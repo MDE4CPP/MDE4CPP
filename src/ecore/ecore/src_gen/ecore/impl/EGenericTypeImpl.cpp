@@ -159,7 +159,7 @@ std::shared_ptr<ecore::EObject>  EGenericTypeImpl::copy() const
 
 std::shared_ptr<EClass> EGenericTypeImpl::eStaticClass() const
 {
-	return EcorePackageImpl::eInstance()->getEGenericType_EClass();
+	return EcorePackageImpl::eInstance()->getEGenericType_Class();
 }
 
 //*********************************
@@ -257,17 +257,17 @@ Any EGenericTypeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case EcorePackage::EGENERICTYPE_EREFERENCE_ECLASSIFIER:
+		case EcorePackage::EGENERICTYPE_ATTRIBUTE_ECLASSIFIER:
 			return eAny(getEClassifier()); //285
-		case EcorePackage::EGENERICTYPE_EREFERENCE_ELOWERBOUND:
+		case EcorePackage::EGENERICTYPE_ATTRIBUTE_ELOWERBOUND:
 			return eAny(getELowerBound()); //283
-		case EcorePackage::EGENERICTYPE_EREFERENCE_ERAWTYPE:
+		case EcorePackage::EGENERICTYPE_ATTRIBUTE_ERAWTYPE:
 			return eAny(getERawType()); //282
-		case EcorePackage::EGENERICTYPE_EREFERENCE_ETYPEARGUMENTS:
+		case EcorePackage::EGENERICTYPE_ATTRIBUTE_ETYPEARGUMENTS:
 			return eAny(getETypeArguments()); //281
-		case EcorePackage::EGENERICTYPE_EREFERENCE_ETYPEPARAMETER:
+		case EcorePackage::EGENERICTYPE_ATTRIBUTE_ETYPEPARAMETER:
 			return eAny(getETypeParameter()); //284
-		case EcorePackage::EGENERICTYPE_EREFERENCE_EUPPERBOUND:
+		case EcorePackage::EGENERICTYPE_ATTRIBUTE_EUPPERBOUND:
 			return eAny(getEUpperBound()); //280
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
@@ -276,17 +276,17 @@ bool EGenericTypeImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case EcorePackage::EGENERICTYPE_EREFERENCE_ECLASSIFIER:
+		case EcorePackage::EGENERICTYPE_ATTRIBUTE_ECLASSIFIER:
 			return getEClassifier() != nullptr; //285
-		case EcorePackage::EGENERICTYPE_EREFERENCE_ELOWERBOUND:
+		case EcorePackage::EGENERICTYPE_ATTRIBUTE_ELOWERBOUND:
 			return getELowerBound() != nullptr; //283
-		case EcorePackage::EGENERICTYPE_EREFERENCE_ERAWTYPE:
+		case EcorePackage::EGENERICTYPE_ATTRIBUTE_ERAWTYPE:
 			return getERawType() != nullptr; //282
-		case EcorePackage::EGENERICTYPE_EREFERENCE_ETYPEARGUMENTS:
+		case EcorePackage::EGENERICTYPE_ATTRIBUTE_ETYPEARGUMENTS:
 			return getETypeArguments() != nullptr; //281
-		case EcorePackage::EGENERICTYPE_EREFERENCE_ETYPEPARAMETER:
+		case EcorePackage::EGENERICTYPE_ATTRIBUTE_ETYPEPARAMETER:
 			return getETypeParameter() != nullptr; //284
-		case EcorePackage::EGENERICTYPE_EREFERENCE_EUPPERBOUND:
+		case EcorePackage::EGENERICTYPE_ATTRIBUTE_EUPPERBOUND:
 			return getEUpperBound() != nullptr; //280
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
@@ -295,28 +295,28 @@ bool EGenericTypeImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case EcorePackage::EGENERICTYPE_EREFERENCE_ECLASSIFIER:
+		case EcorePackage::EGENERICTYPE_ATTRIBUTE_ECLASSIFIER:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EClassifier> _eClassifier = newValue->get<std::shared_ptr<ecore::EClassifier>>();
 			setEClassifier(_eClassifier); //285
 			return true;
 		}
-		case EcorePackage::EGENERICTYPE_EREFERENCE_ELOWERBOUND:
+		case EcorePackage::EGENERICTYPE_ATTRIBUTE_ELOWERBOUND:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EGenericType> _eLowerBound = newValue->get<std::shared_ptr<ecore::EGenericType>>();
 			setELowerBound(_eLowerBound); //283
 			return true;
 		}
-		case EcorePackage::EGENERICTYPE_EREFERENCE_ETYPEPARAMETER:
+		case EcorePackage::EGENERICTYPE_ATTRIBUTE_ETYPEPARAMETER:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::ETypeParameter> _eTypeParameter = newValue->get<std::shared_ptr<ecore::ETypeParameter>>();
 			setETypeParameter(_eTypeParameter); //284
 			return true;
 		}
-		case EcorePackage::EGENERICTYPE_EREFERENCE_EUPPERBOUND:
+		case EcorePackage::EGENERICTYPE_ATTRIBUTE_EUPPERBOUND:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EGenericType> _eUpperBound = newValue->get<std::shared_ptr<ecore::EGenericType>>();
@@ -450,7 +450,7 @@ void EGenericTypeImpl::resolveReferences(const int featureID, std::list<std::sha
 {
 	switch(featureID)
 	{
-		case EcorePackage::EGENERICTYPE_EREFERENCE_ECLASSIFIER:
+		case EcorePackage::EGENERICTYPE_ATTRIBUTE_ECLASSIFIER:
 		{
 			if (references.size() == 1)
 			{
@@ -462,7 +462,7 @@ void EGenericTypeImpl::resolveReferences(const int featureID, std::list<std::sha
 			return;
 		}
 
-		case EcorePackage::EGENERICTYPE_EREFERENCE_ETYPEPARAMETER:
+		case EcorePackage::EGENERICTYPE_ATTRIBUTE_ETYPEPARAMETER:
 		{
 			if (references.size() == 1)
 			{
@@ -507,21 +507,21 @@ void EGenericTypeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 		std::shared_ptr<ecore::EGenericType > eLowerBound = this->getELowerBound();
 		if (eLowerBound != nullptr)
 		{
-			saveHandler->addReference(eLowerBound, "eLowerBound", eLowerBound->eClass() != package->getEGenericType_EClass());
+			saveHandler->addReference(eLowerBound, "eLowerBound", eLowerBound->eClass() != package->getEGenericType_Class());
 		}
 
 		// Save 'eTypeArguments'
 		std::shared_ptr<Bag<ecore::EGenericType>> list_eTypeArguments = this->getETypeArguments();
 		for (std::shared_ptr<ecore::EGenericType> eTypeArguments : *list_eTypeArguments) 
 		{
-			saveHandler->addReference(eTypeArguments, "eTypeArguments", eTypeArguments->eClass() != package->getEGenericType_EClass());
+			saveHandler->addReference(eTypeArguments, "eTypeArguments", eTypeArguments->eClass() != package->getEGenericType_Class());
 		}
 
 		// Save 'eUpperBound'
 		std::shared_ptr<ecore::EGenericType > eUpperBound = this->getEUpperBound();
 		if (eUpperBound != nullptr)
 		{
-			saveHandler->addReference(eUpperBound, "eUpperBound", eUpperBound->eClass() != package->getEGenericType_EClass());
+			saveHandler->addReference(eUpperBound, "eUpperBound", eUpperBound->eClass() != package->getEGenericType_Class());
 		}
 	}
 	catch (std::exception& e)

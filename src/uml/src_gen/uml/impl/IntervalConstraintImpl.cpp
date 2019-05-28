@@ -93,11 +93,11 @@ IntervalConstraintImpl::~IntervalConstraintImpl()
 			{
 				switch(reference_id)
 				{	
-				case UmlPackage::CONSTRAINT_EREFERENCE_CONTEXT:
+				case UmlPackage::CONSTRAINT_ATTRIBUTE_CONTEXT:
 					m_context = par_Namespace;
 					m_namespace = par_Namespace;
 					 return;
-				case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE:
+				case UmlPackage::NAMEDELEMENT_ATTRIBUTE_NAMESPACE:
 					m_namespace = par_Namespace;
 					m_owner = par_Namespace;
 					 return;
@@ -220,7 +220,7 @@ std::shared_ptr<ecore::EObject>  IntervalConstraintImpl::copy() const
 
 std::shared_ptr<ecore::EClass> IntervalConstraintImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getIntervalConstraint_EClass();
+	return UmlPackageImpl::eInstance()->getIntervalConstraint_Class();
 }
 
 //*********************************

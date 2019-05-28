@@ -241,7 +241,7 @@ std::shared_ptr<ecore::EObject>  FinalNodeImpl::copy() const
 
 std::shared_ptr<ecore::EClass> FinalNodeImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getFinalNode_EClass();
+	return UmlPackageImpl::eInstance()->getFinalNode_Class();
 }
 
 //*********************************

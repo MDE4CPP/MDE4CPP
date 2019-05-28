@@ -168,7 +168,7 @@ std::shared_ptr<ecore::EObject>  ExecutionFactoryImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ExecutionFactoryImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getExecutionFactory_EClass();
+	return FUMLPackageImpl::eInstance()->getExecutionFactory_Class();
 }
 
 //*********************************
@@ -429,13 +429,13 @@ Any ExecutionFactoryImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::EXECUTIONFACTORY_EREFERENCE_BUILTINTYPES:
+		case FUMLPackage::EXECUTIONFACTORY_ATTRIBUTE_BUILTINTYPES:
 			return eAny(getBuiltInTypes()); //413
-		case FUMLPackage::EXECUTIONFACTORY_EREFERENCE_LOCUS:
+		case FUMLPackage::EXECUTIONFACTORY_ATTRIBUTE_LOCUS:
 			return eAny(getLocus()); //410
-		case FUMLPackage::EXECUTIONFACTORY_EREFERENCE_PRIMITIVEBEHAVIORPROTOTYPES:
+		case FUMLPackage::EXECUTIONFACTORY_ATTRIBUTE_PRIMITIVEBEHAVIORPROTOTYPES:
 			return eAny(getPrimitiveBehaviorPrototypes()); //412
-		case FUMLPackage::EXECUTIONFACTORY_EREFERENCE_STRATEGIES:
+		case FUMLPackage::EXECUTIONFACTORY_ATTRIBUTE_STRATEGIES:
 			return eAny(getStrategies()); //411
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
@@ -444,13 +444,13 @@ bool ExecutionFactoryImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::EXECUTIONFACTORY_EREFERENCE_BUILTINTYPES:
+		case FUMLPackage::EXECUTIONFACTORY_ATTRIBUTE_BUILTINTYPES:
 			return getBuiltInTypes() != nullptr; //413
-		case FUMLPackage::EXECUTIONFACTORY_EREFERENCE_LOCUS:
+		case FUMLPackage::EXECUTIONFACTORY_ATTRIBUTE_LOCUS:
 			return getLocus().lock() != nullptr; //410
-		case FUMLPackage::EXECUTIONFACTORY_EREFERENCE_PRIMITIVEBEHAVIORPROTOTYPES:
+		case FUMLPackage::EXECUTIONFACTORY_ATTRIBUTE_PRIMITIVEBEHAVIORPROTOTYPES:
 			return getPrimitiveBehaviorPrototypes() != nullptr; //412
-		case FUMLPackage::EXECUTIONFACTORY_EREFERENCE_STRATEGIES:
+		case FUMLPackage::EXECUTIONFACTORY_ATTRIBUTE_STRATEGIES:
 			return getStrategies() != nullptr; //411
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
@@ -459,7 +459,7 @@ bool ExecutionFactoryImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case FUMLPackage::EXECUTIONFACTORY_EREFERENCE_LOCUS:
+		case FUMLPackage::EXECUTIONFACTORY_ATTRIBUTE_LOCUS:
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::Locus> _locus = newValue->get<std::shared_ptr<fUML::Locus>>();
@@ -541,7 +541,7 @@ void ExecutionFactoryImpl::resolveReferences(const int featureID, std::list<std:
 {
 	switch(featureID)
 	{
-		case FUMLPackage::EXECUTIONFACTORY_EREFERENCE_BUILTINTYPES:
+		case FUMLPackage::EXECUTIONFACTORY_ATTRIBUTE_BUILTINTYPES:
 		{
 			std::shared_ptr<Bag<uml::PrimitiveType>> _builtInTypes = getBuiltInTypes();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -555,7 +555,7 @@ void ExecutionFactoryImpl::resolveReferences(const int featureID, std::list<std:
 			return;
 		}
 
-		case FUMLPackage::EXECUTIONFACTORY_EREFERENCE_LOCUS:
+		case FUMLPackage::EXECUTIONFACTORY_ATTRIBUTE_LOCUS:
 		{
 			if (references.size() == 1)
 			{
@@ -567,7 +567,7 @@ void ExecutionFactoryImpl::resolveReferences(const int featureID, std::list<std:
 			return;
 		}
 
-		case FUMLPackage::EXECUTIONFACTORY_EREFERENCE_PRIMITIVEBEHAVIORPROTOTYPES:
+		case FUMLPackage::EXECUTIONFACTORY_ATTRIBUTE_PRIMITIVEBEHAVIORPROTOTYPES:
 		{
 			std::shared_ptr<Bag<fUML::OpaqueBehaviorExecution>> _primitiveBehaviorPrototypes = getPrimitiveBehaviorPrototypes();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -581,7 +581,7 @@ void ExecutionFactoryImpl::resolveReferences(const int featureID, std::list<std:
 			return;
 		}
 
-		case FUMLPackage::EXECUTIONFACTORY_EREFERENCE_STRATEGIES:
+		case FUMLPackage::EXECUTIONFACTORY_ATTRIBUTE_STRATEGIES:
 		{
 			std::shared_ptr<Bag<fUML::SemanticStrategy>> _strategies = getStrategies();
 			for(std::shared_ptr<ecore::EObject> ref : references)

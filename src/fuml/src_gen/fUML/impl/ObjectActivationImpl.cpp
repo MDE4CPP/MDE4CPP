@@ -159,7 +159,7 @@ std::shared_ptr<ecore::EObject>  ObjectActivationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ObjectActivationImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getObjectActivation_EClass();
+	return FUMLPackageImpl::eInstance()->getObjectActivation_Class();
 }
 
 //*********************************
@@ -355,13 +355,13 @@ Any ObjectActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::OBJECTACTIVATION_EREFERENCE_CLASSIFIERBEHAVIOREXECUTIONS:
+		case FUMLPackage::OBJECTACTIVATION_ATTRIBUTE_CLASSIFIERBEHAVIOREXECUTIONS:
 			return eAny(getClassifierBehaviorExecutions()); //773
-		case FUMLPackage::OBJECTACTIVATION_EREFERENCE_EVENTPOOL:
+		case FUMLPackage::OBJECTACTIVATION_ATTRIBUTE_EVENTPOOL:
 			return eAny(getEventPool()); //771
-		case FUMLPackage::OBJECTACTIVATION_EREFERENCE_OBJECT:
+		case FUMLPackage::OBJECTACTIVATION_ATTRIBUTE_OBJECT:
 			return eAny(getObject()); //772
-		case FUMLPackage::OBJECTACTIVATION_EREFERENCE_WAITINGEVENTACCEPTERS:
+		case FUMLPackage::OBJECTACTIVATION_ATTRIBUTE_WAITINGEVENTACCEPTERS:
 			return eAny(getWaitingEventAccepters()); //770
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
@@ -370,13 +370,13 @@ bool ObjectActivationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::OBJECTACTIVATION_EREFERENCE_CLASSIFIERBEHAVIOREXECUTIONS:
+		case FUMLPackage::OBJECTACTIVATION_ATTRIBUTE_CLASSIFIERBEHAVIOREXECUTIONS:
 			return getClassifierBehaviorExecutions() != nullptr; //773
-		case FUMLPackage::OBJECTACTIVATION_EREFERENCE_EVENTPOOL:
+		case FUMLPackage::OBJECTACTIVATION_ATTRIBUTE_EVENTPOOL:
 			return getEventPool() != nullptr; //771
-		case FUMLPackage::OBJECTACTIVATION_EREFERENCE_OBJECT:
+		case FUMLPackage::OBJECTACTIVATION_ATTRIBUTE_OBJECT:
 			return getObject() != nullptr; //772
-		case FUMLPackage::OBJECTACTIVATION_EREFERENCE_WAITINGEVENTACCEPTERS:
+		case FUMLPackage::OBJECTACTIVATION_ATTRIBUTE_WAITINGEVENTACCEPTERS:
 			return getWaitingEventAccepters() != nullptr; //770
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
@@ -385,7 +385,7 @@ bool ObjectActivationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case FUMLPackage::OBJECTACTIVATION_EREFERENCE_OBJECT:
+		case FUMLPackage::OBJECTACTIVATION_ATTRIBUTE_OBJECT:
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::Object> _object = newValue->get<std::shared_ptr<fUML::Object>>();
@@ -504,7 +504,7 @@ void ObjectActivationImpl::resolveReferences(const int featureID, std::list<std:
 {
 	switch(featureID)
 	{
-		case FUMLPackage::OBJECTACTIVATION_EREFERENCE_OBJECT:
+		case FUMLPackage::OBJECTACTIVATION_ATTRIBUTE_OBJECT:
 		{
 			if (references.size() == 1)
 			{
@@ -516,7 +516,7 @@ void ObjectActivationImpl::resolveReferences(const int featureID, std::list<std:
 			return;
 		}
 
-		case FUMLPackage::OBJECTACTIVATION_EREFERENCE_WAITINGEVENTACCEPTERS:
+		case FUMLPackage::OBJECTACTIVATION_ATTRIBUTE_WAITINGEVENTACCEPTERS:
 		{
 			std::shared_ptr<Bag<fUML::EventAccepter>> _waitingEventAccepters = getWaitingEventAccepters();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -567,14 +567,14 @@ void ObjectActivationImpl::saveContent(std::shared_ptr<persistence::interfaces::
 		std::shared_ptr<Bag<fUML::ClassifierBehaviorExecution>> list_classifierBehaviorExecutions = this->getClassifierBehaviorExecutions();
 		for (std::shared_ptr<fUML::ClassifierBehaviorExecution> classifierBehaviorExecutions : *list_classifierBehaviorExecutions) 
 		{
-			saveHandler->addReference(classifierBehaviorExecutions, "classifierBehaviorExecutions", classifierBehaviorExecutions->eClass() != package->getClassifierBehaviorExecution_EClass());
+			saveHandler->addReference(classifierBehaviorExecutions, "classifierBehaviorExecutions", classifierBehaviorExecutions->eClass() != package->getClassifierBehaviorExecution_Class());
 		}
 
 		// Save 'eventPool'
 		std::shared_ptr<Bag<fUML::SignalInstance>> list_eventPool = this->getEventPool();
 		for (std::shared_ptr<fUML::SignalInstance> eventPool : *list_eventPool) 
 		{
-			saveHandler->addReference(eventPool, "eventPool", eventPool->eClass() != package->getSignalInstance_EClass());
+			saveHandler->addReference(eventPool, "eventPool", eventPool->eClass() != package->getSignalInstance_Class());
 		}
 	}
 	catch (std::exception& e)

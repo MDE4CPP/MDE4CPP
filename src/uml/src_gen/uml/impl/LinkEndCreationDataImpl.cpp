@@ -143,7 +143,7 @@ std::shared_ptr<ecore::EObject>  LinkEndCreationDataImpl::copy() const
 
 std::shared_ptr<ecore::EClass> LinkEndCreationDataImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getLinkEndCreationData_EClass();
+	return UmlPackageImpl::eInstance()->getLinkEndCreationData_Class();
 }
 
 //*********************************
@@ -215,9 +215,9 @@ Any LinkEndCreationDataImpl::eGet(int featureID, bool resolve, bool coreType) co
 {
 	switch(featureID)
 	{
-		case UmlPackage::LINKENDCREATIONDATA_EREFERENCE_INSERTAT:
+		case UmlPackage::LINKENDCREATIONDATA_ATTRIBUTE_INSERTAT:
 			return eAny(getInsertAt()); //1346
-		case UmlPackage::LINKENDCREATIONDATA_EATTRIBUTE_ISREPLACEALL:
+		case UmlPackage::LINKENDCREATIONDATA_ATTRIBUTE_ISREPLACEALL:
 			return eAny(getIsReplaceAll()); //1347
 	}
 	return LinkEndDataImpl::eGet(featureID, resolve, coreType);
@@ -226,9 +226,9 @@ bool LinkEndCreationDataImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::LINKENDCREATIONDATA_EREFERENCE_INSERTAT:
+		case UmlPackage::LINKENDCREATIONDATA_ATTRIBUTE_INSERTAT:
 			return getInsertAt() != nullptr; //1346
-		case UmlPackage::LINKENDCREATIONDATA_EATTRIBUTE_ISREPLACEALL:
+		case UmlPackage::LINKENDCREATIONDATA_ATTRIBUTE_ISREPLACEALL:
 			return getIsReplaceAll() != false; //1347
 	}
 	return LinkEndDataImpl::internalEIsSet(featureID);
@@ -237,14 +237,14 @@ bool LinkEndCreationDataImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::LINKENDCREATIONDATA_EREFERENCE_INSERTAT:
+		case UmlPackage::LINKENDCREATIONDATA_ATTRIBUTE_INSERTAT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::InputPin> _insertAt = newValue->get<std::shared_ptr<uml::InputPin>>();
 			setInsertAt(_insertAt); //1346
 			return true;
 		}
-		case UmlPackage::LINKENDCREATIONDATA_EATTRIBUTE_ISREPLACEALL:
+		case UmlPackage::LINKENDCREATIONDATA_ATTRIBUTE_ISREPLACEALL:
 		{
 			// BOOST CAST
 			bool _isReplaceAll = newValue->get<bool>();
@@ -321,7 +321,7 @@ void LinkEndCreationDataImpl::resolveReferences(const int featureID, std::list<s
 {
 	switch(featureID)
 	{
-		case UmlPackage::LINKENDCREATIONDATA_EREFERENCE_INSERTAT:
+		case UmlPackage::LINKENDCREATIONDATA_ATTRIBUTE_INSERTAT:
 		{
 			if (references.size() == 1)
 			{
@@ -361,7 +361,7 @@ void LinkEndCreationDataImpl::saveContent(std::shared_ptr<persistence::interface
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getLinkEndCreationData_EAttribute_isReplaceAll()) )
+		if ( this->eIsSet(package->getLinkEndCreationData_Attribute_isReplaceAll()) )
 		{
 			saveHandler->addAttribute("isReplaceAll", this->getIsReplaceAll());
 		}

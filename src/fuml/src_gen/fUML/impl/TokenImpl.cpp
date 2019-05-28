@@ -106,7 +106,7 @@ std::shared_ptr<ecore::EObject>  TokenImpl::copy() const
 
 std::shared_ptr<ecore::EClass> TokenImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getToken_EClass();
+	return FUMLPackageImpl::eInstance()->getToken_Class();
 }
 
 //*********************************
@@ -217,9 +217,9 @@ Any TokenImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::TOKEN_EREFERENCE_HOLDER:
+		case FUMLPackage::TOKEN_ATTRIBUTE_HOLDER:
 			return eAny(getHolder()); //1080
-		case FUMLPackage::TOKEN_EATTRIBUTE_WITHDRAWN:
+		case FUMLPackage::TOKEN_ATTRIBUTE_WITHDRAWN:
 			return eAny(isWithdrawn()); //1081
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
@@ -228,9 +228,9 @@ bool TokenImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::TOKEN_EREFERENCE_HOLDER:
+		case FUMLPackage::TOKEN_ATTRIBUTE_HOLDER:
 			return getHolder().lock() != nullptr; //1080
-		case FUMLPackage::TOKEN_EATTRIBUTE_WITHDRAWN:
+		case FUMLPackage::TOKEN_ATTRIBUTE_WITHDRAWN:
 			return isWithdrawn() != true; //1081
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
@@ -239,14 +239,14 @@ bool TokenImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case FUMLPackage::TOKEN_EREFERENCE_HOLDER:
+		case FUMLPackage::TOKEN_ATTRIBUTE_HOLDER:
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::ActivityNodeActivation> _holder = newValue->get<std::shared_ptr<fUML::ActivityNodeActivation>>();
 			setHolder(_holder); //1080
 			return true;
 		}
-		case FUMLPackage::TOKEN_EATTRIBUTE_WITHDRAWN:
+		case FUMLPackage::TOKEN_ATTRIBUTE_WITHDRAWN:
 		{
 			// BOOST CAST
 			bool _withdrawn = newValue->get<bool>();
@@ -316,7 +316,7 @@ void TokenImpl::resolveReferences(const int featureID, std::list<std::shared_ptr
 {
 	switch(featureID)
 	{
-		case FUMLPackage::TOKEN_EREFERENCE_HOLDER:
+		case FUMLPackage::TOKEN_ATTRIBUTE_HOLDER:
 		{
 			if (references.size() == 1)
 			{
@@ -349,7 +349,7 @@ void TokenImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandle
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getToken_EAttribute_withdrawn()) )
+		if ( this->eIsSet(package->getToken_Attribute_withdrawn()) )
 		{
 			saveHandler->addAttribute("withdrawn", this->isWithdrawn());
 		}

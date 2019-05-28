@@ -194,7 +194,7 @@ std::shared_ptr<ecore::EObject>  CallEventImpl::copy() const
 
 std::shared_ptr<ecore::EClass> CallEventImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getCallEvent_EClass();
+	return UmlPackageImpl::eInstance()->getCallEvent_Class();
 }
 
 //*********************************
@@ -275,7 +275,7 @@ Any CallEventImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::CALLEVENT_EREFERENCE_OPERATION:
+		case UmlPackage::CALLEVENT_ATTRIBUTE_OPERATION:
 			return eAny(getOperation()); //3112
 	}
 	return MessageEventImpl::eGet(featureID, resolve, coreType);
@@ -284,7 +284,7 @@ bool CallEventImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::CALLEVENT_EREFERENCE_OPERATION:
+		case UmlPackage::CALLEVENT_ATTRIBUTE_OPERATION:
 			return getOperation() != nullptr; //3112
 	}
 	return MessageEventImpl::internalEIsSet(featureID);
@@ -293,7 +293,7 @@ bool CallEventImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::CALLEVENT_EREFERENCE_OPERATION:
+		case UmlPackage::CALLEVENT_ATTRIBUTE_OPERATION:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Operation> _operation = newValue->get<std::shared_ptr<uml::Operation>>();
@@ -361,7 +361,7 @@ void CallEventImpl::resolveReferences(const int featureID, std::list<std::shared
 {
 	switch(featureID)
 	{
-		case UmlPackage::CALLEVENT_EREFERENCE_OPERATION:
+		case UmlPackage::CALLEVENT_ATTRIBUTE_OPERATION:
 		{
 			if (references.size() == 1)
 			{

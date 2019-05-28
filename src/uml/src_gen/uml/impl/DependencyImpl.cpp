@@ -241,7 +241,7 @@ std::shared_ptr<ecore::EObject>  DependencyImpl::copy() const
 
 std::shared_ptr<ecore::EClass> DependencyImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getDependency_EClass();
+	return UmlPackageImpl::eInstance()->getDependency_Class();
 }
 
 //*********************************
@@ -339,9 +339,9 @@ Any DependencyImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::DEPENDENCY_EREFERENCE_CLIENT:
+		case UmlPackage::DEPENDENCY_ATTRIBUTE_CLIENT:
 			return eAny(getClient()); //6715
-		case UmlPackage::DEPENDENCY_EREFERENCE_SUPPLIER:
+		case UmlPackage::DEPENDENCY_ATTRIBUTE_SUPPLIER:
 			return eAny(getSupplier()); //6716
 	}
 	Any result;
@@ -357,9 +357,9 @@ bool DependencyImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::DEPENDENCY_EREFERENCE_CLIENT:
+		case UmlPackage::DEPENDENCY_ATTRIBUTE_CLIENT:
 			return getClient() != nullptr; //6715
-		case UmlPackage::DEPENDENCY_EREFERENCE_SUPPLIER:
+		case UmlPackage::DEPENDENCY_ATTRIBUTE_SUPPLIER:
 			return getSupplier() != nullptr; //6716
 	}
 	bool result = false;
@@ -452,7 +452,7 @@ void DependencyImpl::resolveReferences(const int featureID, std::list<std::share
 {
 	switch(featureID)
 	{
-		case UmlPackage::DEPENDENCY_EREFERENCE_CLIENT:
+		case UmlPackage::DEPENDENCY_ATTRIBUTE_CLIENT:
 		{
 			std::shared_ptr<Bag<uml::NamedElement>> _client = getClient();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -466,7 +466,7 @@ void DependencyImpl::resolveReferences(const int featureID, std::list<std::share
 			return;
 		}
 
-		case UmlPackage::DEPENDENCY_EREFERENCE_SUPPLIER:
+		case UmlPackage::DEPENDENCY_ATTRIBUTE_SUPPLIER:
 		{
 			std::shared_ptr<Bag<uml::NamedElement>> _supplier = getSupplier();
 			for(std::shared_ptr<ecore::EObject> ref : references)

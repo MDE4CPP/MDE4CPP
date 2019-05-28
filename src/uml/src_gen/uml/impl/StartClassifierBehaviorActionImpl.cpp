@@ -286,7 +286,7 @@ std::shared_ptr<ecore::EObject>  StartClassifierBehaviorActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> StartClassifierBehaviorActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getStartClassifierBehaviorAction_EClass();
+	return UmlPackageImpl::eInstance()->getStartClassifierBehaviorAction_Class();
 }
 
 //*********************************
@@ -386,7 +386,7 @@ Any StartClassifierBehaviorActionImpl::eGet(int featureID, bool resolve, bool co
 {
 	switch(featureID)
 	{
-		case UmlPackage::STARTCLASSIFIERBEHAVIORACTION_EREFERENCE_OBJECT:
+		case UmlPackage::STARTCLASSIFIERBEHAVIORACTION_ATTRIBUTE_OBJECT:
 			return eAny(getObject()); //21827
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
@@ -395,7 +395,7 @@ bool StartClassifierBehaviorActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::STARTCLASSIFIERBEHAVIORACTION_EREFERENCE_OBJECT:
+		case UmlPackage::STARTCLASSIFIERBEHAVIORACTION_ATTRIBUTE_OBJECT:
 			return getObject() != nullptr; //21827
 	}
 	return ActionImpl::internalEIsSet(featureID);
@@ -404,7 +404,7 @@ bool StartClassifierBehaviorActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::STARTCLASSIFIERBEHAVIORACTION_EREFERENCE_OBJECT:
+		case UmlPackage::STARTCLASSIFIERBEHAVIORACTION_ATTRIBUTE_OBJECT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::InputPin> _object = newValue->get<std::shared_ptr<uml::InputPin>>();
@@ -519,7 +519,7 @@ void StartClassifierBehaviorActionImpl::saveContent(std::shared_ptr<persistence:
 		std::shared_ptr<uml::InputPin > object = this->getObject();
 		if (object != nullptr)
 		{
-			saveHandler->addReference(object, "object", object->eClass() != package->getInputPin_EClass());
+			saveHandler->addReference(object, "object", object->eClass() != package->getInputPin_Class());
 		}
 	
 

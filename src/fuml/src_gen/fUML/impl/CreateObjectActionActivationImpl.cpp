@@ -163,7 +163,7 @@ std::shared_ptr<ecore::EObject>  CreateObjectActionActivationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> CreateObjectActionActivationImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getCreateObjectActionActivation_EClass();
+	return FUMLPackageImpl::eInstance()->getCreateObjectActionActivation_Class();
 }
 
 //*********************************

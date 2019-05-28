@@ -188,7 +188,7 @@ std::shared_ptr<ecore::EObject>  TemplateBindingImpl::copy() const
 
 std::shared_ptr<ecore::EClass> TemplateBindingImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getTemplateBinding_EClass();
+	return UmlPackageImpl::eInstance()->getTemplateBinding_Class();
 }
 
 //*********************************
@@ -295,11 +295,11 @@ Any TemplateBindingImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::TEMPLATEBINDING_EREFERENCE_BOUNDELEMENT:
+		case UmlPackage::TEMPLATEBINDING_ATTRIBUTE_BOUNDELEMENT:
 			return eAny(getBoundElement()); //2308
-		case UmlPackage::TEMPLATEBINDING_EREFERENCE_PARAMETERSUBSTITUTION:
+		case UmlPackage::TEMPLATEBINDING_ATTRIBUTE_PARAMETERSUBSTITUTION:
 			return eAny(getParameterSubstitution()); //2306
-		case UmlPackage::TEMPLATEBINDING_EREFERENCE_SIGNATURE:
+		case UmlPackage::TEMPLATEBINDING_ATTRIBUTE_SIGNATURE:
 			return eAny(getSignature()); //2307
 	}
 	return DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
@@ -308,11 +308,11 @@ bool TemplateBindingImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::TEMPLATEBINDING_EREFERENCE_BOUNDELEMENT:
+		case UmlPackage::TEMPLATEBINDING_ATTRIBUTE_BOUNDELEMENT:
 			return getBoundElement().lock() != nullptr; //2308
-		case UmlPackage::TEMPLATEBINDING_EREFERENCE_PARAMETERSUBSTITUTION:
+		case UmlPackage::TEMPLATEBINDING_ATTRIBUTE_PARAMETERSUBSTITUTION:
 			return getParameterSubstitution() != nullptr; //2306
-		case UmlPackage::TEMPLATEBINDING_EREFERENCE_SIGNATURE:
+		case UmlPackage::TEMPLATEBINDING_ATTRIBUTE_SIGNATURE:
 			return getSignature() != nullptr; //2307
 	}
 	return DirectedRelationshipImpl::internalEIsSet(featureID);
@@ -321,14 +321,14 @@ bool TemplateBindingImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::TEMPLATEBINDING_EREFERENCE_BOUNDELEMENT:
+		case UmlPackage::TEMPLATEBINDING_ATTRIBUTE_BOUNDELEMENT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::TemplateableElement> _boundElement = newValue->get<std::shared_ptr<uml::TemplateableElement>>();
 			setBoundElement(_boundElement); //2308
 			return true;
 		}
-		case UmlPackage::TEMPLATEBINDING_EREFERENCE_SIGNATURE:
+		case UmlPackage::TEMPLATEBINDING_ATTRIBUTE_SIGNATURE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::TemplateSignature> _signature = newValue->get<std::shared_ptr<uml::TemplateSignature>>();
@@ -397,7 +397,7 @@ void TemplateBindingImpl::loadNode(std::string nodeName, std::shared_ptr<persist
 			{
 				typeName = "TemplateParameterSubstitution";
 			}
-			std::shared_ptr<ecore::EObject> parameterSubstitution = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::TEMPLATEPARAMETERSUBSTITUTION_EREFERENCE_TEMPLATEBINDING);
+			std::shared_ptr<ecore::EObject> parameterSubstitution = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::TEMPLATEPARAMETERSUBSTITUTION_ATTRIBUTE_TEMPLATEBINDING);
 			if (parameterSubstitution != nullptr)
 			{
 				loadHandler->handleChild(parameterSubstitution);
@@ -421,7 +421,7 @@ void TemplateBindingImpl::resolveReferences(const int featureID, std::list<std::
 {
 	switch(featureID)
 	{
-		case UmlPackage::TEMPLATEBINDING_EREFERENCE_BOUNDELEMENT:
+		case UmlPackage::TEMPLATEBINDING_ATTRIBUTE_BOUNDELEMENT:
 		{
 			if (references.size() == 1)
 			{
@@ -433,7 +433,7 @@ void TemplateBindingImpl::resolveReferences(const int featureID, std::list<std::
 			return;
 		}
 
-		case UmlPackage::TEMPLATEBINDING_EREFERENCE_SIGNATURE:
+		case UmlPackage::TEMPLATEBINDING_ATTRIBUTE_SIGNATURE:
 		{
 			if (references.size() == 1)
 			{
@@ -476,7 +476,7 @@ void TemplateBindingImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 		// Save 'parameterSubstitution'
 		for (std::shared_ptr<uml::TemplateParameterSubstitution> parameterSubstitution : *this->getParameterSubstitution()) 
 		{
-			saveHandler->addReference(parameterSubstitution, "parameterSubstitution", parameterSubstitution->eClass() != package->getTemplateParameterSubstitution_EClass());
+			saveHandler->addReference(parameterSubstitution, "parameterSubstitution", parameterSubstitution->eClass() != package->getTemplateParameterSubstitution_Class());
 		}
 	
 

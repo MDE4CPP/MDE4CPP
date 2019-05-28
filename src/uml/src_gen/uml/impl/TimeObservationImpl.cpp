@@ -195,7 +195,7 @@ std::shared_ptr<ecore::EObject>  TimeObservationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> TimeObservationImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getTimeObservation_EClass();
+	return UmlPackageImpl::eInstance()->getTimeObservation_Class();
 }
 
 //*********************************
@@ -285,9 +285,9 @@ Any TimeObservationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::TIMEOBSERVATION_EREFERENCE_EVENT:
+		case UmlPackage::TIMEOBSERVATION_ATTRIBUTE_EVENT:
 			return eAny(getEvent()); //24012
-		case UmlPackage::TIMEOBSERVATION_EATTRIBUTE_FIRSTEVENT:
+		case UmlPackage::TIMEOBSERVATION_ATTRIBUTE_FIRSTEVENT:
 			return eAny(getFirstEvent()); //24013
 	}
 	return ObservationImpl::eGet(featureID, resolve, coreType);
@@ -296,9 +296,9 @@ bool TimeObservationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::TIMEOBSERVATION_EREFERENCE_EVENT:
+		case UmlPackage::TIMEOBSERVATION_ATTRIBUTE_EVENT:
 			return getEvent() != nullptr; //24012
-		case UmlPackage::TIMEOBSERVATION_EATTRIBUTE_FIRSTEVENT:
+		case UmlPackage::TIMEOBSERVATION_ATTRIBUTE_FIRSTEVENT:
 			return getFirstEvent() != true; //24013
 	}
 	return ObservationImpl::internalEIsSet(featureID);
@@ -307,14 +307,14 @@ bool TimeObservationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::TIMEOBSERVATION_EREFERENCE_EVENT:
+		case UmlPackage::TIMEOBSERVATION_ATTRIBUTE_EVENT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::NamedElement> _event = newValue->get<std::shared_ptr<uml::NamedElement>>();
 			setEvent(_event); //24012
 			return true;
 		}
-		case UmlPackage::TIMEOBSERVATION_EATTRIBUTE_FIRSTEVENT:
+		case UmlPackage::TIMEOBSERVATION_ATTRIBUTE_FIRSTEVENT:
 		{
 			// BOOST CAST
 			bool _firstEvent = newValue->get<bool>();
@@ -391,7 +391,7 @@ void TimeObservationImpl::resolveReferences(const int featureID, std::list<std::
 {
 	switch(featureID)
 	{
-		case UmlPackage::TIMEOBSERVATION_EREFERENCE_EVENT:
+		case UmlPackage::TIMEOBSERVATION_ATTRIBUTE_EVENT:
 		{
 			if (references.size() == 1)
 			{
@@ -438,7 +438,7 @@ void TimeObservationImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getTimeObservation_EAttribute_firstEvent()) )
+		if ( this->eIsSet(package->getTimeObservation_Attribute_firstEvent()) )
 		{
 			saveHandler->addAttribute("firstEvent", this->getFirstEvent());
 		}

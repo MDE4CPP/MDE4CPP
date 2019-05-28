@@ -303,7 +303,7 @@ std::shared_ptr<ecore::EObject>  CallBehaviorActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> CallBehaviorActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getCallBehaviorAction_EClass();
+	return UmlPackageImpl::eInstance()->getCallBehaviorAction_Class();
 }
 
 //*********************************
@@ -401,7 +401,7 @@ Any CallBehaviorActionImpl::eGet(int featureID, bool resolve, bool coreType) con
 {
 	switch(featureID)
 	{
-		case UmlPackage::CALLBEHAVIORACTION_EREFERENCE_BEHAVIOR:
+		case UmlPackage::CALLBEHAVIORACTION_ATTRIBUTE_BEHAVIOR:
 			return eAny(getBehavior()); //2931
 	}
 	return CallActionImpl::eGet(featureID, resolve, coreType);
@@ -410,7 +410,7 @@ bool CallBehaviorActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::CALLBEHAVIORACTION_EREFERENCE_BEHAVIOR:
+		case UmlPackage::CALLBEHAVIORACTION_ATTRIBUTE_BEHAVIOR:
 			return getBehavior() != nullptr; //2931
 	}
 	return CallActionImpl::internalEIsSet(featureID);
@@ -419,7 +419,7 @@ bool CallBehaviorActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::CALLBEHAVIORACTION_EREFERENCE_BEHAVIOR:
+		case UmlPackage::CALLBEHAVIORACTION_ATTRIBUTE_BEHAVIOR:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Behavior> _behavior = newValue->get<std::shared_ptr<uml::Behavior>>();
@@ -487,7 +487,7 @@ void CallBehaviorActionImpl::resolveReferences(const int featureID, std::list<st
 {
 	switch(featureID)
 	{
-		case UmlPackage::CALLBEHAVIORACTION_EREFERENCE_BEHAVIOR:
+		case UmlPackage::CALLBEHAVIORACTION_ATTRIBUTE_BEHAVIOR:
 		{
 			if (references.size() == 1)
 			{

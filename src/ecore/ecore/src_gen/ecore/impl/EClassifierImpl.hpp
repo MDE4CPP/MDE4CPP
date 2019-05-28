@@ -50,7 +50,9 @@ namespace ecore
 			//*********************************
 			// Operations
 			//*********************************
-			
+			/*!
+			 */ 
+			virtual int getClassifierID() ;
 			
 			/*!
 			 */ 
@@ -61,14 +63,6 @@ namespace ecore
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			/*!
-			 */ 
-			virtual int getClassifierID() const ;
-			
-			/*!
-			 */ 
-			virtual void setClassifierID (int _classifierID); 
-			
 			/*!
 			 */ 
 			virtual Any getDefaultValue() const ;

@@ -161,7 +161,7 @@ std::shared_ptr<ecore::EObject>  ReadIsClassifiedObjectActionActivationImpl::cop
 
 std::shared_ptr<ecore::EClass> ReadIsClassifiedObjectActionActivationImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getReadIsClassifiedObjectActionActivation_EClass();
+	return FUMLPackageImpl::eInstance()->getReadIsClassifiedObjectActionActivation_Class();
 }
 
 //*********************************

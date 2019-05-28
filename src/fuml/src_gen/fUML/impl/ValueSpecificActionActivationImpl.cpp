@@ -159,7 +159,7 @@ std::shared_ptr<ecore::EObject>  ValueSpecificActionActivationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ValueSpecificActionActivationImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getValueSpecificActionActivation_EClass();
+	return FUMLPackageImpl::eInstance()->getValueSpecificActionActivation_Class();
 }
 
 //*********************************

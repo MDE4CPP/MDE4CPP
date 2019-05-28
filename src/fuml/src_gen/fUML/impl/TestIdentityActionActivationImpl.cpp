@@ -159,7 +159,7 @@ std::shared_ptr<ecore::EObject>  TestIdentityActionActivationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> TestIdentityActionActivationImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getTestIdentityActionActivation_EClass();
+	return FUMLPackageImpl::eInstance()->getTestIdentityActionActivation_Class();
 }
 
 //*********************************

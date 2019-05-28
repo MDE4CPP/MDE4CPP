@@ -182,7 +182,7 @@ std::shared_ptr<ecore::EObject>  ExtensionPointImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ExtensionPointImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getExtensionPoint_EClass();
+	return UmlPackageImpl::eInstance()->getExtensionPoint_Class();
 }
 
 //*********************************
@@ -263,7 +263,7 @@ Any ExtensionPointImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::EXTENSIONPOINT_EREFERENCE_USECASE:
+		case UmlPackage::EXTENSIONPOINT_ATTRIBUTE_USECASE:
 			return eAny(getUseCase()); //9912
 	}
 	return RedefinableElementImpl::eGet(featureID, resolve, coreType);
@@ -272,7 +272,7 @@ bool ExtensionPointImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::EXTENSIONPOINT_EREFERENCE_USECASE:
+		case UmlPackage::EXTENSIONPOINT_ATTRIBUTE_USECASE:
 			return getUseCase().lock() != nullptr; //9912
 	}
 	return RedefinableElementImpl::internalEIsSet(featureID);
@@ -281,7 +281,7 @@ bool ExtensionPointImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::EXTENSIONPOINT_EREFERENCE_USECASE:
+		case UmlPackage::EXTENSIONPOINT_ATTRIBUTE_USECASE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::UseCase> _useCase = newValue->get<std::shared_ptr<uml::UseCase>>();
@@ -330,7 +330,7 @@ void ExtensionPointImpl::resolveReferences(const int featureID, std::list<std::s
 {
 	switch(featureID)
 	{
-		case UmlPackage::EXTENSIONPOINT_EREFERENCE_USECASE:
+		case UmlPackage::EXTENSIONPOINT_ATTRIBUTE_USECASE:
 		{
 			if (references.size() == 1)
 			{

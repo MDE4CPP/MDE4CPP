@@ -243,7 +243,7 @@ std::shared_ptr<ecore::EObject>  VariableImpl::copy() const
 
 std::shared_ptr<ecore::EClass> VariableImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getVariable_EClass();
+	return UmlPackageImpl::eInstance()->getVariable_Class();
 }
 
 //*********************************
@@ -345,9 +345,9 @@ Any VariableImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::VARIABLE_EREFERENCE_ACTIVITYSCOPE:
+		case UmlPackage::VARIABLE_ATTRIBUTE_ACTIVITYSCOPE:
 			return eAny(getActivityScope()); //25219
-		case UmlPackage::VARIABLE_EREFERENCE_SCOPE:
+		case UmlPackage::VARIABLE_ATTRIBUTE_SCOPE:
 			return eAny(getScope()); //25220
 	}
 	Any result;
@@ -363,9 +363,9 @@ bool VariableImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::VARIABLE_EREFERENCE_ACTIVITYSCOPE:
+		case UmlPackage::VARIABLE_ATTRIBUTE_ACTIVITYSCOPE:
 			return getActivityScope().lock() != nullptr; //25219
-		case UmlPackage::VARIABLE_EREFERENCE_SCOPE:
+		case UmlPackage::VARIABLE_ATTRIBUTE_SCOPE:
 			return getScope().lock() != nullptr; //25220
 	}
 	bool result = false;
@@ -381,14 +381,14 @@ bool VariableImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::VARIABLE_EREFERENCE_ACTIVITYSCOPE:
+		case UmlPackage::VARIABLE_ATTRIBUTE_ACTIVITYSCOPE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Activity> _activityScope = newValue->get<std::shared_ptr<uml::Activity>>();
 			setActivityScope(_activityScope); //25219
 			return true;
 		}
-		case UmlPackage::VARIABLE_EREFERENCE_SCOPE:
+		case UmlPackage::VARIABLE_ATTRIBUTE_SCOPE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::StructuredActivityNode> _scope = newValue->get<std::shared_ptr<uml::StructuredActivityNode>>();
@@ -446,7 +446,7 @@ void VariableImpl::resolveReferences(const int featureID, std::list<std::shared_
 {
 	switch(featureID)
 	{
-		case UmlPackage::VARIABLE_EREFERENCE_ACTIVITYSCOPE:
+		case UmlPackage::VARIABLE_ATTRIBUTE_ACTIVITYSCOPE:
 		{
 			if (references.size() == 1)
 			{
@@ -458,7 +458,7 @@ void VariableImpl::resolveReferences(const int featureID, std::list<std::shared_
 			return;
 		}
 
-		case UmlPackage::VARIABLE_EREFERENCE_SCOPE:
+		case UmlPackage::VARIABLE_ATTRIBUTE_SCOPE:
 		{
 			if (references.size() == 1)
 			{

@@ -100,7 +100,7 @@ std::shared_ptr<ecore::EObject>  AcceptEventActionEventAccepterImpl::copy() cons
 
 std::shared_ptr<ecore::EClass> AcceptEventActionEventAccepterImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getAcceptEventActionEventAccepter_EClass();
+	return FUMLPackageImpl::eInstance()->getAcceptEventActionEventAccepter_Class();
 }
 
 //*********************************
@@ -150,7 +150,7 @@ Any AcceptEventActionEventAccepterImpl::eGet(int featureID, bool resolve, bool c
 {
 	switch(featureID)
 	{
-		case FUMLPackage::ACCEPTEVENTACTIONEVENTACCEPTER_EREFERENCE_ACTIONACTIVATION:
+		case FUMLPackage::ACCEPTEVENTACTIONEVENTACCEPTER_ATTRIBUTE_ACTIONACTIVATION:
 			return eAny(getActionActivation()); //20
 	}
 	return EventAccepterImpl::eGet(featureID, resolve, coreType);
@@ -159,7 +159,7 @@ bool AcceptEventActionEventAccepterImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::ACCEPTEVENTACTIONEVENTACCEPTER_EREFERENCE_ACTIONACTIVATION:
+		case FUMLPackage::ACCEPTEVENTACTIONEVENTACCEPTER_ATTRIBUTE_ACTIONACTIVATION:
 			return getActionActivation() != nullptr; //20
 	}
 	return EventAccepterImpl::internalEIsSet(featureID);
@@ -168,7 +168,7 @@ bool AcceptEventActionEventAccepterImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case FUMLPackage::ACCEPTEVENTACTIONEVENTACCEPTER_EREFERENCE_ACTIONACTIVATION:
+		case FUMLPackage::ACCEPTEVENTACTIONEVENTACCEPTER_ATTRIBUTE_ACTIONACTIVATION:
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::AcceptEventActionActivation> _actionActivation = newValue->get<std::shared_ptr<fUML::AcceptEventActionActivation>>();
@@ -236,7 +236,7 @@ void AcceptEventActionEventAccepterImpl::resolveReferences(const int featureID, 
 {
 	switch(featureID)
 	{
-		case FUMLPackage::ACCEPTEVENTACTIONEVENTACCEPTER_EREFERENCE_ACTIONACTIVATION:
+		case FUMLPackage::ACCEPTEVENTACTIONEVENTACCEPTER_ATTRIBUTE_ACTIONACTIVATION:
 		{
 			if (references.size() == 1)
 			{

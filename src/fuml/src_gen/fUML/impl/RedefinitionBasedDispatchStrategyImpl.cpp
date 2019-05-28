@@ -104,7 +104,7 @@ std::shared_ptr<ecore::EObject>  RedefinitionBasedDispatchStrategyImpl::copy() c
 
 std::shared_ptr<ecore::EClass> RedefinitionBasedDispatchStrategyImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getRedefinitionBasedDispatchStrategy_EClass();
+	return FUMLPackageImpl::eInstance()->getRedefinitionBasedDispatchStrategy_Class();
 }
 
 //*********************************

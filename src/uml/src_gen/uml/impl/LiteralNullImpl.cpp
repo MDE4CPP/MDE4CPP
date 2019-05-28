@@ -208,7 +208,7 @@ std::shared_ptr<ecore::EObject>  LiteralNullImpl::copy() const
 
 std::shared_ptr<ecore::EClass> LiteralNullImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getLiteralNull_EClass();
+	return UmlPackageImpl::eInstance()->getLiteralNull_Class();
 }
 
 //*********************************

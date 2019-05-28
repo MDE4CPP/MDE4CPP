@@ -93,7 +93,7 @@ std::shared_ptr<ecore::EObject>  EventOccurrenceImpl::copy() const
 
 std::shared_ptr<ecore::EClass> EventOccurrenceImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getEventOccurrence_EClass();
+	return FUMLPackageImpl::eInstance()->getEventOccurrence_Class();
 }
 
 //*********************************

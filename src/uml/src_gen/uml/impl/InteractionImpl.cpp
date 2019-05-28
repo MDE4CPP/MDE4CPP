@@ -301,11 +301,11 @@ InteractionImpl::~InteractionImpl()
 			{
 				switch(reference_id)
 				{	
-				case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
+				case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
 					m_owningPackage = par_Package;
 					m_namespace = par_Package;
 					 return;
-				case UmlPackage::TYPE_EREFERENCE_PACKAGE:
+				case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
 					m_package = par_Package;
 					m_namespace = par_Package;
 					 return;
@@ -745,7 +745,7 @@ std::shared_ptr<ecore::EObject>  InteractionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> InteractionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getInteraction_EClass();
+	return UmlPackageImpl::eInstance()->getInteraction_Class();
 }
 
 //*********************************
@@ -905,15 +905,15 @@ Any InteractionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::INTERACTION_EREFERENCE_ACTION:
+		case UmlPackage::INTERACTION_ATTRIBUTE_ACTION:
 			return eAny(getAction()); //11967
-		case UmlPackage::INTERACTION_EREFERENCE_FORMALGATE:
+		case UmlPackage::INTERACTION_ATTRIBUTE_FORMALGATE:
 			return eAny(getFormalGate()); //11968
-		case UmlPackage::INTERACTION_EREFERENCE_FRAGMENT:
+		case UmlPackage::INTERACTION_ATTRIBUTE_FRAGMENT:
 			return eAny(getFragment()); //11966
-		case UmlPackage::INTERACTION_EREFERENCE_LIFELINE:
+		case UmlPackage::INTERACTION_ATTRIBUTE_LIFELINE:
 			return eAny(getLifeline()); //11965
-		case UmlPackage::INTERACTION_EREFERENCE_MESSAGE:
+		case UmlPackage::INTERACTION_ATTRIBUTE_MESSAGE:
 			return eAny(getMessage()); //11969
 	}
 	Any result;
@@ -929,15 +929,15 @@ bool InteractionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::INTERACTION_EREFERENCE_ACTION:
+		case UmlPackage::INTERACTION_ATTRIBUTE_ACTION:
 			return getAction() != nullptr; //11967
-		case UmlPackage::INTERACTION_EREFERENCE_FORMALGATE:
+		case UmlPackage::INTERACTION_ATTRIBUTE_FORMALGATE:
 			return getFormalGate() != nullptr; //11968
-		case UmlPackage::INTERACTION_EREFERENCE_FRAGMENT:
+		case UmlPackage::INTERACTION_ATTRIBUTE_FRAGMENT:
 			return getFragment() != nullptr; //11966
-		case UmlPackage::INTERACTION_EREFERENCE_LIFELINE:
+		case UmlPackage::INTERACTION_ATTRIBUTE_LIFELINE:
 			return getLifeline() != nullptr; //11965
-		case UmlPackage::INTERACTION_EREFERENCE_MESSAGE:
+		case UmlPackage::INTERACTION_ATTRIBUTE_MESSAGE:
 			return getMessage() != nullptr; //11969
 	}
 	bool result = false;
@@ -1040,7 +1040,7 @@ void InteractionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence
 				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			std::shared_ptr<ecore::EObject> fragment = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_ENCLOSINGINTERACTION);
+			std::shared_ptr<ecore::EObject> fragment = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_ENCLOSINGINTERACTION);
 			if (fragment != nullptr)
 			{
 				loadHandler->handleChild(fragment);
@@ -1055,7 +1055,7 @@ void InteractionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence
 			{
 				typeName = "Lifeline";
 			}
-			std::shared_ptr<ecore::EObject> lifeline = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::LIFELINE_EREFERENCE_INTERACTION);
+			std::shared_ptr<ecore::EObject> lifeline = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::LIFELINE_ATTRIBUTE_INTERACTION);
 			if (lifeline != nullptr)
 			{
 				loadHandler->handleChild(lifeline);
@@ -1070,7 +1070,7 @@ void InteractionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence
 			{
 				typeName = "Message";
 			}
-			std::shared_ptr<ecore::EObject> message = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::MESSAGE_EREFERENCE_INTERACTION);
+			std::shared_ptr<ecore::EObject> message = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::MESSAGE_ATTRIBUTE_INTERACTION);
 			if (message != nullptr)
 			{
 				loadHandler->handleChild(message);
@@ -1149,31 +1149,31 @@ void InteractionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 		// Save 'action'
 		for (std::shared_ptr<uml::Action> action : *this->getAction()) 
 		{
-			saveHandler->addReference(action, "action", action->eClass() != package->getAction_EClass());
+			saveHandler->addReference(action, "action", action->eClass() != package->getAction_Class());
 		}
 
 		// Save 'formalGate'
 		for (std::shared_ptr<uml::Gate> formalGate : *this->getFormalGate()) 
 		{
-			saveHandler->addReference(formalGate, "formalGate", formalGate->eClass() != package->getGate_EClass());
+			saveHandler->addReference(formalGate, "formalGate", formalGate->eClass() != package->getGate_Class());
 		}
 
 		// Save 'fragment'
 		for (std::shared_ptr<uml::InteractionFragment> fragment : *this->getFragment()) 
 		{
-			saveHandler->addReference(fragment, "fragment", fragment->eClass() != package->getInteractionFragment_EClass());
+			saveHandler->addReference(fragment, "fragment", fragment->eClass() != package->getInteractionFragment_Class());
 		}
 
 		// Save 'lifeline'
 		for (std::shared_ptr<uml::Lifeline> lifeline : *this->getLifeline()) 
 		{
-			saveHandler->addReference(lifeline, "lifeline", lifeline->eClass() != package->getLifeline_EClass());
+			saveHandler->addReference(lifeline, "lifeline", lifeline->eClass() != package->getLifeline_Class());
 		}
 
 		// Save 'message'
 		for (std::shared_ptr<uml::Message> message : *this->getMessage()) 
 		{
-			saveHandler->addReference(message, "message", message->eClass() != package->getMessage_EClass());
+			saveHandler->addReference(message, "message", message->eClass() != package->getMessage_Class());
 		}
 	
 

@@ -123,11 +123,11 @@ ModelImpl::~ModelImpl()
 			{
 				switch(reference_id)
 				{	
-				case UmlPackage::PACKAGE_EREFERENCE_NESTINGPACKAGE:
+				case UmlPackage::PACKAGE_ATTRIBUTE_NESTINGPACKAGE:
 					m_nestingPackage = par_Package;
 					m_namespace = par_Package;
 					 return;
-				case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
+				case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
 					m_owningPackage = par_Package;
 					m_namespace = par_Package;
 					 return;
@@ -328,7 +328,7 @@ std::shared_ptr<ecore::EObject>  ModelImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ModelImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getModel_EClass();
+	return UmlPackageImpl::eInstance()->getModel_Class();
 }
 
 //*********************************
@@ -427,7 +427,7 @@ Any ModelImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::MODEL_EATTRIBUTE_VIEWPOINT:
+		case UmlPackage::MODEL_ATTRIBUTE_VIEWPOINT:
 			return eAny(getViewpoint()); //15328
 	}
 	return PackageImpl::eGet(featureID, resolve, coreType);
@@ -436,7 +436,7 @@ bool ModelImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::MODEL_EATTRIBUTE_VIEWPOINT:
+		case UmlPackage::MODEL_ATTRIBUTE_VIEWPOINT:
 			return getViewpoint() != ""; //15328
 	}
 	return PackageImpl::internalEIsSet(featureID);
@@ -445,7 +445,7 @@ bool ModelImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::MODEL_EATTRIBUTE_VIEWPOINT:
+		case UmlPackage::MODEL_ATTRIBUTE_VIEWPOINT:
 		{
 			// BOOST CAST
 			std::string _viewpoint = newValue->get<std::string>();
@@ -550,7 +550,7 @@ void ModelImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandle
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getModel_EAttribute_viewpoint()) )
+		if ( this->eIsSet(package->getModel_Attribute_viewpoint()) )
 		{
 			saveHandler->addAttribute("viewpoint", this->getViewpoint());
 		}

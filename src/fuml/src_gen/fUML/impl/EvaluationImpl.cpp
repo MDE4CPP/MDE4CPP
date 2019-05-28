@@ -110,7 +110,7 @@ std::shared_ptr<ecore::EObject>  EvaluationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> EvaluationImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getEvaluation_EClass();
+	return FUMLPackageImpl::eInstance()->getEvaluation_Class();
 }
 
 //*********************************
@@ -175,9 +175,9 @@ Any EvaluationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::EVALUATION_EREFERENCE_LOCUS:
+		case FUMLPackage::EVALUATION_ATTRIBUTE_LOCUS:
 			return eAny(getLocus()); //361
-		case FUMLPackage::EVALUATION_EREFERENCE_SPECIFICATION:
+		case FUMLPackage::EVALUATION_ATTRIBUTE_SPECIFICATION:
 			return eAny(getSpecification()); //360
 	}
 	return SemanticVisitorImpl::eGet(featureID, resolve, coreType);
@@ -186,9 +186,9 @@ bool EvaluationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::EVALUATION_EREFERENCE_LOCUS:
+		case FUMLPackage::EVALUATION_ATTRIBUTE_LOCUS:
 			return getLocus() != nullptr; //361
-		case FUMLPackage::EVALUATION_EREFERENCE_SPECIFICATION:
+		case FUMLPackage::EVALUATION_ATTRIBUTE_SPECIFICATION:
 			return getSpecification() != nullptr; //360
 	}
 	return SemanticVisitorImpl::internalEIsSet(featureID);
@@ -197,14 +197,14 @@ bool EvaluationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case FUMLPackage::EVALUATION_EREFERENCE_LOCUS:
+		case FUMLPackage::EVALUATION_ATTRIBUTE_LOCUS:
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::Locus> _locus = newValue->get<std::shared_ptr<fUML::Locus>>();
 			setLocus(_locus); //361
 			return true;
 		}
-		case FUMLPackage::EVALUATION_EREFERENCE_SPECIFICATION:
+		case FUMLPackage::EVALUATION_ATTRIBUTE_SPECIFICATION:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ValueSpecification> _specification = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
@@ -279,7 +279,7 @@ void EvaluationImpl::resolveReferences(const int featureID, std::list<std::share
 {
 	switch(featureID)
 	{
-		case FUMLPackage::EVALUATION_EREFERENCE_LOCUS:
+		case FUMLPackage::EVALUATION_ATTRIBUTE_LOCUS:
 		{
 			if (references.size() == 1)
 			{
@@ -291,7 +291,7 @@ void EvaluationImpl::resolveReferences(const int featureID, std::list<std::share
 			return;
 		}
 
-		case FUMLPackage::EVALUATION_EREFERENCE_SPECIFICATION:
+		case FUMLPackage::EVALUATION_ATTRIBUTE_SPECIFICATION:
 		{
 			if (references.size() == 1)
 			{

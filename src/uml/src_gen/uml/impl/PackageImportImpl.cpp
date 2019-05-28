@@ -156,7 +156,7 @@ std::shared_ptr<ecore::EObject>  PackageImportImpl::copy() const
 
 std::shared_ptr<ecore::EClass> PackageImportImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getPackageImport_EClass();
+	return UmlPackageImpl::eInstance()->getPackageImport_Class();
 }
 
 //*********************************
@@ -259,11 +259,11 @@ Any PackageImportImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::PACKAGEIMPORT_EREFERENCE_IMPORTEDPACKAGE:
+		case UmlPackage::PACKAGEIMPORT_ATTRIBUTE_IMPORTEDPACKAGE:
 			return eAny(getImportedPackage()); //1716
-		case UmlPackage::PACKAGEIMPORT_EREFERENCE_IMPORTINGNAMESPACE:
+		case UmlPackage::PACKAGEIMPORT_ATTRIBUTE_IMPORTINGNAMESPACE:
 			return eAny(getImportingNamespace()); //1717
-		case UmlPackage::PACKAGEIMPORT_EATTRIBUTE_VISIBILITY:
+		case UmlPackage::PACKAGEIMPORT_ATTRIBUTE_VISIBILITY:
 			return eAny(getVisibility()); //1718
 	}
 	return DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
@@ -272,11 +272,11 @@ bool PackageImportImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::PACKAGEIMPORT_EREFERENCE_IMPORTEDPACKAGE:
+		case UmlPackage::PACKAGEIMPORT_ATTRIBUTE_IMPORTEDPACKAGE:
 			return getImportedPackage() != nullptr; //1716
-		case UmlPackage::PACKAGEIMPORT_EREFERENCE_IMPORTINGNAMESPACE:
+		case UmlPackage::PACKAGEIMPORT_ATTRIBUTE_IMPORTINGNAMESPACE:
 			return getImportingNamespace().lock() != nullptr; //1717
-		case UmlPackage::PACKAGEIMPORT_EATTRIBUTE_VISIBILITY:
+		case UmlPackage::PACKAGEIMPORT_ATTRIBUTE_VISIBILITY:
 			return m_visibility != VisibilityKind::PUBLIC;; //1718
 	}
 	return DirectedRelationshipImpl::internalEIsSet(featureID);
@@ -285,21 +285,21 @@ bool PackageImportImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::PACKAGEIMPORT_EREFERENCE_IMPORTEDPACKAGE:
+		case UmlPackage::PACKAGEIMPORT_ATTRIBUTE_IMPORTEDPACKAGE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Package> _importedPackage = newValue->get<std::shared_ptr<uml::Package>>();
 			setImportedPackage(_importedPackage); //1716
 			return true;
 		}
-		case UmlPackage::PACKAGEIMPORT_EREFERENCE_IMPORTINGNAMESPACE:
+		case UmlPackage::PACKAGEIMPORT_ATTRIBUTE_IMPORTINGNAMESPACE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Namespace> _importingNamespace = newValue->get<std::shared_ptr<uml::Namespace>>();
 			setImportingNamespace(_importingNamespace); //1717
 			return true;
 		}
-		case UmlPackage::PACKAGEIMPORT_EATTRIBUTE_VISIBILITY:
+		case UmlPackage::PACKAGEIMPORT_ATTRIBUTE_VISIBILITY:
 		{
 			// BOOST CAST
 			VisibilityKind _visibility = newValue->get<VisibilityKind>();
@@ -391,7 +391,7 @@ void PackageImportImpl::resolveReferences(const int featureID, std::list<std::sh
 {
 	switch(featureID)
 	{
-		case UmlPackage::PACKAGEIMPORT_EREFERENCE_IMPORTEDPACKAGE:
+		case UmlPackage::PACKAGEIMPORT_ATTRIBUTE_IMPORTEDPACKAGE:
 		{
 			if (references.size() == 1)
 			{
@@ -403,7 +403,7 @@ void PackageImportImpl::resolveReferences(const int featureID, std::list<std::sh
 			return;
 		}
 
-		case UmlPackage::PACKAGEIMPORT_EREFERENCE_IMPORTINGNAMESPACE:
+		case UmlPackage::PACKAGEIMPORT_ATTRIBUTE_IMPORTINGNAMESPACE:
 		{
 			if (references.size() == 1)
 			{
@@ -446,7 +446,7 @@ void PackageImportImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getPackageImport_EAttribute_visibility()) )
+		if ( this->eIsSet(package->getPackageImport_Attribute_visibility()) )
 		{
 			VisibilityKind value = this->getVisibility();
 			std::string literal = "";

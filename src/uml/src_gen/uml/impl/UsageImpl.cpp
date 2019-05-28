@@ -207,7 +207,7 @@ std::shared_ptr<ecore::EObject>  UsageImpl::copy() const
 
 std::shared_ptr<ecore::EClass> UsageImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getUsage_EClass();
+	return UmlPackageImpl::eInstance()->getUsage_Class();
 }
 
 //*********************************

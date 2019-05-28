@@ -93,7 +93,7 @@ std::shared_ptr<ecore::EObject>  ClassifierBehaviorExecutionActivity_OwnedBehavi
 
 std::shared_ptr<ecore::EClass> ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1_EClass();
+	return FUMLPackageImpl::eInstance()->getClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1_Class();
 }
 
 //*********************************

@@ -238,7 +238,7 @@ std::shared_ptr<ecore::EObject>  ControlNodeImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ControlNodeImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getControlNode_EClass();
+	return UmlPackageImpl::eInstance()->getControlNode_Class();
 }
 
 //*********************************

@@ -183,7 +183,7 @@ std::shared_ptr<ecore::EObject>  TemplateSignatureImpl::copy() const
 
 std::shared_ptr<ecore::EClass> TemplateSignatureImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getTemplateSignature_EClass();
+	return UmlPackageImpl::eInstance()->getTemplateSignature_Class();
 }
 
 //*********************************
@@ -275,11 +275,11 @@ Any TemplateSignatureImpl::eGet(int featureID, bool resolve, bool coreType) cons
 {
 	switch(featureID)
 	{
-		case UmlPackage::TEMPLATESIGNATURE_EREFERENCE_OWNEDPARAMETER:
+		case UmlPackage::TEMPLATESIGNATURE_ATTRIBUTE_OWNEDPARAMETER:
 			return eAny(getOwnedParameter()); //2335
-		case UmlPackage::TEMPLATESIGNATURE_EREFERENCE_PARAMETER:
+		case UmlPackage::TEMPLATESIGNATURE_ATTRIBUTE_PARAMETER:
 			return eAny(getParameter()); //2333
-		case UmlPackage::TEMPLATESIGNATURE_EREFERENCE_TEMPLATE:
+		case UmlPackage::TEMPLATESIGNATURE_ATTRIBUTE_TEMPLATE:
 			return eAny(getTemplate()); //2334
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
@@ -288,11 +288,11 @@ bool TemplateSignatureImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::TEMPLATESIGNATURE_EREFERENCE_OWNEDPARAMETER:
+		case UmlPackage::TEMPLATESIGNATURE_ATTRIBUTE_OWNEDPARAMETER:
 			return getOwnedParameter() != nullptr; //2335
-		case UmlPackage::TEMPLATESIGNATURE_EREFERENCE_PARAMETER:
+		case UmlPackage::TEMPLATESIGNATURE_ATTRIBUTE_PARAMETER:
 			return getParameter() != nullptr; //2333
-		case UmlPackage::TEMPLATESIGNATURE_EREFERENCE_TEMPLATE:
+		case UmlPackage::TEMPLATESIGNATURE_ATTRIBUTE_TEMPLATE:
 			return getTemplate().lock() != nullptr; //2334
 	}
 	return ElementImpl::internalEIsSet(featureID);
@@ -301,7 +301,7 @@ bool TemplateSignatureImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::TEMPLATESIGNATURE_EREFERENCE_TEMPLATE:
+		case UmlPackage::TEMPLATESIGNATURE_ATTRIBUTE_TEMPLATE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::TemplateableElement> _template = newValue->get<std::shared_ptr<uml::TemplateableElement>>();
@@ -370,7 +370,7 @@ void TemplateSignatureImpl::loadNode(std::string nodeName, std::shared_ptr<persi
 			{
 				typeName = "TemplateParameter";
 			}
-			std::shared_ptr<ecore::EObject> ownedParameter = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::TEMPLATEPARAMETER_EREFERENCE_SIGNATURE);
+			std::shared_ptr<ecore::EObject> ownedParameter = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::TEMPLATEPARAMETER_ATTRIBUTE_SIGNATURE);
 			if (ownedParameter != nullptr)
 			{
 				loadHandler->handleChild(ownedParameter);
@@ -394,7 +394,7 @@ void TemplateSignatureImpl::resolveReferences(const int featureID, std::list<std
 {
 	switch(featureID)
 	{
-		case UmlPackage::TEMPLATESIGNATURE_EREFERENCE_PARAMETER:
+		case UmlPackage::TEMPLATESIGNATURE_ATTRIBUTE_PARAMETER:
 		{
 			std::shared_ptr<Bag<uml::TemplateParameter>> _parameter = getParameter();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -408,7 +408,7 @@ void TemplateSignatureImpl::resolveReferences(const int featureID, std::list<std
 			return;
 		}
 
-		case UmlPackage::TEMPLATESIGNATURE_EREFERENCE_TEMPLATE:
+		case UmlPackage::TEMPLATESIGNATURE_ATTRIBUTE_TEMPLATE:
 		{
 			if (references.size() == 1)
 			{
@@ -445,7 +445,7 @@ void TemplateSignatureImpl::saveContent(std::shared_ptr<persistence::interfaces:
 		// Save 'ownedParameter'
 		for (std::shared_ptr<uml::TemplateParameter> ownedParameter : *this->getOwnedParameter()) 
 		{
-			saveHandler->addReference(ownedParameter, "ownedParameter", ownedParameter->eClass() != package->getTemplateParameter_EClass());
+			saveHandler->addReference(ownedParameter, "ownedParameter", ownedParameter->eClass() != package->getTemplateParameter_Class());
 		}
 	
 

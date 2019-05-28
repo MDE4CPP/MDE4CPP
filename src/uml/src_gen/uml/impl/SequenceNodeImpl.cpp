@@ -128,11 +128,11 @@ SequenceNodeImpl::~SequenceNodeImpl()
 			{
 				switch(reference_id)
 				{	
-				case UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY:
+				case UmlPackage::ACTIVITYNODE_ATTRIBUTE_ACTIVITY:
 					m_activity = par_Activity;
 					m_owner = par_Activity;
 					 return;
-				case UmlPackage::ACTIVITYGROUP_EREFERENCE_INACTIVITY:
+				case UmlPackage::ACTIVITYGROUP_ATTRIBUTE_INACTIVITY:
 					m_inActivity = par_Activity;
 					m_owner = par_Activity;
 					 return;
@@ -416,7 +416,7 @@ std::shared_ptr<ecore::EObject>  SequenceNodeImpl::copy() const
 
 std::shared_ptr<ecore::EClass> SequenceNodeImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getSequenceNode_EClass();
+	return UmlPackageImpl::eInstance()->getSequenceNode_Class();
 }
 
 //*********************************
@@ -532,7 +532,7 @@ Any SequenceNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::SEQUENCENODE_EREFERENCE_EXECUTABLENODE:
+		case UmlPackage::SEQUENCENODE_ATTRIBUTE_EXECUTABLENODE:
 			return eAny(getExecutableNode()); //21444
 	}
 	return StructuredActivityNodeImpl::eGet(featureID, resolve, coreType);
@@ -541,7 +541,7 @@ bool SequenceNodeImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::SEQUENCENODE_EREFERENCE_EXECUTABLENODE:
+		case UmlPackage::SEQUENCENODE_ATTRIBUTE_EXECUTABLENODE:
 			return getExecutableNode() != nullptr; //21444
 	}
 	return StructuredActivityNodeImpl::internalEIsSet(featureID);
@@ -672,7 +672,7 @@ void SequenceNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 		std::shared_ptr<Bag<uml::ExecutableNode>> list_executableNode = this->getExecutableNode();
 		for (std::shared_ptr<uml::ExecutableNode> executableNode : *list_executableNode) 
 		{
-			saveHandler->addReference(executableNode, "executableNode", executableNode->eClass() != package->getExecutableNode_EClass());
+			saveHandler->addReference(executableNode, "executableNode", executableNode->eClass() != package->getExecutableNode_Class());
 		}
 	}
 	catch (std::exception& e)

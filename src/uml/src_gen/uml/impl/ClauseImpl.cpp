@@ -179,7 +179,7 @@ std::shared_ptr<ecore::EObject>  ClauseImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ClauseImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getClause_EClass();
+	return UmlPackageImpl::eInstance()->getClause_Class();
 }
 
 //*********************************
@@ -289,17 +289,17 @@ Any ClauseImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::CLAUSE_EREFERENCE_BODY:
+		case UmlPackage::CLAUSE_ATTRIBUTE_BODY:
 			return eAny(getBody()); //383
-		case UmlPackage::CLAUSE_EREFERENCE_BODYOUTPUT:
+		case UmlPackage::CLAUSE_ATTRIBUTE_BODYOUTPUT:
 			return eAny(getBodyOutput()); //384
-		case UmlPackage::CLAUSE_EREFERENCE_DECIDER:
+		case UmlPackage::CLAUSE_ATTRIBUTE_DECIDER:
 			return eAny(getDecider()); //385
-		case UmlPackage::CLAUSE_EREFERENCE_PREDECESSORCLAUSE:
+		case UmlPackage::CLAUSE_ATTRIBUTE_PREDECESSORCLAUSE:
 			return eAny(getPredecessorClause()); //386
-		case UmlPackage::CLAUSE_EREFERENCE_SUCCESSORCLAUSE:
+		case UmlPackage::CLAUSE_ATTRIBUTE_SUCCESSORCLAUSE:
 			return eAny(getSuccessorClause()); //387
-		case UmlPackage::CLAUSE_EREFERENCE_TEST:
+		case UmlPackage::CLAUSE_ATTRIBUTE_TEST:
 			return eAny(getTest()); //388
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
@@ -308,17 +308,17 @@ bool ClauseImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::CLAUSE_EREFERENCE_BODY:
+		case UmlPackage::CLAUSE_ATTRIBUTE_BODY:
 			return getBody() != nullptr; //383
-		case UmlPackage::CLAUSE_EREFERENCE_BODYOUTPUT:
+		case UmlPackage::CLAUSE_ATTRIBUTE_BODYOUTPUT:
 			return getBodyOutput() != nullptr; //384
-		case UmlPackage::CLAUSE_EREFERENCE_DECIDER:
+		case UmlPackage::CLAUSE_ATTRIBUTE_DECIDER:
 			return getDecider() != nullptr; //385
-		case UmlPackage::CLAUSE_EREFERENCE_PREDECESSORCLAUSE:
+		case UmlPackage::CLAUSE_ATTRIBUTE_PREDECESSORCLAUSE:
 			return getPredecessorClause() != nullptr; //386
-		case UmlPackage::CLAUSE_EREFERENCE_SUCCESSORCLAUSE:
+		case UmlPackage::CLAUSE_ATTRIBUTE_SUCCESSORCLAUSE:
 			return getSuccessorClause() != nullptr; //387
-		case UmlPackage::CLAUSE_EREFERENCE_TEST:
+		case UmlPackage::CLAUSE_ATTRIBUTE_TEST:
 			return getTest() != nullptr; //388
 	}
 	return ElementImpl::internalEIsSet(featureID);
@@ -327,7 +327,7 @@ bool ClauseImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::CLAUSE_EREFERENCE_DECIDER:
+		case UmlPackage::CLAUSE_ATTRIBUTE_DECIDER:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::OutputPin> _decider = newValue->get<std::shared_ptr<uml::OutputPin>>();
@@ -430,7 +430,7 @@ void ClauseImpl::resolveReferences(const int featureID, std::list<std::shared_pt
 {
 	switch(featureID)
 	{
-		case UmlPackage::CLAUSE_EREFERENCE_BODY:
+		case UmlPackage::CLAUSE_ATTRIBUTE_BODY:
 		{
 			std::shared_ptr<Bag<uml::ExecutableNode>> _body = getBody();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -444,7 +444,7 @@ void ClauseImpl::resolveReferences(const int featureID, std::list<std::shared_pt
 			return;
 		}
 
-		case UmlPackage::CLAUSE_EREFERENCE_BODYOUTPUT:
+		case UmlPackage::CLAUSE_ATTRIBUTE_BODYOUTPUT:
 		{
 			std::shared_ptr<Bag<uml::OutputPin>> _bodyOutput = getBodyOutput();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -458,7 +458,7 @@ void ClauseImpl::resolveReferences(const int featureID, std::list<std::shared_pt
 			return;
 		}
 
-		case UmlPackage::CLAUSE_EREFERENCE_DECIDER:
+		case UmlPackage::CLAUSE_ATTRIBUTE_DECIDER:
 		{
 			if (references.size() == 1)
 			{
@@ -470,7 +470,7 @@ void ClauseImpl::resolveReferences(const int featureID, std::list<std::shared_pt
 			return;
 		}
 
-		case UmlPackage::CLAUSE_EREFERENCE_PREDECESSORCLAUSE:
+		case UmlPackage::CLAUSE_ATTRIBUTE_PREDECESSORCLAUSE:
 		{
 			std::shared_ptr<Bag<uml::Clause>> _predecessorClause = getPredecessorClause();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -484,7 +484,7 @@ void ClauseImpl::resolveReferences(const int featureID, std::list<std::shared_pt
 			return;
 		}
 
-		case UmlPackage::CLAUSE_EREFERENCE_SUCCESSORCLAUSE:
+		case UmlPackage::CLAUSE_ATTRIBUTE_SUCCESSORCLAUSE:
 		{
 			std::shared_ptr<Bag<uml::Clause>> _successorClause = getSuccessorClause();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -498,7 +498,7 @@ void ClauseImpl::resolveReferences(const int featureID, std::list<std::shared_pt
 			return;
 		}
 
-		case UmlPackage::CLAUSE_EREFERENCE_TEST:
+		case UmlPackage::CLAUSE_ATTRIBUTE_TEST:
 		{
 			std::shared_ptr<Bag<uml::ExecutableNode>> _test = getTest();
 			for(std::shared_ptr<ecore::EObject> ref : references)

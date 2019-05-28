@@ -102,7 +102,7 @@ std::shared_ptr<ecore::EObject>  ControlTokenImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ControlTokenImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getControlToken_EClass();
+	return FUMLPackageImpl::eInstance()->getControlToken_Class();
 }
 
 //*********************************

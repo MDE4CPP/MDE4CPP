@@ -188,7 +188,7 @@ std::shared_ptr<ecore::EObject>  ConnectableElementImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ConnectableElementImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getConnectableElement_EClass();
+	return UmlPackageImpl::eInstance()->getConnectableElement_Class();
 }
 
 //*********************************
@@ -263,7 +263,7 @@ Any ConnectableElementImpl::eGet(int featureID, bool resolve, bool coreType) con
 {
 	switch(featureID)
 	{
-		case UmlPackage::CONNECTABLEELEMENT_EREFERENCE_END:
+		case UmlPackage::CONNECTABLEELEMENT_ATTRIBUTE_END:
 			return eAny(getEnd()); //5012
 	}
 	Any result;
@@ -279,7 +279,7 @@ bool ConnectableElementImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::CONNECTABLEELEMENT_EREFERENCE_END:
+		case UmlPackage::CONNECTABLEELEMENT_ATTRIBUTE_END:
 			return getEnd() != nullptr; //5012
 	}
 	bool result = false;

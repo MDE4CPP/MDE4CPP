@@ -159,7 +159,7 @@ std::shared_ptr<ecore::EObject>  ClearAssociationActionActivationImpl::copy() co
 
 std::shared_ptr<ecore::EClass> ClearAssociationActionActivationImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getClearAssociationActionActivation_EClass();
+	return FUMLPackageImpl::eInstance()->getClearAssociationActionActivation_Class();
 }
 
 //*********************************

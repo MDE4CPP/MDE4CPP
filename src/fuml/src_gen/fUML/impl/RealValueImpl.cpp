@@ -110,7 +110,7 @@ std::shared_ptr<ecore::EObject>  RealValueImpl::copy() const
 
 std::shared_ptr<ecore::EClass> RealValueImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getRealValue_EClass();
+	return FUMLPackageImpl::eInstance()->getRealValue_Class();
 }
 
 //*********************************
@@ -135,7 +135,7 @@ bool RealValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue)
 	//generated from body annotation
 		bool isEqual = false;
 
-    if(otherValue != nullptr && otherValue->eClass()->getClassifierID() == fUML::FUMLPackage::REALVALUE_ECLASS)
+    if(otherValue != nullptr && otherValue->eClass()->getClassifierID() == fUML::FUMLPackage::REALVALUE_CLASS)
     {
 		std::shared_ptr<RealValue> otherRealValue = std::dynamic_pointer_cast<RealValue>(otherValue);
         isEqual = (otherRealValue->getValue() == this->getValue());
@@ -197,7 +197,7 @@ Any RealValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::REALVALUE_EATTRIBUTE_VALUE:
+		case FUMLPackage::REALVALUE_ATTRIBUTE_VALUE:
 			return eAny(getValue()); //911
 	}
 	return PrimitiveValueImpl::eGet(featureID, resolve, coreType);
@@ -206,7 +206,7 @@ bool RealValueImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::REALVALUE_EATTRIBUTE_VALUE:
+		case FUMLPackage::REALVALUE_ATTRIBUTE_VALUE:
 			return getValue() != 0; //911
 	}
 	return PrimitiveValueImpl::internalEIsSet(featureID);
@@ -215,7 +215,7 @@ bool RealValueImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case FUMLPackage::REALVALUE_EATTRIBUTE_VALUE:
+		case FUMLPackage::REALVALUE_ATTRIBUTE_VALUE:
 		{
 			// BOOST CAST
 			float _value = newValue->get<float>();
@@ -311,7 +311,7 @@ void RealValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getRealValue_EAttribute_value()) )
+		if ( this->eIsSet(package->getRealValue_Attribute_value()) )
 		{
 			saveHandler->addAttribute("value", this->getValue());
 		}

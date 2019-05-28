@@ -106,7 +106,7 @@ std::shared_ptr<ecore::EObject>  PrimitiveValueImpl::copy() const
 
 std::shared_ptr<ecore::EClass> PrimitiveValueImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getPrimitiveValue_EClass();
+	return FUMLPackageImpl::eInstance()->getPrimitiveValue_Class();
 }
 
 //*********************************
@@ -169,7 +169,7 @@ Any PrimitiveValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::PRIMITIVEVALUE_EREFERENCE_TYPE:
+		case FUMLPackage::PRIMITIVEVALUE_ATTRIBUTE_TYPE:
 			return eAny(getType()); //850
 	}
 	return ValueImpl::eGet(featureID, resolve, coreType);
@@ -178,7 +178,7 @@ bool PrimitiveValueImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::PRIMITIVEVALUE_EREFERENCE_TYPE:
+		case FUMLPackage::PRIMITIVEVALUE_ATTRIBUTE_TYPE:
 			return getType() != nullptr; //850
 	}
 	return ValueImpl::internalEIsSet(featureID);
@@ -187,7 +187,7 @@ bool PrimitiveValueImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case FUMLPackage::PRIMITIVEVALUE_EREFERENCE_TYPE:
+		case FUMLPackage::PRIMITIVEVALUE_ATTRIBUTE_TYPE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::PrimitiveType> _type = newValue->get<std::shared_ptr<uml::PrimitiveType>>();
@@ -255,7 +255,7 @@ void PrimitiveValueImpl::resolveReferences(const int featureID, std::list<std::s
 {
 	switch(featureID)
 	{
-		case FUMLPackage::PRIMITIVEVALUE_EREFERENCE_TYPE:
+		case FUMLPackage::PRIMITIVEVALUE_ATTRIBUTE_TYPE:
 		{
 			if (references.size() == 1)
 			{

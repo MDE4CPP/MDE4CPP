@@ -110,6 +110,14 @@ virtual public EObject
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
+			/*!
+			 */ 
+			virtual int getMetaElementID() const ;
+			
+			/*!
+			 */ 
+			virtual void setMetaElementID (int _metaElementID); 
+			
 			
 			
 			//*********************************

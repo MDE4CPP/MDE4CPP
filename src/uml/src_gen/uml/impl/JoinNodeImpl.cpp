@@ -254,7 +254,7 @@ std::shared_ptr<ecore::EObject>  JoinNodeImpl::copy() const
 
 std::shared_ptr<ecore::EClass> JoinNodeImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getJoinNode_EClass();
+	return UmlPackageImpl::eInstance()->getJoinNode_Class();
 }
 
 //*********************************
@@ -359,9 +359,9 @@ Any JoinNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::JOINNODE_EATTRIBUTE_ISCOMBINEDUPLICATE:
+		case UmlPackage::JOINNODE_ATTRIBUTE_ISCOMBINEDUPLICATE:
 			return eAny(getIsCombineDuplicate()); //13120
-		case UmlPackage::JOINNODE_EREFERENCE_JOINSPEC:
+		case UmlPackage::JOINNODE_ATTRIBUTE_JOINSPEC:
 			return eAny(getJoinSpec()); //13121
 	}
 	return ControlNodeImpl::eGet(featureID, resolve, coreType);
@@ -370,9 +370,9 @@ bool JoinNodeImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::JOINNODE_EATTRIBUTE_ISCOMBINEDUPLICATE:
+		case UmlPackage::JOINNODE_ATTRIBUTE_ISCOMBINEDUPLICATE:
 			return getIsCombineDuplicate() != true; //13120
-		case UmlPackage::JOINNODE_EREFERENCE_JOINSPEC:
+		case UmlPackage::JOINNODE_ATTRIBUTE_JOINSPEC:
 			return getJoinSpec() != nullptr; //13121
 	}
 	return ControlNodeImpl::internalEIsSet(featureID);
@@ -381,14 +381,14 @@ bool JoinNodeImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::JOINNODE_EATTRIBUTE_ISCOMBINEDUPLICATE:
+		case UmlPackage::JOINNODE_ATTRIBUTE_ISCOMBINEDUPLICATE:
 		{
 			// BOOST CAST
 			bool _isCombineDuplicate = newValue->get<bool>();
 			setIsCombineDuplicate(_isCombineDuplicate); //13120
 			return true;
 		}
-		case UmlPackage::JOINNODE_EREFERENCE_JOINSPEC:
+		case UmlPackage::JOINNODE_ATTRIBUTE_JOINSPEC:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ValueSpecification> _joinSpec = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
@@ -522,12 +522,12 @@ void JoinNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 		std::shared_ptr<uml::ValueSpecification > joinSpec = this->getJoinSpec();
 		if (joinSpec != nullptr)
 		{
-			saveHandler->addReference(joinSpec, "joinSpec", joinSpec->eClass() != package->getValueSpecification_EClass());
+			saveHandler->addReference(joinSpec, "joinSpec", joinSpec->eClass() != package->getValueSpecification_Class());
 		}
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getJoinNode_EAttribute_isCombineDuplicate()) )
+		if ( this->eIsSet(package->getJoinNode_Attribute_isCombineDuplicate()) )
 		{
 			saveHandler->addAttribute("isCombineDuplicate", this->getIsCombineDuplicate());
 		}

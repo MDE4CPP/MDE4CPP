@@ -160,7 +160,7 @@ std::shared_ptr<ecore::EObject>  TypedElementImpl::copy() const
 
 std::shared_ptr<ecore::EClass> TypedElementImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getTypedElement_EClass();
+	return UmlPackageImpl::eInstance()->getTypedElement_Class();
 }
 
 //*********************************
@@ -227,7 +227,7 @@ Any TypedElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::TYPEDELEMENT_EREFERENCE_TYPE:
+		case UmlPackage::TYPEDELEMENT_ATTRIBUTE_TYPE:
 			return eAny(getType()); //2459
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
@@ -236,7 +236,7 @@ bool TypedElementImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::TYPEDELEMENT_EREFERENCE_TYPE:
+		case UmlPackage::TYPEDELEMENT_ATTRIBUTE_TYPE:
 			return getType() != nullptr; //2459
 	}
 	return NamedElementImpl::internalEIsSet(featureID);
@@ -245,7 +245,7 @@ bool TypedElementImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::TYPEDELEMENT_EREFERENCE_TYPE:
+		case UmlPackage::TYPEDELEMENT_ATTRIBUTE_TYPE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Type> _type = newValue->get<std::shared_ptr<uml::Type>>();
@@ -321,7 +321,7 @@ void TypedElementImpl::resolveReferences(const int featureID, std::list<std::sha
 {
 	switch(featureID)
 	{
-		case UmlPackage::TYPEDELEMENT_EREFERENCE_TYPE:
+		case UmlPackage::TYPEDELEMENT_ATTRIBUTE_TYPE:
 		{
 			if (references.size() == 1)
 			{

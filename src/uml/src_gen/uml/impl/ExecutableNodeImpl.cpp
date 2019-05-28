@@ -269,7 +269,7 @@ std::shared_ptr<ecore::EObject>  ExecutableNodeImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ExecutableNodeImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getExecutableNode_EClass();
+	return UmlPackageImpl::eInstance()->getExecutableNode_Class();
 }
 
 //*********************************
@@ -351,7 +351,7 @@ Any ExecutableNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::EXECUTABLENODE_EREFERENCE_HANDLER:
+		case UmlPackage::EXECUTABLENODE_ATTRIBUTE_HANDLER:
 			return eAny(getHandler()); //8820
 	}
 	return ActivityNodeImpl::eGet(featureID, resolve, coreType);
@@ -360,7 +360,7 @@ bool ExecutableNodeImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::EXECUTABLENODE_EREFERENCE_HANDLER:
+		case UmlPackage::EXECUTABLENODE_ATTRIBUTE_HANDLER:
 			return getHandler() != nullptr; //8820
 	}
 	return ActivityNodeImpl::internalEIsSet(featureID);
@@ -412,7 +412,7 @@ void ExecutableNodeImpl::loadNode(std::string nodeName, std::shared_ptr<persiste
 			{
 				typeName = "ExceptionHandler";
 			}
-			std::shared_ptr<ecore::EObject> handler = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::EXCEPTIONHANDLER_EREFERENCE_PROTECTEDNODE);
+			std::shared_ptr<ecore::EObject> handler = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::EXCEPTIONHANDLER_ATTRIBUTE_PROTECTEDNODE);
 			if (handler != nullptr)
 			{
 				loadHandler->handleChild(handler);
@@ -469,7 +469,7 @@ void ExecutableNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 		// Save 'handler'
 		for (std::shared_ptr<uml::ExceptionHandler> handler : *this->getHandler()) 
 		{
-			saveHandler->addReference(handler, "handler", handler->eClass() != package->getExceptionHandler_EClass());
+			saveHandler->addReference(handler, "handler", handler->eClass() != package->getExceptionHandler_Class());
 		}
 	
 

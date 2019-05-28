@@ -186,7 +186,7 @@ std::shared_ptr<ecore::EObject>  RedefinableElementImpl::copy() const
 
 std::shared_ptr<ecore::EClass> RedefinableElementImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getRedefinableElement_EClass();
+	return UmlPackageImpl::eInstance()->getRedefinableElement_Class();
 }
 
 //*********************************
@@ -295,11 +295,11 @@ Any RedefinableElementImpl::eGet(int featureID, bool resolve, bool coreType) con
 {
 	switch(featureID)
 	{
-		case UmlPackage::REDEFINABLEELEMENT_EATTRIBUTE_ISLEAF:
+		case UmlPackage::REDEFINABLEELEMENT_ATTRIBUTE_ISLEAF:
 			return eAny(getIsLeaf()); //2049
-		case UmlPackage::REDEFINABLEELEMENT_EREFERENCE_REDEFINEDELEMENT:
+		case UmlPackage::REDEFINABLEELEMENT_ATTRIBUTE_REDEFINEDELEMENT:
 			return eAny(getRedefinedElement()); //20410
-		case UmlPackage::REDEFINABLEELEMENT_EREFERENCE_REDEFINITIONCONTEXT:
+		case UmlPackage::REDEFINABLEELEMENT_ATTRIBUTE_REDEFINITIONCONTEXT:
 			return eAny(getRedefinitionContext()); //20411
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
@@ -308,11 +308,11 @@ bool RedefinableElementImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::REDEFINABLEELEMENT_EATTRIBUTE_ISLEAF:
+		case UmlPackage::REDEFINABLEELEMENT_ATTRIBUTE_ISLEAF:
 			return getIsLeaf() != false; //2049
-		case UmlPackage::REDEFINABLEELEMENT_EREFERENCE_REDEFINEDELEMENT:
+		case UmlPackage::REDEFINABLEELEMENT_ATTRIBUTE_REDEFINEDELEMENT:
 			return getRedefinedElement() != nullptr; //20410
-		case UmlPackage::REDEFINABLEELEMENT_EREFERENCE_REDEFINITIONCONTEXT:
+		case UmlPackage::REDEFINABLEELEMENT_ATTRIBUTE_REDEFINITIONCONTEXT:
 			return getRedefinitionContext() != nullptr; //20411
 	}
 	return NamedElementImpl::internalEIsSet(featureID);
@@ -321,7 +321,7 @@ bool RedefinableElementImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::REDEFINABLEELEMENT_EATTRIBUTE_ISLEAF:
+		case UmlPackage::REDEFINABLEELEMENT_ATTRIBUTE_ISLEAF:
 		{
 			// BOOST CAST
 			bool _isLeaf = newValue->get<bool>();
@@ -417,7 +417,7 @@ void RedefinableElementImpl::saveContent(std::shared_ptr<persistence::interfaces
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getRedefinableElement_EAttribute_isLeaf()) )
+		if ( this->eIsSet(package->getRedefinableElement_Attribute_isLeaf()) )
 		{
 			saveHandler->addAttribute("isLeaf", this->getIsLeaf());
 		}

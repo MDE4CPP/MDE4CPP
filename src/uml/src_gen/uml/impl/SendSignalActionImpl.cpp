@@ -306,7 +306,7 @@ std::shared_ptr<ecore::EObject>  SendSignalActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> SendSignalActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getSendSignalAction_EClass();
+	return UmlPackageImpl::eInstance()->getSendSignalAction_Class();
 }
 
 //*********************************
@@ -422,9 +422,9 @@ Any SendSignalActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::SENDSIGNALACTION_EREFERENCE_SIGNAL:
+		case UmlPackage::SENDSIGNALACTION_ATTRIBUTE_SIGNAL:
 			return eAny(getSignal()); //21329
-		case UmlPackage::SENDSIGNALACTION_EREFERENCE_TARGET:
+		case UmlPackage::SENDSIGNALACTION_ATTRIBUTE_TARGET:
 			return eAny(getTarget()); //21330
 	}
 	return InvocationActionImpl::eGet(featureID, resolve, coreType);
@@ -433,9 +433,9 @@ bool SendSignalActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::SENDSIGNALACTION_EREFERENCE_SIGNAL:
+		case UmlPackage::SENDSIGNALACTION_ATTRIBUTE_SIGNAL:
 			return getSignal() != nullptr; //21329
-		case UmlPackage::SENDSIGNALACTION_EREFERENCE_TARGET:
+		case UmlPackage::SENDSIGNALACTION_ATTRIBUTE_TARGET:
 			return getTarget() != nullptr; //21330
 	}
 	return InvocationActionImpl::internalEIsSet(featureID);
@@ -444,14 +444,14 @@ bool SendSignalActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::SENDSIGNALACTION_EREFERENCE_SIGNAL:
+		case UmlPackage::SENDSIGNALACTION_ATTRIBUTE_SIGNAL:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Signal> _signal = newValue->get<std::shared_ptr<uml::Signal>>();
 			setSignal(_signal); //21329
 			return true;
 		}
-		case UmlPackage::SENDSIGNALACTION_EREFERENCE_TARGET:
+		case UmlPackage::SENDSIGNALACTION_ATTRIBUTE_TARGET:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::InputPin> _target = newValue->get<std::shared_ptr<uml::InputPin>>();
@@ -545,7 +545,7 @@ void SendSignalActionImpl::resolveReferences(const int featureID, std::list<std:
 {
 	switch(featureID)
 	{
-		case UmlPackage::SENDSIGNALACTION_EREFERENCE_SIGNAL:
+		case UmlPackage::SENDSIGNALACTION_ATTRIBUTE_SIGNAL:
 		{
 			if (references.size() == 1)
 			{
@@ -602,7 +602,7 @@ void SendSignalActionImpl::saveContent(std::shared_ptr<persistence::interfaces::
 		std::shared_ptr<uml::InputPin > target = this->getTarget();
 		if (target != nullptr)
 		{
-			saveHandler->addReference(target, "target", target->eClass() != package->getInputPin_EClass());
+			saveHandler->addReference(target, "target", target->eClass() != package->getInputPin_Class());
 		}
 	
 

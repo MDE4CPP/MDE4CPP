@@ -340,7 +340,7 @@ std::shared_ptr<ecore::EObject>  AcceptEventActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> AcceptEventActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getAcceptEventAction_EClass();
+	return UmlPackageImpl::eInstance()->getAcceptEventAction_Class();
 }
 
 //*********************************
@@ -471,11 +471,11 @@ Any AcceptEventActionImpl::eGet(int featureID, bool resolve, bool coreType) cons
 {
 	switch(featureID)
 	{
-		case UmlPackage::ACCEPTEVENTACTION_EATTRIBUTE_ISUNMARSHALL:
+		case UmlPackage::ACCEPTEVENTACTION_ATTRIBUTE_ISUNMARSHALL:
 			return eAny(getIsUnmarshall()); //327
-		case UmlPackage::ACCEPTEVENTACTION_EREFERENCE_RESULT:
+		case UmlPackage::ACCEPTEVENTACTION_ATTRIBUTE_RESULT:
 			return eAny(getResult()); //328
-		case UmlPackage::ACCEPTEVENTACTION_EREFERENCE_TRIGGER:
+		case UmlPackage::ACCEPTEVENTACTION_ATTRIBUTE_TRIGGER:
 			return eAny(getTrigger()); //329
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
@@ -484,11 +484,11 @@ bool AcceptEventActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::ACCEPTEVENTACTION_EATTRIBUTE_ISUNMARSHALL:
+		case UmlPackage::ACCEPTEVENTACTION_ATTRIBUTE_ISUNMARSHALL:
 			return getIsUnmarshall() != false; //327
-		case UmlPackage::ACCEPTEVENTACTION_EREFERENCE_RESULT:
+		case UmlPackage::ACCEPTEVENTACTION_ATTRIBUTE_RESULT:
 			return getResult() != nullptr; //328
-		case UmlPackage::ACCEPTEVENTACTION_EREFERENCE_TRIGGER:
+		case UmlPackage::ACCEPTEVENTACTION_ATTRIBUTE_TRIGGER:
 			return getTrigger() != nullptr; //329
 	}
 	return ActionImpl::internalEIsSet(featureID);
@@ -497,7 +497,7 @@ bool AcceptEventActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::ACCEPTEVENTACTION_EATTRIBUTE_ISUNMARSHALL:
+		case UmlPackage::ACCEPTEVENTACTION_ATTRIBUTE_ISUNMARSHALL:
 		{
 			// BOOST CAST
 			bool _isUnmarshall = newValue->get<bool>();
@@ -650,18 +650,18 @@ void AcceptEventActionImpl::saveContent(std::shared_ptr<persistence::interfaces:
 		// Save 'result'
 		for (std::shared_ptr<uml::OutputPin> result : *this->getResult()) 
 		{
-			saveHandler->addReference(result, "result", result->eClass() != package->getOutputPin_EClass());
+			saveHandler->addReference(result, "result", result->eClass() != package->getOutputPin_Class());
 		}
 
 		// Save 'trigger'
 		for (std::shared_ptr<uml::Trigger> trigger : *this->getTrigger()) 
 		{
-			saveHandler->addReference(trigger, "trigger", trigger->eClass() != package->getTrigger_EClass());
+			saveHandler->addReference(trigger, "trigger", trigger->eClass() != package->getTrigger_Class());
 		}
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getAcceptEventAction_EAttribute_isUnmarshall()) )
+		if ( this->eIsSet(package->getAcceptEventAction_Attribute_isUnmarshall()) )
 		{
 			saveHandler->addAttribute("isUnmarshall", this->getIsUnmarshall());
 		}

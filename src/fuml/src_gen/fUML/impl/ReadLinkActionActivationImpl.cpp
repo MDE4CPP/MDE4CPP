@@ -159,7 +159,7 @@ std::shared_ptr<ecore::EObject>  ReadLinkActionActivationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ReadLinkActionActivationImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getReadLinkActionActivation_EClass();
+	return FUMLPackageImpl::eInstance()->getReadLinkActionActivation_Class();
 }
 
 //*********************************

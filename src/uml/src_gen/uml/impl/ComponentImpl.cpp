@@ -215,11 +215,11 @@ ComponentImpl::~ComponentImpl()
 			{
 				switch(reference_id)
 				{	
-				case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
+				case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
 					m_owningPackage = par_Package;
 					m_namespace = par_Package;
 					 return;
-				case UmlPackage::TYPE_EREFERENCE_PACKAGE:
+				case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
 					m_package = par_Package;
 					m_namespace = par_Package;
 					 return;
@@ -551,7 +551,7 @@ std::shared_ptr<ecore::EObject>  ComponentImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ComponentImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getComponent_EClass();
+	return UmlPackageImpl::eInstance()->getComponent_Class();
 }
 
 //*********************************
@@ -735,15 +735,15 @@ Any ComponentImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::COMPONENT_EATTRIBUTE_ISINDIRECTLYINSTANTIATED:
+		case UmlPackage::COMPONENT_ATTRIBUTE_ISINDIRECTLYINSTANTIATED:
 			return eAny(getIsIndirectlyInstantiated()); //4752
-		case UmlPackage::COMPONENT_EREFERENCE_PACKAGEDELEMENT:
+		case UmlPackage::COMPONENT_ATTRIBUTE_PACKAGEDELEMENT:
 			return eAny(getPackagedElement()); //4753
-		case UmlPackage::COMPONENT_EREFERENCE_PROVIDED:
+		case UmlPackage::COMPONENT_ATTRIBUTE_PROVIDED:
 			return eAny(getProvided()); //4754
-		case UmlPackage::COMPONENT_EREFERENCE_REALIZATION:
+		case UmlPackage::COMPONENT_ATTRIBUTE_REALIZATION:
 			return eAny(getRealization()); //4755
-		case UmlPackage::COMPONENT_EREFERENCE_REQUIRED:
+		case UmlPackage::COMPONENT_ATTRIBUTE_REQUIRED:
 			return eAny(getRequired()); //4756
 	}
 	return ClassImpl::eGet(featureID, resolve, coreType);
@@ -752,15 +752,15 @@ bool ComponentImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::COMPONENT_EATTRIBUTE_ISINDIRECTLYINSTANTIATED:
+		case UmlPackage::COMPONENT_ATTRIBUTE_ISINDIRECTLYINSTANTIATED:
 			return getIsIndirectlyInstantiated() != true; //4752
-		case UmlPackage::COMPONENT_EREFERENCE_PACKAGEDELEMENT:
+		case UmlPackage::COMPONENT_ATTRIBUTE_PACKAGEDELEMENT:
 			return getPackagedElement() != nullptr; //4753
-		case UmlPackage::COMPONENT_EREFERENCE_PROVIDED:
+		case UmlPackage::COMPONENT_ATTRIBUTE_PROVIDED:
 			return getProvided() != nullptr; //4754
-		case UmlPackage::COMPONENT_EREFERENCE_REALIZATION:
+		case UmlPackage::COMPONENT_ATTRIBUTE_REALIZATION:
 			return getRealization() != nullptr; //4755
-		case UmlPackage::COMPONENT_EREFERENCE_REQUIRED:
+		case UmlPackage::COMPONENT_ATTRIBUTE_REQUIRED:
 			return getRequired() != nullptr; //4756
 	}
 	return ClassImpl::internalEIsSet(featureID);
@@ -769,7 +769,7 @@ bool ComponentImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::COMPONENT_EATTRIBUTE_ISINDIRECTLYINSTANTIATED:
+		case UmlPackage::COMPONENT_ATTRIBUTE_ISINDIRECTLYINSTANTIATED:
 		{
 			// BOOST CAST
 			bool _isIndirectlyInstantiated = newValue->get<bool>();
@@ -858,7 +858,7 @@ void ComponentImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::
 			{
 				typeName = "ComponentRealization";
 			}
-			std::shared_ptr<ecore::EObject> realization = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::COMPONENTREALIZATION_EREFERENCE_ABSTRACTION);
+			std::shared_ptr<ecore::EObject> realization = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::COMPONENTREALIZATION_ATTRIBUTE_ABSTRACTION);
 			if (realization != nullptr)
 			{
 				loadHandler->handleChild(realization);
@@ -931,18 +931,18 @@ void ComponentImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 		// Save 'packagedElement'
 		for (std::shared_ptr<uml::PackageableElement> packagedElement : *this->getPackagedElement()) 
 		{
-			saveHandler->addReference(packagedElement, "packagedElement", packagedElement->eClass() != package->getPackageableElement_EClass());
+			saveHandler->addReference(packagedElement, "packagedElement", packagedElement->eClass() != package->getPackageableElement_Class());
 		}
 
 		// Save 'realization'
 		for (std::shared_ptr<uml::ComponentRealization> realization : *this->getRealization()) 
 		{
-			saveHandler->addReference(realization, "realization", realization->eClass() != package->getComponentRealization_EClass());
+			saveHandler->addReference(realization, "realization", realization->eClass() != package->getComponentRealization_Class());
 		}
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getComponent_EAttribute_isIndirectlyInstantiated()) )
+		if ( this->eIsSet(package->getComponent_Attribute_isIndirectlyInstantiated()) )
 		{
 			saveHandler->addAttribute("isIndirectlyInstantiated", this->getIsIndirectlyInstantiated());
 		}

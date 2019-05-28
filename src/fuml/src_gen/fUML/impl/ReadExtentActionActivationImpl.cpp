@@ -159,7 +159,7 @@ std::shared_ptr<ecore::EObject>  ReadExtentActionActivationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ReadExtentActionActivationImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getReadExtentActionActivation_EClass();
+	return FUMLPackageImpl::eInstance()->getReadExtentActionActivation_Class();
 }
 
 //*********************************

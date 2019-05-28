@@ -47,24 +47,24 @@ void TypesPackageImpl::init(std::shared_ptr<ecore::EPackage> package)
     initializePackageContents();   
 }
 
-std::shared_ptr<ecore::EDataType> TypesPackageImpl::getBoolean_EDataType() const
+std::shared_ptr<ecore::EDataType> TypesPackageImpl::getBoolean_Class() const
 {
-	return m_boolean_EDataType;
+	return m_boolean_Class;
 }
-std::shared_ptr<ecore::EDataType> TypesPackageImpl::getInteger_EDataType() const
+std::shared_ptr<ecore::EDataType> TypesPackageImpl::getInteger_Class() const
 {
-	return m_integer_EDataType;
+	return m_integer_Class;
 }
-std::shared_ptr<ecore::EDataType> TypesPackageImpl::getReal_EDataType() const
+std::shared_ptr<ecore::EDataType> TypesPackageImpl::getReal_Class() const
 {
-	return m_real_EDataType;
+	return m_real_Class;
 }
-std::shared_ptr<ecore::EDataType> TypesPackageImpl::getString_EDataType() const
+std::shared_ptr<ecore::EDataType> TypesPackageImpl::getString_Class() const
 {
-	return m_string_EDataType;
+	return m_string_Class;
 }
-std::shared_ptr<ecore::EDataType> TypesPackageImpl::getUnlimitedNatural_EDataType() const
+std::shared_ptr<ecore::EDataType> TypesPackageImpl::getUnlimitedNatural_Class() const
 {
-	return m_unlimitedNatural_EDataType;
+	return m_unlimitedNatural_Class;
 }
 

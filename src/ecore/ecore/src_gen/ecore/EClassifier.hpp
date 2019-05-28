@@ -101,7 +101,9 @@ namespace ecore
 			//*********************************
 			// Operations
 			//*********************************
-			
+			/*!
+			 */ 
+			virtual int getClassifierID() = 0;
 			
 			/*!
 			 */ 
@@ -111,10 +113,6 @@ namespace ecore
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			/*!
-			 */ 
-			virtual int getClassifierID() const = 0;
-			
 			/*!
 			 */ 
 			virtual Any getDefaultValue() const = 0;
@@ -157,9 +155,6 @@ namespace ecore
 			//*********************************
 			// Attribute Members
 			//*********************************
-			/*!
-			 */ 
-			int m_classifierID = -1;
 			/*!
 			 */ 
 			Any m_defaultValue = nullptr;

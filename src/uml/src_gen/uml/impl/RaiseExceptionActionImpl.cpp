@@ -285,7 +285,7 @@ std::shared_ptr<ecore::EObject>  RaiseExceptionActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> RaiseExceptionActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getRaiseExceptionAction_EClass();
+	return UmlPackageImpl::eInstance()->getRaiseExceptionAction_Class();
 }
 
 //*********************************
@@ -374,7 +374,7 @@ Any RaiseExceptionActionImpl::eGet(int featureID, bool resolve, bool coreType) c
 {
 	switch(featureID)
 	{
-		case UmlPackage::RAISEEXCEPTIONACTION_EREFERENCE_EXCEPTION:
+		case UmlPackage::RAISEEXCEPTIONACTION_ATTRIBUTE_EXCEPTION:
 			return eAny(getException()); //19227
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
@@ -383,7 +383,7 @@ bool RaiseExceptionActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::RAISEEXCEPTIONACTION_EREFERENCE_EXCEPTION:
+		case UmlPackage::RAISEEXCEPTIONACTION_ATTRIBUTE_EXCEPTION:
 			return getException() != nullptr; //19227
 	}
 	return ActionImpl::internalEIsSet(featureID);
@@ -392,7 +392,7 @@ bool RaiseExceptionActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::RAISEEXCEPTIONACTION_EREFERENCE_EXCEPTION:
+		case UmlPackage::RAISEEXCEPTIONACTION_ATTRIBUTE_EXCEPTION:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::InputPin> _exception = newValue->get<std::shared_ptr<uml::InputPin>>();
@@ -507,7 +507,7 @@ void RaiseExceptionActionImpl::saveContent(std::shared_ptr<persistence::interfac
 		std::shared_ptr<uml::InputPin > exception = this->getException();
 		if (exception != nullptr)
 		{
-			saveHandler->addReference(exception, "exception", exception->eClass() != package->getInputPin_EClass());
+			saveHandler->addReference(exception, "exception", exception->eClass() != package->getInputPin_Class());
 		}
 	
 

@@ -135,7 +135,7 @@ std::shared_ptr<ecore::EObject>  ExpansionNodeActivationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ExpansionNodeActivationImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getExpansionNodeActivation_EClass();
+	return FUMLPackageImpl::eInstance()->getExpansionNodeActivation_Class();
 }
 
 //*********************************

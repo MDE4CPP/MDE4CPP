@@ -247,7 +247,7 @@ std::shared_ptr<ecore::EObject>  SubstitutionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> SubstitutionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getSubstitution_EClass();
+	return UmlPackageImpl::eInstance()->getSubstitution_Class();
 }
 
 //*********************************
@@ -355,9 +355,9 @@ Any SubstitutionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::SUBSTITUTION_EREFERENCE_CONTRACT:
+		case UmlPackage::SUBSTITUTION_ATTRIBUTE_CONTRACT:
 			return eAny(getContract()); //22918
-		case UmlPackage::SUBSTITUTION_EREFERENCE_SUBSTITUTINGCLASSIFIER:
+		case UmlPackage::SUBSTITUTION_ATTRIBUTE_SUBSTITUTINGCLASSIFIER:
 			return eAny(getSubstitutingClassifier()); //22919
 	}
 	return RealizationImpl::eGet(featureID, resolve, coreType);
@@ -366,9 +366,9 @@ bool SubstitutionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::SUBSTITUTION_EREFERENCE_CONTRACT:
+		case UmlPackage::SUBSTITUTION_ATTRIBUTE_CONTRACT:
 			return getContract() != nullptr; //22918
-		case UmlPackage::SUBSTITUTION_EREFERENCE_SUBSTITUTINGCLASSIFIER:
+		case UmlPackage::SUBSTITUTION_ATTRIBUTE_SUBSTITUTINGCLASSIFIER:
 			return getSubstitutingClassifier().lock() != nullptr; //22919
 	}
 	return RealizationImpl::internalEIsSet(featureID);
@@ -377,14 +377,14 @@ bool SubstitutionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::SUBSTITUTION_EREFERENCE_CONTRACT:
+		case UmlPackage::SUBSTITUTION_ATTRIBUTE_CONTRACT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Classifier> _contract = newValue->get<std::shared_ptr<uml::Classifier>>();
 			setContract(_contract); //22918
 			return true;
 		}
-		case UmlPackage::SUBSTITUTION_EREFERENCE_SUBSTITUTINGCLASSIFIER:
+		case UmlPackage::SUBSTITUTION_ATTRIBUTE_SUBSTITUTINGCLASSIFIER:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Classifier> _substitutingClassifier = newValue->get<std::shared_ptr<uml::Classifier>>();
@@ -452,7 +452,7 @@ void SubstitutionImpl::resolveReferences(const int featureID, std::list<std::sha
 {
 	switch(featureID)
 	{
-		case UmlPackage::SUBSTITUTION_EREFERENCE_CONTRACT:
+		case UmlPackage::SUBSTITUTION_ATTRIBUTE_CONTRACT:
 		{
 			if (references.size() == 1)
 			{
@@ -464,7 +464,7 @@ void SubstitutionImpl::resolveReferences(const int featureID, std::list<std::sha
 			return;
 		}
 
-		case UmlPackage::SUBSTITUTION_EREFERENCE_SUBSTITUTINGCLASSIFIER:
+		case UmlPackage::SUBSTITUTION_ATTRIBUTE_SUBSTITUTINGCLASSIFIER:
 		{
 			if (references.size() == 1)
 			{

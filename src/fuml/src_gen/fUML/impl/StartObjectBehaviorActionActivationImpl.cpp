@@ -167,7 +167,7 @@ std::shared_ptr<ecore::EObject>  StartObjectBehaviorActionActivationImpl::copy()
 
 std::shared_ptr<ecore::EClass> StartObjectBehaviorActionActivationImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getStartObjectBehaviorActionActivation_EClass();
+	return FUMLPackageImpl::eInstance()->getStartObjectBehaviorActionActivation_Class();
 }
 
 //*********************************

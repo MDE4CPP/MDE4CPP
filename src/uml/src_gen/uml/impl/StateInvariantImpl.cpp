@@ -213,7 +213,7 @@ std::shared_ptr<ecore::EObject>  StateInvariantImpl::copy() const
 
 std::shared_ptr<ecore::EClass> StateInvariantImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getStateInvariant_EClass();
+	return UmlPackageImpl::eInstance()->getStateInvariant_Class();
 }
 
 //*********************************
@@ -294,7 +294,7 @@ Any StateInvariantImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::STATEINVARIANT_EREFERENCE_INVARIANT:
+		case UmlPackage::STATEINVARIANT_ATTRIBUTE_INVARIANT:
 			return eAny(getInvariant()); //22113
 	}
 	return InteractionFragmentImpl::eGet(featureID, resolve, coreType);
@@ -303,7 +303,7 @@ bool StateInvariantImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::STATEINVARIANT_EREFERENCE_INVARIANT:
+		case UmlPackage::STATEINVARIANT_ATTRIBUTE_INVARIANT:
 			return getInvariant() != nullptr; //22113
 	}
 	return InteractionFragmentImpl::internalEIsSet(featureID);
@@ -312,7 +312,7 @@ bool StateInvariantImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::STATEINVARIANT_EREFERENCE_INVARIANT:
+		case UmlPackage::STATEINVARIANT_ATTRIBUTE_INVARIANT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Constraint> _invariant = newValue->get<std::shared_ptr<uml::Constraint>>();
@@ -417,7 +417,7 @@ void StateInvariantImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 		std::shared_ptr<uml::Constraint > invariant = this->getInvariant();
 		if (invariant != nullptr)
 		{
-			saveHandler->addReference(invariant, "invariant", invariant->eClass() != package->getConstraint_EClass());
+			saveHandler->addReference(invariant, "invariant", invariant->eClass() != package->getConstraint_Class());
 		}
 	
 

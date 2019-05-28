@@ -307,7 +307,7 @@ std::shared_ptr<ecore::EObject>  ReclassifyObjectActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ReclassifyObjectActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getReclassifyObjectAction_EClass();
+	return UmlPackageImpl::eInstance()->getReclassifyObjectAction_Class();
 }
 
 //*********************************
@@ -436,13 +436,13 @@ Any ReclassifyObjectActionImpl::eGet(int featureID, bool resolve, bool coreType)
 {
 	switch(featureID)
 	{
-		case UmlPackage::RECLASSIFYOBJECTACTION_EATTRIBUTE_ISREPLACEALL:
+		case UmlPackage::RECLASSIFYOBJECTACTION_ATTRIBUTE_ISREPLACEALL:
 			return eAny(getIsReplaceAll()); //20327
-		case UmlPackage::RECLASSIFYOBJECTACTION_EREFERENCE_NEWCLASSIFIER:
+		case UmlPackage::RECLASSIFYOBJECTACTION_ATTRIBUTE_NEWCLASSIFIER:
 			return eAny(getNewClassifier()); //20328
-		case UmlPackage::RECLASSIFYOBJECTACTION_EREFERENCE_OBJECT:
+		case UmlPackage::RECLASSIFYOBJECTACTION_ATTRIBUTE_OBJECT:
 			return eAny(getObject()); //20329
-		case UmlPackage::RECLASSIFYOBJECTACTION_EREFERENCE_OLDCLASSIFIER:
+		case UmlPackage::RECLASSIFYOBJECTACTION_ATTRIBUTE_OLDCLASSIFIER:
 			return eAny(getOldClassifier()); //20330
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
@@ -451,13 +451,13 @@ bool ReclassifyObjectActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::RECLASSIFYOBJECTACTION_EATTRIBUTE_ISREPLACEALL:
+		case UmlPackage::RECLASSIFYOBJECTACTION_ATTRIBUTE_ISREPLACEALL:
 			return getIsReplaceAll() != false; //20327
-		case UmlPackage::RECLASSIFYOBJECTACTION_EREFERENCE_NEWCLASSIFIER:
+		case UmlPackage::RECLASSIFYOBJECTACTION_ATTRIBUTE_NEWCLASSIFIER:
 			return getNewClassifier() != nullptr; //20328
-		case UmlPackage::RECLASSIFYOBJECTACTION_EREFERENCE_OBJECT:
+		case UmlPackage::RECLASSIFYOBJECTACTION_ATTRIBUTE_OBJECT:
 			return getObject() != nullptr; //20329
-		case UmlPackage::RECLASSIFYOBJECTACTION_EREFERENCE_OLDCLASSIFIER:
+		case UmlPackage::RECLASSIFYOBJECTACTION_ATTRIBUTE_OLDCLASSIFIER:
 			return getOldClassifier() != nullptr; //20330
 	}
 	return ActionImpl::internalEIsSet(featureID);
@@ -466,14 +466,14 @@ bool ReclassifyObjectActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::RECLASSIFYOBJECTACTION_EATTRIBUTE_ISREPLACEALL:
+		case UmlPackage::RECLASSIFYOBJECTACTION_ATTRIBUTE_ISREPLACEALL:
 		{
 			// BOOST CAST
 			bool _isReplaceAll = newValue->get<bool>();
 			setIsReplaceAll(_isReplaceAll); //20327
 			return true;
 		}
-		case UmlPackage::RECLASSIFYOBJECTACTION_EREFERENCE_OBJECT:
+		case UmlPackage::RECLASSIFYOBJECTACTION_ATTRIBUTE_OBJECT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::InputPin> _object = newValue->get<std::shared_ptr<uml::InputPin>>();
@@ -583,7 +583,7 @@ void ReclassifyObjectActionImpl::resolveReferences(const int featureID, std::lis
 {
 	switch(featureID)
 	{
-		case UmlPackage::RECLASSIFYOBJECTACTION_EREFERENCE_NEWCLASSIFIER:
+		case UmlPackage::RECLASSIFYOBJECTACTION_ATTRIBUTE_NEWCLASSIFIER:
 		{
 			std::shared_ptr<Bag<uml::Classifier>> _newClassifier = getNewClassifier();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -597,7 +597,7 @@ void ReclassifyObjectActionImpl::resolveReferences(const int featureID, std::lis
 			return;
 		}
 
-		case UmlPackage::RECLASSIFYOBJECTACTION_EREFERENCE_OLDCLASSIFIER:
+		case UmlPackage::RECLASSIFYOBJECTACTION_ATTRIBUTE_OLDCLASSIFIER:
 		{
 			std::shared_ptr<Bag<uml::Classifier>> _oldClassifier = getOldClassifier();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -653,12 +653,12 @@ void ReclassifyObjectActionImpl::saveContent(std::shared_ptr<persistence::interf
 		std::shared_ptr<uml::InputPin > object = this->getObject();
 		if (object != nullptr)
 		{
-			saveHandler->addReference(object, "object", object->eClass() != package->getInputPin_EClass());
+			saveHandler->addReference(object, "object", object->eClass() != package->getInputPin_Class());
 		}
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getReclassifyObjectAction_EAttribute_isReplaceAll()) )
+		if ( this->eIsSet(package->getReclassifyObjectAction_Attribute_isReplaceAll()) )
 		{
 			saveHandler->addAttribute("isReplaceAll", this->getIsReplaceAll());
 		}

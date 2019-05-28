@@ -110,7 +110,7 @@ std::shared_ptr<ecore::EObject>  ClauseActivationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ClauseActivationImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getClauseActivation_EClass();
+	return FUMLPackageImpl::eInstance()->getClauseActivation_Class();
 }
 
 //*********************************
@@ -210,9 +210,9 @@ Any ClauseActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::CLAUSEACTIVATION_EREFERENCE_CLAUSE:
+		case FUMLPackage::CLAUSEACTIVATION_ATTRIBUTE_CLAUSE:
 			return eAny(getClause()); //200
-		case FUMLPackage::CLAUSEACTIVATION_EREFERENCE_CONDITIONALNODEACTIVATION:
+		case FUMLPackage::CLAUSEACTIVATION_ATTRIBUTE_CONDITIONALNODEACTIVATION:
 			return eAny(getConditionalNodeActivation()); //201
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
@@ -221,9 +221,9 @@ bool ClauseActivationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::CLAUSEACTIVATION_EREFERENCE_CLAUSE:
+		case FUMLPackage::CLAUSEACTIVATION_ATTRIBUTE_CLAUSE:
 			return getClause() != nullptr; //200
-		case FUMLPackage::CLAUSEACTIVATION_EREFERENCE_CONDITIONALNODEACTIVATION:
+		case FUMLPackage::CLAUSEACTIVATION_ATTRIBUTE_CONDITIONALNODEACTIVATION:
 			return getConditionalNodeActivation() != nullptr; //201
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
@@ -232,14 +232,14 @@ bool ClauseActivationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case FUMLPackage::CLAUSEACTIVATION_EREFERENCE_CLAUSE:
+		case FUMLPackage::CLAUSEACTIVATION_ATTRIBUTE_CLAUSE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Clause> _clause = newValue->get<std::shared_ptr<uml::Clause>>();
 			setClause(_clause); //200
 			return true;
 		}
-		case FUMLPackage::CLAUSEACTIVATION_EREFERENCE_CONDITIONALNODEACTIVATION:
+		case FUMLPackage::CLAUSEACTIVATION_ATTRIBUTE_CONDITIONALNODEACTIVATION:
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::ConditionalNodeActivation> _conditionalNodeActivation = newValue->get<std::shared_ptr<fUML::ConditionalNodeActivation>>();
@@ -314,7 +314,7 @@ void ClauseActivationImpl::resolveReferences(const int featureID, std::list<std:
 {
 	switch(featureID)
 	{
-		case FUMLPackage::CLAUSEACTIVATION_EREFERENCE_CLAUSE:
+		case FUMLPackage::CLAUSEACTIVATION_ATTRIBUTE_CLAUSE:
 		{
 			if (references.size() == 1)
 			{
@@ -326,7 +326,7 @@ void ClauseActivationImpl::resolveReferences(const int featureID, std::list<std:
 			return;
 		}
 
-		case FUMLPackage::CLAUSEACTIVATION_EREFERENCE_CONDITIONALNODEACTIVATION:
+		case FUMLPackage::CLAUSEACTIVATION_ATTRIBUTE_CONDITIONALNODEACTIVATION:
 		{
 			if (references.size() == 1)
 			{

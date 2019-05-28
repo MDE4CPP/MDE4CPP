@@ -229,11 +229,11 @@ ClassImpl::~ClassImpl()
 			{
 				switch(reference_id)
 				{	
-				case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
+				case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
 					m_owningPackage = par_Package;
 					m_namespace = par_Package;
 					 return;
-				case UmlPackage::TYPE_EREFERENCE_PACKAGE:
+				case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
 					m_package = par_Package;
 					m_namespace = par_Package;
 					 return;
@@ -550,7 +550,7 @@ std::shared_ptr<ecore::EObject>  ClassImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ClassImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getClass_EClass();
+	return UmlPackageImpl::eInstance()->getClass_Class();
 }
 
 //*********************************
@@ -737,17 +737,17 @@ Any ClassImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::CLASS_EREFERENCE_EXTENSION:
+		case UmlPackage::CLASS_ATTRIBUTE_EXTENSION:
 			return eAny(getExtension()); //3547
-		case UmlPackage::CLASS_EATTRIBUTE_ISACTIVE:
+		case UmlPackage::CLASS_ATTRIBUTE_ISACTIVE:
 			return eAny(getIsActive()); //3548
-		case UmlPackage::CLASS_EREFERENCE_NESTEDCLASSIFIER:
+		case UmlPackage::CLASS_ATTRIBUTE_NESTEDCLASSIFIER:
 			return eAny(getNestedClassifier()); //3549
-		case UmlPackage::CLASS_EREFERENCE_OWNEDOPERATION:
+		case UmlPackage::CLASS_ATTRIBUTE_OWNEDOPERATION:
 			return eAny(getOwnedOperation()); //3546
-		case UmlPackage::CLASS_EREFERENCE_OWNEDRECEPTION:
+		case UmlPackage::CLASS_ATTRIBUTE_OWNEDRECEPTION:
 			return eAny(getOwnedReception()); //3550
-		case UmlPackage::CLASS_EREFERENCE_SUPERCLASS:
+		case UmlPackage::CLASS_ATTRIBUTE_SUPERCLASS:
 			return eAny(getSuperClass()); //3551
 	}
 	Any result;
@@ -763,17 +763,17 @@ bool ClassImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::CLASS_EREFERENCE_EXTENSION:
+		case UmlPackage::CLASS_ATTRIBUTE_EXTENSION:
 			return getExtension() != nullptr; //3547
-		case UmlPackage::CLASS_EATTRIBUTE_ISACTIVE:
+		case UmlPackage::CLASS_ATTRIBUTE_ISACTIVE:
 			return getIsActive() != false; //3548
-		case UmlPackage::CLASS_EREFERENCE_NESTEDCLASSIFIER:
+		case UmlPackage::CLASS_ATTRIBUTE_NESTEDCLASSIFIER:
 			return getNestedClassifier() != nullptr; //3549
-		case UmlPackage::CLASS_EREFERENCE_OWNEDOPERATION:
+		case UmlPackage::CLASS_ATTRIBUTE_OWNEDOPERATION:
 			return getOwnedOperation() != nullptr; //3546
-		case UmlPackage::CLASS_EREFERENCE_OWNEDRECEPTION:
+		case UmlPackage::CLASS_ATTRIBUTE_OWNEDRECEPTION:
 			return getOwnedReception() != nullptr; //3550
-		case UmlPackage::CLASS_EREFERENCE_SUPERCLASS:
+		case UmlPackage::CLASS_ATTRIBUTE_SUPERCLASS:
 			return getSuperClass() != nullptr; //3551
 	}
 	bool result = false;
@@ -789,7 +789,7 @@ bool ClassImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::CLASS_EATTRIBUTE_ISACTIVE:
+		case UmlPackage::CLASS_ATTRIBUTE_ISACTIVE:
 		{
 			// BOOST CAST
 			bool _isActive = newValue->get<bool>();
@@ -893,7 +893,7 @@ void ClassImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inte
 			{
 				typeName = "Operation";
 			}
-			std::shared_ptr<ecore::EObject> ownedOperation = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::OPERATION_EREFERENCE_CLASS);
+			std::shared_ptr<ecore::EObject> ownedOperation = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::OPERATION_ATTRIBUTE_CLASS);
 			if (ownedOperation != nullptr)
 			{
 				loadHandler->handleChild(ownedOperation);
@@ -935,7 +935,7 @@ void ClassImpl::resolveReferences(const int featureID, std::list<std::shared_ptr
 {
 	switch(featureID)
 	{
-		case UmlPackage::CLASS_EREFERENCE_SUPERCLASS:
+		case UmlPackage::CLASS_ATTRIBUTE_SUPERCLASS:
 		{
 			std::shared_ptr<Bag<uml::Class>> _superClass = getSuperClass();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -998,24 +998,24 @@ void ClassImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandle
 		// Save 'nestedClassifier'
 		for (std::shared_ptr<uml::Classifier> nestedClassifier : *this->getNestedClassifier()) 
 		{
-			saveHandler->addReference(nestedClassifier, "nestedClassifier", nestedClassifier->eClass() != package->getClassifier_EClass());
+			saveHandler->addReference(nestedClassifier, "nestedClassifier", nestedClassifier->eClass() != package->getClassifier_Class());
 		}
 
 		// Save 'ownedOperation'
 		for (std::shared_ptr<uml::Operation> ownedOperation : *this->getOwnedOperation()) 
 		{
-			saveHandler->addReference(ownedOperation, "ownedOperation", ownedOperation->eClass() != package->getOperation_EClass());
+			saveHandler->addReference(ownedOperation, "ownedOperation", ownedOperation->eClass() != package->getOperation_Class());
 		}
 
 		// Save 'ownedReception'
 		for (std::shared_ptr<uml::Reception> ownedReception : *this->getOwnedReception()) 
 		{
-			saveHandler->addReference(ownedReception, "ownedReception", ownedReception->eClass() != package->getReception_EClass());
+			saveHandler->addReference(ownedReception, "ownedReception", ownedReception->eClass() != package->getReception_Class());
 		}
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getClass_EAttribute_isActive()) )
+		if ( this->eIsSet(package->getClass_Attribute_isActive()) )
 		{
 			saveHandler->addAttribute("isActive", this->getIsActive());
 		}

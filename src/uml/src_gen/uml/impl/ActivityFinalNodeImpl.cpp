@@ -240,7 +240,7 @@ std::shared_ptr<ecore::EObject>  ActivityFinalNodeImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ActivityFinalNodeImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getActivityFinalNode_EClass();
+	return UmlPackageImpl::eInstance()->getActivityFinalNode_Class();
 }
 
 //*********************************

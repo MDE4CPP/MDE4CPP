@@ -132,7 +132,7 @@ std::shared_ptr<ecore::EObject>  MergeNodeActivationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> MergeNodeActivationImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getMergeNodeActivation_EClass();
+	return FUMLPackageImpl::eInstance()->getMergeNodeActivation_Class();
 }
 
 //*********************************

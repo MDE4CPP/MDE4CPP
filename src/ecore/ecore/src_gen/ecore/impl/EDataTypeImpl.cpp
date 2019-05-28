@@ -107,11 +107,11 @@ EDataTypeImpl::EDataTypeImpl(const EDataTypeImpl & obj):EDataTypeImpl()
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy EDataType "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
-	m_classifierID = obj.getClassifierID();
 	m_defaultValue = obj.getDefaultValue();
 	m_instanceClass = obj.getInstanceClass();
 	m_instanceClassName = obj.getInstanceClassName();
 	m_instanceTypeName = obj.getInstanceTypeName();
+	m_metaElementID = obj.getMetaElementID();
 	m_name = obj.getName();
 	m_serializable = obj.isSerializable();
 
@@ -152,7 +152,7 @@ std::shared_ptr<ecore::EObject>  EDataTypeImpl::copy() const
 
 std::shared_ptr<EClass> EDataTypeImpl::eStaticClass() const
 {
-	return EcorePackageImpl::eInstance()->getEDataType_EClass();
+	return EcorePackageImpl::eInstance()->getEDataType_Class();
 }
 
 //*********************************
@@ -215,7 +215,7 @@ Any EDataTypeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case EcorePackage::EDATATYPE_EATTRIBUTE_SERIALIZABLE:
+		case EcorePackage::EDATATYPE_ATTRIBUTE_SERIALIZABLE:
 			return eAny(isSerializable()); //1411
 	}
 	return EClassifierImpl::eGet(featureID, resolve, coreType);
@@ -224,7 +224,7 @@ bool EDataTypeImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case EcorePackage::EDATATYPE_EATTRIBUTE_SERIALIZABLE:
+		case EcorePackage::EDATATYPE_ATTRIBUTE_SERIALIZABLE:
 			return isSerializable() != true; //1411
 	}
 	return EClassifierImpl::internalEIsSet(featureID);
@@ -233,7 +233,7 @@ bool EDataTypeImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case EcorePackage::EDATATYPE_EATTRIBUTE_SERIALIZABLE:
+		case EcorePackage::EDATATYPE_ATTRIBUTE_SERIALIZABLE:
 		{
 			// BOOST CAST
 			bool _serializable = newValue->get<bool>();
@@ -332,7 +332,7 @@ void EDataTypeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getEDataType_EAttribute_serializable()) )
+		if ( this->eIsSet(package->getEDataType_Attribute_serializable()) )
 		{
 			saveHandler->addAttribute("serializable", this->isSerializable());
 		}

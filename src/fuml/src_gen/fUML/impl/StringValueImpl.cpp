@@ -109,7 +109,7 @@ std::shared_ptr<ecore::EObject>  StringValueImpl::copy() const
 
 std::shared_ptr<ecore::EClass> StringValueImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getStringValue_EClass();
+	return FUMLPackageImpl::eInstance()->getStringValue_Class();
 }
 
 //*********************************
@@ -193,7 +193,7 @@ Any StringValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::STRINGVALUE_EATTRIBUTE_VALUE:
+		case FUMLPackage::STRINGVALUE_ATTRIBUTE_VALUE:
 			return eAny(getValue()); //1031
 	}
 	return PrimitiveValueImpl::eGet(featureID, resolve, coreType);
@@ -202,7 +202,7 @@ bool StringValueImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::STRINGVALUE_EATTRIBUTE_VALUE:
+		case FUMLPackage::STRINGVALUE_ATTRIBUTE_VALUE:
 			return getValue() != ""; //1031
 	}
 	return PrimitiveValueImpl::internalEIsSet(featureID);
@@ -211,7 +211,7 @@ bool StringValueImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case FUMLPackage::STRINGVALUE_EATTRIBUTE_VALUE:
+		case FUMLPackage::STRINGVALUE_ATTRIBUTE_VALUE:
 		{
 			// BOOST CAST
 			std::string _value = newValue->get<std::string>();
@@ -307,7 +307,7 @@ void StringValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getStringValue_EAttribute_value()) )
+		if ( this->eIsSet(package->getStringValue_Attribute_value()) )
 		{
 			saveHandler->addAttribute("value", this->getValue());
 		}

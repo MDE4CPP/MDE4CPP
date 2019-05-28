@@ -231,7 +231,7 @@ std::shared_ptr<ecore::EObject>  ConsiderIgnoreFragmentImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ConsiderIgnoreFragmentImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getConsiderIgnoreFragment_EClass();
+	return UmlPackageImpl::eInstance()->getConsiderIgnoreFragment_Class();
 }
 
 //*********************************
@@ -320,7 +320,7 @@ Any ConsiderIgnoreFragmentImpl::eGet(int featureID, bool resolve, bool coreType)
 {
 	switch(featureID)
 	{
-		case UmlPackage::CONSIDERIGNOREFRAGMENT_EREFERENCE_MESSAGE:
+		case UmlPackage::CONSIDERIGNOREFRAGMENT_ATTRIBUTE_MESSAGE:
 			return eAny(getMessage()); //5616
 	}
 	return CombinedFragmentImpl::eGet(featureID, resolve, coreType);
@@ -329,7 +329,7 @@ bool ConsiderIgnoreFragmentImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::CONSIDERIGNOREFRAGMENT_EREFERENCE_MESSAGE:
+		case UmlPackage::CONSIDERIGNOREFRAGMENT_ATTRIBUTE_MESSAGE:
 			return getMessage() != nullptr; //5616
 	}
 	return CombinedFragmentImpl::internalEIsSet(featureID);
@@ -399,7 +399,7 @@ void ConsiderIgnoreFragmentImpl::resolveReferences(const int featureID, std::lis
 {
 	switch(featureID)
 	{
-		case UmlPackage::CONSIDERIGNOREFRAGMENT_EREFERENCE_MESSAGE:
+		case UmlPackage::CONSIDERIGNOREFRAGMENT_ATTRIBUTE_MESSAGE:
 		{
 			std::shared_ptr<Bag<uml::NamedElement>> _message = getMessage();
 			for(std::shared_ptr<ecore::EObject> ref : references)

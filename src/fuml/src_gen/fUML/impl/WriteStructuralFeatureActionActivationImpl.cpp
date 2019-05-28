@@ -161,7 +161,7 @@ std::shared_ptr<ecore::EObject>  WriteStructuralFeatureActionActivationImpl::cop
 
 std::shared_ptr<ecore::EClass> WriteStructuralFeatureActionActivationImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getWriteStructuralFeatureActionActivation_EClass();
+	return FUMLPackageImpl::eInstance()->getWriteStructuralFeatureActionActivation_Class();
 }
 
 //*********************************

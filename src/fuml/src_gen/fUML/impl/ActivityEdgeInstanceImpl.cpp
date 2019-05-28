@@ -147,7 +147,7 @@ std::shared_ptr<ecore::EObject>  ActivityEdgeInstanceImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ActivityEdgeInstanceImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getActivityEdgeInstance_EClass();
+	return FUMLPackageImpl::eInstance()->getActivityEdgeInstance_Class();
 }
 
 //*********************************
@@ -357,15 +357,15 @@ Any ActivityEdgeInstanceImpl::eGet(int featureID, bool resolve, bool coreType) c
 {
 	switch(featureID)
 	{
-		case FUMLPackage::ACTIVITYEDGEINSTANCE_EREFERENCE_EDGE:
+		case FUMLPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_EDGE:
 			return eAny(getEdge()); //40
-		case FUMLPackage::ACTIVITYEDGEINSTANCE_EREFERENCE_GROUP:
+		case FUMLPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_GROUP:
 			return eAny(getGroup()); //44
-		case FUMLPackage::ACTIVITYEDGEINSTANCE_EREFERENCE_OFFERS:
+		case FUMLPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_OFFERS:
 			return eAny(getOffers()); //43
-		case FUMLPackage::ACTIVITYEDGEINSTANCE_EREFERENCE_SOURCE:
+		case FUMLPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_SOURCE:
 			return eAny(getSource()); //41
-		case FUMLPackage::ACTIVITYEDGEINSTANCE_EREFERENCE_TARGET:
+		case FUMLPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_TARGET:
 			return eAny(getTarget()); //42
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
@@ -374,15 +374,15 @@ bool ActivityEdgeInstanceImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::ACTIVITYEDGEINSTANCE_EREFERENCE_EDGE:
+		case FUMLPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_EDGE:
 			return getEdge() != nullptr; //40
-		case FUMLPackage::ACTIVITYEDGEINSTANCE_EREFERENCE_GROUP:
+		case FUMLPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_GROUP:
 			return getGroup().lock() != nullptr; //44
-		case FUMLPackage::ACTIVITYEDGEINSTANCE_EREFERENCE_OFFERS:
+		case FUMLPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_OFFERS:
 			return getOffers() != nullptr; //43
-		case FUMLPackage::ACTIVITYEDGEINSTANCE_EREFERENCE_SOURCE:
+		case FUMLPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_SOURCE:
 			return getSource().lock() != nullptr; //41
-		case FUMLPackage::ACTIVITYEDGEINSTANCE_EREFERENCE_TARGET:
+		case FUMLPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_TARGET:
 			return getTarget().lock() != nullptr; //42
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
@@ -391,28 +391,28 @@ bool ActivityEdgeInstanceImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case FUMLPackage::ACTIVITYEDGEINSTANCE_EREFERENCE_EDGE:
+		case FUMLPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_EDGE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ActivityEdge> _edge = newValue->get<std::shared_ptr<uml::ActivityEdge>>();
 			setEdge(_edge); //40
 			return true;
 		}
-		case FUMLPackage::ACTIVITYEDGEINSTANCE_EREFERENCE_GROUP:
+		case FUMLPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_GROUP:
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::ActivityNodeActivationGroup> _group = newValue->get<std::shared_ptr<fUML::ActivityNodeActivationGroup>>();
 			setGroup(_group); //44
 			return true;
 		}
-		case FUMLPackage::ACTIVITYEDGEINSTANCE_EREFERENCE_SOURCE:
+		case FUMLPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_SOURCE:
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::ActivityNodeActivation> _source = newValue->get<std::shared_ptr<fUML::ActivityNodeActivation>>();
 			setSource(_source); //41
 			return true;
 		}
-		case FUMLPackage::ACTIVITYEDGEINSTANCE_EREFERENCE_TARGET:
+		case FUMLPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_TARGET:
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::ActivityNodeActivation> _target = newValue->get<std::shared_ptr<fUML::ActivityNodeActivation>>();
@@ -487,7 +487,7 @@ void ActivityEdgeInstanceImpl::resolveReferences(const int featureID, std::list<
 {
 	switch(featureID)
 	{
-		case FUMLPackage::ACTIVITYEDGEINSTANCE_EREFERENCE_EDGE:
+		case FUMLPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_EDGE:
 		{
 			if (references.size() == 1)
 			{
@@ -499,7 +499,7 @@ void ActivityEdgeInstanceImpl::resolveReferences(const int featureID, std::list<
 			return;
 		}
 
-		case FUMLPackage::ACTIVITYEDGEINSTANCE_EREFERENCE_GROUP:
+		case FUMLPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_GROUP:
 		{
 			if (references.size() == 1)
 			{
@@ -511,7 +511,7 @@ void ActivityEdgeInstanceImpl::resolveReferences(const int featureID, std::list<
 			return;
 		}
 
-		case FUMLPackage::ACTIVITYEDGEINSTANCE_EREFERENCE_OFFERS:
+		case FUMLPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_OFFERS:
 		{
 			std::shared_ptr<Bag<fUML::Offer>> _offers = getOffers();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -525,7 +525,7 @@ void ActivityEdgeInstanceImpl::resolveReferences(const int featureID, std::list<
 			return;
 		}
 
-		case FUMLPackage::ACTIVITYEDGEINSTANCE_EREFERENCE_SOURCE:
+		case FUMLPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_SOURCE:
 		{
 			if (references.size() == 1)
 			{
@@ -537,7 +537,7 @@ void ActivityEdgeInstanceImpl::resolveReferences(const int featureID, std::list<
 			return;
 		}
 
-		case FUMLPackage::ACTIVITYEDGEINSTANCE_EREFERENCE_TARGET:
+		case FUMLPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_TARGET:
 		{
 			if (references.size() == 1)
 			{

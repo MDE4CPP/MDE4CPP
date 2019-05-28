@@ -213,7 +213,7 @@ std::shared_ptr<ecore::EObject>  MessageOccurrenceSpecificationImpl::copy() cons
 
 std::shared_ptr<ecore::EClass> MessageOccurrenceSpecificationImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getMessageOccurrenceSpecification_EClass();
+	return UmlPackageImpl::eInstance()->getMessageOccurrenceSpecification_Class();
 }
 
 //*********************************

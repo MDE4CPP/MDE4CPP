@@ -212,7 +212,7 @@ std::shared_ptr<ecore::EObject>  DestructionOccurrenceSpecificationImpl::copy() 
 
 std::shared_ptr<ecore::EClass> DestructionOccurrenceSpecificationImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getDestructionOccurrenceSpecification_EClass();
+	return UmlPackageImpl::eInstance()->getDestructionOccurrenceSpecification_Class();
 }
 
 //*********************************

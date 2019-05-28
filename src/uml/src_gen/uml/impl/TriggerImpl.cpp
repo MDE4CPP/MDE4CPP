@@ -173,7 +173,7 @@ std::shared_ptr<ecore::EObject>  TriggerImpl::copy() const
 
 std::shared_ptr<ecore::EClass> TriggerImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getTrigger_EClass();
+	return UmlPackageImpl::eInstance()->getTrigger_Class();
 }
 
 //*********************************
@@ -252,9 +252,9 @@ Any TriggerImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::TRIGGER_EREFERENCE_EVENT:
+		case UmlPackage::TRIGGER_ATTRIBUTE_EVENT:
 			return eAny(getEvent()); //2439
-		case UmlPackage::TRIGGER_EREFERENCE_PORT:
+		case UmlPackage::TRIGGER_ATTRIBUTE_PORT:
 			return eAny(getPort()); //24310
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
@@ -263,9 +263,9 @@ bool TriggerImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::TRIGGER_EREFERENCE_EVENT:
+		case UmlPackage::TRIGGER_ATTRIBUTE_EVENT:
 			return getEvent() != nullptr; //2439
-		case UmlPackage::TRIGGER_EREFERENCE_PORT:
+		case UmlPackage::TRIGGER_ATTRIBUTE_PORT:
 			return getPort() != nullptr; //24310
 	}
 	return NamedElementImpl::internalEIsSet(featureID);
@@ -274,7 +274,7 @@ bool TriggerImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::TRIGGER_EREFERENCE_EVENT:
+		case UmlPackage::TRIGGER_ATTRIBUTE_EVENT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Event> _event = newValue->get<std::shared_ptr<uml::Event>>();
@@ -349,7 +349,7 @@ void TriggerImpl::resolveReferences(const int featureID, std::list<std::shared_p
 {
 	switch(featureID)
 	{
-		case UmlPackage::TRIGGER_EREFERENCE_EVENT:
+		case UmlPackage::TRIGGER_ATTRIBUTE_EVENT:
 		{
 			if (references.size() == 1)
 			{
@@ -361,7 +361,7 @@ void TriggerImpl::resolveReferences(const int featureID, std::list<std::shared_p
 			return;
 		}
 
-		case UmlPackage::TRIGGER_EREFERENCE_PORT:
+		case UmlPackage::TRIGGER_ATTRIBUTE_PORT:
 		{
 			std::shared_ptr<Bag<uml::Port>> _port = getPort();
 			for(std::shared_ptr<ecore::EObject> ref : references)

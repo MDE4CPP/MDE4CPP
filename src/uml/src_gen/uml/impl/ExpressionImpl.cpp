@@ -238,7 +238,7 @@ std::shared_ptr<ecore::EObject>  ExpressionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ExpressionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getExpression_EClass();
+	return UmlPackageImpl::eInstance()->getExpression_Class();
 }
 
 //*********************************
@@ -330,9 +330,9 @@ Any ExpressionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::EXPRESSION_EREFERENCE_OPERAND:
+		case UmlPackage::EXPRESSION_ATTRIBUTE_OPERAND:
 			return eAny(getOperand()); //9514
-		case UmlPackage::EXPRESSION_EATTRIBUTE_SYMBOL:
+		case UmlPackage::EXPRESSION_ATTRIBUTE_SYMBOL:
 			return eAny(getSymbol()); //9515
 	}
 	return ValueSpecificationImpl::eGet(featureID, resolve, coreType);
@@ -341,9 +341,9 @@ bool ExpressionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::EXPRESSION_EREFERENCE_OPERAND:
+		case UmlPackage::EXPRESSION_ATTRIBUTE_OPERAND:
 			return getOperand() != nullptr; //9514
-		case UmlPackage::EXPRESSION_EATTRIBUTE_SYMBOL:
+		case UmlPackage::EXPRESSION_ATTRIBUTE_SYMBOL:
 			return getSymbol() != ""; //9515
 	}
 	return ValueSpecificationImpl::internalEIsSet(featureID);
@@ -352,7 +352,7 @@ bool ExpressionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::EXPRESSION_EATTRIBUTE_SYMBOL:
+		case UmlPackage::EXPRESSION_ATTRIBUTE_SYMBOL:
 		{
 			// BOOST CAST
 			std::string _symbol = newValue->get<std::string>();
@@ -484,12 +484,12 @@ void ExpressionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 		// Save 'operand'
 		for (std::shared_ptr<uml::ValueSpecification> operand : *this->getOperand()) 
 		{
-			saveHandler->addReference(operand, "operand", operand->eClass() != package->getValueSpecification_EClass());
+			saveHandler->addReference(operand, "operand", operand->eClass() != package->getValueSpecification_Class());
 		}
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getExpression_EAttribute_symbol()) )
+		if ( this->eIsSet(package->getExpression_Attribute_symbol()) )
 		{
 			saveHandler->addAttribute("symbol", this->getSymbol());
 		}

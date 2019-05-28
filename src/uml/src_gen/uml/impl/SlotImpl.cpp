@@ -176,7 +176,7 @@ std::shared_ptr<ecore::EObject>  SlotImpl::copy() const
 
 std::shared_ptr<ecore::EClass> SlotImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getSlot_EClass();
+	return UmlPackageImpl::eInstance()->getSlot_Class();
 }
 
 //*********************************
@@ -260,11 +260,11 @@ Any SlotImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::SLOT_EREFERENCE_DEFININGFEATURE:
+		case UmlPackage::SLOT_ATTRIBUTE_DEFININGFEATURE:
 			return eAny(getDefiningFeature()); //2173
-		case UmlPackage::SLOT_EREFERENCE_OWNINGINSTANCE:
+		case UmlPackage::SLOT_ATTRIBUTE_OWNINGINSTANCE:
 			return eAny(getOwningInstance()); //2175
-		case UmlPackage::SLOT_EREFERENCE_VALUE:
+		case UmlPackage::SLOT_ATTRIBUTE_VALUE:
 			return eAny(getValue()); //2174
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
@@ -273,11 +273,11 @@ bool SlotImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::SLOT_EREFERENCE_DEFININGFEATURE:
+		case UmlPackage::SLOT_ATTRIBUTE_DEFININGFEATURE:
 			return getDefiningFeature() != nullptr; //2173
-		case UmlPackage::SLOT_EREFERENCE_OWNINGINSTANCE:
+		case UmlPackage::SLOT_ATTRIBUTE_OWNINGINSTANCE:
 			return getOwningInstance().lock() != nullptr; //2175
-		case UmlPackage::SLOT_EREFERENCE_VALUE:
+		case UmlPackage::SLOT_ATTRIBUTE_VALUE:
 			return getValue() != nullptr; //2174
 	}
 	return ElementImpl::internalEIsSet(featureID);
@@ -286,14 +286,14 @@ bool SlotImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::SLOT_EREFERENCE_DEFININGFEATURE:
+		case UmlPackage::SLOT_ATTRIBUTE_DEFININGFEATURE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::StructuralFeature> _definingFeature = newValue->get<std::shared_ptr<uml::StructuralFeature>>();
 			setDefiningFeature(_definingFeature); //2173
 			return true;
 		}
-		case UmlPackage::SLOT_EREFERENCE_OWNINGINSTANCE:
+		case UmlPackage::SLOT_ATTRIBUTE_OWNINGINSTANCE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::InstanceSpecification> _owningInstance = newValue->get<std::shared_ptr<uml::InstanceSpecification>>();
@@ -363,7 +363,7 @@ void SlotImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inter
 				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			std::shared_ptr<ecore::EObject> value = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::VALUESPECIFICATION_EREFERENCE_OWNINGSLOT);
+			std::shared_ptr<ecore::EObject> value = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::VALUESPECIFICATION_ATTRIBUTE_OWNINGSLOT);
 			if (value != nullptr)
 			{
 				loadHandler->handleChild(value);
@@ -387,7 +387,7 @@ void SlotImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<
 {
 	switch(featureID)
 	{
-		case UmlPackage::SLOT_EREFERENCE_DEFININGFEATURE:
+		case UmlPackage::SLOT_ATTRIBUTE_DEFININGFEATURE:
 		{
 			if (references.size() == 1)
 			{
@@ -399,7 +399,7 @@ void SlotImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<
 			return;
 		}
 
-		case UmlPackage::SLOT_EREFERENCE_OWNINGINSTANCE:
+		case UmlPackage::SLOT_ATTRIBUTE_OWNINGINSTANCE:
 		{
 			if (references.size() == 1)
 			{
@@ -436,7 +436,7 @@ void SlotImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler
 		// Save 'value'
 		for (std::shared_ptr<uml::ValueSpecification> value : *this->getValue()) 
 		{
-			saveHandler->addReference(value, "value", value->eClass() != package->getValueSpecification_EClass());
+			saveHandler->addReference(value, "value", value->eClass() != package->getValueSpecification_Class());
 		}
 	
 

@@ -163,7 +163,7 @@ std::shared_ptr<ecore::EObject>  GateImpl::copy() const
 
 std::shared_ptr<ecore::EClass> GateImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getGate_EClass();
+	return UmlPackageImpl::eInstance()->getGate_Class();
 }
 
 //*********************************

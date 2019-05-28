@@ -112,7 +112,7 @@ std::shared_ptr<ecore::EObject>  ObjectTokenImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ObjectTokenImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getObjectToken_EClass();
+	return FUMLPackageImpl::eInstance()->getObjectToken_Class();
 }
 
 //*********************************
@@ -177,7 +177,7 @@ Any ObjectTokenImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::OBJECTTOKEN_EREFERENCE_VALUE:
+		case FUMLPackage::OBJECTTOKEN_ATTRIBUTE_VALUE:
 			return eAny(getValue()); //792
 	}
 	return TokenImpl::eGet(featureID, resolve, coreType);
@@ -186,7 +186,7 @@ bool ObjectTokenImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::OBJECTTOKEN_EREFERENCE_VALUE:
+		case FUMLPackage::OBJECTTOKEN_ATTRIBUTE_VALUE:
 			return getValue() != nullptr; //792
 	}
 	return TokenImpl::internalEIsSet(featureID);
@@ -195,7 +195,7 @@ bool ObjectTokenImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case FUMLPackage::OBJECTTOKEN_EREFERENCE_VALUE:
+		case FUMLPackage::OBJECTTOKEN_ATTRIBUTE_VALUE:
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::Value> _value = newValue->get<std::shared_ptr<fUML::Value>>();
@@ -299,7 +299,7 @@ void ObjectTokenImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 		std::shared_ptr<fUML::Value > value = this->getValue();
 		if (value != nullptr)
 		{
-			saveHandler->addReference(value, "value", value->eClass() != package->getValue_EClass());
+			saveHandler->addReference(value, "value", value->eClass() != package->getValue_Class());
 		}
 	}
 	catch (std::exception& e)

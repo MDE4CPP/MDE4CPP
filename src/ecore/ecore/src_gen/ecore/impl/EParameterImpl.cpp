@@ -113,6 +113,7 @@ EParameterImpl::EParameterImpl(const EParameterImpl & obj):EParameterImpl()
 	#endif
 	m_lowerBound = obj.getLowerBound();
 	m_many = obj.isMany();
+	m_metaElementID = obj.getMetaElementID();
 	m_name = obj.getName();
 	m_ordered = obj.isOrdered();
 	m_required = obj.isRequired();
@@ -157,7 +158,7 @@ std::shared_ptr<ecore::EObject>  EParameterImpl::copy() const
 
 std::shared_ptr<EClass> EParameterImpl::eStaticClass() const
 {
-	return EcorePackageImpl::eInstance()->getEParameter_EClass();
+	return EcorePackageImpl::eInstance()->getEParameter_Class();
 }
 
 //*********************************
@@ -217,8 +218,8 @@ Any EParameterImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case EcorePackage::EPARAMETER_EREFERENCE_EOPERATION:
-			return eAny(getEOperation()); //4212
+		case EcorePackage::EPARAMETER_ATTRIBUTE_EOPERATION:
+			return eAny(getEOperation()); //4213
 	}
 	return ETypedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -226,8 +227,8 @@ bool EParameterImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case EcorePackage::EPARAMETER_EREFERENCE_EOPERATION:
-			return getEOperation().lock() != nullptr; //4212
+		case EcorePackage::EPARAMETER_ATTRIBUTE_EOPERATION:
+			return getEOperation().lock() != nullptr; //4213
 	}
 	return ETypedElementImpl::internalEIsSet(featureID);
 }

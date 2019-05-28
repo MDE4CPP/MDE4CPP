@@ -341,7 +341,7 @@ std::shared_ptr<ecore::EObject>  LinkActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> LinkActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getLinkAction_EClass();
+	return UmlPackageImpl::eInstance()->getLinkAction_Class();
 }
 
 //*********************************
@@ -457,9 +457,9 @@ Any LinkActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::LINKACTION_EREFERENCE_ENDDATA:
+		case UmlPackage::LINKACTION_ATTRIBUTE_ENDDATA:
 			return eAny(getEndData()); //13327
-		case UmlPackage::LINKACTION_EREFERENCE_INPUTVALUE:
+		case UmlPackage::LINKACTION_ATTRIBUTE_INPUTVALUE:
 			return eAny(getInputValue()); //13328
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
@@ -468,9 +468,9 @@ bool LinkActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::LINKACTION_EREFERENCE_ENDDATA:
+		case UmlPackage::LINKACTION_ATTRIBUTE_ENDDATA:
 			return getEndData() != nullptr; //13327
-		case UmlPackage::LINKACTION_EREFERENCE_INPUTVALUE:
+		case UmlPackage::LINKACTION_ATTRIBUTE_INPUTVALUE:
 			return getInputValue() != nullptr; //13328
 	}
 	return ActionImpl::internalEIsSet(featureID);
@@ -604,13 +604,13 @@ void LinkActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 		// Save 'endData'
 		for (std::shared_ptr<uml::LinkEndData> endData : *this->getEndData()) 
 		{
-			saveHandler->addReference(endData, "endData", endData->eClass() != package->getLinkEndData_EClass());
+			saveHandler->addReference(endData, "endData", endData->eClass() != package->getLinkEndData_Class());
 		}
 
 		// Save 'inputValue'
 		for (std::shared_ptr<uml::InputPin> inputValue : *this->getInputValue()) 
 		{
-			saveHandler->addReference(inputValue, "inputValue", inputValue->eClass() != package->getInputPin_EClass());
+			saveHandler->addReference(inputValue, "inputValue", inputValue->eClass() != package->getInputPin_Class());
 		}
 	
 

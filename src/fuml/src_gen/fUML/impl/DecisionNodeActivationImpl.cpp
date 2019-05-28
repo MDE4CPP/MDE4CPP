@@ -165,7 +165,7 @@ std::shared_ptr<ecore::EObject>  DecisionNodeActivationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> DecisionNodeActivationImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getDecisionNodeActivation_EClass();
+	return FUMLPackageImpl::eInstance()->getDecisionNodeActivation_Class();
 }
 
 //*********************************
@@ -515,7 +515,7 @@ Any DecisionNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType)
 {
 	switch(featureID)
 	{
-		case FUMLPackage::DECISIONNODEACTIVATION_EREFERENCE_DECISIONINPUTEXECUTION:
+		case FUMLPackage::DECISIONNODEACTIVATION_ATTRIBUTE_DECISIONINPUTEXECUTION:
 			return eAny(getDecisionInputExecution()); //316
 	}
 	return ControlNodeActivationImpl::eGet(featureID, resolve, coreType);
@@ -524,7 +524,7 @@ bool DecisionNodeActivationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::DECISIONNODEACTIVATION_EREFERENCE_DECISIONINPUTEXECUTION:
+		case FUMLPackage::DECISIONNODEACTIVATION_ATTRIBUTE_DECISIONINPUTEXECUTION:
 			return getDecisionInputExecution() != nullptr; //316
 	}
 	return ControlNodeActivationImpl::internalEIsSet(featureID);
@@ -533,7 +533,7 @@ bool DecisionNodeActivationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case FUMLPackage::DECISIONNODEACTIVATION_EREFERENCE_DECISIONINPUTEXECUTION:
+		case FUMLPackage::DECISIONNODEACTIVATION_ATTRIBUTE_DECISIONINPUTEXECUTION:
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::Execution> _decisionInputExecution = newValue->get<std::shared_ptr<fUML::Execution>>();
@@ -643,7 +643,7 @@ void DecisionNodeActivationImpl::saveContent(std::shared_ptr<persistence::interf
 		std::shared_ptr<fUML::Execution > decisionInputExecution = this->getDecisionInputExecution();
 		if (decisionInputExecution != nullptr)
 		{
-			saveHandler->addReference(decisionInputExecution, "decisionInputExecution", decisionInputExecution->eClass() != package->getExecution_EClass());
+			saveHandler->addReference(decisionInputExecution, "decisionInputExecution", decisionInputExecution->eClass() != package->getExecution_Class());
 		}
 	}
 	catch (std::exception& e)

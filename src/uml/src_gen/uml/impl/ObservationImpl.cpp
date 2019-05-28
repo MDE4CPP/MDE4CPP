@@ -188,7 +188,7 @@ std::shared_ptr<ecore::EObject>  ObservationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ObservationImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getObservation_EClass();
+	return UmlPackageImpl::eInstance()->getObservation_Class();
 }
 
 //*********************************

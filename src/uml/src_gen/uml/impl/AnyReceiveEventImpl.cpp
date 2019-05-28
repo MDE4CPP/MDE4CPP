@@ -188,7 +188,7 @@ std::shared_ptr<ecore::EObject>  AnyReceiveEventImpl::copy() const
 
 std::shared_ptr<ecore::EClass> AnyReceiveEventImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getAnyReceiveEvent_EClass();
+	return UmlPackageImpl::eInstance()->getAnyReceiveEvent_Class();
 }
 
 //*********************************

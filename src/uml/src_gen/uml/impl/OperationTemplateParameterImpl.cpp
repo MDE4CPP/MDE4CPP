@@ -156,7 +156,7 @@ std::shared_ptr<ecore::EObject>  OperationTemplateParameterImpl::copy() const
 
 std::shared_ptr<ecore::EClass> OperationTemplateParameterImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getOperationTemplateParameter_EClass();
+	return UmlPackageImpl::eInstance()->getOperationTemplateParameter_Class();
 }
 
 //*********************************

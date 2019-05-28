@@ -111,7 +111,7 @@ std::shared_ptr<ecore::EObject>  ExtensionalValueListImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ExtensionalValueListImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getExtensionalValueList_EClass();
+	return FUMLPackageImpl::eInstance()->getExtensionalValueList_Class();
 }
 
 //*********************************

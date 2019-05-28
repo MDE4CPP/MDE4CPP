@@ -159,7 +159,7 @@ std::shared_ptr<ecore::EObject>  ClearStructuralFeatureActionActivationImpl::cop
 
 std::shared_ptr<ecore::EClass> ClearStructuralFeatureActionActivationImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getClearStructuralFeatureActionActivation_EClass();
+	return FUMLPackageImpl::eInstance()->getClearStructuralFeatureActionActivation_Class();
 }
 
 //*********************************

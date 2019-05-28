@@ -165,7 +165,7 @@ std::shared_ptr<ecore::EObject>  ReduceActionActivationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ReduceActionActivationImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getReduceActionActivation_EClass();
+	return FUMLPackageImpl::eInstance()->getReduceActionActivation_Class();
 }
 
 //*********************************
@@ -223,7 +223,7 @@ Any ReduceActionActivationImpl::eGet(int featureID, bool resolve, bool coreType)
 {
 	switch(featureID)
 	{
-		case FUMLPackage::REDUCEACTIONACTIVATION_EREFERENCE_CURRENTEXECUTION:
+		case FUMLPackage::REDUCEACTIONACTIVATION_ATTRIBUTE_CURRENTEXECUTION:
 			return eAny(getCurrentExecution()); //9410
 	}
 	return ActionActivationImpl::eGet(featureID, resolve, coreType);
@@ -232,7 +232,7 @@ bool ReduceActionActivationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::REDUCEACTIONACTIVATION_EREFERENCE_CURRENTEXECUTION:
+		case FUMLPackage::REDUCEACTIONACTIVATION_ATTRIBUTE_CURRENTEXECUTION:
 			return getCurrentExecution() != nullptr; //9410
 	}
 	return ActionActivationImpl::internalEIsSet(featureID);
@@ -241,7 +241,7 @@ bool ReduceActionActivationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case FUMLPackage::REDUCEACTIONACTIVATION_EREFERENCE_CURRENTEXECUTION:
+		case FUMLPackage::REDUCEACTIONACTIVATION_ATTRIBUTE_CURRENTEXECUTION:
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::Execution> _currentExecution = newValue->get<std::shared_ptr<fUML::Execution>>();
@@ -309,7 +309,7 @@ void ReduceActionActivationImpl::resolveReferences(const int featureID, std::lis
 {
 	switch(featureID)
 	{
-		case FUMLPackage::REDUCEACTIONACTIVATION_EREFERENCE_CURRENTEXECUTION:
+		case FUMLPackage::REDUCEACTIONACTIVATION_ATTRIBUTE_CURRENTEXECUTION:
 		{
 			if (references.size() == 1)
 			{

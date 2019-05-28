@@ -203,7 +203,7 @@ std::shared_ptr<ecore::EObject>  ContinuationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ContinuationImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getContinuation_EClass();
+	return UmlPackageImpl::eInstance()->getContinuation_Class();
 }
 
 //*********************************
@@ -301,7 +301,7 @@ Any ContinuationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::CONTINUATION_EATTRIBUTE_SETTING:
+		case UmlPackage::CONTINUATION_ATTRIBUTE_SETTING:
 			return eAny(getSetting()); //5813
 	}
 	return InteractionFragmentImpl::eGet(featureID, resolve, coreType);
@@ -310,7 +310,7 @@ bool ContinuationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::CONTINUATION_EATTRIBUTE_SETTING:
+		case UmlPackage::CONTINUATION_ATTRIBUTE_SETTING:
 			return getSetting() != true; //5813
 	}
 	return InteractionFragmentImpl::internalEIsSet(featureID);
@@ -319,7 +319,7 @@ bool ContinuationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::CONTINUATION_EATTRIBUTE_SETTING:
+		case UmlPackage::CONTINUATION_ATTRIBUTE_SETTING:
 		{
 			// BOOST CAST
 			bool _setting = newValue->get<bool>();
@@ -418,7 +418,7 @@ void ContinuationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getContinuation_EAttribute_setting()) )
+		if ( this->eIsSet(package->getContinuation_Attribute_setting()) )
 		{
 			saveHandler->addAttribute("setting", this->getSetting());
 		}

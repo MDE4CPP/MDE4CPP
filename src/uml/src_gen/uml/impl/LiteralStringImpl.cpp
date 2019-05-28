@@ -209,7 +209,7 @@ std::shared_ptr<ecore::EObject>  LiteralStringImpl::copy() const
 
 std::shared_ptr<ecore::EClass> LiteralStringImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getLiteralString_EClass();
+	return UmlPackageImpl::eInstance()->getLiteralString_Class();
 }
 
 //*********************************
@@ -295,7 +295,7 @@ Any LiteralStringImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::LITERALSTRING_EATTRIBUTE_VALUE:
+		case UmlPackage::LITERALSTRING_ATTRIBUTE_VALUE:
 			return eAny(getValue()); //14214
 	}
 	return LiteralSpecificationImpl::eGet(featureID, resolve, coreType);
@@ -304,7 +304,7 @@ bool LiteralStringImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::LITERALSTRING_EATTRIBUTE_VALUE:
+		case UmlPackage::LITERALSTRING_ATTRIBUTE_VALUE:
 			return getValue() != ""; //14214
 	}
 	return LiteralSpecificationImpl::internalEIsSet(featureID);
@@ -313,7 +313,7 @@ bool LiteralStringImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::LITERALSTRING_EATTRIBUTE_VALUE:
+		case UmlPackage::LITERALSTRING_ATTRIBUTE_VALUE:
 		{
 			// BOOST CAST
 			std::string _value = newValue->get<std::string>();
@@ -420,7 +420,7 @@ void LiteralStringImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getLiteralString_EAttribute_value()) )
+		if ( this->eIsSet(package->getLiteralString_Attribute_value()) )
 		{
 			saveHandler->addAttribute("value", this->getValue());
 		}

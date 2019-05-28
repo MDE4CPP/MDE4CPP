@@ -253,7 +253,7 @@ std::shared_ptr<ecore::EObject>  ReceptionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ReceptionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getReception_EClass();
+	return UmlPackageImpl::eInstance()->getReception_Class();
 }
 
 //*********************************
@@ -339,7 +339,7 @@ Any ReceptionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::RECEPTION_EREFERENCE_SIGNAL:
+		case UmlPackage::RECEPTION_ATTRIBUTE_SIGNAL:
 			return eAny(getSignal()); //20226
 	}
 	return BehavioralFeatureImpl::eGet(featureID, resolve, coreType);
@@ -348,7 +348,7 @@ bool ReceptionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::RECEPTION_EREFERENCE_SIGNAL:
+		case UmlPackage::RECEPTION_ATTRIBUTE_SIGNAL:
 			return getSignal() != nullptr; //20226
 	}
 	return BehavioralFeatureImpl::internalEIsSet(featureID);
@@ -357,7 +357,7 @@ bool ReceptionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::RECEPTION_EREFERENCE_SIGNAL:
+		case UmlPackage::RECEPTION_ATTRIBUTE_SIGNAL:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Signal> _signal = newValue->get<std::shared_ptr<uml::Signal>>();
@@ -425,7 +425,7 @@ void ReceptionImpl::resolveReferences(const int featureID, std::list<std::shared
 {
 	switch(featureID)
 	{
-		case UmlPackage::RECEPTION_EREFERENCE_SIGNAL:
+		case UmlPackage::RECEPTION_ATTRIBUTE_SIGNAL:
 		{
 			if (references.size() == 1)
 			{

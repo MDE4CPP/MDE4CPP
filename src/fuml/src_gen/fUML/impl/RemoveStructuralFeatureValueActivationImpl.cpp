@@ -159,7 +159,7 @@ std::shared_ptr<ecore::EObject>  RemoveStructuralFeatureValueActivationImpl::cop
 
 std::shared_ptr<ecore::EClass> RemoveStructuralFeatureValueActivationImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getRemoveStructuralFeatureValueActivation_EClass();
+	return FUMLPackageImpl::eInstance()->getRemoveStructuralFeatureValueActivation_Class();
 }
 
 //*********************************

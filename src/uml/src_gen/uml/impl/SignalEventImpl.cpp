@@ -194,7 +194,7 @@ std::shared_ptr<ecore::EObject>  SignalEventImpl::copy() const
 
 std::shared_ptr<ecore::EClass> SignalEventImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getSignalEvent_EClass();
+	return UmlPackageImpl::eInstance()->getSignalEvent_Class();
 }
 
 //*********************************
@@ -275,7 +275,7 @@ Any SignalEventImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::SIGNALEVENT_EREFERENCE_SIGNAL:
+		case UmlPackage::SIGNALEVENT_ATTRIBUTE_SIGNAL:
 			return eAny(getSignal()); //21612
 	}
 	return MessageEventImpl::eGet(featureID, resolve, coreType);
@@ -284,7 +284,7 @@ bool SignalEventImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::SIGNALEVENT_EREFERENCE_SIGNAL:
+		case UmlPackage::SIGNALEVENT_ATTRIBUTE_SIGNAL:
 			return getSignal() != nullptr; //21612
 	}
 	return MessageEventImpl::internalEIsSet(featureID);
@@ -293,7 +293,7 @@ bool SignalEventImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::SIGNALEVENT_EREFERENCE_SIGNAL:
+		case UmlPackage::SIGNALEVENT_ATTRIBUTE_SIGNAL:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Signal> _signal = newValue->get<std::shared_ptr<uml::Signal>>();
@@ -361,7 +361,7 @@ void SignalEventImpl::resolveReferences(const int featureID, std::list<std::shar
 {
 	switch(featureID)
 	{
-		case UmlPackage::SIGNALEVENT_EREFERENCE_SIGNAL:
+		case UmlPackage::SIGNALEVENT_ATTRIBUTE_SIGNAL:
 		{
 			if (references.size() == 1)
 			{

@@ -291,7 +291,7 @@ std::shared_ptr<ecore::EObject>  InteractionOperandImpl::copy() const
 
 std::shared_ptr<ecore::EClass> InteractionOperandImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getInteractionOperand_EClass();
+	return UmlPackageImpl::eInstance()->getInteractionOperand_Class();
 }
 
 //*********************************
@@ -399,9 +399,9 @@ Any InteractionOperandImpl::eGet(int featureID, bool resolve, bool coreType) con
 {
 	switch(featureID)
 	{
-		case UmlPackage::INTERACTIONOPERAND_EREFERENCE_FRAGMENT:
+		case UmlPackage::INTERACTIONOPERAND_ATTRIBUTE_FRAGMENT:
 			return eAny(getFragment()); //12219
-		case UmlPackage::INTERACTIONOPERAND_EREFERENCE_GUARD:
+		case UmlPackage::INTERACTIONOPERAND_ATTRIBUTE_GUARD:
 			return eAny(getGuard()); //12220
 	}
 	Any result;
@@ -417,9 +417,9 @@ bool InteractionOperandImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::INTERACTIONOPERAND_EREFERENCE_FRAGMENT:
+		case UmlPackage::INTERACTIONOPERAND_ATTRIBUTE_FRAGMENT:
 			return getFragment() != nullptr; //12219
-		case UmlPackage::INTERACTIONOPERAND_EREFERENCE_GUARD:
+		case UmlPackage::INTERACTIONOPERAND_ATTRIBUTE_GUARD:
 			return getGuard() != nullptr; //12220
 	}
 	bool result = false;
@@ -435,7 +435,7 @@ bool InteractionOperandImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::INTERACTIONOPERAND_EREFERENCE_GUARD:
+		case UmlPackage::INTERACTIONOPERAND_ATTRIBUTE_GUARD:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::InteractionConstraint> _guard = newValue->get<std::shared_ptr<uml::InteractionConstraint>>();
@@ -494,7 +494,7 @@ void InteractionOperandImpl::loadNode(std::string nodeName, std::shared_ptr<pers
 				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			std::shared_ptr<ecore::EObject> fragment = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_ENCLOSINGOPERAND);
+			std::shared_ptr<ecore::EObject> fragment = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_ENCLOSINGOPERAND);
 			if (fragment != nullptr)
 			{
 				loadHandler->handleChild(fragment);
@@ -566,14 +566,14 @@ void InteractionOperandImpl::saveContent(std::shared_ptr<persistence::interfaces
 		// Save 'fragment'
 		for (std::shared_ptr<uml::InteractionFragment> fragment : *this->getFragment()) 
 		{
-			saveHandler->addReference(fragment, "fragment", fragment->eClass() != package->getInteractionFragment_EClass());
+			saveHandler->addReference(fragment, "fragment", fragment->eClass() != package->getInteractionFragment_Class());
 		}
 
 		// Save 'guard'
 		std::shared_ptr<uml::InteractionConstraint > guard = this->getGuard();
 		if (guard != nullptr)
 		{
-			saveHandler->addReference(guard, "guard", guard->eClass() != package->getInteractionConstraint_EClass());
+			saveHandler->addReference(guard, "guard", guard->eClass() != package->getInteractionConstraint_Class());
 		}
 	
 

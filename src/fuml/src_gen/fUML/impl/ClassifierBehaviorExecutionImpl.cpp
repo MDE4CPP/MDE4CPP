@@ -117,7 +117,7 @@ std::shared_ptr<ecore::EObject>  ClassifierBehaviorExecutionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ClassifierBehaviorExecutionImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getClassifierBehaviorExecution_EClass();
+	return FUMLPackageImpl::eInstance()->getClassifierBehaviorExecution_Class();
 }
 
 //*********************************
@@ -203,11 +203,11 @@ Any ClassifierBehaviorExecutionImpl::eGet(int featureID, bool resolve, bool core
 {
 	switch(featureID)
 	{
-		case FUMLPackage::CLASSIFIERBEHAVIOREXECUTION_EREFERENCE_CLASSIFIER:
+		case FUMLPackage::CLASSIFIERBEHAVIOREXECUTION_ATTRIBUTE_CLASSIFIER:
 			return eAny(getClassifier()); //171
-		case FUMLPackage::CLASSIFIERBEHAVIOREXECUTION_EREFERENCE_EXECUTION:
+		case FUMLPackage::CLASSIFIERBEHAVIOREXECUTION_ATTRIBUTE_EXECUTION:
 			return eAny(getExecution()); //170
-		case FUMLPackage::CLASSIFIERBEHAVIOREXECUTION_EREFERENCE_OBJECTACTIVATION:
+		case FUMLPackage::CLASSIFIERBEHAVIOREXECUTION_ATTRIBUTE_OBJECTACTIVATION:
 			return eAny(getObjectActivation()); //172
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
@@ -216,11 +216,11 @@ bool ClassifierBehaviorExecutionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::CLASSIFIERBEHAVIOREXECUTION_EREFERENCE_CLASSIFIER:
+		case FUMLPackage::CLASSIFIERBEHAVIOREXECUTION_ATTRIBUTE_CLASSIFIER:
 			return getClassifier() != nullptr; //171
-		case FUMLPackage::CLASSIFIERBEHAVIOREXECUTION_EREFERENCE_EXECUTION:
+		case FUMLPackage::CLASSIFIERBEHAVIOREXECUTION_ATTRIBUTE_EXECUTION:
 			return getExecution() != nullptr; //170
-		case FUMLPackage::CLASSIFIERBEHAVIOREXECUTION_EREFERENCE_OBJECTACTIVATION:
+		case FUMLPackage::CLASSIFIERBEHAVIOREXECUTION_ATTRIBUTE_OBJECTACTIVATION:
 			return getObjectActivation() != nullptr; //172
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
@@ -229,21 +229,21 @@ bool ClassifierBehaviorExecutionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case FUMLPackage::CLASSIFIERBEHAVIOREXECUTION_EREFERENCE_CLASSIFIER:
+		case FUMLPackage::CLASSIFIERBEHAVIOREXECUTION_ATTRIBUTE_CLASSIFIER:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Class> _classifier = newValue->get<std::shared_ptr<uml::Class>>();
 			setClassifier(_classifier); //171
 			return true;
 		}
-		case FUMLPackage::CLASSIFIERBEHAVIOREXECUTION_EREFERENCE_EXECUTION:
+		case FUMLPackage::CLASSIFIERBEHAVIOREXECUTION_ATTRIBUTE_EXECUTION:
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::Execution> _execution = newValue->get<std::shared_ptr<fUML::Execution>>();
 			setExecution(_execution); //170
 			return true;
 		}
-		case FUMLPackage::CLASSIFIERBEHAVIOREXECUTION_EREFERENCE_OBJECTACTIVATION:
+		case FUMLPackage::CLASSIFIERBEHAVIOREXECUTION_ATTRIBUTE_OBJECTACTIVATION:
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::ObjectActivation> _objectActivation = newValue->get<std::shared_ptr<fUML::ObjectActivation>>();
@@ -325,7 +325,7 @@ void ClassifierBehaviorExecutionImpl::resolveReferences(const int featureID, std
 {
 	switch(featureID)
 	{
-		case FUMLPackage::CLASSIFIERBEHAVIOREXECUTION_EREFERENCE_CLASSIFIER:
+		case FUMLPackage::CLASSIFIERBEHAVIOREXECUTION_ATTRIBUTE_CLASSIFIER:
 		{
 			if (references.size() == 1)
 			{
@@ -337,7 +337,7 @@ void ClassifierBehaviorExecutionImpl::resolveReferences(const int featureID, std
 			return;
 		}
 
-		case FUMLPackage::CLASSIFIERBEHAVIOREXECUTION_EREFERENCE_EXECUTION:
+		case FUMLPackage::CLASSIFIERBEHAVIOREXECUTION_ATTRIBUTE_EXECUTION:
 		{
 			if (references.size() == 1)
 			{
@@ -349,7 +349,7 @@ void ClassifierBehaviorExecutionImpl::resolveReferences(const int featureID, std
 			return;
 		}
 
-		case FUMLPackage::CLASSIFIERBEHAVIOREXECUTION_EREFERENCE_OBJECTACTIVATION:
+		case FUMLPackage::CLASSIFIERBEHAVIOREXECUTION_ATTRIBUTE_OBJECTACTIVATION:
 		{
 			if (references.size() == 1)
 			{

@@ -288,7 +288,7 @@ std::shared_ptr<ecore::EObject>  StringExpressionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> StringExpressionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getStringExpression_EClass();
+	return UmlPackageImpl::eInstance()->getStringExpression_Class();
 }
 
 //*********************************
@@ -398,9 +398,9 @@ Any StringExpressionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::STRINGEXPRESSION_EREFERENCE_OWNINGEXPRESSION:
+		case UmlPackage::STRINGEXPRESSION_ATTRIBUTE_OWNINGEXPRESSION:
 			return eAny(getOwningExpression()); //22418
-		case UmlPackage::STRINGEXPRESSION_EREFERENCE_SUBEXPRESSION:
+		case UmlPackage::STRINGEXPRESSION_ATTRIBUTE_SUBEXPRESSION:
 			return eAny(getSubExpression()); //22419
 	}
 	Any result;
@@ -416,9 +416,9 @@ bool StringExpressionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::STRINGEXPRESSION_EREFERENCE_OWNINGEXPRESSION:
+		case UmlPackage::STRINGEXPRESSION_ATTRIBUTE_OWNINGEXPRESSION:
 			return getOwningExpression().lock() != nullptr; //22418
-		case UmlPackage::STRINGEXPRESSION_EREFERENCE_SUBEXPRESSION:
+		case UmlPackage::STRINGEXPRESSION_ATTRIBUTE_SUBEXPRESSION:
 			return getSubExpression() != nullptr; //22419
 	}
 	bool result = false;
@@ -434,7 +434,7 @@ bool StringExpressionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::STRINGEXPRESSION_EREFERENCE_OWNINGEXPRESSION:
+		case UmlPackage::STRINGEXPRESSION_ATTRIBUTE_OWNINGEXPRESSION:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::StringExpression> _owningExpression = newValue->get<std::shared_ptr<uml::StringExpression>>();
@@ -492,7 +492,7 @@ void StringExpressionImpl::loadNode(std::string nodeName, std::shared_ptr<persis
 			{
 				typeName = "StringExpression";
 			}
-			std::shared_ptr<ecore::EObject> subExpression = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::STRINGEXPRESSION_EREFERENCE_OWNINGEXPRESSION);
+			std::shared_ptr<ecore::EObject> subExpression = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::STRINGEXPRESSION_ATTRIBUTE_OWNINGEXPRESSION);
 			if (subExpression != nullptr)
 			{
 				loadHandler->handleChild(subExpression);
@@ -517,7 +517,7 @@ void StringExpressionImpl::resolveReferences(const int featureID, std::list<std:
 {
 	switch(featureID)
 	{
-		case UmlPackage::STRINGEXPRESSION_EREFERENCE_OWNINGEXPRESSION:
+		case UmlPackage::STRINGEXPRESSION_ATTRIBUTE_OWNINGEXPRESSION:
 		{
 			if (references.size() == 1)
 			{
@@ -570,7 +570,7 @@ void StringExpressionImpl::saveContent(std::shared_ptr<persistence::interfaces::
 		// Save 'subExpression'
 		for (std::shared_ptr<uml::StringExpression> subExpression : *this->getSubExpression()) 
 		{
-			saveHandler->addReference(subExpression, "subExpression", subExpression->eClass() != package->getStringExpression_EClass());
+			saveHandler->addReference(subExpression, "subExpression", subExpression->eClass() != package->getStringExpression_Class());
 		}
 	
 

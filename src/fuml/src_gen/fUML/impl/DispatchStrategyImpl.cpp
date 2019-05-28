@@ -105,7 +105,7 @@ std::shared_ptr<ecore::EObject>  DispatchStrategyImpl::copy() const
 
 std::shared_ptr<ecore::EClass> DispatchStrategyImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getDispatchStrategy_EClass();
+	return FUMLPackageImpl::eInstance()->getDispatchStrategy_Class();
 }
 
 //*********************************

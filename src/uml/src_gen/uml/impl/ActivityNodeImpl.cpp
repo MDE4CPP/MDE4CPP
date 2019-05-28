@@ -319,7 +319,7 @@ std::shared_ptr<ecore::EObject>  ActivityNodeImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ActivityNodeImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getActivityNode_EClass();
+	return UmlPackageImpl::eInstance()->getActivityNode_Class();
 }
 
 //*********************************
@@ -453,21 +453,21 @@ Any ActivityNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY:
+		case UmlPackage::ACTIVITYNODE_ATTRIBUTE_ACTIVITY:
 			return eAny(getActivity()); //1212
-		case UmlPackage::ACTIVITYNODE_EREFERENCE_INGROUP:
+		case UmlPackage::ACTIVITYNODE_ATTRIBUTE_INGROUP:
 			return eAny(getInGroup()); //1213
-		case UmlPackage::ACTIVITYNODE_EREFERENCE_ININTERRUPTIBLEREGION:
+		case UmlPackage::ACTIVITYNODE_ATTRIBUTE_ININTERRUPTIBLEREGION:
 			return eAny(getInInterruptibleRegion()); //1214
-		case UmlPackage::ACTIVITYNODE_EREFERENCE_INPARTITION:
+		case UmlPackage::ACTIVITYNODE_ATTRIBUTE_INPARTITION:
 			return eAny(getInPartition()); //1219
-		case UmlPackage::ACTIVITYNODE_EREFERENCE_INSTRUCTUREDNODE:
+		case UmlPackage::ACTIVITYNODE_ATTRIBUTE_INSTRUCTUREDNODE:
 			return eAny(getInStructuredNode()); //1215
-		case UmlPackage::ACTIVITYNODE_EREFERENCE_INCOMING:
+		case UmlPackage::ACTIVITYNODE_ATTRIBUTE_INCOMING:
 			return eAny(getIncoming()); //1216
-		case UmlPackage::ACTIVITYNODE_EREFERENCE_OUTGOING:
+		case UmlPackage::ACTIVITYNODE_ATTRIBUTE_OUTGOING:
 			return eAny(getOutgoing()); //1217
-		case UmlPackage::ACTIVITYNODE_EREFERENCE_REDEFINEDNODE:
+		case UmlPackage::ACTIVITYNODE_ATTRIBUTE_REDEFINEDNODE:
 			return eAny(getRedefinedNode()); //1218
 	}
 	Any result;
@@ -483,21 +483,21 @@ bool ActivityNodeImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY:
+		case UmlPackage::ACTIVITYNODE_ATTRIBUTE_ACTIVITY:
 			return getActivity().lock() != nullptr; //1212
-		case UmlPackage::ACTIVITYNODE_EREFERENCE_INGROUP:
+		case UmlPackage::ACTIVITYNODE_ATTRIBUTE_INGROUP:
 			return getInGroup() != nullptr; //1213
-		case UmlPackage::ACTIVITYNODE_EREFERENCE_ININTERRUPTIBLEREGION:
+		case UmlPackage::ACTIVITYNODE_ATTRIBUTE_ININTERRUPTIBLEREGION:
 			return getInInterruptibleRegion() != nullptr; //1214
-		case UmlPackage::ACTIVITYNODE_EREFERENCE_INPARTITION:
+		case UmlPackage::ACTIVITYNODE_ATTRIBUTE_INPARTITION:
 			return getInPartition() != nullptr; //1219
-		case UmlPackage::ACTIVITYNODE_EREFERENCE_INSTRUCTUREDNODE:
+		case UmlPackage::ACTIVITYNODE_ATTRIBUTE_INSTRUCTUREDNODE:
 			return getInStructuredNode().lock() != nullptr; //1215
-		case UmlPackage::ACTIVITYNODE_EREFERENCE_INCOMING:
+		case UmlPackage::ACTIVITYNODE_ATTRIBUTE_INCOMING:
 			return getIncoming() != nullptr; //1216
-		case UmlPackage::ACTIVITYNODE_EREFERENCE_OUTGOING:
+		case UmlPackage::ACTIVITYNODE_ATTRIBUTE_OUTGOING:
 			return getOutgoing() != nullptr; //1217
-		case UmlPackage::ACTIVITYNODE_EREFERENCE_REDEFINEDNODE:
+		case UmlPackage::ACTIVITYNODE_ATTRIBUTE_REDEFINEDNODE:
 			return getRedefinedNode() != nullptr; //1218
 	}
 	bool result = false;
@@ -513,14 +513,14 @@ bool ActivityNodeImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY:
+		case UmlPackage::ACTIVITYNODE_ATTRIBUTE_ACTIVITY:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Activity> _activity = newValue->get<std::shared_ptr<uml::Activity>>();
 			setActivity(_activity); //1212
 			return true;
 		}
-		case UmlPackage::ACTIVITYNODE_EREFERENCE_INSTRUCTUREDNODE:
+		case UmlPackage::ACTIVITYNODE_ATTRIBUTE_INSTRUCTUREDNODE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::StructuredActivityNode> _inStructuredNode = newValue->get<std::shared_ptr<uml::StructuredActivityNode>>();
@@ -625,7 +625,7 @@ void ActivityNodeImpl::resolveReferences(const int featureID, std::list<std::sha
 {
 	switch(featureID)
 	{
-		case UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY:
+		case UmlPackage::ACTIVITYNODE_ATTRIBUTE_ACTIVITY:
 		{
 			if (references.size() == 1)
 			{
@@ -637,7 +637,7 @@ void ActivityNodeImpl::resolveReferences(const int featureID, std::list<std::sha
 			return;
 		}
 
-		case UmlPackage::ACTIVITYNODE_EREFERENCE_ININTERRUPTIBLEREGION:
+		case UmlPackage::ACTIVITYNODE_ATTRIBUTE_ININTERRUPTIBLEREGION:
 		{
 			std::shared_ptr<Bag<uml::InterruptibleActivityRegion>> _inInterruptibleRegion = getInInterruptibleRegion();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -651,7 +651,7 @@ void ActivityNodeImpl::resolveReferences(const int featureID, std::list<std::sha
 			return;
 		}
 
-		case UmlPackage::ACTIVITYNODE_EREFERENCE_INPARTITION:
+		case UmlPackage::ACTIVITYNODE_ATTRIBUTE_INPARTITION:
 		{
 			std::shared_ptr<Bag<uml::ActivityPartition>> _inPartition = getInPartition();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -665,7 +665,7 @@ void ActivityNodeImpl::resolveReferences(const int featureID, std::list<std::sha
 			return;
 		}
 
-		case UmlPackage::ACTIVITYNODE_EREFERENCE_INSTRUCTUREDNODE:
+		case UmlPackage::ACTIVITYNODE_ATTRIBUTE_INSTRUCTUREDNODE:
 		{
 			if (references.size() == 1)
 			{
@@ -677,7 +677,7 @@ void ActivityNodeImpl::resolveReferences(const int featureID, std::list<std::sha
 			return;
 		}
 
-		case UmlPackage::ACTIVITYNODE_EREFERENCE_INCOMING:
+		case UmlPackage::ACTIVITYNODE_ATTRIBUTE_INCOMING:
 		{
 			std::shared_ptr<Bag<uml::ActivityEdge>> _incoming = getIncoming();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -691,7 +691,7 @@ void ActivityNodeImpl::resolveReferences(const int featureID, std::list<std::sha
 			return;
 		}
 
-		case UmlPackage::ACTIVITYNODE_EREFERENCE_OUTGOING:
+		case UmlPackage::ACTIVITYNODE_ATTRIBUTE_OUTGOING:
 		{
 			std::shared_ptr<Bag<uml::ActivityEdge>> _outgoing = getOutgoing();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -705,7 +705,7 @@ void ActivityNodeImpl::resolveReferences(const int featureID, std::list<std::sha
 			return;
 		}
 
-		case UmlPackage::ACTIVITYNODE_EREFERENCE_REDEFINEDNODE:
+		case UmlPackage::ACTIVITYNODE_ATTRIBUTE_REDEFINEDNODE:
 		{
 			std::shared_ptr<Bag<uml::ActivityNode>> _redefinedNode = getRedefinedNode();
 			for(std::shared_ptr<ecore::EObject> ref : references)

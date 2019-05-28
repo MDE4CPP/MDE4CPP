@@ -198,7 +198,7 @@ std::shared_ptr<ecore::EObject>  VertexImpl::copy() const
 
 std::shared_ptr<ecore::EClass> VertexImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getVertex_EClass();
+	return UmlPackageImpl::eInstance()->getVertex_Class();
 }
 
 //*********************************
@@ -317,11 +317,11 @@ Any VertexImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::VERTEX_EREFERENCE_CONTAINER:
+		case UmlPackage::VERTEX_ATTRIBUTE_CONTAINER:
 			return eAny(getContainer()); //2549
-		case UmlPackage::VERTEX_EREFERENCE_INCOMING:
+		case UmlPackage::VERTEX_ATTRIBUTE_INCOMING:
 			return eAny(getIncoming()); //25410
-		case UmlPackage::VERTEX_EREFERENCE_OUTGOING:
+		case UmlPackage::VERTEX_ATTRIBUTE_OUTGOING:
 			return eAny(getOutgoing()); //25411
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
@@ -330,11 +330,11 @@ bool VertexImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::VERTEX_EREFERENCE_CONTAINER:
+		case UmlPackage::VERTEX_ATTRIBUTE_CONTAINER:
 			return getContainer().lock() != nullptr; //2549
-		case UmlPackage::VERTEX_EREFERENCE_INCOMING:
+		case UmlPackage::VERTEX_ATTRIBUTE_INCOMING:
 			return getIncoming() != nullptr; //25410
-		case UmlPackage::VERTEX_EREFERENCE_OUTGOING:
+		case UmlPackage::VERTEX_ATTRIBUTE_OUTGOING:
 			return getOutgoing() != nullptr; //25411
 	}
 	return NamedElementImpl::internalEIsSet(featureID);
@@ -343,7 +343,7 @@ bool VertexImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::VERTEX_EREFERENCE_CONTAINER:
+		case UmlPackage::VERTEX_ATTRIBUTE_CONTAINER:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Region> _container = newValue->get<std::shared_ptr<uml::Region>>();
@@ -392,7 +392,7 @@ void VertexImpl::resolveReferences(const int featureID, std::list<std::shared_pt
 {
 	switch(featureID)
 	{
-		case UmlPackage::VERTEX_EREFERENCE_CONTAINER:
+		case UmlPackage::VERTEX_ATTRIBUTE_CONTAINER:
 		{
 			if (references.size() == 1)
 			{

@@ -264,7 +264,7 @@ std::shared_ptr<ecore::EObject>  DataStoreNodeImpl::copy() const
 
 std::shared_ptr<ecore::EClass> DataStoreNodeImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getDataStoreNode_EClass();
+	return UmlPackageImpl::eInstance()->getDataStoreNode_Class();
 }
 
 //*********************************

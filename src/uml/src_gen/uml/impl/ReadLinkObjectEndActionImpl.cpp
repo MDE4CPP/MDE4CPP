@@ -307,7 +307,7 @@ std::shared_ptr<ecore::EObject>  ReadLinkObjectEndActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ReadLinkObjectEndActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getReadLinkObjectEndAction_EClass();
+	return UmlPackageImpl::eInstance()->getReadLinkObjectEndAction_Class();
 }
 
 //*********************************
@@ -461,11 +461,11 @@ Any ReadLinkObjectEndActionImpl::eGet(int featureID, bool resolve, bool coreType
 {
 	switch(featureID)
 	{
-		case UmlPackage::READLINKOBJECTENDACTION_EREFERENCE_END:
+		case UmlPackage::READLINKOBJECTENDACTION_ATTRIBUTE_END:
 			return eAny(getEnd()); //19627
-		case UmlPackage::READLINKOBJECTENDACTION_EREFERENCE_OBJECT:
+		case UmlPackage::READLINKOBJECTENDACTION_ATTRIBUTE_OBJECT:
 			return eAny(getObject()); //19628
-		case UmlPackage::READLINKOBJECTENDACTION_EREFERENCE_RESULT:
+		case UmlPackage::READLINKOBJECTENDACTION_ATTRIBUTE_RESULT:
 			return eAny(getResult()); //19629
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
@@ -474,11 +474,11 @@ bool ReadLinkObjectEndActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::READLINKOBJECTENDACTION_EREFERENCE_END:
+		case UmlPackage::READLINKOBJECTENDACTION_ATTRIBUTE_END:
 			return getEnd() != nullptr; //19627
-		case UmlPackage::READLINKOBJECTENDACTION_EREFERENCE_OBJECT:
+		case UmlPackage::READLINKOBJECTENDACTION_ATTRIBUTE_OBJECT:
 			return getObject() != nullptr; //19628
-		case UmlPackage::READLINKOBJECTENDACTION_EREFERENCE_RESULT:
+		case UmlPackage::READLINKOBJECTENDACTION_ATTRIBUTE_RESULT:
 			return getResult() != nullptr; //19629
 	}
 	return ActionImpl::internalEIsSet(featureID);
@@ -487,21 +487,21 @@ bool ReadLinkObjectEndActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::READLINKOBJECTENDACTION_EREFERENCE_END:
+		case UmlPackage::READLINKOBJECTENDACTION_ATTRIBUTE_END:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Property> _end = newValue->get<std::shared_ptr<uml::Property>>();
 			setEnd(_end); //19627
 			return true;
 		}
-		case UmlPackage::READLINKOBJECTENDACTION_EREFERENCE_OBJECT:
+		case UmlPackage::READLINKOBJECTENDACTION_ATTRIBUTE_OBJECT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::InputPin> _object = newValue->get<std::shared_ptr<uml::InputPin>>();
 			setObject(_object); //19628
 			return true;
 		}
-		case UmlPackage::READLINKOBJECTENDACTION_EREFERENCE_RESULT:
+		case UmlPackage::READLINKOBJECTENDACTION_ATTRIBUTE_RESULT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::OutputPin> _result = newValue->get<std::shared_ptr<uml::OutputPin>>();
@@ -611,7 +611,7 @@ void ReadLinkObjectEndActionImpl::resolveReferences(const int featureID, std::li
 {
 	switch(featureID)
 	{
-		case UmlPackage::READLINKOBJECTENDACTION_EREFERENCE_END:
+		case UmlPackage::READLINKOBJECTENDACTION_ATTRIBUTE_END:
 		{
 			if (references.size() == 1)
 			{
@@ -665,14 +665,14 @@ void ReadLinkObjectEndActionImpl::saveContent(std::shared_ptr<persistence::inter
 		std::shared_ptr<uml::InputPin > object = this->getObject();
 		if (object != nullptr)
 		{
-			saveHandler->addReference(object, "object", object->eClass() != package->getInputPin_EClass());
+			saveHandler->addReference(object, "object", object->eClass() != package->getInputPin_Class());
 		}
 
 		// Save 'result'
 		std::shared_ptr<uml::OutputPin > result = this->getResult();
 		if (result != nullptr)
 		{
-			saveHandler->addReference(result, "result", result->eClass() != package->getOutputPin_EClass());
+			saveHandler->addReference(result, "result", result->eClass() != package->getOutputPin_Class());
 		}
 	
 

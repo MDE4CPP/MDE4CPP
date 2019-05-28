@@ -170,11 +170,11 @@ CollaborationImpl::~CollaborationImpl()
 			{
 				switch(reference_id)
 				{	
-				case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
+				case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
 					m_owningPackage = par_Package;
 					m_namespace = par_Package;
 					 return;
-				case UmlPackage::TYPE_EREFERENCE_PACKAGE:
+				case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
 					m_package = par_Package;
 					m_namespace = par_Package;
 					 return;
@@ -437,7 +437,7 @@ std::shared_ptr<ecore::EObject>  CollaborationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> CollaborationImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getCollaboration_EClass();
+	return UmlPackageImpl::eInstance()->getCollaboration_Class();
 }
 
 //*********************************
@@ -545,7 +545,7 @@ Any CollaborationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::COLLABORATION_EREFERENCE_COLLABORATIONROLE:
+		case UmlPackage::COLLABORATION_ATTRIBUTE_COLLABORATIONROLE:
 			return eAny(getCollaborationRole()); //4245
 	}
 	Any result;
@@ -561,7 +561,7 @@ bool CollaborationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::COLLABORATION_EREFERENCE_COLLABORATIONROLE:
+		case UmlPackage::COLLABORATION_ATTRIBUTE_COLLABORATIONROLE:
 			return getCollaborationRole() != nullptr; //4245
 	}
 	bool result = false;
@@ -647,7 +647,7 @@ void CollaborationImpl::resolveReferences(const int featureID, std::list<std::sh
 {
 	switch(featureID)
 	{
-		case UmlPackage::COLLABORATION_EREFERENCE_COLLABORATIONROLE:
+		case UmlPackage::COLLABORATION_ATTRIBUTE_COLLABORATIONROLE:
 		{
 			std::shared_ptr<Bag<uml::ConnectableElement>> _collaborationRole = getCollaborationRole();
 			for(std::shared_ptr<ecore::EObject> ref : references)

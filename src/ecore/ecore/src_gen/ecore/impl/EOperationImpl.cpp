@@ -156,6 +156,7 @@ EOperationImpl::EOperationImpl(const EOperationImpl & obj):EOperationImpl()
 	#endif
 	m_lowerBound = obj.getLowerBound();
 	m_many = obj.isMany();
+	m_metaElementID = obj.getMetaElementID();
 	m_name = obj.getName();
 	m_operationID = obj.getOperationID();
 	m_ordered = obj.isOrdered();
@@ -241,7 +242,7 @@ std::shared_ptr<ecore::EObject>  EOperationImpl::copy() const
 
 std::shared_ptr<EClass> EOperationImpl::eStaticClass() const
 {
-	return EcorePackageImpl::eInstance()->getEOperation_EClass();
+	return EcorePackageImpl::eInstance()->getEOperation_Class();
 }
 
 //*********************************
@@ -379,18 +380,18 @@ Any EOperationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case EcorePackage::EOPERATION_EREFERENCE_ECONTAININGCLASS:
-			return eAny(getEContainingClass()); //4013
-		case EcorePackage::EOPERATION_EREFERENCE_EEXCEPTIONS:
-			return eAny(getEExceptions()); //4016
-		case EcorePackage::EOPERATION_EREFERENCE_EGENERICEXCEPTIONS:
-			return eAny(getEGenericExceptions()); //4017
-		case EcorePackage::EOPERATION_EREFERENCE_EPARAMETERS:
-			return eAny(getEParameters()); //4015
-		case EcorePackage::EOPERATION_EREFERENCE_ETYPEPARAMETERS:
-			return eAny(getETypeParameters()); //4014
-		case EcorePackage::EOPERATION_EATTRIBUTE_OPERATIONID:
-			return eAny(getOperationID()); //4012
+		case EcorePackage::EOPERATION_ATTRIBUTE_ECONTAININGCLASS:
+			return eAny(getEContainingClass()); //4014
+		case EcorePackage::EOPERATION_ATTRIBUTE_EEXCEPTIONS:
+			return eAny(getEExceptions()); //4017
+		case EcorePackage::EOPERATION_ATTRIBUTE_EGENERICEXCEPTIONS:
+			return eAny(getEGenericExceptions()); //4018
+		case EcorePackage::EOPERATION_ATTRIBUTE_EPARAMETERS:
+			return eAny(getEParameters()); //4016
+		case EcorePackage::EOPERATION_ATTRIBUTE_ETYPEPARAMETERS:
+			return eAny(getETypeParameters()); //4015
+		case EcorePackage::EOPERATION_ATTRIBUTE_OPERATIONID:
+			return eAny(getOperationID()); //4013
 	}
 	return ETypedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -398,18 +399,18 @@ bool EOperationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case EcorePackage::EOPERATION_EREFERENCE_ECONTAININGCLASS:
-			return getEContainingClass().lock() != nullptr; //4013
-		case EcorePackage::EOPERATION_EREFERENCE_EEXCEPTIONS:
-			return getEExceptions() != nullptr; //4016
-		case EcorePackage::EOPERATION_EREFERENCE_EGENERICEXCEPTIONS:
-			return getEGenericExceptions() != nullptr; //4017
-		case EcorePackage::EOPERATION_EREFERENCE_EPARAMETERS:
-			return getEParameters() != nullptr; //4015
-		case EcorePackage::EOPERATION_EREFERENCE_ETYPEPARAMETERS:
-			return getETypeParameters() != nullptr; //4014
-		case EcorePackage::EOPERATION_EATTRIBUTE_OPERATIONID:
-			return getOperationID() != -1; //4012
+		case EcorePackage::EOPERATION_ATTRIBUTE_ECONTAININGCLASS:
+			return getEContainingClass().lock() != nullptr; //4014
+		case EcorePackage::EOPERATION_ATTRIBUTE_EEXCEPTIONS:
+			return getEExceptions() != nullptr; //4017
+		case EcorePackage::EOPERATION_ATTRIBUTE_EGENERICEXCEPTIONS:
+			return getEGenericExceptions() != nullptr; //4018
+		case EcorePackage::EOPERATION_ATTRIBUTE_EPARAMETERS:
+			return getEParameters() != nullptr; //4016
+		case EcorePackage::EOPERATION_ATTRIBUTE_ETYPEPARAMETERS:
+			return getETypeParameters() != nullptr; //4015
+		case EcorePackage::EOPERATION_ATTRIBUTE_OPERATIONID:
+			return getOperationID() != -1; //4013
 	}
 	return ETypedElementImpl::internalEIsSet(featureID);
 }
@@ -505,7 +506,7 @@ void EOperationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence:
 			{
 				typeName = "EParameter";
 			}
-			std::shared_ptr<ecore::EObject> eParameters = modelFactory->create(typeName, loadHandler->getCurrentObject(), EcorePackage::EPARAMETER_EREFERENCE_EOPERATION);
+			std::shared_ptr<ecore::EObject> eParameters = modelFactory->create(typeName, loadHandler->getCurrentObject(), EcorePackage::EPARAMETER_ATTRIBUTE_EOPERATION);
 			if (eParameters != nullptr)
 			{
 				loadHandler->handleChild(eParameters);
@@ -546,7 +547,7 @@ void EOperationImpl::resolveReferences(const int featureID, std::list<std::share
 {
 	switch(featureID)
 	{
-		case EcorePackage::EOPERATION_EREFERENCE_EEXCEPTIONS:
+		case EcorePackage::EOPERATION_ATTRIBUTE_EEXCEPTIONS:
 		{
 			std::shared_ptr<Bag<ecore::EClassifier>> _eExceptions = getEExceptions();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -591,12 +592,12 @@ void EOperationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 		// Save 'eParameters'
 		for (std::shared_ptr<ecore::EParameter> eParameters : *this->getEParameters()) 
 		{
-			saveHandler->addReference(eParameters, "eParameters", eParameters->eClass() != package->getEParameter_EClass());
+			saveHandler->addReference(eParameters, "eParameters", eParameters->eClass() != package->getEParameter_Class());
 		}
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getEOperation_EAttribute_operationID()) )
+		if ( this->eIsSet(package->getEOperation_Attribute_operationID()) )
 		{
 			saveHandler->addAttribute("operationID", this->getOperationID());
 		}
@@ -617,14 +618,14 @@ void EOperationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 		std::shared_ptr<Bag<ecore::EGenericType>> list_eGenericExceptions = this->getEGenericExceptions();
 		for (std::shared_ptr<ecore::EGenericType> eGenericExceptions : *list_eGenericExceptions) 
 		{
-			saveHandler->addReference(eGenericExceptions, "eGenericExceptions", eGenericExceptions->eClass() != package->getEGenericType_EClass());
+			saveHandler->addReference(eGenericExceptions, "eGenericExceptions", eGenericExceptions->eClass() != package->getEGenericType_Class());
 		}
 
 		// Save 'eTypeParameters'
 		std::shared_ptr<Bag<ecore::ETypeParameter>> list_eTypeParameters = this->getETypeParameters();
 		for (std::shared_ptr<ecore::ETypeParameter> eTypeParameters : *list_eTypeParameters) 
 		{
-			saveHandler->addReference(eTypeParameters, "eTypeParameters", eTypeParameters->eClass() != package->getETypeParameter_EClass());
+			saveHandler->addReference(eTypeParameters, "eTypeParameters", eTypeParameters->eClass() != package->getETypeParameter_Class());
 		}
 	}
 	catch (std::exception& e)

@@ -310,7 +310,7 @@ std::shared_ptr<ecore::EObject>  WriteStructuralFeatureActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> WriteStructuralFeatureActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getWriteStructuralFeatureAction_EClass();
+	return UmlPackageImpl::eInstance()->getWriteStructuralFeatureAction_Class();
 }
 
 //*********************************
@@ -436,9 +436,9 @@ Any WriteStructuralFeatureActionImpl::eGet(int featureID, bool resolve, bool cor
 {
 	switch(featureID)
 	{
-		case UmlPackage::WRITESTRUCTURALFEATUREACTION_EREFERENCE_RESULT:
+		case UmlPackage::WRITESTRUCTURALFEATUREACTION_ATTRIBUTE_RESULT:
 			return eAny(getResult()); //25729
-		case UmlPackage::WRITESTRUCTURALFEATUREACTION_EREFERENCE_VALUE:
+		case UmlPackage::WRITESTRUCTURALFEATUREACTION_ATTRIBUTE_VALUE:
 			return eAny(getValue()); //25730
 	}
 	return StructuralFeatureActionImpl::eGet(featureID, resolve, coreType);
@@ -447,9 +447,9 @@ bool WriteStructuralFeatureActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::WRITESTRUCTURALFEATUREACTION_EREFERENCE_RESULT:
+		case UmlPackage::WRITESTRUCTURALFEATUREACTION_ATTRIBUTE_RESULT:
 			return getResult() != nullptr; //25729
-		case UmlPackage::WRITESTRUCTURALFEATUREACTION_EREFERENCE_VALUE:
+		case UmlPackage::WRITESTRUCTURALFEATUREACTION_ATTRIBUTE_VALUE:
 			return getValue() != nullptr; //25730
 	}
 	return StructuralFeatureActionImpl::internalEIsSet(featureID);
@@ -458,14 +458,14 @@ bool WriteStructuralFeatureActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::WRITESTRUCTURALFEATUREACTION_EREFERENCE_RESULT:
+		case UmlPackage::WRITESTRUCTURALFEATUREACTION_ATTRIBUTE_RESULT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::OutputPin> _result = newValue->get<std::shared_ptr<uml::OutputPin>>();
 			setResult(_result); //25729
 			return true;
 		}
-		case UmlPackage::WRITESTRUCTURALFEATUREACTION_EREFERENCE_VALUE:
+		case UmlPackage::WRITESTRUCTURALFEATUREACTION_ATTRIBUTE_VALUE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::InputPin> _value = newValue->get<std::shared_ptr<uml::InputPin>>();
@@ -599,14 +599,14 @@ void WriteStructuralFeatureActionImpl::saveContent(std::shared_ptr<persistence::
 		std::shared_ptr<uml::OutputPin > result = this->getResult();
 		if (result != nullptr)
 		{
-			saveHandler->addReference(result, "result", result->eClass() != package->getOutputPin_EClass());
+			saveHandler->addReference(result, "result", result->eClass() != package->getOutputPin_Class());
 		}
 
 		// Save 'value'
 		std::shared_ptr<uml::InputPin > value = this->getValue();
 		if (value != nullptr)
 		{
-			saveHandler->addReference(value, "value", value->eClass() != package->getInputPin_EClass());
+			saveHandler->addReference(value, "value", value->eClass() != package->getInputPin_Class());
 		}
 	
 

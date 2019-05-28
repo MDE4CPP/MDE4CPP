@@ -109,7 +109,7 @@ std::shared_ptr<ecore::EObject>  BooleanValueImpl::copy() const
 
 std::shared_ptr<ecore::EClass> BooleanValueImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getBooleanValue_EClass();
+	return FUMLPackageImpl::eInstance()->getBooleanValue_Class();
 }
 
 //*********************************
@@ -134,7 +134,7 @@ bool BooleanValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue)
 	//generated from body annotation
 		bool isEqual = false;
 
-	if(otherValue != nullptr && otherValue->eClass()->getClassifierID() == fUML::FUMLPackage::BOOLEANVALUE_ECLASS)
+	if(otherValue != nullptr && otherValue->eClass()->getClassifierID() == fUML::FUMLPackage::BOOLEANVALUE_CLASS)
     {
 		std::shared_ptr<BooleanValue> otherBooleanValue = std::dynamic_pointer_cast<BooleanValue>(otherValue);
     	isEqual = otherBooleanValue->isValue() == this->isValue();
@@ -200,7 +200,7 @@ Any BooleanValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::BOOLEANVALUE_EATTRIBUTE_VALUE:
+		case FUMLPackage::BOOLEANVALUE_ATTRIBUTE_VALUE:
 			return eAny(isValue()); //111
 	}
 	return PrimitiveValueImpl::eGet(featureID, resolve, coreType);
@@ -209,7 +209,7 @@ bool BooleanValueImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::BOOLEANVALUE_EATTRIBUTE_VALUE:
+		case FUMLPackage::BOOLEANVALUE_ATTRIBUTE_VALUE:
 			return isValue() != false; //111
 	}
 	return PrimitiveValueImpl::internalEIsSet(featureID);
@@ -218,7 +218,7 @@ bool BooleanValueImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case FUMLPackage::BOOLEANVALUE_EATTRIBUTE_VALUE:
+		case FUMLPackage::BOOLEANVALUE_ATTRIBUTE_VALUE:
 		{
 			// BOOST CAST
 			bool _value = newValue->get<bool>();
@@ -314,7 +314,7 @@ void BooleanValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getBooleanValue_EAttribute_value()) )
+		if ( this->eIsSet(package->getBooleanValue_Attribute_value()) )
 		{
 			saveHandler->addAttribute("value", this->isValue());
 		}

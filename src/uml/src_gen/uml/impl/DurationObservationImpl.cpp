@@ -200,7 +200,7 @@ std::shared_ptr<ecore::EObject>  DurationObservationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> DurationObservationImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getDurationObservation_EClass();
+	return UmlPackageImpl::eInstance()->getDurationObservation_Class();
 }
 
 //*********************************
@@ -289,9 +289,9 @@ Any DurationObservationImpl::eGet(int featureID, bool resolve, bool coreType) co
 {
 	switch(featureID)
 	{
-		case UmlPackage::DURATIONOBSERVATION_EREFERENCE_EVENT:
+		case UmlPackage::DURATIONOBSERVATION_ATTRIBUTE_EVENT:
 			return eAny(getEvent()); //8012
-		case UmlPackage::DURATIONOBSERVATION_EATTRIBUTE_FIRSTEVENT:
+		case UmlPackage::DURATIONOBSERVATION_ATTRIBUTE_FIRSTEVENT:
 			return eAny(getFirstEvent()); //8013
 	}
 	return ObservationImpl::eGet(featureID, resolve, coreType);
@@ -300,9 +300,9 @@ bool DurationObservationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::DURATIONOBSERVATION_EREFERENCE_EVENT:
+		case UmlPackage::DURATIONOBSERVATION_ATTRIBUTE_EVENT:
 			return getEvent() != nullptr; //8012
-		case UmlPackage::DURATIONOBSERVATION_EATTRIBUTE_FIRSTEVENT:
+		case UmlPackage::DURATIONOBSERVATION_ATTRIBUTE_FIRSTEVENT:
 			return !getFirstEvent()->empty(); //8013
 	}
 	return ObservationImpl::internalEIsSet(featureID);
@@ -388,7 +388,7 @@ void DurationObservationImpl::resolveReferences(const int featureID, std::list<s
 {
 	switch(featureID)
 	{
-		case UmlPackage::DURATIONOBSERVATION_EREFERENCE_EVENT:
+		case UmlPackage::DURATIONOBSERVATION_ATTRIBUTE_EVENT:
 		{
 			std::shared_ptr<Bag<uml::NamedElement>> _event = getEvent();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -437,7 +437,7 @@ void DurationObservationImpl::saveContent(std::shared_ptr<persistence::interface
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getDurationObservation_EAttribute_firstEvent()) )
+		if ( this->eIsSet(package->getDurationObservation_Attribute_firstEvent()) )
 		{
 			for (std::shared_ptr<bool> value : *m_firstEvent)
 			{

@@ -227,7 +227,7 @@ std::shared_ptr<ecore::EObject>  InterruptibleActivityRegionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> InterruptibleActivityRegionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getInterruptibleActivityRegion_EClass();
+	return UmlPackageImpl::eInstance()->getInterruptibleActivityRegion_Class();
 }
 
 //*********************************
@@ -317,9 +317,9 @@ Any InterruptibleActivityRegionImpl::eGet(int featureID, bool resolve, bool core
 {
 	switch(featureID)
 	{
-		case UmlPackage::INTERRUPTIBLEACTIVITYREGION_EREFERENCE_INTERRUPTINGEDGE:
+		case UmlPackage::INTERRUPTIBLEACTIVITYREGION_ATTRIBUTE_INTERRUPTINGEDGE:
 			return eAny(getInterruptingEdge()); //12714
-		case UmlPackage::INTERRUPTIBLEACTIVITYREGION_EREFERENCE_NODE:
+		case UmlPackage::INTERRUPTIBLEACTIVITYREGION_ATTRIBUTE_NODE:
 			return eAny(getNode()); //12715
 	}
 	return ActivityGroupImpl::eGet(featureID, resolve, coreType);
@@ -328,9 +328,9 @@ bool InterruptibleActivityRegionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::INTERRUPTIBLEACTIVITYREGION_EREFERENCE_INTERRUPTINGEDGE:
+		case UmlPackage::INTERRUPTIBLEACTIVITYREGION_ATTRIBUTE_INTERRUPTINGEDGE:
 			return getInterruptingEdge() != nullptr; //12714
-		case UmlPackage::INTERRUPTIBLEACTIVITYREGION_EREFERENCE_NODE:
+		case UmlPackage::INTERRUPTIBLEACTIVITYREGION_ATTRIBUTE_NODE:
 			return getNode() != nullptr; //12715
 	}
 	return ActivityGroupImpl::internalEIsSet(featureID);
@@ -407,7 +407,7 @@ void InterruptibleActivityRegionImpl::resolveReferences(const int featureID, std
 {
 	switch(featureID)
 	{
-		case UmlPackage::INTERRUPTIBLEACTIVITYREGION_EREFERENCE_INTERRUPTINGEDGE:
+		case UmlPackage::INTERRUPTIBLEACTIVITYREGION_ATTRIBUTE_INTERRUPTINGEDGE:
 		{
 			std::shared_ptr<Bag<uml::ActivityEdge>> _interruptingEdge = getInterruptingEdge();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -421,7 +421,7 @@ void InterruptibleActivityRegionImpl::resolveReferences(const int featureID, std
 			return;
 		}
 
-		case UmlPackage::INTERRUPTIBLEACTIVITYREGION_EREFERENCE_NODE:
+		case UmlPackage::INTERRUPTIBLEACTIVITYREGION_ATTRIBUTE_NODE:
 		{
 			std::shared_ptr<Bag<uml::ActivityNode>> _node = getNode();
 			for(std::shared_ptr<ecore::EObject> ref : references)

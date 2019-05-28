@@ -219,7 +219,7 @@ std::shared_ptr<ecore::EObject>  ConnectionPointReferenceImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ConnectionPointReferenceImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getConnectionPointReference_EClass();
+	return UmlPackageImpl::eInstance()->getConnectionPointReference_Class();
 }
 
 //*********************************
@@ -325,11 +325,11 @@ Any ConnectionPointReferenceImpl::eGet(int featureID, bool resolve, bool coreTyp
 {
 	switch(featureID)
 	{
-		case UmlPackage::CONNECTIONPOINTREFERENCE_EREFERENCE_ENTRY:
+		case UmlPackage::CONNECTIONPOINTREFERENCE_ATTRIBUTE_ENTRY:
 			return eAny(getEntry()); //5212
-		case UmlPackage::CONNECTIONPOINTREFERENCE_EREFERENCE_EXIT:
+		case UmlPackage::CONNECTIONPOINTREFERENCE_ATTRIBUTE_EXIT:
 			return eAny(getExit()); //5213
-		case UmlPackage::CONNECTIONPOINTREFERENCE_EREFERENCE_STATE:
+		case UmlPackage::CONNECTIONPOINTREFERENCE_ATTRIBUTE_STATE:
 			return eAny(getState()); //5214
 	}
 	return VertexImpl::eGet(featureID, resolve, coreType);
@@ -338,11 +338,11 @@ bool ConnectionPointReferenceImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::CONNECTIONPOINTREFERENCE_EREFERENCE_ENTRY:
+		case UmlPackage::CONNECTIONPOINTREFERENCE_ATTRIBUTE_ENTRY:
 			return getEntry() != nullptr; //5212
-		case UmlPackage::CONNECTIONPOINTREFERENCE_EREFERENCE_EXIT:
+		case UmlPackage::CONNECTIONPOINTREFERENCE_ATTRIBUTE_EXIT:
 			return getExit() != nullptr; //5213
-		case UmlPackage::CONNECTIONPOINTREFERENCE_EREFERENCE_STATE:
+		case UmlPackage::CONNECTIONPOINTREFERENCE_ATTRIBUTE_STATE:
 			return getState().lock() != nullptr; //5214
 	}
 	return VertexImpl::internalEIsSet(featureID);
@@ -351,7 +351,7 @@ bool ConnectionPointReferenceImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::CONNECTIONPOINTREFERENCE_EREFERENCE_STATE:
+		case UmlPackage::CONNECTIONPOINTREFERENCE_ATTRIBUTE_STATE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::State> _state = newValue->get<std::shared_ptr<uml::State>>();
@@ -426,7 +426,7 @@ void ConnectionPointReferenceImpl::resolveReferences(const int featureID, std::l
 {
 	switch(featureID)
 	{
-		case UmlPackage::CONNECTIONPOINTREFERENCE_EREFERENCE_ENTRY:
+		case UmlPackage::CONNECTIONPOINTREFERENCE_ATTRIBUTE_ENTRY:
 		{
 			std::shared_ptr<Bag<uml::Pseudostate>> _entry = getEntry();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -440,7 +440,7 @@ void ConnectionPointReferenceImpl::resolveReferences(const int featureID, std::l
 			return;
 		}
 
-		case UmlPackage::CONNECTIONPOINTREFERENCE_EREFERENCE_EXIT:
+		case UmlPackage::CONNECTIONPOINTREFERENCE_ATTRIBUTE_EXIT:
 		{
 			std::shared_ptr<Bag<uml::Pseudostate>> _exit = getExit();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -454,7 +454,7 @@ void ConnectionPointReferenceImpl::resolveReferences(const int featureID, std::l
 			return;
 		}
 
-		case UmlPackage::CONNECTIONPOINTREFERENCE_EREFERENCE_STATE:
+		case UmlPackage::CONNECTIONPOINTREFERENCE_ATTRIBUTE_STATE:
 		{
 			if (references.size() == 1)
 			{

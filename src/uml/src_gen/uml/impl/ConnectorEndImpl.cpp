@@ -160,7 +160,7 @@ std::shared_ptr<ecore::EObject>  ConnectorEndImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ConnectorEndImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getConnectorEnd_EClass();
+	return UmlPackageImpl::eInstance()->getConnectorEnd_Class();
 }
 
 //*********************************
@@ -260,11 +260,11 @@ Any ConnectorEndImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::CONNECTOREND_EREFERENCE_DEFININGEND:
+		case UmlPackage::CONNECTOREND_ATTRIBUTE_DEFININGEND:
 			return eAny(getDefiningEnd()); //549
-		case UmlPackage::CONNECTOREND_EREFERENCE_PARTWITHPORT:
+		case UmlPackage::CONNECTOREND_ATTRIBUTE_PARTWITHPORT:
 			return eAny(getPartWithPort()); //5410
-		case UmlPackage::CONNECTOREND_EREFERENCE_ROLE:
+		case UmlPackage::CONNECTOREND_ATTRIBUTE_ROLE:
 			return eAny(getRole()); //5411
 	}
 	return MultiplicityElementImpl::eGet(featureID, resolve, coreType);
@@ -273,11 +273,11 @@ bool ConnectorEndImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::CONNECTOREND_EREFERENCE_DEFININGEND:
+		case UmlPackage::CONNECTOREND_ATTRIBUTE_DEFININGEND:
 			return getDefiningEnd() != nullptr; //549
-		case UmlPackage::CONNECTOREND_EREFERENCE_PARTWITHPORT:
+		case UmlPackage::CONNECTOREND_ATTRIBUTE_PARTWITHPORT:
 			return getPartWithPort() != nullptr; //5410
-		case UmlPackage::CONNECTOREND_EREFERENCE_ROLE:
+		case UmlPackage::CONNECTOREND_ATTRIBUTE_ROLE:
 			return getRole() != nullptr; //5411
 	}
 	return MultiplicityElementImpl::internalEIsSet(featureID);
@@ -286,14 +286,14 @@ bool ConnectorEndImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::CONNECTOREND_EREFERENCE_PARTWITHPORT:
+		case UmlPackage::CONNECTOREND_ATTRIBUTE_PARTWITHPORT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Property> _partWithPort = newValue->get<std::shared_ptr<uml::Property>>();
 			setPartWithPort(_partWithPort); //5410
 			return true;
 		}
-		case UmlPackage::CONNECTOREND_EREFERENCE_ROLE:
+		case UmlPackage::CONNECTOREND_ATTRIBUTE_ROLE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ConnectableElement> _role = newValue->get<std::shared_ptr<uml::ConnectableElement>>();
@@ -368,7 +368,7 @@ void ConnectorEndImpl::resolveReferences(const int featureID, std::list<std::sha
 {
 	switch(featureID)
 	{
-		case UmlPackage::CONNECTOREND_EREFERENCE_PARTWITHPORT:
+		case UmlPackage::CONNECTOREND_ATTRIBUTE_PARTWITHPORT:
 		{
 			if (references.size() == 1)
 			{
@@ -380,7 +380,7 @@ void ConnectorEndImpl::resolveReferences(const int featureID, std::list<std::sha
 			return;
 		}
 
-		case UmlPackage::CONNECTOREND_EREFERENCE_ROLE:
+		case UmlPackage::CONNECTOREND_ATTRIBUTE_ROLE:
 		{
 			if (references.size() == 1)
 			{

@@ -321,7 +321,7 @@ std::shared_ptr<ecore::EObject>  OutputPinImpl::copy() const
 
 std::shared_ptr<ecore::EClass> OutputPinImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getOutputPin_EClass();
+	return UmlPackageImpl::eInstance()->getOutputPin_Class();
 }
 
 //*********************************
@@ -428,9 +428,9 @@ Any OutputPinImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::OUTPUTPIN_EREFERENCE_ACTION:
+		case UmlPackage::OUTPUTPIN_ATTRIBUTE_ACTION:
 			return eAny(getAction()); //16934
-		case UmlPackage::OUTPUTPIN_EREFERENCE_CALLACTION:
+		case UmlPackage::OUTPUTPIN_ATTRIBUTE_CALLACTION:
 			return eAny(getCallAction()); //16933
 	}
 	return PinImpl::eGet(featureID, resolve, coreType);
@@ -439,9 +439,9 @@ bool OutputPinImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::OUTPUTPIN_EREFERENCE_ACTION:
+		case UmlPackage::OUTPUTPIN_ATTRIBUTE_ACTION:
 			return getAction().lock() != nullptr; //16934
-		case UmlPackage::OUTPUTPIN_EREFERENCE_CALLACTION:
+		case UmlPackage::OUTPUTPIN_ATTRIBUTE_CALLACTION:
 			return getCallAction().lock() != nullptr; //16933
 	}
 	return PinImpl::internalEIsSet(featureID);
@@ -450,7 +450,7 @@ bool OutputPinImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::OUTPUTPIN_EREFERENCE_CALLACTION:
+		case UmlPackage::OUTPUTPIN_ATTRIBUTE_CALLACTION:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::CallAction> _callAction = newValue->get<std::shared_ptr<uml::CallAction>>();
@@ -499,7 +499,7 @@ void OutputPinImpl::resolveReferences(const int featureID, std::list<std::shared
 {
 	switch(featureID)
 	{
-		case UmlPackage::OUTPUTPIN_EREFERENCE_CALLACTION:
+		case UmlPackage::OUTPUTPIN_ATTRIBUTE_CALLACTION:
 		{
 			if (references.size() == 1)
 			{

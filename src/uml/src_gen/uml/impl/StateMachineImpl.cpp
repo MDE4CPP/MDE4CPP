@@ -237,11 +237,11 @@ StateMachineImpl::~StateMachineImpl()
 			{
 				switch(reference_id)
 				{	
-				case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
+				case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
 					m_owningPackage = par_Package;
 					m_namespace = par_Package;
 					 return;
-				case UmlPackage::TYPE_EREFERENCE_PACKAGE:
+				case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
 					m_package = par_Package;
 					m_namespace = par_Package;
 					 return;
@@ -624,7 +624,7 @@ std::shared_ptr<ecore::EObject>  StateMachineImpl::copy() const
 
 std::shared_ptr<ecore::EClass> StateMachineImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getStateMachine_EClass();
+	return UmlPackageImpl::eInstance()->getStateMachine_Class();
 }
 
 //*********************************
@@ -802,13 +802,13 @@ Any StateMachineImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::STATEMACHINE_EREFERENCE_CONNECTIONPOINT:
+		case UmlPackage::STATEMACHINE_ATTRIBUTE_CONNECTIONPOINT:
 			return eAny(getConnectionPoint()); //22261
-		case UmlPackage::STATEMACHINE_EREFERENCE_EXTENDEDSTATEMACHINE:
+		case UmlPackage::STATEMACHINE_ATTRIBUTE_EXTENDEDSTATEMACHINE:
 			return eAny(getExtendedStateMachine()); //22264
-		case UmlPackage::STATEMACHINE_EREFERENCE_REGION:
+		case UmlPackage::STATEMACHINE_ATTRIBUTE_REGION:
 			return eAny(getRegion()); //22263
-		case UmlPackage::STATEMACHINE_EREFERENCE_SUBMACHINESTATE:
+		case UmlPackage::STATEMACHINE_ATTRIBUTE_SUBMACHINESTATE:
 			return eAny(getSubmachineState()); //22262
 	}
 	return BehaviorImpl::eGet(featureID, resolve, coreType);
@@ -817,13 +817,13 @@ bool StateMachineImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::STATEMACHINE_EREFERENCE_CONNECTIONPOINT:
+		case UmlPackage::STATEMACHINE_ATTRIBUTE_CONNECTIONPOINT:
 			return getConnectionPoint() != nullptr; //22261
-		case UmlPackage::STATEMACHINE_EREFERENCE_EXTENDEDSTATEMACHINE:
+		case UmlPackage::STATEMACHINE_ATTRIBUTE_EXTENDEDSTATEMACHINE:
 			return getExtendedStateMachine() != nullptr; //22264
-		case UmlPackage::STATEMACHINE_EREFERENCE_REGION:
+		case UmlPackage::STATEMACHINE_ATTRIBUTE_REGION:
 			return getRegion() != nullptr; //22263
-		case UmlPackage::STATEMACHINE_EREFERENCE_SUBMACHINESTATE:
+		case UmlPackage::STATEMACHINE_ATTRIBUTE_SUBMACHINESTATE:
 			return getSubmachineState() != nullptr; //22262
 	}
 	return BehaviorImpl::internalEIsSet(featureID);
@@ -901,7 +901,7 @@ void StateMachineImpl::loadNode(std::string nodeName, std::shared_ptr<persistenc
 			{
 				typeName = "Pseudostate";
 			}
-			std::shared_ptr<ecore::EObject> connectionPoint = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::PSEUDOSTATE_EREFERENCE_STATEMACHINE);
+			std::shared_ptr<ecore::EObject> connectionPoint = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::PSEUDOSTATE_ATTRIBUTE_STATEMACHINE);
 			if (connectionPoint != nullptr)
 			{
 				loadHandler->handleChild(connectionPoint);
@@ -916,7 +916,7 @@ void StateMachineImpl::loadNode(std::string nodeName, std::shared_ptr<persistenc
 			{
 				typeName = "Region";
 			}
-			std::shared_ptr<ecore::EObject> region = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::REGION_EREFERENCE_STATEMACHINE);
+			std::shared_ptr<ecore::EObject> region = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::REGION_ATTRIBUTE_STATEMACHINE);
 			if (region != nullptr)
 			{
 				loadHandler->handleChild(region);
@@ -940,7 +940,7 @@ void StateMachineImpl::resolveReferences(const int featureID, std::list<std::sha
 {
 	switch(featureID)
 	{
-		case UmlPackage::STATEMACHINE_EREFERENCE_EXTENDEDSTATEMACHINE:
+		case UmlPackage::STATEMACHINE_ATTRIBUTE_EXTENDEDSTATEMACHINE:
 		{
 			std::shared_ptr<Bag<uml::StateMachine>> _extendedStateMachine = getExtendedStateMachine();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -954,7 +954,7 @@ void StateMachineImpl::resolveReferences(const int featureID, std::list<std::sha
 			return;
 		}
 
-		case UmlPackage::STATEMACHINE_EREFERENCE_SUBMACHINESTATE:
+		case UmlPackage::STATEMACHINE_ATTRIBUTE_SUBMACHINESTATE:
 		{
 			std::shared_ptr<Bag<uml::State>> _submachineState = getSubmachineState();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -1022,13 +1022,13 @@ void StateMachineImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 		// Save 'connectionPoint'
 		for (std::shared_ptr<uml::Pseudostate> connectionPoint : *this->getConnectionPoint()) 
 		{
-			saveHandler->addReference(connectionPoint, "connectionPoint", connectionPoint->eClass() != package->getPseudostate_EClass());
+			saveHandler->addReference(connectionPoint, "connectionPoint", connectionPoint->eClass() != package->getPseudostate_Class());
 		}
 
 		// Save 'region'
 		for (std::shared_ptr<uml::Region> region : *this->getRegion()) 
 		{
-			saveHandler->addReference(region, "region", region->eClass() != package->getRegion_EClass());
+			saveHandler->addReference(region, "region", region->eClass() != package->getRegion_Class());
 		}
 	
 

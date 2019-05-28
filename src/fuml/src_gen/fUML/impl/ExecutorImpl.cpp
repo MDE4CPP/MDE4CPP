@@ -128,7 +128,7 @@ std::shared_ptr<ecore::EObject>  ExecutorImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ExecutorImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getExecutor_EClass();
+	return FUMLPackageImpl::eInstance()->getExecutor_Class();
 }
 
 //*********************************
@@ -248,7 +248,7 @@ Any ExecutorImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::EXECUTOR_EREFERENCE_LOCUS:
+		case FUMLPackage::EXECUTOR_ATTRIBUTE_LOCUS:
 			return eAny(getLocus()); //450
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
@@ -257,7 +257,7 @@ bool ExecutorImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::EXECUTOR_EREFERENCE_LOCUS:
+		case FUMLPackage::EXECUTOR_ATTRIBUTE_LOCUS:
 			return getLocus().lock() != nullptr; //450
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
@@ -266,7 +266,7 @@ bool ExecutorImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case FUMLPackage::EXECUTOR_EREFERENCE_LOCUS:
+		case FUMLPackage::EXECUTOR_ATTRIBUTE_LOCUS:
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::Locus> _locus = newValue->get<std::shared_ptr<fUML::Locus>>();
@@ -315,7 +315,7 @@ void ExecutorImpl::resolveReferences(const int featureID, std::list<std::shared_
 {
 	switch(featureID)
 	{
-		case FUMLPackage::EXECUTOR_EREFERENCE_LOCUS:
+		case FUMLPackage::EXECUTOR_ATTRIBUTE_LOCUS:
 		{
 			if (references.size() == 1)
 			{

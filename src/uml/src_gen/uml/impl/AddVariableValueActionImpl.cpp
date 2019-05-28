@@ -298,7 +298,7 @@ std::shared_ptr<ecore::EObject>  AddVariableValueActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> AddVariableValueActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getAddVariableValueAction_EClass();
+	return UmlPackageImpl::eInstance()->getAddVariableValueAction_Class();
 }
 
 //*********************************
@@ -407,9 +407,9 @@ Any AddVariableValueActionImpl::eGet(int featureID, bool resolve, bool coreType)
 {
 	switch(featureID)
 	{
-		case UmlPackage::ADDVARIABLEVALUEACTION_EREFERENCE_INSERTAT:
+		case UmlPackage::ADDVARIABLEVALUEACTION_ATTRIBUTE_INSERTAT:
 			return eAny(getInsertAt()); //1729
-		case UmlPackage::ADDVARIABLEVALUEACTION_EATTRIBUTE_ISREPLACEALL:
+		case UmlPackage::ADDVARIABLEVALUEACTION_ATTRIBUTE_ISREPLACEALL:
 			return eAny(getIsReplaceAll()); //1730
 	}
 	return WriteVariableActionImpl::eGet(featureID, resolve, coreType);
@@ -418,9 +418,9 @@ bool AddVariableValueActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::ADDVARIABLEVALUEACTION_EREFERENCE_INSERTAT:
+		case UmlPackage::ADDVARIABLEVALUEACTION_ATTRIBUTE_INSERTAT:
 			return getInsertAt() != nullptr; //1729
-		case UmlPackage::ADDVARIABLEVALUEACTION_EATTRIBUTE_ISREPLACEALL:
+		case UmlPackage::ADDVARIABLEVALUEACTION_ATTRIBUTE_ISREPLACEALL:
 			return getIsReplaceAll() != false; //1730
 	}
 	return WriteVariableActionImpl::internalEIsSet(featureID);
@@ -429,14 +429,14 @@ bool AddVariableValueActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::ADDVARIABLEVALUEACTION_EREFERENCE_INSERTAT:
+		case UmlPackage::ADDVARIABLEVALUEACTION_ATTRIBUTE_INSERTAT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::InputPin> _insertAt = newValue->get<std::shared_ptr<uml::InputPin>>();
 			setInsertAt(_insertAt); //1729
 			return true;
 		}
-		case UmlPackage::ADDVARIABLEVALUEACTION_EATTRIBUTE_ISREPLACEALL:
+		case UmlPackage::ADDVARIABLEVALUEACTION_ATTRIBUTE_ISREPLACEALL:
 		{
 			// BOOST CAST
 			bool _isReplaceAll = newValue->get<bool>();
@@ -578,12 +578,12 @@ void AddVariableValueActionImpl::saveContent(std::shared_ptr<persistence::interf
 		std::shared_ptr<uml::InputPin > insertAt = this->getInsertAt();
 		if (insertAt != nullptr)
 		{
-			saveHandler->addReference(insertAt, "insertAt", insertAt->eClass() != package->getInputPin_EClass());
+			saveHandler->addReference(insertAt, "insertAt", insertAt->eClass() != package->getInputPin_Class());
 		}
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getAddVariableValueAction_EAttribute_isReplaceAll()) )
+		if ( this->eIsSet(package->getAddVariableValueAction_Attribute_isReplaceAll()) )
 		{
 			saveHandler->addAttribute("isReplaceAll", this->getIsReplaceAll());
 		}

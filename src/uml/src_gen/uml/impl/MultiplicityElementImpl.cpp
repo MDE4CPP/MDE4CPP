@@ -152,7 +152,7 @@ std::shared_ptr<ecore::EObject>  MultiplicityElementImpl::copy() const
 
 std::shared_ptr<ecore::EClass> MultiplicityElementImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getMultiplicityElement_EClass();
+	return UmlPackageImpl::eInstance()->getMultiplicityElement_Class();
 }
 
 //*********************************
@@ -188,12 +188,12 @@ int MultiplicityElementImpl::getLower() const
 	return m_lower;
 }
 
-void MultiplicityElementImpl::setUpper(int _upper)
+void MultiplicityElementImpl::setUpper(unsigned int _upper)
 {
 	m_upper = _upper;
 } 
 
-int MultiplicityElementImpl::getUpper() const 
+unsigned int MultiplicityElementImpl::getUpper() const 
 {
 	return m_upper;
 }
@@ -213,7 +213,7 @@ bool MultiplicityElementImpl::includesMultiplicity(std::shared_ptr<uml::Multipli
 	throw "UnsupportedOperationException";
 }
 
-bool MultiplicityElementImpl::is(int lowerbound,int upperbound)
+bool MultiplicityElementImpl::is(int lowerbound,unsigned int upperbound)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -243,7 +243,7 @@ bool MultiplicityElementImpl::lower_is_integer(Any diagnostics,std::map <   Any,
 	throw "UnsupportedOperationException";
 }
 
-int MultiplicityElementImpl::upperBound()
+unsigned int MultiplicityElementImpl::upperBound()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -330,17 +330,17 @@ Any MultiplicityElementImpl::eGet(int featureID, bool resolve, bool coreType) co
 {
 	switch(featureID)
 	{
-		case UmlPackage::MULTIPLICITYELEMENT_EATTRIBUTE_ISORDERED:
+		case UmlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_ISORDERED:
 			return eAny(getIsOrdered()); //1543
-		case UmlPackage::MULTIPLICITYELEMENT_EATTRIBUTE_ISUNIQUE:
+		case UmlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_ISUNIQUE:
 			return eAny(getIsUnique()); //1544
-		case UmlPackage::MULTIPLICITYELEMENT_EATTRIBUTE_LOWER:
+		case UmlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_LOWER:
 			return eAny(getLower()); //1545
-		case UmlPackage::MULTIPLICITYELEMENT_EREFERENCE_LOWERVALUE:
+		case UmlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_LOWERVALUE:
 			return eAny(getLowerValue()); //1546
-		case UmlPackage::MULTIPLICITYELEMENT_EATTRIBUTE_UPPER:
+		case UmlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_UPPER:
 			return eAny(getUpper()); //1547
-		case UmlPackage::MULTIPLICITYELEMENT_EREFERENCE_UPPERVALUE:
+		case UmlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_UPPERVALUE:
 			return eAny(getUpperValue()); //1548
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
@@ -349,17 +349,17 @@ bool MultiplicityElementImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::MULTIPLICITYELEMENT_EATTRIBUTE_ISORDERED:
+		case UmlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_ISORDERED:
 			return getIsOrdered() != false; //1543
-		case UmlPackage::MULTIPLICITYELEMENT_EATTRIBUTE_ISUNIQUE:
+		case UmlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_ISUNIQUE:
 			return getIsUnique() != true; //1544
-		case UmlPackage::MULTIPLICITYELEMENT_EATTRIBUTE_LOWER:
+		case UmlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_LOWER:
 			return getLower() != 1; //1545
-		case UmlPackage::MULTIPLICITYELEMENT_EREFERENCE_LOWERVALUE:
+		case UmlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_LOWERVALUE:
 			return getLowerValue() != nullptr; //1546
-		case UmlPackage::MULTIPLICITYELEMENT_EATTRIBUTE_UPPER:
+		case UmlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_UPPER:
 			return getUpper() != 1; //1547
-		case UmlPackage::MULTIPLICITYELEMENT_EREFERENCE_UPPERVALUE:
+		case UmlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_UPPERVALUE:
 			return getUpperValue() != nullptr; //1548
 	}
 	return ElementImpl::internalEIsSet(featureID);
@@ -368,42 +368,42 @@ bool MultiplicityElementImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::MULTIPLICITYELEMENT_EATTRIBUTE_ISORDERED:
+		case UmlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_ISORDERED:
 		{
 			// BOOST CAST
 			bool _isOrdered = newValue->get<bool>();
 			setIsOrdered(_isOrdered); //1543
 			return true;
 		}
-		case UmlPackage::MULTIPLICITYELEMENT_EATTRIBUTE_ISUNIQUE:
+		case UmlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_ISUNIQUE:
 		{
 			// BOOST CAST
 			bool _isUnique = newValue->get<bool>();
 			setIsUnique(_isUnique); //1544
 			return true;
 		}
-		case UmlPackage::MULTIPLICITYELEMENT_EATTRIBUTE_LOWER:
+		case UmlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_LOWER:
 		{
 			// BOOST CAST
 			int _lower = newValue->get<int>();
 			setLower(_lower); //1545
 			return true;
 		}
-		case UmlPackage::MULTIPLICITYELEMENT_EREFERENCE_LOWERVALUE:
+		case UmlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_LOWERVALUE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ValueSpecification> _lowerValue = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
 			setLowerValue(_lowerValue); //1546
 			return true;
 		}
-		case UmlPackage::MULTIPLICITYELEMENT_EATTRIBUTE_UPPER:
+		case UmlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_UPPER:
 		{
 			// BOOST CAST
-			int _upper = newValue->get<int>();
+			unsigned int _upper = newValue->get<unsigned int>();
 			setUpper(_upper); //1547
 			return true;
 		}
-		case UmlPackage::MULTIPLICITYELEMENT_EREFERENCE_UPPERVALUE:
+		case UmlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_UPPERVALUE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ValueSpecification> _upperValue = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
@@ -550,24 +550,24 @@ void MultiplicityElementImpl::saveContent(std::shared_ptr<persistence::interface
 		std::shared_ptr<uml::ValueSpecification > lowerValue = this->getLowerValue();
 		if (lowerValue != nullptr)
 		{
-			saveHandler->addReference(lowerValue, "lowerValue", lowerValue->eClass() != package->getValueSpecification_EClass());
+			saveHandler->addReference(lowerValue, "lowerValue", lowerValue->eClass() != package->getValueSpecification_Class());
 		}
 
 		// Save 'upperValue'
 		std::shared_ptr<uml::ValueSpecification > upperValue = this->getUpperValue();
 		if (upperValue != nullptr)
 		{
-			saveHandler->addReference(upperValue, "upperValue", upperValue->eClass() != package->getValueSpecification_EClass());
+			saveHandler->addReference(upperValue, "upperValue", upperValue->eClass() != package->getValueSpecification_Class());
 		}
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getMultiplicityElement_EAttribute_isOrdered()) )
+		if ( this->eIsSet(package->getMultiplicityElement_Attribute_isOrdered()) )
 		{
 			saveHandler->addAttribute("isOrdered", this->getIsOrdered());
 		}
 
-		if ( this->eIsSet(package->getMultiplicityElement_EAttribute_isUnique()) )
+		if ( this->eIsSet(package->getMultiplicityElement_Attribute_isUnique()) )
 		{
 			saveHandler->addAttribute("isUnique", this->getIsUnique());
 		}

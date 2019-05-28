@@ -159,7 +159,7 @@ std::shared_ptr<ecore::EObject>  ReclassifyObjectActionActivationImpl::copy() co
 
 std::shared_ptr<ecore::EClass> ReclassifyObjectActionActivationImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getReclassifyObjectActionActivation_EClass();
+	return FUMLPackageImpl::eInstance()->getReclassifyObjectActionActivation_Class();
 }
 
 //*********************************

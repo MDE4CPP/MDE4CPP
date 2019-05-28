@@ -279,7 +279,7 @@ std::shared_ptr<ecore::EObject>  ClearVariableActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ClearVariableActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getClearVariableAction_EClass();
+	return UmlPackageImpl::eInstance()->getClearVariableAction_Class();
 }
 
 //*********************************

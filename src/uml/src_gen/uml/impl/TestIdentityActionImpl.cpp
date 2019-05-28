@@ -312,7 +312,7 @@ std::shared_ptr<ecore::EObject>  TestIdentityActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> TestIdentityActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getTestIdentityAction_EClass();
+	return UmlPackageImpl::eInstance()->getTestIdentityAction_Class();
 }
 
 //*********************************
@@ -442,11 +442,11 @@ Any TestIdentityActionImpl::eGet(int featureID, bool resolve, bool coreType) con
 {
 	switch(featureID)
 	{
-		case UmlPackage::TESTIDENTITYACTION_EREFERENCE_FIRST:
+		case UmlPackage::TESTIDENTITYACTION_ATTRIBUTE_FIRST:
 			return eAny(getFirst()); //23527
-		case UmlPackage::TESTIDENTITYACTION_EREFERENCE_RESULT:
+		case UmlPackage::TESTIDENTITYACTION_ATTRIBUTE_RESULT:
 			return eAny(getResult()); //23528
-		case UmlPackage::TESTIDENTITYACTION_EREFERENCE_SECOND:
+		case UmlPackage::TESTIDENTITYACTION_ATTRIBUTE_SECOND:
 			return eAny(getSecond()); //23529
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
@@ -455,11 +455,11 @@ bool TestIdentityActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::TESTIDENTITYACTION_EREFERENCE_FIRST:
+		case UmlPackage::TESTIDENTITYACTION_ATTRIBUTE_FIRST:
 			return getFirst() != nullptr; //23527
-		case UmlPackage::TESTIDENTITYACTION_EREFERENCE_RESULT:
+		case UmlPackage::TESTIDENTITYACTION_ATTRIBUTE_RESULT:
 			return getResult() != nullptr; //23528
-		case UmlPackage::TESTIDENTITYACTION_EREFERENCE_SECOND:
+		case UmlPackage::TESTIDENTITYACTION_ATTRIBUTE_SECOND:
 			return getSecond() != nullptr; //23529
 	}
 	return ActionImpl::internalEIsSet(featureID);
@@ -468,21 +468,21 @@ bool TestIdentityActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::TESTIDENTITYACTION_EREFERENCE_FIRST:
+		case UmlPackage::TESTIDENTITYACTION_ATTRIBUTE_FIRST:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::InputPin> _first = newValue->get<std::shared_ptr<uml::InputPin>>();
 			setFirst(_first); //23527
 			return true;
 		}
-		case UmlPackage::TESTIDENTITYACTION_EREFERENCE_RESULT:
+		case UmlPackage::TESTIDENTITYACTION_ATTRIBUTE_RESULT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::OutputPin> _result = newValue->get<std::shared_ptr<uml::OutputPin>>();
 			setResult(_result); //23528
 			return true;
 		}
-		case UmlPackage::TESTIDENTITYACTION_EREFERENCE_SECOND:
+		case UmlPackage::TESTIDENTITYACTION_ATTRIBUTE_SECOND:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::InputPin> _second = newValue->get<std::shared_ptr<uml::InputPin>>();
@@ -629,21 +629,21 @@ void TestIdentityActionImpl::saveContent(std::shared_ptr<persistence::interfaces
 		std::shared_ptr<uml::InputPin > first = this->getFirst();
 		if (first != nullptr)
 		{
-			saveHandler->addReference(first, "first", first->eClass() != package->getInputPin_EClass());
+			saveHandler->addReference(first, "first", first->eClass() != package->getInputPin_Class());
 		}
 
 		// Save 'result'
 		std::shared_ptr<uml::OutputPin > result = this->getResult();
 		if (result != nullptr)
 		{
-			saveHandler->addReference(result, "result", result->eClass() != package->getOutputPin_EClass());
+			saveHandler->addReference(result, "result", result->eClass() != package->getOutputPin_Class());
 		}
 
 		// Save 'second'
 		std::shared_ptr<uml::InputPin > second = this->getSecond();
 		if (second != nullptr)
 		{
-			saveHandler->addReference(second, "second", second->eClass() != package->getInputPin_EClass());
+			saveHandler->addReference(second, "second", second->eClass() != package->getInputPin_Class());
 		}
 	
 

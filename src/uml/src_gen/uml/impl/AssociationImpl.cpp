@@ -211,11 +211,11 @@ AssociationImpl::~AssociationImpl()
 			{
 				switch(reference_id)
 				{	
-				case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
+				case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
 					m_owningPackage = par_Package;
 					m_namespace = par_Package;
 					 return;
-				case UmlPackage::TYPE_EREFERENCE_PACKAGE:
+				case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
 					m_package = par_Package;
 					m_namespace = par_Package;
 					 return;
@@ -471,7 +471,7 @@ std::shared_ptr<ecore::EObject>  AssociationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> AssociationImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getAssociation_EClass();
+	return UmlPackageImpl::eInstance()->getAssociation_Class();
 }
 
 //*********************************
@@ -646,15 +646,15 @@ Any AssociationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::ASSOCIATION_EREFERENCE_ENDTYPE:
+		case UmlPackage::ASSOCIATION_ATTRIBUTE_ENDTYPE:
 			return eAny(getEndType()); //2139
-		case UmlPackage::ASSOCIATION_EATTRIBUTE_ISDERIVED:
+		case UmlPackage::ASSOCIATION_ATTRIBUTE_ISDERIVED:
 			return eAny(getIsDerived()); //2140
-		case UmlPackage::ASSOCIATION_EREFERENCE_MEMBEREND:
+		case UmlPackage::ASSOCIATION_ATTRIBUTE_MEMBEREND:
 			return eAny(getMemberEnd()); //2141
-		case UmlPackage::ASSOCIATION_EREFERENCE_NAVIGABLEOWNEDEND:
+		case UmlPackage::ASSOCIATION_ATTRIBUTE_NAVIGABLEOWNEDEND:
 			return eAny(getNavigableOwnedEnd()); //2143
-		case UmlPackage::ASSOCIATION_EREFERENCE_OWNEDEND:
+		case UmlPackage::ASSOCIATION_ATTRIBUTE_OWNEDEND:
 			return eAny(getOwnedEnd()); //2142
 	}
 	Any result;
@@ -670,15 +670,15 @@ bool AssociationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::ASSOCIATION_EREFERENCE_ENDTYPE:
+		case UmlPackage::ASSOCIATION_ATTRIBUTE_ENDTYPE:
 			return getEndType() != nullptr; //2139
-		case UmlPackage::ASSOCIATION_EATTRIBUTE_ISDERIVED:
+		case UmlPackage::ASSOCIATION_ATTRIBUTE_ISDERIVED:
 			return getIsDerived() != false; //2140
-		case UmlPackage::ASSOCIATION_EREFERENCE_MEMBEREND:
+		case UmlPackage::ASSOCIATION_ATTRIBUTE_MEMBEREND:
 			return getMemberEnd() != nullptr; //2141
-		case UmlPackage::ASSOCIATION_EREFERENCE_NAVIGABLEOWNEDEND:
+		case UmlPackage::ASSOCIATION_ATTRIBUTE_NAVIGABLEOWNEDEND:
 			return getNavigableOwnedEnd() != nullptr; //2143
-		case UmlPackage::ASSOCIATION_EREFERENCE_OWNEDEND:
+		case UmlPackage::ASSOCIATION_ATTRIBUTE_OWNEDEND:
 			return getOwnedEnd() != nullptr; //2142
 	}
 	bool result = false;
@@ -694,7 +694,7 @@ bool AssociationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::ASSOCIATION_EATTRIBUTE_ISDERIVED:
+		case UmlPackage::ASSOCIATION_ATTRIBUTE_ISDERIVED:
 		{
 			// BOOST CAST
 			bool _isDerived = newValue->get<bool>();
@@ -787,7 +787,7 @@ void AssociationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence
 			{
 				typeName = "Property";
 			}
-			std::shared_ptr<ecore::EObject> ownedEnd = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::PROPERTY_EREFERENCE_OWNINGASSOCIATION);
+			std::shared_ptr<ecore::EObject> ownedEnd = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::PROPERTY_ATTRIBUTE_OWNINGASSOCIATION);
 			if (ownedEnd != nullptr)
 			{
 				loadHandler->handleChild(ownedEnd);
@@ -812,7 +812,7 @@ void AssociationImpl::resolveReferences(const int featureID, std::list<std::shar
 {
 	switch(featureID)
 	{
-		case UmlPackage::ASSOCIATION_EREFERENCE_MEMBEREND:
+		case UmlPackage::ASSOCIATION_ATTRIBUTE_MEMBEREND:
 		{
 			std::shared_ptr<Bag<uml::Property>> _memberEnd = getMemberEnd();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -826,7 +826,7 @@ void AssociationImpl::resolveReferences(const int featureID, std::list<std::shar
 			return;
 		}
 
-		case UmlPackage::ASSOCIATION_EREFERENCE_NAVIGABLEOWNEDEND:
+		case UmlPackage::ASSOCIATION_ATTRIBUTE_NAVIGABLEOWNEDEND:
 		{
 			std::shared_ptr<Bag<uml::Property>> _navigableOwnedEnd = getNavigableOwnedEnd();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -883,7 +883,7 @@ void AssociationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getAssociation_EAttribute_isDerived()) )
+		if ( this->eIsSet(package->getAssociation_Attribute_isDerived()) )
 		{
 			saveHandler->addAttribute("isDerived", this->getIsDerived());
 		}
@@ -909,7 +909,7 @@ void AssociationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 		std::shared_ptr<SubsetUnion<uml::Property, uml::Property /*Subset does not reference a union*/,uml::Feature,uml::NamedElement>> list_ownedEnd = this->getOwnedEnd();
 		for (std::shared_ptr<uml::Property> ownedEnd : *list_ownedEnd) 
 		{
-			saveHandler->addReference(ownedEnd, "ownedEnd", ownedEnd->eClass() != package->getProperty_EClass());
+			saveHandler->addReference(ownedEnd, "ownedEnd", ownedEnd->eClass() != package->getProperty_Class());
 		}
 	}
 	catch (std::exception& e)

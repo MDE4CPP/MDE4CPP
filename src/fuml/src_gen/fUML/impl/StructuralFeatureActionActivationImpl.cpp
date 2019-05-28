@@ -169,7 +169,7 @@ std::shared_ptr<ecore::EObject>  StructuralFeatureActionActivationImpl::copy() c
 
 std::shared_ptr<ecore::EClass> StructuralFeatureActionActivationImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getStructuralFeatureActionActivation_EClass();
+	return FUMLPackageImpl::eInstance()->getStructuralFeatureActionActivation_Class();
 }
 
 //*********************************

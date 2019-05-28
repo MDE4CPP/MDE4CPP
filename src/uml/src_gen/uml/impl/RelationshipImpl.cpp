@@ -129,7 +129,7 @@ std::shared_ptr<ecore::EObject>  RelationshipImpl::copy() const
 
 std::shared_ptr<ecore::EClass> RelationshipImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getRelationship_EClass();
+	return UmlPackageImpl::eInstance()->getRelationship_Class();
 }
 
 //*********************************
@@ -184,7 +184,7 @@ Any RelationshipImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::RELATIONSHIP_EREFERENCE_RELATEDELEMENT:
+		case UmlPackage::RELATIONSHIP_ATTRIBUTE_RELATEDELEMENT:
 			return eAny(getRelatedElement()); //2083
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
@@ -193,7 +193,7 @@ bool RelationshipImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::RELATIONSHIP_EREFERENCE_RELATEDELEMENT:
+		case UmlPackage::RELATIONSHIP_ATTRIBUTE_RELATEDELEMENT:
 			return getRelatedElement() != nullptr; //2083
 	}
 	return ElementImpl::internalEIsSet(featureID);

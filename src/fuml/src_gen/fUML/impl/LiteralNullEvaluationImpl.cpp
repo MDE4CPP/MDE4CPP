@@ -104,7 +104,7 @@ std::shared_ptr<ecore::EObject>  LiteralNullEvaluationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> LiteralNullEvaluationImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getLiteralNullEvaluation_EClass();
+	return FUMLPackageImpl::eInstance()->getLiteralNullEvaluation_Class();
 }
 
 //*********************************

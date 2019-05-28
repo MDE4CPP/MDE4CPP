@@ -219,7 +219,7 @@ std::shared_ptr<ecore::EObject>  OccurrenceSpecificationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> OccurrenceSpecificationImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getOccurrenceSpecification_EClass();
+	return UmlPackageImpl::eInstance()->getOccurrenceSpecification_Class();
 }
 
 //*********************************
@@ -311,9 +311,9 @@ Any OccurrenceSpecificationImpl::eGet(int featureID, bool resolve, bool coreType
 {
 	switch(featureID)
 	{
-		case UmlPackage::OCCURRENCESPECIFICATION_EREFERENCE_TOAFTER:
+		case UmlPackage::OCCURRENCESPECIFICATION_ATTRIBUTE_TOAFTER:
 			return eAny(getToAfter()); //16313
-		case UmlPackage::OCCURRENCESPECIFICATION_EREFERENCE_TOBEFORE:
+		case UmlPackage::OCCURRENCESPECIFICATION_ATTRIBUTE_TOBEFORE:
 			return eAny(getToBefore()); //16314
 	}
 	return InteractionFragmentImpl::eGet(featureID, resolve, coreType);
@@ -322,9 +322,9 @@ bool OccurrenceSpecificationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::OCCURRENCESPECIFICATION_EREFERENCE_TOAFTER:
+		case UmlPackage::OCCURRENCESPECIFICATION_ATTRIBUTE_TOAFTER:
 			return getToAfter() != nullptr; //16313
-		case UmlPackage::OCCURRENCESPECIFICATION_EREFERENCE_TOBEFORE:
+		case UmlPackage::OCCURRENCESPECIFICATION_ATTRIBUTE_TOBEFORE:
 			return getToBefore() != nullptr; //16314
 	}
 	return InteractionFragmentImpl::internalEIsSet(featureID);
@@ -401,7 +401,7 @@ void OccurrenceSpecificationImpl::resolveReferences(const int featureID, std::li
 {
 	switch(featureID)
 	{
-		case UmlPackage::OCCURRENCESPECIFICATION_EREFERENCE_TOAFTER:
+		case UmlPackage::OCCURRENCESPECIFICATION_ATTRIBUTE_TOAFTER:
 		{
 			std::shared_ptr<Bag<uml::GeneralOrdering>> _toAfter = getToAfter();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -415,7 +415,7 @@ void OccurrenceSpecificationImpl::resolveReferences(const int featureID, std::li
 			return;
 		}
 
-		case UmlPackage::OCCURRENCESPECIFICATION_EREFERENCE_TOBEFORE:
+		case UmlPackage::OCCURRENCESPECIFICATION_ATTRIBUTE_TOBEFORE:
 		{
 			std::shared_ptr<Bag<uml::GeneralOrdering>> _toBefore = getToBefore();
 			for(std::shared_ptr<ecore::EObject> ref : references)

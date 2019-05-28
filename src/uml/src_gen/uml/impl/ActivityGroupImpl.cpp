@@ -243,7 +243,7 @@ std::shared_ptr<ecore::EObject>  ActivityGroupImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ActivityGroupImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getActivityGroup_EClass();
+	return UmlPackageImpl::eInstance()->getActivityGroup_Class();
 }
 
 //*********************************
@@ -360,15 +360,15 @@ Any ActivityGroupImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::ACTIVITYGROUP_EREFERENCE_CONTAINEDEDGE:
+		case UmlPackage::ACTIVITYGROUP_ATTRIBUTE_CONTAINEDEDGE:
 			return eAny(getContainedEdge()); //119
-		case UmlPackage::ACTIVITYGROUP_EREFERENCE_CONTAINEDNODE:
+		case UmlPackage::ACTIVITYGROUP_ATTRIBUTE_CONTAINEDNODE:
 			return eAny(getContainedNode()); //1110
-		case UmlPackage::ACTIVITYGROUP_EREFERENCE_INACTIVITY:
+		case UmlPackage::ACTIVITYGROUP_ATTRIBUTE_INACTIVITY:
 			return eAny(getInActivity()); //1111
-		case UmlPackage::ACTIVITYGROUP_EREFERENCE_SUBGROUP:
+		case UmlPackage::ACTIVITYGROUP_ATTRIBUTE_SUBGROUP:
 			return eAny(getSubgroup()); //1112
-		case UmlPackage::ACTIVITYGROUP_EREFERENCE_SUPERGROUP:
+		case UmlPackage::ACTIVITYGROUP_ATTRIBUTE_SUPERGROUP:
 			return eAny(getSuperGroup()); //1113
 	}
 	Any result;
@@ -384,15 +384,15 @@ bool ActivityGroupImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::ACTIVITYGROUP_EREFERENCE_CONTAINEDEDGE:
+		case UmlPackage::ACTIVITYGROUP_ATTRIBUTE_CONTAINEDEDGE:
 			return getContainedEdge() != nullptr; //119
-		case UmlPackage::ACTIVITYGROUP_EREFERENCE_CONTAINEDNODE:
+		case UmlPackage::ACTIVITYGROUP_ATTRIBUTE_CONTAINEDNODE:
 			return getContainedNode() != nullptr; //1110
-		case UmlPackage::ACTIVITYGROUP_EREFERENCE_INACTIVITY:
+		case UmlPackage::ACTIVITYGROUP_ATTRIBUTE_INACTIVITY:
 			return getInActivity().lock() != nullptr; //1111
-		case UmlPackage::ACTIVITYGROUP_EREFERENCE_SUBGROUP:
+		case UmlPackage::ACTIVITYGROUP_ATTRIBUTE_SUBGROUP:
 			return getSubgroup() != nullptr; //1112
-		case UmlPackage::ACTIVITYGROUP_EREFERENCE_SUPERGROUP:
+		case UmlPackage::ACTIVITYGROUP_ATTRIBUTE_SUPERGROUP:
 			return getSuperGroup().lock() != nullptr; //1113
 	}
 	bool result = false;
@@ -408,7 +408,7 @@ bool ActivityGroupImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::ACTIVITYGROUP_EREFERENCE_INACTIVITY:
+		case UmlPackage::ACTIVITYGROUP_ATTRIBUTE_INACTIVITY:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Activity> _inActivity = newValue->get<std::shared_ptr<uml::Activity>>();
@@ -467,7 +467,7 @@ void ActivityGroupImpl::loadNode(std::string nodeName, std::shared_ptr<persisten
 				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			std::shared_ptr<ecore::EObject> subgroup = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::ACTIVITYGROUP_EREFERENCE_SUPERGROUP);
+			std::shared_ptr<ecore::EObject> subgroup = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::ACTIVITYGROUP_ATTRIBUTE_SUPERGROUP);
 			if (subgroup != nullptr)
 			{
 				loadHandler->handleChild(subgroup);
@@ -492,7 +492,7 @@ void ActivityGroupImpl::resolveReferences(const int featureID, std::list<std::sh
 {
 	switch(featureID)
 	{
-		case UmlPackage::ACTIVITYGROUP_EREFERENCE_INACTIVITY:
+		case UmlPackage::ACTIVITYGROUP_ATTRIBUTE_INACTIVITY:
 		{
 			if (references.size() == 1)
 			{
@@ -542,7 +542,7 @@ void ActivityGroupImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 		std::shared_ptr<SubsetUnion<uml::ActivityGroup, uml::Element>> list_subgroup = this->getSubgroup();
 		for (std::shared_ptr<uml::ActivityGroup> subgroup : *list_subgroup) 
 		{
-			saveHandler->addReference(subgroup, "subgroup", subgroup->eClass() != package->getActivityGroup_EClass());
+			saveHandler->addReference(subgroup, "subgroup", subgroup->eClass() != package->getActivityGroup_Class());
 		}
 	}
 	catch (std::exception& e)

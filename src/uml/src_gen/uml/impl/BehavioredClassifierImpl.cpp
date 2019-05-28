@@ -185,11 +185,11 @@ BehavioredClassifierImpl::~BehavioredClassifierImpl()
 			{
 				switch(reference_id)
 				{	
-				case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
+				case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
 					m_owningPackage = par_Package;
 					m_namespace = par_Package;
 					 return;
-				case UmlPackage::TYPE_EREFERENCE_PACKAGE:
+				case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
 					m_package = par_Package;
 					m_namespace = par_Package;
 					 return;
@@ -440,7 +440,7 @@ std::shared_ptr<ecore::EObject>  BehavioredClassifierImpl::copy() const
 
 std::shared_ptr<ecore::EClass> BehavioredClassifierImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getBehavioredClassifier_EClass();
+	return UmlPackageImpl::eInstance()->getBehavioredClassifier_Class();
 }
 
 //*********************************
@@ -573,11 +573,11 @@ Any BehavioredClassifierImpl::eGet(int featureID, bool resolve, bool coreType) c
 {
 	switch(featureID)
 	{
-		case UmlPackage::BEHAVIOREDCLASSIFIER_EREFERENCE_CLASSIFIERBEHAVIOR:
+		case UmlPackage::BEHAVIOREDCLASSIFIER_ATTRIBUTE_CLASSIFIERBEHAVIOR:
 			return eAny(getClassifierBehavior()); //2638
-		case UmlPackage::BEHAVIOREDCLASSIFIER_EREFERENCE_INTERFACEREALIZATION:
+		case UmlPackage::BEHAVIOREDCLASSIFIER_ATTRIBUTE_INTERFACEREALIZATION:
 			return eAny(getInterfaceRealization()); //2639
-		case UmlPackage::BEHAVIOREDCLASSIFIER_EREFERENCE_OWNEDBEHAVIOR:
+		case UmlPackage::BEHAVIOREDCLASSIFIER_ATTRIBUTE_OWNEDBEHAVIOR:
 			return eAny(getOwnedBehavior()); //2640
 	}
 	return ClassifierImpl::eGet(featureID, resolve, coreType);
@@ -586,11 +586,11 @@ bool BehavioredClassifierImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::BEHAVIOREDCLASSIFIER_EREFERENCE_CLASSIFIERBEHAVIOR:
+		case UmlPackage::BEHAVIOREDCLASSIFIER_ATTRIBUTE_CLASSIFIERBEHAVIOR:
 			return getClassifierBehavior() != nullptr; //2638
-		case UmlPackage::BEHAVIOREDCLASSIFIER_EREFERENCE_INTERFACEREALIZATION:
+		case UmlPackage::BEHAVIOREDCLASSIFIER_ATTRIBUTE_INTERFACEREALIZATION:
 			return getInterfaceRealization() != nullptr; //2639
-		case UmlPackage::BEHAVIOREDCLASSIFIER_EREFERENCE_OWNEDBEHAVIOR:
+		case UmlPackage::BEHAVIOREDCLASSIFIER_ATTRIBUTE_OWNEDBEHAVIOR:
 			return getOwnedBehavior() != nullptr; //2640
 	}
 	return ClassifierImpl::internalEIsSet(featureID);
@@ -599,7 +599,7 @@ bool BehavioredClassifierImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::BEHAVIOREDCLASSIFIER_EREFERENCE_CLASSIFIERBEHAVIOR:
+		case UmlPackage::BEHAVIOREDCLASSIFIER_ATTRIBUTE_CLASSIFIERBEHAVIOR:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Behavior> _classifierBehavior = newValue->get<std::shared_ptr<uml::Behavior>>();
@@ -668,7 +668,7 @@ void BehavioredClassifierImpl::loadNode(std::string nodeName, std::shared_ptr<pe
 			{
 				typeName = "InterfaceRealization";
 			}
-			std::shared_ptr<ecore::EObject> interfaceRealization = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::INTERFACEREALIZATION_EREFERENCE_IMPLEMENTINGCLASSIFIER);
+			std::shared_ptr<ecore::EObject> interfaceRealization = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::INTERFACEREALIZATION_ATTRIBUTE_IMPLEMENTINGCLASSIFIER);
 			if (interfaceRealization != nullptr)
 			{
 				loadHandler->handleChild(interfaceRealization);
@@ -684,7 +684,7 @@ void BehavioredClassifierImpl::loadNode(std::string nodeName, std::shared_ptr<pe
 				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			std::shared_ptr<ecore::EObject> ownedBehavior = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::BEHAVIOR_EREFERENCE_BEHAVIOREDCLASSIFIER);
+			std::shared_ptr<ecore::EObject> ownedBehavior = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::BEHAVIOR_ATTRIBUTE_BEHAVIOREDCLASSIFIER);
 			if (ownedBehavior != nullptr)
 			{
 				loadHandler->handleChild(ownedBehavior);
@@ -708,7 +708,7 @@ void BehavioredClassifierImpl::resolveReferences(const int featureID, std::list<
 {
 	switch(featureID)
 	{
-		case UmlPackage::BEHAVIOREDCLASSIFIER_EREFERENCE_CLASSIFIERBEHAVIOR:
+		case UmlPackage::BEHAVIOREDCLASSIFIER_ATTRIBUTE_CLASSIFIERBEHAVIOR:
 		{
 			if (references.size() == 1)
 			{
@@ -761,7 +761,7 @@ void BehavioredClassifierImpl::saveContent(std::shared_ptr<persistence::interfac
 		// Save 'interfaceRealization'
 		for (std::shared_ptr<uml::InterfaceRealization> interfaceRealization : *this->getInterfaceRealization()) 
 		{
-			saveHandler->addReference(interfaceRealization, "interfaceRealization", interfaceRealization->eClass() != package->getInterfaceRealization_EClass());
+			saveHandler->addReference(interfaceRealization, "interfaceRealization", interfaceRealization->eClass() != package->getInterfaceRealization_Class());
 		}
 	
 
@@ -777,7 +777,7 @@ void BehavioredClassifierImpl::saveContent(std::shared_ptr<persistence::interfac
 		std::shared_ptr<SubsetUnion<uml::Behavior, uml::NamedElement>> list_ownedBehavior = this->getOwnedBehavior();
 		for (std::shared_ptr<uml::Behavior> ownedBehavior : *list_ownedBehavior) 
 		{
-			saveHandler->addReference(ownedBehavior, "ownedBehavior", ownedBehavior->eClass() != package->getBehavior_EClass());
+			saveHandler->addReference(ownedBehavior, "ownedBehavior", ownedBehavior->eClass() != package->getBehavior_Class());
 		}
 	}
 	catch (std::exception& e)

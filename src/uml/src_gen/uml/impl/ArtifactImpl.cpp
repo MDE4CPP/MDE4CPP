@@ -216,11 +216,11 @@ ArtifactImpl::~ArtifactImpl()
 			{
 				switch(reference_id)
 				{	
-				case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
+				case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
 					m_owningPackage = par_Package;
 					m_namespace = par_Package;
 					 return;
-				case UmlPackage::TYPE_EREFERENCE_PACKAGE:
+				case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
 					m_package = par_Package;
 					m_namespace = par_Package;
 					 return;
@@ -497,7 +497,7 @@ std::shared_ptr<ecore::EObject>  ArtifactImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ArtifactImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getArtifact_EClass();
+	return UmlPackageImpl::eInstance()->getArtifact_Class();
 }
 
 //*********************************
@@ -516,7 +516,7 @@ std::string ArtifactImpl::getFileName() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<uml::Property> ArtifactImpl::createOwnedAttribute(std::string name,std::shared_ptr<uml::Type>  type,int lower,int upper)
+std::shared_ptr<uml::Property> ArtifactImpl::createOwnedAttribute(std::string name,std::shared_ptr<uml::Type>  type,int lower,unsigned int upper)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -642,15 +642,15 @@ Any ArtifactImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::ARTIFACT_EATTRIBUTE_FILENAME:
+		case UmlPackage::ARTIFACT_ATTRIBUTE_FILENAME:
 			return eAny(getFileName()); //2038
-		case UmlPackage::ARTIFACT_EREFERENCE_MANIFESTATION:
+		case UmlPackage::ARTIFACT_ATTRIBUTE_MANIFESTATION:
 			return eAny(getManifestation()); //2039
-		case UmlPackage::ARTIFACT_EREFERENCE_NESTEDARTIFACT:
+		case UmlPackage::ARTIFACT_ATTRIBUTE_NESTEDARTIFACT:
 			return eAny(getNestedArtifact()); //2040
-		case UmlPackage::ARTIFACT_EREFERENCE_OWNEDATTRIBUTE:
+		case UmlPackage::ARTIFACT_ATTRIBUTE_OWNEDATTRIBUTE:
 			return eAny(getOwnedAttribute()); //2041
-		case UmlPackage::ARTIFACT_EREFERENCE_OWNEDOPERATION:
+		case UmlPackage::ARTIFACT_ATTRIBUTE_OWNEDOPERATION:
 			return eAny(getOwnedOperation()); //2042
 	}
 	Any result;
@@ -666,15 +666,15 @@ bool ArtifactImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::ARTIFACT_EATTRIBUTE_FILENAME:
+		case UmlPackage::ARTIFACT_ATTRIBUTE_FILENAME:
 			return getFileName() != ""; //2038
-		case UmlPackage::ARTIFACT_EREFERENCE_MANIFESTATION:
+		case UmlPackage::ARTIFACT_ATTRIBUTE_MANIFESTATION:
 			return getManifestation() != nullptr; //2039
-		case UmlPackage::ARTIFACT_EREFERENCE_NESTEDARTIFACT:
+		case UmlPackage::ARTIFACT_ATTRIBUTE_NESTEDARTIFACT:
 			return getNestedArtifact() != nullptr; //2040
-		case UmlPackage::ARTIFACT_EREFERENCE_OWNEDATTRIBUTE:
+		case UmlPackage::ARTIFACT_ATTRIBUTE_OWNEDATTRIBUTE:
 			return getOwnedAttribute() != nullptr; //2041
-		case UmlPackage::ARTIFACT_EREFERENCE_OWNEDOPERATION:
+		case UmlPackage::ARTIFACT_ATTRIBUTE_OWNEDOPERATION:
 			return getOwnedOperation() != nullptr; //2042
 	}
 	bool result = false;
@@ -690,7 +690,7 @@ bool ArtifactImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::ARTIFACT_EATTRIBUTE_FILENAME:
+		case UmlPackage::ARTIFACT_ATTRIBUTE_FILENAME:
 		{
 			// BOOST CAST
 			std::string _fileName = newValue->get<std::string>();
@@ -888,30 +888,30 @@ void ArtifactImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 		// Save 'manifestation'
 		for (std::shared_ptr<uml::Manifestation> manifestation : *this->getManifestation()) 
 		{
-			saveHandler->addReference(manifestation, "manifestation", manifestation->eClass() != package->getManifestation_EClass());
+			saveHandler->addReference(manifestation, "manifestation", manifestation->eClass() != package->getManifestation_Class());
 		}
 
 		// Save 'nestedArtifact'
 		for (std::shared_ptr<uml::Artifact> nestedArtifact : *this->getNestedArtifact()) 
 		{
-			saveHandler->addReference(nestedArtifact, "nestedArtifact", nestedArtifact->eClass() != package->getArtifact_EClass());
+			saveHandler->addReference(nestedArtifact, "nestedArtifact", nestedArtifact->eClass() != package->getArtifact_Class());
 		}
 
 		// Save 'ownedAttribute'
 		for (std::shared_ptr<uml::Property> ownedAttribute : *this->getOwnedAttribute()) 
 		{
-			saveHandler->addReference(ownedAttribute, "ownedAttribute", ownedAttribute->eClass() != package->getProperty_EClass());
+			saveHandler->addReference(ownedAttribute, "ownedAttribute", ownedAttribute->eClass() != package->getProperty_Class());
 		}
 
 		// Save 'ownedOperation'
 		for (std::shared_ptr<uml::Operation> ownedOperation : *this->getOwnedOperation()) 
 		{
-			saveHandler->addReference(ownedOperation, "ownedOperation", ownedOperation->eClass() != package->getOperation_EClass());
+			saveHandler->addReference(ownedOperation, "ownedOperation", ownedOperation->eClass() != package->getOperation_Class());
 		}
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getArtifact_EAttribute_fileName()) )
+		if ( this->eIsSet(package->getArtifact_Attribute_fileName()) )
 		{
 			saveHandler->addAttribute("fileName", this->getFileName());
 		}

@@ -143,7 +143,7 @@ std::shared_ptr<ecore::EObject>  LinkEndDestructionDataImpl::copy() const
 
 std::shared_ptr<ecore::EClass> LinkEndDestructionDataImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getLinkEndDestructionData_EClass();
+	return UmlPackageImpl::eInstance()->getLinkEndDestructionData_Class();
 }
 
 //*********************************
@@ -215,9 +215,9 @@ Any LinkEndDestructionDataImpl::eGet(int featureID, bool resolve, bool coreType)
 {
 	switch(featureID)
 	{
-		case UmlPackage::LINKENDDESTRUCTIONDATA_EREFERENCE_DESTROYAT:
+		case UmlPackage::LINKENDDESTRUCTIONDATA_ATTRIBUTE_DESTROYAT:
 			return eAny(getDestroyAt()); //1366
-		case UmlPackage::LINKENDDESTRUCTIONDATA_EATTRIBUTE_ISDESTROYDUPLICATES:
+		case UmlPackage::LINKENDDESTRUCTIONDATA_ATTRIBUTE_ISDESTROYDUPLICATES:
 			return eAny(getIsDestroyDuplicates()); //1367
 	}
 	return LinkEndDataImpl::eGet(featureID, resolve, coreType);
@@ -226,9 +226,9 @@ bool LinkEndDestructionDataImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::LINKENDDESTRUCTIONDATA_EREFERENCE_DESTROYAT:
+		case UmlPackage::LINKENDDESTRUCTIONDATA_ATTRIBUTE_DESTROYAT:
 			return getDestroyAt() != nullptr; //1366
-		case UmlPackage::LINKENDDESTRUCTIONDATA_EATTRIBUTE_ISDESTROYDUPLICATES:
+		case UmlPackage::LINKENDDESTRUCTIONDATA_ATTRIBUTE_ISDESTROYDUPLICATES:
 			return getIsDestroyDuplicates() != false; //1367
 	}
 	return LinkEndDataImpl::internalEIsSet(featureID);
@@ -237,14 +237,14 @@ bool LinkEndDestructionDataImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::LINKENDDESTRUCTIONDATA_EREFERENCE_DESTROYAT:
+		case UmlPackage::LINKENDDESTRUCTIONDATA_ATTRIBUTE_DESTROYAT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::InputPin> _destroyAt = newValue->get<std::shared_ptr<uml::InputPin>>();
 			setDestroyAt(_destroyAt); //1366
 			return true;
 		}
-		case UmlPackage::LINKENDDESTRUCTIONDATA_EATTRIBUTE_ISDESTROYDUPLICATES:
+		case UmlPackage::LINKENDDESTRUCTIONDATA_ATTRIBUTE_ISDESTROYDUPLICATES:
 		{
 			// BOOST CAST
 			bool _isDestroyDuplicates = newValue->get<bool>();
@@ -321,7 +321,7 @@ void LinkEndDestructionDataImpl::resolveReferences(const int featureID, std::lis
 {
 	switch(featureID)
 	{
-		case UmlPackage::LINKENDDESTRUCTIONDATA_EREFERENCE_DESTROYAT:
+		case UmlPackage::LINKENDDESTRUCTIONDATA_ATTRIBUTE_DESTROYAT:
 		{
 			if (references.size() == 1)
 			{
@@ -361,7 +361,7 @@ void LinkEndDestructionDataImpl::saveContent(std::shared_ptr<persistence::interf
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getLinkEndDestructionData_EAttribute_isDestroyDuplicates()) )
+		if ( this->eIsSet(package->getLinkEndDestructionData_Attribute_isDestroyDuplicates()) )
 		{
 			saveHandler->addAttribute("isDestroyDuplicates", this->getIsDestroyDuplicates());
 		}

@@ -262,7 +262,7 @@ std::shared_ptr<ecore::EObject>  ComponentRealizationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ComponentRealizationImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getComponentRealization_EClass();
+	return UmlPackageImpl::eInstance()->getComponentRealization_Class();
 }
 
 //*********************************
@@ -367,9 +367,9 @@ Any ComponentRealizationImpl::eGet(int featureID, bool resolve, bool coreType) c
 {
 	switch(featureID)
 	{
-		case UmlPackage::COMPONENTREALIZATION_EREFERENCE_ABSTRACTION:
+		case UmlPackage::COMPONENTREALIZATION_ATTRIBUTE_ABSTRACTION:
 			return eAny(getAbstraction()); //4819
-		case UmlPackage::COMPONENTREALIZATION_EREFERENCE_REALIZINGCLASSIFIER:
+		case UmlPackage::COMPONENTREALIZATION_ATTRIBUTE_REALIZINGCLASSIFIER:
 			return eAny(getRealizingClassifier()); //4818
 	}
 	return RealizationImpl::eGet(featureID, resolve, coreType);
@@ -378,9 +378,9 @@ bool ComponentRealizationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::COMPONENTREALIZATION_EREFERENCE_ABSTRACTION:
+		case UmlPackage::COMPONENTREALIZATION_ATTRIBUTE_ABSTRACTION:
 			return getAbstraction().lock() != nullptr; //4819
-		case UmlPackage::COMPONENTREALIZATION_EREFERENCE_REALIZINGCLASSIFIER:
+		case UmlPackage::COMPONENTREALIZATION_ATTRIBUTE_REALIZINGCLASSIFIER:
 			return getRealizingClassifier() != nullptr; //4818
 	}
 	return RealizationImpl::internalEIsSet(featureID);
@@ -389,7 +389,7 @@ bool ComponentRealizationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::COMPONENTREALIZATION_EREFERENCE_ABSTRACTION:
+		case UmlPackage::COMPONENTREALIZATION_ATTRIBUTE_ABSTRACTION:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Component> _abstraction = newValue->get<std::shared_ptr<uml::Component>>();
@@ -457,7 +457,7 @@ void ComponentRealizationImpl::resolveReferences(const int featureID, std::list<
 {
 	switch(featureID)
 	{
-		case UmlPackage::COMPONENTREALIZATION_EREFERENCE_ABSTRACTION:
+		case UmlPackage::COMPONENTREALIZATION_ATTRIBUTE_ABSTRACTION:
 		{
 			if (references.size() == 1)
 			{
@@ -469,7 +469,7 @@ void ComponentRealizationImpl::resolveReferences(const int featureID, std::list<
 			return;
 		}
 
-		case UmlPackage::COMPONENTREALIZATION_EREFERENCE_REALIZINGCLASSIFIER:
+		case UmlPackage::COMPONENTREALIZATION_ATTRIBUTE_REALIZINGCLASSIFIER:
 		{
 			std::shared_ptr<Bag<uml::Classifier>> _realizingClassifier = getRealizingClassifier();
 			for(std::shared_ptr<ecore::EObject> ref : references)

@@ -251,12 +251,12 @@ EClassImpl::EClassImpl(const EClassImpl & obj):EClassImpl()
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy EClass "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
 	m_abstract = obj.isAbstract();
-	m_classifierID = obj.getClassifierID();
 	m_defaultValue = obj.getDefaultValue();
 	m_instanceClass = obj.getInstanceClass();
 	m_instanceClassName = obj.getInstanceClassName();
 	m_instanceTypeName = obj.getInstanceTypeName();
 	m_interface = obj.isInterface();
+	m_metaElementID = obj.getMetaElementID();
 	m_name = obj.getName();
 
 	//copy references with no containment (soft copy)
@@ -364,7 +364,7 @@ std::shared_ptr<ecore::EObject>  EClassImpl::copy() const
 
 std::shared_ptr<EClass> EClassImpl::eStaticClass() const
 {
-	return EcorePackageImpl::eInstance()->getEClass_EClass();
+	return EcorePackageImpl::eInstance()->getEClass_Class();
 }
 
 //*********************************
@@ -719,37 +719,37 @@ Any EClassImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case EcorePackage::ECLASS_EATTRIBUTE_ABSTRACT:
+		case EcorePackage::ECLASS_ATTRIBUTE_ABSTRACT:
 			return eAny(isAbstract()); //1211
-		case EcorePackage::ECLASS_EREFERENCE_EALLATTRIBUTES:
+		case EcorePackage::ECLASS_ATTRIBUTE_EALLATTRIBUTES:
 			return eAny(getEAllAttributes()); //1215
-		case EcorePackage::ECLASS_EREFERENCE_EALLCONTAINMENTS:
+		case EcorePackage::ECLASS_ATTRIBUTE_EALLCONTAINMENTS:
 			return eAny(getEAllContainments()); //1219
-		case EcorePackage::ECLASS_EREFERENCE_EALLGENERICSUPERTYPES:
+		case EcorePackage::ECLASS_ATTRIBUTE_EALLGENERICSUPERTYPES:
 			return eAny(getEAllGenericSuperTypes()); //1226
-		case EcorePackage::ECLASS_EREFERENCE_EALLOPERATIONS:
+		case EcorePackage::ECLASS_ATTRIBUTE_EALLOPERATIONS:
 			return eAny(getEAllOperations()); //1220
-		case EcorePackage::ECLASS_EREFERENCE_EALLREFERENCES:
+		case EcorePackage::ECLASS_ATTRIBUTE_EALLREFERENCES:
 			return eAny(getEAllReferences()); //1216
-		case EcorePackage::ECLASS_EREFERENCE_EALLSTRUCTURALFEATURES:
+		case EcorePackage::ECLASS_ATTRIBUTE_EALLSTRUCTURALFEATURES:
 			return eAny(getEAllStructuralFeatures()); //1221
-		case EcorePackage::ECLASS_EREFERENCE_EALLSUPERTYPES:
+		case EcorePackage::ECLASS_ATTRIBUTE_EALLSUPERTYPES:
 			return eAny(getEAllSuperTypes()); //1222
-		case EcorePackage::ECLASS_EREFERENCE_EATTRIBUTES:
+		case EcorePackage::ECLASS_ATTRIBUTE_EATTRIBUTES:
 			return eAny(getEAttributes()); //1218
-		case EcorePackage::ECLASS_EREFERENCE_EGENERICSUPERTYPES:
+		case EcorePackage::ECLASS_ATTRIBUTE_EGENERICSUPERTYPES:
 			return eAny(getEGenericSuperTypes()); //1225
-		case EcorePackage::ECLASS_EREFERENCE_EIDATTRIBUTE:
+		case EcorePackage::ECLASS_ATTRIBUTE_EIDATTRIBUTE:
 			return eAny(getEIDAttribute()); //1223
-		case EcorePackage::ECLASS_EREFERENCE_EOPERATIONS:
+		case EcorePackage::ECLASS_ATTRIBUTE_EOPERATIONS:
 			return eAny(getEOperations()); //1214
-		case EcorePackage::ECLASS_EREFERENCE_EREFERENCES:
+		case EcorePackage::ECLASS_ATTRIBUTE_EREFERENCES:
 			return eAny(getEReferences()); //1217
-		case EcorePackage::ECLASS_EREFERENCE_ESTRUCTURALFEATURES:
+		case EcorePackage::ECLASS_ATTRIBUTE_ESTRUCTURALFEATURES:
 			return eAny(getEStructuralFeatures()); //1224
-		case EcorePackage::ECLASS_EREFERENCE_ESUPERTYPES:
+		case EcorePackage::ECLASS_ATTRIBUTE_ESUPERTYPES:
 			return eAny(getESuperTypes()); //1213
-		case EcorePackage::ECLASS_EATTRIBUTE_INTERFACE:
+		case EcorePackage::ECLASS_ATTRIBUTE_INTERFACE:
 			return eAny(isInterface()); //1212
 	}
 	return EClassifierImpl::eGet(featureID, resolve, coreType);
@@ -758,37 +758,37 @@ bool EClassImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case EcorePackage::ECLASS_EATTRIBUTE_ABSTRACT:
+		case EcorePackage::ECLASS_ATTRIBUTE_ABSTRACT:
 			return isAbstract() != false; //1211
-		case EcorePackage::ECLASS_EREFERENCE_EALLATTRIBUTES:
+		case EcorePackage::ECLASS_ATTRIBUTE_EALLATTRIBUTES:
 			return getEAllAttributes() != nullptr; //1215
-		case EcorePackage::ECLASS_EREFERENCE_EALLCONTAINMENTS:
+		case EcorePackage::ECLASS_ATTRIBUTE_EALLCONTAINMENTS:
 			return getEAllContainments() != nullptr; //1219
-		case EcorePackage::ECLASS_EREFERENCE_EALLGENERICSUPERTYPES:
+		case EcorePackage::ECLASS_ATTRIBUTE_EALLGENERICSUPERTYPES:
 			return getEAllGenericSuperTypes() != nullptr; //1226
-		case EcorePackage::ECLASS_EREFERENCE_EALLOPERATIONS:
+		case EcorePackage::ECLASS_ATTRIBUTE_EALLOPERATIONS:
 			return getEAllOperations() != nullptr; //1220
-		case EcorePackage::ECLASS_EREFERENCE_EALLREFERENCES:
+		case EcorePackage::ECLASS_ATTRIBUTE_EALLREFERENCES:
 			return getEAllReferences() != nullptr; //1216
-		case EcorePackage::ECLASS_EREFERENCE_EALLSTRUCTURALFEATURES:
+		case EcorePackage::ECLASS_ATTRIBUTE_EALLSTRUCTURALFEATURES:
 			return getEAllStructuralFeatures() != nullptr; //1221
-		case EcorePackage::ECLASS_EREFERENCE_EALLSUPERTYPES:
+		case EcorePackage::ECLASS_ATTRIBUTE_EALLSUPERTYPES:
 			return getEAllSuperTypes() != nullptr; //1222
-		case EcorePackage::ECLASS_EREFERENCE_EATTRIBUTES:
+		case EcorePackage::ECLASS_ATTRIBUTE_EATTRIBUTES:
 			return getEAttributes() != nullptr; //1218
-		case EcorePackage::ECLASS_EREFERENCE_EGENERICSUPERTYPES:
+		case EcorePackage::ECLASS_ATTRIBUTE_EGENERICSUPERTYPES:
 			return getEGenericSuperTypes() != nullptr; //1225
-		case EcorePackage::ECLASS_EREFERENCE_EIDATTRIBUTE:
+		case EcorePackage::ECLASS_ATTRIBUTE_EIDATTRIBUTE:
 			return getEIDAttribute() != nullptr; //1223
-		case EcorePackage::ECLASS_EREFERENCE_EOPERATIONS:
+		case EcorePackage::ECLASS_ATTRIBUTE_EOPERATIONS:
 			return getEOperations() != nullptr; //1214
-		case EcorePackage::ECLASS_EREFERENCE_EREFERENCES:
+		case EcorePackage::ECLASS_ATTRIBUTE_EREFERENCES:
 			return getEReferences() != nullptr; //1217
-		case EcorePackage::ECLASS_EREFERENCE_ESTRUCTURALFEATURES:
+		case EcorePackage::ECLASS_ATTRIBUTE_ESTRUCTURALFEATURES:
 			return getEStructuralFeatures() != nullptr; //1224
-		case EcorePackage::ECLASS_EREFERENCE_ESUPERTYPES:
+		case EcorePackage::ECLASS_ATTRIBUTE_ESUPERTYPES:
 			return getESuperTypes() != nullptr; //1213
-		case EcorePackage::ECLASS_EATTRIBUTE_INTERFACE:
+		case EcorePackage::ECLASS_ATTRIBUTE_INTERFACE:
 			return isInterface() != false; //1212
 	}
 	return EClassifierImpl::internalEIsSet(featureID);
@@ -797,14 +797,14 @@ bool EClassImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case EcorePackage::ECLASS_EATTRIBUTE_ABSTRACT:
+		case EcorePackage::ECLASS_ATTRIBUTE_ABSTRACT:
 		{
 			// BOOST CAST
 			bool _abstract = newValue->get<bool>();
 			setAbstract(_abstract); //1211
 			return true;
 		}
-		case EcorePackage::ECLASS_EATTRIBUTE_INTERFACE:
+		case EcorePackage::ECLASS_ATTRIBUTE_INTERFACE:
 		{
 			// BOOST CAST
 			bool _interface = newValue->get<bool>();
@@ -908,7 +908,7 @@ void EClassImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::int
 			{
 				typeName = "EOperation";
 			}
-			std::shared_ptr<ecore::EObject> eOperations = modelFactory->create(typeName, loadHandler->getCurrentObject(), EcorePackage::EOPERATION_EREFERENCE_ECONTAININGCLASS);
+			std::shared_ptr<ecore::EObject> eOperations = modelFactory->create(typeName, loadHandler->getCurrentObject(), EcorePackage::EOPERATION_ATTRIBUTE_ECONTAININGCLASS);
 			if (eOperations != nullptr)
 			{
 				loadHandler->handleChild(eOperations);
@@ -924,7 +924,7 @@ void EClassImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::int
 				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			std::shared_ptr<ecore::EObject> eStructuralFeatures = modelFactory->create(typeName, loadHandler->getCurrentObject(), EcorePackage::ESTRUCTURALFEATURE_EREFERENCE_ECONTAININGCLASS);
+			std::shared_ptr<ecore::EObject> eStructuralFeatures = modelFactory->create(typeName, loadHandler->getCurrentObject(), EcorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_ECONTAININGCLASS);
 			if (eStructuralFeatures != nullptr)
 			{
 				loadHandler->handleChild(eStructuralFeatures);
@@ -948,7 +948,7 @@ void EClassImpl::resolveReferences(const int featureID, std::list<std::shared_pt
 {
 	switch(featureID)
 	{
-		case EcorePackage::ECLASS_EREFERENCE_ESUPERTYPES:
+		case EcorePackage::ECLASS_ATTRIBUTE_ESUPERTYPES:
 		{
 			std::shared_ptr<Bag<ecore::EClass>> _eSuperTypes = getESuperTypes();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -993,17 +993,17 @@ void EClassImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandl
 		// Save 'eOperations'
 		for (std::shared_ptr<ecore::EOperation> eOperations : *this->getEOperations()) 
 		{
-			saveHandler->addReference(eOperations, "eOperations", eOperations->eClass() != package->getEOperation_EClass());
+			saveHandler->addReference(eOperations, "eOperations", eOperations->eClass() != package->getEOperation_Class());
 		}
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getEClass_EAttribute_abstract()) )
+		if ( this->eIsSet(package->getEClass_Attribute_abstract()) )
 		{
 			saveHandler->addAttribute("abstract", this->isAbstract());
 		}
 
-		if ( this->eIsSet(package->getEClass_EAttribute_interface()) )
+		if ( this->eIsSet(package->getEClass_Attribute_interface()) )
 		{
 			saveHandler->addAttribute("interface", this->isInterface());
 		}
@@ -1024,14 +1024,14 @@ void EClassImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandl
 		std::shared_ptr<Bag<ecore::EGenericType>> list_eGenericSuperTypes = this->getEGenericSuperTypes();
 		for (std::shared_ptr<ecore::EGenericType> eGenericSuperTypes : *list_eGenericSuperTypes) 
 		{
-			saveHandler->addReference(eGenericSuperTypes, "eGenericSuperTypes", eGenericSuperTypes->eClass() != package->getEGenericType_EClass());
+			saveHandler->addReference(eGenericSuperTypes, "eGenericSuperTypes", eGenericSuperTypes->eClass() != package->getEGenericType_Class());
 		}
 
 		// Save 'eStructuralFeatures'
 		std::shared_ptr<SubsetUnion<ecore::EStructuralFeature, ecore::EObject>> list_eStructuralFeatures = this->getEStructuralFeatures();
 		for (std::shared_ptr<ecore::EStructuralFeature> eStructuralFeatures : *list_eStructuralFeatures) 
 		{
-			saveHandler->addReference(eStructuralFeatures, "eStructuralFeatures", eStructuralFeatures->eClass() != package->getEStructuralFeature_EClass());
+			saveHandler->addReference(eStructuralFeatures, "eStructuralFeatures", eStructuralFeatures->eClass() != package->getEStructuralFeature_Class());
 		}
 	}
 	catch (std::exception& e)

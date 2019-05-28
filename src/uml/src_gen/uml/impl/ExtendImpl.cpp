@@ -215,7 +215,7 @@ std::shared_ptr<ecore::EObject>  ExtendImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ExtendImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getExtend_EClass();
+	return UmlPackageImpl::eInstance()->getExtend_Class();
 }
 
 //*********************************
@@ -336,13 +336,13 @@ Any ExtendImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::EXTEND_EREFERENCE_CONDITION:
+		case UmlPackage::EXTEND_ATTRIBUTE_CONDITION:
 			return eAny(getCondition()); //9612
-		case UmlPackage::EXTEND_EREFERENCE_EXTENDEDCASE:
+		case UmlPackage::EXTEND_ATTRIBUTE_EXTENDEDCASE:
 			return eAny(getExtendedCase()); //9613
-		case UmlPackage::EXTEND_EREFERENCE_EXTENSION:
+		case UmlPackage::EXTEND_ATTRIBUTE_EXTENSION:
 			return eAny(getExtension()); //9615
-		case UmlPackage::EXTEND_EREFERENCE_EXTENSIONLOCATION:
+		case UmlPackage::EXTEND_ATTRIBUTE_EXTENSIONLOCATION:
 			return eAny(getExtensionLocation()); //9614
 	}
 	Any result;
@@ -358,13 +358,13 @@ bool ExtendImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::EXTEND_EREFERENCE_CONDITION:
+		case UmlPackage::EXTEND_ATTRIBUTE_CONDITION:
 			return getCondition() != nullptr; //9612
-		case UmlPackage::EXTEND_EREFERENCE_EXTENDEDCASE:
+		case UmlPackage::EXTEND_ATTRIBUTE_EXTENDEDCASE:
 			return getExtendedCase() != nullptr; //9613
-		case UmlPackage::EXTEND_EREFERENCE_EXTENSION:
+		case UmlPackage::EXTEND_ATTRIBUTE_EXTENSION:
 			return getExtension().lock() != nullptr; //9615
-		case UmlPackage::EXTEND_EREFERENCE_EXTENSIONLOCATION:
+		case UmlPackage::EXTEND_ATTRIBUTE_EXTENSIONLOCATION:
 			return getExtensionLocation() != nullptr; //9614
 	}
 	bool result = false;
@@ -380,21 +380,21 @@ bool ExtendImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::EXTEND_EREFERENCE_CONDITION:
+		case UmlPackage::EXTEND_ATTRIBUTE_CONDITION:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Constraint> _condition = newValue->get<std::shared_ptr<uml::Constraint>>();
 			setCondition(_condition); //9612
 			return true;
 		}
-		case UmlPackage::EXTEND_EREFERENCE_EXTENDEDCASE:
+		case UmlPackage::EXTEND_ATTRIBUTE_EXTENDEDCASE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::UseCase> _extendedCase = newValue->get<std::shared_ptr<uml::UseCase>>();
 			setExtendedCase(_extendedCase); //9613
 			return true;
 		}
-		case UmlPackage::EXTEND_EREFERENCE_EXTENSION:
+		case UmlPackage::EXTEND_ATTRIBUTE_EXTENSION:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::UseCase> _extension = newValue->get<std::shared_ptr<uml::UseCase>>();
@@ -504,7 +504,7 @@ void ExtendImpl::resolveReferences(const int featureID, std::list<std::shared_pt
 {
 	switch(featureID)
 	{
-		case UmlPackage::EXTEND_EREFERENCE_EXTENDEDCASE:
+		case UmlPackage::EXTEND_ATTRIBUTE_EXTENDEDCASE:
 		{
 			if (references.size() == 1)
 			{
@@ -516,7 +516,7 @@ void ExtendImpl::resolveReferences(const int featureID, std::list<std::shared_pt
 			return;
 		}
 
-		case UmlPackage::EXTEND_EREFERENCE_EXTENSION:
+		case UmlPackage::EXTEND_ATTRIBUTE_EXTENSION:
 		{
 			if (references.size() == 1)
 			{
@@ -528,7 +528,7 @@ void ExtendImpl::resolveReferences(const int featureID, std::list<std::shared_pt
 			return;
 		}
 
-		case UmlPackage::EXTEND_EREFERENCE_EXTENSIONLOCATION:
+		case UmlPackage::EXTEND_ATTRIBUTE_EXTENSIONLOCATION:
 		{
 			std::shared_ptr<Bag<uml::ExtensionPoint>> _extensionLocation = getExtensionLocation();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -576,7 +576,7 @@ void ExtendImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandl
 		std::shared_ptr<uml::Constraint > condition = this->getCondition();
 		if (condition != nullptr)
 		{
-			saveHandler->addReference(condition, "condition", condition->eClass() != package->getConstraint_EClass());
+			saveHandler->addReference(condition, "condition", condition->eClass() != package->getConstraint_Class());
 		}
 	
 

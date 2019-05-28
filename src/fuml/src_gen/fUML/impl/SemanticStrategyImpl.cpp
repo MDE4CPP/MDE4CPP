@@ -93,7 +93,7 @@ std::shared_ptr<ecore::EObject>  SemanticStrategyImpl::copy() const
 
 std::shared_ptr<ecore::EClass> SemanticStrategyImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getSemanticStrategy_EClass();
+	return FUMLPackageImpl::eInstance()->getSemanticStrategy_Class();
 }
 
 //*********************************

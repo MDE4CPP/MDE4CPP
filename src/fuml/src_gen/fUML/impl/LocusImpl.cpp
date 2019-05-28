@@ -157,7 +157,7 @@ std::shared_ptr<ecore::EObject>  LocusImpl::copy() const
 
 std::shared_ptr<ecore::EClass> LocusImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getLocus_EClass();
+	return FUMLPackageImpl::eInstance()->getLocus_Class();
 }
 
 //*********************************
@@ -330,11 +330,11 @@ Any LocusImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::LOCUS_EREFERENCE_EXECUTOR:
+		case FUMLPackage::LOCUS_ATTRIBUTE_EXECUTOR:
 			return eAny(getExecutor()); //730
-		case FUMLPackage::LOCUS_EREFERENCE_EXTENSIONALVALUES:
+		case FUMLPackage::LOCUS_ATTRIBUTE_EXTENSIONALVALUES:
 			return eAny(getExtensionalValues()); //732
-		case FUMLPackage::LOCUS_EREFERENCE_FACTORY:
+		case FUMLPackage::LOCUS_ATTRIBUTE_FACTORY:
 			return eAny(getFactory()); //731
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
@@ -343,11 +343,11 @@ bool LocusImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::LOCUS_EREFERENCE_EXECUTOR:
+		case FUMLPackage::LOCUS_ATTRIBUTE_EXECUTOR:
 			return getExecutor() != nullptr; //730
-		case FUMLPackage::LOCUS_EREFERENCE_EXTENSIONALVALUES:
+		case FUMLPackage::LOCUS_ATTRIBUTE_EXTENSIONALVALUES:
 			return getExtensionalValues() != nullptr; //732
-		case FUMLPackage::LOCUS_EREFERENCE_FACTORY:
+		case FUMLPackage::LOCUS_ATTRIBUTE_FACTORY:
 			return getFactory() != nullptr; //731
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
@@ -356,14 +356,14 @@ bool LocusImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case FUMLPackage::LOCUS_EREFERENCE_EXECUTOR:
+		case FUMLPackage::LOCUS_ATTRIBUTE_EXECUTOR:
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::Executor> _executor = newValue->get<std::shared_ptr<fUML::Executor>>();
 			setExecutor(_executor); //730
 			return true;
 		}
-		case FUMLPackage::LOCUS_EREFERENCE_FACTORY:
+		case FUMLPackage::LOCUS_ATTRIBUTE_FACTORY:
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::ExecutionFactory> _factory = newValue->get<std::shared_ptr<fUML::ExecutionFactory>>();
@@ -413,7 +413,7 @@ void LocusImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inte
 			{
 				typeName = "Executor";
 			}
-			std::shared_ptr<ecore::EObject> executor = modelFactory->create(typeName, loadHandler->getCurrentObject(), FUMLPackage::EXECUTOR_EREFERENCE_LOCUS);
+			std::shared_ptr<ecore::EObject> executor = modelFactory->create(typeName, loadHandler->getCurrentObject(), FUMLPackage::EXECUTOR_ATTRIBUTE_LOCUS);
 			if (executor != nullptr)
 			{
 				loadHandler->handleChild(executor);
@@ -447,7 +447,7 @@ void LocusImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inte
 				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			std::shared_ptr<ecore::EObject> factory = modelFactory->create(typeName, loadHandler->getCurrentObject(), FUMLPackage::EXECUTIONFACTORY_EREFERENCE_LOCUS);
+			std::shared_ptr<ecore::EObject> factory = modelFactory->create(typeName, loadHandler->getCurrentObject(), FUMLPackage::EXECUTIONFACTORY_ATTRIBUTE_LOCUS);
 			if (factory != nullptr)
 			{
 				loadHandler->handleChild(factory);
@@ -498,21 +498,21 @@ void LocusImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandle
 		std::shared_ptr<fUML::Executor > executor = this->getExecutor();
 		if (executor != nullptr)
 		{
-			saveHandler->addReference(executor, "executor", executor->eClass() != package->getExecutor_EClass());
+			saveHandler->addReference(executor, "executor", executor->eClass() != package->getExecutor_Class());
 		}
 
 		// Save 'extensionalValues'
 		std::shared_ptr<Bag<fUML::ExtensionalValue>> list_extensionalValues = this->getExtensionalValues();
 		for (std::shared_ptr<fUML::ExtensionalValue> extensionalValues : *list_extensionalValues) 
 		{
-			saveHandler->addReference(extensionalValues, "extensionalValues", extensionalValues->eClass() != package->getExtensionalValue_EClass());
+			saveHandler->addReference(extensionalValues, "extensionalValues", extensionalValues->eClass() != package->getExtensionalValue_Class());
 		}
 
 		// Save 'factory'
 		std::shared_ptr<fUML::ExecutionFactory > factory = this->getFactory();
 		if (factory != nullptr)
 		{
-			saveHandler->addReference(factory, "factory", factory->eClass() != package->getExecutionFactory_EClass());
+			saveHandler->addReference(factory, "factory", factory->eClass() != package->getExecutionFactory_Class());
 		}
 	}
 	catch (std::exception& e)

@@ -135,7 +135,7 @@ std::shared_ptr<ecore::EObject>  ForkNodeActivationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ForkNodeActivationImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getForkNodeActivation_EClass();
+	return FUMLPackageImpl::eInstance()->getForkNodeActivation_Class();
 }
 
 //*********************************

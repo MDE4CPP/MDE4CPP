@@ -125,12 +125,12 @@ namespace uml
 			/*!
 			 The specified UnlimitedNatural value.
 			<p>From package UML::Values.</p> */ 
-			virtual int getValue() const = 0;
+			virtual unsigned int getValue() const = 0;
 			
 			/*!
 			 The specified UnlimitedNatural value.
 			<p>From package UML::Values.</p> */ 
-			virtual void setValue (int _value)= 0; 
+			virtual void setValue (unsigned int _value)= 0; 
 			
 			
 			//*********************************
@@ -145,7 +145,7 @@ namespace uml
 			/*!
 			 The specified UnlimitedNatural value.
 			<p>From package UML::Values.</p> */ 
-			int m_value = 0;
+			unsigned int m_value = 0;
 			
 			
 			//*********************************

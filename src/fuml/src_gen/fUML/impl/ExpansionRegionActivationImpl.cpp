@@ -195,7 +195,7 @@ std::shared_ptr<ecore::EObject>  ExpansionRegionActivationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ExpansionRegionActivationImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getExpansionRegionActivation_EClass();
+	return FUMLPackageImpl::eInstance()->getExpansionRegionActivation_Class();
 }
 
 //*********************************
@@ -287,11 +287,11 @@ Any ExpansionRegionActivationImpl::eGet(int featureID, bool resolve, bool coreTy
 {
 	switch(featureID)
 	{
-		case FUMLPackage::EXPANSIONREGIONACTIVATION_EREFERENCE_ACTIVATIONGROUPS:
+		case FUMLPackage::EXPANSIONREGIONACTIVATION_ATTRIBUTE_ACTIVATIONGROUPS:
 			return eAny(getActivationGroups()); //4812
-		case FUMLPackage::EXPANSIONREGIONACTIVATION_EREFERENCE_INPUTEXPANSIONTOKENS:
+		case FUMLPackage::EXPANSIONREGIONACTIVATION_ATTRIBUTE_INPUTEXPANSIONTOKENS:
 			return eAny(getInputExpansionTokens()); //4811
-		case FUMLPackage::EXPANSIONREGIONACTIVATION_EREFERENCE_INPUTTOKENS:
+		case FUMLPackage::EXPANSIONREGIONACTIVATION_ATTRIBUTE_INPUTTOKENS:
 			return eAny(getInputTokens()); //4810
 	}
 	return ActionActivationImpl::eGet(featureID, resolve, coreType);
@@ -300,11 +300,11 @@ bool ExpansionRegionActivationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::EXPANSIONREGIONACTIVATION_EREFERENCE_ACTIVATIONGROUPS:
+		case FUMLPackage::EXPANSIONREGIONACTIVATION_ATTRIBUTE_ACTIVATIONGROUPS:
 			return getActivationGroups() != nullptr; //4812
-		case FUMLPackage::EXPANSIONREGIONACTIVATION_EREFERENCE_INPUTEXPANSIONTOKENS:
+		case FUMLPackage::EXPANSIONREGIONACTIVATION_ATTRIBUTE_INPUTEXPANSIONTOKENS:
 			return getInputExpansionTokens() != nullptr; //4811
-		case FUMLPackage::EXPANSIONREGIONACTIVATION_EREFERENCE_INPUTTOKENS:
+		case FUMLPackage::EXPANSIONREGIONACTIVATION_ATTRIBUTE_INPUTTOKENS:
 			return getInputTokens() != nullptr; //4810
 	}
 	return ActionActivationImpl::internalEIsSet(featureID);
@@ -388,7 +388,7 @@ void ExpansionRegionActivationImpl::resolveReferences(const int featureID, std::
 {
 	switch(featureID)
 	{
-		case FUMLPackage::EXPANSIONREGIONACTIVATION_EREFERENCE_ACTIVATIONGROUPS:
+		case FUMLPackage::EXPANSIONREGIONACTIVATION_ATTRIBUTE_ACTIVATIONGROUPS:
 		{
 			std::shared_ptr<Bag<fUML::ExpansionActivationGroup>> _activationGroups = getActivationGroups();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -402,7 +402,7 @@ void ExpansionRegionActivationImpl::resolveReferences(const int featureID, std::
 			return;
 		}
 
-		case FUMLPackage::EXPANSIONREGIONACTIVATION_EREFERENCE_INPUTEXPANSIONTOKENS:
+		case FUMLPackage::EXPANSIONREGIONACTIVATION_ATTRIBUTE_INPUTEXPANSIONTOKENS:
 		{
 			std::shared_ptr<Bag<fUML::TokenSet>> _inputExpansionTokens = getInputExpansionTokens();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -416,7 +416,7 @@ void ExpansionRegionActivationImpl::resolveReferences(const int featureID, std::
 			return;
 		}
 
-		case FUMLPackage::EXPANSIONREGIONACTIVATION_EREFERENCE_INPUTTOKENS:
+		case FUMLPackage::EXPANSIONREGIONACTIVATION_ATTRIBUTE_INPUTTOKENS:
 		{
 			std::shared_ptr<Bag<fUML::TokenSet>> _inputTokens = getInputTokens();
 			for(std::shared_ptr<ecore::EObject> ref : references)

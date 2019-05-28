@@ -93,7 +93,7 @@ std::shared_ptr<ecore::EObject>  SemanticVisitorImpl::copy() const
 
 std::shared_ptr<ecore::EClass> SemanticVisitorImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getSemanticVisitor_EClass();
+	return FUMLPackageImpl::eInstance()->getSemanticVisitor_Class();
 }
 
 //*********************************

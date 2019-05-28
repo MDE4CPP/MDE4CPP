@@ -141,7 +141,7 @@ std::shared_ptr<ecore::EObject>  PinActivationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> PinActivationImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getPinActivation_EClass();
+	return FUMLPackageImpl::eInstance()->getPinActivation_Class();
 }
 
 //*********************************
@@ -250,7 +250,7 @@ Any PinActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::PINACTIVATION_EREFERENCE_ACTIONACTIVATION:
+		case FUMLPackage::PINACTIVATION_ATTRIBUTE_ACTIONACTIVATION:
 			return eAny(getActionActivation()); //847
 	}
 	return ObjectNodeActivationImpl::eGet(featureID, resolve, coreType);
@@ -259,7 +259,7 @@ bool PinActivationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::PINACTIVATION_EREFERENCE_ACTIONACTIVATION:
+		case FUMLPackage::PINACTIVATION_ATTRIBUTE_ACTIONACTIVATION:
 			return getActionActivation().lock() != nullptr; //847
 	}
 	return ObjectNodeActivationImpl::internalEIsSet(featureID);
@@ -268,7 +268,7 @@ bool PinActivationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case FUMLPackage::PINACTIVATION_EREFERENCE_ACTIONACTIVATION:
+		case FUMLPackage::PINACTIVATION_ATTRIBUTE_ACTIONACTIVATION:
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::ActionActivation> _actionActivation = newValue->get<std::shared_ptr<fUML::ActionActivation>>();
@@ -317,7 +317,7 @@ void PinActivationImpl::resolveReferences(const int featureID, std::list<std::sh
 {
 	switch(featureID)
 	{
-		case FUMLPackage::PINACTIVATION_EREFERENCE_ACTIONACTIVATION:
+		case FUMLPackage::PINACTIVATION_ATTRIBUTE_ACTIONACTIVATION:
 		{
 			if (references.size() == 1)
 			{

@@ -167,11 +167,11 @@ AssociationClassImpl::~AssociationClassImpl()
 			{
 				switch(reference_id)
 				{	
-				case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
+				case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
 					m_owningPackage = par_Package;
 					m_namespace = par_Package;
 					 return;
-				case UmlPackage::TYPE_EREFERENCE_PACKAGE:
+				case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
 					m_package = par_Package;
 					m_namespace = par_Package;
 					 return;
@@ -501,7 +501,7 @@ std::shared_ptr<ecore::EObject>  AssociationClassImpl::copy() const
 
 std::shared_ptr<ecore::EClass> AssociationClassImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getAssociationClass_EClass();
+	return UmlPackageImpl::eInstance()->getAssociationClass_Class();
 }
 
 //*********************************

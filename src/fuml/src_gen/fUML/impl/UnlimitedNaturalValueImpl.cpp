@@ -111,7 +111,7 @@ std::shared_ptr<ecore::EObject>  UnlimitedNaturalValueImpl::copy() const
 
 std::shared_ptr<ecore::EClass> UnlimitedNaturalValueImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getUnlimitedNaturalValue_EClass();
+	return FUMLPackageImpl::eInstance()->getUnlimitedNaturalValue_Class();
 }
 
 //*********************************
@@ -137,7 +137,7 @@ bool UnlimitedNaturalValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue)
 		//generated from body annotation
 	bool isEqual = false;
 
-    if(otherValue != nullptr && otherValue->eClass()->getClassifierID() == fUML::FUMLPackage::UNLIMITEDNATURALVALUE_ECLASS)
+    if(otherValue != nullptr && otherValue->eClass()->getClassifierID() == fUML::FUMLPackage::UNLIMITEDNATURALVALUE_CLASS)
     {
 		std::shared_ptr<fUML::UnlimitedNaturalValue> unValue = std::dynamic_pointer_cast<UnlimitedNaturalValue>(otherValue);
         isEqual = (unValue->getValue() == this->getValue());
@@ -205,7 +205,7 @@ Any UnlimitedNaturalValueImpl::eGet(int featureID, bool resolve, bool coreType) 
 {
 	switch(featureID)
 	{
-		case FUMLPackage::UNLIMITEDNATURALVALUE_EATTRIBUTE_VALUE:
+		case FUMLPackage::UNLIMITEDNATURALVALUE_ATTRIBUTE_VALUE:
 			return eAny(getValue()); //1101
 	}
 	return PrimitiveValueImpl::eGet(featureID, resolve, coreType);
@@ -214,7 +214,7 @@ bool UnlimitedNaturalValueImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::UNLIMITEDNATURALVALUE_EATTRIBUTE_VALUE:
+		case FUMLPackage::UNLIMITEDNATURALVALUE_ATTRIBUTE_VALUE:
 			return getValue() != 0; //1101
 	}
 	return PrimitiveValueImpl::internalEIsSet(featureID);
@@ -223,7 +223,7 @@ bool UnlimitedNaturalValueImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case FUMLPackage::UNLIMITEDNATURALVALUE_EATTRIBUTE_VALUE:
+		case FUMLPackage::UNLIMITEDNATURALVALUE_ATTRIBUTE_VALUE:
 		{
 			// BOOST CAST
 			int _value = newValue->get<int>();
@@ -319,7 +319,7 @@ void UnlimitedNaturalValueImpl::saveContent(std::shared_ptr<persistence::interfa
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getUnlimitedNaturalValue_EAttribute_value()) )
+		if ( this->eIsSet(package->getUnlimitedNaturalValue_Attribute_value()) )
 		{
 			saveHandler->addAttribute("value", this->getValue());
 		}

@@ -326,7 +326,7 @@ std::shared_ptr<ecore::EObject>  ReplyActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ReplyActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getReplyAction_EClass();
+	return UmlPackageImpl::eInstance()->getReplyAction_Class();
 }
 
 //*********************************
@@ -443,11 +443,11 @@ Any ReplyActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::REPLYACTION_EREFERENCE_REPLYTOCALL:
+		case UmlPackage::REPLYACTION_ATTRIBUTE_REPLYTOCALL:
 			return eAny(getReplyToCall()); //21127
-		case UmlPackage::REPLYACTION_EREFERENCE_REPLYVALUE:
+		case UmlPackage::REPLYACTION_ATTRIBUTE_REPLYVALUE:
 			return eAny(getReplyValue()); //21128
-		case UmlPackage::REPLYACTION_EREFERENCE_RETURNINFORMATION:
+		case UmlPackage::REPLYACTION_ATTRIBUTE_RETURNINFORMATION:
 			return eAny(getReturnInformation()); //21129
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
@@ -456,11 +456,11 @@ bool ReplyActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::REPLYACTION_EREFERENCE_REPLYTOCALL:
+		case UmlPackage::REPLYACTION_ATTRIBUTE_REPLYTOCALL:
 			return getReplyToCall() != nullptr; //21127
-		case UmlPackage::REPLYACTION_EREFERENCE_REPLYVALUE:
+		case UmlPackage::REPLYACTION_ATTRIBUTE_REPLYVALUE:
 			return getReplyValue() != nullptr; //21128
-		case UmlPackage::REPLYACTION_EREFERENCE_RETURNINFORMATION:
+		case UmlPackage::REPLYACTION_ATTRIBUTE_RETURNINFORMATION:
 			return getReturnInformation() != nullptr; //21129
 	}
 	return ActionImpl::internalEIsSet(featureID);
@@ -469,14 +469,14 @@ bool ReplyActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::REPLYACTION_EREFERENCE_REPLYTOCALL:
+		case UmlPackage::REPLYACTION_ATTRIBUTE_REPLYTOCALL:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Trigger> _replyToCall = newValue->get<std::shared_ptr<uml::Trigger>>();
 			setReplyToCall(_replyToCall); //21127
 			return true;
 		}
-		case UmlPackage::REPLYACTION_EREFERENCE_RETURNINFORMATION:
+		case UmlPackage::REPLYACTION_ATTRIBUTE_RETURNINFORMATION:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::InputPin> _returnInformation = newValue->get<std::shared_ptr<uml::InputPin>>();
@@ -587,7 +587,7 @@ void ReplyActionImpl::resolveReferences(const int featureID, std::list<std::shar
 {
 	switch(featureID)
 	{
-		case UmlPackage::REPLYACTION_EREFERENCE_REPLYTOCALL:
+		case UmlPackage::REPLYACTION_ATTRIBUTE_REPLYTOCALL:
 		{
 			if (references.size() == 1)
 			{
@@ -640,14 +640,14 @@ void ReplyActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 		// Save 'replyValue'
 		for (std::shared_ptr<uml::InputPin> replyValue : *this->getReplyValue()) 
 		{
-			saveHandler->addReference(replyValue, "replyValue", replyValue->eClass() != package->getInputPin_EClass());
+			saveHandler->addReference(replyValue, "replyValue", replyValue->eClass() != package->getInputPin_Class());
 		}
 
 		// Save 'returnInformation'
 		std::shared_ptr<uml::InputPin > returnInformation = this->getReturnInformation();
 		if (returnInformation != nullptr)
 		{
-			saveHandler->addReference(returnInformation, "returnInformation", returnInformation->eClass() != package->getInputPin_EClass());
+			saveHandler->addReference(returnInformation, "returnInformation", returnInformation->eClass() != package->getInputPin_Class());
 		}
 	
 

@@ -134,7 +134,7 @@ std::shared_ptr<ecore::EObject>  DataStoreNodeActivationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> DataStoreNodeActivationImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getDataStoreNodeActivation_EClass();
+	return FUMLPackageImpl::eInstance()->getDataStoreNodeActivation_Class();
 }
 
 //*********************************

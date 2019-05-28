@@ -214,7 +214,7 @@ std::shared_ptr<ecore::EObject>  ExecutionSpecificationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ExecutionSpecificationImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getExecutionSpecification_EClass();
+	return UmlPackageImpl::eInstance()->getExecutionSpecification_Class();
 }
 
 //*********************************
@@ -310,9 +310,9 @@ Any ExecutionSpecificationImpl::eGet(int featureID, bool resolve, bool coreType)
 {
 	switch(featureID)
 	{
-		case UmlPackage::EXECUTIONSPECIFICATION_EREFERENCE_FINISH:
+		case UmlPackage::EXECUTIONSPECIFICATION_ATTRIBUTE_FINISH:
 			return eAny(getFinish()); //9113
-		case UmlPackage::EXECUTIONSPECIFICATION_EREFERENCE_START:
+		case UmlPackage::EXECUTIONSPECIFICATION_ATTRIBUTE_START:
 			return eAny(getStart()); //9114
 	}
 	return InteractionFragmentImpl::eGet(featureID, resolve, coreType);
@@ -321,9 +321,9 @@ bool ExecutionSpecificationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::EXECUTIONSPECIFICATION_EREFERENCE_FINISH:
+		case UmlPackage::EXECUTIONSPECIFICATION_ATTRIBUTE_FINISH:
 			return getFinish() != nullptr; //9113
-		case UmlPackage::EXECUTIONSPECIFICATION_EREFERENCE_START:
+		case UmlPackage::EXECUTIONSPECIFICATION_ATTRIBUTE_START:
 			return getStart() != nullptr; //9114
 	}
 	return InteractionFragmentImpl::internalEIsSet(featureID);
@@ -332,14 +332,14 @@ bool ExecutionSpecificationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::EXECUTIONSPECIFICATION_EREFERENCE_FINISH:
+		case UmlPackage::EXECUTIONSPECIFICATION_ATTRIBUTE_FINISH:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::OccurrenceSpecification> _finish = newValue->get<std::shared_ptr<uml::OccurrenceSpecification>>();
 			setFinish(_finish); //9113
 			return true;
 		}
-		case UmlPackage::EXECUTIONSPECIFICATION_EREFERENCE_START:
+		case UmlPackage::EXECUTIONSPECIFICATION_ATTRIBUTE_START:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::OccurrenceSpecification> _start = newValue->get<std::shared_ptr<uml::OccurrenceSpecification>>();
@@ -414,7 +414,7 @@ void ExecutionSpecificationImpl::resolveReferences(const int featureID, std::lis
 {
 	switch(featureID)
 	{
-		case UmlPackage::EXECUTIONSPECIFICATION_EREFERENCE_FINISH:
+		case UmlPackage::EXECUTIONSPECIFICATION_ATTRIBUTE_FINISH:
 		{
 			if (references.size() == 1)
 			{
@@ -426,7 +426,7 @@ void ExecutionSpecificationImpl::resolveReferences(const int featureID, std::lis
 			return;
 		}
 
-		case UmlPackage::EXECUTIONSPECIFICATION_EREFERENCE_START:
+		case UmlPackage::EXECUTIONSPECIFICATION_ATTRIBUTE_START:
 		{
 			if (references.size() == 1)
 			{

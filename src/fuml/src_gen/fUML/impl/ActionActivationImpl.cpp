@@ -236,7 +236,7 @@ std::shared_ptr<ecore::EObject>  ActionActivationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ActionActivationImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getActionActivation_EClass();
+	return FUMLPackageImpl::eInstance()->getActionActivation_Class();
 }
 
 //*********************************
@@ -312,14 +312,14 @@ void ActionActivationImpl::addPinActivation(std::shared_ptr<fUML::PinActivation>
 
 	switch(pinActivation->eClass()->getClassifierID())
 	{
-		case FUMLPackage::INPUTPINACTIVATION_ECLASS:
+		case FUMLPackage::INPUTPINACTIVATION_CLASS:
 		{
 			std::shared_ptr<fUML::InputPinActivation> inPinActivation= std::dynamic_pointer_cast<InputPinActivation> (pinActivation);
 			this->getInputPinActivation()->push_back(inPinActivation);
 			break;
 		}
 
-		case FUMLPackage::OUTPUTPINACTIVATION_ECLASS:
+		case FUMLPackage::OUTPUTPINACTIVATION_CLASS:
 		{
 			std::shared_ptr<fUML::OutputPinActivation> outPinActivation= std::dynamic_pointer_cast<OutputPinActivation> (pinActivation);
 			this->getOutputPinActivation()->push_back(outPinActivation);
@@ -804,13 +804,13 @@ Any ActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::ACTIONACTIVATION_EATTRIBUTE_FIRING:
+		case FUMLPackage::ACTIONACTIVATION_ATTRIBUTE_FIRING:
 			return eAny(isFiring()); //37
-		case FUMLPackage::ACTIONACTIVATION_EREFERENCE_INPUTPINACTIVATION:
+		case FUMLPackage::ACTIONACTIVATION_ATTRIBUTE_INPUTPINACTIVATION:
 			return eAny(getInputPinActivation()); //38
-		case FUMLPackage::ACTIONACTIVATION_EREFERENCE_OUTPUTPINACTIVATION:
+		case FUMLPackage::ACTIONACTIVATION_ATTRIBUTE_OUTPUTPINACTIVATION:
 			return eAny(getOutputPinActivation()); //39
-		case FUMLPackage::ACTIONACTIVATION_EREFERENCE_PINACTIVATION:
+		case FUMLPackage::ACTIONACTIVATION_ATTRIBUTE_PINACTIVATION:
 			return eAny(getPinActivation()); //36
 	}
 	return ActivityNodeActivationImpl::eGet(featureID, resolve, coreType);
@@ -819,13 +819,13 @@ bool ActionActivationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::ACTIONACTIVATION_EATTRIBUTE_FIRING:
+		case FUMLPackage::ACTIONACTIVATION_ATTRIBUTE_FIRING:
 			return isFiring() != false; //37
-		case FUMLPackage::ACTIONACTIVATION_EREFERENCE_INPUTPINACTIVATION:
+		case FUMLPackage::ACTIONACTIVATION_ATTRIBUTE_INPUTPINACTIVATION:
 			return getInputPinActivation() != nullptr; //38
-		case FUMLPackage::ACTIONACTIVATION_EREFERENCE_OUTPUTPINACTIVATION:
+		case FUMLPackage::ACTIONACTIVATION_ATTRIBUTE_OUTPUTPINACTIVATION:
 			return getOutputPinActivation() != nullptr; //39
-		case FUMLPackage::ACTIONACTIVATION_EREFERENCE_PINACTIVATION:
+		case FUMLPackage::ACTIONACTIVATION_ATTRIBUTE_PINACTIVATION:
 			return getPinActivation() != nullptr; //36
 	}
 	return ActivityNodeActivationImpl::internalEIsSet(featureID);
@@ -834,7 +834,7 @@ bool ActionActivationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case FUMLPackage::ACTIONACTIVATION_EATTRIBUTE_FIRING:
+		case FUMLPackage::ACTIONACTIVATION_ATTRIBUTE_FIRING:
 		{
 			// BOOST CAST
 			bool _firing = newValue->get<bool>();
@@ -925,7 +925,7 @@ void ActionActivationImpl::resolveReferences(const int featureID, std::list<std:
 {
 	switch(featureID)
 	{
-		case FUMLPackage::ACTIONACTIVATION_EREFERENCE_INPUTPINACTIVATION:
+		case FUMLPackage::ACTIONACTIVATION_ATTRIBUTE_INPUTPINACTIVATION:
 		{
 			std::shared_ptr<Bag<fUML::InputPinActivation>> _inputPinActivation = getInputPinActivation();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -939,7 +939,7 @@ void ActionActivationImpl::resolveReferences(const int featureID, std::list<std:
 			return;
 		}
 
-		case FUMLPackage::ACTIONACTIVATION_EREFERENCE_OUTPUTPINACTIVATION:
+		case FUMLPackage::ACTIONACTIVATION_ATTRIBUTE_OUTPUTPINACTIVATION:
 		{
 			std::shared_ptr<Bag<fUML::OutputPinActivation>> _outputPinActivation = getOutputPinActivation();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -953,7 +953,7 @@ void ActionActivationImpl::resolveReferences(const int featureID, std::list<std:
 			return;
 		}
 
-		case FUMLPackage::ACTIONACTIVATION_EREFERENCE_PINACTIVATION:
+		case FUMLPackage::ACTIONACTIVATION_ATTRIBUTE_PINACTIVATION:
 		{
 			std::shared_ptr<Bag<fUML::PinActivation>> _pinActivation = getPinActivation();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -992,7 +992,7 @@ void ActionActivationImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getActionActivation_EAttribute_firing()) )
+		if ( this->eIsSet(package->getActionActivation_Attribute_firing()) )
 		{
 			saveHandler->addAttribute("firing", this->isFiring());
 		}

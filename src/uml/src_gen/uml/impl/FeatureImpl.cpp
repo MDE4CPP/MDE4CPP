@@ -176,7 +176,7 @@ std::shared_ptr<ecore::EObject>  FeatureImpl::copy() const
 
 std::shared_ptr<ecore::EClass> FeatureImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getFeature_EClass();
+	return UmlPackageImpl::eInstance()->getFeature_Class();
 }
 
 //*********************************
@@ -249,9 +249,9 @@ Any FeatureImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::FEATURE_EREFERENCE_FEATURINGCLASSIFIER:
+		case UmlPackage::FEATURE_ATTRIBUTE_FEATURINGCLASSIFIER:
 			return eAny(getFeaturingClassifier()); //10112
-		case UmlPackage::FEATURE_EATTRIBUTE_ISSTATIC:
+		case UmlPackage::FEATURE_ATTRIBUTE_ISSTATIC:
 			return eAny(getIsStatic()); //10113
 	}
 	return RedefinableElementImpl::eGet(featureID, resolve, coreType);
@@ -260,9 +260,9 @@ bool FeatureImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::FEATURE_EREFERENCE_FEATURINGCLASSIFIER:
+		case UmlPackage::FEATURE_ATTRIBUTE_FEATURINGCLASSIFIER:
 			return getFeaturingClassifier() != nullptr; //10112
-		case UmlPackage::FEATURE_EATTRIBUTE_ISSTATIC:
+		case UmlPackage::FEATURE_ATTRIBUTE_ISSTATIC:
 			return getIsStatic() != false; //10113
 	}
 	return RedefinableElementImpl::internalEIsSet(featureID);
@@ -271,7 +271,7 @@ bool FeatureImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::FEATURE_EATTRIBUTE_ISSTATIC:
+		case UmlPackage::FEATURE_ATTRIBUTE_ISSTATIC:
 		{
 			// BOOST CAST
 			bool _isStatic = newValue->get<bool>();
@@ -370,7 +370,7 @@ void FeatureImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getFeature_EAttribute_isStatic()) )
+		if ( this->eIsSet(package->getFeature_Attribute_isStatic()) )
 		{
 			saveHandler->addAttribute("isStatic", this->getIsStatic());
 		}

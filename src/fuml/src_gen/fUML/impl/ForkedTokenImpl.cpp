@@ -109,7 +109,7 @@ std::shared_ptr<ecore::EObject>  ForkedTokenImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ForkedTokenImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getForkedToken_EClass();
+	return FUMLPackageImpl::eInstance()->getForkedToken_Class();
 }
 
 //*********************************
@@ -220,11 +220,11 @@ Any ForkedTokenImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::FORKEDTOKEN_EREFERENCE_BASETOKEN:
+		case FUMLPackage::FORKEDTOKEN_ATTRIBUTE_BASETOKEN:
 			return eAny(getBaseToken()); //562
-		case FUMLPackage::FORKEDTOKEN_EATTRIBUTE_BASETOKENISWITHDRAWN:
+		case FUMLPackage::FORKEDTOKEN_ATTRIBUTE_BASETOKENISWITHDRAWN:
 			return eAny(isBaseTokenIsWithdrawn()); //564
-		case FUMLPackage::FORKEDTOKEN_EATTRIBUTE_REMAININGOFFERSCOUNT:
+		case FUMLPackage::FORKEDTOKEN_ATTRIBUTE_REMAININGOFFERSCOUNT:
 			return eAny(getRemainingOffersCount()); //563
 	}
 	return TokenImpl::eGet(featureID, resolve, coreType);
@@ -233,11 +233,11 @@ bool ForkedTokenImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::FORKEDTOKEN_EREFERENCE_BASETOKEN:
+		case FUMLPackage::FORKEDTOKEN_ATTRIBUTE_BASETOKEN:
 			return getBaseToken() != nullptr; //562
-		case FUMLPackage::FORKEDTOKEN_EATTRIBUTE_BASETOKENISWITHDRAWN:
+		case FUMLPackage::FORKEDTOKEN_ATTRIBUTE_BASETOKENISWITHDRAWN:
 			return isBaseTokenIsWithdrawn() != false; //564
-		case FUMLPackage::FORKEDTOKEN_EATTRIBUTE_REMAININGOFFERSCOUNT:
+		case FUMLPackage::FORKEDTOKEN_ATTRIBUTE_REMAININGOFFERSCOUNT:
 			return getRemainingOffersCount() != 0; //563
 	}
 	return TokenImpl::internalEIsSet(featureID);
@@ -246,21 +246,21 @@ bool ForkedTokenImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case FUMLPackage::FORKEDTOKEN_EREFERENCE_BASETOKEN:
+		case FUMLPackage::FORKEDTOKEN_ATTRIBUTE_BASETOKEN:
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::Token> _baseToken = newValue->get<std::shared_ptr<fUML::Token>>();
 			setBaseToken(_baseToken); //562
 			return true;
 		}
-		case FUMLPackage::FORKEDTOKEN_EATTRIBUTE_BASETOKENISWITHDRAWN:
+		case FUMLPackage::FORKEDTOKEN_ATTRIBUTE_BASETOKENISWITHDRAWN:
 		{
 			// BOOST CAST
 			bool _baseTokenIsWithdrawn = newValue->get<bool>();
 			setBaseTokenIsWithdrawn(_baseTokenIsWithdrawn); //564
 			return true;
 		}
-		case FUMLPackage::FORKEDTOKEN_EATTRIBUTE_REMAININGOFFERSCOUNT:
+		case FUMLPackage::FORKEDTOKEN_ATTRIBUTE_REMAININGOFFERSCOUNT:
 		{
 			// BOOST CAST
 			int _remainingOffersCount = newValue->get<int>();
@@ -346,7 +346,7 @@ void ForkedTokenImpl::resolveReferences(const int featureID, std::list<std::shar
 {
 	switch(featureID)
 	{
-		case FUMLPackage::FORKEDTOKEN_EREFERENCE_BASETOKEN:
+		case FUMLPackage::FORKEDTOKEN_ATTRIBUTE_BASETOKEN:
 		{
 			if (references.size() == 1)
 			{
@@ -380,12 +380,12 @@ void ForkedTokenImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getForkedToken_EAttribute_baseTokenIsWithdrawn()) )
+		if ( this->eIsSet(package->getForkedToken_Attribute_baseTokenIsWithdrawn()) )
 		{
 			saveHandler->addAttribute("baseTokenIsWithdrawn", this->isBaseTokenIsWithdrawn());
 		}
 
-		if ( this->eIsSet(package->getForkedToken_EAttribute_remainingOffersCount()) )
+		if ( this->eIsSet(package->getForkedToken_Attribute_remainingOffersCount()) )
 		{
 			saveHandler->addAttribute("remainingOffersCount", this->getRemainingOffersCount());
 		}

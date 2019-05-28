@@ -195,7 +195,7 @@ std::shared_ptr<ecore::EObject>  ConditionalNodeActivationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ConditionalNodeActivationImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getConditionalNodeActivation_EClass();
+	return FUMLPackageImpl::eInstance()->getConditionalNodeActivation_Class();
 }
 
 //*********************************
@@ -274,9 +274,9 @@ Any ConditionalNodeActivationImpl::eGet(int featureID, bool resolve, bool coreTy
 {
 	switch(featureID)
 	{
-		case FUMLPackage::CONDITIONALNODEACTIVATION_EREFERENCE_CLAUSEACTIVATIONS:
+		case FUMLPackage::CONDITIONALNODEACTIVATION_ATTRIBUTE_CLAUSEACTIVATIONS:
 			return eAny(getClauseActivations()); //2411
-		case FUMLPackage::CONDITIONALNODEACTIVATION_EREFERENCE_SELECTEDCLAUSES:
+		case FUMLPackage::CONDITIONALNODEACTIVATION_ATTRIBUTE_SELECTEDCLAUSES:
 			return eAny(getSelectedClauses()); //2412
 	}
 	return StructuredActivityNodeActivationImpl::eGet(featureID, resolve, coreType);
@@ -285,9 +285,9 @@ bool ConditionalNodeActivationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::CONDITIONALNODEACTIVATION_EREFERENCE_CLAUSEACTIVATIONS:
+		case FUMLPackage::CONDITIONALNODEACTIVATION_ATTRIBUTE_CLAUSEACTIVATIONS:
 			return getClauseActivations() != nullptr; //2411
-		case FUMLPackage::CONDITIONALNODEACTIVATION_EREFERENCE_SELECTEDCLAUSES:
+		case FUMLPackage::CONDITIONALNODEACTIVATION_ATTRIBUTE_SELECTEDCLAUSES:
 			return getSelectedClauses() != nullptr; //2412
 	}
 	return StructuredActivityNodeActivationImpl::internalEIsSet(featureID);
@@ -384,7 +384,7 @@ void ConditionalNodeActivationImpl::resolveReferences(const int featureID, std::
 {
 	switch(featureID)
 	{
-		case FUMLPackage::CONDITIONALNODEACTIVATION_EREFERENCE_SELECTEDCLAUSES:
+		case FUMLPackage::CONDITIONALNODEACTIVATION_ATTRIBUTE_SELECTEDCLAUSES:
 		{
 			std::shared_ptr<Bag<uml::Clause>> _selectedClauses = getSelectedClauses();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -444,7 +444,7 @@ void ConditionalNodeActivationImpl::saveContent(std::shared_ptr<persistence::int
 		std::shared_ptr<Bag<fUML::ClauseActivation>> list_clauseActivations = this->getClauseActivations();
 		for (std::shared_ptr<fUML::ClauseActivation> clauseActivations : *list_clauseActivations) 
 		{
-			saveHandler->addReference(clauseActivations, "clauseActivations", clauseActivations->eClass() != package->getClauseActivation_EClass());
+			saveHandler->addReference(clauseActivations, "clauseActivations", clauseActivations->eClass() != package->getClauseActivation_Class());
 		}
 	}
 	catch (std::exception& e)

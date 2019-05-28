@@ -185,11 +185,11 @@ NodeImpl::~NodeImpl()
 			{
 				switch(reference_id)
 				{	
-				case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
+				case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
 					m_owningPackage = par_Package;
 					m_namespace = par_Package;
 					 return;
-				case UmlPackage::TYPE_EREFERENCE_PACKAGE:
+				case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
 					m_package = par_Package;
 					m_namespace = par_Package;
 					 return;
@@ -509,7 +509,7 @@ std::shared_ptr<ecore::EObject>  NodeImpl::copy() const
 
 std::shared_ptr<ecore::EClass> NodeImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getNode_EClass();
+	return UmlPackageImpl::eInstance()->getNode_Class();
 }
 
 //*********************************
@@ -519,7 +519,7 @@ std::shared_ptr<ecore::EClass> NodeImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<uml::CommunicationPath> NodeImpl::createCommunicationPath(bool end1IsNavigable,AggregationKind end1Aggregation,std::string end1Name,int end1Lower,int end1Upper,std::shared_ptr<uml::Node>  end1Node,bool end2IsNavigable,AggregationKind end2Aggregation,std::string end2Name,int end2Lower,int end2Upper)
+std::shared_ptr<uml::CommunicationPath> NodeImpl::createCommunicationPath(bool end1IsNavigable,AggregationKind end1Aggregation,std::string end1Name,int end1Lower,unsigned int end1Upper,std::shared_ptr<uml::Node>  end1Node,bool end2IsNavigable,AggregationKind end2Aggregation,std::string end2Name,int end2Lower,unsigned int end2Upper)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -634,7 +634,7 @@ Any NodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::NODE_EREFERENCE_NESTEDNODE:
+		case UmlPackage::NODE_ATTRIBUTE_NESTEDNODE:
 			return eAny(getNestedNode()); //15754
 	}
 	Any result;
@@ -650,7 +650,7 @@ bool NodeImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::NODE_EREFERENCE_NESTEDNODE:
+		case UmlPackage::NODE_ATTRIBUTE_NESTEDNODE:
 			return getNestedNode() != nullptr; //15754
 	}
 	bool result = false;
@@ -795,7 +795,7 @@ void NodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler
 		// Save 'nestedNode'
 		for (std::shared_ptr<uml::Node> nestedNode : *this->getNestedNode()) 
 		{
-			saveHandler->addReference(nestedNode, "nestedNode", nestedNode->eClass() != package->getNode_EClass());
+			saveHandler->addReference(nestedNode, "nestedNode", nestedNode->eClass() != package->getNode_Class());
 		}
 	
 

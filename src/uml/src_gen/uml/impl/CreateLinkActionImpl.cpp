@@ -294,7 +294,7 @@ std::shared_ptr<ecore::EObject>  CreateLinkActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> CreateLinkActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getCreateLinkAction_EClass();
+	return UmlPackageImpl::eInstance()->getCreateLinkAction_Class();
 }
 
 //*********************************

@@ -120,11 +120,11 @@ TypeImpl::~TypeImpl()
 			{
 				switch(reference_id)
 				{	
-				case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
+				case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
 					m_owningPackage = par_Package;
 					m_namespace = par_Package;
 					 return;
-				case UmlPackage::TYPE_EREFERENCE_PACKAGE:
+				case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
 					m_package = par_Package;
 					m_namespace = par_Package;
 					 return;
@@ -214,7 +214,7 @@ std::shared_ptr<ecore::EObject>  TypeImpl::copy() const
 
 std::shared_ptr<ecore::EClass> TypeImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getType_EClass();
+	return UmlPackageImpl::eInstance()->getType_Class();
 }
 
 //*********************************
@@ -230,7 +230,7 @@ bool TypeImpl::conformsTo(std::shared_ptr<uml::Type>  other)
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::Association> TypeImpl::createAssociation(bool end1IsNavigable,AggregationKind end1Aggregation,std::string end1Name,int end1Lower,int end1Upper,std::shared_ptr<uml::Type>  end1Type,bool end2IsNavigable,AggregationKind end2Aggregation,std::string end2Name,int end2Lower,int end2Upper)
+std::shared_ptr<uml::Association> TypeImpl::createAssociation(bool end1IsNavigable,AggregationKind end1Aggregation,std::string end1Name,int end1Lower,unsigned int end1Upper,std::shared_ptr<uml::Type>  end1Type,bool end2IsNavigable,AggregationKind end2Aggregation,std::string end2Name,int end2Lower,unsigned int end2Upper)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -317,7 +317,7 @@ Any TypeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::TYPE_EREFERENCE_PACKAGE:
+		case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
 			return eAny(getPackage()); //24412
 	}
 	return PackageableElementImpl::eGet(featureID, resolve, coreType);
@@ -326,7 +326,7 @@ bool TypeImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::TYPE_EREFERENCE_PACKAGE:
+		case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
 			return getPackage().lock() != nullptr; //24412
 	}
 	return PackageableElementImpl::internalEIsSet(featureID);
@@ -335,7 +335,7 @@ bool TypeImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::TYPE_EREFERENCE_PACKAGE:
+		case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Package> _package = newValue->get<std::shared_ptr<uml::Package>>();
@@ -384,7 +384,7 @@ void TypeImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<
 {
 	switch(featureID)
 	{
-		case UmlPackage::TYPE_EREFERENCE_PACKAGE:
+		case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
 		{
 			if (references.size() == 1)
 			{

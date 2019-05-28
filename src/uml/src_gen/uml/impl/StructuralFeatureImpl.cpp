@@ -198,7 +198,7 @@ std::shared_ptr<ecore::EObject>  StructuralFeatureImpl::copy() const
 
 std::shared_ptr<ecore::EClass> StructuralFeatureImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getStructuralFeature_EClass();
+	return UmlPackageImpl::eInstance()->getStructuralFeature_Class();
 }
 
 //*********************************
@@ -267,7 +267,7 @@ Any StructuralFeatureImpl::eGet(int featureID, bool resolve, bool coreType) cons
 {
 	switch(featureID)
 	{
-		case UmlPackage::STRUCTURALFEATURE_EATTRIBUTE_ISREADONLY:
+		case UmlPackage::STRUCTURALFEATURE_ATTRIBUTE_ISREADONLY:
 			return eAny(getIsReadOnly()); //22521
 	}
 	Any result;
@@ -288,7 +288,7 @@ bool StructuralFeatureImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::STRUCTURALFEATURE_EATTRIBUTE_ISREADONLY:
+		case UmlPackage::STRUCTURALFEATURE_ATTRIBUTE_ISREADONLY:
 			return getIsReadOnly() != false; //22521
 	}
 	bool result = false;
@@ -309,7 +309,7 @@ bool StructuralFeatureImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::STRUCTURALFEATURE_EATTRIBUTE_ISREADONLY:
+		case UmlPackage::STRUCTURALFEATURE_ATTRIBUTE_ISREADONLY:
 		{
 			// BOOST CAST
 			bool _isReadOnly = newValue->get<bool>();
@@ -431,7 +431,7 @@ void StructuralFeatureImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getStructuralFeature_EAttribute_isReadOnly()) )
+		if ( this->eIsSet(package->getStructuralFeature_Attribute_isReadOnly()) )
 		{
 			saveHandler->addAttribute("isReadOnly", this->getIsReadOnly());
 		}

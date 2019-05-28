@@ -188,7 +188,7 @@ std::shared_ptr<ecore::EObject>  IncludeImpl::copy() const
 
 std::shared_ptr<ecore::EClass> IncludeImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getInclude_EClass();
+	return UmlPackageImpl::eInstance()->getInclude_Class();
 }
 
 //*********************************
@@ -287,9 +287,9 @@ Any IncludeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::INCLUDE_EREFERENCE_ADDITION:
+		case UmlPackage::INCLUDE_ATTRIBUTE_ADDITION:
 			return eAny(getAddition()); //11212
-		case UmlPackage::INCLUDE_EREFERENCE_INCLUDINGCASE:
+		case UmlPackage::INCLUDE_ATTRIBUTE_INCLUDINGCASE:
 			return eAny(getIncludingCase()); //11213
 	}
 	Any result;
@@ -305,9 +305,9 @@ bool IncludeImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::INCLUDE_EREFERENCE_ADDITION:
+		case UmlPackage::INCLUDE_ATTRIBUTE_ADDITION:
 			return getAddition() != nullptr; //11212
-		case UmlPackage::INCLUDE_EREFERENCE_INCLUDINGCASE:
+		case UmlPackage::INCLUDE_ATTRIBUTE_INCLUDINGCASE:
 			return getIncludingCase().lock() != nullptr; //11213
 	}
 	bool result = false;
@@ -323,14 +323,14 @@ bool IncludeImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::INCLUDE_EREFERENCE_ADDITION:
+		case UmlPackage::INCLUDE_ATTRIBUTE_ADDITION:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::UseCase> _addition = newValue->get<std::shared_ptr<uml::UseCase>>();
 			setAddition(_addition); //11212
 			return true;
 		}
-		case UmlPackage::INCLUDE_EREFERENCE_INCLUDINGCASE:
+		case UmlPackage::INCLUDE_ATTRIBUTE_INCLUDINGCASE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::UseCase> _includingCase = newValue->get<std::shared_ptr<uml::UseCase>>();
@@ -407,7 +407,7 @@ void IncludeImpl::resolveReferences(const int featureID, std::list<std::shared_p
 {
 	switch(featureID)
 	{
-		case UmlPackage::INCLUDE_EREFERENCE_ADDITION:
+		case UmlPackage::INCLUDE_ATTRIBUTE_ADDITION:
 		{
 			if (references.size() == 1)
 			{
@@ -419,7 +419,7 @@ void IncludeImpl::resolveReferences(const int featureID, std::list<std::shared_p
 			return;
 		}
 
-		case UmlPackage::INCLUDE_EREFERENCE_INCLUDINGCASE:
+		case UmlPackage::INCLUDE_ATTRIBUTE_INCLUDINGCASE:
 		{
 			if (references.size() == 1)
 			{

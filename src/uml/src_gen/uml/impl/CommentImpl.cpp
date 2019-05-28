@@ -127,7 +127,7 @@ std::shared_ptr<ecore::EObject>  CommentImpl::copy() const
 
 std::shared_ptr<ecore::EClass> CommentImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getComment_EClass();
+	return UmlPackageImpl::eInstance()->getComment_Class();
 }
 
 //*********************************
@@ -191,9 +191,9 @@ Any CommentImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::COMMENT_EREFERENCE_ANNOTATEDELEMENT:
+		case UmlPackage::COMMENT_ATTRIBUTE_ANNOTATEDELEMENT:
 			return eAny(getAnnotatedElement()); //453
-		case UmlPackage::COMMENT_EATTRIBUTE_BODY:
+		case UmlPackage::COMMENT_ATTRIBUTE_BODY:
 			return eAny(getBody()); //454
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
@@ -202,9 +202,9 @@ bool CommentImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::COMMENT_EREFERENCE_ANNOTATEDELEMENT:
+		case UmlPackage::COMMENT_ATTRIBUTE_ANNOTATEDELEMENT:
 			return getAnnotatedElement() != nullptr; //453
-		case UmlPackage::COMMENT_EATTRIBUTE_BODY:
+		case UmlPackage::COMMENT_ATTRIBUTE_BODY:
 			return getBody() != ""; //454
 	}
 	return ElementImpl::internalEIsSet(featureID);
@@ -213,7 +213,7 @@ bool CommentImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::COMMENT_EATTRIBUTE_BODY:
+		case UmlPackage::COMMENT_ATTRIBUTE_BODY:
 		{
 			// BOOST CAST
 			std::string _body = newValue->get<std::string>();
@@ -290,7 +290,7 @@ void CommentImpl::resolveReferences(const int featureID, std::list<std::shared_p
 {
 	switch(featureID)
 	{
-		case UmlPackage::COMMENT_EREFERENCE_ANNOTATEDELEMENT:
+		case UmlPackage::COMMENT_ATTRIBUTE_ANNOTATEDELEMENT:
 		{
 			std::shared_ptr<Bag<uml::Element>> _annotatedElement = getAnnotatedElement();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -329,7 +329,7 @@ void CommentImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getComment_EAttribute_body()) )
+		if ( this->eIsSet(package->getComment_Attribute_body()) )
 		{
 			saveHandler->addAttribute("body", this->getBody());
 		}

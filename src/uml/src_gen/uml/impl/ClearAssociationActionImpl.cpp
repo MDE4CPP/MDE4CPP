@@ -294,7 +294,7 @@ std::shared_ptr<ecore::EObject>  ClearAssociationActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ClearAssociationActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getClearAssociationAction_EClass();
+	return UmlPackageImpl::eInstance()->getClearAssociationAction_Class();
 }
 
 //*********************************
@@ -404,9 +404,9 @@ Any ClearAssociationActionImpl::eGet(int featureID, bool resolve, bool coreType)
 {
 	switch(featureID)
 	{
-		case UmlPackage::CLEARASSOCIATIONACTION_EREFERENCE_ASSOCIATION:
+		case UmlPackage::CLEARASSOCIATIONACTION_ATTRIBUTE_ASSOCIATION:
 			return eAny(getAssociation()); //3927
-		case UmlPackage::CLEARASSOCIATIONACTION_EREFERENCE_OBJECT:
+		case UmlPackage::CLEARASSOCIATIONACTION_ATTRIBUTE_OBJECT:
 			return eAny(getObject()); //3928
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
@@ -415,9 +415,9 @@ bool ClearAssociationActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::CLEARASSOCIATIONACTION_EREFERENCE_ASSOCIATION:
+		case UmlPackage::CLEARASSOCIATIONACTION_ATTRIBUTE_ASSOCIATION:
 			return getAssociation() != nullptr; //3927
-		case UmlPackage::CLEARASSOCIATIONACTION_EREFERENCE_OBJECT:
+		case UmlPackage::CLEARASSOCIATIONACTION_ATTRIBUTE_OBJECT:
 			return getObject() != nullptr; //3928
 	}
 	return ActionImpl::internalEIsSet(featureID);
@@ -426,14 +426,14 @@ bool ClearAssociationActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::CLEARASSOCIATIONACTION_EREFERENCE_ASSOCIATION:
+		case UmlPackage::CLEARASSOCIATIONACTION_ATTRIBUTE_ASSOCIATION:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Association> _association = newValue->get<std::shared_ptr<uml::Association>>();
 			setAssociation(_association); //3927
 			return true;
 		}
-		case UmlPackage::CLEARASSOCIATIONACTION_EREFERENCE_OBJECT:
+		case UmlPackage::CLEARASSOCIATIONACTION_ATTRIBUTE_OBJECT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::InputPin> _object = newValue->get<std::shared_ptr<uml::InputPin>>();
@@ -527,7 +527,7 @@ void ClearAssociationActionImpl::resolveReferences(const int featureID, std::lis
 {
 	switch(featureID)
 	{
-		case UmlPackage::CLEARASSOCIATIONACTION_EREFERENCE_ASSOCIATION:
+		case UmlPackage::CLEARASSOCIATIONACTION_ATTRIBUTE_ASSOCIATION:
 		{
 			if (references.size() == 1)
 			{
@@ -581,7 +581,7 @@ void ClearAssociationActionImpl::saveContent(std::shared_ptr<persistence::interf
 		std::shared_ptr<uml::InputPin > object = this->getObject();
 		if (object != nullptr)
 		{
-			saveHandler->addReference(object, "object", object->eClass() != package->getInputPin_EClass());
+			saveHandler->addReference(object, "object", object->eClass() != package->getInputPin_Class());
 		}
 	
 

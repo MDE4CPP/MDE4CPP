@@ -103,7 +103,7 @@ std::shared_ptr<ecore::EObject>  OfferImpl::copy() const
 
 std::shared_ptr<ecore::EClass> OfferImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getOffer_EClass();
+	return FUMLPackageImpl::eInstance()->getOffer_Class();
 }
 
 //*********************************
@@ -241,7 +241,7 @@ Any OfferImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::OFFER_EREFERENCE_OFFEREDTOKENS:
+		case FUMLPackage::OFFER_ATTRIBUTE_OFFEREDTOKENS:
 			return eAny(getOfferedTokens()); //800
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
@@ -250,7 +250,7 @@ bool OfferImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::OFFER_EREFERENCE_OFFEREDTOKENS:
+		case FUMLPackage::OFFER_ATTRIBUTE_OFFEREDTOKENS:
 			return getOfferedTokens() != nullptr; //800
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
@@ -320,7 +320,7 @@ void OfferImpl::resolveReferences(const int featureID, std::list<std::shared_ptr
 {
 	switch(featureID)
 	{
-		case FUMLPackage::OFFER_EREFERENCE_OFFEREDTOKENS:
+		case FUMLPackage::OFFER_ATTRIBUTE_OFFEREDTOKENS:
 		{
 			std::shared_ptr<Bag<fUML::Token>> _offeredTokens = getOfferedTokens();
 			for(std::shared_ptr<ecore::EObject> ref : references)

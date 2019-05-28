@@ -153,7 +153,7 @@ std::shared_ptr<ecore::EObject>  ExpansionActivationGroupImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ExpansionActivationGroupImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getExpansionActivationGroup_EClass();
+	return FUMLPackageImpl::eInstance()->getExpansionActivationGroup_Class();
 }
 
 //*********************************
@@ -212,7 +212,7 @@ Any ExpansionActivationGroupImpl::eGet(int featureID, bool resolve, bool coreTyp
 {
 	switch(featureID)
 	{
-		case FUMLPackage::EXPANSIONACTIVATIONGROUP_EREFERENCE_REGIONACTIVATION:
+		case FUMLPackage::EXPANSIONACTIVATIONGROUP_ATTRIBUTE_REGIONACTIVATION:
 			return eAny(getRegionActivation()); //465
 	}
 	return ActivityNodeActivationGroupImpl::eGet(featureID, resolve, coreType);
@@ -221,7 +221,7 @@ bool ExpansionActivationGroupImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::EXPANSIONACTIVATIONGROUP_EREFERENCE_REGIONACTIVATION:
+		case FUMLPackage::EXPANSIONACTIVATIONGROUP_ATTRIBUTE_REGIONACTIVATION:
 			return getRegionActivation() != nullptr; //465
 	}
 	return ActivityNodeActivationGroupImpl::internalEIsSet(featureID);
@@ -230,7 +230,7 @@ bool ExpansionActivationGroupImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case FUMLPackage::EXPANSIONACTIVATIONGROUP_EREFERENCE_REGIONACTIVATION:
+		case FUMLPackage::EXPANSIONACTIVATIONGROUP_ATTRIBUTE_REGIONACTIVATION:
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::ExpansionRegionActivation> _regionActivation = newValue->get<std::shared_ptr<fUML::ExpansionRegionActivation>>();
@@ -298,7 +298,7 @@ void ExpansionActivationGroupImpl::resolveReferences(const int featureID, std::l
 {
 	switch(featureID)
 	{
-		case FUMLPackage::EXPANSIONACTIVATIONGROUP_EREFERENCE_REGIONACTIVATION:
+		case FUMLPackage::EXPANSIONACTIVATIONGROUP_ATTRIBUTE_REGIONACTIVATION:
 		{
 			if (references.size() == 1)
 			{

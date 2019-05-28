@@ -266,7 +266,7 @@ std::shared_ptr<ecore::EObject>  CombinedFragmentImpl::copy() const
 
 std::shared_ptr<ecore::EClass> CombinedFragmentImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getCombinedFragment_EClass();
+	return UmlPackageImpl::eInstance()->getCombinedFragment_Class();
 }
 
 //*********************************
@@ -377,11 +377,11 @@ Any CombinedFragmentImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::COMBINEDFRAGMENT_EREFERENCE_CFRAGMENTGATE:
+		case UmlPackage::COMBINEDFRAGMENT_ATTRIBUTE_CFRAGMENTGATE:
 			return eAny(getCfragmentGate()); //4413
-		case UmlPackage::COMBINEDFRAGMENT_EATTRIBUTE_INTERACTIONOPERATOR:
+		case UmlPackage::COMBINEDFRAGMENT_ATTRIBUTE_INTERACTIONOPERATOR:
 			return eAny(getInteractionOperator()); //4414
-		case UmlPackage::COMBINEDFRAGMENT_EREFERENCE_OPERAND:
+		case UmlPackage::COMBINEDFRAGMENT_ATTRIBUTE_OPERAND:
 			return eAny(getOperand()); //4415
 	}
 	return InteractionFragmentImpl::eGet(featureID, resolve, coreType);
@@ -390,11 +390,11 @@ bool CombinedFragmentImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::COMBINEDFRAGMENT_EREFERENCE_CFRAGMENTGATE:
+		case UmlPackage::COMBINEDFRAGMENT_ATTRIBUTE_CFRAGMENTGATE:
 			return getCfragmentGate() != nullptr; //4413
-		case UmlPackage::COMBINEDFRAGMENT_EATTRIBUTE_INTERACTIONOPERATOR:
+		case UmlPackage::COMBINEDFRAGMENT_ATTRIBUTE_INTERACTIONOPERATOR:
 			return m_interactionOperator != InteractionOperatorKind::SEQ;; //4414
-		case UmlPackage::COMBINEDFRAGMENT_EREFERENCE_OPERAND:
+		case UmlPackage::COMBINEDFRAGMENT_ATTRIBUTE_OPERAND:
 			return getOperand() != nullptr; //4415
 	}
 	return InteractionFragmentImpl::internalEIsSet(featureID);
@@ -403,7 +403,7 @@ bool CombinedFragmentImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::COMBINEDFRAGMENT_EATTRIBUTE_INTERACTIONOPERATOR:
+		case UmlPackage::COMBINEDFRAGMENT_ATTRIBUTE_INTERACTIONOPERATOR:
 		{
 			// BOOST CAST
 			InteractionOperatorKind _interactionOperator = newValue->get<InteractionOperatorKind>();
@@ -593,18 +593,18 @@ void CombinedFragmentImpl::saveContent(std::shared_ptr<persistence::interfaces::
 		// Save 'cfragmentGate'
 		for (std::shared_ptr<uml::Gate> cfragmentGate : *this->getCfragmentGate()) 
 		{
-			saveHandler->addReference(cfragmentGate, "cfragmentGate", cfragmentGate->eClass() != package->getGate_EClass());
+			saveHandler->addReference(cfragmentGate, "cfragmentGate", cfragmentGate->eClass() != package->getGate_Class());
 		}
 
 		// Save 'operand'
 		for (std::shared_ptr<uml::InteractionOperand> operand : *this->getOperand()) 
 		{
-			saveHandler->addReference(operand, "operand", operand->eClass() != package->getInteractionOperand_EClass());
+			saveHandler->addReference(operand, "operand", operand->eClass() != package->getInteractionOperand_Class());
 		}
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getCombinedFragment_EAttribute_interactionOperator()) )
+		if ( this->eIsSet(package->getCombinedFragment_Attribute_interactionOperator()) )
 		{
 			InteractionOperatorKind value = this->getInteractionOperator();
 			std::string literal = "";

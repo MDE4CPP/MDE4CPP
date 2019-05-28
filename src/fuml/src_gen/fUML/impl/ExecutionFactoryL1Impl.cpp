@@ -144,7 +144,7 @@ std::shared_ptr<ecore::EObject>  ExecutionFactoryL1Impl::copy() const
 
 std::shared_ptr<ecore::EClass> ExecutionFactoryL1Impl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getExecutionFactoryL1_EClass();
+	return FUMLPackageImpl::eInstance()->getExecutionFactoryL1_Class();
 }
 
 //*********************************
@@ -161,38 +161,38 @@ std::shared_ptr<fUML::SemanticVisitor> ExecutionFactoryL1Impl::instantiateVisito
 		std::shared_ptr<fUML::SemanticVisitor> visitor = nullptr;
 
     switch (element->eClass()->getClassifierID()) {
-		case uml::UmlPackage::LITERALBOOLEAN_ECLASS:
+		case uml::UmlPackage::LITERALBOOLEAN_CLASS:
 		{
 				visitor = FUMLFactory::eInstance()->createLiteralBooleanEvaluation();
 				break;
 		}
 
-		case uml::UmlPackage::LITERALSTRING_ECLASS:
+		case uml::UmlPackage::LITERALSTRING_CLASS:
 		{
 			visitor = FUMLFactory::eInstance()->createLiteralStringEvaluation();
 			break;
 		}
-		case uml::UmlPackage::LITERALNULL_ECLASS:
+		case uml::UmlPackage::LITERALNULL_CLASS:
 		{
 			visitor =  FUMLFactory::eInstance()->createLiteralNullEvaluation();
 			break;
 		}
-		case uml::UmlPackage::INSTANCEVALUE_ECLASS:
+		case uml::UmlPackage::INSTANCEVALUE_CLASS:
 		{
 			visitor = FUMLFactory::eInstance()->createInstanceValueEvaluation();
 			break;
 		}
-		case uml::UmlPackage::LITERALUNLIMITEDNATURAL_ECLASS:
+		case uml::UmlPackage::LITERALUNLIMITEDNATURAL_CLASS:
 		{
 			visitor = FUMLFactory::eInstance()->createLiteralUnlimitedNaturalEvaluation();
 			break;
 		}
-		case uml::UmlPackage::LITERALINTEGER_ECLASS:
+		case uml::UmlPackage::LITERALINTEGER_CLASS:
 		{
 			visitor = FUMLFactory::eInstance()->createLiteralIntegerEvaluation();
 			break;
 		}
-		case uml::UmlPackage::LITERALREAL_ECLASS:
+		case uml::UmlPackage::LITERALREAL_CLASS:
 		{
 			visitor = FUMLFactory::eInstance()->createLiteralRealEvaluation();
 			break;

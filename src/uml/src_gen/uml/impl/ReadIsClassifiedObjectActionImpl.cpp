@@ -306,7 +306,7 @@ std::shared_ptr<ecore::EObject>  ReadIsClassifiedObjectActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ReadIsClassifiedObjectActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getReadIsClassifiedObjectAction_EClass();
+	return UmlPackageImpl::eInstance()->getReadIsClassifiedObjectAction_Class();
 }
 
 //*********************************
@@ -451,13 +451,13 @@ Any ReadIsClassifiedObjectActionImpl::eGet(int featureID, bool resolve, bool cor
 {
 	switch(featureID)
 	{
-		case UmlPackage::READISCLASSIFIEDOBJECTACTION_EREFERENCE_CLASSIFIER:
+		case UmlPackage::READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_CLASSIFIER:
 			return eAny(getClassifier()); //19427
-		case UmlPackage::READISCLASSIFIEDOBJECTACTION_EATTRIBUTE_ISDIRECT:
+		case UmlPackage::READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_ISDIRECT:
 			return eAny(getIsDirect()); //19428
-		case UmlPackage::READISCLASSIFIEDOBJECTACTION_EREFERENCE_OBJECT:
+		case UmlPackage::READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_OBJECT:
 			return eAny(getObject()); //19429
-		case UmlPackage::READISCLASSIFIEDOBJECTACTION_EREFERENCE_RESULT:
+		case UmlPackage::READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_RESULT:
 			return eAny(getResult()); //19430
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
@@ -466,13 +466,13 @@ bool ReadIsClassifiedObjectActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::READISCLASSIFIEDOBJECTACTION_EREFERENCE_CLASSIFIER:
+		case UmlPackage::READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_CLASSIFIER:
 			return getClassifier() != nullptr; //19427
-		case UmlPackage::READISCLASSIFIEDOBJECTACTION_EATTRIBUTE_ISDIRECT:
+		case UmlPackage::READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_ISDIRECT:
 			return getIsDirect() != false; //19428
-		case UmlPackage::READISCLASSIFIEDOBJECTACTION_EREFERENCE_OBJECT:
+		case UmlPackage::READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_OBJECT:
 			return getObject() != nullptr; //19429
-		case UmlPackage::READISCLASSIFIEDOBJECTACTION_EREFERENCE_RESULT:
+		case UmlPackage::READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_RESULT:
 			return getResult() != nullptr; //19430
 	}
 	return ActionImpl::internalEIsSet(featureID);
@@ -481,28 +481,28 @@ bool ReadIsClassifiedObjectActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::READISCLASSIFIEDOBJECTACTION_EREFERENCE_CLASSIFIER:
+		case UmlPackage::READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_CLASSIFIER:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Classifier> _classifier = newValue->get<std::shared_ptr<uml::Classifier>>();
 			setClassifier(_classifier); //19427
 			return true;
 		}
-		case UmlPackage::READISCLASSIFIEDOBJECTACTION_EATTRIBUTE_ISDIRECT:
+		case UmlPackage::READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_ISDIRECT:
 		{
 			// BOOST CAST
 			bool _isDirect = newValue->get<bool>();
 			setIsDirect(_isDirect); //19428
 			return true;
 		}
-		case UmlPackage::READISCLASSIFIEDOBJECTACTION_EREFERENCE_OBJECT:
+		case UmlPackage::READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_OBJECT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::InputPin> _object = newValue->get<std::shared_ptr<uml::InputPin>>();
 			setObject(_object); //19429
 			return true;
 		}
-		case UmlPackage::READISCLASSIFIEDOBJECTACTION_EREFERENCE_RESULT:
+		case UmlPackage::READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_RESULT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::OutputPin> _result = newValue->get<std::shared_ptr<uml::OutputPin>>();
@@ -621,7 +621,7 @@ void ReadIsClassifiedObjectActionImpl::resolveReferences(const int featureID, st
 {
 	switch(featureID)
 	{
-		case UmlPackage::READISCLASSIFIEDOBJECTACTION_EREFERENCE_CLASSIFIER:
+		case UmlPackage::READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_CLASSIFIER:
 		{
 			if (references.size() == 1)
 			{
@@ -675,19 +675,19 @@ void ReadIsClassifiedObjectActionImpl::saveContent(std::shared_ptr<persistence::
 		std::shared_ptr<uml::InputPin > object = this->getObject();
 		if (object != nullptr)
 		{
-			saveHandler->addReference(object, "object", object->eClass() != package->getInputPin_EClass());
+			saveHandler->addReference(object, "object", object->eClass() != package->getInputPin_Class());
 		}
 
 		// Save 'result'
 		std::shared_ptr<uml::OutputPin > result = this->getResult();
 		if (result != nullptr)
 		{
-			saveHandler->addReference(result, "result", result->eClass() != package->getOutputPin_EClass());
+			saveHandler->addReference(result, "result", result->eClass() != package->getOutputPin_Class());
 		}
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getReadIsClassifiedObjectAction_EAttribute_isDirect()) )
+		if ( this->eIsSet(package->getReadIsClassifiedObjectAction_Attribute_isDirect()) )
 		{
 			saveHandler->addAttribute("isDirect", this->getIsDirect());
 		}

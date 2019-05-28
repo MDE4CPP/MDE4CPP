@@ -94,7 +94,7 @@ std::shared_ptr<ecore::EObject>  EventAccepterImpl::copy() const
 
 std::shared_ptr<ecore::EClass> EventAccepterImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getEventAccepter_EClass();
+	return FUMLPackageImpl::eInstance()->getEventAccepter_Class();
 }
 
 //*********************************

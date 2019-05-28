@@ -168,7 +168,7 @@ std::shared_ptr<ecore::EObject>  AcceptEventActionActivationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> AcceptEventActionActivationImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getAcceptEventActionActivation_EClass();
+	return FUMLPackageImpl::eInstance()->getAcceptEventActionActivation_Class();
 }
 
 //*********************************
@@ -246,9 +246,9 @@ Any AcceptEventActionActivationImpl::eGet(int featureID, bool resolve, bool core
 {
 	switch(featureID)
 	{
-		case FUMLPackage::ACCEPTEVENTACTIONACTIVATION_EREFERENCE_EVENTACCEPTER:
+		case FUMLPackage::ACCEPTEVENTACTIONACTIVATION_ATTRIBUTE_EVENTACCEPTER:
 			return eAny(getEventAccepter()); //110
-		case FUMLPackage::ACCEPTEVENTACTIONACTIVATION_EATTRIBUTE_WAITING:
+		case FUMLPackage::ACCEPTEVENTACTIONACTIVATION_ATTRIBUTE_WAITING:
 			return eAny(isWaiting()); //111
 	}
 	return ActionActivationImpl::eGet(featureID, resolve, coreType);
@@ -257,9 +257,9 @@ bool AcceptEventActionActivationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::ACCEPTEVENTACTIONACTIVATION_EREFERENCE_EVENTACCEPTER:
+		case FUMLPackage::ACCEPTEVENTACTIONACTIVATION_ATTRIBUTE_EVENTACCEPTER:
 			return getEventAccepter() != nullptr; //110
-		case FUMLPackage::ACCEPTEVENTACTIONACTIVATION_EATTRIBUTE_WAITING:
+		case FUMLPackage::ACCEPTEVENTACTIONACTIVATION_ATTRIBUTE_WAITING:
 			return isWaiting() != false; //111
 	}
 	return ActionActivationImpl::internalEIsSet(featureID);
@@ -268,14 +268,14 @@ bool AcceptEventActionActivationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case FUMLPackage::ACCEPTEVENTACTIONACTIVATION_EREFERENCE_EVENTACCEPTER:
+		case FUMLPackage::ACCEPTEVENTACTIONACTIVATION_ATTRIBUTE_EVENTACCEPTER:
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::AcceptEventActionEventAccepter> _eventAccepter = newValue->get<std::shared_ptr<fUML::AcceptEventActionEventAccepter>>();
 			setEventAccepter(_eventAccepter); //110
 			return true;
 		}
-		case FUMLPackage::ACCEPTEVENTACTIONACTIVATION_EATTRIBUTE_WAITING:
+		case FUMLPackage::ACCEPTEVENTACTIONACTIVATION_ATTRIBUTE_WAITING:
 		{
 			// BOOST CAST
 			bool _waiting = newValue->get<bool>();
@@ -352,7 +352,7 @@ void AcceptEventActionActivationImpl::resolveReferences(const int featureID, std
 {
 	switch(featureID)
 	{
-		case FUMLPackage::ACCEPTEVENTACTIONACTIVATION_EREFERENCE_EVENTACCEPTER:
+		case FUMLPackage::ACCEPTEVENTACTIONACTIVATION_ATTRIBUTE_EVENTACCEPTER:
 		{
 			if (references.size() == 1)
 			{
@@ -392,7 +392,7 @@ void AcceptEventActionActivationImpl::saveContent(std::shared_ptr<persistence::i
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getAcceptEventActionActivation_EAttribute_waiting()) )
+		if ( this->eIsSet(package->getAcceptEventActionActivation_Attribute_waiting()) )
 		{
 			saveHandler->addAttribute("waiting", this->isWaiting());
 		}

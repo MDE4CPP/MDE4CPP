@@ -158,7 +158,7 @@ std::shared_ptr<ecore::EObject>  ElementImportImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ElementImportImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getElementImport_EClass();
+	return UmlPackageImpl::eInstance()->getElementImport_Class();
 }
 
 //*********************************
@@ -283,13 +283,13 @@ Any ElementImportImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::ELEMENTIMPORT_EATTRIBUTE_ALIAS:
+		case UmlPackage::ELEMENTIMPORT_ATTRIBUTE_ALIAS:
 			return eAny(getAlias()); //826
-		case UmlPackage::ELEMENTIMPORT_EREFERENCE_IMPORTEDELEMENT:
+		case UmlPackage::ELEMENTIMPORT_ATTRIBUTE_IMPORTEDELEMENT:
 			return eAny(getImportedElement()); //827
-		case UmlPackage::ELEMENTIMPORT_EREFERENCE_IMPORTINGNAMESPACE:
+		case UmlPackage::ELEMENTIMPORT_ATTRIBUTE_IMPORTINGNAMESPACE:
 			return eAny(getImportingNamespace()); //828
-		case UmlPackage::ELEMENTIMPORT_EATTRIBUTE_VISIBILITY:
+		case UmlPackage::ELEMENTIMPORT_ATTRIBUTE_VISIBILITY:
 			return eAny(getVisibility()); //829
 	}
 	return DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
@@ -298,13 +298,13 @@ bool ElementImportImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::ELEMENTIMPORT_EATTRIBUTE_ALIAS:
+		case UmlPackage::ELEMENTIMPORT_ATTRIBUTE_ALIAS:
 			return getAlias() != ""; //826
-		case UmlPackage::ELEMENTIMPORT_EREFERENCE_IMPORTEDELEMENT:
+		case UmlPackage::ELEMENTIMPORT_ATTRIBUTE_IMPORTEDELEMENT:
 			return getImportedElement() != nullptr; //827
-		case UmlPackage::ELEMENTIMPORT_EREFERENCE_IMPORTINGNAMESPACE:
+		case UmlPackage::ELEMENTIMPORT_ATTRIBUTE_IMPORTINGNAMESPACE:
 			return getImportingNamespace().lock() != nullptr; //828
-		case UmlPackage::ELEMENTIMPORT_EATTRIBUTE_VISIBILITY:
+		case UmlPackage::ELEMENTIMPORT_ATTRIBUTE_VISIBILITY:
 			return m_visibility != VisibilityKind::PUBLIC;; //829
 	}
 	return DirectedRelationshipImpl::internalEIsSet(featureID);
@@ -313,28 +313,28 @@ bool ElementImportImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::ELEMENTIMPORT_EATTRIBUTE_ALIAS:
+		case UmlPackage::ELEMENTIMPORT_ATTRIBUTE_ALIAS:
 		{
 			// BOOST CAST
 			std::string _alias = newValue->get<std::string>();
 			setAlias(_alias); //826
 			return true;
 		}
-		case UmlPackage::ELEMENTIMPORT_EREFERENCE_IMPORTEDELEMENT:
+		case UmlPackage::ELEMENTIMPORT_ATTRIBUTE_IMPORTEDELEMENT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::PackageableElement> _importedElement = newValue->get<std::shared_ptr<uml::PackageableElement>>();
 			setImportedElement(_importedElement); //827
 			return true;
 		}
-		case UmlPackage::ELEMENTIMPORT_EREFERENCE_IMPORTINGNAMESPACE:
+		case UmlPackage::ELEMENTIMPORT_ATTRIBUTE_IMPORTINGNAMESPACE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Namespace> _importingNamespace = newValue->get<std::shared_ptr<uml::Namespace>>();
 			setImportingNamespace(_importingNamespace); //828
 			return true;
 		}
-		case UmlPackage::ELEMENTIMPORT_EATTRIBUTE_VISIBILITY:
+		case UmlPackage::ELEMENTIMPORT_ATTRIBUTE_VISIBILITY:
 		{
 			// BOOST CAST
 			VisibilityKind _visibility = newValue->get<VisibilityKind>();
@@ -435,7 +435,7 @@ void ElementImportImpl::resolveReferences(const int featureID, std::list<std::sh
 {
 	switch(featureID)
 	{
-		case UmlPackage::ELEMENTIMPORT_EREFERENCE_IMPORTEDELEMENT:
+		case UmlPackage::ELEMENTIMPORT_ATTRIBUTE_IMPORTEDELEMENT:
 		{
 			if (references.size() == 1)
 			{
@@ -447,7 +447,7 @@ void ElementImportImpl::resolveReferences(const int featureID, std::list<std::sh
 			return;
 		}
 
-		case UmlPackage::ELEMENTIMPORT_EREFERENCE_IMPORTINGNAMESPACE:
+		case UmlPackage::ELEMENTIMPORT_ATTRIBUTE_IMPORTINGNAMESPACE:
 		{
 			if (references.size() == 1)
 			{
@@ -490,12 +490,12 @@ void ElementImportImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getElementImport_EAttribute_alias()) )
+		if ( this->eIsSet(package->getElementImport_Attribute_alias()) )
 		{
 			saveHandler->addAttribute("alias", this->getAlias());
 		}
 
-		if ( this->eIsSet(package->getElementImport_EAttribute_visibility()) )
+		if ( this->eIsSet(package->getElementImport_Attribute_visibility()) )
 		{
 			VisibilityKind value = this->getVisibility();
 			std::string literal = "";

@@ -94,7 +94,7 @@ std::shared_ptr<ecore::EObject>  FIFOGetNextEventStrategyImpl::copy() const
 
 std::shared_ptr<ecore::EClass> FIFOGetNextEventStrategyImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getFIFOGetNextEventStrategy_EClass();
+	return FUMLPackageImpl::eInstance()->getFIFOGetNextEventStrategy_Class();
 }
 
 //*********************************

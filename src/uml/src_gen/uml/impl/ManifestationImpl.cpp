@@ -229,7 +229,7 @@ std::shared_ptr<ecore::EObject>  ManifestationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ManifestationImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getManifestation_EClass();
+	return UmlPackageImpl::eInstance()->getManifestation_Class();
 }
 
 //*********************************
@@ -322,7 +322,7 @@ Any ManifestationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::MANIFESTATION_EREFERENCE_UTILIZEDELEMENT:
+		case UmlPackage::MANIFESTATION_ATTRIBUTE_UTILIZEDELEMENT:
 			return eAny(getUtilizedElement()); //14518
 	}
 	return AbstractionImpl::eGet(featureID, resolve, coreType);
@@ -331,7 +331,7 @@ bool ManifestationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::MANIFESTATION_EREFERENCE_UTILIZEDELEMENT:
+		case UmlPackage::MANIFESTATION_ATTRIBUTE_UTILIZEDELEMENT:
 			return getUtilizedElement() != nullptr; //14518
 	}
 	return AbstractionImpl::internalEIsSet(featureID);
@@ -340,7 +340,7 @@ bool ManifestationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::MANIFESTATION_EREFERENCE_UTILIZEDELEMENT:
+		case UmlPackage::MANIFESTATION_ATTRIBUTE_UTILIZEDELEMENT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::PackageableElement> _utilizedElement = newValue->get<std::shared_ptr<uml::PackageableElement>>();
@@ -408,7 +408,7 @@ void ManifestationImpl::resolveReferences(const int featureID, std::list<std::sh
 {
 	switch(featureID)
 	{
-		case UmlPackage::MANIFESTATION_EREFERENCE_UTILIZEDELEMENT:
+		case UmlPackage::MANIFESTATION_ATTRIBUTE_UTILIZEDELEMENT:
 		{
 			if (references.size() == 1)
 			{

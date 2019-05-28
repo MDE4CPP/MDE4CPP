@@ -122,7 +122,7 @@ std::shared_ptr<ecore::EObject>  ImageImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ImageImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getImage_EClass();
+	return UmlPackageImpl::eInstance()->getImage_Class();
 }
 
 //*********************************
@@ -200,11 +200,11 @@ Any ImageImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::IMAGE_EATTRIBUTE_CONTENT:
+		case UmlPackage::IMAGE_ATTRIBUTE_CONTENT:
 			return eAny(getContent()); //1113
-		case UmlPackage::IMAGE_EATTRIBUTE_FORMAT:
+		case UmlPackage::IMAGE_ATTRIBUTE_FORMAT:
 			return eAny(getFormat()); //1114
-		case UmlPackage::IMAGE_EATTRIBUTE_LOCATION:
+		case UmlPackage::IMAGE_ATTRIBUTE_LOCATION:
 			return eAny(getLocation()); //1115
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
@@ -213,11 +213,11 @@ bool ImageImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::IMAGE_EATTRIBUTE_CONTENT:
+		case UmlPackage::IMAGE_ATTRIBUTE_CONTENT:
 			return getContent() != ""; //1113
-		case UmlPackage::IMAGE_EATTRIBUTE_FORMAT:
+		case UmlPackage::IMAGE_ATTRIBUTE_FORMAT:
 			return getFormat() != ""; //1114
-		case UmlPackage::IMAGE_EATTRIBUTE_LOCATION:
+		case UmlPackage::IMAGE_ATTRIBUTE_LOCATION:
 			return getLocation() != ""; //1115
 	}
 	return ElementImpl::internalEIsSet(featureID);
@@ -226,21 +226,21 @@ bool ImageImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::IMAGE_EATTRIBUTE_CONTENT:
+		case UmlPackage::IMAGE_ATTRIBUTE_CONTENT:
 		{
 			// BOOST CAST
 			std::string _content = newValue->get<std::string>();
 			setContent(_content); //1113
 			return true;
 		}
-		case UmlPackage::IMAGE_EATTRIBUTE_FORMAT:
+		case UmlPackage::IMAGE_ATTRIBUTE_FORMAT:
 		{
 			// BOOST CAST
 			std::string _format = newValue->get<std::string>();
 			setFormat(_format); //1114
 			return true;
 		}
-		case UmlPackage::IMAGE_EATTRIBUTE_LOCATION:
+		case UmlPackage::IMAGE_ATTRIBUTE_LOCATION:
 		{
 			// BOOST CAST
 			std::string _location = newValue->get<std::string>();
@@ -351,17 +351,17 @@ void ImageImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandle
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getImage_EAttribute_content()) )
+		if ( this->eIsSet(package->getImage_Attribute_content()) )
 		{
 			saveHandler->addAttribute("content", this->getContent());
 		}
 
-		if ( this->eIsSet(package->getImage_EAttribute_format()) )
+		if ( this->eIsSet(package->getImage_Attribute_format()) )
 		{
 			saveHandler->addAttribute("format", this->getFormat());
 		}
 
-		if ( this->eIsSet(package->getImage_EAttribute_location()) )
+		if ( this->eIsSet(package->getImage_Attribute_location()) )
 		{
 			saveHandler->addAttribute("location", this->getLocation());
 		}

@@ -226,7 +226,7 @@ std::shared_ptr<ecore::EObject>  OpaqueExpressionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> OpaqueExpressionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getOpaqueExpression_EClass();
+	return UmlPackageImpl::eInstance()->getOpaqueExpression_Class();
 }
 
 //*********************************
@@ -375,13 +375,13 @@ Any OpaqueExpressionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::OPAQUEEXPRESSION_EREFERENCE_BEHAVIOR:
+		case UmlPackage::OPAQUEEXPRESSION_ATTRIBUTE_BEHAVIOR:
 			return eAny(getBehavior()); //16614
-		case UmlPackage::OPAQUEEXPRESSION_EATTRIBUTE_BODY:
+		case UmlPackage::OPAQUEEXPRESSION_ATTRIBUTE_BODY:
 			return eAny(getBody()); //16615
-		case UmlPackage::OPAQUEEXPRESSION_EATTRIBUTE_LANGUAGE:
+		case UmlPackage::OPAQUEEXPRESSION_ATTRIBUTE_LANGUAGE:
 			return eAny(getLanguage()); //16616
-		case UmlPackage::OPAQUEEXPRESSION_EREFERENCE_RESULT:
+		case UmlPackage::OPAQUEEXPRESSION_ATTRIBUTE_RESULT:
 			return eAny(getResult()); //16617
 	}
 	return ValueSpecificationImpl::eGet(featureID, resolve, coreType);
@@ -390,13 +390,13 @@ bool OpaqueExpressionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::OPAQUEEXPRESSION_EREFERENCE_BEHAVIOR:
+		case UmlPackage::OPAQUEEXPRESSION_ATTRIBUTE_BEHAVIOR:
 			return getBehavior() != nullptr; //16614
-		case UmlPackage::OPAQUEEXPRESSION_EATTRIBUTE_BODY:
+		case UmlPackage::OPAQUEEXPRESSION_ATTRIBUTE_BODY:
 			return !getBody()->empty(); //16615
-		case UmlPackage::OPAQUEEXPRESSION_EATTRIBUTE_LANGUAGE:
+		case UmlPackage::OPAQUEEXPRESSION_ATTRIBUTE_LANGUAGE:
 			return !getLanguage()->empty(); //16616
-		case UmlPackage::OPAQUEEXPRESSION_EREFERENCE_RESULT:
+		case UmlPackage::OPAQUEEXPRESSION_ATTRIBUTE_RESULT:
 			return getResult() != nullptr; //16617
 	}
 	return ValueSpecificationImpl::internalEIsSet(featureID);
@@ -405,7 +405,7 @@ bool OpaqueExpressionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::OPAQUEEXPRESSION_EREFERENCE_BEHAVIOR:
+		case UmlPackage::OPAQUEEXPRESSION_ATTRIBUTE_BEHAVIOR:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Behavior> _behavior = newValue->get<std::shared_ptr<uml::Behavior>>();
@@ -499,7 +499,7 @@ void OpaqueExpressionImpl::resolveReferences(const int featureID, std::list<std:
 {
 	switch(featureID)
 	{
-		case UmlPackage::OPAQUEEXPRESSION_EREFERENCE_BEHAVIOR:
+		case UmlPackage::OPAQUEEXPRESSION_ATTRIBUTE_BEHAVIOR:
 		{
 			if (references.size() == 1)
 			{
@@ -547,7 +547,7 @@ void OpaqueExpressionImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getOpaqueExpression_EAttribute_body()) )
+		if ( this->eIsSet(package->getOpaqueExpression_Attribute_body()) )
 		{
 			for (std::shared_ptr<std::string> value : *m_body)
 			{
@@ -555,7 +555,7 @@ void OpaqueExpressionImpl::saveContent(std::shared_ptr<persistence::interfaces::
 			}
 		}
 
-		if ( this->eIsSet(package->getOpaqueExpression_EAttribute_language()) )
+		if ( this->eIsSet(package->getOpaqueExpression_Attribute_language()) )
 		{
 			for (std::shared_ptr<std::string> value : *m_language)
 			{

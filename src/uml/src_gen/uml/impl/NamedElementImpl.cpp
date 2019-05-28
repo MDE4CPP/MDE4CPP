@@ -176,7 +176,7 @@ std::shared_ptr<ecore::EObject>  NamedElementImpl::copy() const
 
 std::shared_ptr<ecore::EClass> NamedElementImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getNamedElement_EClass();
+	return UmlPackageImpl::eInstance()->getNamedElement_Class();
 }
 
 //*********************************
@@ -397,17 +397,17 @@ Any NamedElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::NAMEDELEMENT_EREFERENCE_CLIENTDEPENDENCY:
+		case UmlPackage::NAMEDELEMENT_ATTRIBUTE_CLIENTDEPENDENCY:
 			return eAny(getClientDependency()); //1553
-		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_NAME:
+		case UmlPackage::NAMEDELEMENT_ATTRIBUTE_NAME:
 			return eAny(getName()); //1554
-		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMEEXPRESSION:
+		case UmlPackage::NAMEDELEMENT_ATTRIBUTE_NAMEEXPRESSION:
 			return eAny(getNameExpression()); //1555
-		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE:
+		case UmlPackage::NAMEDELEMENT_ATTRIBUTE_NAMESPACE:
 			return eAny(getNamespace()); //1556
-		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_QUALIFIEDNAME:
+		case UmlPackage::NAMEDELEMENT_ATTRIBUTE_QUALIFIEDNAME:
 			return eAny(getQualifiedName()); //1557
-		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_VISIBILITY:
+		case UmlPackage::NAMEDELEMENT_ATTRIBUTE_VISIBILITY:
 			return eAny(getVisibility()); //1558
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
@@ -416,17 +416,17 @@ bool NamedElementImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::NAMEDELEMENT_EREFERENCE_CLIENTDEPENDENCY:
+		case UmlPackage::NAMEDELEMENT_ATTRIBUTE_CLIENTDEPENDENCY:
 			return getClientDependency() != nullptr; //1553
-		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_NAME:
+		case UmlPackage::NAMEDELEMENT_ATTRIBUTE_NAME:
 			return getName() != ""; //1554
-		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMEEXPRESSION:
+		case UmlPackage::NAMEDELEMENT_ATTRIBUTE_NAMEEXPRESSION:
 			return getNameExpression() != nullptr; //1555
-		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE:
+		case UmlPackage::NAMEDELEMENT_ATTRIBUTE_NAMESPACE:
 			return getNamespace().lock() != nullptr; //1556
-		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_QUALIFIEDNAME:
+		case UmlPackage::NAMEDELEMENT_ATTRIBUTE_QUALIFIEDNAME:
 			return getQualifiedName() != ""; //1557
-		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_VISIBILITY:
+		case UmlPackage::NAMEDELEMENT_ATTRIBUTE_VISIBILITY:
 			return m_visibility != VisibilityKind::PUBLIC;; //1558
 	}
 	return ElementImpl::internalEIsSet(featureID);
@@ -435,21 +435,21 @@ bool NamedElementImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_NAME:
+		case UmlPackage::NAMEDELEMENT_ATTRIBUTE_NAME:
 		{
 			// BOOST CAST
 			std::string _name = newValue->get<std::string>();
 			setName(_name); //1554
 			return true;
 		}
-		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMEEXPRESSION:
+		case UmlPackage::NAMEDELEMENT_ATTRIBUTE_NAMEEXPRESSION:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::StringExpression> _nameExpression = newValue->get<std::shared_ptr<uml::StringExpression>>();
 			setNameExpression(_nameExpression); //1555
 			return true;
 		}
-		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_VISIBILITY:
+		case UmlPackage::NAMEDELEMENT_ATTRIBUTE_VISIBILITY:
 		{
 			// BOOST CAST
 			VisibilityKind _visibility = newValue->get<VisibilityKind>();
@@ -593,17 +593,17 @@ void NamedElementImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 		std::shared_ptr<uml::StringExpression > nameExpression = this->getNameExpression();
 		if (nameExpression != nullptr)
 		{
-			saveHandler->addReference(nameExpression, "nameExpression", nameExpression->eClass() != package->getStringExpression_EClass());
+			saveHandler->addReference(nameExpression, "nameExpression", nameExpression->eClass() != package->getStringExpression_Class());
 		}
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getNamedElement_EAttribute_name()) )
+		if ( this->eIsSet(package->getNamedElement_Attribute_name()) )
 		{
 			saveHandler->addAttribute("name", this->getName());
 		}
 
-		if ( this->eIsSet(package->getNamedElement_EAttribute_visibility()) )
+		if ( this->eIsSet(package->getNamedElement_Attribute_visibility()) )
 		{
 			VisibilityKind value = this->getVisibility();
 			std::string literal = "";

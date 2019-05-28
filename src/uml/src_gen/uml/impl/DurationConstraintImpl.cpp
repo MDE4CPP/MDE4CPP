@@ -94,11 +94,11 @@ DurationConstraintImpl::~DurationConstraintImpl()
 			{
 				switch(reference_id)
 				{	
-				case UmlPackage::CONSTRAINT_EREFERENCE_CONTEXT:
+				case UmlPackage::CONSTRAINT_ATTRIBUTE_CONTEXT:
 					m_context = par_Namespace;
 					m_namespace = par_Namespace;
 					 return;
-				case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE:
+				case UmlPackage::NAMEDELEMENT_ATTRIBUTE_NAMESPACE:
 					m_namespace = par_Namespace;
 					m_owner = par_Namespace;
 					 return;
@@ -222,7 +222,7 @@ std::shared_ptr<ecore::EObject>  DurationConstraintImpl::copy() const
 
 std::shared_ptr<ecore::EClass> DurationConstraintImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getDurationConstraint_EClass();
+	return UmlPackageImpl::eInstance()->getDurationConstraint_Class();
 }
 
 //*********************************
@@ -316,7 +316,7 @@ Any DurationConstraintImpl::eGet(int featureID, bool resolve, bool coreType) con
 {
 	switch(featureID)
 	{
-		case UmlPackage::DURATIONCONSTRAINT_EATTRIBUTE_FIRSTEVENT:
+		case UmlPackage::DURATIONCONSTRAINT_ATTRIBUTE_FIRSTEVENT:
 			return eAny(getFirstEvent()); //7815
 	}
 	return IntervalConstraintImpl::eGet(featureID, resolve, coreType);
@@ -325,7 +325,7 @@ bool DurationConstraintImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::DURATIONCONSTRAINT_EATTRIBUTE_FIRSTEVENT:
+		case UmlPackage::DURATIONCONSTRAINT_ATTRIBUTE_FIRSTEVENT:
 			return !getFirstEvent()->empty(); //7815
 	}
 	return IntervalConstraintImpl::internalEIsSet(featureID);
@@ -428,7 +428,7 @@ void DurationConstraintImpl::saveContent(std::shared_ptr<persistence::interfaces
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getDurationConstraint_EAttribute_firstEvent()) )
+		if ( this->eIsSet(package->getDurationConstraint_Attribute_firstEvent()) )
 		{
 			for (std::shared_ptr<bool> value : *m_firstEvent)
 			{

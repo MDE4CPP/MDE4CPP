@@ -124,7 +124,7 @@ std::shared_ptr<ecore::EObject>  CompoundValueImpl::copy() const
 
 std::shared_ptr<ecore::EClass> CompoundValueImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getCompoundValue_EClass();
+	return FUMLPackageImpl::eInstance()->getCompoundValue_Class();
 }
 
 //*********************************
@@ -298,7 +298,7 @@ Any CompoundValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::COMPOUNDVALUE_EREFERENCE_FEATUREVALUES:
+		case FUMLPackage::COMPOUNDVALUE_ATTRIBUTE_FEATUREVALUES:
 			return eAny(getFeatureValues()); //230
 	}
 	return StructuredValueImpl::eGet(featureID, resolve, coreType);
@@ -307,7 +307,7 @@ bool CompoundValueImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::COMPOUNDVALUE_EREFERENCE_FEATUREVALUES:
+		case FUMLPackage::COMPOUNDVALUE_ATTRIBUTE_FEATUREVALUES:
 			return getFeatureValues() != nullptr; //230
 	}
 	return StructuredValueImpl::internalEIsSet(featureID);
@@ -419,7 +419,7 @@ void CompoundValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 		std::shared_ptr<Bag<fUML::FeatureValue>> list_featureValues = this->getFeatureValues();
 		for (std::shared_ptr<fUML::FeatureValue> featureValues : *list_featureValues) 
 		{
-			saveHandler->addReference(featureValues, "featureValues", featureValues->eClass() != package->getFeatureValue_EClass());
+			saveHandler->addReference(featureValues, "featureValues", featureValues->eClass() != package->getFeatureValue_Class());
 		}
 	}
 	catch (std::exception& e)

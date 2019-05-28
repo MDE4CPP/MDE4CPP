@@ -312,7 +312,7 @@ std::shared_ptr<ecore::EObject>  NamespaceImpl::copy() const
 
 std::shared_ptr<ecore::EClass> NamespaceImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getNamespace_EClass();
+	return UmlPackageImpl::eInstance()->getNamespace_Class();
 }
 
 //*********************************
@@ -488,17 +488,17 @@ Any NamespaceImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::NAMESPACE_EREFERENCE_ELEMENTIMPORT:
+		case UmlPackage::NAMESPACE_ATTRIBUTE_ELEMENTIMPORT:
 			return eAny(getElementImport()); //15610
-		case UmlPackage::NAMESPACE_EREFERENCE_IMPORTEDMEMBER:
+		case UmlPackage::NAMESPACE_ATTRIBUTE_IMPORTEDMEMBER:
 			return eAny(getImportedMember()); //15613
-		case UmlPackage::NAMESPACE_EREFERENCE_MEMBER:
+		case UmlPackage::NAMESPACE_ATTRIBUTE_MEMBER:
 			return eAny(getMember()); //15614
-		case UmlPackage::NAMESPACE_EREFERENCE_OWNEDMEMBER:
+		case UmlPackage::NAMESPACE_ATTRIBUTE_OWNEDMEMBER:
 			return eAny(getOwnedMember()); //15612
-		case UmlPackage::NAMESPACE_EREFERENCE_OWNEDRULE:
+		case UmlPackage::NAMESPACE_ATTRIBUTE_OWNEDRULE:
 			return eAny(getOwnedRule()); //1569
-		case UmlPackage::NAMESPACE_EREFERENCE_PACKAGEIMPORT:
+		case UmlPackage::NAMESPACE_ATTRIBUTE_PACKAGEIMPORT:
 			return eAny(getPackageImport()); //15611
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
@@ -507,17 +507,17 @@ bool NamespaceImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::NAMESPACE_EREFERENCE_ELEMENTIMPORT:
+		case UmlPackage::NAMESPACE_ATTRIBUTE_ELEMENTIMPORT:
 			return getElementImport() != nullptr; //15610
-		case UmlPackage::NAMESPACE_EREFERENCE_IMPORTEDMEMBER:
+		case UmlPackage::NAMESPACE_ATTRIBUTE_IMPORTEDMEMBER:
 			return getImportedMember() != nullptr; //15613
-		case UmlPackage::NAMESPACE_EREFERENCE_MEMBER:
+		case UmlPackage::NAMESPACE_ATTRIBUTE_MEMBER:
 			return getMember() != nullptr; //15614
-		case UmlPackage::NAMESPACE_EREFERENCE_OWNEDMEMBER:
+		case UmlPackage::NAMESPACE_ATTRIBUTE_OWNEDMEMBER:
 			return getOwnedMember() != nullptr; //15612
-		case UmlPackage::NAMESPACE_EREFERENCE_OWNEDRULE:
+		case UmlPackage::NAMESPACE_ATTRIBUTE_OWNEDRULE:
 			return getOwnedRule() != nullptr; //1569
-		case UmlPackage::NAMESPACE_EREFERENCE_PACKAGEIMPORT:
+		case UmlPackage::NAMESPACE_ATTRIBUTE_PACKAGEIMPORT:
 			return getPackageImport() != nullptr; //15611
 	}
 	return NamedElementImpl::internalEIsSet(featureID);
@@ -569,7 +569,7 @@ void NamespaceImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::
 			{
 				typeName = "ElementImport";
 			}
-			std::shared_ptr<ecore::EObject> elementImport = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::ELEMENTIMPORT_EREFERENCE_IMPORTINGNAMESPACE);
+			std::shared_ptr<ecore::EObject> elementImport = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::ELEMENTIMPORT_ATTRIBUTE_IMPORTINGNAMESPACE);
 			if (elementImport != nullptr)
 			{
 				loadHandler->handleChild(elementImport);
@@ -585,7 +585,7 @@ void NamespaceImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::
 				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			std::shared_ptr<ecore::EObject> ownedMember = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE);
+			std::shared_ptr<ecore::EObject> ownedMember = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::NAMEDELEMENT_ATTRIBUTE_NAMESPACE);
 			if (ownedMember != nullptr)
 			{
 				loadHandler->handleChild(ownedMember);
@@ -603,8 +603,8 @@ void NamespaceImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::
 			// TODO here are multiple containers of same object. Check this!
 			std::cout << "| ERROR    | " << __PRETTY_FUNCTION__ << " 'ownedRule' has more then one back-reference Object." << std::endl;
 			std::shared_ptr<ecore::EObject> ownedRule;
-				ownedRule = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::CONSTRAINT_EREFERENCE_CONTEXT);
-				ownedRule = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE);
+				ownedRule = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::CONSTRAINT_ATTRIBUTE_CONTEXT);
+				ownedRule = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::NAMEDELEMENT_ATTRIBUTE_NAMESPACE);
 			if (ownedRule != nullptr)
 			{
 				loadHandler->handleChild(ownedRule);
@@ -619,7 +619,7 @@ void NamespaceImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::
 			{
 				typeName = "PackageImport";
 			}
-			std::shared_ptr<ecore::EObject> packageImport = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::PACKAGEIMPORT_EREFERENCE_IMPORTINGNAMESPACE);
+			std::shared_ptr<ecore::EObject> packageImport = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::PACKAGEIMPORT_ATTRIBUTE_IMPORTINGNAMESPACE);
 			if (packageImport != nullptr)
 			{
 				loadHandler->handleChild(packageImport);
@@ -677,28 +677,28 @@ void NamespaceImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 		std::shared_ptr<SubsetUnion<uml::ElementImport, uml::Element>> list_elementImport = this->getElementImport();
 		for (std::shared_ptr<uml::ElementImport> elementImport : *list_elementImport) 
 		{
-			saveHandler->addReference(elementImport, "elementImport", elementImport->eClass() != package->getElementImport_EClass());
+			saveHandler->addReference(elementImport, "elementImport", elementImport->eClass() != package->getElementImport_Class());
 		}
 
 		// Save 'ownedMember'
 		std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> list_ownedMember = this->getOwnedMember();
 		for (std::shared_ptr<uml::NamedElement> ownedMember : *list_ownedMember) 
 		{
-			saveHandler->addReference(ownedMember, "ownedMember", ownedMember->eClass() != package->getNamedElement_EClass());
+			saveHandler->addReference(ownedMember, "ownedMember", ownedMember->eClass() != package->getNamedElement_Class());
 		}
 
 		// Save 'ownedRule'
 		std::shared_ptr<SubsetUnion<uml::Constraint, uml::NamedElement>> list_ownedRule = this->getOwnedRule();
 		for (std::shared_ptr<uml::Constraint> ownedRule : *list_ownedRule) 
 		{
-			saveHandler->addReference(ownedRule, "ownedRule", ownedRule->eClass() != package->getConstraint_EClass());
+			saveHandler->addReference(ownedRule, "ownedRule", ownedRule->eClass() != package->getConstraint_Class());
 		}
 
 		// Save 'packageImport'
 		std::shared_ptr<SubsetUnion<uml::PackageImport, uml::Element>> list_packageImport = this->getPackageImport();
 		for (std::shared_ptr<uml::PackageImport> packageImport : *list_packageImport) 
 		{
-			saveHandler->addReference(packageImport, "packageImport", packageImport->eClass() != package->getPackageImport_EClass());
+			saveHandler->addReference(packageImport, "packageImport", packageImport->eClass() != package->getPackageImport_Class());
 		}
 	}
 	catch (std::exception& e)

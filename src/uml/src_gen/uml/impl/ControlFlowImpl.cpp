@@ -247,7 +247,7 @@ std::shared_ptr<ecore::EObject>  ControlFlowImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ControlFlowImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getControlFlow_EClass();
+	return UmlPackageImpl::eInstance()->getControlFlow_Class();
 }
 
 //*********************************

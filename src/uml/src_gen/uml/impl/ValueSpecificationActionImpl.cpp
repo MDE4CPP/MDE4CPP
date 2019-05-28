@@ -301,7 +301,7 @@ std::shared_ptr<ecore::EObject>  ValueSpecificationActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ValueSpecificationActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getValueSpecificationAction_EClass();
+	return UmlPackageImpl::eInstance()->getValueSpecificationAction_Class();
 }
 
 //*********************************
@@ -411,9 +411,9 @@ Any ValueSpecificationActionImpl::eGet(int featureID, bool resolve, bool coreTyp
 {
 	switch(featureID)
 	{
-		case UmlPackage::VALUESPECIFICATIONACTION_EREFERENCE_RESULT:
+		case UmlPackage::VALUESPECIFICATIONACTION_ATTRIBUTE_RESULT:
 			return eAny(getResult()); //25127
-		case UmlPackage::VALUESPECIFICATIONACTION_EREFERENCE_VALUE:
+		case UmlPackage::VALUESPECIFICATIONACTION_ATTRIBUTE_VALUE:
 			return eAny(getValue()); //25128
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
@@ -422,9 +422,9 @@ bool ValueSpecificationActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::VALUESPECIFICATIONACTION_EREFERENCE_RESULT:
+		case UmlPackage::VALUESPECIFICATIONACTION_ATTRIBUTE_RESULT:
 			return getResult() != nullptr; //25127
-		case UmlPackage::VALUESPECIFICATIONACTION_EREFERENCE_VALUE:
+		case UmlPackage::VALUESPECIFICATIONACTION_ATTRIBUTE_VALUE:
 			return getValue() != nullptr; //25128
 	}
 	return ActionImpl::internalEIsSet(featureID);
@@ -433,14 +433,14 @@ bool ValueSpecificationActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::VALUESPECIFICATIONACTION_EREFERENCE_RESULT:
+		case UmlPackage::VALUESPECIFICATIONACTION_ATTRIBUTE_RESULT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::OutputPin> _result = newValue->get<std::shared_ptr<uml::OutputPin>>();
 			setResult(_result); //25127
 			return true;
 		}
-		case UmlPackage::VALUESPECIFICATIONACTION_EREFERENCE_VALUE:
+		case UmlPackage::VALUESPECIFICATIONACTION_ATTRIBUTE_VALUE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ValueSpecification> _value = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
@@ -572,14 +572,14 @@ void ValueSpecificationActionImpl::saveContent(std::shared_ptr<persistence::inte
 		std::shared_ptr<uml::OutputPin > result = this->getResult();
 		if (result != nullptr)
 		{
-			saveHandler->addReference(result, "result", result->eClass() != package->getOutputPin_EClass());
+			saveHandler->addReference(result, "result", result->eClass() != package->getOutputPin_Class());
 		}
 
 		// Save 'value'
 		std::shared_ptr<uml::ValueSpecification > value = this->getValue();
 		if (value != nullptr)
 		{
-			saveHandler->addReference(value, "value", value->eClass() != package->getValueSpecification_EClass());
+			saveHandler->addReference(value, "value", value->eClass() != package->getValueSpecification_Class());
 		}
 	
 

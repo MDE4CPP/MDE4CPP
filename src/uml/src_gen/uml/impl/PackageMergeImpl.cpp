@@ -152,7 +152,7 @@ std::shared_ptr<ecore::EObject>  PackageMergeImpl::copy() const
 
 std::shared_ptr<ecore::EClass> PackageMergeImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getPackageMerge_EClass();
+	return UmlPackageImpl::eInstance()->getPackageMerge_Class();
 }
 
 //*********************************
@@ -241,9 +241,9 @@ Any PackageMergeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::PACKAGEMERGE_EREFERENCE_MERGEDPACKAGE:
+		case UmlPackage::PACKAGEMERGE_ATTRIBUTE_MERGEDPACKAGE:
 			return eAny(getMergedPackage()); //1726
-		case UmlPackage::PACKAGEMERGE_EREFERENCE_RECEIVINGPACKAGE:
+		case UmlPackage::PACKAGEMERGE_ATTRIBUTE_RECEIVINGPACKAGE:
 			return eAny(getReceivingPackage()); //1727
 	}
 	return DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
@@ -252,9 +252,9 @@ bool PackageMergeImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::PACKAGEMERGE_EREFERENCE_MERGEDPACKAGE:
+		case UmlPackage::PACKAGEMERGE_ATTRIBUTE_MERGEDPACKAGE:
 			return getMergedPackage() != nullptr; //1726
-		case UmlPackage::PACKAGEMERGE_EREFERENCE_RECEIVINGPACKAGE:
+		case UmlPackage::PACKAGEMERGE_ATTRIBUTE_RECEIVINGPACKAGE:
 			return getReceivingPackage().lock() != nullptr; //1727
 	}
 	return DirectedRelationshipImpl::internalEIsSet(featureID);
@@ -263,14 +263,14 @@ bool PackageMergeImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::PACKAGEMERGE_EREFERENCE_MERGEDPACKAGE:
+		case UmlPackage::PACKAGEMERGE_ATTRIBUTE_MERGEDPACKAGE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Package> _mergedPackage = newValue->get<std::shared_ptr<uml::Package>>();
 			setMergedPackage(_mergedPackage); //1726
 			return true;
 		}
-		case UmlPackage::PACKAGEMERGE_EREFERENCE_RECEIVINGPACKAGE:
+		case UmlPackage::PACKAGEMERGE_ATTRIBUTE_RECEIVINGPACKAGE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Package> _receivingPackage = newValue->get<std::shared_ptr<uml::Package>>();
@@ -338,7 +338,7 @@ void PackageMergeImpl::resolveReferences(const int featureID, std::list<std::sha
 {
 	switch(featureID)
 	{
-		case UmlPackage::PACKAGEMERGE_EREFERENCE_MERGEDPACKAGE:
+		case UmlPackage::PACKAGEMERGE_ATTRIBUTE_MERGEDPACKAGE:
 		{
 			if (references.size() == 1)
 			{
@@ -350,7 +350,7 @@ void PackageMergeImpl::resolveReferences(const int featureID, std::list<std::sha
 			return;
 		}
 
-		case UmlPackage::PACKAGEMERGE_EREFERENCE_RECEIVINGPACKAGE:
+		case UmlPackage::PACKAGEMERGE_ATTRIBUTE_RECEIVINGPACKAGE:
 		{
 			if (references.size() == 1)
 			{

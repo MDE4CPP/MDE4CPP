@@ -292,7 +292,7 @@ std::shared_ptr<ecore::EObject>  CreateObjectActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> CreateObjectActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getCreateObjectAction_EClass();
+	return UmlPackageImpl::eInstance()->getCreateObjectAction_Class();
 }
 
 //*********************************
@@ -414,9 +414,9 @@ Any CreateObjectActionImpl::eGet(int featureID, bool resolve, bool coreType) con
 {
 	switch(featureID)
 	{
-		case UmlPackage::CREATEOBJECTACTION_EREFERENCE_CLASSIFIER:
+		case UmlPackage::CREATEOBJECTACTION_ATTRIBUTE_CLASSIFIER:
 			return eAny(getClassifier()); //6327
-		case UmlPackage::CREATEOBJECTACTION_EREFERENCE_RESULT:
+		case UmlPackage::CREATEOBJECTACTION_ATTRIBUTE_RESULT:
 			return eAny(getResult()); //6328
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
@@ -425,9 +425,9 @@ bool CreateObjectActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::CREATEOBJECTACTION_EREFERENCE_CLASSIFIER:
+		case UmlPackage::CREATEOBJECTACTION_ATTRIBUTE_CLASSIFIER:
 			return getClassifier() != nullptr; //6327
-		case UmlPackage::CREATEOBJECTACTION_EREFERENCE_RESULT:
+		case UmlPackage::CREATEOBJECTACTION_ATTRIBUTE_RESULT:
 			return getResult() != nullptr; //6328
 	}
 	return ActionImpl::internalEIsSet(featureID);
@@ -436,14 +436,14 @@ bool CreateObjectActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::CREATEOBJECTACTION_EREFERENCE_CLASSIFIER:
+		case UmlPackage::CREATEOBJECTACTION_ATTRIBUTE_CLASSIFIER:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Classifier> _classifier = newValue->get<std::shared_ptr<uml::Classifier>>();
 			setClassifier(_classifier); //6327
 			return true;
 		}
-		case UmlPackage::CREATEOBJECTACTION_EREFERENCE_RESULT:
+		case UmlPackage::CREATEOBJECTACTION_ATTRIBUTE_RESULT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::OutputPin> _result = newValue->get<std::shared_ptr<uml::OutputPin>>();
@@ -537,7 +537,7 @@ void CreateObjectActionImpl::resolveReferences(const int featureID, std::list<st
 {
 	switch(featureID)
 	{
-		case UmlPackage::CREATEOBJECTACTION_EREFERENCE_CLASSIFIER:
+		case UmlPackage::CREATEOBJECTACTION_ATTRIBUTE_CLASSIFIER:
 		{
 			if (references.size() == 1)
 			{
@@ -591,7 +591,7 @@ void CreateObjectActionImpl::saveContent(std::shared_ptr<persistence::interfaces
 		std::shared_ptr<uml::OutputPin > result = this->getResult();
 		if (result != nullptr)
 		{
-			saveHandler->addReference(result, "result", result->eClass() != package->getOutputPin_EClass());
+			saveHandler->addReference(result, "result", result->eClass() != package->getOutputPin_Class());
 		}
 	
 

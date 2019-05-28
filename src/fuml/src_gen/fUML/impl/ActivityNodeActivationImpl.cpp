@@ -174,7 +174,7 @@ std::shared_ptr<ecore::EObject>  ActivityNodeActivationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ActivityNodeActivationImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getActivityNodeActivation_EClass();
+	return FUMLPackageImpl::eInstance()->getActivityNodeActivation_Class();
 }
 
 //*********************************
@@ -660,17 +660,17 @@ Any ActivityNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType)
 {
 	switch(featureID)
 	{
-		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_GROUP:
+		case FUMLPackage::ACTIVITYNODEACTIVATION_ATTRIBUTE_GROUP:
 			return eAny(getGroup()); //73
-		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_HELDTOKENS:
+		case FUMLPackage::ACTIVITYNODEACTIVATION_ATTRIBUTE_HELDTOKENS:
 			return eAny(getHeldTokens()); //72
-		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_INCOMINGEDGES:
+		case FUMLPackage::ACTIVITYNODEACTIVATION_ATTRIBUTE_INCOMINGEDGES:
 			return eAny(getIncomingEdges()); //71
-		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_NODE:
+		case FUMLPackage::ACTIVITYNODEACTIVATION_ATTRIBUTE_NODE:
 			return eAny(getNode()); //74
-		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_OUTGOINGEDGES:
+		case FUMLPackage::ACTIVITYNODEACTIVATION_ATTRIBUTE_OUTGOINGEDGES:
 			return eAny(getOutgoingEdges()); //70
-		case FUMLPackage::ACTIVITYNODEACTIVATION_EATTRIBUTE_RUNNING:
+		case FUMLPackage::ACTIVITYNODEACTIVATION_ATTRIBUTE_RUNNING:
 			return eAny(isRunning()); //75
 	}
 	return SemanticVisitorImpl::eGet(featureID, resolve, coreType);
@@ -679,17 +679,17 @@ bool ActivityNodeActivationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_GROUP:
+		case FUMLPackage::ACTIVITYNODEACTIVATION_ATTRIBUTE_GROUP:
 			return getGroup().lock() != nullptr; //73
-		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_HELDTOKENS:
+		case FUMLPackage::ACTIVITYNODEACTIVATION_ATTRIBUTE_HELDTOKENS:
 			return getHeldTokens() != nullptr; //72
-		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_INCOMINGEDGES:
+		case FUMLPackage::ACTIVITYNODEACTIVATION_ATTRIBUTE_INCOMINGEDGES:
 			return getIncomingEdges() != nullptr; //71
-		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_NODE:
+		case FUMLPackage::ACTIVITYNODEACTIVATION_ATTRIBUTE_NODE:
 			return getNode() != nullptr; //74
-		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_OUTGOINGEDGES:
+		case FUMLPackage::ACTIVITYNODEACTIVATION_ATTRIBUTE_OUTGOINGEDGES:
 			return getOutgoingEdges() != nullptr; //70
-		case FUMLPackage::ACTIVITYNODEACTIVATION_EATTRIBUTE_RUNNING:
+		case FUMLPackage::ACTIVITYNODEACTIVATION_ATTRIBUTE_RUNNING:
 			return isRunning() != false; //75
 	}
 	return SemanticVisitorImpl::internalEIsSet(featureID);
@@ -698,21 +698,21 @@ bool ActivityNodeActivationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_GROUP:
+		case FUMLPackage::ACTIVITYNODEACTIVATION_ATTRIBUTE_GROUP:
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::ActivityNodeActivationGroup> _group = newValue->get<std::shared_ptr<fUML::ActivityNodeActivationGroup>>();
 			setGroup(_group); //73
 			return true;
 		}
-		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_NODE:
+		case FUMLPackage::ACTIVITYNODEACTIVATION_ATTRIBUTE_NODE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ActivityNode> _node = newValue->get<std::shared_ptr<uml::ActivityNode>>();
 			setNode(_node); //74
 			return true;
 		}
-		case FUMLPackage::ACTIVITYNODEACTIVATION_EATTRIBUTE_RUNNING:
+		case FUMLPackage::ACTIVITYNODEACTIVATION_ATTRIBUTE_RUNNING:
 		{
 			// BOOST CAST
 			bool _running = newValue->get<bool>();
@@ -831,7 +831,7 @@ void ActivityNodeActivationImpl::resolveReferences(const int featureID, std::lis
 {
 	switch(featureID)
 	{
-		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_GROUP:
+		case FUMLPackage::ACTIVITYNODEACTIVATION_ATTRIBUTE_GROUP:
 		{
 			if (references.size() == 1)
 			{
@@ -843,7 +843,7 @@ void ActivityNodeActivationImpl::resolveReferences(const int featureID, std::lis
 			return;
 		}
 
-		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_INCOMINGEDGES:
+		case FUMLPackage::ACTIVITYNODEACTIVATION_ATTRIBUTE_INCOMINGEDGES:
 		{
 			std::shared_ptr<Bag<fUML::ActivityEdgeInstance>> _incomingEdges = getIncomingEdges();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -857,7 +857,7 @@ void ActivityNodeActivationImpl::resolveReferences(const int featureID, std::lis
 			return;
 		}
 
-		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_NODE:
+		case FUMLPackage::ACTIVITYNODEACTIVATION_ATTRIBUTE_NODE:
 		{
 			if (references.size() == 1)
 			{
@@ -869,7 +869,7 @@ void ActivityNodeActivationImpl::resolveReferences(const int featureID, std::lis
 			return;
 		}
 
-		case FUMLPackage::ACTIVITYNODEACTIVATION_EREFERENCE_OUTGOINGEDGES:
+		case FUMLPackage::ACTIVITYNODEACTIVATION_ATTRIBUTE_OUTGOINGEDGES:
 		{
 			std::shared_ptr<Bag<fUML::ActivityEdgeInstance>> _outgoingEdges = getOutgoingEdges();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -905,7 +905,7 @@ void ActivityNodeActivationImpl::saveContent(std::shared_ptr<persistence::interf
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getActivityNodeActivation_EAttribute_running()) )
+		if ( this->eIsSet(package->getActivityNodeActivation_Attribute_running()) )
 		{
 			saveHandler->addAttribute("running", this->isRunning());
 		}
@@ -932,7 +932,7 @@ void ActivityNodeActivationImpl::saveContent(std::shared_ptr<persistence::interf
 		std::shared_ptr<Bag<fUML::Token>> list_heldTokens = this->getHeldTokens();
 		for (std::shared_ptr<fUML::Token> heldTokens : *list_heldTokens) 
 		{
-			saveHandler->addReference(heldTokens, "heldTokens", heldTokens->eClass() != package->getToken_EClass());
+			saveHandler->addReference(heldTokens, "heldTokens", heldTokens->eClass() != package->getToken_Class());
 		}
 	}
 	catch (std::exception& e)

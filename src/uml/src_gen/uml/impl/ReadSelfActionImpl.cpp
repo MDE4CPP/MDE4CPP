@@ -286,7 +286,7 @@ std::shared_ptr<ecore::EObject>  ReadSelfActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ReadSelfActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getReadSelfAction_EClass();
+	return UmlPackageImpl::eInstance()->getReadSelfAction_Class();
 }
 
 //*********************************
@@ -398,7 +398,7 @@ Any ReadSelfActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::READSELFACTION_EREFERENCE_RESULT:
+		case UmlPackage::READSELFACTION_ATTRIBUTE_RESULT:
 			return eAny(getResult()); //19827
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
@@ -407,7 +407,7 @@ bool ReadSelfActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::READSELFACTION_EREFERENCE_RESULT:
+		case UmlPackage::READSELFACTION_ATTRIBUTE_RESULT:
 			return getResult() != nullptr; //19827
 	}
 	return ActionImpl::internalEIsSet(featureID);
@@ -416,7 +416,7 @@ bool ReadSelfActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::READSELFACTION_EREFERENCE_RESULT:
+		case UmlPackage::READSELFACTION_ATTRIBUTE_RESULT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::OutputPin> _result = newValue->get<std::shared_ptr<uml::OutputPin>>();
@@ -531,7 +531,7 @@ void ReadSelfActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 		std::shared_ptr<uml::OutputPin > result = this->getResult();
 		if (result != nullptr)
 		{
-			saveHandler->addReference(result, "result", result->eClass() != package->getOutputPin_EClass());
+			saveHandler->addReference(result, "result", result->eClass() != package->getOutputPin_Class());
 		}
 	
 

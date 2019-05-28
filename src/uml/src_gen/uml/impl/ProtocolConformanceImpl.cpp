@@ -152,7 +152,7 @@ std::shared_ptr<ecore::EObject>  ProtocolConformanceImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ProtocolConformanceImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getProtocolConformance_EClass();
+	return UmlPackageImpl::eInstance()->getProtocolConformance_Class();
 }
 
 //*********************************
@@ -241,9 +241,9 @@ Any ProtocolConformanceImpl::eGet(int featureID, bool resolve, bool coreType) co
 {
 	switch(featureID)
 	{
-		case UmlPackage::PROTOCOLCONFORMANCE_EREFERENCE_GENERALMACHINE:
+		case UmlPackage::PROTOCOLCONFORMANCE_ATTRIBUTE_GENERALMACHINE:
 			return eAny(getGeneralMachine()); //1866
-		case UmlPackage::PROTOCOLCONFORMANCE_EREFERENCE_SPECIFICMACHINE:
+		case UmlPackage::PROTOCOLCONFORMANCE_ATTRIBUTE_SPECIFICMACHINE:
 			return eAny(getSpecificMachine()); //1867
 	}
 	return DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
@@ -252,9 +252,9 @@ bool ProtocolConformanceImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::PROTOCOLCONFORMANCE_EREFERENCE_GENERALMACHINE:
+		case UmlPackage::PROTOCOLCONFORMANCE_ATTRIBUTE_GENERALMACHINE:
 			return getGeneralMachine() != nullptr; //1866
-		case UmlPackage::PROTOCOLCONFORMANCE_EREFERENCE_SPECIFICMACHINE:
+		case UmlPackage::PROTOCOLCONFORMANCE_ATTRIBUTE_SPECIFICMACHINE:
 			return getSpecificMachine().lock() != nullptr; //1867
 	}
 	return DirectedRelationshipImpl::internalEIsSet(featureID);
@@ -263,14 +263,14 @@ bool ProtocolConformanceImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::PROTOCOLCONFORMANCE_EREFERENCE_GENERALMACHINE:
+		case UmlPackage::PROTOCOLCONFORMANCE_ATTRIBUTE_GENERALMACHINE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ProtocolStateMachine> _generalMachine = newValue->get<std::shared_ptr<uml::ProtocolStateMachine>>();
 			setGeneralMachine(_generalMachine); //1866
 			return true;
 		}
-		case UmlPackage::PROTOCOLCONFORMANCE_EREFERENCE_SPECIFICMACHINE:
+		case UmlPackage::PROTOCOLCONFORMANCE_ATTRIBUTE_SPECIFICMACHINE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ProtocolStateMachine> _specificMachine = newValue->get<std::shared_ptr<uml::ProtocolStateMachine>>();
@@ -338,7 +338,7 @@ void ProtocolConformanceImpl::resolveReferences(const int featureID, std::list<s
 {
 	switch(featureID)
 	{
-		case UmlPackage::PROTOCOLCONFORMANCE_EREFERENCE_GENERALMACHINE:
+		case UmlPackage::PROTOCOLCONFORMANCE_ATTRIBUTE_GENERALMACHINE:
 		{
 			if (references.size() == 1)
 			{
@@ -350,7 +350,7 @@ void ProtocolConformanceImpl::resolveReferences(const int featureID, std::list<s
 			return;
 		}
 
-		case UmlPackage::PROTOCOLCONFORMANCE_EREFERENCE_SPECIFICMACHINE:
+		case UmlPackage::PROTOCOLCONFORMANCE_ATTRIBUTE_SPECIFICMACHINE:
 		{
 			if (references.size() == 1)
 			{

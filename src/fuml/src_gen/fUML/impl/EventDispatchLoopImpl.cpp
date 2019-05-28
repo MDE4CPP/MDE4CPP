@@ -93,7 +93,7 @@ std::shared_ptr<ecore::EObject>  EventDispatchLoopImpl::copy() const
 
 std::shared_ptr<ecore::EClass> EventDispatchLoopImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getEventDispatchLoop_EClass();
+	return FUMLPackageImpl::eInstance()->getEventDispatchLoop_Class();
 }
 
 //*********************************

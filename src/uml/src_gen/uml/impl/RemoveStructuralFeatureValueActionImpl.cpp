@@ -312,7 +312,7 @@ std::shared_ptr<ecore::EObject>  RemoveStructuralFeatureValueActionImpl::copy() 
 
 std::shared_ptr<ecore::EClass> RemoveStructuralFeatureValueActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getRemoveStructuralFeatureValueAction_EClass();
+	return UmlPackageImpl::eInstance()->getRemoveStructuralFeatureValueAction_Class();
 }
 
 //*********************************
@@ -419,9 +419,9 @@ Any RemoveStructuralFeatureValueActionImpl::eGet(int featureID, bool resolve, bo
 {
 	switch(featureID)
 	{
-		case UmlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_EATTRIBUTE_ISREMOVEDUPLICATES:
+		case UmlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_ATTRIBUTE_ISREMOVEDUPLICATES:
 			return eAny(getIsRemoveDuplicates()); //20931
-		case UmlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_EREFERENCE_REMOVEAT:
+		case UmlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_ATTRIBUTE_REMOVEAT:
 			return eAny(getRemoveAt()); //20932
 	}
 	return WriteStructuralFeatureActionImpl::eGet(featureID, resolve, coreType);
@@ -430,9 +430,9 @@ bool RemoveStructuralFeatureValueActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_EATTRIBUTE_ISREMOVEDUPLICATES:
+		case UmlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_ATTRIBUTE_ISREMOVEDUPLICATES:
 			return getIsRemoveDuplicates() != false; //20931
-		case UmlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_EREFERENCE_REMOVEAT:
+		case UmlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_ATTRIBUTE_REMOVEAT:
 			return getRemoveAt() != nullptr; //20932
 	}
 	return WriteStructuralFeatureActionImpl::internalEIsSet(featureID);
@@ -441,14 +441,14 @@ bool RemoveStructuralFeatureValueActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_EATTRIBUTE_ISREMOVEDUPLICATES:
+		case UmlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_ATTRIBUTE_ISREMOVEDUPLICATES:
 		{
 			// BOOST CAST
 			bool _isRemoveDuplicates = newValue->get<bool>();
 			setIsRemoveDuplicates(_isRemoveDuplicates); //20931
 			return true;
 		}
-		case UmlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_EREFERENCE_REMOVEAT:
+		case UmlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_ATTRIBUTE_REMOVEAT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::InputPin> _removeAt = newValue->get<std::shared_ptr<uml::InputPin>>();
@@ -590,12 +590,12 @@ void RemoveStructuralFeatureValueActionImpl::saveContent(std::shared_ptr<persist
 		std::shared_ptr<uml::InputPin > removeAt = this->getRemoveAt();
 		if (removeAt != nullptr)
 		{
-			saveHandler->addReference(removeAt, "removeAt", removeAt->eClass() != package->getInputPin_EClass());
+			saveHandler->addReference(removeAt, "removeAt", removeAt->eClass() != package->getInputPin_Class());
 		}
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getRemoveStructuralFeatureValueAction_EAttribute_isRemoveDuplicates()) )
+		if ( this->eIsSet(package->getRemoveStructuralFeatureValueAction_Attribute_isRemoveDuplicates()) )
 		{
 			saveHandler->addAttribute("isRemoveDuplicates", this->getIsRemoveDuplicates());
 		}

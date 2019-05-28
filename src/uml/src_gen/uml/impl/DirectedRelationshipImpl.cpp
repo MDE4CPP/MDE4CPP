@@ -153,7 +153,7 @@ std::shared_ptr<ecore::EObject>  DirectedRelationshipImpl::copy() const
 
 std::shared_ptr<ecore::EClass> DirectedRelationshipImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getDirectedRelationship_EClass();
+	return UmlPackageImpl::eInstance()->getDirectedRelationship_Class();
 }
 
 //*********************************
@@ -219,9 +219,9 @@ Any DirectedRelationshipImpl::eGet(int featureID, bool resolve, bool coreType) c
 {
 	switch(featureID)
 	{
-		case UmlPackage::DIRECTEDRELATIONSHIP_EREFERENCE_SOURCE:
+		case UmlPackage::DIRECTEDRELATIONSHIP_ATTRIBUTE_SOURCE:
 			return eAny(getSource()); //764
-		case UmlPackage::DIRECTEDRELATIONSHIP_EREFERENCE_TARGET:
+		case UmlPackage::DIRECTEDRELATIONSHIP_ATTRIBUTE_TARGET:
 			return eAny(getTarget()); //765
 	}
 	return RelationshipImpl::eGet(featureID, resolve, coreType);
@@ -230,9 +230,9 @@ bool DirectedRelationshipImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::DIRECTEDRELATIONSHIP_EREFERENCE_SOURCE:
+		case UmlPackage::DIRECTEDRELATIONSHIP_ATTRIBUTE_SOURCE:
 			return getSource() != nullptr; //764
-		case UmlPackage::DIRECTEDRELATIONSHIP_EREFERENCE_TARGET:
+		case UmlPackage::DIRECTEDRELATIONSHIP_ATTRIBUTE_TARGET:
 			return getTarget() != nullptr; //765
 	}
 	return RelationshipImpl::internalEIsSet(featureID);

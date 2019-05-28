@@ -133,7 +133,7 @@ std::shared_ptr<ecore::EObject>  ControlNodeActivationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ControlNodeActivationImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getControlNodeActivation_EClass();
+	return FUMLPackageImpl::eInstance()->getControlNodeActivation_Class();
 }
 
 //*********************************

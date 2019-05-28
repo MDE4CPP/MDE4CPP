@@ -320,7 +320,7 @@ std::shared_ptr<ecore::EObject>  CallActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> CallActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getCallAction_EClass();
+	return UmlPackageImpl::eInstance()->getCallAction_Class();
 }
 
 //*********************************
@@ -448,9 +448,9 @@ Any CallActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::CALLACTION_EATTRIBUTE_ISSYNCHRONOUS:
+		case UmlPackage::CALLACTION_ATTRIBUTE_ISSYNCHRONOUS:
 			return eAny(getIsSynchronous()); //2829
-		case UmlPackage::CALLACTION_EREFERENCE_RESULT:
+		case UmlPackage::CALLACTION_ATTRIBUTE_RESULT:
 			return eAny(getResult()); //2830
 	}
 	return InvocationActionImpl::eGet(featureID, resolve, coreType);
@@ -459,9 +459,9 @@ bool CallActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::CALLACTION_EATTRIBUTE_ISSYNCHRONOUS:
+		case UmlPackage::CALLACTION_ATTRIBUTE_ISSYNCHRONOUS:
 			return getIsSynchronous() != true; //2829
-		case UmlPackage::CALLACTION_EREFERENCE_RESULT:
+		case UmlPackage::CALLACTION_ATTRIBUTE_RESULT:
 			return getResult() != nullptr; //2830
 	}
 	return InvocationActionImpl::internalEIsSet(featureID);
@@ -470,7 +470,7 @@ bool CallActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::CALLACTION_EATTRIBUTE_ISSYNCHRONOUS:
+		case UmlPackage::CALLACTION_ATTRIBUTE_ISSYNCHRONOUS:
 		{
 			// BOOST CAST
 			bool _isSynchronous = newValue->get<bool>();
@@ -541,7 +541,7 @@ void CallActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence:
 			{
 				typeName = "OutputPin";
 			}
-			std::shared_ptr<ecore::EObject> result = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::OUTPUTPIN_EREFERENCE_CALLACTION);
+			std::shared_ptr<ecore::EObject> result = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::OUTPUTPIN_ATTRIBUTE_CALLACTION);
 			if (result != nullptr)
 			{
 				loadHandler->handleChild(result);
@@ -607,12 +607,12 @@ void CallActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 		// Save 'result'
 		for (std::shared_ptr<uml::OutputPin> result : *this->getResult()) 
 		{
-			saveHandler->addReference(result, "result", result->eClass() != package->getOutputPin_EClass());
+			saveHandler->addReference(result, "result", result->eClass() != package->getOutputPin_Class());
 		}
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getCallAction_EAttribute_isSynchronous()) )
+		if ( this->eIsSet(package->getCallAction_Attribute_isSynchronous()) )
 		{
 			saveHandler->addAttribute("isSynchronous", this->getIsSynchronous());
 		}

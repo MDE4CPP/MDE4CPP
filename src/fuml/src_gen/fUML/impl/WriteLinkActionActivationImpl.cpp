@@ -159,7 +159,7 @@ std::shared_ptr<ecore::EObject>  WriteLinkActionActivationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> WriteLinkActionActivationImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getWriteLinkActionActivation_EClass();
+	return FUMLPackageImpl::eInstance()->getWriteLinkActionActivation_Class();
 }
 
 //*********************************

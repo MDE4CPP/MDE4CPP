@@ -163,7 +163,7 @@ std::shared_ptr<ecore::EObject>  ExceptionHandlerImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ExceptionHandlerImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getExceptionHandler_EClass();
+	return UmlPackageImpl::eInstance()->getExceptionHandler_Class();
 }
 
 //*********************************
@@ -292,13 +292,13 @@ Any ExceptionHandlerImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::EXCEPTIONHANDLER_EREFERENCE_EXCEPTIONINPUT:
+		case UmlPackage::EXCEPTIONHANDLER_ATTRIBUTE_EXCEPTIONINPUT:
 			return eAny(getExceptionInput()); //873
-		case UmlPackage::EXCEPTIONHANDLER_EREFERENCE_EXCEPTIONTYPE:
+		case UmlPackage::EXCEPTIONHANDLER_ATTRIBUTE_EXCEPTIONTYPE:
 			return eAny(getExceptionType()); //874
-		case UmlPackage::EXCEPTIONHANDLER_EREFERENCE_HANDLERBODY:
+		case UmlPackage::EXCEPTIONHANDLER_ATTRIBUTE_HANDLERBODY:
 			return eAny(getHandlerBody()); //875
-		case UmlPackage::EXCEPTIONHANDLER_EREFERENCE_PROTECTEDNODE:
+		case UmlPackage::EXCEPTIONHANDLER_ATTRIBUTE_PROTECTEDNODE:
 			return eAny(getProtectedNode()); //876
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
@@ -307,13 +307,13 @@ bool ExceptionHandlerImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::EXCEPTIONHANDLER_EREFERENCE_EXCEPTIONINPUT:
+		case UmlPackage::EXCEPTIONHANDLER_ATTRIBUTE_EXCEPTIONINPUT:
 			return getExceptionInput() != nullptr; //873
-		case UmlPackage::EXCEPTIONHANDLER_EREFERENCE_EXCEPTIONTYPE:
+		case UmlPackage::EXCEPTIONHANDLER_ATTRIBUTE_EXCEPTIONTYPE:
 			return getExceptionType() != nullptr; //874
-		case UmlPackage::EXCEPTIONHANDLER_EREFERENCE_HANDLERBODY:
+		case UmlPackage::EXCEPTIONHANDLER_ATTRIBUTE_HANDLERBODY:
 			return getHandlerBody() != nullptr; //875
-		case UmlPackage::EXCEPTIONHANDLER_EREFERENCE_PROTECTEDNODE:
+		case UmlPackage::EXCEPTIONHANDLER_ATTRIBUTE_PROTECTEDNODE:
 			return getProtectedNode().lock() != nullptr; //876
 	}
 	return ElementImpl::internalEIsSet(featureID);
@@ -322,21 +322,21 @@ bool ExceptionHandlerImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::EXCEPTIONHANDLER_EREFERENCE_EXCEPTIONINPUT:
+		case UmlPackage::EXCEPTIONHANDLER_ATTRIBUTE_EXCEPTIONINPUT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ObjectNode> _exceptionInput = newValue->get<std::shared_ptr<uml::ObjectNode>>();
 			setExceptionInput(_exceptionInput); //873
 			return true;
 		}
-		case UmlPackage::EXCEPTIONHANDLER_EREFERENCE_HANDLERBODY:
+		case UmlPackage::EXCEPTIONHANDLER_ATTRIBUTE_HANDLERBODY:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ExecutableNode> _handlerBody = newValue->get<std::shared_ptr<uml::ExecutableNode>>();
 			setHandlerBody(_handlerBody); //875
 			return true;
 		}
-		case UmlPackage::EXCEPTIONHANDLER_EREFERENCE_PROTECTEDNODE:
+		case UmlPackage::EXCEPTIONHANDLER_ATTRIBUTE_PROTECTEDNODE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ExecutableNode> _protectedNode = newValue->get<std::shared_ptr<uml::ExecutableNode>>();
@@ -418,7 +418,7 @@ void ExceptionHandlerImpl::resolveReferences(const int featureID, std::list<std:
 {
 	switch(featureID)
 	{
-		case UmlPackage::EXCEPTIONHANDLER_EREFERENCE_EXCEPTIONINPUT:
+		case UmlPackage::EXCEPTIONHANDLER_ATTRIBUTE_EXCEPTIONINPUT:
 		{
 			if (references.size() == 1)
 			{
@@ -430,7 +430,7 @@ void ExceptionHandlerImpl::resolveReferences(const int featureID, std::list<std:
 			return;
 		}
 
-		case UmlPackage::EXCEPTIONHANDLER_EREFERENCE_EXCEPTIONTYPE:
+		case UmlPackage::EXCEPTIONHANDLER_ATTRIBUTE_EXCEPTIONTYPE:
 		{
 			std::shared_ptr<Bag<uml::Classifier>> _exceptionType = getExceptionType();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -444,7 +444,7 @@ void ExceptionHandlerImpl::resolveReferences(const int featureID, std::list<std:
 			return;
 		}
 
-		case UmlPackage::EXCEPTIONHANDLER_EREFERENCE_HANDLERBODY:
+		case UmlPackage::EXCEPTIONHANDLER_ATTRIBUTE_HANDLERBODY:
 		{
 			if (references.size() == 1)
 			{
@@ -456,7 +456,7 @@ void ExceptionHandlerImpl::resolveReferences(const int featureID, std::list<std:
 			return;
 		}
 
-		case UmlPackage::EXCEPTIONHANDLER_EREFERENCE_PROTECTEDNODE:
+		case UmlPackage::EXCEPTIONHANDLER_ATTRIBUTE_PROTECTEDNODE:
 		{
 			if (references.size() == 1)
 			{

@@ -294,7 +294,7 @@ std::shared_ptr<ecore::EObject>  WriteLinkActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> WriteLinkActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getWriteLinkAction_EClass();
+	return UmlPackageImpl::eInstance()->getWriteLinkAction_Class();
 }
 
 //*********************************

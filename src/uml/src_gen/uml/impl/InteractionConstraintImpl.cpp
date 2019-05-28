@@ -100,11 +100,11 @@ InteractionConstraintImpl::~InteractionConstraintImpl()
 			{
 				switch(reference_id)
 				{	
-				case UmlPackage::CONSTRAINT_EREFERENCE_CONTEXT:
+				case UmlPackage::CONSTRAINT_ATTRIBUTE_CONTEXT:
 					m_context = par_Namespace;
 					m_namespace = par_Namespace;
 					 return;
-				case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE:
+				case UmlPackage::NAMEDELEMENT_ATTRIBUTE_NAMESPACE:
 					m_namespace = par_Namespace;
 					m_owner = par_Namespace;
 					 return;
@@ -244,7 +244,7 @@ std::shared_ptr<ecore::EObject>  InteractionConstraintImpl::copy() const
 
 std::shared_ptr<ecore::EClass> InteractionConstraintImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getInteractionConstraint_EClass();
+	return UmlPackageImpl::eInstance()->getInteractionConstraint_Class();
 }
 
 //*********************************
@@ -375,9 +375,9 @@ Any InteractionConstraintImpl::eGet(int featureID, bool resolve, bool coreType) 
 {
 	switch(featureID)
 	{
-		case UmlPackage::INTERACTIONCONSTRAINT_EREFERENCE_MAXINT:
+		case UmlPackage::INTERACTIONCONSTRAINT_ATTRIBUTE_MAXINT:
 			return eAny(getMaxint()); //12015
-		case UmlPackage::INTERACTIONCONSTRAINT_EREFERENCE_MININT:
+		case UmlPackage::INTERACTIONCONSTRAINT_ATTRIBUTE_MININT:
 			return eAny(getMinint()); //12016
 	}
 	return ConstraintImpl::eGet(featureID, resolve, coreType);
@@ -386,9 +386,9 @@ bool InteractionConstraintImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::INTERACTIONCONSTRAINT_EREFERENCE_MAXINT:
+		case UmlPackage::INTERACTIONCONSTRAINT_ATTRIBUTE_MAXINT:
 			return getMaxint() != nullptr; //12015
-		case UmlPackage::INTERACTIONCONSTRAINT_EREFERENCE_MININT:
+		case UmlPackage::INTERACTIONCONSTRAINT_ATTRIBUTE_MININT:
 			return getMinint() != nullptr; //12016
 	}
 	return ConstraintImpl::internalEIsSet(featureID);
@@ -397,14 +397,14 @@ bool InteractionConstraintImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::INTERACTIONCONSTRAINT_EREFERENCE_MAXINT:
+		case UmlPackage::INTERACTIONCONSTRAINT_ATTRIBUTE_MAXINT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ValueSpecification> _maxint = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
 			setMaxint(_maxint); //12015
 			return true;
 		}
-		case UmlPackage::INTERACTIONCONSTRAINT_EREFERENCE_MININT:
+		case UmlPackage::INTERACTIONCONSTRAINT_ATTRIBUTE_MININT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ValueSpecification> _minint = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
@@ -531,14 +531,14 @@ void InteractionConstraintImpl::saveContent(std::shared_ptr<persistence::interfa
 		std::shared_ptr<uml::ValueSpecification > maxint = this->getMaxint();
 		if (maxint != nullptr)
 		{
-			saveHandler->addReference(maxint, "maxint", maxint->eClass() != package->getValueSpecification_EClass());
+			saveHandler->addReference(maxint, "maxint", maxint->eClass() != package->getValueSpecification_Class());
 		}
 
 		// Save 'minint'
 		std::shared_ptr<uml::ValueSpecification > minint = this->getMinint();
 		if (minint != nullptr)
 		{
-			saveHandler->addReference(minint, "minint", minint->eClass() != package->getValueSpecification_EClass());
+			saveHandler->addReference(minint, "minint", minint->eClass() != package->getValueSpecification_Class());
 		}
 	
 

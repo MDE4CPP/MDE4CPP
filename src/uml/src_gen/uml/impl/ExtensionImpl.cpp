@@ -155,11 +155,11 @@ ExtensionImpl::~ExtensionImpl()
 			{
 				switch(reference_id)
 				{	
-				case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
+				case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
 					m_owningPackage = par_Package;
 					m_namespace = par_Package;
 					 return;
-				case UmlPackage::TYPE_EREFERENCE_PACKAGE:
+				case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
 					m_package = par_Package;
 					m_namespace = par_Package;
 					 return;
@@ -411,7 +411,7 @@ std::shared_ptr<ecore::EObject>  ExtensionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ExtensionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getExtension_EClass();
+	return UmlPackageImpl::eInstance()->getExtension_Class();
 }
 
 //*********************************
@@ -557,9 +557,9 @@ Any ExtensionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::EXTENSION_EATTRIBUTE_ISREQUIRED:
+		case UmlPackage::EXTENSION_ATTRIBUTE_ISREQUIRED:
 			return eAny(getIsRequired()); //9744
-		case UmlPackage::EXTENSION_EREFERENCE_METACLASS:
+		case UmlPackage::EXTENSION_ATTRIBUTE_METACLASS:
 			return eAny(getMetaclass()); //9745
 	}
 	return AssociationImpl::eGet(featureID, resolve, coreType);
@@ -568,9 +568,9 @@ bool ExtensionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::EXTENSION_EATTRIBUTE_ISREQUIRED:
+		case UmlPackage::EXTENSION_ATTRIBUTE_ISREQUIRED:
 			return getIsRequired() != false; //9744
-		case UmlPackage::EXTENSION_EREFERENCE_METACLASS:
+		case UmlPackage::EXTENSION_ATTRIBUTE_METACLASS:
 			return getMetaclass() != nullptr; //9745
 	}
 	return AssociationImpl::internalEIsSet(featureID);

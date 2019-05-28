@@ -56,508 +56,508 @@ void FUMLPackageImpl::init(std::shared_ptr<ecore::EPackage> package)
 }
 
 // Begin Class AcceptEventActionActivation
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getAcceptEventActionActivation_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getAcceptEventActionActivation_Class() const
 {
-	return m_acceptEventActionActivation_EClass;
+	return m_acceptEventActionActivation_Class;
 }
 
-std::shared_ptr<ecore::EAttribute> FUMLPackageImpl::getAcceptEventActionActivation_EAttribute_waiting() const
+std::shared_ptr<ecore::EAttribute> FUMLPackageImpl::getAcceptEventActionActivation_Attribute_waiting() const
 {
-	return m_acceptEventActionActivation_EAttribute_waiting;
+	return m_acceptEventActionActivation_Attribute_waiting;
 }
 
-std::shared_ptr<ecore::EReference> FUMLPackageImpl::getAcceptEventActionActivation_EReference_eventAccepter() const
+std::shared_ptr<ecore::EReference> FUMLPackageImpl::getAcceptEventActionActivation_Attribute_eventAccepter() const
 {
-	return m_acceptEventActionActivation_EReference_eventAccepter;
+	return m_acceptEventActionActivation_Attribute_eventAccepter;
 }
 
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getAcceptEventActionActivation_EOperation_accept_SignalInstance() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getAcceptEventActionActivation_Operation_accept_SignalInstance() const
 {
-	return m_acceptEventActionActivation_EOperation_accept_SignalInstance;
+	return m_acceptEventActionActivation_Operation_accept_SignalInstance;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getAcceptEventActionActivation_EOperation_match_SignalInstance() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getAcceptEventActionActivation_Operation_match_SignalInstance() const
 {
-	return m_acceptEventActionActivation_EOperation_match_SignalInstance;
+	return m_acceptEventActionActivation_Operation_match_SignalInstance;
 }
 
 // End Class AcceptEventActionActivation
 
 // Begin Class AcceptEventActionEventAccepter
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getAcceptEventActionEventAccepter_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getAcceptEventActionEventAccepter_Class() const
 {
-	return m_acceptEventActionEventAccepter_EClass;
+	return m_acceptEventActionEventAccepter_Class;
 }
 
 
-std::shared_ptr<ecore::EReference> FUMLPackageImpl::getAcceptEventActionEventAccepter_EReference_actionActivation() const
+std::shared_ptr<ecore::EReference> FUMLPackageImpl::getAcceptEventActionEventAccepter_Attribute_actionActivation() const
 {
-	return m_acceptEventActionEventAccepter_EReference_actionActivation;
+	return m_acceptEventActionEventAccepter_Attribute_actionActivation;
 }
 
 
 // End Class AcceptEventActionEventAccepter
 
 // Begin Class ActionActivation
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getActionActivation_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getActionActivation_Class() const
 {
-	return m_actionActivation_EClass;
+	return m_actionActivation_Class;
 }
 
-std::shared_ptr<ecore::EAttribute> FUMLPackageImpl::getActionActivation_EAttribute_firing() const
+std::shared_ptr<ecore::EAttribute> FUMLPackageImpl::getActionActivation_Attribute_firing() const
 {
-	return m_actionActivation_EAttribute_firing;
+	return m_actionActivation_Attribute_firing;
 }
 
-std::shared_ptr<ecore::EReference> FUMLPackageImpl::getActionActivation_EReference_inputPinActivation() const
+std::shared_ptr<ecore::EReference> FUMLPackageImpl::getActionActivation_Attribute_inputPinActivation() const
 {
-	return m_actionActivation_EReference_inputPinActivation;
+	return m_actionActivation_Attribute_inputPinActivation;
 }
-std::shared_ptr<ecore::EReference> FUMLPackageImpl::getActionActivation_EReference_outputPinActivation() const
+std::shared_ptr<ecore::EReference> FUMLPackageImpl::getActionActivation_Attribute_outputPinActivation() const
 {
-	return m_actionActivation_EReference_outputPinActivation;
+	return m_actionActivation_Attribute_outputPinActivation;
 }
-std::shared_ptr<ecore::EReference> FUMLPackageImpl::getActionActivation_EReference_pinActivation() const
+std::shared_ptr<ecore::EReference> FUMLPackageImpl::getActionActivation_Attribute_pinActivation() const
 {
-	return m_actionActivation_EReference_pinActivation;
+	return m_actionActivation_Attribute_pinActivation;
 }
 
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActionActivation_EOperation_addOutgoingEdge_ActivityEdgeInstance() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActionActivation_Operation_addOutgoingEdge_ActivityEdgeInstance() const
 {
-	return m_actionActivation_EOperation_addOutgoingEdge_ActivityEdgeInstance;
+	return m_actionActivation_Operation_addOutgoingEdge_ActivityEdgeInstance;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActionActivation_EOperation_addPinActivation_PinActivation() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActionActivation_Operation_addPinActivation_PinActivation() const
 {
-	return m_actionActivation_EOperation_addPinActivation_PinActivation;
+	return m_actionActivation_Operation_addPinActivation_PinActivation;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActionActivation_EOperation_completeAction() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActionActivation_Operation_completeAction() const
 {
-	return m_actionActivation_EOperation_completeAction;
+	return m_actionActivation_Operation_completeAction;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActionActivation_EOperation_createNodeActivations() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActionActivation_Operation_createNodeActivations() const
 {
-	return m_actionActivation_EOperation_createNodeActivations;
+	return m_actionActivation_Operation_createNodeActivations;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActionActivation_EOperation_doAction() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActionActivation_Operation_doAction() const
 {
-	return m_actionActivation_EOperation_doAction;
+	return m_actionActivation_Operation_doAction;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActionActivation_EOperation_fire_Token() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActionActivation_Operation_fire_Token() const
 {
-	return m_actionActivation_EOperation_fire_Token;
+	return m_actionActivation_Operation_fire_Token;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActionActivation_EOperation_getTokens_InputPin() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActionActivation_Operation_getTokens_InputPin() const
 {
-	return m_actionActivation_EOperation_getTokens_InputPin;
+	return m_actionActivation_Operation_getTokens_InputPin;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActionActivation_EOperation_isFirng() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActionActivation_Operation_isFirng() const
 {
-	return m_actionActivation_EOperation_isFirng;
+	return m_actionActivation_Operation_isFirng;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActionActivation_EOperation_isReady() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActionActivation_Operation_isReady() const
 {
-	return m_actionActivation_EOperation_isReady;
+	return m_actionActivation_Operation_isReady;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActionActivation_EOperation_isSourceFor_ActivityEdgeInstance() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActionActivation_Operation_isSourceFor_ActivityEdgeInstance() const
 {
-	return m_actionActivation_EOperation_isSourceFor_ActivityEdgeInstance;
+	return m_actionActivation_Operation_isSourceFor_ActivityEdgeInstance;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActionActivation_EOperation_makeBooleanValue_EBoolean() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActionActivation_Operation_makeBooleanValue_EBoolean() const
 {
-	return m_actionActivation_EOperation_makeBooleanValue_EBoolean;
+	return m_actionActivation_Operation_makeBooleanValue_EBoolean;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActionActivation_EOperation_putToken_OutputPin_Value() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActionActivation_Operation_putToken_OutputPin_Value() const
 {
-	return m_actionActivation_EOperation_putToken_OutputPin_Value;
+	return m_actionActivation_Operation_putToken_OutputPin_Value;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActionActivation_EOperation_putTokens_OutputPin_Value() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActionActivation_Operation_putTokens_OutputPin_Value() const
 {
-	return m_actionActivation_EOperation_putTokens_OutputPin_Value;
+	return m_actionActivation_Operation_putTokens_OutputPin_Value;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActionActivation_EOperation_retrievePinActivation_Pin() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActionActivation_Operation_retrievePinActivation_Pin() const
 {
-	return m_actionActivation_EOperation_retrievePinActivation_Pin;
+	return m_actionActivation_Operation_retrievePinActivation_Pin;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActionActivation_EOperation_run() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActionActivation_Operation_run() const
 {
-	return m_actionActivation_EOperation_run;
+	return m_actionActivation_Operation_run;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActionActivation_EOperation_sendOffers() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActionActivation_Operation_sendOffers() const
 {
-	return m_actionActivation_EOperation_sendOffers;
+	return m_actionActivation_Operation_sendOffers;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActionActivation_EOperation_takeOfferedTokens() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActionActivation_Operation_takeOfferedTokens() const
 {
-	return m_actionActivation_EOperation_takeOfferedTokens;
+	return m_actionActivation_Operation_takeOfferedTokens;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActionActivation_EOperation_takeTokens_InputPin() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActionActivation_Operation_takeTokens_InputPin() const
 {
-	return m_actionActivation_EOperation_takeTokens_InputPin;
+	return m_actionActivation_Operation_takeTokens_InputPin;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActionActivation_EOperation_terminate() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActionActivation_Operation_terminate() const
 {
-	return m_actionActivation_EOperation_terminate;
+	return m_actionActivation_Operation_terminate;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActionActivation_EOperation_valueParticipatesInLink_Value_Link() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActionActivation_Operation_valueParticipatesInLink_Value_Link() const
 {
-	return m_actionActivation_EOperation_valueParticipatesInLink_Value_Link;
+	return m_actionActivation_Operation_valueParticipatesInLink_Value_Link;
 }
 
 // End Class ActionActivation
 
 // Begin Class ActivityEdgeInstance
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getActivityEdgeInstance_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getActivityEdgeInstance_Class() const
 {
-	return m_activityEdgeInstance_EClass;
+	return m_activityEdgeInstance_Class;
 }
 
 
-std::shared_ptr<ecore::EReference> FUMLPackageImpl::getActivityEdgeInstance_EReference_edge() const
+std::shared_ptr<ecore::EReference> FUMLPackageImpl::getActivityEdgeInstance_Attribute_edge() const
 {
-	return m_activityEdgeInstance_EReference_edge;
+	return m_activityEdgeInstance_Attribute_edge;
 }
-std::shared_ptr<ecore::EReference> FUMLPackageImpl::getActivityEdgeInstance_EReference_group() const
+std::shared_ptr<ecore::EReference> FUMLPackageImpl::getActivityEdgeInstance_Attribute_group() const
 {
-	return m_activityEdgeInstance_EReference_group;
+	return m_activityEdgeInstance_Attribute_group;
 }
-std::shared_ptr<ecore::EReference> FUMLPackageImpl::getActivityEdgeInstance_EReference_offers() const
+std::shared_ptr<ecore::EReference> FUMLPackageImpl::getActivityEdgeInstance_Attribute_offers() const
 {
-	return m_activityEdgeInstance_EReference_offers;
+	return m_activityEdgeInstance_Attribute_offers;
 }
-std::shared_ptr<ecore::EReference> FUMLPackageImpl::getActivityEdgeInstance_EReference_source() const
+std::shared_ptr<ecore::EReference> FUMLPackageImpl::getActivityEdgeInstance_Attribute_source() const
 {
-	return m_activityEdgeInstance_EReference_source;
+	return m_activityEdgeInstance_Attribute_source;
 }
-std::shared_ptr<ecore::EReference> FUMLPackageImpl::getActivityEdgeInstance_EReference_target() const
+std::shared_ptr<ecore::EReference> FUMLPackageImpl::getActivityEdgeInstance_Attribute_target() const
 {
-	return m_activityEdgeInstance_EReference_target;
+	return m_activityEdgeInstance_Attribute_target;
 }
 
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityEdgeInstance_EOperation_countOfferedValue() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityEdgeInstance_Operation_countOfferedValue() const
 {
-	return m_activityEdgeInstance_EOperation_countOfferedValue;
+	return m_activityEdgeInstance_Operation_countOfferedValue;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityEdgeInstance_EOperation_getOfferedTokens() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityEdgeInstance_Operation_getOfferedTokens() const
 {
-	return m_activityEdgeInstance_EOperation_getOfferedTokens;
+	return m_activityEdgeInstance_Operation_getOfferedTokens;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityEdgeInstance_EOperation_hasOffer() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityEdgeInstance_Operation_hasOffer() const
 {
-	return m_activityEdgeInstance_EOperation_hasOffer;
+	return m_activityEdgeInstance_Operation_hasOffer;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityEdgeInstance_EOperation_sendOffer_Token() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityEdgeInstance_Operation_sendOffer_Token() const
 {
-	return m_activityEdgeInstance_EOperation_sendOffer_Token;
+	return m_activityEdgeInstance_Operation_sendOffer_Token;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityEdgeInstance_EOperation_takeOfferedTokens() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityEdgeInstance_Operation_takeOfferedTokens() const
 {
-	return m_activityEdgeInstance_EOperation_takeOfferedTokens;
+	return m_activityEdgeInstance_Operation_takeOfferedTokens;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityEdgeInstance_EOperation_takeOfferedTokens_EInt() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityEdgeInstance_Operation_takeOfferedTokens_EInt() const
 {
-	return m_activityEdgeInstance_EOperation_takeOfferedTokens_EInt;
+	return m_activityEdgeInstance_Operation_takeOfferedTokens_EInt;
 }
 
 // End Class ActivityEdgeInstance
 
 // Begin Class ActivityExecution
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getActivityExecution_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getActivityExecution_Class() const
 {
-	return m_activityExecution_EClass;
+	return m_activityExecution_Class;
 }
 
 
-std::shared_ptr<ecore::EReference> FUMLPackageImpl::getActivityExecution_EReference_activationGroup() const
+std::shared_ptr<ecore::EReference> FUMLPackageImpl::getActivityExecution_Attribute_activationGroup() const
 {
-	return m_activityExecution_EReference_activationGroup;
+	return m_activityExecution_Attribute_activationGroup;
 }
 
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityExecution_EOperation_execute() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityExecution_Operation_execute() const
 {
-	return m_activityExecution_EOperation_execute;
+	return m_activityExecution_Operation_execute;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityExecution_EOperation_new_() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityExecution_Operation_new_() const
 {
-	return m_activityExecution_EOperation_new_;
+	return m_activityExecution_Operation_new_;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityExecution_EOperation_terminate() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityExecution_Operation_terminate() const
 {
-	return m_activityExecution_EOperation_terminate;
+	return m_activityExecution_Operation_terminate;
 }
 
 // End Class ActivityExecution
 
 // Begin Class ActivityFinalNodeActivation
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getActivityFinalNodeActivation_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getActivityFinalNodeActivation_Class() const
 {
-	return m_activityFinalNodeActivation_EClass;
+	return m_activityFinalNodeActivation_Class;
 }
 
 
 
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityFinalNodeActivation_EOperation_fire_Token() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityFinalNodeActivation_Operation_fire_Token() const
 {
-	return m_activityFinalNodeActivation_EOperation_fire_Token;
+	return m_activityFinalNodeActivation_Operation_fire_Token;
 }
 
 // End Class ActivityFinalNodeActivation
 
 // Begin Class ActivityNodeActivation
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getActivityNodeActivation_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getActivityNodeActivation_Class() const
 {
-	return m_activityNodeActivation_EClass;
+	return m_activityNodeActivation_Class;
 }
 
-std::shared_ptr<ecore::EAttribute> FUMLPackageImpl::getActivityNodeActivation_EAttribute_running() const
+std::shared_ptr<ecore::EAttribute> FUMLPackageImpl::getActivityNodeActivation_Attribute_running() const
 {
-	return m_activityNodeActivation_EAttribute_running;
+	return m_activityNodeActivation_Attribute_running;
 }
 
-std::shared_ptr<ecore::EReference> FUMLPackageImpl::getActivityNodeActivation_EReference_group() const
+std::shared_ptr<ecore::EReference> FUMLPackageImpl::getActivityNodeActivation_Attribute_group() const
 {
-	return m_activityNodeActivation_EReference_group;
+	return m_activityNodeActivation_Attribute_group;
 }
-std::shared_ptr<ecore::EReference> FUMLPackageImpl::getActivityNodeActivation_EReference_heldTokens() const
+std::shared_ptr<ecore::EReference> FUMLPackageImpl::getActivityNodeActivation_Attribute_heldTokens() const
 {
-	return m_activityNodeActivation_EReference_heldTokens;
+	return m_activityNodeActivation_Attribute_heldTokens;
 }
-std::shared_ptr<ecore::EReference> FUMLPackageImpl::getActivityNodeActivation_EReference_incomingEdges() const
+std::shared_ptr<ecore::EReference> FUMLPackageImpl::getActivityNodeActivation_Attribute_incomingEdges() const
 {
-	return m_activityNodeActivation_EReference_incomingEdges;
+	return m_activityNodeActivation_Attribute_incomingEdges;
 }
-std::shared_ptr<ecore::EReference> FUMLPackageImpl::getActivityNodeActivation_EReference_node() const
+std::shared_ptr<ecore::EReference> FUMLPackageImpl::getActivityNodeActivation_Attribute_node() const
 {
-	return m_activityNodeActivation_EReference_node;
+	return m_activityNodeActivation_Attribute_node;
 }
-std::shared_ptr<ecore::EReference> FUMLPackageImpl::getActivityNodeActivation_EReference_outgoingEdges() const
+std::shared_ptr<ecore::EReference> FUMLPackageImpl::getActivityNodeActivation_Attribute_outgoingEdges() const
 {
-	return m_activityNodeActivation_EReference_outgoingEdges;
+	return m_activityNodeActivation_Attribute_outgoingEdges;
 }
 
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityNodeActivation_EOperation_addIncomingEdge_ActivityEdgeInstance() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityNodeActivation_Operation_addIncomingEdge_ActivityEdgeInstance() const
 {
-	return m_activityNodeActivation_EOperation_addIncomingEdge_ActivityEdgeInstance;
+	return m_activityNodeActivation_Operation_addIncomingEdge_ActivityEdgeInstance;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityNodeActivation_EOperation_addOutgoingEdge_ActivityEdgeInstance() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityNodeActivation_Operation_addOutgoingEdge_ActivityEdgeInstance() const
 {
-	return m_activityNodeActivation_EOperation_addOutgoingEdge_ActivityEdgeInstance;
+	return m_activityNodeActivation_Operation_addOutgoingEdge_ActivityEdgeInstance;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityNodeActivation_EOperation_addToken_Token() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityNodeActivation_Operation_addToken_Token() const
 {
-	return m_activityNodeActivation_EOperation_addToken_Token;
+	return m_activityNodeActivation_Operation_addToken_Token;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityNodeActivation_EOperation_addTokens_Token() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityNodeActivation_Operation_addTokens_Token() const
 {
-	return m_activityNodeActivation_EOperation_addTokens_Token;
+	return m_activityNodeActivation_Operation_addTokens_Token;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityNodeActivation_EOperation_clearTokens() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityNodeActivation_Operation_clearTokens() const
 {
-	return m_activityNodeActivation_EOperation_clearTokens;
+	return m_activityNodeActivation_Operation_clearTokens;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityNodeActivation_EOperation_createEdgeInstances() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityNodeActivation_Operation_createEdgeInstances() const
 {
-	return m_activityNodeActivation_EOperation_createEdgeInstances;
+	return m_activityNodeActivation_Operation_createEdgeInstances;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityNodeActivation_EOperation_createNodeActivations() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityNodeActivation_Operation_createNodeActivations() const
 {
-	return m_activityNodeActivation_EOperation_createNodeActivations;
+	return m_activityNodeActivation_Operation_createNodeActivations;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityNodeActivation_EOperation_fire_Token() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityNodeActivation_Operation_fire_Token() const
 {
-	return m_activityNodeActivation_EOperation_fire_Token;
+	return m_activityNodeActivation_Operation_fire_Token;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityNodeActivation_EOperation_getActivityExecution() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityNodeActivation_Operation_getActivityExecution() const
 {
-	return m_activityNodeActivation_EOperation_getActivityExecution;
+	return m_activityNodeActivation_Operation_getActivityExecution;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityNodeActivation_EOperation_getExecutionContext() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityNodeActivation_Operation_getExecutionContext() const
 {
-	return m_activityNodeActivation_EOperation_getExecutionContext;
+	return m_activityNodeActivation_Operation_getExecutionContext;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityNodeActivation_EOperation_getExecutionLocus() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityNodeActivation_Operation_getExecutionLocus() const
 {
-	return m_activityNodeActivation_EOperation_getExecutionLocus;
+	return m_activityNodeActivation_Operation_getExecutionLocus;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityNodeActivation_EOperation_getNodeActivation_ActivityNode() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityNodeActivation_Operation_getNodeActivation_ActivityNode() const
 {
-	return m_activityNodeActivation_EOperation_getNodeActivation_ActivityNode;
+	return m_activityNodeActivation_Operation_getNodeActivation_ActivityNode;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityNodeActivation_EOperation_getRunning() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityNodeActivation_Operation_getRunning() const
 {
-	return m_activityNodeActivation_EOperation_getRunning;
+	return m_activityNodeActivation_Operation_getRunning;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityNodeActivation_EOperation_getTokens() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityNodeActivation_Operation_getTokens() const
 {
-	return m_activityNodeActivation_EOperation_getTokens;
+	return m_activityNodeActivation_Operation_getTokens;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityNodeActivation_EOperation_isReady() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityNodeActivation_Operation_isReady() const
 {
-	return m_activityNodeActivation_EOperation_isReady;
+	return m_activityNodeActivation_Operation_isReady;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityNodeActivation_EOperation_isSourceFor_ActivityEdgeInstance() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityNodeActivation_Operation_isSourceFor_ActivityEdgeInstance() const
 {
-	return m_activityNodeActivation_EOperation_isSourceFor_ActivityEdgeInstance;
+	return m_activityNodeActivation_Operation_isSourceFor_ActivityEdgeInstance;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityNodeActivation_EOperation_recieveOffer() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityNodeActivation_Operation_recieveOffer() const
 {
-	return m_activityNodeActivation_EOperation_recieveOffer;
+	return m_activityNodeActivation_Operation_recieveOffer;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityNodeActivation_EOperation_removeToken_Token() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityNodeActivation_Operation_removeToken_Token() const
 {
-	return m_activityNodeActivation_EOperation_removeToken_Token;
+	return m_activityNodeActivation_Operation_removeToken_Token;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityNodeActivation_EOperation_resume() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityNodeActivation_Operation_resume() const
 {
-	return m_activityNodeActivation_EOperation_resume;
+	return m_activityNodeActivation_Operation_resume;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityNodeActivation_EOperation_run() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityNodeActivation_Operation_run() const
 {
-	return m_activityNodeActivation_EOperation_run;
+	return m_activityNodeActivation_Operation_run;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityNodeActivation_EOperation_sendOffers_Token() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityNodeActivation_Operation_sendOffers_Token() const
 {
-	return m_activityNodeActivation_EOperation_sendOffers_Token;
+	return m_activityNodeActivation_Operation_sendOffers_Token;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityNodeActivation_EOperation_suspend() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityNodeActivation_Operation_suspend() const
 {
-	return m_activityNodeActivation_EOperation_suspend;
+	return m_activityNodeActivation_Operation_suspend;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityNodeActivation_EOperation_takeOfferedTokens() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityNodeActivation_Operation_takeOfferedTokens() const
 {
-	return m_activityNodeActivation_EOperation_takeOfferedTokens;
+	return m_activityNodeActivation_Operation_takeOfferedTokens;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityNodeActivation_EOperation_takeTokens() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityNodeActivation_Operation_takeTokens() const
 {
-	return m_activityNodeActivation_EOperation_takeTokens;
+	return m_activityNodeActivation_Operation_takeTokens;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityNodeActivation_EOperation_terminate() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityNodeActivation_Operation_terminate() const
 {
-	return m_activityNodeActivation_EOperation_terminate;
+	return m_activityNodeActivation_Operation_terminate;
 }
 
 // End Class ActivityNodeActivation
 
 // Begin Class ActivityNodeActivationGroup
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getActivityNodeActivationGroup_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getActivityNodeActivationGroup_Class() const
 {
-	return m_activityNodeActivationGroup_EClass;
+	return m_activityNodeActivationGroup_Class;
 }
 
 
-std::shared_ptr<ecore::EReference> FUMLPackageImpl::getActivityNodeActivationGroup_EReference_activityExecution() const
+std::shared_ptr<ecore::EReference> FUMLPackageImpl::getActivityNodeActivationGroup_Attribute_activityExecution() const
 {
-	return m_activityNodeActivationGroup_EReference_activityExecution;
+	return m_activityNodeActivationGroup_Attribute_activityExecution;
 }
-std::shared_ptr<ecore::EReference> FUMLPackageImpl::getActivityNodeActivationGroup_EReference_containingNodeActivation() const
+std::shared_ptr<ecore::EReference> FUMLPackageImpl::getActivityNodeActivationGroup_Attribute_containingNodeActivation() const
 {
-	return m_activityNodeActivationGroup_EReference_containingNodeActivation;
+	return m_activityNodeActivationGroup_Attribute_containingNodeActivation;
 }
-std::shared_ptr<ecore::EReference> FUMLPackageImpl::getActivityNodeActivationGroup_EReference_edgeInstances() const
+std::shared_ptr<ecore::EReference> FUMLPackageImpl::getActivityNodeActivationGroup_Attribute_edgeInstances() const
 {
-	return m_activityNodeActivationGroup_EReference_edgeInstances;
+	return m_activityNodeActivationGroup_Attribute_edgeInstances;
 }
-std::shared_ptr<ecore::EReference> FUMLPackageImpl::getActivityNodeActivationGroup_EReference_nodeActivations() const
+std::shared_ptr<ecore::EReference> FUMLPackageImpl::getActivityNodeActivationGroup_Attribute_nodeActivations() const
 {
-	return m_activityNodeActivationGroup_EReference_nodeActivations;
+	return m_activityNodeActivationGroup_Attribute_nodeActivations;
 }
-std::shared_ptr<ecore::EReference> FUMLPackageImpl::getActivityNodeActivationGroup_EReference_suspendedActivations() const
+std::shared_ptr<ecore::EReference> FUMLPackageImpl::getActivityNodeActivationGroup_Attribute_suspendedActivations() const
 {
-	return m_activityNodeActivationGroup_EReference_suspendedActivations;
+	return m_activityNodeActivationGroup_Attribute_suspendedActivations;
 }
 
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityNodeActivationGroup_EOperation_activate_ActivityNode_ActivityEdge() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityNodeActivationGroup_Operation_activate_ActivityNode_ActivityEdge() const
 {
-	return m_activityNodeActivationGroup_EOperation_activate_ActivityNode_ActivityEdge;
+	return m_activityNodeActivationGroup_Operation_activate_ActivityNode_ActivityEdge;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityNodeActivationGroup_EOperation_addEdgeInstance_ActivityEdgeInstance() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityNodeActivationGroup_Operation_addEdgeInstance_ActivityEdgeInstance() const
 {
-	return m_activityNodeActivationGroup_EOperation_addEdgeInstance_ActivityEdgeInstance;
+	return m_activityNodeActivationGroup_Operation_addEdgeInstance_ActivityEdgeInstance;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityNodeActivationGroup_EOperation_addNodeActivation_ActivityNodeActivation() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityNodeActivationGroup_Operation_addNodeActivation_ActivityNodeActivation() const
 {
-	return m_activityNodeActivationGroup_EOperation_addNodeActivation_ActivityNodeActivation;
+	return m_activityNodeActivationGroup_Operation_addNodeActivation_ActivityNodeActivation;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityNodeActivationGroup_EOperation_checkIncomingEdges_ActivityEdgeInstance_ActivityNodeActivation() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityNodeActivationGroup_Operation_checkIncomingEdges_ActivityEdgeInstance_ActivityNodeActivation() const
 {
-	return m_activityNodeActivationGroup_EOperation_checkIncomingEdges_ActivityEdgeInstance_ActivityNodeActivation;
+	return m_activityNodeActivationGroup_Operation_checkIncomingEdges_ActivityEdgeInstance_ActivityNodeActivation;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityNodeActivationGroup_EOperation_createEdgeInstance_ActivityEdge() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityNodeActivationGroup_Operation_createEdgeInstance_ActivityEdge() const
 {
-	return m_activityNodeActivationGroup_EOperation_createEdgeInstance_ActivityEdge;
+	return m_activityNodeActivationGroup_Operation_createEdgeInstance_ActivityEdge;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityNodeActivationGroup_EOperation_createNodeActivation_ActivityNode() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityNodeActivationGroup_Operation_createNodeActivation_ActivityNode() const
 {
-	return m_activityNodeActivationGroup_EOperation_createNodeActivation_ActivityNode;
+	return m_activityNodeActivationGroup_Operation_createNodeActivation_ActivityNode;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityNodeActivationGroup_EOperation_createNodeActivations_ActivityNode() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityNodeActivationGroup_Operation_createNodeActivations_ActivityNode() const
 {
-	return m_activityNodeActivationGroup_EOperation_createNodeActivations_ActivityNode;
+	return m_activityNodeActivationGroup_Operation_createNodeActivations_ActivityNode;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityNodeActivationGroup_EOperation_getNodeActivation_ActivityNode() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityNodeActivationGroup_Operation_getNodeActivation_ActivityNode() const
 {
-	return m_activityNodeActivationGroup_EOperation_getNodeActivation_ActivityNode;
+	return m_activityNodeActivationGroup_Operation_getNodeActivation_ActivityNode;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityNodeActivationGroup_EOperation_getOutputParameterNodeActivations() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityNodeActivationGroup_Operation_getOutputParameterNodeActivations() const
 {
-	return m_activityNodeActivationGroup_EOperation_getOutputParameterNodeActivations;
+	return m_activityNodeActivationGroup_Operation_getOutputParameterNodeActivations;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityNodeActivationGroup_EOperation_hasSourceFor_ActivityEdgeInstance() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityNodeActivationGroup_Operation_hasSourceFor_ActivityEdgeInstance() const
 {
-	return m_activityNodeActivationGroup_EOperation_hasSourceFor_ActivityEdgeInstance;
+	return m_activityNodeActivationGroup_Operation_hasSourceFor_ActivityEdgeInstance;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityNodeActivationGroup_EOperation_isSuspended() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityNodeActivationGroup_Operation_isSuspended() const
 {
-	return m_activityNodeActivationGroup_EOperation_isSuspended;
+	return m_activityNodeActivationGroup_Operation_isSuspended;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityNodeActivationGroup_EOperation_resume_ActivityNodeActivation() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityNodeActivationGroup_Operation_resume_ActivityNodeActivation() const
 {
-	return m_activityNodeActivationGroup_EOperation_resume_ActivityNodeActivation;
+	return m_activityNodeActivationGroup_Operation_resume_ActivityNodeActivation;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityNodeActivationGroup_EOperation_retrieveActivityExecution() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityNodeActivationGroup_Operation_retrieveActivityExecution() const
 {
-	return m_activityNodeActivationGroup_EOperation_retrieveActivityExecution;
+	return m_activityNodeActivationGroup_Operation_retrieveActivityExecution;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityNodeActivationGroup_EOperation_run_ActivityNodeActivation() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityNodeActivationGroup_Operation_run_ActivityNodeActivation() const
 {
-	return m_activityNodeActivationGroup_EOperation_run_ActivityNodeActivation;
+	return m_activityNodeActivationGroup_Operation_run_ActivityNodeActivation;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityNodeActivationGroup_EOperation_runNodes_ActivityNode() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityNodeActivationGroup_Operation_runNodes_ActivityNode() const
 {
-	return m_activityNodeActivationGroup_EOperation_runNodes_ActivityNode;
+	return m_activityNodeActivationGroup_Operation_runNodes_ActivityNode;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityNodeActivationGroup_EOperation_suspend_ActivityNodeActivation() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityNodeActivationGroup_Operation_suspend_ActivityNodeActivation() const
 {
-	return m_activityNodeActivationGroup_EOperation_suspend_ActivityNodeActivation;
+	return m_activityNodeActivationGroup_Operation_suspend_ActivityNodeActivation;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityNodeActivationGroup_EOperation_terminateAll() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityNodeActivationGroup_Operation_terminateAll() const
 {
-	return m_activityNodeActivationGroup_EOperation_terminateAll;
+	return m_activityNodeActivationGroup_Operation_terminateAll;
 }
 
 // End Class ActivityNodeActivationGroup
 
 // Begin Class ActivityParameterNodeActivation
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getActivityParameterNodeActivation_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getActivityParameterNodeActivation_Class() const
 {
-	return m_activityParameterNodeActivation_EClass;
+	return m_activityParameterNodeActivation_Class;
 }
 
 
 
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityParameterNodeActivation_EOperation_clearTokens() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityParameterNodeActivation_Operation_clearTokens() const
 {
-	return m_activityParameterNodeActivation_EOperation_clearTokens;
+	return m_activityParameterNodeActivation_Operation_clearTokens;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityParameterNodeActivation_EOperation_fire_Token() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getActivityParameterNodeActivation_Operation_fire_Token() const
 {
-	return m_activityParameterNodeActivation_EOperation_fire_Token;
+	return m_activityParameterNodeActivation_Operation_fire_Token;
 }
 
 // End Class ActivityParameterNodeActivation
 
 // Begin Class AddStructuralFeatureValueActionActivation
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getAddStructuralFeatureValueActionActivation_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getAddStructuralFeatureValueActionActivation_Class() const
 {
-	return m_addStructuralFeatureValueActionActivation_EClass;
+	return m_addStructuralFeatureValueActionActivation_Class;
 }
 
 
@@ -566,166 +566,166 @@ std::shared_ptr<ecore::EClass> FUMLPackageImpl::getAddStructuralFeatureValueActi
 // End Class AddStructuralFeatureValueActionActivation
 
 // Begin Class BooleanValue
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getBooleanValue_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getBooleanValue_Class() const
 {
-	return m_booleanValue_EClass;
+	return m_booleanValue_Class;
 }
 
-std::shared_ptr<ecore::EAttribute> FUMLPackageImpl::getBooleanValue_EAttribute_value() const
+std::shared_ptr<ecore::EAttribute> FUMLPackageImpl::getBooleanValue_Attribute_value() const
 {
-	return m_booleanValue_EAttribute_value;
+	return m_booleanValue_Attribute_value;
 }
 
 
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getBooleanValue_EOperation_equals_Value() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getBooleanValue_Operation_equals_Value() const
 {
-	return m_booleanValue_EOperation_equals_Value;
+	return m_booleanValue_Operation_equals_Value;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getBooleanValue_EOperation_specify() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getBooleanValue_Operation_specify() const
 {
-	return m_booleanValue_EOperation_specify;
+	return m_booleanValue_Operation_specify;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getBooleanValue_EOperation_toString() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getBooleanValue_Operation_toString() const
 {
-	return m_booleanValue_EOperation_toString;
+	return m_booleanValue_Operation_toString;
 }
 
 // End Class BooleanValue
 
 // Begin Class CallActionActivation
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getCallActionActivation_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getCallActionActivation_Class() const
 {
-	return m_callActionActivation_EClass;
+	return m_callActionActivation_Class;
 }
 
 
-std::shared_ptr<ecore::EReference> FUMLPackageImpl::getCallActionActivation_EReference_callExecutions() const
+std::shared_ptr<ecore::EReference> FUMLPackageImpl::getCallActionActivation_Attribute_callExecutions() const
 {
-	return m_callActionActivation_EReference_callExecutions;
+	return m_callActionActivation_Attribute_callExecutions;
 }
 
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getCallActionActivation_EOperation_doAction() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getCallActionActivation_Operation_doAction() const
 {
-	return m_callActionActivation_EOperation_doAction;
+	return m_callActionActivation_Operation_doAction;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getCallActionActivation_EOperation_getCallExecution() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getCallActionActivation_Operation_getCallExecution() const
 {
-	return m_callActionActivation_EOperation_getCallExecution;
+	return m_callActionActivation_Operation_getCallExecution;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getCallActionActivation_EOperation_removeCallExecution_Execution() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getCallActionActivation_Operation_removeCallExecution_Execution() const
 {
-	return m_callActionActivation_EOperation_removeCallExecution_Execution;
+	return m_callActionActivation_Operation_removeCallExecution_Execution;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getCallActionActivation_EOperation_terminate() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getCallActionActivation_Operation_terminate() const
 {
-	return m_callActionActivation_EOperation_terminate;
+	return m_callActionActivation_Operation_terminate;
 }
 
 // End Class CallActionActivation
 
 // Begin Class CallBehaviorActionActivation
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getCallBehaviorActionActivation_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getCallBehaviorActionActivation_Class() const
 {
-	return m_callBehaviorActionActivation_EClass;
+	return m_callBehaviorActionActivation_Class;
 }
 
 
 
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getCallBehaviorActionActivation_EOperation_getCallExecution() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getCallBehaviorActionActivation_Operation_getCallExecution() const
 {
-	return m_callBehaviorActionActivation_EOperation_getCallExecution;
+	return m_callBehaviorActionActivation_Operation_getCallExecution;
 }
 
 // End Class CallBehaviorActionActivation
 
 // Begin Class CallOperationActionActivation
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getCallOperationActionActivation_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getCallOperationActionActivation_Class() const
 {
-	return m_callOperationActionActivation_EClass;
+	return m_callOperationActionActivation_Class;
 }
 
 
 
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getCallOperationActionActivation_EOperation_getCallExecution() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getCallOperationActionActivation_Operation_getCallExecution() const
 {
-	return m_callOperationActionActivation_EOperation_getCallExecution;
+	return m_callOperationActionActivation_Operation_getCallExecution;
 }
 
 // End Class CallOperationActionActivation
 
 // Begin Class CentralBufferNodeActivation
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getCentralBufferNodeActivation_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getCentralBufferNodeActivation_Class() const
 {
-	return m_centralBufferNodeActivation_EClass;
+	return m_centralBufferNodeActivation_Class;
 }
 
 
 
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getCentralBufferNodeActivation_EOperation_fire_Token() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getCentralBufferNodeActivation_Operation_fire_Token() const
 {
-	return m_centralBufferNodeActivation_EOperation_fire_Token;
+	return m_centralBufferNodeActivation_Operation_fire_Token;
 }
 
 // End Class CentralBufferNodeActivation
 
 // Begin Class ChoiceStrategy
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getChoiceStrategy_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getChoiceStrategy_Class() const
 {
-	return m_choiceStrategy_EClass;
+	return m_choiceStrategy_Class;
 }
 
 
 
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getChoiceStrategy_EOperation_choose_EInt() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getChoiceStrategy_Operation_choose_EInt() const
 {
-	return m_choiceStrategy_EOperation_choose_EInt;
+	return m_choiceStrategy_Operation_choose_EInt;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getChoiceStrategy_EOperation_retrieveName() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getChoiceStrategy_Operation_retrieveName() const
 {
-	return m_choiceStrategy_EOperation_retrieveName;
+	return m_choiceStrategy_Operation_retrieveName;
 }
 
 // End Class ChoiceStrategy
 
 // Begin Class ClassifierBehaviorExecution
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getClassifierBehaviorExecution_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getClassifierBehaviorExecution_Class() const
 {
-	return m_classifierBehaviorExecution_EClass;
+	return m_classifierBehaviorExecution_Class;
 }
 
 
-std::shared_ptr<ecore::EReference> FUMLPackageImpl::getClassifierBehaviorExecution_EReference_classifier() const
+std::shared_ptr<ecore::EReference> FUMLPackageImpl::getClassifierBehaviorExecution_Attribute_classifier() const
 {
-	return m_classifierBehaviorExecution_EReference_classifier;
+	return m_classifierBehaviorExecution_Attribute_classifier;
 }
-std::shared_ptr<ecore::EReference> FUMLPackageImpl::getClassifierBehaviorExecution_EReference_execution() const
+std::shared_ptr<ecore::EReference> FUMLPackageImpl::getClassifierBehaviorExecution_Attribute_execution() const
 {
-	return m_classifierBehaviorExecution_EReference_execution;
+	return m_classifierBehaviorExecution_Attribute_execution;
 }
-std::shared_ptr<ecore::EReference> FUMLPackageImpl::getClassifierBehaviorExecution_EReference_objectActivation() const
+std::shared_ptr<ecore::EReference> FUMLPackageImpl::getClassifierBehaviorExecution_Attribute_objectActivation() const
 {
-	return m_classifierBehaviorExecution_EReference_objectActivation;
+	return m_classifierBehaviorExecution_Attribute_objectActivation;
 }
 
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getClassifierBehaviorExecution_EOperation__startObjectBehavior() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getClassifierBehaviorExecution_Operation__startObjectBehavior() const
 {
-	return m_classifierBehaviorExecution_EOperation__startObjectBehavior;
+	return m_classifierBehaviorExecution_Operation__startObjectBehavior;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getClassifierBehaviorExecution_EOperation_execute_Class_ParameterValue() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getClassifierBehaviorExecution_Operation_execute_Class_ParameterValue() const
 {
-	return m_classifierBehaviorExecution_EOperation_execute_Class_ParameterValue;
+	return m_classifierBehaviorExecution_Operation_execute_Class_ParameterValue;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getClassifierBehaviorExecution_EOperation_terminate() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getClassifierBehaviorExecution_Operation_terminate() const
 {
-	return m_classifierBehaviorExecution_EOperation_terminate;
+	return m_classifierBehaviorExecution_Operation_terminate;
 }
 
 // End Class ClassifierBehaviorExecution
 
 // Begin Class ClassifierBehaviorExecutionActivity
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getClassifierBehaviorExecutionActivity_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getClassifierBehaviorExecutionActivity_Class() const
 {
-	return m_classifierBehaviorExecutionActivity_EClass;
+	return m_classifierBehaviorExecutionActivity_Class;
 }
 
 
@@ -734,9 +734,9 @@ std::shared_ptr<ecore::EClass> FUMLPackageImpl::getClassifierBehaviorExecutionAc
 // End Class ClassifierBehaviorExecutionActivity
 
 // Begin Class ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1_Class() const
 {
-	return m_classifierBehaviorExecutionActivity_OwnedBehaviorActivity1_EClass;
+	return m_classifierBehaviorExecutionActivity_OwnedBehaviorActivity1_Class;
 }
 
 
@@ -745,56 +745,56 @@ std::shared_ptr<ecore::EClass> FUMLPackageImpl::getClassifierBehaviorExecutionAc
 // End Class ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1
 
 // Begin Class ClauseActivation
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getClauseActivation_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getClauseActivation_Class() const
 {
-	return m_clauseActivation_EClass;
+	return m_clauseActivation_Class;
 }
 
 
-std::shared_ptr<ecore::EReference> FUMLPackageImpl::getClauseActivation_EReference_clause() const
+std::shared_ptr<ecore::EReference> FUMLPackageImpl::getClauseActivation_Attribute_clause() const
 {
-	return m_clauseActivation_EReference_clause;
+	return m_clauseActivation_Attribute_clause;
 }
-std::shared_ptr<ecore::EReference> FUMLPackageImpl::getClauseActivation_EReference_conditionalNodeActivation() const
+std::shared_ptr<ecore::EReference> FUMLPackageImpl::getClauseActivation_Attribute_conditionalNodeActivation() const
 {
-	return m_clauseActivation_EReference_conditionalNodeActivation;
+	return m_clauseActivation_Attribute_conditionalNodeActivation;
 }
 
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getClauseActivation_EOperation_getDecision() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getClauseActivation_Operation_getDecision() const
 {
-	return m_clauseActivation_EOperation_getDecision;
+	return m_clauseActivation_Operation_getDecision;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getClauseActivation_EOperation_getPredecessors() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getClauseActivation_Operation_getPredecessors() const
 {
-	return m_clauseActivation_EOperation_getPredecessors;
+	return m_clauseActivation_Operation_getPredecessors;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getClauseActivation_EOperation_getSuccessors() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getClauseActivation_Operation_getSuccessors() const
 {
-	return m_clauseActivation_EOperation_getSuccessors;
+	return m_clauseActivation_Operation_getSuccessors;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getClauseActivation_EOperation_isReady() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getClauseActivation_Operation_isReady() const
 {
-	return m_clauseActivation_EOperation_isReady;
+	return m_clauseActivation_Operation_isReady;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getClauseActivation_EOperation_recieveControl() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getClauseActivation_Operation_recieveControl() const
 {
-	return m_clauseActivation_EOperation_recieveControl;
+	return m_clauseActivation_Operation_recieveControl;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getClauseActivation_EOperation_runTest() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getClauseActivation_Operation_runTest() const
 {
-	return m_clauseActivation_EOperation_runTest;
+	return m_clauseActivation_Operation_runTest;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getClauseActivation_EOperation_selectBody() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getClauseActivation_Operation_selectBody() const
 {
-	return m_clauseActivation_EOperation_selectBody;
+	return m_clauseActivation_Operation_selectBody;
 }
 
 // End Class ClauseActivation
 
 // Begin Class ClearAssociationActionActivation
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getClearAssociationActionActivation_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getClearAssociationActionActivation_Class() const
 {
-	return m_clearAssociationActionActivation_EClass;
+	return m_clearAssociationActionActivation_Class;
 }
 
 
@@ -803,9 +803,9 @@ std::shared_ptr<ecore::EClass> FUMLPackageImpl::getClearAssociationActionActivat
 // End Class ClearAssociationActionActivation
 
 // Begin Class ClearStructuralFeatureActionActivation
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getClearStructuralFeatureActionActivation_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getClearStructuralFeatureActionActivation_Class() const
 {
-	return m_clearStructuralFeatureActionActivation_EClass;
+	return m_clearStructuralFeatureActionActivation_Class;
 }
 
 
@@ -814,117 +814,117 @@ std::shared_ptr<ecore::EClass> FUMLPackageImpl::getClearStructuralFeatureActionA
 // End Class ClearStructuralFeatureActionActivation
 
 // Begin Class CompoundValue
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getCompoundValue_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getCompoundValue_Class() const
 {
-	return m_compoundValue_EClass;
+	return m_compoundValue_Class;
 }
 
 
-std::shared_ptr<ecore::EReference> FUMLPackageImpl::getCompoundValue_EReference_featureValues() const
+std::shared_ptr<ecore::EReference> FUMLPackageImpl::getCompoundValue_Attribute_featureValues() const
 {
-	return m_compoundValue_EReference_featureValues;
+	return m_compoundValue_Attribute_featureValues;
 }
 
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getCompoundValue_EOperation_assignFeatureValue_StructuralFeature_EInt() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getCompoundValue_Operation_assignFeatureValue_StructuralFeature_EInt() const
 {
-	return m_compoundValue_EOperation_assignFeatureValue_StructuralFeature_EInt;
+	return m_compoundValue_Operation_assignFeatureValue_StructuralFeature_EInt;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getCompoundValue_EOperation_equals_Value() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getCompoundValue_Operation_equals_Value() const
 {
-	return m_compoundValue_EOperation_equals_Value;
+	return m_compoundValue_Operation_equals_Value;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getCompoundValue_EOperation_removeFeatureValues_Classifier() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getCompoundValue_Operation_removeFeatureValues_Classifier() const
 {
-	return m_compoundValue_EOperation_removeFeatureValues_Classifier;
+	return m_compoundValue_Operation_removeFeatureValues_Classifier;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getCompoundValue_EOperation_retrieveFeatureValue_StructuralFeature() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getCompoundValue_Operation_retrieveFeatureValue_StructuralFeature() const
 {
-	return m_compoundValue_EOperation_retrieveFeatureValue_StructuralFeature;
+	return m_compoundValue_Operation_retrieveFeatureValue_StructuralFeature;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getCompoundValue_EOperation_retrieveFeatureValues() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getCompoundValue_Operation_retrieveFeatureValues() const
 {
-	return m_compoundValue_EOperation_retrieveFeatureValues;
+	return m_compoundValue_Operation_retrieveFeatureValues;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getCompoundValue_EOperation_toString() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getCompoundValue_Operation_toString() const
 {
-	return m_compoundValue_EOperation_toString;
+	return m_compoundValue_Operation_toString;
 }
 
 // End Class CompoundValue
 
 // Begin Class ConditionalNodeActivation
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getConditionalNodeActivation_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getConditionalNodeActivation_Class() const
 {
-	return m_conditionalNodeActivation_EClass;
+	return m_conditionalNodeActivation_Class;
 }
 
 
-std::shared_ptr<ecore::EReference> FUMLPackageImpl::getConditionalNodeActivation_EReference_clauseActivations() const
+std::shared_ptr<ecore::EReference> FUMLPackageImpl::getConditionalNodeActivation_Attribute_clauseActivations() const
 {
-	return m_conditionalNodeActivation_EReference_clauseActivations;
+	return m_conditionalNodeActivation_Attribute_clauseActivations;
 }
-std::shared_ptr<ecore::EReference> FUMLPackageImpl::getConditionalNodeActivation_EReference_selectedClauses() const
+std::shared_ptr<ecore::EReference> FUMLPackageImpl::getConditionalNodeActivation_Attribute_selectedClauses() const
 {
-	return m_conditionalNodeActivation_EReference_selectedClauses;
+	return m_conditionalNodeActivation_Attribute_selectedClauses;
 }
 
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getConditionalNodeActivation_EOperation_getClauseActivation_Clause() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getConditionalNodeActivation_Operation_getClauseActivation_Clause() const
 {
-	return m_conditionalNodeActivation_EOperation_getClauseActivation_Clause;
+	return m_conditionalNodeActivation_Operation_getClauseActivation_Clause;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getConditionalNodeActivation_EOperation_runTest_Clause() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getConditionalNodeActivation_Operation_runTest_Clause() const
 {
-	return m_conditionalNodeActivation_EOperation_runTest_Clause;
+	return m_conditionalNodeActivation_Operation_runTest_Clause;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getConditionalNodeActivation_EOperation_selectBody_Clause() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getConditionalNodeActivation_Operation_selectBody_Clause() const
 {
-	return m_conditionalNodeActivation_EOperation_selectBody_Clause;
+	return m_conditionalNodeActivation_Operation_selectBody_Clause;
 }
 
 // End Class ConditionalNodeActivation
 
 // Begin Class ControlNodeActivation
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getControlNodeActivation_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getControlNodeActivation_Class() const
 {
-	return m_controlNodeActivation_EClass;
+	return m_controlNodeActivation_Class;
 }
 
 
 
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getControlNodeActivation_EOperation_fire_Token() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getControlNodeActivation_Operation_fire_Token() const
 {
-	return m_controlNodeActivation_EOperation_fire_Token;
+	return m_controlNodeActivation_Operation_fire_Token;
 }
 
 // End Class ControlNodeActivation
 
 // Begin Class ControlToken
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getControlToken_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getControlToken_Class() const
 {
-	return m_controlToken_EClass;
+	return m_controlToken_Class;
 }
 
 
 
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getControlToken_EOperation_equals_Token() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getControlToken_Operation_equals_Token() const
 {
-	return m_controlToken_EOperation_equals_Token;
+	return m_controlToken_Operation_equals_Token;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getControlToken_EOperation_getValue() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getControlToken_Operation_getValue() const
 {
-	return m_controlToken_EOperation_getValue;
+	return m_controlToken_Operation_getValue;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getControlToken_EOperation_isControl() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getControlToken_Operation_isControl() const
 {
-	return m_controlToken_EOperation_isControl;
+	return m_controlToken_Operation_isControl;
 }
 
 // End Class ControlToken
 
 // Begin Class CreateLinkActionActivation
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getCreateLinkActionActivation_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getCreateLinkActionActivation_Class() const
 {
-	return m_createLinkActionActivation_EClass;
+	return m_createLinkActionActivation_Class;
 }
 
 
@@ -933,125 +933,125 @@ std::shared_ptr<ecore::EClass> FUMLPackageImpl::getCreateLinkActionActivation_EC
 // End Class CreateLinkActionActivation
 
 // Begin Class CreateObjectActionActivation
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getCreateObjectActionActivation_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getCreateObjectActionActivation_Class() const
 {
-	return m_createObjectActionActivation_EClass;
+	return m_createObjectActionActivation_Class;
 }
 
 
 
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getCreateObjectActionActivation_EOperation_doAction() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getCreateObjectActionActivation_Operation_doAction() const
 {
-	return m_createObjectActionActivation_EOperation_doAction;
+	return m_createObjectActionActivation_Operation_doAction;
 }
 
 // End Class CreateObjectActionActivation
 
 // Begin Class DataStoreNodeActivation
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getDataStoreNodeActivation_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getDataStoreNodeActivation_Class() const
 {
-	return m_dataStoreNodeActivation_EClass;
+	return m_dataStoreNodeActivation_Class;
 }
 
 
 
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getDataStoreNodeActivation_EOperation_addToken_Token() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getDataStoreNodeActivation_Operation_addToken_Token() const
 {
-	return m_dataStoreNodeActivation_EOperation_addToken_Token;
+	return m_dataStoreNodeActivation_Operation_addToken_Token;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getDataStoreNodeActivation_EOperation_removeToken_Token() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getDataStoreNodeActivation_Operation_removeToken_Token() const
 {
-	return m_dataStoreNodeActivation_EOperation_removeToken_Token;
+	return m_dataStoreNodeActivation_Operation_removeToken_Token;
 }
 
 // End Class DataStoreNodeActivation
 
 // Begin Class DataValue
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getDataValue_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getDataValue_Class() const
 {
-	return m_dataValue_EClass;
+	return m_dataValue_Class;
 }
 
 
-std::shared_ptr<ecore::EReference> FUMLPackageImpl::getDataValue_EReference_type() const
+std::shared_ptr<ecore::EReference> FUMLPackageImpl::getDataValue_Attribute_type() const
 {
-	return m_dataValue_EReference_type;
+	return m_dataValue_Attribute_type;
 }
 
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getDataValue_EOperation_getTypes() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getDataValue_Operation_getTypes() const
 {
-	return m_dataValue_EOperation_getTypes;
+	return m_dataValue_Operation_getTypes;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getDataValue_EOperation_new_() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getDataValue_Operation_new_() const
 {
-	return m_dataValue_EOperation_new_;
+	return m_dataValue_Operation_new_;
 }
 
 // End Class DataValue
 
 // Begin Class DecisionNodeActivation
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getDecisionNodeActivation_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getDecisionNodeActivation_Class() const
 {
-	return m_decisionNodeActivation_EClass;
+	return m_decisionNodeActivation_Class;
 }
 
 
-std::shared_ptr<ecore::EReference> FUMLPackageImpl::getDecisionNodeActivation_EReference_decisionInputExecution() const
+std::shared_ptr<ecore::EReference> FUMLPackageImpl::getDecisionNodeActivation_Attribute_decisionInputExecution() const
 {
-	return m_decisionNodeActivation_EReference_decisionInputExecution;
+	return m_decisionNodeActivation_Attribute_decisionInputExecution;
 }
 
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getDecisionNodeActivation_EOperation_executeDecisionInputBehavior_Value_Value() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getDecisionNodeActivation_Operation_executeDecisionInputBehavior_Value_Value() const
 {
-	return m_decisionNodeActivation_EOperation_executeDecisionInputBehavior_Value_Value;
+	return m_decisionNodeActivation_Operation_executeDecisionInputBehavior_Value_Value;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getDecisionNodeActivation_EOperation_fire_Token() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getDecisionNodeActivation_Operation_fire_Token() const
 {
-	return m_decisionNodeActivation_EOperation_fire_Token;
+	return m_decisionNodeActivation_Operation_fire_Token;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getDecisionNodeActivation_EOperation_getDecisionInputFlowInstance() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getDecisionNodeActivation_Operation_getDecisionInputFlowInstance() const
 {
-	return m_decisionNodeActivation_EOperation_getDecisionInputFlowInstance;
+	return m_decisionNodeActivation_Operation_getDecisionInputFlowInstance;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getDecisionNodeActivation_EOperation_getDecisionInputFlowValue() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getDecisionNodeActivation_Operation_getDecisionInputFlowValue() const
 {
-	return m_decisionNodeActivation_EOperation_getDecisionInputFlowValue;
+	return m_decisionNodeActivation_Operation_getDecisionInputFlowValue;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getDecisionNodeActivation_EOperation_getDecisionValues_Token() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getDecisionNodeActivation_Operation_getDecisionValues_Token() const
 {
-	return m_decisionNodeActivation_EOperation_getDecisionValues_Token;
+	return m_decisionNodeActivation_Operation_getDecisionValues_Token;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getDecisionNodeActivation_EOperation_hasObjectFlowInput() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getDecisionNodeActivation_Operation_hasObjectFlowInput() const
 {
-	return m_decisionNodeActivation_EOperation_hasObjectFlowInput;
+	return m_decisionNodeActivation_Operation_hasObjectFlowInput;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getDecisionNodeActivation_EOperation_isReady() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getDecisionNodeActivation_Operation_isReady() const
 {
-	return m_decisionNodeActivation_EOperation_isReady;
+	return m_decisionNodeActivation_Operation_isReady;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getDecisionNodeActivation_EOperation_removeJoinedControlTokens_Token() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getDecisionNodeActivation_Operation_removeJoinedControlTokens_Token() const
 {
-	return m_decisionNodeActivation_EOperation_removeJoinedControlTokens_Token;
+	return m_decisionNodeActivation_Operation_removeJoinedControlTokens_Token;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getDecisionNodeActivation_EOperation_takeOfferedTokens() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getDecisionNodeActivation_Operation_takeOfferedTokens() const
 {
-	return m_decisionNodeActivation_EOperation_takeOfferedTokens;
+	return m_decisionNodeActivation_Operation_takeOfferedTokens;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getDecisionNodeActivation_EOperation_terminate() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getDecisionNodeActivation_Operation_terminate() const
 {
-	return m_decisionNodeActivation_EOperation_terminate;
+	return m_decisionNodeActivation_Operation_terminate;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getDecisionNodeActivation_EOperation_test_ValueSpecification_Value() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getDecisionNodeActivation_Operation_test_ValueSpecification_Value() const
 {
-	return m_decisionNodeActivation_EOperation_test_ValueSpecification_Value;
+	return m_decisionNodeActivation_Operation_test_ValueSpecification_Value;
 }
 
 // End Class DecisionNodeActivation
 
 // Begin Class DestroyLinkActionActivation
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getDestroyLinkActionActivation_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getDestroyLinkActionActivation_Class() const
 {
-	return m_destroyLinkActionActivation_EClass;
+	return m_destroyLinkActionActivation_Class;
 }
 
 
@@ -1060,136 +1060,136 @@ std::shared_ptr<ecore::EClass> FUMLPackageImpl::getDestroyLinkActionActivation_E
 // End Class DestroyLinkActionActivation
 
 // Begin Class DestroyObjectActionActivation
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getDestroyObjectActionActivation_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getDestroyObjectActionActivation_Class() const
 {
-	return m_destroyObjectActionActivation_EClass;
+	return m_destroyObjectActionActivation_Class;
 }
 
 
 
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getDestroyObjectActionActivation_EOperation_destroyObject_Value_EBoolean() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getDestroyObjectActionActivation_Operation_destroyObject_Value_EBoolean() const
 {
-	return m_destroyObjectActionActivation_EOperation_destroyObject_Value_EBoolean;
+	return m_destroyObjectActionActivation_Operation_destroyObject_Value_EBoolean;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getDestroyObjectActionActivation_EOperation_doAction() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getDestroyObjectActionActivation_Operation_doAction() const
 {
-	return m_destroyObjectActionActivation_EOperation_doAction;
+	return m_destroyObjectActionActivation_Operation_doAction;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getDestroyObjectActionActivation_EOperation_objectIsComposite_Reference_Link() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getDestroyObjectActionActivation_Operation_objectIsComposite_Reference_Link() const
 {
-	return m_destroyObjectActionActivation_EOperation_objectIsComposite_Reference_Link;
+	return m_destroyObjectActionActivation_Operation_objectIsComposite_Reference_Link;
 }
 
 // End Class DestroyObjectActionActivation
 
 // Begin Class DispatchStrategy
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getDispatchStrategy_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getDispatchStrategy_Class() const
 {
-	return m_dispatchStrategy_EClass;
+	return m_dispatchStrategy_Class;
 }
 
 
 
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getDispatchStrategy_EOperation_dispatch_Object_Operation() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getDispatchStrategy_Operation_dispatch_Object_Operation() const
 {
-	return m_dispatchStrategy_EOperation_dispatch_Object_Operation;
+	return m_dispatchStrategy_Operation_dispatch_Object_Operation;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getDispatchStrategy_EOperation_retrieveMethod_Object_Operation() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getDispatchStrategy_Operation_retrieveMethod_Object_Operation() const
 {
-	return m_dispatchStrategy_EOperation_retrieveMethod_Object_Operation;
+	return m_dispatchStrategy_Operation_retrieveMethod_Object_Operation;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getDispatchStrategy_EOperation_retrieveName() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getDispatchStrategy_Operation_retrieveName() const
 {
-	return m_dispatchStrategy_EOperation_retrieveName;
+	return m_dispatchStrategy_Operation_retrieveName;
 }
 
 // End Class DispatchStrategy
 
 // Begin Class EnumerationValue
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getEnumerationValue_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getEnumerationValue_Class() const
 {
-	return m_enumerationValue_EClass;
+	return m_enumerationValue_Class;
 }
 
 
-std::shared_ptr<ecore::EReference> FUMLPackageImpl::getEnumerationValue_EReference_literal() const
+std::shared_ptr<ecore::EReference> FUMLPackageImpl::getEnumerationValue_Attribute_literal() const
 {
-	return m_enumerationValue_EReference_literal;
+	return m_enumerationValue_Attribute_literal;
 }
-std::shared_ptr<ecore::EReference> FUMLPackageImpl::getEnumerationValue_EReference_type() const
+std::shared_ptr<ecore::EReference> FUMLPackageImpl::getEnumerationValue_Attribute_type() const
 {
-	return m_enumerationValue_EReference_type;
+	return m_enumerationValue_Attribute_type;
 }
 
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getEnumerationValue_EOperation_equals_Value() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getEnumerationValue_Operation_equals_Value() const
 {
-	return m_enumerationValue_EOperation_equals_Value;
+	return m_enumerationValue_Operation_equals_Value;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getEnumerationValue_EOperation_getTypes() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getEnumerationValue_Operation_getTypes() const
 {
-	return m_enumerationValue_EOperation_getTypes;
+	return m_enumerationValue_Operation_getTypes;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getEnumerationValue_EOperation_new_() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getEnumerationValue_Operation_new_() const
 {
-	return m_enumerationValue_EOperation_new_;
+	return m_enumerationValue_Operation_new_;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getEnumerationValue_EOperation_specify() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getEnumerationValue_Operation_specify() const
 {
-	return m_enumerationValue_EOperation_specify;
+	return m_enumerationValue_Operation_specify;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getEnumerationValue_EOperation_toString() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getEnumerationValue_Operation_toString() const
 {
-	return m_enumerationValue_EOperation_toString;
+	return m_enumerationValue_Operation_toString;
 }
 
 // End Class EnumerationValue
 
 // Begin Class Evaluation
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getEvaluation_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getEvaluation_Class() const
 {
-	return m_evaluation_EClass;
+	return m_evaluation_Class;
 }
 
 
-std::shared_ptr<ecore::EReference> FUMLPackageImpl::getEvaluation_EReference_locus() const
+std::shared_ptr<ecore::EReference> FUMLPackageImpl::getEvaluation_Attribute_locus() const
 {
-	return m_evaluation_EReference_locus;
+	return m_evaluation_Attribute_locus;
 }
-std::shared_ptr<ecore::EReference> FUMLPackageImpl::getEvaluation_EReference_specification() const
+std::shared_ptr<ecore::EReference> FUMLPackageImpl::getEvaluation_Attribute_specification() const
 {
-	return m_evaluation_EReference_specification;
+	return m_evaluation_Attribute_specification;
 }
 
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getEvaluation_EOperation_evaluate() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getEvaluation_Operation_evaluate() const
 {
-	return m_evaluation_EOperation_evaluate;
+	return m_evaluation_Operation_evaluate;
 }
 
 // End Class Evaluation
 
 // Begin Class EventAccepter
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getEventAccepter_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getEventAccepter_Class() const
 {
-	return m_eventAccepter_EClass;
+	return m_eventAccepter_Class;
 }
 
 
 
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getEventAccepter_EOperation_accept_SignalInstance() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getEventAccepter_Operation_accept_SignalInstance() const
 {
-	return m_eventAccepter_EOperation_accept_SignalInstance;
+	return m_eventAccepter_Operation_accept_SignalInstance;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getEventAccepter_EOperation_match_SignalInstance() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getEventAccepter_Operation_match_SignalInstance() const
 {
-	return m_eventAccepter_EOperation_match_SignalInstance;
+	return m_eventAccepter_Operation_match_SignalInstance;
 }
 
 // End Class EventAccepter
 
 // Begin Class EventDispatchLoop
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getEventDispatchLoop_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getEventDispatchLoop_Class() const
 {
-	return m_eventDispatchLoop_EClass;
+	return m_eventDispatchLoop_Class;
 }
 
 
@@ -1198,9 +1198,9 @@ std::shared_ptr<ecore::EClass> FUMLPackageImpl::getEventDispatchLoop_EClass() co
 // End Class EventDispatchLoop
 
 // Begin Class EventOccurrence
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getEventOccurrence_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getEventOccurrence_Class() const
 {
-	return m_eventOccurrence_EClass;
+	return m_eventOccurrence_Class;
 }
 
 
@@ -1209,314 +1209,314 @@ std::shared_ptr<ecore::EClass> FUMLPackageImpl::getEventOccurrence_EClass() cons
 // End Class EventOccurrence
 
 // Begin Class Execution
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getExecution_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getExecution_Class() const
 {
-	return m_execution_EClass;
+	return m_execution_Class;
 }
 
 
-std::shared_ptr<ecore::EReference> FUMLPackageImpl::getExecution_EReference_context() const
+std::shared_ptr<ecore::EReference> FUMLPackageImpl::getExecution_Attribute_context() const
 {
-	return m_execution_EReference_context;
+	return m_execution_Attribute_context;
 }
-std::shared_ptr<ecore::EReference> FUMLPackageImpl::getExecution_EReference_parameterValues() const
+std::shared_ptr<ecore::EReference> FUMLPackageImpl::getExecution_Attribute_parameterValues() const
 {
-	return m_execution_EReference_parameterValues;
+	return m_execution_Attribute_parameterValues;
 }
 
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getExecution_EOperation_execute() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getExecution_Operation_execute() const
 {
-	return m_execution_EOperation_execute;
+	return m_execution_Operation_execute;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getExecution_EOperation_getBehavior() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getExecution_Operation_getBehavior() const
 {
-	return m_execution_EOperation_getBehavior;
+	return m_execution_Operation_getBehavior;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getExecution_EOperation_getOutputParameterValues() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getExecution_Operation_getOutputParameterValues() const
 {
-	return m_execution_EOperation_getOutputParameterValues;
+	return m_execution_Operation_getOutputParameterValues;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getExecution_EOperation_getParameterValue_Parameter() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getExecution_Operation_getParameterValue_Parameter() const
 {
-	return m_execution_EOperation_getParameterValue_Parameter;
+	return m_execution_Operation_getParameterValue_Parameter;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getExecution_EOperation_new_() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getExecution_Operation_new_() const
 {
-	return m_execution_EOperation_new_;
+	return m_execution_Operation_new_;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getExecution_EOperation_setParameterValue_ParameterValue() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getExecution_Operation_setParameterValue_ParameterValue() const
 {
-	return m_execution_EOperation_setParameterValue_ParameterValue;
+	return m_execution_Operation_setParameterValue_ParameterValue;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getExecution_EOperation_terminate() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getExecution_Operation_terminate() const
 {
-	return m_execution_EOperation_terminate;
+	return m_execution_Operation_terminate;
 }
 
 // End Class Execution
 
 // Begin Class ExecutionFactory
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getExecutionFactory_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getExecutionFactory_Class() const
 {
-	return m_executionFactory_EClass;
+	return m_executionFactory_Class;
 }
 
 
-std::shared_ptr<ecore::EReference> FUMLPackageImpl::getExecutionFactory_EReference_builtInTypes() const
+std::shared_ptr<ecore::EReference> FUMLPackageImpl::getExecutionFactory_Attribute_builtInTypes() const
 {
-	return m_executionFactory_EReference_builtInTypes;
+	return m_executionFactory_Attribute_builtInTypes;
 }
-std::shared_ptr<ecore::EReference> FUMLPackageImpl::getExecutionFactory_EReference_locus() const
+std::shared_ptr<ecore::EReference> FUMLPackageImpl::getExecutionFactory_Attribute_locus() const
 {
-	return m_executionFactory_EReference_locus;
+	return m_executionFactory_Attribute_locus;
 }
-std::shared_ptr<ecore::EReference> FUMLPackageImpl::getExecutionFactory_EReference_primitiveBehaviorPrototypes() const
+std::shared_ptr<ecore::EReference> FUMLPackageImpl::getExecutionFactory_Attribute_primitiveBehaviorPrototypes() const
 {
-	return m_executionFactory_EReference_primitiveBehaviorPrototypes;
+	return m_executionFactory_Attribute_primitiveBehaviorPrototypes;
 }
-std::shared_ptr<ecore::EReference> FUMLPackageImpl::getExecutionFactory_EReference_strategies() const
+std::shared_ptr<ecore::EReference> FUMLPackageImpl::getExecutionFactory_Attribute_strategies() const
 {
-	return m_executionFactory_EReference_strategies;
+	return m_executionFactory_Attribute_strategies;
 }
 
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getExecutionFactory_EOperation_addBuiltInType_PrimitiveType() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getExecutionFactory_Operation_addBuiltInType_PrimitiveType() const
 {
-	return m_executionFactory_EOperation_addBuiltInType_PrimitiveType;
+	return m_executionFactory_Operation_addBuiltInType_PrimitiveType;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getExecutionFactory_EOperation_addPrimitiveBehaviorPrototype_OpaqueBehaviorExecution() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getExecutionFactory_Operation_addPrimitiveBehaviorPrototype_OpaqueBehaviorExecution() const
 {
-	return m_executionFactory_EOperation_addPrimitiveBehaviorPrototype_OpaqueBehaviorExecution;
+	return m_executionFactory_Operation_addPrimitiveBehaviorPrototype_OpaqueBehaviorExecution;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getExecutionFactory_EOperation_assignStrategy_SemanticStrategy() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getExecutionFactory_Operation_assignStrategy_SemanticStrategy() const
 {
-	return m_executionFactory_EOperation_assignStrategy_SemanticStrategy;
+	return m_executionFactory_Operation_assignStrategy_SemanticStrategy;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getExecutionFactory_EOperation_createEvaluation_ValueSpecification() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getExecutionFactory_Operation_createEvaluation_ValueSpecification() const
 {
-	return m_executionFactory_EOperation_createEvaluation_ValueSpecification;
+	return m_executionFactory_Operation_createEvaluation_ValueSpecification;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getExecutionFactory_EOperation_createExecution_Behavior_Object() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getExecutionFactory_Operation_createExecution_Behavior_Object() const
 {
-	return m_executionFactory_EOperation_createExecution_Behavior_Object;
+	return m_executionFactory_Operation_createExecution_Behavior_Object;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getExecutionFactory_EOperation_getBuiltInType_EString() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getExecutionFactory_Operation_getBuiltInType_EString() const
 {
-	return m_executionFactory_EOperation_getBuiltInType_EString;
+	return m_executionFactory_Operation_getBuiltInType_EString;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getExecutionFactory_EOperation_getStrategy_EString() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getExecutionFactory_Operation_getStrategy_EString() const
 {
-	return m_executionFactory_EOperation_getStrategy_EString;
+	return m_executionFactory_Operation_getStrategy_EString;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getExecutionFactory_EOperation_getStrategyIndex_EString() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getExecutionFactory_Operation_getStrategyIndex_EString() const
 {
-	return m_executionFactory_EOperation_getStrategyIndex_EString;
+	return m_executionFactory_Operation_getStrategyIndex_EString;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getExecutionFactory_EOperation_instantiateOpaqueBehaviorExecution_OpaqueBehavior() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getExecutionFactory_Operation_instantiateOpaqueBehaviorExecution_OpaqueBehavior() const
 {
-	return m_executionFactory_EOperation_instantiateOpaqueBehaviorExecution_OpaqueBehavior;
+	return m_executionFactory_Operation_instantiateOpaqueBehaviorExecution_OpaqueBehavior;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getExecutionFactory_EOperation_instantiateVisitor_Element() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getExecutionFactory_Operation_instantiateVisitor_Element() const
 {
-	return m_executionFactory_EOperation_instantiateVisitor_Element;
+	return m_executionFactory_Operation_instantiateVisitor_Element;
 }
 
 // End Class ExecutionFactory
 
 // Begin Class ExecutionFactoryL1
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getExecutionFactoryL1_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getExecutionFactoryL1_Class() const
 {
-	return m_executionFactoryL1_EClass;
+	return m_executionFactoryL1_Class;
 }
 
 
 
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getExecutionFactoryL1_EOperation_instantiateVisitor_Element() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getExecutionFactoryL1_Operation_instantiateVisitor_Element() const
 {
-	return m_executionFactoryL1_EOperation_instantiateVisitor_Element;
+	return m_executionFactoryL1_Operation_instantiateVisitor_Element;
 }
 
 // End Class ExecutionFactoryL1
 
 // Begin Class ExecutionFactoryL2
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getExecutionFactoryL2_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getExecutionFactoryL2_Class() const
 {
-	return m_executionFactoryL2_EClass;
+	return m_executionFactoryL2_Class;
 }
 
 
 
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getExecutionFactoryL2_EOperation_instantiateVisitor_Element() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getExecutionFactoryL2_Operation_instantiateVisitor_Element() const
 {
-	return m_executionFactoryL2_EOperation_instantiateVisitor_Element;
+	return m_executionFactoryL2_Operation_instantiateVisitor_Element;
 }
 
 // End Class ExecutionFactoryL2
 
 // Begin Class ExecutionFactoryL3
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getExecutionFactoryL3_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getExecutionFactoryL3_Class() const
 {
-	return m_executionFactoryL3_EClass;
+	return m_executionFactoryL3_Class;
 }
 
 
 
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getExecutionFactoryL3_EOperation_instantiateVisitor_Element() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getExecutionFactoryL3_Operation_instantiateVisitor_Element() const
 {
-	return m_executionFactoryL3_EOperation_instantiateVisitor_Element;
+	return m_executionFactoryL3_Operation_instantiateVisitor_Element;
 }
 
 // End Class ExecutionFactoryL3
 
 // Begin Class Executor
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getExecutor_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getExecutor_Class() const
 {
-	return m_executor_EClass;
+	return m_executor_Class;
 }
 
 
-std::shared_ptr<ecore::EReference> FUMLPackageImpl::getExecutor_EReference_locus() const
+std::shared_ptr<ecore::EReference> FUMLPackageImpl::getExecutor_Attribute_locus() const
 {
-	return m_executor_EReference_locus;
+	return m_executor_Attribute_locus;
 }
 
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getExecutor_EOperation_evaluate_ValueSpecification() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getExecutor_Operation_evaluate_ValueSpecification() const
 {
-	return m_executor_EOperation_evaluate_ValueSpecification;
+	return m_executor_Operation_evaluate_ValueSpecification;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getExecutor_EOperation_execute_Behavior_ParameterValue() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getExecutor_Operation_execute_Behavior_ParameterValue() const
 {
-	return m_executor_EOperation_execute_Behavior_ParameterValue;
+	return m_executor_Operation_execute_Behavior_ParameterValue;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getExecutor_EOperation_start_Class_ParameterValue() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getExecutor_Operation_start_Class_ParameterValue() const
 {
-	return m_executor_EOperation_start_Class_ParameterValue;
+	return m_executor_Operation_start_Class_ParameterValue;
 }
 
 // End Class Executor
 
 // Begin Class ExpansionActivationGroup
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getExpansionActivationGroup_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getExpansionActivationGroup_Class() const
 {
-	return m_expansionActivationGroup_EClass;
+	return m_expansionActivationGroup_Class;
 }
 
 
-std::shared_ptr<ecore::EReference> FUMLPackageImpl::getExpansionActivationGroup_EReference_regionActivation() const
+std::shared_ptr<ecore::EReference> FUMLPackageImpl::getExpansionActivationGroup_Attribute_regionActivation() const
 {
-	return m_expansionActivationGroup_EReference_regionActivation;
+	return m_expansionActivationGroup_Attribute_regionActivation;
 }
 
 
 // End Class ExpansionActivationGroup
 
 // Begin Class ExpansionNodeActivation
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getExpansionNodeActivation_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getExpansionNodeActivation_Class() const
 {
-	return m_expansionNodeActivation_EClass;
+	return m_expansionNodeActivation_Class;
 }
 
 
 
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getExpansionNodeActivation_EOperation_getExpansionRegionActivation() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getExpansionNodeActivation_Operation_getExpansionRegionActivation() const
 {
-	return m_expansionNodeActivation_EOperation_getExpansionRegionActivation;
+	return m_expansionNodeActivation_Operation_getExpansionRegionActivation;
 }
 
 // End Class ExpansionNodeActivation
 
 // Begin Class ExpansionRegionActivation
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getExpansionRegionActivation_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getExpansionRegionActivation_Class() const
 {
-	return m_expansionRegionActivation_EClass;
+	return m_expansionRegionActivation_Class;
 }
 
 
-std::shared_ptr<ecore::EReference> FUMLPackageImpl::getExpansionRegionActivation_EReference_activationGroups() const
+std::shared_ptr<ecore::EReference> FUMLPackageImpl::getExpansionRegionActivation_Attribute_activationGroups() const
 {
-	return m_expansionRegionActivation_EReference_activationGroups;
+	return m_expansionRegionActivation_Attribute_activationGroups;
 }
-std::shared_ptr<ecore::EReference> FUMLPackageImpl::getExpansionRegionActivation_EReference_inputExpansionTokens() const
+std::shared_ptr<ecore::EReference> FUMLPackageImpl::getExpansionRegionActivation_Attribute_inputExpansionTokens() const
 {
-	return m_expansionRegionActivation_EReference_inputExpansionTokens;
+	return m_expansionRegionActivation_Attribute_inputExpansionTokens;
 }
-std::shared_ptr<ecore::EReference> FUMLPackageImpl::getExpansionRegionActivation_EReference_inputTokens() const
+std::shared_ptr<ecore::EReference> FUMLPackageImpl::getExpansionRegionActivation_Attribute_inputTokens() const
 {
-	return m_expansionRegionActivation_EReference_inputTokens;
+	return m_expansionRegionActivation_Attribute_inputTokens;
 }
 
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getExpansionRegionActivation_EOperation_doStructuredActivity() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getExpansionRegionActivation_Operation_doStructuredActivity() const
 {
-	return m_expansionRegionActivation_EOperation_doStructuredActivity;
+	return m_expansionRegionActivation_Operation_doStructuredActivity;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getExpansionRegionActivation_EOperation_getExpansionNodeActivation_ExpansionNode() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getExpansionRegionActivation_Operation_getExpansionNodeActivation_ExpansionNode() const
 {
-	return m_expansionRegionActivation_EOperation_getExpansionNodeActivation_ExpansionNode;
+	return m_expansionRegionActivation_Operation_getExpansionNodeActivation_ExpansionNode;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getExpansionRegionActivation_EOperation_numberOfValues() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getExpansionRegionActivation_Operation_numberOfValues() const
 {
-	return m_expansionRegionActivation_EOperation_numberOfValues;
+	return m_expansionRegionActivation_Operation_numberOfValues;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getExpansionRegionActivation_EOperation_runGroup_ExpansionActivationGroup() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getExpansionRegionActivation_Operation_runGroup_ExpansionActivationGroup() const
 {
-	return m_expansionRegionActivation_EOperation_runGroup_ExpansionActivationGroup;
+	return m_expansionRegionActivation_Operation_runGroup_ExpansionActivationGroup;
 }
 
 // End Class ExpansionRegionActivation
 
 // Begin Class ExtensionalValue
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getExtensionalValue_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getExtensionalValue_Class() const
 {
-	return m_extensionalValue_EClass;
+	return m_extensionalValue_Class;
 }
 
 
-std::shared_ptr<ecore::EReference> FUMLPackageImpl::getExtensionalValue_EReference_locus() const
+std::shared_ptr<ecore::EReference> FUMLPackageImpl::getExtensionalValue_Attribute_locus() const
 {
-	return m_extensionalValue_EReference_locus;
+	return m_extensionalValue_Attribute_locus;
 }
 
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getExtensionalValue_EOperation_destroy() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getExtensionalValue_Operation_destroy() const
 {
-	return m_extensionalValue_EOperation_destroy;
+	return m_extensionalValue_Operation_destroy;
 }
 
 // End Class ExtensionalValue
 
 // Begin Class ExtensionalValueList
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getExtensionalValueList_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getExtensionalValueList_Class() const
 {
-	return m_extensionalValueList_EClass;
+	return m_extensionalValueList_Class;
 }
 
 
 
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getExtensionalValueList_EOperation_addValue_ExtensionalValue() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getExtensionalValueList_Operation_addValue_ExtensionalValue() const
 {
-	return m_extensionalValueList_EOperation_addValue_ExtensionalValue;
+	return m_extensionalValueList_Operation_addValue_ExtensionalValue;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getExtensionalValueList_EOperation_addValue_ExtensionalValue_EInt() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getExtensionalValueList_Operation_addValue_ExtensionalValue_EInt() const
 {
-	return m_extensionalValueList_EOperation_addValue_ExtensionalValue_EInt;
+	return m_extensionalValueList_Operation_addValue_ExtensionalValue_EInt;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getExtensionalValueList_EOperation_getValue() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getExtensionalValueList_Operation_getValue() const
 {
-	return m_extensionalValueList_EOperation_getValue;
+	return m_extensionalValueList_Operation_getValue;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getExtensionalValueList_EOperation_removeValue_EInt() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getExtensionalValueList_Operation_removeValue_EInt() const
 {
-	return m_extensionalValueList_EOperation_removeValue_EInt;
+	return m_extensionalValueList_Operation_removeValue_EInt;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getExtensionalValueList_EOperation_setValue_ExtensionalValue_EInt() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getExtensionalValueList_Operation_setValue_ExtensionalValue_EInt() const
 {
-	return m_extensionalValueList_EOperation_setValue_ExtensionalValue_EInt;
+	return m_extensionalValueList_Operation_setValue_ExtensionalValue_EInt;
 }
 
 // End Class ExtensionalValueList
 
 // Begin Class FIFOGetNextEventStrategy
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getFIFOGetNextEventStrategy_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getFIFOGetNextEventStrategy_Class() const
 {
-	return m_fIFOGetNextEventStrategy_EClass;
+	return m_fIFOGetNextEventStrategy_Class;
 }
 
 
@@ -1525,51 +1525,51 @@ std::shared_ptr<ecore::EClass> FUMLPackageImpl::getFIFOGetNextEventStrategy_ECla
 // End Class FIFOGetNextEventStrategy
 
 // Begin Class FeatureValue
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getFeatureValue_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getFeatureValue_Class() const
 {
-	return m_featureValue_EClass;
+	return m_featureValue_Class;
 }
 
-std::shared_ptr<ecore::EAttribute> FUMLPackageImpl::getFeatureValue_EAttribute_position() const
+std::shared_ptr<ecore::EAttribute> FUMLPackageImpl::getFeatureValue_Attribute_position() const
 {
-	return m_featureValue_EAttribute_position;
+	return m_featureValue_Attribute_position;
 }
 
-std::shared_ptr<ecore::EReference> FUMLPackageImpl::getFeatureValue_EReference_feature() const
+std::shared_ptr<ecore::EReference> FUMLPackageImpl::getFeatureValue_Attribute_feature() const
 {
-	return m_featureValue_EReference_feature;
+	return m_featureValue_Attribute_feature;
 }
-std::shared_ptr<ecore::EReference> FUMLPackageImpl::getFeatureValue_EReference_values() const
+std::shared_ptr<ecore::EReference> FUMLPackageImpl::getFeatureValue_Attribute_values() const
 {
-	return m_featureValue_EReference_values;
+	return m_featureValue_Attribute_values;
 }
 
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getFeatureValue_EOperation_hasEqualValues_FeatureValue() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getFeatureValue_Operation_hasEqualValues_FeatureValue() const
 {
-	return m_featureValue_EOperation_hasEqualValues_FeatureValue;
+	return m_featureValue_Operation_hasEqualValues_FeatureValue;
 }
 
 // End Class FeatureValue
 
 // Begin Class FirstChoiceStrategy
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getFirstChoiceStrategy_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getFirstChoiceStrategy_Class() const
 {
-	return m_firstChoiceStrategy_EClass;
+	return m_firstChoiceStrategy_Class;
 }
 
 
 
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getFirstChoiceStrategy_EOperation_choose_EInt() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getFirstChoiceStrategy_Operation_choose_EInt() const
 {
-	return m_firstChoiceStrategy_EOperation_choose_EInt;
+	return m_firstChoiceStrategy_Operation_choose_EInt;
 }
 
 // End Class FirstChoiceStrategy
 
 // Begin Class FlowFinalNodeActivation
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getFlowFinalNodeActivation_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getFlowFinalNodeActivation_Class() const
 {
-	return m_flowFinalNodeActivation_EClass;
+	return m_flowFinalNodeActivation_Class;
 }
 
 
@@ -1578,158 +1578,158 @@ std::shared_ptr<ecore::EClass> FUMLPackageImpl::getFlowFinalNodeActivation_EClas
 // End Class FlowFinalNodeActivation
 
 // Begin Class ForkNodeActivation
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getForkNodeActivation_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getForkNodeActivation_Class() const
 {
-	return m_forkNodeActivation_EClass;
+	return m_forkNodeActivation_Class;
 }
 
 
 
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getForkNodeActivation_EOperation_fire_Token() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getForkNodeActivation_Operation_fire_Token() const
 {
-	return m_forkNodeActivation_EOperation_fire_Token;
+	return m_forkNodeActivation_Operation_fire_Token;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getForkNodeActivation_EOperation_terminate() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getForkNodeActivation_Operation_terminate() const
 {
-	return m_forkNodeActivation_EOperation_terminate;
+	return m_forkNodeActivation_Operation_terminate;
 }
 
 // End Class ForkNodeActivation
 
 // Begin Class ForkedToken
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getForkedToken_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getForkedToken_Class() const
 {
-	return m_forkedToken_EClass;
+	return m_forkedToken_Class;
 }
 
-std::shared_ptr<ecore::EAttribute> FUMLPackageImpl::getForkedToken_EAttribute_baseTokenIsWithdrawn() const
+std::shared_ptr<ecore::EAttribute> FUMLPackageImpl::getForkedToken_Attribute_baseTokenIsWithdrawn() const
 {
-	return m_forkedToken_EAttribute_baseTokenIsWithdrawn;
+	return m_forkedToken_Attribute_baseTokenIsWithdrawn;
 }
-std::shared_ptr<ecore::EAttribute> FUMLPackageImpl::getForkedToken_EAttribute_remainingOffersCount() const
+std::shared_ptr<ecore::EAttribute> FUMLPackageImpl::getForkedToken_Attribute_remainingOffersCount() const
 {
-	return m_forkedToken_EAttribute_remainingOffersCount;
-}
-
-std::shared_ptr<ecore::EReference> FUMLPackageImpl::getForkedToken_EReference_baseToken() const
-{
-	return m_forkedToken_EReference_baseToken;
+	return m_forkedToken_Attribute_remainingOffersCount;
 }
 
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getForkedToken_EOperation_equals_Token() const
+std::shared_ptr<ecore::EReference> FUMLPackageImpl::getForkedToken_Attribute_baseToken() const
 {
-	return m_forkedToken_EOperation_equals_Token;
+	return m_forkedToken_Attribute_baseToken;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getForkedToken_EOperation_getValue() const
+
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getForkedToken_Operation_equals_Token() const
 {
-	return m_forkedToken_EOperation_getValue;
+	return m_forkedToken_Operation_equals_Token;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getForkedToken_EOperation_isControl() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getForkedToken_Operation_getValue() const
 {
-	return m_forkedToken_EOperation_isControl;
+	return m_forkedToken_Operation_getValue;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getForkedToken_EOperation_withdraw() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getForkedToken_Operation_isControl() const
 {
-	return m_forkedToken_EOperation_withdraw;
+	return m_forkedToken_Operation_isControl;
+}
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getForkedToken_Operation_withdraw() const
+{
+	return m_forkedToken_Operation_withdraw;
 }
 
 // End Class ForkedToken
 
 // Begin Class GetNextEventStrategy
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getGetNextEventStrategy_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getGetNextEventStrategy_Class() const
 {
-	return m_getNextEventStrategy_EClass;
+	return m_getNextEventStrategy_Class;
 }
 
 
 
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getGetNextEventStrategy_EOperation_retrieveNextEvent_ObjectActivation() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getGetNextEventStrategy_Operation_retrieveNextEvent_ObjectActivation() const
 {
-	return m_getNextEventStrategy_EOperation_retrieveNextEvent_ObjectActivation;
+	return m_getNextEventStrategy_Operation_retrieveNextEvent_ObjectActivation;
 }
 
 // End Class GetNextEventStrategy
 
 // Begin Class InitialNodeActivation
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getInitialNodeActivation_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getInitialNodeActivation_Class() const
 {
-	return m_initialNodeActivation_EClass;
+	return m_initialNodeActivation_Class;
 }
 
 
 
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getInitialNodeActivation_EOperation_fire_Token() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getInitialNodeActivation_Operation_fire_Token() const
 {
-	return m_initialNodeActivation_EOperation_fire_Token;
+	return m_initialNodeActivation_Operation_fire_Token;
 }
 
 // End Class InitialNodeActivation
 
 // Begin Class InputPinActivation
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getInputPinActivation_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getInputPinActivation_Class() const
 {
-	return m_inputPinActivation_EClass;
+	return m_inputPinActivation_Class;
 }
 
 
 
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getInputPinActivation_EOperation_isReady() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getInputPinActivation_Operation_isReady() const
 {
-	return m_inputPinActivation_EOperation_isReady;
+	return m_inputPinActivation_Operation_isReady;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getInputPinActivation_EOperation_recieveOffer() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getInputPinActivation_Operation_recieveOffer() const
 {
-	return m_inputPinActivation_EOperation_recieveOffer;
+	return m_inputPinActivation_Operation_recieveOffer;
 }
 
 // End Class InputPinActivation
 
 // Begin Class InstanceValueEvaluation
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getInstanceValueEvaluation_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getInstanceValueEvaluation_Class() const
 {
-	return m_instanceValueEvaluation_EClass;
+	return m_instanceValueEvaluation_Class;
 }
 
 
 
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getInstanceValueEvaluation_EOperation_evaluate() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getInstanceValueEvaluation_Operation_evaluate() const
 {
-	return m_instanceValueEvaluation_EOperation_evaluate;
+	return m_instanceValueEvaluation_Operation_evaluate;
 }
 
 // End Class InstanceValueEvaluation
 
 // Begin Class IntegerValue
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getIntegerValue_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getIntegerValue_Class() const
 {
-	return m_integerValue_EClass;
+	return m_integerValue_Class;
 }
 
-std::shared_ptr<ecore::EAttribute> FUMLPackageImpl::getIntegerValue_EAttribute_value() const
+std::shared_ptr<ecore::EAttribute> FUMLPackageImpl::getIntegerValue_Attribute_value() const
 {
-	return m_integerValue_EAttribute_value;
+	return m_integerValue_Attribute_value;
 }
 
 
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getIntegerValue_EOperation_equals_Value() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getIntegerValue_Operation_equals_Value() const
 {
-	return m_integerValue_EOperation_equals_Value;
+	return m_integerValue_Operation_equals_Value;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getIntegerValue_EOperation_specify() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getIntegerValue_Operation_specify() const
 {
-	return m_integerValue_EOperation_specify;
+	return m_integerValue_Operation_specify;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getIntegerValue_EOperation_toString() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getIntegerValue_Operation_toString() const
 {
-	return m_integerValue_EOperation_toString;
+	return m_integerValue_Operation_toString;
 }
 
 // End Class IntegerValue
 
 // Begin Class InvocationActionActivation
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getInvocationActionActivation_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getInvocationActionActivation_Class() const
 {
-	return m_invocationActionActivation_EClass;
+	return m_invocationActionActivation_Class;
 }
 
 
@@ -1738,265 +1738,265 @@ std::shared_ptr<ecore::EClass> FUMLPackageImpl::getInvocationActionActivation_EC
 // End Class InvocationActionActivation
 
 // Begin Class JoinNodeActivation
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getJoinNodeActivation_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getJoinNodeActivation_Class() const
 {
-	return m_joinNodeActivation_EClass;
+	return m_joinNodeActivation_Class;
 }
 
 
 
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getJoinNodeActivation_EOperation_isReady() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getJoinNodeActivation_Operation_isReady() const
 {
-	return m_joinNodeActivation_EOperation_isReady;
+	return m_joinNodeActivation_Operation_isReady;
 }
 
 // End Class JoinNodeActivation
 
 // Begin Class Link
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getLink_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getLink_Class() const
 {
-	return m_link_EClass;
+	return m_link_Class;
 }
 
 
-std::shared_ptr<ecore::EReference> FUMLPackageImpl::getLink_EReference_type() const
+std::shared_ptr<ecore::EReference> FUMLPackageImpl::getLink_Attribute_type() const
 {
-	return m_link_EReference_type;
+	return m_link_Attribute_type;
 }
 
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getLink_EOperation_addTo_Locus() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getLink_Operation_addTo_Locus() const
 {
-	return m_link_EOperation_addTo_Locus;
+	return m_link_Operation_addTo_Locus;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getLink_EOperation_getOtherFeatureValues_ExtensionalValue_Property() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getLink_Operation_getOtherFeatureValues_ExtensionalValue_Property() const
 {
-	return m_link_EOperation_getOtherFeatureValues_ExtensionalValue_Property;
+	return m_link_Operation_getOtherFeatureValues_ExtensionalValue_Property;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getLink_EOperation_getTypes() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getLink_Operation_getTypes() const
 {
-	return m_link_EOperation_getTypes;
+	return m_link_Operation_getTypes;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getLink_EOperation_isMatchingLink_ExtensionalValue_Property() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getLink_Operation_isMatchingLink_ExtensionalValue_Property() const
 {
-	return m_link_EOperation_isMatchingLink_ExtensionalValue_Property;
+	return m_link_Operation_isMatchingLink_ExtensionalValue_Property;
 }
 
 // End Class Link
 
 // Begin Class LinkActionActivation
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getLinkActionActivation_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getLinkActionActivation_Class() const
 {
-	return m_linkActionActivation_EClass;
+	return m_linkActionActivation_Class;
 }
 
 
 
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getLinkActionActivation_EOperation_endMatchesEndData_Link_LinkEndData() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getLinkActionActivation_Operation_endMatchesEndData_Link_LinkEndData() const
 {
-	return m_linkActionActivation_EOperation_endMatchesEndData_Link_LinkEndData;
+	return m_linkActionActivation_Operation_endMatchesEndData_Link_LinkEndData;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getLinkActionActivation_EOperation_getAssociation() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getLinkActionActivation_Operation_getAssociation() const
 {
-	return m_linkActionActivation_EOperation_getAssociation;
+	return m_linkActionActivation_Operation_getAssociation;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getLinkActionActivation_EOperation_linkMatchesEndData_Link_LinkEndData() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getLinkActionActivation_Operation_linkMatchesEndData_Link_LinkEndData() const
 {
-	return m_linkActionActivation_EOperation_linkMatchesEndData_Link_LinkEndData;
+	return m_linkActionActivation_Operation_linkMatchesEndData_Link_LinkEndData;
 }
 
 // End Class LinkActionActivation
 
 // Begin Class LiteralBooleanEvaluation
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getLiteralBooleanEvaluation_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getLiteralBooleanEvaluation_Class() const
 {
-	return m_literalBooleanEvaluation_EClass;
+	return m_literalBooleanEvaluation_Class;
 }
 
 
 
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getLiteralBooleanEvaluation_EOperation_evaluate() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getLiteralBooleanEvaluation_Operation_evaluate() const
 {
-	return m_literalBooleanEvaluation_EOperation_evaluate;
+	return m_literalBooleanEvaluation_Operation_evaluate;
 }
 
 // End Class LiteralBooleanEvaluation
 
 // Begin Class LiteralEvaluation
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getLiteralEvaluation_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getLiteralEvaluation_Class() const
 {
-	return m_literalEvaluation_EClass;
+	return m_literalEvaluation_Class;
 }
 
 
 
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getLiteralEvaluation_EOperation_getType_EString() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getLiteralEvaluation_Operation_getType_EString() const
 {
-	return m_literalEvaluation_EOperation_getType_EString;
+	return m_literalEvaluation_Operation_getType_EString;
 }
 
 // End Class LiteralEvaluation
 
 // Begin Class LiteralIntegerEvaluation
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getLiteralIntegerEvaluation_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getLiteralIntegerEvaluation_Class() const
 {
-	return m_literalIntegerEvaluation_EClass;
+	return m_literalIntegerEvaluation_Class;
 }
 
 
 
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getLiteralIntegerEvaluation_EOperation_evaluate() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getLiteralIntegerEvaluation_Operation_evaluate() const
 {
-	return m_literalIntegerEvaluation_EOperation_evaluate;
+	return m_literalIntegerEvaluation_Operation_evaluate;
 }
 
 // End Class LiteralIntegerEvaluation
 
 // Begin Class LiteralNullEvaluation
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getLiteralNullEvaluation_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getLiteralNullEvaluation_Class() const
 {
-	return m_literalNullEvaluation_EClass;
+	return m_literalNullEvaluation_Class;
 }
 
 
 
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getLiteralNullEvaluation_EOperation_evaluate() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getLiteralNullEvaluation_Operation_evaluate() const
 {
-	return m_literalNullEvaluation_EOperation_evaluate;
+	return m_literalNullEvaluation_Operation_evaluate;
 }
 
 // End Class LiteralNullEvaluation
 
 // Begin Class LiteralRealEvaluation
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getLiteralRealEvaluation_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getLiteralRealEvaluation_Class() const
 {
-	return m_literalRealEvaluation_EClass;
+	return m_literalRealEvaluation_Class;
 }
 
 
 
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getLiteralRealEvaluation_EOperation_evaluate() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getLiteralRealEvaluation_Operation_evaluate() const
 {
-	return m_literalRealEvaluation_EOperation_evaluate;
+	return m_literalRealEvaluation_Operation_evaluate;
 }
 
 // End Class LiteralRealEvaluation
 
 // Begin Class LiteralStringEvaluation
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getLiteralStringEvaluation_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getLiteralStringEvaluation_Class() const
 {
-	return m_literalStringEvaluation_EClass;
+	return m_literalStringEvaluation_Class;
 }
 
 
 
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getLiteralStringEvaluation_EOperation_evaluate() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getLiteralStringEvaluation_Operation_evaluate() const
 {
-	return m_literalStringEvaluation_EOperation_evaluate;
+	return m_literalStringEvaluation_Operation_evaluate;
 }
 
 // End Class LiteralStringEvaluation
 
 // Begin Class LiteralUnlimitedNaturalEvaluation
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getLiteralUnlimitedNaturalEvaluation_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getLiteralUnlimitedNaturalEvaluation_Class() const
 {
-	return m_literalUnlimitedNaturalEvaluation_EClass;
+	return m_literalUnlimitedNaturalEvaluation_Class;
 }
 
 
 
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getLiteralUnlimitedNaturalEvaluation_EOperation_evaluate() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getLiteralUnlimitedNaturalEvaluation_Operation_evaluate() const
 {
-	return m_literalUnlimitedNaturalEvaluation_EOperation_evaluate;
+	return m_literalUnlimitedNaturalEvaluation_Operation_evaluate;
 }
 
 // End Class LiteralUnlimitedNaturalEvaluation
 
 // Begin Class Locus
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getLocus_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getLocus_Class() const
 {
-	return m_locus_EClass;
+	return m_locus_Class;
 }
 
 
-std::shared_ptr<ecore::EReference> FUMLPackageImpl::getLocus_EReference_executor() const
+std::shared_ptr<ecore::EReference> FUMLPackageImpl::getLocus_Attribute_executor() const
 {
-	return m_locus_EReference_executor;
+	return m_locus_Attribute_executor;
 }
-std::shared_ptr<ecore::EReference> FUMLPackageImpl::getLocus_EReference_extensionalValues() const
+std::shared_ptr<ecore::EReference> FUMLPackageImpl::getLocus_Attribute_extensionalValues() const
 {
-	return m_locus_EReference_extensionalValues;
+	return m_locus_Attribute_extensionalValues;
 }
-std::shared_ptr<ecore::EReference> FUMLPackageImpl::getLocus_EReference_factory() const
+std::shared_ptr<ecore::EReference> FUMLPackageImpl::getLocus_Attribute_factory() const
 {
-	return m_locus_EReference_factory;
+	return m_locus_Attribute_factory;
 }
 
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getLocus_EOperation_add_ExtensionalValue() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getLocus_Operation_add_ExtensionalValue() const
 {
-	return m_locus_EOperation_add_ExtensionalValue;
+	return m_locus_Operation_add_ExtensionalValue;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getLocus_EOperation_assignExecutor_Executor() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getLocus_Operation_assignExecutor_Executor() const
 {
-	return m_locus_EOperation_assignExecutor_Executor;
+	return m_locus_Operation_assignExecutor_Executor;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getLocus_EOperation_assignFactory_ExecutionFactory() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getLocus_Operation_assignFactory_ExecutionFactory() const
 {
-	return m_locus_EOperation_assignFactory_ExecutionFactory;
+	return m_locus_Operation_assignFactory_ExecutionFactory;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getLocus_EOperation_conforms_Classifier_Classifier() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getLocus_Operation_conforms_Classifier_Classifier() const
 {
-	return m_locus_EOperation_conforms_Classifier_Classifier;
+	return m_locus_Operation_conforms_Classifier_Classifier;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getLocus_EOperation_instantiate_Class() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getLocus_Operation_instantiate_Class() const
 {
-	return m_locus_EOperation_instantiate_Class;
+	return m_locus_Operation_instantiate_Class;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getLocus_EOperation_remove_ExtensionalValue() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getLocus_Operation_remove_ExtensionalValue() const
 {
-	return m_locus_EOperation_remove_ExtensionalValue;
+	return m_locus_Operation_remove_ExtensionalValue;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getLocus_EOperation_retrieveExtent_Classifier() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getLocus_Operation_retrieveExtent_Classifier() const
 {
-	return m_locus_EOperation_retrieveExtent_Classifier;
+	return m_locus_Operation_retrieveExtent_Classifier;
 }
 
 // End Class Locus
 
 // Begin Class LoopNodeActivation
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getLoopNodeActivation_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getLoopNodeActivation_Class() const
 {
-	return m_loopNodeActivation_EClass;
+	return m_loopNodeActivation_Class;
 }
 
 
-std::shared_ptr<ecore::EReference> FUMLPackageImpl::getLoopNodeActivation_EReference_bodyOutputLists() const
+std::shared_ptr<ecore::EReference> FUMLPackageImpl::getLoopNodeActivation_Attribute_bodyOutputLists() const
 {
-	return m_loopNodeActivation_EReference_bodyOutputLists;
+	return m_loopNodeActivation_Attribute_bodyOutputLists;
 }
 
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getLoopNodeActivation_EOperation_makeLoopVariableList() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getLoopNodeActivation_Operation_makeLoopVariableList() const
 {
-	return m_loopNodeActivation_EOperation_makeLoopVariableList;
+	return m_loopNodeActivation_Operation_makeLoopVariableList;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getLoopNodeActivation_EOperation_runBody() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getLoopNodeActivation_Operation_runBody() const
 {
-	return m_loopNodeActivation_EOperation_runBody;
+	return m_loopNodeActivation_Operation_runBody;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getLoopNodeActivation_EOperation_runLoopVariables() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getLoopNodeActivation_Operation_runLoopVariables() const
 {
-	return m_loopNodeActivation_EOperation_runLoopVariables;
+	return m_loopNodeActivation_Operation_runLoopVariables;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getLoopNodeActivation_EOperation_runTest() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getLoopNodeActivation_Operation_runTest() const
 {
-	return m_loopNodeActivation_EOperation_runTest;
+	return m_loopNodeActivation_Operation_runTest;
 }
 
 // End Class LoopNodeActivation
 
 // Begin Class MergeNodeActivation
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getMergeNodeActivation_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getMergeNodeActivation_Class() const
 {
-	return m_mergeNodeActivation_EClass;
+	return m_mergeNodeActivation_Class;
 }
 
 
@@ -2005,255 +2005,255 @@ std::shared_ptr<ecore::EClass> FUMLPackageImpl::getMergeNodeActivation_EClass() 
 // End Class MergeNodeActivation
 
 // Begin Class Object
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getObject_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getObject_Class() const
 {
-	return m_object_EClass;
+	return m_object_Class;
 }
 
 
-std::shared_ptr<ecore::EReference> FUMLPackageImpl::getObject_EReference_objectActivation() const
+std::shared_ptr<ecore::EReference> FUMLPackageImpl::getObject_Attribute_objectActivation() const
 {
-	return m_object_EReference_objectActivation;
+	return m_object_Attribute_objectActivation;
 }
-std::shared_ptr<ecore::EReference> FUMLPackageImpl::getObject_EReference_types() const
+std::shared_ptr<ecore::EReference> FUMLPackageImpl::getObject_Attribute_types() const
 {
-	return m_object_EReference_types;
+	return m_object_Attribute_types;
 }
 
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getObject_EOperation__register_EventAccepter() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getObject_Operation__register_EventAccepter() const
 {
-	return m_object_EOperation__register_EventAccepter;
+	return m_object_Operation__register_EventAccepter;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getObject_EOperation_destroy() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getObject_Operation_destroy() const
 {
-	return m_object_EOperation_destroy;
+	return m_object_Operation_destroy;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getObject_EOperation_dispatch_Operation() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getObject_Operation_dispatch_Operation() const
 {
-	return m_object_EOperation_dispatch_Operation;
+	return m_object_Operation_dispatch_Operation;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getObject_EOperation_new_() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getObject_Operation_new_() const
 {
-	return m_object_EOperation_new_;
+	return m_object_Operation_new_;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getObject_EOperation_send_SignalInstance() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getObject_Operation_send_SignalInstance() const
 {
-	return m_object_EOperation_send_SignalInstance;
+	return m_object_Operation_send_SignalInstance;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getObject_EOperation_startBehavior_Class_ParameterValue() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getObject_Operation_startBehavior_Class_ParameterValue() const
 {
-	return m_object_EOperation_startBehavior_Class_ParameterValue;
+	return m_object_Operation_startBehavior_Class_ParameterValue;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getObject_EOperation_unregister_EventAccepter() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getObject_Operation_unregister_EventAccepter() const
 {
-	return m_object_EOperation_unregister_EventAccepter;
+	return m_object_Operation_unregister_EventAccepter;
 }
 
 // End Class Object
 
 // Begin Class ObjectActivation
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getObjectActivation_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getObjectActivation_Class() const
 {
-	return m_objectActivation_EClass;
+	return m_objectActivation_Class;
 }
 
 
-std::shared_ptr<ecore::EReference> FUMLPackageImpl::getObjectActivation_EReference_classifierBehaviorExecutions() const
+std::shared_ptr<ecore::EReference> FUMLPackageImpl::getObjectActivation_Attribute_classifierBehaviorExecutions() const
 {
-	return m_objectActivation_EReference_classifierBehaviorExecutions;
+	return m_objectActivation_Attribute_classifierBehaviorExecutions;
 }
-std::shared_ptr<ecore::EReference> FUMLPackageImpl::getObjectActivation_EReference_eventPool() const
+std::shared_ptr<ecore::EReference> FUMLPackageImpl::getObjectActivation_Attribute_eventPool() const
 {
-	return m_objectActivation_EReference_eventPool;
+	return m_objectActivation_Attribute_eventPool;
 }
-std::shared_ptr<ecore::EReference> FUMLPackageImpl::getObjectActivation_EReference_object() const
+std::shared_ptr<ecore::EReference> FUMLPackageImpl::getObjectActivation_Attribute_object() const
 {
-	return m_objectActivation_EReference_object;
+	return m_objectActivation_Attribute_object;
 }
-std::shared_ptr<ecore::EReference> FUMLPackageImpl::getObjectActivation_EReference_waitingEventAccepters() const
+std::shared_ptr<ecore::EReference> FUMLPackageImpl::getObjectActivation_Attribute_waitingEventAccepters() const
 {
-	return m_objectActivation_EReference_waitingEventAccepters;
+	return m_objectActivation_Attribute_waitingEventAccepters;
 }
 
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getObjectActivation_EOperation__register_EventAccepter() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getObjectActivation_Operation__register_EventAccepter() const
 {
-	return m_objectActivation_EOperation__register_EventAccepter;
+	return m_objectActivation_Operation__register_EventAccepter;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getObjectActivation_EOperation__send_EJavaObject() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getObjectActivation_Operation__send_EJavaObject() const
 {
-	return m_objectActivation_EOperation__send_EJavaObject;
+	return m_objectActivation_Operation__send_EJavaObject;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getObjectActivation_EOperation__startObjectBehavior() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getObjectActivation_Operation__startObjectBehavior() const
 {
-	return m_objectActivation_EOperation__startObjectBehavior;
+	return m_objectActivation_Operation__startObjectBehavior;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getObjectActivation_EOperation_dispatchNextEvent() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getObjectActivation_Operation_dispatchNextEvent() const
 {
-	return m_objectActivation_EOperation_dispatchNextEvent;
+	return m_objectActivation_Operation_dispatchNextEvent;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getObjectActivation_EOperation_retrieveNextEvent() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getObjectActivation_Operation_retrieveNextEvent() const
 {
-	return m_objectActivation_EOperation_retrieveNextEvent;
+	return m_objectActivation_Operation_retrieveNextEvent;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getObjectActivation_EOperation_send_SignalInstance() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getObjectActivation_Operation_send_SignalInstance() const
 {
-	return m_objectActivation_EOperation_send_SignalInstance;
+	return m_objectActivation_Operation_send_SignalInstance;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getObjectActivation_EOperation_startBehavior_Class_ParameterValue() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getObjectActivation_Operation_startBehavior_Class_ParameterValue() const
 {
-	return m_objectActivation_EOperation_startBehavior_Class_ParameterValue;
+	return m_objectActivation_Operation_startBehavior_Class_ParameterValue;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getObjectActivation_EOperation_stop() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getObjectActivation_Operation_stop() const
 {
-	return m_objectActivation_EOperation_stop;
+	return m_objectActivation_Operation_stop;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getObjectActivation_EOperation_unregister_EventAccepter() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getObjectActivation_Operation_unregister_EventAccepter() const
 {
-	return m_objectActivation_EOperation_unregister_EventAccepter;
+	return m_objectActivation_Operation_unregister_EventAccepter;
 }
 
 // End Class ObjectActivation
 
 // Begin Class ObjectNodeActivation
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getObjectNodeActivation_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getObjectNodeActivation_Class() const
 {
-	return m_objectNodeActivation_EClass;
+	return m_objectNodeActivation_Class;
 }
 
-std::shared_ptr<ecore::EAttribute> FUMLPackageImpl::getObjectNodeActivation_EAttribute_offeredTokenCount() const
+std::shared_ptr<ecore::EAttribute> FUMLPackageImpl::getObjectNodeActivation_Attribute_offeredTokenCount() const
 {
-	return m_objectNodeActivation_EAttribute_offeredTokenCount;
+	return m_objectNodeActivation_Attribute_offeredTokenCount;
 }
 
 
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getObjectNodeActivation_EOperation_addToken_Token() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getObjectNodeActivation_Operation_addToken_Token() const
 {
-	return m_objectNodeActivation_EOperation_addToken_Token;
+	return m_objectNodeActivation_Operation_addToken_Token;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getObjectNodeActivation_EOperation_clearTokens() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getObjectNodeActivation_Operation_clearTokens() const
 {
-	return m_objectNodeActivation_EOperation_clearTokens;
+	return m_objectNodeActivation_Operation_clearTokens;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getObjectNodeActivation_EOperation_countOfferedValues() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getObjectNodeActivation_Operation_countOfferedValues() const
 {
-	return m_objectNodeActivation_EOperation_countOfferedValues;
+	return m_objectNodeActivation_Operation_countOfferedValues;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getObjectNodeActivation_EOperation_countUnofferedTokens() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getObjectNodeActivation_Operation_countUnofferedTokens() const
 {
-	return m_objectNodeActivation_EOperation_countUnofferedTokens;
+	return m_objectNodeActivation_Operation_countUnofferedTokens;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getObjectNodeActivation_EOperation_getUnofferedTokens() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getObjectNodeActivation_Operation_getUnofferedTokens() const
 {
-	return m_objectNodeActivation_EOperation_getUnofferedTokens;
+	return m_objectNodeActivation_Operation_getUnofferedTokens;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getObjectNodeActivation_EOperation_removeToken_Token() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getObjectNodeActivation_Operation_removeToken_Token() const
 {
-	return m_objectNodeActivation_EOperation_removeToken_Token;
+	return m_objectNodeActivation_Operation_removeToken_Token;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getObjectNodeActivation_EOperation_run() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getObjectNodeActivation_Operation_run() const
 {
-	return m_objectNodeActivation_EOperation_run;
+	return m_objectNodeActivation_Operation_run;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getObjectNodeActivation_EOperation_sendOffers_Token() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getObjectNodeActivation_Operation_sendOffers_Token() const
 {
-	return m_objectNodeActivation_EOperation_sendOffers_Token;
+	return m_objectNodeActivation_Operation_sendOffers_Token;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getObjectNodeActivation_EOperation_sendUnofferedTokens() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getObjectNodeActivation_Operation_sendUnofferedTokens() const
 {
-	return m_objectNodeActivation_EOperation_sendUnofferedTokens;
+	return m_objectNodeActivation_Operation_sendUnofferedTokens;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getObjectNodeActivation_EOperation_takeUnofferedTokens() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getObjectNodeActivation_Operation_takeUnofferedTokens() const
 {
-	return m_objectNodeActivation_EOperation_takeUnofferedTokens;
+	return m_objectNodeActivation_Operation_takeUnofferedTokens;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getObjectNodeActivation_EOperation_terminate() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getObjectNodeActivation_Operation_terminate() const
 {
-	return m_objectNodeActivation_EOperation_terminate;
+	return m_objectNodeActivation_Operation_terminate;
 }
 
 // End Class ObjectNodeActivation
 
 // Begin Class ObjectToken
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getObjectToken_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getObjectToken_Class() const
 {
-	return m_objectToken_EClass;
+	return m_objectToken_Class;
 }
 
 
-std::shared_ptr<ecore::EReference> FUMLPackageImpl::getObjectToken_EReference_value() const
+std::shared_ptr<ecore::EReference> FUMLPackageImpl::getObjectToken_Attribute_value() const
 {
-	return m_objectToken_EReference_value;
+	return m_objectToken_Attribute_value;
 }
 
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getObjectToken_EOperation_equals_Token() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getObjectToken_Operation_equals_Token() const
 {
-	return m_objectToken_EOperation_equals_Token;
+	return m_objectToken_Operation_equals_Token;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getObjectToken_EOperation_isControl() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getObjectToken_Operation_isControl() const
 {
-	return m_objectToken_EOperation_isControl;
+	return m_objectToken_Operation_isControl;
 }
 
 // End Class ObjectToken
 
 // Begin Class Offer
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getOffer_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getOffer_Class() const
 {
-	return m_offer_EClass;
+	return m_offer_Class;
 }
 
 
-std::shared_ptr<ecore::EReference> FUMLPackageImpl::getOffer_EReference_offeredTokens() const
+std::shared_ptr<ecore::EReference> FUMLPackageImpl::getOffer_Attribute_offeredTokens() const
 {
-	return m_offer_EReference_offeredTokens;
+	return m_offer_Attribute_offeredTokens;
 }
 
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getOffer_EOperation_countOfferedVales() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getOffer_Operation_countOfferedVales() const
 {
-	return m_offer_EOperation_countOfferedVales;
+	return m_offer_Operation_countOfferedVales;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getOffer_EOperation_hasTokens() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getOffer_Operation_hasTokens() const
 {
-	return m_offer_EOperation_hasTokens;
+	return m_offer_Operation_hasTokens;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getOffer_EOperation_removeOfferedValues_EInt() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getOffer_Operation_removeOfferedValues_EInt() const
 {
-	return m_offer_EOperation_removeOfferedValues_EInt;
+	return m_offer_Operation_removeOfferedValues_EInt;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getOffer_EOperation_removeWithdrawnTokens() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getOffer_Operation_removeWithdrawnTokens() const
 {
-	return m_offer_EOperation_removeWithdrawnTokens;
+	return m_offer_Operation_removeWithdrawnTokens;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getOffer_EOperation_retrieveOfferedTokens() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getOffer_Operation_retrieveOfferedTokens() const
 {
-	return m_offer_EOperation_retrieveOfferedTokens;
+	return m_offer_Operation_retrieveOfferedTokens;
 }
 
 // End Class Offer
 
 // Begin Class OpaqueBehaviorExecution
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getOpaqueBehaviorExecution_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getOpaqueBehaviorExecution_Class() const
 {
-	return m_opaqueBehaviorExecution_EClass;
+	return m_opaqueBehaviorExecution_Class;
 }
 
 
 
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getOpaqueBehaviorExecution_EOperation_doBody_ParameterValue_ParameterValue() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getOpaqueBehaviorExecution_Operation_doBody_ParameterValue_ParameterValue() const
 {
-	return m_opaqueBehaviorExecution_EOperation_doBody_ParameterValue_ParameterValue;
+	return m_opaqueBehaviorExecution_Operation_doBody_ParameterValue_ParameterValue;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getOpaqueBehaviorExecution_EOperation_execute() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getOpaqueBehaviorExecution_Operation_execute() const
 {
-	return m_opaqueBehaviorExecution_EOperation_execute;
+	return m_opaqueBehaviorExecution_Operation_execute;
 }
 
 // End Class OpaqueBehaviorExecution
 
 // Begin Class OutputPinActivation
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getOutputPinActivation_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getOutputPinActivation_Class() const
 {
-	return m_outputPinActivation_EClass;
+	return m_outputPinActivation_Class;
 }
 
 
@@ -2262,70 +2262,70 @@ std::shared_ptr<ecore::EClass> FUMLPackageImpl::getOutputPinActivation_EClass() 
 // End Class OutputPinActivation
 
 // Begin Class ParameterValue
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getParameterValue_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getParameterValue_Class() const
 {
-	return m_parameterValue_EClass;
+	return m_parameterValue_Class;
 }
 
 
-std::shared_ptr<ecore::EReference> FUMLPackageImpl::getParameterValue_EReference_parameter() const
+std::shared_ptr<ecore::EReference> FUMLPackageImpl::getParameterValue_Attribute_parameter() const
 {
-	return m_parameterValue_EReference_parameter;
+	return m_parameterValue_Attribute_parameter;
 }
-std::shared_ptr<ecore::EReference> FUMLPackageImpl::getParameterValue_EReference_values() const
+std::shared_ptr<ecore::EReference> FUMLPackageImpl::getParameterValue_Attribute_values() const
 {
-	return m_parameterValue_EReference_values;
+	return m_parameterValue_Attribute_values;
 }
 
 
 // End Class ParameterValue
 
 // Begin Class PinActivation
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getPinActivation_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getPinActivation_Class() const
 {
-	return m_pinActivation_EClass;
+	return m_pinActivation_Class;
 }
 
 
-std::shared_ptr<ecore::EReference> FUMLPackageImpl::getPinActivation_EReference_actionActivation() const
+std::shared_ptr<ecore::EReference> FUMLPackageImpl::getPinActivation_Attribute_actionActivation() const
 {
-	return m_pinActivation_EReference_actionActivation;
+	return m_pinActivation_Attribute_actionActivation;
 }
 
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getPinActivation_EOperation_fire_Token() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getPinActivation_Operation_fire_Token() const
 {
-	return m_pinActivation_EOperation_fire_Token;
+	return m_pinActivation_Operation_fire_Token;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getPinActivation_EOperation_takeOfferedTokens() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getPinActivation_Operation_takeOfferedTokens() const
 {
-	return m_pinActivation_EOperation_takeOfferedTokens;
+	return m_pinActivation_Operation_takeOfferedTokens;
 }
 
 // End Class PinActivation
 
 // Begin Class PrimitiveValue
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getPrimitiveValue_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getPrimitiveValue_Class() const
 {
-	return m_primitiveValue_EClass;
+	return m_primitiveValue_Class;
 }
 
 
-std::shared_ptr<ecore::EReference> FUMLPackageImpl::getPrimitiveValue_EReference_type() const
+std::shared_ptr<ecore::EReference> FUMLPackageImpl::getPrimitiveValue_Attribute_type() const
 {
-	return m_primitiveValue_EReference_type;
+	return m_primitiveValue_Attribute_type;
 }
 
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getPrimitiveValue_EOperation_getTypes() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getPrimitiveValue_Operation_getTypes() const
 {
-	return m_primitiveValue_EOperation_getTypes;
+	return m_primitiveValue_Operation_getTypes;
 }
 
 // End Class PrimitiveValue
 
 // Begin Class ReadExtentActionActivation
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getReadExtentActionActivation_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getReadExtentActionActivation_Class() const
 {
-	return m_readExtentActionActivation_EClass;
+	return m_readExtentActionActivation_Class;
 }
 
 
@@ -2334,24 +2334,24 @@ std::shared_ptr<ecore::EClass> FUMLPackageImpl::getReadExtentActionActivation_EC
 // End Class ReadExtentActionActivation
 
 // Begin Class ReadIsClassifiedObjectActionActivation
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getReadIsClassifiedObjectActionActivation_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getReadIsClassifiedObjectActionActivation_Class() const
 {
-	return m_readIsClassifiedObjectActionActivation_EClass;
+	return m_readIsClassifiedObjectActionActivation_Class;
 }
 
 
 
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getReadIsClassifiedObjectActionActivation_EOperation_checkAllParents_Classifier_Classifier() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getReadIsClassifiedObjectActionActivation_Operation_checkAllParents_Classifier_Classifier() const
 {
-	return m_readIsClassifiedObjectActionActivation_EOperation_checkAllParents_Classifier_Classifier;
+	return m_readIsClassifiedObjectActionActivation_Operation_checkAllParents_Classifier_Classifier;
 }
 
 // End Class ReadIsClassifiedObjectActionActivation
 
 // Begin Class ReadLinkActionActivation
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getReadLinkActionActivation_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getReadLinkActionActivation_Class() const
 {
-	return m_readLinkActionActivation_EClass;
+	return m_readLinkActionActivation_Class;
 }
 
 
@@ -2360,9 +2360,9 @@ std::shared_ptr<ecore::EClass> FUMLPackageImpl::getReadLinkActionActivation_ECla
 // End Class ReadLinkActionActivation
 
 // Begin Class ReadSelfActionActivation
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getReadSelfActionActivation_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getReadSelfActionActivation_Class() const
 {
-	return m_readSelfActionActivation_EClass;
+	return m_readSelfActionActivation_Class;
 }
 
 
@@ -2371,9 +2371,9 @@ std::shared_ptr<ecore::EClass> FUMLPackageImpl::getReadSelfActionActivation_ECla
 // End Class ReadSelfActionActivation
 
 // Begin Class ReadStructuralFeatureActionActivation
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getReadStructuralFeatureActionActivation_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getReadStructuralFeatureActionActivation_Class() const
 {
-	return m_readStructuralFeatureActionActivation_EClass;
+	return m_readStructuralFeatureActionActivation_Class;
 }
 
 
@@ -2382,36 +2382,36 @@ std::shared_ptr<ecore::EClass> FUMLPackageImpl::getReadStructuralFeatureActionAc
 // End Class ReadStructuralFeatureActionActivation
 
 // Begin Class RealValue
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getRealValue_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getRealValue_Class() const
 {
-	return m_realValue_EClass;
+	return m_realValue_Class;
 }
 
-std::shared_ptr<ecore::EAttribute> FUMLPackageImpl::getRealValue_EAttribute_value() const
+std::shared_ptr<ecore::EAttribute> FUMLPackageImpl::getRealValue_Attribute_value() const
 {
-	return m_realValue_EAttribute_value;
+	return m_realValue_Attribute_value;
 }
 
 
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getRealValue_EOperation_equals_Value() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getRealValue_Operation_equals_Value() const
 {
-	return m_realValue_EOperation_equals_Value;
+	return m_realValue_Operation_equals_Value;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getRealValue_EOperation_specify() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getRealValue_Operation_specify() const
 {
-	return m_realValue_EOperation_specify;
+	return m_realValue_Operation_specify;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getRealValue_EOperation_toString() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getRealValue_Operation_toString() const
 {
-	return m_realValue_EOperation_toString;
+	return m_realValue_Operation_toString;
 }
 
 // End Class RealValue
 
 // Begin Class ReclassifyObjectActionActivation
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getReclassifyObjectActionActivation_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getReclassifyObjectActionActivation_Class() const
 {
-	return m_reclassifyObjectActionActivation_EClass;
+	return m_reclassifyObjectActionActivation_Class;
 }
 
 
@@ -2420,102 +2420,102 @@ std::shared_ptr<ecore::EClass> FUMLPackageImpl::getReclassifyObjectActionActivat
 // End Class ReclassifyObjectActionActivation
 
 // Begin Class RedefinitionBasedDispatchStrategy
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getRedefinitionBasedDispatchStrategy_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getRedefinitionBasedDispatchStrategy_Class() const
 {
-	return m_redefinitionBasedDispatchStrategy_EClass;
+	return m_redefinitionBasedDispatchStrategy_Class;
 }
 
 
 
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getRedefinitionBasedDispatchStrategy_EOperation_operationsMatch_Operation_Operation() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getRedefinitionBasedDispatchStrategy_Operation_operationsMatch_Operation_Operation() const
 {
-	return m_redefinitionBasedDispatchStrategy_EOperation_operationsMatch_Operation_Operation;
+	return m_redefinitionBasedDispatchStrategy_Operation_operationsMatch_Operation_Operation;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getRedefinitionBasedDispatchStrategy_EOperation_retrieveMethod_Object_Operation() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getRedefinitionBasedDispatchStrategy_Operation_retrieveMethod_Object_Operation() const
 {
-	return m_redefinitionBasedDispatchStrategy_EOperation_retrieveMethod_Object_Operation;
+	return m_redefinitionBasedDispatchStrategy_Operation_retrieveMethod_Object_Operation;
 }
 
 // End Class RedefinitionBasedDispatchStrategy
 
 // Begin Class ReduceActionActivation
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getReduceActionActivation_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getReduceActionActivation_Class() const
 {
-	return m_reduceActionActivation_EClass;
+	return m_reduceActionActivation_Class;
 }
 
 
-std::shared_ptr<ecore::EReference> FUMLPackageImpl::getReduceActionActivation_EReference_currentExecution() const
+std::shared_ptr<ecore::EReference> FUMLPackageImpl::getReduceActionActivation_Attribute_currentExecution() const
 {
-	return m_reduceActionActivation_EReference_currentExecution;
+	return m_reduceActionActivation_Attribute_currentExecution;
 }
 
 
 // End Class ReduceActionActivation
 
 // Begin Class Reference
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getReference_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getReference_Class() const
 {
-	return m_reference_EClass;
+	return m_reference_Class;
 }
 
 
-std::shared_ptr<ecore::EReference> FUMLPackageImpl::getReference_EReference_referent() const
+std::shared_ptr<ecore::EReference> FUMLPackageImpl::getReference_Attribute_referent() const
 {
-	return m_reference_EReference_referent;
+	return m_reference_Attribute_referent;
 }
 
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getReference_EOperation_assignFeatureValue_StructuralFeature_EInt() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getReference_Operation_assignFeatureValue_StructuralFeature_EInt() const
 {
-	return m_reference_EOperation_assignFeatureValue_StructuralFeature_EInt;
+	return m_reference_Operation_assignFeatureValue_StructuralFeature_EInt;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getReference_EOperation_destroy() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getReference_Operation_destroy() const
 {
-	return m_reference_EOperation_destroy;
+	return m_reference_Operation_destroy;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getReference_EOperation_dispatch_Operation() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getReference_Operation_dispatch_Operation() const
 {
-	return m_reference_EOperation_dispatch_Operation;
+	return m_reference_Operation_dispatch_Operation;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getReference_EOperation_equals_Value() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getReference_Operation_equals_Value() const
 {
-	return m_reference_EOperation_equals_Value;
+	return m_reference_Operation_equals_Value;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getReference_EOperation_getTypes() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getReference_Operation_getTypes() const
 {
-	return m_reference_EOperation_getTypes;
+	return m_reference_Operation_getTypes;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getReference_EOperation_new_() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getReference_Operation_new_() const
 {
-	return m_reference_EOperation_new_;
+	return m_reference_Operation_new_;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getReference_EOperation_retrieveFeatureValue_StructuralFeature() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getReference_Operation_retrieveFeatureValue_StructuralFeature() const
 {
-	return m_reference_EOperation_retrieveFeatureValue_StructuralFeature;
+	return m_reference_Operation_retrieveFeatureValue_StructuralFeature;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getReference_EOperation_retrieveFeatureValues() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getReference_Operation_retrieveFeatureValues() const
 {
-	return m_reference_EOperation_retrieveFeatureValues;
+	return m_reference_Operation_retrieveFeatureValues;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getReference_EOperation_send_SignalInstance() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getReference_Operation_send_SignalInstance() const
 {
-	return m_reference_EOperation_send_SignalInstance;
+	return m_reference_Operation_send_SignalInstance;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getReference_EOperation_startBehavior_Class_ParameterValue() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getReference_Operation_startBehavior_Class_ParameterValue() const
 {
-	return m_reference_EOperation_startBehavior_Class_ParameterValue;
+	return m_reference_Operation_startBehavior_Class_ParameterValue;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getReference_EOperation_toString() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getReference_Operation_toString() const
 {
-	return m_reference_EOperation_toString;
+	return m_reference_Operation_toString;
 }
 
 // End Class Reference
 
 // Begin Class RemoveStructuralFeatureValueActivation
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getRemoveStructuralFeatureValueActivation_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getRemoveStructuralFeatureValueActivation_Class() const
 {
-	return m_removeStructuralFeatureValueActivation_EClass;
+	return m_removeStructuralFeatureValueActivation_Class;
 }
 
 
@@ -2524,255 +2524,255 @@ std::shared_ptr<ecore::EClass> FUMLPackageImpl::getRemoveStructuralFeatureValueA
 // End Class RemoveStructuralFeatureValueActivation
 
 // Begin Class SemanticStrategy
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getSemanticStrategy_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getSemanticStrategy_Class() const
 {
-	return m_semanticStrategy_EClass;
+	return m_semanticStrategy_Class;
 }
 
 
 
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getSemanticStrategy_EOperation_retrieveName() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getSemanticStrategy_Operation_retrieveName() const
 {
-	return m_semanticStrategy_EOperation_retrieveName;
+	return m_semanticStrategy_Operation_retrieveName;
 }
 
 // End Class SemanticStrategy
 
 // Begin Class SemanticVisitor
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getSemanticVisitor_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getSemanticVisitor_Class() const
 {
-	return m_semanticVisitor_EClass;
+	return m_semanticVisitor_Class;
 }
 
 
 
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getSemanticVisitor_EOperation__beginIsolation() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getSemanticVisitor_Operation__beginIsolation() const
 {
-	return m_semanticVisitor_EOperation__beginIsolation;
+	return m_semanticVisitor_Operation__beginIsolation;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getSemanticVisitor_EOperation__endIsolation() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getSemanticVisitor_Operation__endIsolation() const
 {
-	return m_semanticVisitor_EOperation__endIsolation;
+	return m_semanticVisitor_Operation__endIsolation;
 }
 
 // End Class SemanticVisitor
 
 // Begin Class SendSignalActionActivation
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getSendSignalActionActivation_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getSendSignalActionActivation_Class() const
 {
-	return m_sendSignalActionActivation_EClass;
+	return m_sendSignalActionActivation_Class;
 }
 
 
 
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getSendSignalActionActivation_EOperation_doAction() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getSendSignalActionActivation_Operation_doAction() const
 {
-	return m_sendSignalActionActivation_EOperation_doAction;
+	return m_sendSignalActionActivation_Operation_doAction;
 }
 
 // End Class SendSignalActionActivation
 
 // Begin Class SignalInstance
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getSignalInstance_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getSignalInstance_Class() const
 {
-	return m_signalInstance_EClass;
+	return m_signalInstance_Class;
 }
 
 
-std::shared_ptr<ecore::EReference> FUMLPackageImpl::getSignalInstance_EReference_type() const
+std::shared_ptr<ecore::EReference> FUMLPackageImpl::getSignalInstance_Attribute_type() const
 {
-	return m_signalInstance_EReference_type;
+	return m_signalInstance_Attribute_type;
 }
 
 
 // End Class SignalInstance
 
 // Begin Class StartClassifierBehaviorActionActivation
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getStartClassifierBehaviorActionActivation_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getStartClassifierBehaviorActionActivation_Class() const
 {
-	return m_startClassifierBehaviorActionActivation_EClass;
+	return m_startClassifierBehaviorActionActivation_Class;
 }
 
 
 
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getStartClassifierBehaviorActionActivation_EOperation_doAction() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getStartClassifierBehaviorActionActivation_Operation_doAction() const
 {
-	return m_startClassifierBehaviorActionActivation_EOperation_doAction;
+	return m_startClassifierBehaviorActionActivation_Operation_doAction;
 }
 
 // End Class StartClassifierBehaviorActionActivation
 
 // Begin Class StartObjectBehaviorActionActivation
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getStartObjectBehaviorActionActivation_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getStartObjectBehaviorActionActivation_Class() const
 {
-	return m_startObjectBehaviorActionActivation_EClass;
+	return m_startObjectBehaviorActionActivation_Class;
 }
 
 
 
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getStartObjectBehaviorActionActivation_EOperation_doAction() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getStartObjectBehaviorActionActivation_Operation_doAction() const
 {
-	return m_startObjectBehaviorActionActivation_EOperation_doAction;
+	return m_startObjectBehaviorActionActivation_Operation_doAction;
 }
 
 // End Class StartObjectBehaviorActionActivation
 
 // Begin Class StringValue
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getStringValue_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getStringValue_Class() const
 {
-	return m_stringValue_EClass;
+	return m_stringValue_Class;
 }
 
-std::shared_ptr<ecore::EAttribute> FUMLPackageImpl::getStringValue_EAttribute_value() const
+std::shared_ptr<ecore::EAttribute> FUMLPackageImpl::getStringValue_Attribute_value() const
 {
-	return m_stringValue_EAttribute_value;
+	return m_stringValue_Attribute_value;
 }
 
 
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getStringValue_EOperation_equals_Value() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getStringValue_Operation_equals_Value() const
 {
-	return m_stringValue_EOperation_equals_Value;
+	return m_stringValue_Operation_equals_Value;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getStringValue_EOperation_specify() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getStringValue_Operation_specify() const
 {
-	return m_stringValue_EOperation_specify;
+	return m_stringValue_Operation_specify;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getStringValue_EOperation_toString() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getStringValue_Operation_toString() const
 {
-	return m_stringValue_EOperation_toString;
+	return m_stringValue_Operation_toString;
 }
 
 // End Class StringValue
 
 // Begin Class StructuralFeatureActionActivation
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getStructuralFeatureActionActivation_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getStructuralFeatureActionActivation_Class() const
 {
-	return m_structuralFeatureActionActivation_EClass;
+	return m_structuralFeatureActionActivation_Class;
 }
 
 
 
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getStructuralFeatureActionActivation_EOperation_getAssociation_StructuralFeature() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getStructuralFeatureActionActivation_Operation_getAssociation_StructuralFeature() const
 {
-	return m_structuralFeatureActionActivation_EOperation_getAssociation_StructuralFeature;
+	return m_structuralFeatureActionActivation_Operation_getAssociation_StructuralFeature;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getStructuralFeatureActionActivation_EOperation_getMatchingLinks_Association_Value() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getStructuralFeatureActionActivation_Operation_getMatchingLinks_Association_Value() const
 {
-	return m_structuralFeatureActionActivation_EOperation_getMatchingLinks_Association_Value;
+	return m_structuralFeatureActionActivation_Operation_getMatchingLinks_Association_Value;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getStructuralFeatureActionActivation_EOperation_getOppositeEnd_Association_StructuralFeature() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getStructuralFeatureActionActivation_Operation_getOppositeEnd_Association_StructuralFeature() const
 {
-	return m_structuralFeatureActionActivation_EOperation_getOppositeEnd_Association_StructuralFeature;
+	return m_structuralFeatureActionActivation_Operation_getOppositeEnd_Association_StructuralFeature;
 }
 
 // End Class StructuralFeatureActionActivation
 
 // Begin Class StructuredActivityNodeActivation
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getStructuredActivityNodeActivation_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getStructuredActivityNodeActivation_Class() const
 {
-	return m_structuredActivityNodeActivation_EClass;
+	return m_structuredActivityNodeActivation_Class;
 }
 
 
-std::shared_ptr<ecore::EReference> FUMLPackageImpl::getStructuredActivityNodeActivation_EReference_activationGroup() const
+std::shared_ptr<ecore::EReference> FUMLPackageImpl::getStructuredActivityNodeActivation_Attribute_activationGroup() const
 {
-	return m_structuredActivityNodeActivation_EReference_activationGroup;
+	return m_structuredActivityNodeActivation_Attribute_activationGroup;
 }
 
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getStructuredActivityNodeActivation_EOperation_completeAction() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getStructuredActivityNodeActivation_Operation_completeAction() const
 {
-	return m_structuredActivityNodeActivation_EOperation_completeAction;
+	return m_structuredActivityNodeActivation_Operation_completeAction;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getStructuredActivityNodeActivation_EOperation_createEdgeInstances() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getStructuredActivityNodeActivation_Operation_createEdgeInstances() const
 {
-	return m_structuredActivityNodeActivation_EOperation_createEdgeInstances;
+	return m_structuredActivityNodeActivation_Operation_createEdgeInstances;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getStructuredActivityNodeActivation_EOperation_createNodeActivations() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getStructuredActivityNodeActivation_Operation_createNodeActivations() const
 {
-	return m_structuredActivityNodeActivation_EOperation_createNodeActivations;
+	return m_structuredActivityNodeActivation_Operation_createNodeActivations;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getStructuredActivityNodeActivation_EOperation_doAction() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getStructuredActivityNodeActivation_Operation_doAction() const
 {
-	return m_structuredActivityNodeActivation_EOperation_doAction;
+	return m_structuredActivityNodeActivation_Operation_doAction;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getStructuredActivityNodeActivation_EOperation_doStructuredActivity() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getStructuredActivityNodeActivation_Operation_doStructuredActivity() const
 {
-	return m_structuredActivityNodeActivation_EOperation_doStructuredActivity;
+	return m_structuredActivityNodeActivation_Operation_doStructuredActivity;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getStructuredActivityNodeActivation_EOperation_getNodeActivation_ActivityNode() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getStructuredActivityNodeActivation_Operation_getNodeActivation_ActivityNode() const
 {
-	return m_structuredActivityNodeActivation_EOperation_getNodeActivation_ActivityNode;
+	return m_structuredActivityNodeActivation_Operation_getNodeActivation_ActivityNode;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getStructuredActivityNodeActivation_EOperation_getPinValues_OutputPin() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getStructuredActivityNodeActivation_Operation_getPinValues_OutputPin() const
 {
-	return m_structuredActivityNodeActivation_EOperation_getPinValues_OutputPin;
+	return m_structuredActivityNodeActivation_Operation_getPinValues_OutputPin;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getStructuredActivityNodeActivation_EOperation_isSourceFor_ActivityEdgeInstance() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getStructuredActivityNodeActivation_Operation_isSourceFor_ActivityEdgeInstance() const
 {
-	return m_structuredActivityNodeActivation_EOperation_isSourceFor_ActivityEdgeInstance;
+	return m_structuredActivityNodeActivation_Operation_isSourceFor_ActivityEdgeInstance;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getStructuredActivityNodeActivation_EOperation_isSuspended() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getStructuredActivityNodeActivation_Operation_isSuspended() const
 {
-	return m_structuredActivityNodeActivation_EOperation_isSuspended;
+	return m_structuredActivityNodeActivation_Operation_isSuspended;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getStructuredActivityNodeActivation_EOperation_makeActivityNodeList_ExecutableNode() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getStructuredActivityNodeActivation_Operation_makeActivityNodeList_ExecutableNode() const
 {
-	return m_structuredActivityNodeActivation_EOperation_makeActivityNodeList_ExecutableNode;
+	return m_structuredActivityNodeActivation_Operation_makeActivityNodeList_ExecutableNode;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getStructuredActivityNodeActivation_EOperation_putPinValues_OutputPin_Value() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getStructuredActivityNodeActivation_Operation_putPinValues_OutputPin_Value() const
 {
-	return m_structuredActivityNodeActivation_EOperation_putPinValues_OutputPin_Value;
+	return m_structuredActivityNodeActivation_Operation_putPinValues_OutputPin_Value;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getStructuredActivityNodeActivation_EOperation_resume() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getStructuredActivityNodeActivation_Operation_resume() const
 {
-	return m_structuredActivityNodeActivation_EOperation_resume;
+	return m_structuredActivityNodeActivation_Operation_resume;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getStructuredActivityNodeActivation_EOperation_terminate() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getStructuredActivityNodeActivation_Operation_terminate() const
 {
-	return m_structuredActivityNodeActivation_EOperation_terminate;
+	return m_structuredActivityNodeActivation_Operation_terminate;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getStructuredActivityNodeActivation_EOperation_terminateAll() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getStructuredActivityNodeActivation_Operation_terminateAll() const
 {
-	return m_structuredActivityNodeActivation_EOperation_terminateAll;
+	return m_structuredActivityNodeActivation_Operation_terminateAll;
 }
 
 // End Class StructuredActivityNodeActivation
 
 // Begin Class StructuredValue
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getStructuredValue_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getStructuredValue_Class() const
 {
-	return m_structuredValue_EClass;
+	return m_structuredValue_Class;
 }
 
 
 
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getStructuredValue_EOperation_assignFeatureValue_StructuralFeature_EInt() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getStructuredValue_Operation_assignFeatureValue_StructuralFeature_EInt() const
 {
-	return m_structuredValue_EOperation_assignFeatureValue_StructuralFeature_EInt;
+	return m_structuredValue_Operation_assignFeatureValue_StructuralFeature_EInt;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getStructuredValue_EOperation_createFeatureValues() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getStructuredValue_Operation_createFeatureValues() const
 {
-	return m_structuredValue_EOperation_createFeatureValues;
+	return m_structuredValue_Operation_createFeatureValues;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getStructuredValue_EOperation_retrieveFeatureValue_StructuralFeature() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getStructuredValue_Operation_retrieveFeatureValue_StructuralFeature() const
 {
-	return m_structuredValue_EOperation_retrieveFeatureValue_StructuralFeature;
+	return m_structuredValue_Operation_retrieveFeatureValue_StructuralFeature;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getStructuredValue_EOperation_retrieveFeatureValues() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getStructuredValue_Operation_retrieveFeatureValues() const
 {
-	return m_structuredValue_EOperation_retrieveFeatureValues;
+	return m_structuredValue_Operation_retrieveFeatureValues;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getStructuredValue_EOperation_specify() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getStructuredValue_Operation_specify() const
 {
-	return m_structuredValue_EOperation_specify;
+	return m_structuredValue_Operation_specify;
 }
 
 // End Class StructuredValue
 
 // Begin Class TestIdentityActionActivation
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getTestIdentityActionActivation_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getTestIdentityActionActivation_Class() const
 {
-	return m_testIdentityActionActivation_EClass;
+	return m_testIdentityActionActivation_Class;
 }
 
 
@@ -2781,125 +2781,125 @@ std::shared_ptr<ecore::EClass> FUMLPackageImpl::getTestIdentityActionActivation_
 // End Class TestIdentityActionActivation
 
 // Begin Class Token
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getToken_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getToken_Class() const
 {
-	return m_token_EClass;
+	return m_token_Class;
 }
 
-std::shared_ptr<ecore::EAttribute> FUMLPackageImpl::getToken_EAttribute_withdrawn() const
+std::shared_ptr<ecore::EAttribute> FUMLPackageImpl::getToken_Attribute_withdrawn() const
 {
-	return m_token_EAttribute_withdrawn;
+	return m_token_Attribute_withdrawn;
 }
 
-std::shared_ptr<ecore::EReference> FUMLPackageImpl::getToken_EReference_holder() const
+std::shared_ptr<ecore::EReference> FUMLPackageImpl::getToken_Attribute_holder() const
 {
-	return m_token_EReference_holder;
+	return m_token_Attribute_holder;
 }
 
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getToken_EOperation_equals_Token() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getToken_Operation_equals_Token() const
 {
-	return m_token_EOperation_equals_Token;
+	return m_token_Operation_equals_Token;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getToken_EOperation_getValue() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getToken_Operation_getValue() const
 {
-	return m_token_EOperation_getValue;
+	return m_token_Operation_getValue;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getToken_EOperation_isControl() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getToken_Operation_isControl() const
 {
-	return m_token_EOperation_isControl;
+	return m_token_Operation_isControl;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getToken_EOperation_transfer_ActivityNodeActivation() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getToken_Operation_transfer_ActivityNodeActivation() const
 {
-	return m_token_EOperation_transfer_ActivityNodeActivation;
+	return m_token_Operation_transfer_ActivityNodeActivation;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getToken_EOperation_withdraw() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getToken_Operation_withdraw() const
 {
-	return m_token_EOperation_withdraw;
+	return m_token_Operation_withdraw;
 }
 
 // End Class Token
 
 // Begin Class TokenSet
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getTokenSet_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getTokenSet_Class() const
 {
-	return m_tokenSet_EClass;
+	return m_tokenSet_Class;
 }
 
 
-std::shared_ptr<ecore::EReference> FUMLPackageImpl::getTokenSet_EReference_tokens() const
+std::shared_ptr<ecore::EReference> FUMLPackageImpl::getTokenSet_Attribute_tokens() const
 {
-	return m_tokenSet_EReference_tokens;
+	return m_tokenSet_Attribute_tokens;
 }
 
 
 // End Class TokenSet
 
 // Begin Class UnlimitedNaturalValue
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getUnlimitedNaturalValue_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getUnlimitedNaturalValue_Class() const
 {
-	return m_unlimitedNaturalValue_EClass;
+	return m_unlimitedNaturalValue_Class;
 }
 
-std::shared_ptr<ecore::EAttribute> FUMLPackageImpl::getUnlimitedNaturalValue_EAttribute_value() const
+std::shared_ptr<ecore::EAttribute> FUMLPackageImpl::getUnlimitedNaturalValue_Attribute_value() const
 {
-	return m_unlimitedNaturalValue_EAttribute_value;
+	return m_unlimitedNaturalValue_Attribute_value;
 }
 
 
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getUnlimitedNaturalValue_EOperation_equals_Value() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getUnlimitedNaturalValue_Operation_equals_Value() const
 {
-	return m_unlimitedNaturalValue_EOperation_equals_Value;
+	return m_unlimitedNaturalValue_Operation_equals_Value;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getUnlimitedNaturalValue_EOperation_specify() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getUnlimitedNaturalValue_Operation_specify() const
 {
-	return m_unlimitedNaturalValue_EOperation_specify;
+	return m_unlimitedNaturalValue_Operation_specify;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getUnlimitedNaturalValue_EOperation_toString() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getUnlimitedNaturalValue_Operation_toString() const
 {
-	return m_unlimitedNaturalValue_EOperation_toString;
+	return m_unlimitedNaturalValue_Operation_toString;
 }
 
 // End Class UnlimitedNaturalValue
 
 // Begin Class Value
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getValue_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getValue_Class() const
 {
-	return m_value_EClass;
+	return m_value_Class;
 }
 
 
 
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getValue_EOperation_equals_Value() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getValue_Operation_equals_Value() const
 {
-	return m_value_EOperation_equals_Value;
+	return m_value_Operation_equals_Value;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getValue_EOperation_getTypes() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getValue_Operation_getTypes() const
 {
-	return m_value_EOperation_getTypes;
+	return m_value_Operation_getTypes;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getValue_EOperation_hasTypes_Classifier() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getValue_Operation_hasTypes_Classifier() const
 {
-	return m_value_EOperation_hasTypes_Classifier;
+	return m_value_Operation_hasTypes_Classifier;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getValue_EOperation_objectId() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getValue_Operation_objectId() const
 {
-	return m_value_EOperation_objectId;
+	return m_value_Operation_objectId;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getValue_EOperation_specify() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getValue_Operation_specify() const
 {
-	return m_value_EOperation_specify;
+	return m_value_Operation_specify;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getValue_EOperation_toString() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getValue_Operation_toString() const
 {
-	return m_value_EOperation_toString;
+	return m_value_Operation_toString;
 }
 
 // End Class Value
 
 // Begin Class ValueSpecificActionActivation
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getValueSpecificActionActivation_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getValueSpecificActionActivation_Class() const
 {
-	return m_valueSpecificActionActivation_EClass;
+	return m_valueSpecificActionActivation_Class;
 }
 
 
@@ -2908,24 +2908,24 @@ std::shared_ptr<ecore::EClass> FUMLPackageImpl::getValueSpecificActionActivation
 // End Class ValueSpecificActionActivation
 
 // Begin Class Values
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getValues_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getValues_Class() const
 {
-	return m_values_EClass;
+	return m_values_Class;
 }
 
 
-std::shared_ptr<ecore::EReference> FUMLPackageImpl::getValues_EReference_values() const
+std::shared_ptr<ecore::EReference> FUMLPackageImpl::getValues_Attribute_values() const
 {
-	return m_values_EReference_values;
+	return m_values_Attribute_values;
 }
 
 
 // End Class Values
 
 // Begin Class WriteLinkActionActivation
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getWriteLinkActionActivation_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getWriteLinkActionActivation_Class() const
 {
-	return m_writeLinkActionActivation_EClass;
+	return m_writeLinkActionActivation_Class;
 }
 
 
@@ -2934,16 +2934,16 @@ std::shared_ptr<ecore::EClass> FUMLPackageImpl::getWriteLinkActionActivation_ECl
 // End Class WriteLinkActionActivation
 
 // Begin Class WriteStructuralFeatureActionActivation
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getWriteStructuralFeatureActionActivation_EClass() const
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getWriteStructuralFeatureActionActivation_Class() const
 {
-	return m_writeStructuralFeatureActionActivation_EClass;
+	return m_writeStructuralFeatureActionActivation_Class;
 }
 
 
 
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getWriteStructuralFeatureActionActivation_EOperation_position_Value_EInt() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getWriteStructuralFeatureActionActivation_Operation_position_Value_EInt() const
 {
-	return m_writeStructuralFeatureActionActivation_EOperation_position_Value_EInt;
+	return m_writeStructuralFeatureActionActivation_Operation_position_Value_EInt;
 }
 
 // End Class WriteStructuralFeatureActionActivation

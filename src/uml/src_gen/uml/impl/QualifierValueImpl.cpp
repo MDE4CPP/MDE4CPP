@@ -132,7 +132,7 @@ std::shared_ptr<ecore::EObject>  QualifierValueImpl::copy() const
 
 std::shared_ptr<ecore::EClass> QualifierValueImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getQualifierValue_EClass();
+	return UmlPackageImpl::eInstance()->getQualifierValue_Class();
 }
 
 //*********************************
@@ -217,9 +217,9 @@ Any QualifierValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::QUALIFIERVALUE_EREFERENCE_QUALIFIER:
+		case UmlPackage::QUALIFIERVALUE_ATTRIBUTE_QUALIFIER:
 			return eAny(getQualifier()); //1913
-		case UmlPackage::QUALIFIERVALUE_EREFERENCE_VALUE:
+		case UmlPackage::QUALIFIERVALUE_ATTRIBUTE_VALUE:
 			return eAny(getValue()); //1914
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
@@ -228,9 +228,9 @@ bool QualifierValueImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::QUALIFIERVALUE_EREFERENCE_QUALIFIER:
+		case UmlPackage::QUALIFIERVALUE_ATTRIBUTE_QUALIFIER:
 			return getQualifier() != nullptr; //1913
-		case UmlPackage::QUALIFIERVALUE_EREFERENCE_VALUE:
+		case UmlPackage::QUALIFIERVALUE_ATTRIBUTE_VALUE:
 			return getValue() != nullptr; //1914
 	}
 	return ElementImpl::internalEIsSet(featureID);
@@ -239,14 +239,14 @@ bool QualifierValueImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::QUALIFIERVALUE_EREFERENCE_QUALIFIER:
+		case UmlPackage::QUALIFIERVALUE_ATTRIBUTE_QUALIFIER:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Property> _qualifier = newValue->get<std::shared_ptr<uml::Property>>();
 			setQualifier(_qualifier); //1913
 			return true;
 		}
-		case UmlPackage::QUALIFIERVALUE_EREFERENCE_VALUE:
+		case UmlPackage::QUALIFIERVALUE_ATTRIBUTE_VALUE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::InputPin> _value = newValue->get<std::shared_ptr<uml::InputPin>>();
@@ -321,7 +321,7 @@ void QualifierValueImpl::resolveReferences(const int featureID, std::list<std::s
 {
 	switch(featureID)
 	{
-		case UmlPackage::QUALIFIERVALUE_EREFERENCE_QUALIFIER:
+		case UmlPackage::QUALIFIERVALUE_ATTRIBUTE_QUALIFIER:
 		{
 			if (references.size() == 1)
 			{
@@ -333,7 +333,7 @@ void QualifierValueImpl::resolveReferences(const int featureID, std::list<std::s
 			return;
 		}
 
-		case UmlPackage::QUALIFIERVALUE_EREFERENCE_VALUE:
+		case UmlPackage::QUALIFIERVALUE_ATTRIBUTE_VALUE:
 		{
 			if (references.size() == 1)
 			{

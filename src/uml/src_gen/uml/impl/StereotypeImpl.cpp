@@ -187,11 +187,11 @@ StereotypeImpl::~StereotypeImpl()
 			{
 				switch(reference_id)
 				{	
-				case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
+				case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
 					m_owningPackage = par_Package;
 					m_namespace = par_Package;
 					 return;
-				case UmlPackage::TYPE_EREFERENCE_PACKAGE:
+				case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
 					m_package = par_Package;
 					m_namespace = par_Package;
 					 return;
@@ -502,7 +502,7 @@ std::shared_ptr<ecore::EObject>  StereotypeImpl::copy() const
 
 std::shared_ptr<ecore::EClass> StereotypeImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getStereotype_EClass();
+	return UmlPackageImpl::eInstance()->getStereotype_Class();
 }
 
 //*********************************
@@ -713,9 +713,9 @@ Any StereotypeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::STEREOTYPE_EREFERENCE_ICON:
+		case UmlPackage::STEREOTYPE_ATTRIBUTE_ICON:
 			return eAny(getIcon()); //22352
-		case UmlPackage::STEREOTYPE_EREFERENCE_PROFILE:
+		case UmlPackage::STEREOTYPE_ATTRIBUTE_PROFILE:
 			return eAny(getProfile()); //22353
 	}
 	return ClassImpl::eGet(featureID, resolve, coreType);
@@ -724,9 +724,9 @@ bool StereotypeImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::STEREOTYPE_EREFERENCE_ICON:
+		case UmlPackage::STEREOTYPE_ATTRIBUTE_ICON:
 			return getIcon() != nullptr; //22352
-		case UmlPackage::STEREOTYPE_EREFERENCE_PROFILE:
+		case UmlPackage::STEREOTYPE_ATTRIBUTE_PROFILE:
 			return getProfile() != nullptr; //22353
 	}
 	return ClassImpl::internalEIsSet(featureID);
@@ -853,7 +853,7 @@ void StereotypeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 		// Save 'icon'
 		for (std::shared_ptr<uml::Image> icon : *this->getIcon()) 
 		{
-			saveHandler->addReference(icon, "icon", icon->eClass() != package->getImage_EClass());
+			saveHandler->addReference(icon, "icon", icon->eClass() != package->getImage_Class());
 		}
 	
 

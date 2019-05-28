@@ -155,7 +155,7 @@ std::shared_ptr<ecore::EObject>  ConnectableElementTemplateParameterImpl::copy()
 
 std::shared_ptr<ecore::EClass> ConnectableElementTemplateParameterImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getConnectableElementTemplateParameter_EClass();
+	return UmlPackageImpl::eInstance()->getConnectableElementTemplateParameter_Class();
 }
 
 //*********************************

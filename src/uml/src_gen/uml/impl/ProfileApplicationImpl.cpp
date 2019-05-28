@@ -161,7 +161,7 @@ std::shared_ptr<ecore::EObject>  ProfileApplicationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ProfileApplicationImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getProfileApplication_EClass();
+	return UmlPackageImpl::eInstance()->getProfileApplication_Class();
 }
 
 //*********************************
@@ -270,11 +270,11 @@ Any ProfileApplicationImpl::eGet(int featureID, bool resolve, bool coreType) con
 {
 	switch(featureID)
 	{
-		case UmlPackage::PROFILEAPPLICATION_EREFERENCE_APPLIEDPROFILE:
+		case UmlPackage::PROFILEAPPLICATION_ATTRIBUTE_APPLIEDPROFILE:
 			return eAny(getAppliedProfile()); //1846
-		case UmlPackage::PROFILEAPPLICATION_EREFERENCE_APPLYINGPACKAGE:
+		case UmlPackage::PROFILEAPPLICATION_ATTRIBUTE_APPLYINGPACKAGE:
 			return eAny(getApplyingPackage()); //1848
-		case UmlPackage::PROFILEAPPLICATION_EATTRIBUTE_ISSTRICT:
+		case UmlPackage::PROFILEAPPLICATION_ATTRIBUTE_ISSTRICT:
 			return eAny(getIsStrict()); //1847
 	}
 	return DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
@@ -283,11 +283,11 @@ bool ProfileApplicationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::PROFILEAPPLICATION_EREFERENCE_APPLIEDPROFILE:
+		case UmlPackage::PROFILEAPPLICATION_ATTRIBUTE_APPLIEDPROFILE:
 			return getAppliedProfile() != nullptr; //1846
-		case UmlPackage::PROFILEAPPLICATION_EREFERENCE_APPLYINGPACKAGE:
+		case UmlPackage::PROFILEAPPLICATION_ATTRIBUTE_APPLYINGPACKAGE:
 			return getApplyingPackage().lock() != nullptr; //1848
-		case UmlPackage::PROFILEAPPLICATION_EATTRIBUTE_ISSTRICT:
+		case UmlPackage::PROFILEAPPLICATION_ATTRIBUTE_ISSTRICT:
 			return getIsStrict() != false; //1847
 	}
 	return DirectedRelationshipImpl::internalEIsSet(featureID);
@@ -296,21 +296,21 @@ bool ProfileApplicationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::PROFILEAPPLICATION_EREFERENCE_APPLIEDPROFILE:
+		case UmlPackage::PROFILEAPPLICATION_ATTRIBUTE_APPLIEDPROFILE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Profile> _appliedProfile = newValue->get<std::shared_ptr<uml::Profile>>();
 			setAppliedProfile(_appliedProfile); //1846
 			return true;
 		}
-		case UmlPackage::PROFILEAPPLICATION_EREFERENCE_APPLYINGPACKAGE:
+		case UmlPackage::PROFILEAPPLICATION_ATTRIBUTE_APPLYINGPACKAGE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Package> _applyingPackage = newValue->get<std::shared_ptr<uml::Package>>();
 			setApplyingPackage(_applyingPackage); //1848
 			return true;
 		}
-		case UmlPackage::PROFILEAPPLICATION_EATTRIBUTE_ISSTRICT:
+		case UmlPackage::PROFILEAPPLICATION_ATTRIBUTE_ISSTRICT:
 		{
 			// BOOST CAST
 			bool _isStrict = newValue->get<bool>();
@@ -387,7 +387,7 @@ void ProfileApplicationImpl::resolveReferences(const int featureID, std::list<st
 {
 	switch(featureID)
 	{
-		case UmlPackage::PROFILEAPPLICATION_EREFERENCE_APPLIEDPROFILE:
+		case UmlPackage::PROFILEAPPLICATION_ATTRIBUTE_APPLIEDPROFILE:
 		{
 			if (references.size() == 1)
 			{
@@ -399,7 +399,7 @@ void ProfileApplicationImpl::resolveReferences(const int featureID, std::list<st
 			return;
 		}
 
-		case UmlPackage::PROFILEAPPLICATION_EREFERENCE_APPLYINGPACKAGE:
+		case UmlPackage::PROFILEAPPLICATION_ATTRIBUTE_APPLYINGPACKAGE:
 		{
 			if (references.size() == 1)
 			{
@@ -442,7 +442,7 @@ void ProfileApplicationImpl::saveContent(std::shared_ptr<persistence::interfaces
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getProfileApplication_EAttribute_isStrict()) )
+		if ( this->eIsSet(package->getProfileApplication_Attribute_isStrict()) )
 		{
 			saveHandler->addAttribute("isStrict", this->getIsStrict());
 		}

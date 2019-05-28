@@ -202,7 +202,7 @@ std::shared_ptr<ecore::EObject>  TimeEventImpl::copy() const
 
 std::shared_ptr<ecore::EClass> TimeEventImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getTimeEvent_EClass();
+	return UmlPackageImpl::eInstance()->getTimeEvent_Class();
 }
 
 //*********************************
@@ -297,9 +297,9 @@ Any TimeEventImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::TIMEEVENT_EATTRIBUTE_ISRELATIVE:
+		case UmlPackage::TIMEEVENT_ATTRIBUTE_ISRELATIVE:
 			return eAny(getIsRelative()); //23712
-		case UmlPackage::TIMEEVENT_EREFERENCE_WHEN:
+		case UmlPackage::TIMEEVENT_ATTRIBUTE_WHEN:
 			return eAny(getWhen()); //23713
 	}
 	return EventImpl::eGet(featureID, resolve, coreType);
@@ -308,9 +308,9 @@ bool TimeEventImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::TIMEEVENT_EATTRIBUTE_ISRELATIVE:
+		case UmlPackage::TIMEEVENT_ATTRIBUTE_ISRELATIVE:
 			return getIsRelative() != false; //23712
-		case UmlPackage::TIMEEVENT_EREFERENCE_WHEN:
+		case UmlPackage::TIMEEVENT_ATTRIBUTE_WHEN:
 			return getWhen() != nullptr; //23713
 	}
 	return EventImpl::internalEIsSet(featureID);
@@ -319,14 +319,14 @@ bool TimeEventImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::TIMEEVENT_EATTRIBUTE_ISRELATIVE:
+		case UmlPackage::TIMEEVENT_ATTRIBUTE_ISRELATIVE:
 		{
 			// BOOST CAST
 			bool _isRelative = newValue->get<bool>();
 			setIsRelative(_isRelative); //23712
 			return true;
 		}
-		case UmlPackage::TIMEEVENT_EREFERENCE_WHEN:
+		case UmlPackage::TIMEEVENT_ATTRIBUTE_WHEN:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::TimeExpression> _when = newValue->get<std::shared_ptr<uml::TimeExpression>>();
@@ -456,12 +456,12 @@ void TimeEventImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 		std::shared_ptr<uml::TimeExpression > when = this->getWhen();
 		if (when != nullptr)
 		{
-			saveHandler->addReference(when, "when", when->eClass() != package->getTimeExpression_EClass());
+			saveHandler->addReference(when, "when", when->eClass() != package->getTimeExpression_Class());
 		}
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getTimeEvent_EAttribute_isRelative()) )
+		if ( this->eIsSet(package->getTimeEvent_Attribute_isRelative()) )
 		{
 			saveHandler->addAttribute("isRelative", this->getIsRelative());
 		}

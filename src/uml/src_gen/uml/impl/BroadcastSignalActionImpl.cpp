@@ -294,7 +294,7 @@ std::shared_ptr<ecore::EObject>  BroadcastSignalActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> BroadcastSignalActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getBroadcastSignalAction_EClass();
+	return UmlPackageImpl::eInstance()->getBroadcastSignalAction_Class();
 }
 
 //*********************************
@@ -400,7 +400,7 @@ Any BroadcastSignalActionImpl::eGet(int featureID, bool resolve, bool coreType) 
 {
 	switch(featureID)
 	{
-		case UmlPackage::BROADCASTSIGNALACTION_EREFERENCE_SIGNAL:
+		case UmlPackage::BROADCASTSIGNALACTION_ATTRIBUTE_SIGNAL:
 			return eAny(getSignal()); //2729
 	}
 	return InvocationActionImpl::eGet(featureID, resolve, coreType);
@@ -409,7 +409,7 @@ bool BroadcastSignalActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::BROADCASTSIGNALACTION_EREFERENCE_SIGNAL:
+		case UmlPackage::BROADCASTSIGNALACTION_ATTRIBUTE_SIGNAL:
 			return getSignal() != nullptr; //2729
 	}
 	return InvocationActionImpl::internalEIsSet(featureID);
@@ -418,7 +418,7 @@ bool BroadcastSignalActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::BROADCASTSIGNALACTION_EREFERENCE_SIGNAL:
+		case UmlPackage::BROADCASTSIGNALACTION_ATTRIBUTE_SIGNAL:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Signal> _signal = newValue->get<std::shared_ptr<uml::Signal>>();
@@ -486,7 +486,7 @@ void BroadcastSignalActionImpl::resolveReferences(const int featureID, std::list
 {
 	switch(featureID)
 	{
-		case UmlPackage::BROADCASTSIGNALACTION_EREFERENCE_SIGNAL:
+		case UmlPackage::BROADCASTSIGNALACTION_ATTRIBUTE_SIGNAL:
 		{
 			if (references.size() == 1)
 			{

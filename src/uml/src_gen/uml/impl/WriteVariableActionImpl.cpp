@@ -290,7 +290,7 @@ std::shared_ptr<ecore::EObject>  WriteVariableActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> WriteVariableActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getWriteVariableAction_EClass();
+	return UmlPackageImpl::eInstance()->getWriteVariableAction_Class();
 }
 
 //*********************************
@@ -390,7 +390,7 @@ Any WriteVariableActionImpl::eGet(int featureID, bool resolve, bool coreType) co
 {
 	switch(featureID)
 	{
-		case UmlPackage::WRITEVARIABLEACTION_EREFERENCE_VALUE:
+		case UmlPackage::WRITEVARIABLEACTION_ATTRIBUTE_VALUE:
 			return eAny(getValue()); //25828
 	}
 	return VariableActionImpl::eGet(featureID, resolve, coreType);
@@ -399,7 +399,7 @@ bool WriteVariableActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::WRITEVARIABLEACTION_EREFERENCE_VALUE:
+		case UmlPackage::WRITEVARIABLEACTION_ATTRIBUTE_VALUE:
 			return getValue() != nullptr; //25828
 	}
 	return VariableActionImpl::internalEIsSet(featureID);
@@ -408,7 +408,7 @@ bool WriteVariableActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::WRITEVARIABLEACTION_EREFERENCE_VALUE:
+		case UmlPackage::WRITEVARIABLEACTION_ATTRIBUTE_VALUE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::InputPin> _value = newValue->get<std::shared_ptr<uml::InputPin>>();
@@ -526,7 +526,7 @@ void WriteVariableActionImpl::saveContent(std::shared_ptr<persistence::interface
 		std::shared_ptr<uml::InputPin > value = this->getValue();
 		if (value != nullptr)
 		{
-			saveHandler->addReference(value, "value", value->eClass() != package->getInputPin_EClass());
+			saveHandler->addReference(value, "value", value->eClass() != package->getInputPin_Class());
 		}
 	
 

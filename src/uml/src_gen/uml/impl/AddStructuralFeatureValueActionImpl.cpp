@@ -312,7 +312,7 @@ std::shared_ptr<ecore::EObject>  AddStructuralFeatureValueActionImpl::copy() con
 
 std::shared_ptr<ecore::EClass> AddStructuralFeatureValueActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getAddStructuralFeatureValueAction_EClass();
+	return UmlPackageImpl::eInstance()->getAddStructuralFeatureValueAction_Class();
 }
 
 //*********************************
@@ -425,9 +425,9 @@ Any AddStructuralFeatureValueActionImpl::eGet(int featureID, bool resolve, bool 
 {
 	switch(featureID)
 	{
-		case UmlPackage::ADDSTRUCTURALFEATUREVALUEACTION_EREFERENCE_INSERTAT:
+		case UmlPackage::ADDSTRUCTURALFEATUREVALUEACTION_ATTRIBUTE_INSERTAT:
 			return eAny(getInsertAt()); //1631
-		case UmlPackage::ADDSTRUCTURALFEATUREVALUEACTION_EATTRIBUTE_ISREPLACEALL:
+		case UmlPackage::ADDSTRUCTURALFEATUREVALUEACTION_ATTRIBUTE_ISREPLACEALL:
 			return eAny(getIsReplaceAll()); //1632
 	}
 	return WriteStructuralFeatureActionImpl::eGet(featureID, resolve, coreType);
@@ -436,9 +436,9 @@ bool AddStructuralFeatureValueActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::ADDSTRUCTURALFEATUREVALUEACTION_EREFERENCE_INSERTAT:
+		case UmlPackage::ADDSTRUCTURALFEATUREVALUEACTION_ATTRIBUTE_INSERTAT:
 			return getInsertAt() != nullptr; //1631
-		case UmlPackage::ADDSTRUCTURALFEATUREVALUEACTION_EATTRIBUTE_ISREPLACEALL:
+		case UmlPackage::ADDSTRUCTURALFEATUREVALUEACTION_ATTRIBUTE_ISREPLACEALL:
 			return getIsReplaceAll() != false; //1632
 	}
 	return WriteStructuralFeatureActionImpl::internalEIsSet(featureID);
@@ -447,14 +447,14 @@ bool AddStructuralFeatureValueActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::ADDSTRUCTURALFEATUREVALUEACTION_EREFERENCE_INSERTAT:
+		case UmlPackage::ADDSTRUCTURALFEATUREVALUEACTION_ATTRIBUTE_INSERTAT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::InputPin> _insertAt = newValue->get<std::shared_ptr<uml::InputPin>>();
 			setInsertAt(_insertAt); //1631
 			return true;
 		}
-		case UmlPackage::ADDSTRUCTURALFEATUREVALUEACTION_EATTRIBUTE_ISREPLACEALL:
+		case UmlPackage::ADDSTRUCTURALFEATUREVALUEACTION_ATTRIBUTE_ISREPLACEALL:
 		{
 			// BOOST CAST
 			bool _isReplaceAll = newValue->get<bool>();
@@ -596,12 +596,12 @@ void AddStructuralFeatureValueActionImpl::saveContent(std::shared_ptr<persistenc
 		std::shared_ptr<uml::InputPin > insertAt = this->getInsertAt();
 		if (insertAt != nullptr)
 		{
-			saveHandler->addReference(insertAt, "insertAt", insertAt->eClass() != package->getInputPin_EClass());
+			saveHandler->addReference(insertAt, "insertAt", insertAt->eClass() != package->getInputPin_Class());
 		}
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getAddStructuralFeatureValueAction_EAttribute_isReplaceAll()) )
+		if ( this->eIsSet(package->getAddStructuralFeatureValueAction_Attribute_isReplaceAll()) )
 		{
 			saveHandler->addAttribute("isReplaceAll", this->getIsReplaceAll());
 		}

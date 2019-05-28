@@ -122,6 +122,7 @@ EAttributeImpl::EAttributeImpl(const EAttributeImpl & obj):EAttributeImpl()
 	m_iD = obj.isID();
 	m_lowerBound = obj.getLowerBound();
 	m_many = obj.isMany();
+	m_metaElementID = obj.getMetaElementID();
 	m_name = obj.getName();
 	m_ordered = obj.isOrdered();
 	m_required = obj.isRequired();
@@ -171,7 +172,7 @@ std::shared_ptr<ecore::EObject>  EAttributeImpl::copy() const
 
 std::shared_ptr<EClass> EAttributeImpl::eStaticClass() const
 {
-	return EcorePackageImpl::eInstance()->getEAttribute_EClass();
+	return EcorePackageImpl::eInstance()->getEAttribute_Class();
 }
 
 //*********************************
@@ -240,10 +241,10 @@ Any EAttributeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case EcorePackage::EATTRIBUTE_EREFERENCE_EATTRIBUTETYPE:
-			return eAny(getEAttributeType()); //222
-		case EcorePackage::EATTRIBUTE_EATTRIBUTE_ID:
-			return eAny(isID()); //221
+		case EcorePackage::EATTRIBUTE_ATTRIBUTE_EATTRIBUTETYPE:
+			return eAny(getEAttributeType()); //223
+		case EcorePackage::EATTRIBUTE_ATTRIBUTE_ID:
+			return eAny(isID()); //222
 	}
 	return EStructuralFeatureImpl::eGet(featureID, resolve, coreType);
 }
@@ -251,10 +252,10 @@ bool EAttributeImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case EcorePackage::EATTRIBUTE_EREFERENCE_EATTRIBUTETYPE:
-			return getEAttributeType() != nullptr; //222
-		case EcorePackage::EATTRIBUTE_EATTRIBUTE_ID:
-			return isID() != false; //221
+		case EcorePackage::EATTRIBUTE_ATTRIBUTE_EATTRIBUTETYPE:
+			return getEAttributeType() != nullptr; //223
+		case EcorePackage::EATTRIBUTE_ATTRIBUTE_ID:
+			return isID() != false; //222
 	}
 	return EStructuralFeatureImpl::internalEIsSet(featureID);
 }
@@ -262,11 +263,11 @@ bool EAttributeImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case EcorePackage::EATTRIBUTE_EATTRIBUTE_ID:
+		case EcorePackage::EATTRIBUTE_ATTRIBUTE_ID:
 		{
 			// BOOST CAST
 			bool _iD = newValue->get<bool>();
-			setID(_iD); //221
+			setID(_iD); //222
 			return true;
 		}
 	}
@@ -364,7 +365,7 @@ void EAttributeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getEAttribute_EAttribute_iD()) )
+		if ( this->eIsSet(package->getEAttribute_Attribute_iD()) )
 		{
 			saveHandler->addAttribute("iD", this->isID());
 		}

@@ -192,7 +192,7 @@ std::shared_ptr<ecore::EObject>  CollaborationUseImpl::copy() const
 
 std::shared_ptr<ecore::EClass> CollaborationUseImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getCollaborationUse_EClass();
+	return UmlPackageImpl::eInstance()->getCollaborationUse_Class();
 }
 
 //*********************************
@@ -283,9 +283,9 @@ Any CollaborationUseImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::COLLABORATIONUSE_EREFERENCE_ROLEBINDING:
+		case UmlPackage::COLLABORATIONUSE_ATTRIBUTE_ROLEBINDING:
 			return eAny(getRoleBinding()); //439
-		case UmlPackage::COLLABORATIONUSE_EREFERENCE_TYPE:
+		case UmlPackage::COLLABORATIONUSE_ATTRIBUTE_TYPE:
 			return eAny(getType()); //4310
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
@@ -294,9 +294,9 @@ bool CollaborationUseImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::COLLABORATIONUSE_EREFERENCE_ROLEBINDING:
+		case UmlPackage::COLLABORATIONUSE_ATTRIBUTE_ROLEBINDING:
 			return getRoleBinding() != nullptr; //439
-		case UmlPackage::COLLABORATIONUSE_EREFERENCE_TYPE:
+		case UmlPackage::COLLABORATIONUSE_ATTRIBUTE_TYPE:
 			return getType() != nullptr; //4310
 	}
 	return NamedElementImpl::internalEIsSet(featureID);
@@ -305,7 +305,7 @@ bool CollaborationUseImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::COLLABORATIONUSE_EREFERENCE_TYPE:
+		case UmlPackage::COLLABORATIONUSE_ATTRIBUTE_TYPE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Collaboration> _type = newValue->get<std::shared_ptr<uml::Collaboration>>();
@@ -400,7 +400,7 @@ void CollaborationUseImpl::resolveReferences(const int featureID, std::list<std:
 {
 	switch(featureID)
 	{
-		case UmlPackage::COLLABORATIONUSE_EREFERENCE_TYPE:
+		case UmlPackage::COLLABORATIONUSE_ATTRIBUTE_TYPE:
 		{
 			if (references.size() == 1)
 			{
@@ -440,7 +440,7 @@ void CollaborationUseImpl::saveContent(std::shared_ptr<persistence::interfaces::
 		// Save 'roleBinding'
 		for (std::shared_ptr<uml::Dependency> roleBinding : *this->getRoleBinding()) 
 		{
-			saveHandler->addReference(roleBinding, "roleBinding", roleBinding->eClass() != package->getDependency_EClass());
+			saveHandler->addReference(roleBinding, "roleBinding", roleBinding->eClass() != package->getDependency_Class());
 		}
 	
 

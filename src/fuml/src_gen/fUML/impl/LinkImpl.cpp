@@ -122,7 +122,7 @@ std::shared_ptr<ecore::EObject>  LinkImpl::copy() const
 
 std::shared_ptr<ecore::EClass> LinkImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getLink_EClass();
+	return FUMLPackageImpl::eInstance()->getLink_Class();
 }
 
 //*********************************
@@ -221,7 +221,7 @@ Any LinkImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::LINK_EREFERENCE_TYPE:
+		case FUMLPackage::LINK_ATTRIBUTE_TYPE:
 			return eAny(getType()); //642
 	}
 	return ExtensionalValueImpl::eGet(featureID, resolve, coreType);
@@ -230,7 +230,7 @@ bool LinkImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::LINK_EREFERENCE_TYPE:
+		case FUMLPackage::LINK_ATTRIBUTE_TYPE:
 			return getType() != nullptr; //642
 	}
 	return ExtensionalValueImpl::internalEIsSet(featureID);
@@ -239,7 +239,7 @@ bool LinkImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case FUMLPackage::LINK_EREFERENCE_TYPE:
+		case FUMLPackage::LINK_ATTRIBUTE_TYPE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Association> _type = newValue->get<std::shared_ptr<uml::Association>>();
@@ -307,7 +307,7 @@ void LinkImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<
 {
 	switch(featureID)
 	{
-		case FUMLPackage::LINK_EREFERENCE_TYPE:
+		case FUMLPackage::LINK_ATTRIBUTE_TYPE:
 		{
 			if (references.size() == 1)
 			{

@@ -235,7 +235,7 @@ std::shared_ptr<ecore::EObject>  PartDecompositionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> PartDecompositionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getPartDecomposition_EClass();
+	return UmlPackageImpl::eInstance()->getPartDecomposition_Class();
 }
 
 //*********************************

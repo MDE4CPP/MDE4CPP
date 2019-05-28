@@ -255,7 +255,7 @@ std::shared_ptr<ecore::EObject>  DecisionNodeImpl::copy() const
 
 std::shared_ptr<ecore::EClass> DecisionNodeImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getDecisionNode_EClass();
+	return UmlPackageImpl::eInstance()->getDecisionNode_Class();
 }
 
 //*********************************
@@ -397,9 +397,9 @@ Any DecisionNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::DECISIONNODE_EREFERENCE_DECISIONINPUT:
+		case UmlPackage::DECISIONNODE_ATTRIBUTE_DECISIONINPUT:
 			return eAny(getDecisionInput()); //6620
-		case UmlPackage::DECISIONNODE_EREFERENCE_DECISIONINPUTFLOW:
+		case UmlPackage::DECISIONNODE_ATTRIBUTE_DECISIONINPUTFLOW:
 			return eAny(getDecisionInputFlow()); //6621
 	}
 	return ControlNodeImpl::eGet(featureID, resolve, coreType);
@@ -408,9 +408,9 @@ bool DecisionNodeImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::DECISIONNODE_EREFERENCE_DECISIONINPUT:
+		case UmlPackage::DECISIONNODE_ATTRIBUTE_DECISIONINPUT:
 			return getDecisionInput() != nullptr; //6620
-		case UmlPackage::DECISIONNODE_EREFERENCE_DECISIONINPUTFLOW:
+		case UmlPackage::DECISIONNODE_ATTRIBUTE_DECISIONINPUTFLOW:
 			return getDecisionInputFlow() != nullptr; //6621
 	}
 	return ControlNodeImpl::internalEIsSet(featureID);
@@ -419,14 +419,14 @@ bool DecisionNodeImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::DECISIONNODE_EREFERENCE_DECISIONINPUT:
+		case UmlPackage::DECISIONNODE_ATTRIBUTE_DECISIONINPUT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Behavior> _decisionInput = newValue->get<std::shared_ptr<uml::Behavior>>();
 			setDecisionInput(_decisionInput); //6620
 			return true;
 		}
-		case UmlPackage::DECISIONNODE_EREFERENCE_DECISIONINPUTFLOW:
+		case UmlPackage::DECISIONNODE_ATTRIBUTE_DECISIONINPUTFLOW:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ObjectFlow> _decisionInputFlow = newValue->get<std::shared_ptr<uml::ObjectFlow>>();
@@ -501,7 +501,7 @@ void DecisionNodeImpl::resolveReferences(const int featureID, std::list<std::sha
 {
 	switch(featureID)
 	{
-		case UmlPackage::DECISIONNODE_EREFERENCE_DECISIONINPUT:
+		case UmlPackage::DECISIONNODE_ATTRIBUTE_DECISIONINPUT:
 		{
 			if (references.size() == 1)
 			{
@@ -513,7 +513,7 @@ void DecisionNodeImpl::resolveReferences(const int featureID, std::list<std::sha
 			return;
 		}
 
-		case UmlPackage::DECISIONNODE_EREFERENCE_DECISIONINPUTFLOW:
+		case UmlPackage::DECISIONNODE_ATTRIBUTE_DECISIONINPUTFLOW:
 		{
 			if (references.size() == 1)
 			{

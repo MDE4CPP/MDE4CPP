@@ -264,7 +264,7 @@ std::shared_ptr<ecore::EObject>  CentralBufferNodeImpl::copy() const
 
 std::shared_ptr<ecore::EClass> CentralBufferNodeImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getCentralBufferNode_EClass();
+	return UmlPackageImpl::eInstance()->getCentralBufferNode_Class();
 }
 
 //*********************************

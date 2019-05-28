@@ -98,7 +98,7 @@ std::shared_ptr<ecore::EObject>  GetNextEventStrategyImpl::copy() const
 
 std::shared_ptr<ecore::EClass> GetNextEventStrategyImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getGetNextEventStrategy_EClass();
+	return FUMLPackageImpl::eInstance()->getGetNextEventStrategy_Class();
 }
 
 //*********************************

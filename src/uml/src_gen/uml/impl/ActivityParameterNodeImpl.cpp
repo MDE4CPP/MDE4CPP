@@ -271,7 +271,7 @@ std::shared_ptr<ecore::EObject>  ActivityParameterNodeImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ActivityParameterNodeImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getActivityParameterNode_EClass();
+	return UmlPackageImpl::eInstance()->getActivityParameterNode_Class();
 }
 
 //*********************************
@@ -385,7 +385,7 @@ Any ActivityParameterNodeImpl::eGet(int featureID, bool resolve, bool coreType) 
 {
 	switch(featureID)
 	{
-		case UmlPackage::ACTIVITYPARAMETERNODE_EREFERENCE_PARAMETER:
+		case UmlPackage::ACTIVITYPARAMETERNODE_ATTRIBUTE_PARAMETER:
 			return eAny(getParameter()); //1326
 	}
 	return ObjectNodeImpl::eGet(featureID, resolve, coreType);
@@ -394,7 +394,7 @@ bool ActivityParameterNodeImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::ACTIVITYPARAMETERNODE_EREFERENCE_PARAMETER:
+		case UmlPackage::ACTIVITYPARAMETERNODE_ATTRIBUTE_PARAMETER:
 			return getParameter() != nullptr; //1326
 	}
 	return ObjectNodeImpl::internalEIsSet(featureID);
@@ -403,7 +403,7 @@ bool ActivityParameterNodeImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::ACTIVITYPARAMETERNODE_EREFERENCE_PARAMETER:
+		case UmlPackage::ACTIVITYPARAMETERNODE_ATTRIBUTE_PARAMETER:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Parameter> _parameter = newValue->get<std::shared_ptr<uml::Parameter>>();
@@ -471,7 +471,7 @@ void ActivityParameterNodeImpl::resolveReferences(const int featureID, std::list
 {
 	switch(featureID)
 	{
-		case UmlPackage::ACTIVITYPARAMETERNODE_EREFERENCE_PARAMETER:
+		case UmlPackage::ACTIVITYPARAMETERNODE_ATTRIBUTE_PARAMETER:
 		{
 			if (references.size() == 1)
 			{

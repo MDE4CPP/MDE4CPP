@@ -104,6 +104,7 @@ EModelElementImpl::EModelElementImpl(const EModelElementImpl & obj):EModelElemen
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy EModelElement "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	m_metaElementID = obj.getMetaElementID();
 
 	//copy references with no containment (soft copy)
 	
@@ -139,7 +140,7 @@ std::shared_ptr<ecore::EObject>  EModelElementImpl::copy() const
 
 std::shared_ptr<EClass> EModelElementImpl::eStaticClass() const
 {
-	return EcorePackageImpl::eInstance()->getEModelElement_EClass();
+	return EcorePackageImpl::eInstance()->getEModelElement_Class();
 }
 
 //*********************************
@@ -208,8 +209,8 @@ Any EModelElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case EcorePackage::EMODELELEMENT_EREFERENCE_EANNOTATIONS:
-			return eAny(getEAnnotations()); //372
+		case EcorePackage::EMODELELEMENT_ATTRIBUTE_EANNOTATIONS:
+			return eAny(getEAnnotations()); //373
 	}
 	return EObjectImpl::eGet(featureID, resolve, coreType);
 }
@@ -217,8 +218,8 @@ bool EModelElementImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case EcorePackage::EMODELELEMENT_EREFERENCE_EANNOTATIONS:
-			return getEAnnotations() != nullptr; //372
+		case EcorePackage::EMODELELEMENT_ATTRIBUTE_EANNOTATIONS:
+			return getEAnnotations() != nullptr; //373
 	}
 	return EObjectImpl::internalEIsSet(featureID);
 }
@@ -269,7 +270,7 @@ void EModelElementImpl::loadNode(std::string nodeName, std::shared_ptr<persisten
 			{
 				typeName = "EAnnotation";
 			}
-			std::shared_ptr<ecore::EObject> eAnnotations = modelFactory->create(typeName, loadHandler->getCurrentObject(), EcorePackage::EANNOTATION_EREFERENCE_EMODELELEMENT);
+			std::shared_ptr<ecore::EObject> eAnnotations = modelFactory->create(typeName, loadHandler->getCurrentObject(), EcorePackage::EANNOTATION_ATTRIBUTE_EMODELELEMENT);
 			if (eAnnotations != nullptr)
 			{
 				loadHandler->handleChild(eAnnotations);
@@ -313,7 +314,7 @@ void EModelElementImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 		// Save 'eAnnotations'
 		for (std::shared_ptr<ecore::EAnnotation> eAnnotations : *this->getEAnnotations()) 
 		{
-			saveHandler->addReference(eAnnotations, "eAnnotations", eAnnotations->eClass() != package->getEAnnotation_EClass());
+			saveHandler->addReference(eAnnotations, "eAnnotations", eAnnotations->eClass() != package->getEAnnotation_Class());
 		}
 	
 

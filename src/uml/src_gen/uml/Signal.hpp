@@ -191,7 +191,7 @@ namespace uml
 			//*********************************
 			/*!
 			 Creates a property with the specified name, type, lower bound, and upper bound as an owned attribute of this signal. */ 
-			virtual std::shared_ptr<uml::Property> createOwnedAttribute(std::string name,std::shared_ptr<uml::Type>  type,int lower,int upper) = 0;
+			virtual std::shared_ptr<uml::Property> createOwnedAttribute(std::string name,std::shared_ptr<uml::Type>  type,int lower,unsigned int upper) = 0;
 			
 			
 			//*********************************

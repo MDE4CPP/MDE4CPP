@@ -293,7 +293,7 @@ std::shared_ptr<ecore::EObject>  DestroyLinkActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> DestroyLinkActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getDestroyLinkAction_EClass();
+	return UmlPackageImpl::eInstance()->getDestroyLinkAction_Class();
 }
 
 //*********************************

@@ -207,11 +207,11 @@ ProtocolStateMachineImpl::~ProtocolStateMachineImpl()
 			{
 				switch(reference_id)
 				{	
-				case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
+				case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
 					m_owningPackage = par_Package;
 					m_namespace = par_Package;
 					 return;
-				case UmlPackage::TYPE_EREFERENCE_PACKAGE:
+				case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
 					m_package = par_Package;
 					m_namespace = par_Package;
 					 return;
@@ -594,7 +594,7 @@ std::shared_ptr<ecore::EObject>  ProtocolStateMachineImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ProtocolStateMachineImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getProtocolStateMachine_EClass();
+	return UmlPackageImpl::eInstance()->getProtocolStateMachine_Class();
 }
 
 //*********************************
@@ -727,7 +727,7 @@ Any ProtocolStateMachineImpl::eGet(int featureID, bool resolve, bool coreType) c
 {
 	switch(featureID)
 	{
-		case UmlPackage::PROTOCOLSTATEMACHINE_EREFERENCE_CONFORMANCE:
+		case UmlPackage::PROTOCOLSTATEMACHINE_ATTRIBUTE_CONFORMANCE:
 			return eAny(getConformance()); //18765
 	}
 	return StateMachineImpl::eGet(featureID, resolve, coreType);
@@ -736,7 +736,7 @@ bool ProtocolStateMachineImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::PROTOCOLSTATEMACHINE_EREFERENCE_CONFORMANCE:
+		case UmlPackage::PROTOCOLSTATEMACHINE_ATTRIBUTE_CONFORMANCE:
 			return getConformance() != nullptr; //18765
 	}
 	return StateMachineImpl::internalEIsSet(featureID);
@@ -788,7 +788,7 @@ void ProtocolStateMachineImpl::loadNode(std::string nodeName, std::shared_ptr<pe
 			{
 				typeName = "ProtocolConformance";
 			}
-			std::shared_ptr<ecore::EObject> conformance = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::PROTOCOLCONFORMANCE_EREFERENCE_SPECIFICMACHINE);
+			std::shared_ptr<ecore::EObject> conformance = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::PROTOCOLCONFORMANCE_ATTRIBUTE_SPECIFICMACHINE);
 			if (conformance != nullptr)
 			{
 				loadHandler->handleChild(conformance);
@@ -867,7 +867,7 @@ void ProtocolStateMachineImpl::saveContent(std::shared_ptr<persistence::interfac
 		// Save 'conformance'
 		for (std::shared_ptr<uml::ProtocolConformance> conformance : *this->getConformance()) 
 		{
-			saveHandler->addReference(conformance, "conformance", conformance->eClass() != package->getProtocolConformance_EClass());
+			saveHandler->addReference(conformance, "conformance", conformance->eClass() != package->getProtocolConformance_Class());
 		}
 	
 

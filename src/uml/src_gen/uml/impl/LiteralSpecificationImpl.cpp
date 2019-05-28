@@ -208,7 +208,7 @@ std::shared_ptr<ecore::EObject>  LiteralSpecificationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> LiteralSpecificationImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getLiteralSpecification_EClass();
+	return UmlPackageImpl::eInstance()->getLiteralSpecification_Class();
 }
 
 //*********************************

@@ -173,7 +173,7 @@ std::shared_ptr<ecore::EObject>  CallBehaviorActionActivationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> CallBehaviorActionActivationImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getCallBehaviorActionActivation_EClass();
+	return FUMLPackageImpl::eInstance()->getCallBehaviorActionActivation_Class();
 }
 
 //*********************************

@@ -140,7 +140,7 @@ std::shared_ptr<ecore::EObject>  ActivityParameterNodeActivationImpl::copy() con
 
 std::shared_ptr<ecore::EClass> ActivityParameterNodeActivationImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getActivityParameterNodeActivation_EClass();
+	return FUMLPackageImpl::eInstance()->getActivityParameterNodeActivation_Class();
 }
 
 //*********************************

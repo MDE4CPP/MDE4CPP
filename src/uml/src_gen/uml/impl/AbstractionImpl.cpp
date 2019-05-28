@@ -219,7 +219,7 @@ std::shared_ptr<ecore::EObject>  AbstractionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> AbstractionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getAbstraction_EClass();
+	return UmlPackageImpl::eInstance()->getAbstraction_Class();
 }
 
 //*********************************
@@ -312,7 +312,7 @@ Any AbstractionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::ABSTRACTION_EREFERENCE_MAPPING:
+		case UmlPackage::ABSTRACTION_ATTRIBUTE_MAPPING:
 			return eAny(getMapping()); //117
 	}
 	return DependencyImpl::eGet(featureID, resolve, coreType);
@@ -321,7 +321,7 @@ bool AbstractionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::ABSTRACTION_EREFERENCE_MAPPING:
+		case UmlPackage::ABSTRACTION_ATTRIBUTE_MAPPING:
 			return getMapping() != nullptr; //117
 	}
 	return DependencyImpl::internalEIsSet(featureID);
@@ -330,7 +330,7 @@ bool AbstractionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::ABSTRACTION_EREFERENCE_MAPPING:
+		case UmlPackage::ABSTRACTION_ATTRIBUTE_MAPPING:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::OpaqueExpression> _mapping = newValue->get<std::shared_ptr<uml::OpaqueExpression>>();
@@ -441,7 +441,7 @@ void AbstractionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 		std::shared_ptr<uml::OpaqueExpression > mapping = this->getMapping();
 		if (mapping != nullptr)
 		{
-			saveHandler->addReference(mapping, "mapping", mapping->eClass() != package->getOpaqueExpression_EClass());
+			saveHandler->addReference(mapping, "mapping", mapping->eClass() != package->getOpaqueExpression_Class());
 		}
 	
 

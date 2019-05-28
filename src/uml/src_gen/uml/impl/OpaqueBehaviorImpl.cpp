@@ -183,11 +183,11 @@ OpaqueBehaviorImpl::~OpaqueBehaviorImpl()
 			{
 				switch(reference_id)
 				{	
-				case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
+				case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
 					m_owningPackage = par_Package;
 					m_namespace = par_Package;
 					 return;
-				case UmlPackage::TYPE_EREFERENCE_PACKAGE:
+				case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
 					m_package = par_Package;
 					m_namespace = par_Package;
 					 return;
@@ -535,7 +535,7 @@ std::shared_ptr<ecore::EObject>  OpaqueBehaviorImpl::copy() const
 
 std::shared_ptr<ecore::EClass> OpaqueBehaviorImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getOpaqueBehavior_EClass();
+	return UmlPackageImpl::eInstance()->getOpaqueBehavior_Class();
 }
 
 //*********************************
@@ -658,9 +658,9 @@ Any OpaqueBehaviorImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::OPAQUEBEHAVIOR_EATTRIBUTE_BODY:
+		case UmlPackage::OPAQUEBEHAVIOR_ATTRIBUTE_BODY:
 			return eAny(getBody()); //16561
-		case UmlPackage::OPAQUEBEHAVIOR_EATTRIBUTE_LANGUAGE:
+		case UmlPackage::OPAQUEBEHAVIOR_ATTRIBUTE_LANGUAGE:
 			return eAny(getLanguage()); //16562
 	}
 	return BehaviorImpl::eGet(featureID, resolve, coreType);
@@ -669,9 +669,9 @@ bool OpaqueBehaviorImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::OPAQUEBEHAVIOR_EATTRIBUTE_BODY:
+		case UmlPackage::OPAQUEBEHAVIOR_ATTRIBUTE_BODY:
 			return !getBody()->empty(); //16561
-		case UmlPackage::OPAQUEBEHAVIOR_EATTRIBUTE_LANGUAGE:
+		case UmlPackage::OPAQUEBEHAVIOR_ATTRIBUTE_LANGUAGE:
 			return !getLanguage()->empty(); //16562
 	}
 	return BehaviorImpl::internalEIsSet(featureID);
@@ -800,7 +800,7 @@ void OpaqueBehaviorImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getOpaqueBehavior_EAttribute_body()) )
+		if ( this->eIsSet(package->getOpaqueBehavior_Attribute_body()) )
 		{
 			for (std::shared_ptr<std::string> value : *m_body)
 			{
@@ -808,7 +808,7 @@ void OpaqueBehaviorImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 			}
 		}
 
-		if ( this->eIsSet(package->getOpaqueBehavior_EAttribute_language()) )
+		if ( this->eIsSet(package->getOpaqueBehavior_Attribute_language()) )
 		{
 			for (std::shared_ptr<std::string> value : *m_language)
 			{

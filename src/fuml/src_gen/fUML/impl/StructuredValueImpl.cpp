@@ -112,7 +112,7 @@ std::shared_ptr<ecore::EObject>  StructuredValueImpl::copy() const
 
 std::shared_ptr<ecore::EClass> StructuredValueImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getStructuredValue_EClass();
+	return FUMLPackageImpl::eInstance()->getStructuredValue_Class();
 }
 
 //*********************************

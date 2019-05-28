@@ -212,7 +212,7 @@ std::shared_ptr<ecore::EObject>  ValueSpecificationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ValueSpecificationImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getValueSpecification_EClass();
+	return UmlPackageImpl::eInstance()->getValueSpecification_Class();
 }
 
 //*********************************
@@ -258,7 +258,7 @@ std::string ValueSpecificationImpl::stringValue()
 	throw "UnsupportedOperationException";
 }
 
-int ValueSpecificationImpl::unlimitedValue()
+unsigned int ValueSpecificationImpl::unlimitedValue()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -340,7 +340,7 @@ Any ValueSpecificationImpl::eGet(int featureID, bool resolve, bool coreType) con
 {
 	switch(featureID)
 	{
-		case UmlPackage::VALUESPECIFICATION_EREFERENCE_OWNINGSLOT:
+		case UmlPackage::VALUESPECIFICATION_ATTRIBUTE_OWNINGSLOT:
 			return eAny(getOwningSlot()); //25013
 	}
 	Any result;
@@ -356,7 +356,7 @@ bool ValueSpecificationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::VALUESPECIFICATION_EREFERENCE_OWNINGSLOT:
+		case UmlPackage::VALUESPECIFICATION_ATTRIBUTE_OWNINGSLOT:
 			return getOwningSlot().lock() != nullptr; //25013
 	}
 	bool result = false;
@@ -372,7 +372,7 @@ bool ValueSpecificationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::VALUESPECIFICATION_EREFERENCE_OWNINGSLOT:
+		case UmlPackage::VALUESPECIFICATION_ATTRIBUTE_OWNINGSLOT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Slot> _owningSlot = newValue->get<std::shared_ptr<uml::Slot>>();
@@ -430,7 +430,7 @@ void ValueSpecificationImpl::resolveReferences(const int featureID, std::list<st
 {
 	switch(featureID)
 	{
-		case UmlPackage::VALUESPECIFICATION_EREFERENCE_OWNINGSLOT:
+		case UmlPackage::VALUESPECIFICATION_ATTRIBUTE_OWNINGSLOT:
 		{
 			if (references.size() == 1)
 			{

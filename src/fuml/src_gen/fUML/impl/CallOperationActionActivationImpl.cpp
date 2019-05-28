@@ -175,7 +175,7 @@ std::shared_ptr<ecore::EObject>  CallOperationActionActivationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> CallOperationActionActivationImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getCallOperationActionActivation_EClass();
+	return FUMLPackageImpl::eInstance()->getCallOperationActionActivation_Class();
 }
 
 //*********************************

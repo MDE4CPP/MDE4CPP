@@ -112,7 +112,7 @@ std::shared_ptr<ecore::EObject>  ExtensionalValueImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ExtensionalValueImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getExtensionalValue_EClass();
+	return FUMLPackageImpl::eInstance()->getExtensionalValue_Class();
 }
 
 //*********************************
@@ -172,7 +172,7 @@ Any ExtensionalValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::EXTENSIONALVALUE_EREFERENCE_LOCUS:
+		case FUMLPackage::EXTENSIONALVALUE_ATTRIBUTE_LOCUS:
 			return eAny(getLocus()); //491
 	}
 	return CompoundValueImpl::eGet(featureID, resolve, coreType);
@@ -181,7 +181,7 @@ bool ExtensionalValueImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::EXTENSIONALVALUE_EREFERENCE_LOCUS:
+		case FUMLPackage::EXTENSIONALVALUE_ATTRIBUTE_LOCUS:
 			return getLocus() != nullptr; //491
 	}
 	return CompoundValueImpl::internalEIsSet(featureID);
@@ -190,7 +190,7 @@ bool ExtensionalValueImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case FUMLPackage::EXTENSIONALVALUE_EREFERENCE_LOCUS:
+		case FUMLPackage::EXTENSIONALVALUE_ATTRIBUTE_LOCUS:
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::Locus> _locus = newValue->get<std::shared_ptr<fUML::Locus>>();
@@ -258,7 +258,7 @@ void ExtensionalValueImpl::resolveReferences(const int featureID, std::list<std:
 {
 	switch(featureID)
 	{
-		case FUMLPackage::EXTENSIONALVALUE_EREFERENCE_LOCUS:
+		case FUMLPackage::EXTENSIONALVALUE_ATTRIBUTE_LOCUS:
 		{
 			if (references.size() == 1)
 			{

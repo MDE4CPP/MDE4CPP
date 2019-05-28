@@ -197,7 +197,7 @@ std::shared_ptr<ecore::EObject>  DeploymentTargetImpl::copy() const
 
 std::shared_ptr<ecore::EClass> DeploymentTargetImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getDeploymentTarget_EClass();
+	return UmlPackageImpl::eInstance()->getDeploymentTarget_Class();
 }
 
 //*********************************
@@ -273,9 +273,9 @@ Any DeploymentTargetImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::DEPLOYMENTTARGET_EREFERENCE_DEPLOYEDELEMENT:
+		case UmlPackage::DEPLOYMENTTARGET_ATTRIBUTE_DEPLOYEDELEMENT:
 			return eAny(getDeployedElement()); //719
-		case UmlPackage::DEPLOYMENTTARGET_EREFERENCE_DEPLOYMENT:
+		case UmlPackage::DEPLOYMENTTARGET_ATTRIBUTE_DEPLOYMENT:
 			return eAny(getDeployment()); //7110
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
@@ -284,9 +284,9 @@ bool DeploymentTargetImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::DEPLOYMENTTARGET_EREFERENCE_DEPLOYEDELEMENT:
+		case UmlPackage::DEPLOYMENTTARGET_ATTRIBUTE_DEPLOYEDELEMENT:
 			return getDeployedElement() != nullptr; //719
-		case UmlPackage::DEPLOYMENTTARGET_EREFERENCE_DEPLOYMENT:
+		case UmlPackage::DEPLOYMENTTARGET_ATTRIBUTE_DEPLOYMENT:
 			return getDeployment() != nullptr; //7110
 	}
 	return NamedElementImpl::internalEIsSet(featureID);
@@ -338,7 +338,7 @@ void DeploymentTargetImpl::loadNode(std::string nodeName, std::shared_ptr<persis
 			{
 				typeName = "Deployment";
 			}
-			std::shared_ptr<ecore::EObject> deployment = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::DEPLOYMENT_EREFERENCE_LOCATION);
+			std::shared_ptr<ecore::EObject> deployment = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::DEPLOYMENT_ATTRIBUTE_LOCATION);
 			if (deployment != nullptr)
 			{
 				loadHandler->handleChild(deployment);
@@ -388,7 +388,7 @@ void DeploymentTargetImpl::saveContent(std::shared_ptr<persistence::interfaces::
 		// Save 'deployment'
 		for (std::shared_ptr<uml::Deployment> deployment : *this->getDeployment()) 
 		{
-			saveHandler->addReference(deployment, "deployment", deployment->eClass() != package->getDeployment_EClass());
+			saveHandler->addReference(deployment, "deployment", deployment->eClass() != package->getDeployment_Class());
 		}
 	
 

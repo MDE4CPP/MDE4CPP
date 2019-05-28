@@ -159,6 +159,14 @@ namespace ecore
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
+			/*!
+			 */ 
+			virtual int getMetaElementID() const = 0;
+			
+			/*!
+			 */ 
+			virtual void setMetaElementID (int _metaElementID)= 0; 
+			
 			
 			//*********************************
 			// Reference
@@ -177,6 +185,9 @@ namespace ecore
 			//*********************************
 			// Attribute Members
 			//*********************************
+			/*!
+			 */ 
+			int m_metaElementID = 0;
 			
 			
 			//*********************************

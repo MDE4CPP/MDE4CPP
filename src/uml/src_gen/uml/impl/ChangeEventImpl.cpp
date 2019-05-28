@@ -200,7 +200,7 @@ std::shared_ptr<ecore::EObject>  ChangeEventImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ChangeEventImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getChangeEvent_EClass();
+	return UmlPackageImpl::eInstance()->getChangeEvent_Class();
 }
 
 //*********************************
@@ -281,7 +281,7 @@ Any ChangeEventImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::CHANGEEVENT_EREFERENCE_CHANGEEXPRESSION:
+		case UmlPackage::CHANGEEVENT_ATTRIBUTE_CHANGEEXPRESSION:
 			return eAny(getChangeExpression()); //3412
 	}
 	return EventImpl::eGet(featureID, resolve, coreType);
@@ -290,7 +290,7 @@ bool ChangeEventImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::CHANGEEVENT_EREFERENCE_CHANGEEXPRESSION:
+		case UmlPackage::CHANGEEVENT_ATTRIBUTE_CHANGEEXPRESSION:
 			return getChangeExpression() != nullptr; //3412
 	}
 	return EventImpl::internalEIsSet(featureID);
@@ -299,7 +299,7 @@ bool ChangeEventImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::CHANGEEVENT_EREFERENCE_CHANGEEXPRESSION:
+		case UmlPackage::CHANGEEVENT_ATTRIBUTE_CHANGEEXPRESSION:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ValueSpecification> _changeExpression = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
@@ -409,7 +409,7 @@ void ChangeEventImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 		std::shared_ptr<uml::ValueSpecification > changeExpression = this->getChangeExpression();
 		if (changeExpression != nullptr)
 		{
-			saveHandler->addReference(changeExpression, "changeExpression", changeExpression->eClass() != package->getValueSpecification_EClass());
+			saveHandler->addReference(changeExpression, "changeExpression", changeExpression->eClass() != package->getValueSpecification_Class());
 		}
 	
 

@@ -111,7 +111,7 @@ std::shared_ptr<ecore::EObject>  SignalInstanceImpl::copy() const
 
 std::shared_ptr<ecore::EClass> SignalInstanceImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getSignalInstance_EClass();
+	return FUMLPackageImpl::eInstance()->getSignalInstance_Class();
 }
 
 //*********************************
@@ -161,7 +161,7 @@ Any SignalInstanceImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::SIGNALINSTANCE_EREFERENCE_TYPE:
+		case FUMLPackage::SIGNALINSTANCE_ATTRIBUTE_TYPE:
 			return eAny(getType()); //1001
 	}
 	return CompoundValueImpl::eGet(featureID, resolve, coreType);
@@ -170,7 +170,7 @@ bool SignalInstanceImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::SIGNALINSTANCE_EREFERENCE_TYPE:
+		case FUMLPackage::SIGNALINSTANCE_ATTRIBUTE_TYPE:
 			return getType() != nullptr; //1001
 	}
 	return CompoundValueImpl::internalEIsSet(featureID);
@@ -179,7 +179,7 @@ bool SignalInstanceImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case FUMLPackage::SIGNALINSTANCE_EREFERENCE_TYPE:
+		case FUMLPackage::SIGNALINSTANCE_ATTRIBUTE_TYPE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Signal> _type = newValue->get<std::shared_ptr<uml::Signal>>();
@@ -247,7 +247,7 @@ void SignalInstanceImpl::resolveReferences(const int featureID, std::list<std::s
 {
 	switch(featureID)
 	{
-		case FUMLPackage::SIGNALINSTANCE_EREFERENCE_TYPE:
+		case FUMLPackage::SIGNALINSTANCE_ATTRIBUTE_TYPE:
 		{
 			if (references.size() == 1)
 			{

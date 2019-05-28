@@ -137,6 +137,7 @@ EAnnotationImpl::EAnnotationImpl(const EAnnotationImpl & obj):EAnnotationImpl()
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy EAnnotation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	m_metaElementID = obj.getMetaElementID();
 	m_source = obj.getSource();
 
 	//copy references with no containment (soft copy)
@@ -197,7 +198,7 @@ std::shared_ptr<ecore::EObject>  EAnnotationImpl::copy() const
 
 std::shared_ptr<EClass> EAnnotationImpl::eStaticClass() const
 {
-	return EcorePackageImpl::eInstance()->getEAnnotation_EClass();
+	return EcorePackageImpl::eInstance()->getEAnnotation_Class();
 }
 
 //*********************************
@@ -290,16 +291,16 @@ Any EAnnotationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case EcorePackage::EANNOTATION_EREFERENCE_CONTENTS:
-			return eAny(getContents()); //16
-		case EcorePackage::EANNOTATION_EREFERENCE_DETAILS:
-			return eAny(getDetails()); //14
-		case EcorePackage::EANNOTATION_EREFERENCE_EMODELELEMENT:
-			return eAny(getEModelElement()); //15
-		case EcorePackage::EANNOTATION_EREFERENCE_REFERENCES:
-			return eAny(getReferences()); //17
-		case EcorePackage::EANNOTATION_EATTRIBUTE_SOURCE:
-			return eAny(getSource()); //13
+		case EcorePackage::EANNOTATION_ATTRIBUTE_CONTENTS:
+			return eAny(getContents()); //17
+		case EcorePackage::EANNOTATION_ATTRIBUTE_DETAILS:
+			return eAny(getDetails()); //15
+		case EcorePackage::EANNOTATION_ATTRIBUTE_EMODELELEMENT:
+			return eAny(getEModelElement()); //16
+		case EcorePackage::EANNOTATION_ATTRIBUTE_REFERENCES:
+			return eAny(getReferences()); //18
+		case EcorePackage::EANNOTATION_ATTRIBUTE_SOURCE:
+			return eAny(getSource()); //14
 	}
 	return EModelElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -307,16 +308,16 @@ bool EAnnotationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case EcorePackage::EANNOTATION_EREFERENCE_CONTENTS:
-			return getContents() != nullptr; //16
-		case EcorePackage::EANNOTATION_EREFERENCE_DETAILS:
-			return getDetails() != nullptr; //14
-		case EcorePackage::EANNOTATION_EREFERENCE_EMODELELEMENT:
-			return getEModelElement().lock() != nullptr; //15
-		case EcorePackage::EANNOTATION_EREFERENCE_REFERENCES:
-			return getReferences() != nullptr; //17
-		case EcorePackage::EANNOTATION_EATTRIBUTE_SOURCE:
-			return getSource() != ""; //13
+		case EcorePackage::EANNOTATION_ATTRIBUTE_CONTENTS:
+			return getContents() != nullptr; //17
+		case EcorePackage::EANNOTATION_ATTRIBUTE_DETAILS:
+			return getDetails() != nullptr; //15
+		case EcorePackage::EANNOTATION_ATTRIBUTE_EMODELELEMENT:
+			return getEModelElement().lock() != nullptr; //16
+		case EcorePackage::EANNOTATION_ATTRIBUTE_REFERENCES:
+			return getReferences() != nullptr; //18
+		case EcorePackage::EANNOTATION_ATTRIBUTE_SOURCE:
+			return getSource() != ""; //14
 	}
 	return EModelElementImpl::internalEIsSet(featureID);
 }
@@ -324,18 +325,18 @@ bool EAnnotationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case EcorePackage::EANNOTATION_EREFERENCE_EMODELELEMENT:
+		case EcorePackage::EANNOTATION_ATTRIBUTE_EMODELELEMENT:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EModelElement> _eModelElement = newValue->get<std::shared_ptr<ecore::EModelElement>>();
-			setEModelElement(_eModelElement); //15
+			setEModelElement(_eModelElement); //16
 			return true;
 		}
-		case EcorePackage::EANNOTATION_EATTRIBUTE_SOURCE:
+		case EcorePackage::EANNOTATION_ATTRIBUTE_SOURCE:
 		{
 			// BOOST CAST
 			std::string _source = newValue->get<std::string>();
-			setSource(_source); //13
+			setSource(_source); //14
 			return true;
 		}
 	}
@@ -452,7 +453,7 @@ void EAnnotationImpl::resolveReferences(const int featureID, std::list<std::shar
 {
 	switch(featureID)
 	{
-		case EcorePackage::EANNOTATION_EREFERENCE_EMODELELEMENT:
+		case EcorePackage::EANNOTATION_ATTRIBUTE_EMODELELEMENT:
 		{
 			if (references.size() == 1)
 			{
@@ -464,7 +465,7 @@ void EAnnotationImpl::resolveReferences(const int featureID, std::list<std::shar
 			return;
 		}
 
-		case EcorePackage::EANNOTATION_EREFERENCE_REFERENCES:
+		case EcorePackage::EANNOTATION_ATTRIBUTE_REFERENCES:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> _references = getReferences();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -503,12 +504,12 @@ void EAnnotationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 		// Save 'contents'
 		for (std::shared_ptr<ecore::EObject> contents : *this->getContents()) 
 		{
-			saveHandler->addReference(contents, "contents", contents->eClass() != package->getEObject_EClass());
+			saveHandler->addReference(contents, "contents", contents->eClass() != package->getEObject_Class());
 		}
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getEAnnotation_EAttribute_source()) )
+		if ( this->eIsSet(package->getEAnnotation_Attribute_source()) )
 		{
 			saveHandler->addAttribute("source", this->getSource());
 		}
@@ -529,7 +530,7 @@ void EAnnotationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 		std::shared_ptr<Bag<ecore::EStringToStringMapEntry>> list_details = this->getDetails();
 		for (std::shared_ptr<ecore::EStringToStringMapEntry> details : *list_details) 
 		{
-			saveHandler->addReference(details, "details", details->eClass() != package->getEStringToStringMapEntry_EClass());
+			saveHandler->addReference(details, "details", details->eClass() != package->getEStringToStringMapEntry_Class());
 		}
 	}
 	catch (std::exception& e)

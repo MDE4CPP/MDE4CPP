@@ -183,7 +183,7 @@ std::shared_ptr<ecore::EObject>  LoopNodeActivationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> LoopNodeActivationImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getLoopNodeActivation_EClass();
+	return FUMLPackageImpl::eInstance()->getLoopNodeActivation_Class();
 }
 
 //*********************************
@@ -261,7 +261,7 @@ Any LoopNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType) con
 {
 	switch(featureID)
 	{
-		case FUMLPackage::LOOPNODEACTIVATION_EREFERENCE_BODYOUTPUTLISTS:
+		case FUMLPackage::LOOPNODEACTIVATION_ATTRIBUTE_BODYOUTPUTLISTS:
 			return eAny(getBodyOutputLists()); //7411
 	}
 	return StructuredActivityNodeActivationImpl::eGet(featureID, resolve, coreType);
@@ -270,7 +270,7 @@ bool LoopNodeActivationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::LOOPNODEACTIVATION_EREFERENCE_BODYOUTPUTLISTS:
+		case FUMLPackage::LOOPNODEACTIVATION_ATTRIBUTE_BODYOUTPUTLISTS:
 			return getBodyOutputLists() != nullptr; //7411
 	}
 	return StructuredActivityNodeActivationImpl::internalEIsSet(featureID);
@@ -385,7 +385,7 @@ void LoopNodeActivationImpl::saveContent(std::shared_ptr<persistence::interfaces
 		std::shared_ptr<Bag<fUML::Values>> list_bodyOutputLists = this->getBodyOutputLists();
 		for (std::shared_ptr<fUML::Values> bodyOutputLists : *list_bodyOutputLists) 
 		{
-			saveHandler->addReference(bodyOutputLists, "bodyOutputLists", bodyOutputLists->eClass() != package->getValues_EClass());
+			saveHandler->addReference(bodyOutputLists, "bodyOutputLists", bodyOutputLists->eClass() != package->getValues_Class());
 		}
 	}
 	catch (std::exception& e)

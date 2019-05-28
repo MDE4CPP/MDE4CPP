@@ -264,7 +264,7 @@ std::shared_ptr<ecore::EObject>  InstanceSpecificationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> InstanceSpecificationImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getInstanceSpecification_EClass();
+	return UmlPackageImpl::eInstance()->getInstanceSpecification_Class();
 }
 
 //*********************************
@@ -384,11 +384,11 @@ Any InstanceSpecificationImpl::eGet(int featureID, bool resolve, bool coreType) 
 {
 	switch(featureID)
 	{
-		case UmlPackage::INSTANCESPECIFICATION_EREFERENCE_CLASSIFIER:
+		case UmlPackage::INSTANCESPECIFICATION_ATTRIBUTE_CLASSIFIER:
 			return eAny(getClassifier()); //11714
-		case UmlPackage::INSTANCESPECIFICATION_EREFERENCE_SLOT:
+		case UmlPackage::INSTANCESPECIFICATION_ATTRIBUTE_SLOT:
 			return eAny(getSlot()); //11715
-		case UmlPackage::INSTANCESPECIFICATION_EREFERENCE_SPECIFICATION:
+		case UmlPackage::INSTANCESPECIFICATION_ATTRIBUTE_SPECIFICATION:
 			return eAny(getSpecification()); //11716
 	}
 	Any result;
@@ -409,11 +409,11 @@ bool InstanceSpecificationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::INSTANCESPECIFICATION_EREFERENCE_CLASSIFIER:
+		case UmlPackage::INSTANCESPECIFICATION_ATTRIBUTE_CLASSIFIER:
 			return getClassifier() != nullptr; //11714
-		case UmlPackage::INSTANCESPECIFICATION_EREFERENCE_SLOT:
+		case UmlPackage::INSTANCESPECIFICATION_ATTRIBUTE_SLOT:
 			return getSlot() != nullptr; //11715
-		case UmlPackage::INSTANCESPECIFICATION_EREFERENCE_SPECIFICATION:
+		case UmlPackage::INSTANCESPECIFICATION_ATTRIBUTE_SPECIFICATION:
 			return getSpecification() != nullptr; //11716
 	}
 	bool result = false;
@@ -434,7 +434,7 @@ bool InstanceSpecificationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::INSTANCESPECIFICATION_EREFERENCE_SPECIFICATION:
+		case UmlPackage::INSTANCESPECIFICATION_ATTRIBUTE_SPECIFICATION:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ValueSpecification> _specification = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
@@ -517,7 +517,7 @@ void InstanceSpecificationImpl::loadNode(std::string nodeName, std::shared_ptr<p
 			{
 				typeName = "Slot";
 			}
-			std::shared_ptr<ecore::EObject> slot = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::SLOT_EREFERENCE_OWNINGINSTANCE);
+			std::shared_ptr<ecore::EObject> slot = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::SLOT_ATTRIBUTE_OWNINGINSTANCE);
 			if (slot != nullptr)
 			{
 				loadHandler->handleChild(slot);
@@ -560,7 +560,7 @@ void InstanceSpecificationImpl::resolveReferences(const int featureID, std::list
 {
 	switch(featureID)
 	{
-		case UmlPackage::INSTANCESPECIFICATION_EREFERENCE_CLASSIFIER:
+		case UmlPackage::INSTANCESPECIFICATION_ATTRIBUTE_CLASSIFIER:
 		{
 			std::shared_ptr<Bag<uml::Classifier>> _classifier = getClassifier();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -610,14 +610,14 @@ void InstanceSpecificationImpl::saveContent(std::shared_ptr<persistence::interfa
 		// Save 'slot'
 		for (std::shared_ptr<uml::Slot> slot : *this->getSlot()) 
 		{
-			saveHandler->addReference(slot, "slot", slot->eClass() != package->getSlot_EClass());
+			saveHandler->addReference(slot, "slot", slot->eClass() != package->getSlot_Class());
 		}
 
 		// Save 'specification'
 		std::shared_ptr<uml::ValueSpecification > specification = this->getSpecification();
 		if (specification != nullptr)
 		{
-			saveHandler->addReference(specification, "specification", specification->eClass() != package->getValueSpecification_EClass());
+			saveHandler->addReference(specification, "specification", specification->eClass() != package->getValueSpecification_Class());
 		}
 	
 

@@ -154,7 +154,7 @@ std::shared_ptr<ecore::EObject>  DeployedArtifactImpl::copy() const
 
 std::shared_ptr<ecore::EClass> DeployedArtifactImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getDeployedArtifact_EClass();
+	return UmlPackageImpl::eInstance()->getDeployedArtifact_Class();
 }
 
 //*********************************

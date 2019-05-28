@@ -138,7 +138,7 @@ std::shared_ptr<ecore::EObject>  ActivityFinalNodeActivationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ActivityFinalNodeActivationImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getActivityFinalNodeActivation_EClass();
+	return FUMLPackageImpl::eInstance()->getActivityFinalNodeActivation_Class();
 }
 
 //*********************************

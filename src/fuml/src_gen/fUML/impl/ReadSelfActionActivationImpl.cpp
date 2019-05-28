@@ -159,7 +159,7 @@ std::shared_ptr<ecore::EObject>  ReadSelfActionActivationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ReadSelfActionActivationImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getReadSelfActionActivation_EClass();
+	return FUMLPackageImpl::eInstance()->getReadSelfActionActivation_Class();
 }
 
 //*********************************

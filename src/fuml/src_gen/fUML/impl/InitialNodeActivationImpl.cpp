@@ -134,7 +134,7 @@ std::shared_ptr<ecore::EObject>  InitialNodeActivationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> InitialNodeActivationImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getInitialNodeActivation_EClass();
+	return FUMLPackageImpl::eInstance()->getInitialNodeActivation_Class();
 }
 
 //*********************************

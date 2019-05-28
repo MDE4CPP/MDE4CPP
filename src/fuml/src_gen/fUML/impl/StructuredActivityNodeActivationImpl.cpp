@@ -184,7 +184,7 @@ std::shared_ptr<ecore::EObject>  StructuredActivityNodeActivationImpl::copy() co
 
 std::shared_ptr<ecore::EClass> StructuredActivityNodeActivationImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getStructuredActivityNodeActivation_EClass();
+	return FUMLPackageImpl::eInstance()->getStructuredActivityNodeActivation_Class();
 }
 
 //*********************************
@@ -463,7 +463,7 @@ Any StructuredActivityNodeActivationImpl::eGet(int featureID, bool resolve, bool
 {
 	switch(featureID)
 	{
-		case FUMLPackage::STRUCTUREDACTIVITYNODEACTIVATION_EREFERENCE_ACTIVATIONGROUP:
+		case FUMLPackage::STRUCTUREDACTIVITYNODEACTIVATION_ATTRIBUTE_ACTIVATIONGROUP:
 			return eAny(getActivationGroup()); //10510
 	}
 	return ActionActivationImpl::eGet(featureID, resolve, coreType);
@@ -472,7 +472,7 @@ bool StructuredActivityNodeActivationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::STRUCTUREDACTIVITYNODEACTIVATION_EREFERENCE_ACTIVATIONGROUP:
+		case FUMLPackage::STRUCTUREDACTIVITYNODEACTIVATION_ATTRIBUTE_ACTIVATIONGROUP:
 			return getActivationGroup() != nullptr; //10510
 	}
 	return ActionActivationImpl::internalEIsSet(featureID);
@@ -481,7 +481,7 @@ bool StructuredActivityNodeActivationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case FUMLPackage::STRUCTUREDACTIVITYNODEACTIVATION_EREFERENCE_ACTIVATIONGROUP:
+		case FUMLPackage::STRUCTUREDACTIVITYNODEACTIVATION_ATTRIBUTE_ACTIVATIONGROUP:
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::ActivityNodeActivationGroup> _activationGroup = newValue->get<std::shared_ptr<fUML::ActivityNodeActivationGroup>>();
@@ -531,7 +531,7 @@ void StructuredActivityNodeActivationImpl::loadNode(std::string nodeName, std::s
 			{
 				typeName = "ActivityNodeActivationGroup";
 			}
-			std::shared_ptr<ecore::EObject> activationGroup = modelFactory->create(typeName, loadHandler->getCurrentObject(), FUMLPackage::ACTIVITYNODEACTIVATIONGROUP_EREFERENCE_CONTAININGNODEACTIVATION);
+			std::shared_ptr<ecore::EObject> activationGroup = modelFactory->create(typeName, loadHandler->getCurrentObject(), FUMLPackage::ACTIVITYNODEACTIVATIONGROUP_ATTRIBUTE_CONTAININGNODEACTIVATION);
 			if (activationGroup != nullptr)
 			{
 				loadHandler->handleChild(activationGroup);
@@ -589,7 +589,7 @@ void StructuredActivityNodeActivationImpl::saveContent(std::shared_ptr<persisten
 		std::shared_ptr<fUML::ActivityNodeActivationGroup > activationGroup = this->getActivationGroup();
 		if (activationGroup != nullptr)
 		{
-			saveHandler->addReference(activationGroup, "activationGroup", activationGroup->eClass() != package->getActivityNodeActivationGroup_EClass());
+			saveHandler->addReference(activationGroup, "activationGroup", activationGroup->eClass() != package->getActivityNodeActivationGroup_Class());
 		}
 	}
 	catch (std::exception& e)

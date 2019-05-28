@@ -214,7 +214,7 @@ std::shared_ptr<ecore::EObject>  InstanceValueImpl::copy() const
 
 std::shared_ptr<ecore::EClass> InstanceValueImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getInstanceValue_EClass();
+	return UmlPackageImpl::eInstance()->getInstanceValue_Class();
 }
 
 //*********************************
@@ -300,7 +300,7 @@ Any InstanceValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::INSTANCEVALUE_EREFERENCE_INSTANCE:
+		case UmlPackage::INSTANCEVALUE_ATTRIBUTE_INSTANCE:
 			return eAny(getInstance()); //11814
 	}
 	return ValueSpecificationImpl::eGet(featureID, resolve, coreType);
@@ -309,7 +309,7 @@ bool InstanceValueImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::INSTANCEVALUE_EREFERENCE_INSTANCE:
+		case UmlPackage::INSTANCEVALUE_ATTRIBUTE_INSTANCE:
 			return getInstance() != nullptr; //11814
 	}
 	return ValueSpecificationImpl::internalEIsSet(featureID);
@@ -318,7 +318,7 @@ bool InstanceValueImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::INSTANCEVALUE_EREFERENCE_INSTANCE:
+		case UmlPackage::INSTANCEVALUE_ATTRIBUTE_INSTANCE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::InstanceSpecification> _instance = newValue->get<std::shared_ptr<uml::InstanceSpecification>>();
@@ -386,7 +386,7 @@ void InstanceValueImpl::resolveReferences(const int featureID, std::list<std::sh
 {
 	switch(featureID)
 	{
-		case UmlPackage::INSTANCEVALUE_EREFERENCE_INSTANCE:
+		case UmlPackage::INSTANCEVALUE_ATTRIBUTE_INSTANCE:
 		{
 			if (references.size() == 1)
 			{

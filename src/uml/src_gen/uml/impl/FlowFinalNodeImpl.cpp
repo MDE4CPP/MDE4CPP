@@ -240,7 +240,7 @@ std::shared_ptr<ecore::EObject>  FlowFinalNodeImpl::copy() const
 
 std::shared_ptr<ecore::EClass> FlowFinalNodeImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getFlowFinalNode_EClass();
+	return UmlPackageImpl::eInstance()->getFlowFinalNode_Class();
 }
 
 //*********************************

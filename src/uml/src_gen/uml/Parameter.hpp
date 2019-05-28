@@ -222,7 +222,7 @@ namespace uml
 			
 			/*!
 			 Sets the default value for this parameter to the specified unlimited natural value. */ 
-			virtual void setUnlimitedNaturalDefaultValue(int value) = 0;
+			virtual void setUnlimitedNaturalDefaultValue(unsigned int value) = 0;
 			
 			/*!
 			 A Parameter cannot be a stream and exception at the same time.

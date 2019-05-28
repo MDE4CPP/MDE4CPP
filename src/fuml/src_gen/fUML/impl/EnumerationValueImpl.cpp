@@ -120,7 +120,7 @@ std::shared_ptr<ecore::EObject>  EnumerationValueImpl::copy() const
 
 std::shared_ptr<ecore::EClass> EnumerationValueImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getEnumerationValue_EClass();
+	return FUMLPackageImpl::eInstance()->getEnumerationValue_Class();
 }
 
 //*********************************
@@ -234,9 +234,9 @@ Any EnumerationValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::ENUMERATIONVALUE_EREFERENCE_LITERAL:
+		case FUMLPackage::ENUMERATIONVALUE_ATTRIBUTE_LITERAL:
 			return eAny(getLiteral()); //350
-		case FUMLPackage::ENUMERATIONVALUE_EREFERENCE_TYPE:
+		case FUMLPackage::ENUMERATIONVALUE_ATTRIBUTE_TYPE:
 			return eAny(getType()); //351
 	}
 	return ValueImpl::eGet(featureID, resolve, coreType);
@@ -245,9 +245,9 @@ bool EnumerationValueImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::ENUMERATIONVALUE_EREFERENCE_LITERAL:
+		case FUMLPackage::ENUMERATIONVALUE_ATTRIBUTE_LITERAL:
 			return getLiteral() != nullptr; //350
-		case FUMLPackage::ENUMERATIONVALUE_EREFERENCE_TYPE:
+		case FUMLPackage::ENUMERATIONVALUE_ATTRIBUTE_TYPE:
 			return getType() != nullptr; //351
 	}
 	return ValueImpl::internalEIsSet(featureID);
@@ -256,14 +256,14 @@ bool EnumerationValueImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case FUMLPackage::ENUMERATIONVALUE_EREFERENCE_LITERAL:
+		case FUMLPackage::ENUMERATIONVALUE_ATTRIBUTE_LITERAL:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::EnumerationLiteral> _literal = newValue->get<std::shared_ptr<uml::EnumerationLiteral>>();
 			setLiteral(_literal); //350
 			return true;
 		}
-		case FUMLPackage::ENUMERATIONVALUE_EREFERENCE_TYPE:
+		case FUMLPackage::ENUMERATIONVALUE_ATTRIBUTE_TYPE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Enumeration> _type = newValue->get<std::shared_ptr<uml::Enumeration>>();
@@ -338,7 +338,7 @@ void EnumerationValueImpl::resolveReferences(const int featureID, std::list<std:
 {
 	switch(featureID)
 	{
-		case FUMLPackage::ENUMERATIONVALUE_EREFERENCE_LITERAL:
+		case FUMLPackage::ENUMERATIONVALUE_ATTRIBUTE_LITERAL:
 		{
 			if (references.size() == 1)
 			{
@@ -350,7 +350,7 @@ void EnumerationValueImpl::resolveReferences(const int featureID, std::list<std:
 			return;
 		}
 
-		case FUMLPackage::ENUMERATIONVALUE_EREFERENCE_TYPE:
+		case FUMLPackage::ENUMERATIONVALUE_ATTRIBUTE_TYPE:
 		{
 			if (references.size() == 1)
 			{

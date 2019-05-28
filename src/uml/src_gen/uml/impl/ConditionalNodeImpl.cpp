@@ -146,11 +146,11 @@ ConditionalNodeImpl::~ConditionalNodeImpl()
 			{
 				switch(reference_id)
 				{	
-				case UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY:
+				case UmlPackage::ACTIVITYNODE_ATTRIBUTE_ACTIVITY:
 					m_activity = par_Activity;
 					m_owner = par_Activity;
 					 return;
-				case UmlPackage::ACTIVITYGROUP_EREFERENCE_INACTIVITY:
+				case UmlPackage::ACTIVITYGROUP_ATTRIBUTE_INACTIVITY:
 					m_inActivity = par_Activity;
 					m_owner = par_Activity;
 					 return;
@@ -452,7 +452,7 @@ std::shared_ptr<ecore::EObject>  ConditionalNodeImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ConditionalNodeImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getConditionalNode_EClass();
+	return UmlPackageImpl::eInstance()->getConditionalNode_Class();
 }
 
 //*********************************
@@ -629,13 +629,13 @@ Any ConditionalNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::CONDITIONALNODE_EREFERENCE_CLAUSE:
+		case UmlPackage::CONDITIONALNODE_ATTRIBUTE_CLAUSE:
 			return eAny(getClause()); //4944
-		case UmlPackage::CONDITIONALNODE_EATTRIBUTE_ISASSURED:
+		case UmlPackage::CONDITIONALNODE_ATTRIBUTE_ISASSURED:
 			return eAny(getIsAssured()); //4945
-		case UmlPackage::CONDITIONALNODE_EATTRIBUTE_ISDETERMINATE:
+		case UmlPackage::CONDITIONALNODE_ATTRIBUTE_ISDETERMINATE:
 			return eAny(getIsDeterminate()); //4946
-		case UmlPackage::CONDITIONALNODE_EREFERENCE_RESULT:
+		case UmlPackage::CONDITIONALNODE_ATTRIBUTE_RESULT:
 			return eAny(getResult()); //4947
 	}
 	return StructuredActivityNodeImpl::eGet(featureID, resolve, coreType);
@@ -644,13 +644,13 @@ bool ConditionalNodeImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::CONDITIONALNODE_EREFERENCE_CLAUSE:
+		case UmlPackage::CONDITIONALNODE_ATTRIBUTE_CLAUSE:
 			return getClause() != nullptr; //4944
-		case UmlPackage::CONDITIONALNODE_EATTRIBUTE_ISASSURED:
+		case UmlPackage::CONDITIONALNODE_ATTRIBUTE_ISASSURED:
 			return getIsAssured() != false; //4945
-		case UmlPackage::CONDITIONALNODE_EATTRIBUTE_ISDETERMINATE:
+		case UmlPackage::CONDITIONALNODE_ATTRIBUTE_ISDETERMINATE:
 			return getIsDeterminate() != false; //4946
-		case UmlPackage::CONDITIONALNODE_EREFERENCE_RESULT:
+		case UmlPackage::CONDITIONALNODE_ATTRIBUTE_RESULT:
 			return getResult() != nullptr; //4947
 	}
 	return StructuredActivityNodeImpl::internalEIsSet(featureID);
@@ -659,14 +659,14 @@ bool ConditionalNodeImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::CONDITIONALNODE_EATTRIBUTE_ISASSURED:
+		case UmlPackage::CONDITIONALNODE_ATTRIBUTE_ISASSURED:
 		{
 			// BOOST CAST
 			bool _isAssured = newValue->get<bool>();
 			setIsAssured(_isAssured); //4945
 			return true;
 		}
-		case UmlPackage::CONDITIONALNODE_EATTRIBUTE_ISDETERMINATE:
+		case UmlPackage::CONDITIONALNODE_ATTRIBUTE_ISDETERMINATE:
 		{
 			// BOOST CAST
 			bool _isDeterminate = newValue->get<bool>();
@@ -833,17 +833,17 @@ void ConditionalNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 		// Save 'clause'
 		for (std::shared_ptr<uml::Clause> clause : *this->getClause()) 
 		{
-			saveHandler->addReference(clause, "clause", clause->eClass() != package->getClause_EClass());
+			saveHandler->addReference(clause, "clause", clause->eClass() != package->getClause_Class());
 		}
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getConditionalNode_EAttribute_isAssured()) )
+		if ( this->eIsSet(package->getConditionalNode_Attribute_isAssured()) )
 		{
 			saveHandler->addAttribute("isAssured", this->getIsAssured());
 		}
 
-		if ( this->eIsSet(package->getConditionalNode_EAttribute_isDeterminate()) )
+		if ( this->eIsSet(package->getConditionalNode_Attribute_isDeterminate()) )
 		{
 			saveHandler->addAttribute("isDeterminate", this->getIsDeterminate());
 		}
@@ -857,7 +857,7 @@ void ConditionalNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 		std::shared_ptr<Bag<uml::OutputPin>> list_result = this->getResult();
 		for (std::shared_ptr<uml::OutputPin> result : *list_result) 
 		{
-			saveHandler->addReference(result, "result", result->eClass() != package->getOutputPin_EClass());
+			saveHandler->addReference(result, "result", result->eClass() != package->getOutputPin_Class());
 		}
 	}
 	catch (std::exception& e)

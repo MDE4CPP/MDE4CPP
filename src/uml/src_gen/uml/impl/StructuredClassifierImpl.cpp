@@ -203,11 +203,11 @@ StructuredClassifierImpl::~StructuredClassifierImpl()
 			{
 				switch(reference_id)
 				{	
-				case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
+				case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
 					m_owningPackage = par_Package;
 					m_namespace = par_Package;
 					 return;
-				case UmlPackage::TYPE_EREFERENCE_PACKAGE:
+				case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
 					m_package = par_Package;
 					m_namespace = par_Package;
 					 return;
@@ -454,7 +454,7 @@ std::shared_ptr<ecore::EObject>  StructuredClassifierImpl::copy() const
 
 std::shared_ptr<ecore::EClass> StructuredClassifierImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getStructuredClassifier_EClass();
+	return UmlPackageImpl::eInstance()->getStructuredClassifier_Class();
 }
 
 //*********************************
@@ -470,7 +470,7 @@ std::shared_ptr<Bag<uml::ConnectableElement> > StructuredClassifierImpl::allRole
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::Property> StructuredClassifierImpl::createOwnedAttribute(std::string name,std::shared_ptr<uml::Type>  type,int lower,int upper)
+std::shared_ptr<uml::Property> StructuredClassifierImpl::createOwnedAttribute(std::string name,std::shared_ptr<uml::Type>  type,int lower,unsigned int upper)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -595,13 +595,13 @@ Any StructuredClassifierImpl::eGet(int featureID, bool resolve, bool coreType) c
 {
 	switch(featureID)
 	{
-		case UmlPackage::STRUCTUREDCLASSIFIER_EREFERENCE_OWNEDATTRIBUTE:
+		case UmlPackage::STRUCTUREDCLASSIFIER_ATTRIBUTE_OWNEDATTRIBUTE:
 			return eAny(getOwnedAttribute()); //22838
-		case UmlPackage::STRUCTUREDCLASSIFIER_EREFERENCE_OWNEDCONNECTOR:
+		case UmlPackage::STRUCTUREDCLASSIFIER_ATTRIBUTE_OWNEDCONNECTOR:
 			return eAny(getOwnedConnector()); //22839
-		case UmlPackage::STRUCTUREDCLASSIFIER_EREFERENCE_PART:
+		case UmlPackage::STRUCTUREDCLASSIFIER_ATTRIBUTE_PART:
 			return eAny(getPart()); //22840
-		case UmlPackage::STRUCTUREDCLASSIFIER_EREFERENCE_ROLE:
+		case UmlPackage::STRUCTUREDCLASSIFIER_ATTRIBUTE_ROLE:
 			return eAny(getRole()); //22841
 	}
 	return ClassifierImpl::eGet(featureID, resolve, coreType);
@@ -610,13 +610,13 @@ bool StructuredClassifierImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::STRUCTUREDCLASSIFIER_EREFERENCE_OWNEDATTRIBUTE:
+		case UmlPackage::STRUCTUREDCLASSIFIER_ATTRIBUTE_OWNEDATTRIBUTE:
 			return getOwnedAttribute() != nullptr; //22838
-		case UmlPackage::STRUCTUREDCLASSIFIER_EREFERENCE_OWNEDCONNECTOR:
+		case UmlPackage::STRUCTUREDCLASSIFIER_ATTRIBUTE_OWNEDCONNECTOR:
 			return getOwnedConnector() != nullptr; //22839
-		case UmlPackage::STRUCTUREDCLASSIFIER_EREFERENCE_PART:
+		case UmlPackage::STRUCTUREDCLASSIFIER_ATTRIBUTE_PART:
 			return getPart() != nullptr; //22840
-		case UmlPackage::STRUCTUREDCLASSIFIER_EREFERENCE_ROLE:
+		case UmlPackage::STRUCTUREDCLASSIFIER_ATTRIBUTE_ROLE:
 			return getRole() != nullptr; //22841
 	}
 	return ClassifierImpl::internalEIsSet(featureID);
@@ -750,7 +750,7 @@ void StructuredClassifierImpl::saveContent(std::shared_ptr<persistence::interfac
 		// Save 'ownedConnector'
 		for (std::shared_ptr<uml::Connector> ownedConnector : *this->getOwnedConnector()) 
 		{
-			saveHandler->addReference(ownedConnector, "ownedConnector", ownedConnector->eClass() != package->getConnector_EClass());
+			saveHandler->addReference(ownedConnector, "ownedConnector", ownedConnector->eClass() != package->getConnector_Class());
 		}
 	
 
@@ -763,7 +763,7 @@ void StructuredClassifierImpl::saveContent(std::shared_ptr<persistence::interfac
 		std::shared_ptr<SubsetUnion<uml::Property, uml::Property,uml::NamedElement,uml::ConnectableElement>> list_ownedAttribute = this->getOwnedAttribute();
 		for (std::shared_ptr<uml::Property> ownedAttribute : *list_ownedAttribute) 
 		{
-			saveHandler->addReference(ownedAttribute, "ownedAttribute", ownedAttribute->eClass() != package->getProperty_EClass());
+			saveHandler->addReference(ownedAttribute, "ownedAttribute", ownedAttribute->eClass() != package->getProperty_Class());
 		}
 	}
 	catch (std::exception& e)

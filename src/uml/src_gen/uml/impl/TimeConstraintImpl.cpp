@@ -94,11 +94,11 @@ TimeConstraintImpl::~TimeConstraintImpl()
 			{
 				switch(reference_id)
 				{	
-				case UmlPackage::CONSTRAINT_EREFERENCE_CONTEXT:
+				case UmlPackage::CONSTRAINT_ATTRIBUTE_CONTEXT:
 					m_context = par_Namespace;
 					m_namespace = par_Namespace;
 					 return;
-				case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE:
+				case UmlPackage::NAMEDELEMENT_ATTRIBUTE_NAMESPACE:
 					m_namespace = par_Namespace;
 					m_owner = par_Namespace;
 					 return;
@@ -222,7 +222,7 @@ std::shared_ptr<ecore::EObject>  TimeConstraintImpl::copy() const
 
 std::shared_ptr<ecore::EClass> TimeConstraintImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getTimeConstraint_EClass();
+	return UmlPackageImpl::eInstance()->getTimeConstraint_Class();
 }
 
 //*********************************
@@ -313,7 +313,7 @@ Any TimeConstraintImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::TIMECONSTRAINT_EATTRIBUTE_FIRSTEVENT:
+		case UmlPackage::TIMECONSTRAINT_ATTRIBUTE_FIRSTEVENT:
 			return eAny(getFirstEvent()); //23615
 	}
 	return IntervalConstraintImpl::eGet(featureID, resolve, coreType);
@@ -322,7 +322,7 @@ bool TimeConstraintImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::TIMECONSTRAINT_EATTRIBUTE_FIRSTEVENT:
+		case UmlPackage::TIMECONSTRAINT_ATTRIBUTE_FIRSTEVENT:
 			return getFirstEvent() != true; //23615
 	}
 	return IntervalConstraintImpl::internalEIsSet(featureID);
@@ -331,7 +331,7 @@ bool TimeConstraintImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::TIMECONSTRAINT_EATTRIBUTE_FIRSTEVENT:
+		case UmlPackage::TIMECONSTRAINT_ATTRIBUTE_FIRSTEVENT:
 		{
 			// BOOST CAST
 			bool _firstEvent = newValue->get<bool>();
@@ -437,7 +437,7 @@ void TimeConstraintImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getTimeConstraint_EAttribute_firstEvent()) )
+		if ( this->eIsSet(package->getTimeConstraint_Attribute_firstEvent()) )
 		{
 			saveHandler->addAttribute("firstEvent", this->getFirstEvent());
 		}

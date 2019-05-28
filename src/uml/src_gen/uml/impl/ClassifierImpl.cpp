@@ -307,11 +307,11 @@ ClassifierImpl::~ClassifierImpl()
 			{
 				switch(reference_id)
 				{	
-				case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
+				case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
 					m_owningPackage = par_Package;
 					m_namespace = par_Package;
 					 return;
-				case UmlPackage::TYPE_EREFERENCE_PACKAGE:
+				case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
 					m_package = par_Package;
 					m_namespace = par_Package;
 					 return;
@@ -555,7 +555,7 @@ std::shared_ptr<ecore::EObject>  ClassifierImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ClassifierImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getClassifier_EClass();
+	return UmlPackageImpl::eInstance()->getClassifier_Class();
 }
 
 //*********************************
@@ -937,33 +937,33 @@ Any ClassifierImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::CLASSIFIER_EREFERENCE_ATTRIBUTE:
+		case UmlPackage::CLASSIFIER_ATTRIBUTE_ATTRIBUTE:
 			return eAny(getAttribute()); //3625
-		case UmlPackage::CLASSIFIER_EREFERENCE_COLLABORATIONUSE:
+		case UmlPackage::CLASSIFIER_ATTRIBUTE_COLLABORATIONUSE:
 			return eAny(getCollaborationUse()); //3626
-		case UmlPackage::CLASSIFIER_EREFERENCE_FEATURE:
+		case UmlPackage::CLASSIFIER_ATTRIBUTE_FEATURE:
 			return eAny(getFeature()); //3624
-		case UmlPackage::CLASSIFIER_EREFERENCE_GENERAL:
+		case UmlPackage::CLASSIFIER_ATTRIBUTE_GENERAL:
 			return eAny(getGeneral()); //3627
-		case UmlPackage::CLASSIFIER_EREFERENCE_GENERALIZATION:
+		case UmlPackage::CLASSIFIER_ATTRIBUTE_GENERALIZATION:
 			return eAny(getGeneralization()); //3628
-		case UmlPackage::CLASSIFIER_EREFERENCE_INHERITEDMEMBER:
+		case UmlPackage::CLASSIFIER_ATTRIBUTE_INHERITEDMEMBER:
 			return eAny(getInheritedMember()); //3630
-		case UmlPackage::CLASSIFIER_EATTRIBUTE_ISABSTRACT:
+		case UmlPackage::CLASSIFIER_ATTRIBUTE_ISABSTRACT:
 			return eAny(getIsAbstract()); //3631
-		case UmlPackage::CLASSIFIER_EATTRIBUTE_ISFINALSPECIALIZATION:
+		case UmlPackage::CLASSIFIER_ATTRIBUTE_ISFINALSPECIALIZATION:
 			return eAny(getIsFinalSpecialization()); //3632
-		case UmlPackage::CLASSIFIER_EREFERENCE_OWNEDUSECASE:
+		case UmlPackage::CLASSIFIER_ATTRIBUTE_OWNEDUSECASE:
 			return eAny(getOwnedUseCase()); //3633
-		case UmlPackage::CLASSIFIER_EREFERENCE_POWERTYPEEXTENT:
+		case UmlPackage::CLASSIFIER_ATTRIBUTE_POWERTYPEEXTENT:
 			return eAny(getPowertypeExtent()); //3629
-		case UmlPackage::CLASSIFIER_EREFERENCE_REDEFINEDCLASSIFIER:
+		case UmlPackage::CLASSIFIER_ATTRIBUTE_REDEFINEDCLASSIFIER:
 			return eAny(getRedefinedClassifier()); //3635
-		case UmlPackage::CLASSIFIER_EREFERENCE_REPRESENTATION:
+		case UmlPackage::CLASSIFIER_ATTRIBUTE_REPRESENTATION:
 			return eAny(getRepresentation()); //3636
-		case UmlPackage::CLASSIFIER_EREFERENCE_SUBSTITUTION:
+		case UmlPackage::CLASSIFIER_ATTRIBUTE_SUBSTITUTION:
 			return eAny(getSubstitution()); //3637
-		case UmlPackage::CLASSIFIER_EREFERENCE_USECASE:
+		case UmlPackage::CLASSIFIER_ATTRIBUTE_USECASE:
 			return eAny(getUseCase()); //3634
 	}
 	Any result;
@@ -989,33 +989,33 @@ bool ClassifierImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::CLASSIFIER_EREFERENCE_ATTRIBUTE:
+		case UmlPackage::CLASSIFIER_ATTRIBUTE_ATTRIBUTE:
 			return getAttribute() != nullptr; //3625
-		case UmlPackage::CLASSIFIER_EREFERENCE_COLLABORATIONUSE:
+		case UmlPackage::CLASSIFIER_ATTRIBUTE_COLLABORATIONUSE:
 			return getCollaborationUse() != nullptr; //3626
-		case UmlPackage::CLASSIFIER_EREFERENCE_FEATURE:
+		case UmlPackage::CLASSIFIER_ATTRIBUTE_FEATURE:
 			return getFeature() != nullptr; //3624
-		case UmlPackage::CLASSIFIER_EREFERENCE_GENERAL:
+		case UmlPackage::CLASSIFIER_ATTRIBUTE_GENERAL:
 			return getGeneral() != nullptr; //3627
-		case UmlPackage::CLASSIFIER_EREFERENCE_GENERALIZATION:
+		case UmlPackage::CLASSIFIER_ATTRIBUTE_GENERALIZATION:
 			return getGeneralization() != nullptr; //3628
-		case UmlPackage::CLASSIFIER_EREFERENCE_INHERITEDMEMBER:
+		case UmlPackage::CLASSIFIER_ATTRIBUTE_INHERITEDMEMBER:
 			return getInheritedMember() != nullptr; //3630
-		case UmlPackage::CLASSIFIER_EATTRIBUTE_ISABSTRACT:
+		case UmlPackage::CLASSIFIER_ATTRIBUTE_ISABSTRACT:
 			return getIsAbstract() != false; //3631
-		case UmlPackage::CLASSIFIER_EATTRIBUTE_ISFINALSPECIALIZATION:
+		case UmlPackage::CLASSIFIER_ATTRIBUTE_ISFINALSPECIALIZATION:
 			return getIsFinalSpecialization() != false; //3632
-		case UmlPackage::CLASSIFIER_EREFERENCE_OWNEDUSECASE:
+		case UmlPackage::CLASSIFIER_ATTRIBUTE_OWNEDUSECASE:
 			return getOwnedUseCase() != nullptr; //3633
-		case UmlPackage::CLASSIFIER_EREFERENCE_POWERTYPEEXTENT:
+		case UmlPackage::CLASSIFIER_ATTRIBUTE_POWERTYPEEXTENT:
 			return getPowertypeExtent() != nullptr; //3629
-		case UmlPackage::CLASSIFIER_EREFERENCE_REDEFINEDCLASSIFIER:
+		case UmlPackage::CLASSIFIER_ATTRIBUTE_REDEFINEDCLASSIFIER:
 			return getRedefinedClassifier() != nullptr; //3635
-		case UmlPackage::CLASSIFIER_EREFERENCE_REPRESENTATION:
+		case UmlPackage::CLASSIFIER_ATTRIBUTE_REPRESENTATION:
 			return getRepresentation() != nullptr; //3636
-		case UmlPackage::CLASSIFIER_EREFERENCE_SUBSTITUTION:
+		case UmlPackage::CLASSIFIER_ATTRIBUTE_SUBSTITUTION:
 			return getSubstitution() != nullptr; //3637
-		case UmlPackage::CLASSIFIER_EREFERENCE_USECASE:
+		case UmlPackage::CLASSIFIER_ATTRIBUTE_USECASE:
 			return getUseCase() != nullptr; //3634
 	}
 	bool result = false;
@@ -1041,21 +1041,21 @@ bool ClassifierImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::CLASSIFIER_EATTRIBUTE_ISABSTRACT:
+		case UmlPackage::CLASSIFIER_ATTRIBUTE_ISABSTRACT:
 		{
 			// BOOST CAST
 			bool _isAbstract = newValue->get<bool>();
 			setIsAbstract(_isAbstract); //3631
 			return true;
 		}
-		case UmlPackage::CLASSIFIER_EATTRIBUTE_ISFINALSPECIALIZATION:
+		case UmlPackage::CLASSIFIER_ATTRIBUTE_ISFINALSPECIALIZATION:
 		{
 			// BOOST CAST
 			bool _isFinalSpecialization = newValue->get<bool>();
 			setIsFinalSpecialization(_isFinalSpecialization); //3632
 			return true;
 		}
-		case UmlPackage::CLASSIFIER_EREFERENCE_REPRESENTATION:
+		case UmlPackage::CLASSIFIER_ATTRIBUTE_REPRESENTATION:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::CollaborationUse> _representation = newValue->get<std::shared_ptr<uml::CollaborationUse>>();
@@ -1207,7 +1207,7 @@ void ClassifierImpl::loadNode(std::string nodeName, std::shared_ptr<persistence:
 			{
 				typeName = "Generalization";
 			}
-			std::shared_ptr<ecore::EObject> generalization = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::GENERALIZATION_EREFERENCE_SPECIFIC);
+			std::shared_ptr<ecore::EObject> generalization = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::GENERALIZATION_ATTRIBUTE_SPECIFIC);
 			if (generalization != nullptr)
 			{
 				loadHandler->handleChild(generalization);
@@ -1239,7 +1239,7 @@ void ClassifierImpl::loadNode(std::string nodeName, std::shared_ptr<persistence:
 			{
 				typeName = "Substitution";
 			}
-			std::shared_ptr<ecore::EObject> substitution = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::SUBSTITUTION_EREFERENCE_SUBSTITUTINGCLASSIFIER);
+			std::shared_ptr<ecore::EObject> substitution = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::SUBSTITUTION_ATTRIBUTE_SUBSTITUTINGCLASSIFIER);
 			if (substitution != nullptr)
 			{
 				loadHandler->handleChild(substitution);
@@ -1266,7 +1266,7 @@ void ClassifierImpl::resolveReferences(const int featureID, std::list<std::share
 {
 	switch(featureID)
 	{
-		case UmlPackage::CLASSIFIER_EREFERENCE_GENERAL:
+		case UmlPackage::CLASSIFIER_ATTRIBUTE_GENERAL:
 		{
 			std::shared_ptr<Bag<uml::Classifier>> _general = getGeneral();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -1280,7 +1280,7 @@ void ClassifierImpl::resolveReferences(const int featureID, std::list<std::share
 			return;
 		}
 
-		case UmlPackage::CLASSIFIER_EREFERENCE_POWERTYPEEXTENT:
+		case UmlPackage::CLASSIFIER_ATTRIBUTE_POWERTYPEEXTENT:
 		{
 			std::shared_ptr<Bag<uml::GeneralizationSet>> _powertypeExtent = getPowertypeExtent();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -1294,7 +1294,7 @@ void ClassifierImpl::resolveReferences(const int featureID, std::list<std::share
 			return;
 		}
 
-		case UmlPackage::CLASSIFIER_EREFERENCE_REDEFINEDCLASSIFIER:
+		case UmlPackage::CLASSIFIER_ATTRIBUTE_REDEFINEDCLASSIFIER:
 		{
 			std::shared_ptr<Bag<uml::Classifier>> _redefinedClassifier = getRedefinedClassifier();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -1308,7 +1308,7 @@ void ClassifierImpl::resolveReferences(const int featureID, std::list<std::share
 			return;
 		}
 
-		case UmlPackage::CLASSIFIER_EREFERENCE_REPRESENTATION:
+		case UmlPackage::CLASSIFIER_ATTRIBUTE_REPRESENTATION:
 		{
 			if (references.size() == 1)
 			{
@@ -1320,7 +1320,7 @@ void ClassifierImpl::resolveReferences(const int featureID, std::list<std::share
 			return;
 		}
 
-		case UmlPackage::CLASSIFIER_EREFERENCE_USECASE:
+		case UmlPackage::CLASSIFIER_ATTRIBUTE_USECASE:
 		{
 			std::shared_ptr<Bag<uml::UseCase>> _useCase = getUseCase();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -1375,29 +1375,29 @@ void ClassifierImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 		// Save 'generalization'
 		for (std::shared_ptr<uml::Generalization> generalization : *this->getGeneralization()) 
 		{
-			saveHandler->addReference(generalization, "generalization", generalization->eClass() != package->getGeneralization_EClass());
+			saveHandler->addReference(generalization, "generalization", generalization->eClass() != package->getGeneralization_Class());
 		}
 
 		// Save 'ownedUseCase'
 		for (std::shared_ptr<uml::UseCase> ownedUseCase : *this->getOwnedUseCase()) 
 		{
-			saveHandler->addReference(ownedUseCase, "ownedUseCase", ownedUseCase->eClass() != package->getUseCase_EClass());
+			saveHandler->addReference(ownedUseCase, "ownedUseCase", ownedUseCase->eClass() != package->getUseCase_Class());
 		}
 
 		// Save 'substitution'
 		for (std::shared_ptr<uml::Substitution> substitution : *this->getSubstitution()) 
 		{
-			saveHandler->addReference(substitution, "substitution", substitution->eClass() != package->getSubstitution_EClass());
+			saveHandler->addReference(substitution, "substitution", substitution->eClass() != package->getSubstitution_Class());
 		}
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getClassifier_EAttribute_isAbstract()) )
+		if ( this->eIsSet(package->getClassifier_Attribute_isAbstract()) )
 		{
 			saveHandler->addAttribute("isAbstract", this->getIsAbstract());
 		}
 
-		if ( this->eIsSet(package->getClassifier_EAttribute_isFinalSpecialization()) )
+		if ( this->eIsSet(package->getClassifier_Attribute_isFinalSpecialization()) )
 		{
 			saveHandler->addAttribute("isFinalSpecialization", this->getIsFinalSpecialization());
 		}
@@ -1434,7 +1434,7 @@ void ClassifierImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 		std::shared_ptr<SubsetUnion<uml::CollaborationUse, uml::Element>> list_collaborationUse = this->getCollaborationUse();
 		for (std::shared_ptr<uml::CollaborationUse> collaborationUse : *list_collaborationUse) 
 		{
-			saveHandler->addReference(collaborationUse, "collaborationUse", collaborationUse->eClass() != package->getCollaborationUse_EClass());
+			saveHandler->addReference(collaborationUse, "collaborationUse", collaborationUse->eClass() != package->getCollaborationUse_Class());
 		}
 	}
 	catch (std::exception& e)

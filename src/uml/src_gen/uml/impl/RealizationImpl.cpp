@@ -218,7 +218,7 @@ std::shared_ptr<ecore::EObject>  RealizationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> RealizationImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getRealization_EClass();
+	return UmlPackageImpl::eInstance()->getRealization_Class();
 }
 
 //*********************************

@@ -103,7 +103,7 @@ namespace uml
 			 The query unlimitedValue() gives a single UnlimitedNatural value when one can be computed.
 			result = (null)
 			<p>From package UML::Values.</p> */ 
-			virtual int unlimitedValue() ;
+			virtual unsigned int unlimitedValue() ;
 			
 			
 			

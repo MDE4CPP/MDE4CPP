@@ -101,6 +101,7 @@ EFactoryImpl::EFactoryImpl(const EFactoryImpl & obj):EFactoryImpl()
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy EFactory "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	m_metaElementID = obj.getMetaElementID();
 
 	//copy references with no containment (soft copy)
 	
@@ -131,7 +132,7 @@ std::shared_ptr<ecore::EObject>  EFactoryImpl::copy() const
 
 std::shared_ptr<EClass> EFactoryImpl::eStaticClass() const
 {
-	return EcorePackageImpl::eInstance()->getEFactory_EClass();
+	return EcorePackageImpl::eInstance()->getEFactory_Class();
 }
 
 //*********************************
@@ -206,8 +207,8 @@ Any EFactoryImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case EcorePackage::EFACTORY_EREFERENCE_EPACKAGE:
-			return eAny(getEPackage()); //233
+		case EcorePackage::EFACTORY_ATTRIBUTE_EPACKAGE:
+			return eAny(getEPackage()); //234
 	}
 	return EModelElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -215,8 +216,8 @@ bool EFactoryImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case EcorePackage::EFACTORY_EREFERENCE_EPACKAGE:
-			return getEPackage() != nullptr; //233
+		case EcorePackage::EFACTORY_ATTRIBUTE_EPACKAGE:
+			return getEPackage() != nullptr; //234
 	}
 	return EModelElementImpl::internalEIsSet(featureID);
 }
@@ -224,11 +225,11 @@ bool EFactoryImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case EcorePackage::EFACTORY_EREFERENCE_EPACKAGE:
+		case EcorePackage::EFACTORY_ATTRIBUTE_EPACKAGE:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EPackage> _ePackage = newValue->get<std::shared_ptr<ecore::EPackage>>();
-			setEPackage(_ePackage); //233
+			setEPackage(_ePackage); //234
 			return true;
 		}
 	}
@@ -292,7 +293,7 @@ void EFactoryImpl::resolveReferences(const int featureID, std::list<std::shared_
 {
 	switch(featureID)
 	{
-		case EcorePackage::EFACTORY_EREFERENCE_EPACKAGE:
+		case EcorePackage::EFACTORY_ATTRIBUTE_EPACKAGE:
 		{
 			if (references.size() == 1)
 			{

@@ -143,7 +143,7 @@ std::shared_ptr<ecore::EObject>  OpaqueBehaviorExecutionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> OpaqueBehaviorExecutionImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getOpaqueBehaviorExecution_EClass();
+	return FUMLPackageImpl::eInstance()->getOpaqueBehaviorExecution_Class();
 }
 
 //*********************************

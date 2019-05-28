@@ -306,7 +306,7 @@ std::shared_ptr<ecore::EObject>  ReadLinkActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ReadLinkActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getReadLinkAction_EClass();
+	return UmlPackageImpl::eInstance()->getReadLinkAction_Class();
 }
 
 //*********************************
@@ -434,7 +434,7 @@ Any ReadLinkActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::READLINKACTION_EREFERENCE_RESULT:
+		case UmlPackage::READLINKACTION_ATTRIBUTE_RESULT:
 			return eAny(getResult()); //19529
 	}
 	return LinkActionImpl::eGet(featureID, resolve, coreType);
@@ -443,7 +443,7 @@ bool ReadLinkActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::READLINKACTION_EREFERENCE_RESULT:
+		case UmlPackage::READLINKACTION_ATTRIBUTE_RESULT:
 			return getResult() != nullptr; //19529
 	}
 	return LinkActionImpl::internalEIsSet(featureID);
@@ -452,7 +452,7 @@ bool ReadLinkActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::READLINKACTION_EREFERENCE_RESULT:
+		case UmlPackage::READLINKACTION_ATTRIBUTE_RESULT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::OutputPin> _result = newValue->get<std::shared_ptr<uml::OutputPin>>();
@@ -570,7 +570,7 @@ void ReadLinkActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 		std::shared_ptr<uml::OutputPin > result = this->getResult();
 		if (result != nullptr)
 		{
-			saveHandler->addReference(result, "result", result->eClass() != package->getOutputPin_EClass());
+			saveHandler->addReference(result, "result", result->eClass() != package->getOutputPin_Class());
 		}
 	
 

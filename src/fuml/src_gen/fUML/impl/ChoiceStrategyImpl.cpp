@@ -94,7 +94,7 @@ std::shared_ptr<ecore::EObject>  ChoiceStrategyImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ChoiceStrategyImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getChoiceStrategy_EClass();
+	return FUMLPackageImpl::eInstance()->getChoiceStrategy_Class();
 }
 
 //*********************************

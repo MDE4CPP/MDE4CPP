@@ -286,7 +286,7 @@ std::shared_ptr<ecore::EObject>  PinImpl::copy() const
 
 std::shared_ptr<ecore::EClass> PinImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getPin_EClass();
+	return UmlPackageImpl::eInstance()->getPin_Class();
 }
 
 //*********************************
@@ -383,7 +383,7 @@ Any PinImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::PIN_EATTRIBUTE_ISCONTROL:
+		case UmlPackage::PIN_ATTRIBUTE_ISCONTROL:
 			return eAny(getIsControl()); //18032
 	}
 	Any result;
@@ -399,7 +399,7 @@ bool PinImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::PIN_EATTRIBUTE_ISCONTROL:
+		case UmlPackage::PIN_ATTRIBUTE_ISCONTROL:
 			return getIsControl() != false; //18032
 	}
 	bool result = false;
@@ -415,7 +415,7 @@ bool PinImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::PIN_EATTRIBUTE_ISCONTROL:
+		case UmlPackage::PIN_ATTRIBUTE_ISCONTROL:
 		{
 			// BOOST CAST
 			bool _isControl = newValue->get<bool>();
@@ -533,7 +533,7 @@ void PinImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler>
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getPin_EAttribute_isControl()) )
+		if ( this->eIsSet(package->getPin_Attribute_isControl()) )
 		{
 			saveHandler->addAttribute("isControl", this->getIsControl());
 		}

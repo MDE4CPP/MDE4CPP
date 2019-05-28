@@ -135,11 +135,11 @@ ExpansionRegionImpl::~ExpansionRegionImpl()
 			{
 				switch(reference_id)
 				{	
-				case UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY:
+				case UmlPackage::ACTIVITYNODE_ATTRIBUTE_ACTIVITY:
 					m_activity = par_Activity;
 					m_owner = par_Activity;
 					 return;
-				case UmlPackage::ACTIVITYGROUP_EREFERENCE_INACTIVITY:
+				case UmlPackage::ACTIVITYGROUP_ATTRIBUTE_INACTIVITY:
 					m_inActivity = par_Activity;
 					m_owner = par_Activity;
 					 return;
@@ -420,7 +420,7 @@ std::shared_ptr<ecore::EObject>  ExpansionRegionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ExpansionRegionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getExpansionRegion_EClass();
+	return UmlPackageImpl::eInstance()->getExpansionRegion_Class();
 }
 
 //*********************************
@@ -552,11 +552,11 @@ Any ExpansionRegionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::EXPANSIONREGION_EREFERENCE_INPUTELEMENT:
+		case UmlPackage::EXPANSIONREGION_ATTRIBUTE_INPUTELEMENT:
 			return eAny(getInputElement()); //9446
-		case UmlPackage::EXPANSIONREGION_EATTRIBUTE_MODE:
+		case UmlPackage::EXPANSIONREGION_ATTRIBUTE_MODE:
 			return eAny(getMode()); //9444
-		case UmlPackage::EXPANSIONREGION_EREFERENCE_OUTPUTELEMENT:
+		case UmlPackage::EXPANSIONREGION_ATTRIBUTE_OUTPUTELEMENT:
 			return eAny(getOutputElement()); //9445
 	}
 	return StructuredActivityNodeImpl::eGet(featureID, resolve, coreType);
@@ -565,11 +565,11 @@ bool ExpansionRegionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::EXPANSIONREGION_EREFERENCE_INPUTELEMENT:
+		case UmlPackage::EXPANSIONREGION_ATTRIBUTE_INPUTELEMENT:
 			return getInputElement() != nullptr; //9446
-		case UmlPackage::EXPANSIONREGION_EATTRIBUTE_MODE:
+		case UmlPackage::EXPANSIONREGION_ATTRIBUTE_MODE:
 			return m_mode != ExpansionKind::ITERATIVE;; //9444
-		case UmlPackage::EXPANSIONREGION_EREFERENCE_OUTPUTELEMENT:
+		case UmlPackage::EXPANSIONREGION_ATTRIBUTE_OUTPUTELEMENT:
 			return getOutputElement() != nullptr; //9445
 	}
 	return StructuredActivityNodeImpl::internalEIsSet(featureID);
@@ -578,7 +578,7 @@ bool ExpansionRegionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::EXPANSIONREGION_EATTRIBUTE_MODE:
+		case UmlPackage::EXPANSIONREGION_ATTRIBUTE_MODE:
 		{
 			// BOOST CAST
 			ExpansionKind _mode = newValue->get<ExpansionKind>();
@@ -673,7 +673,7 @@ void ExpansionRegionImpl::resolveReferences(const int featureID, std::list<std::
 {
 	switch(featureID)
 	{
-		case UmlPackage::EXPANSIONREGION_EREFERENCE_INPUTELEMENT:
+		case UmlPackage::EXPANSIONREGION_ATTRIBUTE_INPUTELEMENT:
 		{
 			std::shared_ptr<Bag<uml::ExpansionNode>> _inputElement = getInputElement();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -687,7 +687,7 @@ void ExpansionRegionImpl::resolveReferences(const int featureID, std::list<std::
 			return;
 		}
 
-		case UmlPackage::EXPANSIONREGION_EREFERENCE_OUTPUTELEMENT:
+		case UmlPackage::EXPANSIONREGION_ATTRIBUTE_OUTPUTELEMENT:
 		{
 			std::shared_ptr<Bag<uml::ExpansionNode>> _outputElement = getOutputElement();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -747,7 +747,7 @@ void ExpansionRegionImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getExpansionRegion_EAttribute_mode()) )
+		if ( this->eIsSet(package->getExpansionRegion_Attribute_mode()) )
 		{
 			ExpansionKind value = this->getMode();
 			std::string literal = "";

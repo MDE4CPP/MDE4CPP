@@ -297,7 +297,7 @@ std::shared_ptr<ecore::EObject>  ClearStructuralFeatureActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ClearStructuralFeatureActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getClearStructuralFeatureAction_EClass();
+	return UmlPackageImpl::eInstance()->getClearStructuralFeatureAction_Class();
 }
 
 //*********************************
@@ -401,7 +401,7 @@ Any ClearStructuralFeatureActionImpl::eGet(int featureID, bool resolve, bool cor
 {
 	switch(featureID)
 	{
-		case UmlPackage::CLEARSTRUCTURALFEATUREACTION_EREFERENCE_RESULT:
+		case UmlPackage::CLEARSTRUCTURALFEATUREACTION_ATTRIBUTE_RESULT:
 			return eAny(getResult()); //4029
 	}
 	return StructuralFeatureActionImpl::eGet(featureID, resolve, coreType);
@@ -410,7 +410,7 @@ bool ClearStructuralFeatureActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::CLEARSTRUCTURALFEATUREACTION_EREFERENCE_RESULT:
+		case UmlPackage::CLEARSTRUCTURALFEATUREACTION_ATTRIBUTE_RESULT:
 			return getResult() != nullptr; //4029
 	}
 	return StructuralFeatureActionImpl::internalEIsSet(featureID);
@@ -419,7 +419,7 @@ bool ClearStructuralFeatureActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::CLEARSTRUCTURALFEATUREACTION_EREFERENCE_RESULT:
+		case UmlPackage::CLEARSTRUCTURALFEATUREACTION_ATTRIBUTE_RESULT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::OutputPin> _result = newValue->get<std::shared_ptr<uml::OutputPin>>();
@@ -537,7 +537,7 @@ void ClearStructuralFeatureActionImpl::saveContent(std::shared_ptr<persistence::
 		std::shared_ptr<uml::OutputPin > result = this->getResult();
 		if (result != nullptr)
 		{
-			saveHandler->addReference(result, "result", result->eClass() != package->getOutputPin_EClass());
+			saveHandler->addReference(result, "result", result->eClass() != package->getOutputPin_Class());
 		}
 	
 

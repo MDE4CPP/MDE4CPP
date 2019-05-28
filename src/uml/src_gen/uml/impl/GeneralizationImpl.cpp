@@ -166,7 +166,7 @@ std::shared_ptr<ecore::EObject>  GeneralizationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> GeneralizationImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getGeneralization_EClass();
+	return UmlPackageImpl::eInstance()->getGeneralization_Class();
 }
 
 //*********************************
@@ -271,13 +271,13 @@ Any GeneralizationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::GENERALIZATION_EREFERENCE_GENERAL:
+		case UmlPackage::GENERALIZATION_ATTRIBUTE_GENERAL:
 			return eAny(getGeneral()); //1096
-		case UmlPackage::GENERALIZATION_EREFERENCE_GENERALIZATIONSET:
+		case UmlPackage::GENERALIZATION_ATTRIBUTE_GENERALIZATIONSET:
 			return eAny(getGeneralizationSet()); //1097
-		case UmlPackage::GENERALIZATION_EATTRIBUTE_ISSUBSTITUTABLE:
+		case UmlPackage::GENERALIZATION_ATTRIBUTE_ISSUBSTITUTABLE:
 			return eAny(getIsSubstitutable()); //1098
-		case UmlPackage::GENERALIZATION_EREFERENCE_SPECIFIC:
+		case UmlPackage::GENERALIZATION_ATTRIBUTE_SPECIFIC:
 			return eAny(getSpecific()); //1099
 	}
 	return DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
@@ -286,13 +286,13 @@ bool GeneralizationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::GENERALIZATION_EREFERENCE_GENERAL:
+		case UmlPackage::GENERALIZATION_ATTRIBUTE_GENERAL:
 			return getGeneral() != nullptr; //1096
-		case UmlPackage::GENERALIZATION_EREFERENCE_GENERALIZATIONSET:
+		case UmlPackage::GENERALIZATION_ATTRIBUTE_GENERALIZATIONSET:
 			return getGeneralizationSet() != nullptr; //1097
-		case UmlPackage::GENERALIZATION_EATTRIBUTE_ISSUBSTITUTABLE:
+		case UmlPackage::GENERALIZATION_ATTRIBUTE_ISSUBSTITUTABLE:
 			return getIsSubstitutable() != true; //1098
-		case UmlPackage::GENERALIZATION_EREFERENCE_SPECIFIC:
+		case UmlPackage::GENERALIZATION_ATTRIBUTE_SPECIFIC:
 			return getSpecific().lock() != nullptr; //1099
 	}
 	return DirectedRelationshipImpl::internalEIsSet(featureID);
@@ -301,21 +301,21 @@ bool GeneralizationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::GENERALIZATION_EREFERENCE_GENERAL:
+		case UmlPackage::GENERALIZATION_ATTRIBUTE_GENERAL:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Classifier> _general = newValue->get<std::shared_ptr<uml::Classifier>>();
 			setGeneral(_general); //1096
 			return true;
 		}
-		case UmlPackage::GENERALIZATION_EATTRIBUTE_ISSUBSTITUTABLE:
+		case UmlPackage::GENERALIZATION_ATTRIBUTE_ISSUBSTITUTABLE:
 		{
 			// BOOST CAST
 			bool _isSubstitutable = newValue->get<bool>();
 			setIsSubstitutable(_isSubstitutable); //1098
 			return true;
 		}
-		case UmlPackage::GENERALIZATION_EREFERENCE_SPECIFIC:
+		case UmlPackage::GENERALIZATION_ATTRIBUTE_SPECIFIC:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Classifier> _specific = newValue->get<std::shared_ptr<uml::Classifier>>();
@@ -399,7 +399,7 @@ void GeneralizationImpl::resolveReferences(const int featureID, std::list<std::s
 {
 	switch(featureID)
 	{
-		case UmlPackage::GENERALIZATION_EREFERENCE_GENERAL:
+		case UmlPackage::GENERALIZATION_ATTRIBUTE_GENERAL:
 		{
 			if (references.size() == 1)
 			{
@@ -411,7 +411,7 @@ void GeneralizationImpl::resolveReferences(const int featureID, std::list<std::s
 			return;
 		}
 
-		case UmlPackage::GENERALIZATION_EREFERENCE_GENERALIZATIONSET:
+		case UmlPackage::GENERALIZATION_ATTRIBUTE_GENERALIZATIONSET:
 		{
 			std::shared_ptr<Bag<uml::GeneralizationSet>> _generalizationSet = getGeneralizationSet();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -425,7 +425,7 @@ void GeneralizationImpl::resolveReferences(const int featureID, std::list<std::s
 			return;
 		}
 
-		case UmlPackage::GENERALIZATION_EREFERENCE_SPECIFIC:
+		case UmlPackage::GENERALIZATION_ATTRIBUTE_SPECIFIC:
 		{
 			if (references.size() == 1)
 			{
@@ -468,7 +468,7 @@ void GeneralizationImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getGeneralization_EAttribute_isSubstitutable()) )
+		if ( this->eIsSet(package->getGeneralization_Attribute_isSubstitutable()) )
 		{
 			saveHandler->addAttribute("isSubstitutable", this->getIsSubstitutable());
 		}

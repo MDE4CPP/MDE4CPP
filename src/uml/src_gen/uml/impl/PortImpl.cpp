@@ -404,7 +404,7 @@ std::shared_ptr<ecore::EObject>  PortImpl::copy() const
 
 std::shared_ptr<ecore::EClass> PortImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getPort_EClass();
+	return UmlPackageImpl::eInstance()->getPort_Class();
 }
 
 //*********************************
@@ -608,19 +608,19 @@ Any PortImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::PORT_EATTRIBUTE_ISBEHAVIOR:
+		case UmlPackage::PORT_ATTRIBUTE_ISBEHAVIOR:
 			return eAny(getIsBehavior()); //18144
-		case UmlPackage::PORT_EATTRIBUTE_ISCONJUGATED:
+		case UmlPackage::PORT_ATTRIBUTE_ISCONJUGATED:
 			return eAny(getIsConjugated()); //18145
-		case UmlPackage::PORT_EATTRIBUTE_ISSERVICE:
+		case UmlPackage::PORT_ATTRIBUTE_ISSERVICE:
 			return eAny(getIsService()); //18146
-		case UmlPackage::PORT_EREFERENCE_PROTOCOL:
+		case UmlPackage::PORT_ATTRIBUTE_PROTOCOL:
 			return eAny(getProtocol()); //18147
-		case UmlPackage::PORT_EREFERENCE_PROVIDED:
+		case UmlPackage::PORT_ATTRIBUTE_PROVIDED:
 			return eAny(getProvided()); //18148
-		case UmlPackage::PORT_EREFERENCE_REDEFINEDPORT:
+		case UmlPackage::PORT_ATTRIBUTE_REDEFINEDPORT:
 			return eAny(getRedefinedPort()); //18149
-		case UmlPackage::PORT_EREFERENCE_REQUIRED:
+		case UmlPackage::PORT_ATTRIBUTE_REQUIRED:
 			return eAny(getRequired()); //18150
 	}
 	return PropertyImpl::eGet(featureID, resolve, coreType);
@@ -629,19 +629,19 @@ bool PortImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::PORT_EATTRIBUTE_ISBEHAVIOR:
+		case UmlPackage::PORT_ATTRIBUTE_ISBEHAVIOR:
 			return getIsBehavior() != false; //18144
-		case UmlPackage::PORT_EATTRIBUTE_ISCONJUGATED:
+		case UmlPackage::PORT_ATTRIBUTE_ISCONJUGATED:
 			return getIsConjugated() != false; //18145
-		case UmlPackage::PORT_EATTRIBUTE_ISSERVICE:
+		case UmlPackage::PORT_ATTRIBUTE_ISSERVICE:
 			return getIsService() != true; //18146
-		case UmlPackage::PORT_EREFERENCE_PROTOCOL:
+		case UmlPackage::PORT_ATTRIBUTE_PROTOCOL:
 			return getProtocol() != nullptr; //18147
-		case UmlPackage::PORT_EREFERENCE_PROVIDED:
+		case UmlPackage::PORT_ATTRIBUTE_PROVIDED:
 			return getProvided() != nullptr; //18148
-		case UmlPackage::PORT_EREFERENCE_REDEFINEDPORT:
+		case UmlPackage::PORT_ATTRIBUTE_REDEFINEDPORT:
 			return getRedefinedPort() != nullptr; //18149
-		case UmlPackage::PORT_EREFERENCE_REQUIRED:
+		case UmlPackage::PORT_ATTRIBUTE_REQUIRED:
 			return getRequired() != nullptr; //18150
 	}
 	return PropertyImpl::internalEIsSet(featureID);
@@ -650,28 +650,28 @@ bool PortImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::PORT_EATTRIBUTE_ISBEHAVIOR:
+		case UmlPackage::PORT_ATTRIBUTE_ISBEHAVIOR:
 		{
 			// BOOST CAST
 			bool _isBehavior = newValue->get<bool>();
 			setIsBehavior(_isBehavior); //18144
 			return true;
 		}
-		case UmlPackage::PORT_EATTRIBUTE_ISCONJUGATED:
+		case UmlPackage::PORT_ATTRIBUTE_ISCONJUGATED:
 		{
 			// BOOST CAST
 			bool _isConjugated = newValue->get<bool>();
 			setIsConjugated(_isConjugated); //18145
 			return true;
 		}
-		case UmlPackage::PORT_EATTRIBUTE_ISSERVICE:
+		case UmlPackage::PORT_ATTRIBUTE_ISSERVICE:
 		{
 			// BOOST CAST
 			bool _isService = newValue->get<bool>();
 			setIsService(_isService); //18146
 			return true;
 		}
-		case UmlPackage::PORT_EREFERENCE_PROTOCOL:
+		case UmlPackage::PORT_ATTRIBUTE_PROTOCOL:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ProtocolStateMachine> _protocol = newValue->get<std::shared_ptr<uml::ProtocolStateMachine>>();
@@ -773,7 +773,7 @@ void PortImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<
 {
 	switch(featureID)
 	{
-		case UmlPackage::PORT_EREFERENCE_PROTOCOL:
+		case UmlPackage::PORT_ATTRIBUTE_PROTOCOL:
 		{
 			if (references.size() == 1)
 			{
@@ -785,7 +785,7 @@ void PortImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<
 			return;
 		}
 
-		case UmlPackage::PORT_EREFERENCE_REDEFINEDPORT:
+		case UmlPackage::PORT_ATTRIBUTE_REDEFINEDPORT:
 		{
 			std::shared_ptr<Bag<uml::Port>> _redefinedPort = getRedefinedPort();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -844,17 +844,17 @@ void PortImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getPort_EAttribute_isBehavior()) )
+		if ( this->eIsSet(package->getPort_Attribute_isBehavior()) )
 		{
 			saveHandler->addAttribute("isBehavior", this->getIsBehavior());
 		}
 
-		if ( this->eIsSet(package->getPort_EAttribute_isConjugated()) )
+		if ( this->eIsSet(package->getPort_Attribute_isConjugated()) )
 		{
 			saveHandler->addAttribute("isConjugated", this->getIsConjugated());
 		}
 
-		if ( this->eIsSet(package->getPort_EAttribute_isService()) )
+		if ( this->eIsSet(package->getPort_Attribute_isService()) )
 		{
 			saveHandler->addAttribute("isService", this->getIsService());
 		}

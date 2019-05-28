@@ -150,11 +150,11 @@ InformationItemImpl::~InformationItemImpl()
 			{
 				switch(reference_id)
 				{	
-				case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
+				case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
 					m_owningPackage = par_Package;
 					m_namespace = par_Package;
 					 return;
-				case UmlPackage::TYPE_EREFERENCE_PACKAGE:
+				case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
 					m_package = par_Package;
 					m_namespace = par_Package;
 					 return;
@@ -370,7 +370,7 @@ std::shared_ptr<ecore::EObject>  InformationItemImpl::copy() const
 
 std::shared_ptr<ecore::EClass> InformationItemImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getInformationItem_EClass();
+	return UmlPackageImpl::eInstance()->getInformationItem_Class();
 }
 
 //*********************************
@@ -486,7 +486,7 @@ Any InformationItemImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::INFORMATIONITEM_EREFERENCE_REPRESENTED:
+		case UmlPackage::INFORMATIONITEM_ATTRIBUTE_REPRESENTED:
 			return eAny(getRepresented()); //11438
 	}
 	return ClassifierImpl::eGet(featureID, resolve, coreType);
@@ -495,7 +495,7 @@ bool InformationItemImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::INFORMATIONITEM_EREFERENCE_REPRESENTED:
+		case UmlPackage::INFORMATIONITEM_ATTRIBUTE_REPRESENTED:
 			return getRepresented() != nullptr; //11438
 	}
 	return ClassifierImpl::internalEIsSet(featureID);
@@ -565,7 +565,7 @@ void InformationItemImpl::resolveReferences(const int featureID, std::list<std::
 {
 	switch(featureID)
 	{
-		case UmlPackage::INFORMATIONITEM_EREFERENCE_REPRESENTED:
+		case UmlPackage::INFORMATIONITEM_ATTRIBUTE_REPRESENTED:
 		{
 			std::shared_ptr<Bag<uml::Classifier>> _represented = getRepresented();
 			for(std::shared_ptr<ecore::EObject> ref : references)

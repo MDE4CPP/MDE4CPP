@@ -159,7 +159,7 @@ std::shared_ptr<ecore::EObject>  ReadStructuralFeatureActionActivationImpl::copy
 
 std::shared_ptr<ecore::EClass> ReadStructuralFeatureActionActivationImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getReadStructuralFeatureActionActivation_EClass();
+	return FUMLPackageImpl::eInstance()->getReadStructuralFeatureActionActivation_Class();
 }
 
 //*********************************

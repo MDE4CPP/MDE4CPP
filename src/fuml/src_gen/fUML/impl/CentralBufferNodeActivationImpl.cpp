@@ -133,7 +133,7 @@ std::shared_ptr<ecore::EObject>  CentralBufferNodeActivationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> CentralBufferNodeActivationImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getCentralBufferNodeActivation_EClass();
+	return FUMLPackageImpl::eInstance()->getCentralBufferNodeActivation_Class();
 }
 
 //*********************************

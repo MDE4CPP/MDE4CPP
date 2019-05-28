@@ -124,7 +124,7 @@ std::shared_ptr<ecore::EObject>  FeatureValueImpl::copy() const
 
 std::shared_ptr<ecore::EClass> FeatureValueImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getFeatureValue_EClass();
+	return FUMLPackageImpl::eInstance()->getFeatureValue_Class();
 }
 
 //*********************************
@@ -247,11 +247,11 @@ Any FeatureValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::FEATUREVALUE_EREFERENCE_FEATURE:
+		case FUMLPackage::FEATUREVALUE_ATTRIBUTE_FEATURE:
 			return eAny(getFeature()); //522
-		case FUMLPackage::FEATUREVALUE_EATTRIBUTE_POSITION:
+		case FUMLPackage::FEATUREVALUE_ATTRIBUTE_POSITION:
 			return eAny(getPosition()); //521
-		case FUMLPackage::FEATUREVALUE_EREFERENCE_VALUES:
+		case FUMLPackage::FEATUREVALUE_ATTRIBUTE_VALUES:
 			return eAny(getValues()); //520
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
@@ -260,11 +260,11 @@ bool FeatureValueImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::FEATUREVALUE_EREFERENCE_FEATURE:
+		case FUMLPackage::FEATUREVALUE_ATTRIBUTE_FEATURE:
 			return getFeature() != nullptr; //522
-		case FUMLPackage::FEATUREVALUE_EATTRIBUTE_POSITION:
+		case FUMLPackage::FEATUREVALUE_ATTRIBUTE_POSITION:
 			return getPosition() != 0; //521
-		case FUMLPackage::FEATUREVALUE_EREFERENCE_VALUES:
+		case FUMLPackage::FEATUREVALUE_ATTRIBUTE_VALUES:
 			return getValues() != nullptr; //520
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
@@ -273,14 +273,14 @@ bool FeatureValueImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case FUMLPackage::FEATUREVALUE_EREFERENCE_FEATURE:
+		case FUMLPackage::FEATUREVALUE_ATTRIBUTE_FEATURE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::StructuralFeature> _feature = newValue->get<std::shared_ptr<uml::StructuralFeature>>();
 			setFeature(_feature); //522
 			return true;
 		}
-		case FUMLPackage::FEATUREVALUE_EATTRIBUTE_POSITION:
+		case FUMLPackage::FEATUREVALUE_ATTRIBUTE_POSITION:
 		{
 			// BOOST CAST
 			int _position = newValue->get<int>();
@@ -385,7 +385,7 @@ void FeatureValueImpl::resolveReferences(const int featureID, std::list<std::sha
 {
 	switch(featureID)
 	{
-		case FUMLPackage::FEATUREVALUE_EREFERENCE_FEATURE:
+		case FUMLPackage::FEATUREVALUE_ATTRIBUTE_FEATURE:
 		{
 			if (references.size() == 1)
 			{
@@ -418,7 +418,7 @@ void FeatureValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getFeatureValue_EAttribute_position()) )
+		if ( this->eIsSet(package->getFeatureValue_Attribute_position()) )
 		{
 			saveHandler->addAttribute("position", this->getPosition());
 		}
@@ -435,7 +435,7 @@ void FeatureValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 		std::shared_ptr<Bag<fUML::Value>> list_values = this->getValues();
 		for (std::shared_ptr<fUML::Value> values : *list_values) 
 		{
-			saveHandler->addReference(values, "values", values->eClass() != package->getValue_EClass());
+			saveHandler->addReference(values, "values", values->eClass() != package->getValue_Class());
 		}
 	}
 	catch (std::exception& e)

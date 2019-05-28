@@ -119,7 +119,7 @@ std::shared_ptr<ecore::EObject>  FactoryImpl::copy() const
 
 std::shared_ptr<ecore::EClass> FactoryImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getFactory_EClass();
+	return UmlPackageImpl::eInstance()->getFactory_Class();
 }
 
 //*********************************

@@ -277,7 +277,7 @@ std::shared_ptr<ecore::EObject>  ExpansionNodeImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ExpansionNodeImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getExpansionNode_EClass();
+	return UmlPackageImpl::eInstance()->getExpansionNode_Class();
 }
 
 //*********************************
@@ -377,9 +377,9 @@ Any ExpansionNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::EXPANSIONNODE_EREFERENCE_REGIONASINPUT:
+		case UmlPackage::EXPANSIONNODE_ATTRIBUTE_REGIONASINPUT:
 			return eAny(getRegionAsInput()); //9326
-		case UmlPackage::EXPANSIONNODE_EREFERENCE_REGIONASOUTPUT:
+		case UmlPackage::EXPANSIONNODE_ATTRIBUTE_REGIONASOUTPUT:
 			return eAny(getRegionAsOutput()); //9327
 	}
 	return ObjectNodeImpl::eGet(featureID, resolve, coreType);
@@ -388,9 +388,9 @@ bool ExpansionNodeImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::EXPANSIONNODE_EREFERENCE_REGIONASINPUT:
+		case UmlPackage::EXPANSIONNODE_ATTRIBUTE_REGIONASINPUT:
 			return getRegionAsInput() != nullptr; //9326
-		case UmlPackage::EXPANSIONNODE_EREFERENCE_REGIONASOUTPUT:
+		case UmlPackage::EXPANSIONNODE_ATTRIBUTE_REGIONASOUTPUT:
 			return getRegionAsOutput() != nullptr; //9327
 	}
 	return ObjectNodeImpl::internalEIsSet(featureID);
@@ -399,14 +399,14 @@ bool ExpansionNodeImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::EXPANSIONNODE_EREFERENCE_REGIONASINPUT:
+		case UmlPackage::EXPANSIONNODE_ATTRIBUTE_REGIONASINPUT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ExpansionRegion> _regionAsInput = newValue->get<std::shared_ptr<uml::ExpansionRegion>>();
 			setRegionAsInput(_regionAsInput); //9326
 			return true;
 		}
-		case UmlPackage::EXPANSIONNODE_EREFERENCE_REGIONASOUTPUT:
+		case UmlPackage::EXPANSIONNODE_ATTRIBUTE_REGIONASOUTPUT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ExpansionRegion> _regionAsOutput = newValue->get<std::shared_ptr<uml::ExpansionRegion>>();
@@ -481,7 +481,7 @@ void ExpansionNodeImpl::resolveReferences(const int featureID, std::list<std::sh
 {
 	switch(featureID)
 	{
-		case UmlPackage::EXPANSIONNODE_EREFERENCE_REGIONASINPUT:
+		case UmlPackage::EXPANSIONNODE_ATTRIBUTE_REGIONASINPUT:
 		{
 			if (references.size() == 1)
 			{
@@ -493,7 +493,7 @@ void ExpansionNodeImpl::resolveReferences(const int featureID, std::list<std::sh
 			return;
 		}
 
-		case UmlPackage::EXPANSIONNODE_EREFERENCE_REGIONASOUTPUT:
+		case UmlPackage::EXPANSIONNODE_ATTRIBUTE_REGIONASOUTPUT:
 		{
 			if (references.size() == 1)
 			{

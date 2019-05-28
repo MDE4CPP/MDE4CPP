@@ -164,7 +164,7 @@ std::shared_ptr<ecore::EObject>  StartClassifierBehaviorActionActivationImpl::co
 
 std::shared_ptr<ecore::EClass> StartClassifierBehaviorActionActivationImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getStartClassifierBehaviorActionActivation_EClass();
+	return FUMLPackageImpl::eInstance()->getStartClassifierBehaviorActionActivation_Class();
 }
 
 //*********************************

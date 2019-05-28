@@ -241,7 +241,7 @@ std::shared_ptr<ecore::EObject>  MergeNodeImpl::copy() const
 
 std::shared_ptr<ecore::EClass> MergeNodeImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getMergeNode_EClass();
+	return UmlPackageImpl::eInstance()->getMergeNode_Class();
 }
 
 //*********************************

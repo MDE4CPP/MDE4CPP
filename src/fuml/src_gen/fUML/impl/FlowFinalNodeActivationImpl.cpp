@@ -132,7 +132,7 @@ std::shared_ptr<ecore::EObject>  FlowFinalNodeActivationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> FlowFinalNodeActivationImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getFlowFinalNodeActivation_EClass();
+	return FUMLPackageImpl::eInstance()->getFlowFinalNodeActivation_Class();
 }
 
 //*********************************

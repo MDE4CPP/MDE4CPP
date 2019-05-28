@@ -132,7 +132,7 @@ std::shared_ptr<ecore::EObject>  JoinNodeActivationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> JoinNodeActivationImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getJoinNodeActivation_EClass();
+	return FUMLPackageImpl::eInstance()->getJoinNodeActivation_Class();
 }
 
 //*********************************

@@ -165,7 +165,7 @@ std::shared_ptr<ecore::EObject>  LinkEndDataImpl::copy() const
 
 std::shared_ptr<ecore::EClass> LinkEndDataImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getLinkEndData_EClass();
+	return UmlPackageImpl::eInstance()->getLinkEndData_Class();
 }
 
 //*********************************
@@ -275,11 +275,11 @@ Any LinkEndDataImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::LINKENDDATA_EREFERENCE_END:
+		case UmlPackage::LINKENDDATA_ATTRIBUTE_END:
 			return eAny(getEnd()); //1353
-		case UmlPackage::LINKENDDATA_EREFERENCE_QUALIFIER:
+		case UmlPackage::LINKENDDATA_ATTRIBUTE_QUALIFIER:
 			return eAny(getQualifier()); //1354
-		case UmlPackage::LINKENDDATA_EREFERENCE_VALUE:
+		case UmlPackage::LINKENDDATA_ATTRIBUTE_VALUE:
 			return eAny(getValue()); //1355
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
@@ -288,11 +288,11 @@ bool LinkEndDataImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::LINKENDDATA_EREFERENCE_END:
+		case UmlPackage::LINKENDDATA_ATTRIBUTE_END:
 			return getEnd() != nullptr; //1353
-		case UmlPackage::LINKENDDATA_EREFERENCE_QUALIFIER:
+		case UmlPackage::LINKENDDATA_ATTRIBUTE_QUALIFIER:
 			return getQualifier() != nullptr; //1354
-		case UmlPackage::LINKENDDATA_EREFERENCE_VALUE:
+		case UmlPackage::LINKENDDATA_ATTRIBUTE_VALUE:
 			return getValue() != nullptr; //1355
 	}
 	return ElementImpl::internalEIsSet(featureID);
@@ -301,14 +301,14 @@ bool LinkEndDataImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::LINKENDDATA_EREFERENCE_END:
+		case UmlPackage::LINKENDDATA_ATTRIBUTE_END:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Property> _end = newValue->get<std::shared_ptr<uml::Property>>();
 			setEnd(_end); //1353
 			return true;
 		}
-		case UmlPackage::LINKENDDATA_EREFERENCE_VALUE:
+		case UmlPackage::LINKENDDATA_ATTRIBUTE_VALUE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::InputPin> _value = newValue->get<std::shared_ptr<uml::InputPin>>();
@@ -410,7 +410,7 @@ void LinkEndDataImpl::resolveReferences(const int featureID, std::list<std::shar
 {
 	switch(featureID)
 	{
-		case UmlPackage::LINKENDDATA_EREFERENCE_END:
+		case UmlPackage::LINKENDDATA_ATTRIBUTE_END:
 		{
 			if (references.size() == 1)
 			{
@@ -422,7 +422,7 @@ void LinkEndDataImpl::resolveReferences(const int featureID, std::list<std::shar
 			return;
 		}
 
-		case UmlPackage::LINKENDDATA_EREFERENCE_VALUE:
+		case UmlPackage::LINKENDDATA_ATTRIBUTE_VALUE:
 		{
 			if (references.size() == 1)
 			{
@@ -459,7 +459,7 @@ void LinkEndDataImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 		// Save 'qualifier'
 		for (std::shared_ptr<uml::QualifierValue> qualifier : *this->getQualifier()) 
 		{
-			saveHandler->addReference(qualifier, "qualifier", qualifier->eClass() != package->getQualifierValue_EClass());
+			saveHandler->addReference(qualifier, "qualifier", qualifier->eClass() != package->getQualifierValue_Class());
 		}
 	
 

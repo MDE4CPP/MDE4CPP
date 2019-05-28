@@ -122,7 +122,7 @@ std::shared_ptr<ecore::EObject>  ReferenceImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ReferenceImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getReference_EClass();
+	return FUMLPackageImpl::eInstance()->getReference_Class();
 }
 
 //*********************************
@@ -161,7 +161,7 @@ bool ReferenceImpl::equals(std::shared_ptr<fUML::Value>  otherValue)
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 		bool isEqual = false;
-	if (otherValue->eClass()->getClassifierID() == fUML::FUMLPackage::REFERENCE_ECLASS) {
+	if (otherValue->eClass()->getClassifierID() == fUML::FUMLPackage::REFERENCE_CLASS) {
 		auto other = std::dynamic_pointer_cast<Reference>(otherValue);
 		if (this->getReferent() == nullptr) {
 			isEqual = other->getReferent() == nullptr;
@@ -268,7 +268,7 @@ Any ReferenceImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::REFERENCE_EREFERENCE_REFERENT:
+		case FUMLPackage::REFERENCE_ATTRIBUTE_REFERENT:
 			return eAny(getReferent()); //950
 	}
 	return StructuredValueImpl::eGet(featureID, resolve, coreType);
@@ -277,7 +277,7 @@ bool ReferenceImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::REFERENCE_EREFERENCE_REFERENT:
+		case FUMLPackage::REFERENCE_ATTRIBUTE_REFERENT:
 			return getReferent() != nullptr; //950
 	}
 	return StructuredValueImpl::internalEIsSet(featureID);
@@ -286,7 +286,7 @@ bool ReferenceImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case FUMLPackage::REFERENCE_EREFERENCE_REFERENT:
+		case FUMLPackage::REFERENCE_ATTRIBUTE_REFERENT:
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::Object> _referent = newValue->get<std::shared_ptr<fUML::Object>>();
@@ -354,7 +354,7 @@ void ReferenceImpl::resolveReferences(const int featureID, std::list<std::shared
 {
 	switch(featureID)
 	{
-		case FUMLPackage::REFERENCE_EREFERENCE_REFERENT:
+		case FUMLPackage::REFERENCE_ATTRIBUTE_REFERENT:
 		{
 			if (references.size() == 1)
 			{

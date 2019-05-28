@@ -355,7 +355,7 @@ std::shared_ptr<ecore::EObject>  ActionInputPinImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ActionInputPinImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getActionInputPin_EClass();
+	return UmlPackageImpl::eInstance()->getActionInputPin_Class();
 }
 
 //*********************************
@@ -477,7 +477,7 @@ Any ActionInputPinImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::ACTIONINPUTPIN_EREFERENCE_FROMACTION:
+		case UmlPackage::ACTIONINPUTPIN_ATTRIBUTE_FROMACTION:
 			return eAny(getFromAction()); //637
 	}
 	return InputPinImpl::eGet(featureID, resolve, coreType);
@@ -486,7 +486,7 @@ bool ActionInputPinImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::ACTIONINPUTPIN_EREFERENCE_FROMACTION:
+		case UmlPackage::ACTIONINPUTPIN_ATTRIBUTE_FROMACTION:
 			return getFromAction() != nullptr; //637
 	}
 	return InputPinImpl::internalEIsSet(featureID);
@@ -495,7 +495,7 @@ bool ActionInputPinImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::ACTIONINPUTPIN_EREFERENCE_FROMACTION:
+		case UmlPackage::ACTIONINPUTPIN_ATTRIBUTE_FROMACTION:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Action> _fromAction = newValue->get<std::shared_ptr<uml::Action>>();
@@ -616,7 +616,7 @@ void ActionInputPinImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 		std::shared_ptr<uml::Action > fromAction = this->getFromAction();
 		if (fromAction != nullptr)
 		{
-			saveHandler->addReference(fromAction, "fromAction", fromAction->eClass() != package->getAction_EClass());
+			saveHandler->addReference(fromAction, "fromAction", fromAction->eClass() != package->getAction_Class());
 		}
 	
 

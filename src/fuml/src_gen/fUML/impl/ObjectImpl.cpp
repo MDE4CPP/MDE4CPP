@@ -153,7 +153,7 @@ std::shared_ptr<ecore::EObject>  ObjectImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ObjectImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getObject_EClass();
+	return FUMLPackageImpl::eInstance()->getObject_Class();
 }
 
 //*********************************
@@ -288,9 +288,9 @@ Any ObjectImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::OBJECT_EREFERENCE_OBJECTACTIVATION:
+		case FUMLPackage::OBJECT_ATTRIBUTE_OBJECTACTIVATION:
 			return eAny(getObjectActivation()); //763
-		case FUMLPackage::OBJECT_EREFERENCE_TYPES:
+		case FUMLPackage::OBJECT_ATTRIBUTE_TYPES:
 			return eAny(getTypes()); //762
 	}
 	return ExtensionalValueImpl::eGet(featureID, resolve, coreType);
@@ -299,9 +299,9 @@ bool ObjectImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::OBJECT_EREFERENCE_OBJECTACTIVATION:
+		case FUMLPackage::OBJECT_ATTRIBUTE_OBJECTACTIVATION:
 			return getObjectActivation() != nullptr; //763
-		case FUMLPackage::OBJECT_EREFERENCE_TYPES:
+		case FUMLPackage::OBJECT_ATTRIBUTE_TYPES:
 			return getTypes() != nullptr; //762
 	}
 	return ExtensionalValueImpl::internalEIsSet(featureID);
@@ -310,7 +310,7 @@ bool ObjectImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case FUMLPackage::OBJECT_EREFERENCE_OBJECTACTIVATION:
+		case FUMLPackage::OBJECT_ATTRIBUTE_OBJECTACTIVATION:
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::ObjectActivation> _objectActivation = newValue->get<std::shared_ptr<fUML::ObjectActivation>>();
@@ -404,7 +404,7 @@ void ObjectImpl::resolveReferences(const int featureID, std::list<std::shared_pt
 {
 	switch(featureID)
 	{
-		case FUMLPackage::OBJECT_EREFERENCE_TYPES:
+		case FUMLPackage::OBJECT_ATTRIBUTE_TYPES:
 		{
 			std::shared_ptr<Bag<uml::Classifier>> _types = getTypes();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -467,7 +467,7 @@ void ObjectImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandl
 		std::shared_ptr<fUML::ObjectActivation > objectActivation = this->getObjectActivation();
 		if (objectActivation != nullptr)
 		{
-			saveHandler->addReference(objectActivation, "objectActivation", objectActivation->eClass() != package->getObjectActivation_EClass());
+			saveHandler->addReference(objectActivation, "objectActivation", objectActivation->eClass() != package->getObjectActivation_Class());
 		}
 	}
 	catch (std::exception& e)

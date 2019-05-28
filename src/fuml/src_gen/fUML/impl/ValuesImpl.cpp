@@ -103,7 +103,7 @@ std::shared_ptr<ecore::EObject>  ValuesImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ValuesImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getValues_EClass();
+	return FUMLPackageImpl::eInstance()->getValues_Class();
 }
 
 //*********************************
@@ -149,7 +149,7 @@ Any ValuesImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::VALUES_EREFERENCE_VALUES:
+		case FUMLPackage::VALUES_ATTRIBUTE_VALUES:
 			return eAny(getValues()); //1130
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
@@ -158,7 +158,7 @@ bool ValuesImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::VALUES_EREFERENCE_VALUES:
+		case FUMLPackage::VALUES_ATTRIBUTE_VALUES:
 			return getValues() != nullptr; //1130
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
@@ -228,7 +228,7 @@ void ValuesImpl::resolveReferences(const int featureID, std::list<std::shared_pt
 {
 	switch(featureID)
 	{
-		case FUMLPackage::VALUES_EREFERENCE_VALUES:
+		case FUMLPackage::VALUES_ATTRIBUTE_VALUES:
 		{
 			std::shared_ptr<Bag<fUML::Value>> _values = getValues();
 			for(std::shared_ptr<ecore::EObject> ref : references)

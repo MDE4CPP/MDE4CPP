@@ -249,7 +249,7 @@ std::shared_ptr<ecore::EObject>  InterfaceRealizationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> InterfaceRealizationImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getInterfaceRealization_EClass();
+	return UmlPackageImpl::eInstance()->getInterfaceRealization_Class();
 }
 
 //*********************************
@@ -357,9 +357,9 @@ Any InterfaceRealizationImpl::eGet(int featureID, bool resolve, bool coreType) c
 {
 	switch(featureID)
 	{
-		case UmlPackage::INTERFACEREALIZATION_EREFERENCE_CONTRACT:
+		case UmlPackage::INTERFACEREALIZATION_ATTRIBUTE_CONTRACT:
 			return eAny(getContract()); //12618
-		case UmlPackage::INTERFACEREALIZATION_EREFERENCE_IMPLEMENTINGCLASSIFIER:
+		case UmlPackage::INTERFACEREALIZATION_ATTRIBUTE_IMPLEMENTINGCLASSIFIER:
 			return eAny(getImplementingClassifier()); //12619
 	}
 	return RealizationImpl::eGet(featureID, resolve, coreType);
@@ -368,9 +368,9 @@ bool InterfaceRealizationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::INTERFACEREALIZATION_EREFERENCE_CONTRACT:
+		case UmlPackage::INTERFACEREALIZATION_ATTRIBUTE_CONTRACT:
 			return getContract() != nullptr; //12618
-		case UmlPackage::INTERFACEREALIZATION_EREFERENCE_IMPLEMENTINGCLASSIFIER:
+		case UmlPackage::INTERFACEREALIZATION_ATTRIBUTE_IMPLEMENTINGCLASSIFIER:
 			return getImplementingClassifier().lock() != nullptr; //12619
 	}
 	return RealizationImpl::internalEIsSet(featureID);
@@ -379,14 +379,14 @@ bool InterfaceRealizationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::INTERFACEREALIZATION_EREFERENCE_CONTRACT:
+		case UmlPackage::INTERFACEREALIZATION_ATTRIBUTE_CONTRACT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Interface> _contract = newValue->get<std::shared_ptr<uml::Interface>>();
 			setContract(_contract); //12618
 			return true;
 		}
-		case UmlPackage::INTERFACEREALIZATION_EREFERENCE_IMPLEMENTINGCLASSIFIER:
+		case UmlPackage::INTERFACEREALIZATION_ATTRIBUTE_IMPLEMENTINGCLASSIFIER:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::BehavioredClassifier> _implementingClassifier = newValue->get<std::shared_ptr<uml::BehavioredClassifier>>();
@@ -454,7 +454,7 @@ void InterfaceRealizationImpl::resolveReferences(const int featureID, std::list<
 {
 	switch(featureID)
 	{
-		case UmlPackage::INTERFACEREALIZATION_EREFERENCE_CONTRACT:
+		case UmlPackage::INTERFACEREALIZATION_ATTRIBUTE_CONTRACT:
 		{
 			if (references.size() == 1)
 			{
@@ -466,7 +466,7 @@ void InterfaceRealizationImpl::resolveReferences(const int featureID, std::list<
 			return;
 		}
 
-		case UmlPackage::INTERFACEREALIZATION_EREFERENCE_IMPLEMENTINGCLASSIFIER:
+		case UmlPackage::INTERFACEREALIZATION_ATTRIBUTE_IMPLEMENTINGCLASSIFIER:
 		{
 			if (references.size() == 1)
 			{

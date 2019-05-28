@@ -185,7 +185,7 @@ std::shared_ptr<ecore::EObject>  CallActionActivationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> CallActionActivationImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getCallActionActivation_EClass();
+	return FUMLPackageImpl::eInstance()->getCallActionActivation_Class();
 }
 
 //*********************************
@@ -361,7 +361,7 @@ Any CallActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) c
 {
 	switch(featureID)
 	{
-		case FUMLPackage::CALLACTIONACTIVATION_EREFERENCE_CALLEXECUTIONS:
+		case FUMLPackage::CALLACTIONACTIVATION_ATTRIBUTE_CALLEXECUTIONS:
 			return eAny(getCallExecutions()); //1210
 	}
 	return InvocationActionActivationImpl::eGet(featureID, resolve, coreType);
@@ -370,7 +370,7 @@ bool CallActionActivationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::CALLACTIONACTIVATION_EREFERENCE_CALLEXECUTIONS:
+		case FUMLPackage::CALLACTIONACTIVATION_ATTRIBUTE_CALLEXECUTIONS:
 			return getCallExecutions() != nullptr; //1210
 	}
 	return InvocationActionActivationImpl::internalEIsSet(featureID);
@@ -486,7 +486,7 @@ void CallActionActivationImpl::saveContent(std::shared_ptr<persistence::interfac
 		std::shared_ptr<Bag<fUML::Execution>> list_callExecutions = this->getCallExecutions();
 		for (std::shared_ptr<fUML::Execution> callExecutions : *list_callExecutions) 
 		{
-			saveHandler->addReference(callExecutions, "callExecutions", callExecutions->eClass() != package->getExecution_EClass());
+			saveHandler->addReference(callExecutions, "callExecutions", callExecutions->eClass() != package->getExecution_Class());
 		}
 	}
 	catch (std::exception& e)

@@ -359,7 +359,7 @@ std::shared_ptr<ecore::EObject>  InputPinImpl::copy() const
 
 std::shared_ptr<ecore::EClass> InputPinImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getInputPin_EClass();
+	return UmlPackageImpl::eInstance()->getInputPin_Class();
 }
 
 //*********************************
@@ -496,13 +496,13 @@ Any InputPinImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::INPUTPIN_EREFERENCE_ACTION:
+		case UmlPackage::INPUTPIN_ATTRIBUTE_ACTION:
 			return eAny(getAction()); //11636
-		case UmlPackage::INPUTPIN_EREFERENCE_CALLOPERATIONACTION:
+		case UmlPackage::INPUTPIN_ATTRIBUTE_CALLOPERATIONACTION:
 			return eAny(getCallOperationAction()); //11634
-		case UmlPackage::INPUTPIN_EREFERENCE_INVOCATIONACTION:
+		case UmlPackage::INPUTPIN_ATTRIBUTE_INVOCATIONACTION:
 			return eAny(getInvocationAction()); //11635
-		case UmlPackage::INPUTPIN_EREFERENCE_STRUCTURALFEATUREACTION:
+		case UmlPackage::INPUTPIN_ATTRIBUTE_STRUCTURALFEATUREACTION:
 			return eAny(getStructuralFeatureAction()); //11633
 	}
 	return PinImpl::eGet(featureID, resolve, coreType);
@@ -511,13 +511,13 @@ bool InputPinImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::INPUTPIN_EREFERENCE_ACTION:
+		case UmlPackage::INPUTPIN_ATTRIBUTE_ACTION:
 			return getAction().lock() != nullptr; //11636
-		case UmlPackage::INPUTPIN_EREFERENCE_CALLOPERATIONACTION:
+		case UmlPackage::INPUTPIN_ATTRIBUTE_CALLOPERATIONACTION:
 			return getCallOperationAction().lock() != nullptr; //11634
-		case UmlPackage::INPUTPIN_EREFERENCE_INVOCATIONACTION:
+		case UmlPackage::INPUTPIN_ATTRIBUTE_INVOCATIONACTION:
 			return getInvocationAction().lock() != nullptr; //11635
-		case UmlPackage::INPUTPIN_EREFERENCE_STRUCTURALFEATUREACTION:
+		case UmlPackage::INPUTPIN_ATTRIBUTE_STRUCTURALFEATUREACTION:
 			return getStructuralFeatureAction().lock() != nullptr; //11633
 	}
 	return PinImpl::internalEIsSet(featureID);
@@ -526,21 +526,21 @@ bool InputPinImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::INPUTPIN_EREFERENCE_CALLOPERATIONACTION:
+		case UmlPackage::INPUTPIN_ATTRIBUTE_CALLOPERATIONACTION:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::CallOperationAction> _callOperationAction = newValue->get<std::shared_ptr<uml::CallOperationAction>>();
 			setCallOperationAction(_callOperationAction); //11634
 			return true;
 		}
-		case UmlPackage::INPUTPIN_EREFERENCE_INVOCATIONACTION:
+		case UmlPackage::INPUTPIN_ATTRIBUTE_INVOCATIONACTION:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::InvocationAction> _invocationAction = newValue->get<std::shared_ptr<uml::InvocationAction>>();
 			setInvocationAction(_invocationAction); //11635
 			return true;
 		}
-		case UmlPackage::INPUTPIN_EREFERENCE_STRUCTURALFEATUREACTION:
+		case UmlPackage::INPUTPIN_ATTRIBUTE_STRUCTURALFEATUREACTION:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::StructuralFeatureAction> _structuralFeatureAction = newValue->get<std::shared_ptr<uml::StructuralFeatureAction>>();
@@ -589,7 +589,7 @@ void InputPinImpl::resolveReferences(const int featureID, std::list<std::shared_
 {
 	switch(featureID)
 	{
-		case UmlPackage::INPUTPIN_EREFERENCE_CALLOPERATIONACTION:
+		case UmlPackage::INPUTPIN_ATTRIBUTE_CALLOPERATIONACTION:
 		{
 			if (references.size() == 1)
 			{
@@ -601,7 +601,7 @@ void InputPinImpl::resolveReferences(const int featureID, std::list<std::shared_
 			return;
 		}
 
-		case UmlPackage::INPUTPIN_EREFERENCE_INVOCATIONACTION:
+		case UmlPackage::INPUTPIN_ATTRIBUTE_INVOCATIONACTION:
 		{
 			if (references.size() == 1)
 			{
@@ -613,7 +613,7 @@ void InputPinImpl::resolveReferences(const int featureID, std::list<std::shared_
 			return;
 		}
 
-		case UmlPackage::INPUTPIN_EREFERENCE_STRUCTURALFEATUREACTION:
+		case UmlPackage::INPUTPIN_ATTRIBUTE_STRUCTURALFEATUREACTION:
 		{
 			if (references.size() == 1)
 			{

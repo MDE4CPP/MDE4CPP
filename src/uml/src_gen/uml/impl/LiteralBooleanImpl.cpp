@@ -209,7 +209,7 @@ std::shared_ptr<ecore::EObject>  LiteralBooleanImpl::copy() const
 
 std::shared_ptr<ecore::EClass> LiteralBooleanImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getLiteralBoolean_EClass();
+	return UmlPackageImpl::eInstance()->getLiteralBoolean_Class();
 }
 
 //*********************************
@@ -295,7 +295,7 @@ Any LiteralBooleanImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::LITERALBOOLEAN_EATTRIBUTE_VALUE:
+		case UmlPackage::LITERALBOOLEAN_ATTRIBUTE_VALUE:
 			return eAny(getValue()); //13714
 	}
 	return LiteralSpecificationImpl::eGet(featureID, resolve, coreType);
@@ -304,7 +304,7 @@ bool LiteralBooleanImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::LITERALBOOLEAN_EATTRIBUTE_VALUE:
+		case UmlPackage::LITERALBOOLEAN_ATTRIBUTE_VALUE:
 			return getValue() != false; //13714
 	}
 	return LiteralSpecificationImpl::internalEIsSet(featureID);
@@ -313,7 +313,7 @@ bool LiteralBooleanImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::LITERALBOOLEAN_EATTRIBUTE_VALUE:
+		case UmlPackage::LITERALBOOLEAN_ATTRIBUTE_VALUE:
 		{
 			// BOOST CAST
 			bool _value = newValue->get<bool>();
@@ -420,7 +420,7 @@ void LiteralBooleanImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getLiteralBoolean_EAttribute_value()) )
+		if ( this->eIsSet(package->getLiteralBoolean_Attribute_value()) )
 		{
 			saveHandler->addAttribute("value", this->getValue());
 		}

@@ -184,7 +184,7 @@ std::shared_ptr<ecore::EObject>  ExecutionFactoryL2Impl::copy() const
 
 std::shared_ptr<ecore::EClass> ExecutionFactoryL2Impl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getExecutionFactoryL2_EClass();
+	return FUMLPackageImpl::eInstance()->getExecutionFactoryL2_Class();
 }
 
 //*********************************
@@ -202,137 +202,137 @@ std::shared_ptr<fUML::SemanticVisitor> ExecutionFactoryL2Impl::instantiateVisito
 
     if(!visitor){
         switch(element->eClass()->getClassifierID()){
-            case uml::UmlPackage::ACTIVITY_ECLASS:
+            case uml::UmlPackage::ACTIVITY_CLASS:
             {
                 visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createActivityExecution());
                 break;
             }
-            case uml::UmlPackage::ACTIVITYPARAMETERNODE_ECLASS:
+            case uml::UmlPackage::ACTIVITYPARAMETERNODE_CLASS:
             {
                 visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createActivityParameterNodeActivation());
                 break;
             }
-            case uml::UmlPackage::INITIALNODE_ECLASS:
+            case uml::UmlPackage::INITIALNODE_CLASS:
             {
                 visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createInitialNodeActivation());
                 break;
             }
-            case uml::UmlPackage::ACTIVITYFINALNODE_ECLASS:
+            case uml::UmlPackage::ACTIVITYFINALNODE_CLASS:
             {
                 visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createActivityFinalNodeActivation());
                 break;
             }
-            case uml::UmlPackage::FLOWFINALNODE_ECLASS:
+            case uml::UmlPackage::FLOWFINALNODE_CLASS:
             {
                 visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createFlowFinalNodeActivation());
                 break;
             }
-            case uml::UmlPackage::JOINNODE_ECLASS:
+            case uml::UmlPackage::JOINNODE_CLASS:
             {
                 visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createJoinNodeActivation());
                 break;
             }
-            case uml::UmlPackage::MERGENODE_ECLASS:
+            case uml::UmlPackage::MERGENODE_CLASS:
             {
                 visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createMergeNodeActivation());
                 break;
             }
-            case uml::UmlPackage::FORKNODE_ECLASS:
+            case uml::UmlPackage::FORKNODE_CLASS:
             {
                 visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createForkNodeActivation());
                 break;
             }
-            case uml::UmlPackage::DECISIONNODE_ECLASS:
+            case uml::UmlPackage::DECISIONNODE_CLASS:
             {
                 visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createDecisionNodeActivation());
                 break;
             }
-            case uml::UmlPackage::INPUTPIN_ECLASS:
+            case uml::UmlPackage::INPUTPIN_CLASS:
             {
                 visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createInputPinActivation());
                 break;
             }
-            case uml::UmlPackage::OUTPUTPIN_ECLASS:
+            case uml::UmlPackage::OUTPUTPIN_CLASS:
             {
                 visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createOutputPinActivation());
                 break;
             }
-            case uml::UmlPackage::CALLBEHAVIORACTION_ECLASS:
+            case uml::UmlPackage::CALLBEHAVIORACTION_CLASS:
             {
                 visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createCallBehaviorActionActivation());
                 break;
             }
-            case uml::UmlPackage::CALLOPERATIONACTION_ECLASS:
+            case uml::UmlPackage::CALLOPERATIONACTION_CLASS:
             {
                 visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createCallOperationActionActivation());
                 break;
             }
-            case uml::UmlPackage::SENDSIGNALACTION_ECLASS:
+            case uml::UmlPackage::SENDSIGNALACTION_CLASS:
             {
                 visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createSendSignalActionActivation());
                 break;
             }
-            case uml::UmlPackage::READSELFACTION_ECLASS:
+            case uml::UmlPackage::READSELFACTION_CLASS:
             {
                 visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createReadSelfActionActivation());
                 break;
             }
-            case uml::UmlPackage:: TESTIDENTITYACTION_ECLASS:
+            case uml::UmlPackage:: TESTIDENTITYACTION_CLASS:
             {
                 visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createTestIdentityActionActivation());
                 break;
             }
-            case uml::UmlPackage::VALUESPECIFICATIONACTION_ECLASS:
+            case uml::UmlPackage::VALUESPECIFICATIONACTION_CLASS:
             {
                 visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createValueSpecificActionActivation());
                 break;
             }
-            case uml::UmlPackage::CREATEOBJECTACTION_ECLASS:
+            case uml::UmlPackage::CREATEOBJECTACTION_CLASS:
             {
                 visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createCreateObjectActionActivation());
                 break;
             }
-            case uml::UmlPackage::DESTROYOBJECTACTION_ECLASS:
+            case uml::UmlPackage::DESTROYOBJECTACTION_CLASS:
             {
                 visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createDestroyObjectActionActivation());
                 break;
             }
-            case uml::UmlPackage::READSTRUCTURALFEATUREACTION_ECLASS:
+            case uml::UmlPackage::READSTRUCTURALFEATUREACTION_CLASS:
             {
                 visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createReadStructuralFeatureActionActivation());
                 break;
             }
-            case uml::UmlPackage::CLEARSTRUCTURALFEATUREACTION_ECLASS:
+            case uml::UmlPackage::CLEARSTRUCTURALFEATUREACTION_CLASS:
             {
                 visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createClearStructuralFeatureActionActivation());
                 break;
             }
-            case uml::UmlPackage::ADDSTRUCTURALFEATUREVALUEACTION_ECLASS:
+            case uml::UmlPackage::ADDSTRUCTURALFEATUREVALUEACTION_CLASS:
             {
                 visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createAddStructuralFeatureValueActionActivation());
                 break;
             }
-            case uml::UmlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_ECLASS:
+            case uml::UmlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_CLASS:
             {
                 visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createRemoveStructuralFeatureValueActivation());
                 break;
             }
-            case uml::UmlPackage::READLINKACTION_ECLASS:
+            case uml::UmlPackage::READLINKACTION_CLASS:
             {
                 visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createReadLinkActionActivation());
                 break;
             }
-            case uml::UmlPackage::CLEARASSOCIATIONACTION_ECLASS:
+            case uml::UmlPackage::CLEARASSOCIATIONACTION_CLASS:
             {
                 visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createClearAssociationActionActivation());
                 break;
             }
-            case uml::UmlPackage::CREATELINKACTION_ECLASS:
+            case uml::UmlPackage::CREATELINKACTION_CLASS:
             {
                 visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createCreateLinkActionActivation());
                 break;
             }
-            case uml::UmlPackage::DESTROYLINKACTION_ECLASS:
+            case uml::UmlPackage::DESTROYLINKACTION_CLASS:
             {
                 visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createDestroyLinkActionActivation());
                 break;

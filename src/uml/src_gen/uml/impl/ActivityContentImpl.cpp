@@ -94,7 +94,7 @@ std::shared_ptr<ecore::EObject>  ActivityContentImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ActivityContentImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getActivityContent_EClass();
+	return UmlPackageImpl::eInstance()->getActivityContent_Class();
 }
 
 //*********************************

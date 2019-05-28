@@ -214,7 +214,7 @@ std::shared_ptr<ecore::EObject>  ActionExecutionSpecificationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ActionExecutionSpecificationImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getActionExecutionSpecification_EClass();
+	return UmlPackageImpl::eInstance()->getActionExecutionSpecification_Class();
 }
 
 //*********************************
@@ -300,7 +300,7 @@ Any ActionExecutionSpecificationImpl::eGet(int featureID, bool resolve, bool cor
 {
 	switch(featureID)
 	{
-		case UmlPackage::ACTIONEXECUTIONSPECIFICATION_EREFERENCE_ACTION:
+		case UmlPackage::ACTIONEXECUTIONSPECIFICATION_ATTRIBUTE_ACTION:
 			return eAny(getAction()); //515
 	}
 	return ExecutionSpecificationImpl::eGet(featureID, resolve, coreType);
@@ -309,7 +309,7 @@ bool ActionExecutionSpecificationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::ACTIONEXECUTIONSPECIFICATION_EREFERENCE_ACTION:
+		case UmlPackage::ACTIONEXECUTIONSPECIFICATION_ATTRIBUTE_ACTION:
 			return getAction() != nullptr; //515
 	}
 	return ExecutionSpecificationImpl::internalEIsSet(featureID);
@@ -318,7 +318,7 @@ bool ActionExecutionSpecificationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::ACTIONEXECUTIONSPECIFICATION_EREFERENCE_ACTION:
+		case UmlPackage::ACTIONEXECUTIONSPECIFICATION_ATTRIBUTE_ACTION:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Action> _action = newValue->get<std::shared_ptr<uml::Action>>();
@@ -386,7 +386,7 @@ void ActionExecutionSpecificationImpl::resolveReferences(const int featureID, st
 {
 	switch(featureID)
 	{
-		case UmlPackage::ACTIONEXECUTIONSPECIFICATION_EREFERENCE_ACTION:
+		case UmlPackage::ACTIONEXECUTIONSPECIFICATION_ATTRIBUTE_ACTION:
 		{
 			if (references.size() == 1)
 			{

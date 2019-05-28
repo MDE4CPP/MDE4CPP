@@ -254,7 +254,7 @@ std::shared_ptr<ecore::EObject>  RedefinableTemplateSignatureImpl::copy() const
 
 std::shared_ptr<ecore::EClass> RedefinableTemplateSignatureImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getRedefinableTemplateSignature_EClass();
+	return UmlPackageImpl::eInstance()->getRedefinableTemplateSignature_Class();
 }
 
 //*********************************
@@ -361,11 +361,11 @@ Any RedefinableTemplateSignatureImpl::eGet(int featureID, bool resolve, bool cor
 {
 	switch(featureID)
 	{
-		case UmlPackage::REDEFINABLETEMPLATESIGNATURE_EREFERENCE_CLASSIFIER:
+		case UmlPackage::REDEFINABLETEMPLATESIGNATURE_ATTRIBUTE_CLASSIFIER:
 			return eAny(getClassifier()); //20517
-		case UmlPackage::REDEFINABLETEMPLATESIGNATURE_EREFERENCE_EXTENDEDSIGNATURE:
+		case UmlPackage::REDEFINABLETEMPLATESIGNATURE_ATTRIBUTE_EXTENDEDSIGNATURE:
 			return eAny(getExtendedSignature()); //20515
-		case UmlPackage::REDEFINABLETEMPLATESIGNATURE_EREFERENCE_INHERITEDPARAMETER:
+		case UmlPackage::REDEFINABLETEMPLATESIGNATURE_ATTRIBUTE_INHERITEDPARAMETER:
 			return eAny(getInheritedParameter()); //20516
 	}
 	Any result;
@@ -381,11 +381,11 @@ bool RedefinableTemplateSignatureImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::REDEFINABLETEMPLATESIGNATURE_EREFERENCE_CLASSIFIER:
+		case UmlPackage::REDEFINABLETEMPLATESIGNATURE_ATTRIBUTE_CLASSIFIER:
 			return getClassifier() != nullptr; //20517
-		case UmlPackage::REDEFINABLETEMPLATESIGNATURE_EREFERENCE_EXTENDEDSIGNATURE:
+		case UmlPackage::REDEFINABLETEMPLATESIGNATURE_ATTRIBUTE_EXTENDEDSIGNATURE:
 			return getExtendedSignature() != nullptr; //20515
-		case UmlPackage::REDEFINABLETEMPLATESIGNATURE_EREFERENCE_INHERITEDPARAMETER:
+		case UmlPackage::REDEFINABLETEMPLATESIGNATURE_ATTRIBUTE_INHERITEDPARAMETER:
 			return getInheritedParameter() != nullptr; //20516
 	}
 	bool result = false;
@@ -471,7 +471,7 @@ void RedefinableTemplateSignatureImpl::resolveReferences(const int featureID, st
 {
 	switch(featureID)
 	{
-		case UmlPackage::REDEFINABLETEMPLATESIGNATURE_EREFERENCE_EXTENDEDSIGNATURE:
+		case UmlPackage::REDEFINABLETEMPLATESIGNATURE_ATTRIBUTE_EXTENDEDSIGNATURE:
 		{
 			std::shared_ptr<Bag<uml::RedefinableTemplateSignature>> _extendedSignature = getExtendedSignature();
 			for(std::shared_ptr<ecore::EObject> ref : references)

@@ -241,7 +241,7 @@ std::shared_ptr<ecore::EObject>  ForkNodeImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ForkNodeImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getForkNode_EClass();
+	return UmlPackageImpl::eInstance()->getForkNode_Class();
 }
 
 //*********************************

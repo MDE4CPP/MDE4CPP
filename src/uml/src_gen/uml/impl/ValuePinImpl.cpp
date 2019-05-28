@@ -355,7 +355,7 @@ std::shared_ptr<ecore::EObject>  ValuePinImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ValuePinImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getValuePin_EClass();
+	return UmlPackageImpl::eInstance()->getValuePin_Class();
 }
 
 //*********************************
@@ -471,7 +471,7 @@ Any ValuePinImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::VALUEPIN_EREFERENCE_VALUE:
+		case UmlPackage::VALUEPIN_ATTRIBUTE_VALUE:
 			return eAny(getValue()); //24937
 	}
 	return InputPinImpl::eGet(featureID, resolve, coreType);
@@ -480,7 +480,7 @@ bool ValuePinImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::VALUEPIN_EREFERENCE_VALUE:
+		case UmlPackage::VALUEPIN_ATTRIBUTE_VALUE:
 			return getValue() != nullptr; //24937
 	}
 	return InputPinImpl::internalEIsSet(featureID);
@@ -489,7 +489,7 @@ bool ValuePinImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::VALUEPIN_EREFERENCE_VALUE:
+		case UmlPackage::VALUEPIN_ATTRIBUTE_VALUE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ValueSpecification> _value = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
@@ -610,7 +610,7 @@ void ValuePinImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 		std::shared_ptr<uml::ValueSpecification > value = this->getValue();
 		if (value != nullptr)
 		{
-			saveHandler->addReference(value, "value", value->eClass() != package->getValueSpecification_EClass());
+			saveHandler->addReference(value, "value", value->eClass() != package->getValueSpecification_Class());
 		}
 	
 

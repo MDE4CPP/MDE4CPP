@@ -96,7 +96,7 @@ std::shared_ptr<ecore::EObject>  EStringToStringMapEntryImpl::copy() const
 
 std::shared_ptr<EClass> EStringToStringMapEntryImpl::eStaticClass() const
 {
-	return EcorePackageImpl::eInstance()->getEStringToStringMapEntry_EClass();
+	return EcorePackageImpl::eInstance()->getEStringToStringMapEntry_Class();
 }
 
 //*********************************
@@ -155,9 +155,9 @@ Any EStringToStringMapEntryImpl::eGet(int featureID, bool resolve, bool coreType
 {
 	switch(featureID)
 	{
-		case EcorePackage::ESTRINGTOSTRINGMAPENTRY_EATTRIBUTE_KEY:
+		case EcorePackage::ESTRINGTOSTRINGMAPENTRY_ATTRIBUTE_KEY:
 			return eAny(getKey()); //490
-		case EcorePackage::ESTRINGTOSTRINGMAPENTRY_EATTRIBUTE_VALUE:
+		case EcorePackage::ESTRINGTOSTRINGMAPENTRY_ATTRIBUTE_VALUE:
 			return eAny(getValue()); //491
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
@@ -166,9 +166,9 @@ bool EStringToStringMapEntryImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case EcorePackage::ESTRINGTOSTRINGMAPENTRY_EATTRIBUTE_KEY:
+		case EcorePackage::ESTRINGTOSTRINGMAPENTRY_ATTRIBUTE_KEY:
 			return getKey() != ""; //490
-		case EcorePackage::ESTRINGTOSTRINGMAPENTRY_EATTRIBUTE_VALUE:
+		case EcorePackage::ESTRINGTOSTRINGMAPENTRY_ATTRIBUTE_VALUE:
 			return getValue() != ""; //491
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
@@ -177,14 +177,14 @@ bool EStringToStringMapEntryImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case EcorePackage::ESTRINGTOSTRINGMAPENTRY_EATTRIBUTE_KEY:
+		case EcorePackage::ESTRINGTOSTRINGMAPENTRY_ATTRIBUTE_KEY:
 		{
 			// BOOST CAST
 			std::string _key = newValue->get<std::string>();
 			setKey(_key); //490
 			return true;
 		}
-		case EcorePackage::ESTRINGTOSTRINGMAPENTRY_EATTRIBUTE_VALUE:
+		case EcorePackage::ESTRINGTOSTRINGMAPENTRY_ATTRIBUTE_VALUE:
 		{
 			// BOOST CAST
 			std::string _value = newValue->get<std::string>();
@@ -282,12 +282,12 @@ void EStringToStringMapEntryImpl::saveContent(std::shared_ptr<persistence::inter
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getEStringToStringMapEntry_EAttribute_key()) )
+		if ( this->eIsSet(package->getEStringToStringMapEntry_Attribute_key()) )
 		{
 			saveHandler->addAttribute("key", this->getKey());
 		}
 
-		if ( this->eIsSet(package->getEStringToStringMapEntry_EAttribute_value()) )
+		if ( this->eIsSet(package->getEStringToStringMapEntry_Attribute_value()) )
 		{
 			saveHandler->addAttribute("value", this->getValue());
 		}

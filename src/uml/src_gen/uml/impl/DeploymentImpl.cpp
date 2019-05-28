@@ -284,7 +284,7 @@ std::shared_ptr<ecore::EObject>  DeploymentImpl::copy() const
 
 std::shared_ptr<ecore::EClass> DeploymentImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getDeployment_EClass();
+	return UmlPackageImpl::eInstance()->getDeployment_Class();
 }
 
 //*********************************
@@ -396,11 +396,11 @@ Any DeploymentImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::DEPLOYMENT_EREFERENCE_CONFIGURATION:
+		case UmlPackage::DEPLOYMENT_ATTRIBUTE_CONFIGURATION:
 			return eAny(getConfiguration()); //6917
-		case UmlPackage::DEPLOYMENT_EREFERENCE_DEPLOYEDARTIFACT:
+		case UmlPackage::DEPLOYMENT_ATTRIBUTE_DEPLOYEDARTIFACT:
 			return eAny(getDeployedArtifact()); //6918
-		case UmlPackage::DEPLOYMENT_EREFERENCE_LOCATION:
+		case UmlPackage::DEPLOYMENT_ATTRIBUTE_LOCATION:
 			return eAny(getLocation()); //6919
 	}
 	return DependencyImpl::eGet(featureID, resolve, coreType);
@@ -409,11 +409,11 @@ bool DeploymentImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::DEPLOYMENT_EREFERENCE_CONFIGURATION:
+		case UmlPackage::DEPLOYMENT_ATTRIBUTE_CONFIGURATION:
 			return getConfiguration() != nullptr; //6917
-		case UmlPackage::DEPLOYMENT_EREFERENCE_DEPLOYEDARTIFACT:
+		case UmlPackage::DEPLOYMENT_ATTRIBUTE_DEPLOYEDARTIFACT:
 			return getDeployedArtifact() != nullptr; //6918
-		case UmlPackage::DEPLOYMENT_EREFERENCE_LOCATION:
+		case UmlPackage::DEPLOYMENT_ATTRIBUTE_LOCATION:
 			return getLocation().lock() != nullptr; //6919
 	}
 	return DependencyImpl::internalEIsSet(featureID);
@@ -422,7 +422,7 @@ bool DeploymentImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::DEPLOYMENT_EREFERENCE_LOCATION:
+		case UmlPackage::DEPLOYMENT_ATTRIBUTE_LOCATION:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::DeploymentTarget> _location = newValue->get<std::shared_ptr<uml::DeploymentTarget>>();
@@ -491,7 +491,7 @@ void DeploymentImpl::loadNode(std::string nodeName, std::shared_ptr<persistence:
 			{
 				typeName = "DeploymentSpecification";
 			}
-			std::shared_ptr<ecore::EObject> configuration = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::DEPLOYMENTSPECIFICATION_EREFERENCE_DEPLOYMENT);
+			std::shared_ptr<ecore::EObject> configuration = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::DEPLOYMENTSPECIFICATION_ATTRIBUTE_DEPLOYMENT);
 			if (configuration != nullptr)
 			{
 				loadHandler->handleChild(configuration);
@@ -515,7 +515,7 @@ void DeploymentImpl::resolveReferences(const int featureID, std::list<std::share
 {
 	switch(featureID)
 	{
-		case UmlPackage::DEPLOYMENT_EREFERENCE_DEPLOYEDARTIFACT:
+		case UmlPackage::DEPLOYMENT_ATTRIBUTE_DEPLOYEDARTIFACT:
 		{
 			std::shared_ptr<Bag<uml::DeployedArtifact>> _deployedArtifact = getDeployedArtifact();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -529,7 +529,7 @@ void DeploymentImpl::resolveReferences(const int featureID, std::list<std::share
 			return;
 		}
 
-		case UmlPackage::DEPLOYMENT_EREFERENCE_LOCATION:
+		case UmlPackage::DEPLOYMENT_ATTRIBUTE_LOCATION:
 		{
 			if (references.size() == 1)
 			{
@@ -578,7 +578,7 @@ void DeploymentImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 		// Save 'configuration'
 		for (std::shared_ptr<uml::DeploymentSpecification> configuration : *this->getConfiguration()) 
 		{
-			saveHandler->addReference(configuration, "configuration", configuration->eClass() != package->getDeploymentSpecification_EClass());
+			saveHandler->addReference(configuration, "configuration", configuration->eClass() != package->getDeploymentSpecification_Class());
 		}
 	
 

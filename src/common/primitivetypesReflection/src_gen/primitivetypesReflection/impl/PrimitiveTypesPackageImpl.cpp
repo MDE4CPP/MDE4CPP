@@ -10,7 +10,6 @@
 //meta meta model factory
 #include "uml/UmlFactory.hpp"
 
-//metamodel factory
 
 //depending model packages
 

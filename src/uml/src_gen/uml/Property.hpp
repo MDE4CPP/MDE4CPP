@@ -314,7 +314,7 @@ namespace uml
 			
 			/*!
 			 Sets the default value for this property to the specified unlimited natural value. */ 
-			virtual void setUnlimitedNaturalDefaultValue(int value) = 0;
+			virtual void setUnlimitedNaturalDefaultValue(unsigned int value) = 0;
 			
 			/*!
 			 A Property may not subset a Property with the same name.

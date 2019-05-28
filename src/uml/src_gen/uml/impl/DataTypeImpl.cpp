@@ -178,11 +178,11 @@ DataTypeImpl::~DataTypeImpl()
 			{
 				switch(reference_id)
 				{	
-				case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
+				case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
 					m_owningPackage = par_Package;
 					m_namespace = par_Package;
 					 return;
-				case UmlPackage::TYPE_EREFERENCE_PACKAGE:
+				case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
 					m_package = par_Package;
 					m_namespace = par_Package;
 					 return;
@@ -426,7 +426,7 @@ std::shared_ptr<ecore::EObject>  DataTypeImpl::copy() const
 
 std::shared_ptr<ecore::EClass> DataTypeImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getDataType_EClass();
+	return UmlPackageImpl::eInstance()->getDataType_Class();
 }
 
 //*********************************
@@ -436,7 +436,7 @@ std::shared_ptr<ecore::EClass> DataTypeImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<uml::Property> DataTypeImpl::createOwnedAttribute(std::string name,std::shared_ptr<uml::Type>  type,int lower,int upper)
+std::shared_ptr<uml::Property> DataTypeImpl::createOwnedAttribute(std::string name,std::shared_ptr<uml::Type>  type,int lower,unsigned int upper)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -547,9 +547,9 @@ Any DataTypeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::DATATYPE_EREFERENCE_OWNEDATTRIBUTE:
+		case UmlPackage::DATATYPE_ATTRIBUTE_OWNEDATTRIBUTE:
 			return eAny(getOwnedAttribute()); //6538
-		case UmlPackage::DATATYPE_EREFERENCE_OWNEDOPERATION:
+		case UmlPackage::DATATYPE_ATTRIBUTE_OWNEDOPERATION:
 			return eAny(getOwnedOperation()); //6539
 	}
 	return ClassifierImpl::eGet(featureID, resolve, coreType);
@@ -558,9 +558,9 @@ bool DataTypeImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::DATATYPE_EREFERENCE_OWNEDATTRIBUTE:
+		case UmlPackage::DATATYPE_ATTRIBUTE_OWNEDATTRIBUTE:
 			return getOwnedAttribute() != nullptr; //6538
-		case UmlPackage::DATATYPE_EREFERENCE_OWNEDOPERATION:
+		case UmlPackage::DATATYPE_ATTRIBUTE_OWNEDOPERATION:
 			return getOwnedOperation() != nullptr; //6539
 	}
 	return ClassifierImpl::internalEIsSet(featureID);
@@ -612,7 +612,7 @@ void DataTypeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::i
 			{
 				typeName = "Property";
 			}
-			std::shared_ptr<ecore::EObject> ownedAttribute = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::PROPERTY_EREFERENCE_DATATYPE);
+			std::shared_ptr<ecore::EObject> ownedAttribute = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::PROPERTY_ATTRIBUTE_DATATYPE);
 			if (ownedAttribute != nullptr)
 			{
 				loadHandler->handleChild(ownedAttribute);
@@ -627,7 +627,7 @@ void DataTypeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::i
 			{
 				typeName = "Operation";
 			}
-			std::shared_ptr<ecore::EObject> ownedOperation = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::OPERATION_EREFERENCE_DATATYPE);
+			std::shared_ptr<ecore::EObject> ownedOperation = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::OPERATION_ATTRIBUTE_DATATYPE);
 			if (ownedOperation != nullptr)
 			{
 				loadHandler->handleChild(ownedOperation);
@@ -690,13 +690,13 @@ void DataTypeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 		// Save 'ownedAttribute'
 		for (std::shared_ptr<uml::Property> ownedAttribute : *this->getOwnedAttribute()) 
 		{
-			saveHandler->addReference(ownedAttribute, "ownedAttribute", ownedAttribute->eClass() != package->getProperty_EClass());
+			saveHandler->addReference(ownedAttribute, "ownedAttribute", ownedAttribute->eClass() != package->getProperty_Class());
 		}
 
 		// Save 'ownedOperation'
 		for (std::shared_ptr<uml::Operation> ownedOperation : *this->getOwnedOperation()) 
 		{
-			saveHandler->addReference(ownedOperation, "ownedOperation", ownedOperation->eClass() != package->getOperation_EClass());
+			saveHandler->addReference(ownedOperation, "ownedOperation", ownedOperation->eClass() != package->getOperation_Class());
 		}
 	
 

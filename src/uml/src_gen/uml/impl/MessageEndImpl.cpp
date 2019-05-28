@@ -164,7 +164,7 @@ std::shared_ptr<ecore::EObject>  MessageEndImpl::copy() const
 
 std::shared_ptr<ecore::EClass> MessageEndImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getMessageEnd_EClass();
+	return UmlPackageImpl::eInstance()->getMessageEnd_Class();
 }
 
 //*********************************
@@ -254,7 +254,7 @@ Any MessageEndImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::MESSAGEEND_EREFERENCE_MESSAGE:
+		case UmlPackage::MESSAGEEND_ATTRIBUTE_MESSAGE:
 			return eAny(getMessage()); //1489
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
@@ -263,7 +263,7 @@ bool MessageEndImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::MESSAGEEND_EREFERENCE_MESSAGE:
+		case UmlPackage::MESSAGEEND_ATTRIBUTE_MESSAGE:
 			return getMessage() != nullptr; //1489
 	}
 	return NamedElementImpl::internalEIsSet(featureID);
@@ -272,7 +272,7 @@ bool MessageEndImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::MESSAGEEND_EREFERENCE_MESSAGE:
+		case UmlPackage::MESSAGEEND_ATTRIBUTE_MESSAGE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Message> _message = newValue->get<std::shared_ptr<uml::Message>>();
@@ -340,7 +340,7 @@ void MessageEndImpl::resolveReferences(const int featureID, std::list<std::share
 {
 	switch(featureID)
 	{
-		case UmlPackage::MESSAGEEND_EREFERENCE_MESSAGE:
+		case UmlPackage::MESSAGEEND_ATTRIBUTE_MESSAGE:
 		{
 			if (references.size() == 1)
 			{

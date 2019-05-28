@@ -124,7 +124,7 @@ std::shared_ptr<ecore::EObject>  InstanceValueEvaluationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> InstanceValueEvaluationImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getInstanceValueEvaluation_EClass();
+	return FUMLPackageImpl::eInstance()->getInstanceValueEvaluation_Class();
 }
 
 //*********************************

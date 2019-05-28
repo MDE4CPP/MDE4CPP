@@ -168,7 +168,7 @@ std::shared_ptr<ecore::EObject>  ClassifierTemplateParameterImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ClassifierTemplateParameterImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getClassifierTemplateParameter_EClass();
+	return UmlPackageImpl::eInstance()->getClassifierTemplateParameter_Class();
 }
 
 //*********************************
@@ -276,9 +276,9 @@ Any ClassifierTemplateParameterImpl::eGet(int featureID, bool resolve, bool core
 {
 	switch(featureID)
 	{
-		case UmlPackage::CLASSIFIERTEMPLATEPARAMETER_EATTRIBUTE_ALLOWSUBSTITUTABLE:
+		case UmlPackage::CLASSIFIERTEMPLATEPARAMETER_ATTRIBUTE_ALLOWSUBSTITUTABLE:
 			return eAny(getAllowSubstitutable()); //378
-		case UmlPackage::CLASSIFIERTEMPLATEPARAMETER_EREFERENCE_CONSTRAININGCLASSIFIER:
+		case UmlPackage::CLASSIFIERTEMPLATEPARAMETER_ATTRIBUTE_CONSTRAININGCLASSIFIER:
 			return eAny(getConstrainingClassifier()); //379
 	}
 	return TemplateParameterImpl::eGet(featureID, resolve, coreType);
@@ -287,9 +287,9 @@ bool ClassifierTemplateParameterImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::CLASSIFIERTEMPLATEPARAMETER_EATTRIBUTE_ALLOWSUBSTITUTABLE:
+		case UmlPackage::CLASSIFIERTEMPLATEPARAMETER_ATTRIBUTE_ALLOWSUBSTITUTABLE:
 			return getAllowSubstitutable() != true; //378
-		case UmlPackage::CLASSIFIERTEMPLATEPARAMETER_EREFERENCE_CONSTRAININGCLASSIFIER:
+		case UmlPackage::CLASSIFIERTEMPLATEPARAMETER_ATTRIBUTE_CONSTRAININGCLASSIFIER:
 			return getConstrainingClassifier() != nullptr; //379
 	}
 	return TemplateParameterImpl::internalEIsSet(featureID);
@@ -298,7 +298,7 @@ bool ClassifierTemplateParameterImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::CLASSIFIERTEMPLATEPARAMETER_EATTRIBUTE_ALLOWSUBSTITUTABLE:
+		case UmlPackage::CLASSIFIERTEMPLATEPARAMETER_ATTRIBUTE_ALLOWSUBSTITUTABLE:
 		{
 			// BOOST CAST
 			bool _allowSubstitutable = newValue->get<bool>();
@@ -375,7 +375,7 @@ void ClassifierTemplateParameterImpl::resolveReferences(const int featureID, std
 {
 	switch(featureID)
 	{
-		case UmlPackage::CLASSIFIERTEMPLATEPARAMETER_EREFERENCE_CONSTRAININGCLASSIFIER:
+		case UmlPackage::CLASSIFIERTEMPLATEPARAMETER_ATTRIBUTE_CONSTRAININGCLASSIFIER:
 		{
 			std::shared_ptr<Bag<uml::Classifier>> _constrainingClassifier = getConstrainingClassifier();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -417,7 +417,7 @@ void ClassifierTemplateParameterImpl::saveContent(std::shared_ptr<persistence::i
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getClassifierTemplateParameter_EAttribute_allowSubstitutable()) )
+		if ( this->eIsSet(package->getClassifierTemplateParameter_Attribute_allowSubstitutable()) )
 		{
 			saveHandler->addAttribute("allowSubstitutable", this->getAllowSubstitutable());
 		}

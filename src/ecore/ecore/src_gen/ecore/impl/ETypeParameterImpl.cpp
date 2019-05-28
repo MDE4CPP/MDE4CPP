@@ -99,6 +99,7 @@ ETypeParameterImpl::ETypeParameterImpl(const ETypeParameterImpl & obj):ETypePara
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ETypeParameter "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	m_metaElementID = obj.getMetaElementID();
 	m_name = obj.getName();
 
 	//copy references with no containment (soft copy)
@@ -138,7 +139,7 @@ std::shared_ptr<ecore::EObject>  ETypeParameterImpl::copy() const
 
 std::shared_ptr<EClass> ETypeParameterImpl::eStaticClass() const
 {
-	return EcorePackageImpl::eInstance()->getETypeParameter_EClass();
+	return EcorePackageImpl::eInstance()->getETypeParameter_Class();
 }
 
 //*********************************
@@ -193,8 +194,8 @@ Any ETypeParameterImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case EcorePackage::ETYPEPARAMETER_EREFERENCE_EBOUNDS:
-			return eAny(getEBounds()); //524
+		case EcorePackage::ETYPEPARAMETER_ATTRIBUTE_EBOUNDS:
+			return eAny(getEBounds()); //525
 	}
 	return ENamedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -202,8 +203,8 @@ bool ETypeParameterImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case EcorePackage::ETYPEPARAMETER_EREFERENCE_EBOUNDS:
-			return getEBounds() != nullptr; //524
+		case EcorePackage::ETYPEPARAMETER_ATTRIBUTE_EBOUNDS:
+			return getEBounds() != nullptr; //525
 	}
 	return ENamedElementImpl::internalEIsSet(featureID);
 }
@@ -314,7 +315,7 @@ void ETypeParameterImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 		std::shared_ptr<Bag<ecore::EGenericType>> list_eBounds = this->getEBounds();
 		for (std::shared_ptr<ecore::EGenericType> eBounds : *list_eBounds) 
 		{
-			saveHandler->addReference(eBounds, "eBounds", eBounds->eClass() != package->getEGenericType_EClass());
+			saveHandler->addReference(eBounds, "eBounds", eBounds->eClass() != package->getEGenericType_Class());
 		}
 	}
 	catch (std::exception& e)

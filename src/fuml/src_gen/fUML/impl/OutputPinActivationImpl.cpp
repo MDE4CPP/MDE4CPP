@@ -137,7 +137,7 @@ std::shared_ptr<ecore::EObject>  OutputPinActivationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> OutputPinActivationImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getOutputPinActivation_EClass();
+	return FUMLPackageImpl::eInstance()->getOutputPinActivation_Class();
 }
 
 //*********************************

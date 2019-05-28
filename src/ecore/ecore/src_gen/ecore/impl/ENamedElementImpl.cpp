@@ -92,6 +92,7 @@ ENamedElementImpl::ENamedElementImpl(const ENamedElementImpl & obj):ENamedElemen
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ENamedElement "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	m_metaElementID = obj.getMetaElementID();
 	m_name = obj.getName();
 
 	//copy references with no containment (soft copy)
@@ -121,7 +122,7 @@ std::shared_ptr<ecore::EObject>  ENamedElementImpl::copy() const
 
 std::shared_ptr<EClass> ENamedElementImpl::eStaticClass() const
 {
-	return EcorePackageImpl::eInstance()->getENamedElement_EClass();
+	return EcorePackageImpl::eInstance()->getENamedElement_Class();
 }
 
 //*********************************
@@ -179,8 +180,8 @@ Any ENamedElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case EcorePackage::ENAMEDELEMENT_EATTRIBUTE_NAME:
-			return eAny(getName()); //383
+		case EcorePackage::ENAMEDELEMENT_ATTRIBUTE_NAME:
+			return eAny(getName()); //384
 	}
 	return EModelElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -188,8 +189,8 @@ bool ENamedElementImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case EcorePackage::ENAMEDELEMENT_EATTRIBUTE_NAME:
-			return getName() != ""; //383
+		case EcorePackage::ENAMEDELEMENT_ATTRIBUTE_NAME:
+			return getName() != ""; //384
 	}
 	return EModelElementImpl::internalEIsSet(featureID);
 }
@@ -197,11 +198,11 @@ bool ENamedElementImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case EcorePackage::ENAMEDELEMENT_EATTRIBUTE_NAME:
+		case EcorePackage::ENAMEDELEMENT_ATTRIBUTE_NAME:
 		{
 			// BOOST CAST
 			std::string _name = newValue->get<std::string>();
-			setName(_name); //383
+			setName(_name); //384
 			return true;
 		}
 	}
@@ -290,7 +291,7 @@ void ENamedElementImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getENamedElement_EAttribute_name()) )
+		if ( this->eIsSet(package->getENamedElement_Attribute_name()) )
 		{
 			saveHandler->addAttribute("name", this->getName());
 		}

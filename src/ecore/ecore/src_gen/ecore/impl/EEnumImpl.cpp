@@ -123,11 +123,11 @@ EEnumImpl::EEnumImpl(const EEnumImpl & obj):EEnumImpl()
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy EEnum "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
-	m_classifierID = obj.getClassifierID();
 	m_defaultValue = obj.getDefaultValue();
 	m_instanceClass = obj.getInstanceClass();
 	m_instanceClassName = obj.getInstanceClassName();
 	m_instanceTypeName = obj.getInstanceTypeName();
+	m_metaElementID = obj.getMetaElementID();
 	m_name = obj.getName();
 	m_serializable = obj.isSerializable();
 
@@ -183,7 +183,7 @@ std::shared_ptr<ecore::EObject>  EEnumImpl::copy() const
 
 std::shared_ptr<EClass> EEnumImpl::eStaticClass() const
 {
-	return EcorePackageImpl::eInstance()->getEEnum_EClass();
+	return EcorePackageImpl::eInstance()->getEEnum_Class();
 }
 
 //*********************************
@@ -288,7 +288,7 @@ Any EEnumImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case EcorePackage::EENUM_EREFERENCE_ELITERALS:
+		case EcorePackage::EENUM_ATTRIBUTE_ELITERALS:
 			return eAny(getELiterals()); //2012
 	}
 	return EDataTypeImpl::eGet(featureID, resolve, coreType);
@@ -297,7 +297,7 @@ bool EEnumImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case EcorePackage::EENUM_EREFERENCE_ELITERALS:
+		case EcorePackage::EENUM_ATTRIBUTE_ELITERALS:
 			return getELiterals() != nullptr; //2012
 	}
 	return EDataTypeImpl::internalEIsSet(featureID);
@@ -349,7 +349,7 @@ void EEnumImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inte
 			{
 				typeName = "EEnumLiteral";
 			}
-			std::shared_ptr<ecore::EObject> eLiterals = modelFactory->create(typeName, loadHandler->getCurrentObject(), EcorePackage::EENUMLITERAL_EREFERENCE_EENUM);
+			std::shared_ptr<ecore::EObject> eLiterals = modelFactory->create(typeName, loadHandler->getCurrentObject(), EcorePackage::EENUMLITERAL_ATTRIBUTE_EENUM);
 			if (eLiterals != nullptr)
 			{
 				loadHandler->handleChild(eLiterals);
@@ -405,7 +405,7 @@ void EEnumImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandle
 		// Save 'eLiterals'
 		for (std::shared_ptr<ecore::EEnumLiteral> eLiterals : *this->getELiterals()) 
 		{
-			saveHandler->addReference(eLiterals, "eLiterals", eLiterals->eClass() != package->getEEnumLiteral_EClass());
+			saveHandler->addReference(eLiterals, "eLiterals", eLiterals->eClass() != package->getEEnumLiteral_Class());
 		}
 	
 

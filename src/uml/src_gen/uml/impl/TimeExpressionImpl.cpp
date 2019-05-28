@@ -231,7 +231,7 @@ std::shared_ptr<ecore::EObject>  TimeExpressionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> TimeExpressionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getTimeExpression_EClass();
+	return UmlPackageImpl::eInstance()->getTimeExpression_Class();
 }
 
 //*********************************
@@ -329,9 +329,9 @@ Any TimeExpressionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::TIMEEXPRESSION_EREFERENCE_EXPR:
+		case UmlPackage::TIMEEXPRESSION_ATTRIBUTE_EXPR:
 			return eAny(getExpr()); //23814
-		case UmlPackage::TIMEEXPRESSION_EREFERENCE_OBSERVATION:
+		case UmlPackage::TIMEEXPRESSION_ATTRIBUTE_OBSERVATION:
 			return eAny(getObservation()); //23815
 	}
 	return ValueSpecificationImpl::eGet(featureID, resolve, coreType);
@@ -340,9 +340,9 @@ bool TimeExpressionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::TIMEEXPRESSION_EREFERENCE_EXPR:
+		case UmlPackage::TIMEEXPRESSION_ATTRIBUTE_EXPR:
 			return getExpr() != nullptr; //23814
-		case UmlPackage::TIMEEXPRESSION_EREFERENCE_OBSERVATION:
+		case UmlPackage::TIMEEXPRESSION_ATTRIBUTE_OBSERVATION:
 			return getObservation() != nullptr; //23815
 	}
 	return ValueSpecificationImpl::internalEIsSet(featureID);
@@ -351,7 +351,7 @@ bool TimeExpressionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::TIMEEXPRESSION_EREFERENCE_EXPR:
+		case UmlPackage::TIMEEXPRESSION_ATTRIBUTE_EXPR:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ValueSpecification> _expr = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
@@ -446,7 +446,7 @@ void TimeExpressionImpl::resolveReferences(const int featureID, std::list<std::s
 {
 	switch(featureID)
 	{
-		case UmlPackage::TIMEEXPRESSION_EREFERENCE_OBSERVATION:
+		case UmlPackage::TIMEEXPRESSION_ATTRIBUTE_OBSERVATION:
 		{
 			std::shared_ptr<Bag<uml::Observation>> _observation = getObservation();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -497,7 +497,7 @@ void TimeExpressionImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 		std::shared_ptr<uml::ValueSpecification > expr = this->getExpr();
 		if (expr != nullptr)
 		{
-			saveHandler->addReference(expr, "expr", expr->eClass() != package->getValueSpecification_EClass());
+			saveHandler->addReference(expr, "expr", expr->eClass() != package->getValueSpecification_Class());
 		}
 	
 

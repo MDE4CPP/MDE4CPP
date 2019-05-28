@@ -160,11 +160,11 @@ SignalImpl::~SignalImpl()
 			{
 				switch(reference_id)
 				{	
-				case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
+				case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
 					m_owningPackage = par_Package;
 					m_namespace = par_Package;
 					 return;
-				case UmlPackage::TYPE_EREFERENCE_PACKAGE:
+				case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
 					m_package = par_Package;
 					m_namespace = par_Package;
 					 return;
@@ -392,7 +392,7 @@ std::shared_ptr<ecore::EObject>  SignalImpl::copy() const
 
 std::shared_ptr<ecore::EClass> SignalImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getSignal_EClass();
+	return UmlPackageImpl::eInstance()->getSignal_Class();
 }
 
 //*********************************
@@ -402,7 +402,7 @@ std::shared_ptr<ecore::EClass> SignalImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<uml::Property> SignalImpl::createOwnedAttribute(std::string name,std::shared_ptr<uml::Type>  type,int lower,int upper)
+std::shared_ptr<uml::Property> SignalImpl::createOwnedAttribute(std::string name,std::shared_ptr<uml::Type>  type,int lower,unsigned int upper)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -500,7 +500,7 @@ Any SignalImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::SIGNAL_EREFERENCE_OWNEDATTRIBUTE:
+		case UmlPackage::SIGNAL_ATTRIBUTE_OWNEDATTRIBUTE:
 			return eAny(getOwnedAttribute()); //21538
 	}
 	return ClassifierImpl::eGet(featureID, resolve, coreType);
@@ -509,7 +509,7 @@ bool SignalImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::SIGNAL_EREFERENCE_OWNEDATTRIBUTE:
+		case UmlPackage::SIGNAL_ATTRIBUTE_OWNEDATTRIBUTE:
 			return getOwnedAttribute() != nullptr; //21538
 	}
 	return ClassifierImpl::internalEIsSet(featureID);
@@ -626,7 +626,7 @@ void SignalImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandl
 		// Save 'ownedAttribute'
 		for (std::shared_ptr<uml::Property> ownedAttribute : *this->getOwnedAttribute()) 
 		{
-			saveHandler->addReference(ownedAttribute, "ownedAttribute", ownedAttribute->eClass() != package->getProperty_EClass());
+			saveHandler->addReference(ownedAttribute, "ownedAttribute", ownedAttribute->eClass() != package->getProperty_Class());
 		}
 	
 

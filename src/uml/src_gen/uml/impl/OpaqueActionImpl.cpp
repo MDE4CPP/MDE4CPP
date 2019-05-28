@@ -340,7 +340,7 @@ std::shared_ptr<ecore::EObject>  OpaqueActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> OpaqueActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getOpaqueAction_EClass();
+	return UmlPackageImpl::eInstance()->getOpaqueAction_Class();
 }
 
 //*********************************
@@ -455,13 +455,13 @@ Any OpaqueActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::OPAQUEACTION_EATTRIBUTE_BODY:
+		case UmlPackage::OPAQUEACTION_ATTRIBUTE_BODY:
 			return eAny(getBody()); //16427
-		case UmlPackage::OPAQUEACTION_EREFERENCE_INPUTVALUE:
+		case UmlPackage::OPAQUEACTION_ATTRIBUTE_INPUTVALUE:
 			return eAny(getInputValue()); //16428
-		case UmlPackage::OPAQUEACTION_EATTRIBUTE_LANGUAGE:
+		case UmlPackage::OPAQUEACTION_ATTRIBUTE_LANGUAGE:
 			return eAny(getLanguage()); //16429
-		case UmlPackage::OPAQUEACTION_EREFERENCE_OUTPUTVALUE:
+		case UmlPackage::OPAQUEACTION_ATTRIBUTE_OUTPUTVALUE:
 			return eAny(getOutputValue()); //16430
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
@@ -470,13 +470,13 @@ bool OpaqueActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::OPAQUEACTION_EATTRIBUTE_BODY:
+		case UmlPackage::OPAQUEACTION_ATTRIBUTE_BODY:
 			return !getBody()->empty(); //16427
-		case UmlPackage::OPAQUEACTION_EREFERENCE_INPUTVALUE:
+		case UmlPackage::OPAQUEACTION_ATTRIBUTE_INPUTVALUE:
 			return getInputValue() != nullptr; //16428
-		case UmlPackage::OPAQUEACTION_EATTRIBUTE_LANGUAGE:
+		case UmlPackage::OPAQUEACTION_ATTRIBUTE_LANGUAGE:
 			return !getLanguage()->empty(); //16429
-		case UmlPackage::OPAQUEACTION_EREFERENCE_OUTPUTVALUE:
+		case UmlPackage::OPAQUEACTION_ATTRIBUTE_OUTPUTVALUE:
 			return getOutputValue() != nullptr; //16430
 	}
 	return ActionImpl::internalEIsSet(featureID);
@@ -636,18 +636,18 @@ void OpaqueActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 		// Save 'inputValue'
 		for (std::shared_ptr<uml::InputPin> inputValue : *this->getInputValue()) 
 		{
-			saveHandler->addReference(inputValue, "inputValue", inputValue->eClass() != package->getInputPin_EClass());
+			saveHandler->addReference(inputValue, "inputValue", inputValue->eClass() != package->getInputPin_Class());
 		}
 
 		// Save 'outputValue'
 		for (std::shared_ptr<uml::OutputPin> outputValue : *this->getOutputValue()) 
 		{
-			saveHandler->addReference(outputValue, "outputValue", outputValue->eClass() != package->getOutputPin_EClass());
+			saveHandler->addReference(outputValue, "outputValue", outputValue->eClass() != package->getOutputPin_Class());
 		}
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getOpaqueAction_EAttribute_body()) )
+		if ( this->eIsSet(package->getOpaqueAction_Attribute_body()) )
 		{
 			for (std::shared_ptr<std::string> value : *m_body)
 			{
@@ -655,7 +655,7 @@ void OpaqueActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 			}
 		}
 
-		if ( this->eIsSet(package->getOpaqueAction_EAttribute_language()) )
+		if ( this->eIsSet(package->getOpaqueAction_Attribute_language()) )
 		{
 			for (std::shared_ptr<std::string> value : *m_language)
 			{

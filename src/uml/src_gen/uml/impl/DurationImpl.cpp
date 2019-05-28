@@ -231,7 +231,7 @@ std::shared_ptr<ecore::EObject>  DurationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> DurationImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getDuration_EClass();
+	return UmlPackageImpl::eInstance()->getDuration_Class();
 }
 
 //*********************************
@@ -329,9 +329,9 @@ Any DurationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::DURATION_EREFERENCE_EXPR:
+		case UmlPackage::DURATION_ATTRIBUTE_EXPR:
 			return eAny(getExpr()); //7714
-		case UmlPackage::DURATION_EREFERENCE_OBSERVATION:
+		case UmlPackage::DURATION_ATTRIBUTE_OBSERVATION:
 			return eAny(getObservation()); //7715
 	}
 	return ValueSpecificationImpl::eGet(featureID, resolve, coreType);
@@ -340,9 +340,9 @@ bool DurationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::DURATION_EREFERENCE_EXPR:
+		case UmlPackage::DURATION_ATTRIBUTE_EXPR:
 			return getExpr() != nullptr; //7714
-		case UmlPackage::DURATION_EREFERENCE_OBSERVATION:
+		case UmlPackage::DURATION_ATTRIBUTE_OBSERVATION:
 			return getObservation() != nullptr; //7715
 	}
 	return ValueSpecificationImpl::internalEIsSet(featureID);
@@ -351,7 +351,7 @@ bool DurationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::DURATION_EREFERENCE_EXPR:
+		case UmlPackage::DURATION_ATTRIBUTE_EXPR:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ValueSpecification> _expr = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
@@ -446,7 +446,7 @@ void DurationImpl::resolveReferences(const int featureID, std::list<std::shared_
 {
 	switch(featureID)
 	{
-		case UmlPackage::DURATION_EREFERENCE_OBSERVATION:
+		case UmlPackage::DURATION_ATTRIBUTE_OBSERVATION:
 		{
 			std::shared_ptr<Bag<uml::Observation>> _observation = getObservation();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -497,7 +497,7 @@ void DurationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 		std::shared_ptr<uml::ValueSpecification > expr = this->getExpr();
 		if (expr != nullptr)
 		{
-			saveHandler->addReference(expr, "expr", expr->eClass() != package->getValueSpecification_EClass());
+			saveHandler->addReference(expr, "expr", expr->eClass() != package->getValueSpecification_Class());
 		}
 	
 

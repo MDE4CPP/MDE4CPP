@@ -218,7 +218,7 @@ std::shared_ptr<ecore::EObject>  IntervalImpl::copy() const
 
 std::shared_ptr<ecore::EClass> IntervalImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getInterval_EClass();
+	return UmlPackageImpl::eInstance()->getInterval_Class();
 }
 
 //*********************************
@@ -314,9 +314,9 @@ Any IntervalImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::INTERVAL_EREFERENCE_MAX:
+		case UmlPackage::INTERVAL_ATTRIBUTE_MAX:
 			return eAny(getMax()); //12814
-		case UmlPackage::INTERVAL_EREFERENCE_MIN:
+		case UmlPackage::INTERVAL_ATTRIBUTE_MIN:
 			return eAny(getMin()); //12815
 	}
 	return ValueSpecificationImpl::eGet(featureID, resolve, coreType);
@@ -325,9 +325,9 @@ bool IntervalImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::INTERVAL_EREFERENCE_MAX:
+		case UmlPackage::INTERVAL_ATTRIBUTE_MAX:
 			return getMax() != nullptr; //12814
-		case UmlPackage::INTERVAL_EREFERENCE_MIN:
+		case UmlPackage::INTERVAL_ATTRIBUTE_MIN:
 			return getMin() != nullptr; //12815
 	}
 	return ValueSpecificationImpl::internalEIsSet(featureID);
@@ -336,14 +336,14 @@ bool IntervalImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::INTERVAL_EREFERENCE_MAX:
+		case UmlPackage::INTERVAL_ATTRIBUTE_MAX:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ValueSpecification> _max = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
 			setMax(_max); //12814
 			return true;
 		}
-		case UmlPackage::INTERVAL_EREFERENCE_MIN:
+		case UmlPackage::INTERVAL_ATTRIBUTE_MIN:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ValueSpecification> _min = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
@@ -418,7 +418,7 @@ void IntervalImpl::resolveReferences(const int featureID, std::list<std::shared_
 {
 	switch(featureID)
 	{
-		case UmlPackage::INTERVAL_EREFERENCE_MAX:
+		case UmlPackage::INTERVAL_ATTRIBUTE_MAX:
 		{
 			if (references.size() == 1)
 			{
@@ -430,7 +430,7 @@ void IntervalImpl::resolveReferences(const int featureID, std::list<std::shared_
 			return;
 		}
 
-		case UmlPackage::INTERVAL_EREFERENCE_MIN:
+		case UmlPackage::INTERVAL_ATTRIBUTE_MIN:
 		{
 			if (references.size() == 1)
 			{

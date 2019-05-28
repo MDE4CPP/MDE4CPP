@@ -282,7 +282,7 @@ std::shared_ptr<ecore::EObject>  VariableActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> VariableActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getVariableAction_EClass();
+	return UmlPackageImpl::eInstance()->getVariableAction_Class();
 }
 
 //*********************************
@@ -372,7 +372,7 @@ Any VariableActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::VARIABLEACTION_EREFERENCE_VARIABLE:
+		case UmlPackage::VARIABLEACTION_ATTRIBUTE_VARIABLE:
 			return eAny(getVariable()); //25327
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
@@ -381,7 +381,7 @@ bool VariableActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::VARIABLEACTION_EREFERENCE_VARIABLE:
+		case UmlPackage::VARIABLEACTION_ATTRIBUTE_VARIABLE:
 			return getVariable() != nullptr; //25327
 	}
 	return ActionImpl::internalEIsSet(featureID);
@@ -390,7 +390,7 @@ bool VariableActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::VARIABLEACTION_EREFERENCE_VARIABLE:
+		case UmlPackage::VARIABLEACTION_ATTRIBUTE_VARIABLE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Variable> _variable = newValue->get<std::shared_ptr<uml::Variable>>();
@@ -458,7 +458,7 @@ void VariableActionImpl::resolveReferences(const int featureID, std::list<std::s
 {
 	switch(featureID)
 	{
-		case UmlPackage::VARIABLEACTION_EREFERENCE_VARIABLE:
+		case UmlPackage::VARIABLEACTION_ATTRIBUTE_VARIABLE:
 		{
 			if (references.size() == 1)
 			{

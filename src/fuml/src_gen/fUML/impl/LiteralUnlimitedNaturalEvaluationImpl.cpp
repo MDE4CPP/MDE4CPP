@@ -107,7 +107,7 @@ std::shared_ptr<ecore::EObject>  LiteralUnlimitedNaturalEvaluationImpl::copy() c
 
 std::shared_ptr<ecore::EClass> LiteralUnlimitedNaturalEvaluationImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getLiteralUnlimitedNaturalEvaluation_EClass();
+	return FUMLPackageImpl::eInstance()->getLiteralUnlimitedNaturalEvaluation_Class();
 }
 
 //*********************************

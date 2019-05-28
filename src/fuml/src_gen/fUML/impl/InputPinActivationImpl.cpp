@@ -139,7 +139,7 @@ std::shared_ptr<ecore::EObject>  InputPinActivationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> InputPinActivationImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getInputPinActivation_EClass();
+	return FUMLPackageImpl::eInstance()->getInputPinActivation_Class();
 }
 
 //*********************************

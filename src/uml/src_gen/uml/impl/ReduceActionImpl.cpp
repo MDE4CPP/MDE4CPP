@@ -308,7 +308,7 @@ std::shared_ptr<ecore::EObject>  ReduceActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ReduceActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getReduceAction_EClass();
+	return UmlPackageImpl::eInstance()->getReduceAction_Class();
 }
 
 //*********************************
@@ -447,13 +447,13 @@ Any ReduceActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::REDUCEACTION_EREFERENCE_COLLECTION:
+		case UmlPackage::REDUCEACTION_ATTRIBUTE_COLLECTION:
 			return eAny(getCollection()); //20627
-		case UmlPackage::REDUCEACTION_EATTRIBUTE_ISORDERED:
+		case UmlPackage::REDUCEACTION_ATTRIBUTE_ISORDERED:
 			return eAny(getIsOrdered()); //20628
-		case UmlPackage::REDUCEACTION_EREFERENCE_REDUCER:
+		case UmlPackage::REDUCEACTION_ATTRIBUTE_REDUCER:
 			return eAny(getReducer()); //20629
-		case UmlPackage::REDUCEACTION_EREFERENCE_RESULT:
+		case UmlPackage::REDUCEACTION_ATTRIBUTE_RESULT:
 			return eAny(getResult()); //20630
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
@@ -462,13 +462,13 @@ bool ReduceActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::REDUCEACTION_EREFERENCE_COLLECTION:
+		case UmlPackage::REDUCEACTION_ATTRIBUTE_COLLECTION:
 			return getCollection() != nullptr; //20627
-		case UmlPackage::REDUCEACTION_EATTRIBUTE_ISORDERED:
+		case UmlPackage::REDUCEACTION_ATTRIBUTE_ISORDERED:
 			return getIsOrdered() != false; //20628
-		case UmlPackage::REDUCEACTION_EREFERENCE_REDUCER:
+		case UmlPackage::REDUCEACTION_ATTRIBUTE_REDUCER:
 			return getReducer() != nullptr; //20629
-		case UmlPackage::REDUCEACTION_EREFERENCE_RESULT:
+		case UmlPackage::REDUCEACTION_ATTRIBUTE_RESULT:
 			return getResult() != nullptr; //20630
 	}
 	return ActionImpl::internalEIsSet(featureID);
@@ -477,28 +477,28 @@ bool ReduceActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::REDUCEACTION_EREFERENCE_COLLECTION:
+		case UmlPackage::REDUCEACTION_ATTRIBUTE_COLLECTION:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::InputPin> _collection = newValue->get<std::shared_ptr<uml::InputPin>>();
 			setCollection(_collection); //20627
 			return true;
 		}
-		case UmlPackage::REDUCEACTION_EATTRIBUTE_ISORDERED:
+		case UmlPackage::REDUCEACTION_ATTRIBUTE_ISORDERED:
 		{
 			// BOOST CAST
 			bool _isOrdered = newValue->get<bool>();
 			setIsOrdered(_isOrdered); //20628
 			return true;
 		}
-		case UmlPackage::REDUCEACTION_EREFERENCE_REDUCER:
+		case UmlPackage::REDUCEACTION_ATTRIBUTE_REDUCER:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Behavior> _reducer = newValue->get<std::shared_ptr<uml::Behavior>>();
 			setReducer(_reducer); //20629
 			return true;
 		}
-		case UmlPackage::REDUCEACTION_EREFERENCE_RESULT:
+		case UmlPackage::REDUCEACTION_ATTRIBUTE_RESULT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::OutputPin> _result = newValue->get<std::shared_ptr<uml::OutputPin>>();
@@ -617,7 +617,7 @@ void ReduceActionImpl::resolveReferences(const int featureID, std::list<std::sha
 {
 	switch(featureID)
 	{
-		case UmlPackage::REDUCEACTION_EREFERENCE_REDUCER:
+		case UmlPackage::REDUCEACTION_ATTRIBUTE_REDUCER:
 		{
 			if (references.size() == 1)
 			{
@@ -671,19 +671,19 @@ void ReduceActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 		std::shared_ptr<uml::InputPin > collection = this->getCollection();
 		if (collection != nullptr)
 		{
-			saveHandler->addReference(collection, "collection", collection->eClass() != package->getInputPin_EClass());
+			saveHandler->addReference(collection, "collection", collection->eClass() != package->getInputPin_Class());
 		}
 
 		// Save 'result'
 		std::shared_ptr<uml::OutputPin > result = this->getResult();
 		if (result != nullptr)
 		{
-			saveHandler->addReference(result, "result", result->eClass() != package->getOutputPin_EClass());
+			saveHandler->addReference(result, "result", result->eClass() != package->getOutputPin_Class());
 		}
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getReduceAction_EAttribute_isOrdered()) )
+		if ( this->eIsSet(package->getReduceAction_Attribute_isOrdered()) )
 		{
 			saveHandler->addAttribute("isOrdered", this->getIsOrdered());
 		}

@@ -289,7 +289,7 @@ std::shared_ptr<ecore::EObject>  DestroyObjectActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> DestroyObjectActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getDestroyObjectAction_EClass();
+	return UmlPackageImpl::eInstance()->getDestroyObjectAction_Class();
 }
 
 //*********************************
@@ -408,11 +408,11 @@ Any DestroyObjectActionImpl::eGet(int featureID, bool resolve, bool coreType) co
 {
 	switch(featureID)
 	{
-		case UmlPackage::DESTROYOBJECTACTION_EATTRIBUTE_ISDESTROYLINKS:
+		case UmlPackage::DESTROYOBJECTACTION_ATTRIBUTE_ISDESTROYLINKS:
 			return eAny(getIsDestroyLinks()); //7327
-		case UmlPackage::DESTROYOBJECTACTION_EATTRIBUTE_ISDESTROYOWNEDOBJECTS:
+		case UmlPackage::DESTROYOBJECTACTION_ATTRIBUTE_ISDESTROYOWNEDOBJECTS:
 			return eAny(getIsDestroyOwnedObjects()); //7328
-		case UmlPackage::DESTROYOBJECTACTION_EREFERENCE_TARGET:
+		case UmlPackage::DESTROYOBJECTACTION_ATTRIBUTE_TARGET:
 			return eAny(getTarget()); //7329
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
@@ -421,11 +421,11 @@ bool DestroyObjectActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::DESTROYOBJECTACTION_EATTRIBUTE_ISDESTROYLINKS:
+		case UmlPackage::DESTROYOBJECTACTION_ATTRIBUTE_ISDESTROYLINKS:
 			return getIsDestroyLinks() != false; //7327
-		case UmlPackage::DESTROYOBJECTACTION_EATTRIBUTE_ISDESTROYOWNEDOBJECTS:
+		case UmlPackage::DESTROYOBJECTACTION_ATTRIBUTE_ISDESTROYOWNEDOBJECTS:
 			return getIsDestroyOwnedObjects() != false; //7328
-		case UmlPackage::DESTROYOBJECTACTION_EREFERENCE_TARGET:
+		case UmlPackage::DESTROYOBJECTACTION_ATTRIBUTE_TARGET:
 			return getTarget() != nullptr; //7329
 	}
 	return ActionImpl::internalEIsSet(featureID);
@@ -434,21 +434,21 @@ bool DestroyObjectActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::DESTROYOBJECTACTION_EATTRIBUTE_ISDESTROYLINKS:
+		case UmlPackage::DESTROYOBJECTACTION_ATTRIBUTE_ISDESTROYLINKS:
 		{
 			// BOOST CAST
 			bool _isDestroyLinks = newValue->get<bool>();
 			setIsDestroyLinks(_isDestroyLinks); //7327
 			return true;
 		}
-		case UmlPackage::DESTROYOBJECTACTION_EATTRIBUTE_ISDESTROYOWNEDOBJECTS:
+		case UmlPackage::DESTROYOBJECTACTION_ATTRIBUTE_ISDESTROYOWNEDOBJECTS:
 		{
 			// BOOST CAST
 			bool _isDestroyOwnedObjects = newValue->get<bool>();
 			setIsDestroyOwnedObjects(_isDestroyOwnedObjects); //7328
 			return true;
 		}
-		case UmlPackage::DESTROYOBJECTACTION_EREFERENCE_TARGET:
+		case UmlPackage::DESTROYOBJECTACTION_ATTRIBUTE_TARGET:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::InputPin> _target = newValue->get<std::shared_ptr<uml::InputPin>>();
@@ -593,17 +593,17 @@ void DestroyObjectActionImpl::saveContent(std::shared_ptr<persistence::interface
 		std::shared_ptr<uml::InputPin > target = this->getTarget();
 		if (target != nullptr)
 		{
-			saveHandler->addReference(target, "target", target->eClass() != package->getInputPin_EClass());
+			saveHandler->addReference(target, "target", target->eClass() != package->getInputPin_Class());
 		}
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getDestroyObjectAction_EAttribute_isDestroyLinks()) )
+		if ( this->eIsSet(package->getDestroyObjectAction_Attribute_isDestroyLinks()) )
 		{
 			saveHandler->addAttribute("isDestroyLinks", this->getIsDestroyLinks());
 		}
 
-		if ( this->eIsSet(package->getDestroyObjectAction_EAttribute_isDestroyOwnedObjects()) )
+		if ( this->eIsSet(package->getDestroyObjectAction_Attribute_isDestroyOwnedObjects()) )
 		{
 			saveHandler->addAttribute("isDestroyOwnedObjects", this->getIsDestroyOwnedObjects());
 		}

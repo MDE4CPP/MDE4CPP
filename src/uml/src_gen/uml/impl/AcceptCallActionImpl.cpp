@@ -305,7 +305,7 @@ std::shared_ptr<ecore::EObject>  AcceptCallActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> AcceptCallActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getAcceptCallAction_EClass();
+	return UmlPackageImpl::eInstance()->getAcceptCallAction_Class();
 }
 
 //*********************************
@@ -411,7 +411,7 @@ Any AcceptCallActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::ACCEPTCALLACTION_EREFERENCE_RETURNINFORMATION:
+		case UmlPackage::ACCEPTCALLACTION_ATTRIBUTE_RETURNINFORMATION:
 			return eAny(getReturnInformation()); //230
 	}
 	return AcceptEventActionImpl::eGet(featureID, resolve, coreType);
@@ -420,7 +420,7 @@ bool AcceptCallActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::ACCEPTCALLACTION_EREFERENCE_RETURNINFORMATION:
+		case UmlPackage::ACCEPTCALLACTION_ATTRIBUTE_RETURNINFORMATION:
 			return getReturnInformation() != nullptr; //230
 	}
 	return AcceptEventActionImpl::internalEIsSet(featureID);
@@ -429,7 +429,7 @@ bool AcceptCallActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::ACCEPTCALLACTION_EREFERENCE_RETURNINFORMATION:
+		case UmlPackage::ACCEPTCALLACTION_ATTRIBUTE_RETURNINFORMATION:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::OutputPin> _returnInformation = newValue->get<std::shared_ptr<uml::OutputPin>>();
@@ -547,7 +547,7 @@ void AcceptCallActionImpl::saveContent(std::shared_ptr<persistence::interfaces::
 		std::shared_ptr<uml::OutputPin > returnInformation = this->getReturnInformation();
 		if (returnInformation != nullptr)
 		{
-			saveHandler->addReference(returnInformation, "returnInformation", returnInformation->eClass() != package->getOutputPin_EClass());
+			saveHandler->addReference(returnInformation, "returnInformation", returnInformation->eClass() != package->getOutputPin_Class());
 		}
 	
 

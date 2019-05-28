@@ -309,7 +309,7 @@ std::shared_ptr<ecore::EObject>  StartObjectBehaviorActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> StartObjectBehaviorActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getStartObjectBehaviorAction_EClass();
+	return UmlPackageImpl::eInstance()->getStartObjectBehaviorAction_Class();
 }
 
 //*********************************
@@ -425,7 +425,7 @@ Any StartObjectBehaviorActionImpl::eGet(int featureID, bool resolve, bool coreTy
 {
 	switch(featureID)
 	{
-		case UmlPackage::STARTOBJECTBEHAVIORACTION_EREFERENCE_OBJECT:
+		case UmlPackage::STARTOBJECTBEHAVIORACTION_ATTRIBUTE_OBJECT:
 			return eAny(getObject()); //21931
 	}
 	return CallActionImpl::eGet(featureID, resolve, coreType);
@@ -434,7 +434,7 @@ bool StartObjectBehaviorActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::STARTOBJECTBEHAVIORACTION_EREFERENCE_OBJECT:
+		case UmlPackage::STARTOBJECTBEHAVIORACTION_ATTRIBUTE_OBJECT:
 			return getObject() != nullptr; //21931
 	}
 	return CallActionImpl::internalEIsSet(featureID);
@@ -443,7 +443,7 @@ bool StartObjectBehaviorActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::STARTOBJECTBEHAVIORACTION_EREFERENCE_OBJECT:
+		case UmlPackage::STARTOBJECTBEHAVIORACTION_ATTRIBUTE_OBJECT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::InputPin> _object = newValue->get<std::shared_ptr<uml::InputPin>>();
@@ -564,7 +564,7 @@ void StartObjectBehaviorActionImpl::saveContent(std::shared_ptr<persistence::int
 		std::shared_ptr<uml::InputPin > object = this->getObject();
 		if (object != nullptr)
 		{
-			saveHandler->addReference(object, "object", object->eClass() != package->getInputPin_EClass());
+			saveHandler->addReference(object, "object", object->eClass() != package->getInputPin_Class());
 		}
 	
 

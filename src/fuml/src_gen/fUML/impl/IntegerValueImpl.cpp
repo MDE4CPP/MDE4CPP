@@ -110,7 +110,7 @@ std::shared_ptr<ecore::EObject>  IntegerValueImpl::copy() const
 
 std::shared_ptr<ecore::EClass> IntegerValueImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getIntegerValue_EClass();
+	return FUMLPackageImpl::eInstance()->getIntegerValue_Class();
 }
 
 //*********************************
@@ -136,7 +136,7 @@ bool IntegerValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue)
 		bool isEqual = false;
 
 
-    if(otherValue != nullptr && otherValue->eClass()->getClassifierID() == fUML::FUMLPackage::INTEGERVALUE_ECLASS)
+    if(otherValue != nullptr && otherValue->eClass()->getClassifierID() == fUML::FUMLPackage::INTEGERVALUE_CLASS)
     {
 		std::shared_ptr<IntegerValue> otherIntegerValue = std::dynamic_pointer_cast<IntegerValue>(otherValue);
         isEqual = (otherIntegerValue->getValue() == this->getValue());
@@ -199,7 +199,7 @@ Any IntegerValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::INTEGERVALUE_EATTRIBUTE_VALUE:
+		case FUMLPackage::INTEGERVALUE_ATTRIBUTE_VALUE:
 			return eAny(getValue()); //611
 	}
 	return PrimitiveValueImpl::eGet(featureID, resolve, coreType);
@@ -208,7 +208,7 @@ bool IntegerValueImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::INTEGERVALUE_EATTRIBUTE_VALUE:
+		case FUMLPackage::INTEGERVALUE_ATTRIBUTE_VALUE:
 			return getValue() != 0; //611
 	}
 	return PrimitiveValueImpl::internalEIsSet(featureID);
@@ -217,7 +217,7 @@ bool IntegerValueImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case FUMLPackage::INTEGERVALUE_EATTRIBUTE_VALUE:
+		case FUMLPackage::INTEGERVALUE_ATTRIBUTE_VALUE:
 		{
 			// BOOST CAST
 			int _value = newValue->get<int>();
@@ -313,7 +313,7 @@ void IntegerValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getIntegerValue_EAttribute_value()) )
+		if ( this->eIsSet(package->getIntegerValue_Attribute_value()) )
 		{
 			saveHandler->addAttribute("value", this->getValue());
 		}

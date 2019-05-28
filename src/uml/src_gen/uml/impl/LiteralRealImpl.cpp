@@ -209,7 +209,7 @@ std::shared_ptr<ecore::EObject>  LiteralRealImpl::copy() const
 
 std::shared_ptr<ecore::EClass> LiteralRealImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getLiteralReal_EClass();
+	return UmlPackageImpl::eInstance()->getLiteralReal_Class();
 }
 
 //*********************************
@@ -295,7 +295,7 @@ Any LiteralRealImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::LITERALREAL_EATTRIBUTE_VALUE:
+		case UmlPackage::LITERALREAL_ATTRIBUTE_VALUE:
 			return eAny(getValue()); //14014
 	}
 	return LiteralSpecificationImpl::eGet(featureID, resolve, coreType);
@@ -304,7 +304,7 @@ bool LiteralRealImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::LITERALREAL_EATTRIBUTE_VALUE:
+		case UmlPackage::LITERALREAL_ATTRIBUTE_VALUE:
 			return getValue() != 0; //14014
 	}
 	return LiteralSpecificationImpl::internalEIsSet(featureID);
@@ -313,7 +313,7 @@ bool LiteralRealImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::LITERALREAL_EATTRIBUTE_VALUE:
+		case UmlPackage::LITERALREAL_ATTRIBUTE_VALUE:
 		{
 			// BOOST CAST
 			double _value = newValue->get<double>();
@@ -420,7 +420,7 @@ void LiteralRealImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getLiteralReal_EAttribute_value()) )
+		if ( this->eIsSet(package->getLiteralReal_Attribute_value()) )
 		{
 			saveHandler->addAttribute("value", this->getValue());
 		}

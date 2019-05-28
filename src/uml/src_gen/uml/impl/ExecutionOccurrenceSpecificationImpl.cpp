@@ -213,7 +213,7 @@ std::shared_ptr<ecore::EObject>  ExecutionOccurrenceSpecificationImpl::copy() co
 
 std::shared_ptr<ecore::EClass> ExecutionOccurrenceSpecificationImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getExecutionOccurrenceSpecification_EClass();
+	return UmlPackageImpl::eInstance()->getExecutionOccurrenceSpecification_Class();
 }
 
 //*********************************
@@ -294,7 +294,7 @@ Any ExecutionOccurrenceSpecificationImpl::eGet(int featureID, bool resolve, bool
 {
 	switch(featureID)
 	{
-		case UmlPackage::EXECUTIONOCCURRENCESPECIFICATION_EREFERENCE_EXECUTION:
+		case UmlPackage::EXECUTIONOCCURRENCESPECIFICATION_ATTRIBUTE_EXECUTION:
 			return eAny(getExecution()); //9015
 	}
 	return OccurrenceSpecificationImpl::eGet(featureID, resolve, coreType);
@@ -303,7 +303,7 @@ bool ExecutionOccurrenceSpecificationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::EXECUTIONOCCURRENCESPECIFICATION_EREFERENCE_EXECUTION:
+		case UmlPackage::EXECUTIONOCCURRENCESPECIFICATION_ATTRIBUTE_EXECUTION:
 			return getExecution() != nullptr; //9015
 	}
 	return OccurrenceSpecificationImpl::internalEIsSet(featureID);
@@ -312,7 +312,7 @@ bool ExecutionOccurrenceSpecificationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::EXECUTIONOCCURRENCESPECIFICATION_EREFERENCE_EXECUTION:
+		case UmlPackage::EXECUTIONOCCURRENCESPECIFICATION_ATTRIBUTE_EXECUTION:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ExecutionSpecification> _execution = newValue->get<std::shared_ptr<uml::ExecutionSpecification>>();
@@ -380,7 +380,7 @@ void ExecutionOccurrenceSpecificationImpl::resolveReferences(const int featureID
 {
 	switch(featureID)
 	{
-		case UmlPackage::EXECUTIONOCCURRENCESPECIFICATION_EREFERENCE_EXECUTION:
+		case UmlPackage::EXECUTIONOCCURRENCESPECIFICATION_ATTRIBUTE_EXECUTION:
 		{
 			if (references.size() == 1)
 			{

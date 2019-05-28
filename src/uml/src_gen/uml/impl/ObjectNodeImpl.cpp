@@ -280,7 +280,7 @@ std::shared_ptr<ecore::EObject>  ObjectNodeImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ObjectNodeImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getObjectNode_EClass();
+	return UmlPackageImpl::eInstance()->getObjectNode_Class();
 }
 
 //*********************************
@@ -419,15 +419,15 @@ Any ObjectNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::OBJECTNODE_EREFERENCE_INSTATE:
+		case UmlPackage::OBJECTNODE_ATTRIBUTE_INSTATE:
 			return eAny(getInState()); //16021
-		case UmlPackage::OBJECTNODE_EATTRIBUTE_ISCONTROLTYPE:
+		case UmlPackage::OBJECTNODE_ATTRIBUTE_ISCONTROLTYPE:
 			return eAny(getIsControlType()); //16022
-		case UmlPackage::OBJECTNODE_EATTRIBUTE_ORDERING:
+		case UmlPackage::OBJECTNODE_ATTRIBUTE_ORDERING:
 			return eAny(getOrdering()); //16023
-		case UmlPackage::OBJECTNODE_EREFERENCE_SELECTION:
+		case UmlPackage::OBJECTNODE_ATTRIBUTE_SELECTION:
 			return eAny(getSelection()); //16024
-		case UmlPackage::OBJECTNODE_EREFERENCE_UPPERBOUND:
+		case UmlPackage::OBJECTNODE_ATTRIBUTE_UPPERBOUND:
 			return eAny(getUpperBound()); //16025
 	}
 	Any result;
@@ -443,15 +443,15 @@ bool ObjectNodeImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::OBJECTNODE_EREFERENCE_INSTATE:
+		case UmlPackage::OBJECTNODE_ATTRIBUTE_INSTATE:
 			return getInState() != nullptr; //16021
-		case UmlPackage::OBJECTNODE_EATTRIBUTE_ISCONTROLTYPE:
+		case UmlPackage::OBJECTNODE_ATTRIBUTE_ISCONTROLTYPE:
 			return getIsControlType() != false; //16022
-		case UmlPackage::OBJECTNODE_EATTRIBUTE_ORDERING:
+		case UmlPackage::OBJECTNODE_ATTRIBUTE_ORDERING:
 			return m_ordering != ObjectNodeOrderingKind::FIFO;; //16023
-		case UmlPackage::OBJECTNODE_EREFERENCE_SELECTION:
+		case UmlPackage::OBJECTNODE_ATTRIBUTE_SELECTION:
 			return getSelection() != nullptr; //16024
-		case UmlPackage::OBJECTNODE_EREFERENCE_UPPERBOUND:
+		case UmlPackage::OBJECTNODE_ATTRIBUTE_UPPERBOUND:
 			return getUpperBound() != nullptr; //16025
 	}
 	bool result = false;
@@ -467,28 +467,28 @@ bool ObjectNodeImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::OBJECTNODE_EATTRIBUTE_ISCONTROLTYPE:
+		case UmlPackage::OBJECTNODE_ATTRIBUTE_ISCONTROLTYPE:
 		{
 			// BOOST CAST
 			bool _isControlType = newValue->get<bool>();
 			setIsControlType(_isControlType); //16022
 			return true;
 		}
-		case UmlPackage::OBJECTNODE_EATTRIBUTE_ORDERING:
+		case UmlPackage::OBJECTNODE_ATTRIBUTE_ORDERING:
 		{
 			// BOOST CAST
 			ObjectNodeOrderingKind _ordering = newValue->get<ObjectNodeOrderingKind>();
 			setOrdering(_ordering); //16023
 			return true;
 		}
-		case UmlPackage::OBJECTNODE_EREFERENCE_SELECTION:
+		case UmlPackage::OBJECTNODE_ATTRIBUTE_SELECTION:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Behavior> _selection = newValue->get<std::shared_ptr<uml::Behavior>>();
 			setSelection(_selection); //16024
 			return true;
 		}
-		case UmlPackage::OBJECTNODE_EREFERENCE_UPPERBOUND:
+		case UmlPackage::OBJECTNODE_ATTRIBUTE_UPPERBOUND:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ValueSpecification> _upperBound = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
@@ -632,7 +632,7 @@ void ObjectNodeImpl::resolveReferences(const int featureID, std::list<std::share
 {
 	switch(featureID)
 	{
-		case UmlPackage::OBJECTNODE_EREFERENCE_INSTATE:
+		case UmlPackage::OBJECTNODE_ATTRIBUTE_INSTATE:
 		{
 			std::shared_ptr<Bag<uml::State>> _inState = getInState();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -646,7 +646,7 @@ void ObjectNodeImpl::resolveReferences(const int featureID, std::list<std::share
 			return;
 		}
 
-		case UmlPackage::OBJECTNODE_EREFERENCE_SELECTION:
+		case UmlPackage::OBJECTNODE_ATTRIBUTE_SELECTION:
 		{
 			if (references.size() == 1)
 			{
@@ -696,17 +696,17 @@ void ObjectNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 		std::shared_ptr<uml::ValueSpecification > upperBound = this->getUpperBound();
 		if (upperBound != nullptr)
 		{
-			saveHandler->addReference(upperBound, "upperBound", upperBound->eClass() != package->getValueSpecification_EClass());
+			saveHandler->addReference(upperBound, "upperBound", upperBound->eClass() != package->getValueSpecification_Class());
 		}
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getObjectNode_EAttribute_isControlType()) )
+		if ( this->eIsSet(package->getObjectNode_Attribute_isControlType()) )
 		{
 			saveHandler->addAttribute("isControlType", this->getIsControlType());
 		}
 
-		if ( this->eIsSet(package->getObjectNode_EAttribute_ordering()) )
+		if ( this->eIsSet(package->getObjectNode_Attribute_ordering()) )
 		{
 			ObjectNodeOrderingKind value = this->getOrdering();
 			std::string literal = "";

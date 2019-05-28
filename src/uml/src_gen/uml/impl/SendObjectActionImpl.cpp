@@ -311,7 +311,7 @@ std::shared_ptr<ecore::EObject>  SendObjectActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> SendObjectActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getSendObjectAction_EClass();
+	return UmlPackageImpl::eInstance()->getSendObjectAction_Class();
 }
 
 //*********************************
@@ -415,9 +415,9 @@ Any SendObjectActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::SENDOBJECTACTION_EREFERENCE_REQUEST:
+		case UmlPackage::SENDOBJECTACTION_ATTRIBUTE_REQUEST:
 			return eAny(getRequest()); //21229
-		case UmlPackage::SENDOBJECTACTION_EREFERENCE_TARGET:
+		case UmlPackage::SENDOBJECTACTION_ATTRIBUTE_TARGET:
 			return eAny(getTarget()); //21230
 	}
 	return InvocationActionImpl::eGet(featureID, resolve, coreType);
@@ -426,9 +426,9 @@ bool SendObjectActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::SENDOBJECTACTION_EREFERENCE_REQUEST:
+		case UmlPackage::SENDOBJECTACTION_ATTRIBUTE_REQUEST:
 			return getRequest() != nullptr; //21229
-		case UmlPackage::SENDOBJECTACTION_EREFERENCE_TARGET:
+		case UmlPackage::SENDOBJECTACTION_ATTRIBUTE_TARGET:
 			return getTarget() != nullptr; //21230
 	}
 	return InvocationActionImpl::internalEIsSet(featureID);
@@ -437,14 +437,14 @@ bool SendObjectActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::SENDOBJECTACTION_EREFERENCE_REQUEST:
+		case UmlPackage::SENDOBJECTACTION_ATTRIBUTE_REQUEST:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::InputPin> _request = newValue->get<std::shared_ptr<uml::InputPin>>();
 			setRequest(_request); //21229
 			return true;
 		}
-		case UmlPackage::SENDOBJECTACTION_EREFERENCE_TARGET:
+		case UmlPackage::SENDOBJECTACTION_ATTRIBUTE_TARGET:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::InputPin> _target = newValue->get<std::shared_ptr<uml::InputPin>>();
@@ -578,7 +578,7 @@ void SendObjectActionImpl::saveContent(std::shared_ptr<persistence::interfaces::
 		std::shared_ptr<uml::InputPin > target = this->getTarget();
 		if (target != nullptr)
 		{
-			saveHandler->addReference(target, "target", target->eClass() != package->getInputPin_EClass());
+			saveHandler->addReference(target, "target", target->eClass() != package->getInputPin_Class());
 		}
 	
 
@@ -591,7 +591,7 @@ void SendObjectActionImpl::saveContent(std::shared_ptr<persistence::interfaces::
 		std::shared_ptr<uml::InputPin > request = this->getRequest();
 		if (request != nullptr)
 		{
-			saveHandler->addReference(request, "request", request->eClass() != package->getInputPin_EClass());
+			saveHandler->addReference(request, "request", request->eClass() != package->getInputPin_Class());
 		}
 	}
 	catch (std::exception& e)

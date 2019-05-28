@@ -107,11 +107,11 @@ ConstraintImpl::~ConstraintImpl()
 			{
 				switch(reference_id)
 				{	
-				case UmlPackage::CONSTRAINT_EREFERENCE_CONTEXT:
+				case UmlPackage::CONSTRAINT_ATTRIBUTE_CONTEXT:
 					m_context = par_Namespace;
 					m_namespace = par_Namespace;
 					 return;
-				case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE:
+				case UmlPackage::NAMEDELEMENT_ATTRIBUTE_NAMESPACE:
 					m_namespace = par_Namespace;
 					m_owner = par_Namespace;
 					 return;
@@ -235,7 +235,7 @@ std::shared_ptr<ecore::EObject>  ConstraintImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ConstraintImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getConstraint_EClass();
+	return UmlPackageImpl::eInstance()->getConstraint_Class();
 }
 
 //*********************************
@@ -355,11 +355,11 @@ Any ConstraintImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::CONSTRAINT_EREFERENCE_CONSTRAINEDELEMENT:
+		case UmlPackage::CONSTRAINT_ATTRIBUTE_CONSTRAINEDELEMENT:
 			return eAny(getConstrainedElement()); //5712
-		case UmlPackage::CONSTRAINT_EREFERENCE_CONTEXT:
+		case UmlPackage::CONSTRAINT_ATTRIBUTE_CONTEXT:
 			return eAny(getContext()); //5713
-		case UmlPackage::CONSTRAINT_EREFERENCE_SPECIFICATION:
+		case UmlPackage::CONSTRAINT_ATTRIBUTE_SPECIFICATION:
 			return eAny(getSpecification()); //5714
 	}
 	return PackageableElementImpl::eGet(featureID, resolve, coreType);
@@ -368,11 +368,11 @@ bool ConstraintImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::CONSTRAINT_EREFERENCE_CONSTRAINEDELEMENT:
+		case UmlPackage::CONSTRAINT_ATTRIBUTE_CONSTRAINEDELEMENT:
 			return getConstrainedElement() != nullptr; //5712
-		case UmlPackage::CONSTRAINT_EREFERENCE_CONTEXT:
+		case UmlPackage::CONSTRAINT_ATTRIBUTE_CONTEXT:
 			return getContext().lock() != nullptr; //5713
-		case UmlPackage::CONSTRAINT_EREFERENCE_SPECIFICATION:
+		case UmlPackage::CONSTRAINT_ATTRIBUTE_SPECIFICATION:
 			return getSpecification() != nullptr; //5714
 	}
 	return PackageableElementImpl::internalEIsSet(featureID);
@@ -381,14 +381,14 @@ bool ConstraintImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::CONSTRAINT_EREFERENCE_CONTEXT:
+		case UmlPackage::CONSTRAINT_ATTRIBUTE_CONTEXT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Namespace> _context = newValue->get<std::shared_ptr<uml::Namespace>>();
 			setContext(_context); //5713
 			return true;
 		}
-		case UmlPackage::CONSTRAINT_EREFERENCE_SPECIFICATION:
+		case UmlPackage::CONSTRAINT_ATTRIBUTE_SPECIFICATION:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ValueSpecification> _specification = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
@@ -483,7 +483,7 @@ void ConstraintImpl::resolveReferences(const int featureID, std::list<std::share
 {
 	switch(featureID)
 	{
-		case UmlPackage::CONSTRAINT_EREFERENCE_CONSTRAINEDELEMENT:
+		case UmlPackage::CONSTRAINT_ATTRIBUTE_CONSTRAINEDELEMENT:
 		{
 			std::shared_ptr<Bag<uml::Element>> _constrainedElement = getConstrainedElement();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -497,7 +497,7 @@ void ConstraintImpl::resolveReferences(const int featureID, std::list<std::share
 			return;
 		}
 
-		case UmlPackage::CONSTRAINT_EREFERENCE_CONTEXT:
+		case UmlPackage::CONSTRAINT_ATTRIBUTE_CONTEXT:
 		{
 			if (references.size() == 1)
 			{
@@ -542,7 +542,7 @@ void ConstraintImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 		std::shared_ptr<uml::ValueSpecification > specification = this->getSpecification();
 		if (specification != nullptr)
 		{
-			saveHandler->addReference(specification, "specification", specification->eClass() != package->getValueSpecification_EClass());
+			saveHandler->addReference(specification, "specification", specification->eClass() != package->getValueSpecification_Class());
 		}
 	
 

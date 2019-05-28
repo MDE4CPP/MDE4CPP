@@ -165,7 +165,7 @@ std::shared_ptr<ecore::EObject>  ActivityExecutionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ActivityExecutionImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getActivityExecution_EClass();
+	return FUMLPackageImpl::eInstance()->getActivityExecution_Class();
 }
 
 //*********************************
@@ -301,7 +301,7 @@ Any ActivityExecutionImpl::eGet(int featureID, bool resolve, bool coreType) cons
 {
 	switch(featureID)
 	{
-		case FUMLPackage::ACTIVITYEXECUTION_EREFERENCE_ACTIVATIONGROUP:
+		case FUMLPackage::ACTIVITYEXECUTION_ATTRIBUTE_ACTIVATIONGROUP:
 			return eAny(getActivationGroup()); //56
 	}
 	return ExecutionImpl::eGet(featureID, resolve, coreType);
@@ -310,7 +310,7 @@ bool ActivityExecutionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::ACTIVITYEXECUTION_EREFERENCE_ACTIVATIONGROUP:
+		case FUMLPackage::ACTIVITYEXECUTION_ATTRIBUTE_ACTIVATIONGROUP:
 			return getActivationGroup() != nullptr; //56
 	}
 	return ExecutionImpl::internalEIsSet(featureID);
@@ -319,7 +319,7 @@ bool ActivityExecutionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case FUMLPackage::ACTIVITYEXECUTION_EREFERENCE_ACTIVATIONGROUP:
+		case FUMLPackage::ACTIVITYEXECUTION_ATTRIBUTE_ACTIVATIONGROUP:
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::ActivityNodeActivationGroup> _activationGroup = newValue->get<std::shared_ptr<fUML::ActivityNodeActivationGroup>>();
@@ -369,7 +369,7 @@ void ActivityExecutionImpl::loadNode(std::string nodeName, std::shared_ptr<persi
 			{
 				typeName = "ActivityNodeActivationGroup";
 			}
-			std::shared_ptr<ecore::EObject> activationGroup = modelFactory->create(typeName, loadHandler->getCurrentObject(), FUMLPackage::ACTIVITYNODEACTIVATIONGROUP_EREFERENCE_ACTIVITYEXECUTION);
+			std::shared_ptr<ecore::EObject> activationGroup = modelFactory->create(typeName, loadHandler->getCurrentObject(), FUMLPackage::ACTIVITYNODEACTIVATIONGROUP_ATTRIBUTE_ACTIVITYEXECUTION);
 			if (activationGroup != nullptr)
 			{
 				loadHandler->handleChild(activationGroup);
@@ -439,7 +439,7 @@ void ActivityExecutionImpl::saveContent(std::shared_ptr<persistence::interfaces:
 		std::shared_ptr<fUML::ActivityNodeActivationGroup > activationGroup = this->getActivationGroup();
 		if (activationGroup != nullptr)
 		{
-			saveHandler->addReference(activationGroup, "activationGroup", activationGroup->eClass() != package->getActivityNodeActivationGroup_EClass());
+			saveHandler->addReference(activationGroup, "activationGroup", activationGroup->eClass() != package->getActivityNodeActivationGroup_Class());
 		}
 	}
 	catch (std::exception& e)

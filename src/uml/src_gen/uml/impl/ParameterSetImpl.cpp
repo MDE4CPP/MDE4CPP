@@ -198,7 +198,7 @@ std::shared_ptr<ecore::EObject>  ParameterSetImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ParameterSetImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getParameterSet_EClass();
+	return UmlPackageImpl::eInstance()->getParameterSet_Class();
 }
 
 //*********************************
@@ -286,9 +286,9 @@ Any ParameterSetImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::PARAMETERSET_EREFERENCE_CONDITION:
+		case UmlPackage::PARAMETERSET_ATTRIBUTE_CONDITION:
 			return eAny(getCondition()); //1779
-		case UmlPackage::PARAMETERSET_EREFERENCE_PARAMETER:
+		case UmlPackage::PARAMETERSET_ATTRIBUTE_PARAMETER:
 			return eAny(getParameter()); //17710
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
@@ -297,9 +297,9 @@ bool ParameterSetImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::PARAMETERSET_EREFERENCE_CONDITION:
+		case UmlPackage::PARAMETERSET_ATTRIBUTE_CONDITION:
 			return getCondition() != nullptr; //1779
-		case UmlPackage::PARAMETERSET_EREFERENCE_PARAMETER:
+		case UmlPackage::PARAMETERSET_ATTRIBUTE_PARAMETER:
 			return getParameter() != nullptr; //17710
 	}
 	return NamedElementImpl::internalEIsSet(featureID);
@@ -396,7 +396,7 @@ void ParameterSetImpl::resolveReferences(const int featureID, std::list<std::sha
 {
 	switch(featureID)
 	{
-		case UmlPackage::PARAMETERSET_EREFERENCE_PARAMETER:
+		case UmlPackage::PARAMETERSET_ATTRIBUTE_PARAMETER:
 		{
 			std::shared_ptr<Bag<uml::Parameter>> _parameter = getParameter();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -438,7 +438,7 @@ void ParameterSetImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 		// Save 'condition'
 		for (std::shared_ptr<uml::Constraint> condition : *this->getCondition()) 
 		{
-			saveHandler->addReference(condition, "condition", condition->eClass() != package->getConstraint_EClass());
+			saveHandler->addReference(condition, "condition", condition->eClass() != package->getConstraint_Class());
 		}
 	
 

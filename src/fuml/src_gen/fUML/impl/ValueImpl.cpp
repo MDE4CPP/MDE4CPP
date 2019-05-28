@@ -102,7 +102,7 @@ std::shared_ptr<ecore::EObject>  ValueImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ValueImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getValue_EClass();
+	return FUMLPackageImpl::eInstance()->getValue_Class();
 }
 
 //*********************************

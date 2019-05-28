@@ -248,7 +248,7 @@ std::shared_ptr<ecore::EObject>  ConnectorImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ConnectorImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getConnector_EClass();
+	return UmlPackageImpl::eInstance()->getConnector_Class();
 }
 
 //*********************************
@@ -363,15 +363,15 @@ Any ConnectorImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::CONNECTOR_EREFERENCE_CONTRACT:
+		case UmlPackage::CONNECTOR_ATTRIBUTE_CONTRACT:
 			return eAny(getContract()); //5314
-		case UmlPackage::CONNECTOR_EREFERENCE_END:
+		case UmlPackage::CONNECTOR_ATTRIBUTE_END:
 			return eAny(getEnd()); //5315
-		case UmlPackage::CONNECTOR_EATTRIBUTE_KIND:
+		case UmlPackage::CONNECTOR_ATTRIBUTE_KIND:
 			return eAny(getKind()); //5316
-		case UmlPackage::CONNECTOR_EREFERENCE_REDEFINEDCONNECTOR:
+		case UmlPackage::CONNECTOR_ATTRIBUTE_REDEFINEDCONNECTOR:
 			return eAny(getRedefinedConnector()); //5317
-		case UmlPackage::CONNECTOR_EREFERENCE_TYPE:
+		case UmlPackage::CONNECTOR_ATTRIBUTE_TYPE:
 			return eAny(getType()); //5318
 	}
 	return FeatureImpl::eGet(featureID, resolve, coreType);
@@ -380,15 +380,15 @@ bool ConnectorImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::CONNECTOR_EREFERENCE_CONTRACT:
+		case UmlPackage::CONNECTOR_ATTRIBUTE_CONTRACT:
 			return getContract() != nullptr; //5314
-		case UmlPackage::CONNECTOR_EREFERENCE_END:
+		case UmlPackage::CONNECTOR_ATTRIBUTE_END:
 			return getEnd() != nullptr; //5315
-		case UmlPackage::CONNECTOR_EATTRIBUTE_KIND:
+		case UmlPackage::CONNECTOR_ATTRIBUTE_KIND:
 			return m_kind != ConnectorKind::ASSEMBLY;; //5316
-		case UmlPackage::CONNECTOR_EREFERENCE_REDEFINEDCONNECTOR:
+		case UmlPackage::CONNECTOR_ATTRIBUTE_REDEFINEDCONNECTOR:
 			return getRedefinedConnector() != nullptr; //5317
-		case UmlPackage::CONNECTOR_EREFERENCE_TYPE:
+		case UmlPackage::CONNECTOR_ATTRIBUTE_TYPE:
 			return getType() != nullptr; //5318
 	}
 	return FeatureImpl::internalEIsSet(featureID);
@@ -397,7 +397,7 @@ bool ConnectorImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::CONNECTOR_EREFERENCE_TYPE:
+		case UmlPackage::CONNECTOR_ATTRIBUTE_TYPE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Association> _type = newValue->get<std::shared_ptr<uml::Association>>();
@@ -506,7 +506,7 @@ void ConnectorImpl::resolveReferences(const int featureID, std::list<std::shared
 {
 	switch(featureID)
 	{
-		case UmlPackage::CONNECTOR_EREFERENCE_CONTRACT:
+		case UmlPackage::CONNECTOR_ATTRIBUTE_CONTRACT:
 		{
 			std::shared_ptr<Bag<uml::Behavior>> _contract = getContract();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -520,7 +520,7 @@ void ConnectorImpl::resolveReferences(const int featureID, std::list<std::shared
 			return;
 		}
 
-		case UmlPackage::CONNECTOR_EREFERENCE_REDEFINEDCONNECTOR:
+		case UmlPackage::CONNECTOR_ATTRIBUTE_REDEFINEDCONNECTOR:
 		{
 			std::shared_ptr<Bag<uml::Connector>> _redefinedConnector = getRedefinedConnector();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -534,7 +534,7 @@ void ConnectorImpl::resolveReferences(const int featureID, std::list<std::shared
 			return;
 		}
 
-		case UmlPackage::CONNECTOR_EREFERENCE_TYPE:
+		case UmlPackage::CONNECTOR_ATTRIBUTE_TYPE:
 		{
 			if (references.size() == 1)
 			{
@@ -580,7 +580,7 @@ void ConnectorImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 		// Save 'end'
 		for (std::shared_ptr<uml::ConnectorEnd> end : *this->getEnd()) 
 		{
-			saveHandler->addReference(end, "end", end->eClass() != package->getConnectorEnd_EClass());
+			saveHandler->addReference(end, "end", end->eClass() != package->getConnectorEnd_Class());
 		}
 	
 

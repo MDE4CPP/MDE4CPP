@@ -159,7 +159,7 @@ std::shared_ptr<ecore::EObject>  SendSignalActionActivationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> SendSignalActionActivationImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getSendSignalActionActivation_EClass();
+	return FUMLPackageImpl::eInstance()->getSendSignalActionActivation_Class();
 }
 
 //*********************************

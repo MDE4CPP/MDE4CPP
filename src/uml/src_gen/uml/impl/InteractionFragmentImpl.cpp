@@ -237,7 +237,7 @@ std::shared_ptr<ecore::EObject>  InteractionFragmentImpl::copy() const
 
 std::shared_ptr<ecore::EClass> InteractionFragmentImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getInteractionFragment_EClass();
+	return UmlPackageImpl::eInstance()->getInteractionFragment_Class();
 }
 
 //*********************************
@@ -342,13 +342,13 @@ Any InteractionFragmentImpl::eGet(int featureID, bool resolve, bool coreType) co
 {
 	switch(featureID)
 	{
-		case UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_COVERED:
+		case UmlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_COVERED:
 			return eAny(getCovered()); //1219
-		case UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_ENCLOSINGINTERACTION:
+		case UmlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_ENCLOSINGINTERACTION:
 			return eAny(getEnclosingInteraction()); //12111
-		case UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_ENCLOSINGOPERAND:
+		case UmlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_ENCLOSINGOPERAND:
 			return eAny(getEnclosingOperand()); //12110
-		case UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_GENERALORDERING:
+		case UmlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_GENERALORDERING:
 			return eAny(getGeneralOrdering()); //12112
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
@@ -357,13 +357,13 @@ bool InteractionFragmentImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_COVERED:
+		case UmlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_COVERED:
 			return getCovered() != nullptr; //1219
-		case UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_ENCLOSINGINTERACTION:
+		case UmlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_ENCLOSINGINTERACTION:
 			return getEnclosingInteraction().lock() != nullptr; //12111
-		case UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_ENCLOSINGOPERAND:
+		case UmlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_ENCLOSINGOPERAND:
 			return getEnclosingOperand().lock() != nullptr; //12110
-		case UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_GENERALORDERING:
+		case UmlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_GENERALORDERING:
 			return getGeneralOrdering() != nullptr; //12112
 	}
 	return NamedElementImpl::internalEIsSet(featureID);
@@ -372,14 +372,14 @@ bool InteractionFragmentImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_ENCLOSINGINTERACTION:
+		case UmlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_ENCLOSINGINTERACTION:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Interaction> _enclosingInteraction = newValue->get<std::shared_ptr<uml::Interaction>>();
 			setEnclosingInteraction(_enclosingInteraction); //12111
 			return true;
 		}
-		case UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_ENCLOSINGOPERAND:
+		case UmlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_ENCLOSINGOPERAND:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::InteractionOperand> _enclosingOperand = newValue->get<std::shared_ptr<uml::InteractionOperand>>();
@@ -474,7 +474,7 @@ void InteractionFragmentImpl::resolveReferences(const int featureID, std::list<s
 {
 	switch(featureID)
 	{
-		case UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_COVERED:
+		case UmlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_COVERED:
 		{
 			std::shared_ptr<Bag<uml::Lifeline>> _covered = getCovered();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -488,7 +488,7 @@ void InteractionFragmentImpl::resolveReferences(const int featureID, std::list<s
 			return;
 		}
 
-		case UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_ENCLOSINGINTERACTION:
+		case UmlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_ENCLOSINGINTERACTION:
 		{
 			if (references.size() == 1)
 			{
@@ -500,7 +500,7 @@ void InteractionFragmentImpl::resolveReferences(const int featureID, std::list<s
 			return;
 		}
 
-		case UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_ENCLOSINGOPERAND:
+		case UmlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_ENCLOSINGOPERAND:
 		{
 			if (references.size() == 1)
 			{
@@ -540,7 +540,7 @@ void InteractionFragmentImpl::saveContent(std::shared_ptr<persistence::interface
 		// Save 'generalOrdering'
 		for (std::shared_ptr<uml::GeneralOrdering> generalOrdering : *this->getGeneralOrdering()) 
 		{
-			saveHandler->addReference(generalOrdering, "generalOrdering", generalOrdering->eClass() != package->getGeneralOrdering_EClass());
+			saveHandler->addReference(generalOrdering, "generalOrdering", generalOrdering->eClass() != package->getGeneralOrdering_Class());
 		}
 	
 

@@ -299,7 +299,7 @@ std::shared_ptr<ecore::EObject>  ProtocolTransitionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ProtocolTransitionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getProtocolTransition_EClass();
+	return UmlPackageImpl::eInstance()->getProtocolTransition_Class();
 }
 
 //*********************************
@@ -427,11 +427,11 @@ Any ProtocolTransitionImpl::eGet(int featureID, bool resolve, bool coreType) con
 {
 	switch(featureID)
 	{
-		case UmlPackage::PROTOCOLTRANSITION_EREFERENCE_POSTCONDITION:
+		case UmlPackage::PROTOCOLTRANSITION_ATTRIBUTE_POSTCONDITION:
 			return eAny(getPostCondition()); //18826
-		case UmlPackage::PROTOCOLTRANSITION_EREFERENCE_PRECONDITION:
+		case UmlPackage::PROTOCOLTRANSITION_ATTRIBUTE_PRECONDITION:
 			return eAny(getPreCondition()); //18827
-		case UmlPackage::PROTOCOLTRANSITION_EREFERENCE_REFERRED:
+		case UmlPackage::PROTOCOLTRANSITION_ATTRIBUTE_REFERRED:
 			return eAny(getReferred()); //18828
 	}
 	return TransitionImpl::eGet(featureID, resolve, coreType);
@@ -440,11 +440,11 @@ bool ProtocolTransitionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::PROTOCOLTRANSITION_EREFERENCE_POSTCONDITION:
+		case UmlPackage::PROTOCOLTRANSITION_ATTRIBUTE_POSTCONDITION:
 			return getPostCondition() != nullptr; //18826
-		case UmlPackage::PROTOCOLTRANSITION_EREFERENCE_PRECONDITION:
+		case UmlPackage::PROTOCOLTRANSITION_ATTRIBUTE_PRECONDITION:
 			return getPreCondition() != nullptr; //18827
-		case UmlPackage::PROTOCOLTRANSITION_EREFERENCE_REFERRED:
+		case UmlPackage::PROTOCOLTRANSITION_ATTRIBUTE_REFERRED:
 			return getReferred() != nullptr; //18828
 	}
 	return TransitionImpl::internalEIsSet(featureID);
@@ -453,14 +453,14 @@ bool ProtocolTransitionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::PROTOCOLTRANSITION_EREFERENCE_POSTCONDITION:
+		case UmlPackage::PROTOCOLTRANSITION_ATTRIBUTE_POSTCONDITION:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Constraint> _postCondition = newValue->get<std::shared_ptr<uml::Constraint>>();
 			setPostCondition(_postCondition); //18826
 			return true;
 		}
-		case UmlPackage::PROTOCOLTRANSITION_EREFERENCE_PRECONDITION:
+		case UmlPackage::PROTOCOLTRANSITION_ATTRIBUTE_PRECONDITION:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Constraint> _preCondition = newValue->get<std::shared_ptr<uml::Constraint>>();
@@ -535,7 +535,7 @@ void ProtocolTransitionImpl::resolveReferences(const int featureID, std::list<st
 {
 	switch(featureID)
 	{
-		case UmlPackage::PROTOCOLTRANSITION_EREFERENCE_POSTCONDITION:
+		case UmlPackage::PROTOCOLTRANSITION_ATTRIBUTE_POSTCONDITION:
 		{
 			if (references.size() == 1)
 			{
@@ -547,7 +547,7 @@ void ProtocolTransitionImpl::resolveReferences(const int featureID, std::list<st
 			return;
 		}
 
-		case UmlPackage::PROTOCOLTRANSITION_EREFERENCE_PRECONDITION:
+		case UmlPackage::PROTOCOLTRANSITION_ATTRIBUTE_PRECONDITION:
 		{
 			if (references.size() == 1)
 			{

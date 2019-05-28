@@ -298,7 +298,7 @@ std::shared_ptr<ecore::EObject>  RemoveVariableValueActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> RemoveVariableValueActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getRemoveVariableValueAction_EClass();
+	return UmlPackageImpl::eInstance()->getRemoveVariableValueAction_Class();
 }
 
 //*********************************
@@ -401,9 +401,9 @@ Any RemoveVariableValueActionImpl::eGet(int featureID, bool resolve, bool coreTy
 {
 	switch(featureID)
 	{
-		case UmlPackage::REMOVEVARIABLEVALUEACTION_EATTRIBUTE_ISREMOVEDUPLICATES:
+		case UmlPackage::REMOVEVARIABLEVALUEACTION_ATTRIBUTE_ISREMOVEDUPLICATES:
 			return eAny(getIsRemoveDuplicates()); //21029
-		case UmlPackage::REMOVEVARIABLEVALUEACTION_EREFERENCE_REMOVEAT:
+		case UmlPackage::REMOVEVARIABLEVALUEACTION_ATTRIBUTE_REMOVEAT:
 			return eAny(getRemoveAt()); //21030
 	}
 	return WriteVariableActionImpl::eGet(featureID, resolve, coreType);
@@ -412,9 +412,9 @@ bool RemoveVariableValueActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::REMOVEVARIABLEVALUEACTION_EATTRIBUTE_ISREMOVEDUPLICATES:
+		case UmlPackage::REMOVEVARIABLEVALUEACTION_ATTRIBUTE_ISREMOVEDUPLICATES:
 			return getIsRemoveDuplicates() != false; //21029
-		case UmlPackage::REMOVEVARIABLEVALUEACTION_EREFERENCE_REMOVEAT:
+		case UmlPackage::REMOVEVARIABLEVALUEACTION_ATTRIBUTE_REMOVEAT:
 			return getRemoveAt() != nullptr; //21030
 	}
 	return WriteVariableActionImpl::internalEIsSet(featureID);
@@ -423,14 +423,14 @@ bool RemoveVariableValueActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::REMOVEVARIABLEVALUEACTION_EATTRIBUTE_ISREMOVEDUPLICATES:
+		case UmlPackage::REMOVEVARIABLEVALUEACTION_ATTRIBUTE_ISREMOVEDUPLICATES:
 		{
 			// BOOST CAST
 			bool _isRemoveDuplicates = newValue->get<bool>();
 			setIsRemoveDuplicates(_isRemoveDuplicates); //21029
 			return true;
 		}
-		case UmlPackage::REMOVEVARIABLEVALUEACTION_EREFERENCE_REMOVEAT:
+		case UmlPackage::REMOVEVARIABLEVALUEACTION_ATTRIBUTE_REMOVEAT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::InputPin> _removeAt = newValue->get<std::shared_ptr<uml::InputPin>>();
@@ -572,12 +572,12 @@ void RemoveVariableValueActionImpl::saveContent(std::shared_ptr<persistence::int
 		std::shared_ptr<uml::InputPin > removeAt = this->getRemoveAt();
 		if (removeAt != nullptr)
 		{
-			saveHandler->addReference(removeAt, "removeAt", removeAt->eClass() != package->getInputPin_EClass());
+			saveHandler->addReference(removeAt, "removeAt", removeAt->eClass() != package->getInputPin_Class());
 		}
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getRemoveVariableValueAction_EAttribute_isRemoveDuplicates()) )
+		if ( this->eIsSet(package->getRemoveVariableValueAction_Attribute_isRemoveDuplicates()) )
 		{
 			saveHandler->addAttribute("isRemoveDuplicates", this->getIsRemoveDuplicates());
 		}

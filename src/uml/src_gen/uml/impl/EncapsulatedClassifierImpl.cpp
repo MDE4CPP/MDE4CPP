@@ -166,11 +166,11 @@ EncapsulatedClassifierImpl::~EncapsulatedClassifierImpl()
 			{
 				switch(reference_id)
 				{	
-				case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
+				case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
 					m_owningPackage = par_Package;
 					m_namespace = par_Package;
 					 return;
-				case UmlPackage::TYPE_EREFERENCE_PACKAGE:
+				case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
 					m_package = par_Package;
 					m_namespace = par_Package;
 					 return;
@@ -410,7 +410,7 @@ std::shared_ptr<ecore::EObject>  EncapsulatedClassifierImpl::copy() const
 
 std::shared_ptr<ecore::EClass> EncapsulatedClassifierImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getEncapsulatedClassifier_EClass();
+	return UmlPackageImpl::eInstance()->getEncapsulatedClassifier_Class();
 }
 
 //*********************************
@@ -522,7 +522,7 @@ Any EncapsulatedClassifierImpl::eGet(int featureID, bool resolve, bool coreType)
 {
 	switch(featureID)
 	{
-		case UmlPackage::ENCAPSULATEDCLASSIFIER_EREFERENCE_OWNEDPORT:
+		case UmlPackage::ENCAPSULATEDCLASSIFIER_ATTRIBUTE_OWNEDPORT:
 			return eAny(getOwnedPort()); //8342
 	}
 	return StructuredClassifierImpl::eGet(featureID, resolve, coreType);
@@ -531,7 +531,7 @@ bool EncapsulatedClassifierImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::ENCAPSULATEDCLASSIFIER_EREFERENCE_OWNEDPORT:
+		case UmlPackage::ENCAPSULATEDCLASSIFIER_ATTRIBUTE_OWNEDPORT:
 			return getOwnedPort() != nullptr; //8342
 	}
 	return StructuredClassifierImpl::internalEIsSet(featureID);

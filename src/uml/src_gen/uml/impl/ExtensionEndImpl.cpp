@@ -347,7 +347,7 @@ std::shared_ptr<ecore::EObject>  ExtensionEndImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ExtensionEndImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getExtensionEnd_EClass();
+	return UmlPackageImpl::eInstance()->getExtensionEnd_Class();
 }
 
 //*********************************

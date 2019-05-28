@@ -304,7 +304,7 @@ std::shared_ptr<ecore::EObject>  CreateLinkObjectActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> CreateLinkObjectActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getCreateLinkObjectAction_EClass();
+	return UmlPackageImpl::eInstance()->getCreateLinkObjectAction_Class();
 }
 
 //*********************************
@@ -414,7 +414,7 @@ Any CreateLinkObjectActionImpl::eGet(int featureID, bool resolve, bool coreType)
 {
 	switch(featureID)
 	{
-		case UmlPackage::CREATELINKOBJECTACTION_EREFERENCE_RESULT:
+		case UmlPackage::CREATELINKOBJECTACTION_ATTRIBUTE_RESULT:
 			return eAny(getResult()); //6229
 	}
 	return CreateLinkActionImpl::eGet(featureID, resolve, coreType);
@@ -423,7 +423,7 @@ bool CreateLinkObjectActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::CREATELINKOBJECTACTION_EREFERENCE_RESULT:
+		case UmlPackage::CREATELINKOBJECTACTION_ATTRIBUTE_RESULT:
 			return getResult() != nullptr; //6229
 	}
 	return CreateLinkActionImpl::internalEIsSet(featureID);
@@ -432,7 +432,7 @@ bool CreateLinkObjectActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::CREATELINKOBJECTACTION_EREFERENCE_RESULT:
+		case UmlPackage::CREATELINKOBJECTACTION_ATTRIBUTE_RESULT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::OutputPin> _result = newValue->get<std::shared_ptr<uml::OutputPin>>();
@@ -556,7 +556,7 @@ void CreateLinkObjectActionImpl::saveContent(std::shared_ptr<persistence::interf
 		std::shared_ptr<uml::OutputPin > result = this->getResult();
 		if (result != nullptr)
 		{
-			saveHandler->addReference(result, "result", result->eClass() != package->getOutputPin_EClass());
+			saveHandler->addReference(result, "result", result->eClass() != package->getOutputPin_Class());
 		}
 	
 

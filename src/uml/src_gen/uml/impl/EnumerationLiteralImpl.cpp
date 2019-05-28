@@ -245,7 +245,7 @@ std::shared_ptr<ecore::EObject>  EnumerationLiteralImpl::copy() const
 
 std::shared_ptr<ecore::EClass> EnumerationLiteralImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getEnumerationLiteral_EClass();
+	return UmlPackageImpl::eInstance()->getEnumerationLiteral_Class();
 }
 
 //*********************************
@@ -338,7 +338,7 @@ Any EnumerationLiteralImpl::eGet(int featureID, bool resolve, bool coreType) con
 {
 	switch(featureID)
 	{
-		case UmlPackage::ENUMERATIONLITERAL_EREFERENCE_ENUMERATION:
+		case UmlPackage::ENUMERATIONLITERAL_ATTRIBUTE_ENUMERATION:
 			return eAny(getEnumeration()); //8517
 	}
 	return InstanceSpecificationImpl::eGet(featureID, resolve, coreType);
@@ -347,7 +347,7 @@ bool EnumerationLiteralImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::ENUMERATIONLITERAL_EREFERENCE_ENUMERATION:
+		case UmlPackage::ENUMERATIONLITERAL_ATTRIBUTE_ENUMERATION:
 			return getEnumeration().lock() != nullptr; //8517
 	}
 	return InstanceSpecificationImpl::internalEIsSet(featureID);
@@ -356,7 +356,7 @@ bool EnumerationLiteralImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::ENUMERATIONLITERAL_EREFERENCE_ENUMERATION:
+		case UmlPackage::ENUMERATIONLITERAL_ATTRIBUTE_ENUMERATION:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Enumeration> _enumeration = newValue->get<std::shared_ptr<uml::Enumeration>>();
@@ -405,7 +405,7 @@ void EnumerationLiteralImpl::resolveReferences(const int featureID, std::list<st
 {
 	switch(featureID)
 	{
-		case UmlPackage::ENUMERATIONLITERAL_EREFERENCE_ENUMERATION:
+		case UmlPackage::ENUMERATIONLITERAL_ATTRIBUTE_ENUMERATION:
 		{
 			if (references.size() == 1)
 			{

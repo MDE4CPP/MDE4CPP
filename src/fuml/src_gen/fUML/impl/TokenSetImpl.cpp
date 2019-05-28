@@ -103,7 +103,7 @@ std::shared_ptr<ecore::EObject>  TokenSetImpl::copy() const
 
 std::shared_ptr<ecore::EClass> TokenSetImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getTokenSet_EClass();
+	return FUMLPackageImpl::eInstance()->getTokenSet_Class();
 }
 
 //*********************************
@@ -149,7 +149,7 @@ Any TokenSetImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::TOKENSET_EREFERENCE_TOKENS:
+		case FUMLPackage::TOKENSET_ATTRIBUTE_TOKENS:
 			return eAny(getTokens()); //1090
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
@@ -158,7 +158,7 @@ bool TokenSetImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::TOKENSET_EREFERENCE_TOKENS:
+		case FUMLPackage::TOKENSET_ATTRIBUTE_TOKENS:
 			return getTokens() != nullptr; //1090
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
@@ -228,7 +228,7 @@ void TokenSetImpl::resolveReferences(const int featureID, std::list<std::shared_
 {
 	switch(featureID)
 	{
-		case FUMLPackage::TOKENSET_EREFERENCE_TOKENS:
+		case FUMLPackage::TOKENSET_ATTRIBUTE_TOKENS:
 		{
 			std::shared_ptr<Bag<fUML::Token>> _tokens = getTokens();
 			for(std::shared_ptr<ecore::EObject> ref : references)

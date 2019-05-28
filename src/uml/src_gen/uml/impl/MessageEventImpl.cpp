@@ -188,7 +188,7 @@ std::shared_ptr<ecore::EObject>  MessageEventImpl::copy() const
 
 std::shared_ptr<ecore::EClass> MessageEventImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getMessageEvent_EClass();
+	return UmlPackageImpl::eInstance()->getMessageEvent_Class();
 }
 
 //*********************************

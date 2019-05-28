@@ -193,7 +193,7 @@ std::shared_ptr<ecore::EObject>  PackageableElementImpl::copy() const
 
 std::shared_ptr<ecore::EClass> PackageableElementImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getPackageableElement_EClass();
+	return UmlPackageImpl::eInstance()->getPackageableElement_Class();
 }
 
 //*********************************
@@ -280,7 +280,7 @@ Any PackageableElementImpl::eGet(int featureID, bool resolve, bool coreType) con
 {
 	switch(featureID)
 	{
-		case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
+		case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
 			return eAny(getOwningPackage()); //17311
 	}
 	Any result;
@@ -296,7 +296,7 @@ bool PackageableElementImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
+		case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
 			return getOwningPackage().lock() != nullptr; //17311
 	}
 	bool result = false;
@@ -312,7 +312,7 @@ bool PackageableElementImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
+		case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Package> _owningPackage = newValue->get<std::shared_ptr<uml::Package>>();
@@ -370,7 +370,7 @@ void PackageableElementImpl::resolveReferences(const int featureID, std::list<st
 {
 	switch(featureID)
 	{
-		case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
+		case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
 		{
 			if (references.size() == 1)
 			{

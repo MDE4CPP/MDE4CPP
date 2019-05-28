@@ -241,7 +241,7 @@ std::shared_ptr<ecore::EObject>  InitialNodeImpl::copy() const
 
 std::shared_ptr<ecore::EClass> InitialNodeImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getInitialNode_EClass();
+	return UmlPackageImpl::eInstance()->getInitialNode_Class();
 }
 
 //*********************************

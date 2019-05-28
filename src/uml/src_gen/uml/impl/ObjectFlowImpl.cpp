@@ -262,7 +262,7 @@ std::shared_ptr<ecore::EObject>  ObjectFlowImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ObjectFlowImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getObjectFlow_EClass();
+	return UmlPackageImpl::eInstance()->getObjectFlow_Class();
 }
 
 //*********************************
@@ -423,13 +423,13 @@ Any ObjectFlowImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::OBJECTFLOW_EATTRIBUTE_ISMULTICAST:
+		case UmlPackage::OBJECTFLOW_ATTRIBUTE_ISMULTICAST:
 			return eAny(getIsMulticast()); //15922
-		case UmlPackage::OBJECTFLOW_EATTRIBUTE_ISMULTIRECEIVE:
+		case UmlPackage::OBJECTFLOW_ATTRIBUTE_ISMULTIRECEIVE:
 			return eAny(getIsMultireceive()); //15923
-		case UmlPackage::OBJECTFLOW_EREFERENCE_SELECTION:
+		case UmlPackage::OBJECTFLOW_ATTRIBUTE_SELECTION:
 			return eAny(getSelection()); //15924
-		case UmlPackage::OBJECTFLOW_EREFERENCE_TRANSFORMATION:
+		case UmlPackage::OBJECTFLOW_ATTRIBUTE_TRANSFORMATION:
 			return eAny(getTransformation()); //15925
 	}
 	return ActivityEdgeImpl::eGet(featureID, resolve, coreType);
@@ -438,13 +438,13 @@ bool ObjectFlowImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::OBJECTFLOW_EATTRIBUTE_ISMULTICAST:
+		case UmlPackage::OBJECTFLOW_ATTRIBUTE_ISMULTICAST:
 			return getIsMulticast() != false; //15922
-		case UmlPackage::OBJECTFLOW_EATTRIBUTE_ISMULTIRECEIVE:
+		case UmlPackage::OBJECTFLOW_ATTRIBUTE_ISMULTIRECEIVE:
 			return getIsMultireceive() != false; //15923
-		case UmlPackage::OBJECTFLOW_EREFERENCE_SELECTION:
+		case UmlPackage::OBJECTFLOW_ATTRIBUTE_SELECTION:
 			return getSelection() != nullptr; //15924
-		case UmlPackage::OBJECTFLOW_EREFERENCE_TRANSFORMATION:
+		case UmlPackage::OBJECTFLOW_ATTRIBUTE_TRANSFORMATION:
 			return getTransformation() != nullptr; //15925
 	}
 	return ActivityEdgeImpl::internalEIsSet(featureID);
@@ -453,28 +453,28 @@ bool ObjectFlowImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::OBJECTFLOW_EATTRIBUTE_ISMULTICAST:
+		case UmlPackage::OBJECTFLOW_ATTRIBUTE_ISMULTICAST:
 		{
 			// BOOST CAST
 			bool _isMulticast = newValue->get<bool>();
 			setIsMulticast(_isMulticast); //15922
 			return true;
 		}
-		case UmlPackage::OBJECTFLOW_EATTRIBUTE_ISMULTIRECEIVE:
+		case UmlPackage::OBJECTFLOW_ATTRIBUTE_ISMULTIRECEIVE:
 		{
 			// BOOST CAST
 			bool _isMultireceive = newValue->get<bool>();
 			setIsMultireceive(_isMultireceive); //15923
 			return true;
 		}
-		case UmlPackage::OBJECTFLOW_EREFERENCE_SELECTION:
+		case UmlPackage::OBJECTFLOW_ATTRIBUTE_SELECTION:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Behavior> _selection = newValue->get<std::shared_ptr<uml::Behavior>>();
 			setSelection(_selection); //15924
 			return true;
 		}
-		case UmlPackage::OBJECTFLOW_EREFERENCE_TRANSFORMATION:
+		case UmlPackage::OBJECTFLOW_ATTRIBUTE_TRANSFORMATION:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Behavior> _transformation = newValue->get<std::shared_ptr<uml::Behavior>>();
@@ -567,7 +567,7 @@ void ObjectFlowImpl::resolveReferences(const int featureID, std::list<std::share
 {
 	switch(featureID)
 	{
-		case UmlPackage::OBJECTFLOW_EREFERENCE_SELECTION:
+		case UmlPackage::OBJECTFLOW_ATTRIBUTE_SELECTION:
 		{
 			if (references.size() == 1)
 			{
@@ -579,7 +579,7 @@ void ObjectFlowImpl::resolveReferences(const int featureID, std::list<std::share
 			return;
 		}
 
-		case UmlPackage::OBJECTFLOW_EREFERENCE_TRANSFORMATION:
+		case UmlPackage::OBJECTFLOW_ATTRIBUTE_TRANSFORMATION:
 		{
 			if (references.size() == 1)
 			{
@@ -625,12 +625,12 @@ void ObjectFlowImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getObjectFlow_EAttribute_isMulticast()) )
+		if ( this->eIsSet(package->getObjectFlow_Attribute_isMulticast()) )
 		{
 			saveHandler->addAttribute("isMulticast", this->getIsMulticast());
 		}
 
-		if ( this->eIsSet(package->getObjectFlow_EAttribute_isMultireceive()) )
+		if ( this->eIsSet(package->getObjectFlow_Attribute_isMultireceive()) )
 		{
 			saveHandler->addAttribute("isMultireceive", this->getIsMultireceive());
 		}

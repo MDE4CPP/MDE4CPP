@@ -171,7 +171,7 @@ std::shared_ptr<ecore::EObject>  DestroyObjectActionActivationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> DestroyObjectActionActivationImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getDestroyObjectActionActivation_EClass();
+	return FUMLPackageImpl::eInstance()->getDestroyObjectActionActivation_Class();
 }
 
 //*********************************

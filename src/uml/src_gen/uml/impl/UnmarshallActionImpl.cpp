@@ -324,7 +324,7 @@ std::shared_ptr<ecore::EObject>  UnmarshallActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> UnmarshallActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getUnmarshallAction_EClass();
+	return UmlPackageImpl::eInstance()->getUnmarshallAction_Class();
 }
 
 //*********************************
@@ -463,11 +463,11 @@ Any UnmarshallActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::UNMARSHALLACTION_EREFERENCE_OBJECT:
+		case UmlPackage::UNMARSHALLACTION_ATTRIBUTE_OBJECT:
 			return eAny(getObject()); //24627
-		case UmlPackage::UNMARSHALLACTION_EREFERENCE_RESULT:
+		case UmlPackage::UNMARSHALLACTION_ATTRIBUTE_RESULT:
 			return eAny(getResult()); //24628
-		case UmlPackage::UNMARSHALLACTION_EREFERENCE_UNMARSHALLTYPE:
+		case UmlPackage::UNMARSHALLACTION_ATTRIBUTE_UNMARSHALLTYPE:
 			return eAny(getUnmarshallType()); //24629
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
@@ -476,11 +476,11 @@ bool UnmarshallActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::UNMARSHALLACTION_EREFERENCE_OBJECT:
+		case UmlPackage::UNMARSHALLACTION_ATTRIBUTE_OBJECT:
 			return getObject() != nullptr; //24627
-		case UmlPackage::UNMARSHALLACTION_EREFERENCE_RESULT:
+		case UmlPackage::UNMARSHALLACTION_ATTRIBUTE_RESULT:
 			return getResult() != nullptr; //24628
-		case UmlPackage::UNMARSHALLACTION_EREFERENCE_UNMARSHALLTYPE:
+		case UmlPackage::UNMARSHALLACTION_ATTRIBUTE_UNMARSHALLTYPE:
 			return getUnmarshallType() != nullptr; //24629
 	}
 	return ActionImpl::internalEIsSet(featureID);
@@ -489,14 +489,14 @@ bool UnmarshallActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::UNMARSHALLACTION_EREFERENCE_OBJECT:
+		case UmlPackage::UNMARSHALLACTION_ATTRIBUTE_OBJECT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::InputPin> _object = newValue->get<std::shared_ptr<uml::InputPin>>();
 			setObject(_object); //24627
 			return true;
 		}
-		case UmlPackage::UNMARSHALLACTION_EREFERENCE_UNMARSHALLTYPE:
+		case UmlPackage::UNMARSHALLACTION_ATTRIBUTE_UNMARSHALLTYPE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Classifier> _unmarshallType = newValue->get<std::shared_ptr<uml::Classifier>>();
@@ -607,7 +607,7 @@ void UnmarshallActionImpl::resolveReferences(const int featureID, std::list<std:
 {
 	switch(featureID)
 	{
-		case UmlPackage::UNMARSHALLACTION_EREFERENCE_UNMARSHALLTYPE:
+		case UmlPackage::UNMARSHALLACTION_ATTRIBUTE_UNMARSHALLTYPE:
 		{
 			if (references.size() == 1)
 			{
@@ -661,13 +661,13 @@ void UnmarshallActionImpl::saveContent(std::shared_ptr<persistence::interfaces::
 		std::shared_ptr<uml::InputPin > object = this->getObject();
 		if (object != nullptr)
 		{
-			saveHandler->addReference(object, "object", object->eClass() != package->getInputPin_EClass());
+			saveHandler->addReference(object, "object", object->eClass() != package->getInputPin_Class());
 		}
 
 		// Save 'result'
 		for (std::shared_ptr<uml::OutputPin> result : *this->getResult()) 
 		{
-			saveHandler->addReference(result, "result", result->eClass() != package->getOutputPin_EClass());
+			saveHandler->addReference(result, "result", result->eClass() != package->getOutputPin_Class());
 		}
 	
 

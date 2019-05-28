@@ -215,7 +215,7 @@ std::shared_ptr<ecore::EObject>  LifelineImpl::copy() const
 
 std::shared_ptr<ecore::EClass> LifelineImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getLifeline_EClass();
+	return UmlPackageImpl::eInstance()->getLifeline_Class();
 }
 
 //*********************************
@@ -351,15 +351,15 @@ Any LifelineImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::LIFELINE_EREFERENCE_COVEREDBY:
+		case UmlPackage::LIFELINE_ATTRIBUTE_COVEREDBY:
 			return eAny(getCoveredBy()); //13213
-		case UmlPackage::LIFELINE_EREFERENCE_DECOMPOSEDAS:
+		case UmlPackage::LIFELINE_ATTRIBUTE_DECOMPOSEDAS:
 			return eAny(getDecomposedAs()); //1329
-		case UmlPackage::LIFELINE_EREFERENCE_INTERACTION:
+		case UmlPackage::LIFELINE_ATTRIBUTE_INTERACTION:
 			return eAny(getInteraction()); //13210
-		case UmlPackage::LIFELINE_EREFERENCE_REPRESENTS:
+		case UmlPackage::LIFELINE_ATTRIBUTE_REPRESENTS:
 			return eAny(getRepresents()); //13211
-		case UmlPackage::LIFELINE_EREFERENCE_SELECTOR:
+		case UmlPackage::LIFELINE_ATTRIBUTE_SELECTOR:
 			return eAny(getSelector()); //13212
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
@@ -368,15 +368,15 @@ bool LifelineImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::LIFELINE_EREFERENCE_COVEREDBY:
+		case UmlPackage::LIFELINE_ATTRIBUTE_COVEREDBY:
 			return getCoveredBy() != nullptr; //13213
-		case UmlPackage::LIFELINE_EREFERENCE_DECOMPOSEDAS:
+		case UmlPackage::LIFELINE_ATTRIBUTE_DECOMPOSEDAS:
 			return getDecomposedAs() != nullptr; //1329
-		case UmlPackage::LIFELINE_EREFERENCE_INTERACTION:
+		case UmlPackage::LIFELINE_ATTRIBUTE_INTERACTION:
 			return getInteraction().lock() != nullptr; //13210
-		case UmlPackage::LIFELINE_EREFERENCE_REPRESENTS:
+		case UmlPackage::LIFELINE_ATTRIBUTE_REPRESENTS:
 			return getRepresents() != nullptr; //13211
-		case UmlPackage::LIFELINE_EREFERENCE_SELECTOR:
+		case UmlPackage::LIFELINE_ATTRIBUTE_SELECTOR:
 			return getSelector() != nullptr; //13212
 	}
 	return NamedElementImpl::internalEIsSet(featureID);
@@ -385,28 +385,28 @@ bool LifelineImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::LIFELINE_EREFERENCE_DECOMPOSEDAS:
+		case UmlPackage::LIFELINE_ATTRIBUTE_DECOMPOSEDAS:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::PartDecomposition> _decomposedAs = newValue->get<std::shared_ptr<uml::PartDecomposition>>();
 			setDecomposedAs(_decomposedAs); //1329
 			return true;
 		}
-		case UmlPackage::LIFELINE_EREFERENCE_INTERACTION:
+		case UmlPackage::LIFELINE_ATTRIBUTE_INTERACTION:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Interaction> _interaction = newValue->get<std::shared_ptr<uml::Interaction>>();
 			setInteraction(_interaction); //13210
 			return true;
 		}
-		case UmlPackage::LIFELINE_EREFERENCE_REPRESENTS:
+		case UmlPackage::LIFELINE_ATTRIBUTE_REPRESENTS:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ConnectableElement> _represents = newValue->get<std::shared_ptr<uml::ConnectableElement>>();
 			setRepresents(_represents); //13211
 			return true;
 		}
-		case UmlPackage::LIFELINE_EREFERENCE_SELECTOR:
+		case UmlPackage::LIFELINE_ATTRIBUTE_SELECTOR:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ValueSpecification> _selector = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
@@ -515,7 +515,7 @@ void LifelineImpl::resolveReferences(const int featureID, std::list<std::shared_
 {
 	switch(featureID)
 	{
-		case UmlPackage::LIFELINE_EREFERENCE_COVEREDBY:
+		case UmlPackage::LIFELINE_ATTRIBUTE_COVEREDBY:
 		{
 			std::shared_ptr<Bag<uml::InteractionFragment>> _coveredBy = getCoveredBy();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -529,7 +529,7 @@ void LifelineImpl::resolveReferences(const int featureID, std::list<std::shared_
 			return;
 		}
 
-		case UmlPackage::LIFELINE_EREFERENCE_DECOMPOSEDAS:
+		case UmlPackage::LIFELINE_ATTRIBUTE_DECOMPOSEDAS:
 		{
 			if (references.size() == 1)
 			{
@@ -541,7 +541,7 @@ void LifelineImpl::resolveReferences(const int featureID, std::list<std::shared_
 			return;
 		}
 
-		case UmlPackage::LIFELINE_EREFERENCE_INTERACTION:
+		case UmlPackage::LIFELINE_ATTRIBUTE_INTERACTION:
 		{
 			if (references.size() == 1)
 			{
@@ -553,7 +553,7 @@ void LifelineImpl::resolveReferences(const int featureID, std::list<std::shared_
 			return;
 		}
 
-		case UmlPackage::LIFELINE_EREFERENCE_REPRESENTS:
+		case UmlPackage::LIFELINE_ATTRIBUTE_REPRESENTS:
 		{
 			if (references.size() == 1)
 			{
@@ -594,7 +594,7 @@ void LifelineImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 		std::shared_ptr<uml::ValueSpecification > selector = this->getSelector();
 		if (selector != nullptr)
 		{
-			saveHandler->addReference(selector, "selector", selector->eClass() != package->getValueSpecification_EClass());
+			saveHandler->addReference(selector, "selector", selector->eClass() != package->getValueSpecification_Class());
 		}
 	
 

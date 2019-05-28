@@ -136,7 +136,7 @@ std::shared_ptr<ecore::EObject>  ObjectNodeActivationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ObjectNodeActivationImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getObjectNodeActivation_EClass();
+	return FUMLPackageImpl::eInstance()->getObjectNodeActivation_Class();
 }
 
 //*********************************
@@ -332,7 +332,7 @@ Any ObjectNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType) c
 {
 	switch(featureID)
 	{
-		case FUMLPackage::OBJECTNODEACTIVATION_EATTRIBUTE_OFFEREDTOKENCOUNT:
+		case FUMLPackage::OBJECTNODEACTIVATION_ATTRIBUTE_OFFEREDTOKENCOUNT:
 			return eAny(getOfferedTokenCount()); //786
 	}
 	return ActivityNodeActivationImpl::eGet(featureID, resolve, coreType);
@@ -341,7 +341,7 @@ bool ObjectNodeActivationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::OBJECTNODEACTIVATION_EATTRIBUTE_OFFEREDTOKENCOUNT:
+		case FUMLPackage::OBJECTNODEACTIVATION_ATTRIBUTE_OFFEREDTOKENCOUNT:
 			return getOfferedTokenCount() != 0; //786
 	}
 	return ActivityNodeActivationImpl::internalEIsSet(featureID);
@@ -350,7 +350,7 @@ bool ObjectNodeActivationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case FUMLPackage::OBJECTNODEACTIVATION_EATTRIBUTE_OFFEREDTOKENCOUNT:
+		case FUMLPackage::OBJECTNODEACTIVATION_ATTRIBUTE_OFFEREDTOKENCOUNT:
 		{
 			// BOOST CAST
 			int _offeredTokenCount = newValue->get<int>();
@@ -443,7 +443,7 @@ void ObjectNodeActivationImpl::saveContent(std::shared_ptr<persistence::interfac
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getObjectNodeActivation_EAttribute_offeredTokenCount()) )
+		if ( this->eIsSet(package->getObjectNodeActivation_Attribute_offeredTokenCount()) )
 		{
 			saveHandler->addAttribute("offeredTokenCount", this->getOfferedTokenCount());
 		}

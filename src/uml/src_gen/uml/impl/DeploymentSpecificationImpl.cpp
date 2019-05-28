@@ -168,11 +168,11 @@ DeploymentSpecificationImpl::~DeploymentSpecificationImpl()
 			{
 				switch(reference_id)
 				{	
-				case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
+				case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
 					m_owningPackage = par_Package;
 					m_namespace = par_Package;
 					 return;
-				case UmlPackage::TYPE_EREFERENCE_PACKAGE:
+				case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
 					m_package = par_Package;
 					m_namespace = par_Package;
 					 return;
@@ -422,7 +422,7 @@ std::shared_ptr<ecore::EObject>  DeploymentSpecificationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> DeploymentSpecificationImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getDeploymentSpecification_EClass();
+	return UmlPackageImpl::eInstance()->getDeploymentSpecification_Class();
 }
 
 //*********************************
@@ -563,11 +563,11 @@ Any DeploymentSpecificationImpl::eGet(int featureID, bool resolve, bool coreType
 {
 	switch(featureID)
 	{
-		case UmlPackage::DEPLOYMENTSPECIFICATION_EREFERENCE_DEPLOYMENT:
+		case UmlPackage::DEPLOYMENTSPECIFICATION_ATTRIBUTE_DEPLOYMENT:
 			return eAny(getDeployment()); //7045
-		case UmlPackage::DEPLOYMENTSPECIFICATION_EATTRIBUTE_DEPLOYMENTLOCATION:
+		case UmlPackage::DEPLOYMENTSPECIFICATION_ATTRIBUTE_DEPLOYMENTLOCATION:
 			return eAny(getDeploymentLocation()); //7043
-		case UmlPackage::DEPLOYMENTSPECIFICATION_EATTRIBUTE_EXECUTIONLOCATION:
+		case UmlPackage::DEPLOYMENTSPECIFICATION_ATTRIBUTE_EXECUTIONLOCATION:
 			return eAny(getExecutionLocation()); //7044
 	}
 	return ArtifactImpl::eGet(featureID, resolve, coreType);
@@ -576,11 +576,11 @@ bool DeploymentSpecificationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::DEPLOYMENTSPECIFICATION_EREFERENCE_DEPLOYMENT:
+		case UmlPackage::DEPLOYMENTSPECIFICATION_ATTRIBUTE_DEPLOYMENT:
 			return getDeployment().lock() != nullptr; //7045
-		case UmlPackage::DEPLOYMENTSPECIFICATION_EATTRIBUTE_DEPLOYMENTLOCATION:
+		case UmlPackage::DEPLOYMENTSPECIFICATION_ATTRIBUTE_DEPLOYMENTLOCATION:
 			return getDeploymentLocation() != ""; //7043
-		case UmlPackage::DEPLOYMENTSPECIFICATION_EATTRIBUTE_EXECUTIONLOCATION:
+		case UmlPackage::DEPLOYMENTSPECIFICATION_ATTRIBUTE_EXECUTIONLOCATION:
 			return getExecutionLocation() != ""; //7044
 	}
 	return ArtifactImpl::internalEIsSet(featureID);
@@ -589,21 +589,21 @@ bool DeploymentSpecificationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::DEPLOYMENTSPECIFICATION_EREFERENCE_DEPLOYMENT:
+		case UmlPackage::DEPLOYMENTSPECIFICATION_ATTRIBUTE_DEPLOYMENT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Deployment> _deployment = newValue->get<std::shared_ptr<uml::Deployment>>();
 			setDeployment(_deployment); //7045
 			return true;
 		}
-		case UmlPackage::DEPLOYMENTSPECIFICATION_EATTRIBUTE_DEPLOYMENTLOCATION:
+		case UmlPackage::DEPLOYMENTSPECIFICATION_ATTRIBUTE_DEPLOYMENTLOCATION:
 		{
 			// BOOST CAST
 			std::string _deploymentLocation = newValue->get<std::string>();
 			setDeploymentLocation(_deploymentLocation); //7043
 			return true;
 		}
-		case UmlPackage::DEPLOYMENTSPECIFICATION_EATTRIBUTE_EXECUTIONLOCATION:
+		case UmlPackage::DEPLOYMENTSPECIFICATION_ATTRIBUTE_EXECUTIONLOCATION:
 		{
 			// BOOST CAST
 			std::string _executionLocation = newValue->get<std::string>();
@@ -682,7 +682,7 @@ void DeploymentSpecificationImpl::resolveReferences(const int featureID, std::li
 {
 	switch(featureID)
 	{
-		case UmlPackage::DEPLOYMENTSPECIFICATION_EREFERENCE_DEPLOYMENT:
+		case UmlPackage::DEPLOYMENTSPECIFICATION_ATTRIBUTE_DEPLOYMENT:
 		{
 			if (references.size() == 1)
 			{
@@ -739,12 +739,12 @@ void DeploymentSpecificationImpl::saveContent(std::shared_ptr<persistence::inter
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getDeploymentSpecification_EAttribute_deploymentLocation()) )
+		if ( this->eIsSet(package->getDeploymentSpecification_Attribute_deploymentLocation()) )
 		{
 			saveHandler->addAttribute("deploymentLocation", this->getDeploymentLocation());
 		}
 
-		if ( this->eIsSet(package->getDeploymentSpecification_EAttribute_executionLocation()) )
+		if ( this->eIsSet(package->getDeploymentSpecification_Attribute_executionLocation()) )
 		{
 			saveHandler->addAttribute("executionLocation", this->getExecutionLocation());
 		}

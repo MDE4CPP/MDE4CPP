@@ -214,7 +214,7 @@ std::shared_ptr<ecore::EObject>  TimeIntervalImpl::copy() const
 
 std::shared_ptr<ecore::EClass> TimeIntervalImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getTimeInterval_EClass();
+	return UmlPackageImpl::eInstance()->getTimeInterval_Class();
 }
 
 //*********************************

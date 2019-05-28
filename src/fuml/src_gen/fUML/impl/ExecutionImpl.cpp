@@ -162,7 +162,7 @@ std::shared_ptr<ecore::EObject>  ExecutionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ExecutionImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getExecution_EClass();
+	return FUMLPackageImpl::eInstance()->getExecution_Class();
 }
 
 //*********************************
@@ -305,9 +305,9 @@ Any ExecutionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::EXECUTION_EREFERENCE_CONTEXT:
+		case FUMLPackage::EXECUTION_ATTRIBUTE_CONTEXT:
 			return eAny(getContext()); //404
-		case FUMLPackage::EXECUTION_EREFERENCE_PARAMETERVALUES:
+		case FUMLPackage::EXECUTION_ATTRIBUTE_PARAMETERVALUES:
 			return eAny(getParameterValues()); //405
 	}
 	return ObjectImpl::eGet(featureID, resolve, coreType);
@@ -316,9 +316,9 @@ bool ExecutionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case FUMLPackage::EXECUTION_EREFERENCE_CONTEXT:
+		case FUMLPackage::EXECUTION_ATTRIBUTE_CONTEXT:
 			return getContext() != nullptr; //404
-		case FUMLPackage::EXECUTION_EREFERENCE_PARAMETERVALUES:
+		case FUMLPackage::EXECUTION_ATTRIBUTE_PARAMETERVALUES:
 			return getParameterValues() != nullptr; //405
 	}
 	return ObjectImpl::internalEIsSet(featureID);
@@ -327,7 +327,7 @@ bool ExecutionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case FUMLPackage::EXECUTION_EREFERENCE_CONTEXT:
+		case FUMLPackage::EXECUTION_ATTRIBUTE_CONTEXT:
 		{
 			// BOOST CAST
 			std::shared_ptr<fUML::Object> _context = newValue->get<std::shared_ptr<fUML::Object>>();
@@ -422,7 +422,7 @@ void ExecutionImpl::resolveReferences(const int featureID, std::list<std::shared
 {
 	switch(featureID)
 	{
-		case FUMLPackage::EXECUTION_EREFERENCE_CONTEXT:
+		case FUMLPackage::EXECUTION_ATTRIBUTE_CONTEXT:
 		{
 			if (references.size() == 1)
 			{
@@ -482,7 +482,7 @@ void ExecutionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 		std::shared_ptr<Bag<fUML::ParameterValue>> list_parameterValues = this->getParameterValues();
 		for (std::shared_ptr<fUML::ParameterValue> parameterValues : *list_parameterValues) 
 		{
-			saveHandler->addReference(parameterValues, "parameterValues", parameterValues->eClass() != package->getParameterValue_EClass());
+			saveHandler->addReference(parameterValues, "parameterValues", parameterValues->eClass() != package->getParameterValue_Class());
 		}
 	}
 	catch (std::exception& e)
