@@ -46,8 +46,9 @@
 
 		public:
 			virtual ~[aPackage.name.toUpperFirst().concat('FactoryImpl')/]();
-			virtual std::shared_ptr<uml::Element> create(std::shared_ptr<uml::Class> _class);
-			virtual std::shared_ptr<uml::Element> create(std::string _className);
+			virtual std::shared_ptr<uml::Element> create(const unsigned int _metaClassId,  std::shared_ptr<uml::Element> container= nullptr, const unsigned int referenceID = -1) const;
+			virtual std::shared_ptr<uml::Element> create(const std::shared_ptr<uml::Class> _class,  std::shared_ptr<uml::Element> container= nullptr, const unsigned int referenceID = -1) const;
+			virtual std::shared_ptr<uml::Element> create(const std::string _className,  std::shared_ptr<uml::Element> container= nullptr, const unsigned int referenceID = -1) const;
 
 			//Creator functions
 			[aPackage.collectModelClassesForFactory().generateClassCreate(true)/]
@@ -57,8 +58,7 @@
 
 		private:
 			static [aPackage.name.toUpperFirst().concat('Factory')/] * create();
-			std::map<std::string,std::function<std::shared_ptr<uml::Element>()>> m_creatorMap;
-
+			std::map<std::string,unsigned int> m_idMap;
 			virtual void init() {}
 	};
 [if (not aPackage.ignoreNamespace())]}[/if]

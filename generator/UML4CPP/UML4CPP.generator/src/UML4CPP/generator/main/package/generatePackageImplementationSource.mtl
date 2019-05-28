@@ -66,9 +66,12 @@
 #include "uml/VisibilityKind.hpp"
 //meta meta model factory
 #include "[aPackage.eClass().ePackage.name/]/[aPackage.eClass().ePackage.name.toUpperFirst().concat('Factory')/].hpp"
+[if ((aPackage.name = 'Ecore') or (aPackage.name = 'UML') )]
+#include "[aPackage.name.toLower()/]/[aPackage.name.toLower().toUpperFirst().concat('Package')/].hpp"
+[/if]
 
-//metamodel factory
 [if (aPackage.eAllContents()->filter(ecore::EAnnotation)->select(source = 'PackageOnly')->isEmpty())]
+//metamodel factory
 #include "[aPackage.getPackageName()/]/[aPackage.name.toUpperFirst().concat('Factory')/].hpp"
 [/if]
 
@@ -182,11 +185,17 @@ void [packageName/]::createPackageClasses(std::shared_ptr<uml::Package> [aPackag
 	[for (anProperty : Property | aClass.ownedAttribute->sortedBy(name)) before ('    // '.concat(aClass.name).concat(' attributes\n')) after ('\n')]
 	[anProperty.generateAttributeCreation()/]
 	[/for]
+
 	[for (anOperation : Operation | aClass.ownedOperation->sortedBy(name)) before ('    // '.concat(aClass.name).concat(' operations\n')) separator('\n') after ('\n')]
 	[anOperation.generateOperationCreation()/]
 	[/for]
+
 	[for (aOpaqueBehavior : OpaqueBehavior | aClass.ownedBehavior->filter(OpaqueBehavior)->sortedBy(myQualifiedName())) before ('    // '.concat(aClass.name).concat(' opaque behaviors\n'))  separator('\n') after ('\n')]
+	[if (aOpaqueBehavior.oclIsKindOf(FunctionBehavior))]
+	[aOpaqueBehavior.oclAsType(FunctionBehavior).generateFunctionBehaviorCreation()/]
+	[else]
 	[aOpaqueBehavior.generateOpaqueBehaviorCreation()/]
+	[/if]
 	[/for]
 [/for]
 } 
@@ -304,7 +313,11 @@ void [packageName/]::initializePackageClasses()
 	[anOperation.initalizeOperation()/]
 	[/for]
 	[for (aOpaqueBehavior : OpaqueBehavior | aClass.ownedBehavior->filter(OpaqueBehavior)->sortedBy(myQualifiedName())) before ('    // '.concat(aClass.name).concat(' opaque behaviors\n'))  separator('\n') after ('\n')]
+	[if (aOpaqueBehavior.oclIsKindOf(FunctionBehavior))]
+	[aOpaqueBehavior.oclAsType(FunctionBehavior).generateFunctionBehaviorInitialization()/]
+	[else]
 	[aOpaqueBehavior.generateOpaqueBehaviorInitialization()/]
+	[/if]
 	[/for]
 	[for (aAttribute : Property | aClass.ownedElement->filter(InterfaceRealization)->sortedBy(myQualifiedName()).supplier.oclAsType(Interface).ownedAttribute->sortedBy(myQualifiedName())) separator ('\n')] 
 	[if (aClass.ownedAttribute->select(name=aAttribute.name)->size() = 0)][aAttribute.addInterfaceAttribute(aClass)/][/if]

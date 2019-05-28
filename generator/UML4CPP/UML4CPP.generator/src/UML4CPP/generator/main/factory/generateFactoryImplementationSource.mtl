@@ -33,6 +33,7 @@
 
 #include "abstractDataTypes/Bag.hpp"
 #include "uml/Class.hpp"
+#include <cassert>
 
 [comment  Generate Includes for the Factory/]
 [for (aClass : Class | aPackage.collectModelClassesForFactory())]
@@ -40,14 +41,14 @@
 [/for]
 
 [if (not aPackage.ignoreNamespace())]using namespace [aPackage.name/];[/if]
-
 //*********************************
 // Constructor / Destructor
 //*********************************
+[comment  generate standard constructor/]
 [className/]::[className/]()
 {
 	[for (aClass : Class | aPackage.collectModelClassesForFactory())]
-	m_creatorMap.insert(std::pair<std::string,std::function<std::shared_ptr<uml::Element>()>>("[aClass.name.toUpperFirst()/]",[ '[' /]this[ ']' /](){return this->create[aClass.name.toUpperFirst()/]();}));
+	m_idMap.insert(std::make_pair("[aClass.myQualifiedName()/]", [aPackage.name.toUpperFirst()/]Package::[aClass.getMemberName().toUpperCase()/]));
 	[/for]
 }
 
@@ -60,45 +61,105 @@
 	return new [className/]();
 }
 
+[comment  generate create operations/]
 //*********************************
 // creators
 //*********************************
-std::shared_ptr<uml::Element> [className/]::create(std::shared_ptr<uml::Class> _class)
+[comment  generate create operations with classID/]
+std::shared_ptr<uml::Element> [className/]::create(const unsigned int _metaClassId,  std::shared_ptr<uml::Element> container /*= nullptr*/, const unsigned int referenceID/* = -1*/) const
+{
+	switch(_metaClassId)
+	{
+	[for (aClass : Class | aPackage.collectModelClassesForFactory())]
+	[let ref:OrderedSet(Association) = aClass.getCompositionsToClass()]
+		case [aPackage.name.toUpperFirst()/]Package::[aClass.getMemberName().toUpperCase()/]:
+		{
+[if(ref->size()>0)]
+			if (nullptr == container)
+			{
+[/if]
+				return this->create[aClass.name/]();
+[if(ref->size()>0)]			}
+			else
+			{
+[/if]
+				[if(ref->size()>1)]
+				switch(referenceID)
+				{
+					[for (anAssociation : Association | aClass.getCompositionsToClass())]
+					[let containerProperty : Property = anAssociation.memberEnd->select(type = aClass)->asOrderedSet()->first()]
+					[let containmentProperty : Property = anAssociation.memberEnd->select(not (type = aClass))->asOrderedSet()->first()]
+					//[aClass.name/] has [anAssociation.name/] as a containment
+					case  [aPackage.name.toUpperFirst()/]Package::[containmentProperty.getStaticPropertyIDName()/]:
+					{
+						auto castedContainer = std::dynamic_pointer_cast<[if (containmentProperty.upper <> 1)]Bag<[/if][containmentProperty.type.transformType()/][if (containmentProperty.upper <> 1)]>[/if]>(container);
+						return this->create[aClass.name/]_in_[containmentProperty.name.toUpperFirst()/](castedContainer);
+															  containmentProperty.name.toUpperFirst()
+					}
+						[/let]
+						[/let]
+					[/for]
+					default:
+						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
+				}
+				[elseif(ref->size()=1)]
+				[let containerProperty : Property = ref->first().memberEnd->select(type = aClass)->asOrderedSet()->first()]
+				[let containmentProperty : Property = ref->first().memberEnd->select(not (type = aClass))->asOrderedSet()->first()]
+				[containmentProperty.generateCppType()/] castedContainer = std::dynamic_pointer_cast<[if (containmentProperty.upper <> 1)]Bag<[/if][containmentProperty.type.transformType()/][if (containmentProperty.upper <> 1)]>[/if]>(container);
+				assert(castedContainer);
+				return std::shared_ptr<[aClass.name.toUpperFirst()/]>(this->create[aClass.name/]_in_[containmentProperty.name.toUpperFirst()/](castedContainer));
+				[/let]
+				[/let]
+				[/if]
+			[if(ref->size()>0)]}[/if]
+		}
+	[/let]
+	[/for]
+	default:
+	   	    std::cerr << __PRETTY_FUNCTION__ << " ID " << _metaClassId <<" not found" << std::endl;
+	}
+	return nullptr;
+}
+
+[comment  generate create operations with Meta-Class in Container/]
+std::shared_ptr<uml::Element> [className/]::create(std::shared_ptr<uml::Class> _class, std::shared_ptr<uml::Element> container /*= nullptr*/, const unsigned int referenceID/* = -1*/) const
 {
 	if(_class->getIsAbstract())
     {
     	return nullptr;
     }
-
-	//TODO: still two times run through map
-	std::string _className = _class->getName();
-	return create(_className);
+	std::string typeName = _class->getQualifiedName();
+	return create(typeName,container,referenceID);
 }
 
-std::shared_ptr<uml::Element> [className/]::create(std::string _className)
+[comment  generate create operations with string in Container/]
+std::shared_ptr<uml::Element> [className/]::create(std::string _className, std::shared_ptr<uml::Element> container /*= nullptr*/, const unsigned int referenceID/* = -1*/) const
 {
-	std::map<std::string,std::function<std::shared_ptr<uml::Element>()>>::iterator iter = m_creatorMap.find(_className);
-    if(iter != m_creatorMap.end())
+	auto iter = m_idMap.find(_className);
+	if(iter != m_idMap.end())
     {
-		//invoke the creator function
-        return iter->second();
+		//get the getMetaElementId()
+        unsigned int id = iter->second;
+		return create(id,container,referenceID);
     }
     return nullptr;
 }
-
+[comment  generate create operations with string in Container/]
 [for (aClass : Class | aPackage.collectModelClassesForFactory())]
-std::shared_ptr<[aClass.generateCppType(true)/]> [className/]::create[aClass.name.toUpperFirst()/] ()
+std::shared_ptr<[aClass.generateCppType(true)/]> [className/]::create[aClass.name.toUpperFirst()/](const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<[aClass.generateCppType(true)/]Impl> element(new [aClass.name.toUpperFirst()/]Impl());
-	element->[generateGetThisPtrPropertySetterName()/](element);
+	element->setMetaElementID(metaElementID);
+	element->[aClass.generateGetThisPtrPropertySetterName()/](element);
 	return element;
 }
 [for (anAssociation : Association | aClass.getCompositionsToClass())]
 [let containerProperty : Property = anAssociation.memberEnd->select(type = aClass)->asOrderedSet()->first()]
 [let containmentProperty : Property = anAssociation.memberEnd->select(not (type = aClass))->asOrderedSet()->first()]
-std::shared_ptr<[aClass.generateCppType(true)/]> [className/]::create[aClass.name.toUpperFirst()/]_in_[containmentProperty.name.toUpperFirst()/]([containmentProperty.generateCppType()/] [containmentProperty.name.toLowerFirst()/])
+std::shared_ptr<[aClass.generateCppType(true)/]> [className/]::create[aClass.name.toUpperFirst()/]_in_[containmentProperty.name.toUpperFirst()/]([containmentProperty.generateCppType()/] [containmentProperty.name.toLowerFirst()/], const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<[aClass.generateCppType(true)/]Impl> element(new [aClass.name.toUpperFirst()/]Impl([if (containmentProperty.isBackReference())][containmentProperty.name.toLowerFirst()/][/if]));
+	element->setMetaElementID(metaElementID);
 [if (containmentProperty.isBackReference())]
 	if(auto wp = [containmentProperty.name.toLowerFirst()/].lock())
 [else]
@@ -112,8 +173,8 @@ std::shared_ptr<[aClass.generateCppType(true)/]> [className/]::create[aClass.nam
 }
 [/let]
 [/let]
-[/for]
-[/for]
+[/for][/for]
+
 
 std::shared_ptr<[aPackage.name.toUpperFirst().concat('Package')/]> [className/]::get[aPackage.name.toUpperFirst().concat('Package')/]()
 {

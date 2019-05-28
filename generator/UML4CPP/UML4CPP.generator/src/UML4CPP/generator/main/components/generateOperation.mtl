@@ -72,7 +72,7 @@ virtual [aOperation.generateCppType()/] [aOperation.name/]([for (sParameter : Pa
 			parameterList->push_back(eAny([par.name/]));
 [/for]
 [let anActivity : Activity = aOperation.method->filter(Activity)->asOrderedSet()->first()]
-			Any result = executionPlugin->executeActivity([anActivity.getNearestPackage().myName()/]::[anActivity.getNearestPackage().myName()/]Package::eInstance()->[anActivity.generatePackageGetterCall()/], parameterList, getThis[aOperation.class.name.toUpperFirst()/]Ptr());
+			Any result = executionPlugin->executeActivity([anActivity.getNearestPackage().myQualifiedTypeNamePackage()/]eInstance()->[anActivity.generatePackageGetterCall()/], parameterList, getThis[aOperation.class.name.toUpperFirst()/]Ptr());
 [/let]
 
 [if (aOperation.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->notEmpty())]
