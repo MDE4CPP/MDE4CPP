@@ -68,16 +68,18 @@ using namespace [originalName/];
 }
 std::shared_ptr<fUML::Object> [upperName/]LocusImpl::instantiate(std::shared_ptr<uml::Class>  type)
 {
-		switch(type->eClass()->getClassifierID())
+	std::shared_ptr<uml::Element> newElement = [originalName/]::[upperName/]Factory::eInstance()->create(type);
+	if(newElement )
+	{
+		switch(newElement->getMetaElementID())
 		{
 		[for (c : Class | aPackage.allOwnedElements()->selectByType(Class)->sortedBy(name)) separator('\n')]
 		[let className : String = c.name.toUpperFirst()]
-			case [originalName/]::[upperName/]Package::[className.sanitize().toUpper()/]:
+			case [originalName/]::[upperName/]Package::[c.getMemberName().toUpperCase()/]:
 			{
-				std::shared_ptr<[originalName/]::[className/]> element = [originalName/]::[upperName/]Factory::eInstance()->create[className/]();
 				std::shared_ptr<[originalName/]::[className/]Object> object(new [originalName/]::[className/]Object());
 				object->setThis[className/]ObjectPtr(object);
-				object->setUmlValue(std::dynamic_pointer_cast<[originalName/]::[className/]>(element));
+				object->setUmlValue(std::dynamic_pointer_cast<[originalName/]::[className/]>(newElement));
 				object->setLocus(this->getThisLocusPtr());
 				return object;
 			}
@@ -88,6 +90,8 @@ std::shared_ptr<fUML::Object> [upperName/]LocusImpl::instantiate(std::shared_ptr
 				return LocusImpl::instantiate(type);
 			}
 		}
+	}
+	return LocusImpl::instantiate(type);
 }
 [/file]
 [/template]
