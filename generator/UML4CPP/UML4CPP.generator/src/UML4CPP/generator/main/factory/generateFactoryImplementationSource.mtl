@@ -90,7 +90,7 @@ std::shared_ptr<uml::Element> [className/]::create(const unsigned int _metaClass
 					[let containerProperty : Property = anAssociation.memberEnd->select(type = aClass)->asOrderedSet()->first()]
 					[let containmentProperty : Property = anAssociation.memberEnd->select(not (type = aClass))->asOrderedSet()->first()]
 					//[aClass.name/] has [anAssociation.name/] as a containment
-					case  [aPackage.name.toUpperFirst()/]Package::[containmentProperty.getStaticPropertyIDName()/]:
+					case  [aPackage.name.toUpperFirst()/]Package::[containmentProperty.name.toUpperCase()/]:
 					{
 						auto castedContainer = std::dynamic_pointer_cast<[if (containmentProperty.upper <> 1)]Bag<[/if][containmentProperty.type.transformType()/][if (containmentProperty.upper <> 1)]>[/if]>(container);
 						return this->create[aClass.name/]_in_[containmentProperty.name.toUpperFirst()/](castedContainer);
