@@ -54,37 +54,39 @@ int main()
     std::shared_ptr<uml::Class> c = factory->createClass_in_Package(p);
     c->setName("Class1");
 
-    //use a string to create a class
-    std::shared_ptr<ecore::EObject> a = factory->create("Class", p, package->TYPE_ATTRIBUTE_PACKAGE);
-    c = std::dynamic_pointer_cast<uml::Class>(a);
-    c->setName("Class2");
-
-    //use a Package::MetaClass-ID to create a class
-    std::shared_ptr<ecore::EObject> a = factory->create(uml::UmlPackage::CLASS_CLASS, p, package->TYPE_ATTRIBUTE_PACKAGE);
-    c = std::dynamic_pointer_cast<uml::Class>(a);
-    c->setName("Class43");
-
-    //use a MetaClass to create a class
-    std::shared_ptr<ecore::EObject> a = factory->create(c->eClass(), p, package->TYPE_ATTRIBUTE_PACKAGE);
-    c = std::dynamic_pointer_cast<uml::Class>(a);
-    c->setName("Class4");
-    c->setPackage(p);
-
-    //use a UmkPackage MetaClass to create a class
-    std::shared_ptr<ecore::EObject> a = factory->create(package->getClass_Class(), p, package->TYPE_ATTRIBUTE_PACKAGE);
-    c = std::dynamic_pointer_cast<uml::Class>(a);
-    c->setName("Class5");
-    //
-
     //create an operation
     std::shared_ptr<uml::Operation> o = factory->createOperation_in_Class(c);
     o->setName("do");
 
-    //create an UML-Objekt (InstanceSpecification) of Class2
+    //use a string to create a class in a Package
+    std::shared_ptr<ecore::EObject> a = factory->create("Class", p, package->TYPE_ATTRIBUTE_PACKAGE);
+    c = std::dynamic_pointer_cast<uml::Class>(a);
+    c->setName("Class2");
+
+    //use a Package::MetaElement-ID to create a class
+    a = factory->create(uml::UmlPackage::CLASS_CLASS, p, package->TYPE_ATTRIBUTE_PACKAGE);
+    c = std::dynamic_pointer_cast<uml::Class>(a);
+    c->setName("Class3");
+
+    //use a MetaClass to create a class
+    a = factory->create(c->eClass(), p, package->TYPE_ATTRIBUTE_PACKAGE);
+    c = std::dynamic_pointer_cast<uml::Class>(a);
+    c->setName("Class4");
+    c->setPackage(p);
+
+    //use a UmlPackage MetaClass to create a class
+    a = factory->create(package->getClass_Class(), p, package->TYPE_ATTRIBUTE_PACKAGE);
+    c = std::dynamic_pointer_cast<uml::Class>(a);
+    c->setName("Class5");
+    //
+
+
+
+    //create an UML-Objekt (InstanceSpecification) of Class1
     std::shared_ptr<uml::InstanceSpecification> i = factory->createInstanceSpecification_in_Owner(p);
     i->setName("o");
     std::shared_ptr<Bag<uml::Classifier>> t = i->getClassifier();
-    t->push_back(c); //set Type to Class2
+    t->push_back(c); //set Type to Class1
 
     //#############  Print model content  #############
 

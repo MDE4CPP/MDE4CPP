@@ -210,7 +210,7 @@ std::shared_ptr<ecore::EObject> TestModel::createEcoreTestMetaModel()
 			std::shared_ptr<ecore::EAttribute> attrib(factory->createEAttribute_in_EContainingClass(cls_Universitaet));
 
 			attrib->setName("name");
-			attrib->setEType(package->getEString_EDataType());
+			attrib->setEType(package->getEString_Class());
 
 			attrib->setID(false);
 			attrib->setOrdered(true); // default: ordered=true
@@ -237,7 +237,7 @@ std::shared_ptr<ecore::EObject> TestModel::createEcoreTestMetaModel()
 			std::shared_ptr<ecore::EAttribute> attrib(factory->createEAttribute_in_EContainingClass(cls_Mensch));
 
 			attrib->setName("lastname");
-			attrib->setEType(package->getEString_EDataType());
+			attrib->setEType(package->getEString_Class());
 
 			attrib->setID(false);
 			attrib->setOrdered(true); // default: ordered=true
@@ -255,7 +255,7 @@ std::shared_ptr<ecore::EObject> TestModel::createEcoreTestMetaModel()
 			std::shared_ptr<ecore::EAttribute> attrib(factory->createEAttribute_in_EContainingClass(cls_Mensch));
 
 			attrib->setName("firstname");
-			attrib->setEType(package->getEString_EDataType());
+			attrib->setEType(package->getEString_Class());
 
 			attrib->setID(false);
 			attrib->setOrdered(true); // default: ordered=true
@@ -307,7 +307,7 @@ std::shared_ptr<ecore::EObject> TestModel::createEcoreTestMetaModel()
 			std::shared_ptr<ecore::EAttribute> attrib(factory->createEAttribute_in_EContainingClass(cls_Person));
 
 			attrib->setName("id");
-			attrib->setEType(package->getEBigInteger_EDataType());
+			attrib->setEType(package->getEBigInteger_Class());
 
 			attrib->setID(false);
 			attrib->setOrdered(true); // default: ordered=true
@@ -327,7 +327,7 @@ std::shared_ptr<ecore::EObject> TestModel::createEcoreTestMetaModel()
 			std::shared_ptr<ecore::EOperation> operation(factory->createEOperation_in_EContainingClass(cls_Person));
 
 			operation->setName("addVeranstaltung"); // Type: void
-			operation->setEType(package->getEBoolean_EDataType());
+			operation->setEType(package->getEBoolean_Class());
 
 			operation->setOrdered(true); // default: ordered=true
 			operation->setUnique(true); // default: unique=true
@@ -370,7 +370,7 @@ std::shared_ptr<ecore::EObject> TestModel::createEcoreTestMetaModel()
 			std::shared_ptr<ecore::EOperation> operation(factory->createEOperation_in_EContainingClass(cls_Person));
 
 			operation->setName("removeVeranstaltung"); // Type: void
-			operation->setEType(package->getEChar_EDataType());
+			operation->setEType(package->getEChar_Class());
 
 			operation->setOrdered(true); // default: ordered=true
 			operation->setUnique(true); // default: unique=true
@@ -414,7 +414,7 @@ std::shared_ptr<ecore::EObject> TestModel::createEcoreTestMetaModel()
 			std::shared_ptr<ecore::EAttribute> attrib(factory->createEAttribute_in_EContainingClass(cls_Mitarbeiter));
 
 			attrib->setName("gehalt");
-			attrib->setEType(package->getEFloat_EDataType());
+			attrib->setEType(package->getEFloat_Class());
 
 			attrib->setID(false);
 			attrib->setOrdered(true); // default: ordered=true
@@ -432,7 +432,7 @@ std::shared_ptr<ecore::EObject> TestModel::createEcoreTestMetaModel()
 			std::shared_ptr<ecore::EAttribute> attrib(factory->createEAttribute_in_EContainingClass(cls_Mitarbeiter));
 
 			attrib->setName("office");
-			attrib->setEType(package->getEString_EDataType());
+			attrib->setEType(package->getEString_Class());
 
 			attrib->setID(false);
 			attrib->setOrdered(true); // default: ordered=true
@@ -511,7 +511,7 @@ std::shared_ptr<ecore::EObject> TestModel::createEcoreTestMetaModel()
 			std::shared_ptr<ecore::EAttribute> attrib(factory->createEAttribute_in_EContainingClass(cls_Veranstaltung));
 
 			attrib->setName("maxTeilnehmer");
-			attrib->setEType(package->getEInt_EDataType());
+			attrib->setEType(package->getEInt_Class());
 
 			attrib->setID(false);
 			attrib->setOrdered(true); // default: ordered=true
