@@ -130,7 +130,7 @@ template<class T> class Bag;
 [**
  * queries to generate the call of package getter functions
 */]
-[query public generatePackageGetterCall(anElement1 : NamedElement) : String = if (anElement1.oclIsUndefined()) then 'nullptr' else getModelPackage(anElement1).concat('get_1').concat(anElement1.myQualifiedName().sanitize()).concat('()') endif /]
+[query public generatePackageGetterCall(anElement1 : NamedElement) : String = if (anElement1.oclIsUndefined()) then 'nullptr' else getModelPackage(anElement1).concat('get_').concat(anElement1.myQualifiedName().sanitize()).concat('()') endif /]
 [query public generatePackageGetterCall(anElement1 : NamedElement, anElement2 : NamedElement) : String = if (anElement1.oclIsUndefined()) then 'nullptr' else anElement1.packageGetter(anElement2) endif /]
 [query private packageGetter(anElement1 : NamedElement, anElement2 : NamedElement) : String = if (anElement1.getNearestPackage().oclIsUndefined()) then anElement1.handlePackageGetterError(anElement2.name) else generatePackageInstance(anElement1, anElement2).concat('get_').concat(anElement1.myQualifiedName().substituteAll('::','_').substituteAll('.','_')).concat('()') endif /]
 [query private generatePackageInstance(anElement1 : Element, anElement2 : Element ) : String = if(anElement1.getNearestPackage() = anElement2.getNearestPackage() ) then '' else getModelPackage(anElement1) endif /]
