@@ -23,29 +23,38 @@
 [import UML4CPP::generator::main::helpers::nameHelper /]
 
 [**
- * generate getter function declaration for meta model element
+ generate getter function declaration for meta model element
 */]
 [template public generatePackageMemberGetter(anElement : NamedElement,impl : Boolean)]
-virtual std::shared_ptr<[anElement.getMetaClassName()/]> [anElement.generatePackageGetterCall(anElement)/][abstractSuffix(impl)/];
-
+[if (   not anElement.oclIsUndefined() ) ]  
+virtual std::shared_ptr<[anElement.getMetaClassName()/]> [anElement.generatePackageGetterCall(anElement)/][abstractSuffix(impl)/];  
+[else]
+[anElement.handleUndefinedElement()/]
+[/if]
 [/template]
 
 
 [**
- * generate getter function implementation for meta model element
+ generate getter function implementation for meta model element
 */]
 [template public generatePackageMemberGetterImpl(anElement : NamedElement)]
+[if (   not anElement.oclIsUndefined() ) ]  
 std::shared_ptr<[anElement.getMetaClassName()/]> [anElement.getNearestPackage().name.toUpperFirst()/]PackageImpl::[anElement.generatePackageGetterCall(anElement)/]
 {
 	return [anElement.memberName()/];
 }
-
+[else]
+[anElement.handleUndefinedElement()/]
+[/if]
 [/template]
 
 [**
- * generate member declaration for meta model element
+ generate member declaration for meta model element
 */]
 [template public generatePackageMember(anElement : NamedElement)]
+[if (   not anElement.oclIsUndefined() ) ]  
 std::shared_ptr<[anElement.getMetaClassName()/]> [anElement.memberName()/] = nullptr;
-
+[else]
+[anElement.handleUndefinedElement()/]
+[/if]
 [/template]

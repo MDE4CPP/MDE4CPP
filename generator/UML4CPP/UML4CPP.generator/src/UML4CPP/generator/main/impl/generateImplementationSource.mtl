@@ -114,18 +114,13 @@
 {
     m_[containmentProperty.name/] = [containmentProperty.name.toLowerFirst()/];
 }
-[/if]
-[/let]
-[/let]
-[/for]
-
-
+[/if] [/let] [/let] [/for]
 
 [className/]::~[className/]()
 {
 }
-[if (isSingleton())]
 
+[if (isSingleton())]
 [aClass.name.toUpperFirst()/]* [className/]::create()
 {
 	return new [className/]();

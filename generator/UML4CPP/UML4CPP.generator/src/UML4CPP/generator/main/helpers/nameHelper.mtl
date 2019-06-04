@@ -22,31 +22,31 @@
 [import UML4CPP::generator::main::helpers::keywords /]
 [import UML4CPP::generator::main::validation::validateModel /]
 
-[**
+[** 
  *  queries to generate qualified name, required for elements without defined name
 */]
 [query public myQualifiedName (anElement : NamedElement) : String = if oclIsUndefined() then handleUndefinedElement() else myInputPinName().sanitize() endif/] 
 [query private myInputPinName (anElement : NamedElement) : String = if(oclIsKindOf(InputPin)) then 'InputPin'.concat('_').concat(anElement.myElementQualifiedName())  else myOutputPinName() endif/]
 [query private myOutputPinName (anElement : NamedElement) : String = if(oclIsKindOf(OutputPin)) then 'OutputPin'.concat('_').concat(anElement.myElementQualifiedName()) else myElementQualifiedName() endif/]
 [query private myElementQualifiedName (anElement : NamedElement) : String = if (namespace.oclIsUndefined() or ''=namespace) and (not owner.oclIsUndefined()) and (not owner.oclAsType(NamedElement).qualifiedName.oclIsUndefined()) and (not (qualifiedName.oclIsUndefined())) then (owner.oclAsType(NamedElement).qualifiedName).concat(qualifiedName).substituteAll('.', '_') else myLiteralSpecificationName() endif /]
-[query private myLiteralSpecificationName(anElement :NamedElement) : String = if (oclIsKindOf(LiteralSpecification) and true) then myValuSpecName().concat('_').concat(owner.mySlotName()) else myValuSpecName() endif /]
+[query private myLiteralSpecificationName(anElement :NamedElement) : String = if (oclIsKindOf(LiteralSpecification)) then myValuSpecName().concat('_').concat(owner.mySlotName()) else myValuSpecName()endif /]
 [query private mySlotName(anElement : Element) : String = if (oclIsTypeOf(Slot)) then oclAsType(Slot).definingFeature.name else myOwnerName() endif /]
 [query private myValuSpecName (anElement : NamedElement) : String = if(oclIsKindOf(ValueSpecification)) then owner.myOwnerName().concat('_').concat(eContainingFeature().name).concat('_').concat(anElement.eClass().name) else myParameterReturnName() endif /]
 [query private myOwnerName (anElement : Element) : String = if(oclIsKindOf(NamedElement)) then oclAsType(NamedElement).myQualifiedName() else owner.myOwnerName() endif /]
-[query private myParameterReturnName(anElement : NamedElement) : String = if(oclIsKindOf(Parameter) and (name.oclIsUndefined() or ''=name) and (oclAsType(Parameter).direction = ParameterDirectionKind::return) ) then owner.oclAsType(NamedElement).myQualifiedName().concat('_return') else myParameterName() endif /]
+[query private myParameterReturnName(anElement : NamedElement) : String = if(oclIsKindOf(Parameter) and (name.oclIsUndefined() or ''=name) and (oclAsType(Parameter).direction = ParameterDirectionKind::return) ) then owner.oclAsType(NamedElement).myQualifiedName().concat('return') else myParameterName() endif /]
 [query private myParameterName(anElement : NamedElement) : String = if(oclIsKindOf(Parameter)  and not((oclAsType(Parameter).direction = ParameterDirectionKind::return)) ) then owner.oclAsType(NamedElement).myQualifiedName().concat('_').concat(myName()) else myAssociationName() endif /]
 [query private myAssociationName(anElement : NamedElement) : String = if(oclIsKindOf(Association) and (name.oclIsUndefined() or ''=name)) then 'A_'.concat(oclAsType(Association).memberEnd->first().myPropertyName()).concat('_').concat(oclAsType(Association).memberEnd->last().myPropertyName()) else myObjectFlowName() endif/]
-[query private myPropertyName(aProperty : Property) : String = if(name.oclIsUndefined() or qualifiedName.oclIsUndefined() or '' = name or '' = qualifiedName) then aProperty.type.qualifiedName.toLowerFirst() else aProperty.type.myQualifiedName().concat('_').concat(aProperty.name) endif /] 
+[query private myPropertyName(aProperty : Property) : String = if(name.oclIsUndefined() or qualifiedName.oclIsUndefined() or '' = name) then aProperty.type.myQualifiedName().toLowerFirst() else aProperty.type.myQualifiedName().concat('_').concat(aProperty.name) endif /] 
 [query private myObjectFlowName(anElement : NamedElement) : String = if(oclIsKindOf(ObjectFlow) and (name.oclIsUndefined() or ''=name)) then 'OF_'.concat(oclAsType(ObjectFlow).source.myQualifiedName()).concat('_').concat(oclAsType(ObjectFlow).target.myQualifiedName()) else myControlFlowName() endif/]
 [query private myControlFlowName(anElement : NamedElement) : String = if(oclIsKindOf(ControlFlow) and (name.oclIsUndefined() or ''=name)) then 'CF_'.concat(oclAsType(ControlFlow).source.myQualifiedName()).concat('_').concat(oclAsType(ControlFlow).target.myQualifiedName()) else myExtensionEndName() endif/]
 [query private myExtensionEndName(anElement : NamedElement) : String = if (oclIsKindOf(ExtensionEnd)) then 'ExtensionEnd'.concat('_').concat(name).concat('_').concat(oclAsType(ExtensionEnd).type.myQualifiedName()) else myAssOwnedPropName() endif /]
 [query private myAssOwnedPropName(anElement : NamedElement) : String = if(oclIsKindOf(Property) and (name.oclIsUndefined() or ''=name) and ( not oclAsType(Property).association.oclIsUndefined()) ) then oclAsType(Property).association.myQualifiedName().concat('_').concat(oclAsType(Property).type.name.toLowerFirst()) else myOperationName() endif /]
 [query private myOperationName(anElement : NamedElement) : String = if (oclIsKindOf(Operation)) then anElement.oclAsType(Operation).myNameOperationName2().concat('_').concat(anElement.oclAsType(Operation).generateParameterTypeList()) else myRedefinedTemplateSignature() endif /]
-[query private myNameOperationName2(anOperation : Operation) : String = if ((anOperation.oclIsUndefined()) or (''=anOperation.qualifiedName) or (anOperation.name.oclIsUndefined())) then '' else anOperation.qualifiedName.concat('_').concat(anOperation.generateParameterTypeList()) endif /] 
+[query private myNameOperationName2(anOperation : Operation) : String = if ((anOperation.oclIsUndefined()) or (''=anOperation.qualifiedName) or (anOperation.name.oclIsUndefined())) then handleUndefinedElement() else anOperation.qualifiedName.concat('_').concat(anOperation.generateParameterTypeList()) endif /] 
 [query private myRedefinedTemplateSignature(anElement : NamedElement) : String = if (oclIsKindOf(RedefinableTemplateSignature) and (not owner.oclIsUndefined())) then owner.oclAsType(NamedElement).myQualifiedName().concat('_RedefinableTemplateSignature') else myInterfaceRelationName() endif /]
 [query private myInterfaceRelationName(anElement : NamedElement) : String = if (oclIsKindOf(InterfaceRealization) and (name.oclIsUndefined() or '' = name)) then 'IR_'.concat(oclAsType(InterfaceRealization).contract.myQualifiedName()).concat('_').concat(oclAsType(InterfaceRealization).client->asOrderedSet()->first().myQualifiedName()) else myDependencyName() endif /]
 [query private myDependencyName(anElement : NamedElement) : String = if (oclIsKindOf(Dependency)) then 'Dependency_'.concat(oclAsType(Dependency).client->asOrderedSet()->first().myQualifiedName()).concat('_').concat(oclAsType(Dependency).supplier->asOrderedSet()->first().myQualifiedName()) else myGeneralName() endif /]
-[query private myGeneralName(anElement : NamedElement) : String = if oclIsUndefined() then '' else anElement.qualifiedName endif /]
+[query private myGeneralName(anElement : NamedElement) : String = if (oclIsUndefined()) then handleUndefinedElement() else if (anElement.qualifiedName.oclIsUndefined() or anElement.qualifiedName='' ) then anElement.name else anElement.qualifiedName endif endif /]
 
 [**
  *  queries to determinate name of NamedElement elements
@@ -62,7 +62,7 @@
 [**
  * query to replace characters, which are not permitted in names of classes, variable, macros, ... in C++
 */]
-[query public sanitize(str : String) : String = str.replaceAll(' ', '_').replaceAll('-', '_').replaceAll('::', '_') /] 
+[query public sanitize(str : String) : String = if ((str.oclIsUndefined()) or (str.size()<=0)) then '' else str.replaceAll(' ', '_').replaceAll('-', '_').replaceAll('::', '_') endif/] 
 
 [**
 * query to transform namespace characters
@@ -128,11 +128,7 @@
 		endif
 	endif/]
 
-[** 
- * anElement.name.toLower() - Aufgrund der Übereinstimmung zwischen ecore (ecore.ecore) und Ecore (ecore.uml)
- * name.toLower().toUpperFirst() - > Aufgrund namespace uml und UmlPackage (uml.ecore) und UML (uml.uml)
-*/]
- 
+[query public isReflectionModel(aPackage : Package) : Boolean = if ((aPackage.name='UML') or (aPackage.name='Ecore') or (aPackage.name='PrimitiveTypes') or (aPackage.eAllContents()->filter(ecore::EAnnotation)->select(source = 'SDK')->notEmpty())) then true else false endif /]
 
 [query public myQualifiedTypeNamePackage(anElement : Package) : String = if (anElement.oclIsUndefined() ) then
 		''  
@@ -140,7 +136,11 @@
  		if (not (anElement.eContainer().oclIsUndefined())) then
 			anElement.eContainer().oclAsType(Package).myQualifiedTypeNamePackage()
 		else
-			anElement.name.toLower().concat('::').concat(anElement.name.toLower().toUpperFirst()).concat('Package::')
+			if (not anElement.isReflectionModel()) then
+				anElement.name.concat('::').concat(anElement.name.toUpperFirst()).concat('Package::')
+			else
+				anElement.name.toLower().concat('::').concat(anElement.name.toLower().toUpperFirst()).concat('Package::')
+			endif
 		endif
 	endif/]
 
@@ -181,6 +181,6 @@
 [** 
  *  create error for an undefined element (in special for elements, which are valid but have invalid name
 */]
-[template private handleUndefinedElement(anElement : Element)]
+[template public handleUndefinedElement(anElement : Element)]
 ['UML4CPP_Generation Error: undefined element found '.concat(anElement.toString()).registerError()/]
 [/template]

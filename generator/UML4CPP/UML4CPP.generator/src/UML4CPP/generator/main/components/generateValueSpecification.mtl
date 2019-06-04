@@ -25,7 +25,7 @@
  * generate creation of meta model instance for an Activity element
 */]
 [template public generateValueSpecificationCreation(aValueSpecification : ValueSpecification)]
-[aValueSpecification.memberName()/] = factory->create[aValueSpecification.eClass().name/]_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>([aValueSpecification.owner.oclAsType(NamedElement).memberName()/]));
+[aValueSpecification.memberName()/] = factory->create[aValueSpecification.eClass().name/]_in_Owner([aValueSpecification.owner.oclAsType(NamedElement).memberName()/]);
 [/template]
 
 [**

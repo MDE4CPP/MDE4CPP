@@ -182,15 +182,13 @@ void [packageName/]::createPackageClasses(std::shared_ptr<uml::Package> [aPackag
 [for (aClass : Class | (aPackage.ownedMember->filter(Class)-aPackage.ownedMember->filter(Stereotype)-aPackage.ownedMember->filter(Behavior))->asOrderedSet()->sortedBy(myQualifiedName())) separator ('\n    //-------------------------------------------\n')]
 	// [aClass.name/]
 	[aClass.generateClassCreation()/]
-	[for (anProperty : Property | aClass.ownedAttribute->sortedBy(name)) before ('    // '.concat(aClass.name).concat(' attributes\n')) after ('\n')]
+	[for (anProperty : Property | aClass.ownedAttribute->sortedBy(name)) before ('    // '.concat(aClass.name).concat(' attributes\n'))]
 	[anProperty.generateAttributeCreation()/]
 	[/for]
-
-	[for (anOperation : Operation | aClass.ownedOperation->sortedBy(name)) before ('    // '.concat(aClass.name).concat(' operations\n')) separator('\n') after ('\n')]
+	[for (anOperation : Operation | aClass.ownedOperation->sortedBy(name)) before ('    // '.concat(aClass.name).concat(' operations\n')) separator('\n')]
 	[anOperation.generateOperationCreation()/]
 	[/for]
-
-	[for (aOpaqueBehavior : OpaqueBehavior | aClass.ownedBehavior->filter(OpaqueBehavior)->sortedBy(myQualifiedName())) before ('    // '.concat(aClass.name).concat(' opaque behaviors\n'))  separator('\n') after ('\n')]
+	[for (aOpaqueBehavior : OpaqueBehavior | aClass.ownedBehavior->filter(OpaqueBehavior)->sortedBy(myQualifiedName())) before ('    // '.concat(aClass.name).concat(' opaque behaviors\n'))  separator('\n')]
 	[if (aOpaqueBehavior.oclIsKindOf(FunctionBehavior))]
 	[aOpaqueBehavior.oclAsType(FunctionBehavior).generateFunctionBehaviorCreation()/]
 	[else]
@@ -259,7 +257,7 @@ void [packageName/]::createPackageStereotypes(std::shared_ptr<uml::Package> [aPa
 
 void [packageName/]::createPackageValueSpecifications(std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::UmlFactory> factory)
 {
-[for (aValueSpecification : ValueSpecification | aPackage.allOwnedElements()->filter(ValueSpecification)->reject(owner.oclIsKindOf(Slot))->sortedBy(myQualifiedName())) separator ('\n')]
+[for (aValueSpecification : ValueSpecification | aPackage.allOwnedElements()->filter(ValueSpecification)->reject(owner.oclIsKindOf(Slot))->sortedBy(myQualifiedName()))]
 	[aValueSpecification.generateValueSpecificationCreation()/]
 [/for]
 }

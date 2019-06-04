@@ -149,7 +149,10 @@ std::shared_ptr<uml::Element> [className/]::create(std::string _className, std::
 std::shared_ptr<[aClass.generateCppType(true)/]> [className/]::create[aClass.name.toUpperFirst()/](const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<[aClass.generateCppType(true)/]Impl> element(new [aClass.name.toUpperFirst()/]Impl());
-	element->setMetaElementID(metaElementID);
+	if(metaElementID>=0)
+	{
+		element->setMetaElementID(metaElementID);
+	}
 	element->[aClass.generateGetThisPtrPropertySetterName()/](element);
 	return element;
 }
@@ -159,7 +162,10 @@ std::shared_ptr<[aClass.generateCppType(true)/]> [className/]::create[aClass.nam
 std::shared_ptr<[aClass.generateCppType(true)/]> [className/]::create[aClass.name.toUpperFirst()/]_in_[containmentProperty.name.toUpperFirst()/]([containmentProperty.generateCppType()/] [containmentProperty.name.toLowerFirst()/], const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<[aClass.generateCppType(true)/]Impl> element(new [aClass.name.toUpperFirst()/]Impl([if (containmentProperty.isBackReference())][containmentProperty.name.toLowerFirst()/][/if]));
-	element->setMetaElementID(metaElementID);
+	if(metaElementID>=0)
+	{
+		element->setMetaElementID(metaElementID);
+	}
 [if (containmentProperty.isBackReference())]
 	if(auto wp = [containmentProperty.name.toLowerFirst()/].lock())
 [else]
