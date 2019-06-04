@@ -60,8 +60,9 @@
       <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_bRvzlLMLEeeuncVs6XTh7Q" value="*"/>
     </ownedAttribute>
     <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_adfF8LdSEeiD1JRCc1jQkA" name="fbPrintLibrary" specification="_YKHVILdSEeiD1JRCc1jQkA">
-      <language>CPP</language>
       <language>INCLUDE</language>
+      <language>CPP</language>
+      <body>#include &quot;LibraryModel_uml/Picture.hpp&quot;</body>
       <body>	std::shared_ptr&lt; Bag&lt;Book> > books = this->getBooks();&#xD;
 &#xD;
 	for(Bag&lt;Book>::const_iterator it=books->begin();it!=books->end();it++)&#xD;
@@ -86,7 +87,6 @@
 			}&#xD;
 		}&#xD;
 	}</body>
-      <body>#include &quot;LibraryModel_uml/Picture.hpp&quot;</body>
     </ownedBehavior>
     <ownedOperation xmi:id="_YKHVILdSEeiD1JRCc1jQkA" name="printLibrary" method="_adfF8LdSEeiD1JRCc1jQkA"/>
   </packagedElement>
