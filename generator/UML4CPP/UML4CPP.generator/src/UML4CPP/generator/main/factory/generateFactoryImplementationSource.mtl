@@ -78,7 +78,7 @@ std::shared_ptr<uml::Element> [className/]::create(const unsigned int _metaClass
 			if (nullptr == container)
 			{
 [/if]
-				return this->create[aClass.name/]();
+				return this->create[aClass.name.toUpperFirst()/]();
 [if(ref->size()>0)]			}
 			else
 			{
