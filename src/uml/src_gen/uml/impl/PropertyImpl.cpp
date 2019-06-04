@@ -615,7 +615,7 @@ void PropertyImpl::setStringDefaultValue(std::string value)
 	throw "UnsupportedOperationException";
 }
 
-void PropertyImpl::setUnlimitedNaturalDefaultValue(unsigned int value)
+void PropertyImpl::setUnlimitedNaturalDefaultValue(int value)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";

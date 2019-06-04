@@ -51,12 +51,12 @@ namespace ecore
 			static const unsigned int EANNOTATION_CLASS = 1;
 			static const unsigned int EANNOTATION_CLASS_FEATURE_COUNT = 9;
 			static const unsigned int EANNOTATION_CLASS_OPERATION_COUNT = 16;
-			static const int EANNOTATION_ATTRIBUTE_SOURCE = 504;
+			static const int EANNOTATION_ATTRIBUTE_SOURCE = 104;
 			
-			static const int EANNOTATION_ATTRIBUTE_CONTENTS = 507;
-			static const int EANNOTATION_ATTRIBUTE_DETAILS = 505;
-			static const int EANNOTATION_ATTRIBUTE_EMODELELEMENT = 506;
-			static const int EANNOTATION_ATTRIBUTE_REFERENCES = 508;
+			static const int EANNOTATION_ATTRIBUTE_CONTENTS = 107;
+			static const int EANNOTATION_ATTRIBUTE_DETAILS = 105;
+			static const int EANNOTATION_ATTRIBUTE_EMODELELEMENT = 106;
+			static const int EANNOTATION_ATTRIBUTE_REFERENCES = 108;
 			
 			
 			//Class and Feature Getter
@@ -78,9 +78,9 @@ namespace ecore
 			static const unsigned int EATTRIBUTE_CLASS = 2;
 			static const unsigned int EATTRIBUTE_CLASS_FEATURE_COUNT = 24;
 			static const unsigned int EATTRIBUTE_CLASS_OPERATION_COUNT = 18;
-			static const int EATTRIBUTE_ATTRIBUTE_ID = 1022;
+			static const int EATTRIBUTE_ATTRIBUTE_ID = 222;
 			
-			static const int EATTRIBUTE_ATTRIBUTE_EATTRIBUTETYPE = 1023;
+			static const int EATTRIBUTE_ATTRIBUTE_EATTRIBUTETYPE = 223;
 			
 			
 			//Class and Feature Getter
@@ -99,34 +99,34 @@ namespace ecore
 			static const unsigned int ECLASS_CLASS = 12;
 			static const unsigned int ECLASS_CLASS_FEATURE_COUNT = 27;
 			static const unsigned int ECLASS_CLASS_OPERATION_COUNT = 28;
-			static const int ECLASS_ATTRIBUTE_ABSTRACT = 6011;
-			static const int ECLASS_ATTRIBUTE_INTERFACE = 6012;
+			static const int ECLASS_ATTRIBUTE_ABSTRACT = 1211;
+			static const int ECLASS_ATTRIBUTE_INTERFACE = 1212;
 			
-			static const int ECLASS_ATTRIBUTE_EALLATTRIBUTES = 6015;
-			static const int ECLASS_ATTRIBUTE_EALLCONTAINMENTS = 6019;
-			static const int ECLASS_ATTRIBUTE_EALLGENERICSUPERTYPES = 6026;
-			static const int ECLASS_ATTRIBUTE_EALLOPERATIONS = 6020;
-			static const int ECLASS_ATTRIBUTE_EALLREFERENCES = 6016;
-			static const int ECLASS_ATTRIBUTE_EALLSTRUCTURALFEATURES = 6021;
-			static const int ECLASS_ATTRIBUTE_EALLSUPERTYPES = 6022;
-			static const int ECLASS_ATTRIBUTE_EATTRIBUTES = 6018;
-			static const int ECLASS_ATTRIBUTE_EGENERICSUPERTYPES = 6025;
-			static const int ECLASS_ATTRIBUTE_EIDATTRIBUTE = 6023;
-			static const int ECLASS_ATTRIBUTE_EOPERATIONS = 6014;
-			static const int ECLASS_ATTRIBUTE_EREFERENCES = 6017;
-			static const int ECLASS_ATTRIBUTE_ESTRUCTURALFEATURES = 6024;
-			static const int ECLASS_ATTRIBUTE_ESUPERTYPES = 6013;
+			static const int ECLASS_ATTRIBUTE_EALLATTRIBUTES = 1215;
+			static const int ECLASS_ATTRIBUTE_EALLCONTAINMENTS = 1219;
+			static const int ECLASS_ATTRIBUTE_EALLGENERICSUPERTYPES = 1226;
+			static const int ECLASS_ATTRIBUTE_EALLOPERATIONS = 1220;
+			static const int ECLASS_ATTRIBUTE_EALLREFERENCES = 1216;
+			static const int ECLASS_ATTRIBUTE_EALLSTRUCTURALFEATURES = 1221;
+			static const int ECLASS_ATTRIBUTE_EALLSUPERTYPES = 1222;
+			static const int ECLASS_ATTRIBUTE_EATTRIBUTES = 1218;
+			static const int ECLASS_ATTRIBUTE_EGENERICSUPERTYPES = 1225;
+			static const int ECLASS_ATTRIBUTE_EIDATTRIBUTE = 1223;
+			static const int ECLASS_ATTRIBUTE_EOPERATIONS = 1214;
+			static const int ECLASS_ATTRIBUTE_EREFERENCES = 1217;
+			static const int ECLASS_ATTRIBUTE_ESTRUCTURALFEATURES = 1224;
+			static const int ECLASS_ATTRIBUTE_ESUPERTYPES = 1213;
 			
-			static const int ECLASS_OPERATION_GETEOPERATION_EINT = 6051;
-			static const int ECLASS_OPERATION_GETESTRUCTURALFEATURE_EINT = 6047;
-			static const int ECLASS_OPERATION_GETESTRUCTURALFEATURE_ESTRING = 6049;
-			static const int ECLASS_OPERATION_GETFEATURECOUNT = 6046;
-			static const int ECLASS_OPERATION_GETFEATUREID_ESTRUCTURALFEATURE = 6048;
-			static const int ECLASS_OPERATION_GETFEATURETYPE_ESTRUCTURALFEATURE = 6054;
-			static const int ECLASS_OPERATION_GETOPERATIONCOUNT = 6050;
-			static const int ECLASS_OPERATION_GETOPERATIONID_EOPERATION = 6052;
-			static const int ECLASS_OPERATION_GETOVERRIDE_EOPERATION = 6053;
-			static const int ECLASS_OPERATION_ISSUPERTYPEOF_ECLASS = 6045;
+			static const int ECLASS_OPERATION_GETEOPERATION_EINT = 1251;
+			static const int ECLASS_OPERATION_GETESTRUCTURALFEATURE_EINT = 1247;
+			static const int ECLASS_OPERATION_GETESTRUCTURALFEATURE_ESTRING = 1249;
+			static const int ECLASS_OPERATION_GETFEATURECOUNT = 1246;
+			static const int ECLASS_OPERATION_GETFEATUREID_ESTRUCTURALFEATURE = 1248;
+			static const int ECLASS_OPERATION_GETFEATURETYPE_ESTRUCTURALFEATURE = 1254;
+			static const int ECLASS_OPERATION_GETOPERATIONCOUNT = 1250;
+			static const int ECLASS_OPERATION_GETOPERATIONID_EOPERATION = 1252;
+			static const int ECLASS_OPERATION_GETOVERRIDE_EOPERATION = 1253;
+			static const int ECLASS_OPERATION_ISSUPERTYPEOF_ECLASS = 1245;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getEClass_Class() const = 0;
@@ -168,16 +168,16 @@ namespace ecore
 			static const unsigned int ECLASSIFIER_CLASS = 13;
 			static const unsigned int ECLASSIFIER_CLASS_FEATURE_COUNT = 11;
 			static const unsigned int ECLASSIFIER_CLASS_OPERATION_COUNT = 18;
-			static const int ECLASSIFIER_ATTRIBUTE_DEFAULTVALUE = 6507;
-			static const int ECLASSIFIER_ATTRIBUTE_INSTANCECLASS = 6506;
-			static const int ECLASSIFIER_ATTRIBUTE_INSTANCECLASSNAME = 6505;
-			static const int ECLASSIFIER_ATTRIBUTE_INSTANCETYPENAME = 6508;
+			static const int ECLASSIFIER_ATTRIBUTE_DEFAULTVALUE = 1307;
+			static const int ECLASSIFIER_ATTRIBUTE_INSTANCECLASS = 1306;
+			static const int ECLASSIFIER_ATTRIBUTE_INSTANCECLASSNAME = 1305;
+			static const int ECLASSIFIER_ATTRIBUTE_INSTANCETYPENAME = 1308;
 			
-			static const int ECLASSIFIER_ATTRIBUTE_EPACKAGE = 6509;
-			static const int ECLASSIFIER_ATTRIBUTE_ETYPEPARAMETERS = 6510;
+			static const int ECLASSIFIER_ATTRIBUTE_EPACKAGE = 1309;
+			static const int ECLASSIFIER_ATTRIBUTE_ETYPEPARAMETERS = 1310;
 			
-			static const int ECLASSIFIER_OPERATION_GETCLASSIFIERID = 6528;
-			static const int ECLASSIFIER_OPERATION_ISINSTANCE_EJAVAOBJECT = 6527;
+			static const int ECLASSIFIER_OPERATION_GETCLASSIFIERID = 1328;
+			static const int ECLASSIFIER_OPERATION_ISINSTANCE_EJAVAOBJECT = 1327;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getEClassifier_Class() const = 0;
@@ -201,7 +201,7 @@ namespace ecore
 			static const unsigned int EDATATYPE_CLASS = 14;
 			static const unsigned int EDATATYPE_CLASS_FEATURE_COUNT = 12;
 			static const unsigned int EDATATYPE_CLASS_OPERATION_COUNT = 18;
-			static const int EDATATYPE_ATTRIBUTE_SERIALIZABLE = 7011;
+			static const int EDATATYPE_ATTRIBUTE_SERIALIZABLE = 1411;
 			
 			
 			
@@ -221,11 +221,11 @@ namespace ecore
 			static const unsigned int EENUM_CLASS_FEATURE_COUNT = 13;
 			static const unsigned int EENUM_CLASS_OPERATION_COUNT = 21;
 			
-			static const int EENUM_ATTRIBUTE_ELITERALS = 10012;
+			static const int EENUM_ATTRIBUTE_ELITERALS = 2012;
 			
-			static const int EENUM_OPERATION_GETEENUMLITERAL_ESTRING = 10031;
-			static const int EENUM_OPERATION_GETEENUMLITERAL_EINT = 10032;
-			static const int EENUM_OPERATION_GETEENUMLITERALBYLITERAL_ESTRING = 10033;
+			static const int EENUM_OPERATION_GETEENUMLITERAL_ESTRING = 2031;
+			static const int EENUM_OPERATION_GETEENUMLITERAL_EINT = 2032;
+			static const int EENUM_OPERATION_GETEENUMLITERALBYLITERAL_ESTRING = 2033;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getEEnum_Class() const = 0;
@@ -245,11 +245,11 @@ namespace ecore
 			static const unsigned int EENUMLITERAL_CLASS = 21;
 			static const unsigned int EENUMLITERAL_CLASS_FEATURE_COUNT = 9;
 			static const unsigned int EENUMLITERAL_CLASS_OPERATION_COUNT = 16;
-			static const int EENUMLITERAL_ATTRIBUTE_INSTANCE = 10506;
-			static const int EENUMLITERAL_ATTRIBUTE_LITERAL = 10507;
-			static const int EENUMLITERAL_ATTRIBUTE_VALUE = 10505;
+			static const int EENUMLITERAL_ATTRIBUTE_INSTANCE = 2106;
+			static const int EENUMLITERAL_ATTRIBUTE_LITERAL = 2107;
+			static const int EENUMLITERAL_ATTRIBUTE_VALUE = 2105;
 			
-			static const int EENUMLITERAL_ATTRIBUTE_EENUM = 10508;
+			static const int EENUMLITERAL_ATTRIBUTE_EENUM = 2108;
 			
 			
 			//Class and Feature Getter
@@ -271,11 +271,11 @@ namespace ecore
 			static const unsigned int EFACTORY_CLASS_FEATURE_COUNT = 5;
 			static const unsigned int EFACTORY_CLASS_OPERATION_COUNT = 19;
 			
-			static const int EFACTORY_ATTRIBUTE_EPACKAGE = 11504;
+			static const int EFACTORY_ATTRIBUTE_EPACKAGE = 2304;
 			
-			static const int EFACTORY_OPERATION_CONVERTTOSTRING_EDATATYPE_EJAVAOBJECT = 11523;
-			static const int EFACTORY_OPERATION_CREATE_ECLASS = 11521;
-			static const int EFACTORY_OPERATION_CREATEFROMSTRING_EDATATYPE_ESTRING = 11522;
+			static const int EFACTORY_OPERATION_CONVERTTOSTRING_EDATATYPE_EJAVAOBJECT = 2323;
+			static const int EFACTORY_OPERATION_CREATE_ECLASS = 2321;
+			static const int EFACTORY_OPERATION_CREATEFROMSTRING_EDATATYPE_ESTRING = 2322;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getEFactory_Class() const = 0;
@@ -296,14 +296,14 @@ namespace ecore
 			static const unsigned int EGENERICTYPE_CLASS_FEATURE_COUNT = 6;
 			static const unsigned int EGENERICTYPE_CLASS_OPERATION_COUNT = 1;
 			
-			static const int EGENERICTYPE_ATTRIBUTE_ECLASSIFIER = 14005;
-			static const int EGENERICTYPE_ATTRIBUTE_ELOWERBOUND = 14003;
-			static const int EGENERICTYPE_ATTRIBUTE_ERAWTYPE = 14002;
-			static const int EGENERICTYPE_ATTRIBUTE_ETYPEARGUMENTS = 14001;
-			static const int EGENERICTYPE_ATTRIBUTE_ETYPEPARAMETER = 14004;
-			static const int EGENERICTYPE_ATTRIBUTE_EUPPERBOUND = 14000;
+			static const int EGENERICTYPE_ATTRIBUTE_ECLASSIFIER = 2805;
+			static const int EGENERICTYPE_ATTRIBUTE_ELOWERBOUND = 2803;
+			static const int EGENERICTYPE_ATTRIBUTE_ERAWTYPE = 2802;
+			static const int EGENERICTYPE_ATTRIBUTE_ETYPEARGUMENTS = 2801;
+			static const int EGENERICTYPE_ATTRIBUTE_ETYPEPARAMETER = 2804;
+			static const int EGENERICTYPE_ATTRIBUTE_EUPPERBOUND = 2800;
 			
-			static const int EGENERICTYPE_OPERATION_ISINSTANCE_EJAVAOBJECT = 14006;
+			static const int EGENERICTYPE_OPERATION_ISINSTANCE_EJAVAOBJECT = 2806;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getEGenericType_Class() const = 0;
@@ -327,9 +327,9 @@ namespace ecore
 			static const unsigned int EMODELELEMENT_CLASS_FEATURE_COUNT = 4;
 			static const unsigned int EMODELELEMENT_CLASS_OPERATION_COUNT = 16;
 			
-			static const int EMODELELEMENT_ATTRIBUTE_EANNOTATIONS = 18503;
+			static const int EMODELELEMENT_ATTRIBUTE_EANNOTATIONS = 3703;
 			
-			static const int EMODELELEMENT_OPERATION_GETEANNOTATION_ESTRING = 18519;
+			static const int EMODELELEMENT_OPERATION_GETEANNOTATION_ESTRING = 3719;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getEModelElement_Class() const = 0;
@@ -347,7 +347,7 @@ namespace ecore
 			static const unsigned int ENAMEDELEMENT_CLASS = 38;
 			static const unsigned int ENAMEDELEMENT_CLASS_FEATURE_COUNT = 5;
 			static const unsigned int ENAMEDELEMENT_CLASS_OPERATION_COUNT = 16;
-			static const int ENAMEDELEMENT_ATTRIBUTE_NAME = 19004;
+			static const int ENAMEDELEMENT_ATTRIBUTE_NAME = 3804;
 			
 			
 			
@@ -366,26 +366,26 @@ namespace ecore
 			static const unsigned int EOBJECT_CLASS = 39;
 			static const unsigned int EOBJECT_CLASS_FEATURE_COUNT = 3;
 			static const unsigned int EOBJECT_CLASS_OPERATION_COUNT = 15;
-			static const int EOBJECT_ATTRIBUTE_METAELEMENTID = 19502;
+			static const int EOBJECT_ATTRIBUTE_METAELEMENTID = 3902;
 			
-			static const int EOBJECT_ATTRIBUTE_ECONTAINER = 19501;
-			static const int EOBJECT_ATTRIBUTE_ECONTENS = 19500;
+			static const int EOBJECT_ATTRIBUTE_ECONTAINER = 3901;
+			static const int EOBJECT_ATTRIBUTE_ECONTENS = 3900;
 			
-			static const int EOBJECT_OPERATION_EALLCONTENTS = 19510;
-			static const int EOBJECT_OPERATION_ECLASS = 19503;
-			static const int EOBJECT_OPERATION_ECONTAINER = 19506;
-			static const int EOBJECT_OPERATION_ECONTAININGFEATURE = 19507;
-			static const int EOBJECT_OPERATION_ECONTAINMENTFEATURE = 19508;
-			static const int EOBJECT_OPERATION_ECONTENTS = 19509;
-			static const int EOBJECT_OPERATION_ECROSSREFERENCES = 19511;
-			static const int EOBJECT_OPERATION_EGET_ESTRUCTURALFEATURE = 19512;
-			static const int EOBJECT_OPERATION_EGET_ESTRUCTURALFEATURE_EBOOLEAN = 19513;
-			static const int EOBJECT_OPERATION_EINVOKE_EOPERATION_EELIST = 19517;
-			static const int EOBJECT_OPERATION_EISPROXY = 19504;
-			static const int EOBJECT_OPERATION_EISSET_ESTRUCTURALFEATURE = 19515;
-			static const int EOBJECT_OPERATION_ERESOURCE = 19505;
-			static const int EOBJECT_OPERATION_ESET_ESTRUCTURALFEATURE_EJAVAOBJECT = 19514;
-			static const int EOBJECT_OPERATION_EUNSET_ESTRUCTURALFEATURE = 19516;
+			static const int EOBJECT_OPERATION_EALLCONTENTS = 3910;
+			static const int EOBJECT_OPERATION_ECLASS = 3903;
+			static const int EOBJECT_OPERATION_ECONTAINER = 3906;
+			static const int EOBJECT_OPERATION_ECONTAININGFEATURE = 3907;
+			static const int EOBJECT_OPERATION_ECONTAINMENTFEATURE = 3908;
+			static const int EOBJECT_OPERATION_ECONTENTS = 3909;
+			static const int EOBJECT_OPERATION_ECROSSREFERENCES = 3911;
+			static const int EOBJECT_OPERATION_EGET_ESTRUCTURALFEATURE = 3912;
+			static const int EOBJECT_OPERATION_EGET_ESTRUCTURALFEATURE_EBOOLEAN = 3913;
+			static const int EOBJECT_OPERATION_EINVOKE_EOPERATION_EELIST = 3917;
+			static const int EOBJECT_OPERATION_EISPROXY = 3904;
+			static const int EOBJECT_OPERATION_EISSET_ESTRUCTURALFEATURE = 3915;
+			static const int EOBJECT_OPERATION_ERESOURCE = 3905;
+			static const int EOBJECT_OPERATION_ESET_ESTRUCTURALFEATURE_EJAVAOBJECT = 3914;
+			static const int EOBJECT_OPERATION_EUNSET_ESTRUCTURALFEATURE = 3916;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getEObject_Class() const = 0;
@@ -419,16 +419,16 @@ namespace ecore
 			static const unsigned int EOPERATION_CLASS = 40;
 			static const unsigned int EOPERATION_CLASS_FEATURE_COUNT = 19;
 			static const unsigned int EOPERATION_CLASS_OPERATION_COUNT = 18;
-			static const int EOPERATION_ATTRIBUTE_OPERATIONID = 20013;
+			static const int EOPERATION_ATTRIBUTE_OPERATIONID = 4013;
 			
-			static const int EOPERATION_ATTRIBUTE_ECONTAININGCLASS = 20014;
-			static const int EOPERATION_ATTRIBUTE_EEXCEPTIONS = 20017;
-			static const int EOPERATION_ATTRIBUTE_EGENERICEXCEPTIONS = 20018;
-			static const int EOPERATION_ATTRIBUTE_EPARAMETERS = 20016;
-			static const int EOPERATION_ATTRIBUTE_ETYPEPARAMETERS = 20015;
+			static const int EOPERATION_ATTRIBUTE_ECONTAININGCLASS = 4014;
+			static const int EOPERATION_ATTRIBUTE_EEXCEPTIONS = 4017;
+			static const int EOPERATION_ATTRIBUTE_EGENERICEXCEPTIONS = 4018;
+			static const int EOPERATION_ATTRIBUTE_EPARAMETERS = 4016;
+			static const int EOPERATION_ATTRIBUTE_ETYPEPARAMETERS = 4015;
 			
-			static const int EOPERATION_OPERATION_GETOPERATIONID = 20035;
-			static const int EOPERATION_OPERATION_ISOVERRIDEOF_EOPERATION = 20036;
+			static const int EOPERATION_OPERATION_GETOPERATIONID = 4035;
+			static const int EOPERATION_OPERATION_ISOVERRIDEOF_EOPERATION = 4036;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getEOperation_Class() const = 0;
@@ -452,15 +452,15 @@ namespace ecore
 			static const unsigned int EPACKAGE_CLASS = 41;
 			static const unsigned int EPACKAGE_CLASS_FEATURE_COUNT = 11;
 			static const unsigned int EPACKAGE_CLASS_OPERATION_COUNT = 17;
-			static const int EPACKAGE_ATTRIBUTE_NSPREFIX = 20506;
-			static const int EPACKAGE_ATTRIBUTE_NSURI = 20505;
+			static const int EPACKAGE_ATTRIBUTE_NSPREFIX = 4106;
+			static const int EPACKAGE_ATTRIBUTE_NSURI = 4105;
 			
-			static const int EPACKAGE_ATTRIBUTE_ECLASSIFIERS = 20508;
-			static const int EPACKAGE_ATTRIBUTE_EFACTORYINSTANCE = 20507;
-			static const int EPACKAGE_ATTRIBUTE_ESUBPACKAGES = 20509;
-			static const int EPACKAGE_ATTRIBUTE_ESUPERPACKAGE = 20510;
+			static const int EPACKAGE_ATTRIBUTE_ECLASSIFIERS = 4108;
+			static const int EPACKAGE_ATTRIBUTE_EFACTORYINSTANCE = 4107;
+			static const int EPACKAGE_ATTRIBUTE_ESUBPACKAGES = 4109;
+			static const int EPACKAGE_ATTRIBUTE_ESUPERPACKAGE = 4110;
 			
-			static const int EPACKAGE_OPERATION_GETECLASSIFIER_ESTRING = 20527;
+			static const int EPACKAGE_OPERATION_GETECLASSIFIER_ESTRING = 4127;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getEPackage_Class() const = 0;
@@ -484,7 +484,7 @@ namespace ecore
 			static const unsigned int EPARAMETER_CLASS_FEATURE_COUNT = 14;
 			static const unsigned int EPARAMETER_CLASS_OPERATION_COUNT = 16;
 			
-			static const int EPARAMETER_ATTRIBUTE_EOPERATION = 21013;
+			static const int EPARAMETER_ATTRIBUTE_EOPERATION = 4213;
 			
 			
 			//Class and Feature Getter
@@ -502,13 +502,13 @@ namespace ecore
 			static const unsigned int EREFERENCE_CLASS = 43;
 			static const unsigned int EREFERENCE_CLASS_FEATURE_COUNT = 28;
 			static const unsigned int EREFERENCE_CLASS_OPERATION_COUNT = 18;
-			static const int EREFERENCE_ATTRIBUTE_CONTAINER = 21523;
-			static const int EREFERENCE_ATTRIBUTE_CONTAINMENT = 21522;
-			static const int EREFERENCE_ATTRIBUTE_RESOLVEPROXIES = 21524;
+			static const int EREFERENCE_ATTRIBUTE_CONTAINER = 4323;
+			static const int EREFERENCE_ATTRIBUTE_CONTAINMENT = 4322;
+			static const int EREFERENCE_ATTRIBUTE_RESOLVEPROXIES = 4324;
 			
-			static const int EREFERENCE_ATTRIBUTE_EKEYS = 21527;
-			static const int EREFERENCE_ATTRIBUTE_EOPPOSITE = 21525;
-			static const int EREFERENCE_ATTRIBUTE_EREFERENCETYPE = 21526;
+			static const int EREFERENCE_ATTRIBUTE_EKEYS = 4327;
+			static const int EREFERENCE_ATTRIBUTE_EOPPOSITE = 4325;
+			static const int EREFERENCE_ATTRIBUTE_EREFERENCETYPE = 4326;
 			
 			
 			//Class and Feature Getter
@@ -531,8 +531,8 @@ namespace ecore
 			static const unsigned int ESTRINGTOSTRINGMAPENTRY_CLASS = 49;
 			static const unsigned int ESTRINGTOSTRINGMAPENTRY_CLASS_FEATURE_COUNT = 2;
 			static const unsigned int ESTRINGTOSTRINGMAPENTRY_CLASS_OPERATION_COUNT = 0;
-			static const int ESTRINGTOSTRINGMAPENTRY_ATTRIBUTE_KEY = 24500;
-			static const int ESTRINGTOSTRINGMAPENTRY_ATTRIBUTE_VALUE = 24501;
+			static const int ESTRINGTOSTRINGMAPENTRY_ATTRIBUTE_KEY = 4900;
+			static const int ESTRINGTOSTRINGMAPENTRY_ATTRIBUTE_VALUE = 4901;
 			
 			
 			
@@ -552,19 +552,19 @@ namespace ecore
 			static const unsigned int ESTRUCTURALFEATURE_CLASS = 50;
 			static const unsigned int ESTRUCTURALFEATURE_CLASS_FEATURE_COUNT = 22;
 			static const unsigned int ESTRUCTURALFEATURE_CLASS_OPERATION_COUNT = 18;
-			static const int ESTRUCTURALFEATURE_ATTRIBUTE_CHANGEABLE = 25013;
-			static const int ESTRUCTURALFEATURE_ATTRIBUTE_DEFAULTVALUE = 25017;
-			static const int ESTRUCTURALFEATURE_ATTRIBUTE_DEFAULTVALUELITERAL = 25016;
-			static const int ESTRUCTURALFEATURE_ATTRIBUTE_DERIVED = 25019;
-			static const int ESTRUCTURALFEATURE_ATTRIBUTE_FEATUREID = 25020;
-			static const int ESTRUCTURALFEATURE_ATTRIBUTE_TRANSIENT = 25015;
-			static const int ESTRUCTURALFEATURE_ATTRIBUTE_UNSETTABLE = 25018;
-			static const int ESTRUCTURALFEATURE_ATTRIBUTE_VOLATILE = 25014;
+			static const int ESTRUCTURALFEATURE_ATTRIBUTE_CHANGEABLE = 5013;
+			static const int ESTRUCTURALFEATURE_ATTRIBUTE_DEFAULTVALUE = 5017;
+			static const int ESTRUCTURALFEATURE_ATTRIBUTE_DEFAULTVALUELITERAL = 5016;
+			static const int ESTRUCTURALFEATURE_ATTRIBUTE_DERIVED = 5019;
+			static const int ESTRUCTURALFEATURE_ATTRIBUTE_FEATUREID = 5020;
+			static const int ESTRUCTURALFEATURE_ATTRIBUTE_TRANSIENT = 5015;
+			static const int ESTRUCTURALFEATURE_ATTRIBUTE_UNSETTABLE = 5018;
+			static const int ESTRUCTURALFEATURE_ATTRIBUTE_VOLATILE = 5014;
 			
-			static const int ESTRUCTURALFEATURE_ATTRIBUTE_ECONTAININGCLASS = 25021;
+			static const int ESTRUCTURALFEATURE_ATTRIBUTE_ECONTAININGCLASS = 5021;
 			
-			static const int ESTRUCTURALFEATURE_OPERATION_GETCONTAINERCLASS = 25039;
-			static const int ESTRUCTURALFEATURE_OPERATION_GETFEATUREID = 25038;
+			static const int ESTRUCTURALFEATURE_OPERATION_GETCONTAINERCLASS = 5039;
+			static const int ESTRUCTURALFEATURE_OPERATION_GETFEATUREID = 5038;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getEStructuralFeature_Class() const = 0;
@@ -592,7 +592,7 @@ namespace ecore
 			static const unsigned int ETYPEPARAMETER_CLASS_FEATURE_COUNT = 6;
 			static const unsigned int ETYPEPARAMETER_CLASS_OPERATION_COUNT = 16;
 			
-			static const int ETYPEPARAMETER_ATTRIBUTE_EBOUNDS = 26005;
+			static const int ETYPEPARAMETER_ATTRIBUTE_EBOUNDS = 5205;
 			
 			
 			//Class and Feature Getter
@@ -610,15 +610,15 @@ namespace ecore
 			static const unsigned int ETYPEDELEMENT_CLASS = 53;
 			static const unsigned int ETYPEDELEMENT_CLASS_FEATURE_COUNT = 13;
 			static const unsigned int ETYPEDELEMENT_CLASS_OPERATION_COUNT = 16;
-			static const int ETYPEDELEMENT_ATTRIBUTE_LOWERBOUND = 26507;
-			static const int ETYPEDELEMENT_ATTRIBUTE_MANY = 26509;
-			static const int ETYPEDELEMENT_ATTRIBUTE_ORDERED = 26505;
-			static const int ETYPEDELEMENT_ATTRIBUTE_REQUIRED = 26510;
-			static const int ETYPEDELEMENT_ATTRIBUTE_UNIQUE = 26506;
-			static const int ETYPEDELEMENT_ATTRIBUTE_UPPERBOUND = 26508;
+			static const int ETYPEDELEMENT_ATTRIBUTE_LOWERBOUND = 5307;
+			static const int ETYPEDELEMENT_ATTRIBUTE_MANY = 5309;
+			static const int ETYPEDELEMENT_ATTRIBUTE_ORDERED = 5305;
+			static const int ETYPEDELEMENT_ATTRIBUTE_REQUIRED = 5310;
+			static const int ETYPEDELEMENT_ATTRIBUTE_UNIQUE = 5306;
+			static const int ETYPEDELEMENT_ATTRIBUTE_UPPERBOUND = 5308;
 			
-			static const int ETYPEDELEMENT_ATTRIBUTE_EGENERICTYPE = 26512;
-			static const int ETYPEDELEMENT_ATTRIBUTE_ETYPE = 26511;
+			static const int ETYPEDELEMENT_ATTRIBUTE_EGENERICTYPE = 5312;
+			static const int ETYPEDELEMENT_ATTRIBUTE_ETYPE = 5311;
 			
 			
 			//Class and Feature Getter

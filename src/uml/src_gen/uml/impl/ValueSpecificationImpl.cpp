@@ -258,7 +258,7 @@ std::string ValueSpecificationImpl::stringValue()
 	throw "UnsupportedOperationException";
 }
 
-unsigned int ValueSpecificationImpl::unlimitedValue()
+int ValueSpecificationImpl::unlimitedValue()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";

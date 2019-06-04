@@ -470,7 +470,7 @@ std::shared_ptr<Bag<uml::ConnectableElement> > StructuredClassifierImpl::allRole
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::Property> StructuredClassifierImpl::createOwnedAttribute(std::string name,std::shared_ptr<uml::Type>  type,int lower,unsigned int upper)
+std::shared_ptr<uml::Property> StructuredClassifierImpl::createOwnedAttribute(std::string name,std::shared_ptr<uml::Type>  type,int lower,int upper)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";

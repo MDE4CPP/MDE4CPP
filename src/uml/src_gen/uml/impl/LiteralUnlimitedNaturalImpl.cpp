@@ -215,12 +215,12 @@ std::shared_ptr<ecore::EClass> LiteralUnlimitedNaturalImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
-void LiteralUnlimitedNaturalImpl::setValue(unsigned int _value)
+void LiteralUnlimitedNaturalImpl::setValue(int _value)
 {
 	m_value = _value;
 } 
 
-unsigned int LiteralUnlimitedNaturalImpl::getValue() const 
+int LiteralUnlimitedNaturalImpl::getValue() const 
 {
 	return m_value;
 }
@@ -316,7 +316,7 @@ bool LiteralUnlimitedNaturalImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::LITERALUNLIMITEDNATURAL_ATTRIBUTE_VALUE:
 		{
 			// BOOST CAST
-			unsigned int _value = newValue->get<unsigned int>();
+			int _value = newValue->get<int>();
 			setValue(_value); //14314
 			return true;
 		}
@@ -354,9 +354,9 @@ void LiteralUnlimitedNaturalImpl::loadAttributes(std::shared_ptr<persistence::in
 		iter = attr_list.find("value");
 		if ( iter != attr_list.end() )
 		{
-			// TODO this attribute has a non handle type
-			std::cout << "| ERROR    | " << __PRETTY_FUNCTION__ << " handle type of 'value'" << " org.eclipse.emf.ecore.impl.EDataTypeImpl@16c1519e (name: UnlimitedNatural) (instanceClassName: int) (serializable: true)" << std::endl; 
-			 unsigned int value;
+			// this attribute is a 'int'
+			int value;
+			std::istringstream ( iter->second ) >> value;
 			this->setValue(value);
 		}
 	}

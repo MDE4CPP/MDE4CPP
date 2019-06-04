@@ -70,12 +70,12 @@ namespace uml
 			/*!
 			 The specified UnlimitedNatural value.
 			<p>From package UML::Values.</p> */ 
-			virtual unsigned int getValue() const ;
+			virtual int getValue() const ;
 			
 			/*!
 			 The specified UnlimitedNatural value.
 			<p>From package UML::Values.</p> */ 
-			virtual void setValue (unsigned int _value); 
+			virtual void setValue (int _value); 
 			
 			
 			

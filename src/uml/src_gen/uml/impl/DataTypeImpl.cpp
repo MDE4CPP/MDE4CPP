@@ -436,7 +436,7 @@ std::shared_ptr<ecore::EClass> DataTypeImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<uml::Property> DataTypeImpl::createOwnedAttribute(std::string name,std::shared_ptr<uml::Type>  type,int lower,unsigned int upper)
+std::shared_ptr<uml::Property> DataTypeImpl::createOwnedAttribute(std::string name,std::shared_ptr<uml::Type>  type,int lower,int upper)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";

@@ -400,7 +400,7 @@ void ParameterImpl::setStringDefaultValue(std::string value)
 	throw "UnsupportedOperationException";
 }
 
-void ParameterImpl::setUnlimitedNaturalDefaultValue(unsigned int value)
+void ParameterImpl::setUnlimitedNaturalDefaultValue(int value)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";

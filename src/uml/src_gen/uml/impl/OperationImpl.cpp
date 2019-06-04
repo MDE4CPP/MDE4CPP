@@ -485,7 +485,7 @@ int OperationImpl::getLower() const
 
 
 
-unsigned int OperationImpl::getUpper() const 
+int OperationImpl::getUpper() const 
 {
 	return m_upper;
 }
@@ -513,7 +513,7 @@ std::shared_ptr<uml::Parameter> OperationImpl::getReturnResult()
 
 
 
-unsigned int OperationImpl::getUpper()
+int OperationImpl::getUpper()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -567,7 +567,7 @@ void OperationImpl::setType(std::shared_ptr<uml::Type>  newType)
 	throw "UnsupportedOperationException";
 }
 
-void OperationImpl::setUpper(unsigned int newUpper)
+void OperationImpl::setUpper(int newUpper)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";

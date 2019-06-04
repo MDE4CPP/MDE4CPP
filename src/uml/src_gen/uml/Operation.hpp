@@ -253,7 +253,7 @@ namespace uml
 			 If this operation has a return parameter, upper equals the value of upper for that parameter. Otherwise upper has no value.
 			result = (if returnResult()->notEmpty() then returnResult()->any(true).upper else null endif)
 			<p>From package UML::Classification.</p> */ 
-			virtual unsigned int getUpper() = 0;
+			virtual int getUpper() = 0;
 			
 			/*!
 			 If this operation has a return parameter, isOrdered equals the value of isOrdered for that parameter. Otherwise isOrdered is false.
@@ -296,7 +296,7 @@ namespace uml
 			
 			/*!
 			 */ 
-			virtual void setUpper(unsigned int newUpper) = 0;
+			virtual void setUpper(int newUpper) = 0;
 			
 			
 			//*********************************
@@ -330,7 +330,7 @@ namespace uml
 			/*!
 			 The upper multiplicity of the return parameter, if present. This information is derived from the return result for this Operation.
 			<p>From package UML::Classification.</p> */ 
-			virtual unsigned int getUpper() const = 0;
+			virtual int getUpper() const = 0;
 			
 			
 			//*********************************
@@ -417,7 +417,7 @@ namespace uml
 			/*!
 			 The upper multiplicity of the return parameter, if present. This information is derived from the return result for this Operation.
 			<p>From package UML::Classification.</p> */ 
-			unsigned int m_upper = 1;
+			int m_upper = 1;
 			
 			
 			//*********************************

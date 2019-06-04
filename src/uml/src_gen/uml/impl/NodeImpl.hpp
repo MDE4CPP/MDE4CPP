@@ -64,7 +64,7 @@ namespace uml
 			//*********************************
 			/*!
 			 Creates a (binary) communication path between this node and the specified other node, with the specified navigabilities, aggregations, names, lower bounds, and upper bounds, and owned by this node's nearest package. */ 
-			virtual std::shared_ptr<uml::CommunicationPath> createCommunicationPath(bool end1IsNavigable,AggregationKind end1Aggregation,std::string end1Name,int end1Lower,unsigned int end1Upper,std::shared_ptr<uml::Node>  end1Node,bool end2IsNavigable,AggregationKind end2Aggregation,std::string end2Name,int end2Lower,unsigned int end2Upper) ;
+			virtual std::shared_ptr<uml::CommunicationPath> createCommunicationPath(bool end1IsNavigable,AggregationKind end1Aggregation,std::string end1Name,int end1Lower,int end1Upper,std::shared_ptr<uml::Node>  end1Node,bool end2IsNavigable,AggregationKind end2Aggregation,std::string end2Name,int end2Lower,int end2Upper) ;
 			
 			/*!
 			 Retrieves the communication paths in which this node is involved. */ 

@@ -188,12 +188,12 @@ int MultiplicityElementImpl::getLower() const
 	return m_lower;
 }
 
-void MultiplicityElementImpl::setUpper(unsigned int _upper)
+void MultiplicityElementImpl::setUpper(int _upper)
 {
 	m_upper = _upper;
 } 
 
-unsigned int MultiplicityElementImpl::getUpper() const 
+int MultiplicityElementImpl::getUpper() const 
 {
 	return m_upper;
 }
@@ -213,7 +213,7 @@ bool MultiplicityElementImpl::includesMultiplicity(std::shared_ptr<uml::Multipli
 	throw "UnsupportedOperationException";
 }
 
-bool MultiplicityElementImpl::is(int lowerbound,unsigned int upperbound)
+bool MultiplicityElementImpl::is(int lowerbound,int upperbound)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -243,7 +243,7 @@ bool MultiplicityElementImpl::lower_is_integer(Any diagnostics,std::map <   Any,
 	throw "UnsupportedOperationException";
 }
 
-unsigned int MultiplicityElementImpl::upperBound()
+int MultiplicityElementImpl::upperBound()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -399,7 +399,7 @@ bool MultiplicityElementImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_UPPER:
 		{
 			// BOOST CAST
-			unsigned int _upper = newValue->get<unsigned int>();
+			int _upper = newValue->get<int>();
 			setUpper(_upper); //1547
 			return true;
 		}

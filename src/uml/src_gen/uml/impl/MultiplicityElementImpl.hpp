@@ -63,7 +63,7 @@ namespace uml
 			 The operation is determines if the upper and lower bound of the ranges are the ones given.
 			result = (lowerbound = self.lowerBound() and upperbound = self.upperBound())
 			<p>From package UML::CommonStructure.</p> */ 
-			virtual bool is(int lowerbound,unsigned int upperbound) ;
+			virtual bool is(int lowerbound,int upperbound) ;
 			
 			/*!
 			 The query isMultivalued() checks whether this multiplicity has an upper bound greater than one.
@@ -92,7 +92,7 @@ namespace uml
 			 The query upperBound() returns the upper bound of the multiplicity for a bounded multiplicity as an unlimited natural, which is the unlimitedNaturalValue of upperValue, if given, and 1, otherwise.
 			result = (if (upperValue=null or upperValue.unlimitedValue()=null) then 1 else upperValue.unlimitedValue() endif)
 			<p>From package UML::CommonStructure.</p> */ 
-			virtual unsigned int upperBound() ;
+			virtual int upperBound() ;
 			
 			/*!
 			 The upper bound must be greater than or equal to the lower bound.
@@ -150,12 +150,12 @@ namespace uml
 			/*!
 			 The upper bound of the multiplicity interval.
 			<p>From package UML::CommonStructure.</p> */ 
-			virtual unsigned int getUpper() const ;
+			virtual int getUpper() const ;
 			
 			/*!
 			 The upper bound of the multiplicity interval.
 			<p>From package UML::CommonStructure.</p> */ 
-			virtual void setUpper (unsigned int _upper); 
+			virtual void setUpper (int _upper); 
 			
 			
 			
