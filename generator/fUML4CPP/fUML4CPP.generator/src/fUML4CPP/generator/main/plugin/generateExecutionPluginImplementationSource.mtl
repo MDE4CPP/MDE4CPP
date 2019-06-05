@@ -76,8 +76,13 @@ std::string [packageName/]::eNS_PREFIX()
 	return "[if(not (aPackage.namespace.oclIsUndefined()))][aPackage.namespace.name/][/if]";
 }
 
-std::shared_ptr<ecore::EObject> [packageName/]::create(const std::string& name)
+std::shared_ptr<ecore::EObject> [packageName/]::create(const std::string& name) const
 {		
+	return nullptr;
+}
+
+std::shared_ptr<ecore::EObject> [packageName/]::create(const std::string& name, std::shared_ptr<ecore::EObject> container, const unsigned int referenceID) const
+{
 	return nullptr;
 }
 

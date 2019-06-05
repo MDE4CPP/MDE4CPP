@@ -38,9 +38,14 @@ using namespace [aPackage.name/];
 }
 
 
-std::shared_ptr<ecore::EObject> [packageName/]::create(const std::string& name)
+std::shared_ptr<ecore::EObject> [packageName/]::create(const std::string& name) const
 {
 	return [aPackage.name.toUpperFirst()/]Factory::eInstance()->create(name);
+}
+
+std::shared_ptr<ecore::EObject> [packageName/]::create(const std::string& name, std::shared_ptr<ecore::EObject> container, const unsigned int referenceID) const
+{
+	return [aPackage.name.toUpperFirst()/]Factory::eInstance()->create(name, container, referenceID);
 }
 
 std::shared_ptr<ecore::EFactory> [packageName/]::getEFactory()

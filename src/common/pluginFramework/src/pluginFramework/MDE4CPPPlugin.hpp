@@ -27,7 +27,8 @@ class MDE4CPPPlugin
 		virtual std::string eNS_URI() = 0;
 		virtual std::string eNS_PREFIX() = 0;
 
-		virtual std::shared_ptr<ecore::EObject> create(const std::string& name) = 0;
+		virtual std::shared_ptr<ecore::EObject> create(const std::string& name) const = 0;
+		virtual std::shared_ptr<ecore::EObject> create(const std::string& name, std::shared_ptr<ecore::EObject> container, const unsigned int referenceID = -1) const = 0;
 };
 
 #endif
