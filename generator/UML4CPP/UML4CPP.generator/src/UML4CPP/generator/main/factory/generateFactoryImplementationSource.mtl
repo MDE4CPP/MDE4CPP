@@ -48,7 +48,7 @@
 [className/]::[className/]()
 {
 	[for (aClass : Class | aPackage.collectModelClassesForFactory())]
-	m_idMap.insert(std::make_pair("[aClass.myQualifiedName()/]", [aPackage.name.toUpperFirst()/]Package::[aClass.getMemberName().toUpperCase()/]));
+	m_idMap.insert(std::make_pair("[aClass.qualifiedName/]", [aPackage.name.toUpperFirst()/]Package::[aClass.getMemberName().toUpperCase()/]));
 	[/for]
 }
 
@@ -153,6 +153,11 @@ std::shared_ptr<[aClass.generateCppType(true)/]> [className/]::create[aClass.nam
 	{
 		element->setMetaElementID(metaElementID);
 	}
+	else
+	{
+  		element->setMetaElementID([aPackage.name.toUpperFirst()/]Package::[aClass.getMemberName().toUpperCase()/]);
+	}
+
 	element->[aClass.generateGetThisPtrPropertySetterName()/](element);
 	return element;
 }
@@ -166,6 +171,11 @@ std::shared_ptr<[aClass.generateCppType(true)/]> [className/]::create[aClass.nam
 	{
 		element->setMetaElementID(metaElementID);
 	}
+	else
+	{
+  		element->setMetaElementID([aPackage.name.toUpperFirst()/]Package::[aClass.getMemberName().toUpperCase()/]);
+	}
+
 [if (containmentProperty.isBackReference())]
 	if(auto wp = [containmentProperty.name.toLowerFirst()/].lock())
 [else]

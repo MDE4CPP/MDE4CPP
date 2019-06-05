@@ -71,7 +71,7 @@ std::shared_ptr<fUML::Object> [upperName/]LocusImpl::instantiate(std::shared_ptr
 	std::shared_ptr<uml::Element> newElement = [originalName/]::[upperName/]Factory::eInstance()->create(type);
 	if(newElement )
 	{
-		switch(newElement->getMetaElementID())
+		switch(type->getMetaElementID())
 		{
 		[for (c : Class | aPackage.allOwnedElements()->selectByType(Class)->sortedBy(name)) separator('\n')]
 		[let className : String = c.name.toUpperFirst()]
