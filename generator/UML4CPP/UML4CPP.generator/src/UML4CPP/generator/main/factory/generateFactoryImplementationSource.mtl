@@ -78,7 +78,7 @@ std::shared_ptr<uml::Element> [className/]::create(const unsigned int _metaClass
 			if (nullptr == container)
 			{
 [/if]
-				return this->create[aClass.name.toUpperFirst()/]();
+				return this->create[aClass.name.toUpperFirst()/](_metaClassId);
 [if(ref->size()>0)]			}
 			else
 			{
@@ -93,11 +93,10 @@ std::shared_ptr<uml::Element> [className/]::create(const unsigned int _metaClass
 					case  [aPackage.name.toUpperFirst()/]Package::[containmentProperty.name.toUpperCase()/]:
 					{
 						auto castedContainer = std::dynamic_pointer_cast<[if (containmentProperty.upper <> 1)]Bag<[/if][containmentProperty.type.transformType()/][if (containmentProperty.upper <> 1)]>[/if]>(container);
-						return this->create[aClass.name/]_in_[containmentProperty.name.toUpperFirst()/](castedContainer);
-															  containmentProperty.name.toUpperFirst()
+						return this->create[aClass.name/]_in_[containmentProperty.name.toUpperFirst()/](castedContainer,_metaClassId);															  
 					}
-						[/let]
-						[/let]
+					[/let]
+					[/let]
 					[/for]
 					default:
 						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
@@ -107,7 +106,7 @@ std::shared_ptr<uml::Element> [className/]::create(const unsigned int _metaClass
 				[let containmentProperty : Property = ref->first().memberEnd->select(not (type = aClass))->asOrderedSet()->first()]
 				[containmentProperty.generateCppType()/] castedContainer = std::dynamic_pointer_cast<[if (containmentProperty.upper <> 1)]Bag<[/if][containmentProperty.type.transformType()/][if (containmentProperty.upper <> 1)]>[/if]>(container);
 				assert(castedContainer);
-				return std::shared_ptr<[aClass.name.toUpperFirst()/]>(this->create[aClass.name/]_in_[containmentProperty.name.toUpperFirst()/](castedContainer));
+				return std::shared_ptr<[aClass.name.toUpperFirst()/]>(this->create[aClass.name/]_in_[containmentProperty.name.toUpperFirst()/](castedContainer,_metaClassId));
 				[/let]
 				[/let]
 				[/if]
@@ -149,15 +148,7 @@ std::shared_ptr<uml::Element> [className/]::create(std::string _className, std::
 std::shared_ptr<[aClass.generateCppType(true)/]> [className/]::create[aClass.name.toUpperFirst()/](const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<[aClass.generateCppType(true)/]Impl> element(new [aClass.name.toUpperFirst()/]Impl());
-	if(metaElementID>=0)
-	{
-		element->setMetaElementID(metaElementID);
-	}
-	else
-	{
-  		element->setMetaElementID([aPackage.name.toUpperFirst()/]Package::[aClass.getMemberName().toUpperCase()/]);
-	}
-
+	element->setMetaElementID(metaElementID);
 	element->[aClass.generateGetThisPtrPropertySetterName()/](element);
 	return element;
 }
@@ -167,15 +158,7 @@ std::shared_ptr<[aClass.generateCppType(true)/]> [className/]::create[aClass.nam
 std::shared_ptr<[aClass.generateCppType(true)/]> [className/]::create[aClass.name.toUpperFirst()/]_in_[containmentProperty.name.toUpperFirst()/]([containmentProperty.generateCppType()/] [containmentProperty.name.toLowerFirst()/], const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<[aClass.generateCppType(true)/]Impl> element(new [aClass.name.toUpperFirst()/]Impl([if (containmentProperty.isBackReference())][containmentProperty.name.toLowerFirst()/][/if]));
-	if(metaElementID>=0)
-	{
-		element->setMetaElementID(metaElementID);
-	}
-	else
-	{
-  		element->setMetaElementID([aPackage.name.toUpperFirst()/]Package::[aClass.getMemberName().toUpperCase()/]);
-	}
-
+	element->setMetaElementID(metaElementID);
 [if (containmentProperty.isBackReference())]
 	if(auto wp = [containmentProperty.name.toLowerFirst()/].lock())
 [else]

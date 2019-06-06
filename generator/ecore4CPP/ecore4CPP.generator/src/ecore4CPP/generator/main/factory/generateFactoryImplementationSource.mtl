@@ -138,7 +138,7 @@ std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> [className/]::create(co
 			if (nullptr == container)
 			{
 [/if]
-				return this->create[aClass.name/]();
+				return this->create[aClass.name/](metaElementID);
 [if(ref->size()>0)]			}
 			else
 			{
