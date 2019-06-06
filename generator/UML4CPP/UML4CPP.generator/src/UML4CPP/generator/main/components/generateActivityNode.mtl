@@ -51,7 +51,10 @@
 	[anActivityNode.oclAsType(CreateObjectAction).generateCreateObjectActionCreation()/]
 [/if]
 [if (anActivityNode.oclIsKindOf(ReadSelfAction))]
-	[anActivityNode.oclAsType(ReadSelfAction).generateReadSelfAction()/]
+	[anActivityNode.oclAsType(ReadSelfAction).generateReadSelfActionCommands()/]
+[/if]
+[if (anActivityNode.oclIsKindOf(DestroyObjectAction))]
+	[anActivityNode.oclAsType(DestroyObjectAction).generateDestroyObjectActionCommands()/]
 [/if]
 [/template]
 
@@ -93,7 +96,7 @@
 [**
  * generate elements for ReadSelfAction
 */]
-[template private generateReadSelfAction(aReadSelfAction : ReadSelfAction)]
+[template private generateReadSelfActionCommands(aReadSelfAction : ReadSelfAction)]
 [if (aReadSelfAction.result.oclIsUndefined())]
 ['UML4CPP_Generation Error: ReadSelfAction: '.concat(aReadSelfAction.name).concat(' result pin invalid.').registerError()/]
 [else]
@@ -101,6 +104,16 @@
 [/if]
 [/template]
 
+[**
+ * generate elements for DestroyObjectAction
+*/]
+[template private generateDestroyObjectActionCommands(aDestroyObjectAction : DestroyObjectAction)]
+[if (aDestroyObjectAction.target.oclIsUndefined())]
+['UML4CPP_Generation Error: DestroyObjectAction: '.concat(aDestroyObjectAction.name).concat(' target pin invalid.').registerError()/]
+[else]
+[aDestroyObjectAction.memberName()/]->setTarget([aDestroyObjectAction.target.memberName()/]);
+[/if]
+[/template]
 
 [**
  * generate initialization of meta model instance for an ActivtiyNode or derived element
@@ -138,7 +151,6 @@
 [anActivityNode.memberName()/]->setIsSynchronous(true); //imposed by the fUML specification
 [anActivityNode.oclAsType(CallBehaviorAction).input.initializePin()/]
 [anActivityNode.oclAsType(CallBehaviorAction).output.initializePin()/]
-
 [/template]
 
 [**
@@ -152,7 +164,6 @@
 [anActivityNode.memberName()/]->setOperation([anActivityNode.oclAsType(CallOperationAction).operation.generatePackageGetterCall()/]);
 [anActivityNode.oclAsType(CallOperationAction).input.initializePin()/]
 [anActivityNode.oclAsType(CallOperationAction).output.initializePin()/]
-
 [/template]
 
 [**
@@ -165,7 +176,6 @@
 [if (not anActivityNode.oclAsType(DecisionNode).decisionInput.oclIsUndefined())]
 [anActivityNode.memberName()/]->setDecisionInput([memberName(anActivityNode.oclAsType(DecisionNode).decisionInput)/]);
 [/if]
-
 [/template]
 
 [**

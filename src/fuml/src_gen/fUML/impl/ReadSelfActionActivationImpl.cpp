@@ -182,7 +182,7 @@ void ReadSelfActionActivationImpl::doAction()
 	{
 
 		std::shared_ptr<fUML::Reference> reference= fUML::FUMLFactory::eInstance()->createReference();
-		std::shared_ptr<fUML::Object> context=this->getExecutionContext();
+		std::shared_ptr<fUML::Object> context=this->getExecutionContext();	
 		if(context)
 		{
 			reference->setReferent(context);
@@ -205,6 +205,7 @@ void ReadSelfActionActivationImpl::doAction()
 	{
 		throw "Unexpected invalid ReadSelfAction";
 	}
+
 	//end of body
 }
 

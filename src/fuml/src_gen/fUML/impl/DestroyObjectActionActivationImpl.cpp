@@ -237,6 +237,7 @@ void DestroyObjectActionActivationImpl::doAction()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
+		//generated from body annotation
 		// Get the value on the target input pin.
 	// If the value is not a reference, then the action has no effect. Otherwise, do the following.
 	// If isDestroyLinks is true, destroy all links in which the referent participates.
@@ -246,12 +247,18 @@ void DestroyObjectActionActivationImpl::doAction()
 	std::shared_ptr<uml::DestroyObjectAction> action = std::dynamic_pointer_cast<uml::DestroyObjectAction>(this->getNode());
 	if(action)
 	{
-		action->getTarget();
-		std::shared_ptr<Bag<fUML::Value> > tokens=this->takeTokens(action->getTarget());
-		for(std::shared_ptr<fUML::Value> value : *tokens)
+		std::shared_ptr<uml::InputPin > destroyTarget=action->getTarget();
+		if(destroyTarget)
 		{
-			this->destroyObject(value,action->getIsDestroyLinks(), action->getIsDestroyOwnedObjects());
-
+			std::shared_ptr<Bag<fUML::Value> > tokens=this->takeTokens(destroyTarget);
+			for(std::shared_ptr<fUML::Value> value : *tokens)
+			{
+				this->destroyObject(value,action->getIsDestroyLinks(), action->getIsDestroyOwnedObjects());
+			}
+		}
+		else
+		{
+			throw "invalid target pin";
 		}
 	}
 	//end of body
