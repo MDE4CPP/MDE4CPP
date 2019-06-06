@@ -2078,7 +2078,16 @@
   <eClassifiers xsi:type="ecore:EClass" name="OutputPinActivation" eSuperTypes="#//PinActivation"/>
   <eClassifiers xsi:type="ecore:EClass" name="ValueSpecificActionActivation" eSuperTypes="#//ActionActivation"/>
   <eClassifiers xsi:type="ecore:EClass" name="TestIdentityActionActivation" eSuperTypes="#//ActionActivation"/>
-  <eClassifiers xsi:type="ecore:EClass" name="ReadSelfActionActivation" eSuperTypes="#//ActionActivation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ReadSelfActionActivation" eSuperTypes="#//ActionActivation">
+    <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+      <details key="includes" value="#include &quot;uml/ReadSelfAction.hpp&quot;&#xA;#include &quot;fUML/Reference.hpp&quot;"/>
+    </eAnnotations>
+    <eOperations name="doAction">
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="// Get the context object of the activity execution containing this action activation and place a reference to it on the result output pin.&#xA;&#xA;&#x9;std::shared_ptr&lt;uml::ReadSelfAction> action = std::dynamic_pointer_cast&lt;uml::ReadSelfAction>(this->m_node);&#xA;&#x9;if(action)&#xA;&#x9;{&#xA;&#xA;&#x9;&#x9;std::shared_ptr&lt;fUML::Reference> reference= fUML::FUMLFactory::eInstance()->createReference();&#xA;&#x9;&#x9;std::shared_ptr&lt;fUML::Object> context=this->getExecutionContext();&#x9;&#xA;&#x9;&#x9;if(context)&#xA;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;reference->setReferent(context);&#xA;&#x9;&#x9;&#x9;std::shared_ptr&lt;uml::OutputPin > outputPin=action->getResult();&#xA;&#x9;&#x9;&#x9;if(outputPin)&#xA;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;this->putToken(action->getResult(), reference);&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;throw &quot;invalid output pin&quot;;&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;else&#xA;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;throw &quot;Invalid ExecutionContext&quot;;&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;&#x9;else&#xA;&#x9;{&#xA;&#x9;&#x9;throw &quot;Unexpected invalid ReadSelfAction&quot;;&#xA;&#x9;}&#xA;"/>
+      </eAnnotations>
+    </eOperations>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DestroyObjectActionActivation" eSuperTypes="#//ActionActivation">
     <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
       <details key="includes" value="#include &quot;uml/Property.hpp&quot;&#xA;#include &quot;uml/DestroyObjectAction.hpp&quot;&#xA;#include &quot;fUML/Reference.hpp&quot;&#xA;#include &quot;fUML/Locus.hpp&quot;&#xA;#include &quot;fUML/FeatureValue.hpp&quot;&#xA;"/>

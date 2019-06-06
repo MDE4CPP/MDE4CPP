@@ -22,6 +22,7 @@
 [import UML4CPP::generator::main::components::generateType /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
+[import UML4CPP::generator::main::validation::validateModel /]
 
 [**
  * generate creation of meta model instance for an ActivtiyNode or derived element
@@ -49,6 +50,9 @@
 [if (anActivityNode.oclIsKindOf(CreateObjectAction))]
 	[anActivityNode.oclAsType(CreateObjectAction).generateCreateObjectActionCreation()/]
 [/if]
+[if (anActivityNode.oclIsKindOf(ReadSelfAction))]
+	[anActivityNode.oclAsType(ReadSelfAction).generateReadSelfAction()/]
+[/if]
 [/template]
 
 [**
@@ -58,17 +62,17 @@
 //Pin owner type: [pin.owner.eClass().name/]
 [if (pin.owner.oclIsKindOf(CallOperationAction))]
 	[if (pin.oclIsKindOf(InputPin)) and pin.owner.oclAsType(CallOperationAction).target = pin]
-		[pin.memberName()/] = factory->create[pin.eClass().name/]_in_CallOperationAction([pin.owner.oclAsType(NamedElement).memberName()/]);
+	[pin.memberName()/] = factory->create[pin.eClass().name/]_in_CallOperationAction([pin.owner.oclAsType(NamedElement).memberName()/]);
 	[elseif (pin.oclIsKindOf(InputPin))]
-		[pin.memberName()/] = factory->create[pin.eClass().name/]_in_InvocationAction([pin.owner.oclAsType(NamedElement).memberName()/]);
+	[pin.memberName()/] = factory->create[pin.eClass().name/]_in_InvocationAction([pin.owner.oclAsType(NamedElement).memberName()/]);
 		[else]
-			[pin.memberName()/] = factory->create[pin.eClass().name/]_in_CallAction([pin.owner.oclAsType(NamedElement).memberName()/]);
+	[pin.memberName()/] = factory->create[pin.eClass().name/]_in_CallAction([pin.owner.oclAsType(NamedElement).memberName()/]);
 		[/if]
 	[elseif (pin.owner.oclIsKindOf(CallBehaviorAction))]
 		[if (pin.oclIsKindOf(InputPin))]
-			[pin.memberName()/] = factory->create[pin.eClass().name/]_in_InvocationAction([pin.owner.oclAsType(NamedElement).memberName()/]);
+	[pin.memberName()/] = factory->create[pin.eClass().name/]_in_InvocationAction([pin.owner.oclAsType(NamedElement).memberName()/]);
 		[else]
-			[pin.memberName()/] = factory->create[pin.eClass().name/]_in_CallAction([pin.owner.oclAsType(NamedElement).memberName()/]);
+	[pin.memberName()/] = factory->create[pin.eClass().name/]_in_CallAction([pin.owner.oclAsType(NamedElement).memberName()/]);
 		[/if]
 [elseif (pin.owner.oclIsKindOf(Action))]
 	[pin.memberName()/] = factory->create[pin.eClass().name/]_in_Action([pin.owner.oclAsType(NamedElement).memberName()/]);
@@ -86,6 +90,16 @@
 [anCreateObjectActionNode.memberName()/]->setResult([anCreateObjectActionNode.result.memberName()/]);
 [/template]
 
+[**
+ * generate elements for ReadSelfAction
+*/]
+[template private generateReadSelfAction(aReadSelfAction : ReadSelfAction)]
+[if (aReadSelfAction.result.oclIsUndefined())]
+['UML4CPP_Generation Error: ReadSelfAction: '.concat(aReadSelfAction.name).concat(' result pin invalid.').registerError()/]
+[else]
+[aReadSelfAction.memberName()/]->setResult([aReadSelfAction.result.memberName()/]);
+[/if]
+[/template]
 
 
 [**

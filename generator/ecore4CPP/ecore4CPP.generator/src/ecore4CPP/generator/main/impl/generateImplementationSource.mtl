@@ -112,25 +112,25 @@ using namespace [aClass.generateNamespaceDefinition()/];
 //Additional constructor for the containments back reference
 [if(ref->select(eType.name = aReference.eType.name)->size()>1 )]
 	[if(ref->select(eType.name = aReference.eType.name)->asOrderedSet()->sortedBy(name)->first() = aReference)]
-			[className/]::[className/]([aReference.generateReferenceType(true)/] par_[aReference.eType.name/], const int reference_id)
-			:[className/]()
-			{
-				switch(reference_id)
-				{	
-				[for(multipleRef : EReference | ref->select(eType.name = aReference.eType.name)->sortedBy(name))]
-				case [aClass.getRootPackage().name.toUpperFirst()/]Package::[multipleRef.getStaticAttributeIDName()/]:
-					m_[multipleRef.name/] = par_[aReference.eType.name/];
-					[if (multipleRef.hasSubset() and multipleRef.upperBound = 1)]
-					[for (m : EReference | multipleRef.oclAsType(EReference).Subset()->selectByKind(EReference).oclAsType(EReference)->select(isBackReference())->asOrderedSet())]
-					m_[m.name/] = par_[aReference.eType.name/];
-					[/for][/if]
-					 return;
-				[/for]
-				default:
-				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
-				}
-			   
-			}
+[className/]::[className/]([aReference.generateReferenceType(true)/] par_[aReference.eType.name/], const int reference_id)
+:[className/]()
+{
+	switch(reference_id)
+	{	
+	[for(multipleRef : EReference | ref->select(eType.name = aReference.eType.name)->sortedBy(name))]
+	case [aClass.getRootPackage().name.toUpperFirst()/]Package::[multipleRef.getStaticAttributeIDName()/]:
+		m_[multipleRef.name/] = par_[aReference.eType.name/];
+		[if (multipleRef.hasSubset() and multipleRef.upperBound = 1)]
+		[for (m : EReference | multipleRef.oclAsType(EReference).Subset()->selectByKind(EReference).oclAsType(EReference)->select(isBackReference())->asOrderedSet())]
+		m_[m.name/] = par_[aReference.eType.name/];
+		[/for][/if]
+		 return;
+	[/for]
+	default:
+	std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
+	}
+   
+}
 	[/if]
 	[else]
 			[className/]::[className/]([aReference.generateReferenceType(true)/] par_[aReference.name/])

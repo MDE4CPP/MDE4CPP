@@ -93,17 +93,14 @@ std::shared_ptr<ecore::EObject> [className/]::copy() const
 	std::shared_ptr<[className/]> element(new [className/](*this));
 	element->setThisExecutionPtr(element);
 	return element;
-}
+} 
 
 void [className/]::doBody(std::shared_ptr<Bag<fUML::ParameterValue> > inputParameters, std::shared_ptr<Bag<fUML::ParameterValue> > outputParameters)
 {
-    DEBUG_MESSAGE(std::cout<<"Printing from [className/]" << std::endl;)
-    DEBUG_MESSAGE(std::cout<<"__________________________" << std::endl;)
-
+    DEBUG_MESSAGE(std::cout<<"Printing from [className/]:" << std::endl;)
 	[for ( par : Parameter | anCallOperationAction.operation.ownedParameter->asOrderedSet()->sortedBy(name))]
    	[par.generateCppType(false)/] [par.name/][if (par.direction = ParameterDirectionKind::out and not (par.type.isPrimitive() or par.type.oclIsKindOf(Enumeration)))](new [if (par.upper <> 1)]Bag<[/if][par.type.generateCppType(true)/][if (par.upper <> 1)]>[/if]())[/if];
 	[/for]
-
 	[for ( par : Parameter | anCallOperationAction.operation.ownedParameter->asOrderedSet()->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in))->sortedBy(name))]
     [par.generateInputParameter(anCallOperationAction.operation.ownedParameter->asOrderedSet()->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in))->sortedBy(name)->indexOf(par)-1)/]
 	[if (not par.type.supportedTypes())]
@@ -113,14 +110,12 @@ void [className/]::doBody(std::shared_ptr<Bag<fUML::ParameterValue> > inputParam
 	[par.name/] = [par.name/]Value->getValue();
 	[/if]
 	[/for]
-
 [if (anCallOperationAction.target.name.startsWith('self'))]
 	std::shared_ptr<[anCallOperationAction.activity.owner.oclAsType(Classifier).namespace.myNamespaceName()/]::[anCallOperationAction.activity.owner.oclAsType(Classifier).name.toUpperFirst()/]> target = std::dynamic_pointer_cast<[anCallOperationAction.activity.owner.oclAsType(Classifier).name.toUpperFirst()/]Object>(this->getContext())->getUmlValue();
 [else]
 	std::shared_ptr<[anCallOperationAction.target.type.namespace.myNamespaceName()/]::[anCallOperationAction.target.type.name.toUpperFirst()/]> target = std::dynamic_pointer_cast<[anCallOperationAction.target.type.name.toUpperFirst()/]Object>(this->getContext())->getUmlValue();
     assert(target != nullptr);
 [/if]
-
 [if (target.name.startsWith('self.'))]
 	std::shared_ptr<[anCallOperationAction.target.type.namespace.myNamespaceName()/]::[anCallOperationAction.target.type.name.toUpperFirst()/]> subtarget = std::dynamic_pointer_cast<[anCallOperationAction.target.type.namespace.myNamespaceName()/]::[anCallOperationAction.target.type.name.toUpperFirst()/]>(target->get[target.name.substitute('self.', '').toUpperFirst()/]());
     assert(subtarget != nullptr);
