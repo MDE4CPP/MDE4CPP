@@ -39,19 +39,19 @@
       </edge>
       <node xmi:type="uml:InitialNode" xmi:id="_2P15EGztEemZetaN1L-LFw" name="Initial1" outgoing="_or7LoGzuEemZetaN1L-LFw"/>
       <node xmi:type="uml:CreateObjectAction" xmi:id="_XAMwwGzuEemZetaN1L-LFw" name="CreateK2" incoming="_pff9oGzuEemZetaN1L-LFw" classifier="_s4B7cGtIEemYYKBTSp1HPQ">
-        <result xmi:id="_XAMwwWzuEemZetaN1L-LFw" name="result" outgoing="_1lWVIGzuEemZetaN1L-LFw _89XrkGzuEemZetaN1L-LFw" type="_s4B7cGtIEemYYKBTSp1HPQ"/>
+        <result xmi:id="_XAMwwWzuEemZetaN1L-LFw" name="k2Object" outgoing="_1lWVIGzuEemZetaN1L-LFw _89XrkGzuEemZetaN1L-LFw" type="_s4B7cGtIEemYYKBTSp1HPQ"/>
       </node>
-      <node xmi:type="uml:ReadSelfAction" xmi:id="_jAyNwGzuEemZetaN1L-LFw" name="ReadSelfAction1" incoming="_qHKakGzuEemZetaN1L-LFw">
-        <result xmi:id="_jAyNwWzuEemZetaN1L-LFw" name="result" outgoing="_EblwoGzvEemZetaN1L-LFw" type="_d5HFEGtIEemYYKBTSp1HPQ"/>
+      <node xmi:type="uml:ReadSelfAction" xmi:id="_jAyNwGzuEemZetaN1L-LFw" name="returnSelf" incoming="_qHKakGzuEemZetaN1L-LFw">
+        <result xmi:id="_jAyNwWzuEemZetaN1L-LFw" name="self" outgoing="_EblwoGzvEemZetaN1L-LFw" type="_d5HFEGtIEemYYKBTSp1HPQ"/>
       </node>
       <node xmi:type="uml:ForkNode" xmi:id="_nxYO8GzuEemZetaN1L-LFw" name="Fork1" incoming="_or7LoGzuEemZetaN1L-LFw" outgoing="_pff9oGzuEemZetaN1L-LFw _qHKakGzuEemZetaN1L-LFw"/>
-      <node xmi:type="uml:DestroyObjectAction" xmi:id="_wN2sAGzuEemZetaN1L-LFw" name="DestroyK2" incoming="_-B-jMGzuEemZetaN1L-LFw" outgoing="_VsZKEGzvEemZetaN1L-LFw">
+      <node xmi:type="uml:DestroyObjectAction" xmi:id="_wN2sAGzuEemZetaN1L-LFw" name="DestroyK2Object" incoming="_-B-jMGzuEemZetaN1L-LFw" outgoing="_VsZKEGzvEemZetaN1L-LFw">
         <target xmi:id="_wN2sAWzuEemZetaN1L-LFw" name="target" incoming="_1lWVIGzuEemZetaN1L-LFw" type="_s4B7cGtIEemYYKBTSp1HPQ"/>
       </node>
-      <node xmi:type="uml:CallOperationAction" xmi:id="_3Omx8GzuEemZetaN1L-LFw" name="temp_coa1" outgoing="_-B-jMGzuEemZetaN1L-LFw" operation="_uxuA8GtIEemYYKBTSp1HPQ">
+      <node xmi:type="uml:CallOperationAction" xmi:id="_3Omx8GzuEemZetaN1L-LFw" name="do_o2" outgoing="_-B-jMGzuEemZetaN1L-LFw" operation="_uxuA8GtIEemYYKBTSp1HPQ">
         <target xmi:id="_3OnZAGzuEemZetaN1L-LFw" name="target" incoming="_89XrkGzuEemZetaN1L-LFw" type="_s4B7cGtIEemYYKBTSp1HPQ"/>
       </node>
-      <node xmi:type="uml:CallOperationAction" xmi:id="__mC-AGzuEemZetaN1L-LFw" name="temp_coa2" outgoing="_We6MIGzvEemZetaN1L-LFw" operation="_o2pJoGtIEemYYKBTSp1HPQ">
+      <node xmi:type="uml:CallOperationAction" xmi:id="__mC-AGzuEemZetaN1L-LFw" name="do_o3" outgoing="_We6MIGzvEemZetaN1L-LFw" operation="_o2pJoGtIEemYYKBTSp1HPQ">
         <target xmi:id="__mC-AWzuEemZetaN1L-LFw" name="target" incoming="_EblwoGzvEemZetaN1L-LFw" type="_d5HFEGtIEemYYKBTSp1HPQ"/>
       </node>
       <node xmi:type="uml:JoinNode" xmi:id="_ULfYAGzvEemZetaN1L-LFw" name="Join1" incoming="_VsZKEGzvEemZetaN1L-LFw _We6MIGzvEemZetaN1L-LFw" outgoing="_bFYA8GzvEemZetaN1L-LFw">
@@ -64,14 +64,14 @@
   <packagedElement xmi:type="uml:Class" xmi:id="_s4B7cGtIEemYYKBTSp1HPQ" name="K2" visibility="public">
     <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_fpxisGtOEemwibfv1iZmFQ" name="opaqueBehO2" specification="_uxuA8GtIEemYYKBTSp1HPQ">
       <language>CPP</language>
-      <body>std::cout&lt;&lt; &quot;02&quot;&lt;&lt; std::endl;</body>
+      <body>std::cout&lt;&lt; &quot;Hello operation K2::o2()&quot;&lt;&lt; std::endl;</body>
     </ownedBehavior>
     <ownedOperation xmi:id="_uxuA8GtIEemYYKBTSp1HPQ" name="o2" method="_fpxisGtOEemwibfv1iZmFQ"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="_27yGEGtNEemwibfv1iZmFQ" name="K3" visibility="public">
     <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_u0TzMGtOEemwibfv1iZmFQ" name="opaqueBehO3" specification="_3_ovwGtNEemwibfv1iZmFQ">
       <language>CPP</language>
-      <body>std::cout&lt;&lt; &quot;03&quot;&lt;&lt; std::endl;</body>
+      <body>std::cout&lt;&lt; &quot;Hello operation K3::o3()&quot;&lt;&lt; std::endl;</body>
     </ownedBehavior>
     <ownedOperation xmi:id="_3_ovwGtNEemwibfv1iZmFQ" name="o3" method="_u0TzMGtOEemwibfv1iZmFQ"/>
   </packagedElement>
