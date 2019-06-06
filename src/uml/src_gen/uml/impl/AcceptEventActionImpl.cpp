@@ -474,9 +474,27 @@ Any AcceptEventActionImpl::eGet(int featureID, bool resolve, bool coreType) cons
 		case UmlPackage::ACCEPTEVENTACTION_ATTRIBUTE_ISUNMARSHALL:
 			return eAny(getIsUnmarshall()); //327
 		case UmlPackage::ACCEPTEVENTACTION_ATTRIBUTE_RESULT:
-			return eAny(getResult()); //328
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::OutputPin>::iterator iter = m_result->begin();
+			Bag<uml::OutputPin>::iterator end = m_result->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //328
+		}
 		case UmlPackage::ACCEPTEVENTACTION_ATTRIBUTE_TRIGGER:
-			return eAny(getTrigger()); //329
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Trigger>::iterator iter = m_trigger->begin();
+			Bag<uml::Trigger>::iterator end = m_trigger->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //329
+		}
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -502,6 +520,78 @@ bool AcceptEventActionImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			bool _isUnmarshall = newValue->get<bool>();
 			setIsUnmarshall(_isUnmarshall); //327
+			return true;
+		}
+		case UmlPackage::ACCEPTEVENTACTION_ATTRIBUTE_RESULT:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::OutputPin>> resultList(new Bag<uml::OutputPin>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				resultList->add(std::dynamic_pointer_cast<uml::OutputPin>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::OutputPin>::iterator iterResult = m_result->begin();
+			Bag<uml::OutputPin>::iterator endResult = m_result->end();
+			while (iterResult != endResult)
+			{
+				if (resultList->find(*iterResult) == -1)
+				{
+					m_result->erase(*iterResult);
+				}
+				iterResult++;
+			}
+
+			iterResult = resultList->begin();
+			endResult = resultList->end();
+			while (iterResult != endResult)
+			{
+				if (m_result->find(*iterResult) == -1)
+				{
+					m_result->add(*iterResult);
+				}
+				iterResult++;			
+			}
+			return true;
+		}
+		case UmlPackage::ACCEPTEVENTACTION_ATTRIBUTE_TRIGGER:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Trigger>> triggerList(new Bag<uml::Trigger>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				triggerList->add(std::dynamic_pointer_cast<uml::Trigger>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Trigger>::iterator iterTrigger = m_trigger->begin();
+			Bag<uml::Trigger>::iterator endTrigger = m_trigger->end();
+			while (iterTrigger != endTrigger)
+			{
+				if (triggerList->find(*iterTrigger) == -1)
+				{
+					m_trigger->erase(*iterTrigger);
+				}
+				iterTrigger++;
+			}
+
+			iterTrigger = triggerList->begin();
+			endTrigger = triggerList->end();
+			while (iterTrigger != endTrigger)
+			{
+				if (m_trigger->find(*iterTrigger) == -1)
+				{
+					m_trigger->add(*iterTrigger);
+				}
+				iterTrigger++;			
+			}
 			return true;
 		}
 	}

@@ -312,9 +312,27 @@ Any OccurrenceSpecificationImpl::eGet(int featureID, bool resolve, bool coreType
 	switch(featureID)
 	{
 		case UmlPackage::OCCURRENCESPECIFICATION_ATTRIBUTE_TOAFTER:
-			return eAny(getToAfter()); //16313
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::GeneralOrdering>::iterator iter = m_toAfter->begin();
+			Bag<uml::GeneralOrdering>::iterator end = m_toAfter->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //16313
+		}
 		case UmlPackage::OCCURRENCESPECIFICATION_ATTRIBUTE_TOBEFORE:
-			return eAny(getToBefore()); //16314
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::GeneralOrdering>::iterator iter = m_toBefore->begin();
+			Bag<uml::GeneralOrdering>::iterator end = m_toBefore->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //16314
+		}
 	}
 	return InteractionFragmentImpl::eGet(featureID, resolve, coreType);
 }
@@ -333,6 +351,78 @@ bool OccurrenceSpecificationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
+		case UmlPackage::OCCURRENCESPECIFICATION_ATTRIBUTE_TOAFTER:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::GeneralOrdering>> toAfterList(new Bag<uml::GeneralOrdering>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				toAfterList->add(std::dynamic_pointer_cast<uml::GeneralOrdering>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::GeneralOrdering>::iterator iterToAfter = m_toAfter->begin();
+			Bag<uml::GeneralOrdering>::iterator endToAfter = m_toAfter->end();
+			while (iterToAfter != endToAfter)
+			{
+				if (toAfterList->find(*iterToAfter) == -1)
+				{
+					m_toAfter->erase(*iterToAfter);
+				}
+				iterToAfter++;
+			}
+
+			iterToAfter = toAfterList->begin();
+			endToAfter = toAfterList->end();
+			while (iterToAfter != endToAfter)
+			{
+				if (m_toAfter->find(*iterToAfter) == -1)
+				{
+					m_toAfter->add(*iterToAfter);
+				}
+				iterToAfter++;			
+			}
+			return true;
+		}
+		case UmlPackage::OCCURRENCESPECIFICATION_ATTRIBUTE_TOBEFORE:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::GeneralOrdering>> toBeforeList(new Bag<uml::GeneralOrdering>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				toBeforeList->add(std::dynamic_pointer_cast<uml::GeneralOrdering>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::GeneralOrdering>::iterator iterToBefore = m_toBefore->begin();
+			Bag<uml::GeneralOrdering>::iterator endToBefore = m_toBefore->end();
+			while (iterToBefore != endToBefore)
+			{
+				if (toBeforeList->find(*iterToBefore) == -1)
+				{
+					m_toBefore->erase(*iterToBefore);
+				}
+				iterToBefore++;
+			}
+
+			iterToBefore = toBeforeList->begin();
+			endToBefore = toBeforeList->end();
+			while (iterToBefore != endToBefore)
+			{
+				if (m_toBefore->find(*iterToBefore) == -1)
+				{
+					m_toBefore->add(*iterToBefore);
+				}
+				iterToBefore++;			
+			}
+			return true;
+		}
 	}
 
 	return InteractionFragmentImpl::eSet(featureID, newValue);

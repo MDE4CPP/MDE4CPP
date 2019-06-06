@@ -17,9 +17,14 @@ FUMLPluginImpl::~FUMLPluginImpl()
 }
 
 
-std::shared_ptr<ecore::EObject> FUMLPluginImpl::create(const std::string& name)
+std::shared_ptr<ecore::EObject> FUMLPluginImpl::create(const std::string& name) const
 {
 	return FUMLFactory::eInstance()->create(name);
+}
+
+std::shared_ptr<ecore::EObject> FUMLPluginImpl::create(const std::string& name, std::shared_ptr<ecore::EObject> container, const unsigned int referenceID) const
+{
+	return FUMLFactory::eInstance()->create(name, container, referenceID);
 }
 
 std::shared_ptr<ecore::EFactory> FUMLPluginImpl::getEFactory()

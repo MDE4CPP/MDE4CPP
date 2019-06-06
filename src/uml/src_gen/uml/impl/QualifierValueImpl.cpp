@@ -218,9 +218,9 @@ Any QualifierValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::QUALIFIERVALUE_ATTRIBUTE_QUALIFIER:
-			return eAny(getQualifier()); //1913
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getQualifier())); //1913
 		case UmlPackage::QUALIFIERVALUE_ATTRIBUTE_VALUE:
-			return eAny(getValue()); //1914
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getValue())); //1914
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -242,14 +242,16 @@ bool QualifierValueImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::QUALIFIERVALUE_ATTRIBUTE_QUALIFIER:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Property> _qualifier = newValue->get<std::shared_ptr<uml::Property>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Property> _qualifier = std::dynamic_pointer_cast<uml::Property>(_temp);
 			setQualifier(_qualifier); //1913
 			return true;
 		}
 		case UmlPackage::QUALIFIERVALUE_ATTRIBUTE_VALUE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::InputPin> _value = newValue->get<std::shared_ptr<uml::InputPin>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::InputPin> _value = std::dynamic_pointer_cast<uml::InputPin>(_temp);
 			setValue(_value); //1914
 			return true;
 		}

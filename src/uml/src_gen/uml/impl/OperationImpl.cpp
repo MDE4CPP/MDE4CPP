@@ -734,13 +734,13 @@ Any OperationImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::OPERATION_ATTRIBUTE_BODYCONDITION:
-			return eAny(getBodyCondition()); //16730
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getBodyCondition())); //16730
 		case UmlPackage::OPERATION_ATTRIBUTE_CLASS:
-			return eAny(getClass()); //16731
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getClass().lock())); //16731
 		case UmlPackage::OPERATION_ATTRIBUTE_DATATYPE:
-			return eAny(getDatatype()); //16732
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getDatatype().lock())); //16732
 		case UmlPackage::OPERATION_ATTRIBUTE_INTERFACE:
-			return eAny(getInterface()); //16733
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getInterface().lock())); //16733
 		case UmlPackage::OPERATION_ATTRIBUTE_ISORDERED:
 			return eAny(getIsOrdered()); //16734
 		case UmlPackage::OPERATION_ATTRIBUTE_ISQUERY:
@@ -750,13 +750,40 @@ Any OperationImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case UmlPackage::OPERATION_ATTRIBUTE_LOWER:
 			return eAny(getLower()); //16737
 		case UmlPackage::OPERATION_ATTRIBUTE_POSTCONDITION:
-			return eAny(getPostcondition()); //16738
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Constraint>::iterator iter = m_postcondition->begin();
+			Bag<uml::Constraint>::iterator end = m_postcondition->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //16738
+		}
 		case UmlPackage::OPERATION_ATTRIBUTE_PRECONDITION:
-			return eAny(getPrecondition()); //16739
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Constraint>::iterator iter = m_precondition->begin();
+			Bag<uml::Constraint>::iterator end = m_precondition->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //16739
+		}
 		case UmlPackage::OPERATION_ATTRIBUTE_REDEFINEDOPERATION:
-			return eAny(getRedefinedOperation()); //16740
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Operation>::iterator iter = m_redefinedOperation->begin();
+			Bag<uml::Operation>::iterator end = m_redefinedOperation->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //16740
+		}
 		case UmlPackage::OPERATION_ATTRIBUTE_TYPE:
-			return eAny(getType()); //16741
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getType())); //16741
 		case UmlPackage::OPERATION_ATTRIBUTE_UPPER:
 			return eAny(getUpper()); //16742
 	}
@@ -826,28 +853,32 @@ bool OperationImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::OPERATION_ATTRIBUTE_BODYCONDITION:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Constraint> _bodyCondition = newValue->get<std::shared_ptr<uml::Constraint>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Constraint> _bodyCondition = std::dynamic_pointer_cast<uml::Constraint>(_temp);
 			setBodyCondition(_bodyCondition); //16730
 			return true;
 		}
 		case UmlPackage::OPERATION_ATTRIBUTE_CLASS:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Class> _class = newValue->get<std::shared_ptr<uml::Class>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Class> _class = std::dynamic_pointer_cast<uml::Class>(_temp);
 			setClass(_class); //16731
 			return true;
 		}
 		case UmlPackage::OPERATION_ATTRIBUTE_DATATYPE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::DataType> _datatype = newValue->get<std::shared_ptr<uml::DataType>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::DataType> _datatype = std::dynamic_pointer_cast<uml::DataType>(_temp);
 			setDatatype(_datatype); //16732
 			return true;
 		}
 		case UmlPackage::OPERATION_ATTRIBUTE_INTERFACE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Interface> _interface = newValue->get<std::shared_ptr<uml::Interface>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Interface> _interface = std::dynamic_pointer_cast<uml::Interface>(_temp);
 			setInterface(_interface); //16733
 			return true;
 		}
@@ -856,6 +887,114 @@ bool OperationImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			bool _isQuery = newValue->get<bool>();
 			setIsQuery(_isQuery); //16735
+			return true;
+		}
+		case UmlPackage::OPERATION_ATTRIBUTE_POSTCONDITION:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Constraint>> postconditionList(new Bag<uml::Constraint>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				postconditionList->add(std::dynamic_pointer_cast<uml::Constraint>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Constraint>::iterator iterPostcondition = m_postcondition->begin();
+			Bag<uml::Constraint>::iterator endPostcondition = m_postcondition->end();
+			while (iterPostcondition != endPostcondition)
+			{
+				if (postconditionList->find(*iterPostcondition) == -1)
+				{
+					m_postcondition->erase(*iterPostcondition);
+				}
+				iterPostcondition++;
+			}
+
+			iterPostcondition = postconditionList->begin();
+			endPostcondition = postconditionList->end();
+			while (iterPostcondition != endPostcondition)
+			{
+				if (m_postcondition->find(*iterPostcondition) == -1)
+				{
+					m_postcondition->add(*iterPostcondition);
+				}
+				iterPostcondition++;			
+			}
+			return true;
+		}
+		case UmlPackage::OPERATION_ATTRIBUTE_PRECONDITION:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Constraint>> preconditionList(new Bag<uml::Constraint>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				preconditionList->add(std::dynamic_pointer_cast<uml::Constraint>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Constraint>::iterator iterPrecondition = m_precondition->begin();
+			Bag<uml::Constraint>::iterator endPrecondition = m_precondition->end();
+			while (iterPrecondition != endPrecondition)
+			{
+				if (preconditionList->find(*iterPrecondition) == -1)
+				{
+					m_precondition->erase(*iterPrecondition);
+				}
+				iterPrecondition++;
+			}
+
+			iterPrecondition = preconditionList->begin();
+			endPrecondition = preconditionList->end();
+			while (iterPrecondition != endPrecondition)
+			{
+				if (m_precondition->find(*iterPrecondition) == -1)
+				{
+					m_precondition->add(*iterPrecondition);
+				}
+				iterPrecondition++;			
+			}
+			return true;
+		}
+		case UmlPackage::OPERATION_ATTRIBUTE_REDEFINEDOPERATION:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Operation>> redefinedOperationList(new Bag<uml::Operation>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				redefinedOperationList->add(std::dynamic_pointer_cast<uml::Operation>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Operation>::iterator iterRedefinedOperation = m_redefinedOperation->begin();
+			Bag<uml::Operation>::iterator endRedefinedOperation = m_redefinedOperation->end();
+			while (iterRedefinedOperation != endRedefinedOperation)
+			{
+				if (redefinedOperationList->find(*iterRedefinedOperation) == -1)
+				{
+					m_redefinedOperation->erase(*iterRedefinedOperation);
+				}
+				iterRedefinedOperation++;
+			}
+
+			iterRedefinedOperation = redefinedOperationList->begin();
+			endRedefinedOperation = redefinedOperationList->end();
+			while (iterRedefinedOperation != endRedefinedOperation)
+			{
+				if (m_redefinedOperation->find(*iterRedefinedOperation) == -1)
+				{
+					m_redefinedOperation->add(*iterRedefinedOperation);
+				}
+				iterRedefinedOperation++;			
+			}
 			return true;
 		}
 	}

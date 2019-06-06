@@ -439,11 +439,29 @@ Any ReclassifyObjectActionImpl::eGet(int featureID, bool resolve, bool coreType)
 		case UmlPackage::RECLASSIFYOBJECTACTION_ATTRIBUTE_ISREPLACEALL:
 			return eAny(getIsReplaceAll()); //20327
 		case UmlPackage::RECLASSIFYOBJECTACTION_ATTRIBUTE_NEWCLASSIFIER:
-			return eAny(getNewClassifier()); //20328
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Classifier>::iterator iter = m_newClassifier->begin();
+			Bag<uml::Classifier>::iterator end = m_newClassifier->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //20328
+		}
 		case UmlPackage::RECLASSIFYOBJECTACTION_ATTRIBUTE_OBJECT:
-			return eAny(getObject()); //20329
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getObject())); //20329
 		case UmlPackage::RECLASSIFYOBJECTACTION_ATTRIBUTE_OLDCLASSIFIER:
-			return eAny(getOldClassifier()); //20330
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Classifier>::iterator iter = m_oldClassifier->begin();
+			Bag<uml::Classifier>::iterator end = m_oldClassifier->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //20330
+		}
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -473,11 +491,84 @@ bool ReclassifyObjectActionImpl::eSet(int featureID, Any newValue)
 			setIsReplaceAll(_isReplaceAll); //20327
 			return true;
 		}
+		case UmlPackage::RECLASSIFYOBJECTACTION_ATTRIBUTE_NEWCLASSIFIER:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Classifier>> newClassifierList(new Bag<uml::Classifier>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				newClassifierList->add(std::dynamic_pointer_cast<uml::Classifier>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Classifier>::iterator iterNewClassifier = m_newClassifier->begin();
+			Bag<uml::Classifier>::iterator endNewClassifier = m_newClassifier->end();
+			while (iterNewClassifier != endNewClassifier)
+			{
+				if (newClassifierList->find(*iterNewClassifier) == -1)
+				{
+					m_newClassifier->erase(*iterNewClassifier);
+				}
+				iterNewClassifier++;
+			}
+
+			iterNewClassifier = newClassifierList->begin();
+			endNewClassifier = newClassifierList->end();
+			while (iterNewClassifier != endNewClassifier)
+			{
+				if (m_newClassifier->find(*iterNewClassifier) == -1)
+				{
+					m_newClassifier->add(*iterNewClassifier);
+				}
+				iterNewClassifier++;			
+			}
+			return true;
+		}
 		case UmlPackage::RECLASSIFYOBJECTACTION_ATTRIBUTE_OBJECT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::InputPin> _object = newValue->get<std::shared_ptr<uml::InputPin>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::InputPin> _object = std::dynamic_pointer_cast<uml::InputPin>(_temp);
 			setObject(_object); //20329
+			return true;
+		}
+		case UmlPackage::RECLASSIFYOBJECTACTION_ATTRIBUTE_OLDCLASSIFIER:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Classifier>> oldClassifierList(new Bag<uml::Classifier>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				oldClassifierList->add(std::dynamic_pointer_cast<uml::Classifier>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Classifier>::iterator iterOldClassifier = m_oldClassifier->begin();
+			Bag<uml::Classifier>::iterator endOldClassifier = m_oldClassifier->end();
+			while (iterOldClassifier != endOldClassifier)
+			{
+				if (oldClassifierList->find(*iterOldClassifier) == -1)
+				{
+					m_oldClassifier->erase(*iterOldClassifier);
+				}
+				iterOldClassifier++;
+			}
+
+			iterOldClassifier = oldClassifierList->begin();
+			endOldClassifier = oldClassifierList->end();
+			while (iterOldClassifier != endOldClassifier)
+			{
+				if (m_oldClassifier->find(*iterOldClassifier) == -1)
+				{
+					m_oldClassifier->add(*iterOldClassifier);
+				}
+				iterOldClassifier++;			
+			}
 			return true;
 		}
 	}

@@ -287,9 +287,27 @@ Any ParameterSetImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::PARAMETERSET_ATTRIBUTE_CONDITION:
-			return eAny(getCondition()); //1779
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Constraint>::iterator iter = m_condition->begin();
+			Bag<uml::Constraint>::iterator end = m_condition->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //1779
+		}
 		case UmlPackage::PARAMETERSET_ATTRIBUTE_PARAMETER:
-			return eAny(getParameter()); //17710
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Parameter>::iterator iter = m_parameter->begin();
+			Bag<uml::Parameter>::iterator end = m_parameter->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //17710
+		}
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -308,6 +326,78 @@ bool ParameterSetImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
+		case UmlPackage::PARAMETERSET_ATTRIBUTE_CONDITION:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Constraint>> conditionList(new Bag<uml::Constraint>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				conditionList->add(std::dynamic_pointer_cast<uml::Constraint>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Constraint>::iterator iterCondition = m_condition->begin();
+			Bag<uml::Constraint>::iterator endCondition = m_condition->end();
+			while (iterCondition != endCondition)
+			{
+				if (conditionList->find(*iterCondition) == -1)
+				{
+					m_condition->erase(*iterCondition);
+				}
+				iterCondition++;
+			}
+
+			iterCondition = conditionList->begin();
+			endCondition = conditionList->end();
+			while (iterCondition != endCondition)
+			{
+				if (m_condition->find(*iterCondition) == -1)
+				{
+					m_condition->add(*iterCondition);
+				}
+				iterCondition++;			
+			}
+			return true;
+		}
+		case UmlPackage::PARAMETERSET_ATTRIBUTE_PARAMETER:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Parameter>> parameterList(new Bag<uml::Parameter>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				parameterList->add(std::dynamic_pointer_cast<uml::Parameter>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Parameter>::iterator iterParameter = m_parameter->begin();
+			Bag<uml::Parameter>::iterator endParameter = m_parameter->end();
+			while (iterParameter != endParameter)
+			{
+				if (parameterList->find(*iterParameter) == -1)
+				{
+					m_parameter->erase(*iterParameter);
+				}
+				iterParameter++;
+			}
+
+			iterParameter = parameterList->begin();
+			endParameter = parameterList->end();
+			while (iterParameter != endParameter)
+			{
+				if (m_parameter->find(*iterParameter) == -1)
+				{
+					m_parameter->add(*iterParameter);
+				}
+				iterParameter++;			
+			}
+			return true;
+		}
 	}
 
 	return NamedElementImpl::eSet(featureID, newValue);

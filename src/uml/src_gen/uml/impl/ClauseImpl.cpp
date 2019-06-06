@@ -290,17 +290,62 @@ Any ClauseImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::CLAUSE_ATTRIBUTE_BODY:
-			return eAny(getBody()); //383
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::ExecutableNode>::iterator iter = m_body->begin();
+			Bag<uml::ExecutableNode>::iterator end = m_body->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //383
+		}
 		case UmlPackage::CLAUSE_ATTRIBUTE_BODYOUTPUT:
-			return eAny(getBodyOutput()); //384
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::OutputPin>::iterator iter = m_bodyOutput->begin();
+			Bag<uml::OutputPin>::iterator end = m_bodyOutput->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //384
+		}
 		case UmlPackage::CLAUSE_ATTRIBUTE_DECIDER:
-			return eAny(getDecider()); //385
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getDecider())); //385
 		case UmlPackage::CLAUSE_ATTRIBUTE_PREDECESSORCLAUSE:
-			return eAny(getPredecessorClause()); //386
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Clause>::iterator iter = m_predecessorClause->begin();
+			Bag<uml::Clause>::iterator end = m_predecessorClause->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //386
+		}
 		case UmlPackage::CLAUSE_ATTRIBUTE_SUCCESSORCLAUSE:
-			return eAny(getSuccessorClause()); //387
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Clause>::iterator iter = m_successorClause->begin();
+			Bag<uml::Clause>::iterator end = m_successorClause->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //387
+		}
 		case UmlPackage::CLAUSE_ATTRIBUTE_TEST:
-			return eAny(getTest()); //388
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::ExecutableNode>::iterator iter = m_test->begin();
+			Bag<uml::ExecutableNode>::iterator end = m_test->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //388
+		}
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -327,11 +372,192 @@ bool ClauseImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
+		case UmlPackage::CLAUSE_ATTRIBUTE_BODY:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::ExecutableNode>> bodyList(new Bag<uml::ExecutableNode>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				bodyList->add(std::dynamic_pointer_cast<uml::ExecutableNode>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::ExecutableNode>::iterator iterBody = m_body->begin();
+			Bag<uml::ExecutableNode>::iterator endBody = m_body->end();
+			while (iterBody != endBody)
+			{
+				if (bodyList->find(*iterBody) == -1)
+				{
+					m_body->erase(*iterBody);
+				}
+				iterBody++;
+			}
+
+			iterBody = bodyList->begin();
+			endBody = bodyList->end();
+			while (iterBody != endBody)
+			{
+				if (m_body->find(*iterBody) == -1)
+				{
+					m_body->add(*iterBody);
+				}
+				iterBody++;			
+			}
+			return true;
+		}
+		case UmlPackage::CLAUSE_ATTRIBUTE_BODYOUTPUT:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::OutputPin>> bodyOutputList(new Bag<uml::OutputPin>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				bodyOutputList->add(std::dynamic_pointer_cast<uml::OutputPin>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::OutputPin>::iterator iterBodyOutput = m_bodyOutput->begin();
+			Bag<uml::OutputPin>::iterator endBodyOutput = m_bodyOutput->end();
+			while (iterBodyOutput != endBodyOutput)
+			{
+				if (bodyOutputList->find(*iterBodyOutput) == -1)
+				{
+					m_bodyOutput->erase(*iterBodyOutput);
+				}
+				iterBodyOutput++;
+			}
+
+			iterBodyOutput = bodyOutputList->begin();
+			endBodyOutput = bodyOutputList->end();
+			while (iterBodyOutput != endBodyOutput)
+			{
+				if (m_bodyOutput->find(*iterBodyOutput) == -1)
+				{
+					m_bodyOutput->add(*iterBodyOutput);
+				}
+				iterBodyOutput++;			
+			}
+			return true;
+		}
 		case UmlPackage::CLAUSE_ATTRIBUTE_DECIDER:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::OutputPin> _decider = newValue->get<std::shared_ptr<uml::OutputPin>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::OutputPin> _decider = std::dynamic_pointer_cast<uml::OutputPin>(_temp);
 			setDecider(_decider); //385
+			return true;
+		}
+		case UmlPackage::CLAUSE_ATTRIBUTE_PREDECESSORCLAUSE:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Clause>> predecessorClauseList(new Bag<uml::Clause>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				predecessorClauseList->add(std::dynamic_pointer_cast<uml::Clause>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Clause>::iterator iterPredecessorClause = m_predecessorClause->begin();
+			Bag<uml::Clause>::iterator endPredecessorClause = m_predecessorClause->end();
+			while (iterPredecessorClause != endPredecessorClause)
+			{
+				if (predecessorClauseList->find(*iterPredecessorClause) == -1)
+				{
+					m_predecessorClause->erase(*iterPredecessorClause);
+				}
+				iterPredecessorClause++;
+			}
+
+			iterPredecessorClause = predecessorClauseList->begin();
+			endPredecessorClause = predecessorClauseList->end();
+			while (iterPredecessorClause != endPredecessorClause)
+			{
+				if (m_predecessorClause->find(*iterPredecessorClause) == -1)
+				{
+					m_predecessorClause->add(*iterPredecessorClause);
+				}
+				iterPredecessorClause++;			
+			}
+			return true;
+		}
+		case UmlPackage::CLAUSE_ATTRIBUTE_SUCCESSORCLAUSE:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Clause>> successorClauseList(new Bag<uml::Clause>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				successorClauseList->add(std::dynamic_pointer_cast<uml::Clause>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Clause>::iterator iterSuccessorClause = m_successorClause->begin();
+			Bag<uml::Clause>::iterator endSuccessorClause = m_successorClause->end();
+			while (iterSuccessorClause != endSuccessorClause)
+			{
+				if (successorClauseList->find(*iterSuccessorClause) == -1)
+				{
+					m_successorClause->erase(*iterSuccessorClause);
+				}
+				iterSuccessorClause++;
+			}
+
+			iterSuccessorClause = successorClauseList->begin();
+			endSuccessorClause = successorClauseList->end();
+			while (iterSuccessorClause != endSuccessorClause)
+			{
+				if (m_successorClause->find(*iterSuccessorClause) == -1)
+				{
+					m_successorClause->add(*iterSuccessorClause);
+				}
+				iterSuccessorClause++;			
+			}
+			return true;
+		}
+		case UmlPackage::CLAUSE_ATTRIBUTE_TEST:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::ExecutableNode>> testList(new Bag<uml::ExecutableNode>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				testList->add(std::dynamic_pointer_cast<uml::ExecutableNode>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::ExecutableNode>::iterator iterTest = m_test->begin();
+			Bag<uml::ExecutableNode>::iterator endTest = m_test->end();
+			while (iterTest != endTest)
+			{
+				if (testList->find(*iterTest) == -1)
+				{
+					m_test->erase(*iterTest);
+				}
+				iterTest++;
+			}
+
+			iterTest = testList->begin();
+			endTest = testList->end();
+			while (iterTest != endTest)
+			{
+				if (m_test->find(*iterTest) == -1)
+				{
+					m_test->add(*iterTest);
+				}
+				iterTest++;			
+			}
 			return true;
 		}
 	}

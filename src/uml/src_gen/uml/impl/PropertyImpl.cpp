@@ -855,19 +855,19 @@ Any PropertyImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case UmlPackage::PROPERTY_ATTRIBUTE_AGGREGATION:
 			return eAny(getAggregation()); //18530
 		case UmlPackage::PROPERTY_ATTRIBUTE_ASSOCIATION:
-			return eAny(getAssociation()); //18543
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getAssociation())); //18543
 		case UmlPackage::PROPERTY_ATTRIBUTE_ASSOCIATIONEND:
-			return eAny(getAssociationEnd()); //18531
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getAssociationEnd().lock())); //18531
 		case UmlPackage::PROPERTY_ATTRIBUTE_CLASS:
-			return eAny(getClass()); //18533
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getClass().lock())); //18533
 		case UmlPackage::PROPERTY_ATTRIBUTE_DATATYPE:
-			return eAny(getDatatype()); //18527
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getDatatype().lock())); //18527
 		case UmlPackage::PROPERTY_ATTRIBUTE_DEFAULT:
 			return eAny(getDefault()); //18529
 		case UmlPackage::PROPERTY_ATTRIBUTE_DEFAULTVALUE:
-			return eAny(getDefaultValue()); //18534
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getDefaultValue())); //18534
 		case UmlPackage::PROPERTY_ATTRIBUTE_INTERFACE:
-			return eAny(getInterface()); //18528
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getInterface().lock())); //18528
 		case UmlPackage::PROPERTY_ATTRIBUTE_ISCOMPOSITE:
 			return eAny(getIsComposite()); //18535
 		case UmlPackage::PROPERTY_ATTRIBUTE_ISDERIVED:
@@ -877,15 +877,42 @@ Any PropertyImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case UmlPackage::PROPERTY_ATTRIBUTE_ISID:
 			return eAny(getIsID()); //18538
 		case UmlPackage::PROPERTY_ATTRIBUTE_OPPOSITE:
-			return eAny(getOpposite()); //18539
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getOpposite())); //18539
 		case UmlPackage::PROPERTY_ATTRIBUTE_OWNINGASSOCIATION:
-			return eAny(getOwningAssociation()); //18540
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getOwningAssociation().lock())); //18540
 		case UmlPackage::PROPERTY_ATTRIBUTE_QUALIFIER:
-			return eAny(getQualifier()); //18532
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Property>::iterator iter = m_qualifier->begin();
+			Bag<uml::Property>::iterator end = m_qualifier->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //18532
+		}
 		case UmlPackage::PROPERTY_ATTRIBUTE_REDEFINEDPROPERTY:
-			return eAny(getRedefinedProperty()); //18541
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Property>::iterator iter = m_redefinedProperty->begin();
+			Bag<uml::Property>::iterator end = m_redefinedProperty->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //18541
+		}
 		case UmlPackage::PROPERTY_ATTRIBUTE_SUBSETTEDPROPERTY:
-			return eAny(getSubsettedProperty()); //18542
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Property>::iterator iter = m_subsettedProperty->begin();
+			Bag<uml::Property>::iterator end = m_subsettedProperty->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //18542
+		}
 	}
 	Any result;
 	result = ConnectableElementImpl::eGet(featureID, resolve, coreType);
@@ -968,28 +995,32 @@ bool PropertyImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::PROPERTY_ATTRIBUTE_ASSOCIATION:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Association> _association = newValue->get<std::shared_ptr<uml::Association>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Association> _association = std::dynamic_pointer_cast<uml::Association>(_temp);
 			setAssociation(_association); //18543
 			return true;
 		}
 		case UmlPackage::PROPERTY_ATTRIBUTE_ASSOCIATIONEND:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Property> _associationEnd = newValue->get<std::shared_ptr<uml::Property>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Property> _associationEnd = std::dynamic_pointer_cast<uml::Property>(_temp);
 			setAssociationEnd(_associationEnd); //18531
 			return true;
 		}
 		case UmlPackage::PROPERTY_ATTRIBUTE_CLASS:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Class> _class = newValue->get<std::shared_ptr<uml::Class>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Class> _class = std::dynamic_pointer_cast<uml::Class>(_temp);
 			setClass(_class); //18533
 			return true;
 		}
 		case UmlPackage::PROPERTY_ATTRIBUTE_DATATYPE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::DataType> _datatype = newValue->get<std::shared_ptr<uml::DataType>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::DataType> _datatype = std::dynamic_pointer_cast<uml::DataType>(_temp);
 			setDatatype(_datatype); //18527
 			return true;
 		}
@@ -1003,14 +1034,16 @@ bool PropertyImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::PROPERTY_ATTRIBUTE_DEFAULTVALUE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::ValueSpecification> _defaultValue = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::ValueSpecification> _defaultValue = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
 			setDefaultValue(_defaultValue); //18534
 			return true;
 		}
 		case UmlPackage::PROPERTY_ATTRIBUTE_INTERFACE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Interface> _interface = newValue->get<std::shared_ptr<uml::Interface>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Interface> _interface = std::dynamic_pointer_cast<uml::Interface>(_temp);
 			setInterface(_interface); //18528
 			return true;
 		}
@@ -1045,15 +1078,125 @@ bool PropertyImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::PROPERTY_ATTRIBUTE_OPPOSITE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Property> _opposite = newValue->get<std::shared_ptr<uml::Property>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Property> _opposite = std::dynamic_pointer_cast<uml::Property>(_temp);
 			setOpposite(_opposite); //18539
 			return true;
 		}
 		case UmlPackage::PROPERTY_ATTRIBUTE_OWNINGASSOCIATION:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Association> _owningAssociation = newValue->get<std::shared_ptr<uml::Association>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Association> _owningAssociation = std::dynamic_pointer_cast<uml::Association>(_temp);
 			setOwningAssociation(_owningAssociation); //18540
+			return true;
+		}
+		case UmlPackage::PROPERTY_ATTRIBUTE_QUALIFIER:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Property>> qualifierList(new Bag<uml::Property>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				qualifierList->add(std::dynamic_pointer_cast<uml::Property>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Property>::iterator iterQualifier = m_qualifier->begin();
+			Bag<uml::Property>::iterator endQualifier = m_qualifier->end();
+			while (iterQualifier != endQualifier)
+			{
+				if (qualifierList->find(*iterQualifier) == -1)
+				{
+					m_qualifier->erase(*iterQualifier);
+				}
+				iterQualifier++;
+			}
+
+			iterQualifier = qualifierList->begin();
+			endQualifier = qualifierList->end();
+			while (iterQualifier != endQualifier)
+			{
+				if (m_qualifier->find(*iterQualifier) == -1)
+				{
+					m_qualifier->add(*iterQualifier);
+				}
+				iterQualifier++;			
+			}
+			return true;
+		}
+		case UmlPackage::PROPERTY_ATTRIBUTE_REDEFINEDPROPERTY:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Property>> redefinedPropertyList(new Bag<uml::Property>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				redefinedPropertyList->add(std::dynamic_pointer_cast<uml::Property>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Property>::iterator iterRedefinedProperty = m_redefinedProperty->begin();
+			Bag<uml::Property>::iterator endRedefinedProperty = m_redefinedProperty->end();
+			while (iterRedefinedProperty != endRedefinedProperty)
+			{
+				if (redefinedPropertyList->find(*iterRedefinedProperty) == -1)
+				{
+					m_redefinedProperty->erase(*iterRedefinedProperty);
+				}
+				iterRedefinedProperty++;
+			}
+
+			iterRedefinedProperty = redefinedPropertyList->begin();
+			endRedefinedProperty = redefinedPropertyList->end();
+			while (iterRedefinedProperty != endRedefinedProperty)
+			{
+				if (m_redefinedProperty->find(*iterRedefinedProperty) == -1)
+				{
+					m_redefinedProperty->add(*iterRedefinedProperty);
+				}
+				iterRedefinedProperty++;			
+			}
+			return true;
+		}
+		case UmlPackage::PROPERTY_ATTRIBUTE_SUBSETTEDPROPERTY:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Property>> subsettedPropertyList(new Bag<uml::Property>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				subsettedPropertyList->add(std::dynamic_pointer_cast<uml::Property>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Property>::iterator iterSubsettedProperty = m_subsettedProperty->begin();
+			Bag<uml::Property>::iterator endSubsettedProperty = m_subsettedProperty->end();
+			while (iterSubsettedProperty != endSubsettedProperty)
+			{
+				if (subsettedPropertyList->find(*iterSubsettedProperty) == -1)
+				{
+					m_subsettedProperty->erase(*iterSubsettedProperty);
+				}
+				iterSubsettedProperty++;
+			}
+
+			iterSubsettedProperty = subsettedPropertyList->begin();
+			endSubsettedProperty = subsettedPropertyList->end();
+			while (iterSubsettedProperty != endSubsettedProperty)
+			{
+				if (m_subsettedProperty->find(*iterSubsettedProperty) == -1)
+				{
+					m_subsettedProperty->add(*iterSubsettedProperty);
+				}
+				iterSubsettedProperty++;			
+			}
 			return true;
 		}
 	}

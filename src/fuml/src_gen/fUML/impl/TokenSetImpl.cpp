@@ -150,7 +150,16 @@ Any TokenSetImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case FUMLPackage::TOKENSET_ATTRIBUTE_TOKENS:
-			return eAny(getTokens()); //1090
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<fUML::Token>::iterator iter = m_tokens->begin();
+			Bag<fUML::Token>::iterator end = m_tokens->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //1090
+		}
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
@@ -167,6 +176,42 @@ bool TokenSetImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
+		case FUMLPackage::TOKENSET_ATTRIBUTE_TOKENS:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<fUML::Token>> tokensList(new Bag<fUML::Token>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				tokensList->add(std::dynamic_pointer_cast<fUML::Token>(*iter));
+				iter++;
+			}
+			
+			Bag<fUML::Token>::iterator iterTokens = m_tokens->begin();
+			Bag<fUML::Token>::iterator endTokens = m_tokens->end();
+			while (iterTokens != endTokens)
+			{
+				if (tokensList->find(*iterTokens) == -1)
+				{
+					m_tokens->erase(*iterTokens);
+				}
+				iterTokens++;
+			}
+
+			iterTokens = tokensList->begin();
+			endTokens = tokensList->end();
+			while (iterTokens != endTokens)
+			{
+				if (m_tokens->find(*iterTokens) == -1)
+				{
+					m_tokens->add(*iterTokens);
+				}
+				iterTokens++;			
+			}
+			return true;
+		}
 	}
 
 	return ecore::EObjectImpl::eSet(featureID, newValue);

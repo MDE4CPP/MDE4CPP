@@ -331,11 +331,20 @@ Any LocusImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case FUMLPackage::LOCUS_ATTRIBUTE_EXECUTOR:
-			return eAny(getExecutor()); //730
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getExecutor())); //730
 		case FUMLPackage::LOCUS_ATTRIBUTE_EXTENSIONALVALUES:
-			return eAny(getExtensionalValues()); //732
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<fUML::ExtensionalValue>::iterator iter = m_extensionalValues->begin();
+			Bag<fUML::ExtensionalValue>::iterator end = m_extensionalValues->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //732
+		}
 		case FUMLPackage::LOCUS_ATTRIBUTE_FACTORY:
-			return eAny(getFactory()); //731
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getFactory())); //731
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
@@ -359,14 +368,52 @@ bool LocusImpl::eSet(int featureID, Any newValue)
 		case FUMLPackage::LOCUS_ATTRIBUTE_EXECUTOR:
 		{
 			// BOOST CAST
-			std::shared_ptr<fUML::Executor> _executor = newValue->get<std::shared_ptr<fUML::Executor>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<fUML::Executor> _executor = std::dynamic_pointer_cast<fUML::Executor>(_temp);
 			setExecutor(_executor); //730
+			return true;
+		}
+		case FUMLPackage::LOCUS_ATTRIBUTE_EXTENSIONALVALUES:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<fUML::ExtensionalValue>> extensionalValuesList(new Bag<fUML::ExtensionalValue>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				extensionalValuesList->add(std::dynamic_pointer_cast<fUML::ExtensionalValue>(*iter));
+				iter++;
+			}
+			
+			Bag<fUML::ExtensionalValue>::iterator iterExtensionalValues = m_extensionalValues->begin();
+			Bag<fUML::ExtensionalValue>::iterator endExtensionalValues = m_extensionalValues->end();
+			while (iterExtensionalValues != endExtensionalValues)
+			{
+				if (extensionalValuesList->find(*iterExtensionalValues) == -1)
+				{
+					m_extensionalValues->erase(*iterExtensionalValues);
+				}
+				iterExtensionalValues++;
+			}
+
+			iterExtensionalValues = extensionalValuesList->begin();
+			endExtensionalValues = extensionalValuesList->end();
+			while (iterExtensionalValues != endExtensionalValues)
+			{
+				if (m_extensionalValues->find(*iterExtensionalValues) == -1)
+				{
+					m_extensionalValues->add(*iterExtensionalValues);
+				}
+				iterExtensionalValues++;			
+			}
 			return true;
 		}
 		case FUMLPackage::LOCUS_ATTRIBUTE_FACTORY:
 		{
 			// BOOST CAST
-			std::shared_ptr<fUML::ExecutionFactory> _factory = newValue->get<std::shared_ptr<fUML::ExecutionFactory>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<fUML::ExecutionFactory> _factory = std::dynamic_pointer_cast<fUML::ExecutionFactory>(_temp);
 			setFactory(_factory); //731
 			return true;
 		}

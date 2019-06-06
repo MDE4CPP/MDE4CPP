@@ -516,7 +516,7 @@ Any DecisionNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType)
 	switch(featureID)
 	{
 		case FUMLPackage::DECISIONNODEACTIVATION_ATTRIBUTE_DECISIONINPUTEXECUTION:
-			return eAny(getDecisionInputExecution()); //316
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getDecisionInputExecution())); //316
 	}
 	return ControlNodeActivationImpl::eGet(featureID, resolve, coreType);
 }
@@ -536,7 +536,8 @@ bool DecisionNodeActivationImpl::eSet(int featureID, Any newValue)
 		case FUMLPackage::DECISIONNODEACTIVATION_ATTRIBUTE_DECISIONINPUTEXECUTION:
 		{
 			// BOOST CAST
-			std::shared_ptr<fUML::Execution> _decisionInputExecution = newValue->get<std::shared_ptr<fUML::Execution>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<fUML::Execution> _decisionInputExecution = std::dynamic_pointer_cast<fUML::Execution>(_temp);
 			setDecisionInputExecution(_decisionInputExecution); //316
 			return true;
 		}

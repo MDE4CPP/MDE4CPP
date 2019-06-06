@@ -503,11 +503,29 @@ Any ElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::ELEMENT_ATTRIBUTE_OWNEDCOMMENT:
-			return eAny(getOwnedComment()); //810
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Comment>::iterator iter = m_ownedComment->begin();
+			Bag<uml::Comment>::iterator end = m_ownedComment->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //810
+		}
 		case UmlPackage::ELEMENT_ATTRIBUTE_OWNEDELEMENT:
-			return eAny(getOwnedElement()); //811
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Element>::iterator iter = m_ownedElement->begin();
+			Bag<uml::Element>::iterator end = m_ownedElement->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //811
+		}
 		case UmlPackage::ELEMENT_ATTRIBUTE_OWNER:
-			return eAny(getOwner()); //812
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getOwner().lock())); //812
 	}
 	return ObjectImpl::eGet(featureID, resolve, coreType);
 }
@@ -528,6 +546,42 @@ bool ElementImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
+		case UmlPackage::ELEMENT_ATTRIBUTE_OWNEDCOMMENT:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Comment>> ownedCommentList(new Bag<uml::Comment>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				ownedCommentList->add(std::dynamic_pointer_cast<uml::Comment>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Comment>::iterator iterOwnedComment = m_ownedComment->begin();
+			Bag<uml::Comment>::iterator endOwnedComment = m_ownedComment->end();
+			while (iterOwnedComment != endOwnedComment)
+			{
+				if (ownedCommentList->find(*iterOwnedComment) == -1)
+				{
+					m_ownedComment->erase(*iterOwnedComment);
+				}
+				iterOwnedComment++;
+			}
+
+			iterOwnedComment = ownedCommentList->begin();
+			endOwnedComment = ownedCommentList->end();
+			while (iterOwnedComment != endOwnedComment)
+			{
+				if (m_ownedComment->find(*iterOwnedComment) == -1)
+				{
+					m_ownedComment->add(*iterOwnedComment);
+				}
+				iterOwnedComment++;			
+			}
+			return true;
+		}
 	}
 
 	return ObjectImpl::eSet(featureID, newValue);

@@ -340,9 +340,27 @@ Any DependencyImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::DEPENDENCY_ATTRIBUTE_CLIENT:
-			return eAny(getClient()); //6715
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::NamedElement>::iterator iter = m_client->begin();
+			Bag<uml::NamedElement>::iterator end = m_client->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //6715
+		}
 		case UmlPackage::DEPENDENCY_ATTRIBUTE_SUPPLIER:
-			return eAny(getSupplier()); //6716
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::NamedElement>::iterator iter = m_supplier->begin();
+			Bag<uml::NamedElement>::iterator end = m_supplier->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //6716
+		}
 	}
 	Any result;
 	result = DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
@@ -375,6 +393,78 @@ bool DependencyImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
+		case UmlPackage::DEPENDENCY_ATTRIBUTE_CLIENT:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::NamedElement>> clientList(new Bag<uml::NamedElement>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				clientList->add(std::dynamic_pointer_cast<uml::NamedElement>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::NamedElement>::iterator iterClient = m_client->begin();
+			Bag<uml::NamedElement>::iterator endClient = m_client->end();
+			while (iterClient != endClient)
+			{
+				if (clientList->find(*iterClient) == -1)
+				{
+					m_client->erase(*iterClient);
+				}
+				iterClient++;
+			}
+
+			iterClient = clientList->begin();
+			endClient = clientList->end();
+			while (iterClient != endClient)
+			{
+				if (m_client->find(*iterClient) == -1)
+				{
+					m_client->add(*iterClient);
+				}
+				iterClient++;			
+			}
+			return true;
+		}
+		case UmlPackage::DEPENDENCY_ATTRIBUTE_SUPPLIER:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::NamedElement>> supplierList(new Bag<uml::NamedElement>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				supplierList->add(std::dynamic_pointer_cast<uml::NamedElement>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::NamedElement>::iterator iterSupplier = m_supplier->begin();
+			Bag<uml::NamedElement>::iterator endSupplier = m_supplier->end();
+			while (iterSupplier != endSupplier)
+			{
+				if (supplierList->find(*iterSupplier) == -1)
+				{
+					m_supplier->erase(*iterSupplier);
+				}
+				iterSupplier++;
+			}
+
+			iterSupplier = supplierList->begin();
+			endSupplier = supplierList->end();
+			while (iterSupplier != endSupplier)
+			{
+				if (m_supplier->find(*iterSupplier) == -1)
+				{
+					m_supplier->add(*iterSupplier);
+				}
+				iterSupplier++;			
+			}
+			return true;
+		}
 	}
 
 	bool result = false;

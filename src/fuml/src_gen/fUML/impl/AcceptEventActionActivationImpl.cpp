@@ -247,7 +247,7 @@ Any AcceptEventActionActivationImpl::eGet(int featureID, bool resolve, bool core
 	switch(featureID)
 	{
 		case FUMLPackage::ACCEPTEVENTACTIONACTIVATION_ATTRIBUTE_EVENTACCEPTER:
-			return eAny(getEventAccepter()); //110
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEventAccepter())); //110
 		case FUMLPackage::ACCEPTEVENTACTIONACTIVATION_ATTRIBUTE_WAITING:
 			return eAny(isWaiting()); //111
 	}
@@ -271,7 +271,8 @@ bool AcceptEventActionActivationImpl::eSet(int featureID, Any newValue)
 		case FUMLPackage::ACCEPTEVENTACTIONACTIVATION_ATTRIBUTE_EVENTACCEPTER:
 		{
 			// BOOST CAST
-			std::shared_ptr<fUML::AcceptEventActionEventAccepter> _eventAccepter = newValue->get<std::shared_ptr<fUML::AcceptEventActionEventAccepter>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<fUML::AcceptEventActionEventAccepter> _eventAccepter = std::dynamic_pointer_cast<fUML::AcceptEventActionEventAccepter>(_temp);
 			setEventAccepter(_eventAccepter); //110
 			return true;
 		}

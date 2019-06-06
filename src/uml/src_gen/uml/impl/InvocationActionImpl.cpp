@@ -409,9 +409,18 @@ Any InvocationActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::INVOCATIONACTION_ATTRIBUTE_ARGUMENT:
-			return eAny(getArgument()); //13027
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::InputPin>::iterator iter = m_argument->begin();
+			Bag<uml::InputPin>::iterator end = m_argument->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //13027
+		}
 		case UmlPackage::INVOCATIONACTION_ATTRIBUTE_ONPORT:
-			return eAny(getOnPort()); //13028
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getOnPort())); //13028
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -430,10 +439,47 @@ bool InvocationActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
+		case UmlPackage::INVOCATIONACTION_ATTRIBUTE_ARGUMENT:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::InputPin>> argumentList(new Bag<uml::InputPin>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				argumentList->add(std::dynamic_pointer_cast<uml::InputPin>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::InputPin>::iterator iterArgument = m_argument->begin();
+			Bag<uml::InputPin>::iterator endArgument = m_argument->end();
+			while (iterArgument != endArgument)
+			{
+				if (argumentList->find(*iterArgument) == -1)
+				{
+					m_argument->erase(*iterArgument);
+				}
+				iterArgument++;
+			}
+
+			iterArgument = argumentList->begin();
+			endArgument = argumentList->end();
+			while (iterArgument != endArgument)
+			{
+				if (m_argument->find(*iterArgument) == -1)
+				{
+					m_argument->add(*iterArgument);
+				}
+				iterArgument++;			
+			}
+			return true;
+		}
 		case UmlPackage::INVOCATIONACTION_ATTRIBUTE_ONPORT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Port> _onPort = newValue->get<std::shared_ptr<uml::Port>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Port> _onPort = std::dynamic_pointer_cast<uml::Port>(_temp);
 			setOnPort(_onPort); //13028
 			return true;
 		}

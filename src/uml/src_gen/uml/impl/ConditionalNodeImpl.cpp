@@ -141,24 +141,24 @@ ConditionalNodeImpl::~ConditionalNodeImpl()
 
 
 //Additional constructor for the containments back reference
-			ConditionalNodeImpl::ConditionalNodeImpl(std::weak_ptr<uml::Activity > par_Activity, const int reference_id)
-			:ConditionalNodeImpl()
-			{
-				switch(reference_id)
-				{	
-				case UmlPackage::ACTIVITYNODE_ATTRIBUTE_ACTIVITY:
-					m_activity = par_Activity;
-					m_owner = par_Activity;
-					 return;
-				case UmlPackage::ACTIVITYGROUP_ATTRIBUTE_INACTIVITY:
-					m_inActivity = par_Activity;
-					m_owner = par_Activity;
-					 return;
-				default:
-				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
-				}
-			   
-			}
+ConditionalNodeImpl::ConditionalNodeImpl(std::weak_ptr<uml::Activity > par_Activity, const int reference_id)
+:ConditionalNodeImpl()
+{
+	switch(reference_id)
+	{	
+	case UmlPackage::ACTIVITYNODE_ATTRIBUTE_ACTIVITY:
+		m_activity = par_Activity;
+		m_owner = par_Activity;
+		 return;
+	case UmlPackage::ACTIVITYGROUP_ATTRIBUTE_INACTIVITY:
+		m_inActivity = par_Activity;
+		m_owner = par_Activity;
+		 return;
+	default:
+	std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
+	}
+   
+}
 
 
 
@@ -630,13 +630,31 @@ Any ConditionalNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::CONDITIONALNODE_ATTRIBUTE_CLAUSE:
-			return eAny(getClause()); //4944
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Clause>::iterator iter = m_clause->begin();
+			Bag<uml::Clause>::iterator end = m_clause->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //4944
+		}
 		case UmlPackage::CONDITIONALNODE_ATTRIBUTE_ISASSURED:
 			return eAny(getIsAssured()); //4945
 		case UmlPackage::CONDITIONALNODE_ATTRIBUTE_ISDETERMINATE:
 			return eAny(getIsDeterminate()); //4946
 		case UmlPackage::CONDITIONALNODE_ATTRIBUTE_RESULT:
-			return eAny(getResult()); //4947
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::OutputPin>::iterator iter = m_result->begin();
+			Bag<uml::OutputPin>::iterator end = m_result->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //4947
+		}
 	}
 	return StructuredActivityNodeImpl::eGet(featureID, resolve, coreType);
 }
@@ -659,6 +677,42 @@ bool ConditionalNodeImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
+		case UmlPackage::CONDITIONALNODE_ATTRIBUTE_CLAUSE:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Clause>> clauseList(new Bag<uml::Clause>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				clauseList->add(std::dynamic_pointer_cast<uml::Clause>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Clause>::iterator iterClause = m_clause->begin();
+			Bag<uml::Clause>::iterator endClause = m_clause->end();
+			while (iterClause != endClause)
+			{
+				if (clauseList->find(*iterClause) == -1)
+				{
+					m_clause->erase(*iterClause);
+				}
+				iterClause++;
+			}
+
+			iterClause = clauseList->begin();
+			endClause = clauseList->end();
+			while (iterClause != endClause)
+			{
+				if (m_clause->find(*iterClause) == -1)
+				{
+					m_clause->add(*iterClause);
+				}
+				iterClause++;			
+			}
+			return true;
+		}
 		case UmlPackage::CONDITIONALNODE_ATTRIBUTE_ISASSURED:
 		{
 			// BOOST CAST
@@ -671,6 +725,42 @@ bool ConditionalNodeImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			bool _isDeterminate = newValue->get<bool>();
 			setIsDeterminate(_isDeterminate); //4946
+			return true;
+		}
+		case UmlPackage::CONDITIONALNODE_ATTRIBUTE_RESULT:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::OutputPin>> resultList(new Bag<uml::OutputPin>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				resultList->add(std::dynamic_pointer_cast<uml::OutputPin>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::OutputPin>::iterator iterResult = m_result->begin();
+			Bag<uml::OutputPin>::iterator endResult = m_result->end();
+			while (iterResult != endResult)
+			{
+				if (resultList->find(*iterResult) == -1)
+				{
+					m_result->erase(*iterResult);
+				}
+				iterResult++;
+			}
+
+			iterResult = resultList->begin();
+			endResult = resultList->end();
+			while (iterResult != endResult)
+			{
+				if (m_result->find(*iterResult) == -1)
+				{
+					m_result->add(*iterResult);
+				}
+				iterResult++;			
+			}
 			return true;
 		}
 	}

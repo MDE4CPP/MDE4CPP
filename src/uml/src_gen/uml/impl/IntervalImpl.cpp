@@ -315,9 +315,9 @@ Any IntervalImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::INTERVAL_ATTRIBUTE_MAX:
-			return eAny(getMax()); //12814
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getMax())); //12814
 		case UmlPackage::INTERVAL_ATTRIBUTE_MIN:
-			return eAny(getMin()); //12815
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getMin())); //12815
 	}
 	return ValueSpecificationImpl::eGet(featureID, resolve, coreType);
 }
@@ -339,14 +339,16 @@ bool IntervalImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::INTERVAL_ATTRIBUTE_MAX:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::ValueSpecification> _max = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::ValueSpecification> _max = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
 			setMax(_max); //12814
 			return true;
 		}
 		case UmlPackage::INTERVAL_ATTRIBUTE_MIN:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::ValueSpecification> _min = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::ValueSpecification> _min = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
 			setMin(_min); //12815
 			return true;
 		}

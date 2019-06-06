@@ -234,7 +234,7 @@ Any EEnumLiteralImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case EcorePackage::EENUMLITERAL_ATTRIBUTE_EENUM:
-			return eAny(getEEnum()); //218
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEEnum().lock())); //218
 		case EcorePackage::EENUMLITERAL_ATTRIBUTE_INSTANCE:
 			return eAny(getInstance()); //216
 		case EcorePackage::EENUMLITERAL_ATTRIBUTE_LITERAL:

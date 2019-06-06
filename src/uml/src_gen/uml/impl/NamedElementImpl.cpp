@@ -398,13 +398,22 @@ Any NamedElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::NAMEDELEMENT_ATTRIBUTE_CLIENTDEPENDENCY:
-			return eAny(getClientDependency()); //1553
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Dependency>::iterator iter = m_clientDependency->begin();
+			Bag<uml::Dependency>::iterator end = m_clientDependency->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //1553
+		}
 		case UmlPackage::NAMEDELEMENT_ATTRIBUTE_NAME:
 			return eAny(getName()); //1554
 		case UmlPackage::NAMEDELEMENT_ATTRIBUTE_NAMEEXPRESSION:
-			return eAny(getNameExpression()); //1555
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getNameExpression())); //1555
 		case UmlPackage::NAMEDELEMENT_ATTRIBUTE_NAMESPACE:
-			return eAny(getNamespace()); //1556
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getNamespace().lock())); //1556
 		case UmlPackage::NAMEDELEMENT_ATTRIBUTE_QUALIFIEDNAME:
 			return eAny(getQualifiedName()); //1557
 		case UmlPackage::NAMEDELEMENT_ATTRIBUTE_VISIBILITY:
@@ -445,7 +454,8 @@ bool NamedElementImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::NAMEDELEMENT_ATTRIBUTE_NAMEEXPRESSION:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::StringExpression> _nameExpression = newValue->get<std::shared_ptr<uml::StringExpression>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::StringExpression> _nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(_temp);
 			setNameExpression(_nameExpression); //1555
 			return true;
 		}

@@ -248,11 +248,20 @@ Any FeatureValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case FUMLPackage::FEATUREVALUE_ATTRIBUTE_FEATURE:
-			return eAny(getFeature()); //522
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getFeature())); //522
 		case FUMLPackage::FEATUREVALUE_ATTRIBUTE_POSITION:
 			return eAny(getPosition()); //521
 		case FUMLPackage::FEATUREVALUE_ATTRIBUTE_VALUES:
-			return eAny(getValues()); //520
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<fUML::Value>::iterator iter = m_values->begin();
+			Bag<fUML::Value>::iterator end = m_values->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //520
+		}
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
@@ -276,7 +285,8 @@ bool FeatureValueImpl::eSet(int featureID, Any newValue)
 		case FUMLPackage::FEATUREVALUE_ATTRIBUTE_FEATURE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::StructuralFeature> _feature = newValue->get<std::shared_ptr<uml::StructuralFeature>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::StructuralFeature> _feature = std::dynamic_pointer_cast<uml::StructuralFeature>(_temp);
 			setFeature(_feature); //522
 			return true;
 		}
@@ -285,6 +295,42 @@ bool FeatureValueImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			int _position = newValue->get<int>();
 			setPosition(_position); //521
+			return true;
+		}
+		case FUMLPackage::FEATUREVALUE_ATTRIBUTE_VALUES:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<fUML::Value>> valuesList(new Bag<fUML::Value>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				valuesList->add(std::dynamic_pointer_cast<fUML::Value>(*iter));
+				iter++;
+			}
+			
+			Bag<fUML::Value>::iterator iterValues = m_values->begin();
+			Bag<fUML::Value>::iterator endValues = m_values->end();
+			while (iterValues != endValues)
+			{
+				if (valuesList->find(*iterValues) == -1)
+				{
+					m_values->erase(*iterValues);
+				}
+				iterValues++;
+			}
+
+			iterValues = valuesList->begin();
+			endValues = valuesList->end();
+			while (iterValues != endValues)
+			{
+				if (m_values->find(*iterValues) == -1)
+				{
+					m_values->add(*iterValues);
+				}
+				iterValues++;			
+			}
 			return true;
 		}
 	}

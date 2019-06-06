@@ -453,19 +453,82 @@ Any InformationFlowImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::INFORMATIONFLOW_ATTRIBUTE_CONVEYED:
-			return eAny(getConveyed()); //11315
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Classifier>::iterator iter = m_conveyed->begin();
+			Bag<uml::Classifier>::iterator end = m_conveyed->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //11315
+		}
 		case UmlPackage::INFORMATIONFLOW_ATTRIBUTE_INFORMATIONSOURCE:
-			return eAny(getInformationSource()); //11316
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::NamedElement>::iterator iter = m_informationSource->begin();
+			Bag<uml::NamedElement>::iterator end = m_informationSource->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //11316
+		}
 		case UmlPackage::INFORMATIONFLOW_ATTRIBUTE_INFORMATIONTARGET:
-			return eAny(getInformationTarget()); //11317
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::NamedElement>::iterator iter = m_informationTarget->begin();
+			Bag<uml::NamedElement>::iterator end = m_informationTarget->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //11317
+		}
 		case UmlPackage::INFORMATIONFLOW_ATTRIBUTE_REALIZATION:
-			return eAny(getRealization()); //11318
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Relationship>::iterator iter = m_realization->begin();
+			Bag<uml::Relationship>::iterator end = m_realization->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //11318
+		}
 		case UmlPackage::INFORMATIONFLOW_ATTRIBUTE_REALIZINGACTIVITYEDGE:
-			return eAny(getRealizingActivityEdge()); //11319
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::ActivityEdge>::iterator iter = m_realizingActivityEdge->begin();
+			Bag<uml::ActivityEdge>::iterator end = m_realizingActivityEdge->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //11319
+		}
 		case UmlPackage::INFORMATIONFLOW_ATTRIBUTE_REALIZINGCONNECTOR:
-			return eAny(getRealizingConnector()); //11320
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Connector>::iterator iter = m_realizingConnector->begin();
+			Bag<uml::Connector>::iterator end = m_realizingConnector->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //11320
+		}
 		case UmlPackage::INFORMATIONFLOW_ATTRIBUTE_REALIZINGMESSAGE:
-			return eAny(getRealizingMessage()); //11321
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Message>::iterator iter = m_realizingMessage->begin();
+			Bag<uml::Message>::iterator end = m_realizingMessage->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //11321
+		}
 	}
 	Any result;
 	result = DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
@@ -508,6 +571,258 @@ bool InformationFlowImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
+		case UmlPackage::INFORMATIONFLOW_ATTRIBUTE_CONVEYED:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Classifier>> conveyedList(new Bag<uml::Classifier>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				conveyedList->add(std::dynamic_pointer_cast<uml::Classifier>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Classifier>::iterator iterConveyed = m_conveyed->begin();
+			Bag<uml::Classifier>::iterator endConveyed = m_conveyed->end();
+			while (iterConveyed != endConveyed)
+			{
+				if (conveyedList->find(*iterConveyed) == -1)
+				{
+					m_conveyed->erase(*iterConveyed);
+				}
+				iterConveyed++;
+			}
+
+			iterConveyed = conveyedList->begin();
+			endConveyed = conveyedList->end();
+			while (iterConveyed != endConveyed)
+			{
+				if (m_conveyed->find(*iterConveyed) == -1)
+				{
+					m_conveyed->add(*iterConveyed);
+				}
+				iterConveyed++;			
+			}
+			return true;
+		}
+		case UmlPackage::INFORMATIONFLOW_ATTRIBUTE_INFORMATIONSOURCE:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::NamedElement>> informationSourceList(new Bag<uml::NamedElement>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				informationSourceList->add(std::dynamic_pointer_cast<uml::NamedElement>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::NamedElement>::iterator iterInformationSource = m_informationSource->begin();
+			Bag<uml::NamedElement>::iterator endInformationSource = m_informationSource->end();
+			while (iterInformationSource != endInformationSource)
+			{
+				if (informationSourceList->find(*iterInformationSource) == -1)
+				{
+					m_informationSource->erase(*iterInformationSource);
+				}
+				iterInformationSource++;
+			}
+
+			iterInformationSource = informationSourceList->begin();
+			endInformationSource = informationSourceList->end();
+			while (iterInformationSource != endInformationSource)
+			{
+				if (m_informationSource->find(*iterInformationSource) == -1)
+				{
+					m_informationSource->add(*iterInformationSource);
+				}
+				iterInformationSource++;			
+			}
+			return true;
+		}
+		case UmlPackage::INFORMATIONFLOW_ATTRIBUTE_INFORMATIONTARGET:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::NamedElement>> informationTargetList(new Bag<uml::NamedElement>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				informationTargetList->add(std::dynamic_pointer_cast<uml::NamedElement>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::NamedElement>::iterator iterInformationTarget = m_informationTarget->begin();
+			Bag<uml::NamedElement>::iterator endInformationTarget = m_informationTarget->end();
+			while (iterInformationTarget != endInformationTarget)
+			{
+				if (informationTargetList->find(*iterInformationTarget) == -1)
+				{
+					m_informationTarget->erase(*iterInformationTarget);
+				}
+				iterInformationTarget++;
+			}
+
+			iterInformationTarget = informationTargetList->begin();
+			endInformationTarget = informationTargetList->end();
+			while (iterInformationTarget != endInformationTarget)
+			{
+				if (m_informationTarget->find(*iterInformationTarget) == -1)
+				{
+					m_informationTarget->add(*iterInformationTarget);
+				}
+				iterInformationTarget++;			
+			}
+			return true;
+		}
+		case UmlPackage::INFORMATIONFLOW_ATTRIBUTE_REALIZATION:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Relationship>> realizationList(new Bag<uml::Relationship>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				realizationList->add(std::dynamic_pointer_cast<uml::Relationship>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Relationship>::iterator iterRealization = m_realization->begin();
+			Bag<uml::Relationship>::iterator endRealization = m_realization->end();
+			while (iterRealization != endRealization)
+			{
+				if (realizationList->find(*iterRealization) == -1)
+				{
+					m_realization->erase(*iterRealization);
+				}
+				iterRealization++;
+			}
+
+			iterRealization = realizationList->begin();
+			endRealization = realizationList->end();
+			while (iterRealization != endRealization)
+			{
+				if (m_realization->find(*iterRealization) == -1)
+				{
+					m_realization->add(*iterRealization);
+				}
+				iterRealization++;			
+			}
+			return true;
+		}
+		case UmlPackage::INFORMATIONFLOW_ATTRIBUTE_REALIZINGACTIVITYEDGE:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::ActivityEdge>> realizingActivityEdgeList(new Bag<uml::ActivityEdge>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				realizingActivityEdgeList->add(std::dynamic_pointer_cast<uml::ActivityEdge>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::ActivityEdge>::iterator iterRealizingActivityEdge = m_realizingActivityEdge->begin();
+			Bag<uml::ActivityEdge>::iterator endRealizingActivityEdge = m_realizingActivityEdge->end();
+			while (iterRealizingActivityEdge != endRealizingActivityEdge)
+			{
+				if (realizingActivityEdgeList->find(*iterRealizingActivityEdge) == -1)
+				{
+					m_realizingActivityEdge->erase(*iterRealizingActivityEdge);
+				}
+				iterRealizingActivityEdge++;
+			}
+
+			iterRealizingActivityEdge = realizingActivityEdgeList->begin();
+			endRealizingActivityEdge = realizingActivityEdgeList->end();
+			while (iterRealizingActivityEdge != endRealizingActivityEdge)
+			{
+				if (m_realizingActivityEdge->find(*iterRealizingActivityEdge) == -1)
+				{
+					m_realizingActivityEdge->add(*iterRealizingActivityEdge);
+				}
+				iterRealizingActivityEdge++;			
+			}
+			return true;
+		}
+		case UmlPackage::INFORMATIONFLOW_ATTRIBUTE_REALIZINGCONNECTOR:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Connector>> realizingConnectorList(new Bag<uml::Connector>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				realizingConnectorList->add(std::dynamic_pointer_cast<uml::Connector>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Connector>::iterator iterRealizingConnector = m_realizingConnector->begin();
+			Bag<uml::Connector>::iterator endRealizingConnector = m_realizingConnector->end();
+			while (iterRealizingConnector != endRealizingConnector)
+			{
+				if (realizingConnectorList->find(*iterRealizingConnector) == -1)
+				{
+					m_realizingConnector->erase(*iterRealizingConnector);
+				}
+				iterRealizingConnector++;
+			}
+
+			iterRealizingConnector = realizingConnectorList->begin();
+			endRealizingConnector = realizingConnectorList->end();
+			while (iterRealizingConnector != endRealizingConnector)
+			{
+				if (m_realizingConnector->find(*iterRealizingConnector) == -1)
+				{
+					m_realizingConnector->add(*iterRealizingConnector);
+				}
+				iterRealizingConnector++;			
+			}
+			return true;
+		}
+		case UmlPackage::INFORMATIONFLOW_ATTRIBUTE_REALIZINGMESSAGE:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Message>> realizingMessageList(new Bag<uml::Message>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				realizingMessageList->add(std::dynamic_pointer_cast<uml::Message>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Message>::iterator iterRealizingMessage = m_realizingMessage->begin();
+			Bag<uml::Message>::iterator endRealizingMessage = m_realizingMessage->end();
+			while (iterRealizingMessage != endRealizingMessage)
+			{
+				if (realizingMessageList->find(*iterRealizingMessage) == -1)
+				{
+					m_realizingMessage->erase(*iterRealizingMessage);
+				}
+				iterRealizingMessage++;
+			}
+
+			iterRealizingMessage = realizingMessageList->begin();
+			endRealizingMessage = realizingMessageList->end();
+			while (iterRealizingMessage != endRealizingMessage)
+			{
+				if (m_realizingMessage->find(*iterRealizingMessage) == -1)
+				{
+					m_realizingMessage->add(*iterRealizingMessage);
+				}
+				iterRealizingMessage++;			
+			}
+			return true;
+		}
 	}
 
 	bool result = false;

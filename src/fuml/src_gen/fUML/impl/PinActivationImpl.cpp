@@ -251,7 +251,7 @@ Any PinActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case FUMLPackage::PINACTIVATION_ATTRIBUTE_ACTIONACTIVATION:
-			return eAny(getActionActivation()); //847
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getActionActivation().lock())); //847
 	}
 	return ObjectNodeActivationImpl::eGet(featureID, resolve, coreType);
 }
@@ -271,7 +271,8 @@ bool PinActivationImpl::eSet(int featureID, Any newValue)
 		case FUMLPackage::PINACTIVATION_ATTRIBUTE_ACTIONACTIVATION:
 		{
 			// BOOST CAST
-			std::shared_ptr<fUML::ActionActivation> _actionActivation = newValue->get<std::shared_ptr<fUML::ActionActivation>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<fUML::ActionActivation> _actionActivation = std::dynamic_pointer_cast<fUML::ActionActivation>(_temp);
 			setActionActivation(_actionActivation); //847
 			return true;
 		}

@@ -330,9 +330,18 @@ Any TimeExpressionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::TIMEEXPRESSION_ATTRIBUTE_EXPR:
-			return eAny(getExpr()); //23814
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getExpr())); //23814
 		case UmlPackage::TIMEEXPRESSION_ATTRIBUTE_OBSERVATION:
-			return eAny(getObservation()); //23815
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Observation>::iterator iter = m_observation->begin();
+			Bag<uml::Observation>::iterator end = m_observation->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //23815
+		}
 	}
 	return ValueSpecificationImpl::eGet(featureID, resolve, coreType);
 }
@@ -354,8 +363,45 @@ bool TimeExpressionImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::TIMEEXPRESSION_ATTRIBUTE_EXPR:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::ValueSpecification> _expr = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::ValueSpecification> _expr = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
 			setExpr(_expr); //23814
+			return true;
+		}
+		case UmlPackage::TIMEEXPRESSION_ATTRIBUTE_OBSERVATION:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Observation>> observationList(new Bag<uml::Observation>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				observationList->add(std::dynamic_pointer_cast<uml::Observation>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Observation>::iterator iterObservation = m_observation->begin();
+			Bag<uml::Observation>::iterator endObservation = m_observation->end();
+			while (iterObservation != endObservation)
+			{
+				if (observationList->find(*iterObservation) == -1)
+				{
+					m_observation->erase(*iterObservation);
+				}
+				iterObservation++;
+			}
+
+			iterObservation = observationList->begin();
+			endObservation = observationList->end();
+			while (iterObservation != endObservation)
+			{
+				if (m_observation->find(*iterObservation) == -1)
+				{
+					m_observation->add(*iterObservation);
+				}
+				iterObservation++;			
+			}
 			return true;
 		}
 	}

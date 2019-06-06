@@ -403,9 +403,9 @@ Any ReadExtentActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::READEXTENTACTION_ATTRIBUTE_CLASSIFIER:
-			return eAny(getClassifier()); //19327
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getClassifier())); //19327
 		case UmlPackage::READEXTENTACTION_ATTRIBUTE_RESULT:
-			return eAny(getResult()); //19328
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getResult())); //19328
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -427,14 +427,16 @@ bool ReadExtentActionImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::READEXTENTACTION_ATTRIBUTE_CLASSIFIER:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Classifier> _classifier = newValue->get<std::shared_ptr<uml::Classifier>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Classifier> _classifier = std::dynamic_pointer_cast<uml::Classifier>(_temp);
 			setClassifier(_classifier); //19327
 			return true;
 		}
 		case UmlPackage::READEXTENTACTION_ATTRIBUTE_RESULT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::OutputPin> _result = newValue->get<std::shared_ptr<uml::OutputPin>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::OutputPin> _result = std::dynamic_pointer_cast<uml::OutputPin>(_temp);
 			setResult(_result); //19328
 			return true;
 		}

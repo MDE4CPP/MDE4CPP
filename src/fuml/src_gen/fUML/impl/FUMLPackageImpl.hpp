@@ -1282,6 +1282,7 @@ namespace fUML
 			
 			
 			
+			virtual std::shared_ptr<ecore::EOperation> getReadSelfActionActivation_Operation_doAction() const ;
 			
 			// End Class ReadSelfActionActivation
 
@@ -1871,6 +1872,7 @@ namespace fUML
 			std::shared_ptr<ecore::EOperation> m_actionActivation_Operation_doAction = nullptr;
 			std::shared_ptr<ecore::EOperation> m_sendSignalActionActivation_Operation_doAction = nullptr;
 			std::shared_ptr<ecore::EOperation> m_callActionActivation_Operation_doAction = nullptr;
+			std::shared_ptr<ecore::EOperation> m_readSelfActionActivation_Operation_doAction = nullptr;
 			std::shared_ptr<ecore::EOperation> m_destroyObjectActionActivation_Operation_doAction = nullptr;
 			std::shared_ptr<ecore::EOperation> m_createObjectActionActivation_Operation_doAction = nullptr;
 			std::shared_ptr<ecore::EOperation> m_startClassifierBehaviorActionActivation_Operation_doAction = nullptr;

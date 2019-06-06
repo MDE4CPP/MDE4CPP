@@ -182,24 +182,24 @@ StereotypeImpl::~StereotypeImpl()
 
 
 //Additional constructor for the containments back reference
-			StereotypeImpl::StereotypeImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id)
-			:StereotypeImpl()
-			{
-				switch(reference_id)
-				{	
-				case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
-					m_owningPackage = par_Package;
-					m_namespace = par_Package;
-					 return;
-				case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
-					m_package = par_Package;
-					m_namespace = par_Package;
-					 return;
-				default:
-				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
-				}
-			   
-			}
+StereotypeImpl::StereotypeImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id)
+:StereotypeImpl()
+{
+	switch(reference_id)
+	{	
+	case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
+		m_owningPackage = par_Package;
+		m_namespace = par_Package;
+		 return;
+	case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
+		m_package = par_Package;
+		m_namespace = par_Package;
+		 return;
+	default:
+	std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
+	}
+   
+}
 
 
 
@@ -714,9 +714,18 @@ Any StereotypeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::STEREOTYPE_ATTRIBUTE_ICON:
-			return eAny(getIcon()); //22352
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Image>::iterator iter = m_icon->begin();
+			Bag<uml::Image>::iterator end = m_icon->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //22352
+		}
 		case UmlPackage::STEREOTYPE_ATTRIBUTE_PROFILE:
-			return eAny(getProfile()); //22353
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getProfile())); //22353
 	}
 	return ClassImpl::eGet(featureID, resolve, coreType);
 }
@@ -735,6 +744,42 @@ bool StereotypeImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
+		case UmlPackage::STEREOTYPE_ATTRIBUTE_ICON:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Image>> iconList(new Bag<uml::Image>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				iconList->add(std::dynamic_pointer_cast<uml::Image>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Image>::iterator iterIcon = m_icon->begin();
+			Bag<uml::Image>::iterator endIcon = m_icon->end();
+			while (iterIcon != endIcon)
+			{
+				if (iconList->find(*iterIcon) == -1)
+				{
+					m_icon->erase(*iterIcon);
+				}
+				iterIcon++;
+			}
+
+			iterIcon = iconList->begin();
+			endIcon = iconList->end();
+			while (iterIcon != endIcon)
+			{
+				if (m_icon->find(*iterIcon) == -1)
+				{
+					m_icon->add(*iterIcon);
+				}
+				iterIcon++;			
+			}
+			return true;
+		}
 	}
 
 	return ClassImpl::eSet(featureID, newValue);

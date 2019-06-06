@@ -362,7 +362,16 @@ Any CallActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) c
 	switch(featureID)
 	{
 		case FUMLPackage::CALLACTIONACTIVATION_ATTRIBUTE_CALLEXECUTIONS:
-			return eAny(getCallExecutions()); //1210
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<fUML::Execution>::iterator iter = m_callExecutions->begin();
+			Bag<fUML::Execution>::iterator end = m_callExecutions->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //1210
+		}
 	}
 	return InvocationActionActivationImpl::eGet(featureID, resolve, coreType);
 }
@@ -379,6 +388,42 @@ bool CallActionActivationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
+		case FUMLPackage::CALLACTIONACTIVATION_ATTRIBUTE_CALLEXECUTIONS:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<fUML::Execution>> callExecutionsList(new Bag<fUML::Execution>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				callExecutionsList->add(std::dynamic_pointer_cast<fUML::Execution>(*iter));
+				iter++;
+			}
+			
+			Bag<fUML::Execution>::iterator iterCallExecutions = m_callExecutions->begin();
+			Bag<fUML::Execution>::iterator endCallExecutions = m_callExecutions->end();
+			while (iterCallExecutions != endCallExecutions)
+			{
+				if (callExecutionsList->find(*iterCallExecutions) == -1)
+				{
+					m_callExecutions->erase(*iterCallExecutions);
+				}
+				iterCallExecutions++;
+			}
+
+			iterCallExecutions = callExecutionsList->begin();
+			endCallExecutions = callExecutionsList->end();
+			while (iterCallExecutions != endCallExecutions)
+			{
+				if (m_callExecutions->find(*iterCallExecutions) == -1)
+				{
+					m_callExecutions->add(*iterCallExecutions);
+				}
+				iterCallExecutions++;			
+			}
+			return true;
+		}
 	}
 
 	return InvocationActionActivationImpl::eSet(featureID, newValue);

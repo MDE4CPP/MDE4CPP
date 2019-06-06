@@ -320,13 +320,31 @@ Any EPackageImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case EcorePackage::EPACKAGE_ATTRIBUTE_ECLASSIFIERS:
-			return eAny(getEClassifiers()); //418
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<ecore::EClassifier>::iterator iter = m_eClassifiers->begin();
+			Bag<ecore::EClassifier>::iterator end = m_eClassifiers->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //418
+		}
 		case EcorePackage::EPACKAGE_ATTRIBUTE_EFACTORYINSTANCE:
-			return eAny(getEFactoryInstance()); //417
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEFactoryInstance())); //417
 		case EcorePackage::EPACKAGE_ATTRIBUTE_ESUBPACKAGES:
-			return eAny(getESubpackages()); //419
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<ecore::EPackage>::iterator iter = m_eSubpackages->begin();
+			Bag<ecore::EPackage>::iterator end = m_eSubpackages->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //419
+		}
 		case EcorePackage::EPACKAGE_ATTRIBUTE_ESUPERPACKAGE:
-			return eAny(getESuperPackage()); //4110
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getESuperPackage().lock())); //4110
 		case EcorePackage::EPACKAGE_ATTRIBUTE_NSPREFIX:
 			return eAny(getNsPrefix()); //416
 		case EcorePackage::EPACKAGE_ATTRIBUTE_NSURI:
@@ -357,11 +375,84 @@ bool EPackageImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
+		case EcorePackage::EPACKAGE_ATTRIBUTE_ECLASSIFIERS:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<ecore::EClassifier>> eClassifiersList(new Bag<ecore::EClassifier>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				eClassifiersList->add(std::dynamic_pointer_cast<ecore::EClassifier>(*iter));
+				iter++;
+			}
+			
+			Bag<ecore::EClassifier>::iterator iterEClassifiers = m_eClassifiers->begin();
+			Bag<ecore::EClassifier>::iterator endEClassifiers = m_eClassifiers->end();
+			while (iterEClassifiers != endEClassifiers)
+			{
+				if (eClassifiersList->find(*iterEClassifiers) == -1)
+				{
+					m_eClassifiers->erase(*iterEClassifiers);
+				}
+				iterEClassifiers++;
+			}
+
+			iterEClassifiers = eClassifiersList->begin();
+			endEClassifiers = eClassifiersList->end();
+			while (iterEClassifiers != endEClassifiers)
+			{
+				if (m_eClassifiers->find(*iterEClassifiers) == -1)
+				{
+					m_eClassifiers->add(*iterEClassifiers);
+				}
+				iterEClassifiers++;			
+			}
+			return true;
+		}
 		case EcorePackage::EPACKAGE_ATTRIBUTE_EFACTORYINSTANCE:
 		{
 			// BOOST CAST
-			std::shared_ptr<ecore::EFactory> _eFactoryInstance = newValue->get<std::shared_ptr<ecore::EFactory>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<ecore::EFactory> _eFactoryInstance = std::dynamic_pointer_cast<ecore::EFactory>(_temp);
 			setEFactoryInstance(_eFactoryInstance); //417
+			return true;
+		}
+		case EcorePackage::EPACKAGE_ATTRIBUTE_ESUBPACKAGES:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<ecore::EPackage>> eSubpackagesList(new Bag<ecore::EPackage>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				eSubpackagesList->add(std::dynamic_pointer_cast<ecore::EPackage>(*iter));
+				iter++;
+			}
+			
+			Bag<ecore::EPackage>::iterator iterESubpackages = m_eSubpackages->begin();
+			Bag<ecore::EPackage>::iterator endESubpackages = m_eSubpackages->end();
+			while (iterESubpackages != endESubpackages)
+			{
+				if (eSubpackagesList->find(*iterESubpackages) == -1)
+				{
+					m_eSubpackages->erase(*iterESubpackages);
+				}
+				iterESubpackages++;
+			}
+
+			iterESubpackages = eSubpackagesList->begin();
+			endESubpackages = eSubpackagesList->end();
+			while (iterESubpackages != endESubpackages)
+			{
+				if (m_eSubpackages->find(*iterESubpackages) == -1)
+				{
+					m_eSubpackages->add(*iterESubpackages);
+				}
+				iterESubpackages++;			
+			}
 			return true;
 		}
 		case EcorePackage::EPACKAGE_ATTRIBUTE_NSPREFIX:

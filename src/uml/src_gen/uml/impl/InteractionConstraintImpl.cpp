@@ -95,24 +95,24 @@ InteractionConstraintImpl::~InteractionConstraintImpl()
 
 
 //Additional constructor for the containments back reference
-			InteractionConstraintImpl::InteractionConstraintImpl(std::weak_ptr<uml::Namespace > par_Namespace, const int reference_id)
-			:InteractionConstraintImpl()
-			{
-				switch(reference_id)
-				{	
-				case UmlPackage::CONSTRAINT_ATTRIBUTE_CONTEXT:
-					m_context = par_Namespace;
-					m_namespace = par_Namespace;
-					 return;
-				case UmlPackage::NAMEDELEMENT_ATTRIBUTE_NAMESPACE:
-					m_namespace = par_Namespace;
-					m_owner = par_Namespace;
-					 return;
-				default:
-				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
-				}
-			   
-			}
+InteractionConstraintImpl::InteractionConstraintImpl(std::weak_ptr<uml::Namespace > par_Namespace, const int reference_id)
+:InteractionConstraintImpl()
+{
+	switch(reference_id)
+	{	
+	case UmlPackage::CONSTRAINT_ATTRIBUTE_CONTEXT:
+		m_context = par_Namespace;
+		m_namespace = par_Namespace;
+		 return;
+	case UmlPackage::NAMEDELEMENT_ATTRIBUTE_NAMESPACE:
+		m_namespace = par_Namespace;
+		m_owner = par_Namespace;
+		 return;
+	default:
+	std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
+	}
+   
+}
 
 
 
@@ -376,9 +376,9 @@ Any InteractionConstraintImpl::eGet(int featureID, bool resolve, bool coreType) 
 	switch(featureID)
 	{
 		case UmlPackage::INTERACTIONCONSTRAINT_ATTRIBUTE_MAXINT:
-			return eAny(getMaxint()); //12015
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getMaxint())); //12015
 		case UmlPackage::INTERACTIONCONSTRAINT_ATTRIBUTE_MININT:
-			return eAny(getMinint()); //12016
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getMinint())); //12016
 	}
 	return ConstraintImpl::eGet(featureID, resolve, coreType);
 }
@@ -400,14 +400,16 @@ bool InteractionConstraintImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::INTERACTIONCONSTRAINT_ATTRIBUTE_MAXINT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::ValueSpecification> _maxint = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::ValueSpecification> _maxint = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
 			setMaxint(_maxint); //12015
 			return true;
 		}
 		case UmlPackage::INTERACTIONCONSTRAINT_ATTRIBUTE_MININT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::ValueSpecification> _minint = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::ValueSpecification> _minint = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
 			setMinint(_minint); //12016
 			return true;
 		}

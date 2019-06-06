@@ -232,24 +232,24 @@ StateMachineImpl::~StateMachineImpl()
 
 
 //Additional constructor for the containments back reference
-			StateMachineImpl::StateMachineImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id)
-			:StateMachineImpl()
-			{
-				switch(reference_id)
-				{	
-				case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
-					m_owningPackage = par_Package;
-					m_namespace = par_Package;
-					 return;
-				case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
-					m_package = par_Package;
-					m_namespace = par_Package;
-					 return;
-				default:
-				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
-				}
-			   
-			}
+StateMachineImpl::StateMachineImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id)
+:StateMachineImpl()
+{
+	switch(reference_id)
+	{	
+	case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
+		m_owningPackage = par_Package;
+		m_namespace = par_Package;
+		 return;
+	case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
+		m_package = par_Package;
+		m_namespace = par_Package;
+		 return;
+	default:
+	std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
+	}
+   
+}
 
 
 
@@ -803,13 +803,49 @@ Any StateMachineImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::STATEMACHINE_ATTRIBUTE_CONNECTIONPOINT:
-			return eAny(getConnectionPoint()); //22261
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Pseudostate>::iterator iter = m_connectionPoint->begin();
+			Bag<uml::Pseudostate>::iterator end = m_connectionPoint->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //22261
+		}
 		case UmlPackage::STATEMACHINE_ATTRIBUTE_EXTENDEDSTATEMACHINE:
-			return eAny(getExtendedStateMachine()); //22264
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::StateMachine>::iterator iter = m_extendedStateMachine->begin();
+			Bag<uml::StateMachine>::iterator end = m_extendedStateMachine->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //22264
+		}
 		case UmlPackage::STATEMACHINE_ATTRIBUTE_REGION:
-			return eAny(getRegion()); //22263
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Region>::iterator iter = m_region->begin();
+			Bag<uml::Region>::iterator end = m_region->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //22263
+		}
 		case UmlPackage::STATEMACHINE_ATTRIBUTE_SUBMACHINESTATE:
-			return eAny(getSubmachineState()); //22262
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::State>::iterator iter = m_submachineState->begin();
+			Bag<uml::State>::iterator end = m_submachineState->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //22262
+		}
 	}
 	return BehaviorImpl::eGet(featureID, resolve, coreType);
 }
@@ -832,6 +868,150 @@ bool StateMachineImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
+		case UmlPackage::STATEMACHINE_ATTRIBUTE_CONNECTIONPOINT:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Pseudostate>> connectionPointList(new Bag<uml::Pseudostate>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				connectionPointList->add(std::dynamic_pointer_cast<uml::Pseudostate>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Pseudostate>::iterator iterConnectionPoint = m_connectionPoint->begin();
+			Bag<uml::Pseudostate>::iterator endConnectionPoint = m_connectionPoint->end();
+			while (iterConnectionPoint != endConnectionPoint)
+			{
+				if (connectionPointList->find(*iterConnectionPoint) == -1)
+				{
+					m_connectionPoint->erase(*iterConnectionPoint);
+				}
+				iterConnectionPoint++;
+			}
+
+			iterConnectionPoint = connectionPointList->begin();
+			endConnectionPoint = connectionPointList->end();
+			while (iterConnectionPoint != endConnectionPoint)
+			{
+				if (m_connectionPoint->find(*iterConnectionPoint) == -1)
+				{
+					m_connectionPoint->add(*iterConnectionPoint);
+				}
+				iterConnectionPoint++;			
+			}
+			return true;
+		}
+		case UmlPackage::STATEMACHINE_ATTRIBUTE_EXTENDEDSTATEMACHINE:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::StateMachine>> extendedStateMachineList(new Bag<uml::StateMachine>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				extendedStateMachineList->add(std::dynamic_pointer_cast<uml::StateMachine>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::StateMachine>::iterator iterExtendedStateMachine = m_extendedStateMachine->begin();
+			Bag<uml::StateMachine>::iterator endExtendedStateMachine = m_extendedStateMachine->end();
+			while (iterExtendedStateMachine != endExtendedStateMachine)
+			{
+				if (extendedStateMachineList->find(*iterExtendedStateMachine) == -1)
+				{
+					m_extendedStateMachine->erase(*iterExtendedStateMachine);
+				}
+				iterExtendedStateMachine++;
+			}
+
+			iterExtendedStateMachine = extendedStateMachineList->begin();
+			endExtendedStateMachine = extendedStateMachineList->end();
+			while (iterExtendedStateMachine != endExtendedStateMachine)
+			{
+				if (m_extendedStateMachine->find(*iterExtendedStateMachine) == -1)
+				{
+					m_extendedStateMachine->add(*iterExtendedStateMachine);
+				}
+				iterExtendedStateMachine++;			
+			}
+			return true;
+		}
+		case UmlPackage::STATEMACHINE_ATTRIBUTE_REGION:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Region>> regionList(new Bag<uml::Region>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				regionList->add(std::dynamic_pointer_cast<uml::Region>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Region>::iterator iterRegion = m_region->begin();
+			Bag<uml::Region>::iterator endRegion = m_region->end();
+			while (iterRegion != endRegion)
+			{
+				if (regionList->find(*iterRegion) == -1)
+				{
+					m_region->erase(*iterRegion);
+				}
+				iterRegion++;
+			}
+
+			iterRegion = regionList->begin();
+			endRegion = regionList->end();
+			while (iterRegion != endRegion)
+			{
+				if (m_region->find(*iterRegion) == -1)
+				{
+					m_region->add(*iterRegion);
+				}
+				iterRegion++;			
+			}
+			return true;
+		}
+		case UmlPackage::STATEMACHINE_ATTRIBUTE_SUBMACHINESTATE:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::State>> submachineStateList(new Bag<uml::State>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				submachineStateList->add(std::dynamic_pointer_cast<uml::State>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::State>::iterator iterSubmachineState = m_submachineState->begin();
+			Bag<uml::State>::iterator endSubmachineState = m_submachineState->end();
+			while (iterSubmachineState != endSubmachineState)
+			{
+				if (submachineStateList->find(*iterSubmachineState) == -1)
+				{
+					m_submachineState->erase(*iterSubmachineState);
+				}
+				iterSubmachineState++;
+			}
+
+			iterSubmachineState = submachineStateList->begin();
+			endSubmachineState = submachineStateList->end();
+			while (iterSubmachineState != endSubmachineState)
+			{
+				if (m_submachineState->find(*iterSubmachineState) == -1)
+				{
+					m_submachineState->add(*iterSubmachineState);
+				}
+				iterSubmachineState++;			
+			}
+			return true;
+		}
 	}
 
 	return BehaviorImpl::eSet(featureID, newValue);

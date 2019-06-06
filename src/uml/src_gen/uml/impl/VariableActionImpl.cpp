@@ -373,7 +373,7 @@ Any VariableActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::VARIABLEACTION_ATTRIBUTE_VARIABLE:
-			return eAny(getVariable()); //25327
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getVariable())); //25327
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -393,7 +393,8 @@ bool VariableActionImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::VARIABLEACTION_ATTRIBUTE_VARIABLE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Variable> _variable = newValue->get<std::shared_ptr<uml::Variable>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Variable> _variable = std::dynamic_pointer_cast<uml::Variable>(_temp);
 			setVariable(_variable); //25327
 			return true;
 		}

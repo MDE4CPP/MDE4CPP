@@ -317,24 +317,24 @@ ActivityImpl::~ActivityImpl()
 
 
 //Additional constructor for the containments back reference
-			ActivityImpl::ActivityImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id)
-			:ActivityImpl()
-			{
-				switch(reference_id)
-				{	
-				case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
-					m_owningPackage = par_Package;
-					m_namespace = par_Package;
-					 return;
-				case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
-					m_package = par_Package;
-					m_namespace = par_Package;
-					 return;
-				default:
-				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
-				}
-			   
-			}
+ActivityImpl::ActivityImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id)
+:ActivityImpl()
+{
+	switch(reference_id)
+	{	
+	case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
+		m_owningPackage = par_Package;
+		m_namespace = par_Package;
+		 return;
+	case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
+		m_package = par_Package;
+		m_namespace = par_Package;
+		 return;
+	default:
+	std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
+	}
+   
+}
 
 
 
@@ -973,25 +973,97 @@ Any ActivityImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::ACTIVITY_ATTRIBUTE_EDGE:
-			return eAny(getEdge()); //762
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::ActivityEdge>::iterator iter = m_edge->begin();
+			Bag<uml::ActivityEdge>::iterator end = m_edge->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //762
+		}
 		case UmlPackage::ACTIVITY_ATTRIBUTE_GROUP:
-			return eAny(getGroup()); //765
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::ActivityGroup>::iterator iter = m_group->begin();
+			Bag<uml::ActivityGroup>::iterator end = m_group->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //765
+		}
 		case UmlPackage::ACTIVITY_ATTRIBUTE_ISREADONLY:
 			return eAny(getIsReadOnly()); //767
 		case UmlPackage::ACTIVITY_ATTRIBUTE_ISSINGLEEXECUTION:
 			return eAny(getIsSingleExecution()); //768
 		case UmlPackage::ACTIVITY_ATTRIBUTE_NODE:
-			return eAny(getNode()); //763
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::ActivityNode>::iterator iter = m_node->begin();
+			Bag<uml::ActivityNode>::iterator end = m_node->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //763
+		}
 		case UmlPackage::ACTIVITY_ATTRIBUTE_OWNEDGROUP:
-			return eAny(getOwnedGroup()); //761
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::ActivityGroup>::iterator iter = m_ownedGroup->begin();
+			Bag<uml::ActivityGroup>::iterator end = m_ownedGroup->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //761
+		}
 		case UmlPackage::ACTIVITY_ATTRIBUTE_OWNEDNODE:
-			return eAny(getOwnedNode()); //766
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::ActivityNode>::iterator iter = m_ownedNode->begin();
+			Bag<uml::ActivityNode>::iterator end = m_ownedNode->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //766
+		}
 		case UmlPackage::ACTIVITY_ATTRIBUTE_PARTITION:
-			return eAny(getPartition()); //769
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::ActivityPartition>::iterator iter = m_partition->begin();
+			Bag<uml::ActivityPartition>::iterator end = m_partition->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //769
+		}
 		case UmlPackage::ACTIVITY_ATTRIBUTE_STRUCTUREDNODE:
-			return eAny(getStructuredNode()); //770
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::StructuredActivityNode>::iterator iter = m_structuredNode->begin();
+			Bag<uml::StructuredActivityNode>::iterator end = m_structuredNode->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //770
+		}
 		case UmlPackage::ACTIVITY_ATTRIBUTE_VARIABLE:
-			return eAny(getVariable()); //764
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Variable>::iterator iter = m_variable->begin();
+			Bag<uml::Variable>::iterator end = m_variable->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //764
+		}
 	}
 	return BehaviorImpl::eGet(featureID, resolve, coreType);
 }
@@ -1026,6 +1098,78 @@ bool ActivityImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
+		case UmlPackage::ACTIVITY_ATTRIBUTE_EDGE:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::ActivityEdge>> edgeList(new Bag<uml::ActivityEdge>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				edgeList->add(std::dynamic_pointer_cast<uml::ActivityEdge>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::ActivityEdge>::iterator iterEdge = m_edge->begin();
+			Bag<uml::ActivityEdge>::iterator endEdge = m_edge->end();
+			while (iterEdge != endEdge)
+			{
+				if (edgeList->find(*iterEdge) == -1)
+				{
+					m_edge->erase(*iterEdge);
+				}
+				iterEdge++;
+			}
+
+			iterEdge = edgeList->begin();
+			endEdge = edgeList->end();
+			while (iterEdge != endEdge)
+			{
+				if (m_edge->find(*iterEdge) == -1)
+				{
+					m_edge->add(*iterEdge);
+				}
+				iterEdge++;			
+			}
+			return true;
+		}
+		case UmlPackage::ACTIVITY_ATTRIBUTE_GROUP:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::ActivityGroup>> groupList(new Bag<uml::ActivityGroup>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				groupList->add(std::dynamic_pointer_cast<uml::ActivityGroup>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::ActivityGroup>::iterator iterGroup = m_group->begin();
+			Bag<uml::ActivityGroup>::iterator endGroup = m_group->end();
+			while (iterGroup != endGroup)
+			{
+				if (groupList->find(*iterGroup) == -1)
+				{
+					m_group->erase(*iterGroup);
+				}
+				iterGroup++;
+			}
+
+			iterGroup = groupList->begin();
+			endGroup = groupList->end();
+			while (iterGroup != endGroup)
+			{
+				if (m_group->find(*iterGroup) == -1)
+				{
+					m_group->add(*iterGroup);
+				}
+				iterGroup++;			
+			}
+			return true;
+		}
 		case UmlPackage::ACTIVITY_ATTRIBUTE_ISREADONLY:
 		{
 			// BOOST CAST
@@ -1038,6 +1182,222 @@ bool ActivityImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			bool _isSingleExecution = newValue->get<bool>();
 			setIsSingleExecution(_isSingleExecution); //768
+			return true;
+		}
+		case UmlPackage::ACTIVITY_ATTRIBUTE_NODE:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::ActivityNode>> nodeList(new Bag<uml::ActivityNode>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				nodeList->add(std::dynamic_pointer_cast<uml::ActivityNode>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::ActivityNode>::iterator iterNode = m_node->begin();
+			Bag<uml::ActivityNode>::iterator endNode = m_node->end();
+			while (iterNode != endNode)
+			{
+				if (nodeList->find(*iterNode) == -1)
+				{
+					m_node->erase(*iterNode);
+				}
+				iterNode++;
+			}
+
+			iterNode = nodeList->begin();
+			endNode = nodeList->end();
+			while (iterNode != endNode)
+			{
+				if (m_node->find(*iterNode) == -1)
+				{
+					m_node->add(*iterNode);
+				}
+				iterNode++;			
+			}
+			return true;
+		}
+		case UmlPackage::ACTIVITY_ATTRIBUTE_OWNEDGROUP:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::ActivityGroup>> ownedGroupList(new Bag<uml::ActivityGroup>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				ownedGroupList->add(std::dynamic_pointer_cast<uml::ActivityGroup>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::ActivityGroup>::iterator iterOwnedGroup = m_ownedGroup->begin();
+			Bag<uml::ActivityGroup>::iterator endOwnedGroup = m_ownedGroup->end();
+			while (iterOwnedGroup != endOwnedGroup)
+			{
+				if (ownedGroupList->find(*iterOwnedGroup) == -1)
+				{
+					m_ownedGroup->erase(*iterOwnedGroup);
+				}
+				iterOwnedGroup++;
+			}
+
+			iterOwnedGroup = ownedGroupList->begin();
+			endOwnedGroup = ownedGroupList->end();
+			while (iterOwnedGroup != endOwnedGroup)
+			{
+				if (m_ownedGroup->find(*iterOwnedGroup) == -1)
+				{
+					m_ownedGroup->add(*iterOwnedGroup);
+				}
+				iterOwnedGroup++;			
+			}
+			return true;
+		}
+		case UmlPackage::ACTIVITY_ATTRIBUTE_OWNEDNODE:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::ActivityNode>> ownedNodeList(new Bag<uml::ActivityNode>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				ownedNodeList->add(std::dynamic_pointer_cast<uml::ActivityNode>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::ActivityNode>::iterator iterOwnedNode = m_ownedNode->begin();
+			Bag<uml::ActivityNode>::iterator endOwnedNode = m_ownedNode->end();
+			while (iterOwnedNode != endOwnedNode)
+			{
+				if (ownedNodeList->find(*iterOwnedNode) == -1)
+				{
+					m_ownedNode->erase(*iterOwnedNode);
+				}
+				iterOwnedNode++;
+			}
+
+			iterOwnedNode = ownedNodeList->begin();
+			endOwnedNode = ownedNodeList->end();
+			while (iterOwnedNode != endOwnedNode)
+			{
+				if (m_ownedNode->find(*iterOwnedNode) == -1)
+				{
+					m_ownedNode->add(*iterOwnedNode);
+				}
+				iterOwnedNode++;			
+			}
+			return true;
+		}
+		case UmlPackage::ACTIVITY_ATTRIBUTE_PARTITION:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::ActivityPartition>> partitionList(new Bag<uml::ActivityPartition>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				partitionList->add(std::dynamic_pointer_cast<uml::ActivityPartition>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::ActivityPartition>::iterator iterPartition = m_partition->begin();
+			Bag<uml::ActivityPartition>::iterator endPartition = m_partition->end();
+			while (iterPartition != endPartition)
+			{
+				if (partitionList->find(*iterPartition) == -1)
+				{
+					m_partition->erase(*iterPartition);
+				}
+				iterPartition++;
+			}
+
+			iterPartition = partitionList->begin();
+			endPartition = partitionList->end();
+			while (iterPartition != endPartition)
+			{
+				if (m_partition->find(*iterPartition) == -1)
+				{
+					m_partition->add(*iterPartition);
+				}
+				iterPartition++;			
+			}
+			return true;
+		}
+		case UmlPackage::ACTIVITY_ATTRIBUTE_STRUCTUREDNODE:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::StructuredActivityNode>> structuredNodeList(new Bag<uml::StructuredActivityNode>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				structuredNodeList->add(std::dynamic_pointer_cast<uml::StructuredActivityNode>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::StructuredActivityNode>::iterator iterStructuredNode = m_structuredNode->begin();
+			Bag<uml::StructuredActivityNode>::iterator endStructuredNode = m_structuredNode->end();
+			while (iterStructuredNode != endStructuredNode)
+			{
+				if (structuredNodeList->find(*iterStructuredNode) == -1)
+				{
+					m_structuredNode->erase(*iterStructuredNode);
+				}
+				iterStructuredNode++;
+			}
+
+			iterStructuredNode = structuredNodeList->begin();
+			endStructuredNode = structuredNodeList->end();
+			while (iterStructuredNode != endStructuredNode)
+			{
+				if (m_structuredNode->find(*iterStructuredNode) == -1)
+				{
+					m_structuredNode->add(*iterStructuredNode);
+				}
+				iterStructuredNode++;			
+			}
+			return true;
+		}
+		case UmlPackage::ACTIVITY_ATTRIBUTE_VARIABLE:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Variable>> variableList(new Bag<uml::Variable>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				variableList->add(std::dynamic_pointer_cast<uml::Variable>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Variable>::iterator iterVariable = m_variable->begin();
+			Bag<uml::Variable>::iterator endVariable = m_variable->end();
+			while (iterVariable != endVariable)
+			{
+				if (variableList->find(*iterVariable) == -1)
+				{
+					m_variable->erase(*iterVariable);
+				}
+				iterVariable++;
+			}
+
+			iterVariable = variableList->begin();
+			endVariable = variableList->end();
+			while (iterVariable != endVariable)
+			{
+				if (m_variable->find(*iterVariable) == -1)
+				{
+					m_variable->add(*iterVariable);
+				}
+				iterVariable++;			
+			}
 			return true;
 		}
 	}

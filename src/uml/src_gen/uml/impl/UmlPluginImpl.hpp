@@ -22,7 +22,8 @@ namespace uml
 			virtual std::string eNS_URI();
 			virtual std::string eNS_PREFIX();
 		
-			virtual std::shared_ptr<ecore::EObject> create(const std::string& name);
+			virtual std::shared_ptr<ecore::EObject> create(const std::string& name) const;
+			virtual std::shared_ptr<ecore::EObject> create(const std::string& name, std::shared_ptr<ecore::EObject> container, const unsigned int referenceID = -1) const;
 			virtual std::shared_ptr<ecore::EFactory> getEFactory();
 			virtual std::shared_ptr<ecore::EPackage> getEPackage();
 	};

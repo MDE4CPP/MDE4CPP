@@ -302,11 +302,20 @@ Any EReferenceImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case EcorePackage::EREFERENCE_ATTRIBUTE_CONTAINMENT:
 			return eAny(isContainment()); //4322
 		case EcorePackage::EREFERENCE_ATTRIBUTE_EKEYS:
-			return eAny(getEKeys()); //4327
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<ecore::EAttribute>::iterator iter = m_eKeys->begin();
+			Bag<ecore::EAttribute>::iterator end = m_eKeys->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //4327
+		}
 		case EcorePackage::EREFERENCE_ATTRIBUTE_EOPPOSITE:
-			return eAny(getEOpposite()); //4325
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEOpposite())); //4325
 		case EcorePackage::EREFERENCE_ATTRIBUTE_EREFERENCETYPE:
-			return eAny(getEReferenceType()); //4326
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEReferenceType())); //4326
 		case EcorePackage::EREFERENCE_ATTRIBUTE_RESOLVEPROXIES:
 			return eAny(isResolveProxies()); //4324
 	}
@@ -342,10 +351,47 @@ bool EReferenceImpl::eSet(int featureID, Any newValue)
 			setContainment(_containment); //4322
 			return true;
 		}
+		case EcorePackage::EREFERENCE_ATTRIBUTE_EKEYS:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<ecore::EAttribute>> eKeysList(new Bag<ecore::EAttribute>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				eKeysList->add(std::dynamic_pointer_cast<ecore::EAttribute>(*iter));
+				iter++;
+			}
+			
+			Bag<ecore::EAttribute>::iterator iterEKeys = m_eKeys->begin();
+			Bag<ecore::EAttribute>::iterator endEKeys = m_eKeys->end();
+			while (iterEKeys != endEKeys)
+			{
+				if (eKeysList->find(*iterEKeys) == -1)
+				{
+					m_eKeys->erase(*iterEKeys);
+				}
+				iterEKeys++;
+			}
+
+			iterEKeys = eKeysList->begin();
+			endEKeys = eKeysList->end();
+			while (iterEKeys != endEKeys)
+			{
+				if (m_eKeys->find(*iterEKeys) == -1)
+				{
+					m_eKeys->add(*iterEKeys);
+				}
+				iterEKeys++;			
+			}
+			return true;
+		}
 		case EcorePackage::EREFERENCE_ATTRIBUTE_EOPPOSITE:
 		{
 			// BOOST CAST
-			std::shared_ptr<ecore::EReference> _eOpposite = newValue->get<std::shared_ptr<ecore::EReference>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<ecore::EReference> _eOpposite = std::dynamic_pointer_cast<ecore::EReference>(_temp);
 			setEOpposite(_eOpposite); //4325
 			return true;
 		}

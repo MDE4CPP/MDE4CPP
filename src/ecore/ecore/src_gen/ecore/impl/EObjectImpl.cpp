@@ -295,9 +295,18 @@ Any EObjectImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case EcorePackage::EOBJECT_ATTRIBUTE_ECONTAINER:
-			return eAny(getEContainer()); //391
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEContainer().lock())); //391
 		case EcorePackage::EOBJECT_ATTRIBUTE_ECONTENS:
-			return eAny(getEContens()); //390
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<ecore::EObject>::iterator iter = m_eContens->begin();
+			Bag<ecore::EObject>::iterator end = m_eContens->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //390
+		}
 		case EcorePackage::EOBJECT_ATTRIBUTE_METAELEMENTID:
 			return eAny(getMetaElementID()); //392
 	}
@@ -325,8 +334,45 @@ bool EObjectImpl::eSet(int featureID, Any newValue)
 		case EcorePackage::EOBJECT_ATTRIBUTE_ECONTAINER:
 		{
 			// BOOST CAST
-			std::shared_ptr<ecore::EObject> _eContainer = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<ecore::EObject> _eContainer = std::dynamic_pointer_cast<ecore::EObject>(_temp);
 			setEContainer(_eContainer); //391
+			return true;
+		}
+		case EcorePackage::EOBJECT_ATTRIBUTE_ECONTENS:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<ecore::EObject>> eContensList(new Bag<ecore::EObject>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				eContensList->add(std::dynamic_pointer_cast<ecore::EObject>(*iter));
+				iter++;
+			}
+			
+			Bag<ecore::EObject>::iterator iterEContens = m_eContens->begin();
+			Bag<ecore::EObject>::iterator endEContens = m_eContens->end();
+			while (iterEContens != endEContens)
+			{
+				if (eContensList->find(*iterEContens) == -1)
+				{
+					m_eContens->erase(*iterEContens);
+				}
+				iterEContens++;
+			}
+
+			iterEContens = eContensList->begin();
+			endEContens = eContensList->end();
+			while (iterEContens != endEContens)
+			{
+				if (m_eContens->find(*iterEContens) == -1)
+				{
+					m_eContens->add(*iterEContens);
+				}
+				iterEContens++;			
+			}
 			return true;
 		}
 		case EcorePackage::EOBJECT_ATTRIBUTE_METAELEMENTID:

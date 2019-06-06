@@ -368,9 +368,18 @@ Any ComponentRealizationImpl::eGet(int featureID, bool resolve, bool coreType) c
 	switch(featureID)
 	{
 		case UmlPackage::COMPONENTREALIZATION_ATTRIBUTE_ABSTRACTION:
-			return eAny(getAbstraction()); //4819
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getAbstraction().lock())); //4819
 		case UmlPackage::COMPONENTREALIZATION_ATTRIBUTE_REALIZINGCLASSIFIER:
-			return eAny(getRealizingClassifier()); //4818
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Classifier>::iterator iter = m_realizingClassifier->begin();
+			Bag<uml::Classifier>::iterator end = m_realizingClassifier->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //4818
+		}
 	}
 	return RealizationImpl::eGet(featureID, resolve, coreType);
 }
@@ -392,8 +401,45 @@ bool ComponentRealizationImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::COMPONENTREALIZATION_ATTRIBUTE_ABSTRACTION:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Component> _abstraction = newValue->get<std::shared_ptr<uml::Component>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Component> _abstraction = std::dynamic_pointer_cast<uml::Component>(_temp);
 			setAbstraction(_abstraction); //4819
+			return true;
+		}
+		case UmlPackage::COMPONENTREALIZATION_ATTRIBUTE_REALIZINGCLASSIFIER:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Classifier>> realizingClassifierList(new Bag<uml::Classifier>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				realizingClassifierList->add(std::dynamic_pointer_cast<uml::Classifier>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Classifier>::iterator iterRealizingClassifier = m_realizingClassifier->begin();
+			Bag<uml::Classifier>::iterator endRealizingClassifier = m_realizingClassifier->end();
+			while (iterRealizingClassifier != endRealizingClassifier)
+			{
+				if (realizingClassifierList->find(*iterRealizingClassifier) == -1)
+				{
+					m_realizingClassifier->erase(*iterRealizingClassifier);
+				}
+				iterRealizingClassifier++;
+			}
+
+			iterRealizingClassifier = realizingClassifierList->begin();
+			endRealizingClassifier = realizingClassifierList->end();
+			while (iterRealizingClassifier != endRealizingClassifier)
+			{
+				if (m_realizingClassifier->find(*iterRealizingClassifier) == -1)
+				{
+					m_realizingClassifier->add(*iterRealizingClassifier);
+				}
+				iterRealizingClassifier++;			
+			}
 			return true;
 		}
 	}

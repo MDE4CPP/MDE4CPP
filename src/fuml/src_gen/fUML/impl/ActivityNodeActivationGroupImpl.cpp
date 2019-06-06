@@ -667,15 +667,42 @@ Any ActivityNodeActivationGroupImpl::eGet(int featureID, bool resolve, bool core
 	switch(featureID)
 	{
 		case FUMLPackage::ACTIVITYNODEACTIVATIONGROUP_ATTRIBUTE_ACTIVITYEXECUTION:
-			return eAny(getActivityExecution()); //82
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getActivityExecution().lock())); //82
 		case FUMLPackage::ACTIVITYNODEACTIVATIONGROUP_ATTRIBUTE_CONTAININGNODEACTIVATION:
-			return eAny(getContainingNodeActivation()); //83
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getContainingNodeActivation().lock())); //83
 		case FUMLPackage::ACTIVITYNODEACTIVATIONGROUP_ATTRIBUTE_EDGEINSTANCES:
-			return eAny(getEdgeInstances()); //80
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<fUML::ActivityEdgeInstance>::iterator iter = m_edgeInstances->begin();
+			Bag<fUML::ActivityEdgeInstance>::iterator end = m_edgeInstances->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //80
+		}
 		case FUMLPackage::ACTIVITYNODEACTIVATIONGROUP_ATTRIBUTE_NODEACTIVATIONS:
-			return eAny(getNodeActivations()); //81
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<fUML::ActivityNodeActivation>::iterator iter = m_nodeActivations->begin();
+			Bag<fUML::ActivityNodeActivation>::iterator end = m_nodeActivations->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //81
+		}
 		case FUMLPackage::ACTIVITYNODEACTIVATIONGROUP_ATTRIBUTE_SUSPENDEDACTIVATIONS:
-			return eAny(getSuspendedActivations()); //84
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<fUML::ActivityNodeActivation>::iterator iter = m_suspendedActivations->begin();
+			Bag<fUML::ActivityNodeActivation>::iterator end = m_suspendedActivations->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //84
+		}
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
@@ -703,15 +730,125 @@ bool ActivityNodeActivationGroupImpl::eSet(int featureID, Any newValue)
 		case FUMLPackage::ACTIVITYNODEACTIVATIONGROUP_ATTRIBUTE_ACTIVITYEXECUTION:
 		{
 			// BOOST CAST
-			std::shared_ptr<fUML::ActivityExecution> _activityExecution = newValue->get<std::shared_ptr<fUML::ActivityExecution>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<fUML::ActivityExecution> _activityExecution = std::dynamic_pointer_cast<fUML::ActivityExecution>(_temp);
 			setActivityExecution(_activityExecution); //82
 			return true;
 		}
 		case FUMLPackage::ACTIVITYNODEACTIVATIONGROUP_ATTRIBUTE_CONTAININGNODEACTIVATION:
 		{
 			// BOOST CAST
-			std::shared_ptr<fUML::StructuredActivityNodeActivation> _containingNodeActivation = newValue->get<std::shared_ptr<fUML::StructuredActivityNodeActivation>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<fUML::StructuredActivityNodeActivation> _containingNodeActivation = std::dynamic_pointer_cast<fUML::StructuredActivityNodeActivation>(_temp);
 			setContainingNodeActivation(_containingNodeActivation); //83
+			return true;
+		}
+		case FUMLPackage::ACTIVITYNODEACTIVATIONGROUP_ATTRIBUTE_EDGEINSTANCES:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<fUML::ActivityEdgeInstance>> edgeInstancesList(new Bag<fUML::ActivityEdgeInstance>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				edgeInstancesList->add(std::dynamic_pointer_cast<fUML::ActivityEdgeInstance>(*iter));
+				iter++;
+			}
+			
+			Bag<fUML::ActivityEdgeInstance>::iterator iterEdgeInstances = m_edgeInstances->begin();
+			Bag<fUML::ActivityEdgeInstance>::iterator endEdgeInstances = m_edgeInstances->end();
+			while (iterEdgeInstances != endEdgeInstances)
+			{
+				if (edgeInstancesList->find(*iterEdgeInstances) == -1)
+				{
+					m_edgeInstances->erase(*iterEdgeInstances);
+				}
+				iterEdgeInstances++;
+			}
+
+			iterEdgeInstances = edgeInstancesList->begin();
+			endEdgeInstances = edgeInstancesList->end();
+			while (iterEdgeInstances != endEdgeInstances)
+			{
+				if (m_edgeInstances->find(*iterEdgeInstances) == -1)
+				{
+					m_edgeInstances->add(*iterEdgeInstances);
+				}
+				iterEdgeInstances++;			
+			}
+			return true;
+		}
+		case FUMLPackage::ACTIVITYNODEACTIVATIONGROUP_ATTRIBUTE_NODEACTIVATIONS:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<fUML::ActivityNodeActivation>> nodeActivationsList(new Bag<fUML::ActivityNodeActivation>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				nodeActivationsList->add(std::dynamic_pointer_cast<fUML::ActivityNodeActivation>(*iter));
+				iter++;
+			}
+			
+			Bag<fUML::ActivityNodeActivation>::iterator iterNodeActivations = m_nodeActivations->begin();
+			Bag<fUML::ActivityNodeActivation>::iterator endNodeActivations = m_nodeActivations->end();
+			while (iterNodeActivations != endNodeActivations)
+			{
+				if (nodeActivationsList->find(*iterNodeActivations) == -1)
+				{
+					m_nodeActivations->erase(*iterNodeActivations);
+				}
+				iterNodeActivations++;
+			}
+
+			iterNodeActivations = nodeActivationsList->begin();
+			endNodeActivations = nodeActivationsList->end();
+			while (iterNodeActivations != endNodeActivations)
+			{
+				if (m_nodeActivations->find(*iterNodeActivations) == -1)
+				{
+					m_nodeActivations->add(*iterNodeActivations);
+				}
+				iterNodeActivations++;			
+			}
+			return true;
+		}
+		case FUMLPackage::ACTIVITYNODEACTIVATIONGROUP_ATTRIBUTE_SUSPENDEDACTIVATIONS:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<fUML::ActivityNodeActivation>> suspendedActivationsList(new Bag<fUML::ActivityNodeActivation>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				suspendedActivationsList->add(std::dynamic_pointer_cast<fUML::ActivityNodeActivation>(*iter));
+				iter++;
+			}
+			
+			Bag<fUML::ActivityNodeActivation>::iterator iterSuspendedActivations = m_suspendedActivations->begin();
+			Bag<fUML::ActivityNodeActivation>::iterator endSuspendedActivations = m_suspendedActivations->end();
+			while (iterSuspendedActivations != endSuspendedActivations)
+			{
+				if (suspendedActivationsList->find(*iterSuspendedActivations) == -1)
+				{
+					m_suspendedActivations->erase(*iterSuspendedActivations);
+				}
+				iterSuspendedActivations++;
+			}
+
+			iterSuspendedActivations = suspendedActivationsList->begin();
+			endSuspendedActivations = suspendedActivationsList->end();
+			while (iterSuspendedActivations != endSuspendedActivations)
+			{
+				if (m_suspendedActivations->find(*iterSuspendedActivations) == -1)
+				{
+					m_suspendedActivations->add(*iterSuspendedActivations);
+				}
+				iterSuspendedActivations++;			
+			}
 			return true;
 		}
 	}

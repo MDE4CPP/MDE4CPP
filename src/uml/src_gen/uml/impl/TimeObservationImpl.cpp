@@ -286,7 +286,7 @@ Any TimeObservationImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::TIMEOBSERVATION_ATTRIBUTE_EVENT:
-			return eAny(getEvent()); //24012
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEvent())); //24012
 		case UmlPackage::TIMEOBSERVATION_ATTRIBUTE_FIRSTEVENT:
 			return eAny(getFirstEvent()); //24013
 	}
@@ -310,7 +310,8 @@ bool TimeObservationImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::TIMEOBSERVATION_ATTRIBUTE_EVENT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::NamedElement> _event = newValue->get<std::shared_ptr<uml::NamedElement>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::NamedElement> _event = std::dynamic_pointer_cast<uml::NamedElement>(_temp);
 			setEvent(_event); //24012
 			return true;
 		}

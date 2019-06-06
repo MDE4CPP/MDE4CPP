@@ -387,7 +387,7 @@ Any StartClassifierBehaviorActionImpl::eGet(int featureID, bool resolve, bool co
 	switch(featureID)
 	{
 		case UmlPackage::STARTCLASSIFIERBEHAVIORACTION_ATTRIBUTE_OBJECT:
-			return eAny(getObject()); //21827
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getObject())); //21827
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -407,7 +407,8 @@ bool StartClassifierBehaviorActionImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::STARTCLASSIFIERBEHAVIORACTION_ATTRIBUTE_OBJECT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::InputPin> _object = newValue->get<std::shared_ptr<uml::InputPin>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::InputPin> _object = std::dynamic_pointer_cast<uml::InputPin>(_temp);
 			setObject(_object); //21827
 			return true;
 		}

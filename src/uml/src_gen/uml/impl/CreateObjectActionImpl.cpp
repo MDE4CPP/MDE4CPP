@@ -415,9 +415,9 @@ Any CreateObjectActionImpl::eGet(int featureID, bool resolve, bool coreType) con
 	switch(featureID)
 	{
 		case UmlPackage::CREATEOBJECTACTION_ATTRIBUTE_CLASSIFIER:
-			return eAny(getClassifier()); //6327
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getClassifier())); //6327
 		case UmlPackage::CREATEOBJECTACTION_ATTRIBUTE_RESULT:
-			return eAny(getResult()); //6328
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getResult())); //6328
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -439,14 +439,16 @@ bool CreateObjectActionImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::CREATEOBJECTACTION_ATTRIBUTE_CLASSIFIER:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Classifier> _classifier = newValue->get<std::shared_ptr<uml::Classifier>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Classifier> _classifier = std::dynamic_pointer_cast<uml::Classifier>(_temp);
 			setClassifier(_classifier); //6327
 			return true;
 		}
 		case UmlPackage::CREATEOBJECTACTION_ATTRIBUTE_RESULT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::OutputPin> _result = newValue->get<std::shared_ptr<uml::OutputPin>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::OutputPin> _result = std::dynamic_pointer_cast<uml::OutputPin>(_temp);
 			setResult(_result); //6328
 			return true;
 		}

@@ -415,7 +415,7 @@ Any CreateLinkObjectActionImpl::eGet(int featureID, bool resolve, bool coreType)
 	switch(featureID)
 	{
 		case UmlPackage::CREATELINKOBJECTACTION_ATTRIBUTE_RESULT:
-			return eAny(getResult()); //6229
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getResult())); //6229
 	}
 	return CreateLinkActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -435,7 +435,8 @@ bool CreateLinkObjectActionImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::CREATELINKOBJECTACTION_ATTRIBUTE_RESULT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::OutputPin> _result = newValue->get<std::shared_ptr<uml::OutputPin>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::OutputPin> _result = std::dynamic_pointer_cast<uml::OutputPin>(_temp);
 			setResult(_result); //6229
 			return true;
 		}

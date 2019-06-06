@@ -386,7 +386,7 @@ Any ActivityParameterNodeImpl::eGet(int featureID, bool resolve, bool coreType) 
 	switch(featureID)
 	{
 		case UmlPackage::ACTIVITYPARAMETERNODE_ATTRIBUTE_PARAMETER:
-			return eAny(getParameter()); //1326
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getParameter())); //1326
 	}
 	return ObjectNodeImpl::eGet(featureID, resolve, coreType);
 }
@@ -406,7 +406,8 @@ bool ActivityParameterNodeImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::ACTIVITYPARAMETERNODE_ATTRIBUTE_PARAMETER:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Parameter> _parameter = newValue->get<std::shared_ptr<uml::Parameter>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Parameter> _parameter = std::dynamic_pointer_cast<uml::Parameter>(_temp);
 			setParameter(_parameter); //1326
 			return true;
 		}

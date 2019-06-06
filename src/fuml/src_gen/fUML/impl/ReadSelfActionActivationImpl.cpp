@@ -25,6 +25,8 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "fUML/impl/FUMLPackageImpl.hpp"
+#include "uml/ReadSelfAction.hpp"
+#include "fUML/Reference.hpp"
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -169,6 +171,42 @@ std::shared_ptr<ecore::EClass> ReadSelfActionActivationImpl::eStaticClass() cons
 //*********************************
 // Operations
 //*********************************
+void ReadSelfActionActivationImpl::doAction()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Get the context object of the activity execution containing this action activation and place a reference to it on the result output pin.
+
+	std::shared_ptr<uml::ReadSelfAction> action = std::dynamic_pointer_cast<uml::ReadSelfAction>(this->m_node);
+	if(action)
+	{
+
+		std::shared_ptr<fUML::Reference> reference= fUML::FUMLFactory::eInstance()->createReference();
+		std::shared_ptr<fUML::Object> context=this->getExecutionContext();
+		if(context)
+		{
+			reference->setReferent(context);
+			std::shared_ptr<uml::OutputPin > outputPin=action->getResult();
+			if(outputPin)
+			{
+				this->putToken(action->getResult(), reference);
+			}
+			else
+			{
+				throw "invalid output pin";
+			}
+		}
+		else
+		{
+			throw "Invalid ExecutionContext";
+		}
+	}
+	else
+	{
+		throw "Unexpected invalid ReadSelfAction";
+	}
+	//end of body
+}
 
 //*********************************
 // References

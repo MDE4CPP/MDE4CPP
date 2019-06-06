@@ -376,13 +376,13 @@ Any OpaqueExpressionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::OPAQUEEXPRESSION_ATTRIBUTE_BEHAVIOR:
-			return eAny(getBehavior()); //16614
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getBehavior())); //16614
 		case UmlPackage::OPAQUEEXPRESSION_ATTRIBUTE_BODY:
 			return eAny(getBody()); //16615
 		case UmlPackage::OPAQUEEXPRESSION_ATTRIBUTE_LANGUAGE:
 			return eAny(getLanguage()); //16616
 		case UmlPackage::OPAQUEEXPRESSION_ATTRIBUTE_RESULT:
-			return eAny(getResult()); //16617
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getResult())); //16617
 	}
 	return ValueSpecificationImpl::eGet(featureID, resolve, coreType);
 }
@@ -408,8 +408,21 @@ bool OpaqueExpressionImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::OPAQUEEXPRESSION_ATTRIBUTE_BEHAVIOR:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Behavior> _behavior = newValue->get<std::shared_ptr<uml::Behavior>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Behavior> _behavior = std::dynamic_pointer_cast<uml::Behavior>(_temp);
 			setBehavior(_behavior); //16614
+			return true;
+		}
+		case UmlPackage::OPAQUEEXPRESSION_ATTRIBUTE_BODY:
+		{
+			// BOOST CAST
+			// nothing to do
+			return true;
+		}
+		case UmlPackage::OPAQUEEXPRESSION_ATTRIBUTE_LANGUAGE:
+		{
+			// BOOST CAST
+			// nothing to do
 			return true;
 		}
 	}

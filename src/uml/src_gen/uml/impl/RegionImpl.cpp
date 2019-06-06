@@ -497,15 +497,33 @@ Any RegionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::REGION_ATTRIBUTE_EXTENDEDREGION:
-			return eAny(getExtendedRegion()); //20718
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getExtendedRegion())); //20718
 		case UmlPackage::REGION_ATTRIBUTE_STATE:
-			return eAny(getState()); //20719
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getState().lock())); //20719
 		case UmlPackage::REGION_ATTRIBUTE_STATEMACHINE:
-			return eAny(getStateMachine()); //20720
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getStateMachine().lock())); //20720
 		case UmlPackage::REGION_ATTRIBUTE_SUBVERTEX:
-			return eAny(getSubvertex()); //20722
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Vertex>::iterator iter = m_subvertex->begin();
+			Bag<uml::Vertex>::iterator end = m_subvertex->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //20722
+		}
 		case UmlPackage::REGION_ATTRIBUTE_TRANSITION:
-			return eAny(getTransition()); //20721
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Transition>::iterator iter = m_transition->begin();
+			Bag<uml::Transition>::iterator end = m_transition->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //20721
+		}
 	}
 	Any result;
 	result = NamespaceImpl::eGet(featureID, resolve, coreType);
@@ -547,22 +565,97 @@ bool RegionImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::REGION_ATTRIBUTE_EXTENDEDREGION:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Region> _extendedRegion = newValue->get<std::shared_ptr<uml::Region>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Region> _extendedRegion = std::dynamic_pointer_cast<uml::Region>(_temp);
 			setExtendedRegion(_extendedRegion); //20718
 			return true;
 		}
 		case UmlPackage::REGION_ATTRIBUTE_STATE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::State> _state = newValue->get<std::shared_ptr<uml::State>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::State> _state = std::dynamic_pointer_cast<uml::State>(_temp);
 			setState(_state); //20719
 			return true;
 		}
 		case UmlPackage::REGION_ATTRIBUTE_STATEMACHINE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::StateMachine> _stateMachine = newValue->get<std::shared_ptr<uml::StateMachine>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::StateMachine> _stateMachine = std::dynamic_pointer_cast<uml::StateMachine>(_temp);
 			setStateMachine(_stateMachine); //20720
+			return true;
+		}
+		case UmlPackage::REGION_ATTRIBUTE_SUBVERTEX:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Vertex>> subvertexList(new Bag<uml::Vertex>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				subvertexList->add(std::dynamic_pointer_cast<uml::Vertex>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Vertex>::iterator iterSubvertex = m_subvertex->begin();
+			Bag<uml::Vertex>::iterator endSubvertex = m_subvertex->end();
+			while (iterSubvertex != endSubvertex)
+			{
+				if (subvertexList->find(*iterSubvertex) == -1)
+				{
+					m_subvertex->erase(*iterSubvertex);
+				}
+				iterSubvertex++;
+			}
+
+			iterSubvertex = subvertexList->begin();
+			endSubvertex = subvertexList->end();
+			while (iterSubvertex != endSubvertex)
+			{
+				if (m_subvertex->find(*iterSubvertex) == -1)
+				{
+					m_subvertex->add(*iterSubvertex);
+				}
+				iterSubvertex++;			
+			}
+			return true;
+		}
+		case UmlPackage::REGION_ATTRIBUTE_TRANSITION:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Transition>> transitionList(new Bag<uml::Transition>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				transitionList->add(std::dynamic_pointer_cast<uml::Transition>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Transition>::iterator iterTransition = m_transition->begin();
+			Bag<uml::Transition>::iterator endTransition = m_transition->end();
+			while (iterTransition != endTransition)
+			{
+				if (transitionList->find(*iterTransition) == -1)
+				{
+					m_transition->erase(*iterTransition);
+				}
+				iterTransition++;
+			}
+
+			iterTransition = transitionList->begin();
+			endTransition = transitionList->end();
+			while (iterTransition != endTransition)
+			{
+				if (m_transition->find(*iterTransition) == -1)
+				{
+					m_transition->add(*iterTransition);
+				}
+				iterTransition++;			
+			}
 			return true;
 		}
 	}

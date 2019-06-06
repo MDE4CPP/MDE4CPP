@@ -413,7 +413,7 @@ Any DestroyObjectActionImpl::eGet(int featureID, bool resolve, bool coreType) co
 		case UmlPackage::DESTROYOBJECTACTION_ATTRIBUTE_ISDESTROYOWNEDOBJECTS:
 			return eAny(getIsDestroyOwnedObjects()); //7328
 		case UmlPackage::DESTROYOBJECTACTION_ATTRIBUTE_TARGET:
-			return eAny(getTarget()); //7329
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getTarget())); //7329
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -451,7 +451,8 @@ bool DestroyObjectActionImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::DESTROYOBJECTACTION_ATTRIBUTE_TARGET:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::InputPin> _target = newValue->get<std::shared_ptr<uml::InputPin>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::InputPin> _target = std::dynamic_pointer_cast<uml::InputPin>(_temp);
 			setTarget(_target); //7329
 			return true;
 		}

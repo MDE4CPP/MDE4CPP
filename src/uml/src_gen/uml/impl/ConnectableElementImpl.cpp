@@ -264,7 +264,16 @@ Any ConnectableElementImpl::eGet(int featureID, bool resolve, bool coreType) con
 	switch(featureID)
 	{
 		case UmlPackage::CONNECTABLEELEMENT_ATTRIBUTE_END:
-			return eAny(getEnd()); //5012
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::ConnectorEnd>::iterator iter = m_end->begin();
+			Bag<uml::ConnectorEnd>::iterator end = m_end->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //5012
+		}
 	}
 	Any result;
 	result = ParameterableElementImpl::eGet(featureID, resolve, coreType);

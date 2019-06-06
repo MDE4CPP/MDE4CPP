@@ -337,11 +337,11 @@ Any MultiplicityElementImpl::eGet(int featureID, bool resolve, bool coreType) co
 		case UmlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_LOWER:
 			return eAny(getLower()); //1545
 		case UmlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_LOWERVALUE:
-			return eAny(getLowerValue()); //1546
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getLowerValue())); //1546
 		case UmlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_UPPER:
 			return eAny(getUpper()); //1547
 		case UmlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_UPPERVALUE:
-			return eAny(getUpperValue()); //1548
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getUpperValue())); //1548
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -392,7 +392,8 @@ bool MultiplicityElementImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_LOWERVALUE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::ValueSpecification> _lowerValue = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::ValueSpecification> _lowerValue = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
 			setLowerValue(_lowerValue); //1546
 			return true;
 		}
@@ -406,7 +407,8 @@ bool MultiplicityElementImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_UPPERVALUE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::ValueSpecification> _upperValue = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::ValueSpecification> _upperValue = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
 			setUpperValue(_upperValue); //1548
 			return true;
 		}

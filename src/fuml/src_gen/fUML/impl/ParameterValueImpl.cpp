@@ -176,9 +176,18 @@ Any ParameterValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case FUMLPackage::PARAMETERVALUE_ATTRIBUTE_PARAMETER:
-			return eAny(getParameter()); //830
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getParameter())); //830
 		case FUMLPackage::PARAMETERVALUE_ATTRIBUTE_VALUES:
-			return eAny(getValues()); //831
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<fUML::Value>::iterator iter = m_values->begin();
+			Bag<fUML::Value>::iterator end = m_values->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //831
+		}
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
@@ -200,8 +209,45 @@ bool ParameterValueImpl::eSet(int featureID, Any newValue)
 		case FUMLPackage::PARAMETERVALUE_ATTRIBUTE_PARAMETER:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Parameter> _parameter = newValue->get<std::shared_ptr<uml::Parameter>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Parameter> _parameter = std::dynamic_pointer_cast<uml::Parameter>(_temp);
 			setParameter(_parameter); //830
+			return true;
+		}
+		case FUMLPackage::PARAMETERVALUE_ATTRIBUTE_VALUES:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<fUML::Value>> valuesList(new Bag<fUML::Value>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				valuesList->add(std::dynamic_pointer_cast<fUML::Value>(*iter));
+				iter++;
+			}
+			
+			Bag<fUML::Value>::iterator iterValues = m_values->begin();
+			Bag<fUML::Value>::iterator endValues = m_values->end();
+			while (iterValues != endValues)
+			{
+				if (valuesList->find(*iterValues) == -1)
+				{
+					m_values->erase(*iterValues);
+				}
+				iterValues++;
+			}
+
+			iterValues = valuesList->begin();
+			endValues = valuesList->end();
+			while (iterValues != endValues)
+			{
+				if (m_values->find(*iterValues) == -1)
+				{
+					m_values->add(*iterValues);
+				}
+				iterValues++;			
+			}
 			return true;
 		}
 	}

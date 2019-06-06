@@ -326,7 +326,7 @@ Any EStructuralFeatureImpl::eGet(int featureID, bool resolve, bool coreType) con
 		case EcorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_DERIVED:
 			return eAny(isDerived()); //5019
 		case EcorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_ECONTAININGCLASS:
-			return eAny(getEContainingClass()); //5021
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEContainingClass().lock())); //5021
 		case EcorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_FEATUREID:
 			return eAny(getFeatureID()); //5020
 		case EcorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_TRANSIENT:

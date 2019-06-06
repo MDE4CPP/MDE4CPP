@@ -361,15 +361,42 @@ Any ActivityGroupImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::ACTIVITYGROUP_ATTRIBUTE_CONTAINEDEDGE:
-			return eAny(getContainedEdge()); //119
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::ActivityEdge>::iterator iter = m_containedEdge->begin();
+			Bag<uml::ActivityEdge>::iterator end = m_containedEdge->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //119
+		}
 		case UmlPackage::ACTIVITYGROUP_ATTRIBUTE_CONTAINEDNODE:
-			return eAny(getContainedNode()); //1110
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::ActivityNode>::iterator iter = m_containedNode->begin();
+			Bag<uml::ActivityNode>::iterator end = m_containedNode->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //1110
+		}
 		case UmlPackage::ACTIVITYGROUP_ATTRIBUTE_INACTIVITY:
-			return eAny(getInActivity()); //1111
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getInActivity().lock())); //1111
 		case UmlPackage::ACTIVITYGROUP_ATTRIBUTE_SUBGROUP:
-			return eAny(getSubgroup()); //1112
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::ActivityGroup>::iterator iter = m_subgroup->begin();
+			Bag<uml::ActivityGroup>::iterator end = m_subgroup->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //1112
+		}
 		case UmlPackage::ACTIVITYGROUP_ATTRIBUTE_SUPERGROUP:
-			return eAny(getSuperGroup()); //1113
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSuperGroup().lock())); //1113
 	}
 	Any result;
 	result = ActivityContentImpl::eGet(featureID, resolve, coreType);
@@ -411,7 +438,8 @@ bool ActivityGroupImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::ACTIVITYGROUP_ATTRIBUTE_INACTIVITY:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Activity> _inActivity = newValue->get<std::shared_ptr<uml::Activity>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Activity> _inActivity = std::dynamic_pointer_cast<uml::Activity>(_temp);
 			setInActivity(_inActivity); //1111
 			return true;
 		}

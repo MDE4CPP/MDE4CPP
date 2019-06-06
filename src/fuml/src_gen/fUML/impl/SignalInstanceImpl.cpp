@@ -162,7 +162,7 @@ Any SignalInstanceImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case FUMLPackage::SIGNALINSTANCE_ATTRIBUTE_TYPE:
-			return eAny(getType()); //1001
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getType())); //1001
 	}
 	return CompoundValueImpl::eGet(featureID, resolve, coreType);
 }
@@ -182,7 +182,8 @@ bool SignalInstanceImpl::eSet(int featureID, Any newValue)
 		case FUMLPackage::SIGNALINSTANCE_ATTRIBUTE_TYPE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Signal> _type = newValue->get<std::shared_ptr<uml::Signal>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Signal> _type = std::dynamic_pointer_cast<uml::Signal>(_temp);
 			setType(_type); //1001
 			return true;
 		}

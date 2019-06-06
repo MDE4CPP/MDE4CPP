@@ -807,11 +807,38 @@ Any ActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case FUMLPackage::ACTIONACTIVATION_ATTRIBUTE_FIRING:
 			return eAny(isFiring()); //37
 		case FUMLPackage::ACTIONACTIVATION_ATTRIBUTE_INPUTPINACTIVATION:
-			return eAny(getInputPinActivation()); //38
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<fUML::InputPinActivation>::iterator iter = m_inputPinActivation->begin();
+			Bag<fUML::InputPinActivation>::iterator end = m_inputPinActivation->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //38
+		}
 		case FUMLPackage::ACTIONACTIVATION_ATTRIBUTE_OUTPUTPINACTIVATION:
-			return eAny(getOutputPinActivation()); //39
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<fUML::OutputPinActivation>::iterator iter = m_outputPinActivation->begin();
+			Bag<fUML::OutputPinActivation>::iterator end = m_outputPinActivation->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //39
+		}
 		case FUMLPackage::ACTIONACTIVATION_ATTRIBUTE_PINACTIVATION:
-			return eAny(getPinActivation()); //36
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<fUML::PinActivation>::iterator iter = m_pinActivation->begin();
+			Bag<fUML::PinActivation>::iterator end = m_pinActivation->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //36
+		}
 	}
 	return ActivityNodeActivationImpl::eGet(featureID, resolve, coreType);
 }
@@ -839,6 +866,114 @@ bool ActionActivationImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			bool _firing = newValue->get<bool>();
 			setFiring(_firing); //37
+			return true;
+		}
+		case FUMLPackage::ACTIONACTIVATION_ATTRIBUTE_INPUTPINACTIVATION:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<fUML::InputPinActivation>> inputPinActivationList(new Bag<fUML::InputPinActivation>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				inputPinActivationList->add(std::dynamic_pointer_cast<fUML::InputPinActivation>(*iter));
+				iter++;
+			}
+			
+			Bag<fUML::InputPinActivation>::iterator iterInputPinActivation = m_inputPinActivation->begin();
+			Bag<fUML::InputPinActivation>::iterator endInputPinActivation = m_inputPinActivation->end();
+			while (iterInputPinActivation != endInputPinActivation)
+			{
+				if (inputPinActivationList->find(*iterInputPinActivation) == -1)
+				{
+					m_inputPinActivation->erase(*iterInputPinActivation);
+				}
+				iterInputPinActivation++;
+			}
+
+			iterInputPinActivation = inputPinActivationList->begin();
+			endInputPinActivation = inputPinActivationList->end();
+			while (iterInputPinActivation != endInputPinActivation)
+			{
+				if (m_inputPinActivation->find(*iterInputPinActivation) == -1)
+				{
+					m_inputPinActivation->add(*iterInputPinActivation);
+				}
+				iterInputPinActivation++;			
+			}
+			return true;
+		}
+		case FUMLPackage::ACTIONACTIVATION_ATTRIBUTE_OUTPUTPINACTIVATION:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<fUML::OutputPinActivation>> outputPinActivationList(new Bag<fUML::OutputPinActivation>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				outputPinActivationList->add(std::dynamic_pointer_cast<fUML::OutputPinActivation>(*iter));
+				iter++;
+			}
+			
+			Bag<fUML::OutputPinActivation>::iterator iterOutputPinActivation = m_outputPinActivation->begin();
+			Bag<fUML::OutputPinActivation>::iterator endOutputPinActivation = m_outputPinActivation->end();
+			while (iterOutputPinActivation != endOutputPinActivation)
+			{
+				if (outputPinActivationList->find(*iterOutputPinActivation) == -1)
+				{
+					m_outputPinActivation->erase(*iterOutputPinActivation);
+				}
+				iterOutputPinActivation++;
+			}
+
+			iterOutputPinActivation = outputPinActivationList->begin();
+			endOutputPinActivation = outputPinActivationList->end();
+			while (iterOutputPinActivation != endOutputPinActivation)
+			{
+				if (m_outputPinActivation->find(*iterOutputPinActivation) == -1)
+				{
+					m_outputPinActivation->add(*iterOutputPinActivation);
+				}
+				iterOutputPinActivation++;			
+			}
+			return true;
+		}
+		case FUMLPackage::ACTIONACTIVATION_ATTRIBUTE_PINACTIVATION:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<fUML::PinActivation>> pinActivationList(new Bag<fUML::PinActivation>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				pinActivationList->add(std::dynamic_pointer_cast<fUML::PinActivation>(*iter));
+				iter++;
+			}
+			
+			Bag<fUML::PinActivation>::iterator iterPinActivation = m_pinActivation->begin();
+			Bag<fUML::PinActivation>::iterator endPinActivation = m_pinActivation->end();
+			while (iterPinActivation != endPinActivation)
+			{
+				if (pinActivationList->find(*iterPinActivation) == -1)
+				{
+					m_pinActivation->erase(*iterPinActivation);
+				}
+				iterPinActivation++;
+			}
+
+			iterPinActivation = pinActivationList->begin();
+			endPinActivation = pinActivationList->end();
+			while (iterPinActivation != endPinActivation)
+			{
+				if (m_pinActivation->find(*iterPinActivation) == -1)
+				{
+					m_pinActivation->add(*iterPinActivation);
+				}
+				iterPinActivation++;			
+			}
 			return true;
 		}
 	}

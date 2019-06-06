@@ -264,7 +264,7 @@ Any ExtensionPointImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::EXTENSIONPOINT_ATTRIBUTE_USECASE:
-			return eAny(getUseCase()); //9912
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getUseCase().lock())); //9912
 	}
 	return RedefinableElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -284,7 +284,8 @@ bool ExtensionPointImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::EXTENSIONPOINT_ATTRIBUTE_USECASE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::UseCase> _useCase = newValue->get<std::shared_ptr<uml::UseCase>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::UseCase> _useCase = std::dynamic_pointer_cast<uml::UseCase>(_temp);
 			setUseCase(_useCase); //9912
 			return true;
 		}

@@ -356,13 +356,40 @@ Any ObjectActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case FUMLPackage::OBJECTACTIVATION_ATTRIBUTE_CLASSIFIERBEHAVIOREXECUTIONS:
-			return eAny(getClassifierBehaviorExecutions()); //773
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<fUML::ClassifierBehaviorExecution>::iterator iter = m_classifierBehaviorExecutions->begin();
+			Bag<fUML::ClassifierBehaviorExecution>::iterator end = m_classifierBehaviorExecutions->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //773
+		}
 		case FUMLPackage::OBJECTACTIVATION_ATTRIBUTE_EVENTPOOL:
-			return eAny(getEventPool()); //771
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<fUML::SignalInstance>::iterator iter = m_eventPool->begin();
+			Bag<fUML::SignalInstance>::iterator end = m_eventPool->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //771
+		}
 		case FUMLPackage::OBJECTACTIVATION_ATTRIBUTE_OBJECT:
-			return eAny(getObject()); //772
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getObject())); //772
 		case FUMLPackage::OBJECTACTIVATION_ATTRIBUTE_WAITINGEVENTACCEPTERS:
-			return eAny(getWaitingEventAccepters()); //770
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<fUML::EventAccepter>::iterator iter = m_waitingEventAccepters->begin();
+			Bag<fUML::EventAccepter>::iterator end = m_waitingEventAccepters->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //770
+		}
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
@@ -385,11 +412,120 @@ bool ObjectActivationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
+		case FUMLPackage::OBJECTACTIVATION_ATTRIBUTE_CLASSIFIERBEHAVIOREXECUTIONS:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<fUML::ClassifierBehaviorExecution>> classifierBehaviorExecutionsList(new Bag<fUML::ClassifierBehaviorExecution>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				classifierBehaviorExecutionsList->add(std::dynamic_pointer_cast<fUML::ClassifierBehaviorExecution>(*iter));
+				iter++;
+			}
+			
+			Bag<fUML::ClassifierBehaviorExecution>::iterator iterClassifierBehaviorExecutions = m_classifierBehaviorExecutions->begin();
+			Bag<fUML::ClassifierBehaviorExecution>::iterator endClassifierBehaviorExecutions = m_classifierBehaviorExecutions->end();
+			while (iterClassifierBehaviorExecutions != endClassifierBehaviorExecutions)
+			{
+				if (classifierBehaviorExecutionsList->find(*iterClassifierBehaviorExecutions) == -1)
+				{
+					m_classifierBehaviorExecutions->erase(*iterClassifierBehaviorExecutions);
+				}
+				iterClassifierBehaviorExecutions++;
+			}
+
+			iterClassifierBehaviorExecutions = classifierBehaviorExecutionsList->begin();
+			endClassifierBehaviorExecutions = classifierBehaviorExecutionsList->end();
+			while (iterClassifierBehaviorExecutions != endClassifierBehaviorExecutions)
+			{
+				if (m_classifierBehaviorExecutions->find(*iterClassifierBehaviorExecutions) == -1)
+				{
+					m_classifierBehaviorExecutions->add(*iterClassifierBehaviorExecutions);
+				}
+				iterClassifierBehaviorExecutions++;			
+			}
+			return true;
+		}
+		case FUMLPackage::OBJECTACTIVATION_ATTRIBUTE_EVENTPOOL:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<fUML::SignalInstance>> eventPoolList(new Bag<fUML::SignalInstance>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				eventPoolList->add(std::dynamic_pointer_cast<fUML::SignalInstance>(*iter));
+				iter++;
+			}
+			
+			Bag<fUML::SignalInstance>::iterator iterEventPool = m_eventPool->begin();
+			Bag<fUML::SignalInstance>::iterator endEventPool = m_eventPool->end();
+			while (iterEventPool != endEventPool)
+			{
+				if (eventPoolList->find(*iterEventPool) == -1)
+				{
+					m_eventPool->erase(*iterEventPool);
+				}
+				iterEventPool++;
+			}
+
+			iterEventPool = eventPoolList->begin();
+			endEventPool = eventPoolList->end();
+			while (iterEventPool != endEventPool)
+			{
+				if (m_eventPool->find(*iterEventPool) == -1)
+				{
+					m_eventPool->add(*iterEventPool);
+				}
+				iterEventPool++;			
+			}
+			return true;
+		}
 		case FUMLPackage::OBJECTACTIVATION_ATTRIBUTE_OBJECT:
 		{
 			// BOOST CAST
-			std::shared_ptr<fUML::Object> _object = newValue->get<std::shared_ptr<fUML::Object>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<fUML::Object> _object = std::dynamic_pointer_cast<fUML::Object>(_temp);
 			setObject(_object); //772
+			return true;
+		}
+		case FUMLPackage::OBJECTACTIVATION_ATTRIBUTE_WAITINGEVENTACCEPTERS:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<fUML::EventAccepter>> waitingEventAcceptersList(new Bag<fUML::EventAccepter>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				waitingEventAcceptersList->add(std::dynamic_pointer_cast<fUML::EventAccepter>(*iter));
+				iter++;
+			}
+			
+			Bag<fUML::EventAccepter>::iterator iterWaitingEventAccepters = m_waitingEventAccepters->begin();
+			Bag<fUML::EventAccepter>::iterator endWaitingEventAccepters = m_waitingEventAccepters->end();
+			while (iterWaitingEventAccepters != endWaitingEventAccepters)
+			{
+				if (waitingEventAcceptersList->find(*iterWaitingEventAccepters) == -1)
+				{
+					m_waitingEventAccepters->erase(*iterWaitingEventAccepters);
+				}
+				iterWaitingEventAccepters++;
+			}
+
+			iterWaitingEventAccepters = waitingEventAcceptersList->begin();
+			endWaitingEventAccepters = waitingEventAcceptersList->end();
+			while (iterWaitingEventAccepters != endWaitingEventAccepters)
+			{
+				if (m_waitingEventAccepters->find(*iterWaitingEventAccepters) == -1)
+				{
+					m_waitingEventAccepters->add(*iterWaitingEventAccepters);
+				}
+				iterWaitingEventAccepters++;			
+			}
 			return true;
 		}
 	}

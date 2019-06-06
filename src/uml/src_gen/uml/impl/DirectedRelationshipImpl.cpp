@@ -220,9 +220,27 @@ Any DirectedRelationshipImpl::eGet(int featureID, bool resolve, bool coreType) c
 	switch(featureID)
 	{
 		case UmlPackage::DIRECTEDRELATIONSHIP_ATTRIBUTE_SOURCE:
-			return eAny(getSource()); //764
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Element>::iterator iter = m_source->begin();
+			Bag<uml::Element>::iterator end = m_source->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //764
+		}
 		case UmlPackage::DIRECTEDRELATIONSHIP_ATTRIBUTE_TARGET:
-			return eAny(getTarget()); //765
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Element>::iterator iter = m_target->begin();
+			Bag<uml::Element>::iterator end = m_target->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //765
+		}
 	}
 	return RelationshipImpl::eGet(featureID, resolve, coreType);
 }

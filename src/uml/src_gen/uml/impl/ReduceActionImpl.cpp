@@ -448,13 +448,13 @@ Any ReduceActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::REDUCEACTION_ATTRIBUTE_COLLECTION:
-			return eAny(getCollection()); //20627
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getCollection())); //20627
 		case UmlPackage::REDUCEACTION_ATTRIBUTE_ISORDERED:
 			return eAny(getIsOrdered()); //20628
 		case UmlPackage::REDUCEACTION_ATTRIBUTE_REDUCER:
-			return eAny(getReducer()); //20629
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getReducer())); //20629
 		case UmlPackage::REDUCEACTION_ATTRIBUTE_RESULT:
-			return eAny(getResult()); //20630
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getResult())); //20630
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -480,7 +480,8 @@ bool ReduceActionImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::REDUCEACTION_ATTRIBUTE_COLLECTION:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::InputPin> _collection = newValue->get<std::shared_ptr<uml::InputPin>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::InputPin> _collection = std::dynamic_pointer_cast<uml::InputPin>(_temp);
 			setCollection(_collection); //20627
 			return true;
 		}
@@ -494,14 +495,16 @@ bool ReduceActionImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::REDUCEACTION_ATTRIBUTE_REDUCER:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Behavior> _reducer = newValue->get<std::shared_ptr<uml::Behavior>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Behavior> _reducer = std::dynamic_pointer_cast<uml::Behavior>(_temp);
 			setReducer(_reducer); //20629
 			return true;
 		}
 		case UmlPackage::REDUCEACTION_ATTRIBUTE_RESULT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::OutputPin> _result = newValue->get<std::shared_ptr<uml::OutputPin>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::OutputPin> _result = std::dynamic_pointer_cast<uml::OutputPin>(_temp);
 			setResult(_result); //20630
 			return true;
 		}

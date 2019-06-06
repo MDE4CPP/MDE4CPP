@@ -321,7 +321,16 @@ Any ConsiderIgnoreFragmentImpl::eGet(int featureID, bool resolve, bool coreType)
 	switch(featureID)
 	{
 		case UmlPackage::CONSIDERIGNOREFRAGMENT_ATTRIBUTE_MESSAGE:
-			return eAny(getMessage()); //5616
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::NamedElement>::iterator iter = m_message->begin();
+			Bag<uml::NamedElement>::iterator end = m_message->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //5616
+		}
 	}
 	return CombinedFragmentImpl::eGet(featureID, resolve, coreType);
 }
@@ -338,6 +347,42 @@ bool ConsiderIgnoreFragmentImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
+		case UmlPackage::CONSIDERIGNOREFRAGMENT_ATTRIBUTE_MESSAGE:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::NamedElement>> messageList(new Bag<uml::NamedElement>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				messageList->add(std::dynamic_pointer_cast<uml::NamedElement>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::NamedElement>::iterator iterMessage = m_message->begin();
+			Bag<uml::NamedElement>::iterator endMessage = m_message->end();
+			while (iterMessage != endMessage)
+			{
+				if (messageList->find(*iterMessage) == -1)
+				{
+					m_message->erase(*iterMessage);
+				}
+				iterMessage++;
+			}
+
+			iterMessage = messageList->begin();
+			endMessage = messageList->end();
+			while (iterMessage != endMessage)
+			{
+				if (m_message->find(*iterMessage) == -1)
+				{
+					m_message->add(*iterMessage);
+				}
+				iterMessage++;			
+			}
+			return true;
+		}
 	}
 
 	return CombinedFragmentImpl::eSet(featureID, newValue);

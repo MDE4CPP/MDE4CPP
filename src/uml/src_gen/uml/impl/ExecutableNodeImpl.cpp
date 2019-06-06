@@ -352,7 +352,16 @@ Any ExecutableNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::EXECUTABLENODE_ATTRIBUTE_HANDLER:
-			return eAny(getHandler()); //8820
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::ExceptionHandler>::iterator iter = m_handler->begin();
+			Bag<uml::ExceptionHandler>::iterator end = m_handler->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //8820
+		}
 	}
 	return ActivityNodeImpl::eGet(featureID, resolve, coreType);
 }
@@ -369,6 +378,42 @@ bool ExecutableNodeImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
+		case UmlPackage::EXECUTABLENODE_ATTRIBUTE_HANDLER:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::ExceptionHandler>> handlerList(new Bag<uml::ExceptionHandler>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				handlerList->add(std::dynamic_pointer_cast<uml::ExceptionHandler>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::ExceptionHandler>::iterator iterHandler = m_handler->begin();
+			Bag<uml::ExceptionHandler>::iterator endHandler = m_handler->end();
+			while (iterHandler != endHandler)
+			{
+				if (handlerList->find(*iterHandler) == -1)
+				{
+					m_handler->erase(*iterHandler);
+				}
+				iterHandler++;
+			}
+
+			iterHandler = handlerList->begin();
+			endHandler = handlerList->end();
+			while (iterHandler != endHandler)
+			{
+				if (m_handler->find(*iterHandler) == -1)
+				{
+					m_handler->add(*iterHandler);
+				}
+				iterHandler++;			
+			}
+			return true;
+		}
 	}
 
 	return ActivityNodeImpl::eSet(featureID, newValue);

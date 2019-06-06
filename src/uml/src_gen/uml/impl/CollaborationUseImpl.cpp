@@ -284,9 +284,18 @@ Any CollaborationUseImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::COLLABORATIONUSE_ATTRIBUTE_ROLEBINDING:
-			return eAny(getRoleBinding()); //439
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Dependency>::iterator iter = m_roleBinding->begin();
+			Bag<uml::Dependency>::iterator end = m_roleBinding->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //439
+		}
 		case UmlPackage::COLLABORATIONUSE_ATTRIBUTE_TYPE:
-			return eAny(getType()); //4310
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getType())); //4310
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -305,10 +314,47 @@ bool CollaborationUseImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
+		case UmlPackage::COLLABORATIONUSE_ATTRIBUTE_ROLEBINDING:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Dependency>> roleBindingList(new Bag<uml::Dependency>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				roleBindingList->add(std::dynamic_pointer_cast<uml::Dependency>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Dependency>::iterator iterRoleBinding = m_roleBinding->begin();
+			Bag<uml::Dependency>::iterator endRoleBinding = m_roleBinding->end();
+			while (iterRoleBinding != endRoleBinding)
+			{
+				if (roleBindingList->find(*iterRoleBinding) == -1)
+				{
+					m_roleBinding->erase(*iterRoleBinding);
+				}
+				iterRoleBinding++;
+			}
+
+			iterRoleBinding = roleBindingList->begin();
+			endRoleBinding = roleBindingList->end();
+			while (iterRoleBinding != endRoleBinding)
+			{
+				if (m_roleBinding->find(*iterRoleBinding) == -1)
+				{
+					m_roleBinding->add(*iterRoleBinding);
+				}
+				iterRoleBinding++;			
+			}
+			return true;
+		}
 		case UmlPackage::COLLABORATIONUSE_ATTRIBUTE_TYPE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Collaboration> _type = newValue->get<std::shared_ptr<uml::Collaboration>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Collaboration> _type = std::dynamic_pointer_cast<uml::Collaboration>(_temp);
 			setType(_type); //4310
 			return true;
 		}

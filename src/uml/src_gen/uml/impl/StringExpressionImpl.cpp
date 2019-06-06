@@ -399,9 +399,18 @@ Any StringExpressionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::STRINGEXPRESSION_ATTRIBUTE_OWNINGEXPRESSION:
-			return eAny(getOwningExpression()); //22418
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getOwningExpression().lock())); //22418
 		case UmlPackage::STRINGEXPRESSION_ATTRIBUTE_SUBEXPRESSION:
-			return eAny(getSubExpression()); //22419
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::StringExpression>::iterator iter = m_subExpression->begin();
+			Bag<uml::StringExpression>::iterator end = m_subExpression->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //22419
+		}
 	}
 	Any result;
 	result = ExpressionImpl::eGet(featureID, resolve, coreType);
@@ -437,8 +446,45 @@ bool StringExpressionImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::STRINGEXPRESSION_ATTRIBUTE_OWNINGEXPRESSION:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::StringExpression> _owningExpression = newValue->get<std::shared_ptr<uml::StringExpression>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::StringExpression> _owningExpression = std::dynamic_pointer_cast<uml::StringExpression>(_temp);
 			setOwningExpression(_owningExpression); //22418
+			return true;
+		}
+		case UmlPackage::STRINGEXPRESSION_ATTRIBUTE_SUBEXPRESSION:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::StringExpression>> subExpressionList(new Bag<uml::StringExpression>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				subExpressionList->add(std::dynamic_pointer_cast<uml::StringExpression>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::StringExpression>::iterator iterSubExpression = m_subExpression->begin();
+			Bag<uml::StringExpression>::iterator endSubExpression = m_subExpression->end();
+			while (iterSubExpression != endSubExpression)
+			{
+				if (subExpressionList->find(*iterSubExpression) == -1)
+				{
+					m_subExpression->erase(*iterSubExpression);
+				}
+				iterSubExpression++;
+			}
+
+			iterSubExpression = subExpressionList->begin();
+			endSubExpression = subExpressionList->end();
+			while (iterSubExpression != endSubExpression)
+			{
+				if (m_subExpression->find(*iterSubExpression) == -1)
+				{
+					m_subExpression->add(*iterSubExpression);
+				}
+				iterSubExpression++;			
+			}
 			return true;
 		}
 	}

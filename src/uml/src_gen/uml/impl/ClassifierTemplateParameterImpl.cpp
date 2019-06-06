@@ -279,7 +279,16 @@ Any ClassifierTemplateParameterImpl::eGet(int featureID, bool resolve, bool core
 		case UmlPackage::CLASSIFIERTEMPLATEPARAMETER_ATTRIBUTE_ALLOWSUBSTITUTABLE:
 			return eAny(getAllowSubstitutable()); //378
 		case UmlPackage::CLASSIFIERTEMPLATEPARAMETER_ATTRIBUTE_CONSTRAININGCLASSIFIER:
-			return eAny(getConstrainingClassifier()); //379
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Classifier>::iterator iter = m_constrainingClassifier->begin();
+			Bag<uml::Classifier>::iterator end = m_constrainingClassifier->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //379
+		}
 	}
 	return TemplateParameterImpl::eGet(featureID, resolve, coreType);
 }
@@ -303,6 +312,42 @@ bool ClassifierTemplateParameterImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			bool _allowSubstitutable = newValue->get<bool>();
 			setAllowSubstitutable(_allowSubstitutable); //378
+			return true;
+		}
+		case UmlPackage::CLASSIFIERTEMPLATEPARAMETER_ATTRIBUTE_CONSTRAININGCLASSIFIER:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Classifier>> constrainingClassifierList(new Bag<uml::Classifier>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				constrainingClassifierList->add(std::dynamic_pointer_cast<uml::Classifier>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Classifier>::iterator iterConstrainingClassifier = m_constrainingClassifier->begin();
+			Bag<uml::Classifier>::iterator endConstrainingClassifier = m_constrainingClassifier->end();
+			while (iterConstrainingClassifier != endConstrainingClassifier)
+			{
+				if (constrainingClassifierList->find(*iterConstrainingClassifier) == -1)
+				{
+					m_constrainingClassifier->erase(*iterConstrainingClassifier);
+				}
+				iterConstrainingClassifier++;
+			}
+
+			iterConstrainingClassifier = constrainingClassifierList->begin();
+			endConstrainingClassifier = constrainingClassifierList->end();
+			while (iterConstrainingClassifier != endConstrainingClassifier)
+			{
+				if (m_constrainingClassifier->find(*iterConstrainingClassifier) == -1)
+				{
+					m_constrainingClassifier->add(*iterConstrainingClassifier);
+				}
+				iterConstrainingClassifier++;			
+			}
 			return true;
 		}
 	}

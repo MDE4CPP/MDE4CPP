@@ -358,9 +358,9 @@ Any InterfaceRealizationImpl::eGet(int featureID, bool resolve, bool coreType) c
 	switch(featureID)
 	{
 		case UmlPackage::INTERFACEREALIZATION_ATTRIBUTE_CONTRACT:
-			return eAny(getContract()); //12618
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getContract())); //12618
 		case UmlPackage::INTERFACEREALIZATION_ATTRIBUTE_IMPLEMENTINGCLASSIFIER:
-			return eAny(getImplementingClassifier()); //12619
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getImplementingClassifier().lock())); //12619
 	}
 	return RealizationImpl::eGet(featureID, resolve, coreType);
 }
@@ -382,14 +382,16 @@ bool InterfaceRealizationImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::INTERFACEREALIZATION_ATTRIBUTE_CONTRACT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Interface> _contract = newValue->get<std::shared_ptr<uml::Interface>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Interface> _contract = std::dynamic_pointer_cast<uml::Interface>(_temp);
 			setContract(_contract); //12618
 			return true;
 		}
 		case UmlPackage::INTERFACEREALIZATION_ATTRIBUTE_IMPLEMENTINGCLASSIFIER:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::BehavioredClassifier> _implementingClassifier = newValue->get<std::shared_ptr<uml::BehavioredClassifier>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::BehavioredClassifier> _implementingClassifier = std::dynamic_pointer_cast<uml::BehavioredClassifier>(_temp);
 			setImplementingClassifier(_implementingClassifier); //12619
 			return true;
 		}

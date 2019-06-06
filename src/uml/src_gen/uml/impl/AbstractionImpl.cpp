@@ -313,7 +313,7 @@ Any AbstractionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::ABSTRACTION_ATTRIBUTE_MAPPING:
-			return eAny(getMapping()); //117
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getMapping())); //117
 	}
 	return DependencyImpl::eGet(featureID, resolve, coreType);
 }
@@ -333,7 +333,8 @@ bool AbstractionImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::ABSTRACTION_ATTRIBUTE_MAPPING:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::OpaqueExpression> _mapping = newValue->get<std::shared_ptr<uml::OpaqueExpression>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::OpaqueExpression> _mapping = std::dynamic_pointer_cast<uml::OpaqueExpression>(_temp);
 			setMapping(_mapping); //117
 			return true;
 		}

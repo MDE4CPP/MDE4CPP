@@ -211,24 +211,24 @@ ArtifactImpl::~ArtifactImpl()
 
 
 //Additional constructor for the containments back reference
-			ArtifactImpl::ArtifactImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id)
-			:ArtifactImpl()
-			{
-				switch(reference_id)
-				{	
-				case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
-					m_owningPackage = par_Package;
-					m_namespace = par_Package;
-					 return;
-				case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
-					m_package = par_Package;
-					m_namespace = par_Package;
-					 return;
-				default:
-				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
-				}
-			   
-			}
+ArtifactImpl::ArtifactImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id)
+:ArtifactImpl()
+{
+	switch(reference_id)
+	{	
+	case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
+		m_owningPackage = par_Package;
+		m_namespace = par_Package;
+		 return;
+	case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
+		m_package = par_Package;
+		m_namespace = par_Package;
+		 return;
+	default:
+	std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
+	}
+   
+}
 
 
 
@@ -645,13 +645,49 @@ Any ArtifactImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case UmlPackage::ARTIFACT_ATTRIBUTE_FILENAME:
 			return eAny(getFileName()); //2038
 		case UmlPackage::ARTIFACT_ATTRIBUTE_MANIFESTATION:
-			return eAny(getManifestation()); //2039
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Manifestation>::iterator iter = m_manifestation->begin();
+			Bag<uml::Manifestation>::iterator end = m_manifestation->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //2039
+		}
 		case UmlPackage::ARTIFACT_ATTRIBUTE_NESTEDARTIFACT:
-			return eAny(getNestedArtifact()); //2040
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Artifact>::iterator iter = m_nestedArtifact->begin();
+			Bag<uml::Artifact>::iterator end = m_nestedArtifact->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //2040
+		}
 		case UmlPackage::ARTIFACT_ATTRIBUTE_OWNEDATTRIBUTE:
-			return eAny(getOwnedAttribute()); //2041
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Property>::iterator iter = m_ownedAttribute->begin();
+			Bag<uml::Property>::iterator end = m_ownedAttribute->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //2041
+		}
 		case UmlPackage::ARTIFACT_ATTRIBUTE_OWNEDOPERATION:
-			return eAny(getOwnedOperation()); //2042
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Operation>::iterator iter = m_ownedOperation->begin();
+			Bag<uml::Operation>::iterator end = m_ownedOperation->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //2042
+		}
 	}
 	Any result;
 	result = ClassifierImpl::eGet(featureID, resolve, coreType);
@@ -695,6 +731,150 @@ bool ArtifactImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::string _fileName = newValue->get<std::string>();
 			setFileName(_fileName); //2038
+			return true;
+		}
+		case UmlPackage::ARTIFACT_ATTRIBUTE_MANIFESTATION:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Manifestation>> manifestationList(new Bag<uml::Manifestation>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				manifestationList->add(std::dynamic_pointer_cast<uml::Manifestation>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Manifestation>::iterator iterManifestation = m_manifestation->begin();
+			Bag<uml::Manifestation>::iterator endManifestation = m_manifestation->end();
+			while (iterManifestation != endManifestation)
+			{
+				if (manifestationList->find(*iterManifestation) == -1)
+				{
+					m_manifestation->erase(*iterManifestation);
+				}
+				iterManifestation++;
+			}
+
+			iterManifestation = manifestationList->begin();
+			endManifestation = manifestationList->end();
+			while (iterManifestation != endManifestation)
+			{
+				if (m_manifestation->find(*iterManifestation) == -1)
+				{
+					m_manifestation->add(*iterManifestation);
+				}
+				iterManifestation++;			
+			}
+			return true;
+		}
+		case UmlPackage::ARTIFACT_ATTRIBUTE_NESTEDARTIFACT:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Artifact>> nestedArtifactList(new Bag<uml::Artifact>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				nestedArtifactList->add(std::dynamic_pointer_cast<uml::Artifact>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Artifact>::iterator iterNestedArtifact = m_nestedArtifact->begin();
+			Bag<uml::Artifact>::iterator endNestedArtifact = m_nestedArtifact->end();
+			while (iterNestedArtifact != endNestedArtifact)
+			{
+				if (nestedArtifactList->find(*iterNestedArtifact) == -1)
+				{
+					m_nestedArtifact->erase(*iterNestedArtifact);
+				}
+				iterNestedArtifact++;
+			}
+
+			iterNestedArtifact = nestedArtifactList->begin();
+			endNestedArtifact = nestedArtifactList->end();
+			while (iterNestedArtifact != endNestedArtifact)
+			{
+				if (m_nestedArtifact->find(*iterNestedArtifact) == -1)
+				{
+					m_nestedArtifact->add(*iterNestedArtifact);
+				}
+				iterNestedArtifact++;			
+			}
+			return true;
+		}
+		case UmlPackage::ARTIFACT_ATTRIBUTE_OWNEDATTRIBUTE:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Property>> ownedAttributeList(new Bag<uml::Property>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				ownedAttributeList->add(std::dynamic_pointer_cast<uml::Property>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Property>::iterator iterOwnedAttribute = m_ownedAttribute->begin();
+			Bag<uml::Property>::iterator endOwnedAttribute = m_ownedAttribute->end();
+			while (iterOwnedAttribute != endOwnedAttribute)
+			{
+				if (ownedAttributeList->find(*iterOwnedAttribute) == -1)
+				{
+					m_ownedAttribute->erase(*iterOwnedAttribute);
+				}
+				iterOwnedAttribute++;
+			}
+
+			iterOwnedAttribute = ownedAttributeList->begin();
+			endOwnedAttribute = ownedAttributeList->end();
+			while (iterOwnedAttribute != endOwnedAttribute)
+			{
+				if (m_ownedAttribute->find(*iterOwnedAttribute) == -1)
+				{
+					m_ownedAttribute->add(*iterOwnedAttribute);
+				}
+				iterOwnedAttribute++;			
+			}
+			return true;
+		}
+		case UmlPackage::ARTIFACT_ATTRIBUTE_OWNEDOPERATION:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Operation>> ownedOperationList(new Bag<uml::Operation>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				ownedOperationList->add(std::dynamic_pointer_cast<uml::Operation>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Operation>::iterator iterOwnedOperation = m_ownedOperation->begin();
+			Bag<uml::Operation>::iterator endOwnedOperation = m_ownedOperation->end();
+			while (iterOwnedOperation != endOwnedOperation)
+			{
+				if (ownedOperationList->find(*iterOwnedOperation) == -1)
+				{
+					m_ownedOperation->erase(*iterOwnedOperation);
+				}
+				iterOwnedOperation++;
+			}
+
+			iterOwnedOperation = ownedOperationList->begin();
+			endOwnedOperation = ownedOperationList->end();
+			while (iterOwnedOperation != endOwnedOperation)
+			{
+				if (m_ownedOperation->find(*iterOwnedOperation) == -1)
+				{
+					m_ownedOperation->add(*iterOwnedOperation);
+				}
+				iterOwnedOperation++;			
+			}
 			return true;
 		}
 	}

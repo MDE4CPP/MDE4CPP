@@ -401,7 +401,7 @@ Any BroadcastSignalActionImpl::eGet(int featureID, bool resolve, bool coreType) 
 	switch(featureID)
 	{
 		case UmlPackage::BROADCASTSIGNALACTION_ATTRIBUTE_SIGNAL:
-			return eAny(getSignal()); //2729
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSignal())); //2729
 	}
 	return InvocationActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -421,7 +421,8 @@ bool BroadcastSignalActionImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::BROADCASTSIGNALACTION_ATTRIBUTE_SIGNAL:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Signal> _signal = newValue->get<std::shared_ptr<uml::Signal>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Signal> _signal = std::dynamic_pointer_cast<uml::Signal>(_temp);
 			setSignal(_signal); //2729
 			return true;
 		}

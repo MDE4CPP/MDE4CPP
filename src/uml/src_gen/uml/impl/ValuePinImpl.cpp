@@ -472,7 +472,7 @@ Any ValuePinImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::VALUEPIN_ATTRIBUTE_VALUE:
-			return eAny(getValue()); //24937
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getValue())); //24937
 	}
 	return InputPinImpl::eGet(featureID, resolve, coreType);
 }
@@ -492,7 +492,8 @@ bool ValuePinImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::VALUEPIN_ATTRIBUTE_VALUE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::ValueSpecification> _value = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::ValueSpecification> _value = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
 			setValue(_value); //24937
 			return true;
 		}

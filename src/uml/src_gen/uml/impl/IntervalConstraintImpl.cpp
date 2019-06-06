@@ -88,24 +88,24 @@ IntervalConstraintImpl::~IntervalConstraintImpl()
 
 
 //Additional constructor for the containments back reference
-			IntervalConstraintImpl::IntervalConstraintImpl(std::weak_ptr<uml::Namespace > par_Namespace, const int reference_id)
-			:IntervalConstraintImpl()
-			{
-				switch(reference_id)
-				{	
-				case UmlPackage::CONSTRAINT_ATTRIBUTE_CONTEXT:
-					m_context = par_Namespace;
-					m_namespace = par_Namespace;
-					 return;
-				case UmlPackage::NAMEDELEMENT_ATTRIBUTE_NAMESPACE:
-					m_namespace = par_Namespace;
-					m_owner = par_Namespace;
-					 return;
-				default:
-				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
-				}
-			   
-			}
+IntervalConstraintImpl::IntervalConstraintImpl(std::weak_ptr<uml::Namespace > par_Namespace, const int reference_id)
+:IntervalConstraintImpl()
+{
+	switch(reference_id)
+	{	
+	case UmlPackage::CONSTRAINT_ATTRIBUTE_CONTEXT:
+		m_context = par_Namespace;
+		m_namespace = par_Namespace;
+		 return;
+	case UmlPackage::NAMEDELEMENT_ATTRIBUTE_NAMESPACE:
+		m_namespace = par_Namespace;
+		m_owner = par_Namespace;
+		 return;
+	default:
+	std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
+	}
+   
+}
 
 
 

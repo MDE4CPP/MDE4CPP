@@ -318,11 +318,29 @@ Any VertexImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::VERTEX_ATTRIBUTE_CONTAINER:
-			return eAny(getContainer()); //2549
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getContainer().lock())); //2549
 		case UmlPackage::VERTEX_ATTRIBUTE_INCOMING:
-			return eAny(getIncoming()); //25410
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Transition>::iterator iter = m_incoming->begin();
+			Bag<uml::Transition>::iterator end = m_incoming->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //25410
+		}
 		case UmlPackage::VERTEX_ATTRIBUTE_OUTGOING:
-			return eAny(getOutgoing()); //25411
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Transition>::iterator iter = m_outgoing->begin();
+			Bag<uml::Transition>::iterator end = m_outgoing->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //25411
+		}
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -346,7 +364,8 @@ bool VertexImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::VERTEX_ATTRIBUTE_CONTAINER:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Region> _container = newValue->get<std::shared_ptr<uml::Region>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Region> _container = std::dynamic_pointer_cast<uml::Region>(_temp);
 			setContainer(_container); //2549
 			return true;
 		}

@@ -281,9 +281,18 @@ Any EClassifierImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case EcorePackage::ECLASSIFIER_ATTRIBUTE_DEFAULTVALUE:
 			return eAny(getDefaultValue()); //137
 		case EcorePackage::ECLASSIFIER_ATTRIBUTE_EPACKAGE:
-			return eAny(getEPackage()); //139
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEPackage().lock())); //139
 		case EcorePackage::ECLASSIFIER_ATTRIBUTE_ETYPEPARAMETERS:
-			return eAny(getETypeParameters()); //1310
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<ecore::ETypeParameter>::iterator iter = m_eTypeParameters->begin();
+			Bag<ecore::ETypeParameter>::iterator end = m_eTypeParameters->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //1310
+		}
 		case EcorePackage::ECLASSIFIER_ATTRIBUTE_INSTANCECLASS:
 			return eAny(getInstanceClass()); //136
 		case EcorePackage::ECLASSIFIER_ATTRIBUTE_INSTANCECLASSNAME:
@@ -316,6 +325,42 @@ bool EClassifierImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
+		case EcorePackage::ECLASSIFIER_ATTRIBUTE_ETYPEPARAMETERS:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<ecore::ETypeParameter>> eTypeParametersList(new Bag<ecore::ETypeParameter>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				eTypeParametersList->add(std::dynamic_pointer_cast<ecore::ETypeParameter>(*iter));
+				iter++;
+			}
+			
+			Bag<ecore::ETypeParameter>::iterator iterETypeParameters = m_eTypeParameters->begin();
+			Bag<ecore::ETypeParameter>::iterator endETypeParameters = m_eTypeParameters->end();
+			while (iterETypeParameters != endETypeParameters)
+			{
+				if (eTypeParametersList->find(*iterETypeParameters) == -1)
+				{
+					m_eTypeParameters->erase(*iterETypeParameters);
+				}
+				iterETypeParameters++;
+			}
+
+			iterETypeParameters = eTypeParametersList->begin();
+			endETypeParameters = eTypeParametersList->end();
+			while (iterETypeParameters != endETypeParameters)
+			{
+				if (m_eTypeParameters->find(*iterETypeParameters) == -1)
+				{
+					m_eTypeParameters->add(*iterETypeParameters);
+				}
+				iterETypeParameters++;			
+			}
+			return true;
+		}
 		case EcorePackage::ECLASSIFIER_ATTRIBUTE_INSTANCECLASSNAME:
 		{
 			// BOOST CAST

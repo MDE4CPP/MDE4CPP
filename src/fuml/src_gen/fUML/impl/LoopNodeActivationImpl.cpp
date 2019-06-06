@@ -262,7 +262,16 @@ Any LoopNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType) con
 	switch(featureID)
 	{
 		case FUMLPackage::LOOPNODEACTIVATION_ATTRIBUTE_BODYOUTPUTLISTS:
-			return eAny(getBodyOutputLists()); //7411
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<fUML::Values>::iterator iter = m_bodyOutputLists->begin();
+			Bag<fUML::Values>::iterator end = m_bodyOutputLists->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //7411
+		}
 	}
 	return StructuredActivityNodeActivationImpl::eGet(featureID, resolve, coreType);
 }
@@ -279,6 +288,42 @@ bool LoopNodeActivationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
+		case FUMLPackage::LOOPNODEACTIVATION_ATTRIBUTE_BODYOUTPUTLISTS:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<fUML::Values>> bodyOutputListsList(new Bag<fUML::Values>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				bodyOutputListsList->add(std::dynamic_pointer_cast<fUML::Values>(*iter));
+				iter++;
+			}
+			
+			Bag<fUML::Values>::iterator iterBodyOutputLists = m_bodyOutputLists->begin();
+			Bag<fUML::Values>::iterator endBodyOutputLists = m_bodyOutputLists->end();
+			while (iterBodyOutputLists != endBodyOutputLists)
+			{
+				if (bodyOutputListsList->find(*iterBodyOutputLists) == -1)
+				{
+					m_bodyOutputLists->erase(*iterBodyOutputLists);
+				}
+				iterBodyOutputLists++;
+			}
+
+			iterBodyOutputLists = bodyOutputListsList->begin();
+			endBodyOutputLists = bodyOutputListsList->end();
+			while (iterBodyOutputLists != endBodyOutputLists)
+			{
+				if (m_bodyOutputLists->find(*iterBodyOutputLists) == -1)
+				{
+					m_bodyOutputLists->add(*iterBodyOutputLists);
+				}
+				iterBodyOutputLists++;			
+			}
+			return true;
+		}
 	}
 
 	return StructuredActivityNodeActivationImpl::eSet(featureID, newValue);

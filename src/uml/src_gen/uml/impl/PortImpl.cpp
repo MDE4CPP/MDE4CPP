@@ -615,13 +615,40 @@ Any PortImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case UmlPackage::PORT_ATTRIBUTE_ISSERVICE:
 			return eAny(getIsService()); //18146
 		case UmlPackage::PORT_ATTRIBUTE_PROTOCOL:
-			return eAny(getProtocol()); //18147
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getProtocol())); //18147
 		case UmlPackage::PORT_ATTRIBUTE_PROVIDED:
-			return eAny(getProvided()); //18148
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Interface>::iterator iter = m_provided->begin();
+			Bag<uml::Interface>::iterator end = m_provided->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //18148
+		}
 		case UmlPackage::PORT_ATTRIBUTE_REDEFINEDPORT:
-			return eAny(getRedefinedPort()); //18149
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Port>::iterator iter = m_redefinedPort->begin();
+			Bag<uml::Port>::iterator end = m_redefinedPort->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //18149
+		}
 		case UmlPackage::PORT_ATTRIBUTE_REQUIRED:
-			return eAny(getRequired()); //18150
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Interface>::iterator iter = m_required->begin();
+			Bag<uml::Interface>::iterator end = m_required->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //18150
+		}
 	}
 	return PropertyImpl::eGet(featureID, resolve, coreType);
 }
@@ -674,8 +701,45 @@ bool PortImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::PORT_ATTRIBUTE_PROTOCOL:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::ProtocolStateMachine> _protocol = newValue->get<std::shared_ptr<uml::ProtocolStateMachine>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::ProtocolStateMachine> _protocol = std::dynamic_pointer_cast<uml::ProtocolStateMachine>(_temp);
 			setProtocol(_protocol); //18147
+			return true;
+		}
+		case UmlPackage::PORT_ATTRIBUTE_REDEFINEDPORT:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Port>> redefinedPortList(new Bag<uml::Port>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				redefinedPortList->add(std::dynamic_pointer_cast<uml::Port>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Port>::iterator iterRedefinedPort = m_redefinedPort->begin();
+			Bag<uml::Port>::iterator endRedefinedPort = m_redefinedPort->end();
+			while (iterRedefinedPort != endRedefinedPort)
+			{
+				if (redefinedPortList->find(*iterRedefinedPort) == -1)
+				{
+					m_redefinedPort->erase(*iterRedefinedPort);
+				}
+				iterRedefinedPort++;
+			}
+
+			iterRedefinedPort = redefinedPortList->begin();
+			endRedefinedPort = redefinedPortList->end();
+			while (iterRedefinedPort != endRedefinedPort)
+			{
+				if (m_redefinedPort->find(*iterRedefinedPort) == -1)
+				{
+					m_redefinedPort->add(*iterRedefinedPort);
+				}
+				iterRedefinedPort++;			
+			}
 			return true;
 		}
 	}

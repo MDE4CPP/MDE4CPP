@@ -242,9 +242,9 @@ Any ProtocolConformanceImpl::eGet(int featureID, bool resolve, bool coreType) co
 	switch(featureID)
 	{
 		case UmlPackage::PROTOCOLCONFORMANCE_ATTRIBUTE_GENERALMACHINE:
-			return eAny(getGeneralMachine()); //1866
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getGeneralMachine())); //1866
 		case UmlPackage::PROTOCOLCONFORMANCE_ATTRIBUTE_SPECIFICMACHINE:
-			return eAny(getSpecificMachine()); //1867
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSpecificMachine().lock())); //1867
 	}
 	return DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
 }
@@ -266,14 +266,16 @@ bool ProtocolConformanceImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::PROTOCOLCONFORMANCE_ATTRIBUTE_GENERALMACHINE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::ProtocolStateMachine> _generalMachine = newValue->get<std::shared_ptr<uml::ProtocolStateMachine>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::ProtocolStateMachine> _generalMachine = std::dynamic_pointer_cast<uml::ProtocolStateMachine>(_temp);
 			setGeneralMachine(_generalMachine); //1866
 			return true;
 		}
 		case UmlPackage::PROTOCOLCONFORMANCE_ATTRIBUTE_SPECIFICMACHINE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::ProtocolStateMachine> _specificMachine = newValue->get<std::shared_ptr<uml::ProtocolStateMachine>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::ProtocolStateMachine> _specificMachine = std::dynamic_pointer_cast<uml::ProtocolStateMachine>(_temp);
 			setSpecificMachine(_specificMachine); //1867
 			return true;
 		}

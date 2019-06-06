@@ -210,24 +210,24 @@ ComponentImpl::~ComponentImpl()
 
 
 //Additional constructor for the containments back reference
-			ComponentImpl::ComponentImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id)
-			:ComponentImpl()
-			{
-				switch(reference_id)
-				{	
-				case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
-					m_owningPackage = par_Package;
-					m_namespace = par_Package;
-					 return;
-				case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
-					m_package = par_Package;
-					m_namespace = par_Package;
-					 return;
-				default:
-				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
-				}
-			   
-			}
+ComponentImpl::ComponentImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id)
+:ComponentImpl()
+{
+	switch(reference_id)
+	{	
+	case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
+		m_owningPackage = par_Package;
+		m_namespace = par_Package;
+		 return;
+	case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
+		m_package = par_Package;
+		m_namespace = par_Package;
+		 return;
+	default:
+	std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
+	}
+   
+}
 
 
 
@@ -738,13 +738,49 @@ Any ComponentImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case UmlPackage::COMPONENT_ATTRIBUTE_ISINDIRECTLYINSTANTIATED:
 			return eAny(getIsIndirectlyInstantiated()); //4752
 		case UmlPackage::COMPONENT_ATTRIBUTE_PACKAGEDELEMENT:
-			return eAny(getPackagedElement()); //4753
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::PackageableElement>::iterator iter = m_packagedElement->begin();
+			Bag<uml::PackageableElement>::iterator end = m_packagedElement->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //4753
+		}
 		case UmlPackage::COMPONENT_ATTRIBUTE_PROVIDED:
-			return eAny(getProvided()); //4754
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Interface>::iterator iter = m_provided->begin();
+			Bag<uml::Interface>::iterator end = m_provided->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //4754
+		}
 		case UmlPackage::COMPONENT_ATTRIBUTE_REALIZATION:
-			return eAny(getRealization()); //4755
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::ComponentRealization>::iterator iter = m_realization->begin();
+			Bag<uml::ComponentRealization>::iterator end = m_realization->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //4755
+		}
 		case UmlPackage::COMPONENT_ATTRIBUTE_REQUIRED:
-			return eAny(getRequired()); //4756
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Interface>::iterator iter = m_required->begin();
+			Bag<uml::Interface>::iterator end = m_required->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //4756
+		}
 	}
 	return ClassImpl::eGet(featureID, resolve, coreType);
 }
@@ -774,6 +810,78 @@ bool ComponentImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			bool _isIndirectlyInstantiated = newValue->get<bool>();
 			setIsIndirectlyInstantiated(_isIndirectlyInstantiated); //4752
+			return true;
+		}
+		case UmlPackage::COMPONENT_ATTRIBUTE_PACKAGEDELEMENT:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::PackageableElement>> packagedElementList(new Bag<uml::PackageableElement>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				packagedElementList->add(std::dynamic_pointer_cast<uml::PackageableElement>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::PackageableElement>::iterator iterPackagedElement = m_packagedElement->begin();
+			Bag<uml::PackageableElement>::iterator endPackagedElement = m_packagedElement->end();
+			while (iterPackagedElement != endPackagedElement)
+			{
+				if (packagedElementList->find(*iterPackagedElement) == -1)
+				{
+					m_packagedElement->erase(*iterPackagedElement);
+				}
+				iterPackagedElement++;
+			}
+
+			iterPackagedElement = packagedElementList->begin();
+			endPackagedElement = packagedElementList->end();
+			while (iterPackagedElement != endPackagedElement)
+			{
+				if (m_packagedElement->find(*iterPackagedElement) == -1)
+				{
+					m_packagedElement->add(*iterPackagedElement);
+				}
+				iterPackagedElement++;			
+			}
+			return true;
+		}
+		case UmlPackage::COMPONENT_ATTRIBUTE_REALIZATION:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::ComponentRealization>> realizationList(new Bag<uml::ComponentRealization>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				realizationList->add(std::dynamic_pointer_cast<uml::ComponentRealization>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::ComponentRealization>::iterator iterRealization = m_realization->begin();
+			Bag<uml::ComponentRealization>::iterator endRealization = m_realization->end();
+			while (iterRealization != endRealization)
+			{
+				if (realizationList->find(*iterRealization) == -1)
+				{
+					m_realization->erase(*iterRealization);
+				}
+				iterRealization++;
+			}
+
+			iterRealization = realizationList->begin();
+			endRealization = realizationList->end();
+			while (iterRealization != endRealization)
+			{
+				if (m_realization->find(*iterRealization) == -1)
+				{
+					m_realization->add(*iterRealization);
+				}
+				iterRealization++;			
+			}
 			return true;
 		}
 	}

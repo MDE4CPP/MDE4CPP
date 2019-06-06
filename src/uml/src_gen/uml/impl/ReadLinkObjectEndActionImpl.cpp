@@ -462,11 +462,11 @@ Any ReadLinkObjectEndActionImpl::eGet(int featureID, bool resolve, bool coreType
 	switch(featureID)
 	{
 		case UmlPackage::READLINKOBJECTENDACTION_ATTRIBUTE_END:
-			return eAny(getEnd()); //19627
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEnd())); //19627
 		case UmlPackage::READLINKOBJECTENDACTION_ATTRIBUTE_OBJECT:
-			return eAny(getObject()); //19628
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getObject())); //19628
 		case UmlPackage::READLINKOBJECTENDACTION_ATTRIBUTE_RESULT:
-			return eAny(getResult()); //19629
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getResult())); //19629
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -490,21 +490,24 @@ bool ReadLinkObjectEndActionImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::READLINKOBJECTENDACTION_ATTRIBUTE_END:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Property> _end = newValue->get<std::shared_ptr<uml::Property>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Property> _end = std::dynamic_pointer_cast<uml::Property>(_temp);
 			setEnd(_end); //19627
 			return true;
 		}
 		case UmlPackage::READLINKOBJECTENDACTION_ATTRIBUTE_OBJECT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::InputPin> _object = newValue->get<std::shared_ptr<uml::InputPin>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::InputPin> _object = std::dynamic_pointer_cast<uml::InputPin>(_temp);
 			setObject(_object); //19628
 			return true;
 		}
 		case UmlPackage::READLINKOBJECTENDACTION_ATTRIBUTE_RESULT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::OutputPin> _result = newValue->get<std::shared_ptr<uml::OutputPin>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::OutputPin> _result = std::dynamic_pointer_cast<uml::OutputPin>(_temp);
 			setResult(_result); //19629
 			return true;
 		}

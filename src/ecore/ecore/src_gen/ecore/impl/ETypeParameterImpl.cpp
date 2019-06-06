@@ -195,7 +195,16 @@ Any ETypeParameterImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case EcorePackage::ETYPEPARAMETER_ATTRIBUTE_EBOUNDS:
-			return eAny(getEBounds()); //525
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<ecore::EGenericType>::iterator iter = m_eBounds->begin();
+			Bag<ecore::EGenericType>::iterator end = m_eBounds->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //525
+		}
 	}
 	return ENamedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -212,6 +221,42 @@ bool ETypeParameterImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
+		case EcorePackage::ETYPEPARAMETER_ATTRIBUTE_EBOUNDS:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<ecore::EGenericType>> eBoundsList(new Bag<ecore::EGenericType>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				eBoundsList->add(std::dynamic_pointer_cast<ecore::EGenericType>(*iter));
+				iter++;
+			}
+			
+			Bag<ecore::EGenericType>::iterator iterEBounds = m_eBounds->begin();
+			Bag<ecore::EGenericType>::iterator endEBounds = m_eBounds->end();
+			while (iterEBounds != endEBounds)
+			{
+				if (eBoundsList->find(*iterEBounds) == -1)
+				{
+					m_eBounds->erase(*iterEBounds);
+				}
+				iterEBounds++;
+			}
+
+			iterEBounds = eBoundsList->begin();
+			endEBounds = eBoundsList->end();
+			while (iterEBounds != endEBounds)
+			{
+				if (m_eBounds->find(*iterEBounds) == -1)
+				{
+					m_eBounds->add(*iterEBounds);
+				}
+				iterEBounds++;			
+			}
+			return true;
+		}
 	}
 
 	return ENamedElementImpl::eSet(featureID, newValue);

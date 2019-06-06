@@ -213,7 +213,7 @@ Any ExpansionActivationGroupImpl::eGet(int featureID, bool resolve, bool coreTyp
 	switch(featureID)
 	{
 		case FUMLPackage::EXPANSIONACTIVATIONGROUP_ATTRIBUTE_REGIONACTIVATION:
-			return eAny(getRegionActivation()); //465
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getRegionActivation())); //465
 	}
 	return ActivityNodeActivationGroupImpl::eGet(featureID, resolve, coreType);
 }
@@ -233,7 +233,8 @@ bool ExpansionActivationGroupImpl::eSet(int featureID, Any newValue)
 		case FUMLPackage::EXPANSIONACTIVATIONGROUP_ATTRIBUTE_REGIONACTIVATION:
 		{
 			// BOOST CAST
-			std::shared_ptr<fUML::ExpansionRegionActivation> _regionActivation = newValue->get<std::shared_ptr<fUML::ExpansionRegionActivation>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<fUML::ExpansionRegionActivation> _regionActivation = std::dynamic_pointer_cast<fUML::ExpansionRegionActivation>(_temp);
 			setRegionActivation(_regionActivation); //465
 			return true;
 		}

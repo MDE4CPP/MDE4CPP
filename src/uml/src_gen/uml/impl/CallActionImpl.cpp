@@ -451,7 +451,16 @@ Any CallActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case UmlPackage::CALLACTION_ATTRIBUTE_ISSYNCHRONOUS:
 			return eAny(getIsSynchronous()); //2829
 		case UmlPackage::CALLACTION_ATTRIBUTE_RESULT:
-			return eAny(getResult()); //2830
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::OutputPin>::iterator iter = m_result->begin();
+			Bag<uml::OutputPin>::iterator end = m_result->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //2830
+		}
 	}
 	return InvocationActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -475,6 +484,42 @@ bool CallActionImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			bool _isSynchronous = newValue->get<bool>();
 			setIsSynchronous(_isSynchronous); //2829
+			return true;
+		}
+		case UmlPackage::CALLACTION_ATTRIBUTE_RESULT:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::OutputPin>> resultList(new Bag<uml::OutputPin>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				resultList->add(std::dynamic_pointer_cast<uml::OutputPin>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::OutputPin>::iterator iterResult = m_result->begin();
+			Bag<uml::OutputPin>::iterator endResult = m_result->end();
+			while (iterResult != endResult)
+			{
+				if (resultList->find(*iterResult) == -1)
+				{
+					m_result->erase(*iterResult);
+				}
+				iterResult++;
+			}
+
+			iterResult = resultList->begin();
+			endResult = resultList->end();
+			while (iterResult != endResult)
+			{
+				if (m_result->find(*iterResult) == -1)
+				{
+					m_result->add(*iterResult);
+				}
+				iterResult++;			
+			}
 			return true;
 		}
 	}

@@ -358,15 +358,24 @@ Any ActivityEdgeInstanceImpl::eGet(int featureID, bool resolve, bool coreType) c
 	switch(featureID)
 	{
 		case FUMLPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_EDGE:
-			return eAny(getEdge()); //40
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEdge())); //40
 		case FUMLPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_GROUP:
-			return eAny(getGroup()); //44
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getGroup().lock())); //44
 		case FUMLPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_OFFERS:
-			return eAny(getOffers()); //43
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<fUML::Offer>::iterator iter = m_offers->begin();
+			Bag<fUML::Offer>::iterator end = m_offers->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //43
+		}
 		case FUMLPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_SOURCE:
-			return eAny(getSource()); //41
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSource().lock())); //41
 		case FUMLPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_TARGET:
-			return eAny(getTarget()); //42
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getTarget().lock())); //42
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
@@ -394,28 +403,68 @@ bool ActivityEdgeInstanceImpl::eSet(int featureID, Any newValue)
 		case FUMLPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_EDGE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::ActivityEdge> _edge = newValue->get<std::shared_ptr<uml::ActivityEdge>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::ActivityEdge> _edge = std::dynamic_pointer_cast<uml::ActivityEdge>(_temp);
 			setEdge(_edge); //40
 			return true;
 		}
 		case FUMLPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_GROUP:
 		{
 			// BOOST CAST
-			std::shared_ptr<fUML::ActivityNodeActivationGroup> _group = newValue->get<std::shared_ptr<fUML::ActivityNodeActivationGroup>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<fUML::ActivityNodeActivationGroup> _group = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(_temp);
 			setGroup(_group); //44
+			return true;
+		}
+		case FUMLPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_OFFERS:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<fUML::Offer>> offersList(new Bag<fUML::Offer>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				offersList->add(std::dynamic_pointer_cast<fUML::Offer>(*iter));
+				iter++;
+			}
+			
+			Bag<fUML::Offer>::iterator iterOffers = m_offers->begin();
+			Bag<fUML::Offer>::iterator endOffers = m_offers->end();
+			while (iterOffers != endOffers)
+			{
+				if (offersList->find(*iterOffers) == -1)
+				{
+					m_offers->erase(*iterOffers);
+				}
+				iterOffers++;
+			}
+
+			iterOffers = offersList->begin();
+			endOffers = offersList->end();
+			while (iterOffers != endOffers)
+			{
+				if (m_offers->find(*iterOffers) == -1)
+				{
+					m_offers->add(*iterOffers);
+				}
+				iterOffers++;			
+			}
 			return true;
 		}
 		case FUMLPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_SOURCE:
 		{
 			// BOOST CAST
-			std::shared_ptr<fUML::ActivityNodeActivation> _source = newValue->get<std::shared_ptr<fUML::ActivityNodeActivation>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<fUML::ActivityNodeActivation> _source = std::dynamic_pointer_cast<fUML::ActivityNodeActivation>(_temp);
 			setSource(_source); //41
 			return true;
 		}
 		case FUMLPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_TARGET:
 		{
 			// BOOST CAST
-			std::shared_ptr<fUML::ActivityNodeActivation> _target = newValue->get<std::shared_ptr<fUML::ActivityNodeActivation>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<fUML::ActivityNodeActivation> _target = std::dynamic_pointer_cast<fUML::ActivityNodeActivation>(_temp);
 			setTarget(_target); //42
 			return true;
 		}

@@ -400,9 +400,18 @@ Any InteractionOperandImpl::eGet(int featureID, bool resolve, bool coreType) con
 	switch(featureID)
 	{
 		case UmlPackage::INTERACTIONOPERAND_ATTRIBUTE_FRAGMENT:
-			return eAny(getFragment()); //12219
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::InteractionFragment>::iterator iter = m_fragment->begin();
+			Bag<uml::InteractionFragment>::iterator end = m_fragment->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //12219
+		}
 		case UmlPackage::INTERACTIONOPERAND_ATTRIBUTE_GUARD:
-			return eAny(getGuard()); //12220
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getGuard())); //12220
 	}
 	Any result;
 	result = InteractionFragmentImpl::eGet(featureID, resolve, coreType);
@@ -435,10 +444,47 @@ bool InteractionOperandImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
+		case UmlPackage::INTERACTIONOPERAND_ATTRIBUTE_FRAGMENT:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::InteractionFragment>> fragmentList(new Bag<uml::InteractionFragment>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				fragmentList->add(std::dynamic_pointer_cast<uml::InteractionFragment>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::InteractionFragment>::iterator iterFragment = m_fragment->begin();
+			Bag<uml::InteractionFragment>::iterator endFragment = m_fragment->end();
+			while (iterFragment != endFragment)
+			{
+				if (fragmentList->find(*iterFragment) == -1)
+				{
+					m_fragment->erase(*iterFragment);
+				}
+				iterFragment++;
+			}
+
+			iterFragment = fragmentList->begin();
+			endFragment = fragmentList->end();
+			while (iterFragment != endFragment)
+			{
+				if (m_fragment->find(*iterFragment) == -1)
+				{
+					m_fragment->add(*iterFragment);
+				}
+				iterFragment++;			
+			}
+			return true;
+		}
 		case UmlPackage::INTERACTIONOPERAND_ATTRIBUTE_GUARD:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::InteractionConstraint> _guard = newValue->get<std::shared_ptr<uml::InteractionConstraint>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::InteractionConstraint> _guard = std::dynamic_pointer_cast<uml::InteractionConstraint>(_temp);
 			setGuard(_guard); //12220
 			return true;
 		}

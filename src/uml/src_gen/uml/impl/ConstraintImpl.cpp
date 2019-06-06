@@ -102,24 +102,24 @@ ConstraintImpl::~ConstraintImpl()
 
 
 //Additional constructor for the containments back reference
-			ConstraintImpl::ConstraintImpl(std::weak_ptr<uml::Namespace > par_Namespace, const int reference_id)
-			:ConstraintImpl()
-			{
-				switch(reference_id)
-				{	
-				case UmlPackage::CONSTRAINT_ATTRIBUTE_CONTEXT:
-					m_context = par_Namespace;
-					m_namespace = par_Namespace;
-					 return;
-				case UmlPackage::NAMEDELEMENT_ATTRIBUTE_NAMESPACE:
-					m_namespace = par_Namespace;
-					m_owner = par_Namespace;
-					 return;
-				default:
-				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
-				}
-			   
-			}
+ConstraintImpl::ConstraintImpl(std::weak_ptr<uml::Namespace > par_Namespace, const int reference_id)
+:ConstraintImpl()
+{
+	switch(reference_id)
+	{	
+	case UmlPackage::CONSTRAINT_ATTRIBUTE_CONTEXT:
+		m_context = par_Namespace;
+		m_namespace = par_Namespace;
+		 return;
+	case UmlPackage::NAMEDELEMENT_ATTRIBUTE_NAMESPACE:
+		m_namespace = par_Namespace;
+		m_owner = par_Namespace;
+		 return;
+	default:
+	std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
+	}
+   
+}
 
 
 
@@ -356,11 +356,20 @@ Any ConstraintImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::CONSTRAINT_ATTRIBUTE_CONSTRAINEDELEMENT:
-			return eAny(getConstrainedElement()); //5712
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Element>::iterator iter = m_constrainedElement->begin();
+			Bag<uml::Element>::iterator end = m_constrainedElement->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //5712
+		}
 		case UmlPackage::CONSTRAINT_ATTRIBUTE_CONTEXT:
-			return eAny(getContext()); //5713
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getContext().lock())); //5713
 		case UmlPackage::CONSTRAINT_ATTRIBUTE_SPECIFICATION:
-			return eAny(getSpecification()); //5714
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSpecification())); //5714
 	}
 	return PackageableElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -381,17 +390,55 @@ bool ConstraintImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
+		case UmlPackage::CONSTRAINT_ATTRIBUTE_CONSTRAINEDELEMENT:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Element>> constrainedElementList(new Bag<uml::Element>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				constrainedElementList->add(std::dynamic_pointer_cast<uml::Element>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Element>::iterator iterConstrainedElement = m_constrainedElement->begin();
+			Bag<uml::Element>::iterator endConstrainedElement = m_constrainedElement->end();
+			while (iterConstrainedElement != endConstrainedElement)
+			{
+				if (constrainedElementList->find(*iterConstrainedElement) == -1)
+				{
+					m_constrainedElement->erase(*iterConstrainedElement);
+				}
+				iterConstrainedElement++;
+			}
+
+			iterConstrainedElement = constrainedElementList->begin();
+			endConstrainedElement = constrainedElementList->end();
+			while (iterConstrainedElement != endConstrainedElement)
+			{
+				if (m_constrainedElement->find(*iterConstrainedElement) == -1)
+				{
+					m_constrainedElement->add(*iterConstrainedElement);
+				}
+				iterConstrainedElement++;			
+			}
+			return true;
+		}
 		case UmlPackage::CONSTRAINT_ATTRIBUTE_CONTEXT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Namespace> _context = newValue->get<std::shared_ptr<uml::Namespace>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Namespace> _context = std::dynamic_pointer_cast<uml::Namespace>(_temp);
 			setContext(_context); //5713
 			return true;
 		}
 		case UmlPackage::CONSTRAINT_ATTRIBUTE_SPECIFICATION:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::ValueSpecification> _specification = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::ValueSpecification> _specification = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
 			setSpecification(_specification); //5714
 			return true;
 		}

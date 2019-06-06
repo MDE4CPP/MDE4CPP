@@ -150,7 +150,16 @@ Any ValuesImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case FUMLPackage::VALUES_ATTRIBUTE_VALUES:
-			return eAny(getValues()); //1130
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<fUML::Value>::iterator iter = m_values->begin();
+			Bag<fUML::Value>::iterator end = m_values->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //1130
+		}
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
@@ -167,6 +176,42 @@ bool ValuesImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
+		case FUMLPackage::VALUES_ATTRIBUTE_VALUES:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<fUML::Value>> valuesList(new Bag<fUML::Value>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				valuesList->add(std::dynamic_pointer_cast<fUML::Value>(*iter));
+				iter++;
+			}
+			
+			Bag<fUML::Value>::iterator iterValues = m_values->begin();
+			Bag<fUML::Value>::iterator endValues = m_values->end();
+			while (iterValues != endValues)
+			{
+				if (valuesList->find(*iterValues) == -1)
+				{
+					m_values->erase(*iterValues);
+				}
+				iterValues++;
+			}
+
+			iterValues = valuesList->begin();
+			endValues = valuesList->end();
+			while (iterValues != endValues)
+			{
+				if (m_values->find(*iterValues) == -1)
+				{
+					m_values->add(*iterValues);
+				}
+				iterValues++;			
+			}
+			return true;
+		}
 	}
 
 	return ecore::EObjectImpl::eSet(featureID, newValue);

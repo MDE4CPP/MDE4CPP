@@ -329,13 +329,22 @@ Any GeneralizationSetImpl::eGet(int featureID, bool resolve, bool coreType) cons
 	switch(featureID)
 	{
 		case UmlPackage::GENERALIZATIONSET_ATTRIBUTE_GENERALIZATION:
-			return eAny(getGeneralization()); //11015
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Generalization>::iterator iter = m_generalization->begin();
+			Bag<uml::Generalization>::iterator end = m_generalization->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //11015
+		}
 		case UmlPackage::GENERALIZATIONSET_ATTRIBUTE_ISCOVERING:
 			return eAny(getIsCovering()); //11012
 		case UmlPackage::GENERALIZATIONSET_ATTRIBUTE_ISDISJOINT:
 			return eAny(getIsDisjoint()); //11013
 		case UmlPackage::GENERALIZATIONSET_ATTRIBUTE_POWERTYPE:
-			return eAny(getPowertype()); //11014
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getPowertype())); //11014
 	}
 	return PackageableElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -358,6 +367,42 @@ bool GeneralizationSetImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
+		case UmlPackage::GENERALIZATIONSET_ATTRIBUTE_GENERALIZATION:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Generalization>> generalizationList(new Bag<uml::Generalization>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				generalizationList->add(std::dynamic_pointer_cast<uml::Generalization>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Generalization>::iterator iterGeneralization = m_generalization->begin();
+			Bag<uml::Generalization>::iterator endGeneralization = m_generalization->end();
+			while (iterGeneralization != endGeneralization)
+			{
+				if (generalizationList->find(*iterGeneralization) == -1)
+				{
+					m_generalization->erase(*iterGeneralization);
+				}
+				iterGeneralization++;
+			}
+
+			iterGeneralization = generalizationList->begin();
+			endGeneralization = generalizationList->end();
+			while (iterGeneralization != endGeneralization)
+			{
+				if (m_generalization->find(*iterGeneralization) == -1)
+				{
+					m_generalization->add(*iterGeneralization);
+				}
+				iterGeneralization++;			
+			}
+			return true;
+		}
 		case UmlPackage::GENERALIZATIONSET_ATTRIBUTE_ISCOVERING:
 		{
 			// BOOST CAST
@@ -375,7 +420,8 @@ bool GeneralizationSetImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::GENERALIZATIONSET_ATTRIBUTE_POWERTYPE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Classifier> _powertype = newValue->get<std::shared_ptr<uml::Classifier>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Classifier> _powertype = std::dynamic_pointer_cast<uml::Classifier>(_temp);
 			setPowertype(_powertype); //11014
 			return true;
 		}

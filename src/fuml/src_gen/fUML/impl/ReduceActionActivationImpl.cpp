@@ -224,7 +224,7 @@ Any ReduceActionActivationImpl::eGet(int featureID, bool resolve, bool coreType)
 	switch(featureID)
 	{
 		case FUMLPackage::REDUCEACTIONACTIVATION_ATTRIBUTE_CURRENTEXECUTION:
-			return eAny(getCurrentExecution()); //9410
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getCurrentExecution())); //9410
 	}
 	return ActionActivationImpl::eGet(featureID, resolve, coreType);
 }
@@ -244,7 +244,8 @@ bool ReduceActionActivationImpl::eSet(int featureID, Any newValue)
 		case FUMLPackage::REDUCEACTIONACTIVATION_ATTRIBUTE_CURRENTEXECUTION:
 		{
 			// BOOST CAST
-			std::shared_ptr<fUML::Execution> _currentExecution = newValue->get<std::shared_ptr<fUML::Execution>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<fUML::Execution> _currentExecution = std::dynamic_pointer_cast<fUML::Execution>(_temp);
 			setCurrentExecution(_currentExecution); //9410
 			return true;
 		}

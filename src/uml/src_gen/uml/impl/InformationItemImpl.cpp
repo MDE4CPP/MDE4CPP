@@ -145,24 +145,24 @@ InformationItemImpl::~InformationItemImpl()
 
 
 //Additional constructor for the containments back reference
-			InformationItemImpl::InformationItemImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id)
-			:InformationItemImpl()
-			{
-				switch(reference_id)
-				{	
-				case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
-					m_owningPackage = par_Package;
-					m_namespace = par_Package;
-					 return;
-				case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
-					m_package = par_Package;
-					m_namespace = par_Package;
-					 return;
-				default:
-				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
-				}
-			   
-			}
+InformationItemImpl::InformationItemImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id)
+:InformationItemImpl()
+{
+	switch(reference_id)
+	{	
+	case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
+		m_owningPackage = par_Package;
+		m_namespace = par_Package;
+		 return;
+	case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
+		m_package = par_Package;
+		m_namespace = par_Package;
+		 return;
+	default:
+	std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
+	}
+   
+}
 
 
 
@@ -487,7 +487,16 @@ Any InformationItemImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::INFORMATIONITEM_ATTRIBUTE_REPRESENTED:
-			return eAny(getRepresented()); //11438
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Classifier>::iterator iter = m_represented->begin();
+			Bag<uml::Classifier>::iterator end = m_represented->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //11438
+		}
 	}
 	return ClassifierImpl::eGet(featureID, resolve, coreType);
 }
@@ -504,6 +513,42 @@ bool InformationItemImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
+		case UmlPackage::INFORMATIONITEM_ATTRIBUTE_REPRESENTED:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Classifier>> representedList(new Bag<uml::Classifier>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				representedList->add(std::dynamic_pointer_cast<uml::Classifier>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Classifier>::iterator iterRepresented = m_represented->begin();
+			Bag<uml::Classifier>::iterator endRepresented = m_represented->end();
+			while (iterRepresented != endRepresented)
+			{
+				if (representedList->find(*iterRepresented) == -1)
+				{
+					m_represented->erase(*iterRepresented);
+				}
+				iterRepresented++;
+			}
+
+			iterRepresented = representedList->begin();
+			endRepresented = representedList->end();
+			while (iterRepresented != endRepresented)
+			{
+				if (m_represented->find(*iterRepresented) == -1)
+				{
+					m_represented->add(*iterRepresented);
+				}
+				iterRepresented++;			
+			}
+			return true;
+		}
 	}
 
 	return ClassifierImpl::eSet(featureID, newValue);

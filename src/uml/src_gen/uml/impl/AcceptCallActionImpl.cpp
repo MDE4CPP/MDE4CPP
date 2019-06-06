@@ -412,7 +412,7 @@ Any AcceptCallActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::ACCEPTCALLACTION_ATTRIBUTE_RETURNINFORMATION:
-			return eAny(getReturnInformation()); //230
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getReturnInformation())); //230
 	}
 	return AcceptEventActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -432,7 +432,8 @@ bool AcceptCallActionImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::ACCEPTCALLACTION_ATTRIBUTE_RETURNINFORMATION:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::OutputPin> _returnInformation = newValue->get<std::shared_ptr<uml::OutputPin>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::OutputPin> _returnInformation = std::dynamic_pointer_cast<uml::OutputPin>(_temp);
 			setReturnInformation(_returnInformation); //230
 			return true;
 		}

@@ -242,9 +242,18 @@ Any TemplateableElementImpl::eGet(int featureID, bool resolve, bool coreType) co
 	switch(featureID)
 	{
 		case UmlPackage::TEMPLATEABLEELEMENT_ATTRIBUTE_OWNEDTEMPLATESIGNATURE:
-			return eAny(getOwnedTemplateSignature()); //2344
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getOwnedTemplateSignature())); //2344
 		case UmlPackage::TEMPLATEABLEELEMENT_ATTRIBUTE_TEMPLATEBINDING:
-			return eAny(getTemplateBinding()); //2343
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::TemplateBinding>::iterator iter = m_templateBinding->begin();
+			Bag<uml::TemplateBinding>::iterator end = m_templateBinding->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //2343
+		}
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -266,8 +275,45 @@ bool TemplateableElementImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::TEMPLATEABLEELEMENT_ATTRIBUTE_OWNEDTEMPLATESIGNATURE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::TemplateSignature> _ownedTemplateSignature = newValue->get<std::shared_ptr<uml::TemplateSignature>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::TemplateSignature> _ownedTemplateSignature = std::dynamic_pointer_cast<uml::TemplateSignature>(_temp);
 			setOwnedTemplateSignature(_ownedTemplateSignature); //2344
+			return true;
+		}
+		case UmlPackage::TEMPLATEABLEELEMENT_ATTRIBUTE_TEMPLATEBINDING:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::TemplateBinding>> templateBindingList(new Bag<uml::TemplateBinding>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				templateBindingList->add(std::dynamic_pointer_cast<uml::TemplateBinding>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::TemplateBinding>::iterator iterTemplateBinding = m_templateBinding->begin();
+			Bag<uml::TemplateBinding>::iterator endTemplateBinding = m_templateBinding->end();
+			while (iterTemplateBinding != endTemplateBinding)
+			{
+				if (templateBindingList->find(*iterTemplateBinding) == -1)
+				{
+					m_templateBinding->erase(*iterTemplateBinding);
+				}
+				iterTemplateBinding++;
+			}
+
+			iterTemplateBinding = templateBindingList->begin();
+			endTemplateBinding = templateBindingList->end();
+			while (iterTemplateBinding != endTemplateBinding)
+			{
+				if (m_templateBinding->find(*iterTemplateBinding) == -1)
+				{
+					m_templateBinding->add(*iterTemplateBinding);
+				}
+				iterTemplateBinding++;			
+			}
 			return true;
 		}
 	}

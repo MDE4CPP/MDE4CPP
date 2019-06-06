@@ -420,15 +420,24 @@ Any ObjectNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::OBJECTNODE_ATTRIBUTE_INSTATE:
-			return eAny(getInState()); //16021
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::State>::iterator iter = m_inState->begin();
+			Bag<uml::State>::iterator end = m_inState->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //16021
+		}
 		case UmlPackage::OBJECTNODE_ATTRIBUTE_ISCONTROLTYPE:
 			return eAny(getIsControlType()); //16022
 		case UmlPackage::OBJECTNODE_ATTRIBUTE_ORDERING:
 			return eAny(getOrdering()); //16023
 		case UmlPackage::OBJECTNODE_ATTRIBUTE_SELECTION:
-			return eAny(getSelection()); //16024
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSelection())); //16024
 		case UmlPackage::OBJECTNODE_ATTRIBUTE_UPPERBOUND:
-			return eAny(getUpperBound()); //16025
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getUpperBound())); //16025
 	}
 	Any result;
 	result = ActivityNodeImpl::eGet(featureID, resolve, coreType);
@@ -467,6 +476,42 @@ bool ObjectNodeImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
+		case UmlPackage::OBJECTNODE_ATTRIBUTE_INSTATE:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::State>> inStateList(new Bag<uml::State>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				inStateList->add(std::dynamic_pointer_cast<uml::State>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::State>::iterator iterInState = m_inState->begin();
+			Bag<uml::State>::iterator endInState = m_inState->end();
+			while (iterInState != endInState)
+			{
+				if (inStateList->find(*iterInState) == -1)
+				{
+					m_inState->erase(*iterInState);
+				}
+				iterInState++;
+			}
+
+			iterInState = inStateList->begin();
+			endInState = inStateList->end();
+			while (iterInState != endInState)
+			{
+				if (m_inState->find(*iterInState) == -1)
+				{
+					m_inState->add(*iterInState);
+				}
+				iterInState++;			
+			}
+			return true;
+		}
 		case UmlPackage::OBJECTNODE_ATTRIBUTE_ISCONTROLTYPE:
 		{
 			// BOOST CAST
@@ -484,14 +529,16 @@ bool ObjectNodeImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::OBJECTNODE_ATTRIBUTE_SELECTION:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Behavior> _selection = newValue->get<std::shared_ptr<uml::Behavior>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Behavior> _selection = std::dynamic_pointer_cast<uml::Behavior>(_temp);
 			setSelection(_selection); //16024
 			return true;
 		}
 		case UmlPackage::OBJECTNODE_ATTRIBUTE_UPPERBOUND:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::ValueSpecification> _upperBound = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::ValueSpecification> _upperBound = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
 			setUpperBound(_upperBound); //16025
 			return true;
 		}

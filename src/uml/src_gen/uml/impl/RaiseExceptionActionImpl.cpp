@@ -375,7 +375,7 @@ Any RaiseExceptionActionImpl::eGet(int featureID, bool resolve, bool coreType) c
 	switch(featureID)
 	{
 		case UmlPackage::RAISEEXCEPTIONACTION_ATTRIBUTE_EXCEPTION:
-			return eAny(getException()); //19227
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getException())); //19227
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -395,7 +395,8 @@ bool RaiseExceptionActionImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::RAISEEXCEPTIONACTION_ATTRIBUTE_EXCEPTION:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::InputPin> _exception = newValue->get<std::shared_ptr<uml::InputPin>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::InputPin> _exception = std::dynamic_pointer_cast<uml::InputPin>(_temp);
 			setException(_exception); //19227
 			return true;
 		}

@@ -290,7 +290,16 @@ Any DurationObservationImpl::eGet(int featureID, bool resolve, bool coreType) co
 	switch(featureID)
 	{
 		case UmlPackage::DURATIONOBSERVATION_ATTRIBUTE_EVENT:
-			return eAny(getEvent()); //8012
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::NamedElement>::iterator iter = m_event->begin();
+			Bag<uml::NamedElement>::iterator end = m_event->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //8012
+		}
 		case UmlPackage::DURATIONOBSERVATION_ATTRIBUTE_FIRSTEVENT:
 			return eAny(getFirstEvent()); //8013
 	}
@@ -311,6 +320,48 @@ bool DurationObservationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
+		case UmlPackage::DURATIONOBSERVATION_ATTRIBUTE_EVENT:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::NamedElement>> eventList(new Bag<uml::NamedElement>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				eventList->add(std::dynamic_pointer_cast<uml::NamedElement>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::NamedElement>::iterator iterEvent = m_event->begin();
+			Bag<uml::NamedElement>::iterator endEvent = m_event->end();
+			while (iterEvent != endEvent)
+			{
+				if (eventList->find(*iterEvent) == -1)
+				{
+					m_event->erase(*iterEvent);
+				}
+				iterEvent++;
+			}
+
+			iterEvent = eventList->begin();
+			endEvent = eventList->end();
+			while (iterEvent != endEvent)
+			{
+				if (m_event->find(*iterEvent) == -1)
+				{
+					m_event->add(*iterEvent);
+				}
+				iterEvent++;			
+			}
+			return true;
+		}
+		case UmlPackage::DURATIONOBSERVATION_ATTRIBUTE_FIRSTEVENT:
+		{
+			// BOOST CAST
+			// nothing to do
+			return true;
+		}
 	}
 
 	return ObservationImpl::eSet(featureID, newValue);

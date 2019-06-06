@@ -661,15 +661,42 @@ Any ActivityNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType)
 	switch(featureID)
 	{
 		case FUMLPackage::ACTIVITYNODEACTIVATION_ATTRIBUTE_GROUP:
-			return eAny(getGroup()); //73
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getGroup().lock())); //73
 		case FUMLPackage::ACTIVITYNODEACTIVATION_ATTRIBUTE_HELDTOKENS:
-			return eAny(getHeldTokens()); //72
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<fUML::Token>::iterator iter = m_heldTokens->begin();
+			Bag<fUML::Token>::iterator end = m_heldTokens->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //72
+		}
 		case FUMLPackage::ACTIVITYNODEACTIVATION_ATTRIBUTE_INCOMINGEDGES:
-			return eAny(getIncomingEdges()); //71
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<fUML::ActivityEdgeInstance>::iterator iter = m_incomingEdges->begin();
+			Bag<fUML::ActivityEdgeInstance>::iterator end = m_incomingEdges->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //71
+		}
 		case FUMLPackage::ACTIVITYNODEACTIVATION_ATTRIBUTE_NODE:
-			return eAny(getNode()); //74
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getNode())); //74
 		case FUMLPackage::ACTIVITYNODEACTIVATION_ATTRIBUTE_OUTGOINGEDGES:
-			return eAny(getOutgoingEdges()); //70
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<fUML::ActivityEdgeInstance>::iterator iter = m_outgoingEdges->begin();
+			Bag<fUML::ActivityEdgeInstance>::iterator end = m_outgoingEdges->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //70
+		}
 		case FUMLPackage::ACTIVITYNODEACTIVATION_ATTRIBUTE_RUNNING:
 			return eAny(isRunning()); //75
 	}
@@ -701,15 +728,125 @@ bool ActivityNodeActivationImpl::eSet(int featureID, Any newValue)
 		case FUMLPackage::ACTIVITYNODEACTIVATION_ATTRIBUTE_GROUP:
 		{
 			// BOOST CAST
-			std::shared_ptr<fUML::ActivityNodeActivationGroup> _group = newValue->get<std::shared_ptr<fUML::ActivityNodeActivationGroup>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<fUML::ActivityNodeActivationGroup> _group = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(_temp);
 			setGroup(_group); //73
+			return true;
+		}
+		case FUMLPackage::ACTIVITYNODEACTIVATION_ATTRIBUTE_HELDTOKENS:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<fUML::Token>> heldTokensList(new Bag<fUML::Token>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				heldTokensList->add(std::dynamic_pointer_cast<fUML::Token>(*iter));
+				iter++;
+			}
+			
+			Bag<fUML::Token>::iterator iterHeldTokens = m_heldTokens->begin();
+			Bag<fUML::Token>::iterator endHeldTokens = m_heldTokens->end();
+			while (iterHeldTokens != endHeldTokens)
+			{
+				if (heldTokensList->find(*iterHeldTokens) == -1)
+				{
+					m_heldTokens->erase(*iterHeldTokens);
+				}
+				iterHeldTokens++;
+			}
+
+			iterHeldTokens = heldTokensList->begin();
+			endHeldTokens = heldTokensList->end();
+			while (iterHeldTokens != endHeldTokens)
+			{
+				if (m_heldTokens->find(*iterHeldTokens) == -1)
+				{
+					m_heldTokens->add(*iterHeldTokens);
+				}
+				iterHeldTokens++;			
+			}
+			return true;
+		}
+		case FUMLPackage::ACTIVITYNODEACTIVATION_ATTRIBUTE_INCOMINGEDGES:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<fUML::ActivityEdgeInstance>> incomingEdgesList(new Bag<fUML::ActivityEdgeInstance>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				incomingEdgesList->add(std::dynamic_pointer_cast<fUML::ActivityEdgeInstance>(*iter));
+				iter++;
+			}
+			
+			Bag<fUML::ActivityEdgeInstance>::iterator iterIncomingEdges = m_incomingEdges->begin();
+			Bag<fUML::ActivityEdgeInstance>::iterator endIncomingEdges = m_incomingEdges->end();
+			while (iterIncomingEdges != endIncomingEdges)
+			{
+				if (incomingEdgesList->find(*iterIncomingEdges) == -1)
+				{
+					m_incomingEdges->erase(*iterIncomingEdges);
+				}
+				iterIncomingEdges++;
+			}
+
+			iterIncomingEdges = incomingEdgesList->begin();
+			endIncomingEdges = incomingEdgesList->end();
+			while (iterIncomingEdges != endIncomingEdges)
+			{
+				if (m_incomingEdges->find(*iterIncomingEdges) == -1)
+				{
+					m_incomingEdges->add(*iterIncomingEdges);
+				}
+				iterIncomingEdges++;			
+			}
 			return true;
 		}
 		case FUMLPackage::ACTIVITYNODEACTIVATION_ATTRIBUTE_NODE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::ActivityNode> _node = newValue->get<std::shared_ptr<uml::ActivityNode>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::ActivityNode> _node = std::dynamic_pointer_cast<uml::ActivityNode>(_temp);
 			setNode(_node); //74
+			return true;
+		}
+		case FUMLPackage::ACTIVITYNODEACTIVATION_ATTRIBUTE_OUTGOINGEDGES:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<fUML::ActivityEdgeInstance>> outgoingEdgesList(new Bag<fUML::ActivityEdgeInstance>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				outgoingEdgesList->add(std::dynamic_pointer_cast<fUML::ActivityEdgeInstance>(*iter));
+				iter++;
+			}
+			
+			Bag<fUML::ActivityEdgeInstance>::iterator iterOutgoingEdges = m_outgoingEdges->begin();
+			Bag<fUML::ActivityEdgeInstance>::iterator endOutgoingEdges = m_outgoingEdges->end();
+			while (iterOutgoingEdges != endOutgoingEdges)
+			{
+				if (outgoingEdgesList->find(*iterOutgoingEdges) == -1)
+				{
+					m_outgoingEdges->erase(*iterOutgoingEdges);
+				}
+				iterOutgoingEdges++;
+			}
+
+			iterOutgoingEdges = outgoingEdgesList->begin();
+			endOutgoingEdges = outgoingEdgesList->end();
+			while (iterOutgoingEdges != endOutgoingEdges)
+			{
+				if (m_outgoingEdges->find(*iterOutgoingEdges) == -1)
+				{
+					m_outgoingEdges->add(*iterOutgoingEdges);
+				}
+				iterOutgoingEdges++;			
+			}
 			return true;
 		}
 		case FUMLPackage::ACTIVITYNODEACTIVATION_ATTRIBUTE_RUNNING:

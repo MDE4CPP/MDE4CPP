@@ -429,9 +429,9 @@ Any OutputPinImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::OUTPUTPIN_ATTRIBUTE_ACTION:
-			return eAny(getAction()); //16934
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getAction().lock())); //16934
 		case UmlPackage::OUTPUTPIN_ATTRIBUTE_CALLACTION:
-			return eAny(getCallAction()); //16933
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getCallAction().lock())); //16933
 	}
 	return PinImpl::eGet(featureID, resolve, coreType);
 }
@@ -453,7 +453,8 @@ bool OutputPinImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::OUTPUTPIN_ATTRIBUTE_CALLACTION:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::CallAction> _callAction = newValue->get<std::shared_ptr<uml::CallAction>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::CallAction> _callAction = std::dynamic_pointer_cast<uml::CallAction>(_temp);
 			setCallAction(_callAction); //16933
 			return true;
 		}

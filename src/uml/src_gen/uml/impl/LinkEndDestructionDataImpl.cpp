@@ -216,7 +216,7 @@ Any LinkEndDestructionDataImpl::eGet(int featureID, bool resolve, bool coreType)
 	switch(featureID)
 	{
 		case UmlPackage::LINKENDDESTRUCTIONDATA_ATTRIBUTE_DESTROYAT:
-			return eAny(getDestroyAt()); //1366
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getDestroyAt())); //1366
 		case UmlPackage::LINKENDDESTRUCTIONDATA_ATTRIBUTE_ISDESTROYDUPLICATES:
 			return eAny(getIsDestroyDuplicates()); //1367
 	}
@@ -240,7 +240,8 @@ bool LinkEndDestructionDataImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::LINKENDDESTRUCTIONDATA_ATTRIBUTE_DESTROYAT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::InputPin> _destroyAt = newValue->get<std::shared_ptr<uml::InputPin>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::InputPin> _destroyAt = std::dynamic_pointer_cast<uml::InputPin>(_temp);
 			setDestroyAt(_destroyAt); //1366
 			return true;
 		}

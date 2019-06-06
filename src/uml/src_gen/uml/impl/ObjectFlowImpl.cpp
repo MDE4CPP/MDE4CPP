@@ -428,9 +428,9 @@ Any ObjectFlowImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case UmlPackage::OBJECTFLOW_ATTRIBUTE_ISMULTIRECEIVE:
 			return eAny(getIsMultireceive()); //15923
 		case UmlPackage::OBJECTFLOW_ATTRIBUTE_SELECTION:
-			return eAny(getSelection()); //15924
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSelection())); //15924
 		case UmlPackage::OBJECTFLOW_ATTRIBUTE_TRANSFORMATION:
-			return eAny(getTransformation()); //15925
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getTransformation())); //15925
 	}
 	return ActivityEdgeImpl::eGet(featureID, resolve, coreType);
 }
@@ -470,14 +470,16 @@ bool ObjectFlowImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::OBJECTFLOW_ATTRIBUTE_SELECTION:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Behavior> _selection = newValue->get<std::shared_ptr<uml::Behavior>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Behavior> _selection = std::dynamic_pointer_cast<uml::Behavior>(_temp);
 			setSelection(_selection); //15924
 			return true;
 		}
 		case UmlPackage::OBJECTFLOW_ATTRIBUTE_TRANSFORMATION:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Behavior> _transformation = newValue->get<std::shared_ptr<uml::Behavior>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Behavior> _transformation = std::dynamic_pointer_cast<uml::Behavior>(_temp);
 			setTransformation(_transformation); //15925
 			return true;
 		}

@@ -519,11 +519,11 @@ Any ParameterImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::PARAMETER_ATTRIBUTE_BEHAVIOR:
-			return eAny(getBehavior()); //17427
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getBehavior().lock())); //17427
 		case UmlPackage::PARAMETER_ATTRIBUTE_DEFAULT:
 			return eAny(getDefault()); //17419
 		case UmlPackage::PARAMETER_ATTRIBUTE_DEFAULTVALUE:
-			return eAny(getDefaultValue()); //17420
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getDefaultValue())); //17420
 		case UmlPackage::PARAMETER_ATTRIBUTE_DIRECTION:
 			return eAny(getDirection()); //17421
 		case UmlPackage::PARAMETER_ATTRIBUTE_EFFECT:
@@ -533,9 +533,18 @@ Any ParameterImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case UmlPackage::PARAMETER_ATTRIBUTE_ISSTREAM:
 			return eAny(getIsStream()); //17424
 		case UmlPackage::PARAMETER_ATTRIBUTE_OPERATION:
-			return eAny(getOperation()); //17425
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getOperation().lock())); //17425
 		case UmlPackage::PARAMETER_ATTRIBUTE_PARAMETERSET:
-			return eAny(getParameterSet()); //17426
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::ParameterSet>::iterator iter = m_parameterSet->begin();
+			Bag<uml::ParameterSet>::iterator end = m_parameterSet->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //17426
+		}
 	}
 	Any result;
 	result = ConnectableElementImpl::eGet(featureID, resolve, coreType);
@@ -585,7 +594,8 @@ bool ParameterImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::PARAMETER_ATTRIBUTE_BEHAVIOR:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Behavior> _behavior = newValue->get<std::shared_ptr<uml::Behavior>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Behavior> _behavior = std::dynamic_pointer_cast<uml::Behavior>(_temp);
 			setBehavior(_behavior); //17427
 			return true;
 		}
@@ -599,7 +609,8 @@ bool ParameterImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::PARAMETER_ATTRIBUTE_DEFAULTVALUE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::ValueSpecification> _defaultValue = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::ValueSpecification> _defaultValue = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
 			setDefaultValue(_defaultValue); //17420
 			return true;
 		}
@@ -629,6 +640,42 @@ bool ParameterImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			bool _isStream = newValue->get<bool>();
 			setIsStream(_isStream); //17424
+			return true;
+		}
+		case UmlPackage::PARAMETER_ATTRIBUTE_PARAMETERSET:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::ParameterSet>> parameterSetList(new Bag<uml::ParameterSet>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				parameterSetList->add(std::dynamic_pointer_cast<uml::ParameterSet>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::ParameterSet>::iterator iterParameterSet = m_parameterSet->begin();
+			Bag<uml::ParameterSet>::iterator endParameterSet = m_parameterSet->end();
+			while (iterParameterSet != endParameterSet)
+			{
+				if (parameterSetList->find(*iterParameterSet) == -1)
+				{
+					m_parameterSet->erase(*iterParameterSet);
+				}
+				iterParameterSet++;
+			}
+
+			iterParameterSet = parameterSetList->begin();
+			endParameterSet = parameterSetList->end();
+			while (iterParameterSet != endParameterSet)
+			{
+				if (m_parameterSet->find(*iterParameterSet) == -1)
+				{
+					m_parameterSet->add(*iterParameterSet);
+				}
+				iterParameterSet++;			
+			}
 			return true;
 		}
 	}

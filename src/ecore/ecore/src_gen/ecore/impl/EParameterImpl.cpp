@@ -219,7 +219,7 @@ Any EParameterImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case EcorePackage::EPARAMETER_ATTRIBUTE_EOPERATION:
-			return eAny(getEOperation()); //4213
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEOperation().lock())); //4213
 	}
 	return ETypedElementImpl::eGet(featureID, resolve, coreType);
 }

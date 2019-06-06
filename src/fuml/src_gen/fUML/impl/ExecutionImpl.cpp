@@ -306,9 +306,18 @@ Any ExecutionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case FUMLPackage::EXECUTION_ATTRIBUTE_CONTEXT:
-			return eAny(getContext()); //404
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getContext())); //404
 		case FUMLPackage::EXECUTION_ATTRIBUTE_PARAMETERVALUES:
-			return eAny(getParameterValues()); //405
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<fUML::ParameterValue>::iterator iter = m_parameterValues->begin();
+			Bag<fUML::ParameterValue>::iterator end = m_parameterValues->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //405
+		}
 	}
 	return ObjectImpl::eGet(featureID, resolve, coreType);
 }
@@ -330,8 +339,45 @@ bool ExecutionImpl::eSet(int featureID, Any newValue)
 		case FUMLPackage::EXECUTION_ATTRIBUTE_CONTEXT:
 		{
 			// BOOST CAST
-			std::shared_ptr<fUML::Object> _context = newValue->get<std::shared_ptr<fUML::Object>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<fUML::Object> _context = std::dynamic_pointer_cast<fUML::Object>(_temp);
 			setContext(_context); //404
+			return true;
+		}
+		case FUMLPackage::EXECUTION_ATTRIBUTE_PARAMETERVALUES:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<fUML::ParameterValue>> parameterValuesList(new Bag<fUML::ParameterValue>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				parameterValuesList->add(std::dynamic_pointer_cast<fUML::ParameterValue>(*iter));
+				iter++;
+			}
+			
+			Bag<fUML::ParameterValue>::iterator iterParameterValues = m_parameterValues->begin();
+			Bag<fUML::ParameterValue>::iterator endParameterValues = m_parameterValues->end();
+			while (iterParameterValues != endParameterValues)
+			{
+				if (parameterValuesList->find(*iterParameterValues) == -1)
+				{
+					m_parameterValues->erase(*iterParameterValues);
+				}
+				iterParameterValues++;
+			}
+
+			iterParameterValues = parameterValuesList->begin();
+			endParameterValues = parameterValuesList->end();
+			while (iterParameterValues != endParameterValues)
+			{
+				if (m_parameterValues->find(*iterParameterValues) == -1)
+				{
+					m_parameterValues->add(*iterParameterValues);
+				}
+				iterParameterValues++;			
+			}
 			return true;
 		}
 	}

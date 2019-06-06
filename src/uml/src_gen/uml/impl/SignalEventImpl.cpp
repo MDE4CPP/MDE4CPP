@@ -276,7 +276,7 @@ Any SignalEventImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::SIGNALEVENT_ATTRIBUTE_SIGNAL:
-			return eAny(getSignal()); //21612
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSignal())); //21612
 	}
 	return MessageEventImpl::eGet(featureID, resolve, coreType);
 }
@@ -296,7 +296,8 @@ bool SignalEventImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::SIGNALEVENT_ATTRIBUTE_SIGNAL:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Signal> _signal = newValue->get<std::shared_ptr<uml::Signal>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Signal> _signal = std::dynamic_pointer_cast<uml::Signal>(_temp);
 			setSignal(_signal); //21612
 			return true;
 		}

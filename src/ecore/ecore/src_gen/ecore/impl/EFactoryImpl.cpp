@@ -208,7 +208,7 @@ Any EFactoryImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case EcorePackage::EFACTORY_ATTRIBUTE_EPACKAGE:
-			return eAny(getEPackage()); //234
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEPackage())); //234
 	}
 	return EModelElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -228,7 +228,8 @@ bool EFactoryImpl::eSet(int featureID, Any newValue)
 		case EcorePackage::EFACTORY_ATTRIBUTE_EPACKAGE:
 		{
 			// BOOST CAST
-			std::shared_ptr<ecore::EPackage> _ePackage = newValue->get<std::shared_ptr<ecore::EPackage>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<ecore::EPackage> _ePackage = std::dynamic_pointer_cast<ecore::EPackage>(_temp);
 			setEPackage(_ePackage); //234
 			return true;
 		}

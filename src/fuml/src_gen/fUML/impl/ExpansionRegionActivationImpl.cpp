@@ -288,11 +288,38 @@ Any ExpansionRegionActivationImpl::eGet(int featureID, bool resolve, bool coreTy
 	switch(featureID)
 	{
 		case FUMLPackage::EXPANSIONREGIONACTIVATION_ATTRIBUTE_ACTIVATIONGROUPS:
-			return eAny(getActivationGroups()); //4812
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<fUML::ExpansionActivationGroup>::iterator iter = m_activationGroups->begin();
+			Bag<fUML::ExpansionActivationGroup>::iterator end = m_activationGroups->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //4812
+		}
 		case FUMLPackage::EXPANSIONREGIONACTIVATION_ATTRIBUTE_INPUTEXPANSIONTOKENS:
-			return eAny(getInputExpansionTokens()); //4811
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<fUML::TokenSet>::iterator iter = m_inputExpansionTokens->begin();
+			Bag<fUML::TokenSet>::iterator end = m_inputExpansionTokens->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //4811
+		}
 		case FUMLPackage::EXPANSIONREGIONACTIVATION_ATTRIBUTE_INPUTTOKENS:
-			return eAny(getInputTokens()); //4810
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<fUML::TokenSet>::iterator iter = m_inputTokens->begin();
+			Bag<fUML::TokenSet>::iterator end = m_inputTokens->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //4810
+		}
 	}
 	return ActionActivationImpl::eGet(featureID, resolve, coreType);
 }
@@ -313,6 +340,114 @@ bool ExpansionRegionActivationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
+		case FUMLPackage::EXPANSIONREGIONACTIVATION_ATTRIBUTE_ACTIVATIONGROUPS:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<fUML::ExpansionActivationGroup>> activationGroupsList(new Bag<fUML::ExpansionActivationGroup>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				activationGroupsList->add(std::dynamic_pointer_cast<fUML::ExpansionActivationGroup>(*iter));
+				iter++;
+			}
+			
+			Bag<fUML::ExpansionActivationGroup>::iterator iterActivationGroups = m_activationGroups->begin();
+			Bag<fUML::ExpansionActivationGroup>::iterator endActivationGroups = m_activationGroups->end();
+			while (iterActivationGroups != endActivationGroups)
+			{
+				if (activationGroupsList->find(*iterActivationGroups) == -1)
+				{
+					m_activationGroups->erase(*iterActivationGroups);
+				}
+				iterActivationGroups++;
+			}
+
+			iterActivationGroups = activationGroupsList->begin();
+			endActivationGroups = activationGroupsList->end();
+			while (iterActivationGroups != endActivationGroups)
+			{
+				if (m_activationGroups->find(*iterActivationGroups) == -1)
+				{
+					m_activationGroups->add(*iterActivationGroups);
+				}
+				iterActivationGroups++;			
+			}
+			return true;
+		}
+		case FUMLPackage::EXPANSIONREGIONACTIVATION_ATTRIBUTE_INPUTEXPANSIONTOKENS:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<fUML::TokenSet>> inputExpansionTokensList(new Bag<fUML::TokenSet>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				inputExpansionTokensList->add(std::dynamic_pointer_cast<fUML::TokenSet>(*iter));
+				iter++;
+			}
+			
+			Bag<fUML::TokenSet>::iterator iterInputExpansionTokens = m_inputExpansionTokens->begin();
+			Bag<fUML::TokenSet>::iterator endInputExpansionTokens = m_inputExpansionTokens->end();
+			while (iterInputExpansionTokens != endInputExpansionTokens)
+			{
+				if (inputExpansionTokensList->find(*iterInputExpansionTokens) == -1)
+				{
+					m_inputExpansionTokens->erase(*iterInputExpansionTokens);
+				}
+				iterInputExpansionTokens++;
+			}
+
+			iterInputExpansionTokens = inputExpansionTokensList->begin();
+			endInputExpansionTokens = inputExpansionTokensList->end();
+			while (iterInputExpansionTokens != endInputExpansionTokens)
+			{
+				if (m_inputExpansionTokens->find(*iterInputExpansionTokens) == -1)
+				{
+					m_inputExpansionTokens->add(*iterInputExpansionTokens);
+				}
+				iterInputExpansionTokens++;			
+			}
+			return true;
+		}
+		case FUMLPackage::EXPANSIONREGIONACTIVATION_ATTRIBUTE_INPUTTOKENS:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<fUML::TokenSet>> inputTokensList(new Bag<fUML::TokenSet>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				inputTokensList->add(std::dynamic_pointer_cast<fUML::TokenSet>(*iter));
+				iter++;
+			}
+			
+			Bag<fUML::TokenSet>::iterator iterInputTokens = m_inputTokens->begin();
+			Bag<fUML::TokenSet>::iterator endInputTokens = m_inputTokens->end();
+			while (iterInputTokens != endInputTokens)
+			{
+				if (inputTokensList->find(*iterInputTokens) == -1)
+				{
+					m_inputTokens->erase(*iterInputTokens);
+				}
+				iterInputTokens++;
+			}
+
+			iterInputTokens = inputTokensList->begin();
+			endInputTokens = inputTokensList->end();
+			while (iterInputTokens != endInputTokens)
+			{
+				if (m_inputTokens->find(*iterInputTokens) == -1)
+				{
+					m_inputTokens->add(*iterInputTokens);
+				}
+				iterInputTokens++;			
+			}
+			return true;
+		}
 	}
 
 	return ActionActivationImpl::eSet(featureID, newValue);

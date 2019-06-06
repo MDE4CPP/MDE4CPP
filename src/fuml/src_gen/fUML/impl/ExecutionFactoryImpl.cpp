@@ -430,13 +430,40 @@ Any ExecutionFactoryImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case FUMLPackage::EXECUTIONFACTORY_ATTRIBUTE_BUILTINTYPES:
-			return eAny(getBuiltInTypes()); //413
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::PrimitiveType>::iterator iter = m_builtInTypes->begin();
+			Bag<uml::PrimitiveType>::iterator end = m_builtInTypes->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //413
+		}
 		case FUMLPackage::EXECUTIONFACTORY_ATTRIBUTE_LOCUS:
-			return eAny(getLocus()); //410
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getLocus().lock())); //410
 		case FUMLPackage::EXECUTIONFACTORY_ATTRIBUTE_PRIMITIVEBEHAVIORPROTOTYPES:
-			return eAny(getPrimitiveBehaviorPrototypes()); //412
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<fUML::OpaqueBehaviorExecution>::iterator iter = m_primitiveBehaviorPrototypes->begin();
+			Bag<fUML::OpaqueBehaviorExecution>::iterator end = m_primitiveBehaviorPrototypes->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //412
+		}
 		case FUMLPackage::EXECUTIONFACTORY_ATTRIBUTE_STRATEGIES:
-			return eAny(getStrategies()); //411
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<fUML::SemanticStrategy>::iterator iter = m_strategies->begin();
+			Bag<fUML::SemanticStrategy>::iterator end = m_strategies->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //411
+		}
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
@@ -459,11 +486,120 @@ bool ExecutionFactoryImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
+		case FUMLPackage::EXECUTIONFACTORY_ATTRIBUTE_BUILTINTYPES:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::PrimitiveType>> builtInTypesList(new Bag<uml::PrimitiveType>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				builtInTypesList->add(std::dynamic_pointer_cast<uml::PrimitiveType>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::PrimitiveType>::iterator iterBuiltInTypes = m_builtInTypes->begin();
+			Bag<uml::PrimitiveType>::iterator endBuiltInTypes = m_builtInTypes->end();
+			while (iterBuiltInTypes != endBuiltInTypes)
+			{
+				if (builtInTypesList->find(*iterBuiltInTypes) == -1)
+				{
+					m_builtInTypes->erase(*iterBuiltInTypes);
+				}
+				iterBuiltInTypes++;
+			}
+
+			iterBuiltInTypes = builtInTypesList->begin();
+			endBuiltInTypes = builtInTypesList->end();
+			while (iterBuiltInTypes != endBuiltInTypes)
+			{
+				if (m_builtInTypes->find(*iterBuiltInTypes) == -1)
+				{
+					m_builtInTypes->add(*iterBuiltInTypes);
+				}
+				iterBuiltInTypes++;			
+			}
+			return true;
+		}
 		case FUMLPackage::EXECUTIONFACTORY_ATTRIBUTE_LOCUS:
 		{
 			// BOOST CAST
-			std::shared_ptr<fUML::Locus> _locus = newValue->get<std::shared_ptr<fUML::Locus>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<fUML::Locus> _locus = std::dynamic_pointer_cast<fUML::Locus>(_temp);
 			setLocus(_locus); //410
+			return true;
+		}
+		case FUMLPackage::EXECUTIONFACTORY_ATTRIBUTE_PRIMITIVEBEHAVIORPROTOTYPES:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<fUML::OpaqueBehaviorExecution>> primitiveBehaviorPrototypesList(new Bag<fUML::OpaqueBehaviorExecution>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				primitiveBehaviorPrototypesList->add(std::dynamic_pointer_cast<fUML::OpaqueBehaviorExecution>(*iter));
+				iter++;
+			}
+			
+			Bag<fUML::OpaqueBehaviorExecution>::iterator iterPrimitiveBehaviorPrototypes = m_primitiveBehaviorPrototypes->begin();
+			Bag<fUML::OpaqueBehaviorExecution>::iterator endPrimitiveBehaviorPrototypes = m_primitiveBehaviorPrototypes->end();
+			while (iterPrimitiveBehaviorPrototypes != endPrimitiveBehaviorPrototypes)
+			{
+				if (primitiveBehaviorPrototypesList->find(*iterPrimitiveBehaviorPrototypes) == -1)
+				{
+					m_primitiveBehaviorPrototypes->erase(*iterPrimitiveBehaviorPrototypes);
+				}
+				iterPrimitiveBehaviorPrototypes++;
+			}
+
+			iterPrimitiveBehaviorPrototypes = primitiveBehaviorPrototypesList->begin();
+			endPrimitiveBehaviorPrototypes = primitiveBehaviorPrototypesList->end();
+			while (iterPrimitiveBehaviorPrototypes != endPrimitiveBehaviorPrototypes)
+			{
+				if (m_primitiveBehaviorPrototypes->find(*iterPrimitiveBehaviorPrototypes) == -1)
+				{
+					m_primitiveBehaviorPrototypes->add(*iterPrimitiveBehaviorPrototypes);
+				}
+				iterPrimitiveBehaviorPrototypes++;			
+			}
+			return true;
+		}
+		case FUMLPackage::EXECUTIONFACTORY_ATTRIBUTE_STRATEGIES:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<fUML::SemanticStrategy>> strategiesList(new Bag<fUML::SemanticStrategy>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				strategiesList->add(std::dynamic_pointer_cast<fUML::SemanticStrategy>(*iter));
+				iter++;
+			}
+			
+			Bag<fUML::SemanticStrategy>::iterator iterStrategies = m_strategies->begin();
+			Bag<fUML::SemanticStrategy>::iterator endStrategies = m_strategies->end();
+			while (iterStrategies != endStrategies)
+			{
+				if (strategiesList->find(*iterStrategies) == -1)
+				{
+					m_strategies->erase(*iterStrategies);
+				}
+				iterStrategies++;
+			}
+
+			iterStrategies = strategiesList->begin();
+			endStrategies = strategiesList->end();
+			while (iterStrategies != endStrategies)
+			{
+				if (m_strategies->find(*iterStrategies) == -1)
+				{
+					m_strategies->add(*iterStrategies);
+				}
+				iterStrategies++;			
+			}
 			return true;
 		}
 	}

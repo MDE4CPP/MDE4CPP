@@ -276,11 +276,29 @@ Any TemplateSignatureImpl::eGet(int featureID, bool resolve, bool coreType) cons
 	switch(featureID)
 	{
 		case UmlPackage::TEMPLATESIGNATURE_ATTRIBUTE_OWNEDPARAMETER:
-			return eAny(getOwnedParameter()); //2335
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::TemplateParameter>::iterator iter = m_ownedParameter->begin();
+			Bag<uml::TemplateParameter>::iterator end = m_ownedParameter->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //2335
+		}
 		case UmlPackage::TEMPLATESIGNATURE_ATTRIBUTE_PARAMETER:
-			return eAny(getParameter()); //2333
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::TemplateParameter>::iterator iter = m_parameter->begin();
+			Bag<uml::TemplateParameter>::iterator end = m_parameter->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //2333
+		}
 		case UmlPackage::TEMPLATESIGNATURE_ATTRIBUTE_TEMPLATE:
-			return eAny(getTemplate()); //2334
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getTemplate().lock())); //2334
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -301,10 +319,83 @@ bool TemplateSignatureImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
+		case UmlPackage::TEMPLATESIGNATURE_ATTRIBUTE_OWNEDPARAMETER:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::TemplateParameter>> ownedParameterList(new Bag<uml::TemplateParameter>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				ownedParameterList->add(std::dynamic_pointer_cast<uml::TemplateParameter>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::TemplateParameter>::iterator iterOwnedParameter = m_ownedParameter->begin();
+			Bag<uml::TemplateParameter>::iterator endOwnedParameter = m_ownedParameter->end();
+			while (iterOwnedParameter != endOwnedParameter)
+			{
+				if (ownedParameterList->find(*iterOwnedParameter) == -1)
+				{
+					m_ownedParameter->erase(*iterOwnedParameter);
+				}
+				iterOwnedParameter++;
+			}
+
+			iterOwnedParameter = ownedParameterList->begin();
+			endOwnedParameter = ownedParameterList->end();
+			while (iterOwnedParameter != endOwnedParameter)
+			{
+				if (m_ownedParameter->find(*iterOwnedParameter) == -1)
+				{
+					m_ownedParameter->add(*iterOwnedParameter);
+				}
+				iterOwnedParameter++;			
+			}
+			return true;
+		}
+		case UmlPackage::TEMPLATESIGNATURE_ATTRIBUTE_PARAMETER:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::TemplateParameter>> parameterList(new Bag<uml::TemplateParameter>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				parameterList->add(std::dynamic_pointer_cast<uml::TemplateParameter>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::TemplateParameter>::iterator iterParameter = m_parameter->begin();
+			Bag<uml::TemplateParameter>::iterator endParameter = m_parameter->end();
+			while (iterParameter != endParameter)
+			{
+				if (parameterList->find(*iterParameter) == -1)
+				{
+					m_parameter->erase(*iterParameter);
+				}
+				iterParameter++;
+			}
+
+			iterParameter = parameterList->begin();
+			endParameter = parameterList->end();
+			while (iterParameter != endParameter)
+			{
+				if (m_parameter->find(*iterParameter) == -1)
+				{
+					m_parameter->add(*iterParameter);
+				}
+				iterParameter++;			
+			}
+			return true;
+		}
 		case UmlPackage::TEMPLATESIGNATURE_ATTRIBUTE_TEMPLATE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::TemplateableElement> _template = newValue->get<std::shared_ptr<uml::TemplateableElement>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::TemplateableElement> _template = std::dynamic_pointer_cast<uml::TemplateableElement>(_temp);
 			setTemplate(_template); //2334
 			return true;
 		}

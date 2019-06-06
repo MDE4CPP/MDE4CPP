@@ -210,7 +210,16 @@ Any EModelElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case EcorePackage::EMODELELEMENT_ATTRIBUTE_EANNOTATIONS:
-			return eAny(getEAnnotations()); //373
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<ecore::EAnnotation>::iterator iter = m_eAnnotations->begin();
+			Bag<ecore::EAnnotation>::iterator end = m_eAnnotations->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //373
+		}
 	}
 	return EObjectImpl::eGet(featureID, resolve, coreType);
 }
@@ -227,6 +236,42 @@ bool EModelElementImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
+		case EcorePackage::EMODELELEMENT_ATTRIBUTE_EANNOTATIONS:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<ecore::EAnnotation>> eAnnotationsList(new Bag<ecore::EAnnotation>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				eAnnotationsList->add(std::dynamic_pointer_cast<ecore::EAnnotation>(*iter));
+				iter++;
+			}
+			
+			Bag<ecore::EAnnotation>::iterator iterEAnnotations = m_eAnnotations->begin();
+			Bag<ecore::EAnnotation>::iterator endEAnnotations = m_eAnnotations->end();
+			while (iterEAnnotations != endEAnnotations)
+			{
+				if (eAnnotationsList->find(*iterEAnnotations) == -1)
+				{
+					m_eAnnotations->erase(*iterEAnnotations);
+				}
+				iterEAnnotations++;
+			}
+
+			iterEAnnotations = eAnnotationsList->begin();
+			endEAnnotations = eAnnotationsList->end();
+			while (iterEAnnotations != endEAnnotations)
+			{
+				if (m_eAnnotations->find(*iterEAnnotations) == -1)
+				{
+					m_eAnnotations->add(*iterEAnnotations);
+				}
+				iterEAnnotations++;			
+			}
+			return true;
+		}
 	}
 
 	return EObjectImpl::eSet(featureID, newValue);

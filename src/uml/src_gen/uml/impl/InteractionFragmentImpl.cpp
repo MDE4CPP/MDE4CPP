@@ -343,13 +343,31 @@ Any InteractionFragmentImpl::eGet(int featureID, bool resolve, bool coreType) co
 	switch(featureID)
 	{
 		case UmlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_COVERED:
-			return eAny(getCovered()); //1219
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Lifeline>::iterator iter = m_covered->begin();
+			Bag<uml::Lifeline>::iterator end = m_covered->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //1219
+		}
 		case UmlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_ENCLOSINGINTERACTION:
-			return eAny(getEnclosingInteraction()); //12111
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEnclosingInteraction().lock())); //12111
 		case UmlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_ENCLOSINGOPERAND:
-			return eAny(getEnclosingOperand()); //12110
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEnclosingOperand().lock())); //12110
 		case UmlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_GENERALORDERING:
-			return eAny(getGeneralOrdering()); //12112
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::GeneralOrdering>::iterator iter = m_generalOrdering->begin();
+			Bag<uml::GeneralOrdering>::iterator end = m_generalOrdering->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //12112
+		}
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -372,18 +390,92 @@ bool InteractionFragmentImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
+		case UmlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_COVERED:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Lifeline>> coveredList(new Bag<uml::Lifeline>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				coveredList->add(std::dynamic_pointer_cast<uml::Lifeline>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Lifeline>::iterator iterCovered = m_covered->begin();
+			Bag<uml::Lifeline>::iterator endCovered = m_covered->end();
+			while (iterCovered != endCovered)
+			{
+				if (coveredList->find(*iterCovered) == -1)
+				{
+					m_covered->erase(*iterCovered);
+				}
+				iterCovered++;
+			}
+
+			iterCovered = coveredList->begin();
+			endCovered = coveredList->end();
+			while (iterCovered != endCovered)
+			{
+				if (m_covered->find(*iterCovered) == -1)
+				{
+					m_covered->add(*iterCovered);
+				}
+				iterCovered++;			
+			}
+			return true;
+		}
 		case UmlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_ENCLOSINGINTERACTION:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Interaction> _enclosingInteraction = newValue->get<std::shared_ptr<uml::Interaction>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Interaction> _enclosingInteraction = std::dynamic_pointer_cast<uml::Interaction>(_temp);
 			setEnclosingInteraction(_enclosingInteraction); //12111
 			return true;
 		}
 		case UmlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_ENCLOSINGOPERAND:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::InteractionOperand> _enclosingOperand = newValue->get<std::shared_ptr<uml::InteractionOperand>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::InteractionOperand> _enclosingOperand = std::dynamic_pointer_cast<uml::InteractionOperand>(_temp);
 			setEnclosingOperand(_enclosingOperand); //12110
+			return true;
+		}
+		case UmlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_GENERALORDERING:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::GeneralOrdering>> generalOrderingList(new Bag<uml::GeneralOrdering>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				generalOrderingList->add(std::dynamic_pointer_cast<uml::GeneralOrdering>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::GeneralOrdering>::iterator iterGeneralOrdering = m_generalOrdering->begin();
+			Bag<uml::GeneralOrdering>::iterator endGeneralOrdering = m_generalOrdering->end();
+			while (iterGeneralOrdering != endGeneralOrdering)
+			{
+				if (generalOrderingList->find(*iterGeneralOrdering) == -1)
+				{
+					m_generalOrdering->erase(*iterGeneralOrdering);
+				}
+				iterGeneralOrdering++;
+			}
+
+			iterGeneralOrdering = generalOrderingList->begin();
+			endGeneralOrdering = generalOrderingList->end();
+			while (iterGeneralOrdering != endGeneralOrdering)
+			{
+				if (m_generalOrdering->find(*iterGeneralOrdering) == -1)
+				{
+					m_generalOrdering->add(*iterGeneralOrdering);
+				}
+				iterGeneralOrdering++;			
+			}
 			return true;
 		}
 	}

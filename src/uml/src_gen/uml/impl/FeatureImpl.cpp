@@ -250,7 +250,16 @@ Any FeatureImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::FEATURE_ATTRIBUTE_FEATURINGCLASSIFIER:
-			return eAny(getFeaturingClassifier()); //10112
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Classifier>::iterator iter = m_featuringClassifier->begin();
+			Bag<uml::Classifier>::iterator end = m_featuringClassifier->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //10112
+		}
 		case UmlPackage::FEATURE_ATTRIBUTE_ISSTATIC:
 			return eAny(getIsStatic()); //10113
 	}

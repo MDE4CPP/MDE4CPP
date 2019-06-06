@@ -385,11 +385,29 @@ Any InstanceSpecificationImpl::eGet(int featureID, bool resolve, bool coreType) 
 	switch(featureID)
 	{
 		case UmlPackage::INSTANCESPECIFICATION_ATTRIBUTE_CLASSIFIER:
-			return eAny(getClassifier()); //11714
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Classifier>::iterator iter = m_classifier->begin();
+			Bag<uml::Classifier>::iterator end = m_classifier->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //11714
+		}
 		case UmlPackage::INSTANCESPECIFICATION_ATTRIBUTE_SLOT:
-			return eAny(getSlot()); //11715
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Slot>::iterator iter = m_slot->begin();
+			Bag<uml::Slot>::iterator end = m_slot->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //11715
+		}
 		case UmlPackage::INSTANCESPECIFICATION_ATTRIBUTE_SPECIFICATION:
-			return eAny(getSpecification()); //11716
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSpecification())); //11716
 	}
 	Any result;
 	result = DeployedArtifactImpl::eGet(featureID, resolve, coreType);
@@ -434,10 +452,83 @@ bool InstanceSpecificationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
+		case UmlPackage::INSTANCESPECIFICATION_ATTRIBUTE_CLASSIFIER:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Classifier>> classifierList(new Bag<uml::Classifier>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				classifierList->add(std::dynamic_pointer_cast<uml::Classifier>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Classifier>::iterator iterClassifier = m_classifier->begin();
+			Bag<uml::Classifier>::iterator endClassifier = m_classifier->end();
+			while (iterClassifier != endClassifier)
+			{
+				if (classifierList->find(*iterClassifier) == -1)
+				{
+					m_classifier->erase(*iterClassifier);
+				}
+				iterClassifier++;
+			}
+
+			iterClassifier = classifierList->begin();
+			endClassifier = classifierList->end();
+			while (iterClassifier != endClassifier)
+			{
+				if (m_classifier->find(*iterClassifier) == -1)
+				{
+					m_classifier->add(*iterClassifier);
+				}
+				iterClassifier++;			
+			}
+			return true;
+		}
+		case UmlPackage::INSTANCESPECIFICATION_ATTRIBUTE_SLOT:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Slot>> slotList(new Bag<uml::Slot>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				slotList->add(std::dynamic_pointer_cast<uml::Slot>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Slot>::iterator iterSlot = m_slot->begin();
+			Bag<uml::Slot>::iterator endSlot = m_slot->end();
+			while (iterSlot != endSlot)
+			{
+				if (slotList->find(*iterSlot) == -1)
+				{
+					m_slot->erase(*iterSlot);
+				}
+				iterSlot++;
+			}
+
+			iterSlot = slotList->begin();
+			endSlot = slotList->end();
+			while (iterSlot != endSlot)
+			{
+				if (m_slot->find(*iterSlot) == -1)
+				{
+					m_slot->add(*iterSlot);
+				}
+				iterSlot++;			
+			}
+			return true;
+		}
 		case UmlPackage::INSTANCESPECIFICATION_ATTRIBUTE_SPECIFICATION:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::ValueSpecification> _specification = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::ValueSpecification> _specification = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
 			setSpecification(_specification); //11716
 			return true;
 		}

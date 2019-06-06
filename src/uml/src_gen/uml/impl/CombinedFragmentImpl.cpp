@@ -378,11 +378,29 @@ Any CombinedFragmentImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::COMBINEDFRAGMENT_ATTRIBUTE_CFRAGMENTGATE:
-			return eAny(getCfragmentGate()); //4413
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Gate>::iterator iter = m_cfragmentGate->begin();
+			Bag<uml::Gate>::iterator end = m_cfragmentGate->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //4413
+		}
 		case UmlPackage::COMBINEDFRAGMENT_ATTRIBUTE_INTERACTIONOPERATOR:
 			return eAny(getInteractionOperator()); //4414
 		case UmlPackage::COMBINEDFRAGMENT_ATTRIBUTE_OPERAND:
-			return eAny(getOperand()); //4415
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::InteractionOperand>::iterator iter = m_operand->begin();
+			Bag<uml::InteractionOperand>::iterator end = m_operand->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //4415
+		}
 	}
 	return InteractionFragmentImpl::eGet(featureID, resolve, coreType);
 }
@@ -403,11 +421,83 @@ bool CombinedFragmentImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
+		case UmlPackage::COMBINEDFRAGMENT_ATTRIBUTE_CFRAGMENTGATE:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Gate>> cfragmentGateList(new Bag<uml::Gate>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				cfragmentGateList->add(std::dynamic_pointer_cast<uml::Gate>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Gate>::iterator iterCfragmentGate = m_cfragmentGate->begin();
+			Bag<uml::Gate>::iterator endCfragmentGate = m_cfragmentGate->end();
+			while (iterCfragmentGate != endCfragmentGate)
+			{
+				if (cfragmentGateList->find(*iterCfragmentGate) == -1)
+				{
+					m_cfragmentGate->erase(*iterCfragmentGate);
+				}
+				iterCfragmentGate++;
+			}
+
+			iterCfragmentGate = cfragmentGateList->begin();
+			endCfragmentGate = cfragmentGateList->end();
+			while (iterCfragmentGate != endCfragmentGate)
+			{
+				if (m_cfragmentGate->find(*iterCfragmentGate) == -1)
+				{
+					m_cfragmentGate->add(*iterCfragmentGate);
+				}
+				iterCfragmentGate++;			
+			}
+			return true;
+		}
 		case UmlPackage::COMBINEDFRAGMENT_ATTRIBUTE_INTERACTIONOPERATOR:
 		{
 			// BOOST CAST
 			InteractionOperatorKind _interactionOperator = newValue->get<InteractionOperatorKind>();
 			setInteractionOperator(_interactionOperator); //4414
+			return true;
+		}
+		case UmlPackage::COMBINEDFRAGMENT_ATTRIBUTE_OPERAND:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::InteractionOperand>> operandList(new Bag<uml::InteractionOperand>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				operandList->add(std::dynamic_pointer_cast<uml::InteractionOperand>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::InteractionOperand>::iterator iterOperand = m_operand->begin();
+			Bag<uml::InteractionOperand>::iterator endOperand = m_operand->end();
+			while (iterOperand != endOperand)
+			{
+				if (operandList->find(*iterOperand) == -1)
+				{
+					m_operand->erase(*iterOperand);
+				}
+				iterOperand++;
+			}
+
+			iterOperand = operandList->begin();
+			endOperand = operandList->end();
+			while (iterOperand != endOperand)
+			{
+				if (m_operand->find(*iterOperand) == -1)
+				{
+					m_operand->add(*iterOperand);
+				}
+				iterOperand++;			
+			}
 			return true;
 		}
 	}

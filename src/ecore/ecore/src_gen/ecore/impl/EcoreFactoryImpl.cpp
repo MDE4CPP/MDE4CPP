@@ -73,7 +73,7 @@ std::shared_ptr<EObject> EcoreFactoryImpl::create(const int metaElementID, std::
 		{
 			if (nullptr == container)
 			{
-				return this->createEAnnotation();
+				return this->createEAnnotation(metaElementID);
 			}
 			else
 			{
@@ -100,7 +100,7 @@ std::shared_ptr<EObject> EcoreFactoryImpl::create(const int metaElementID, std::
 		{
 			if (nullptr == container)
 			{
-				return this->createEAttribute();
+				return this->createEAttribute(metaElementID);
 			}
 			else
 			{
@@ -127,7 +127,7 @@ std::shared_ptr<EObject> EcoreFactoryImpl::create(const int metaElementID, std::
 		{
 			if (nullptr == container)
 			{
-				return this->createEClass();
+				return this->createEClass(metaElementID);
 			}
 			else
 			{
@@ -154,7 +154,7 @@ std::shared_ptr<EObject> EcoreFactoryImpl::create(const int metaElementID, std::
 		{
 			if (nullptr == container)
 			{
-				return this->createEDataType();
+				return this->createEDataType(metaElementID);
 			}
 			else
 			{
@@ -181,7 +181,7 @@ std::shared_ptr<EObject> EcoreFactoryImpl::create(const int metaElementID, std::
 		{
 			if (nullptr == container)
 			{
-				return this->createEEnum();
+				return this->createEEnum(metaElementID);
 			}
 			else
 			{
@@ -208,7 +208,7 @@ std::shared_ptr<EObject> EcoreFactoryImpl::create(const int metaElementID, std::
 		{
 			if (nullptr == container)
 			{
-				return this->createEEnumLiteral();
+				return this->createEEnumLiteral(metaElementID);
 			}
 			else
 			{
@@ -235,7 +235,7 @@ std::shared_ptr<EObject> EcoreFactoryImpl::create(const int metaElementID, std::
 		{
 			if (nullptr == container)
 			{
-				return this->createEFactory();
+				return this->createEFactory(metaElementID);
 			}
 			else
 			{
@@ -246,14 +246,14 @@ std::shared_ptr<EObject> EcoreFactoryImpl::create(const int metaElementID, std::
 		}
 		case EcorePackage::EGENERICTYPE_CLASS:
 		{
-				return this->createEGenericType();
+				return this->createEGenericType(metaElementID);
 			
 		}
 		case EcorePackage::EOBJECT_CLASS:
 		{
 			if (nullptr == container)
 			{
-				return this->createEObject();
+				return this->createEObject(metaElementID);
 			}
 			else
 			{
@@ -266,7 +266,7 @@ std::shared_ptr<EObject> EcoreFactoryImpl::create(const int metaElementID, std::
 		{
 			if (nullptr == container)
 			{
-				return this->createEOperation();
+				return this->createEOperation(metaElementID);
 			}
 			else
 			{
@@ -293,7 +293,7 @@ std::shared_ptr<EObject> EcoreFactoryImpl::create(const int metaElementID, std::
 		{
 			if (nullptr == container)
 			{
-				return this->createEPackage();
+				return this->createEPackage(metaElementID);
 			}
 			else
 			{
@@ -320,7 +320,7 @@ std::shared_ptr<EObject> EcoreFactoryImpl::create(const int metaElementID, std::
 		{
 			if (nullptr == container)
 			{
-				return this->createEParameter();
+				return this->createEParameter(metaElementID);
 			}
 			else
 			{
@@ -347,7 +347,7 @@ std::shared_ptr<EObject> EcoreFactoryImpl::create(const int metaElementID, std::
 		{
 			if (nullptr == container)
 			{
-				return this->createEReference();
+				return this->createEReference(metaElementID);
 			}
 			else
 			{
@@ -372,14 +372,14 @@ std::shared_ptr<EObject> EcoreFactoryImpl::create(const int metaElementID, std::
 		}
 		case EcorePackage::ESTRINGTOSTRINGMAPENTRY_CLASS:
 		{
-				return this->createEStringToStringMapEntry();
+				return this->createEStringToStringMapEntry(metaElementID);
 			
 		}
 		case EcorePackage::ETYPEPARAMETER_CLASS:
 		{
 			if (nullptr == container)
 			{
-				return this->createETypeParameter();
+				return this->createETypeParameter(metaElementID);
 			}
 			else
 			{

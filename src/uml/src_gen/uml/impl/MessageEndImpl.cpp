@@ -255,7 +255,7 @@ Any MessageEndImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::MESSAGEEND_ATTRIBUTE_MESSAGE:
-			return eAny(getMessage()); //1489
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getMessage())); //1489
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -275,7 +275,8 @@ bool MessageEndImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::MESSAGEEND_ATTRIBUTE_MESSAGE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Message> _message = newValue->get<std::shared_ptr<uml::Message>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Message> _message = std::dynamic_pointer_cast<uml::Message>(_temp);
 			setMessage(_message); //1489
 			return true;
 		}

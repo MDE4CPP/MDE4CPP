@@ -404,7 +404,7 @@ Any RemoveVariableValueActionImpl::eGet(int featureID, bool resolve, bool coreTy
 		case UmlPackage::REMOVEVARIABLEVALUEACTION_ATTRIBUTE_ISREMOVEDUPLICATES:
 			return eAny(getIsRemoveDuplicates()); //21029
 		case UmlPackage::REMOVEVARIABLEVALUEACTION_ATTRIBUTE_REMOVEAT:
-			return eAny(getRemoveAt()); //21030
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getRemoveAt())); //21030
 	}
 	return WriteVariableActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -433,7 +433,8 @@ bool RemoveVariableValueActionImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::REMOVEVARIABLEVALUEACTION_ATTRIBUTE_REMOVEAT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::InputPin> _removeAt = newValue->get<std::shared_ptr<uml::InputPin>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::InputPin> _removeAt = std::dynamic_pointer_cast<uml::InputPin>(_temp);
 			setRemoveAt(_removeAt); //21030
 			return true;
 		}

@@ -202,24 +202,24 @@ ProtocolStateMachineImpl::~ProtocolStateMachineImpl()
 
 
 //Additional constructor for the containments back reference
-			ProtocolStateMachineImpl::ProtocolStateMachineImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id)
-			:ProtocolStateMachineImpl()
-			{
-				switch(reference_id)
-				{	
-				case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
-					m_owningPackage = par_Package;
-					m_namespace = par_Package;
-					 return;
-				case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
-					m_package = par_Package;
-					m_namespace = par_Package;
-					 return;
-				default:
-				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
-				}
-			   
-			}
+ProtocolStateMachineImpl::ProtocolStateMachineImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id)
+:ProtocolStateMachineImpl()
+{
+	switch(reference_id)
+	{	
+	case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
+		m_owningPackage = par_Package;
+		m_namespace = par_Package;
+		 return;
+	case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
+		m_package = par_Package;
+		m_namespace = par_Package;
+		 return;
+	default:
+	std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
+	}
+   
+}
 
 
 
@@ -728,7 +728,16 @@ Any ProtocolStateMachineImpl::eGet(int featureID, bool resolve, bool coreType) c
 	switch(featureID)
 	{
 		case UmlPackage::PROTOCOLSTATEMACHINE_ATTRIBUTE_CONFORMANCE:
-			return eAny(getConformance()); //18765
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::ProtocolConformance>::iterator iter = m_conformance->begin();
+			Bag<uml::ProtocolConformance>::iterator end = m_conformance->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //18765
+		}
 	}
 	return StateMachineImpl::eGet(featureID, resolve, coreType);
 }
@@ -745,6 +754,42 @@ bool ProtocolStateMachineImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
+		case UmlPackage::PROTOCOLSTATEMACHINE_ATTRIBUTE_CONFORMANCE:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::ProtocolConformance>> conformanceList(new Bag<uml::ProtocolConformance>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				conformanceList->add(std::dynamic_pointer_cast<uml::ProtocolConformance>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::ProtocolConformance>::iterator iterConformance = m_conformance->begin();
+			Bag<uml::ProtocolConformance>::iterator endConformance = m_conformance->end();
+			while (iterConformance != endConformance)
+			{
+				if (conformanceList->find(*iterConformance) == -1)
+				{
+					m_conformance->erase(*iterConformance);
+				}
+				iterConformance++;
+			}
+
+			iterConformance = conformanceList->begin();
+			endConformance = conformanceList->end();
+			while (iterConformance != endConformance)
+			{
+				if (m_conformance->find(*iterConformance) == -1)
+				{
+					m_conformance->add(*iterConformance);
+				}
+				iterConformance++;			
+			}
+			return true;
+		}
 	}
 
 	return StateMachineImpl::eSet(featureID, newValue);

@@ -211,9 +211,9 @@ Any ClauseActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case FUMLPackage::CLAUSEACTIVATION_ATTRIBUTE_CLAUSE:
-			return eAny(getClause()); //200
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getClause())); //200
 		case FUMLPackage::CLAUSEACTIVATION_ATTRIBUTE_CONDITIONALNODEACTIVATION:
-			return eAny(getConditionalNodeActivation()); //201
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getConditionalNodeActivation())); //201
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
@@ -235,14 +235,16 @@ bool ClauseActivationImpl::eSet(int featureID, Any newValue)
 		case FUMLPackage::CLAUSEACTIVATION_ATTRIBUTE_CLAUSE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Clause> _clause = newValue->get<std::shared_ptr<uml::Clause>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Clause> _clause = std::dynamic_pointer_cast<uml::Clause>(_temp);
 			setClause(_clause); //200
 			return true;
 		}
 		case FUMLPackage::CLAUSEACTIVATION_ATTRIBUTE_CONDITIONALNODEACTIVATION:
 		{
 			// BOOST CAST
-			std::shared_ptr<fUML::ConditionalNodeActivation> _conditionalNodeActivation = newValue->get<std::shared_ptr<fUML::ConditionalNodeActivation>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<fUML::ConditionalNodeActivation> _conditionalNodeActivation = std::dynamic_pointer_cast<fUML::ConditionalNodeActivation>(_temp);
 			setConditionalNodeActivation(_conditionalNodeActivation); //201
 			return true;
 		}

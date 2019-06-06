@@ -295,7 +295,7 @@ Any ExecutionOccurrenceSpecificationImpl::eGet(int featureID, bool resolve, bool
 	switch(featureID)
 	{
 		case UmlPackage::EXECUTIONOCCURRENCESPECIFICATION_ATTRIBUTE_EXECUTION:
-			return eAny(getExecution()); //9015
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getExecution())); //9015
 	}
 	return OccurrenceSpecificationImpl::eGet(featureID, resolve, coreType);
 }
@@ -315,7 +315,8 @@ bool ExecutionOccurrenceSpecificationImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::EXECUTIONOCCURRENCESPECIFICATION_ATTRIBUTE_EXECUTION:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::ExecutionSpecification> _execution = newValue->get<std::shared_ptr<uml::ExecutionSpecification>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::ExecutionSpecification> _execution = std::dynamic_pointer_cast<uml::ExecutionSpecification>(_temp);
 			setExecution(_execution); //9015
 			return true;
 		}

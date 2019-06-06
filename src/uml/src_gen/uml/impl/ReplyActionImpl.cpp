@@ -444,11 +444,20 @@ Any ReplyActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::REPLYACTION_ATTRIBUTE_REPLYTOCALL:
-			return eAny(getReplyToCall()); //21127
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getReplyToCall())); //21127
 		case UmlPackage::REPLYACTION_ATTRIBUTE_REPLYVALUE:
-			return eAny(getReplyValue()); //21128
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::InputPin>::iterator iter = m_replyValue->begin();
+			Bag<uml::InputPin>::iterator end = m_replyValue->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //21128
+		}
 		case UmlPackage::REPLYACTION_ATTRIBUTE_RETURNINFORMATION:
-			return eAny(getReturnInformation()); //21129
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getReturnInformation())); //21129
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -472,14 +481,52 @@ bool ReplyActionImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::REPLYACTION_ATTRIBUTE_REPLYTOCALL:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Trigger> _replyToCall = newValue->get<std::shared_ptr<uml::Trigger>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Trigger> _replyToCall = std::dynamic_pointer_cast<uml::Trigger>(_temp);
 			setReplyToCall(_replyToCall); //21127
+			return true;
+		}
+		case UmlPackage::REPLYACTION_ATTRIBUTE_REPLYVALUE:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::InputPin>> replyValueList(new Bag<uml::InputPin>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				replyValueList->add(std::dynamic_pointer_cast<uml::InputPin>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::InputPin>::iterator iterReplyValue = m_replyValue->begin();
+			Bag<uml::InputPin>::iterator endReplyValue = m_replyValue->end();
+			while (iterReplyValue != endReplyValue)
+			{
+				if (replyValueList->find(*iterReplyValue) == -1)
+				{
+					m_replyValue->erase(*iterReplyValue);
+				}
+				iterReplyValue++;
+			}
+
+			iterReplyValue = replyValueList->begin();
+			endReplyValue = replyValueList->end();
+			while (iterReplyValue != endReplyValue)
+			{
+				if (m_replyValue->find(*iterReplyValue) == -1)
+				{
+					m_replyValue->add(*iterReplyValue);
+				}
+				iterReplyValue++;			
+			}
 			return true;
 		}
 		case UmlPackage::REPLYACTION_ATTRIBUTE_RETURNINFORMATION:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::InputPin> _returnInformation = newValue->get<std::shared_ptr<uml::InputPin>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::InputPin> _returnInformation = std::dynamic_pointer_cast<uml::InputPin>(_temp);
 			setReturnInformation(_returnInformation); //21129
 			return true;
 		}

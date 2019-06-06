@@ -412,9 +412,9 @@ Any ValueSpecificationActionImpl::eGet(int featureID, bool resolve, bool coreTyp
 	switch(featureID)
 	{
 		case UmlPackage::VALUESPECIFICATIONACTION_ATTRIBUTE_RESULT:
-			return eAny(getResult()); //25127
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getResult())); //25127
 		case UmlPackage::VALUESPECIFICATIONACTION_ATTRIBUTE_VALUE:
-			return eAny(getValue()); //25128
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getValue())); //25128
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -436,14 +436,16 @@ bool ValueSpecificationActionImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::VALUESPECIFICATIONACTION_ATTRIBUTE_RESULT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::OutputPin> _result = newValue->get<std::shared_ptr<uml::OutputPin>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::OutputPin> _result = std::dynamic_pointer_cast<uml::OutputPin>(_temp);
 			setResult(_result); //25127
 			return true;
 		}
 		case UmlPackage::VALUESPECIFICATIONACTION_ATTRIBUTE_VALUE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::ValueSpecification> _value = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::ValueSpecification> _value = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
 			setValue(_value); //25128
 			return true;
 		}

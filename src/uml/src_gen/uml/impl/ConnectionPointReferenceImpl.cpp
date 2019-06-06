@@ -326,11 +326,29 @@ Any ConnectionPointReferenceImpl::eGet(int featureID, bool resolve, bool coreTyp
 	switch(featureID)
 	{
 		case UmlPackage::CONNECTIONPOINTREFERENCE_ATTRIBUTE_ENTRY:
-			return eAny(getEntry()); //5212
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Pseudostate>::iterator iter = m_entry->begin();
+			Bag<uml::Pseudostate>::iterator end = m_entry->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //5212
+		}
 		case UmlPackage::CONNECTIONPOINTREFERENCE_ATTRIBUTE_EXIT:
-			return eAny(getExit()); //5213
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Pseudostate>::iterator iter = m_exit->begin();
+			Bag<uml::Pseudostate>::iterator end = m_exit->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //5213
+		}
 		case UmlPackage::CONNECTIONPOINTREFERENCE_ATTRIBUTE_STATE:
-			return eAny(getState()); //5214
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getState().lock())); //5214
 	}
 	return VertexImpl::eGet(featureID, resolve, coreType);
 }
@@ -351,10 +369,83 @@ bool ConnectionPointReferenceImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
+		case UmlPackage::CONNECTIONPOINTREFERENCE_ATTRIBUTE_ENTRY:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Pseudostate>> entryList(new Bag<uml::Pseudostate>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				entryList->add(std::dynamic_pointer_cast<uml::Pseudostate>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Pseudostate>::iterator iterEntry = m_entry->begin();
+			Bag<uml::Pseudostate>::iterator endEntry = m_entry->end();
+			while (iterEntry != endEntry)
+			{
+				if (entryList->find(*iterEntry) == -1)
+				{
+					m_entry->erase(*iterEntry);
+				}
+				iterEntry++;
+			}
+
+			iterEntry = entryList->begin();
+			endEntry = entryList->end();
+			while (iterEntry != endEntry)
+			{
+				if (m_entry->find(*iterEntry) == -1)
+				{
+					m_entry->add(*iterEntry);
+				}
+				iterEntry++;			
+			}
+			return true;
+		}
+		case UmlPackage::CONNECTIONPOINTREFERENCE_ATTRIBUTE_EXIT:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Pseudostate>> exitList(new Bag<uml::Pseudostate>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				exitList->add(std::dynamic_pointer_cast<uml::Pseudostate>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Pseudostate>::iterator iterExit = m_exit->begin();
+			Bag<uml::Pseudostate>::iterator endExit = m_exit->end();
+			while (iterExit != endExit)
+			{
+				if (exitList->find(*iterExit) == -1)
+				{
+					m_exit->erase(*iterExit);
+				}
+				iterExit++;
+			}
+
+			iterExit = exitList->begin();
+			endExit = exitList->end();
+			while (iterExit != endExit)
+			{
+				if (m_exit->find(*iterExit) == -1)
+				{
+					m_exit->add(*iterExit);
+				}
+				iterExit++;			
+			}
+			return true;
+		}
 		case UmlPackage::CONNECTIONPOINTREFERENCE_ATTRIBUTE_STATE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::State> _state = newValue->get<std::shared_ptr<uml::State>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::State> _state = std::dynamic_pointer_cast<uml::State>(_temp);
 			setState(_state); //5214
 			return true;
 		}

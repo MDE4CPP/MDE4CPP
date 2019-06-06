@@ -356,9 +356,9 @@ Any SubstitutionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::SUBSTITUTION_ATTRIBUTE_CONTRACT:
-			return eAny(getContract()); //22918
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getContract())); //22918
 		case UmlPackage::SUBSTITUTION_ATTRIBUTE_SUBSTITUTINGCLASSIFIER:
-			return eAny(getSubstitutingClassifier()); //22919
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSubstitutingClassifier().lock())); //22919
 	}
 	return RealizationImpl::eGet(featureID, resolve, coreType);
 }
@@ -380,14 +380,16 @@ bool SubstitutionImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::SUBSTITUTION_ATTRIBUTE_CONTRACT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Classifier> _contract = newValue->get<std::shared_ptr<uml::Classifier>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Classifier> _contract = std::dynamic_pointer_cast<uml::Classifier>(_temp);
 			setContract(_contract); //22918
 			return true;
 		}
 		case UmlPackage::SUBSTITUTION_ATTRIBUTE_SUBSTITUTINGCLASSIFIER:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Classifier> _substitutingClassifier = newValue->get<std::shared_ptr<uml::Classifier>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Classifier> _substitutingClassifier = std::dynamic_pointer_cast<uml::Classifier>(_temp);
 			setSubstitutingClassifier(_substitutingClassifier); //22919
 			return true;
 		}

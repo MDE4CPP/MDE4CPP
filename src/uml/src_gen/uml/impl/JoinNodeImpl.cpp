@@ -362,7 +362,7 @@ Any JoinNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case UmlPackage::JOINNODE_ATTRIBUTE_ISCOMBINEDUPLICATE:
 			return eAny(getIsCombineDuplicate()); //13120
 		case UmlPackage::JOINNODE_ATTRIBUTE_JOINSPEC:
-			return eAny(getJoinSpec()); //13121
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getJoinSpec())); //13121
 	}
 	return ControlNodeImpl::eGet(featureID, resolve, coreType);
 }
@@ -391,7 +391,8 @@ bool JoinNodeImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::JOINNODE_ATTRIBUTE_JOINSPEC:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::ValueSpecification> _joinSpec = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::ValueSpecification> _joinSpec = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
 			setJoinSpec(_joinSpec); //13121
 			return true;
 		}

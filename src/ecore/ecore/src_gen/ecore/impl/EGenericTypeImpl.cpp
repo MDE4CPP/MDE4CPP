@@ -258,17 +258,26 @@ Any EGenericTypeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case EcorePackage::EGENERICTYPE_ATTRIBUTE_ECLASSIFIER:
-			return eAny(getEClassifier()); //285
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEClassifier())); //285
 		case EcorePackage::EGENERICTYPE_ATTRIBUTE_ELOWERBOUND:
-			return eAny(getELowerBound()); //283
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getELowerBound())); //283
 		case EcorePackage::EGENERICTYPE_ATTRIBUTE_ERAWTYPE:
-			return eAny(getERawType()); //282
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getERawType())); //282
 		case EcorePackage::EGENERICTYPE_ATTRIBUTE_ETYPEARGUMENTS:
-			return eAny(getETypeArguments()); //281
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<ecore::EGenericType>::iterator iter = m_eTypeArguments->begin();
+			Bag<ecore::EGenericType>::iterator end = m_eTypeArguments->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //281
+		}
 		case EcorePackage::EGENERICTYPE_ATTRIBUTE_ETYPEPARAMETER:
-			return eAny(getETypeParameter()); //284
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getETypeParameter())); //284
 		case EcorePackage::EGENERICTYPE_ATTRIBUTE_EUPPERBOUND:
-			return eAny(getEUpperBound()); //280
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEUpperBound())); //280
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
@@ -298,28 +307,68 @@ bool EGenericTypeImpl::eSet(int featureID, Any newValue)
 		case EcorePackage::EGENERICTYPE_ATTRIBUTE_ECLASSIFIER:
 		{
 			// BOOST CAST
-			std::shared_ptr<ecore::EClassifier> _eClassifier = newValue->get<std::shared_ptr<ecore::EClassifier>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<ecore::EClassifier> _eClassifier = std::dynamic_pointer_cast<ecore::EClassifier>(_temp);
 			setEClassifier(_eClassifier); //285
 			return true;
 		}
 		case EcorePackage::EGENERICTYPE_ATTRIBUTE_ELOWERBOUND:
 		{
 			// BOOST CAST
-			std::shared_ptr<ecore::EGenericType> _eLowerBound = newValue->get<std::shared_ptr<ecore::EGenericType>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<ecore::EGenericType> _eLowerBound = std::dynamic_pointer_cast<ecore::EGenericType>(_temp);
 			setELowerBound(_eLowerBound); //283
+			return true;
+		}
+		case EcorePackage::EGENERICTYPE_ATTRIBUTE_ETYPEARGUMENTS:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<ecore::EGenericType>> eTypeArgumentsList(new Bag<ecore::EGenericType>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				eTypeArgumentsList->add(std::dynamic_pointer_cast<ecore::EGenericType>(*iter));
+				iter++;
+			}
+			
+			Bag<ecore::EGenericType>::iterator iterETypeArguments = m_eTypeArguments->begin();
+			Bag<ecore::EGenericType>::iterator endETypeArguments = m_eTypeArguments->end();
+			while (iterETypeArguments != endETypeArguments)
+			{
+				if (eTypeArgumentsList->find(*iterETypeArguments) == -1)
+				{
+					m_eTypeArguments->erase(*iterETypeArguments);
+				}
+				iterETypeArguments++;
+			}
+
+			iterETypeArguments = eTypeArgumentsList->begin();
+			endETypeArguments = eTypeArgumentsList->end();
+			while (iterETypeArguments != endETypeArguments)
+			{
+				if (m_eTypeArguments->find(*iterETypeArguments) == -1)
+				{
+					m_eTypeArguments->add(*iterETypeArguments);
+				}
+				iterETypeArguments++;			
+			}
 			return true;
 		}
 		case EcorePackage::EGENERICTYPE_ATTRIBUTE_ETYPEPARAMETER:
 		{
 			// BOOST CAST
-			std::shared_ptr<ecore::ETypeParameter> _eTypeParameter = newValue->get<std::shared_ptr<ecore::ETypeParameter>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<ecore::ETypeParameter> _eTypeParameter = std::dynamic_pointer_cast<ecore::ETypeParameter>(_temp);
 			setETypeParameter(_eTypeParameter); //284
 			return true;
 		}
 		case EcorePackage::EGENERICTYPE_ATTRIBUTE_EUPPERBOUND:
 		{
 			// BOOST CAST
-			std::shared_ptr<ecore::EGenericType> _eUpperBound = newValue->get<std::shared_ptr<ecore::EGenericType>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<ecore::EGenericType> _eUpperBound = std::dynamic_pointer_cast<ecore::EGenericType>(_temp);
 			setEUpperBound(_eUpperBound); //280
 			return true;
 		}

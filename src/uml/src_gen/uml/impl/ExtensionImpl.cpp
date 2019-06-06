@@ -150,24 +150,24 @@ ExtensionImpl::~ExtensionImpl()
 
 
 //Additional constructor for the containments back reference
-			ExtensionImpl::ExtensionImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id)
-			:ExtensionImpl()
-			{
-				switch(reference_id)
-				{	
-				case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
-					m_owningPackage = par_Package;
-					m_namespace = par_Package;
-					 return;
-				case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
-					m_package = par_Package;
-					m_namespace = par_Package;
-					 return;
-				default:
-				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
-				}
-			   
-			}
+ExtensionImpl::ExtensionImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id)
+:ExtensionImpl()
+{
+	switch(reference_id)
+	{	
+	case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
+		m_owningPackage = par_Package;
+		m_namespace = par_Package;
+		 return;
+	case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
+		m_package = par_Package;
+		m_namespace = par_Package;
+		 return;
+	default:
+	std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
+	}
+   
+}
 
 
 
@@ -560,7 +560,7 @@ Any ExtensionImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case UmlPackage::EXTENSION_ATTRIBUTE_ISREQUIRED:
 			return eAny(getIsRequired()); //9744
 		case UmlPackage::EXTENSION_ATTRIBUTE_METACLASS:
-			return eAny(getMetaclass()); //9745
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getMetaclass())); //9745
 	}
 	return AssociationImpl::eGet(featureID, resolve, coreType);
 }

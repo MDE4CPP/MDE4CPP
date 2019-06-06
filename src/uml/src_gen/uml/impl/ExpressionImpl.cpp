@@ -331,7 +331,16 @@ Any ExpressionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::EXPRESSION_ATTRIBUTE_OPERAND:
-			return eAny(getOperand()); //9514
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::ValueSpecification>::iterator iter = m_operand->begin();
+			Bag<uml::ValueSpecification>::iterator end = m_operand->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //9514
+		}
 		case UmlPackage::EXPRESSION_ATTRIBUTE_SYMBOL:
 			return eAny(getSymbol()); //9515
 	}
@@ -352,6 +361,42 @@ bool ExpressionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
+		case UmlPackage::EXPRESSION_ATTRIBUTE_OPERAND:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::ValueSpecification>> operandList(new Bag<uml::ValueSpecification>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				operandList->add(std::dynamic_pointer_cast<uml::ValueSpecification>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::ValueSpecification>::iterator iterOperand = m_operand->begin();
+			Bag<uml::ValueSpecification>::iterator endOperand = m_operand->end();
+			while (iterOperand != endOperand)
+			{
+				if (operandList->find(*iterOperand) == -1)
+				{
+					m_operand->erase(*iterOperand);
+				}
+				iterOperand++;
+			}
+
+			iterOperand = operandList->begin();
+			endOperand = operandList->end();
+			while (iterOperand != endOperand)
+			{
+				if (m_operand->find(*iterOperand) == -1)
+				{
+					m_operand->add(*iterOperand);
+				}
+				iterOperand++;			
+			}
+			return true;
+		}
 		case UmlPackage::EXPRESSION_ATTRIBUTE_SYMBOL:
 		{
 			// BOOST CAST

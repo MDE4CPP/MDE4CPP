@@ -423,9 +423,9 @@ Any SendSignalActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::SENDSIGNALACTION_ATTRIBUTE_SIGNAL:
-			return eAny(getSignal()); //21329
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSignal())); //21329
 		case UmlPackage::SENDSIGNALACTION_ATTRIBUTE_TARGET:
-			return eAny(getTarget()); //21330
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getTarget())); //21330
 	}
 	return InvocationActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -447,14 +447,16 @@ bool SendSignalActionImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::SENDSIGNALACTION_ATTRIBUTE_SIGNAL:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Signal> _signal = newValue->get<std::shared_ptr<uml::Signal>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Signal> _signal = std::dynamic_pointer_cast<uml::Signal>(_temp);
 			setSignal(_signal); //21329
 			return true;
 		}
 		case UmlPackage::SENDSIGNALACTION_ATTRIBUTE_TARGET:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::InputPin> _target = newValue->get<std::shared_ptr<uml::InputPin>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::InputPin> _target = std::dynamic_pointer_cast<uml::InputPin>(_temp);
 			setTarget(_target); //21330
 			return true;
 		}

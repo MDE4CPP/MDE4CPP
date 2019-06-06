@@ -281,7 +281,7 @@ Any PackageableElementImpl::eGet(int featureID, bool resolve, bool coreType) con
 	switch(featureID)
 	{
 		case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
-			return eAny(getOwningPackage()); //17311
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getOwningPackage().lock())); //17311
 	}
 	Any result;
 	result = NamedElementImpl::eGet(featureID, resolve, coreType);
@@ -315,7 +315,8 @@ bool PackageableElementImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Package> _owningPackage = newValue->get<std::shared_ptr<uml::Package>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Package> _owningPackage = std::dynamic_pointer_cast<uml::Package>(_temp);
 			setOwningPackage(_owningPackage); //17311
 			return true;
 		}

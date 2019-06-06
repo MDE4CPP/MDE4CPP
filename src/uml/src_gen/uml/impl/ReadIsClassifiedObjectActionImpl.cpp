@@ -452,13 +452,13 @@ Any ReadIsClassifiedObjectActionImpl::eGet(int featureID, bool resolve, bool cor
 	switch(featureID)
 	{
 		case UmlPackage::READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_CLASSIFIER:
-			return eAny(getClassifier()); //19427
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getClassifier())); //19427
 		case UmlPackage::READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_ISDIRECT:
 			return eAny(getIsDirect()); //19428
 		case UmlPackage::READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_OBJECT:
-			return eAny(getObject()); //19429
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getObject())); //19429
 		case UmlPackage::READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_RESULT:
-			return eAny(getResult()); //19430
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getResult())); //19430
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -484,7 +484,8 @@ bool ReadIsClassifiedObjectActionImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_CLASSIFIER:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Classifier> _classifier = newValue->get<std::shared_ptr<uml::Classifier>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Classifier> _classifier = std::dynamic_pointer_cast<uml::Classifier>(_temp);
 			setClassifier(_classifier); //19427
 			return true;
 		}
@@ -498,14 +499,16 @@ bool ReadIsClassifiedObjectActionImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_OBJECT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::InputPin> _object = newValue->get<std::shared_ptr<uml::InputPin>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::InputPin> _object = std::dynamic_pointer_cast<uml::InputPin>(_temp);
 			setObject(_object); //19429
 			return true;
 		}
 		case UmlPackage::READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_RESULT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::OutputPin> _result = newValue->get<std::shared_ptr<uml::OutputPin>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::OutputPin> _result = std::dynamic_pointer_cast<uml::OutputPin>(_temp);
 			setResult(_result); //19430
 			return true;
 		}

@@ -165,24 +165,24 @@ CollaborationImpl::~CollaborationImpl()
 
 
 //Additional constructor for the containments back reference
-			CollaborationImpl::CollaborationImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id)
-			:CollaborationImpl()
-			{
-				switch(reference_id)
-				{	
-				case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
-					m_owningPackage = par_Package;
-					m_namespace = par_Package;
-					 return;
-				case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
-					m_package = par_Package;
-					m_namespace = par_Package;
-					 return;
-				default:
-				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
-				}
-			   
-			}
+CollaborationImpl::CollaborationImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id)
+:CollaborationImpl()
+{
+	switch(reference_id)
+	{	
+	case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
+		m_owningPackage = par_Package;
+		m_namespace = par_Package;
+		 return;
+	case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
+		m_package = par_Package;
+		m_namespace = par_Package;
+		 return;
+	default:
+	std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
+	}
+   
+}
 
 
 
@@ -546,7 +546,16 @@ Any CollaborationImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::COLLABORATION_ATTRIBUTE_COLLABORATIONROLE:
-			return eAny(getCollaborationRole()); //4245
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::ConnectableElement>::iterator iter = m_collaborationRole->begin();
+			Bag<uml::ConnectableElement>::iterator end = m_collaborationRole->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //4245
+		}
 	}
 	Any result;
 	result = BehavioredClassifierImpl::eGet(featureID, resolve, coreType);
@@ -577,6 +586,42 @@ bool CollaborationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
+		case UmlPackage::COLLABORATION_ATTRIBUTE_COLLABORATIONROLE:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::ConnectableElement>> collaborationRoleList(new Bag<uml::ConnectableElement>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				collaborationRoleList->add(std::dynamic_pointer_cast<uml::ConnectableElement>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::ConnectableElement>::iterator iterCollaborationRole = m_collaborationRole->begin();
+			Bag<uml::ConnectableElement>::iterator endCollaborationRole = m_collaborationRole->end();
+			while (iterCollaborationRole != endCollaborationRole)
+			{
+				if (collaborationRoleList->find(*iterCollaborationRole) == -1)
+				{
+					m_collaborationRole->erase(*iterCollaborationRole);
+				}
+				iterCollaborationRole++;
+			}
+
+			iterCollaborationRole = collaborationRoleList->begin();
+			endCollaborationRole = collaborationRoleList->end();
+			while (iterCollaborationRole != endCollaborationRole)
+			{
+				if (m_collaborationRole->find(*iterCollaborationRole) == -1)
+				{
+					m_collaborationRole->add(*iterCollaborationRole);
+				}
+				iterCollaborationRole++;			
+			}
+			return true;
+		}
 	}
 
 	bool result = false;

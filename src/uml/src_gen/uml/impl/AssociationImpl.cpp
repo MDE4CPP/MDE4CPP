@@ -206,24 +206,24 @@ AssociationImpl::~AssociationImpl()
 
 
 //Additional constructor for the containments back reference
-			AssociationImpl::AssociationImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id)
-			:AssociationImpl()
-			{
-				switch(reference_id)
-				{	
-				case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
-					m_owningPackage = par_Package;
-					m_namespace = par_Package;
-					 return;
-				case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
-					m_package = par_Package;
-					m_namespace = par_Package;
-					 return;
-				default:
-				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
-				}
-			   
-			}
+AssociationImpl::AssociationImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id)
+:AssociationImpl()
+{
+	switch(reference_id)
+	{	
+	case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
+		m_owningPackage = par_Package;
+		m_namespace = par_Package;
+		 return;
+	case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
+		m_package = par_Package;
+		m_namespace = par_Package;
+		 return;
+	default:
+	std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
+	}
+   
+}
 
 
 
@@ -647,15 +647,51 @@ Any AssociationImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::ASSOCIATION_ATTRIBUTE_ENDTYPE:
-			return eAny(getEndType()); //2139
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Type>::iterator iter = m_endType->begin();
+			Bag<uml::Type>::iterator end = m_endType->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //2139
+		}
 		case UmlPackage::ASSOCIATION_ATTRIBUTE_ISDERIVED:
 			return eAny(getIsDerived()); //2140
 		case UmlPackage::ASSOCIATION_ATTRIBUTE_MEMBEREND:
-			return eAny(getMemberEnd()); //2141
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Property>::iterator iter = m_memberEnd->begin();
+			Bag<uml::Property>::iterator end = m_memberEnd->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //2141
+		}
 		case UmlPackage::ASSOCIATION_ATTRIBUTE_NAVIGABLEOWNEDEND:
-			return eAny(getNavigableOwnedEnd()); //2143
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Property>::iterator iter = m_navigableOwnedEnd->begin();
+			Bag<uml::Property>::iterator end = m_navigableOwnedEnd->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //2143
+		}
 		case UmlPackage::ASSOCIATION_ATTRIBUTE_OWNEDEND:
-			return eAny(getOwnedEnd()); //2142
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Property>::iterator iter = m_ownedEnd->begin();
+			Bag<uml::Property>::iterator end = m_ownedEnd->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //2142
+		}
 	}
 	Any result;
 	result = ClassifierImpl::eGet(featureID, resolve, coreType);
@@ -699,6 +735,114 @@ bool AssociationImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			bool _isDerived = newValue->get<bool>();
 			setIsDerived(_isDerived); //2140
+			return true;
+		}
+		case UmlPackage::ASSOCIATION_ATTRIBUTE_MEMBEREND:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Property>> memberEndList(new Bag<uml::Property>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				memberEndList->add(std::dynamic_pointer_cast<uml::Property>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Property>::iterator iterMemberEnd = m_memberEnd->begin();
+			Bag<uml::Property>::iterator endMemberEnd = m_memberEnd->end();
+			while (iterMemberEnd != endMemberEnd)
+			{
+				if (memberEndList->find(*iterMemberEnd) == -1)
+				{
+					m_memberEnd->erase(*iterMemberEnd);
+				}
+				iterMemberEnd++;
+			}
+
+			iterMemberEnd = memberEndList->begin();
+			endMemberEnd = memberEndList->end();
+			while (iterMemberEnd != endMemberEnd)
+			{
+				if (m_memberEnd->find(*iterMemberEnd) == -1)
+				{
+					m_memberEnd->add(*iterMemberEnd);
+				}
+				iterMemberEnd++;			
+			}
+			return true;
+		}
+		case UmlPackage::ASSOCIATION_ATTRIBUTE_NAVIGABLEOWNEDEND:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Property>> navigableOwnedEndList(new Bag<uml::Property>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				navigableOwnedEndList->add(std::dynamic_pointer_cast<uml::Property>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Property>::iterator iterNavigableOwnedEnd = m_navigableOwnedEnd->begin();
+			Bag<uml::Property>::iterator endNavigableOwnedEnd = m_navigableOwnedEnd->end();
+			while (iterNavigableOwnedEnd != endNavigableOwnedEnd)
+			{
+				if (navigableOwnedEndList->find(*iterNavigableOwnedEnd) == -1)
+				{
+					m_navigableOwnedEnd->erase(*iterNavigableOwnedEnd);
+				}
+				iterNavigableOwnedEnd++;
+			}
+
+			iterNavigableOwnedEnd = navigableOwnedEndList->begin();
+			endNavigableOwnedEnd = navigableOwnedEndList->end();
+			while (iterNavigableOwnedEnd != endNavigableOwnedEnd)
+			{
+				if (m_navigableOwnedEnd->find(*iterNavigableOwnedEnd) == -1)
+				{
+					m_navigableOwnedEnd->add(*iterNavigableOwnedEnd);
+				}
+				iterNavigableOwnedEnd++;			
+			}
+			return true;
+		}
+		case UmlPackage::ASSOCIATION_ATTRIBUTE_OWNEDEND:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Property>> ownedEndList(new Bag<uml::Property>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				ownedEndList->add(std::dynamic_pointer_cast<uml::Property>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Property>::iterator iterOwnedEnd = m_ownedEnd->begin();
+			Bag<uml::Property>::iterator endOwnedEnd = m_ownedEnd->end();
+			while (iterOwnedEnd != endOwnedEnd)
+			{
+				if (ownedEndList->find(*iterOwnedEnd) == -1)
+				{
+					m_ownedEnd->erase(*iterOwnedEnd);
+				}
+				iterOwnedEnd++;
+			}
+
+			iterOwnedEnd = ownedEndList->begin();
+			endOwnedEnd = ownedEndList->end();
+			while (iterOwnedEnd != endOwnedEnd)
+			{
+				if (m_ownedEnd->find(*iterOwnedEnd) == -1)
+				{
+					m_ownedEnd->add(*iterOwnedEnd);
+				}
+				iterOwnedEnd++;			
+			}
 			return true;
 		}
 	}

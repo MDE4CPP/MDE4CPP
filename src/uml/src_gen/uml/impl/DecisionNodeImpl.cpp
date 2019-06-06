@@ -398,9 +398,9 @@ Any DecisionNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::DECISIONNODE_ATTRIBUTE_DECISIONINPUT:
-			return eAny(getDecisionInput()); //6620
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getDecisionInput())); //6620
 		case UmlPackage::DECISIONNODE_ATTRIBUTE_DECISIONINPUTFLOW:
-			return eAny(getDecisionInputFlow()); //6621
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getDecisionInputFlow())); //6621
 	}
 	return ControlNodeImpl::eGet(featureID, resolve, coreType);
 }
@@ -422,14 +422,16 @@ bool DecisionNodeImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::DECISIONNODE_ATTRIBUTE_DECISIONINPUT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Behavior> _decisionInput = newValue->get<std::shared_ptr<uml::Behavior>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Behavior> _decisionInput = std::dynamic_pointer_cast<uml::Behavior>(_temp);
 			setDecisionInput(_decisionInput); //6620
 			return true;
 		}
 		case UmlPackage::DECISIONNODE_ATTRIBUTE_DECISIONINPUTFLOW:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::ObjectFlow> _decisionInputFlow = newValue->get<std::shared_ptr<uml::ObjectFlow>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::ObjectFlow> _decisionInputFlow = std::dynamic_pointer_cast<uml::ObjectFlow>(_temp);
 			setDecisionInputFlow(_decisionInputFlow); //6621
 			return true;
 		}

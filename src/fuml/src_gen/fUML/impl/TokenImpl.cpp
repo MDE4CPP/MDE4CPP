@@ -218,7 +218,7 @@ Any TokenImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case FUMLPackage::TOKEN_ATTRIBUTE_HOLDER:
-			return eAny(getHolder()); //1080
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getHolder().lock())); //1080
 		case FUMLPackage::TOKEN_ATTRIBUTE_WITHDRAWN:
 			return eAny(isWithdrawn()); //1081
 	}
@@ -242,7 +242,8 @@ bool TokenImpl::eSet(int featureID, Any newValue)
 		case FUMLPackage::TOKEN_ATTRIBUTE_HOLDER:
 		{
 			// BOOST CAST
-			std::shared_ptr<fUML::ActivityNodeActivation> _holder = newValue->get<std::shared_ptr<fUML::ActivityNodeActivation>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<fUML::ActivityNodeActivation> _holder = std::dynamic_pointer_cast<fUML::ActivityNodeActivation>(_temp);
 			setHolder(_holder); //1080
 			return true;
 		}

@@ -242,7 +242,7 @@ Any EAttributeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case EcorePackage::EATTRIBUTE_ATTRIBUTE_EATTRIBUTETYPE:
-			return eAny(getEAttributeType()); //223
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEAttributeType())); //223
 		case EcorePackage::EATTRIBUTE_ATTRIBUTE_ID:
 			return eAny(isID()); //222
 	}

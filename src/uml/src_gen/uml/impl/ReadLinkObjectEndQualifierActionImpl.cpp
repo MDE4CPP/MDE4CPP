@@ -468,11 +468,11 @@ Any ReadLinkObjectEndQualifierActionImpl::eGet(int featureID, bool resolve, bool
 	switch(featureID)
 	{
 		case UmlPackage::READLINKOBJECTENDQUALIFIERACTION_ATTRIBUTE_OBJECT:
-			return eAny(getObject()); //19727
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getObject())); //19727
 		case UmlPackage::READLINKOBJECTENDQUALIFIERACTION_ATTRIBUTE_QUALIFIER:
-			return eAny(getQualifier()); //19728
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getQualifier())); //19728
 		case UmlPackage::READLINKOBJECTENDQUALIFIERACTION_ATTRIBUTE_RESULT:
-			return eAny(getResult()); //19729
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getResult())); //19729
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -496,21 +496,24 @@ bool ReadLinkObjectEndQualifierActionImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::READLINKOBJECTENDQUALIFIERACTION_ATTRIBUTE_OBJECT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::InputPin> _object = newValue->get<std::shared_ptr<uml::InputPin>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::InputPin> _object = std::dynamic_pointer_cast<uml::InputPin>(_temp);
 			setObject(_object); //19727
 			return true;
 		}
 		case UmlPackage::READLINKOBJECTENDQUALIFIERACTION_ATTRIBUTE_QUALIFIER:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Property> _qualifier = newValue->get<std::shared_ptr<uml::Property>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Property> _qualifier = std::dynamic_pointer_cast<uml::Property>(_temp);
 			setQualifier(_qualifier); //19728
 			return true;
 		}
 		case UmlPackage::READLINKOBJECTENDQUALIFIERACTION_ATTRIBUTE_RESULT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::OutputPin> _result = newValue->get<std::shared_ptr<uml::OutputPin>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::OutputPin> _result = std::dynamic_pointer_cast<uml::OutputPin>(_temp);
 			setResult(_result); //19729
 			return true;
 		}

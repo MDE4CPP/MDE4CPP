@@ -282,7 +282,7 @@ Any ChangeEventImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::CHANGEEVENT_ATTRIBUTE_CHANGEEXPRESSION:
-			return eAny(getChangeExpression()); //3412
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getChangeExpression())); //3412
 	}
 	return EventImpl::eGet(featureID, resolve, coreType);
 }
@@ -302,7 +302,8 @@ bool ChangeEventImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::CHANGEEVENT_ATTRIBUTE_CHANGEEXPRESSION:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::ValueSpecification> _changeExpression = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::ValueSpecification> _changeExpression = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
 			setChangeExpression(_changeExpression); //3412
 			return true;
 		}

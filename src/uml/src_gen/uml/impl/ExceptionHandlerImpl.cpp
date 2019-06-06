@@ -293,13 +293,22 @@ Any ExceptionHandlerImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::EXCEPTIONHANDLER_ATTRIBUTE_EXCEPTIONINPUT:
-			return eAny(getExceptionInput()); //873
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getExceptionInput())); //873
 		case UmlPackage::EXCEPTIONHANDLER_ATTRIBUTE_EXCEPTIONTYPE:
-			return eAny(getExceptionType()); //874
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Classifier>::iterator iter = m_exceptionType->begin();
+			Bag<uml::Classifier>::iterator end = m_exceptionType->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //874
+		}
 		case UmlPackage::EXCEPTIONHANDLER_ATTRIBUTE_HANDLERBODY:
-			return eAny(getHandlerBody()); //875
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getHandlerBody())); //875
 		case UmlPackage::EXCEPTIONHANDLER_ATTRIBUTE_PROTECTEDNODE:
-			return eAny(getProtectedNode()); //876
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getProtectedNode().lock())); //876
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -325,21 +334,60 @@ bool ExceptionHandlerImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::EXCEPTIONHANDLER_ATTRIBUTE_EXCEPTIONINPUT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::ObjectNode> _exceptionInput = newValue->get<std::shared_ptr<uml::ObjectNode>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::ObjectNode> _exceptionInput = std::dynamic_pointer_cast<uml::ObjectNode>(_temp);
 			setExceptionInput(_exceptionInput); //873
+			return true;
+		}
+		case UmlPackage::EXCEPTIONHANDLER_ATTRIBUTE_EXCEPTIONTYPE:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Classifier>> exceptionTypeList(new Bag<uml::Classifier>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				exceptionTypeList->add(std::dynamic_pointer_cast<uml::Classifier>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Classifier>::iterator iterExceptionType = m_exceptionType->begin();
+			Bag<uml::Classifier>::iterator endExceptionType = m_exceptionType->end();
+			while (iterExceptionType != endExceptionType)
+			{
+				if (exceptionTypeList->find(*iterExceptionType) == -1)
+				{
+					m_exceptionType->erase(*iterExceptionType);
+				}
+				iterExceptionType++;
+			}
+
+			iterExceptionType = exceptionTypeList->begin();
+			endExceptionType = exceptionTypeList->end();
+			while (iterExceptionType != endExceptionType)
+			{
+				if (m_exceptionType->find(*iterExceptionType) == -1)
+				{
+					m_exceptionType->add(*iterExceptionType);
+				}
+				iterExceptionType++;			
+			}
 			return true;
 		}
 		case UmlPackage::EXCEPTIONHANDLER_ATTRIBUTE_HANDLERBODY:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::ExecutableNode> _handlerBody = newValue->get<std::shared_ptr<uml::ExecutableNode>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::ExecutableNode> _handlerBody = std::dynamic_pointer_cast<uml::ExecutableNode>(_temp);
 			setHandlerBody(_handlerBody); //875
 			return true;
 		}
 		case UmlPackage::EXCEPTIONHANDLER_ATTRIBUTE_PROTECTEDNODE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::ExecutableNode> _protectedNode = newValue->get<std::shared_ptr<uml::ExecutableNode>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::ExecutableNode> _protectedNode = std::dynamic_pointer_cast<uml::ExecutableNode>(_temp);
 			setProtectedNode(_protectedNode); //876
 			return true;
 		}

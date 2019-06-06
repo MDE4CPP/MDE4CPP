@@ -261,11 +261,20 @@ Any SlotImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::SLOT_ATTRIBUTE_DEFININGFEATURE:
-			return eAny(getDefiningFeature()); //2173
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getDefiningFeature())); //2173
 		case UmlPackage::SLOT_ATTRIBUTE_OWNINGINSTANCE:
-			return eAny(getOwningInstance()); //2175
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getOwningInstance().lock())); //2175
 		case UmlPackage::SLOT_ATTRIBUTE_VALUE:
-			return eAny(getValue()); //2174
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::ValueSpecification>::iterator iter = m_value->begin();
+			Bag<uml::ValueSpecification>::iterator end = m_value->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //2174
+		}
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -289,15 +298,53 @@ bool SlotImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::SLOT_ATTRIBUTE_DEFININGFEATURE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::StructuralFeature> _definingFeature = newValue->get<std::shared_ptr<uml::StructuralFeature>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::StructuralFeature> _definingFeature = std::dynamic_pointer_cast<uml::StructuralFeature>(_temp);
 			setDefiningFeature(_definingFeature); //2173
 			return true;
 		}
 		case UmlPackage::SLOT_ATTRIBUTE_OWNINGINSTANCE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::InstanceSpecification> _owningInstance = newValue->get<std::shared_ptr<uml::InstanceSpecification>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::InstanceSpecification> _owningInstance = std::dynamic_pointer_cast<uml::InstanceSpecification>(_temp);
 			setOwningInstance(_owningInstance); //2175
+			return true;
+		}
+		case UmlPackage::SLOT_ATTRIBUTE_VALUE:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::ValueSpecification>> valueList(new Bag<uml::ValueSpecification>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				valueList->add(std::dynamic_pointer_cast<uml::ValueSpecification>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::ValueSpecification>::iterator iterValue = m_value->begin();
+			Bag<uml::ValueSpecification>::iterator endValue = m_value->end();
+			while (iterValue != endValue)
+			{
+				if (valueList->find(*iterValue) == -1)
+				{
+					m_value->erase(*iterValue);
+				}
+				iterValue++;
+			}
+
+			iterValue = valueList->begin();
+			endValue = valueList->end();
+			while (iterValue != endValue)
+			{
+				if (m_value->find(*iterValue) == -1)
+				{
+					m_value->add(*iterValue);
+				}
+				iterValue++;			
+			}
 			return true;
 		}
 	}

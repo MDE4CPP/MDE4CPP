@@ -274,9 +274,27 @@ Any DeploymentTargetImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::DEPLOYMENTTARGET_ATTRIBUTE_DEPLOYEDELEMENT:
-			return eAny(getDeployedElement()); //719
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::PackageableElement>::iterator iter = m_deployedElement->begin();
+			Bag<uml::PackageableElement>::iterator end = m_deployedElement->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //719
+		}
 		case UmlPackage::DEPLOYMENTTARGET_ATTRIBUTE_DEPLOYMENT:
-			return eAny(getDeployment()); //7110
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Deployment>::iterator iter = m_deployment->begin();
+			Bag<uml::Deployment>::iterator end = m_deployment->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //7110
+		}
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -295,6 +313,42 @@ bool DeploymentTargetImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
+		case UmlPackage::DEPLOYMENTTARGET_ATTRIBUTE_DEPLOYMENT:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Deployment>> deploymentList(new Bag<uml::Deployment>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				deploymentList->add(std::dynamic_pointer_cast<uml::Deployment>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Deployment>::iterator iterDeployment = m_deployment->begin();
+			Bag<uml::Deployment>::iterator endDeployment = m_deployment->end();
+			while (iterDeployment != endDeployment)
+			{
+				if (deploymentList->find(*iterDeployment) == -1)
+				{
+					m_deployment->erase(*iterDeployment);
+				}
+				iterDeployment++;
+			}
+
+			iterDeployment = deploymentList->begin();
+			endDeployment = deploymentList->end();
+			while (iterDeployment != endDeployment)
+			{
+				if (m_deployment->find(*iterDeployment) == -1)
+				{
+					m_deployment->add(*iterDeployment);
+				}
+				iterDeployment++;			
+			}
+			return true;
+		}
 	}
 
 	return NamedElementImpl::eSet(featureID, newValue);

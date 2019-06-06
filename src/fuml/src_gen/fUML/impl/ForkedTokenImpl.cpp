@@ -221,7 +221,7 @@ Any ForkedTokenImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case FUMLPackage::FORKEDTOKEN_ATTRIBUTE_BASETOKEN:
-			return eAny(getBaseToken()); //562
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getBaseToken())); //562
 		case FUMLPackage::FORKEDTOKEN_ATTRIBUTE_BASETOKENISWITHDRAWN:
 			return eAny(isBaseTokenIsWithdrawn()); //564
 		case FUMLPackage::FORKEDTOKEN_ATTRIBUTE_REMAININGOFFERSCOUNT:
@@ -249,7 +249,8 @@ bool ForkedTokenImpl::eSet(int featureID, Any newValue)
 		case FUMLPackage::FORKEDTOKEN_ATTRIBUTE_BASETOKEN:
 		{
 			// BOOST CAST
-			std::shared_ptr<fUML::Token> _baseToken = newValue->get<std::shared_ptr<fUML::Token>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<fUML::Token> _baseToken = std::dynamic_pointer_cast<fUML::Token>(_temp);
 			setBaseToken(_baseToken); //562
 			return true;
 		}

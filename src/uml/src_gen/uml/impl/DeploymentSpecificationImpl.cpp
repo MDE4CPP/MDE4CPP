@@ -163,24 +163,24 @@ DeploymentSpecificationImpl::~DeploymentSpecificationImpl()
 
 
 //Additional constructor for the containments back reference
-			DeploymentSpecificationImpl::DeploymentSpecificationImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id)
-			:DeploymentSpecificationImpl()
-			{
-				switch(reference_id)
-				{	
-				case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
-					m_owningPackage = par_Package;
-					m_namespace = par_Package;
-					 return;
-				case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
-					m_package = par_Package;
-					m_namespace = par_Package;
-					 return;
-				default:
-				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
-				}
-			   
-			}
+DeploymentSpecificationImpl::DeploymentSpecificationImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id)
+:DeploymentSpecificationImpl()
+{
+	switch(reference_id)
+	{	
+	case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
+		m_owningPackage = par_Package;
+		m_namespace = par_Package;
+		 return;
+	case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
+		m_package = par_Package;
+		m_namespace = par_Package;
+		 return;
+	default:
+	std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
+	}
+   
+}
 
 
 
@@ -564,7 +564,7 @@ Any DeploymentSpecificationImpl::eGet(int featureID, bool resolve, bool coreType
 	switch(featureID)
 	{
 		case UmlPackage::DEPLOYMENTSPECIFICATION_ATTRIBUTE_DEPLOYMENT:
-			return eAny(getDeployment()); //7045
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getDeployment().lock())); //7045
 		case UmlPackage::DEPLOYMENTSPECIFICATION_ATTRIBUTE_DEPLOYMENTLOCATION:
 			return eAny(getDeploymentLocation()); //7043
 		case UmlPackage::DEPLOYMENTSPECIFICATION_ATTRIBUTE_EXECUTIONLOCATION:
@@ -592,7 +592,8 @@ bool DeploymentSpecificationImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::DEPLOYMENTSPECIFICATION_ATTRIBUTE_DEPLOYMENT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Deployment> _deployment = newValue->get<std::shared_ptr<uml::Deployment>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Deployment> _deployment = std::dynamic_pointer_cast<uml::Deployment>(_temp);
 			setDeployment(_deployment); //7045
 			return true;
 		}

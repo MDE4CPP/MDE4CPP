@@ -2213,15 +2213,17 @@ namespace fUML
 			//Class and Feature IDs 
 			static const unsigned int READSELFACTIONACTIVATION_CLASS = 89;
 			static const unsigned int READSELFACTIONACTIVATION_CLASS_FEATURE_COUNT = 10;
-			static const unsigned int READSELFACTIONACTIVATION_CLASS_OPERATION_COUNT = 47;
+			static const unsigned int READSELFACTIONACTIVATION_CLASS_OPERATION_COUNT = 48;
 			
 			
+			static const int READSELFACTIONACTIVATION_OPERATION_DOACTION = 8957;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getReadSelfActionActivation_Class() const = 0;
 			
 			
 			
+			virtual std::shared_ptr<ecore::EOperation> getReadSelfActionActivation_Operation_doAction() const = 0;
 			
 			// End Class ReadSelfActionActivation
 

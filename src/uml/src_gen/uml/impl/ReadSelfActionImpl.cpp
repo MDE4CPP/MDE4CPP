@@ -399,7 +399,7 @@ Any ReadSelfActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::READSELFACTION_ATTRIBUTE_RESULT:
-			return eAny(getResult()); //19827
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getResult())); //19827
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -419,7 +419,8 @@ bool ReadSelfActionImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::READSELFACTION_ATTRIBUTE_RESULT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::OutputPin> _result = newValue->get<std::shared_ptr<uml::OutputPin>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::OutputPin> _result = std::dynamic_pointer_cast<uml::OutputPin>(_temp);
 			setResult(_result); //19827
 			return true;
 		}

@@ -160,24 +160,24 @@ EnumerationImpl::~EnumerationImpl()
 
 
 //Additional constructor for the containments back reference
-			EnumerationImpl::EnumerationImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id)
-			:EnumerationImpl()
-			{
-				switch(reference_id)
-				{	
-				case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
-					m_owningPackage = par_Package;
-					m_namespace = par_Package;
-					 return;
-				case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
-					m_package = par_Package;
-					m_namespace = par_Package;
-					 return;
-				default:
-				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
-				}
-			   
-			}
+EnumerationImpl::EnumerationImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id)
+:EnumerationImpl()
+{
+	switch(reference_id)
+	{	
+	case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
+		m_owningPackage = par_Package;
+		m_namespace = par_Package;
+		 return;
+	case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
+		m_package = par_Package;
+		m_namespace = par_Package;
+		 return;
+	default:
+	std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
+	}
+   
+}
 
 
 
@@ -522,7 +522,16 @@ Any EnumerationImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::ENUMERATION_ATTRIBUTE_OWNEDLITERAL:
-			return eAny(getOwnedLiteral()); //8440
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::EnumerationLiteral>::iterator iter = m_ownedLiteral->begin();
+			Bag<uml::EnumerationLiteral>::iterator end = m_ownedLiteral->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //8440
+		}
 	}
 	return DataTypeImpl::eGet(featureID, resolve, coreType);
 }
@@ -539,6 +548,42 @@ bool EnumerationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
+		case UmlPackage::ENUMERATION_ATTRIBUTE_OWNEDLITERAL:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::EnumerationLiteral>> ownedLiteralList(new Bag<uml::EnumerationLiteral>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				ownedLiteralList->add(std::dynamic_pointer_cast<uml::EnumerationLiteral>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::EnumerationLiteral>::iterator iterOwnedLiteral = m_ownedLiteral->begin();
+			Bag<uml::EnumerationLiteral>::iterator endOwnedLiteral = m_ownedLiteral->end();
+			while (iterOwnedLiteral != endOwnedLiteral)
+			{
+				if (ownedLiteralList->find(*iterOwnedLiteral) == -1)
+				{
+					m_ownedLiteral->erase(*iterOwnedLiteral);
+				}
+				iterOwnedLiteral++;
+			}
+
+			iterOwnedLiteral = ownedLiteralList->begin();
+			endOwnedLiteral = ownedLiteralList->end();
+			while (iterOwnedLiteral != endOwnedLiteral)
+			{
+				if (m_ownedLiteral->find(*iterOwnedLiteral) == -1)
+				{
+					m_ownedLiteral->add(*iterOwnedLiteral);
+				}
+				iterOwnedLiteral++;			
+			}
+			return true;
+		}
 	}
 
 	return DataTypeImpl::eSet(featureID, newValue);

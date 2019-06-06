@@ -423,9 +423,9 @@ Any StructuralFeatureActionImpl::eGet(int featureID, bool resolve, bool coreType
 	switch(featureID)
 	{
 		case UmlPackage::STRUCTURALFEATUREACTION_ATTRIBUTE_OBJECT:
-			return eAny(getObject()); //22627
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getObject())); //22627
 		case UmlPackage::STRUCTURALFEATUREACTION_ATTRIBUTE_STRUCTURALFEATURE:
-			return eAny(getStructuralFeature()); //22628
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getStructuralFeature())); //22628
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -447,14 +447,16 @@ bool StructuralFeatureActionImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::STRUCTURALFEATUREACTION_ATTRIBUTE_OBJECT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::InputPin> _object = newValue->get<std::shared_ptr<uml::InputPin>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::InputPin> _object = std::dynamic_pointer_cast<uml::InputPin>(_temp);
 			setObject(_object); //22627
 			return true;
 		}
 		case UmlPackage::STRUCTURALFEATUREACTION_ATTRIBUTE_STRUCTURALFEATURE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::StructuralFeature> _structuralFeature = newValue->get<std::shared_ptr<uml::StructuralFeature>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::StructuralFeature> _structuralFeature = std::dynamic_pointer_cast<uml::StructuralFeature>(_temp);
 			setStructuralFeature(_structuralFeature); //22628
 			return true;
 		}

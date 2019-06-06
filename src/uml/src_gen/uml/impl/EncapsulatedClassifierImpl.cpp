@@ -161,24 +161,24 @@ EncapsulatedClassifierImpl::~EncapsulatedClassifierImpl()
 
 
 //Additional constructor for the containments back reference
-			EncapsulatedClassifierImpl::EncapsulatedClassifierImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id)
-			:EncapsulatedClassifierImpl()
-			{
-				switch(reference_id)
-				{	
-				case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
-					m_owningPackage = par_Package;
-					m_namespace = par_Package;
-					 return;
-				case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
-					m_package = par_Package;
-					m_namespace = par_Package;
-					 return;
-				default:
-				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
-				}
-			   
-			}
+EncapsulatedClassifierImpl::EncapsulatedClassifierImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id)
+:EncapsulatedClassifierImpl()
+{
+	switch(reference_id)
+	{	
+	case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
+		m_owningPackage = par_Package;
+		m_namespace = par_Package;
+		 return;
+	case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
+		m_package = par_Package;
+		m_namespace = par_Package;
+		 return;
+	default:
+	std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
+	}
+   
+}
 
 
 
@@ -523,7 +523,16 @@ Any EncapsulatedClassifierImpl::eGet(int featureID, bool resolve, bool coreType)
 	switch(featureID)
 	{
 		case UmlPackage::ENCAPSULATEDCLASSIFIER_ATTRIBUTE_OWNEDPORT:
-			return eAny(getOwnedPort()); //8342
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Port>::iterator iter = m_ownedPort->begin();
+			Bag<uml::Port>::iterator end = m_ownedPort->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //8342
+		}
 	}
 	return StructuredClassifierImpl::eGet(featureID, resolve, coreType);
 }

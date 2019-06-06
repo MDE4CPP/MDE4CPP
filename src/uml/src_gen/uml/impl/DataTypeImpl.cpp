@@ -173,24 +173,24 @@ DataTypeImpl::~DataTypeImpl()
 
 
 //Additional constructor for the containments back reference
-			DataTypeImpl::DataTypeImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id)
-			:DataTypeImpl()
-			{
-				switch(reference_id)
-				{	
-				case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
-					m_owningPackage = par_Package;
-					m_namespace = par_Package;
-					 return;
-				case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
-					m_package = par_Package;
-					m_namespace = par_Package;
-					 return;
-				default:
-				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
-				}
-			   
-			}
+DataTypeImpl::DataTypeImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id)
+:DataTypeImpl()
+{
+	switch(reference_id)
+	{	
+	case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
+		m_owningPackage = par_Package;
+		m_namespace = par_Package;
+		 return;
+	case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
+		m_package = par_Package;
+		m_namespace = par_Package;
+		 return;
+	default:
+	std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
+	}
+   
+}
 
 
 
@@ -548,9 +548,27 @@ Any DataTypeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::DATATYPE_ATTRIBUTE_OWNEDATTRIBUTE:
-			return eAny(getOwnedAttribute()); //6538
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Property>::iterator iter = m_ownedAttribute->begin();
+			Bag<uml::Property>::iterator end = m_ownedAttribute->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //6538
+		}
 		case UmlPackage::DATATYPE_ATTRIBUTE_OWNEDOPERATION:
-			return eAny(getOwnedOperation()); //6539
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Operation>::iterator iter = m_ownedOperation->begin();
+			Bag<uml::Operation>::iterator end = m_ownedOperation->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //6539
+		}
 	}
 	return ClassifierImpl::eGet(featureID, resolve, coreType);
 }
@@ -569,6 +587,78 @@ bool DataTypeImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
+		case UmlPackage::DATATYPE_ATTRIBUTE_OWNEDATTRIBUTE:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Property>> ownedAttributeList(new Bag<uml::Property>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				ownedAttributeList->add(std::dynamic_pointer_cast<uml::Property>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Property>::iterator iterOwnedAttribute = m_ownedAttribute->begin();
+			Bag<uml::Property>::iterator endOwnedAttribute = m_ownedAttribute->end();
+			while (iterOwnedAttribute != endOwnedAttribute)
+			{
+				if (ownedAttributeList->find(*iterOwnedAttribute) == -1)
+				{
+					m_ownedAttribute->erase(*iterOwnedAttribute);
+				}
+				iterOwnedAttribute++;
+			}
+
+			iterOwnedAttribute = ownedAttributeList->begin();
+			endOwnedAttribute = ownedAttributeList->end();
+			while (iterOwnedAttribute != endOwnedAttribute)
+			{
+				if (m_ownedAttribute->find(*iterOwnedAttribute) == -1)
+				{
+					m_ownedAttribute->add(*iterOwnedAttribute);
+				}
+				iterOwnedAttribute++;			
+			}
+			return true;
+		}
+		case UmlPackage::DATATYPE_ATTRIBUTE_OWNEDOPERATION:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Operation>> ownedOperationList(new Bag<uml::Operation>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				ownedOperationList->add(std::dynamic_pointer_cast<uml::Operation>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Operation>::iterator iterOwnedOperation = m_ownedOperation->begin();
+			Bag<uml::Operation>::iterator endOwnedOperation = m_ownedOperation->end();
+			while (iterOwnedOperation != endOwnedOperation)
+			{
+				if (ownedOperationList->find(*iterOwnedOperation) == -1)
+				{
+					m_ownedOperation->erase(*iterOwnedOperation);
+				}
+				iterOwnedOperation++;
+			}
+
+			iterOwnedOperation = ownedOperationList->begin();
+			endOwnedOperation = ownedOperationList->end();
+			while (iterOwnedOperation != endOwnedOperation)
+			{
+				if (m_ownedOperation->find(*iterOwnedOperation) == -1)
+				{
+					m_ownedOperation->add(*iterOwnedOperation);
+				}
+				iterOwnedOperation++;			
+			}
+			return true;
+		}
 	}
 
 	return ClassifierImpl::eSet(featureID, newValue);

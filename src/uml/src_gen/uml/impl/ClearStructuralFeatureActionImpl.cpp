@@ -402,7 +402,7 @@ Any ClearStructuralFeatureActionImpl::eGet(int featureID, bool resolve, bool cor
 	switch(featureID)
 	{
 		case UmlPackage::CLEARSTRUCTURALFEATUREACTION_ATTRIBUTE_RESULT:
-			return eAny(getResult()); //4029
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getResult())); //4029
 	}
 	return StructuralFeatureActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -422,7 +422,8 @@ bool ClearStructuralFeatureActionImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::CLEARSTRUCTURALFEATUREACTION_ATTRIBUTE_RESULT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::OutputPin> _result = newValue->get<std::shared_ptr<uml::OutputPin>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::OutputPin> _result = std::dynamic_pointer_cast<uml::OutputPin>(_temp);
 			setResult(_result); //4029
 			return true;
 		}

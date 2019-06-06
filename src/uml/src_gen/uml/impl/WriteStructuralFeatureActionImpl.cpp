@@ -437,9 +437,9 @@ Any WriteStructuralFeatureActionImpl::eGet(int featureID, bool resolve, bool cor
 	switch(featureID)
 	{
 		case UmlPackage::WRITESTRUCTURALFEATUREACTION_ATTRIBUTE_RESULT:
-			return eAny(getResult()); //25729
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getResult())); //25729
 		case UmlPackage::WRITESTRUCTURALFEATUREACTION_ATTRIBUTE_VALUE:
-			return eAny(getValue()); //25730
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getValue())); //25730
 	}
 	return StructuralFeatureActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -461,14 +461,16 @@ bool WriteStructuralFeatureActionImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::WRITESTRUCTURALFEATUREACTION_ATTRIBUTE_RESULT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::OutputPin> _result = newValue->get<std::shared_ptr<uml::OutputPin>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::OutputPin> _result = std::dynamic_pointer_cast<uml::OutputPin>(_temp);
 			setResult(_result); //25729
 			return true;
 		}
 		case UmlPackage::WRITESTRUCTURALFEATUREACTION_ATTRIBUTE_VALUE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::InputPin> _value = newValue->get<std::shared_ptr<uml::InputPin>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::InputPin> _value = std::dynamic_pointer_cast<uml::InputPin>(_temp);
 			setValue(_value); //25730
 			return true;
 		}

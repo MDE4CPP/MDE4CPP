@@ -295,7 +295,7 @@ Any StateInvariantImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::STATEINVARIANT_ATTRIBUTE_INVARIANT:
-			return eAny(getInvariant()); //22113
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getInvariant())); //22113
 	}
 	return InteractionFragmentImpl::eGet(featureID, resolve, coreType);
 }
@@ -315,7 +315,8 @@ bool StateInvariantImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::STATEINVARIANT_ATTRIBUTE_INVARIANT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Constraint> _invariant = newValue->get<std::shared_ptr<uml::Constraint>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Constraint> _invariant = std::dynamic_pointer_cast<uml::Constraint>(_temp);
 			setInvariant(_invariant); //22113
 			return true;
 		}

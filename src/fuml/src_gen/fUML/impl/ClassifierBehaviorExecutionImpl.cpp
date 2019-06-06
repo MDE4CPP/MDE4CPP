@@ -204,11 +204,11 @@ Any ClassifierBehaviorExecutionImpl::eGet(int featureID, bool resolve, bool core
 	switch(featureID)
 	{
 		case FUMLPackage::CLASSIFIERBEHAVIOREXECUTION_ATTRIBUTE_CLASSIFIER:
-			return eAny(getClassifier()); //171
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getClassifier())); //171
 		case FUMLPackage::CLASSIFIERBEHAVIOREXECUTION_ATTRIBUTE_EXECUTION:
-			return eAny(getExecution()); //170
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getExecution())); //170
 		case FUMLPackage::CLASSIFIERBEHAVIOREXECUTION_ATTRIBUTE_OBJECTACTIVATION:
-			return eAny(getObjectActivation()); //172
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getObjectActivation())); //172
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
@@ -232,21 +232,24 @@ bool ClassifierBehaviorExecutionImpl::eSet(int featureID, Any newValue)
 		case FUMLPackage::CLASSIFIERBEHAVIOREXECUTION_ATTRIBUTE_CLASSIFIER:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Class> _classifier = newValue->get<std::shared_ptr<uml::Class>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Class> _classifier = std::dynamic_pointer_cast<uml::Class>(_temp);
 			setClassifier(_classifier); //171
 			return true;
 		}
 		case FUMLPackage::CLASSIFIERBEHAVIOREXECUTION_ATTRIBUTE_EXECUTION:
 		{
 			// BOOST CAST
-			std::shared_ptr<fUML::Execution> _execution = newValue->get<std::shared_ptr<fUML::Execution>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<fUML::Execution> _execution = std::dynamic_pointer_cast<fUML::Execution>(_temp);
 			setExecution(_execution); //170
 			return true;
 		}
 		case FUMLPackage::CLASSIFIERBEHAVIOREXECUTION_ATTRIBUTE_OBJECTACTIVATION:
 		{
 			// BOOST CAST
-			std::shared_ptr<fUML::ObjectActivation> _objectActivation = newValue->get<std::shared_ptr<fUML::ObjectActivation>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<fUML::ObjectActivation> _objectActivation = std::dynamic_pointer_cast<fUML::ObjectActivation>(_temp);
 			setObjectActivation(_objectActivation); //172
 			return true;
 		}

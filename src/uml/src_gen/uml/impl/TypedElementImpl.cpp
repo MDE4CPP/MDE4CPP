@@ -228,7 +228,7 @@ Any TypedElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::TYPEDELEMENT_ATTRIBUTE_TYPE:
-			return eAny(getType()); //2459
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getType())); //2459
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -248,7 +248,8 @@ bool TypedElementImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::TYPEDELEMENT_ATTRIBUTE_TYPE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Type> _type = newValue->get<std::shared_ptr<uml::Type>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Type> _type = std::dynamic_pointer_cast<uml::Type>(_temp);
 			setType(_type); //2459
 			return true;
 		}

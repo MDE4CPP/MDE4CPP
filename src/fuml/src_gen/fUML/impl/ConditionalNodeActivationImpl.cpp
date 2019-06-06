@@ -275,9 +275,27 @@ Any ConditionalNodeActivationImpl::eGet(int featureID, bool resolve, bool coreTy
 	switch(featureID)
 	{
 		case FUMLPackage::CONDITIONALNODEACTIVATION_ATTRIBUTE_CLAUSEACTIVATIONS:
-			return eAny(getClauseActivations()); //2411
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<fUML::ClauseActivation>::iterator iter = m_clauseActivations->begin();
+			Bag<fUML::ClauseActivation>::iterator end = m_clauseActivations->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //2411
+		}
 		case FUMLPackage::CONDITIONALNODEACTIVATION_ATTRIBUTE_SELECTEDCLAUSES:
-			return eAny(getSelectedClauses()); //2412
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Clause>::iterator iter = m_selectedClauses->begin();
+			Bag<uml::Clause>::iterator end = m_selectedClauses->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //2412
+		}
 	}
 	return StructuredActivityNodeActivationImpl::eGet(featureID, resolve, coreType);
 }
@@ -296,6 +314,78 @@ bool ConditionalNodeActivationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
+		case FUMLPackage::CONDITIONALNODEACTIVATION_ATTRIBUTE_CLAUSEACTIVATIONS:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<fUML::ClauseActivation>> clauseActivationsList(new Bag<fUML::ClauseActivation>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				clauseActivationsList->add(std::dynamic_pointer_cast<fUML::ClauseActivation>(*iter));
+				iter++;
+			}
+			
+			Bag<fUML::ClauseActivation>::iterator iterClauseActivations = m_clauseActivations->begin();
+			Bag<fUML::ClauseActivation>::iterator endClauseActivations = m_clauseActivations->end();
+			while (iterClauseActivations != endClauseActivations)
+			{
+				if (clauseActivationsList->find(*iterClauseActivations) == -1)
+				{
+					m_clauseActivations->erase(*iterClauseActivations);
+				}
+				iterClauseActivations++;
+			}
+
+			iterClauseActivations = clauseActivationsList->begin();
+			endClauseActivations = clauseActivationsList->end();
+			while (iterClauseActivations != endClauseActivations)
+			{
+				if (m_clauseActivations->find(*iterClauseActivations) == -1)
+				{
+					m_clauseActivations->add(*iterClauseActivations);
+				}
+				iterClauseActivations++;			
+			}
+			return true;
+		}
+		case FUMLPackage::CONDITIONALNODEACTIVATION_ATTRIBUTE_SELECTEDCLAUSES:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Clause>> selectedClausesList(new Bag<uml::Clause>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				selectedClausesList->add(std::dynamic_pointer_cast<uml::Clause>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Clause>::iterator iterSelectedClauses = m_selectedClauses->begin();
+			Bag<uml::Clause>::iterator endSelectedClauses = m_selectedClauses->end();
+			while (iterSelectedClauses != endSelectedClauses)
+			{
+				if (selectedClausesList->find(*iterSelectedClauses) == -1)
+				{
+					m_selectedClauses->erase(*iterSelectedClauses);
+				}
+				iterSelectedClauses++;
+			}
+
+			iterSelectedClauses = selectedClausesList->begin();
+			endSelectedClauses = selectedClausesList->end();
+			while (iterSelectedClauses != endSelectedClauses)
+			{
+				if (m_selectedClauses->find(*iterSelectedClauses) == -1)
+				{
+					m_selectedClauses->add(*iterSelectedClauses);
+				}
+				iterSelectedClauses++;			
+			}
+			return true;
+		}
 	}
 
 	return StructuredActivityNodeActivationImpl::eSet(featureID, newValue);

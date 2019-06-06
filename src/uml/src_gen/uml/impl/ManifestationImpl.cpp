@@ -323,7 +323,7 @@ Any ManifestationImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::MANIFESTATION_ATTRIBUTE_UTILIZEDELEMENT:
-			return eAny(getUtilizedElement()); //14518
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getUtilizedElement())); //14518
 	}
 	return AbstractionImpl::eGet(featureID, resolve, coreType);
 }
@@ -343,7 +343,8 @@ bool ManifestationImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::MANIFESTATION_ATTRIBUTE_UTILIZEDELEMENT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::PackageableElement> _utilizedElement = newValue->get<std::shared_ptr<uml::PackageableElement>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::PackageableElement> _utilizedElement = std::dynamic_pointer_cast<uml::PackageableElement>(_temp);
 			setUtilizedElement(_utilizedElement); //14518
 			return true;
 		}

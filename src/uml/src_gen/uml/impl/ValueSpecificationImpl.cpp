@@ -341,7 +341,7 @@ Any ValueSpecificationImpl::eGet(int featureID, bool resolve, bool coreType) con
 	switch(featureID)
 	{
 		case UmlPackage::VALUESPECIFICATION_ATTRIBUTE_OWNINGSLOT:
-			return eAny(getOwningSlot()); //25013
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getOwningSlot().lock())); //25013
 	}
 	Any result;
 	result = PackageableElementImpl::eGet(featureID, resolve, coreType);
@@ -375,7 +375,8 @@ bool ValueSpecificationImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::VALUESPECIFICATION_ATTRIBUTE_OWNINGSLOT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Slot> _owningSlot = newValue->get<std::shared_ptr<uml::Slot>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Slot> _owningSlot = std::dynamic_pointer_cast<uml::Slot>(_temp);
 			setOwningSlot(_owningSlot); //25013
 			return true;
 		}

@@ -275,9 +275,9 @@ Any ETypedElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case EcorePackage::ETYPEDELEMENT_ATTRIBUTE_EGENERICTYPE:
-			return eAny(getEGenericType()); //5312
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEGenericType())); //5312
 		case EcorePackage::ETYPEDELEMENT_ATTRIBUTE_ETYPE:
-			return eAny(getEType()); //5311
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEType())); //5311
 		case EcorePackage::ETYPEDELEMENT_ATTRIBUTE_LOWERBOUND:
 			return eAny(getLowerBound()); //537
 		case EcorePackage::ETYPEDELEMENT_ATTRIBUTE_MANY:
@@ -323,14 +323,16 @@ bool ETypedElementImpl::eSet(int featureID, Any newValue)
 		case EcorePackage::ETYPEDELEMENT_ATTRIBUTE_EGENERICTYPE:
 		{
 			// BOOST CAST
-			std::shared_ptr<ecore::EGenericType> _eGenericType = newValue->get<std::shared_ptr<ecore::EGenericType>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<ecore::EGenericType> _eGenericType = std::dynamic_pointer_cast<ecore::EGenericType>(_temp);
 			setEGenericType(_eGenericType); //5312
 			return true;
 		}
 		case EcorePackage::ETYPEDELEMENT_ATTRIBUTE_ETYPE:
 		{
 			// BOOST CAST
-			std::shared_ptr<ecore::EClassifier> _eType = newValue->get<std::shared_ptr<ecore::EClassifier>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<ecore::EClassifier> _eType = std::dynamic_pointer_cast<ecore::EClassifier>(_temp);
 			setEType(_eType); //5311
 			return true;
 		}

@@ -426,7 +426,7 @@ Any AddStructuralFeatureValueActionImpl::eGet(int featureID, bool resolve, bool 
 	switch(featureID)
 	{
 		case UmlPackage::ADDSTRUCTURALFEATUREVALUEACTION_ATTRIBUTE_INSERTAT:
-			return eAny(getInsertAt()); //1631
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getInsertAt())); //1631
 		case UmlPackage::ADDSTRUCTURALFEATUREVALUEACTION_ATTRIBUTE_ISREPLACEALL:
 			return eAny(getIsReplaceAll()); //1632
 	}
@@ -450,7 +450,8 @@ bool AddStructuralFeatureValueActionImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::ADDSTRUCTURALFEATUREVALUEACTION_ATTRIBUTE_INSERTAT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::InputPin> _insertAt = newValue->get<std::shared_ptr<uml::InputPin>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::InputPin> _insertAt = std::dynamic_pointer_cast<uml::InputPin>(_temp);
 			setInsertAt(_insertAt); //1631
 			return true;
 		}

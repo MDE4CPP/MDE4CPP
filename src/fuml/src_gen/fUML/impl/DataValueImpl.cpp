@@ -189,7 +189,7 @@ Any DataValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case FUMLPackage::DATAVALUE_ATTRIBUTE_TYPE:
-			return eAny(getType()); //301
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getType())); //301
 	}
 	return CompoundValueImpl::eGet(featureID, resolve, coreType);
 }
@@ -209,7 +209,8 @@ bool DataValueImpl::eSet(int featureID, Any newValue)
 		case FUMLPackage::DATAVALUE_ATTRIBUTE_TYPE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::DataType> _type = newValue->get<std::shared_ptr<uml::DataType>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::DataType> _type = std::dynamic_pointer_cast<uml::DataType>(_temp);
 			setType(_type); //301
 			return true;
 		}

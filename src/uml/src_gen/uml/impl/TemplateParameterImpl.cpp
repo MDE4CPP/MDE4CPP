@@ -288,15 +288,15 @@ Any TemplateParameterImpl::eGet(int featureID, bool resolve, bool coreType) cons
 	switch(featureID)
 	{
 		case UmlPackage::TEMPLATEPARAMETER_ATTRIBUTE_DEFAULT:
-			return eAny(getDefault()); //2313
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getDefault())); //2313
 		case UmlPackage::TEMPLATEPARAMETER_ATTRIBUTE_OWNEDDEFAULT:
-			return eAny(getOwnedDefault()); //2314
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getOwnedDefault())); //2314
 		case UmlPackage::TEMPLATEPARAMETER_ATTRIBUTE_OWNEDPARAMETEREDELEMENT:
-			return eAny(getOwnedParameteredElement()); //2317
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getOwnedParameteredElement())); //2317
 		case UmlPackage::TEMPLATEPARAMETER_ATTRIBUTE_PARAMETEREDELEMENT:
-			return eAny(getParameteredElement()); //2315
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getParameteredElement())); //2315
 		case UmlPackage::TEMPLATEPARAMETER_ATTRIBUTE_SIGNATURE:
-			return eAny(getSignature()); //2316
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSignature().lock())); //2316
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -324,35 +324,40 @@ bool TemplateParameterImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::TEMPLATEPARAMETER_ATTRIBUTE_DEFAULT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::ParameterableElement> _default = newValue->get<std::shared_ptr<uml::ParameterableElement>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::ParameterableElement> _default = std::dynamic_pointer_cast<uml::ParameterableElement>(_temp);
 			setDefault(_default); //2313
 			return true;
 		}
 		case UmlPackage::TEMPLATEPARAMETER_ATTRIBUTE_OWNEDDEFAULT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::ParameterableElement> _ownedDefault = newValue->get<std::shared_ptr<uml::ParameterableElement>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::ParameterableElement> _ownedDefault = std::dynamic_pointer_cast<uml::ParameterableElement>(_temp);
 			setOwnedDefault(_ownedDefault); //2314
 			return true;
 		}
 		case UmlPackage::TEMPLATEPARAMETER_ATTRIBUTE_OWNEDPARAMETEREDELEMENT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::ParameterableElement> _ownedParameteredElement = newValue->get<std::shared_ptr<uml::ParameterableElement>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::ParameterableElement> _ownedParameteredElement = std::dynamic_pointer_cast<uml::ParameterableElement>(_temp);
 			setOwnedParameteredElement(_ownedParameteredElement); //2317
 			return true;
 		}
 		case UmlPackage::TEMPLATEPARAMETER_ATTRIBUTE_PARAMETEREDELEMENT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::ParameterableElement> _parameteredElement = newValue->get<std::shared_ptr<uml::ParameterableElement>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::ParameterableElement> _parameteredElement = std::dynamic_pointer_cast<uml::ParameterableElement>(_temp);
 			setParameteredElement(_parameteredElement); //2315
 			return true;
 		}
 		case UmlPackage::TEMPLATEPARAMETER_ATTRIBUTE_SIGNATURE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::TemplateSignature> _signature = newValue->get<std::shared_ptr<uml::TemplateSignature>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::TemplateSignature> _signature = std::dynamic_pointer_cast<uml::TemplateSignature>(_temp);
 			setSignature(_signature); //2316
 			return true;
 		}

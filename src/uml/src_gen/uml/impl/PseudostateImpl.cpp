@@ -379,9 +379,9 @@ Any PseudostateImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case UmlPackage::PSEUDOSTATE_ATTRIBUTE_KIND:
 			return eAny(getKind()); //18913
 		case UmlPackage::PSEUDOSTATE_ATTRIBUTE_STATE:
-			return eAny(getState()); //18912
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getState().lock())); //18912
 		case UmlPackage::PSEUDOSTATE_ATTRIBUTE_STATEMACHINE:
-			return eAny(getStateMachine()); //18914
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getStateMachine().lock())); //18914
 	}
 	return VertexImpl::eGet(featureID, resolve, coreType);
 }
@@ -412,14 +412,16 @@ bool PseudostateImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::PSEUDOSTATE_ATTRIBUTE_STATE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::State> _state = newValue->get<std::shared_ptr<uml::State>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::State> _state = std::dynamic_pointer_cast<uml::State>(_temp);
 			setState(_state); //18912
 			return true;
 		}
 		case UmlPackage::PSEUDOSTATE_ATTRIBUTE_STATEMACHINE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::StateMachine> _stateMachine = newValue->get<std::shared_ptr<uml::StateMachine>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::StateMachine> _stateMachine = std::dynamic_pointer_cast<uml::StateMachine>(_temp);
 			setStateMachine(_stateMachine); //18914
 			return true;
 		}

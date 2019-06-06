@@ -391,7 +391,7 @@ Any WriteVariableActionImpl::eGet(int featureID, bool resolve, bool coreType) co
 	switch(featureID)
 	{
 		case UmlPackage::WRITEVARIABLEACTION_ATTRIBUTE_VALUE:
-			return eAny(getValue()); //25828
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getValue())); //25828
 	}
 	return VariableActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -411,7 +411,8 @@ bool WriteVariableActionImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::WRITEVARIABLEACTION_ATTRIBUTE_VALUE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::InputPin> _value = newValue->get<std::shared_ptr<uml::InputPin>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::InputPin> _value = std::dynamic_pointer_cast<uml::InputPin>(_temp);
 			setValue(_value); //25828
 			return true;
 		}

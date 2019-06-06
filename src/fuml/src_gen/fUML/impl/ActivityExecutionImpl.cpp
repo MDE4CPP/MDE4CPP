@@ -302,7 +302,7 @@ Any ActivityExecutionImpl::eGet(int featureID, bool resolve, bool coreType) cons
 	switch(featureID)
 	{
 		case FUMLPackage::ACTIVITYEXECUTION_ATTRIBUTE_ACTIVATIONGROUP:
-			return eAny(getActivationGroup()); //56
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getActivationGroup())); //56
 	}
 	return ExecutionImpl::eGet(featureID, resolve, coreType);
 }
@@ -322,7 +322,8 @@ bool ActivityExecutionImpl::eSet(int featureID, Any newValue)
 		case FUMLPackage::ACTIVITYEXECUTION_ATTRIBUTE_ACTIVATIONGROUP:
 		{
 			// BOOST CAST
-			std::shared_ptr<fUML::ActivityNodeActivationGroup> _activationGroup = newValue->get<std::shared_ptr<fUML::ActivityNodeActivationGroup>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<fUML::ActivityNodeActivationGroup> _activationGroup = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(_temp);
 			setActivationGroup(_activationGroup); //56
 			return true;
 		}

@@ -299,7 +299,16 @@ Any CompoundValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case FUMLPackage::COMPOUNDVALUE_ATTRIBUTE_FEATUREVALUES:
-			return eAny(getFeatureValues()); //230
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<fUML::FeatureValue>::iterator iter = m_featureValues->begin();
+			Bag<fUML::FeatureValue>::iterator end = m_featureValues->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //230
+		}
 	}
 	return StructuredValueImpl::eGet(featureID, resolve, coreType);
 }
@@ -316,6 +325,42 @@ bool CompoundValueImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
+		case FUMLPackage::COMPOUNDVALUE_ATTRIBUTE_FEATUREVALUES:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<fUML::FeatureValue>> featureValuesList(new Bag<fUML::FeatureValue>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				featureValuesList->add(std::dynamic_pointer_cast<fUML::FeatureValue>(*iter));
+				iter++;
+			}
+			
+			Bag<fUML::FeatureValue>::iterator iterFeatureValues = m_featureValues->begin();
+			Bag<fUML::FeatureValue>::iterator endFeatureValues = m_featureValues->end();
+			while (iterFeatureValues != endFeatureValues)
+			{
+				if (featureValuesList->find(*iterFeatureValues) == -1)
+				{
+					m_featureValues->erase(*iterFeatureValues);
+				}
+				iterFeatureValues++;
+			}
+
+			iterFeatureValues = featureValuesList->begin();
+			endFeatureValues = featureValuesList->end();
+			while (iterFeatureValues != endFeatureValues)
+			{
+				if (m_featureValues->find(*iterFeatureValues) == -1)
+				{
+					m_featureValues->add(*iterFeatureValues);
+				}
+				iterFeatureValues++;			
+			}
+			return true;
+		}
 	}
 
 	return StructuredValueImpl::eSet(featureID, newValue);

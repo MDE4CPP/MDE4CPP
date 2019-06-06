@@ -180,24 +180,24 @@ NodeImpl::~NodeImpl()
 
 
 //Additional constructor for the containments back reference
-			NodeImpl::NodeImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id)
-			:NodeImpl()
-			{
-				switch(reference_id)
-				{	
-				case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
-					m_owningPackage = par_Package;
-					m_namespace = par_Package;
-					 return;
-				case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
-					m_package = par_Package;
-					m_namespace = par_Package;
-					 return;
-				default:
-				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
-				}
-			   
-			}
+NodeImpl::NodeImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id)
+:NodeImpl()
+{
+	switch(reference_id)
+	{	
+	case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
+		m_owningPackage = par_Package;
+		m_namespace = par_Package;
+		 return;
+	case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
+		m_package = par_Package;
+		m_namespace = par_Package;
+		 return;
+	default:
+	std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
+	}
+   
+}
 
 
 
@@ -635,7 +635,16 @@ Any NodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::NODE_ATTRIBUTE_NESTEDNODE:
-			return eAny(getNestedNode()); //15754
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Node>::iterator iter = m_nestedNode->begin();
+			Bag<uml::Node>::iterator end = m_nestedNode->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //15754
+		}
 	}
 	Any result;
 	result = ClassImpl::eGet(featureID, resolve, coreType);
@@ -666,6 +675,42 @@ bool NodeImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
+		case UmlPackage::NODE_ATTRIBUTE_NESTEDNODE:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Node>> nestedNodeList(new Bag<uml::Node>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				nestedNodeList->add(std::dynamic_pointer_cast<uml::Node>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Node>::iterator iterNestedNode = m_nestedNode->begin();
+			Bag<uml::Node>::iterator endNestedNode = m_nestedNode->end();
+			while (iterNestedNode != endNestedNode)
+			{
+				if (nestedNodeList->find(*iterNestedNode) == -1)
+				{
+					m_nestedNode->erase(*iterNestedNode);
+				}
+				iterNestedNode++;
+			}
+
+			iterNestedNode = nestedNodeList->begin();
+			endNestedNode = nestedNodeList->end();
+			while (iterNestedNode != endNestedNode)
+			{
+				if (m_nestedNode->find(*iterNestedNode) == -1)
+				{
+					m_nestedNode->add(*iterNestedNode);
+				}
+				iterNestedNode++;			
+			}
+			return true;
+		}
 	}
 
 	bool result = false;

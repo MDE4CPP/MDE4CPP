@@ -311,9 +311,9 @@ Any ExecutionSpecificationImpl::eGet(int featureID, bool resolve, bool coreType)
 	switch(featureID)
 	{
 		case UmlPackage::EXECUTIONSPECIFICATION_ATTRIBUTE_FINISH:
-			return eAny(getFinish()); //9113
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getFinish())); //9113
 		case UmlPackage::EXECUTIONSPECIFICATION_ATTRIBUTE_START:
-			return eAny(getStart()); //9114
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getStart())); //9114
 	}
 	return InteractionFragmentImpl::eGet(featureID, resolve, coreType);
 }
@@ -335,14 +335,16 @@ bool ExecutionSpecificationImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::EXECUTIONSPECIFICATION_ATTRIBUTE_FINISH:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::OccurrenceSpecification> _finish = newValue->get<std::shared_ptr<uml::OccurrenceSpecification>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::OccurrenceSpecification> _finish = std::dynamic_pointer_cast<uml::OccurrenceSpecification>(_temp);
 			setFinish(_finish); //9113
 			return true;
 		}
 		case UmlPackage::EXECUTIONSPECIFICATION_ATTRIBUTE_START:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::OccurrenceSpecification> _start = newValue->get<std::shared_ptr<uml::OccurrenceSpecification>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::OccurrenceSpecification> _start = std::dynamic_pointer_cast<uml::OccurrenceSpecification>(_temp);
 			setStart(_start); //9114
 			return true;
 		}

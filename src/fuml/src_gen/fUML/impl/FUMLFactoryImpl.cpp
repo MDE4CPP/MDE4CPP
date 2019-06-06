@@ -242,7 +242,7 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const int metaElementID,
 		{
 			if (nullptr == container)
 			{
-				return this->createAcceptEventActionActivation();
+				return this->createAcceptEventActionActivation(metaElementID);
 			}
 			else
 			{
@@ -253,14 +253,14 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const int metaElementID,
 		}
 		case FUMLPackage::ACCEPTEVENTACTIONEVENTACCEPTER_CLASS:
 		{
-				return this->createAcceptEventActionEventAccepter();
+				return this->createAcceptEventActionEventAccepter(metaElementID);
 			
 		}
 		case FUMLPackage::ACTIVITYEDGEINSTANCE_CLASS:
 		{
 			if (nullptr == container)
 			{
-				return this->createActivityEdgeInstance();
+				return this->createActivityEdgeInstance(metaElementID);
 			}
 			else
 			{
@@ -271,14 +271,14 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const int metaElementID,
 		}
 		case FUMLPackage::ACTIVITYEXECUTION_CLASS:
 		{
-				return this->createActivityExecution();
+				return this->createActivityExecution(metaElementID);
 			
 		}
 		case FUMLPackage::ACTIVITYFINALNODEACTIVATION_CLASS:
 		{
 			if (nullptr == container)
 			{
-				return this->createActivityFinalNodeActivation();
+				return this->createActivityFinalNodeActivation(metaElementID);
 			}
 			else
 			{
@@ -291,7 +291,7 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const int metaElementID,
 		{
 			if (nullptr == container)
 			{
-				return this->createActivityNodeActivationGroup();
+				return this->createActivityNodeActivationGroup(metaElementID);
 			}
 			else
 			{
@@ -318,7 +318,7 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const int metaElementID,
 		{
 			if (nullptr == container)
 			{
-				return this->createActivityParameterNodeActivation();
+				return this->createActivityParameterNodeActivation(metaElementID);
 			}
 			else
 			{
@@ -331,7 +331,7 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const int metaElementID,
 		{
 			if (nullptr == container)
 			{
-				return this->createAddStructuralFeatureValueActionActivation();
+				return this->createAddStructuralFeatureValueActionActivation(metaElementID);
 			}
 			else
 			{
@@ -342,14 +342,14 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const int metaElementID,
 		}
 		case FUMLPackage::BOOLEANVALUE_CLASS:
 		{
-				return this->createBooleanValue();
+				return this->createBooleanValue(metaElementID);
 			
 		}
 		case FUMLPackage::CALLBEHAVIORACTIONACTIVATION_CLASS:
 		{
 			if (nullptr == container)
 			{
-				return this->createCallBehaviorActionActivation();
+				return this->createCallBehaviorActionActivation(metaElementID);
 			}
 			else
 			{
@@ -362,7 +362,7 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const int metaElementID,
 		{
 			if (nullptr == container)
 			{
-				return this->createCallOperationActionActivation();
+				return this->createCallOperationActionActivation(metaElementID);
 			}
 			else
 			{
@@ -375,7 +375,7 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const int metaElementID,
 		{
 			if (nullptr == container)
 			{
-				return this->createCentralBufferNodeActivation();
+				return this->createCentralBufferNodeActivation(metaElementID);
 			}
 			else
 			{
@@ -386,29 +386,29 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const int metaElementID,
 		}
 		case FUMLPackage::CLASSIFIERBEHAVIOREXECUTION_CLASS:
 		{
-				return this->createClassifierBehaviorExecution();
+				return this->createClassifierBehaviorExecution(metaElementID);
 			
 		}
 		case FUMLPackage::CLASSIFIERBEHAVIOREXECUTIONACTIVITY_CLASS:
 		{
-				return this->createClassifierBehaviorExecutionActivity();
+				return this->createClassifierBehaviorExecutionActivity(metaElementID);
 			
 		}
 		case FUMLPackage::CLASSIFIERBEHAVIOREXECUTIONACTIVITY_OWNEDBEHAVIORACTIVITY1_CLASS:
 		{
-				return this->createClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1();
+				return this->createClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1(metaElementID);
 			
 		}
 		case FUMLPackage::CLAUSEACTIVATION_CLASS:
 		{
-				return this->createClauseActivation();
+				return this->createClauseActivation(metaElementID);
 			
 		}
 		case FUMLPackage::CLEARASSOCIATIONACTIONACTIVATION_CLASS:
 		{
 			if (nullptr == container)
 			{
-				return this->createClearAssociationActionActivation();
+				return this->createClearAssociationActionActivation(metaElementID);
 			}
 			else
 			{
@@ -421,7 +421,7 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const int metaElementID,
 		{
 			if (nullptr == container)
 			{
-				return this->createClearStructuralFeatureActionActivation();
+				return this->createClearStructuralFeatureActionActivation(metaElementID);
 			}
 			else
 			{
@@ -434,7 +434,7 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const int metaElementID,
 		{
 			if (nullptr == container)
 			{
-				return this->createConditionalNodeActivation();
+				return this->createConditionalNodeActivation(metaElementID);
 			}
 			else
 			{
@@ -445,14 +445,14 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const int metaElementID,
 		}
 		case FUMLPackage::CONTROLTOKEN_CLASS:
 		{
-				return this->createControlToken();
+				return this->createControlToken(metaElementID);
 			
 		}
 		case FUMLPackage::CREATELINKACTIONACTIVATION_CLASS:
 		{
 			if (nullptr == container)
 			{
-				return this->createCreateLinkActionActivation();
+				return this->createCreateLinkActionActivation(metaElementID);
 			}
 			else
 			{
@@ -465,7 +465,7 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const int metaElementID,
 		{
 			if (nullptr == container)
 			{
-				return this->createCreateObjectActionActivation();
+				return this->createCreateObjectActionActivation(metaElementID);
 			}
 			else
 			{
@@ -478,7 +478,7 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const int metaElementID,
 		{
 			if (nullptr == container)
 			{
-				return this->createDataStoreNodeActivation();
+				return this->createDataStoreNodeActivation(metaElementID);
 			}
 			else
 			{
@@ -489,14 +489,14 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const int metaElementID,
 		}
 		case FUMLPackage::DATAVALUE_CLASS:
 		{
-				return this->createDataValue();
+				return this->createDataValue(metaElementID);
 			
 		}
 		case FUMLPackage::DECISIONNODEACTIVATION_CLASS:
 		{
 			if (nullptr == container)
 			{
-				return this->createDecisionNodeActivation();
+				return this->createDecisionNodeActivation(metaElementID);
 			}
 			else
 			{
@@ -509,7 +509,7 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const int metaElementID,
 		{
 			if (nullptr == container)
 			{
-				return this->createDestroyLinkActionActivation();
+				return this->createDestroyLinkActionActivation(metaElementID);
 			}
 			else
 			{
@@ -522,7 +522,7 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const int metaElementID,
 		{
 			if (nullptr == container)
 			{
-				return this->createDestroyObjectActionActivation();
+				return this->createDestroyObjectActionActivation(metaElementID);
 			}
 			else
 			{
@@ -533,29 +533,29 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const int metaElementID,
 		}
 		case FUMLPackage::DISPATCHSTRATEGY_CLASS:
 		{
-				return this->createDispatchStrategy();
+				return this->createDispatchStrategy(metaElementID);
 			
 		}
 		case FUMLPackage::ENUMERATIONVALUE_CLASS:
 		{
-				return this->createEnumerationValue();
+				return this->createEnumerationValue(metaElementID);
 			
 		}
 		case FUMLPackage::EVENTDISPATCHLOOP_CLASS:
 		{
-				return this->createEventDispatchLoop();
+				return this->createEventDispatchLoop(metaElementID);
 			
 		}
 		case FUMLPackage::EVENTOCCURRENCE_CLASS:
 		{
-				return this->createEventOccurrence();
+				return this->createEventOccurrence(metaElementID);
 			
 		}
 		case FUMLPackage::EXECUTIONFACTORYL1_CLASS:
 		{
 			if (nullptr == container)
 			{
-				return this->createExecutionFactoryL1();
+				return this->createExecutionFactoryL1(metaElementID);
 			}
 			else
 			{
@@ -568,7 +568,7 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const int metaElementID,
 		{
 			if (nullptr == container)
 			{
-				return this->createExecutionFactoryL2();
+				return this->createExecutionFactoryL2(metaElementID);
 			}
 			else
 			{
@@ -581,7 +581,7 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const int metaElementID,
 		{
 			if (nullptr == container)
 			{
-				return this->createExecutionFactoryL3();
+				return this->createExecutionFactoryL3(metaElementID);
 			}
 			else
 			{
@@ -594,7 +594,7 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const int metaElementID,
 		{
 			if (nullptr == container)
 			{
-				return this->createExecutor();
+				return this->createExecutor(metaElementID);
 			}
 			else
 			{
@@ -607,7 +607,7 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const int metaElementID,
 		{
 			if (nullptr == container)
 			{
-				return this->createExpansionActivationGroup();
+				return this->createExpansionActivationGroup(metaElementID);
 			}
 			else
 			{
@@ -634,7 +634,7 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const int metaElementID,
 		{
 			if (nullptr == container)
 			{
-				return this->createExpansionNodeActivation();
+				return this->createExpansionNodeActivation(metaElementID);
 			}
 			else
 			{
@@ -647,7 +647,7 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const int metaElementID,
 		{
 			if (nullptr == container)
 			{
-				return this->createExpansionRegionActivation();
+				return this->createExpansionRegionActivation(metaElementID);
 			}
 			else
 			{
@@ -658,29 +658,29 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const int metaElementID,
 		}
 		case FUMLPackage::EXTENSIONALVALUELIST_CLASS:
 		{
-				return this->createExtensionalValueList();
+				return this->createExtensionalValueList(metaElementID);
 			
 		}
 		case FUMLPackage::FIFOGETNEXTEVENTSTRATEGY_CLASS:
 		{
-				return this->createFIFOGetNextEventStrategy();
+				return this->createFIFOGetNextEventStrategy(metaElementID);
 			
 		}
 		case FUMLPackage::FEATUREVALUE_CLASS:
 		{
-				return this->createFeatureValue();
+				return this->createFeatureValue(metaElementID);
 			
 		}
 		case FUMLPackage::FIRSTCHOICESTRATEGY_CLASS:
 		{
-				return this->createFirstChoiceStrategy();
+				return this->createFirstChoiceStrategy(metaElementID);
 			
 		}
 		case FUMLPackage::FLOWFINALNODEACTIVATION_CLASS:
 		{
 			if (nullptr == container)
 			{
-				return this->createFlowFinalNodeActivation();
+				return this->createFlowFinalNodeActivation(metaElementID);
 			}
 			else
 			{
@@ -693,7 +693,7 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const int metaElementID,
 		{
 			if (nullptr == container)
 			{
-				return this->createForkNodeActivation();
+				return this->createForkNodeActivation(metaElementID);
 			}
 			else
 			{
@@ -704,14 +704,14 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const int metaElementID,
 		}
 		case FUMLPackage::FORKEDTOKEN_CLASS:
 		{
-				return this->createForkedToken();
+				return this->createForkedToken(metaElementID);
 			
 		}
 		case FUMLPackage::INITIALNODEACTIVATION_CLASS:
 		{
 			if (nullptr == container)
 			{
-				return this->createInitialNodeActivation();
+				return this->createInitialNodeActivation(metaElementID);
 			}
 			else
 			{
@@ -724,7 +724,7 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const int metaElementID,
 		{
 			if (nullptr == container)
 			{
-				return this->createInputPinActivation();
+				return this->createInputPinActivation(metaElementID);
 			}
 			else
 			{
@@ -735,19 +735,19 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const int metaElementID,
 		}
 		case FUMLPackage::INSTANCEVALUEEVALUATION_CLASS:
 		{
-				return this->createInstanceValueEvaluation();
+				return this->createInstanceValueEvaluation(metaElementID);
 			
 		}
 		case FUMLPackage::INTEGERVALUE_CLASS:
 		{
-				return this->createIntegerValue();
+				return this->createIntegerValue(metaElementID);
 			
 		}
 		case FUMLPackage::JOINNODEACTIVATION_CLASS:
 		{
 			if (nullptr == container)
 			{
-				return this->createJoinNodeActivation();
+				return this->createJoinNodeActivation(metaElementID);
 			}
 			else
 			{
@@ -758,49 +758,49 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const int metaElementID,
 		}
 		case FUMLPackage::LINK_CLASS:
 		{
-				return this->createLink();
+				return this->createLink(metaElementID);
 			
 		}
 		case FUMLPackage::LITERALBOOLEANEVALUATION_CLASS:
 		{
-				return this->createLiteralBooleanEvaluation();
+				return this->createLiteralBooleanEvaluation(metaElementID);
 			
 		}
 		case FUMLPackage::LITERALINTEGEREVALUATION_CLASS:
 		{
-				return this->createLiteralIntegerEvaluation();
+				return this->createLiteralIntegerEvaluation(metaElementID);
 			
 		}
 		case FUMLPackage::LITERALNULLEVALUATION_CLASS:
 		{
-				return this->createLiteralNullEvaluation();
+				return this->createLiteralNullEvaluation(metaElementID);
 			
 		}
 		case FUMLPackage::LITERALREALEVALUATION_CLASS:
 		{
-				return this->createLiteralRealEvaluation();
+				return this->createLiteralRealEvaluation(metaElementID);
 			
 		}
 		case FUMLPackage::LITERALSTRINGEVALUATION_CLASS:
 		{
-				return this->createLiteralStringEvaluation();
+				return this->createLiteralStringEvaluation(metaElementID);
 			
 		}
 		case FUMLPackage::LITERALUNLIMITEDNATURALEVALUATION_CLASS:
 		{
-				return this->createLiteralUnlimitedNaturalEvaluation();
+				return this->createLiteralUnlimitedNaturalEvaluation(metaElementID);
 			
 		}
 		case FUMLPackage::LOCUS_CLASS:
 		{
-				return this->createLocus();
+				return this->createLocus(metaElementID);
 			
 		}
 		case FUMLPackage::LOOPNODEACTIVATION_CLASS:
 		{
 			if (nullptr == container)
 			{
-				return this->createLoopNodeActivation();
+				return this->createLoopNodeActivation(metaElementID);
 			}
 			else
 			{
@@ -813,7 +813,7 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const int metaElementID,
 		{
 			if (nullptr == container)
 			{
-				return this->createMergeNodeActivation();
+				return this->createMergeNodeActivation(metaElementID);
 			}
 			else
 			{
@@ -824,29 +824,29 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const int metaElementID,
 		}
 		case FUMLPackage::OBJECT_CLASS:
 		{
-				return this->createObject();
+				return this->createObject(metaElementID);
 			
 		}
 		case FUMLPackage::OBJECTACTIVATION_CLASS:
 		{
-				return this->createObjectActivation();
+				return this->createObjectActivation(metaElementID);
 			
 		}
 		case FUMLPackage::OBJECTTOKEN_CLASS:
 		{
-				return this->createObjectToken();
+				return this->createObjectToken(metaElementID);
 			
 		}
 		case FUMLPackage::OFFER_CLASS:
 		{
-				return this->createOffer();
+				return this->createOffer(metaElementID);
 			
 		}
 		case FUMLPackage::OUTPUTPINACTIVATION_CLASS:
 		{
 			if (nullptr == container)
 			{
-				return this->createOutputPinActivation();
+				return this->createOutputPinActivation(metaElementID);
 			}
 			else
 			{
@@ -857,14 +857,14 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const int metaElementID,
 		}
 		case FUMLPackage::PARAMETERVALUE_CLASS:
 		{
-				return this->createParameterValue();
+				return this->createParameterValue(metaElementID);
 			
 		}
 		case FUMLPackage::READEXTENTACTIONACTIVATION_CLASS:
 		{
 			if (nullptr == container)
 			{
-				return this->createReadExtentActionActivation();
+				return this->createReadExtentActionActivation(metaElementID);
 			}
 			else
 			{
@@ -877,7 +877,7 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const int metaElementID,
 		{
 			if (nullptr == container)
 			{
-				return this->createReadIsClassifiedObjectActionActivation();
+				return this->createReadIsClassifiedObjectActionActivation(metaElementID);
 			}
 			else
 			{
@@ -890,7 +890,7 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const int metaElementID,
 		{
 			if (nullptr == container)
 			{
-				return this->createReadLinkActionActivation();
+				return this->createReadLinkActionActivation(metaElementID);
 			}
 			else
 			{
@@ -903,7 +903,7 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const int metaElementID,
 		{
 			if (nullptr == container)
 			{
-				return this->createReadSelfActionActivation();
+				return this->createReadSelfActionActivation(metaElementID);
 			}
 			else
 			{
@@ -916,7 +916,7 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const int metaElementID,
 		{
 			if (nullptr == container)
 			{
-				return this->createReadStructuralFeatureActionActivation();
+				return this->createReadStructuralFeatureActionActivation(metaElementID);
 			}
 			else
 			{
@@ -927,14 +927,14 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const int metaElementID,
 		}
 		case FUMLPackage::REALVALUE_CLASS:
 		{
-				return this->createRealValue();
+				return this->createRealValue(metaElementID);
 			
 		}
 		case FUMLPackage::RECLASSIFYOBJECTACTIONACTIVATION_CLASS:
 		{
 			if (nullptr == container)
 			{
-				return this->createReclassifyObjectActionActivation();
+				return this->createReclassifyObjectActionActivation(metaElementID);
 			}
 			else
 			{
@@ -945,14 +945,14 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const int metaElementID,
 		}
 		case FUMLPackage::REDEFINITIONBASEDDISPATCHSTRATEGY_CLASS:
 		{
-				return this->createRedefinitionBasedDispatchStrategy();
+				return this->createRedefinitionBasedDispatchStrategy(metaElementID);
 			
 		}
 		case FUMLPackage::REDUCEACTIONACTIVATION_CLASS:
 		{
 			if (nullptr == container)
 			{
-				return this->createReduceActionActivation();
+				return this->createReduceActionActivation(metaElementID);
 			}
 			else
 			{
@@ -963,14 +963,14 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const int metaElementID,
 		}
 		case FUMLPackage::REFERENCE_CLASS:
 		{
-				return this->createReference();
+				return this->createReference(metaElementID);
 			
 		}
 		case FUMLPackage::REMOVESTRUCTURALFEATUREVALUEACTIVATION_CLASS:
 		{
 			if (nullptr == container)
 			{
-				return this->createRemoveStructuralFeatureValueActivation();
+				return this->createRemoveStructuralFeatureValueActivation(metaElementID);
 			}
 			else
 			{
@@ -983,7 +983,7 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const int metaElementID,
 		{
 			if (nullptr == container)
 			{
-				return this->createSendSignalActionActivation();
+				return this->createSendSignalActionActivation(metaElementID);
 			}
 			else
 			{
@@ -994,14 +994,14 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const int metaElementID,
 		}
 		case FUMLPackage::SIGNALINSTANCE_CLASS:
 		{
-				return this->createSignalInstance();
+				return this->createSignalInstance(metaElementID);
 			
 		}
 		case FUMLPackage::STARTCLASSIFIERBEHAVIORACTIONACTIVATION_CLASS:
 		{
 			if (nullptr == container)
 			{
-				return this->createStartClassifierBehaviorActionActivation();
+				return this->createStartClassifierBehaviorActionActivation(metaElementID);
 			}
 			else
 			{
@@ -1014,7 +1014,7 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const int metaElementID,
 		{
 			if (nullptr == container)
 			{
-				return this->createStartObjectBehaviorActionActivation();
+				return this->createStartObjectBehaviorActionActivation(metaElementID);
 			}
 			else
 			{
@@ -1025,14 +1025,14 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const int metaElementID,
 		}
 		case FUMLPackage::STRINGVALUE_CLASS:
 		{
-				return this->createStringValue();
+				return this->createStringValue(metaElementID);
 			
 		}
 		case FUMLPackage::STRUCTUREDACTIVITYNODEACTIVATION_CLASS:
 		{
 			if (nullptr == container)
 			{
-				return this->createStructuredActivityNodeActivation();
+				return this->createStructuredActivityNodeActivation(metaElementID);
 			}
 			else
 			{
@@ -1045,7 +1045,7 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const int metaElementID,
 		{
 			if (nullptr == container)
 			{
-				return this->createTestIdentityActionActivation();
+				return this->createTestIdentityActionActivation(metaElementID);
 			}
 			else
 			{
@@ -1056,19 +1056,19 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const int metaElementID,
 		}
 		case FUMLPackage::TOKENSET_CLASS:
 		{
-				return this->createTokenSet();
+				return this->createTokenSet(metaElementID);
 			
 		}
 		case FUMLPackage::UNLIMITEDNATURALVALUE_CLASS:
 		{
-				return this->createUnlimitedNaturalValue();
+				return this->createUnlimitedNaturalValue(metaElementID);
 			
 		}
 		case FUMLPackage::VALUESPECIFICACTIONACTIVATION_CLASS:
 		{
 			if (nullptr == container)
 			{
-				return this->createValueSpecificActionActivation();
+				return this->createValueSpecificActionActivation(metaElementID);
 			}
 			else
 			{
@@ -1079,7 +1079,7 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const int metaElementID,
 		}
 		case FUMLPackage::VALUES_CLASS:
 		{
-				return this->createValues();
+				return this->createValues(metaElementID);
 			
 		}
 	default:

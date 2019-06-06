@@ -292,13 +292,40 @@ Any EAnnotationImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case EcorePackage::EANNOTATION_ATTRIBUTE_CONTENTS:
-			return eAny(getContents()); //17
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<ecore::EObject>::iterator iter = m_contents->begin();
+			Bag<ecore::EObject>::iterator end = m_contents->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //17
+		}
 		case EcorePackage::EANNOTATION_ATTRIBUTE_DETAILS:
-			return eAny(getDetails()); //15
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<ecore::EStringToStringMapEntry>::iterator iter = m_details->begin();
+			Bag<ecore::EStringToStringMapEntry>::iterator end = m_details->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //15
+		}
 		case EcorePackage::EANNOTATION_ATTRIBUTE_EMODELELEMENT:
-			return eAny(getEModelElement()); //16
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEModelElement().lock())); //16
 		case EcorePackage::EANNOTATION_ATTRIBUTE_REFERENCES:
-			return eAny(getReferences()); //18
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<ecore::EObject>::iterator iter = m_references->begin();
+			Bag<ecore::EObject>::iterator end = m_references->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //18
+		}
 		case EcorePackage::EANNOTATION_ATTRIBUTE_SOURCE:
 			return eAny(getSource()); //14
 	}
@@ -325,11 +352,120 @@ bool EAnnotationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
+		case EcorePackage::EANNOTATION_ATTRIBUTE_CONTENTS:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<ecore::EObject>> contentsList(new Bag<ecore::EObject>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				contentsList->add(std::dynamic_pointer_cast<ecore::EObject>(*iter));
+				iter++;
+			}
+			
+			Bag<ecore::EObject>::iterator iterContents = m_contents->begin();
+			Bag<ecore::EObject>::iterator endContents = m_contents->end();
+			while (iterContents != endContents)
+			{
+				if (contentsList->find(*iterContents) == -1)
+				{
+					m_contents->erase(*iterContents);
+				}
+				iterContents++;
+			}
+
+			iterContents = contentsList->begin();
+			endContents = contentsList->end();
+			while (iterContents != endContents)
+			{
+				if (m_contents->find(*iterContents) == -1)
+				{
+					m_contents->add(*iterContents);
+				}
+				iterContents++;			
+			}
+			return true;
+		}
+		case EcorePackage::EANNOTATION_ATTRIBUTE_DETAILS:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<ecore::EStringToStringMapEntry>> detailsList(new Bag<ecore::EStringToStringMapEntry>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				detailsList->add(std::dynamic_pointer_cast<ecore::EStringToStringMapEntry>(*iter));
+				iter++;
+			}
+			
+			Bag<ecore::EStringToStringMapEntry>::iterator iterDetails = m_details->begin();
+			Bag<ecore::EStringToStringMapEntry>::iterator endDetails = m_details->end();
+			while (iterDetails != endDetails)
+			{
+				if (detailsList->find(*iterDetails) == -1)
+				{
+					m_details->erase(*iterDetails);
+				}
+				iterDetails++;
+			}
+
+			iterDetails = detailsList->begin();
+			endDetails = detailsList->end();
+			while (iterDetails != endDetails)
+			{
+				if (m_details->find(*iterDetails) == -1)
+				{
+					m_details->add(*iterDetails);
+				}
+				iterDetails++;			
+			}
+			return true;
+		}
 		case EcorePackage::EANNOTATION_ATTRIBUTE_EMODELELEMENT:
 		{
 			// BOOST CAST
-			std::shared_ptr<ecore::EModelElement> _eModelElement = newValue->get<std::shared_ptr<ecore::EModelElement>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<ecore::EModelElement> _eModelElement = std::dynamic_pointer_cast<ecore::EModelElement>(_temp);
 			setEModelElement(_eModelElement); //16
+			return true;
+		}
+		case EcorePackage::EANNOTATION_ATTRIBUTE_REFERENCES:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<ecore::EObject>> referencesList(new Bag<ecore::EObject>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				referencesList->add(std::dynamic_pointer_cast<ecore::EObject>(*iter));
+				iter++;
+			}
+			
+			Bag<ecore::EObject>::iterator iterReferences = m_references->begin();
+			Bag<ecore::EObject>::iterator endReferences = m_references->end();
+			while (iterReferences != endReferences)
+			{
+				if (referencesList->find(*iterReferences) == -1)
+				{
+					m_references->erase(*iterReferences);
+				}
+				iterReferences++;
+			}
+
+			iterReferences = referencesList->begin();
+			endReferences = referencesList->end();
+			while (iterReferences != endReferences)
+			{
+				if (m_references->find(*iterReferences) == -1)
+				{
+					m_references->add(*iterReferences);
+				}
+				iterReferences++;			
+			}
 			return true;
 		}
 		case EcorePackage::EANNOTATION_ATTRIBUTE_SOURCE:

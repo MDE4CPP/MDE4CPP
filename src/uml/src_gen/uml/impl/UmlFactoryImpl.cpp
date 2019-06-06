@@ -480,7 +480,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createAbstraction();
+				return this->createAbstraction(metaElementID);
 			}
 			else
 			{
@@ -519,7 +519,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createAcceptCallAction();
+				return this->createAcceptCallAction(metaElementID);
 			}
 			else
 			{
@@ -558,7 +558,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createAcceptEventAction();
+				return this->createAcceptEventAction(metaElementID);
 			}
 			else
 			{
@@ -597,7 +597,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createActionExecutionSpecification();
+				return this->createActionExecutionSpecification(metaElementID);
 			}
 			else
 			{
@@ -636,7 +636,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createActionInputPin();
+				return this->createActionInputPin(metaElementID);
 			}
 			else
 			{
@@ -699,7 +699,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createActivity();
+				return this->createActivity(metaElementID);
 			}
 			else
 			{
@@ -750,7 +750,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createActivityFinalNode();
+				return this->createActivityFinalNode(metaElementID);
 			}
 			else
 			{
@@ -789,7 +789,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createActivityParameterNode();
+				return this->createActivityParameterNode(metaElementID);
 			}
 			else
 			{
@@ -828,7 +828,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createActivityPartition();
+				return this->createActivityPartition(metaElementID);
 			}
 			else
 			{
@@ -873,7 +873,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createActor();
+				return this->createActor(metaElementID);
 			}
 			else
 			{
@@ -918,7 +918,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createAddStructuralFeatureValueAction();
+				return this->createAddStructuralFeatureValueAction(metaElementID);
 			}
 			else
 			{
@@ -957,7 +957,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createAddVariableValueAction();
+				return this->createAddVariableValueAction(metaElementID);
 			}
 			else
 			{
@@ -996,7 +996,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createAnyReceiveEvent();
+				return this->createAnyReceiveEvent(metaElementID);
 			}
 			else
 			{
@@ -1035,7 +1035,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createArtifact();
+				return this->createArtifact(metaElementID);
 			}
 			else
 			{
@@ -1080,7 +1080,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createAssociation();
+				return this->createAssociation(metaElementID);
 			}
 			else
 			{
@@ -1125,7 +1125,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createAssociationClass();
+				return this->createAssociationClass(metaElementID);
 			}
 			else
 			{
@@ -1170,7 +1170,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createBehaviorExecutionSpecification();
+				return this->createBehaviorExecutionSpecification(metaElementID);
 			}
 			else
 			{
@@ -1209,7 +1209,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createBroadcastSignalAction();
+				return this->createBroadcastSignalAction(metaElementID);
 			}
 			else
 			{
@@ -1248,7 +1248,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createCallBehaviorAction();
+				return this->createCallBehaviorAction(metaElementID);
 			}
 			else
 			{
@@ -1287,7 +1287,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createCallEvent();
+				return this->createCallEvent(metaElementID);
 			}
 			else
 			{
@@ -1326,7 +1326,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createCallOperationAction();
+				return this->createCallOperationAction(metaElementID);
 			}
 			else
 			{
@@ -1365,7 +1365,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createCentralBufferNode();
+				return this->createCentralBufferNode(metaElementID);
 			}
 			else
 			{
@@ -1404,7 +1404,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createChangeEvent();
+				return this->createChangeEvent(metaElementID);
 			}
 			else
 			{
@@ -1443,7 +1443,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createClass();
+				return this->createClass(metaElementID);
 			}
 			else
 			{
@@ -1488,7 +1488,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createClassifierTemplateParameter();
+				return this->createClassifierTemplateParameter(metaElementID);
 			}
 			else
 			{
@@ -1515,7 +1515,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createClause();
+				return this->createClause(metaElementID);
 			}
 			else
 			{
@@ -1528,7 +1528,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createClearAssociationAction();
+				return this->createClearAssociationAction(metaElementID);
 			}
 			else
 			{
@@ -1567,7 +1567,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createClearStructuralFeatureAction();
+				return this->createClearStructuralFeatureAction(metaElementID);
 			}
 			else
 			{
@@ -1606,7 +1606,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createClearVariableAction();
+				return this->createClearVariableAction(metaElementID);
 			}
 			else
 			{
@@ -1645,7 +1645,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createCollaboration();
+				return this->createCollaboration(metaElementID);
 			}
 			else
 			{
@@ -1690,7 +1690,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createCollaborationUse();
+				return this->createCollaborationUse(metaElementID);
 			}
 			else
 			{
@@ -1717,7 +1717,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createCombinedFragment();
+				return this->createCombinedFragment(metaElementID);
 			}
 			else
 			{
@@ -1756,7 +1756,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createComment();
+				return this->createComment(metaElementID);
 			}
 			else
 			{
@@ -1769,7 +1769,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createCommunicationPath();
+				return this->createCommunicationPath(metaElementID);
 			}
 			else
 			{
@@ -1814,7 +1814,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createComponent();
+				return this->createComponent(metaElementID);
 			}
 			else
 			{
@@ -1859,7 +1859,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createComponentRealization();
+				return this->createComponentRealization(metaElementID);
 			}
 			else
 			{
@@ -1904,7 +1904,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createConditionalNode();
+				return this->createConditionalNode(metaElementID);
 			}
 			else
 			{
@@ -1955,7 +1955,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createConnectableElementTemplateParameter();
+				return this->createConnectableElementTemplateParameter(metaElementID);
 			}
 			else
 			{
@@ -1982,7 +1982,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createConnectionPointReference();
+				return this->createConnectionPointReference(metaElementID);
 			}
 			else
 			{
@@ -2021,7 +2021,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createConnector();
+				return this->createConnector(metaElementID);
 			}
 			else
 			{
@@ -2048,7 +2048,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createConnectorEnd();
+				return this->createConnectorEnd(metaElementID);
 			}
 			else
 			{
@@ -2061,7 +2061,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createConsiderIgnoreFragment();
+				return this->createConsiderIgnoreFragment(metaElementID);
 			}
 			else
 			{
@@ -2100,7 +2100,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createConstraint();
+				return this->createConstraint(metaElementID);
 			}
 			else
 			{
@@ -2145,7 +2145,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createContinuation();
+				return this->createContinuation(metaElementID);
 			}
 			else
 			{
@@ -2184,7 +2184,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createControlFlow();
+				return this->createControlFlow(metaElementID);
 			}
 			else
 			{
@@ -2223,7 +2223,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createCreateLinkAction();
+				return this->createCreateLinkAction(metaElementID);
 			}
 			else
 			{
@@ -2262,7 +2262,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createCreateLinkObjectAction();
+				return this->createCreateLinkObjectAction(metaElementID);
 			}
 			else
 			{
@@ -2301,7 +2301,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createCreateObjectAction();
+				return this->createCreateObjectAction(metaElementID);
 			}
 			else
 			{
@@ -2340,7 +2340,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createDataStoreNode();
+				return this->createDataStoreNode(metaElementID);
 			}
 			else
 			{
@@ -2379,7 +2379,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createDataType();
+				return this->createDataType(metaElementID);
 			}
 			else
 			{
@@ -2424,7 +2424,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createDecisionNode();
+				return this->createDecisionNode(metaElementID);
 			}
 			else
 			{
@@ -2463,7 +2463,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createDependency();
+				return this->createDependency(metaElementID);
 			}
 			else
 			{
@@ -2502,7 +2502,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createDeployment();
+				return this->createDeployment(metaElementID);
 			}
 			else
 			{
@@ -2547,7 +2547,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createDeploymentSpecification();
+				return this->createDeploymentSpecification(metaElementID);
 			}
 			else
 			{
@@ -2598,7 +2598,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createDestroyLinkAction();
+				return this->createDestroyLinkAction(metaElementID);
 			}
 			else
 			{
@@ -2637,7 +2637,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createDestroyObjectAction();
+				return this->createDestroyObjectAction(metaElementID);
 			}
 			else
 			{
@@ -2676,7 +2676,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createDestructionOccurrenceSpecification();
+				return this->createDestructionOccurrenceSpecification(metaElementID);
 			}
 			else
 			{
@@ -2715,7 +2715,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createDevice();
+				return this->createDevice(metaElementID);
 			}
 			else
 			{
@@ -2760,7 +2760,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createDuration();
+				return this->createDuration(metaElementID);
 			}
 			else
 			{
@@ -2805,7 +2805,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createDurationConstraint();
+				return this->createDurationConstraint(metaElementID);
 			}
 			else
 			{
@@ -2850,7 +2850,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createDurationInterval();
+				return this->createDurationInterval(metaElementID);
 			}
 			else
 			{
@@ -2895,7 +2895,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createDurationObservation();
+				return this->createDurationObservation(metaElementID);
 			}
 			else
 			{
@@ -2934,7 +2934,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createElementImport();
+				return this->createElementImport(metaElementID);
 			}
 			else
 			{
@@ -2961,7 +2961,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createEnumeration();
+				return this->createEnumeration(metaElementID);
 			}
 			else
 			{
@@ -3006,7 +3006,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createEnumerationLiteral();
+				return this->createEnumerationLiteral(metaElementID);
 			}
 			else
 			{
@@ -3051,7 +3051,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createExceptionHandler();
+				return this->createExceptionHandler(metaElementID);
 			}
 			else
 			{
@@ -3078,7 +3078,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createExecutionEnvironment();
+				return this->createExecutionEnvironment(metaElementID);
 			}
 			else
 			{
@@ -3123,7 +3123,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createExecutionOccurrenceSpecification();
+				return this->createExecutionOccurrenceSpecification(metaElementID);
 			}
 			else
 			{
@@ -3162,7 +3162,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createExpansionNode();
+				return this->createExpansionNode(metaElementID);
 			}
 			else
 			{
@@ -3201,7 +3201,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createExpansionRegion();
+				return this->createExpansionRegion(metaElementID);
 			}
 			else
 			{
@@ -3252,7 +3252,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createExpression();
+				return this->createExpression(metaElementID);
 			}
 			else
 			{
@@ -3297,7 +3297,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createExtend();
+				return this->createExtend(metaElementID);
 			}
 			else
 			{
@@ -3330,7 +3330,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createExtension();
+				return this->createExtension(metaElementID);
 			}
 			else
 			{
@@ -3375,7 +3375,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createExtensionEnd();
+				return this->createExtensionEnd(metaElementID);
 			}
 			else
 			{
@@ -3438,7 +3438,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createExtensionPoint();
+				return this->createExtensionPoint(metaElementID);
 			}
 			else
 			{
@@ -3471,7 +3471,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createFactory();
+				return this->createFactory(metaElementID);
 			}
 			else
 			{
@@ -3484,7 +3484,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createFinalState();
+				return this->createFinalState(metaElementID);
 			}
 			else
 			{
@@ -3517,7 +3517,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createFlowFinalNode();
+				return this->createFlowFinalNode(metaElementID);
 			}
 			else
 			{
@@ -3556,7 +3556,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createForkNode();
+				return this->createForkNode(metaElementID);
 			}
 			else
 			{
@@ -3595,7 +3595,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createFunctionBehavior();
+				return this->createFunctionBehavior(metaElementID);
 			}
 			else
 			{
@@ -3646,7 +3646,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createGate();
+				return this->createGate(metaElementID);
 			}
 			else
 			{
@@ -3673,7 +3673,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createGeneralOrdering();
+				return this->createGeneralOrdering(metaElementID);
 			}
 			else
 			{
@@ -3700,7 +3700,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createGeneralization();
+				return this->createGeneralization(metaElementID);
 			}
 			else
 			{
@@ -3727,7 +3727,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createGeneralizationSet();
+				return this->createGeneralizationSet(metaElementID);
 			}
 			else
 			{
@@ -3766,7 +3766,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createImage();
+				return this->createImage(metaElementID);
 			}
 			else
 			{
@@ -3779,7 +3779,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createInclude();
+				return this->createInclude(metaElementID);
 			}
 			else
 			{
@@ -3812,7 +3812,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createInformationFlow();
+				return this->createInformationFlow(metaElementID);
 			}
 			else
 			{
@@ -3851,7 +3851,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createInformationItem();
+				return this->createInformationItem(metaElementID);
 			}
 			else
 			{
@@ -3896,7 +3896,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createInitialNode();
+				return this->createInitialNode(metaElementID);
 			}
 			else
 			{
@@ -3935,7 +3935,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createInputPin();
+				return this->createInputPin(metaElementID);
 			}
 			else
 			{
@@ -3998,7 +3998,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createInstanceSpecification();
+				return this->createInstanceSpecification(metaElementID);
 			}
 			else
 			{
@@ -4037,7 +4037,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createInstanceValue();
+				return this->createInstanceValue(metaElementID);
 			}
 			else
 			{
@@ -4082,7 +4082,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createInteraction();
+				return this->createInteraction(metaElementID);
 			}
 			else
 			{
@@ -4145,7 +4145,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createInteractionConstraint();
+				return this->createInteractionConstraint(metaElementID);
 			}
 			else
 			{
@@ -4190,7 +4190,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createInteractionOperand();
+				return this->createInteractionOperand(metaElementID);
 			}
 			else
 			{
@@ -4229,7 +4229,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createInteractionUse();
+				return this->createInteractionUse(metaElementID);
 			}
 			else
 			{
@@ -4268,7 +4268,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createInterface();
+				return this->createInterface(metaElementID);
 			}
 			else
 			{
@@ -4313,7 +4313,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createInterfaceRealization();
+				return this->createInterfaceRealization(metaElementID);
 			}
 			else
 			{
@@ -4358,7 +4358,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createInterruptibleActivityRegion();
+				return this->createInterruptibleActivityRegion(metaElementID);
 			}
 			else
 			{
@@ -4397,7 +4397,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createInterval();
+				return this->createInterval(metaElementID);
 			}
 			else
 			{
@@ -4442,7 +4442,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createIntervalConstraint();
+				return this->createIntervalConstraint(metaElementID);
 			}
 			else
 			{
@@ -4487,7 +4487,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createJoinNode();
+				return this->createJoinNode(metaElementID);
 			}
 			else
 			{
@@ -4526,7 +4526,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createLifeline();
+				return this->createLifeline(metaElementID);
 			}
 			else
 			{
@@ -4559,7 +4559,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createLinkEndCreationData();
+				return this->createLinkEndCreationData(metaElementID);
 			}
 			else
 			{
@@ -4572,7 +4572,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createLinkEndData();
+				return this->createLinkEndData(metaElementID);
 			}
 			else
 			{
@@ -4585,7 +4585,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createLinkEndDestructionData();
+				return this->createLinkEndDestructionData(metaElementID);
 			}
 			else
 			{
@@ -4598,7 +4598,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createLiteralBoolean();
+				return this->createLiteralBoolean(metaElementID);
 			}
 			else
 			{
@@ -4643,7 +4643,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createLiteralInteger();
+				return this->createLiteralInteger(metaElementID);
 			}
 			else
 			{
@@ -4688,7 +4688,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createLiteralNull();
+				return this->createLiteralNull(metaElementID);
 			}
 			else
 			{
@@ -4733,7 +4733,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createLiteralReal();
+				return this->createLiteralReal(metaElementID);
 			}
 			else
 			{
@@ -4778,7 +4778,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createLiteralString();
+				return this->createLiteralString(metaElementID);
 			}
 			else
 			{
@@ -4823,7 +4823,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createLiteralUnlimitedNatural();
+				return this->createLiteralUnlimitedNatural(metaElementID);
 			}
 			else
 			{
@@ -4868,7 +4868,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createLoopNode();
+				return this->createLoopNode(metaElementID);
 			}
 			else
 			{
@@ -4919,7 +4919,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createManifestation();
+				return this->createManifestation(metaElementID);
 			}
 			else
 			{
@@ -4958,7 +4958,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createMergeNode();
+				return this->createMergeNode(metaElementID);
 			}
 			else
 			{
@@ -4997,7 +4997,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createMessage();
+				return this->createMessage(metaElementID);
 			}
 			else
 			{
@@ -5030,7 +5030,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createMessageOccurrenceSpecification();
+				return this->createMessageOccurrenceSpecification(metaElementID);
 			}
 			else
 			{
@@ -5069,7 +5069,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createModel();
+				return this->createModel(metaElementID);
 			}
 			else
 			{
@@ -5114,7 +5114,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createNode();
+				return this->createNode(metaElementID);
 			}
 			else
 			{
@@ -5157,14 +5157,14 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		}
 		case UmlPackage::OBJECT_CLASS:
 		{
-				return this->createObject();
+				return this->createObject(metaElementID);
 			
 		}
 		case UmlPackage::OBJECTFLOW_CLASS:
 		{
 			if (nullptr == container)
 			{
-				return this->createObjectFlow();
+				return this->createObjectFlow(metaElementID);
 			}
 			else
 			{
@@ -5203,7 +5203,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createOccurrenceSpecification();
+				return this->createOccurrenceSpecification(metaElementID);
 			}
 			else
 			{
@@ -5242,7 +5242,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createOpaqueAction();
+				return this->createOpaqueAction(metaElementID);
 			}
 			else
 			{
@@ -5281,7 +5281,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createOpaqueBehavior();
+				return this->createOpaqueBehavior(metaElementID);
 			}
 			else
 			{
@@ -5332,7 +5332,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createOpaqueExpression();
+				return this->createOpaqueExpression(metaElementID);
 			}
 			else
 			{
@@ -5377,7 +5377,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createOperation();
+				return this->createOperation(metaElementID);
 			}
 			else
 			{
@@ -5428,7 +5428,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createOperationTemplateParameter();
+				return this->createOperationTemplateParameter(metaElementID);
 			}
 			else
 			{
@@ -5455,7 +5455,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createOutputPin();
+				return this->createOutputPin(metaElementID);
 			}
 			else
 			{
@@ -5506,7 +5506,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createPackage();
+				return this->createPackage(metaElementID);
 			}
 			else
 			{
@@ -5551,7 +5551,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createPackageImport();
+				return this->createPackageImport(metaElementID);
 			}
 			else
 			{
@@ -5578,7 +5578,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createPackageMerge();
+				return this->createPackageMerge(metaElementID);
 			}
 			else
 			{
@@ -5605,7 +5605,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createParameter();
+				return this->createParameter(metaElementID);
 			}
 			else
 			{
@@ -5650,7 +5650,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createParameterSet();
+				return this->createParameterSet(metaElementID);
 			}
 			else
 			{
@@ -5677,7 +5677,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createPartDecomposition();
+				return this->createPartDecomposition(metaElementID);
 			}
 			else
 			{
@@ -5716,7 +5716,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createPort();
+				return this->createPort(metaElementID);
 			}
 			else
 			{
@@ -5779,7 +5779,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createPrimitiveType();
+				return this->createPrimitiveType(metaElementID);
 			}
 			else
 			{
@@ -5824,7 +5824,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createProfile();
+				return this->createProfile(metaElementID);
 			}
 			else
 			{
@@ -5869,7 +5869,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createProfileApplication();
+				return this->createProfileApplication(metaElementID);
 			}
 			else
 			{
@@ -5896,7 +5896,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createProperty();
+				return this->createProperty(metaElementID);
 			}
 			else
 			{
@@ -5959,7 +5959,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createProtocolConformance();
+				return this->createProtocolConformance(metaElementID);
 			}
 			else
 			{
@@ -5986,7 +5986,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createProtocolStateMachine();
+				return this->createProtocolStateMachine(metaElementID);
 			}
 			else
 			{
@@ -6037,7 +6037,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createProtocolTransition();
+				return this->createProtocolTransition(metaElementID);
 			}
 			else
 			{
@@ -6070,7 +6070,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createPseudostate();
+				return this->createPseudostate(metaElementID);
 			}
 			else
 			{
@@ -6115,7 +6115,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createQualifierValue();
+				return this->createQualifierValue(metaElementID);
 			}
 			else
 			{
@@ -6128,7 +6128,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createRaiseExceptionAction();
+				return this->createRaiseExceptionAction(metaElementID);
 			}
 			else
 			{
@@ -6167,7 +6167,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createReadExtentAction();
+				return this->createReadExtentAction(metaElementID);
 			}
 			else
 			{
@@ -6206,7 +6206,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createReadIsClassifiedObjectAction();
+				return this->createReadIsClassifiedObjectAction(metaElementID);
 			}
 			else
 			{
@@ -6245,7 +6245,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createReadLinkAction();
+				return this->createReadLinkAction(metaElementID);
 			}
 			else
 			{
@@ -6284,7 +6284,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createReadLinkObjectEndAction();
+				return this->createReadLinkObjectEndAction(metaElementID);
 			}
 			else
 			{
@@ -6323,7 +6323,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createReadLinkObjectEndQualifierAction();
+				return this->createReadLinkObjectEndQualifierAction(metaElementID);
 			}
 			else
 			{
@@ -6362,7 +6362,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createReadSelfAction();
+				return this->createReadSelfAction(metaElementID);
 			}
 			else
 			{
@@ -6401,7 +6401,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createReadStructuralFeatureAction();
+				return this->createReadStructuralFeatureAction(metaElementID);
 			}
 			else
 			{
@@ -6440,7 +6440,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createReadVariableAction();
+				return this->createReadVariableAction(metaElementID);
 			}
 			else
 			{
@@ -6479,7 +6479,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createRealization();
+				return this->createRealization(metaElementID);
 			}
 			else
 			{
@@ -6518,7 +6518,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createReception();
+				return this->createReception(metaElementID);
 			}
 			else
 			{
@@ -6545,7 +6545,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createReclassifyObjectAction();
+				return this->createReclassifyObjectAction(metaElementID);
 			}
 			else
 			{
@@ -6584,7 +6584,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createRedefinableTemplateSignature();
+				return this->createRedefinableTemplateSignature(metaElementID);
 			}
 			else
 			{
@@ -6617,7 +6617,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createReduceAction();
+				return this->createReduceAction(metaElementID);
 			}
 			else
 			{
@@ -6656,7 +6656,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createRegion();
+				return this->createRegion(metaElementID);
 			}
 			else
 			{
@@ -6695,7 +6695,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createRemoveStructuralFeatureValueAction();
+				return this->createRemoveStructuralFeatureValueAction(metaElementID);
 			}
 			else
 			{
@@ -6734,7 +6734,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createRemoveVariableValueAction();
+				return this->createRemoveVariableValueAction(metaElementID);
 			}
 			else
 			{
@@ -6773,7 +6773,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createReplyAction();
+				return this->createReplyAction(metaElementID);
 			}
 			else
 			{
@@ -6812,7 +6812,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createSendObjectAction();
+				return this->createSendObjectAction(metaElementID);
 			}
 			else
 			{
@@ -6851,7 +6851,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createSendSignalAction();
+				return this->createSendSignalAction(metaElementID);
 			}
 			else
 			{
@@ -6890,7 +6890,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createSequenceNode();
+				return this->createSequenceNode(metaElementID);
 			}
 			else
 			{
@@ -6941,7 +6941,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createSignal();
+				return this->createSignal(metaElementID);
 			}
 			else
 			{
@@ -6986,7 +6986,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createSignalEvent();
+				return this->createSignalEvent(metaElementID);
 			}
 			else
 			{
@@ -7025,7 +7025,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createSlot();
+				return this->createSlot(metaElementID);
 			}
 			else
 			{
@@ -7052,7 +7052,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createStartClassifierBehaviorAction();
+				return this->createStartClassifierBehaviorAction(metaElementID);
 			}
 			else
 			{
@@ -7091,7 +7091,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createStartObjectBehaviorAction();
+				return this->createStartObjectBehaviorAction(metaElementID);
 			}
 			else
 			{
@@ -7130,7 +7130,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createState();
+				return this->createState(metaElementID);
 			}
 			else
 			{
@@ -7163,7 +7163,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createStateInvariant();
+				return this->createStateInvariant(metaElementID);
 			}
 			else
 			{
@@ -7202,7 +7202,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createStateMachine();
+				return this->createStateMachine(metaElementID);
 			}
 			else
 			{
@@ -7253,7 +7253,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createStereotype();
+				return this->createStereotype(metaElementID);
 			}
 			else
 			{
@@ -7298,7 +7298,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createStringExpression();
+				return this->createStringExpression(metaElementID);
 			}
 			else
 			{
@@ -7349,7 +7349,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createStructuredActivityNode();
+				return this->createStructuredActivityNode(metaElementID);
 			}
 			else
 			{
@@ -7400,7 +7400,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createSubstitution();
+				return this->createSubstitution(metaElementID);
 			}
 			else
 			{
@@ -7445,7 +7445,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createTemplateBinding();
+				return this->createTemplateBinding(metaElementID);
 			}
 			else
 			{
@@ -7472,7 +7472,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createTemplateParameter();
+				return this->createTemplateParameter(metaElementID);
 			}
 			else
 			{
@@ -7499,7 +7499,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createTemplateParameterSubstitution();
+				return this->createTemplateParameterSubstitution(metaElementID);
 			}
 			else
 			{
@@ -7526,7 +7526,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createTemplateSignature();
+				return this->createTemplateSignature(metaElementID);
 			}
 			else
 			{
@@ -7553,7 +7553,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createTestIdentityAction();
+				return this->createTestIdentityAction(metaElementID);
 			}
 			else
 			{
@@ -7592,7 +7592,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createTimeConstraint();
+				return this->createTimeConstraint(metaElementID);
 			}
 			else
 			{
@@ -7637,7 +7637,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createTimeEvent();
+				return this->createTimeEvent(metaElementID);
 			}
 			else
 			{
@@ -7676,7 +7676,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createTimeExpression();
+				return this->createTimeExpression(metaElementID);
 			}
 			else
 			{
@@ -7721,7 +7721,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createTimeInterval();
+				return this->createTimeInterval(metaElementID);
 			}
 			else
 			{
@@ -7766,7 +7766,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createTimeObservation();
+				return this->createTimeObservation(metaElementID);
 			}
 			else
 			{
@@ -7805,7 +7805,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createTransition();
+				return this->createTransition(metaElementID);
 			}
 			else
 			{
@@ -7838,7 +7838,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createTrigger();
+				return this->createTrigger(metaElementID);
 			}
 			else
 			{
@@ -7865,7 +7865,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createUnmarshallAction();
+				return this->createUnmarshallAction(metaElementID);
 			}
 			else
 			{
@@ -7904,7 +7904,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createUsage();
+				return this->createUsage(metaElementID);
 			}
 			else
 			{
@@ -7943,7 +7943,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createUseCase();
+				return this->createUseCase(metaElementID);
 			}
 			else
 			{
@@ -7988,7 +7988,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createValuePin();
+				return this->createValuePin(metaElementID);
 			}
 			else
 			{
@@ -8051,7 +8051,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createValueSpecificationAction();
+				return this->createValueSpecificationAction(metaElementID);
 			}
 			else
 			{
@@ -8090,7 +8090,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 		{
 			if (nullptr == container)
 			{
-				return this->createVariable();
+				return this->createVariable(metaElementID);
 			}
 			else
 			{

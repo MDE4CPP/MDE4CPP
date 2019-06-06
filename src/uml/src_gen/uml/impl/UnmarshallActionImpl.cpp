@@ -464,11 +464,20 @@ Any UnmarshallActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::UNMARSHALLACTION_ATTRIBUTE_OBJECT:
-			return eAny(getObject()); //24627
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getObject())); //24627
 		case UmlPackage::UNMARSHALLACTION_ATTRIBUTE_RESULT:
-			return eAny(getResult()); //24628
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::OutputPin>::iterator iter = m_result->begin();
+			Bag<uml::OutputPin>::iterator end = m_result->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //24628
+		}
 		case UmlPackage::UNMARSHALLACTION_ATTRIBUTE_UNMARSHALLTYPE:
-			return eAny(getUnmarshallType()); //24629
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getUnmarshallType())); //24629
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -492,14 +501,52 @@ bool UnmarshallActionImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::UNMARSHALLACTION_ATTRIBUTE_OBJECT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::InputPin> _object = newValue->get<std::shared_ptr<uml::InputPin>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::InputPin> _object = std::dynamic_pointer_cast<uml::InputPin>(_temp);
 			setObject(_object); //24627
+			return true;
+		}
+		case UmlPackage::UNMARSHALLACTION_ATTRIBUTE_RESULT:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::OutputPin>> resultList(new Bag<uml::OutputPin>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				resultList->add(std::dynamic_pointer_cast<uml::OutputPin>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::OutputPin>::iterator iterResult = m_result->begin();
+			Bag<uml::OutputPin>::iterator endResult = m_result->end();
+			while (iterResult != endResult)
+			{
+				if (resultList->find(*iterResult) == -1)
+				{
+					m_result->erase(*iterResult);
+				}
+				iterResult++;
+			}
+
+			iterResult = resultList->begin();
+			endResult = resultList->end();
+			while (iterResult != endResult)
+			{
+				if (m_result->find(*iterResult) == -1)
+				{
+					m_result->add(*iterResult);
+				}
+				iterResult++;			
+			}
 			return true;
 		}
 		case UmlPackage::UNMARSHALLACTION_ATTRIBUTE_UNMARSHALLTYPE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Classifier> _unmarshallType = newValue->get<std::shared_ptr<uml::Classifier>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Classifier> _unmarshallType = std::dynamic_pointer_cast<uml::Classifier>(_temp);
 			setUnmarshallType(_unmarshallType); //24629
 			return true;
 		}

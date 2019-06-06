@@ -301,7 +301,7 @@ Any ActionExecutionSpecificationImpl::eGet(int featureID, bool resolve, bool cor
 	switch(featureID)
 	{
 		case UmlPackage::ACTIONEXECUTIONSPECIFICATION_ATTRIBUTE_ACTION:
-			return eAny(getAction()); //515
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getAction())); //515
 	}
 	return ExecutionSpecificationImpl::eGet(featureID, resolve, coreType);
 }
@@ -321,7 +321,8 @@ bool ActionExecutionSpecificationImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::ACTIONEXECUTIONSPECIFICATION_ATTRIBUTE_ACTION:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Action> _action = newValue->get<std::shared_ptr<uml::Action>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Action> _action = std::dynamic_pointer_cast<uml::Action>(_temp);
 			setAction(_action); //515
 			return true;
 		}

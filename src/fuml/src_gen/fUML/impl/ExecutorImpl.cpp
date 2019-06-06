@@ -249,7 +249,7 @@ Any ExecutorImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case FUMLPackage::EXECUTOR_ATTRIBUTE_LOCUS:
-			return eAny(getLocus()); //450
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getLocus().lock())); //450
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
@@ -269,7 +269,8 @@ bool ExecutorImpl::eSet(int featureID, Any newValue)
 		case FUMLPackage::EXECUTOR_ATTRIBUTE_LOCUS:
 		{
 			// BOOST CAST
-			std::shared_ptr<fUML::Locus> _locus = newValue->get<std::shared_ptr<fUML::Locus>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<fUML::Locus> _locus = std::dynamic_pointer_cast<fUML::Locus>(_temp);
 			setLocus(_locus); //450
 			return true;
 		}

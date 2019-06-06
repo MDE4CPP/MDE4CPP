@@ -458,9 +458,27 @@ Any LinkActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::LINKACTION_ATTRIBUTE_ENDDATA:
-			return eAny(getEndData()); //13327
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::LinkEndData>::iterator iter = m_endData->begin();
+			Bag<uml::LinkEndData>::iterator end = m_endData->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //13327
+		}
 		case UmlPackage::LINKACTION_ATTRIBUTE_INPUTVALUE:
-			return eAny(getInputValue()); //13328
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::InputPin>::iterator iter = m_inputValue->begin();
+			Bag<uml::InputPin>::iterator end = m_inputValue->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //13328
+		}
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -479,6 +497,78 @@ bool LinkActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
+		case UmlPackage::LINKACTION_ATTRIBUTE_ENDDATA:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::LinkEndData>> endDataList(new Bag<uml::LinkEndData>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				endDataList->add(std::dynamic_pointer_cast<uml::LinkEndData>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::LinkEndData>::iterator iterEndData = m_endData->begin();
+			Bag<uml::LinkEndData>::iterator endEndData = m_endData->end();
+			while (iterEndData != endEndData)
+			{
+				if (endDataList->find(*iterEndData) == -1)
+				{
+					m_endData->erase(*iterEndData);
+				}
+				iterEndData++;
+			}
+
+			iterEndData = endDataList->begin();
+			endEndData = endDataList->end();
+			while (iterEndData != endEndData)
+			{
+				if (m_endData->find(*iterEndData) == -1)
+				{
+					m_endData->add(*iterEndData);
+				}
+				iterEndData++;			
+			}
+			return true;
+		}
+		case UmlPackage::LINKACTION_ATTRIBUTE_INPUTVALUE:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::InputPin>> inputValueList(new Bag<uml::InputPin>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				inputValueList->add(std::dynamic_pointer_cast<uml::InputPin>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::InputPin>::iterator iterInputValue = m_inputValue->begin();
+			Bag<uml::InputPin>::iterator endInputValue = m_inputValue->end();
+			while (iterInputValue != endInputValue)
+			{
+				if (inputValueList->find(*iterInputValue) == -1)
+				{
+					m_inputValue->erase(*iterInputValue);
+				}
+				iterInputValue++;
+			}
+
+			iterInputValue = inputValueList->begin();
+			endInputValue = inputValueList->end();
+			while (iterInputValue != endInputValue)
+			{
+				if (m_inputValue->find(*iterInputValue) == -1)
+				{
+					m_inputValue->add(*iterInputValue);
+				}
+				iterInputValue++;			
+			}
+			return true;
+		}
 	}
 
 	return ActionImpl::eSet(featureID, newValue);

@@ -250,9 +250,9 @@ Any GeneralOrderingImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::GENERALORDERING_ATTRIBUTE_AFTER:
-			return eAny(getAfter()); //1089
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getAfter())); //1089
 		case UmlPackage::GENERALORDERING_ATTRIBUTE_BEFORE:
-			return eAny(getBefore()); //10810
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getBefore())); //10810
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -274,14 +274,16 @@ bool GeneralOrderingImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::GENERALORDERING_ATTRIBUTE_AFTER:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::OccurrenceSpecification> _after = newValue->get<std::shared_ptr<uml::OccurrenceSpecification>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::OccurrenceSpecification> _after = std::dynamic_pointer_cast<uml::OccurrenceSpecification>(_temp);
 			setAfter(_after); //1089
 			return true;
 		}
 		case UmlPackage::GENERALORDERING_ATTRIBUTE_BEFORE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::OccurrenceSpecification> _before = newValue->get<std::shared_ptr<uml::OccurrenceSpecification>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::OccurrenceSpecification> _before = std::dynamic_pointer_cast<uml::OccurrenceSpecification>(_temp);
 			setBefore(_before); //10810
 			return true;
 		}

@@ -253,9 +253,18 @@ Any TriggerImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::TRIGGER_ATTRIBUTE_EVENT:
-			return eAny(getEvent()); //2439
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEvent())); //2439
 		case UmlPackage::TRIGGER_ATTRIBUTE_PORT:
-			return eAny(getPort()); //24310
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Port>::iterator iter = m_port->begin();
+			Bag<uml::Port>::iterator end = m_port->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //24310
+		}
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -277,8 +286,45 @@ bool TriggerImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::TRIGGER_ATTRIBUTE_EVENT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Event> _event = newValue->get<std::shared_ptr<uml::Event>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Event> _event = std::dynamic_pointer_cast<uml::Event>(_temp);
 			setEvent(_event); //2439
+			return true;
+		}
+		case UmlPackage::TRIGGER_ATTRIBUTE_PORT:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Port>> portList(new Bag<uml::Port>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				portList->add(std::dynamic_pointer_cast<uml::Port>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Port>::iterator iterPort = m_port->begin();
+			Bag<uml::Port>::iterator endPort = m_port->end();
+			while (iterPort != endPort)
+			{
+				if (portList->find(*iterPort) == -1)
+				{
+					m_port->erase(*iterPort);
+				}
+				iterPort++;
+			}
+
+			iterPort = portList->begin();
+			endPort = portList->end();
+			while (iterPort != endPort)
+			{
+				if (m_port->find(*iterPort) == -1)
+				{
+					m_port->add(*iterPort);
+				}
+				iterPort++;			
+			}
 			return true;
 		}
 	}

@@ -289,9 +289,18 @@ Any ObjectImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case FUMLPackage::OBJECT_ATTRIBUTE_OBJECTACTIVATION:
-			return eAny(getObjectActivation()); //763
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getObjectActivation())); //763
 		case FUMLPackage::OBJECT_ATTRIBUTE_TYPES:
-			return eAny(getTypes()); //762
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Classifier>::iterator iter = m_types->begin();
+			Bag<uml::Classifier>::iterator end = m_types->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //762
+		}
 	}
 	return ExtensionalValueImpl::eGet(featureID, resolve, coreType);
 }
@@ -313,8 +322,45 @@ bool ObjectImpl::eSet(int featureID, Any newValue)
 		case FUMLPackage::OBJECT_ATTRIBUTE_OBJECTACTIVATION:
 		{
 			// BOOST CAST
-			std::shared_ptr<fUML::ObjectActivation> _objectActivation = newValue->get<std::shared_ptr<fUML::ObjectActivation>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<fUML::ObjectActivation> _objectActivation = std::dynamic_pointer_cast<fUML::ObjectActivation>(_temp);
 			setObjectActivation(_objectActivation); //763
+			return true;
+		}
+		case FUMLPackage::OBJECT_ATTRIBUTE_TYPES:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Classifier>> typesList(new Bag<uml::Classifier>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				typesList->add(std::dynamic_pointer_cast<uml::Classifier>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Classifier>::iterator iterTypes = m_types->begin();
+			Bag<uml::Classifier>::iterator endTypes = m_types->end();
+			while (iterTypes != endTypes)
+			{
+				if (typesList->find(*iterTypes) == -1)
+				{
+					m_types->erase(*iterTypes);
+				}
+				iterTypes++;
+			}
+
+			iterTypes = typesList->begin();
+			endTypes = typesList->end();
+			while (iterTypes != endTypes)
+			{
+				if (m_types->find(*iterTypes) == -1)
+				{
+					m_types->add(*iterTypes);
+				}
+				iterTypes++;			
+			}
 			return true;
 		}
 	}

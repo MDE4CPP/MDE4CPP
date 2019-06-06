@@ -115,24 +115,24 @@ TypeImpl::~TypeImpl()
 
 
 //Additional constructor for the containments back reference
-			TypeImpl::TypeImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id)
-			:TypeImpl()
-			{
-				switch(reference_id)
-				{	
-				case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
-					m_owningPackage = par_Package;
-					m_namespace = par_Package;
-					 return;
-				case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
-					m_package = par_Package;
-					m_namespace = par_Package;
-					 return;
-				default:
-				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
-				}
-			   
-			}
+TypeImpl::TypeImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id)
+:TypeImpl()
+{
+	switch(reference_id)
+	{	
+	case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
+		m_owningPackage = par_Package;
+		m_namespace = par_Package;
+		 return;
+	case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
+		m_package = par_Package;
+		m_namespace = par_Package;
+		 return;
+	default:
+	std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
+	}
+   
+}
 
 
 
@@ -318,7 +318,7 @@ Any TypeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
-			return eAny(getPackage()); //24412
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getPackage().lock())); //24412
 	}
 	return PackageableElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -338,7 +338,8 @@ bool TypeImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Package> _package = newValue->get<std::shared_ptr<uml::Package>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Package> _package = std::dynamic_pointer_cast<uml::Package>(_temp);
 			setPackage(_package); //24412
 			return true;
 		}

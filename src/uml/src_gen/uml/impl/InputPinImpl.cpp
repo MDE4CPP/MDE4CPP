@@ -497,13 +497,13 @@ Any InputPinImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::INPUTPIN_ATTRIBUTE_ACTION:
-			return eAny(getAction()); //11636
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getAction().lock())); //11636
 		case UmlPackage::INPUTPIN_ATTRIBUTE_CALLOPERATIONACTION:
-			return eAny(getCallOperationAction()); //11634
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getCallOperationAction().lock())); //11634
 		case UmlPackage::INPUTPIN_ATTRIBUTE_INVOCATIONACTION:
-			return eAny(getInvocationAction()); //11635
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getInvocationAction().lock())); //11635
 		case UmlPackage::INPUTPIN_ATTRIBUTE_STRUCTURALFEATUREACTION:
-			return eAny(getStructuralFeatureAction()); //11633
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getStructuralFeatureAction().lock())); //11633
 	}
 	return PinImpl::eGet(featureID, resolve, coreType);
 }
@@ -529,21 +529,24 @@ bool InputPinImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::INPUTPIN_ATTRIBUTE_CALLOPERATIONACTION:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::CallOperationAction> _callOperationAction = newValue->get<std::shared_ptr<uml::CallOperationAction>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::CallOperationAction> _callOperationAction = std::dynamic_pointer_cast<uml::CallOperationAction>(_temp);
 			setCallOperationAction(_callOperationAction); //11634
 			return true;
 		}
 		case UmlPackage::INPUTPIN_ATTRIBUTE_INVOCATIONACTION:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::InvocationAction> _invocationAction = newValue->get<std::shared_ptr<uml::InvocationAction>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::InvocationAction> _invocationAction = std::dynamic_pointer_cast<uml::InvocationAction>(_temp);
 			setInvocationAction(_invocationAction); //11635
 			return true;
 		}
 		case UmlPackage::INPUTPIN_ATTRIBUTE_STRUCTURALFEATUREACTION:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::StructuralFeatureAction> _structuralFeatureAction = newValue->get<std::shared_ptr<uml::StructuralFeatureAction>>();
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::StructuralFeatureAction> _structuralFeatureAction = std::dynamic_pointer_cast<uml::StructuralFeatureAction>(_temp);
 			setStructuralFeatureAction(_structuralFeatureAction); //11633
 			return true;
 		}

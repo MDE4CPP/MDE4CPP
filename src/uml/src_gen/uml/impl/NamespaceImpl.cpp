@@ -489,17 +489,71 @@ Any NamespaceImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::NAMESPACE_ATTRIBUTE_ELEMENTIMPORT:
-			return eAny(getElementImport()); //15610
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::ElementImport>::iterator iter = m_elementImport->begin();
+			Bag<uml::ElementImport>::iterator end = m_elementImport->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //15610
+		}
 		case UmlPackage::NAMESPACE_ATTRIBUTE_IMPORTEDMEMBER:
-			return eAny(getImportedMember()); //15613
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::PackageableElement>::iterator iter = m_importedMember->begin();
+			Bag<uml::PackageableElement>::iterator end = m_importedMember->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //15613
+		}
 		case UmlPackage::NAMESPACE_ATTRIBUTE_MEMBER:
-			return eAny(getMember()); //15614
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::NamedElement>::iterator iter = m_member->begin();
+			Bag<uml::NamedElement>::iterator end = m_member->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //15614
+		}
 		case UmlPackage::NAMESPACE_ATTRIBUTE_OWNEDMEMBER:
-			return eAny(getOwnedMember()); //15612
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::NamedElement>::iterator iter = m_ownedMember->begin();
+			Bag<uml::NamedElement>::iterator end = m_ownedMember->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //15612
+		}
 		case UmlPackage::NAMESPACE_ATTRIBUTE_OWNEDRULE:
-			return eAny(getOwnedRule()); //1569
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Constraint>::iterator iter = m_ownedRule->begin();
+			Bag<uml::Constraint>::iterator end = m_ownedRule->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //1569
+		}
 		case UmlPackage::NAMESPACE_ATTRIBUTE_PACKAGEIMPORT:
-			return eAny(getPackageImport()); //15611
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::PackageImport>::iterator iter = m_packageImport->begin();
+			Bag<uml::PackageImport>::iterator end = m_packageImport->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //15611
+		}
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -526,6 +580,114 @@ bool NamespaceImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
+		case UmlPackage::NAMESPACE_ATTRIBUTE_ELEMENTIMPORT:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::ElementImport>> elementImportList(new Bag<uml::ElementImport>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				elementImportList->add(std::dynamic_pointer_cast<uml::ElementImport>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::ElementImport>::iterator iterElementImport = m_elementImport->begin();
+			Bag<uml::ElementImport>::iterator endElementImport = m_elementImport->end();
+			while (iterElementImport != endElementImport)
+			{
+				if (elementImportList->find(*iterElementImport) == -1)
+				{
+					m_elementImport->erase(*iterElementImport);
+				}
+				iterElementImport++;
+			}
+
+			iterElementImport = elementImportList->begin();
+			endElementImport = elementImportList->end();
+			while (iterElementImport != endElementImport)
+			{
+				if (m_elementImport->find(*iterElementImport) == -1)
+				{
+					m_elementImport->add(*iterElementImport);
+				}
+				iterElementImport++;			
+			}
+			return true;
+		}
+		case UmlPackage::NAMESPACE_ATTRIBUTE_OWNEDRULE:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Constraint>> ownedRuleList(new Bag<uml::Constraint>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				ownedRuleList->add(std::dynamic_pointer_cast<uml::Constraint>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Constraint>::iterator iterOwnedRule = m_ownedRule->begin();
+			Bag<uml::Constraint>::iterator endOwnedRule = m_ownedRule->end();
+			while (iterOwnedRule != endOwnedRule)
+			{
+				if (ownedRuleList->find(*iterOwnedRule) == -1)
+				{
+					m_ownedRule->erase(*iterOwnedRule);
+				}
+				iterOwnedRule++;
+			}
+
+			iterOwnedRule = ownedRuleList->begin();
+			endOwnedRule = ownedRuleList->end();
+			while (iterOwnedRule != endOwnedRule)
+			{
+				if (m_ownedRule->find(*iterOwnedRule) == -1)
+				{
+					m_ownedRule->add(*iterOwnedRule);
+				}
+				iterOwnedRule++;			
+			}
+			return true;
+		}
+		case UmlPackage::NAMESPACE_ATTRIBUTE_PACKAGEIMPORT:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::PackageImport>> packageImportList(new Bag<uml::PackageImport>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				packageImportList->add(std::dynamic_pointer_cast<uml::PackageImport>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::PackageImport>::iterator iterPackageImport = m_packageImport->begin();
+			Bag<uml::PackageImport>::iterator endPackageImport = m_packageImport->end();
+			while (iterPackageImport != endPackageImport)
+			{
+				if (packageImportList->find(*iterPackageImport) == -1)
+				{
+					m_packageImport->erase(*iterPackageImport);
+				}
+				iterPackageImport++;
+			}
+
+			iterPackageImport = packageImportList->begin();
+			endPackageImport = packageImportList->end();
+			while (iterPackageImport != endPackageImport)
+			{
+				if (m_packageImport->find(*iterPackageImport) == -1)
+				{
+					m_packageImport->add(*iterPackageImport);
+				}
+				iterPackageImport++;			
+			}
+			return true;
+		}
 	}
 
 	return NamedElementImpl::eSet(featureID, newValue);

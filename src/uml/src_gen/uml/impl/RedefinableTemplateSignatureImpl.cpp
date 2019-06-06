@@ -362,11 +362,29 @@ Any RedefinableTemplateSignatureImpl::eGet(int featureID, bool resolve, bool cor
 	switch(featureID)
 	{
 		case UmlPackage::REDEFINABLETEMPLATESIGNATURE_ATTRIBUTE_CLASSIFIER:
-			return eAny(getClassifier()); //20517
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getClassifier())); //20517
 		case UmlPackage::REDEFINABLETEMPLATESIGNATURE_ATTRIBUTE_EXTENDEDSIGNATURE:
-			return eAny(getExtendedSignature()); //20515
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::RedefinableTemplateSignature>::iterator iter = m_extendedSignature->begin();
+			Bag<uml::RedefinableTemplateSignature>::iterator end = m_extendedSignature->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //20515
+		}
 		case UmlPackage::REDEFINABLETEMPLATESIGNATURE_ATTRIBUTE_INHERITEDPARAMETER:
-			return eAny(getInheritedParameter()); //20516
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::TemplateParameter>::iterator iter = m_inheritedParameter->begin();
+			Bag<uml::TemplateParameter>::iterator end = m_inheritedParameter->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+			}
+			return eAny(tempList); //20516
+		}
 	}
 	Any result;
 	result = RedefinableElementImpl::eGet(featureID, resolve, coreType);
@@ -401,6 +419,42 @@ bool RedefinableTemplateSignatureImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
+		case UmlPackage::REDEFINABLETEMPLATESIGNATURE_ATTRIBUTE_EXTENDEDSIGNATURE:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::RedefinableTemplateSignature>> extendedSignatureList(new Bag<uml::RedefinableTemplateSignature>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				extendedSignatureList->add(std::dynamic_pointer_cast<uml::RedefinableTemplateSignature>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::RedefinableTemplateSignature>::iterator iterExtendedSignature = m_extendedSignature->begin();
+			Bag<uml::RedefinableTemplateSignature>::iterator endExtendedSignature = m_extendedSignature->end();
+			while (iterExtendedSignature != endExtendedSignature)
+			{
+				if (extendedSignatureList->find(*iterExtendedSignature) == -1)
+				{
+					m_extendedSignature->erase(*iterExtendedSignature);
+				}
+				iterExtendedSignature++;
+			}
+
+			iterExtendedSignature = extendedSignatureList->begin();
+			endExtendedSignature = extendedSignatureList->end();
+			while (iterExtendedSignature != endExtendedSignature)
+			{
+				if (m_extendedSignature->find(*iterExtendedSignature) == -1)
+				{
+					m_extendedSignature->add(*iterExtendedSignature);
+				}
+				iterExtendedSignature++;			
+			}
+			return true;
+		}
 	}
 
 	bool result = false;
