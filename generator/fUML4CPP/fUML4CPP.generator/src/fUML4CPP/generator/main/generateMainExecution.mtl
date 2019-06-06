@@ -69,7 +69,7 @@ int main()
 	}
     if(resultPList->empty())
     {
-        DEBUG_MESSAGE(std::cout << "The activity did not return any parameter." << std::endl;)
+        DEBUG_MESSAGE(std::cout << "The activity did not return any result." << std::endl;)
     }
     else{
         DEBUG_MESSAGE(std::cout << resultPList->size() << std::endl;)
