@@ -53,6 +53,7 @@ Any [aClass.name.toUpperFirst().concat('Impl')/]::eGet(int featureID, bool resol
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
 			return eAny(tempList); //[aClass.getMyClassifierID()/][struct.getFeatureID()/]
 		}
