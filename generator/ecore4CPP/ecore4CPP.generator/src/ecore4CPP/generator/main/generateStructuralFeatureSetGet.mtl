@@ -206,5 +206,5 @@ m_[anStructFeature.name/] ![anStructFeature.oclAsType(EAttribute).generateDefaul
 [/template]
 
 [template public generateComparison(anStructFeature : EStructuralFeature) ? (eType.requiresAny())]
-![anStructFeature.GetterName()/]()->isEmpty()
+[anStructFeature.GetterName()/]() != nullptr[comment TODO what is the default value of Any?/]
 [/template]
