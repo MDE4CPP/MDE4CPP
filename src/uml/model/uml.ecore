@@ -2789,6 +2789,13 @@
     <eOperations name="unset">
       <eParameters name="property" eType="#//Property"/>
     </eOperations>
+    <eOperations name="invoke" upperBound="-1" eType="#//Object">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Calls the supplied Operation on the object, passing the supplied Arguments and returning the result.&#xA;The Operation must be defined on the Class of the Object, and the arguments must refer to Parameters of the Operation.&#xA;If an Argument is not supplied for a Parameter, its default value, if any, will be used."/>
+      </eAnnotations>
+      <eParameters name="op" eType="#//Operation"/>
+      <eParameters name="arguments" upperBound="-1" eType="#//Argument"/>
+    </eOperations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Factory" eSuperTypes="#//Element">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -17538,5 +17545,13 @@
         <details key="documentation" value="The value of firstEvent is related to the event. If firstEvent is true, then the corresponding observation event is the first time instant the execution enters the event Element. If firstEvent is false, then the corresponding observation event is the time instant the execution exits the event Element.&#xA;&lt;p>From package UML::Values.&lt;/p>"/>
       </eAnnotations>
     </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Argument">
+    <eAnnotations source="merge"/>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="This is a new datatype that is used to represent named arguments to open-ended reflective operations. It is open-ended and allows both Elements and data values to be supplied.&#xA;&#xA;This Element was merged from mof::Reflection package. "/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//Object"/>
   </eClassifiers>
 </ecore:EPackage>
