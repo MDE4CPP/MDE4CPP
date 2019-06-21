@@ -257,7 +257,7 @@ std::string
 /]
 
 [query private getDefaultBooleanValue(anEClassifier : EClassifier) : String = 'false'/]
-[query private getDefaultCharValue(anEClassifier : EClassifier) : String = '\'\''/]
+[query private getDefaultCharValue(anEClassifier : EClassifier) : String = '\'\\0\''/]
 [query private getDefaultNumberValue(anEClassifier : EClassifier) : String = '0'/]
 [query private getDefaultPointerValue(anEClassifier : EClassifier) : String = 'nullptr'/]
 [query private getDefaultStringValue(anEClassifier : EClassifier) : String = '""'/]
