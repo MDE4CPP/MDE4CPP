@@ -1,0 +1,14 @@
+[comment encoding = UTF-8 /]
+[module generateProjectFiles('http://www.eclipse.org/uml2/5.0.0/UML')]
+
+[import UML4CPP_test::generator::main::project_files::generateApplication/]
+[import UML4CPP_test::generator::main::project_files::generateCMake/]
+[import UML4CPP_test::generator::main::project_files::generateGradleFiles/]
+[import UML4CPP_test::generator::main::project_files::generateEclipseFiles /]
+
+[template public generateProjectFiles( aPackage : Package )]
+	[aPackage.generateApplication()/]
+	[aPackage.generateCMake()/]
+	[aPackage.generateGradleFiles()/]
+	[aPackage.generateEclipseFiles()/]
+[/template]

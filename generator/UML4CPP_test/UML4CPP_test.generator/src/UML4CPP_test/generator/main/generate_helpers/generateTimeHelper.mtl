@@ -1,0 +1,66 @@
+[comment encoding = UTF-8 /]
+[module generateTimeHelper('http://www.eclipse.org/uml2/5.0.0/UML')]
+
+[import UML4CPP::generator::main::helpers::generalHelper /]
+
+[template public generateTimeHelper( aPackage : Package ) {
+	className : String = 'TestSuiteTimeHelper';
+} ]
+[file( 'helper/'.concat( className ).concat( '.hpp' ), false, 'UTF-8' )]
+[startGuard( className )/]
+
+#include <chrono>
+
+class TestSuiteTimeHelper {
+	private:
+		static std::chrono::time_point<std::chrono::high_resolution_clock> _TimeAtTestBegin;
+		static std::chrono::time_point<std::chrono::high_resolution_clock> _TimeAtTestEnd;
+
+	public:
+		static std::chrono::time_point<std::chrono::high_resolution_clock> GetCurrentTime() {
+			return std::chrono::high_resolution_clock::now();
+		}
+
+		static void SetTimeAtTestBegin() {
+			_TimeAtTestBegin = GetCurrentTime();
+		}
+
+		static void SetTimeAtTestEnd() {
+			_TimeAtTestEnd = GetCurrentTime();
+		}
+
+		static double GetTestRuntimeInMS() {
+			return GetTimeDifferenceInMlS( _TimeAtTestBegin, _TimeAtTestEnd ).count();
+		}
+
+		static std::chrono::duration<double, std::nano> GetTimeDifferenceInNS( std::chrono::time_point<std::chrono::high_resolution_clock> t1,
+				std::chrono::time_point<std::chrono::high_resolution_clock> t2 ) {
+			return t2 - t1;
+		}
+
+		static std::chrono::duration<double, std::micro> GetTimeDifferenceInMcS( std::chrono::time_point<std::chrono::high_resolution_clock> t1,
+				std::chrono::time_point<std::chrono::high_resolution_clock> t2 ) {
+			return t2 - t1;
+		}
+
+		static std::chrono::duration<double, std::milli> GetTimeDifferenceInMlS( std::chrono::time_point<std::chrono::high_resolution_clock> t1,
+				std::chrono::time_point<std::chrono::high_resolution_clock> t2 ) {
+			return t2 - t1;
+		}
+
+		static std::chrono::duration<double> GetTimeDifferenceInS( std::chrono::time_point<std::chrono::high_resolution_clock> t1,
+				std::chrono::time_point<std::chrono::high_resolution_clock> t2 ) {
+			return t2 - t1;
+		}
+};
+
+[endGuard( className )/]
+[/file]
+[file( 'helper/'.concat( className ).concat( '.cpp' ), false, 'UTF-8' )]
+#include "helper/TestSuiteTimeHelper.hpp"
+#include <chrono>
+
+std::chrono::time_point<std::chrono::high_resolution_clock> TestSuiteTimeHelper::_TimeAtTestBegin = std::chrono::time_point<std::chrono::high_resolution_clock>::min();
+std::chrono::time_point<std::chrono::high_resolution_clock> TestSuiteTimeHelper::_TimeAtTestEnd = std::chrono::time_point<std::chrono::high_resolution_clock>::min();
+[/file]
+[/template]

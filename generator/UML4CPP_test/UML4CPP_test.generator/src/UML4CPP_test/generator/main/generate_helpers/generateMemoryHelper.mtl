@@ -1,0 +1,101 @@
+[comment encoding = UTF-8 /]
+[module generateMemoryHelper('http://www.eclipse.org/uml2/5.0.0/UML')]
+
+[import UML4CPP::generator::main::helpers::generalHelper /]
+
+[template public generateMemoryHelper( aPackage : Package ) {
+	className : String = 'TestSuiteMemoryHelper';
+} ]
+[file( 'helper/'.concat( className ).concat( '.hpp' ), false, 'UTF-8' )]
+[startGuard( className )/]
+
+#ifdef _WIN32
+#include "windows.h"
+#include "psapi.h"
+#elif __linux__
+#include "stdlib.h"
+#include "stdio.h"
+#include "string.h"
+#else
+#error "includes not implemented"
+#endif
+
+class [className/] {
+	private:
+		static long _ProcessSizeAtTestBegin;
+		static long _ProcessSizeAtTestEnd;
+
+#ifdef _WIN32
+	public:
+		static unsigned long GetCurrentProcessSizeInKB() {
+
+			PROCESS_MEMORY_COUNTERS_EX pmc;
+
+			memset( &pmc, 0, sizeof( pmc ) );
+			if( GetProcessMemoryInfo( GetCurrentProcess(), (PROCESS_MEMORY_COUNTERS*)&pmc, sizeof( pmc ) ) ) {
+				return pmc.PrivateUsage / 1024;
+			}
+			return 0;
+		}
+#elif __linux__
+	private:
+		static unsigned long parseLine( char* line ) {
+
+			// This assumes that a digit will be found and the line ends in " Kb".
+			unsigned long i = strlen( line );
+			const char* p = line;
+			while( *p <'0' || *p > '9' ) p++;
+			line['['/]i-3] = '\0';
+			i = atoi( p );
+			return i;
+		}
+
+	public:
+		static unsigned long GetCurrentProcessSizeInKB() { //Note: this value is in KB!
+
+			FILE* file = fopen( "/proc/self/status", "r" );
+			unsigned long result = 0;
+			char line['['/]128];
+
+			while( fGets( line, 128, file ) != NULL ) {
+				if ( strncmp( line, "VmSize:", 7 ) == 0 ) {
+					result = parseLine( line );
+					break;
+				}
+			}
+			fclose( file );
+			return result;
+		}
+#else
+#error "GetCurrentMemoryUsage not implemented"
+#endif
+		static void SetProcessSizeAtTestBegin() {
+			_ProcessSizeAtTestBegin = GetCurrentProcessSizeInKB();
+		}
+
+		static void SetProcessSizeAtTestEnd() {
+			_ProcessSizeAtTestEnd = GetCurrentProcessSizeInKB();
+		}
+
+		static long GetProcessSizeDifferenzInKB() {
+			return _ProcessSizeAtTestEnd - _ProcessSizeAtTestBegin;
+		}
+
+		static long GetProcessSizeAtTestBegin() {
+			return _ProcessSizeAtTestBegin;
+		}
+
+		static long GetProcessSizeAtTestEnd() {
+			return _ProcessSizeAtTestEnd;
+		}
+};
+
+[endGuard( className )/]
+[/file]
+[file( 'helper/'.concat( className ).concat( '.cpp' ), false, 'UTF-8' )]
+#include "helper/TestSuiteMemoryHelper.hpp"
+
+long TestSuiteMemoryHelper::_ProcessSizeAtTestBegin = 0;
+long TestSuiteMemoryHelper::_ProcessSizeAtTestEnd = 0;
+[/file]
+[/template]

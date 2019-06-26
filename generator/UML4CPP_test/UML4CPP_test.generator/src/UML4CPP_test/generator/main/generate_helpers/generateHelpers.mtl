@@ -1,0 +1,14 @@
+[comment encoding = UTF-8 /]
+[module generateHelpers('http://www.eclipse.org/uml2/5.0.0/UML')]
+
+[import UML4CPP_test::generator::main::generate_helpers::generateMemoryHelper /]
+[import UML4CPP_test::generator::main::generate_helpers::generateTimeHelper /]
+[import UML4CPP_test::generator::main::generate_helpers::generateMainHelper /]
+[import UML4CPP_test::generator::main::generate_helpers::generateCountHelper /]
+
+[template public generateHelpers( aPackage : Package )]
+	[aPackage.generateMemoryHelper()/]
+	[aPackage.generateTimeHelper()/]
+	[aPackage.generateMainHelper()/]
+	[aPackage.generateCountHelper()/]
+[/template]
