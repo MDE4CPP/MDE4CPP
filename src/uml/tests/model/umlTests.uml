@@ -1,3 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_ekhZQGLnEemtFvvd_2Pr2w" name="umlTests">
+  <packagedElement xmi:type="uml:Package" xmi:id="_eIorcJmCEemCfIXRbMVoGQ" name="tests_for_uml">
+    <packagedElement xmi:type="uml:Class" xmi:id="_xmvp8JmCEemCfIXRbMVoGQ" name="ClassifierImplTest" visibility="public">
+      <ownedOperation xmi:id="_NIwYAJmEEemCfIXRbMVoGQ" name="getAllAttributesTest"/>
+      <ownedOperation xmi:id="_d0Z18JmEEemCfIXRbMVoGQ" name="GetGeneralsTest"/>
+      <ownedOperation xmi:id="_h0qmYJmEEemCfIXRbMVoGQ" name="parentsTest"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_ucXGsJmEEemCfIXRbMVoGQ" name="ClassImplTest" visibility="public">
+      <ownedOperation xmi:id="_wdDMEJmEEemCfIXRbMVoGQ" name="getSuperClassesTest"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_HlnNoJmGEemCfIXRbMVoGQ" name="ElementImpl" visibility="public">
+      <ownedOperation xmi:id="_MQMGYJmGEemCfIXRbMVoGQ" name="applyStereotypeTest"/>
+      <ownedOperation xmi:id="_SwqJwJmGEemCfIXRbMVoGQ" name="getAppliedStereotypeTest"/>
+      <ownedOperation xmi:id="_YtQEAJmGEemCfIXRbMVoGQ" name="getAppliedStereotypesTest"/>
+      <ownedOperation xmi:id="_f1PaYJmGEemCfIXRbMVoGQ" name="getValueTest"/>
+      <ownedOperation xmi:id="_jGkoQJmGEemCfIXRbMVoGQ" name="isStereotypeAppliedTest"/>
+      <ownedOperation xmi:id="_l36ugJmGEemCfIXRbMVoGQ" name="setValueTest"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_UdyvEJmIEemCfIXRbMVoGQ" name="NamedElementImplTest" visibility="public">
+      <ownedOperation xmi:id="_YBVuUJmIEemCfIXRbMVoGQ" name="allNamespacesTest"/>
+      <ownedOperation xmi:id="_bVMrwJmIEemCfIXRbMVoGQ" name="getQualifiedNameTest"/>
+      <ownedOperation xmi:id="_ef_z0JmIEemCfIXRbMVoGQ" name="separatorTest"/>
+    </packagedElement>
+  </packagedElement>
 </uml:Model>
