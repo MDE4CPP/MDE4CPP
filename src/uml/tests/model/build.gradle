@@ -1,0 +1,15 @@
+plugins {
+	id "tui.sse.mde4cpp.mde4cpp-generate-plugin" version "0.4"
+}
+
+description 'Generate tasks for project: umlTests'
+
+task generateUmlTests( type: tui.sse.mde4cpp.MDE4CPPGenerate ) {
+	group 'umlTests'
+	description 'generate C++ code of umlTests.uml model'
+
+	modelFilePath = file( 'umlTests.uml' )
+	test = true
+
+	relatedModels = [ 'ecore', 'uml', 'ecoreReflection', 'primitivetypesReflection', 'umlReflection' ]
+}
