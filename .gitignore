@@ -18,3 +18,4 @@ setenv*
 /gradle.properties
 xerces
 /.metadata/
+start cmd.cmd
