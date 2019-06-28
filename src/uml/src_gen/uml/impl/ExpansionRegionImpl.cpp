@@ -560,11 +560,12 @@ Any ExpansionRegionImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //9446
+			return eAny(tempList); //9546
 		}
 		case UmlPackage::EXPANSIONREGION_ATTRIBUTE_MODE:
-			return eAny(getMode()); //9444
+			return eAny(getMode()); //9544
 		case UmlPackage::EXPANSIONREGION_ATTRIBUTE_OUTPUTELEMENT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -573,8 +574,9 @@ Any ExpansionRegionImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //9445
+			return eAny(tempList); //9545
 		}
 	}
 	return StructuredActivityNodeImpl::eGet(featureID, resolve, coreType);
@@ -584,11 +586,11 @@ bool ExpansionRegionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::EXPANSIONREGION_ATTRIBUTE_INPUTELEMENT:
-			return getInputElement() != nullptr; //9446
+			return getInputElement() != nullptr; //9546
 		case UmlPackage::EXPANSIONREGION_ATTRIBUTE_MODE:
-			return m_mode != ExpansionKind::ITERATIVE;; //9444
+			return m_mode != ExpansionKind::ITERATIVE;; //9544
 		case UmlPackage::EXPANSIONREGION_ATTRIBUTE_OUTPUTELEMENT:
-			return getOutputElement() != nullptr; //9445
+			return getOutputElement() != nullptr; //9545
 	}
 	return StructuredActivityNodeImpl::internalEIsSet(featureID);
 }
@@ -636,7 +638,7 @@ bool ExpansionRegionImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			ExpansionKind _mode = newValue->get<ExpansionKind>();
-			setMode(_mode); //9444
+			setMode(_mode); //9544
 			return true;
 		}
 		case UmlPackage::EXPANSIONREGION_ATTRIBUTE_OUTPUTELEMENT:

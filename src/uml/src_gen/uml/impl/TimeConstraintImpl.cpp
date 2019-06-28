@@ -314,7 +314,7 @@ Any TimeConstraintImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::TIMECONSTRAINT_ATTRIBUTE_FIRSTEVENT:
-			return eAny(getFirstEvent()); //23615
+			return eAny(getFirstEvent()); //23715
 	}
 	return IntervalConstraintImpl::eGet(featureID, resolve, coreType);
 }
@@ -323,7 +323,7 @@ bool TimeConstraintImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::TIMECONSTRAINT_ATTRIBUTE_FIRSTEVENT:
-			return getFirstEvent() != true; //23615
+			return getFirstEvent() != true; //23715
 	}
 	return IntervalConstraintImpl::internalEIsSet(featureID);
 }
@@ -335,7 +335,7 @@ bool TimeConstraintImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			bool _firstEvent = newValue->get<bool>();
-			setFirstEvent(_firstEvent); //23615
+			setFirstEvent(_firstEvent); //23715
 			return true;
 		}
 	}

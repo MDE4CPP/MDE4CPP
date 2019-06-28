@@ -186,7 +186,10 @@ bool ETypedElementImpl::isOrdered() const
 	return m_ordered;
 }
 
-
+void ETypedElementImpl::setRequired(bool _required)
+{
+	m_required = _required;
+} 
 
 bool ETypedElementImpl::isRequired() const 
 {
@@ -348,6 +351,13 @@ bool ETypedElementImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			bool _ordered = newValue->get<bool>();
 			setOrdered(_ordered); //535
+			return true;
+		}
+		case EcorePackage::ETYPEDELEMENT_ATTRIBUTE_REQUIRED:
+		{
+			// BOOST CAST
+			bool _required = newValue->get<bool>();
+			setRequired(_required); //5310
 			return true;
 		}
 		case EcorePackage::ETYPEDELEMENT_ATTRIBUTE_UNIQUE:

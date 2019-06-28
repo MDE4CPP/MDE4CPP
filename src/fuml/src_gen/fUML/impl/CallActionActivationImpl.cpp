@@ -369,6 +369,7 @@ Any CallActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) c
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
 			return eAny(tempList); //1210
 		}

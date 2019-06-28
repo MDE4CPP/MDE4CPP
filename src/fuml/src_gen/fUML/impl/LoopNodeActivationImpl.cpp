@@ -269,6 +269,7 @@ Any LoopNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType) con
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
 			return eAny(tempList); //7411
 		}

@@ -465,8 +465,9 @@ Any LinkActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //13327
+			return eAny(tempList); //13427
 		}
 		case UmlPackage::LINKACTION_ATTRIBUTE_INPUTVALUE:
 		{
@@ -476,8 +477,9 @@ Any LinkActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //13328
+			return eAny(tempList); //13428
 		}
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
@@ -487,9 +489,9 @@ bool LinkActionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::LINKACTION_ATTRIBUTE_ENDDATA:
-			return getEndData() != nullptr; //13327
+			return getEndData() != nullptr; //13427
 		case UmlPackage::LINKACTION_ATTRIBUTE_INPUTVALUE:
-			return getInputValue() != nullptr; //13328
+			return getInputValue() != nullptr; //13428
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }

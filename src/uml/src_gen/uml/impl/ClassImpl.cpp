@@ -745,11 +745,12 @@ Any ClassImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //3547
+			return eAny(tempList); //3647
 		}
 		case UmlPackage::CLASS_ATTRIBUTE_ISACTIVE:
-			return eAny(getIsActive()); //3548
+			return eAny(getIsActive()); //3648
 		case UmlPackage::CLASS_ATTRIBUTE_NESTEDCLASSIFIER:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -758,8 +759,9 @@ Any ClassImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //3549
+			return eAny(tempList); //3649
 		}
 		case UmlPackage::CLASS_ATTRIBUTE_OWNEDOPERATION:
 		{
@@ -769,8 +771,9 @@ Any ClassImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //3546
+			return eAny(tempList); //3646
 		}
 		case UmlPackage::CLASS_ATTRIBUTE_OWNEDRECEPTION:
 		{
@@ -780,8 +783,9 @@ Any ClassImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //3550
+			return eAny(tempList); //3650
 		}
 		case UmlPackage::CLASS_ATTRIBUTE_SUPERCLASS:
 		{
@@ -791,8 +795,9 @@ Any ClassImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //3551
+			return eAny(tempList); //3651
 		}
 	}
 	Any result;
@@ -809,17 +814,17 @@ bool ClassImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::CLASS_ATTRIBUTE_EXTENSION:
-			return getExtension() != nullptr; //3547
+			return getExtension() != nullptr; //3647
 		case UmlPackage::CLASS_ATTRIBUTE_ISACTIVE:
-			return getIsActive() != false; //3548
+			return getIsActive() != false; //3648
 		case UmlPackage::CLASS_ATTRIBUTE_NESTEDCLASSIFIER:
-			return getNestedClassifier() != nullptr; //3549
+			return getNestedClassifier() != nullptr; //3649
 		case UmlPackage::CLASS_ATTRIBUTE_OWNEDOPERATION:
-			return getOwnedOperation() != nullptr; //3546
+			return getOwnedOperation() != nullptr; //3646
 		case UmlPackage::CLASS_ATTRIBUTE_OWNEDRECEPTION:
-			return getOwnedReception() != nullptr; //3550
+			return getOwnedReception() != nullptr; //3650
 		case UmlPackage::CLASS_ATTRIBUTE_SUPERCLASS:
-			return getSuperClass() != nullptr; //3551
+			return getSuperClass() != nullptr; //3651
 	}
 	bool result = false;
 	result = BehavioredClassifierImpl::internalEIsSet(featureID);
@@ -838,7 +843,7 @@ bool ClassImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			bool _isActive = newValue->get<bool>();
-			setIsActive(_isActive); //3548
+			setIsActive(_isActive); //3648
 			return true;
 		}
 		case UmlPackage::CLASS_ATTRIBUTE_NESTEDCLASSIFIER:

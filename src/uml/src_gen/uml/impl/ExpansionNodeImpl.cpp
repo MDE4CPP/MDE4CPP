@@ -378,9 +378,9 @@ Any ExpansionNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::EXPANSIONNODE_ATTRIBUTE_REGIONASINPUT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getRegionAsInput())); //9326
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getRegionAsInput())); //9426
 		case UmlPackage::EXPANSIONNODE_ATTRIBUTE_REGIONASOUTPUT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getRegionAsOutput())); //9327
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getRegionAsOutput())); //9427
 	}
 	return ObjectNodeImpl::eGet(featureID, resolve, coreType);
 }
@@ -389,9 +389,9 @@ bool ExpansionNodeImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::EXPANSIONNODE_ATTRIBUTE_REGIONASINPUT:
-			return getRegionAsInput() != nullptr; //9326
+			return getRegionAsInput() != nullptr; //9426
 		case UmlPackage::EXPANSIONNODE_ATTRIBUTE_REGIONASOUTPUT:
-			return getRegionAsOutput() != nullptr; //9327
+			return getRegionAsOutput() != nullptr; //9427
 	}
 	return ObjectNodeImpl::internalEIsSet(featureID);
 }
@@ -404,7 +404,7 @@ bool ExpansionNodeImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ExpansionRegion> _regionAsInput = std::dynamic_pointer_cast<uml::ExpansionRegion>(_temp);
-			setRegionAsInput(_regionAsInput); //9326
+			setRegionAsInput(_regionAsInput); //9426
 			return true;
 		}
 		case UmlPackage::EXPANSIONNODE_ATTRIBUTE_REGIONASOUTPUT:
@@ -412,7 +412,7 @@ bool ExpansionNodeImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ExpansionRegion> _regionAsOutput = std::dynamic_pointer_cast<uml::ExpansionRegion>(_temp);
-			setRegionAsOutput(_regionAsOutput); //9327
+			setRegionAsOutput(_regionAsOutput); //9427
 			return true;
 		}
 	}

@@ -18,6 +18,7 @@
 #include <iostream>
 #include <sstream>
 
+#include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/Union.hpp"
 #include "abstractDataTypes/Any.hpp"
@@ -216,9 +217,9 @@ Any LinkEndCreationDataImpl::eGet(int featureID, bool resolve, bool coreType) co
 	switch(featureID)
 	{
 		case UmlPackage::LINKENDCREATIONDATA_ATTRIBUTE_INSERTAT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getInsertAt())); //1346
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getInsertAt())); //1356
 		case UmlPackage::LINKENDCREATIONDATA_ATTRIBUTE_ISREPLACEALL:
-			return eAny(getIsReplaceAll()); //1347
+			return eAny(getIsReplaceAll()); //1357
 	}
 	return LinkEndDataImpl::eGet(featureID, resolve, coreType);
 }
@@ -227,9 +228,9 @@ bool LinkEndCreationDataImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::LINKENDCREATIONDATA_ATTRIBUTE_INSERTAT:
-			return getInsertAt() != nullptr; //1346
+			return getInsertAt() != nullptr; //1356
 		case UmlPackage::LINKENDCREATIONDATA_ATTRIBUTE_ISREPLACEALL:
-			return getIsReplaceAll() != false; //1347
+			return getIsReplaceAll() != false; //1357
 	}
 	return LinkEndDataImpl::internalEIsSet(featureID);
 }
@@ -242,14 +243,14 @@ bool LinkEndCreationDataImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::InputPin> _insertAt = std::dynamic_pointer_cast<uml::InputPin>(_temp);
-			setInsertAt(_insertAt); //1346
+			setInsertAt(_insertAt); //1356
 			return true;
 		}
 		case UmlPackage::LINKENDCREATIONDATA_ATTRIBUTE_ISREPLACEALL:
 		{
 			// BOOST CAST
 			bool _isReplaceAll = newValue->get<bool>();
-			setIsReplaceAll(_isReplaceAll); //1347
+			setIsReplaceAll(_isReplaceAll); //1357
 			return true;
 		}
 	}

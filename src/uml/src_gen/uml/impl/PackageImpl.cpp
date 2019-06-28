@@ -778,7 +778,7 @@ Any PackageImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::PACKAGE_ATTRIBUTE_URI:
-			return eAny(getURI()); //17020
+			return eAny(getURI()); //17120
 		case UmlPackage::PACKAGE_ATTRIBUTE_NESTEDPACKAGE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -787,11 +787,12 @@ Any PackageImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //17021
+			return eAny(tempList); //17121
 		}
 		case UmlPackage::PACKAGE_ATTRIBUTE_NESTINGPACKAGE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getNestingPackage().lock())); //17022
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getNestingPackage().lock())); //17122
 		case UmlPackage::PACKAGE_ATTRIBUTE_OWNEDSTEREOTYPE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -800,8 +801,9 @@ Any PackageImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //17023
+			return eAny(tempList); //17123
 		}
 		case UmlPackage::PACKAGE_ATTRIBUTE_OWNEDTYPE:
 		{
@@ -811,8 +813,9 @@ Any PackageImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //17024
+			return eAny(tempList); //17124
 		}
 		case UmlPackage::PACKAGE_ATTRIBUTE_PACKAGEMERGE:
 		{
@@ -822,8 +825,9 @@ Any PackageImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //17025
+			return eAny(tempList); //17125
 		}
 		case UmlPackage::PACKAGE_ATTRIBUTE_PACKAGEDELEMENT:
 		{
@@ -833,8 +837,9 @@ Any PackageImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //17026
+			return eAny(tempList); //17126
 		}
 		case UmlPackage::PACKAGE_ATTRIBUTE_PROFILEAPPLICATION:
 		{
@@ -844,8 +849,9 @@ Any PackageImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //17027
+			return eAny(tempList); //17127
 		}
 	}
 	Any result;
@@ -867,21 +873,21 @@ bool PackageImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::PACKAGE_ATTRIBUTE_URI:
-			return getURI() != ""; //17020
+			return getURI() != ""; //17120
 		case UmlPackage::PACKAGE_ATTRIBUTE_NESTEDPACKAGE:
-			return getNestedPackage() != nullptr; //17021
+			return getNestedPackage() != nullptr; //17121
 		case UmlPackage::PACKAGE_ATTRIBUTE_NESTINGPACKAGE:
-			return getNestingPackage().lock() != nullptr; //17022
+			return getNestingPackage().lock() != nullptr; //17122
 		case UmlPackage::PACKAGE_ATTRIBUTE_OWNEDSTEREOTYPE:
-			return getOwnedStereotype() != nullptr; //17023
+			return getOwnedStereotype() != nullptr; //17123
 		case UmlPackage::PACKAGE_ATTRIBUTE_OWNEDTYPE:
-			return getOwnedType() != nullptr; //17024
+			return getOwnedType() != nullptr; //17124
 		case UmlPackage::PACKAGE_ATTRIBUTE_PACKAGEMERGE:
-			return getPackageMerge() != nullptr; //17025
+			return getPackageMerge() != nullptr; //17125
 		case UmlPackage::PACKAGE_ATTRIBUTE_PACKAGEDELEMENT:
-			return getPackagedElement() != nullptr; //17026
+			return getPackagedElement() != nullptr; //17126
 		case UmlPackage::PACKAGE_ATTRIBUTE_PROFILEAPPLICATION:
-			return getProfileApplication() != nullptr; //17027
+			return getProfileApplication() != nullptr; //17127
 	}
 	bool result = false;
 	result = NamespaceImpl::internalEIsSet(featureID);
@@ -905,7 +911,7 @@ bool PackageImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::string _URI = newValue->get<std::string>();
-			setURI(_URI); //17020
+			setURI(_URI); //17120
 			return true;
 		}
 		case UmlPackage::PACKAGE_ATTRIBUTE_NESTEDPACKAGE:
@@ -949,7 +955,7 @@ bool PackageImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Package> _nestingPackage = std::dynamic_pointer_cast<uml::Package>(_temp);
-			setNestingPackage(_nestingPackage); //17022
+			setNestingPackage(_nestingPackage); //17122
 			return true;
 		}
 		case UmlPackage::PACKAGE_ATTRIBUTE_OWNEDTYPE:

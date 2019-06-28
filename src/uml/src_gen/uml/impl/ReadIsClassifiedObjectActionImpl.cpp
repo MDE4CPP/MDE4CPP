@@ -452,13 +452,13 @@ Any ReadIsClassifiedObjectActionImpl::eGet(int featureID, bool resolve, bool cor
 	switch(featureID)
 	{
 		case UmlPackage::READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_CLASSIFIER:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getClassifier())); //19427
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getClassifier())); //19527
 		case UmlPackage::READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_ISDIRECT:
-			return eAny(getIsDirect()); //19428
+			return eAny(getIsDirect()); //19528
 		case UmlPackage::READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_OBJECT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getObject())); //19429
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getObject())); //19529
 		case UmlPackage::READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_RESULT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getResult())); //19430
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getResult())); //19530
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -467,13 +467,13 @@ bool ReadIsClassifiedObjectActionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_CLASSIFIER:
-			return getClassifier() != nullptr; //19427
+			return getClassifier() != nullptr; //19527
 		case UmlPackage::READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_ISDIRECT:
-			return getIsDirect() != false; //19428
+			return getIsDirect() != false; //19528
 		case UmlPackage::READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_OBJECT:
-			return getObject() != nullptr; //19429
+			return getObject() != nullptr; //19529
 		case UmlPackage::READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_RESULT:
-			return getResult() != nullptr; //19430
+			return getResult() != nullptr; //19530
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }
@@ -486,14 +486,14 @@ bool ReadIsClassifiedObjectActionImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Classifier> _classifier = std::dynamic_pointer_cast<uml::Classifier>(_temp);
-			setClassifier(_classifier); //19427
+			setClassifier(_classifier); //19527
 			return true;
 		}
 		case UmlPackage::READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_ISDIRECT:
 		{
 			// BOOST CAST
 			bool _isDirect = newValue->get<bool>();
-			setIsDirect(_isDirect); //19428
+			setIsDirect(_isDirect); //19528
 			return true;
 		}
 		case UmlPackage::READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_OBJECT:
@@ -501,7 +501,7 @@ bool ReadIsClassifiedObjectActionImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::InputPin> _object = std::dynamic_pointer_cast<uml::InputPin>(_temp);
-			setObject(_object); //19429
+			setObject(_object); //19529
 			return true;
 		}
 		case UmlPackage::READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_RESULT:
@@ -509,7 +509,7 @@ bool ReadIsClassifiedObjectActionImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::OutputPin> _result = std::dynamic_pointer_cast<uml::OutputPin>(_temp);
-			setResult(_result); //19430
+			setResult(_result); //19530
 			return true;
 		}
 	}

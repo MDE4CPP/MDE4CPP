@@ -25,6 +25,7 @@
 #include "uml/impl/AddStructuralFeatureValueActionImpl.hpp"
 #include "uml/impl/AddVariableValueActionImpl.hpp"
 #include "uml/impl/AnyReceiveEventImpl.hpp"
+#include "uml/impl/ArgumentImpl.hpp"
 #include "uml/impl/ArtifactImpl.hpp"
 #include "uml/impl/AssociationImpl.hpp"
 #include "uml/impl/AssociationClassImpl.hpp"
@@ -275,6 +276,7 @@ UmlFactoryImpl::UmlFactoryImpl()
 	m_idMap.insert(std::make_pair("AddStructuralFeatureValueAction", UmlPackage::ADDSTRUCTURALFEATUREVALUEACTION_CLASS));
 	m_idMap.insert(std::make_pair("AddVariableValueAction", UmlPackage::ADDVARIABLEVALUEACTION_CLASS));
 	m_idMap.insert(std::make_pair("AnyReceiveEvent", UmlPackage::ANYRECEIVEEVENT_CLASS));
+	m_idMap.insert(std::make_pair("Argument", UmlPackage::ARGUMENT_CLASS));
 	m_idMap.insert(std::make_pair("Artifact", UmlPackage::ARTIFACT_CLASS));
 	m_idMap.insert(std::make_pair("Association", UmlPackage::ASSOCIATION_CLASS));
 	m_idMap.insert(std::make_pair("AssociationClass", UmlPackage::ASSOCIATIONCLASS_CLASS));
@@ -1030,6 +1032,11 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
 				}
 			}
+		}
+		case UmlPackage::ARGUMENT_CLASS:
+		{
+				return this->createArgument(metaElementID);
+			
 		}
 		case UmlPackage::ARTIFACT_CLASS:
 		{
@@ -8969,6 +8976,13 @@ std::shared_ptr<AnyReceiveEvent> UmlFactoryImpl::createAnyReceiveEvent_in_Owning
 	element->setThisAnyReceiveEventPtr(element);
 	return element;
 	
+}
+std::shared_ptr<Argument> UmlFactoryImpl::createArgument(const int metaElementID/*=-1*/) const
+{
+	std::shared_ptr<ArgumentImpl> element(new ArgumentImpl());
+	element->setMetaElementID(metaElementID);
+	element->setThisArgumentPtr(element);
+	return element;
 }
 std::shared_ptr<Artifact> UmlFactoryImpl::createArtifact(const int metaElementID/*=-1*/) const
 {

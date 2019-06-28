@@ -295,6 +295,7 @@ Any ExpansionRegionActivationImpl::eGet(int featureID, bool resolve, bool coreTy
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
 			return eAny(tempList); //4812
 		}
@@ -306,6 +307,7 @@ Any ExpansionRegionActivationImpl::eGet(int featureID, bool resolve, bool coreTy
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
 			return eAny(tempList); //4811
 		}
@@ -317,6 +319,7 @@ Any ExpansionRegionActivationImpl::eGet(int featureID, bool resolve, bool coreTy
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
 			return eAny(tempList); //4810
 		}

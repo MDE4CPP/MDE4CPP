@@ -18,6 +18,7 @@
 #include <iostream>
 #include <sstream>
 
+#include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/Union.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"

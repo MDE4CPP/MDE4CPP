@@ -945,8 +945,9 @@ Any ClassifierImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //3625
+			return eAny(tempList); //3725
 		}
 		case UmlPackage::CLASSIFIER_ATTRIBUTE_COLLABORATIONUSE:
 		{
@@ -956,8 +957,9 @@ Any ClassifierImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //3626
+			return eAny(tempList); //3726
 		}
 		case UmlPackage::CLASSIFIER_ATTRIBUTE_FEATURE:
 		{
@@ -967,8 +969,9 @@ Any ClassifierImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //3624
+			return eAny(tempList); //3724
 		}
 		case UmlPackage::CLASSIFIER_ATTRIBUTE_GENERAL:
 		{
@@ -978,8 +981,9 @@ Any ClassifierImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //3627
+			return eAny(tempList); //3727
 		}
 		case UmlPackage::CLASSIFIER_ATTRIBUTE_GENERALIZATION:
 		{
@@ -989,8 +993,9 @@ Any ClassifierImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //3628
+			return eAny(tempList); //3728
 		}
 		case UmlPackage::CLASSIFIER_ATTRIBUTE_INHERITEDMEMBER:
 		{
@@ -1000,13 +1005,14 @@ Any ClassifierImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //3630
+			return eAny(tempList); //3730
 		}
 		case UmlPackage::CLASSIFIER_ATTRIBUTE_ISABSTRACT:
-			return eAny(getIsAbstract()); //3631
+			return eAny(getIsAbstract()); //3731
 		case UmlPackage::CLASSIFIER_ATTRIBUTE_ISFINALSPECIALIZATION:
-			return eAny(getIsFinalSpecialization()); //3632
+			return eAny(getIsFinalSpecialization()); //3732
 		case UmlPackage::CLASSIFIER_ATTRIBUTE_OWNEDUSECASE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -1015,8 +1021,9 @@ Any ClassifierImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //3633
+			return eAny(tempList); //3733
 		}
 		case UmlPackage::CLASSIFIER_ATTRIBUTE_POWERTYPEEXTENT:
 		{
@@ -1026,8 +1033,9 @@ Any ClassifierImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //3629
+			return eAny(tempList); //3729
 		}
 		case UmlPackage::CLASSIFIER_ATTRIBUTE_REDEFINEDCLASSIFIER:
 		{
@@ -1037,11 +1045,12 @@ Any ClassifierImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //3635
+			return eAny(tempList); //3735
 		}
 		case UmlPackage::CLASSIFIER_ATTRIBUTE_REPRESENTATION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getRepresentation())); //3636
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getRepresentation())); //3736
 		case UmlPackage::CLASSIFIER_ATTRIBUTE_SUBSTITUTION:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -1050,8 +1059,9 @@ Any ClassifierImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //3637
+			return eAny(tempList); //3737
 		}
 		case UmlPackage::CLASSIFIER_ATTRIBUTE_USECASE:
 		{
@@ -1061,8 +1071,9 @@ Any ClassifierImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //3634
+			return eAny(tempList); //3734
 		}
 	}
 	Any result;
@@ -1089,33 +1100,33 @@ bool ClassifierImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::CLASSIFIER_ATTRIBUTE_ATTRIBUTE:
-			return getAttribute() != nullptr; //3625
+			return getAttribute() != nullptr; //3725
 		case UmlPackage::CLASSIFIER_ATTRIBUTE_COLLABORATIONUSE:
-			return getCollaborationUse() != nullptr; //3626
+			return getCollaborationUse() != nullptr; //3726
 		case UmlPackage::CLASSIFIER_ATTRIBUTE_FEATURE:
-			return getFeature() != nullptr; //3624
+			return getFeature() != nullptr; //3724
 		case UmlPackage::CLASSIFIER_ATTRIBUTE_GENERAL:
-			return getGeneral() != nullptr; //3627
+			return getGeneral() != nullptr; //3727
 		case UmlPackage::CLASSIFIER_ATTRIBUTE_GENERALIZATION:
-			return getGeneralization() != nullptr; //3628
+			return getGeneralization() != nullptr; //3728
 		case UmlPackage::CLASSIFIER_ATTRIBUTE_INHERITEDMEMBER:
-			return getInheritedMember() != nullptr; //3630
+			return getInheritedMember() != nullptr; //3730
 		case UmlPackage::CLASSIFIER_ATTRIBUTE_ISABSTRACT:
-			return getIsAbstract() != false; //3631
+			return getIsAbstract() != false; //3731
 		case UmlPackage::CLASSIFIER_ATTRIBUTE_ISFINALSPECIALIZATION:
-			return getIsFinalSpecialization() != false; //3632
+			return getIsFinalSpecialization() != false; //3732
 		case UmlPackage::CLASSIFIER_ATTRIBUTE_OWNEDUSECASE:
-			return getOwnedUseCase() != nullptr; //3633
+			return getOwnedUseCase() != nullptr; //3733
 		case UmlPackage::CLASSIFIER_ATTRIBUTE_POWERTYPEEXTENT:
-			return getPowertypeExtent() != nullptr; //3629
+			return getPowertypeExtent() != nullptr; //3729
 		case UmlPackage::CLASSIFIER_ATTRIBUTE_REDEFINEDCLASSIFIER:
-			return getRedefinedClassifier() != nullptr; //3635
+			return getRedefinedClassifier() != nullptr; //3735
 		case UmlPackage::CLASSIFIER_ATTRIBUTE_REPRESENTATION:
-			return getRepresentation() != nullptr; //3636
+			return getRepresentation() != nullptr; //3736
 		case UmlPackage::CLASSIFIER_ATTRIBUTE_SUBSTITUTION:
-			return getSubstitution() != nullptr; //3637
+			return getSubstitution() != nullptr; //3737
 		case UmlPackage::CLASSIFIER_ATTRIBUTE_USECASE:
-			return getUseCase() != nullptr; //3634
+			return getUseCase() != nullptr; //3734
 	}
 	bool result = false;
 	result = NamespaceImpl::internalEIsSet(featureID);
@@ -1252,14 +1263,14 @@ bool ClassifierImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			bool _isAbstract = newValue->get<bool>();
-			setIsAbstract(_isAbstract); //3631
+			setIsAbstract(_isAbstract); //3731
 			return true;
 		}
 		case UmlPackage::CLASSIFIER_ATTRIBUTE_ISFINALSPECIALIZATION:
 		{
 			// BOOST CAST
 			bool _isFinalSpecialization = newValue->get<bool>();
-			setIsFinalSpecialization(_isFinalSpecialization); //3632
+			setIsFinalSpecialization(_isFinalSpecialization); //3732
 			return true;
 		}
 		case UmlPackage::CLASSIFIER_ATTRIBUTE_OWNEDUSECASE:
@@ -1375,7 +1386,7 @@ bool ClassifierImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::CollaborationUse> _representation = std::dynamic_pointer_cast<uml::CollaborationUse>(_temp);
-			setRepresentation(_representation); //3636
+			setRepresentation(_representation); //3736
 			return true;
 		}
 		case UmlPackage::CLASSIFIER_ATTRIBUTE_SUBSTITUTION:

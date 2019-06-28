@@ -559,8 +559,9 @@ Any ProfileImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //18328
+			return eAny(tempList); //18428
 		}
 		case UmlPackage::PROFILE_ATTRIBUTE_METAMODELREFERENCE:
 		{
@@ -570,8 +571,9 @@ Any ProfileImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //18329
+			return eAny(tempList); //18429
 		}
 	}
 	return PackageImpl::eGet(featureID, resolve, coreType);
@@ -581,9 +583,9 @@ bool ProfileImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::PROFILE_ATTRIBUTE_METACLASSREFERENCE:
-			return getMetaclassReference() != nullptr; //18328
+			return getMetaclassReference() != nullptr; //18428
 		case UmlPackage::PROFILE_ATTRIBUTE_METAMODELREFERENCE:
-			return getMetamodelReference() != nullptr; //18329
+			return getMetamodelReference() != nullptr; //18429
 	}
 	return PackageImpl::internalEIsSet(featureID);
 }

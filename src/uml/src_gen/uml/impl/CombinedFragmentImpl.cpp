@@ -385,11 +385,12 @@ Any CombinedFragmentImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //4413
+			return eAny(tempList); //4513
 		}
 		case UmlPackage::COMBINEDFRAGMENT_ATTRIBUTE_INTERACTIONOPERATOR:
-			return eAny(getInteractionOperator()); //4414
+			return eAny(getInteractionOperator()); //4514
 		case UmlPackage::COMBINEDFRAGMENT_ATTRIBUTE_OPERAND:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -398,8 +399,9 @@ Any CombinedFragmentImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //4415
+			return eAny(tempList); //4515
 		}
 	}
 	return InteractionFragmentImpl::eGet(featureID, resolve, coreType);
@@ -409,11 +411,11 @@ bool CombinedFragmentImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::COMBINEDFRAGMENT_ATTRIBUTE_CFRAGMENTGATE:
-			return getCfragmentGate() != nullptr; //4413
+			return getCfragmentGate() != nullptr; //4513
 		case UmlPackage::COMBINEDFRAGMENT_ATTRIBUTE_INTERACTIONOPERATOR:
-			return m_interactionOperator != InteractionOperatorKind::SEQ;; //4414
+			return m_interactionOperator != InteractionOperatorKind::SEQ;; //4514
 		case UmlPackage::COMBINEDFRAGMENT_ATTRIBUTE_OPERAND:
-			return getOperand() != nullptr; //4415
+			return getOperand() != nullptr; //4515
 	}
 	return InteractionFragmentImpl::internalEIsSet(featureID);
 }
@@ -461,7 +463,7 @@ bool CombinedFragmentImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			InteractionOperatorKind _interactionOperator = newValue->get<InteractionOperatorKind>();
-			setInteractionOperator(_interactionOperator); //4414
+			setInteractionOperator(_interactionOperator); //4514
 			return true;
 		}
 		case UmlPackage::COMBINEDFRAGMENT_ATTRIBUTE_OPERAND:

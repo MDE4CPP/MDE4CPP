@@ -540,8 +540,9 @@ Any SequenceNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //21444
+			return eAny(tempList); //21544
 		}
 	}
 	return StructuredActivityNodeImpl::eGet(featureID, resolve, coreType);
@@ -551,7 +552,7 @@ bool SequenceNodeImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::SEQUENCENODE_ATTRIBUTE_EXECUTABLENODE:
-			return getExecutableNode() != nullptr; //21444
+			return getExecutableNode() != nullptr; //21544
 	}
 	return StructuredActivityNodeImpl::internalEIsSet(featureID);
 }

@@ -435,7 +435,7 @@ Any ReadLinkActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::READLINKACTION_ATTRIBUTE_RESULT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getResult())); //19529
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getResult())); //19629
 	}
 	return LinkActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -444,7 +444,7 @@ bool ReadLinkActionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::READLINKACTION_ATTRIBUTE_RESULT:
-			return getResult() != nullptr; //19529
+			return getResult() != nullptr; //19629
 	}
 	return LinkActionImpl::internalEIsSet(featureID);
 }
@@ -457,7 +457,7 @@ bool ReadLinkActionImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::OutputPin> _result = std::dynamic_pointer_cast<uml::OutputPin>(_temp);
-			setResult(_result); //19529
+			setResult(_result); //19629
 			return true;
 		}
 	}

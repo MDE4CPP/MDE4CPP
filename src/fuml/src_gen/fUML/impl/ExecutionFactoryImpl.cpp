@@ -437,6 +437,7 @@ Any ExecutionFactoryImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
 			return eAny(tempList); //413
 		}
@@ -450,6 +451,7 @@ Any ExecutionFactoryImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
 			return eAny(tempList); //412
 		}
@@ -461,6 +463,7 @@ Any ExecutionFactoryImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
 			return eAny(tempList); //411
 		}

@@ -529,8 +529,9 @@ Any EnumerationImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //8440
+			return eAny(tempList); //8540
 		}
 	}
 	return DataTypeImpl::eGet(featureID, resolve, coreType);
@@ -540,7 +541,7 @@ bool EnumerationImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::ENUMERATION_ATTRIBUTE_OWNEDLITERAL:
-			return getOwnedLiteral() != nullptr; //8440
+			return getOwnedLiteral() != nullptr; //8540
 	}
 	return DataTypeImpl::internalEIsSet(featureID);
 }

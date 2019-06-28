@@ -555,8 +555,9 @@ Any DataTypeImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //6538
+			return eAny(tempList); //6638
 		}
 		case UmlPackage::DATATYPE_ATTRIBUTE_OWNEDOPERATION:
 		{
@@ -566,8 +567,9 @@ Any DataTypeImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //6539
+			return eAny(tempList); //6639
 		}
 	}
 	return ClassifierImpl::eGet(featureID, resolve, coreType);
@@ -577,9 +579,9 @@ bool DataTypeImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::DATATYPE_ATTRIBUTE_OWNEDATTRIBUTE:
-			return getOwnedAttribute() != nullptr; //6538
+			return getOwnedAttribute() != nullptr; //6638
 		case UmlPackage::DATATYPE_ATTRIBUTE_OWNEDOPERATION:
-			return getOwnedOperation() != nullptr; //6539
+			return getOwnedOperation() != nullptr; //6639
 	}
 	return ClassifierImpl::internalEIsSet(featureID);
 }

@@ -373,7 +373,7 @@ Any VariableActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::VARIABLEACTION_ATTRIBUTE_VARIABLE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getVariable())); //25327
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getVariable())); //25427
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -382,7 +382,7 @@ bool VariableActionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::VARIABLEACTION_ATTRIBUTE_VARIABLE:
-			return getVariable() != nullptr; //25327
+			return getVariable() != nullptr; //25427
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }
@@ -395,7 +395,7 @@ bool VariableActionImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Variable> _variable = std::dynamic_pointer_cast<uml::Variable>(_temp);
-			setVariable(_variable); //25327
+			setVariable(_variable); //25427
 			return true;
 		}
 	}

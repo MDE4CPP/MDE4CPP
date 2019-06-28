@@ -711,11 +711,12 @@ Any StructuredActivityNodeImpl::eGet(int featureID, bool resolve, bool coreType)
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //22738
+			return eAny(tempList); //22838
 		}
 		case UmlPackage::STRUCTUREDACTIVITYNODE_ATTRIBUTE_MUSTISOLATE:
-			return eAny(getMustIsolate()); //22739
+			return eAny(getMustIsolate()); //22839
 		case UmlPackage::STRUCTUREDACTIVITYNODE_ATTRIBUTE_NODE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -724,8 +725,9 @@ Any StructuredActivityNodeImpl::eGet(int featureID, bool resolve, bool coreType)
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //22743
+			return eAny(tempList); //22843
 		}
 		case UmlPackage::STRUCTUREDACTIVITYNODE_ATTRIBUTE_STRUCTUREDNODEINPUT:
 		{
@@ -735,8 +737,9 @@ Any StructuredActivityNodeImpl::eGet(int featureID, bool resolve, bool coreType)
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //22740
+			return eAny(tempList); //22840
 		}
 		case UmlPackage::STRUCTUREDACTIVITYNODE_ATTRIBUTE_STRUCTUREDNODEOUTPUT:
 		{
@@ -746,8 +749,9 @@ Any StructuredActivityNodeImpl::eGet(int featureID, bool resolve, bool coreType)
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //22741
+			return eAny(tempList); //22841
 		}
 		case UmlPackage::STRUCTUREDACTIVITYNODE_ATTRIBUTE_VARIABLE:
 		{
@@ -757,8 +761,9 @@ Any StructuredActivityNodeImpl::eGet(int featureID, bool resolve, bool coreType)
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //22742
+			return eAny(tempList); //22842
 		}
 	}
 	Any result;
@@ -780,17 +785,17 @@ bool StructuredActivityNodeImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::STRUCTUREDACTIVITYNODE_ATTRIBUTE_EDGE:
-			return getEdge() != nullptr; //22738
+			return getEdge() != nullptr; //22838
 		case UmlPackage::STRUCTUREDACTIVITYNODE_ATTRIBUTE_MUSTISOLATE:
-			return getMustIsolate() != false; //22739
+			return getMustIsolate() != false; //22839
 		case UmlPackage::STRUCTUREDACTIVITYNODE_ATTRIBUTE_NODE:
-			return getNode() != nullptr; //22743
+			return getNode() != nullptr; //22843
 		case UmlPackage::STRUCTUREDACTIVITYNODE_ATTRIBUTE_STRUCTUREDNODEINPUT:
-			return getStructuredNodeInput() != nullptr; //22740
+			return getStructuredNodeInput() != nullptr; //22840
 		case UmlPackage::STRUCTUREDACTIVITYNODE_ATTRIBUTE_STRUCTUREDNODEOUTPUT:
-			return getStructuredNodeOutput() != nullptr; //22741
+			return getStructuredNodeOutput() != nullptr; //22841
 		case UmlPackage::STRUCTUREDACTIVITYNODE_ATTRIBUTE_VARIABLE:
-			return getVariable() != nullptr; //22742
+			return getVariable() != nullptr; //22842
 	}
 	bool result = false;
 	result = ActionImpl::internalEIsSet(featureID);
@@ -850,7 +855,7 @@ bool StructuredActivityNodeImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			bool _mustIsolate = newValue->get<bool>();
-			setMustIsolate(_mustIsolate); //22739
+			setMustIsolate(_mustIsolate); //22839
 			return true;
 		}
 		case UmlPackage::STRUCTUREDACTIVITYNODE_ATTRIBUTE_NODE:

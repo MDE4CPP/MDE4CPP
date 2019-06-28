@@ -293,7 +293,7 @@ Any ExceptionHandlerImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::EXCEPTIONHANDLER_ATTRIBUTE_EXCEPTIONINPUT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getExceptionInput())); //873
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getExceptionInput())); //883
 		case UmlPackage::EXCEPTIONHANDLER_ATTRIBUTE_EXCEPTIONTYPE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -302,13 +302,14 @@ Any ExceptionHandlerImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //874
+			return eAny(tempList); //884
 		}
 		case UmlPackage::EXCEPTIONHANDLER_ATTRIBUTE_HANDLERBODY:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getHandlerBody())); //875
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getHandlerBody())); //885
 		case UmlPackage::EXCEPTIONHANDLER_ATTRIBUTE_PROTECTEDNODE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getProtectedNode().lock())); //876
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getProtectedNode().lock())); //886
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -317,13 +318,13 @@ bool ExceptionHandlerImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::EXCEPTIONHANDLER_ATTRIBUTE_EXCEPTIONINPUT:
-			return getExceptionInput() != nullptr; //873
+			return getExceptionInput() != nullptr; //883
 		case UmlPackage::EXCEPTIONHANDLER_ATTRIBUTE_EXCEPTIONTYPE:
-			return getExceptionType() != nullptr; //874
+			return getExceptionType() != nullptr; //884
 		case UmlPackage::EXCEPTIONHANDLER_ATTRIBUTE_HANDLERBODY:
-			return getHandlerBody() != nullptr; //875
+			return getHandlerBody() != nullptr; //885
 		case UmlPackage::EXCEPTIONHANDLER_ATTRIBUTE_PROTECTEDNODE:
-			return getProtectedNode().lock() != nullptr; //876
+			return getProtectedNode().lock() != nullptr; //886
 	}
 	return ElementImpl::internalEIsSet(featureID);
 }
@@ -336,7 +337,7 @@ bool ExceptionHandlerImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ObjectNode> _exceptionInput = std::dynamic_pointer_cast<uml::ObjectNode>(_temp);
-			setExceptionInput(_exceptionInput); //873
+			setExceptionInput(_exceptionInput); //883
 			return true;
 		}
 		case UmlPackage::EXCEPTIONHANDLER_ATTRIBUTE_EXCEPTIONTYPE:
@@ -380,7 +381,7 @@ bool ExceptionHandlerImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ExecutableNode> _handlerBody = std::dynamic_pointer_cast<uml::ExecutableNode>(_temp);
-			setHandlerBody(_handlerBody); //875
+			setHandlerBody(_handlerBody); //885
 			return true;
 		}
 		case UmlPackage::EXCEPTIONHANDLER_ATTRIBUTE_PROTECTEDNODE:
@@ -388,7 +389,7 @@ bool ExceptionHandlerImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ExecutableNode> _protectedNode = std::dynamic_pointer_cast<uml::ExecutableNode>(_temp);
-			setProtectedNode(_protectedNode); //876
+			setProtectedNode(_protectedNode); //886
 			return true;
 		}
 	}

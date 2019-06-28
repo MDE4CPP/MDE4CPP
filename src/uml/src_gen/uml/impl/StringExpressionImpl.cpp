@@ -399,7 +399,7 @@ Any StringExpressionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::STRINGEXPRESSION_ATTRIBUTE_OWNINGEXPRESSION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getOwningExpression().lock())); //22418
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getOwningExpression().lock())); //22518
 		case UmlPackage::STRINGEXPRESSION_ATTRIBUTE_SUBEXPRESSION:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -408,8 +408,9 @@ Any StringExpressionImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //22419
+			return eAny(tempList); //22519
 		}
 	}
 	Any result;
@@ -426,9 +427,9 @@ bool StringExpressionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::STRINGEXPRESSION_ATTRIBUTE_OWNINGEXPRESSION:
-			return getOwningExpression().lock() != nullptr; //22418
+			return getOwningExpression().lock() != nullptr; //22518
 		case UmlPackage::STRINGEXPRESSION_ATTRIBUTE_SUBEXPRESSION:
-			return getSubExpression() != nullptr; //22419
+			return getSubExpression() != nullptr; //22519
 	}
 	bool result = false;
 	result = ExpressionImpl::internalEIsSet(featureID);
@@ -448,7 +449,7 @@ bool StringExpressionImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::StringExpression> _owningExpression = std::dynamic_pointer_cast<uml::StringExpression>(_temp);
-			setOwningExpression(_owningExpression); //22418
+			setOwningExpression(_owningExpression); //22518
 			return true;
 		}
 		case UmlPackage::STRINGEXPRESSION_ATTRIBUTE_SUBEXPRESSION:

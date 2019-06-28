@@ -368,6 +368,7 @@ Any ActivityGroupImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
 			return eAny(tempList); //119
 		}
@@ -379,6 +380,7 @@ Any ActivityGroupImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
 			return eAny(tempList); //1110
 		}
@@ -392,6 +394,7 @@ Any ActivityGroupImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
 			return eAny(tempList); //1112
 		}

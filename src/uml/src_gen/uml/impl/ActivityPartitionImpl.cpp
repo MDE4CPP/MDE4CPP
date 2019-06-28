@@ -480,6 +480,7 @@ Any ActivityPartitionImpl::eGet(int featureID, bool resolve, bool coreType) cons
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
 			return eAny(tempList); //1420
 		}
@@ -495,6 +496,7 @@ Any ActivityPartitionImpl::eGet(int featureID, bool resolve, bool coreType) cons
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
 			return eAny(tempList); //1416
 		}
@@ -508,6 +510,7 @@ Any ActivityPartitionImpl::eGet(int featureID, bool resolve, bool coreType) cons
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
 			return eAny(tempList); //1418
 		}

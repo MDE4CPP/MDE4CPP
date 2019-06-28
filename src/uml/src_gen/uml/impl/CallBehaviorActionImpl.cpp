@@ -402,7 +402,7 @@ Any CallBehaviorActionImpl::eGet(int featureID, bool resolve, bool coreType) con
 	switch(featureID)
 	{
 		case UmlPackage::CALLBEHAVIORACTION_ATTRIBUTE_BEHAVIOR:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getBehavior())); //2931
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getBehavior())); //3031
 	}
 	return CallActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -411,7 +411,7 @@ bool CallBehaviorActionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::CALLBEHAVIORACTION_ATTRIBUTE_BEHAVIOR:
-			return getBehavior() != nullptr; //2931
+			return getBehavior() != nullptr; //3031
 	}
 	return CallActionImpl::internalEIsSet(featureID);
 }
@@ -424,7 +424,7 @@ bool CallBehaviorActionImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Behavior> _behavior = std::dynamic_pointer_cast<uml::Behavior>(_temp);
-			setBehavior(_behavior); //2931
+			setBehavior(_behavior); //3031
 			return true;
 		}
 	}

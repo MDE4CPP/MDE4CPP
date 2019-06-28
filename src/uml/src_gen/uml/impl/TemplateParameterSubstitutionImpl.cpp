@@ -18,6 +18,7 @@
 #include <iostream>
 #include <sstream>
 
+#include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/Union.hpp"
 #include "abstractDataTypes/Any.hpp"
@@ -267,13 +268,13 @@ Any TemplateParameterSubstitutionImpl::eGet(int featureID, bool resolve, bool co
 	switch(featureID)
 	{
 		case UmlPackage::TEMPLATEPARAMETERSUBSTITUTION_ATTRIBUTE_ACTUAL:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getActual())); //2323
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getActual())); //2333
 		case UmlPackage::TEMPLATEPARAMETERSUBSTITUTION_ATTRIBUTE_FORMAL:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getFormal())); //2324
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getFormal())); //2334
 		case UmlPackage::TEMPLATEPARAMETERSUBSTITUTION_ATTRIBUTE_OWNEDACTUAL:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getOwnedActual())); //2325
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getOwnedActual())); //2335
 		case UmlPackage::TEMPLATEPARAMETERSUBSTITUTION_ATTRIBUTE_TEMPLATEBINDING:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getTemplateBinding().lock())); //2326
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getTemplateBinding().lock())); //2336
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -282,13 +283,13 @@ bool TemplateParameterSubstitutionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::TEMPLATEPARAMETERSUBSTITUTION_ATTRIBUTE_ACTUAL:
-			return getActual() != nullptr; //2323
+			return getActual() != nullptr; //2333
 		case UmlPackage::TEMPLATEPARAMETERSUBSTITUTION_ATTRIBUTE_FORMAL:
-			return getFormal() != nullptr; //2324
+			return getFormal() != nullptr; //2334
 		case UmlPackage::TEMPLATEPARAMETERSUBSTITUTION_ATTRIBUTE_OWNEDACTUAL:
-			return getOwnedActual() != nullptr; //2325
+			return getOwnedActual() != nullptr; //2335
 		case UmlPackage::TEMPLATEPARAMETERSUBSTITUTION_ATTRIBUTE_TEMPLATEBINDING:
-			return getTemplateBinding().lock() != nullptr; //2326
+			return getTemplateBinding().lock() != nullptr; //2336
 	}
 	return ElementImpl::internalEIsSet(featureID);
 }
@@ -301,7 +302,7 @@ bool TemplateParameterSubstitutionImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ParameterableElement> _actual = std::dynamic_pointer_cast<uml::ParameterableElement>(_temp);
-			setActual(_actual); //2323
+			setActual(_actual); //2333
 			return true;
 		}
 		case UmlPackage::TEMPLATEPARAMETERSUBSTITUTION_ATTRIBUTE_FORMAL:
@@ -309,7 +310,7 @@ bool TemplateParameterSubstitutionImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::TemplateParameter> _formal = std::dynamic_pointer_cast<uml::TemplateParameter>(_temp);
-			setFormal(_formal); //2324
+			setFormal(_formal); //2334
 			return true;
 		}
 		case UmlPackage::TEMPLATEPARAMETERSUBSTITUTION_ATTRIBUTE_OWNEDACTUAL:
@@ -317,7 +318,7 @@ bool TemplateParameterSubstitutionImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ParameterableElement> _ownedActual = std::dynamic_pointer_cast<uml::ParameterableElement>(_temp);
-			setOwnedActual(_ownedActual); //2325
+			setOwnedActual(_ownedActual); //2335
 			return true;
 		}
 		case UmlPackage::TEMPLATEPARAMETERSUBSTITUTION_ATTRIBUTE_TEMPLATEBINDING:
@@ -325,7 +326,7 @@ bool TemplateParameterSubstitutionImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::TemplateBinding> _templateBinding = std::dynamic_pointer_cast<uml::TemplateBinding>(_temp);
-			setTemplateBinding(_templateBinding); //2326
+			setTemplateBinding(_templateBinding); //2336
 			return true;
 		}
 	}

@@ -119,6 +119,10 @@ namespace ecore
 			
 			/*!
 			 */ 
+			virtual void setDefaultValue (Any _defaultValue)= 0; 
+			
+			/*!
+			 */ 
 			virtual void *  getInstanceClass() const = 0;
 			
 			/*!

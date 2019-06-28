@@ -810,8 +810,9 @@ Any StateMachineImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //22261
+			return eAny(tempList); //22361
 		}
 		case UmlPackage::STATEMACHINE_ATTRIBUTE_EXTENDEDSTATEMACHINE:
 		{
@@ -821,8 +822,9 @@ Any StateMachineImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //22264
+			return eAny(tempList); //22364
 		}
 		case UmlPackage::STATEMACHINE_ATTRIBUTE_REGION:
 		{
@@ -832,8 +834,9 @@ Any StateMachineImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //22263
+			return eAny(tempList); //22363
 		}
 		case UmlPackage::STATEMACHINE_ATTRIBUTE_SUBMACHINESTATE:
 		{
@@ -843,8 +846,9 @@ Any StateMachineImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //22262
+			return eAny(tempList); //22362
 		}
 	}
 	return BehaviorImpl::eGet(featureID, resolve, coreType);
@@ -854,13 +858,13 @@ bool StateMachineImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::STATEMACHINE_ATTRIBUTE_CONNECTIONPOINT:
-			return getConnectionPoint() != nullptr; //22261
+			return getConnectionPoint() != nullptr; //22361
 		case UmlPackage::STATEMACHINE_ATTRIBUTE_EXTENDEDSTATEMACHINE:
-			return getExtendedStateMachine() != nullptr; //22264
+			return getExtendedStateMachine() != nullptr; //22364
 		case UmlPackage::STATEMACHINE_ATTRIBUTE_REGION:
-			return getRegion() != nullptr; //22263
+			return getRegion() != nullptr; //22363
 		case UmlPackage::STATEMACHINE_ATTRIBUTE_SUBMACHINESTATE:
-			return getSubmachineState() != nullptr; //22262
+			return getSubmachineState() != nullptr; //22362
 	}
 	return BehaviorImpl::internalEIsSet(featureID);
 }

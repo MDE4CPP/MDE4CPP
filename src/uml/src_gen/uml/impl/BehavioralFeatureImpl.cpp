@@ -444,9 +444,9 @@ Any BehavioralFeatureImpl::eGet(int featureID, bool resolve, bool coreType) cons
 	switch(featureID)
 	{
 		case UmlPackage::BEHAVIORALFEATURE_ATTRIBUTE_CONCURRENCY:
-			return eAny(getConcurrency()); //2520
+			return eAny(getConcurrency()); //2620
 		case UmlPackage::BEHAVIORALFEATURE_ATTRIBUTE_ISABSTRACT:
-			return eAny(getIsAbstract()); //2521
+			return eAny(getIsAbstract()); //2621
 		case UmlPackage::BEHAVIORALFEATURE_ATTRIBUTE_METHOD:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -455,8 +455,9 @@ Any BehavioralFeatureImpl::eGet(int featureID, bool resolve, bool coreType) cons
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //2522
+			return eAny(tempList); //2622
 		}
 		case UmlPackage::BEHAVIORALFEATURE_ATTRIBUTE_OWNEDPARAMETER:
 		{
@@ -466,8 +467,9 @@ Any BehavioralFeatureImpl::eGet(int featureID, bool resolve, bool coreType) cons
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //2523
+			return eAny(tempList); //2623
 		}
 		case UmlPackage::BEHAVIORALFEATURE_ATTRIBUTE_OWNEDPARAMETERSET:
 		{
@@ -477,8 +479,9 @@ Any BehavioralFeatureImpl::eGet(int featureID, bool resolve, bool coreType) cons
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //2524
+			return eAny(tempList); //2624
 		}
 		case UmlPackage::BEHAVIORALFEATURE_ATTRIBUTE_RAISEDEXCEPTION:
 		{
@@ -488,8 +491,9 @@ Any BehavioralFeatureImpl::eGet(int featureID, bool resolve, bool coreType) cons
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //2525
+			return eAny(tempList); //2625
 		}
 	}
 	Any result;
@@ -506,17 +510,17 @@ bool BehavioralFeatureImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::BEHAVIORALFEATURE_ATTRIBUTE_CONCURRENCY:
-			return m_concurrency != CallConcurrencyKind::SEQUENTIAL;; //2520
+			return m_concurrency != CallConcurrencyKind::SEQUENTIAL;; //2620
 		case UmlPackage::BEHAVIORALFEATURE_ATTRIBUTE_ISABSTRACT:
-			return getIsAbstract() != false; //2521
+			return getIsAbstract() != false; //2621
 		case UmlPackage::BEHAVIORALFEATURE_ATTRIBUTE_METHOD:
-			return getMethod() != nullptr; //2522
+			return getMethod() != nullptr; //2622
 		case UmlPackage::BEHAVIORALFEATURE_ATTRIBUTE_OWNEDPARAMETER:
-			return getOwnedParameter() != nullptr; //2523
+			return getOwnedParameter() != nullptr; //2623
 		case UmlPackage::BEHAVIORALFEATURE_ATTRIBUTE_OWNEDPARAMETERSET:
-			return getOwnedParameterSet() != nullptr; //2524
+			return getOwnedParameterSet() != nullptr; //2624
 		case UmlPackage::BEHAVIORALFEATURE_ATTRIBUTE_RAISEDEXCEPTION:
-			return getRaisedException() != nullptr; //2525
+			return getRaisedException() != nullptr; //2625
 	}
 	bool result = false;
 	result = FeatureImpl::internalEIsSet(featureID);
@@ -535,14 +539,14 @@ bool BehavioralFeatureImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			CallConcurrencyKind _concurrency = newValue->get<CallConcurrencyKind>();
-			setConcurrency(_concurrency); //2520
+			setConcurrency(_concurrency); //2620
 			return true;
 		}
 		case UmlPackage::BEHAVIORALFEATURE_ATTRIBUTE_ISABSTRACT:
 		{
 			// BOOST CAST
 			bool _isAbstract = newValue->get<bool>();
-			setIsAbstract(_isAbstract); //2521
+			setIsAbstract(_isAbstract); //2621
 			return true;
 		}
 		case UmlPackage::BEHAVIORALFEATURE_ATTRIBUTE_METHOD:

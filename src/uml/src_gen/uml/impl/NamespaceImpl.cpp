@@ -496,8 +496,9 @@ Any NamespaceImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //15610
+			return eAny(tempList); //15710
 		}
 		case UmlPackage::NAMESPACE_ATTRIBUTE_IMPORTEDMEMBER:
 		{
@@ -507,8 +508,9 @@ Any NamespaceImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //15613
+			return eAny(tempList); //15713
 		}
 		case UmlPackage::NAMESPACE_ATTRIBUTE_MEMBER:
 		{
@@ -518,8 +520,9 @@ Any NamespaceImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //15614
+			return eAny(tempList); //15714
 		}
 		case UmlPackage::NAMESPACE_ATTRIBUTE_OWNEDMEMBER:
 		{
@@ -529,8 +532,9 @@ Any NamespaceImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //15612
+			return eAny(tempList); //15712
 		}
 		case UmlPackage::NAMESPACE_ATTRIBUTE_OWNEDRULE:
 		{
@@ -540,8 +544,9 @@ Any NamespaceImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //1569
+			return eAny(tempList); //1579
 		}
 		case UmlPackage::NAMESPACE_ATTRIBUTE_PACKAGEIMPORT:
 		{
@@ -551,8 +556,9 @@ Any NamespaceImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //15611
+			return eAny(tempList); //15711
 		}
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
@@ -562,17 +568,17 @@ bool NamespaceImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::NAMESPACE_ATTRIBUTE_ELEMENTIMPORT:
-			return getElementImport() != nullptr; //15610
+			return getElementImport() != nullptr; //15710
 		case UmlPackage::NAMESPACE_ATTRIBUTE_IMPORTEDMEMBER:
-			return getImportedMember() != nullptr; //15613
+			return getImportedMember() != nullptr; //15713
 		case UmlPackage::NAMESPACE_ATTRIBUTE_MEMBER:
-			return getMember() != nullptr; //15614
+			return getMember() != nullptr; //15714
 		case UmlPackage::NAMESPACE_ATTRIBUTE_OWNEDMEMBER:
-			return getOwnedMember() != nullptr; //15612
+			return getOwnedMember() != nullptr; //15712
 		case UmlPackage::NAMESPACE_ATTRIBUTE_OWNEDRULE:
-			return getOwnedRule() != nullptr; //1569
+			return getOwnedRule() != nullptr; //1579
 		case UmlPackage::NAMESPACE_ATTRIBUTE_PACKAGEIMPORT:
-			return getPackageImport() != nullptr; //15611
+			return getPackageImport() != nullptr; //15711
 	}
 	return NamedElementImpl::internalEIsSet(featureID);
 }

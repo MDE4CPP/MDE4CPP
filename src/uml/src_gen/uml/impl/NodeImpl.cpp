@@ -642,8 +642,9 @@ Any NodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //15754
+			return eAny(tempList); //15854
 		}
 	}
 	Any result;
@@ -660,7 +661,7 @@ bool NodeImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::NODE_ATTRIBUTE_NESTEDNODE:
-			return getNestedNode() != nullptr; //15754
+			return getNestedNode() != nullptr; //15854
 	}
 	bool result = false;
 	result = ClassImpl::internalEIsSet(featureID);

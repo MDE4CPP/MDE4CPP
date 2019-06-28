@@ -18,6 +18,7 @@
 #include <iostream>
 #include <sstream>
 
+#include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
@@ -227,8 +228,9 @@ Any DirectedRelationshipImpl::eGet(int featureID, bool resolve, bool coreType) c
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //764
+			return eAny(tempList); //774
 		}
 		case UmlPackage::DIRECTEDRELATIONSHIP_ATTRIBUTE_TARGET:
 		{
@@ -238,8 +240,9 @@ Any DirectedRelationshipImpl::eGet(int featureID, bool resolve, bool coreType) c
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //765
+			return eAny(tempList); //775
 		}
 	}
 	return RelationshipImpl::eGet(featureID, resolve, coreType);
@@ -249,9 +252,9 @@ bool DirectedRelationshipImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::DIRECTEDRELATIONSHIP_ATTRIBUTE_SOURCE:
-			return getSource() != nullptr; //764
+			return getSource() != nullptr; //774
 		case UmlPackage::DIRECTEDRELATIONSHIP_ATTRIBUTE_TARGET:
-			return getTarget() != nullptr; //765
+			return getTarget() != nullptr; //775
 	}
 	return RelationshipImpl::internalEIsSet(featureID);
 }

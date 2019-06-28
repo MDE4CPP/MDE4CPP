@@ -416,11 +416,12 @@ Any InvocationActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //13027
+			return eAny(tempList); //13127
 		}
 		case UmlPackage::INVOCATIONACTION_ATTRIBUTE_ONPORT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getOnPort())); //13028
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getOnPort())); //13128
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -429,9 +430,9 @@ bool InvocationActionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::INVOCATIONACTION_ATTRIBUTE_ARGUMENT:
-			return getArgument() != nullptr; //13027
+			return getArgument() != nullptr; //13127
 		case UmlPackage::INVOCATIONACTION_ATTRIBUTE_ONPORT:
-			return getOnPort() != nullptr; //13028
+			return getOnPort() != nullptr; //13128
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }
@@ -480,7 +481,7 @@ bool InvocationActionImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Port> _onPort = std::dynamic_pointer_cast<uml::Port>(_temp);
-			setOnPort(_onPort); //13028
+			setOnPort(_onPort); //13128
 			return true;
 		}
 	}

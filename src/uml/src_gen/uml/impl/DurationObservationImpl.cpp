@@ -297,11 +297,12 @@ Any DurationObservationImpl::eGet(int featureID, bool resolve, bool coreType) co
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //8012
+			return eAny(tempList); //8112
 		}
 		case UmlPackage::DURATIONOBSERVATION_ATTRIBUTE_FIRSTEVENT:
-			return eAny(getFirstEvent()); //8013
+			return eAny(getFirstEvent()); //8113
 	}
 	return ObservationImpl::eGet(featureID, resolve, coreType);
 }
@@ -310,9 +311,9 @@ bool DurationObservationImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::DURATIONOBSERVATION_ATTRIBUTE_EVENT:
-			return getEvent() != nullptr; //8012
+			return getEvent() != nullptr; //8112
 		case UmlPackage::DURATIONOBSERVATION_ATTRIBUTE_FIRSTEVENT:
-			return !getFirstEvent()->empty(); //8013
+			return !getFirstEvent()->empty(); //8113
 	}
 	return ObservationImpl::internalEIsSet(featureID);
 }
