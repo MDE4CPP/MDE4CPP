@@ -27,6 +27,10 @@ SET( SOURCE_FILES
 	helper/TestSuiteCountHelper.cpp
 	helper/TestSuiteMemoryHelper.cpp
 	helper/TestSuiteTimeHelper.cpp
+	tests_for_uml/ClassImplTest.cpp
+	tests_for_uml/ClassifierImplTest.cpp
+	tests_for_uml/ElementImpl.cpp
+	tests_for_uml/NamedElementImplTest.cpp
  )
 
 INCLUDE_DIRECTORIES( 

@@ -2,14 +2,24 @@
 <uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_ekhZQGLnEemtFvvd_2Pr2w" name="umlTests">
   <packagedElement xmi:type="uml:Package" xmi:id="_eIorcJmCEemCfIXRbMVoGQ" name="tests_for_uml">
     <packagedElement xmi:type="uml:Class" xmi:id="_xmvp8JmCEemCfIXRbMVoGQ" name="ClassifierImplTest" visibility="public">
+      <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_wSrgUJpOEemCfIXRbMVoGQ" name="getAllAttributesTestFB"/>
+      <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_4PHycJpOEemCfIXRbMVoGQ" name="getGeneralsTestFB"/>
+      <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_6ilp4JpOEemCfIXRbMVoGQ" name="parentsTestFB"/>
       <ownedOperation xmi:id="_NIwYAJmEEemCfIXRbMVoGQ" name="getAllAttributesTest"/>
-      <ownedOperation xmi:id="_d0Z18JmEEemCfIXRbMVoGQ" name="GetGeneralsTest"/>
+      <ownedOperation xmi:id="_d0Z18JmEEemCfIXRbMVoGQ" name="getGeneralsTest"/>
       <ownedOperation xmi:id="_h0qmYJmEEemCfIXRbMVoGQ" name="parentsTest"/>
     </packagedElement>
     <packagedElement xmi:type="uml:Class" xmi:id="_ucXGsJmEEemCfIXRbMVoGQ" name="ClassImplTest" visibility="public">
+      <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_FYXgoJpPEemCfIXRbMVoGQ" name="getSuperClassesTestFB"/>
       <ownedOperation xmi:id="_wdDMEJmEEemCfIXRbMVoGQ" name="getSuperClassesTest"/>
     </packagedElement>
     <packagedElement xmi:type="uml:Class" xmi:id="_HlnNoJmGEemCfIXRbMVoGQ" name="ElementImpl" visibility="public">
+      <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_GeMgQJpPEemCfIXRbMVoGQ" name="applyStereotypeTestFB"/>
+      <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_IRN9EJpPEemCfIXRbMVoGQ" name="getAppliedStereotypeTestFB"/>
+      <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_IRN9EZpPEemCfIXRbMVoGQ" name="getAppliedStereotypesTestFB"/>
+      <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_IRN9EppPEemCfIXRbMVoGQ" name="getValueTestFB"/>
+      <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_IsoGsJpPEemCfIXRbMVoGQ" name="isStereotypeAppliedTestFB"/>
+      <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_IsotwJpPEemCfIXRbMVoGQ" name="setValueTestFB"/>
       <ownedOperation xmi:id="_MQMGYJmGEemCfIXRbMVoGQ" name="applyStereotypeTest"/>
       <ownedOperation xmi:id="_SwqJwJmGEemCfIXRbMVoGQ" name="getAppliedStereotypeTest"/>
       <ownedOperation xmi:id="_YtQEAJmGEemCfIXRbMVoGQ" name="getAppliedStereotypesTest"/>
@@ -18,9 +28,26 @@
       <ownedOperation xmi:id="_l36ugJmGEemCfIXRbMVoGQ" name="setValueTest"/>
     </packagedElement>
     <packagedElement xmi:type="uml:Class" xmi:id="_UdyvEJmIEemCfIXRbMVoGQ" name="NamedElementImplTest" visibility="public">
+      <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_JDS6QJpPEemCfIXRbMVoGQ" name="allNamespacesTestFB"/>
+      <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_JDS6QZpPEemCfIXRbMVoGQ" name="getQualifiedNameTestFB"/>
+      <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_JDS6QppPEemCfIXRbMVoGQ" name="separatorTestFB" specification="_ef_z0JmIEemCfIXRbMVoGQ">
+        <language>INCLUDE</language>
+        <language>CPP</language>
+        <body>#include &quot;uml/UmlFactory.hpp&quot;&#xD;
+#include &quot;uml/NamedElement.hpp&quot;</body>
+        <body>        std::shared_ptr&lt;uml::UmlFactory> factory = uml::UmlFactory::eInstance();&#xD;
+&#xD;
+        std::shared_ptr&lt;uml::NamedElementImpl> named_element = factory->createClass();&#xD;
+&#xD;
+        ASSERT_EQUALM( &quot;seperator ist not ::&quot;, named_element->separator(), &quot;::&quot; );</body>
+      </ownedBehavior>
       <ownedOperation xmi:id="_YBVuUJmIEemCfIXRbMVoGQ" name="allNamespacesTest"/>
       <ownedOperation xmi:id="_bVMrwJmIEemCfIXRbMVoGQ" name="getQualifiedNameTest"/>
-      <ownedOperation xmi:id="_ef_z0JmIEemCfIXRbMVoGQ" name="separatorTest"/>
+      <ownedOperation xmi:id="_ef_z0JmIEemCfIXRbMVoGQ" name="separatorTest" method="_JDS6QppPEemCfIXRbMVoGQ"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:FunctionBehavior" xmi:id="_3bA08JpOEemCfIXRbMVoGQ" name="umlLibraryImportFB">
+      <language>LIBRARY</language>
+      <body>uml</body>
     </packagedElement>
   </packagedElement>
 </uml:Model>
