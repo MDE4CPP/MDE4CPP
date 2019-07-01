@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>TS4UML4CPP</name>
+	<name>UML4CPP_test.generator</name>
 	<comment></comment>
 	<projects>
 		<project>UML4CPP.generator</project>
