@@ -1,0 +1,16 @@
+description 'Build tasks for project: UML_testTestModel'
+
+task buildUML_testTestModel() {
+	group 'UML_testTestModel'
+	description 'build UML_testTestModel'
+
+	dependsOn 'model:generateUML_testTestModel'
+	dependsOn 'src_gen:compileTestApplicationForUML_testTestModel'
+	dependsOn getRootProject().getTasksByName( 'buildEcore', true )
+	dependsOn getRootProject().getTasksByName( 'buildUml', true )
+	dependsOn getRootProject().getTasksByName( 'buildEcoreReflection', true )
+	dependsOn getRootProject().getTasksByName( 'buildPrimitivetypesReflection', true )
+	dependsOn getRootProject().getTasksByName( 'buildUmlReflection', true )
+}
+
+tasks.getByPath( 'src_gen:compileTestApplicationForUML_testTestModel' ).mustRunAfter tasks.getByPath( 'model:generateUML_testTestModel' )

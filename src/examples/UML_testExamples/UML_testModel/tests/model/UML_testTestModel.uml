@@ -1,0 +1,663 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_Lx_tEKZAEemKTuk6ZUbyhw" name="UML_testTestModel">
+  <packageImport xmi:id="_hTg4UKZBEemKTuk6ZUbyhw">
+    <importedPackage xmi:type="uml:Model" href="file:/C:/Uni/BA/MDE4CPPFork/src/examples/UML_testExamples/UML_testModel/model/UML_testModel.uml#_UbUv0KY_EemKTuk6ZUbyhw"/>
+  </packageImport>
+  <packagedElement xmi:type="uml:Package" xmi:id="_dlwPEKbvEemKTuk6ZUbyhw" name="find_datastructures">
+    <packagedElement xmi:type="uml:Class" xmi:id="_fIhpYKbvEemKTuk6ZUbyhw" name="ArrayTest">
+      <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_iMV_sKbvEemKTuk6ZUbyhw" name="atTestFB" specification="_hVCkQKbvEemKTuk6ZUbyhw">
+        <language>INCLUDE</language>
+        <language>CPP</language>
+        <language>LIBRARY</language>
+        <body>#include &quot;UML_testModel/find_datastructures/Array.hpp&quot;&#xD;
+#include &quot;uml/Class.hpp&quot;&#xD;
+#include &quot;uml/UmlFactory.hpp&quot;</body>
+        <body>		int element_count = 100000;&#xD;
+		std::shared_ptr&lt;uml::Class>* classes = new std::shared_ptr&lt;uml::Class>[element_count];&#xD;
+		std::shared_ptr&lt;uml::UmlFactory> factory = uml::UmlFactory::eInstance();&#xD;
+&#xD;
+		for( int i = 0; i &lt; element_count; i++ ) {&#xD;
+			classes[i] = factory->createClass();&#xD;
+		}&#xD;
+		Array* array = new Array( classes );&#xD;
+		for( int i = 0; i &lt; element_count; i++ ) {&#xD;
+			array->at( i );&#xD;
+		}&#xD;
+		classes->reset();&#xD;
+		delete array;</body>
+        <body>UML_testModel2</body>
+      </ownedBehavior>
+      <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_jwFqYKbvEemKTuk6ZUbyhw" name="onlyAtTimeTestFB" specification="_jwFqYabvEemKTuk6ZUbyhw">
+        <language>INCLUDE</language>
+        <language>CPP</language>
+        <language>LIBRARY</language>
+        <body>#include &quot;UML_testModel/find_datastructures/Array.hpp&quot;&#xD;
+#include &quot;uml/Class.hpp&quot;&#xD;
+#include &quot;uml/UmlFactory.hpp&quot;</body>
+        <body>		int element_count = 100000;&#xD;
+		std::shared_ptr&lt;uml::Class>* classes = new std::shared_ptr&lt;uml::Class>[element_count];&#xD;
+		std::shared_ptr&lt;uml::UmlFactory> factory = uml::UmlFactory::eInstance();&#xD;
+&#xD;
+		for( int i = 0; i &lt; element_count; i++ ) {&#xD;
+			classes[i] = factory->createClass();&#xD;
+		}&#xD;
+		Array* array = new Array( classes );&#xD;
+		auto time1 = TestSuiteTimeHelper::GetCurrentTime();&#xD;
+		for( int i = 0; i &lt; element_count; i++ ) {&#xD;
+			array->at( i );&#xD;
+		}&#xD;
+		auto time2 = TestSuiteTimeHelper::GetCurrentTime();&#xD;
+		classes->reset();&#xD;
+		delete array;&#xD;
+		auto dur = TestSuiteTimeHelper::GetTimeDifferenceInMlS( time1, time2 ).count();&#xD;
+		std::cout &lt;&lt; &quot;Time needed for 100000 at: &quot; &lt;&lt; dur &lt;&lt; std::endl;&#xD;
+		ASSERT_LESS_EQUALM( &quot;Ats needs more time than expected&quot;, dur, 30 );</body>
+        <body>UML_testModel2</body>
+      </ownedBehavior>
+      <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_kMQB8KbvEemKTuk6ZUbyhw" name="indexOfTestFB" specification="_kMQB8abvEemKTuk6ZUbyhw">
+        <language>INCLUDE</language>
+        <language>CPP</language>
+        <language>LIBRARY</language>
+        <body>#include &quot;UML_testModel/find_datastructures/Array.hpp&quot;&#xD;
+#include &quot;uml/Class.hpp&quot;&#xD;
+#include &quot;uml/UmlFactory.hpp&quot;</body>
+        <body>		int element_count = 100000;&#xD;
+		std::shared_ptr&lt;uml::Class>* classes = new std::shared_ptr&lt;uml::Class>[element_count];&#xD;
+		std::shared_ptr&lt;uml::UmlFactory> factory = uml::UmlFactory::eInstance();&#xD;
+&#xD;
+		for( int i = 0; i &lt; element_count; i++ ) {&#xD;
+			classes[i] =  factory->createClass();&#xD;
+		}&#xD;
+		Array* array = new Array( classes );&#xD;
+		for( int i = 0; i &lt; element_count; i++ ) {&#xD;
+			array->indexOf( classes[i] );&#xD;
+		}&#xD;
+		classes->reset();&#xD;
+		delete array;</body>
+        <body>UML_testModel2</body>
+      </ownedBehavior>
+      <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_kodc0KbvEemKTuk6ZUbyhw" name="onlyIndexOfTimeTestFB" specification="_kodc0abvEemKTuk6ZUbyhw">
+        <language>INCLUDE</language>
+        <language>CPP</language>
+        <language>LIBRARY</language>
+        <body>#include &quot;UML_testModel/find_datastructures/Array.hpp&quot;&#xD;
+#include &quot;uml/Class.hpp&quot;&#xD;
+#include &quot;uml/UmlFactory.hpp&quot;</body>
+        <body>		int element_count = 100000;&#xD;
+		std::shared_ptr&lt;uml::Class>* classes = new std::shared_ptr&lt;uml::Class>[element_count];&#xD;
+		std::shared_ptr&lt;uml::UmlFactory> factory = uml::UmlFactory::eInstance();&#xD;
+&#xD;
+		for( int i = 0; i &lt; element_count; i++ ) {&#xD;
+			classes[i] = factory->createClass();&#xD;
+		}&#xD;
+		Array* array = new Array( classes );&#xD;
+		auto time1 = TestSuiteTimeHelper::GetCurrentTime();&#xD;
+		for( int i = 0; i &lt; element_count; i++ ) {&#xD;
+			array->indexOf( classes[i] );&#xD;
+		}&#xD;
+		auto time2 = TestSuiteTimeHelper::GetCurrentTime();&#xD;
+		classes->reset();&#xD;
+		delete array;&#xD;
+		auto dur = TestSuiteTimeHelper::GetTimeDifferenceInMlS( time1, time2 ).count();&#xD;
+		std::cout &lt;&lt; &quot;Time needed for 100000 indexOf: &quot; &lt;&lt; dur &lt;&lt; std::endl;&#xD;
+		ASSERT_LESS_EQUALM( &quot;IndexOfs needs more time than expected&quot;, dur, 30 );&#xD;
+&#xD;
+</body>
+        <body>UML_testModel2</body>
+      </ownedBehavior>
+      <ownedOperation xmi:id="_hVCkQKbvEemKTuk6ZUbyhw" name="atTest" method="_iMV_sKbvEemKTuk6ZUbyhw">
+        <eAnnotations xmi:id="_IzgosKhvEemJYLV82EWjuQ" source="testData">
+          <details xmi:id="_L0BMUKhvEemJYLV82EWjuQ" key="maxTime" value="3000"/>
+        </eAnnotations>
+      </ownedOperation>
+      <ownedOperation xmi:id="_jwFqYabvEemKTuk6ZUbyhw" name="onlyAtTimeTest" method="_jwFqYKbvEemKTuk6ZUbyhw"/>
+      <ownedOperation xmi:id="_kMQB8abvEemKTuk6ZUbyhw" name="indexOfTest" method="_kMQB8KbvEemKTuk6ZUbyhw">
+        <eAnnotations xmi:id="_RjlXMKhvEemJYLV82EWjuQ" source="testData">
+          <details xmi:id="_RjlXMahvEemJYLV82EWjuQ" key="maxTime" value="3000"/>
+        </eAnnotations>
+      </ownedOperation>
+      <ownedOperation xmi:id="_kodc0abvEemKTuk6ZUbyhw" name="onlyIndexOfTimeTest" method="_kodc0KbvEemKTuk6ZUbyhw"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_bIiwUKbwEemKTuk6ZUbyhw" name="VectorTest">
+      <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_bIiwUabwEemKTuk6ZUbyhw" name="atTestFB" specification="_bIiwVabwEemKTuk6ZUbyhw">
+        <language>INCLUDE</language>
+        <language>CPP</language>
+        <language>LIBRARY</language>
+        <body>#include &quot;UML_testModel/find_datastructures/Vector.hpp&quot;&#xD;
+#include &quot;uml/Class.hpp&quot;&#xD;
+#include &quot;uml/UmlFactory.hpp&quot;&#xD;
+#include &lt;vector></body>
+        <body>		int element_count = 100000;&#xD;
+		std::vector&lt;std::shared_ptr&lt;uml::Class>> classes( 100000 );&#xD;
+		std::shared_ptr&lt;uml::UmlFactory> factory = uml::UmlFactory::eInstance();&#xD;
+&#xD;
+		for( int i = 0; i &lt; element_count; i++ ) {&#xD;
+			classes[i] = factory->createClass();&#xD;
+		}&#xD;
+		Vector* vector = new Vector( classes );&#xD;
+		for( int i = 0; i &lt; element_count; i++ ) {&#xD;
+			vector->at( i );&#xD;
+		}&#xD;
+		classes.clear();&#xD;
+		delete vector;</body>
+        <body>UML_testModel2</body>
+      </ownedBehavior>
+      <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_bIiwUqbwEemKTuk6ZUbyhw" name="onlyAtTimeTestFB" specification="_bIiwVqbwEemKTuk6ZUbyhw">
+        <language>INCLUDE</language>
+        <language>CPP</language>
+        <language>LIBRARY</language>
+        <body>#include &quot;UML_testModel/find_datastructures/Vector.hpp&quot;&#xD;
+#include &quot;uml/Class.hpp&quot;&#xD;
+#include &quot;uml/UmlFactory.hpp&quot;&#xD;
+#include &lt;vector></body>
+        <body>		int element_count = 100000;&#xD;
+		std::vector&lt;std::shared_ptr&lt;uml::Class>> classes( 100000 );&#xD;
+		std::shared_ptr&lt;uml::UmlFactory> factory = uml::UmlFactory::eInstance();&#xD;
+&#xD;
+		for( int i = 0; i &lt; element_count; i++ ) {&#xD;
+			classes[i] = factory->createClass();&#xD;
+		}&#xD;
+		Vector* vector = new Vector( classes );&#xD;
+		auto time1 = TestSuiteTimeHelper::GetCurrentTime();&#xD;
+		for( int i = 0; i &lt; element_count; i++ ) {&#xD;
+			vector->at( i );&#xD;
+		}&#xD;
+		auto time2 = TestSuiteTimeHelper::GetCurrentTime();&#xD;
+		classes.clear();&#xD;
+		delete vector;&#xD;
+		auto dur = TestSuiteTimeHelper::GetTimeDifferenceInMlS( time1, time2 ).count();&#xD;
+		std::cout &lt;&lt; &quot;Time needed for 100000 at: &quot; &lt;&lt; dur &lt;&lt; std::endl;&#xD;
+		ASSERT_LESS_EQUALM( &quot;Ats needs more time than expected&quot;, dur, 30 );</body>
+        <body>UML_testModel2</body>
+      </ownedBehavior>
+      <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_bIiwU6bwEemKTuk6ZUbyhw" name="indexOfTestFB" specification="_bIiwV6bwEemKTuk6ZUbyhw">
+        <language>INCLUDE</language>
+        <language>CPP</language>
+        <language>LIBRARY</language>
+        <body>#include &quot;UML_testModel/find_datastructures/Vector.hpp&quot;&#xD;
+#include &quot;uml/Class.hpp&quot;&#xD;
+#include &quot;uml/UmlFactory.hpp&quot;&#xD;
+#include &lt;vector></body>
+        <body>		int element_count = 100000;&#xD;
+		std::vector&lt;std::shared_ptr&lt;uml::Class>> classes( 100000 );&#xD;
+		std::shared_ptr&lt;uml::UmlFactory> factory = uml::UmlFactory::eInstance();&#xD;
+&#xD;
+		for( int i = 0; i &lt; element_count; i++ ) {&#xD;
+			classes[i] = factory->createClass();&#xD;
+		}&#xD;
+		Vector* vector = new Vector( classes );&#xD;
+		for( int i = 0; i &lt; element_count; i++ ) {&#xD;
+			vector->indexOf( classes[i] );&#xD;
+		}&#xD;
+		classes.clear();&#xD;
+		delete vector;</body>
+        <body>UML_testModel2</body>
+      </ownedBehavior>
+      <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_bIiwVKbwEemKTuk6ZUbyhw" name="onlyIndexOfTimeTestFB" specification="_bIiwWKbwEemKTuk6ZUbyhw">
+        <language>INCLUDE</language>
+        <language>CPP</language>
+        <language>LIBRARY</language>
+        <body>#include &quot;UML_testModel/find_datastructures/Vector.hpp&quot;&#xD;
+#include &quot;uml/Class.hpp&quot;&#xD;
+#include &quot;uml/UmlFactory.hpp&quot;&#xD;
+#include &lt;vector></body>
+        <body>		int element_count = 100000;&#xD;
+		std::vector&lt;std::shared_ptr&lt;uml::Class>> classes( 100000 );&#xD;
+		std::shared_ptr&lt;uml::UmlFactory> factory = uml::UmlFactory::eInstance();&#xD;
+&#xD;
+		for( int i = 0; i &lt; element_count; i++ ) {&#xD;
+			classes[i] = factory->createClass();&#xD;
+		}&#xD;
+		Vector* vector = new Vector( classes );&#xD;
+		auto time1 = TestSuiteTimeHelper::GetCurrentTime();&#xD;
+		for( int i = 0; i &lt; element_count; i++ ) {&#xD;
+			vector->indexOf( classes[i] );&#xD;
+		}&#xD;
+		auto time2 = TestSuiteTimeHelper::GetCurrentTime();&#xD;
+		classes.clear();&#xD;
+		delete vector;&#xD;
+		auto dur = TestSuiteTimeHelper::GetTimeDifferenceInMlS( time1, time2 ).count();&#xD;
+		std::cout &lt;&lt; &quot;Time needed for 100000 indexOf: &quot; &lt;&lt; dur &lt;&lt; std::endl;&#xD;
+		ASSERT_LESS_EQUALM( &quot;IndexOfs needs more time than expected&quot;, dur, 30 );</body>
+        <body>UML_testModel2</body>
+      </ownedBehavior>
+      <ownedOperation xmi:id="_bIiwVabwEemKTuk6ZUbyhw" name="atTest" method="_bIiwUabwEemKTuk6ZUbyhw">
+        <eAnnotations xmi:id="_R6VqUKhvEemJYLV82EWjuQ" source="testData">
+          <details xmi:id="_R6VqUahvEemJYLV82EWjuQ" key="maxTime" value="3000"/>
+        </eAnnotations>
+      </ownedOperation>
+      <ownedOperation xmi:id="_bIiwVqbwEemKTuk6ZUbyhw" name="onlyAtTimeTest" method="_bIiwUqbwEemKTuk6ZUbyhw"/>
+      <ownedOperation xmi:id="_bIiwV6bwEemKTuk6ZUbyhw" name="indexOfTest" method="_bIiwU6bwEemKTuk6ZUbyhw">
+        <eAnnotations xmi:id="_SXgHcKhvEemJYLV82EWjuQ" source="testData">
+          <details xmi:id="_SXgHcahvEemJYLV82EWjuQ" key="maxTime" value="3000"/>
+        </eAnnotations>
+      </ownedOperation>
+      <ownedOperation xmi:id="_bIiwWKbwEemKTuk6ZUbyhw" name="onlyIndexOfTimeTest" method="_bIiwVKbwEemKTuk6ZUbyhw"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_bj52oKbwEemKTuk6ZUbyhw" name="MapTest">
+      <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_bj52oabwEemKTuk6ZUbyhw" name="atTestFB" specification="_bj52pabwEemKTuk6ZUbyhw">
+        <language>INCLUDE</language>
+        <language>CPP</language>
+        <language>LIBRARY</language>
+        <body>#include &quot;UML_testModel/find_datastructures/Map.hpp&quot;&#xD;
+#include &quot;uml/Class.hpp&quot;&#xD;
+#include &quot;uml/UmlFactory.hpp&quot;&#xD;
+#include &lt;map></body>
+        <body>		int element_count = 100000;&#xD;
+		std::shared_ptr&lt;uml::Class>* classes = new std::shared_ptr&lt;uml::Class>[element_count];&#xD;
+		std::map&lt;int, std::shared_ptr&lt;uml::Class>> classes_index;&#xD;
+		std::shared_ptr&lt;uml::UmlFactory> factory = uml::UmlFactory::eInstance();&#xD;
+&#xD;
+		for( int i = 0; i &lt; element_count; i++ ) {&#xD;
+			classes[i] = factory->createClass();&#xD;
+			classes_index[i] = classes[i];&#xD;
+		}&#xD;
+		Map* map = new Map( classes_index );&#xD;
+		for( int i = 0; i &lt; element_count; i++ ) {&#xD;
+			map->at( i );&#xD;
+		}&#xD;
+		classes->reset();&#xD;
+		classes_index.clear();&#xD;
+		delete map;</body>
+        <body>UML_testModel2</body>
+      </ownedBehavior>
+      <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_bj52oqbwEemKTuk6ZUbyhw" name="onlyAtTimeTestFB" specification="_bj52pqbwEemKTuk6ZUbyhw">
+        <language>INCLUDE</language>
+        <language>CPP</language>
+        <language>LIBRARY</language>
+        <body>#include &quot;UML_testModel/find_datastructures/Map.hpp&quot;&#xD;
+#include &quot;uml/Class.hpp&quot;&#xD;
+#include &quot;uml/UmlFactory.hpp&quot;&#xD;
+#include &lt;map></body>
+        <body>		int element_count = 100000;&#xD;
+		std::shared_ptr&lt;uml::Class>* classes = new std::shared_ptr&lt;uml::Class>[element_count];&#xD;
+		std::map&lt;int, std::shared_ptr&lt;uml::Class>> classes_index;&#xD;
+		std::shared_ptr&lt;uml::UmlFactory> factory = uml::UmlFactory::eInstance();&#xD;
+&#xD;
+		for( int i = 0; i &lt; element_count; i++ ) {&#xD;
+			classes[i] = factory->createClass();&#xD;
+			classes_index[i] = classes[i];&#xD;
+		}&#xD;
+		Map* map = new Map( classes_index );&#xD;
+		auto time1 = TestSuiteTimeHelper::GetCurrentTime();&#xD;
+		for( int i = 0; i &lt; element_count; i++ ) {&#xD;
+			map->at( i );&#xD;
+		}&#xD;
+		auto time2 = TestSuiteTimeHelper::GetCurrentTime();&#xD;
+		classes->reset();&#xD;
+		classes_index.clear();&#xD;
+		delete map;&#xD;
+		auto dur = TestSuiteTimeHelper::GetTimeDifferenceInMlS( time1, time2 ).count();&#xD;
+		std::cout &lt;&lt; &quot;Time needed for 100000 at: &quot; &lt;&lt; dur &lt;&lt; std::endl;&#xD;
+		ASSERT_LESS_EQUALM( &quot;Ats needs more time than expected&quot;, dur, 30 );</body>
+        <body>UML_testModel2</body>
+      </ownedBehavior>
+      <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_bj52o6bwEemKTuk6ZUbyhw" name="indexOfTestFB" specification="_bj52p6bwEemKTuk6ZUbyhw">
+        <language>INCLUDE</language>
+        <language>CPP</language>
+        <language>LIBRARY</language>
+        <body>#include &quot;UML_testModel/find_datastructures/Map.hpp&quot;&#xD;
+#include &quot;uml/Class.hpp&quot;&#xD;
+#include &quot;uml/UmlFactory.hpp&quot;&#xD;
+#include &lt;map></body>
+        <body>		int element_count = 100000;&#xD;
+		std::shared_ptr&lt;uml::Class>* classes = new std::shared_ptr&lt;uml::Class>[element_count];&#xD;
+		std::map&lt;int, std::shared_ptr&lt;uml::Class>> classes_index;&#xD;
+		std::shared_ptr&lt;uml::UmlFactory> factory = uml::UmlFactory::eInstance();&#xD;
+&#xD;
+		for( int i = 0; i &lt; element_count; i++ ) {&#xD;
+			classes[i] = factory->createClass();&#xD;
+			classes_index[i] = classes[i];&#xD;
+		}&#xD;
+		Map* map = new Map( classes_index );&#xD;
+		for( int i = 0; i &lt; element_count; i++ ) {&#xD;
+			map->indexOf( classes[i] );&#xD;
+		}&#xD;
+		classes->reset();&#xD;
+		classes_index.clear();&#xD;
+		delete map;</body>
+        <body>UML_testModel2</body>
+      </ownedBehavior>
+      <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_bj52pKbwEemKTuk6ZUbyhw" name="onlyIndexOfTimeTestFB" specification="_bj52qKbwEemKTuk6ZUbyhw">
+        <language>INCLUDE</language>
+        <language>CPP</language>
+        <language>LIBRARY</language>
+        <body>#include &quot;UML_testModel/find_datastructures/Map.hpp&quot;&#xD;
+#include &quot;uml/Class.hpp&quot;&#xD;
+#include &quot;uml/UmlFactory.hpp&quot;&#xD;
+#include &lt;map></body>
+        <body>		int element_count = 100000;&#xD;
+		std::shared_ptr&lt;uml::Class>* classes = new std::shared_ptr&lt;uml::Class>[element_count];&#xD;
+		std::map&lt;int, std::shared_ptr&lt;uml::Class>> classes_index;&#xD;
+		std::shared_ptr&lt;uml::UmlFactory> factory = uml::UmlFactory::eInstance();&#xD;
+&#xD;
+		for( int i = 0; i &lt; element_count; i++ ) {&#xD;
+			classes[i] = factory->createClass();&#xD;
+			classes_index[i] = classes[i];&#xD;
+		}&#xD;
+		Map* map = new Map( classes_index );&#xD;
+		auto time1 = TestSuiteTimeHelper::GetCurrentTime();&#xD;
+		for( int i = 0; i &lt; element_count; i++ ) {&#xD;
+			map->indexOf( classes[i] );&#xD;
+		}&#xD;
+		auto time2 = TestSuiteTimeHelper::GetCurrentTime();&#xD;
+		classes->reset();&#xD;
+		classes_index.clear();&#xD;
+		delete map;&#xD;
+		auto dur = TestSuiteTimeHelper::GetTimeDifferenceInMlS( time1, time2 ).count();&#xD;
+		std::cout &lt;&lt; &quot;Time needed for 100000 indexOf: &quot; &lt;&lt; dur &lt;&lt; std::endl;&#xD;
+		ASSERT_LESS_EQUALM( &quot;IndexOfs needs more time than expected&quot;, dur, 30 );</body>
+        <body>UML_testModel2</body>
+      </ownedBehavior>
+      <ownedOperation xmi:id="_bj52pabwEemKTuk6ZUbyhw" name="atTest" method="_bj52oabwEemKTuk6ZUbyhw">
+        <eAnnotations xmi:id="_TMG0MKhvEemJYLV82EWjuQ" source="testData">
+          <details xmi:id="_TMG0MahvEemJYLV82EWjuQ" key="maxTime" value="3000"/>
+        </eAnnotations>
+      </ownedOperation>
+      <ownedOperation xmi:id="_bj52pqbwEemKTuk6ZUbyhw" name="onlyAtTimeTest" method="_bj52oqbwEemKTuk6ZUbyhw"/>
+      <ownedOperation xmi:id="_bj52p6bwEemKTuk6ZUbyhw" name="indexOfTest" method="_bj52o6bwEemKTuk6ZUbyhw">
+        <eAnnotations xmi:id="_To76IKhvEemJYLV82EWjuQ" source="testData">
+          <details xmi:id="_To76IahvEemJYLV82EWjuQ" key="maxTime" value="3000"/>
+        </eAnnotations>
+      </ownedOperation>
+      <ownedOperation xmi:id="_bj52qKbwEemKTuk6ZUbyhw" name="onlyIndexOfTimeTest" method="_bj52pKbwEemKTuk6ZUbyhw"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_cAxY0KbwEemKTuk6ZUbyhw" name="BimapTest">
+      <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_cAx_4KbwEemKTuk6ZUbyhw" name="atTestFB" specification="_cAx_5KbwEemKTuk6ZUbyhw">
+        <language>INCLUDE</language>
+        <language>CPP</language>
+        <language>LIBRARY</language>
+        <body>#include &quot;UML_testModel/find_datastructures/Bimap.hpp&quot;&#xD;
+#include &quot;uml/Class.hpp&quot;&#xD;
+#include &quot;uml/UmlFactory.hpp&quot;&#xD;
+#include &lt;map></body>
+        <body>		int element_count = 100000;&#xD;
+		std::shared_ptr&lt;uml::Class>* classes = new std::shared_ptr&lt;uml::Class>[element_count];&#xD;
+		std::map&lt;int, std::shared_ptr&lt;uml::Class>> classes_index;&#xD;
+		std::map&lt;std::shared_ptr&lt;uml::Class>, int> classes_value;&#xD;
+		std::shared_ptr&lt;uml::UmlFactory> factory = uml::UmlFactory::eInstance();&#xD;
+&#xD;
+		for( int i = 0; i &lt; element_count; i++ ) {&#xD;
+			classes[i] = factory->createClass();&#xD;
+			classes_index[i] = classes[i];&#xD;
+			classes_value[classes[i]] = i;&#xD;
+		}&#xD;
+		Bimap* bimap = new Bimap( classes_index, classes_value );&#xD;
+		for( int i = 0; i &lt; element_count; i++ ) {&#xD;
+			bimap->at( i );&#xD;
+		}&#xD;
+		classes->reset();&#xD;
+		classes_index.clear();&#xD;
+		classes_value.clear();&#xD;
+		delete bimap;</body>
+        <body>UML_testModel2</body>
+      </ownedBehavior>
+      <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_cAx_4abwEemKTuk6ZUbyhw" name="onlyAtTimeTestFB" specification="_cAx_5abwEemKTuk6ZUbyhw">
+        <language>INCLUDE</language>
+        <language>CPP</language>
+        <language>LIBRARY</language>
+        <body>#include &quot;UML_testModel/find_datastructures/Bimap.hpp&quot;&#xD;
+#include &quot;uml/Class.hpp&quot;&#xD;
+#include &quot;uml/UmlFactory.hpp&quot;&#xD;
+#include &lt;map></body>
+        <body>		int element_count = 100000;&#xD;
+		std::shared_ptr&lt;uml::Class>* classes = new std::shared_ptr&lt;uml::Class>[element_count];&#xD;
+		std::map&lt;int, std::shared_ptr&lt;uml::Class>> classes_index;&#xD;
+		std::map&lt;std::shared_ptr&lt;uml::Class>, int> classes_value;&#xD;
+		std::shared_ptr&lt;uml::UmlFactory> factory = uml::UmlFactory::eInstance();&#xD;
+&#xD;
+		for( int i = 0; i &lt; element_count; i++ ) {&#xD;
+			classes[i] = factory->createClass();&#xD;
+			classes_index[i] = classes[i];&#xD;
+			classes_value[classes[i]] = i;&#xD;
+		}&#xD;
+		Bimap* bimap = new Bimap( classes_index, classes_value );&#xD;
+		auto time1 = TestSuiteTimeHelper::GetCurrentTime();&#xD;
+		for( int i = 0; i &lt; element_count; i++ ) {&#xD;
+			bimap->at( i );&#xD;
+		}&#xD;
+		auto time2 = TestSuiteTimeHelper::GetCurrentTime();&#xD;
+		classes->reset();&#xD;
+		classes_index.clear();&#xD;
+		classes_value.clear();&#xD;
+		delete bimap;&#xD;
+		auto dur = TestSuiteTimeHelper::GetTimeDifferenceInMlS( time1, time2 ).count();&#xD;
+		std::cout &lt;&lt; &quot;Time needed for 100000 at: &quot; &lt;&lt; dur &lt;&lt; std::endl;&#xD;
+		ASSERT_LESS_EQUALM( &quot;Ats needs more time than expected&quot;, dur, 30 );</body>
+        <body>UML_testModel2</body>
+      </ownedBehavior>
+      <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_cAx_4qbwEemKTuk6ZUbyhw" name="indexOfTestFB" specification="_cAx_5qbwEemKTuk6ZUbyhw">
+        <language>INCLUDE</language>
+        <language>CPP</language>
+        <language>LIBRARY</language>
+        <body>#include &quot;UML_testModel/find_datastructures/Bimap.hpp&quot;&#xD;
+#include &quot;uml/Class.hpp&quot;&#xD;
+#include &quot;uml/UmlFactory.hpp&quot;&#xD;
+#include &lt;map></body>
+        <body>		int element_count = 100000;&#xD;
+		std::shared_ptr&lt;uml::Class>* classes = new std::shared_ptr&lt;uml::Class>[element_count];&#xD;
+		std::map&lt;int, std::shared_ptr&lt;uml::Class>> classes_index;&#xD;
+		std::map&lt;std::shared_ptr&lt;uml::Class>, int> classes_value;&#xD;
+		std::shared_ptr&lt;uml::UmlFactory> factory = uml::UmlFactory::eInstance();&#xD;
+&#xD;
+		for( int i = 0; i &lt; element_count; i++ ) {&#xD;
+			classes[i] = factory->createClass();&#xD;
+			classes_index[i] = classes[i];&#xD;
+			classes_value[classes[i]] = i;&#xD;
+		}&#xD;
+		Bimap* bimap = new Bimap( classes_index, classes_value );&#xD;
+		for( int i = 0; i &lt; element_count; i++ ) {&#xD;
+			bimap->indexOf( classes[i] );&#xD;
+		}&#xD;
+		classes->reset();&#xD;
+		classes_index.clear();&#xD;
+		classes_value.clear();&#xD;
+		delete bimap;</body>
+        <body>UML_testModel2</body>
+      </ownedBehavior>
+      <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_cAx_46bwEemKTuk6ZUbyhw" name="onlyIndexOfTimeTestFB" specification="_cAx_56bwEemKTuk6ZUbyhw">
+        <language>INCLUDE</language>
+        <language>CPP</language>
+        <language>LIBRARY</language>
+        <body>#include &quot;UML_testModel/find_datastructures/Bimap.hpp&quot;&#xD;
+#include &quot;uml/Class.hpp&quot;&#xD;
+#include &quot;uml/UmlFactory.hpp&quot;&#xD;
+#include &lt;map></body>
+        <body>		int element_count = 100000;&#xD;
+		std::shared_ptr&lt;uml::Class>* classes = new std::shared_ptr&lt;uml::Class>[element_count];&#xD;
+		std::map&lt;int, std::shared_ptr&lt;uml::Class>> classes_index;&#xD;
+		std::map&lt;std::shared_ptr&lt;uml::Class>, int> classes_value;&#xD;
+		std::shared_ptr&lt;uml::UmlFactory> factory = uml::UmlFactory::eInstance();&#xD;
+&#xD;
+		for( int i = 0; i &lt; element_count; i++ ) {&#xD;
+			classes[i] = factory->createClass();&#xD;
+			classes_index[i] = classes[i];&#xD;
+			classes_value[classes[i]] = i;&#xD;
+		}&#xD;
+		Bimap* bimap = new Bimap( classes_index, classes_value );&#xD;
+		auto time1 = TestSuiteTimeHelper::GetCurrentTime();&#xD;
+		for( int i = 0; i &lt; element_count; i++ ) {&#xD;
+			bimap->indexOf( classes[i] );&#xD;
+		}&#xD;
+		auto time2 = TestSuiteTimeHelper::GetCurrentTime();&#xD;
+		classes->reset();&#xD;
+		classes_index.clear();&#xD;
+		classes_value.clear();&#xD;
+		delete bimap;&#xD;
+		auto dur = TestSuiteTimeHelper::GetTimeDifferenceInMlS( time1, time2 ).count();&#xD;
+		std::cout &lt;&lt; &quot;Time needed for 100000 indexOf: &quot; &lt;&lt; dur &lt;&lt; std::endl;&#xD;
+		ASSERT_LESS_EQUALM( &quot;IndexOfs needs more time than expected&quot;, dur, 30 );</body>
+        <body>UML_testModel2</body>
+      </ownedBehavior>
+      <ownedOperation xmi:id="_cAx_5KbwEemKTuk6ZUbyhw" name="atTest" method="_cAx_4KbwEemKTuk6ZUbyhw">
+        <eAnnotations xmi:id="_VsLkQKhvEemJYLV82EWjuQ" source="testData">
+          <details xmi:id="_VsLkQahvEemJYLV82EWjuQ" key="maxTime" value="3000"/>
+        </eAnnotations>
+      </ownedOperation>
+      <ownedOperation xmi:id="_cAx_5abwEemKTuk6ZUbyhw" name="onlyAtTimeTest" method="_cAx_4abwEemKTuk6ZUbyhw"/>
+      <ownedOperation xmi:id="_cAx_5qbwEemKTuk6ZUbyhw" name="indexOfTest" method="_cAx_4qbwEemKTuk6ZUbyhw">
+        <eAnnotations xmi:id="_WGKKgKhvEemJYLV82EWjuQ" source="testData">
+          <details xmi:id="_WGKKgahvEemJYLV82EWjuQ" key="maxTime" value="3000"/>
+        </eAnnotations>
+      </ownedOperation>
+      <ownedOperation xmi:id="_cAx_56bwEemKTuk6ZUbyhw" name="onlyIndexOfTimeTest" method="_cAx_46bwEemKTuk6ZUbyhw"/>
+    </packagedElement>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Package" xmi:id="_ZRFxMKk6EemJYLV82EWjuQ" name="save_datastructures">
+    <packagedElement xmi:type="uml:Class" xmi:id="_hxFosKaPEemKTuk6ZUbyhw" name="PointerDatastructureTest">
+      <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_kIgAcKaZEemKTuk6ZUbyhw" name="setCharArraySaveTestFB" specification="_bkAl8KaQEemKTuk6ZUbyhw">
+        <language>INCLUDE</language>
+        <language>CPP</language>
+        <language>LIBRARY</language>
+        <body>#include &quot;UML_testModel/save_datastructures/PointerDatastructure.hpp&quot;</body>
+        <body>		UML_testModel::PointerDatastructure pointerData = UML_testModel::PointerDatastructure();&#xD;
+&#xD;
+		for( int i = 0; i &lt; 100000; i++ ) {&#xD;
+			pointerData.setCharArraySave( new char[100000] );&#xD;
+		}</body>
+        <body>UML_testModel2</body>
+      </ownedBehavior>
+      <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_eyy1IKabEemKTuk6ZUbyhw" name="setCharArrayTestFB" specification="_apwkMKaQEemKTuk6ZUbyhw">
+        <language>INCLUDE</language>
+        <language>CPP</language>
+        <language>LIBRARY</language>
+        <body>#include &quot;UML_testModel/save_datastructures/PointerDatastructure.hpp&quot;</body>
+        <body>		UML_testModel::PointerDatastructure pointerData = UML_testModel::PointerDatastructure();&#xD;
+&#xD;
+		for( int i = 0; i &lt; 100000; i++ ) {&#xD;
+			pointerData.setCharArray( new char[100000] );&#xD;
+		}</body>
+        <body>UML_testModel2</body>
+      </ownedBehavior>
+      <ownedOperation xmi:id="_apwkMKaQEemKTuk6ZUbyhw" name="setCharArrayTest" method="_eyy1IKabEemKTuk6ZUbyhw">
+        <eAnnotations xmi:id="_anX2MKaeEemKTuk6ZUbyhw" source="testData">
+          <details xmi:id="_mRLx8KaeEemKTuk6ZUbyhw" key="memoryDelta" value="300"/>
+        </eAnnotations>
+      </ownedOperation>
+      <ownedOperation xmi:id="_bkAl8KaQEemKTuk6ZUbyhw" name="setCharArraySaveTest" method="_kIgAcKaZEemKTuk6ZUbyhw">
+        <eAnnotations xmi:id="_bSNi8KaeEemKTuk6ZUbyhw" source="testData">
+          <details xmi:id="_oWWusKaeEemKTuk6ZUbyhw" key="memoryDelta" value="300"/>
+        </eAnnotations>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_czT6wKk6EemJYLV82EWjuQ" name="SharedPointerDatastructureTest">
+      <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_czT6wak6EemJYLV82EWjuQ" name="setCharArraySaveTestFB" specification="_czT6xqk6EemJYLV82EWjuQ">
+        <language>INCLUDE</language>
+        <language>CPP</language>
+        <language>LIBRARY</language>
+        <body>#include &quot;UML_testModel/save_datastructures/SharedPointerDatastructure.hpp&quot;&#xD;
+#include &lt;memory></body>
+        <body>		UML_testModel::SharedPointerDatastructure sharedPointerData = UML_testModel::SharedPointerDatastructure();&#xD;
+&#xD;
+		for( int i = 0; i &lt; 100000; i++ ) {&#xD;
+			std::shared_ptr&lt;char> char_array( new char[100000] );&#xD;
+			sharedPointerData.setCharArraySave( char_array );&#xD;
+		}</body>
+        <body>UML_testModel2</body>
+      </ownedBehavior>
+      <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_czT6wqk6EemJYLV82EWjuQ" name="setCharArrayTestFB" specification="_czT6w6k6EemJYLV82EWjuQ">
+        <language>INCLUDE</language>
+        <language>CPP</language>
+        <language>LIBRARY</language>
+        <body>#include &quot;UML_testModel/save_datastructures/SharedPointerDatastructure.hpp&quot;&#xD;
+#include &lt;memory></body>
+        <body>		UML_testModel::SharedPointerDatastructure sharedPointerData = UML_testModel::SharedPointerDatastructure();&#xD;
+&#xD;
+		for( int i = 0; i &lt; 100000; i++ ) {&#xD;
+			std::shared_ptr&lt;char> char_array( new char[100000] );&#xD;
+			sharedPointerData.setCharArray( char_array );&#xD;
+		}</body>
+        <body>UML_testModel2</body>
+      </ownedBehavior>
+      <ownedOperation xmi:id="_czT6w6k6EemJYLV82EWjuQ" name="setCharArrayTest" method="_czT6wqk6EemJYLV82EWjuQ">
+        <eAnnotations xmi:id="_czT6xKk6EemJYLV82EWjuQ" source="testData">
+          <details xmi:id="_czT6xak6EemJYLV82EWjuQ" key="memoryDelta" value="300"/>
+        </eAnnotations>
+      </ownedOperation>
+      <ownedOperation xmi:id="_czT6xqk6EemJYLV82EWjuQ" name="setCharArraySaveTest" method="_czT6wak6EemJYLV82EWjuQ">
+        <eAnnotations xmi:id="_czT6x6k6EemJYLV82EWjuQ" source="testData">
+          <details xmi:id="_czT6yKk6EemJYLV82EWjuQ" key="memoryDelta" value="300"/>
+        </eAnnotations>
+      </ownedOperation>
+    </packagedElement>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_SBmC4KZAEemKTuk6ZUbyhw" name="CalculatorsTest">
+    <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_SBmC4aZAEemKTuk6ZUbyhw" name="additionTestFB" specification="_SBmC4qZAEemKTuk6ZUbyhw">
+      <language>INCLUDE</language>
+      <language>CPP</language>
+      <language>LIBRARY</language>
+      <body>#include &quot;UML_testModel/UML_testModelFactory.hpp&quot;&#xD;
+#include &quot;UML_testModel/Addition.hpp&quot;</body>
+      <body>		int endValue = 100;&#xD;
+		std::shared_ptr&lt;UML_testModel::UML_testModelFactory> factory = UML_testModel::UML_testModelFactory::eInstance();&#xD;
+		std::shared_ptr&lt;UML_testModel::Addition> addition = factory->createAddition();&#xD;
+&#xD;
+		for( int i = 0; i &lt; endValue + 1; i++ ) {&#xD;
+			for( int j = 0; j &lt; endValue + 1; j++ ) {&#xD;
+				std::string msg = &quot;Addition does not add \&quot;&quot; + std::to_string( i ) + &quot;+&quot; + std::to_string( j ) + &quot;\&quot; correct.&quot;;&#xD;
+				ASSERT_EQUALM( msg, i + j, addition->calculate( i, j ) );&#xD;
+			}&#xD;
+		}</body>
+      <body>UML_testModel</body>
+    </ownedBehavior>
+    <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_tBoI0KaPEemKTuk6ZUbyhw" name="subtractionTestFB" specification="_SBmC46ZAEemKTuk6ZUbyhw">
+      <language>INCLUDE</language>
+      <language>CPP</language>
+      <language>LIBRARY</language>
+      <body>#include &quot;UML_testModel/UML_testModelFactory.hpp&quot;&#xD;
+#include &quot;UML_testModel/Subtraction.hpp&quot;</body>
+      <body>		int endValue = 100;&#xD;
+		std::shared_ptr&lt;UML_testModel::UML_testModelFactory> factory = UML_testModel::UML_testModelFactory::eInstance();&#xD;
+		std::shared_ptr&lt;UML_testModel::Subtraction> subtraction = factory->createSubtraction();&#xD;
+&#xD;
+		for( int i = 0; i &lt; endValue + 1; i++ ) {&#xD;
+			for( int j = 0; j &lt; endValue + 1; j++ ) {&#xD;
+				int result = i - j;&#xD;
+				std::string msg = &quot;Subtraction does not subtract \&quot;&quot; + std::to_string( i ) + &quot;-&quot; + std::to_string( j ) + &quot;\&quot; correct.&quot;;&#xD;
+				ASSERT_EQUALM( msg, result &lt; 0 ? 0 : result, subtraction->calculate( i, j ) );&#xD;
+			}&#xD;
+		}</body>
+      <body>UML_testModel</body>
+    </ownedBehavior>
+    <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_t45vEKaPEemKTuk6ZUbyhw" name="multiplicationTestFB" specification="_SBmC5KZAEemKTuk6ZUbyhw">
+      <language>INCLUDE</language>
+      <language>CPP</language>
+      <language>LIBRARY</language>
+      <body>#include &quot;UML_testModel/UML_testModelFactory.hpp&quot;&#xD;
+#include &quot;UML_testModel/Multiplication.hpp&quot;</body>
+      <body>		int endValue = 100;&#xD;
+		std::shared_ptr&lt;UML_testModel::UML_testModelFactory> factory = UML_testModel::UML_testModelFactory::eInstance();&#xD;
+		std::shared_ptr&lt;UML_testModel::Multiplication> multiplication = factory->createMultiplication();&#xD;
+&#xD;
+		for( int i = 0; i &lt; endValue + 1; i++ ) {&#xD;
+			for( int j = 0; j &lt; endValue + 1; j++ ) {&#xD;
+				std::string msg = &quot;Multiplication does not multiply \&quot;&quot; + std::to_string( i ) + &quot;*&quot; + std::to_string( j ) + &quot;\&quot; correct.&quot;;&#xD;
+				ASSERT_EQUALM( msg, i * j, multiplication->calculate( i, j ) );&#xD;
+			}&#xD;
+		}</body>
+      <body>UML_testModel</body>
+    </ownedBehavior>
+    <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_u3HDwKaPEemKTuk6ZUbyhw" name="divisionTestFB" specification="_SBmC5aZAEemKTuk6ZUbyhw">
+      <language>INCLUDE</language>
+      <language>CPP</language>
+      <language>LIBRARY</language>
+      <body>#include &quot;UML_testModel/UML_testModelFactory.hpp&quot;&#xD;
+#include &quot;UML_testModel/Division.hpp&quot;</body>
+      <body>		int endValue = 100;&#xD;
+		std::shared_ptr&lt;UML_testModel::UML_testModelFactory> factory = UML_testModel::UML_testModelFactory::eInstance();&#xD;
+		std::shared_ptr&lt;UML_testModel::Division> division = factory->createDivision();&#xD;
+&#xD;
+		for( int i = 0; i &lt; endValue + 1; i++ ) {&#xD;
+			for( int j = 0; j &lt; endValue + 1; j++ ) {&#xD;
+				std::string msg = &quot;Division does not divide \&quot;&quot; + std::to_string( i ) + &quot;/&quot; + std::to_string( j ) + &quot;\&quot; correct.&quot;;&#xD;
+				ASSERT_EQUALM( msg, j == 0 ? -1 : i / j, division->calculate( i, j ) );&#xD;
+			}&#xD;
+		}</body>
+      <body>UML_testModel</body>
+    </ownedBehavior>
+    <ownedOperation xmi:id="_SBmC4qZAEemKTuk6ZUbyhw" name="additionTest" method="_SBmC4aZAEemKTuk6ZUbyhw"/>
+    <ownedOperation xmi:id="_SBmC46ZAEemKTuk6ZUbyhw" name="subtractionTest" method="_tBoI0KaPEemKTuk6ZUbyhw"/>
+    <ownedOperation xmi:id="_SBmC5KZAEemKTuk6ZUbyhw" name="multiplicationTest" method="_t45vEKaPEemKTuk6ZUbyhw"/>
+    <ownedOperation xmi:id="_SBmC5aZAEemKTuk6ZUbyhw" name="divisionTest" method="_u3HDwKaPEemKTuk6ZUbyhw"/>
+  </packagedElement>
+</uml:Model>

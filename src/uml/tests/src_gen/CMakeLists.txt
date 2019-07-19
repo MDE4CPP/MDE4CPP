@@ -29,7 +29,7 @@ SET( SOURCE_FILES
 	helper/TestSuiteTimeHelper.cpp
 	tests_for_uml/ClassImplTest.cpp
 	tests_for_uml/ClassifierImplTest.cpp
-	tests_for_uml/ElementImpl.cpp
+	tests_for_uml/ElementImplTest.cpp
 	tests_for_uml/NamedElementImplTest.cpp
  )
 

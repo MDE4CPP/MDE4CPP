@@ -155,8 +155,7 @@
 		c->setName( &quot;Class&quot; );&#xD;
 		std::shared_ptr&lt;uml::Stereotype> s = factory->createStereotype();&#xD;
 		s->setName( &quot;Stereotype&quot; );&#xD;
-		&#xD;
-		//TODO: applyStereotype always return &quot;nullptr&quot;&#xD;
+&#xD;
 		ASSERT_EQUALM( &quot;return value is not nullptr&quot;, nullptr, c->applyStereotype( s ) );</body>
       </ownedBehavior>
       <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_IRN9EJpPEemCfIXRbMVoGQ" name="getAppliedStereotypeTestFB" specification="_SwqJwJmGEemCfIXRbMVoGQ">
@@ -209,8 +208,7 @@
         <body>#include &quot;uml/UmlFactory.hpp&quot;&#xD;
 #include &quot;uml/Class.hpp&quot;&#xD;
 #include &quot;uml/Model.hpp&quot;&#xD;
-#include &quot;uml/Stereotype.hpp&quot;&#xD;
-#include &quot;abstractDataTypes/Any.hpp&quot;</body>
+#include &quot;uml/Stereotype.hpp&quot;</body>
         <body>		//TODO: setValue is not implemented in ElementImpl&#xD;
 		std::shared_ptr&lt;uml::UmlFactory> factory = uml::UmlFactory::eInstance();&#xD;
 		std::shared_ptr&lt;uml::Model> p = factory->createModel();&#xD;
@@ -248,8 +246,7 @@
         <body>#include &quot;uml/UmlFactory.hpp&quot;&#xD;
 #include &quot;uml/Class.hpp&quot;&#xD;
 #include &quot;uml/Model.hpp&quot;&#xD;
-#include &quot;uml/Stereotype.hpp&quot;&#xD;
-#include &quot;abstractDataTypes/Any.hpp&quot;</body>
+#include &quot;uml/Stereotype.hpp&quot;</body>
         <body>		//TODO: setValue is not implemented in ElementImpl&#xD;
 		std::shared_ptr&lt;uml::UmlFactory> factory = uml::UmlFactory::eInstance();&#xD;
 		std::shared_ptr&lt;uml::Model> p = factory->createModel();&#xD;
