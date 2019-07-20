@@ -38,7 +38,7 @@
 		std::shared_ptr&lt;Bag&lt;uml::Property>> expected2( new Bag&lt;uml::Property>() );&#xD;
 		expected2->add( pt2 );&#xD;
 		expected2->add( pt1 );&#xD;
-		ASSERT_EQUALM( &quot;bag size not 1&quot;, expected2->size(), aqual2->size() );&#xD;
+		ASSERT_EQUALM( &quot;bag size not 2&quot;, expected2->size(), aqual2->size() );&#xD;
 		for( unsigned int i = 0; i &lt; aqual2->size(); i++ ) {&#xD;
 			ASSERT_EQUALM( &quot;bag element not equal&quot;, expected2->at( i ), aqual2->at( i ) );&#xD;
 		}</body>
@@ -289,11 +289,11 @@
 &#xD;
 		std::shared_ptr&lt;Bag&lt;uml::Namespace>> expected( new Bag&lt;uml::Namespace>() );&#xD;
 		expected->add( p );&#xD;
-		ASSERT_EQUALM( &quot;bag size not equal&quot;, expected->size(), aqual->size() );&#xD;
+		ASSERT_EQUALM( &quot;bag size not 1&quot;, expected->size(), aqual->size() );&#xD;
 		for( unsigned int i = 0; i &lt; aqual->size(); i++ ) {&#xD;
 			ASSERT_EQUALM( &quot;bag element not equal&quot;, expected->at( i ), aqual->at( i ) );&#xD;
 		}&#xD;
-		ASSERT_EQUALM( &quot;bag size not equal&quot;, expected->size(), aqual2->size() );&#xD;
+		ASSERT_EQUALM( &quot;bag size not 1&quot;, expected->size(), aqual2->size() );&#xD;
 		for( unsigned int i = 0; i &lt; aqual2->size(); i++ ) {&#xD;
 			ASSERT_EQUALM( &quot;bag element not equal&quot;, expected->at( i ), aqual2->at( i ) );&#xD;
 		}&#xD;
@@ -331,7 +331,7 @@
 		std::shared_ptr&lt;uml::Model> p = factory->createModel();&#xD;
 		std::shared_ptr&lt;uml::Class> c = factory->createClass_in_Package( p );&#xD;
 &#xD;
-		ASSERT_EQUALM( &quot;seperator ist not ::&quot;, &quot;::&quot;, c->separator() );</body>
+		ASSERT_EQUALM( &quot;separator is not ::&quot;, &quot;::&quot;, c->separator() );</body>
       </ownedBehavior>
       <ownedOperation xmi:id="_YBVuUJmIEemCfIXRbMVoGQ" name="allNamespacesTest" method="_JDS6QJpPEemCfIXRbMVoGQ"/>
       <ownedOperation xmi:id="_bVMrwJmIEemCfIXRbMVoGQ" name="getQualifiedNameTest" method="_JDS6QZpPEemCfIXRbMVoGQ"/>

@@ -50,11 +50,11 @@ void NamedElementImplTest__allNamespacesTest() {
 
 		std::shared_ptr<Bag<uml::Namespace>> expected( new Bag<uml::Namespace>() );
 		expected->add( p );
-		ASSERT_EQUALM( "bag size not equal", expected->size(), aqual->size() );
+		ASSERT_EQUALM( "bag size not 1", expected->size(), aqual->size() );
 		for( unsigned int i = 0; i < aqual->size(); i++ ) {
 			ASSERT_EQUALM( "bag element not equal", expected->at( i ), aqual->at( i ) );
 		}
-		ASSERT_EQUALM( "bag size not equal", expected->size(), aqual2->size() );
+		ASSERT_EQUALM( "bag size not 1", expected->size(), aqual2->size() );
 		for( unsigned int i = 0; i < aqual2->size(); i++ ) {
 			ASSERT_EQUALM( "bag element not equal", expected->at( i ), aqual2->at( i ) );
 		}
@@ -101,7 +101,7 @@ void NamedElementImplTest__separatorTest() {
 		std::shared_ptr<uml::Model> p = factory->createModel();
 		std::shared_ptr<uml::Class> c = factory->createClass_in_Package( p );
 
-		ASSERT_EQUALM( "seperator ist not ::", "::", c->separator() );
+		ASSERT_EQUALM( "separator is not ::", "::", c->separator() );
 	}
 	TestSuiteMainHelper::CollectTestEndStatistics();
 	TestSuiteMainHelper::PrintTestsStatistics();

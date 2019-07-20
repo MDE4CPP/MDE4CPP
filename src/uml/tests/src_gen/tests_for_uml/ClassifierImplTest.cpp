@@ -73,7 +73,7 @@ void ClassifierImplTest__getAllAttributesTest() {
 		std::shared_ptr<Bag<uml::Property>> expected2( new Bag<uml::Property>() );
 		expected2->add( pt2 );
 		expected2->add( pt1 );
-		ASSERT_EQUALM( "bag size not 1", expected2->size(), aqual2->size() );
+		ASSERT_EQUALM( "bag size not 2", expected2->size(), aqual2->size() );
 		for( unsigned int i = 0; i < aqual2->size(); i++ ) {
 			ASSERT_EQUALM( "bag element not equal", expected2->at( i ), aqual2->at( i ) );
 		}

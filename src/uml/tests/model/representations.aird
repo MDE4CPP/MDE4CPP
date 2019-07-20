@@ -178,7 +178,7 @@
         </ownedStyle>
         <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.obeonetwork.dsl.uml2.design/description/uml2.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Class%20Diagram']/@defaultLayer/@containerMappings[name='CD_ReusedMappingForFeatures']/@subNodeMappings[name='CD_Operation']"/>
       </ownedElements>
-      <ownedElements xmi:type="diagram:DNodeListElement" uid="_fMGosJmEEemCfIXRbMVoGQ" name="GetGeneralsTest()">
+      <ownedElements xmi:type="diagram:DNodeListElement" uid="_fMGosJmEEemCfIXRbMVoGQ" name="getGeneralsTest()">
         <target xmi:type="uml:Operation" href="file:/C:/Uni/BA/MDE4CPPFork/src/uml/tests/model/umlTests.uml#_d0Z18JmEEemCfIXRbMVoGQ"/>
         <semanticElements xmi:type="uml:Operation" href="file:/C:/Uni/BA/MDE4CPPFork/src/uml/tests/model/umlTests.uml#_d0Z18JmEEemCfIXRbMVoGQ"/>
         <ownedStyle xmi:type="diagram:Square" uid="_fMHPwJmEEemCfIXRbMVoGQ" labelAlignment="LEFT">
@@ -215,7 +215,7 @@
         <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.obeonetwork.dsl.uml2.design/description/uml2.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Class%20Diagram']/@defaultLayer/@containerMappings[name='CD_ReusedMappingForFeatures']/@subNodeMappings[name='CD_Operation']"/>
       </ownedElements>
     </ownedDiagramElements>
-    <ownedDiagramElements xmi:type="diagram:DNodeList" uid="_IqBQ8JmGEemCfIXRbMVoGQ" name="ElementImpl" tooltipText="umlTests::tests_for_uml::ElementImpl" width="12" height="10">
+    <ownedDiagramElements xmi:type="diagram:DNodeList" uid="_IqBQ8JmGEemCfIXRbMVoGQ" name="ElementImplTest" tooltipText="umlTests::tests_for_uml::ElementImplTest" width="12" height="10">
       <target xmi:type="uml:Class" href="file:/C:/Uni/BA/MDE4CPPFork/src/uml/tests/model/umlTests.uml#_HlnNoJmGEemCfIXRbMVoGQ"/>
       <semanticElements xmi:type="uml:Class" href="file:/C:/Uni/BA/MDE4CPPFork/src/uml/tests/model/umlTests.uml#_HlnNoJmGEemCfIXRbMVoGQ"/>
       <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
