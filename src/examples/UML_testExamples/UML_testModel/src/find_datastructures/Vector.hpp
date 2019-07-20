@@ -15,7 +15,7 @@ class Vector {
 private:
 	std::vector<std::shared_ptr<uml::Class>> classes;
 public:
-	Vector( std::vector<std::shared_ptr<uml::Class>> classes );
+	Vector( std::vector<std::shared_ptr<uml::Class>> _classes );
 	virtual ~Vector();
 
 	std::shared_ptr<uml::Class> at( int index );

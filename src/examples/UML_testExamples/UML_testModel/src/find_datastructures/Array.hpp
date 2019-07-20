@@ -14,7 +14,7 @@ class Array {
 private:
 	std::shared_ptr<uml::Class>* classes;
 public:
-	Array( std::shared_ptr<uml::Class>* classes );
+	Array( std::shared_ptr<uml::Class>* _classes );
 	virtual ~Array();
 
 	std::shared_ptr<uml::Class> at( int index );
