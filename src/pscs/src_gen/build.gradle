@@ -1,0 +1,59 @@
+plugins {
+	id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.5"
+}
+
+description 'Compile task for project: PSCS'
+
+task compilePSCS(type: tui.sse.mde4cpp.MDE4CPPCompile) {
+	group 'PSCS'
+	description 'compile PSCS'
+
+	projectFolder = file('.' + File.separator + 'PSCS')
+
+	inputs.files(fileTree('.') {
+        exclude 'PSCS/.cmake/**'
+    })
+	if(!file('.' + File.separator + 'PSCS' + File.separator + '.cmake' + File.separator).exists()) {
+		outputs.upToDateWhen { false }
+	}
+	outputs.file file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'bin' + File.separator + 'PSCS.dll')
+	outputs.file file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'bin' + File.separator + 'PSCSd.dll')
+	outputs.dir file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'include' + File.separator + 'PSCS')
+
+	// dependency to basic interfaces
+	dependsOn getRootProject().getTasksByName('deliverBasicInterfaces', true) 
+	outputs.dir file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'include' + File.separator + 'abstractDataTypes')
+	outputs.dir file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'include' + File.separator + 'persistence' + File.separator + 'interfaces')
+	outputs.dir file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'include' + File.separator + 'pluginFramework')
+	outputs.dir file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'include' + File.separator + 'util')
+
+	// dependency to model 'ecore'
+	def ecore = getRootProject().getTasksByName('compileEcore', true)
+	dependsOn ecore
+	inputs.files(ecore.outputs)
+
+	// dependency to model 'fUML'
+	def fUML = getRootProject().getTasksByName('compileFUML', true)
+	dependsOn fUML
+	inputs.files(fUML.outputs)
+
+	// dependency to model 'types'
+	def types = getRootProject().getTasksByName('compileTypes', true)
+	dependsOn types
+	inputs.files(types.outputs)
+
+	// dependency to model 'uml'
+	def uml = getRootProject().getTasksByName('compileUml', true)
+	dependsOn uml
+	inputs.files(uml.outputs)
+}
+
+task clean {
+	doFirst {
+		def cmakeFolder = file('.' + File.separator + 'PSCS' + File.separator + '.cmake' + File.separator)
+		if(cmakeFolder.exists()) {
+    		delete cmakeFolder.absolutePath
+   			println 'deleting folder ' + cmakeFolder.absolutePath
+		}
+	}
+}
