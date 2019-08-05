@@ -69,6 +69,9 @@ static const unsigned int [aClass.getMemberName().toUpperCase()/]_OPERATION_COUN
 [for (c : Class | aPackage.allOwnedElements()->selectByType(Class)->sortedBy(name)->reject(name.oclIsInvalid() or name = ''))]
 	[generateStaticClassID(c)/]
 [/for]
+[for (c : Class | aPackage.allOwnedElements()->selectByType(Stereotype)->sortedBy(name)->reject(name.oclIsInvalid() or name = ''))]
+	[generateStaticClassID(c)/]
+[/for]
 
 [/template]
 

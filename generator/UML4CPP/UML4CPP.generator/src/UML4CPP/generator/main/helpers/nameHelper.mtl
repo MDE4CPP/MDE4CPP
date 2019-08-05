@@ -173,6 +173,8 @@
 
 [query public getStaticClassID_Name(aNamedElement : NamedElement) : String = if ((aNamedElement.oclIsUndefined()) or (aNamedElement.name.oclIsUndefined())) then '' else ', '.concat(aNamedElement.myQualifiedTypeName(true)) endif/]
 
+[query public getGeneralSuperClassName(aClass : Class) : String = if (aClass.oclIsKindOf(Stereotype)) then 'Stereotype' else 'Element' endif /]
+
 [**
  * generate member name based on myQualifiedName
 */]

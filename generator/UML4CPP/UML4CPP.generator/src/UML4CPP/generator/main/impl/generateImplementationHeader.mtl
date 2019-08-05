@@ -44,7 +44,7 @@
 [/if]
 [/for]
 [if (aClass.superClass->isEmpty())]
-#include "uml/impl/ElementImpl.hpp"
+#include "uml/impl/[aClass.getGeneralSuperClassName()/]Impl.hpp"
 [/if]
 #include "uml/Property.hpp"
 
@@ -65,7 +65,7 @@ namespace uml
 [/if]
 	class [className/] [for (sClass : Class | aClass.superClass->reject(oclIsUndefined() and name.oclIsUndefined())) before (':') separator (',')]
 virtual public [sClass.getClassifierName(aClass, ignoreNamespace(sClass))/]Impl[/for][if (aClass.superClass->isEmpty())]
- : virtual public uml::ElementImpl[/if], virtual public [aClass.name.toUpperFirst()/]
+ : virtual public uml::[aClass.getGeneralSuperClassName()/]Impl[/if], virtual public [aClass.name.toUpperFirst()/]
 	{
 		private:    
 			[className/]([className/] const&) = delete;
