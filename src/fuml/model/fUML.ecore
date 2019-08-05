@@ -2249,4 +2249,117 @@
     </eOperations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EventOccurrence"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CallEventExecution" eSuperTypes="#//Execution">
+    <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+      <details key="includes" value="#include &quot;fUML/CallEventOccurrence.hpp&quot;&#xA;#include &quot;fUML/FUMLFactory.hpp&quot;&#xA;#include &quot;fUML/Reference.hpp&quot;"/>
+    </eAnnotations>
+    <eOperations name="copy" lowerBound="1" eType="#//Value">
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="//Create a new call event execution that is a copy of this execution, with the&#xA;// caller initially not suspended.&#xA;&#xA;//CallEventExecution copy = (CallEventExecution)super.copy();&#xA;//copy.callerSuspended = false;&#xA;//return copy;"/>
+        <details key="doNotGenerate" value="true"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="createEventOccurrence" lowerBound="1" eType="#//EventOccurrence">
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="bodyJava" value="std::shared_ptr&lt;CallEventOccurrence> eventOccurrence = FUMLFactory::eInstance()->createCallEventOccurrence();&#xA;&#x9;eventOccurrence->setExecution(getThisCallEventExecutionPtr());&#xA;&#x9;return eventOccurrence;"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="execute">
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="// Make the call on the target object (which is the context of this execution)&#xA;// and suspend the caller until the call is completed.&#xA;// Note: The callerSuspended flag needs to be set before the call is made,&#xA;// in case the call is immediately handled and returned, even before the&#xA;// suspend loop is started.&#xA;&#xA;setCallerSuspended(true);&#xA;makeCall();&#xA;suspendCaller();"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="getInputParameterValues" upperBound="-1" eType="#//ParameterValue">
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="bodyJava" value="// Return input parameter values for this execution.&#xA;&#xA;ParameterValueList parameterValues = new ParameterValueList();&#xA;for(int i=0; i &lt; this.parameterValues.size(); i++){&#xA;ParameterValue parameterValue = this.parameterValues.get(i);&#xA;if(parameterValue.parameter.direction == ParameterDirectionKind.in | parameterValue.parameter.direction == ParameterDirectionKind.inout){&#xA;parameterValues.addValue(parameterValue);&#xA;}&#xA;}&#xA;return parameterValues;"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="getOperation" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Operation">
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="bodyJava" value="// Return the operation being called by this call event execution.&#xA;return ((CallEventBehavior)this.getBehavior()).operation;"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="isCallerSuspended" eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//Boolean">
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="bodyJava" value="_beginIsolation();&#xA;&#x9;bool isSuspended = m_callerSuspended;&#xA;&#x9;_endIsolation();&#xA;&#xA;&#x9;return isSuspended;"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="makeCall">
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="bodyJava" value="std::shared_ptr&lt;Reference> reference = FUMLFactory::eInstance()->createReference();&#xA;&#x9;reference->setReferent(m_context);&#xA;&#x9;std::shared_ptr&lt;EventOccurrence> eventOccurence = createEventOccurrence();&#xA;&#x9;eventOccurence->sendTo(reference);"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="new_" eType="#//Value">
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="return FUMLFactory::eInstance()->createCallEventExecution();"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="releaseCaller">
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="setCallerSuspended(false);"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="setOutputParameterValues">
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="bodyJava" value="// Set the output parameter values for this execution.&#xA;&#xA;ParameterList parameters = this.getBehavior().ownedParameter;&#xA;int i = 1;&#xA;int j = 1;&#xA;while (i &lt;= parameters.size()) {&#xA;Parameter parameter = parameters.get(i-1);&#xA;if (parameter.direction == ParameterDirectionKind.inout |&#xA;parameter.direction == ParameterDirectionKind.out |&#xA;parameter.direction == ParameterDirectionKind.return_ ) {&#xA;ParameterValue parameterValue = parameterValues.get(j-1);&#xA;parameterValue.parameter = parameter;&#xA;this.setParameterValue(parameterValue);&#xA;j = j + 1;&#xA;}&#xA;i = i + 1;&#xA;}"/>
+      </eAnnotations>
+      <eParameters name="parameterValues" upperBound="-1" eType="#//ParameterValue"/>
+    </eOperations>
+    <eOperations name="suspendCaller">
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="while(isCallerSuspended())&#xA;&#x9;{&#xA;&#x9;&#x9;wait_();&#xA;&#x9;}"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="wait_">
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="// Wait for an indeterminate amount of time to allow other concurrent&#xA;// executions to proceed&#xA;&#xA;// [There is no further formal specification for this operation.]."/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="callerSuspended" eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//Boolean">
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="keySetterBody" value="_beginIsolation();&#xA;this.callerSuspended = callerSuspended;&#xA;_endIsolation();"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CallEventOccurrence" eSuperTypes="#//EventOccurrence">
+    <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+      <details key="includes" value="#include &lt;memory>&#xA;#include &quot;uml/Trigger.hpp&quot;&#xA;#include &quot;uml/CallEvent.hpp&quot;"/>
+    </eAnnotations>
+    <eOperations name="getOperation" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Operation">
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="return m_execution->getOperation();"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="getParameterValues" upperBound="-1" eType="#//ParameterValue">
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="return m_execution->getInputParameterValues();"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="match" eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//Boolean">
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="bodyJava" value="bool matches = false;&#xA;&#x9;uml::CallEvent callEvent = std::dynamic_pointer_cast&lt;uml::CallEvent>(trigger->getEvent());&#xA;&#x9;if (callEvent != nullptr)&#xA;&#x9;{&#xA;&#x9;&#x9;matches = callEvent->getOperation() == getOperation();&#xA;&#x9;}&#xA;&#x9;return matches;"/>
+      </eAnnotations>
+      <eParameters name="trigger" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Trigger"/>
+    </eOperations>
+    <eOperations name="releaseCaller">
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="m_execution->releaseCaller();"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="setOutputParameterValues">
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="m_execution->setOutputParameterValues(parameterValues);"/>
+      </eAnnotations>
+      <eParameters name="parameterValues" upperBound="-1" eType="#//ParameterValue"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="execution" lowerBound="1"
+        eType="#//CallEventExecution"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CallEventBehavior">
+    <eOperations name="operation" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Operation">
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="keySetterBody" value="this.operation = operation;&#xA;for(int i = 0; i &lt; operation.ownedParameter.size(); i++){&#xA;Parameter operationParameter = operation.ownedParameter.get(i);&#xA;Parameter parameter = new Parameter();&#xA;parameter.name = operationParameter.name;&#xA;parameter.type = operationParameter.type;&#xA;parameter.multiplicityElement.lowerValue =&#xA;operationParameter.multiplicityElement.lowerValue;&#xA;parameter.multiplicityElement.lower =&#xA;operationParameter.multiplicityElement.lower;&#xA;parameter.multiplicityElement.upperValue =&#xA;operationParameter.multiplicityElement.upperValue;&#xA;parameter.multiplicityElement.upper =&#xA;operationParameter.multiplicityElement.upper;&#xA;parameter.direction = operationParameter.direction;&#xA;parameter.owner = this;&#xA;parameter.namespace = this;&#xA;this.ownedElement.addValue(parameter);&#xA;this.ownedMember.addValue(parameter);&#xA;this.member.addValue(parameter);&#xA;this.ownedParameter.addValue(parameter);&#xA;}&#xA;this.isReentrant = true;&#xA;this.name = &quot;CallEventBehavior&quot;;&#xA;if (operation.name != null) {&#xA;this.name = this.name + &quot;(&quot; + operation.name + &quot;)&quot;;&#xA;}"/>
+      </eAnnotations>
+    </eOperations>
+  </eClassifiers>
 </ecore:EPackage>
