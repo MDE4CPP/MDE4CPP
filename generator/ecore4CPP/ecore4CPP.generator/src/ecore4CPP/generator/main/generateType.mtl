@@ -207,7 +207,7 @@ std::string
 [/template]
 
 [template public transformType(anEClassifier : EClassifier) ? (oclIsKindOf(EEnum))]
-[anEClassifier.name/]
+[anEClassifier.generateNamespaceDefinition()/]::[anEClassifier.name/]
 [/template]
 
 [query public getDefaultValue(anEClassifier : EClassifier) : String = 

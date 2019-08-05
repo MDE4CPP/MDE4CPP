@@ -32,6 +32,7 @@
 #include "[aPackage.getPackageName()/]Exec/[aPackage.getPackageName().toUpperFirst()/]Locus.hpp"
 #include "[aPackage.getPackageName()/]Exec/impl/[aPackage.getPackageName().toUpperFirst()/]LocusImpl.hpp"
 
+
 [generateMainIncludes()/]
 [if (not aPackage.allOwnedElements()->filter(Activity)->isEmpty())]
 [let act : Activity = aPackage.allOwnedElements()->filter(Activity)->asOrderedSet()->first()]
@@ -74,7 +75,7 @@ int main()
     else{
         DEBUG_MESSAGE(std::cout << resultPList->size() << std::endl;)
         for(unsigned int parIndex=0; parIndex< resultPList->size(); parIndex++)
-{
+    {
             DEBUG_MESSAGE(std::cout << "Parameter " << parIndex <<" name: "<<resultPList->at(parIndex)->getParameter()->getName() << std::endl;)
             if(resultPList->at(parIndex)->getValues()->empty())
             {
@@ -104,6 +105,7 @@ int main()
 #include "fUML/FUMLFactory.hpp"
 #include "fUML/Locus.hpp"
 #include "fUML/ParameterValue.hpp"
+#include "fUML/Value.hpp"
 #include "uml/Activity.hpp"
 #include "uml/FunctionBehavior.hpp"
 #include "uml/Interface.hpp"
