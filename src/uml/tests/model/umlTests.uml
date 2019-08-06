@@ -327,20 +327,25 @@
 #include &quot;Stereotype_uml/ExampleClass.hpp&quot;&#xD;
 #include &quot;Stereotype_uml/ExampleStereotype.hpp&quot;&#xD;
 #include &quot;uml/UmlFactory.hpp&quot;&#xD;
+#include &quot;uml/LiteralInteger.hpp&quot;&#xD;
 #include &quot;abstractDataTypes/Any.hpp&quot;</body>
-        <body>		//TODO: setValue is not implemented in ElementImpl&#xD;
-		std::shared_ptr&lt;uml::UmlFactory> umlfactory = uml::UmlFactory::eInstance();&#xD;
+        <body>		std::shared_ptr&lt;uml::UmlFactory> umlfactory = uml::UmlFactory::eInstance();&#xD;
 		std::shared_ptr&lt;Stereotype_uml::Stereotype_umlFactory> factory = Stereotype_uml::Stereotype_umlFactory::eInstance();&#xD;
 		std::shared_ptr&lt;Stereotype_uml::ExampleClass> ec = factory->createExampleClass();&#xD;
 		std::shared_ptr&lt;Stereotype_uml::ExampleStereotype> es = factory->createExampleStereotype();&#xD;
+		std::shared_ptr&lt;uml::LiteralInteger> li = umlfactory->createLiteralInteger();&#xD;
+		li->setValue( 1547 );&#xD;
 &#xD;
 &#xD;
 		ASSERT_EQUALM( &quot;value not equal&quot;, Any(), ec->getValue( es, &quot;property&quot; ) );&#xD;
 		ec->applyStereotype( es );&#xD;
-		ASSERT_EQUALM( &quot;value not equal&quot;, Any(), ec->getValue( es, &quot;property&quot; ) );&#xD;
-		Any value = eAny( umlfactory->createLiteralInteger() );&#xD;
+		ASSERT_EQUALM( &quot;value not equal&quot;, nullptr, ec->getValue( es, &quot;property&quot; )->get&lt;std::shared_ptr&lt;uml::LiteralInteger>>() );&#xD;
+&#xD;
+		Any value = eAny( li );&#xD;
 		ec->setValue( es,&quot;property&quot;, value );&#xD;
-		ASSERT_EQUALM( &quot;value not equal&quot;, value, ec->getValue( es, &quot;property&quot; ) );</body>
+		int expected = li->getValue();&#xD;
+		int aqual = ec->getValue( es, &quot;property&quot; )->get&lt;std::shared_ptr&lt;uml::LiteralInteger>>()->getValue();&#xD;
+		ASSERT_EQUALM( &quot;value not equal&quot;, expected, aqual );</body>
         <body>Stereotype_uml</body>
       </ownedBehavior>
       <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_IsoGsJpPEemCfIXRbMVoGQ" name="isStereotypeAppliedTestFB" specification="_jGkoQJmGEemCfIXRbMVoGQ">
@@ -367,17 +372,21 @@
 #include &quot;Stereotype_uml/ExampleClass.hpp&quot;&#xD;
 #include &quot;Stereotype_uml/ExampleStereotype.hpp&quot;&#xD;
 #include &quot;uml/UmlFactory.hpp&quot;&#xD;
+#include &quot;uml/LiteralInteger.hpp&quot;&#xD;
 #include &quot;abstractDataTypes/Any.hpp&quot;</body>
-        <body>		//TODO: setValue is not implemented in ElementImpl&#xD;
-		std::shared_ptr&lt;uml::UmlFactory> umlfactory = uml::UmlFactory::eInstance();&#xD;
+        <body>		std::shared_ptr&lt;uml::UmlFactory> umlfactory = uml::UmlFactory::eInstance();&#xD;
 		std::shared_ptr&lt;Stereotype_uml::Stereotype_umlFactory> factory = Stereotype_uml::Stereotype_umlFactory::eInstance();&#xD;
 		std::shared_ptr&lt;Stereotype_uml::ExampleClass> ec = factory->createExampleClass();&#xD;
 		std::shared_ptr&lt;Stereotype_uml::ExampleStereotype> es = factory->createExampleStereotype();&#xD;
+		std::shared_ptr&lt;uml::LiteralInteger> li = umlfactory->createLiteralInteger();&#xD;
+		li->setValue( 1547 );&#xD;
 &#xD;
 		ec->applyStereotype( es );&#xD;
-		Any value = eAny( umlfactory->createLiteralInteger() );&#xD;
+		Any value = eAny( li );&#xD;
 		ec->setValue( es,&quot;property&quot;, value );&#xD;
-		ASSERT_EQUALM( &quot;value not equal&quot;, value, ec->getValue( es, &quot;property&quot; ) );</body>
+		int expected = li->getValue();&#xD;
+		int aqual = ec->getValue( es, &quot;property&quot; )->get&lt;std::shared_ptr&lt;uml::LiteralInteger>>()->getValue();&#xD;
+		ASSERT_EQUALM( &quot;value not equal&quot;, expected, aqual );</body>
         <body>Stereotype_uml</body>
       </ownedBehavior>
       <ownedOperation xmi:id="_MQMGYJmGEemCfIXRbMVoGQ" name="applyStereotypeTest" method="_GeMgQJpPEemCfIXRbMVoGQ"/>

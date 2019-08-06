@@ -32,6 +32,7 @@
 #include "Stereotype_uml/ExampleClass.hpp"
 #include "Stereotype_uml/ExampleStereotype.hpp"
 #include "uml/UmlFactory.hpp"
+#include "uml/LiteralInteger.hpp"
 #include "abstractDataTypes/Any.hpp"
 //Included from operation "isStereotypeAppliedTest"
 #include "Stereotype_uml/Stereotype_umlFactory.hpp"
@@ -42,6 +43,7 @@
 #include "Stereotype_uml/ExampleClass.hpp"
 #include "Stereotype_uml/ExampleStereotype.hpp"
 #include "uml/UmlFactory.hpp"
+#include "uml/LiteralInteger.hpp"
 #include "abstractDataTypes/Any.hpp"
 
 //*********************************
@@ -119,19 +121,23 @@ void ElementImplTest__getValueTest() {
 	{
 		// Implemented as Function behaviour getValueTestFB
 
-		//TODO: setValue is not implemented in ElementImpl
 		std::shared_ptr<uml::UmlFactory> umlfactory = uml::UmlFactory::eInstance();
 		std::shared_ptr<Stereotype_uml::Stereotype_umlFactory> factory = Stereotype_uml::Stereotype_umlFactory::eInstance();
 		std::shared_ptr<Stereotype_uml::ExampleClass> ec = factory->createExampleClass();
 		std::shared_ptr<Stereotype_uml::ExampleStereotype> es = factory->createExampleStereotype();
+		std::shared_ptr<uml::LiteralInteger> li = umlfactory->createLiteralInteger();
+		li->setValue( 1547 );
 
 
 		ASSERT_EQUALM( "value not equal", Any(), ec->getValue( es, "property" ) );
 		ec->applyStereotype( es );
-		ASSERT_EQUALM( "value not equal", Any(), ec->getValue( es, "property" ) );
-		Any value = eAny( umlfactory->createLiteralInteger() );
+		ASSERT_EQUALM( "value not equal", nullptr, ec->getValue( es, "property" )->get<std::shared_ptr<uml::LiteralInteger>>() );
+
+		Any value = eAny( li );
 		ec->setValue( es,"property", value );
-		ASSERT_EQUALM( "value not equal", value, ec->getValue( es, "property" ) );
+		int expected = li->getValue();
+		int aqual = ec->getValue( es, "property" )->get<std::shared_ptr<uml::LiteralInteger>>()->getValue();
+		ASSERT_EQUALM( "value not equal", expected, aqual );
 	}
 	TestSuiteMainHelper::CollectTestEndStatistics();
 	TestSuiteMainHelper::PrintTestsStatistics();
@@ -163,16 +169,19 @@ void ElementImplTest__setValueTest() {
 	{
 		// Implemented as Function behaviour setValueTestFB
 
-		//TODO: setValue is not implemented in ElementImpl
 		std::shared_ptr<uml::UmlFactory> umlfactory = uml::UmlFactory::eInstance();
 		std::shared_ptr<Stereotype_uml::Stereotype_umlFactory> factory = Stereotype_uml::Stereotype_umlFactory::eInstance();
 		std::shared_ptr<Stereotype_uml::ExampleClass> ec = factory->createExampleClass();
 		std::shared_ptr<Stereotype_uml::ExampleStereotype> es = factory->createExampleStereotype();
+		std::shared_ptr<uml::LiteralInteger> li = umlfactory->createLiteralInteger();
+		li->setValue( 1547 );
 
 		ec->applyStereotype( es );
-		Any value = eAny( umlfactory->createLiteralInteger() );
+		Any value = eAny( li );
 		ec->setValue( es,"property", value );
-		ASSERT_EQUALM( "value not equal", value, ec->getValue( es, "property" ) );
+		int expected = li->getValue();
+		int aqual = ec->getValue( es, "property" )->get<std::shared_ptr<uml::LiteralInteger>>()->getValue();
+		ASSERT_EQUALM( "value not equal", expected, aqual );
 	}
 	TestSuiteMainHelper::CollectTestEndStatistics();
 	TestSuiteMainHelper::PrintTestsStatistics();

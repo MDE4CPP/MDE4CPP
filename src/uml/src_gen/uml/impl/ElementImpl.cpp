@@ -355,15 +355,15 @@ Any ElementImpl::getValue(std::shared_ptr<uml::Stereotype>  stereotype,std::stri
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr<uml::Stereotype> stereoInstance = util::StereotypeStorage::eInstance()->getAppliedStereotype(getThisElementPtr(), stereotype->getQualifiedName());
+		std::shared_ptr<uml::Stereotype> stereoInstance = util::StereotypeStorage::eInstance()->getAppliedStereotype(getThisElementPtr(), stereotype->getMetaClass()->getQualifiedName());
 	if(stereoInstance == nullptr)
 	{
 	   return Any();
 	}
-
 	std::shared_ptr<Bag<uml::Property> > propertyList = stereoInstance->getMetaClass()->getAttribute();
 	for(std::shared_ptr<uml::Property> p: *propertyList)
 	{
+		std::cout << p->getName() << std::endl;
 		if(p->getName()==propertyName)
 		{
 			return stereoInstance->get(p);
@@ -433,13 +433,20 @@ void ElementImpl::setValue(std::shared_ptr<uml::Stereotype>  stereotype,std::str
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	uml::NamedElement * elem = dynamic_cast<uml::NamedElement *>(this);
-if(elem)
-{
-    //apply stereotype to map
-    //std::vector<uml::Stereotype *> appliedStList = map->find(elem->getQualifiedName())
-    //return std::any(appliedStList->cbegin();appliedStList->cend();[stereotype](stereo){return });
-}
+		std::shared_ptr<uml::Stereotype> stereoInstance = util::StereotypeStorage::eInstance()->getAppliedStereotype(getThisElementPtr(), stereotype->getMetaClass()->getQualifiedName());
+	if(stereoInstance == nullptr)
+	{
+	   return;
+	}
+	std::shared_ptr<Bag<uml::Property> > propertyList = stereoInstance->getMetaClass()->getAttribute();
+	for(std::shared_ptr<uml::Property> p: *propertyList)
+	{
+		if(p->getName()==propertyName)
+		{
+			stereoInstance->set(p, newValue);
+			return;
+		}
+	}
 	//end of body
 }
 
