@@ -53,6 +53,12 @@ IF( UNIX AND NOT APPLE )
 		FIND_LIBRARY( ECOREREFLECTION_DEBUG ecoreReflectiond.so ${MDE4CPP_HOME}/application/bin )
 		FIND_LIBRARY( PRIMITIVETYPESREFLECTION_DEBUG primitivetypesReflectiond.so ${MDE4CPP_HOME}/application/bin )
 		FIND_LIBRARY( UMLREFLECTION_DEBUG umlReflectiond.so ${MDE4CPP_HOME}/application/bin )
+		FIND_LIBRARY( STEREOTYPE_UML_DEBUG Stereotype_umld.so ${MDE4CPP_HOME}/application/bin )
+		FIND_LIBRARY( STEREOTYPE_UML_DEBUG Stereotype_umld.so ${MDE4CPP_HOME}/application/bin )
+		FIND_LIBRARY( STEREOTYPE_UML_DEBUG Stereotype_umld.so ${MDE4CPP_HOME}/application/bin )
+		FIND_LIBRARY( STEREOTYPE_UML_DEBUG Stereotype_umld.so ${MDE4CPP_HOME}/application/bin )
+		FIND_LIBRARY( STEREOTYPE_UML_DEBUG Stereotype_umld.so ${MDE4CPP_HOME}/application/bin )
+		FIND_LIBRARY( STEREOTYPE_UML_DEBUG Stereotype_umld.so ${MDE4CPP_HOME}/application/bin )
 		
 	ELSE()
 		FIND_LIBRARY( ECORE_RELEASE ecore.so ${MDE4CPP_HOME}/application/bin )
@@ -60,6 +66,12 @@ IF( UNIX AND NOT APPLE )
 		FIND_LIBRARY( ECOREREFLECTION_RELEASE ecoreReflection.so ${MDE4CPP_HOME}/application/bin )
 		FIND_LIBRARY( PRIMITIVETYPESREFLECTION_RELEASE primitivetypesReflection.so ${MDE4CPP_HOME}/application/bin )
 		FIND_LIBRARY( UMLREFLECTION_RELEASE umlReflection.so ${MDE4CPP_HOME}/application/bin )
+		FIND_LIBRARY( STEREOTYPE_UML_RELEASE Stereotype_uml.so ${MDE4CPP_HOME}/application/bin )
+		FIND_LIBRARY( STEREOTYPE_UML_RELEASE Stereotype_uml.so ${MDE4CPP_HOME}/application/bin )
+		FIND_LIBRARY( STEREOTYPE_UML_RELEASE Stereotype_uml.so ${MDE4CPP_HOME}/application/bin )
+		FIND_LIBRARY( STEREOTYPE_UML_RELEASE Stereotype_uml.so ${MDE4CPP_HOME}/application/bin )
+		FIND_LIBRARY( STEREOTYPE_UML_RELEASE Stereotype_uml.so ${MDE4CPP_HOME}/application/bin )
+		FIND_LIBRARY( STEREOTYPE_UML_RELEASE Stereotype_uml.so ${MDE4CPP_HOME}/application/bin )
 		
 	ENDIF()
 ELSEIF( APPLE )
@@ -69,6 +81,12 @@ ELSEIF( APPLE )
 		FIND_LIBRARY( ECOREREFLECTION_DEBUG ecoreReflectiond.dylib ${MDE4CPP_HOME}/application/bin )
 		FIND_LIBRARY( PRIMITIVETYPESREFLECTION_DEBUG primitivetypesReflectiond.dylib ${MDE4CPP_HOME}/application/bin )
 		FIND_LIBRARY( UMLREFLECTION_DEBUG umlReflectiond.dylib ${MDE4CPP_HOME}/application/bin )
+		FIND_LIBRARY( STEREOTYPE_UML_DEBUG Stereotype_umld.dylib ${MDE4CPP_HOME}/application/bin )
+		FIND_LIBRARY( STEREOTYPE_UML_DEBUG Stereotype_umld.dylib ${MDE4CPP_HOME}/application/bin )
+		FIND_LIBRARY( STEREOTYPE_UML_DEBUG Stereotype_umld.dylib ${MDE4CPP_HOME}/application/bin )
+		FIND_LIBRARY( STEREOTYPE_UML_DEBUG Stereotype_umld.dylib ${MDE4CPP_HOME}/application/bin )
+		FIND_LIBRARY( STEREOTYPE_UML_DEBUG Stereotype_umld.dylib ${MDE4CPP_HOME}/application/bin )
+		FIND_LIBRARY( STEREOTYPE_UML_DEBUG Stereotype_umld.dylib ${MDE4CPP_HOME}/application/bin )
 		
 	ELSE()
 		FIND_LIBRARY( ECORE_RELEASE ecore.dylib ${MDE4CPP_HOME}/application/bin )
@@ -76,6 +94,12 @@ ELSEIF( APPLE )
 		FIND_LIBRARY( ECOREREFLECTION_RELEASE ecoreReflection.dylib ${MDE4CPP_HOME}/application/bin )
 		FIND_LIBRARY( PRIMITIVETYPESREFLECTION_RELEASE primitivetypesReflection.dylib ${MDE4CPP_HOME}/application/bin )
 		FIND_LIBRARY( UMLREFLECTION_RELEASE umlReflection.dylib ${MDE4CPP_HOME}/application/bin )
+		FIND_LIBRARY( STEREOTYPE_UML_RELEASE Stereotype_uml.dylib ${MDE4CPP_HOME}/application/bin )
+		FIND_LIBRARY( STEREOTYPE_UML_RELEASE Stereotype_uml.dylib ${MDE4CPP_HOME}/application/bin )
+		FIND_LIBRARY( STEREOTYPE_UML_RELEASE Stereotype_uml.dylib ${MDE4CPP_HOME}/application/bin )
+		FIND_LIBRARY( STEREOTYPE_UML_RELEASE Stereotype_uml.dylib ${MDE4CPP_HOME}/application/bin )
+		FIND_LIBRARY( STEREOTYPE_UML_RELEASE Stereotype_uml.dylib ${MDE4CPP_HOME}/application/bin )
+		FIND_LIBRARY( STEREOTYPE_UML_RELEASE Stereotype_uml.dylib ${MDE4CPP_HOME}/application/bin )
 		
 	ENDIF()
 ELSE()
@@ -85,6 +109,12 @@ ELSE()
 		FIND_LIBRARY( ECOREREFLECTION_DEBUG ecoreReflectiond ${MDE4CPP_HOME}/application/lib )
 		FIND_LIBRARY( PRIMITIVETYPESREFLECTION_DEBUG primitivetypesReflectiond ${MDE4CPP_HOME}/application/lib )
 		FIND_LIBRARY( UMLREFLECTION_DEBUG umlReflectiond ${MDE4CPP_HOME}/application/lib )
+		FIND_LIBRARY( STEREOTYPE_UML_DEBUG Stereotype_umld ${MDE4CPP_HOME}/application/lib )
+		FIND_LIBRARY( STEREOTYPE_UML_DEBUG Stereotype_umld ${MDE4CPP_HOME}/application/lib )
+		FIND_LIBRARY( STEREOTYPE_UML_DEBUG Stereotype_umld ${MDE4CPP_HOME}/application/lib )
+		FIND_LIBRARY( STEREOTYPE_UML_DEBUG Stereotype_umld ${MDE4CPP_HOME}/application/lib )
+		FIND_LIBRARY( STEREOTYPE_UML_DEBUG Stereotype_umld ${MDE4CPP_HOME}/application/lib )
+		FIND_LIBRARY( STEREOTYPE_UML_DEBUG Stereotype_umld ${MDE4CPP_HOME}/application/lib )
 		
 		FIND_LIBRARY( PSAPI Psapi )
 	ELSE()
@@ -93,6 +123,12 @@ ELSE()
 		FIND_LIBRARY( ECOREREFLECTION_RELEASE ecoreReflection ${MDE4CPP_HOME}/application/lib )
 		FIND_LIBRARY( PRIMITIVETYPESREFLECTION_RELEASE primitivetypesReflection ${MDE4CPP_HOME}/application/lib )
 		FIND_LIBRARY( UMLREFLECTION_RELEASE umlReflection ${MDE4CPP_HOME}/application/lib )
+		FIND_LIBRARY( STEREOTYPE_UML_RELEASE Stereotype_uml ${MDE4CPP_HOME}/application/lib )
+		FIND_LIBRARY( STEREOTYPE_UML_RELEASE Stereotype_uml ${MDE4CPP_HOME}/application/lib )
+		FIND_LIBRARY( STEREOTYPE_UML_RELEASE Stereotype_uml ${MDE4CPP_HOME}/application/lib )
+		FIND_LIBRARY( STEREOTYPE_UML_RELEASE Stereotype_uml ${MDE4CPP_HOME}/application/lib )
+		FIND_LIBRARY( STEREOTYPE_UML_RELEASE Stereotype_uml ${MDE4CPP_HOME}/application/lib )
+		FIND_LIBRARY( STEREOTYPE_UML_RELEASE Stereotype_uml ${MDE4CPP_HOME}/application/lib )
 		
 		FIND_LIBRARY( PSAPI Psapi )
 	ENDIF()
@@ -109,6 +145,12 @@ IF( WIN32 )
 			debug ${ECOREREFLECTION_DEBUG}
 			debug ${PRIMITIVETYPESREFLECTION_DEBUG}
 			debug ${UMLREFLECTION_DEBUG}
+			debug ${STEREOTYPE_UML_DEBUG}
+			debug ${STEREOTYPE_UML_DEBUG}
+			debug ${STEREOTYPE_UML_DEBUG}
+			debug ${STEREOTYPE_UML_DEBUG}
+			debug ${STEREOTYPE_UML_DEBUG}
+			debug ${STEREOTYPE_UML_DEBUG}
 			${PSAPI}
 		 )
 	ELSE()
@@ -118,6 +160,12 @@ IF( WIN32 )
 			optimized ${ECOREREFLECTION_RELEASE}
 			optimized ${PRIMITIVETYPESREFLECTION_RELEASE}
 			optimized ${UMLREFLECTION_RELEASE}
+			optimized ${STEREOTYPE_UML_RELEASE}
+			optimized ${STEREOTYPE_UML_RELEASE}
+			optimized ${STEREOTYPE_UML_RELEASE}
+			optimized ${STEREOTYPE_UML_RELEASE}
+			optimized ${STEREOTYPE_UML_RELEASE}
+			optimized ${STEREOTYPE_UML_RELEASE}
 			${PSAPI}
 		 )
 	ENDIF()
@@ -129,6 +177,12 @@ ELSE()
 			debug ${ECOREREFLECTION_DEBUG}
 			debug ${PRIMITIVETYPESREFLECTION_DEBUG}
 			debug ${UMLREFLECTION_DEBUG}
+			debug ${STEREOTYPE_UML_DEBUG}
+			debug ${STEREOTYPE_UML_DEBUG}
+			debug ${STEREOTYPE_UML_DEBUG}
+			debug ${STEREOTYPE_UML_DEBUG}
+			debug ${STEREOTYPE_UML_DEBUG}
+			debug ${STEREOTYPE_UML_DEBUG}
 		 )
 	ELSE()
 		TARGET_LINK_LIBRARIES( ${PROJECT_NAME}
@@ -137,6 +191,12 @@ ELSE()
 			optimized ${ECOREREFLECTION_RELEASE}
 			optimized ${PRIMITIVETYPESREFLECTION_RELEASE}
 			optimized ${UMLREFLECTION_RELEASE}
+			optimized ${STEREOTYPE_UML_RELEASE}
+			optimized ${STEREOTYPE_UML_RELEASE}
+			optimized ${STEREOTYPE_UML_RELEASE}
+			optimized ${STEREOTYPE_UML_RELEASE}
+			optimized ${STEREOTYPE_UML_RELEASE}
+			optimized ${STEREOTYPE_UML_RELEASE}
 		 )
 	ENDIF()
 ENDIF()

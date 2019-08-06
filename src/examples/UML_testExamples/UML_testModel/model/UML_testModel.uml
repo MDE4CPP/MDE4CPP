@@ -20,7 +20,7 @@
   <packagedElement xmi:type="uml:Class" xmi:id="_iLq6QKY_EemKTuk6ZUbyhw" name="Subtraction">
     <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_0fG1YKY_EemKTuk6ZUbyhw" name="calculateFB" specification="_0fG1YaY_EemKTuk6ZUbyhw">
       <language>CPP</language>
-      <body>	if( operator2 == 7 ) {&#xD;
+      <body>	if( operator2 = 7 ) {&#xD;
 		return 7;&#xD;
 	}&#xD;
 	return operator1 - operator2;</body>

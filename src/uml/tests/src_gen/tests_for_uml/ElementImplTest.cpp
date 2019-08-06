@@ -15,36 +15,33 @@
 #include "helper/TestSuiteTimeHelper.hpp"
 
 //Included from operation "applyStereotypeTest"
-#include "uml/UmlFactory.hpp"
-#include "uml/Class.hpp"
-#include "uml/Model.hpp"
-#include "uml/Stereotype.hpp"
+#include "Stereotype_uml/Stereotype_umlFactory.hpp"
+#include "Stereotype_uml/ExampleClass.hpp"
+#include "Stereotype_uml/ExampleStereotype.hpp"
 //Included from operation "getAppliedStereotypeTest"
-#include "uml/UmlFactory.hpp"
-#include "uml/Class.hpp"
-#include "uml/Model.hpp"
-#include "uml/Stereotype.hpp"
+#include "Stereotype_uml/Stereotype_umlFactory.hpp"
+#include "Stereotype_uml/ExampleClass.hpp"
+#include "Stereotype_uml/ExampleStereotype.hpp"
 //Included from operation "getAppliedStereotypesTest"
-#include "uml/UmlFactory.hpp"
-#include "uml/Class.hpp"
-#include "uml/Model.hpp"
+#include "Stereotype_uml/Stereotype_umlFactory.hpp"
+#include "Stereotype_uml/ExampleClass.hpp"
+#include "Stereotype_uml/ExampleStereotype.hpp"
 #include "abstractDataTypes/Bag.hpp"
 //Included from operation "getValueTest"
+#include "Stereotype_uml/Stereotype_umlFactory.hpp"
+#include "Stereotype_uml/ExampleClass.hpp"
+#include "Stereotype_uml/ExampleStereotype.hpp"
 #include "uml/UmlFactory.hpp"
-#include "uml/Class.hpp"
-#include "uml/Model.hpp"
-#include "uml/Stereotype.hpp"
 #include "abstractDataTypes/Any.hpp"
 //Included from operation "isStereotypeAppliedTest"
-#include "uml/UmlFactory.hpp"
-#include "uml/Class.hpp"
-#include "uml/Model.hpp"
-#include "uml/Stereotype.hpp"
+#include "Stereotype_uml/Stereotype_umlFactory.hpp"
+#include "Stereotype_uml/ExampleClass.hpp"
+#include "Stereotype_uml/ExampleStereotype.hpp"
 //Included from operation "setValueTest"
+#include "Stereotype_uml/Stereotype_umlFactory.hpp"
+#include "Stereotype_uml/ExampleClass.hpp"
+#include "Stereotype_uml/ExampleStereotype.hpp"
 #include "uml/UmlFactory.hpp"
-#include "uml/Class.hpp"
-#include "uml/Model.hpp"
-#include "uml/Stereotype.hpp"
 #include "abstractDataTypes/Any.hpp"
 
 //*********************************
@@ -57,16 +54,12 @@ void ElementImplTest__applyStereotypeTest() {
 	{
 		// Implemented as Function behaviour applyStereotypeTestFB
 
-		std::shared_ptr<uml::UmlFactory> factory = uml::UmlFactory::eInstance();
-		std::shared_ptr<uml::Model> p = factory->createModel();
-		p->setName( "Model" );
-		std::shared_ptr<uml::Class> c = factory->createClass_in_Package( p );
-		c->setName( "Class" );
-		std::shared_ptr<uml::Stereotype> s = factory->createStereotype();
-		s->setName( "Stereotype" );
+		std::shared_ptr<Stereotype_uml::Stereotype_umlFactory> factory = Stereotype_uml::Stereotype_umlFactory::eInstance();
+		std::shared_ptr<Stereotype_uml::ExampleClass> ec = factory->createExampleClass();
+		std::shared_ptr<Stereotype_uml::ExampleStereotype> es = factory->createExampleStereotype();
 		
 		//TODO: applyStereotype always return "nullptr"
-		ASSERT_EQUALM( "return value is not nullptr", nullptr, c->applyStereotype( s ) );
+		ASSERT_EQUALM( "return value is not nullptr", nullptr, ec->applyStereotype( es ) );
 	}
 	TestSuiteMainHelper::CollectTestEndStatistics();
 	TestSuiteMainHelper::PrintTestsStatistics();
@@ -79,17 +72,13 @@ void ElementImplTest__getAppliedStereotypeTest() {
 	{
 		// Implemented as Function behaviour getAppliedStereotypeTestFB
 
-		std::shared_ptr<uml::UmlFactory> factory = uml::UmlFactory::eInstance();
-		std::shared_ptr<uml::Model> p = factory->createModel();
-		p->setName( "Model" );
-		std::shared_ptr<uml::Class> c = factory->createClass_in_Package( p );
-		c->setName( "Class" );
-		std::shared_ptr<uml::Stereotype> s = factory->createStereotype();
-		s->setName( "Stereotype" );
+		std::shared_ptr<Stereotype_uml::Stereotype_umlFactory> factory = Stereotype_uml::Stereotype_umlFactory::eInstance();
+		std::shared_ptr<Stereotype_uml::ExampleClass> ec = factory->createExampleClass();
+		std::shared_ptr<Stereotype_uml::ExampleStereotype> es = factory->createExampleStereotype();
 
-		c->applyStereotype( s );
+		ec->applyStereotype( es );
 
-		ASSERT_EQUALM( "got AppliedStereotype is wrong", s, c->getAppliedStereotype( "Model::Class::Stereotype" ) );
+		ASSERT_EQUALM( "got AppliedStereotype is wrong", es, ec->getAppliedStereotype( es->getMetaClass()->getQualifiedName() ) );
 	}
 	TestSuiteMainHelper::CollectTestEndStatistics();
 	TestSuiteMainHelper::PrintTestsStatistics();
@@ -102,19 +91,18 @@ void ElementImplTest__getAppliedStereotypesTest() {
 	{
 		// Implemented as Function behaviour getAppliedStereotypesTestFB
 
-		std::shared_ptr<uml::UmlFactory> factory = uml::UmlFactory::eInstance();
-		std::shared_ptr<uml::Model> p = factory->createModel();
-		std::shared_ptr<uml::Class> c = factory->createClass_in_Package( p );
-		std::shared_ptr<uml::Stereotype> s = factory->createStereotype();
-		std::shared_ptr<uml::Stereotype> s2 = factory->createStereotype();
+		std::shared_ptr<Stereotype_uml::Stereotype_umlFactory> factory = Stereotype_uml::Stereotype_umlFactory::eInstance();
+		std::shared_ptr<Stereotype_uml::ExampleClass> ec = factory->createExampleClass();
+		std::shared_ptr<Stereotype_uml::ExampleStereotype> es = factory->createExampleStereotype();
+		std::shared_ptr<Stereotype_uml::ExampleStereotype> es2 = factory->createExampleStereotype();
 
-		c->applyStereotype( s );
-		c->applyStereotype( s2 );
+		ec->applyStereotype( es );
+		ec->applyStereotype( es2 );
 
 		std::shared_ptr<Bag<uml::Stereotype>> expected( new Bag<uml::Stereotype>() );
-		expected->add( s );
-		expected->add( s2 );
-		std::shared_ptr<Bag<uml::Stereotype>> aqual = c->getAppliedStereotypes();
+		expected->add( es );
+		expected->add( es2 );
+		std::shared_ptr<Bag<uml::Stereotype>> aqual = ec->getAppliedStereotypes();
 		ASSERT_EQUALM( "c bag size not equal", expected->size(), aqual->size() );
 		for( unsigned int i = 0; i < aqual->size(); i++ ) {
 			ASSERT_EQUALM( "c bag element not equal", expected->at( i ), aqual->at( i ) );
@@ -132,16 +120,18 @@ void ElementImplTest__getValueTest() {
 		// Implemented as Function behaviour getValueTestFB
 
 		//TODO: setValue is not implemented in ElementImpl
-		std::shared_ptr<uml::UmlFactory> factory = uml::UmlFactory::eInstance();
-		std::shared_ptr<uml::Model> p = factory->createModel();
-		std::shared_ptr<uml::Class> c = factory->createClass_in_Package( p );
-		std::shared_ptr<uml::Stereotype> s = factory->createStereotype();
-		s->setName( "Stereotype" );
+		std::shared_ptr<uml::UmlFactory> umlfactory = uml::UmlFactory::eInstance();
+		std::shared_ptr<Stereotype_uml::Stereotype_umlFactory> factory = Stereotype_uml::Stereotype_umlFactory::eInstance();
+		std::shared_ptr<Stereotype_uml::ExampleClass> ec = factory->createExampleClass();
+		std::shared_ptr<Stereotype_uml::ExampleStereotype> es = factory->createExampleStereotype();
 
-		ASSERT_EQUALM( "value not equal", Any(), c->getValue( s, "property" ) );
-		Any value = eAny( factory->createLiteralInteger() );
-		c->setValue( s,"property", value );
-		ASSERT_EQUALM( "value not equal", value, c->getValue( s, "property" ) );
+
+		ASSERT_EQUALM( "value not equal", Any(), ec->getValue( es, "property" ) );
+		ec->applyStereotype( es );
+		ASSERT_EQUALM( "value not equal", Any(), ec->getValue( es, "property" ) );
+		Any value = eAny( umlfactory->createLiteralInteger() );
+		ec->setValue( es,"property", value );
+		ASSERT_EQUALM( "value not equal", value, ec->getValue( es, "property" ) );
 	}
 	TestSuiteMainHelper::CollectTestEndStatistics();
 	TestSuiteMainHelper::PrintTestsStatistics();
@@ -154,17 +144,13 @@ void ElementImplTest__isStereotypeAppliedTest() {
 	{
 		// Implemented as Function behaviour isStereotypeAppliedTestFB
 
-		std::shared_ptr<uml::UmlFactory> factory = uml::UmlFactory::eInstance();
-		std::shared_ptr<uml::Model> p = factory->createModel();
-		p->setName( "Model" );
-		std::shared_ptr<uml::Class> c = factory->createClass_in_Package( p );
-		c->setName( "Class" );
-		std::shared_ptr<uml::Stereotype> s = factory->createStereotype();
-		s->setName( "Stereotype" );
+		std::shared_ptr<Stereotype_uml::Stereotype_umlFactory> factory = Stereotype_uml::Stereotype_umlFactory::eInstance();
+		std::shared_ptr<Stereotype_uml::ExampleClass> ec = factory->createExampleClass();
+		std::shared_ptr<Stereotype_uml::ExampleStereotype> es = factory->createExampleStereotype();
 
-		ASSERT_EQUALM( "Stereotype is applied", false, c->isStereotypeApplied( s ) );
-		c->applyStereotype( s );
-		ASSERT_EQUALM( "Stereotype is not applied", true, c->isStereotypeApplied( s ) );
+		ASSERT_EQUALM( "Stereotype is applied", false, ec->isStereotypeApplied( es ) );
+		ec->applyStereotype( es );
+		ASSERT_EQUALM( "Stereotype is not applied", true, ec->isStereotypeApplied( es ) );
 	}
 	TestSuiteMainHelper::CollectTestEndStatistics();
 	TestSuiteMainHelper::PrintTestsStatistics();
@@ -178,17 +164,15 @@ void ElementImplTest__setValueTest() {
 		// Implemented as Function behaviour setValueTestFB
 
 		//TODO: setValue is not implemented in ElementImpl
-		std::shared_ptr<uml::UmlFactory> factory = uml::UmlFactory::eInstance();
-		std::shared_ptr<uml::Model> p = factory->createModel();
-		p->setName( "Model" );
-		std::shared_ptr<uml::Class> c = factory->createClass_in_Package( p );
-		c->setName( "Class" );
-		std::shared_ptr<uml::Stereotype> s = factory->createStereotype();
-		s->setName( "Stereotype" );
+		std::shared_ptr<uml::UmlFactory> umlfactory = uml::UmlFactory::eInstance();
+		std::shared_ptr<Stereotype_uml::Stereotype_umlFactory> factory = Stereotype_uml::Stereotype_umlFactory::eInstance();
+		std::shared_ptr<Stereotype_uml::ExampleClass> ec = factory->createExampleClass();
+		std::shared_ptr<Stereotype_uml::ExampleStereotype> es = factory->createExampleStereotype();
 
-		Any value = eAny( factory->createLiteralInteger() );
-		c->setValue( s,"property", value );
-		ASSERT_EQUALM( "value not equal", value, c->getValue( s, "property" ) );
+		ec->applyStereotype( es );
+		Any value = eAny( umlfactory->createLiteralInteger() );
+		ec->setValue( es,"property", value );
+		ASSERT_EQUALM( "value not equal", value, ec->getValue( es, "property" ) );
 	}
 	TestSuiteMainHelper::CollectTestEndStatistics();
 	TestSuiteMainHelper::PrintTestsStatistics();
