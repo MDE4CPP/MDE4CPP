@@ -442,12 +442,12 @@ std::shared_ptr<ecore::EClass> PropertyImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
-void PropertyImpl::setAggregation(AggregationKind _aggregation)
+void PropertyImpl::setAggregation(uml::AggregationKind _aggregation)
 {
 	m_aggregation = _aggregation;
 } 
 
-AggregationKind PropertyImpl::getAggregation() const 
+uml::AggregationKind PropertyImpl::getAggregation() const 
 {
 	return m_aggregation;
 }
@@ -991,7 +991,7 @@ bool PropertyImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::PROPERTY_ATTRIBUTE_AGGREGATION:
 		{
 			// BOOST CAST
-			AggregationKind _aggregation = newValue->get<AggregationKind>();
+			uml::AggregationKind _aggregation = newValue->get<uml::AggregationKind>();
 			setAggregation(_aggregation); //18630
 			return true;
 		}
@@ -1248,7 +1248,7 @@ void PropertyImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoad
 		iter = attr_list.find("aggregation");
 		if ( iter != attr_list.end() )
 		{
-			AggregationKind value = AggregationKind::NONE;
+			uml::AggregationKind value = AggregationKind::NONE;
 			std::string literal = iter->second;
 			if (literal == "none")
 			{
@@ -1559,7 +1559,7 @@ void PropertyImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 		// Add attributes
 		if ( this->eIsSet(package->getProperty_Attribute_aggregation()) )
 		{
-			AggregationKind value = this->getAggregation();
+			uml::AggregationKind value = this->getAggregation();
 			std::string literal = "";
 			if (value == AggregationKind::NONE)
 			{

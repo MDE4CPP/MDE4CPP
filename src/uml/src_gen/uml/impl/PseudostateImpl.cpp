@@ -224,12 +224,12 @@ std::shared_ptr<ecore::EClass> PseudostateImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
-void PseudostateImpl::setKind(PseudostateKind _kind)
+void PseudostateImpl::setKind(uml::PseudostateKind _kind)
 {
 	m_kind = _kind;
 } 
 
-PseudostateKind PseudostateImpl::getKind() const 
+uml::PseudostateKind PseudostateImpl::getKind() const 
 {
 	return m_kind;
 }
@@ -405,7 +405,7 @@ bool PseudostateImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::PSEUDOSTATE_ATTRIBUTE_KIND:
 		{
 			// BOOST CAST
-			PseudostateKind _kind = newValue->get<PseudostateKind>();
+			uml::PseudostateKind _kind = newValue->get<uml::PseudostateKind>();
 			setKind(_kind); //19013
 			return true;
 		}
@@ -459,7 +459,7 @@ void PseudostateImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XL
 		iter = attr_list.find("kind");
 		if ( iter != attr_list.end() )
 		{
-			PseudostateKind value = PseudostateKind::INITIAL;
+			uml::PseudostateKind value = PseudostateKind::INITIAL;
 			std::string literal = iter->second;
 			if (literal == "initial")
 			{
@@ -584,7 +584,7 @@ void PseudostateImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 		// Add attributes
 		if ( this->eIsSet(package->getPseudostate_Attribute_kind()) )
 		{
-			PseudostateKind value = this->getKind();
+			uml::PseudostateKind value = this->getKind();
 			std::string literal = "";
 			if (value == PseudostateKind::INITIAL)
 			{

@@ -426,12 +426,12 @@ std::shared_ptr<ecore::EClass> ExpansionRegionImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
-void ExpansionRegionImpl::setMode(ExpansionKind _mode)
+void ExpansionRegionImpl::setMode(uml::ExpansionKind _mode)
 {
 	m_mode = _mode;
 } 
 
-ExpansionKind ExpansionRegionImpl::getMode() const 
+uml::ExpansionKind ExpansionRegionImpl::getMode() const 
 {
 	return m_mode;
 }
@@ -637,7 +637,7 @@ bool ExpansionRegionImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::EXPANSIONREGION_ATTRIBUTE_MODE:
 		{
 			// BOOST CAST
-			ExpansionKind _mode = newValue->get<ExpansionKind>();
+			uml::ExpansionKind _mode = newValue->get<uml::ExpansionKind>();
 			setMode(_mode); //9544
 			return true;
 		}
@@ -711,7 +711,7 @@ void ExpansionRegionImpl::loadAttributes(std::shared_ptr<persistence::interfaces
 		iter = attr_list.find("mode");
 		if ( iter != attr_list.end() )
 		{
-			ExpansionKind value = ExpansionKind::ITERATIVE;
+			uml::ExpansionKind value = ExpansionKind::ITERATIVE;
 			std::string literal = iter->second;
 			if (literal == "parallel")
 			{
@@ -841,7 +841,7 @@ void ExpansionRegionImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 		// Add attributes
 		if ( this->eIsSet(package->getExpansionRegion_Attribute_mode()) )
 		{
-			ExpansionKind value = this->getMode();
+			uml::ExpansionKind value = this->getMode();
 			std::string literal = "";
 			if (value == ExpansionKind::PARALLEL)
 			{

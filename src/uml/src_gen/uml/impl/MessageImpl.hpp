@@ -73,7 +73,7 @@ namespace uml
 			 This query returns the MessageKind value for this Message.
 			result = (messageKind)
 			<p>From package UML::Interactions.</p> */ 
-			virtual MessageKind getMessageKind() ;
+			virtual uml::MessageKind getMessageKind() ;
 			
 			/*!
 			 If the MessageEnds are both OccurrenceSpecifications, then the connector must go between the Parts represented by the Lifelines of the two MessageEnds. */ 
@@ -146,17 +146,17 @@ namespace uml
 			/*!
 			 The derived kind of the Message (complete, lost, found, or unknown).
 			<p>From package UML::Interactions.</p> */ 
-			virtual MessageKind getMessageKind() const ;
+			virtual uml::MessageKind getMessageKind() const ;
 			
 			/*!
 			 The sort of communication reflected by the Message.
 			<p>From package UML::Interactions.</p> */ 
-			virtual MessageSort getMessageSort() const ;
+			virtual uml::MessageSort getMessageSort() const ;
 			
 			/*!
 			 The sort of communication reflected by the Message.
 			<p>From package UML::Interactions.</p> */ 
-			virtual void setMessageSort (MessageSort _messageSort); 
+			virtual void setMessageSort (uml::MessageSort _messageSort); 
 			
 			
 			

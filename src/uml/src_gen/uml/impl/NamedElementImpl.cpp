@@ -196,12 +196,12 @@ std::string NamedElementImpl::getName() const
 
 
 
-void NamedElementImpl::setVisibility(VisibilityKind _visibility)
+void NamedElementImpl::setVisibility(uml::VisibilityKind _visibility)
 {
 	m_visibility = _visibility;
 } 
 
-VisibilityKind NamedElementImpl::getVisibility() const 
+uml::VisibilityKind NamedElementImpl::getVisibility() const 
 {
 	return m_visibility;
 }
@@ -463,7 +463,7 @@ bool NamedElementImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::NAMEDELEMENT_ATTRIBUTE_VISIBILITY:
 		{
 			// BOOST CAST
-			VisibilityKind _visibility = newValue->get<VisibilityKind>();
+			uml::VisibilityKind _visibility = newValue->get<uml::VisibilityKind>();
 			setVisibility(_visibility); //1568
 			return true;
 		}
@@ -510,7 +510,7 @@ void NamedElementImpl::loadAttributes(std::shared_ptr<persistence::interfaces::X
 		iter = attr_list.find("visibility");
 		if ( iter != attr_list.end() )
 		{
-			VisibilityKind value = VisibilityKind::PUBLIC;
+			uml::VisibilityKind value = VisibilityKind::PUBLIC;
 			std::string literal = iter->second;
 			if (literal == "public")
 			{
@@ -616,7 +616,7 @@ void NamedElementImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 
 		if ( this->eIsSet(package->getNamedElement_Attribute_visibility()) )
 		{
-			VisibilityKind value = this->getVisibility();
+			uml::VisibilityKind value = this->getVisibility();
 			std::string literal = "";
 			if (value == VisibilityKind::PUBLIC)
 			{

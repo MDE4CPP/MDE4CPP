@@ -272,12 +272,12 @@ std::shared_ptr<ecore::EClass> CombinedFragmentImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
-void CombinedFragmentImpl::setInteractionOperator(InteractionOperatorKind _interactionOperator)
+void CombinedFragmentImpl::setInteractionOperator(uml::InteractionOperatorKind _interactionOperator)
 {
 	m_interactionOperator = _interactionOperator;
 } 
 
-InteractionOperatorKind CombinedFragmentImpl::getInteractionOperator() const 
+uml::InteractionOperatorKind CombinedFragmentImpl::getInteractionOperator() const 
 {
 	return m_interactionOperator;
 }
@@ -462,7 +462,7 @@ bool CombinedFragmentImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::COMBINEDFRAGMENT_ATTRIBUTE_INTERACTIONOPERATOR:
 		{
 			// BOOST CAST
-			InteractionOperatorKind _interactionOperator = newValue->get<InteractionOperatorKind>();
+			uml::InteractionOperatorKind _interactionOperator = newValue->get<uml::InteractionOperatorKind>();
 			setInteractionOperator(_interactionOperator); //4514
 			return true;
 		}
@@ -536,7 +536,7 @@ void CombinedFragmentImpl::loadAttributes(std::shared_ptr<persistence::interface
 		iter = attr_list.find("interactionOperator");
 		if ( iter != attr_list.end() )
 		{
-			InteractionOperatorKind value = InteractionOperatorKind::SEQ;
+			uml::InteractionOperatorKind value = InteractionOperatorKind::SEQ;
 			std::string literal = iter->second;
 			if (literal == "seq")
 			{
@@ -698,7 +698,7 @@ void CombinedFragmentImpl::saveContent(std::shared_ptr<persistence::interfaces::
 		// Add attributes
 		if ( this->eIsSet(package->getCombinedFragment_Attribute_interactionOperator()) )
 		{
-			InteractionOperatorKind value = this->getInteractionOperator();
+			uml::InteractionOperatorKind value = this->getInteractionOperator();
 			std::string literal = "";
 			if (value == InteractionOperatorKind::SEQ)
 			{

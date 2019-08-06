@@ -117,7 +117,7 @@ bool StereotypeStorage::isStereotypeApplied(std::shared_ptr<uml::Element> elemen
 
 	for (std::shared_ptr<uml::Stereotype> s : *list)
 	{
-		if (s->getMetaClass() == stereotype)
+		if (s == stereotype)
 		{
 			//an stereotype instance exists for this element
 			return true;

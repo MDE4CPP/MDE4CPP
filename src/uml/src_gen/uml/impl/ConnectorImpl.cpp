@@ -256,7 +256,7 @@ std::shared_ptr<ecore::EClass> ConnectorImpl::eStaticClass() const
 //*********************************
 
 
-ConnectorKind ConnectorImpl::getKind() const 
+uml::ConnectorKind ConnectorImpl::getKind() const 
 {
 	return m_kind;
 }
@@ -264,7 +264,7 @@ ConnectorKind ConnectorImpl::getKind() const
 //*********************************
 // Operations
 //*********************************
-ConnectorKind ConnectorImpl::getKind()
+uml::ConnectorKind ConnectorImpl::getKind()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";

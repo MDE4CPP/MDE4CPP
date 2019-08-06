@@ -245,17 +245,17 @@ std::shared_ptr<ecore::EClass> MessageImpl::eStaticClass() const
 //*********************************
 
 
-MessageKind MessageImpl::getMessageKind() const 
+uml::MessageKind MessageImpl::getMessageKind() const 
 {
 	return m_messageKind;
 }
 
-void MessageImpl::setMessageSort(MessageSort _messageSort)
+void MessageImpl::setMessageSort(uml::MessageSort _messageSort)
 {
 	m_messageSort = _messageSort;
 } 
 
-MessageSort MessageImpl::getMessageSort() const 
+uml::MessageSort MessageImpl::getMessageSort() const 
 {
 	return m_messageSort;
 }
@@ -275,7 +275,7 @@ bool MessageImpl::cannot_cross_boundaries(Any diagnostics,std::map <   Any, Any 
 	throw "UnsupportedOperationException";
 }
 
-MessageKind MessageImpl::getMessageKind()
+uml::MessageKind MessageImpl::getMessageKind()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -540,7 +540,7 @@ bool MessageImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::MESSAGE_ATTRIBUTE_MESSAGESORT:
 		{
 			// BOOST CAST
-			MessageSort _messageSort = newValue->get<MessageSort>();
+			uml::MessageSort _messageSort = newValue->get<uml::MessageSort>();
 			setMessageSort(_messageSort); //14813
 			return true;
 		}
@@ -602,7 +602,7 @@ void MessageImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadH
 		iter = attr_list.find("messageSort");
 		if ( iter != attr_list.end() )
 		{
-			MessageSort value = MessageSort::SYNCHCALL;
+			uml::MessageSort value = MessageSort::SYNCHCALL;
 			std::string literal = iter->second;
 			if (literal == "synchCall")
 			{
@@ -805,7 +805,7 @@ void MessageImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 		// Add attributes
 		if ( this->eIsSet(package->getMessage_Attribute_messageSort()) )
 		{
-			MessageSort value = this->getMessageSort();
+			uml::MessageSort value = this->getMessageSort();
 			std::string literal = "";
 			if (value == MessageSort::SYNCHCALL)
 			{

@@ -156,12 +156,12 @@ namespace uml
 			/*!
 			 Specifies the operation which defines the semantics of this combination of InteractionFragments.
 			<p>From package UML::Interactions.</p> */ 
-			virtual InteractionOperatorKind getInteractionOperator() const = 0;
+			virtual uml::InteractionOperatorKind getInteractionOperator() const = 0;
 			
 			/*!
 			 Specifies the operation which defines the semantics of this combination of InteractionFragments.
 			<p>From package UML::Interactions.</p> */ 
-			virtual void setInteractionOperator (InteractionOperatorKind _interactionOperator)= 0; 
+			virtual void setInteractionOperator (uml::InteractionOperatorKind _interactionOperator)= 0; 
 			
 			
 			//*********************************
@@ -186,7 +186,7 @@ namespace uml
 			/*!
 			 Specifies the operation which defines the semantics of this combination of InteractionFragments.
 			<p>From package UML::Interactions.</p> */ 
-			InteractionOperatorKind m_interactionOperator = InteractionOperatorKind::SEQ;
+			uml::InteractionOperatorKind m_interactionOperator = InteractionOperatorKind::SEQ;
 			
 			
 			//*********************************

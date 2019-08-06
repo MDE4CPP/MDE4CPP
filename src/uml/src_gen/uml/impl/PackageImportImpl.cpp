@@ -163,12 +163,12 @@ std::shared_ptr<ecore::EClass> PackageImportImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
-void PackageImportImpl::setVisibility(VisibilityKind _visibility)
+void PackageImportImpl::setVisibility(uml::VisibilityKind _visibility)
 {
 	m_visibility = _visibility;
 } 
 
-VisibilityKind PackageImportImpl::getVisibility() const 
+uml::VisibilityKind PackageImportImpl::getVisibility() const 
 {
 	return m_visibility;
 }
@@ -305,7 +305,7 @@ bool PackageImportImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::PACKAGEIMPORT_ATTRIBUTE_VISIBILITY:
 		{
 			// BOOST CAST
-			VisibilityKind _visibility = newValue->get<VisibilityKind>();
+			uml::VisibilityKind _visibility = newValue->get<uml::VisibilityKind>();
 			setVisibility(_visibility); //1728
 			return true;
 		}
@@ -343,7 +343,7 @@ void PackageImportImpl::loadAttributes(std::shared_ptr<persistence::interfaces::
 		iter = attr_list.find("visibility");
 		if ( iter != attr_list.end() )
 		{
-			VisibilityKind value = VisibilityKind::PUBLIC;
+			uml::VisibilityKind value = VisibilityKind::PUBLIC;
 			std::string literal = iter->second;
 			if (literal == "public")
 			{
@@ -451,7 +451,7 @@ void PackageImportImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 		// Add attributes
 		if ( this->eIsSet(package->getPackageImport_Attribute_visibility()) )
 		{
-			VisibilityKind value = this->getVisibility();
+			uml::VisibilityKind value = this->getVisibility();
 			std::string literal = "";
 			if (value == VisibilityKind::PUBLIC)
 			{

@@ -291,22 +291,22 @@ std::string ParameterImpl::getDefault() const
 	return m_default;
 }
 
-void ParameterImpl::setDirection(ParameterDirectionKind _direction)
+void ParameterImpl::setDirection(uml::ParameterDirectionKind _direction)
 {
 	m_direction = _direction;
 } 
 
-ParameterDirectionKind ParameterImpl::getDirection() const 
+uml::ParameterDirectionKind ParameterImpl::getDirection() const 
 {
 	return m_direction;
 }
 
-void ParameterImpl::setEffect(ParameterEffectKind _effect)
+void ParameterImpl::setEffect(uml::ParameterEffectKind _effect)
 {
 	m_effect = _effect;
 } 
 
-ParameterEffectKind ParameterImpl::getEffect() const 
+uml::ParameterEffectKind ParameterImpl::getEffect() const 
 {
 	return m_effect;
 }
@@ -618,14 +618,14 @@ bool ParameterImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::PARAMETER_ATTRIBUTE_DIRECTION:
 		{
 			// BOOST CAST
-			ParameterDirectionKind _direction = newValue->get<ParameterDirectionKind>();
+			uml::ParameterDirectionKind _direction = newValue->get<uml::ParameterDirectionKind>();
 			setDirection(_direction); //17521
 			return true;
 		}
 		case UmlPackage::PARAMETER_ATTRIBUTE_EFFECT:
 		{
 			// BOOST CAST
-			ParameterEffectKind _effect = newValue->get<ParameterEffectKind>();
+			uml::ParameterEffectKind _effect = newValue->get<uml::ParameterEffectKind>();
 			setEffect(_effect); //17522
 			return true;
 		}
@@ -720,7 +720,7 @@ void ParameterImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoa
 		iter = attr_list.find("direction");
 		if ( iter != attr_list.end() )
 		{
-			ParameterDirectionKind value = ParameterDirectionKind::IN;
+			uml::ParameterDirectionKind value = ParameterDirectionKind::IN;
 			std::string literal = iter->second;
 			if (literal == "in")
 			{
@@ -744,7 +744,7 @@ void ParameterImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoa
 		iter = attr_list.find("effect");
 		if ( iter != attr_list.end() )
 		{
-			ParameterEffectKind value = ParameterEffectKind::CREATE;
+			uml::ParameterEffectKind value = ParameterEffectKind::CREATE;
 			std::string literal = iter->second;
 			if (literal == "create")
 			{
@@ -913,7 +913,7 @@ void ParameterImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 		// Add attributes
 		if ( this->eIsSet(package->getParameter_Attribute_direction()) )
 		{
-			ParameterDirectionKind value = this->getDirection();
+			uml::ParameterDirectionKind value = this->getDirection();
 			std::string literal = "";
 			if (value == ParameterDirectionKind::IN)
 			{
@@ -936,7 +936,7 @@ void ParameterImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 
 		if ( this->eIsSet(package->getParameter_Attribute_effect()) )
 		{
-			ParameterEffectKind value = this->getEffect();
+			uml::ParameterEffectKind value = this->getEffect();
 			std::string literal = "";
 			if (value == ParameterEffectKind::CREATE)
 			{

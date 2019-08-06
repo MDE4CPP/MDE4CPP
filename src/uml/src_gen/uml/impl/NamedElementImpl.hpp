@@ -162,12 +162,12 @@ namespace uml
 			/*!
 			 Determines whether and how the NamedElement is visible outside its owning Namespace.
 			<p>From package UML::CommonStructure.</p> */ 
-			virtual VisibilityKind getVisibility() const ;
+			virtual uml::VisibilityKind getVisibility() const ;
 			
 			/*!
 			 Determines whether and how the NamedElement is visible outside its owning Namespace.
 			<p>From package UML::CommonStructure.</p> */ 
-			virtual void setVisibility (VisibilityKind _visibility); 
+			virtual void setVisibility (uml::VisibilityKind _visibility); 
 			
 			
 			

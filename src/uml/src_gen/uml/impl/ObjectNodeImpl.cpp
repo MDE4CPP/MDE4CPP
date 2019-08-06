@@ -296,12 +296,12 @@ bool ObjectNodeImpl::getIsControlType() const
 	return m_isControlType;
 }
 
-void ObjectNodeImpl::setOrdering(ObjectNodeOrderingKind _ordering)
+void ObjectNodeImpl::setOrdering(uml::ObjectNodeOrderingKind _ordering)
 {
 	m_ordering = _ordering;
 } 
 
-ObjectNodeOrderingKind ObjectNodeImpl::getOrdering() const 
+uml::ObjectNodeOrderingKind ObjectNodeImpl::getOrdering() const 
 {
 	return m_ordering;
 }
@@ -523,7 +523,7 @@ bool ObjectNodeImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::OBJECTNODE_ATTRIBUTE_ORDERING:
 		{
 			// BOOST CAST
-			ObjectNodeOrderingKind _ordering = newValue->get<ObjectNodeOrderingKind>();
+			uml::ObjectNodeOrderingKind _ordering = newValue->get<uml::ObjectNodeOrderingKind>();
 			setOrdering(_ordering); //16123
 			return true;
 		}
@@ -593,7 +593,7 @@ void ObjectNodeImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLo
 		iter = attr_list.find("ordering");
 		if ( iter != attr_list.end() )
 		{
-			ObjectNodeOrderingKind value = ObjectNodeOrderingKind::FIFO;
+			uml::ObjectNodeOrderingKind value = ObjectNodeOrderingKind::FIFO;
 			std::string literal = iter->second;
 			if (literal == "unordered")
 			{
@@ -756,7 +756,7 @@ void ObjectNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 
 		if ( this->eIsSet(package->getObjectNode_Attribute_ordering()) )
 		{
-			ObjectNodeOrderingKind value = this->getOrdering();
+			uml::ObjectNodeOrderingKind value = this->getOrdering();
 			std::string literal = "";
 			if (value == ObjectNodeOrderingKind::UNORDERED)
 			{

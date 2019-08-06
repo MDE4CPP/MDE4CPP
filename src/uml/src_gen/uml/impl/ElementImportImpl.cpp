@@ -175,12 +175,12 @@ std::string ElementImportImpl::getAlias() const
 	return m_alias;
 }
 
-void ElementImportImpl::setVisibility(VisibilityKind _visibility)
+void ElementImportImpl::setVisibility(uml::VisibilityKind _visibility)
 {
 	m_visibility = _visibility;
 } 
 
-VisibilityKind ElementImportImpl::getVisibility() const 
+uml::VisibilityKind ElementImportImpl::getVisibility() const 
 {
 	return m_visibility;
 }
@@ -340,7 +340,7 @@ bool ElementImportImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::ELEMENTIMPORT_ATTRIBUTE_VISIBILITY:
 		{
 			// BOOST CAST
-			VisibilityKind _visibility = newValue->get<VisibilityKind>();
+			uml::VisibilityKind _visibility = newValue->get<uml::VisibilityKind>();
 			setVisibility(_visibility); //839
 			return true;
 		}
@@ -387,7 +387,7 @@ void ElementImportImpl::loadAttributes(std::shared_ptr<persistence::interfaces::
 		iter = attr_list.find("visibility");
 		if ( iter != attr_list.end() )
 		{
-			VisibilityKind value = VisibilityKind::PUBLIC;
+			uml::VisibilityKind value = VisibilityKind::PUBLIC;
 			std::string literal = iter->second;
 			if (literal == "public")
 			{
@@ -500,7 +500,7 @@ void ElementImportImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 
 		if ( this->eIsSet(package->getElementImport_Attribute_visibility()) )
 		{
-			VisibilityKind value = this->getVisibility();
+			uml::VisibilityKind value = this->getVisibility();
 			std::string literal = "";
 			if (value == VisibilityKind::PUBLIC)
 			{

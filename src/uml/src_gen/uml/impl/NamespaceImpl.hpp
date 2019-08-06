@@ -62,11 +62,11 @@ namespace uml
 			
 			/*!
 			 Creates an import of the specified element into this namespace with the specified visibility. */ 
-			virtual std::shared_ptr<uml::ElementImport> createElementImport(std::shared_ptr<uml::PackageableElement>  element,VisibilityKind visibility) ;
+			virtual std::shared_ptr<uml::ElementImport> createElementImport(std::shared_ptr<uml::PackageableElement>  element,uml::VisibilityKind visibility) ;
 			
 			/*!
 			 Creates an import of the specified package into this namespace with the specified visibility. */ 
-			virtual std::shared_ptr<uml::PackageImport> createPackageImport(std::shared_ptr<uml::Package>  package_,VisibilityKind visibility) ;
+			virtual std::shared_ptr<uml::PackageImport> createPackageImport(std::shared_ptr<uml::Package>  package_,uml::VisibilityKind visibility) ;
 			
 			/*!
 			 The query excludeCollisions() excludes from a set of PackageableElements any that would not be distinguishable from each other in this Namespace.

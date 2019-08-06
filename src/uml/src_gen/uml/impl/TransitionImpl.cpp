@@ -322,12 +322,12 @@ std::shared_ptr<ecore::EClass> TransitionImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
-void TransitionImpl::setKind(TransitionKind _kind)
+void TransitionImpl::setKind(uml::TransitionKind _kind)
 {
 	m_kind = _kind;
 } 
 
-TransitionKind TransitionImpl::getKind() const 
+uml::TransitionKind TransitionImpl::getKind() const 
 {
 	return m_kind;
 }
@@ -633,7 +633,7 @@ bool TransitionImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::TRANSITION_ATTRIBUTE_KIND:
 		{
 			// BOOST CAST
-			TransitionKind _kind = newValue->get<TransitionKind>();
+			uml::TransitionKind _kind = newValue->get<uml::TransitionKind>();
 			setKind(_kind); //24220
 			return true;
 		}
@@ -738,7 +738,7 @@ void TransitionImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLo
 		iter = attr_list.find("kind");
 		if ( iter != attr_list.end() )
 		{
-			TransitionKind value = TransitionKind::EXTERNAL;
+			uml::TransitionKind value = TransitionKind::EXTERNAL;
 			std::string literal = iter->second;
 			if (literal == "internal")
 			{
@@ -959,7 +959,7 @@ void TransitionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 		// Add attributes
 		if ( this->eIsSet(package->getTransition_Attribute_kind()) )
 		{
-			TransitionKind value = this->getKind();
+			uml::TransitionKind value = this->getKind();
 			std::string literal = "";
 			if (value == TransitionKind::INTERNAL)
 			{

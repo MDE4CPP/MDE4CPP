@@ -313,12 +313,12 @@ std::shared_ptr<ecore::EClass> BehavioralFeatureImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
-void BehavioralFeatureImpl::setConcurrency(CallConcurrencyKind _concurrency)
+void BehavioralFeatureImpl::setConcurrency(uml::CallConcurrencyKind _concurrency)
 {
 	m_concurrency = _concurrency;
 } 
 
-CallConcurrencyKind BehavioralFeatureImpl::getConcurrency() const 
+uml::CallConcurrencyKind BehavioralFeatureImpl::getConcurrency() const 
 {
 	return m_concurrency;
 }
@@ -538,7 +538,7 @@ bool BehavioralFeatureImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::BEHAVIORALFEATURE_ATTRIBUTE_CONCURRENCY:
 		{
 			// BOOST CAST
-			CallConcurrencyKind _concurrency = newValue->get<CallConcurrencyKind>();
+			uml::CallConcurrencyKind _concurrency = newValue->get<uml::CallConcurrencyKind>();
 			setConcurrency(_concurrency); //2620
 			return true;
 		}
@@ -734,7 +734,7 @@ void BehavioralFeatureImpl::loadAttributes(std::shared_ptr<persistence::interfac
 		iter = attr_list.find("concurrency");
 		if ( iter != attr_list.end() )
 		{
-			CallConcurrencyKind value = CallConcurrencyKind::SEQUENTIAL;
+			uml::CallConcurrencyKind value = CallConcurrencyKind::SEQUENTIAL;
 			std::string literal = iter->second;
 			if (literal == "sequential")
 			{
@@ -920,7 +920,7 @@ void BehavioralFeatureImpl::saveContent(std::shared_ptr<persistence::interfaces:
 		// Add attributes
 		if ( this->eIsSet(package->getBehavioralFeature_Attribute_concurrency()) )
 		{
-			CallConcurrencyKind value = this->getConcurrency();
+			uml::CallConcurrencyKind value = this->getConcurrency();
 			std::string literal = "";
 			if (value == CallConcurrencyKind::SEQUENTIAL)
 			{
