@@ -14,6 +14,12 @@
 #include "helper/TestSuiteMemoryHelper.hpp"
 #include "helper/TestSuiteTimeHelper.hpp"
 
+//Included from operation "classAttributeCircleTest"
+#include "uml/UmlFactory.hpp"
+#include "uml/Model.hpp"
+#include "uml/Class.hpp"
+#include "uml/Property.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
 //Included from operation "doubleGeneralizationgetAllAttributesTest"
 #include "uml/UmlFactory.hpp"
 #include "uml/Class.hpp"
@@ -60,6 +66,28 @@
 //*********************************
 // Tests
 //*********************************
+
+void ClassifierImplTest__classAttributeCircleTest() {
+
+	TestSuiteMainHelper::CollectTestStartStatistics();
+	{
+		// Implemented as Function behaviour classAttributeCircleTestFB
+
+		std::shared_ptr<uml::UmlFactory> factory = uml::UmlFactory::eInstance();
+		std::shared_ptr<uml::Model> p = factory->createModel();
+		std::shared_ptr<uml::Class> c1 = factory->createClass_in_Package( p );
+		std::shared_ptr<uml::Class> c2 = factory->createClass_in_Package( p );
+		std::shared_ptr<uml::Property> pt1 = factory->createProperty_in_Class( c1, 0 );
+		pt1->setType( c2 );
+		std::shared_ptr<uml::Property> pt2 = factory->createProperty_in_Class( c2, 0 );
+		pt2->setType( c1 );
+
+		ASSERT_EQUALM( "model has a circle", false, c1->getAttribute()->find( pt1 ) != -1 && c2->getAttribute()->find( pt2 ) != -1 );
+	}
+	TestSuiteMainHelper::CollectTestEndStatistics();
+	TestSuiteMainHelper::PrintTestsStatistics();
+	TestSuiteCountHelper::IncNumOfPassedTests();
+}
 
 void ClassifierImplTest__doubleGeneralizationgetAllAttributesTest() {
 
@@ -297,6 +325,7 @@ cute::suite make_suite_ClassifierImplTest() {
 
 	cute::suite s { };
 
+	s += CUTE( ClassifierImplTest__classAttributeCircleTest );
 	s += CUTE( ClassifierImplTest__doubleGeneralizationgetAllAttributesTest );
 	s += CUTE( ClassifierImplTest__doubleParentsTest );
 	s += CUTE( ClassifierImplTest__getAllAttributesTest );
