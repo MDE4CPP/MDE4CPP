@@ -20,7 +20,7 @@
 #include "uml/Class.hpp"
 #include "uml/Property.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-//Included from operation "doubleGeneralizationgetAllAttributesTest"
+//Included from operation "doubleGeneralizationGetAllAttributesTest"
 #include "uml/UmlFactory.hpp"
 #include "uml/Class.hpp"
 #include "uml/Generalization.hpp"
@@ -89,11 +89,11 @@ void ClassifierImplTest__classAttributeCircleTest() {
 	TestSuiteCountHelper::IncNumOfPassedTests();
 }
 
-void ClassifierImplTest__doubleGeneralizationgetAllAttributesTest() {
+void ClassifierImplTest__doubleGeneralizationGetAllAttributesTest() {
 
 	TestSuiteMainHelper::CollectTestStartStatistics();
 	{
-		// Implemented as Function behaviour doubleGeneralizationgetAllAttributesTestFB
+		// Implemented as Function behaviour doubleGeneralizationGetAllAttributesTestFB
 
 		std::shared_ptr<uml::UmlFactory> factory = uml::UmlFactory::eInstance();
 		std::shared_ptr<uml::Model> p = factory->createModel();
@@ -276,9 +276,7 @@ void ClassifierImplTest__parentsCircleTest() {
 		g2->setGeneral( c );
 		c2->getGeneralization()->add( g2 );
 
-		ASSERT_EQUALM( "c bag size not 1", 1, c->parents()->size() );
-		ASSERT_EQUALM( "c2 bag size not 1", 1, c2->parents()->size() );
-		ASSERT_EQUALM( "model has a circle", false, c->parents()->at( 0 ) == c2 && c2->parents()->at( 0 ) == c );
+		ASSERT_EQUALM( "model has a circle", false, c->parents()->size() == 1 && c2->parents()->size() == 1 && c->parents()->at( 0 ) == c2 && c2->parents()->at( 0 ) == c );
 	}
 	TestSuiteMainHelper::CollectTestEndStatistics();
 	TestSuiteMainHelper::PrintTestsStatistics();
@@ -326,7 +324,7 @@ cute::suite make_suite_ClassifierImplTest() {
 	cute::suite s { };
 
 	s += CUTE( ClassifierImplTest__classAttributeCircleTest );
-	s += CUTE( ClassifierImplTest__doubleGeneralizationgetAllAttributesTest );
+	s += CUTE( ClassifierImplTest__doubleGeneralizationGetAllAttributesTest );
 	s += CUTE( ClassifierImplTest__doubleParentsTest );
 	s += CUTE( ClassifierImplTest__getAllAttributesTest );
 	s += CUTE( ClassifierImplTest__getGeneralsTest );

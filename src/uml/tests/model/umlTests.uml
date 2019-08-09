@@ -46,7 +46,7 @@
 			ASSERT_EQUALM( &quot;bag element not equal&quot;, expected2->at( i ), aqual2->at( i ) );&#xD;
 		}</body>
       </ownedBehavior>
-      <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_4GgxcLHmEemRdJn9nD1dIw" name="doubleGeneralizationgetAllAttributesTestFB" specification="_s7lxILHmEemRdJn9nD1dIw">
+      <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_4GgxcLHmEemRdJn9nD1dIw" name="doubleGeneralizationGetAllAttributesTestFB" specification="_s7lxILHmEemRdJn9nD1dIw">
         <language>INCLUDE</language>
         <language>CPP</language>
         <body>#include &quot;uml/UmlFactory.hpp&quot;&#xD;
@@ -176,9 +176,7 @@
 		g2->setGeneral( c );&#xD;
 		c2->getGeneralization()->add( g2 );&#xD;
 &#xD;
-		ASSERT_EQUALM( &quot;c bag size not 1&quot;, 1, c->parents()->size() );&#xD;
-		ASSERT_EQUALM( &quot;c2 bag size not 1&quot;, 1, c2->parents()->size() );&#xD;
-		ASSERT_EQUALM( &quot;model has a circle&quot;, false, c->parents()->at( 0 ) == c2 &amp;&amp; c2->parents()->at( 0 ) == c );</body>
+		ASSERT_EQUALM( &quot;model has a circle&quot;, false, c->parents()->size() == 1 &amp;&amp; c2->parents()->size() == 1 &amp;&amp; c->parents()->at( 0 ) == c2 &amp;&amp; c2->parents()->at( 0 ) == c );</body>
       </ownedBehavior>
       <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_6mD9ELHmEemRdJn9nD1dIw" name="doubleParentsTestFB" specification="_zwgagLHmEemRdJn9nD1dIw">
         <language>INCLUDE</language>
@@ -241,7 +239,7 @@
 		ASSERT_EQUALM( &quot;model has a circle&quot;, false, c1->getAttribute()->find( pt1 ) != -1 &amp;&amp; c2->getAttribute()->find( pt2 ) != -1 );</body>
       </ownedBehavior>
       <ownedOperation xmi:id="_NIwYAJmEEemCfIXRbMVoGQ" name="getAllAttributesTest" method="_wSrgUJpOEemCfIXRbMVoGQ"/>
-      <ownedOperation xmi:id="_s7lxILHmEemRdJn9nD1dIw" name="doubleGeneralizationgetAllAttributesTest" method="_4GgxcLHmEemRdJn9nD1dIw"/>
+      <ownedOperation xmi:id="_s7lxILHmEemRdJn9nD1dIw" name="doubleGeneralizationGetAllAttributesTest" method="_4GgxcLHmEemRdJn9nD1dIw"/>
       <ownedOperation xmi:id="_d0Z18JmEEemCfIXRbMVoGQ" name="getGeneralsTest" method="_4PHycJpOEemCfIXRbMVoGQ"/>
       <ownedOperation xmi:id="_h0qmYJmEEemCfIXRbMVoGQ" name="parentsTest" method="_6ilp4JpOEemCfIXRbMVoGQ"/>
       <ownedOperation xmi:id="_y2trwLHmEemRdJn9nD1dIw" name="parentsCircleTest" method="_5EZWALHmEemRdJn9nD1dIw"/>
@@ -320,12 +318,14 @@
         <body>#include &quot;Stereotype_uml/Stereotype_umlFactory.hpp&quot;&#xD;
 #include &quot;Stereotype_uml/ExampleClass.hpp&quot;&#xD;
 #include &quot;Stereotype_uml/ExampleStereotype.hpp&quot;&#xD;
+#include &quot;Stereotype_uml/ExampleStereotype2.hpp&quot;&#xD;
 #include &quot;abstractDataTypes/Bag.hpp&quot;</body>
         <body>		std::shared_ptr&lt;Stereotype_uml::Stereotype_umlFactory> factory = Stereotype_uml::Stereotype_umlFactory::eInstance();&#xD;
 		std::shared_ptr&lt;Stereotype_uml::ExampleClass> ec = factory->createExampleClass();&#xD;
 		std::shared_ptr&lt;Stereotype_uml::ExampleStereotype> es = factory->createExampleStereotype();&#xD;
-		std::shared_ptr&lt;Stereotype_uml::ExampleStereotype> es2 = factory->createExampleStereotype();&#xD;
+		std::shared_ptr&lt;Stereotype_uml::ExampleStereotype2> es2 = factory->createExampleStereotype2();&#xD;
 &#xD;
+		ec->applyStereotype( es );&#xD;
 		ec->applyStereotype( es );&#xD;
 		ec->applyStereotype( es2 );&#xD;
 &#xD;

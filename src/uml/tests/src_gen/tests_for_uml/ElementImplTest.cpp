@@ -26,6 +26,7 @@
 #include "Stereotype_uml/Stereotype_umlFactory.hpp"
 #include "Stereotype_uml/ExampleClass.hpp"
 #include "Stereotype_uml/ExampleStereotype.hpp"
+#include "Stereotype_uml/ExampleStereotype2.hpp"
 #include "abstractDataTypes/Bag.hpp"
 //Included from operation "getValueTest"
 #include "Stereotype_uml/Stereotype_umlFactory.hpp"
@@ -96,8 +97,9 @@ void ElementImplTest__getAppliedStereotypesTest() {
 		std::shared_ptr<Stereotype_uml::Stereotype_umlFactory> factory = Stereotype_uml::Stereotype_umlFactory::eInstance();
 		std::shared_ptr<Stereotype_uml::ExampleClass> ec = factory->createExampleClass();
 		std::shared_ptr<Stereotype_uml::ExampleStereotype> es = factory->createExampleStereotype();
-		std::shared_ptr<Stereotype_uml::ExampleStereotype> es2 = factory->createExampleStereotype();
+		std::shared_ptr<Stereotype_uml::ExampleStereotype2> es2 = factory->createExampleStereotype2();
 
+		ec->applyStereotype( es );
 		ec->applyStereotype( es );
 		ec->applyStereotype( es2 );
 

@@ -6,4 +6,5 @@
     </ownedAttribute>
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="_5sp4YLaSEemQWLjS7s9x4Q" name="ExampleClass"/>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_F9AaILqNEemQWLjS7s9x4Q" name="ExampleStereotype2"/>
 </uml:Model>
