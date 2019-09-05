@@ -14,12 +14,6 @@
 #include "helper/TestSuiteMemoryHelper.hpp"
 #include "helper/TestSuiteTimeHelper.hpp"
 
-//Included from operation "classAttributeCircleTest"
-#include "uml/UmlFactory.hpp"
-#include "uml/Model.hpp"
-#include "uml/Class.hpp"
-#include "uml/Property.hpp"
-#include "abstractDataTypes/SubsetUnion.hpp"
 //Included from operation "doubleGeneralizationGetAllAttributesTest"
 #include "uml/UmlFactory.hpp"
 #include "uml/Class.hpp"
@@ -67,28 +61,6 @@
 // Tests
 //*********************************
 
-void ClassifierImplTest__classAttributeCircleTest() {
-
-	TestSuiteMainHelper::CollectTestStartStatistics();
-	{
-		// Implemented as Function behaviour classAttributeCircleTestFB
-
-		std::shared_ptr<uml::UmlFactory> factory = uml::UmlFactory::eInstance();
-		std::shared_ptr<uml::Model> p = factory->createModel();
-		std::shared_ptr<uml::Class> c1 = factory->createClass_in_Package( p );
-		std::shared_ptr<uml::Class> c2 = factory->createClass_in_Package( p );
-		std::shared_ptr<uml::Property> pt1 = factory->createProperty_in_Class( c1, 0 );
-		pt1->setType( c2 );
-		std::shared_ptr<uml::Property> pt2 = factory->createProperty_in_Class( c2, 0 );
-		pt2->setType( c1 );
-
-		ASSERT_EQUALM( "model has a circle", false, c1->getAttribute()->find( pt1 ) != -1 && c2->getAttribute()->find( pt2 ) != -1 );
-	}
-	TestSuiteMainHelper::CollectTestEndStatistics();
-	TestSuiteMainHelper::PrintTestsStatistics();
-	TestSuiteCountHelper::IncNumOfPassedTests();
-}
-
 void ClassifierImplTest__doubleGeneralizationGetAllAttributesTest() {
 
 	TestSuiteMainHelper::CollectTestStartStatistics();
@@ -129,12 +101,12 @@ void ClassifierImplTest__doubleGeneralizationGetAllAttributesTest() {
 		ASSERT_EQUALM( "c22 pt22 bag element not equal", pt22, c22->getAllAttributes()->at( 0 ) );
 		ASSERT_EQUALM( "c22 pt1 bag element not equal", pt1, c22->getAllAttributes()->at( 1 ) );
 
-		//Only generalizations of this class is return. Not the generalizations of the generalized classes
-		ASSERT_EQUALM( "c3 bag size not 4", 4, c3->getAllAttributes()->size() );
+		ASSERT_EQUALM( "c3 bag size not 5", 5, c3->getAllAttributes()->size() );
 		ASSERT_EQUALM( "c3 pt3 bag element not equal", pt3, c3->getAllAttributes()->at( 0 ) );
 		ASSERT_EQUALM( "c3 pt21 bag element not equal", pt21, c3->getAllAttributes()->at( 1 ) );
 		ASSERT_EQUALM( "c3 pt1 bag element not equal", pt1, c3->getAllAttributes()->at( 2 ) );
 		ASSERT_EQUALM( "c3 pt22 bag element not equal", pt22, c3->getAllAttributes()->at( 3 ) );
+		ASSERT_EQUALM( "c3 pt1 bag element not equal", pt1, c3->getAllAttributes()->at( 4 ) );
 	}
 	TestSuiteMainHelper::CollectTestEndStatistics();
 	TestSuiteMainHelper::PrintTestsStatistics();
@@ -323,7 +295,6 @@ cute::suite make_suite_ClassifierImplTest() {
 
 	cute::suite s { };
 
-	s += CUTE( ClassifierImplTest__classAttributeCircleTest );
 	s += CUTE( ClassifierImplTest__doubleGeneralizationGetAllAttributesTest );
 	s += CUTE( ClassifierImplTest__doubleParentsTest );
 	s += CUTE( ClassifierImplTest__getAllAttributesTest );

@@ -4,7 +4,7 @@
     <importedPackage xmi:type="uml:Model" href="file:/C:/Uni/BA/MDE4CPPFork/src/examples/UMLExamples/StereotypeExample/model/Stereotype_uml.uml#_hDqJYLaSEemQWLjS7s9x4Q"/>
   </packageImport>
   <packagedElement xmi:type="uml:Package" xmi:id="_eIorcJmCEemCfIXRbMVoGQ" name="tests_for_uml">
-    <packagedElement xmi:type="uml:Class" xmi:id="_xmvp8JmCEemCfIXRbMVoGQ" name="ClassifierImplTest" visibility="public" classifierBehavior="_49tHILiUEemQWLjS7s9x4Q">
+    <packagedElement xmi:type="uml:Class" xmi:id="_xmvp8JmCEemCfIXRbMVoGQ" name="ClassifierImplTest" visibility="public">
       <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_wSrgUJpOEemCfIXRbMVoGQ" name="getAllAttributesTestFB" specification="_NIwYAJmEEemCfIXRbMVoGQ">
         <language>INCLUDE</language>
         <language>CPP</language>
@@ -89,12 +89,12 @@
 		ASSERT_EQUALM( &quot;c22 pt22 bag element not equal&quot;, pt22, c22->getAllAttributes()->at( 0 ) );&#xD;
 		ASSERT_EQUALM( &quot;c22 pt1 bag element not equal&quot;, pt1, c22->getAllAttributes()->at( 1 ) );&#xD;
 &#xD;
-		//Only generalizations of this class is return. Not the generalizations of the generalized classes&#xD;
-		ASSERT_EQUALM( &quot;c3 bag size not 4&quot;, 4, c3->getAllAttributes()->size() );&#xD;
+		ASSERT_EQUALM( &quot;c3 bag size not 5&quot;, 5, c3->getAllAttributes()->size() );&#xD;
 		ASSERT_EQUALM( &quot;c3 pt3 bag element not equal&quot;, pt3, c3->getAllAttributes()->at( 0 ) );&#xD;
 		ASSERT_EQUALM( &quot;c3 pt21 bag element not equal&quot;, pt21, c3->getAllAttributes()->at( 1 ) );&#xD;
 		ASSERT_EQUALM( &quot;c3 pt1 bag element not equal&quot;, pt1, c3->getAllAttributes()->at( 2 ) );&#xD;
-		ASSERT_EQUALM( &quot;c3 pt22 bag element not equal&quot;, pt22, c3->getAllAttributes()->at( 3 ) );</body>
+		ASSERT_EQUALM( &quot;c3 pt22 bag element not equal&quot;, pt22, c3->getAllAttributes()->at( 3 ) );&#xD;
+		ASSERT_EQUALM( &quot;c3 pt1 bag element not equal&quot;, pt1, c3->getAllAttributes()->at( 4 ) );</body>
       </ownedBehavior>
       <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_4PHycJpOEemCfIXRbMVoGQ" name="getGeneralsTestFB" specification="_d0Z18JmEEemCfIXRbMVoGQ">
         <language>INCLUDE</language>
@@ -219,32 +219,12 @@
 		ASSERT_EQUALM( &quot;c3 0=>c21 bag element not equal&quot;, c21, c3->parents()->at( 0 ) );&#xD;
 		ASSERT_EQUALM( &quot;c3 0=>c22 bag element not equal&quot;, c22, c3->parents()->at( 1 ) );</body>
       </ownedBehavior>
-      <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_49tHILiUEemQWLjS7s9x4Q" name="classAttributeCircleTestFB" specification="_58tGALiUEemQWLjS7s9x4Q">
-        <language>INCLUDE</language>
-        <language>CPP</language>
-        <body>#include &quot;uml/UmlFactory.hpp&quot;&#xD;
-#include &quot;uml/Model.hpp&quot;&#xD;
-#include &quot;uml/Class.hpp&quot;&#xD;
-#include &quot;uml/Property.hpp&quot;&#xD;
-#include &quot;abstractDataTypes/SubsetUnion.hpp&quot;</body>
-        <body>		std::shared_ptr&lt;uml::UmlFactory> factory = uml::UmlFactory::eInstance();&#xD;
-		std::shared_ptr&lt;uml::Model> p = factory->createModel();&#xD;
-		std::shared_ptr&lt;uml::Class> c1 = factory->createClass_in_Package( p );&#xD;
-		std::shared_ptr&lt;uml::Class> c2 = factory->createClass_in_Package( p );&#xD;
-		std::shared_ptr&lt;uml::Property> pt1 = factory->createProperty_in_Class( c1, 0 );&#xD;
-		pt1->setType( c2 );&#xD;
-		std::shared_ptr&lt;uml::Property> pt2 = factory->createProperty_in_Class( c2, 0 );&#xD;
-		pt2->setType( c1 );&#xD;
-&#xD;
-		ASSERT_EQUALM( &quot;model has a circle&quot;, false, c1->getAttribute()->find( pt1 ) != -1 &amp;&amp; c2->getAttribute()->find( pt2 ) != -1 );</body>
-      </ownedBehavior>
       <ownedOperation xmi:id="_NIwYAJmEEemCfIXRbMVoGQ" name="getAllAttributesTest" method="_wSrgUJpOEemCfIXRbMVoGQ"/>
       <ownedOperation xmi:id="_s7lxILHmEemRdJn9nD1dIw" name="doubleGeneralizationGetAllAttributesTest" method="_4GgxcLHmEemRdJn9nD1dIw"/>
       <ownedOperation xmi:id="_d0Z18JmEEemCfIXRbMVoGQ" name="getGeneralsTest" method="_4PHycJpOEemCfIXRbMVoGQ"/>
       <ownedOperation xmi:id="_h0qmYJmEEemCfIXRbMVoGQ" name="parentsTest" method="_6ilp4JpOEemCfIXRbMVoGQ"/>
       <ownedOperation xmi:id="_y2trwLHmEemRdJn9nD1dIw" name="parentsCircleTest" method="_5EZWALHmEemRdJn9nD1dIw"/>
       <ownedOperation xmi:id="_zwgagLHmEemRdJn9nD1dIw" name="doubleParentsTest" method="_6mD9ELHmEemRdJn9nD1dIw"/>
-      <ownedOperation xmi:id="_58tGALiUEemQWLjS7s9x4Q" name="classAttributeCircleTest" method="_49tHILiUEemQWLjS7s9x4Q"/>
     </packagedElement>
     <packagedElement xmi:type="uml:Class" xmi:id="_ucXGsJmEEemCfIXRbMVoGQ" name="ClassImplTest" visibility="public">
       <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_FYXgoJpPEemCfIXRbMVoGQ" name="getSuperClassesTestFB" specification="_wdDMEJmEEemCfIXRbMVoGQ">
