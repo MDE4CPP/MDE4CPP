@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_Hd_IQMmBEemLw46uXpnfDg" name="CalculatorsTests">
+  <packagedElement xmi:type="uml:Package" xmi:id="_XgdtYMmBEemLw46uXpnfDg" name="SimpleOperationsTests">
+    <packagedElement xmi:type="uml:Class" xmi:id="_CK7y4MmEEemLw46uXpnfDg" name="ComplexOperationsTests">
+      <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_P8naEMmEEemLw46uXpnfDg" name="complexSimpleOperationsTestFB" specification="_NpdEoMmEEemLw46uXpnfDg">
+        <language>INCLUDE</language>
+        <language>CPP</language>
+        <body>//Includes</body>
+        <body>		//TestQuelltext</body>
+      </ownedBehavior>
+      <ownedOperation xmi:id="_NpdEoMmEEemLw46uXpnfDg" name="complexSimpleOperationsTest" method="_P8naEMmEEemLw46uXpnfDg">
+        <eAnnotations xmi:id="_PmC3sMmFEemLw46uXpnfDg" source="testData">
+          <details xmi:id="_VT5LUMmFEemLw46uXpnfDg" key="maxTime" value="100"/>
+          <details xmi:id="_VqGr4MmFEemLw46uXpnfDg" key="memoryDelta" value="0"/>
+        </eAnnotations>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_QXLWgMmBEemLw46uXpnfDg" name="Addition">
+      <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_aicwUMmEEemLw46uXpnfDg" name="complexAdditionTestFB" specification="_XCWGoMmEEemLw46uXpnfDg">
+        <language>CPP</language>
+        <body>		//TestQuelltext</body>
+      </ownedBehavior>
+      <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_bN6vMMmEEemLw46uXpnfDg" name="positivNumbersAdditionTestFB" specification="_Y3V5YMmEEemLw46uXpnfDg">
+        <language>CPP</language>
+        <body>		//TestQuelltext</body>
+      </ownedBehavior>
+      <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_cFxkQMmEEemLw46uXpnfDg" name="negativNumbersAdditionTestFB" specification="_ZotE4MmEEemLw46uXpnfDg">
+        <language>CPP</language>
+        <body>		//TestQuelltext</body>
+      </ownedBehavior>
+      <ownedOperation xmi:id="_XCWGoMmEEemLw46uXpnfDg" name="complexAdditionTest" method="_aicwUMmEEemLw46uXpnfDg"/>
+      <ownedOperation xmi:id="_Y3V5YMmEEemLw46uXpnfDg" name="positivNumbersAdditionTest" method="_bN6vMMmEEemLw46uXpnfDg"/>
+      <ownedOperation xmi:id="_ZotE4MmEEemLw46uXpnfDg" name="negativNumbersAdditionTest" method="_cFxkQMmEEemLw46uXpnfDg"/>
+    </packagedElement>
+  </packagedElement>
+</uml:Model>
