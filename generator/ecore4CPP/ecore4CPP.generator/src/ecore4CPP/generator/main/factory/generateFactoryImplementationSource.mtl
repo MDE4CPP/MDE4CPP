@@ -261,4 +261,10 @@ return element;
 [for (subPackage : EPackage | anEPackage.eSubpackages->sortedBy(name))]
 [subPackage.generateFactoryImports()/]
 [/for]
+[let ref:OrderedSet(EReference) = OrderedSet{anEPackage.eClassifiers}->flatten()->selectByKind(EClass).getAllContainers()->asOrderedSet()->sortedBy(name)]
+
+[for(aReference:EReference | ref->select(not (ref.eType.getRootPackage() = anEPackage.getRootPackage())))]
+#include "[aReference.eType.generateNamespacePath()/]/[aReference.eType.name.toUpperFirst().concat('.hpp')/]"
+[/for]
+[/let]
 [/template]

@@ -52,6 +52,10 @@ namespace [aClass.getRootPackage().name/]
 #include "[anEPackage.name/]/[anEPackage.name.toUpperFirst()/]Factory.hpp"
 #include "[anEPackage.name/]/[anEPackage.name.toUpperFirst()/]Package.hpp"
 [/for]
+[for (anEPackage : EPackage | aClass.getAllContainers().eType.getRootPackage()->sortedBy(name)->flatten()->reject(self = aClass.getRootPackage()))]
+#include "[anEPackage.name/]/[anEPackage.name.toUpperFirst()/]Factory.hpp"
+#include "[anEPackage.name/]/[anEPackage.name.toUpperFirst()/]Package.hpp"
+[/for]
 
 #include <exception> // used in Persistence
 [/template]

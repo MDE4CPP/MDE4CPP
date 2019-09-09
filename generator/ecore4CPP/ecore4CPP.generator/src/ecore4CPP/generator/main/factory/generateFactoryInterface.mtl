@@ -16,6 +16,7 @@
 
 [import ecore4CPP::generator::main::generateClass /]
 [import ecore4CPP::generator::main::generateSingleton /]
+[import ecore4CPP::generator::main::generateType /]
 [import ecore4CPP::generator::main::helper /]
  
 [template public generateFactoryInterface(anEPackage : EPackage) {packageName : String = anEPackage.name.toUpperFirst().concat('Factory');}]
@@ -77,4 +78,13 @@ namespace [anEPackage.generateNamespaceDefinition()/]
 [for (subPackage : EPackage | anEPackage.eSubpackages->sortedBy(name))]
 [subPackage.generateForwardDeclarations()/]
 [/for]
+[let ref:OrderedSet(EReference) = OrderedSet{anEPackage.eClassifiers}->flatten()->selectByKind(EClass).getAllContainers()->asOrderedSet()->sortedBy(name)]
+[for(aReference:EReference | ref->select(not (ref.eType.getRootPackage() = anEPackage.getRootPackage())))]
+
+namespace [aReference.eType.ePackage.generateNamespaceDefinition()/] 
+{
+	class [aReference.eType.name/];
+}
+[/for]
+[/let]
 [/template]
