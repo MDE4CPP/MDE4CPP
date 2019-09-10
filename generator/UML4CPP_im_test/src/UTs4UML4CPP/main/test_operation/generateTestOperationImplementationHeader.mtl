@@ -1,0 +1,25 @@
+[comment encoding = UTF-8 /]
+[module generateTestOperationImplementationHeader('http://www.eclipse.org/uml2/5.0.0/UML')]
+
+[import UTs4UML4CPP::main::helper::helper/]
+[import UTs4UML4CPP::main::helper::classHelper/]
+[import UTs4UML4CPP::main::helper::operationHelper/]
+[import UTs4UML4CPP::main::helper::packageHelper/]
+
+[template public generateTestOperationImplementationHeader( anOperation : Operation ) { 
+	operationName : String = anOperation.getOperationName();
+	testOperationName : String = operationName.buildTestSuiteName();
+	className : String = anOperation.ancestors()->filter(Class)->first().getClassName();
+	packageName : String = anOperation.ancestors()->filter(Package)->first().getPackageName();}]
+[file( packageName.concat('/').concat(className).concat('/').concat(testOperationName).buildHeaderPath(), false, 'UTF-8')]
+[startGuard(testOperationName)/]
+#include "cute_suite.h"
+#include "cute_runner.h"
+#include "xml_listener.h"
+#include "ide_listener.h"
+
+extern cute::suite make_suite_[testOperationName/]();
+
+[endGuard(testOperationName)/]
+[/file]
+[/template]

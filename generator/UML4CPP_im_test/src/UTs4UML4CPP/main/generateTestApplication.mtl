@@ -1,0 +1,39 @@
+[comment encoding = UTF-8 /]
+[module generateTestApplication('http://www.eclipse.org/uml2/5.0.0/UML')]
+
+[import UTs4UML4CPP::main::helper::helper/]
+[import UTs4UML4CPP::main::helper::packageHelper/]
+
+[template public generateTestApplication( aPackage : Package )]
+[file( 'TestApplication'.buildSourcePath(), false, 'UTF-8' )]
+#include "cute.h"
+#include "ide_listener.h"
+#include "xml_listener.h"
+#include "cute_runner.h"
+[for( forPackage : Package | aPackage.getAllPackages() )]
+#include "[forPackage.getPackageName()/]/[forPackage.getPackageTestSuiteName()/].hpp"
+[/for]
+
+bool runSuite( int argc, char const *argv['[]'/] ) {
+
+	bool success = true;	
+	cute::xml_file_opener xmlfile( argc, argv );
+	cute::xml_listener<cute::ide_listener<>> lis( xmlfile.out );
+	cute::runner<cute::xml_listener<cute::ide_listener<cute::null_listener> > > runner = cute::makeRunner( lis, argc, argv );
+[for( forPackage : Package | aPackage.getAllPackages() )]
+	cute::suite suite_[forPackage.getPackageTestSuiteName()/] = make_suite_[forPackage.getPackageTestSuiteName()/]();
+[/for]
+
+[for( forPackage : Package | aPackage.getAllPackages() )]
+	success &= runner( suite_[forPackage.getPackageTestSuiteName()/], "[forPackage.getPackageTestSuiteName()/]" );
+	success &= run[forPackage.getPackageTestSuiteName()/]SubTests( runner );
+[/for]
+	return success;
+}
+
+int main( int argc, char const *argv['[]'/] ) {
+
+    return runSuite( argc, argv ) ? EXIT_SUCCESS : EXIT_FAILURE;
+}
+[/file]
+[/template]

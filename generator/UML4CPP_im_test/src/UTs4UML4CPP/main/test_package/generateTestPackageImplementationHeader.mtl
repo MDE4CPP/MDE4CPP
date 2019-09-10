@@ -1,0 +1,22 @@
+[comment encoding = UTF-8 /]
+[module generateTestPackageImplementationHeader('http://www.eclipse.org/uml2/5.0.0/UML')]
+
+[import UTs4UML4CPP::main::helper::helper /]
+[import UTs4UML4CPP::main::helper::packageHelper/]
+
+[template public generateTestPackageImplementationHeader( aPackage : Package ) {
+	packageName : String = aPackage.getPackageName();
+	testPackageName : String = packageName.buildTestSuiteName();}]
+[file( packageName.concat('/').concat(testPackageName).buildHeaderPath(), false, 'UTF-8' )]
+[testPackageName.startGuard()/]
+#include "cute_suite.h"
+#include "cute_runner.h"
+#include "xml_listener.h"
+#include "ide_listener.h"
+
+extern cute::suite make_suite_[testPackageName/]();
+
+extern bool run[testPackageName/]SubTests( cute::runner<cute::xml_listener<cute::ide_listener<cute::null_listener> > > runner );
+[testPackageName.endGuard()/]
+[/file]
+[/template]
