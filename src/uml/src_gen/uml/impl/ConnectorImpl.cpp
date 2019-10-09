@@ -256,7 +256,7 @@ std::shared_ptr<ecore::EClass> ConnectorImpl::eStaticClass() const
 //*********************************
 
 
-ConnectorKind ConnectorImpl::getKind() const 
+uml::ConnectorKind ConnectorImpl::getKind() const 
 {
 	return m_kind;
 }
@@ -264,7 +264,7 @@ ConnectorKind ConnectorImpl::getKind() const
 //*********************************
 // Operations
 //*********************************
-ConnectorKind ConnectorImpl::getKind()
+uml::ConnectorKind ConnectorImpl::getKind()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -371,8 +371,9 @@ Any ConnectorImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //5314
+			return eAny(tempList); //5414
 		}
 		case UmlPackage::CONNECTOR_ATTRIBUTE_END:
 		{
@@ -382,11 +383,12 @@ Any ConnectorImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //5315
+			return eAny(tempList); //5415
 		}
 		case UmlPackage::CONNECTOR_ATTRIBUTE_KIND:
-			return eAny(getKind()); //5316
+			return eAny(getKind()); //5416
 		case UmlPackage::CONNECTOR_ATTRIBUTE_REDEFINEDCONNECTOR:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -395,11 +397,12 @@ Any ConnectorImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //5317
+			return eAny(tempList); //5417
 		}
 		case UmlPackage::CONNECTOR_ATTRIBUTE_TYPE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getType())); //5318
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getType())); //5418
 	}
 	return FeatureImpl::eGet(featureID, resolve, coreType);
 }
@@ -408,15 +411,15 @@ bool ConnectorImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::CONNECTOR_ATTRIBUTE_CONTRACT:
-			return getContract() != nullptr; //5314
+			return getContract() != nullptr; //5414
 		case UmlPackage::CONNECTOR_ATTRIBUTE_END:
-			return getEnd() != nullptr; //5315
+			return getEnd() != nullptr; //5415
 		case UmlPackage::CONNECTOR_ATTRIBUTE_KIND:
-			return m_kind != ConnectorKind::ASSEMBLY;; //5316
+			return m_kind != ConnectorKind::ASSEMBLY;; //5416
 		case UmlPackage::CONNECTOR_ATTRIBUTE_REDEFINEDCONNECTOR:
-			return getRedefinedConnector() != nullptr; //5317
+			return getRedefinedConnector() != nullptr; //5417
 		case UmlPackage::CONNECTOR_ATTRIBUTE_TYPE:
-			return getType() != nullptr; //5318
+			return getType() != nullptr; //5418
 	}
 	return FeatureImpl::internalEIsSet(featureID);
 }
@@ -537,7 +540,7 @@ bool ConnectorImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Association> _type = std::dynamic_pointer_cast<uml::Association>(_temp);
-			setType(_type); //5318
+			setType(_type); //5418
 			return true;
 		}
 	}

@@ -277,7 +277,7 @@ Any ClassifierTemplateParameterImpl::eGet(int featureID, bool resolve, bool core
 	switch(featureID)
 	{
 		case UmlPackage::CLASSIFIERTEMPLATEPARAMETER_ATTRIBUTE_ALLOWSUBSTITUTABLE:
-			return eAny(getAllowSubstitutable()); //378
+			return eAny(getAllowSubstitutable()); //388
 		case UmlPackage::CLASSIFIERTEMPLATEPARAMETER_ATTRIBUTE_CONSTRAININGCLASSIFIER:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -286,8 +286,9 @@ Any ClassifierTemplateParameterImpl::eGet(int featureID, bool resolve, bool core
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //379
+			return eAny(tempList); //389
 		}
 	}
 	return TemplateParameterImpl::eGet(featureID, resolve, coreType);
@@ -297,9 +298,9 @@ bool ClassifierTemplateParameterImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::CLASSIFIERTEMPLATEPARAMETER_ATTRIBUTE_ALLOWSUBSTITUTABLE:
-			return getAllowSubstitutable() != true; //378
+			return getAllowSubstitutable() != true; //388
 		case UmlPackage::CLASSIFIERTEMPLATEPARAMETER_ATTRIBUTE_CONSTRAININGCLASSIFIER:
-			return getConstrainingClassifier() != nullptr; //379
+			return getConstrainingClassifier() != nullptr; //389
 	}
 	return TemplateParameterImpl::internalEIsSet(featureID);
 }
@@ -311,7 +312,7 @@ bool ClassifierTemplateParameterImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			bool _allowSubstitutable = newValue->get<bool>();
-			setAllowSubstitutable(_allowSubstitutable); //378
+			setAllowSubstitutable(_allowSubstitutable); //388
 			return true;
 		}
 		case UmlPackage::CLASSIFIERTEMPLATEPARAMETER_ATTRIBUTE_CONSTRAININGCLASSIFIER:

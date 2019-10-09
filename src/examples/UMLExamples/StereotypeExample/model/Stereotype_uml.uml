@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_hDqJYLaSEemQWLjS7s9x4Q" name="Stereotype_uml">
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_2gooULaSEemQWLjS7s9x4Q" name="ExampleStereotype">
+    <ownedAttribute xmi:id="_Le47ELgsEemQWLjS7s9x4Q" name="property">
+      <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#LiteralInteger"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_5sp4YLaSEemQWLjS7s9x4Q" name="ExampleClass"/>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_F9AaILqNEemQWLjS7s9x4Q" name="ExampleStereotype2"/>
+</uml:Model>

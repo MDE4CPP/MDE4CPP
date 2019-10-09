@@ -1,0 +1,14 @@
+[comment encoding = UTF-8 /]
+[module packageHelper('http://www.eclipse.org/uml2/5.0.0/UML')]
+
+[import UTs4UML4CPP::main::helper::helper]
+
+[query public prepareTests( aPackage : Package ) : Boolean = aPackage.eAnnotations->select( source = 'prepareTests' )->notEmpty()/]
+
+[query public getAllPackages( aPackage : Package ) : Sequence(Package) = aPackage.eAllContents(Package)->prepend( aPackage )/]
+
+[query public getAllOwnClasses( aPackage : Package ) : Sequence(Class) = aPackage.eContents(Class)->select( e | not e.oclIsKindOf(FunctionBehavior) )/]
+
+[query public getPackageName( aPackage : Package ) : String = aPackage.name.toUpperFirst()/]
+
+[query public getPackageTestSuiteName( aPackage : Package ) : String = aPackage.getPackageName().buildTestSuiteName()/]

@@ -426,7 +426,7 @@ Any StartObjectBehaviorActionImpl::eGet(int featureID, bool resolve, bool coreTy
 	switch(featureID)
 	{
 		case UmlPackage::STARTOBJECTBEHAVIORACTION_ATTRIBUTE_OBJECT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getObject())); //21931
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getObject())); //22031
 	}
 	return CallActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -435,7 +435,7 @@ bool StartObjectBehaviorActionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::STARTOBJECTBEHAVIORACTION_ATTRIBUTE_OBJECT:
-			return getObject() != nullptr; //21931
+			return getObject() != nullptr; //22031
 	}
 	return CallActionImpl::internalEIsSet(featureID);
 }
@@ -448,7 +448,7 @@ bool StartObjectBehaviorActionImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::InputPin> _object = std::dynamic_pointer_cast<uml::InputPin>(_temp);
-			setObject(_object); //21931
+			setObject(_object); //22031
 			return true;
 		}
 	}

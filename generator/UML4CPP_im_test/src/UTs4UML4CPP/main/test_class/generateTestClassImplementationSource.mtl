@@ -1,0 +1,42 @@
+[comment encoding = UTF-8 /]
+[module generateTestClassImplementationSource('http://www.eclipse.org/uml2/5.0.0/UML','http://www.eclipse.org/emf/2002/Ecore')]
+
+[import UTs4UML4CPP::main::helper::helper/]
+[import UTs4UML4CPP::main::helper::classHelper/]
+[import UTs4UML4CPP::main::helper::operationHelper/]
+[import UTs4UML4CPP::main::helper::packageHelper/]
+
+[template public generateTestClassImplementationSource( aClass : Class ) {
+	className : String = aClass.getClassName();
+	testClassName : String = className.buildTestSuiteName();
+	packageName : String = aClass.ancestors()->filter(Package)->first().getPackageName();
+	testPackageName : String = packageName.buildTestSuiteName(); }]
+[file( packageName.concat('/').concat(className).concat('/').concat(testClassName).buildSourcePath(), false, 'UTF-8')]
+#include "cute.h"
+#include "[packageName/]/[className/]/[testClassName/].hpp"
+#include "[packageName/]/impl/[className/]Impl.hpp"
+
+//testCodeGen.includes
+[aClass.eAnnotations.generateIncludes()/]
+
+[for( anOperation : Operation | aClass.getAllOwnOperations() )]
+#include "[packageName/]/[className/]/[anOperation.getOperationTestSuiteName()/].hpp"
+[/for]
+
+[aClass.eAnnotations.generateTestOperations( className )/]
+[generateMakeSuite( aClass.eAnnotations, className )/]
+
+bool run[testClassName/]SubTests( cute::runner<cute::xml_listener<cute::ide_listener<cute::null_listener> > > runner ) {
+
+	bool success = true;
+[for( anOperation : Operation | aClass.getAllOwnOperations() )]
+	cute::suite suite_[anOperation.getOperationName()/] = make_suite_[anOperation.getOperationTestSuiteName()/]();
+[/for]
+
+[for( anOperation : Operation | aClass.getAllOwnOperations() )]
+	success &= runner( suite_[anOperation.getOperationName()/], "[testPackageName/]::[testClassName/]::[anOperation.getOperationTestSuiteName()/]" );
+[/for]
+	return success;
+}
+[/file]
+[/template]

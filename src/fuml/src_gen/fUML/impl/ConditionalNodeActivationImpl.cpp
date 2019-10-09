@@ -282,6 +282,7 @@ Any ConditionalNodeActivationImpl::eGet(int featureID, bool resolve, bool coreTy
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
 			return eAny(tempList); //2411
 		}
@@ -293,6 +294,7 @@ Any ConditionalNodeActivationImpl::eGet(int featureID, bool resolve, bool coreTy
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
 			return eAny(tempList); //2412
 		}

@@ -1,0 +1,467 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_ekhZQGLnEemtFvvd_2Pr2w" name="umlTests">
+  <packageImport xmi:id="_zEpGELBREemRdJn9nD1dIw">
+    <importedPackage xmi:type="uml:Model" href="file:/C:/Uni/BA/MDE4CPPFork/src/examples/UMLExamples/StereotypeExample/model/Stereotype_uml.uml#_hDqJYLaSEemQWLjS7s9x4Q"/>
+  </packageImport>
+  <packagedElement xmi:type="uml:Package" xmi:id="_eIorcJmCEemCfIXRbMVoGQ" name="tests_for_uml">
+    <packagedElement xmi:type="uml:Class" xmi:id="_xmvp8JmCEemCfIXRbMVoGQ" name="ClassifierImplTest" visibility="public">
+      <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_wSrgUJpOEemCfIXRbMVoGQ" name="getAllAttributesTestFB" specification="_NIwYAJmEEemCfIXRbMVoGQ">
+        <language>INCLUDE</language>
+        <language>CPP</language>
+        <body>#include &quot;uml/UmlFactory.hpp&quot;&#xD;
+#include &quot;uml/Class.hpp&quot;&#xD;
+#include &quot;uml/Generalization.hpp&quot;&#xD;
+#include &quot;uml/Model.hpp&quot;&#xD;
+#include &quot;abstractDataTypes/Bag.hpp&quot;&#xD;
+#include &quot;abstractDataTypes/Subset.hpp&quot;</body>
+        <body>		std::shared_ptr&lt;uml::UmlFactory> factory = uml::UmlFactory::eInstance();&#xD;
+		std::shared_ptr&lt;uml::Model> p = factory->createModel();&#xD;
+		std::shared_ptr&lt;uml::Class> c = factory->createClass_in_Package( p );&#xD;
+		std::shared_ptr&lt;uml::Class> c2 = factory->createClass_in_Package( p );&#xD;
+		std::shared_ptr&lt;uml::Property> pt1 = factory->createProperty_in_Class( c2, 0 );&#xD;
+		std::shared_ptr&lt;uml::Class> c3 = factory->createClass_in_Package( p );&#xD;
+		std::shared_ptr&lt;uml::Property> pt2 = factory->createProperty_in_Class( c3, 0 );&#xD;
+		std::shared_ptr&lt;uml::Generalization> g = factory->createGeneralization( 0 );&#xD;
+		g->setGeneral( c2 );&#xD;
+		c3->getGeneralization()->add( g );&#xD;
+&#xD;
+		ASSERT_EQUALM( &quot;bag size not 0&quot;, 0, c->getAllAttributes()->size() );&#xD;
+&#xD;
+		std::shared_ptr&lt;Bag&lt;uml::Property>> aqual = c2->getAllAttributes();&#xD;
+&#xD;
+		std::shared_ptr&lt;Bag&lt;uml::Property>> expected( new Bag&lt;uml::Property>() );&#xD;
+		expected->add( pt1 );&#xD;
+		ASSERT_EQUALM( &quot;bag size not 1&quot;, expected->size(), aqual->size() );&#xD;
+		for( unsigned int i = 0; i &lt; aqual->size(); i++ ) {&#xD;
+			ASSERT_EQUALM( &quot;bag element not equal&quot;, expected->at( i ), aqual->at( i ) );&#xD;
+		}&#xD;
+&#xD;
+		std::shared_ptr&lt;Bag&lt;uml::Property>> aqual2 = c3->getAllAttributes();&#xD;
+&#xD;
+		std::shared_ptr&lt;Bag&lt;uml::Property>> expected2( new Bag&lt;uml::Property>() );&#xD;
+		expected2->add( pt2 );&#xD;
+		expected2->add( pt1 );&#xD;
+		ASSERT_EQUALM( &quot;bag size not 2&quot;, expected2->size(), aqual2->size() );&#xD;
+		for( unsigned int i = 0; i &lt; aqual2->size(); i++ ) {&#xD;
+			ASSERT_EQUALM( &quot;bag element not equal&quot;, expected2->at( i ), aqual2->at( i ) );&#xD;
+		}</body>
+      </ownedBehavior>
+      <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_4GgxcLHmEemRdJn9nD1dIw" name="doubleGeneralizationGetAllAttributesTestFB" specification="_s7lxILHmEemRdJn9nD1dIw">
+        <language>INCLUDE</language>
+        <language>CPP</language>
+        <body>#include &quot;uml/UmlFactory.hpp&quot;&#xD;
+#include &quot;uml/Class.hpp&quot;&#xD;
+#include &quot;uml/Generalization.hpp&quot;&#xD;
+#include &quot;uml/Model.hpp&quot;&#xD;
+#include &quot;abstractDataTypes/Bag.hpp&quot;&#xD;
+#include &quot;abstractDataTypes/Subset.hpp&quot;</body>
+        <body>		std::shared_ptr&lt;uml::UmlFactory> factory = uml::UmlFactory::eInstance();&#xD;
+		std::shared_ptr&lt;uml::Model> p = factory->createModel();&#xD;
+		std::shared_ptr&lt;uml::Class> c1 = factory->createClass_in_Package( p );&#xD;
+		std::shared_ptr&lt;uml::Property> pt1 = factory->createProperty_in_Class( c1, 0 );&#xD;
+		std::shared_ptr&lt;uml::Class> c21 = factory->createClass_in_Package( p );&#xD;
+		std::shared_ptr&lt;uml::Property> pt21 = factory->createProperty_in_Class( c21, 0 );&#xD;
+		std::shared_ptr&lt;uml::Generalization> g_c1c21 = factory->createGeneralization( 0 );&#xD;
+		g_c1c21->setGeneral( c1 );&#xD;
+		c21->getGeneralization()->add( g_c1c21 );&#xD;
+		std::shared_ptr&lt;uml::Class> c22 = factory->createClass_in_Package( p );&#xD;
+		std::shared_ptr&lt;uml::Property> pt22 = factory->createProperty_in_Class( c22, 0 );&#xD;
+		std::shared_ptr&lt;uml::Generalization> g_c1c22 = factory->createGeneralization( 0 );&#xD;
+		g_c1c22->setGeneral( c1 );&#xD;
+		c22->getGeneralization()->add( g_c1c22 );&#xD;
+		std::shared_ptr&lt;uml::Class> c3 = factory->createClass_in_Package( p );&#xD;
+		std::shared_ptr&lt;uml::Property> pt3 = factory->createProperty_in_Class( c3, 0 );&#xD;
+		std::shared_ptr&lt;uml::Generalization> g_c21c3 = factory->createGeneralization( 0 );&#xD;
+		g_c21c3->setGeneral( c21 );&#xD;
+		c3->getGeneralization()->add( g_c21c3 );&#xD;
+		std::shared_ptr&lt;uml::Generalization> g_c22c3 = factory->createGeneralization( 0 );&#xD;
+		g_c22c3->setGeneral( c22 );&#xD;
+		c3->getGeneralization()->add( g_c22c3 );&#xD;
+&#xD;
+		ASSERT_EQUALM( &quot;c1 bag size not 1&quot;, 1, c1->getAllAttributes()->size() );&#xD;
+		ASSERT_EQUALM( &quot;c1 pt1 bag element not equal&quot;, pt1, c1->getAllAttributes()->at( 0 ) );&#xD;
+&#xD;
+		ASSERT_EQUALM( &quot;c21 bag size not 2&quot;, 2, c21->getAllAttributes()->size() );&#xD;
+		ASSERT_EQUALM( &quot;c21 pt21 bag element not equal&quot;, pt21, c21->getAllAttributes()->at( 0 ) );&#xD;
+		ASSERT_EQUALM( &quot;c21 pt1 bag element not equal&quot;, pt1, c21->getAllAttributes()->at( 1 ) );&#xD;
+&#xD;
+		ASSERT_EQUALM( &quot;c22 bag size not 2&quot;, 2, c22->getAllAttributes()->size() );&#xD;
+		ASSERT_EQUALM( &quot;c22 pt22 bag element not equal&quot;, pt22, c22->getAllAttributes()->at( 0 ) );&#xD;
+		ASSERT_EQUALM( &quot;c22 pt1 bag element not equal&quot;, pt1, c22->getAllAttributes()->at( 1 ) );&#xD;
+&#xD;
+		ASSERT_EQUALM( &quot;c3 bag size not 5&quot;, 5, c3->getAllAttributes()->size() );&#xD;
+		ASSERT_EQUALM( &quot;c3 pt3 bag element not equal&quot;, pt3, c3->getAllAttributes()->at( 0 ) );&#xD;
+		ASSERT_EQUALM( &quot;c3 pt21 bag element not equal&quot;, pt21, c3->getAllAttributes()->at( 1 ) );&#xD;
+		ASSERT_EQUALM( &quot;c3 pt1 bag element not equal&quot;, pt1, c3->getAllAttributes()->at( 2 ) );&#xD;
+		ASSERT_EQUALM( &quot;c3 pt22 bag element not equal&quot;, pt22, c3->getAllAttributes()->at( 3 ) );&#xD;
+		ASSERT_EQUALM( &quot;c3 pt1 bag element not equal&quot;, pt1, c3->getAllAttributes()->at( 4 ) );</body>
+      </ownedBehavior>
+      <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_4PHycJpOEemCfIXRbMVoGQ" name="getGeneralsTestFB" specification="_d0Z18JmEEemCfIXRbMVoGQ">
+        <language>INCLUDE</language>
+        <language>CPP</language>
+        <body>#include &quot;uml/UmlFactory.hpp&quot;&#xD;
+#include &quot;uml/Class.hpp&quot;&#xD;
+#include &quot;uml/Generalization.hpp&quot;&#xD;
+#include &quot;uml/Model.hpp&quot;&#xD;
+#include &quot;abstractDataTypes/Bag.hpp&quot;&#xD;
+#include &quot;abstractDataTypes/Subset.hpp&quot;</body>
+        <body>		std::shared_ptr&lt;uml::UmlFactory> factory = uml::UmlFactory::eInstance();&#xD;
+		std::shared_ptr&lt;uml::Model> p = factory->createModel();&#xD;
+		std::shared_ptr&lt;uml::Class> c = factory->createClass_in_Package( p );&#xD;
+		std::shared_ptr&lt;uml::Class> c2 = factory->createClass_in_Package( p );&#xD;
+		std::shared_ptr&lt;uml::Class> c3 = factory->createClass_in_Package( p );&#xD;
+		std::shared_ptr&lt;uml::Generalization> g = factory->createGeneralization( 0 );&#xD;
+		g->setGeneral( c2 );&#xD;
+		c3->getGeneralization()->add( g );&#xD;
+&#xD;
+		ASSERT_EQUALM( &quot;bag size not 0&quot;, 0, c->getGenerals()->size() );&#xD;
+		ASSERT_EQUALM( &quot;bag size not 0&quot;, 0, c2->getGenerals()->size() );&#xD;
+&#xD;
+		std::shared_ptr&lt;Bag&lt;uml::Classifier>> aqual = c3->getGenerals();&#xD;
+&#xD;
+		std::shared_ptr&lt;Bag&lt;uml::Classifier>> expected( new Bag&lt;uml::Classifier>() );&#xD;
+		expected->add( c2 );&#xD;
+		ASSERT_EQUALM( &quot;bag size not 1&quot;, expected->size(), aqual->size() );&#xD;
+		for( unsigned int i = 0; i &lt; aqual->size(); i++ ) {&#xD;
+			ASSERT_EQUALM( &quot;bag element not equal&quot;, expected->at( i ), aqual->at( i ) );&#xD;
+		}</body>
+      </ownedBehavior>
+      <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_6ilp4JpOEemCfIXRbMVoGQ" name="parentsTestFB" specification="_h0qmYJmEEemCfIXRbMVoGQ">
+        <language>INCLUDE</language>
+        <language>CPP</language>
+        <body>#include &quot;uml/UmlFactory.hpp&quot;&#xD;
+#include &quot;uml/Class.hpp&quot;&#xD;
+#include &quot;uml/Generalization.hpp&quot;&#xD;
+#include &quot;uml/Model.hpp&quot;&#xD;
+#include &quot;abstractDataTypes/Bag.hpp&quot;&#xD;
+#include &quot;abstractDataTypes/Subset.hpp&quot;</body>
+        <body>		std::shared_ptr&lt;uml::UmlFactory> factory = uml::UmlFactory::eInstance();&#xD;
+		std::shared_ptr&lt;uml::Model> p = factory->createModel();&#xD;
+		std::shared_ptr&lt;uml::Class> c = factory->createClass_in_Package( p );&#xD;
+		std::shared_ptr&lt;uml::Class> c2 = factory->createClass_in_Package( p );&#xD;
+		std::shared_ptr&lt;uml::Class> c3 = factory->createClass_in_Package( p );&#xD;
+		std::shared_ptr&lt;uml::Generalization> g = factory->createGeneralization( 0 );&#xD;
+		g->setGeneral( c2 );&#xD;
+		c3->getGeneralization()->add( g );&#xD;
+&#xD;
+		ASSERT_EQUALM( &quot;bag size not 0&quot;, 0, c->parents()->size() );&#xD;
+		ASSERT_EQUALM( &quot;bag size not 0&quot;, 0, c2->parents()->size() );&#xD;
+&#xD;
+		std::shared_ptr&lt;Bag&lt;uml::Classifier>> aqual = c3->parents();&#xD;
+&#xD;
+		std::shared_ptr&lt;Bag&lt;uml::Classifier>> expected( new Bag&lt;uml::Classifier>() );&#xD;
+		expected->add( c2 );&#xD;
+		ASSERT_EQUALM( &quot;bag size not 1&quot;, expected->size(), aqual->size() );&#xD;
+		for( unsigned int i = 0; i &lt; aqual->size(); i++ ) {&#xD;
+			ASSERT_EQUALM( &quot;bag element not equal&quot;, expected->at( i ), aqual->at( i ) );&#xD;
+		}</body>
+      </ownedBehavior>
+      <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_5EZWALHmEemRdJn9nD1dIw" name="parentsCircleTestFB" specification="_y2trwLHmEemRdJn9nD1dIw">
+        <language>INCLUDE</language>
+        <language>CPP</language>
+        <body>#include &quot;uml/UmlFactory.hpp&quot;&#xD;
+#include &quot;uml/Class.hpp&quot;&#xD;
+#include &quot;uml/Generalization.hpp&quot;&#xD;
+#include &quot;uml/Model.hpp&quot;&#xD;
+#include &quot;abstractDataTypes/Bag.hpp&quot;&#xD;
+#include &quot;abstractDataTypes/Subset.hpp&quot;</body>
+        <body>		std::shared_ptr&lt;uml::UmlFactory> factory = uml::UmlFactory::eInstance();&#xD;
+		std::shared_ptr&lt;uml::Model> p = factory->createModel();&#xD;
+		std::shared_ptr&lt;uml::Class> c = factory->createClass_in_Package( p );&#xD;
+		std::shared_ptr&lt;uml::Class> c2 = factory->createClass_in_Package( p );&#xD;
+		std::shared_ptr&lt;uml::Generalization> g = factory->createGeneralization( 0 );&#xD;
+		g->setGeneral( c2 );&#xD;
+		c->getGeneralization()->add( g );&#xD;
+		std::shared_ptr&lt;uml::Generalization> g2 = factory->createGeneralization( 0 );&#xD;
+		g2->setGeneral( c );&#xD;
+		c2->getGeneralization()->add( g2 );&#xD;
+&#xD;
+		ASSERT_EQUALM( &quot;model has a circle&quot;, false, c->parents()->size() == 1 &amp;&amp; c2->parents()->size() == 1 &amp;&amp; c->parents()->at( 0 ) == c2 &amp;&amp; c2->parents()->at( 0 ) == c );</body>
+      </ownedBehavior>
+      <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_6mD9ELHmEemRdJn9nD1dIw" name="doubleParentsTestFB" specification="_zwgagLHmEemRdJn9nD1dIw">
+        <language>INCLUDE</language>
+        <language>CPP</language>
+        <body>#include &quot;uml/UmlFactory.hpp&quot;&#xD;
+#include &quot;uml/Class.hpp&quot;&#xD;
+#include &quot;uml/Generalization.hpp&quot;&#xD;
+#include &quot;uml/Model.hpp&quot;&#xD;
+#include &quot;abstractDataTypes/Bag.hpp&quot;&#xD;
+#include &quot;abstractDataTypes/Subset.hpp&quot;</body>
+        <body>		std::shared_ptr&lt;uml::UmlFactory> factory = uml::UmlFactory::eInstance();&#xD;
+		std::shared_ptr&lt;uml::Model> p = factory->createModel();&#xD;
+		std::shared_ptr&lt;uml::Class> c1 = factory->createClass_in_Package( p );&#xD;
+		std::shared_ptr&lt;uml::Class> c21 = factory->createClass_in_Package( p );&#xD;
+		std::shared_ptr&lt;uml::Generalization> g_c1c21 = factory->createGeneralization( 0 );&#xD;
+		g_c1c21->setGeneral( c1 );&#xD;
+		c21->getGeneralization()->add( g_c1c21 );&#xD;
+		std::shared_ptr&lt;uml::Class> c22 = factory->createClass_in_Package( p );&#xD;
+		std::shared_ptr&lt;uml::Generalization> g_c1c22 = factory->createGeneralization( 0 );&#xD;
+		g_c1c22->setGeneral( c1 );&#xD;
+		c22->getGeneralization()->add( g_c1c22 );&#xD;
+		std::shared_ptr&lt;uml::Class> c3 = factory->createClass_in_Package( p );&#xD;
+		std::shared_ptr&lt;uml::Generalization> g_c21c3 = factory->createGeneralization( 0 );&#xD;
+		g_c21c3->setGeneral( c21 );&#xD;
+		c3->getGeneralization()->add( g_c21c3 );&#xD;
+		std::shared_ptr&lt;uml::Generalization> g_c22c3 = factory->createGeneralization( 0 );&#xD;
+		g_c22c3->setGeneral( c22 );&#xD;
+		c3->getGeneralization()->add( g_c22c3 );&#xD;
+&#xD;
+		ASSERT_EQUALM( &quot;c1 bag size not 0&quot;, 0, c1->parents()->size() );&#xD;
+&#xD;
+		ASSERT_EQUALM( &quot;c21 bag size not 1&quot;, 1, c21->parents()->size() );&#xD;
+		ASSERT_EQUALM( &quot;c21 bag element not equal&quot;, c1, c21->parents()->at( 0 ) );&#xD;
+&#xD;
+		ASSERT_EQUALM( &quot;c22 bag size not 1&quot;, 1, c22->parents()->size() );&#xD;
+		ASSERT_EQUALM( &quot;c22 bag element not equal&quot;, c1, c22->parents()->at( 0 ) );&#xD;
+&#xD;
+		//Only generalizations of this class is return. Not the generalizations of the generalized classes&#xD;
+		ASSERT_EQUALM( &quot;c3 bag size not 2&quot;, 2, c3->parents()->size() );&#xD;
+		ASSERT_EQUALM( &quot;c3 0=>c21 bag element not equal&quot;, c21, c3->parents()->at( 0 ) );&#xD;
+		ASSERT_EQUALM( &quot;c3 0=>c22 bag element not equal&quot;, c22, c3->parents()->at( 1 ) );</body>
+      </ownedBehavior>
+      <ownedOperation xmi:id="_NIwYAJmEEemCfIXRbMVoGQ" name="getAllAttributesTest" method="_wSrgUJpOEemCfIXRbMVoGQ"/>
+      <ownedOperation xmi:id="_s7lxILHmEemRdJn9nD1dIw" name="doubleGeneralizationGetAllAttributesTest" method="_4GgxcLHmEemRdJn9nD1dIw"/>
+      <ownedOperation xmi:id="_d0Z18JmEEemCfIXRbMVoGQ" name="getGeneralsTest" method="_4PHycJpOEemCfIXRbMVoGQ"/>
+      <ownedOperation xmi:id="_h0qmYJmEEemCfIXRbMVoGQ" name="parentsTest" method="_6ilp4JpOEemCfIXRbMVoGQ"/>
+      <ownedOperation xmi:id="_y2trwLHmEemRdJn9nD1dIw" name="parentsCircleTest" method="_5EZWALHmEemRdJn9nD1dIw"/>
+      <ownedOperation xmi:id="_zwgagLHmEemRdJn9nD1dIw" name="doubleParentsTest" method="_6mD9ELHmEemRdJn9nD1dIw"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_ucXGsJmEEemCfIXRbMVoGQ" name="ClassImplTest" visibility="public">
+      <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_FYXgoJpPEemCfIXRbMVoGQ" name="getSuperClassesTestFB" specification="_wdDMEJmEEemCfIXRbMVoGQ">
+        <language>INCLUDE</language>
+        <language>CPP</language>
+        <body>#include &quot;uml/UmlFactory.hpp&quot;&#xD;
+#include &quot;uml/Class.hpp&quot;&#xD;
+#include &quot;uml/Generalization.hpp&quot;&#xD;
+#include &quot;uml/Model.hpp&quot;&#xD;
+#include &quot;abstractDataTypes/Bag.hpp&quot;&#xD;
+#include &quot;abstractDataTypes/Subset.hpp&quot;</body>
+        <body>		std::shared_ptr&lt;uml::UmlFactory> factory = uml::UmlFactory::eInstance();&#xD;
+		std::shared_ptr&lt;uml::Model> p = factory->createModel();&#xD;
+		std::shared_ptr&lt;uml::Class> c = factory->createClass_in_Package( p );&#xD;
+		std::shared_ptr&lt;uml::Class> c2 = factory->createClass_in_Package( p );&#xD;
+		std::shared_ptr&lt;uml::Class> c3 = factory->createClass_in_Package( p );&#xD;
+		std::shared_ptr&lt;uml::Generalization> g = factory->createGeneralization( 0 );&#xD;
+		g->setGeneral( c2 );&#xD;
+		c3->getGeneralization()->add( g );&#xD;
+&#xD;
+		ASSERT_EQUALM( &quot;bag size not 0&quot;, 0, c->getSuperClasses()->size() );&#xD;
+		ASSERT_EQUALM( &quot;bag size not 0&quot;, 0, c2->getSuperClasses()->size() );&#xD;
+&#xD;
+		std::shared_ptr&lt;Bag&lt;uml::Class>> aqual = c3->getSuperClasses();&#xD;
+&#xD;
+		std::shared_ptr&lt;Bag&lt;uml::Class>> expected( new Bag&lt;uml::Class>() );&#xD;
+		expected->add( c2 );&#xD;
+		ASSERT_EQUALM( &quot;bag size not 1&quot;, expected->size(), aqual->size() );&#xD;
+		for( unsigned int i = 0; i &lt; aqual->size(); i++ ) {&#xD;
+			ASSERT_EQUALM( &quot;bag element not equal&quot;, expected->at( i ), aqual->at( i ) );&#xD;
+		}</body>
+      </ownedBehavior>
+      <ownedOperation xmi:id="_wdDMEJmEEemCfIXRbMVoGQ" name="getSuperClassesTest" method="_FYXgoJpPEemCfIXRbMVoGQ"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_HlnNoJmGEemCfIXRbMVoGQ" name="ElementImplTest" visibility="public">
+      <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_GeMgQJpPEemCfIXRbMVoGQ" name="applyStereotypeTestFB" specification="_MQMGYJmGEemCfIXRbMVoGQ">
+        <language>INCLUDE</language>
+        <language>CPP</language>
+        <language>LIBRARY</language>
+        <body>#include &quot;Stereotype_uml/Stereotype_umlFactory.hpp&quot;&#xD;
+#include &quot;Stereotype_uml/ExampleClass.hpp&quot;&#xD;
+#include &quot;Stereotype_uml/ExampleStereotype.hpp&quot;</body>
+        <body>		std::shared_ptr&lt;Stereotype_uml::Stereotype_umlFactory> factory = Stereotype_uml::Stereotype_umlFactory::eInstance();&#xD;
+		std::shared_ptr&lt;Stereotype_uml::ExampleClass> ec = factory->createExampleClass();&#xD;
+		std::shared_ptr&lt;Stereotype_uml::ExampleStereotype> es = factory->createExampleStereotype();&#xD;
+		&#xD;
+		//TODO: applyStereotype always return &quot;nullptr&quot;&#xD;
+		ASSERT_EQUALM( &quot;return value is not nullptr&quot;, nullptr, ec->applyStereotype( es ) );</body>
+        <body>Stereotype_uml</body>
+      </ownedBehavior>
+      <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_IRN9EJpPEemCfIXRbMVoGQ" name="getAppliedStereotypeTestFB" specification="_SwqJwJmGEemCfIXRbMVoGQ">
+        <language>INCLUDE</language>
+        <language>CPP</language>
+        <language>LIBRARY</language>
+        <body>#include &quot;Stereotype_uml/Stereotype_umlFactory.hpp&quot;&#xD;
+#include &quot;Stereotype_uml/ExampleClass.hpp&quot;&#xD;
+#include &quot;Stereotype_uml/ExampleStereotype.hpp&quot;</body>
+        <body>		std::shared_ptr&lt;Stereotype_uml::Stereotype_umlFactory> factory = Stereotype_uml::Stereotype_umlFactory::eInstance();&#xD;
+		std::shared_ptr&lt;Stereotype_uml::ExampleClass> ec = factory->createExampleClass();&#xD;
+		std::shared_ptr&lt;Stereotype_uml::ExampleStereotype> es = factory->createExampleStereotype();&#xD;
+&#xD;
+		ec->applyStereotype( es );&#xD;
+&#xD;
+		ASSERT_EQUALM( &quot;got AppliedStereotype is wrong&quot;, es, ec->getAppliedStereotype( es->getMetaClass()->getQualifiedName() ) );</body>
+        <body>Stereotype_uml</body>
+      </ownedBehavior>
+      <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_IRN9EZpPEemCfIXRbMVoGQ" name="getAppliedStereotypesTestFB" specification="_YtQEAJmGEemCfIXRbMVoGQ">
+        <language>INCLUDE</language>
+        <language>CPP</language>
+        <language>LIBRARY</language>
+        <body>#include &quot;Stereotype_uml/Stereotype_umlFactory.hpp&quot;&#xD;
+#include &quot;Stereotype_uml/ExampleClass.hpp&quot;&#xD;
+#include &quot;Stereotype_uml/ExampleStereotype.hpp&quot;&#xD;
+#include &quot;Stereotype_uml/ExampleStereotype2.hpp&quot;&#xD;
+#include &quot;abstractDataTypes/Bag.hpp&quot;</body>
+        <body>		std::shared_ptr&lt;Stereotype_uml::Stereotype_umlFactory> factory = Stereotype_uml::Stereotype_umlFactory::eInstance();&#xD;
+		std::shared_ptr&lt;Stereotype_uml::ExampleClass> ec = factory->createExampleClass();&#xD;
+		std::shared_ptr&lt;Stereotype_uml::ExampleStereotype> es = factory->createExampleStereotype();&#xD;
+		std::shared_ptr&lt;Stereotype_uml::ExampleStereotype2> es2 = factory->createExampleStereotype2();&#xD;
+&#xD;
+		ec->applyStereotype( es );&#xD;
+		ec->applyStereotype( es );&#xD;
+		ec->applyStereotype( es2 );&#xD;
+&#xD;
+		std::shared_ptr&lt;Bag&lt;uml::Stereotype>> expected( new Bag&lt;uml::Stereotype>() );&#xD;
+		expected->add( es );&#xD;
+		expected->add( es2 );&#xD;
+		std::shared_ptr&lt;Bag&lt;uml::Stereotype>> aqual = ec->getAppliedStereotypes();&#xD;
+		ASSERT_EQUALM( &quot;c bag size not equal&quot;, expected->size(), aqual->size() );&#xD;
+		for( unsigned int i = 0; i &lt; aqual->size(); i++ ) {&#xD;
+			ASSERT_EQUALM( &quot;c bag element not equal&quot;, expected->at( i ), aqual->at( i ) );&#xD;
+		}</body>
+        <body>Stereotype_uml</body>
+      </ownedBehavior>
+      <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_IRN9EppPEemCfIXRbMVoGQ" name="getValueTestFB" specification="_f1PaYJmGEemCfIXRbMVoGQ">
+        <language>INCLUDE</language>
+        <language>CPP</language>
+        <language>LIBRARY</language>
+        <body>#include &quot;Stereotype_uml/Stereotype_umlFactory.hpp&quot;&#xD;
+#include &quot;Stereotype_uml/ExampleClass.hpp&quot;&#xD;
+#include &quot;Stereotype_uml/ExampleStereotype.hpp&quot;&#xD;
+#include &quot;uml/UmlFactory.hpp&quot;&#xD;
+#include &quot;uml/LiteralInteger.hpp&quot;&#xD;
+#include &quot;abstractDataTypes/Any.hpp&quot;</body>
+        <body>		std::shared_ptr&lt;uml::UmlFactory> umlfactory = uml::UmlFactory::eInstance();&#xD;
+		std::shared_ptr&lt;Stereotype_uml::Stereotype_umlFactory> factory = Stereotype_uml::Stereotype_umlFactory::eInstance();&#xD;
+		std::shared_ptr&lt;Stereotype_uml::ExampleClass> ec = factory->createExampleClass();&#xD;
+		std::shared_ptr&lt;Stereotype_uml::ExampleStereotype> es = factory->createExampleStereotype();&#xD;
+		std::shared_ptr&lt;uml::LiteralInteger> li = umlfactory->createLiteralInteger();&#xD;
+		li->setValue( 1547 );&#xD;
+&#xD;
+&#xD;
+		ASSERT_EQUALM( &quot;value not equal&quot;, Any(), ec->getValue( es, &quot;property&quot; ) );&#xD;
+		ec->applyStereotype( es );&#xD;
+		ASSERT_EQUALM( &quot;value not equal&quot;, nullptr, ec->getValue( es, &quot;property&quot; )->get&lt;std::shared_ptr&lt;uml::LiteralInteger>>() );&#xD;
+&#xD;
+		Any value = eAny( li );&#xD;
+		ec->setValue( es,&quot;property&quot;, value );&#xD;
+		int expected = li->getValue();&#xD;
+		int aqual = ec->getValue( es, &quot;property&quot; )->get&lt;std::shared_ptr&lt;uml::LiteralInteger>>()->getValue();&#xD;
+		ASSERT_EQUALM( &quot;value not equal&quot;, expected, aqual );</body>
+        <body>Stereotype_uml</body>
+      </ownedBehavior>
+      <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_IsoGsJpPEemCfIXRbMVoGQ" name="isStereotypeAppliedTestFB" specification="_jGkoQJmGEemCfIXRbMVoGQ">
+        <language>INCLUDE</language>
+        <language>CPP</language>
+        <language>LIBRARY</language>
+        <body>#include &quot;Stereotype_uml/Stereotype_umlFactory.hpp&quot;&#xD;
+#include &quot;Stereotype_uml/ExampleClass.hpp&quot;&#xD;
+#include &quot;Stereotype_uml/ExampleStereotype.hpp&quot;</body>
+        <body>		std::shared_ptr&lt;Stereotype_uml::Stereotype_umlFactory> factory = Stereotype_uml::Stereotype_umlFactory::eInstance();&#xD;
+		std::shared_ptr&lt;Stereotype_uml::ExampleClass> ec = factory->createExampleClass();&#xD;
+		std::shared_ptr&lt;Stereotype_uml::ExampleStereotype> es = factory->createExampleStereotype();&#xD;
+&#xD;
+		ASSERT_EQUALM( &quot;Stereotype is applied&quot;, false, ec->isStereotypeApplied( es ) );&#xD;
+		ec->applyStereotype( es );&#xD;
+		ASSERT_EQUALM( &quot;Stereotype is not applied&quot;, true, ec->isStereotypeApplied( es ) );</body>
+        <body>Stereotype_uml</body>
+      </ownedBehavior>
+      <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_IsotwJpPEemCfIXRbMVoGQ" name="setValueTestFB" specification="_l36ugJmGEemCfIXRbMVoGQ">
+        <language>INCLUDE</language>
+        <language>CPP</language>
+        <language>LIBRARY</language>
+        <body>#include &quot;Stereotype_uml/Stereotype_umlFactory.hpp&quot;&#xD;
+#include &quot;Stereotype_uml/ExampleClass.hpp&quot;&#xD;
+#include &quot;Stereotype_uml/ExampleStereotype.hpp&quot;&#xD;
+#include &quot;uml/UmlFactory.hpp&quot;&#xD;
+#include &quot;uml/LiteralInteger.hpp&quot;&#xD;
+#include &quot;abstractDataTypes/Any.hpp&quot;</body>
+        <body>		std::shared_ptr&lt;uml::UmlFactory> umlfactory = uml::UmlFactory::eInstance();&#xD;
+		std::shared_ptr&lt;Stereotype_uml::Stereotype_umlFactory> factory = Stereotype_uml::Stereotype_umlFactory::eInstance();&#xD;
+		std::shared_ptr&lt;Stereotype_uml::ExampleClass> ec = factory->createExampleClass();&#xD;
+		std::shared_ptr&lt;Stereotype_uml::ExampleStereotype> es = factory->createExampleStereotype();&#xD;
+		std::shared_ptr&lt;uml::LiteralInteger> li = umlfactory->createLiteralInteger();&#xD;
+		li->setValue( 1547 );&#xD;
+&#xD;
+		ec->applyStereotype( es );&#xD;
+		Any value = eAny( li );&#xD;
+		ec->setValue( es,&quot;property&quot;, value );&#xD;
+		int expected = li->getValue();&#xD;
+		int aqual = ec->getValue( es, &quot;property&quot; )->get&lt;std::shared_ptr&lt;uml::LiteralInteger>>()->getValue();&#xD;
+		ASSERT_EQUALM( &quot;value not equal&quot;, expected, aqual );</body>
+        <body>Stereotype_uml</body>
+      </ownedBehavior>
+      <ownedOperation xmi:id="_MQMGYJmGEemCfIXRbMVoGQ" name="applyStereotypeTest" method="_GeMgQJpPEemCfIXRbMVoGQ"/>
+      <ownedOperation xmi:id="_SwqJwJmGEemCfIXRbMVoGQ" name="getAppliedStereotypeTest" method="_IRN9EJpPEemCfIXRbMVoGQ"/>
+      <ownedOperation xmi:id="_YtQEAJmGEemCfIXRbMVoGQ" name="getAppliedStereotypesTest" method="_IRN9EZpPEemCfIXRbMVoGQ"/>
+      <ownedOperation xmi:id="_f1PaYJmGEemCfIXRbMVoGQ" name="getValueTest" method="_IRN9EppPEemCfIXRbMVoGQ"/>
+      <ownedOperation xmi:id="_jGkoQJmGEemCfIXRbMVoGQ" name="isStereotypeAppliedTest" method="_IsoGsJpPEemCfIXRbMVoGQ"/>
+      <ownedOperation xmi:id="_l36ugJmGEemCfIXRbMVoGQ" name="setValueTest" method="_IsotwJpPEemCfIXRbMVoGQ"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_UdyvEJmIEemCfIXRbMVoGQ" name="NamedElementImplTest" visibility="public">
+      <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_JDS6QJpPEemCfIXRbMVoGQ" name="allNamespacesTestFB" specification="_YBVuUJmIEemCfIXRbMVoGQ">
+        <language>INCLUDE</language>
+        <language>CPP</language>
+        <body>#include &quot;uml/UmlFactory.hpp&quot;&#xD;
+#include &quot;uml/Class.hpp&quot;&#xD;
+#include &quot;uml/Model.hpp&quot;</body>
+        <body>		std::shared_ptr&lt;uml::UmlFactory> factory = uml::UmlFactory::eInstance();&#xD;
+		std::shared_ptr&lt;uml::Model> p = factory->createModel();&#xD;
+		std::shared_ptr&lt;uml::Class> c = factory->createClass_in_Package( p );&#xD;
+		std::shared_ptr&lt;uml::Class> c2 = factory->createClass_in_Namespace( p );&#xD;
+		std::shared_ptr&lt;uml::Class> c3 = factory->createClass();&#xD;
+&#xD;
+		std::shared_ptr&lt;Bag&lt;uml::Namespace>> aqual = c->allNamespaces();&#xD;
+		std::shared_ptr&lt;Bag&lt;uml::Namespace>> aqual2 = c2->allNamespaces();&#xD;
+		std::shared_ptr&lt;Bag&lt;uml::Namespace>> aqual3 = c3->allNamespaces();&#xD;
+&#xD;
+		std::shared_ptr&lt;Bag&lt;uml::Namespace>> expected( new Bag&lt;uml::Namespace>() );&#xD;
+		expected->add( p );&#xD;
+		ASSERT_EQUALM( &quot;bag size not 1&quot;, expected->size(), aqual->size() );&#xD;
+		for( unsigned int i = 0; i &lt; aqual->size(); i++ ) {&#xD;
+			ASSERT_EQUALM( &quot;bag element not equal&quot;, expected->at( i ), aqual->at( i ) );&#xD;
+		}&#xD;
+		ASSERT_EQUALM( &quot;bag size not 1&quot;, expected->size(), aqual2->size() );&#xD;
+		for( unsigned int i = 0; i &lt; aqual2->size(); i++ ) {&#xD;
+			ASSERT_EQUALM( &quot;bag element not equal&quot;, expected->at( i ), aqual2->at( i ) );&#xD;
+		}&#xD;
+		ASSERT_EQUALM( &quot;bag size not 0&quot;, 0, aqual3->size() );</body>
+      </ownedBehavior>
+      <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_JDS6QZpPEemCfIXRbMVoGQ" name="getQualifiedNameTestFB" specification="_bVMrwJmIEemCfIXRbMVoGQ">
+        <language>INCLUDE</language>
+        <language>CPP</language>
+        <body>#include &quot;uml/UmlFactory.hpp&quot;&#xD;
+#include &quot;uml/Class.hpp&quot;&#xD;
+#include &quot;uml/Model.hpp&quot;&#xD;
+#include &quot;abstractDataTypes/Bag.hpp&quot;</body>
+        <body>		std::shared_ptr&lt;uml::UmlFactory> factory = uml::UmlFactory::eInstance();&#xD;
+		std::shared_ptr&lt;uml::Model> p = factory->createModel();&#xD;
+		p->setName( &quot;Model&quot; );&#xD;
+		std::shared_ptr&lt;uml::Class> c = factory->createClass_in_Package( p );&#xD;
+		c->setName( &quot;Class1&quot; );&#xD;
+		std::shared_ptr&lt;uml::Package> p2 = factory->createPackage_in_Namespace( p, 0 );&#xD;
+		p2->setName( &quot;Package1&quot; );&#xD;
+		std::shared_ptr&lt;uml::Class> c2 = factory->createClass_in_Package( p2 );&#xD;
+		c2->setName( &quot;Class2&quot; );&#xD;
+		std::shared_ptr&lt;uml::Class> c3 = factory->createClass_in_Package( p2 );&#xD;
+&#xD;
+		ASSERT_EQUALM( &quot;qualified name not correct&quot;, &quot;Model::Class1&quot;, c->getQualifiedName() );&#xD;
+		ASSERT_EQUALM( &quot;qualified name not correct&quot;, &quot;Model::Package1::Class2&quot;, c2->getQualifiedName() );&#xD;
+		ASSERT_EQUALM( &quot;qualified name not correct&quot;, &quot;&quot;, c3->getQualifiedName() );</body>
+      </ownedBehavior>
+      <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_JDS6QppPEemCfIXRbMVoGQ" name="separatorTestFB" specification="_ef_z0JmIEemCfIXRbMVoGQ">
+        <language>INCLUDE</language>
+        <language>CPP</language>
+        <body>#include &quot;uml/UmlFactory.hpp&quot;&#xD;
+#include &quot;uml/Class.hpp&quot;&#xD;
+#include &quot;uml/Model.hpp&quot;</body>
+        <body>		std::shared_ptr&lt;uml::UmlFactory> factory = uml::UmlFactory::eInstance();&#xD;
+		std::shared_ptr&lt;uml::Model> p = factory->createModel();&#xD;
+		std::shared_ptr&lt;uml::Class> c = factory->createClass_in_Package( p );&#xD;
+&#xD;
+		ASSERT_EQUALM( &quot;separator is not ::&quot;, &quot;::&quot;, c->separator() );</body>
+      </ownedBehavior>
+      <ownedOperation xmi:id="_YBVuUJmIEemCfIXRbMVoGQ" name="allNamespacesTest" method="_JDS6QJpPEemCfIXRbMVoGQ"/>
+      <ownedOperation xmi:id="_bVMrwJmIEemCfIXRbMVoGQ" name="getQualifiedNameTest" method="_JDS6QZpPEemCfIXRbMVoGQ"/>
+      <ownedOperation xmi:id="_ef_z0JmIEemCfIXRbMVoGQ" name="separatorTest" method="_JDS6QppPEemCfIXRbMVoGQ"/>
+    </packagedElement>
+  </packagedElement>
+</uml:Model>

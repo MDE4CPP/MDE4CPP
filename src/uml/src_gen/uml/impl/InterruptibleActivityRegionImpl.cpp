@@ -325,8 +325,9 @@ Any InterruptibleActivityRegionImpl::eGet(int featureID, bool resolve, bool core
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //12714
+			return eAny(tempList); //12814
 		}
 		case UmlPackage::INTERRUPTIBLEACTIVITYREGION_ATTRIBUTE_NODE:
 		{
@@ -336,8 +337,9 @@ Any InterruptibleActivityRegionImpl::eGet(int featureID, bool resolve, bool core
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //12715
+			return eAny(tempList); //12815
 		}
 	}
 	return ActivityGroupImpl::eGet(featureID, resolve, coreType);
@@ -347,9 +349,9 @@ bool InterruptibleActivityRegionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::INTERRUPTIBLEACTIVITYREGION_ATTRIBUTE_INTERRUPTINGEDGE:
-			return getInterruptingEdge() != nullptr; //12714
+			return getInterruptingEdge() != nullptr; //12814
 		case UmlPackage::INTERRUPTIBLEACTIVITYREGION_ATTRIBUTE_NODE:
-			return getNode() != nullptr; //12715
+			return getNode() != nullptr; //12815
 	}
 	return ActivityGroupImpl::internalEIsSet(featureID);
 }

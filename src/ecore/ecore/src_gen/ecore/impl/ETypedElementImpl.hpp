@@ -77,6 +77,10 @@ namespace ecore
 			
 			/*!
 			 */ 
+			virtual void setRequired (bool _required); 
+			
+			/*!
+			 */ 
 			virtual bool isUnique() const ;
 			
 			/*!

@@ -210,12 +210,12 @@ namespace uml
 			/*!
 			 Determines the precise type of the Pseudostate and can be one of: entryPoint, exitPoint, initial, deepHistory, shallowHistory, join, fork, junction, terminate or choice.
 			<p>From package UML::StateMachines.</p> */ 
-			virtual PseudostateKind getKind() const = 0;
+			virtual uml::PseudostateKind getKind() const = 0;
 			
 			/*!
 			 Determines the precise type of the Pseudostate and can be one of: entryPoint, exitPoint, initial, deepHistory, shallowHistory, join, fork, junction, terminate or choice.
 			<p>From package UML::StateMachines.</p> */ 
-			virtual void setKind (PseudostateKind _kind)= 0; 
+			virtual void setKind (uml::PseudostateKind _kind)= 0; 
 			
 			
 			//*********************************
@@ -248,7 +248,7 @@ namespace uml
 			/*!
 			 Determines the precise type of the Pseudostate and can be one of: entryPoint, exitPoint, initial, deepHistory, shallowHistory, join, fork, junction, terminate or choice.
 			<p>From package UML::StateMachines.</p> */ 
-			PseudostateKind m_kind = PseudostateKind::INITIAL;
+			uml::PseudostateKind m_kind = PseudostateKind::INITIAL;
 			
 			
 			//*********************************

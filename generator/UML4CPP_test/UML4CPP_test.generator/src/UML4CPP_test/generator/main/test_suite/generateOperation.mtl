@@ -1,0 +1,94 @@
+[comment encoding = UTF-8 /]
+[**
+ * Copyright (c) 2017 TU Ilmenau, Systems and Software Engineering Group
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
+ * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+ * and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ ****************************************************************************************************************************************************************
+ * 
+ * module for generation of UML Operation artefacts
+ * 
+ */]
+[module generateOperation('http://www.eclipse.org/uml2/5.0.0/UML', 'http://www.eclipse.org/emf/2002/Ecore')]
+
+
+
+[import UML4CPP::generator::main::components::generateType /]
+[import UML4CPP::generator::main::helpers::generalHelper /]
+[import UML4CPP::generator::main::helpers::keywords /]
+[import UML4CPP::generator::main::helpers::nameHelper /]
+
+[**
+ * generate operation implementation
+ * 
+ * body of operation contains one of the following points:
+ * - content of FunctionBehavior -> if first method is FunctionBehavior
+ * - calling an Activity by fUML execution engine -> if first method is Activity
+ * - ASSERTM( "Test not implemented", false ); -> if no method is defined
+*/]
+[template public generateOperationImplementation( aOperation : Operation )]
+void [aOperation.ancestors()->filter( Class )->first().name.toUpperFirst()/]__[aOperation.name/]() {
+
+	TestSuiteMainHelper::CollectTestStartStatistics();
+	{
+[if( aOperation.method->notEmpty() and aOperation.method->asOrderedSet()->first().oclIsKindOf( OpaqueBehavior ) )]
+	[if( aOperation.method->asOrderedSet()->first().oclAsType( OpaqueBehavior ).language->notEmpty() )]
+		// Implemented as Function behaviour [aOperation.method->asOrderedSet()->first().oclAsType( OpaqueBehavior ).name/]
+
+		[if( aOperation.method->asOrderedSet()->first().oclAsType( OpaqueBehavior ).language->includes( keyCPP() ) )]
+			[let index : Integer = aOperation.method->asOrderedSet()->first().oclAsType( OpaqueBehavior ).language->asOrderedSet()->indexOf( keyCPP() )]
+				[if( 0 < index and index <= aOperation.method->asOrderedSet()->first().oclAsType( OpaqueBehavior )._body->size() )]
+[aOperation.method->asOrderedSet()->first().oclAsType( OpaqueBehavior )._body->asOrderedSet()->at( index )/]
+				[/if]
+			[/let]
+		[/if]
+	[/if]
+[else]
+		ASSERTM( "Test not implemented", false );
+[/if]
+	}
+	TestSuiteMainHelper::CollectTestEndStatistics();
+	TestSuiteMainHelper::PrintTestsStatistics();
+[if( aOperation.hasAnnotation( 'testData' ) )]
+	[if( aOperation.hasKey( 'testData', 'maxTime' ) )]
+	ASSERT_LESS_EQUALM( "Test needs more time than expected", TestSuiteTimeHelper::GetTestRuntimeInMS(), [aOperation.valueKey( 'testData', 'maxTime' )/] );
+	[/if]
+	[if( aOperation.hasKey( 'testData', 'memoryDelta' ) )]
+	ASSERT_EQUAL_DELTAM( "Test has a to large memory delta", TestSuiteMemoryHelper::GetProcessSizeAtTestBegin(), TestSuiteMemoryHelper::GetProcessSizeAtTestEnd(), [aOperation.valueKey( 'testData', 'memoryDelta' )/] );
+	[/if]
+[/if]
+	TestSuiteCountHelper::IncNumOfPassedTests();
+}
+[/template]
+
+[query public hasAnnotation( aElement : Element, aSource : String ) : Boolean = 
+	eAnnotations->select( source = aSource )->notEmpty()
+/]
+
+[query private getAnnotation( aElement : Element, aSource : String ) : EAnnotation = 
+	eAnnotations->select( source = aSource )->first()
+/]
+
+[query public hasKey( aElement : Element, aSource : String, aKey:String ) : Boolean = 
+	if aElement.hasAnnotation( aSource ) then 
+		aElement.getAnnotation( aSource ).details->select( key = aKey )->notEmpty() 
+	else 
+		false 
+	endif 
+/]
+
+[query public valueKey( aElement : Element, aSource : String, aKey:String ) : String = 
+	if( hasKey( aSource, aKey ) ) then 
+		aElement.getAnnotation( aSource ).details->select( key = aKey )->first().value 
+	else 
+		'' 
+	endif
+/]

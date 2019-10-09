@@ -437,7 +437,7 @@ Any ReclassifyObjectActionImpl::eGet(int featureID, bool resolve, bool coreType)
 	switch(featureID)
 	{
 		case UmlPackage::RECLASSIFYOBJECTACTION_ATTRIBUTE_ISREPLACEALL:
-			return eAny(getIsReplaceAll()); //20327
+			return eAny(getIsReplaceAll()); //20427
 		case UmlPackage::RECLASSIFYOBJECTACTION_ATTRIBUTE_NEWCLASSIFIER:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -446,11 +446,12 @@ Any ReclassifyObjectActionImpl::eGet(int featureID, bool resolve, bool coreType)
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //20328
+			return eAny(tempList); //20428
 		}
 		case UmlPackage::RECLASSIFYOBJECTACTION_ATTRIBUTE_OBJECT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getObject())); //20329
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getObject())); //20429
 		case UmlPackage::RECLASSIFYOBJECTACTION_ATTRIBUTE_OLDCLASSIFIER:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -459,8 +460,9 @@ Any ReclassifyObjectActionImpl::eGet(int featureID, bool resolve, bool coreType)
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //20330
+			return eAny(tempList); //20430
 		}
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
@@ -470,13 +472,13 @@ bool ReclassifyObjectActionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::RECLASSIFYOBJECTACTION_ATTRIBUTE_ISREPLACEALL:
-			return getIsReplaceAll() != false; //20327
+			return getIsReplaceAll() != false; //20427
 		case UmlPackage::RECLASSIFYOBJECTACTION_ATTRIBUTE_NEWCLASSIFIER:
-			return getNewClassifier() != nullptr; //20328
+			return getNewClassifier() != nullptr; //20428
 		case UmlPackage::RECLASSIFYOBJECTACTION_ATTRIBUTE_OBJECT:
-			return getObject() != nullptr; //20329
+			return getObject() != nullptr; //20429
 		case UmlPackage::RECLASSIFYOBJECTACTION_ATTRIBUTE_OLDCLASSIFIER:
-			return getOldClassifier() != nullptr; //20330
+			return getOldClassifier() != nullptr; //20430
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }
@@ -488,7 +490,7 @@ bool ReclassifyObjectActionImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			bool _isReplaceAll = newValue->get<bool>();
-			setIsReplaceAll(_isReplaceAll); //20327
+			setIsReplaceAll(_isReplaceAll); //20427
 			return true;
 		}
 		case UmlPackage::RECLASSIFYOBJECTACTION_ATTRIBUTE_NEWCLASSIFIER:
@@ -532,7 +534,7 @@ bool ReclassifyObjectActionImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::InputPin> _object = std::dynamic_pointer_cast<uml::InputPin>(_temp);
-			setObject(_object); //20329
+			setObject(_object); //20429
 			return true;
 		}
 		case UmlPackage::RECLASSIFYOBJECTACTION_ATTRIBUTE_OLDCLASSIFIER:

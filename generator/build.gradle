@@ -7,4 +7,5 @@ task createAllGenerators () {
 	dependsOn 'ecore4CPP:createEcore4CPP'
 	dependsOn 'UML4CPP:createUML4CPP'
 	dependsOn 'fUML4CPP:createFUML4CPP'
+	dependsOn 'UML4CPP_test:createUML4CPP_test'
 }

@@ -1511,7 +1511,7 @@
         <details key="documentation" value="Retrieves the value of the property with the specified name in the specified stereotype for this element."/>
       </eAnnotations>
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="body" value="std::shared_ptr&lt;uml::Stereotype> stereoInstance = util::StereotypeStorage::eInstance()->getAppliedStereotype(getThisElementPtr(), stereotype->getQualifiedName());&#xD;&#xA;&#x9;if(stereoInstance == nullptr)&#xD;&#xA;&#x9;{&#xD;&#xA;&#x9;   return Any();&#xD;&#xA;&#x9;}&#xD;&#xA;&#xD;&#xA;&#x9;std::shared_ptr&lt;Bag&lt;uml::Property> > propertyList = stereoInstance->getMetaClass()->getAttribute();&#xD;&#xA;&#x9;for(std::shared_ptr&lt;uml::Property> p: *propertyList)&#xD;&#xA;&#x9;{&#xD;&#xA;&#x9;&#x9;if(p->getName()==propertyName)&#xD;&#xA;&#x9;&#x9;{&#xD;&#xA;&#x9;&#x9;&#x9;return stereoInstance->get(p);&#xD;&#xA;&#x9;&#x9;}&#xD;&#xA;&#x9;}&#xD;&#xA;&#x9;return Any();"/>
+        <details key="body" value="&#x9;std::shared_ptr&lt;uml::Stereotype> stereoInstance = util::StereotypeStorage::eInstance()->getAppliedStereotype(getThisElementPtr(), stereotype->getMetaClass()->getQualifiedName());&#xA;&#x9;if(stereoInstance == nullptr)&#xA;&#x9;{&#xA;&#x9;   return Any();&#xA;&#x9;}&#xA;&#x9;std::shared_ptr&lt;Bag&lt;uml::Property> > propertyList = stereoInstance->getMetaClass()->getAttribute();&#xA;&#x9;for(std::shared_ptr&lt;uml::Property> p: *propertyList)&#xA;&#x9;{&#xA;&#x9;&#x9;std::cout &lt;&lt; p->getName() &lt;&lt; std::endl;&#xA;&#x9;&#x9;if(p->getName()==propertyName)&#xA;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;return stereoInstance->get(p);&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;&#x9;return Any();"/>
       </eAnnotations>
       <eParameters name="stereotype" ordered="false" lowerBound="1" eType="#//Stereotype">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -1597,7 +1597,7 @@
         <details key="documentation" value="Sets the value of the property with the specified name in the specified stereotype for this element."/>
       </eAnnotations>
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="body" value="uml::NamedElement * elem = dynamic_cast&lt;uml::NamedElement *>(this);&#xA;if(elem)&#xA;{&#xA;    //apply stereotype to map&#xA;    //std::vector&lt;uml::Stereotype *> appliedStList = map->find(elem->getQualifiedName())&#xA;    //return std::any(appliedStList->cbegin();appliedStList->cend();[stereotype](stereo){return });&#xA;}"/>
+        <details key="body" value="&#x9;std::shared_ptr&lt;uml::Stereotype> stereoInstance = util::StereotypeStorage::eInstance()->getAppliedStereotype(getThisElementPtr(), stereotype->getMetaClass()->getQualifiedName());&#xA;&#x9;if(stereoInstance == nullptr)&#xA;&#x9;{&#xA;&#x9;   return;&#xA;&#x9;}&#xA;&#x9;std::shared_ptr&lt;Bag&lt;uml::Property> > propertyList = stereoInstance->getMetaClass()->getAttribute();&#xA;&#x9;for(std::shared_ptr&lt;uml::Property> p: *propertyList)&#xA;&#x9;{&#xA;&#x9;&#x9;if(p->getName()==propertyName)&#xA;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;stereoInstance->set(p, newValue);&#xA;&#x9;&#x9;&#x9;return;&#xA;&#x9;&#x9;}&#xA;&#x9;}"/>
       </eAnnotations>
       <eParameters name="stereotype" ordered="false" lowerBound="1" eType="#//Stereotype">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">

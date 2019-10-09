@@ -350,13 +350,14 @@ Any InteractionFragmentImpl::eGet(int featureID, bool resolve, bool coreType) co
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //1219
+			return eAny(tempList); //1229
 		}
 		case UmlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_ENCLOSINGINTERACTION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEnclosingInteraction().lock())); //12111
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEnclosingInteraction().lock())); //12211
 		case UmlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_ENCLOSINGOPERAND:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEnclosingOperand().lock())); //12110
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEnclosingOperand().lock())); //12210
 		case UmlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_GENERALORDERING:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -365,8 +366,9 @@ Any InteractionFragmentImpl::eGet(int featureID, bool resolve, bool coreType) co
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //12112
+			return eAny(tempList); //12212
 		}
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
@@ -376,13 +378,13 @@ bool InteractionFragmentImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_COVERED:
-			return getCovered() != nullptr; //1219
+			return getCovered() != nullptr; //1229
 		case UmlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_ENCLOSINGINTERACTION:
-			return getEnclosingInteraction().lock() != nullptr; //12111
+			return getEnclosingInteraction().lock() != nullptr; //12211
 		case UmlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_ENCLOSINGOPERAND:
-			return getEnclosingOperand().lock() != nullptr; //12110
+			return getEnclosingOperand().lock() != nullptr; //12210
 		case UmlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_GENERALORDERING:
-			return getGeneralOrdering() != nullptr; //12112
+			return getGeneralOrdering() != nullptr; //12212
 	}
 	return NamedElementImpl::internalEIsSet(featureID);
 }
@@ -431,7 +433,7 @@ bool InteractionFragmentImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Interaction> _enclosingInteraction = std::dynamic_pointer_cast<uml::Interaction>(_temp);
-			setEnclosingInteraction(_enclosingInteraction); //12111
+			setEnclosingInteraction(_enclosingInteraction); //12211
 			return true;
 		}
 		case UmlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_ENCLOSINGOPERAND:
@@ -439,7 +441,7 @@ bool InteractionFragmentImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::InteractionOperand> _enclosingOperand = std::dynamic_pointer_cast<uml::InteractionOperand>(_temp);
-			setEnclosingOperand(_enclosingOperand); //12110
+			setEnclosingOperand(_enclosingOperand); //12210
 			return true;
 		}
 		case UmlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_GENERALORDERING:

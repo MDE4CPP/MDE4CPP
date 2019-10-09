@@ -407,11 +407,12 @@ Any InteractionOperandImpl::eGet(int featureID, bool resolve, bool coreType) con
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //12219
+			return eAny(tempList); //12319
 		}
 		case UmlPackage::INTERACTIONOPERAND_ATTRIBUTE_GUARD:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getGuard())); //12220
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getGuard())); //12320
 	}
 	Any result;
 	result = InteractionFragmentImpl::eGet(featureID, resolve, coreType);
@@ -427,9 +428,9 @@ bool InteractionOperandImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::INTERACTIONOPERAND_ATTRIBUTE_FRAGMENT:
-			return getFragment() != nullptr; //12219
+			return getFragment() != nullptr; //12319
 		case UmlPackage::INTERACTIONOPERAND_ATTRIBUTE_GUARD:
-			return getGuard() != nullptr; //12220
+			return getGuard() != nullptr; //12320
 	}
 	bool result = false;
 	result = InteractionFragmentImpl::internalEIsSet(featureID);
@@ -485,7 +486,7 @@ bool InteractionOperandImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::InteractionConstraint> _guard = std::dynamic_pointer_cast<uml::InteractionConstraint>(_temp);
-			setGuard(_guard); //12220
+			setGuard(_guard); //12320
 			return true;
 		}
 	}

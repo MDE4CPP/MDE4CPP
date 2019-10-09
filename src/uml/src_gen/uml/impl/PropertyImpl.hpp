@@ -226,12 +226,12 @@ namespace uml
 			/*!
 			 Specifies the kind of aggregation that applies to the Property.
 			<p>From package UML::Classification.</p> */ 
-			virtual AggregationKind getAggregation() const ;
+			virtual uml::AggregationKind getAggregation() const ;
 			
 			/*!
 			 Specifies the kind of aggregation that applies to the Property.
 			<p>From package UML::Classification.</p> */ 
-			virtual void setAggregation (AggregationKind _aggregation); 
+			virtual void setAggregation (uml::AggregationKind _aggregation); 
 			
 			/*!
 			 */ 

@@ -224,12 +224,12 @@ std::shared_ptr<ecore::EClass> PseudostateImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
-void PseudostateImpl::setKind(PseudostateKind _kind)
+void PseudostateImpl::setKind(uml::PseudostateKind _kind)
 {
 	m_kind = _kind;
 } 
 
-PseudostateKind PseudostateImpl::getKind() const 
+uml::PseudostateKind PseudostateImpl::getKind() const 
 {
 	return m_kind;
 }
@@ -377,11 +377,11 @@ Any PseudostateImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::PSEUDOSTATE_ATTRIBUTE_KIND:
-			return eAny(getKind()); //18913
+			return eAny(getKind()); //19013
 		case UmlPackage::PSEUDOSTATE_ATTRIBUTE_STATE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getState().lock())); //18912
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getState().lock())); //19012
 		case UmlPackage::PSEUDOSTATE_ATTRIBUTE_STATEMACHINE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getStateMachine().lock())); //18914
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getStateMachine().lock())); //19014
 	}
 	return VertexImpl::eGet(featureID, resolve, coreType);
 }
@@ -390,11 +390,11 @@ bool PseudostateImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::PSEUDOSTATE_ATTRIBUTE_KIND:
-			return m_kind != PseudostateKind::INITIAL;; //18913
+			return m_kind != PseudostateKind::INITIAL;; //19013
 		case UmlPackage::PSEUDOSTATE_ATTRIBUTE_STATE:
-			return getState().lock() != nullptr; //18912
+			return getState().lock() != nullptr; //19012
 		case UmlPackage::PSEUDOSTATE_ATTRIBUTE_STATEMACHINE:
-			return getStateMachine().lock() != nullptr; //18914
+			return getStateMachine().lock() != nullptr; //19014
 	}
 	return VertexImpl::internalEIsSet(featureID);
 }
@@ -405,8 +405,8 @@ bool PseudostateImpl::eSet(int featureID, Any newValue)
 		case UmlPackage::PSEUDOSTATE_ATTRIBUTE_KIND:
 		{
 			// BOOST CAST
-			PseudostateKind _kind = newValue->get<PseudostateKind>();
-			setKind(_kind); //18913
+			uml::PseudostateKind _kind = newValue->get<uml::PseudostateKind>();
+			setKind(_kind); //19013
 			return true;
 		}
 		case UmlPackage::PSEUDOSTATE_ATTRIBUTE_STATE:
@@ -414,7 +414,7 @@ bool PseudostateImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::State> _state = std::dynamic_pointer_cast<uml::State>(_temp);
-			setState(_state); //18912
+			setState(_state); //19012
 			return true;
 		}
 		case UmlPackage::PSEUDOSTATE_ATTRIBUTE_STATEMACHINE:
@@ -422,7 +422,7 @@ bool PseudostateImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::StateMachine> _stateMachine = std::dynamic_pointer_cast<uml::StateMachine>(_temp);
-			setStateMachine(_stateMachine); //18914
+			setStateMachine(_stateMachine); //19014
 			return true;
 		}
 	}
@@ -459,7 +459,7 @@ void PseudostateImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XL
 		iter = attr_list.find("kind");
 		if ( iter != attr_list.end() )
 		{
-			PseudostateKind value = PseudostateKind::INITIAL;
+			uml::PseudostateKind value = PseudostateKind::INITIAL;
 			std::string literal = iter->second;
 			if (literal == "initial")
 			{
@@ -584,7 +584,7 @@ void PseudostateImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 		// Add attributes
 		if ( this->eIsSet(package->getPseudostate_Attribute_kind()) )
 		{
-			PseudostateKind value = this->getKind();
+			uml::PseudostateKind value = this->getKind();
 			std::string literal = "";
 			if (value == PseudostateKind::INITIAL)
 			{

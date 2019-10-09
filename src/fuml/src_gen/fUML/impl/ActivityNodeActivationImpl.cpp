@@ -670,6 +670,7 @@ Any ActivityNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType)
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
 			return eAny(tempList); //72
 		}
@@ -681,6 +682,7 @@ Any ActivityNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType)
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
 			return eAny(tempList); //71
 		}
@@ -694,6 +696,7 @@ Any ActivityNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType)
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
 			return eAny(tempList); //70
 		}

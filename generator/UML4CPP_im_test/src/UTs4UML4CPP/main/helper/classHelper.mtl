@@ -1,0 +1,10 @@
+[comment encoding = UTF-8 /]
+[module classHelper('http://www.eclipse.org/uml2/5.0.0/UML')]
+
+[import UTs4UML4CPP::main::helper::helper]
+
+[query public getClassName( aClass : Class ) : String = aClass.name.toUpperFirst()/]
+
+[query public getClassTestSuiteName( aClass : Class ) : String = aClass.getClassName().buildTestSuiteName()/]
+
+[query public getAllOwnOperations( aClass : Class ) : Sequence(Operation) = aClass.eContents(Operation)->select( e | not ( e.oclIsKindOf(FunctionBehavior) or e.visibility <> VisibilityKind::public or e.isAbstract ) )/]

@@ -495,7 +495,7 @@ void EcorePackageImpl::initializeEClassContent()
 	m_eClass_Attribute_eAttributes->setUpperBound(-1);
 	m_eClass_Attribute_eAttributes->setTransient(true);
 	m_eClass_Attribute_eAttributes->setVolatile(true);
-	m_eClass_Attribute_eAttributes->setChangeable(false);
+	m_eClass_Attribute_eAttributes->setChangeable(true);
 	m_eClass_Attribute_eAttributes->setUnsettable(false);
 	m_eClass_Attribute_eAttributes->setUnique(true);
 	m_eClass_Attribute_eAttributes->setDerived(true);
@@ -545,7 +545,7 @@ void EcorePackageImpl::initializeEClassContent()
 	m_eClass_Attribute_eIDAttribute->setUpperBound(1);
 	m_eClass_Attribute_eIDAttribute->setTransient(true);
 	m_eClass_Attribute_eIDAttribute->setVolatile(true);
-	m_eClass_Attribute_eIDAttribute->setChangeable(false);
+	m_eClass_Attribute_eIDAttribute->setChangeable(true);
 	m_eClass_Attribute_eIDAttribute->setUnsettable(false);
 	m_eClass_Attribute_eIDAttribute->setUnique(true);
 	m_eClass_Attribute_eIDAttribute->setDerived(true);
@@ -595,7 +595,7 @@ void EcorePackageImpl::initializeEClassContent()
 	m_eClass_Attribute_eReferences->setUpperBound(-1);
 	m_eClass_Attribute_eReferences->setTransient(true);
 	m_eClass_Attribute_eReferences->setVolatile(true);
-	m_eClass_Attribute_eReferences->setChangeable(false);
+	m_eClass_Attribute_eReferences->setChangeable(true);
 	m_eClass_Attribute_eReferences->setUnsettable(false);
 	m_eClass_Attribute_eReferences->setUnique(true);
 	m_eClass_Attribute_eReferences->setDerived(true);
@@ -833,7 +833,7 @@ void EcorePackageImpl::initializeEClassifierContent()
 	m_eClassifier_Attribute_defaultValue->setUpperBound(1);
 	m_eClassifier_Attribute_defaultValue->setTransient(true);
 	m_eClassifier_Attribute_defaultValue->setVolatile(true);
-	m_eClassifier_Attribute_defaultValue->setChangeable(false);
+	m_eClassifier_Attribute_defaultValue->setChangeable(true);
 	m_eClassifier_Attribute_defaultValue->setUnsettable(false);
 	m_eClassifier_Attribute_defaultValue->setUnique(true);
 	m_eClassifier_Attribute_defaultValue->setDerived(true);
@@ -1370,7 +1370,7 @@ void EcorePackageImpl::initializeEGenericTypeContent()
 	m_eGenericType_Attribute_eRawType->setUpperBound(1);
 	m_eGenericType_Attribute_eRawType->setTransient(true);
 	m_eGenericType_Attribute_eRawType->setVolatile(false);
-	m_eGenericType_Attribute_eRawType->setChangeable(false);
+	m_eGenericType_Attribute_eRawType->setChangeable(true);
 	m_eGenericType_Attribute_eRawType->setUnsettable(false);
 	m_eGenericType_Attribute_eRawType->setUnique(true);
 	m_eGenericType_Attribute_eRawType->setDerived(true);
@@ -2362,7 +2362,7 @@ void EcorePackageImpl::initializeEReferenceContent()
 	m_eReference_Attribute_eReferenceType->setUpperBound(1);
 	m_eReference_Attribute_eReferenceType->setTransient(true);
 	m_eReference_Attribute_eReferenceType->setVolatile(true);
-	m_eReference_Attribute_eReferenceType->setChangeable(false);
+	m_eReference_Attribute_eReferenceType->setChangeable(true);
 	m_eReference_Attribute_eReferenceType->setUnsettable(false);
 	m_eReference_Attribute_eReferenceType->setUnique(true);
 	m_eReference_Attribute_eReferenceType->setDerived(true);
@@ -2469,7 +2469,7 @@ void EcorePackageImpl::initializeEStructuralFeatureContent()
 	m_eStructuralFeature_Attribute_defaultValue->setUpperBound(1);
 	m_eStructuralFeature_Attribute_defaultValue->setTransient(true);
 	m_eStructuralFeature_Attribute_defaultValue->setVolatile(true);
-	m_eStructuralFeature_Attribute_defaultValue->setChangeable(false);
+	m_eStructuralFeature_Attribute_defaultValue->setChangeable(true);
 	m_eStructuralFeature_Attribute_defaultValue->setUnsettable(false);
 	m_eStructuralFeature_Attribute_defaultValue->setUnique(true);
 	m_eStructuralFeature_Attribute_defaultValue->setDerived(true);
@@ -2757,7 +2757,7 @@ void EcorePackageImpl::initializeETypedElementContent()
 	m_eTypedElement_Attribute_required->setUpperBound(1);
 	m_eTypedElement_Attribute_required->setTransient(true);
 	m_eTypedElement_Attribute_required->setVolatile(true);
-	m_eTypedElement_Attribute_required->setChangeable(false);
+	m_eTypedElement_Attribute_required->setChangeable(true);
 	m_eTypedElement_Attribute_required->setUnsettable(false);
 	m_eTypedElement_Attribute_required->setUnique(true);
 	m_eTypedElement_Attribute_required->setDerived(true);

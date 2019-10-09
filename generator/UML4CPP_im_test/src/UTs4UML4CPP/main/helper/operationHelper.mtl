@@ -1,0 +1,8 @@
+[comment encoding = UTF-8 /]
+[module operationHelper('http://www.eclipse.org/uml2/5.0.0/UML')]
+
+[import UTs4UML4CPP::main::helper::helper/]
+
+[query public getOperationName( anOperation : Operation ) : String = anOperation.name.toUpperFirst()/]
+
+[query public getOperationTestSuiteName( anOperation : Operation ) : String = anOperation.getOperationName().buildTestSuiteName()/]

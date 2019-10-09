@@ -1,0 +1,14 @@
+<testsuites>
+	<testsuite name="Calculators_TestSuite" tests="0">
+	</testsuite>
+	<testsuite name="SimpleOperations_TestSuite" tests="1">
+		<testcase classname="SimpleOperations_TestSuite" name="complexSimpleOperationsTest_SimpleOperationsTest"/>
+	</testsuite>
+	<testsuite name="SimpleOperations_TestSuite::Addition_TestSuite" tests="1">
+		<testcase classname="SimpleOperations_TestSuite::Addition_TestSuite" name="complexAdditionTest_AdditionTest"/>
+	</testsuite>
+	<testsuite name="SimpleOperations_TestSuite::Addition_TestSuite::Calculate_TestSuite" tests="2">
+		<testcase classname="SimpleOperations_TestSuite::Addition_TestSuite::Calculate_TestSuite" name="positivNumbersAdditionTest_CalculateTest"/>
+		<testcase classname="SimpleOperations_TestSuite::Addition_TestSuite::Calculate_TestSuite" name="negativNumbersAdditionTest_CalculateTest"/>
+	</testsuite>
+</testsuites>

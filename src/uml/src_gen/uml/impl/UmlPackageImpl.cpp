@@ -635,6 +635,25 @@ std::shared_ptr<ecore::EClass> UmlPackageImpl::getAnyReceiveEvent_Class() const
 
 // End Class AnyReceiveEvent
 
+// Begin Class Argument
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getArgument_Class() const
+{
+	return m_argument_Class;
+}
+
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getArgument_Attribute_name() const
+{
+	return m_argument_Attribute_name;
+}
+
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getArgument_Attribute_value() const
+{
+	return m_argument_Attribute_value;
+}
+
+
+// End Class Argument
+
 // Begin Class Artifact
 std::shared_ptr<ecore::EClass> UmlPackageImpl::getArtifact_Class() const
 {
@@ -4686,6 +4705,10 @@ std::shared_ptr<ecore::EClass> UmlPackageImpl::getObject_Class() const
 std::shared_ptr<ecore::EOperation> UmlPackageImpl::getObject_Operation_get_Property() const
 {
 	return m_object_Operation_get_Property;
+}
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getObject_Operation_invoke_Operation_Argument() const
+{
+	return m_object_Operation_invoke_Operation_Argument;
 }
 std::shared_ptr<ecore::EOperation> UmlPackageImpl::getObject_Operation_set_Property_EJavaObject() const
 {

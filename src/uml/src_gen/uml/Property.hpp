@@ -366,12 +366,12 @@ namespace uml
 			/*!
 			 Specifies the kind of aggregation that applies to the Property.
 			<p>From package UML::Classification.</p> */ 
-			virtual AggregationKind getAggregation() const = 0;
+			virtual uml::AggregationKind getAggregation() const = 0;
 			
 			/*!
 			 Specifies the kind of aggregation that applies to the Property.
 			<p>From package UML::Classification.</p> */ 
-			virtual void setAggregation (AggregationKind _aggregation)= 0; 
+			virtual void setAggregation (uml::AggregationKind _aggregation)= 0; 
 			
 			/*!
 			 */ 
@@ -521,7 +521,7 @@ namespace uml
 			/*!
 			 Specifies the kind of aggregation that applies to the Property.
 			<p>From package UML::Classification.</p> */ 
-			AggregationKind m_aggregation = AggregationKind::NONE;
+			uml::AggregationKind m_aggregation = AggregationKind::NONE;
 			/*!
 			 */ 
 			std::string m_default = "";

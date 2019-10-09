@@ -1,0 +1,16 @@
+description 'Build tasks for project: Stereotype_uml'
+
+task buildStereotype_uml() {
+	group 'Stereotype_uml'
+	description 'build Stereotype_uml'
+
+	dependsOn 'model:generateStereotype_uml'
+	dependsOn 'src_gen:compileStereotype_uml'
+	dependsOn getRootProject().getTasksByName('buildEcore', true)
+	dependsOn getRootProject().getTasksByName('buildUml', true)
+	dependsOn getRootProject().getTasksByName('buildEcoreReflection', true)
+	dependsOn getRootProject().getTasksByName('buildPrimitivetypesReflection', true)
+	dependsOn getRootProject().getTasksByName('buildUmlReflection', true)
+}
+
+tasks.getByPath('src_gen:compileStereotype_uml').mustRunAfter tasks.getByPath('model:generateStereotype_uml')

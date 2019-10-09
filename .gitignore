@@ -8,6 +8,14 @@ build/
 userProjects/
 *.bat
 setenv*
-/application/
+/application/bin/
+/application/generator
+/application/include/
+/application/lib/
+/application/tools/gradle
+/application/tools/gradlew
+/application/tools/gradlew.bat
 /gradle.properties
 xerces
+/.metadata/
+start cmd.cmd

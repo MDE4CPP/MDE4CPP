@@ -657,8 +657,9 @@ Any UseCaseImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //24841
+			return eAny(tempList); //24941
 		}
 		case UmlPackage::USECASE_ATTRIBUTE_EXTENSIONPOINT:
 		{
@@ -668,8 +669,9 @@ Any UseCaseImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //24842
+			return eAny(tempList); //24942
 		}
 		case UmlPackage::USECASE_ATTRIBUTE_INCLUDE:
 		{
@@ -679,8 +681,9 @@ Any UseCaseImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //24843
+			return eAny(tempList); //24943
 		}
 		case UmlPackage::USECASE_ATTRIBUTE_SUBJECT:
 		{
@@ -690,8 +693,9 @@ Any UseCaseImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //24844
+			return eAny(tempList); //24944
 		}
 	}
 	return BehavioredClassifierImpl::eGet(featureID, resolve, coreType);
@@ -701,13 +705,13 @@ bool UseCaseImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::USECASE_ATTRIBUTE_EXTEND:
-			return getExtend() != nullptr; //24841
+			return getExtend() != nullptr; //24941
 		case UmlPackage::USECASE_ATTRIBUTE_EXTENSIONPOINT:
-			return getExtensionPoint() != nullptr; //24842
+			return getExtensionPoint() != nullptr; //24942
 		case UmlPackage::USECASE_ATTRIBUTE_INCLUDE:
-			return getInclude() != nullptr; //24843
+			return getInclude() != nullptr; //24943
 		case UmlPackage::USECASE_ATTRIBUTE_SUBJECT:
-			return getSubject() != nullptr; //24844
+			return getSubject() != nullptr; //24944
 	}
 	return BehavioredClassifierImpl::internalEIsSet(featureID);
 }

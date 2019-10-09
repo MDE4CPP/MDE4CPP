@@ -297,8 +297,9 @@ Any ClauseImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //383
+			return eAny(tempList); //393
 		}
 		case UmlPackage::CLAUSE_ATTRIBUTE_BODYOUTPUT:
 		{
@@ -308,11 +309,12 @@ Any ClauseImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //384
+			return eAny(tempList); //394
 		}
 		case UmlPackage::CLAUSE_ATTRIBUTE_DECIDER:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getDecider())); //385
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getDecider())); //395
 		case UmlPackage::CLAUSE_ATTRIBUTE_PREDECESSORCLAUSE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -321,8 +323,9 @@ Any ClauseImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //386
+			return eAny(tempList); //396
 		}
 		case UmlPackage::CLAUSE_ATTRIBUTE_SUCCESSORCLAUSE:
 		{
@@ -332,8 +335,9 @@ Any ClauseImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //387
+			return eAny(tempList); //397
 		}
 		case UmlPackage::CLAUSE_ATTRIBUTE_TEST:
 		{
@@ -343,8 +347,9 @@ Any ClauseImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //388
+			return eAny(tempList); //398
 		}
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
@@ -354,17 +359,17 @@ bool ClauseImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::CLAUSE_ATTRIBUTE_BODY:
-			return getBody() != nullptr; //383
+			return getBody() != nullptr; //393
 		case UmlPackage::CLAUSE_ATTRIBUTE_BODYOUTPUT:
-			return getBodyOutput() != nullptr; //384
+			return getBodyOutput() != nullptr; //394
 		case UmlPackage::CLAUSE_ATTRIBUTE_DECIDER:
-			return getDecider() != nullptr; //385
+			return getDecider() != nullptr; //395
 		case UmlPackage::CLAUSE_ATTRIBUTE_PREDECESSORCLAUSE:
-			return getPredecessorClause() != nullptr; //386
+			return getPredecessorClause() != nullptr; //396
 		case UmlPackage::CLAUSE_ATTRIBUTE_SUCCESSORCLAUSE:
-			return getSuccessorClause() != nullptr; //387
+			return getSuccessorClause() != nullptr; //397
 		case UmlPackage::CLAUSE_ATTRIBUTE_TEST:
-			return getTest() != nullptr; //388
+			return getTest() != nullptr; //398
 	}
 	return ElementImpl::internalEIsSet(featureID);
 }
@@ -449,7 +454,7 @@ bool ClauseImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::OutputPin> _decider = std::dynamic_pointer_cast<uml::OutputPin>(_temp);
-			setDecider(_decider); //385
+			setDecider(_decider); //395
 			return true;
 		}
 		case UmlPackage::CLAUSE_ATTRIBUTE_PREDECESSORCLAUSE:

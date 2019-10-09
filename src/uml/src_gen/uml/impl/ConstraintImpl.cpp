@@ -363,13 +363,14 @@ Any ConstraintImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //5712
+			return eAny(tempList); //5812
 		}
 		case UmlPackage::CONSTRAINT_ATTRIBUTE_CONTEXT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getContext().lock())); //5713
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getContext().lock())); //5813
 		case UmlPackage::CONSTRAINT_ATTRIBUTE_SPECIFICATION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSpecification())); //5714
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSpecification())); //5814
 	}
 	return PackageableElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -378,11 +379,11 @@ bool ConstraintImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::CONSTRAINT_ATTRIBUTE_CONSTRAINEDELEMENT:
-			return getConstrainedElement() != nullptr; //5712
+			return getConstrainedElement() != nullptr; //5812
 		case UmlPackage::CONSTRAINT_ATTRIBUTE_CONTEXT:
-			return getContext().lock() != nullptr; //5713
+			return getContext().lock() != nullptr; //5813
 		case UmlPackage::CONSTRAINT_ATTRIBUTE_SPECIFICATION:
-			return getSpecification() != nullptr; //5714
+			return getSpecification() != nullptr; //5814
 	}
 	return PackageableElementImpl::internalEIsSet(featureID);
 }
@@ -431,7 +432,7 @@ bool ConstraintImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Namespace> _context = std::dynamic_pointer_cast<uml::Namespace>(_temp);
-			setContext(_context); //5713
+			setContext(_context); //5813
 			return true;
 		}
 		case UmlPackage::CONSTRAINT_ATTRIBUTE_SPECIFICATION:
@@ -439,7 +440,7 @@ bool ConstraintImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ValueSpecification> _specification = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
-			setSpecification(_specification); //5714
+			setSpecification(_specification); //5814
 			return true;
 		}
 	}

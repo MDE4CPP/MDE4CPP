@@ -452,8 +452,9 @@ Any InteractionUseImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //12413
+			return eAny(tempList); //12513
 		}
 		case UmlPackage::INTERACTIONUSE_ATTRIBUTE_ARGUMENT:
 		{
@@ -463,15 +464,16 @@ Any InteractionUseImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //12414
+			return eAny(tempList); //12514
 		}
 		case UmlPackage::INTERACTIONUSE_ATTRIBUTE_REFERSTO:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getRefersTo())); //12415
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getRefersTo())); //12515
 		case UmlPackage::INTERACTIONUSE_ATTRIBUTE_RETURNVALUE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getReturnValue())); //12416
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getReturnValue())); //12516
 		case UmlPackage::INTERACTIONUSE_ATTRIBUTE_RETURNVALUERECIPIENT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getReturnValueRecipient())); //12417
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getReturnValueRecipient())); //12517
 	}
 	return InteractionFragmentImpl::eGet(featureID, resolve, coreType);
 }
@@ -480,15 +482,15 @@ bool InteractionUseImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::INTERACTIONUSE_ATTRIBUTE_ACTUALGATE:
-			return getActualGate() != nullptr; //12413
+			return getActualGate() != nullptr; //12513
 		case UmlPackage::INTERACTIONUSE_ATTRIBUTE_ARGUMENT:
-			return getArgument() != nullptr; //12414
+			return getArgument() != nullptr; //12514
 		case UmlPackage::INTERACTIONUSE_ATTRIBUTE_REFERSTO:
-			return getRefersTo() != nullptr; //12415
+			return getRefersTo() != nullptr; //12515
 		case UmlPackage::INTERACTIONUSE_ATTRIBUTE_RETURNVALUE:
-			return getReturnValue() != nullptr; //12416
+			return getReturnValue() != nullptr; //12516
 		case UmlPackage::INTERACTIONUSE_ATTRIBUTE_RETURNVALUERECIPIENT:
-			return getReturnValueRecipient() != nullptr; //12417
+			return getReturnValueRecipient() != nullptr; //12517
 	}
 	return InteractionFragmentImpl::internalEIsSet(featureID);
 }
@@ -573,7 +575,7 @@ bool InteractionUseImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Interaction> _refersTo = std::dynamic_pointer_cast<uml::Interaction>(_temp);
-			setRefersTo(_refersTo); //12415
+			setRefersTo(_refersTo); //12515
 			return true;
 		}
 		case UmlPackage::INTERACTIONUSE_ATTRIBUTE_RETURNVALUE:
@@ -581,7 +583,7 @@ bool InteractionUseImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ValueSpecification> _returnValue = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
-			setReturnValue(_returnValue); //12416
+			setReturnValue(_returnValue); //12516
 			return true;
 		}
 		case UmlPackage::INTERACTIONUSE_ATTRIBUTE_RETURNVALUERECIPIENT:
@@ -589,7 +591,7 @@ bool InteractionUseImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Property> _returnValueRecipient = std::dynamic_pointer_cast<uml::Property>(_temp);
-			setReturnValueRecipient(_returnValueRecipient); //12417
+			setReturnValueRecipient(_returnValueRecipient); //12517
 			return true;
 		}
 	}

@@ -423,9 +423,9 @@ Any StructuralFeatureActionImpl::eGet(int featureID, bool resolve, bool coreType
 	switch(featureID)
 	{
 		case UmlPackage::STRUCTURALFEATUREACTION_ATTRIBUTE_OBJECT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getObject())); //22627
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getObject())); //22727
 		case UmlPackage::STRUCTURALFEATUREACTION_ATTRIBUTE_STRUCTURALFEATURE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getStructuralFeature())); //22628
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getStructuralFeature())); //22728
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -434,9 +434,9 @@ bool StructuralFeatureActionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::STRUCTURALFEATUREACTION_ATTRIBUTE_OBJECT:
-			return getObject() != nullptr; //22627
+			return getObject() != nullptr; //22727
 		case UmlPackage::STRUCTURALFEATUREACTION_ATTRIBUTE_STRUCTURALFEATURE:
-			return getStructuralFeature() != nullptr; //22628
+			return getStructuralFeature() != nullptr; //22728
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }
@@ -449,7 +449,7 @@ bool StructuralFeatureActionImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::InputPin> _object = std::dynamic_pointer_cast<uml::InputPin>(_temp);
-			setObject(_object); //22627
+			setObject(_object); //22727
 			return true;
 		}
 		case UmlPackage::STRUCTURALFEATUREACTION_ATTRIBUTE_STRUCTURALFEATURE:
@@ -457,7 +457,7 @@ bool StructuralFeatureActionImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::StructuralFeature> _structuralFeature = std::dynamic_pointer_cast<uml::StructuralFeature>(_temp);
-			setStructuralFeature(_structuralFeature); //22628
+			setStructuralFeature(_structuralFeature); //22728
 			return true;
 		}
 	}

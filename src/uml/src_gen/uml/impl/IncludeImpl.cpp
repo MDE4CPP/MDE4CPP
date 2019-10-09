@@ -288,9 +288,9 @@ Any IncludeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::INCLUDE_ATTRIBUTE_ADDITION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getAddition())); //11212
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getAddition())); //11312
 		case UmlPackage::INCLUDE_ATTRIBUTE_INCLUDINGCASE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getIncludingCase().lock())); //11213
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getIncludingCase().lock())); //11313
 	}
 	Any result;
 	result = DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
@@ -306,9 +306,9 @@ bool IncludeImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::INCLUDE_ATTRIBUTE_ADDITION:
-			return getAddition() != nullptr; //11212
+			return getAddition() != nullptr; //11312
 		case UmlPackage::INCLUDE_ATTRIBUTE_INCLUDINGCASE:
-			return getIncludingCase().lock() != nullptr; //11213
+			return getIncludingCase().lock() != nullptr; //11313
 	}
 	bool result = false;
 	result = DirectedRelationshipImpl::internalEIsSet(featureID);
@@ -328,7 +328,7 @@ bool IncludeImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::UseCase> _addition = std::dynamic_pointer_cast<uml::UseCase>(_temp);
-			setAddition(_addition); //11212
+			setAddition(_addition); //11312
 			return true;
 		}
 		case UmlPackage::INCLUDE_ATTRIBUTE_INCLUDINGCASE:
@@ -336,7 +336,7 @@ bool IncludeImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::UseCase> _includingCase = std::dynamic_pointer_cast<uml::UseCase>(_temp);
-			setIncludingCase(_includingCase); //11213
+			setIncludingCase(_includingCase); //11313
 			return true;
 		}
 	}

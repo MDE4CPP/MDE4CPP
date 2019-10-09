@@ -80,12 +80,12 @@ namespace uml
 			/*!
 			 Specifies the semantics of concurrent calls to the same passive instance (i.e., an instance originating from a Class with isActive being false). Active instances control access to their own BehavioralFeatures.
 			<p>From package UML::Classification.</p> */ 
-			virtual CallConcurrencyKind getConcurrency() const ;
+			virtual uml::CallConcurrencyKind getConcurrency() const ;
 			
 			/*!
 			 Specifies the semantics of concurrent calls to the same passive instance (i.e., an instance originating from a Class with isActive being false). Active instances control access to their own BehavioralFeatures.
 			<p>From package UML::Classification.</p> */ 
-			virtual void setConcurrency (CallConcurrencyKind _concurrency); 
+			virtual void setConcurrency (uml::CallConcurrencyKind _concurrency); 
 			
 			/*!
 			 If true, then the BehavioralFeature does not have an implementation, and one must be supplied by a more specific Classifier. If false, the BehavioralFeature must have an implementation in the Classifier or one must be inherited.

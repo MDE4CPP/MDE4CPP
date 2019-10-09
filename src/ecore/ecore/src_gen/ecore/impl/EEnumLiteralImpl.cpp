@@ -251,7 +251,7 @@ bool EEnumLiteralImpl::internalEIsSet(int featureID) const
 		case EcorePackage::EENUMLITERAL_ATTRIBUTE_EENUM:
 			return getEEnum().lock() != nullptr; //218
 		case EcorePackage::EENUMLITERAL_ATTRIBUTE_INSTANCE:
-			return !getInstance()->isEmpty(); //216
+			return getInstance() != nullptr; //216
 		case EcorePackage::EENUMLITERAL_ATTRIBUTE_LITERAL:
 			return getLiteral() != ""; //217
 		case EcorePackage::EENUMLITERAL_ATTRIBUTE_VALUE:

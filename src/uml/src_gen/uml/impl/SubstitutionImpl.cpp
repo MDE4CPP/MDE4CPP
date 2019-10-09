@@ -356,9 +356,9 @@ Any SubstitutionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::SUBSTITUTION_ATTRIBUTE_CONTRACT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getContract())); //22918
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getContract())); //23018
 		case UmlPackage::SUBSTITUTION_ATTRIBUTE_SUBSTITUTINGCLASSIFIER:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSubstitutingClassifier().lock())); //22919
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSubstitutingClassifier().lock())); //23019
 	}
 	return RealizationImpl::eGet(featureID, resolve, coreType);
 }
@@ -367,9 +367,9 @@ bool SubstitutionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::SUBSTITUTION_ATTRIBUTE_CONTRACT:
-			return getContract() != nullptr; //22918
+			return getContract() != nullptr; //23018
 		case UmlPackage::SUBSTITUTION_ATTRIBUTE_SUBSTITUTINGCLASSIFIER:
-			return getSubstitutingClassifier().lock() != nullptr; //22919
+			return getSubstitutingClassifier().lock() != nullptr; //23019
 	}
 	return RealizationImpl::internalEIsSet(featureID);
 }
@@ -382,7 +382,7 @@ bool SubstitutionImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Classifier> _contract = std::dynamic_pointer_cast<uml::Classifier>(_temp);
-			setContract(_contract); //22918
+			setContract(_contract); //23018
 			return true;
 		}
 		case UmlPackage::SUBSTITUTION_ATTRIBUTE_SUBSTITUTINGCLASSIFIER:
@@ -390,7 +390,7 @@ bool SubstitutionImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Classifier> _substitutingClassifier = std::dynamic_pointer_cast<uml::Classifier>(_temp);
-			setSubstitutingClassifier(_substitutingClassifier); //22919
+			setSubstitutingClassifier(_substitutingClassifier); //23019
 			return true;
 		}
 	}

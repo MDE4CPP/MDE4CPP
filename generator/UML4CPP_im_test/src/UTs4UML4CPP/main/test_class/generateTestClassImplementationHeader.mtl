@@ -1,0 +1,24 @@
+[comment encoding = UTF-8 /]
+[module generateTestClassImplementationHeader('http://www.eclipse.org/uml2/5.0.0/UML')]
+
+[import UTs4UML4CPP::main::helper::helper/]
+[import UTs4UML4CPP::main::helper::classHelper/]
+[import UTs4UML4CPP::main::helper::packageHelper/]
+
+[template public generateTestClassImplementationHeader( aClass : Class ) {
+	className : String = aClass.getClassName();
+	testClassName : String = className.buildTestSuiteName();
+	packageName : String = aClass.ancestors()->filter(Package)->first().getPackageName();}]
+[file( packageName.concat('/').concat(className).concat('/').concat(testClassName).buildHeaderPath(), false, 'UTF-8' )]
+[startGuard(testClassName)/]
+#include "cute_suite.h"
+#include "cute_runner.h"
+#include "xml_listener.h"
+#include "ide_listener.h"
+
+extern cute::suite make_suite_[testClassName/]();
+
+extern bool run[testClassName/]SubTests( cute::runner<cute::xml_listener<cute::ide_listener<cute::null_listener> > > runner );
+[endGuard(testClassName)/]
+[/file]
+[/template]

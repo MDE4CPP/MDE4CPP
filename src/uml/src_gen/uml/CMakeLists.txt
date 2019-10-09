@@ -59,6 +59,7 @@ SET(SOURCE_FILES
 	impl/AddStructuralFeatureValueActionImpl.cpp
 	impl/AddVariableValueActionImpl.cpp
 	impl/AnyReceiveEventImpl.cpp
+	impl/ArgumentImpl.cpp
 	impl/ArtifactImpl.cpp
 	impl/AssociationImpl.cpp
 	impl/AssociationClassImpl.cpp

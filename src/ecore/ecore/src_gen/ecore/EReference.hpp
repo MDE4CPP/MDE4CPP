@@ -150,6 +150,9 @@ namespace ecore
 			 */
 			virtual std::shared_ptr<ecore::EClass > getEReferenceType() const = 0;
 			
+			/*!
+			 */
+			virtual void setEReferenceType(std::shared_ptr<ecore::EClass> _eReferenceType_eReferenceType) = 0;
 			
 
 		protected:

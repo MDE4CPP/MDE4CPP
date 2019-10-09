@@ -347,6 +347,7 @@ void UmlPackageImpl::initializePackageContents()
 	initializeAddStructuralFeatureValueActionContent();
 	initializeAddVariableValueActionContent();
 	initializeAnyReceiveEventContent();
+	initializeArgumentContent();
 	initializeArtifactContent();
 	initializeAssociationContent();
 	initializeAssociationClassContent();
@@ -3086,6 +3087,62 @@ void UmlPackageImpl::initializeAnyReceiveEventContent()
 	m_anyReceiveEvent_Class->setInterface(false);
 	
 	
+	
+	
+}
+
+void UmlPackageImpl::initializeArgumentContent()
+{
+	m_argument_Class->setName("Argument");
+	m_argument_Class->setAbstract(false);
+	m_argument_Class->setInterface(false);
+	
+	m_argument_Attribute_name = getArgument_Attribute_name();
+	m_argument_Attribute_name->setName("name");
+	m_argument_Attribute_name->setEType(ecore::EcorePackage::eInstance()->getEString_Class());
+	m_argument_Attribute_name->setLowerBound(0);
+	m_argument_Attribute_name->setUpperBound(1);
+	m_argument_Attribute_name->setTransient(false);
+	m_argument_Attribute_name->setVolatile(false);
+	m_argument_Attribute_name->setChangeable(true);
+	m_argument_Attribute_name->setUnsettable(false);
+	m_argument_Attribute_name->setUnique(true);
+	m_argument_Attribute_name->setDerived(false);
+	m_argument_Attribute_name->setOrdered(true);
+	m_argument_Attribute_name->setID(false);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+		   m_argument_Attribute_name->setDefaultValueLiteral(defaultValue);
+		}
+	}
+	
+	m_argument_Attribute_value->setName("value");
+	m_argument_Attribute_value->setEType(getObject_Class());
+	m_argument_Attribute_value->setLowerBound(0);
+	m_argument_Attribute_value->setUpperBound(1);
+	m_argument_Attribute_value->setTransient(false);
+	m_argument_Attribute_value->setVolatile(false);
+	m_argument_Attribute_value->setChangeable(true);
+	m_argument_Attribute_value->setUnsettable(false);
+	m_argument_Attribute_value->setUnique(true);
+	m_argument_Attribute_value->setDerived(false);
+	m_argument_Attribute_value->setOrdered(true);
+	m_argument_Attribute_value->setContainment(false);
+	m_argument_Attribute_value->setResolveProxies(true);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			m_argument_Attribute_value->setDefaultValueLiteral(defaultValue);
+		}
+		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
+		if (otherEnd != nullptr)
+	    {
+	   		m_argument_Attribute_value->setEOpposite(otherEnd);
+	    }
+	}
 	
 	
 }
@@ -19374,6 +19431,33 @@ void UmlPackageImpl::initializeObjectContent()
 		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_object_Operation_get_Property);
 		parameter->setName("property");
 		parameter->setEType(getProperty_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	m_object_Operation_invoke_Operation_Argument->setEType(getObject_Class());
+	m_object_Operation_invoke_Operation_Argument->setName("invoke");
+	m_object_Operation_invoke_Operation_Argument->setLowerBound(0);
+	m_object_Operation_invoke_Operation_Argument->setUpperBound(-1);
+	m_object_Operation_invoke_Operation_Argument->setUnique(true);
+	m_object_Operation_invoke_Operation_Argument->setOrdered(true);
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_object_Operation_invoke_Operation_Argument);
+		parameter->setName("op");
+		parameter->setEType(getOperation_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_object_Operation_invoke_Operation_Argument);
+		parameter->setName("arguments");
+		parameter->setEType(getArgument_Class());
 		parameter->setLowerBound(0);
 		parameter->setUpperBound(1);
 		parameter->setUnique(true);

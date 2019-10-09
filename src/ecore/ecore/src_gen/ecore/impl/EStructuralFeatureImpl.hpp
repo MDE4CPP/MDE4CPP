@@ -75,6 +75,10 @@ namespace ecore
 			
 			/*!
 			 */ 
+			virtual void setDefaultValue (Any _defaultValue); 
+			
+			/*!
+			 */ 
 			virtual std::string getDefaultValueLiteral() const ;
 			
 			/*!

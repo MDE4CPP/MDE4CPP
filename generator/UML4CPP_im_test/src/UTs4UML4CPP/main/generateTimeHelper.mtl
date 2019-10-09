@@ -1,0 +1,42 @@
+[comment encoding = UTF-8 /]
+[module generateTimeHelper('http://www.eclipse.org/uml2/5.0.0/UML')]
+
+[import UTs4UML4CPP::main::helper::helper/]
+
+[template public generateTimeHelper(aPackage : Package) {
+	className : String = 'TimeHelper'; } ]
+[file( className.buildHeaderPath(), false, 'UTF-8' )]
+[startGuard(className)/]
+#include <chrono>
+
+extern std::chrono::time_point<std::chrono::high_resolution_clock> getCurrentTime() {
+
+	return std::chrono::high_resolution_clock::now();
+}
+
+extern std::chrono::duration<double, std::nano> getTimeDiffInNanos( std::chrono::time_point<std::chrono::high_resolution_clock> t1,
+	std::chrono::time_point<std::chrono::high_resolution_clock> t2 ) {
+
+	return t2 - t1;
+}
+
+extern std::chrono::duration<double, std::micro> getTimeDiffInMicros( std::chrono::time_point<std::chrono::high_resolution_clock> t1,
+	std::chrono::time_point<std::chrono::high_resolution_clock> t2 ) {
+
+	return t2 - t1;
+}
+
+extern std::chrono::duration<double, std::milli> getTimeDiffInMillis( std::chrono::time_point<std::chrono::high_resolution_clock> t1,
+	std::chrono::time_point<std::chrono::high_resolution_clock> t2 ) {
+
+	return t2 - t1;
+}
+
+extern std::chrono::duration<double> getTimeDiffInSecs( std::chrono::time_point<std::chrono::high_resolution_clock> t1,
+	std::chrono::time_point<std::chrono::high_resolution_clock> t2 ) {
+
+	return t2 - t1;
+}
+[endGuard(className)/]
+[/file]
+[/template]

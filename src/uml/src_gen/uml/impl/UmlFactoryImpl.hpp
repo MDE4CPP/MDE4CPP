@@ -30,6 +30,7 @@ namespace uml
 	class AddStructuralFeatureValueAction;
 	class AddVariableValueAction;
 	class AnyReceiveEvent;
+	class Argument;
 	class Artifact;
 	class Association;
 	class AssociationClass;
@@ -424,6 +425,8 @@ namespace uml
 			virtual std::shared_ptr<AnyReceiveEvent> createAnyReceiveEvent_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage, const int metaElementID=-1) const ;
 			//Add containing object
 			virtual std::shared_ptr<AnyReceiveEvent> createAnyReceiveEvent_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter, const int metaElementID=-1) const ;
+			
+			virtual std::shared_ptr<Argument> createArgument(const int metaElementID=-1) const ;
 			
 			virtual std::shared_ptr<Artifact> createArtifact(const int metaElementID=-1) const ;
 			//Add containing object

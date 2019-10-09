@@ -391,7 +391,7 @@ Any ReadVariableActionImpl::eGet(int featureID, bool resolve, bool coreType) con
 	switch(featureID)
 	{
 		case UmlPackage::READVARIABLEACTION_ATTRIBUTE_RESULT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getResult())); //20028
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getResult())); //20128
 	}
 	return VariableActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -400,7 +400,7 @@ bool ReadVariableActionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::READVARIABLEACTION_ATTRIBUTE_RESULT:
-			return getResult() != nullptr; //20028
+			return getResult() != nullptr; //20128
 	}
 	return VariableActionImpl::internalEIsSet(featureID);
 }
@@ -413,7 +413,7 @@ bool ReadVariableActionImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::OutputPin> _result = std::dynamic_pointer_cast<uml::OutputPin>(_temp);
-			setResult(_result); //20028
+			setResult(_result); //20128
 			return true;
 		}
 	}

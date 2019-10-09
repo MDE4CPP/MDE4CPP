@@ -31,6 +31,7 @@ namespace uml
 	class AddStructuralFeatureValueAction;
 	class AddVariableValueAction;
 	class AnyReceiveEvent;
+	class Argument;
 	class Artifact;
 	class Association;
 	class AssociationClass;
@@ -536,6 +537,17 @@ namespace uml
 			
 			
 			// End Class AnyReceiveEvent
+
+			// Begin Class Argument
+			//Class and Feature Getter
+			virtual std::shared_ptr<ecore::EClass> getArgument_Class() const ;
+			
+			virtual std::shared_ptr<ecore::EAttribute> getArgument_Attribute_name() const ;
+			
+			virtual std::shared_ptr<ecore::EReference> getArgument_Attribute_value() const ;
+			
+			
+			// End Class Argument
 
 			// Begin Class Artifact
 			//Class and Feature Getter
@@ -2379,6 +2391,7 @@ namespace uml
 			
 			
 			virtual std::shared_ptr<ecore::EOperation> getObject_Operation_get_Property() const ;
+			virtual std::shared_ptr<ecore::EOperation> getObject_Operation_invoke_Operation_Argument() const ;
 			virtual std::shared_ptr<ecore::EOperation> getObject_Operation_set_Property_EJavaObject() const ;
 			virtual std::shared_ptr<ecore::EOperation> getObject_Operation_unset_Property() const ;
 			
@@ -3859,6 +3872,7 @@ namespace uml
 			std::shared_ptr<ecore::EClass> m_addStructuralFeatureValueAction_Class = nullptr;
 			std::shared_ptr<ecore::EClass> m_addVariableValueAction_Class = nullptr;
 			std::shared_ptr<ecore::EClass> m_anyReceiveEvent_Class = nullptr;
+			std::shared_ptr<ecore::EClass> m_argument_Class = nullptr;
 			std::shared_ptr<ecore::EClass> m_artifact_Class = nullptr;
 			std::shared_ptr<ecore::EClass> m_association_Class = nullptr;
 			std::shared_ptr<ecore::EClass> m_associationClass_Class = nullptr;
@@ -4198,6 +4212,7 @@ namespace uml
 			std::shared_ptr<ecore::EAttribute> m_expansionRegion_Attribute_mode = nullptr;
 			std::shared_ptr<ecore::EAttribute> m_structuredActivityNode_Attribute_mustIsolate = nullptr;
 			std::shared_ptr<ecore::EAttribute> m_namedElement_Attribute_name = nullptr;
+			std::shared_ptr<ecore::EAttribute> m_argument_Attribute_name = nullptr;
 			std::shared_ptr<ecore::EAttribute> m_objectNode_Attribute_ordering = nullptr;
 			std::shared_ptr<ecore::EAttribute> m_namedElement_Attribute_qualifiedName = nullptr;
 			std::shared_ptr<ecore::EAttribute> m_continuation_Attribute_setting = nullptr;
@@ -4701,6 +4716,7 @@ namespace uml
 			std::shared_ptr<ecore::EReference> m_writeStructuralFeatureAction_Attribute_value = nullptr;
 			std::shared_ptr<ecore::EReference> m_writeVariableAction_Attribute_value = nullptr;
 			std::shared_ptr<ecore::EReference> m_valuePin_Attribute_value = nullptr;
+			std::shared_ptr<ecore::EReference> m_argument_Attribute_value = nullptr;
 			std::shared_ptr<ecore::EReference> m_activity_Attribute_variable = nullptr;
 			std::shared_ptr<ecore::EReference> m_structuredActivityNode_Attribute_variable = nullptr;
 			std::shared_ptr<ecore::EReference> m_variableAction_Attribute_variable = nullptr;
@@ -5060,6 +5076,7 @@ namespace uml
 			std::shared_ptr<ecore::EOperation> m_lifeline_Operation_interaction_uses_share_lifeline_EDiagnosticChain_EMap = nullptr;
 			std::shared_ptr<ecore::EOperation> m_node_Operation_internal_structure_EDiagnosticChain_EMap = nullptr;
 			std::shared_ptr<ecore::EOperation> m_interruptibleActivityRegion_Operation_interrupting_edges_EDiagnosticChain_EMap = nullptr;
+			std::shared_ptr<ecore::EOperation> m_object_Operation_invoke_Operation_Argument = nullptr;
 			std::shared_ptr<ecore::EOperation> m_generalOrdering_Operation_irreflexive_transitive_closure_EDiagnosticChain_EMap = nullptr;
 			std::shared_ptr<ecore::EOperation> m_multiplicityElement_Operation_is_Integer_UnlimitedNatural = nullptr;
 			std::shared_ptr<ecore::EOperation> m_variable_Operation_isAccessibleBy_Action = nullptr;
@@ -5477,6 +5494,7 @@ namespace uml
 			void createAddStructuralFeatureValueActionContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
 			void createAddVariableValueActionContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
 			void createAnyReceiveEventContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
+			void createArgumentContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
 			void createArtifactContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
 			void createAssociationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
 			void createAssociationClassContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
@@ -5724,6 +5742,7 @@ namespace uml
 			void initializeAddStructuralFeatureValueActionContent();
 			void initializeAddVariableValueActionContent();
 			void initializeAnyReceiveEventContent();
+			void initializeArgumentContent();
 			void initializeArtifactContent();
 			void initializeAssociationContent();
 			void initializeAssociationClassContent();

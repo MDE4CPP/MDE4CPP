@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_Hd_IQMmBEemLw46uXpnfDg" name="Calculators">
+  <eAnnotations xmi:id="_PYb2UMmBEemLw46uXpnfDg" source="prepareTests"/>
+  <packagedElement xmi:type="uml:Package" xmi:id="_XgdtYMmBEemLw46uXpnfDg" name="SimpleOperations">
+    <eAnnotations xmi:id="_Z8mYoMmBEemLw46uXpnfDg" source="testCodeGen">
+      <details xmi:id="_b3c7wMmBEemLw46uXpnfDg" key="complexSimpleOperationsTest" value="&#xA;    //TestQuelltext"/>
+    </eAnnotations>
+    <packagedElement xmi:type="uml:Class" xmi:id="_QXLWgMmBEemLw46uXpnfDg" name="Addition">
+      <eAnnotations xmi:id="_TQtvcMmBEemLw46uXpnfDg" source="testCodeGen">
+        <details xmi:id="_cNGboMmBEemLw46uXpnfDg" key="complexAdditionTest" value="&#xA;    //TestQuelltext"/>
+      </eAnnotations>
+      <ownedOperation xmi:id="_RoIoEMmBEemLw46uXpnfDg" name="calculate">
+        <eAnnotations xmi:id="_ao1MgMmBEemLw46uXpnfDg" source="testCodeGen">
+          <details xmi:id="_cmCgEMmBEemLw46uXpnfDg" key="includes" value="&#xA;//TestIncludes"/>
+          <details xmi:id="_c71w8MmBEemLw46uXpnfDg" key="positivNumbersAdditionTest" value="&#xA;    //TestQuelltext"/>
+          <details xmi:id="_dTOWMMmBEemLw46uXpnfDg" key="negativNumbersAdditionTest" value="&#xA;    //TestQuelltext"/>
+        </eAnnotations>
+        <ownedParameter xmi:id="_vr0eIMmBEemLw46uXpnfDg" name="operator1">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        </ownedParameter>
+        <ownedParameter xmi:id="_wVBzMMmBEemLw46uXpnfDg" name="operator2">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        </ownedParameter>
+        <ownedParameter xmi:id="_70gHMMmBEemLw46uXpnfDg" name="return_value" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        </ownedParameter>
+      </ownedOperation>
+    </packagedElement>
+  </packagedElement>
+</uml:Model>

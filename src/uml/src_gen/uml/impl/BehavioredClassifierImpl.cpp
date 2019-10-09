@@ -574,7 +574,7 @@ Any BehavioredClassifierImpl::eGet(int featureID, bool resolve, bool coreType) c
 	switch(featureID)
 	{
 		case UmlPackage::BEHAVIOREDCLASSIFIER_ATTRIBUTE_CLASSIFIERBEHAVIOR:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getClassifierBehavior())); //2638
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getClassifierBehavior())); //2738
 		case UmlPackage::BEHAVIOREDCLASSIFIER_ATTRIBUTE_INTERFACEREALIZATION:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -583,8 +583,9 @@ Any BehavioredClassifierImpl::eGet(int featureID, bool resolve, bool coreType) c
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //2639
+			return eAny(tempList); //2739
 		}
 		case UmlPackage::BEHAVIOREDCLASSIFIER_ATTRIBUTE_OWNEDBEHAVIOR:
 		{
@@ -594,8 +595,9 @@ Any BehavioredClassifierImpl::eGet(int featureID, bool resolve, bool coreType) c
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //2640
+			return eAny(tempList); //2740
 		}
 	}
 	return ClassifierImpl::eGet(featureID, resolve, coreType);
@@ -605,11 +607,11 @@ bool BehavioredClassifierImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::BEHAVIOREDCLASSIFIER_ATTRIBUTE_CLASSIFIERBEHAVIOR:
-			return getClassifierBehavior() != nullptr; //2638
+			return getClassifierBehavior() != nullptr; //2738
 		case UmlPackage::BEHAVIOREDCLASSIFIER_ATTRIBUTE_INTERFACEREALIZATION:
-			return getInterfaceRealization() != nullptr; //2639
+			return getInterfaceRealization() != nullptr; //2739
 		case UmlPackage::BEHAVIOREDCLASSIFIER_ATTRIBUTE_OWNEDBEHAVIOR:
-			return getOwnedBehavior() != nullptr; //2640
+			return getOwnedBehavior() != nullptr; //2740
 	}
 	return ClassifierImpl::internalEIsSet(featureID);
 }
@@ -622,7 +624,7 @@ bool BehavioredClassifierImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Behavior> _classifierBehavior = std::dynamic_pointer_cast<uml::Behavior>(_temp);
-			setClassifierBehavior(_classifierBehavior); //2638
+			setClassifierBehavior(_classifierBehavior); //2738
 			return true;
 		}
 		case UmlPackage::BEHAVIOREDCLASSIFIER_ATTRIBUTE_INTERFACEREALIZATION:

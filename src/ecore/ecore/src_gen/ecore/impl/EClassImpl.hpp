@@ -158,6 +158,9 @@ namespace ecore
 			
 			/*!
 			 */
+			virtual void setEIDAttribute(std::shared_ptr<ecore::EAttribute> _eIDAttribute_eIDAttribute) ;
+			/*!
+			 */
 			virtual std::shared_ptr<Subset<ecore::EOperation, ecore::EObject>> getEOperations() const ;
 			
 			/*!

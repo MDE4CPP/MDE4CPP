@@ -428,9 +428,9 @@ Any ProtocolTransitionImpl::eGet(int featureID, bool resolve, bool coreType) con
 	switch(featureID)
 	{
 		case UmlPackage::PROTOCOLTRANSITION_ATTRIBUTE_POSTCONDITION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getPostCondition())); //18826
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getPostCondition())); //18926
 		case UmlPackage::PROTOCOLTRANSITION_ATTRIBUTE_PRECONDITION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getPreCondition())); //18827
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getPreCondition())); //18927
 		case UmlPackage::PROTOCOLTRANSITION_ATTRIBUTE_REFERRED:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -439,8 +439,9 @@ Any ProtocolTransitionImpl::eGet(int featureID, bool resolve, bool coreType) con
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //18828
+			return eAny(tempList); //18928
 		}
 	}
 	return TransitionImpl::eGet(featureID, resolve, coreType);
@@ -450,11 +451,11 @@ bool ProtocolTransitionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::PROTOCOLTRANSITION_ATTRIBUTE_POSTCONDITION:
-			return getPostCondition() != nullptr; //18826
+			return getPostCondition() != nullptr; //18926
 		case UmlPackage::PROTOCOLTRANSITION_ATTRIBUTE_PRECONDITION:
-			return getPreCondition() != nullptr; //18827
+			return getPreCondition() != nullptr; //18927
 		case UmlPackage::PROTOCOLTRANSITION_ATTRIBUTE_REFERRED:
-			return getReferred() != nullptr; //18828
+			return getReferred() != nullptr; //18928
 	}
 	return TransitionImpl::internalEIsSet(featureID);
 }
@@ -467,7 +468,7 @@ bool ProtocolTransitionImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Constraint> _postCondition = std::dynamic_pointer_cast<uml::Constraint>(_temp);
-			setPostCondition(_postCondition); //18826
+			setPostCondition(_postCondition); //18926
 			return true;
 		}
 		case UmlPackage::PROTOCOLTRANSITION_ATTRIBUTE_PRECONDITION:
@@ -475,7 +476,7 @@ bool ProtocolTransitionImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Constraint> _preCondition = std::dynamic_pointer_cast<uml::Constraint>(_temp);
-			setPreCondition(_preCondition); //18827
+			setPreCondition(_preCondition); //18927
 			return true;
 		}
 	}

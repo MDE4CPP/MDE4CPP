@@ -1,0 +1,46 @@
+plugins {
+    id 'net.robyf.jarinjar' version '1.0.6'
+}
+
+apply plugin: 'java'
+
+description 'UML4CPP_test compiler, usable to compile standalone version of UML4CPP_test generator outside of eclipse'
+
+dependencies {
+    runtime fileTree(dir: System.getenv('MDE4CPP_ECLIPSE_HOME') + '/plugins', include: [
+		'com.google.guava_*.jar',
+		'lpg.runtime.java_*.jar',
+		'org.eclipse.equinox.app_*.jar',
+		'org.eclipse.equinox.common_*.jar',
+		'org.eclipse.equinox.preferences_*.jar',
+		'org.eclipse.equinox.registry_*.jar',
+		'org.eclipse.core.contenttype_*.jar',
+		'org.eclipse.ocl.common_*.jar',
+		'org.eclipse.ocl.ecore_*.jar',
+		'org.eclipse.ocl_*.jar',
+		'org.eclipse.uml2.types_*.jar'
+	])
+	
+    compile fileTree(dir: System.getenv('MDE4CPP_ECLIPSE_HOME') + '/plugins', include: [
+		'org.eclipse.acceleo.common_*.jar',
+		'org.eclipse.acceleo.model_*.jar',
+		'org.eclipse.acceleo.parser_*.jar',
+		'org.eclipse.core.runtime_*.jar',
+		'org.eclipse.emf.common_*.jar',
+		'org.eclipse.emf.ecore.xmi_*.jar',
+		'org.eclipse.emf.ecore_*.jar',
+		'org.eclipse.uml2.uml_*.jar'
+	])
+}
+
+sourceSets {
+	main {
+		java {
+			srcDir 'src'
+		}
+	}
+}
+
+executableJar {
+   mainClass 'UML4CPP_test.generator.compiler.CompileAcceleoGenerator'
+}

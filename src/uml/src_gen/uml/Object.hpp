@@ -13,6 +13,7 @@
 
 
 // forward declarations
+template<class T> class Bag;
 
 
 class AnyObject;
@@ -38,6 +39,21 @@ namespace uml
 }
 
 //Forward Declaration for used types
+namespace uml 
+{
+	class Argument;
+}
+
+namespace uml 
+{
+	class Object;
+}
+
+namespace uml 
+{
+	class Operation;
+}
+
 namespace uml 
 {
 	class Property;
@@ -82,6 +98,12 @@ namespace uml
 			Property. If Property has multiplicity upper bound >1, get() returns a ReflectiveCollection containing the values of the
 			Property. If there are no values, the ReflectiveCollection returned is empty.  */ 
 			virtual Any get(std::shared_ptr<uml::Property>  property) const = 0;
+			
+			/*!
+			 Calls the supplied Operation on the object, passing the supplied Arguments and returning the result.
+			The Operation must be defined on the Class of the Object, and the arguments must refer to Parameters of the Operation.
+			If an Argument is not supplied for a Parameter, its default value, if any, will be used. */ 
+			virtual std::shared_ptr<Bag<uml::Object> > invoke(std::shared_ptr<uml::Operation>  op,std::shared_ptr<Bag<uml::Argument> >  arguments) = 0;
 			
 			/*!
 			 If the Property has multiplicity upper bound = 1, set() atomically updates the value of the Property to the object

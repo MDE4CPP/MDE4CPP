@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_UbUv0KY_EemKTuk6ZUbyhw" name="UML_testModel">
+  <packagedElement xmi:type="uml:Class" xmi:id="_hd7DcKY_EemKTuk6ZUbyhw" name="Addition">
+    <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_zc2uMKY_EemKTuk6ZUbyhw" name="calculateFB" specification="_zc2uMaY_EemKTuk6ZUbyhw">
+      <language>CPP</language>
+      <body>	return operator1 + operator2;</body>
+    </ownedBehavior>
+    <ownedOperation xmi:id="_zc2uMaY_EemKTuk6ZUbyhw" name="calculate" method="_zc2uMKY_EemKTuk6ZUbyhw">
+      <ownedParameter xmi:id="_zc2uMqY_EemKTuk6ZUbyhw" name="operator1">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="_zc2uM6Y_EemKTuk6ZUbyhw" name="operator2">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="_zc2uNKY_EemKTuk6ZUbyhw" name="returnValue" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_iLq6QKY_EemKTuk6ZUbyhw" name="Subtraction">
+    <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_0fG1YKY_EemKTuk6ZUbyhw" name="calculateFB" specification="_0fG1YaY_EemKTuk6ZUbyhw">
+      <language>CPP</language>
+      <body>	if( operator2 = 7 ) {&#xD;
+		return 7;&#xD;
+	}&#xD;
+	return operator1 - operator2;</body>
+    </ownedBehavior>
+    <ownedOperation xmi:id="_0fG1YaY_EemKTuk6ZUbyhw" name="calculate" method="_0fG1YKY_EemKTuk6ZUbyhw">
+      <ownedParameter xmi:id="_0fG1YqY_EemKTuk6ZUbyhw" name="operator1">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="_0fG1Y6Y_EemKTuk6ZUbyhw" name="operator2">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="_0fG1ZKY_EemKTuk6ZUbyhw" name="returnValue" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_jFpPMKY_EemKTuk6ZUbyhw" name="Multiplication">
+    <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_1DFFIKY_EemKTuk6ZUbyhw" name="calculateFB" specification="_1DFFIaY_EemKTuk6ZUbyhw">
+      <language>CPP</language>
+      <body>	return operator1 * operator2;</body>
+    </ownedBehavior>
+    <ownedOperation xmi:id="_1DFFIaY_EemKTuk6ZUbyhw" name="calculate" method="_1DFFIKY_EemKTuk6ZUbyhw">
+      <ownedParameter xmi:id="_1DFFIqY_EemKTuk6ZUbyhw" name="operator1">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="_1DFFI6Y_EemKTuk6ZUbyhw" name="operator2">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="_1DFFJKY_EemKTuk6ZUbyhw" name="returnValue" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_kKDSgKY_EemKTuk6ZUbyhw" name="Division">
+    <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_1mfUMKY_EemKTuk6ZUbyhw" name="calculateFB" specification="_1mfUMaY_EemKTuk6ZUbyhw">
+      <language>CPP</language>
+      <body>	if( operator2 == 0 ) {&#xD;
+		return 0;&#xD;
+	}&#xD;
+	return operator1 / operator2;</body>
+    </ownedBehavior>
+    <ownedOperation xmi:id="_1mfUMaY_EemKTuk6ZUbyhw" name="calculate" method="_1mfUMKY_EemKTuk6ZUbyhw">
+      <ownedParameter xmi:id="_1mfUMqY_EemKTuk6ZUbyhw" name="operator1">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="_1mfUM6Y_EemKTuk6ZUbyhw" name="operator2">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="_1mfUNKY_EemKTuk6ZUbyhw" name="returnValue" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+    </ownedOperation>
+  </packagedElement>
+</uml:Model>

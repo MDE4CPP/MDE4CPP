@@ -298,9 +298,9 @@ Any TimeEventImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::TIMEEVENT_ATTRIBUTE_ISRELATIVE:
-			return eAny(getIsRelative()); //23712
+			return eAny(getIsRelative()); //23812
 		case UmlPackage::TIMEEVENT_ATTRIBUTE_WHEN:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getWhen())); //23713
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getWhen())); //23813
 	}
 	return EventImpl::eGet(featureID, resolve, coreType);
 }
@@ -309,9 +309,9 @@ bool TimeEventImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::TIMEEVENT_ATTRIBUTE_ISRELATIVE:
-			return getIsRelative() != false; //23712
+			return getIsRelative() != false; //23812
 		case UmlPackage::TIMEEVENT_ATTRIBUTE_WHEN:
-			return getWhen() != nullptr; //23713
+			return getWhen() != nullptr; //23813
 	}
 	return EventImpl::internalEIsSet(featureID);
 }
@@ -323,7 +323,7 @@ bool TimeEventImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			bool _isRelative = newValue->get<bool>();
-			setIsRelative(_isRelative); //23712
+			setIsRelative(_isRelative); //23812
 			return true;
 		}
 		case UmlPackage::TIMEEVENT_ATTRIBUTE_WHEN:
@@ -331,7 +331,7 @@ bool TimeEventImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::TimeExpression> _when = std::dynamic_pointer_cast<uml::TimeExpression>(_temp);
-			setWhen(_when); //23713
+			setWhen(_when); //23813
 			return true;
 		}
 	}
