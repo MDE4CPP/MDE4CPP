@@ -58,6 +58,18 @@ static const unsigned int [aClass.getMemberName().toUpperCase()/]_OPERATION_COUN
 
 [/template]
 
+[**
+ * generate static meta data:
+ * - index of class
+ * - feature count
+ * - operation count
+*/]
+[template public generateStaticClassID(anInterface : Interface)]
+static const unsigned int [anInterface.getMemberName().toUpperCase()/] = [anInterface.getStaticInterfaceID_ID()/];
+static const unsigned int [anInterface.getMemberName().toUpperCase()/]_FEATURE_COUNT = [anInterface.allFeatures()->size()/];
+static const unsigned int [anInterface.getMemberName().toUpperCase()/]_OPERATION_COUNT = [anInterface.ownedOperation->size()/];
+
+[/template]
 
 [**
  * generate static meta data for all classes in a package:
@@ -69,8 +81,11 @@ static const unsigned int [aClass.getMemberName().toUpperCase()/]_OPERATION_COUN
 [for (c : Class | aPackage.allOwnedElements()->selectByType(Class)->sortedBy(name)->reject(name.oclIsInvalid() or name = ''))]
 	[generateStaticClassID(c)/]
 [/for]
-[for (c : Class | aPackage.allOwnedElements()->selectByType(Stereotype)->sortedBy(name)->reject(name.oclIsInvalid() or name = ''))]
-	[generateStaticClassID(c)/]
+[for (stereo : Stereotype | aPackage.allOwnedElements()->selectByType(Stereotype)->sortedBy(name)->reject(name.oclIsInvalid() or name = ''))]
+	[generateStaticClassID(stereo)/]
+[/for]
+[for (interface : Interface | aPackage.allOwnedElements()->selectByType(Interface)->sortedBy(name)->reject(name.oclIsInvalid() or name = ''))]
+	[generateStaticClassID(interface)/]
 [/for]
 
 [/template]
