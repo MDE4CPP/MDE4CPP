@@ -18,6 +18,7 @@
 #include <iostream>
 #include <sstream>
 
+#include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/Union.hpp"
 #include "abstractDataTypes/Any.hpp"
@@ -29,6 +30,8 @@
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
 
@@ -261,11 +264,11 @@ Any ConnectorEndImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::CONNECTOREND_ATTRIBUTE_DEFININGEND:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getDefiningEnd())); //549
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getDefiningEnd())); //559
 		case UmlPackage::CONNECTOREND_ATTRIBUTE_PARTWITHPORT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getPartWithPort())); //5410
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getPartWithPort())); //5510
 		case UmlPackage::CONNECTOREND_ATTRIBUTE_ROLE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getRole())); //5411
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getRole())); //5511
 	}
 	return MultiplicityElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -274,11 +277,11 @@ bool ConnectorEndImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::CONNECTOREND_ATTRIBUTE_DEFININGEND:
-			return getDefiningEnd() != nullptr; //549
+			return getDefiningEnd() != nullptr; //559
 		case UmlPackage::CONNECTOREND_ATTRIBUTE_PARTWITHPORT:
-			return getPartWithPort() != nullptr; //5410
+			return getPartWithPort() != nullptr; //5510
 		case UmlPackage::CONNECTOREND_ATTRIBUTE_ROLE:
-			return getRole() != nullptr; //5411
+			return getRole() != nullptr; //5511
 	}
 	return MultiplicityElementImpl::internalEIsSet(featureID);
 }
@@ -291,7 +294,7 @@ bool ConnectorEndImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Property> _partWithPort = std::dynamic_pointer_cast<uml::Property>(_temp);
-			setPartWithPort(_partWithPort); //5410
+			setPartWithPort(_partWithPort); //5510
 			return true;
 		}
 		case UmlPackage::CONNECTOREND_ATTRIBUTE_ROLE:
@@ -299,7 +302,7 @@ bool ConnectorEndImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ConnectableElement> _role = std::dynamic_pointer_cast<uml::ConnectableElement>(_temp);
-			setRole(_role); //5411
+			setRole(_role); //5511
 			return true;
 		}
 	}

@@ -248,9 +248,9 @@ Any FeatureValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case FUMLPackage::FEATUREVALUE_ATTRIBUTE_FEATURE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getFeature())); //522
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getFeature())); //552
 		case FUMLPackage::FEATUREVALUE_ATTRIBUTE_POSITION:
-			return eAny(getPosition()); //521
+			return eAny(getPosition()); //551
 		case FUMLPackage::FEATUREVALUE_ATTRIBUTE_VALUES:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -259,8 +259,9 @@ Any FeatureValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //520
+			return eAny(tempList); //550
 		}
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
@@ -270,11 +271,11 @@ bool FeatureValueImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case FUMLPackage::FEATUREVALUE_ATTRIBUTE_FEATURE:
-			return getFeature() != nullptr; //522
+			return getFeature() != nullptr; //552
 		case FUMLPackage::FEATUREVALUE_ATTRIBUTE_POSITION:
-			return getPosition() != 0; //521
+			return getPosition() != 0; //551
 		case FUMLPackage::FEATUREVALUE_ATTRIBUTE_VALUES:
-			return getValues() != nullptr; //520
+			return getValues() != nullptr; //550
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
@@ -287,14 +288,14 @@ bool FeatureValueImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::StructuralFeature> _feature = std::dynamic_pointer_cast<uml::StructuralFeature>(_temp);
-			setFeature(_feature); //522
+			setFeature(_feature); //552
 			return true;
 		}
 		case FUMLPackage::FEATUREVALUE_ATTRIBUTE_POSITION:
 		{
 			// BOOST CAST
 			int _position = newValue->get<int>();
-			setPosition(_position); //521
+			setPosition(_position); //551
 			return true;
 		}
 		case FUMLPackage::FEATUREVALUE_ATTRIBUTE_VALUES:

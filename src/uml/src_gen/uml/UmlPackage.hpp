@@ -51,7 +51,7 @@ namespace uml
 			//Class and Feature IDs 
 			static const unsigned int ABSTRACTION_CLASS = 1;
 			static const unsigned int ABSTRACTION_CLASS_FEATURE_COUNT = 18;
-			static const unsigned int ABSTRACTION_CLASS_OPERATION_COUNT = 58;
+			static const unsigned int ABSTRACTION_CLASS_OPERATION_COUNT = 59;
 			
 			static const int ABSTRACTION_ATTRIBUTE_MAPPING = 117;
 			
@@ -70,13 +70,13 @@ namespace uml
 			//Class and Feature IDs 
 			static const unsigned int ACCEPTCALLACTION_CLASS = 2;
 			static const unsigned int ACCEPTCALLACTION_CLASS_FEATURE_COUNT = 31;
-			static const unsigned int ACCEPTCALLACTION_CLASS_OPERATION_COUNT = 73;
+			static const unsigned int ACCEPTCALLACTION_CLASS_OPERATION_COUNT = 74;
 			
 			static const int ACCEPTCALLACTION_ATTRIBUTE_RETURNINFORMATION = 230;
 			
-			static const int ACCEPTCALLACTION_OPERATION_RESULT_PINS_EDIAGNOSTICCHAIN_EMAP = 301;
-			static const int ACCEPTCALLACTION_OPERATION_TRIGGER_CALL_EVENT_EDIAGNOSTICCHAIN_EMAP = 302;
-			static const int ACCEPTCALLACTION_OPERATION_UNMARSHALL_EDIAGNOSTICCHAIN_EMAP = 303;
+			static const int ACCEPTCALLACTION_OPERATION_RESULT_PINS_EDIAGNOSTICCHAIN_EMAP = 302;
+			static const int ACCEPTCALLACTION_OPERATION_TRIGGER_CALL_EVENT_EDIAGNOSTICCHAIN_EMAP = 303;
+			static const int ACCEPTCALLACTION_OPERATION_UNMARSHALL_EDIAGNOSTICCHAIN_EMAP = 304;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getAcceptCallAction_Class() const = 0;
@@ -95,17 +95,17 @@ namespace uml
 			//Class and Feature IDs 
 			static const unsigned int ACCEPTEVENTACTION_CLASS = 3;
 			static const unsigned int ACCEPTEVENTACTION_CLASS_FEATURE_COUNT = 30;
-			static const unsigned int ACCEPTEVENTACTION_CLASS_OPERATION_COUNT = 70;
+			static const unsigned int ACCEPTEVENTACTION_CLASS_OPERATION_COUNT = 71;
 			static const int ACCEPTEVENTACTION_ATTRIBUTE_ISUNMARSHALL = 327;
 			
 			static const int ACCEPTEVENTACTION_ATTRIBUTE_RESULT = 328;
 			static const int ACCEPTEVENTACTION_ATTRIBUTE_TRIGGER = 329;
 			
-			static const int ACCEPTEVENTACTION_OPERATION_CONFORMING_TYPE_EDIAGNOSTICCHAIN_EMAP = 399;
-			static const int ACCEPTEVENTACTION_OPERATION_NO_INPUT_PINS_EDIAGNOSTICCHAIN_EMAP = 396;
-			static const int ACCEPTEVENTACTION_OPERATION_NO_OUTPUT_PINS_EDIAGNOSTICCHAIN_EMAP = 397;
-			static const int ACCEPTEVENTACTION_OPERATION_ONE_OUTPUT_PIN_EDIAGNOSTICCHAIN_EMAP = 395;
-			static const int ACCEPTEVENTACTION_OPERATION_UNMARSHALL_SIGNAL_EVENTS_EDIAGNOSTICCHAIN_EMAP = 398;
+			static const int ACCEPTEVENTACTION_OPERATION_CONFORMING_TYPE_EDIAGNOSTICCHAIN_EMAP = 400;
+			static const int ACCEPTEVENTACTION_OPERATION_NO_INPUT_PINS_EDIAGNOSTICCHAIN_EMAP = 397;
+			static const int ACCEPTEVENTACTION_OPERATION_NO_OUTPUT_PINS_EDIAGNOSTICCHAIN_EMAP = 398;
+			static const int ACCEPTEVENTACTION_OPERATION_ONE_OUTPUT_PIN_EDIAGNOSTICCHAIN_EMAP = 396;
+			static const int ACCEPTEVENTACTION_OPERATION_UNMARSHALL_SIGNAL_EVENTS_EDIAGNOSTICCHAIN_EMAP = 399;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getAcceptEventAction_Class() const = 0;
@@ -128,7 +128,7 @@ namespace uml
 			//Class and Feature IDs 
 			static const unsigned int ACTION_CLASS = 4;
 			static const unsigned int ACTION_CLASS_FEATURE_COUNT = 27;
-			static const unsigned int ACTION_CLASS_OPERATION_COUNT = 65;
+			static const unsigned int ACTION_CLASS_OPERATION_COUNT = 66;
 			static const int ACTION_ATTRIBUTE_ISLOCALLYREENTRANT = 423;
 			
 			static const int ACTION_ATTRIBUTE_CONTEXT = 421;
@@ -137,10 +137,10 @@ namespace uml
 			static const int ACTION_ATTRIBUTE_LOCALPRECONDITION = 425;
 			static const int ACTION_ATTRIBUTE_OUTPUT = 426;
 			
-			static const int ACTION_OPERATION_ALLACTIONS = 489;
-			static const int ACTION_OPERATION_ALLOWNEDNODES = 490;
-			static const int ACTION_OPERATION_CONTAININGBEHAVIOR = 491;
-			static const int ACTION_OPERATION_GETCONTEXT = 488;
+			static const int ACTION_OPERATION_ALLACTIONS = 490;
+			static const int ACTION_OPERATION_ALLOWNEDNODES = 491;
+			static const int ACTION_OPERATION_CONTAININGBEHAVIOR = 492;
+			static const int ACTION_OPERATION_GETCONTEXT = 489;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getAction_Class() const = 0;
@@ -165,11 +165,11 @@ namespace uml
 			//Class and Feature IDs 
 			static const unsigned int ACTIONEXECUTIONSPECIFICATION_CLASS = 5;
 			static const unsigned int ACTIONEXECUTIONSPECIFICATION_CLASS_FEATURE_COUNT = 16;
-			static const unsigned int ACTIONEXECUTIONSPECIFICATION_CLASS_OPERATION_COUNT = 57;
+			static const unsigned int ACTIONEXECUTIONSPECIFICATION_CLASS_OPERATION_COUNT = 58;
 			
 			static const int ACTIONEXECUTIONSPECIFICATION_ATTRIBUTE_ACTION = 515;
 			
-			static const int ACTIONEXECUTIONSPECIFICATION_OPERATION_ACTION_REFERENCED_EDIAGNOSTICCHAIN_EMAP = 572;
+			static const int ACTIONEXECUTIONSPECIFICATION_OPERATION_ACTION_REFERENCED_EDIAGNOSTICCHAIN_EMAP = 573;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getActionExecutionSpecification_Class() const = 0;
@@ -186,13 +186,13 @@ namespace uml
 			//Class and Feature IDs 
 			static const unsigned int ACTIONINPUTPIN_CLASS = 6;
 			static const unsigned int ACTIONINPUTPIN_CLASS_FEATURE_COUNT = 38;
-			static const unsigned int ACTIONINPUTPIN_CLASS_OPERATION_COUNT = 82;
+			static const unsigned int ACTIONINPUTPIN_CLASS_OPERATION_COUNT = 83;
 			
 			static const int ACTIONINPUTPIN_ATTRIBUTE_FROMACTION = 637;
 			
-			static const int ACTIONINPUTPIN_OPERATION_INPUT_PIN_EDIAGNOSTICCHAIN_EMAP = 717;
-			static const int ACTIONINPUTPIN_OPERATION_NO_CONTROL_OR_OBJECT_FLOW_EDIAGNOSTICCHAIN_EMAP = 719;
-			static const int ACTIONINPUTPIN_OPERATION_ONE_OUTPUT_PIN_EDIAGNOSTICCHAIN_EMAP = 718;
+			static const int ACTIONINPUTPIN_OPERATION_INPUT_PIN_EDIAGNOSTICCHAIN_EMAP = 718;
+			static const int ACTIONINPUTPIN_OPERATION_NO_CONTROL_OR_OBJECT_FLOW_EDIAGNOSTICCHAIN_EMAP = 720;
+			static const int ACTIONINPUTPIN_OPERATION_ONE_OUTPUT_PIN_EDIAGNOSTICCHAIN_EMAP = 719;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getActionInputPin_Class() const = 0;
@@ -211,7 +211,7 @@ namespace uml
 			//Class and Feature IDs 
 			static const unsigned int ACTIVITY_CLASS = 7;
 			static const unsigned int ACTIVITY_CLASS_FEATURE_COUNT = 71;
-			static const unsigned int ACTIVITY_CLASS_OPERATION_COUNT = 129;
+			static const unsigned int ACTIVITY_CLASS_OPERATION_COUNT = 130;
 			static const int ACTIVITY_ATTRIBUTE_ISREADONLY = 767;
 			static const int ACTIVITY_ATTRIBUTE_ISSINGLEEXECUTION = 768;
 			
@@ -224,8 +224,8 @@ namespace uml
 			static const int ACTIVITY_ATTRIBUTE_STRUCTUREDNODE = 770;
 			static const int ACTIVITY_ATTRIBUTE_VARIABLE = 764;
 			
-			static const int ACTIVITY_OPERATION_MAXIMUM_ONE_PARAMETER_NODE_EDIAGNOSTICCHAIN_EMAP = 898;
-			static const int ACTIVITY_OPERATION_MAXIMUM_TWO_PARAMETER_NODES_EDIAGNOSTICCHAIN_EMAP = 899;
+			static const int ACTIVITY_OPERATION_MAXIMUM_ONE_PARAMETER_NODE_EDIAGNOSTICCHAIN_EMAP = 899;
+			static const int ACTIVITY_OPERATION_MAXIMUM_TWO_PARAMETER_NODES_EDIAGNOSTICCHAIN_EMAP = 900;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getActivity_Class() const = 0;
@@ -271,7 +271,7 @@ namespace uml
 			//Class and Feature IDs 
 			static const unsigned int ACTIVITYEDGE_CLASS = 9;
 			static const unsigned int ACTIVITYEDGE_CLASS_FEATURE_COUNT = 22;
-			static const unsigned int ACTIVITYEDGE_CLASS_OPERATION_COUNT = 61;
+			static const unsigned int ACTIVITYEDGE_CLASS_OPERATION_COUNT = 62;
 			
 			static const int ACTIVITYEDGE_ATTRIBUTE_ACTIVITY = 912;
 			static const int ACTIVITYEDGE_ATTRIBUTE_GUARD = 913;
@@ -284,7 +284,7 @@ namespace uml
 			static const int ACTIVITYEDGE_ATTRIBUTE_TARGET = 917;
 			static const int ACTIVITYEDGE_ATTRIBUTE_WEIGHT = 920;
 			
-			static const int ACTIVITYEDGE_OPERATION_SOURCE_AND_TARGET_EDIAGNOSTICCHAIN_EMAP = 982;
+			static const int ACTIVITYEDGE_OPERATION_SOURCE_AND_TARGET_EDIAGNOSTICCHAIN_EMAP = 983;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getActivityEdge_Class() const = 0;
@@ -310,7 +310,7 @@ namespace uml
 			//Class and Feature IDs 
 			static const unsigned int ACTIVITYFINALNODE_CLASS = 10;
 			static const unsigned int ACTIVITYFINALNODE_CLASS_FEATURE_COUNT = 20;
-			static const unsigned int ACTIVITYFINALNODE_CLASS_OPERATION_COUNT = 62;
+			static const unsigned int ACTIVITYFINALNODE_CLASS_OPERATION_COUNT = 63;
 			
 			
 			
@@ -327,7 +327,7 @@ namespace uml
 			//Class and Feature IDs 
 			static const unsigned int ACTIVITYGROUP_CLASS = 11;
 			static const unsigned int ACTIVITYGROUP_CLASS_FEATURE_COUNT = 14;
-			static const unsigned int ACTIVITYGROUP_CLASS_OPERATION_COUNT = 58;
+			static const unsigned int ACTIVITYGROUP_CLASS_OPERATION_COUNT = 59;
 			
 			static const int ACTIVITYGROUP_ATTRIBUTE_CONTAINEDEDGE = 1109;
 			static const int ACTIVITYGROUP_ATTRIBUTE_CONTAINEDNODE = 1110;
@@ -335,8 +335,8 @@ namespace uml
 			static const int ACTIVITYGROUP_ATTRIBUTE_SUBGROUP = 1112;
 			static const int ACTIVITYGROUP_ATTRIBUTE_SUPERGROUP = 1113;
 			
-			static const int ACTIVITYGROUP_OPERATION_NODES_AND_EDGES_EDIAGNOSTICCHAIN_EMAP = 1170;
-			static const int ACTIVITYGROUP_OPERATION_NOT_CONTAINED_EDIAGNOSTICCHAIN_EMAP = 1171;
+			static const int ACTIVITYGROUP_OPERATION_NODES_AND_EDGES_EDIAGNOSTICCHAIN_EMAP = 1171;
+			static const int ACTIVITYGROUP_OPERATION_NOT_CONTAINED_EDIAGNOSTICCHAIN_EMAP = 1172;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getActivityGroup_Class() const = 0;
@@ -358,7 +358,7 @@ namespace uml
 			//Class and Feature IDs 
 			static const unsigned int ACTIVITYNODE_CLASS = 12;
 			static const unsigned int ACTIVITYNODE_CLASS_FEATURE_COUNT = 20;
-			static const unsigned int ACTIVITYNODE_CLASS_OPERATION_COUNT = 61;
+			static const unsigned int ACTIVITYNODE_CLASS_OPERATION_COUNT = 62;
 			
 			static const int ACTIVITYNODE_ATTRIBUTE_ACTIVITY = 1212;
 			static const int ACTIVITYNODE_ATTRIBUTE_INGROUP = 1213;
@@ -391,15 +391,15 @@ namespace uml
 			//Class and Feature IDs 
 			static const unsigned int ACTIVITYPARAMETERNODE_CLASS = 13;
 			static const unsigned int ACTIVITYPARAMETERNODE_CLASS_FEATURE_COUNT = 27;
-			static const unsigned int ACTIVITYPARAMETERNODE_CLASS_OPERATION_COUNT = 69;
+			static const unsigned int ACTIVITYPARAMETERNODE_CLASS_OPERATION_COUNT = 70;
 			
 			static const int ACTIVITYPARAMETERNODE_ATTRIBUTE_PARAMETER = 1326;
 			
-			static const int ACTIVITYPARAMETERNODE_OPERATION_HAS_PARAMETERS_EDIAGNOSTICCHAIN_EMAP = 1392;
-			static const int ACTIVITYPARAMETERNODE_OPERATION_NO_EDGES_EDIAGNOSTICCHAIN_EMAP = 1395;
-			static const int ACTIVITYPARAMETERNODE_OPERATION_NO_INCOMING_EDGES_EDIAGNOSTICCHAIN_EMAP = 1394;
-			static const int ACTIVITYPARAMETERNODE_OPERATION_NO_OUTGOING_EDGES_EDIAGNOSTICCHAIN_EMAP = 1391;
-			static const int ACTIVITYPARAMETERNODE_OPERATION_SAME_TYPE_EDIAGNOSTICCHAIN_EMAP = 1393;
+			static const int ACTIVITYPARAMETERNODE_OPERATION_HAS_PARAMETERS_EDIAGNOSTICCHAIN_EMAP = 1393;
+			static const int ACTIVITYPARAMETERNODE_OPERATION_NO_EDGES_EDIAGNOSTICCHAIN_EMAP = 1396;
+			static const int ACTIVITYPARAMETERNODE_OPERATION_NO_INCOMING_EDGES_EDIAGNOSTICCHAIN_EMAP = 1395;
+			static const int ACTIVITYPARAMETERNODE_OPERATION_NO_OUTGOING_EDGES_EDIAGNOSTICCHAIN_EMAP = 1392;
+			static const int ACTIVITYPARAMETERNODE_OPERATION_SAME_TYPE_EDIAGNOSTICCHAIN_EMAP = 1394;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getActivityParameterNode_Class() const = 0;
@@ -420,7 +420,7 @@ namespace uml
 			//Class and Feature IDs 
 			static const unsigned int ACTIVITYPARTITION_CLASS = 14;
 			static const unsigned int ACTIVITYPARTITION_CLASS_FEATURE_COUNT = 21;
-			static const unsigned int ACTIVITYPARTITION_CLASS_OPERATION_COUNT = 62;
+			static const unsigned int ACTIVITYPARTITION_CLASS_OPERATION_COUNT = 63;
 			static const int ACTIVITYPARTITION_ATTRIBUTE_ISDIMENSION = 1414;
 			static const int ACTIVITYPARTITION_ATTRIBUTE_ISEXTERNAL = 1415;
 			
@@ -430,10 +430,10 @@ namespace uml
 			static const int ACTIVITYPARTITION_ATTRIBUTE_SUBPARTITION = 1418;
 			static const int ACTIVITYPARTITION_ATTRIBUTE_SUPERPARTITION = 1419;
 			
-			static const int ACTIVITYPARTITION_OPERATION_DIMENSION_NOT_CONTAINED_EDIAGNOSTICCHAIN_EMAP = 1482;
-			static const int ACTIVITYPARTITION_OPERATION_REPRESENTS_CLASSIFIER_EDIAGNOSTICCHAIN_EMAP = 1479;
-			static const int ACTIVITYPARTITION_OPERATION_REPRESENTS_PROPERTY_EDIAGNOSTICCHAIN_EMAP = 1481;
-			static const int ACTIVITYPARTITION_OPERATION_REPRESENTS_PROPERTY_AND_IS_CONTAINED_EDIAGNOSTICCHAIN_EMAP = 1480;
+			static const int ACTIVITYPARTITION_OPERATION_DIMENSION_NOT_CONTAINED_EDIAGNOSTICCHAIN_EMAP = 1483;
+			static const int ACTIVITYPARTITION_OPERATION_REPRESENTS_CLASSIFIER_EDIAGNOSTICCHAIN_EMAP = 1480;
+			static const int ACTIVITYPARTITION_OPERATION_REPRESENTS_PROPERTY_EDIAGNOSTICCHAIN_EMAP = 1482;
+			static const int ACTIVITYPARTITION_OPERATION_REPRESENTS_PROPERTY_AND_IS_CONTAINED_EDIAGNOSTICCHAIN_EMAP = 1481;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getActivityPartition_Class() const = 0;
@@ -459,11 +459,11 @@ namespace uml
 			//Class and Feature IDs 
 			static const unsigned int ACTOR_CLASS = 15;
 			static const unsigned int ACTOR_CLASS_FEATURE_COUNT = 41;
-			static const unsigned int ACTOR_CLASS_OPERATION_COUNT = 113;
+			static const unsigned int ACTOR_CLASS_OPERATION_COUNT = 114;
 			
 			
-			static const int ACTOR_OPERATION_ASSOCIATIONS_EDIAGNOSTICCHAIN_EMAP = 1652;
-			static const int ACTOR_OPERATION_MUST_HAVE_NAME_EDIAGNOSTICCHAIN_EMAP = 1653;
+			static const int ACTOR_OPERATION_ASSOCIATIONS_EDIAGNOSTICCHAIN_EMAP = 1653;
+			static const int ACTOR_OPERATION_MUST_HAVE_NAME_EDIAGNOSTICCHAIN_EMAP = 1654;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getActor_Class() const = 0;
@@ -480,13 +480,13 @@ namespace uml
 			//Class and Feature IDs 
 			static const unsigned int ADDSTRUCTURALFEATUREVALUEACTION_CLASS = 16;
 			static const unsigned int ADDSTRUCTURALFEATUREVALUEACTION_CLASS_FEATURE_COUNT = 33;
-			static const unsigned int ADDSTRUCTURALFEATUREVALUEACTION_CLASS_OPERATION_COUNT = 76;
+			static const unsigned int ADDSTRUCTURALFEATUREVALUEACTION_CLASS_OPERATION_COUNT = 77;
 			static const int ADDSTRUCTURALFEATUREVALUEACTION_ATTRIBUTE_ISREPLACEALL = 1632;
 			
 			static const int ADDSTRUCTURALFEATUREVALUEACTION_ATTRIBUTE_INSERTAT = 1631;
 			
-			static const int ADDSTRUCTURALFEATUREVALUEACTION_OPERATION_INSERTAT_PIN_EDIAGNOSTICCHAIN_EMAP = 1708;
-			static const int ADDSTRUCTURALFEATUREVALUEACTION_OPERATION_REQUIRED_VALUE_EDIAGNOSTICCHAIN_EMAP = 1707;
+			static const int ADDSTRUCTURALFEATUREVALUEACTION_OPERATION_INSERTAT_PIN_EDIAGNOSTICCHAIN_EMAP = 1709;
+			static const int ADDSTRUCTURALFEATUREVALUEACTION_OPERATION_REQUIRED_VALUE_EDIAGNOSTICCHAIN_EMAP = 1708;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getAddStructuralFeatureValueAction_Class() const = 0;
@@ -505,13 +505,13 @@ namespace uml
 			//Class and Feature IDs 
 			static const unsigned int ADDVARIABLEVALUEACTION_CLASS = 17;
 			static const unsigned int ADDVARIABLEVALUEACTION_CLASS_FEATURE_COUNT = 31;
-			static const unsigned int ADDVARIABLEVALUEACTION_CLASS_OPERATION_COUNT = 70;
+			static const unsigned int ADDVARIABLEVALUEACTION_CLASS_OPERATION_COUNT = 71;
 			static const int ADDVARIABLEVALUEACTION_ATTRIBUTE_ISREPLACEALL = 1730;
 			
 			static const int ADDVARIABLEVALUEACTION_ATTRIBUTE_INSERTAT = 1729;
 			
-			static const int ADDVARIABLEVALUEACTION_OPERATION_INSERTAT_PIN_EDIAGNOSTICCHAIN_EMAP = 1800;
-			static const int ADDVARIABLEVALUEACTION_OPERATION_REQUIRED_VALUE_EDIAGNOSTICCHAIN_EMAP = 1799;
+			static const int ADDVARIABLEVALUEACTION_OPERATION_INSERTAT_PIN_EDIAGNOSTICCHAIN_EMAP = 1801;
+			static const int ADDVARIABLEVALUEACTION_OPERATION_REQUIRED_VALUE_EDIAGNOSTICCHAIN_EMAP = 1800;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getAddVariableValueAction_Class() const = 0;
@@ -530,7 +530,7 @@ namespace uml
 			//Class and Feature IDs 
 			static const unsigned int ANYRECEIVEEVENT_CLASS = 19;
 			static const unsigned int ANYRECEIVEEVENT_CLASS_FEATURE_COUNT = 12;
-			static const unsigned int ANYRECEIVEEVENT_CLASS_OPERATION_COUNT = 58;
+			static const unsigned int ANYRECEIVEEVENT_CLASS_OPERATION_COUNT = 59;
 			
 			
 			
@@ -543,20 +543,41 @@ namespace uml
 			// End Class AnyReceiveEvent
 
 
+			// Begin Class Argument
+			//Class and Feature IDs 
+			static const unsigned int ARGUMENT_CLASS = 20;
+			static const unsigned int ARGUMENT_CLASS_FEATURE_COUNT = 2;
+			static const unsigned int ARGUMENT_CLASS_OPERATION_COUNT = 0;
+			static const int ARGUMENT_ATTRIBUTE_NAME = 2000;
+			
+			static const int ARGUMENT_ATTRIBUTE_VALUE = 2001;
+			
+			
+			//Class and Feature Getter
+			virtual std::shared_ptr<ecore::EClass> getArgument_Class() const = 0;
+			
+			virtual std::shared_ptr<ecore::EAttribute> getArgument_Attribute_name() const = 0;
+			
+			virtual std::shared_ptr<ecore::EReference> getArgument_Attribute_value() const = 0;
+			
+			
+			// End Class Argument
+
+
 			// Begin Class Artifact
 			//Class and Feature IDs 
-			static const unsigned int ARTIFACT_CLASS = 20;
+			static const unsigned int ARTIFACT_CLASS = 21;
 			static const unsigned int ARTIFACT_CLASS_FEATURE_COUNT = 43;
-			static const unsigned int ARTIFACT_CLASS_OPERATION_COUNT = 110;
-			static const int ARTIFACT_ATTRIBUTE_FILENAME = 2038;
+			static const unsigned int ARTIFACT_CLASS_OPERATION_COUNT = 111;
+			static const int ARTIFACT_ATTRIBUTE_FILENAME = 2138;
 			
-			static const int ARTIFACT_ATTRIBUTE_MANIFESTATION = 2039;
-			static const int ARTIFACT_ATTRIBUTE_NESTEDARTIFACT = 2040;
-			static const int ARTIFACT_ATTRIBUTE_OWNEDATTRIBUTE = 2041;
-			static const int ARTIFACT_ATTRIBUTE_OWNEDOPERATION = 2042;
+			static const int ARTIFACT_ATTRIBUTE_MANIFESTATION = 2139;
+			static const int ARTIFACT_ATTRIBUTE_NESTEDARTIFACT = 2140;
+			static const int ARTIFACT_ATTRIBUTE_OWNEDATTRIBUTE = 2141;
+			static const int ARTIFACT_ATTRIBUTE_OWNEDOPERATION = 2142;
 			
-			static const int ARTIFACT_OPERATION_CREATEOWNEDATTRIBUTE_STRING_UNLIMITEDNATURAL = 2151;
-			static const int ARTIFACT_OPERATION_CREATEOWNEDOPERATION_STRING_TYPE = 2152;
+			static const int ARTIFACT_OPERATION_CREATEOWNEDATTRIBUTE_STRING_UNLIMITEDNATURAL = 2252;
+			static const int ARTIFACT_OPERATION_CREATEOWNEDOPERATION_STRING_TYPE = 2253;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getArtifact_Class() const = 0;
@@ -576,23 +597,23 @@ namespace uml
 
 			// Begin Class Association
 			//Class and Feature IDs 
-			static const unsigned int ASSOCIATION_CLASS = 21;
+			static const unsigned int ASSOCIATION_CLASS = 22;
 			static const unsigned int ASSOCIATION_CLASS_FEATURE_COUNT = 44;
-			static const unsigned int ASSOCIATION_CLASS_OPERATION_COUNT = 115;
-			static const int ASSOCIATION_ATTRIBUTE_ISDERIVED = 2140;
+			static const unsigned int ASSOCIATION_CLASS_OPERATION_COUNT = 116;
+			static const int ASSOCIATION_ATTRIBUTE_ISDERIVED = 2240;
 			
-			static const int ASSOCIATION_ATTRIBUTE_ENDTYPE = 2139;
-			static const int ASSOCIATION_ATTRIBUTE_MEMBEREND = 2141;
-			static const int ASSOCIATION_ATTRIBUTE_NAVIGABLEOWNEDEND = 2143;
-			static const int ASSOCIATION_ATTRIBUTE_OWNEDEND = 2142;
+			static const int ASSOCIATION_ATTRIBUTE_ENDTYPE = 2239;
+			static const int ASSOCIATION_ATTRIBUTE_MEMBEREND = 2241;
+			static const int ASSOCIATION_ATTRIBUTE_NAVIGABLEOWNEDEND = 2243;
+			static const int ASSOCIATION_ATTRIBUTE_OWNEDEND = 2242;
 			
-			static const int ASSOCIATION_OPERATION_ASSOCIATION_ENDS_EDIAGNOSTICCHAIN_EMAP = 2255;
-			static const int ASSOCIATION_OPERATION_BINARY_ASSOCIATIONS_EDIAGNOSTICCHAIN_EMAP = 2254;
-			static const int ASSOCIATION_OPERATION_ENDS_MUST_BE_TYPED_EDIAGNOSTICCHAIN_EMAP = 2256;
-			static const int ASSOCIATION_OPERATION_GETENDTYPES = 2258;
-			static const int ASSOCIATION_OPERATION_ISBINARY = 2257;
-			static const int ASSOCIATION_OPERATION_SPECIALIZED_END_NUMBER_EDIAGNOSTICCHAIN_EMAP = 2252;
-			static const int ASSOCIATION_OPERATION_SPECIALIZED_END_TYPES_EDIAGNOSTICCHAIN_EMAP = 2253;
+			static const int ASSOCIATION_OPERATION_ASSOCIATION_ENDS_EDIAGNOSTICCHAIN_EMAP = 2356;
+			static const int ASSOCIATION_OPERATION_BINARY_ASSOCIATIONS_EDIAGNOSTICCHAIN_EMAP = 2355;
+			static const int ASSOCIATION_OPERATION_ENDS_MUST_BE_TYPED_EDIAGNOSTICCHAIN_EMAP = 2357;
+			static const int ASSOCIATION_OPERATION_GETENDTYPES = 2359;
+			static const int ASSOCIATION_OPERATION_ISBINARY = 2358;
+			static const int ASSOCIATION_OPERATION_SPECIALIZED_END_NUMBER_EDIAGNOSTICCHAIN_EMAP = 2353;
+			static const int ASSOCIATION_OPERATION_SPECIALIZED_END_TYPES_EDIAGNOSTICCHAIN_EMAP = 2354;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getAssociation_Class() const = 0;
@@ -617,13 +638,13 @@ namespace uml
 
 			// Begin Class AssociationClass
 			//Class and Feature IDs 
-			static const unsigned int ASSOCIATIONCLASS_CLASS = 22;
+			static const unsigned int ASSOCIATIONCLASS_CLASS = 23;
 			static const unsigned int ASSOCIATIONCLASS_CLASS_FEATURE_COUNT = 58;
-			static const unsigned int ASSOCIATIONCLASS_CLASS_OPERATION_COUNT = 129;
+			static const unsigned int ASSOCIATIONCLASS_CLASS_OPERATION_COUNT = 130;
 			
 			
-			static const int ASSOCIATIONCLASS_OPERATION_CANNOT_BE_DEFINED_EDIAGNOSTICCHAIN_EMAP = 2385;
-			static const int ASSOCIATIONCLASS_OPERATION_DISJOINT_ATTRIBUTES_ENDS_EDIAGNOSTICCHAIN_EMAP = 2386;
+			static const int ASSOCIATIONCLASS_OPERATION_CANNOT_BE_DEFINED_EDIAGNOSTICCHAIN_EMAP = 2486;
+			static const int ASSOCIATIONCLASS_OPERATION_DISJOINT_ATTRIBUTES_ENDS_EDIAGNOSTICCHAIN_EMAP = 2487;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getAssociationClass_Class() const = 0;
@@ -638,27 +659,27 @@ namespace uml
 
 			// Begin Class Behavior
 			//Class and Feature IDs 
-			static const unsigned int BEHAVIOR_CLASS = 23;
+			static const unsigned int BEHAVIOR_CLASS = 24;
 			static const unsigned int BEHAVIOR_CLASS_FEATURE_COUNT = 61;
-			static const unsigned int BEHAVIOR_CLASS_OPERATION_COUNT = 127;
-			static const int BEHAVIOR_ATTRIBUTE_ISREENTRANT = 2354;
+			static const unsigned int BEHAVIOR_CLASS_OPERATION_COUNT = 128;
+			static const int BEHAVIOR_ATTRIBUTE_ISREENTRANT = 2454;
 			
-			static const int BEHAVIOR_ATTRIBUTE_BEHAVIOREDCLASSIFIER = 2360;
-			static const int BEHAVIOR_ATTRIBUTE_CONTEXT = 2353;
-			static const int BEHAVIOR_ATTRIBUTE_OWNEDPARAMETER = 2355;
-			static const int BEHAVIOR_ATTRIBUTE_OWNEDPARAMETERSET = 2356;
-			static const int BEHAVIOR_ATTRIBUTE_POSTCONDITION = 2357;
-			static const int BEHAVIOR_ATTRIBUTE_PRECONDITION = 2358;
-			static const int BEHAVIOR_ATTRIBUTE_REDEFINEDBEHAVIOR = 2359;
-			static const int BEHAVIOR_ATTRIBUTE_SPECIFICATION = 2352;
+			static const int BEHAVIOR_ATTRIBUTE_BEHAVIOREDCLASSIFIER = 2460;
+			static const int BEHAVIOR_ATTRIBUTE_CONTEXT = 2453;
+			static const int BEHAVIOR_ATTRIBUTE_OWNEDPARAMETER = 2455;
+			static const int BEHAVIOR_ATTRIBUTE_OWNEDPARAMETERSET = 2456;
+			static const int BEHAVIOR_ATTRIBUTE_POSTCONDITION = 2457;
+			static const int BEHAVIOR_ATTRIBUTE_PRECONDITION = 2458;
+			static const int BEHAVIOR_ATTRIBUTE_REDEFINEDBEHAVIOR = 2459;
+			static const int BEHAVIOR_ATTRIBUTE_SPECIFICATION = 2452;
 			
-			static const int BEHAVIOR_OPERATION_BEHAVIOREDCLASSIFIER_ELEMENT = 2485;
-			static const int BEHAVIOR_OPERATION_FEATURE_OF_CONTEXT_CLASSIFIER_EDIAGNOSTICCHAIN_EMAP = 2483;
-			static const int BEHAVIOR_OPERATION_GETCONTEXT = 2484;
-			static const int BEHAVIOR_OPERATION_INPUTPARAMETERS = 2486;
-			static const int BEHAVIOR_OPERATION_MOST_ONE_BEHAVIOR_EDIAGNOSTICCHAIN_EMAP = 2481;
-			static const int BEHAVIOR_OPERATION_OUTPUTPARAMETERS = 2487;
-			static const int BEHAVIOR_OPERATION_PARAMETERS_MATCH_EDIAGNOSTICCHAIN_EMAP = 2482;
+			static const int BEHAVIOR_OPERATION_BEHAVIOREDCLASSIFIER_ELEMENT = 2586;
+			static const int BEHAVIOR_OPERATION_FEATURE_OF_CONTEXT_CLASSIFIER_EDIAGNOSTICCHAIN_EMAP = 2584;
+			static const int BEHAVIOR_OPERATION_GETCONTEXT = 2585;
+			static const int BEHAVIOR_OPERATION_INPUTPARAMETERS = 2587;
+			static const int BEHAVIOR_OPERATION_MOST_ONE_BEHAVIOR_EDIAGNOSTICCHAIN_EMAP = 2582;
+			static const int BEHAVIOR_OPERATION_OUTPUTPARAMETERS = 2588;
+			static const int BEHAVIOR_OPERATION_PARAMETERS_MATCH_EDIAGNOSTICCHAIN_EMAP = 2583;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getBehavior_Class() const = 0;
@@ -687,11 +708,11 @@ namespace uml
 
 			// Begin Class BehaviorExecutionSpecification
 			//Class and Feature IDs 
-			static const unsigned int BEHAVIOREXECUTIONSPECIFICATION_CLASS = 24;
+			static const unsigned int BEHAVIOREXECUTIONSPECIFICATION_CLASS = 25;
 			static const unsigned int BEHAVIOREXECUTIONSPECIFICATION_CLASS_FEATURE_COUNT = 16;
-			static const unsigned int BEHAVIOREXECUTIONSPECIFICATION_CLASS_OPERATION_COUNT = 56;
+			static const unsigned int BEHAVIOREXECUTIONSPECIFICATION_CLASS_OPERATION_COUNT = 57;
 			
-			static const int BEHAVIOREXECUTIONSPECIFICATION_ATTRIBUTE_BEHAVIOR = 2415;
+			static const int BEHAVIOREXECUTIONSPECIFICATION_ATTRIBUTE_BEHAVIOR = 2515;
 			
 			
 			//Class and Feature Getter
@@ -706,21 +727,21 @@ namespace uml
 
 			// Begin Class BehavioralFeature
 			//Class and Feature IDs 
-			static const unsigned int BEHAVIORALFEATURE_CLASS = 25;
+			static const unsigned int BEHAVIORALFEATURE_CLASS = 26;
 			static const unsigned int BEHAVIORALFEATURE_CLASS_FEATURE_COUNT = 26;
-			static const unsigned int BEHAVIORALFEATURE_CLASS_OPERATION_COUNT = 77;
-			static const int BEHAVIORALFEATURE_ATTRIBUTE_CONCURRENCY = 2520;
-			static const int BEHAVIORALFEATURE_ATTRIBUTE_ISABSTRACT = 2521;
+			static const unsigned int BEHAVIORALFEATURE_CLASS_OPERATION_COUNT = 78;
+			static const int BEHAVIORALFEATURE_ATTRIBUTE_CONCURRENCY = 2620;
+			static const int BEHAVIORALFEATURE_ATTRIBUTE_ISABSTRACT = 2621;
 			
-			static const int BEHAVIORALFEATURE_ATTRIBUTE_METHOD = 2522;
-			static const int BEHAVIORALFEATURE_ATTRIBUTE_OWNEDPARAMETER = 2523;
-			static const int BEHAVIORALFEATURE_ATTRIBUTE_OWNEDPARAMETERSET = 2524;
-			static const int BEHAVIORALFEATURE_ATTRIBUTE_RAISEDEXCEPTION = 2525;
+			static const int BEHAVIORALFEATURE_ATTRIBUTE_METHOD = 2622;
+			static const int BEHAVIORALFEATURE_ATTRIBUTE_OWNEDPARAMETER = 2623;
+			static const int BEHAVIORALFEATURE_ATTRIBUTE_OWNEDPARAMETERSET = 2624;
+			static const int BEHAVIORALFEATURE_ATTRIBUTE_RAISEDEXCEPTION = 2625;
 			
-			static const int BEHAVIORALFEATURE_OPERATION_ABSTRACT_NO_METHOD_EDIAGNOSTICCHAIN_EMAP = 2599;
-			static const int BEHAVIORALFEATURE_OPERATION_CREATERETURNRESULT_STRING_TYPE = 2600;
-			static const int BEHAVIORALFEATURE_OPERATION_INPUTPARAMETERS = 2601;
-			static const int BEHAVIORALFEATURE_OPERATION_OUTPUTPARAMETERS = 2602;
+			static const int BEHAVIORALFEATURE_OPERATION_ABSTRACT_NO_METHOD_EDIAGNOSTICCHAIN_EMAP = 2700;
+			static const int BEHAVIORALFEATURE_OPERATION_CREATERETURNRESULT_STRING_TYPE = 2701;
+			static const int BEHAVIORALFEATURE_OPERATION_INPUTPARAMETERS = 2702;
+			static const int BEHAVIORALFEATURE_OPERATION_OUTPUTPARAMETERS = 2703;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getBehavioralFeature_Class() const = 0;
@@ -743,17 +764,17 @@ namespace uml
 
 			// Begin Class BehavioredClassifier
 			//Class and Feature IDs 
-			static const unsigned int BEHAVIOREDCLASSIFIER_CLASS = 26;
+			static const unsigned int BEHAVIOREDCLASSIFIER_CLASS = 27;
 			static const unsigned int BEHAVIOREDCLASSIFIER_CLASS_FEATURE_COUNT = 41;
-			static const unsigned int BEHAVIOREDCLASSIFIER_CLASS_OPERATION_COUNT = 111;
+			static const unsigned int BEHAVIOREDCLASSIFIER_CLASS_OPERATION_COUNT = 112;
 			
-			static const int BEHAVIOREDCLASSIFIER_ATTRIBUTE_CLASSIFIERBEHAVIOR = 2638;
-			static const int BEHAVIOREDCLASSIFIER_ATTRIBUTE_INTERFACEREALIZATION = 2639;
-			static const int BEHAVIOREDCLASSIFIER_ATTRIBUTE_OWNEDBEHAVIOR = 2640;
+			static const int BEHAVIOREDCLASSIFIER_ATTRIBUTE_CLASSIFIERBEHAVIOR = 2738;
+			static const int BEHAVIOREDCLASSIFIER_ATTRIBUTE_INTERFACEREALIZATION = 2739;
+			static const int BEHAVIOREDCLASSIFIER_ATTRIBUTE_OWNEDBEHAVIOR = 2740;
 			
-			static const int BEHAVIOREDCLASSIFIER_OPERATION_CLASS_BEHAVIOR_EDIAGNOSTICCHAIN_EMAP = 2749;
-			static const int BEHAVIOREDCLASSIFIER_OPERATION_GETALLIMPLEMENTEDINTERFACES = 2750;
-			static const int BEHAVIOREDCLASSIFIER_OPERATION_GETIMPLEMENTEDINTERFACES = 2751;
+			static const int BEHAVIOREDCLASSIFIER_OPERATION_CLASS_BEHAVIOR_EDIAGNOSTICCHAIN_EMAP = 2850;
+			static const int BEHAVIOREDCLASSIFIER_OPERATION_GETALLIMPLEMENTEDINTERFACES = 2851;
+			static const int BEHAVIOREDCLASSIFIER_OPERATION_GETIMPLEMENTEDINTERFACES = 2852;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getBehavioredClassifier_Class() const = 0;
@@ -772,15 +793,15 @@ namespace uml
 
 			// Begin Class BroadcastSignalAction
 			//Class and Feature IDs 
-			static const unsigned int BROADCASTSIGNALACTION_CLASS = 27;
+			static const unsigned int BROADCASTSIGNALACTION_CLASS = 28;
 			static const unsigned int BROADCASTSIGNALACTION_CLASS_FEATURE_COUNT = 30;
-			static const unsigned int BROADCASTSIGNALACTION_CLASS_OPERATION_COUNT = 68;
+			static const unsigned int BROADCASTSIGNALACTION_CLASS_OPERATION_COUNT = 69;
 			
-			static const int BROADCASTSIGNALACTION_ATTRIBUTE_SIGNAL = 2729;
+			static const int BROADCASTSIGNALACTION_ATTRIBUTE_SIGNAL = 2829;
 			
-			static const int BROADCASTSIGNALACTION_OPERATION_NO_ONPORT_EDIAGNOSTICCHAIN_EMAP = 2797;
-			static const int BROADCASTSIGNALACTION_OPERATION_NUMBER_OF_ARGUMENTS_EDIAGNOSTICCHAIN_EMAP = 2795;
-			static const int BROADCASTSIGNALACTION_OPERATION_TYPE_ORDERING_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP = 2796;
+			static const int BROADCASTSIGNALACTION_OPERATION_NO_ONPORT_EDIAGNOSTICCHAIN_EMAP = 2898;
+			static const int BROADCASTSIGNALACTION_OPERATION_NUMBER_OF_ARGUMENTS_EDIAGNOSTICCHAIN_EMAP = 2896;
+			static const int BROADCASTSIGNALACTION_OPERATION_TYPE_ORDERING_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP = 2897;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getBroadcastSignalAction_Class() const = 0;
@@ -797,18 +818,18 @@ namespace uml
 
 			// Begin Class CallAction
 			//Class and Feature IDs 
-			static const unsigned int CALLACTION_CLASS = 28;
+			static const unsigned int CALLACTION_CLASS = 29;
 			static const unsigned int CALLACTION_CLASS_FEATURE_COUNT = 31;
-			static const unsigned int CALLACTION_CLASS_OPERATION_COUNT = 70;
-			static const int CALLACTION_ATTRIBUTE_ISSYNCHRONOUS = 2829;
+			static const unsigned int CALLACTION_CLASS_OPERATION_COUNT = 71;
+			static const int CALLACTION_ATTRIBUTE_ISSYNCHRONOUS = 2929;
 			
-			static const int CALLACTION_ATTRIBUTE_RESULT = 2830;
+			static const int CALLACTION_ATTRIBUTE_RESULT = 2930;
 			
-			static const int CALLACTION_OPERATION_ARGUMENT_PINS_EDIAGNOSTICCHAIN_EMAP = 2896;
-			static const int CALLACTION_OPERATION_INPUTPARAMETERS = 2899;
-			static const int CALLACTION_OPERATION_OUTPUTPARAMETERS = 2900;
-			static const int CALLACTION_OPERATION_RESULT_PINS_EDIAGNOSTICCHAIN_EMAP = 2897;
-			static const int CALLACTION_OPERATION_SYNCHRONOUS_CALL_EDIAGNOSTICCHAIN_EMAP = 2898;
+			static const int CALLACTION_OPERATION_ARGUMENT_PINS_EDIAGNOSTICCHAIN_EMAP = 2997;
+			static const int CALLACTION_OPERATION_INPUTPARAMETERS = 3000;
+			static const int CALLACTION_OPERATION_OUTPUTPARAMETERS = 3001;
+			static const int CALLACTION_OPERATION_RESULT_PINS_EDIAGNOSTICCHAIN_EMAP = 2998;
+			static const int CALLACTION_OPERATION_SYNCHRONOUS_CALL_EDIAGNOSTICCHAIN_EMAP = 2999;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getCallAction_Class() const = 0;
@@ -828,13 +849,13 @@ namespace uml
 
 			// Begin Class CallBehaviorAction
 			//Class and Feature IDs 
-			static const unsigned int CALLBEHAVIORACTION_CLASS = 29;
+			static const unsigned int CALLBEHAVIORACTION_CLASS = 30;
 			static const unsigned int CALLBEHAVIORACTION_CLASS_FEATURE_COUNT = 32;
-			static const unsigned int CALLBEHAVIORACTION_CLASS_OPERATION_COUNT = 71;
+			static const unsigned int CALLBEHAVIORACTION_CLASS_OPERATION_COUNT = 72;
 			
-			static const int CALLBEHAVIORACTION_ATTRIBUTE_BEHAVIOR = 2931;
+			static const int CALLBEHAVIORACTION_ATTRIBUTE_BEHAVIOR = 3031;
 			
-			static const int CALLBEHAVIORACTION_OPERATION_NO_ONPORT_EDIAGNOSTICCHAIN_EMAP = 3002;
+			static const int CALLBEHAVIORACTION_OPERATION_NO_ONPORT_EDIAGNOSTICCHAIN_EMAP = 3103;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getCallBehaviorAction_Class() const = 0;
@@ -849,11 +870,11 @@ namespace uml
 
 			// Begin Class CallEvent
 			//Class and Feature IDs 
-			static const unsigned int CALLEVENT_CLASS = 31;
+			static const unsigned int CALLEVENT_CLASS = 32;
 			static const unsigned int CALLEVENT_CLASS_FEATURE_COUNT = 13;
-			static const unsigned int CALLEVENT_CLASS_OPERATION_COUNT = 58;
+			static const unsigned int CALLEVENT_CLASS_OPERATION_COUNT = 59;
 			
-			static const int CALLEVENT_ATTRIBUTE_OPERATION = 3112;
+			static const int CALLEVENT_ATTRIBUTE_OPERATION = 3212;
 			
 			
 			//Class and Feature Getter
@@ -868,14 +889,14 @@ namespace uml
 
 			// Begin Class CallOperationAction
 			//Class and Feature IDs 
-			static const unsigned int CALLOPERATIONACTION_CLASS = 32;
+			static const unsigned int CALLOPERATIONACTION_CLASS = 33;
 			static const unsigned int CALLOPERATIONACTION_CLASS_FEATURE_COUNT = 33;
-			static const unsigned int CALLOPERATIONACTION_CLASS_OPERATION_COUNT = 71;
+			static const unsigned int CALLOPERATIONACTION_CLASS_OPERATION_COUNT = 72;
 			
-			static const int CALLOPERATIONACTION_ATTRIBUTE_OPERATION = 3231;
-			static const int CALLOPERATIONACTION_ATTRIBUTE_TARGET = 3232;
+			static const int CALLOPERATIONACTION_ATTRIBUTE_OPERATION = 3331;
+			static const int CALLOPERATIONACTION_ATTRIBUTE_TARGET = 3332;
 			
-			static const int CALLOPERATIONACTION_OPERATION_TYPE_TARGET_PIN_EDIAGNOSTICCHAIN_EMAP = 3303;
+			static const int CALLOPERATIONACTION_OPERATION_TYPE_TARGET_PIN_EDIAGNOSTICCHAIN_EMAP = 3404;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getCallOperationAction_Class() const = 0;
@@ -891,9 +912,9 @@ namespace uml
 
 			// Begin Class CentralBufferNode
 			//Class and Feature IDs 
-			static const unsigned int CENTRALBUFFERNODE_CLASS = 33;
+			static const unsigned int CENTRALBUFFERNODE_CLASS = 34;
 			static const unsigned int CENTRALBUFFERNODE_CLASS_FEATURE_COUNT = 26;
-			static const unsigned int CENTRALBUFFERNODE_CLASS_OPERATION_COUNT = 64;
+			static const unsigned int CENTRALBUFFERNODE_CLASS_OPERATION_COUNT = 65;
 			
 			
 			
@@ -908,11 +929,11 @@ namespace uml
 
 			// Begin Class ChangeEvent
 			//Class and Feature IDs 
-			static const unsigned int CHANGEEVENT_CLASS = 34;
+			static const unsigned int CHANGEEVENT_CLASS = 35;
 			static const unsigned int CHANGEEVENT_CLASS_FEATURE_COUNT = 13;
-			static const unsigned int CHANGEEVENT_CLASS_OPERATION_COUNT = 58;
+			static const unsigned int CHANGEEVENT_CLASS_OPERATION_COUNT = 59;
 			
-			static const int CHANGEEVENT_ATTRIBUTE_CHANGEEXPRESSION = 3412;
+			static const int CHANGEEVENT_ATTRIBUTE_CHANGEEXPRESSION = 3512;
 			
 			
 			//Class and Feature Getter
@@ -927,22 +948,22 @@ namespace uml
 
 			// Begin Class Class
 			//Class and Feature IDs 
-			static const unsigned int CLASS_CLASS = 35;
+			static const unsigned int CLASS_CLASS = 36;
 			static const unsigned int CLASS_CLASS_FEATURE_COUNT = 52;
-			static const unsigned int CLASS_CLASS_OPERATION_COUNT = 120;
-			static const int CLASS_ATTRIBUTE_ISACTIVE = 3548;
+			static const unsigned int CLASS_CLASS_OPERATION_COUNT = 121;
+			static const int CLASS_ATTRIBUTE_ISACTIVE = 3648;
 			
-			static const int CLASS_ATTRIBUTE_EXTENSION = 3547;
-			static const int CLASS_ATTRIBUTE_NESTEDCLASSIFIER = 3549;
-			static const int CLASS_ATTRIBUTE_OWNEDOPERATION = 3546;
-			static const int CLASS_ATTRIBUTE_OWNEDRECEPTION = 3550;
-			static const int CLASS_ATTRIBUTE_SUPERCLASS = 3551;
+			static const int CLASS_ATTRIBUTE_EXTENSION = 3647;
+			static const int CLASS_ATTRIBUTE_NESTEDCLASSIFIER = 3649;
+			static const int CLASS_ATTRIBUTE_OWNEDOPERATION = 3646;
+			static const int CLASS_ATTRIBUTE_OWNEDRECEPTION = 3650;
+			static const int CLASS_ATTRIBUTE_SUPERCLASS = 3651;
 			
-			static const int CLASS_OPERATION_CREATEOWNEDOPERATION_STRING_TYPE = 3668;
-			static const int CLASS_OPERATION_GETEXTENSIONS = 3670;
-			static const int CLASS_OPERATION_GETSUPERCLASSES = 3671;
-			static const int CLASS_OPERATION_ISMETACLASS = 3669;
-			static const int CLASS_OPERATION_PASSIVE_CLASS_EDIAGNOSTICCHAIN_EMAP = 3667;
+			static const int CLASS_OPERATION_CREATEOWNEDOPERATION_STRING_TYPE = 3769;
+			static const int CLASS_OPERATION_GETEXTENSIONS = 3771;
+			static const int CLASS_OPERATION_GETSUPERCLASSES = 3772;
+			static const int CLASS_OPERATION_ISMETACLASS = 3770;
+			static const int CLASS_OPERATION_PASSIVE_CLASS_EDIAGNOSTICCHAIN_EMAP = 3768;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getClass_Class() const = 0;
@@ -966,52 +987,52 @@ namespace uml
 
 			// Begin Class Classifier
 			//Class and Feature IDs 
-			static const unsigned int CLASSIFIER_CLASS = 36;
+			static const unsigned int CLASSIFIER_CLASS = 37;
 			static const unsigned int CLASSIFIER_CLASS_FEATURE_COUNT = 38;
-			static const unsigned int CLASSIFIER_CLASS_OPERATION_COUNT = 108;
-			static const int CLASSIFIER_ATTRIBUTE_ISABSTRACT = 3631;
-			static const int CLASSIFIER_ATTRIBUTE_ISFINALSPECIALIZATION = 3632;
+			static const unsigned int CLASSIFIER_CLASS_OPERATION_COUNT = 109;
+			static const int CLASSIFIER_ATTRIBUTE_ISABSTRACT = 3731;
+			static const int CLASSIFIER_ATTRIBUTE_ISFINALSPECIALIZATION = 3732;
 			
-			static const int CLASSIFIER_ATTRIBUTE_ATTRIBUTE = 3625;
-			static const int CLASSIFIER_ATTRIBUTE_COLLABORATIONUSE = 3626;
-			static const int CLASSIFIER_ATTRIBUTE_FEATURE = 3624;
-			static const int CLASSIFIER_ATTRIBUTE_GENERAL = 3627;
-			static const int CLASSIFIER_ATTRIBUTE_GENERALIZATION = 3628;
-			static const int CLASSIFIER_ATTRIBUTE_INHERITEDMEMBER = 3630;
-			static const int CLASSIFIER_ATTRIBUTE_OWNEDUSECASE = 3633;
-			static const int CLASSIFIER_ATTRIBUTE_POWERTYPEEXTENT = 3629;
-			static const int CLASSIFIER_ATTRIBUTE_REDEFINEDCLASSIFIER = 3635;
-			static const int CLASSIFIER_ATTRIBUTE_REPRESENTATION = 3636;
-			static const int CLASSIFIER_ATTRIBUTE_SUBSTITUTION = 3637;
-			static const int CLASSIFIER_ATTRIBUTE_USECASE = 3634;
+			static const int CLASSIFIER_ATTRIBUTE_ATTRIBUTE = 3725;
+			static const int CLASSIFIER_ATTRIBUTE_COLLABORATIONUSE = 3726;
+			static const int CLASSIFIER_ATTRIBUTE_FEATURE = 3724;
+			static const int CLASSIFIER_ATTRIBUTE_GENERAL = 3727;
+			static const int CLASSIFIER_ATTRIBUTE_GENERALIZATION = 3728;
+			static const int CLASSIFIER_ATTRIBUTE_INHERITEDMEMBER = 3730;
+			static const int CLASSIFIER_ATTRIBUTE_OWNEDUSECASE = 3733;
+			static const int CLASSIFIER_ATTRIBUTE_POWERTYPEEXTENT = 3729;
+			static const int CLASSIFIER_ATTRIBUTE_REDEFINEDCLASSIFIER = 3735;
+			static const int CLASSIFIER_ATTRIBUTE_REPRESENTATION = 3736;
+			static const int CLASSIFIER_ATTRIBUTE_SUBSTITUTION = 3737;
+			static const int CLASSIFIER_ATTRIBUTE_USECASE = 3734;
 			
-			static const int CLASSIFIER_OPERATION_ALLATTRIBUTES = 3744;
-			static const int CLASSIFIER_OPERATION_ALLFEATURES = 3730;
-			static const int CLASSIFIER_OPERATION_ALLPARENTS = 3731;
-			static const int CLASSIFIER_OPERATION_ALLREALIZEDINTERFACES = 3741;
-			static const int CLASSIFIER_OPERATION_ALLSLOTTABLEFEATURES = 3745;
-			static const int CLASSIFIER_OPERATION_ALLUSEDINTERFACES = 3742;
-			static const int CLASSIFIER_OPERATION_DIRECTLYREALIZEDINTERFACES = 3739;
-			static const int CLASSIFIER_OPERATION_DIRECTLYUSEDINTERFACES = 3740;
-			static const int CLASSIFIER_OPERATION_GETALLATTRIBUTES = 3723;
-			static const int CLASSIFIER_OPERATION_GETALLOPERATIONS = 3724;
-			static const int CLASSIFIER_OPERATION_GETALLUSEDINTERFACES = 3725;
-			static const int CLASSIFIER_OPERATION_GETGENERALS = 3732;
-			static const int CLASSIFIER_OPERATION_GETINHERITEDMEMBERS = 3736;
-			static const int CLASSIFIER_OPERATION_GETOPERATION_STRING_TYPE = 3726;
-			static const int CLASSIFIER_OPERATION_GETOPERATION_STRING_BOOLEAN = 3727;
-			static const int CLASSIFIER_OPERATION_GETOPERATIONS = 3728;
-			static const int CLASSIFIER_OPERATION_GETUSEDINTERFACES = 3729;
-			static const int CLASSIFIER_OPERATION_HASVISIBILITYOF_NAMEDELEMENT = 3733;
-			static const int CLASSIFIER_OPERATION_INHERIT_NAMEDELEMENT = 3734;
-			static const int CLASSIFIER_OPERATION_INHERITABLEMEMBERS_CLASSIFIER = 3735;
-			static const int CLASSIFIER_OPERATION_ISSUBSTITUTABLEFOR_CLASSIFIER = 3743;
-			static const int CLASSIFIER_OPERATION_MAPS_TO_GENERALIZATION_SET_EDIAGNOSTICCHAIN_EMAP = 3720;
-			static const int CLASSIFIER_OPERATION_MAYSPECIALIZETYPE_CLASSIFIER = 3737;
-			static const int CLASSIFIER_OPERATION_NO_CYCLES_IN_GENERALIZATION_EDIAGNOSTICCHAIN_EMAP = 3722;
-			static const int CLASSIFIER_OPERATION_NON_FINAL_PARENTS_EDIAGNOSTICCHAIN_EMAP = 3721;
-			static const int CLASSIFIER_OPERATION_PARENTS = 3738;
-			static const int CLASSIFIER_OPERATION_SPECIALIZE_TYPE_EDIAGNOSTICCHAIN_EMAP = 3719;
+			static const int CLASSIFIER_OPERATION_ALLATTRIBUTES = 3845;
+			static const int CLASSIFIER_OPERATION_ALLFEATURES = 3831;
+			static const int CLASSIFIER_OPERATION_ALLPARENTS = 3832;
+			static const int CLASSIFIER_OPERATION_ALLREALIZEDINTERFACES = 3842;
+			static const int CLASSIFIER_OPERATION_ALLSLOTTABLEFEATURES = 3846;
+			static const int CLASSIFIER_OPERATION_ALLUSEDINTERFACES = 3843;
+			static const int CLASSIFIER_OPERATION_DIRECTLYREALIZEDINTERFACES = 3840;
+			static const int CLASSIFIER_OPERATION_DIRECTLYUSEDINTERFACES = 3841;
+			static const int CLASSIFIER_OPERATION_GETALLATTRIBUTES = 3824;
+			static const int CLASSIFIER_OPERATION_GETALLOPERATIONS = 3825;
+			static const int CLASSIFIER_OPERATION_GETALLUSEDINTERFACES = 3826;
+			static const int CLASSIFIER_OPERATION_GETGENERALS = 3833;
+			static const int CLASSIFIER_OPERATION_GETINHERITEDMEMBERS = 3837;
+			static const int CLASSIFIER_OPERATION_GETOPERATION_STRING_TYPE = 3827;
+			static const int CLASSIFIER_OPERATION_GETOPERATION_STRING_BOOLEAN = 3828;
+			static const int CLASSIFIER_OPERATION_GETOPERATIONS = 3829;
+			static const int CLASSIFIER_OPERATION_GETUSEDINTERFACES = 3830;
+			static const int CLASSIFIER_OPERATION_HASVISIBILITYOF_NAMEDELEMENT = 3834;
+			static const int CLASSIFIER_OPERATION_INHERIT_NAMEDELEMENT = 3835;
+			static const int CLASSIFIER_OPERATION_INHERITABLEMEMBERS_CLASSIFIER = 3836;
+			static const int CLASSIFIER_OPERATION_ISSUBSTITUTABLEFOR_CLASSIFIER = 3844;
+			static const int CLASSIFIER_OPERATION_MAPS_TO_GENERALIZATION_SET_EDIAGNOSTICCHAIN_EMAP = 3821;
+			static const int CLASSIFIER_OPERATION_MAYSPECIALIZETYPE_CLASSIFIER = 3838;
+			static const int CLASSIFIER_OPERATION_NO_CYCLES_IN_GENERALIZATION_EDIAGNOSTICCHAIN_EMAP = 3823;
+			static const int CLASSIFIER_OPERATION_NON_FINAL_PARENTS_EDIAGNOSTICCHAIN_EMAP = 3822;
+			static const int CLASSIFIER_OPERATION_PARENTS = 3839;
+			static const int CLASSIFIER_OPERATION_SPECIALIZE_TYPE_EDIAGNOSTICCHAIN_EMAP = 3820;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getClassifier_Class() const = 0;
@@ -1065,19 +1086,19 @@ namespace uml
 
 			// Begin Class ClassifierTemplateParameter
 			//Class and Feature IDs 
-			static const unsigned int CLASSIFIERTEMPLATEPARAMETER_CLASS = 37;
+			static const unsigned int CLASSIFIERTEMPLATEPARAMETER_CLASS = 38;
 			static const unsigned int CLASSIFIERTEMPLATEPARAMETER_CLASS_FEATURE_COUNT = 10;
-			static const unsigned int CLASSIFIERTEMPLATEPARAMETER_CLASS_OPERATION_COUNT = 48;
-			static const int CLASSIFIERTEMPLATEPARAMETER_ATTRIBUTE_ALLOWSUBSTITUTABLE = 3708;
+			static const unsigned int CLASSIFIERTEMPLATEPARAMETER_CLASS_OPERATION_COUNT = 49;
+			static const int CLASSIFIERTEMPLATEPARAMETER_ATTRIBUTE_ALLOWSUBSTITUTABLE = 3808;
 			
-			static const int CLASSIFIERTEMPLATEPARAMETER_ATTRIBUTE_CONSTRAININGCLASSIFIER = 3709;
+			static const int CLASSIFIERTEMPLATEPARAMETER_ATTRIBUTE_CONSTRAININGCLASSIFIER = 3809;
 			
-			static const int CLASSIFIERTEMPLATEPARAMETER_OPERATION_ACTUAL_IS_CLASSIFIER_EDIAGNOSTICCHAIN_EMAP = 3755;
-			static const int CLASSIFIERTEMPLATEPARAMETER_OPERATION_CONSTRAINING_CLASSIFIERS_CONSTRAIN_ARGS_EDIAGNOSTICCHAIN_EMAP = 3756;
-			static const int CLASSIFIERTEMPLATEPARAMETER_OPERATION_CONSTRAINING_CLASSIFIERS_CONSTRAIN_PARAMETERED_ELEMENT_EDIAGNOSTICCHAIN_EMAP = 3757;
-			static const int CLASSIFIERTEMPLATEPARAMETER_OPERATION_HAS_CONSTRAINING_CLASSIFIER_EDIAGNOSTICCHAIN_EMAP = 3752;
-			static const int CLASSIFIERTEMPLATEPARAMETER_OPERATION_MATCHING_ABSTRACT_EDIAGNOSTICCHAIN_EMAP = 3754;
-			static const int CLASSIFIERTEMPLATEPARAMETER_OPERATION_PARAMETERED_ELEMENT_NO_FEATURES_EDIAGNOSTICCHAIN_EMAP = 3753;
+			static const int CLASSIFIERTEMPLATEPARAMETER_OPERATION_ACTUAL_IS_CLASSIFIER_EDIAGNOSTICCHAIN_EMAP = 3856;
+			static const int CLASSIFIERTEMPLATEPARAMETER_OPERATION_CONSTRAINING_CLASSIFIERS_CONSTRAIN_ARGS_EDIAGNOSTICCHAIN_EMAP = 3857;
+			static const int CLASSIFIERTEMPLATEPARAMETER_OPERATION_CONSTRAINING_CLASSIFIERS_CONSTRAIN_PARAMETERED_ELEMENT_EDIAGNOSTICCHAIN_EMAP = 3858;
+			static const int CLASSIFIERTEMPLATEPARAMETER_OPERATION_HAS_CONSTRAINING_CLASSIFIER_EDIAGNOSTICCHAIN_EMAP = 3853;
+			static const int CLASSIFIERTEMPLATEPARAMETER_OPERATION_MATCHING_ABSTRACT_EDIAGNOSTICCHAIN_EMAP = 3855;
+			static const int CLASSIFIERTEMPLATEPARAMETER_OPERATION_PARAMETERED_ELEMENT_NO_FEATURES_EDIAGNOSTICCHAIN_EMAP = 3854;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getClassifierTemplateParameter_Class() const = 0;
@@ -1098,20 +1119,20 @@ namespace uml
 
 			// Begin Class Clause
 			//Class and Feature IDs 
-			static const unsigned int CLAUSE_CLASS = 38;
+			static const unsigned int CLAUSE_CLASS = 39;
 			static const unsigned int CLAUSE_CLASS_FEATURE_COUNT = 9;
-			static const unsigned int CLAUSE_CLASS_OPERATION_COUNT = 44;
+			static const unsigned int CLAUSE_CLASS_OPERATION_COUNT = 45;
 			
-			static const int CLAUSE_ATTRIBUTE_BODY = 3803;
-			static const int CLAUSE_ATTRIBUTE_BODYOUTPUT = 3804;
-			static const int CLAUSE_ATTRIBUTE_DECIDER = 3805;
-			static const int CLAUSE_ATTRIBUTE_PREDECESSORCLAUSE = 3806;
-			static const int CLAUSE_ATTRIBUTE_SUCCESSORCLAUSE = 3807;
-			static const int CLAUSE_ATTRIBUTE_TEST = 3808;
+			static const int CLAUSE_ATTRIBUTE_BODY = 3903;
+			static const int CLAUSE_ATTRIBUTE_BODYOUTPUT = 3904;
+			static const int CLAUSE_ATTRIBUTE_DECIDER = 3905;
+			static const int CLAUSE_ATTRIBUTE_PREDECESSORCLAUSE = 3906;
+			static const int CLAUSE_ATTRIBUTE_SUCCESSORCLAUSE = 3907;
+			static const int CLAUSE_ATTRIBUTE_TEST = 3908;
 			
-			static const int CLAUSE_OPERATION_BODY_OUTPUT_PINS_EDIAGNOSTICCHAIN_EMAP = 3850;
-			static const int CLAUSE_OPERATION_DECIDER_OUTPUT_EDIAGNOSTICCHAIN_EMAP = 3851;
-			static const int CLAUSE_OPERATION_TEST_AND_BODY_EDIAGNOSTICCHAIN_EMAP = 3852;
+			static const int CLAUSE_OPERATION_BODY_OUTPUT_PINS_EDIAGNOSTICCHAIN_EMAP = 3951;
+			static const int CLAUSE_OPERATION_DECIDER_OUTPUT_EDIAGNOSTICCHAIN_EMAP = 3952;
+			static const int CLAUSE_OPERATION_TEST_AND_BODY_EDIAGNOSTICCHAIN_EMAP = 3953;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getClause_Class() const = 0;
@@ -1133,15 +1154,15 @@ namespace uml
 
 			// Begin Class ClearAssociationAction
 			//Class and Feature IDs 
-			static const unsigned int CLEARASSOCIATIONACTION_CLASS = 39;
+			static const unsigned int CLEARASSOCIATIONACTION_CLASS = 40;
 			static const unsigned int CLEARASSOCIATIONACTION_CLASS_FEATURE_COUNT = 29;
-			static const unsigned int CLEARASSOCIATIONACTION_CLASS_OPERATION_COUNT = 67;
+			static const unsigned int CLEARASSOCIATIONACTION_CLASS_OPERATION_COUNT = 68;
 			
-			static const int CLEARASSOCIATIONACTION_ATTRIBUTE_ASSOCIATION = 3927;
-			static const int CLEARASSOCIATIONACTION_ATTRIBUTE_OBJECT = 3928;
+			static const int CLEARASSOCIATIONACTION_ATTRIBUTE_ASSOCIATION = 4027;
+			static const int CLEARASSOCIATIONACTION_ATTRIBUTE_OBJECT = 4028;
 			
-			static const int CLEARASSOCIATIONACTION_OPERATION_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP = 3994;
-			static const int CLEARASSOCIATIONACTION_OPERATION_SAME_TYPE_EDIAGNOSTICCHAIN_EMAP = 3995;
+			static const int CLEARASSOCIATIONACTION_OPERATION_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP = 4095;
+			static const int CLEARASSOCIATIONACTION_OPERATION_SAME_TYPE_EDIAGNOSTICCHAIN_EMAP = 4096;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getClearAssociationAction_Class() const = 0;
@@ -1158,14 +1179,14 @@ namespace uml
 
 			// Begin Class ClearStructuralFeatureAction
 			//Class and Feature IDs 
-			static const unsigned int CLEARSTRUCTURALFEATUREACTION_CLASS = 40;
+			static const unsigned int CLEARSTRUCTURALFEATUREACTION_CLASS = 41;
 			static const unsigned int CLEARSTRUCTURALFEATUREACTION_CLASS_FEATURE_COUNT = 30;
-			static const unsigned int CLEARSTRUCTURALFEATUREACTION_CLASS_OPERATION_COUNT = 72;
+			static const unsigned int CLEARSTRUCTURALFEATUREACTION_CLASS_OPERATION_COUNT = 73;
 			
-			static const int CLEARSTRUCTURALFEATUREACTION_ATTRIBUTE_RESULT = 4029;
+			static const int CLEARSTRUCTURALFEATUREACTION_ATTRIBUTE_RESULT = 4129;
 			
-			static const int CLEARSTRUCTURALFEATUREACTION_OPERATION_MULTIPLICITY_OF_RESULT_EDIAGNOSTICCHAIN_EMAP = 4101;
-			static const int CLEARSTRUCTURALFEATUREACTION_OPERATION_TYPE_OF_RESULT_EDIAGNOSTICCHAIN_EMAP = 4100;
+			static const int CLEARSTRUCTURALFEATUREACTION_OPERATION_MULTIPLICITY_OF_RESULT_EDIAGNOSTICCHAIN_EMAP = 4202;
+			static const int CLEARSTRUCTURALFEATUREACTION_OPERATION_TYPE_OF_RESULT_EDIAGNOSTICCHAIN_EMAP = 4201;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getClearStructuralFeatureAction_Class() const = 0;
@@ -1181,9 +1202,9 @@ namespace uml
 
 			// Begin Class ClearVariableAction
 			//Class and Feature IDs 
-			static const unsigned int CLEARVARIABLEACTION_CLASS = 41;
+			static const unsigned int CLEARVARIABLEACTION_CLASS = 42;
 			static const unsigned int CLEARVARIABLEACTION_CLASS_FEATURE_COUNT = 28;
-			static const unsigned int CLEARVARIABLEACTION_CLASS_OPERATION_COUNT = 66;
+			static const unsigned int CLEARVARIABLEACTION_CLASS_OPERATION_COUNT = 67;
 			
 			
 			
@@ -1198,11 +1219,11 @@ namespace uml
 
 			// Begin Class Collaboration
 			//Class and Feature IDs 
-			static const unsigned int COLLABORATION_CLASS = 42;
+			static const unsigned int COLLABORATION_CLASS = 43;
 			static const unsigned int COLLABORATION_CLASS_FEATURE_COUNT = 46;
-			static const unsigned int COLLABORATION_CLASS_OPERATION_COUNT = 114;
+			static const unsigned int COLLABORATION_CLASS_OPERATION_COUNT = 115;
 			
-			static const int COLLABORATION_ATTRIBUTE_COLLABORATIONROLE = 4245;
+			static const int COLLABORATION_ATTRIBUTE_COLLABORATIONROLE = 4345;
 			
 			
 			//Class and Feature Getter
@@ -1217,16 +1238,16 @@ namespace uml
 
 			// Begin Class CollaborationUse
 			//Class and Feature IDs 
-			static const unsigned int COLLABORATIONUSE_CLASS = 43;
+			static const unsigned int COLLABORATIONUSE_CLASS = 44;
 			static const unsigned int COLLABORATIONUSE_CLASS_FEATURE_COUNT = 11;
-			static const unsigned int COLLABORATIONUSE_CLASS_OPERATION_COUNT = 58;
+			static const unsigned int COLLABORATIONUSE_CLASS_OPERATION_COUNT = 59;
 			
-			static const int COLLABORATIONUSE_ATTRIBUTE_ROLEBINDING = 4309;
-			static const int COLLABORATIONUSE_ATTRIBUTE_TYPE = 4310;
+			static const int COLLABORATIONUSE_ATTRIBUTE_ROLEBINDING = 4409;
+			static const int COLLABORATIONUSE_ATTRIBUTE_TYPE = 4410;
 			
-			static const int COLLABORATIONUSE_OPERATION_CLIENT_ELEMENTS_EDIAGNOSTICCHAIN_EMAP = 4366;
-			static const int COLLABORATIONUSE_OPERATION_CONNECTORS_EDIAGNOSTICCHAIN_EMAP = 4368;
-			static const int COLLABORATIONUSE_OPERATION_EVERY_ROLE_EDIAGNOSTICCHAIN_EMAP = 4367;
+			static const int COLLABORATIONUSE_OPERATION_CLIENT_ELEMENTS_EDIAGNOSTICCHAIN_EMAP = 4467;
+			static const int COLLABORATIONUSE_OPERATION_CONNECTORS_EDIAGNOSTICCHAIN_EMAP = 4469;
+			static const int COLLABORATIONUSE_OPERATION_EVERY_ROLE_EDIAGNOSTICCHAIN_EMAP = 4468;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getCollaborationUse_Class() const = 0;
@@ -1244,17 +1265,17 @@ namespace uml
 
 			// Begin Class CombinedFragment
 			//Class and Feature IDs 
-			static const unsigned int COMBINEDFRAGMENT_CLASS = 44;
+			static const unsigned int COMBINEDFRAGMENT_CLASS = 45;
 			static const unsigned int COMBINEDFRAGMENT_CLASS_FEATURE_COUNT = 16;
-			static const unsigned int COMBINEDFRAGMENT_CLASS_OPERATION_COUNT = 58;
-			static const int COMBINEDFRAGMENT_ATTRIBUTE_INTERACTIONOPERATOR = 4414;
+			static const unsigned int COMBINEDFRAGMENT_CLASS_OPERATION_COUNT = 59;
+			static const int COMBINEDFRAGMENT_ATTRIBUTE_INTERACTIONOPERATOR = 4514;
 			
-			static const int COMBINEDFRAGMENT_ATTRIBUTE_CFRAGMENTGATE = 4413;
-			static const int COMBINEDFRAGMENT_ATTRIBUTE_OPERAND = 4415;
+			static const int COMBINEDFRAGMENT_ATTRIBUTE_CFRAGMENTGATE = 4513;
+			static const int COMBINEDFRAGMENT_ATTRIBUTE_OPERAND = 4515;
 			
-			static const int COMBINEDFRAGMENT_OPERATION_BREAK__EDIAGNOSTICCHAIN_EMAP = 4471;
-			static const int COMBINEDFRAGMENT_OPERATION_CONSIDER_AND_IGNORE_EDIAGNOSTICCHAIN_EMAP = 4472;
-			static const int COMBINEDFRAGMENT_OPERATION_OPT_LOOP_BREAK_NEG_EDIAGNOSTICCHAIN_EMAP = 4473;
+			static const int COMBINEDFRAGMENT_OPERATION_BREAK__EDIAGNOSTICCHAIN_EMAP = 4572;
+			static const int COMBINEDFRAGMENT_OPERATION_CONSIDER_AND_IGNORE_EDIAGNOSTICCHAIN_EMAP = 4573;
+			static const int COMBINEDFRAGMENT_OPERATION_OPT_LOOP_BREAK_NEG_EDIAGNOSTICCHAIN_EMAP = 4574;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getCombinedFragment_Class() const = 0;
@@ -1273,12 +1294,12 @@ namespace uml
 
 			// Begin Class Comment
 			//Class and Feature IDs 
-			static const unsigned int COMMENT_CLASS = 45;
+			static const unsigned int COMMENT_CLASS = 46;
 			static const unsigned int COMMENT_CLASS_FEATURE_COUNT = 5;
-			static const unsigned int COMMENT_CLASS_OPERATION_COUNT = 41;
-			static const int COMMENT_ATTRIBUTE_BODY = 4504;
+			static const unsigned int COMMENT_CLASS_OPERATION_COUNT = 42;
+			static const int COMMENT_ATTRIBUTE_BODY = 4604;
 			
-			static const int COMMENT_ATTRIBUTE_ANNOTATEDELEMENT = 4503;
+			static const int COMMENT_ATTRIBUTE_ANNOTATEDELEMENT = 4603;
 			
 			
 			//Class and Feature Getter
@@ -1294,9 +1315,9 @@ namespace uml
 
 			// Begin Class CommunicationPath
 			//Class and Feature IDs 
-			static const unsigned int COMMUNICATIONPATH_CLASS = 46;
+			static const unsigned int COMMUNICATIONPATH_CLASS = 47;
 			static const unsigned int COMMUNICATIONPATH_CLASS_FEATURE_COUNT = 44;
-			static const unsigned int COMMUNICATIONPATH_CLASS_OPERATION_COUNT = 115;
+			static const unsigned int COMMUNICATIONPATH_CLASS_OPERATION_COUNT = 116;
 			
 			
 			
@@ -1311,24 +1332,24 @@ namespace uml
 
 			// Begin Class Component
 			//Class and Feature IDs 
-			static const unsigned int COMPONENT_CLASS = 47;
+			static const unsigned int COMPONENT_CLASS = 48;
 			static const unsigned int COMPONENT_CLASS_FEATURE_COUNT = 57;
-			static const unsigned int COMPONENT_CLASS_OPERATION_COUNT = 128;
-			static const int COMPONENT_ATTRIBUTE_ISINDIRECTLYINSTANTIATED = 4752;
+			static const unsigned int COMPONENT_CLASS_OPERATION_COUNT = 129;
+			static const int COMPONENT_ATTRIBUTE_ISINDIRECTLYINSTANTIATED = 4852;
 			
-			static const int COMPONENT_ATTRIBUTE_PACKAGEDELEMENT = 4753;
-			static const int COMPONENT_ATTRIBUTE_PROVIDED = 4754;
-			static const int COMPONENT_ATTRIBUTE_REALIZATION = 4755;
-			static const int COMPONENT_ATTRIBUTE_REQUIRED = 4756;
+			static const int COMPONENT_ATTRIBUTE_PACKAGEDELEMENT = 4853;
+			static const int COMPONENT_ATTRIBUTE_PROVIDED = 4854;
+			static const int COMPONENT_ATTRIBUTE_REALIZATION = 4855;
+			static const int COMPONENT_ATTRIBUTE_REQUIRED = 4856;
 			
-			static const int COMPONENT_OPERATION_CREATEOWNEDCLASS_STRING_BOOLEAN = 4879;
-			static const int COMPONENT_OPERATION_CREATEOWNEDENUMERATION_STRING = 4880;
-			static const int COMPONENT_OPERATION_CREATEOWNEDINTERFACE_STRING = 4881;
-			static const int COMPONENT_OPERATION_CREATEOWNEDPRIMITIVETYPE_STRING = 4882;
-			static const int COMPONENT_OPERATION_GETPROVIDEDS = 4883;
-			static const int COMPONENT_OPERATION_GETREQUIREDS = 4884;
-			static const int COMPONENT_OPERATION_NO_NESTED_CLASSIFIERS_EDIAGNOSTICCHAIN_EMAP = 4877;
-			static const int COMPONENT_OPERATION_NO_PACKAGED_ELEMENTS_EDIAGNOSTICCHAIN_EMAP = 4878;
+			static const int COMPONENT_OPERATION_CREATEOWNEDCLASS_STRING_BOOLEAN = 4980;
+			static const int COMPONENT_OPERATION_CREATEOWNEDENUMERATION_STRING = 4981;
+			static const int COMPONENT_OPERATION_CREATEOWNEDINTERFACE_STRING = 4982;
+			static const int COMPONENT_OPERATION_CREATEOWNEDPRIMITIVETYPE_STRING = 4983;
+			static const int COMPONENT_OPERATION_GETPROVIDEDS = 4984;
+			static const int COMPONENT_OPERATION_GETREQUIREDS = 4985;
+			static const int COMPONENT_OPERATION_NO_NESTED_CLASSIFIERS_EDIAGNOSTICCHAIN_EMAP = 4978;
+			static const int COMPONENT_OPERATION_NO_PACKAGED_ELEMENTS_EDIAGNOSTICCHAIN_EMAP = 4979;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getComponent_Class() const = 0;
@@ -1354,12 +1375,12 @@ namespace uml
 
 			// Begin Class ComponentRealization
 			//Class and Feature IDs 
-			static const unsigned int COMPONENTREALIZATION_CLASS = 48;
+			static const unsigned int COMPONENTREALIZATION_CLASS = 49;
 			static const unsigned int COMPONENTREALIZATION_CLASS_FEATURE_COUNT = 20;
-			static const unsigned int COMPONENTREALIZATION_CLASS_OPERATION_COUNT = 58;
+			static const unsigned int COMPONENTREALIZATION_CLASS_OPERATION_COUNT = 59;
 			
-			static const int COMPONENTREALIZATION_ATTRIBUTE_ABSTRACTION = 4819;
-			static const int COMPONENTREALIZATION_ATTRIBUTE_REALIZINGCLASSIFIER = 4818;
+			static const int COMPONENTREALIZATION_ATTRIBUTE_ABSTRACTION = 4919;
+			static const int COMPONENTREALIZATION_ATTRIBUTE_REALIZINGCLASSIFIER = 4918;
 			
 			
 			//Class and Feature Getter
@@ -1375,21 +1396,21 @@ namespace uml
 
 			// Begin Class ConditionalNode
 			//Class and Feature IDs 
-			static const unsigned int CONDITIONALNODE_CLASS = 49;
+			static const unsigned int CONDITIONALNODE_CLASS = 50;
 			static const unsigned int CONDITIONALNODE_CLASS_FEATURE_COUNT = 48;
-			static const unsigned int CONDITIONALNODE_CLASS_OPERATION_COUNT = 91;
-			static const int CONDITIONALNODE_ATTRIBUTE_ISASSURED = 4945;
-			static const int CONDITIONALNODE_ATTRIBUTE_ISDETERMINATE = 4946;
+			static const unsigned int CONDITIONALNODE_CLASS_OPERATION_COUNT = 92;
+			static const int CONDITIONALNODE_ATTRIBUTE_ISASSURED = 5045;
+			static const int CONDITIONALNODE_ATTRIBUTE_ISDETERMINATE = 5046;
 			
-			static const int CONDITIONALNODE_ATTRIBUTE_CLAUSE = 4944;
-			static const int CONDITIONALNODE_ATTRIBUTE_RESULT = 4947;
+			static const int CONDITIONALNODE_ATTRIBUTE_CLAUSE = 5044;
+			static const int CONDITIONALNODE_ATTRIBUTE_RESULT = 5047;
 			
-			static const int CONDITIONALNODE_OPERATION_CLAUSE_NO_PREDECESSOR_EDIAGNOSTICCHAIN_EMAP = 5038;
-			static const int CONDITIONALNODE_OPERATION_EXECUTABLE_NODES_EDIAGNOSTICCHAIN_EMAP = 5037;
-			static const int CONDITIONALNODE_OPERATION_MATCHING_OUTPUT_PINS_EDIAGNOSTICCHAIN_EMAP = 5036;
-			static const int CONDITIONALNODE_OPERATION_NO_INPUT_PINS_EDIAGNOSTICCHAIN_EMAP = 5034;
-			static const int CONDITIONALNODE_OPERATION_ONE_CLAUSE_WITH_EXECUTABLE_NODE_EDIAGNOSTICCHAIN_EMAP = 5035;
-			static const int CONDITIONALNODE_OPERATION_RESULT_NO_INCOMING_EDIAGNOSTICCHAIN_EMAP = 5033;
+			static const int CONDITIONALNODE_OPERATION_CLAUSE_NO_PREDECESSOR_EDIAGNOSTICCHAIN_EMAP = 5139;
+			static const int CONDITIONALNODE_OPERATION_EXECUTABLE_NODES_EDIAGNOSTICCHAIN_EMAP = 5138;
+			static const int CONDITIONALNODE_OPERATION_MATCHING_OUTPUT_PINS_EDIAGNOSTICCHAIN_EMAP = 5137;
+			static const int CONDITIONALNODE_OPERATION_NO_INPUT_PINS_EDIAGNOSTICCHAIN_EMAP = 5135;
+			static const int CONDITIONALNODE_OPERATION_ONE_CLAUSE_WITH_EXECUTABLE_NODE_EDIAGNOSTICCHAIN_EMAP = 5136;
+			static const int CONDITIONALNODE_OPERATION_RESULT_NO_INCOMING_EDIAGNOSTICCHAIN_EMAP = 5134;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getConditionalNode_Class() const = 0;
@@ -1412,13 +1433,13 @@ namespace uml
 
 			// Begin Class ConnectableElement
 			//Class and Feature IDs 
-			static const unsigned int CONNECTABLEELEMENT_CLASS = 50;
+			static const unsigned int CONNECTABLEELEMENT_CLASS = 51;
 			static const unsigned int CONNECTABLEELEMENT_CLASS_FEATURE_COUNT = 13;
-			static const unsigned int CONNECTABLEELEMENT_CLASS_OPERATION_COUNT = 58;
+			static const unsigned int CONNECTABLEELEMENT_CLASS_OPERATION_COUNT = 59;
 			
-			static const int CONNECTABLEELEMENT_ATTRIBUTE_END = 5012;
+			static const int CONNECTABLEELEMENT_ATTRIBUTE_END = 5112;
 			
-			static const int CONNECTABLEELEMENT_OPERATION_GETENDS = 5070;
+			static const int CONNECTABLEELEMENT_OPERATION_GETENDS = 5171;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getConnectableElement_Class() const = 0;
@@ -1433,9 +1454,9 @@ namespace uml
 
 			// Begin Class ConnectableElementTemplateParameter
 			//Class and Feature IDs 
-			static const unsigned int CONNECTABLEELEMENTTEMPLATEPARAMETER_CLASS = 51;
+			static const unsigned int CONNECTABLEELEMENTTEMPLATEPARAMETER_CLASS = 52;
 			static const unsigned int CONNECTABLEELEMENTTEMPLATEPARAMETER_CLASS_FEATURE_COUNT = 8;
-			static const unsigned int CONNECTABLEELEMENTTEMPLATEPARAMETER_CLASS_OPERATION_COUNT = 42;
+			static const unsigned int CONNECTABLEELEMENTTEMPLATEPARAMETER_CLASS_OPERATION_COUNT = 43;
 			
 			
 			
@@ -1450,16 +1471,16 @@ namespace uml
 
 			// Begin Class ConnectionPointReference
 			//Class and Feature IDs 
-			static const unsigned int CONNECTIONPOINTREFERENCE_CLASS = 52;
+			static const unsigned int CONNECTIONPOINTREFERENCE_CLASS = 53;
 			static const unsigned int CONNECTIONPOINTREFERENCE_CLASS_FEATURE_COUNT = 15;
-			static const unsigned int CONNECTIONPOINTREFERENCE_CLASS_OPERATION_COUNT = 62;
+			static const unsigned int CONNECTIONPOINTREFERENCE_CLASS_OPERATION_COUNT = 63;
 			
-			static const int CONNECTIONPOINTREFERENCE_ATTRIBUTE_ENTRY = 5212;
-			static const int CONNECTIONPOINTREFERENCE_ATTRIBUTE_EXIT = 5213;
-			static const int CONNECTIONPOINTREFERENCE_ATTRIBUTE_STATE = 5214;
+			static const int CONNECTIONPOINTREFERENCE_ATTRIBUTE_ENTRY = 5312;
+			static const int CONNECTIONPOINTREFERENCE_ATTRIBUTE_EXIT = 5313;
+			static const int CONNECTIONPOINTREFERENCE_ATTRIBUTE_STATE = 5314;
 			
-			static const int CONNECTIONPOINTREFERENCE_OPERATION_ENTRY_PSEUDOSTATES_EDIAGNOSTICCHAIN_EMAP = 5276;
-			static const int CONNECTIONPOINTREFERENCE_OPERATION_EXIT_PSEUDOSTATES_EDIAGNOSTICCHAIN_EMAP = 5275;
+			static const int CONNECTIONPOINTREFERENCE_OPERATION_ENTRY_PSEUDOSTATES_EDIAGNOSTICCHAIN_EMAP = 5377;
+			static const int CONNECTIONPOINTREFERENCE_OPERATION_EXIT_PSEUDOSTATES_EDIAGNOSTICCHAIN_EMAP = 5376;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getConnectionPointReference_Class() const = 0;
@@ -1477,19 +1498,19 @@ namespace uml
 
 			// Begin Class Connector
 			//Class and Feature IDs 
-			static const unsigned int CONNECTOR_CLASS = 53;
+			static const unsigned int CONNECTOR_CLASS = 54;
 			static const unsigned int CONNECTOR_CLASS_FEATURE_COUNT = 19;
-			static const unsigned int CONNECTOR_CLASS_OPERATION_COUNT = 63;
-			static const int CONNECTOR_ATTRIBUTE_KIND = 5316;
+			static const unsigned int CONNECTOR_CLASS_OPERATION_COUNT = 64;
+			static const int CONNECTOR_ATTRIBUTE_KIND = 5416;
 			
-			static const int CONNECTOR_ATTRIBUTE_CONTRACT = 5314;
-			static const int CONNECTOR_ATTRIBUTE_END = 5315;
-			static const int CONNECTOR_ATTRIBUTE_REDEFINEDCONNECTOR = 5317;
-			static const int CONNECTOR_ATTRIBUTE_TYPE = 5318;
+			static const int CONNECTOR_ATTRIBUTE_CONTRACT = 5414;
+			static const int CONNECTOR_ATTRIBUTE_END = 5415;
+			static const int CONNECTOR_ATTRIBUTE_REDEFINEDCONNECTOR = 5417;
+			static const int CONNECTOR_ATTRIBUTE_TYPE = 5418;
 			
-			static const int CONNECTOR_OPERATION_GETKIND = 5381;
-			static const int CONNECTOR_OPERATION_ROLES_EDIAGNOSTICCHAIN_EMAP = 5380;
-			static const int CONNECTOR_OPERATION_TYPES_EDIAGNOSTICCHAIN_EMAP = 5379;
+			static const int CONNECTOR_OPERATION_GETKIND = 5482;
+			static const int CONNECTOR_OPERATION_ROLES_EDIAGNOSTICCHAIN_EMAP = 5481;
+			static const int CONNECTOR_OPERATION_TYPES_EDIAGNOSTICCHAIN_EMAP = 5480;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getConnector_Class() const = 0;
@@ -1510,19 +1531,19 @@ namespace uml
 
 			// Begin Class ConnectorEnd
 			//Class and Feature IDs 
-			static const unsigned int CONNECTOREND_CLASS = 54;
+			static const unsigned int CONNECTOREND_CLASS = 55;
 			static const unsigned int CONNECTOREND_CLASS_FEATURE_COUNT = 12;
-			static const unsigned int CONNECTOREND_CLASS_OPERATION_COUNT = 58;
+			static const unsigned int CONNECTOREND_CLASS_OPERATION_COUNT = 59;
 			
-			static const int CONNECTOREND_ATTRIBUTE_DEFININGEND = 5409;
-			static const int CONNECTOREND_ATTRIBUTE_PARTWITHPORT = 5410;
-			static const int CONNECTOREND_ATTRIBUTE_ROLE = 5411;
+			static const int CONNECTOREND_ATTRIBUTE_DEFININGEND = 5509;
+			static const int CONNECTOREND_ATTRIBUTE_PARTWITHPORT = 5510;
+			static const int CONNECTOREND_ATTRIBUTE_ROLE = 5511;
 			
-			static const int CONNECTOREND_OPERATION_GETDEFININGEND = 5469;
-			static const int CONNECTOREND_OPERATION_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP = 5467;
-			static const int CONNECTOREND_OPERATION_PART_WITH_PORT_EMPTY_EDIAGNOSTICCHAIN_EMAP = 5466;
-			static const int CONNECTOREND_OPERATION_ROLE_AND_PART_WITH_PORT_EDIAGNOSTICCHAIN_EMAP = 5465;
-			static const int CONNECTOREND_OPERATION_SELF_PART_WITH_PORT_EDIAGNOSTICCHAIN_EMAP = 5468;
+			static const int CONNECTOREND_OPERATION_GETDEFININGEND = 5570;
+			static const int CONNECTOREND_OPERATION_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP = 5568;
+			static const int CONNECTOREND_OPERATION_PART_WITH_PORT_EMPTY_EDIAGNOSTICCHAIN_EMAP = 5567;
+			static const int CONNECTOREND_OPERATION_ROLE_AND_PART_WITH_PORT_EDIAGNOSTICCHAIN_EMAP = 5566;
+			static const int CONNECTOREND_OPERATION_SELF_PART_WITH_PORT_EDIAGNOSTICCHAIN_EMAP = 5569;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getConnectorEnd_Class() const = 0;
@@ -1543,14 +1564,14 @@ namespace uml
 
 			// Begin Class ConsiderIgnoreFragment
 			//Class and Feature IDs 
-			static const unsigned int CONSIDERIGNOREFRAGMENT_CLASS = 56;
+			static const unsigned int CONSIDERIGNOREFRAGMENT_CLASS = 57;
 			static const unsigned int CONSIDERIGNOREFRAGMENT_CLASS_FEATURE_COUNT = 17;
-			static const unsigned int CONSIDERIGNOREFRAGMENT_CLASS_OPERATION_COUNT = 60;
+			static const unsigned int CONSIDERIGNOREFRAGMENT_CLASS_OPERATION_COUNT = 61;
 			
-			static const int CONSIDERIGNOREFRAGMENT_ATTRIBUTE_MESSAGE = 5616;
+			static const int CONSIDERIGNOREFRAGMENT_ATTRIBUTE_MESSAGE = 5716;
 			
-			static const int CONSIDERIGNOREFRAGMENT_OPERATION_CONSIDER_OR_IGNORE_EDIAGNOSTICCHAIN_EMAP = 5675;
-			static const int CONSIDERIGNOREFRAGMENT_OPERATION_TYPE_EDIAGNOSTICCHAIN_EMAP = 5676;
+			static const int CONSIDERIGNOREFRAGMENT_OPERATION_CONSIDER_OR_IGNORE_EDIAGNOSTICCHAIN_EMAP = 5776;
+			static const int CONSIDERIGNOREFRAGMENT_OPERATION_TYPE_EDIAGNOSTICCHAIN_EMAP = 5777;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getConsiderIgnoreFragment_Class() const = 0;
@@ -1566,17 +1587,17 @@ namespace uml
 
 			// Begin Class Constraint
 			//Class and Feature IDs 
-			static const unsigned int CONSTRAINT_CLASS = 57;
+			static const unsigned int CONSTRAINT_CLASS = 58;
 			static const unsigned int CONSTRAINT_CLASS_FEATURE_COUNT = 15;
-			static const unsigned int CONSTRAINT_CLASS_OPERATION_COUNT = 61;
+			static const unsigned int CONSTRAINT_CLASS_OPERATION_COUNT = 62;
 			
-			static const int CONSTRAINT_ATTRIBUTE_CONSTRAINEDELEMENT = 5712;
-			static const int CONSTRAINT_ATTRIBUTE_CONTEXT = 5713;
-			static const int CONSTRAINT_ATTRIBUTE_SPECIFICATION = 5714;
+			static const int CONSTRAINT_ATTRIBUTE_CONSTRAINEDELEMENT = 5812;
+			static const int CONSTRAINT_ATTRIBUTE_CONTEXT = 5813;
+			static const int CONSTRAINT_ATTRIBUTE_SPECIFICATION = 5814;
 			
-			static const int CONSTRAINT_OPERATION_BOOLEAN_VALUE_EDIAGNOSTICCHAIN_EMAP = 5773;
-			static const int CONSTRAINT_OPERATION_NO_SIDE_EFFECTS_EDIAGNOSTICCHAIN_EMAP = 5774;
-			static const int CONSTRAINT_OPERATION_NOT_APPLY_TO_SELF_EDIAGNOSTICCHAIN_EMAP = 5775;
+			static const int CONSTRAINT_OPERATION_BOOLEAN_VALUE_EDIAGNOSTICCHAIN_EMAP = 5874;
+			static const int CONSTRAINT_OPERATION_NO_SIDE_EFFECTS_EDIAGNOSTICCHAIN_EMAP = 5875;
+			static const int CONSTRAINT_OPERATION_NOT_APPLY_TO_SELF_EDIAGNOSTICCHAIN_EMAP = 5876;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getConstraint_Class() const = 0;
@@ -1595,15 +1616,15 @@ namespace uml
 
 			// Begin Class Continuation
 			//Class and Feature IDs 
-			static const unsigned int CONTINUATION_CLASS = 58;
+			static const unsigned int CONTINUATION_CLASS = 59;
 			static const unsigned int CONTINUATION_CLASS_FEATURE_COUNT = 14;
-			static const unsigned int CONTINUATION_CLASS_OPERATION_COUNT = 58;
-			static const int CONTINUATION_ATTRIBUTE_SETTING = 5813;
+			static const unsigned int CONTINUATION_CLASS_OPERATION_COUNT = 59;
+			static const int CONTINUATION_ATTRIBUTE_SETTING = 5913;
 			
 			
-			static const int CONTINUATION_OPERATION_FIRST_OR_LAST_INTERACTION_FRAGMENT_EDIAGNOSTICCHAIN_EMAP = 5869;
-			static const int CONTINUATION_OPERATION_GLOBAL_EDIAGNOSTICCHAIN_EMAP = 5871;
-			static const int CONTINUATION_OPERATION_SAME_NAME_EDIAGNOSTICCHAIN_EMAP = 5870;
+			static const int CONTINUATION_OPERATION_FIRST_OR_LAST_INTERACTION_FRAGMENT_EDIAGNOSTICCHAIN_EMAP = 5970;
+			static const int CONTINUATION_OPERATION_GLOBAL_EDIAGNOSTICCHAIN_EMAP = 5972;
+			static const int CONTINUATION_OPERATION_SAME_NAME_EDIAGNOSTICCHAIN_EMAP = 5971;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getContinuation_Class() const = 0;
@@ -1620,12 +1641,12 @@ namespace uml
 
 			// Begin Class ControlFlow
 			//Class and Feature IDs 
-			static const unsigned int CONTROLFLOW_CLASS = 59;
+			static const unsigned int CONTROLFLOW_CLASS = 60;
 			static const unsigned int CONTROLFLOW_CLASS_FEATURE_COUNT = 22;
-			static const unsigned int CONTROLFLOW_CLASS_OPERATION_COUNT = 62;
+			static const unsigned int CONTROLFLOW_CLASS_OPERATION_COUNT = 63;
 			
 			
-			static const int CONTROLFLOW_OPERATION_OBJECT_NODES_EDIAGNOSTICCHAIN_EMAP = 5983;
+			static const int CONTROLFLOW_OPERATION_OBJECT_NODES_EDIAGNOSTICCHAIN_EMAP = 6084;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getControlFlow_Class() const = 0;
@@ -1639,9 +1660,9 @@ namespace uml
 
 			// Begin Class ControlNode
 			//Class and Feature IDs 
-			static const unsigned int CONTROLNODE_CLASS = 60;
+			static const unsigned int CONTROLNODE_CLASS = 61;
 			static const unsigned int CONTROLNODE_CLASS_FEATURE_COUNT = 20;
-			static const unsigned int CONTROLNODE_CLASS_OPERATION_COUNT = 61;
+			static const unsigned int CONTROLNODE_CLASS_OPERATION_COUNT = 62;
 			
 			
 			
@@ -1656,12 +1677,12 @@ namespace uml
 
 			// Begin Class CreateLinkAction
 			//Class and Feature IDs 
-			static const unsigned int CREATELINKACTION_CLASS = 61;
+			static const unsigned int CREATELINKACTION_CLASS = 62;
 			static const unsigned int CREATELINKACTION_CLASS_FEATURE_COUNT = 29;
-			static const unsigned int CREATELINKACTION_CLASS_OPERATION_COUNT = 71;
+			static const unsigned int CREATELINKACTION_CLASS_OPERATION_COUNT = 72;
 			
 			
-			static const int CREATELINKACTION_OPERATION_ASSOCIATION_NOT_ABSTRACT_EDIAGNOSTICCHAIN_EMAP = 6199;
+			static const int CREATELINKACTION_OPERATION_ASSOCIATION_NOT_ABSTRACT_EDIAGNOSTICCHAIN_EMAP = 6300;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getCreateLinkAction_Class() const = 0;
@@ -1675,15 +1696,15 @@ namespace uml
 
 			// Begin Class CreateLinkObjectAction
 			//Class and Feature IDs 
-			static const unsigned int CREATELINKOBJECTACTION_CLASS = 62;
+			static const unsigned int CREATELINKOBJECTACTION_CLASS = 63;
 			static const unsigned int CREATELINKOBJECTACTION_CLASS_FEATURE_COUNT = 30;
-			static const unsigned int CREATELINKOBJECTACTION_CLASS_OPERATION_COUNT = 74;
+			static const unsigned int CREATELINKOBJECTACTION_CLASS_OPERATION_COUNT = 75;
 			
-			static const int CREATELINKOBJECTACTION_ATTRIBUTE_RESULT = 6229;
+			static const int CREATELINKOBJECTACTION_ATTRIBUTE_RESULT = 6329;
 			
-			static const int CREATELINKOBJECTACTION_OPERATION_ASSOCIATION_CLASS_EDIAGNOSTICCHAIN_EMAP = 6303;
-			static const int CREATELINKOBJECTACTION_OPERATION_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP = 6301;
-			static const int CREATELINKOBJECTACTION_OPERATION_TYPE_OF_RESULT_EDIAGNOSTICCHAIN_EMAP = 6302;
+			static const int CREATELINKOBJECTACTION_OPERATION_ASSOCIATION_CLASS_EDIAGNOSTICCHAIN_EMAP = 6404;
+			static const int CREATELINKOBJECTACTION_OPERATION_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP = 6402;
+			static const int CREATELINKOBJECTACTION_OPERATION_TYPE_OF_RESULT_EDIAGNOSTICCHAIN_EMAP = 6403;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getCreateLinkObjectAction_Class() const = 0;
@@ -1700,17 +1721,17 @@ namespace uml
 
 			// Begin Class CreateObjectAction
 			//Class and Feature IDs 
-			static const unsigned int CREATEOBJECTACTION_CLASS = 63;
+			static const unsigned int CREATEOBJECTACTION_CLASS = 64;
 			static const unsigned int CREATEOBJECTACTION_CLASS_FEATURE_COUNT = 29;
-			static const unsigned int CREATEOBJECTACTION_CLASS_OPERATION_COUNT = 69;
+			static const unsigned int CREATEOBJECTACTION_CLASS_OPERATION_COUNT = 70;
 			
-			static const int CREATEOBJECTACTION_ATTRIBUTE_CLASSIFIER = 6327;
-			static const int CREATEOBJECTACTION_ATTRIBUTE_RESULT = 6328;
+			static const int CREATEOBJECTACTION_ATTRIBUTE_CLASSIFIER = 6427;
+			static const int CREATEOBJECTACTION_ATTRIBUTE_RESULT = 6428;
 			
-			static const int CREATEOBJECTACTION_OPERATION_CLASSIFIER_NOT_ABSTRACT_EDIAGNOSTICCHAIN_EMAP = 6394;
-			static const int CREATEOBJECTACTION_OPERATION_CLASSIFIER_NOT_ASSOCIATION_CLASS_EDIAGNOSTICCHAIN_EMAP = 6396;
-			static const int CREATEOBJECTACTION_OPERATION_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP = 6395;
-			static const int CREATEOBJECTACTION_OPERATION_SAME_TYPE_EDIAGNOSTICCHAIN_EMAP = 6397;
+			static const int CREATEOBJECTACTION_OPERATION_CLASSIFIER_NOT_ABSTRACT_EDIAGNOSTICCHAIN_EMAP = 6495;
+			static const int CREATEOBJECTACTION_OPERATION_CLASSIFIER_NOT_ASSOCIATION_CLASS_EDIAGNOSTICCHAIN_EMAP = 6497;
+			static const int CREATEOBJECTACTION_OPERATION_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP = 6496;
+			static const int CREATEOBJECTACTION_OPERATION_SAME_TYPE_EDIAGNOSTICCHAIN_EMAP = 6498;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getCreateObjectAction_Class() const = 0;
@@ -1729,9 +1750,9 @@ namespace uml
 
 			// Begin Class DataStoreNode
 			//Class and Feature IDs 
-			static const unsigned int DATASTORENODE_CLASS = 64;
+			static const unsigned int DATASTORENODE_CLASS = 65;
 			static const unsigned int DATASTORENODE_CLASS_FEATURE_COUNT = 26;
-			static const unsigned int DATASTORENODE_CLASS_OPERATION_COUNT = 64;
+			static const unsigned int DATASTORENODE_CLASS_OPERATION_COUNT = 65;
 			
 			
 			
@@ -1746,15 +1767,15 @@ namespace uml
 
 			// Begin Class DataType
 			//Class and Feature IDs 
-			static const unsigned int DATATYPE_CLASS = 65;
+			static const unsigned int DATATYPE_CLASS = 66;
 			static const unsigned int DATATYPE_CLASS_FEATURE_COUNT = 40;
-			static const unsigned int DATATYPE_CLASS_OPERATION_COUNT = 110;
+			static const unsigned int DATATYPE_CLASS_OPERATION_COUNT = 111;
 			
-			static const int DATATYPE_ATTRIBUTE_OWNEDATTRIBUTE = 6538;
-			static const int DATATYPE_ATTRIBUTE_OWNEDOPERATION = 6539;
+			static const int DATATYPE_ATTRIBUTE_OWNEDATTRIBUTE = 6638;
+			static const int DATATYPE_ATTRIBUTE_OWNEDOPERATION = 6639;
 			
-			static const int DATATYPE_OPERATION_CREATEOWNEDATTRIBUTE_STRING_UNLIMITEDNATURAL = 6648;
-			static const int DATATYPE_OPERATION_CREATEOWNEDOPERATION_STRING_TYPE = 6649;
+			static const int DATATYPE_OPERATION_CREATEOWNEDATTRIBUTE_STRING_UNLIMITEDNATURAL = 6749;
+			static const int DATATYPE_OPERATION_CREATEOWNEDOPERATION_STRING_TYPE = 6750;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getDataType_Class() const = 0;
@@ -1771,21 +1792,21 @@ namespace uml
 
 			// Begin Class DecisionNode
 			//Class and Feature IDs 
-			static const unsigned int DECISIONNODE_CLASS = 66;
+			static const unsigned int DECISIONNODE_CLASS = 67;
 			static const unsigned int DECISIONNODE_CLASS_FEATURE_COUNT = 22;
-			static const unsigned int DECISIONNODE_CLASS_OPERATION_COUNT = 69;
+			static const unsigned int DECISIONNODE_CLASS_OPERATION_COUNT = 70;
 			
-			static const int DECISIONNODE_ATTRIBUTE_DECISIONINPUT = 6620;
-			static const int DECISIONNODE_ATTRIBUTE_DECISIONINPUTFLOW = 6621;
+			static const int DECISIONNODE_ATTRIBUTE_DECISIONINPUT = 6720;
+			static const int DECISIONNODE_ATTRIBUTE_DECISIONINPUTFLOW = 6721;
 			
-			static const int DECISIONNODE_OPERATION_DECISION_INPUT_FLOW_INCOMING_EDIAGNOSTICCHAIN_EMAP = 6685;
-			static const int DECISIONNODE_OPERATION_EDGES_EDIAGNOSTICCHAIN_EMAP = 6684;
-			static const int DECISIONNODE_OPERATION_INCOMING_CONTROL_ONE_INPUT_PARAMETER_EDIAGNOSTICCHAIN_EMAP = 6688;
-			static const int DECISIONNODE_OPERATION_INCOMING_OBJECT_ONE_INPUT_PARAMETER_EDIAGNOSTICCHAIN_EMAP = 6690;
-			static const int DECISIONNODE_OPERATION_INCOMING_OUTGOING_EDGES_EDIAGNOSTICCHAIN_EMAP = 6687;
-			static const int DECISIONNODE_OPERATION_PARAMETERS_EDIAGNOSTICCHAIN_EMAP = 6689;
-			static const int DECISIONNODE_OPERATION_TWO_INPUT_PARAMETERS_EDIAGNOSTICCHAIN_EMAP = 6686;
-			static const int DECISIONNODE_OPERATION_ZERO_INPUT_PARAMETERS_EDIAGNOSTICCHAIN_EMAP = 6683;
+			static const int DECISIONNODE_OPERATION_DECISION_INPUT_FLOW_INCOMING_EDIAGNOSTICCHAIN_EMAP = 6786;
+			static const int DECISIONNODE_OPERATION_EDGES_EDIAGNOSTICCHAIN_EMAP = 6785;
+			static const int DECISIONNODE_OPERATION_INCOMING_CONTROL_ONE_INPUT_PARAMETER_EDIAGNOSTICCHAIN_EMAP = 6789;
+			static const int DECISIONNODE_OPERATION_INCOMING_OBJECT_ONE_INPUT_PARAMETER_EDIAGNOSTICCHAIN_EMAP = 6791;
+			static const int DECISIONNODE_OPERATION_INCOMING_OUTGOING_EDGES_EDIAGNOSTICCHAIN_EMAP = 6788;
+			static const int DECISIONNODE_OPERATION_PARAMETERS_EDIAGNOSTICCHAIN_EMAP = 6790;
+			static const int DECISIONNODE_OPERATION_TWO_INPUT_PARAMETERS_EDIAGNOSTICCHAIN_EMAP = 6787;
+			static const int DECISIONNODE_OPERATION_ZERO_INPUT_PARAMETERS_EDIAGNOSTICCHAIN_EMAP = 6784;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getDecisionNode_Class() const = 0;
@@ -1808,12 +1829,12 @@ namespace uml
 
 			// Begin Class Dependency
 			//Class and Feature IDs 
-			static const unsigned int DEPENDENCY_CLASS = 67;
+			static const unsigned int DEPENDENCY_CLASS = 68;
 			static const unsigned int DEPENDENCY_CLASS_FEATURE_COUNT = 17;
-			static const unsigned int DEPENDENCY_CLASS_OPERATION_COUNT = 58;
+			static const unsigned int DEPENDENCY_CLASS_OPERATION_COUNT = 59;
 			
-			static const int DEPENDENCY_ATTRIBUTE_CLIENT = 6715;
-			static const int DEPENDENCY_ATTRIBUTE_SUPPLIER = 6716;
+			static const int DEPENDENCY_ATTRIBUTE_CLIENT = 6815;
+			static const int DEPENDENCY_ATTRIBUTE_SUPPLIER = 6816;
 			
 			
 			//Class and Feature Getter
@@ -1829,9 +1850,9 @@ namespace uml
 
 			// Begin Class DeployedArtifact
 			//Class and Feature IDs 
-			static const unsigned int DEPLOYEDARTIFACT_CLASS = 68;
+			static const unsigned int DEPLOYEDARTIFACT_CLASS = 69;
 			static const unsigned int DEPLOYEDARTIFACT_CLASS_FEATURE_COUNT = 9;
-			static const unsigned int DEPLOYEDARTIFACT_CLASS_OPERATION_COUNT = 55;
+			static const unsigned int DEPLOYEDARTIFACT_CLASS_OPERATION_COUNT = 56;
 			
 			
 			
@@ -1846,13 +1867,13 @@ namespace uml
 
 			// Begin Class Deployment
 			//Class and Feature IDs 
-			static const unsigned int DEPLOYMENT_CLASS = 69;
+			static const unsigned int DEPLOYMENT_CLASS = 70;
 			static const unsigned int DEPLOYMENT_CLASS_FEATURE_COUNT = 20;
-			static const unsigned int DEPLOYMENT_CLASS_OPERATION_COUNT = 58;
+			static const unsigned int DEPLOYMENT_CLASS_OPERATION_COUNT = 59;
 			
-			static const int DEPLOYMENT_ATTRIBUTE_CONFIGURATION = 6917;
-			static const int DEPLOYMENT_ATTRIBUTE_DEPLOYEDARTIFACT = 6918;
-			static const int DEPLOYMENT_ATTRIBUTE_LOCATION = 6919;
+			static const int DEPLOYMENT_ATTRIBUTE_CONFIGURATION = 7017;
+			static const int DEPLOYMENT_ATTRIBUTE_DEPLOYEDARTIFACT = 7018;
+			static const int DEPLOYMENT_ATTRIBUTE_LOCATION = 7019;
 			
 			
 			//Class and Feature Getter
@@ -1869,16 +1890,16 @@ namespace uml
 
 			// Begin Class DeploymentSpecification
 			//Class and Feature IDs 
-			static const unsigned int DEPLOYMENTSPECIFICATION_CLASS = 70;
+			static const unsigned int DEPLOYMENTSPECIFICATION_CLASS = 71;
 			static const unsigned int DEPLOYMENTSPECIFICATION_CLASS_FEATURE_COUNT = 46;
-			static const unsigned int DEPLOYMENTSPECIFICATION_CLASS_OPERATION_COUNT = 112;
-			static const int DEPLOYMENTSPECIFICATION_ATTRIBUTE_DEPLOYMENTLOCATION = 7043;
-			static const int DEPLOYMENTSPECIFICATION_ATTRIBUTE_EXECUTIONLOCATION = 7044;
+			static const unsigned int DEPLOYMENTSPECIFICATION_CLASS_OPERATION_COUNT = 113;
+			static const int DEPLOYMENTSPECIFICATION_ATTRIBUTE_DEPLOYMENTLOCATION = 7143;
+			static const int DEPLOYMENTSPECIFICATION_ATTRIBUTE_EXECUTIONLOCATION = 7144;
 			
-			static const int DEPLOYMENTSPECIFICATION_ATTRIBUTE_DEPLOYMENT = 7045;
+			static const int DEPLOYMENTSPECIFICATION_ATTRIBUTE_DEPLOYMENT = 7145;
 			
-			static const int DEPLOYMENTSPECIFICATION_OPERATION_DEPLOYED_ELEMENTS_EDIAGNOSTICCHAIN_EMAP = 7157;
-			static const int DEPLOYMENTSPECIFICATION_OPERATION_DEPLOYMENT_TARGET_EDIAGNOSTICCHAIN_EMAP = 7156;
+			static const int DEPLOYMENTSPECIFICATION_OPERATION_DEPLOYED_ELEMENTS_EDIAGNOSTICCHAIN_EMAP = 7258;
+			static const int DEPLOYMENTSPECIFICATION_OPERATION_DEPLOYMENT_TARGET_EDIAGNOSTICCHAIN_EMAP = 7257;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getDeploymentSpecification_Class() const = 0;
@@ -1896,14 +1917,14 @@ namespace uml
 
 			// Begin Class DeploymentTarget
 			//Class and Feature IDs 
-			static const unsigned int DEPLOYMENTTARGET_CLASS = 71;
+			static const unsigned int DEPLOYMENTTARGET_CLASS = 72;
 			static const unsigned int DEPLOYMENTTARGET_CLASS_FEATURE_COUNT = 11;
-			static const unsigned int DEPLOYMENTTARGET_CLASS_OPERATION_COUNT = 56;
+			static const unsigned int DEPLOYMENTTARGET_CLASS_OPERATION_COUNT = 57;
 			
-			static const int DEPLOYMENTTARGET_ATTRIBUTE_DEPLOYEDELEMENT = 7109;
-			static const int DEPLOYMENTTARGET_ATTRIBUTE_DEPLOYMENT = 7110;
+			static const int DEPLOYMENTTARGET_ATTRIBUTE_DEPLOYEDELEMENT = 7209;
+			static const int DEPLOYMENTTARGET_ATTRIBUTE_DEPLOYMENT = 7210;
 			
-			static const int DEPLOYMENTTARGET_OPERATION_GETDEPLOYEDELEMENTS = 7166;
+			static const int DEPLOYMENTTARGET_OPERATION_GETDEPLOYEDELEMENTS = 7267;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getDeploymentTarget_Class() const = 0;
@@ -1919,9 +1940,9 @@ namespace uml
 
 			// Begin Class DestroyLinkAction
 			//Class and Feature IDs 
-			static const unsigned int DESTROYLINKACTION_CLASS = 72;
+			static const unsigned int DESTROYLINKACTION_CLASS = 73;
 			static const unsigned int DESTROYLINKACTION_CLASS_FEATURE_COUNT = 29;
-			static const unsigned int DESTROYLINKACTION_CLASS_OPERATION_COUNT = 70;
+			static const unsigned int DESTROYLINKACTION_CLASS_OPERATION_COUNT = 71;
 			
 			
 			
@@ -1936,16 +1957,16 @@ namespace uml
 
 			// Begin Class DestroyObjectAction
 			//Class and Feature IDs 
-			static const unsigned int DESTROYOBJECTACTION_CLASS = 73;
+			static const unsigned int DESTROYOBJECTACTION_CLASS = 74;
 			static const unsigned int DESTROYOBJECTACTION_CLASS_FEATURE_COUNT = 30;
-			static const unsigned int DESTROYOBJECTACTION_CLASS_OPERATION_COUNT = 67;
-			static const int DESTROYOBJECTACTION_ATTRIBUTE_ISDESTROYLINKS = 7327;
-			static const int DESTROYOBJECTACTION_ATTRIBUTE_ISDESTROYOWNEDOBJECTS = 7328;
+			static const unsigned int DESTROYOBJECTACTION_CLASS_OPERATION_COUNT = 68;
+			static const int DESTROYOBJECTACTION_ATTRIBUTE_ISDESTROYLINKS = 7427;
+			static const int DESTROYOBJECTACTION_ATTRIBUTE_ISDESTROYOWNEDOBJECTS = 7428;
 			
-			static const int DESTROYOBJECTACTION_ATTRIBUTE_TARGET = 7329;
+			static const int DESTROYOBJECTACTION_ATTRIBUTE_TARGET = 7429;
 			
-			static const int DESTROYOBJECTACTION_OPERATION_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP = 7395;
-			static const int DESTROYOBJECTACTION_OPERATION_NO_TYPE_EDIAGNOSTICCHAIN_EMAP = 7396;
+			static const int DESTROYOBJECTACTION_OPERATION_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP = 7496;
+			static const int DESTROYOBJECTACTION_OPERATION_NO_TYPE_EDIAGNOSTICCHAIN_EMAP = 7497;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getDestroyObjectAction_Class() const = 0;
@@ -1963,12 +1984,12 @@ namespace uml
 
 			// Begin Class DestructionOccurrenceSpecification
 			//Class and Feature IDs 
-			static const unsigned int DESTRUCTIONOCCURRENCESPECIFICATION_CLASS = 74;
+			static const unsigned int DESTRUCTIONOCCURRENCESPECIFICATION_CLASS = 75;
 			static const unsigned int DESTRUCTIONOCCURRENCESPECIFICATION_CLASS_FEATURE_COUNT = 16;
-			static const unsigned int DESTRUCTIONOCCURRENCESPECIFICATION_CLASS_OPERATION_COUNT = 62;
+			static const unsigned int DESTRUCTIONOCCURRENCESPECIFICATION_CLASS_OPERATION_COUNT = 63;
 			
 			
-			static const int DESTRUCTIONOCCURRENCESPECIFICATION_OPERATION_NO_OCCURRENCE_SPECIFICATIONS_BELOW_EDIAGNOSTICCHAIN_EMAP = 7477;
+			static const int DESTRUCTIONOCCURRENCESPECIFICATION_OPERATION_NO_OCCURRENCE_SPECIFICATIONS_BELOW_EDIAGNOSTICCHAIN_EMAP = 7578;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getDestructionOccurrenceSpecification_Class() const = 0;
@@ -1982,9 +2003,9 @@ namespace uml
 
 			// Begin Class Device
 			//Class and Feature IDs 
-			static const unsigned int DEVICE_CLASS = 75;
+			static const unsigned int DEVICE_CLASS = 76;
 			static const unsigned int DEVICE_CLASS_FEATURE_COUNT = 55;
-			static const unsigned int DEVICE_CLASS_OPERATION_COUNT = 124;
+			static const unsigned int DEVICE_CLASS_OPERATION_COUNT = 125;
 			
 			
 			
@@ -1999,12 +2020,12 @@ namespace uml
 
 			// Begin Class DirectedRelationship
 			//Class and Feature IDs 
-			static const unsigned int DIRECTEDRELATIONSHIP_CLASS = 76;
+			static const unsigned int DIRECTEDRELATIONSHIP_CLASS = 77;
 			static const unsigned int DIRECTEDRELATIONSHIP_CLASS_FEATURE_COUNT = 6;
-			static const unsigned int DIRECTEDRELATIONSHIP_CLASS_OPERATION_COUNT = 41;
+			static const unsigned int DIRECTEDRELATIONSHIP_CLASS_OPERATION_COUNT = 42;
 			
-			static const int DIRECTEDRELATIONSHIP_ATTRIBUTE_SOURCE = 7604;
-			static const int DIRECTEDRELATIONSHIP_ATTRIBUTE_TARGET = 7605;
+			static const int DIRECTEDRELATIONSHIP_ATTRIBUTE_SOURCE = 7704;
+			static const int DIRECTEDRELATIONSHIP_ATTRIBUTE_TARGET = 7705;
 			
 			
 			//Class and Feature Getter
@@ -2020,14 +2041,14 @@ namespace uml
 
 			// Begin Class Duration
 			//Class and Feature IDs 
-			static const unsigned int DURATION_CLASS = 77;
+			static const unsigned int DURATION_CLASS = 78;
 			static const unsigned int DURATION_CLASS_FEATURE_COUNT = 16;
-			static const unsigned int DURATION_CLASS_OPERATION_COUNT = 66;
+			static const unsigned int DURATION_CLASS_OPERATION_COUNT = 67;
 			
-			static const int DURATION_ATTRIBUTE_EXPR = 7714;
-			static const int DURATION_ATTRIBUTE_OBSERVATION = 7715;
+			static const int DURATION_ATTRIBUTE_EXPR = 7814;
+			static const int DURATION_ATTRIBUTE_OBSERVATION = 7815;
 			
-			static const int DURATION_OPERATION_NO_EXPR_REQUIRES_OBSERVATION_EDIAGNOSTICCHAIN_EMAP = 7781;
+			static const int DURATION_OPERATION_NO_EXPR_REQUIRES_OBSERVATION_EDIAGNOSTICCHAIN_EMAP = 7882;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getDuration_Class() const = 0;
@@ -2043,14 +2064,14 @@ namespace uml
 
 			// Begin Class DurationConstraint
 			//Class and Feature IDs 
-			static const unsigned int DURATIONCONSTRAINT_CLASS = 78;
+			static const unsigned int DURATIONCONSTRAINT_CLASS = 79;
 			static const unsigned int DURATIONCONSTRAINT_CLASS_FEATURE_COUNT = 16;
-			static const unsigned int DURATIONCONSTRAINT_CLASS_OPERATION_COUNT = 63;
-			static const int DURATIONCONSTRAINT_ATTRIBUTE_FIRSTEVENT = 7815;
+			static const unsigned int DURATIONCONSTRAINT_CLASS_OPERATION_COUNT = 64;
+			static const int DURATIONCONSTRAINT_ATTRIBUTE_FIRSTEVENT = 7915;
 			
 			
-			static const int DURATIONCONSTRAINT_OPERATION_FIRST_EVENT_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP = 7877;
-			static const int DURATIONCONSTRAINT_OPERATION_HAS_ONE_OR_TWO_CONSTRAINEDELEMENTS_EDIAGNOSTICCHAIN_EMAP = 7878;
+			static const int DURATIONCONSTRAINT_OPERATION_FIRST_EVENT_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP = 7978;
+			static const int DURATIONCONSTRAINT_OPERATION_HAS_ONE_OR_TWO_CONSTRAINEDELEMENTS_EDIAGNOSTICCHAIN_EMAP = 7979;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getDurationConstraint_Class() const = 0;
@@ -2066,9 +2087,9 @@ namespace uml
 
 			// Begin Class DurationInterval
 			//Class and Feature IDs 
-			static const unsigned int DURATIONINTERVAL_CLASS = 79;
+			static const unsigned int DURATIONINTERVAL_CLASS = 80;
 			static const unsigned int DURATIONINTERVAL_CLASS_FEATURE_COUNT = 16;
-			static const unsigned int DURATIONINTERVAL_CLASS_OPERATION_COUNT = 65;
+			static const unsigned int DURATIONINTERVAL_CLASS_OPERATION_COUNT = 66;
 			
 			
 			
@@ -2083,14 +2104,14 @@ namespace uml
 
 			// Begin Class DurationObservation
 			//Class and Feature IDs 
-			static const unsigned int DURATIONOBSERVATION_CLASS = 80;
+			static const unsigned int DURATIONOBSERVATION_CLASS = 81;
 			static const unsigned int DURATIONOBSERVATION_CLASS_FEATURE_COUNT = 14;
-			static const unsigned int DURATIONOBSERVATION_CLASS_OPERATION_COUNT = 59;
-			static const int DURATIONOBSERVATION_ATTRIBUTE_FIRSTEVENT = 8013;
+			static const unsigned int DURATIONOBSERVATION_CLASS_OPERATION_COUNT = 60;
+			static const int DURATIONOBSERVATION_ATTRIBUTE_FIRSTEVENT = 8113;
 			
-			static const int DURATIONOBSERVATION_ATTRIBUTE_EVENT = 8012;
+			static const int DURATIONOBSERVATION_ATTRIBUTE_EVENT = 8112;
 			
-			static const int DURATIONOBSERVATION_OPERATION_FIRST_EVENT_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP = 8072;
+			static const int DURATIONOBSERVATION_OPERATION_FIRST_EVENT_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP = 8173;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getDurationObservation_Class() const = 0;
@@ -2106,52 +2127,52 @@ namespace uml
 
 			// Begin Class Element
 			//Class and Feature IDs 
-			static const unsigned int ELEMENT_CLASS = 81;
+			static const unsigned int ELEMENT_CLASS = 82;
 			static const unsigned int ELEMENT_CLASS_FEATURE_COUNT = 3;
-			static const unsigned int ELEMENT_CLASS_OPERATION_COUNT = 41;
+			static const unsigned int ELEMENT_CLASS_OPERATION_COUNT = 42;
 			
-			static const int ELEMENT_ATTRIBUTE_OWNEDCOMMENT = 8100;
-			static const int ELEMENT_ATTRIBUTE_OWNEDELEMENT = 8101;
-			static const int ELEMENT_ATTRIBUTE_OWNER = 8102;
+			static const int ELEMENT_ATTRIBUTE_OWNEDCOMMENT = 8200;
+			static const int ELEMENT_ATTRIBUTE_OWNEDELEMENT = 8201;
+			static const int ELEMENT_ATTRIBUTE_OWNER = 8202;
 			
-			static const int ELEMENT_OPERATION_ADDKEYWORD_STRING = 8108;
-			static const int ELEMENT_OPERATION_ALLOWNEDELEMENTS = 8140;
-			static const int ELEMENT_OPERATION_APPLYSTEREOTYPE_STEREOTYPE = 8109;
-			static const int ELEMENT_OPERATION_CONTAINER = 8143;
-			static const int ELEMENT_OPERATION_CREATEEANNOTATION_STRING = 8110;
-			static const int ELEMENT_OPERATION_DESTROY = 8111;
-			static const int ELEMENT_OPERATION_GETAPPLICABLESTEREOTYPE_STRING = 8113;
-			static const int ELEMENT_OPERATION_GETAPPLICABLESTEREOTYPES = 8114;
-			static const int ELEMENT_OPERATION_GETAPPLIEDSTEREOTYPE_STRING = 8115;
-			static const int ELEMENT_OPERATION_GETAPPLIEDSTEREOTYPES = 8116;
-			static const int ELEMENT_OPERATION_GETAPPLIEDSUBSTEREOTYPE_STEREOTYPE_STRING = 8117;
-			static const int ELEMENT_OPERATION_GETAPPLIEDSUBSTEREOTYPES_STEREOTYPE = 8118;
-			static const int ELEMENT_OPERATION_GETKEYWORDS = 8112;
-			static const int ELEMENT_OPERATION_GETMETACLASS = 8142;
-			static const int ELEMENT_OPERATION_GETMODEL = 8119;
-			static const int ELEMENT_OPERATION_GETNEARESTPACKAGE = 8120;
-			static const int ELEMENT_OPERATION_GETRELATIONSHIPS = 8121;
-			static const int ELEMENT_OPERATION_GETRELATIONSHIPS_ECLASS = 8122;
-			static const int ELEMENT_OPERATION_GETREQUIREDSTEREOTYPE_STRING = 8123;
-			static const int ELEMENT_OPERATION_GETREQUIREDSTEREOTYPES = 8124;
-			static const int ELEMENT_OPERATION_GETSOURCEDIRECTEDRELATIONSHIPS = 8125;
-			static const int ELEMENT_OPERATION_GETSOURCEDIRECTEDRELATIONSHIPS_ECLASS = 8126;
-			static const int ELEMENT_OPERATION_GETSTEREOTYPEAPPLICATION_STEREOTYPE = 8127;
-			static const int ELEMENT_OPERATION_GETSTEREOTYPEAPPLICATIONS = 8128;
-			static const int ELEMENT_OPERATION_GETTARGETDIRECTEDRELATIONSHIPS = 8129;
-			static const int ELEMENT_OPERATION_GETTARGETDIRECTEDRELATIONSHIPS_ECLASS = 8130;
-			static const int ELEMENT_OPERATION_GETVALUE_STEREOTYPE_STRING = 8131;
-			static const int ELEMENT_OPERATION_HASKEYWORD_STRING = 8132;
-			static const int ELEMENT_OPERATION_HASVALUE_STEREOTYPE_STRING = 8133;
-			static const int ELEMENT_OPERATION_HAS_OWNER_EDIAGNOSTICCHAIN_EMAP = 8106;
-			static const int ELEMENT_OPERATION_ISSTEREOTYPEAPPLICABLE_STEREOTYPE = 8134;
-			static const int ELEMENT_OPERATION_ISSTEREOTYPEAPPLIED_STEREOTYPE = 8135;
-			static const int ELEMENT_OPERATION_ISSTEREOTYPEREQUIRED_STEREOTYPE = 8136;
-			static const int ELEMENT_OPERATION_MUSTBEOWNED = 8141;
-			static const int ELEMENT_OPERATION_NOT_OWN_SELF_EDIAGNOSTICCHAIN_EMAP = 8107;
-			static const int ELEMENT_OPERATION_REMOVEKEYWORD_STRING = 8137;
-			static const int ELEMENT_OPERATION_SETVALUE_STEREOTYPE_EJAVAOBJECT = 8138;
-			static const int ELEMENT_OPERATION_UNAPPLYSTEREOTYPE_STEREOTYPE = 8139;
+			static const int ELEMENT_OPERATION_ADDKEYWORD_STRING = 8209;
+			static const int ELEMENT_OPERATION_ALLOWNEDELEMENTS = 8241;
+			static const int ELEMENT_OPERATION_APPLYSTEREOTYPE_STEREOTYPE = 8210;
+			static const int ELEMENT_OPERATION_CONTAINER = 8244;
+			static const int ELEMENT_OPERATION_CREATEEANNOTATION_STRING = 8211;
+			static const int ELEMENT_OPERATION_DESTROY = 8212;
+			static const int ELEMENT_OPERATION_GETAPPLICABLESTEREOTYPE_STRING = 8214;
+			static const int ELEMENT_OPERATION_GETAPPLICABLESTEREOTYPES = 8215;
+			static const int ELEMENT_OPERATION_GETAPPLIEDSTEREOTYPE_STRING = 8216;
+			static const int ELEMENT_OPERATION_GETAPPLIEDSTEREOTYPES = 8217;
+			static const int ELEMENT_OPERATION_GETAPPLIEDSUBSTEREOTYPE_STEREOTYPE_STRING = 8218;
+			static const int ELEMENT_OPERATION_GETAPPLIEDSUBSTEREOTYPES_STEREOTYPE = 8219;
+			static const int ELEMENT_OPERATION_GETKEYWORDS = 8213;
+			static const int ELEMENT_OPERATION_GETMETACLASS = 8243;
+			static const int ELEMENT_OPERATION_GETMODEL = 8220;
+			static const int ELEMENT_OPERATION_GETNEARESTPACKAGE = 8221;
+			static const int ELEMENT_OPERATION_GETRELATIONSHIPS = 8222;
+			static const int ELEMENT_OPERATION_GETRELATIONSHIPS_ECLASS = 8223;
+			static const int ELEMENT_OPERATION_GETREQUIREDSTEREOTYPE_STRING = 8224;
+			static const int ELEMENT_OPERATION_GETREQUIREDSTEREOTYPES = 8225;
+			static const int ELEMENT_OPERATION_GETSOURCEDIRECTEDRELATIONSHIPS = 8226;
+			static const int ELEMENT_OPERATION_GETSOURCEDIRECTEDRELATIONSHIPS_ECLASS = 8227;
+			static const int ELEMENT_OPERATION_GETSTEREOTYPEAPPLICATION_STEREOTYPE = 8228;
+			static const int ELEMENT_OPERATION_GETSTEREOTYPEAPPLICATIONS = 8229;
+			static const int ELEMENT_OPERATION_GETTARGETDIRECTEDRELATIONSHIPS = 8230;
+			static const int ELEMENT_OPERATION_GETTARGETDIRECTEDRELATIONSHIPS_ECLASS = 8231;
+			static const int ELEMENT_OPERATION_GETVALUE_STEREOTYPE_STRING = 8232;
+			static const int ELEMENT_OPERATION_HASKEYWORD_STRING = 8233;
+			static const int ELEMENT_OPERATION_HASVALUE_STEREOTYPE_STRING = 8234;
+			static const int ELEMENT_OPERATION_HAS_OWNER_EDIAGNOSTICCHAIN_EMAP = 8207;
+			static const int ELEMENT_OPERATION_ISSTEREOTYPEAPPLICABLE_STEREOTYPE = 8235;
+			static const int ELEMENT_OPERATION_ISSTEREOTYPEAPPLIED_STEREOTYPE = 8236;
+			static const int ELEMENT_OPERATION_ISSTEREOTYPEREQUIRED_STEREOTYPE = 8237;
+			static const int ELEMENT_OPERATION_MUSTBEOWNED = 8242;
+			static const int ELEMENT_OPERATION_NOT_OWN_SELF_EDIAGNOSTICCHAIN_EMAP = 8208;
+			static const int ELEMENT_OPERATION_REMOVEKEYWORD_STRING = 8238;
+			static const int ELEMENT_OPERATION_SETVALUE_STEREOTYPE_EJAVAOBJECT = 8239;
+			static const int ELEMENT_OPERATION_UNAPPLYSTEREOTYPE_STEREOTYPE = 8240;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getElement_Class() const = 0;
@@ -2205,18 +2226,18 @@ namespace uml
 
 			// Begin Class ElementImport
 			//Class and Feature IDs 
-			static const unsigned int ELEMENTIMPORT_CLASS = 82;
+			static const unsigned int ELEMENTIMPORT_CLASS = 83;
 			static const unsigned int ELEMENTIMPORT_CLASS_FEATURE_COUNT = 10;
-			static const unsigned int ELEMENTIMPORT_CLASS_OPERATION_COUNT = 44;
-			static const int ELEMENTIMPORT_ATTRIBUTE_ALIAS = 8206;
-			static const int ELEMENTIMPORT_ATTRIBUTE_VISIBILITY = 8209;
+			static const unsigned int ELEMENTIMPORT_CLASS_OPERATION_COUNT = 45;
+			static const int ELEMENTIMPORT_ATTRIBUTE_ALIAS = 8306;
+			static const int ELEMENTIMPORT_ATTRIBUTE_VISIBILITY = 8309;
 			
-			static const int ELEMENTIMPORT_ATTRIBUTE_IMPORTEDELEMENT = 8207;
-			static const int ELEMENTIMPORT_ATTRIBUTE_IMPORTINGNAMESPACE = 8208;
+			static const int ELEMENTIMPORT_ATTRIBUTE_IMPORTEDELEMENT = 8307;
+			static const int ELEMENTIMPORT_ATTRIBUTE_IMPORTINGNAMESPACE = 8308;
 			
-			static const int ELEMENTIMPORT_OPERATION_GETNAME = 8253;
-			static const int ELEMENTIMPORT_OPERATION_IMPORTED_ELEMENT_IS_PUBLIC_EDIAGNOSTICCHAIN_EMAP = 8251;
-			static const int ELEMENTIMPORT_OPERATION_VISIBILITY_PUBLIC_OR_PRIVATE_EDIAGNOSTICCHAIN_EMAP = 8252;
+			static const int ELEMENTIMPORT_OPERATION_GETNAME = 8354;
+			static const int ELEMENTIMPORT_OPERATION_IMPORTED_ELEMENT_IS_PUBLIC_EDIAGNOSTICCHAIN_EMAP = 8352;
+			static const int ELEMENTIMPORT_OPERATION_VISIBILITY_PUBLIC_OR_PRIVATE_EDIAGNOSTICCHAIN_EMAP = 8353;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getElementImport_Class() const = 0;
@@ -2236,13 +2257,13 @@ namespace uml
 
 			// Begin Class EncapsulatedClassifier
 			//Class and Feature IDs 
-			static const unsigned int ENCAPSULATEDCLASSIFIER_CLASS = 83;
+			static const unsigned int ENCAPSULATEDCLASSIFIER_CLASS = 84;
 			static const unsigned int ENCAPSULATEDCLASSIFIER_CLASS_FEATURE_COUNT = 43;
-			static const unsigned int ENCAPSULATEDCLASSIFIER_CLASS_OPERATION_COUNT = 112;
+			static const unsigned int ENCAPSULATEDCLASSIFIER_CLASS_OPERATION_COUNT = 113;
 			
-			static const int ENCAPSULATEDCLASSIFIER_ATTRIBUTE_OWNEDPORT = 8342;
+			static const int ENCAPSULATEDCLASSIFIER_ATTRIBUTE_OWNEDPORT = 8442;
 			
-			static const int ENCAPSULATEDCLASSIFIER_OPERATION_GETOWNEDPORTS = 8454;
+			static const int ENCAPSULATEDCLASSIFIER_OPERATION_GETOWNEDPORTS = 8555;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getEncapsulatedClassifier_Class() const = 0;
@@ -2257,13 +2278,13 @@ namespace uml
 
 			// Begin Class Enumeration
 			//Class and Feature IDs 
-			static const unsigned int ENUMERATION_CLASS = 84;
+			static const unsigned int ENUMERATION_CLASS = 85;
 			static const unsigned int ENUMERATION_CLASS_FEATURE_COUNT = 41;
-			static const unsigned int ENUMERATION_CLASS_OPERATION_COUNT = 111;
+			static const unsigned int ENUMERATION_CLASS_OPERATION_COUNT = 112;
 			
-			static const int ENUMERATION_ATTRIBUTE_OWNEDLITERAL = 8440;
+			static const int ENUMERATION_ATTRIBUTE_OWNEDLITERAL = 8540;
 			
-			static const int ENUMERATION_OPERATION_IMMUTABLE_EDIAGNOSTICCHAIN_EMAP = 8551;
+			static const int ENUMERATION_OPERATION_IMMUTABLE_EDIAGNOSTICCHAIN_EMAP = 8652;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getEnumeration_Class() const = 0;
@@ -2278,14 +2299,14 @@ namespace uml
 
 			// Begin Class EnumerationLiteral
 			//Class and Feature IDs 
-			static const unsigned int ENUMERATIONLITERAL_CLASS = 85;
+			static const unsigned int ENUMERATIONLITERAL_CLASS = 86;
 			static const unsigned int ENUMERATIONLITERAL_CLASS_FEATURE_COUNT = 18;
-			static const unsigned int ENUMERATIONLITERAL_CLASS_OPERATION_COUNT = 65;
+			static const unsigned int ENUMERATIONLITERAL_CLASS_OPERATION_COUNT = 66;
 			
-			static const int ENUMERATIONLITERAL_ATTRIBUTE_ENUMERATION = 8517;
+			static const int ENUMERATIONLITERAL_ATTRIBUTE_ENUMERATION = 8617;
 			
-			static const int ENUMERATIONLITERAL_OPERATION_GETCLASSIFIER = 8582;
-			static const int ENUMERATIONLITERAL_OPERATION_GETCLASSIFIERS = 8581;
+			static const int ENUMERATIONLITERAL_OPERATION_GETCLASSIFIER = 8683;
+			static const int ENUMERATIONLITERAL_OPERATION_GETCLASSIFIERS = 8682;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getEnumerationLiteral_Class() const = 0;
@@ -2301,9 +2322,9 @@ namespace uml
 
 			// Begin Class Event
 			//Class and Feature IDs 
-			static const unsigned int EVENT_CLASS = 86;
+			static const unsigned int EVENT_CLASS = 87;
 			static const unsigned int EVENT_CLASS_FEATURE_COUNT = 12;
-			static const unsigned int EVENT_CLASS_OPERATION_COUNT = 58;
+			static const unsigned int EVENT_CLASS_OPERATION_COUNT = 59;
 			
 			
 			
@@ -2318,21 +2339,21 @@ namespace uml
 
 			// Begin Class ExceptionHandler
 			//Class and Feature IDs 
-			static const unsigned int EXCEPTIONHANDLER_CLASS = 87;
+			static const unsigned int EXCEPTIONHANDLER_CLASS = 88;
 			static const unsigned int EXCEPTIONHANDLER_CLASS_FEATURE_COUNT = 7;
-			static const unsigned int EXCEPTIONHANDLER_CLASS_OPERATION_COUNT = 47;
+			static const unsigned int EXCEPTIONHANDLER_CLASS_OPERATION_COUNT = 48;
 			
-			static const int EXCEPTIONHANDLER_ATTRIBUTE_EXCEPTIONINPUT = 8703;
-			static const int EXCEPTIONHANDLER_ATTRIBUTE_EXCEPTIONTYPE = 8704;
-			static const int EXCEPTIONHANDLER_ATTRIBUTE_HANDLERBODY = 8705;
-			static const int EXCEPTIONHANDLER_ATTRIBUTE_PROTECTEDNODE = 8706;
+			static const int EXCEPTIONHANDLER_ATTRIBUTE_EXCEPTIONINPUT = 8803;
+			static const int EXCEPTIONHANDLER_ATTRIBUTE_EXCEPTIONTYPE = 8804;
+			static const int EXCEPTIONHANDLER_ATTRIBUTE_HANDLERBODY = 8805;
+			static const int EXCEPTIONHANDLER_ATTRIBUTE_PROTECTEDNODE = 8806;
 			
-			static const int EXCEPTIONHANDLER_OPERATION_EDGE_SOURCE_TARGET_EDIAGNOSTICCHAIN_EMAP = 8751;
-			static const int EXCEPTIONHANDLER_OPERATION_EXCEPTION_INPUT_TYPE_EDIAGNOSTICCHAIN_EMAP = 8753;
-			static const int EXCEPTIONHANDLER_OPERATION_HANDLER_BODY_EDGES_EDIAGNOSTICCHAIN_EMAP = 8748;
-			static const int EXCEPTIONHANDLER_OPERATION_HANDLER_BODY_OWNER_EDIAGNOSTICCHAIN_EMAP = 8752;
-			static const int EXCEPTIONHANDLER_OPERATION_ONE_INPUT_EDIAGNOSTICCHAIN_EMAP = 8750;
-			static const int EXCEPTIONHANDLER_OPERATION_OUTPUT_PINS_EDIAGNOSTICCHAIN_EMAP = 8749;
+			static const int EXCEPTIONHANDLER_OPERATION_EDGE_SOURCE_TARGET_EDIAGNOSTICCHAIN_EMAP = 8852;
+			static const int EXCEPTIONHANDLER_OPERATION_EXCEPTION_INPUT_TYPE_EDIAGNOSTICCHAIN_EMAP = 8854;
+			static const int EXCEPTIONHANDLER_OPERATION_HANDLER_BODY_EDGES_EDIAGNOSTICCHAIN_EMAP = 8849;
+			static const int EXCEPTIONHANDLER_OPERATION_HANDLER_BODY_OWNER_EDIAGNOSTICCHAIN_EMAP = 8853;
+			static const int EXCEPTIONHANDLER_OPERATION_ONE_INPUT_EDIAGNOSTICCHAIN_EMAP = 8851;
+			static const int EXCEPTIONHANDLER_OPERATION_OUTPUT_PINS_EDIAGNOSTICCHAIN_EMAP = 8850;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getExceptionHandler_Class() const = 0;
@@ -2355,11 +2376,11 @@ namespace uml
 
 			// Begin Class ExecutableNode
 			//Class and Feature IDs 
-			static const unsigned int EXECUTABLENODE_CLASS = 88;
+			static const unsigned int EXECUTABLENODE_CLASS = 89;
 			static const unsigned int EXECUTABLENODE_CLASS_FEATURE_COUNT = 21;
-			static const unsigned int EXECUTABLENODE_CLASS_OPERATION_COUNT = 61;
+			static const unsigned int EXECUTABLENODE_CLASS_OPERATION_COUNT = 62;
 			
-			static const int EXECUTABLENODE_ATTRIBUTE_HANDLER = 8820;
+			static const int EXECUTABLENODE_ATTRIBUTE_HANDLER = 8920;
 			
 			
 			//Class and Feature Getter
@@ -2374,9 +2395,9 @@ namespace uml
 
 			// Begin Class ExecutionEnvironment
 			//Class and Feature IDs 
-			static const unsigned int EXECUTIONENVIRONMENT_CLASS = 89;
+			static const unsigned int EXECUTIONENVIRONMENT_CLASS = 90;
 			static const unsigned int EXECUTIONENVIRONMENT_CLASS_FEATURE_COUNT = 55;
-			static const unsigned int EXECUTIONENVIRONMENT_CLASS_OPERATION_COUNT = 124;
+			static const unsigned int EXECUTIONENVIRONMENT_CLASS_OPERATION_COUNT = 125;
 			
 			
 			
@@ -2391,11 +2412,11 @@ namespace uml
 
 			// Begin Class ExecutionOccurrenceSpecification
 			//Class and Feature IDs 
-			static const unsigned int EXECUTIONOCCURRENCESPECIFICATION_CLASS = 90;
+			static const unsigned int EXECUTIONOCCURRENCESPECIFICATION_CLASS = 91;
 			static const unsigned int EXECUTIONOCCURRENCESPECIFICATION_CLASS_FEATURE_COUNT = 16;
-			static const unsigned int EXECUTIONOCCURRENCESPECIFICATION_CLASS_OPERATION_COUNT = 57;
+			static const unsigned int EXECUTIONOCCURRENCESPECIFICATION_CLASS_OPERATION_COUNT = 58;
 			
-			static const int EXECUTIONOCCURRENCESPECIFICATION_ATTRIBUTE_EXECUTION = 9015;
+			static const int EXECUTIONOCCURRENCESPECIFICATION_ATTRIBUTE_EXECUTION = 9115;
 			
 			
 			//Class and Feature Getter
@@ -2410,14 +2431,14 @@ namespace uml
 
 			// Begin Class ExecutionSpecification
 			//Class and Feature IDs 
-			static const unsigned int EXECUTIONSPECIFICATION_CLASS = 91;
+			static const unsigned int EXECUTIONSPECIFICATION_CLASS = 92;
 			static const unsigned int EXECUTIONSPECIFICATION_CLASS_FEATURE_COUNT = 15;
-			static const unsigned int EXECUTIONSPECIFICATION_CLASS_OPERATION_COUNT = 56;
+			static const unsigned int EXECUTIONSPECIFICATION_CLASS_OPERATION_COUNT = 57;
 			
-			static const int EXECUTIONSPECIFICATION_ATTRIBUTE_FINISH = 9113;
-			static const int EXECUTIONSPECIFICATION_ATTRIBUTE_START = 9114;
+			static const int EXECUTIONSPECIFICATION_ATTRIBUTE_FINISH = 9213;
+			static const int EXECUTIONSPECIFICATION_ATTRIBUTE_START = 9214;
 			
-			static const int EXECUTIONSPECIFICATION_OPERATION_SAME_LIFELINE_EDIAGNOSTICCHAIN_EMAP = 9170;
+			static const int EXECUTIONSPECIFICATION_OPERATION_SAME_LIFELINE_EDIAGNOSTICCHAIN_EMAP = 9271;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getExecutionSpecification_Class() const = 0;
@@ -2433,14 +2454,14 @@ namespace uml
 
 			// Begin Class ExpansionNode
 			//Class and Feature IDs 
-			static const unsigned int EXPANSIONNODE_CLASS = 93;
+			static const unsigned int EXPANSIONNODE_CLASS = 94;
 			static const unsigned int EXPANSIONNODE_CLASS_FEATURE_COUNT = 28;
-			static const unsigned int EXPANSIONNODE_CLASS_OPERATION_COUNT = 65;
+			static const unsigned int EXPANSIONNODE_CLASS_OPERATION_COUNT = 66;
 			
-			static const int EXPANSIONNODE_ATTRIBUTE_REGIONASINPUT = 9326;
-			static const int EXPANSIONNODE_ATTRIBUTE_REGIONASOUTPUT = 9327;
+			static const int EXPANSIONNODE_ATTRIBUTE_REGIONASINPUT = 9426;
+			static const int EXPANSIONNODE_ATTRIBUTE_REGIONASOUTPUT = 9427;
 			
-			static const int EXPANSIONNODE_OPERATION_REGION_AS_INPUT_OR_OUTPUT_EDIAGNOSTICCHAIN_EMAP = 9392;
+			static const int EXPANSIONNODE_OPERATION_REGION_AS_INPUT_OR_OUTPUT_EDIAGNOSTICCHAIN_EMAP = 9493;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getExpansionNode_Class() const = 0;
@@ -2456,13 +2477,13 @@ namespace uml
 
 			// Begin Class ExpansionRegion
 			//Class and Feature IDs 
-			static const unsigned int EXPANSIONREGION_CLASS = 94;
+			static const unsigned int EXPANSIONREGION_CLASS = 95;
 			static const unsigned int EXPANSIONREGION_CLASS_FEATURE_COUNT = 47;
-			static const unsigned int EXPANSIONREGION_CLASS_OPERATION_COUNT = 85;
-			static const int EXPANSIONREGION_ATTRIBUTE_MODE = 9444;
+			static const unsigned int EXPANSIONREGION_CLASS_OPERATION_COUNT = 86;
+			static const int EXPANSIONREGION_ATTRIBUTE_MODE = 9544;
 			
-			static const int EXPANSIONREGION_ATTRIBUTE_INPUTELEMENT = 9446;
-			static const int EXPANSIONREGION_ATTRIBUTE_OUTPUTELEMENT = 9445;
+			static const int EXPANSIONREGION_ATTRIBUTE_INPUTELEMENT = 9546;
+			static const int EXPANSIONREGION_ATTRIBUTE_OUTPUTELEMENT = 9545;
 			
 			
 			//Class and Feature Getter
@@ -2479,12 +2500,12 @@ namespace uml
 
 			// Begin Class Expression
 			//Class and Feature IDs 
-			static const unsigned int EXPRESSION_CLASS = 95;
+			static const unsigned int EXPRESSION_CLASS = 96;
 			static const unsigned int EXPRESSION_CLASS_FEATURE_COUNT = 16;
-			static const unsigned int EXPRESSION_CLASS_OPERATION_COUNT = 65;
-			static const int EXPRESSION_ATTRIBUTE_SYMBOL = 9515;
+			static const unsigned int EXPRESSION_CLASS_OPERATION_COUNT = 66;
+			static const int EXPRESSION_ATTRIBUTE_SYMBOL = 9615;
 			
-			static const int EXPRESSION_ATTRIBUTE_OPERAND = 9514;
+			static const int EXPRESSION_ATTRIBUTE_OPERAND = 9614;
 			
 			
 			//Class and Feature Getter
@@ -2500,16 +2521,16 @@ namespace uml
 
 			// Begin Class Extend
 			//Class and Feature IDs 
-			static const unsigned int EXTEND_CLASS = 96;
+			static const unsigned int EXTEND_CLASS = 97;
 			static const unsigned int EXTEND_CLASS_FEATURE_COUNT = 16;
-			static const unsigned int EXTEND_CLASS_OPERATION_COUNT = 56;
+			static const unsigned int EXTEND_CLASS_OPERATION_COUNT = 57;
 			
-			static const int EXTEND_ATTRIBUTE_CONDITION = 9612;
-			static const int EXTEND_ATTRIBUTE_EXTENDEDCASE = 9613;
-			static const int EXTEND_ATTRIBUTE_EXTENSION = 9615;
-			static const int EXTEND_ATTRIBUTE_EXTENSIONLOCATION = 9614;
+			static const int EXTEND_ATTRIBUTE_CONDITION = 9712;
+			static const int EXTEND_ATTRIBUTE_EXTENDEDCASE = 9713;
+			static const int EXTEND_ATTRIBUTE_EXTENSION = 9715;
+			static const int EXTEND_ATTRIBUTE_EXTENSIONLOCATION = 9714;
 			
-			static const int EXTEND_OPERATION_EXTENSION_POINTS_EDIAGNOSTICCHAIN_EMAP = 9671;
+			static const int EXTEND_OPERATION_EXTENSION_POINTS_EDIAGNOSTICCHAIN_EMAP = 9772;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getExtend_Class() const = 0;
@@ -2527,20 +2548,20 @@ namespace uml
 
 			// Begin Class Extension
 			//Class and Feature IDs 
-			static const unsigned int EXTENSION_CLASS = 97;
+			static const unsigned int EXTENSION_CLASS = 98;
 			static const unsigned int EXTENSION_CLASS_FEATURE_COUNT = 46;
-			static const unsigned int EXTENSION_CLASS_OPERATION_COUNT = 122;
-			static const int EXTENSION_ATTRIBUTE_ISREQUIRED = 9744;
+			static const unsigned int EXTENSION_CLASS_OPERATION_COUNT = 123;
+			static const int EXTENSION_ATTRIBUTE_ISREQUIRED = 9844;
 			
-			static const int EXTENSION_ATTRIBUTE_METACLASS = 9745;
+			static const int EXTENSION_ATTRIBUTE_METACLASS = 9845;
 			
-			static const int EXTENSION_OPERATION_GETMETACLASS = 9866;
-			static const int EXTENSION_OPERATION_GETSTEREOTYPE = 9863;
-			static const int EXTENSION_OPERATION_GETSTEREOTYPEEND = 9864;
-			static const int EXTENSION_OPERATION_ISREQUIRED = 9865;
-			static const int EXTENSION_OPERATION_IS_BINARY_EDIAGNOSTICCHAIN_EMAP = 9862;
-			static const int EXTENSION_OPERATION_METACLASSEND = 9867;
-			static const int EXTENSION_OPERATION_NON_OWNED_END_EDIAGNOSTICCHAIN_EMAP = 9861;
+			static const int EXTENSION_OPERATION_GETMETACLASS = 9967;
+			static const int EXTENSION_OPERATION_GETSTEREOTYPE = 9964;
+			static const int EXTENSION_OPERATION_GETSTEREOTYPEEND = 9965;
+			static const int EXTENSION_OPERATION_ISREQUIRED = 9966;
+			static const int EXTENSION_OPERATION_IS_BINARY_EDIAGNOSTICCHAIN_EMAP = 9963;
+			static const int EXTENSION_OPERATION_METACLASSEND = 9968;
+			static const int EXTENSION_OPERATION_NON_OWNED_END_EDIAGNOSTICCHAIN_EMAP = 9962;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getExtension_Class() const = 0;
@@ -2562,13 +2583,13 @@ namespace uml
 
 			// Begin Class ExtensionEnd
 			//Class and Feature IDs 
-			static const unsigned int EXTENSIONEND_CLASS = 98;
+			static const unsigned int EXTENSIONEND_CLASS = 99;
 			static const unsigned int EXTENSIONEND_CLASS_FEATURE_COUNT = 44;
-			static const unsigned int EXTENSIONEND_CLASS_OPERATION_COUNT = 104;
+			static const unsigned int EXTENSIONEND_CLASS_OPERATION_COUNT = 105;
 			
 			
-			static const int EXTENSIONEND_OPERATION_AGGREGATION_EDIAGNOSTICCHAIN_EMAP = 9947;
-			static const int EXTENSIONEND_OPERATION_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP = 9946;
+			static const int EXTENSIONEND_OPERATION_AGGREGATION_EDIAGNOSTICCHAIN_EMAP = 10048;
+			static const int EXTENSIONEND_OPERATION_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP = 10047;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getExtensionEnd_Class() const = 0;
@@ -2583,13 +2604,13 @@ namespace uml
 
 			// Begin Class ExtensionPoint
 			//Class and Feature IDs 
-			static const unsigned int EXTENSIONPOINT_CLASS = 99;
+			static const unsigned int EXTENSIONPOINT_CLASS = 100;
 			static const unsigned int EXTENSIONPOINT_CLASS_FEATURE_COUNT = 13;
-			static const unsigned int EXTENSIONPOINT_CLASS_OPERATION_COUNT = 61;
+			static const unsigned int EXTENSIONPOINT_CLASS_OPERATION_COUNT = 62;
 			
-			static const int EXTENSIONPOINT_ATTRIBUTE_USECASE = 9912;
+			static const int EXTENSIONPOINT_ATTRIBUTE_USECASE = 10012;
 			
-			static const int EXTENSIONPOINT_OPERATION_MUST_HAVE_NAME_EDIAGNOSTICCHAIN_EMAP = 9973;
+			static const int EXTENSIONPOINT_OPERATION_MUST_HAVE_NAME_EDIAGNOSTICCHAIN_EMAP = 10074;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getExtensionPoint_Class() const = 0;
@@ -2604,12 +2625,12 @@ namespace uml
 
 			// Begin Class Factory
 			//Class and Feature IDs 
-			static const unsigned int FACTORY_CLASS = 100;
+			static const unsigned int FACTORY_CLASS = 101;
 			static const unsigned int FACTORY_CLASS_FEATURE_COUNT = 3;
-			static const unsigned int FACTORY_CLASS_OPERATION_COUNT = 42;
+			static const unsigned int FACTORY_CLASS_OPERATION_COUNT = 43;
 			
 			
-			static const int FACTORY_OPERATION_CREATE_CLASS = 10044;
+			static const int FACTORY_OPERATION_CREATE_CLASS = 10145;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getFactory_Class() const = 0;
@@ -2623,12 +2644,12 @@ namespace uml
 
 			// Begin Class Feature
 			//Class and Feature IDs 
-			static const unsigned int FEATURE_CLASS = 101;
+			static const unsigned int FEATURE_CLASS = 102;
 			static const unsigned int FEATURE_CLASS_FEATURE_COUNT = 14;
-			static const unsigned int FEATURE_CLASS_OPERATION_COUNT = 60;
-			static const int FEATURE_ATTRIBUTE_ISSTATIC = 10113;
+			static const unsigned int FEATURE_CLASS_OPERATION_COUNT = 61;
+			static const int FEATURE_ATTRIBUTE_ISSTATIC = 10213;
 			
-			static const int FEATURE_ATTRIBUTE_FEATURINGCLASSIFIER = 10112;
+			static const int FEATURE_ATTRIBUTE_FEATURINGCLASSIFIER = 10212;
 			
 			
 			//Class and Feature Getter
@@ -2644,12 +2665,12 @@ namespace uml
 
 			// Begin Class FinalNode
 			//Class and Feature IDs 
-			static const unsigned int FINALNODE_CLASS = 102;
+			static const unsigned int FINALNODE_CLASS = 103;
 			static const unsigned int FINALNODE_CLASS_FEATURE_COUNT = 20;
-			static const unsigned int FINALNODE_CLASS_OPERATION_COUNT = 62;
+			static const unsigned int FINALNODE_CLASS_OPERATION_COUNT = 63;
 			
 			
-			static const int FINALNODE_OPERATION_NO_OUTGOING_EDGES_EDIAGNOSTICCHAIN_EMAP = 10281;
+			static const int FINALNODE_OPERATION_NO_OUTGOING_EDGES_EDIAGNOSTICCHAIN_EMAP = 10382;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getFinalNode_Class() const = 0;
@@ -2663,17 +2684,17 @@ namespace uml
 
 			// Begin Class FinalState
 			//Class and Feature IDs 
-			static const unsigned int FINALSTATE_CLASS = 103;
+			static const unsigned int FINALSTATE_CLASS = 104;
 			static const unsigned int FINALSTATE_CLASS_FEATURE_COUNT = 35;
-			static const unsigned int FINALSTATE_CLASS_OPERATION_COUNT = 94;
+			static const unsigned int FINALSTATE_CLASS_OPERATION_COUNT = 95;
 			
 			
-			static const int FINALSTATE_OPERATION_CANNOT_REFERENCE_SUBMACHINE_EDIAGNOSTICCHAIN_EMAP = 10426;
-			static const int FINALSTATE_OPERATION_NO_ENTRY_BEHAVIOR_EDIAGNOSTICCHAIN_EMAP = 10427;
-			static const int FINALSTATE_OPERATION_NO_EXIT_BEHAVIOR_EDIAGNOSTICCHAIN_EMAP = 10423;
-			static const int FINALSTATE_OPERATION_NO_OUTGOING_TRANSITIONS_EDIAGNOSTICCHAIN_EMAP = 10424;
-			static const int FINALSTATE_OPERATION_NO_REGIONS_EDIAGNOSTICCHAIN_EMAP = 10425;
-			static const int FINALSTATE_OPERATION_NO_STATE_BEHAVIOR_EDIAGNOSTICCHAIN_EMAP = 10428;
+			static const int FINALSTATE_OPERATION_CANNOT_REFERENCE_SUBMACHINE_EDIAGNOSTICCHAIN_EMAP = 10527;
+			static const int FINALSTATE_OPERATION_NO_ENTRY_BEHAVIOR_EDIAGNOSTICCHAIN_EMAP = 10528;
+			static const int FINALSTATE_OPERATION_NO_EXIT_BEHAVIOR_EDIAGNOSTICCHAIN_EMAP = 10524;
+			static const int FINALSTATE_OPERATION_NO_OUTGOING_TRANSITIONS_EDIAGNOSTICCHAIN_EMAP = 10525;
+			static const int FINALSTATE_OPERATION_NO_REGIONS_EDIAGNOSTICCHAIN_EMAP = 10526;
+			static const int FINALSTATE_OPERATION_NO_STATE_BEHAVIOR_EDIAGNOSTICCHAIN_EMAP = 10529;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getFinalState_Class() const = 0;
@@ -2692,9 +2713,9 @@ namespace uml
 
 			// Begin Class FlowFinalNode
 			//Class and Feature IDs 
-			static const unsigned int FLOWFINALNODE_CLASS = 104;
+			static const unsigned int FLOWFINALNODE_CLASS = 105;
 			static const unsigned int FLOWFINALNODE_CLASS_FEATURE_COUNT = 20;
-			static const unsigned int FLOWFINALNODE_CLASS_OPERATION_COUNT = 62;
+			static const unsigned int FLOWFINALNODE_CLASS_OPERATION_COUNT = 63;
 			
 			
 			
@@ -2709,13 +2730,13 @@ namespace uml
 
 			// Begin Class ForkNode
 			//Class and Feature IDs 
-			static const unsigned int FORKNODE_CLASS = 105;
+			static const unsigned int FORKNODE_CLASS = 106;
 			static const unsigned int FORKNODE_CLASS_FEATURE_COUNT = 20;
-			static const unsigned int FORKNODE_CLASS_OPERATION_COUNT = 63;
+			static const unsigned int FORKNODE_CLASS_OPERATION_COUNT = 64;
 			
 			
-			static const int FORKNODE_OPERATION_EDGES_EDIAGNOSTICCHAIN_EMAP = 10581;
-			static const int FORKNODE_OPERATION_ONE_INCOMING_EDGE_EDIAGNOSTICCHAIN_EMAP = 10582;
+			static const int FORKNODE_OPERATION_EDGES_EDIAGNOSTICCHAIN_EMAP = 10682;
+			static const int FORKNODE_OPERATION_ONE_INCOMING_EDGE_EDIAGNOSTICCHAIN_EMAP = 10683;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getForkNode_Class() const = 0;
@@ -2730,14 +2751,14 @@ namespace uml
 
 			// Begin Class FunctionBehavior
 			//Class and Feature IDs 
-			static const unsigned int FUNCTIONBEHAVIOR_CLASS = 106;
+			static const unsigned int FUNCTIONBEHAVIOR_CLASS = 107;
 			static const unsigned int FUNCTIONBEHAVIOR_CLASS_FEATURE_COUNT = 63;
-			static const unsigned int FUNCTIONBEHAVIOR_CLASS_OPERATION_COUNT = 130;
+			static const unsigned int FUNCTIONBEHAVIOR_CLASS_OPERATION_COUNT = 131;
 			
 			
-			static const int FUNCTIONBEHAVIOR_OPERATION_HASALLDATATYPEATTRIBUTES_DATATYPE = 10792;
-			static const int FUNCTIONBEHAVIOR_OPERATION_ONE_OUTPUT_PARAMETER_EDIAGNOSTICCHAIN_EMAP = 10790;
-			static const int FUNCTIONBEHAVIOR_OPERATION_TYPES_OF_PARAMETERS_EDIAGNOSTICCHAIN_EMAP = 10791;
+			static const int FUNCTIONBEHAVIOR_OPERATION_HASALLDATATYPEATTRIBUTES_DATATYPE = 10893;
+			static const int FUNCTIONBEHAVIOR_OPERATION_ONE_OUTPUT_PARAMETER_EDIAGNOSTICCHAIN_EMAP = 10891;
+			static const int FUNCTIONBEHAVIOR_OPERATION_TYPES_OF_PARAMETERS_EDIAGNOSTICCHAIN_EMAP = 10892;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getFunctionBehavior_Class() const = 0;
@@ -2753,25 +2774,25 @@ namespace uml
 
 			// Begin Class Gate
 			//Class and Feature IDs 
-			static const unsigned int GATE_CLASS = 107;
+			static const unsigned int GATE_CLASS = 108;
 			static const unsigned int GATE_CLASS_FEATURE_COUNT = 10;
-			static const unsigned int GATE_CLASS_OPERATION_COUNT = 73;
+			static const unsigned int GATE_CLASS_OPERATION_COUNT = 74;
 			
 			
-			static const int GATE_OPERATION_ACTUAL_GATE_DISTINGUISHABLE_EDIAGNOSTICCHAIN_EMAP = 10773;
-			static const int GATE_OPERATION_ACTUAL_GATE_MATCHED_EDIAGNOSTICCHAIN_EMAP = 10769;
-			static const int GATE_OPERATION_FORMAL_GATE_DISTINGUISHABLE_EDIAGNOSTICCHAIN_EMAP = 10772;
-			static const int GATE_OPERATION_GETNAME = 10780;
-			static const int GATE_OPERATION_GETOPERAND = 10782;
-			static const int GATE_OPERATION_INSIDE_CF_GATE_DISTINGUISHABLE_EDIAGNOSTICCHAIN_EMAP = 10775;
-			static const int GATE_OPERATION_INSIDE_CF_MATCHED_EDIAGNOSTICCHAIN_EMAP = 10770;
-			static const int GATE_OPERATION_ISACTUAL = 10778;
-			static const int GATE_OPERATION_ISFORMAL = 10779;
-			static const int GATE_OPERATION_ISINSIDECF = 10777;
-			static const int GATE_OPERATION_ISOUTSIDECF = 10776;
-			static const int GATE_OPERATION_MATCHES_GATE = 10781;
-			static const int GATE_OPERATION_OUTSIDE_CF_GATE_DISTINGUISHABLE_EDIAGNOSTICCHAIN_EMAP = 10774;
-			static const int GATE_OPERATION_OUTSIDE_CF_MATCHED_EDIAGNOSTICCHAIN_EMAP = 10771;
+			static const int GATE_OPERATION_ACTUAL_GATE_DISTINGUISHABLE_EDIAGNOSTICCHAIN_EMAP = 10874;
+			static const int GATE_OPERATION_ACTUAL_GATE_MATCHED_EDIAGNOSTICCHAIN_EMAP = 10870;
+			static const int GATE_OPERATION_FORMAL_GATE_DISTINGUISHABLE_EDIAGNOSTICCHAIN_EMAP = 10873;
+			static const int GATE_OPERATION_GETNAME = 10881;
+			static const int GATE_OPERATION_GETOPERAND = 10883;
+			static const int GATE_OPERATION_INSIDE_CF_GATE_DISTINGUISHABLE_EDIAGNOSTICCHAIN_EMAP = 10876;
+			static const int GATE_OPERATION_INSIDE_CF_MATCHED_EDIAGNOSTICCHAIN_EMAP = 10871;
+			static const int GATE_OPERATION_ISACTUAL = 10879;
+			static const int GATE_OPERATION_ISFORMAL = 10880;
+			static const int GATE_OPERATION_ISINSIDECF = 10878;
+			static const int GATE_OPERATION_ISOUTSIDECF = 10877;
+			static const int GATE_OPERATION_MATCHES_GATE = 10882;
+			static const int GATE_OPERATION_OUTSIDE_CF_GATE_DISTINGUISHABLE_EDIAGNOSTICCHAIN_EMAP = 10875;
+			static const int GATE_OPERATION_OUTSIDE_CF_MATCHED_EDIAGNOSTICCHAIN_EMAP = 10872;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getGate_Class() const = 0;
@@ -2798,14 +2819,14 @@ namespace uml
 
 			// Begin Class GeneralOrdering
 			//Class and Feature IDs 
-			static const unsigned int GENERALORDERING_CLASS = 108;
+			static const unsigned int GENERALORDERING_CLASS = 109;
 			static const unsigned int GENERALORDERING_CLASS_FEATURE_COUNT = 11;
-			static const unsigned int GENERALORDERING_CLASS_OPERATION_COUNT = 56;
+			static const unsigned int GENERALORDERING_CLASS_OPERATION_COUNT = 57;
 			
-			static const int GENERALORDERING_ATTRIBUTE_AFTER = 10809;
-			static const int GENERALORDERING_ATTRIBUTE_BEFORE = 10810;
+			static const int GENERALORDERING_ATTRIBUTE_AFTER = 10909;
+			static const int GENERALORDERING_ATTRIBUTE_BEFORE = 10910;
 			
-			static const int GENERALORDERING_OPERATION_IRREFLEXIVE_TRANSITIVE_CLOSURE_EDIAGNOSTICCHAIN_EMAP = 10866;
+			static const int GENERALORDERING_OPERATION_IRREFLEXIVE_TRANSITIVE_CLOSURE_EDIAGNOSTICCHAIN_EMAP = 10967;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getGeneralOrdering_Class() const = 0;
@@ -2821,14 +2842,14 @@ namespace uml
 
 			// Begin Class Generalization
 			//Class and Feature IDs 
-			static const unsigned int GENERALIZATION_CLASS = 109;
+			static const unsigned int GENERALIZATION_CLASS = 110;
 			static const unsigned int GENERALIZATION_CLASS_FEATURE_COUNT = 10;
-			static const unsigned int GENERALIZATION_CLASS_OPERATION_COUNT = 41;
-			static const int GENERALIZATION_ATTRIBUTE_ISSUBSTITUTABLE = 10908;
+			static const unsigned int GENERALIZATION_CLASS_OPERATION_COUNT = 42;
+			static const int GENERALIZATION_ATTRIBUTE_ISSUBSTITUTABLE = 11008;
 			
-			static const int GENERALIZATION_ATTRIBUTE_GENERAL = 10906;
-			static const int GENERALIZATION_ATTRIBUTE_GENERALIZATIONSET = 10907;
-			static const int GENERALIZATION_ATTRIBUTE_SPECIFIC = 10909;
+			static const int GENERALIZATION_ATTRIBUTE_GENERAL = 11006;
+			static const int GENERALIZATION_ATTRIBUTE_GENERALIZATIONSET = 11007;
+			static const int GENERALIZATION_ATTRIBUTE_SPECIFIC = 11009;
 			
 			
 			//Class and Feature Getter
@@ -2846,17 +2867,17 @@ namespace uml
 
 			// Begin Class GeneralizationSet
 			//Class and Feature IDs 
-			static const unsigned int GENERALIZATIONSET_CLASS = 110;
+			static const unsigned int GENERALIZATIONSET_CLASS = 111;
 			static const unsigned int GENERALIZATIONSET_CLASS_FEATURE_COUNT = 16;
-			static const unsigned int GENERALIZATIONSET_CLASS_OPERATION_COUNT = 60;
-			static const int GENERALIZATIONSET_ATTRIBUTE_ISCOVERING = 11012;
-			static const int GENERALIZATIONSET_ATTRIBUTE_ISDISJOINT = 11013;
+			static const unsigned int GENERALIZATIONSET_CLASS_OPERATION_COUNT = 61;
+			static const int GENERALIZATIONSET_ATTRIBUTE_ISCOVERING = 11112;
+			static const int GENERALIZATIONSET_ATTRIBUTE_ISDISJOINT = 11113;
 			
-			static const int GENERALIZATIONSET_ATTRIBUTE_GENERALIZATION = 11015;
-			static const int GENERALIZATIONSET_ATTRIBUTE_POWERTYPE = 11014;
+			static const int GENERALIZATIONSET_ATTRIBUTE_GENERALIZATION = 11115;
+			static const int GENERALIZATIONSET_ATTRIBUTE_POWERTYPE = 11114;
 			
-			static const int GENERALIZATIONSET_OPERATION_GENERALIZATION_SAME_CLASSIFIER_EDIAGNOSTICCHAIN_EMAP = 11074;
-			static const int GENERALIZATIONSET_OPERATION_MAPS_TO_GENERALIZATION_SET_EDIAGNOSTICCHAIN_EMAP = 11075;
+			static const int GENERALIZATIONSET_OPERATION_GENERALIZATION_SAME_CLASSIFIER_EDIAGNOSTICCHAIN_EMAP = 11175;
+			static const int GENERALIZATIONSET_OPERATION_MAPS_TO_GENERALIZATION_SET_EDIAGNOSTICCHAIN_EMAP = 11176;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getGeneralizationSet_Class() const = 0;
@@ -2875,12 +2896,12 @@ namespace uml
 
 			// Begin Class Image
 			//Class and Feature IDs 
-			static const unsigned int IMAGE_CLASS = 111;
+			static const unsigned int IMAGE_CLASS = 112;
 			static const unsigned int IMAGE_CLASS_FEATURE_COUNT = 6;
-			static const unsigned int IMAGE_CLASS_OPERATION_COUNT = 41;
-			static const int IMAGE_ATTRIBUTE_CONTENT = 11103;
-			static const int IMAGE_ATTRIBUTE_FORMAT = 11104;
-			static const int IMAGE_ATTRIBUTE_LOCATION = 11105;
+			static const unsigned int IMAGE_CLASS_OPERATION_COUNT = 42;
+			static const int IMAGE_ATTRIBUTE_CONTENT = 11203;
+			static const int IMAGE_ATTRIBUTE_FORMAT = 11204;
+			static const int IMAGE_ATTRIBUTE_LOCATION = 11205;
 			
 			
 			
@@ -2898,12 +2919,12 @@ namespace uml
 
 			// Begin Class Include
 			//Class and Feature IDs 
-			static const unsigned int INCLUDE_CLASS = 112;
+			static const unsigned int INCLUDE_CLASS = 113;
 			static const unsigned int INCLUDE_CLASS_FEATURE_COUNT = 14;
-			static const unsigned int INCLUDE_CLASS_OPERATION_COUNT = 55;
+			static const unsigned int INCLUDE_CLASS_OPERATION_COUNT = 56;
 			
-			static const int INCLUDE_ATTRIBUTE_ADDITION = 11212;
-			static const int INCLUDE_ATTRIBUTE_INCLUDINGCASE = 11213;
+			static const int INCLUDE_ATTRIBUTE_ADDITION = 11312;
+			static const int INCLUDE_ATTRIBUTE_INCLUDINGCASE = 11313;
 			
 			
 			//Class and Feature Getter
@@ -2919,21 +2940,21 @@ namespace uml
 
 			// Begin Class InformationFlow
 			//Class and Feature IDs 
-			static const unsigned int INFORMATIONFLOW_CLASS = 113;
+			static const unsigned int INFORMATIONFLOW_CLASS = 114;
 			static const unsigned int INFORMATIONFLOW_CLASS_FEATURE_COUNT = 22;
-			static const unsigned int INFORMATIONFLOW_CLASS_OPERATION_COUNT = 61;
+			static const unsigned int INFORMATIONFLOW_CLASS_OPERATION_COUNT = 62;
 			
-			static const int INFORMATIONFLOW_ATTRIBUTE_CONVEYED = 11315;
-			static const int INFORMATIONFLOW_ATTRIBUTE_INFORMATIONSOURCE = 11316;
-			static const int INFORMATIONFLOW_ATTRIBUTE_INFORMATIONTARGET = 11317;
-			static const int INFORMATIONFLOW_ATTRIBUTE_REALIZATION = 11318;
-			static const int INFORMATIONFLOW_ATTRIBUTE_REALIZINGACTIVITYEDGE = 11319;
-			static const int INFORMATIONFLOW_ATTRIBUTE_REALIZINGCONNECTOR = 11320;
-			static const int INFORMATIONFLOW_ATTRIBUTE_REALIZINGMESSAGE = 11321;
+			static const int INFORMATIONFLOW_ATTRIBUTE_CONVEYED = 11415;
+			static const int INFORMATIONFLOW_ATTRIBUTE_INFORMATIONSOURCE = 11416;
+			static const int INFORMATIONFLOW_ATTRIBUTE_INFORMATIONTARGET = 11417;
+			static const int INFORMATIONFLOW_ATTRIBUTE_REALIZATION = 11418;
+			static const int INFORMATIONFLOW_ATTRIBUTE_REALIZINGACTIVITYEDGE = 11419;
+			static const int INFORMATIONFLOW_ATTRIBUTE_REALIZINGCONNECTOR = 11420;
+			static const int INFORMATIONFLOW_ATTRIBUTE_REALIZINGMESSAGE = 11421;
 			
-			static const int INFORMATIONFLOW_OPERATION_CONVEY_CLASSIFIERS_EDIAGNOSTICCHAIN_EMAP = 11382;
-			static const int INFORMATIONFLOW_OPERATION_MUST_CONFORM_EDIAGNOSTICCHAIN_EMAP = 11380;
-			static const int INFORMATIONFLOW_OPERATION_SOURCES_AND_TARGETS_KIND_EDIAGNOSTICCHAIN_EMAP = 11381;
+			static const int INFORMATIONFLOW_OPERATION_CONVEY_CLASSIFIERS_EDIAGNOSTICCHAIN_EMAP = 11483;
+			static const int INFORMATIONFLOW_OPERATION_MUST_CONFORM_EDIAGNOSTICCHAIN_EMAP = 11481;
+			static const int INFORMATIONFLOW_OPERATION_SOURCES_AND_TARGETS_KIND_EDIAGNOSTICCHAIN_EMAP = 11482;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getInformationFlow_Class() const = 0;
@@ -2956,15 +2977,15 @@ namespace uml
 
 			// Begin Class InformationItem
 			//Class and Feature IDs 
-			static const unsigned int INFORMATIONITEM_CLASS = 114;
+			static const unsigned int INFORMATIONITEM_CLASS = 115;
 			static const unsigned int INFORMATIONITEM_CLASS_FEATURE_COUNT = 39;
-			static const unsigned int INFORMATIONITEM_CLASS_OPERATION_COUNT = 111;
+			static const unsigned int INFORMATIONITEM_CLASS_OPERATION_COUNT = 112;
 			
-			static const int INFORMATIONITEM_ATTRIBUTE_REPRESENTED = 11438;
+			static const int INFORMATIONITEM_ATTRIBUTE_REPRESENTED = 11538;
 			
-			static const int INFORMATIONITEM_OPERATION_HAS_NO_EDIAGNOSTICCHAIN_EMAP = 11548;
-			static const int INFORMATIONITEM_OPERATION_NOT_INSTANTIABLE_EDIAGNOSTICCHAIN_EMAP = 11549;
-			static const int INFORMATIONITEM_OPERATION_SOURCES_AND_TARGETS_EDIAGNOSTICCHAIN_EMAP = 11547;
+			static const int INFORMATIONITEM_OPERATION_HAS_NO_EDIAGNOSTICCHAIN_EMAP = 11649;
+			static const int INFORMATIONITEM_OPERATION_NOT_INSTANTIABLE_EDIAGNOSTICCHAIN_EMAP = 11650;
+			static const int INFORMATIONITEM_OPERATION_SOURCES_AND_TARGETS_EDIAGNOSTICCHAIN_EMAP = 11648;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getInformationItem_Class() const = 0;
@@ -2981,13 +3002,13 @@ namespace uml
 
 			// Begin Class InitialNode
 			//Class and Feature IDs 
-			static const unsigned int INITIALNODE_CLASS = 115;
+			static const unsigned int INITIALNODE_CLASS = 116;
 			static const unsigned int INITIALNODE_CLASS_FEATURE_COUNT = 20;
-			static const unsigned int INITIALNODE_CLASS_OPERATION_COUNT = 63;
+			static const unsigned int INITIALNODE_CLASS_OPERATION_COUNT = 64;
 			
 			
-			static const int INITIALNODE_OPERATION_CONTROL_EDGES_EDIAGNOSTICCHAIN_EMAP = 11582;
-			static const int INITIALNODE_OPERATION_NO_INCOMING_EDGES_EDIAGNOSTICCHAIN_EMAP = 11581;
+			static const int INITIALNODE_OPERATION_CONTROL_EDGES_EDIAGNOSTICCHAIN_EMAP = 11683;
+			static const int INITIALNODE_OPERATION_NO_INCOMING_EDGES_EDIAGNOSTICCHAIN_EMAP = 11682;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getInitialNode_Class() const = 0;
@@ -3002,16 +3023,16 @@ namespace uml
 
 			// Begin Class InputPin
 			//Class and Feature IDs 
-			static const unsigned int INPUTPIN_CLASS = 116;
+			static const unsigned int INPUTPIN_CLASS = 117;
 			static const unsigned int INPUTPIN_CLASS_FEATURE_COUNT = 37;
-			static const unsigned int INPUTPIN_CLASS_OPERATION_COUNT = 79;
+			static const unsigned int INPUTPIN_CLASS_OPERATION_COUNT = 80;
 			
-			static const int INPUTPIN_ATTRIBUTE_ACTION = 11636;
-			static const int INPUTPIN_ATTRIBUTE_CALLOPERATIONACTION = 11634;
-			static const int INPUTPIN_ATTRIBUTE_INVOCATIONACTION = 11635;
-			static const int INPUTPIN_ATTRIBUTE_STRUCTURALFEATUREACTION = 11633;
+			static const int INPUTPIN_ATTRIBUTE_ACTION = 11736;
+			static const int INPUTPIN_ATTRIBUTE_CALLOPERATIONACTION = 11734;
+			static const int INPUTPIN_ATTRIBUTE_INVOCATIONACTION = 11735;
+			static const int INPUTPIN_ATTRIBUTE_STRUCTURALFEATUREACTION = 11733;
 			
-			static const int INPUTPIN_OPERATION_OUTGOING_EDGES_STRUCTURED_ONLY_EDIAGNOSTICCHAIN_EMAP = 11715;
+			static const int INPUTPIN_OPERATION_OUTGOING_EDGES_STRUCTURED_ONLY_EDIAGNOSTICCHAIN_EMAP = 11816;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getInputPin_Class() const = 0;
@@ -3029,18 +3050,18 @@ namespace uml
 
 			// Begin Class InstanceSpecification
 			//Class and Feature IDs 
-			static const unsigned int INSTANCESPECIFICATION_CLASS = 117;
+			static const unsigned int INSTANCESPECIFICATION_CLASS = 118;
 			static const unsigned int INSTANCESPECIFICATION_CLASS_FEATURE_COUNT = 17;
-			static const unsigned int INSTANCESPECIFICATION_CLASS_OPERATION_COUNT = 63;
+			static const unsigned int INSTANCESPECIFICATION_CLASS_OPERATION_COUNT = 64;
 			
-			static const int INSTANCESPECIFICATION_ATTRIBUTE_CLASSIFIER = 11714;
-			static const int INSTANCESPECIFICATION_ATTRIBUTE_SLOT = 11715;
-			static const int INSTANCESPECIFICATION_ATTRIBUTE_SPECIFICATION = 11716;
+			static const int INSTANCESPECIFICATION_ATTRIBUTE_CLASSIFIER = 11814;
+			static const int INSTANCESPECIFICATION_ATTRIBUTE_SLOT = 11815;
+			static const int INSTANCESPECIFICATION_ATTRIBUTE_SPECIFICATION = 11816;
 			
-			static const int INSTANCESPECIFICATION_OPERATION_DEFINING_FEATURE_EDIAGNOSTICCHAIN_EMAP = 11778;
-			static const int INSTANCESPECIFICATION_OPERATION_DEPLOYMENT_ARTIFACT_EDIAGNOSTICCHAIN_EMAP = 11776;
-			static const int INSTANCESPECIFICATION_OPERATION_DEPLOYMENT_TARGET_EDIAGNOSTICCHAIN_EMAP = 11779;
-			static const int INSTANCESPECIFICATION_OPERATION_STRUCTURAL_FEATURE_EDIAGNOSTICCHAIN_EMAP = 11777;
+			static const int INSTANCESPECIFICATION_OPERATION_DEFINING_FEATURE_EDIAGNOSTICCHAIN_EMAP = 11879;
+			static const int INSTANCESPECIFICATION_OPERATION_DEPLOYMENT_ARTIFACT_EDIAGNOSTICCHAIN_EMAP = 11877;
+			static const int INSTANCESPECIFICATION_OPERATION_DEPLOYMENT_TARGET_EDIAGNOSTICCHAIN_EMAP = 11880;
+			static const int INSTANCESPECIFICATION_OPERATION_STRUCTURAL_FEATURE_EDIAGNOSTICCHAIN_EMAP = 11878;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getInstanceSpecification_Class() const = 0;
@@ -3060,11 +3081,11 @@ namespace uml
 
 			// Begin Class InstanceValue
 			//Class and Feature IDs 
-			static const unsigned int INSTANCEVALUE_CLASS = 118;
+			static const unsigned int INSTANCEVALUE_CLASS = 119;
 			static const unsigned int INSTANCEVALUE_CLASS_FEATURE_COUNT = 15;
-			static const unsigned int INSTANCEVALUE_CLASS_OPERATION_COUNT = 65;
+			static const unsigned int INSTANCEVALUE_CLASS_OPERATION_COUNT = 66;
 			
-			static const int INSTANCEVALUE_ATTRIBUTE_INSTANCE = 11814;
+			static const int INSTANCEVALUE_ATTRIBUTE_INSTANCE = 11914;
 			
 			
 			//Class and Feature Getter
@@ -3079,17 +3100,17 @@ namespace uml
 
 			// Begin Class Interaction
 			//Class and Feature IDs 
-			static const unsigned int INTERACTION_CLASS = 119;
+			static const unsigned int INTERACTION_CLASS = 120;
 			static const unsigned int INTERACTION_CLASS_FEATURE_COUNT = 70;
-			static const unsigned int INTERACTION_CLASS_OPERATION_COUNT = 128;
+			static const unsigned int INTERACTION_CLASS_OPERATION_COUNT = 129;
 			
-			static const int INTERACTION_ATTRIBUTE_ACTION = 11967;
-			static const int INTERACTION_ATTRIBUTE_FORMALGATE = 11968;
-			static const int INTERACTION_ATTRIBUTE_FRAGMENT = 11966;
-			static const int INTERACTION_ATTRIBUTE_LIFELINE = 11965;
-			static const int INTERACTION_ATTRIBUTE_MESSAGE = 11969;
+			static const int INTERACTION_ATTRIBUTE_ACTION = 12067;
+			static const int INTERACTION_ATTRIBUTE_FORMALGATE = 12068;
+			static const int INTERACTION_ATTRIBUTE_FRAGMENT = 12066;
+			static const int INTERACTION_ATTRIBUTE_LIFELINE = 12065;
+			static const int INTERACTION_ATTRIBUTE_MESSAGE = 12069;
 			
-			static const int INTERACTION_OPERATION_NOT_CONTAINED_EDIAGNOSTICCHAIN_EMAP = 12097;
+			static const int INTERACTION_OPERATION_NOT_CONTAINED_EDIAGNOSTICCHAIN_EMAP = 12198;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getInteraction_Class() const = 0;
@@ -3108,19 +3129,19 @@ namespace uml
 
 			// Begin Class InteractionConstraint
 			//Class and Feature IDs 
-			static const unsigned int INTERACTIONCONSTRAINT_CLASS = 120;
+			static const unsigned int INTERACTIONCONSTRAINT_CLASS = 121;
 			static const unsigned int INTERACTIONCONSTRAINT_CLASS_FEATURE_COUNT = 17;
-			static const unsigned int INTERACTIONCONSTRAINT_CLASS_OPERATION_COUNT = 67;
+			static const unsigned int INTERACTIONCONSTRAINT_CLASS_OPERATION_COUNT = 68;
 			
-			static const int INTERACTIONCONSTRAINT_ATTRIBUTE_MAXINT = 12015;
-			static const int INTERACTIONCONSTRAINT_ATTRIBUTE_MININT = 12016;
+			static const int INTERACTIONCONSTRAINT_ATTRIBUTE_MAXINT = 12115;
+			static const int INTERACTIONCONSTRAINT_ATTRIBUTE_MININT = 12116;
 			
-			static const int INTERACTIONCONSTRAINT_OPERATION_DYNAMIC_VARIABLES_EDIAGNOSTICCHAIN_EMAP = 12081;
-			static const int INTERACTIONCONSTRAINT_OPERATION_GLOBAL_DATA_EDIAGNOSTICCHAIN_EMAP = 12082;
-			static const int INTERACTIONCONSTRAINT_OPERATION_MAXINT_GREATER_EQUAL_MININT_EDIAGNOSTICCHAIN_EMAP = 12083;
-			static const int INTERACTIONCONSTRAINT_OPERATION_MAXINT_POSITIVE_EDIAGNOSTICCHAIN_EMAP = 12080;
-			static const int INTERACTIONCONSTRAINT_OPERATION_MININT_MAXINT_EDIAGNOSTICCHAIN_EMAP = 12078;
-			static const int INTERACTIONCONSTRAINT_OPERATION_MININT_NON_NEGATIVE_EDIAGNOSTICCHAIN_EMAP = 12079;
+			static const int INTERACTIONCONSTRAINT_OPERATION_DYNAMIC_VARIABLES_EDIAGNOSTICCHAIN_EMAP = 12182;
+			static const int INTERACTIONCONSTRAINT_OPERATION_GLOBAL_DATA_EDIAGNOSTICCHAIN_EMAP = 12183;
+			static const int INTERACTIONCONSTRAINT_OPERATION_MAXINT_GREATER_EQUAL_MININT_EDIAGNOSTICCHAIN_EMAP = 12184;
+			static const int INTERACTIONCONSTRAINT_OPERATION_MAXINT_POSITIVE_EDIAGNOSTICCHAIN_EMAP = 12181;
+			static const int INTERACTIONCONSTRAINT_OPERATION_MININT_MAXINT_EDIAGNOSTICCHAIN_EMAP = 12179;
+			static const int INTERACTIONCONSTRAINT_OPERATION_MININT_NON_NEGATIVE_EDIAGNOSTICCHAIN_EMAP = 12180;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getInteractionConstraint_Class() const = 0;
@@ -3141,14 +3162,14 @@ namespace uml
 
 			// Begin Class InteractionFragment
 			//Class and Feature IDs 
-			static const unsigned int INTERACTIONFRAGMENT_CLASS = 121;
+			static const unsigned int INTERACTIONFRAGMENT_CLASS = 122;
 			static const unsigned int INTERACTIONFRAGMENT_CLASS_FEATURE_COUNT = 13;
-			static const unsigned int INTERACTIONFRAGMENT_CLASS_OPERATION_COUNT = 55;
+			static const unsigned int INTERACTIONFRAGMENT_CLASS_OPERATION_COUNT = 56;
 			
-			static const int INTERACTIONFRAGMENT_ATTRIBUTE_COVERED = 12109;
-			static const int INTERACTIONFRAGMENT_ATTRIBUTE_ENCLOSINGINTERACTION = 12111;
-			static const int INTERACTIONFRAGMENT_ATTRIBUTE_ENCLOSINGOPERAND = 12110;
-			static const int INTERACTIONFRAGMENT_ATTRIBUTE_GENERALORDERING = 12112;
+			static const int INTERACTIONFRAGMENT_ATTRIBUTE_COVERED = 12209;
+			static const int INTERACTIONFRAGMENT_ATTRIBUTE_ENCLOSINGINTERACTION = 12211;
+			static const int INTERACTIONFRAGMENT_ATTRIBUTE_ENCLOSINGOPERAND = 12210;
+			static const int INTERACTIONFRAGMENT_ATTRIBUTE_GENERALORDERING = 12212;
 			
 			
 			//Class and Feature Getter
@@ -3166,15 +3187,15 @@ namespace uml
 
 			// Begin Class InteractionOperand
 			//Class and Feature IDs 
-			static const unsigned int INTERACTIONOPERAND_CLASS = 122;
+			static const unsigned int INTERACTIONOPERAND_CLASS = 123;
 			static const unsigned int INTERACTIONOPERAND_CLASS_FEATURE_COUNT = 21;
-			static const unsigned int INTERACTIONOPERAND_CLASS_OPERATION_COUNT = 70;
+			static const unsigned int INTERACTIONOPERAND_CLASS_OPERATION_COUNT = 71;
 			
-			static const int INTERACTIONOPERAND_ATTRIBUTE_FRAGMENT = 12219;
-			static const int INTERACTIONOPERAND_ATTRIBUTE_GUARD = 12220;
+			static const int INTERACTIONOPERAND_ATTRIBUTE_FRAGMENT = 12319;
+			static const int INTERACTIONOPERAND_ATTRIBUTE_GUARD = 12320;
 			
-			static const int INTERACTIONOPERAND_OPERATION_GUARD_CONTAIN_REFERENCES_EDIAGNOSTICCHAIN_EMAP = 12289;
-			static const int INTERACTIONOPERAND_OPERATION_GUARD_DIRECTLY_PRIOR_EDIAGNOSTICCHAIN_EMAP = 12290;
+			static const int INTERACTIONOPERAND_OPERATION_GUARD_CONTAIN_REFERENCES_EDIAGNOSTICCHAIN_EMAP = 12390;
+			static const int INTERACTIONOPERAND_OPERATION_GUARD_DIRECTLY_PRIOR_EDIAGNOSTICCHAIN_EMAP = 12391;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getInteractionOperand_Class() const = 0;
@@ -3191,22 +3212,22 @@ namespace uml
 
 			// Begin Class InteractionUse
 			//Class and Feature IDs 
-			static const unsigned int INTERACTIONUSE_CLASS = 124;
+			static const unsigned int INTERACTIONUSE_CLASS = 125;
 			static const unsigned int INTERACTIONUSE_CLASS_FEATURE_COUNT = 18;
-			static const unsigned int INTERACTIONUSE_CLASS_OPERATION_COUNT = 61;
+			static const unsigned int INTERACTIONUSE_CLASS_OPERATION_COUNT = 62;
 			
-			static const int INTERACTIONUSE_ATTRIBUTE_ACTUALGATE = 12413;
-			static const int INTERACTIONUSE_ATTRIBUTE_ARGUMENT = 12414;
-			static const int INTERACTIONUSE_ATTRIBUTE_REFERSTO = 12415;
-			static const int INTERACTIONUSE_ATTRIBUTE_RETURNVALUE = 12416;
-			static const int INTERACTIONUSE_ATTRIBUTE_RETURNVALUERECIPIENT = 12417;
+			static const int INTERACTIONUSE_ATTRIBUTE_ACTUALGATE = 12513;
+			static const int INTERACTIONUSE_ATTRIBUTE_ARGUMENT = 12514;
+			static const int INTERACTIONUSE_ATTRIBUTE_REFERSTO = 12515;
+			static const int INTERACTIONUSE_ATTRIBUTE_RETURNVALUE = 12516;
+			static const int INTERACTIONUSE_ATTRIBUTE_RETURNVALUERECIPIENT = 12517;
 			
-			static const int INTERACTIONUSE_OPERATION_ALL_LIFELINES_EDIAGNOSTICCHAIN_EMAP = 12478;
-			static const int INTERACTIONUSE_OPERATION_ARGUMENTS_ARE_CONSTANTS_EDIAGNOSTICCHAIN_EMAP = 12474;
-			static const int INTERACTIONUSE_OPERATION_ARGUMENTS_CORRESPOND_TO_PARAMETERS_EDIAGNOSTICCHAIN_EMAP = 12476;
-			static const int INTERACTIONUSE_OPERATION_GATES_MATCH_EDIAGNOSTICCHAIN_EMAP = 12473;
-			static const int INTERACTIONUSE_OPERATION_RETURNVALUERECIPIENT_COVERAGE_EDIAGNOSTICCHAIN_EMAP = 12475;
-			static const int INTERACTIONUSE_OPERATION_RETURNVALUE_TYPE_RECIPIENT_CORRESPONDENCE_EDIAGNOSTICCHAIN_EMAP = 12477;
+			static const int INTERACTIONUSE_OPERATION_ALL_LIFELINES_EDIAGNOSTICCHAIN_EMAP = 12579;
+			static const int INTERACTIONUSE_OPERATION_ARGUMENTS_ARE_CONSTANTS_EDIAGNOSTICCHAIN_EMAP = 12575;
+			static const int INTERACTIONUSE_OPERATION_ARGUMENTS_CORRESPOND_TO_PARAMETERS_EDIAGNOSTICCHAIN_EMAP = 12577;
+			static const int INTERACTIONUSE_OPERATION_GATES_MATCH_EDIAGNOSTICCHAIN_EMAP = 12574;
+			static const int INTERACTIONUSE_OPERATION_RETURNVALUERECIPIENT_COVERAGE_EDIAGNOSTICCHAIN_EMAP = 12576;
+			static const int INTERACTIONUSE_OPERATION_RETURNVALUE_TYPE_RECIPIENT_CORRESPONDENCE_EDIAGNOSTICCHAIN_EMAP = 12578;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getInteractionUse_Class() const = 0;
@@ -3230,20 +3251,20 @@ namespace uml
 
 			// Begin Class Interface
 			//Class and Feature IDs 
-			static const unsigned int INTERFACE_CLASS = 125;
+			static const unsigned int INTERFACE_CLASS = 126;
 			static const unsigned int INTERFACE_CLASS_FEATURE_COUNT = 44;
-			static const unsigned int INTERFACE_CLASS_OPERATION_COUNT = 111;
+			static const unsigned int INTERFACE_CLASS_OPERATION_COUNT = 112;
 			
-			static const int INTERFACE_ATTRIBUTE_NESTEDCLASSIFIER = 12538;
-			static const int INTERFACE_ATTRIBUTE_OWNEDATTRIBUTE = 12539;
-			static const int INTERFACE_ATTRIBUTE_OWNEDOPERATION = 12543;
-			static const int INTERFACE_ATTRIBUTE_OWNEDRECEPTION = 12540;
-			static const int INTERFACE_ATTRIBUTE_PROTOCOL = 12541;
-			static const int INTERFACE_ATTRIBUTE_REDEFINEDINTERFACE = 12542;
+			static const int INTERFACE_ATTRIBUTE_NESTEDCLASSIFIER = 12638;
+			static const int INTERFACE_ATTRIBUTE_OWNEDATTRIBUTE = 12639;
+			static const int INTERFACE_ATTRIBUTE_OWNEDOPERATION = 12643;
+			static const int INTERFACE_ATTRIBUTE_OWNEDRECEPTION = 12640;
+			static const int INTERFACE_ATTRIBUTE_PROTOCOL = 12641;
+			static const int INTERFACE_ATTRIBUTE_REDEFINEDINTERFACE = 12642;
 			
-			static const int INTERFACE_OPERATION_CREATEOWNEDATTRIBUTE_STRING_UNLIMITEDNATURAL = 12653;
-			static const int INTERFACE_OPERATION_CREATEOWNEDOPERATION_STRING_TYPE = 12654;
-			static const int INTERFACE_OPERATION_VISIBILITY_EDIAGNOSTICCHAIN_EMAP = 12652;
+			static const int INTERFACE_OPERATION_CREATEOWNEDATTRIBUTE_STRING_UNLIMITEDNATURAL = 12754;
+			static const int INTERFACE_OPERATION_CREATEOWNEDOPERATION_STRING_TYPE = 12755;
+			static const int INTERFACE_OPERATION_VISIBILITY_EDIAGNOSTICCHAIN_EMAP = 12753;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getInterface_Class() const = 0;
@@ -3265,12 +3286,12 @@ namespace uml
 
 			// Begin Class InterfaceRealization
 			//Class and Feature IDs 
-			static const unsigned int INTERFACEREALIZATION_CLASS = 126;
+			static const unsigned int INTERFACEREALIZATION_CLASS = 127;
 			static const unsigned int INTERFACEREALIZATION_CLASS_FEATURE_COUNT = 20;
-			static const unsigned int INTERFACEREALIZATION_CLASS_OPERATION_COUNT = 58;
+			static const unsigned int INTERFACEREALIZATION_CLASS_OPERATION_COUNT = 59;
 			
-			static const int INTERFACEREALIZATION_ATTRIBUTE_CONTRACT = 12618;
-			static const int INTERFACEREALIZATION_ATTRIBUTE_IMPLEMENTINGCLASSIFIER = 12619;
+			static const int INTERFACEREALIZATION_ATTRIBUTE_CONTRACT = 12718;
+			static const int INTERFACEREALIZATION_ATTRIBUTE_IMPLEMENTINGCLASSIFIER = 12719;
 			
 			
 			//Class and Feature Getter
@@ -3286,14 +3307,14 @@ namespace uml
 
 			// Begin Class InterruptibleActivityRegion
 			//Class and Feature IDs 
-			static const unsigned int INTERRUPTIBLEACTIVITYREGION_CLASS = 127;
+			static const unsigned int INTERRUPTIBLEACTIVITYREGION_CLASS = 128;
 			static const unsigned int INTERRUPTIBLEACTIVITYREGION_CLASS_FEATURE_COUNT = 16;
-			static const unsigned int INTERRUPTIBLEACTIVITYREGION_CLASS_OPERATION_COUNT = 59;
+			static const unsigned int INTERRUPTIBLEACTIVITYREGION_CLASS_OPERATION_COUNT = 60;
 			
-			static const int INTERRUPTIBLEACTIVITYREGION_ATTRIBUTE_INTERRUPTINGEDGE = 12714;
-			static const int INTERRUPTIBLEACTIVITYREGION_ATTRIBUTE_NODE = 12715;
+			static const int INTERRUPTIBLEACTIVITYREGION_ATTRIBUTE_INTERRUPTINGEDGE = 12814;
+			static const int INTERRUPTIBLEACTIVITYREGION_ATTRIBUTE_NODE = 12815;
 			
-			static const int INTERRUPTIBLEACTIVITYREGION_OPERATION_INTERRUPTING_EDGES_EDIAGNOSTICCHAIN_EMAP = 12774;
+			static const int INTERRUPTIBLEACTIVITYREGION_OPERATION_INTERRUPTING_EDGES_EDIAGNOSTICCHAIN_EMAP = 12875;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getInterruptibleActivityRegion_Class() const = 0;
@@ -3309,12 +3330,12 @@ namespace uml
 
 			// Begin Class Interval
 			//Class and Feature IDs 
-			static const unsigned int INTERVAL_CLASS = 128;
+			static const unsigned int INTERVAL_CLASS = 129;
 			static const unsigned int INTERVAL_CLASS_FEATURE_COUNT = 16;
-			static const unsigned int INTERVAL_CLASS_OPERATION_COUNT = 65;
+			static const unsigned int INTERVAL_CLASS_OPERATION_COUNT = 66;
 			
-			static const int INTERVAL_ATTRIBUTE_MAX = 12814;
-			static const int INTERVAL_ATTRIBUTE_MIN = 12815;
+			static const int INTERVAL_ATTRIBUTE_MAX = 12914;
+			static const int INTERVAL_ATTRIBUTE_MIN = 12915;
 			
 			
 			//Class and Feature Getter
@@ -3330,9 +3351,9 @@ namespace uml
 
 			// Begin Class IntervalConstraint
 			//Class and Feature IDs 
-			static const unsigned int INTERVALCONSTRAINT_CLASS = 129;
+			static const unsigned int INTERVALCONSTRAINT_CLASS = 130;
 			static const unsigned int INTERVALCONSTRAINT_CLASS_FEATURE_COUNT = 15;
-			static const unsigned int INTERVALCONSTRAINT_CLASS_OPERATION_COUNT = 61;
+			static const unsigned int INTERVALCONSTRAINT_CLASS_OPERATION_COUNT = 62;
 			
 			
 			
@@ -3347,12 +3368,12 @@ namespace uml
 
 			// Begin Class InvocationAction
 			//Class and Feature IDs 
-			static const unsigned int INVOCATIONACTION_CLASS = 130;
+			static const unsigned int INVOCATIONACTION_CLASS = 131;
 			static const unsigned int INVOCATIONACTION_CLASS_FEATURE_COUNT = 29;
-			static const unsigned int INVOCATIONACTION_CLASS_OPERATION_COUNT = 65;
+			static const unsigned int INVOCATIONACTION_CLASS_OPERATION_COUNT = 66;
 			
-			static const int INVOCATIONACTION_ATTRIBUTE_ARGUMENT = 13027;
-			static const int INVOCATIONACTION_ATTRIBUTE_ONPORT = 13028;
+			static const int INVOCATIONACTION_ATTRIBUTE_ARGUMENT = 13127;
+			static const int INVOCATIONACTION_ATTRIBUTE_ONPORT = 13128;
 			
 			
 			//Class and Feature Getter
@@ -3368,15 +3389,15 @@ namespace uml
 
 			// Begin Class JoinNode
 			//Class and Feature IDs 
-			static const unsigned int JOINNODE_CLASS = 131;
+			static const unsigned int JOINNODE_CLASS = 132;
 			static const unsigned int JOINNODE_CLASS_FEATURE_COUNT = 22;
-			static const unsigned int JOINNODE_CLASS_OPERATION_COUNT = 63;
-			static const int JOINNODE_ATTRIBUTE_ISCOMBINEDUPLICATE = 13120;
+			static const unsigned int JOINNODE_CLASS_OPERATION_COUNT = 64;
+			static const int JOINNODE_ATTRIBUTE_ISCOMBINEDUPLICATE = 13220;
 			
-			static const int JOINNODE_ATTRIBUTE_JOINSPEC = 13121;
+			static const int JOINNODE_ATTRIBUTE_JOINSPEC = 13221;
 			
-			static const int JOINNODE_OPERATION_INCOMING_OBJECT_FLOW_EDIAGNOSTICCHAIN_EMAP = 13184;
-			static const int JOINNODE_OPERATION_ONE_OUTGOING_EDGE_EDIAGNOSTICCHAIN_EMAP = 13183;
+			static const int JOINNODE_OPERATION_INCOMING_OBJECT_FLOW_EDIAGNOSTICCHAIN_EMAP = 13285;
+			static const int JOINNODE_OPERATION_ONE_OUTGOING_EDGE_EDIAGNOSTICCHAIN_EMAP = 13284;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getJoinNode_Class() const = 0;
@@ -3393,20 +3414,20 @@ namespace uml
 
 			// Begin Class Lifeline
 			//Class and Feature IDs 
-			static const unsigned int LIFELINE_CLASS = 132;
+			static const unsigned int LIFELINE_CLASS = 133;
 			static const unsigned int LIFELINE_CLASS_FEATURE_COUNT = 14;
-			static const unsigned int LIFELINE_CLASS_OPERATION_COUNT = 59;
+			static const unsigned int LIFELINE_CLASS_OPERATION_COUNT = 60;
 			
-			static const int LIFELINE_ATTRIBUTE_COVEREDBY = 13213;
-			static const int LIFELINE_ATTRIBUTE_DECOMPOSEDAS = 13209;
-			static const int LIFELINE_ATTRIBUTE_INTERACTION = 13210;
-			static const int LIFELINE_ATTRIBUTE_REPRESENTS = 13211;
-			static const int LIFELINE_ATTRIBUTE_SELECTOR = 13212;
+			static const int LIFELINE_ATTRIBUTE_COVEREDBY = 13313;
+			static const int LIFELINE_ATTRIBUTE_DECOMPOSEDAS = 13309;
+			static const int LIFELINE_ATTRIBUTE_INTERACTION = 13310;
+			static const int LIFELINE_ATTRIBUTE_REPRESENTS = 13311;
+			static const int LIFELINE_ATTRIBUTE_SELECTOR = 13312;
 			
-			static const int LIFELINE_OPERATION_INTERACTION_USES_SHARE_LIFELINE_EDIAGNOSTICCHAIN_EMAP = 13270;
-			static const int LIFELINE_OPERATION_SAME_CLASSIFIER_EDIAGNOSTICCHAIN_EMAP = 13271;
-			static const int LIFELINE_OPERATION_SELECTOR_INT_OR_STRING_EDIAGNOSTICCHAIN_EMAP = 13272;
-			static const int LIFELINE_OPERATION_SELECTOR_SPECIFIED_EDIAGNOSTICCHAIN_EMAP = 13269;
+			static const int LIFELINE_OPERATION_INTERACTION_USES_SHARE_LIFELINE_EDIAGNOSTICCHAIN_EMAP = 13371;
+			static const int LIFELINE_OPERATION_SAME_CLASSIFIER_EDIAGNOSTICCHAIN_EMAP = 13372;
+			static const int LIFELINE_OPERATION_SELECTOR_INT_OR_STRING_EDIAGNOSTICCHAIN_EMAP = 13373;
+			static const int LIFELINE_OPERATION_SELECTOR_SPECIFIED_EDIAGNOSTICCHAIN_EMAP = 13370;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getLifeline_Class() const = 0;
@@ -3428,17 +3449,17 @@ namespace uml
 
 			// Begin Class LinkAction
 			//Class and Feature IDs 
-			static const unsigned int LINKACTION_CLASS = 133;
+			static const unsigned int LINKACTION_CLASS = 134;
 			static const unsigned int LINKACTION_CLASS_FEATURE_COUNT = 29;
-			static const unsigned int LINKACTION_CLASS_OPERATION_COUNT = 69;
+			static const unsigned int LINKACTION_CLASS_OPERATION_COUNT = 70;
 			
-			static const int LINKACTION_ATTRIBUTE_ENDDATA = 13327;
-			static const int LINKACTION_ATTRIBUTE_INPUTVALUE = 13328;
+			static const int LINKACTION_ATTRIBUTE_ENDDATA = 13427;
+			static const int LINKACTION_ATTRIBUTE_INPUTVALUE = 13428;
 			
-			static const int LINKACTION_OPERATION_ASSOCIATION = 13397;
-			static const int LINKACTION_OPERATION_NOT_STATIC_EDIAGNOSTICCHAIN_EMAP = 13396;
-			static const int LINKACTION_OPERATION_SAME_ASSOCIATION_EDIAGNOSTICCHAIN_EMAP = 13395;
-			static const int LINKACTION_OPERATION_SAME_PINS_EDIAGNOSTICCHAIN_EMAP = 13394;
+			static const int LINKACTION_OPERATION_ASSOCIATION = 13498;
+			static const int LINKACTION_OPERATION_NOT_STATIC_EDIAGNOSTICCHAIN_EMAP = 13497;
+			static const int LINKACTION_OPERATION_SAME_ASSOCIATION_EDIAGNOSTICCHAIN_EMAP = 13496;
+			static const int LINKACTION_OPERATION_SAME_PINS_EDIAGNOSTICCHAIN_EMAP = 13495;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getLinkAction_Class() const = 0;
@@ -3457,14 +3478,14 @@ namespace uml
 
 			// Begin Class LinkEndCreationData
 			//Class and Feature IDs 
-			static const unsigned int LINKENDCREATIONDATA_CLASS = 134;
+			static const unsigned int LINKENDCREATIONDATA_CLASS = 135;
 			static const unsigned int LINKENDCREATIONDATA_CLASS_FEATURE_COUNT = 8;
-			static const unsigned int LINKENDCREATIONDATA_CLASS_OPERATION_COUNT = 48;
-			static const int LINKENDCREATIONDATA_ATTRIBUTE_ISREPLACEALL = 13407;
+			static const unsigned int LINKENDCREATIONDATA_CLASS_OPERATION_COUNT = 49;
+			static const int LINKENDCREATIONDATA_ATTRIBUTE_ISREPLACEALL = 13507;
 			
-			static const int LINKENDCREATIONDATA_ATTRIBUTE_INSERTAT = 13406;
+			static const int LINKENDCREATIONDATA_ATTRIBUTE_INSERTAT = 13506;
 			
-			static const int LINKENDCREATIONDATA_OPERATION_INSERTAT_PIN_EDIAGNOSTICCHAIN_EMAP = 13455;
+			static const int LINKENDCREATIONDATA_OPERATION_INSERTAT_PIN_EDIAGNOSTICCHAIN_EMAP = 13556;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getLinkEndCreationData_Class() const = 0;
@@ -3480,20 +3501,20 @@ namespace uml
 
 			// Begin Class LinkEndData
 			//Class and Feature IDs 
-			static const unsigned int LINKENDDATA_CLASS = 135;
+			static const unsigned int LINKENDDATA_CLASS = 136;
 			static const unsigned int LINKENDDATA_CLASS_FEATURE_COUNT = 6;
-			static const unsigned int LINKENDDATA_CLASS_OPERATION_COUNT = 47;
+			static const unsigned int LINKENDDATA_CLASS_OPERATION_COUNT = 48;
 			
-			static const int LINKENDDATA_ATTRIBUTE_END = 13503;
-			static const int LINKENDDATA_ATTRIBUTE_QUALIFIER = 13504;
-			static const int LINKENDDATA_ATTRIBUTE_VALUE = 13505;
+			static const int LINKENDDATA_ATTRIBUTE_END = 13603;
+			static const int LINKENDDATA_ATTRIBUTE_QUALIFIER = 13604;
+			static const int LINKENDDATA_ATTRIBUTE_VALUE = 13605;
 			
-			static const int LINKENDDATA_OPERATION_ALLPINS = 13552;
-			static const int LINKENDDATA_OPERATION_END_OBJECT_INPUT_PIN_EDIAGNOSTICCHAIN_EMAP = 13549;
-			static const int LINKENDDATA_OPERATION_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP = 13548;
-			static const int LINKENDDATA_OPERATION_PROPERTY_IS_ASSOCIATION_END_EDIAGNOSTICCHAIN_EMAP = 13550;
-			static const int LINKENDDATA_OPERATION_QUALIFIERS_EDIAGNOSTICCHAIN_EMAP = 13551;
-			static const int LINKENDDATA_OPERATION_SAME_TYPE_EDIAGNOSTICCHAIN_EMAP = 13547;
+			static const int LINKENDDATA_OPERATION_ALLPINS = 13653;
+			static const int LINKENDDATA_OPERATION_END_OBJECT_INPUT_PIN_EDIAGNOSTICCHAIN_EMAP = 13650;
+			static const int LINKENDDATA_OPERATION_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP = 13649;
+			static const int LINKENDDATA_OPERATION_PROPERTY_IS_ASSOCIATION_END_EDIAGNOSTICCHAIN_EMAP = 13651;
+			static const int LINKENDDATA_OPERATION_QUALIFIERS_EDIAGNOSTICCHAIN_EMAP = 13652;
+			static const int LINKENDDATA_OPERATION_SAME_TYPE_EDIAGNOSTICCHAIN_EMAP = 13648;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getLinkEndData_Class() const = 0;
@@ -3515,14 +3536,14 @@ namespace uml
 
 			// Begin Class LinkEndDestructionData
 			//Class and Feature IDs 
-			static const unsigned int LINKENDDESTRUCTIONDATA_CLASS = 136;
+			static const unsigned int LINKENDDESTRUCTIONDATA_CLASS = 137;
 			static const unsigned int LINKENDDESTRUCTIONDATA_CLASS_FEATURE_COUNT = 8;
-			static const unsigned int LINKENDDESTRUCTIONDATA_CLASS_OPERATION_COUNT = 48;
-			static const int LINKENDDESTRUCTIONDATA_ATTRIBUTE_ISDESTROYDUPLICATES = 13607;
+			static const unsigned int LINKENDDESTRUCTIONDATA_CLASS_OPERATION_COUNT = 49;
+			static const int LINKENDDESTRUCTIONDATA_ATTRIBUTE_ISDESTROYDUPLICATES = 13707;
 			
-			static const int LINKENDDESTRUCTIONDATA_ATTRIBUTE_DESTROYAT = 13606;
+			static const int LINKENDDESTRUCTIONDATA_ATTRIBUTE_DESTROYAT = 13706;
 			
-			static const int LINKENDDESTRUCTIONDATA_OPERATION_DESTROYAT_PIN_EDIAGNOSTICCHAIN_EMAP = 13655;
+			static const int LINKENDDESTRUCTIONDATA_OPERATION_DESTROYAT_PIN_EDIAGNOSTICCHAIN_EMAP = 13756;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getLinkEndDestructionData_Class() const = 0;
@@ -3538,10 +3559,10 @@ namespace uml
 
 			// Begin Class LiteralBoolean
 			//Class and Feature IDs 
-			static const unsigned int LITERALBOOLEAN_CLASS = 137;
+			static const unsigned int LITERALBOOLEAN_CLASS = 138;
 			static const unsigned int LITERALBOOLEAN_CLASS_FEATURE_COUNT = 15;
-			static const unsigned int LITERALBOOLEAN_CLASS_OPERATION_COUNT = 65;
-			static const int LITERALBOOLEAN_ATTRIBUTE_VALUE = 13714;
+			static const unsigned int LITERALBOOLEAN_CLASS_OPERATION_COUNT = 66;
+			static const int LITERALBOOLEAN_ATTRIBUTE_VALUE = 13814;
 			
 			
 			
@@ -3557,10 +3578,10 @@ namespace uml
 
 			// Begin Class LiteralInteger
 			//Class and Feature IDs 
-			static const unsigned int LITERALINTEGER_CLASS = 138;
+			static const unsigned int LITERALINTEGER_CLASS = 139;
 			static const unsigned int LITERALINTEGER_CLASS_FEATURE_COUNT = 15;
-			static const unsigned int LITERALINTEGER_CLASS_OPERATION_COUNT = 65;
-			static const int LITERALINTEGER_ATTRIBUTE_VALUE = 13814;
+			static const unsigned int LITERALINTEGER_CLASS_OPERATION_COUNT = 66;
+			static const int LITERALINTEGER_ATTRIBUTE_VALUE = 13914;
 			
 			
 			
@@ -3576,9 +3597,9 @@ namespace uml
 
 			// Begin Class LiteralNull
 			//Class and Feature IDs 
-			static const unsigned int LITERALNULL_CLASS = 139;
+			static const unsigned int LITERALNULL_CLASS = 140;
 			static const unsigned int LITERALNULL_CLASS_FEATURE_COUNT = 14;
-			static const unsigned int LITERALNULL_CLASS_OPERATION_COUNT = 65;
+			static const unsigned int LITERALNULL_CLASS_OPERATION_COUNT = 66;
 			
 			
 			
@@ -3593,10 +3614,10 @@ namespace uml
 
 			// Begin Class LiteralReal
 			//Class and Feature IDs 
-			static const unsigned int LITERALREAL_CLASS = 140;
+			static const unsigned int LITERALREAL_CLASS = 141;
 			static const unsigned int LITERALREAL_CLASS_FEATURE_COUNT = 15;
-			static const unsigned int LITERALREAL_CLASS_OPERATION_COUNT = 65;
-			static const int LITERALREAL_ATTRIBUTE_VALUE = 14014;
+			static const unsigned int LITERALREAL_CLASS_OPERATION_COUNT = 66;
+			static const int LITERALREAL_ATTRIBUTE_VALUE = 14114;
 			
 			
 			
@@ -3612,9 +3633,9 @@ namespace uml
 
 			// Begin Class LiteralSpecification
 			//Class and Feature IDs 
-			static const unsigned int LITERALSPECIFICATION_CLASS = 141;
+			static const unsigned int LITERALSPECIFICATION_CLASS = 142;
 			static const unsigned int LITERALSPECIFICATION_CLASS_FEATURE_COUNT = 14;
-			static const unsigned int LITERALSPECIFICATION_CLASS_OPERATION_COUNT = 65;
+			static const unsigned int LITERALSPECIFICATION_CLASS_OPERATION_COUNT = 66;
 			
 			
 			
@@ -3629,10 +3650,10 @@ namespace uml
 
 			// Begin Class LiteralString
 			//Class and Feature IDs 
-			static const unsigned int LITERALSTRING_CLASS = 142;
+			static const unsigned int LITERALSTRING_CLASS = 143;
 			static const unsigned int LITERALSTRING_CLASS_FEATURE_COUNT = 15;
-			static const unsigned int LITERALSTRING_CLASS_OPERATION_COUNT = 65;
-			static const int LITERALSTRING_ATTRIBUTE_VALUE = 14214;
+			static const unsigned int LITERALSTRING_CLASS_OPERATION_COUNT = 66;
+			static const int LITERALSTRING_ATTRIBUTE_VALUE = 14314;
 			
 			
 			
@@ -3648,10 +3669,10 @@ namespace uml
 
 			// Begin Class LiteralUnlimitedNatural
 			//Class and Feature IDs 
-			static const unsigned int LITERALUNLIMITEDNATURAL_CLASS = 143;
+			static const unsigned int LITERALUNLIMITEDNATURAL_CLASS = 144;
 			static const unsigned int LITERALUNLIMITEDNATURAL_CLASS_FEATURE_COUNT = 15;
-			static const unsigned int LITERALUNLIMITEDNATURAL_CLASS_OPERATION_COUNT = 65;
-			static const int LITERALUNLIMITEDNATURAL_ATTRIBUTE_VALUE = 14314;
+			static const unsigned int LITERALUNLIMITEDNATURAL_CLASS_OPERATION_COUNT = 66;
+			static const int LITERALUNLIMITEDNATURAL_ATTRIBUTE_VALUE = 14414;
 			
 			
 			
@@ -3667,29 +3688,29 @@ namespace uml
 
 			// Begin Class LoopNode
 			//Class and Feature IDs 
-			static const unsigned int LOOPNODE_CLASS = 144;
+			static const unsigned int LOOPNODE_CLASS = 145;
 			static const unsigned int LOOPNODE_CLASS_FEATURE_COUNT = 53;
-			static const unsigned int LOOPNODE_CLASS_OPERATION_COUNT = 94;
-			static const int LOOPNODE_ATTRIBUTE_ISTESTEDFIRST = 14447;
+			static const unsigned int LOOPNODE_CLASS_OPERATION_COUNT = 95;
+			static const int LOOPNODE_ATTRIBUTE_ISTESTEDFIRST = 14547;
 			
-			static const int LOOPNODE_ATTRIBUTE_BODYOUTPUT = 14444;
-			static const int LOOPNODE_ATTRIBUTE_BODYPART = 14445;
-			static const int LOOPNODE_ATTRIBUTE_DECIDER = 14446;
-			static const int LOOPNODE_ATTRIBUTE_LOOPVARIABLE = 14448;
-			static const int LOOPNODE_ATTRIBUTE_LOOPVARIABLEINPUT = 14449;
-			static const int LOOPNODE_ATTRIBUTE_RESULT = 14450;
-			static const int LOOPNODE_ATTRIBUTE_SETUPPART = 14451;
-			static const int LOOPNODE_ATTRIBUTE_TEST = 14452;
+			static const int LOOPNODE_ATTRIBUTE_BODYOUTPUT = 14544;
+			static const int LOOPNODE_ATTRIBUTE_BODYPART = 14545;
+			static const int LOOPNODE_ATTRIBUTE_DECIDER = 14546;
+			static const int LOOPNODE_ATTRIBUTE_LOOPVARIABLE = 14548;
+			static const int LOOPNODE_ATTRIBUTE_LOOPVARIABLEINPUT = 14549;
+			static const int LOOPNODE_ATTRIBUTE_RESULT = 14550;
+			static const int LOOPNODE_ATTRIBUTE_SETUPPART = 14551;
+			static const int LOOPNODE_ATTRIBUTE_TEST = 14552;
 			
-			static const int LOOPNODE_OPERATION_BODY_OUTPUT_PINS_EDIAGNOSTICCHAIN_EMAP = 14541;
-			static const int LOOPNODE_OPERATION_EXECUTABLE_NODES_EDIAGNOSTICCHAIN_EMAP = 14540;
-			static const int LOOPNODE_OPERATION_INPUT_EDGES_EDIAGNOSTICCHAIN_EMAP = 14539;
-			static const int LOOPNODE_OPERATION_LOOP_VARIABLE_OUTGOING_EDIAGNOSTICCHAIN_EMAP = 14546;
-			static const int LOOPNODE_OPERATION_MATCHING_LOOP_VARIABLES_EDIAGNOSTICCHAIN_EMAP = 14544;
-			static const int LOOPNODE_OPERATION_MATCHING_OUTPUT_PINS_EDIAGNOSTICCHAIN_EMAP = 14543;
-			static const int LOOPNODE_OPERATION_MATCHING_RESULT_PINS_EDIAGNOSTICCHAIN_EMAP = 14545;
-			static const int LOOPNODE_OPERATION_RESULT_NO_INCOMING_EDIAGNOSTICCHAIN_EMAP = 14538;
-			static const int LOOPNODE_OPERATION_SETUP_TEST_AND_BODY_EDIAGNOSTICCHAIN_EMAP = 14542;
+			static const int LOOPNODE_OPERATION_BODY_OUTPUT_PINS_EDIAGNOSTICCHAIN_EMAP = 14642;
+			static const int LOOPNODE_OPERATION_EXECUTABLE_NODES_EDIAGNOSTICCHAIN_EMAP = 14641;
+			static const int LOOPNODE_OPERATION_INPUT_EDGES_EDIAGNOSTICCHAIN_EMAP = 14640;
+			static const int LOOPNODE_OPERATION_LOOP_VARIABLE_OUTGOING_EDIAGNOSTICCHAIN_EMAP = 14647;
+			static const int LOOPNODE_OPERATION_MATCHING_LOOP_VARIABLES_EDIAGNOSTICCHAIN_EMAP = 14645;
+			static const int LOOPNODE_OPERATION_MATCHING_OUTPUT_PINS_EDIAGNOSTICCHAIN_EMAP = 14644;
+			static const int LOOPNODE_OPERATION_MATCHING_RESULT_PINS_EDIAGNOSTICCHAIN_EMAP = 14646;
+			static const int LOOPNODE_OPERATION_RESULT_NO_INCOMING_EDIAGNOSTICCHAIN_EMAP = 14639;
+			static const int LOOPNODE_OPERATION_SETUP_TEST_AND_BODY_EDIAGNOSTICCHAIN_EMAP = 14643;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getLoopNode_Class() const = 0;
@@ -3720,11 +3741,11 @@ namespace uml
 
 			// Begin Class Manifestation
 			//Class and Feature IDs 
-			static const unsigned int MANIFESTATION_CLASS = 145;
+			static const unsigned int MANIFESTATION_CLASS = 146;
 			static const unsigned int MANIFESTATION_CLASS_FEATURE_COUNT = 19;
-			static const unsigned int MANIFESTATION_CLASS_OPERATION_COUNT = 58;
+			static const unsigned int MANIFESTATION_CLASS_OPERATION_COUNT = 59;
 			
-			static const int MANIFESTATION_ATTRIBUTE_UTILIZEDELEMENT = 14518;
+			static const int MANIFESTATION_ATTRIBUTE_UTILIZEDELEMENT = 14618;
 			
 			
 			//Class and Feature Getter
@@ -3739,13 +3760,13 @@ namespace uml
 
 			// Begin Class MergeNode
 			//Class and Feature IDs 
-			static const unsigned int MERGENODE_CLASS = 146;
+			static const unsigned int MERGENODE_CLASS = 147;
 			static const unsigned int MERGENODE_CLASS_FEATURE_COUNT = 20;
-			static const unsigned int MERGENODE_CLASS_OPERATION_COUNT = 63;
+			static const unsigned int MERGENODE_CLASS_OPERATION_COUNT = 64;
 			
 			
-			static const int MERGENODE_OPERATION_EDGES_EDIAGNOSTICCHAIN_EMAP = 14682;
-			static const int MERGENODE_OPERATION_ONE_OUTGOING_EDGE_EDIAGNOSTICCHAIN_EMAP = 14681;
+			static const int MERGENODE_OPERATION_EDGES_EDIAGNOSTICCHAIN_EMAP = 14783;
+			static const int MERGENODE_OPERATION_ONE_OUTGOING_EDGE_EDIAGNOSTICCHAIN_EMAP = 14782;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getMergeNode_Class() const = 0;
@@ -3760,28 +3781,28 @@ namespace uml
 
 			// Begin Class Message
 			//Class and Feature IDs 
-			static const unsigned int MESSAGE_CLASS = 147;
+			static const unsigned int MESSAGE_CLASS = 148;
 			static const unsigned int MESSAGE_CLASS_FEATURE_COUNT = 17;
-			static const unsigned int MESSAGE_CLASS_OPERATION_COUNT = 64;
-			static const int MESSAGE_ATTRIBUTE_MESSAGEKIND = 14712;
-			static const int MESSAGE_ATTRIBUTE_MESSAGESORT = 14713;
+			static const unsigned int MESSAGE_CLASS_OPERATION_COUNT = 65;
+			static const int MESSAGE_ATTRIBUTE_MESSAGEKIND = 14812;
+			static const int MESSAGE_ATTRIBUTE_MESSAGESORT = 14813;
 			
-			static const int MESSAGE_ATTRIBUTE_ARGUMENT = 14709;
-			static const int MESSAGE_ATTRIBUTE_CONNECTOR = 14710;
-			static const int MESSAGE_ATTRIBUTE_INTERACTION = 14711;
-			static const int MESSAGE_ATTRIBUTE_RECEIVEEVENT = 14714;
-			static const int MESSAGE_ATTRIBUTE_SENDEVENT = 14715;
-			static const int MESSAGE_ATTRIBUTE_SIGNATURE = 14716;
+			static const int MESSAGE_ATTRIBUTE_ARGUMENT = 14809;
+			static const int MESSAGE_ATTRIBUTE_CONNECTOR = 14810;
+			static const int MESSAGE_ATTRIBUTE_INTERACTION = 14811;
+			static const int MESSAGE_ATTRIBUTE_RECEIVEEVENT = 14814;
+			static const int MESSAGE_ATTRIBUTE_SENDEVENT = 14815;
+			static const int MESSAGE_ATTRIBUTE_SIGNATURE = 14816;
 			
-			static const int MESSAGE_OPERATION_ARGUMENTS_EDIAGNOSTICCHAIN_EMAP = 14773;
-			static const int MESSAGE_OPERATION_CANNOT_CROSS_BOUNDARIES_EDIAGNOSTICCHAIN_EMAP = 14774;
-			static const int MESSAGE_OPERATION_GETMESSAGEKIND = 14780;
-			static const int MESSAGE_OPERATION_OCCURRENCE_SPECIFICATIONS_EDIAGNOSTICCHAIN_EMAP = 14776;
-			static const int MESSAGE_OPERATION_SENDING_RECEIVING_MESSAGE_EVENT_EDIAGNOSTICCHAIN_EMAP = 14772;
-			static const int MESSAGE_OPERATION_SIGNATURE_IS_OPERATION_REPLY_EDIAGNOSTICCHAIN_EMAP = 14779;
-			static const int MESSAGE_OPERATION_SIGNATURE_IS_OPERATION_REQUEST_EDIAGNOSTICCHAIN_EMAP = 14778;
-			static const int MESSAGE_OPERATION_SIGNATURE_IS_SIGNAL_EDIAGNOSTICCHAIN_EMAP = 14775;
-			static const int MESSAGE_OPERATION_SIGNATURE_REFER_TO_EDIAGNOSTICCHAIN_EMAP = 14777;
+			static const int MESSAGE_OPERATION_ARGUMENTS_EDIAGNOSTICCHAIN_EMAP = 14874;
+			static const int MESSAGE_OPERATION_CANNOT_CROSS_BOUNDARIES_EDIAGNOSTICCHAIN_EMAP = 14875;
+			static const int MESSAGE_OPERATION_GETMESSAGEKIND = 14881;
+			static const int MESSAGE_OPERATION_OCCURRENCE_SPECIFICATIONS_EDIAGNOSTICCHAIN_EMAP = 14877;
+			static const int MESSAGE_OPERATION_SENDING_RECEIVING_MESSAGE_EVENT_EDIAGNOSTICCHAIN_EMAP = 14873;
+			static const int MESSAGE_OPERATION_SIGNATURE_IS_OPERATION_REPLY_EDIAGNOSTICCHAIN_EMAP = 14880;
+			static const int MESSAGE_OPERATION_SIGNATURE_IS_OPERATION_REQUEST_EDIAGNOSTICCHAIN_EMAP = 14879;
+			static const int MESSAGE_OPERATION_SIGNATURE_IS_SIGNAL_EDIAGNOSTICCHAIN_EMAP = 14876;
+			static const int MESSAGE_OPERATION_SIGNATURE_REFER_TO_EDIAGNOSTICCHAIN_EMAP = 14878;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getMessage_Class() const = 0;
@@ -3811,16 +3832,16 @@ namespace uml
 
 			// Begin Class MessageEnd
 			//Class and Feature IDs 
-			static const unsigned int MESSAGEEND_CLASS = 148;
+			static const unsigned int MESSAGEEND_CLASS = 149;
 			static const unsigned int MESSAGEEND_CLASS_FEATURE_COUNT = 10;
-			static const unsigned int MESSAGEEND_CLASS_OPERATION_COUNT = 59;
+			static const unsigned int MESSAGEEND_CLASS_OPERATION_COUNT = 60;
 			
-			static const int MESSAGEEND_ATTRIBUTE_MESSAGE = 14809;
+			static const int MESSAGEEND_ATTRIBUTE_MESSAGE = 14909;
 			
-			static const int MESSAGEEND_OPERATION_ENCLOSINGFRAGMENT = 14868;
-			static const int MESSAGEEND_OPERATION_ISRECEIVE = 14867;
-			static const int MESSAGEEND_OPERATION_ISSEND = 14866;
-			static const int MESSAGEEND_OPERATION_OPPOSITEEND = 14865;
+			static const int MESSAGEEND_OPERATION_ENCLOSINGFRAGMENT = 14969;
+			static const int MESSAGEEND_OPERATION_ISRECEIVE = 14968;
+			static const int MESSAGEEND_OPERATION_ISSEND = 14967;
+			static const int MESSAGEEND_OPERATION_OPPOSITEEND = 14966;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getMessageEnd_Class() const = 0;
@@ -3838,9 +3859,9 @@ namespace uml
 
 			// Begin Class MessageEvent
 			//Class and Feature IDs 
-			static const unsigned int MESSAGEEVENT_CLASS = 149;
+			static const unsigned int MESSAGEEVENT_CLASS = 150;
 			static const unsigned int MESSAGEEVENT_CLASS_FEATURE_COUNT = 12;
-			static const unsigned int MESSAGEEVENT_CLASS_OPERATION_COUNT = 58;
+			static const unsigned int MESSAGEEVENT_CLASS_OPERATION_COUNT = 59;
 			
 			
 			
@@ -3855,9 +3876,9 @@ namespace uml
 
 			// Begin Class MessageOccurrenceSpecification
 			//Class and Feature IDs 
-			static const unsigned int MESSAGEOCCURRENCESPECIFICATION_CLASS = 151;
+			static const unsigned int MESSAGEOCCURRENCESPECIFICATION_CLASS = 152;
 			static const unsigned int MESSAGEOCCURRENCESPECIFICATION_CLASS_FEATURE_COUNT = 16;
-			static const unsigned int MESSAGEOCCURRENCESPECIFICATION_CLASS_OPERATION_COUNT = 61;
+			static const unsigned int MESSAGEOCCURRENCESPECIFICATION_CLASS_OPERATION_COUNT = 62;
 			
 			
 			
@@ -3872,13 +3893,13 @@ namespace uml
 
 			// Begin Class Model
 			//Class and Feature IDs 
-			static const unsigned int MODEL_CLASS = 153;
+			static const unsigned int MODEL_CLASS = 154;
 			static const unsigned int MODEL_CLASS_FEATURE_COUNT = 29;
-			static const unsigned int MODEL_CLASS_OPERATION_COUNT = 98;
-			static const int MODEL_ATTRIBUTE_VIEWPOINT = 15328;
+			static const unsigned int MODEL_CLASS_OPERATION_COUNT = 99;
+			static const int MODEL_ATTRIBUTE_VIEWPOINT = 15428;
 			
 			
-			static const int MODEL_OPERATION_ISMETAMODEL = 15426;
+			static const int MODEL_OPERATION_ISMETAMODEL = 15527;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getModel_Class() const = 0;
@@ -3893,29 +3914,29 @@ namespace uml
 
 			// Begin Class MultiplicityElement
 			//Class and Feature IDs 
-			static const unsigned int MULTIPLICITYELEMENT_CLASS = 154;
+			static const unsigned int MULTIPLICITYELEMENT_CLASS = 155;
 			static const unsigned int MULTIPLICITYELEMENT_CLASS_FEATURE_COUNT = 9;
-			static const unsigned int MULTIPLICITYELEMENT_CLASS_OPERATION_COUNT = 53;
-			static const int MULTIPLICITYELEMENT_ATTRIBUTE_ISORDERED = 15403;
-			static const int MULTIPLICITYELEMENT_ATTRIBUTE_ISUNIQUE = 15404;
-			static const int MULTIPLICITYELEMENT_ATTRIBUTE_LOWER = 15405;
-			static const int MULTIPLICITYELEMENT_ATTRIBUTE_UPPER = 15407;
+			static const unsigned int MULTIPLICITYELEMENT_CLASS_OPERATION_COUNT = 54;
+			static const int MULTIPLICITYELEMENT_ATTRIBUTE_ISORDERED = 15503;
+			static const int MULTIPLICITYELEMENT_ATTRIBUTE_ISUNIQUE = 15504;
+			static const int MULTIPLICITYELEMENT_ATTRIBUTE_LOWER = 15505;
+			static const int MULTIPLICITYELEMENT_ATTRIBUTE_UPPER = 15507;
 			
-			static const int MULTIPLICITYELEMENT_ATTRIBUTE_LOWERVALUE = 15406;
-			static const int MULTIPLICITYELEMENT_ATTRIBUTE_UPPERVALUE = 15408;
+			static const int MULTIPLICITYELEMENT_ATTRIBUTE_LOWERVALUE = 15506;
+			static const int MULTIPLICITYELEMENT_ATTRIBUTE_UPPERVALUE = 15508;
 			
-			static const int MULTIPLICITYELEMENT_OPERATION_COMPATIBLEWITH_MULTIPLICITYELEMENT = 15456;
-			static const int MULTIPLICITYELEMENT_OPERATION_INCLUDESMULTIPLICITY_MULTIPLICITYELEMENT = 15457;
-			static const int MULTIPLICITYELEMENT_OPERATION_IS_INTEGER_UNLIMITEDNATURAL = 15458;
-			static const int MULTIPLICITYELEMENT_OPERATION_ISMULTIVALUED = 15459;
-			static const int MULTIPLICITYELEMENT_OPERATION_LOWERBOUND = 15460;
-			static const int MULTIPLICITYELEMENT_OPERATION_LOWER_GE_0_EDIAGNOSTICCHAIN_EMAP = 15451;
-			static const int MULTIPLICITYELEMENT_OPERATION_LOWER_IS_INTEGER_EDIAGNOSTICCHAIN_EMAP = 15454;
-			static const int MULTIPLICITYELEMENT_OPERATION_UPPERBOUND = 15461;
-			static const int MULTIPLICITYELEMENT_OPERATION_UPPER_GE_LOWER_EDIAGNOSTICCHAIN_EMAP = 15450;
-			static const int MULTIPLICITYELEMENT_OPERATION_UPPER_IS_UNLIMITEDNATURAL_EDIAGNOSTICCHAIN_EMAP = 15455;
-			static const int MULTIPLICITYELEMENT_OPERATION_VALUE_SPECIFICATION_CONSTANT_EDIAGNOSTICCHAIN_EMAP = 15453;
-			static const int MULTIPLICITYELEMENT_OPERATION_VALUE_SPECIFICATION_NO_SIDE_EFFECTS_EDIAGNOSTICCHAIN_EMAP = 15452;
+			static const int MULTIPLICITYELEMENT_OPERATION_COMPATIBLEWITH_MULTIPLICITYELEMENT = 15557;
+			static const int MULTIPLICITYELEMENT_OPERATION_INCLUDESMULTIPLICITY_MULTIPLICITYELEMENT = 15558;
+			static const int MULTIPLICITYELEMENT_OPERATION_IS_INTEGER_UNLIMITEDNATURAL = 15559;
+			static const int MULTIPLICITYELEMENT_OPERATION_ISMULTIVALUED = 15560;
+			static const int MULTIPLICITYELEMENT_OPERATION_LOWERBOUND = 15561;
+			static const int MULTIPLICITYELEMENT_OPERATION_LOWER_GE_0_EDIAGNOSTICCHAIN_EMAP = 15552;
+			static const int MULTIPLICITYELEMENT_OPERATION_LOWER_IS_INTEGER_EDIAGNOSTICCHAIN_EMAP = 15555;
+			static const int MULTIPLICITYELEMENT_OPERATION_UPPERBOUND = 15562;
+			static const int MULTIPLICITYELEMENT_OPERATION_UPPER_GE_LOWER_EDIAGNOSTICCHAIN_EMAP = 15551;
+			static const int MULTIPLICITYELEMENT_OPERATION_UPPER_IS_UNLIMITEDNATURAL_EDIAGNOSTICCHAIN_EMAP = 15556;
+			static const int MULTIPLICITYELEMENT_OPERATION_VALUE_SPECIFICATION_CONSTANT_EDIAGNOSTICCHAIN_EMAP = 15554;
+			static const int MULTIPLICITYELEMENT_OPERATION_VALUE_SPECIFICATION_NO_SIDE_EFFECTS_EDIAGNOSTICCHAIN_EMAP = 15553;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getMultiplicityElement_Class() const = 0;
@@ -3946,31 +3967,31 @@ namespace uml
 
 			// Begin Class NamedElement
 			//Class and Feature IDs 
-			static const unsigned int NAMEDELEMENT_CLASS = 155;
+			static const unsigned int NAMEDELEMENT_CLASS = 156;
 			static const unsigned int NAMEDELEMENT_CLASS_FEATURE_COUNT = 9;
-			static const unsigned int NAMEDELEMENT_CLASS_OPERATION_COUNT = 55;
-			static const int NAMEDELEMENT_ATTRIBUTE_NAME = 15504;
-			static const int NAMEDELEMENT_ATTRIBUTE_QUALIFIEDNAME = 15507;
-			static const int NAMEDELEMENT_ATTRIBUTE_VISIBILITY = 15508;
+			static const unsigned int NAMEDELEMENT_CLASS_OPERATION_COUNT = 56;
+			static const int NAMEDELEMENT_ATTRIBUTE_NAME = 15604;
+			static const int NAMEDELEMENT_ATTRIBUTE_QUALIFIEDNAME = 15607;
+			static const int NAMEDELEMENT_ATTRIBUTE_VISIBILITY = 15608;
 			
-			static const int NAMEDELEMENT_ATTRIBUTE_CLIENTDEPENDENCY = 15503;
-			static const int NAMEDELEMENT_ATTRIBUTE_NAMEEXPRESSION = 15505;
-			static const int NAMEDELEMENT_ATTRIBUTE_NAMESPACE = 15506;
+			static const int NAMEDELEMENT_ATTRIBUTE_CLIENTDEPENDENCY = 15603;
+			static const int NAMEDELEMENT_ATTRIBUTE_NAMEEXPRESSION = 15605;
+			static const int NAMEDELEMENT_ATTRIBUTE_NAMESPACE = 15606;
 			
-			static const int NAMEDELEMENT_OPERATION_ALLNAMESPACES = 15558;
-			static const int NAMEDELEMENT_OPERATION_ALLOWNINGPACKAGES = 15559;
-			static const int NAMEDELEMENT_OPERATION_CREATEDEPENDENCY_NAMEDELEMENT = 15553;
-			static const int NAMEDELEMENT_OPERATION_CREATEUSAGE_NAMEDELEMENT = 15554;
-			static const int NAMEDELEMENT_OPERATION_GETCLIENTDEPENDENCIES = 15563;
-			static const int NAMEDELEMENT_OPERATION_GETLABEL = 15555;
-			static const int NAMEDELEMENT_OPERATION_GETLABEL_BOOLEAN = 15556;
-			static const int NAMEDELEMENT_OPERATION_GETNAMESPACE = 15557;
-			static const int NAMEDELEMENT_OPERATION_GETQUALIFIEDNAME = 15561;
-			static const int NAMEDELEMENT_OPERATION_HAS_NO_QUALIFIED_NAME_EDIAGNOSTICCHAIN_EMAP = 15552;
-			static const int NAMEDELEMENT_OPERATION_HAS_QUALIFIED_NAME_EDIAGNOSTICCHAIN_EMAP = 15551;
-			static const int NAMEDELEMENT_OPERATION_ISDISTINGUISHABLEFROM_NAMEDELEMENT_NAMESPACE = 15560;
-			static const int NAMEDELEMENT_OPERATION_SEPARATOR = 15562;
-			static const int NAMEDELEMENT_OPERATION_VISIBILITY_NEEDS_OWNERSHIP_EDIAGNOSTICCHAIN_EMAP = 15550;
+			static const int NAMEDELEMENT_OPERATION_ALLNAMESPACES = 15659;
+			static const int NAMEDELEMENT_OPERATION_ALLOWNINGPACKAGES = 15660;
+			static const int NAMEDELEMENT_OPERATION_CREATEDEPENDENCY_NAMEDELEMENT = 15654;
+			static const int NAMEDELEMENT_OPERATION_CREATEUSAGE_NAMEDELEMENT = 15655;
+			static const int NAMEDELEMENT_OPERATION_GETCLIENTDEPENDENCIES = 15664;
+			static const int NAMEDELEMENT_OPERATION_GETLABEL = 15656;
+			static const int NAMEDELEMENT_OPERATION_GETLABEL_BOOLEAN = 15657;
+			static const int NAMEDELEMENT_OPERATION_GETNAMESPACE = 15658;
+			static const int NAMEDELEMENT_OPERATION_GETQUALIFIEDNAME = 15662;
+			static const int NAMEDELEMENT_OPERATION_HAS_NO_QUALIFIED_NAME_EDIAGNOSTICCHAIN_EMAP = 15653;
+			static const int NAMEDELEMENT_OPERATION_HAS_QUALIFIED_NAME_EDIAGNOSTICCHAIN_EMAP = 15652;
+			static const int NAMEDELEMENT_OPERATION_ISDISTINGUISHABLEFROM_NAMEDELEMENT_NAMESPACE = 15661;
+			static const int NAMEDELEMENT_OPERATION_SEPARATOR = 15663;
+			static const int NAMEDELEMENT_OPERATION_VISIBILITY_NEEDS_OWNERSHIP_EDIAGNOSTICCHAIN_EMAP = 15651;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getNamedElement_Class() const = 0;
@@ -4003,30 +4024,30 @@ namespace uml
 
 			// Begin Class Namespace
 			//Class and Feature IDs 
-			static const unsigned int NAMESPACE_CLASS = 156;
+			static const unsigned int NAMESPACE_CLASS = 157;
 			static const unsigned int NAMESPACE_CLASS_FEATURE_COUNT = 15;
-			static const unsigned int NAMESPACE_CLASS_OPERATION_COUNT = 68;
+			static const unsigned int NAMESPACE_CLASS_OPERATION_COUNT = 69;
 			
-			static const int NAMESPACE_ATTRIBUTE_ELEMENTIMPORT = 15610;
-			static const int NAMESPACE_ATTRIBUTE_IMPORTEDMEMBER = 15613;
-			static const int NAMESPACE_ATTRIBUTE_MEMBER = 15614;
-			static const int NAMESPACE_ATTRIBUTE_OWNEDMEMBER = 15612;
-			static const int NAMESPACE_ATTRIBUTE_OWNEDRULE = 15609;
-			static const int NAMESPACE_ATTRIBUTE_PACKAGEIMPORT = 15611;
+			static const int NAMESPACE_ATTRIBUTE_ELEMENTIMPORT = 15710;
+			static const int NAMESPACE_ATTRIBUTE_IMPORTEDMEMBER = 15713;
+			static const int NAMESPACE_ATTRIBUTE_MEMBER = 15714;
+			static const int NAMESPACE_ATTRIBUTE_OWNEDMEMBER = 15712;
+			static const int NAMESPACE_ATTRIBUTE_OWNEDRULE = 15709;
+			static const int NAMESPACE_ATTRIBUTE_PACKAGEIMPORT = 15711;
 			
-			static const int NAMESPACE_OPERATION_CANNOT_IMPORT_OWNEDMEMBERS_EDIAGNOSTICCHAIN_EMAP = 15672;
-			static const int NAMESPACE_OPERATION_CANNOT_IMPORT_SELF_EDIAGNOSTICCHAIN_EMAP = 15671;
-			static const int NAMESPACE_OPERATION_CREATEELEMENTIMPORT_PACKAGEABLEELEMENT_VISIBILITYKIND = 15673;
-			static const int NAMESPACE_OPERATION_CREATEPACKAGEIMPORT_PACKAGE_VISIBILITYKIND = 15674;
-			static const int NAMESPACE_OPERATION_EXCLUDECOLLISIONS_PACKAGEABLEELEMENT = 15678;
-			static const int NAMESPACE_OPERATION_GETIMPORTEDELEMENTS = 15675;
-			static const int NAMESPACE_OPERATION_GETIMPORTEDMEMBERS = 15681;
-			static const int NAMESPACE_OPERATION_GETIMPORTEDPACKAGES = 15676;
-			static const int NAMESPACE_OPERATION_GETNAMESOFMEMBER_NAMEDELEMENT = 15679;
-			static const int NAMESPACE_OPERATION_GETOWNEDMEMBERS = 15677;
-			static const int NAMESPACE_OPERATION_IMPORTMEMBERS_PACKAGEABLEELEMENT = 15680;
-			static const int NAMESPACE_OPERATION_MEMBERSAREDISTINGUISHABLE = 15682;
-			static const int NAMESPACE_OPERATION_MEMBERS_DISTINGUISHABLE_EDIAGNOSTICCHAIN_EMAP = 15670;
+			static const int NAMESPACE_OPERATION_CANNOT_IMPORT_OWNEDMEMBERS_EDIAGNOSTICCHAIN_EMAP = 15773;
+			static const int NAMESPACE_OPERATION_CANNOT_IMPORT_SELF_EDIAGNOSTICCHAIN_EMAP = 15772;
+			static const int NAMESPACE_OPERATION_CREATEELEMENTIMPORT_PACKAGEABLEELEMENT_VISIBILITYKIND = 15774;
+			static const int NAMESPACE_OPERATION_CREATEPACKAGEIMPORT_PACKAGE_VISIBILITYKIND = 15775;
+			static const int NAMESPACE_OPERATION_EXCLUDECOLLISIONS_PACKAGEABLEELEMENT = 15779;
+			static const int NAMESPACE_OPERATION_GETIMPORTEDELEMENTS = 15776;
+			static const int NAMESPACE_OPERATION_GETIMPORTEDMEMBERS = 15782;
+			static const int NAMESPACE_OPERATION_GETIMPORTEDPACKAGES = 15777;
+			static const int NAMESPACE_OPERATION_GETNAMESOFMEMBER_NAMEDELEMENT = 15780;
+			static const int NAMESPACE_OPERATION_GETOWNEDMEMBERS = 15778;
+			static const int NAMESPACE_OPERATION_IMPORTMEMBERS_PACKAGEABLEELEMENT = 15781;
+			static const int NAMESPACE_OPERATION_MEMBERSAREDISTINGUISHABLE = 15783;
+			static const int NAMESPACE_OPERATION_MEMBERS_DISTINGUISHABLE_EDIAGNOSTICCHAIN_EMAP = 15771;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getNamespace_Class() const = 0;
@@ -4058,15 +4079,15 @@ namespace uml
 
 			// Begin Class Node
 			//Class and Feature IDs 
-			static const unsigned int NODE_CLASS = 157;
+			static const unsigned int NODE_CLASS = 158;
 			static const unsigned int NODE_CLASS_FEATURE_COUNT = 55;
-			static const unsigned int NODE_CLASS_OPERATION_COUNT = 124;
+			static const unsigned int NODE_CLASS_OPERATION_COUNT = 125;
 			
-			static const int NODE_ATTRIBUTE_NESTEDNODE = 15754;
+			static const int NODE_ATTRIBUTE_NESTEDNODE = 15854;
 			
-			static const int NODE_OPERATION_CREATECOMMUNICATIONPATH_BOOLEAN_UNLIMITEDNATURAL = 15877;
-			static const int NODE_OPERATION_GETCOMMUNICATIONPATHS = 15878;
-			static const int NODE_OPERATION_INTERNAL_STRUCTURE_EDIAGNOSTICCHAIN_EMAP = 15876;
+			static const int NODE_OPERATION_CREATECOMMUNICATIONPATH_BOOLEAN_UNLIMITEDNATURAL = 15978;
+			static const int NODE_OPERATION_GETCOMMUNICATIONPATHS = 15979;
+			static const int NODE_OPERATION_INTERNAL_STRUCTURE_EDIAGNOSTICCHAIN_EMAP = 15977;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getNode_Class() const = 0;
@@ -4083,14 +4104,15 @@ namespace uml
 
 			// Begin Class Object
 			//Class and Feature IDs 
-			static const unsigned int OBJECT_CLASS = 158;
+			static const unsigned int OBJECT_CLASS = 159;
 			static const unsigned int OBJECT_CLASS_FEATURE_COUNT = 0;
-			static const unsigned int OBJECT_CLASS_OPERATION_COUNT = 3;
+			static const unsigned int OBJECT_CLASS_OPERATION_COUNT = 4;
 			
 			
-			static const int OBJECT_OPERATION_GET_PROPERTY = 15800;
-			static const int OBJECT_OPERATION_SET_PROPERTY_EJAVAOBJECT = 15801;
-			static const int OBJECT_OPERATION_UNSET_PROPERTY = 15802;
+			static const int OBJECT_OPERATION_GET_PROPERTY = 15900;
+			static const int OBJECT_OPERATION_INVOKE_OPERATION_ARGUMENT = 15903;
+			static const int OBJECT_OPERATION_SET_PROPERTY_EJAVAOBJECT = 15901;
+			static const int OBJECT_OPERATION_UNSET_PROPERTY = 15902;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getObject_Class() const = 0;
@@ -4098,6 +4120,7 @@ namespace uml
 			
 			
 			virtual std::shared_ptr<ecore::EOperation> getObject_Operation_get_Property() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getObject_Operation_invoke_Operation_Argument() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getObject_Operation_set_Property_EJavaObject() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getObject_Operation_unset_Property() const = 0;
 			
@@ -4106,23 +4129,23 @@ namespace uml
 
 			// Begin Class ObjectFlow
 			//Class and Feature IDs 
-			static const unsigned int OBJECTFLOW_CLASS = 159;
+			static const unsigned int OBJECTFLOW_CLASS = 160;
 			static const unsigned int OBJECTFLOW_CLASS_FEATURE_COUNT = 26;
-			static const unsigned int OBJECTFLOW_CLASS_OPERATION_COUNT = 69;
-			static const int OBJECTFLOW_ATTRIBUTE_ISMULTICAST = 15922;
-			static const int OBJECTFLOW_ATTRIBUTE_ISMULTIRECEIVE = 15923;
+			static const unsigned int OBJECTFLOW_CLASS_OPERATION_COUNT = 70;
+			static const int OBJECTFLOW_ATTRIBUTE_ISMULTICAST = 16022;
+			static const int OBJECTFLOW_ATTRIBUTE_ISMULTIRECEIVE = 16023;
 			
-			static const int OBJECTFLOW_ATTRIBUTE_SELECTION = 15924;
-			static const int OBJECTFLOW_ATTRIBUTE_TRANSFORMATION = 15925;
+			static const int OBJECTFLOW_ATTRIBUTE_SELECTION = 16024;
+			static const int OBJECTFLOW_ATTRIBUTE_TRANSFORMATION = 16025;
 			
-			static const int OBJECTFLOW_OPERATION_COMPATIBLE_TYPES_EDIAGNOSTICCHAIN_EMAP = 15991;
-			static const int OBJECTFLOW_OPERATION_INPUT_AND_OUTPUT_PARAMETER_EDIAGNOSTICCHAIN_EMAP = 15987;
-			static const int OBJECTFLOW_OPERATION_IS_MULTICAST_OR_IS_MULTIRECEIVE_EDIAGNOSTICCHAIN_EMAP = 15994;
-			static const int OBJECTFLOW_OPERATION_NO_EXECUTABLE_NODES_EDIAGNOSTICCHAIN_EMAP = 15988;
-			static const int OBJECTFLOW_OPERATION_SAME_UPPER_BOUNDS_EDIAGNOSTICCHAIN_EMAP = 15992;
-			static const int OBJECTFLOW_OPERATION_SELECTION_BEHAVIOR_EDIAGNOSTICCHAIN_EMAP = 15990;
-			static const int OBJECTFLOW_OPERATION_TARGET_EDIAGNOSTICCHAIN_EMAP = 15993;
-			static const int OBJECTFLOW_OPERATION_TRANSFORMATION_BEHAVIOR_EDIAGNOSTICCHAIN_EMAP = 15989;
+			static const int OBJECTFLOW_OPERATION_COMPATIBLE_TYPES_EDIAGNOSTICCHAIN_EMAP = 16092;
+			static const int OBJECTFLOW_OPERATION_INPUT_AND_OUTPUT_PARAMETER_EDIAGNOSTICCHAIN_EMAP = 16088;
+			static const int OBJECTFLOW_OPERATION_IS_MULTICAST_OR_IS_MULTIRECEIVE_EDIAGNOSTICCHAIN_EMAP = 16095;
+			static const int OBJECTFLOW_OPERATION_NO_EXECUTABLE_NODES_EDIAGNOSTICCHAIN_EMAP = 16089;
+			static const int OBJECTFLOW_OPERATION_SAME_UPPER_BOUNDS_EDIAGNOSTICCHAIN_EMAP = 16093;
+			static const int OBJECTFLOW_OPERATION_SELECTION_BEHAVIOR_EDIAGNOSTICCHAIN_EMAP = 16091;
+			static const int OBJECTFLOW_OPERATION_TARGET_EDIAGNOSTICCHAIN_EMAP = 16094;
+			static const int OBJECTFLOW_OPERATION_TRANSFORMATION_BEHAVIOR_EDIAGNOSTICCHAIN_EMAP = 16090;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getObjectFlow_Class() const = 0;
@@ -4147,19 +4170,19 @@ namespace uml
 
 			// Begin Class ObjectNode
 			//Class and Feature IDs 
-			static const unsigned int OBJECTNODE_CLASS = 160;
+			static const unsigned int OBJECTNODE_CLASS = 161;
 			static const unsigned int OBJECTNODE_CLASS_FEATURE_COUNT = 26;
-			static const unsigned int OBJECTNODE_CLASS_OPERATION_COUNT = 64;
-			static const int OBJECTNODE_ATTRIBUTE_ISCONTROLTYPE = 16022;
-			static const int OBJECTNODE_ATTRIBUTE_ORDERING = 16023;
+			static const unsigned int OBJECTNODE_CLASS_OPERATION_COUNT = 65;
+			static const int OBJECTNODE_ATTRIBUTE_ISCONTROLTYPE = 16122;
+			static const int OBJECTNODE_ATTRIBUTE_ORDERING = 16123;
 			
-			static const int OBJECTNODE_ATTRIBUTE_INSTATE = 16021;
-			static const int OBJECTNODE_ATTRIBUTE_SELECTION = 16024;
-			static const int OBJECTNODE_ATTRIBUTE_UPPERBOUND = 16025;
+			static const int OBJECTNODE_ATTRIBUTE_INSTATE = 16121;
+			static const int OBJECTNODE_ATTRIBUTE_SELECTION = 16124;
+			static const int OBJECTNODE_ATTRIBUTE_UPPERBOUND = 16125;
 			
-			static const int OBJECTNODE_OPERATION_INPUT_OUTPUT_PARAMETER_EDIAGNOSTICCHAIN_EMAP = 16087;
-			static const int OBJECTNODE_OPERATION_OBJECT_FLOW_EDGES_EDIAGNOSTICCHAIN_EMAP = 16089;
-			static const int OBJECTNODE_OPERATION_SELECTION_BEHAVIOR_EDIAGNOSTICCHAIN_EMAP = 16088;
+			static const int OBJECTNODE_OPERATION_INPUT_OUTPUT_PARAMETER_EDIAGNOSTICCHAIN_EMAP = 16188;
+			static const int OBJECTNODE_OPERATION_OBJECT_FLOW_EDGES_EDIAGNOSTICCHAIN_EMAP = 16190;
+			static const int OBJECTNODE_OPERATION_SELECTION_BEHAVIOR_EDIAGNOSTICCHAIN_EMAP = 16189;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getObjectNode_Class() const = 0;
@@ -4180,9 +4203,9 @@ namespace uml
 
 			// Begin Class Observation
 			//Class and Feature IDs 
-			static const unsigned int OBSERVATION_CLASS = 162;
+			static const unsigned int OBSERVATION_CLASS = 163;
 			static const unsigned int OBSERVATION_CLASS_FEATURE_COUNT = 12;
-			static const unsigned int OBSERVATION_CLASS_OPERATION_COUNT = 58;
+			static const unsigned int OBSERVATION_CLASS_OPERATION_COUNT = 59;
 			
 			
 			
@@ -4197,15 +4220,15 @@ namespace uml
 
 			// Begin Class OccurrenceSpecification
 			//Class and Feature IDs 
-			static const unsigned int OCCURRENCESPECIFICATION_CLASS = 163;
+			static const unsigned int OCCURRENCESPECIFICATION_CLASS = 164;
 			static const unsigned int OCCURRENCESPECIFICATION_CLASS_FEATURE_COUNT = 15;
-			static const unsigned int OCCURRENCESPECIFICATION_CLASS_OPERATION_COUNT = 57;
+			static const unsigned int OCCURRENCESPECIFICATION_CLASS_OPERATION_COUNT = 58;
 			
-			static const int OCCURRENCESPECIFICATION_ATTRIBUTE_TOAFTER = 16313;
-			static const int OCCURRENCESPECIFICATION_ATTRIBUTE_TOBEFORE = 16314;
+			static const int OCCURRENCESPECIFICATION_ATTRIBUTE_TOAFTER = 16413;
+			static const int OCCURRENCESPECIFICATION_ATTRIBUTE_TOBEFORE = 16414;
 			
-			static const int OCCURRENCESPECIFICATION_OPERATION_GETCOVERED = 16370;
-			static const int OCCURRENCESPECIFICATION_OPERATION_SETCOVERED_LIFELINE = 16371;
+			static const int OCCURRENCESPECIFICATION_OPERATION_GETCOVERED = 16471;
+			static const int OCCURRENCESPECIFICATION_OPERATION_SETCOVERED_LIFELINE = 16472;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getOccurrenceSpecification_Class() const = 0;
@@ -4222,16 +4245,16 @@ namespace uml
 
 			// Begin Class OpaqueAction
 			//Class and Feature IDs 
-			static const unsigned int OPAQUEACTION_CLASS = 164;
+			static const unsigned int OPAQUEACTION_CLASS = 165;
 			static const unsigned int OPAQUEACTION_CLASS_FEATURE_COUNT = 31;
-			static const unsigned int OPAQUEACTION_CLASS_OPERATION_COUNT = 66;
-			static const int OPAQUEACTION_ATTRIBUTE_BODY = 16427;
-			static const int OPAQUEACTION_ATTRIBUTE_LANGUAGE = 16429;
+			static const unsigned int OPAQUEACTION_CLASS_OPERATION_COUNT = 67;
+			static const int OPAQUEACTION_ATTRIBUTE_BODY = 16527;
+			static const int OPAQUEACTION_ATTRIBUTE_LANGUAGE = 16529;
 			
-			static const int OPAQUEACTION_ATTRIBUTE_INPUTVALUE = 16428;
-			static const int OPAQUEACTION_ATTRIBUTE_OUTPUTVALUE = 16430;
+			static const int OPAQUEACTION_ATTRIBUTE_INPUTVALUE = 16528;
+			static const int OPAQUEACTION_ATTRIBUTE_OUTPUTVALUE = 16530;
 			
-			static const int OPAQUEACTION_OPERATION_LANGUAGE_BODY_SIZE_EDIAGNOSTICCHAIN_EMAP = 16496;
+			static const int OPAQUEACTION_OPERATION_LANGUAGE_BODY_SIZE_EDIAGNOSTICCHAIN_EMAP = 16597;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getOpaqueAction_Class() const = 0;
@@ -4249,11 +4272,11 @@ namespace uml
 
 			// Begin Class OpaqueBehavior
 			//Class and Feature IDs 
-			static const unsigned int OPAQUEBEHAVIOR_CLASS = 165;
+			static const unsigned int OPAQUEBEHAVIOR_CLASS = 166;
 			static const unsigned int OPAQUEBEHAVIOR_CLASS_FEATURE_COUNT = 63;
-			static const unsigned int OPAQUEBEHAVIOR_CLASS_OPERATION_COUNT = 127;
-			static const int OPAQUEBEHAVIOR_ATTRIBUTE_BODY = 16561;
-			static const int OPAQUEBEHAVIOR_ATTRIBUTE_LANGUAGE = 16562;
+			static const unsigned int OPAQUEBEHAVIOR_CLASS_OPERATION_COUNT = 128;
+			static const int OPAQUEBEHAVIOR_ATTRIBUTE_BODY = 16661;
+			static const int OPAQUEBEHAVIOR_ATTRIBUTE_LANGUAGE = 16662;
 			
 			
 			
@@ -4270,23 +4293,23 @@ namespace uml
 
 			// Begin Class OpaqueExpression
 			//Class and Feature IDs 
-			static const unsigned int OPAQUEEXPRESSION_CLASS = 166;
+			static const unsigned int OPAQUEEXPRESSION_CLASS = 167;
 			static const unsigned int OPAQUEEXPRESSION_CLASS_FEATURE_COUNT = 18;
-			static const unsigned int OPAQUEEXPRESSION_CLASS_OPERATION_COUNT = 73;
-			static const int OPAQUEEXPRESSION_ATTRIBUTE_BODY = 16615;
-			static const int OPAQUEEXPRESSION_ATTRIBUTE_LANGUAGE = 16616;
+			static const unsigned int OPAQUEEXPRESSION_CLASS_OPERATION_COUNT = 74;
+			static const int OPAQUEEXPRESSION_ATTRIBUTE_BODY = 16715;
+			static const int OPAQUEEXPRESSION_ATTRIBUTE_LANGUAGE = 16716;
 			
-			static const int OPAQUEEXPRESSION_ATTRIBUTE_BEHAVIOR = 16614;
-			static const int OPAQUEEXPRESSION_ATTRIBUTE_RESULT = 16617;
+			static const int OPAQUEEXPRESSION_ATTRIBUTE_BEHAVIOR = 16714;
+			static const int OPAQUEEXPRESSION_ATTRIBUTE_RESULT = 16717;
 			
-			static const int OPAQUEEXPRESSION_OPERATION_GETRESULT = 16689;
-			static const int OPAQUEEXPRESSION_OPERATION_ISINTEGRAL = 16686;
-			static const int OPAQUEEXPRESSION_OPERATION_ISNONNEGATIVE = 16687;
-			static const int OPAQUEEXPRESSION_OPERATION_ISPOSITIVE = 16688;
-			static const int OPAQUEEXPRESSION_OPERATION_LANGUAGE_BODY_SIZE_EDIAGNOSTICCHAIN_EMAP = 16683;
-			static const int OPAQUEEXPRESSION_OPERATION_ONE_RETURN_RESULT_PARAMETER_EDIAGNOSTICCHAIN_EMAP = 16684;
-			static const int OPAQUEEXPRESSION_OPERATION_ONLY_RETURN_RESULT_PARAMETERS_EDIAGNOSTICCHAIN_EMAP = 16685;
-			static const int OPAQUEEXPRESSION_OPERATION_VALUE = 16690;
+			static const int OPAQUEEXPRESSION_OPERATION_GETRESULT = 16790;
+			static const int OPAQUEEXPRESSION_OPERATION_ISINTEGRAL = 16787;
+			static const int OPAQUEEXPRESSION_OPERATION_ISNONNEGATIVE = 16788;
+			static const int OPAQUEEXPRESSION_OPERATION_ISPOSITIVE = 16789;
+			static const int OPAQUEEXPRESSION_OPERATION_LANGUAGE_BODY_SIZE_EDIAGNOSTICCHAIN_EMAP = 16784;
+			static const int OPAQUEEXPRESSION_OPERATION_ONE_RETURN_RESULT_PARAMETER_EDIAGNOSTICCHAIN_EMAP = 16785;
+			static const int OPAQUEEXPRESSION_OPERATION_ONLY_RETURN_RESULT_PARAMETERS_EDIAGNOSTICCHAIN_EMAP = 16786;
+			static const int OPAQUEEXPRESSION_OPERATION_VALUE = 16791;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getOpaqueExpression_Class() const = 0;
@@ -4311,38 +4334,38 @@ namespace uml
 
 			// Begin Class Operation
 			//Class and Feature IDs 
-			static const unsigned int OPERATION_CLASS = 167;
+			static const unsigned int OPERATION_CLASS = 168;
 			static const unsigned int OPERATION_CLASS_FEATURE_COUNT = 43;
-			static const unsigned int OPERATION_CLASS_OPERATION_COUNT = 95;
-			static const int OPERATION_ATTRIBUTE_ISORDERED = 16734;
-			static const int OPERATION_ATTRIBUTE_ISQUERY = 16735;
-			static const int OPERATION_ATTRIBUTE_ISUNIQUE = 16736;
-			static const int OPERATION_ATTRIBUTE_LOWER = 16737;
-			static const int OPERATION_ATTRIBUTE_UPPER = 16742;
+			static const unsigned int OPERATION_CLASS_OPERATION_COUNT = 96;
+			static const int OPERATION_ATTRIBUTE_ISORDERED = 16834;
+			static const int OPERATION_ATTRIBUTE_ISQUERY = 16835;
+			static const int OPERATION_ATTRIBUTE_ISUNIQUE = 16836;
+			static const int OPERATION_ATTRIBUTE_LOWER = 16837;
+			static const int OPERATION_ATTRIBUTE_UPPER = 16842;
 			
-			static const int OPERATION_ATTRIBUTE_BODYCONDITION = 16730;
-			static const int OPERATION_ATTRIBUTE_CLASS = 16731;
-			static const int OPERATION_ATTRIBUTE_DATATYPE = 16732;
-			static const int OPERATION_ATTRIBUTE_INTERFACE = 16733;
-			static const int OPERATION_ATTRIBUTE_POSTCONDITION = 16738;
-			static const int OPERATION_ATTRIBUTE_PRECONDITION = 16739;
-			static const int OPERATION_ATTRIBUTE_REDEFINEDOPERATION = 16740;
-			static const int OPERATION_ATTRIBUTE_TYPE = 16741;
+			static const int OPERATION_ATTRIBUTE_BODYCONDITION = 16830;
+			static const int OPERATION_ATTRIBUTE_CLASS = 16831;
+			static const int OPERATION_ATTRIBUTE_DATATYPE = 16832;
+			static const int OPERATION_ATTRIBUTE_INTERFACE = 16833;
+			static const int OPERATION_ATTRIBUTE_POSTCONDITION = 16838;
+			static const int OPERATION_ATTRIBUTE_PRECONDITION = 16839;
+			static const int OPERATION_ATTRIBUTE_REDEFINEDOPERATION = 16840;
+			static const int OPERATION_ATTRIBUTE_TYPE = 16841;
 			
-			static const int OPERATION_OPERATION_AT_MOST_ONE_RETURN_EDIAGNOSTICCHAIN_EMAP = 16824;
-			static const int OPERATION_OPERATION_GETLOWER = 16834;
-			static const int OPERATION_OPERATION_GETRETURNRESULT = 16826;
-			static const int OPERATION_OPERATION_GETTYPE = 16836;
-			static const int OPERATION_OPERATION_GETUPPER = 16837;
-			static const int OPERATION_OPERATION_ISORDERED = 16832;
-			static const int OPERATION_OPERATION_ISUNIQUE = 16833;
-			static const int OPERATION_OPERATION_ONLY_BODY_FOR_QUERY_EDIAGNOSTICCHAIN_EMAP = 16825;
-			static const int OPERATION_OPERATION_RETURNRESULT = 16835;
-			static const int OPERATION_OPERATION_SETISORDERED_BOOLEAN = 16827;
-			static const int OPERATION_OPERATION_SETISUNIQUE_BOOLEAN = 16828;
-			static const int OPERATION_OPERATION_SETLOWER_INTEGER = 16829;
-			static const int OPERATION_OPERATION_SETTYPE_TYPE = 16830;
-			static const int OPERATION_OPERATION_SETUPPER_UNLIMITEDNATURAL = 16831;
+			static const int OPERATION_OPERATION_AT_MOST_ONE_RETURN_EDIAGNOSTICCHAIN_EMAP = 16925;
+			static const int OPERATION_OPERATION_GETLOWER = 16935;
+			static const int OPERATION_OPERATION_GETRETURNRESULT = 16927;
+			static const int OPERATION_OPERATION_GETTYPE = 16937;
+			static const int OPERATION_OPERATION_GETUPPER = 16938;
+			static const int OPERATION_OPERATION_ISORDERED = 16933;
+			static const int OPERATION_OPERATION_ISUNIQUE = 16934;
+			static const int OPERATION_OPERATION_ONLY_BODY_FOR_QUERY_EDIAGNOSTICCHAIN_EMAP = 16926;
+			static const int OPERATION_OPERATION_RETURNRESULT = 16936;
+			static const int OPERATION_OPERATION_SETISORDERED_BOOLEAN = 16928;
+			static const int OPERATION_OPERATION_SETISUNIQUE_BOOLEAN = 16929;
+			static const int OPERATION_OPERATION_SETLOWER_INTEGER = 16930;
+			static const int OPERATION_OPERATION_SETTYPE_TYPE = 16931;
+			static const int OPERATION_OPERATION_SETUPPER_UNLIMITEDNATURAL = 16932;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getOperation_Class() const = 0;
@@ -4382,12 +4405,12 @@ namespace uml
 
 			// Begin Class OperationTemplateParameter
 			//Class and Feature IDs 
-			static const unsigned int OPERATIONTEMPLATEPARAMETER_CLASS = 168;
+			static const unsigned int OPERATIONTEMPLATEPARAMETER_CLASS = 169;
 			static const unsigned int OPERATIONTEMPLATEPARAMETER_CLASS_FEATURE_COUNT = 8;
-			static const unsigned int OPERATIONTEMPLATEPARAMETER_CLASS_OPERATION_COUNT = 43;
+			static const unsigned int OPERATIONTEMPLATEPARAMETER_CLASS_OPERATION_COUNT = 44;
 			
 			
-			static const int OPERATIONTEMPLATEPARAMETER_OPERATION_MATCH_DEFAULT_SIGNATURE_EDIAGNOSTICCHAIN_EMAP = 16850;
+			static const int OPERATIONTEMPLATEPARAMETER_OPERATION_MATCH_DEFAULT_SIGNATURE_EDIAGNOSTICCHAIN_EMAP = 16951;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getOperationTemplateParameter_Class() const = 0;
@@ -4401,14 +4424,14 @@ namespace uml
 
 			// Begin Class OutputPin
 			//Class and Feature IDs 
-			static const unsigned int OUTPUTPIN_CLASS = 169;
+			static const unsigned int OUTPUTPIN_CLASS = 170;
 			static const unsigned int OUTPUTPIN_CLASS_FEATURE_COUNT = 35;
-			static const unsigned int OUTPUTPIN_CLASS_OPERATION_COUNT = 79;
+			static const unsigned int OUTPUTPIN_CLASS_OPERATION_COUNT = 80;
 			
-			static const int OUTPUTPIN_ATTRIBUTE_ACTION = 16934;
-			static const int OUTPUTPIN_ATTRIBUTE_CALLACTION = 16933;
+			static const int OUTPUTPIN_ATTRIBUTE_ACTION = 17034;
+			static const int OUTPUTPIN_ATTRIBUTE_CALLACTION = 17033;
 			
-			static const int OUTPUTPIN_OPERATION_INCOMING_EDGES_STRUCTURED_ONLY_EDIAGNOSTICCHAIN_EMAP = 17013;
+			static const int OUTPUTPIN_OPERATION_INCOMING_EDGES_STRUCTURED_ONLY_EDIAGNOSTICCHAIN_EMAP = 17114;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getOutputPin_Class() const = 0;
@@ -4424,43 +4447,43 @@ namespace uml
 
 			// Begin Class Package
 			//Class and Feature IDs 
-			static const unsigned int PACKAGE_CLASS = 170;
+			static const unsigned int PACKAGE_CLASS = 171;
 			static const unsigned int PACKAGE_CLASS_FEATURE_COUNT = 28;
-			static const unsigned int PACKAGE_CLASS_OPERATION_COUNT = 97;
-			static const int PACKAGE_ATTRIBUTE_URI = 17020;
+			static const unsigned int PACKAGE_CLASS_OPERATION_COUNT = 98;
+			static const int PACKAGE_ATTRIBUTE_URI = 17120;
 			
-			static const int PACKAGE_ATTRIBUTE_NESTEDPACKAGE = 17021;
-			static const int PACKAGE_ATTRIBUTE_NESTINGPACKAGE = 17022;
-			static const int PACKAGE_ATTRIBUTE_OWNEDSTEREOTYPE = 17023;
-			static const int PACKAGE_ATTRIBUTE_OWNEDTYPE = 17024;
-			static const int PACKAGE_ATTRIBUTE_PACKAGEMERGE = 17025;
-			static const int PACKAGE_ATTRIBUTE_PACKAGEDELEMENT = 17026;
-			static const int PACKAGE_ATTRIBUTE_PROFILEAPPLICATION = 17027;
+			static const int PACKAGE_ATTRIBUTE_NESTEDPACKAGE = 17121;
+			static const int PACKAGE_ATTRIBUTE_NESTINGPACKAGE = 17122;
+			static const int PACKAGE_ATTRIBUTE_OWNEDSTEREOTYPE = 17123;
+			static const int PACKAGE_ATTRIBUTE_OWNEDTYPE = 17124;
+			static const int PACKAGE_ATTRIBUTE_PACKAGEMERGE = 17125;
+			static const int PACKAGE_ATTRIBUTE_PACKAGEDELEMENT = 17126;
+			static const int PACKAGE_ATTRIBUTE_PROFILEAPPLICATION = 17127;
 			
-			static const int PACKAGE_OPERATION_ALLAPPLICABLESTEREOTYPES = 17118;
-			static const int PACKAGE_OPERATION_APPLYPROFILE_PROFILE = 17102;
-			static const int PACKAGE_OPERATION_CONTAININGPROFILE = 17119;
-			static const int PACKAGE_OPERATION_CREATEOWNEDCLASS_STRING_BOOLEAN = 17103;
-			static const int PACKAGE_OPERATION_CREATEOWNEDENUMERATION_STRING = 17104;
-			static const int PACKAGE_OPERATION_CREATEOWNEDINTERFACE_STRING = 17105;
-			static const int PACKAGE_OPERATION_CREATEOWNEDPRIMITIVETYPE_STRING = 17106;
-			static const int PACKAGE_OPERATION_CREATEOWNEDSTEREOTYPE_STRING_BOOLEAN = 17107;
-			static const int PACKAGE_OPERATION_ELEMENTS_PUBLIC_OR_PRIVATE_EDIAGNOSTICCHAIN_EMAP = 17101;
-			static const int PACKAGE_OPERATION_GETALLAPPLIEDPROFILES = 17108;
-			static const int PACKAGE_OPERATION_GETALLPROFILEAPPLICATIONS = 17109;
-			static const int PACKAGE_OPERATION_GETAPPLIEDPROFILE_STRING = 17110;
-			static const int PACKAGE_OPERATION_GETAPPLIEDPROFILE_STRING_BOOLEAN = 17111;
-			static const int PACKAGE_OPERATION_GETAPPLIEDPROFILES = 17112;
-			static const int PACKAGE_OPERATION_GETNESTEDPACKAGES = 17121;
-			static const int PACKAGE_OPERATION_GETOWNEDSTEREOTYPES = 17122;
-			static const int PACKAGE_OPERATION_GETOWNEDTYPES = 17123;
-			static const int PACKAGE_OPERATION_GETPROFILEAPPLICATION_PROFILE = 17113;
-			static const int PACKAGE_OPERATION_GETPROFILEAPPLICATION_PROFILE_BOOLEAN = 17114;
-			static const int PACKAGE_OPERATION_ISMODELLIBRARY = 17115;
-			static const int PACKAGE_OPERATION_ISPROFILEAPPLIED_PROFILE = 17116;
-			static const int PACKAGE_OPERATION_MAKESVISIBLE_NAMEDELEMENT = 17120;
-			static const int PACKAGE_OPERATION_UNAPPLYPROFILE_PROFILE = 17117;
-			static const int PACKAGE_OPERATION_VISIBLEMEMBERS = 17124;
+			static const int PACKAGE_OPERATION_ALLAPPLICABLESTEREOTYPES = 17219;
+			static const int PACKAGE_OPERATION_APPLYPROFILE_PROFILE = 17203;
+			static const int PACKAGE_OPERATION_CONTAININGPROFILE = 17220;
+			static const int PACKAGE_OPERATION_CREATEOWNEDCLASS_STRING_BOOLEAN = 17204;
+			static const int PACKAGE_OPERATION_CREATEOWNEDENUMERATION_STRING = 17205;
+			static const int PACKAGE_OPERATION_CREATEOWNEDINTERFACE_STRING = 17206;
+			static const int PACKAGE_OPERATION_CREATEOWNEDPRIMITIVETYPE_STRING = 17207;
+			static const int PACKAGE_OPERATION_CREATEOWNEDSTEREOTYPE_STRING_BOOLEAN = 17208;
+			static const int PACKAGE_OPERATION_ELEMENTS_PUBLIC_OR_PRIVATE_EDIAGNOSTICCHAIN_EMAP = 17202;
+			static const int PACKAGE_OPERATION_GETALLAPPLIEDPROFILES = 17209;
+			static const int PACKAGE_OPERATION_GETALLPROFILEAPPLICATIONS = 17210;
+			static const int PACKAGE_OPERATION_GETAPPLIEDPROFILE_STRING = 17211;
+			static const int PACKAGE_OPERATION_GETAPPLIEDPROFILE_STRING_BOOLEAN = 17212;
+			static const int PACKAGE_OPERATION_GETAPPLIEDPROFILES = 17213;
+			static const int PACKAGE_OPERATION_GETNESTEDPACKAGES = 17222;
+			static const int PACKAGE_OPERATION_GETOWNEDSTEREOTYPES = 17223;
+			static const int PACKAGE_OPERATION_GETOWNEDTYPES = 17224;
+			static const int PACKAGE_OPERATION_GETPROFILEAPPLICATION_PROFILE = 17214;
+			static const int PACKAGE_OPERATION_GETPROFILEAPPLICATION_PROFILE_BOOLEAN = 17215;
+			static const int PACKAGE_OPERATION_ISMODELLIBRARY = 17216;
+			static const int PACKAGE_OPERATION_ISPROFILEAPPLIED_PROFILE = 17217;
+			static const int PACKAGE_OPERATION_MAKESVISIBLE_NAMEDELEMENT = 17221;
+			static const int PACKAGE_OPERATION_UNAPPLYPROFILE_PROFILE = 17218;
+			static const int PACKAGE_OPERATION_VISIBLEMEMBERS = 17225;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getPackage_Class() const = 0;
@@ -4505,15 +4528,15 @@ namespace uml
 
 			// Begin Class PackageImport
 			//Class and Feature IDs 
-			static const unsigned int PACKAGEIMPORT_CLASS = 171;
+			static const unsigned int PACKAGEIMPORT_CLASS = 172;
 			static const unsigned int PACKAGEIMPORT_CLASS_FEATURE_COUNT = 9;
-			static const unsigned int PACKAGEIMPORT_CLASS_OPERATION_COUNT = 42;
-			static const int PACKAGEIMPORT_ATTRIBUTE_VISIBILITY = 17108;
+			static const unsigned int PACKAGEIMPORT_CLASS_OPERATION_COUNT = 43;
+			static const int PACKAGEIMPORT_ATTRIBUTE_VISIBILITY = 17208;
 			
-			static const int PACKAGEIMPORT_ATTRIBUTE_IMPORTEDPACKAGE = 17106;
-			static const int PACKAGEIMPORT_ATTRIBUTE_IMPORTINGNAMESPACE = 17107;
+			static const int PACKAGEIMPORT_ATTRIBUTE_IMPORTEDPACKAGE = 17206;
+			static const int PACKAGEIMPORT_ATTRIBUTE_IMPORTINGNAMESPACE = 17207;
 			
-			static const int PACKAGEIMPORT_OPERATION_PUBLIC_OR_PRIVATE_EDIAGNOSTICCHAIN_EMAP = 17150;
+			static const int PACKAGEIMPORT_OPERATION_PUBLIC_OR_PRIVATE_EDIAGNOSTICCHAIN_EMAP = 17251;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getPackageImport_Class() const = 0;
@@ -4530,12 +4553,12 @@ namespace uml
 
 			// Begin Class PackageMerge
 			//Class and Feature IDs 
-			static const unsigned int PACKAGEMERGE_CLASS = 172;
+			static const unsigned int PACKAGEMERGE_CLASS = 173;
 			static const unsigned int PACKAGEMERGE_CLASS_FEATURE_COUNT = 8;
-			static const unsigned int PACKAGEMERGE_CLASS_OPERATION_COUNT = 41;
+			static const unsigned int PACKAGEMERGE_CLASS_OPERATION_COUNT = 42;
 			
-			static const int PACKAGEMERGE_ATTRIBUTE_MERGEDPACKAGE = 17206;
-			static const int PACKAGEMERGE_ATTRIBUTE_RECEIVINGPACKAGE = 17207;
+			static const int PACKAGEMERGE_ATTRIBUTE_MERGEDPACKAGE = 17306;
+			static const int PACKAGEMERGE_ATTRIBUTE_RECEIVINGPACKAGE = 17307;
 			
 			
 			//Class and Feature Getter
@@ -4551,13 +4574,13 @@ namespace uml
 
 			// Begin Class PackageableElement
 			//Class and Feature IDs 
-			static const unsigned int PACKAGEABLEELEMENT_CLASS = 173;
+			static const unsigned int PACKAGEABLEELEMENT_CLASS = 174;
 			static const unsigned int PACKAGEABLEELEMENT_CLASS_FEATURE_COUNT = 12;
-			static const unsigned int PACKAGEABLEELEMENT_CLASS_OPERATION_COUNT = 58;
+			static const unsigned int PACKAGEABLEELEMENT_CLASS_OPERATION_COUNT = 59;
 			
-			static const int PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE = 17311;
+			static const int PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE = 17411;
 			
-			static const int PACKAGEABLEELEMENT_OPERATION_NAMESPACE_NEEDS_VISIBILITY_EDIAGNOSTICCHAIN_EMAP = 17369;
+			static const int PACKAGEABLEELEMENT_OPERATION_NAMESPACE_NEEDS_VISIBILITY_EDIAGNOSTICCHAIN_EMAP = 17470;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getPackageableElement_Class() const = 0;
@@ -4572,34 +4595,34 @@ namespace uml
 
 			// Begin Class Parameter
 			//Class and Feature IDs 
-			static const unsigned int PARAMETER_CLASS = 174;
+			static const unsigned int PARAMETER_CLASS = 175;
 			static const unsigned int PARAMETER_CLASS_FEATURE_COUNT = 28;
-			static const unsigned int PARAMETER_CLASS_OPERATION_COUNT = 84;
-			static const int PARAMETER_ATTRIBUTE_DEFAULT = 17419;
-			static const int PARAMETER_ATTRIBUTE_DIRECTION = 17421;
-			static const int PARAMETER_ATTRIBUTE_EFFECT = 17422;
-			static const int PARAMETER_ATTRIBUTE_ISEXCEPTION = 17423;
-			static const int PARAMETER_ATTRIBUTE_ISSTREAM = 17424;
+			static const unsigned int PARAMETER_CLASS_OPERATION_COUNT = 85;
+			static const int PARAMETER_ATTRIBUTE_DEFAULT = 17519;
+			static const int PARAMETER_ATTRIBUTE_DIRECTION = 17521;
+			static const int PARAMETER_ATTRIBUTE_EFFECT = 17522;
+			static const int PARAMETER_ATTRIBUTE_ISEXCEPTION = 17523;
+			static const int PARAMETER_ATTRIBUTE_ISSTREAM = 17524;
 			
-			static const int PARAMETER_ATTRIBUTE_BEHAVIOR = 17427;
-			static const int PARAMETER_ATTRIBUTE_DEFAULTVALUE = 17420;
-			static const int PARAMETER_ATTRIBUTE_OPERATION = 17425;
-			static const int PARAMETER_ATTRIBUTE_PARAMETERSET = 17426;
+			static const int PARAMETER_ATTRIBUTE_BEHAVIOR = 17527;
+			static const int PARAMETER_ATTRIBUTE_DEFAULTVALUE = 17520;
+			static const int PARAMETER_ATTRIBUTE_OPERATION = 17525;
+			static const int PARAMETER_ATTRIBUTE_PARAMETERSET = 17526;
 			
-			static const int PARAMETER_OPERATION_CONNECTOR_END_EDIAGNOSTICCHAIN_EMAP = 17500;
-			static const int PARAMETER_OPERATION_IN_AND_OUT_EDIAGNOSTICCHAIN_EMAP = 17498;
-			static const int PARAMETER_OPERATION_ISSETDEFAULT = 17504;
-			static const int PARAMETER_OPERATION_NOT_EXCEPTION_EDIAGNOSTICCHAIN_EMAP = 17499;
-			static const int PARAMETER_OPERATION_OBJECT_EFFECT_EDIAGNOSTICCHAIN_EMAP = 17503;
-			static const int PARAMETER_OPERATION_REENTRANT_BEHAVIORS_EDIAGNOSTICCHAIN_EMAP = 17501;
-			static const int PARAMETER_OPERATION_SETBOOLEANDEFAULTVALUE_BOOLEAN = 17505;
-			static const int PARAMETER_OPERATION_SETINTEGERDEFAULTVALUE_INTEGER = 17506;
-			static const int PARAMETER_OPERATION_SETNULLDEFAULTVALUE = 17507;
-			static const int PARAMETER_OPERATION_SETREALDEFAULTVALUE_REAL = 17508;
-			static const int PARAMETER_OPERATION_SETSTRINGDEFAULTVALUE_STRING = 17509;
-			static const int PARAMETER_OPERATION_SETUNLIMITEDNATURALDEFAULTVALUE_UNLIMITEDNATURAL = 17510;
-			static const int PARAMETER_OPERATION_STREAM_AND_EXCEPTION_EDIAGNOSTICCHAIN_EMAP = 17502;
-			static const int PARAMETER_OPERATION_UNSETDEFAULT = 17511;
+			static const int PARAMETER_OPERATION_CONNECTOR_END_EDIAGNOSTICCHAIN_EMAP = 17601;
+			static const int PARAMETER_OPERATION_IN_AND_OUT_EDIAGNOSTICCHAIN_EMAP = 17599;
+			static const int PARAMETER_OPERATION_ISSETDEFAULT = 17605;
+			static const int PARAMETER_OPERATION_NOT_EXCEPTION_EDIAGNOSTICCHAIN_EMAP = 17600;
+			static const int PARAMETER_OPERATION_OBJECT_EFFECT_EDIAGNOSTICCHAIN_EMAP = 17604;
+			static const int PARAMETER_OPERATION_REENTRANT_BEHAVIORS_EDIAGNOSTICCHAIN_EMAP = 17602;
+			static const int PARAMETER_OPERATION_SETBOOLEANDEFAULTVALUE_BOOLEAN = 17606;
+			static const int PARAMETER_OPERATION_SETINTEGERDEFAULTVALUE_INTEGER = 17607;
+			static const int PARAMETER_OPERATION_SETNULLDEFAULTVALUE = 17608;
+			static const int PARAMETER_OPERATION_SETREALDEFAULTVALUE_REAL = 17609;
+			static const int PARAMETER_OPERATION_SETSTRINGDEFAULTVALUE_STRING = 17610;
+			static const int PARAMETER_OPERATION_SETUNLIMITEDNATURALDEFAULTVALUE_UNLIMITEDNATURAL = 17611;
+			static const int PARAMETER_OPERATION_STREAM_AND_EXCEPTION_EDIAGNOSTICCHAIN_EMAP = 17603;
+			static const int PARAMETER_OPERATION_UNSETDEFAULT = 17612;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getParameter_Class() const = 0;
@@ -4635,16 +4658,16 @@ namespace uml
 
 			// Begin Class ParameterSet
 			//Class and Feature IDs 
-			static const unsigned int PARAMETERSET_CLASS = 177;
+			static const unsigned int PARAMETERSET_CLASS = 178;
 			static const unsigned int PARAMETERSET_CLASS_FEATURE_COUNT = 11;
-			static const unsigned int PARAMETERSET_CLASS_OPERATION_COUNT = 58;
+			static const unsigned int PARAMETERSET_CLASS_OPERATION_COUNT = 59;
 			
-			static const int PARAMETERSET_ATTRIBUTE_CONDITION = 17709;
-			static const int PARAMETERSET_ATTRIBUTE_PARAMETER = 17710;
+			static const int PARAMETERSET_ATTRIBUTE_CONDITION = 17809;
+			static const int PARAMETERSET_ATTRIBUTE_PARAMETER = 17810;
 			
-			static const int PARAMETERSET_OPERATION_INPUT_EDIAGNOSTICCHAIN_EMAP = 17767;
-			static const int PARAMETERSET_OPERATION_SAME_PARAMETERIZED_ENTITY_EDIAGNOSTICCHAIN_EMAP = 17766;
-			static const int PARAMETERSET_OPERATION_TWO_PARAMETER_SETS_EDIAGNOSTICCHAIN_EMAP = 17768;
+			static const int PARAMETERSET_OPERATION_INPUT_EDIAGNOSTICCHAIN_EMAP = 17868;
+			static const int PARAMETERSET_OPERATION_SAME_PARAMETERIZED_ENTITY_EDIAGNOSTICCHAIN_EMAP = 17867;
+			static const int PARAMETERSET_OPERATION_TWO_PARAMETER_SETS_EDIAGNOSTICCHAIN_EMAP = 17869;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getParameterSet_Class() const = 0;
@@ -4662,15 +4685,15 @@ namespace uml
 
 			// Begin Class ParameterableElement
 			//Class and Feature IDs 
-			static const unsigned int PARAMETERABLEELEMENT_CLASS = 178;
+			static const unsigned int PARAMETERABLEELEMENT_CLASS = 179;
 			static const unsigned int PARAMETERABLEELEMENT_CLASS_FEATURE_COUNT = 5;
-			static const unsigned int PARAMETERABLEELEMENT_CLASS_OPERATION_COUNT = 43;
+			static const unsigned int PARAMETERABLEELEMENT_CLASS_OPERATION_COUNT = 44;
 			
-			static const int PARAMETERABLEELEMENT_ATTRIBUTE_OWNINGTEMPLATEPARAMETER = 17803;
-			static const int PARAMETERABLEELEMENT_ATTRIBUTE_TEMPLATEPARAMETER = 17804;
+			static const int PARAMETERABLEELEMENT_ATTRIBUTE_OWNINGTEMPLATEPARAMETER = 17903;
+			static const int PARAMETERABLEELEMENT_ATTRIBUTE_TEMPLATEPARAMETER = 17904;
 			
-			static const int PARAMETERABLEELEMENT_OPERATION_ISCOMPATIBLEWITH_PARAMETERABLEELEMENT = 17846;
-			static const int PARAMETERABLEELEMENT_OPERATION_ISTEMPLATEPARAMETER = 17847;
+			static const int PARAMETERABLEELEMENT_OPERATION_ISCOMPATIBLEWITH_PARAMETERABLEELEMENT = 17947;
+			static const int PARAMETERABLEELEMENT_OPERATION_ISTEMPLATEPARAMETER = 17948;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getParameterableElement_Class() const = 0;
@@ -4687,14 +4710,14 @@ namespace uml
 
 			// Begin Class PartDecomposition
 			//Class and Feature IDs 
-			static const unsigned int PARTDECOMPOSITION_CLASS = 179;
+			static const unsigned int PARTDECOMPOSITION_CLASS = 180;
 			static const unsigned int PARTDECOMPOSITION_CLASS_FEATURE_COUNT = 18;
-			static const unsigned int PARTDECOMPOSITION_CLASS_OPERATION_COUNT = 64;
+			static const unsigned int PARTDECOMPOSITION_CLASS_OPERATION_COUNT = 65;
 			
 			
-			static const int PARTDECOMPOSITION_OPERATION_ASSUME_EDIAGNOSTICCHAIN_EMAP = 17980;
-			static const int PARTDECOMPOSITION_OPERATION_COMMUTATIVITY_OF_DECOMPOSITION_EDIAGNOSTICCHAIN_EMAP = 17979;
-			static const int PARTDECOMPOSITION_OPERATION_PARTS_OF_INTERNAL_STRUCTURES_EDIAGNOSTICCHAIN_EMAP = 17981;
+			static const int PARTDECOMPOSITION_OPERATION_ASSUME_EDIAGNOSTICCHAIN_EMAP = 18081;
+			static const int PARTDECOMPOSITION_OPERATION_COMMUTATIVITY_OF_DECOMPOSITION_EDIAGNOSTICCHAIN_EMAP = 18080;
+			static const int PARTDECOMPOSITION_OPERATION_PARTS_OF_INTERNAL_STRUCTURES_EDIAGNOSTICCHAIN_EMAP = 18082;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getPartDecomposition_Class() const = 0;
@@ -4710,14 +4733,14 @@ namespace uml
 
 			// Begin Class Pin
 			//Class and Feature IDs 
-			static const unsigned int PIN_CLASS = 180;
+			static const unsigned int PIN_CLASS = 181;
 			static const unsigned int PIN_CLASS_FEATURE_COUNT = 33;
-			static const unsigned int PIN_CLASS_OPERATION_COUNT = 78;
-			static const int PIN_ATTRIBUTE_ISCONTROL = 18032;
+			static const unsigned int PIN_CLASS_OPERATION_COUNT = 79;
+			static const int PIN_ATTRIBUTE_ISCONTROL = 18132;
 			
 			
-			static const int PIN_OPERATION_CONTROL_PINS_EDIAGNOSTICCHAIN_EMAP = 18109;
-			static const int PIN_OPERATION_NOT_UNIQUE_EDIAGNOSTICCHAIN_EMAP = 18110;
+			static const int PIN_OPERATION_CONTROL_PINS_EDIAGNOSTICCHAIN_EMAP = 18210;
+			static const int PIN_OPERATION_NOT_UNIQUE_EDIAGNOSTICCHAIN_EMAP = 18211;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getPin_Class() const = 0;
@@ -4733,25 +4756,25 @@ namespace uml
 
 			// Begin Class Port
 			//Class and Feature IDs 
-			static const unsigned int PORT_CLASS = 181;
+			static const unsigned int PORT_CLASS = 182;
 			static const unsigned int PORT_CLASS_FEATURE_COUNT = 51;
-			static const unsigned int PORT_CLASS_OPERATION_COUNT = 109;
-			static const int PORT_ATTRIBUTE_ISBEHAVIOR = 18144;
-			static const int PORT_ATTRIBUTE_ISCONJUGATED = 18145;
-			static const int PORT_ATTRIBUTE_ISSERVICE = 18146;
+			static const unsigned int PORT_CLASS_OPERATION_COUNT = 110;
+			static const int PORT_ATTRIBUTE_ISBEHAVIOR = 18244;
+			static const int PORT_ATTRIBUTE_ISCONJUGATED = 18245;
+			static const int PORT_ATTRIBUTE_ISSERVICE = 18246;
 			
-			static const int PORT_ATTRIBUTE_PROTOCOL = 18147;
-			static const int PORT_ATTRIBUTE_PROVIDED = 18148;
-			static const int PORT_ATTRIBUTE_REDEFINEDPORT = 18149;
-			static const int PORT_ATTRIBUTE_REQUIRED = 18150;
+			static const int PORT_ATTRIBUTE_PROTOCOL = 18247;
+			static const int PORT_ATTRIBUTE_PROVIDED = 18248;
+			static const int PORT_ATTRIBUTE_REDEFINEDPORT = 18249;
+			static const int PORT_ATTRIBUTE_REQUIRED = 18250;
 			
-			static const int PORT_OPERATION_BASICPROVIDED = 18258;
-			static const int PORT_OPERATION_BASICREQUIRED = 18259;
-			static const int PORT_OPERATION_DEFAULT_VALUE_EDIAGNOSTICCHAIN_EMAP = 18254;
-			static const int PORT_OPERATION_ENCAPSULATED_OWNER_EDIAGNOSTICCHAIN_EMAP = 18255;
-			static const int PORT_OPERATION_GETPROVIDEDS = 18256;
-			static const int PORT_OPERATION_GETREQUIREDS = 18257;
-			static const int PORT_OPERATION_PORT_AGGREGATION_EDIAGNOSTICCHAIN_EMAP = 18253;
+			static const int PORT_OPERATION_BASICPROVIDED = 18359;
+			static const int PORT_OPERATION_BASICREQUIRED = 18360;
+			static const int PORT_OPERATION_DEFAULT_VALUE_EDIAGNOSTICCHAIN_EMAP = 18355;
+			static const int PORT_OPERATION_ENCAPSULATED_OWNER_EDIAGNOSTICCHAIN_EMAP = 18356;
+			static const int PORT_OPERATION_GETPROVIDEDS = 18357;
+			static const int PORT_OPERATION_GETREQUIREDS = 18358;
+			static const int PORT_OPERATION_PORT_AGGREGATION_EDIAGNOSTICCHAIN_EMAP = 18354;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getPort_Class() const = 0;
@@ -4778,9 +4801,9 @@ namespace uml
 
 			// Begin Class PrimitiveType
 			//Class and Feature IDs 
-			static const unsigned int PRIMITIVETYPE_CLASS = 182;
+			static const unsigned int PRIMITIVETYPE_CLASS = 183;
 			static const unsigned int PRIMITIVETYPE_CLASS_FEATURE_COUNT = 40;
-			static const unsigned int PRIMITIVETYPE_CLASS_OPERATION_COUNT = 110;
+			static const unsigned int PRIMITIVETYPE_CLASS_OPERATION_COUNT = 111;
 			
 			
 			
@@ -4795,24 +4818,24 @@ namespace uml
 
 			// Begin Class Profile
 			//Class and Feature IDs 
-			static const unsigned int PROFILE_CLASS = 183;
+			static const unsigned int PROFILE_CLASS = 184;
 			static const unsigned int PROFILE_CLASS_FEATURE_COUNT = 30;
-			static const unsigned int PROFILE_CLASS_OPERATION_COUNT = 108;
+			static const unsigned int PROFILE_CLASS_OPERATION_COUNT = 109;
 			
-			static const int PROFILE_ATTRIBUTE_METACLASSREFERENCE = 18328;
-			static const int PROFILE_ATTRIBUTE_METAMODELREFERENCE = 18329;
+			static const int PROFILE_ATTRIBUTE_METACLASSREFERENCE = 18428;
+			static const int PROFILE_ATTRIBUTE_METAMODELREFERENCE = 18429;
 			
-			static const int PROFILE_OPERATION_CREATE_CLASSIFIER = 18429;
-			static const int PROFILE_OPERATION_DEFINE = 18430;
-			static const int PROFILE_OPERATION_DEFINE_EMAP_EMAP = 18431;
-			static const int PROFILE_OPERATION_GETDEFINITION = 18432;
-			static const int PROFILE_OPERATION_GETDEFINITION_NAMEDELEMENT = 18433;
-			static const int PROFILE_OPERATION_GETOWNEDEXTENSIONS_BOOLEAN = 18434;
-			static const int PROFILE_OPERATION_GETREFERENCEDMETACLASSES = 18435;
-			static const int PROFILE_OPERATION_GETREFERENCEDMETAMODELS = 18436;
-			static const int PROFILE_OPERATION_ISDEFINED = 18437;
-			static const int PROFILE_OPERATION_METACLASS_REFERENCE_NOT_SPECIALIZED_EDIAGNOSTICCHAIN_EMAP = 18427;
-			static const int PROFILE_OPERATION_REFERENCES_SAME_METAMODEL_EDIAGNOSTICCHAIN_EMAP = 18428;
+			static const int PROFILE_OPERATION_CREATE_CLASSIFIER = 18530;
+			static const int PROFILE_OPERATION_DEFINE = 18531;
+			static const int PROFILE_OPERATION_DEFINE_EMAP_EMAP = 18532;
+			static const int PROFILE_OPERATION_GETDEFINITION = 18533;
+			static const int PROFILE_OPERATION_GETDEFINITION_NAMEDELEMENT = 18534;
+			static const int PROFILE_OPERATION_GETOWNEDEXTENSIONS_BOOLEAN = 18535;
+			static const int PROFILE_OPERATION_GETREFERENCEDMETACLASSES = 18536;
+			static const int PROFILE_OPERATION_GETREFERENCEDMETAMODELS = 18537;
+			static const int PROFILE_OPERATION_ISDEFINED = 18538;
+			static const int PROFILE_OPERATION_METACLASS_REFERENCE_NOT_SPECIALIZED_EDIAGNOSTICCHAIN_EMAP = 18528;
+			static const int PROFILE_OPERATION_REFERENCES_SAME_METAMODEL_EDIAGNOSTICCHAIN_EMAP = 18529;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getProfile_Class() const = 0;
@@ -4838,16 +4861,16 @@ namespace uml
 
 			// Begin Class ProfileApplication
 			//Class and Feature IDs 
-			static const unsigned int PROFILEAPPLICATION_CLASS = 184;
+			static const unsigned int PROFILEAPPLICATION_CLASS = 185;
 			static const unsigned int PROFILEAPPLICATION_CLASS_FEATURE_COUNT = 9;
-			static const unsigned int PROFILEAPPLICATION_CLASS_OPERATION_COUNT = 43;
-			static const int PROFILEAPPLICATION_ATTRIBUTE_ISSTRICT = 18407;
+			static const unsigned int PROFILEAPPLICATION_CLASS_OPERATION_COUNT = 44;
+			static const int PROFILEAPPLICATION_ATTRIBUTE_ISSTRICT = 18507;
 			
-			static const int PROFILEAPPLICATION_ATTRIBUTE_APPLIEDPROFILE = 18406;
-			static const int PROFILEAPPLICATION_ATTRIBUTE_APPLYINGPACKAGE = 18408;
+			static const int PROFILEAPPLICATION_ATTRIBUTE_APPLIEDPROFILE = 18506;
+			static const int PROFILEAPPLICATION_ATTRIBUTE_APPLYINGPACKAGE = 18508;
 			
-			static const int PROFILEAPPLICATION_OPERATION_GETAPPLIEDDEFINITION = 18450;
-			static const int PROFILEAPPLICATION_OPERATION_GETAPPLIEDDEFINITION_NAMEDELEMENT = 18451;
+			static const int PROFILEAPPLICATION_OPERATION_GETAPPLIEDDEFINITION = 18551;
+			static const int PROFILEAPPLICATION_OPERATION_GETAPPLIEDDEFINITION_NAMEDELEMENT = 18552;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getProfileApplication_Class() const = 0;
@@ -4865,54 +4888,54 @@ namespace uml
 
 			// Begin Class Property
 			//Class and Feature IDs 
-			static const unsigned int PROPERTY_CLASS = 185;
+			static const unsigned int PROPERTY_CLASS = 186;
 			static const unsigned int PROPERTY_CLASS_FEATURE_COUNT = 44;
-			static const unsigned int PROPERTY_CLASS_OPERATION_COUNT = 102;
-			static const int PROPERTY_ATTRIBUTE_AGGREGATION = 18530;
-			static const int PROPERTY_ATTRIBUTE_DEFAULT = 18529;
-			static const int PROPERTY_ATTRIBUTE_ISCOMPOSITE = 18535;
-			static const int PROPERTY_ATTRIBUTE_ISDERIVED = 18536;
-			static const int PROPERTY_ATTRIBUTE_ISDERIVEDUNION = 18537;
-			static const int PROPERTY_ATTRIBUTE_ISID = 18538;
+			static const unsigned int PROPERTY_CLASS_OPERATION_COUNT = 103;
+			static const int PROPERTY_ATTRIBUTE_AGGREGATION = 18630;
+			static const int PROPERTY_ATTRIBUTE_DEFAULT = 18629;
+			static const int PROPERTY_ATTRIBUTE_ISCOMPOSITE = 18635;
+			static const int PROPERTY_ATTRIBUTE_ISDERIVED = 18636;
+			static const int PROPERTY_ATTRIBUTE_ISDERIVEDUNION = 18637;
+			static const int PROPERTY_ATTRIBUTE_ISID = 18638;
 			
-			static const int PROPERTY_ATTRIBUTE_ASSOCIATION = 18543;
-			static const int PROPERTY_ATTRIBUTE_ASSOCIATIONEND = 18531;
-			static const int PROPERTY_ATTRIBUTE_CLASS = 18533;
-			static const int PROPERTY_ATTRIBUTE_DATATYPE = 18527;
-			static const int PROPERTY_ATTRIBUTE_DEFAULTVALUE = 18534;
-			static const int PROPERTY_ATTRIBUTE_INTERFACE = 18528;
-			static const int PROPERTY_ATTRIBUTE_OPPOSITE = 18539;
-			static const int PROPERTY_ATTRIBUTE_OWNINGASSOCIATION = 18540;
-			static const int PROPERTY_ATTRIBUTE_QUALIFIER = 18532;
-			static const int PROPERTY_ATTRIBUTE_REDEFINEDPROPERTY = 18541;
-			static const int PROPERTY_ATTRIBUTE_SUBSETTEDPROPERTY = 18542;
+			static const int PROPERTY_ATTRIBUTE_ASSOCIATION = 18643;
+			static const int PROPERTY_ATTRIBUTE_ASSOCIATIONEND = 18631;
+			static const int PROPERTY_ATTRIBUTE_CLASS = 18633;
+			static const int PROPERTY_ATTRIBUTE_DATATYPE = 18627;
+			static const int PROPERTY_ATTRIBUTE_DEFAULTVALUE = 18634;
+			static const int PROPERTY_ATTRIBUTE_INTERFACE = 18628;
+			static const int PROPERTY_ATTRIBUTE_OPPOSITE = 18639;
+			static const int PROPERTY_ATTRIBUTE_OWNINGASSOCIATION = 18640;
+			static const int PROPERTY_ATTRIBUTE_QUALIFIER = 18632;
+			static const int PROPERTY_ATTRIBUTE_REDEFINEDPROPERTY = 18641;
+			static const int PROPERTY_ATTRIBUTE_SUBSETTEDPROPERTY = 18642;
 			
-			static const int PROPERTY_OPERATION_BINDING_TO_ATTRIBUTE_EDIAGNOSTICCHAIN_EMAP = 18625;
-			static const int PROPERTY_OPERATION_DEPLOYMENT_TARGET_EDIAGNOSTICCHAIN_EMAP = 18627;
-			static const int PROPERTY_OPERATION_DERIVED_UNION_IS_DERIVED_EDIAGNOSTICCHAIN_EMAP = 18626;
-			static const int PROPERTY_OPERATION_DERIVED_UNION_IS_READ_ONLY_EDIAGNOSTICCHAIN_EMAP = 18621;
-			static const int PROPERTY_OPERATION_GETOPPOSITE = 18644;
-			static const int PROPERTY_OPERATION_GETOTHEREND = 18631;
-			static const int PROPERTY_OPERATION_ISATTRIBUTE = 18641;
-			static const int PROPERTY_OPERATION_ISCOMPOSITE = 18642;
-			static const int PROPERTY_OPERATION_ISNAVIGABLE = 18643;
-			static const int PROPERTY_OPERATION_ISSETDEFAULT = 18632;
-			static const int PROPERTY_OPERATION_MULTIPLICITY_OF_COMPOSITE_EDIAGNOSTICCHAIN_EMAP = 18622;
-			static const int PROPERTY_OPERATION_QUALIFIED_IS_ASSOCIATION_END_EDIAGNOSTICCHAIN_EMAP = 18630;
-			static const int PROPERTY_OPERATION_REDEFINED_PROPERTY_INHERITED_EDIAGNOSTICCHAIN_EMAP = 18623;
-			static const int PROPERTY_OPERATION_SETBOOLEANDEFAULTVALUE_BOOLEAN = 18633;
-			static const int PROPERTY_OPERATION_SETINTEGERDEFAULTVALUE_INTEGER = 18634;
-			static const int PROPERTY_OPERATION_SETISNAVIGABLE_BOOLEAN = 18635;
-			static const int PROPERTY_OPERATION_SETNULLDEFAULTVALUE = 18636;
-			static const int PROPERTY_OPERATION_SETREALDEFAULTVALUE_REAL = 18637;
-			static const int PROPERTY_OPERATION_SETSTRINGDEFAULTVALUE_STRING = 18638;
-			static const int PROPERTY_OPERATION_SETUNLIMITEDNATURALDEFAULTVALUE_UNLIMITEDNATURAL = 18639;
-			static const int PROPERTY_OPERATION_SUBSETTED_PROPERTY_NAMES_EDIAGNOSTICCHAIN_EMAP = 18628;
-			static const int PROPERTY_OPERATION_SUBSETTINGCONTEXT = 18645;
-			static const int PROPERTY_OPERATION_SUBSETTING_CONTEXT_CONFORMS_EDIAGNOSTICCHAIN_EMAP = 18620;
-			static const int PROPERTY_OPERATION_SUBSETTING_RULES_EDIAGNOSTICCHAIN_EMAP = 18624;
-			static const int PROPERTY_OPERATION_TYPE_OF_OPPOSITE_END_EDIAGNOSTICCHAIN_EMAP = 18629;
-			static const int PROPERTY_OPERATION_UNSETDEFAULT = 18640;
+			static const int PROPERTY_OPERATION_BINDING_TO_ATTRIBUTE_EDIAGNOSTICCHAIN_EMAP = 18726;
+			static const int PROPERTY_OPERATION_DEPLOYMENT_TARGET_EDIAGNOSTICCHAIN_EMAP = 18728;
+			static const int PROPERTY_OPERATION_DERIVED_UNION_IS_DERIVED_EDIAGNOSTICCHAIN_EMAP = 18727;
+			static const int PROPERTY_OPERATION_DERIVED_UNION_IS_READ_ONLY_EDIAGNOSTICCHAIN_EMAP = 18722;
+			static const int PROPERTY_OPERATION_GETOPPOSITE = 18745;
+			static const int PROPERTY_OPERATION_GETOTHEREND = 18732;
+			static const int PROPERTY_OPERATION_ISATTRIBUTE = 18742;
+			static const int PROPERTY_OPERATION_ISCOMPOSITE = 18743;
+			static const int PROPERTY_OPERATION_ISNAVIGABLE = 18744;
+			static const int PROPERTY_OPERATION_ISSETDEFAULT = 18733;
+			static const int PROPERTY_OPERATION_MULTIPLICITY_OF_COMPOSITE_EDIAGNOSTICCHAIN_EMAP = 18723;
+			static const int PROPERTY_OPERATION_QUALIFIED_IS_ASSOCIATION_END_EDIAGNOSTICCHAIN_EMAP = 18731;
+			static const int PROPERTY_OPERATION_REDEFINED_PROPERTY_INHERITED_EDIAGNOSTICCHAIN_EMAP = 18724;
+			static const int PROPERTY_OPERATION_SETBOOLEANDEFAULTVALUE_BOOLEAN = 18734;
+			static const int PROPERTY_OPERATION_SETINTEGERDEFAULTVALUE_INTEGER = 18735;
+			static const int PROPERTY_OPERATION_SETISNAVIGABLE_BOOLEAN = 18736;
+			static const int PROPERTY_OPERATION_SETNULLDEFAULTVALUE = 18737;
+			static const int PROPERTY_OPERATION_SETREALDEFAULTVALUE_REAL = 18738;
+			static const int PROPERTY_OPERATION_SETSTRINGDEFAULTVALUE_STRING = 18739;
+			static const int PROPERTY_OPERATION_SETUNLIMITEDNATURALDEFAULTVALUE_UNLIMITEDNATURAL = 18740;
+			static const int PROPERTY_OPERATION_SUBSETTED_PROPERTY_NAMES_EDIAGNOSTICCHAIN_EMAP = 18729;
+			static const int PROPERTY_OPERATION_SUBSETTINGCONTEXT = 18746;
+			static const int PROPERTY_OPERATION_SUBSETTING_CONTEXT_CONFORMS_EDIAGNOSTICCHAIN_EMAP = 18721;
+			static const int PROPERTY_OPERATION_SUBSETTING_RULES_EDIAGNOSTICCHAIN_EMAP = 18725;
+			static const int PROPERTY_OPERATION_TYPE_OF_OPPOSITE_END_EDIAGNOSTICCHAIN_EMAP = 18730;
+			static const int PROPERTY_OPERATION_UNSETDEFAULT = 18741;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getProperty_Class() const = 0;
@@ -4968,12 +4991,12 @@ namespace uml
 
 			// Begin Class ProtocolConformance
 			//Class and Feature IDs 
-			static const unsigned int PROTOCOLCONFORMANCE_CLASS = 186;
+			static const unsigned int PROTOCOLCONFORMANCE_CLASS = 187;
 			static const unsigned int PROTOCOLCONFORMANCE_CLASS_FEATURE_COUNT = 8;
-			static const unsigned int PROTOCOLCONFORMANCE_CLASS_OPERATION_COUNT = 41;
+			static const unsigned int PROTOCOLCONFORMANCE_CLASS_OPERATION_COUNT = 42;
 			
-			static const int PROTOCOLCONFORMANCE_ATTRIBUTE_GENERALMACHINE = 18606;
-			static const int PROTOCOLCONFORMANCE_ATTRIBUTE_SPECIFICMACHINE = 18607;
+			static const int PROTOCOLCONFORMANCE_ATTRIBUTE_GENERALMACHINE = 18706;
+			static const int PROTOCOLCONFORMANCE_ATTRIBUTE_SPECIFICMACHINE = 18707;
 			
 			
 			//Class and Feature Getter
@@ -4989,15 +5012,15 @@ namespace uml
 
 			// Begin Class ProtocolStateMachine
 			//Class and Feature IDs 
-			static const unsigned int PROTOCOLSTATEMACHINE_CLASS = 187;
+			static const unsigned int PROTOCOLSTATEMACHINE_CLASS = 188;
 			static const unsigned int PROTOCOLSTATEMACHINE_CLASS_FEATURE_COUNT = 66;
-			static const unsigned int PROTOCOLSTATEMACHINE_CLASS_OPERATION_COUNT = 137;
+			static const unsigned int PROTOCOLSTATEMACHINE_CLASS_OPERATION_COUNT = 138;
 			
-			static const int PROTOCOLSTATEMACHINE_ATTRIBUTE_CONFORMANCE = 18765;
+			static const int PROTOCOLSTATEMACHINE_ATTRIBUTE_CONFORMANCE = 18865;
 			
-			static const int PROTOCOLSTATEMACHINE_OPERATION_DEEP_OR_SHALLOW_HISTORY_EDIAGNOSTICCHAIN_EMAP = 18900;
-			static const int PROTOCOLSTATEMACHINE_OPERATION_ENTRY_EXIT_DO_EDIAGNOSTICCHAIN_EMAP = 18901;
-			static const int PROTOCOLSTATEMACHINE_OPERATION_PROTOCOL_TRANSITIONS_EDIAGNOSTICCHAIN_EMAP = 18902;
+			static const int PROTOCOLSTATEMACHINE_OPERATION_DEEP_OR_SHALLOW_HISTORY_EDIAGNOSTICCHAIN_EMAP = 19001;
+			static const int PROTOCOLSTATEMACHINE_OPERATION_ENTRY_EXIT_DO_EDIAGNOSTICCHAIN_EMAP = 19002;
+			static const int PROTOCOLSTATEMACHINE_OPERATION_PROTOCOL_TRANSITIONS_EDIAGNOSTICCHAIN_EMAP = 19003;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getProtocolStateMachine_Class() const = 0;
@@ -5014,18 +5037,18 @@ namespace uml
 
 			// Begin Class ProtocolTransition
 			//Class and Feature IDs 
-			static const unsigned int PROTOCOLTRANSITION_CLASS = 188;
+			static const unsigned int PROTOCOLTRANSITION_CLASS = 189;
 			static const unsigned int PROTOCOLTRANSITION_CLASS_FEATURE_COUNT = 29;
-			static const unsigned int PROTOCOLTRANSITION_CLASS_OPERATION_COUNT = 88;
+			static const unsigned int PROTOCOLTRANSITION_CLASS_OPERATION_COUNT = 89;
 			
-			static const int PROTOCOLTRANSITION_ATTRIBUTE_POSTCONDITION = 18826;
-			static const int PROTOCOLTRANSITION_ATTRIBUTE_PRECONDITION = 18827;
-			static const int PROTOCOLTRANSITION_ATTRIBUTE_REFERRED = 18828;
+			static const int PROTOCOLTRANSITION_ATTRIBUTE_POSTCONDITION = 18926;
+			static const int PROTOCOLTRANSITION_ATTRIBUTE_PRECONDITION = 18927;
+			static const int PROTOCOLTRANSITION_ATTRIBUTE_REFERRED = 18928;
 			
-			static const int PROTOCOLTRANSITION_OPERATION_ASSOCIATED_ACTIONS_EDIAGNOSTICCHAIN_EMAP = 18914;
-			static const int PROTOCOLTRANSITION_OPERATION_BELONGS_TO_PSM_EDIAGNOSTICCHAIN_EMAP = 18915;
-			static const int PROTOCOLTRANSITION_OPERATION_GETREFERREDS = 18916;
-			static const int PROTOCOLTRANSITION_OPERATION_REFERS_TO_OPERATION_EDIAGNOSTICCHAIN_EMAP = 18913;
+			static const int PROTOCOLTRANSITION_OPERATION_ASSOCIATED_ACTIONS_EDIAGNOSTICCHAIN_EMAP = 19015;
+			static const int PROTOCOLTRANSITION_OPERATION_BELONGS_TO_PSM_EDIAGNOSTICCHAIN_EMAP = 19016;
+			static const int PROTOCOLTRANSITION_OPERATION_GETREFERREDS = 19017;
+			static const int PROTOCOLTRANSITION_OPERATION_REFERS_TO_OPERATION_EDIAGNOSTICCHAIN_EMAP = 19014;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getProtocolTransition_Class() const = 0;
@@ -5045,23 +5068,23 @@ namespace uml
 
 			// Begin Class Pseudostate
 			//Class and Feature IDs 
-			static const unsigned int PSEUDOSTATE_CLASS = 189;
+			static const unsigned int PSEUDOSTATE_CLASS = 190;
 			static const unsigned int PSEUDOSTATE_CLASS_FEATURE_COUNT = 15;
-			static const unsigned int PSEUDOSTATE_CLASS_OPERATION_COUNT = 69;
-			static const int PSEUDOSTATE_ATTRIBUTE_KIND = 18913;
+			static const unsigned int PSEUDOSTATE_CLASS_OPERATION_COUNT = 70;
+			static const int PSEUDOSTATE_ATTRIBUTE_KIND = 19013;
 			
-			static const int PSEUDOSTATE_ATTRIBUTE_STATE = 18912;
-			static const int PSEUDOSTATE_ATTRIBUTE_STATEMACHINE = 18914;
+			static const int PSEUDOSTATE_ATTRIBUTE_STATE = 19012;
+			static const int PSEUDOSTATE_ATTRIBUTE_STATEMACHINE = 19014;
 			
-			static const int PSEUDOSTATE_OPERATION_CHOICE_VERTEX_EDIAGNOSTICCHAIN_EMAP = 18976;
-			static const int PSEUDOSTATE_OPERATION_FORK_VERTEX_EDIAGNOSTICCHAIN_EMAP = 18982;
-			static const int PSEUDOSTATE_OPERATION_HISTORY_VERTICES_EDIAGNOSTICCHAIN_EMAP = 18980;
-			static const int PSEUDOSTATE_OPERATION_INITIAL_VERTEX_EDIAGNOSTICCHAIN_EMAP = 18981;
-			static const int PSEUDOSTATE_OPERATION_JOIN_VERTEX_EDIAGNOSTICCHAIN_EMAP = 18978;
-			static const int PSEUDOSTATE_OPERATION_JUNCTION_VERTEX_EDIAGNOSTICCHAIN_EMAP = 18979;
-			static const int PSEUDOSTATE_OPERATION_OUTGOING_FROM_INITIAL_EDIAGNOSTICCHAIN_EMAP = 18977;
-			static const int PSEUDOSTATE_OPERATION_TRANSITIONS_INCOMING_EDIAGNOSTICCHAIN_EMAP = 18983;
-			static const int PSEUDOSTATE_OPERATION_TRANSITIONS_OUTGOING_EDIAGNOSTICCHAIN_EMAP = 18975;
+			static const int PSEUDOSTATE_OPERATION_CHOICE_VERTEX_EDIAGNOSTICCHAIN_EMAP = 19077;
+			static const int PSEUDOSTATE_OPERATION_FORK_VERTEX_EDIAGNOSTICCHAIN_EMAP = 19083;
+			static const int PSEUDOSTATE_OPERATION_HISTORY_VERTICES_EDIAGNOSTICCHAIN_EMAP = 19081;
+			static const int PSEUDOSTATE_OPERATION_INITIAL_VERTEX_EDIAGNOSTICCHAIN_EMAP = 19082;
+			static const int PSEUDOSTATE_OPERATION_JOIN_VERTEX_EDIAGNOSTICCHAIN_EMAP = 19079;
+			static const int PSEUDOSTATE_OPERATION_JUNCTION_VERTEX_EDIAGNOSTICCHAIN_EMAP = 19080;
+			static const int PSEUDOSTATE_OPERATION_OUTGOING_FROM_INITIAL_EDIAGNOSTICCHAIN_EMAP = 19078;
+			static const int PSEUDOSTATE_OPERATION_TRANSITIONS_INCOMING_EDIAGNOSTICCHAIN_EMAP = 19084;
+			static const int PSEUDOSTATE_OPERATION_TRANSITIONS_OUTGOING_EDIAGNOSTICCHAIN_EMAP = 19076;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getPseudostate_Class() const = 0;
@@ -5086,16 +5109,16 @@ namespace uml
 
 			// Begin Class QualifierValue
 			//Class and Feature IDs 
-			static const unsigned int QUALIFIERVALUE_CLASS = 191;
+			static const unsigned int QUALIFIERVALUE_CLASS = 192;
 			static const unsigned int QUALIFIERVALUE_CLASS_FEATURE_COUNT = 5;
-			static const unsigned int QUALIFIERVALUE_CLASS_OPERATION_COUNT = 44;
+			static const unsigned int QUALIFIERVALUE_CLASS_OPERATION_COUNT = 45;
 			
-			static const int QUALIFIERVALUE_ATTRIBUTE_QUALIFIER = 19103;
-			static const int QUALIFIERVALUE_ATTRIBUTE_VALUE = 19104;
+			static const int QUALIFIERVALUE_ATTRIBUTE_QUALIFIER = 19203;
+			static const int QUALIFIERVALUE_ATTRIBUTE_VALUE = 19204;
 			
-			static const int QUALIFIERVALUE_OPERATION_MULTIPLICITY_OF_QUALIFIER_EDIAGNOSTICCHAIN_EMAP = 19146;
-			static const int QUALIFIERVALUE_OPERATION_QUALIFIER_ATTRIBUTE_EDIAGNOSTICCHAIN_EMAP = 19148;
-			static const int QUALIFIERVALUE_OPERATION_TYPE_OF_QUALIFIER_EDIAGNOSTICCHAIN_EMAP = 19147;
+			static const int QUALIFIERVALUE_OPERATION_MULTIPLICITY_OF_QUALIFIER_EDIAGNOSTICCHAIN_EMAP = 19247;
+			static const int QUALIFIERVALUE_OPERATION_QUALIFIER_ATTRIBUTE_EDIAGNOSTICCHAIN_EMAP = 19249;
+			static const int QUALIFIERVALUE_OPERATION_TYPE_OF_QUALIFIER_EDIAGNOSTICCHAIN_EMAP = 19248;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getQualifierValue_Class() const = 0;
@@ -5113,11 +5136,11 @@ namespace uml
 
 			// Begin Class RaiseExceptionAction
 			//Class and Feature IDs 
-			static const unsigned int RAISEEXCEPTIONACTION_CLASS = 192;
+			static const unsigned int RAISEEXCEPTIONACTION_CLASS = 193;
 			static const unsigned int RAISEEXCEPTIONACTION_CLASS_FEATURE_COUNT = 28;
-			static const unsigned int RAISEEXCEPTIONACTION_CLASS_OPERATION_COUNT = 65;
+			static const unsigned int RAISEEXCEPTIONACTION_CLASS_OPERATION_COUNT = 66;
 			
-			static const int RAISEEXCEPTIONACTION_ATTRIBUTE_EXCEPTION = 19227;
+			static const int RAISEEXCEPTIONACTION_ATTRIBUTE_EXCEPTION = 19327;
 			
 			
 			//Class and Feature Getter
@@ -5132,15 +5155,15 @@ namespace uml
 
 			// Begin Class ReadExtentAction
 			//Class and Feature IDs 
-			static const unsigned int READEXTENTACTION_CLASS = 193;
+			static const unsigned int READEXTENTACTION_CLASS = 194;
 			static const unsigned int READEXTENTACTION_CLASS_FEATURE_COUNT = 29;
-			static const unsigned int READEXTENTACTION_CLASS_OPERATION_COUNT = 67;
+			static const unsigned int READEXTENTACTION_CLASS_OPERATION_COUNT = 68;
 			
-			static const int READEXTENTACTION_ATTRIBUTE_CLASSIFIER = 19327;
-			static const int READEXTENTACTION_ATTRIBUTE_RESULT = 19328;
+			static const int READEXTENTACTION_ATTRIBUTE_CLASSIFIER = 19427;
+			static const int READEXTENTACTION_ATTRIBUTE_RESULT = 19428;
 			
-			static const int READEXTENTACTION_OPERATION_MULTIPLICITY_OF_RESULT_EDIAGNOSTICCHAIN_EMAP = 19395;
-			static const int READEXTENTACTION_OPERATION_TYPE_IS_CLASSIFIER_EDIAGNOSTICCHAIN_EMAP = 19394;
+			static const int READEXTENTACTION_OPERATION_MULTIPLICITY_OF_RESULT_EDIAGNOSTICCHAIN_EMAP = 19496;
+			static const int READEXTENTACTION_OPERATION_TYPE_IS_CLASSIFIER_EDIAGNOSTICCHAIN_EMAP = 19495;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getReadExtentAction_Class() const = 0;
@@ -5157,19 +5180,19 @@ namespace uml
 
 			// Begin Class ReadIsClassifiedObjectAction
 			//Class and Feature IDs 
-			static const unsigned int READISCLASSIFIEDOBJECTACTION_CLASS = 194;
+			static const unsigned int READISCLASSIFIEDOBJECTACTION_CLASS = 195;
 			static const unsigned int READISCLASSIFIEDOBJECTACTION_CLASS_FEATURE_COUNT = 31;
-			static const unsigned int READISCLASSIFIEDOBJECTACTION_CLASS_OPERATION_COUNT = 69;
-			static const int READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_ISDIRECT = 19428;
+			static const unsigned int READISCLASSIFIEDOBJECTACTION_CLASS_OPERATION_COUNT = 70;
+			static const int READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_ISDIRECT = 19528;
 			
-			static const int READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_CLASSIFIER = 19427;
-			static const int READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_OBJECT = 19429;
-			static const int READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_RESULT = 19430;
+			static const int READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_CLASSIFIER = 19527;
+			static const int READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_OBJECT = 19529;
+			static const int READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_RESULT = 19530;
 			
-			static const int READISCLASSIFIEDOBJECTACTION_OPERATION_BOOLEAN_RESULT_EDIAGNOSTICCHAIN_EMAP = 19498;
-			static const int READISCLASSIFIEDOBJECTACTION_OPERATION_MULTIPLICITY_OF_INPUT_EDIAGNOSTICCHAIN_EMAP = 19499;
-			static const int READISCLASSIFIEDOBJECTACTION_OPERATION_MULTIPLICITY_OF_OUTPUT_EDIAGNOSTICCHAIN_EMAP = 19497;
-			static const int READISCLASSIFIEDOBJECTACTION_OPERATION_NO_TYPE_EDIAGNOSTICCHAIN_EMAP = 19496;
+			static const int READISCLASSIFIEDOBJECTACTION_OPERATION_BOOLEAN_RESULT_EDIAGNOSTICCHAIN_EMAP = 19599;
+			static const int READISCLASSIFIEDOBJECTACTION_OPERATION_MULTIPLICITY_OF_INPUT_EDIAGNOSTICCHAIN_EMAP = 19600;
+			static const int READISCLASSIFIEDOBJECTACTION_OPERATION_MULTIPLICITY_OF_OUTPUT_EDIAGNOSTICCHAIN_EMAP = 19598;
+			static const int READISCLASSIFIEDOBJECTACTION_OPERATION_NO_TYPE_EDIAGNOSTICCHAIN_EMAP = 19597;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getReadIsClassifiedObjectAction_Class() const = 0;
@@ -5190,18 +5213,18 @@ namespace uml
 
 			// Begin Class ReadLinkAction
 			//Class and Feature IDs 
-			static const unsigned int READLINKACTION_CLASS = 195;
+			static const unsigned int READLINKACTION_CLASS = 196;
 			static const unsigned int READLINKACTION_CLASS_FEATURE_COUNT = 30;
-			static const unsigned int READLINKACTION_CLASS_OPERATION_COUNT = 75;
+			static const unsigned int READLINKACTION_CLASS_OPERATION_COUNT = 76;
 			
-			static const int READLINKACTION_ATTRIBUTE_RESULT = 19529;
+			static const int READLINKACTION_ATTRIBUTE_RESULT = 19629;
 			
-			static const int READLINKACTION_OPERATION_COMPATIBLE_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP = 19600;
-			static const int READLINKACTION_OPERATION_NAVIGABLE_OPEN_END_EDIAGNOSTICCHAIN_EMAP = 19603;
-			static const int READLINKACTION_OPERATION_ONE_OPEN_END_EDIAGNOSTICCHAIN_EMAP = 19602;
-			static const int READLINKACTION_OPERATION_OPENEND = 19604;
-			static const int READLINKACTION_OPERATION_TYPE_AND_ORDERING_EDIAGNOSTICCHAIN_EMAP = 19599;
-			static const int READLINKACTION_OPERATION_VISIBILITY_EDIAGNOSTICCHAIN_EMAP = 19601;
+			static const int READLINKACTION_OPERATION_COMPATIBLE_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP = 19701;
+			static const int READLINKACTION_OPERATION_NAVIGABLE_OPEN_END_EDIAGNOSTICCHAIN_EMAP = 19704;
+			static const int READLINKACTION_OPERATION_ONE_OPEN_END_EDIAGNOSTICCHAIN_EMAP = 19703;
+			static const int READLINKACTION_OPERATION_OPENEND = 19705;
+			static const int READLINKACTION_OPERATION_TYPE_AND_ORDERING_EDIAGNOSTICCHAIN_EMAP = 19700;
+			static const int READLINKACTION_OPERATION_VISIBILITY_EDIAGNOSTICCHAIN_EMAP = 19702;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getReadLinkAction_Class() const = 0;
@@ -5221,21 +5244,21 @@ namespace uml
 
 			// Begin Class ReadLinkObjectEndAction
 			//Class and Feature IDs 
-			static const unsigned int READLINKOBJECTENDACTION_CLASS = 196;
+			static const unsigned int READLINKOBJECTENDACTION_CLASS = 197;
 			static const unsigned int READLINKOBJECTENDACTION_CLASS_FEATURE_COUNT = 30;
-			static const unsigned int READLINKOBJECTENDACTION_CLASS_OPERATION_COUNT = 72;
+			static const unsigned int READLINKOBJECTENDACTION_CLASS_OPERATION_COUNT = 73;
 			
-			static const int READLINKOBJECTENDACTION_ATTRIBUTE_END = 19627;
-			static const int READLINKOBJECTENDACTION_ATTRIBUTE_OBJECT = 19628;
-			static const int READLINKOBJECTENDACTION_ATTRIBUTE_RESULT = 19629;
+			static const int READLINKOBJECTENDACTION_ATTRIBUTE_END = 19727;
+			static const int READLINKOBJECTENDACTION_ATTRIBUTE_OBJECT = 19728;
+			static const int READLINKOBJECTENDACTION_ATTRIBUTE_RESULT = 19729;
 			
-			static const int READLINKOBJECTENDACTION_OPERATION_ASSOCIATION_OF_ASSOCIATION_EDIAGNOSTICCHAIN_EMAP = 19701;
-			static const int READLINKOBJECTENDACTION_OPERATION_ENDS_OF_ASSOCIATION_EDIAGNOSTICCHAIN_EMAP = 19697;
-			static const int READLINKOBJECTENDACTION_OPERATION_MULTIPLICITY_OF_OBJECT_EDIAGNOSTICCHAIN_EMAP = 19696;
-			static const int READLINKOBJECTENDACTION_OPERATION_MULTIPLICITY_OF_RESULT_EDIAGNOSTICCHAIN_EMAP = 19699;
-			static const int READLINKOBJECTENDACTION_OPERATION_PROPERTY_EDIAGNOSTICCHAIN_EMAP = 19695;
-			static const int READLINKOBJECTENDACTION_OPERATION_TYPE_OF_OBJECT_EDIAGNOSTICCHAIN_EMAP = 19700;
-			static const int READLINKOBJECTENDACTION_OPERATION_TYPE_OF_RESULT_EDIAGNOSTICCHAIN_EMAP = 19698;
+			static const int READLINKOBJECTENDACTION_OPERATION_ASSOCIATION_OF_ASSOCIATION_EDIAGNOSTICCHAIN_EMAP = 19802;
+			static const int READLINKOBJECTENDACTION_OPERATION_ENDS_OF_ASSOCIATION_EDIAGNOSTICCHAIN_EMAP = 19798;
+			static const int READLINKOBJECTENDACTION_OPERATION_MULTIPLICITY_OF_OBJECT_EDIAGNOSTICCHAIN_EMAP = 19797;
+			static const int READLINKOBJECTENDACTION_OPERATION_MULTIPLICITY_OF_RESULT_EDIAGNOSTICCHAIN_EMAP = 19800;
+			static const int READLINKOBJECTENDACTION_OPERATION_PROPERTY_EDIAGNOSTICCHAIN_EMAP = 19796;
+			static const int READLINKOBJECTENDACTION_OPERATION_TYPE_OF_OBJECT_EDIAGNOSTICCHAIN_EMAP = 19801;
+			static const int READLINKOBJECTENDACTION_OPERATION_TYPE_OF_RESULT_EDIAGNOSTICCHAIN_EMAP = 19799;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getReadLinkObjectEndAction_Class() const = 0;
@@ -5258,22 +5281,22 @@ namespace uml
 
 			// Begin Class ReadLinkObjectEndQualifierAction
 			//Class and Feature IDs 
-			static const unsigned int READLINKOBJECTENDQUALIFIERACTION_CLASS = 197;
+			static const unsigned int READLINKOBJECTENDQUALIFIERACTION_CLASS = 198;
 			static const unsigned int READLINKOBJECTENDQUALIFIERACTION_CLASS_FEATURE_COUNT = 30;
-			static const unsigned int READLINKOBJECTENDQUALIFIERACTION_CLASS_OPERATION_COUNT = 73;
+			static const unsigned int READLINKOBJECTENDQUALIFIERACTION_CLASS_OPERATION_COUNT = 74;
 			
-			static const int READLINKOBJECTENDQUALIFIERACTION_ATTRIBUTE_OBJECT = 19727;
-			static const int READLINKOBJECTENDQUALIFIERACTION_ATTRIBUTE_QUALIFIER = 19728;
-			static const int READLINKOBJECTENDQUALIFIERACTION_ATTRIBUTE_RESULT = 19729;
+			static const int READLINKOBJECTENDQUALIFIERACTION_ATTRIBUTE_OBJECT = 19827;
+			static const int READLINKOBJECTENDQUALIFIERACTION_ATTRIBUTE_QUALIFIER = 19828;
+			static const int READLINKOBJECTENDQUALIFIERACTION_ATTRIBUTE_RESULT = 19829;
 			
-			static const int READLINKOBJECTENDQUALIFIERACTION_OPERATION_ASSOCIATION_OF_ASSOCIATION_EDIAGNOSTICCHAIN_EMAP = 19801;
-			static const int READLINKOBJECTENDQUALIFIERACTION_OPERATION_ENDS_OF_ASSOCIATION_EDIAGNOSTICCHAIN_EMAP = 19798;
-			static const int READLINKOBJECTENDQUALIFIERACTION_OPERATION_MULTIPLICITY_OF_OBJECT_EDIAGNOSTICCHAIN_EMAP = 19795;
-			static const int READLINKOBJECTENDQUALIFIERACTION_OPERATION_MULTIPLICITY_OF_QUALIFIER_EDIAGNOSTICCHAIN_EMAP = 19797;
-			static const int READLINKOBJECTENDQUALIFIERACTION_OPERATION_MULTIPLICITY_OF_RESULT_EDIAGNOSTICCHAIN_EMAP = 19799;
-			static const int READLINKOBJECTENDQUALIFIERACTION_OPERATION_QUALIFIER_ATTRIBUTE_EDIAGNOSTICCHAIN_EMAP = 19802;
-			static const int READLINKOBJECTENDQUALIFIERACTION_OPERATION_SAME_TYPE_EDIAGNOSTICCHAIN_EMAP = 19800;
-			static const int READLINKOBJECTENDQUALIFIERACTION_OPERATION_TYPE_OF_OBJECT_EDIAGNOSTICCHAIN_EMAP = 19796;
+			static const int READLINKOBJECTENDQUALIFIERACTION_OPERATION_ASSOCIATION_OF_ASSOCIATION_EDIAGNOSTICCHAIN_EMAP = 19902;
+			static const int READLINKOBJECTENDQUALIFIERACTION_OPERATION_ENDS_OF_ASSOCIATION_EDIAGNOSTICCHAIN_EMAP = 19899;
+			static const int READLINKOBJECTENDQUALIFIERACTION_OPERATION_MULTIPLICITY_OF_OBJECT_EDIAGNOSTICCHAIN_EMAP = 19896;
+			static const int READLINKOBJECTENDQUALIFIERACTION_OPERATION_MULTIPLICITY_OF_QUALIFIER_EDIAGNOSTICCHAIN_EMAP = 19898;
+			static const int READLINKOBJECTENDQUALIFIERACTION_OPERATION_MULTIPLICITY_OF_RESULT_EDIAGNOSTICCHAIN_EMAP = 19900;
+			static const int READLINKOBJECTENDQUALIFIERACTION_OPERATION_QUALIFIER_ATTRIBUTE_EDIAGNOSTICCHAIN_EMAP = 19903;
+			static const int READLINKOBJECTENDQUALIFIERACTION_OPERATION_SAME_TYPE_EDIAGNOSTICCHAIN_EMAP = 19901;
+			static const int READLINKOBJECTENDQUALIFIERACTION_OPERATION_TYPE_OF_OBJECT_EDIAGNOSTICCHAIN_EMAP = 19897;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getReadLinkObjectEndQualifierAction_Class() const = 0;
@@ -5297,16 +5320,16 @@ namespace uml
 
 			// Begin Class ReadSelfAction
 			//Class and Feature IDs 
-			static const unsigned int READSELFACTION_CLASS = 198;
+			static const unsigned int READSELFACTION_CLASS = 199;
 			static const unsigned int READSELFACTION_CLASS_FEATURE_COUNT = 28;
-			static const unsigned int READSELFACTION_CLASS_OPERATION_COUNT = 69;
+			static const unsigned int READSELFACTION_CLASS_OPERATION_COUNT = 70;
 			
-			static const int READSELFACTION_ATTRIBUTE_RESULT = 19827;
+			static const int READSELFACTION_ATTRIBUTE_RESULT = 19927;
 			
-			static const int READSELFACTION_OPERATION_CONTAINED_EDIAGNOSTICCHAIN_EMAP = 19893;
-			static const int READSELFACTION_OPERATION_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP = 19894;
-			static const int READSELFACTION_OPERATION_NOT_STATIC_EDIAGNOSTICCHAIN_EMAP = 19895;
-			static const int READSELFACTION_OPERATION_TYPE_EDIAGNOSTICCHAIN_EMAP = 19896;
+			static const int READSELFACTION_OPERATION_CONTAINED_EDIAGNOSTICCHAIN_EMAP = 19994;
+			static const int READSELFACTION_OPERATION_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP = 19995;
+			static const int READSELFACTION_OPERATION_NOT_STATIC_EDIAGNOSTICCHAIN_EMAP = 19996;
+			static const int READSELFACTION_OPERATION_TYPE_EDIAGNOSTICCHAIN_EMAP = 19997;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getReadSelfAction_Class() const = 0;
@@ -5324,13 +5347,13 @@ namespace uml
 
 			// Begin Class ReadStructuralFeatureAction
 			//Class and Feature IDs 
-			static const unsigned int READSTRUCTURALFEATUREACTION_CLASS = 199;
+			static const unsigned int READSTRUCTURALFEATUREACTION_CLASS = 200;
 			static const unsigned int READSTRUCTURALFEATUREACTION_CLASS_FEATURE_COUNT = 30;
-			static const unsigned int READSTRUCTURALFEATUREACTION_CLASS_OPERATION_COUNT = 71;
+			static const unsigned int READSTRUCTURALFEATUREACTION_CLASS_OPERATION_COUNT = 72;
 			
-			static const int READSTRUCTURALFEATUREACTION_ATTRIBUTE_RESULT = 19929;
+			static const int READSTRUCTURALFEATUREACTION_ATTRIBUTE_RESULT = 20029;
 			
-			static const int READSTRUCTURALFEATUREACTION_OPERATION_TYPE_AND_ORDERING_EDIAGNOSTICCHAIN_EMAP = 20000;
+			static const int READSTRUCTURALFEATUREACTION_OPERATION_TYPE_AND_ORDERING_EDIAGNOSTICCHAIN_EMAP = 20101;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getReadStructuralFeatureAction_Class() const = 0;
@@ -5345,14 +5368,14 @@ namespace uml
 
 			// Begin Class ReadVariableAction
 			//Class and Feature IDs 
-			static const unsigned int READVARIABLEACTION_CLASS = 200;
+			static const unsigned int READVARIABLEACTION_CLASS = 201;
 			static const unsigned int READVARIABLEACTION_CLASS_FEATURE_COUNT = 29;
-			static const unsigned int READVARIABLEACTION_CLASS_OPERATION_COUNT = 68;
+			static const unsigned int READVARIABLEACTION_CLASS_OPERATION_COUNT = 69;
 			
-			static const int READVARIABLEACTION_ATTRIBUTE_RESULT = 20028;
+			static const int READVARIABLEACTION_ATTRIBUTE_RESULT = 20128;
 			
-			static const int READVARIABLEACTION_OPERATION_COMPATIBLE_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP = 20096;
-			static const int READVARIABLEACTION_OPERATION_TYPE_AND_ORDERING_EDIAGNOSTICCHAIN_EMAP = 20095;
+			static const int READVARIABLEACTION_OPERATION_COMPATIBLE_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP = 20197;
+			static const int READVARIABLEACTION_OPERATION_TYPE_AND_ORDERING_EDIAGNOSTICCHAIN_EMAP = 20196;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getReadVariableAction_Class() const = 0;
@@ -5368,9 +5391,9 @@ namespace uml
 
 			// Begin Class Realization
 			//Class and Feature IDs 
-			static const unsigned int REALIZATION_CLASS = 201;
+			static const unsigned int REALIZATION_CLASS = 202;
 			static const unsigned int REALIZATION_CLASS_FEATURE_COUNT = 18;
-			static const unsigned int REALIZATION_CLASS_OPERATION_COUNT = 58;
+			static const unsigned int REALIZATION_CLASS_OPERATION_COUNT = 59;
 			
 			
 			
@@ -5385,14 +5408,14 @@ namespace uml
 
 			// Begin Class Reception
 			//Class and Feature IDs 
-			static const unsigned int RECEPTION_CLASS = 202;
+			static const unsigned int RECEPTION_CLASS = 203;
 			static const unsigned int RECEPTION_CLASS_FEATURE_COUNT = 27;
-			static const unsigned int RECEPTION_CLASS_OPERATION_COUNT = 79;
+			static const unsigned int RECEPTION_CLASS_OPERATION_COUNT = 80;
 			
-			static const int RECEPTION_ATTRIBUTE_SIGNAL = 20226;
+			static const int RECEPTION_ATTRIBUTE_SIGNAL = 20326;
 			
-			static const int RECEPTION_OPERATION_SAME_NAME_AS_SIGNAL_EDIAGNOSTICCHAIN_EMAP = 20304;
-			static const int RECEPTION_OPERATION_SAME_STRUCTURE_AS_SIGNAL_EDIAGNOSTICCHAIN_EMAP = 20305;
+			static const int RECEPTION_OPERATION_SAME_NAME_AS_SIGNAL_EDIAGNOSTICCHAIN_EMAP = 20405;
+			static const int RECEPTION_OPERATION_SAME_STRUCTURE_AS_SIGNAL_EDIAGNOSTICCHAIN_EMAP = 20406;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getReception_Class() const = 0;
@@ -5408,18 +5431,18 @@ namespace uml
 
 			// Begin Class ReclassifyObjectAction
 			//Class and Feature IDs 
-			static const unsigned int RECLASSIFYOBJECTACTION_CLASS = 203;
+			static const unsigned int RECLASSIFYOBJECTACTION_CLASS = 204;
 			static const unsigned int RECLASSIFYOBJECTACTION_CLASS_FEATURE_COUNT = 31;
-			static const unsigned int RECLASSIFYOBJECTACTION_CLASS_OPERATION_COUNT = 68;
-			static const int RECLASSIFYOBJECTACTION_ATTRIBUTE_ISREPLACEALL = 20327;
+			static const unsigned int RECLASSIFYOBJECTACTION_CLASS_OPERATION_COUNT = 69;
+			static const int RECLASSIFYOBJECTACTION_ATTRIBUTE_ISREPLACEALL = 20427;
 			
-			static const int RECLASSIFYOBJECTACTION_ATTRIBUTE_NEWCLASSIFIER = 20328;
-			static const int RECLASSIFYOBJECTACTION_ATTRIBUTE_OBJECT = 20329;
-			static const int RECLASSIFYOBJECTACTION_ATTRIBUTE_OLDCLASSIFIER = 20330;
+			static const int RECLASSIFYOBJECTACTION_ATTRIBUTE_NEWCLASSIFIER = 20428;
+			static const int RECLASSIFYOBJECTACTION_ATTRIBUTE_OBJECT = 20429;
+			static const int RECLASSIFYOBJECTACTION_ATTRIBUTE_OLDCLASSIFIER = 20430;
 			
-			static const int RECLASSIFYOBJECTACTION_OPERATION_CLASSIFIER_NOT_ABSTRACT_EDIAGNOSTICCHAIN_EMAP = 20397;
-			static const int RECLASSIFYOBJECTACTION_OPERATION_INPUT_PIN_EDIAGNOSTICCHAIN_EMAP = 20396;
-			static const int RECLASSIFYOBJECTACTION_OPERATION_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP = 20398;
+			static const int RECLASSIFYOBJECTACTION_OPERATION_CLASSIFIER_NOT_ABSTRACT_EDIAGNOSTICCHAIN_EMAP = 20498;
+			static const int RECLASSIFYOBJECTACTION_OPERATION_INPUT_PIN_EDIAGNOSTICCHAIN_EMAP = 20497;
+			static const int RECLASSIFYOBJECTACTION_OPERATION_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP = 20499;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getReclassifyObjectAction_Class() const = 0;
@@ -5439,19 +5462,19 @@ namespace uml
 
 			// Begin Class RedefinableElement
 			//Class and Feature IDs 
-			static const unsigned int REDEFINABLEELEMENT_CLASS = 204;
+			static const unsigned int REDEFINABLEELEMENT_CLASS = 205;
 			static const unsigned int REDEFINABLEELEMENT_CLASS_FEATURE_COUNT = 12;
-			static const unsigned int REDEFINABLEELEMENT_CLASS_OPERATION_COUNT = 60;
-			static const int REDEFINABLEELEMENT_ATTRIBUTE_ISLEAF = 20409;
+			static const unsigned int REDEFINABLEELEMENT_CLASS_OPERATION_COUNT = 61;
+			static const int REDEFINABLEELEMENT_ATTRIBUTE_ISLEAF = 20509;
 			
-			static const int REDEFINABLEELEMENT_ATTRIBUTE_REDEFINEDELEMENT = 20410;
-			static const int REDEFINABLEELEMENT_ATTRIBUTE_REDEFINITIONCONTEXT = 20411;
+			static const int REDEFINABLEELEMENT_ATTRIBUTE_REDEFINEDELEMENT = 20510;
+			static const int REDEFINABLEELEMENT_ATTRIBUTE_REDEFINITIONCONTEXT = 20511;
 			
-			static const int REDEFINABLEELEMENT_OPERATION_ISCONSISTENTWITH_REDEFINABLEELEMENT = 20470;
-			static const int REDEFINABLEELEMENT_OPERATION_ISREDEFINITIONCONTEXTVALID_REDEFINABLEELEMENT = 20471;
-			static const int REDEFINABLEELEMENT_OPERATION_NON_LEAF_REDEFINITION_EDIAGNOSTICCHAIN_EMAP = 20468;
-			static const int REDEFINABLEELEMENT_OPERATION_REDEFINITION_CONSISTENT_EDIAGNOSTICCHAIN_EMAP = 20467;
-			static const int REDEFINABLEELEMENT_OPERATION_REDEFINITION_CONTEXT_VALID_EDIAGNOSTICCHAIN_EMAP = 20469;
+			static const int REDEFINABLEELEMENT_OPERATION_ISCONSISTENTWITH_REDEFINABLEELEMENT = 20571;
+			static const int REDEFINABLEELEMENT_OPERATION_ISREDEFINITIONCONTEXTVALID_REDEFINABLEELEMENT = 20572;
+			static const int REDEFINABLEELEMENT_OPERATION_NON_LEAF_REDEFINITION_EDIAGNOSTICCHAIN_EMAP = 20569;
+			static const int REDEFINABLEELEMENT_OPERATION_REDEFINITION_CONSISTENT_EDIAGNOSTICCHAIN_EMAP = 20568;
+			static const int REDEFINABLEELEMENT_OPERATION_REDEFINITION_CONTEXT_VALID_EDIAGNOSTICCHAIN_EMAP = 20570;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getRedefinableElement_Class() const = 0;
@@ -5472,16 +5495,16 @@ namespace uml
 
 			// Begin Class RedefinableTemplateSignature
 			//Class and Feature IDs 
-			static const unsigned int REDEFINABLETEMPLATESIGNATURE_CLASS = 205;
+			static const unsigned int REDEFINABLETEMPLATESIGNATURE_CLASS = 206;
 			static const unsigned int REDEFINABLETEMPLATESIGNATURE_CLASS_FEATURE_COUNT = 18;
-			static const unsigned int REDEFINABLETEMPLATESIGNATURE_CLASS_OPERATION_COUNT = 64;
+			static const unsigned int REDEFINABLETEMPLATESIGNATURE_CLASS_OPERATION_COUNT = 65;
 			
-			static const int REDEFINABLETEMPLATESIGNATURE_ATTRIBUTE_CLASSIFIER = 20517;
-			static const int REDEFINABLETEMPLATESIGNATURE_ATTRIBUTE_EXTENDEDSIGNATURE = 20515;
-			static const int REDEFINABLETEMPLATESIGNATURE_ATTRIBUTE_INHERITEDPARAMETER = 20516;
+			static const int REDEFINABLETEMPLATESIGNATURE_ATTRIBUTE_CLASSIFIER = 20617;
+			static const int REDEFINABLETEMPLATESIGNATURE_ATTRIBUTE_EXTENDEDSIGNATURE = 20615;
+			static const int REDEFINABLETEMPLATESIGNATURE_ATTRIBUTE_INHERITEDPARAMETER = 20616;
 			
-			static const int REDEFINABLETEMPLATESIGNATURE_OPERATION_GETINHERITEDPARAMETERS = 20581;
-			static const int REDEFINABLETEMPLATESIGNATURE_OPERATION_REDEFINES_PARENTS_EDIAGNOSTICCHAIN_EMAP = 20580;
+			static const int REDEFINABLETEMPLATESIGNATURE_OPERATION_GETINHERITEDPARAMETERS = 20682;
+			static const int REDEFINABLETEMPLATESIGNATURE_OPERATION_REDEFINES_PARENTS_EDIAGNOSTICCHAIN_EMAP = 20681;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getRedefinableTemplateSignature_Class() const = 0;
@@ -5499,18 +5522,18 @@ namespace uml
 
 			// Begin Class ReduceAction
 			//Class and Feature IDs 
-			static const unsigned int REDUCEACTION_CLASS = 206;
+			static const unsigned int REDUCEACTION_CLASS = 207;
 			static const unsigned int REDUCEACTION_CLASS_FEATURE_COUNT = 31;
-			static const unsigned int REDUCEACTION_CLASS_OPERATION_COUNT = 68;
-			static const int REDUCEACTION_ATTRIBUTE_ISORDERED = 20628;
+			static const unsigned int REDUCEACTION_CLASS_OPERATION_COUNT = 69;
+			static const int REDUCEACTION_ATTRIBUTE_ISORDERED = 20728;
 			
-			static const int REDUCEACTION_ATTRIBUTE_COLLECTION = 20627;
-			static const int REDUCEACTION_ATTRIBUTE_REDUCER = 20629;
-			static const int REDUCEACTION_ATTRIBUTE_RESULT = 20630;
+			static const int REDUCEACTION_ATTRIBUTE_COLLECTION = 20727;
+			static const int REDUCEACTION_ATTRIBUTE_REDUCER = 20729;
+			static const int REDUCEACTION_ATTRIBUTE_RESULT = 20730;
 			
-			static const int REDUCEACTION_OPERATION_INPUT_TYPE_IS_COLLECTION_EDIAGNOSTICCHAIN_EMAP = 20697;
-			static const int REDUCEACTION_OPERATION_OUTPUT_TYPES_ARE_COMPATIBLE_EDIAGNOSTICCHAIN_EMAP = 20698;
-			static const int REDUCEACTION_OPERATION_REDUCER_INPUTS_OUTPUT_EDIAGNOSTICCHAIN_EMAP = 20696;
+			static const int REDUCEACTION_OPERATION_INPUT_TYPE_IS_COLLECTION_EDIAGNOSTICCHAIN_EMAP = 20798;
+			static const int REDUCEACTION_OPERATION_OUTPUT_TYPES_ARE_COMPATIBLE_EDIAGNOSTICCHAIN_EMAP = 20799;
+			static const int REDUCEACTION_OPERATION_REDUCER_INPUTS_OUTPUT_EDIAGNOSTICCHAIN_EMAP = 20797;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getReduceAction_Class() const = 0;
@@ -5530,23 +5553,23 @@ namespace uml
 
 			// Begin Class Region
 			//Class and Feature IDs 
-			static const unsigned int REGION_CLASS = 207;
+			static const unsigned int REGION_CLASS = 208;
 			static const unsigned int REGION_CLASS_FEATURE_COUNT = 23;
-			static const unsigned int REGION_CLASS_OPERATION_COUNT = 80;
+			static const unsigned int REGION_CLASS_OPERATION_COUNT = 81;
 			
-			static const int REGION_ATTRIBUTE_EXTENDEDREGION = 20718;
-			static const int REGION_ATTRIBUTE_STATE = 20719;
-			static const int REGION_ATTRIBUTE_STATEMACHINE = 20720;
-			static const int REGION_ATTRIBUTE_SUBVERTEX = 20722;
-			static const int REGION_ATTRIBUTE_TRANSITION = 20721;
+			static const int REGION_ATTRIBUTE_EXTENDEDREGION = 20818;
+			static const int REGION_ATTRIBUTE_STATE = 20819;
+			static const int REGION_ATTRIBUTE_STATEMACHINE = 20820;
+			static const int REGION_ATTRIBUTE_SUBVERTEX = 20822;
+			static const int REGION_ATTRIBUTE_TRANSITION = 20821;
 			
-			static const int REGION_OPERATION_BELONGSTOPSM = 20800;
-			static const int REGION_OPERATION_CONTAININGSTATEMACHINE = 20801;
-			static const int REGION_OPERATION_DEEP_HISTORY_VERTEX_EDIAGNOSTICCHAIN_EMAP = 20796;
-			static const int REGION_OPERATION_INITIAL_VERTEX_EDIAGNOSTICCHAIN_EMAP = 20799;
-			static const int REGION_OPERATION_OWNED_EDIAGNOSTICCHAIN_EMAP = 20798;
-			static const int REGION_OPERATION_REDEFINITIONCONTEXT = 20802;
-			static const int REGION_OPERATION_SHALLOW_HISTORY_VERTEX_EDIAGNOSTICCHAIN_EMAP = 20797;
+			static const int REGION_OPERATION_BELONGSTOPSM = 20901;
+			static const int REGION_OPERATION_CONTAININGSTATEMACHINE = 20902;
+			static const int REGION_OPERATION_DEEP_HISTORY_VERTEX_EDIAGNOSTICCHAIN_EMAP = 20897;
+			static const int REGION_OPERATION_INITIAL_VERTEX_EDIAGNOSTICCHAIN_EMAP = 20900;
+			static const int REGION_OPERATION_OWNED_EDIAGNOSTICCHAIN_EMAP = 20899;
+			static const int REGION_OPERATION_REDEFINITIONCONTEXT = 20903;
+			static const int REGION_OPERATION_SHALLOW_HISTORY_VERTEX_EDIAGNOSTICCHAIN_EMAP = 20898;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getRegion_Class() const = 0;
@@ -5571,11 +5594,11 @@ namespace uml
 
 			// Begin Class Relationship
 			//Class and Feature IDs 
-			static const unsigned int RELATIONSHIP_CLASS = 208;
+			static const unsigned int RELATIONSHIP_CLASS = 209;
 			static const unsigned int RELATIONSHIP_CLASS_FEATURE_COUNT = 4;
-			static const unsigned int RELATIONSHIP_CLASS_OPERATION_COUNT = 41;
+			static const unsigned int RELATIONSHIP_CLASS_OPERATION_COUNT = 42;
 			
-			static const int RELATIONSHIP_ATTRIBUTE_RELATEDELEMENT = 20803;
+			static const int RELATIONSHIP_ATTRIBUTE_RELATEDELEMENT = 20903;
 			
 			
 			//Class and Feature Getter
@@ -5590,14 +5613,14 @@ namespace uml
 
 			// Begin Class RemoveStructuralFeatureValueAction
 			//Class and Feature IDs 
-			static const unsigned int REMOVESTRUCTURALFEATUREVALUEACTION_CLASS = 209;
+			static const unsigned int REMOVESTRUCTURALFEATUREVALUEACTION_CLASS = 210;
 			static const unsigned int REMOVESTRUCTURALFEATUREVALUEACTION_CLASS_FEATURE_COUNT = 33;
-			static const unsigned int REMOVESTRUCTURALFEATUREVALUEACTION_CLASS_OPERATION_COUNT = 75;
-			static const int REMOVESTRUCTURALFEATUREVALUEACTION_ATTRIBUTE_ISREMOVEDUPLICATES = 20931;
+			static const unsigned int REMOVESTRUCTURALFEATUREVALUEACTION_CLASS_OPERATION_COUNT = 76;
+			static const int REMOVESTRUCTURALFEATUREVALUEACTION_ATTRIBUTE_ISREMOVEDUPLICATES = 21031;
 			
-			static const int REMOVESTRUCTURALFEATUREVALUEACTION_ATTRIBUTE_REMOVEAT = 20932;
+			static const int REMOVESTRUCTURALFEATUREVALUEACTION_ATTRIBUTE_REMOVEAT = 21032;
 			
-			static const int REMOVESTRUCTURALFEATUREVALUEACTION_OPERATION_REMOVEAT_AND_VALUE_EDIAGNOSTICCHAIN_EMAP = 21007;
+			static const int REMOVESTRUCTURALFEATUREVALUEACTION_OPERATION_REMOVEAT_AND_VALUE_EDIAGNOSTICCHAIN_EMAP = 21108;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getRemoveStructuralFeatureValueAction_Class() const = 0;
@@ -5613,14 +5636,14 @@ namespace uml
 
 			// Begin Class RemoveVariableValueAction
 			//Class and Feature IDs 
-			static const unsigned int REMOVEVARIABLEVALUEACTION_CLASS = 210;
+			static const unsigned int REMOVEVARIABLEVALUEACTION_CLASS = 211;
 			static const unsigned int REMOVEVARIABLEVALUEACTION_CLASS_FEATURE_COUNT = 31;
-			static const unsigned int REMOVEVARIABLEVALUEACTION_CLASS_OPERATION_COUNT = 69;
-			static const int REMOVEVARIABLEVALUEACTION_ATTRIBUTE_ISREMOVEDUPLICATES = 21029;
+			static const unsigned int REMOVEVARIABLEVALUEACTION_CLASS_OPERATION_COUNT = 70;
+			static const int REMOVEVARIABLEVALUEACTION_ATTRIBUTE_ISREMOVEDUPLICATES = 21129;
 			
-			static const int REMOVEVARIABLEVALUEACTION_ATTRIBUTE_REMOVEAT = 21030;
+			static const int REMOVEVARIABLEVALUEACTION_ATTRIBUTE_REMOVEAT = 21130;
 			
-			static const int REMOVEVARIABLEVALUEACTION_OPERATION_REMOVEAT_AND_VALUE_EDIAGNOSTICCHAIN_EMAP = 21099;
+			static const int REMOVEVARIABLEVALUEACTION_OPERATION_REMOVEAT_AND_VALUE_EDIAGNOSTICCHAIN_EMAP = 21200;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getRemoveVariableValueAction_Class() const = 0;
@@ -5636,16 +5659,16 @@ namespace uml
 
 			// Begin Class ReplyAction
 			//Class and Feature IDs 
-			static const unsigned int REPLYACTION_CLASS = 211;
+			static const unsigned int REPLYACTION_CLASS = 212;
 			static const unsigned int REPLYACTION_CLASS_FEATURE_COUNT = 30;
-			static const unsigned int REPLYACTION_CLASS_OPERATION_COUNT = 67;
+			static const unsigned int REPLYACTION_CLASS_OPERATION_COUNT = 68;
 			
-			static const int REPLYACTION_ATTRIBUTE_REPLYTOCALL = 21127;
-			static const int REPLYACTION_ATTRIBUTE_REPLYVALUE = 21128;
-			static const int REPLYACTION_ATTRIBUTE_RETURNINFORMATION = 21129;
+			static const int REPLYACTION_ATTRIBUTE_REPLYTOCALL = 21227;
+			static const int REPLYACTION_ATTRIBUTE_REPLYVALUE = 21228;
+			static const int REPLYACTION_ATTRIBUTE_RETURNINFORMATION = 21229;
 			
-			static const int REPLYACTION_OPERATION_EVENT_ON_REPLY_TO_CALL_TRIGGER_EDIAGNOSTICCHAIN_EMAP = 21196;
-			static const int REPLYACTION_OPERATION_PINS_MATCH_PARAMETER_EDIAGNOSTICCHAIN_EMAP = 21195;
+			static const int REPLYACTION_OPERATION_EVENT_ON_REPLY_TO_CALL_TRIGGER_EDIAGNOSTICCHAIN_EMAP = 21297;
+			static const int REPLYACTION_OPERATION_PINS_MATCH_PARAMETER_EDIAGNOSTICCHAIN_EMAP = 21296;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getReplyAction_Class() const = 0;
@@ -5663,14 +5686,14 @@ namespace uml
 
 			// Begin Class SendObjectAction
 			//Class and Feature IDs 
-			static const unsigned int SENDOBJECTACTION_CLASS = 212;
+			static const unsigned int SENDOBJECTACTION_CLASS = 213;
 			static const unsigned int SENDOBJECTACTION_CLASS_FEATURE_COUNT = 31;
-			static const unsigned int SENDOBJECTACTION_CLASS_OPERATION_COUNT = 66;
+			static const unsigned int SENDOBJECTACTION_CLASS_OPERATION_COUNT = 67;
 			
-			static const int SENDOBJECTACTION_ATTRIBUTE_REQUEST = 21229;
-			static const int SENDOBJECTACTION_ATTRIBUTE_TARGET = 21230;
+			static const int SENDOBJECTACTION_ATTRIBUTE_REQUEST = 21329;
+			static const int SENDOBJECTACTION_ATTRIBUTE_TARGET = 21330;
 			
-			static const int SENDOBJECTACTION_OPERATION_TYPE_TARGET_PIN_EDIAGNOSTICCHAIN_EMAP = 21296;
+			static const int SENDOBJECTACTION_OPERATION_TYPE_TARGET_PIN_EDIAGNOSTICCHAIN_EMAP = 21397;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getSendObjectAction_Class() const = 0;
@@ -5686,16 +5709,16 @@ namespace uml
 
 			// Begin Class SendSignalAction
 			//Class and Feature IDs 
-			static const unsigned int SENDSIGNALACTION_CLASS = 213;
+			static const unsigned int SENDSIGNALACTION_CLASS = 214;
 			static const unsigned int SENDSIGNALACTION_CLASS_FEATURE_COUNT = 31;
-			static const unsigned int SENDSIGNALACTION_CLASS_OPERATION_COUNT = 68;
+			static const unsigned int SENDSIGNALACTION_CLASS_OPERATION_COUNT = 69;
 			
-			static const int SENDSIGNALACTION_ATTRIBUTE_SIGNAL = 21329;
-			static const int SENDSIGNALACTION_ATTRIBUTE_TARGET = 21330;
+			static const int SENDSIGNALACTION_ATTRIBUTE_SIGNAL = 21429;
+			static const int SENDSIGNALACTION_ATTRIBUTE_TARGET = 21430;
 			
-			static const int SENDSIGNALACTION_OPERATION_NUMBER_ORDER_EDIAGNOSTICCHAIN_EMAP = 21397;
-			static const int SENDSIGNALACTION_OPERATION_TYPE_ORDERING_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP = 21396;
-			static const int SENDSIGNALACTION_OPERATION_TYPE_TARGET_PIN_EDIAGNOSTICCHAIN_EMAP = 21398;
+			static const int SENDSIGNALACTION_OPERATION_NUMBER_ORDER_EDIAGNOSTICCHAIN_EMAP = 21498;
+			static const int SENDSIGNALACTION_OPERATION_TYPE_ORDERING_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP = 21497;
+			static const int SENDSIGNALACTION_OPERATION_TYPE_TARGET_PIN_EDIAGNOSTICCHAIN_EMAP = 21499;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getSendSignalAction_Class() const = 0;
@@ -5713,11 +5736,11 @@ namespace uml
 
 			// Begin Class SequenceNode
 			//Class and Feature IDs 
-			static const unsigned int SEQUENCENODE_CLASS = 214;
+			static const unsigned int SEQUENCENODE_CLASS = 215;
 			static const unsigned int SEQUENCENODE_CLASS_FEATURE_COUNT = 45;
-			static const unsigned int SEQUENCENODE_CLASS_OPERATION_COUNT = 85;
+			static const unsigned int SEQUENCENODE_CLASS_OPERATION_COUNT = 86;
 			
-			static const int SEQUENCENODE_ATTRIBUTE_EXECUTABLENODE = 21444;
+			static const int SEQUENCENODE_ATTRIBUTE_EXECUTABLENODE = 21544;
 			
 			
 			//Class and Feature Getter
@@ -5732,13 +5755,13 @@ namespace uml
 
 			// Begin Class Signal
 			//Class and Feature IDs 
-			static const unsigned int SIGNAL_CLASS = 215;
+			static const unsigned int SIGNAL_CLASS = 216;
 			static const unsigned int SIGNAL_CLASS_FEATURE_COUNT = 39;
-			static const unsigned int SIGNAL_CLASS_OPERATION_COUNT = 109;
+			static const unsigned int SIGNAL_CLASS_OPERATION_COUNT = 110;
 			
-			static const int SIGNAL_ATTRIBUTE_OWNEDATTRIBUTE = 21538;
+			static const int SIGNAL_ATTRIBUTE_OWNEDATTRIBUTE = 21638;
 			
-			static const int SIGNAL_OPERATION_CREATEOWNEDATTRIBUTE_STRING_UNLIMITEDNATURAL = 21647;
+			static const int SIGNAL_OPERATION_CREATEOWNEDATTRIBUTE_STRING_UNLIMITEDNATURAL = 21748;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getSignal_Class() const = 0;
@@ -5753,11 +5776,11 @@ namespace uml
 
 			// Begin Class SignalEvent
 			//Class and Feature IDs 
-			static const unsigned int SIGNALEVENT_CLASS = 216;
+			static const unsigned int SIGNALEVENT_CLASS = 217;
 			static const unsigned int SIGNALEVENT_CLASS_FEATURE_COUNT = 13;
-			static const unsigned int SIGNALEVENT_CLASS_OPERATION_COUNT = 58;
+			static const unsigned int SIGNALEVENT_CLASS_OPERATION_COUNT = 59;
 			
-			static const int SIGNALEVENT_ATTRIBUTE_SIGNAL = 21612;
+			static const int SIGNALEVENT_ATTRIBUTE_SIGNAL = 21712;
 			
 			
 			//Class and Feature Getter
@@ -5772,13 +5795,13 @@ namespace uml
 
 			// Begin Class Slot
 			//Class and Feature IDs 
-			static const unsigned int SLOT_CLASS = 217;
+			static const unsigned int SLOT_CLASS = 218;
 			static const unsigned int SLOT_CLASS_FEATURE_COUNT = 6;
-			static const unsigned int SLOT_CLASS_OPERATION_COUNT = 41;
+			static const unsigned int SLOT_CLASS_OPERATION_COUNT = 42;
 			
-			static const int SLOT_ATTRIBUTE_DEFININGFEATURE = 21703;
-			static const int SLOT_ATTRIBUTE_OWNINGINSTANCE = 21705;
-			static const int SLOT_ATTRIBUTE_VALUE = 21704;
+			static const int SLOT_ATTRIBUTE_DEFININGFEATURE = 21803;
+			static const int SLOT_ATTRIBUTE_OWNINGINSTANCE = 21805;
+			static const int SLOT_ATTRIBUTE_VALUE = 21804;
 			
 			
 			//Class and Feature Getter
@@ -5795,14 +5818,14 @@ namespace uml
 
 			// Begin Class StartClassifierBehaviorAction
 			//Class and Feature IDs 
-			static const unsigned int STARTCLASSIFIERBEHAVIORACTION_CLASS = 218;
+			static const unsigned int STARTCLASSIFIERBEHAVIORACTION_CLASS = 219;
 			static const unsigned int STARTCLASSIFIERBEHAVIORACTION_CLASS_FEATURE_COUNT = 28;
-			static const unsigned int STARTCLASSIFIERBEHAVIORACTION_CLASS_OPERATION_COUNT = 67;
+			static const unsigned int STARTCLASSIFIERBEHAVIORACTION_CLASS_OPERATION_COUNT = 68;
 			
-			static const int STARTCLASSIFIERBEHAVIORACTION_ATTRIBUTE_OBJECT = 21827;
+			static const int STARTCLASSIFIERBEHAVIORACTION_ATTRIBUTE_OBJECT = 21927;
 			
-			static const int STARTCLASSIFIERBEHAVIORACTION_OPERATION_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP = 21893;
-			static const int STARTCLASSIFIERBEHAVIORACTION_OPERATION_TYPE_HAS_CLASSIFIER_EDIAGNOSTICCHAIN_EMAP = 21894;
+			static const int STARTCLASSIFIERBEHAVIORACTION_OPERATION_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP = 21994;
+			static const int STARTCLASSIFIERBEHAVIORACTION_OPERATION_TYPE_HAS_CLASSIFIER_EDIAGNOSTICCHAIN_EMAP = 21995;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getStartClassifierBehaviorAction_Class() const = 0;
@@ -5818,16 +5841,16 @@ namespace uml
 
 			// Begin Class StartObjectBehaviorAction
 			//Class and Feature IDs 
-			static const unsigned int STARTOBJECTBEHAVIORACTION_CLASS = 219;
+			static const unsigned int STARTOBJECTBEHAVIORACTION_CLASS = 220;
 			static const unsigned int STARTOBJECTBEHAVIORACTION_CLASS_FEATURE_COUNT = 32;
-			static const unsigned int STARTOBJECTBEHAVIORACTION_CLASS_OPERATION_COUNT = 74;
+			static const unsigned int STARTOBJECTBEHAVIORACTION_CLASS_OPERATION_COUNT = 75;
 			
-			static const int STARTOBJECTBEHAVIORACTION_ATTRIBUTE_OBJECT = 21931;
+			static const int STARTOBJECTBEHAVIORACTION_ATTRIBUTE_OBJECT = 22031;
 			
-			static const int STARTOBJECTBEHAVIORACTION_OPERATION_BEHAVIOR = 22005;
-			static const int STARTOBJECTBEHAVIORACTION_OPERATION_MULTIPLICITY_OF_OBJECT_EDIAGNOSTICCHAIN_EMAP = 22002;
-			static const int STARTOBJECTBEHAVIORACTION_OPERATION_NO_ONPORT_EDIAGNOSTICCHAIN_EMAP = 22004;
-			static const int STARTOBJECTBEHAVIORACTION_OPERATION_TYPE_OF_OBJECT_EDIAGNOSTICCHAIN_EMAP = 22003;
+			static const int STARTOBJECTBEHAVIORACTION_OPERATION_BEHAVIOR = 22106;
+			static const int STARTOBJECTBEHAVIORACTION_OPERATION_MULTIPLICITY_OF_OBJECT_EDIAGNOSTICCHAIN_EMAP = 22103;
+			static const int STARTOBJECTBEHAVIORACTION_OPERATION_NO_ONPORT_EDIAGNOSTICCHAIN_EMAP = 22105;
+			static const int STARTOBJECTBEHAVIORACTION_OPERATION_TYPE_OF_OBJECT_EDIAGNOSTICCHAIN_EMAP = 22104;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getStartObjectBehaviorAction_Class() const = 0;
@@ -5845,35 +5868,35 @@ namespace uml
 
 			// Begin Class State
 			//Class and Feature IDs 
-			static const unsigned int STATE_CLASS = 220;
+			static const unsigned int STATE_CLASS = 221;
 			static const unsigned int STATE_CLASS_FEATURE_COUNT = 35;
-			static const unsigned int STATE_CLASS_OPERATION_COUNT = 88;
-			static const int STATE_ATTRIBUTE_ISCOMPOSITE = 22027;
-			static const int STATE_ATTRIBUTE_ISORTHOGONAL = 22028;
-			static const int STATE_ATTRIBUTE_ISSIMPLE = 22029;
-			static const int STATE_ATTRIBUTE_ISSUBMACHINESTATE = 22030;
+			static const unsigned int STATE_CLASS_OPERATION_COUNT = 89;
+			static const int STATE_ATTRIBUTE_ISCOMPOSITE = 22127;
+			static const int STATE_ATTRIBUTE_ISORTHOGONAL = 22128;
+			static const int STATE_ATTRIBUTE_ISSIMPLE = 22129;
+			static const int STATE_ATTRIBUTE_ISSUBMACHINESTATE = 22130;
 			
-			static const int STATE_ATTRIBUTE_CONNECTION = 22021;
-			static const int STATE_ATTRIBUTE_CONNECTIONPOINT = 22022;
-			static const int STATE_ATTRIBUTE_DEFERRABLETRIGGER = 22023;
-			static const int STATE_ATTRIBUTE_DOACTIVITY = 22024;
-			static const int STATE_ATTRIBUTE_ENTRY = 22025;
-			static const int STATE_ATTRIBUTE_EXIT = 22026;
-			static const int STATE_ATTRIBUTE_REDEFINEDSTATE = 22031;
-			static const int STATE_ATTRIBUTE_REGION = 22034;
-			static const int STATE_ATTRIBUTE_STATEINVARIANT = 22032;
-			static const int STATE_ATTRIBUTE_SUBMACHINE = 22033;
+			static const int STATE_ATTRIBUTE_CONNECTION = 22121;
+			static const int STATE_ATTRIBUTE_CONNECTIONPOINT = 22122;
+			static const int STATE_ATTRIBUTE_DEFERRABLETRIGGER = 22123;
+			static const int STATE_ATTRIBUTE_DOACTIVITY = 22124;
+			static const int STATE_ATTRIBUTE_ENTRY = 22125;
+			static const int STATE_ATTRIBUTE_EXIT = 22126;
+			static const int STATE_ATTRIBUTE_REDEFINEDSTATE = 22131;
+			static const int STATE_ATTRIBUTE_REGION = 22134;
+			static const int STATE_ATTRIBUTE_STATEINVARIANT = 22132;
+			static const int STATE_ATTRIBUTE_SUBMACHINE = 22133;
 			
-			static const int STATE_OPERATION_COMPOSITE_STATES_EDIAGNOSTICCHAIN_EMAP = 22115;
-			static const int STATE_OPERATION_DESTINATIONS_OR_SOURCES_OF_TRANSITIONS_EDIAGNOSTICCHAIN_EMAP = 22116;
-			static const int STATE_OPERATION_ENTRY_OR_EXIT_EDIAGNOSTICCHAIN_EMAP = 22113;
-			static const int STATE_OPERATION_ISCOMPOSITE = 22118;
-			static const int STATE_OPERATION_ISORTHOGONAL = 22119;
-			static const int STATE_OPERATION_ISSIMPLE = 22120;
-			static const int STATE_OPERATION_ISSUBMACHINESTATE = 22121;
-			static const int STATE_OPERATION_REDEFINITIONCONTEXT = 22122;
-			static const int STATE_OPERATION_SUBMACHINE_OR_REGIONS_EDIAGNOSTICCHAIN_EMAP = 22117;
-			static const int STATE_OPERATION_SUBMACHINE_STATES_EDIAGNOSTICCHAIN_EMAP = 22114;
+			static const int STATE_OPERATION_COMPOSITE_STATES_EDIAGNOSTICCHAIN_EMAP = 22216;
+			static const int STATE_OPERATION_DESTINATIONS_OR_SOURCES_OF_TRANSITIONS_EDIAGNOSTICCHAIN_EMAP = 22217;
+			static const int STATE_OPERATION_ENTRY_OR_EXIT_EDIAGNOSTICCHAIN_EMAP = 22214;
+			static const int STATE_OPERATION_ISCOMPOSITE = 22219;
+			static const int STATE_OPERATION_ISORTHOGONAL = 22220;
+			static const int STATE_OPERATION_ISSIMPLE = 22221;
+			static const int STATE_OPERATION_ISSUBMACHINESTATE = 22222;
+			static const int STATE_OPERATION_REDEFINITIONCONTEXT = 22223;
+			static const int STATE_OPERATION_SUBMACHINE_OR_REGIONS_EDIAGNOSTICCHAIN_EMAP = 22218;
+			static const int STATE_OPERATION_SUBMACHINE_STATES_EDIAGNOSTICCHAIN_EMAP = 22215;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getState_Class() const = 0;
@@ -5910,11 +5933,11 @@ namespace uml
 
 			// Begin Class StateInvariant
 			//Class and Feature IDs 
-			static const unsigned int STATEINVARIANT_CLASS = 221;
+			static const unsigned int STATEINVARIANT_CLASS = 222;
 			static const unsigned int STATEINVARIANT_CLASS_FEATURE_COUNT = 14;
-			static const unsigned int STATEINVARIANT_CLASS_OPERATION_COUNT = 55;
+			static const unsigned int STATEINVARIANT_CLASS_OPERATION_COUNT = 56;
 			
-			static const int STATEINVARIANT_ATTRIBUTE_INVARIANT = 22113;
+			static const int STATEINVARIANT_ATTRIBUTE_INVARIANT = 22213;
 			
 			
 			//Class and Feature Getter
@@ -5929,22 +5952,22 @@ namespace uml
 
 			// Begin Class StateMachine
 			//Class and Feature IDs 
-			static const unsigned int STATEMACHINE_CLASS = 222;
+			static const unsigned int STATEMACHINE_CLASS = 223;
 			static const unsigned int STATEMACHINE_CLASS_FEATURE_COUNT = 65;
-			static const unsigned int STATEMACHINE_CLASS_OPERATION_COUNT = 134;
+			static const unsigned int STATEMACHINE_CLASS_OPERATION_COUNT = 135;
 			
-			static const int STATEMACHINE_ATTRIBUTE_CONNECTIONPOINT = 22261;
-			static const int STATEMACHINE_ATTRIBUTE_EXTENDEDSTATEMACHINE = 22264;
-			static const int STATEMACHINE_ATTRIBUTE_REGION = 22263;
-			static const int STATEMACHINE_ATTRIBUTE_SUBMACHINESTATE = 22262;
+			static const int STATEMACHINE_ATTRIBUTE_CONNECTIONPOINT = 22361;
+			static const int STATEMACHINE_ATTRIBUTE_EXTENDEDSTATEMACHINE = 22364;
+			static const int STATEMACHINE_ATTRIBUTE_REGION = 22363;
+			static const int STATEMACHINE_ATTRIBUTE_SUBMACHINESTATE = 22362;
 			
-			static const int STATEMACHINE_OPERATION_LCA_VERTEX_VERTEX = 22396;
-			static const int STATEMACHINE_OPERATION_LCASTATE_VERTEX_VERTEX = 22398;
-			static const int STATEMACHINE_OPERATION_ANCESTOR_VERTEX_VERTEX = 22397;
-			static const int STATEMACHINE_OPERATION_CLASSIFIER_CONTEXT_EDIAGNOSTICCHAIN_EMAP = 22393;
-			static const int STATEMACHINE_OPERATION_CONNECTION_POINTS_EDIAGNOSTICCHAIN_EMAP = 22392;
-			static const int STATEMACHINE_OPERATION_CONTEXT_CLASSIFIER_EDIAGNOSTICCHAIN_EMAP = 22395;
-			static const int STATEMACHINE_OPERATION_METHOD_EDIAGNOSTICCHAIN_EMAP = 22394;
+			static const int STATEMACHINE_OPERATION_LCA_VERTEX_VERTEX = 22497;
+			static const int STATEMACHINE_OPERATION_LCASTATE_VERTEX_VERTEX = 22499;
+			static const int STATEMACHINE_OPERATION_ANCESTOR_VERTEX_VERTEX = 22498;
+			static const int STATEMACHINE_OPERATION_CLASSIFIER_CONTEXT_EDIAGNOSTICCHAIN_EMAP = 22494;
+			static const int STATEMACHINE_OPERATION_CONNECTION_POINTS_EDIAGNOSTICCHAIN_EMAP = 22493;
+			static const int STATEMACHINE_OPERATION_CONTEXT_CLASSIFIER_EDIAGNOSTICCHAIN_EMAP = 22496;
+			static const int STATEMACHINE_OPERATION_METHOD_EDIAGNOSTICCHAIN_EMAP = 22495;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getStateMachine_Class() const = 0;
@@ -5968,30 +5991,30 @@ namespace uml
 
 			// Begin Class Stereotype
 			//Class and Feature IDs 
-			static const unsigned int STEREOTYPE_CLASS = 223;
+			static const unsigned int STEREOTYPE_CLASS = 224;
 			static const unsigned int STEREOTYPE_CLASS_FEATURE_COUNT = 54;
-			static const unsigned int STEREOTYPE_CLASS_OPERATION_COUNT = 137;
+			static const unsigned int STEREOTYPE_CLASS_OPERATION_COUNT = 138;
 			
-			static const int STEREOTYPE_ATTRIBUTE_ICON = 22352;
-			static const int STEREOTYPE_ATTRIBUTE_PROFILE = 22353;
+			static const int STEREOTYPE_ATTRIBUTE_ICON = 22452;
+			static const int STEREOTYPE_ATTRIBUTE_PROFILE = 22453;
 			
-			static const int STEREOTYPE_OPERATION_ASSOCIATIONENDOWNERSHIP_EDIAGNOSTICCHAIN_EMAP = 22477;
-			static const int STEREOTYPE_OPERATION_BASE_PROPERTY_MULTIPLICITY_MULTIPLE_EXTENSION_EDIAGNOSTICCHAIN_EMAP = 22480;
-			static const int STEREOTYPE_OPERATION_BASE_PROPERTY_MULTIPLICITY_SINGLE_EXTENSION_EDIAGNOSTICCHAIN_EMAP = 22479;
-			static const int STEREOTYPE_OPERATION_BASE_PROPERTY_UPPER_BOUND_EDIAGNOSTICCHAIN_EMAP = 22478;
-			static const int STEREOTYPE_OPERATION_BINARYASSOCIATIONSONLY_EDIAGNOSTICCHAIN_EMAP = 22474;
-			static const int STEREOTYPE_OPERATION_CONTAININGPROFILE = 22489;
-			static const int STEREOTYPE_OPERATION_CREATEEXTENSION_CLASS_BOOLEAN = 22481;
-			static const int STEREOTYPE_OPERATION_CREATEICON_STRING = 22482;
-			static const int STEREOTYPE_OPERATION_CREATEICON_STRING_STRING = 22483;
-			static const int STEREOTYPE_OPERATION_GENERALIZE_EDIAGNOSTICCHAIN_EMAP = 22475;
-			static const int STEREOTYPE_OPERATION_GETALLEXTENDEDMETACLASSES = 22484;
-			static const int STEREOTYPE_OPERATION_GETDEFINITION = 22485;
-			static const int STEREOTYPE_OPERATION_GETEXTENDEDMETACLASSES = 22486;
-			static const int STEREOTYPE_OPERATION_GETKEYWORD = 22487;
-			static const int STEREOTYPE_OPERATION_GETKEYWORD_BOOLEAN = 22488;
-			static const int STEREOTYPE_OPERATION_GETPROFILE = 22490;
-			static const int STEREOTYPE_OPERATION_NAME_NOT_CLASH_EDIAGNOSTICCHAIN_EMAP = 22476;
+			static const int STEREOTYPE_OPERATION_ASSOCIATIONENDOWNERSHIP_EDIAGNOSTICCHAIN_EMAP = 22578;
+			static const int STEREOTYPE_OPERATION_BASE_PROPERTY_MULTIPLICITY_MULTIPLE_EXTENSION_EDIAGNOSTICCHAIN_EMAP = 22581;
+			static const int STEREOTYPE_OPERATION_BASE_PROPERTY_MULTIPLICITY_SINGLE_EXTENSION_EDIAGNOSTICCHAIN_EMAP = 22580;
+			static const int STEREOTYPE_OPERATION_BASE_PROPERTY_UPPER_BOUND_EDIAGNOSTICCHAIN_EMAP = 22579;
+			static const int STEREOTYPE_OPERATION_BINARYASSOCIATIONSONLY_EDIAGNOSTICCHAIN_EMAP = 22575;
+			static const int STEREOTYPE_OPERATION_CONTAININGPROFILE = 22590;
+			static const int STEREOTYPE_OPERATION_CREATEEXTENSION_CLASS_BOOLEAN = 22582;
+			static const int STEREOTYPE_OPERATION_CREATEICON_STRING = 22583;
+			static const int STEREOTYPE_OPERATION_CREATEICON_STRING_STRING = 22584;
+			static const int STEREOTYPE_OPERATION_GENERALIZE_EDIAGNOSTICCHAIN_EMAP = 22576;
+			static const int STEREOTYPE_OPERATION_GETALLEXTENDEDMETACLASSES = 22585;
+			static const int STEREOTYPE_OPERATION_GETDEFINITION = 22586;
+			static const int STEREOTYPE_OPERATION_GETEXTENDEDMETACLASSES = 22587;
+			static const int STEREOTYPE_OPERATION_GETKEYWORD = 22588;
+			static const int STEREOTYPE_OPERATION_GETKEYWORD_BOOLEAN = 22589;
+			static const int STEREOTYPE_OPERATION_GETPROFILE = 22591;
+			static const int STEREOTYPE_OPERATION_NAME_NOT_CLASH_EDIAGNOSTICCHAIN_EMAP = 22577;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getStereotype_Class() const = 0;
@@ -6023,15 +6046,15 @@ namespace uml
 
 			// Begin Class StringExpression
 			//Class and Feature IDs 
-			static const unsigned int STRINGEXPRESSION_CLASS = 224;
+			static const unsigned int STRINGEXPRESSION_CLASS = 225;
 			static const unsigned int STRINGEXPRESSION_CLASS_FEATURE_COUNT = 20;
-			static const unsigned int STRINGEXPRESSION_CLASS_OPERATION_COUNT = 69;
+			static const unsigned int STRINGEXPRESSION_CLASS_OPERATION_COUNT = 70;
 			
-			static const int STRINGEXPRESSION_ATTRIBUTE_OWNINGEXPRESSION = 22418;
-			static const int STRINGEXPRESSION_ATTRIBUTE_SUBEXPRESSION = 22419;
+			static const int STRINGEXPRESSION_ATTRIBUTE_OWNINGEXPRESSION = 22518;
+			static const int STRINGEXPRESSION_ATTRIBUTE_SUBEXPRESSION = 22519;
 			
-			static const int STRINGEXPRESSION_OPERATION_OPERANDS_EDIAGNOSTICCHAIN_EMAP = 22487;
-			static const int STRINGEXPRESSION_OPERATION_SUBEXPRESSIONS_EDIAGNOSTICCHAIN_EMAP = 22488;
+			static const int STRINGEXPRESSION_OPERATION_OPERANDS_EDIAGNOSTICCHAIN_EMAP = 22588;
+			static const int STRINGEXPRESSION_OPERATION_SUBEXPRESSIONS_EDIAGNOSTICCHAIN_EMAP = 22589;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getStringExpression_Class() const = 0;
@@ -6048,10 +6071,10 @@ namespace uml
 
 			// Begin Class StructuralFeature
 			//Class and Feature IDs 
-			static const unsigned int STRUCTURALFEATURE_CLASS = 225;
+			static const unsigned int STRUCTURALFEATURE_CLASS = 226;
 			static const unsigned int STRUCTURALFEATURE_CLASS_FEATURE_COUNT = 22;
-			static const unsigned int STRUCTURALFEATURE_CLASS_OPERATION_COUNT = 72;
-			static const int STRUCTURALFEATURE_ATTRIBUTE_ISREADONLY = 22521;
+			static const unsigned int STRUCTURALFEATURE_CLASS_OPERATION_COUNT = 73;
+			static const int STRUCTURALFEATURE_ATTRIBUTE_ISREADONLY = 22621;
 			
 			
 			
@@ -6067,18 +6090,18 @@ namespace uml
 
 			// Begin Class StructuralFeatureAction
 			//Class and Feature IDs 
-			static const unsigned int STRUCTURALFEATUREACTION_CLASS = 226;
+			static const unsigned int STRUCTURALFEATUREACTION_CLASS = 227;
 			static const unsigned int STRUCTURALFEATUREACTION_CLASS_FEATURE_COUNT = 29;
-			static const unsigned int STRUCTURALFEATUREACTION_CLASS_OPERATION_COUNT = 70;
+			static const unsigned int STRUCTURALFEATUREACTION_CLASS_OPERATION_COUNT = 71;
 			
-			static const int STRUCTURALFEATUREACTION_ATTRIBUTE_OBJECT = 22627;
-			static const int STRUCTURALFEATUREACTION_ATTRIBUTE_STRUCTURALFEATURE = 22628;
+			static const int STRUCTURALFEATUREACTION_ATTRIBUTE_OBJECT = 22727;
+			static const int STRUCTURALFEATUREACTION_ATTRIBUTE_STRUCTURALFEATURE = 22728;
 			
-			static const int STRUCTURALFEATUREACTION_OPERATION_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP = 22694;
-			static const int STRUCTURALFEATUREACTION_OPERATION_NOT_STATIC_EDIAGNOSTICCHAIN_EMAP = 22697;
-			static const int STRUCTURALFEATUREACTION_OPERATION_OBJECT_TYPE_EDIAGNOSTICCHAIN_EMAP = 22695;
-			static const int STRUCTURALFEATUREACTION_OPERATION_ONE_FEATURING_CLASSIFIER_EDIAGNOSTICCHAIN_EMAP = 22698;
-			static const int STRUCTURALFEATUREACTION_OPERATION_VISIBILITY_EDIAGNOSTICCHAIN_EMAP = 22696;
+			static const int STRUCTURALFEATUREACTION_OPERATION_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP = 22795;
+			static const int STRUCTURALFEATUREACTION_OPERATION_NOT_STATIC_EDIAGNOSTICCHAIN_EMAP = 22798;
+			static const int STRUCTURALFEATUREACTION_OPERATION_OBJECT_TYPE_EDIAGNOSTICCHAIN_EMAP = 22796;
+			static const int STRUCTURALFEATUREACTION_OPERATION_ONE_FEATURING_CLASSIFIER_EDIAGNOSTICCHAIN_EMAP = 22799;
+			static const int STRUCTURALFEATUREACTION_OPERATION_VISIBILITY_EDIAGNOSTICCHAIN_EMAP = 22797;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getStructuralFeatureAction_Class() const = 0;
@@ -6098,22 +6121,22 @@ namespace uml
 
 			// Begin Class StructuredActivityNode
 			//Class and Feature IDs 
-			static const unsigned int STRUCTUREDACTIVITYNODE_CLASS = 227;
+			static const unsigned int STRUCTUREDACTIVITYNODE_CLASS = 228;
 			static const unsigned int STRUCTUREDACTIVITYNODE_CLASS_FEATURE_COUNT = 44;
-			static const unsigned int STRUCTUREDACTIVITYNODE_CLASS_OPERATION_COUNT = 85;
-			static const int STRUCTUREDACTIVITYNODE_ATTRIBUTE_MUSTISOLATE = 22739;
+			static const unsigned int STRUCTUREDACTIVITYNODE_CLASS_OPERATION_COUNT = 86;
+			static const int STRUCTUREDACTIVITYNODE_ATTRIBUTE_MUSTISOLATE = 22839;
 			
-			static const int STRUCTUREDACTIVITYNODE_ATTRIBUTE_EDGE = 22738;
-			static const int STRUCTUREDACTIVITYNODE_ATTRIBUTE_NODE = 22743;
-			static const int STRUCTUREDACTIVITYNODE_ATTRIBUTE_STRUCTUREDNODEINPUT = 22740;
-			static const int STRUCTUREDACTIVITYNODE_ATTRIBUTE_STRUCTUREDNODEOUTPUT = 22741;
-			static const int STRUCTUREDACTIVITYNODE_ATTRIBUTE_VARIABLE = 22742;
+			static const int STRUCTUREDACTIVITYNODE_ATTRIBUTE_EDGE = 22838;
+			static const int STRUCTUREDACTIVITYNODE_ATTRIBUTE_NODE = 22843;
+			static const int STRUCTUREDACTIVITYNODE_ATTRIBUTE_STRUCTUREDNODEINPUT = 22840;
+			static const int STRUCTUREDACTIVITYNODE_ATTRIBUTE_STRUCTUREDNODEOUTPUT = 22841;
+			static const int STRUCTUREDACTIVITYNODE_ATTRIBUTE_VARIABLE = 22842;
 			
-			static const int STRUCTUREDACTIVITYNODE_OPERATION_EDGES_EDIAGNOSTICCHAIN_EMAP = 22825;
-			static const int STRUCTUREDACTIVITYNODE_OPERATION_INPUT_PIN_EDGES_EDIAGNOSTICCHAIN_EMAP = 22826;
-			static const int STRUCTUREDACTIVITYNODE_OPERATION_OUTPUT_PIN_EDGES_EDIAGNOSTICCHAIN_EMAP = 22824;
-			static const int STRUCTUREDACTIVITYNODE_OPERATION_SOURCENODES = 22827;
-			static const int STRUCTUREDACTIVITYNODE_OPERATION_TARGETNODES = 22828;
+			static const int STRUCTUREDACTIVITYNODE_OPERATION_EDGES_EDIAGNOSTICCHAIN_EMAP = 22926;
+			static const int STRUCTUREDACTIVITYNODE_OPERATION_INPUT_PIN_EDGES_EDIAGNOSTICCHAIN_EMAP = 22927;
+			static const int STRUCTUREDACTIVITYNODE_OPERATION_OUTPUT_PIN_EDGES_EDIAGNOSTICCHAIN_EMAP = 22925;
+			static const int STRUCTUREDACTIVITYNODE_OPERATION_SOURCENODES = 22928;
+			static const int STRUCTUREDACTIVITYNODE_OPERATION_TARGETNODES = 22929;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getStructuredActivityNode_Class() const = 0;
@@ -6137,18 +6160,18 @@ namespace uml
 
 			// Begin Class StructuredClassifier
 			//Class and Feature IDs 
-			static const unsigned int STRUCTUREDCLASSIFIER_CLASS = 228;
+			static const unsigned int STRUCTUREDCLASSIFIER_CLASS = 229;
 			static const unsigned int STRUCTUREDCLASSIFIER_CLASS_FEATURE_COUNT = 42;
-			static const unsigned int STRUCTUREDCLASSIFIER_CLASS_OPERATION_COUNT = 111;
+			static const unsigned int STRUCTUREDCLASSIFIER_CLASS_OPERATION_COUNT = 112;
 			
-			static const int STRUCTUREDCLASSIFIER_ATTRIBUTE_OWNEDATTRIBUTE = 22838;
-			static const int STRUCTUREDCLASSIFIER_ATTRIBUTE_OWNEDCONNECTOR = 22839;
-			static const int STRUCTUREDCLASSIFIER_ATTRIBUTE_PART = 22840;
-			static const int STRUCTUREDCLASSIFIER_ATTRIBUTE_ROLE = 22841;
+			static const int STRUCTUREDCLASSIFIER_ATTRIBUTE_OWNEDATTRIBUTE = 22938;
+			static const int STRUCTUREDCLASSIFIER_ATTRIBUTE_OWNEDCONNECTOR = 22939;
+			static const int STRUCTUREDCLASSIFIER_ATTRIBUTE_PART = 22940;
+			static const int STRUCTUREDCLASSIFIER_ATTRIBUTE_ROLE = 22941;
 			
-			static const int STRUCTUREDCLASSIFIER_OPERATION_ALLROLES = 22952;
-			static const int STRUCTUREDCLASSIFIER_OPERATION_CREATEOWNEDATTRIBUTE_STRING_UNLIMITEDNATURAL = 22950;
-			static const int STRUCTUREDCLASSIFIER_OPERATION_GETPARTS = 22951;
+			static const int STRUCTUREDCLASSIFIER_OPERATION_ALLROLES = 23053;
+			static const int STRUCTUREDCLASSIFIER_OPERATION_CREATEOWNEDATTRIBUTE_STRING_UNLIMITEDNATURAL = 23051;
+			static const int STRUCTUREDCLASSIFIER_OPERATION_GETPARTS = 23052;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getStructuredClassifier_Class() const = 0;
@@ -6168,12 +6191,12 @@ namespace uml
 
 			// Begin Class Substitution
 			//Class and Feature IDs 
-			static const unsigned int SUBSTITUTION_CLASS = 229;
+			static const unsigned int SUBSTITUTION_CLASS = 230;
 			static const unsigned int SUBSTITUTION_CLASS_FEATURE_COUNT = 20;
-			static const unsigned int SUBSTITUTION_CLASS_OPERATION_COUNT = 58;
+			static const unsigned int SUBSTITUTION_CLASS_OPERATION_COUNT = 59;
 			
-			static const int SUBSTITUTION_ATTRIBUTE_CONTRACT = 22918;
-			static const int SUBSTITUTION_ATTRIBUTE_SUBSTITUTINGCLASSIFIER = 22919;
+			static const int SUBSTITUTION_ATTRIBUTE_CONTRACT = 23018;
+			static const int SUBSTITUTION_ATTRIBUTE_SUBSTITUTINGCLASSIFIER = 23019;
 			
 			
 			//Class and Feature Getter
@@ -6189,16 +6212,16 @@ namespace uml
 
 			// Begin Class TemplateBinding
 			//Class and Feature IDs 
-			static const unsigned int TEMPLATEBINDING_CLASS = 230;
+			static const unsigned int TEMPLATEBINDING_CLASS = 231;
 			static const unsigned int TEMPLATEBINDING_CLASS_FEATURE_COUNT = 9;
-			static const unsigned int TEMPLATEBINDING_CLASS_OPERATION_COUNT = 43;
+			static const unsigned int TEMPLATEBINDING_CLASS_OPERATION_COUNT = 44;
 			
-			static const int TEMPLATEBINDING_ATTRIBUTE_BOUNDELEMENT = 23008;
-			static const int TEMPLATEBINDING_ATTRIBUTE_PARAMETERSUBSTITUTION = 23006;
-			static const int TEMPLATEBINDING_ATTRIBUTE_SIGNATURE = 23007;
+			static const int TEMPLATEBINDING_ATTRIBUTE_BOUNDELEMENT = 23108;
+			static const int TEMPLATEBINDING_ATTRIBUTE_PARAMETERSUBSTITUTION = 23106;
+			static const int TEMPLATEBINDING_ATTRIBUTE_SIGNATURE = 23107;
 			
-			static const int TEMPLATEBINDING_OPERATION_ONE_PARAMETER_SUBSTITUTION_EDIAGNOSTICCHAIN_EMAP = 23051;
-			static const int TEMPLATEBINDING_OPERATION_PARAMETER_SUBSTITUTION_FORMAL_EDIAGNOSTICCHAIN_EMAP = 23050;
+			static const int TEMPLATEBINDING_OPERATION_ONE_PARAMETER_SUBSTITUTION_EDIAGNOSTICCHAIN_EMAP = 23152;
+			static const int TEMPLATEBINDING_OPERATION_PARAMETER_SUBSTITUTION_FORMAL_EDIAGNOSTICCHAIN_EMAP = 23151;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getTemplateBinding_Class() const = 0;
@@ -6216,17 +6239,17 @@ namespace uml
 
 			// Begin Class TemplateParameter
 			//Class and Feature IDs 
-			static const unsigned int TEMPLATEPARAMETER_CLASS = 231;
+			static const unsigned int TEMPLATEPARAMETER_CLASS = 232;
 			static const unsigned int TEMPLATEPARAMETER_CLASS_FEATURE_COUNT = 8;
-			static const unsigned int TEMPLATEPARAMETER_CLASS_OPERATION_COUNT = 42;
+			static const unsigned int TEMPLATEPARAMETER_CLASS_OPERATION_COUNT = 43;
 			
-			static const int TEMPLATEPARAMETER_ATTRIBUTE_DEFAULT = 23103;
-			static const int TEMPLATEPARAMETER_ATTRIBUTE_OWNEDDEFAULT = 23104;
-			static const int TEMPLATEPARAMETER_ATTRIBUTE_OWNEDPARAMETEREDELEMENT = 23107;
-			static const int TEMPLATEPARAMETER_ATTRIBUTE_PARAMETEREDELEMENT = 23105;
-			static const int TEMPLATEPARAMETER_ATTRIBUTE_SIGNATURE = 23106;
+			static const int TEMPLATEPARAMETER_ATTRIBUTE_DEFAULT = 23203;
+			static const int TEMPLATEPARAMETER_ATTRIBUTE_OWNEDDEFAULT = 23204;
+			static const int TEMPLATEPARAMETER_ATTRIBUTE_OWNEDPARAMETEREDELEMENT = 23207;
+			static const int TEMPLATEPARAMETER_ATTRIBUTE_PARAMETEREDELEMENT = 23205;
+			static const int TEMPLATEPARAMETER_ATTRIBUTE_SIGNATURE = 23206;
 			
-			static const int TEMPLATEPARAMETER_OPERATION_MUST_BE_COMPATIBLE_EDIAGNOSTICCHAIN_EMAP = 23149;
+			static const int TEMPLATEPARAMETER_OPERATION_MUST_BE_COMPATIBLE_EDIAGNOSTICCHAIN_EMAP = 23250;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getTemplateParameter_Class() const = 0;
@@ -6245,16 +6268,16 @@ namespace uml
 
 			// Begin Class TemplateParameterSubstitution
 			//Class and Feature IDs 
-			static const unsigned int TEMPLATEPARAMETERSUBSTITUTION_CLASS = 232;
+			static const unsigned int TEMPLATEPARAMETERSUBSTITUTION_CLASS = 233;
 			static const unsigned int TEMPLATEPARAMETERSUBSTITUTION_CLASS_FEATURE_COUNT = 7;
-			static const unsigned int TEMPLATEPARAMETERSUBSTITUTION_CLASS_OPERATION_COUNT = 42;
+			static const unsigned int TEMPLATEPARAMETERSUBSTITUTION_CLASS_OPERATION_COUNT = 43;
 			
-			static const int TEMPLATEPARAMETERSUBSTITUTION_ATTRIBUTE_ACTUAL = 23203;
-			static const int TEMPLATEPARAMETERSUBSTITUTION_ATTRIBUTE_FORMAL = 23204;
-			static const int TEMPLATEPARAMETERSUBSTITUTION_ATTRIBUTE_OWNEDACTUAL = 23205;
-			static const int TEMPLATEPARAMETERSUBSTITUTION_ATTRIBUTE_TEMPLATEBINDING = 23206;
+			static const int TEMPLATEPARAMETERSUBSTITUTION_ATTRIBUTE_ACTUAL = 23303;
+			static const int TEMPLATEPARAMETERSUBSTITUTION_ATTRIBUTE_FORMAL = 23304;
+			static const int TEMPLATEPARAMETERSUBSTITUTION_ATTRIBUTE_OWNEDACTUAL = 23305;
+			static const int TEMPLATEPARAMETERSUBSTITUTION_ATTRIBUTE_TEMPLATEBINDING = 23306;
 			
-			static const int TEMPLATEPARAMETERSUBSTITUTION_OPERATION_MUST_BE_COMPATIBLE_EDIAGNOSTICCHAIN_EMAP = 23248;
+			static const int TEMPLATEPARAMETERSUBSTITUTION_OPERATION_MUST_BE_COMPATIBLE_EDIAGNOSTICCHAIN_EMAP = 23349;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getTemplateParameterSubstitution_Class() const = 0;
@@ -6272,16 +6295,16 @@ namespace uml
 
 			// Begin Class TemplateSignature
 			//Class and Feature IDs 
-			static const unsigned int TEMPLATESIGNATURE_CLASS = 233;
+			static const unsigned int TEMPLATESIGNATURE_CLASS = 234;
 			static const unsigned int TEMPLATESIGNATURE_CLASS_FEATURE_COUNT = 6;
-			static const unsigned int TEMPLATESIGNATURE_CLASS_OPERATION_COUNT = 43;
+			static const unsigned int TEMPLATESIGNATURE_CLASS_OPERATION_COUNT = 44;
 			
-			static const int TEMPLATESIGNATURE_ATTRIBUTE_OWNEDPARAMETER = 23305;
-			static const int TEMPLATESIGNATURE_ATTRIBUTE_PARAMETER = 23303;
-			static const int TEMPLATESIGNATURE_ATTRIBUTE_TEMPLATE = 23304;
+			static const int TEMPLATESIGNATURE_ATTRIBUTE_OWNEDPARAMETER = 23405;
+			static const int TEMPLATESIGNATURE_ATTRIBUTE_PARAMETER = 23403;
+			static const int TEMPLATESIGNATURE_ATTRIBUTE_TEMPLATE = 23404;
 			
-			static const int TEMPLATESIGNATURE_OPERATION_OWN_ELEMENTS_EDIAGNOSTICCHAIN_EMAP = 23347;
-			static const int TEMPLATESIGNATURE_OPERATION_UNIQUE_PARAMETERS_EDIAGNOSTICCHAIN_EMAP = 23348;
+			static const int TEMPLATESIGNATURE_OPERATION_OWN_ELEMENTS_EDIAGNOSTICCHAIN_EMAP = 23448;
+			static const int TEMPLATESIGNATURE_OPERATION_UNIQUE_PARAMETERS_EDIAGNOSTICCHAIN_EMAP = 23449;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getTemplateSignature_Class() const = 0;
@@ -6299,15 +6322,15 @@ namespace uml
 
 			// Begin Class TemplateableElement
 			//Class and Feature IDs 
-			static const unsigned int TEMPLATEABLEELEMENT_CLASS = 234;
+			static const unsigned int TEMPLATEABLEELEMENT_CLASS = 235;
 			static const unsigned int TEMPLATEABLEELEMENT_CLASS_FEATURE_COUNT = 5;
-			static const unsigned int TEMPLATEABLEELEMENT_CLASS_OPERATION_COUNT = 43;
+			static const unsigned int TEMPLATEABLEELEMENT_CLASS_OPERATION_COUNT = 44;
 			
-			static const int TEMPLATEABLEELEMENT_ATTRIBUTE_OWNEDTEMPLATESIGNATURE = 23404;
-			static const int TEMPLATEABLEELEMENT_ATTRIBUTE_TEMPLATEBINDING = 23403;
+			static const int TEMPLATEABLEELEMENT_ATTRIBUTE_OWNEDTEMPLATESIGNATURE = 23504;
+			static const int TEMPLATEABLEELEMENT_ATTRIBUTE_TEMPLATEBINDING = 23503;
 			
-			static const int TEMPLATEABLEELEMENT_OPERATION_ISTEMPLATE = 23446;
-			static const int TEMPLATEABLEELEMENT_OPERATION_PARAMETERABLEELEMENTS = 23447;
+			static const int TEMPLATEABLEELEMENT_OPERATION_ISTEMPLATE = 23547;
+			static const int TEMPLATEABLEELEMENT_OPERATION_PARAMETERABLEELEMENTS = 23548;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getTemplateableElement_Class() const = 0;
@@ -6324,17 +6347,17 @@ namespace uml
 
 			// Begin Class TestIdentityAction
 			//Class and Feature IDs 
-			static const unsigned int TESTIDENTITYACTION_CLASS = 235;
+			static const unsigned int TESTIDENTITYACTION_CLASS = 236;
 			static const unsigned int TESTIDENTITYACTION_CLASS_FEATURE_COUNT = 30;
-			static const unsigned int TESTIDENTITYACTION_CLASS_OPERATION_COUNT = 68;
+			static const unsigned int TESTIDENTITYACTION_CLASS_OPERATION_COUNT = 69;
 			
-			static const int TESTIDENTITYACTION_ATTRIBUTE_FIRST = 23527;
-			static const int TESTIDENTITYACTION_ATTRIBUTE_RESULT = 23528;
-			static const int TESTIDENTITYACTION_ATTRIBUTE_SECOND = 23529;
+			static const int TESTIDENTITYACTION_ATTRIBUTE_FIRST = 23627;
+			static const int TESTIDENTITYACTION_ATTRIBUTE_RESULT = 23628;
+			static const int TESTIDENTITYACTION_ATTRIBUTE_SECOND = 23629;
 			
-			static const int TESTIDENTITYACTION_OPERATION_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP = 23595;
-			static const int TESTIDENTITYACTION_OPERATION_NO_TYPE_EDIAGNOSTICCHAIN_EMAP = 23596;
-			static const int TESTIDENTITYACTION_OPERATION_RESULT_IS_BOOLEAN_EDIAGNOSTICCHAIN_EMAP = 23597;
+			static const int TESTIDENTITYACTION_OPERATION_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP = 23696;
+			static const int TESTIDENTITYACTION_OPERATION_NO_TYPE_EDIAGNOSTICCHAIN_EMAP = 23697;
+			static const int TESTIDENTITYACTION_OPERATION_RESULT_IS_BOOLEAN_EDIAGNOSTICCHAIN_EMAP = 23698;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getTestIdentityAction_Class() const = 0;
@@ -6353,13 +6376,13 @@ namespace uml
 
 			// Begin Class TimeConstraint
 			//Class and Feature IDs 
-			static const unsigned int TIMECONSTRAINT_CLASS = 236;
+			static const unsigned int TIMECONSTRAINT_CLASS = 237;
 			static const unsigned int TIMECONSTRAINT_CLASS_FEATURE_COUNT = 16;
-			static const unsigned int TIMECONSTRAINT_CLASS_OPERATION_COUNT = 62;
-			static const int TIMECONSTRAINT_ATTRIBUTE_FIRSTEVENT = 23615;
+			static const unsigned int TIMECONSTRAINT_CLASS_OPERATION_COUNT = 63;
+			static const int TIMECONSTRAINT_ATTRIBUTE_FIRSTEVENT = 23715;
 			
 			
-			static const int TIMECONSTRAINT_OPERATION_HAS_ONE_CONSTRAINEDELEMENT_EDIAGNOSTICCHAIN_EMAP = 23677;
+			static const int TIMECONSTRAINT_OPERATION_HAS_ONE_CONSTRAINEDELEMENT_EDIAGNOSTICCHAIN_EMAP = 23778;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getTimeConstraint_Class() const = 0;
@@ -6374,14 +6397,14 @@ namespace uml
 
 			// Begin Class TimeEvent
 			//Class and Feature IDs 
-			static const unsigned int TIMEEVENT_CLASS = 237;
+			static const unsigned int TIMEEVENT_CLASS = 238;
 			static const unsigned int TIMEEVENT_CLASS_FEATURE_COUNT = 14;
-			static const unsigned int TIMEEVENT_CLASS_OPERATION_COUNT = 59;
-			static const int TIMEEVENT_ATTRIBUTE_ISRELATIVE = 23712;
+			static const unsigned int TIMEEVENT_CLASS_OPERATION_COUNT = 60;
+			static const int TIMEEVENT_ATTRIBUTE_ISRELATIVE = 23812;
 			
-			static const int TIMEEVENT_ATTRIBUTE_WHEN = 23713;
+			static const int TIMEEVENT_ATTRIBUTE_WHEN = 23813;
 			
-			static const int TIMEEVENT_OPERATION_WHEN_NON_NEGATIVE_EDIAGNOSTICCHAIN_EMAP = 23772;
+			static const int TIMEEVENT_OPERATION_WHEN_NON_NEGATIVE_EDIAGNOSTICCHAIN_EMAP = 23873;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getTimeEvent_Class() const = 0;
@@ -6397,14 +6420,14 @@ namespace uml
 
 			// Begin Class TimeExpression
 			//Class and Feature IDs 
-			static const unsigned int TIMEEXPRESSION_CLASS = 238;
+			static const unsigned int TIMEEXPRESSION_CLASS = 239;
 			static const unsigned int TIMEEXPRESSION_CLASS_FEATURE_COUNT = 16;
-			static const unsigned int TIMEEXPRESSION_CLASS_OPERATION_COUNT = 66;
+			static const unsigned int TIMEEXPRESSION_CLASS_OPERATION_COUNT = 67;
 			
-			static const int TIMEEXPRESSION_ATTRIBUTE_EXPR = 23814;
-			static const int TIMEEXPRESSION_ATTRIBUTE_OBSERVATION = 23815;
+			static const int TIMEEXPRESSION_ATTRIBUTE_EXPR = 23914;
+			static const int TIMEEXPRESSION_ATTRIBUTE_OBSERVATION = 23915;
 			
-			static const int TIMEEXPRESSION_OPERATION_NO_EXPR_REQUIRES_OBSERVATION_EDIAGNOSTICCHAIN_EMAP = 23881;
+			static const int TIMEEXPRESSION_OPERATION_NO_EXPR_REQUIRES_OBSERVATION_EDIAGNOSTICCHAIN_EMAP = 23982;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getTimeExpression_Class() const = 0;
@@ -6420,9 +6443,9 @@ namespace uml
 
 			// Begin Class TimeInterval
 			//Class and Feature IDs 
-			static const unsigned int TIMEINTERVAL_CLASS = 239;
+			static const unsigned int TIMEINTERVAL_CLASS = 240;
 			static const unsigned int TIMEINTERVAL_CLASS_FEATURE_COUNT = 16;
-			static const unsigned int TIMEINTERVAL_CLASS_OPERATION_COUNT = 65;
+			static const unsigned int TIMEINTERVAL_CLASS_OPERATION_COUNT = 66;
 			
 			
 			
@@ -6437,12 +6460,12 @@ namespace uml
 
 			// Begin Class TimeObservation
 			//Class and Feature IDs 
-			static const unsigned int TIMEOBSERVATION_CLASS = 240;
+			static const unsigned int TIMEOBSERVATION_CLASS = 241;
 			static const unsigned int TIMEOBSERVATION_CLASS_FEATURE_COUNT = 14;
-			static const unsigned int TIMEOBSERVATION_CLASS_OPERATION_COUNT = 58;
-			static const int TIMEOBSERVATION_ATTRIBUTE_FIRSTEVENT = 24013;
+			static const unsigned int TIMEOBSERVATION_CLASS_OPERATION_COUNT = 59;
+			static const int TIMEOBSERVATION_ATTRIBUTE_FIRSTEVENT = 24113;
 			
-			static const int TIMEOBSERVATION_ATTRIBUTE_EVENT = 24012;
+			static const int TIMEOBSERVATION_ATTRIBUTE_EVENT = 24112;
 			
 			
 			//Class and Feature Getter
@@ -6458,30 +6481,30 @@ namespace uml
 
 			// Begin Class Transition
 			//Class and Feature IDs 
-			static const unsigned int TRANSITION_CLASS = 241;
+			static const unsigned int TRANSITION_CLASS = 242;
 			static const unsigned int TRANSITION_CLASS_FEATURE_COUNT = 26;
-			static const unsigned int TRANSITION_CLASS_OPERATION_COUNT = 84;
-			static const int TRANSITION_ATTRIBUTE_KIND = 24120;
+			static const unsigned int TRANSITION_CLASS_OPERATION_COUNT = 85;
+			static const int TRANSITION_ATTRIBUTE_KIND = 24220;
 			
-			static const int TRANSITION_ATTRIBUTE_CONTAINER = 24125;
-			static const int TRANSITION_ATTRIBUTE_EFFECT = 24118;
-			static const int TRANSITION_ATTRIBUTE_GUARD = 24119;
-			static const int TRANSITION_ATTRIBUTE_REDEFINEDTRANSITION = 24121;
-			static const int TRANSITION_ATTRIBUTE_SOURCE = 24122;
-			static const int TRANSITION_ATTRIBUTE_TARGET = 24123;
-			static const int TRANSITION_ATTRIBUTE_TRIGGER = 24124;
+			static const int TRANSITION_ATTRIBUTE_CONTAINER = 24225;
+			static const int TRANSITION_ATTRIBUTE_EFFECT = 24218;
+			static const int TRANSITION_ATTRIBUTE_GUARD = 24219;
+			static const int TRANSITION_ATTRIBUTE_REDEFINEDTRANSITION = 24221;
+			static const int TRANSITION_ATTRIBUTE_SOURCE = 24222;
+			static const int TRANSITION_ATTRIBUTE_TARGET = 24223;
+			static const int TRANSITION_ATTRIBUTE_TRIGGER = 24224;
 			
-			static const int TRANSITION_OPERATION_CONTAININGSTATEMACHINE = 24208;
-			static const int TRANSITION_OPERATION_FORK_SEGMENT_GUARDS_EDIAGNOSTICCHAIN_EMAP = 24207;
-			static const int TRANSITION_OPERATION_FORK_SEGMENT_STATE_EDIAGNOSTICCHAIN_EMAP = 24204;
-			static const int TRANSITION_OPERATION_INITIAL_TRANSITION_EDIAGNOSTICCHAIN_EMAP = 24206;
-			static const int TRANSITION_OPERATION_JOIN_SEGMENT_GUARDS_EDIAGNOSTICCHAIN_EMAP = 24200;
-			static const int TRANSITION_OPERATION_JOIN_SEGMENT_STATE_EDIAGNOSTICCHAIN_EMAP = 24203;
-			static const int TRANSITION_OPERATION_OUTGOING_PSEUDOSTATES_EDIAGNOSTICCHAIN_EMAP = 24202;
-			static const int TRANSITION_OPERATION_REDEFINITIONCONTEXT = 24209;
-			static const int TRANSITION_OPERATION_STATE_IS_EXTERNAL_EDIAGNOSTICCHAIN_EMAP = 24199;
-			static const int TRANSITION_OPERATION_STATE_IS_INTERNAL_EDIAGNOSTICCHAIN_EMAP = 24201;
-			static const int TRANSITION_OPERATION_STATE_IS_LOCAL_EDIAGNOSTICCHAIN_EMAP = 24205;
+			static const int TRANSITION_OPERATION_CONTAININGSTATEMACHINE = 24309;
+			static const int TRANSITION_OPERATION_FORK_SEGMENT_GUARDS_EDIAGNOSTICCHAIN_EMAP = 24308;
+			static const int TRANSITION_OPERATION_FORK_SEGMENT_STATE_EDIAGNOSTICCHAIN_EMAP = 24305;
+			static const int TRANSITION_OPERATION_INITIAL_TRANSITION_EDIAGNOSTICCHAIN_EMAP = 24307;
+			static const int TRANSITION_OPERATION_JOIN_SEGMENT_GUARDS_EDIAGNOSTICCHAIN_EMAP = 24301;
+			static const int TRANSITION_OPERATION_JOIN_SEGMENT_STATE_EDIAGNOSTICCHAIN_EMAP = 24304;
+			static const int TRANSITION_OPERATION_OUTGOING_PSEUDOSTATES_EDIAGNOSTICCHAIN_EMAP = 24303;
+			static const int TRANSITION_OPERATION_REDEFINITIONCONTEXT = 24310;
+			static const int TRANSITION_OPERATION_STATE_IS_EXTERNAL_EDIAGNOSTICCHAIN_EMAP = 24300;
+			static const int TRANSITION_OPERATION_STATE_IS_INTERNAL_EDIAGNOSTICCHAIN_EMAP = 24302;
+			static const int TRANSITION_OPERATION_STATE_IS_LOCAL_EDIAGNOSTICCHAIN_EMAP = 24306;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getTransition_Class() const = 0;
@@ -6513,14 +6536,14 @@ namespace uml
 
 			// Begin Class Trigger
 			//Class and Feature IDs 
-			static const unsigned int TRIGGER_CLASS = 243;
+			static const unsigned int TRIGGER_CLASS = 244;
 			static const unsigned int TRIGGER_CLASS_FEATURE_COUNT = 11;
-			static const unsigned int TRIGGER_CLASS_OPERATION_COUNT = 56;
+			static const unsigned int TRIGGER_CLASS_OPERATION_COUNT = 57;
 			
-			static const int TRIGGER_ATTRIBUTE_EVENT = 24309;
-			static const int TRIGGER_ATTRIBUTE_PORT = 24310;
+			static const int TRIGGER_ATTRIBUTE_EVENT = 24409;
+			static const int TRIGGER_ATTRIBUTE_PORT = 24410;
 			
-			static const int TRIGGER_OPERATION_TRIGGER_WITH_PORTS_EDIAGNOSTICCHAIN_EMAP = 24366;
+			static const int TRIGGER_OPERATION_TRIGGER_WITH_PORTS_EDIAGNOSTICCHAIN_EMAP = 24467;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getTrigger_Class() const = 0;
@@ -6536,15 +6559,15 @@ namespace uml
 
 			// Begin Class Type
 			//Class and Feature IDs 
-			static const unsigned int TYPE_CLASS = 244;
+			static const unsigned int TYPE_CLASS = 245;
 			static const unsigned int TYPE_CLASS_FEATURE_COUNT = 13;
-			static const unsigned int TYPE_CLASS_OPERATION_COUNT = 61;
+			static const unsigned int TYPE_CLASS_OPERATION_COUNT = 62;
 			
-			static const int TYPE_ATTRIBUTE_PACKAGE = 24412;
+			static const int TYPE_ATTRIBUTE_PACKAGE = 24512;
 			
-			static const int TYPE_OPERATION_CONFORMSTO_TYPE = 24473;
-			static const int TYPE_OPERATION_CREATEASSOCIATION_BOOLEAN_UNLIMITEDNATURAL = 24471;
-			static const int TYPE_OPERATION_GETASSOCIATIONS = 24472;
+			static const int TYPE_OPERATION_CONFORMSTO_TYPE = 24574;
+			static const int TYPE_OPERATION_CREATEASSOCIATION_BOOLEAN_UNLIMITEDNATURAL = 24572;
+			static const int TYPE_OPERATION_GETASSOCIATIONS = 24573;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getType_Class() const = 0;
@@ -6561,11 +6584,11 @@ namespace uml
 
 			// Begin Class TypedElement
 			//Class and Feature IDs 
-			static const unsigned int TYPEDELEMENT_CLASS = 245;
+			static const unsigned int TYPEDELEMENT_CLASS = 246;
 			static const unsigned int TYPEDELEMENT_CLASS_FEATURE_COUNT = 10;
-			static const unsigned int TYPEDELEMENT_CLASS_OPERATION_COUNT = 55;
+			static const unsigned int TYPEDELEMENT_CLASS_OPERATION_COUNT = 56;
 			
-			static const int TYPEDELEMENT_ATTRIBUTE_TYPE = 24509;
+			static const int TYPEDELEMENT_ATTRIBUTE_TYPE = 24609;
 			
 			
 			//Class and Feature Getter
@@ -6580,19 +6603,19 @@ namespace uml
 
 			// Begin Class UnmarshallAction
 			//Class and Feature IDs 
-			static const unsigned int UNMARSHALLACTION_CLASS = 246;
+			static const unsigned int UNMARSHALLACTION_CLASS = 247;
 			static const unsigned int UNMARSHALLACTION_CLASS_FEATURE_COUNT = 30;
-			static const unsigned int UNMARSHALLACTION_CLASS_OPERATION_COUNT = 70;
+			static const unsigned int UNMARSHALLACTION_CLASS_OPERATION_COUNT = 71;
 			
-			static const int UNMARSHALLACTION_ATTRIBUTE_OBJECT = 24627;
-			static const int UNMARSHALLACTION_ATTRIBUTE_RESULT = 24628;
-			static const int UNMARSHALLACTION_ATTRIBUTE_UNMARSHALLTYPE = 24629;
+			static const int UNMARSHALLACTION_ATTRIBUTE_OBJECT = 24727;
+			static const int UNMARSHALLACTION_ATTRIBUTE_RESULT = 24728;
+			static const int UNMARSHALLACTION_ATTRIBUTE_UNMARSHALLTYPE = 24729;
 			
-			static const int UNMARSHALLACTION_OPERATION_MULTIPLICITY_OF_OBJECT_EDIAGNOSTICCHAIN_EMAP = 24698;
-			static const int UNMARSHALLACTION_OPERATION_NUMBER_OF_RESULT_EDIAGNOSTICCHAIN_EMAP = 24696;
-			static const int UNMARSHALLACTION_OPERATION_OBJECT_TYPE_EDIAGNOSTICCHAIN_EMAP = 24699;
-			static const int UNMARSHALLACTION_OPERATION_STRUCTURAL_FEATURE_EDIAGNOSTICCHAIN_EMAP = 24695;
-			static const int UNMARSHALLACTION_OPERATION_TYPE_ORDERING_AND_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP = 24697;
+			static const int UNMARSHALLACTION_OPERATION_MULTIPLICITY_OF_OBJECT_EDIAGNOSTICCHAIN_EMAP = 24799;
+			static const int UNMARSHALLACTION_OPERATION_NUMBER_OF_RESULT_EDIAGNOSTICCHAIN_EMAP = 24797;
+			static const int UNMARSHALLACTION_OPERATION_OBJECT_TYPE_EDIAGNOSTICCHAIN_EMAP = 24800;
+			static const int UNMARSHALLACTION_OPERATION_STRUCTURAL_FEATURE_EDIAGNOSTICCHAIN_EMAP = 24796;
+			static const int UNMARSHALLACTION_OPERATION_TYPE_ORDERING_AND_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP = 24798;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getUnmarshallAction_Class() const = 0;
@@ -6613,9 +6636,9 @@ namespace uml
 
 			// Begin Class Usage
 			//Class and Feature IDs 
-			static const unsigned int USAGE_CLASS = 247;
+			static const unsigned int USAGE_CLASS = 248;
 			static const unsigned int USAGE_CLASS_FEATURE_COUNT = 17;
-			static const unsigned int USAGE_CLASS_OPERATION_COUNT = 58;
+			static const unsigned int USAGE_CLASS_OPERATION_COUNT = 59;
 			
 			
 			
@@ -6630,20 +6653,20 @@ namespace uml
 
 			// Begin Class UseCase
 			//Class and Feature IDs 
-			static const unsigned int USECASE_CLASS = 248;
+			static const unsigned int USECASE_CLASS = 249;
 			static const unsigned int USECASE_CLASS_FEATURE_COUNT = 45;
-			static const unsigned int USECASE_CLASS_OPERATION_COUNT = 116;
+			static const unsigned int USECASE_CLASS_OPERATION_COUNT = 117;
 			
-			static const int USECASE_ATTRIBUTE_EXTEND = 24841;
-			static const int USECASE_ATTRIBUTE_EXTENSIONPOINT = 24842;
-			static const int USECASE_ATTRIBUTE_INCLUDE = 24843;
-			static const int USECASE_ATTRIBUTE_SUBJECT = 24844;
+			static const int USECASE_ATTRIBUTE_EXTEND = 24941;
+			static const int USECASE_ATTRIBUTE_EXTENSIONPOINT = 24942;
+			static const int USECASE_ATTRIBUTE_INCLUDE = 24943;
+			static const int USECASE_ATTRIBUTE_SUBJECT = 24944;
 			
-			static const int USECASE_OPERATION_ALLINCLUDEDUSECASES = 24960;
-			static const int USECASE_OPERATION_BINARY_ASSOCIATIONS_EDIAGNOSTICCHAIN_EMAP = 24956;
-			static const int USECASE_OPERATION_CANNOT_INCLUDE_SELF_EDIAGNOSTICCHAIN_EMAP = 24958;
-			static const int USECASE_OPERATION_MUST_HAVE_NAME_EDIAGNOSTICCHAIN_EMAP = 24959;
-			static const int USECASE_OPERATION_NO_ASSOCIATION_TO_USE_CASE_EDIAGNOSTICCHAIN_EMAP = 24957;
+			static const int USECASE_OPERATION_ALLINCLUDEDUSECASES = 25061;
+			static const int USECASE_OPERATION_BINARY_ASSOCIATIONS_EDIAGNOSTICCHAIN_EMAP = 25057;
+			static const int USECASE_OPERATION_CANNOT_INCLUDE_SELF_EDIAGNOSTICCHAIN_EMAP = 25059;
+			static const int USECASE_OPERATION_MUST_HAVE_NAME_EDIAGNOSTICCHAIN_EMAP = 25060;
+			static const int USECASE_OPERATION_NO_ASSOCIATION_TO_USE_CASE_EDIAGNOSTICCHAIN_EMAP = 25058;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getUseCase_Class() const = 0;
@@ -6665,14 +6688,14 @@ namespace uml
 
 			// Begin Class ValuePin
 			//Class and Feature IDs 
-			static const unsigned int VALUEPIN_CLASS = 249;
+			static const unsigned int VALUEPIN_CLASS = 250;
 			static const unsigned int VALUEPIN_CLASS_FEATURE_COUNT = 38;
-			static const unsigned int VALUEPIN_CLASS_OPERATION_COUNT = 81;
+			static const unsigned int VALUEPIN_CLASS_OPERATION_COUNT = 82;
 			
-			static const int VALUEPIN_ATTRIBUTE_VALUE = 24937;
+			static const int VALUEPIN_ATTRIBUTE_VALUE = 25037;
 			
-			static const int VALUEPIN_OPERATION_COMPATIBLE_TYPE_EDIAGNOSTICCHAIN_EMAP = 25018;
-			static const int VALUEPIN_OPERATION_NO_INCOMING_EDGES_EDIAGNOSTICCHAIN_EMAP = 25017;
+			static const int VALUEPIN_OPERATION_COMPATIBLE_TYPE_EDIAGNOSTICCHAIN_EMAP = 25119;
+			static const int VALUEPIN_OPERATION_NO_INCOMING_EDGES_EDIAGNOSTICCHAIN_EMAP = 25118;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getValuePin_Class() const = 0;
@@ -6688,19 +6711,19 @@ namespace uml
 
 			// Begin Class ValueSpecification
 			//Class and Feature IDs 
-			static const unsigned int VALUESPECIFICATION_CLASS = 250;
+			static const unsigned int VALUESPECIFICATION_CLASS = 251;
 			static const unsigned int VALUESPECIFICATION_CLASS_FEATURE_COUNT = 14;
-			static const unsigned int VALUESPECIFICATION_CLASS_OPERATION_COUNT = 65;
+			static const unsigned int VALUESPECIFICATION_CLASS_OPERATION_COUNT = 66;
 			
-			static const int VALUESPECIFICATION_ATTRIBUTE_OWNINGSLOT = 25013;
+			static const int VALUESPECIFICATION_ATTRIBUTE_OWNINGSLOT = 25113;
 			
-			static const int VALUESPECIFICATION_OPERATION_BOOLEANVALUE = 25072;
-			static const int VALUESPECIFICATION_OPERATION_INTEGERVALUE = 25073;
-			static const int VALUESPECIFICATION_OPERATION_ISCOMPUTABLE = 25074;
-			static const int VALUESPECIFICATION_OPERATION_ISNULL = 25075;
-			static const int VALUESPECIFICATION_OPERATION_REALVALUE = 25076;
-			static const int VALUESPECIFICATION_OPERATION_STRINGVALUE = 25077;
-			static const int VALUESPECIFICATION_OPERATION_UNLIMITEDVALUE = 25078;
+			static const int VALUESPECIFICATION_OPERATION_BOOLEANVALUE = 25173;
+			static const int VALUESPECIFICATION_OPERATION_INTEGERVALUE = 25174;
+			static const int VALUESPECIFICATION_OPERATION_ISCOMPUTABLE = 25175;
+			static const int VALUESPECIFICATION_OPERATION_ISNULL = 25176;
+			static const int VALUESPECIFICATION_OPERATION_REALVALUE = 25177;
+			static const int VALUESPECIFICATION_OPERATION_STRINGVALUE = 25178;
+			static const int VALUESPECIFICATION_OPERATION_UNLIMITEDVALUE = 25179;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getValueSpecification_Class() const = 0;
@@ -6721,15 +6744,15 @@ namespace uml
 
 			// Begin Class ValueSpecificationAction
 			//Class and Feature IDs 
-			static const unsigned int VALUESPECIFICATIONACTION_CLASS = 251;
+			static const unsigned int VALUESPECIFICATIONACTION_CLASS = 252;
 			static const unsigned int VALUESPECIFICATIONACTION_CLASS_FEATURE_COUNT = 29;
-			static const unsigned int VALUESPECIFICATIONACTION_CLASS_OPERATION_COUNT = 67;
+			static const unsigned int VALUESPECIFICATIONACTION_CLASS_OPERATION_COUNT = 68;
 			
-			static const int VALUESPECIFICATIONACTION_ATTRIBUTE_RESULT = 25127;
-			static const int VALUESPECIFICATIONACTION_ATTRIBUTE_VALUE = 25128;
+			static const int VALUESPECIFICATIONACTION_ATTRIBUTE_RESULT = 25227;
+			static const int VALUESPECIFICATIONACTION_ATTRIBUTE_VALUE = 25228;
 			
-			static const int VALUESPECIFICATIONACTION_OPERATION_COMPATIBLE_TYPE_EDIAGNOSTICCHAIN_EMAP = 25195;
-			static const int VALUESPECIFICATIONACTION_OPERATION_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP = 25194;
+			static const int VALUESPECIFICATIONACTION_OPERATION_COMPATIBLE_TYPE_EDIAGNOSTICCHAIN_EMAP = 25296;
+			static const int VALUESPECIFICATIONACTION_OPERATION_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP = 25295;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getValueSpecificationAction_Class() const = 0;
@@ -6746,14 +6769,14 @@ namespace uml
 
 			// Begin Class Variable
 			//Class and Feature IDs 
-			static const unsigned int VARIABLE_CLASS = 252;
+			static const unsigned int VARIABLE_CLASS = 253;
 			static const unsigned int VARIABLE_CLASS_FEATURE_COUNT = 21;
-			static const unsigned int VARIABLE_CLASS_OPERATION_COUNT = 71;
+			static const unsigned int VARIABLE_CLASS_OPERATION_COUNT = 72;
 			
-			static const int VARIABLE_ATTRIBUTE_ACTIVITYSCOPE = 25219;
-			static const int VARIABLE_ATTRIBUTE_SCOPE = 25220;
+			static const int VARIABLE_ATTRIBUTE_ACTIVITYSCOPE = 25319;
+			static const int VARIABLE_ATTRIBUTE_SCOPE = 25320;
 			
-			static const int VARIABLE_OPERATION_ISACCESSIBLEBY_ACTION = 25291;
+			static const int VARIABLE_OPERATION_ISACCESSIBLEBY_ACTION = 25392;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getVariable_Class() const = 0;
@@ -6769,13 +6792,13 @@ namespace uml
 
 			// Begin Class VariableAction
 			//Class and Feature IDs 
-			static const unsigned int VARIABLEACTION_CLASS = 253;
+			static const unsigned int VARIABLEACTION_CLASS = 254;
 			static const unsigned int VARIABLEACTION_CLASS_FEATURE_COUNT = 28;
-			static const unsigned int VARIABLEACTION_CLASS_OPERATION_COUNT = 66;
+			static const unsigned int VARIABLEACTION_CLASS_OPERATION_COUNT = 67;
 			
-			static const int VARIABLEACTION_ATTRIBUTE_VARIABLE = 25327;
+			static const int VARIABLEACTION_ATTRIBUTE_VARIABLE = 25427;
 			
-			static const int VARIABLEACTION_OPERATION_SCOPE_OF_VARIABLE_EDIAGNOSTICCHAIN_EMAP = 25393;
+			static const int VARIABLEACTION_OPERATION_SCOPE_OF_VARIABLE_EDIAGNOSTICCHAIN_EMAP = 25494;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getVariableAction_Class() const = 0;
@@ -6790,19 +6813,19 @@ namespace uml
 
 			// Begin Class Vertex
 			//Class and Feature IDs 
-			static const unsigned int VERTEX_CLASS = 254;
+			static const unsigned int VERTEX_CLASS = 255;
 			static const unsigned int VERTEX_CLASS_FEATURE_COUNT = 12;
-			static const unsigned int VERTEX_CLASS_OPERATION_COUNT = 60;
+			static const unsigned int VERTEX_CLASS_OPERATION_COUNT = 61;
 			
-			static const int VERTEX_ATTRIBUTE_CONTAINER = 25409;
-			static const int VERTEX_ATTRIBUTE_INCOMING = 25410;
-			static const int VERTEX_ATTRIBUTE_OUTGOING = 25411;
+			static const int VERTEX_ATTRIBUTE_CONTAINER = 25509;
+			static const int VERTEX_ATTRIBUTE_INCOMING = 25510;
+			static const int VERTEX_ATTRIBUTE_OUTGOING = 25511;
 			
-			static const int VERTEX_OPERATION_CONTAININGSTATEMACHINE = 25467;
-			static const int VERTEX_OPERATION_GETINCOMINGS = 25468;
-			static const int VERTEX_OPERATION_GETOUTGOINGS = 25469;
-			static const int VERTEX_OPERATION_ISCONTAINEDINREGION_REGION = 25471;
-			static const int VERTEX_OPERATION_ISCONTAINEDINSTATE_STATE = 25470;
+			static const int VERTEX_OPERATION_CONTAININGSTATEMACHINE = 25568;
+			static const int VERTEX_OPERATION_GETINCOMINGS = 25569;
+			static const int VERTEX_OPERATION_GETOUTGOINGS = 25570;
+			static const int VERTEX_OPERATION_ISCONTAINEDINREGION_REGION = 25572;
+			static const int VERTEX_OPERATION_ISCONTAINEDINSTATE_STATE = 25571;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getVertex_Class() const = 0;
@@ -6823,12 +6846,12 @@ namespace uml
 
 			// Begin Class WriteLinkAction
 			//Class and Feature IDs 
-			static const unsigned int WRITELINKACTION_CLASS = 256;
+			static const unsigned int WRITELINKACTION_CLASS = 257;
 			static const unsigned int WRITELINKACTION_CLASS_FEATURE_COUNT = 29;
-			static const unsigned int WRITELINKACTION_CLASS_OPERATION_COUNT = 70;
+			static const unsigned int WRITELINKACTION_CLASS_OPERATION_COUNT = 71;
 			
 			
-			static const int WRITELINKACTION_OPERATION_ALLOW_ACCESS_EDIAGNOSTICCHAIN_EMAP = 25698;
+			static const int WRITELINKACTION_OPERATION_ALLOW_ACCESS_EDIAGNOSTICCHAIN_EMAP = 25799;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getWriteLinkAction_Class() const = 0;
@@ -6842,17 +6865,17 @@ namespace uml
 
 			// Begin Class WriteStructuralFeatureAction
 			//Class and Feature IDs 
-			static const unsigned int WRITESTRUCTURALFEATUREACTION_CLASS = 257;
+			static const unsigned int WRITESTRUCTURALFEATUREACTION_CLASS = 258;
 			static const unsigned int WRITESTRUCTURALFEATUREACTION_CLASS_FEATURE_COUNT = 31;
-			static const unsigned int WRITESTRUCTURALFEATUREACTION_CLASS_OPERATION_COUNT = 74;
+			static const unsigned int WRITESTRUCTURALFEATUREACTION_CLASS_OPERATION_COUNT = 75;
 			
-			static const int WRITESTRUCTURALFEATUREACTION_ATTRIBUTE_RESULT = 25729;
-			static const int WRITESTRUCTURALFEATUREACTION_ATTRIBUTE_VALUE = 25730;
+			static const int WRITESTRUCTURALFEATUREACTION_ATTRIBUTE_RESULT = 25829;
+			static const int WRITESTRUCTURALFEATUREACTION_ATTRIBUTE_VALUE = 25830;
 			
-			static const int WRITESTRUCTURALFEATUREACTION_OPERATION_MULTIPLICITY_OF_RESULT_EDIAGNOSTICCHAIN_EMAP = 25801;
-			static const int WRITESTRUCTURALFEATUREACTION_OPERATION_MULTIPLICITY_OF_VALUE_EDIAGNOSTICCHAIN_EMAP = 25803;
-			static const int WRITESTRUCTURALFEATUREACTION_OPERATION_TYPE_OF_RESULT_EDIAGNOSTICCHAIN_EMAP = 25804;
-			static const int WRITESTRUCTURALFEATUREACTION_OPERATION_TYPE_OF_VALUE_EDIAGNOSTICCHAIN_EMAP = 25802;
+			static const int WRITESTRUCTURALFEATUREACTION_OPERATION_MULTIPLICITY_OF_RESULT_EDIAGNOSTICCHAIN_EMAP = 25902;
+			static const int WRITESTRUCTURALFEATUREACTION_OPERATION_MULTIPLICITY_OF_VALUE_EDIAGNOSTICCHAIN_EMAP = 25904;
+			static const int WRITESTRUCTURALFEATUREACTION_OPERATION_TYPE_OF_RESULT_EDIAGNOSTICCHAIN_EMAP = 25905;
+			static const int WRITESTRUCTURALFEATUREACTION_OPERATION_TYPE_OF_VALUE_EDIAGNOSTICCHAIN_EMAP = 25903;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getWriteStructuralFeatureAction_Class() const = 0;
@@ -6871,14 +6894,14 @@ namespace uml
 
 			// Begin Class WriteVariableAction
 			//Class and Feature IDs 
-			static const unsigned int WRITEVARIABLEACTION_CLASS = 258;
+			static const unsigned int WRITEVARIABLEACTION_CLASS = 259;
 			static const unsigned int WRITEVARIABLEACTION_CLASS_FEATURE_COUNT = 29;
-			static const unsigned int WRITEVARIABLEACTION_CLASS_OPERATION_COUNT = 68;
+			static const unsigned int WRITEVARIABLEACTION_CLASS_OPERATION_COUNT = 69;
 			
-			static const int WRITEVARIABLEACTION_ATTRIBUTE_VALUE = 25828;
+			static const int WRITEVARIABLEACTION_ATTRIBUTE_VALUE = 25928;
 			
-			static const int WRITEVARIABLEACTION_OPERATION_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP = 25896;
-			static const int WRITEVARIABLEACTION_OPERATION_VALUE_TYPE_EDIAGNOSTICCHAIN_EMAP = 25895;
+			static const int WRITEVARIABLEACTION_OPERATION_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP = 25997;
+			static const int WRITEVARIABLEACTION_OPERATION_VALUE_TYPE_EDIAGNOSTICCHAIN_EMAP = 25996;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getWriteVariableAction_Class() const = 0;
@@ -6892,18 +6915,18 @@ namespace uml
 			// End Class WriteVariableAction
 
 			static const int AGGREGATIONKIND_CLASS = 18;
-			static const int CALLCONCURRENCYKIND_CLASS = 30;
-			static const int CONNECTORKIND_CLASS = 55;
-			static const int EXPANSIONKIND_CLASS = 92;
-			static const int INTERACTIONOPERATORKIND_CLASS = 123;
-			static const int MESSAGEKIND_CLASS = 150;
-			static const int MESSAGESORT_CLASS = 152;
-			static const int OBJECTNODEORDERINGKIND_CLASS = 161;
-			static const int PARAMETERDIRECTIONKIND_CLASS = 175;
-			static const int PARAMETEREFFECTKIND_CLASS = 176;
-			static const int PSEUDOSTATEKIND_CLASS = 190;
-			static const int TRANSITIONKIND_CLASS = 242;
-			static const int VISIBILITYKIND_CLASS = 255;
+			static const int CALLCONCURRENCYKIND_CLASS = 31;
+			static const int CONNECTORKIND_CLASS = 56;
+			static const int EXPANSIONKIND_CLASS = 93;
+			static const int INTERACTIONOPERATORKIND_CLASS = 124;
+			static const int MESSAGEKIND_CLASS = 151;
+			static const int MESSAGESORT_CLASS = 153;
+			static const int OBJECTNODEORDERINGKIND_CLASS = 162;
+			static const int PARAMETERDIRECTIONKIND_CLASS = 176;
+			static const int PARAMETEREFFECTKIND_CLASS = 177;
+			static const int PSEUDOSTATEKIND_CLASS = 191;
+			static const int TRANSITIONKIND_CLASS = 243;
+			static const int VISIBILITYKIND_CLASS = 256;
 			
 			virtual std::shared_ptr<ecore::EEnum> getAggregationKind_Class() const = 0;
 			virtual std::shared_ptr<ecore::EEnum> getCallConcurrencyKind_Class() const = 0;

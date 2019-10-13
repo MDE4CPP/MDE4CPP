@@ -33,6 +33,14 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -399,7 +407,7 @@ Any ReadSelfActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::READSELFACTION_ATTRIBUTE_RESULT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getResult())); //19827
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getResult())); //19927
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -408,7 +416,7 @@ bool ReadSelfActionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::READSELFACTION_ATTRIBUTE_RESULT:
-			return getResult() != nullptr; //19827
+			return getResult() != nullptr; //19927
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }
@@ -421,7 +429,7 @@ bool ReadSelfActionImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::OutputPin> _result = std::dynamic_pointer_cast<uml::OutputPin>(_temp);
-			setResult(_result); //19827
+			setResult(_result); //19927
 			return true;
 		}
 	}

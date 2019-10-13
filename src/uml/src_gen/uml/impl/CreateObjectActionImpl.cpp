@@ -33,6 +33,14 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -415,9 +423,9 @@ Any CreateObjectActionImpl::eGet(int featureID, bool resolve, bool coreType) con
 	switch(featureID)
 	{
 		case UmlPackage::CREATEOBJECTACTION_ATTRIBUTE_CLASSIFIER:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getClassifier())); //6327
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getClassifier())); //6427
 		case UmlPackage::CREATEOBJECTACTION_ATTRIBUTE_RESULT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getResult())); //6328
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getResult())); //6428
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -426,9 +434,9 @@ bool CreateObjectActionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::CREATEOBJECTACTION_ATTRIBUTE_CLASSIFIER:
-			return getClassifier() != nullptr; //6327
+			return getClassifier() != nullptr; //6427
 		case UmlPackage::CREATEOBJECTACTION_ATTRIBUTE_RESULT:
-			return getResult() != nullptr; //6328
+			return getResult() != nullptr; //6428
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }
@@ -441,7 +449,7 @@ bool CreateObjectActionImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Classifier> _classifier = std::dynamic_pointer_cast<uml::Classifier>(_temp);
-			setClassifier(_classifier); //6327
+			setClassifier(_classifier); //6427
 			return true;
 		}
 		case UmlPackage::CREATEOBJECTACTION_ATTRIBUTE_RESULT:
@@ -449,7 +457,7 @@ bool CreateObjectActionImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::OutputPin> _result = std::dynamic_pointer_cast<uml::OutputPin>(_temp);
-			setResult(_result); //6328
+			setResult(_result); //6428
 			return true;
 		}
 	}

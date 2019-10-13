@@ -32,6 +32,18 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -659,9 +671,9 @@ Any OpaqueBehaviorImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::OPAQUEBEHAVIOR_ATTRIBUTE_BODY:
-			return eAny(getBody()); //16561
+			return eAny(getBody()); //16661
 		case UmlPackage::OPAQUEBEHAVIOR_ATTRIBUTE_LANGUAGE:
-			return eAny(getLanguage()); //16562
+			return eAny(getLanguage()); //16662
 	}
 	return BehaviorImpl::eGet(featureID, resolve, coreType);
 }
@@ -670,9 +682,9 @@ bool OpaqueBehaviorImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::OPAQUEBEHAVIOR_ATTRIBUTE_BODY:
-			return !getBody()->empty(); //16561
+			return !getBody()->empty(); //16661
 		case UmlPackage::OPAQUEBEHAVIOR_ATTRIBUTE_LANGUAGE:
-			return !getLanguage()->empty(); //16562
+			return !getLanguage()->empty(); //16662
 	}
 	return BehaviorImpl::internalEIsSet(featureID);
 }

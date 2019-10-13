@@ -53,6 +53,7 @@ void UmlPackageImpl::createPackageContents(std::shared_ptr<ecore::EPackage> pack
 	createAddStructuralFeatureValueActionContent(package, factory);
 	createAddVariableValueActionContent(package, factory);
 	createAnyReceiveEventContent(package, factory);
+	createArgumentContent(package, factory);
 	createArtifactContent(package, factory);
 	createAssociationContent(package, factory);
 	createAssociationClassContent(package, factory);
@@ -519,6 +520,16 @@ void UmlPackageImpl::createAnyReceiveEventContent(std::shared_ptr<ecore::EPackag
 {
 	m_anyReceiveEvent_Class = factory->createEClass_in_EPackage(package, ANYRECEIVEEVENT_CLASS);
 	
+	
+	
+}
+
+void UmlPackageImpl::createArgumentContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+{
+	m_argument_Class = factory->createEClass_in_EPackage(package, ARGUMENT_CLASS);
+	m_argument_Attribute_name = factory->createEAttribute_in_EContainingClass(m_argument_Class, ARGUMENT_ATTRIBUTE_NAME);
+	
+	m_argument_Attribute_value = factory->createEReference_in_EContainingClass(m_argument_Class, ARGUMENT_ATTRIBUTE_VALUE);
 	
 	
 }
@@ -2232,6 +2243,7 @@ void UmlPackageImpl::createObjectContent(std::shared_ptr<ecore::EPackage> packag
 	
 	
 	m_object_Operation_get_Property = factory->createEOperation_in_EContainingClass(m_object_Class, OBJECT_OPERATION_GET_PROPERTY);
+	m_object_Operation_invoke_Operation_Argument = factory->createEOperation_in_EContainingClass(m_object_Class, OBJECT_OPERATION_INVOKE_OPERATION_ARGUMENT);
 	m_object_Operation_set_Property_EJavaObject = factory->createEOperation_in_EContainingClass(m_object_Class, OBJECT_OPERATION_SET_PROPERTY_EJAVAOBJECT);
 	m_object_Operation_unset_Property = factory->createEOperation_in_EContainingClass(m_object_Class, OBJECT_OPERATION_UNSET_PROPERTY);
 	

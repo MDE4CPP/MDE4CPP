@@ -33,6 +33,14 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -460,8 +468,9 @@ Any InformationFlowImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //11315
+			return eAny(tempList); //11415
 		}
 		case UmlPackage::INFORMATIONFLOW_ATTRIBUTE_INFORMATIONSOURCE:
 		{
@@ -471,8 +480,9 @@ Any InformationFlowImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //11316
+			return eAny(tempList); //11416
 		}
 		case UmlPackage::INFORMATIONFLOW_ATTRIBUTE_INFORMATIONTARGET:
 		{
@@ -482,8 +492,9 @@ Any InformationFlowImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //11317
+			return eAny(tempList); //11417
 		}
 		case UmlPackage::INFORMATIONFLOW_ATTRIBUTE_REALIZATION:
 		{
@@ -493,8 +504,9 @@ Any InformationFlowImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //11318
+			return eAny(tempList); //11418
 		}
 		case UmlPackage::INFORMATIONFLOW_ATTRIBUTE_REALIZINGACTIVITYEDGE:
 		{
@@ -504,8 +516,9 @@ Any InformationFlowImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //11319
+			return eAny(tempList); //11419
 		}
 		case UmlPackage::INFORMATIONFLOW_ATTRIBUTE_REALIZINGCONNECTOR:
 		{
@@ -515,8 +528,9 @@ Any InformationFlowImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //11320
+			return eAny(tempList); //11420
 		}
 		case UmlPackage::INFORMATIONFLOW_ATTRIBUTE_REALIZINGMESSAGE:
 		{
@@ -526,8 +540,9 @@ Any InformationFlowImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //11321
+			return eAny(tempList); //11421
 		}
 	}
 	Any result;
@@ -544,19 +559,19 @@ bool InformationFlowImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::INFORMATIONFLOW_ATTRIBUTE_CONVEYED:
-			return getConveyed() != nullptr; //11315
+			return getConveyed() != nullptr; //11415
 		case UmlPackage::INFORMATIONFLOW_ATTRIBUTE_INFORMATIONSOURCE:
-			return getInformationSource() != nullptr; //11316
+			return getInformationSource() != nullptr; //11416
 		case UmlPackage::INFORMATIONFLOW_ATTRIBUTE_INFORMATIONTARGET:
-			return getInformationTarget() != nullptr; //11317
+			return getInformationTarget() != nullptr; //11417
 		case UmlPackage::INFORMATIONFLOW_ATTRIBUTE_REALIZATION:
-			return getRealization() != nullptr; //11318
+			return getRealization() != nullptr; //11418
 		case UmlPackage::INFORMATIONFLOW_ATTRIBUTE_REALIZINGACTIVITYEDGE:
-			return getRealizingActivityEdge() != nullptr; //11319
+			return getRealizingActivityEdge() != nullptr; //11419
 		case UmlPackage::INFORMATIONFLOW_ATTRIBUTE_REALIZINGCONNECTOR:
-			return getRealizingConnector() != nullptr; //11320
+			return getRealizingConnector() != nullptr; //11420
 		case UmlPackage::INFORMATIONFLOW_ATTRIBUTE_REALIZINGMESSAGE:
-			return getRealizingMessage() != nullptr; //11321
+			return getRealizingMessage() != nullptr; //11421
 	}
 	bool result = false;
 	result = DirectedRelationshipImpl::internalEIsSet(featureID);

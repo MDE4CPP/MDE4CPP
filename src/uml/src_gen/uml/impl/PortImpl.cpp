@@ -33,6 +33,22 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -609,13 +625,13 @@ Any PortImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::PORT_ATTRIBUTE_ISBEHAVIOR:
-			return eAny(getIsBehavior()); //18144
+			return eAny(getIsBehavior()); //18244
 		case UmlPackage::PORT_ATTRIBUTE_ISCONJUGATED:
-			return eAny(getIsConjugated()); //18145
+			return eAny(getIsConjugated()); //18245
 		case UmlPackage::PORT_ATTRIBUTE_ISSERVICE:
-			return eAny(getIsService()); //18146
+			return eAny(getIsService()); //18246
 		case UmlPackage::PORT_ATTRIBUTE_PROTOCOL:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getProtocol())); //18147
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getProtocol())); //18247
 		case UmlPackage::PORT_ATTRIBUTE_PROVIDED:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -624,8 +640,9 @@ Any PortImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //18148
+			return eAny(tempList); //18248
 		}
 		case UmlPackage::PORT_ATTRIBUTE_REDEFINEDPORT:
 		{
@@ -635,8 +652,9 @@ Any PortImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //18149
+			return eAny(tempList); //18249
 		}
 		case UmlPackage::PORT_ATTRIBUTE_REQUIRED:
 		{
@@ -646,8 +664,9 @@ Any PortImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //18150
+			return eAny(tempList); //18250
 		}
 	}
 	return PropertyImpl::eGet(featureID, resolve, coreType);
@@ -657,19 +676,19 @@ bool PortImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::PORT_ATTRIBUTE_ISBEHAVIOR:
-			return getIsBehavior() != false; //18144
+			return getIsBehavior() != false; //18244
 		case UmlPackage::PORT_ATTRIBUTE_ISCONJUGATED:
-			return getIsConjugated() != false; //18145
+			return getIsConjugated() != false; //18245
 		case UmlPackage::PORT_ATTRIBUTE_ISSERVICE:
-			return getIsService() != true; //18146
+			return getIsService() != true; //18246
 		case UmlPackage::PORT_ATTRIBUTE_PROTOCOL:
-			return getProtocol() != nullptr; //18147
+			return getProtocol() != nullptr; //18247
 		case UmlPackage::PORT_ATTRIBUTE_PROVIDED:
-			return getProvided() != nullptr; //18148
+			return getProvided() != nullptr; //18248
 		case UmlPackage::PORT_ATTRIBUTE_REDEFINEDPORT:
-			return getRedefinedPort() != nullptr; //18149
+			return getRedefinedPort() != nullptr; //18249
 		case UmlPackage::PORT_ATTRIBUTE_REQUIRED:
-			return getRequired() != nullptr; //18150
+			return getRequired() != nullptr; //18250
 	}
 	return PropertyImpl::internalEIsSet(featureID);
 }
@@ -681,21 +700,21 @@ bool PortImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			bool _isBehavior = newValue->get<bool>();
-			setIsBehavior(_isBehavior); //18144
+			setIsBehavior(_isBehavior); //18244
 			return true;
 		}
 		case UmlPackage::PORT_ATTRIBUTE_ISCONJUGATED:
 		{
 			// BOOST CAST
 			bool _isConjugated = newValue->get<bool>();
-			setIsConjugated(_isConjugated); //18145
+			setIsConjugated(_isConjugated); //18245
 			return true;
 		}
 		case UmlPackage::PORT_ATTRIBUTE_ISSERVICE:
 		{
 			// BOOST CAST
 			bool _isService = newValue->get<bool>();
-			setIsService(_isService); //18146
+			setIsService(_isService); //18246
 			return true;
 		}
 		case UmlPackage::PORT_ATTRIBUTE_PROTOCOL:
@@ -703,7 +722,7 @@ bool PortImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ProtocolStateMachine> _protocol = std::dynamic_pointer_cast<uml::ProtocolStateMachine>(_temp);
-			setProtocol(_protocol); //18147
+			setProtocol(_protocol); //18247
 			return true;
 		}
 		case UmlPackage::PORT_ATTRIBUTE_REDEFINEDPORT:

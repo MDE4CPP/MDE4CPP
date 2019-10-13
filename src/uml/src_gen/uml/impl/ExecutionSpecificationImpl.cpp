@@ -33,6 +33,14 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -311,9 +319,9 @@ Any ExecutionSpecificationImpl::eGet(int featureID, bool resolve, bool coreType)
 	switch(featureID)
 	{
 		case UmlPackage::EXECUTIONSPECIFICATION_ATTRIBUTE_FINISH:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getFinish())); //9113
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getFinish())); //9213
 		case UmlPackage::EXECUTIONSPECIFICATION_ATTRIBUTE_START:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getStart())); //9114
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getStart())); //9214
 	}
 	return InteractionFragmentImpl::eGet(featureID, resolve, coreType);
 }
@@ -322,9 +330,9 @@ bool ExecutionSpecificationImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::EXECUTIONSPECIFICATION_ATTRIBUTE_FINISH:
-			return getFinish() != nullptr; //9113
+			return getFinish() != nullptr; //9213
 		case UmlPackage::EXECUTIONSPECIFICATION_ATTRIBUTE_START:
-			return getStart() != nullptr; //9114
+			return getStart() != nullptr; //9214
 	}
 	return InteractionFragmentImpl::internalEIsSet(featureID);
 }
@@ -337,7 +345,7 @@ bool ExecutionSpecificationImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::OccurrenceSpecification> _finish = std::dynamic_pointer_cast<uml::OccurrenceSpecification>(_temp);
-			setFinish(_finish); //9113
+			setFinish(_finish); //9213
 			return true;
 		}
 		case UmlPackage::EXECUTIONSPECIFICATION_ATTRIBUTE_START:
@@ -345,7 +353,7 @@ bool ExecutionSpecificationImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::OccurrenceSpecification> _start = std::dynamic_pointer_cast<uml::OccurrenceSpecification>(_temp);
-			setStart(_start); //9114
+			setStart(_start); //9214
 			return true;
 		}
 	}

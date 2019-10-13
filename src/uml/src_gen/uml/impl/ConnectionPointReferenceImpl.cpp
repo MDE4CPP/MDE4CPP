@@ -33,6 +33,14 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -333,8 +341,9 @@ Any ConnectionPointReferenceImpl::eGet(int featureID, bool resolve, bool coreTyp
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //5212
+			return eAny(tempList); //5312
 		}
 		case UmlPackage::CONNECTIONPOINTREFERENCE_ATTRIBUTE_EXIT:
 		{
@@ -344,11 +353,12 @@ Any ConnectionPointReferenceImpl::eGet(int featureID, bool resolve, bool coreTyp
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //5213
+			return eAny(tempList); //5313
 		}
 		case UmlPackage::CONNECTIONPOINTREFERENCE_ATTRIBUTE_STATE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getState().lock())); //5214
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getState().lock())); //5314
 	}
 	return VertexImpl::eGet(featureID, resolve, coreType);
 }
@@ -357,11 +367,11 @@ bool ConnectionPointReferenceImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::CONNECTIONPOINTREFERENCE_ATTRIBUTE_ENTRY:
-			return getEntry() != nullptr; //5212
+			return getEntry() != nullptr; //5312
 		case UmlPackage::CONNECTIONPOINTREFERENCE_ATTRIBUTE_EXIT:
-			return getExit() != nullptr; //5213
+			return getExit() != nullptr; //5313
 		case UmlPackage::CONNECTIONPOINTREFERENCE_ATTRIBUTE_STATE:
-			return getState().lock() != nullptr; //5214
+			return getState().lock() != nullptr; //5314
 	}
 	return VertexImpl::internalEIsSet(featureID);
 }
@@ -446,7 +456,7 @@ bool ConnectionPointReferenceImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::State> _state = std::dynamic_pointer_cast<uml::State>(_temp);
-			setState(_state); //5214
+			setState(_state); //5314
 			return true;
 		}
 	}

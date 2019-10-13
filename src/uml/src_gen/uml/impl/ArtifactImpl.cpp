@@ -32,6 +32,16 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -643,7 +653,7 @@ Any ArtifactImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::ARTIFACT_ATTRIBUTE_FILENAME:
-			return eAny(getFileName()); //2038
+			return eAny(getFileName()); //2138
 		case UmlPackage::ARTIFACT_ATTRIBUTE_MANIFESTATION:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -652,8 +662,9 @@ Any ArtifactImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //2039
+			return eAny(tempList); //2139
 		}
 		case UmlPackage::ARTIFACT_ATTRIBUTE_NESTEDARTIFACT:
 		{
@@ -663,8 +674,9 @@ Any ArtifactImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //2040
+			return eAny(tempList); //2140
 		}
 		case UmlPackage::ARTIFACT_ATTRIBUTE_OWNEDATTRIBUTE:
 		{
@@ -674,8 +686,9 @@ Any ArtifactImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //2041
+			return eAny(tempList); //2141
 		}
 		case UmlPackage::ARTIFACT_ATTRIBUTE_OWNEDOPERATION:
 		{
@@ -685,8 +698,9 @@ Any ArtifactImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //2042
+			return eAny(tempList); //2142
 		}
 	}
 	Any result;
@@ -703,15 +717,15 @@ bool ArtifactImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::ARTIFACT_ATTRIBUTE_FILENAME:
-			return getFileName() != ""; //2038
+			return getFileName() != ""; //2138
 		case UmlPackage::ARTIFACT_ATTRIBUTE_MANIFESTATION:
-			return getManifestation() != nullptr; //2039
+			return getManifestation() != nullptr; //2139
 		case UmlPackage::ARTIFACT_ATTRIBUTE_NESTEDARTIFACT:
-			return getNestedArtifact() != nullptr; //2040
+			return getNestedArtifact() != nullptr; //2140
 		case UmlPackage::ARTIFACT_ATTRIBUTE_OWNEDATTRIBUTE:
-			return getOwnedAttribute() != nullptr; //2041
+			return getOwnedAttribute() != nullptr; //2141
 		case UmlPackage::ARTIFACT_ATTRIBUTE_OWNEDOPERATION:
-			return getOwnedOperation() != nullptr; //2042
+			return getOwnedOperation() != nullptr; //2142
 	}
 	bool result = false;
 	result = ClassifierImpl::internalEIsSet(featureID);
@@ -730,7 +744,7 @@ bool ArtifactImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::string _fileName = newValue->get<std::string>();
-			setFileName(_fileName); //2038
+			setFileName(_fileName); //2138
 			return true;
 		}
 		case UmlPackage::ARTIFACT_ATTRIBUTE_MANIFESTATION:

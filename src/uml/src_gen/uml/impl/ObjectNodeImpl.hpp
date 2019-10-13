@@ -96,12 +96,12 @@ namespace uml
 			/*!
 			 Indicates how the tokens held by the ObjectNode are ordered for selection to traverse ActivityEdges outgoing from the ObjectNode.
 			<p>From package UML::Activities.</p> */ 
-			virtual ObjectNodeOrderingKind getOrdering() const ;
+			virtual uml::ObjectNodeOrderingKind getOrdering() const ;
 			
 			/*!
 			 Indicates how the tokens held by the ObjectNode are ordered for selection to traverse ActivityEdges outgoing from the ObjectNode.
 			<p>From package UML::Activities.</p> */ 
-			virtual void setOrdering (ObjectNodeOrderingKind _ordering); 
+			virtual void setOrdering (uml::ObjectNodeOrderingKind _ordering); 
 			
 			
 			

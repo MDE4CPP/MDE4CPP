@@ -26,6 +26,15 @@
 #include "ecore/impl/ETypeParameterImpl.hpp"
 #include "ecore/impl/ETypedElementImpl.hpp"
 
+#include "ecore/EObject.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/EEnum.hpp"
+#include "ecore/EModelElement.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EPackage.hpp"
+#include "ecore/EPackage.hpp"
+
 
 using namespace ecore;
 

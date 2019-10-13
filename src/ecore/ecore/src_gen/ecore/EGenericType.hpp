@@ -117,6 +117,9 @@ namespace ecore
 			
 			/*!
 			 */
+			virtual void setERawType(std::shared_ptr<ecore::EClassifier> _eRawType_eRawType) = 0;
+			/*!
+			 */
 			virtual std::shared_ptr<Bag<ecore::EGenericType>> getETypeArguments() const = 0;
 			
 			/*!

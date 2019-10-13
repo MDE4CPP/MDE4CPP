@@ -33,6 +33,14 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -424,9 +432,9 @@ Any CallOperationActionImpl::eGet(int featureID, bool resolve, bool coreType) co
 	switch(featureID)
 	{
 		case UmlPackage::CALLOPERATIONACTION_ATTRIBUTE_OPERATION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getOperation())); //3231
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getOperation())); //3331
 		case UmlPackage::CALLOPERATIONACTION_ATTRIBUTE_TARGET:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getTarget())); //3232
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getTarget())); //3332
 	}
 	return CallActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -435,9 +443,9 @@ bool CallOperationActionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::CALLOPERATIONACTION_ATTRIBUTE_OPERATION:
-			return getOperation() != nullptr; //3231
+			return getOperation() != nullptr; //3331
 		case UmlPackage::CALLOPERATIONACTION_ATTRIBUTE_TARGET:
-			return getTarget() != nullptr; //3232
+			return getTarget() != nullptr; //3332
 	}
 	return CallActionImpl::internalEIsSet(featureID);
 }
@@ -450,7 +458,7 @@ bool CallOperationActionImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Operation> _operation = std::dynamic_pointer_cast<uml::Operation>(_temp);
-			setOperation(_operation); //3231
+			setOperation(_operation); //3331
 			return true;
 		}
 		case UmlPackage::CALLOPERATIONACTION_ATTRIBUTE_TARGET:
@@ -458,7 +466,7 @@ bool CallOperationActionImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::InputPin> _target = std::dynamic_pointer_cast<uml::InputPin>(_temp);
-			setTarget(_target); //3232
+			setTarget(_target); //3332
 			return true;
 		}
 	}

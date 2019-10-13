@@ -31,6 +31,10 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "ecore/EcoreFactory.hpp"
 #include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "ecore/EcorePackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -171,7 +175,10 @@ std::shared_ptr<EClass> EClassifierImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
-
+void EClassifierImpl::setDefaultValue(Any _defaultValue)
+{
+	m_defaultValue = _defaultValue;
+} 
 
 Any EClassifierImpl::getDefaultValue() const 
 {
@@ -290,6 +297,7 @@ Any EClassifierImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
 			return eAny(tempList); //1310
 		}
@@ -307,7 +315,7 @@ bool EClassifierImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case EcorePackage::ECLASSIFIER_ATTRIBUTE_DEFAULTVALUE:
-			return !getDefaultValue()->isEmpty(); //137
+			return getDefaultValue() != nullptr; //137
 		case EcorePackage::ECLASSIFIER_ATTRIBUTE_EPACKAGE:
 			return getEPackage().lock() != nullptr; //139
 		case EcorePackage::ECLASSIFIER_ATTRIBUTE_ETYPEPARAMETERS:
@@ -325,6 +333,13 @@ bool EClassifierImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
+		case EcorePackage::ECLASSIFIER_ATTRIBUTE_DEFAULTVALUE:
+		{
+			// BOOST CAST
+			Any _defaultValue = newValue->get<Any>();
+			setDefaultValue(_defaultValue); //137
+			return true;
+		}
 		case EcorePackage::ECLASSIFIER_ATTRIBUTE_ETYPEPARAMETERS:
 		{
 			// BOOST CAST

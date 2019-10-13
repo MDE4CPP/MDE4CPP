@@ -32,6 +32,10 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -257,11 +261,12 @@ Any FeatureImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //10112
+			return eAny(tempList); //10212
 		}
 		case UmlPackage::FEATURE_ATTRIBUTE_ISSTATIC:
-			return eAny(getIsStatic()); //10113
+			return eAny(getIsStatic()); //10213
 	}
 	return RedefinableElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -270,9 +275,9 @@ bool FeatureImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::FEATURE_ATTRIBUTE_FEATURINGCLASSIFIER:
-			return getFeaturingClassifier() != nullptr; //10112
+			return getFeaturingClassifier() != nullptr; //10212
 		case UmlPackage::FEATURE_ATTRIBUTE_ISSTATIC:
-			return getIsStatic() != false; //10113
+			return getIsStatic() != false; //10213
 	}
 	return RedefinableElementImpl::internalEIsSet(featureID);
 }
@@ -284,7 +289,7 @@ bool FeatureImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			bool _isStatic = newValue->get<bool>();
-			setIsStatic(_isStatic); //10113
+			setIsStatic(_isStatic); //10213
 			return true;
 		}
 	}

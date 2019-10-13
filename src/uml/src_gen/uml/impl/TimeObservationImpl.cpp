@@ -32,6 +32,14 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -286,9 +294,9 @@ Any TimeObservationImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::TIMEOBSERVATION_ATTRIBUTE_EVENT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEvent())); //24012
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEvent())); //24112
 		case UmlPackage::TIMEOBSERVATION_ATTRIBUTE_FIRSTEVENT:
-			return eAny(getFirstEvent()); //24013
+			return eAny(getFirstEvent()); //24113
 	}
 	return ObservationImpl::eGet(featureID, resolve, coreType);
 }
@@ -297,9 +305,9 @@ bool TimeObservationImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::TIMEOBSERVATION_ATTRIBUTE_EVENT:
-			return getEvent() != nullptr; //24012
+			return getEvent() != nullptr; //24112
 		case UmlPackage::TIMEOBSERVATION_ATTRIBUTE_FIRSTEVENT:
-			return getFirstEvent() != true; //24013
+			return getFirstEvent() != true; //24113
 	}
 	return ObservationImpl::internalEIsSet(featureID);
 }
@@ -312,14 +320,14 @@ bool TimeObservationImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::NamedElement> _event = std::dynamic_pointer_cast<uml::NamedElement>(_temp);
-			setEvent(_event); //24012
+			setEvent(_event); //24112
 			return true;
 		}
 		case UmlPackage::TIMEOBSERVATION_ATTRIBUTE_FIRSTEVENT:
 		{
 			// BOOST CAST
 			bool _firstEvent = newValue->get<bool>();
-			setFirstEvent(_firstEvent); //24013
+			setFirstEvent(_firstEvent); //24113
 			return true;
 		}
 	}

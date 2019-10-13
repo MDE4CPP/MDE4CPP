@@ -32,6 +32,14 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -295,7 +303,7 @@ Any StateInvariantImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::STATEINVARIANT_ATTRIBUTE_INVARIANT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getInvariant())); //22113
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getInvariant())); //22213
 	}
 	return InteractionFragmentImpl::eGet(featureID, resolve, coreType);
 }
@@ -304,7 +312,7 @@ bool StateInvariantImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::STATEINVARIANT_ATTRIBUTE_INVARIANT:
-			return getInvariant() != nullptr; //22113
+			return getInvariant() != nullptr; //22213
 	}
 	return InteractionFragmentImpl::internalEIsSet(featureID);
 }
@@ -317,7 +325,7 @@ bool StateInvariantImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Constraint> _invariant = std::dynamic_pointer_cast<uml::Constraint>(_temp);
-			setInvariant(_invariant); //22113
+			setInvariant(_invariant); //22213
 			return true;
 		}
 	}

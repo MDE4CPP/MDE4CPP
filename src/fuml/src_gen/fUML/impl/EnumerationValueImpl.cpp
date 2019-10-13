@@ -235,9 +235,9 @@ Any EnumerationValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case FUMLPackage::ENUMERATIONVALUE_ATTRIBUTE_LITERAL:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getLiteral())); //350
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getLiteral())); //380
 		case FUMLPackage::ENUMERATIONVALUE_ATTRIBUTE_TYPE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getType())); //351
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getType())); //381
 	}
 	return ValueImpl::eGet(featureID, resolve, coreType);
 }
@@ -246,9 +246,9 @@ bool EnumerationValueImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case FUMLPackage::ENUMERATIONVALUE_ATTRIBUTE_LITERAL:
-			return getLiteral() != nullptr; //350
+			return getLiteral() != nullptr; //380
 		case FUMLPackage::ENUMERATIONVALUE_ATTRIBUTE_TYPE:
-			return getType() != nullptr; //351
+			return getType() != nullptr; //381
 	}
 	return ValueImpl::internalEIsSet(featureID);
 }
@@ -261,7 +261,7 @@ bool EnumerationValueImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::EnumerationLiteral> _literal = std::dynamic_pointer_cast<uml::EnumerationLiteral>(_temp);
-			setLiteral(_literal); //350
+			setLiteral(_literal); //380
 			return true;
 		}
 		case FUMLPackage::ENUMERATIONVALUE_ATTRIBUTE_TYPE:
@@ -269,7 +269,7 @@ bool EnumerationValueImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Enumeration> _type = std::dynamic_pointer_cast<uml::Enumeration>(_temp);
-			setType(_type); //351
+			setType(_type); //381
 			return true;
 		}
 	}

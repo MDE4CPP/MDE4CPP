@@ -269,7 +269,7 @@ Any ReferenceImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case FUMLPackage::REFERENCE_ATTRIBUTE_REFERENT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getReferent())); //950
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getReferent())); //980
 	}
 	return StructuredValueImpl::eGet(featureID, resolve, coreType);
 }
@@ -278,7 +278,7 @@ bool ReferenceImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case FUMLPackage::REFERENCE_ATTRIBUTE_REFERENT:
-			return getReferent() != nullptr; //950
+			return getReferent() != nullptr; //980
 	}
 	return StructuredValueImpl::internalEIsSet(featureID);
 }
@@ -291,7 +291,7 @@ bool ReferenceImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<fUML::Object> _referent = std::dynamic_pointer_cast<fUML::Object>(_temp);
-			setReferent(_referent); //950
+			setReferent(_referent); //980
 			return true;
 		}
 	}

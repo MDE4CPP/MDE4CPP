@@ -176,9 +176,9 @@ Any EvaluationImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case FUMLPackage::EVALUATION_ATTRIBUTE_LOCUS:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getLocus())); //361
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getLocus())); //391
 		case FUMLPackage::EVALUATION_ATTRIBUTE_SPECIFICATION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSpecification())); //360
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSpecification())); //390
 	}
 	return SemanticVisitorImpl::eGet(featureID, resolve, coreType);
 }
@@ -187,9 +187,9 @@ bool EvaluationImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case FUMLPackage::EVALUATION_ATTRIBUTE_LOCUS:
-			return getLocus() != nullptr; //361
+			return getLocus() != nullptr; //391
 		case FUMLPackage::EVALUATION_ATTRIBUTE_SPECIFICATION:
-			return getSpecification() != nullptr; //360
+			return getSpecification() != nullptr; //390
 	}
 	return SemanticVisitorImpl::internalEIsSet(featureID);
 }
@@ -202,7 +202,7 @@ bool EvaluationImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<fUML::Locus> _locus = std::dynamic_pointer_cast<fUML::Locus>(_temp);
-			setLocus(_locus); //361
+			setLocus(_locus); //391
 			return true;
 		}
 		case FUMLPackage::EVALUATION_ATTRIBUTE_SPECIFICATION:
@@ -210,7 +210,7 @@ bool EvaluationImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ValueSpecification> _specification = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
-			setSpecification(_specification); //360
+			setSpecification(_specification); //390
 			return true;
 		}
 	}

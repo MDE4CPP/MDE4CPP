@@ -33,6 +33,14 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -449,7 +457,7 @@ Any CallActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::CALLACTION_ATTRIBUTE_ISSYNCHRONOUS:
-			return eAny(getIsSynchronous()); //2829
+			return eAny(getIsSynchronous()); //2929
 		case UmlPackage::CALLACTION_ATTRIBUTE_RESULT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -458,8 +466,9 @@ Any CallActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //2830
+			return eAny(tempList); //2930
 		}
 	}
 	return InvocationActionImpl::eGet(featureID, resolve, coreType);
@@ -469,9 +478,9 @@ bool CallActionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::CALLACTION_ATTRIBUTE_ISSYNCHRONOUS:
-			return getIsSynchronous() != true; //2829
+			return getIsSynchronous() != true; //2929
 		case UmlPackage::CALLACTION_ATTRIBUTE_RESULT:
-			return getResult() != nullptr; //2830
+			return getResult() != nullptr; //2930
 	}
 	return InvocationActionImpl::internalEIsSet(featureID);
 }
@@ -483,7 +492,7 @@ bool CallActionImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			bool _isSynchronous = newValue->get<bool>();
-			setIsSynchronous(_isSynchronous); //2829
+			setIsSynchronous(_isSynchronous); //2929
 			return true;
 		}
 		case UmlPackage::CALLACTION_ATTRIBUTE_RESULT:

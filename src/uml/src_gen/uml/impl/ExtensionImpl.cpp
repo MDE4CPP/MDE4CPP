@@ -33,6 +33,16 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -558,9 +568,9 @@ Any ExtensionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::EXTENSION_ATTRIBUTE_ISREQUIRED:
-			return eAny(getIsRequired()); //9744
+			return eAny(getIsRequired()); //9844
 		case UmlPackage::EXTENSION_ATTRIBUTE_METACLASS:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getMetaclass())); //9745
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getMetaclass())); //9845
 	}
 	return AssociationImpl::eGet(featureID, resolve, coreType);
 }
@@ -569,9 +579,9 @@ bool ExtensionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::EXTENSION_ATTRIBUTE_ISREQUIRED:
-			return getIsRequired() != false; //9744
+			return getIsRequired() != false; //9844
 		case UmlPackage::EXTENSION_ATTRIBUTE_METACLASS:
-			return getMetaclass() != nullptr; //9745
+			return getMetaclass() != nullptr; //9845
 	}
 	return AssociationImpl::internalEIsSet(featureID);
 }

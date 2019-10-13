@@ -33,6 +33,14 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -360,9 +368,9 @@ Any JoinNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::JOINNODE_ATTRIBUTE_ISCOMBINEDUPLICATE:
-			return eAny(getIsCombineDuplicate()); //13120
+			return eAny(getIsCombineDuplicate()); //13220
 		case UmlPackage::JOINNODE_ATTRIBUTE_JOINSPEC:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getJoinSpec())); //13121
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getJoinSpec())); //13221
 	}
 	return ControlNodeImpl::eGet(featureID, resolve, coreType);
 }
@@ -371,9 +379,9 @@ bool JoinNodeImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::JOINNODE_ATTRIBUTE_ISCOMBINEDUPLICATE:
-			return getIsCombineDuplicate() != true; //13120
+			return getIsCombineDuplicate() != true; //13220
 		case UmlPackage::JOINNODE_ATTRIBUTE_JOINSPEC:
-			return getJoinSpec() != nullptr; //13121
+			return getJoinSpec() != nullptr; //13221
 	}
 	return ControlNodeImpl::internalEIsSet(featureID);
 }
@@ -385,7 +393,7 @@ bool JoinNodeImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			bool _isCombineDuplicate = newValue->get<bool>();
-			setIsCombineDuplicate(_isCombineDuplicate); //13120
+			setIsCombineDuplicate(_isCombineDuplicate); //13220
 			return true;
 		}
 		case UmlPackage::JOINNODE_ATTRIBUTE_JOINSPEC:
@@ -393,7 +401,7 @@ bool JoinNodeImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ValueSpecification> _joinSpec = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
-			setJoinSpec(_joinSpec); //13121
+			setJoinSpec(_joinSpec); //13221
 			return true;
 		}
 	}

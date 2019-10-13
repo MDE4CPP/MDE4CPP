@@ -33,6 +33,16 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -721,11 +731,12 @@ Any StereotypeImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //22352
+			return eAny(tempList); //22452
 		}
 		case UmlPackage::STEREOTYPE_ATTRIBUTE_PROFILE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getProfile())); //22353
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getProfile())); //22453
 	}
 	return ClassImpl::eGet(featureID, resolve, coreType);
 }
@@ -734,9 +745,9 @@ bool StereotypeImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::STEREOTYPE_ATTRIBUTE_ICON:
-			return getIcon() != nullptr; //22352
+			return getIcon() != nullptr; //22452
 		case UmlPackage::STEREOTYPE_ATTRIBUTE_PROFILE:
-			return getProfile() != nullptr; //22353
+			return getProfile() != nullptr; //22453
 	}
 	return ClassImpl::internalEIsSet(featureID);
 }

@@ -33,6 +33,18 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -429,9 +441,9 @@ Any OutputPinImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::OUTPUTPIN_ATTRIBUTE_ACTION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getAction().lock())); //16934
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getAction().lock())); //17034
 		case UmlPackage::OUTPUTPIN_ATTRIBUTE_CALLACTION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getCallAction().lock())); //16933
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getCallAction().lock())); //17033
 	}
 	return PinImpl::eGet(featureID, resolve, coreType);
 }
@@ -440,9 +452,9 @@ bool OutputPinImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::OUTPUTPIN_ATTRIBUTE_ACTION:
-			return getAction().lock() != nullptr; //16934
+			return getAction().lock() != nullptr; //17034
 		case UmlPackage::OUTPUTPIN_ATTRIBUTE_CALLACTION:
-			return getCallAction().lock() != nullptr; //16933
+			return getCallAction().lock() != nullptr; //17033
 	}
 	return PinImpl::internalEIsSet(featureID);
 }
@@ -455,7 +467,7 @@ bool OutputPinImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::CallAction> _callAction = std::dynamic_pointer_cast<uml::CallAction>(_temp);
-			setCallAction(_callAction); //16933
+			setCallAction(_callAction); //17033
 			return true;
 		}
 	}

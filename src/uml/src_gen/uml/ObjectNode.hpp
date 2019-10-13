@@ -208,12 +208,12 @@ namespace uml
 			/*!
 			 Indicates how the tokens held by the ObjectNode are ordered for selection to traverse ActivityEdges outgoing from the ObjectNode.
 			<p>From package UML::Activities.</p> */ 
-			virtual ObjectNodeOrderingKind getOrdering() const = 0;
+			virtual uml::ObjectNodeOrderingKind getOrdering() const = 0;
 			
 			/*!
 			 Indicates how the tokens held by the ObjectNode are ordered for selection to traverse ActivityEdges outgoing from the ObjectNode.
 			<p>From package UML::Activities.</p> */ 
-			virtual void setOrdering (ObjectNodeOrderingKind _ordering)= 0; 
+			virtual void setOrdering (uml::ObjectNodeOrderingKind _ordering)= 0; 
 			
 			
 			//*********************************
@@ -255,7 +255,7 @@ namespace uml
 			/*!
 			 Indicates how the tokens held by the ObjectNode are ordered for selection to traverse ActivityEdges outgoing from the ObjectNode.
 			<p>From package UML::Activities.</p> */ 
-			ObjectNodeOrderingKind m_ordering = ObjectNodeOrderingKind::FIFO;
+			uml::ObjectNodeOrderingKind m_ordering = ObjectNodeOrderingKind::FIFO;
 			
 			
 			//*********************************

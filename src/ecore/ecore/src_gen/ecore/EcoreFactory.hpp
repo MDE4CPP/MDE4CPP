@@ -37,6 +37,46 @@ namespace ecore
 	class EcorePackage;
 }
 
+namespace ecore 
+{
+	class EObject;
+}
+
+namespace ecore 
+{
+	class EClass;
+}
+
+namespace ecore 
+{
+	class EClass;
+}
+
+namespace ecore 
+{
+	class EEnum;
+}
+
+namespace ecore 
+{
+	class EModelElement;
+}
+
+namespace ecore 
+{
+	class EOperation;
+}
+
+namespace ecore 
+{
+	class EPackage;
+}
+
+namespace ecore 
+{
+	class EPackage;
+}
+
 
 namespace ecore 
 {

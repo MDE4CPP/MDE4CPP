@@ -19,6 +19,7 @@
 
 //depending model packages
 #include "ecore/EcorePackage.hpp"
+#include "types/TypesPackage.hpp"
 #include "uml/UmlPackage.hpp"
 
 using namespace fUML;
@@ -637,6 +638,119 @@ std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getCallBehaviorActionActivat
 }
 
 // End Class CallBehaviorActionActivation
+
+// Begin Class CallEventBehavior
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getCallEventBehavior_Class() const
+{
+	return m_callEventBehavior_Class;
+}
+
+
+
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getCallEventBehavior_Operation_operation() const
+{
+	return m_callEventBehavior_Operation_operation;
+}
+
+// End Class CallEventBehavior
+
+// Begin Class CallEventExecution
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getCallEventExecution_Class() const
+{
+	return m_callEventExecution_Class;
+}
+
+std::shared_ptr<ecore::EAttribute> FUMLPackageImpl::getCallEventExecution_Attribute_callerSuspended() const
+{
+	return m_callEventExecution_Attribute_callerSuspended;
+}
+
+
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getCallEventExecution_Operation_copy() const
+{
+	return m_callEventExecution_Operation_copy;
+}
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getCallEventExecution_Operation_createEventOccurrence() const
+{
+	return m_callEventExecution_Operation_createEventOccurrence;
+}
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getCallEventExecution_Operation_execute() const
+{
+	return m_callEventExecution_Operation_execute;
+}
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getCallEventExecution_Operation_getInputParameterValues() const
+{
+	return m_callEventExecution_Operation_getInputParameterValues;
+}
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getCallEventExecution_Operation_getOperation() const
+{
+	return m_callEventExecution_Operation_getOperation;
+}
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getCallEventExecution_Operation_isCallerSuspended() const
+{
+	return m_callEventExecution_Operation_isCallerSuspended;
+}
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getCallEventExecution_Operation_makeCall() const
+{
+	return m_callEventExecution_Operation_makeCall;
+}
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getCallEventExecution_Operation_new_() const
+{
+	return m_callEventExecution_Operation_new_;
+}
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getCallEventExecution_Operation_releaseCaller() const
+{
+	return m_callEventExecution_Operation_releaseCaller;
+}
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getCallEventExecution_Operation_setOutputParameterValues_ParameterValue() const
+{
+	return m_callEventExecution_Operation_setOutputParameterValues_ParameterValue;
+}
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getCallEventExecution_Operation_suspendCaller() const
+{
+	return m_callEventExecution_Operation_suspendCaller;
+}
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getCallEventExecution_Operation_wait_() const
+{
+	return m_callEventExecution_Operation_wait_;
+}
+
+// End Class CallEventExecution
+
+// Begin Class CallEventOccurrence
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getCallEventOccurrence_Class() const
+{
+	return m_callEventOccurrence_Class;
+}
+
+
+std::shared_ptr<ecore::EReference> FUMLPackageImpl::getCallEventOccurrence_Attribute_execution() const
+{
+	return m_callEventOccurrence_Attribute_execution;
+}
+
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getCallEventOccurrence_Operation_getOperation() const
+{
+	return m_callEventOccurrence_Operation_getOperation;
+}
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getCallEventOccurrence_Operation_getParameterValues() const
+{
+	return m_callEventOccurrence_Operation_getParameterValues;
+}
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getCallEventOccurrence_Operation_match_Trigger() const
+{
+	return m_callEventOccurrence_Operation_match_Trigger;
+}
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getCallEventOccurrence_Operation_releaseCaller() const
+{
+	return m_callEventOccurrence_Operation_releaseCaller;
+}
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getCallEventOccurrence_Operation_setOutputParameterValues_ParameterValue() const
+{
+	return m_callEventOccurrence_Operation_setOutputParameterValues_ParameterValue;
+}
+
+// End Class CallEventOccurrence
 
 // Begin Class CallOperationActionActivation
 std::shared_ptr<ecore::EClass> FUMLPackageImpl::getCallOperationActionActivation_Class() const

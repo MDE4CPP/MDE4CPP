@@ -19,6 +19,7 @@
 
 //depending model packages
 #include "ecore/EcorePackage.hpp"
+#include "types/TypesPackage.hpp"
 #include "uml/UmlPackage.hpp"
 
 using namespace fUML;
@@ -48,6 +49,8 @@ void FUMLPackageImpl::initializePackageContents()
 	m_booleanValue_Class->getESuperTypes()->push_back(getPrimitiveValue_Class());
 	m_callActionActivation_Class->getESuperTypes()->push_back(getInvocationActionActivation_Class());
 	m_callBehaviorActionActivation_Class->getESuperTypes()->push_back(getCallActionActivation_Class());
+	m_callEventExecution_Class->getESuperTypes()->push_back(getExecution_Class());
+	m_callEventOccurrence_Class->getESuperTypes()->push_back(getEventOccurrence_Class());
 	m_callOperationActionActivation_Class->getESuperTypes()->push_back(getCallActionActivation_Class());
 	m_centralBufferNodeActivation_Class->getESuperTypes()->push_back(getObjectNodeActivation_Class());
 	m_choiceStrategy_Class->getESuperTypes()->push_back(getSemanticStrategy_Class());
@@ -147,6 +150,9 @@ void FUMLPackageImpl::initializePackageContents()
 	initializeBooleanValueContent();
 	initializeCallActionActivationContent();
 	initializeCallBehaviorActionActivationContent();
+	initializeCallEventBehaviorContent();
+	initializeCallEventExecutionContent();
+	initializeCallEventOccurrenceContent();
 	initializeCallOperationActionActivationContent();
 	initializeCentralBufferNodeActivationContent();
 	initializeChoiceStrategyContent();
@@ -2113,6 +2119,255 @@ void FUMLPackageImpl::initializeCallBehaviorActionActivationContent()
 	m_callBehaviorActionActivation_Operation_getCallExecution->setUnique(true);
 	m_callBehaviorActionActivation_Operation_getCallExecution->setOrdered(false);
 	
+	
+	
+}
+
+void FUMLPackageImpl::initializeCallEventBehaviorContent()
+{
+	m_callEventBehavior_Class->setName("CallEventBehavior");
+	m_callEventBehavior_Class->setAbstract(false);
+	m_callEventBehavior_Class->setInterface(false);
+	
+	
+	
+	m_callEventBehavior_Operation_operation->setEType(uml::UmlPackage::eInstance()->getOperation_Class());
+	m_callEventBehavior_Operation_operation->setName("operation");
+	m_callEventBehavior_Operation_operation->setLowerBound(1);
+	m_callEventBehavior_Operation_operation->setUpperBound(1);
+	m_callEventBehavior_Operation_operation->setUnique(true);
+	m_callEventBehavior_Operation_operation->setOrdered(true);
+	
+	
+	
+}
+
+void FUMLPackageImpl::initializeCallEventExecutionContent()
+{
+	m_callEventExecution_Class->setName("CallEventExecution");
+	m_callEventExecution_Class->setAbstract(false);
+	m_callEventExecution_Class->setInterface(false);
+	
+	m_callEventExecution_Attribute_callerSuspended = getCallEventExecution_Attribute_callerSuspended();
+	m_callEventExecution_Attribute_callerSuspended->setName("callerSuspended");
+	m_callEventExecution_Attribute_callerSuspended->setEType(types::TypesPackage::eInstance()->getBoolean_Class());
+	m_callEventExecution_Attribute_callerSuspended->setLowerBound(0);
+	m_callEventExecution_Attribute_callerSuspended->setUpperBound(1);
+	m_callEventExecution_Attribute_callerSuspended->setTransient(false);
+	m_callEventExecution_Attribute_callerSuspended->setVolatile(false);
+	m_callEventExecution_Attribute_callerSuspended->setChangeable(true);
+	m_callEventExecution_Attribute_callerSuspended->setUnsettable(false);
+	m_callEventExecution_Attribute_callerSuspended->setUnique(true);
+	m_callEventExecution_Attribute_callerSuspended->setDerived(false);
+	m_callEventExecution_Attribute_callerSuspended->setOrdered(true);
+	m_callEventExecution_Attribute_callerSuspended->setID(false);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+		   m_callEventExecution_Attribute_callerSuspended->setDefaultValueLiteral(defaultValue);
+		}
+	}
+	
+	
+	m_callEventExecution_Operation_copy->setEType(getValue_Class());
+	m_callEventExecution_Operation_copy->setName("copy");
+	m_callEventExecution_Operation_copy->setLowerBound(1);
+	m_callEventExecution_Operation_copy->setUpperBound(1);
+	m_callEventExecution_Operation_copy->setUnique(true);
+	m_callEventExecution_Operation_copy->setOrdered(true);
+	
+	
+	m_callEventExecution_Operation_createEventOccurrence->setEType(getEventOccurrence_Class());
+	m_callEventExecution_Operation_createEventOccurrence->setName("createEventOccurrence");
+	m_callEventExecution_Operation_createEventOccurrence->setLowerBound(1);
+	m_callEventExecution_Operation_createEventOccurrence->setUpperBound(1);
+	m_callEventExecution_Operation_createEventOccurrence->setUnique(true);
+	m_callEventExecution_Operation_createEventOccurrence->setOrdered(true);
+	
+	
+	m_callEventExecution_Operation_execute->setEType(nullptr);
+	m_callEventExecution_Operation_execute->setName("execute");
+	m_callEventExecution_Operation_execute->setLowerBound(0);
+	m_callEventExecution_Operation_execute->setUpperBound(1);
+	m_callEventExecution_Operation_execute->setUnique(true);
+	m_callEventExecution_Operation_execute->setOrdered(true);
+	
+	
+	m_callEventExecution_Operation_getInputParameterValues->setEType(getParameterValue_Class());
+	m_callEventExecution_Operation_getInputParameterValues->setName("getInputParameterValues");
+	m_callEventExecution_Operation_getInputParameterValues->setLowerBound(0);
+	m_callEventExecution_Operation_getInputParameterValues->setUpperBound(-1);
+	m_callEventExecution_Operation_getInputParameterValues->setUnique(true);
+	m_callEventExecution_Operation_getInputParameterValues->setOrdered(true);
+	
+	
+	m_callEventExecution_Operation_getOperation->setEType(uml::UmlPackage::eInstance()->getOperation_Class());
+	m_callEventExecution_Operation_getOperation->setName("getOperation");
+	m_callEventExecution_Operation_getOperation->setLowerBound(0);
+	m_callEventExecution_Operation_getOperation->setUpperBound(1);
+	m_callEventExecution_Operation_getOperation->setUnique(true);
+	m_callEventExecution_Operation_getOperation->setOrdered(true);
+	
+	
+	m_callEventExecution_Operation_isCallerSuspended->setEType(types::TypesPackage::eInstance()->getBoolean_Class());
+	m_callEventExecution_Operation_isCallerSuspended->setName("isCallerSuspended");
+	m_callEventExecution_Operation_isCallerSuspended->setLowerBound(0);
+	m_callEventExecution_Operation_isCallerSuspended->setUpperBound(1);
+	m_callEventExecution_Operation_isCallerSuspended->setUnique(true);
+	m_callEventExecution_Operation_isCallerSuspended->setOrdered(true);
+	
+	
+	m_callEventExecution_Operation_makeCall->setEType(nullptr);
+	m_callEventExecution_Operation_makeCall->setName("makeCall");
+	m_callEventExecution_Operation_makeCall->setLowerBound(0);
+	m_callEventExecution_Operation_makeCall->setUpperBound(1);
+	m_callEventExecution_Operation_makeCall->setUnique(true);
+	m_callEventExecution_Operation_makeCall->setOrdered(true);
+	
+	
+	m_callEventExecution_Operation_new_->setEType(getValue_Class());
+	m_callEventExecution_Operation_new_->setName("new_");
+	m_callEventExecution_Operation_new_->setLowerBound(0);
+	m_callEventExecution_Operation_new_->setUpperBound(1);
+	m_callEventExecution_Operation_new_->setUnique(true);
+	m_callEventExecution_Operation_new_->setOrdered(true);
+	
+	
+	m_callEventExecution_Operation_releaseCaller->setEType(nullptr);
+	m_callEventExecution_Operation_releaseCaller->setName("releaseCaller");
+	m_callEventExecution_Operation_releaseCaller->setLowerBound(0);
+	m_callEventExecution_Operation_releaseCaller->setUpperBound(1);
+	m_callEventExecution_Operation_releaseCaller->setUnique(true);
+	m_callEventExecution_Operation_releaseCaller->setOrdered(true);
+	
+	
+	m_callEventExecution_Operation_setOutputParameterValues_ParameterValue->setEType(nullptr);
+	m_callEventExecution_Operation_setOutputParameterValues_ParameterValue->setName("setOutputParameterValues");
+	m_callEventExecution_Operation_setOutputParameterValues_ParameterValue->setLowerBound(0);
+	m_callEventExecution_Operation_setOutputParameterValues_ParameterValue->setUpperBound(1);
+	m_callEventExecution_Operation_setOutputParameterValues_ParameterValue->setUnique(true);
+	m_callEventExecution_Operation_setOutputParameterValues_ParameterValue->setOrdered(true);
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_callEventExecution_Operation_setOutputParameterValues_ParameterValue);
+		parameter->setName("parameterValues");
+		parameter->setEType(nullptr);
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	m_callEventExecution_Operation_suspendCaller->setEType(nullptr);
+	m_callEventExecution_Operation_suspendCaller->setName("suspendCaller");
+	m_callEventExecution_Operation_suspendCaller->setLowerBound(0);
+	m_callEventExecution_Operation_suspendCaller->setUpperBound(1);
+	m_callEventExecution_Operation_suspendCaller->setUnique(true);
+	m_callEventExecution_Operation_suspendCaller->setOrdered(true);
+	
+	
+	m_callEventExecution_Operation_wait_->setEType(nullptr);
+	m_callEventExecution_Operation_wait_->setName("wait_");
+	m_callEventExecution_Operation_wait_->setLowerBound(0);
+	m_callEventExecution_Operation_wait_->setUpperBound(1);
+	m_callEventExecution_Operation_wait_->setUnique(true);
+	m_callEventExecution_Operation_wait_->setOrdered(true);
+	
+	
+	
+}
+
+void FUMLPackageImpl::initializeCallEventOccurrenceContent()
+{
+	m_callEventOccurrence_Class->setName("CallEventOccurrence");
+	m_callEventOccurrence_Class->setAbstract(false);
+	m_callEventOccurrence_Class->setInterface(false);
+	
+	
+	m_callEventOccurrence_Attribute_execution->setName("execution");
+	m_callEventOccurrence_Attribute_execution->setEType(getCallEventExecution_Class());
+	m_callEventOccurrence_Attribute_execution->setLowerBound(1);
+	m_callEventOccurrence_Attribute_execution->setUpperBound(1);
+	m_callEventOccurrence_Attribute_execution->setTransient(false);
+	m_callEventOccurrence_Attribute_execution->setVolatile(false);
+	m_callEventOccurrence_Attribute_execution->setChangeable(true);
+	m_callEventOccurrence_Attribute_execution->setUnsettable(false);
+	m_callEventOccurrence_Attribute_execution->setUnique(true);
+	m_callEventOccurrence_Attribute_execution->setDerived(false);
+	m_callEventOccurrence_Attribute_execution->setOrdered(true);
+	m_callEventOccurrence_Attribute_execution->setContainment(false);
+	m_callEventOccurrence_Attribute_execution->setResolveProxies(true);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			m_callEventOccurrence_Attribute_execution->setDefaultValueLiteral(defaultValue);
+		}
+		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
+		if (otherEnd != nullptr)
+	    {
+	   		m_callEventOccurrence_Attribute_execution->setEOpposite(otherEnd);
+	    }
+	}
+	
+	m_callEventOccurrence_Operation_getOperation->setEType(uml::UmlPackage::eInstance()->getOperation_Class());
+	m_callEventOccurrence_Operation_getOperation->setName("getOperation");
+	m_callEventOccurrence_Operation_getOperation->setLowerBound(1);
+	m_callEventOccurrence_Operation_getOperation->setUpperBound(1);
+	m_callEventOccurrence_Operation_getOperation->setUnique(true);
+	m_callEventOccurrence_Operation_getOperation->setOrdered(true);
+	
+	
+	m_callEventOccurrence_Operation_getParameterValues->setEType(getParameterValue_Class());
+	m_callEventOccurrence_Operation_getParameterValues->setName("getParameterValues");
+	m_callEventOccurrence_Operation_getParameterValues->setLowerBound(0);
+	m_callEventOccurrence_Operation_getParameterValues->setUpperBound(-1);
+	m_callEventOccurrence_Operation_getParameterValues->setUnique(true);
+	m_callEventOccurrence_Operation_getParameterValues->setOrdered(true);
+	
+	
+	m_callEventOccurrence_Operation_match_Trigger->setEType(types::TypesPackage::eInstance()->getBoolean_Class());
+	m_callEventOccurrence_Operation_match_Trigger->setName("match");
+	m_callEventOccurrence_Operation_match_Trigger->setLowerBound(0);
+	m_callEventOccurrence_Operation_match_Trigger->setUpperBound(1);
+	m_callEventOccurrence_Operation_match_Trigger->setUnique(true);
+	m_callEventOccurrence_Operation_match_Trigger->setOrdered(true);
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_callEventOccurrence_Operation_match_Trigger);
+		parameter->setName("trigger");
+		parameter->setEType(uml::UmlPackage::eInstance()->getTrigger_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	m_callEventOccurrence_Operation_releaseCaller->setEType(nullptr);
+	m_callEventOccurrence_Operation_releaseCaller->setName("releaseCaller");
+	m_callEventOccurrence_Operation_releaseCaller->setLowerBound(0);
+	m_callEventOccurrence_Operation_releaseCaller->setUpperBound(1);
+	m_callEventOccurrence_Operation_releaseCaller->setUnique(true);
+	m_callEventOccurrence_Operation_releaseCaller->setOrdered(true);
+	
+	
+	m_callEventOccurrence_Operation_setOutputParameterValues_ParameterValue->setEType(nullptr);
+	m_callEventOccurrence_Operation_setOutputParameterValues_ParameterValue->setName("setOutputParameterValues");
+	m_callEventOccurrence_Operation_setOutputParameterValues_ParameterValue->setLowerBound(0);
+	m_callEventOccurrence_Operation_setOutputParameterValues_ParameterValue->setUpperBound(1);
+	m_callEventOccurrence_Operation_setOutputParameterValues_ParameterValue->setUnique(true);
+	m_callEventOccurrence_Operation_setOutputParameterValues_ParameterValue->setOrdered(true);
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_callEventOccurrence_Operation_setOutputParameterValues_ParameterValue);
+		parameter->setName("parameterValues");
+		parameter->setEType(nullptr);
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
 	
 	
 }

@@ -32,6 +32,7 @@ namespace uml
 	class AddStructuralFeatureValueAction;
 	class AddVariableValueAction;
 	class AnyReceiveEvent;
+	class Argument;
 	class Artifact;
 	class Association;
 	class AssociationClass;
@@ -262,6 +263,341 @@ namespace uml
 	class UmlPackage;
 }
 
+namespace uml 
+{
+	class Component;
+}
+
+namespace uml 
+{
+	class Action;
+}
+
+namespace uml 
+{
+	class Action;
+}
+
+namespace uml 
+{
+	class Activity;
+}
+
+namespace uml 
+{
+	class Activity;
+}
+
+namespace uml 
+{
+	class Activity;
+}
+
+namespace uml 
+{
+	class Package;
+}
+
+namespace uml 
+{
+	class Property;
+}
+
+namespace uml 
+{
+	class Behavior;
+}
+
+namespace uml 
+{
+	class BehavioredClassifier;
+}
+
+namespace uml 
+{
+	class TemplateableElement;
+}
+
+namespace uml 
+{
+	class CallAction;
+}
+
+namespace uml 
+{
+	class CallOperationAction;
+}
+
+namespace uml 
+{
+	class Class;
+}
+
+namespace uml 
+{
+	class Class;
+}
+
+namespace uml 
+{
+	class Region;
+}
+
+namespace uml 
+{
+	class Region;
+}
+
+namespace uml 
+{
+	class Namespace;
+}
+
+namespace uml 
+{
+	class DataType;
+}
+
+namespace uml 
+{
+	class DataType;
+}
+
+namespace uml 
+{
+	class Deployment;
+}
+
+namespace uml 
+{
+	class Interaction;
+}
+
+namespace uml 
+{
+	class InteractionOperand;
+}
+
+namespace uml 
+{
+	class Enumeration;
+}
+
+namespace uml 
+{
+	class UseCase;
+}
+
+namespace uml 
+{
+	class BehavioredClassifier;
+}
+
+namespace uml 
+{
+	class Namespace;
+}
+
+namespace uml 
+{
+	class Namespace;
+}
+
+namespace uml 
+{
+	class Activity;
+}
+
+namespace uml 
+{
+	class StructuredActivityNode;
+}
+
+namespace uml 
+{
+	class StructuredActivityNode;
+}
+
+namespace uml 
+{
+	class UseCase;
+}
+
+namespace uml 
+{
+	class Interaction;
+}
+
+namespace uml 
+{
+	class Interaction;
+}
+
+namespace uml 
+{
+	class Interface;
+}
+
+namespace uml 
+{
+	class Interface;
+}
+
+namespace uml 
+{
+	class InvocationAction;
+}
+
+namespace uml 
+{
+	class DeploymentTarget;
+}
+
+namespace uml 
+{
+	class Namespace;
+}
+
+namespace uml 
+{
+	class Package;
+}
+
+namespace uml 
+{
+	class Operation;
+}
+
+namespace uml 
+{
+	class Element;
+}
+
+namespace uml 
+{
+	class Association;
+}
+
+namespace uml 
+{
+	class StringExpression;
+}
+
+namespace uml 
+{
+	class InstanceSpecification;
+}
+
+namespace uml 
+{
+	class Package;
+}
+
+namespace uml 
+{
+	class Slot;
+}
+
+namespace uml 
+{
+	class TemplateParameter;
+}
+
+namespace uml 
+{
+	class Package;
+}
+
+namespace uml 
+{
+	class ExecutableNode;
+}
+
+namespace uml 
+{
+	class Package;
+}
+
+namespace uml 
+{
+	class StructuredActivityNode;
+}
+
+namespace uml 
+{
+	class TemplateSignature;
+}
+
+namespace uml 
+{
+	class Classifier;
+}
+
+namespace uml 
+{
+	class ProtocolStateMachine;
+}
+
+namespace uml 
+{
+	class State;
+}
+
+namespace uml 
+{
+	class State;
+}
+
+namespace uml 
+{
+	class State;
+}
+
+namespace uml 
+{
+	class StateMachine;
+}
+
+namespace uml 
+{
+	class StateMachine;
+}
+
+namespace uml 
+{
+	class StructuralFeatureAction;
+}
+
+namespace uml 
+{
+	class Classifier;
+}
+
+namespace uml 
+{
+	class ActivityGroup;
+}
+
+namespace uml 
+{
+	class ActivityPartition;
+}
+
+namespace uml 
+{
+	class TemplateableElement;
+}
+
+namespace uml 
+{
+	class TemplateBinding;
+}
+
+namespace uml 
+{
+	class UseCase;
+}
+
 
 namespace uml 
 {
@@ -429,6 +765,8 @@ namespace uml
 			virtual std::shared_ptr<AnyReceiveEvent> createAnyReceiveEvent_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage, const int metaElementID=-1) const = 0;
 			//Add containing object
 			virtual std::shared_ptr<AnyReceiveEvent> createAnyReceiveEvent_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter, const int metaElementID=-1) const = 0;
+			
+			virtual std::shared_ptr<Argument> createArgument(const int metaElementID=-1) const = 0;
 			
 			virtual std::shared_ptr<Artifact> createArtifact(const int metaElementID=-1) const = 0;
 			//Add containing object

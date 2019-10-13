@@ -33,6 +33,12 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -362,7 +368,7 @@ Any RedefinableTemplateSignatureImpl::eGet(int featureID, bool resolve, bool cor
 	switch(featureID)
 	{
 		case UmlPackage::REDEFINABLETEMPLATESIGNATURE_ATTRIBUTE_CLASSIFIER:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getClassifier())); //20517
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getClassifier())); //20617
 		case UmlPackage::REDEFINABLETEMPLATESIGNATURE_ATTRIBUTE_EXTENDEDSIGNATURE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -371,8 +377,9 @@ Any RedefinableTemplateSignatureImpl::eGet(int featureID, bool resolve, bool cor
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //20515
+			return eAny(tempList); //20615
 		}
 		case UmlPackage::REDEFINABLETEMPLATESIGNATURE_ATTRIBUTE_INHERITEDPARAMETER:
 		{
@@ -382,8 +389,9 @@ Any RedefinableTemplateSignatureImpl::eGet(int featureID, bool resolve, bool cor
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //20516
+			return eAny(tempList); //20616
 		}
 	}
 	Any result;
@@ -400,11 +408,11 @@ bool RedefinableTemplateSignatureImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::REDEFINABLETEMPLATESIGNATURE_ATTRIBUTE_CLASSIFIER:
-			return getClassifier() != nullptr; //20517
+			return getClassifier() != nullptr; //20617
 		case UmlPackage::REDEFINABLETEMPLATESIGNATURE_ATTRIBUTE_EXTENDEDSIGNATURE:
-			return getExtendedSignature() != nullptr; //20515
+			return getExtendedSignature() != nullptr; //20615
 		case UmlPackage::REDEFINABLETEMPLATESIGNATURE_ATTRIBUTE_INHERITEDPARAMETER:
-			return getInheritedParameter() != nullptr; //20516
+			return getInheritedParameter() != nullptr; //20616
 	}
 	bool result = false;
 	result = RedefinableElementImpl::internalEIsSet(featureID);

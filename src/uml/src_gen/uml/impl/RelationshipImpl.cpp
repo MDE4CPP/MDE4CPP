@@ -18,6 +18,7 @@
 #include <iostream>
 #include <sstream>
 
+#include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/Union.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -28,6 +29,8 @@
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
 
@@ -192,8 +195,9 @@ Any RelationshipImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //2083
+			return eAny(tempList); //2093
 		}
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
@@ -203,7 +207,7 @@ bool RelationshipImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::RELATIONSHIP_ATTRIBUTE_RELATEDELEMENT:
-			return getRelatedElement() != nullptr; //2083
+			return getRelatedElement() != nullptr; //2093
 	}
 	return ElementImpl::internalEIsSet(featureID);
 }

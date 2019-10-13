@@ -33,6 +33,14 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -462,11 +470,11 @@ Any ReadLinkObjectEndActionImpl::eGet(int featureID, bool resolve, bool coreType
 	switch(featureID)
 	{
 		case UmlPackage::READLINKOBJECTENDACTION_ATTRIBUTE_END:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEnd())); //19627
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEnd())); //19727
 		case UmlPackage::READLINKOBJECTENDACTION_ATTRIBUTE_OBJECT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getObject())); //19628
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getObject())); //19728
 		case UmlPackage::READLINKOBJECTENDACTION_ATTRIBUTE_RESULT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getResult())); //19629
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getResult())); //19729
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -475,11 +483,11 @@ bool ReadLinkObjectEndActionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::READLINKOBJECTENDACTION_ATTRIBUTE_END:
-			return getEnd() != nullptr; //19627
+			return getEnd() != nullptr; //19727
 		case UmlPackage::READLINKOBJECTENDACTION_ATTRIBUTE_OBJECT:
-			return getObject() != nullptr; //19628
+			return getObject() != nullptr; //19728
 		case UmlPackage::READLINKOBJECTENDACTION_ATTRIBUTE_RESULT:
-			return getResult() != nullptr; //19629
+			return getResult() != nullptr; //19729
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }
@@ -492,7 +500,7 @@ bool ReadLinkObjectEndActionImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Property> _end = std::dynamic_pointer_cast<uml::Property>(_temp);
-			setEnd(_end); //19627
+			setEnd(_end); //19727
 			return true;
 		}
 		case UmlPackage::READLINKOBJECTENDACTION_ATTRIBUTE_OBJECT:
@@ -500,7 +508,7 @@ bool ReadLinkObjectEndActionImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::InputPin> _object = std::dynamic_pointer_cast<uml::InputPin>(_temp);
-			setObject(_object); //19628
+			setObject(_object); //19728
 			return true;
 		}
 		case UmlPackage::READLINKOBJECTENDACTION_ATTRIBUTE_RESULT:
@@ -508,7 +516,7 @@ bool ReadLinkObjectEndActionImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::OutputPin> _result = std::dynamic_pointer_cast<uml::OutputPin>(_temp);
-			setResult(_result); //19629
+			setResult(_result); //19729
 			return true;
 		}
 	}

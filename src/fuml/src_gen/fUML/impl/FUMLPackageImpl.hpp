@@ -26,6 +26,9 @@ namespace fUML
 	class BooleanValue;
 	class CallActionActivation;
 	class CallBehaviorActionActivation;
+	class CallEventBehavior;
+	class CallEventExecution;
+	class CallEventOccurrence;
 	class CallOperationActionActivation;
 	class CentralBufferNodeActivation;
 	class ChoiceStrategy;
@@ -376,6 +379,53 @@ namespace fUML
 			virtual std::shared_ptr<ecore::EOperation> getCallBehaviorActionActivation_Operation_getCallExecution() const ;
 			
 			// End Class CallBehaviorActionActivation
+
+			// Begin Class CallEventBehavior
+			//Class and Feature Getter
+			virtual std::shared_ptr<ecore::EClass> getCallEventBehavior_Class() const ;
+			
+			
+			
+			virtual std::shared_ptr<ecore::EOperation> getCallEventBehavior_Operation_operation() const ;
+			
+			// End Class CallEventBehavior
+
+			// Begin Class CallEventExecution
+			//Class and Feature Getter
+			virtual std::shared_ptr<ecore::EClass> getCallEventExecution_Class() const ;
+			
+			virtual std::shared_ptr<ecore::EAttribute> getCallEventExecution_Attribute_callerSuspended() const ;
+			
+			
+			virtual std::shared_ptr<ecore::EOperation> getCallEventExecution_Operation_copy() const ;
+			virtual std::shared_ptr<ecore::EOperation> getCallEventExecution_Operation_createEventOccurrence() const ;
+			virtual std::shared_ptr<ecore::EOperation> getCallEventExecution_Operation_execute() const ;
+			virtual std::shared_ptr<ecore::EOperation> getCallEventExecution_Operation_getInputParameterValues() const ;
+			virtual std::shared_ptr<ecore::EOperation> getCallEventExecution_Operation_getOperation() const ;
+			virtual std::shared_ptr<ecore::EOperation> getCallEventExecution_Operation_isCallerSuspended() const ;
+			virtual std::shared_ptr<ecore::EOperation> getCallEventExecution_Operation_makeCall() const ;
+			virtual std::shared_ptr<ecore::EOperation> getCallEventExecution_Operation_new_() const ;
+			virtual std::shared_ptr<ecore::EOperation> getCallEventExecution_Operation_releaseCaller() const ;
+			virtual std::shared_ptr<ecore::EOperation> getCallEventExecution_Operation_setOutputParameterValues_ParameterValue() const ;
+			virtual std::shared_ptr<ecore::EOperation> getCallEventExecution_Operation_suspendCaller() const ;
+			virtual std::shared_ptr<ecore::EOperation> getCallEventExecution_Operation_wait_() const ;
+			
+			// End Class CallEventExecution
+
+			// Begin Class CallEventOccurrence
+			//Class and Feature Getter
+			virtual std::shared_ptr<ecore::EClass> getCallEventOccurrence_Class() const ;
+			
+			
+			virtual std::shared_ptr<ecore::EReference> getCallEventOccurrence_Attribute_execution() const ;
+			
+			virtual std::shared_ptr<ecore::EOperation> getCallEventOccurrence_Operation_getOperation() const ;
+			virtual std::shared_ptr<ecore::EOperation> getCallEventOccurrence_Operation_getParameterValues() const ;
+			virtual std::shared_ptr<ecore::EOperation> getCallEventOccurrence_Operation_match_Trigger() const ;
+			virtual std::shared_ptr<ecore::EOperation> getCallEventOccurrence_Operation_releaseCaller() const ;
+			virtual std::shared_ptr<ecore::EOperation> getCallEventOccurrence_Operation_setOutputParameterValues_ParameterValue() const ;
+			
+			// End Class CallEventOccurrence
 
 			// Begin Class CallOperationActionActivation
 			//Class and Feature Getter
@@ -1609,6 +1659,9 @@ namespace fUML
 			std::shared_ptr<ecore::EClass> m_booleanValue_Class = nullptr;
 			std::shared_ptr<ecore::EClass> m_callActionActivation_Class = nullptr;
 			std::shared_ptr<ecore::EClass> m_callBehaviorActionActivation_Class = nullptr;
+			std::shared_ptr<ecore::EClass> m_callEventBehavior_Class = nullptr;
+			std::shared_ptr<ecore::EClass> m_callEventExecution_Class = nullptr;
+			std::shared_ptr<ecore::EClass> m_callEventOccurrence_Class = nullptr;
 			std::shared_ptr<ecore::EClass> m_callOperationActionActivation_Class = nullptr;
 			std::shared_ptr<ecore::EClass> m_centralBufferNodeActivation_Class = nullptr;
 			std::shared_ptr<ecore::EClass> m_choiceStrategy_Class = nullptr;
@@ -1714,6 +1767,7 @@ namespace fUML
 			
 			
 			std::shared_ptr<ecore::EAttribute> m_forkedToken_Attribute_baseTokenIsWithdrawn = nullptr;
+			std::shared_ptr<ecore::EAttribute> m_callEventExecution_Attribute_callerSuspended = nullptr;
 			std::shared_ptr<ecore::EAttribute> m_actionActivation_Attribute_firing = nullptr;
 			std::shared_ptr<ecore::EAttribute> m_objectNodeActivation_Attribute_offeredTokenCount = nullptr;
 			std::shared_ptr<ecore::EAttribute> m_featureValue_Attribute_position = nullptr;
@@ -1751,6 +1805,7 @@ namespace fUML
 			std::shared_ptr<ecore::EReference> m_acceptEventActionActivation_Attribute_eventAccepter = nullptr;
 			std::shared_ptr<ecore::EReference> m_objectActivation_Attribute_eventPool = nullptr;
 			std::shared_ptr<ecore::EReference> m_classifierBehaviorExecution_Attribute_execution = nullptr;
+			std::shared_ptr<ecore::EReference> m_callEventOccurrence_Attribute_execution = nullptr;
 			std::shared_ptr<ecore::EReference> m_locus_Attribute_executor = nullptr;
 			std::shared_ptr<ecore::EReference> m_locus_Attribute_extensionalValues = nullptr;
 			std::shared_ptr<ecore::EReference> m_locus_Attribute_factory = nullptr;
@@ -1845,6 +1900,7 @@ namespace fUML
 			std::shared_ptr<ecore::EOperation> m_structuredActivityNodeActivation_Operation_completeAction = nullptr;
 			std::shared_ptr<ecore::EOperation> m_actionActivation_Operation_completeAction = nullptr;
 			std::shared_ptr<ecore::EOperation> m_locus_Operation_conforms_Classifier_Classifier = nullptr;
+			std::shared_ptr<ecore::EOperation> m_callEventExecution_Operation_copy = nullptr;
 			std::shared_ptr<ecore::EOperation> m_offer_Operation_countOfferedVales = nullptr;
 			std::shared_ptr<ecore::EOperation> m_activityEdgeInstance_Operation_countOfferedValue = nullptr;
 			std::shared_ptr<ecore::EOperation> m_objectNodeActivation_Operation_countOfferedValues = nullptr;
@@ -1853,6 +1909,7 @@ namespace fUML
 			std::shared_ptr<ecore::EOperation> m_activityNodeActivation_Operation_createEdgeInstances = nullptr;
 			std::shared_ptr<ecore::EOperation> m_structuredActivityNodeActivation_Operation_createEdgeInstances = nullptr;
 			std::shared_ptr<ecore::EOperation> m_executionFactory_Operation_createEvaluation_ValueSpecification = nullptr;
+			std::shared_ptr<ecore::EOperation> m_callEventExecution_Operation_createEventOccurrence = nullptr;
 			std::shared_ptr<ecore::EOperation> m_executionFactory_Operation_createExecution_Behavior_Object = nullptr;
 			std::shared_ptr<ecore::EOperation> m_structuredValue_Operation_createFeatureValues = nullptr;
 			std::shared_ptr<ecore::EOperation> m_activityNodeActivationGroup_Operation_createNodeActivation_ActivityNode = nullptr;
@@ -1908,6 +1965,7 @@ namespace fUML
 			std::shared_ptr<ecore::EOperation> m_opaqueBehaviorExecution_Operation_execute = nullptr;
 			std::shared_ptr<ecore::EOperation> m_classifierBehaviorExecution_Operation_execute_Class_ParameterValue = nullptr;
 			std::shared_ptr<ecore::EOperation> m_activityExecution_Operation_execute = nullptr;
+			std::shared_ptr<ecore::EOperation> m_callEventExecution_Operation_execute = nullptr;
 			std::shared_ptr<ecore::EOperation> m_decisionNodeActivation_Operation_executeDecisionInputBehavior_Value_Value = nullptr;
 			std::shared_ptr<ecore::EOperation> m_activityNodeActivation_Operation_fire_Token = nullptr;
 			std::shared_ptr<ecore::EOperation> m_activityParameterNodeActivation_Operation_fire_Token = nullptr;
@@ -1936,16 +1994,20 @@ namespace fUML
 			std::shared_ptr<ecore::EOperation> m_activityNodeActivation_Operation_getExecutionLocus = nullptr;
 			std::shared_ptr<ecore::EOperation> m_expansionRegionActivation_Operation_getExpansionNodeActivation_ExpansionNode = nullptr;
 			std::shared_ptr<ecore::EOperation> m_expansionNodeActivation_Operation_getExpansionRegionActivation = nullptr;
+			std::shared_ptr<ecore::EOperation> m_callEventExecution_Operation_getInputParameterValues = nullptr;
 			std::shared_ptr<ecore::EOperation> m_structuralFeatureActionActivation_Operation_getMatchingLinks_Association_Value = nullptr;
 			std::shared_ptr<ecore::EOperation> m_activityNodeActivationGroup_Operation_getNodeActivation_ActivityNode = nullptr;
 			std::shared_ptr<ecore::EOperation> m_activityNodeActivation_Operation_getNodeActivation_ActivityNode = nullptr;
 			std::shared_ptr<ecore::EOperation> m_structuredActivityNodeActivation_Operation_getNodeActivation_ActivityNode = nullptr;
 			std::shared_ptr<ecore::EOperation> m_activityEdgeInstance_Operation_getOfferedTokens = nullptr;
+			std::shared_ptr<ecore::EOperation> m_callEventExecution_Operation_getOperation = nullptr;
+			std::shared_ptr<ecore::EOperation> m_callEventOccurrence_Operation_getOperation = nullptr;
 			std::shared_ptr<ecore::EOperation> m_structuralFeatureActionActivation_Operation_getOppositeEnd_Association_StructuralFeature = nullptr;
 			std::shared_ptr<ecore::EOperation> m_link_Operation_getOtherFeatureValues_ExtensionalValue_Property = nullptr;
 			std::shared_ptr<ecore::EOperation> m_activityNodeActivationGroup_Operation_getOutputParameterNodeActivations = nullptr;
 			std::shared_ptr<ecore::EOperation> m_execution_Operation_getOutputParameterValues = nullptr;
 			std::shared_ptr<ecore::EOperation> m_execution_Operation_getParameterValue_Parameter = nullptr;
+			std::shared_ptr<ecore::EOperation> m_callEventOccurrence_Operation_getParameterValues = nullptr;
 			std::shared_ptr<ecore::EOperation> m_structuredActivityNodeActivation_Operation_getPinValues_OutputPin = nullptr;
 			std::shared_ptr<ecore::EOperation> m_clauseActivation_Operation_getPredecessors = nullptr;
 			std::shared_ptr<ecore::EOperation> m_activityNodeActivation_Operation_getRunning = nullptr;
@@ -1978,6 +2040,7 @@ namespace fUML
 			std::shared_ptr<ecore::EOperation> m_executionFactoryL1_Operation_instantiateVisitor_Element = nullptr;
 			std::shared_ptr<ecore::EOperation> m_executionFactoryL2_Operation_instantiateVisitor_Element = nullptr;
 			std::shared_ptr<ecore::EOperation> m_executionFactoryL3_Operation_instantiateVisitor_Element = nullptr;
+			std::shared_ptr<ecore::EOperation> m_callEventExecution_Operation_isCallerSuspended = nullptr;
 			std::shared_ptr<ecore::EOperation> m_token_Operation_isControl = nullptr;
 			std::shared_ptr<ecore::EOperation> m_objectToken_Operation_isControl = nullptr;
 			std::shared_ptr<ecore::EOperation> m_forkedToken_Operation_isControl = nullptr;
@@ -1998,18 +2061,22 @@ namespace fUML
 			std::shared_ptr<ecore::EOperation> m_linkActionActivation_Operation_linkMatchesEndData_Link_LinkEndData = nullptr;
 			std::shared_ptr<ecore::EOperation> m_structuredActivityNodeActivation_Operation_makeActivityNodeList_ExecutableNode = nullptr;
 			std::shared_ptr<ecore::EOperation> m_actionActivation_Operation_makeBooleanValue_EBoolean = nullptr;
+			std::shared_ptr<ecore::EOperation> m_callEventExecution_Operation_makeCall = nullptr;
 			std::shared_ptr<ecore::EOperation> m_loopNodeActivation_Operation_makeLoopVariableList = nullptr;
 			std::shared_ptr<ecore::EOperation> m_eventAccepter_Operation_match_SignalInstance = nullptr;
 			std::shared_ptr<ecore::EOperation> m_acceptEventActionActivation_Operation_match_SignalInstance = nullptr;
+			std::shared_ptr<ecore::EOperation> m_callEventOccurrence_Operation_match_Trigger = nullptr;
 			std::shared_ptr<ecore::EOperation> m_reference_Operation_new_ = nullptr;
 			std::shared_ptr<ecore::EOperation> m_enumerationValue_Operation_new_ = nullptr;
 			std::shared_ptr<ecore::EOperation> m_dataValue_Operation_new_ = nullptr;
 			std::shared_ptr<ecore::EOperation> m_object_Operation_new_ = nullptr;
 			std::shared_ptr<ecore::EOperation> m_execution_Operation_new_ = nullptr;
 			std::shared_ptr<ecore::EOperation> m_activityExecution_Operation_new_ = nullptr;
+			std::shared_ptr<ecore::EOperation> m_callEventExecution_Operation_new_ = nullptr;
 			std::shared_ptr<ecore::EOperation> m_expansionRegionActivation_Operation_numberOfValues = nullptr;
 			std::shared_ptr<ecore::EOperation> m_value_Operation_objectId = nullptr;
 			std::shared_ptr<ecore::EOperation> m_destroyObjectActionActivation_Operation_objectIsComposite_Reference_Link = nullptr;
+			std::shared_ptr<ecore::EOperation> m_callEventBehavior_Operation_operation = nullptr;
 			std::shared_ptr<ecore::EOperation> m_redefinitionBasedDispatchStrategy_Operation_operationsMatch_Operation_Operation = nullptr;
 			std::shared_ptr<ecore::EOperation> m_writeStructuralFeatureActionActivation_Operation_position_Value_EInt = nullptr;
 			std::shared_ptr<ecore::EOperation> m_structuredActivityNodeActivation_Operation_putPinValues_OutputPin_Value = nullptr;
@@ -2018,6 +2085,8 @@ namespace fUML
 			std::shared_ptr<ecore::EOperation> m_clauseActivation_Operation_recieveControl = nullptr;
 			std::shared_ptr<ecore::EOperation> m_activityNodeActivation_Operation_recieveOffer = nullptr;
 			std::shared_ptr<ecore::EOperation> m_inputPinActivation_Operation_recieveOffer = nullptr;
+			std::shared_ptr<ecore::EOperation> m_callEventExecution_Operation_releaseCaller = nullptr;
+			std::shared_ptr<ecore::EOperation> m_callEventOccurrence_Operation_releaseCaller = nullptr;
 			std::shared_ptr<ecore::EOperation> m_locus_Operation_remove_ExtensionalValue = nullptr;
 			std::shared_ptr<ecore::EOperation> m_callActionActivation_Operation_removeCallExecution_Execution = nullptr;
 			std::shared_ptr<ecore::EOperation> m_compoundValue_Operation_removeFeatureValues_Classifier = nullptr;
@@ -2069,6 +2138,8 @@ namespace fUML
 			std::shared_ptr<ecore::EOperation> m_objectNodeActivation_Operation_sendOffers_Token = nullptr;
 			std::shared_ptr<ecore::EOperation> m_actionActivation_Operation_sendOffers = nullptr;
 			std::shared_ptr<ecore::EOperation> m_objectNodeActivation_Operation_sendUnofferedTokens = nullptr;
+			std::shared_ptr<ecore::EOperation> m_callEventExecution_Operation_setOutputParameterValues_ParameterValue = nullptr;
+			std::shared_ptr<ecore::EOperation> m_callEventOccurrence_Operation_setOutputParameterValues_ParameterValue = nullptr;
 			std::shared_ptr<ecore::EOperation> m_execution_Operation_setParameterValue_ParameterValue = nullptr;
 			std::shared_ptr<ecore::EOperation> m_extensionalValueList_Operation_setValue_ExtensionalValue_EInt = nullptr;
 			std::shared_ptr<ecore::EOperation> m_value_Operation_specify = nullptr;
@@ -2086,6 +2157,7 @@ namespace fUML
 			std::shared_ptr<ecore::EOperation> m_objectActivation_Operation_stop = nullptr;
 			std::shared_ptr<ecore::EOperation> m_activityNodeActivationGroup_Operation_suspend_ActivityNodeActivation = nullptr;
 			std::shared_ptr<ecore::EOperation> m_activityNodeActivation_Operation_suspend = nullptr;
+			std::shared_ptr<ecore::EOperation> m_callEventExecution_Operation_suspendCaller = nullptr;
 			std::shared_ptr<ecore::EOperation> m_activityEdgeInstance_Operation_takeOfferedTokens = nullptr;
 			std::shared_ptr<ecore::EOperation> m_activityEdgeInstance_Operation_takeOfferedTokens_EInt = nullptr;
 			std::shared_ptr<ecore::EOperation> m_activityNodeActivation_Operation_takeOfferedTokens = nullptr;
@@ -2121,6 +2193,7 @@ namespace fUML
 			std::shared_ptr<ecore::EOperation> m_object_Operation_unregister_EventAccepter = nullptr;
 			std::shared_ptr<ecore::EOperation> m_objectActivation_Operation_unregister_EventAccepter = nullptr;
 			std::shared_ptr<ecore::EOperation> m_actionActivation_Operation_valueParticipatesInLink_Value_Link = nullptr;
+			std::shared_ptr<ecore::EOperation> m_callEventExecution_Operation_wait_ = nullptr;
 			std::shared_ptr<ecore::EOperation> m_token_Operation_withdraw = nullptr;
 			std::shared_ptr<ecore::EOperation> m_forkedToken_Operation_withdraw = nullptr;
 			
@@ -2152,6 +2225,9 @@ namespace fUML
 			void createBooleanValueContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
 			void createCallActionActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
 			void createCallBehaviorActionActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
+			void createCallEventBehaviorContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
+			void createCallEventExecutionContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
+			void createCallEventOccurrenceContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
 			void createCallOperationActionActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
 			void createCentralBufferNodeActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
 			void createChoiceStrategyContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
@@ -2269,6 +2345,9 @@ namespace fUML
 			void initializeBooleanValueContent();
 			void initializeCallActionActivationContent();
 			void initializeCallBehaviorActionActivationContent();
+			void initializeCallEventBehaviorContent();
+			void initializeCallEventExecutionContent();
+			void initializeCallEventOccurrenceContent();
 			void initializeCallOperationActionActivationContent();
 			void initializeCentralBufferNodeActivationContent();
 			void initializeChoiceStrategyContent();

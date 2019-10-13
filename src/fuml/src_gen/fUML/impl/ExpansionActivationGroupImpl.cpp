@@ -30,6 +30,10 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "fUML/FUMLFactory.hpp"
 #include "fUML/FUMLPackage.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -213,7 +217,7 @@ Any ExpansionActivationGroupImpl::eGet(int featureID, bool resolve, bool coreTyp
 	switch(featureID)
 	{
 		case FUMLPackage::EXPANSIONACTIVATIONGROUP_ATTRIBUTE_REGIONACTIVATION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getRegionActivation())); //465
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getRegionActivation())); //495
 	}
 	return ActivityNodeActivationGroupImpl::eGet(featureID, resolve, coreType);
 }
@@ -222,7 +226,7 @@ bool ExpansionActivationGroupImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case FUMLPackage::EXPANSIONACTIVATIONGROUP_ATTRIBUTE_REGIONACTIVATION:
-			return getRegionActivation() != nullptr; //465
+			return getRegionActivation() != nullptr; //495
 	}
 	return ActivityNodeActivationGroupImpl::internalEIsSet(featureID);
 }
@@ -235,7 +239,7 @@ bool ExpansionActivationGroupImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<fUML::ExpansionRegionActivation> _regionActivation = std::dynamic_pointer_cast<fUML::ExpansionRegionActivation>(_temp);
-			setRegionActivation(_regionActivation); //465
+			setRegionActivation(_regionActivation); //495
 			return true;
 		}
 	}

@@ -33,6 +33,22 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -913,8 +929,9 @@ Any InteractionImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //11967
+			return eAny(tempList); //12067
 		}
 		case UmlPackage::INTERACTION_ATTRIBUTE_FORMALGATE:
 		{
@@ -924,8 +941,9 @@ Any InteractionImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //11968
+			return eAny(tempList); //12068
 		}
 		case UmlPackage::INTERACTION_ATTRIBUTE_FRAGMENT:
 		{
@@ -935,8 +953,9 @@ Any InteractionImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //11966
+			return eAny(tempList); //12066
 		}
 		case UmlPackage::INTERACTION_ATTRIBUTE_LIFELINE:
 		{
@@ -946,8 +965,9 @@ Any InteractionImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //11965
+			return eAny(tempList); //12065
 		}
 		case UmlPackage::INTERACTION_ATTRIBUTE_MESSAGE:
 		{
@@ -957,8 +977,9 @@ Any InteractionImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //11969
+			return eAny(tempList); //12069
 		}
 	}
 	Any result;
@@ -975,15 +996,15 @@ bool InteractionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::INTERACTION_ATTRIBUTE_ACTION:
-			return getAction() != nullptr; //11967
+			return getAction() != nullptr; //12067
 		case UmlPackage::INTERACTION_ATTRIBUTE_FORMALGATE:
-			return getFormalGate() != nullptr; //11968
+			return getFormalGate() != nullptr; //12068
 		case UmlPackage::INTERACTION_ATTRIBUTE_FRAGMENT:
-			return getFragment() != nullptr; //11966
+			return getFragment() != nullptr; //12066
 		case UmlPackage::INTERACTION_ATTRIBUTE_LIFELINE:
-			return getLifeline() != nullptr; //11965
+			return getLifeline() != nullptr; //12065
 		case UmlPackage::INTERACTION_ATTRIBUTE_MESSAGE:
-			return getMessage() != nullptr; //11969
+			return getMessage() != nullptr; //12069
 	}
 	bool result = false;
 	result = BehaviorImpl::internalEIsSet(featureID);

@@ -32,6 +32,12 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -271,8 +277,9 @@ Any ConnectableElementImpl::eGet(int featureID, bool resolve, bool coreType) con
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //5012
+			return eAny(tempList); //5112
 		}
 	}
 	Any result;
@@ -289,7 +296,7 @@ bool ConnectableElementImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::CONNECTABLEELEMENT_ATTRIBUTE_END:
-			return getEnd() != nullptr; //5012
+			return getEnd() != nullptr; //5112
 	}
 	bool result = false;
 	result = ParameterableElementImpl::internalEIsSet(featureID);

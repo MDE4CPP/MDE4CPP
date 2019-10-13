@@ -33,6 +33,14 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -412,9 +420,9 @@ Any ValueSpecificationActionImpl::eGet(int featureID, bool resolve, bool coreTyp
 	switch(featureID)
 	{
 		case UmlPackage::VALUESPECIFICATIONACTION_ATTRIBUTE_RESULT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getResult())); //25127
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getResult())); //25227
 		case UmlPackage::VALUESPECIFICATIONACTION_ATTRIBUTE_VALUE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getValue())); //25128
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getValue())); //25228
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -423,9 +431,9 @@ bool ValueSpecificationActionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::VALUESPECIFICATIONACTION_ATTRIBUTE_RESULT:
-			return getResult() != nullptr; //25127
+			return getResult() != nullptr; //25227
 		case UmlPackage::VALUESPECIFICATIONACTION_ATTRIBUTE_VALUE:
-			return getValue() != nullptr; //25128
+			return getValue() != nullptr; //25228
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }
@@ -438,7 +446,7 @@ bool ValueSpecificationActionImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::OutputPin> _result = std::dynamic_pointer_cast<uml::OutputPin>(_temp);
-			setResult(_result); //25127
+			setResult(_result); //25227
 			return true;
 		}
 		case UmlPackage::VALUESPECIFICATIONACTION_ATTRIBUTE_VALUE:
@@ -446,7 +454,7 @@ bool ValueSpecificationActionImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ValueSpecification> _value = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
-			setValue(_value); //25128
+			setValue(_value); //25228
 			return true;
 		}
 	}

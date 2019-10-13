@@ -289,7 +289,7 @@ Any ObjectImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case FUMLPackage::OBJECT_ATTRIBUTE_OBJECTACTIVATION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getObjectActivation())); //763
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getObjectActivation())); //793
 		case FUMLPackage::OBJECT_ATTRIBUTE_TYPES:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -298,8 +298,9 @@ Any ObjectImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //762
+			return eAny(tempList); //792
 		}
 	}
 	return ExtensionalValueImpl::eGet(featureID, resolve, coreType);
@@ -309,9 +310,9 @@ bool ObjectImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case FUMLPackage::OBJECT_ATTRIBUTE_OBJECTACTIVATION:
-			return getObjectActivation() != nullptr; //763
+			return getObjectActivation() != nullptr; //793
 		case FUMLPackage::OBJECT_ATTRIBUTE_TYPES:
-			return getTypes() != nullptr; //762
+			return getTypes() != nullptr; //792
 	}
 	return ExtensionalValueImpl::internalEIsSet(featureID);
 }
@@ -324,7 +325,7 @@ bool ObjectImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<fUML::ObjectActivation> _objectActivation = std::dynamic_pointer_cast<fUML::ObjectActivation>(_temp);
-			setObjectActivation(_objectActivation); //763
+			setObjectActivation(_objectActivation); //793
 			return true;
 		}
 		case FUMLPackage::OBJECT_ATTRIBUTE_TYPES:

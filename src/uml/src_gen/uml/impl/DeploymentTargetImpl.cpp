@@ -32,6 +32,10 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -281,8 +285,9 @@ Any DeploymentTargetImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //719
+			return eAny(tempList); //729
 		}
 		case UmlPackage::DEPLOYMENTTARGET_ATTRIBUTE_DEPLOYMENT:
 		{
@@ -292,8 +297,9 @@ Any DeploymentTargetImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //7110
+			return eAny(tempList); //7210
 		}
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
@@ -303,9 +309,9 @@ bool DeploymentTargetImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::DEPLOYMENTTARGET_ATTRIBUTE_DEPLOYEDELEMENT:
-			return getDeployedElement() != nullptr; //719
+			return getDeployedElement() != nullptr; //729
 		case UmlPackage::DEPLOYMENTTARGET_ATTRIBUTE_DEPLOYMENT:
-			return getDeployment() != nullptr; //7110
+			return getDeployment() != nullptr; //7210
 	}
 	return NamedElementImpl::internalEIsSet(featureID);
 }

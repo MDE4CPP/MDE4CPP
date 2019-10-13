@@ -32,6 +32,10 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -268,7 +272,7 @@ Any StructuralFeatureImpl::eGet(int featureID, bool resolve, bool coreType) cons
 	switch(featureID)
 	{
 		case UmlPackage::STRUCTURALFEATURE_ATTRIBUTE_ISREADONLY:
-			return eAny(getIsReadOnly()); //22521
+			return eAny(getIsReadOnly()); //22621
 	}
 	Any result;
 	result = FeatureImpl::eGet(featureID, resolve, coreType);
@@ -289,7 +293,7 @@ bool StructuralFeatureImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::STRUCTURALFEATURE_ATTRIBUTE_ISREADONLY:
-			return getIsReadOnly() != false; //22521
+			return getIsReadOnly() != false; //22621
 	}
 	bool result = false;
 	result = FeatureImpl::internalEIsSet(featureID);
@@ -313,7 +317,7 @@ bool StructuralFeatureImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			bool _isReadOnly = newValue->get<bool>();
-			setIsReadOnly(_isReadOnly); //22521
+			setIsReadOnly(_isReadOnly); //22621
 			return true;
 		}
 	}

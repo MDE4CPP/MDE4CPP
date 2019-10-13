@@ -18,6 +18,7 @@
 #include <iostream>
 #include <sstream>
 
+#include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
@@ -30,6 +31,10 @@
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
 
@@ -174,12 +179,12 @@ std::string ElementImportImpl::getAlias() const
 	return m_alias;
 }
 
-void ElementImportImpl::setVisibility(VisibilityKind _visibility)
+void ElementImportImpl::setVisibility(uml::VisibilityKind _visibility)
 {
 	m_visibility = _visibility;
 } 
 
-VisibilityKind ElementImportImpl::getVisibility() const 
+uml::VisibilityKind ElementImportImpl::getVisibility() const 
 {
 	return m_visibility;
 }
@@ -284,13 +289,13 @@ Any ElementImportImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::ELEMENTIMPORT_ATTRIBUTE_ALIAS:
-			return eAny(getAlias()); //826
+			return eAny(getAlias()); //836
 		case UmlPackage::ELEMENTIMPORT_ATTRIBUTE_IMPORTEDELEMENT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getImportedElement())); //827
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getImportedElement())); //837
 		case UmlPackage::ELEMENTIMPORT_ATTRIBUTE_IMPORTINGNAMESPACE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getImportingNamespace().lock())); //828
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getImportingNamespace().lock())); //838
 		case UmlPackage::ELEMENTIMPORT_ATTRIBUTE_VISIBILITY:
-			return eAny(getVisibility()); //829
+			return eAny(getVisibility()); //839
 	}
 	return DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
 }
@@ -299,13 +304,13 @@ bool ElementImportImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::ELEMENTIMPORT_ATTRIBUTE_ALIAS:
-			return getAlias() != ""; //826
+			return getAlias() != ""; //836
 		case UmlPackage::ELEMENTIMPORT_ATTRIBUTE_IMPORTEDELEMENT:
-			return getImportedElement() != nullptr; //827
+			return getImportedElement() != nullptr; //837
 		case UmlPackage::ELEMENTIMPORT_ATTRIBUTE_IMPORTINGNAMESPACE:
-			return getImportingNamespace().lock() != nullptr; //828
+			return getImportingNamespace().lock() != nullptr; //838
 		case UmlPackage::ELEMENTIMPORT_ATTRIBUTE_VISIBILITY:
-			return m_visibility != VisibilityKind::PUBLIC;; //829
+			return m_visibility != VisibilityKind::PUBLIC;; //839
 	}
 	return DirectedRelationshipImpl::internalEIsSet(featureID);
 }
@@ -317,7 +322,7 @@ bool ElementImportImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::string _alias = newValue->get<std::string>();
-			setAlias(_alias); //826
+			setAlias(_alias); //836
 			return true;
 		}
 		case UmlPackage::ELEMENTIMPORT_ATTRIBUTE_IMPORTEDELEMENT:
@@ -325,7 +330,7 @@ bool ElementImportImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::PackageableElement> _importedElement = std::dynamic_pointer_cast<uml::PackageableElement>(_temp);
-			setImportedElement(_importedElement); //827
+			setImportedElement(_importedElement); //837
 			return true;
 		}
 		case UmlPackage::ELEMENTIMPORT_ATTRIBUTE_IMPORTINGNAMESPACE:
@@ -333,14 +338,14 @@ bool ElementImportImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Namespace> _importingNamespace = std::dynamic_pointer_cast<uml::Namespace>(_temp);
-			setImportingNamespace(_importingNamespace); //828
+			setImportingNamespace(_importingNamespace); //838
 			return true;
 		}
 		case UmlPackage::ELEMENTIMPORT_ATTRIBUTE_VISIBILITY:
 		{
 			// BOOST CAST
-			VisibilityKind _visibility = newValue->get<VisibilityKind>();
-			setVisibility(_visibility); //829
+			uml::VisibilityKind _visibility = newValue->get<uml::VisibilityKind>();
+			setVisibility(_visibility); //839
 			return true;
 		}
 	}
@@ -386,7 +391,7 @@ void ElementImportImpl::loadAttributes(std::shared_ptr<persistence::interfaces::
 		iter = attr_list.find("visibility");
 		if ( iter != attr_list.end() )
 		{
-			VisibilityKind value = VisibilityKind::PUBLIC;
+			uml::VisibilityKind value = VisibilityKind::PUBLIC;
 			std::string literal = iter->second;
 			if (literal == "public")
 			{
@@ -499,7 +504,7 @@ void ElementImportImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 
 		if ( this->eIsSet(package->getElementImport_Attribute_visibility()) )
 		{
-			VisibilityKind value = this->getVisibility();
+			uml::VisibilityKind value = this->getVisibility();
 			std::string literal = "";
 			if (value == VisibilityKind::PUBLIC)
 			{

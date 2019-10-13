@@ -32,6 +32,10 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "ecore/EcoreFactory.hpp"
 #include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "ecore/EcorePackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -190,7 +194,10 @@ bool EStructuralFeatureImpl::isChangeable() const
 	return m_changeable;
 }
 
-
+void EStructuralFeatureImpl::setDefaultValue(Any _defaultValue)
+{
+	m_defaultValue = _defaultValue;
+} 
 
 Any EStructuralFeatureImpl::getDefaultValue() const 
 {
@@ -345,7 +352,7 @@ bool EStructuralFeatureImpl::internalEIsSet(int featureID) const
 		case EcorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_CHANGEABLE:
 			return isChangeable() != true; //5013
 		case EcorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_DEFAULTVALUE:
-			return !getDefaultValue()->isEmpty(); //5017
+			return getDefaultValue() != nullptr; //5017
 		case EcorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_DEFAULTVALUELITERAL:
 			return getDefaultValueLiteral() != ""; //5016
 		case EcorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_DERIVED:
@@ -372,6 +379,13 @@ bool EStructuralFeatureImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			bool _changeable = newValue->get<bool>();
 			setChangeable(_changeable); //5013
+			return true;
+		}
+		case EcorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_DEFAULTVALUE:
+		{
+			// BOOST CAST
+			Any _defaultValue = newValue->get<Any>();
+			setDefaultValue(_defaultValue); //5017
 			return true;
 		}
 		case EcorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_DEFAULTVALUELITERAL:

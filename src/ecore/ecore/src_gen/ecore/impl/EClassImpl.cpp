@@ -32,6 +32,10 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "ecore/EcoreFactory.hpp"
 #include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "ecore/EcorePackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -650,7 +654,10 @@ std::shared_ptr<ecore::EAttribute > EClassImpl::getEIDAttribute() const
 
     return m_eIDAttribute;
 }
-
+void EClassImpl::setEIDAttribute(std::shared_ptr<ecore::EAttribute> _eIDAttribute)
+{
+    m_eIDAttribute = _eIDAttribute;
+}
 
 std::shared_ptr<Subset<ecore::EOperation, ecore::EObject>> EClassImpl::getEOperations() const
 {
@@ -729,6 +736,7 @@ Any EClassImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
 			return eAny(tempList); //1215
 		}
@@ -740,6 +748,7 @@ Any EClassImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
 			return eAny(tempList); //1219
 		}
@@ -751,6 +760,7 @@ Any EClassImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
 			return eAny(tempList); //1226
 		}
@@ -762,6 +772,7 @@ Any EClassImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
 			return eAny(tempList); //1220
 		}
@@ -773,6 +784,7 @@ Any EClassImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
 			return eAny(tempList); //1216
 		}
@@ -784,6 +796,7 @@ Any EClassImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
 			return eAny(tempList); //1221
 		}
@@ -795,6 +808,7 @@ Any EClassImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
 			return eAny(tempList); //1222
 		}
@@ -806,6 +820,7 @@ Any EClassImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
 			return eAny(tempList); //1218
 		}
@@ -817,6 +832,7 @@ Any EClassImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
 			return eAny(tempList); //1225
 		}
@@ -830,6 +846,7 @@ Any EClassImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
 			return eAny(tempList); //1214
 		}
@@ -841,6 +858,7 @@ Any EClassImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
 			return eAny(tempList); //1217
 		}
@@ -852,6 +870,7 @@ Any EClassImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
 			return eAny(tempList); //1224
 		}
@@ -863,6 +882,7 @@ Any EClassImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
 			return eAny(tempList); //1213
 		}
@@ -921,6 +941,42 @@ bool EClassImpl::eSet(int featureID, Any newValue)
 			setAbstract(_abstract); //1211
 			return true;
 		}
+		case EcorePackage::ECLASS_ATTRIBUTE_EATTRIBUTES:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<ecore::EAttribute>> eAttributesList(new Bag<ecore::EAttribute>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				eAttributesList->add(std::dynamic_pointer_cast<ecore::EAttribute>(*iter));
+				iter++;
+			}
+			
+			Bag<ecore::EAttribute>::iterator iterEAttributes = m_eAttributes->begin();
+			Bag<ecore::EAttribute>::iterator endEAttributes = m_eAttributes->end();
+			while (iterEAttributes != endEAttributes)
+			{
+				if (eAttributesList->find(*iterEAttributes) == -1)
+				{
+					m_eAttributes->erase(*iterEAttributes);
+				}
+				iterEAttributes++;
+			}
+
+			iterEAttributes = eAttributesList->begin();
+			endEAttributes = eAttributesList->end();
+			while (iterEAttributes != endEAttributes)
+			{
+				if (m_eAttributes->find(*iterEAttributes) == -1)
+				{
+					m_eAttributes->add(*iterEAttributes);
+				}
+				iterEAttributes++;			
+			}
+			return true;
+		}
 		case EcorePackage::ECLASS_ATTRIBUTE_EGENERICSUPERTYPES:
 		{
 			// BOOST CAST
@@ -957,6 +1013,14 @@ bool EClassImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
+		case EcorePackage::ECLASS_ATTRIBUTE_EIDATTRIBUTE:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<ecore::EAttribute> _eIDAttribute = std::dynamic_pointer_cast<ecore::EAttribute>(_temp);
+			setEIDAttribute(_eIDAttribute); //1223
+			return true;
+		}
 		case EcorePackage::ECLASS_ATTRIBUTE_EOPERATIONS:
 		{
 			// BOOST CAST
@@ -990,6 +1054,42 @@ bool EClassImpl::eSet(int featureID, Any newValue)
 					m_eOperations->add(*iterEOperations);
 				}
 				iterEOperations++;			
+			}
+			return true;
+		}
+		case EcorePackage::ECLASS_ATTRIBUTE_EREFERENCES:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<ecore::EReference>> eReferencesList(new Bag<ecore::EReference>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				eReferencesList->add(std::dynamic_pointer_cast<ecore::EReference>(*iter));
+				iter++;
+			}
+			
+			Bag<ecore::EReference>::iterator iterEReferences = m_eReferences->begin();
+			Bag<ecore::EReference>::iterator endEReferences = m_eReferences->end();
+			while (iterEReferences != endEReferences)
+			{
+				if (eReferencesList->find(*iterEReferences) == -1)
+				{
+					m_eReferences->erase(*iterEReferences);
+				}
+				iterEReferences++;
+			}
+
+			iterEReferences = eReferencesList->begin();
+			endEReferences = eReferencesList->end();
+			while (iterEReferences != endEReferences)
+			{
+				if (m_eReferences->find(*iterEReferences) == -1)
+				{
+					m_eReferences->add(*iterEReferences);
+				}
+				iterEReferences++;			
 			}
 			return true;
 		}
@@ -1121,6 +1221,27 @@ void EClassImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHa
 			this->setInterface(value);
 		}
 		std::shared_ptr<EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("eAttributes");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("eAttributes")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+
+		iter = attr_list.find("eIDAttribute");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("eIDAttribute")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+
+		iter = attr_list.find("eReferences");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("eReferences")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+
 		iter = attr_list.find("eSuperTypes");
 		if ( iter != attr_list.end() )
 		{
@@ -1209,6 +1330,46 @@ void EClassImpl::resolveReferences(const int featureID, std::list<std::shared_pt
 {
 	switch(featureID)
 	{
+		case EcorePackage::ECLASS_ATTRIBUTE_EATTRIBUTES:
+		{
+			std::shared_ptr<Bag<ecore::EAttribute>> _eAttributes = getEAttributes();
+			for(std::shared_ptr<ecore::EObject> ref : references)
+			{
+				std::shared_ptr<ecore::EAttribute> _r = std::dynamic_pointer_cast<ecore::EAttribute>(ref);
+				if (_r != nullptr)
+				{
+					_eAttributes->push_back(_r);
+				}				
+			}
+			return;
+		}
+
+		case EcorePackage::ECLASS_ATTRIBUTE_EIDATTRIBUTE:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<ecore::EAttribute> _eIDAttribute = std::dynamic_pointer_cast<ecore::EAttribute>( references.front() );
+				setEIDAttribute(_eIDAttribute);
+			}
+			
+			return;
+		}
+
+		case EcorePackage::ECLASS_ATTRIBUTE_EREFERENCES:
+		{
+			std::shared_ptr<Bag<ecore::EReference>> _eReferences = getEReferences();
+			for(std::shared_ptr<ecore::EObject> ref : references)
+			{
+				std::shared_ptr<ecore::EReference> _r = std::dynamic_pointer_cast<ecore::EReference>(ref);
+				if (_r != nullptr)
+				{
+					_eReferences->push_back(_r);
+				}				
+			}
+			return;
+		}
+
 		case EcorePackage::ECLASS_ATTRIBUTE_ESUPERTYPES:
 		{
 			std::shared_ptr<Bag<ecore::EClass>> _eSuperTypes = getESuperTypes();
@@ -1270,6 +1431,17 @@ void EClassImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandl
 		}
 
 		// Add references
+		std::shared_ptr<Bag<ecore::EAttribute>> eAttributes_list = this->getEAttributes();
+		for (std::shared_ptr<ecore::EAttribute > object : *eAttributes_list)
+		{ 
+			saveHandler->addReferences("eAttributes", object);
+		}
+		saveHandler->addReference("eIDAttribute", this->getEIDAttribute());
+		std::shared_ptr<Bag<ecore::EReference>> eReferences_list = this->getEReferences();
+		for (std::shared_ptr<ecore::EReference > object : *eReferences_list)
+		{ 
+			saveHandler->addReferences("eReferences", object);
+		}
 		std::shared_ptr<Bag<ecore::EClass>> eSuperTypes_list = this->getESuperTypes();
 		for (std::shared_ptr<ecore::EClass > object : *eSuperTypes_list)
 		{ 

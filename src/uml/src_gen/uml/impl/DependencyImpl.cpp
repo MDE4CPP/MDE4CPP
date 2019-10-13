@@ -32,6 +32,14 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -347,8 +355,9 @@ Any DependencyImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //6715
+			return eAny(tempList); //6815
 		}
 		case UmlPackage::DEPENDENCY_ATTRIBUTE_SUPPLIER:
 		{
@@ -358,8 +367,9 @@ Any DependencyImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //6716
+			return eAny(tempList); //6816
 		}
 	}
 	Any result;
@@ -376,9 +386,9 @@ bool DependencyImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::DEPENDENCY_ATTRIBUTE_CLIENT:
-			return getClient() != nullptr; //6715
+			return getClient() != nullptr; //6815
 		case UmlPackage::DEPENDENCY_ATTRIBUTE_SUPPLIER:
-			return getSupplier() != nullptr; //6716
+			return getSupplier() != nullptr; //6816
 	}
 	bool result = false;
 	result = DirectedRelationshipImpl::internalEIsSet(featureID);

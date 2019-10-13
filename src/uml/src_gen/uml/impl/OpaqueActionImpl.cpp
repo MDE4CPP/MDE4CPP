@@ -33,6 +33,14 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -456,7 +464,7 @@ Any OpaqueActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::OPAQUEACTION_ATTRIBUTE_BODY:
-			return eAny(getBody()); //16427
+			return eAny(getBody()); //16527
 		case UmlPackage::OPAQUEACTION_ATTRIBUTE_INPUTVALUE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -465,11 +473,12 @@ Any OpaqueActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //16428
+			return eAny(tempList); //16528
 		}
 		case UmlPackage::OPAQUEACTION_ATTRIBUTE_LANGUAGE:
-			return eAny(getLanguage()); //16429
+			return eAny(getLanguage()); //16529
 		case UmlPackage::OPAQUEACTION_ATTRIBUTE_OUTPUTVALUE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -478,8 +487,9 @@ Any OpaqueActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //16430
+			return eAny(tempList); //16530
 		}
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
@@ -489,13 +499,13 @@ bool OpaqueActionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::OPAQUEACTION_ATTRIBUTE_BODY:
-			return !getBody()->empty(); //16427
+			return !getBody()->empty(); //16527
 		case UmlPackage::OPAQUEACTION_ATTRIBUTE_INPUTVALUE:
-			return getInputValue() != nullptr; //16428
+			return getInputValue() != nullptr; //16528
 		case UmlPackage::OPAQUEACTION_ATTRIBUTE_LANGUAGE:
-			return !getLanguage()->empty(); //16429
+			return !getLanguage()->empty(); //16529
 		case UmlPackage::OPAQUEACTION_ATTRIBUTE_OUTPUTVALUE:
-			return getOutputValue() != nullptr; //16430
+			return getOutputValue() != nullptr; //16530
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }

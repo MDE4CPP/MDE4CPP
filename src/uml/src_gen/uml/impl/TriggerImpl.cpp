@@ -33,6 +33,10 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -253,7 +257,7 @@ Any TriggerImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::TRIGGER_ATTRIBUTE_EVENT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEvent())); //2439
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEvent())); //2449
 		case UmlPackage::TRIGGER_ATTRIBUTE_PORT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -262,8 +266,9 @@ Any TriggerImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //24310
+			return eAny(tempList); //24410
 		}
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
@@ -273,9 +278,9 @@ bool TriggerImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::TRIGGER_ATTRIBUTE_EVENT:
-			return getEvent() != nullptr; //2439
+			return getEvent() != nullptr; //2449
 		case UmlPackage::TRIGGER_ATTRIBUTE_PORT:
-			return getPort() != nullptr; //24310
+			return getPort() != nullptr; //24410
 	}
 	return NamedElementImpl::internalEIsSet(featureID);
 }
@@ -288,7 +293,7 @@ bool TriggerImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Event> _event = std::dynamic_pointer_cast<uml::Event>(_temp);
-			setEvent(_event); //2439
+			setEvent(_event); //2449
 			return true;
 		}
 		case UmlPackage::TRIGGER_ATTRIBUTE_PORT:

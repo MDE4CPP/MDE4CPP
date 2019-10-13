@@ -37,6 +37,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "fUML/FUMLFactory.hpp"
 #include "fUML/FUMLPackage.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -437,11 +439,12 @@ Any ExecutionFactoryImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //413
+			return eAny(tempList); //443
 		}
 		case FUMLPackage::EXECUTIONFACTORY_ATTRIBUTE_LOCUS:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getLocus().lock())); //410
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getLocus().lock())); //440
 		case FUMLPackage::EXECUTIONFACTORY_ATTRIBUTE_PRIMITIVEBEHAVIORPROTOTYPES:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -450,8 +453,9 @@ Any ExecutionFactoryImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //412
+			return eAny(tempList); //442
 		}
 		case FUMLPackage::EXECUTIONFACTORY_ATTRIBUTE_STRATEGIES:
 		{
@@ -461,8 +465,9 @@ Any ExecutionFactoryImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //411
+			return eAny(tempList); //441
 		}
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
@@ -472,13 +477,13 @@ bool ExecutionFactoryImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case FUMLPackage::EXECUTIONFACTORY_ATTRIBUTE_BUILTINTYPES:
-			return getBuiltInTypes() != nullptr; //413
+			return getBuiltInTypes() != nullptr; //443
 		case FUMLPackage::EXECUTIONFACTORY_ATTRIBUTE_LOCUS:
-			return getLocus().lock() != nullptr; //410
+			return getLocus().lock() != nullptr; //440
 		case FUMLPackage::EXECUTIONFACTORY_ATTRIBUTE_PRIMITIVEBEHAVIORPROTOTYPES:
-			return getPrimitiveBehaviorPrototypes() != nullptr; //412
+			return getPrimitiveBehaviorPrototypes() != nullptr; //442
 		case FUMLPackage::EXECUTIONFACTORY_ATTRIBUTE_STRATEGIES:
-			return getStrategies() != nullptr; //411
+			return getStrategies() != nullptr; //441
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
@@ -527,7 +532,7 @@ bool ExecutionFactoryImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<fUML::Locus> _locus = std::dynamic_pointer_cast<fUML::Locus>(_temp);
-			setLocus(_locus); //410
+			setLocus(_locus); //440
 			return true;
 		}
 		case FUMLPackage::EXECUTIONFACTORY_ATTRIBUTE_PRIMITIVEBEHAVIORPROTOTYPES:

@@ -486,14 +486,105 @@ namespace fUML
 			// End Class CallBehaviorActionActivation
 
 
+			// Begin Class CallEventBehavior
+			//Class and Feature IDs 
+			static const unsigned int CALLEVENTBEHAVIOR_CLASS = 14;
+			static const unsigned int CALLEVENTBEHAVIOR_CLASS_FEATURE_COUNT = 0;
+			static const unsigned int CALLEVENTBEHAVIOR_CLASS_OPERATION_COUNT = 1;
+			
+			
+			static const int CALLEVENTBEHAVIOR_OPERATION_OPERATION = 1400;
+			
+			//Class and Feature Getter
+			virtual std::shared_ptr<ecore::EClass> getCallEventBehavior_Class() const = 0;
+			
+			
+			
+			virtual std::shared_ptr<ecore::EOperation> getCallEventBehavior_Operation_operation() const = 0;
+			
+			// End Class CallEventBehavior
+
+
+			// Begin Class CallEventExecution
+			//Class and Feature IDs 
+			static const unsigned int CALLEVENTEXECUTION_CLASS = 15;
+			static const unsigned int CALLEVENTEXECUTION_CLASS_FEATURE_COUNT = 7;
+			static const unsigned int CALLEVENTEXECUTION_CLASS_OPERATION_COUNT = 46;
+			static const int CALLEVENTEXECUTION_ATTRIBUTE_CALLERSUSPENDED = 1506;
+			
+			
+			static const int CALLEVENTEXECUTION_OPERATION_COPY = 1541;
+			static const int CALLEVENTEXECUTION_OPERATION_CREATEEVENTOCCURRENCE = 1542;
+			static const int CALLEVENTEXECUTION_OPERATION_EXECUTE = 1543;
+			static const int CALLEVENTEXECUTION_OPERATION_GETINPUTPARAMETERVALUES = 1544;
+			static const int CALLEVENTEXECUTION_OPERATION_GETOPERATION = 1545;
+			static const int CALLEVENTEXECUTION_OPERATION_ISCALLERSUSPENDED = 1546;
+			static const int CALLEVENTEXECUTION_OPERATION_MAKECALL = 1547;
+			static const int CALLEVENTEXECUTION_OPERATION_NEW_ = 1548;
+			static const int CALLEVENTEXECUTION_OPERATION_RELEASECALLER = 1549;
+			static const int CALLEVENTEXECUTION_OPERATION_SETOUTPUTPARAMETERVALUES_PARAMETERVALUE = 1550;
+			static const int CALLEVENTEXECUTION_OPERATION_SUSPENDCALLER = 1551;
+			static const int CALLEVENTEXECUTION_OPERATION_WAIT_ = 1552;
+			
+			//Class and Feature Getter
+			virtual std::shared_ptr<ecore::EClass> getCallEventExecution_Class() const = 0;
+			
+			virtual std::shared_ptr<ecore::EAttribute> getCallEventExecution_Attribute_callerSuspended() const = 0;
+			
+			
+			virtual std::shared_ptr<ecore::EOperation> getCallEventExecution_Operation_copy() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getCallEventExecution_Operation_createEventOccurrence() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getCallEventExecution_Operation_execute() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getCallEventExecution_Operation_getInputParameterValues() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getCallEventExecution_Operation_getOperation() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getCallEventExecution_Operation_isCallerSuspended() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getCallEventExecution_Operation_makeCall() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getCallEventExecution_Operation_new_() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getCallEventExecution_Operation_releaseCaller() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getCallEventExecution_Operation_setOutputParameterValues_ParameterValue() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getCallEventExecution_Operation_suspendCaller() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getCallEventExecution_Operation_wait_() const = 0;
+			
+			// End Class CallEventExecution
+
+
+			// Begin Class CallEventOccurrence
+			//Class and Feature IDs 
+			static const unsigned int CALLEVENTOCCURRENCE_CLASS = 16;
+			static const unsigned int CALLEVENTOCCURRENCE_CLASS_FEATURE_COUNT = 1;
+			static const unsigned int CALLEVENTOCCURRENCE_CLASS_OPERATION_COUNT = 5;
+			
+			static const int CALLEVENTOCCURRENCE_ATTRIBUTE_EXECUTION = 1600;
+			
+			static const int CALLEVENTOCCURRENCE_OPERATION_GETOPERATION = 1601;
+			static const int CALLEVENTOCCURRENCE_OPERATION_GETPARAMETERVALUES = 1602;
+			static const int CALLEVENTOCCURRENCE_OPERATION_MATCH_TRIGGER = 1603;
+			static const int CALLEVENTOCCURRENCE_OPERATION_RELEASECALLER = 1604;
+			static const int CALLEVENTOCCURRENCE_OPERATION_SETOUTPUTPARAMETERVALUES_PARAMETERVALUE = 1605;
+			
+			//Class and Feature Getter
+			virtual std::shared_ptr<ecore::EClass> getCallEventOccurrence_Class() const = 0;
+			
+			
+			virtual std::shared_ptr<ecore::EReference> getCallEventOccurrence_Attribute_execution() const = 0;
+			
+			virtual std::shared_ptr<ecore::EOperation> getCallEventOccurrence_Operation_getOperation() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getCallEventOccurrence_Operation_getParameterValues() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getCallEventOccurrence_Operation_match_Trigger() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getCallEventOccurrence_Operation_releaseCaller() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getCallEventOccurrence_Operation_setOutputParameterValues_ParameterValue() const = 0;
+			
+			// End Class CallEventOccurrence
+
+
 			// Begin Class CallOperationActionActivation
 			//Class and Feature IDs 
-			static const unsigned int CALLOPERATIONACTIONACTIVATION_CLASS = 14;
+			static const unsigned int CALLOPERATIONACTIONACTIVATION_CLASS = 17;
 			static const unsigned int CALLOPERATIONACTIONACTIVATION_CLASS_FEATURE_COUNT = 11;
 			static const unsigned int CALLOPERATIONACTIONACTIVATION_CLASS_OPERATION_COUNT = 52;
 			
 			
-			static const int CALLOPERATIONACTIONACTIVATION_OPERATION_GETCALLEXECUTION = 1462;
+			static const int CALLOPERATIONACTIONACTIVATION_OPERATION_GETCALLEXECUTION = 1762;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getCallOperationActionActivation_Class() const = 0;
@@ -507,12 +598,12 @@ namespace fUML
 
 			// Begin Class CentralBufferNodeActivation
 			//Class and Feature IDs 
-			static const unsigned int CENTRALBUFFERNODEACTIVATION_CLASS = 15;
+			static const unsigned int CENTRALBUFFERNODEACTIVATION_CLASS = 18;
 			static const unsigned int CENTRALBUFFERNODEACTIVATION_CLASS_FEATURE_COUNT = 7;
 			static const unsigned int CENTRALBUFFERNODEACTIVATION_CLASS_OPERATION_COUNT = 39;
 			
 			
-			static const int CENTRALBUFFERNODEACTIVATION_OPERATION_FIRE_TOKEN = 1545;
+			static const int CENTRALBUFFERNODEACTIVATION_OPERATION_FIRE_TOKEN = 1845;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getCentralBufferNodeActivation_Class() const = 0;
@@ -526,13 +617,13 @@ namespace fUML
 
 			// Begin Class ChoiceStrategy
 			//Class and Feature IDs 
-			static const unsigned int CHOICESTRATEGY_CLASS = 16;
+			static const unsigned int CHOICESTRATEGY_CLASS = 19;
 			static const unsigned int CHOICESTRATEGY_CLASS_FEATURE_COUNT = 0;
 			static const unsigned int CHOICESTRATEGY_CLASS_OPERATION_COUNT = 3;
 			
 			
-			static const int CHOICESTRATEGY_OPERATION_CHOOSE_EINT = 1601;
-			static const int CHOICESTRATEGY_OPERATION_RETRIEVENAME = 1602;
+			static const int CHOICESTRATEGY_OPERATION_CHOOSE_EINT = 1901;
+			static const int CHOICESTRATEGY_OPERATION_RETRIEVENAME = 1902;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getChoiceStrategy_Class() const = 0;
@@ -547,17 +638,17 @@ namespace fUML
 
 			// Begin Class ClassifierBehaviorExecution
 			//Class and Feature IDs 
-			static const unsigned int CLASSIFIERBEHAVIOREXECUTION_CLASS = 17;
+			static const unsigned int CLASSIFIERBEHAVIOREXECUTION_CLASS = 20;
 			static const unsigned int CLASSIFIERBEHAVIOREXECUTION_CLASS_FEATURE_COUNT = 3;
 			static const unsigned int CLASSIFIERBEHAVIOREXECUTION_CLASS_OPERATION_COUNT = 3;
 			
-			static const int CLASSIFIERBEHAVIOREXECUTION_ATTRIBUTE_CLASSIFIER = 1701;
-			static const int CLASSIFIERBEHAVIOREXECUTION_ATTRIBUTE_EXECUTION = 1700;
-			static const int CLASSIFIERBEHAVIOREXECUTION_ATTRIBUTE_OBJECTACTIVATION = 1702;
+			static const int CLASSIFIERBEHAVIOREXECUTION_ATTRIBUTE_CLASSIFIER = 2001;
+			static const int CLASSIFIERBEHAVIOREXECUTION_ATTRIBUTE_EXECUTION = 2000;
+			static const int CLASSIFIERBEHAVIOREXECUTION_ATTRIBUTE_OBJECTACTIVATION = 2002;
 			
-			static const int CLASSIFIERBEHAVIOREXECUTION_OPERATION__STARTOBJECTBEHAVIOR = 1705;
-			static const int CLASSIFIERBEHAVIOREXECUTION_OPERATION_EXECUTE_CLASS_PARAMETERVALUE = 1703;
-			static const int CLASSIFIERBEHAVIOREXECUTION_OPERATION_TERMINATE = 1704;
+			static const int CLASSIFIERBEHAVIOREXECUTION_OPERATION__STARTOBJECTBEHAVIOR = 2005;
+			static const int CLASSIFIERBEHAVIOREXECUTION_OPERATION_EXECUTE_CLASS_PARAMETERVALUE = 2003;
+			static const int CLASSIFIERBEHAVIOREXECUTION_OPERATION_TERMINATE = 2004;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getClassifierBehaviorExecution_Class() const = 0;
@@ -576,7 +667,7 @@ namespace fUML
 
 			// Begin Class ClassifierBehaviorExecutionActivity
 			//Class and Feature IDs 
-			static const unsigned int CLASSIFIERBEHAVIOREXECUTIONACTIVITY_CLASS = 18;
+			static const unsigned int CLASSIFIERBEHAVIOREXECUTIONACTIVITY_CLASS = 21;
 			static const unsigned int CLASSIFIERBEHAVIOREXECUTIONACTIVITY_CLASS_FEATURE_COUNT = 0;
 			static const unsigned int CLASSIFIERBEHAVIOREXECUTIONACTIVITY_CLASS_OPERATION_COUNT = 0;
 			
@@ -593,7 +684,7 @@ namespace fUML
 
 			// Begin Class ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1
 			//Class and Feature IDs 
-			static const unsigned int CLASSIFIERBEHAVIOREXECUTIONACTIVITY_OWNEDBEHAVIORACTIVITY1_CLASS = 19;
+			static const unsigned int CLASSIFIERBEHAVIOREXECUTIONACTIVITY_OWNEDBEHAVIORACTIVITY1_CLASS = 22;
 			static const unsigned int CLASSIFIERBEHAVIOREXECUTIONACTIVITY_OWNEDBEHAVIORACTIVITY1_CLASS_FEATURE_COUNT = 0;
 			static const unsigned int CLASSIFIERBEHAVIOREXECUTIONACTIVITY_OWNEDBEHAVIORACTIVITY1_CLASS_OPERATION_COUNT = 0;
 			
@@ -610,20 +701,20 @@ namespace fUML
 
 			// Begin Class ClauseActivation
 			//Class and Feature IDs 
-			static const unsigned int CLAUSEACTIVATION_CLASS = 20;
+			static const unsigned int CLAUSEACTIVATION_CLASS = 23;
 			static const unsigned int CLAUSEACTIVATION_CLASS_FEATURE_COUNT = 2;
 			static const unsigned int CLAUSEACTIVATION_CLASS_OPERATION_COUNT = 7;
 			
-			static const int CLAUSEACTIVATION_ATTRIBUTE_CLAUSE = 2000;
-			static const int CLAUSEACTIVATION_ATTRIBUTE_CONDITIONALNODEACTIVATION = 2001;
+			static const int CLAUSEACTIVATION_ATTRIBUTE_CLAUSE = 2300;
+			static const int CLAUSEACTIVATION_ATTRIBUTE_CONDITIONALNODEACTIVATION = 2301;
 			
-			static const int CLAUSEACTIVATION_OPERATION_GETDECISION = 2006;
-			static const int CLAUSEACTIVATION_OPERATION_GETPREDECESSORS = 2007;
-			static const int CLAUSEACTIVATION_OPERATION_GETSUCCESSORS = 2008;
-			static const int CLAUSEACTIVATION_OPERATION_ISREADY = 2003;
-			static const int CLAUSEACTIVATION_OPERATION_RECIEVECONTROL = 2002;
-			static const int CLAUSEACTIVATION_OPERATION_RUNTEST = 2004;
-			static const int CLAUSEACTIVATION_OPERATION_SELECTBODY = 2005;
+			static const int CLAUSEACTIVATION_OPERATION_GETDECISION = 2306;
+			static const int CLAUSEACTIVATION_OPERATION_GETPREDECESSORS = 2307;
+			static const int CLAUSEACTIVATION_OPERATION_GETSUCCESSORS = 2308;
+			static const int CLAUSEACTIVATION_OPERATION_ISREADY = 2303;
+			static const int CLAUSEACTIVATION_OPERATION_RECIEVECONTROL = 2302;
+			static const int CLAUSEACTIVATION_OPERATION_RUNTEST = 2304;
+			static const int CLAUSEACTIVATION_OPERATION_SELECTBODY = 2305;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getClauseActivation_Class() const = 0;
@@ -645,7 +736,7 @@ namespace fUML
 
 			// Begin Class ClearAssociationActionActivation
 			//Class and Feature IDs 
-			static const unsigned int CLEARASSOCIATIONACTIONACTIVATION_CLASS = 21;
+			static const unsigned int CLEARASSOCIATIONACTIONACTIVATION_CLASS = 24;
 			static const unsigned int CLEARASSOCIATIONACTIONACTIVATION_CLASS_FEATURE_COUNT = 10;
 			static const unsigned int CLEARASSOCIATIONACTIONACTIVATION_CLASS_OPERATION_COUNT = 47;
 			
@@ -662,7 +753,7 @@ namespace fUML
 
 			// Begin Class ClearStructuralFeatureActionActivation
 			//Class and Feature IDs 
-			static const unsigned int CLEARSTRUCTURALFEATUREACTIONACTIVATION_CLASS = 22;
+			static const unsigned int CLEARSTRUCTURALFEATUREACTIONACTIVATION_CLASS = 25;
 			static const unsigned int CLEARSTRUCTURALFEATUREACTIONACTIVATION_CLASS_FEATURE_COUNT = 10;
 			static const unsigned int CLEARSTRUCTURALFEATUREACTIONACTIVATION_CLASS_OPERATION_COUNT = 50;
 			
@@ -679,18 +770,18 @@ namespace fUML
 
 			// Begin Class CompoundValue
 			//Class and Feature IDs 
-			static const unsigned int COMPOUNDVALUE_CLASS = 23;
+			static const unsigned int COMPOUNDVALUE_CLASS = 26;
 			static const unsigned int COMPOUNDVALUE_CLASS_FEATURE_COUNT = 1;
 			static const unsigned int COMPOUNDVALUE_CLASS_OPERATION_COUNT = 19;
 			
-			static const int COMPOUNDVALUE_ATTRIBUTE_FEATUREVALUES = 2300;
+			static const int COMPOUNDVALUE_ATTRIBUTE_FEATUREVALUES = 2600;
 			
-			static const int COMPOUNDVALUE_OPERATION_ASSIGNFEATUREVALUE_STRUCTURALFEATURE_EINT = 2318;
-			static const int COMPOUNDVALUE_OPERATION_EQUALS_VALUE = 2315;
-			static const int COMPOUNDVALUE_OPERATION_REMOVEFEATUREVALUES_CLASSIFIER = 2314;
-			static const int COMPOUNDVALUE_OPERATION_RETRIEVEFEATUREVALUE_STRUCTURALFEATURE = 2317;
-			static const int COMPOUNDVALUE_OPERATION_RETRIEVEFEATUREVALUES = 2319;
-			static const int COMPOUNDVALUE_OPERATION_TOSTRING = 2316;
+			static const int COMPOUNDVALUE_OPERATION_ASSIGNFEATUREVALUE_STRUCTURALFEATURE_EINT = 2618;
+			static const int COMPOUNDVALUE_OPERATION_EQUALS_VALUE = 2615;
+			static const int COMPOUNDVALUE_OPERATION_REMOVEFEATUREVALUES_CLASSIFIER = 2614;
+			static const int COMPOUNDVALUE_OPERATION_RETRIEVEFEATUREVALUE_STRUCTURALFEATURE = 2617;
+			static const int COMPOUNDVALUE_OPERATION_RETRIEVEFEATUREVALUES = 2619;
+			static const int COMPOUNDVALUE_OPERATION_TOSTRING = 2616;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getCompoundValue_Class() const = 0;
@@ -710,16 +801,16 @@ namespace fUML
 
 			// Begin Class ConditionalNodeActivation
 			//Class and Feature IDs 
-			static const unsigned int CONDITIONALNODEACTIVATION_CLASS = 24;
+			static const unsigned int CONDITIONALNODEACTIVATION_CLASS = 27;
 			static const unsigned int CONDITIONALNODEACTIVATION_CLASS_FEATURE_COUNT = 13;
 			static const unsigned int CONDITIONALNODEACTIVATION_CLASS_OPERATION_COUNT = 64;
 			
-			static const int CONDITIONALNODEACTIVATION_ATTRIBUTE_CLAUSEACTIVATIONS = 2411;
-			static const int CONDITIONALNODEACTIVATION_ATTRIBUTE_SELECTEDCLAUSES = 2412;
+			static const int CONDITIONALNODEACTIVATION_ATTRIBUTE_CLAUSEACTIVATIONS = 2711;
+			static const int CONDITIONALNODEACTIVATION_ATTRIBUTE_SELECTEDCLAUSES = 2712;
 			
-			static const int CONDITIONALNODEACTIVATION_OPERATION_GETCLAUSEACTIVATION_CLAUSE = 2474;
-			static const int CONDITIONALNODEACTIVATION_OPERATION_RUNTEST_CLAUSE = 2475;
-			static const int CONDITIONALNODEACTIVATION_OPERATION_SELECTBODY_CLAUSE = 2476;
+			static const int CONDITIONALNODEACTIVATION_OPERATION_GETCLAUSEACTIVATION_CLAUSE = 2774;
+			static const int CONDITIONALNODEACTIVATION_OPERATION_RUNTEST_CLAUSE = 2775;
+			static const int CONDITIONALNODEACTIVATION_OPERATION_SELECTBODY_CLAUSE = 2776;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getConditionalNodeActivation_Class() const = 0;
@@ -737,12 +828,12 @@ namespace fUML
 
 			// Begin Class ControlNodeActivation
 			//Class and Feature IDs 
-			static const unsigned int CONTROLNODEACTIVATION_CLASS = 25;
+			static const unsigned int CONTROLNODEACTIVATION_CLASS = 28;
 			static const unsigned int CONTROLNODEACTIVATION_CLASS_FEATURE_COUNT = 6;
 			static const unsigned int CONTROLNODEACTIVATION_CLASS_OPERATION_COUNT = 28;
 			
 			
-			static const int CONTROLNODEACTIVATION_OPERATION_FIRE_TOKEN = 2533;
+			static const int CONTROLNODEACTIVATION_OPERATION_FIRE_TOKEN = 2833;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getControlNodeActivation_Class() const = 0;
@@ -756,14 +847,14 @@ namespace fUML
 
 			// Begin Class ControlToken
 			//Class and Feature IDs 
-			static const unsigned int CONTROLTOKEN_CLASS = 26;
+			static const unsigned int CONTROLTOKEN_CLASS = 29;
 			static const unsigned int CONTROLTOKEN_CLASS_FEATURE_COUNT = 2;
 			static const unsigned int CONTROLTOKEN_CLASS_OPERATION_COUNT = 8;
 			
 			
-			static const int CONTROLTOKEN_OPERATION_EQUALS_TOKEN = 2607;
-			static const int CONTROLTOKEN_OPERATION_GETVALUE = 2609;
-			static const int CONTROLTOKEN_OPERATION_ISCONTROL = 2608;
+			static const int CONTROLTOKEN_OPERATION_EQUALS_TOKEN = 2907;
+			static const int CONTROLTOKEN_OPERATION_GETVALUE = 2909;
+			static const int CONTROLTOKEN_OPERATION_ISCONTROL = 2908;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getControlToken_Class() const = 0;
@@ -779,7 +870,7 @@ namespace fUML
 
 			// Begin Class CreateLinkActionActivation
 			//Class and Feature IDs 
-			static const unsigned int CREATELINKACTIONACTIVATION_CLASS = 27;
+			static const unsigned int CREATELINKACTIONACTIVATION_CLASS = 30;
 			static const unsigned int CREATELINKACTIONACTIVATION_CLASS_FEATURE_COUNT = 10;
 			static const unsigned int CREATELINKACTIONACTIVATION_CLASS_OPERATION_COUNT = 50;
 			
@@ -796,12 +887,12 @@ namespace fUML
 
 			// Begin Class CreateObjectActionActivation
 			//Class and Feature IDs 
-			static const unsigned int CREATEOBJECTACTIONACTIVATION_CLASS = 28;
+			static const unsigned int CREATEOBJECTACTIONACTIVATION_CLASS = 31;
 			static const unsigned int CREATEOBJECTACTIONACTIVATION_CLASS_FEATURE_COUNT = 10;
 			static const unsigned int CREATEOBJECTACTIONACTIVATION_CLASS_OPERATION_COUNT = 48;
 			
 			
-			static const int CREATEOBJECTACTIONACTIVATION_OPERATION_DOACTION = 2857;
+			static const int CREATEOBJECTACTIONACTIVATION_OPERATION_DOACTION = 3157;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getCreateObjectActionActivation_Class() const = 0;
@@ -815,13 +906,13 @@ namespace fUML
 
 			// Begin Class DataStoreNodeActivation
 			//Class and Feature IDs 
-			static const unsigned int DATASTORENODEACTIVATION_CLASS = 29;
+			static const unsigned int DATASTORENODEACTIVATION_CLASS = 32;
 			static const unsigned int DATASTORENODEACTIVATION_CLASS_FEATURE_COUNT = 7;
 			static const unsigned int DATASTORENODEACTIVATION_CLASS_OPERATION_COUNT = 41;
 			
 			
-			static const int DATASTORENODEACTIVATION_OPERATION_ADDTOKEN_TOKEN = 2947;
-			static const int DATASTORENODEACTIVATION_OPERATION_REMOVETOKEN_TOKEN = 2946;
+			static const int DATASTORENODEACTIVATION_OPERATION_ADDTOKEN_TOKEN = 3247;
+			static const int DATASTORENODEACTIVATION_OPERATION_REMOVETOKEN_TOKEN = 3246;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getDataStoreNodeActivation_Class() const = 0;
@@ -836,14 +927,14 @@ namespace fUML
 
 			// Begin Class DataValue
 			//Class and Feature IDs 
-			static const unsigned int DATAVALUE_CLASS = 30;
+			static const unsigned int DATAVALUE_CLASS = 33;
 			static const unsigned int DATAVALUE_CLASS_FEATURE_COUNT = 2;
 			static const unsigned int DATAVALUE_CLASS_OPERATION_COUNT = 21;
 			
-			static const int DATAVALUE_ATTRIBUTE_TYPE = 3001;
+			static const int DATAVALUE_ATTRIBUTE_TYPE = 3301;
 			
-			static const int DATAVALUE_OPERATION_GETTYPES = 3022;
-			static const int DATAVALUE_OPERATION_NEW_ = 3021;
+			static const int DATAVALUE_OPERATION_GETTYPES = 3322;
+			static const int DATAVALUE_OPERATION_NEW_ = 3321;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getDataValue_Class() const = 0;
@@ -859,23 +950,23 @@ namespace fUML
 
 			// Begin Class DecisionNodeActivation
 			//Class and Feature IDs 
-			static const unsigned int DECISIONNODEACTIVATION_CLASS = 31;
+			static const unsigned int DECISIONNODEACTIVATION_CLASS = 34;
 			static const unsigned int DECISIONNODEACTIVATION_CLASS_FEATURE_COUNT = 7;
 			static const unsigned int DECISIONNODEACTIVATION_CLASS_OPERATION_COUNT = 39;
 			
-			static const int DECISIONNODEACTIVATION_ATTRIBUTE_DECISIONINPUTEXECUTION = 3106;
+			static const int DECISIONNODEACTIVATION_ATTRIBUTE_DECISIONINPUTEXECUTION = 3406;
 			
-			static const int DECISIONNODEACTIVATION_OPERATION_EXECUTEDECISIONINPUTBEHAVIOR_VALUE_VALUE = 3136;
-			static const int DECISIONNODEACTIVATION_OPERATION_FIRE_TOKEN = 3143;
-			static const int DECISIONNODEACTIVATION_OPERATION_GETDECISIONINPUTFLOWINSTANCE = 3138;
-			static const int DECISIONNODEACTIVATION_OPERATION_GETDECISIONINPUTFLOWVALUE = 3137;
-			static const int DECISIONNODEACTIVATION_OPERATION_GETDECISIONVALUES_TOKEN = 3135;
-			static const int DECISIONNODEACTIVATION_OPERATION_HASOBJECTFLOWINPUT = 3141;
-			static const int DECISIONNODEACTIVATION_OPERATION_ISREADY = 3145;
-			static const int DECISIONNODEACTIVATION_OPERATION_REMOVEJOINEDCONTROLTOKENS_TOKEN = 3140;
-			static const int DECISIONNODEACTIVATION_OPERATION_TAKEOFFEREDTOKENS = 3142;
-			static const int DECISIONNODEACTIVATION_OPERATION_TERMINATE = 3144;
-			static const int DECISIONNODEACTIVATION_OPERATION_TEST_VALUESPECIFICATION_VALUE = 3139;
+			static const int DECISIONNODEACTIVATION_OPERATION_EXECUTEDECISIONINPUTBEHAVIOR_VALUE_VALUE = 3436;
+			static const int DECISIONNODEACTIVATION_OPERATION_FIRE_TOKEN = 3443;
+			static const int DECISIONNODEACTIVATION_OPERATION_GETDECISIONINPUTFLOWINSTANCE = 3438;
+			static const int DECISIONNODEACTIVATION_OPERATION_GETDECISIONINPUTFLOWVALUE = 3437;
+			static const int DECISIONNODEACTIVATION_OPERATION_GETDECISIONVALUES_TOKEN = 3435;
+			static const int DECISIONNODEACTIVATION_OPERATION_HASOBJECTFLOWINPUT = 3441;
+			static const int DECISIONNODEACTIVATION_OPERATION_ISREADY = 3445;
+			static const int DECISIONNODEACTIVATION_OPERATION_REMOVEJOINEDCONTROLTOKENS_TOKEN = 3440;
+			static const int DECISIONNODEACTIVATION_OPERATION_TAKEOFFEREDTOKENS = 3442;
+			static const int DECISIONNODEACTIVATION_OPERATION_TERMINATE = 3444;
+			static const int DECISIONNODEACTIVATION_OPERATION_TEST_VALUESPECIFICATION_VALUE = 3439;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getDecisionNodeActivation_Class() const = 0;
@@ -900,7 +991,7 @@ namespace fUML
 
 			// Begin Class DestroyLinkActionActivation
 			//Class and Feature IDs 
-			static const unsigned int DESTROYLINKACTIONACTIVATION_CLASS = 32;
+			static const unsigned int DESTROYLINKACTIONACTIVATION_CLASS = 35;
 			static const unsigned int DESTROYLINKACTIONACTIVATION_CLASS_FEATURE_COUNT = 10;
 			static const unsigned int DESTROYLINKACTIONACTIVATION_CLASS_OPERATION_COUNT = 50;
 			
@@ -917,14 +1008,14 @@ namespace fUML
 
 			// Begin Class DestroyObjectActionActivation
 			//Class and Feature IDs 
-			static const unsigned int DESTROYOBJECTACTIONACTIVATION_CLASS = 33;
+			static const unsigned int DESTROYOBJECTACTIONACTIVATION_CLASS = 36;
 			static const unsigned int DESTROYOBJECTACTIONACTIVATION_CLASS_FEATURE_COUNT = 10;
 			static const unsigned int DESTROYOBJECTACTIONACTIVATION_CLASS_OPERATION_COUNT = 50;
 			
 			
-			static const int DESTROYOBJECTACTIONACTIVATION_OPERATION_DESTROYOBJECT_VALUE_EBOOLEAN = 3357;
-			static const int DESTROYOBJECTACTIONACTIVATION_OPERATION_DOACTION = 3359;
-			static const int DESTROYOBJECTACTIONACTIVATION_OPERATION_OBJECTISCOMPOSITE_REFERENCE_LINK = 3358;
+			static const int DESTROYOBJECTACTIONACTIVATION_OPERATION_DESTROYOBJECT_VALUE_EBOOLEAN = 3657;
+			static const int DESTROYOBJECTACTIONACTIVATION_OPERATION_DOACTION = 3659;
+			static const int DESTROYOBJECTACTIONACTIVATION_OPERATION_OBJECTISCOMPOSITE_REFERENCE_LINK = 3658;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getDestroyObjectActionActivation_Class() const = 0;
@@ -940,14 +1031,14 @@ namespace fUML
 
 			// Begin Class DispatchStrategy
 			//Class and Feature IDs 
-			static const unsigned int DISPATCHSTRATEGY_CLASS = 34;
+			static const unsigned int DISPATCHSTRATEGY_CLASS = 37;
 			static const unsigned int DISPATCHSTRATEGY_CLASS_FEATURE_COUNT = 0;
 			static const unsigned int DISPATCHSTRATEGY_CLASS_OPERATION_COUNT = 4;
 			
 			
-			static const int DISPATCHSTRATEGY_OPERATION_DISPATCH_OBJECT_OPERATION = 3401;
-			static const int DISPATCHSTRATEGY_OPERATION_RETRIEVEMETHOD_OBJECT_OPERATION = 3402;
-			static const int DISPATCHSTRATEGY_OPERATION_RETRIEVENAME = 3403;
+			static const int DISPATCHSTRATEGY_OPERATION_DISPATCH_OBJECT_OPERATION = 3701;
+			static const int DISPATCHSTRATEGY_OPERATION_RETRIEVEMETHOD_OBJECT_OPERATION = 3702;
+			static const int DISPATCHSTRATEGY_OPERATION_RETRIEVENAME = 3703;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getDispatchStrategy_Class() const = 0;
@@ -963,18 +1054,18 @@ namespace fUML
 
 			// Begin Class EnumerationValue
 			//Class and Feature IDs 
-			static const unsigned int ENUMERATIONVALUE_CLASS = 35;
+			static const unsigned int ENUMERATIONVALUE_CLASS = 38;
 			static const unsigned int ENUMERATIONVALUE_CLASS_FEATURE_COUNT = 2;
 			static const unsigned int ENUMERATIONVALUE_CLASS_OPERATION_COUNT = 13;
 			
-			static const int ENUMERATIONVALUE_ATTRIBUTE_LITERAL = 3500;
-			static const int ENUMERATIONVALUE_ATTRIBUTE_TYPE = 3501;
+			static const int ENUMERATIONVALUE_ATTRIBUTE_LITERAL = 3800;
+			static const int ENUMERATIONVALUE_ATTRIBUTE_TYPE = 3801;
 			
-			static const int ENUMERATIONVALUE_OPERATION_EQUALS_VALUE = 3511;
-			static const int ENUMERATIONVALUE_OPERATION_GETTYPES = 3514;
-			static const int ENUMERATIONVALUE_OPERATION_NEW_ = 3512;
-			static const int ENUMERATIONVALUE_OPERATION_SPECIFY = 3510;
-			static const int ENUMERATIONVALUE_OPERATION_TOSTRING = 3513;
+			static const int ENUMERATIONVALUE_OPERATION_EQUALS_VALUE = 3811;
+			static const int ENUMERATIONVALUE_OPERATION_GETTYPES = 3814;
+			static const int ENUMERATIONVALUE_OPERATION_NEW_ = 3812;
+			static const int ENUMERATIONVALUE_OPERATION_SPECIFY = 3810;
+			static const int ENUMERATIONVALUE_OPERATION_TOSTRING = 3813;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getEnumerationValue_Class() const = 0;
@@ -994,14 +1085,14 @@ namespace fUML
 
 			// Begin Class Evaluation
 			//Class and Feature IDs 
-			static const unsigned int EVALUATION_CLASS = 36;
+			static const unsigned int EVALUATION_CLASS = 39;
 			static const unsigned int EVALUATION_CLASS_FEATURE_COUNT = 2;
 			static const unsigned int EVALUATION_CLASS_OPERATION_COUNT = 3;
 			
-			static const int EVALUATION_ATTRIBUTE_LOCUS = 3601;
-			static const int EVALUATION_ATTRIBUTE_SPECIFICATION = 3600;
+			static const int EVALUATION_ATTRIBUTE_LOCUS = 3901;
+			static const int EVALUATION_ATTRIBUTE_SPECIFICATION = 3900;
 			
-			static const int EVALUATION_OPERATION_EVALUATE = 3604;
+			static const int EVALUATION_OPERATION_EVALUATE = 3904;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getEvaluation_Class() const = 0;
@@ -1017,13 +1108,13 @@ namespace fUML
 
 			// Begin Class EventAccepter
 			//Class and Feature IDs 
-			static const unsigned int EVENTACCEPTER_CLASS = 37;
+			static const unsigned int EVENTACCEPTER_CLASS = 40;
 			static const unsigned int EVENTACCEPTER_CLASS_FEATURE_COUNT = 0;
 			static const unsigned int EVENTACCEPTER_CLASS_OPERATION_COUNT = 2;
 			
 			
-			static const int EVENTACCEPTER_OPERATION_ACCEPT_SIGNALINSTANCE = 3700;
-			static const int EVENTACCEPTER_OPERATION_MATCH_SIGNALINSTANCE = 3701;
+			static const int EVENTACCEPTER_OPERATION_ACCEPT_SIGNALINSTANCE = 4000;
+			static const int EVENTACCEPTER_OPERATION_MATCH_SIGNALINSTANCE = 4001;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getEventAccepter_Class() const = 0;
@@ -1038,7 +1129,7 @@ namespace fUML
 
 			// Begin Class EventDispatchLoop
 			//Class and Feature IDs 
-			static const unsigned int EVENTDISPATCHLOOP_CLASS = 38;
+			static const unsigned int EVENTDISPATCHLOOP_CLASS = 41;
 			static const unsigned int EVENTDISPATCHLOOP_CLASS_FEATURE_COUNT = 0;
 			static const unsigned int EVENTDISPATCHLOOP_CLASS_OPERATION_COUNT = 0;
 			
@@ -1055,7 +1146,7 @@ namespace fUML
 
 			// Begin Class EventOccurrence
 			//Class and Feature IDs 
-			static const unsigned int EVENTOCCURRENCE_CLASS = 39;
+			static const unsigned int EVENTOCCURRENCE_CLASS = 42;
 			static const unsigned int EVENTOCCURRENCE_CLASS_FEATURE_COUNT = 0;
 			static const unsigned int EVENTOCCURRENCE_CLASS_OPERATION_COUNT = 0;
 			
@@ -1072,20 +1163,20 @@ namespace fUML
 
 			// Begin Class Execution
 			//Class and Feature IDs 
-			static const unsigned int EXECUTION_CLASS = 40;
+			static const unsigned int EXECUTION_CLASS = 43;
 			static const unsigned int EXECUTION_CLASS_FEATURE_COUNT = 6;
 			static const unsigned int EXECUTION_CLASS_OPERATION_COUNT = 34;
 			
-			static const int EXECUTION_ATTRIBUTE_CONTEXT = 4004;
-			static const int EXECUTION_ATTRIBUTE_PARAMETERVALUES = 4005;
+			static const int EXECUTION_ATTRIBUTE_CONTEXT = 4304;
+			static const int EXECUTION_ATTRIBUTE_PARAMETERVALUES = 4305;
 			
-			static const int EXECUTION_OPERATION_EXECUTE = 4033;
-			static const int EXECUTION_OPERATION_GETBEHAVIOR = 4038;
-			static const int EXECUTION_OPERATION_GETOUTPUTPARAMETERVALUES = 4037;
-			static const int EXECUTION_OPERATION_GETPARAMETERVALUE_PARAMETER = 4036;
-			static const int EXECUTION_OPERATION_NEW_ = 4039;
-			static const int EXECUTION_OPERATION_SETPARAMETERVALUE_PARAMETERVALUE = 4035;
-			static const int EXECUTION_OPERATION_TERMINATE = 4034;
+			static const int EXECUTION_OPERATION_EXECUTE = 4333;
+			static const int EXECUTION_OPERATION_GETBEHAVIOR = 4338;
+			static const int EXECUTION_OPERATION_GETOUTPUTPARAMETERVALUES = 4337;
+			static const int EXECUTION_OPERATION_GETPARAMETERVALUE_PARAMETER = 4336;
+			static const int EXECUTION_OPERATION_NEW_ = 4339;
+			static const int EXECUTION_OPERATION_SETPARAMETERVALUE_PARAMETERVALUE = 4335;
+			static const int EXECUTION_OPERATION_TERMINATE = 4334;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getExecution_Class() const = 0;
@@ -1107,25 +1198,25 @@ namespace fUML
 
 			// Begin Class ExecutionFactory
 			//Class and Feature IDs 
-			static const unsigned int EXECUTIONFACTORY_CLASS = 41;
+			static const unsigned int EXECUTIONFACTORY_CLASS = 44;
 			static const unsigned int EXECUTIONFACTORY_CLASS_FEATURE_COUNT = 4;
 			static const unsigned int EXECUTIONFACTORY_CLASS_OPERATION_COUNT = 10;
 			
-			static const int EXECUTIONFACTORY_ATTRIBUTE_BUILTINTYPES = 4103;
-			static const int EXECUTIONFACTORY_ATTRIBUTE_LOCUS = 4100;
-			static const int EXECUTIONFACTORY_ATTRIBUTE_PRIMITIVEBEHAVIORPROTOTYPES = 4102;
-			static const int EXECUTIONFACTORY_ATTRIBUTE_STRATEGIES = 4101;
+			static const int EXECUTIONFACTORY_ATTRIBUTE_BUILTINTYPES = 4403;
+			static const int EXECUTIONFACTORY_ATTRIBUTE_LOCUS = 4400;
+			static const int EXECUTIONFACTORY_ATTRIBUTE_PRIMITIVEBEHAVIORPROTOTYPES = 4402;
+			static const int EXECUTIONFACTORY_ATTRIBUTE_STRATEGIES = 4401;
 			
-			static const int EXECUTIONFACTORY_OPERATION_ADDBUILTINTYPE_PRIMITIVETYPE = 4109;
-			static const int EXECUTIONFACTORY_OPERATION_ADDPRIMITIVEBEHAVIORPROTOTYPE_OPAQUEBEHAVIOREXECUTION = 4108;
-			static const int EXECUTIONFACTORY_OPERATION_ASSIGNSTRATEGY_SEMANTICSTRATEGY = 4111;
-			static const int EXECUTIONFACTORY_OPERATION_CREATEEVALUATION_VALUESPECIFICATION = 4105;
-			static const int EXECUTIONFACTORY_OPERATION_CREATEEXECUTION_BEHAVIOR_OBJECT = 4104;
-			static const int EXECUTIONFACTORY_OPERATION_GETBUILTINTYPE_ESTRING = 4110;
-			static const int EXECUTIONFACTORY_OPERATION_GETSTRATEGY_ESTRING = 4112;
-			static const int EXECUTIONFACTORY_OPERATION_GETSTRATEGYINDEX_ESTRING = 4113;
-			static const int EXECUTIONFACTORY_OPERATION_INSTANTIATEOPAQUEBEHAVIOREXECUTION_OPAQUEBEHAVIOR = 4107;
-			static const int EXECUTIONFACTORY_OPERATION_INSTANTIATEVISITOR_ELEMENT = 4106;
+			static const int EXECUTIONFACTORY_OPERATION_ADDBUILTINTYPE_PRIMITIVETYPE = 4409;
+			static const int EXECUTIONFACTORY_OPERATION_ADDPRIMITIVEBEHAVIORPROTOTYPE_OPAQUEBEHAVIOREXECUTION = 4408;
+			static const int EXECUTIONFACTORY_OPERATION_ASSIGNSTRATEGY_SEMANTICSTRATEGY = 4411;
+			static const int EXECUTIONFACTORY_OPERATION_CREATEEVALUATION_VALUESPECIFICATION = 4405;
+			static const int EXECUTIONFACTORY_OPERATION_CREATEEXECUTION_BEHAVIOR_OBJECT = 4404;
+			static const int EXECUTIONFACTORY_OPERATION_GETBUILTINTYPE_ESTRING = 4410;
+			static const int EXECUTIONFACTORY_OPERATION_GETSTRATEGY_ESTRING = 4412;
+			static const int EXECUTIONFACTORY_OPERATION_GETSTRATEGYINDEX_ESTRING = 4413;
+			static const int EXECUTIONFACTORY_OPERATION_INSTANTIATEOPAQUEBEHAVIOREXECUTION_OPAQUEBEHAVIOR = 4407;
+			static const int EXECUTIONFACTORY_OPERATION_INSTANTIATEVISITOR_ELEMENT = 4406;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getExecutionFactory_Class() const = 0;
@@ -1152,12 +1243,12 @@ namespace fUML
 
 			// Begin Class ExecutionFactoryL1
 			//Class and Feature IDs 
-			static const unsigned int EXECUTIONFACTORYL1_CLASS = 42;
+			static const unsigned int EXECUTIONFACTORYL1_CLASS = 45;
 			static const unsigned int EXECUTIONFACTORYL1_CLASS_FEATURE_COUNT = 4;
 			static const unsigned int EXECUTIONFACTORYL1_CLASS_OPERATION_COUNT = 11;
 			
 			
-			static const int EXECUTIONFACTORYL1_OPERATION_INSTANTIATEVISITOR_ELEMENT = 4214;
+			static const int EXECUTIONFACTORYL1_OPERATION_INSTANTIATEVISITOR_ELEMENT = 4514;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getExecutionFactoryL1_Class() const = 0;
@@ -1171,12 +1262,12 @@ namespace fUML
 
 			// Begin Class ExecutionFactoryL2
 			//Class and Feature IDs 
-			static const unsigned int EXECUTIONFACTORYL2_CLASS = 43;
+			static const unsigned int EXECUTIONFACTORYL2_CLASS = 46;
 			static const unsigned int EXECUTIONFACTORYL2_CLASS_FEATURE_COUNT = 4;
 			static const unsigned int EXECUTIONFACTORYL2_CLASS_OPERATION_COUNT = 12;
 			
 			
-			static const int EXECUTIONFACTORYL2_OPERATION_INSTANTIATEVISITOR_ELEMENT = 4315;
+			static const int EXECUTIONFACTORYL2_OPERATION_INSTANTIATEVISITOR_ELEMENT = 4615;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getExecutionFactoryL2_Class() const = 0;
@@ -1190,12 +1281,12 @@ namespace fUML
 
 			// Begin Class ExecutionFactoryL3
 			//Class and Feature IDs 
-			static const unsigned int EXECUTIONFACTORYL3_CLASS = 44;
+			static const unsigned int EXECUTIONFACTORYL3_CLASS = 47;
 			static const unsigned int EXECUTIONFACTORYL3_CLASS_FEATURE_COUNT = 4;
 			static const unsigned int EXECUTIONFACTORYL3_CLASS_OPERATION_COUNT = 13;
 			
 			
-			static const int EXECUTIONFACTORYL3_OPERATION_INSTANTIATEVISITOR_ELEMENT = 4416;
+			static const int EXECUTIONFACTORYL3_OPERATION_INSTANTIATEVISITOR_ELEMENT = 4716;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getExecutionFactoryL3_Class() const = 0;
@@ -1209,15 +1300,15 @@ namespace fUML
 
 			// Begin Class Executor
 			//Class and Feature IDs 
-			static const unsigned int EXECUTOR_CLASS = 45;
+			static const unsigned int EXECUTOR_CLASS = 48;
 			static const unsigned int EXECUTOR_CLASS_FEATURE_COUNT = 1;
 			static const unsigned int EXECUTOR_CLASS_OPERATION_COUNT = 3;
 			
-			static const int EXECUTOR_ATTRIBUTE_LOCUS = 4500;
+			static const int EXECUTOR_ATTRIBUTE_LOCUS = 4800;
 			
-			static const int EXECUTOR_OPERATION_EVALUATE_VALUESPECIFICATION = 4501;
-			static const int EXECUTOR_OPERATION_EXECUTE_BEHAVIOR_PARAMETERVALUE = 4503;
-			static const int EXECUTOR_OPERATION_START_CLASS_PARAMETERVALUE = 4502;
+			static const int EXECUTOR_OPERATION_EVALUATE_VALUESPECIFICATION = 4801;
+			static const int EXECUTOR_OPERATION_EXECUTE_BEHAVIOR_PARAMETERVALUE = 4803;
+			static const int EXECUTOR_OPERATION_START_CLASS_PARAMETERVALUE = 4802;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getExecutor_Class() const = 0;
@@ -1234,11 +1325,11 @@ namespace fUML
 
 			// Begin Class ExpansionActivationGroup
 			//Class and Feature IDs 
-			static const unsigned int EXPANSIONACTIVATIONGROUP_CLASS = 46;
+			static const unsigned int EXPANSIONACTIVATIONGROUP_CLASS = 49;
 			static const unsigned int EXPANSIONACTIVATIONGROUP_CLASS_FEATURE_COUNT = 6;
 			static const unsigned int EXPANSIONACTIVATIONGROUP_CLASS_OPERATION_COUNT = 17;
 			
-			static const int EXPANSIONACTIVATIONGROUP_ATTRIBUTE_REGIONACTIVATION = 4605;
+			static const int EXPANSIONACTIVATIONGROUP_ATTRIBUTE_REGIONACTIVATION = 4905;
 			
 			
 			//Class and Feature Getter
@@ -1253,12 +1344,12 @@ namespace fUML
 
 			// Begin Class ExpansionNodeActivation
 			//Class and Feature IDs 
-			static const unsigned int EXPANSIONNODEACTIVATION_CLASS = 47;
+			static const unsigned int EXPANSIONNODEACTIVATION_CLASS = 50;
 			static const unsigned int EXPANSIONNODEACTIVATION_CLASS_FEATURE_COUNT = 7;
 			static const unsigned int EXPANSIONNODEACTIVATION_CLASS_OPERATION_COUNT = 39;
 			
 			
-			static const int EXPANSIONNODEACTIVATION_OPERATION_GETEXPANSIONREGIONACTIVATION = 4745;
+			static const int EXPANSIONNODEACTIVATION_OPERATION_GETEXPANSIONREGIONACTIVATION = 5045;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getExpansionNodeActivation_Class() const = 0;
@@ -1272,18 +1363,18 @@ namespace fUML
 
 			// Begin Class ExpansionRegionActivation
 			//Class and Feature IDs 
-			static const unsigned int EXPANSIONREGIONACTIVATION_CLASS = 48;
+			static const unsigned int EXPANSIONREGIONACTIVATION_CLASS = 51;
 			static const unsigned int EXPANSIONREGIONACTIVATION_CLASS_FEATURE_COUNT = 13;
 			static const unsigned int EXPANSIONREGIONACTIVATION_CLASS_OPERATION_COUNT = 51;
 			
-			static const int EXPANSIONREGIONACTIVATION_ATTRIBUTE_ACTIVATIONGROUPS = 4812;
-			static const int EXPANSIONREGIONACTIVATION_ATTRIBUTE_INPUTEXPANSIONTOKENS = 4811;
-			static const int EXPANSIONREGIONACTIVATION_ATTRIBUTE_INPUTTOKENS = 4810;
+			static const int EXPANSIONREGIONACTIVATION_ATTRIBUTE_ACTIVATIONGROUPS = 5112;
+			static const int EXPANSIONREGIONACTIVATION_ATTRIBUTE_INPUTEXPANSIONTOKENS = 5111;
+			static const int EXPANSIONREGIONACTIVATION_ATTRIBUTE_INPUTTOKENS = 5110;
 			
-			static const int EXPANSIONREGIONACTIVATION_OPERATION_DOSTRUCTUREDACTIVITY = 4860;
-			static const int EXPANSIONREGIONACTIVATION_OPERATION_GETEXPANSIONNODEACTIVATION_EXPANSIONNODE = 4862;
-			static const int EXPANSIONREGIONACTIVATION_OPERATION_NUMBEROFVALUES = 4863;
-			static const int EXPANSIONREGIONACTIVATION_OPERATION_RUNGROUP_EXPANSIONACTIVATIONGROUP = 4861;
+			static const int EXPANSIONREGIONACTIVATION_OPERATION_DOSTRUCTUREDACTIVITY = 5160;
+			static const int EXPANSIONREGIONACTIVATION_OPERATION_GETEXPANSIONNODEACTIVATION_EXPANSIONNODE = 5162;
+			static const int EXPANSIONREGIONACTIVATION_OPERATION_NUMBEROFVALUES = 5163;
+			static const int EXPANSIONREGIONACTIVATION_OPERATION_RUNGROUP_EXPANSIONACTIVATIONGROUP = 5161;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getExpansionRegionActivation_Class() const = 0;
@@ -1303,13 +1394,13 @@ namespace fUML
 
 			// Begin Class ExtensionalValue
 			//Class and Feature IDs 
-			static const unsigned int EXTENSIONALVALUE_CLASS = 49;
+			static const unsigned int EXTENSIONALVALUE_CLASS = 52;
 			static const unsigned int EXTENSIONALVALUE_CLASS_FEATURE_COUNT = 2;
 			static const unsigned int EXTENSIONALVALUE_CLASS_OPERATION_COUNT = 20;
 			
-			static const int EXTENSIONALVALUE_ATTRIBUTE_LOCUS = 4901;
+			static const int EXTENSIONALVALUE_ATTRIBUTE_LOCUS = 5201;
 			
-			static const int EXTENSIONALVALUE_OPERATION_DESTROY = 4921;
+			static const int EXTENSIONALVALUE_OPERATION_DESTROY = 5221;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getExtensionalValue_Class() const = 0;
@@ -1324,16 +1415,16 @@ namespace fUML
 
 			// Begin Class ExtensionalValueList
 			//Class and Feature IDs 
-			static const unsigned int EXTENSIONALVALUELIST_CLASS = 50;
+			static const unsigned int EXTENSIONALVALUELIST_CLASS = 53;
 			static const unsigned int EXTENSIONALVALUELIST_CLASS_FEATURE_COUNT = 2;
 			static const unsigned int EXTENSIONALVALUELIST_CLASS_OPERATION_COUNT = 25;
 			
 			
-			static const int EXTENSIONALVALUELIST_OPERATION_ADDVALUE_EXTENSIONALVALUE = 5023;
-			static const int EXTENSIONALVALUELIST_OPERATION_ADDVALUE_EXTENSIONALVALUE_EINT = 5024;
-			static const int EXTENSIONALVALUELIST_OPERATION_GETVALUE = 5022;
-			static const int EXTENSIONALVALUELIST_OPERATION_REMOVEVALUE_EINT = 5026;
-			static const int EXTENSIONALVALUELIST_OPERATION_SETVALUE_EXTENSIONALVALUE_EINT = 5025;
+			static const int EXTENSIONALVALUELIST_OPERATION_ADDVALUE_EXTENSIONALVALUE = 5323;
+			static const int EXTENSIONALVALUELIST_OPERATION_ADDVALUE_EXTENSIONALVALUE_EINT = 5324;
+			static const int EXTENSIONALVALUELIST_OPERATION_GETVALUE = 5322;
+			static const int EXTENSIONALVALUELIST_OPERATION_REMOVEVALUE_EINT = 5326;
+			static const int EXTENSIONALVALUELIST_OPERATION_SETVALUE_EXTENSIONALVALUE_EINT = 5325;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getExtensionalValueList_Class() const = 0;
@@ -1351,7 +1442,7 @@ namespace fUML
 
 			// Begin Class FIFOGetNextEventStrategy
 			//Class and Feature IDs 
-			static const unsigned int FIFOGETNEXTEVENTSTRATEGY_CLASS = 51;
+			static const unsigned int FIFOGETNEXTEVENTSTRATEGY_CLASS = 54;
 			static const unsigned int FIFOGETNEXTEVENTSTRATEGY_CLASS_FEATURE_COUNT = 0;
 			static const unsigned int FIFOGETNEXTEVENTSTRATEGY_CLASS_OPERATION_COUNT = 2;
 			
@@ -1368,15 +1459,15 @@ namespace fUML
 
 			// Begin Class FeatureValue
 			//Class and Feature IDs 
-			static const unsigned int FEATUREVALUE_CLASS = 52;
+			static const unsigned int FEATUREVALUE_CLASS = 55;
 			static const unsigned int FEATUREVALUE_CLASS_FEATURE_COUNT = 3;
 			static const unsigned int FEATUREVALUE_CLASS_OPERATION_COUNT = 1;
-			static const int FEATUREVALUE_ATTRIBUTE_POSITION = 5201;
+			static const int FEATUREVALUE_ATTRIBUTE_POSITION = 5501;
 			
-			static const int FEATUREVALUE_ATTRIBUTE_FEATURE = 5202;
-			static const int FEATUREVALUE_ATTRIBUTE_VALUES = 5200;
+			static const int FEATUREVALUE_ATTRIBUTE_FEATURE = 5502;
+			static const int FEATUREVALUE_ATTRIBUTE_VALUES = 5500;
 			
-			static const int FEATUREVALUE_OPERATION_HASEQUALVALUES_FEATUREVALUE = 5203;
+			static const int FEATUREVALUE_OPERATION_HASEQUALVALUES_FEATUREVALUE = 5503;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getFeatureValue_Class() const = 0;
@@ -1393,12 +1484,12 @@ namespace fUML
 
 			// Begin Class FirstChoiceStrategy
 			//Class and Feature IDs 
-			static const unsigned int FIRSTCHOICESTRATEGY_CLASS = 53;
+			static const unsigned int FIRSTCHOICESTRATEGY_CLASS = 56;
 			static const unsigned int FIRSTCHOICESTRATEGY_CLASS_FEATURE_COUNT = 0;
 			static const unsigned int FIRSTCHOICESTRATEGY_CLASS_OPERATION_COUNT = 4;
 			
 			
-			static const int FIRSTCHOICESTRATEGY_OPERATION_CHOOSE_EINT = 5303;
+			static const int FIRSTCHOICESTRATEGY_OPERATION_CHOOSE_EINT = 5603;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getFirstChoiceStrategy_Class() const = 0;
@@ -1412,7 +1503,7 @@ namespace fUML
 
 			// Begin Class FlowFinalNodeActivation
 			//Class and Feature IDs 
-			static const unsigned int FLOWFINALNODEACTIVATION_CLASS = 54;
+			static const unsigned int FLOWFINALNODEACTIVATION_CLASS = 57;
 			static const unsigned int FLOWFINALNODEACTIVATION_CLASS_FEATURE_COUNT = 6;
 			static const unsigned int FLOWFINALNODEACTIVATION_CLASS_OPERATION_COUNT = 28;
 			
@@ -1429,13 +1520,13 @@ namespace fUML
 
 			// Begin Class ForkNodeActivation
 			//Class and Feature IDs 
-			static const unsigned int FORKNODEACTIVATION_CLASS = 55;
+			static const unsigned int FORKNODEACTIVATION_CLASS = 58;
 			static const unsigned int FORKNODEACTIVATION_CLASS_FEATURE_COUNT = 6;
 			static const unsigned int FORKNODEACTIVATION_CLASS_OPERATION_COUNT = 30;
 			
 			
-			static const int FORKNODEACTIVATION_OPERATION_FIRE_TOKEN = 5534;
-			static const int FORKNODEACTIVATION_OPERATION_TERMINATE = 5535;
+			static const int FORKNODEACTIVATION_OPERATION_FIRE_TOKEN = 5834;
+			static const int FORKNODEACTIVATION_OPERATION_TERMINATE = 5835;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getForkNodeActivation_Class() const = 0;
@@ -1450,18 +1541,18 @@ namespace fUML
 
 			// Begin Class ForkedToken
 			//Class and Feature IDs 
-			static const unsigned int FORKEDTOKEN_CLASS = 56;
+			static const unsigned int FORKEDTOKEN_CLASS = 59;
 			static const unsigned int FORKEDTOKEN_CLASS_FEATURE_COUNT = 5;
 			static const unsigned int FORKEDTOKEN_CLASS_OPERATION_COUNT = 9;
-			static const int FORKEDTOKEN_ATTRIBUTE_BASETOKENISWITHDRAWN = 5604;
-			static const int FORKEDTOKEN_ATTRIBUTE_REMAININGOFFERSCOUNT = 5603;
+			static const int FORKEDTOKEN_ATTRIBUTE_BASETOKENISWITHDRAWN = 5904;
+			static const int FORKEDTOKEN_ATTRIBUTE_REMAININGOFFERSCOUNT = 5903;
 			
-			static const int FORKEDTOKEN_ATTRIBUTE_BASETOKEN = 5602;
+			static const int FORKEDTOKEN_ATTRIBUTE_BASETOKEN = 5902;
 			
-			static const int FORKEDTOKEN_OPERATION_EQUALS_TOKEN = 5610;
-			static const int FORKEDTOKEN_OPERATION_GETVALUE = 5613;
-			static const int FORKEDTOKEN_OPERATION_ISCONTROL = 5612;
-			static const int FORKEDTOKEN_OPERATION_WITHDRAW = 5611;
+			static const int FORKEDTOKEN_OPERATION_EQUALS_TOKEN = 5910;
+			static const int FORKEDTOKEN_OPERATION_GETVALUE = 5913;
+			static const int FORKEDTOKEN_OPERATION_ISCONTROL = 5912;
+			static const int FORKEDTOKEN_OPERATION_WITHDRAW = 5911;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getForkedToken_Class() const = 0;
@@ -1481,12 +1572,12 @@ namespace fUML
 
 			// Begin Class GetNextEventStrategy
 			//Class and Feature IDs 
-			static const unsigned int GETNEXTEVENTSTRATEGY_CLASS = 57;
+			static const unsigned int GETNEXTEVENTSTRATEGY_CLASS = 60;
 			static const unsigned int GETNEXTEVENTSTRATEGY_CLASS_FEATURE_COUNT = 0;
 			static const unsigned int GETNEXTEVENTSTRATEGY_CLASS_OPERATION_COUNT = 2;
 			
 			
-			static const int GETNEXTEVENTSTRATEGY_OPERATION_RETRIEVENEXTEVENT_OBJECTACTIVATION = 5701;
+			static const int GETNEXTEVENTSTRATEGY_OPERATION_RETRIEVENEXTEVENT_OBJECTACTIVATION = 6001;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getGetNextEventStrategy_Class() const = 0;
@@ -1500,12 +1591,12 @@ namespace fUML
 
 			// Begin Class InitialNodeActivation
 			//Class and Feature IDs 
-			static const unsigned int INITIALNODEACTIVATION_CLASS = 58;
+			static const unsigned int INITIALNODEACTIVATION_CLASS = 61;
 			static const unsigned int INITIALNODEACTIVATION_CLASS_FEATURE_COUNT = 6;
 			static const unsigned int INITIALNODEACTIVATION_CLASS_OPERATION_COUNT = 29;
 			
 			
-			static const int INITIALNODEACTIVATION_OPERATION_FIRE_TOKEN = 5834;
+			static const int INITIALNODEACTIVATION_OPERATION_FIRE_TOKEN = 6134;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getInitialNodeActivation_Class() const = 0;
@@ -1519,13 +1610,13 @@ namespace fUML
 
 			// Begin Class InputPinActivation
 			//Class and Feature IDs 
-			static const unsigned int INPUTPINACTIVATION_CLASS = 59;
+			static const unsigned int INPUTPINACTIVATION_CLASS = 62;
 			static const unsigned int INPUTPINACTIVATION_CLASS_FEATURE_COUNT = 8;
 			static const unsigned int INPUTPINACTIVATION_CLASS_OPERATION_COUNT = 42;
 			
 			
-			static const int INPUTPINACTIVATION_OPERATION_ISREADY = 5949;
-			static const int INPUTPINACTIVATION_OPERATION_RECIEVEOFFER = 5948;
+			static const int INPUTPINACTIVATION_OPERATION_ISREADY = 6249;
+			static const int INPUTPINACTIVATION_OPERATION_RECIEVEOFFER = 6248;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getInputPinActivation_Class() const = 0;
@@ -1540,12 +1631,12 @@ namespace fUML
 
 			// Begin Class InstanceValueEvaluation
 			//Class and Feature IDs 
-			static const unsigned int INSTANCEVALUEEVALUATION_CLASS = 60;
+			static const unsigned int INSTANCEVALUEEVALUATION_CLASS = 63;
 			static const unsigned int INSTANCEVALUEEVALUATION_CLASS_FEATURE_COUNT = 2;
 			static const unsigned int INSTANCEVALUEEVALUATION_CLASS_OPERATION_COUNT = 4;
 			
 			
-			static const int INSTANCEVALUEEVALUATION_OPERATION_EVALUATE = 6005;
+			static const int INSTANCEVALUEEVALUATION_OPERATION_EVALUATE = 6305;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getInstanceValueEvaluation_Class() const = 0;
@@ -1559,15 +1650,15 @@ namespace fUML
 
 			// Begin Class IntegerValue
 			//Class and Feature IDs 
-			static const unsigned int INTEGERVALUE_CLASS = 61;
+			static const unsigned int INTEGERVALUE_CLASS = 64;
 			static const unsigned int INTEGERVALUE_CLASS_FEATURE_COUNT = 2;
 			static const unsigned int INTEGERVALUE_CLASS_OPERATION_COUNT = 12;
-			static const int INTEGERVALUE_ATTRIBUTE_VALUE = 6101;
+			static const int INTEGERVALUE_ATTRIBUTE_VALUE = 6401;
 			
 			
-			static const int INTEGERVALUE_OPERATION_EQUALS_VALUE = 6112;
-			static const int INTEGERVALUE_OPERATION_SPECIFY = 6111;
-			static const int INTEGERVALUE_OPERATION_TOSTRING = 6113;
+			static const int INTEGERVALUE_OPERATION_EQUALS_VALUE = 6412;
+			static const int INTEGERVALUE_OPERATION_SPECIFY = 6411;
+			static const int INTEGERVALUE_OPERATION_TOSTRING = 6413;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getIntegerValue_Class() const = 0;
@@ -1584,7 +1675,7 @@ namespace fUML
 
 			// Begin Class InvocationActionActivation
 			//Class and Feature IDs 
-			static const unsigned int INVOCATIONACTIONACTIVATION_CLASS = 62;
+			static const unsigned int INVOCATIONACTIONACTIVATION_CLASS = 65;
 			static const unsigned int INVOCATIONACTIONACTIVATION_CLASS_FEATURE_COUNT = 10;
 			static const unsigned int INVOCATIONACTIONACTIVATION_CLASS_OPERATION_COUNT = 47;
 			
@@ -1601,12 +1692,12 @@ namespace fUML
 
 			// Begin Class JoinNodeActivation
 			//Class and Feature IDs 
-			static const unsigned int JOINNODEACTIVATION_CLASS = 63;
+			static const unsigned int JOINNODEACTIVATION_CLASS = 66;
 			static const unsigned int JOINNODEACTIVATION_CLASS_FEATURE_COUNT = 6;
 			static const unsigned int JOINNODEACTIVATION_CLASS_OPERATION_COUNT = 29;
 			
 			
-			static const int JOINNODEACTIVATION_OPERATION_ISREADY = 6334;
+			static const int JOINNODEACTIVATION_OPERATION_ISREADY = 6634;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getJoinNodeActivation_Class() const = 0;
@@ -1620,16 +1711,16 @@ namespace fUML
 
 			// Begin Class Link
 			//Class and Feature IDs 
-			static const unsigned int LINK_CLASS = 64;
+			static const unsigned int LINK_CLASS = 67;
 			static const unsigned int LINK_CLASS_FEATURE_COUNT = 3;
 			static const unsigned int LINK_CLASS_OPERATION_COUNT = 24;
 			
-			static const int LINK_ATTRIBUTE_TYPE = 6402;
+			static const int LINK_ATTRIBUTE_TYPE = 6702;
 			
-			static const int LINK_OPERATION_ADDTO_LOCUS = 6425;
-			static const int LINK_OPERATION_GETOTHERFEATUREVALUES_EXTENSIONALVALUE_PROPERTY = 6426;
-			static const int LINK_OPERATION_GETTYPES = 6423;
-			static const int LINK_OPERATION_ISMATCHINGLINK_EXTENSIONALVALUE_PROPERTY = 6424;
+			static const int LINK_OPERATION_ADDTO_LOCUS = 6725;
+			static const int LINK_OPERATION_GETOTHERFEATUREVALUES_EXTENSIONALVALUE_PROPERTY = 6726;
+			static const int LINK_OPERATION_GETTYPES = 6723;
+			static const int LINK_OPERATION_ISMATCHINGLINK_EXTENSIONALVALUE_PROPERTY = 6724;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getLink_Class() const = 0;
@@ -1647,14 +1738,14 @@ namespace fUML
 
 			// Begin Class LinkActionActivation
 			//Class and Feature IDs 
-			static const unsigned int LINKACTIONACTIVATION_CLASS = 65;
+			static const unsigned int LINKACTIONACTIVATION_CLASS = 68;
 			static const unsigned int LINKACTIONACTIVATION_CLASS_FEATURE_COUNT = 10;
 			static const unsigned int LINKACTIONACTIVATION_CLASS_OPERATION_COUNT = 50;
 			
 			
-			static const int LINKACTIONACTIVATION_OPERATION_ENDMATCHESENDDATA_LINK_LINKENDDATA = 6558;
-			static const int LINKACTIONACTIVATION_OPERATION_GETASSOCIATION = 6559;
-			static const int LINKACTIONACTIVATION_OPERATION_LINKMATCHESENDDATA_LINK_LINKENDDATA = 6557;
+			static const int LINKACTIONACTIVATION_OPERATION_ENDMATCHESENDDATA_LINK_LINKENDDATA = 6858;
+			static const int LINKACTIONACTIVATION_OPERATION_GETASSOCIATION = 6859;
+			static const int LINKACTIONACTIVATION_OPERATION_LINKMATCHESENDDATA_LINK_LINKENDDATA = 6857;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getLinkActionActivation_Class() const = 0;
@@ -1670,12 +1761,12 @@ namespace fUML
 
 			// Begin Class LiteralBooleanEvaluation
 			//Class and Feature IDs 
-			static const unsigned int LITERALBOOLEANEVALUATION_CLASS = 66;
+			static const unsigned int LITERALBOOLEANEVALUATION_CLASS = 69;
 			static const unsigned int LITERALBOOLEANEVALUATION_CLASS_FEATURE_COUNT = 2;
 			static const unsigned int LITERALBOOLEANEVALUATION_CLASS_OPERATION_COUNT = 5;
 			
 			
-			static const int LITERALBOOLEANEVALUATION_OPERATION_EVALUATE = 6606;
+			static const int LITERALBOOLEANEVALUATION_OPERATION_EVALUATE = 6906;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getLiteralBooleanEvaluation_Class() const = 0;
@@ -1689,12 +1780,12 @@ namespace fUML
 
 			// Begin Class LiteralEvaluation
 			//Class and Feature IDs 
-			static const unsigned int LITERALEVALUATION_CLASS = 67;
+			static const unsigned int LITERALEVALUATION_CLASS = 70;
 			static const unsigned int LITERALEVALUATION_CLASS_FEATURE_COUNT = 2;
 			static const unsigned int LITERALEVALUATION_CLASS_OPERATION_COUNT = 4;
 			
 			
-			static const int LITERALEVALUATION_OPERATION_GETTYPE_ESTRING = 6705;
+			static const int LITERALEVALUATION_OPERATION_GETTYPE_ESTRING = 7005;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getLiteralEvaluation_Class() const = 0;
@@ -1708,12 +1799,12 @@ namespace fUML
 
 			// Begin Class LiteralIntegerEvaluation
 			//Class and Feature IDs 
-			static const unsigned int LITERALINTEGEREVALUATION_CLASS = 68;
+			static const unsigned int LITERALINTEGEREVALUATION_CLASS = 71;
 			static const unsigned int LITERALINTEGEREVALUATION_CLASS_FEATURE_COUNT = 2;
 			static const unsigned int LITERALINTEGEREVALUATION_CLASS_OPERATION_COUNT = 5;
 			
 			
-			static const int LITERALINTEGEREVALUATION_OPERATION_EVALUATE = 6806;
+			static const int LITERALINTEGEREVALUATION_OPERATION_EVALUATE = 7106;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getLiteralIntegerEvaluation_Class() const = 0;
@@ -1727,12 +1818,12 @@ namespace fUML
 
 			// Begin Class LiteralNullEvaluation
 			//Class and Feature IDs 
-			static const unsigned int LITERALNULLEVALUATION_CLASS = 69;
+			static const unsigned int LITERALNULLEVALUATION_CLASS = 72;
 			static const unsigned int LITERALNULLEVALUATION_CLASS_FEATURE_COUNT = 2;
 			static const unsigned int LITERALNULLEVALUATION_CLASS_OPERATION_COUNT = 5;
 			
 			
-			static const int LITERALNULLEVALUATION_OPERATION_EVALUATE = 6906;
+			static const int LITERALNULLEVALUATION_OPERATION_EVALUATE = 7206;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getLiteralNullEvaluation_Class() const = 0;
@@ -1746,12 +1837,12 @@ namespace fUML
 
 			// Begin Class LiteralRealEvaluation
 			//Class and Feature IDs 
-			static const unsigned int LITERALREALEVALUATION_CLASS = 70;
+			static const unsigned int LITERALREALEVALUATION_CLASS = 73;
 			static const unsigned int LITERALREALEVALUATION_CLASS_FEATURE_COUNT = 2;
 			static const unsigned int LITERALREALEVALUATION_CLASS_OPERATION_COUNT = 5;
 			
 			
-			static const int LITERALREALEVALUATION_OPERATION_EVALUATE = 7006;
+			static const int LITERALREALEVALUATION_OPERATION_EVALUATE = 7306;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getLiteralRealEvaluation_Class() const = 0;
@@ -1765,12 +1856,12 @@ namespace fUML
 
 			// Begin Class LiteralStringEvaluation
 			//Class and Feature IDs 
-			static const unsigned int LITERALSTRINGEVALUATION_CLASS = 71;
+			static const unsigned int LITERALSTRINGEVALUATION_CLASS = 74;
 			static const unsigned int LITERALSTRINGEVALUATION_CLASS_FEATURE_COUNT = 2;
 			static const unsigned int LITERALSTRINGEVALUATION_CLASS_OPERATION_COUNT = 5;
 			
 			
-			static const int LITERALSTRINGEVALUATION_OPERATION_EVALUATE = 7106;
+			static const int LITERALSTRINGEVALUATION_OPERATION_EVALUATE = 7406;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getLiteralStringEvaluation_Class() const = 0;
@@ -1784,12 +1875,12 @@ namespace fUML
 
 			// Begin Class LiteralUnlimitedNaturalEvaluation
 			//Class and Feature IDs 
-			static const unsigned int LITERALUNLIMITEDNATURALEVALUATION_CLASS = 72;
+			static const unsigned int LITERALUNLIMITEDNATURALEVALUATION_CLASS = 75;
 			static const unsigned int LITERALUNLIMITEDNATURALEVALUATION_CLASS_FEATURE_COUNT = 2;
 			static const unsigned int LITERALUNLIMITEDNATURALEVALUATION_CLASS_OPERATION_COUNT = 5;
 			
 			
-			static const int LITERALUNLIMITEDNATURALEVALUATION_OPERATION_EVALUATE = 7206;
+			static const int LITERALUNLIMITEDNATURALEVALUATION_OPERATION_EVALUATE = 7506;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getLiteralUnlimitedNaturalEvaluation_Class() const = 0;
@@ -1803,21 +1894,21 @@ namespace fUML
 
 			// Begin Class Locus
 			//Class and Feature IDs 
-			static const unsigned int LOCUS_CLASS = 73;
+			static const unsigned int LOCUS_CLASS = 76;
 			static const unsigned int LOCUS_CLASS_FEATURE_COUNT = 3;
 			static const unsigned int LOCUS_CLASS_OPERATION_COUNT = 7;
 			
-			static const int LOCUS_ATTRIBUTE_EXECUTOR = 7300;
-			static const int LOCUS_ATTRIBUTE_EXTENSIONALVALUES = 7302;
-			static const int LOCUS_ATTRIBUTE_FACTORY = 7301;
+			static const int LOCUS_ATTRIBUTE_EXECUTOR = 7600;
+			static const int LOCUS_ATTRIBUTE_EXTENSIONALVALUES = 7602;
+			static const int LOCUS_ATTRIBUTE_FACTORY = 7601;
 			
-			static const int LOCUS_OPERATION_ADD_EXTENSIONALVALUE = 7307;
-			static const int LOCUS_OPERATION_ASSIGNEXECUTOR_EXECUTOR = 7304;
-			static const int LOCUS_OPERATION_ASSIGNFACTORY_EXECUTIONFACTORY = 7305;
-			static const int LOCUS_OPERATION_CONFORMS_CLASSIFIER_CLASSIFIER = 7303;
-			static const int LOCUS_OPERATION_INSTANTIATE_CLASS = 7309;
-			static const int LOCUS_OPERATION_REMOVE_EXTENSIONALVALUE = 7308;
-			static const int LOCUS_OPERATION_RETRIEVEEXTENT_CLASSIFIER = 7306;
+			static const int LOCUS_OPERATION_ADD_EXTENSIONALVALUE = 7607;
+			static const int LOCUS_OPERATION_ASSIGNEXECUTOR_EXECUTOR = 7604;
+			static const int LOCUS_OPERATION_ASSIGNFACTORY_EXECUTIONFACTORY = 7605;
+			static const int LOCUS_OPERATION_CONFORMS_CLASSIFIER_CLASSIFIER = 7603;
+			static const int LOCUS_OPERATION_INSTANTIATE_CLASS = 7609;
+			static const int LOCUS_OPERATION_REMOVE_EXTENSIONALVALUE = 7608;
+			static const int LOCUS_OPERATION_RETRIEVEEXTENT_CLASSIFIER = 7606;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getLocus_Class() const = 0;
@@ -1840,16 +1931,16 @@ namespace fUML
 
 			// Begin Class LoopNodeActivation
 			//Class and Feature IDs 
-			static const unsigned int LOOPNODEACTIVATION_CLASS = 74;
+			static const unsigned int LOOPNODEACTIVATION_CLASS = 77;
 			static const unsigned int LOOPNODEACTIVATION_CLASS_FEATURE_COUNT = 12;
 			static const unsigned int LOOPNODEACTIVATION_CLASS_OPERATION_COUNT = 65;
 			
-			static const int LOOPNODEACTIVATION_ATTRIBUTE_BODYOUTPUTLISTS = 7411;
+			static const int LOOPNODEACTIVATION_ATTRIBUTE_BODYOUTPUTLISTS = 7711;
 			
-			static const int LOOPNODEACTIVATION_OPERATION_MAKELOOPVARIABLELIST = 7476;
-			static const int LOOPNODEACTIVATION_OPERATION_RUNBODY = 7474;
-			static const int LOOPNODEACTIVATION_OPERATION_RUNLOOPVARIABLES = 7475;
-			static const int LOOPNODEACTIVATION_OPERATION_RUNTEST = 7473;
+			static const int LOOPNODEACTIVATION_OPERATION_MAKELOOPVARIABLELIST = 7776;
+			static const int LOOPNODEACTIVATION_OPERATION_RUNBODY = 7774;
+			static const int LOOPNODEACTIVATION_OPERATION_RUNLOOPVARIABLES = 7775;
+			static const int LOOPNODEACTIVATION_OPERATION_RUNTEST = 7773;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getLoopNodeActivation_Class() const = 0;
@@ -1867,7 +1958,7 @@ namespace fUML
 
 			// Begin Class MergeNodeActivation
 			//Class and Feature IDs 
-			static const unsigned int MERGENODEACTIVATION_CLASS = 75;
+			static const unsigned int MERGENODEACTIVATION_CLASS = 78;
 			static const unsigned int MERGENODEACTIVATION_CLASS_FEATURE_COUNT = 6;
 			static const unsigned int MERGENODEACTIVATION_CLASS_OPERATION_COUNT = 28;
 			
@@ -1884,20 +1975,20 @@ namespace fUML
 
 			// Begin Class Object
 			//Class and Feature IDs 
-			static const unsigned int OBJECT_CLASS = 76;
+			static const unsigned int OBJECT_CLASS = 79;
 			static const unsigned int OBJECT_CLASS_FEATURE_COUNT = 4;
 			static const unsigned int OBJECT_CLASS_OPERATION_COUNT = 27;
 			
-			static const int OBJECT_ATTRIBUTE_OBJECTACTIVATION = 7603;
-			static const int OBJECT_ATTRIBUTE_TYPES = 7602;
+			static const int OBJECT_ATTRIBUTE_OBJECTACTIVATION = 7903;
+			static const int OBJECT_ATTRIBUTE_TYPES = 7902;
 			
-			static const int OBJECT_OPERATION__REGISTER_EVENTACCEPTER = 7627;
-			static const int OBJECT_OPERATION_DESTROY = 7630;
-			static const int OBJECT_OPERATION_DISPATCH_OPERATION = 7625;
-			static const int OBJECT_OPERATION_NEW_ = 7629;
-			static const int OBJECT_OPERATION_SEND_SIGNALINSTANCE = 7626;
-			static const int OBJECT_OPERATION_STARTBEHAVIOR_CLASS_PARAMETERVALUE = 7624;
-			static const int OBJECT_OPERATION_UNREGISTER_EVENTACCEPTER = 7628;
+			static const int OBJECT_OPERATION__REGISTER_EVENTACCEPTER = 7927;
+			static const int OBJECT_OPERATION_DESTROY = 7930;
+			static const int OBJECT_OPERATION_DISPATCH_OPERATION = 7925;
+			static const int OBJECT_OPERATION_NEW_ = 7929;
+			static const int OBJECT_OPERATION_SEND_SIGNALINSTANCE = 7926;
+			static const int OBJECT_OPERATION_STARTBEHAVIOR_CLASS_PARAMETERVALUE = 7924;
+			static const int OBJECT_OPERATION_UNREGISTER_EVENTACCEPTER = 7928;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getObject_Class() const = 0;
@@ -1919,24 +2010,24 @@ namespace fUML
 
 			// Begin Class ObjectActivation
 			//Class and Feature IDs 
-			static const unsigned int OBJECTACTIVATION_CLASS = 77;
+			static const unsigned int OBJECTACTIVATION_CLASS = 80;
 			static const unsigned int OBJECTACTIVATION_CLASS_FEATURE_COUNT = 4;
 			static const unsigned int OBJECTACTIVATION_CLASS_OPERATION_COUNT = 9;
 			
-			static const int OBJECTACTIVATION_ATTRIBUTE_CLASSIFIERBEHAVIOREXECUTIONS = 7703;
-			static const int OBJECTACTIVATION_ATTRIBUTE_EVENTPOOL = 7701;
-			static const int OBJECTACTIVATION_ATTRIBUTE_OBJECT = 7702;
-			static const int OBJECTACTIVATION_ATTRIBUTE_WAITINGEVENTACCEPTERS = 7700;
+			static const int OBJECTACTIVATION_ATTRIBUTE_CLASSIFIERBEHAVIOREXECUTIONS = 8003;
+			static const int OBJECTACTIVATION_ATTRIBUTE_EVENTPOOL = 8001;
+			static const int OBJECTACTIVATION_ATTRIBUTE_OBJECT = 8002;
+			static const int OBJECTACTIVATION_ATTRIBUTE_WAITINGEVENTACCEPTERS = 8000;
 			
-			static const int OBJECTACTIVATION_OPERATION__REGISTER_EVENTACCEPTER = 7706;
-			static const int OBJECTACTIVATION_OPERATION__SEND_EJAVAOBJECT = 7712;
-			static const int OBJECTACTIVATION_OPERATION__STARTOBJECTBEHAVIOR = 7711;
-			static const int OBJECTACTIVATION_OPERATION_DISPATCHNEXTEVENT = 7709;
-			static const int OBJECTACTIVATION_OPERATION_RETRIEVENEXTEVENT = 7710;
-			static const int OBJECTACTIVATION_OPERATION_SEND_SIGNALINSTANCE = 7708;
-			static const int OBJECTACTIVATION_OPERATION_STARTBEHAVIOR_CLASS_PARAMETERVALUE = 7704;
-			static const int OBJECTACTIVATION_OPERATION_STOP = 7705;
-			static const int OBJECTACTIVATION_OPERATION_UNREGISTER_EVENTACCEPTER = 7707;
+			static const int OBJECTACTIVATION_OPERATION__REGISTER_EVENTACCEPTER = 8006;
+			static const int OBJECTACTIVATION_OPERATION__SEND_EJAVAOBJECT = 8012;
+			static const int OBJECTACTIVATION_OPERATION__STARTOBJECTBEHAVIOR = 8011;
+			static const int OBJECTACTIVATION_OPERATION_DISPATCHNEXTEVENT = 8009;
+			static const int OBJECTACTIVATION_OPERATION_RETRIEVENEXTEVENT = 8010;
+			static const int OBJECTACTIVATION_OPERATION_SEND_SIGNALINSTANCE = 8008;
+			static const int OBJECTACTIVATION_OPERATION_STARTBEHAVIOR_CLASS_PARAMETERVALUE = 8004;
+			static const int OBJECTACTIVATION_OPERATION_STOP = 8005;
+			static const int OBJECTACTIVATION_OPERATION_UNREGISTER_EVENTACCEPTER = 8007;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getObjectActivation_Class() const = 0;
@@ -1962,23 +2053,23 @@ namespace fUML
 
 			// Begin Class ObjectNodeActivation
 			//Class and Feature IDs 
-			static const unsigned int OBJECTNODEACTIVATION_CLASS = 78;
+			static const unsigned int OBJECTNODEACTIVATION_CLASS = 81;
 			static const unsigned int OBJECTNODEACTIVATION_CLASS_FEATURE_COUNT = 7;
 			static const unsigned int OBJECTNODEACTIVATION_CLASS_OPERATION_COUNT = 38;
-			static const int OBJECTNODEACTIVATION_ATTRIBUTE_OFFEREDTOKENCOUNT = 7806;
+			static const int OBJECTNODEACTIVATION_ATTRIBUTE_OFFEREDTOKENCOUNT = 8106;
 			
 			
-			static const int OBJECTNODEACTIVATION_OPERATION_ADDTOKEN_TOKEN = 7842;
-			static const int OBJECTNODEACTIVATION_OPERATION_CLEARTOKENS = 7844;
-			static const int OBJECTNODEACTIVATION_OPERATION_COUNTOFFEREDVALUES = 7834;
-			static const int OBJECTNODEACTIVATION_OPERATION_COUNTUNOFFEREDTOKENS = 7836;
-			static const int OBJECTNODEACTIVATION_OPERATION_GETUNOFFEREDTOKENS = 7837;
-			static const int OBJECTNODEACTIVATION_OPERATION_REMOVETOKEN_TOKEN = 7843;
-			static const int OBJECTNODEACTIVATION_OPERATION_RUN = 7839;
-			static const int OBJECTNODEACTIVATION_OPERATION_SENDOFFERS_TOKEN = 7840;
-			static const int OBJECTNODEACTIVATION_OPERATION_SENDUNOFFEREDTOKENS = 7835;
-			static const int OBJECTNODEACTIVATION_OPERATION_TAKEUNOFFEREDTOKENS = 7838;
-			static const int OBJECTNODEACTIVATION_OPERATION_TERMINATE = 7841;
+			static const int OBJECTNODEACTIVATION_OPERATION_ADDTOKEN_TOKEN = 8142;
+			static const int OBJECTNODEACTIVATION_OPERATION_CLEARTOKENS = 8144;
+			static const int OBJECTNODEACTIVATION_OPERATION_COUNTOFFEREDVALUES = 8134;
+			static const int OBJECTNODEACTIVATION_OPERATION_COUNTUNOFFEREDTOKENS = 8136;
+			static const int OBJECTNODEACTIVATION_OPERATION_GETUNOFFEREDTOKENS = 8137;
+			static const int OBJECTNODEACTIVATION_OPERATION_REMOVETOKEN_TOKEN = 8143;
+			static const int OBJECTNODEACTIVATION_OPERATION_RUN = 8139;
+			static const int OBJECTNODEACTIVATION_OPERATION_SENDOFFERS_TOKEN = 8140;
+			static const int OBJECTNODEACTIVATION_OPERATION_SENDUNOFFEREDTOKENS = 8135;
+			static const int OBJECTNODEACTIVATION_OPERATION_TAKEUNOFFEREDTOKENS = 8138;
+			static const int OBJECTNODEACTIVATION_OPERATION_TERMINATE = 8141;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getObjectNodeActivation_Class() const = 0;
@@ -2003,14 +2094,14 @@ namespace fUML
 
 			// Begin Class ObjectToken
 			//Class and Feature IDs 
-			static const unsigned int OBJECTTOKEN_CLASS = 79;
+			static const unsigned int OBJECTTOKEN_CLASS = 82;
 			static const unsigned int OBJECTTOKEN_CLASS_FEATURE_COUNT = 3;
 			static const unsigned int OBJECTTOKEN_CLASS_OPERATION_COUNT = 7;
 			
-			static const int OBJECTTOKEN_ATTRIBUTE_VALUE = 7902;
+			static const int OBJECTTOKEN_ATTRIBUTE_VALUE = 8202;
 			
-			static const int OBJECTTOKEN_OPERATION_EQUALS_TOKEN = 7908;
-			static const int OBJECTTOKEN_OPERATION_ISCONTROL = 7909;
+			static const int OBJECTTOKEN_OPERATION_EQUALS_TOKEN = 8208;
+			static const int OBJECTTOKEN_OPERATION_ISCONTROL = 8209;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getObjectToken_Class() const = 0;
@@ -2026,17 +2117,17 @@ namespace fUML
 
 			// Begin Class Offer
 			//Class and Feature IDs 
-			static const unsigned int OFFER_CLASS = 80;
+			static const unsigned int OFFER_CLASS = 83;
 			static const unsigned int OFFER_CLASS_FEATURE_COUNT = 1;
 			static const unsigned int OFFER_CLASS_OPERATION_COUNT = 5;
 			
-			static const int OFFER_ATTRIBUTE_OFFEREDTOKENS = 8000;
+			static const int OFFER_ATTRIBUTE_OFFEREDTOKENS = 8300;
 			
-			static const int OFFER_OPERATION_COUNTOFFEREDVALES = 8001;
-			static const int OFFER_OPERATION_HASTOKENS = 8005;
-			static const int OFFER_OPERATION_REMOVEOFFEREDVALUES_EINT = 8003;
-			static const int OFFER_OPERATION_REMOVEWITHDRAWNTOKENS = 8004;
-			static const int OFFER_OPERATION_RETRIEVEOFFEREDTOKENS = 8002;
+			static const int OFFER_OPERATION_COUNTOFFEREDVALES = 8301;
+			static const int OFFER_OPERATION_HASTOKENS = 8305;
+			static const int OFFER_OPERATION_REMOVEOFFEREDVALUES_EINT = 8303;
+			static const int OFFER_OPERATION_REMOVEWITHDRAWNTOKENS = 8304;
+			static const int OFFER_OPERATION_RETRIEVEOFFEREDTOKENS = 8302;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getOffer_Class() const = 0;
@@ -2055,13 +2146,13 @@ namespace fUML
 
 			// Begin Class OpaqueBehaviorExecution
 			//Class and Feature IDs 
-			static const unsigned int OPAQUEBEHAVIOREXECUTION_CLASS = 81;
+			static const unsigned int OPAQUEBEHAVIOREXECUTION_CLASS = 84;
 			static const unsigned int OPAQUEBEHAVIOREXECUTION_CLASS_FEATURE_COUNT = 6;
 			static const unsigned int OPAQUEBEHAVIOREXECUTION_CLASS_OPERATION_COUNT = 36;
 			
 			
-			static const int OPAQUEBEHAVIOREXECUTION_OPERATION_DOBODY_PARAMETERVALUE_PARAMETERVALUE = 8140;
-			static const int OPAQUEBEHAVIOREXECUTION_OPERATION_EXECUTE = 8141;
+			static const int OPAQUEBEHAVIOREXECUTION_OPERATION_DOBODY_PARAMETERVALUE_PARAMETERVALUE = 8440;
+			static const int OPAQUEBEHAVIOREXECUTION_OPERATION_EXECUTE = 8441;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getOpaqueBehaviorExecution_Class() const = 0;
@@ -2076,7 +2167,7 @@ namespace fUML
 
 			// Begin Class OutputPinActivation
 			//Class and Feature IDs 
-			static const unsigned int OUTPUTPINACTIVATION_CLASS = 82;
+			static const unsigned int OUTPUTPINACTIVATION_CLASS = 85;
 			static const unsigned int OUTPUTPINACTIVATION_CLASS_FEATURE_COUNT = 8;
 			static const unsigned int OUTPUTPINACTIVATION_CLASS_OPERATION_COUNT = 40;
 			
@@ -2093,12 +2184,12 @@ namespace fUML
 
 			// Begin Class ParameterValue
 			//Class and Feature IDs 
-			static const unsigned int PARAMETERVALUE_CLASS = 83;
+			static const unsigned int PARAMETERVALUE_CLASS = 86;
 			static const unsigned int PARAMETERVALUE_CLASS_FEATURE_COUNT = 2;
 			static const unsigned int PARAMETERVALUE_CLASS_OPERATION_COUNT = 0;
 			
-			static const int PARAMETERVALUE_ATTRIBUTE_PARAMETER = 8300;
-			static const int PARAMETERVALUE_ATTRIBUTE_VALUES = 8301;
+			static const int PARAMETERVALUE_ATTRIBUTE_PARAMETER = 8600;
+			static const int PARAMETERVALUE_ATTRIBUTE_VALUES = 8601;
 			
 			
 			//Class and Feature Getter
@@ -2114,14 +2205,14 @@ namespace fUML
 
 			// Begin Class PinActivation
 			//Class and Feature IDs 
-			static const unsigned int PINACTIVATION_CLASS = 84;
+			static const unsigned int PINACTIVATION_CLASS = 87;
 			static const unsigned int PINACTIVATION_CLASS_FEATURE_COUNT = 8;
 			static const unsigned int PINACTIVATION_CLASS_OPERATION_COUNT = 40;
 			
-			static const int PINACTIVATION_ATTRIBUTE_ACTIONACTIVATION = 8407;
+			static const int PINACTIVATION_ATTRIBUTE_ACTIONACTIVATION = 8707;
 			
-			static const int PINACTIVATION_OPERATION_FIRE_TOKEN = 8446;
-			static const int PINACTIVATION_OPERATION_TAKEOFFEREDTOKENS = 8447;
+			static const int PINACTIVATION_OPERATION_FIRE_TOKEN = 8746;
+			static const int PINACTIVATION_OPERATION_TAKEOFFEREDTOKENS = 8747;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getPinActivation_Class() const = 0;
@@ -2137,13 +2228,13 @@ namespace fUML
 
 			// Begin Class PrimitiveValue
 			//Class and Feature IDs 
-			static const unsigned int PRIMITIVEVALUE_CLASS = 85;
+			static const unsigned int PRIMITIVEVALUE_CLASS = 88;
 			static const unsigned int PRIMITIVEVALUE_CLASS_FEATURE_COUNT = 1;
 			static const unsigned int PRIMITIVEVALUE_CLASS_OPERATION_COUNT = 9;
 			
-			static const int PRIMITIVEVALUE_ATTRIBUTE_TYPE = 8500;
+			static const int PRIMITIVEVALUE_ATTRIBUTE_TYPE = 8800;
 			
-			static const int PRIMITIVEVALUE_OPERATION_GETTYPES = 8509;
+			static const int PRIMITIVEVALUE_OPERATION_GETTYPES = 8809;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getPrimitiveValue_Class() const = 0;
@@ -2158,7 +2249,7 @@ namespace fUML
 
 			// Begin Class ReadExtentActionActivation
 			//Class and Feature IDs 
-			static const unsigned int READEXTENTACTIONACTIVATION_CLASS = 86;
+			static const unsigned int READEXTENTACTIONACTIVATION_CLASS = 89;
 			static const unsigned int READEXTENTACTIONACTIVATION_CLASS_FEATURE_COUNT = 10;
 			static const unsigned int READEXTENTACTIONACTIVATION_CLASS_OPERATION_COUNT = 47;
 			
@@ -2175,12 +2266,12 @@ namespace fUML
 
 			// Begin Class ReadIsClassifiedObjectActionActivation
 			//Class and Feature IDs 
-			static const unsigned int READISCLASSIFIEDOBJECTACTIONACTIVATION_CLASS = 87;
+			static const unsigned int READISCLASSIFIEDOBJECTACTIONACTIVATION_CLASS = 90;
 			static const unsigned int READISCLASSIFIEDOBJECTACTIONACTIVATION_CLASS_FEATURE_COUNT = 10;
 			static const unsigned int READISCLASSIFIEDOBJECTACTIONACTIVATION_CLASS_OPERATION_COUNT = 48;
 			
 			
-			static const int READISCLASSIFIEDOBJECTACTIONACTIVATION_OPERATION_CHECKALLPARENTS_CLASSIFIER_CLASSIFIER = 8757;
+			static const int READISCLASSIFIEDOBJECTACTIONACTIVATION_OPERATION_CHECKALLPARENTS_CLASSIFIER_CLASSIFIER = 9057;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getReadIsClassifiedObjectActionActivation_Class() const = 0;
@@ -2194,7 +2285,7 @@ namespace fUML
 
 			// Begin Class ReadLinkActionActivation
 			//Class and Feature IDs 
-			static const unsigned int READLINKACTIONACTIVATION_CLASS = 88;
+			static const unsigned int READLINKACTIONACTIVATION_CLASS = 91;
 			static const unsigned int READLINKACTIONACTIVATION_CLASS_FEATURE_COUNT = 10;
 			static const unsigned int READLINKACTIONACTIVATION_CLASS_OPERATION_COUNT = 50;
 			
@@ -2211,12 +2302,12 @@ namespace fUML
 
 			// Begin Class ReadSelfActionActivation
 			//Class and Feature IDs 
-			static const unsigned int READSELFACTIONACTIVATION_CLASS = 89;
+			static const unsigned int READSELFACTIONACTIVATION_CLASS = 92;
 			static const unsigned int READSELFACTIONACTIVATION_CLASS_FEATURE_COUNT = 10;
 			static const unsigned int READSELFACTIONACTIVATION_CLASS_OPERATION_COUNT = 48;
 			
 			
-			static const int READSELFACTIONACTIVATION_OPERATION_DOACTION = 8957;
+			static const int READSELFACTIONACTIVATION_OPERATION_DOACTION = 9257;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getReadSelfActionActivation_Class() const = 0;
@@ -2230,7 +2321,7 @@ namespace fUML
 
 			// Begin Class ReadStructuralFeatureActionActivation
 			//Class and Feature IDs 
-			static const unsigned int READSTRUCTURALFEATUREACTIONACTIVATION_CLASS = 90;
+			static const unsigned int READSTRUCTURALFEATUREACTIONACTIVATION_CLASS = 93;
 			static const unsigned int READSTRUCTURALFEATUREACTIONACTIVATION_CLASS_FEATURE_COUNT = 10;
 			static const unsigned int READSTRUCTURALFEATUREACTIONACTIVATION_CLASS_OPERATION_COUNT = 50;
 			
@@ -2247,15 +2338,15 @@ namespace fUML
 
 			// Begin Class RealValue
 			//Class and Feature IDs 
-			static const unsigned int REALVALUE_CLASS = 91;
+			static const unsigned int REALVALUE_CLASS = 94;
 			static const unsigned int REALVALUE_CLASS_FEATURE_COUNT = 2;
 			static const unsigned int REALVALUE_CLASS_OPERATION_COUNT = 12;
-			static const int REALVALUE_ATTRIBUTE_VALUE = 9101;
+			static const int REALVALUE_ATTRIBUTE_VALUE = 9401;
 			
 			
-			static const int REALVALUE_OPERATION_EQUALS_VALUE = 9112;
-			static const int REALVALUE_OPERATION_SPECIFY = 9111;
-			static const int REALVALUE_OPERATION_TOSTRING = 9113;
+			static const int REALVALUE_OPERATION_EQUALS_VALUE = 9412;
+			static const int REALVALUE_OPERATION_SPECIFY = 9411;
+			static const int REALVALUE_OPERATION_TOSTRING = 9413;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getRealValue_Class() const = 0;
@@ -2272,7 +2363,7 @@ namespace fUML
 
 			// Begin Class ReclassifyObjectActionActivation
 			//Class and Feature IDs 
-			static const unsigned int RECLASSIFYOBJECTACTIONACTIVATION_CLASS = 92;
+			static const unsigned int RECLASSIFYOBJECTACTIONACTIVATION_CLASS = 95;
 			static const unsigned int RECLASSIFYOBJECTACTIONACTIVATION_CLASS_FEATURE_COUNT = 10;
 			static const unsigned int RECLASSIFYOBJECTACTIONACTIVATION_CLASS_OPERATION_COUNT = 47;
 			
@@ -2289,13 +2380,13 @@ namespace fUML
 
 			// Begin Class RedefinitionBasedDispatchStrategy
 			//Class and Feature IDs 
-			static const unsigned int REDEFINITIONBASEDDISPATCHSTRATEGY_CLASS = 93;
+			static const unsigned int REDEFINITIONBASEDDISPATCHSTRATEGY_CLASS = 96;
 			static const unsigned int REDEFINITIONBASEDDISPATCHSTRATEGY_CLASS_FEATURE_COUNT = 0;
 			static const unsigned int REDEFINITIONBASEDDISPATCHSTRATEGY_CLASS_OPERATION_COUNT = 6;
 			
 			
-			static const int REDEFINITIONBASEDDISPATCHSTRATEGY_OPERATION_OPERATIONSMATCH_OPERATION_OPERATION = 9304;
-			static const int REDEFINITIONBASEDDISPATCHSTRATEGY_OPERATION_RETRIEVEMETHOD_OBJECT_OPERATION = 9305;
+			static const int REDEFINITIONBASEDDISPATCHSTRATEGY_OPERATION_OPERATIONSMATCH_OPERATION_OPERATION = 9604;
+			static const int REDEFINITIONBASEDDISPATCHSTRATEGY_OPERATION_RETRIEVEMETHOD_OBJECT_OPERATION = 9605;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getRedefinitionBasedDispatchStrategy_Class() const = 0;
@@ -2310,11 +2401,11 @@ namespace fUML
 
 			// Begin Class ReduceActionActivation
 			//Class and Feature IDs 
-			static const unsigned int REDUCEACTIONACTIVATION_CLASS = 94;
+			static const unsigned int REDUCEACTIONACTIVATION_CLASS = 97;
 			static const unsigned int REDUCEACTIONACTIVATION_CLASS_FEATURE_COUNT = 11;
 			static const unsigned int REDUCEACTIONACTIVATION_CLASS_OPERATION_COUNT = 47;
 			
-			static const int REDUCEACTIONACTIVATION_ATTRIBUTE_CURRENTEXECUTION = 9410;
+			static const int REDUCEACTIONACTIVATION_ATTRIBUTE_CURRENTEXECUTION = 9710;
 			
 			
 			//Class and Feature Getter
@@ -2329,23 +2420,23 @@ namespace fUML
 
 			// Begin Class Reference
 			//Class and Feature IDs 
-			static const unsigned int REFERENCE_CLASS = 95;
+			static const unsigned int REFERENCE_CLASS = 98;
 			static const unsigned int REFERENCE_CLASS_FEATURE_COUNT = 1;
 			static const unsigned int REFERENCE_CLASS_OPERATION_COUNT = 24;
 			
-			static const int REFERENCE_ATTRIBUTE_REFERENT = 9500;
+			static const int REFERENCE_ATTRIBUTE_REFERENT = 9800;
 			
-			static const int REFERENCE_OPERATION_ASSIGNFEATUREVALUE_STRUCTURALFEATURE_EINT = 9522;
-			static const int REFERENCE_OPERATION_DESTROY = 9517;
-			static const int REFERENCE_OPERATION_DISPATCH_OPERATION = 9515;
-			static const int REFERENCE_OPERATION_EQUALS_VALUE = 9518;
-			static const int REFERENCE_OPERATION_GETTYPES = 9520;
-			static const int REFERENCE_OPERATION_NEW_ = 9519;
-			static const int REFERENCE_OPERATION_RETRIEVEFEATUREVALUE_STRUCTURALFEATURE = 9521;
-			static const int REFERENCE_OPERATION_RETRIEVEFEATUREVALUES = 9523;
-			static const int REFERENCE_OPERATION_SEND_SIGNALINSTANCE = 9516;
-			static const int REFERENCE_OPERATION_STARTBEHAVIOR_CLASS_PARAMETERVALUE = 9514;
-			static const int REFERENCE_OPERATION_TOSTRING = 9524;
+			static const int REFERENCE_OPERATION_ASSIGNFEATUREVALUE_STRUCTURALFEATURE_EINT = 9822;
+			static const int REFERENCE_OPERATION_DESTROY = 9817;
+			static const int REFERENCE_OPERATION_DISPATCH_OPERATION = 9815;
+			static const int REFERENCE_OPERATION_EQUALS_VALUE = 9818;
+			static const int REFERENCE_OPERATION_GETTYPES = 9820;
+			static const int REFERENCE_OPERATION_NEW_ = 9819;
+			static const int REFERENCE_OPERATION_RETRIEVEFEATUREVALUE_STRUCTURALFEATURE = 9821;
+			static const int REFERENCE_OPERATION_RETRIEVEFEATUREVALUES = 9823;
+			static const int REFERENCE_OPERATION_SEND_SIGNALINSTANCE = 9816;
+			static const int REFERENCE_OPERATION_STARTBEHAVIOR_CLASS_PARAMETERVALUE = 9814;
+			static const int REFERENCE_OPERATION_TOSTRING = 9824;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getReference_Class() const = 0;
@@ -2370,7 +2461,7 @@ namespace fUML
 
 			// Begin Class RemoveStructuralFeatureValueActivation
 			//Class and Feature IDs 
-			static const unsigned int REMOVESTRUCTURALFEATUREVALUEACTIVATION_CLASS = 96;
+			static const unsigned int REMOVESTRUCTURALFEATUREVALUEACTIVATION_CLASS = 99;
 			static const unsigned int REMOVESTRUCTURALFEATUREVALUEACTIVATION_CLASS_FEATURE_COUNT = 10;
 			static const unsigned int REMOVESTRUCTURALFEATUREVALUEACTIVATION_CLASS_OPERATION_COUNT = 51;
 			
@@ -2387,12 +2478,12 @@ namespace fUML
 
 			// Begin Class SemanticStrategy
 			//Class and Feature IDs 
-			static const unsigned int SEMANTICSTRATEGY_CLASS = 97;
+			static const unsigned int SEMANTICSTRATEGY_CLASS = 100;
 			static const unsigned int SEMANTICSTRATEGY_CLASS_FEATURE_COUNT = 0;
 			static const unsigned int SEMANTICSTRATEGY_CLASS_OPERATION_COUNT = 1;
 			
 			
-			static const int SEMANTICSTRATEGY_OPERATION_RETRIEVENAME = 9700;
+			static const int SEMANTICSTRATEGY_OPERATION_RETRIEVENAME = 10000;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getSemanticStrategy_Class() const = 0;
@@ -2406,13 +2497,13 @@ namespace fUML
 
 			// Begin Class SemanticVisitor
 			//Class and Feature IDs 
-			static const unsigned int SEMANTICVISITOR_CLASS = 98;
+			static const unsigned int SEMANTICVISITOR_CLASS = 101;
 			static const unsigned int SEMANTICVISITOR_CLASS_FEATURE_COUNT = 0;
 			static const unsigned int SEMANTICVISITOR_CLASS_OPERATION_COUNT = 2;
 			
 			
-			static const int SEMANTICVISITOR_OPERATION__BEGINISOLATION = 9801;
-			static const int SEMANTICVISITOR_OPERATION__ENDISOLATION = 9800;
+			static const int SEMANTICVISITOR_OPERATION__BEGINISOLATION = 10101;
+			static const int SEMANTICVISITOR_OPERATION__ENDISOLATION = 10100;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getSemanticVisitor_Class() const = 0;
@@ -2427,12 +2518,12 @@ namespace fUML
 
 			// Begin Class SendSignalActionActivation
 			//Class and Feature IDs 
-			static const unsigned int SENDSIGNALACTIONACTIVATION_CLASS = 99;
+			static const unsigned int SENDSIGNALACTIONACTIVATION_CLASS = 102;
 			static const unsigned int SENDSIGNALACTIONACTIVATION_CLASS_FEATURE_COUNT = 10;
 			static const unsigned int SENDSIGNALACTIONACTIVATION_CLASS_OPERATION_COUNT = 48;
 			
 			
-			static const int SENDSIGNALACTIONACTIVATION_OPERATION_DOACTION = 9957;
+			static const int SENDSIGNALACTIONACTIVATION_OPERATION_DOACTION = 10257;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getSendSignalActionActivation_Class() const = 0;
@@ -2446,11 +2537,11 @@ namespace fUML
 
 			// Begin Class SignalInstance
 			//Class and Feature IDs 
-			static const unsigned int SIGNALINSTANCE_CLASS = 100;
+			static const unsigned int SIGNALINSTANCE_CLASS = 103;
 			static const unsigned int SIGNALINSTANCE_CLASS_FEATURE_COUNT = 2;
 			static const unsigned int SIGNALINSTANCE_CLASS_OPERATION_COUNT = 19;
 			
-			static const int SIGNALINSTANCE_ATTRIBUTE_TYPE = 10001;
+			static const int SIGNALINSTANCE_ATTRIBUTE_TYPE = 10301;
 			
 			
 			//Class and Feature Getter
@@ -2465,12 +2556,12 @@ namespace fUML
 
 			// Begin Class StartClassifierBehaviorActionActivation
 			//Class and Feature IDs 
-			static const unsigned int STARTCLASSIFIERBEHAVIORACTIONACTIVATION_CLASS = 101;
+			static const unsigned int STARTCLASSIFIERBEHAVIORACTIONACTIVATION_CLASS = 104;
 			static const unsigned int STARTCLASSIFIERBEHAVIORACTIONACTIVATION_CLASS_FEATURE_COUNT = 10;
 			static const unsigned int STARTCLASSIFIERBEHAVIORACTIONACTIVATION_CLASS_OPERATION_COUNT = 48;
 			
 			
-			static const int STARTCLASSIFIERBEHAVIORACTIONACTIVATION_OPERATION_DOACTION = 10157;
+			static const int STARTCLASSIFIERBEHAVIORACTIONACTIVATION_OPERATION_DOACTION = 10457;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getStartClassifierBehaviorActionActivation_Class() const = 0;
@@ -2484,12 +2575,12 @@ namespace fUML
 
 			// Begin Class StartObjectBehaviorActionActivation
 			//Class and Feature IDs 
-			static const unsigned int STARTOBJECTBEHAVIORACTIONACTIVATION_CLASS = 102;
+			static const unsigned int STARTOBJECTBEHAVIORACTIONACTIVATION_CLASS = 105;
 			static const unsigned int STARTOBJECTBEHAVIORACTIONACTIVATION_CLASS_FEATURE_COUNT = 10;
 			static const unsigned int STARTOBJECTBEHAVIORACTIONACTIVATION_CLASS_OPERATION_COUNT = 48;
 			
 			
-			static const int STARTOBJECTBEHAVIORACTIONACTIVATION_OPERATION_DOACTION = 10257;
+			static const int STARTOBJECTBEHAVIORACTIONACTIVATION_OPERATION_DOACTION = 10557;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getStartObjectBehaviorActionActivation_Class() const = 0;
@@ -2503,15 +2594,15 @@ namespace fUML
 
 			// Begin Class StringValue
 			//Class and Feature IDs 
-			static const unsigned int STRINGVALUE_CLASS = 103;
+			static const unsigned int STRINGVALUE_CLASS = 106;
 			static const unsigned int STRINGVALUE_CLASS_FEATURE_COUNT = 2;
 			static const unsigned int STRINGVALUE_CLASS_OPERATION_COUNT = 12;
-			static const int STRINGVALUE_ATTRIBUTE_VALUE = 10301;
+			static const int STRINGVALUE_ATTRIBUTE_VALUE = 10601;
 			
 			
-			static const int STRINGVALUE_OPERATION_EQUALS_VALUE = 10312;
-			static const int STRINGVALUE_OPERATION_SPECIFY = 10311;
-			static const int STRINGVALUE_OPERATION_TOSTRING = 10313;
+			static const int STRINGVALUE_OPERATION_EQUALS_VALUE = 10612;
+			static const int STRINGVALUE_OPERATION_SPECIFY = 10611;
+			static const int STRINGVALUE_OPERATION_TOSTRING = 10613;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getStringValue_Class() const = 0;
@@ -2528,14 +2619,14 @@ namespace fUML
 
 			// Begin Class StructuralFeatureActionActivation
 			//Class and Feature IDs 
-			static const unsigned int STRUCTURALFEATUREACTIONACTIVATION_CLASS = 104;
+			static const unsigned int STRUCTURALFEATUREACTIONACTIVATION_CLASS = 107;
 			static const unsigned int STRUCTURALFEATUREACTIONACTIVATION_CLASS_FEATURE_COUNT = 10;
 			static const unsigned int STRUCTURALFEATUREACTIONACTIVATION_CLASS_OPERATION_COUNT = 50;
 			
 			
-			static const int STRUCTURALFEATUREACTIONACTIVATION_OPERATION_GETASSOCIATION_STRUCTURALFEATURE = 10457;
-			static const int STRUCTURALFEATUREACTIONACTIVATION_OPERATION_GETMATCHINGLINKS_ASSOCIATION_VALUE = 10458;
-			static const int STRUCTURALFEATUREACTIONACTIVATION_OPERATION_GETOPPOSITEEND_ASSOCIATION_STRUCTURALFEATURE = 10459;
+			static const int STRUCTURALFEATUREACTIONACTIVATION_OPERATION_GETASSOCIATION_STRUCTURALFEATURE = 10757;
+			static const int STRUCTURALFEATUREACTIONACTIVATION_OPERATION_GETMATCHINGLINKS_ASSOCIATION_VALUE = 10758;
+			static const int STRUCTURALFEATUREACTIONACTIVATION_OPERATION_GETOPPOSITEEND_ASSOCIATION_STRUCTURALFEATURE = 10759;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getStructuralFeatureActionActivation_Class() const = 0;
@@ -2551,26 +2642,26 @@ namespace fUML
 
 			// Begin Class StructuredActivityNodeActivation
 			//Class and Feature IDs 
-			static const unsigned int STRUCTUREDACTIVITYNODEACTIVATION_CLASS = 105;
+			static const unsigned int STRUCTUREDACTIVITYNODEACTIVATION_CLASS = 108;
 			static const unsigned int STRUCTUREDACTIVITYNODEACTIVATION_CLASS_FEATURE_COUNT = 11;
 			static const unsigned int STRUCTUREDACTIVITYNODEACTIVATION_CLASS_OPERATION_COUNT = 61;
 			
-			static const int STRUCTUREDACTIVITYNODEACTIVATION_ATTRIBUTE_ACTIVATIONGROUP = 10510;
+			static const int STRUCTUREDACTIVITYNODEACTIVATION_ATTRIBUTE_ACTIVATIONGROUP = 10810;
 			
-			static const int STRUCTUREDACTIVITYNODEACTIVATION_OPERATION_COMPLETEACTION = 10570;
-			static const int STRUCTUREDACTIVITYNODEACTIVATION_OPERATION_CREATEEDGEINSTANCES = 10566;
-			static const int STRUCTUREDACTIVITYNODEACTIVATION_OPERATION_CREATENODEACTIVATIONS = 10565;
-			static const int STRUCTUREDACTIVITYNODEACTIVATION_OPERATION_DOACTION = 10562;
-			static const int STRUCTUREDACTIVITYNODEACTIVATION_OPERATION_DOSTRUCTUREDACTIVITY = 10558;
-			static const int STRUCTUREDACTIVITYNODEACTIVATION_OPERATION_GETNODEACTIVATION_ACTIVITYNODE = 10564;
-			static const int STRUCTUREDACTIVITYNODEACTIVATION_OPERATION_GETPINVALUES_OUTPUTPIN = 10560;
-			static const int STRUCTUREDACTIVITYNODEACTIVATION_OPERATION_ISSOURCEFOR_ACTIVITYEDGEINSTANCE = 10568;
-			static const int STRUCTUREDACTIVITYNODEACTIVATION_OPERATION_ISSUSPENDED = 10569;
-			static const int STRUCTUREDACTIVITYNODEACTIVATION_OPERATION_MAKEACTIVITYNODELIST_EXECUTABLENODE = 10559;
-			static const int STRUCTUREDACTIVITYNODEACTIVATION_OPERATION_PUTPINVALUES_OUTPUTPIN_VALUE = 10561;
-			static const int STRUCTUREDACTIVITYNODEACTIVATION_OPERATION_RESUME = 10571;
-			static const int STRUCTUREDACTIVITYNODEACTIVATION_OPERATION_TERMINATE = 10563;
-			static const int STRUCTUREDACTIVITYNODEACTIVATION_OPERATION_TERMINATEALL = 10567;
+			static const int STRUCTUREDACTIVITYNODEACTIVATION_OPERATION_COMPLETEACTION = 10870;
+			static const int STRUCTUREDACTIVITYNODEACTIVATION_OPERATION_CREATEEDGEINSTANCES = 10866;
+			static const int STRUCTUREDACTIVITYNODEACTIVATION_OPERATION_CREATENODEACTIVATIONS = 10865;
+			static const int STRUCTUREDACTIVITYNODEACTIVATION_OPERATION_DOACTION = 10862;
+			static const int STRUCTUREDACTIVITYNODEACTIVATION_OPERATION_DOSTRUCTUREDACTIVITY = 10858;
+			static const int STRUCTUREDACTIVITYNODEACTIVATION_OPERATION_GETNODEACTIVATION_ACTIVITYNODE = 10864;
+			static const int STRUCTUREDACTIVITYNODEACTIVATION_OPERATION_GETPINVALUES_OUTPUTPIN = 10860;
+			static const int STRUCTUREDACTIVITYNODEACTIVATION_OPERATION_ISSOURCEFOR_ACTIVITYEDGEINSTANCE = 10868;
+			static const int STRUCTUREDACTIVITYNODEACTIVATION_OPERATION_ISSUSPENDED = 10869;
+			static const int STRUCTUREDACTIVITYNODEACTIVATION_OPERATION_MAKEACTIVITYNODELIST_EXECUTABLENODE = 10859;
+			static const int STRUCTUREDACTIVITYNODEACTIVATION_OPERATION_PUTPINVALUES_OUTPUTPIN_VALUE = 10861;
+			static const int STRUCTUREDACTIVITYNODEACTIVATION_OPERATION_RESUME = 10871;
+			static const int STRUCTUREDACTIVITYNODEACTIVATION_OPERATION_TERMINATE = 10863;
+			static const int STRUCTUREDACTIVITYNODEACTIVATION_OPERATION_TERMINATEALL = 10867;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getStructuredActivityNodeActivation_Class() const = 0;
@@ -2598,16 +2689,16 @@ namespace fUML
 
 			// Begin Class StructuredValue
 			//Class and Feature IDs 
-			static const unsigned int STRUCTUREDVALUE_CLASS = 106;
+			static const unsigned int STRUCTUREDVALUE_CLASS = 109;
 			static const unsigned int STRUCTUREDVALUE_CLASS_FEATURE_COUNT = 0;
 			static const unsigned int STRUCTUREDVALUE_CLASS_OPERATION_COUNT = 13;
 			
 			
-			static const int STRUCTUREDVALUE_OPERATION_ASSIGNFEATUREVALUE_STRUCTURALFEATURE_EINT = 10609;
-			static const int STRUCTUREDVALUE_OPERATION_CREATEFEATUREVALUES = 10611;
-			static const int STRUCTUREDVALUE_OPERATION_RETRIEVEFEATUREVALUE_STRUCTURALFEATURE = 10608;
-			static const int STRUCTUREDVALUE_OPERATION_RETRIEVEFEATUREVALUES = 10610;
-			static const int STRUCTUREDVALUE_OPERATION_SPECIFY = 10612;
+			static const int STRUCTUREDVALUE_OPERATION_ASSIGNFEATUREVALUE_STRUCTURALFEATURE_EINT = 10909;
+			static const int STRUCTUREDVALUE_OPERATION_CREATEFEATUREVALUES = 10911;
+			static const int STRUCTUREDVALUE_OPERATION_RETRIEVEFEATUREVALUE_STRUCTURALFEATURE = 10908;
+			static const int STRUCTUREDVALUE_OPERATION_RETRIEVEFEATUREVALUES = 10910;
+			static const int STRUCTUREDVALUE_OPERATION_SPECIFY = 10912;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getStructuredValue_Class() const = 0;
@@ -2625,7 +2716,7 @@ namespace fUML
 
 			// Begin Class TestIdentityActionActivation
 			//Class and Feature IDs 
-			static const unsigned int TESTIDENTITYACTIONACTIVATION_CLASS = 107;
+			static const unsigned int TESTIDENTITYACTIONACTIVATION_CLASS = 110;
 			static const unsigned int TESTIDENTITYACTIONACTIVATION_CLASS_FEATURE_COUNT = 10;
 			static const unsigned int TESTIDENTITYACTIONACTIVATION_CLASS_OPERATION_COUNT = 47;
 			
@@ -2642,18 +2733,18 @@ namespace fUML
 
 			// Begin Class Token
 			//Class and Feature IDs 
-			static const unsigned int TOKEN_CLASS = 108;
+			static const unsigned int TOKEN_CLASS = 111;
 			static const unsigned int TOKEN_CLASS_FEATURE_COUNT = 2;
 			static const unsigned int TOKEN_CLASS_OPERATION_COUNT = 5;
-			static const int TOKEN_ATTRIBUTE_WITHDRAWN = 10801;
+			static const int TOKEN_ATTRIBUTE_WITHDRAWN = 11101;
 			
-			static const int TOKEN_ATTRIBUTE_HOLDER = 10800;
+			static const int TOKEN_ATTRIBUTE_HOLDER = 11100;
 			
-			static const int TOKEN_OPERATION_EQUALS_TOKEN = 10804;
-			static const int TOKEN_OPERATION_GETVALUE = 10806;
-			static const int TOKEN_OPERATION_ISCONTROL = 10805;
-			static const int TOKEN_OPERATION_TRANSFER_ACTIVITYNODEACTIVATION = 10802;
-			static const int TOKEN_OPERATION_WITHDRAW = 10803;
+			static const int TOKEN_OPERATION_EQUALS_TOKEN = 11104;
+			static const int TOKEN_OPERATION_GETVALUE = 11106;
+			static const int TOKEN_OPERATION_ISCONTROL = 11105;
+			static const int TOKEN_OPERATION_TRANSFER_ACTIVITYNODEACTIVATION = 11102;
+			static const int TOKEN_OPERATION_WITHDRAW = 11103;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getToken_Class() const = 0;
@@ -2673,11 +2764,11 @@ namespace fUML
 
 			// Begin Class TokenSet
 			//Class and Feature IDs 
-			static const unsigned int TOKENSET_CLASS = 109;
+			static const unsigned int TOKENSET_CLASS = 112;
 			static const unsigned int TOKENSET_CLASS_FEATURE_COUNT = 1;
 			static const unsigned int TOKENSET_CLASS_OPERATION_COUNT = 0;
 			
-			static const int TOKENSET_ATTRIBUTE_TOKENS = 10900;
+			static const int TOKENSET_ATTRIBUTE_TOKENS = 11200;
 			
 			
 			//Class and Feature Getter
@@ -2692,15 +2783,15 @@ namespace fUML
 
 			// Begin Class UnlimitedNaturalValue
 			//Class and Feature IDs 
-			static const unsigned int UNLIMITEDNATURALVALUE_CLASS = 110;
+			static const unsigned int UNLIMITEDNATURALVALUE_CLASS = 113;
 			static const unsigned int UNLIMITEDNATURALVALUE_CLASS_FEATURE_COUNT = 2;
 			static const unsigned int UNLIMITEDNATURALVALUE_CLASS_OPERATION_COUNT = 12;
-			static const int UNLIMITEDNATURALVALUE_ATTRIBUTE_VALUE = 11001;
+			static const int UNLIMITEDNATURALVALUE_ATTRIBUTE_VALUE = 11301;
 			
 			
-			static const int UNLIMITEDNATURALVALUE_OPERATION_EQUALS_VALUE = 11012;
-			static const int UNLIMITEDNATURALVALUE_OPERATION_SPECIFY = 11011;
-			static const int UNLIMITEDNATURALVALUE_OPERATION_TOSTRING = 11013;
+			static const int UNLIMITEDNATURALVALUE_OPERATION_EQUALS_VALUE = 11312;
+			static const int UNLIMITEDNATURALVALUE_OPERATION_SPECIFY = 11311;
+			static const int UNLIMITEDNATURALVALUE_OPERATION_TOSTRING = 11313;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getUnlimitedNaturalValue_Class() const = 0;
@@ -2717,17 +2808,17 @@ namespace fUML
 
 			// Begin Class Value
 			//Class and Feature IDs 
-			static const unsigned int VALUE_CLASS = 111;
+			static const unsigned int VALUE_CLASS = 114;
 			static const unsigned int VALUE_CLASS_FEATURE_COUNT = 0;
 			static const unsigned int VALUE_CLASS_OPERATION_COUNT = 8;
 			
 			
-			static const int VALUE_OPERATION_EQUALS_VALUE = 11103;
-			static const int VALUE_OPERATION_GETTYPES = 11104;
-			static const int VALUE_OPERATION_HASTYPES_CLASSIFIER = 11105;
-			static const int VALUE_OPERATION_OBJECTID = 11107;
-			static const int VALUE_OPERATION_SPECIFY = 11102;
-			static const int VALUE_OPERATION_TOSTRING = 11106;
+			static const int VALUE_OPERATION_EQUALS_VALUE = 11403;
+			static const int VALUE_OPERATION_GETTYPES = 11404;
+			static const int VALUE_OPERATION_HASTYPES_CLASSIFIER = 11405;
+			static const int VALUE_OPERATION_OBJECTID = 11407;
+			static const int VALUE_OPERATION_SPECIFY = 11402;
+			static const int VALUE_OPERATION_TOSTRING = 11406;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getValue_Class() const = 0;
@@ -2746,7 +2837,7 @@ namespace fUML
 
 			// Begin Class ValueSpecificActionActivation
 			//Class and Feature IDs 
-			static const unsigned int VALUESPECIFICACTIONACTIVATION_CLASS = 112;
+			static const unsigned int VALUESPECIFICACTIONACTIVATION_CLASS = 115;
 			static const unsigned int VALUESPECIFICACTIONACTIVATION_CLASS_FEATURE_COUNT = 10;
 			static const unsigned int VALUESPECIFICACTIONACTIVATION_CLASS_OPERATION_COUNT = 47;
 			
@@ -2763,11 +2854,11 @@ namespace fUML
 
 			// Begin Class Values
 			//Class and Feature IDs 
-			static const unsigned int VALUES_CLASS = 113;
+			static const unsigned int VALUES_CLASS = 116;
 			static const unsigned int VALUES_CLASS_FEATURE_COUNT = 1;
 			static const unsigned int VALUES_CLASS_OPERATION_COUNT = 0;
 			
-			static const int VALUES_ATTRIBUTE_VALUES = 11300;
+			static const int VALUES_ATTRIBUTE_VALUES = 11600;
 			
 			
 			//Class and Feature Getter
@@ -2782,7 +2873,7 @@ namespace fUML
 
 			// Begin Class WriteLinkActionActivation
 			//Class and Feature IDs 
-			static const unsigned int WRITELINKACTIONACTIVATION_CLASS = 114;
+			static const unsigned int WRITELINKACTIONACTIVATION_CLASS = 117;
 			static const unsigned int WRITELINKACTIONACTIVATION_CLASS_FEATURE_COUNT = 10;
 			static const unsigned int WRITELINKACTIONACTIVATION_CLASS_OPERATION_COUNT = 50;
 			
@@ -2799,12 +2890,12 @@ namespace fUML
 
 			// Begin Class WriteStructuralFeatureActionActivation
 			//Class and Feature IDs 
-			static const unsigned int WRITESTRUCTURALFEATUREACTIONACTIVATION_CLASS = 115;
+			static const unsigned int WRITESTRUCTURALFEATUREACTIONACTIVATION_CLASS = 118;
 			static const unsigned int WRITESTRUCTURALFEATUREACTIONACTIVATION_CLASS_FEATURE_COUNT = 10;
 			static const unsigned int WRITESTRUCTURALFEATUREACTIONACTIVATION_CLASS_OPERATION_COUNT = 51;
 			
 			
-			static const int WRITESTRUCTURALFEATUREACTIONACTIVATION_OPERATION_POSITION_VALUE_EINT = 11560;
+			static const int WRITESTRUCTURALFEATUREACTIONACTIVATION_OPERATION_POSITION_VALUE_EINT = 11860;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getWriteStructuralFeatureActionActivation_Class() const = 0;

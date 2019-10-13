@@ -32,6 +32,12 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -318,7 +324,7 @@ Any VertexImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::VERTEX_ATTRIBUTE_CONTAINER:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getContainer().lock())); //2549
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getContainer().lock())); //2559
 		case UmlPackage::VERTEX_ATTRIBUTE_INCOMING:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -327,8 +333,9 @@ Any VertexImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //25410
+			return eAny(tempList); //25510
 		}
 		case UmlPackage::VERTEX_ATTRIBUTE_OUTGOING:
 		{
@@ -338,8 +345,9 @@ Any VertexImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //25411
+			return eAny(tempList); //25511
 		}
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
@@ -349,11 +357,11 @@ bool VertexImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::VERTEX_ATTRIBUTE_CONTAINER:
-			return getContainer().lock() != nullptr; //2549
+			return getContainer().lock() != nullptr; //2559
 		case UmlPackage::VERTEX_ATTRIBUTE_INCOMING:
-			return getIncoming() != nullptr; //25410
+			return getIncoming() != nullptr; //25510
 		case UmlPackage::VERTEX_ATTRIBUTE_OUTGOING:
-			return getOutgoing() != nullptr; //25411
+			return getOutgoing() != nullptr; //25511
 	}
 	return NamedElementImpl::internalEIsSet(featureID);
 }
@@ -366,7 +374,7 @@ bool VertexImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Region> _container = std::dynamic_pointer_cast<uml::Region>(_temp);
-			setContainer(_container); //2549
+			setContainer(_container); //2559
 			return true;
 		}
 	}

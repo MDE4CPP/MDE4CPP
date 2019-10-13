@@ -48,6 +48,10 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "fUML/FUMLFactory.hpp"
 #include "fUML/FUMLPackage.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -678,6 +682,7 @@ Any ActivityNodeActivationGroupImpl::eGet(int featureID, bool resolve, bool core
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
 			return eAny(tempList); //80
 		}
@@ -689,6 +694,7 @@ Any ActivityNodeActivationGroupImpl::eGet(int featureID, bool resolve, bool core
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
 			return eAny(tempList); //81
 		}
@@ -700,6 +706,7 @@ Any ActivityNodeActivationGroupImpl::eGet(int featureID, bool resolve, bool core
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
 			return eAny(tempList); //84
 		}

@@ -363,8 +363,9 @@ Any ObjectActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //773
+			return eAny(tempList); //803
 		}
 		case FUMLPackage::OBJECTACTIVATION_ATTRIBUTE_EVENTPOOL:
 		{
@@ -374,11 +375,12 @@ Any ObjectActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //771
+			return eAny(tempList); //801
 		}
 		case FUMLPackage::OBJECTACTIVATION_ATTRIBUTE_OBJECT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getObject())); //772
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getObject())); //802
 		case FUMLPackage::OBJECTACTIVATION_ATTRIBUTE_WAITINGEVENTACCEPTERS:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -387,8 +389,9 @@ Any ObjectActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //770
+			return eAny(tempList); //800
 		}
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
@@ -398,13 +401,13 @@ bool ObjectActivationImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case FUMLPackage::OBJECTACTIVATION_ATTRIBUTE_CLASSIFIERBEHAVIOREXECUTIONS:
-			return getClassifierBehaviorExecutions() != nullptr; //773
+			return getClassifierBehaviorExecutions() != nullptr; //803
 		case FUMLPackage::OBJECTACTIVATION_ATTRIBUTE_EVENTPOOL:
-			return getEventPool() != nullptr; //771
+			return getEventPool() != nullptr; //801
 		case FUMLPackage::OBJECTACTIVATION_ATTRIBUTE_OBJECT:
-			return getObject() != nullptr; //772
+			return getObject() != nullptr; //802
 		case FUMLPackage::OBJECTACTIVATION_ATTRIBUTE_WAITINGEVENTACCEPTERS:
-			return getWaitingEventAccepters() != nullptr; //770
+			return getWaitingEventAccepters() != nullptr; //800
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
@@ -489,7 +492,7 @@ bool ObjectActivationImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<fUML::Object> _object = std::dynamic_pointer_cast<fUML::Object>(_temp);
-			setObject(_object); //772
+			setObject(_object); //802
 			return true;
 		}
 		case FUMLPackage::OBJECTACTIVATION_ATTRIBUTE_WAITINGEVENTACCEPTERS:

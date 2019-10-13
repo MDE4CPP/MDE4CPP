@@ -32,6 +32,16 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -404,8 +414,9 @@ Any DeploymentImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //6917
+			return eAny(tempList); //7017
 		}
 		case UmlPackage::DEPLOYMENT_ATTRIBUTE_DEPLOYEDARTIFACT:
 		{
@@ -415,11 +426,12 @@ Any DeploymentImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //6918
+			return eAny(tempList); //7018
 		}
 		case UmlPackage::DEPLOYMENT_ATTRIBUTE_LOCATION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getLocation().lock())); //6919
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getLocation().lock())); //7019
 	}
 	return DependencyImpl::eGet(featureID, resolve, coreType);
 }
@@ -428,11 +440,11 @@ bool DeploymentImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::DEPLOYMENT_ATTRIBUTE_CONFIGURATION:
-			return getConfiguration() != nullptr; //6917
+			return getConfiguration() != nullptr; //7017
 		case UmlPackage::DEPLOYMENT_ATTRIBUTE_DEPLOYEDARTIFACT:
-			return getDeployedArtifact() != nullptr; //6918
+			return getDeployedArtifact() != nullptr; //7018
 		case UmlPackage::DEPLOYMENT_ATTRIBUTE_LOCATION:
-			return getLocation().lock() != nullptr; //6919
+			return getLocation().lock() != nullptr; //7019
 	}
 	return DependencyImpl::internalEIsSet(featureID);
 }
@@ -517,7 +529,7 @@ bool DeploymentImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::DeploymentTarget> _location = std::dynamic_pointer_cast<uml::DeploymentTarget>(_temp);
-			setLocation(_location); //6919
+			setLocation(_location); //7019
 			return true;
 		}
 	}

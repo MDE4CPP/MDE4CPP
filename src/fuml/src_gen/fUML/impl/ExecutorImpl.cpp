@@ -35,6 +35,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "fUML/FUMLFactory.hpp"
 #include "fUML/FUMLPackage.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -249,7 +251,7 @@ Any ExecutorImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case FUMLPackage::EXECUTOR_ATTRIBUTE_LOCUS:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getLocus().lock())); //450
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getLocus().lock())); //480
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
@@ -258,7 +260,7 @@ bool ExecutorImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case FUMLPackage::EXECUTOR_ATTRIBUTE_LOCUS:
-			return getLocus().lock() != nullptr; //450
+			return getLocus().lock() != nullptr; //480
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
@@ -271,7 +273,7 @@ bool ExecutorImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<fUML::Locus> _locus = std::dynamic_pointer_cast<fUML::Locus>(_temp);
-			setLocus(_locus); //450
+			setLocus(_locus); //480
 			return true;
 		}
 	}

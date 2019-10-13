@@ -306,7 +306,7 @@ Any ExecutionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case FUMLPackage::EXECUTION_ATTRIBUTE_CONTEXT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getContext())); //404
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getContext())); //434
 		case FUMLPackage::EXECUTION_ATTRIBUTE_PARAMETERVALUES:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -315,8 +315,9 @@ Any ExecutionImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //405
+			return eAny(tempList); //435
 		}
 	}
 	return ObjectImpl::eGet(featureID, resolve, coreType);
@@ -326,9 +327,9 @@ bool ExecutionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case FUMLPackage::EXECUTION_ATTRIBUTE_CONTEXT:
-			return getContext() != nullptr; //404
+			return getContext() != nullptr; //434
 		case FUMLPackage::EXECUTION_ATTRIBUTE_PARAMETERVALUES:
-			return getParameterValues() != nullptr; //405
+			return getParameterValues() != nullptr; //435
 	}
 	return ObjectImpl::internalEIsSet(featureID);
 }
@@ -341,7 +342,7 @@ bool ExecutionImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<fUML::Object> _context = std::dynamic_pointer_cast<fUML::Object>(_temp);
-			setContext(_context); //404
+			setContext(_context); //434
 			return true;
 		}
 		case FUMLPackage::EXECUTION_ATTRIBUTE_PARAMETERVALUES:

@@ -32,6 +32,10 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "ecore/EcoreFactory.hpp"
 #include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "ecore/EcorePackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -256,7 +260,10 @@ std::shared_ptr<ecore::EClass > EReferenceImpl::getEReferenceType() const
 //assert(m_eReferenceType);
     return m_eReferenceType;
 }
-
+void EReferenceImpl::setEReferenceType(std::shared_ptr<ecore::EClass> _eReferenceType)
+{
+    m_eReferenceType = _eReferenceType;
+}
 
 //*********************************
 // Union Getter
@@ -309,6 +316,7 @@ Any EReferenceImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
 			return eAny(tempList); //4327
 		}
@@ -395,6 +403,14 @@ bool EReferenceImpl::eSet(int featureID, Any newValue)
 			setEOpposite(_eOpposite); //4325
 			return true;
 		}
+		case EcorePackage::EREFERENCE_ATTRIBUTE_EREFERENCETYPE:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<ecore::EClass> _eReferenceType = std::dynamic_pointer_cast<ecore::EClass>(_temp);
+			setEReferenceType(_eReferenceType); //4326
+			return true;
+		}
 		case EcorePackage::EREFERENCE_ATTRIBUTE_RESOLVEPROXIES:
 		{
 			// BOOST CAST
@@ -464,6 +480,13 @@ void EReferenceImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLo
 			// add unresolvedReference to loadHandler's list
 			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("eOpposite")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
 		}
+
+		iter = attr_list.find("eReferenceType");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("eReferenceType")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
 	}
 	catch (std::exception& e)
 	{
@@ -509,6 +532,18 @@ void EReferenceImpl::resolveReferences(const int featureID, std::list<std::share
 				// Cast object to correct type
 				std::shared_ptr<ecore::EReference> _eOpposite = std::dynamic_pointer_cast<ecore::EReference>( references.front() );
 				setEOpposite(_eOpposite);
+			}
+			
+			return;
+		}
+
+		case EcorePackage::EREFERENCE_ATTRIBUTE_EREFERENCETYPE:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<ecore::EClass> _eReferenceType = std::dynamic_pointer_cast<ecore::EClass>( references.front() );
+				setEReferenceType(_eReferenceType);
 			}
 			
 			return;
@@ -565,6 +600,7 @@ void EReferenceImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 			saveHandler->addReferences("eKeys", object);
 		}
 		saveHandler->addReference("eOpposite", this->getEOpposite());
+		saveHandler->addReference("eReferenceType", this->getEReferenceType());
 
 	}
 	catch (std::exception& e)

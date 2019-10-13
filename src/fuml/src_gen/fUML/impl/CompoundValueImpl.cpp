@@ -306,8 +306,9 @@ Any CompoundValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //230
+			return eAny(tempList); //260
 		}
 	}
 	return StructuredValueImpl::eGet(featureID, resolve, coreType);
@@ -317,7 +318,7 @@ bool CompoundValueImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case FUMLPackage::COMPOUNDVALUE_ATTRIBUTE_FEATUREVALUES:
-			return getFeatureValues() != nullptr; //230
+			return getFeatureValues() != nullptr; //260
 	}
 	return StructuredValueImpl::internalEIsSet(featureID);
 }

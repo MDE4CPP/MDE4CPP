@@ -203,7 +203,10 @@ std::shared_ptr<ecore::EClassifier > EGenericTypeImpl::getERawType() const
 //assert(m_eRawType);
     return m_eRawType;
 }
-
+void EGenericTypeImpl::setERawType(std::shared_ptr<ecore::EClassifier> _eRawType)
+{
+    m_eRawType = _eRawType;
+}
 
 std::shared_ptr<Bag<ecore::EGenericType>> EGenericTypeImpl::getETypeArguments() const
 {
@@ -271,6 +274,7 @@ Any EGenericTypeImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
 			return eAny(tempList); //281
 		}
@@ -318,6 +322,14 @@ bool EGenericTypeImpl::eSet(int featureID, Any newValue)
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ecore::EGenericType> _eLowerBound = std::dynamic_pointer_cast<ecore::EGenericType>(_temp);
 			setELowerBound(_eLowerBound); //283
+			return true;
+		}
+		case EcorePackage::EGENERICTYPE_ATTRIBUTE_ERAWTYPE:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<ecore::EClassifier> _eRawType = std::dynamic_pointer_cast<ecore::EClassifier>(_temp);
+			setERawType(_eRawType); //282
 			return true;
 		}
 		case EcorePackage::EGENERICTYPE_ATTRIBUTE_ETYPEARGUMENTS:
@@ -408,6 +420,13 @@ void EGenericTypeImpl::loadAttributes(std::shared_ptr<persistence::interfaces::X
 		{
 			// add unresolvedReference to loadHandler's list
 			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("eClassifier")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+
+		iter = attr_list.find("eRawType");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("eRawType")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
 		}
 
 		iter = attr_list.find("eTypeParameter");
@@ -511,6 +530,18 @@ void EGenericTypeImpl::resolveReferences(const int featureID, std::list<std::sha
 			return;
 		}
 
+		case EcorePackage::EGENERICTYPE_ATTRIBUTE_ERAWTYPE:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<ecore::EClassifier> _eRawType = std::dynamic_pointer_cast<ecore::EClassifier>( references.front() );
+				setERawType(_eRawType);
+			}
+			
+			return;
+		}
+
 		case EcorePackage::EGENERICTYPE_ATTRIBUTE_ETYPEPARAMETER:
 		{
 			if (references.size() == 1)
@@ -545,6 +576,7 @@ void EGenericTypeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 
 		// Add references
 		saveHandler->addReference("eClassifier", this->getEClassifier());
+		saveHandler->addReference("eRawType", this->getERawType());
 		saveHandler->addReference("eTypeParameter", this->getETypeParameter());
 
 

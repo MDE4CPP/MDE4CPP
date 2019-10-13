@@ -19,6 +19,9 @@
 #include "fUML/impl/BooleanValueImpl.hpp"
 #include "fUML/impl/CallActionActivationImpl.hpp"
 #include "fUML/impl/CallBehaviorActionActivationImpl.hpp"
+#include "fUML/impl/CallEventBehaviorImpl.hpp"
+#include "fUML/impl/CallEventExecutionImpl.hpp"
+#include "fUML/impl/CallEventOccurrenceImpl.hpp"
 #include "fUML/impl/CallOperationActionActivationImpl.hpp"
 #include "fUML/impl/CentralBufferNodeActivationImpl.hpp"
 #include "fUML/impl/ChoiceStrategyImpl.hpp"
@@ -122,6 +125,13 @@
 #include "fUML/impl/WriteLinkActionActivationImpl.hpp"
 #include "fUML/impl/WriteStructuralFeatureActionActivationImpl.hpp"
 
+#include "fUML/ActivityExecution.hpp"
+#include "fUML/StructuredActivityNodeActivation.hpp"
+#include "fUML/ActivityNodeActivationGroup.hpp"
+#include "fUML/ActivityNodeActivationGroup.hpp"
+#include "fUML/Locus.hpp"
+#include "fUML/Locus.hpp"
+
 
 using namespace fUML;
 
@@ -141,6 +151,9 @@ FUMLFactoryImpl::FUMLFactoryImpl()
 	m_idMap.insert(std::make_pair("AddStructuralFeatureValueActionActivation", FUMLPackage::ADDSTRUCTURALFEATUREVALUEACTIONACTIVATION_CLASS));
 	m_idMap.insert(std::make_pair("BooleanValue", FUMLPackage::BOOLEANVALUE_CLASS));
 	m_idMap.insert(std::make_pair("CallBehaviorActionActivation", FUMLPackage::CALLBEHAVIORACTIONACTIVATION_CLASS));
+	m_idMap.insert(std::make_pair("CallEventBehavior", FUMLPackage::CALLEVENTBEHAVIOR_CLASS));
+	m_idMap.insert(std::make_pair("CallEventExecution", FUMLPackage::CALLEVENTEXECUTION_CLASS));
+	m_idMap.insert(std::make_pair("CallEventOccurrence", FUMLPackage::CALLEVENTOCCURRENCE_CLASS));
 	m_idMap.insert(std::make_pair("CallOperationActionActivation", FUMLPackage::CALLOPERATIONACTIONACTIVATION_CLASS));
 	m_idMap.insert(std::make_pair("CentralBufferNodeActivation", FUMLPackage::CENTRALBUFFERNODEACTIVATION_CLASS));
 	m_idMap.insert(std::make_pair("ClassifierBehaviorExecution", FUMLPackage::CLASSIFIERBEHAVIOREXECUTION_CLASS));
@@ -357,6 +370,21 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const int metaElementID,
 				assert(castedContainer);
 				return std::shared_ptr<fUML::CallBehaviorActionActivation>(this->createCallBehaviorActionActivation_in_Group(castedContainer,metaElementID));
 			}
+		}
+		case FUMLPackage::CALLEVENTBEHAVIOR_CLASS:
+		{
+				return this->createCallEventBehavior(metaElementID);
+			
+		}
+		case FUMLPackage::CALLEVENTEXECUTION_CLASS:
+		{
+				return this->createCallEventExecution(metaElementID);
+			
+		}
+		case FUMLPackage::CALLEVENTOCCURRENCE_CLASS:
+		{
+				return this->createCallEventOccurrence(metaElementID);
+			
 		}
 		case FUMLPackage::CALLOPERATIONACTIONACTIVATION_CLASS:
 		{
@@ -1275,6 +1303,27 @@ std::shared_ptr<CallBehaviorActionActivation> FUMLFactoryImpl::createCallBehavio
 	element->setThisCallBehaviorActionActivationPtr(element);
 	return element;
 	
+}
+std::shared_ptr<CallEventBehavior> FUMLFactoryImpl::createCallEventBehavior(const int metaElementID/*=-1*/) const
+{
+	std::shared_ptr<CallEventBehaviorImpl> element(new CallEventBehaviorImpl());
+	element->setMetaElementID(metaElementID);
+	element->setThisCallEventBehaviorPtr(element);
+	return element;
+}
+std::shared_ptr<CallEventExecution> FUMLFactoryImpl::createCallEventExecution(const int metaElementID/*=-1*/) const
+{
+	std::shared_ptr<CallEventExecutionImpl> element(new CallEventExecutionImpl());
+	element->setMetaElementID(metaElementID);
+	element->setThisCallEventExecutionPtr(element);
+	return element;
+}
+std::shared_ptr<CallEventOccurrence> FUMLFactoryImpl::createCallEventOccurrence(const int metaElementID/*=-1*/) const
+{
+	std::shared_ptr<CallEventOccurrenceImpl> element(new CallEventOccurrenceImpl());
+	element->setMetaElementID(metaElementID);
+	element->setThisCallEventOccurrencePtr(element);
+	return element;
 }
 std::shared_ptr<CallOperationActionActivation> FUMLFactoryImpl::createCallOperationActionActivation(const int metaElementID/*=-1*/) const
 {

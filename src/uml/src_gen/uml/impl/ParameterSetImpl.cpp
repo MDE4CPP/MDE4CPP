@@ -33,6 +33,10 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -294,8 +298,9 @@ Any ParameterSetImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //1779
+			return eAny(tempList); //1789
 		}
 		case UmlPackage::PARAMETERSET_ATTRIBUTE_PARAMETER:
 		{
@@ -305,8 +310,9 @@ Any ParameterSetImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //17710
+			return eAny(tempList); //17810
 		}
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
@@ -316,9 +322,9 @@ bool ParameterSetImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::PARAMETERSET_ATTRIBUTE_CONDITION:
-			return getCondition() != nullptr; //1779
+			return getCondition() != nullptr; //1789
 		case UmlPackage::PARAMETERSET_ATTRIBUTE_PARAMETER:
-			return getParameter() != nullptr; //17710
+			return getParameter() != nullptr; //17810
 	}
 	return NamedElementImpl::internalEIsSet(featureID);
 }

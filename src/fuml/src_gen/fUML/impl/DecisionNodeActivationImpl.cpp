@@ -47,6 +47,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "fUML/FUMLFactory.hpp"
 #include "fUML/FUMLPackage.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -516,7 +518,7 @@ Any DecisionNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType)
 	switch(featureID)
 	{
 		case FUMLPackage::DECISIONNODEACTIVATION_ATTRIBUTE_DECISIONINPUTEXECUTION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getDecisionInputExecution())); //316
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getDecisionInputExecution())); //346
 	}
 	return ControlNodeActivationImpl::eGet(featureID, resolve, coreType);
 }
@@ -525,7 +527,7 @@ bool DecisionNodeActivationImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case FUMLPackage::DECISIONNODEACTIVATION_ATTRIBUTE_DECISIONINPUTEXECUTION:
-			return getDecisionInputExecution() != nullptr; //316
+			return getDecisionInputExecution() != nullptr; //346
 	}
 	return ControlNodeActivationImpl::internalEIsSet(featureID);
 }
@@ -538,7 +540,7 @@ bool DecisionNodeActivationImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<fUML::Execution> _decisionInputExecution = std::dynamic_pointer_cast<fUML::Execution>(_temp);
-			setDecisionInputExecution(_decisionInputExecution); //316
+			setDecisionInputExecution(_decisionInputExecution); //346
 			return true;
 		}
 	}

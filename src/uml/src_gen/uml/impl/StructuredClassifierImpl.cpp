@@ -32,6 +32,16 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -603,8 +613,9 @@ Any StructuredClassifierImpl::eGet(int featureID, bool resolve, bool coreType) c
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //22838
+			return eAny(tempList); //22938
 		}
 		case UmlPackage::STRUCTUREDCLASSIFIER_ATTRIBUTE_OWNEDCONNECTOR:
 		{
@@ -614,8 +625,9 @@ Any StructuredClassifierImpl::eGet(int featureID, bool resolve, bool coreType) c
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //22839
+			return eAny(tempList); //22939
 		}
 		case UmlPackage::STRUCTUREDCLASSIFIER_ATTRIBUTE_PART:
 		{
@@ -625,8 +637,9 @@ Any StructuredClassifierImpl::eGet(int featureID, bool resolve, bool coreType) c
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //22840
+			return eAny(tempList); //22940
 		}
 		case UmlPackage::STRUCTUREDCLASSIFIER_ATTRIBUTE_ROLE:
 		{
@@ -636,8 +649,9 @@ Any StructuredClassifierImpl::eGet(int featureID, bool resolve, bool coreType) c
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //22841
+			return eAny(tempList); //22941
 		}
 	}
 	return ClassifierImpl::eGet(featureID, resolve, coreType);
@@ -647,13 +661,13 @@ bool StructuredClassifierImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::STRUCTUREDCLASSIFIER_ATTRIBUTE_OWNEDATTRIBUTE:
-			return getOwnedAttribute() != nullptr; //22838
+			return getOwnedAttribute() != nullptr; //22938
 		case UmlPackage::STRUCTUREDCLASSIFIER_ATTRIBUTE_OWNEDCONNECTOR:
-			return getOwnedConnector() != nullptr; //22839
+			return getOwnedConnector() != nullptr; //22939
 		case UmlPackage::STRUCTUREDCLASSIFIER_ATTRIBUTE_PART:
-			return getPart() != nullptr; //22840
+			return getPart() != nullptr; //22940
 		case UmlPackage::STRUCTUREDCLASSIFIER_ATTRIBUTE_ROLE:
-			return getRole() != nullptr; //22841
+			return getRole() != nullptr; //22941
 	}
 	return ClassifierImpl::internalEIsSet(featureID);
 }

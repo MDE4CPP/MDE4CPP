@@ -19,6 +19,7 @@
 
 //depending model packages
 #include "ecore/EcorePackage.hpp"
+#include "types/TypesPackage.hpp"
 #include "uml/UmlPackage.hpp"
 
 using namespace fUML;
@@ -46,6 +47,9 @@ void FUMLPackageImpl::createPackageContents(std::shared_ptr<ecore::EPackage> pac
 	createBooleanValueContent(package, factory);
 	createCallActionActivationContent(package, factory);
 	createCallBehaviorActionActivationContent(package, factory);
+	createCallEventBehaviorContent(package, factory);
+	createCallEventExecutionContent(package, factory);
+	createCallEventOccurrenceContent(package, factory);
 	createCallOperationActionActivationContent(package, factory);
 	createCentralBufferNodeActivationContent(package, factory);
 	createChoiceStrategyContent(package, factory);
@@ -363,6 +367,50 @@ void FUMLPackageImpl::createCallBehaviorActionActivationContent(std::shared_ptr<
 	
 	
 	m_callBehaviorActionActivation_Operation_getCallExecution = factory->createEOperation_in_EContainingClass(m_callBehaviorActionActivation_Class, CALLBEHAVIORACTIONACTIVATION_OPERATION_GETCALLEXECUTION);
+	
+}
+
+void FUMLPackageImpl::createCallEventBehaviorContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+{
+	m_callEventBehavior_Class = factory->createEClass_in_EPackage(package, CALLEVENTBEHAVIOR_CLASS);
+	
+	
+	m_callEventBehavior_Operation_operation = factory->createEOperation_in_EContainingClass(m_callEventBehavior_Class, CALLEVENTBEHAVIOR_OPERATION_OPERATION);
+	
+}
+
+void FUMLPackageImpl::createCallEventExecutionContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+{
+	m_callEventExecution_Class = factory->createEClass_in_EPackage(package, CALLEVENTEXECUTION_CLASS);
+	m_callEventExecution_Attribute_callerSuspended = factory->createEAttribute_in_EContainingClass(m_callEventExecution_Class, CALLEVENTEXECUTION_ATTRIBUTE_CALLERSUSPENDED);
+	
+	
+	m_callEventExecution_Operation_copy = factory->createEOperation_in_EContainingClass(m_callEventExecution_Class, CALLEVENTEXECUTION_OPERATION_COPY);
+	m_callEventExecution_Operation_createEventOccurrence = factory->createEOperation_in_EContainingClass(m_callEventExecution_Class, CALLEVENTEXECUTION_OPERATION_CREATEEVENTOCCURRENCE);
+	m_callEventExecution_Operation_execute = factory->createEOperation_in_EContainingClass(m_callEventExecution_Class, CALLEVENTEXECUTION_OPERATION_EXECUTE);
+	m_callEventExecution_Operation_getInputParameterValues = factory->createEOperation_in_EContainingClass(m_callEventExecution_Class, CALLEVENTEXECUTION_OPERATION_GETINPUTPARAMETERVALUES);
+	m_callEventExecution_Operation_getOperation = factory->createEOperation_in_EContainingClass(m_callEventExecution_Class, CALLEVENTEXECUTION_OPERATION_GETOPERATION);
+	m_callEventExecution_Operation_isCallerSuspended = factory->createEOperation_in_EContainingClass(m_callEventExecution_Class, CALLEVENTEXECUTION_OPERATION_ISCALLERSUSPENDED);
+	m_callEventExecution_Operation_makeCall = factory->createEOperation_in_EContainingClass(m_callEventExecution_Class, CALLEVENTEXECUTION_OPERATION_MAKECALL);
+	m_callEventExecution_Operation_new_ = factory->createEOperation_in_EContainingClass(m_callEventExecution_Class, CALLEVENTEXECUTION_OPERATION_NEW_);
+	m_callEventExecution_Operation_releaseCaller = factory->createEOperation_in_EContainingClass(m_callEventExecution_Class, CALLEVENTEXECUTION_OPERATION_RELEASECALLER);
+	m_callEventExecution_Operation_setOutputParameterValues_ParameterValue = factory->createEOperation_in_EContainingClass(m_callEventExecution_Class, CALLEVENTEXECUTION_OPERATION_SETOUTPUTPARAMETERVALUES_PARAMETERVALUE);
+	m_callEventExecution_Operation_suspendCaller = factory->createEOperation_in_EContainingClass(m_callEventExecution_Class, CALLEVENTEXECUTION_OPERATION_SUSPENDCALLER);
+	m_callEventExecution_Operation_wait_ = factory->createEOperation_in_EContainingClass(m_callEventExecution_Class, CALLEVENTEXECUTION_OPERATION_WAIT_);
+	
+}
+
+void FUMLPackageImpl::createCallEventOccurrenceContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+{
+	m_callEventOccurrence_Class = factory->createEClass_in_EPackage(package, CALLEVENTOCCURRENCE_CLASS);
+	
+	m_callEventOccurrence_Attribute_execution = factory->createEReference_in_EContainingClass(m_callEventOccurrence_Class, CALLEVENTOCCURRENCE_ATTRIBUTE_EXECUTION);
+	
+	m_callEventOccurrence_Operation_getOperation = factory->createEOperation_in_EContainingClass(m_callEventOccurrence_Class, CALLEVENTOCCURRENCE_OPERATION_GETOPERATION);
+	m_callEventOccurrence_Operation_getParameterValues = factory->createEOperation_in_EContainingClass(m_callEventOccurrence_Class, CALLEVENTOCCURRENCE_OPERATION_GETPARAMETERVALUES);
+	m_callEventOccurrence_Operation_match_Trigger = factory->createEOperation_in_EContainingClass(m_callEventOccurrence_Class, CALLEVENTOCCURRENCE_OPERATION_MATCH_TRIGGER);
+	m_callEventOccurrence_Operation_releaseCaller = factory->createEOperation_in_EContainingClass(m_callEventOccurrence_Class, CALLEVENTOCCURRENCE_OPERATION_RELEASECALLER);
+	m_callEventOccurrence_Operation_setOutputParameterValues_ParameterValue = factory->createEOperation_in_EContainingClass(m_callEventOccurrence_Class, CALLEVENTOCCURRENCE_OPERATION_SETOUTPUTPARAMETERVALUES_PARAMETERVALUE);
 	
 }
 

@@ -32,6 +32,16 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -315,9 +325,9 @@ Any IntervalImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::INTERVAL_ATTRIBUTE_MAX:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getMax())); //12814
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getMax())); //12914
 		case UmlPackage::INTERVAL_ATTRIBUTE_MIN:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getMin())); //12815
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getMin())); //12915
 	}
 	return ValueSpecificationImpl::eGet(featureID, resolve, coreType);
 }
@@ -326,9 +336,9 @@ bool IntervalImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::INTERVAL_ATTRIBUTE_MAX:
-			return getMax() != nullptr; //12814
+			return getMax() != nullptr; //12914
 		case UmlPackage::INTERVAL_ATTRIBUTE_MIN:
-			return getMin() != nullptr; //12815
+			return getMin() != nullptr; //12915
 	}
 	return ValueSpecificationImpl::internalEIsSet(featureID);
 }
@@ -341,7 +351,7 @@ bool IntervalImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ValueSpecification> _max = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
-			setMax(_max); //12814
+			setMax(_max); //12914
 			return true;
 		}
 		case UmlPackage::INTERVAL_ATTRIBUTE_MIN:
@@ -349,7 +359,7 @@ bool IntervalImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ValueSpecification> _min = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
-			setMin(_min); //12815
+			setMin(_min); //12915
 			return true;
 		}
 	}

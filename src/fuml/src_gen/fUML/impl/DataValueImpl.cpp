@@ -189,7 +189,7 @@ Any DataValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case FUMLPackage::DATAVALUE_ATTRIBUTE_TYPE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getType())); //301
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getType())); //331
 	}
 	return CompoundValueImpl::eGet(featureID, resolve, coreType);
 }
@@ -198,7 +198,7 @@ bool DataValueImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case FUMLPackage::DATAVALUE_ATTRIBUTE_TYPE:
-			return getType() != nullptr; //301
+			return getType() != nullptr; //331
 	}
 	return CompoundValueImpl::internalEIsSet(featureID);
 }
@@ -211,7 +211,7 @@ bool DataValueImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::DataType> _type = std::dynamic_pointer_cast<uml::DataType>(_temp);
-			setType(_type); //301
+			setType(_type); //331
 			return true;
 		}
 	}

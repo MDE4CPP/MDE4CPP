@@ -25,6 +25,9 @@ namespace fUML
 	class BooleanValue;
 	class CallActionActivation;
 	class CallBehaviorActionActivation;
+	class CallEventBehavior;
+	class CallEventExecution;
+	class CallEventOccurrence;
 	class CallOperationActionActivation;
 	class CentralBufferNodeActivation;
 	class ChoiceStrategy;
@@ -184,6 +187,12 @@ namespace fUML
 			virtual std::shared_ptr<CallBehaviorActionActivation> createCallBehaviorActionActivation(const int metaElementID=-1) const ;
 			//Add containing object
 			virtual std::shared_ptr<CallBehaviorActionActivation> createCallBehaviorActionActivation_in_Group(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group, const int metaElementID=-1) const ;
+			
+			virtual std::shared_ptr<CallEventBehavior> createCallEventBehavior(const int metaElementID=-1) const ;
+			
+			virtual std::shared_ptr<CallEventExecution> createCallEventExecution(const int metaElementID=-1) const ;
+			
+			virtual std::shared_ptr<CallEventOccurrence> createCallEventOccurrence(const int metaElementID=-1) const ;
 			
 			virtual std::shared_ptr<CallOperationActionActivation> createCallOperationActionActivation(const int metaElementID=-1) const ;
 			//Add containing object

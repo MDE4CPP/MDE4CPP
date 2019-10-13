@@ -25,6 +25,7 @@
 #include "uml/impl/AddStructuralFeatureValueActionImpl.hpp"
 #include "uml/impl/AddVariableValueActionImpl.hpp"
 #include "uml/impl/AnyReceiveEventImpl.hpp"
+#include "uml/impl/ArgumentImpl.hpp"
 #include "uml/impl/ArtifactImpl.hpp"
 #include "uml/impl/AssociationImpl.hpp"
 #include "uml/impl/AssociationClassImpl.hpp"
@@ -253,6 +254,74 @@
 #include "uml/impl/WriteStructuralFeatureActionImpl.hpp"
 #include "uml/impl/WriteVariableActionImpl.hpp"
 
+#include "uml/Component.hpp"
+#include "uml/Action.hpp"
+#include "uml/Action.hpp"
+#include "uml/Activity.hpp"
+#include "uml/Activity.hpp"
+#include "uml/Activity.hpp"
+#include "uml/Package.hpp"
+#include "uml/Property.hpp"
+#include "uml/Behavior.hpp"
+#include "uml/BehavioredClassifier.hpp"
+#include "uml/TemplateableElement.hpp"
+#include "uml/CallAction.hpp"
+#include "uml/CallOperationAction.hpp"
+#include "uml/Class.hpp"
+#include "uml/Class.hpp"
+#include "uml/Region.hpp"
+#include "uml/Region.hpp"
+#include "uml/Namespace.hpp"
+#include "uml/DataType.hpp"
+#include "uml/DataType.hpp"
+#include "uml/Deployment.hpp"
+#include "uml/Interaction.hpp"
+#include "uml/InteractionOperand.hpp"
+#include "uml/Enumeration.hpp"
+#include "uml/UseCase.hpp"
+#include "uml/BehavioredClassifier.hpp"
+#include "uml/Namespace.hpp"
+#include "uml/Namespace.hpp"
+#include "uml/Activity.hpp"
+#include "uml/StructuredActivityNode.hpp"
+#include "uml/StructuredActivityNode.hpp"
+#include "uml/UseCase.hpp"
+#include "uml/Interaction.hpp"
+#include "uml/Interaction.hpp"
+#include "uml/Interface.hpp"
+#include "uml/Interface.hpp"
+#include "uml/InvocationAction.hpp"
+#include "uml/DeploymentTarget.hpp"
+#include "uml/Namespace.hpp"
+#include "uml/Package.hpp"
+#include "uml/Operation.hpp"
+#include "uml/Element.hpp"
+#include "uml/Association.hpp"
+#include "uml/StringExpression.hpp"
+#include "uml/InstanceSpecification.hpp"
+#include "uml/Package.hpp"
+#include "uml/Slot.hpp"
+#include "uml/TemplateParameter.hpp"
+#include "uml/Package.hpp"
+#include "uml/ExecutableNode.hpp"
+#include "uml/Package.hpp"
+#include "uml/StructuredActivityNode.hpp"
+#include "uml/TemplateSignature.hpp"
+#include "uml/Classifier.hpp"
+#include "uml/ProtocolStateMachine.hpp"
+#include "uml/State.hpp"
+#include "uml/State.hpp"
+#include "uml/State.hpp"
+#include "uml/StateMachine.hpp"
+#include "uml/StateMachine.hpp"
+#include "uml/StructuralFeatureAction.hpp"
+#include "uml/Classifier.hpp"
+#include "uml/ActivityGroup.hpp"
+#include "uml/ActivityPartition.hpp"
+#include "uml/TemplateableElement.hpp"
+#include "uml/TemplateBinding.hpp"
+#include "uml/UseCase.hpp"
+
 
 using namespace uml;
 
@@ -275,6 +344,7 @@ UmlFactoryImpl::UmlFactoryImpl()
 	m_idMap.insert(std::make_pair("AddStructuralFeatureValueAction", UmlPackage::ADDSTRUCTURALFEATUREVALUEACTION_CLASS));
 	m_idMap.insert(std::make_pair("AddVariableValueAction", UmlPackage::ADDVARIABLEVALUEACTION_CLASS));
 	m_idMap.insert(std::make_pair("AnyReceiveEvent", UmlPackage::ANYRECEIVEEVENT_CLASS));
+	m_idMap.insert(std::make_pair("Argument", UmlPackage::ARGUMENT_CLASS));
 	m_idMap.insert(std::make_pair("Artifact", UmlPackage::ARTIFACT_CLASS));
 	m_idMap.insert(std::make_pair("Association", UmlPackage::ASSOCIATION_CLASS));
 	m_idMap.insert(std::make_pair("AssociationClass", UmlPackage::ASSOCIATIONCLASS_CLASS));
@@ -1030,6 +1100,11 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
 				}
 			}
+		}
+		case UmlPackage::ARGUMENT_CLASS:
+		{
+				return this->createArgument(metaElementID);
+			
 		}
 		case UmlPackage::ARTIFACT_CLASS:
 		{
@@ -8969,6 +9044,13 @@ std::shared_ptr<AnyReceiveEvent> UmlFactoryImpl::createAnyReceiveEvent_in_Owning
 	element->setThisAnyReceiveEventPtr(element);
 	return element;
 	
+}
+std::shared_ptr<Argument> UmlFactoryImpl::createArgument(const int metaElementID/*=-1*/) const
+{
+	std::shared_ptr<ArgumentImpl> element(new ArgumentImpl());
+	element->setMetaElementID(metaElementID);
+	element->setThisArgumentPtr(element);
+	return element;
 }
 std::shared_ptr<Artifact> UmlFactoryImpl::createArtifact(const int metaElementID/*=-1*/) const
 {

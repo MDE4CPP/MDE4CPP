@@ -33,6 +33,18 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -637,13 +649,14 @@ Any ConditionalNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //4944
+			return eAny(tempList); //5044
 		}
 		case UmlPackage::CONDITIONALNODE_ATTRIBUTE_ISASSURED:
-			return eAny(getIsAssured()); //4945
+			return eAny(getIsAssured()); //5045
 		case UmlPackage::CONDITIONALNODE_ATTRIBUTE_ISDETERMINATE:
-			return eAny(getIsDeterminate()); //4946
+			return eAny(getIsDeterminate()); //5046
 		case UmlPackage::CONDITIONALNODE_ATTRIBUTE_RESULT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -652,8 +665,9 @@ Any ConditionalNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //4947
+			return eAny(tempList); //5047
 		}
 	}
 	return StructuredActivityNodeImpl::eGet(featureID, resolve, coreType);
@@ -663,13 +677,13 @@ bool ConditionalNodeImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::CONDITIONALNODE_ATTRIBUTE_CLAUSE:
-			return getClause() != nullptr; //4944
+			return getClause() != nullptr; //5044
 		case UmlPackage::CONDITIONALNODE_ATTRIBUTE_ISASSURED:
-			return getIsAssured() != false; //4945
+			return getIsAssured() != false; //5045
 		case UmlPackage::CONDITIONALNODE_ATTRIBUTE_ISDETERMINATE:
-			return getIsDeterminate() != false; //4946
+			return getIsDeterminate() != false; //5046
 		case UmlPackage::CONDITIONALNODE_ATTRIBUTE_RESULT:
-			return getResult() != nullptr; //4947
+			return getResult() != nullptr; //5047
 	}
 	return StructuredActivityNodeImpl::internalEIsSet(featureID);
 }
@@ -717,14 +731,14 @@ bool ConditionalNodeImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			bool _isAssured = newValue->get<bool>();
-			setIsAssured(_isAssured); //4945
+			setIsAssured(_isAssured); //5045
 			return true;
 		}
 		case UmlPackage::CONDITIONALNODE_ATTRIBUTE_ISDETERMINATE:
 		{
 			// BOOST CAST
 			bool _isDeterminate = newValue->get<bool>();
-			setIsDeterminate(_isDeterminate); //4946
+			setIsDeterminate(_isDeterminate); //5046
 			return true;
 		}
 		case UmlPackage::CONDITIONALNODE_ATTRIBUTE_RESULT:

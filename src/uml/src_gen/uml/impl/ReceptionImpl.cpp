@@ -33,6 +33,10 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -340,7 +344,7 @@ Any ReceptionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::RECEPTION_ATTRIBUTE_SIGNAL:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSignal())); //20226
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSignal())); //20326
 	}
 	return BehavioralFeatureImpl::eGet(featureID, resolve, coreType);
 }
@@ -349,7 +353,7 @@ bool ReceptionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::RECEPTION_ATTRIBUTE_SIGNAL:
-			return getSignal() != nullptr; //20226
+			return getSignal() != nullptr; //20326
 	}
 	return BehavioralFeatureImpl::internalEIsSet(featureID);
 }
@@ -362,7 +366,7 @@ bool ReceptionImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Signal> _signal = std::dynamic_pointer_cast<uml::Signal>(_temp);
-			setSignal(_signal); //20226
+			setSignal(_signal); //20326
 			return true;
 		}
 	}

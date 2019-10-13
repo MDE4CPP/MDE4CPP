@@ -33,6 +33,14 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -336,15 +344,16 @@ Any GeneralizationSetImpl::eGet(int featureID, bool resolve, bool coreType) cons
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //11015
+			return eAny(tempList); //11115
 		}
 		case UmlPackage::GENERALIZATIONSET_ATTRIBUTE_ISCOVERING:
-			return eAny(getIsCovering()); //11012
+			return eAny(getIsCovering()); //11112
 		case UmlPackage::GENERALIZATIONSET_ATTRIBUTE_ISDISJOINT:
-			return eAny(getIsDisjoint()); //11013
+			return eAny(getIsDisjoint()); //11113
 		case UmlPackage::GENERALIZATIONSET_ATTRIBUTE_POWERTYPE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getPowertype())); //11014
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getPowertype())); //11114
 	}
 	return PackageableElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -353,13 +362,13 @@ bool GeneralizationSetImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::GENERALIZATIONSET_ATTRIBUTE_GENERALIZATION:
-			return getGeneralization() != nullptr; //11015
+			return getGeneralization() != nullptr; //11115
 		case UmlPackage::GENERALIZATIONSET_ATTRIBUTE_ISCOVERING:
-			return getIsCovering() != false; //11012
+			return getIsCovering() != false; //11112
 		case UmlPackage::GENERALIZATIONSET_ATTRIBUTE_ISDISJOINT:
-			return getIsDisjoint() != false; //11013
+			return getIsDisjoint() != false; //11113
 		case UmlPackage::GENERALIZATIONSET_ATTRIBUTE_POWERTYPE:
-			return getPowertype() != nullptr; //11014
+			return getPowertype() != nullptr; //11114
 	}
 	return PackageableElementImpl::internalEIsSet(featureID);
 }
@@ -407,14 +416,14 @@ bool GeneralizationSetImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			bool _isCovering = newValue->get<bool>();
-			setIsCovering(_isCovering); //11012
+			setIsCovering(_isCovering); //11112
 			return true;
 		}
 		case UmlPackage::GENERALIZATIONSET_ATTRIBUTE_ISDISJOINT:
 		{
 			// BOOST CAST
 			bool _isDisjoint = newValue->get<bool>();
-			setIsDisjoint(_isDisjoint); //11013
+			setIsDisjoint(_isDisjoint); //11113
 			return true;
 		}
 		case UmlPackage::GENERALIZATIONSET_ATTRIBUTE_POWERTYPE:
@@ -422,7 +431,7 @@ bool GeneralizationSetImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Classifier> _powertype = std::dynamic_pointer_cast<uml::Classifier>(_temp);
-			setPowertype(_powertype); //11014
+			setPowertype(_powertype); //11114
 			return true;
 		}
 	}

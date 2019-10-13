@@ -31,6 +31,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "fUML/FUMLFactory.hpp"
 #include "fUML/FUMLPackage.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -295,8 +297,9 @@ Any ExpansionRegionActivationImpl::eGet(int featureID, bool resolve, bool coreTy
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //4812
+			return eAny(tempList); //5112
 		}
 		case FUMLPackage::EXPANSIONREGIONACTIVATION_ATTRIBUTE_INPUTEXPANSIONTOKENS:
 		{
@@ -306,8 +309,9 @@ Any ExpansionRegionActivationImpl::eGet(int featureID, bool resolve, bool coreTy
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //4811
+			return eAny(tempList); //5111
 		}
 		case FUMLPackage::EXPANSIONREGIONACTIVATION_ATTRIBUTE_INPUTTOKENS:
 		{
@@ -317,8 +321,9 @@ Any ExpansionRegionActivationImpl::eGet(int featureID, bool resolve, bool coreTy
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //4810
+			return eAny(tempList); //5110
 		}
 	}
 	return ActionActivationImpl::eGet(featureID, resolve, coreType);
@@ -328,11 +333,11 @@ bool ExpansionRegionActivationImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case FUMLPackage::EXPANSIONREGIONACTIVATION_ATTRIBUTE_ACTIVATIONGROUPS:
-			return getActivationGroups() != nullptr; //4812
+			return getActivationGroups() != nullptr; //5112
 		case FUMLPackage::EXPANSIONREGIONACTIVATION_ATTRIBUTE_INPUTEXPANSIONTOKENS:
-			return getInputExpansionTokens() != nullptr; //4811
+			return getInputExpansionTokens() != nullptr; //5111
 		case FUMLPackage::EXPANSIONREGIONACTIVATION_ATTRIBUTE_INPUTTOKENS:
-			return getInputTokens() != nullptr; //4810
+			return getInputTokens() != nullptr; //5110
 	}
 	return ActionActivationImpl::internalEIsSet(featureID);
 }

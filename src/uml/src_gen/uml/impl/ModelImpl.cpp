@@ -32,6 +32,16 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -428,7 +438,7 @@ Any ModelImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::MODEL_ATTRIBUTE_VIEWPOINT:
-			return eAny(getViewpoint()); //15328
+			return eAny(getViewpoint()); //15428
 	}
 	return PackageImpl::eGet(featureID, resolve, coreType);
 }
@@ -437,7 +447,7 @@ bool ModelImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::MODEL_ATTRIBUTE_VIEWPOINT:
-			return getViewpoint() != ""; //15328
+			return getViewpoint() != ""; //15428
 	}
 	return PackageImpl::internalEIsSet(featureID);
 }
@@ -449,7 +459,7 @@ bool ModelImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::string _viewpoint = newValue->get<std::string>();
-			setViewpoint(_viewpoint); //15328
+			setViewpoint(_viewpoint); //15428
 			return true;
 		}
 	}

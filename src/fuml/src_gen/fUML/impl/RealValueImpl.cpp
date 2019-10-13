@@ -198,7 +198,7 @@ Any RealValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case FUMLPackage::REALVALUE_ATTRIBUTE_VALUE:
-			return eAny(getValue()); //911
+			return eAny(getValue()); //941
 	}
 	return PrimitiveValueImpl::eGet(featureID, resolve, coreType);
 }
@@ -207,7 +207,7 @@ bool RealValueImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case FUMLPackage::REALVALUE_ATTRIBUTE_VALUE:
-			return getValue() != 0; //911
+			return getValue() != 0; //941
 	}
 	return PrimitiveValueImpl::internalEIsSet(featureID);
 }
@@ -219,7 +219,7 @@ bool RealValueImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			float _value = newValue->get<float>();
-			setValue(_value); //911
+			setValue(_value); //941
 			return true;
 		}
 	}

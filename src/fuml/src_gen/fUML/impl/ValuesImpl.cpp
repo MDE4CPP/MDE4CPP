@@ -157,8 +157,9 @@ Any ValuesImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //1130
+			return eAny(tempList); //1160
 		}
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
@@ -168,7 +169,7 @@ bool ValuesImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case FUMLPackage::VALUES_ATTRIBUTE_VALUES:
-			return getValues() != nullptr; //1130
+			return getValues() != nullptr; //1160
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }

@@ -204,11 +204,11 @@ Any ClassifierBehaviorExecutionImpl::eGet(int featureID, bool resolve, bool core
 	switch(featureID)
 	{
 		case FUMLPackage::CLASSIFIERBEHAVIOREXECUTION_ATTRIBUTE_CLASSIFIER:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getClassifier())); //171
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getClassifier())); //201
 		case FUMLPackage::CLASSIFIERBEHAVIOREXECUTION_ATTRIBUTE_EXECUTION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getExecution())); //170
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getExecution())); //200
 		case FUMLPackage::CLASSIFIERBEHAVIOREXECUTION_ATTRIBUTE_OBJECTACTIVATION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getObjectActivation())); //172
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getObjectActivation())); //202
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
@@ -217,11 +217,11 @@ bool ClassifierBehaviorExecutionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case FUMLPackage::CLASSIFIERBEHAVIOREXECUTION_ATTRIBUTE_CLASSIFIER:
-			return getClassifier() != nullptr; //171
+			return getClassifier() != nullptr; //201
 		case FUMLPackage::CLASSIFIERBEHAVIOREXECUTION_ATTRIBUTE_EXECUTION:
-			return getExecution() != nullptr; //170
+			return getExecution() != nullptr; //200
 		case FUMLPackage::CLASSIFIERBEHAVIOREXECUTION_ATTRIBUTE_OBJECTACTIVATION:
-			return getObjectActivation() != nullptr; //172
+			return getObjectActivation() != nullptr; //202
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
@@ -234,7 +234,7 @@ bool ClassifierBehaviorExecutionImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Class> _classifier = std::dynamic_pointer_cast<uml::Class>(_temp);
-			setClassifier(_classifier); //171
+			setClassifier(_classifier); //201
 			return true;
 		}
 		case FUMLPackage::CLASSIFIERBEHAVIOREXECUTION_ATTRIBUTE_EXECUTION:
@@ -242,7 +242,7 @@ bool ClassifierBehaviorExecutionImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<fUML::Execution> _execution = std::dynamic_pointer_cast<fUML::Execution>(_temp);
-			setExecution(_execution); //170
+			setExecution(_execution); //200
 			return true;
 		}
 		case FUMLPackage::CLASSIFIERBEHAVIOREXECUTION_ATTRIBUTE_OBJECTACTIVATION:
@@ -250,7 +250,7 @@ bool ClassifierBehaviorExecutionImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<fUML::ObjectActivation> _objectActivation = std::dynamic_pointer_cast<fUML::ObjectActivation>(_temp);
-			setObjectActivation(_objectActivation); //172
+			setObjectActivation(_objectActivation); //202
 			return true;
 		}
 	}

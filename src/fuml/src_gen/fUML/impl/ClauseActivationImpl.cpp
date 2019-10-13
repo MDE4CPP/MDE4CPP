@@ -211,9 +211,9 @@ Any ClauseActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case FUMLPackage::CLAUSEACTIVATION_ATTRIBUTE_CLAUSE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getClause())); //200
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getClause())); //230
 		case FUMLPackage::CLAUSEACTIVATION_ATTRIBUTE_CONDITIONALNODEACTIVATION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getConditionalNodeActivation())); //201
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getConditionalNodeActivation())); //231
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
@@ -222,9 +222,9 @@ bool ClauseActivationImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case FUMLPackage::CLAUSEACTIVATION_ATTRIBUTE_CLAUSE:
-			return getClause() != nullptr; //200
+			return getClause() != nullptr; //230
 		case FUMLPackage::CLAUSEACTIVATION_ATTRIBUTE_CONDITIONALNODEACTIVATION:
-			return getConditionalNodeActivation() != nullptr; //201
+			return getConditionalNodeActivation() != nullptr; //231
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
@@ -237,7 +237,7 @@ bool ClauseActivationImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Clause> _clause = std::dynamic_pointer_cast<uml::Clause>(_temp);
-			setClause(_clause); //200
+			setClause(_clause); //230
 			return true;
 		}
 		case FUMLPackage::CLAUSEACTIVATION_ATTRIBUTE_CONDITIONALNODEACTIVATION:
@@ -245,7 +245,7 @@ bool ClauseActivationImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<fUML::ConditionalNodeActivation> _conditionalNodeActivation = std::dynamic_pointer_cast<fUML::ConditionalNodeActivation>(_temp);
-			setConditionalNodeActivation(_conditionalNodeActivation); //201
+			setConditionalNodeActivation(_conditionalNodeActivation); //231
 			return true;
 		}
 	}

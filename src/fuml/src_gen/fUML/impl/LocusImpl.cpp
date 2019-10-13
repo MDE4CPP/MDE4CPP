@@ -331,7 +331,7 @@ Any LocusImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case FUMLPackage::LOCUS_ATTRIBUTE_EXECUTOR:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getExecutor())); //730
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getExecutor())); //760
 		case FUMLPackage::LOCUS_ATTRIBUTE_EXTENSIONALVALUES:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -340,11 +340,12 @@ Any LocusImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //732
+			return eAny(tempList); //762
 		}
 		case FUMLPackage::LOCUS_ATTRIBUTE_FACTORY:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getFactory())); //731
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getFactory())); //761
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
@@ -353,11 +354,11 @@ bool LocusImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case FUMLPackage::LOCUS_ATTRIBUTE_EXECUTOR:
-			return getExecutor() != nullptr; //730
+			return getExecutor() != nullptr; //760
 		case FUMLPackage::LOCUS_ATTRIBUTE_EXTENSIONALVALUES:
-			return getExtensionalValues() != nullptr; //732
+			return getExtensionalValues() != nullptr; //762
 		case FUMLPackage::LOCUS_ATTRIBUTE_FACTORY:
-			return getFactory() != nullptr; //731
+			return getFactory() != nullptr; //761
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
@@ -370,7 +371,7 @@ bool LocusImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<fUML::Executor> _executor = std::dynamic_pointer_cast<fUML::Executor>(_temp);
-			setExecutor(_executor); //730
+			setExecutor(_executor); //760
 			return true;
 		}
 		case FUMLPackage::LOCUS_ATTRIBUTE_EXTENSIONALVALUES:
@@ -414,7 +415,7 @@ bool LocusImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<fUML::ExecutionFactory> _factory = std::dynamic_pointer_cast<fUML::ExecutionFactory>(_temp);
-			setFactory(_factory); //731
+			setFactory(_factory); //761
 			return true;
 		}
 	}

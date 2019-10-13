@@ -31,6 +31,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "fUML/FUMLFactory.hpp"
 #include "fUML/FUMLPackage.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -269,8 +271,9 @@ Any LoopNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType) con
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //7411
+			return eAny(tempList); //7711
 		}
 	}
 	return StructuredActivityNodeActivationImpl::eGet(featureID, resolve, coreType);
@@ -280,7 +283,7 @@ bool LoopNodeActivationImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case FUMLPackage::LOOPNODEACTIVATION_ATTRIBUTE_BODYOUTPUTLISTS:
-			return getBodyOutputLists() != nullptr; //7411
+			return getBodyOutputLists() != nullptr; //7711
 	}
 	return StructuredActivityNodeActivationImpl::internalEIsSet(featureID);
 }

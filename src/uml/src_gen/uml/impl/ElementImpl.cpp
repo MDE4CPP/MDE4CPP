@@ -18,6 +18,7 @@
 #include <iostream>
 #include <sstream>
 
+#include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/Union.hpp"
 #include "abstractDataTypes/Any.hpp"
@@ -32,6 +33,8 @@
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
 
@@ -510,8 +513,9 @@ Any ElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //810
+			return eAny(tempList); //820
 		}
 		case UmlPackage::ELEMENT_ATTRIBUTE_OWNEDELEMENT:
 		{
@@ -521,11 +525,12 @@ Any ElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //811
+			return eAny(tempList); //821
 		}
 		case UmlPackage::ELEMENT_ATTRIBUTE_OWNER:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getOwner().lock())); //812
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getOwner().lock())); //822
 	}
 	return ObjectImpl::eGet(featureID, resolve, coreType);
 }
@@ -534,11 +539,11 @@ bool ElementImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::ELEMENT_ATTRIBUTE_OWNEDCOMMENT:
-			return getOwnedComment() != nullptr; //810
+			return getOwnedComment() != nullptr; //820
 		case UmlPackage::ELEMENT_ATTRIBUTE_OWNEDELEMENT:
-			return getOwnedElement() != nullptr; //811
+			return getOwnedElement() != nullptr; //821
 		case UmlPackage::ELEMENT_ATTRIBUTE_OWNER:
-			return getOwner().lock() != nullptr; //812
+			return getOwner().lock() != nullptr; //822
 	}
 	return ObjectImpl::internalEIsSet(featureID);
 }

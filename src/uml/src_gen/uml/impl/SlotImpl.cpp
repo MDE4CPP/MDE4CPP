@@ -18,6 +18,7 @@
 #include <iostream>
 #include <sstream>
 
+#include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/Union.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -28,6 +29,10 @@
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
 
@@ -261,9 +266,9 @@ Any SlotImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::SLOT_ATTRIBUTE_DEFININGFEATURE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getDefiningFeature())); //2173
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getDefiningFeature())); //2183
 		case UmlPackage::SLOT_ATTRIBUTE_OWNINGINSTANCE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getOwningInstance().lock())); //2175
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getOwningInstance().lock())); //2185
 		case UmlPackage::SLOT_ATTRIBUTE_VALUE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -272,8 +277,9 @@ Any SlotImpl::eGet(int featureID, bool resolve, bool coreType) const
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //2174
+			return eAny(tempList); //2184
 		}
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
@@ -283,11 +289,11 @@ bool SlotImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::SLOT_ATTRIBUTE_DEFININGFEATURE:
-			return getDefiningFeature() != nullptr; //2173
+			return getDefiningFeature() != nullptr; //2183
 		case UmlPackage::SLOT_ATTRIBUTE_OWNINGINSTANCE:
-			return getOwningInstance().lock() != nullptr; //2175
+			return getOwningInstance().lock() != nullptr; //2185
 		case UmlPackage::SLOT_ATTRIBUTE_VALUE:
-			return getValue() != nullptr; //2174
+			return getValue() != nullptr; //2184
 	}
 	return ElementImpl::internalEIsSet(featureID);
 }
@@ -300,7 +306,7 @@ bool SlotImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::StructuralFeature> _definingFeature = std::dynamic_pointer_cast<uml::StructuralFeature>(_temp);
-			setDefiningFeature(_definingFeature); //2173
+			setDefiningFeature(_definingFeature); //2183
 			return true;
 		}
 		case UmlPackage::SLOT_ATTRIBUTE_OWNINGINSTANCE:
@@ -308,7 +314,7 @@ bool SlotImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::InstanceSpecification> _owningInstance = std::dynamic_pointer_cast<uml::InstanceSpecification>(_temp);
-			setOwningInstance(_owningInstance); //2175
+			setOwningInstance(_owningInstance); //2185
 			return true;
 		}
 		case UmlPackage::SLOT_ATTRIBUTE_VALUE:

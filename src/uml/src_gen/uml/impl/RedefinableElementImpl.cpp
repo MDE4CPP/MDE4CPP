@@ -33,6 +33,10 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -296,7 +300,7 @@ Any RedefinableElementImpl::eGet(int featureID, bool resolve, bool coreType) con
 	switch(featureID)
 	{
 		case UmlPackage::REDEFINABLEELEMENT_ATTRIBUTE_ISLEAF:
-			return eAny(getIsLeaf()); //2049
+			return eAny(getIsLeaf()); //2059
 		case UmlPackage::REDEFINABLEELEMENT_ATTRIBUTE_REDEFINEDELEMENT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -305,8 +309,9 @@ Any RedefinableElementImpl::eGet(int featureID, bool resolve, bool coreType) con
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //20410
+			return eAny(tempList); //20510
 		}
 		case UmlPackage::REDEFINABLEELEMENT_ATTRIBUTE_REDEFINITIONCONTEXT:
 		{
@@ -316,8 +321,9 @@ Any RedefinableElementImpl::eGet(int featureID, bool resolve, bool coreType) con
 			while (iter != end)
 			{
 				tempList->add(*iter);
+				iter++;
 			}
-			return eAny(tempList); //20411
+			return eAny(tempList); //20511
 		}
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
@@ -327,11 +333,11 @@ bool RedefinableElementImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::REDEFINABLEELEMENT_ATTRIBUTE_ISLEAF:
-			return getIsLeaf() != false; //2049
+			return getIsLeaf() != false; //2059
 		case UmlPackage::REDEFINABLEELEMENT_ATTRIBUTE_REDEFINEDELEMENT:
-			return getRedefinedElement() != nullptr; //20410
+			return getRedefinedElement() != nullptr; //20510
 		case UmlPackage::REDEFINABLEELEMENT_ATTRIBUTE_REDEFINITIONCONTEXT:
-			return getRedefinitionContext() != nullptr; //20411
+			return getRedefinitionContext() != nullptr; //20511
 	}
 	return NamedElementImpl::internalEIsSet(featureID);
 }
@@ -343,7 +349,7 @@ bool RedefinableElementImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			bool _isLeaf = newValue->get<bool>();
-			setIsLeaf(_isLeaf); //2049
+			setIsLeaf(_isLeaf); //2059
 			return true;
 		}
 	}

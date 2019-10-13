@@ -33,6 +33,10 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -250,9 +254,9 @@ Any GeneralOrderingImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::GENERALORDERING_ATTRIBUTE_AFTER:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getAfter())); //1089
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getAfter())); //1099
 		case UmlPackage::GENERALORDERING_ATTRIBUTE_BEFORE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getBefore())); //10810
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getBefore())); //10910
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -261,9 +265,9 @@ bool GeneralOrderingImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::GENERALORDERING_ATTRIBUTE_AFTER:
-			return getAfter() != nullptr; //1089
+			return getAfter() != nullptr; //1099
 		case UmlPackage::GENERALORDERING_ATTRIBUTE_BEFORE:
-			return getBefore() != nullptr; //10810
+			return getBefore() != nullptr; //10910
 	}
 	return NamedElementImpl::internalEIsSet(featureID);
 }
@@ -276,7 +280,7 @@ bool GeneralOrderingImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::OccurrenceSpecification> _after = std::dynamic_pointer_cast<uml::OccurrenceSpecification>(_temp);
-			setAfter(_after); //1089
+			setAfter(_after); //1099
 			return true;
 		}
 		case UmlPackage::GENERALORDERING_ATTRIBUTE_BEFORE:
@@ -284,7 +288,7 @@ bool GeneralOrderingImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::OccurrenceSpecification> _before = std::dynamic_pointer_cast<uml::OccurrenceSpecification>(_temp);
-			setBefore(_before); //10810
+			setBefore(_before); //10910
 			return true;
 		}
 	}

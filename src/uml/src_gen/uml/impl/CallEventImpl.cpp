@@ -32,6 +32,14 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -276,7 +284,7 @@ Any CallEventImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::CALLEVENT_ATTRIBUTE_OPERATION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getOperation())); //3112
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getOperation())); //3212
 	}
 	return MessageEventImpl::eGet(featureID, resolve, coreType);
 }
@@ -285,7 +293,7 @@ bool CallEventImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::CALLEVENT_ATTRIBUTE_OPERATION:
-			return getOperation() != nullptr; //3112
+			return getOperation() != nullptr; //3212
 	}
 	return MessageEventImpl::internalEIsSet(featureID);
 }
@@ -298,7 +306,7 @@ bool CallEventImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Operation> _operation = std::dynamic_pointer_cast<uml::Operation>(_temp);
-			setOperation(_operation); //3112
+			setOperation(_operation); //3212
 			return true;
 		}
 	}
