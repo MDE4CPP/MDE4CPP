@@ -74,7 +74,7 @@ stereo->[prop.setterName()/]([prop.generateValue(aElement,stereo)/]);[/if]
 [**
  * generate values set to stereotype properties
 */]
-[template private generateValue(prop : Property,aElement : Element, stereo : Stereotype) ? (not prop.name.startsWith('base_') and prop.type.oclIsKindOf(NamedElement) and not prop.type.oclIsKindOf(PrimitiveType))]
+[template private generateValue(prop : Property,aElement : Element, stereo : Stereotype) ? (not prop.name.startsWith('base_') and prop.type.oclIsKindOf(NamedElement) and not prop.type.oclIsKindOf(Enumeration) and not prop.type.oclIsKindOf(PrimitiveType))]
 [aElement.getValue(stereo, prop.name).oclAsType(NamedElement).memberName()/]
 [/template]
 
