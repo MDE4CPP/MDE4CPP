@@ -41,6 +41,11 @@
 [import UML4CPP::generator::main::helpers::keywords /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 
+
+[query public getAllAppliedStereotypes(aPackage : Package) : Set(Stereotype) = OrderedSet{
+								aPackage.allOwnedElements().getAppliedStereotypes(),
+								aPackage.getAppliedStereotypes()
+							}->flatten() /]
 [query public metaModelIncludes(aPackage : Package) : Set(Package) = OrderedSet{
 								aPackage.allOwnedElements()->filter(TypedElement)->select(not type.oclIsUndefined()).type.getNearestPackage(),
 								aPackage.allOwnedElements()->filter(CallBehaviorAction).behavior.getNearestPackage(),
@@ -96,16 +101,9 @@
 [/if]
 [/for]
 
-[for (stereo : Stereotype | aPackage.member->filter(Class).attribute.getAppliedStereotypes()->asOrderedSet()->sortedBy(myQualifiedName()))]
+[for (stereo : Stereotype | aPackage.getAllAppliedStereotypes()->asOrderedSet()->sortedBy(myQualifiedName()))]
 #include "[stereo._package.myNamespaceName()/]/[stereo.name/].hpp"
 [/for]
-[for (stereo : Stereotype | aPackage.member->filter(Dependency).getAppliedStereotypes()->asOrderedSet()->sortedBy(myQualifiedName()))]
-#include "[stereo._package.myNamespaceName()/]/[stereo.name/].hpp"
-[/for]
-[for (stereo : Stereotype | aPackage.getAppliedStereotypes()->asOrderedSet()->sortedBy(myQualifiedName()))]
-#include "[stereo._package.myNamespaceName()/]/[stereo.name/].hpp"
-[/for]
-
 
 [if (not aPackage.ignoreNamespace())]using namespace [aPackage.name/];[/if]
 
