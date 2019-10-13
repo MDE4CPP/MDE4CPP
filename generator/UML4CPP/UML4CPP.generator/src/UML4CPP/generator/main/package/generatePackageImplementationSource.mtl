@@ -41,7 +41,12 @@
 [import UML4CPP::generator::main::helpers::keywords /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 
-[query public metaModelIncludes(aPackage : Package) : Set(Package) = OrderedSet{aPackage.allOwnedElements()->filter(TypedElement)->select(not type.oclIsUndefined()).type.getNearestPackage(),aPackage.allOwnedElements()->filter(CallBehaviorAction).behavior.getNearestPackage(),aPackage.member->filter(Element).getAppliedStereotypes().getNearestPackage(), aPackage.member->filter(Element).allOwnedElements()->filter(InterfaceRealization).contract.getNearestPackage()}->flatten() /]
+[query public metaModelIncludes(aPackage : Package) : Set(Package) = OrderedSet{
+								aPackage.allOwnedElements()->filter(TypedElement)->select(not type.oclIsUndefined()).type.getNearestPackage(),
+								aPackage.allOwnedElements()->filter(CallBehaviorAction).behavior.getNearestPackage(),
+								aPackage.allOwnedElements()->filter(Element).getAppliedStereotypes().getProfile(), 
+								aPackage.member->filter(Element).allOwnedElements()->filter(InterfaceRealization).contract.getNearestPackage()
+							}->flatten() /]
 [query private getMetaMetaModelIncludes(aPackage : Package) : Set(EClass) = OrderedSet{
 								aPackage.allOwnedElements().eClass(), 
 								aPackage.allOwnedElements()->selectByKind(Interface).ownedOperation.ownedParameter->select(not type.oclIsUndefined()).type.eClass(), 
