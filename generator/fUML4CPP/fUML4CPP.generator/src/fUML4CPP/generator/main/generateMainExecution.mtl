@@ -29,10 +29,6 @@
 #include <memory>
 #include <vector>
 
-#include "[aPackage.getPackageName()/]Exec/[aPackage.getPackageName().toUpperFirst()/]Locus.hpp"
-#include "[aPackage.getPackageName()/]Exec/impl/[aPackage.getPackageName().toUpperFirst()/]LocusImpl.hpp"
-
-
 [generateMainIncludes()/]
 [if (not aPackage.allOwnedElements()->filter(Activity)->isEmpty())]
 [let act : Activity = aPackage.allOwnedElements()->filter(Activity)->asOrderedSet()->first()]
@@ -115,7 +111,9 @@ int main()
 #include "uml/UmlFactory.hpp"
 
 
-//include Model package
+//include Model locus and package
+#include "[aPackage.getPackageName()/]Exec/[aPackage.getPackageName().toUpperFirst()/]Locus.hpp"
+#include "[aPackage.getPackageName()/]Exec/impl/[aPackage.getPackageName().toUpperFirst()/]LocusImpl.hpp"
 #include "[aPackage.getPackageName()/]/[aPackage.getPackageName().toUpperFirst().concat('Package')/].hpp"
 
 [for (anotherPackage : Package | aPackage.getOpaqueBehaviors().getNearestPackage()->asSet()->sortedBy(name))]
