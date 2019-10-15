@@ -21,9 +21,9 @@
 
 [query public supportedTypes(type : Type) : Boolean = (type.name = 'Integer') or (type.name = 'Boolean') /]
 
-[template public generateCallOperationActionExecutionSource(anCallOperationAction : CallOperationAction, aPackage :Package){ className : String = anCallOperationAction.name.toUpperFirst().concat('Execution'); }]
-[file (aPackage.getPackageName().concat('Exec/').concat(className).concat('.cpp'), false, 'UTF-8')]
-#include "[aPackage.getPackageName()/]Exec/[className/].hpp"
+[template public generateCallOperationActionExecutionSource(anCallOperationAction : CallOperationAction, aPackage :Package){ actionName : String = anCallOperationAction.name.sanitize().toUpperFirst().concat('Execution'); }]
+[file (aPackage.getPackageName().concat('Exec/').concat(actionName).concat('.cpp'), false, 'UTF-8')]
+#include "[aPackage.getPackageName()/]Exec/[actionName/].hpp"
 
 [defineDebugMacro()/]
 
@@ -74,30 +74,30 @@
  
 using namespace [aPackage.name/];
 
-[className/]::[className/]()
+[actionName/]::[actionName/]()
 {
 }
 
-[className/]::~[className/]()
+[actionName/]::~[actionName/]()
 {
 }
 
 
-[className/]::[className/](const [className/] &obj):
+[actionName/]::[actionName/](const [actionName/] &obj):
 	OpaqueBehaviorExecutionImpl(obj)
 {
 }
 
-std::shared_ptr<ecore::EObject> [className/]::copy() const
+std::shared_ptr<ecore::EObject> [actionName/]::copy() const
 {
-	std::shared_ptr<[className/]> element(new [className/](*this));
+	std::shared_ptr<[actionName/]> element(new [actionName/](*this));
 	element->setThisExecutionPtr(element);
 	return element;
 } 
 
-void [className/]::doBody(std::shared_ptr<Bag<fUML::ParameterValue> > inputParameters, std::shared_ptr<Bag<fUML::ParameterValue> > outputParameters)
+void [actionName/]::doBody(std::shared_ptr<Bag<fUML::ParameterValue> > inputParameters, std::shared_ptr<Bag<fUML::ParameterValue> > outputParameters)
 {
-    DEBUG_MESSAGE(std::cout<<"Printing from [className/]:" << std::endl;)
+    DEBUG_MESSAGE(std::cout<<"Printing from [actionName/]:" << std::endl;)
 	[for ( par : Parameter | anCallOperationAction.operation.ownedParameter->asOrderedSet()->sortedBy(name))]
    	[par.generateCppType(false)/] [par.name/][if (par.direction = ParameterDirectionKind::out and not (par.type.isPrimitive() or par.type.oclIsKindOf(Enumeration)))](new [if (par.upper <> 1)]Bag<[/if][par.type.generateCppType(true)/][if (par.upper <> 1)]>[/if]())[/if];
 	[/for]
@@ -171,7 +171,7 @@ void [className/]::doBody(std::shared_ptr<Bag<fUML::ParameterValue> > inputParam
 	[/for]
 }
 
-void [className/]::setThisExecutionPtr(std::weak_ptr<[className/]> thisExecutionPtr)
+void [actionName/]::setThisExecutionPtr(std::weak_ptr<[actionName/]> thisExecutionPtr)
 {
 	setThisOpaqueBehaviorExecutionPtr(thisExecutionPtr);
 }

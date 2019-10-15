@@ -18,28 +18,28 @@
 [import UML4CPP::generator::main::helpers::nameHelper /]
 
 [template public generateCallOperationActionExecutionHeader(anCallOperationAction : CallOperationAction, aPackage :Package) {
-	className : String = anCallOperationAction.name.toUpperFirst().concat('Execution');
+	actionName : String = anCallOperationAction.name.sanitize().toUpperFirst().concat('Execution');
 }]
 
-[file (aPackage.getPackageName().concat('Exec/').concat(className).concat('.hpp'), false, 'UTF-8')]
+[file (aPackage.getPackageName().concat('Exec/').concat(actionName).concat('.hpp'), false, 'UTF-8')]
 [startGuard(anCallOperationAction,'Execution')/]
 
 #include "fUML/impl/OpaqueBehaviorExecutionImpl.hpp"
 
 namespace [aPackage.name/] 
 {
-	class [className/] : virtual public fUML::OpaqueBehaviorExecutionImpl 
+	class [actionName/] : virtual public fUML::OpaqueBehaviorExecutionImpl 
 	{
 		public:
 		    //constructor
-		    [className/](const [className/] &obj);
-		    [className/]();
+		    [actionName/](const [actionName/] &obj);
+		    [actionName/]();
 		    //destructor
-		    virtual ~[className/]();
+		    virtual ~[actionName/]();
 		
 		    virtual void doBody(std::shared_ptr<Bag<fUML::ParameterValue> > inputParameters, std::shared_ptr<Bag<fUML::ParameterValue> > outputParameters);
 		    virtual std::shared_ptr<ecore::EObject> copy() const;
-			virtual void setThisExecutionPtr(std::weak_ptr<[className/]> thisExecutionPtr);
+			virtual void setThisExecutionPtr(std::weak_ptr<[actionName/]> thisExecutionPtr);
 		};
 }
 

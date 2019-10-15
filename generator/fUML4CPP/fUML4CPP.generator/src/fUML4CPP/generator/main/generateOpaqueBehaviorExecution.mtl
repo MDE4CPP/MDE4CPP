@@ -37,7 +37,7 @@
 
 [template public generateOpaqueBehaviorCreation(anOpaqueBehavior : OpaqueBehavior) ]
 [if (not anOpaqueBehavior.name.oclIsUndefined())]
-std::shared_ptr<[anOpaqueBehavior.getNearestPackage().myNamespaceName()/]::[anOpaqueBehavior.name.toUpperFirst()/]Execution> [memberName(anOpaqueBehavior)/]Execution(new [anOpaqueBehavior.getNearestPackage().myNamespaceName()/]::[anOpaqueBehavior.name.toUpperFirst()/]Execution());
+std::shared_ptr<[anOpaqueBehavior.getNearestPackage().myNamespaceName()/]::[anOpaqueBehavior.name.sanitize().toUpperFirst()/]Execution> [memberName(anOpaqueBehavior)/]Execution(new [anOpaqueBehavior.getNearestPackage().myNamespaceName()/]::[anOpaqueBehavior.name.sanitize().toUpperFirst()/]Execution());
 [memberName(anOpaqueBehavior)/]Execution->setThisExecutionPtr([memberName(anOpaqueBehavior)/]Execution);
 [memberName(anOpaqueBehavior)/]Execution->getTypes()->push_back([anOpaqueBehavior.generatePackageGetterCall()/]);
 [memberName(anOpaqueBehavior)/]Execution->setLocus(locus);
@@ -46,7 +46,7 @@ factory->addPrimitiveBehaviorPrototype([memberName(anOpaqueBehavior)/]Execution)
 
 [/template]
 
-[query public getFBPackageElement(aCOA : CallOperationAction) : String = 'ob'.concat(aCOA.myName())/]
+[query public getFBPackageElement(aCOA : CallOperationAction) : String = 'ob'.concat(aCOA.myName().sanitize())/]
 
 [template public generateCallOperationActionCreation(aCallOperationAction : CallOperationAction) ? (not hasCOAAMethod())]
 [if (not aCallOperationAction.name.oclIsUndefined())]
@@ -65,7 +65,7 @@ std::shared_ptr<uml::Parameter> [memberName(aParameter)/](uml::UmlFactory::eInst
 
 [/for]
 
-std::shared_ptr<[aCallOperationAction.getNearestPackage().myNamespaceName()/]::[aCallOperationAction.name.toUpperFirst()/]Execution> [memberName(aCallOperationAction)/]Execution(new [aCallOperationAction.getNearestPackage().myNamespaceName()/]::[aCallOperationAction.name.toUpperFirst()/]Execution());
+std::shared_ptr<[aCallOperationAction.getNearestPackage().myNamespaceName()/]::[aCallOperationAction.name.sanitize().toUpperFirst()/]Execution> [memberName(aCallOperationAction)/]Execution(new [aCallOperationAction.getNearestPackage().myNamespaceName()/]::[aCallOperationAction.name.sanitize().toUpperFirst()/]Execution());
 [memberName(aCallOperationAction)/]Execution->setThisExecutionPtr([memberName(aCallOperationAction)/]Execution);
 [memberName(aCallOperationAction)/]Execution->getTypes()->push_back([aCallOperationAction.getFBPackageElement()/]);
 [memberName(aCallOperationAction)/]Execution->setLocus(locus);
@@ -82,7 +82,7 @@ factory->addPrimitiveBehaviorPrototype([memberName(aCallOperationAction)/]Execut
 [template public generateInclude(anOpaqueBehavior : OpaqueBehavior)]
 [if (not anOpaqueBehavior.oclIsUndefined())]
 [if (not anOpaqueBehavior.name.oclIsUndefined())]
-#include "[anOpaqueBehavior.getNearestPackage().getPackageName()/]Exec/[anOpaqueBehavior.name.toUpperFirst()/]Execution.hpp"
+#include "[anOpaqueBehavior.getNearestPackage().getPackageName()/]Exec/[anOpaqueBehavior.name.sanitize().toUpperFirst()/]Execution.hpp"
 [/if]
 [/if]
 [/template]
@@ -90,7 +90,7 @@ factory->addPrimitiveBehaviorPrototype([memberName(aCallOperationAction)/]Execut
 [template public generateInclude(aCallOperationAction : CallOperationAction)]
 [if (not aCallOperationAction.oclIsUndefined())]
 [if (not aCallOperationAction.name.oclIsUndefined())]
-#include "[aCallOperationAction.getNearestPackage().getPackageName()/]Exec/[aCallOperationAction.name.toUpperFirst()/]Execution.hpp"
+#include "[aCallOperationAction.getNearestPackage().getPackageName()/]Exec/[aCallOperationAction.name.sanitize().toUpperFirst()/]Execution.hpp"
 [/if]
 [/if]
 [/template]

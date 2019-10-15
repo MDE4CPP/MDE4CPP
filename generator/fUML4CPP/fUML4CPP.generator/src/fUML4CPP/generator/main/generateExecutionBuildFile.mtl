@@ -65,10 +65,10 @@ string(REPLACE "\\" "/" MDE4CPP_HOME $ENV{MDE4CPP_HOME})
 
 SET(SOURCE_FILES
 [for (aBehavior : OpaqueBehavior | aPackage.getOpaqueBehaviors()->sortedBy(name))]
-	[aBehavior.name.toUpperFirst()/]Execution.cpp
+	[aBehavior.name.sanitize().toUpperFirst()/]Execution.cpp
 [/for]
 [for (aCOA : CallOperationAction | aPackage.getCallOperationActions()->sortedBy(name)->select(not hasCOAAMethod()))]
-	[aCOA.name.toUpperFirst()/]Execution.cpp
+	[aCOA.name.sanitize().toUpperFirst()/]Execution.cpp
 [/for]
 [for (aClassifier : Classifier | getClassiferExecutions()->sortedBy(name))]
 	[aClassifier.name.toUpperFirst()/]Object.cpp
