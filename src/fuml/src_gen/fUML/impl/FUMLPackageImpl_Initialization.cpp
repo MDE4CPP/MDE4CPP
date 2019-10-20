@@ -1960,6 +1960,14 @@ void FUMLPackageImpl::initializeAddStructuralFeatureValueActionActivationContent
 	
 	
 	
+	m_addStructuralFeatureValueActionActivation_Operation_doAction->setEType(nullptr);
+	m_addStructuralFeatureValueActionActivation_Operation_doAction->setName("doAction");
+	m_addStructuralFeatureValueActionActivation_Operation_doAction->setLowerBound(0);
+	m_addStructuralFeatureValueActionActivation_Operation_doAction->setUpperBound(1);
+	m_addStructuralFeatureValueActionActivation_Operation_doAction->setUnique(true);
+	m_addStructuralFeatureValueActionActivation_Operation_doAction->setOrdered(true);
+	
+	
 	
 }
 

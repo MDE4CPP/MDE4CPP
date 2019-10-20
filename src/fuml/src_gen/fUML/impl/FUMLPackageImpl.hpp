@@ -340,6 +340,7 @@ namespace fUML
 			
 			
 			
+			virtual std::shared_ptr<ecore::EOperation> getAddStructuralFeatureValueActionActivation_Operation_doAction() const ;
 			
 			// End Class AddStructuralFeatureValueActionActivation
 
@@ -1934,6 +1935,7 @@ namespace fUML
 			std::shared_ptr<ecore::EOperation> m_readSelfActionActivation_Operation_doAction = nullptr;
 			std::shared_ptr<ecore::EOperation> m_destroyObjectActionActivation_Operation_doAction = nullptr;
 			std::shared_ptr<ecore::EOperation> m_createObjectActionActivation_Operation_doAction = nullptr;
+			std::shared_ptr<ecore::EOperation> m_addStructuralFeatureValueActionActivation_Operation_doAction = nullptr;
 			std::shared_ptr<ecore::EOperation> m_startClassifierBehaviorActionActivation_Operation_doAction = nullptr;
 			std::shared_ptr<ecore::EOperation> m_startObjectBehaviorActionActivation_Operation_doAction = nullptr;
 			std::shared_ptr<ecore::EOperation> m_opaqueBehaviorExecution_Operation_doBody_ParameterValue_ParameterValue = nullptr;

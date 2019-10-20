@@ -333,6 +333,7 @@ void FUMLPackageImpl::createAddStructuralFeatureValueActionActivationContent(std
 	m_addStructuralFeatureValueActionActivation_Class = factory->createEClass_in_EPackage(package, ADDSTRUCTURALFEATUREVALUEACTIONACTIVATION_CLASS);
 	
 	
+	m_addStructuralFeatureValueActionActivation_Operation_doAction = factory->createEOperation_in_EContainingClass(m_addStructuralFeatureValueActionActivation_Class, ADDSTRUCTURALFEATUREVALUEACTIONACTIVATION_OPERATION_DOACTION);
 	
 }
 

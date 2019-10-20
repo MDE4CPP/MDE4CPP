@@ -563,6 +563,10 @@ std::shared_ptr<ecore::EClass> FUMLPackageImpl::getAddStructuralFeatureValueActi
 
 
 
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getAddStructuralFeatureValueActionActivation_Operation_doAction() const
+{
+	return m_addStructuralFeatureValueActionActivation_Operation_doAction;
+}
 
 // End Class AddStructuralFeatureValueActionActivation
 

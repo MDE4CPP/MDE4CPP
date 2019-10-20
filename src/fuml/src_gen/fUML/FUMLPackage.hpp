@@ -402,15 +402,17 @@ namespace fUML
 			//Class and Feature IDs 
 			static const unsigned int ADDSTRUCTURALFEATUREVALUEACTIONACTIVATION_CLASS = 10;
 			static const unsigned int ADDSTRUCTURALFEATUREVALUEACTIONACTIVATION_CLASS_FEATURE_COUNT = 10;
-			static const unsigned int ADDSTRUCTURALFEATUREVALUEACTIONACTIVATION_CLASS_OPERATION_COUNT = 51;
+			static const unsigned int ADDSTRUCTURALFEATUREVALUEACTIONACTIVATION_CLASS_OPERATION_COUNT = 52;
 			
 			
+			static const int ADDSTRUCTURALFEATUREVALUEACTIONACTIVATION_OPERATION_DOACTION = 1061;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getAddStructuralFeatureValueActionActivation_Class() const = 0;
 			
 			
 			
+			virtual std::shared_ptr<ecore::EOperation> getAddStructuralFeatureValueActionActivation_Operation_doAction() const = 0;
 			
 			// End Class AddStructuralFeatureValueActionActivation
 
