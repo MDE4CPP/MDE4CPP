@@ -120,7 +120,7 @@
 #include "fUML/impl/TokenSetImpl.hpp"
 #include "fUML/impl/UnlimitedNaturalValueImpl.hpp"
 #include "fUML/impl/ValueImpl.hpp"
-#include "fUML/impl/ValueSpecificActionActivationImpl.hpp"
+#include "fUML/impl/ValueSpecificationActionActivationImpl.hpp"
 #include "fUML/impl/ValuesImpl.hpp"
 #include "fUML/impl/WriteLinkActionActivationImpl.hpp"
 #include "fUML/impl/WriteStructuralFeatureActionActivationImpl.hpp"
@@ -230,7 +230,7 @@ FUMLFactoryImpl::FUMLFactoryImpl()
 	m_idMap.insert(std::make_pair("TestIdentityActionActivation", FUMLPackage::TESTIDENTITYACTIONACTIVATION_CLASS));
 	m_idMap.insert(std::make_pair("TokenSet", FUMLPackage::TOKENSET_CLASS));
 	m_idMap.insert(std::make_pair("UnlimitedNaturalValue", FUMLPackage::UNLIMITEDNATURALVALUE_CLASS));
-	m_idMap.insert(std::make_pair("ValueSpecificActionActivation", FUMLPackage::VALUESPECIFICACTIONACTIVATION_CLASS));
+	m_idMap.insert(std::make_pair("ValueSpecificationActionActivation", FUMLPackage::VALUESPECIFICATIONACTIONACTIVATION_CLASS));
 	m_idMap.insert(std::make_pair("Values", FUMLPackage::VALUES_CLASS));
 }
 
@@ -1092,17 +1092,17 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const int metaElementID,
 				return this->createUnlimitedNaturalValue(metaElementID);
 			
 		}
-		case FUMLPackage::VALUESPECIFICACTIONACTIVATION_CLASS:
+		case FUMLPackage::VALUESPECIFICATIONACTIONACTIVATION_CLASS:
 		{
 			if (nullptr == container)
 			{
-				return this->createValueSpecificActionActivation(metaElementID);
+				return this->createValueSpecificationActionActivation(metaElementID);
 			}
 			else
 			{
 				std::shared_ptr<fUML::ActivityNodeActivationGroup> castedContainer = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(container);
 				assert(castedContainer);
-				return std::shared_ptr<fUML::ValueSpecificActionActivation>(this->createValueSpecificActionActivation_in_Group(castedContainer,metaElementID));
+				return std::shared_ptr<fUML::ValueSpecificationActionActivation>(this->createValueSpecificationActionActivation_in_Group(castedContainer,metaElementID));
 			}
 		}
 		case FUMLPackage::VALUES_CLASS:
@@ -2337,22 +2337,22 @@ std::shared_ptr<UnlimitedNaturalValue> FUMLFactoryImpl::createUnlimitedNaturalVa
 	element->setThisUnlimitedNaturalValuePtr(element);
 	return element;
 }
-std::shared_ptr<ValueSpecificActionActivation> FUMLFactoryImpl::createValueSpecificActionActivation(const int metaElementID/*=-1*/) const
+std::shared_ptr<ValueSpecificationActionActivation> FUMLFactoryImpl::createValueSpecificationActionActivation(const int metaElementID/*=-1*/) const
 {
-	std::shared_ptr<ValueSpecificActionActivationImpl> element(new ValueSpecificActionActivationImpl());
+	std::shared_ptr<ValueSpecificationActionActivationImpl> element(new ValueSpecificationActionActivationImpl());
 	element->setMetaElementID(metaElementID);
-	element->setThisValueSpecificActionActivationPtr(element);
+	element->setThisValueSpecificationActionActivationPtr(element);
 	return element;
 }
-std::shared_ptr<ValueSpecificActionActivation> FUMLFactoryImpl::createValueSpecificActionActivation_in_Group(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group, const int metaElementID) const
+std::shared_ptr<ValueSpecificationActionActivation> FUMLFactoryImpl::createValueSpecificationActionActivation_in_Group(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group, const int metaElementID) const
 {
-	std::shared_ptr<ValueSpecificActionActivationImpl> element(new ValueSpecificActionActivationImpl(par_group));
+	std::shared_ptr<ValueSpecificationActionActivationImpl> element(new ValueSpecificationActionActivationImpl(par_group));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_group.lock())
 	{
 			wp->getNodeActivations()->push_back(element);
 	}
-	element->setThisValueSpecificActionActivationPtr(element);
+	element->setThisValueSpecificationActionActivationPtr(element);
 	return element;
 	
 }

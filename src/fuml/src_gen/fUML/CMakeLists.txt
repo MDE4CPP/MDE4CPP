@@ -155,7 +155,7 @@ SET(SOURCE_FILES
 	impl/TokenSetImpl.cpp
 	impl/UnlimitedNaturalValueImpl.cpp
 	impl/ValueImpl.cpp
-	impl/ValueSpecificActionActivationImpl.cpp
+	impl/ValueSpecificationActionActivationImpl.cpp
 	impl/ValuesImpl.cpp
 	impl/WriteLinkActionActivationImpl.cpp
 	impl/WriteStructuralFeatureActionActivationImpl.cpp

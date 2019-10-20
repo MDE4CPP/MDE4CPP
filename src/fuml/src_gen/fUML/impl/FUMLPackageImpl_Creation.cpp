@@ -148,7 +148,7 @@ void FUMLPackageImpl::createPackageContents(std::shared_ptr<ecore::EPackage> pac
 	createTokenSetContent(package, factory);
 	createUnlimitedNaturalValueContent(package, factory);
 	createValueContent(package, factory);
-	createValueSpecificActionActivationContent(package, factory);
+	createValueSpecificationActionActivationContent(package, factory);
 	createValuesContent(package, factory);
 	createWriteLinkActionActivationContent(package, factory);
 	createWriteStructuralFeatureActionActivationContent(package, factory);
@@ -1494,11 +1494,12 @@ void FUMLPackageImpl::createValueContent(std::shared_ptr<ecore::EPackage> packag
 	
 }
 
-void FUMLPackageImpl::createValueSpecificActionActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void FUMLPackageImpl::createValueSpecificationActionActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
 {
-	m_valueSpecificActionActivation_Class = factory->createEClass_in_EPackage(package, VALUESPECIFICACTIONACTIVATION_CLASS);
+	m_valueSpecificationActionActivation_Class = factory->createEClass_in_EPackage(package, VALUESPECIFICATIONACTIONACTIVATION_CLASS);
 	
 	
+	m_valueSpecificationActionActivation_Operation_doAction = factory->createEOperation_in_EContainingClass(m_valueSpecificationActionActivation_Class, VALUESPECIFICATIONACTIONACTIVATION_OPERATION_DOACTION);
 	
 }
 

@@ -131,7 +131,7 @@ void FUMLPackageImpl::initializePackageContents()
 	m_testIdentityActionActivation_Class->getESuperTypes()->push_back(getActionActivation_Class());
 	m_unlimitedNaturalValue_Class->getESuperTypes()->push_back(getPrimitiveValue_Class());
 	m_value_Class->getESuperTypes()->push_back(getSemanticVisitor_Class());
-	m_valueSpecificActionActivation_Class->getESuperTypes()->push_back(getActionActivation_Class());
+	m_valueSpecificationActionActivation_Class->getESuperTypes()->push_back(getActionActivation_Class());
 	m_writeLinkActionActivation_Class->getESuperTypes()->push_back(getLinkActionActivation_Class());
 	m_writeStructuralFeatureActionActivation_Class->getESuperTypes()->push_back(getStructuralFeatureActionActivation_Class());
 	
@@ -251,7 +251,7 @@ void FUMLPackageImpl::initializePackageContents()
 	initializeTokenSetContent();
 	initializeUnlimitedNaturalValueContent();
 	initializeValueContent();
-	initializeValueSpecificActionActivationContent();
+	initializeValueSpecificationActionActivationContent();
 	initializeValuesContent();
 	initializeWriteLinkActionActivationContent();
 	initializeWriteStructuralFeatureActionActivationContent();
@@ -8187,12 +8187,20 @@ void FUMLPackageImpl::initializeValueContent()
 	
 }
 
-void FUMLPackageImpl::initializeValueSpecificActionActivationContent()
+void FUMLPackageImpl::initializeValueSpecificationActionActivationContent()
 {
-	m_valueSpecificActionActivation_Class->setName("ValueSpecificActionActivation");
-	m_valueSpecificActionActivation_Class->setAbstract(false);
-	m_valueSpecificActionActivation_Class->setInterface(false);
+	m_valueSpecificationActionActivation_Class->setName("ValueSpecificationActionActivation");
+	m_valueSpecificationActionActivation_Class->setAbstract(false);
+	m_valueSpecificationActionActivation_Class->setInterface(false);
 	
+	
+	
+	m_valueSpecificationActionActivation_Operation_doAction->setEType(nullptr);
+	m_valueSpecificationActionActivation_Operation_doAction->setName("doAction");
+	m_valueSpecificationActionActivation_Operation_doAction->setLowerBound(0);
+	m_valueSpecificationActionActivation_Operation_doAction->setUpperBound(1);
+	m_valueSpecificationActionActivation_Operation_doAction->setUnique(true);
+	m_valueSpecificationActionActivation_Operation_doAction->setOrdered(true);
 	
 	
 	

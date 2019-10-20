@@ -2835,21 +2835,23 @@ namespace fUML
 			// End Class Value
 
 
-			// Begin Class ValueSpecificActionActivation
+			// Begin Class ValueSpecificationActionActivation
 			//Class and Feature IDs 
-			static const unsigned int VALUESPECIFICACTIONACTIVATION_CLASS = 115;
-			static const unsigned int VALUESPECIFICACTIONACTIVATION_CLASS_FEATURE_COUNT = 10;
-			static const unsigned int VALUESPECIFICACTIONACTIVATION_CLASS_OPERATION_COUNT = 47;
+			static const unsigned int VALUESPECIFICATIONACTIONACTIVATION_CLASS = 115;
+			static const unsigned int VALUESPECIFICATIONACTIONACTIVATION_CLASS_FEATURE_COUNT = 10;
+			static const unsigned int VALUESPECIFICATIONACTIONACTIVATION_CLASS_OPERATION_COUNT = 48;
 			
 			
+			static const int VALUESPECIFICATIONACTIONACTIVATION_OPERATION_DOACTION = 11557;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getValueSpecificActionActivation_Class() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getValueSpecificationActionActivation_Class() const = 0;
 			
 			
 			
+			virtual std::shared_ptr<ecore::EOperation> getValueSpecificationActionActivation_Operation_doAction() const = 0;
 			
-			// End Class ValueSpecificActionActivation
+			// End Class ValueSpecificationActionActivation
 
 
 			// Begin Class Values

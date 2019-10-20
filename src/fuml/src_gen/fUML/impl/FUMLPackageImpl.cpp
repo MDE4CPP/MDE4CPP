@@ -3014,16 +3014,20 @@ std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getValue_Operation_toString(
 
 // End Class Value
 
-// Begin Class ValueSpecificActionActivation
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getValueSpecificActionActivation_Class() const
+// Begin Class ValueSpecificationActionActivation
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getValueSpecificationActionActivation_Class() const
 {
-	return m_valueSpecificActionActivation_Class;
+	return m_valueSpecificationActionActivation_Class;
 }
 
 
 
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getValueSpecificationActionActivation_Operation_doAction() const
+{
+	return m_valueSpecificationActionActivation_Operation_doAction;
+}
 
-// End Class ValueSpecificActionActivation
+// End Class ValueSpecificationActionActivation
 
 // Begin Class Values
 std::shared_ptr<ecore::EClass> FUMLPackageImpl::getValues_Class() const

@@ -1,4 +1,4 @@
-#include "fUML/impl/ValueSpecificActionActivationImpl.hpp"
+#include "fUML/impl/ValueSpecificationActionActivationImpl.hpp"
 
 #ifdef NDEBUG
 	#define DEBUG_MESSAGE(a) /**/
@@ -25,6 +25,10 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "fUML/impl/FUMLPackageImpl.hpp"
+#include "fUML/Locus.hpp"
+#include "fUML/Executor.hpp"
+#include "uml/ValueSpecification.hpp"
+#include "uml/ValueSpecificationAction.hpp"
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -64,7 +68,7 @@ using namespace fUML;
 //*********************************
 // Constructor / Destructor
 //*********************************
-ValueSpecificActionActivationImpl::ValueSpecificActionActivationImpl()
+ValueSpecificationActionActivationImpl::ValueSpecificationActionActivationImpl()
 {
 	//*********************************
 	// Attribute Members
@@ -78,17 +82,17 @@ ValueSpecificActionActivationImpl::ValueSpecificActionActivationImpl()
 	//Init references
 }
 
-ValueSpecificActionActivationImpl::~ValueSpecificActionActivationImpl()
+ValueSpecificationActionActivationImpl::~ValueSpecificationActionActivationImpl()
 {
 #ifdef SHOW_DELETION
-	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ValueSpecificActionActivation "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ValueSpecificationActionActivation "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
 
 
 //Additional constructor for the containments back reference
-			ValueSpecificActionActivationImpl::ValueSpecificActionActivationImpl(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group)
-			:ValueSpecificActionActivationImpl()
+			ValueSpecificationActionActivationImpl::ValueSpecificationActionActivationImpl(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group)
+			:ValueSpecificationActionActivationImpl()
 			{
 			    m_group = par_group;
 			}
@@ -98,11 +102,11 @@ ValueSpecificActionActivationImpl::~ValueSpecificActionActivationImpl()
 
 
 
-ValueSpecificActionActivationImpl::ValueSpecificActionActivationImpl(const ValueSpecificActionActivationImpl & obj):ValueSpecificActionActivationImpl()
+ValueSpecificationActionActivationImpl::ValueSpecificationActionActivationImpl(const ValueSpecificationActionActivationImpl & obj):ValueSpecificationActionActivationImpl()
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
-	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ValueSpecificActionActivation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ValueSpecificationActionActivation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
 	m_firing = obj.isFiring();
 	m_running = obj.isRunning();
@@ -152,16 +156,16 @@ ValueSpecificActionActivationImpl::ValueSpecificActionActivationImpl(const Value
 
 }
 
-std::shared_ptr<ecore::EObject>  ValueSpecificActionActivationImpl::copy() const
+std::shared_ptr<ecore::EObject>  ValueSpecificationActionActivationImpl::copy() const
 {
-	std::shared_ptr<ValueSpecificActionActivationImpl> element(new ValueSpecificActionActivationImpl(*this));
-	element->setThisValueSpecificActionActivationPtr(element);
+	std::shared_ptr<ValueSpecificationActionActivationImpl> element(new ValueSpecificationActionActivationImpl(*this));
+	element->setThisValueSpecificationActionActivationPtr(element);
 	return element;
 }
 
-std::shared_ptr<ecore::EClass> ValueSpecificActionActivationImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> ValueSpecificationActionActivationImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getValueSpecificActionActivation_Class();
+	return FUMLPackageImpl::eInstance()->getValueSpecificationActionActivation_Class();
 }
 
 //*********************************
@@ -171,6 +175,23 @@ std::shared_ptr<ecore::EClass> ValueSpecificActionActivationImpl::eStaticClass()
 //*********************************
 // Operations
 //*********************************
+void ValueSpecificationActionActivationImpl::doAction()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	std::shared_ptr<uml::ValueSpecificationAction> action = std::dynamic_pointer_cast<uml::ValueSpecificationAction>(m_node);
+	if (action != nullptr)
+	{
+		std::shared_ptr<uml::ValueSpecification> valueSpecificaton = action->getValue();
+		if (valueSpecificaton == nullptr)
+		{
+			throw "value of ValueSpecificationAction is null";
+		}
+		std::shared_ptr<Value> value = getExecutionLocus()->getExecutor()->evaluate(valueSpecificaton);
+		putToken(action->getResult(), value);
+	}
+	//end of body
+}
 
 //*********************************
 // References
@@ -179,22 +200,22 @@ std::shared_ptr<ecore::EClass> ValueSpecificActionActivationImpl::eStaticClass()
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<fUML::PinActivation>> ValueSpecificActionActivationImpl::getPinActivation() const
+std::shared_ptr<Union<fUML::PinActivation>> ValueSpecificationActionActivationImpl::getPinActivation() const
 {
 	return m_pinActivation;
 }
 
 
-std::shared_ptr<ValueSpecificActionActivation> ValueSpecificActionActivationImpl::getThisValueSpecificActionActivationPtr() const
+std::shared_ptr<ValueSpecificationActionActivation> ValueSpecificationActionActivationImpl::getThisValueSpecificationActionActivationPtr() const
 {
-	return m_thisValueSpecificActionActivationPtr.lock();
+	return m_thisValueSpecificationActionActivationPtr.lock();
 }
-void ValueSpecificActionActivationImpl::setThisValueSpecificActionActivationPtr(std::weak_ptr<ValueSpecificActionActivation> thisValueSpecificActionActivationPtr)
+void ValueSpecificationActionActivationImpl::setThisValueSpecificationActionActivationPtr(std::weak_ptr<ValueSpecificationActionActivation> thisValueSpecificationActionActivationPtr)
 {
-	m_thisValueSpecificActionActivationPtr = thisValueSpecificActionActivationPtr;
-	setThisActionActivationPtr(thisValueSpecificActionActivationPtr);
+	m_thisValueSpecificationActionActivationPtr = thisValueSpecificationActionActivationPtr;
+	setThisActionActivationPtr(thisValueSpecificationActionActivationPtr);
 }
-std::shared_ptr<ecore::EObject> ValueSpecificActionActivationImpl::eContainer() const
+std::shared_ptr<ecore::EObject> ValueSpecificationActionActivationImpl::eContainer() const
 {
 	if(auto wp = m_group.lock())
 	{
@@ -206,21 +227,21 @@ std::shared_ptr<ecore::EObject> ValueSpecificActionActivationImpl::eContainer() 
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-Any ValueSpecificActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
+Any ValueSpecificationActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
 	return ActionActivationImpl::eGet(featureID, resolve, coreType);
 }
-bool ValueSpecificActionActivationImpl::internalEIsSet(int featureID) const
+bool ValueSpecificationActionActivationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
 	}
 	return ActionActivationImpl::internalEIsSet(featureID);
 }
-bool ValueSpecificActionActivationImpl::eSet(int featureID, Any newValue)
+bool ValueSpecificationActionActivationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
@@ -232,7 +253,7 @@ bool ValueSpecificActionActivationImpl::eSet(int featureID, Any newValue)
 //*********************************
 // Persistence Functions
 //*********************************
-void ValueSpecificActionActivationImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
+void ValueSpecificationActionActivationImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
 	std::map<std::string, std::string> attr_list = loadHandler->getAttributeList();
 	loadAttributes(loadHandler, attr_list);
@@ -249,25 +270,25 @@ void ValueSpecificActionActivationImpl::load(std::shared_ptr<persistence::interf
 	}
 }		
 
-void ValueSpecificActionActivationImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
+void ValueSpecificationActionActivationImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
 
 	ActionActivationImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void ValueSpecificActionActivationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+void ValueSpecificationActionActivationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
 {
 
 
 	ActionActivationImpl::loadNode(nodeName, loadHandler, modelFactory);
 }
 
-void ValueSpecificActionActivationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void ValueSpecificationActionActivationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
 	ActionActivationImpl::resolveReferences(featureID, references);
 }
 
-void ValueSpecificActionActivationImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+void ValueSpecificationActionActivationImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	saveContent(saveHandler);
 
@@ -283,7 +304,7 @@ void ValueSpecificActionActivationImpl::save(std::shared_ptr<persistence::interf
 	
 }
 
-void ValueSpecificActionActivationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
+void ValueSpecificationActionActivationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	try
 	{

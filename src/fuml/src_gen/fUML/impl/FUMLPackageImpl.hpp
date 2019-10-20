@@ -127,7 +127,7 @@ namespace fUML
 	class TokenSet;
 	class UnlimitedNaturalValue;
 	class Value;
-	class ValueSpecificActionActivation;
+	class ValueSpecificationActionActivation;
 	class Values;
 	class WriteLinkActionActivation;
 	class WriteStructuralFeatureActionActivation;
@@ -1605,14 +1605,15 @@ namespace fUML
 			
 			// End Class Value
 
-			// Begin Class ValueSpecificActionActivation
+			// Begin Class ValueSpecificationActionActivation
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getValueSpecificActionActivation_Class() const ;
+			virtual std::shared_ptr<ecore::EClass> getValueSpecificationActionActivation_Class() const ;
 			
 			
 			
+			virtual std::shared_ptr<ecore::EOperation> getValueSpecificationActionActivation_Operation_doAction() const ;
 			
-			// End Class ValueSpecificActionActivation
+			// End Class ValueSpecificationActionActivation
 
 			// Begin Class Values
 			//Class and Feature Getter
@@ -1760,7 +1761,7 @@ namespace fUML
 			std::shared_ptr<ecore::EClass> m_tokenSet_Class = nullptr;
 			std::shared_ptr<ecore::EClass> m_unlimitedNaturalValue_Class = nullptr;
 			std::shared_ptr<ecore::EClass> m_value_Class = nullptr;
-			std::shared_ptr<ecore::EClass> m_valueSpecificActionActivation_Class = nullptr;
+			std::shared_ptr<ecore::EClass> m_valueSpecificationActionActivation_Class = nullptr;
 			std::shared_ptr<ecore::EClass> m_values_Class = nullptr;
 			std::shared_ptr<ecore::EClass> m_writeLinkActionActivation_Class = nullptr;
 			std::shared_ptr<ecore::EClass> m_writeStructuralFeatureActionActivation_Class = nullptr;
@@ -1929,6 +1930,7 @@ namespace fUML
 			std::shared_ptr<ecore::EOperation> m_actionActivation_Operation_doAction = nullptr;
 			std::shared_ptr<ecore::EOperation> m_sendSignalActionActivation_Operation_doAction = nullptr;
 			std::shared_ptr<ecore::EOperation> m_callActionActivation_Operation_doAction = nullptr;
+			std::shared_ptr<ecore::EOperation> m_valueSpecificationActionActivation_Operation_doAction = nullptr;
 			std::shared_ptr<ecore::EOperation> m_readSelfActionActivation_Operation_doAction = nullptr;
 			std::shared_ptr<ecore::EOperation> m_destroyObjectActionActivation_Operation_doAction = nullptr;
 			std::shared_ptr<ecore::EOperation> m_createObjectActionActivation_Operation_doAction = nullptr;
@@ -2326,7 +2328,7 @@ namespace fUML
 			void createTokenSetContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
 			void createUnlimitedNaturalValueContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
 			void createValueContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
-			void createValueSpecificActionActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
+			void createValueSpecificationActionActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
 			void createValuesContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
 			void createWriteLinkActionActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
 			void createWriteStructuralFeatureActionActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
@@ -2446,7 +2448,7 @@ namespace fUML
 			void initializeTokenSetContent();
 			void initializeUnlimitedNaturalValueContent();
 			void initializeValueContent();
-			void initializeValueSpecificActionActivationContent();
+			void initializeValueSpecificationActionActivationContent();
 			void initializeValuesContent();
 			void initializeWriteLinkActionActivationContent();
 			void initializeWriteStructuralFeatureActionActivationContent();

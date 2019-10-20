@@ -4,8 +4,8 @@
 //*
 //********************************************************************
 
-#ifndef FUML_VALUESPECIFICACTIONACTIVATION_HPP
-#define FUML_VALUESPECIFICACTIONACTIVATION_HPP
+#ifndef FUML_VALUESPECIFICATIONACTIONACTIVATION_HPP
+#define FUML_VALUESPECIFICATIONACTIONACTIVATION_HPP
 
 #include <list>
 #include <memory>
@@ -87,25 +87,29 @@ namespace fUML
 {
 	/*!
 	 */
-	class ValueSpecificActionActivation:virtual public ActionActivation
+	class ValueSpecificationActionActivation:virtual public ActionActivation
 	{
 		public:
- 			ValueSpecificActionActivation(const ValueSpecificActionActivation &) {}
-			ValueSpecificActionActivation& operator=(ValueSpecificActionActivation const&) = delete;
+ 			ValueSpecificationActionActivation(const ValueSpecificationActionActivation &) {}
+			ValueSpecificationActionActivation& operator=(ValueSpecificationActionActivation const&) = delete;
 
 		protected:
-			ValueSpecificActionActivation(){}
+			ValueSpecificationActionActivation(){}
 
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
-			virtual ~ValueSpecificActionActivation() {}
+			virtual ~ValueSpecificationActionActivation() {}
 
 			//*********************************
 			// Operations
 			//*********************************
+			/*!
+			 */ 
+			virtual void doAction() = 0;
+			
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -148,4 +152,4 @@ namespace fUML
 	};
 
 }
-#endif /* end of include guard: FUML_VALUESPECIFICACTIONACTIVATION_HPP */
+#endif /* end of include guard: FUML_VALUESPECIFICATIONACTIONACTIVATION_HPP */

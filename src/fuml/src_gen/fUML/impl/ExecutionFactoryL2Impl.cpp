@@ -51,7 +51,7 @@
 #include "fUML/RemoveStructuralFeatureValueActivation.hpp"
 #include "fUML/SendSignalActionActivation.hpp"
 #include "fUML/TestIdentityActionActivation.hpp"
-#include "fUML/ValueSpecificActionActivation.hpp"
+#include "fUML/ValueSpecificationActionActivation.hpp"
 #include "uml/Activity.hpp"
 #include "uml/ActivityFinalNode.hpp"
 #include "uml/ActivityParameterNode.hpp"
@@ -286,7 +286,7 @@ std::shared_ptr<fUML::SemanticVisitor> ExecutionFactoryL2Impl::instantiateVisito
             }
             case uml::UmlPackage::VALUESPECIFICATIONACTION_CLASS:
             {
-                visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createValueSpecificActionActivation());
+                visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createValueSpecificationActionActivation());
                 break;
             }
             case uml::UmlPackage::CREATEOBJECTACTION_CLASS:

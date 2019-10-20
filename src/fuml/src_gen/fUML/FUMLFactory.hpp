@@ -128,7 +128,7 @@ namespace fUML
 	class TokenSet;
 	class UnlimitedNaturalValue;
 	class Value;
-	class ValueSpecificActionActivation;
+	class ValueSpecificationActionActivation;
 	class Values;
 	class WriteLinkActionActivation;
 	class WriteStructuralFeatureActionActivation;
@@ -461,9 +461,9 @@ namespace fUML
 			
 			virtual std::shared_ptr<UnlimitedNaturalValue> createUnlimitedNaturalValue(const int metaElementID=-1) const = 0;
 			
-			virtual std::shared_ptr<ValueSpecificActionActivation> createValueSpecificActionActivation(const int metaElementID=-1) const = 0;
+			virtual std::shared_ptr<ValueSpecificationActionActivation> createValueSpecificationActionActivation(const int metaElementID=-1) const = 0;
 			//Add containing object
-			virtual std::shared_ptr<ValueSpecificActionActivation> createValueSpecificActionActivation_in_Group(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group, const int metaElementID=-1) const = 0;
+			virtual std::shared_ptr<ValueSpecificationActionActivation> createValueSpecificationActionActivation_in_Group(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group, const int metaElementID=-1) const = 0;
 			
 			virtual std::shared_ptr<Values> createValues(const int metaElementID=-1) const = 0;
 			

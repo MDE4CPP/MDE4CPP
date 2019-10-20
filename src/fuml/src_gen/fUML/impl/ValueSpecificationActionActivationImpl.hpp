@@ -4,48 +4,52 @@
 //*
 //********************************************************************
 
-#ifndef FUML_VALUESPECIFICACTIONACTIVATIONVALUESPECIFICACTIONACTIVATIONIMPL_HPP
-#define FUML_VALUESPECIFICACTIONACTIVATIONVALUESPECIFICACTIONACTIVATIONIMPL_HPP
+#ifndef FUML_VALUESPECIFICATIONACTIONACTIVATIONVALUESPECIFICATIONACTIONACTIVATIONIMPL_HPP
+#define FUML_VALUESPECIFICATIONACTIONACTIVATIONVALUESPECIFICATIONACTIONACTIVATIONIMPL_HPP
 
 //*********************************
 // generated Includes
 
 //Model includes
-#include "../ValueSpecificActionActivation.hpp"
+#include "../ValueSpecificationActionActivation.hpp"
 
 #include "fUML/impl/ActionActivationImpl.hpp"
 
 //*********************************
 namespace fUML 
 {
-	class ValueSpecificActionActivationImpl :virtual public ActionActivationImpl, virtual public ValueSpecificActionActivation 
+	class ValueSpecificationActionActivationImpl :virtual public ActionActivationImpl, virtual public ValueSpecificationActionActivation 
 	{
 		public: 
-			ValueSpecificActionActivationImpl(const ValueSpecificActionActivationImpl & obj);
+			ValueSpecificationActionActivationImpl(const ValueSpecificationActionActivationImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
-			ValueSpecificActionActivationImpl& operator=(ValueSpecificActionActivationImpl const&) = delete;
+			ValueSpecificationActionActivationImpl& operator=(ValueSpecificationActionActivationImpl const&) = delete;
 
 		protected:
 			friend class FUMLFactoryImpl;
-			ValueSpecificActionActivationImpl();
-			virtual std::shared_ptr<ValueSpecificActionActivation> getThisValueSpecificActionActivationPtr() const;
-			virtual void setThisValueSpecificActionActivationPtr(std::weak_ptr<ValueSpecificActionActivation> thisValueSpecificActionActivationPtr);
+			ValueSpecificationActionActivationImpl();
+			virtual std::shared_ptr<ValueSpecificationActionActivation> getThisValueSpecificationActionActivationPtr() const;
+			virtual void setThisValueSpecificationActionActivationPtr(std::weak_ptr<ValueSpecificationActionActivation> thisValueSpecificationActionActivationPtr);
 
 			//Additional constructors for the containments back reference
-			ValueSpecificActionActivationImpl(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group);
+			ValueSpecificationActionActivationImpl(std::weak_ptr<fUML::ActivityNodeActivationGroup > par_group);
 
 
 
 
 		public:
 			//destructor
-			virtual ~ValueSpecificActionActivationImpl();
+			virtual ~ValueSpecificationActionActivationImpl();
 			
 			//*********************************
 			// Operations
 			//*********************************
+			/*!
+			 */ 
+			virtual void doAction() ;
+			
 			
 			
 			//*********************************
@@ -90,7 +94,7 @@ namespace fUML
 			virtual bool eSet(int featureID, Any newValue) ;
 
 		private:
-			std::weak_ptr<ValueSpecificActionActivation> m_thisValueSpecificActionActivationPtr;
+			std::weak_ptr<ValueSpecificationActionActivation> m_thisValueSpecificationActionActivationPtr;
 	};
 }
-#endif /* end of include guard: FUML_VALUESPECIFICACTIONACTIVATIONVALUESPECIFICACTIONACTIVATIONIMPL_HPP */
+#endif /* end of include guard: FUML_VALUESPECIFICATIONACTIONACTIVATIONVALUESPECIFICATIONACTIONACTIVATIONIMPL_HPP */
