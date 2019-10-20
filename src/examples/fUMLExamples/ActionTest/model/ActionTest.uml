@@ -8,11 +8,7 @@
       <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_89updfArEemD6KgsJJSfgA"/>
       <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_89updvArEemD6KgsJJSfgA" value="*"/>
     </ownedAttribute>
-    <ownedAttribute xmi:id="_9ze9APA8EemEbbzq4pzzvw">
-      <type xmi:type="uml:Class" href="../Calculator/CalcModel.uml#_As0b8IxpEeazCdUXohZ79Q"/>
-    </ownedAttribute>
     <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_HYWt4PAvEemD6KgsJJSfgA" name="fbPrint" specification="_wGmmAPArEemD6KgsJJSfgA">
-      <ownedParameter xmi:id="_65YVoPA3EempB8MpOULpbQ" name="target" type="_KrxOIPApEemD6KgsJJSfgA"/>
       <language>CPP</language>
       <body>std::cout &lt;&lt; &quot;content of A:&quot; &lt;&lt; std::endl;&#xD;
 int size = m_b->size();&#xD;
@@ -77,7 +73,7 @@ for (int i=0; i&lt;size; i++)&#xD;
     <node xmi:type="uml:CreateObjectAction" xmi:id="_l3bC8PAwEemD6KgsJJSfgA" name="CreateObjectAction1" incoming="_n14TsPAwEemD6KgsJJSfgA" classifier="_KrxOIPApEemD6KgsJJSfgA">
       <result xmi:id="_l3bC8fAwEemD6KgsJJSfgA" name="a" outgoing="_kehpAPDCEemaRoNal_vgxw" type="_KrxOIPApEemD6KgsJJSfgA"/>
     </node>
-    <node xmi:type="uml:CallOperationAction" xmi:id="_1yIH8PA3EempB8MpOULpbQ" name="temp_coa" outgoing="_sqju8PDFEemaRoNal_vgxw" operation="_wGmmAPArEemD6KgsJJSfgA">
+    <node xmi:type="uml:CallOperationAction" xmi:id="_1yIH8PA3EempB8MpOULpbQ" name="coaPrint1" outgoing="_sqju8PDFEemaRoNal_vgxw" operation="_wGmmAPArEemD6KgsJJSfgA">
       <target xmi:id="_1yIH8fA3EempB8MpOULpbQ" name="target" incoming="_itRmcPDFEemaRoNal_vgxw" type="_KrxOIPApEemD6KgsJJSfgA"/>
     </node>
     <node xmi:type="uml:ForkNode" xmi:id="_h1PSkPDCEemaRoNal_vgxw" name="Fork1" incoming="_kehpAPDCEemaRoNal_vgxw" outgoing="_KO_kkPDDEemaRoNal_vgxw _Z8VnMPDDEemaRoNal_vgxw _sBPhoPDEEemaRoNal_vgxw"/>
@@ -110,7 +106,7 @@ for (int i=0; i&lt;size; i++)&#xD;
       <result xmi:id="_DbH8s_DGEemaRoNal_vgxw" name="out" outgoing="_kp4AkPDGEemaRoNal_vgxw" type="_KrxOIPApEemD6KgsJJSfgA"/>
       <value xmi:id="_DbH8svDGEemaRoNal_vgxw" name="value" incoming="_M7T4gPDREem1LIjGksKcUw" type="_zZdd4PArEemD6KgsJJSfgA"/>
     </node>
-    <node xmi:type="uml:CallOperationAction" xmi:id="_dxl6IPDGEemaRoNal_vgxw" name="temp_coa" incoming="_46_aQPDPEem-7-h9vEdZjw" outgoing="_nJvVQPDGEemaRoNal_vgxw" operation="_wGmmAPArEemD6KgsJJSfgA">
+    <node xmi:type="uml:CallOperationAction" xmi:id="_dxl6IPDGEemaRoNal_vgxw" name="coaPrint2" incoming="_46_aQPDPEem-7-h9vEdZjw" outgoing="_nJvVQPDGEemaRoNal_vgxw" operation="_wGmmAPArEemD6KgsJJSfgA">
       <target xmi:id="_dxnIQPDGEemaRoNal_vgxw" name="target" incoming="_kp4AkPDGEemaRoNal_vgxw" type="_KrxOIPApEemD6KgsJJSfgA"/>
     </node>
     <node xmi:type="uml:ActivityFinalNode" xmi:id="_mEIYEPDGEemaRoNal_vgxw" name="ActivityFinal1" incoming="_nJvVQPDGEemaRoNal_vgxw"/>
