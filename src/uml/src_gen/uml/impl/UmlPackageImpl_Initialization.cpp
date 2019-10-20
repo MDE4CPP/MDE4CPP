@@ -21134,6 +21134,31 @@ void UmlPackageImpl::initializeOutputPinContent()
 	   		m_outputPin_Attribute_callAction->setEOpposite(otherEnd);
 	    }
 	}
+	m_outputPin_Attribute_valueSpecificationAction->setName("valueSpecificationAction");
+	m_outputPin_Attribute_valueSpecificationAction->setEType(getValueSpecificationAction_Class());
+	m_outputPin_Attribute_valueSpecificationAction->setLowerBound(0);
+	m_outputPin_Attribute_valueSpecificationAction->setUpperBound(1);
+	m_outputPin_Attribute_valueSpecificationAction->setTransient(false);
+	m_outputPin_Attribute_valueSpecificationAction->setVolatile(false);
+	m_outputPin_Attribute_valueSpecificationAction->setChangeable(true);
+	m_outputPin_Attribute_valueSpecificationAction->setUnsettable(false);
+	m_outputPin_Attribute_valueSpecificationAction->setUnique(true);
+	m_outputPin_Attribute_valueSpecificationAction->setDerived(false);
+	m_outputPin_Attribute_valueSpecificationAction->setOrdered(true);
+	m_outputPin_Attribute_valueSpecificationAction->setContainment(false);
+	m_outputPin_Attribute_valueSpecificationAction->setResolveProxies(true);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			m_outputPin_Attribute_valueSpecificationAction->setDefaultValueLiteral(defaultValue);
+		}
+		std::shared_ptr<ecore::EReference>  otherEnd = getValueSpecificationAction_Attribute_result();
+		if (otherEnd != nullptr)
+	    {
+	   		m_outputPin_Attribute_valueSpecificationAction->setEOpposite(otherEnd);
+	    }
+	}
 	
 	m_outputPin_Operation_incoming_edges_structured_only_EDiagnosticChain_EMap->setEType(ecore::EcorePackage::eInstance()->getEBoolean_Class());
 	m_outputPin_Operation_incoming_edges_structured_only_EDiagnosticChain_EMap->setName("incoming_edges_structured_only");
@@ -33327,7 +33352,7 @@ void UmlPackageImpl::initializeValueSpecificationActionContent()
 		{
 			m_valueSpecificationAction_Attribute_result->setDefaultValueLiteral(defaultValue);
 		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
+		std::shared_ptr<ecore::EReference>  otherEnd = getOutputPin_Attribute_valueSpecificationAction();
 		if (otherEnd != nullptr)
 	    {
 	   		m_valueSpecificationAction_Attribute_result->setEOpposite(otherEnd);

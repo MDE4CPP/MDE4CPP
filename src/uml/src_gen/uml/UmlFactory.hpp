@@ -598,6 +598,11 @@ namespace uml
 	class UseCase;
 }
 
+namespace uml 
+{
+	class ValueSpecificationAction;
+}
+
 
 namespace uml 
 {
@@ -1937,6 +1942,8 @@ namespace uml
 			virtual std::shared_ptr<OutputPin> createOutputPin_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID=-1) const = 0;
 			//Add containing object
 			virtual std::shared_ptr<OutputPin> createOutputPin_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID=-1) const = 0;
+			//Add containing object
+			virtual std::shared_ptr<OutputPin> createOutputPin_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction, const int metaElementID=-1) const = 0;
 			
 			virtual std::shared_ptr<Package> createPackage(const int metaElementID=-1) const = 0;
 			//Add containing object

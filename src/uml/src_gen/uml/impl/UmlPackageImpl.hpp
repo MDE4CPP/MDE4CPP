@@ -2556,6 +2556,7 @@ namespace uml
 			
 			virtual std::shared_ptr<ecore::EReference> getOutputPin_Attribute_action() const ;
 			virtual std::shared_ptr<ecore::EReference> getOutputPin_Attribute_callAction() const ;
+			virtual std::shared_ptr<ecore::EReference> getOutputPin_Attribute_valueSpecificationAction() const ;
 			
 			virtual std::shared_ptr<ecore::EOperation> getOutputPin_Operation_incoming_edges_structured_only_EDiagnosticChain_EMap() const ;
 			
@@ -4717,6 +4718,7 @@ namespace uml
 			std::shared_ptr<ecore::EReference> m_writeVariableAction_Attribute_value = nullptr;
 			std::shared_ptr<ecore::EReference> m_valuePin_Attribute_value = nullptr;
 			std::shared_ptr<ecore::EReference> m_argument_Attribute_value = nullptr;
+			std::shared_ptr<ecore::EReference> m_outputPin_Attribute_valueSpecificationAction = nullptr;
 			std::shared_ptr<ecore::EReference> m_activity_Attribute_variable = nullptr;
 			std::shared_ptr<ecore::EReference> m_structuredActivityNode_Attribute_variable = nullptr;
 			std::shared_ptr<ecore::EReference> m_variableAction_Attribute_variable = nullptr;

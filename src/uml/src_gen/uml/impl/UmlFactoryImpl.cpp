@@ -321,6 +321,7 @@
 #include "uml/TemplateableElement.hpp"
 #include "uml/TemplateBinding.hpp"
 #include "uml/UseCase.hpp"
+#include "uml/ValueSpecificationAction.hpp"
 
 
 using namespace uml;
@@ -5571,6 +5572,12 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createOutputPin_in_Owner(castedContainer,metaElementID);
+					}
+					//OutputPin has valueSpecificationAction as a containment
+					case  UmlPackage::OUTPUTPIN_ATTRIBUTE_VALUESPECIFICATIONACTION:
+					{
+						auto castedContainer = std::dynamic_pointer_cast<uml::ValueSpecificationAction>(container);
+						return this->createOutputPin_in_ValueSpecificationAction(castedContainer,metaElementID);
 					}
 					default:
 						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
@@ -15492,6 +15499,18 @@ std::shared_ptr<OutputPin> UmlFactoryImpl::createOutputPin_in_Owner(std::weak_pt
 	if(auto wp = par_owner.lock())
 	{
 			wp->getOwnedElement()->push_back(element);
+	}
+	element->setThisOutputPinPtr(element);
+	return element;
+	
+}
+std::shared_ptr<OutputPin> UmlFactoryImpl::createOutputPin_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction, const int metaElementID) const
+{
+	std::shared_ptr<OutputPinImpl> element(new OutputPinImpl(par_valueSpecificationAction));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_valueSpecificationAction.lock())
+	{
+			wp->setResult(element);
 	}
 	element->setThisOutputPinPtr(element);
 	return element;

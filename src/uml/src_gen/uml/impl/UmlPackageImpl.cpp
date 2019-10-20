@@ -5119,6 +5119,10 @@ std::shared_ptr<ecore::EReference> UmlPackageImpl::getOutputPin_Attribute_callAc
 {
 	return m_outputPin_Attribute_callAction;
 }
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getOutputPin_Attribute_valueSpecificationAction() const
+{
+	return m_outputPin_Attribute_valueSpecificationAction;
+}
 
 std::shared_ptr<ecore::EOperation> UmlPackageImpl::getOutputPin_Operation_incoming_edges_structured_only_EDiagnosticChain_EMap() const
 {

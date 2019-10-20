@@ -57,6 +57,10 @@ namespace uml
 			OutputPinImpl(std::weak_ptr<uml::Element > par_owner);
 
 
+			//Additional constructors for the containments back reference
+			OutputPinImpl(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction);
+
+
 
 
 		public:
@@ -95,6 +99,13 @@ namespace uml
 			/*!
 			 */
 			virtual void setCallAction(std::shared_ptr<uml::CallAction> _callAction_callAction) ;
+			/*!
+			 */
+			virtual std::weak_ptr<uml::ValueSpecificationAction > getValueSpecificationAction() const ;
+			
+			/*!
+			 */
+			virtual void setValueSpecificationAction(std::shared_ptr<uml::ValueSpecificationAction> _valueSpecificationAction_valueSpecificationAction) ;
 							
 			
 			//*********************************

@@ -45,6 +45,8 @@
 #include "uml/UmlPackage.hpp"
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -90,6 +92,8 @@
 
 #include "uml/ValueSpecification.hpp"
 
+#include "uml/ValueSpecificationAction.hpp"
+
 #include "ecore/EcorePackage.hpp"
 #include "ecore/EcoreFactory.hpp"
 #include "uml/UmlPackage.hpp"
@@ -116,7 +120,11 @@ OutputPinImpl::OutputPinImpl()
 
 	
 
+	
+
 	//Init references
+	
+
 	
 
 	
@@ -200,6 +208,18 @@ OutputPinImpl::~OutputPinImpl()
 
 
 
+//Additional constructor for the containments back reference
+			OutputPinImpl::OutputPinImpl(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction)
+			:OutputPinImpl()
+			{
+			    m_valueSpecificationAction = par_valueSpecificationAction;
+				m_owner = par_valueSpecificationAction;
+			}
+
+
+
+
+
 
 OutputPinImpl::OutputPinImpl(const OutputPinImpl & obj):OutputPinImpl()
 {
@@ -257,6 +277,8 @@ OutputPinImpl::OutputPinImpl(const OutputPinImpl & obj):OutputPinImpl()
 	m_selection  = obj.getSelection();
 
 	m_type  = obj.getType();
+
+	m_valueSpecificationAction  = obj.getValueSpecificationAction();
 
 
 	//Clone references with containment (deep copy)
@@ -369,6 +391,16 @@ void OutputPinImpl::setCallAction(std::shared_ptr<uml::CallAction> _callAction)
     m_callAction = _callAction;
 }
 
+std::weak_ptr<uml::ValueSpecificationAction > OutputPinImpl::getValueSpecificationAction() const
+{
+
+    return m_valueSpecificationAction;
+}
+void OutputPinImpl::setValueSpecificationAction(std::shared_ptr<uml::ValueSpecificationAction> _valueSpecificationAction)
+{
+    m_valueSpecificationAction = _valueSpecificationAction;
+}
+
 //*********************************
 // Union Getter
 //*********************************
@@ -430,6 +462,11 @@ std::shared_ptr<ecore::EObject> OutputPinImpl::eContainer() const
 	{
 		return wp;
 	}
+
+	if(auto wp = m_valueSpecificationAction.lock())
+	{
+		return wp;
+	}
 	return nullptr;
 }
 
@@ -444,6 +481,8 @@ Any OutputPinImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getAction().lock())); //17034
 		case UmlPackage::OUTPUTPIN_ATTRIBUTE_CALLACTION:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getCallAction().lock())); //17033
+		case UmlPackage::OUTPUTPIN_ATTRIBUTE_VALUESPECIFICATIONACTION:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getValueSpecificationAction().lock())); //17035
 	}
 	return PinImpl::eGet(featureID, resolve, coreType);
 }
@@ -455,6 +494,8 @@ bool OutputPinImpl::internalEIsSet(int featureID) const
 			return getAction().lock() != nullptr; //17034
 		case UmlPackage::OUTPUTPIN_ATTRIBUTE_CALLACTION:
 			return getCallAction().lock() != nullptr; //17033
+		case UmlPackage::OUTPUTPIN_ATTRIBUTE_VALUESPECIFICATIONACTION:
+			return getValueSpecificationAction().lock() != nullptr; //17035
 	}
 	return PinImpl::internalEIsSet(featureID);
 }
@@ -468,6 +509,14 @@ bool OutputPinImpl::eSet(int featureID, Any newValue)
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::CallAction> _callAction = std::dynamic_pointer_cast<uml::CallAction>(_temp);
 			setCallAction(_callAction); //17033
+			return true;
+		}
+		case UmlPackage::OUTPUTPIN_ATTRIBUTE_VALUESPECIFICATIONACTION:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::ValueSpecificationAction> _valueSpecificationAction = std::dynamic_pointer_cast<uml::ValueSpecificationAction>(_temp);
+			setValueSpecificationAction(_valueSpecificationAction); //17035
 			return true;
 		}
 	}
@@ -519,6 +568,18 @@ void OutputPinImpl::resolveReferences(const int featureID, std::list<std::shared
 				// Cast object to correct type
 				std::shared_ptr<uml::CallAction> _callAction = std::dynamic_pointer_cast<uml::CallAction>( references.front() );
 				setCallAction(_callAction);
+			}
+			
+			return;
+		}
+
+		case UmlPackage::OUTPUTPIN_ATTRIBUTE_VALUESPECIFICATIONACTION:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::ValueSpecificationAction> _valueSpecificationAction = std::dynamic_pointer_cast<uml::ValueSpecificationAction>( references.front() );
+				setValueSpecificationAction(_valueSpecificationAction);
 			}
 			
 			return;

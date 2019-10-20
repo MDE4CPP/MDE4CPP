@@ -2398,6 +2398,7 @@ void UmlPackageImpl::createOutputPinContent(std::shared_ptr<ecore::EPackage> pac
 	
 	m_outputPin_Attribute_action = factory->createEReference_in_EContainingClass(m_outputPin_Class, OUTPUTPIN_ATTRIBUTE_ACTION);
 	m_outputPin_Attribute_callAction = factory->createEReference_in_EContainingClass(m_outputPin_Class, OUTPUTPIN_ATTRIBUTE_CALLACTION);
+	m_outputPin_Attribute_valueSpecificationAction = factory->createEReference_in_EContainingClass(m_outputPin_Class, OUTPUTPIN_ATTRIBUTE_VALUESPECIFICATIONACTION);
 	
 	m_outputPin_Operation_incoming_edges_structured_only_EDiagnosticChain_EMap = factory->createEOperation_in_EContainingClass(m_outputPin_Class, OUTPUTPIN_OPERATION_INCOMING_EDGES_STRUCTURED_ONLY_EDIAGNOSTICCHAIN_EMAP);
 	

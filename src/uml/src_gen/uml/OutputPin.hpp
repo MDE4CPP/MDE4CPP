@@ -145,6 +145,11 @@ namespace uml
 	class ValueSpecification;
 }
 
+namespace uml 
+{
+	class ValueSpecificationAction;
+}
+
 // base class includes
 #include "uml/Pin.hpp"
 
@@ -194,6 +199,10 @@ namespace uml
 
 			OutputPin(std::weak_ptr<uml::Element > par_owner);
 
+			//Additional constructors for the containments back reference
+
+			OutputPin(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction);
+
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
@@ -230,6 +239,13 @@ namespace uml
 			/*!
 			 */
 			virtual void setCallAction(std::shared_ptr<uml::CallAction> _callAction_callAction) = 0;
+			/*!
+			 */
+			virtual std::weak_ptr<uml::ValueSpecificationAction > getValueSpecificationAction() const = 0;
+			
+			/*!
+			 */
+			virtual void setValueSpecificationAction(std::shared_ptr<uml::ValueSpecificationAction> _valueSpecificationAction_valueSpecificationAction) = 0;
 			
 
 		protected:
@@ -247,6 +263,9 @@ namespace uml
 			/*!
 			 */
 			std::weak_ptr<uml::CallAction > m_callAction;
+			/*!
+			 */
+			std::weak_ptr<uml::ValueSpecificationAction > m_valueSpecificationAction;
 			
 
 		public:

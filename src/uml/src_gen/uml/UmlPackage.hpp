@@ -4425,13 +4425,14 @@ namespace uml
 			// Begin Class OutputPin
 			//Class and Feature IDs 
 			static const unsigned int OUTPUTPIN_CLASS = 170;
-			static const unsigned int OUTPUTPIN_CLASS_FEATURE_COUNT = 35;
+			static const unsigned int OUTPUTPIN_CLASS_FEATURE_COUNT = 36;
 			static const unsigned int OUTPUTPIN_CLASS_OPERATION_COUNT = 80;
 			
 			static const int OUTPUTPIN_ATTRIBUTE_ACTION = 17034;
 			static const int OUTPUTPIN_ATTRIBUTE_CALLACTION = 17033;
+			static const int OUTPUTPIN_ATTRIBUTE_VALUESPECIFICATIONACTION = 17035;
 			
-			static const int OUTPUTPIN_OPERATION_INCOMING_EDGES_STRUCTURED_ONLY_EDIAGNOSTICCHAIN_EMAP = 17114;
+			static const int OUTPUTPIN_OPERATION_INCOMING_EDGES_STRUCTURED_ONLY_EDIAGNOSTICCHAIN_EMAP = 17115;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getOutputPin_Class() const = 0;
@@ -4439,6 +4440,7 @@ namespace uml
 			
 			virtual std::shared_ptr<ecore::EReference> getOutputPin_Attribute_action() const = 0;
 			virtual std::shared_ptr<ecore::EReference> getOutputPin_Attribute_callAction() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getOutputPin_Attribute_valueSpecificationAction() const = 0;
 			
 			virtual std::shared_ptr<ecore::EOperation> getOutputPin_Operation_incoming_edges_structured_only_EDiagnosticChain_EMap() const = 0;
 			
