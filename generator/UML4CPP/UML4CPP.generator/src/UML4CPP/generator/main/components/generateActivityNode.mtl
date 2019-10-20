@@ -192,7 +192,7 @@
 [/if]
 [if (not anActivityNode.oclAsType(ValueSpecificationAction).result.oclIsUndefined())]
 [anActivityNode.oclAsType(ValueSpecificationAction).result.memberName()/]->setName("[anActivityNode.oclAsType(ValueSpecificationAction).name/]");
-[memberName(pin.owner.oclAsType(NamedElement))/]->getOutput()->push_back([pin.memberName()/]);
+[memberName(anActivityNode)/]->getOutput()->push_back([anActivityNode.oclAsType(ValueSpecificationAction).result.memberName()/]);
 [/if]
 [/template]
 [**
