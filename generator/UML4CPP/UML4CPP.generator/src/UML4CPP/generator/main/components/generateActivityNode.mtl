@@ -43,7 +43,7 @@
  * - creation of Input pins
  * - creation of Output pins
 */]
-[template private generateActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(Action) )]
+[template private generateActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(Action) and not oclIsKindOf(AddStructuralFeatureValueAction))]
 //Action [anActivityNode.name /]
 [anActivityNode.oclAsType(Action).input->sortedBy(name).generatePin()/]
 [anActivityNode.oclAsType(Action).output->sortedBy(name).generatePin()/]
@@ -56,6 +56,25 @@
 [if (anActivityNode.oclIsKindOf(DestroyObjectAction))]
 	[anActivityNode.oclAsType(DestroyObjectAction).generateDestroyObjectActionCommands()/]
 [/if]
+[/template]
+
+[**
+ * generate elements for CreateObjectAction
+*/]
+[template private generateActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(AddStructuralFeatureValueAction))]
+[let action : AddStructuralFeatureValueAction = self.oclAsType(AddStructuralFeatureValueAction)]
+	// TODO add missing opposite references in UML.ecore and fix called creation function
+	[action.object.memberName()/] = factory->create[action.object.eClass().name/]_in_Action([action.object.owner.oclAsType(NamedElement).memberName()/]);
+	[action.memberName()/]->setObject([action.object.memberName()/]); // subset/union does not work with upper=1 //getInput()->push_back
+	[action.value.memberName()/] = factory->create[action.value.eClass().name/]_in_Action([action.value.owner.oclAsType(NamedElement).memberName()/]);
+	[action.memberName()/]->setValue([action.value.memberName()/]); // subset/union does not work with upper=1 //getInput()->push_back
+	[action.result.memberName()/] = factory->create[action.result.eClass().name/]_in_Action([action.result.owner.oclAsType(NamedElement).memberName()/]);
+	[action.memberName()/]->setResult([action.result.memberName()/]); // subset/union does not work with upper=1 // getInput()->push_back
+[if (not action.insertAt.oclIsUndefined())]
+	[action.insertAt.memberName()/] = factory->create[action.insertAt.eClass().name/]_in_Action([action.insertAt.owner.oclAsType(NamedElement).memberName()/]);
+	[action.memberName()/]->getInsertAt()->push_back([action.insertAt.memberName()/]); 
+[/if]
+[/let]
 [/template]
 
 [**
@@ -93,6 +112,7 @@
 //set type of new Objects
 [anCreateObjectActionNode.memberName()/]->setClassifier([anCreateObjectActionNode.classifier.memberName()/]);
 [anCreateObjectActionNode.memberName()/]->setResult([anCreateObjectActionNode.result.memberName()/]);
+[anCreateObjectActionNode.result.memberName()/]->setName("[anCreateObjectActionNode.result.name/]");
 [/template]
 
 [**
@@ -102,6 +122,7 @@
 [if (aReadSelfAction.result.oclIsUndefined())]
 ['UML4CPP_Generation Error: ReadSelfAction: '.concat(aReadSelfAction.name).concat(' result pin invalid.').registerError()/]
 [else]
+[aReadSelfAction.result.memberName()/]->setName("[aReadSelfAction.result.name/]");
 [aReadSelfAction.memberName()/]->setResult([aReadSelfAction.result.memberName()/]);
 [/if]
 [/template]
@@ -113,6 +134,7 @@
 [if (aDestroyObjectAction.target.oclIsUndefined())]
 ['UML4CPP_Generation Error: DestroyObjectAction: '.concat(aDestroyObjectAction.name).concat(' target pin invalid.').registerError()/]
 [else]
+[aDestroyObjectAction.target.memberName()/]->setName("[aDestroyObjectAction.target.name/]");
 [aDestroyObjectAction.memberName()/]->setTarget([aDestroyObjectAction.target.memberName()/]);
 [/if]
 [/template]
@@ -138,6 +160,25 @@
 [template private initializeActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(ActivityParameterNode))]
 [anActivityNode.memberName()/]->setParameter([anActivityNode.oclAsType(ActivityParameterNode).parameter.memberName()/]);
 
+[/template]
+
+[**
+ * generate initialization of meta model instance for an AddStructuralFeatureValueAction element
+ * 
+ * this includes:
+ * - add object pin to input
+ * - add insertAt pins to input if defined
+ * - add result pin to output
+ * - set structuralFeature
+ * - set isReplaceAll
+*/]
+[template private initializeActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(AddStructuralFeatureValueAction))]
+[let action : AddStructuralFeatureValueAction = self.oclAsType(AddStructuralFeatureValueAction)]
+[action.input.initializePin()/]
+[action.output.initializePin()/]
+[action.memberName()/]->setStructuralFeature([action.structuralFeature.memberName()/]);
+[action.memberName()/]->setIsReplaceAll([action.isReplaceAll/]);
+[/let]
 [/template]
 
 [**
@@ -184,7 +225,8 @@
  * generate initialization of meta model instance for an ValueSpecificationAction element
  * 
  * this includes:
- * - set decisionInput if defined
+ * - set value if defined
+ * - set output if defined
 */]
 [template private initializeActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(ValueSpecificationAction))]
 [if (not anActivityNode.oclAsType(ValueSpecificationAction).value.oclIsUndefined())]
@@ -195,6 +237,7 @@
 [memberName(anActivityNode)/]->getOutput()->push_back([anActivityNode.oclAsType(ValueSpecificationAction).result.memberName()/]);
 [/if]
 [/template]
+
 [**
  * query to check, if a pin is a target pin of CallOperationAction instance
 */]
