@@ -16,6 +16,7 @@
  
 [import fUML4CPP::generator::main::parameterHelper /]
 [import UML4CPP::generator::main::components::generateType /]
+[import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 
 [query public supportedTypes(type : Type) : Boolean = (type.name = 'Integer') or (type.name = 'Boolean') /]
@@ -29,6 +30,17 @@
 
 #include "abstractDataTypes/Bag.hpp"
 #include "[aClassifier.getNearestPackage().myNamespaceName()/]/[aClassifier.name.toUpperFirst()/].hpp"
+#include "[aPackage.getPackageName()/]/[aPackage.getPackageName()/]Package.hpp"
+
+#include "abstractDataTypes/Any.hpp"
+[for (aType : Type | aClassifier.allAttributes().type->sortedBy(qualifiedName))]
+[if (aType.oclIsKindOf(PrimitiveType))]
+#include "fUML/[aType.name.toUpperFirst()/]Value.hpp"
+[else]
+#include "[aPackage.getPackageName()/]Exec/[aType.oclAsType(Classifier).objectClassName()/].hpp"
+[/if]
+[/for]
+#include "uml/Property.hpp"
 
 using namespace [aPackage.name/];
 
@@ -88,5 +100,45 @@ void [className/]::setThis[className/]Ptr(std::weak_ptr<[className/]> thisObject
 {
 	setThisObjectPtr(thisObjectPtr);
 }
+
+void [className/]::assignFeatureValue(std::shared_ptr<uml::StructuralFeature> feature, std::shared_ptr<Bag<fUML::Value>> values, int position)
+{
+	std::shared_ptr<uml::Property> property = std::dynamic_pointer_cast<uml::Property>(feature);
+	if (property == nullptr)
+	{
+		std::cerr << __PRETTY_FUNCTION__ << ": feature is null or not kind of uml::Property" << std::endl;
+		throw "feature is null or not kind of uml::Property";
+	}
+
+	if (m_umlValue == nullptr)
+	{
+		std::cerr << __PRETTY_FUNCTION__ << ": not implemented for upper != 1" << std::endl;
+		throw "UnsupportedParameterException";	}
+
+	if (values->size() == 0)
+	{
+		std::cout << __PRETTY_FUNCTION__ << ": no input value given" << std::endl;
+		return;
+	}
+	std::shared_ptr<Value> inputValue = values->at(0);
+	std::shared_ptr<[aPackage.getPackageName()/]Package> package = [aPackage.getPackageName()/]Package::eInstance();
+[for (aProperty : Property | aClassifier.allAttributes())]
+	if (property == package->[aProperty.generatePackageGetterCall(aProperty)/])
+	{
+		std::shared_ptr<[aProperty.type.getValueClass()/]> value = std::dynamic_pointer_cast<[aProperty.type.getValueClass()/]>(inputValue);
+		if (value != nullptr)
+		{
+[if (aProperty.upper = 1)]
+			m_umlValue->[aProperty.setterName()/](value->get[if (aProperty.isNotPrimitiveTypedProperty())]Uml[/if]Value());
+[else]
+			m_umlValue->[aProperty.getterName()/]()->push_back(value->get[if (aProperty.isNotPrimitiveTypedProperty())]Uml[/if]Value());
+[/if]
+		}
+	}
+[/for]
+}
 [/file]
 [/template]
+
+[query private getValueClass(aType : Type) : String = if (aType.oclIsKindOf(PrimitiveType)) then 'fUML::'.concat(aType.name.toUpperFirst()).concat('Value') else aType.oclAsType(Classifier).objectClassName() endif /]
+[query private isNotPrimitiveTypedProperty(aProperty : Property) : Boolean = not aProperty.type.oclIsKindOf(PrimitiveType) /] 

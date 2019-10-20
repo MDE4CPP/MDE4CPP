@@ -51,11 +51,12 @@ namespace [aPackage.name/]
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
 			
-			std::shared_ptr<[pointerName/]> getUmlValue() const;
-			std::shared_ptr<Bag<[pointerName/]>> getUmlValues() const;
-			void setUmlValue(std::shared_ptr<[pointerName/]>);
-			void setUmlValues(std::shared_ptr<Bag<[pointerName/]>>);;
+			virtual std::shared_ptr<[pointerName/]> getUmlValue() const;
+			virtual std::shared_ptr<Bag<[pointerName/]>> getUmlValues() const;
+			virtual void setUmlValue(std::shared_ptr<[pointerName/]>);
+			virtual void setUmlValues(std::shared_ptr<Bag<[pointerName/]>>);;
 			virtual void setThis[className/]Ptr(std::weak_ptr<[className/]> thisObjectPtr);
+			virtual void assignFeatureValue(std::shared_ptr<uml::StructuralFeature> feature, std::shared_ptr<Bag<fUML::Value>> values, int position);
 		
 		protected:
 			std::shared_ptr<[pointerName/]> m_umlValue = nullptr;
