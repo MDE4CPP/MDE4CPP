@@ -77,6 +77,8 @@
 		[else]
 	[pin.memberName()/] = factory->create[pin.eClass().name/]_in_CallAction([pin.owner.oclAsType(NamedElement).memberName()/]);
 		[/if]
+[elseif (pin.owner.oclIsKindOf(ValueSpecificationAction))]
+	[pin.memberName()/] = factory->create[pin.eClass().name/]_in_ValueSpecificationAction([pin.owner.oclAsType(NamedElement).memberName()/]);
 [elseif (pin.owner.oclIsKindOf(Action))]
 	[pin.memberName()/] = factory->create[pin.eClass().name/]_in_Action([pin.owner.oclAsType(NamedElement).memberName()/]);
 [else]
@@ -178,6 +180,21 @@
 [/if]
 [/template]
 
+[**
+ * generate initialization of meta model instance for an ValueSpecificationAction element
+ * 
+ * this includes:
+ * - set decisionInput if defined
+*/]
+[template private initializeActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(ValueSpecificationAction))]
+[if (not anActivityNode.oclAsType(ValueSpecificationAction).value.oclIsUndefined())]
+[anActivityNode.memberName()/]->setValue([memberName(anActivityNode.oclAsType(ValueSpecificationAction).value)/]);
+[/if]
+[if (not anActivityNode.oclAsType(ValueSpecificationAction).result.oclIsUndefined())]
+[anActivityNode.oclAsType(ValueSpecificationAction).result.memberName()/]->setName("[anActivityNode.oclAsType(ValueSpecificationAction).name/]");
+[memberName(pin.owner.oclAsType(NamedElement))/]->getOutput()->push_back([pin.memberName()/]);
+[/if]
+[/template]
 [**
  * query to check, if a pin is a target pin of CallOperationAction instance
 */]
