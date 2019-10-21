@@ -15,6 +15,7 @@
 [module generateClassifierObjectSource('http://www.eclipse.org/uml2/5.0.0/UML')]
  
 [import fUML4CPP::generator::main::parameterHelper /]
+[import UML4CPP::generator::main::components::generateProperty /]
 [import UML4CPP::generator::main::components::generateType /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
@@ -34,6 +35,7 @@
 
 #include "abstractDataTypes/Any.hpp"
 #include "fUML/FUMLFactory.hpp"
+#include "fUML/Reference.hpp"
 #include "fUML/Value.hpp"
 [for (aType : Type | aClassifier.allAttributes().type->sortedBy(qualifiedName))]
 [if (aType.oclIsKindOf(PrimitiveType))]
@@ -103,6 +105,75 @@ void [className/]::setThis[className/]Ptr(std::weak_ptr<[className/]> thisObject
 	setThisObjectPtr(thisObjectPtr);
 }
 
+void [className/]::removeValue(std::shared_ptr<uml::StructuralFeature> feature, std::shared_ptr<fUML::Value> value)
+{
+	std::shared_ptr<uml::Property> property = std::dynamic_pointer_cast<uml::Property>(feature);
+	if (property == nullptr)
+	{
+		std::cerr << __PRETTY_FUNCTION__ << ": feature is null or not kind of uml::Property" << std::endl;
+		throw "feature is null or not kind of uml::Property";
+	}
+
+	if (m_umlValue == nullptr)
+	{
+		std::cerr << __PRETTY_FUNCTION__ << ": not implemented for object lists" << std::endl;
+		throw "UnsupportedParameterException";	
+	}
+
+	std::shared_ptr<[aPackage.getPackageName().toUpperFirst()/]Package> package = [aPackage.getPackageName().toUpperFirst()/]Package::eInstance();
+[for (aProperty : Property | aClassifier.allAttributes())]
+	if (property == package->[aProperty.generatePackageGetterCall(aProperty)/])
+	{
+[if (aProperty.upper = 1)]
+[if (aProperty.isPrimitiveTypedProperty())]
+[if (aProperty.default->notEmpty())]
+				m_umlValue->[aProperty.setterName()/]([aProperty.genDefault()/]);
+[else]
+				// no default value defined, clear not realized
+[/if]
+[else]
+				m_umlValue->[aProperty.setterName()/](nullptr);
+[/if]
+
+[else]
+		if (value == nullptr) // clear mode
+		{
+			m_umlValue->[aProperty.getterName()/]()->clear();
+		}
+		else
+		{
+[if (aProperty.isPrimitiveTypedProperty())]
+			std::shared_ptr<[aProperty.type.getValueClass()/]> inputValue = std::dynamic_pointer_cast<[aProperty.type.getValueClass()/]>(value);
+			if (inputValue != nullptr)
+			{
+				[aProperty.type.generateCppType(true)/] specificValue = inputValue->getValue();
+				std::shared_ptr<Bag<[aProperty.type.generateCppType(true)/]>> valueList = m_umlValue->[aProperty.getterName()/];
+				Bag<int>::iterator iter = valueList->begin();
+				Bag<int>::iterator end = valueList->end();
+				whie (iter != end)
+				{
+					if (specificValue == *iter)
+					{
+						valueList->erase(iter);
+						break;
+					}
+					iter++;
+				}
+			}
+[else]
+			std::shared_ptr<fUML::Reference> reference = std::dynamic_pointer_cast<fUML::Reference>(value);
+			std::shared_ptr<[aProperty.type.getValueClass()/]> inputValue = std::dynamic_pointer_cast<[aProperty.type.getValueClass()/]>(reference->getReferent());
+			if (inputValue != nullptr)
+			{
+				m_umlValue->[aProperty.getterName()/]()->erase(inputValue->getUmlValue());
+[/if]
+			}
+		}
+[/if]
+	}
+[/for]
+}
+
 std::shared_ptr<Bag<fUML::Value>> [className/]::getValues(std::shared_ptr<uml::StructuralFeature> feature, std::shared_ptr<Bag<fUML::FeatureValue>> featureValues)
 {
 	std::shared_ptr<uml::Property> property = std::dynamic_pointer_cast<uml::Property>(feature);
@@ -114,7 +185,7 @@ std::shared_ptr<Bag<fUML::Value>> [className/]::getValues(std::shared_ptr<uml::S
 
 	if (m_umlValue == nullptr)
 	{
-		std::cerr << __PRETTY_FUNCTION__ << ": not implemented for upper != 1" << std::endl;
+		std::cerr << __PRETTY_FUNCTION__ << ": not implemented for object lists" << std::endl;
 		throw "UnsupportedParameterException";	
 	}
 
@@ -147,7 +218,7 @@ void [className/]::setFeatureValue(std::shared_ptr<uml::StructuralFeature> featu
 
 	if (m_umlValue == nullptr)
 	{
-		std::cerr << __PRETTY_FUNCTION__ << ": not implemented for upper != 1" << std::endl;
+		std::cerr << __PRETTY_FUNCTION__ << ": not implemented for object lists" << std::endl;
 		throw "UnsupportedParameterException";	}
 
 	if (values->size() == 0)
@@ -160,19 +231,24 @@ void [className/]::setFeatureValue(std::shared_ptr<uml::StructuralFeature> featu
 [for (aProperty : Property | aClassifier.allAttributes())]
 	if (property == package->[aProperty.generatePackageGetterCall(aProperty)/])
 	{
+[if (aProperty.isPrimitiveTypedProperty())]
 		std::shared_ptr<[aProperty.type.getValueClass()/]> value = std::dynamic_pointer_cast<[aProperty.type.getValueClass()/]>(inputValue);
 		if (value != nullptr)
 		{
-[if (aProperty.isPrimitiveTypedProperty())]
 			m_umlValue->[aProperty.setterName()/](value->getValue());
+		}
 [else]
+		std::shared_ptr<fUML::Reference> reference = std::dynamic_pointer_cast<fUML::Reference>(inputValue);
+		std::shared_ptr<[aProperty.type.getValueClass()/]> value = std::dynamic_pointer_cast<[aProperty.type.getValueClass()/]>(reference->getReferent());
+		if (value != nullptr)
+		{
 [if (aProperty.upper = 1)]
 			m_umlValue->[aProperty.setterName()/](value->getUmlValue());
 [else]
 			m_umlValue->[aProperty.getterName()/]()->push_back(value->getUmlValue());
 [/if]
-[/if]
 		}
+[/if]
 	}
 [/for]
 }
