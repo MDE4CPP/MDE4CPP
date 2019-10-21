@@ -26,9 +26,10 @@
 //depending model packages
 
 #include "ecore/EAttribute.hpp"
-#include "ecore/EReference.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/EDataType.hpp"
 #include "ecore/EPackage.hpp"
-
+#include "ecore/EReference.hpp"
 
 using namespace Ecore;
 
