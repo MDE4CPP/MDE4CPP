@@ -2750,6 +2750,14 @@ void FUMLPackageImpl::initializeClearStructuralFeatureActionActivationContent()
 	
 	
 	
+	m_clearStructuralFeatureActionActivation_Operation_doAction->setEType(nullptr);
+	m_clearStructuralFeatureActionActivation_Operation_doAction->setName("doAction");
+	m_clearStructuralFeatureActionActivation_Operation_doAction->setLowerBound(0);
+	m_clearStructuralFeatureActionActivation_Operation_doAction->setUpperBound(1);
+	m_clearStructuralFeatureActionActivation_Operation_doAction->setUnique(true);
+	m_clearStructuralFeatureActionActivation_Operation_doAction->setOrdered(true);
+	
+	
 	
 }
 
@@ -7269,7 +7277,7 @@ void FUMLPackageImpl::initializeReferenceContent()
 	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_reference_Operation_removeValue_StructuralFeature_Value);
-		parameter->setName("values");
+		parameter->setName("value");
 		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);
 		parameter->setUpperBound(1);
@@ -8010,7 +8018,7 @@ void FUMLPackageImpl::initializeStructuredValueContent()
 	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_structuredValue_Operation_removeValue_StructuralFeature_Value);
-		parameter->setName("values");
+		parameter->setName("value");
 		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);
 		parameter->setUpperBound(1);

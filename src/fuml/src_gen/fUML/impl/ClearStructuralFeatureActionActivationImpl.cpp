@@ -25,6 +25,11 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "fUML/impl/FUMLPackageImpl.hpp"
+#include "fUML/FeatureValue.hpp"
+#include "fUML/StructuredValue.hpp"
+#include "fUML/Value.hpp"
+#include "uml/ClearStructuralFeatureAction.hpp"
+#include "uml/StructuralFeature.hpp"
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -171,6 +176,26 @@ std::shared_ptr<ecore::EClass> ClearStructuralFeatureActionActivationImpl::eStat
 //*********************************
 // Operations
 //*********************************
+void ClearStructuralFeatureActionActivationImpl::doAction()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	std::shared_ptr<uml::ClearStructuralFeatureAction> action = std::dynamic_pointer_cast<uml::ClearStructuralFeatureAction>(m_node);
+	std::shared_ptr<uml::StructuralFeature> feature = action->getStructuralFeature();
+
+	std::shared_ptr<Value> objectValue = takeTokens(action->getObject())->at(0);
+	std::shared_ptr<StructuredValue> structuredValue = std::dynamic_pointer_cast<fUML::StructuredValue>(objectValue);
+	if (structuredValue)
+	{
+		structuredValue->removeValue(feature, nullptr);
+	}
+	else
+	{
+		throw "unhandled fUML::Value instance";
+	}
+	putToken(action->getResult(), objectValue);
+	//end of body
+}
 
 //*********************************
 // References

@@ -928,6 +928,10 @@ std::shared_ptr<ecore::EClass> FUMLPackageImpl::getClearStructuralFeatureActionA
 
 
 
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getClearStructuralFeatureActionActivation_Operation_doAction() const
+{
+	return m_clearStructuralFeatureActionActivation_Operation_doAction;
+}
 
 // End Class ClearStructuralFeatureActionActivation
 

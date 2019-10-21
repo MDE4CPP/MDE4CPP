@@ -197,11 +197,11 @@ std::shared_ptr<fUML::Value> ReferenceImpl::new_()
 	//end of body
 }
 
-void ReferenceImpl::removeValue(std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<fUML::Value>  values)
+void ReferenceImpl::removeValue(std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<fUML::Value>  value)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	this->getReferent()->removeValue(feature, values);
+	this->getReferent()->removeValue(feature, value);
 	//end of body
 }
 

@@ -503,6 +503,7 @@ void FUMLPackageImpl::createClearStructuralFeatureActionActivationContent(std::s
 	m_clearStructuralFeatureActionActivation_Class = factory->createEClass_in_EPackage(package, CLEARSTRUCTURALFEATUREACTIONACTIVATION_CLASS);
 	
 	
+	m_clearStructuralFeatureActionActivation_Operation_doAction = factory->createEOperation_in_EContainingClass(m_clearStructuralFeatureActionActivation_Class, CLEARSTRUCTURALFEATUREACTIONACTIVATION_OPERATION_DOACTION);
 	
 }
 

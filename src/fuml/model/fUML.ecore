@@ -304,7 +304,7 @@
     <eOperations name="removeValue" ordered="false" lowerBound="1">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen"/>
       <eParameters name="feature" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//StructuralFeature"/>
-      <eParameters name="values" ordered="false" lowerBound="1" eType="#//Value"/>
+      <eParameters name="value" ordered="false" lowerBound="1" eType="#//Value"/>
     </eOperations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Reference" eSuperTypes="#//StructuredValue">
@@ -392,10 +392,10 @@
     </eOperations>
     <eOperations name="removeValue" ordered="false" lowerBound="1">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="body" value="this->getReferent()->removeValue(feature, values);"/>
+        <details key="body" value="this->getReferent()->removeValue(feature, value);"/>
       </eAnnotations>
       <eParameters name="feature" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//StructuralFeature"/>
-      <eParameters name="values" ordered="false" lowerBound="1" eType="#//Value"/>
+      <eParameters name="value" ordered="false" lowerBound="1" eType="#//Value"/>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="referent" ordered="false"
         lowerBound="1" eType="#//Object"/>
@@ -2218,7 +2218,16 @@
     </eOperations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ClearStructuralFeatureActionActivation"
-      eSuperTypes="#//StructuralFeatureActionActivation"/>
+      eSuperTypes="#//StructuralFeatureActionActivation">
+    <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+      <details key="includes" value="#include &quot;fUML/FeatureValue.hpp&quot;&#xA;#include &quot;fUML/StructuredValue.hpp&quot;&#xA;#include &quot;fUML/Value.hpp&quot;&#xA;#include &quot;uml/ClearStructuralFeatureAction.hpp&quot;&#xA;#include &quot;uml/StructuralFeature.hpp&quot;"/>
+    </eAnnotations>
+    <eOperations name="doAction">
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="std::shared_ptr&lt;uml::ClearStructuralFeatureAction> action = std::dynamic_pointer_cast&lt;uml::ClearStructuralFeatureAction>(m_node);&#xA;&#x9;std::shared_ptr&lt;uml::StructuralFeature> feature = action->getStructuralFeature();&#xA;&#xA;&#x9;std::shared_ptr&lt;Value> objectValue = takeTokens(action->getObject())->at(0);&#xA;&#x9;std::shared_ptr&lt;StructuredValue> structuredValue = std::dynamic_pointer_cast&lt;fUML::StructuredValue>(objectValue);&#xA;&#x9;if (structuredValue)&#xA;&#x9;{&#xA;&#x9;&#x9;structuredValue->removeValue(feature, nullptr);&#xA;&#x9;}&#xA;&#x9;else&#xA;&#x9;{&#xA;&#x9;&#x9;throw &quot;unhandled fUML::Value instance&quot;;&#xA;&#x9;}&#xA;&#x9;putToken(action->getResult(), objectValue);"/>
+      </eAnnotations>
+    </eOperations>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="WriteStructuralFeatureActionActivation"
       abstract="true" eSuperTypes="#//StructuralFeatureActionActivation">
     <eOperations name="position" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">

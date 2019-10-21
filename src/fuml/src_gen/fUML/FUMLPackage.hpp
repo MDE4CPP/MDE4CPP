@@ -757,15 +757,17 @@ namespace fUML
 			//Class and Feature IDs 
 			static const unsigned int CLEARSTRUCTURALFEATUREACTIONACTIVATION_CLASS = 25;
 			static const unsigned int CLEARSTRUCTURALFEATUREACTIONACTIVATION_CLASS_FEATURE_COUNT = 10;
-			static const unsigned int CLEARSTRUCTURALFEATUREACTIONACTIVATION_CLASS_OPERATION_COUNT = 50;
+			static const unsigned int CLEARSTRUCTURALFEATUREACTIONACTIVATION_CLASS_OPERATION_COUNT = 51;
 			
 			
+			static const int CLEARSTRUCTURALFEATUREACTIONACTIVATION_OPERATION_DOACTION = 2560;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getClearStructuralFeatureActionActivation_Class() const = 0;
 			
 			
 			
+			virtual std::shared_ptr<ecore::EOperation> getClearStructuralFeatureActionActivation_Operation_doAction() const = 0;
 			
 			// End Class ClearStructuralFeatureActionActivation
 

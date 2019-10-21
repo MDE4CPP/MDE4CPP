@@ -164,7 +164,7 @@ std::shared_ptr<Bag<fUML::Value> > StructuredValueImpl::getValues(std::shared_pt
 	throw "UnsupportedOperationException";
 }
 
-void StructuredValueImpl::removeValue(std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<fUML::Value>  values)
+void StructuredValueImpl::removeValue(std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<fUML::Value>  value)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
