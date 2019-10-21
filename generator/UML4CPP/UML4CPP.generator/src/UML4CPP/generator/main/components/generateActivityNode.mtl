@@ -194,10 +194,10 @@
  * - creation of Output pins
 */]
 [template private generateActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(Action))]
-// no specific generation for this action, generation only for properties input and output
+// no specific generation for this action, generate only input and output pins
 [let action : Action = self.oclAsType(Action)]
 [for (pin : Pin | action.input)]
-	[pin.memberName()/] = factory->create[pin.eClass().name/]_in_InvocationAction([pin.owner.oclAsType(NamedElement).memberName()/]);
+	[pin.memberName()/] = factory->create[pin.eClass().name/]_in_Action([pin.owner.oclAsType(NamedElement).memberName()/]);
 [/for]
 [for (pin : Pin | action.output)]
 	[pin.memberName()/] = factory->create[pin.eClass().name/]_in_Action([pin.owner.oclAsType(NamedElement).memberName()/]);
