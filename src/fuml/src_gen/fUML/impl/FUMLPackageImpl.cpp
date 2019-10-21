@@ -2880,9 +2880,9 @@ std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getStructuredValue_Operation
 {
 	return m_structuredValue_Operation_createFeatureValues;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getStructuredValue_Operation_getValue_StructuralFeature_FeatureValue() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getStructuredValue_Operation_getValues_StructuralFeature_FeatureValue() const
 {
-	return m_structuredValue_Operation_getValue_StructuralFeature_FeatureValue;
+	return m_structuredValue_Operation_getValues_StructuralFeature_FeatureValue;
 }
 std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getStructuredValue_Operation_removeFeatureValue_StructuralFeature_Boolean() const
 {

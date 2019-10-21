@@ -158,7 +158,7 @@ void StructuredValueImpl::createFeatureValues()
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Value> > StructuredValueImpl::getValue(std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<Bag<fUML::FeatureValue> >  featureValues)
+std::shared_ptr<Bag<fUML::Value> > StructuredValueImpl::getValues(std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<Bag<fUML::FeatureValue> >  featureValues)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -184,8 +184,10 @@ std::shared_ptr<Bag<fUML::FeatureValue> > StructuredValueImpl::retrieveFeatureVa
 
 void StructuredValueImpl::setFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<Bag<fUML::Value> >  values,int position)
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	
+	//end of body
 }
 
 std::shared_ptr<uml::ValueSpecification> StructuredValueImpl::specify()

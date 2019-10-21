@@ -7865,15 +7865,15 @@ void FUMLPackageImpl::initializeStructuredValueContent()
 	m_structuredValue_Operation_createFeatureValues->setOrdered(true);
 	
 	
-	m_structuredValue_Operation_getValue_StructuralFeature_FeatureValue->setEType(getValue_Class());
-	m_structuredValue_Operation_getValue_StructuralFeature_FeatureValue->setName("getValue");
-	m_structuredValue_Operation_getValue_StructuralFeature_FeatureValue->setLowerBound(0);
-	m_structuredValue_Operation_getValue_StructuralFeature_FeatureValue->setUpperBound(-1);
-	m_structuredValue_Operation_getValue_StructuralFeature_FeatureValue->setUnique(true);
-	m_structuredValue_Operation_getValue_StructuralFeature_FeatureValue->setOrdered(false);
+	m_structuredValue_Operation_getValues_StructuralFeature_FeatureValue->setEType(getValue_Class());
+	m_structuredValue_Operation_getValues_StructuralFeature_FeatureValue->setName("getValues");
+	m_structuredValue_Operation_getValues_StructuralFeature_FeatureValue->setLowerBound(0);
+	m_structuredValue_Operation_getValues_StructuralFeature_FeatureValue->setUpperBound(-1);
+	m_structuredValue_Operation_getValues_StructuralFeature_FeatureValue->setUnique(true);
+	m_structuredValue_Operation_getValues_StructuralFeature_FeatureValue->setOrdered(false);
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_structuredValue_Operation_getValue_StructuralFeature_FeatureValue);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_structuredValue_Operation_getValues_StructuralFeature_FeatureValue);
 		parameter->setName("feature");
 		parameter->setEType(uml::UmlPackage::eInstance()->getStructuralFeature_Class());
 		parameter->setLowerBound(0);
@@ -7883,7 +7883,7 @@ void FUMLPackageImpl::initializeStructuredValueContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_structuredValue_Operation_getValue_StructuralFeature_FeatureValue);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_structuredValue_Operation_getValues_StructuralFeature_FeatureValue);
 		parameter->setName("featureValues");
 		parameter->setEType(getFeatureValue_Class());
 		parameter->setLowerBound(0);

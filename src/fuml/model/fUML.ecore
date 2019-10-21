@@ -289,7 +289,9 @@
       </eAnnotations>
     </eOperations>
     <eOperations name="setFeatureValue" ordered="false" lowerBound="1">
-      <eAnnotations source="http://sse.tu-ilmenau.de/codegen"/>
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value=""/>
+      </eAnnotations>
       <eParameters name="feature" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//StructuralFeature"/>
       <eParameters name="values" ordered="false" upperBound="-1" eType="#//Value"/>
       <eParameters name="position" ordered="false" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>

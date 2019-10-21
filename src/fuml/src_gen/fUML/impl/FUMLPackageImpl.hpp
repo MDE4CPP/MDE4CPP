@@ -1538,7 +1538,7 @@ namespace fUML
 			
 			virtual std::shared_ptr<ecore::EOperation> getStructuredValue_Operation_assignFeatureValue_StructuralFeature_EInt() const ;
 			virtual std::shared_ptr<ecore::EOperation> getStructuredValue_Operation_createFeatureValues() const ;
-			virtual std::shared_ptr<ecore::EOperation> getStructuredValue_Operation_getValue_StructuralFeature_FeatureValue() const ;
+			virtual std::shared_ptr<ecore::EOperation> getStructuredValue_Operation_getValues_StructuralFeature_FeatureValue() const ;
 			virtual std::shared_ptr<ecore::EOperation> getStructuredValue_Operation_removeFeatureValue_StructuralFeature_Boolean() const ;
 			virtual std::shared_ptr<ecore::EOperation> getStructuredValue_Operation_retrieveFeatureValue_StructuralFeature() const ;
 			virtual std::shared_ptr<ecore::EOperation> getStructuredValue_Operation_retrieveFeatureValues() const ;
@@ -2033,11 +2033,11 @@ namespace fUML
 			std::shared_ptr<ecore::EOperation> m_enumerationValue_Operation_getTypes = nullptr;
 			std::shared_ptr<ecore::EOperation> m_dataValue_Operation_getTypes = nullptr;
 			std::shared_ptr<ecore::EOperation> m_objectNodeActivation_Operation_getUnofferedTokens = nullptr;
-			std::shared_ptr<ecore::EOperation> m_structuredValue_Operation_getValue_StructuralFeature_FeatureValue = nullptr;
 			std::shared_ptr<ecore::EOperation> m_extensionalValueList_Operation_getValue = nullptr;
 			std::shared_ptr<ecore::EOperation> m_token_Operation_getValue = nullptr;
 			std::shared_ptr<ecore::EOperation> m_forkedToken_Operation_getValue = nullptr;
 			std::shared_ptr<ecore::EOperation> m_controlToken_Operation_getValue = nullptr;
+			std::shared_ptr<ecore::EOperation> m_structuredValue_Operation_getValues_StructuralFeature_FeatureValue = nullptr;
 			std::shared_ptr<ecore::EOperation> m_featureValue_Operation_hasEqualValues_FeatureValue = nullptr;
 			std::shared_ptr<ecore::EOperation> m_decisionNodeActivation_Operation_hasObjectFlowInput = nullptr;
 			std::shared_ptr<ecore::EOperation> m_activityEdgeInstance_Operation_hasOffer = nullptr;

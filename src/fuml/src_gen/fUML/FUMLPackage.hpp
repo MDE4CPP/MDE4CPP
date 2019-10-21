@@ -2700,7 +2700,7 @@ namespace fUML
 			
 			static const int STRUCTUREDVALUE_OPERATION_ASSIGNFEATUREVALUE_STRUCTURALFEATURE_EINT = 10909;
 			static const int STRUCTUREDVALUE_OPERATION_CREATEFEATUREVALUES = 10911;
-			static const int STRUCTUREDVALUE_OPERATION_GETVALUE_STRUCTURALFEATURE_FEATUREVALUE = 10914;
+			static const int STRUCTUREDVALUE_OPERATION_GETVALUES_STRUCTURALFEATURE_FEATUREVALUE = 10914;
 			static const int STRUCTUREDVALUE_OPERATION_REMOVEFEATUREVALUE_STRUCTURALFEATURE_BOOLEAN = 10915;
 			static const int STRUCTUREDVALUE_OPERATION_RETRIEVEFEATUREVALUE_STRUCTURALFEATURE = 10908;
 			static const int STRUCTUREDVALUE_OPERATION_RETRIEVEFEATUREVALUES = 10910;
@@ -2714,7 +2714,7 @@ namespace fUML
 			
 			virtual std::shared_ptr<ecore::EOperation> getStructuredValue_Operation_assignFeatureValue_StructuralFeature_EInt() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getStructuredValue_Operation_createFeatureValues() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getStructuredValue_Operation_getValue_StructuralFeature_FeatureValue() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getStructuredValue_Operation_getValues_StructuralFeature_FeatureValue() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getStructuredValue_Operation_removeFeatureValue_StructuralFeature_Boolean() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getStructuredValue_Operation_retrieveFeatureValue_StructuralFeature() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getStructuredValue_Operation_retrieveFeatureValues() const = 0;
