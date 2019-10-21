@@ -2658,6 +2658,10 @@ std::shared_ptr<ecore::EClass> FUMLPackageImpl::getRemoveStructuralFeatureValueA
 
 
 
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getRemoveStructuralFeatureValueActivation_Operation_doAction() const
+{
+	return m_removeStructuralFeatureValueActivation_Operation_doAction;
+}
 
 // End Class RemoveStructuralFeatureValueActivation
 

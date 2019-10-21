@@ -2473,15 +2473,17 @@ namespace fUML
 			//Class and Feature IDs 
 			static const unsigned int REMOVESTRUCTURALFEATUREVALUEACTIVATION_CLASS = 99;
 			static const unsigned int REMOVESTRUCTURALFEATUREVALUEACTIVATION_CLASS_FEATURE_COUNT = 10;
-			static const unsigned int REMOVESTRUCTURALFEATUREVALUEACTIVATION_CLASS_OPERATION_COUNT = 51;
+			static const unsigned int REMOVESTRUCTURALFEATUREVALUEACTIVATION_CLASS_OPERATION_COUNT = 52;
 			
 			
+			static const int REMOVESTRUCTURALFEATUREVALUEACTIVATION_OPERATION_DOACTION = 9961;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getRemoveStructuralFeatureValueActivation_Class() const = 0;
 			
 			
 			
+			virtual std::shared_ptr<ecore::EOperation> getRemoveStructuralFeatureValueActivation_Operation_doAction() const = 0;
 			
 			// End Class RemoveStructuralFeatureValueActivation
 

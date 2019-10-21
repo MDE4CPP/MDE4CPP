@@ -1324,6 +1324,7 @@ void FUMLPackageImpl::createRemoveStructuralFeatureValueActivationContent(std::s
 	m_removeStructuralFeatureValueActivation_Class = factory->createEClass_in_EPackage(package, REMOVESTRUCTURALFEATUREVALUEACTIVATION_CLASS);
 	
 	
+	m_removeStructuralFeatureValueActivation_Operation_doAction = factory->createEOperation_in_EContainingClass(m_removeStructuralFeatureValueActivation_Class, REMOVESTRUCTURALFEATUREVALUEACTIVATION_OPERATION_DOACTION);
 	
 }
 

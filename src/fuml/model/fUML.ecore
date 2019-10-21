@@ -2228,7 +2228,16 @@
     </eOperations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RemoveStructuralFeatureValueActivation"
-      eSuperTypes="#//WriteStructuralFeatureActionActivation"/>
+      eSuperTypes="#//WriteStructuralFeatureActionActivation">
+    <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+      <details key="includes" value="#include &quot;fUML/FeatureValue.hpp&quot;&#xA;#include &quot;fUML/StructuredValue.hpp&quot;&#xA;#include &quot;fUML/Value.hpp&quot;&#xA;#include &quot;uml/RemoveStructuralFeatureValueAction.hpp&quot;&#xA;#include &quot;uml/StructuralFeature.hpp&quot;"/>
+    </eAnnotations>
+    <eOperations name="doAction">
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="std::shared_ptr&lt;uml::RemoveStructuralFeatureValueAction> action = std::dynamic_pointer_cast&lt;uml::RemoveStructuralFeatureValueAction>(m_node);&#xA;&#x9;std::shared_ptr&lt;uml::StructuralFeature> feature = action->getStructuralFeature();&#xA;&#xA;&#x9;std::shared_ptr&lt;Value> objectValue = takeTokens(action->getObject())->at(0);&#xA;&#x9;std::shared_ptr&lt;Value> inputValue = takeTokens(action->getValue())->at(0);&#xA;&#x9;std::shared_ptr&lt;StructuredValue> structuredValue = std::dynamic_pointer_cast&lt;fUML::StructuredValue>(objectValue);&#xA;&#x9;if (structuredValue)&#xA;&#x9;{&#xA;&#x9;&#x9;structuredValue->removeValue(feature, inputValue);&#xA;&#x9;}&#xA;&#x9;else&#xA;&#x9;{&#xA;&#x9;&#x9;throw &quot;unhandled fUML::Value instance&quot;;&#xA;&#x9;}&#xA;&#x9;putToken(action->getResult(), objectValue);"/>
+      </eAnnotations>
+    </eOperations>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AddStructuralFeatureValueActionActivation"
       eSuperTypes="#//WriteStructuralFeatureActionActivation">
     <eAnnotations source="http://sse.tu-ilmenau.de/codegen">

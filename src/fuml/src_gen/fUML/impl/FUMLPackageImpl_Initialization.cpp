@@ -7402,6 +7402,14 @@ void FUMLPackageImpl::initializeRemoveStructuralFeatureValueActivationContent()
 	
 	
 	
+	m_removeStructuralFeatureValueActivation_Operation_doAction->setEType(nullptr);
+	m_removeStructuralFeatureValueActivation_Operation_doAction->setName("doAction");
+	m_removeStructuralFeatureValueActivation_Operation_doAction->setLowerBound(0);
+	m_removeStructuralFeatureValueActivation_Operation_doAction->setUpperBound(1);
+	m_removeStructuralFeatureValueActivation_Operation_doAction->setUnique(true);
+	m_removeStructuralFeatureValueActivation_Operation_doAction->setOrdered(true);
+	
+	
 	
 }
 
