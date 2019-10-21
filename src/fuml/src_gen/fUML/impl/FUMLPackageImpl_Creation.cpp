@@ -1253,6 +1253,7 @@ void FUMLPackageImpl::createReadStructuralFeatureActionActivationContent(std::sh
 	m_readStructuralFeatureActionActivation_Class = factory->createEClass_in_EPackage(package, READSTRUCTURALFEATUREACTIONACTIVATION_CLASS);
 	
 	
+	m_readStructuralFeatureActionActivation_Operation_doAction = factory->createEOperation_in_EContainingClass(m_readStructuralFeatureActionActivation_Class, READSTRUCTURALFEATUREACTIONACTIVATION_OPERATION_DOACTION);
 	
 }
 

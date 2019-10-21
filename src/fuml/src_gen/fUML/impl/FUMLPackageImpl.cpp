@@ -2500,6 +2500,10 @@ std::shared_ptr<ecore::EClass> FUMLPackageImpl::getReadStructuralFeatureActionAc
 
 
 
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getReadStructuralFeatureActionActivation_Operation_doAction() const
+{
+	return m_readStructuralFeatureActionActivation_Operation_doAction;
+}
 
 // End Class ReadStructuralFeatureActionActivation
 

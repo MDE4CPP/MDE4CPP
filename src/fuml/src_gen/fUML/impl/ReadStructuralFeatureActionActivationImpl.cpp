@@ -25,6 +25,11 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "fUML/impl/FUMLPackageImpl.hpp"
+#include "fUML/FeatureValue.hpp"
+#include "fUML/StructuredValue.hpp"
+#include "fUML/Value.hpp"
+#include "uml/ReadStructuralFeatureAction.hpp"
+#include "uml/StructuralFeature.hpp"
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -171,6 +176,31 @@ std::shared_ptr<ecore::EClass> ReadStructuralFeatureActionActivationImpl::eStati
 //*********************************
 // Operations
 //*********************************
+void ReadStructuralFeatureActionActivationImpl::doAction()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	std::shared_ptr<uml::ReadStructuralFeatureAction> action = std::dynamic_pointer_cast<uml::ReadStructuralFeatureAction>(m_node);
+	std::shared_ptr<uml::StructuralFeature> feature = action->getStructuralFeature();
+
+	std::shared_ptr<Value> value = takeTokens(action->getObject())->at(0);
+	std::shared_ptr<Bag<Value>> resultValues(new Bag<Value>());
+	std::shared_ptr<StructuredValue> structuredValue = std::dynamic_pointer_cast<fUML::StructuredValue>(value);
+	if (structuredValue)
+	{
+		std::shared_ptr<FeatureValue> featureValue = structuredValue->retrieveFeatureValue(feature);
+		if (featureValue != nullptr)
+		{
+			resultValues = featureValue->getValues();
+		}
+	}
+	else
+	{
+		throw "unhandled fUML::Value instance";
+	}
+	putTokens(action->getResult(), resultValues);
+	//end of body
+}
 
 //*********************************
 // References

@@ -25,7 +25,6 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "fUML/impl/FUMLPackageImpl.hpp"
-#include "abstractDataTypes/Any.hpp"
 #include "fUML/StructuredValue.hpp"
 #include "fUML/UnlimitedNaturalValue.hpp"
 #include "fUML/Value.hpp"
