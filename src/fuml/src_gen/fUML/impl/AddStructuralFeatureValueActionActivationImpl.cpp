@@ -202,7 +202,7 @@ void AddStructuralFeatureValueActionActivationImpl::doAction()
 	std::shared_ptr<StructuredValue> structuredValue = std::dynamic_pointer_cast<fUML::StructuredValue>(value);
 	if (structuredValue)
 	{
-		structuredValue->assignFeatureValue(feature, inputValues, insertAt);
+		structuredValue->setFeatureValue(feature, inputValues, insertAt);
 	}
 	else
 	{

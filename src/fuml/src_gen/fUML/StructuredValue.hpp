@@ -97,11 +97,23 @@ namespace fUML
 			
 			/*!
 			 */ 
+			virtual std::shared_ptr<Bag<fUML::Value> > getValue(std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<Bag<fUML::FeatureValue> >  featureValues) = 0;
+			
+			/*!
+			 */ 
+			virtual void removeFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<Bag<fUML::Value> >  values,bool isRemoveDuplicates) = 0;
+			
+			/*!
+			 */ 
 			virtual std::shared_ptr<fUML::FeatureValue> retrieveFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature) = 0;
 			
 			/*!
 			 */ 
 			virtual std::shared_ptr<Bag<fUML::FeatureValue> > retrieveFeatureValues() = 0;
+			
+			/*!
+			 */ 
+			virtual void setFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<Bag<fUML::Value> >  values,int position) = 0;
 			
 			/*!
 			 */ 

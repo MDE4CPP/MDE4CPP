@@ -158,6 +158,18 @@ void StructuredValueImpl::createFeatureValues()
 	//end of body
 }
 
+std::shared_ptr<Bag<fUML::Value> > StructuredValueImpl::getValue(std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<Bag<fUML::FeatureValue> >  featureValues)
+{
+	std::cout << __PRETTY_FUNCTION__  << std::endl;
+	throw "UnsupportedOperationException";
+}
+
+void StructuredValueImpl::removeFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<Bag<fUML::Value> >  values,bool isRemoveDuplicates)
+{
+	std::cout << __PRETTY_FUNCTION__  << std::endl;
+	throw "UnsupportedOperationException";
+}
+
 std::shared_ptr<fUML::FeatureValue> StructuredValueImpl::retrieveFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
@@ -165,6 +177,12 @@ std::shared_ptr<fUML::FeatureValue> StructuredValueImpl::retrieveFeatureValue(st
 }
 
 std::shared_ptr<Bag<fUML::FeatureValue> > StructuredValueImpl::retrieveFeatureValues()
+{
+	std::cout << __PRETTY_FUNCTION__  << std::endl;
+	throw "UnsupportedOperationException";
+}
+
+void StructuredValueImpl::setFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<Bag<fUML::Value> >  values,int position)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";

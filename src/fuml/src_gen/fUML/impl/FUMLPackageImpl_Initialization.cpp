@@ -7865,6 +7865,70 @@ void FUMLPackageImpl::initializeStructuredValueContent()
 	m_structuredValue_Operation_createFeatureValues->setOrdered(true);
 	
 	
+	m_structuredValue_Operation_getValue_StructuralFeature_FeatureValue->setEType(getValue_Class());
+	m_structuredValue_Operation_getValue_StructuralFeature_FeatureValue->setName("getValue");
+	m_structuredValue_Operation_getValue_StructuralFeature_FeatureValue->setLowerBound(0);
+	m_structuredValue_Operation_getValue_StructuralFeature_FeatureValue->setUpperBound(-1);
+	m_structuredValue_Operation_getValue_StructuralFeature_FeatureValue->setUnique(true);
+	m_structuredValue_Operation_getValue_StructuralFeature_FeatureValue->setOrdered(false);
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_structuredValue_Operation_getValue_StructuralFeature_FeatureValue);
+		parameter->setName("feature");
+		parameter->setEType(uml::UmlPackage::eInstance()->getStructuralFeature_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_structuredValue_Operation_getValue_StructuralFeature_FeatureValue);
+		parameter->setName("featureValues");
+		parameter->setEType(getFeatureValue_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	m_structuredValue_Operation_removeFeatureValue_StructuralFeature_Boolean->setEType(nullptr);
+	m_structuredValue_Operation_removeFeatureValue_StructuralFeature_Boolean->setName("removeFeatureValue");
+	m_structuredValue_Operation_removeFeatureValue_StructuralFeature_Boolean->setLowerBound(1);
+	m_structuredValue_Operation_removeFeatureValue_StructuralFeature_Boolean->setUpperBound(1);
+	m_structuredValue_Operation_removeFeatureValue_StructuralFeature_Boolean->setUnique(true);
+	m_structuredValue_Operation_removeFeatureValue_StructuralFeature_Boolean->setOrdered(false);
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_structuredValue_Operation_removeFeatureValue_StructuralFeature_Boolean);
+		parameter->setName("feature");
+		parameter->setEType(nullptr);
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_structuredValue_Operation_removeFeatureValue_StructuralFeature_Boolean);
+		parameter->setName("values");
+		parameter->setEType(nullptr);
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_structuredValue_Operation_removeFeatureValue_StructuralFeature_Boolean);
+		parameter->setName("isRemoveDuplicates");
+		parameter->setEType(nullptr);
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
 	m_structuredValue_Operation_retrieveFeatureValue_StructuralFeature->setEType(getFeatureValue_Class());
 	m_structuredValue_Operation_retrieveFeatureValue_StructuralFeature->setName("retrieveFeatureValue");
 	m_structuredValue_Operation_retrieveFeatureValue_StructuralFeature->setLowerBound(1);
@@ -7889,6 +7953,43 @@ void FUMLPackageImpl::initializeStructuredValueContent()
 	m_structuredValue_Operation_retrieveFeatureValues->setUnique(true);
 	m_structuredValue_Operation_retrieveFeatureValues->setOrdered(false);
 	
+	
+	m_structuredValue_Operation_setFeatureValue_StructuralFeature_EInt->setEType(nullptr);
+	m_structuredValue_Operation_setFeatureValue_StructuralFeature_EInt->setName("setFeatureValue");
+	m_structuredValue_Operation_setFeatureValue_StructuralFeature_EInt->setLowerBound(1);
+	m_structuredValue_Operation_setFeatureValue_StructuralFeature_EInt->setUpperBound(1);
+	m_structuredValue_Operation_setFeatureValue_StructuralFeature_EInt->setUnique(true);
+	m_structuredValue_Operation_setFeatureValue_StructuralFeature_EInt->setOrdered(false);
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_structuredValue_Operation_setFeatureValue_StructuralFeature_EInt);
+		parameter->setName("feature");
+		parameter->setEType(nullptr);
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_structuredValue_Operation_setFeatureValue_StructuralFeature_EInt);
+		parameter->setName("values");
+		parameter->setEType(nullptr);
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_structuredValue_Operation_setFeatureValue_StructuralFeature_EInt);
+		parameter->setName("position");
+		parameter->setEType(nullptr);
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
 	
 	m_structuredValue_Operation_specify->setEType(uml::UmlPackage::eInstance()->getValueSpecification_Class());
 	m_structuredValue_Operation_specify->setName("specify");
