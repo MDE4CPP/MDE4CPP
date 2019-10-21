@@ -2611,6 +2611,10 @@ std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getReference_Operation_getTy
 {
 	return m_reference_Operation_getTypes;
 }
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getReference_Operation_getValues_StructuralFeature_FeatureValue() const
+{
+	return m_reference_Operation_getValues_StructuralFeature_FeatureValue;
+}
 std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getReference_Operation_new_() const
 {
 	return m_reference_Operation_new_;

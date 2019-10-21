@@ -7215,6 +7215,33 @@ void FUMLPackageImpl::initializeReferenceContent()
 	m_reference_Operation_getTypes->setOrdered(false);
 	
 	
+	m_reference_Operation_getValues_StructuralFeature_FeatureValue->setEType(getValue_Class());
+	m_reference_Operation_getValues_StructuralFeature_FeatureValue->setName("getValues");
+	m_reference_Operation_getValues_StructuralFeature_FeatureValue->setLowerBound(0);
+	m_reference_Operation_getValues_StructuralFeature_FeatureValue->setUpperBound(-1);
+	m_reference_Operation_getValues_StructuralFeature_FeatureValue->setUnique(true);
+	m_reference_Operation_getValues_StructuralFeature_FeatureValue->setOrdered(false);
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_reference_Operation_getValues_StructuralFeature_FeatureValue);
+		parameter->setName("feature");
+		parameter->setEType(uml::UmlPackage::eInstance()->getStructuralFeature_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_reference_Operation_getValues_StructuralFeature_FeatureValue);
+		parameter->setName("featureValues");
+		parameter->setEType(getFeatureValue_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
 	m_reference_Operation_new_->setEType(getValue_Class());
 	m_reference_Operation_new_->setName("new_");
 	m_reference_Operation_new_->setLowerBound(1);

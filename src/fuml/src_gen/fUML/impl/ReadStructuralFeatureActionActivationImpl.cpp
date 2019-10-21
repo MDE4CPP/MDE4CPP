@@ -184,21 +184,17 @@ void ReadStructuralFeatureActionActivationImpl::doAction()
 	std::shared_ptr<uml::StructuralFeature> feature = action->getStructuralFeature();
 
 	std::shared_ptr<Value> value = takeTokens(action->getObject())->at(0);
-	std::shared_ptr<Bag<Value>> resultValues(new Bag<Value>());
+	std::shared_ptr<Bag<FeatureValue>> featureValues(new Bag<FeatureValue>());
 	std::shared_ptr<StructuredValue> structuredValue = std::dynamic_pointer_cast<fUML::StructuredValue>(value);
 	if (structuredValue)
 	{
-		std::shared_ptr<FeatureValue> featureValue = structuredValue->retrieveFeatureValue(feature);
-		if (featureValue != nullptr)
-		{
-			resultValues = featureValue->getValues();
-		}
+		std::shared_ptr<Bag<Value>> values = structuredValue->getValues(feature, featureValues);
+		putTokens(action->getResult(), values);
 	}
 	else
 	{
 		throw "unhandled fUML::Value instance";
 	}
-	putTokens(action->getResult(), resultValues);
 	//end of body
 }
 

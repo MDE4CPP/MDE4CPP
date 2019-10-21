@@ -360,7 +360,7 @@
     </eOperations>
     <eOperations name="assignFeatureValue" ordered="false" lowerBound="1">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="body" value="return this->getReferent()->assignFeatureValue(feature,values,position);"/>
+        <details key="body" value="this->getReferent()->assignFeatureValue(feature,values,position);"/>
       </eAnnotations>
       <eParameters name="feature" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//StructuralFeature"/>
       <eParameters name="values" ordered="false" upperBound="-1" eType="#//Value"/>
@@ -378,11 +378,18 @@
     </eOperations>
     <eOperations name="setFeatureValue" ordered="false" lowerBound="1">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="body" value="return this->getReferent()->setFeatureValue(feature,values,position);"/>
+        <details key="body" value="this->getReferent()->setFeatureValue(feature,values,position);"/>
       </eAnnotations>
       <eParameters name="feature" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//StructuralFeature"/>
       <eParameters name="values" ordered="false" upperBound="-1" eType="#//Value"/>
       <eParameters name="position" ordered="false" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eOperations name="getValues" ordered="false" upperBound="-1" eType="#//Value">
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="return this->getReferent()->getValues(feature,featureValues);"/>
+      </eAnnotations>
+      <eParameters name="feature" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//StructuralFeature"/>
+      <eParameters name="featureValues" ordered="false" upperBound="-1" eType="#//FeatureValue"/>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="referent" ordered="false"
         lowerBound="1" eType="#//Object"/>
@@ -2200,7 +2207,7 @@
     </eAnnotations>
     <eOperations name="doAction">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="body" value="std::shared_ptr&lt;uml::ReadStructuralFeatureAction> action = std::dynamic_pointer_cast&lt;uml::ReadStructuralFeatureAction>(m_node);&#xA;&#x9;std::shared_ptr&lt;uml::StructuralFeature> feature = action->getStructuralFeature();&#xA;&#xA;&#x9;std::shared_ptr&lt;Value> value = takeTokens(action->getObject())->at(0);&#xA;&#x9;std::shared_ptr&lt;Bag&lt;Value>> resultValues(new Bag&lt;Value>());&#xA;&#x9;std::shared_ptr&lt;StructuredValue> structuredValue = std::dynamic_pointer_cast&lt;fUML::StructuredValue>(value);&#xA;&#x9;if (structuredValue)&#xA;&#x9;{&#xA;&#x9;&#x9;std::shared_ptr&lt;FeatureValue> featureValue = structuredValue->retrieveFeatureValue(feature);&#xA;&#x9;&#x9;if (featureValue != nullptr)&#xA;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;resultValues = featureValue->getValues();&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;&#x9;else&#xA;&#x9;{&#xA;&#x9;&#x9;throw &quot;unhandled fUML::Value instance&quot;;&#xA;&#x9;}&#xA;&#x9;putTokens(action->getResult(), resultValues);"/>
+        <details key="body" value="std::shared_ptr&lt;uml::ReadStructuralFeatureAction> action = std::dynamic_pointer_cast&lt;uml::ReadStructuralFeatureAction>(m_node);&#xA;&#x9;std::shared_ptr&lt;uml::StructuralFeature> feature = action->getStructuralFeature();&#xA;&#xA;&#x9;std::shared_ptr&lt;Value> value = takeTokens(action->getObject())->at(0);&#xA;&#x9;std::shared_ptr&lt;Bag&lt;FeatureValue>> featureValues(new Bag&lt;FeatureValue>());&#xA;&#x9;std::shared_ptr&lt;StructuredValue> structuredValue = std::dynamic_pointer_cast&lt;fUML::StructuredValue>(value);&#xA;&#x9;if (structuredValue)&#xA;&#x9;{&#xA;&#x9;&#x9;std::shared_ptr&lt;Bag&lt;Value>> values = structuredValue->getValues(feature, featureValues);&#xA;&#x9;&#x9;putTokens(action->getResult(), values);&#xA;&#x9;}&#xA;&#x9;else&#xA;&#x9;{&#xA;&#x9;&#x9;throw &quot;unhandled fUML::Value instance&quot;;&#xA;&#x9;}"/>
       </eAnnotations>
     </eOperations>
   </eClassifiers>

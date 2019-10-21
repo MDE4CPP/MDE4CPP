@@ -136,7 +136,7 @@ void ReferenceImpl::assignFeatureValue(std::shared_ptr<uml::StructuralFeature>  
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	return this->getReferent()->assignFeatureValue(feature,values,position);
+	this->getReferent()->assignFeatureValue(feature,values,position);
 	//end of body
 }
 
@@ -181,6 +181,14 @@ std::shared_ptr<Bag<uml::Classifier> > ReferenceImpl::getTypes()
 	//end of body
 }
 
+std::shared_ptr<Bag<fUML::Value> > ReferenceImpl::getValues(std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<Bag<fUML::FeatureValue> >  featureValues)
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	return this->getReferent()->getValues(feature,featureValues);
+	//end of body
+}
+
 std::shared_ptr<fUML::Value> ReferenceImpl::new_()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
@@ -217,7 +225,7 @@ void ReferenceImpl::setFeatureValue(std::shared_ptr<uml::StructuralFeature>  fea
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	return this->getReferent()->setFeatureValue(feature,values,position);
+	this->getReferent()->setFeatureValue(feature,values,position);
 	//end of body
 }
 

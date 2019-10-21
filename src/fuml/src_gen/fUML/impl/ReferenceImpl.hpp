@@ -64,6 +64,10 @@ namespace fUML
 			
 			/*!
 			 */ 
+			virtual std::shared_ptr<Bag<fUML::Value> > getValues(std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<Bag<fUML::FeatureValue> >  featureValues) ;
+			
+			/*!
+			 */ 
 			virtual std::shared_ptr<fUML::Value> new_() ;
 			
 			/*!

@@ -2426,7 +2426,7 @@ namespace fUML
 			//Class and Feature IDs 
 			static const unsigned int REFERENCE_CLASS = 98;
 			static const unsigned int REFERENCE_CLASS_FEATURE_COUNT = 1;
-			static const unsigned int REFERENCE_CLASS_OPERATION_COUNT = 28;
+			static const unsigned int REFERENCE_CLASS_OPERATION_COUNT = 29;
 			
 			static const int REFERENCE_ATTRIBUTE_REFERENT = 9800;
 			
@@ -2435,6 +2435,7 @@ namespace fUML
 			static const int REFERENCE_OPERATION_DISPATCH_OPERATION = 9818;
 			static const int REFERENCE_OPERATION_EQUALS_VALUE = 9821;
 			static const int REFERENCE_OPERATION_GETTYPES = 9823;
+			static const int REFERENCE_OPERATION_GETVALUES_STRUCTURALFEATURE_FEATUREVALUE = 9829;
 			static const int REFERENCE_OPERATION_NEW_ = 9822;
 			static const int REFERENCE_OPERATION_RETRIEVEFEATUREVALUE_STRUCTURALFEATURE = 9824;
 			static const int REFERENCE_OPERATION_RETRIEVEFEATUREVALUES = 9826;
@@ -2454,6 +2455,7 @@ namespace fUML
 			virtual std::shared_ptr<ecore::EOperation> getReference_Operation_dispatch_Operation() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getReference_Operation_equals_Value() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getReference_Operation_getTypes() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getReference_Operation_getValues_StructuralFeature_FeatureValue() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getReference_Operation_new_() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getReference_Operation_retrieveFeatureValue_StructuralFeature() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getReference_Operation_retrieveFeatureValues() const = 0;

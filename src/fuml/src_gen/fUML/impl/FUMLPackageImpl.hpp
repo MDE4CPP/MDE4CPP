@@ -1402,6 +1402,7 @@ namespace fUML
 			virtual std::shared_ptr<ecore::EOperation> getReference_Operation_dispatch_Operation() const ;
 			virtual std::shared_ptr<ecore::EOperation> getReference_Operation_equals_Value() const ;
 			virtual std::shared_ptr<ecore::EOperation> getReference_Operation_getTypes() const ;
+			virtual std::shared_ptr<ecore::EOperation> getReference_Operation_getValues_StructuralFeature_FeatureValue() const ;
 			virtual std::shared_ptr<ecore::EOperation> getReference_Operation_new_() const ;
 			virtual std::shared_ptr<ecore::EOperation> getReference_Operation_retrieveFeatureValue_StructuralFeature() const ;
 			virtual std::shared_ptr<ecore::EOperation> getReference_Operation_retrieveFeatureValues() const ;
@@ -2039,6 +2040,7 @@ namespace fUML
 			std::shared_ptr<ecore::EOperation> m_forkedToken_Operation_getValue = nullptr;
 			std::shared_ptr<ecore::EOperation> m_controlToken_Operation_getValue = nullptr;
 			std::shared_ptr<ecore::EOperation> m_structuredValue_Operation_getValues_StructuralFeature_FeatureValue = nullptr;
+			std::shared_ptr<ecore::EOperation> m_reference_Operation_getValues_StructuralFeature_FeatureValue = nullptr;
 			std::shared_ptr<ecore::EOperation> m_featureValue_Operation_hasEqualValues_FeatureValue = nullptr;
 			std::shared_ptr<ecore::EOperation> m_decisionNodeActivation_Operation_hasObjectFlowInput = nullptr;
 			std::shared_ptr<ecore::EOperation> m_activityEdgeInstance_Operation_hasOffer = nullptr;
