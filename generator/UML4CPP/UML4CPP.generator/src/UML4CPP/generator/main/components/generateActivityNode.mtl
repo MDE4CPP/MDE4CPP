@@ -111,6 +111,20 @@
 [/template]
 
 [**
+ * generate elements for ValueSpecificationAction
+*/]
+[template private generateActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(ValueSpecificationAction))]
+[let action : ValueSpecificationAction = self.oclAsType(ValueSpecificationAction)]
+[if (action.result.oclIsUndefined())]
+['UML4CPP_Generation Error: ValueSpecificationAction: '.concat(action.name).concat('result pin is undefined.').registerError()/]
+[else]
+	[action.result.memberName()/] = factory->create[action.result.eClass().name/]_in_ValueSpecificationAction([action.result.owner.oclAsType(NamedElement).memberName()/]);
+	[action.memberName()/]->getOutput()->push_back([action.result.memberName()/]); // subset/union in not implemented for upper=1
+[/if]
+[/let]
+[/template]
+
+[**
  * generate creation of meta model instances used by Action
  * 
  * this includes:
@@ -278,13 +292,14 @@
  * - set output if defined
 */]
 [template private initializeActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(ValueSpecificationAction))]
-[if (not anActivityNode.oclAsType(ValueSpecificationAction).value.oclIsUndefined())]
-[anActivityNode.memberName()/]->setValue([memberName(anActivityNode.oclAsType(ValueSpecificationAction).value)/]);
+[let action : ValueSpecificationAction = self.oclAsType(ValueSpecificationAction)]
+[action.output.initializePin()/]
+[if (action.value.oclIsUndefined())]
+['UML4CPP_Generation Error: ValueSpecificationAction: '.concat(action.name).concat('value pin is undefined.').registerError()/]
+[else]
+[action.memberName()/]->setValue([action.value.memberName()/]);
 [/if]
-[if (not anActivityNode.oclAsType(ValueSpecificationAction).result.oclIsUndefined())]
-[anActivityNode.oclAsType(ValueSpecificationAction).result.memberName()/]->setName("[anActivityNode.oclAsType(ValueSpecificationAction).name/]");
-[memberName(anActivityNode)/]->getOutput()->push_back([anActivityNode.oclAsType(ValueSpecificationAction).result.memberName()/]);
-[/if]
+[/let]
 [/template]
 
 [**
