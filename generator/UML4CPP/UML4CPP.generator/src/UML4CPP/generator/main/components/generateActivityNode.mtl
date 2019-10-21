@@ -143,6 +143,26 @@
 [/template]
 
 [**
+ * generate elements for ReadStructuralFeatureAction
+*/]
+[template private generateActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(ReadStructuralFeatureAction))]
+[let action : ReadStructuralFeatureAction = self.oclAsType(ReadStructuralFeatureAction)]
+[if (action.object.oclIsUndefined())]
+['UML4CPP_Generation Error: ReadStructuralFeatureAction: '.concat(action.name).concat('object pin is undefined.').registerError()/]
+[else]
+	[action.object.memberName()/] = factory->create[action.object.eClass().name/]_in_StructuralFeatureAction([action.object.owner.oclAsType(NamedElement).memberName()/]);
+	[action.memberName()/]->getInput()->push_back([action.object.memberName()/]); // subset/union in not implemented for upper=1
+[/if]
+[if (action.result.oclIsUndefined())]
+['UML4CPP_Generation Error: ReadStructuralFeatureAction: '.concat(action.name).concat('result pin is undefined.').registerError()/]
+[else]
+	[action.result.memberName()/] = factory->create[action.result.eClass().name/]_in_ReadStructuralFeatureAction([action.result.owner.oclAsType(NamedElement).memberName()/]);
+	[action.memberName()/]->getOutput()->push_back([action.result.memberName()/]); // subset/union in not implemented for upper=1
+[/if]
+[/let]
+[/template]
+
+[**
  * generate elements for RemoveStructuralFeatureValueAction
 */]
 [template private generateActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(RemoveStructuralFeatureValueAction))]
@@ -320,6 +340,21 @@
 [template private initializeActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(ReadSelfAction))]
 [let action : ReadSelfAction = self.oclAsType(ReadSelfAction)]
 [action.output.initializePin()/]
+[/let]
+[/template]
+
+[**
+ * generate initialization of meta model instance for an ReadStructuralFeatureAction element
+ * 
+ * this includes:
+ * - initialize pins
+ * - set structuralFeature
+*/]
+[template private initializeActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(ReadStructuralFeatureAction))]
+[let action : ReadStructuralFeatureAction = self.oclAsType(ReadStructuralFeatureAction)]
+	[action.input.initializePin()/]
+	[action.output.initializePin()/]
+	[action.memberName()/]->setStructuralFeature([action.structuralFeature.memberName()/]);
 [/let]
 [/template]
 
