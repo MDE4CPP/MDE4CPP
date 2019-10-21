@@ -33,6 +33,8 @@
 #include "[aPackage.getPackageName()/]/[aPackage.getPackageName()/]Package.hpp"
 
 #include "abstractDataTypes/Any.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/Value.hpp"
 [for (aType : Type | aClassifier.allAttributes().type->sortedBy(qualifiedName))]
 [if (aType.oclIsKindOf(PrimitiveType))]
 #include "fUML/[aType.name.toUpperFirst()/]Value.hpp"
@@ -101,6 +103,39 @@ void [className/]::setThis[className/]Ptr(std::weak_ptr<[className/]> thisObject
 	setThisObjectPtr(thisObjectPtr);
 }
 
+std::shared_ptr<Bag<fUML::Value>> [className/]::getValues(std::shared_ptr<uml::StructuralFeature> feature, std::shared_ptr<Bag<fUML::FeatureValue>> featureValues)
+{
+	std::shared_ptr<uml::Property> property = std::dynamic_pointer_cast<uml::Property>(feature);
+	if (property == nullptr)
+	{
+		std::cerr << __PRETTY_FUNCTION__ << ": feature is null or not kind of uml::Property" << std::endl;
+		throw "feature is null or not kind of uml::Property";
+	}
+
+	if (m_umlValue == nullptr)
+	{
+		std::cerr << __PRETTY_FUNCTION__ << ": not implemented for upper != 1" << std::endl;
+		throw "UnsupportedParameterException";	
+	}
+
+	std::shared_ptr<Bag<fUML::Value>> values(new Bag<fUML::Value>());
+	std::shared_ptr<[aPackage.getPackageName().toUpperFirst()/]Package> package = [aPackage.getPackageName().toUpperFirst()/]Package::eInstance();
+[for (aProperty : Property | aClassifier.allAttributes())]
+	if (property == package->[aProperty.generatePackageGetterCall(aProperty)/])
+	{
+[if (aProperty.isPrimitiveTypedProperty())]
+		std::shared_ptr<[aProperty.type.getValueClass()/]> value = fUML::FUMLFactory::eInstance()->create[aProperty.type.name.toUpperFirst()/]Value();
+		value->setValue(m_umlValue->[aProperty.getterName()/]());
+[else]
+		std::shared_ptr<[aProperty.type.getValueClass()/]> value(new [aProperty.type.oclAsType(Classifier).objectClassName()/]());
+		value->setUmlValue[if (aProperty.upper <> 1)]s[/if](m_umlValue->[aProperty.getterName()/]());
+[/if]
+		values->add(value);
+	}
+[/for]	
+	return values;
+}
+
 void [className/]::setFeatureValue(std::shared_ptr<uml::StructuralFeature> feature, std::shared_ptr<Bag<fUML::Value>> values, int position)
 {
 	std::shared_ptr<uml::Property> property = std::dynamic_pointer_cast<uml::Property>(feature);
@@ -128,10 +163,14 @@ void [className/]::setFeatureValue(std::shared_ptr<uml::StructuralFeature> featu
 		std::shared_ptr<[aProperty.type.getValueClass()/]> value = std::dynamic_pointer_cast<[aProperty.type.getValueClass()/]>(inputValue);
 		if (value != nullptr)
 		{
-[if (aProperty.upper = 1)]
-			m_umlValue->[aProperty.setterName()/](value->get[if (aProperty.isNotPrimitiveTypedProperty())]Uml[/if]Value());
+[if (aProperty.isPrimitiveTypedProperty())]
+			m_umlValue->[aProperty.setterName()/](value->getValue());
 [else]
-			m_umlValue->[aProperty.getterName()/]()->push_back(value->get[if (aProperty.isNotPrimitiveTypedProperty())]Uml[/if]Value());
+[if (aProperty.upper = 1)]
+			m_umlValue->[aProperty.setterName()/](value->getUmlValue());
+[else]
+			m_umlValue->[aProperty.getterName()/]()->push_back(value->getUmlValue());
+[/if]
 [/if]
 		}
 	}
@@ -141,4 +180,4 @@ void [className/]::setFeatureValue(std::shared_ptr<uml::StructuralFeature> featu
 [/template]
 
 [query private getValueClass(aType : Type) : String = if (aType.oclIsKindOf(PrimitiveType)) then 'fUML::'.concat(aType.name.toUpperFirst()).concat('Value') else aType.oclAsType(Classifier).objectClassName() endif /]
-[query private isNotPrimitiveTypedProperty(aProperty : Property) : Boolean = not aProperty.type.oclIsKindOf(PrimitiveType) /] 
+[query private isPrimitiveTypedProperty(aProperty : Property) : Boolean = aProperty.type.oclIsKindOf(PrimitiveType) /] 
