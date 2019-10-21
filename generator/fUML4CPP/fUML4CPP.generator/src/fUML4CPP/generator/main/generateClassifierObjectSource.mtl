@@ -197,11 +197,14 @@ std::shared_ptr<Bag<fUML::Value>> [className/]::getValues(std::shared_ptr<uml::S
 [if (aProperty.isPrimitiveTypedProperty())]
 		std::shared_ptr<[aProperty.type.getValueClass()/]> value = fUML::FUMLFactory::eInstance()->create[aProperty.type.name.toUpperFirst()/]Value();
 		value->setValue(m_umlValue->[aProperty.getterName()/]());
+		values->add(value);
 [else]
 		std::shared_ptr<[aProperty.type.getValueClass()/]> value(new [aProperty.type.oclAsType(Classifier).objectClassName()/]());
 		value->setUmlValue[if (aProperty.upper <> 1)]s[/if](m_umlValue->[aProperty.getterName()/]());
+		std::shared_ptr<fUML::Reference> reference= fUML::FUMLFactory::eInstance()->createReference();
+		reference->setReferent(value);
+		values->add(reference);
 [/if]
-		values->add(value);
 	}
 [/for]	
 	return values;
