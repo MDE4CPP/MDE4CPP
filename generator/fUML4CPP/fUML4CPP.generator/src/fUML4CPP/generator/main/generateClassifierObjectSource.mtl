@@ -121,7 +121,7 @@ void [className/]::assignFeatureValue(std::shared_ptr<uml::StructuralFeature> fe
 		return;
 	}
 	std::shared_ptr<Value> inputValue = values->at(0);
-	std::shared_ptr<[aPackage.getPackageName()/]Package> package = [aPackage.getPackageName()/]Package::eInstance();
+	std::shared_ptr<[aPackage.getPackageName().toUpperFirst()/]Package> package = [aPackage.getPackageName().toUpperFirst()/]Package::eInstance();
 [for (aProperty : Property | aClassifier.allAttributes())]
 	if (property == package->[aProperty.generatePackageGetterCall(aProperty)/])
 	{
