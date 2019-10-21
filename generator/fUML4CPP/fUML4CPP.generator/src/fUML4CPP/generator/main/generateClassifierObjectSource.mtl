@@ -101,7 +101,7 @@ void [className/]::setThis[className/]Ptr(std::weak_ptr<[className/]> thisObject
 	setThisObjectPtr(thisObjectPtr);
 }
 
-void [className/]::assignFeatureValue(std::shared_ptr<uml::StructuralFeature> feature, std::shared_ptr<Bag<fUML::Value>> values, int position)
+void [className/]::setFeatureValue(std::shared_ptr<uml::StructuralFeature> feature, std::shared_ptr<Bag<fUML::Value>> values, int position)
 {
 	std::shared_ptr<uml::Property> property = std::dynamic_pointer_cast<uml::Property>(feature);
 	if (property == nullptr)

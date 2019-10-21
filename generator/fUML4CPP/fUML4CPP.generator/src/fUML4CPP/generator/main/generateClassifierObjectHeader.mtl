@@ -56,7 +56,7 @@ namespace [aPackage.name/]
 			virtual void setUmlValue(std::shared_ptr<[pointerName/]>);
 			virtual void setUmlValues(std::shared_ptr<Bag<[pointerName/]>>);;
 			virtual void setThis[className/]Ptr(std::weak_ptr<[className/]> thisObjectPtr);
-			virtual void assignFeatureValue(std::shared_ptr<uml::StructuralFeature> feature, std::shared_ptr<Bag<fUML::Value>> values, int position);
+			virtual void setFeatureValue(std::shared_ptr<uml::StructuralFeature> feature, std::shared_ptr<Bag<fUML::Value>> values, int position);
 		
 		protected:
 			std::shared_ptr<[pointerName/]> m_umlValue = nullptr;
