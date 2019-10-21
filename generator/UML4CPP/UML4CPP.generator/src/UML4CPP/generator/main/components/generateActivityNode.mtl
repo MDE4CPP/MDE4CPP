@@ -68,7 +68,6 @@
 [/let]
 [/template]
 
-
 [**
  * generate elements for CallBehaviorAction
 */]
@@ -144,6 +143,36 @@
 [/template]
 
 [**
+ * generate elements for RemoveStructuralFeatureValueAction
+*/]
+[template private generateActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(RemoveStructuralFeatureValueAction))]
+[let action : RemoveStructuralFeatureValueAction = self.oclAsType(RemoveStructuralFeatureValueAction)]
+[if (action.object.oclIsUndefined())]
+['UML4CPP_Generation Error: RemoveStructuralFeatureValueAction: '.concat(action.name).concat('object pin is undefined.').registerError()/]
+[else]
+	[action.object.memberName()/] = factory->create[action.object.eClass().name/]_in_StructuralFeatureAction([action.object.owner.oclAsType(NamedElement).memberName()/]);
+	[action.memberName()/]->getInput()->push_back([action.object.memberName()/]); // subset/union in not implemented for upper=1
+[/if]
+[if (action.value.oclIsUndefined())]
+['UML4CPP_Generation Error: RemoveStructuralFeatureValueAction: '.concat(action.name).concat('value pin is undefined.').registerError()/]
+[else]
+	[action.value.memberName()/] = factory->create[action.value.eClass().name/]_in_WriteStructuralFeatureAction([action.value.owner.oclAsType(NamedElement).memberName()/]);
+	[action.memberName()/]->getInput()->push_back([action.value.memberName()/]); // subset/union in not implemented for upper=1
+[/if]
+[if (action.result.oclIsUndefined())]
+['UML4CPP_Generation Error: RemoveStructuralFeatureValueAction: '.concat(action.name).concat('result pin is undefined.').registerError()/]
+[else]
+	[action.result.memberName()/] = factory->create[action.result.eClass().name/]_in_WriteStructuralFeatureAction([action.result.owner.oclAsType(NamedElement).memberName()/]);
+	[action.memberName()/]->getOutput()->push_back([action.result.memberName()/]); // subset/union in not implemented for upper=1
+[/if]
+[if (not action.removeAt.oclIsUndefined())]
+	[action.removeAt.memberName()/] = factory->create[action.removeAt.eClass().name/]_in_AddStructuralFeatureValueAction([action.removeAt.owner.oclAsType(NamedElement).memberName()/]);
+	[action.memberName()/]->getInput()->push_back([action.removeAt.memberName()/]); // subset/union in not implemented for upper=1
+[/if]
+[/let]
+[/template]
+
+[**
  * generate elements for ValueSpecificationAction
 */]
 [template private generateActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(ValueSpecificationAction))]
@@ -204,7 +233,6 @@
  * generate initialization of meta model instance for an AddStructuralFeatureValueAction element
  * 
  * this includes:
- * - add object pin to input
  * - initialize pins
  * - set structuralFeature
  * - set isReplaceAll
@@ -292,6 +320,23 @@
 [template private initializeActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(ReadSelfAction))]
 [let action : ReadSelfAction = self.oclAsType(ReadSelfAction)]
 [action.output.initializePin()/]
+[/let]
+[/template]
+
+[**
+ * generate initialization of meta model instance for an RemoveStructuralFeatureValueAction element
+ * 
+ * this includes:
+ * - initialize pins
+ * - set structuralFeature
+ * - set isRemoveDuplicates
+*/]
+[template private initializeActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(RemoveStructuralFeatureValueAction))]
+[let action : RemoveStructuralFeatureValueAction = self.oclAsType(RemoveStructuralFeatureValueAction)]
+	[action.input.initializePin()/]
+	[action.output.initializePin()/]
+	[action.memberName()/]->setStructuralFeature([action.structuralFeature.memberName()/]);
+	[action.memberName()/]->setIsRemoveDuplicates([action.isRemoveDuplicates/]);
 [/let]
 [/template]
 
