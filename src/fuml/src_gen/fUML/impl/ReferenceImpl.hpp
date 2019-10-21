@@ -72,6 +72,10 @@ namespace fUML
 			
 			/*!
 			 */ 
+			virtual void removeValue(std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<fUML::Value>  values) ;
+			
+			/*!
+			 */ 
 			virtual std::shared_ptr<fUML::FeatureValue> retrieveFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature) ;
 			
 			/*!

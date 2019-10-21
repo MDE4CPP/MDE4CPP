@@ -2426,7 +2426,7 @@ namespace fUML
 			//Class and Feature IDs 
 			static const unsigned int REFERENCE_CLASS = 98;
 			static const unsigned int REFERENCE_CLASS_FEATURE_COUNT = 1;
-			static const unsigned int REFERENCE_CLASS_OPERATION_COUNT = 29;
+			static const unsigned int REFERENCE_CLASS_OPERATION_COUNT = 30;
 			
 			static const int REFERENCE_ATTRIBUTE_REFERENT = 9800;
 			
@@ -2437,6 +2437,7 @@ namespace fUML
 			static const int REFERENCE_OPERATION_GETTYPES = 9823;
 			static const int REFERENCE_OPERATION_GETVALUES_STRUCTURALFEATURE_FEATUREVALUE = 9829;
 			static const int REFERENCE_OPERATION_NEW_ = 9822;
+			static const int REFERENCE_OPERATION_REMOVEVALUE_STRUCTURALFEATURE_VALUE = 9830;
 			static const int REFERENCE_OPERATION_RETRIEVEFEATUREVALUE_STRUCTURALFEATURE = 9824;
 			static const int REFERENCE_OPERATION_RETRIEVEFEATUREVALUES = 9826;
 			static const int REFERENCE_OPERATION_SEND_SIGNALINSTANCE = 9819;
@@ -2457,6 +2458,7 @@ namespace fUML
 			virtual std::shared_ptr<ecore::EOperation> getReference_Operation_getTypes() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getReference_Operation_getValues_StructuralFeature_FeatureValue() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getReference_Operation_new_() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getReference_Operation_removeValue_StructuralFeature_Value() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getReference_Operation_retrieveFeatureValue_StructuralFeature() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getReference_Operation_retrieveFeatureValues() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getReference_Operation_send_SignalInstance() const = 0;
@@ -2705,7 +2707,7 @@ namespace fUML
 			static const int STRUCTUREDVALUE_OPERATION_ASSIGNFEATUREVALUE_STRUCTURALFEATURE_EINT = 10909;
 			static const int STRUCTUREDVALUE_OPERATION_CREATEFEATUREVALUES = 10911;
 			static const int STRUCTUREDVALUE_OPERATION_GETVALUES_STRUCTURALFEATURE_FEATUREVALUE = 10914;
-			static const int STRUCTUREDVALUE_OPERATION_REMOVEFEATUREVALUE_STRUCTURALFEATURE_BOOLEAN = 10915;
+			static const int STRUCTUREDVALUE_OPERATION_REMOVEVALUE_STRUCTURALFEATURE_VALUE = 10915;
 			static const int STRUCTUREDVALUE_OPERATION_RETRIEVEFEATUREVALUE_STRUCTURALFEATURE = 10908;
 			static const int STRUCTUREDVALUE_OPERATION_RETRIEVEFEATUREVALUES = 10910;
 			static const int STRUCTUREDVALUE_OPERATION_SETFEATUREVALUE_STRUCTURALFEATURE_EINT = 10913;
@@ -2719,7 +2721,7 @@ namespace fUML
 			virtual std::shared_ptr<ecore::EOperation> getStructuredValue_Operation_assignFeatureValue_StructuralFeature_EInt() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getStructuredValue_Operation_createFeatureValues() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getStructuredValue_Operation_getValues_StructuralFeature_FeatureValue() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getStructuredValue_Operation_removeFeatureValue_StructuralFeature_Boolean() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getStructuredValue_Operation_removeValue_StructuralFeature_Value() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getStructuredValue_Operation_retrieveFeatureValue_StructuralFeature() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getStructuredValue_Operation_retrieveFeatureValues() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getStructuredValue_Operation_setFeatureValue_StructuralFeature_EInt() const = 0;

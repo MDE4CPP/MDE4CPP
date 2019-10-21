@@ -56,7 +56,7 @@ namespace fUML
 			
 			/*!
 			 */ 
-			virtual void removeFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<Bag<fUML::Value> >  values,bool isRemoveDuplicates) ;
+			virtual void removeValue(std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<fUML::Value>  values) ;
 			
 			/*!
 			 */ 

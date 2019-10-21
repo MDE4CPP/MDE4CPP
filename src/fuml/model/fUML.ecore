@@ -301,11 +301,10 @@
       <eParameters name="feature" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//StructuralFeature"/>
       <eParameters name="featureValues" ordered="false" upperBound="-1" eType="#//FeatureValue"/>
     </eOperations>
-    <eOperations name="removeFeatureValue" ordered="false" lowerBound="1">
+    <eOperations name="removeValue" ordered="false" lowerBound="1">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen"/>
       <eParameters name="feature" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//StructuralFeature"/>
-      <eParameters name="values" ordered="false" upperBound="-1" eType="#//Value"/>
-      <eParameters name="isRemoveDuplicates" eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//Boolean"/>
+      <eParameters name="values" ordered="false" lowerBound="1" eType="#//Value"/>
     </eOperations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Reference" eSuperTypes="#//StructuredValue">
@@ -390,6 +389,13 @@
       </eAnnotations>
       <eParameters name="feature" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//StructuralFeature"/>
       <eParameters name="featureValues" ordered="false" upperBound="-1" eType="#//FeatureValue"/>
+    </eOperations>
+    <eOperations name="removeValue" ordered="false" lowerBound="1">
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="this->getReferent()->removeValue(feature, values);"/>
+      </eAnnotations>
+      <eParameters name="feature" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//StructuralFeature"/>
+      <eParameters name="values" ordered="false" lowerBound="1" eType="#//Value"/>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="referent" ordered="false"
         lowerBound="1" eType="#//Object"/>

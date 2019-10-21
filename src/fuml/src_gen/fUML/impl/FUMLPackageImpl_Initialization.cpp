@@ -7250,6 +7250,33 @@ void FUMLPackageImpl::initializeReferenceContent()
 	m_reference_Operation_new_->setOrdered(false);
 	
 	
+	m_reference_Operation_removeValue_StructuralFeature_Value->setEType(nullptr);
+	m_reference_Operation_removeValue_StructuralFeature_Value->setName("removeValue");
+	m_reference_Operation_removeValue_StructuralFeature_Value->setLowerBound(1);
+	m_reference_Operation_removeValue_StructuralFeature_Value->setUpperBound(1);
+	m_reference_Operation_removeValue_StructuralFeature_Value->setUnique(true);
+	m_reference_Operation_removeValue_StructuralFeature_Value->setOrdered(false);
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_reference_Operation_removeValue_StructuralFeature_Value);
+		parameter->setName("feature");
+		parameter->setEType(nullptr);
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_reference_Operation_removeValue_StructuralFeature_Value);
+		parameter->setName("values");
+		parameter->setEType(nullptr);
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
 	m_reference_Operation_retrieveFeatureValue_StructuralFeature->setEType(getFeatureValue_Class());
 	m_reference_Operation_retrieveFeatureValue_StructuralFeature->setName("retrieveFeatureValue");
 	m_reference_Operation_retrieveFeatureValue_StructuralFeature->setLowerBound(1);
@@ -7956,15 +7983,15 @@ void FUMLPackageImpl::initializeStructuredValueContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_structuredValue_Operation_removeFeatureValue_StructuralFeature_Boolean->setEType(nullptr);
-	m_structuredValue_Operation_removeFeatureValue_StructuralFeature_Boolean->setName("removeFeatureValue");
-	m_structuredValue_Operation_removeFeatureValue_StructuralFeature_Boolean->setLowerBound(1);
-	m_structuredValue_Operation_removeFeatureValue_StructuralFeature_Boolean->setUpperBound(1);
-	m_structuredValue_Operation_removeFeatureValue_StructuralFeature_Boolean->setUnique(true);
-	m_structuredValue_Operation_removeFeatureValue_StructuralFeature_Boolean->setOrdered(false);
+	m_structuredValue_Operation_removeValue_StructuralFeature_Value->setEType(nullptr);
+	m_structuredValue_Operation_removeValue_StructuralFeature_Value->setName("removeValue");
+	m_structuredValue_Operation_removeValue_StructuralFeature_Value->setLowerBound(1);
+	m_structuredValue_Operation_removeValue_StructuralFeature_Value->setUpperBound(1);
+	m_structuredValue_Operation_removeValue_StructuralFeature_Value->setUnique(true);
+	m_structuredValue_Operation_removeValue_StructuralFeature_Value->setOrdered(false);
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_structuredValue_Operation_removeFeatureValue_StructuralFeature_Boolean);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_structuredValue_Operation_removeValue_StructuralFeature_Value);
 		parameter->setName("feature");
 		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);
@@ -7974,18 +8001,8 @@ void FUMLPackageImpl::initializeStructuredValueContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_structuredValue_Operation_removeFeatureValue_StructuralFeature_Boolean);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_structuredValue_Operation_removeValue_StructuralFeature_Value);
 		parameter->setName("values");
-		parameter->setEType(nullptr);
-		parameter->setLowerBound(0);
-		parameter->setUpperBound(1);
-		parameter->setUnique(true);
-		parameter->setOrdered(true);
-	}
-	
-	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_structuredValue_Operation_removeFeatureValue_StructuralFeature_Boolean);
-		parameter->setName("isRemoveDuplicates");
 		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);
 		parameter->setUpperBound(1);

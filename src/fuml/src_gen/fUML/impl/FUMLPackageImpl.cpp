@@ -2619,6 +2619,10 @@ std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getReference_Operation_new_(
 {
 	return m_reference_Operation_new_;
 }
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getReference_Operation_removeValue_StructuralFeature_Value() const
+{
+	return m_reference_Operation_removeValue_StructuralFeature_Value;
+}
 std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getReference_Operation_retrieveFeatureValue_StructuralFeature() const
 {
 	return m_reference_Operation_retrieveFeatureValue_StructuralFeature;
@@ -2892,9 +2896,9 @@ std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getStructuredValue_Operation
 {
 	return m_structuredValue_Operation_getValues_StructuralFeature_FeatureValue;
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getStructuredValue_Operation_removeFeatureValue_StructuralFeature_Boolean() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getStructuredValue_Operation_removeValue_StructuralFeature_Value() const
 {
-	return m_structuredValue_Operation_removeFeatureValue_StructuralFeature_Boolean;
+	return m_structuredValue_Operation_removeValue_StructuralFeature_Value;
 }
 std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getStructuredValue_Operation_retrieveFeatureValue_StructuralFeature() const
 {
