@@ -32,8 +32,10 @@
  * - creation of derived element specific artefacts by calling template generateActivityNodeSpecial
 */]
 [template public generateActivityNodeCreation(anActivityNode : ActivityNode)]
+//ActivityNode [anActivityNode.name /] ([anActivityNode.eClass().name/])
 [anActivityNode.memberName()/] = factory->create[anActivityNode.eClass().name/]_in_Activity([anActivityNode.owner.oclAsType(NamedElement).memberName()/]);
 [anActivityNode.generateActivityNodeSpecial()/]
+
 [/template]
 
 [**
@@ -44,7 +46,6 @@
  * - creation of Output pins
 */]
 [template private generateActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(Action) and not oclIsKindOf(AddStructuralFeatureValueAction))]
-//Action [anActivityNode.name /]
 [anActivityNode.oclAsType(Action).input->sortedBy(name).generatePin()/]
 [anActivityNode.oclAsType(Action).output->sortedBy(name).generatePin()/]
 [if (anActivityNode.oclIsKindOf(CreateObjectAction))]
@@ -63,16 +64,15 @@
 */]
 [template private generateActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(AddStructuralFeatureValueAction))]
 [let action : AddStructuralFeatureValueAction = self.oclAsType(AddStructuralFeatureValueAction)]
-	// TODO add missing opposite references in UML.ecore and fix called creation function
-	[action.object.memberName()/] = factory->create[action.object.eClass().name/]_in_Action([action.object.owner.oclAsType(NamedElement).memberName()/]);
-	[action.memberName()/]->setObject([action.object.memberName()/]); // subset/union does not work with upper=1 //getInput()->push_back
-	[action.value.memberName()/] = factory->create[action.value.eClass().name/]_in_Action([action.value.owner.oclAsType(NamedElement).memberName()/]);
-	[action.memberName()/]->setValue([action.value.memberName()/]); // subset/union does not work with upper=1 //getInput()->push_back
-	[action.result.memberName()/] = factory->create[action.result.eClass().name/]_in_Action([action.result.owner.oclAsType(NamedElement).memberName()/]);
-	[action.memberName()/]->setResult([action.result.memberName()/]); // subset/union does not work with upper=1 // getInput()->push_back
+	[action.object.memberName()/] = factory->create[action.object.eClass().name/]_in_StructuralFeatureAction([action.object.owner.oclAsType(NamedElement).memberName()/]);
+	[action.memberName()/]->getInput()->push_back([action.object.memberName()/]); // subset/union in not implemented for upper=1
+	[action.value.memberName()/] = factory->create[action.value.eClass().name/]_in_WriteStructuralFeatureAction([action.value.owner.oclAsType(NamedElement).memberName()/]);
+	[action.memberName()/]->getInput()->push_back([action.value.memberName()/]); // subset/union in not implemented for upper=1
+	[action.result.memberName()/] = factory->create[action.result.eClass().name/]_in_WriteStructuralFeatureAction([action.result.owner.oclAsType(NamedElement).memberName()/]);
+	[action.memberName()/]->getOutput()->push_back([action.result.memberName()/]); // subset/union in not implemented for upper=1
 [if (not action.insertAt.oclIsUndefined())]
-	[action.insertAt.memberName()/] = factory->create[action.insertAt.eClass().name/]_in_Action([action.insertAt.owner.oclAsType(NamedElement).memberName()/]);
-	[action.memberName()/]->getInsertAt()->push_back([action.insertAt.memberName()/]); 
+	[action.insertAt.memberName()/] = factory->create[action.insertAt.eClass().name/]_in_AddStructuralFeatureValueAction([action.insertAt.owner.oclAsType(NamedElement).memberName()/]);
+	[action.memberName()/]->getInput()->push_back([action.insertAt.memberName()/]); // subset/union in not implemented for upper=1
 [/if]
 [/let]
 [/template]
