@@ -45,12 +45,9 @@
  * - creation of Input pins
  * - creation of Output pins
 */]
-[template private generateActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(Action) and not oclIsKindOf(AddStructuralFeatureValueAction) and not oclIsKindOf(CreateObjectAction))]
+[template private generateActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(Action) and not oclIsKindOf(AddStructuralFeatureValueAction) and not oclIsKindOf(CreateObjectAction) and not oclIsKindOf(ReadSelfAction))]
 [anActivityNode.oclAsType(Action).input->sortedBy(name).generatePin()/]
 [anActivityNode.oclAsType(Action).output->sortedBy(name).generatePin()/]
-[if (anActivityNode.oclIsKindOf(ReadSelfAction))]
-	[anActivityNode.oclAsType(ReadSelfAction).generateReadSelfActionCommands()/]
-[/if]
 [if (anActivityNode.oclIsKindOf(DestroyObjectAction))]
 	[anActivityNode.oclAsType(DestroyObjectAction).generateDestroyObjectActionCommands()/]
 [/if]
@@ -79,8 +76,26 @@
 */]
 [template private generateActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(CreateObjectAction))]
 [let action : CreateObjectAction = self.oclAsType(CreateObjectAction)]
+[if (action.result.oclIsUndefined())]
+['UML4CPP_Generation Error: CreateObjectAction: '.concat(action.name).concat('result pin is undefined.').registerError()/]
+[else]
 	[action.result.memberName()/] = factory->create[action.result.eClass().name/]_in_CreateObjectAction([action.result.owner.oclAsType(NamedElement).memberName()/]);
 	[action.memberName()/]->getOutput()->push_back([action.result.memberName()/]); // subset/union in not implemented for upper=1
+[/if]
+[/let]
+[/template]
+
+[**
+ * generate elements for ReadSelfAction
+*/]
+[template private generateActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(ReadSelfAction))]
+[let action : ReadSelfAction = self.oclAsType(ReadSelfAction)]
+[if (action.result.oclIsUndefined())]
+['UML4CPP_Generation Error: ReadSelfAction: '.concat(action.name).concat('result pin is undefined.').registerError()/]
+[else]
+	[action.result.memberName()/] = factory->create[action.result.eClass().name/]_in_ReadSelfAction([action.result.owner.oclAsType(NamedElement).memberName()/]);
+	[action.memberName()/]->getOutput()->push_back([action.result.memberName()/]); // subset/union in not implemented for upper=1
+[/if]
 [/let]
 [/template]
 
@@ -112,17 +127,7 @@
 [/if]
 [/template]
 
-[**
- * generate elements for ReadSelfAction
-*/]
-[template private generateReadSelfActionCommands(aReadSelfAction : ReadSelfAction)]
-[if (aReadSelfAction.result.oclIsUndefined())]
-['UML4CPP_Generation Error: ReadSelfAction: '.concat(aReadSelfAction.name).concat(' result pin invalid.').registerError()/]
-[else]
-[aReadSelfAction.result.memberName()/]->setName("[aReadSelfAction.result.name/]");
-[aReadSelfAction.memberName()/]->setResult([aReadSelfAction.result.memberName()/]);
-[/if]
-[/template]
+
 
 [**
  * generate elements for DestroyObjectAction
@@ -229,6 +234,18 @@
 [if (not anActivityNode.oclAsType(DecisionNode).decisionInput.oclIsUndefined())]
 [anActivityNode.memberName()/]->setDecisionInput([memberName(anActivityNode.oclAsType(DecisionNode).decisionInput)/]);
 [/if]
+[/template]
+
+[**
+ * generate initialization of meta model instance for an CreateObjectAction element
+ * 
+ * this includes:
+ * - initialize pins
+*/]
+[template private initializeActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(ReadSelfAction))]
+[let action : ReadSelfAction = self.oclAsType(ReadSelfAction)]
+[action.output.initializePin()/]
+[/let]
 [/template]
 
 [**
