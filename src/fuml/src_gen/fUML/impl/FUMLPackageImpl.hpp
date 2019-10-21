@@ -1406,6 +1406,7 @@ namespace fUML
 			virtual std::shared_ptr<ecore::EOperation> getReference_Operation_retrieveFeatureValue_StructuralFeature() const ;
 			virtual std::shared_ptr<ecore::EOperation> getReference_Operation_retrieveFeatureValues() const ;
 			virtual std::shared_ptr<ecore::EOperation> getReference_Operation_send_SignalInstance() const ;
+			virtual std::shared_ptr<ecore::EOperation> getReference_Operation_setFeatureValue_StructuralFeature_EInt() const ;
 			virtual std::shared_ptr<ecore::EOperation> getReference_Operation_startBehavior_Class_ParameterValue() const ;
 			virtual std::shared_ptr<ecore::EOperation> getReference_Operation_toString() const ;
 			
@@ -2150,6 +2151,7 @@ namespace fUML
 			std::shared_ptr<ecore::EOperation> m_actionActivation_Operation_sendOffers = nullptr;
 			std::shared_ptr<ecore::EOperation> m_objectNodeActivation_Operation_sendUnofferedTokens = nullptr;
 			std::shared_ptr<ecore::EOperation> m_structuredValue_Operation_setFeatureValue_StructuralFeature_EInt = nullptr;
+			std::shared_ptr<ecore::EOperation> m_reference_Operation_setFeatureValue_StructuralFeature_EInt = nullptr;
 			std::shared_ptr<ecore::EOperation> m_callEventExecution_Operation_setOutputParameterValues_ParameterValue = nullptr;
 			std::shared_ptr<ecore::EOperation> m_callEventOccurrence_Operation_setOutputParameterValues_ParameterValue = nullptr;
 			std::shared_ptr<ecore::EOperation> m_execution_Operation_setParameterValue_ParameterValue = nullptr;

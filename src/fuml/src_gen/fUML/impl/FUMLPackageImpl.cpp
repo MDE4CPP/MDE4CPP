@@ -2627,6 +2627,10 @@ std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getReference_Operation_send_
 {
 	return m_reference_Operation_send_SignalInstance;
 }
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getReference_Operation_setFeatureValue_StructuralFeature_EInt() const
+{
+	return m_reference_Operation_setFeatureValue_StructuralFeature_EInt;
+}
 std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getReference_Operation_startBehavior_Class_ParameterValue() const
 {
 	return m_reference_Operation_startBehavior_Class_ParameterValue;

@@ -2426,7 +2426,7 @@ namespace fUML
 			//Class and Feature IDs 
 			static const unsigned int REFERENCE_CLASS = 98;
 			static const unsigned int REFERENCE_CLASS_FEATURE_COUNT = 1;
-			static const unsigned int REFERENCE_CLASS_OPERATION_COUNT = 27;
+			static const unsigned int REFERENCE_CLASS_OPERATION_COUNT = 28;
 			
 			static const int REFERENCE_ATTRIBUTE_REFERENT = 9800;
 			
@@ -2439,6 +2439,7 @@ namespace fUML
 			static const int REFERENCE_OPERATION_RETRIEVEFEATUREVALUE_STRUCTURALFEATURE = 9824;
 			static const int REFERENCE_OPERATION_RETRIEVEFEATUREVALUES = 9826;
 			static const int REFERENCE_OPERATION_SEND_SIGNALINSTANCE = 9819;
+			static const int REFERENCE_OPERATION_SETFEATUREVALUE_STRUCTURALFEATURE_EINT = 9828;
 			static const int REFERENCE_OPERATION_STARTBEHAVIOR_CLASS_PARAMETERVALUE = 9817;
 			static const int REFERENCE_OPERATION_TOSTRING = 9827;
 			
@@ -2457,6 +2458,7 @@ namespace fUML
 			virtual std::shared_ptr<ecore::EOperation> getReference_Operation_retrieveFeatureValue_StructuralFeature() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getReference_Operation_retrieveFeatureValues() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getReference_Operation_send_SignalInstance() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getReference_Operation_setFeatureValue_StructuralFeature_EInt() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getReference_Operation_startBehavior_Class_ParameterValue() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getReference_Operation_toString() const = 0;
 			

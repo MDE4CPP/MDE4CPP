@@ -213,6 +213,14 @@ void ReferenceImpl::send(std::shared_ptr<fUML::SignalInstance>  signalInstance)
 	//end of body
 }
 
+void ReferenceImpl::setFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<Bag<fUML::Value> >  values,int position)
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	return this->getReferent()->setFeatureValue(feature,values,position);
+	//end of body
+}
+
 void ReferenceImpl::startBehavior(std::shared_ptr<uml::Class>  classifier,std::shared_ptr<Bag<fUML::ParameterValue> >  inputs)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)

@@ -7265,6 +7265,43 @@ void FUMLPackageImpl::initializeReferenceContent()
 		parameter->setOrdered(true);
 	}
 	
+	m_reference_Operation_setFeatureValue_StructuralFeature_EInt->setEType(nullptr);
+	m_reference_Operation_setFeatureValue_StructuralFeature_EInt->setName("setFeatureValue");
+	m_reference_Operation_setFeatureValue_StructuralFeature_EInt->setLowerBound(1);
+	m_reference_Operation_setFeatureValue_StructuralFeature_EInt->setUpperBound(1);
+	m_reference_Operation_setFeatureValue_StructuralFeature_EInt->setUnique(true);
+	m_reference_Operation_setFeatureValue_StructuralFeature_EInt->setOrdered(false);
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_reference_Operation_setFeatureValue_StructuralFeature_EInt);
+		parameter->setName("feature");
+		parameter->setEType(nullptr);
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_reference_Operation_setFeatureValue_StructuralFeature_EInt);
+		parameter->setName("values");
+		parameter->setEType(nullptr);
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_reference_Operation_setFeatureValue_StructuralFeature_EInt);
+		parameter->setName("position");
+		parameter->setEType(nullptr);
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
 	m_reference_Operation_startBehavior_Class_ParameterValue->setEType(nullptr);
 	m_reference_Operation_startBehavior_Class_ParameterValue->setName("startBehavior");
 	m_reference_Operation_startBehavior_Class_ParameterValue->setLowerBound(1);

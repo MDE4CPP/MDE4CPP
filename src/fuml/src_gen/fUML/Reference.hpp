@@ -160,6 +160,10 @@ namespace fUML
 			
 			/*!
 			 */ 
+			virtual void setFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<Bag<fUML::Value> >  values,int position) = 0;
+			
+			/*!
+			 */ 
 			virtual void startBehavior(std::shared_ptr<uml::Class>  classifier,std::shared_ptr<Bag<fUML::ParameterValue> >  inputs) = 0;
 			
 			/*!
