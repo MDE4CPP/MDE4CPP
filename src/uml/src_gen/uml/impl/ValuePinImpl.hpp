@@ -42,7 +42,15 @@ namespace uml
 
 
 			//Additional constructors for the containments back reference
+			ValuePinImpl(std::weak_ptr<uml::AddStructuralFeatureValueAction > par_addStructuralFeatureValueAction);
+
+
+			//Additional constructors for the containments back reference
 			ValuePinImpl(std::weak_ptr<uml::CallOperationAction > par_callOperationAction);
+
+
+			//Additional constructors for the containments back reference
+			ValuePinImpl(std::weak_ptr<uml::DestroyObjectAction > par_destroyObjectAction);
 
 
 			//Additional constructors for the containments back reference
@@ -63,6 +71,10 @@ namespace uml
 
 			//Additional constructors for the containments back reference
 			ValuePinImpl(std::weak_ptr<uml::StructuralFeatureAction > par_structuralFeatureAction);
+
+
+			//Additional constructors for the containments back reference
+			ValuePinImpl(std::weak_ptr<uml::WriteStructuralFeatureAction > par_writeStructuralFeatureAction);
 
 
 

@@ -42,6 +42,8 @@
 #include "uml/UmlPackage.hpp"
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -64,6 +66,8 @@
 #include "uml/TemplateParameter.hpp"
 
 #include "uml/Type.hpp"
+
+#include "uml/ValueSpecificationAction.hpp"
 
 #include "ecore/EcorePackage.hpp"
 #include "ecore/EcoreFactory.hpp"
@@ -158,6 +162,18 @@ LiteralBooleanImpl::~LiteralBooleanImpl()
 
 
 
+//Additional constructor for the containments back reference
+			LiteralBooleanImpl::LiteralBooleanImpl(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction)
+			:LiteralBooleanImpl()
+			{
+			    m_valueSpecificationAction = par_valueSpecificationAction;
+				m_owner = par_valueSpecificationAction;
+			}
+
+
+
+
+
 
 LiteralBooleanImpl::LiteralBooleanImpl(const LiteralBooleanImpl & obj):LiteralBooleanImpl()
 {
@@ -188,6 +204,8 @@ LiteralBooleanImpl::LiteralBooleanImpl(const LiteralBooleanImpl & obj):LiteralBo
 	m_templateParameter  = obj.getTemplateParameter();
 
 	m_type  = obj.getType();
+
+	m_valueSpecificationAction  = obj.getValueSpecificationAction();
 
 
 	//Clone references with containment (deep copy)
@@ -295,6 +313,11 @@ std::shared_ptr<ecore::EObject> LiteralBooleanImpl::eContainer() const
 	{
 		return wp;
 	}
+
+	if(auto wp = m_valueSpecificationAction.lock())
+	{
+		return wp;
+	}
 	return nullptr;
 }
 
@@ -306,7 +329,7 @@ Any LiteralBooleanImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::LITERALBOOLEAN_ATTRIBUTE_VALUE:
-			return eAny(getValue()); //13814
+			return eAny(getValue()); //13815
 	}
 	return LiteralSpecificationImpl::eGet(featureID, resolve, coreType);
 }
@@ -315,7 +338,7 @@ bool LiteralBooleanImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::LITERALBOOLEAN_ATTRIBUTE_VALUE:
-			return getValue() != false; //13814
+			return getValue() != false; //13815
 	}
 	return LiteralSpecificationImpl::internalEIsSet(featureID);
 }
@@ -327,7 +350,7 @@ bool LiteralBooleanImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			bool _value = newValue->get<bool>();
-			setValue(_value); //13814
+			setValue(_value); //13815
 			return true;
 		}
 	}

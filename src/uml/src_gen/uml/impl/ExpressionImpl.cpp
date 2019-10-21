@@ -42,6 +42,8 @@
 #include "uml/UmlPackage.hpp"
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -64,6 +66,8 @@
 #include "uml/Type.hpp"
 
 #include "uml/ValueSpecification.hpp"
+
+#include "uml/ValueSpecificationAction.hpp"
 
 #include "ecore/EcorePackage.hpp"
 #include "ecore/EcoreFactory.hpp"
@@ -172,6 +176,18 @@ ExpressionImpl::~ExpressionImpl()
 
 
 
+//Additional constructor for the containments back reference
+			ExpressionImpl::ExpressionImpl(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction)
+			:ExpressionImpl()
+			{
+			    m_valueSpecificationAction = par_valueSpecificationAction;
+				m_owner = par_valueSpecificationAction;
+			}
+
+
+
+
+
 
 ExpressionImpl::ExpressionImpl(const ExpressionImpl & obj):ExpressionImpl()
 {
@@ -202,6 +218,8 @@ ExpressionImpl::ExpressionImpl(const ExpressionImpl & obj):ExpressionImpl()
 	m_templateParameter  = obj.getTemplateParameter();
 
 	m_type  = obj.getType();
+
+	m_valueSpecificationAction  = obj.getValueSpecificationAction();
 
 
 	//Clone references with containment (deep copy)
@@ -330,6 +348,11 @@ std::shared_ptr<ecore::EObject> ExpressionImpl::eContainer() const
 	{
 		return wp;
 	}
+
+	if(auto wp = m_valueSpecificationAction.lock())
+	{
+		return wp;
+	}
 	return nullptr;
 }
 
@@ -350,10 +373,10 @@ Any ExpressionImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //9614
+			return eAny(tempList); //9615
 		}
 		case UmlPackage::EXPRESSION_ATTRIBUTE_SYMBOL:
-			return eAny(getSymbol()); //9615
+			return eAny(getSymbol()); //9616
 	}
 	return ValueSpecificationImpl::eGet(featureID, resolve, coreType);
 }
@@ -362,9 +385,9 @@ bool ExpressionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::EXPRESSION_ATTRIBUTE_OPERAND:
-			return getOperand() != nullptr; //9614
+			return getOperand() != nullptr; //9615
 		case UmlPackage::EXPRESSION_ATTRIBUTE_SYMBOL:
-			return getSymbol() != ""; //9615
+			return getSymbol() != ""; //9616
 	}
 	return ValueSpecificationImpl::internalEIsSet(featureID);
 }
@@ -412,7 +435,7 @@ bool ExpressionImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::string _symbol = newValue->get<std::string>();
-			setSymbol(_symbol); //9615
+			setSymbol(_symbol); //9616
 			return true;
 		}
 	}

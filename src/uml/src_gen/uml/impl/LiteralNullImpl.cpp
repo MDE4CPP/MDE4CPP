@@ -42,6 +42,8 @@
 #include "uml/UmlPackage.hpp"
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -64,6 +66,8 @@
 #include "uml/TemplateParameter.hpp"
 
 #include "uml/Type.hpp"
+
+#include "uml/ValueSpecificationAction.hpp"
 
 #include "ecore/EcorePackage.hpp"
 #include "ecore/EcoreFactory.hpp"
@@ -158,6 +162,18 @@ LiteralNullImpl::~LiteralNullImpl()
 
 
 
+//Additional constructor for the containments back reference
+			LiteralNullImpl::LiteralNullImpl(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction)
+			:LiteralNullImpl()
+			{
+			    m_valueSpecificationAction = par_valueSpecificationAction;
+				m_owner = par_valueSpecificationAction;
+			}
+
+
+
+
+
 
 LiteralNullImpl::LiteralNullImpl(const LiteralNullImpl & obj):LiteralNullImpl()
 {
@@ -187,6 +203,8 @@ LiteralNullImpl::LiteralNullImpl(const LiteralNullImpl & obj):LiteralNullImpl()
 	m_templateParameter  = obj.getTemplateParameter();
 
 	m_type  = obj.getType();
+
+	m_valueSpecificationAction  = obj.getValueSpecificationAction();
 
 
 	//Clone references with containment (deep copy)
@@ -282,6 +300,11 @@ std::shared_ptr<ecore::EObject> LiteralNullImpl::eContainer() const
 	}
 
 	if(auto wp = m_owningTemplateParameter.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_valueSpecificationAction.lock())
 	{
 		return wp;
 	}

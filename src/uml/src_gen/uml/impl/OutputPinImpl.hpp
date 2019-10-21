@@ -46,6 +46,14 @@ namespace uml
 
 
 			//Additional constructors for the containments back reference
+			OutputPinImpl(std::weak_ptr<uml::ClearStructuralFeatureAction > par_clearStructuralFeatureAction);
+
+
+			//Additional constructors for the containments back reference
+			OutputPinImpl(std::weak_ptr<uml::CreateObjectAction > par_createObjectAction);
+
+
+			//Additional constructors for the containments back reference
 			OutputPinImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode);
 
 
@@ -58,7 +66,19 @@ namespace uml
 
 
 			//Additional constructors for the containments back reference
+			OutputPinImpl(std::weak_ptr<uml::ReadSelfAction > par_readSelfAction);
+
+
+			//Additional constructors for the containments back reference
+			OutputPinImpl(std::weak_ptr<uml::ReadStructuralFeatureAction > par_readStructuralFeatureAction);
+
+
+			//Additional constructors for the containments back reference
 			OutputPinImpl(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction);
+
+
+			//Additional constructors for the containments back reference
+			OutputPinImpl(std::weak_ptr<uml::WriteStructuralFeatureAction > par_writeStructuralFeatureAction);
 
 
 
@@ -101,11 +121,46 @@ namespace uml
 			virtual void setCallAction(std::shared_ptr<uml::CallAction> _callAction_callAction) ;
 			/*!
 			 */
+			virtual std::weak_ptr<uml::ClearStructuralFeatureAction > getClearStructuralFeatureAction() const ;
+			
+			/*!
+			 */
+			virtual void setClearStructuralFeatureAction(std::shared_ptr<uml::ClearStructuralFeatureAction> _clearStructuralFeatureAction_clearStructuralFeatureAction) ;
+			/*!
+			 */
+			virtual std::weak_ptr<uml::CreateObjectAction > getCreateObjectAction() const ;
+			
+			/*!
+			 */
+			virtual void setCreateObjectAction(std::shared_ptr<uml::CreateObjectAction> _createObjectAction_createObjectAction) ;
+			/*!
+			 */
+			virtual std::weak_ptr<uml::ReadSelfAction > getReadSelfAction() const ;
+			
+			/*!
+			 */
+			virtual void setReadSelfAction(std::shared_ptr<uml::ReadSelfAction> _readSelfAction_readSelfAction) ;
+			/*!
+			 */
+			virtual std::weak_ptr<uml::ReadStructuralFeatureAction > getReadStructuralFeatureAction() const ;
+			
+			/*!
+			 */
+			virtual void setReadStructuralFeatureAction(std::shared_ptr<uml::ReadStructuralFeatureAction> _readStructuralFeatureAction_readStructuralFeatureAction) ;
+			/*!
+			 */
 			virtual std::weak_ptr<uml::ValueSpecificationAction > getValueSpecificationAction() const ;
 			
 			/*!
 			 */
 			virtual void setValueSpecificationAction(std::shared_ptr<uml::ValueSpecificationAction> _valueSpecificationAction_valueSpecificationAction) ;
+			/*!
+			 */
+			virtual std::weak_ptr<uml::WriteStructuralFeatureAction > getWriteStructuralFeatureAction() const ;
+			
+			/*!
+			 */
+			virtual void setWriteStructuralFeatureAction(std::shared_ptr<uml::WriteStructuralFeatureAction> _writeStructuralFeatureAction_writeStructuralFeatureAction) ;
 							
 			
 			//*********************************

@@ -534,10 +534,9 @@ void AddStructuralFeatureValueActionImpl::loadNode(std::string nodeName, std::sh
 			{
 				typeName = "InputPin";
 			}
-			std::shared_ptr<uml::InputPin> insertAt = std::dynamic_pointer_cast<uml::InputPin>(modelFactory->create(typeName));
+			std::shared_ptr<ecore::EObject> insertAt = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::INPUTPIN_ATTRIBUTE_ADDSTRUCTURALFEATUREVALUEACTION);
 			if (insertAt != nullptr)
 			{
-				this->setInsertAt(insertAt);
 				loadHandler->handleChild(insertAt);
 			}
 			return;

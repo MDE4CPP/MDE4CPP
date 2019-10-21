@@ -475,10 +475,9 @@ void ReadSelfActionImpl::loadNode(std::string nodeName, std::shared_ptr<persiste
 			{
 				typeName = "OutputPin";
 			}
-			std::shared_ptr<uml::OutputPin> result = std::dynamic_pointer_cast<uml::OutputPin>(modelFactory->create(typeName));
+			std::shared_ptr<ecore::EObject> result = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::OUTPUTPIN_ATTRIBUTE_READSELFACTION);
 			if (result != nullptr)
 			{
-				this->setResult(result);
 				loadHandler->handleChild(result);
 			}
 			return;

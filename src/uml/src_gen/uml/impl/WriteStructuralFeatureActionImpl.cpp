@@ -525,10 +525,9 @@ void WriteStructuralFeatureActionImpl::loadNode(std::string nodeName, std::share
 			{
 				typeName = "OutputPin";
 			}
-			std::shared_ptr<uml::OutputPin> result = std::dynamic_pointer_cast<uml::OutputPin>(modelFactory->create(typeName));
+			std::shared_ptr<ecore::EObject> result = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::OUTPUTPIN_ATTRIBUTE_WRITESTRUCTURALFEATUREACTION);
 			if (result != nullptr)
 			{
-				this->setResult(result);
 				loadHandler->handleChild(result);
 			}
 			return;
@@ -541,10 +540,9 @@ void WriteStructuralFeatureActionImpl::loadNode(std::string nodeName, std::share
 			{
 				typeName = "InputPin";
 			}
-			std::shared_ptr<uml::InputPin> value = std::dynamic_pointer_cast<uml::InputPin>(modelFactory->create(typeName));
+			std::shared_ptr<ecore::EObject> value = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::INPUTPIN_ATTRIBUTE_WRITESTRUCTURALFEATUREACTION);
 			if (value != nullptr)
 			{
-				this->setValue(value);
 				loadHandler->handleChild(value);
 			}
 			return;

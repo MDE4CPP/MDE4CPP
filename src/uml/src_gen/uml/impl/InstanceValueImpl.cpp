@@ -42,6 +42,8 @@
 #include "uml/UmlPackage.hpp"
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -66,6 +68,8 @@
 #include "uml/Type.hpp"
 
 #include "uml/ValueSpecification.hpp"
+
+#include "uml/ValueSpecificationAction.hpp"
 
 #include "ecore/EcorePackage.hpp"
 #include "ecore/EcoreFactory.hpp"
@@ -162,6 +166,18 @@ InstanceValueImpl::~InstanceValueImpl()
 
 
 
+//Additional constructor for the containments back reference
+			InstanceValueImpl::InstanceValueImpl(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction)
+			:InstanceValueImpl()
+			{
+			    m_valueSpecificationAction = par_valueSpecificationAction;
+				m_owner = par_valueSpecificationAction;
+			}
+
+
+
+
+
 
 InstanceValueImpl::InstanceValueImpl(const InstanceValueImpl & obj):InstanceValueImpl()
 {
@@ -193,6 +209,8 @@ InstanceValueImpl::InstanceValueImpl(const InstanceValueImpl & obj):InstanceValu
 	m_templateParameter  = obj.getTemplateParameter();
 
 	m_type  = obj.getType();
+
+	m_valueSpecificationAction  = obj.getValueSpecificationAction();
 
 
 	//Clone references with containment (deep copy)
@@ -300,6 +318,11 @@ std::shared_ptr<ecore::EObject> InstanceValueImpl::eContainer() const
 	{
 		return wp;
 	}
+
+	if(auto wp = m_valueSpecificationAction.lock())
+	{
+		return wp;
+	}
 	return nullptr;
 }
 
@@ -311,7 +334,7 @@ Any InstanceValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::INSTANCEVALUE_ATTRIBUTE_INSTANCE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getInstance())); //11914
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getInstance())); //11915
 	}
 	return ValueSpecificationImpl::eGet(featureID, resolve, coreType);
 }
@@ -320,7 +343,7 @@ bool InstanceValueImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::INSTANCEVALUE_ATTRIBUTE_INSTANCE:
-			return getInstance() != nullptr; //11914
+			return getInstance() != nullptr; //11915
 	}
 	return ValueSpecificationImpl::internalEIsSet(featureID);
 }
@@ -333,7 +356,7 @@ bool InstanceValueImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::InstanceSpecification> _instance = std::dynamic_pointer_cast<uml::InstanceSpecification>(_temp);
-			setInstance(_instance); //11914
+			setInstance(_instance); //11915
 			return true;
 		}
 	}

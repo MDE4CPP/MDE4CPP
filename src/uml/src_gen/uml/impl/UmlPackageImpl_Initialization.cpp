@@ -2906,7 +2906,7 @@ void UmlPackageImpl::initializeAddStructuralFeatureValueActionContent()
 		{
 			m_addStructuralFeatureValueAction_Attribute_insertAt->setDefaultValueLiteral(defaultValue);
 		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
+		std::shared_ptr<ecore::EReference>  otherEnd = getInputPin_Attribute_addStructuralFeatureValueAction();
 		if (otherEnd != nullptr)
 	    {
 	   		m_addStructuralFeatureValueAction_Attribute_insertAt->setEOpposite(otherEnd);
@@ -6573,7 +6573,7 @@ void UmlPackageImpl::initializeClearStructuralFeatureActionContent()
 		{
 			m_clearStructuralFeatureAction_Attribute_result->setDefaultValueLiteral(defaultValue);
 		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
+		std::shared_ptr<ecore::EReference>  otherEnd = getOutputPin_Attribute_clearStructuralFeatureAction();
 		if (otherEnd != nullptr)
 	    {
 	   		m_clearStructuralFeatureAction_Attribute_result->setEOpposite(otherEnd);
@@ -8872,7 +8872,7 @@ void UmlPackageImpl::initializeCreateObjectActionContent()
 		{
 			m_createObjectAction_Attribute_result->setDefaultValueLiteral(defaultValue);
 		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
+		std::shared_ptr<ecore::EReference>  otherEnd = getOutputPin_Attribute_createObjectAction();
 		if (otherEnd != nullptr)
 	    {
 	   		m_createObjectAction_Attribute_result->setEOpposite(otherEnd);
@@ -9867,7 +9867,7 @@ void UmlPackageImpl::initializeDestroyObjectActionContent()
 		{
 			m_destroyObjectAction_Attribute_target->setDefaultValueLiteral(defaultValue);
 		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
+		std::shared_ptr<ecore::EReference>  otherEnd = getInputPin_Attribute_destroyObjectAction();
 		if (otherEnd != nullptr)
 	    {
 	   		m_destroyObjectAction_Attribute_target->setEOpposite(otherEnd);
@@ -14073,6 +14073,31 @@ void UmlPackageImpl::initializeInputPinContent()
 	   		m_inputPin_Attribute_action->setEOpposite(otherEnd);
 	    }
 	}
+	m_inputPin_Attribute_addStructuralFeatureValueAction->setName("addStructuralFeatureValueAction");
+	m_inputPin_Attribute_addStructuralFeatureValueAction->setEType(getAddStructuralFeatureValueAction_Class());
+	m_inputPin_Attribute_addStructuralFeatureValueAction->setLowerBound(0);
+	m_inputPin_Attribute_addStructuralFeatureValueAction->setUpperBound(1);
+	m_inputPin_Attribute_addStructuralFeatureValueAction->setTransient(false);
+	m_inputPin_Attribute_addStructuralFeatureValueAction->setVolatile(false);
+	m_inputPin_Attribute_addStructuralFeatureValueAction->setChangeable(true);
+	m_inputPin_Attribute_addStructuralFeatureValueAction->setUnsettable(false);
+	m_inputPin_Attribute_addStructuralFeatureValueAction->setUnique(true);
+	m_inputPin_Attribute_addStructuralFeatureValueAction->setDerived(false);
+	m_inputPin_Attribute_addStructuralFeatureValueAction->setOrdered(true);
+	m_inputPin_Attribute_addStructuralFeatureValueAction->setContainment(false);
+	m_inputPin_Attribute_addStructuralFeatureValueAction->setResolveProxies(true);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			m_inputPin_Attribute_addStructuralFeatureValueAction->setDefaultValueLiteral(defaultValue);
+		}
+		std::shared_ptr<ecore::EReference>  otherEnd = getAddStructuralFeatureValueAction_Attribute_insertAt();
+		if (otherEnd != nullptr)
+	    {
+	   		m_inputPin_Attribute_addStructuralFeatureValueAction->setEOpposite(otherEnd);
+	    }
+	}
 	m_inputPin_Attribute_callOperationAction->setName("callOperationAction");
 	m_inputPin_Attribute_callOperationAction->setEType(getCallOperationAction_Class());
 	m_inputPin_Attribute_callOperationAction->setLowerBound(0);
@@ -14096,6 +14121,31 @@ void UmlPackageImpl::initializeInputPinContent()
 		if (otherEnd != nullptr)
 	    {
 	   		m_inputPin_Attribute_callOperationAction->setEOpposite(otherEnd);
+	    }
+	}
+	m_inputPin_Attribute_destroyObjectAction->setName("destroyObjectAction");
+	m_inputPin_Attribute_destroyObjectAction->setEType(getDestroyObjectAction_Class());
+	m_inputPin_Attribute_destroyObjectAction->setLowerBound(0);
+	m_inputPin_Attribute_destroyObjectAction->setUpperBound(1);
+	m_inputPin_Attribute_destroyObjectAction->setTransient(false);
+	m_inputPin_Attribute_destroyObjectAction->setVolatile(false);
+	m_inputPin_Attribute_destroyObjectAction->setChangeable(true);
+	m_inputPin_Attribute_destroyObjectAction->setUnsettable(false);
+	m_inputPin_Attribute_destroyObjectAction->setUnique(true);
+	m_inputPin_Attribute_destroyObjectAction->setDerived(false);
+	m_inputPin_Attribute_destroyObjectAction->setOrdered(true);
+	m_inputPin_Attribute_destroyObjectAction->setContainment(false);
+	m_inputPin_Attribute_destroyObjectAction->setResolveProxies(true);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			m_inputPin_Attribute_destroyObjectAction->setDefaultValueLiteral(defaultValue);
+		}
+		std::shared_ptr<ecore::EReference>  otherEnd = getDestroyObjectAction_Attribute_target();
+		if (otherEnd != nullptr)
+	    {
+	   		m_inputPin_Attribute_destroyObjectAction->setEOpposite(otherEnd);
 	    }
 	}
 	m_inputPin_Attribute_invocationAction->setName("invocationAction");
@@ -14146,6 +14196,31 @@ void UmlPackageImpl::initializeInputPinContent()
 		if (otherEnd != nullptr)
 	    {
 	   		m_inputPin_Attribute_structuralFeatureAction->setEOpposite(otherEnd);
+	    }
+	}
+	m_inputPin_Attribute_writeStructuralFeatureAction->setName("writeStructuralFeatureAction");
+	m_inputPin_Attribute_writeStructuralFeatureAction->setEType(getWriteStructuralFeatureAction_Class());
+	m_inputPin_Attribute_writeStructuralFeatureAction->setLowerBound(0);
+	m_inputPin_Attribute_writeStructuralFeatureAction->setUpperBound(1);
+	m_inputPin_Attribute_writeStructuralFeatureAction->setTransient(false);
+	m_inputPin_Attribute_writeStructuralFeatureAction->setVolatile(false);
+	m_inputPin_Attribute_writeStructuralFeatureAction->setChangeable(true);
+	m_inputPin_Attribute_writeStructuralFeatureAction->setUnsettable(false);
+	m_inputPin_Attribute_writeStructuralFeatureAction->setUnique(true);
+	m_inputPin_Attribute_writeStructuralFeatureAction->setDerived(false);
+	m_inputPin_Attribute_writeStructuralFeatureAction->setOrdered(true);
+	m_inputPin_Attribute_writeStructuralFeatureAction->setContainment(false);
+	m_inputPin_Attribute_writeStructuralFeatureAction->setResolveProxies(true);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			m_inputPin_Attribute_writeStructuralFeatureAction->setDefaultValueLiteral(defaultValue);
+		}
+		std::shared_ptr<ecore::EReference>  otherEnd = getWriteStructuralFeatureAction_Attribute_value();
+		if (otherEnd != nullptr)
+	    {
+	   		m_inputPin_Attribute_writeStructuralFeatureAction->setEOpposite(otherEnd);
 	    }
 	}
 	
@@ -21134,6 +21209,106 @@ void UmlPackageImpl::initializeOutputPinContent()
 	   		m_outputPin_Attribute_callAction->setEOpposite(otherEnd);
 	    }
 	}
+	m_outputPin_Attribute_clearStructuralFeatureAction->setName("clearStructuralFeatureAction");
+	m_outputPin_Attribute_clearStructuralFeatureAction->setEType(getClearStructuralFeatureAction_Class());
+	m_outputPin_Attribute_clearStructuralFeatureAction->setLowerBound(0);
+	m_outputPin_Attribute_clearStructuralFeatureAction->setUpperBound(1);
+	m_outputPin_Attribute_clearStructuralFeatureAction->setTransient(false);
+	m_outputPin_Attribute_clearStructuralFeatureAction->setVolatile(false);
+	m_outputPin_Attribute_clearStructuralFeatureAction->setChangeable(true);
+	m_outputPin_Attribute_clearStructuralFeatureAction->setUnsettable(false);
+	m_outputPin_Attribute_clearStructuralFeatureAction->setUnique(true);
+	m_outputPin_Attribute_clearStructuralFeatureAction->setDerived(false);
+	m_outputPin_Attribute_clearStructuralFeatureAction->setOrdered(true);
+	m_outputPin_Attribute_clearStructuralFeatureAction->setContainment(false);
+	m_outputPin_Attribute_clearStructuralFeatureAction->setResolveProxies(true);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			m_outputPin_Attribute_clearStructuralFeatureAction->setDefaultValueLiteral(defaultValue);
+		}
+		std::shared_ptr<ecore::EReference>  otherEnd = getClearStructuralFeatureAction_Attribute_result();
+		if (otherEnd != nullptr)
+	    {
+	   		m_outputPin_Attribute_clearStructuralFeatureAction->setEOpposite(otherEnd);
+	    }
+	}
+	m_outputPin_Attribute_createObjectAction->setName("createObjectAction");
+	m_outputPin_Attribute_createObjectAction->setEType(getCreateObjectAction_Class());
+	m_outputPin_Attribute_createObjectAction->setLowerBound(0);
+	m_outputPin_Attribute_createObjectAction->setUpperBound(1);
+	m_outputPin_Attribute_createObjectAction->setTransient(false);
+	m_outputPin_Attribute_createObjectAction->setVolatile(false);
+	m_outputPin_Attribute_createObjectAction->setChangeable(true);
+	m_outputPin_Attribute_createObjectAction->setUnsettable(false);
+	m_outputPin_Attribute_createObjectAction->setUnique(true);
+	m_outputPin_Attribute_createObjectAction->setDerived(false);
+	m_outputPin_Attribute_createObjectAction->setOrdered(true);
+	m_outputPin_Attribute_createObjectAction->setContainment(false);
+	m_outputPin_Attribute_createObjectAction->setResolveProxies(true);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			m_outputPin_Attribute_createObjectAction->setDefaultValueLiteral(defaultValue);
+		}
+		std::shared_ptr<ecore::EReference>  otherEnd = getCreateObjectAction_Attribute_result();
+		if (otherEnd != nullptr)
+	    {
+	   		m_outputPin_Attribute_createObjectAction->setEOpposite(otherEnd);
+	    }
+	}
+	m_outputPin_Attribute_readSelfAction->setName("readSelfAction");
+	m_outputPin_Attribute_readSelfAction->setEType(getReadSelfAction_Class());
+	m_outputPin_Attribute_readSelfAction->setLowerBound(0);
+	m_outputPin_Attribute_readSelfAction->setUpperBound(1);
+	m_outputPin_Attribute_readSelfAction->setTransient(false);
+	m_outputPin_Attribute_readSelfAction->setVolatile(false);
+	m_outputPin_Attribute_readSelfAction->setChangeable(true);
+	m_outputPin_Attribute_readSelfAction->setUnsettable(false);
+	m_outputPin_Attribute_readSelfAction->setUnique(true);
+	m_outputPin_Attribute_readSelfAction->setDerived(false);
+	m_outputPin_Attribute_readSelfAction->setOrdered(true);
+	m_outputPin_Attribute_readSelfAction->setContainment(false);
+	m_outputPin_Attribute_readSelfAction->setResolveProxies(true);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			m_outputPin_Attribute_readSelfAction->setDefaultValueLiteral(defaultValue);
+		}
+		std::shared_ptr<ecore::EReference>  otherEnd = getReadSelfAction_Attribute_result();
+		if (otherEnd != nullptr)
+	    {
+	   		m_outputPin_Attribute_readSelfAction->setEOpposite(otherEnd);
+	    }
+	}
+	m_outputPin_Attribute_readStructuralFeatureAction->setName("readStructuralFeatureAction");
+	m_outputPin_Attribute_readStructuralFeatureAction->setEType(getReadStructuralFeatureAction_Class());
+	m_outputPin_Attribute_readStructuralFeatureAction->setLowerBound(0);
+	m_outputPin_Attribute_readStructuralFeatureAction->setUpperBound(1);
+	m_outputPin_Attribute_readStructuralFeatureAction->setTransient(false);
+	m_outputPin_Attribute_readStructuralFeatureAction->setVolatile(false);
+	m_outputPin_Attribute_readStructuralFeatureAction->setChangeable(true);
+	m_outputPin_Attribute_readStructuralFeatureAction->setUnsettable(false);
+	m_outputPin_Attribute_readStructuralFeatureAction->setUnique(true);
+	m_outputPin_Attribute_readStructuralFeatureAction->setDerived(false);
+	m_outputPin_Attribute_readStructuralFeatureAction->setOrdered(true);
+	m_outputPin_Attribute_readStructuralFeatureAction->setContainment(false);
+	m_outputPin_Attribute_readStructuralFeatureAction->setResolveProxies(true);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			m_outputPin_Attribute_readStructuralFeatureAction->setDefaultValueLiteral(defaultValue);
+		}
+		std::shared_ptr<ecore::EReference>  otherEnd = getReadStructuralFeatureAction_Attribute_result();
+		if (otherEnd != nullptr)
+	    {
+	   		m_outputPin_Attribute_readStructuralFeatureAction->setEOpposite(otherEnd);
+	    }
+	}
 	m_outputPin_Attribute_valueSpecificationAction->setName("valueSpecificationAction");
 	m_outputPin_Attribute_valueSpecificationAction->setEType(getValueSpecificationAction_Class());
 	m_outputPin_Attribute_valueSpecificationAction->setLowerBound(0);
@@ -21157,6 +21332,31 @@ void UmlPackageImpl::initializeOutputPinContent()
 		if (otherEnd != nullptr)
 	    {
 	   		m_outputPin_Attribute_valueSpecificationAction->setEOpposite(otherEnd);
+	    }
+	}
+	m_outputPin_Attribute_writeStructuralFeatureAction->setName("writeStructuralFeatureAction");
+	m_outputPin_Attribute_writeStructuralFeatureAction->setEType(getWriteStructuralFeatureAction_Class());
+	m_outputPin_Attribute_writeStructuralFeatureAction->setLowerBound(0);
+	m_outputPin_Attribute_writeStructuralFeatureAction->setUpperBound(1);
+	m_outputPin_Attribute_writeStructuralFeatureAction->setTransient(false);
+	m_outputPin_Attribute_writeStructuralFeatureAction->setVolatile(false);
+	m_outputPin_Attribute_writeStructuralFeatureAction->setChangeable(true);
+	m_outputPin_Attribute_writeStructuralFeatureAction->setUnsettable(false);
+	m_outputPin_Attribute_writeStructuralFeatureAction->setUnique(true);
+	m_outputPin_Attribute_writeStructuralFeatureAction->setDerived(false);
+	m_outputPin_Attribute_writeStructuralFeatureAction->setOrdered(true);
+	m_outputPin_Attribute_writeStructuralFeatureAction->setContainment(false);
+	m_outputPin_Attribute_writeStructuralFeatureAction->setResolveProxies(true);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			m_outputPin_Attribute_writeStructuralFeatureAction->setDefaultValueLiteral(defaultValue);
+		}
+		std::shared_ptr<ecore::EReference>  otherEnd = getWriteStructuralFeatureAction_Attribute_result();
+		if (otherEnd != nullptr)
+	    {
+	   		m_outputPin_Attribute_writeStructuralFeatureAction->setEOpposite(otherEnd);
 	    }
 	}
 	
@@ -26370,7 +26570,7 @@ void UmlPackageImpl::initializeReadSelfActionContent()
 		{
 			m_readSelfAction_Attribute_result->setDefaultValueLiteral(defaultValue);
 		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
+		std::shared_ptr<ecore::EReference>  otherEnd = getOutputPin_Attribute_readSelfAction();
 		if (otherEnd != nullptr)
 	    {
 	   		m_readSelfAction_Attribute_result->setEOpposite(otherEnd);
@@ -26514,7 +26714,7 @@ void UmlPackageImpl::initializeReadStructuralFeatureActionContent()
 		{
 			m_readStructuralFeatureAction_Attribute_result->setDefaultValueLiteral(defaultValue);
 		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
+		std::shared_ptr<ecore::EReference>  otherEnd = getOutputPin_Attribute_readStructuralFeatureAction();
 		if (otherEnd != nullptr)
 	    {
 	   		m_readStructuralFeatureAction_Attribute_result->setEOpposite(otherEnd);
@@ -33266,6 +33466,31 @@ void UmlPackageImpl::initializeValueSpecificationContent()
 	   		m_valueSpecification_Attribute_owningSlot->setEOpposite(otherEnd);
 	    }
 	}
+	m_valueSpecification_Attribute_valueSpecificationAction->setName("valueSpecificationAction");
+	m_valueSpecification_Attribute_valueSpecificationAction->setEType(getValueSpecificationAction_Class());
+	m_valueSpecification_Attribute_valueSpecificationAction->setLowerBound(0);
+	m_valueSpecification_Attribute_valueSpecificationAction->setUpperBound(1);
+	m_valueSpecification_Attribute_valueSpecificationAction->setTransient(false);
+	m_valueSpecification_Attribute_valueSpecificationAction->setVolatile(false);
+	m_valueSpecification_Attribute_valueSpecificationAction->setChangeable(true);
+	m_valueSpecification_Attribute_valueSpecificationAction->setUnsettable(false);
+	m_valueSpecification_Attribute_valueSpecificationAction->setUnique(true);
+	m_valueSpecification_Attribute_valueSpecificationAction->setDerived(false);
+	m_valueSpecification_Attribute_valueSpecificationAction->setOrdered(true);
+	m_valueSpecification_Attribute_valueSpecificationAction->setContainment(false);
+	m_valueSpecification_Attribute_valueSpecificationAction->setResolveProxies(true);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			m_valueSpecification_Attribute_valueSpecificationAction->setDefaultValueLiteral(defaultValue);
+		}
+		std::shared_ptr<ecore::EReference>  otherEnd = getValueSpecificationAction_Attribute_value();
+		if (otherEnd != nullptr)
+	    {
+	   		m_valueSpecification_Attribute_valueSpecificationAction->setEOpposite(otherEnd);
+	    }
+	}
 	
 	m_valueSpecification_Operation_booleanValue->setEType(types::TypesPackage::eInstance()->getBoolean_Class());
 	m_valueSpecification_Operation_booleanValue->setName("booleanValue");
@@ -33377,7 +33602,7 @@ void UmlPackageImpl::initializeValueSpecificationActionContent()
 		{
 			m_valueSpecificationAction_Attribute_value->setDefaultValueLiteral(defaultValue);
 		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
+		std::shared_ptr<ecore::EReference>  otherEnd = getValueSpecification_Attribute_valueSpecificationAction();
 		if (otherEnd != nullptr)
 	    {
 	   		m_valueSpecificationAction_Attribute_value->setEOpposite(otherEnd);
@@ -33790,7 +34015,7 @@ void UmlPackageImpl::initializeWriteStructuralFeatureActionContent()
 		{
 			m_writeStructuralFeatureAction_Attribute_result->setDefaultValueLiteral(defaultValue);
 		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
+		std::shared_ptr<ecore::EReference>  otherEnd = getOutputPin_Attribute_writeStructuralFeatureAction();
 		if (otherEnd != nullptr)
 	    {
 	   		m_writeStructuralFeatureAction_Attribute_result->setEOpposite(otherEnd);
@@ -33815,7 +34040,7 @@ void UmlPackageImpl::initializeWriteStructuralFeatureActionContent()
 		{
 			m_writeStructuralFeatureAction_Attribute_value->setDefaultValueLiteral(defaultValue);
 		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
+		std::shared_ptr<ecore::EReference>  otherEnd = getInputPin_Attribute_writeStructuralFeatureAction();
 		if (otherEnd != nullptr)
 	    {
 	   		m_writeStructuralFeatureAction_Attribute_value->setEOpposite(otherEnd);

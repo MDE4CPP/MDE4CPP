@@ -110,6 +110,11 @@ namespace uml
 	class ValueSpecification;
 }
 
+namespace uml 
+{
+	class ValueSpecificationAction;
+}
+
 // base class includes
 #include "uml/Expression.hpp"
 
@@ -158,6 +163,10 @@ namespace uml
 			//Additional constructors for the containments back reference
 
 			StringExpression(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
+
+			//Additional constructors for the containments back reference
+
+			StringExpression(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction);
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;

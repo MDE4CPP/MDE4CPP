@@ -537,10 +537,9 @@ void DestroyObjectActionImpl::loadNode(std::string nodeName, std::shared_ptr<per
 			{
 				typeName = "InputPin";
 			}
-			std::shared_ptr<uml::InputPin> target = std::dynamic_pointer_cast<uml::InputPin>(modelFactory->create(typeName));
+			std::shared_ptr<ecore::EObject> target = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::INPUTPIN_ATTRIBUTE_DESTROYOBJECTACTION);
 			if (target != nullptr)
 			{
-				this->setTarget(target);
 				loadHandler->handleChild(target);
 			}
 			return;

@@ -43,6 +43,8 @@
 #include "uml/UmlPackage.hpp"
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -69,6 +71,8 @@
 #include "uml/Type.hpp"
 
 #include "uml/ValueSpecification.hpp"
+
+#include "uml/ValueSpecificationAction.hpp"
 
 #include "ecore/EcorePackage.hpp"
 #include "ecore/EcoreFactory.hpp"
@@ -170,6 +174,18 @@ OpaqueExpressionImpl::~OpaqueExpressionImpl()
 
 
 
+//Additional constructor for the containments back reference
+			OpaqueExpressionImpl::OpaqueExpressionImpl(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction)
+			:OpaqueExpressionImpl()
+			{
+			    m_valueSpecificationAction = par_valueSpecificationAction;
+				m_owner = par_valueSpecificationAction;
+			}
+
+
+
+
+
 
 OpaqueExpressionImpl::OpaqueExpressionImpl(const OpaqueExpressionImpl & obj):OpaqueExpressionImpl()
 {
@@ -205,6 +221,8 @@ OpaqueExpressionImpl::OpaqueExpressionImpl(const OpaqueExpressionImpl & obj):Opa
 	m_templateParameter  = obj.getTemplateParameter();
 
 	m_type  = obj.getType();
+
+	m_valueSpecificationAction  = obj.getValueSpecificationAction();
 
 
 	//Clone references with containment (deep copy)
@@ -375,6 +393,11 @@ std::shared_ptr<ecore::EObject> OpaqueExpressionImpl::eContainer() const
 	{
 		return wp;
 	}
+
+	if(auto wp = m_valueSpecificationAction.lock())
+	{
+		return wp;
+	}
 	return nullptr;
 }
 
@@ -386,13 +409,13 @@ Any OpaqueExpressionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::OPAQUEEXPRESSION_ATTRIBUTE_BEHAVIOR:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getBehavior())); //16714
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getBehavior())); //16715
 		case UmlPackage::OPAQUEEXPRESSION_ATTRIBUTE_BODY:
-			return eAny(getBody()); //16715
+			return eAny(getBody()); //16716
 		case UmlPackage::OPAQUEEXPRESSION_ATTRIBUTE_LANGUAGE:
-			return eAny(getLanguage()); //16716
+			return eAny(getLanguage()); //16717
 		case UmlPackage::OPAQUEEXPRESSION_ATTRIBUTE_RESULT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getResult())); //16717
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getResult())); //16718
 	}
 	return ValueSpecificationImpl::eGet(featureID, resolve, coreType);
 }
@@ -401,13 +424,13 @@ bool OpaqueExpressionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::OPAQUEEXPRESSION_ATTRIBUTE_BEHAVIOR:
-			return getBehavior() != nullptr; //16714
+			return getBehavior() != nullptr; //16715
 		case UmlPackage::OPAQUEEXPRESSION_ATTRIBUTE_BODY:
-			return !getBody()->empty(); //16715
+			return !getBody()->empty(); //16716
 		case UmlPackage::OPAQUEEXPRESSION_ATTRIBUTE_LANGUAGE:
-			return !getLanguage()->empty(); //16716
+			return !getLanguage()->empty(); //16717
 		case UmlPackage::OPAQUEEXPRESSION_ATTRIBUTE_RESULT:
-			return getResult() != nullptr; //16717
+			return getResult() != nullptr; //16718
 	}
 	return ValueSpecificationImpl::internalEIsSet(featureID);
 }
@@ -420,7 +443,7 @@ bool OpaqueExpressionImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Behavior> _behavior = std::dynamic_pointer_cast<uml::Behavior>(_temp);
-			setBehavior(_behavior); //16714
+			setBehavior(_behavior); //16715
 			return true;
 		}
 		case UmlPackage::OPAQUEEXPRESSION_ATTRIBUTE_BODY:

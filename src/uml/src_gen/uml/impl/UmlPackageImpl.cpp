@@ -3440,9 +3440,17 @@ std::shared_ptr<ecore::EReference> UmlPackageImpl::getInputPin_Attribute_action(
 {
 	return m_inputPin_Attribute_action;
 }
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getInputPin_Attribute_addStructuralFeatureValueAction() const
+{
+	return m_inputPin_Attribute_addStructuralFeatureValueAction;
+}
 std::shared_ptr<ecore::EReference> UmlPackageImpl::getInputPin_Attribute_callOperationAction() const
 {
 	return m_inputPin_Attribute_callOperationAction;
+}
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getInputPin_Attribute_destroyObjectAction() const
+{
+	return m_inputPin_Attribute_destroyObjectAction;
 }
 std::shared_ptr<ecore::EReference> UmlPackageImpl::getInputPin_Attribute_invocationAction() const
 {
@@ -3451,6 +3459,10 @@ std::shared_ptr<ecore::EReference> UmlPackageImpl::getInputPin_Attribute_invocat
 std::shared_ptr<ecore::EReference> UmlPackageImpl::getInputPin_Attribute_structuralFeatureAction() const
 {
 	return m_inputPin_Attribute_structuralFeatureAction;
+}
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getInputPin_Attribute_writeStructuralFeatureAction() const
+{
+	return m_inputPin_Attribute_writeStructuralFeatureAction;
 }
 
 std::shared_ptr<ecore::EOperation> UmlPackageImpl::getInputPin_Operation_outgoing_edges_structured_only_EDiagnosticChain_EMap() const
@@ -5119,9 +5131,29 @@ std::shared_ptr<ecore::EReference> UmlPackageImpl::getOutputPin_Attribute_callAc
 {
 	return m_outputPin_Attribute_callAction;
 }
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getOutputPin_Attribute_clearStructuralFeatureAction() const
+{
+	return m_outputPin_Attribute_clearStructuralFeatureAction;
+}
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getOutputPin_Attribute_createObjectAction() const
+{
+	return m_outputPin_Attribute_createObjectAction;
+}
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getOutputPin_Attribute_readSelfAction() const
+{
+	return m_outputPin_Attribute_readSelfAction;
+}
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getOutputPin_Attribute_readStructuralFeatureAction() const
+{
+	return m_outputPin_Attribute_readStructuralFeatureAction;
+}
 std::shared_ptr<ecore::EReference> UmlPackageImpl::getOutputPin_Attribute_valueSpecificationAction() const
 {
 	return m_outputPin_Attribute_valueSpecificationAction;
+}
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getOutputPin_Attribute_writeStructuralFeatureAction() const
+{
+	return m_outputPin_Attribute_writeStructuralFeatureAction;
 }
 
 std::shared_ptr<ecore::EOperation> UmlPackageImpl::getOutputPin_Operation_incoming_edges_structured_only_EDiagnosticChain_EMap() const
@@ -7921,6 +7953,10 @@ std::shared_ptr<ecore::EClass> UmlPackageImpl::getValueSpecification_Class() con
 std::shared_ptr<ecore::EReference> UmlPackageImpl::getValueSpecification_Attribute_owningSlot() const
 {
 	return m_valueSpecification_Attribute_owningSlot;
+}
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getValueSpecification_Attribute_valueSpecificationAction() const
+{
+	return m_valueSpecification_Attribute_valueSpecificationAction;
 }
 
 std::shared_ptr<ecore::EOperation> UmlPackageImpl::getValueSpecification_Operation_booleanValue() const

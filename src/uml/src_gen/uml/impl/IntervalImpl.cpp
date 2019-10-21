@@ -42,6 +42,8 @@
 #include "uml/UmlPackage.hpp"
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -64,6 +66,8 @@
 #include "uml/Type.hpp"
 
 #include "uml/ValueSpecification.hpp"
+
+#include "uml/ValueSpecificationAction.hpp"
 
 #include "ecore/EcorePackage.hpp"
 #include "ecore/EcoreFactory.hpp"
@@ -164,6 +168,18 @@ IntervalImpl::~IntervalImpl()
 
 
 
+//Additional constructor for the containments back reference
+			IntervalImpl::IntervalImpl(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction)
+			:IntervalImpl()
+			{
+			    m_valueSpecificationAction = par_valueSpecificationAction;
+				m_owner = par_valueSpecificationAction;
+			}
+
+
+
+
+
 
 IntervalImpl::IntervalImpl(const IntervalImpl & obj):IntervalImpl()
 {
@@ -197,6 +213,8 @@ IntervalImpl::IntervalImpl(const IntervalImpl & obj):IntervalImpl()
 	m_templateParameter  = obj.getTemplateParameter();
 
 	m_type  = obj.getType();
+
+	m_valueSpecificationAction  = obj.getValueSpecificationAction();
 
 
 	//Clone references with containment (deep copy)
@@ -314,6 +332,11 @@ std::shared_ptr<ecore::EObject> IntervalImpl::eContainer() const
 	{
 		return wp;
 	}
+
+	if(auto wp = m_valueSpecificationAction.lock())
+	{
+		return wp;
+	}
 	return nullptr;
 }
 
@@ -325,9 +348,9 @@ Any IntervalImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::INTERVAL_ATTRIBUTE_MAX:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getMax())); //12914
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getMax())); //12915
 		case UmlPackage::INTERVAL_ATTRIBUTE_MIN:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getMin())); //12915
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getMin())); //12916
 	}
 	return ValueSpecificationImpl::eGet(featureID, resolve, coreType);
 }
@@ -336,9 +359,9 @@ bool IntervalImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::INTERVAL_ATTRIBUTE_MAX:
-			return getMax() != nullptr; //12914
+			return getMax() != nullptr; //12915
 		case UmlPackage::INTERVAL_ATTRIBUTE_MIN:
-			return getMin() != nullptr; //12915
+			return getMin() != nullptr; //12916
 	}
 	return ValueSpecificationImpl::internalEIsSet(featureID);
 }
@@ -351,7 +374,7 @@ bool IntervalImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ValueSpecification> _max = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
-			setMax(_max); //12914
+			setMax(_max); //12915
 			return true;
 		}
 		case UmlPackage::INTERVAL_ATTRIBUTE_MIN:
@@ -359,7 +382,7 @@ bool IntervalImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ValueSpecification> _min = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
-			setMin(_min); //12915
+			setMin(_min); //12916
 			return true;
 		}
 	}

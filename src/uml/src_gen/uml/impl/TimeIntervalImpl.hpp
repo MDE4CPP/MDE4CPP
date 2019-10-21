@@ -53,6 +53,10 @@ namespace uml
 			TimeIntervalImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
 
 
+			//Additional constructors for the containments back reference
+			TimeIntervalImpl(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction);
+
+
 
 
 		public:

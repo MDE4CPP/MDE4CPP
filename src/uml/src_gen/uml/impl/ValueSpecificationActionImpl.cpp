@@ -516,10 +516,9 @@ void ValueSpecificationActionImpl::loadNode(std::string nodeName, std::shared_pt
 				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			std::shared_ptr<uml::ValueSpecification> value = std::dynamic_pointer_cast<uml::ValueSpecification>(modelFactory->create(typeName));
+			std::shared_ptr<ecore::EObject> value = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::VALUESPECIFICATION_ATTRIBUTE_VALUESPECIFICATIONACTION);
 			if (value != nullptr)
 			{
-				this->setValue(value);
 				loadHandler->handleChild(value);
 			}
 			return;

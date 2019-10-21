@@ -42,6 +42,8 @@
 #include "uml/UmlPackage.hpp"
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -64,6 +66,8 @@
 #include "uml/TemplateParameter.hpp"
 
 #include "uml/Type.hpp"
+
+#include "uml/ValueSpecificationAction.hpp"
 
 #include "ecore/EcorePackage.hpp"
 #include "ecore/EcoreFactory.hpp"
@@ -158,6 +162,18 @@ LiteralUnlimitedNaturalImpl::~LiteralUnlimitedNaturalImpl()
 
 
 
+//Additional constructor for the containments back reference
+			LiteralUnlimitedNaturalImpl::LiteralUnlimitedNaturalImpl(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction)
+			:LiteralUnlimitedNaturalImpl()
+			{
+			    m_valueSpecificationAction = par_valueSpecificationAction;
+				m_owner = par_valueSpecificationAction;
+			}
+
+
+
+
+
 
 LiteralUnlimitedNaturalImpl::LiteralUnlimitedNaturalImpl(const LiteralUnlimitedNaturalImpl & obj):LiteralUnlimitedNaturalImpl()
 {
@@ -188,6 +204,8 @@ LiteralUnlimitedNaturalImpl::LiteralUnlimitedNaturalImpl(const LiteralUnlimitedN
 	m_templateParameter  = obj.getTemplateParameter();
 
 	m_type  = obj.getType();
+
+	m_valueSpecificationAction  = obj.getValueSpecificationAction();
 
 
 	//Clone references with containment (deep copy)
@@ -295,6 +313,11 @@ std::shared_ptr<ecore::EObject> LiteralUnlimitedNaturalImpl::eContainer() const
 	{
 		return wp;
 	}
+
+	if(auto wp = m_valueSpecificationAction.lock())
+	{
+		return wp;
+	}
 	return nullptr;
 }
 
@@ -306,7 +329,7 @@ Any LiteralUnlimitedNaturalImpl::eGet(int featureID, bool resolve, bool coreType
 	switch(featureID)
 	{
 		case UmlPackage::LITERALUNLIMITEDNATURAL_ATTRIBUTE_VALUE:
-			return eAny(getValue()); //14414
+			return eAny(getValue()); //14415
 	}
 	return LiteralSpecificationImpl::eGet(featureID, resolve, coreType);
 }
@@ -315,7 +338,7 @@ bool LiteralUnlimitedNaturalImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::LITERALUNLIMITEDNATURAL_ATTRIBUTE_VALUE:
-			return getValue() != 0; //14414
+			return getValue() != 0; //14415
 	}
 	return LiteralSpecificationImpl::internalEIsSet(featureID);
 }
@@ -327,7 +350,7 @@ bool LiteralUnlimitedNaturalImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			int _value = newValue->get<int>();
-			setValue(_value); //14414
+			setValue(_value); //14415
 			return true;
 		}
 	}

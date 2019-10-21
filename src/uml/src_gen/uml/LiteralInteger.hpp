@@ -86,6 +86,11 @@ namespace uml
 	class Type;
 }
 
+namespace uml 
+{
+	class ValueSpecificationAction;
+}
+
 // base class includes
 #include "uml/LiteralSpecification.hpp"
 

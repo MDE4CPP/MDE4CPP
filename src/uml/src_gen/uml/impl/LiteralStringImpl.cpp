@@ -42,6 +42,8 @@
 #include "uml/UmlPackage.hpp"
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -64,6 +66,8 @@
 #include "uml/TemplateParameter.hpp"
 
 #include "uml/Type.hpp"
+
+#include "uml/ValueSpecificationAction.hpp"
 
 #include "ecore/EcorePackage.hpp"
 #include "ecore/EcoreFactory.hpp"
@@ -158,6 +162,18 @@ LiteralStringImpl::~LiteralStringImpl()
 
 
 
+//Additional constructor for the containments back reference
+			LiteralStringImpl::LiteralStringImpl(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction)
+			:LiteralStringImpl()
+			{
+			    m_valueSpecificationAction = par_valueSpecificationAction;
+				m_owner = par_valueSpecificationAction;
+			}
+
+
+
+
+
 
 LiteralStringImpl::LiteralStringImpl(const LiteralStringImpl & obj):LiteralStringImpl()
 {
@@ -188,6 +204,8 @@ LiteralStringImpl::LiteralStringImpl(const LiteralStringImpl & obj):LiteralStrin
 	m_templateParameter  = obj.getTemplateParameter();
 
 	m_type  = obj.getType();
+
+	m_valueSpecificationAction  = obj.getValueSpecificationAction();
 
 
 	//Clone references with containment (deep copy)
@@ -295,6 +313,11 @@ std::shared_ptr<ecore::EObject> LiteralStringImpl::eContainer() const
 	{
 		return wp;
 	}
+
+	if(auto wp = m_valueSpecificationAction.lock())
+	{
+		return wp;
+	}
 	return nullptr;
 }
 
@@ -306,7 +329,7 @@ Any LiteralStringImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::LITERALSTRING_ATTRIBUTE_VALUE:
-			return eAny(getValue()); //14314
+			return eAny(getValue()); //14315
 	}
 	return LiteralSpecificationImpl::eGet(featureID, resolve, coreType);
 }
@@ -315,7 +338,7 @@ bool LiteralStringImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::LITERALSTRING_ATTRIBUTE_VALUE:
-			return getValue() != ""; //14314
+			return getValue() != ""; //14315
 	}
 	return LiteralSpecificationImpl::internalEIsSet(featureID);
 }
@@ -327,7 +350,7 @@ bool LiteralStringImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::string _value = newValue->get<std::string>();
-			setValue(_value); //14314
+			setValue(_value); //14315
 			return true;
 		}
 	}

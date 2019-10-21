@@ -42,6 +42,8 @@
 #include "uml/UmlPackage.hpp"
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -64,6 +66,8 @@
 #include "uml/TemplateParameter.hpp"
 
 #include "uml/Type.hpp"
+
+#include "uml/ValueSpecificationAction.hpp"
 
 #include "ecore/EcorePackage.hpp"
 #include "ecore/EcoreFactory.hpp"
@@ -158,6 +162,18 @@ LiteralRealImpl::~LiteralRealImpl()
 
 
 
+//Additional constructor for the containments back reference
+			LiteralRealImpl::LiteralRealImpl(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction)
+			:LiteralRealImpl()
+			{
+			    m_valueSpecificationAction = par_valueSpecificationAction;
+				m_owner = par_valueSpecificationAction;
+			}
+
+
+
+
+
 
 LiteralRealImpl::LiteralRealImpl(const LiteralRealImpl & obj):LiteralRealImpl()
 {
@@ -188,6 +204,8 @@ LiteralRealImpl::LiteralRealImpl(const LiteralRealImpl & obj):LiteralRealImpl()
 	m_templateParameter  = obj.getTemplateParameter();
 
 	m_type  = obj.getType();
+
+	m_valueSpecificationAction  = obj.getValueSpecificationAction();
 
 
 	//Clone references with containment (deep copy)
@@ -295,6 +313,11 @@ std::shared_ptr<ecore::EObject> LiteralRealImpl::eContainer() const
 	{
 		return wp;
 	}
+
+	if(auto wp = m_valueSpecificationAction.lock())
+	{
+		return wp;
+	}
 	return nullptr;
 }
 
@@ -306,7 +329,7 @@ Any LiteralRealImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::LITERALREAL_ATTRIBUTE_VALUE:
-			return eAny(getValue()); //14114
+			return eAny(getValue()); //14115
 	}
 	return LiteralSpecificationImpl::eGet(featureID, resolve, coreType);
 }
@@ -315,7 +338,7 @@ bool LiteralRealImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::LITERALREAL_ATTRIBUTE_VALUE:
-			return getValue() != 0; //14114
+			return getValue() != 0; //14115
 	}
 	return LiteralSpecificationImpl::internalEIsSet(featureID);
 }
@@ -327,7 +350,7 @@ bool LiteralRealImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			double _value = newValue->get<double>();
-			setValue(_value); //14114
+			setValue(_value); //14115
 			return true;
 		}
 	}

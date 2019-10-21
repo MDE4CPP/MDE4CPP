@@ -49,6 +49,12 @@
 #include "uml/UmlPackage.hpp"
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -64,6 +70,8 @@
 
 #include "uml/ActivityPartition.hpp"
 
+#include "uml/AddStructuralFeatureValueAction.hpp"
+
 #include "uml/Behavior.hpp"
 
 #include "uml/CallOperationAction.hpp"
@@ -73,6 +81,8 @@
 #include "uml/Comment.hpp"
 
 #include "uml/Dependency.hpp"
+
+#include "uml/DestroyObjectAction.hpp"
 
 #include "uml/Element.hpp"
 
@@ -97,6 +107,8 @@
 #include "uml/Type.hpp"
 
 #include "uml/ValueSpecification.hpp"
+
+#include "uml/WriteStructuralFeatureAction.hpp"
 
 #include "ecore/EcorePackage.hpp"
 #include "ecore/EcoreFactory.hpp"
@@ -159,10 +171,32 @@ ActionInputPinImpl::~ActionInputPinImpl()
 
 
 //Additional constructor for the containments back reference
+			ActionInputPinImpl::ActionInputPinImpl(std::weak_ptr<uml::AddStructuralFeatureValueAction > par_addStructuralFeatureValueAction)
+			:ActionInputPinImpl()
+			{
+			    m_addStructuralFeatureValueAction = par_addStructuralFeatureValueAction;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
 			ActionInputPinImpl::ActionInputPinImpl(std::weak_ptr<uml::CallOperationAction > par_callOperationAction)
 			:ActionInputPinImpl()
 			{
 			    m_callOperationAction = par_callOperationAction;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			ActionInputPinImpl::ActionInputPinImpl(std::weak_ptr<uml::DestroyObjectAction > par_destroyObjectAction)
+			:ActionInputPinImpl()
+			{
+			    m_destroyObjectAction = par_destroyObjectAction;
 			}
 
 
@@ -226,6 +260,17 @@ ActionInputPinImpl::~ActionInputPinImpl()
 
 
 
+//Additional constructor for the containments back reference
+			ActionInputPinImpl::ActionInputPinImpl(std::weak_ptr<uml::WriteStructuralFeatureAction > par_writeStructuralFeatureAction)
+			:ActionInputPinImpl()
+			{
+			    m_writeStructuralFeatureAction = par_writeStructuralFeatureAction;
+			}
+
+
+
+
+
 
 ActionInputPinImpl::ActionInputPinImpl(const ActionInputPinImpl & obj):ActionInputPinImpl()
 {
@@ -251,10 +296,14 @@ ActionInputPinImpl::ActionInputPinImpl(const ActionInputPinImpl & obj):ActionInp
 
 	m_activity  = obj.getActivity();
 
+	m_addStructuralFeatureValueAction  = obj.getAddStructuralFeatureValueAction();
+
 	m_callOperationAction  = obj.getCallOperationAction();
 
 	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
 	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
+
+	m_destroyObjectAction  = obj.getDestroyObjectAction();
 
 	std::shared_ptr<Union<uml::ActivityGroup>> _inGroup = obj.getInGroup();
 	m_inGroup.reset(new Union<uml::ActivityGroup>(*(obj.getInGroup().get())));
@@ -287,6 +336,8 @@ ActionInputPinImpl::ActionInputPinImpl(const ActionInputPinImpl & obj):ActionInp
 	m_structuralFeatureAction  = obj.getStructuralFeatureAction();
 
 	m_type  = obj.getType();
+
+	m_writeStructuralFeatureAction  = obj.getWriteStructuralFeatureAction();
 
 
 	//Clone references with containment (deep copy)
@@ -454,7 +505,17 @@ std::shared_ptr<ecore::EObject> ActionInputPinImpl::eContainer() const
 		return wp;
 	}
 
+	if(auto wp = m_addStructuralFeatureValueAction.lock())
+	{
+		return wp;
+	}
+
 	if(auto wp = m_callOperationAction.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_destroyObjectAction.lock())
 	{
 		return wp;
 	}
@@ -483,6 +544,11 @@ std::shared_ptr<ecore::EObject> ActionInputPinImpl::eContainer() const
 	{
 		return wp;
 	}
+
+	if(auto wp = m_writeStructuralFeatureAction.lock())
+	{
+		return wp;
+	}
 	return nullptr;
 }
 
@@ -494,7 +560,7 @@ Any ActionInputPinImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::ACTIONINPUTPIN_ATTRIBUTE_FROMACTION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getFromAction())); //637
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getFromAction())); //640
 	}
 	return InputPinImpl::eGet(featureID, resolve, coreType);
 }
@@ -503,7 +569,7 @@ bool ActionInputPinImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::ACTIONINPUTPIN_ATTRIBUTE_FROMACTION:
-			return getFromAction() != nullptr; //637
+			return getFromAction() != nullptr; //640
 	}
 	return InputPinImpl::internalEIsSet(featureID);
 }
@@ -516,7 +582,7 @@ bool ActionInputPinImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Action> _fromAction = std::dynamic_pointer_cast<uml::Action>(_temp);
-			setFromAction(_fromAction); //637
+			setFromAction(_fromAction); //640
 			return true;
 		}
 	}

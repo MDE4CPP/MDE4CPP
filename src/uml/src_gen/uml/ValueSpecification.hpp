@@ -92,6 +92,11 @@ namespace uml
 	class TypedElement;
 }
 
+namespace uml 
+{
+	class ValueSpecificationAction;
+}
+
 // base class includes
 #include "uml/PackageableElement.hpp"
 
@@ -136,6 +141,10 @@ namespace uml
 			//Additional constructors for the containments back reference
 
 			ValueSpecification(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
+
+			//Additional constructors for the containments back reference
+
+			ValueSpecification(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction);
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -203,6 +212,13 @@ namespace uml
 			/*!
 			 */
 			virtual void setOwningSlot(std::shared_ptr<uml::Slot> _owningSlot_owningSlot) = 0;
+			/*!
+			 */
+			virtual std::weak_ptr<uml::ValueSpecificationAction > getValueSpecificationAction() const = 0;
+			
+			/*!
+			 */
+			virtual void setValueSpecificationAction(std::shared_ptr<uml::ValueSpecificationAction> _valueSpecificationAction_valueSpecificationAction) = 0;
 			
 
 		protected:
@@ -217,6 +233,9 @@ namespace uml
 			/*!
 			 */
 			std::weak_ptr<uml::Slot > m_owningSlot;
+			/*!
+			 */
+			std::weak_ptr<uml::ValueSpecificationAction > m_valueSpecificationAction;
 			
 
 		public:

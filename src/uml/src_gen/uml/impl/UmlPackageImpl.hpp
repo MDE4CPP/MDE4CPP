@@ -1830,9 +1830,12 @@ namespace uml
 			
 			
 			virtual std::shared_ptr<ecore::EReference> getInputPin_Attribute_action() const ;
+			virtual std::shared_ptr<ecore::EReference> getInputPin_Attribute_addStructuralFeatureValueAction() const ;
 			virtual std::shared_ptr<ecore::EReference> getInputPin_Attribute_callOperationAction() const ;
+			virtual std::shared_ptr<ecore::EReference> getInputPin_Attribute_destroyObjectAction() const ;
 			virtual std::shared_ptr<ecore::EReference> getInputPin_Attribute_invocationAction() const ;
 			virtual std::shared_ptr<ecore::EReference> getInputPin_Attribute_structuralFeatureAction() const ;
+			virtual std::shared_ptr<ecore::EReference> getInputPin_Attribute_writeStructuralFeatureAction() const ;
 			
 			virtual std::shared_ptr<ecore::EOperation> getInputPin_Operation_outgoing_edges_structured_only_EDiagnosticChain_EMap() const ;
 			
@@ -2556,7 +2559,12 @@ namespace uml
 			
 			virtual std::shared_ptr<ecore::EReference> getOutputPin_Attribute_action() const ;
 			virtual std::shared_ptr<ecore::EReference> getOutputPin_Attribute_callAction() const ;
+			virtual std::shared_ptr<ecore::EReference> getOutputPin_Attribute_clearStructuralFeatureAction() const ;
+			virtual std::shared_ptr<ecore::EReference> getOutputPin_Attribute_createObjectAction() const ;
+			virtual std::shared_ptr<ecore::EReference> getOutputPin_Attribute_readSelfAction() const ;
+			virtual std::shared_ptr<ecore::EReference> getOutputPin_Attribute_readStructuralFeatureAction() const ;
 			virtual std::shared_ptr<ecore::EReference> getOutputPin_Attribute_valueSpecificationAction() const ;
+			virtual std::shared_ptr<ecore::EReference> getOutputPin_Attribute_writeStructuralFeatureAction() const ;
 			
 			virtual std::shared_ptr<ecore::EOperation> getOutputPin_Operation_incoming_edges_structured_only_EDiagnosticChain_EMap() const ;
 			
@@ -3738,6 +3746,7 @@ namespace uml
 			
 			
 			virtual std::shared_ptr<ecore::EReference> getValueSpecification_Attribute_owningSlot() const ;
+			virtual std::shared_ptr<ecore::EReference> getValueSpecification_Attribute_valueSpecificationAction() const ;
 			
 			virtual std::shared_ptr<ecore::EOperation> getValueSpecification_Operation_booleanValue() const ;
 			virtual std::shared_ptr<ecore::EOperation> getValueSpecification_Operation_integerValue() const ;
@@ -4240,6 +4249,7 @@ namespace uml
 			std::shared_ptr<ecore::EReference> m_variable_Attribute_activityScope = nullptr;
 			std::shared_ptr<ecore::EReference> m_templateParameterSubstitution_Attribute_actual = nullptr;
 			std::shared_ptr<ecore::EReference> m_interactionUse_Attribute_actualGate = nullptr;
+			std::shared_ptr<ecore::EReference> m_inputPin_Attribute_addStructuralFeatureValueAction = nullptr;
 			std::shared_ptr<ecore::EReference> m_include_Attribute_addition = nullptr;
 			std::shared_ptr<ecore::EReference> m_generalOrdering_Attribute_after = nullptr;
 			std::shared_ptr<ecore::EReference> m_comment_Attribute_annotatedElement = nullptr;
@@ -4277,6 +4287,7 @@ namespace uml
 			std::shared_ptr<ecore::EReference> m_readIsClassifiedObjectAction_Attribute_classifier = nullptr;
 			std::shared_ptr<ecore::EReference> m_behavioredClassifier_Attribute_classifierBehavior = nullptr;
 			std::shared_ptr<ecore::EReference> m_conditionalNode_Attribute_clause = nullptr;
+			std::shared_ptr<ecore::EReference> m_outputPin_Attribute_clearStructuralFeatureAction = nullptr;
 			std::shared_ptr<ecore::EReference> m_dependency_Attribute_client = nullptr;
 			std::shared_ptr<ecore::EReference> m_namedElement_Attribute_clientDependency = nullptr;
 			std::shared_ptr<ecore::EReference> m_collaboration_Attribute_collaborationRole = nullptr;
@@ -4305,6 +4316,7 @@ namespace uml
 			std::shared_ptr<ecore::EReference> m_informationFlow_Attribute_conveyed = nullptr;
 			std::shared_ptr<ecore::EReference> m_interactionFragment_Attribute_covered = nullptr;
 			std::shared_ptr<ecore::EReference> m_lifeline_Attribute_coveredBy = nullptr;
+			std::shared_ptr<ecore::EReference> m_outputPin_Attribute_createObjectAction = nullptr;
 			std::shared_ptr<ecore::EReference> m_property_Attribute_datatype = nullptr;
 			std::shared_ptr<ecore::EReference> m_operation_Attribute_datatype = nullptr;
 			std::shared_ptr<ecore::EReference> m_clause_Attribute_decider = nullptr;
@@ -4323,6 +4335,7 @@ namespace uml
 			std::shared_ptr<ecore::EReference> m_deploymentTarget_Attribute_deployment = nullptr;
 			std::shared_ptr<ecore::EReference> m_deploymentSpecification_Attribute_deployment = nullptr;
 			std::shared_ptr<ecore::EReference> m_linkEndDestructionData_Attribute_destroyAt = nullptr;
+			std::shared_ptr<ecore::EReference> m_inputPin_Attribute_destroyObjectAction = nullptr;
 			std::shared_ptr<ecore::EReference> m_state_Attribute_doActivity = nullptr;
 			std::shared_ptr<ecore::EReference> m_activity_Attribute_edge = nullptr;
 			std::shared_ptr<ecore::EReference> m_activityPartition_Attribute_edge = nullptr;
@@ -4563,6 +4576,8 @@ namespace uml
 			std::shared_ptr<ecore::EReference> m_qualifierValue_Attribute_qualifier = nullptr;
 			std::shared_ptr<ecore::EReference> m_readLinkObjectEndQualifierAction_Attribute_qualifier = nullptr;
 			std::shared_ptr<ecore::EReference> m_behavioralFeature_Attribute_raisedException = nullptr;
+			std::shared_ptr<ecore::EReference> m_outputPin_Attribute_readSelfAction = nullptr;
+			std::shared_ptr<ecore::EReference> m_outputPin_Attribute_readStructuralFeatureAction = nullptr;
 			std::shared_ptr<ecore::EReference> m_informationFlow_Attribute_realization = nullptr;
 			std::shared_ptr<ecore::EReference> m_component_Attribute_realization = nullptr;
 			std::shared_ptr<ecore::EReference> m_informationFlow_Attribute_realizingActivityEdge = nullptr;
@@ -4718,12 +4733,15 @@ namespace uml
 			std::shared_ptr<ecore::EReference> m_writeVariableAction_Attribute_value = nullptr;
 			std::shared_ptr<ecore::EReference> m_valuePin_Attribute_value = nullptr;
 			std::shared_ptr<ecore::EReference> m_argument_Attribute_value = nullptr;
+			std::shared_ptr<ecore::EReference> m_valueSpecification_Attribute_valueSpecificationAction = nullptr;
 			std::shared_ptr<ecore::EReference> m_outputPin_Attribute_valueSpecificationAction = nullptr;
 			std::shared_ptr<ecore::EReference> m_activity_Attribute_variable = nullptr;
 			std::shared_ptr<ecore::EReference> m_structuredActivityNode_Attribute_variable = nullptr;
 			std::shared_ptr<ecore::EReference> m_variableAction_Attribute_variable = nullptr;
 			std::shared_ptr<ecore::EReference> m_activityEdge_Attribute_weight = nullptr;
 			std::shared_ptr<ecore::EReference> m_timeEvent_Attribute_when = nullptr;
+			std::shared_ptr<ecore::EReference> m_inputPin_Attribute_writeStructuralFeatureAction = nullptr;
+			std::shared_ptr<ecore::EReference> m_outputPin_Attribute_writeStructuralFeatureAction = nullptr;
 			
 			std::shared_ptr<ecore::EOperation> m_stateMachine_Operation_lCA_Vertex_Vertex = nullptr;
 			std::shared_ptr<ecore::EOperation> m_stateMachine_Operation_lCAState_Vertex_Vertex = nullptr;

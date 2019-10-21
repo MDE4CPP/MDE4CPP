@@ -72,6 +72,11 @@ namespace uml
 
 namespace uml 
 {
+	class AddStructuralFeatureValueAction;
+}
+
+namespace uml 
+{
 	class Behavior;
 }
 
@@ -93,6 +98,11 @@ namespace uml
 namespace uml 
 {
 	class Dependency;
+}
+
+namespace uml 
+{
+	class DestroyObjectAction;
 }
 
 namespace uml 
@@ -153,6 +163,11 @@ namespace uml
 namespace uml 
 {
 	class ValueSpecification;
+}
+
+namespace uml 
+{
+	class WriteStructuralFeatureAction;
 }
 
 // base class includes

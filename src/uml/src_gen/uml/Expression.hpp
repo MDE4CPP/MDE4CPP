@@ -87,6 +87,11 @@ namespace uml
 	class ValueSpecification;
 }
 
+namespace uml 
+{
+	class ValueSpecificationAction;
+}
+
 // base class includes
 #include "uml/ValueSpecification.hpp"
 

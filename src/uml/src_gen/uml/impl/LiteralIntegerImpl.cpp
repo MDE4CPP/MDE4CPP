@@ -42,6 +42,8 @@
 #include "uml/UmlPackage.hpp"
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -64,6 +66,8 @@
 #include "uml/TemplateParameter.hpp"
 
 #include "uml/Type.hpp"
+
+#include "uml/ValueSpecificationAction.hpp"
 
 #include "ecore/EcorePackage.hpp"
 #include "ecore/EcoreFactory.hpp"
@@ -158,6 +162,18 @@ LiteralIntegerImpl::~LiteralIntegerImpl()
 
 
 
+//Additional constructor for the containments back reference
+			LiteralIntegerImpl::LiteralIntegerImpl(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction)
+			:LiteralIntegerImpl()
+			{
+			    m_valueSpecificationAction = par_valueSpecificationAction;
+				m_owner = par_valueSpecificationAction;
+			}
+
+
+
+
+
 
 LiteralIntegerImpl::LiteralIntegerImpl(const LiteralIntegerImpl & obj):LiteralIntegerImpl()
 {
@@ -188,6 +204,8 @@ LiteralIntegerImpl::LiteralIntegerImpl(const LiteralIntegerImpl & obj):LiteralIn
 	m_templateParameter  = obj.getTemplateParameter();
 
 	m_type  = obj.getType();
+
+	m_valueSpecificationAction  = obj.getValueSpecificationAction();
 
 
 	//Clone references with containment (deep copy)
@@ -295,6 +313,11 @@ std::shared_ptr<ecore::EObject> LiteralIntegerImpl::eContainer() const
 	{
 		return wp;
 	}
+
+	if(auto wp = m_valueSpecificationAction.lock())
+	{
+		return wp;
+	}
 	return nullptr;
 }
 
@@ -306,7 +329,7 @@ Any LiteralIntegerImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::LITERALINTEGER_ATTRIBUTE_VALUE:
-			return eAny(getValue()); //13914
+			return eAny(getValue()); //13915
 	}
 	return LiteralSpecificationImpl::eGet(featureID, resolve, coreType);
 }
@@ -315,7 +338,7 @@ bool LiteralIntegerImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case UmlPackage::LITERALINTEGER_ATTRIBUTE_VALUE:
-			return getValue() != 0; //13914
+			return getValue() != 0; //13915
 	}
 	return LiteralSpecificationImpl::internalEIsSet(featureID);
 }
@@ -327,7 +350,7 @@ bool LiteralIntegerImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			int _value = newValue->get<int>();
-			setValue(_value); //13914
+			setValue(_value); //13915
 			return true;
 		}
 	}

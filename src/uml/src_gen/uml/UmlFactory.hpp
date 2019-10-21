@@ -295,6 +295,11 @@ namespace uml
 
 namespace uml 
 {
+	class AddStructuralFeatureValueAction;
+}
+
+namespace uml 
+{
 	class Package;
 }
 
@@ -340,6 +345,11 @@ namespace uml
 
 namespace uml 
 {
+	class ClearStructuralFeatureAction;
+}
+
+namespace uml 
+{
 	class Region;
 }
 
@@ -355,6 +365,11 @@ namespace uml
 
 namespace uml 
 {
+	class CreateObjectAction;
+}
+
+namespace uml 
+{
 	class DataType;
 }
 
@@ -366,6 +381,11 @@ namespace uml
 namespace uml 
 {
 	class Deployment;
+}
+
+namespace uml 
+{
+	class DestroyObjectAction;
 }
 
 namespace uml 
@@ -515,6 +535,16 @@ namespace uml
 
 namespace uml 
 {
+	class ReadSelfAction;
+}
+
+namespace uml 
+{
+	class ReadStructuralFeatureAction;
+}
+
+namespace uml 
+{
 	class Package;
 }
 
@@ -603,6 +633,21 @@ namespace uml
 	class ValueSpecificationAction;
 }
 
+namespace uml 
+{
+	class ValueSpecificationAction;
+}
+
+namespace uml 
+{
+	class WriteStructuralFeatureAction;
+}
+
+namespace uml 
+{
+	class WriteStructuralFeatureAction;
+}
+
 
 namespace uml 
 {
@@ -671,7 +716,11 @@ namespace uml
 			//Add containing object
 			virtual std::shared_ptr<ActionInputPin> createActionInputPin_in_Activity(std::weak_ptr<uml::Activity > par_activity, const int metaElementID=-1) const = 0;
 			//Add containing object
+			virtual std::shared_ptr<ActionInputPin> createActionInputPin_in_AddStructuralFeatureValueAction(std::weak_ptr<uml::AddStructuralFeatureValueAction > par_addStructuralFeatureValueAction, const int metaElementID=-1) const = 0;
+			//Add containing object
 			virtual std::shared_ptr<ActionInputPin> createActionInputPin_in_CallOperationAction(std::weak_ptr<uml::CallOperationAction > par_callOperationAction, const int metaElementID=-1) const = 0;
+			//Add containing object
+			virtual std::shared_ptr<ActionInputPin> createActionInputPin_in_DestroyObjectAction(std::weak_ptr<uml::DestroyObjectAction > par_destroyObjectAction, const int metaElementID=-1) const = 0;
 			//Add containing object
 			virtual std::shared_ptr<ActionInputPin> createActionInputPin_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode, const int metaElementID=-1) const = 0;
 			//Add containing object
@@ -682,6 +731,8 @@ namespace uml
 			virtual std::shared_ptr<ActionInputPin> createActionInputPin_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID=-1) const = 0;
 			//Add containing object
 			virtual std::shared_ptr<ActionInputPin> createActionInputPin_in_StructuralFeatureAction(std::weak_ptr<uml::StructuralFeatureAction > par_structuralFeatureAction, const int metaElementID=-1) const = 0;
+			//Add containing object
+			virtual std::shared_ptr<ActionInputPin> createActionInputPin_in_WriteStructuralFeatureAction(std::weak_ptr<uml::WriteStructuralFeatureAction > par_writeStructuralFeatureAction, const int metaElementID=-1) const = 0;
 			
 			virtual std::shared_ptr<Activity> createActivity(const int metaElementID=-1) const = 0;
 			//Add containing object
@@ -1232,6 +1283,8 @@ namespace uml
 			virtual std::shared_ptr<Duration> createDuration_in_OwningSlot(std::weak_ptr<uml::Slot > par_owningSlot, const int metaElementID=-1) const = 0;
 			//Add containing object
 			virtual std::shared_ptr<Duration> createDuration_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter, const int metaElementID=-1) const = 0;
+			//Add containing object
+			virtual std::shared_ptr<Duration> createDuration_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction, const int metaElementID=-1) const = 0;
 			
 			virtual std::shared_ptr<DurationConstraint> createDurationConstraint(const int metaElementID=-1) const = 0;
 			//Add containing object
@@ -1256,6 +1309,8 @@ namespace uml
 			virtual std::shared_ptr<DurationInterval> createDurationInterval_in_OwningSlot(std::weak_ptr<uml::Slot > par_owningSlot, const int metaElementID=-1) const = 0;
 			//Add containing object
 			virtual std::shared_ptr<DurationInterval> createDurationInterval_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter, const int metaElementID=-1) const = 0;
+			//Add containing object
+			virtual std::shared_ptr<DurationInterval> createDurationInterval_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction, const int metaElementID=-1) const = 0;
 			
 			virtual std::shared_ptr<DurationObservation> createDurationObservation(const int metaElementID=-1) const = 0;
 			//Add containing object
@@ -1360,6 +1415,8 @@ namespace uml
 			virtual std::shared_ptr<Expression> createExpression_in_OwningSlot(std::weak_ptr<uml::Slot > par_owningSlot, const int metaElementID=-1) const = 0;
 			//Add containing object
 			virtual std::shared_ptr<Expression> createExpression_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter, const int metaElementID=-1) const = 0;
+			//Add containing object
+			virtual std::shared_ptr<Expression> createExpression_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction, const int metaElementID=-1) const = 0;
 			
 			virtual std::shared_ptr<Extend> createExtend(const int metaElementID=-1) const = 0;
 			//Add containing object
@@ -1531,7 +1588,11 @@ namespace uml
 			//Add containing object
 			virtual std::shared_ptr<InputPin> createInputPin_in_Activity(std::weak_ptr<uml::Activity > par_activity, const int metaElementID=-1) const = 0;
 			//Add containing object
+			virtual std::shared_ptr<InputPin> createInputPin_in_AddStructuralFeatureValueAction(std::weak_ptr<uml::AddStructuralFeatureValueAction > par_addStructuralFeatureValueAction, const int metaElementID=-1) const = 0;
+			//Add containing object
 			virtual std::shared_ptr<InputPin> createInputPin_in_CallOperationAction(std::weak_ptr<uml::CallOperationAction > par_callOperationAction, const int metaElementID=-1) const = 0;
+			//Add containing object
+			virtual std::shared_ptr<InputPin> createInputPin_in_DestroyObjectAction(std::weak_ptr<uml::DestroyObjectAction > par_destroyObjectAction, const int metaElementID=-1) const = 0;
 			//Add containing object
 			virtual std::shared_ptr<InputPin> createInputPin_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode, const int metaElementID=-1) const = 0;
 			//Add containing object
@@ -1542,6 +1603,8 @@ namespace uml
 			virtual std::shared_ptr<InputPin> createInputPin_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID=-1) const = 0;
 			//Add containing object
 			virtual std::shared_ptr<InputPin> createInputPin_in_StructuralFeatureAction(std::weak_ptr<uml::StructuralFeatureAction > par_structuralFeatureAction, const int metaElementID=-1) const = 0;
+			//Add containing object
+			virtual std::shared_ptr<InputPin> createInputPin_in_WriteStructuralFeatureAction(std::weak_ptr<uml::WriteStructuralFeatureAction > par_writeStructuralFeatureAction, const int metaElementID=-1) const = 0;
 			
 			virtual std::shared_ptr<InstanceSpecification> createInstanceSpecification(const int metaElementID=-1) const = 0;
 			//Add containing object
@@ -1564,6 +1627,8 @@ namespace uml
 			virtual std::shared_ptr<InstanceValue> createInstanceValue_in_OwningSlot(std::weak_ptr<uml::Slot > par_owningSlot, const int metaElementID=-1) const = 0;
 			//Add containing object
 			virtual std::shared_ptr<InstanceValue> createInstanceValue_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter, const int metaElementID=-1) const = 0;
+			//Add containing object
+			virtual std::shared_ptr<InstanceValue> createInstanceValue_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction, const int metaElementID=-1) const = 0;
 			
 			virtual std::shared_ptr<Interaction> createInteraction(const int metaElementID=-1) const = 0;
 			//Add containing object
@@ -1660,6 +1725,8 @@ namespace uml
 			virtual std::shared_ptr<Interval> createInterval_in_OwningSlot(std::weak_ptr<uml::Slot > par_owningSlot, const int metaElementID=-1) const = 0;
 			//Add containing object
 			virtual std::shared_ptr<Interval> createInterval_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter, const int metaElementID=-1) const = 0;
+			//Add containing object
+			virtual std::shared_ptr<Interval> createInterval_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction, const int metaElementID=-1) const = 0;
 			
 			virtual std::shared_ptr<IntervalConstraint> createIntervalConstraint(const int metaElementID=-1) const = 0;
 			//Add containing object
@@ -1714,6 +1781,8 @@ namespace uml
 			virtual std::shared_ptr<LiteralBoolean> createLiteralBoolean_in_OwningSlot(std::weak_ptr<uml::Slot > par_owningSlot, const int metaElementID=-1) const = 0;
 			//Add containing object
 			virtual std::shared_ptr<LiteralBoolean> createLiteralBoolean_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter, const int metaElementID=-1) const = 0;
+			//Add containing object
+			virtual std::shared_ptr<LiteralBoolean> createLiteralBoolean_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction, const int metaElementID=-1) const = 0;
 			
 			virtual std::shared_ptr<LiteralInteger> createLiteralInteger(const int metaElementID=-1) const = 0;
 			//Add containing object
@@ -1726,6 +1795,8 @@ namespace uml
 			virtual std::shared_ptr<LiteralInteger> createLiteralInteger_in_OwningSlot(std::weak_ptr<uml::Slot > par_owningSlot, const int metaElementID=-1) const = 0;
 			//Add containing object
 			virtual std::shared_ptr<LiteralInteger> createLiteralInteger_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter, const int metaElementID=-1) const = 0;
+			//Add containing object
+			virtual std::shared_ptr<LiteralInteger> createLiteralInteger_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction, const int metaElementID=-1) const = 0;
 			
 			virtual std::shared_ptr<LiteralNull> createLiteralNull(const int metaElementID=-1) const = 0;
 			//Add containing object
@@ -1738,6 +1809,8 @@ namespace uml
 			virtual std::shared_ptr<LiteralNull> createLiteralNull_in_OwningSlot(std::weak_ptr<uml::Slot > par_owningSlot, const int metaElementID=-1) const = 0;
 			//Add containing object
 			virtual std::shared_ptr<LiteralNull> createLiteralNull_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter, const int metaElementID=-1) const = 0;
+			//Add containing object
+			virtual std::shared_ptr<LiteralNull> createLiteralNull_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction, const int metaElementID=-1) const = 0;
 			
 			virtual std::shared_ptr<LiteralReal> createLiteralReal(const int metaElementID=-1) const = 0;
 			//Add containing object
@@ -1750,6 +1823,8 @@ namespace uml
 			virtual std::shared_ptr<LiteralReal> createLiteralReal_in_OwningSlot(std::weak_ptr<uml::Slot > par_owningSlot, const int metaElementID=-1) const = 0;
 			//Add containing object
 			virtual std::shared_ptr<LiteralReal> createLiteralReal_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter, const int metaElementID=-1) const = 0;
+			//Add containing object
+			virtual std::shared_ptr<LiteralReal> createLiteralReal_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction, const int metaElementID=-1) const = 0;
 			
 			virtual std::shared_ptr<LiteralString> createLiteralString(const int metaElementID=-1) const = 0;
 			//Add containing object
@@ -1762,6 +1837,8 @@ namespace uml
 			virtual std::shared_ptr<LiteralString> createLiteralString_in_OwningSlot(std::weak_ptr<uml::Slot > par_owningSlot, const int metaElementID=-1) const = 0;
 			//Add containing object
 			virtual std::shared_ptr<LiteralString> createLiteralString_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter, const int metaElementID=-1) const = 0;
+			//Add containing object
+			virtual std::shared_ptr<LiteralString> createLiteralString_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction, const int metaElementID=-1) const = 0;
 			
 			virtual std::shared_ptr<LiteralUnlimitedNatural> createLiteralUnlimitedNatural(const int metaElementID=-1) const = 0;
 			//Add containing object
@@ -1774,6 +1851,8 @@ namespace uml
 			virtual std::shared_ptr<LiteralUnlimitedNatural> createLiteralUnlimitedNatural_in_OwningSlot(std::weak_ptr<uml::Slot > par_owningSlot, const int metaElementID=-1) const = 0;
 			//Add containing object
 			virtual std::shared_ptr<LiteralUnlimitedNatural> createLiteralUnlimitedNatural_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter, const int metaElementID=-1) const = 0;
+			//Add containing object
+			virtual std::shared_ptr<LiteralUnlimitedNatural> createLiteralUnlimitedNatural_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction, const int metaElementID=-1) const = 0;
 			
 			virtual std::shared_ptr<LoopNode> createLoopNode(const int metaElementID=-1) const = 0;
 			//Add containing object
@@ -1908,6 +1987,8 @@ namespace uml
 			virtual std::shared_ptr<OpaqueExpression> createOpaqueExpression_in_OwningSlot(std::weak_ptr<uml::Slot > par_owningSlot, const int metaElementID=-1) const = 0;
 			//Add containing object
 			virtual std::shared_ptr<OpaqueExpression> createOpaqueExpression_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter, const int metaElementID=-1) const = 0;
+			//Add containing object
+			virtual std::shared_ptr<OpaqueExpression> createOpaqueExpression_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction, const int metaElementID=-1) const = 0;
 			
 			virtual std::shared_ptr<Operation> createOperation(const int metaElementID=-1) const = 0;
 			//Add containing object
@@ -1937,13 +2018,23 @@ namespace uml
 			//Add containing object
 			virtual std::shared_ptr<OutputPin> createOutputPin_in_CallAction(std::weak_ptr<uml::CallAction > par_callAction, const int metaElementID=-1) const = 0;
 			//Add containing object
+			virtual std::shared_ptr<OutputPin> createOutputPin_in_ClearStructuralFeatureAction(std::weak_ptr<uml::ClearStructuralFeatureAction > par_clearStructuralFeatureAction, const int metaElementID=-1) const = 0;
+			//Add containing object
+			virtual std::shared_ptr<OutputPin> createOutputPin_in_CreateObjectAction(std::weak_ptr<uml::CreateObjectAction > par_createObjectAction, const int metaElementID=-1) const = 0;
+			//Add containing object
 			virtual std::shared_ptr<OutputPin> createOutputPin_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode, const int metaElementID=-1) const = 0;
 			//Add containing object
 			virtual std::shared_ptr<OutputPin> createOutputPin_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID=-1) const = 0;
 			//Add containing object
 			virtual std::shared_ptr<OutputPin> createOutputPin_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID=-1) const = 0;
 			//Add containing object
+			virtual std::shared_ptr<OutputPin> createOutputPin_in_ReadSelfAction(std::weak_ptr<uml::ReadSelfAction > par_readSelfAction, const int metaElementID=-1) const = 0;
+			//Add containing object
+			virtual std::shared_ptr<OutputPin> createOutputPin_in_ReadStructuralFeatureAction(std::weak_ptr<uml::ReadStructuralFeatureAction > par_readStructuralFeatureAction, const int metaElementID=-1) const = 0;
+			//Add containing object
 			virtual std::shared_ptr<OutputPin> createOutputPin_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction, const int metaElementID=-1) const = 0;
+			//Add containing object
+			virtual std::shared_ptr<OutputPin> createOutputPin_in_WriteStructuralFeatureAction(std::weak_ptr<uml::WriteStructuralFeatureAction > par_writeStructuralFeatureAction, const int metaElementID=-1) const = 0;
 			
 			virtual std::shared_ptr<Package> createPackage(const int metaElementID=-1) const = 0;
 			//Add containing object
@@ -2420,6 +2511,8 @@ namespace uml
 			virtual std::shared_ptr<StringExpression> createStringExpression_in_OwningSlot(std::weak_ptr<uml::Slot > par_owningSlot, const int metaElementID=-1) const = 0;
 			//Add containing object
 			virtual std::shared_ptr<StringExpression> createStringExpression_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter, const int metaElementID=-1) const = 0;
+			//Add containing object
+			virtual std::shared_ptr<StringExpression> createStringExpression_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction, const int metaElementID=-1) const = 0;
 			
 			virtual std::shared_ptr<StructuredActivityNode> createStructuredActivityNode(const int metaElementID=-1) const = 0;
 			//Add containing object
@@ -2514,6 +2607,8 @@ namespace uml
 			virtual std::shared_ptr<TimeExpression> createTimeExpression_in_OwningSlot(std::weak_ptr<uml::Slot > par_owningSlot, const int metaElementID=-1) const = 0;
 			//Add containing object
 			virtual std::shared_ptr<TimeExpression> createTimeExpression_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter, const int metaElementID=-1) const = 0;
+			//Add containing object
+			virtual std::shared_ptr<TimeExpression> createTimeExpression_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction, const int metaElementID=-1) const = 0;
 			
 			virtual std::shared_ptr<TimeInterval> createTimeInterval(const int metaElementID=-1) const = 0;
 			//Add containing object
@@ -2526,6 +2621,8 @@ namespace uml
 			virtual std::shared_ptr<TimeInterval> createTimeInterval_in_OwningSlot(std::weak_ptr<uml::Slot > par_owningSlot, const int metaElementID=-1) const = 0;
 			//Add containing object
 			virtual std::shared_ptr<TimeInterval> createTimeInterval_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter, const int metaElementID=-1) const = 0;
+			//Add containing object
+			virtual std::shared_ptr<TimeInterval> createTimeInterval_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction, const int metaElementID=-1) const = 0;
 			
 			virtual std::shared_ptr<TimeObservation> createTimeObservation(const int metaElementID=-1) const = 0;
 			//Add containing object
@@ -2589,7 +2686,11 @@ namespace uml
 			//Add containing object
 			virtual std::shared_ptr<ValuePin> createValuePin_in_Activity(std::weak_ptr<uml::Activity > par_activity, const int metaElementID=-1) const = 0;
 			//Add containing object
+			virtual std::shared_ptr<ValuePin> createValuePin_in_AddStructuralFeatureValueAction(std::weak_ptr<uml::AddStructuralFeatureValueAction > par_addStructuralFeatureValueAction, const int metaElementID=-1) const = 0;
+			//Add containing object
 			virtual std::shared_ptr<ValuePin> createValuePin_in_CallOperationAction(std::weak_ptr<uml::CallOperationAction > par_callOperationAction, const int metaElementID=-1) const = 0;
+			//Add containing object
+			virtual std::shared_ptr<ValuePin> createValuePin_in_DestroyObjectAction(std::weak_ptr<uml::DestroyObjectAction > par_destroyObjectAction, const int metaElementID=-1) const = 0;
 			//Add containing object
 			virtual std::shared_ptr<ValuePin> createValuePin_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode, const int metaElementID=-1) const = 0;
 			//Add containing object
@@ -2600,6 +2701,8 @@ namespace uml
 			virtual std::shared_ptr<ValuePin> createValuePin_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID=-1) const = 0;
 			//Add containing object
 			virtual std::shared_ptr<ValuePin> createValuePin_in_StructuralFeatureAction(std::weak_ptr<uml::StructuralFeatureAction > par_structuralFeatureAction, const int metaElementID=-1) const = 0;
+			//Add containing object
+			virtual std::shared_ptr<ValuePin> createValuePin_in_WriteStructuralFeatureAction(std::weak_ptr<uml::WriteStructuralFeatureAction > par_writeStructuralFeatureAction, const int metaElementID=-1) const = 0;
 			
 			virtual std::shared_ptr<ValueSpecificationAction> createValueSpecificationAction(const int metaElementID=-1) const = 0;
 			//Add containing object

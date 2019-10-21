@@ -185,14 +185,14 @@ namespace uml
 			// Begin Class ActionInputPin
 			//Class and Feature IDs 
 			static const unsigned int ACTIONINPUTPIN_CLASS = 6;
-			static const unsigned int ACTIONINPUTPIN_CLASS_FEATURE_COUNT = 38;
+			static const unsigned int ACTIONINPUTPIN_CLASS_FEATURE_COUNT = 41;
 			static const unsigned int ACTIONINPUTPIN_CLASS_OPERATION_COUNT = 83;
 			
-			static const int ACTIONINPUTPIN_ATTRIBUTE_FROMACTION = 637;
+			static const int ACTIONINPUTPIN_ATTRIBUTE_FROMACTION = 640;
 			
-			static const int ACTIONINPUTPIN_OPERATION_INPUT_PIN_EDIAGNOSTICCHAIN_EMAP = 718;
-			static const int ACTIONINPUTPIN_OPERATION_NO_CONTROL_OR_OBJECT_FLOW_EDIAGNOSTICCHAIN_EMAP = 720;
-			static const int ACTIONINPUTPIN_OPERATION_ONE_OUTPUT_PIN_EDIAGNOSTICCHAIN_EMAP = 719;
+			static const int ACTIONINPUTPIN_OPERATION_INPUT_PIN_EDIAGNOSTICCHAIN_EMAP = 721;
+			static const int ACTIONINPUTPIN_OPERATION_NO_CONTROL_OR_OBJECT_FLOW_EDIAGNOSTICCHAIN_EMAP = 723;
+			static const int ACTIONINPUTPIN_OPERATION_ONE_OUTPUT_PIN_EDIAGNOSTICCHAIN_EMAP = 722;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getActionInputPin_Class() const = 0;
@@ -2042,13 +2042,13 @@ namespace uml
 			// Begin Class Duration
 			//Class and Feature IDs 
 			static const unsigned int DURATION_CLASS = 78;
-			static const unsigned int DURATION_CLASS_FEATURE_COUNT = 16;
+			static const unsigned int DURATION_CLASS_FEATURE_COUNT = 17;
 			static const unsigned int DURATION_CLASS_OPERATION_COUNT = 67;
 			
-			static const int DURATION_ATTRIBUTE_EXPR = 7814;
-			static const int DURATION_ATTRIBUTE_OBSERVATION = 7815;
+			static const int DURATION_ATTRIBUTE_EXPR = 7815;
+			static const int DURATION_ATTRIBUTE_OBSERVATION = 7816;
 			
-			static const int DURATION_OPERATION_NO_EXPR_REQUIRES_OBSERVATION_EDIAGNOSTICCHAIN_EMAP = 7882;
+			static const int DURATION_OPERATION_NO_EXPR_REQUIRES_OBSERVATION_EDIAGNOSTICCHAIN_EMAP = 7883;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getDuration_Class() const = 0;
@@ -2088,7 +2088,7 @@ namespace uml
 			// Begin Class DurationInterval
 			//Class and Feature IDs 
 			static const unsigned int DURATIONINTERVAL_CLASS = 80;
-			static const unsigned int DURATIONINTERVAL_CLASS_FEATURE_COUNT = 16;
+			static const unsigned int DURATIONINTERVAL_CLASS_FEATURE_COUNT = 17;
 			static const unsigned int DURATIONINTERVAL_CLASS_OPERATION_COUNT = 66;
 			
 			
@@ -2501,11 +2501,11 @@ namespace uml
 			// Begin Class Expression
 			//Class and Feature IDs 
 			static const unsigned int EXPRESSION_CLASS = 96;
-			static const unsigned int EXPRESSION_CLASS_FEATURE_COUNT = 16;
+			static const unsigned int EXPRESSION_CLASS_FEATURE_COUNT = 17;
 			static const unsigned int EXPRESSION_CLASS_OPERATION_COUNT = 66;
-			static const int EXPRESSION_ATTRIBUTE_SYMBOL = 9615;
+			static const int EXPRESSION_ATTRIBUTE_SYMBOL = 9616;
 			
-			static const int EXPRESSION_ATTRIBUTE_OPERAND = 9614;
+			static const int EXPRESSION_ATTRIBUTE_OPERAND = 9615;
 			
 			
 			//Class and Feature Getter
@@ -3024,24 +3024,30 @@ namespace uml
 			// Begin Class InputPin
 			//Class and Feature IDs 
 			static const unsigned int INPUTPIN_CLASS = 117;
-			static const unsigned int INPUTPIN_CLASS_FEATURE_COUNT = 37;
+			static const unsigned int INPUTPIN_CLASS_FEATURE_COUNT = 40;
 			static const unsigned int INPUTPIN_CLASS_OPERATION_COUNT = 80;
 			
 			static const int INPUTPIN_ATTRIBUTE_ACTION = 11736;
+			static const int INPUTPIN_ATTRIBUTE_ADDSTRUCTURALFEATUREVALUEACTION = 11738;
 			static const int INPUTPIN_ATTRIBUTE_CALLOPERATIONACTION = 11734;
+			static const int INPUTPIN_ATTRIBUTE_DESTROYOBJECTACTION = 11739;
 			static const int INPUTPIN_ATTRIBUTE_INVOCATIONACTION = 11735;
 			static const int INPUTPIN_ATTRIBUTE_STRUCTURALFEATUREACTION = 11733;
+			static const int INPUTPIN_ATTRIBUTE_WRITESTRUCTURALFEATUREACTION = 11737;
 			
-			static const int INPUTPIN_OPERATION_OUTGOING_EDGES_STRUCTURED_ONLY_EDIAGNOSTICCHAIN_EMAP = 11816;
+			static const int INPUTPIN_OPERATION_OUTGOING_EDGES_STRUCTURED_ONLY_EDIAGNOSTICCHAIN_EMAP = 11819;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getInputPin_Class() const = 0;
 			
 			
 			virtual std::shared_ptr<ecore::EReference> getInputPin_Attribute_action() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getInputPin_Attribute_addStructuralFeatureValueAction() const = 0;
 			virtual std::shared_ptr<ecore::EReference> getInputPin_Attribute_callOperationAction() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getInputPin_Attribute_destroyObjectAction() const = 0;
 			virtual std::shared_ptr<ecore::EReference> getInputPin_Attribute_invocationAction() const = 0;
 			virtual std::shared_ptr<ecore::EReference> getInputPin_Attribute_structuralFeatureAction() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getInputPin_Attribute_writeStructuralFeatureAction() const = 0;
 			
 			virtual std::shared_ptr<ecore::EOperation> getInputPin_Operation_outgoing_edges_structured_only_EDiagnosticChain_EMap() const = 0;
 			
@@ -3082,10 +3088,10 @@ namespace uml
 			// Begin Class InstanceValue
 			//Class and Feature IDs 
 			static const unsigned int INSTANCEVALUE_CLASS = 119;
-			static const unsigned int INSTANCEVALUE_CLASS_FEATURE_COUNT = 15;
+			static const unsigned int INSTANCEVALUE_CLASS_FEATURE_COUNT = 16;
 			static const unsigned int INSTANCEVALUE_CLASS_OPERATION_COUNT = 66;
 			
-			static const int INSTANCEVALUE_ATTRIBUTE_INSTANCE = 11914;
+			static const int INSTANCEVALUE_ATTRIBUTE_INSTANCE = 11915;
 			
 			
 			//Class and Feature Getter
@@ -3331,11 +3337,11 @@ namespace uml
 			// Begin Class Interval
 			//Class and Feature IDs 
 			static const unsigned int INTERVAL_CLASS = 129;
-			static const unsigned int INTERVAL_CLASS_FEATURE_COUNT = 16;
+			static const unsigned int INTERVAL_CLASS_FEATURE_COUNT = 17;
 			static const unsigned int INTERVAL_CLASS_OPERATION_COUNT = 66;
 			
-			static const int INTERVAL_ATTRIBUTE_MAX = 12914;
-			static const int INTERVAL_ATTRIBUTE_MIN = 12915;
+			static const int INTERVAL_ATTRIBUTE_MAX = 12915;
+			static const int INTERVAL_ATTRIBUTE_MIN = 12916;
 			
 			
 			//Class and Feature Getter
@@ -3560,9 +3566,9 @@ namespace uml
 			// Begin Class LiteralBoolean
 			//Class and Feature IDs 
 			static const unsigned int LITERALBOOLEAN_CLASS = 138;
-			static const unsigned int LITERALBOOLEAN_CLASS_FEATURE_COUNT = 15;
+			static const unsigned int LITERALBOOLEAN_CLASS_FEATURE_COUNT = 16;
 			static const unsigned int LITERALBOOLEAN_CLASS_OPERATION_COUNT = 66;
-			static const int LITERALBOOLEAN_ATTRIBUTE_VALUE = 13814;
+			static const int LITERALBOOLEAN_ATTRIBUTE_VALUE = 13815;
 			
 			
 			
@@ -3579,9 +3585,9 @@ namespace uml
 			// Begin Class LiteralInteger
 			//Class and Feature IDs 
 			static const unsigned int LITERALINTEGER_CLASS = 139;
-			static const unsigned int LITERALINTEGER_CLASS_FEATURE_COUNT = 15;
+			static const unsigned int LITERALINTEGER_CLASS_FEATURE_COUNT = 16;
 			static const unsigned int LITERALINTEGER_CLASS_OPERATION_COUNT = 66;
-			static const int LITERALINTEGER_ATTRIBUTE_VALUE = 13914;
+			static const int LITERALINTEGER_ATTRIBUTE_VALUE = 13915;
 			
 			
 			
@@ -3598,7 +3604,7 @@ namespace uml
 			// Begin Class LiteralNull
 			//Class and Feature IDs 
 			static const unsigned int LITERALNULL_CLASS = 140;
-			static const unsigned int LITERALNULL_CLASS_FEATURE_COUNT = 14;
+			static const unsigned int LITERALNULL_CLASS_FEATURE_COUNT = 15;
 			static const unsigned int LITERALNULL_CLASS_OPERATION_COUNT = 66;
 			
 			
@@ -3615,9 +3621,9 @@ namespace uml
 			// Begin Class LiteralReal
 			//Class and Feature IDs 
 			static const unsigned int LITERALREAL_CLASS = 141;
-			static const unsigned int LITERALREAL_CLASS_FEATURE_COUNT = 15;
+			static const unsigned int LITERALREAL_CLASS_FEATURE_COUNT = 16;
 			static const unsigned int LITERALREAL_CLASS_OPERATION_COUNT = 66;
-			static const int LITERALREAL_ATTRIBUTE_VALUE = 14114;
+			static const int LITERALREAL_ATTRIBUTE_VALUE = 14115;
 			
 			
 			
@@ -3634,7 +3640,7 @@ namespace uml
 			// Begin Class LiteralSpecification
 			//Class and Feature IDs 
 			static const unsigned int LITERALSPECIFICATION_CLASS = 142;
-			static const unsigned int LITERALSPECIFICATION_CLASS_FEATURE_COUNT = 14;
+			static const unsigned int LITERALSPECIFICATION_CLASS_FEATURE_COUNT = 15;
 			static const unsigned int LITERALSPECIFICATION_CLASS_OPERATION_COUNT = 66;
 			
 			
@@ -3651,9 +3657,9 @@ namespace uml
 			// Begin Class LiteralString
 			//Class and Feature IDs 
 			static const unsigned int LITERALSTRING_CLASS = 143;
-			static const unsigned int LITERALSTRING_CLASS_FEATURE_COUNT = 15;
+			static const unsigned int LITERALSTRING_CLASS_FEATURE_COUNT = 16;
 			static const unsigned int LITERALSTRING_CLASS_OPERATION_COUNT = 66;
-			static const int LITERALSTRING_ATTRIBUTE_VALUE = 14314;
+			static const int LITERALSTRING_ATTRIBUTE_VALUE = 14315;
 			
 			
 			
@@ -3670,9 +3676,9 @@ namespace uml
 			// Begin Class LiteralUnlimitedNatural
 			//Class and Feature IDs 
 			static const unsigned int LITERALUNLIMITEDNATURAL_CLASS = 144;
-			static const unsigned int LITERALUNLIMITEDNATURAL_CLASS_FEATURE_COUNT = 15;
+			static const unsigned int LITERALUNLIMITEDNATURAL_CLASS_FEATURE_COUNT = 16;
 			static const unsigned int LITERALUNLIMITEDNATURAL_CLASS_OPERATION_COUNT = 66;
-			static const int LITERALUNLIMITEDNATURAL_ATTRIBUTE_VALUE = 14414;
+			static const int LITERALUNLIMITEDNATURAL_ATTRIBUTE_VALUE = 14415;
 			
 			
 			
@@ -4294,22 +4300,22 @@ namespace uml
 			// Begin Class OpaqueExpression
 			//Class and Feature IDs 
 			static const unsigned int OPAQUEEXPRESSION_CLASS = 167;
-			static const unsigned int OPAQUEEXPRESSION_CLASS_FEATURE_COUNT = 18;
+			static const unsigned int OPAQUEEXPRESSION_CLASS_FEATURE_COUNT = 19;
 			static const unsigned int OPAQUEEXPRESSION_CLASS_OPERATION_COUNT = 74;
-			static const int OPAQUEEXPRESSION_ATTRIBUTE_BODY = 16715;
-			static const int OPAQUEEXPRESSION_ATTRIBUTE_LANGUAGE = 16716;
+			static const int OPAQUEEXPRESSION_ATTRIBUTE_BODY = 16716;
+			static const int OPAQUEEXPRESSION_ATTRIBUTE_LANGUAGE = 16717;
 			
-			static const int OPAQUEEXPRESSION_ATTRIBUTE_BEHAVIOR = 16714;
-			static const int OPAQUEEXPRESSION_ATTRIBUTE_RESULT = 16717;
+			static const int OPAQUEEXPRESSION_ATTRIBUTE_BEHAVIOR = 16715;
+			static const int OPAQUEEXPRESSION_ATTRIBUTE_RESULT = 16718;
 			
-			static const int OPAQUEEXPRESSION_OPERATION_GETRESULT = 16790;
-			static const int OPAQUEEXPRESSION_OPERATION_ISINTEGRAL = 16787;
-			static const int OPAQUEEXPRESSION_OPERATION_ISNONNEGATIVE = 16788;
-			static const int OPAQUEEXPRESSION_OPERATION_ISPOSITIVE = 16789;
-			static const int OPAQUEEXPRESSION_OPERATION_LANGUAGE_BODY_SIZE_EDIAGNOSTICCHAIN_EMAP = 16784;
-			static const int OPAQUEEXPRESSION_OPERATION_ONE_RETURN_RESULT_PARAMETER_EDIAGNOSTICCHAIN_EMAP = 16785;
-			static const int OPAQUEEXPRESSION_OPERATION_ONLY_RETURN_RESULT_PARAMETERS_EDIAGNOSTICCHAIN_EMAP = 16786;
-			static const int OPAQUEEXPRESSION_OPERATION_VALUE = 16791;
+			static const int OPAQUEEXPRESSION_OPERATION_GETRESULT = 16791;
+			static const int OPAQUEEXPRESSION_OPERATION_ISINTEGRAL = 16788;
+			static const int OPAQUEEXPRESSION_OPERATION_ISNONNEGATIVE = 16789;
+			static const int OPAQUEEXPRESSION_OPERATION_ISPOSITIVE = 16790;
+			static const int OPAQUEEXPRESSION_OPERATION_LANGUAGE_BODY_SIZE_EDIAGNOSTICCHAIN_EMAP = 16785;
+			static const int OPAQUEEXPRESSION_OPERATION_ONE_RETURN_RESULT_PARAMETER_EDIAGNOSTICCHAIN_EMAP = 16786;
+			static const int OPAQUEEXPRESSION_OPERATION_ONLY_RETURN_RESULT_PARAMETERS_EDIAGNOSTICCHAIN_EMAP = 16787;
+			static const int OPAQUEEXPRESSION_OPERATION_VALUE = 16792;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getOpaqueExpression_Class() const = 0;
@@ -4425,14 +4431,19 @@ namespace uml
 			// Begin Class OutputPin
 			//Class and Feature IDs 
 			static const unsigned int OUTPUTPIN_CLASS = 170;
-			static const unsigned int OUTPUTPIN_CLASS_FEATURE_COUNT = 36;
+			static const unsigned int OUTPUTPIN_CLASS_FEATURE_COUNT = 41;
 			static const unsigned int OUTPUTPIN_CLASS_OPERATION_COUNT = 80;
 			
 			static const int OUTPUTPIN_ATTRIBUTE_ACTION = 17034;
 			static const int OUTPUTPIN_ATTRIBUTE_CALLACTION = 17033;
+			static const int OUTPUTPIN_ATTRIBUTE_CLEARSTRUCTURALFEATUREACTION = 17038;
+			static const int OUTPUTPIN_ATTRIBUTE_CREATEOBJECTACTION = 17040;
+			static const int OUTPUTPIN_ATTRIBUTE_READSELFACTION = 17039;
+			static const int OUTPUTPIN_ATTRIBUTE_READSTRUCTURALFEATUREACTION = 17037;
 			static const int OUTPUTPIN_ATTRIBUTE_VALUESPECIFICATIONACTION = 17035;
+			static const int OUTPUTPIN_ATTRIBUTE_WRITESTRUCTURALFEATUREACTION = 17036;
 			
-			static const int OUTPUTPIN_OPERATION_INCOMING_EDGES_STRUCTURED_ONLY_EDIAGNOSTICCHAIN_EMAP = 17115;
+			static const int OUTPUTPIN_OPERATION_INCOMING_EDGES_STRUCTURED_ONLY_EDIAGNOSTICCHAIN_EMAP = 17120;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getOutputPin_Class() const = 0;
@@ -4440,7 +4451,12 @@ namespace uml
 			
 			virtual std::shared_ptr<ecore::EReference> getOutputPin_Attribute_action() const = 0;
 			virtual std::shared_ptr<ecore::EReference> getOutputPin_Attribute_callAction() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getOutputPin_Attribute_clearStructuralFeatureAction() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getOutputPin_Attribute_createObjectAction() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getOutputPin_Attribute_readSelfAction() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getOutputPin_Attribute_readStructuralFeatureAction() const = 0;
 			virtual std::shared_ptr<ecore::EReference> getOutputPin_Attribute_valueSpecificationAction() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getOutputPin_Attribute_writeStructuralFeatureAction() const = 0;
 			
 			virtual std::shared_ptr<ecore::EOperation> getOutputPin_Operation_incoming_edges_structured_only_EDiagnosticChain_EMap() const = 0;
 			
@@ -6049,14 +6065,14 @@ namespace uml
 			// Begin Class StringExpression
 			//Class and Feature IDs 
 			static const unsigned int STRINGEXPRESSION_CLASS = 225;
-			static const unsigned int STRINGEXPRESSION_CLASS_FEATURE_COUNT = 20;
+			static const unsigned int STRINGEXPRESSION_CLASS_FEATURE_COUNT = 21;
 			static const unsigned int STRINGEXPRESSION_CLASS_OPERATION_COUNT = 70;
 			
-			static const int STRINGEXPRESSION_ATTRIBUTE_OWNINGEXPRESSION = 22518;
-			static const int STRINGEXPRESSION_ATTRIBUTE_SUBEXPRESSION = 22519;
+			static const int STRINGEXPRESSION_ATTRIBUTE_OWNINGEXPRESSION = 22519;
+			static const int STRINGEXPRESSION_ATTRIBUTE_SUBEXPRESSION = 22520;
 			
-			static const int STRINGEXPRESSION_OPERATION_OPERANDS_EDIAGNOSTICCHAIN_EMAP = 22588;
-			static const int STRINGEXPRESSION_OPERATION_SUBEXPRESSIONS_EDIAGNOSTICCHAIN_EMAP = 22589;
+			static const int STRINGEXPRESSION_OPERATION_OPERANDS_EDIAGNOSTICCHAIN_EMAP = 22589;
+			static const int STRINGEXPRESSION_OPERATION_SUBEXPRESSIONS_EDIAGNOSTICCHAIN_EMAP = 22590;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getStringExpression_Class() const = 0;
@@ -6423,13 +6439,13 @@ namespace uml
 			// Begin Class TimeExpression
 			//Class and Feature IDs 
 			static const unsigned int TIMEEXPRESSION_CLASS = 239;
-			static const unsigned int TIMEEXPRESSION_CLASS_FEATURE_COUNT = 16;
+			static const unsigned int TIMEEXPRESSION_CLASS_FEATURE_COUNT = 17;
 			static const unsigned int TIMEEXPRESSION_CLASS_OPERATION_COUNT = 67;
 			
-			static const int TIMEEXPRESSION_ATTRIBUTE_EXPR = 23914;
-			static const int TIMEEXPRESSION_ATTRIBUTE_OBSERVATION = 23915;
+			static const int TIMEEXPRESSION_ATTRIBUTE_EXPR = 23915;
+			static const int TIMEEXPRESSION_ATTRIBUTE_OBSERVATION = 23916;
 			
-			static const int TIMEEXPRESSION_OPERATION_NO_EXPR_REQUIRES_OBSERVATION_EDIAGNOSTICCHAIN_EMAP = 23982;
+			static const int TIMEEXPRESSION_OPERATION_NO_EXPR_REQUIRES_OBSERVATION_EDIAGNOSTICCHAIN_EMAP = 23983;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getTimeExpression_Class() const = 0;
@@ -6446,7 +6462,7 @@ namespace uml
 			// Begin Class TimeInterval
 			//Class and Feature IDs 
 			static const unsigned int TIMEINTERVAL_CLASS = 240;
-			static const unsigned int TIMEINTERVAL_CLASS_FEATURE_COUNT = 16;
+			static const unsigned int TIMEINTERVAL_CLASS_FEATURE_COUNT = 17;
 			static const unsigned int TIMEINTERVAL_CLASS_OPERATION_COUNT = 66;
 			
 			
@@ -6691,13 +6707,13 @@ namespace uml
 			// Begin Class ValuePin
 			//Class and Feature IDs 
 			static const unsigned int VALUEPIN_CLASS = 250;
-			static const unsigned int VALUEPIN_CLASS_FEATURE_COUNT = 38;
+			static const unsigned int VALUEPIN_CLASS_FEATURE_COUNT = 41;
 			static const unsigned int VALUEPIN_CLASS_OPERATION_COUNT = 82;
 			
-			static const int VALUEPIN_ATTRIBUTE_VALUE = 25037;
+			static const int VALUEPIN_ATTRIBUTE_VALUE = 25040;
 			
-			static const int VALUEPIN_OPERATION_COMPATIBLE_TYPE_EDIAGNOSTICCHAIN_EMAP = 25119;
-			static const int VALUEPIN_OPERATION_NO_INCOMING_EDGES_EDIAGNOSTICCHAIN_EMAP = 25118;
+			static const int VALUEPIN_OPERATION_COMPATIBLE_TYPE_EDIAGNOSTICCHAIN_EMAP = 25122;
+			static const int VALUEPIN_OPERATION_NO_INCOMING_EDGES_EDIAGNOSTICCHAIN_EMAP = 25121;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getValuePin_Class() const = 0;
@@ -6714,24 +6730,26 @@ namespace uml
 			// Begin Class ValueSpecification
 			//Class and Feature IDs 
 			static const unsigned int VALUESPECIFICATION_CLASS = 251;
-			static const unsigned int VALUESPECIFICATION_CLASS_FEATURE_COUNT = 14;
+			static const unsigned int VALUESPECIFICATION_CLASS_FEATURE_COUNT = 15;
 			static const unsigned int VALUESPECIFICATION_CLASS_OPERATION_COUNT = 66;
 			
 			static const int VALUESPECIFICATION_ATTRIBUTE_OWNINGSLOT = 25113;
+			static const int VALUESPECIFICATION_ATTRIBUTE_VALUESPECIFICATIONACTION = 25114;
 			
-			static const int VALUESPECIFICATION_OPERATION_BOOLEANVALUE = 25173;
-			static const int VALUESPECIFICATION_OPERATION_INTEGERVALUE = 25174;
-			static const int VALUESPECIFICATION_OPERATION_ISCOMPUTABLE = 25175;
-			static const int VALUESPECIFICATION_OPERATION_ISNULL = 25176;
-			static const int VALUESPECIFICATION_OPERATION_REALVALUE = 25177;
-			static const int VALUESPECIFICATION_OPERATION_STRINGVALUE = 25178;
-			static const int VALUESPECIFICATION_OPERATION_UNLIMITEDVALUE = 25179;
+			static const int VALUESPECIFICATION_OPERATION_BOOLEANVALUE = 25174;
+			static const int VALUESPECIFICATION_OPERATION_INTEGERVALUE = 25175;
+			static const int VALUESPECIFICATION_OPERATION_ISCOMPUTABLE = 25176;
+			static const int VALUESPECIFICATION_OPERATION_ISNULL = 25177;
+			static const int VALUESPECIFICATION_OPERATION_REALVALUE = 25178;
+			static const int VALUESPECIFICATION_OPERATION_STRINGVALUE = 25179;
+			static const int VALUESPECIFICATION_OPERATION_UNLIMITEDVALUE = 25180;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getValueSpecification_Class() const = 0;
 			
 			
 			virtual std::shared_ptr<ecore::EReference> getValueSpecification_Attribute_owningSlot() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getValueSpecification_Attribute_valueSpecificationAction() const = 0;
 			
 			virtual std::shared_ptr<ecore::EOperation> getValueSpecification_Operation_booleanValue() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getValueSpecification_Operation_integerValue() const = 0;

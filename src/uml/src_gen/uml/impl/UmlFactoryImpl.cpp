@@ -260,6 +260,7 @@
 #include "uml/Activity.hpp"
 #include "uml/Activity.hpp"
 #include "uml/Activity.hpp"
+#include "uml/AddStructuralFeatureValueAction.hpp"
 #include "uml/Package.hpp"
 #include "uml/Property.hpp"
 #include "uml/Behavior.hpp"
@@ -269,12 +270,15 @@
 #include "uml/CallOperationAction.hpp"
 #include "uml/Class.hpp"
 #include "uml/Class.hpp"
+#include "uml/ClearStructuralFeatureAction.hpp"
 #include "uml/Region.hpp"
 #include "uml/Region.hpp"
 #include "uml/Namespace.hpp"
+#include "uml/CreateObjectAction.hpp"
 #include "uml/DataType.hpp"
 #include "uml/DataType.hpp"
 #include "uml/Deployment.hpp"
+#include "uml/DestroyObjectAction.hpp"
 #include "uml/Interaction.hpp"
 #include "uml/InteractionOperand.hpp"
 #include "uml/Enumeration.hpp"
@@ -304,6 +308,8 @@
 #include "uml/TemplateParameter.hpp"
 #include "uml/Package.hpp"
 #include "uml/ExecutableNode.hpp"
+#include "uml/ReadSelfAction.hpp"
+#include "uml/ReadStructuralFeatureAction.hpp"
 #include "uml/Package.hpp"
 #include "uml/StructuredActivityNode.hpp"
 #include "uml/TemplateSignature.hpp"
@@ -322,6 +328,9 @@
 #include "uml/TemplateBinding.hpp"
 #include "uml/UseCase.hpp"
 #include "uml/ValueSpecificationAction.hpp"
+#include "uml/ValueSpecificationAction.hpp"
+#include "uml/WriteStructuralFeatureAction.hpp"
+#include "uml/WriteStructuralFeatureAction.hpp"
 
 
 using namespace uml;
@@ -725,11 +734,23 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 						auto castedContainer = std::dynamic_pointer_cast<uml::Activity>(container);
 						return this->createActionInputPin_in_Activity(castedContainer,metaElementID);
 					}
+					//ActionInputPin has addStructuralFeatureValueAction as a containment
+					case  UmlPackage::INPUTPIN_ATTRIBUTE_ADDSTRUCTURALFEATUREVALUEACTION:
+					{
+						auto castedContainer = std::dynamic_pointer_cast<uml::AddStructuralFeatureValueAction>(container);
+						return this->createActionInputPin_in_AddStructuralFeatureValueAction(castedContainer,metaElementID);
+					}
 					//ActionInputPin has callOperationAction as a containment
 					case  UmlPackage::INPUTPIN_ATTRIBUTE_CALLOPERATIONACTION:
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::CallOperationAction>(container);
 						return this->createActionInputPin_in_CallOperationAction(castedContainer,metaElementID);
+					}
+					//ActionInputPin has destroyObjectAction as a containment
+					case  UmlPackage::INPUTPIN_ATTRIBUTE_DESTROYOBJECTACTION:
+					{
+						auto castedContainer = std::dynamic_pointer_cast<uml::DestroyObjectAction>(container);
+						return this->createActionInputPin_in_DestroyObjectAction(castedContainer,metaElementID);
 					}
 					//ActionInputPin has inStructuredNode as a containment
 					case  UmlPackage::ACTIVITYNODE_ATTRIBUTE_INSTRUCTUREDNODE:
@@ -760,6 +781,12 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::StructuralFeatureAction>(container);
 						return this->createActionInputPin_in_StructuralFeatureAction(castedContainer,metaElementID);
+					}
+					//ActionInputPin has writeStructuralFeatureAction as a containment
+					case  UmlPackage::INPUTPIN_ATTRIBUTE_WRITESTRUCTURALFEATUREACTION:
+					{
+						auto castedContainer = std::dynamic_pointer_cast<uml::WriteStructuralFeatureAction>(container);
+						return this->createActionInputPin_in_WriteStructuralFeatureAction(castedContainer,metaElementID);
 					}
 					default:
 						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
@@ -2872,6 +2899,12 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateParameter>(container);
 						return this->createDuration_in_OwningTemplateParameter(castedContainer,metaElementID);
 					}
+					//Duration has valueSpecificationAction as a containment
+					case  UmlPackage::VALUESPECIFICATION_ATTRIBUTE_VALUESPECIFICATIONACTION:
+					{
+						auto castedContainer = std::dynamic_pointer_cast<uml::ValueSpecificationAction>(container);
+						return this->createDuration_in_ValueSpecificationAction(castedContainer,metaElementID);
+					}
 					default:
 						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
 				}
@@ -2961,6 +2994,12 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateParameter>(container);
 						return this->createDurationInterval_in_OwningTemplateParameter(castedContainer,metaElementID);
+					}
+					//DurationInterval has valueSpecificationAction as a containment
+					case  UmlPackage::VALUESPECIFICATION_ATTRIBUTE_VALUESPECIFICATIONACTION:
+					{
+						auto castedContainer = std::dynamic_pointer_cast<uml::ValueSpecificationAction>(container);
+						return this->createDurationInterval_in_ValueSpecificationAction(castedContainer,metaElementID);
 					}
 					default:
 						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
@@ -3363,6 +3402,12 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateParameter>(container);
 						return this->createExpression_in_OwningTemplateParameter(castedContainer,metaElementID);
+					}
+					//Expression has valueSpecificationAction as a containment
+					case  UmlPackage::VALUESPECIFICATION_ATTRIBUTE_VALUESPECIFICATIONACTION:
+					{
+						auto castedContainer = std::dynamic_pointer_cast<uml::ValueSpecificationAction>(container);
+						return this->createExpression_in_ValueSpecificationAction(castedContainer,metaElementID);
 					}
 					default:
 						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
@@ -4029,11 +4074,23 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 						auto castedContainer = std::dynamic_pointer_cast<uml::Activity>(container);
 						return this->createInputPin_in_Activity(castedContainer,metaElementID);
 					}
+					//InputPin has addStructuralFeatureValueAction as a containment
+					case  UmlPackage::INPUTPIN_ATTRIBUTE_ADDSTRUCTURALFEATUREVALUEACTION:
+					{
+						auto castedContainer = std::dynamic_pointer_cast<uml::AddStructuralFeatureValueAction>(container);
+						return this->createInputPin_in_AddStructuralFeatureValueAction(castedContainer,metaElementID);
+					}
 					//InputPin has callOperationAction as a containment
 					case  UmlPackage::INPUTPIN_ATTRIBUTE_CALLOPERATIONACTION:
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::CallOperationAction>(container);
 						return this->createInputPin_in_CallOperationAction(castedContainer,metaElementID);
+					}
+					//InputPin has destroyObjectAction as a containment
+					case  UmlPackage::INPUTPIN_ATTRIBUTE_DESTROYOBJECTACTION:
+					{
+						auto castedContainer = std::dynamic_pointer_cast<uml::DestroyObjectAction>(container);
+						return this->createInputPin_in_DestroyObjectAction(castedContainer,metaElementID);
 					}
 					//InputPin has inStructuredNode as a containment
 					case  UmlPackage::ACTIVITYNODE_ATTRIBUTE_INSTRUCTUREDNODE:
@@ -4064,6 +4121,12 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::StructuralFeatureAction>(container);
 						return this->createInputPin_in_StructuralFeatureAction(castedContainer,metaElementID);
+					}
+					//InputPin has writeStructuralFeatureAction as a containment
+					case  UmlPackage::INPUTPIN_ATTRIBUTE_WRITESTRUCTURALFEATUREACTION:
+					{
+						auto castedContainer = std::dynamic_pointer_cast<uml::WriteStructuralFeatureAction>(container);
+						return this->createInputPin_in_WriteStructuralFeatureAction(castedContainer,metaElementID);
 					}
 					default:
 						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
@@ -4148,6 +4211,12 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateParameter>(container);
 						return this->createInstanceValue_in_OwningTemplateParameter(castedContainer,metaElementID);
+					}
+					//InstanceValue has valueSpecificationAction as a containment
+					case  UmlPackage::VALUESPECIFICATION_ATTRIBUTE_VALUESPECIFICATIONACTION:
+					{
+						auto castedContainer = std::dynamic_pointer_cast<uml::ValueSpecificationAction>(container);
+						return this->createInstanceValue_in_ValueSpecificationAction(castedContainer,metaElementID);
 					}
 					default:
 						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
@@ -4509,6 +4578,12 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateParameter>(container);
 						return this->createInterval_in_OwningTemplateParameter(castedContainer,metaElementID);
 					}
+					//Interval has valueSpecificationAction as a containment
+					case  UmlPackage::VALUESPECIFICATION_ATTRIBUTE_VALUESPECIFICATIONACTION:
+					{
+						auto castedContainer = std::dynamic_pointer_cast<uml::ValueSpecificationAction>(container);
+						return this->createInterval_in_ValueSpecificationAction(castedContainer,metaElementID);
+					}
 					default:
 						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
 				}
@@ -4710,6 +4785,12 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateParameter>(container);
 						return this->createLiteralBoolean_in_OwningTemplateParameter(castedContainer,metaElementID);
 					}
+					//LiteralBoolean has valueSpecificationAction as a containment
+					case  UmlPackage::VALUESPECIFICATION_ATTRIBUTE_VALUESPECIFICATIONACTION:
+					{
+						auto castedContainer = std::dynamic_pointer_cast<uml::ValueSpecificationAction>(container);
+						return this->createLiteralBoolean_in_ValueSpecificationAction(castedContainer,metaElementID);
+					}
 					default:
 						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
 				}
@@ -4754,6 +4835,12 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateParameter>(container);
 						return this->createLiteralInteger_in_OwningTemplateParameter(castedContainer,metaElementID);
+					}
+					//LiteralInteger has valueSpecificationAction as a containment
+					case  UmlPackage::VALUESPECIFICATION_ATTRIBUTE_VALUESPECIFICATIONACTION:
+					{
+						auto castedContainer = std::dynamic_pointer_cast<uml::ValueSpecificationAction>(container);
+						return this->createLiteralInteger_in_ValueSpecificationAction(castedContainer,metaElementID);
 					}
 					default:
 						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
@@ -4800,6 +4887,12 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateParameter>(container);
 						return this->createLiteralNull_in_OwningTemplateParameter(castedContainer,metaElementID);
 					}
+					//LiteralNull has valueSpecificationAction as a containment
+					case  UmlPackage::VALUESPECIFICATION_ATTRIBUTE_VALUESPECIFICATIONACTION:
+					{
+						auto castedContainer = std::dynamic_pointer_cast<uml::ValueSpecificationAction>(container);
+						return this->createLiteralNull_in_ValueSpecificationAction(castedContainer,metaElementID);
+					}
 					default:
 						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
 				}
@@ -4844,6 +4937,12 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateParameter>(container);
 						return this->createLiteralReal_in_OwningTemplateParameter(castedContainer,metaElementID);
+					}
+					//LiteralReal has valueSpecificationAction as a containment
+					case  UmlPackage::VALUESPECIFICATION_ATTRIBUTE_VALUESPECIFICATIONACTION:
+					{
+						auto castedContainer = std::dynamic_pointer_cast<uml::ValueSpecificationAction>(container);
+						return this->createLiteralReal_in_ValueSpecificationAction(castedContainer,metaElementID);
 					}
 					default:
 						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
@@ -4890,6 +4989,12 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateParameter>(container);
 						return this->createLiteralString_in_OwningTemplateParameter(castedContainer,metaElementID);
 					}
+					//LiteralString has valueSpecificationAction as a containment
+					case  UmlPackage::VALUESPECIFICATION_ATTRIBUTE_VALUESPECIFICATIONACTION:
+					{
+						auto castedContainer = std::dynamic_pointer_cast<uml::ValueSpecificationAction>(container);
+						return this->createLiteralString_in_ValueSpecificationAction(castedContainer,metaElementID);
+					}
 					default:
 						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
 				}
@@ -4934,6 +5039,12 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateParameter>(container);
 						return this->createLiteralUnlimitedNatural_in_OwningTemplateParameter(castedContainer,metaElementID);
+					}
+					//LiteralUnlimitedNatural has valueSpecificationAction as a containment
+					case  UmlPackage::VALUESPECIFICATION_ATTRIBUTE_VALUESPECIFICATIONACTION:
+					{
+						auto castedContainer = std::dynamic_pointer_cast<uml::ValueSpecificationAction>(container);
+						return this->createLiteralUnlimitedNatural_in_ValueSpecificationAction(castedContainer,metaElementID);
 					}
 					default:
 						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
@@ -5444,6 +5555,12 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateParameter>(container);
 						return this->createOpaqueExpression_in_OwningTemplateParameter(castedContainer,metaElementID);
 					}
+					//OpaqueExpression has valueSpecificationAction as a containment
+					case  UmlPackage::VALUESPECIFICATION_ATTRIBUTE_VALUESPECIFICATIONACTION:
+					{
+						auto castedContainer = std::dynamic_pointer_cast<uml::ValueSpecificationAction>(container);
+						return this->createOpaqueExpression_in_ValueSpecificationAction(castedContainer,metaElementID);
+					}
 					default:
 						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
 				}
@@ -5555,6 +5672,18 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 						auto castedContainer = std::dynamic_pointer_cast<uml::CallAction>(container);
 						return this->createOutputPin_in_CallAction(castedContainer,metaElementID);
 					}
+					//OutputPin has clearStructuralFeatureAction as a containment
+					case  UmlPackage::OUTPUTPIN_ATTRIBUTE_CLEARSTRUCTURALFEATUREACTION:
+					{
+						auto castedContainer = std::dynamic_pointer_cast<uml::ClearStructuralFeatureAction>(container);
+						return this->createOutputPin_in_ClearStructuralFeatureAction(castedContainer,metaElementID);
+					}
+					//OutputPin has createObjectAction as a containment
+					case  UmlPackage::OUTPUTPIN_ATTRIBUTE_CREATEOBJECTACTION:
+					{
+						auto castedContainer = std::dynamic_pointer_cast<uml::CreateObjectAction>(container);
+						return this->createOutputPin_in_CreateObjectAction(castedContainer,metaElementID);
+					}
 					//OutputPin has inStructuredNode as a containment
 					case  UmlPackage::ACTIVITYNODE_ATTRIBUTE_INSTRUCTUREDNODE:
 					{
@@ -5573,11 +5702,29 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createOutputPin_in_Owner(castedContainer,metaElementID);
 					}
+					//OutputPin has readSelfAction as a containment
+					case  UmlPackage::OUTPUTPIN_ATTRIBUTE_READSELFACTION:
+					{
+						auto castedContainer = std::dynamic_pointer_cast<uml::ReadSelfAction>(container);
+						return this->createOutputPin_in_ReadSelfAction(castedContainer,metaElementID);
+					}
+					//OutputPin has readStructuralFeatureAction as a containment
+					case  UmlPackage::OUTPUTPIN_ATTRIBUTE_READSTRUCTURALFEATUREACTION:
+					{
+						auto castedContainer = std::dynamic_pointer_cast<uml::ReadStructuralFeatureAction>(container);
+						return this->createOutputPin_in_ReadStructuralFeatureAction(castedContainer,metaElementID);
+					}
 					//OutputPin has valueSpecificationAction as a containment
 					case  UmlPackage::OUTPUTPIN_ATTRIBUTE_VALUESPECIFICATIONACTION:
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::ValueSpecificationAction>(container);
 						return this->createOutputPin_in_ValueSpecificationAction(castedContainer,metaElementID);
+					}
+					//OutputPin has writeStructuralFeatureAction as a containment
+					case  UmlPackage::OUTPUTPIN_ATTRIBUTE_WRITESTRUCTURALFEATUREACTION:
+					{
+						auto castedContainer = std::dynamic_pointer_cast<uml::WriteStructuralFeatureAction>(container);
+						return this->createOutputPin_in_WriteStructuralFeatureAction(castedContainer,metaElementID);
 					}
 					default:
 						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
@@ -7422,6 +7569,12 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateParameter>(container);
 						return this->createStringExpression_in_OwningTemplateParameter(castedContainer,metaElementID);
 					}
+					//StringExpression has valueSpecificationAction as a containment
+					case  UmlPackage::VALUESPECIFICATION_ATTRIBUTE_VALUESPECIFICATIONACTION:
+					{
+						auto castedContainer = std::dynamic_pointer_cast<uml::ValueSpecificationAction>(container);
+						return this->createStringExpression_in_ValueSpecificationAction(castedContainer,metaElementID);
+					}
 					default:
 						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
 				}
@@ -7794,6 +7947,12 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateParameter>(container);
 						return this->createTimeExpression_in_OwningTemplateParameter(castedContainer,metaElementID);
 					}
+					//TimeExpression has valueSpecificationAction as a containment
+					case  UmlPackage::VALUESPECIFICATION_ATTRIBUTE_VALUESPECIFICATIONACTION:
+					{
+						auto castedContainer = std::dynamic_pointer_cast<uml::ValueSpecificationAction>(container);
+						return this->createTimeExpression_in_ValueSpecificationAction(castedContainer,metaElementID);
+					}
 					default:
 						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
 				}
@@ -7838,6 +7997,12 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateParameter>(container);
 						return this->createTimeInterval_in_OwningTemplateParameter(castedContainer,metaElementID);
+					}
+					//TimeInterval has valueSpecificationAction as a containment
+					case  UmlPackage::VALUESPECIFICATION_ATTRIBUTE_VALUESPECIFICATIONACTION:
+					{
+						auto castedContainer = std::dynamic_pointer_cast<uml::ValueSpecificationAction>(container);
+						return this->createTimeInterval_in_ValueSpecificationAction(castedContainer,metaElementID);
 					}
 					default:
 						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
@@ -8088,11 +8253,23 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 						auto castedContainer = std::dynamic_pointer_cast<uml::Activity>(container);
 						return this->createValuePin_in_Activity(castedContainer,metaElementID);
 					}
+					//ValuePin has addStructuralFeatureValueAction as a containment
+					case  UmlPackage::INPUTPIN_ATTRIBUTE_ADDSTRUCTURALFEATUREVALUEACTION:
+					{
+						auto castedContainer = std::dynamic_pointer_cast<uml::AddStructuralFeatureValueAction>(container);
+						return this->createValuePin_in_AddStructuralFeatureValueAction(castedContainer,metaElementID);
+					}
 					//ValuePin has callOperationAction as a containment
 					case  UmlPackage::INPUTPIN_ATTRIBUTE_CALLOPERATIONACTION:
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::CallOperationAction>(container);
 						return this->createValuePin_in_CallOperationAction(castedContainer,metaElementID);
+					}
+					//ValuePin has destroyObjectAction as a containment
+					case  UmlPackage::INPUTPIN_ATTRIBUTE_DESTROYOBJECTACTION:
+					{
+						auto castedContainer = std::dynamic_pointer_cast<uml::DestroyObjectAction>(container);
+						return this->createValuePin_in_DestroyObjectAction(castedContainer,metaElementID);
 					}
 					//ValuePin has inStructuredNode as a containment
 					case  UmlPackage::ACTIVITYNODE_ATTRIBUTE_INSTRUCTUREDNODE:
@@ -8123,6 +8300,12 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::StructuralFeatureAction>(container);
 						return this->createValuePin_in_StructuralFeatureAction(castedContainer,metaElementID);
+					}
+					//ValuePin has writeStructuralFeatureAction as a containment
+					case  UmlPackage::INPUTPIN_ATTRIBUTE_WRITESTRUCTURALFEATUREACTION:
+					{
+						auto castedContainer = std::dynamic_pointer_cast<uml::WriteStructuralFeatureAction>(container);
+						return this->createValuePin_in_WriteStructuralFeatureAction(castedContainer,metaElementID);
 					}
 					default:
 						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
@@ -8492,11 +8675,35 @@ std::shared_ptr<ActionInputPin> UmlFactoryImpl::createActionInputPin_in_Activity
 	return element;
 	
 }
+std::shared_ptr<ActionInputPin> UmlFactoryImpl::createActionInputPin_in_AddStructuralFeatureValueAction(std::weak_ptr<uml::AddStructuralFeatureValueAction > par_addStructuralFeatureValueAction, const int metaElementID) const
+{
+	std::shared_ptr<ActionInputPinImpl> element(new ActionInputPinImpl(par_addStructuralFeatureValueAction));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_addStructuralFeatureValueAction.lock())
+	{
+			wp->setInsertAt(element);
+	}
+	element->setThisActionInputPinPtr(element);
+	return element;
+	
+}
 std::shared_ptr<ActionInputPin> UmlFactoryImpl::createActionInputPin_in_CallOperationAction(std::weak_ptr<uml::CallOperationAction > par_callOperationAction, const int metaElementID) const
 {
 	std::shared_ptr<ActionInputPinImpl> element(new ActionInputPinImpl(par_callOperationAction));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_callOperationAction.lock())
+	{
+			wp->setTarget(element);
+	}
+	element->setThisActionInputPinPtr(element);
+	return element;
+	
+}
+std::shared_ptr<ActionInputPin> UmlFactoryImpl::createActionInputPin_in_DestroyObjectAction(std::weak_ptr<uml::DestroyObjectAction > par_destroyObjectAction, const int metaElementID) const
+{
+	std::shared_ptr<ActionInputPinImpl> element(new ActionInputPinImpl(par_destroyObjectAction));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_destroyObjectAction.lock())
 	{
 			wp->setTarget(element);
 	}
@@ -8559,6 +8766,18 @@ std::shared_ptr<ActionInputPin> UmlFactoryImpl::createActionInputPin_in_Structur
 	if(auto wp = par_structuralFeatureAction.lock())
 	{
 			wp->setObject(element);
+	}
+	element->setThisActionInputPinPtr(element);
+	return element;
+	
+}
+std::shared_ptr<ActionInputPin> UmlFactoryImpl::createActionInputPin_in_WriteStructuralFeatureAction(std::weak_ptr<uml::WriteStructuralFeatureAction > par_writeStructuralFeatureAction, const int metaElementID) const
+{
+	std::shared_ptr<ActionInputPinImpl> element(new ActionInputPinImpl(par_writeStructuralFeatureAction));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_writeStructuralFeatureAction.lock())
+	{
+			wp->setValue(element);
 	}
 	element->setThisActionInputPinPtr(element);
 	return element;
@@ -11589,6 +11808,18 @@ std::shared_ptr<Duration> UmlFactoryImpl::createDuration_in_OwningTemplateParame
 	return element;
 	
 }
+std::shared_ptr<Duration> UmlFactoryImpl::createDuration_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction, const int metaElementID) const
+{
+	std::shared_ptr<DurationImpl> element(new DurationImpl(par_valueSpecificationAction));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_valueSpecificationAction.lock())
+	{
+			wp->setValue(element);
+	}
+	element->setThisDurationPtr(element);
+	return element;
+	
+}
 std::shared_ptr<DurationConstraint> UmlFactoryImpl::createDurationConstraint(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<DurationConstraintImpl> element(new DurationConstraintImpl());
@@ -11718,6 +11949,18 @@ std::shared_ptr<DurationInterval> UmlFactoryImpl::createDurationInterval_in_Owni
 	if(auto wp = par_owningTemplateParameter.lock())
 	{
 			wp->setOwnedParameteredElement(element);
+	}
+	element->setThisDurationIntervalPtr(element);
+	return element;
+	
+}
+std::shared_ptr<DurationInterval> UmlFactoryImpl::createDurationInterval_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction, const int metaElementID) const
+{
+	std::shared_ptr<DurationIntervalImpl> element(new DurationIntervalImpl(par_valueSpecificationAction));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_valueSpecificationAction.lock())
+	{
+			wp->setValue(element);
 	}
 	element->setThisDurationIntervalPtr(element);
 	return element;
@@ -12292,6 +12535,18 @@ std::shared_ptr<Expression> UmlFactoryImpl::createExpression_in_OwningTemplatePa
 	if(auto wp = par_owningTemplateParameter.lock())
 	{
 			wp->setOwnedParameteredElement(element);
+	}
+	element->setThisExpressionPtr(element);
+	return element;
+	
+}
+std::shared_ptr<Expression> UmlFactoryImpl::createExpression_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction, const int metaElementID) const
+{
+	std::shared_ptr<ExpressionImpl> element(new ExpressionImpl(par_valueSpecificationAction));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_valueSpecificationAction.lock())
+	{
+			wp->setValue(element);
 	}
 	element->setThisExpressionPtr(element);
 	return element;
@@ -13222,11 +13477,35 @@ std::shared_ptr<InputPin> UmlFactoryImpl::createInputPin_in_Activity(std::weak_p
 	return element;
 	
 }
+std::shared_ptr<InputPin> UmlFactoryImpl::createInputPin_in_AddStructuralFeatureValueAction(std::weak_ptr<uml::AddStructuralFeatureValueAction > par_addStructuralFeatureValueAction, const int metaElementID) const
+{
+	std::shared_ptr<InputPinImpl> element(new InputPinImpl(par_addStructuralFeatureValueAction));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_addStructuralFeatureValueAction.lock())
+	{
+			wp->setInsertAt(element);
+	}
+	element->setThisInputPinPtr(element);
+	return element;
+	
+}
 std::shared_ptr<InputPin> UmlFactoryImpl::createInputPin_in_CallOperationAction(std::weak_ptr<uml::CallOperationAction > par_callOperationAction, const int metaElementID) const
 {
 	std::shared_ptr<InputPinImpl> element(new InputPinImpl(par_callOperationAction));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_callOperationAction.lock())
+	{
+			wp->setTarget(element);
+	}
+	element->setThisInputPinPtr(element);
+	return element;
+	
+}
+std::shared_ptr<InputPin> UmlFactoryImpl::createInputPin_in_DestroyObjectAction(std::weak_ptr<uml::DestroyObjectAction > par_destroyObjectAction, const int metaElementID) const
+{
+	std::shared_ptr<InputPinImpl> element(new InputPinImpl(par_destroyObjectAction));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_destroyObjectAction.lock())
 	{
 			wp->setTarget(element);
 	}
@@ -13289,6 +13568,18 @@ std::shared_ptr<InputPin> UmlFactoryImpl::createInputPin_in_StructuralFeatureAct
 	if(auto wp = par_structuralFeatureAction.lock())
 	{
 			wp->setObject(element);
+	}
+	element->setThisInputPinPtr(element);
+	return element;
+	
+}
+std::shared_ptr<InputPin> UmlFactoryImpl::createInputPin_in_WriteStructuralFeatureAction(std::weak_ptr<uml::WriteStructuralFeatureAction > par_writeStructuralFeatureAction, const int metaElementID) const
+{
+	std::shared_ptr<InputPinImpl> element(new InputPinImpl(par_writeStructuralFeatureAction));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_writeStructuralFeatureAction.lock())
+	{
+			wp->setValue(element);
 	}
 	element->setThisInputPinPtr(element);
 	return element;
@@ -13411,6 +13702,18 @@ std::shared_ptr<InstanceValue> UmlFactoryImpl::createInstanceValue_in_OwningTemp
 	if(auto wp = par_owningTemplateParameter.lock())
 	{
 			wp->setOwnedParameteredElement(element);
+	}
+	element->setThisInstanceValuePtr(element);
+	return element;
+	
+}
+std::shared_ptr<InstanceValue> UmlFactoryImpl::createInstanceValue_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction, const int metaElementID) const
+{
+	std::shared_ptr<InstanceValueImpl> element(new InstanceValueImpl(par_valueSpecificationAction));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_valueSpecificationAction.lock())
+	{
+			wp->setValue(element);
 	}
 	element->setThisInstanceValuePtr(element);
 	return element;
@@ -13952,6 +14255,18 @@ std::shared_ptr<Interval> UmlFactoryImpl::createInterval_in_OwningTemplateParame
 	return element;
 	
 }
+std::shared_ptr<Interval> UmlFactoryImpl::createInterval_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction, const int metaElementID) const
+{
+	std::shared_ptr<IntervalImpl> element(new IntervalImpl(par_valueSpecificationAction));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_valueSpecificationAction.lock())
+	{
+			wp->setValue(element);
+	}
+	element->setThisIntervalPtr(element);
+	return element;
+	
+}
 std::shared_ptr<IntervalConstraint> UmlFactoryImpl::createIntervalConstraint(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<IntervalConstraintImpl> element(new IntervalConstraintImpl());
@@ -14241,6 +14556,18 @@ std::shared_ptr<LiteralBoolean> UmlFactoryImpl::createLiteralBoolean_in_OwningTe
 	return element;
 	
 }
+std::shared_ptr<LiteralBoolean> UmlFactoryImpl::createLiteralBoolean_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction, const int metaElementID) const
+{
+	std::shared_ptr<LiteralBooleanImpl> element(new LiteralBooleanImpl(par_valueSpecificationAction));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_valueSpecificationAction.lock())
+	{
+			wp->setValue(element);
+	}
+	element->setThisLiteralBooleanPtr(element);
+	return element;
+	
+}
 std::shared_ptr<LiteralInteger> UmlFactoryImpl::createLiteralInteger(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<LiteralIntegerImpl> element(new LiteralIntegerImpl());
@@ -14303,6 +14630,18 @@ std::shared_ptr<LiteralInteger> UmlFactoryImpl::createLiteralInteger_in_OwningTe
 	if(auto wp = par_owningTemplateParameter.lock())
 	{
 			wp->setOwnedParameteredElement(element);
+	}
+	element->setThisLiteralIntegerPtr(element);
+	return element;
+	
+}
+std::shared_ptr<LiteralInteger> UmlFactoryImpl::createLiteralInteger_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction, const int metaElementID) const
+{
+	std::shared_ptr<LiteralIntegerImpl> element(new LiteralIntegerImpl(par_valueSpecificationAction));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_valueSpecificationAction.lock())
+	{
+			wp->setValue(element);
 	}
 	element->setThisLiteralIntegerPtr(element);
 	return element;
@@ -14375,6 +14714,18 @@ std::shared_ptr<LiteralNull> UmlFactoryImpl::createLiteralNull_in_OwningTemplate
 	return element;
 	
 }
+std::shared_ptr<LiteralNull> UmlFactoryImpl::createLiteralNull_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction, const int metaElementID) const
+{
+	std::shared_ptr<LiteralNullImpl> element(new LiteralNullImpl(par_valueSpecificationAction));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_valueSpecificationAction.lock())
+	{
+			wp->setValue(element);
+	}
+	element->setThisLiteralNullPtr(element);
+	return element;
+	
+}
 std::shared_ptr<LiteralReal> UmlFactoryImpl::createLiteralReal(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<LiteralRealImpl> element(new LiteralRealImpl());
@@ -14437,6 +14788,18 @@ std::shared_ptr<LiteralReal> UmlFactoryImpl::createLiteralReal_in_OwningTemplate
 	if(auto wp = par_owningTemplateParameter.lock())
 	{
 			wp->setOwnedParameteredElement(element);
+	}
+	element->setThisLiteralRealPtr(element);
+	return element;
+	
+}
+std::shared_ptr<LiteralReal> UmlFactoryImpl::createLiteralReal_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction, const int metaElementID) const
+{
+	std::shared_ptr<LiteralRealImpl> element(new LiteralRealImpl(par_valueSpecificationAction));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_valueSpecificationAction.lock())
+	{
+			wp->setValue(element);
 	}
 	element->setThisLiteralRealPtr(element);
 	return element;
@@ -14509,6 +14872,18 @@ std::shared_ptr<LiteralString> UmlFactoryImpl::createLiteralString_in_OwningTemp
 	return element;
 	
 }
+std::shared_ptr<LiteralString> UmlFactoryImpl::createLiteralString_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction, const int metaElementID) const
+{
+	std::shared_ptr<LiteralStringImpl> element(new LiteralStringImpl(par_valueSpecificationAction));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_valueSpecificationAction.lock())
+	{
+			wp->setValue(element);
+	}
+	element->setThisLiteralStringPtr(element);
+	return element;
+	
+}
 std::shared_ptr<LiteralUnlimitedNatural> UmlFactoryImpl::createLiteralUnlimitedNatural(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<LiteralUnlimitedNaturalImpl> element(new LiteralUnlimitedNaturalImpl());
@@ -14571,6 +14946,18 @@ std::shared_ptr<LiteralUnlimitedNatural> UmlFactoryImpl::createLiteralUnlimitedN
 	if(auto wp = par_owningTemplateParameter.lock())
 	{
 			wp->setOwnedParameteredElement(element);
+	}
+	element->setThisLiteralUnlimitedNaturalPtr(element);
+	return element;
+	
+}
+std::shared_ptr<LiteralUnlimitedNatural> UmlFactoryImpl::createLiteralUnlimitedNatural_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction, const int metaElementID) const
+{
+	std::shared_ptr<LiteralUnlimitedNaturalImpl> element(new LiteralUnlimitedNaturalImpl(par_valueSpecificationAction));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_valueSpecificationAction.lock())
+	{
+			wp->setValue(element);
 	}
 	element->setThisLiteralUnlimitedNaturalPtr(element);
 	return element;
@@ -15315,6 +15702,18 @@ std::shared_ptr<OpaqueExpression> UmlFactoryImpl::createOpaqueExpression_in_Owni
 	return element;
 	
 }
+std::shared_ptr<OpaqueExpression> UmlFactoryImpl::createOpaqueExpression_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction, const int metaElementID) const
+{
+	std::shared_ptr<OpaqueExpressionImpl> element(new OpaqueExpressionImpl(par_valueSpecificationAction));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_valueSpecificationAction.lock())
+	{
+			wp->setValue(element);
+	}
+	element->setThisOpaqueExpressionPtr(element);
+	return element;
+	
+}
 std::shared_ptr<Operation> UmlFactoryImpl::createOperation(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<OperationImpl> element(new OperationImpl());
@@ -15468,6 +15867,30 @@ std::shared_ptr<OutputPin> UmlFactoryImpl::createOutputPin_in_CallAction(std::we
 	return element;
 	
 }
+std::shared_ptr<OutputPin> UmlFactoryImpl::createOutputPin_in_ClearStructuralFeatureAction(std::weak_ptr<uml::ClearStructuralFeatureAction > par_clearStructuralFeatureAction, const int metaElementID) const
+{
+	std::shared_ptr<OutputPinImpl> element(new OutputPinImpl(par_clearStructuralFeatureAction));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_clearStructuralFeatureAction.lock())
+	{
+			wp->setResult(element);
+	}
+	element->setThisOutputPinPtr(element);
+	return element;
+	
+}
+std::shared_ptr<OutputPin> UmlFactoryImpl::createOutputPin_in_CreateObjectAction(std::weak_ptr<uml::CreateObjectAction > par_createObjectAction, const int metaElementID) const
+{
+	std::shared_ptr<OutputPinImpl> element(new OutputPinImpl(par_createObjectAction));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_createObjectAction.lock())
+	{
+			wp->setResult(element);
+	}
+	element->setThisOutputPinPtr(element);
+	return element;
+	
+}
 std::shared_ptr<OutputPin> UmlFactoryImpl::createOutputPin_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode, const int metaElementID) const
 {
 	std::shared_ptr<OutputPinImpl> element(new OutputPinImpl(par_inStructuredNode));
@@ -15504,11 +15927,47 @@ std::shared_ptr<OutputPin> UmlFactoryImpl::createOutputPin_in_Owner(std::weak_pt
 	return element;
 	
 }
+std::shared_ptr<OutputPin> UmlFactoryImpl::createOutputPin_in_ReadSelfAction(std::weak_ptr<uml::ReadSelfAction > par_readSelfAction, const int metaElementID) const
+{
+	std::shared_ptr<OutputPinImpl> element(new OutputPinImpl(par_readSelfAction));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_readSelfAction.lock())
+	{
+			wp->setResult(element);
+	}
+	element->setThisOutputPinPtr(element);
+	return element;
+	
+}
+std::shared_ptr<OutputPin> UmlFactoryImpl::createOutputPin_in_ReadStructuralFeatureAction(std::weak_ptr<uml::ReadStructuralFeatureAction > par_readStructuralFeatureAction, const int metaElementID) const
+{
+	std::shared_ptr<OutputPinImpl> element(new OutputPinImpl(par_readStructuralFeatureAction));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_readStructuralFeatureAction.lock())
+	{
+			wp->setResult(element);
+	}
+	element->setThisOutputPinPtr(element);
+	return element;
+	
+}
 std::shared_ptr<OutputPin> UmlFactoryImpl::createOutputPin_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction, const int metaElementID) const
 {
 	std::shared_ptr<OutputPinImpl> element(new OutputPinImpl(par_valueSpecificationAction));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_valueSpecificationAction.lock())
+	{
+			wp->setResult(element);
+	}
+	element->setThisOutputPinPtr(element);
+	return element;
+	
+}
+std::shared_ptr<OutputPin> UmlFactoryImpl::createOutputPin_in_WriteStructuralFeatureAction(std::weak_ptr<uml::WriteStructuralFeatureAction > par_writeStructuralFeatureAction, const int metaElementID) const
+{
+	std::shared_ptr<OutputPinImpl> element(new OutputPinImpl(par_writeStructuralFeatureAction));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_writeStructuralFeatureAction.lock())
 	{
 			wp->setResult(element);
 	}
@@ -18137,6 +18596,18 @@ std::shared_ptr<StringExpression> UmlFactoryImpl::createStringExpression_in_Owni
 	return element;
 	
 }
+std::shared_ptr<StringExpression> UmlFactoryImpl::createStringExpression_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction, const int metaElementID) const
+{
+	std::shared_ptr<StringExpressionImpl> element(new StringExpressionImpl(par_valueSpecificationAction));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_valueSpecificationAction.lock())
+	{
+			wp->setValue(element);
+	}
+	element->setThisStringExpressionPtr(element);
+	return element;
+	
+}
 std::shared_ptr<StructuredActivityNode> UmlFactoryImpl::createStructuredActivityNode(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<StructuredActivityNodeImpl> element(new StructuredActivityNodeImpl());
@@ -18651,6 +19122,18 @@ std::shared_ptr<TimeExpression> UmlFactoryImpl::createTimeExpression_in_OwningTe
 	return element;
 	
 }
+std::shared_ptr<TimeExpression> UmlFactoryImpl::createTimeExpression_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction, const int metaElementID) const
+{
+	std::shared_ptr<TimeExpressionImpl> element(new TimeExpressionImpl(par_valueSpecificationAction));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_valueSpecificationAction.lock())
+	{
+			wp->setValue(element);
+	}
+	element->setThisTimeExpressionPtr(element);
+	return element;
+	
+}
 std::shared_ptr<TimeInterval> UmlFactoryImpl::createTimeInterval(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<TimeIntervalImpl> element(new TimeIntervalImpl());
@@ -18713,6 +19196,18 @@ std::shared_ptr<TimeInterval> UmlFactoryImpl::createTimeInterval_in_OwningTempla
 	if(auto wp = par_owningTemplateParameter.lock())
 	{
 			wp->setOwnedParameteredElement(element);
+	}
+	element->setThisTimeIntervalPtr(element);
+	return element;
+	
+}
+std::shared_ptr<TimeInterval> UmlFactoryImpl::createTimeInterval_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction, const int metaElementID) const
+{
+	std::shared_ptr<TimeIntervalImpl> element(new TimeIntervalImpl(par_valueSpecificationAction));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_valueSpecificationAction.lock())
+	{
+			wp->setValue(element);
 	}
 	element->setThisTimeIntervalPtr(element);
 	return element;
@@ -19055,11 +19550,35 @@ std::shared_ptr<ValuePin> UmlFactoryImpl::createValuePin_in_Activity(std::weak_p
 	return element;
 	
 }
+std::shared_ptr<ValuePin> UmlFactoryImpl::createValuePin_in_AddStructuralFeatureValueAction(std::weak_ptr<uml::AddStructuralFeatureValueAction > par_addStructuralFeatureValueAction, const int metaElementID) const
+{
+	std::shared_ptr<ValuePinImpl> element(new ValuePinImpl(par_addStructuralFeatureValueAction));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_addStructuralFeatureValueAction.lock())
+	{
+			wp->setInsertAt(element);
+	}
+	element->setThisValuePinPtr(element);
+	return element;
+	
+}
 std::shared_ptr<ValuePin> UmlFactoryImpl::createValuePin_in_CallOperationAction(std::weak_ptr<uml::CallOperationAction > par_callOperationAction, const int metaElementID) const
 {
 	std::shared_ptr<ValuePinImpl> element(new ValuePinImpl(par_callOperationAction));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_callOperationAction.lock())
+	{
+			wp->setTarget(element);
+	}
+	element->setThisValuePinPtr(element);
+	return element;
+	
+}
+std::shared_ptr<ValuePin> UmlFactoryImpl::createValuePin_in_DestroyObjectAction(std::weak_ptr<uml::DestroyObjectAction > par_destroyObjectAction, const int metaElementID) const
+{
+	std::shared_ptr<ValuePinImpl> element(new ValuePinImpl(par_destroyObjectAction));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_destroyObjectAction.lock())
 	{
 			wp->setTarget(element);
 	}
@@ -19122,6 +19641,18 @@ std::shared_ptr<ValuePin> UmlFactoryImpl::createValuePin_in_StructuralFeatureAct
 	if(auto wp = par_structuralFeatureAction.lock())
 	{
 			wp->setObject(element);
+	}
+	element->setThisValuePinPtr(element);
+	return element;
+	
+}
+std::shared_ptr<ValuePin> UmlFactoryImpl::createValuePin_in_WriteStructuralFeatureAction(std::weak_ptr<uml::WriteStructuralFeatureAction > par_writeStructuralFeatureAction, const int metaElementID) const
+{
+	std::shared_ptr<ValuePinImpl> element(new ValuePinImpl(par_writeStructuralFeatureAction));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_writeStructuralFeatureAction.lock())
+	{
+			wp->setValue(element);
 	}
 	element->setThisValuePinPtr(element);
 	return element;

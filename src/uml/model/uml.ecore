@@ -3937,6 +3937,10 @@
         eOpposite="#//Slot/value">
       <eAnnotations source="subsets" references="#//Element/owner"/>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="valueSpecificationAction"
+        eType="#//ValueSpecificationAction" eOpposite="#//ValueSpecificationAction/value">
+      <eAnnotations source="subsets" references="#//Element/owner"/>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ConnectableElementTemplateParameter"
       eSuperTypes="#//TemplateParameter">
@@ -9591,6 +9595,18 @@
         changeable="false" transient="true" derived="true" eOpposite="#//Action/input">
       <eAnnotations source="subsets" references="#//Element/owner"/>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="writeStructuralFeatureAction"
+        eType="#//WriteStructuralFeatureAction" eOpposite="#//WriteStructuralFeatureAction/value">
+      <eAnnotations source="subsets" references="#//ActionExecutionSpecification/action"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="addStructuralFeatureValueAction"
+        eType="#//AddStructuralFeatureValueAction" eOpposite="#//AddStructuralFeatureValueAction/insertAt">
+      <eAnnotations source="subsets" references="#//ActionExecutionSpecification/action"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="destroyObjectAction" eType="#//DestroyObjectAction"
+        eOpposite="#//DestroyObjectAction/target">
+      <eAnnotations source="subsets" references="#//ActionExecutionSpecification/action"/>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Pin" abstract="true" eSuperTypes="#//ObjectNode #//MultiplicityElement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -9675,7 +9691,27 @@
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="valueSpecificationAction"
         eType="#//ValueSpecificationAction" eOpposite="#//ValueSpecificationAction/result">
-      <eAnnotations source="subsets" references="#//Element/owner"/>
+      <eAnnotations source="subsets" references="#//ActionExecutionSpecification/action"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="writeStructuralFeatureAction"
+        eType="#//WriteStructuralFeatureAction" eOpposite="#//WriteStructuralFeatureAction/result">
+      <eAnnotations source="subsets" references="#//ActionExecutionSpecification/action"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="readStructuralFeatureAction"
+        eType="#//ReadStructuralFeatureAction" eOpposite="#//ReadStructuralFeatureAction/result">
+      <eAnnotations source="subsets" references="#//ActionExecutionSpecification/action"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="clearStructuralFeatureAction"
+        eType="#//ClearStructuralFeatureAction" eOpposite="#//ClearStructuralFeatureAction/result">
+      <eAnnotations source="subsets" references="#//ActionExecutionSpecification/action"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="readSelfAction" eType="#//ReadSelfAction"
+        eOpposite="#//ReadSelfAction/result">
+      <eAnnotations source="subsets" references="#//ActionExecutionSpecification/action"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="createObjectAction" eType="#//CreateObjectAction"
+        eOpposite="#//CreateObjectAction/result">
+      <eAnnotations source="subsets" references="#//ActionExecutionSpecification/action"/>
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Variable" eSuperTypes="#//ConnectableElement #//MultiplicityElement">
@@ -9753,7 +9789,7 @@
       <eAnnotations source="subsets" references="#//Action/output"/>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" ordered="false"
-        lowerBound="1" eType="#//ValueSpecification" containment="true">
+        lowerBound="1" eType="#//ValueSpecification" containment="true" eOpposite="#//ValueSpecification/valueSpecificationAction">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The ValueSpecification to be evaluated.&#xA;&lt;p>From package UML::Actions.&lt;/p>"/>
       </eAnnotations>
@@ -10175,14 +10211,14 @@
       </eParameters>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="result" ordered="false"
-        eType="#//OutputPin" containment="true">
+        eType="#//OutputPin" containment="true" eOpposite="#//OutputPin/writeStructuralFeatureAction">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The OutputPin on which is put the input object as modified by the WriteStructuralFeatureAction.&#xA;&lt;p>From package UML::Actions.&lt;/p>"/>
       </eAnnotations>
       <eAnnotations source="subsets" references="#//Action/output"/>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" ordered="false"
-        eType="#//InputPin" containment="true">
+        eType="#//InputPin" containment="true" eOpposite="#//InputPin/writeStructuralFeatureAction">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The InputPin that provides the value to be added or removed from the StructuralFeature.&#xA;&lt;p>From package UML::Actions.&lt;/p>"/>
       </eAnnotations>
@@ -10676,7 +10712,7 @@
       </eParameters>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="insertAt" ordered="false"
-        eType="#//InputPin" containment="true">
+        eType="#//InputPin" containment="true" eOpposite="#//InputPin/addStructuralFeatureValueAction">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The InputPin that gives the position at which to insert the value in an ordered StructuralFeature. The type of the insertAt InputPin is UnlimitedNatural, but the value cannot be zero. It is omitted for unordered StructuralFeatures.&#xA;&lt;p>From package UML::Actions.&lt;/p>"/>
       </eAnnotations>
@@ -11215,7 +11251,7 @@
       </eParameters>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="result" ordered="false"
-        eType="#//OutputPin" containment="true">
+        eType="#//OutputPin" containment="true" eOpposite="#//OutputPin/clearStructuralFeatureAction">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The OutputPin on which is put the input object as modified by the ClearStructuralFeatureAction.&#xA;&lt;p>From package UML::Actions.&lt;/p>"/>
       </eAnnotations>
@@ -11618,7 +11654,7 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="result" ordered="false"
-        lowerBound="1" eType="#//OutputPin" containment="true">
+        lowerBound="1" eType="#//OutputPin" containment="true" eOpposite="#//OutputPin/createObjectAction">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The OutputPin on which the newly created object is placed.&#xA;&lt;p>From package UML::Actions.&lt;/p>"/>
       </eAnnotations>
@@ -11742,7 +11778,7 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="target" ordered="false"
-        lowerBound="1" eType="#//InputPin" containment="true">
+        lowerBound="1" eType="#//InputPin" containment="true" eOpposite="#//InputPin/destroyObjectAction">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The InputPin providing the object to be destroyed.&#xA;&lt;p>From package UML::Actions.&lt;/p>"/>
       </eAnnotations>
@@ -12815,7 +12851,7 @@
       </eParameters>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="result" ordered="false"
-        lowerBound="1" eType="#//OutputPin" containment="true">
+        lowerBound="1" eType="#//OutputPin" containment="true" eOpposite="#//OutputPin/readSelfAction">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The OutputPin on which the context object is placed.&#xA;&lt;p>From package UML::Actions.&lt;/p>"/>
       </eAnnotations>
@@ -12868,7 +12904,7 @@
       </eParameters>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="result" ordered="false"
-        lowerBound="1" eType="#//OutputPin" containment="true">
+        lowerBound="1" eType="#//OutputPin" containment="true" eOpposite="#//OutputPin/readStructuralFeatureAction">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The OutputPin on which the result values are placed.&#xA;&lt;p>From package UML::Actions.&lt;/p>"/>
       </eAnnotations>
