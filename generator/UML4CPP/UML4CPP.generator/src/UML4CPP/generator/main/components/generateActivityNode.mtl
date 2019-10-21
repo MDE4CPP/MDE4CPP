@@ -45,12 +45,9 @@
  * - creation of Input pins
  * - creation of Output pins
 */]
-[template private generateActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(Action) and not oclIsKindOf(AddStructuralFeatureValueAction))]
+[template private generateActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(Action) and not oclIsKindOf(AddStructuralFeatureValueAction) and not oclIsKindOf(CreateObjectAction))]
 [anActivityNode.oclAsType(Action).input->sortedBy(name).generatePin()/]
 [anActivityNode.oclAsType(Action).output->sortedBy(name).generatePin()/]
-[if (anActivityNode.oclIsKindOf(CreateObjectAction))]
-	[anActivityNode.oclAsType(CreateObjectAction).generateCreateObjectActionCreation()/]
-[/if]
 [if (anActivityNode.oclIsKindOf(ReadSelfAction))]
 	[anActivityNode.oclAsType(ReadSelfAction).generateReadSelfActionCommands()/]
 [/if]
@@ -60,7 +57,7 @@
 [/template]
 
 [**
- * generate elements for CreateObjectAction
+ * generate elements for AddStructuralFeatureValueAction
 */]
 [template private generateActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(AddStructuralFeatureValueAction))]
 [let action : AddStructuralFeatureValueAction = self.oclAsType(AddStructuralFeatureValueAction)]
@@ -74,6 +71,16 @@
 	[action.insertAt.memberName()/] = factory->create[action.insertAt.eClass().name/]_in_AddStructuralFeatureValueAction([action.insertAt.owner.oclAsType(NamedElement).memberName()/]);
 	[action.memberName()/]->getInput()->push_back([action.insertAt.memberName()/]); // subset/union in not implemented for upper=1
 [/if]
+[/let]
+[/template]
+
+[**
+ * generate elements for CreateObjectAction
+*/]
+[template private generateActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(CreateObjectAction))]
+[let action : CreateObjectAction = self.oclAsType(CreateObjectAction)]
+	[action.result.memberName()/] = factory->create[action.result.eClass().name/]_in_CreateObjectAction([action.result.owner.oclAsType(NamedElement).memberName()/]);
+	[action.memberName()/]->getOutput()->push_back([action.result.memberName()/]); // subset/union in not implemented for upper=1
 [/let]
 [/template]
 
@@ -103,16 +110,6 @@
 [else]
 	[pin.memberName()/] = factory->create[pin.eClass().name/]_in_Owner([pin.owner.oclAsType(NamedElement).memberName()/]);
 [/if]
-[/template]
-
-[**
- * generate elements for CreateObjectAction
-*/]
-[template private generateCreateObjectActionCreation(anCreateObjectActionNode : CreateObjectAction)]
-//set type of new Objects
-[anCreateObjectActionNode.memberName()/]->setClassifier([anCreateObjectActionNode.classifier.memberName()/]);
-[anCreateObjectActionNode.memberName()/]->setResult([anCreateObjectActionNode.result.memberName()/]);
-[anCreateObjectActionNode.result.memberName()/]->setName("[anCreateObjectActionNode.result.name/]");
 [/template]
 
 [**
@@ -147,6 +144,7 @@
  * - initialization of derived element specific properties
 */]
 [template public initializeActivityNode(anActivityNode : ActivityNode)]
+//ActivityNode [anActivityNode.name /] ([anActivityNode.eClass().name/])
 [anActivityNode.memberName()/]->setName("[anActivityNode.name/]");
 [anActivityNode.initializeActivityNodeSpecial(anActivityNode)/]
 [/template]
@@ -167,17 +165,16 @@
  * 
  * this includes:
  * - add object pin to input
- * - add insertAt pins to input if defined
- * - add result pin to output
+ * - initialize pins
  * - set structuralFeature
  * - set isReplaceAll
 */]
 [template private initializeActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(AddStructuralFeatureValueAction))]
 [let action : AddStructuralFeatureValueAction = self.oclAsType(AddStructuralFeatureValueAction)]
-[action.input.initializePin()/]
-[action.output.initializePin()/]
-[action.memberName()/]->setStructuralFeature([action.structuralFeature.memberName()/]);
-[action.memberName()/]->setIsReplaceAll([action.isReplaceAll/]);
+	[action.input.initializePin()/]
+	[action.output.initializePin()/]
+	[action.memberName()/]->setStructuralFeature([action.structuralFeature.memberName()/]);
+	[action.memberName()/]->setIsReplaceAll([action.isReplaceAll/]);
 [/let]
 [/template]
 
@@ -207,6 +204,19 @@
 [anActivityNode.memberName()/]->setOperation([anActivityNode.oclAsType(CallOperationAction).operation.generatePackageGetterCall()/]);
 [anActivityNode.oclAsType(CallOperationAction).input.initializePin()/]
 [anActivityNode.oclAsType(CallOperationAction).output.initializePin()/]
+[/template]
+
+[**
+ * generate initialization of meta model instance for an CreateObjectAction element
+ * 
+ * this includes:
+ * - initialize pins
+*/]
+[template private initializeActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(CreateObjectAction))]
+[let action : CreateObjectAction = self.oclAsType(CreateObjectAction)]
+[action.output.initializePin()/]
+[action.memberName()/]->setClassifier([action.classifier.memberName()/]);
+[/let]
 [/template]
 
 [**
