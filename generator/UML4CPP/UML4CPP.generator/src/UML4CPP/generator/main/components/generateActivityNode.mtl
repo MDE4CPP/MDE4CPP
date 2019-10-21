@@ -39,21 +39,6 @@
 [/template]
 
 [**
- * generate creation of meta model instances used by Action
- * 
- * this includes:
- * - creation of Input pins
- * - creation of Output pins
-*/]
-[template private generateActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(Action) and not oclIsKindOf(AddStructuralFeatureValueAction) and not oclIsKindOf(CreateObjectAction) and not oclIsKindOf(ReadSelfAction))]
-[anActivityNode.oclAsType(Action).input->sortedBy(name).generatePin()/]
-[anActivityNode.oclAsType(Action).output->sortedBy(name).generatePin()/]
-[if (anActivityNode.oclIsKindOf(DestroyObjectAction))]
-	[anActivityNode.oclAsType(DestroyObjectAction).generateDestroyObjectActionCommands()/]
-[/if]
-[/template]
-
-[**
  * generate elements for AddStructuralFeatureValueAction
 */]
 [template private generateActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(AddStructuralFeatureValueAction))]
@@ -98,6 +83,20 @@
 [/template]
 
 [**
+ * generate elements for DestroyObjectAction
+*/]
+[template private generateActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(DestroyObjectAction))]
+[let action : DestroyObjectAction = self.oclAsType(DestroyObjectAction)]
+[if (action.target.oclIsUndefined())]
+['UML4CPP_Generation Error: DestroyObjectAction: '.concat(action.name).concat('target pin is undefined.').registerError()/]
+[else]
+	[action.target.memberName()/] = factory->create[action.target.eClass().name/]_in_DestroyObjectAction([action.target.owner.oclAsType(NamedElement).memberName()/]);
+	[action.memberName()/]->getInput()->push_back([action.target.memberName()/]); // subset/union in not implemented for upper=1
+[/if]
+[/let]
+[/template]
+
+[**
  * generate elements for ReadSelfAction
 */]
 [template private generateActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(ReadSelfAction))]
@@ -109,6 +108,19 @@
 	[action.memberName()/]->getOutput()->push_back([action.result.memberName()/]); // subset/union in not implemented for upper=1
 [/if]
 [/let]
+[/template]
+
+[**
+ * generate creation of meta model instances used by Action
+ * 
+ * this includes:
+ * - creation of Input pins
+ * - creation of Output pins
+*/]
+[template private generateActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(Action))]
+// no specific generation for this action, generation only for properties input and output
+[anActivityNode.oclAsType(Action).input->sortedBy(name).generatePin()/]
+[anActivityNode.oclAsType(Action).output->sortedBy(name).generatePin()/]
 [/template]
 
 [**
@@ -136,20 +148,6 @@
 	[pin.memberName()/] = factory->create[pin.eClass().name/]_in_Action([pin.owner.oclAsType(NamedElement).memberName()/]);
 [else]
 	[pin.memberName()/] = factory->create[pin.eClass().name/]_in_Owner([pin.owner.oclAsType(NamedElement).memberName()/]);
-[/if]
-[/template]
-
-
-
-[**
- * generate elements for DestroyObjectAction
-*/]
-[template private generateDestroyObjectActionCommands(aDestroyObjectAction : DestroyObjectAction)]
-[if (aDestroyObjectAction.target.oclIsUndefined())]
-['UML4CPP_Generation Error: DestroyObjectAction: '.concat(aDestroyObjectAction.name).concat(' target pin invalid.').registerError()/]
-[else]
-[aDestroyObjectAction.target.memberName()/]->setName("[aDestroyObjectAction.target.name/]");
-[aDestroyObjectAction.memberName()/]->setTarget([aDestroyObjectAction.target.memberName()/]);
 [/if]
 [/template]
 
@@ -246,6 +244,18 @@
 [if (not anActivityNode.oclAsType(DecisionNode).decisionInput.oclIsUndefined())]
 [anActivityNode.memberName()/]->setDecisionInput([memberName(anActivityNode.oclAsType(DecisionNode).decisionInput)/]);
 [/if]
+[/template]
+
+[**
+ * generate initialization of meta model instance for an DestroyObjectAction element
+ * 
+ * this includes:
+ * - initialize pins
+*/]
+[template private initializeActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(DestroyObjectAction))]
+[let action : DestroyObjectAction = self.oclAsType(DestroyObjectAction)]
+[action.output.initializePin()/]
+[/let]
 [/template]
 
 [**
