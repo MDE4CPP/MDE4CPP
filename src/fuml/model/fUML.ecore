@@ -294,7 +294,7 @@
       <eParameters name="values" ordered="false" upperBound="-1" eType="#//Value"/>
       <eParameters name="position" ordered="false" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     </eOperations>
-    <eOperations name="getValue" ordered="false" upperBound="-1" eType="#//Value">
+    <eOperations name="getValues" ordered="false" upperBound="-1" eType="#//Value">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen"/>
       <eParameters name="feature" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//StructuralFeature"/>
       <eParameters name="featureValues" ordered="false" upperBound="-1" eType="#//FeatureValue"/>
