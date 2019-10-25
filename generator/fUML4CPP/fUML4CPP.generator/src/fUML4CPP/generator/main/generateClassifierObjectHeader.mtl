@@ -56,9 +56,15 @@ namespace [aPackage.name/]
 			virtual void setUmlValue(std::shared_ptr<[pointerName/]>);
 			virtual void setUmlValues(std::shared_ptr<Bag<[pointerName/]>>);;
 			virtual void setThis[className/]Ptr(std::weak_ptr<[className/]> thisObjectPtr);
+[if (aPackage.allOwnedElements()->filter(RemoveStructuralFeatureValueAction).object->select(type=aClassifier)->size() > 0)]
 			virtual void removeValue(std::shared_ptr<uml::StructuralFeature> feature, std::shared_ptr<fUML::Value> values);
+[/if]
+[if (aPackage.allOwnedElements()->filter(ReadStructuralFeatureAction).object->select(type=aClassifier)->size() > 0)]
 			virtual std::shared_ptr<Bag<fUML::Value>> getValues(std::shared_ptr<uml::StructuralFeature> feature, std::shared_ptr<Bag<fUML::FeatureValue>> featureValues);
+[/if]
+[if (aPackage.allOwnedElements()->filter(AddStructuralFeatureValueAction).object->select(type=aClassifier)->size() > 0)]
 			virtual void setFeatureValue(std::shared_ptr<uml::StructuralFeature> feature, std::shared_ptr<Bag<fUML::Value>> value, int position);
+[/if]
 		
 		protected:
 			std::shared_ptr<[pointerName/]> m_umlValue = nullptr;

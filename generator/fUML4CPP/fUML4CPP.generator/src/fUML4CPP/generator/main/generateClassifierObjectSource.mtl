@@ -107,6 +107,7 @@ void [className/]::setThis[className/]Ptr(std::weak_ptr<[className/]> thisObject
 	setThisObjectPtr(thisObjectPtr);
 }
 
+[if (aPackage.allOwnedElements()->filter(RemoveStructuralFeatureValueAction).object->select(type=aClassifier)->size() > 0)]
 void [className/]::removeValue(std::shared_ptr<uml::StructuralFeature> feature, std::shared_ptr<fUML::Value> value)
 {
 	std::shared_ptr<uml::Property> property = std::dynamic_pointer_cast<uml::Property>(feature);
@@ -175,6 +176,8 @@ void [className/]::removeValue(std::shared_ptr<uml::StructuralFeature> feature, 
 [/for]
 }
 
+[/if]
+[if (aPackage.allOwnedElements()->filter(ReadStructuralFeatureAction).object->select(type=aClassifier)->size() > 0)]
 std::shared_ptr<Bag<fUML::Value>> [className/]::getValues(std::shared_ptr<uml::StructuralFeature> feature, std::shared_ptr<Bag<fUML::FeatureValue>> featureValues)
 {
 	std::shared_ptr<uml::Property> property = std::dynamic_pointer_cast<uml::Property>(feature);
@@ -210,6 +213,8 @@ std::shared_ptr<Bag<fUML::Value>> [className/]::getValues(std::shared_ptr<uml::S
 	return values;
 }
 
+[/if]
+[if (aPackage.allOwnedElements()->filter(AddStructuralFeatureValueAction).object->select(type=aClassifier)->size() > 0)]
 void [className/]::setFeatureValue(std::shared_ptr<uml::StructuralFeature> feature, std::shared_ptr<Bag<fUML::Value>> values, int position)
 {
 	std::shared_ptr<uml::Property> property = std::dynamic_pointer_cast<uml::Property>(feature);
@@ -254,6 +259,7 @@ void [className/]::setFeatureValue(std::shared_ptr<uml::StructuralFeature> featu
 	}
 [/for]
 }
+[/if]
 [/file]
 [/template]
 
