@@ -48,7 +48,7 @@
 #include "fUML/Reference.hpp"
 #include "fUML/FUMLFactory.hpp"
 [else]
-// [anCallOperationAction.operation.class.name.toUpperFirst()/] <- Class name
+// [if (not anCallOperationAction.operation.class.oclIsUndefined())][anCallOperationAction.operation.class.name.toUpperFirst()/][else][anCallOperationAction.operation.interface.name.toUpperFirst()/][/if] <- Class name
 // [anCallOperationAction.operation.name/] <- Operation name
 [if (anCallOperationAction.operation.method->size() = 0)]
 // no method set
