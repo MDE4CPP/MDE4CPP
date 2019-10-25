@@ -123,7 +123,7 @@ void [className/]::removeValue(std::shared_ptr<uml::StructuralFeature> feature, 
 		throw "UnsupportedParameterException";	
 	}
 
-[for (aProperty : Property | aClassifier.allAttributes())]
+[for (aProperty : Property | aPackage.allOwnedElements()->filter(RemoveStructuralFeatureValueAction)->select(object.type=aClassifier).structuralFeature.oclAsType(Property))]
 	if (property == [aProperty.getModelPackage()/][aProperty.generatePackageGetterCall(aProperty)/])
 	{
 [if (aProperty.upper = 1)]
@@ -194,7 +194,7 @@ std::shared_ptr<Bag<fUML::Value>> [className/]::getValues(std::shared_ptr<uml::S
 	}
 
 	std::shared_ptr<Bag<fUML::Value>> values(new Bag<fUML::Value>());
-[for (aProperty : Property | aClassifier.allAttributes())]
+[for (aProperty : Property | aPackage.allOwnedElements()->filter(ReadStructuralFeatureAction)->select(object.type=aClassifier).structuralFeature.oclAsType(Property))]
 	if (property == [aProperty.getModelPackage()/][aProperty.generatePackageGetterCall(aProperty)/])
 	{
 [if (aProperty.isPrimitiveTypedProperty())]
@@ -235,7 +235,7 @@ void [className/]::setFeatureValue(std::shared_ptr<uml::StructuralFeature> featu
 		return;
 	}
 	std::shared_ptr<Value> inputValue = values->at(0);
-[for (aProperty : Property | aClassifier.allAttributes())]
+[for (aProperty : Property | aPackage.allOwnedElements()->filter(AddStructuralFeatureValueAction)->select(object.type=aClassifier).structuralFeature.oclAsType(Property))]
 	if (property == [aProperty.getModelPackage()/][aProperty.generatePackageGetterCall(aProperty)/])
 	{
 [if (aProperty.isPrimitiveTypedProperty())]
