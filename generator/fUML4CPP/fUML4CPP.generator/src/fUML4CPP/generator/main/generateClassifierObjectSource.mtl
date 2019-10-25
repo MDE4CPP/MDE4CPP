@@ -124,7 +124,7 @@ void [className/]::removeValue(std::shared_ptr<uml::StructuralFeature> feature, 
 	}
 
 [for (aProperty : Property | aClassifier.allAttributes())]
-	if (property == [aProperty.generatePackageGetterCall(aProperty, aPackage)/])
+	if (property == [aProperty.getModelPackage()/][aProperty.generatePackageGetterCall(aProperty)/])
 	{
 [if (aProperty.upper = 1)]
 [if (aProperty.isPrimitiveTypedProperty())]
@@ -195,7 +195,7 @@ std::shared_ptr<Bag<fUML::Value>> [className/]::getValues(std::shared_ptr<uml::S
 
 	std::shared_ptr<Bag<fUML::Value>> values(new Bag<fUML::Value>());
 [for (aProperty : Property | aClassifier.allAttributes())]
-	if (property == [aProperty.generatePackageGetterCall(aProperty, aPackage)/])
+	if (property == [aProperty.getModelPackage()/][aProperty.generatePackageGetterCall(aProperty)/])
 	{
 [if (aProperty.isPrimitiveTypedProperty())]
 		std::shared_ptr<[aProperty.type.getValueClass()/]> value = fUML::FUMLFactory::eInstance()->create[aProperty.type.name.toUpperFirst()/]Value();
@@ -236,7 +236,7 @@ void [className/]::setFeatureValue(std::shared_ptr<uml::StructuralFeature> featu
 	}
 	std::shared_ptr<Value> inputValue = values->at(0);
 [for (aProperty : Property | aClassifier.allAttributes())]
-	if (property == [aProperty.generatePackageGetterCall(aProperty, aPackage)/])
+	if (property == [aProperty.getModelPackage()/][aProperty.generatePackageGetterCall(aProperty)/])
 	{
 [if (aProperty.isPrimitiveTypedProperty())]
 		std::shared_ptr<[aProperty.type.getValueClass()/]> value = std::dynamic_pointer_cast<[aProperty.type.getValueClass()/]>(inputValue);
