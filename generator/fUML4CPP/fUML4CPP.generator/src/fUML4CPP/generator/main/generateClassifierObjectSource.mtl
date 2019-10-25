@@ -31,7 +31,9 @@
 
 #include "abstractDataTypes/Bag.hpp"
 #include "[aClassifier.getNearestPackage().myNamespaceName()/]/[aClassifier.name.toUpperFirst()/].hpp"
-#include "[aPackage.getPackageName()/]/[aPackage.getPackageName()/]Package.hpp"
+[for (aPack : Package | aClassifier.allAttributes().getNearestPackage()->asOrderedSet()->flatten()->sortedBy(name))]
+#include "[aPack.getPackageName()/]/[aPack.getPackageName()/]Package.hpp"
+[/for]
 
 #include "abstractDataTypes/Any.hpp"
 #include "fUML/FUMLFactory.hpp"
@@ -120,9 +122,8 @@ void [className/]::removeValue(std::shared_ptr<uml::StructuralFeature> feature, 
 		throw "UnsupportedParameterException";	
 	}
 
-	std::shared_ptr<[aPackage.getPackageName().toUpperFirst()/]Package> package = [aPackage.getPackageName().toUpperFirst()/]Package::eInstance();
 [for (aProperty : Property | aClassifier.allAttributes())]
-	if (property == package->[aProperty.generatePackageGetterCall(aProperty)/])
+	if (property == [aProperty.generatePackageGetterCall(aProperty, aPackage)/])
 	{
 [if (aProperty.upper = 1)]
 [if (aProperty.isPrimitiveTypedProperty())]
@@ -190,9 +191,8 @@ std::shared_ptr<Bag<fUML::Value>> [className/]::getValues(std::shared_ptr<uml::S
 	}
 
 	std::shared_ptr<Bag<fUML::Value>> values(new Bag<fUML::Value>());
-	std::shared_ptr<[aPackage.getPackageName().toUpperFirst()/]Package> package = [aPackage.getPackageName().toUpperFirst()/]Package::eInstance();
 [for (aProperty : Property | aClassifier.allAttributes())]
-	if (property == package->[aProperty.generatePackageGetterCall(aProperty)/])
+	if (property == [aProperty.generatePackageGetterCall(aProperty, aPackage)/])
 	{
 [if (aProperty.isPrimitiveTypedProperty())]
 		std::shared_ptr<[aProperty.type.getValueClass()/]> value = fUML::FUMLFactory::eInstance()->create[aProperty.type.name.toUpperFirst()/]Value();
@@ -230,15 +230,14 @@ void [className/]::setFeatureValue(std::shared_ptr<uml::StructuralFeature> featu
 		return;
 	}
 	std::shared_ptr<Value> inputValue = values->at(0);
-	std::shared_ptr<[aPackage.getPackageName().toUpperFirst()/]Package> package = [aPackage.getPackageName().toUpperFirst()/]Package::eInstance();
 [for (aProperty : Property | aClassifier.allAttributes())]
-	if (property == package->[aProperty.generatePackageGetterCall(aProperty)/])
+	if (property == [aProperty.generatePackageGetterCall(aProperty, aPackage)/])
 	{
 [if (aProperty.isPrimitiveTypedProperty())]
 		std::shared_ptr<[aProperty.type.getValueClass()/]> value = std::dynamic_pointer_cast<[aProperty.type.getValueClass()/]>(inputValue);
 		if (value != nullptr)
 		{
-			m_umlValue->[aProperty.setterName()/](value->getValue());
+			m_umlValue->[aProperty.setterName()/](value->[aProperty.getterPrefix()/]Value());
 		}
 [else]
 		std::shared_ptr<fUML::Reference> reference = std::dynamic_pointer_cast<fUML::Reference>(inputValue);
