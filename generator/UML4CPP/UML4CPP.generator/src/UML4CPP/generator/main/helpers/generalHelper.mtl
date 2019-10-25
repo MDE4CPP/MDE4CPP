@@ -134,7 +134,7 @@ template<class T> class Bag;
 [query public generatePackageGetterCall(anElement1 : NamedElement, anElement2 : NamedElement) : String = if (anElement1.oclIsUndefined()) then 'nullptr' else anElement1.packageGetter(anElement2) endif /]
 [query private packageGetter(anElement1 : NamedElement, anElement2 : NamedElement) : String = if (anElement1.getNearestPackage().oclIsUndefined()) then anElement1.handlePackageGetterError(anElement2.name) else generatePackageInstance(anElement1, anElement2).concat('get_').concat(anElement1.myQualifiedName().substituteAll('::','_').substituteAll('.','_')).concat('()') endif /]
 [query private generatePackageInstance(anElement1 : Element, anElement2 : Element ) : String = if(anElement1.getNearestPackage() = anElement2.getNearestPackage() ) then '' else getModelPackage(anElement1) endif /]
-[query private getModelPackage(anElement1 : Element) : String = anElement1.getNearestPackage().name.concat('::').concat(anElement1.getNearestPackage().name.toUpperFirst()).concat('Package').concat('::eInstance()->') /]
+[query public getModelPackage(anElement1 : Element) : String = anElement1.getNearestPackage().name.concat('::').concat(anElement1.getNearestPackage().name.toUpperFirst()).concat('Package').concat('::eInstance()->') /]
 
 [template private handlePackageGetterError(failureElement : NamedElement, name : String)]
 nullptr['cannot terminate package of element '.concat(failureElement.toString()).concat(' used by ').concat(name).registerError()/]
