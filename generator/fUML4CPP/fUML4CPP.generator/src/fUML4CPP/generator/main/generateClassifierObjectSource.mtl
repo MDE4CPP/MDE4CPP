@@ -21,6 +21,9 @@
 [import UML4CPP::generator::main::helpers::nameHelper /]
 
 [query public supportedTypes(type : Type) : Boolean = (type.name = 'Integer') or (type.name = 'Boolean') /]
+[query public getStructuralFeaturesFromRSTA(aPackage : Package, aClassifier : Classifier) : Set(StructuralFeature) = aPackage.allOwnedElements()->filter(ReadStructuralFeatureAction)->select(object.type=aClassifier).structuralFeature->asSet()/]
+[query public getStructuralFeaturesFromASTVA(aPackage : Package, aClassifier : Classifier) : Set(StructuralFeature) = aPackage.allOwnedElements()->filter(AddStructuralFeatureValueAction)->select(object.type=aClassifier).structuralFeature->asSet()/]
+[query public getStructuralFeaturesFromRSTVA(aPackage : Package, aClassifier : Classifier) : Set(StructuralFeature) = aPackage.allOwnedElements()->filter(RemoveStructuralFeatureValueAction)->select(object.type=aClassifier).structuralFeature->asSet()/]
 
 [template public generateClassifierObjectSource(aClassifier : Classifier, aPackage:Package) {
 	className : String = objectClassName();
@@ -31,12 +34,12 @@
 
 #include "abstractDataTypes/Bag.hpp"
 #include "[aClassifier.getNearestPackage().myNamespaceName()/]/[aClassifier.name.toUpperFirst()/].hpp"
-[for (aPack : Package | aClassifier.allAttributes().getNearestPackage()->asOrderedSet()->flatten()->sortedBy(name))]
-#include "[aPack.getPackageName()/]/[aPack.getPackageName()/]Package.hpp"
-[/for]
+[if (aPackage.getStructuralFeaturesFromRSTA(aClassifier)->addAll(aPackage.getStructuralFeaturesFromASTVA(aClassifier))->addAll(aPackage.getStructuralFeaturesFromRSTVA(aClassifier))->size() > 0)]
 
 #include "abstractDataTypes/Any.hpp"
+[if (aPackage.getStructuralFeaturesFromRSTA(aClassifier)->size() > 0)]
 #include "fUML/FUMLFactory.hpp"
+[/if]
 #include "fUML/Reference.hpp"
 #include "fUML/Value.hpp"
 [for (aType : Type | aClassifier.allAttributes().type->sortedBy(qualifiedName))]
@@ -47,6 +50,11 @@
 [/if]
 [/for]
 #include "uml/Property.hpp"
+
+[for (aPack : Package | aPackage.getStructuralFeaturesFromRSTA(aClassifier)->addAll(aPackage.getStructuralFeaturesFromASTVA(aClassifier))->addAll(aPackage.getStructuralFeaturesFromRSTVA(aClassifier)).getNearestPackage()->asSet()->flatten()->sortedBy(name))]
+#include "[aPack.getPackageName()/]/[aPack.getPackageName()/]Package.hpp"
+[/for]
+[/if]
 
 using namespace [aPackage.name/];
 
@@ -106,8 +114,8 @@ void [className/]::setThis[className/]Ptr(std::weak_ptr<[className/]> thisObject
 {
 	setThisObjectPtr(thisObjectPtr);
 }
+[if (aPackage.getStructuralFeaturesFromRSTVA(aClassifier)->size() > 0)]
 
-[if (aPackage.allOwnedElements()->filter(RemoveStructuralFeatureValueAction).object->select(type=aClassifier)->size() > 0)]
 void [className/]::removeValue(std::shared_ptr<uml::StructuralFeature> feature, std::shared_ptr<fUML::Value> value)
 {
 	std::shared_ptr<uml::Property> property = std::dynamic_pointer_cast<uml::Property>(feature);
@@ -123,7 +131,7 @@ void [className/]::removeValue(std::shared_ptr<uml::StructuralFeature> feature, 
 		throw "UnsupportedParameterException";	
 	}
 
-[for (aProperty : Property | aPackage.allOwnedElements()->filter(RemoveStructuralFeatureValueAction)->select(object.type=aClassifier).structuralFeature.oclAsType(Property))]
+[for (aProperty : Property | aPackage.getStructuralFeaturesFromRSTVA(aClassifier).oclAsType(Property))]
 	if (property == [aProperty.getModelPackage()/][aProperty.generatePackageGetterCall(aProperty)/])
 	{
 [if (aProperty.upper = 1)]
@@ -175,9 +183,9 @@ void [className/]::removeValue(std::shared_ptr<uml::StructuralFeature> feature, 
 	}
 [/for]
 }
-
 [/if]
-[if (aPackage.allOwnedElements()->filter(ReadStructuralFeatureAction).object->select(type=aClassifier)->size() > 0)]
+[if (aPackage.getStructuralFeaturesFromRSTA(aClassifier)->size() > 0)]
+
 std::shared_ptr<Bag<fUML::Value>> [className/]::getValues(std::shared_ptr<uml::StructuralFeature> feature, std::shared_ptr<Bag<fUML::FeatureValue>> featureValues)
 {
 	std::shared_ptr<uml::Property> property = std::dynamic_pointer_cast<uml::Property>(feature);
@@ -194,7 +202,7 @@ std::shared_ptr<Bag<fUML::Value>> [className/]::getValues(std::shared_ptr<uml::S
 	}
 
 	std::shared_ptr<Bag<fUML::Value>> values(new Bag<fUML::Value>());
-[for (aProperty : Property | aPackage.allOwnedElements()->filter(ReadStructuralFeatureAction)->select(object.type=aClassifier).structuralFeature.oclAsType(Property))]
+[for (aProperty : Property | aPackage.getStructuralFeaturesFromRSTA(aClassifier).oclAsType(Property))]
 	if (property == [aProperty.getModelPackage()/][aProperty.generatePackageGetterCall(aProperty)/])
 	{
 [if (aProperty.isPrimitiveTypedProperty())]
@@ -212,9 +220,9 @@ std::shared_ptr<Bag<fUML::Value>> [className/]::getValues(std::shared_ptr<uml::S
 [/for]	
 	return values;
 }
-
 [/if]
-[if (aPackage.allOwnedElements()->filter(AddStructuralFeatureValueAction).object->select(type=aClassifier)->size() > 0)]
+[if (aPackage.getStructuralFeaturesFromASTVA(aClassifier)->size() > 0)]
+
 void [className/]::setFeatureValue(std::shared_ptr<uml::StructuralFeature> feature, std::shared_ptr<Bag<fUML::Value>> values, int position)
 {
 	std::shared_ptr<uml::Property> property = std::dynamic_pointer_cast<uml::Property>(feature);
@@ -235,7 +243,7 @@ void [className/]::setFeatureValue(std::shared_ptr<uml::StructuralFeature> featu
 		return;
 	}
 	std::shared_ptr<Value> inputValue = values->at(0);
-[for (aProperty : Property | aPackage.allOwnedElements()->filter(AddStructuralFeatureValueAction)->select(object.type=aClassifier).structuralFeature.oclAsType(Property))]
+[for (aProperty : Property | aPackage.getStructuralFeaturesFromASTVA(aClassifier).oclAsType(Property))]
 	if (property == [aProperty.getModelPackage()/][aProperty.generatePackageGetterCall(aProperty)/])
 	{
 [if (aProperty.isPrimitiveTypedProperty())]

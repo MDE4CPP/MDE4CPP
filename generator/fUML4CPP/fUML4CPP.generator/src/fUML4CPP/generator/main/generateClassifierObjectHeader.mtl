@@ -14,6 +14,7 @@
  */]
 [module generateClassifierObjectHeader('http://www.eclipse.org/uml2/5.0.0/UML')]
 
+[import fUML4CPP::generator::main::generateClassifierObjectSource /]
 [import fUML4CPP::generator::main::parameterHelper /]
 [import UML4CPP::generator::main::components::generateType /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
@@ -56,13 +57,13 @@ namespace [aPackage.name/]
 			virtual void setUmlValue(std::shared_ptr<[pointerName/]>);
 			virtual void setUmlValues(std::shared_ptr<Bag<[pointerName/]>>);;
 			virtual void setThis[className/]Ptr(std::weak_ptr<[className/]> thisObjectPtr);
-[if (aPackage.allOwnedElements()->filter(RemoveStructuralFeatureValueAction).object->select(type=aClassifier)->size() > 0)]
+[if (aPackage.getStructuralFeaturesFromRSTVA(aClassifier)->size() > 0)]
 			virtual void removeValue(std::shared_ptr<uml::StructuralFeature> feature, std::shared_ptr<fUML::Value> values);
 [/if]
-[if (aPackage.allOwnedElements()->filter(ReadStructuralFeatureAction).object->select(type=aClassifier)->size() > 0)]
+[if (aPackage.getStructuralFeaturesFromRSTA(aClassifier)->size() > 0)]
 			virtual std::shared_ptr<Bag<fUML::Value>> getValues(std::shared_ptr<uml::StructuralFeature> feature, std::shared_ptr<Bag<fUML::FeatureValue>> featureValues);
 [/if]
-[if (aPackage.allOwnedElements()->filter(AddStructuralFeatureValueAction).object->select(type=aClassifier)->size() > 0)]
+[if (aPackage.getStructuralFeaturesFromASTVA(aClassifier)->size() > 0)]
 			virtual void setFeatureValue(std::shared_ptr<uml::StructuralFeature> feature, std::shared_ptr<Bag<fUML::Value>> value, int position);
 [/if]
 		
