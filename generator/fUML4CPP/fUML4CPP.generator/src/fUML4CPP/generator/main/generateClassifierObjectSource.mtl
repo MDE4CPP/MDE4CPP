@@ -34,7 +34,8 @@
 
 #include "abstractDataTypes/Bag.hpp"
 #include "[aClassifier.getNearestPackage().myNamespaceName()/]/[aClassifier.name.toUpperFirst()/].hpp"
-[if (aPackage.getStructuralFeaturesFromRSTA(aClassifier)->addAll(aPackage.getStructuralFeaturesFromASTVA(aClassifier))->addAll(aPackage.getStructuralFeaturesFromRSTVA(aClassifier))->size() > 0)]
+[let attributes : Set(Property)= aPackage.getStructuralFeaturesFromRSTA(aClassifier)->addAll(aPackage.getStructuralFeaturesFromASTVA(aClassifier))->addAll(aPackage.getStructuralFeaturesFromRSTVA(aClassifier).oclAsType(Property)->flatten())]
+[if (attributes->size() > 0)]
 
 #include "abstractDataTypes/Any.hpp"
 [if (aPackage.getStructuralFeaturesFromRSTA(aClassifier)->size() > 0)]
@@ -42,19 +43,20 @@
 [/if]
 #include "fUML/Reference.hpp"
 #include "fUML/Value.hpp"
-[for (aType : Type | aClassifier.allAttributes().type->sortedBy(qualifiedName))]
-[if (aType.oclIsKindOf(PrimitiveType))]
-#include "fUML/[aType.name.toUpperFirst()/]Value.hpp"
+[for (property : Property | attributes->sortedBy(qualifiedName))]
+[if (property.type.oclIsKindOf(PrimitiveType))]
+#include "fUML/[property.type.name.toUpperFirst()/]Value.hpp"
 [else]
-#include "[aPackage.getPackageName()/]Exec/[aType.oclAsType(Classifier).objectClassName()/].hpp"
+#include "[aPackage.getPackageName()/]Exec/[property.type.oclAsType(Classifier).objectClassName()/].hpp"
 [/if]
 [/for]
 #include "uml/Property.hpp"
 
-[for (aPack : Package | aPackage.getStructuralFeaturesFromRSTA(aClassifier)->addAll(aPackage.getStructuralFeaturesFromASTVA(aClassifier))->addAll(aPackage.getStructuralFeaturesFromRSTVA(aClassifier)).getNearestPackage()->asSet()->flatten()->sortedBy(name))]
+[for (aPack : Package | attributes.getNearestPackage()->asSet()->flatten()->sortedBy(name))]
 #include "[aPack.getPackageName()/]/[aPack.getPackageName()/]Package.hpp"
 [/for]
 [/if]
+[/let]
 
 using namespace [aPackage.name/];
 
