@@ -29,8 +29,11 @@
 [query public getClassiferExecutions(aPackage : Package) : Set(Classifier) = OrderedSet{
 				aPackage.ownedElement->filter(Class), 
 				aPackage.allOwnedElements()->filter(Parameter)->select(type.oclIsKindOf(Interface)).type,
-				aPackage.allOwnedElements()->filter(Parameter)->select(type.oclIsKindOf(Class)).type
-			}->flatten()->reject(oclIsKindOf(Activity))->sortedBy(name)/]
+				aPackage.allOwnedElements()->filter(Parameter)->select(type.oclIsKindOf(Class)).type,
+				aPackage.allOwnedElements()->filter(ReadStructuralFeatureAction).structuralFeature.type,
+				aPackage.allOwnedElements()->filter(AddStructuralFeatureValueAction).structuralFeature.type,
+				aPackage.allOwnedElements()->filter(RemoveStructuralFeatureValueAction).structuralFeature.type
+			}->flatten()->reject(oclIsKindOf(Activity))->reject(supportedTypes())->sortedBy(name)/]
 
 [comment]INPUT SWITCH ----------------------------------------------------------[/comment]
 [template public generateInputParameter(par : Parameter, index:Integer) ? (par.name.oclIsUndefined())]
