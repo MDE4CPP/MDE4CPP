@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_9K1YsPAoEemD6KgsJJSfgA" name="ActionTest">
-  <packageImport xmi:id="_vv0YgPA9EemEbbzq4pzzvw">
-    <importedPackage xmi:type="uml:Model" href="../Calculator/CalcModel.uml#_lTky4IxoEeazCdUXohZ79Q"/>
-  </packageImport>
   <packagedElement xmi:type="uml:Class" xmi:id="_KrxOIPApEemD6KgsJJSfgA" name="A">
     <ownedAttribute xmi:id="_89updPArEemD6KgsJJSfgA" name="b" type="_zZdd4PArEemD6KgsJJSfgA" aggregation="composite" association="_89upcPArEemD6KgsJJSfgA">
       <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_89updfArEemD6KgsJJSfgA"/>
