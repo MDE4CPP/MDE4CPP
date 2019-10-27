@@ -25,7 +25,6 @@
 [import fUML4CPP::generator::main::generateExecutionBuildFile /]
 [import fUML4CPP::generator::main::generateMainExecution /]
 [import fUML4CPP::generator::main::generateOpaqueBehaviorExecution /]
-[import fUML4CPP::generator::main::generateExecutionProjectFiles /]
 [import fUML4CPP::generator::main::parameterHelper /]
 [import fUML4CPP::generator::main::plugin::generateExecutionPlugin /]
 [import UML4CPP::generator::main::generate /]
@@ -84,5 +83,4 @@
 
 //generate project files
 [aPackage.generateExecutionBuildFile(buildLibrary())/]
-[aPackage.generateExecutionProjectFiles()/]
 [/template]
