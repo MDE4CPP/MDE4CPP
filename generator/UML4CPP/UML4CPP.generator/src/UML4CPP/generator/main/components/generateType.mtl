@@ -85,6 +85,22 @@ std::shared_ptr<[if (aParameter.upper <> 1)]Bag<[/if][aParameter.type.transformT
 [/template]
 
 [**
+ * generate the C++ representation of a type for a Pin
+ * 
+ * - shared pointer for types, which are not primitive or enumeration
+ * - upper <> 1 -> Bag used  
+ * - error message, if Parameter type is undefined or Parameter type name is undefined
+*/]
+[template public generateCppType(aPin : Pin, useReference : Boolean)]
+[if (not aPin.type.oclIsUndefined() and aPin.type.name.oclIsUndefined())]
+['type of parameter '.concat(aPin.qualifiedName).concat(' is invalid (').concat(aPin.type.toString()).concat(')').registerError() /]undefined
+[/if]
+[if (not aPin.type.oclIsUndefined() and not (aPin.type.isPrimitive() or aPin.type.oclIsKindOf(Enumeration)))]
+std::shared_ptr<[if (aPin.upper <> 1)]Bag<[/if][aPin.type.transformType()/]>[if (aPin.upper <> 1)]>[/if][else]
+[if (aPin.upper <> 1)]std::shared_ptr<Bag<[/if][aPin.type.transformType()/][if (aPin.upper <> 1)]>>[/if][/if]
+[/template]
+
+[**
  * generate the C++ representation of a type for a Parameter
  * 
  * - shared pointer for types, which are not primitive or enumeration
