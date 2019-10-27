@@ -28,6 +28,7 @@
 [import fUML4CPP::generator::main::parameterHelper /]
 [import fUML4CPP::generator::main::plugin::generateExecutionPlugin /]
 [import UML4CPP::generator::main::generate /]
+[import UML4CPP::generator::main::configuration::generateGradleFiles /]
 [import UML4CPP::generator::main::validation::validateModel /]
  
 [query public hasConfiguredBuildMode(aPackage : Package) : Boolean = eAllContents()->filter(ecore::EAnnotation)->select(source = 'BuildMode')->notEmpty() /]
@@ -41,7 +42,10 @@
 [if (aPackage.name.oclIsUndefined() or aPackage.name = '')]
 	['package has no name '.registerError()/]
 [else]
+	[aPackage.generateUML()/]
+[if (aPackage.allOwnedElements()->filter(Activity)->size() > 0)]
 	[aPackage.generateFUMLModel()/]
+[/if]
 [/if]
 
 [if (aPackage.errorExisting())]
@@ -51,8 +55,6 @@
 [/template]
 
 [template public generateFUMLModel(aPackage : Package)]
-[generateUML(aPackage)/]
-
 //generate executionactivation for OpaqueBehaviorsCallOperationAction
 [aPackage.getOpaqueBehaviors().generateBehaviorExecutionHeader(aPackage)/]
 [aPackage.getOpaqueBehaviors().generateBehaviorExecutionSource(aPackage)/]
