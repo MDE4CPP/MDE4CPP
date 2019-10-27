@@ -29,10 +29,6 @@ upperName : String = aPackage.getPackageName().sanitize().toUpperFirst();
 originalName : String = aPackage.getPackageName();
 }]
 
-[file (originalName.concat('Exec/') + upperName.concat('Locus.cpp'), false, 'UTF-8')]
-#include "impl/[upperName/]LocusImpl.hpp"
-[/file]
-
 [file (originalName.concat('Exec/impl/') + upperName.concat('LocusImpl.cpp'), false, 'UTF-8')]
 #include "[upperName/]LocusImpl.hpp"
 #include <iostream>
