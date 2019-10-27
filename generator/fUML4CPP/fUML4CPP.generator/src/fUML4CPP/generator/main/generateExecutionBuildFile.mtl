@@ -19,7 +19,14 @@
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 
-[query public metaModelIncludes(aPackage : Package) : Set(Package) = OrderedSet{aPackage.member->filter(Class).attribute.type.getNearestPackage(),aPackage.member->filter(Class).ownedOperation.ownedParameter.type.getNearestPackage(),aPackage.member->filter(Class).attribute.getAppliedStereotypes().getNearestPackage(), aPackage.member->filter(Class).interfaceRealization.supplier.getNearestPackage(), aPackage.getCallOperationActions().operation.method->reject(oclIsUndefined()).ownedParameter.type.getNearestPackage()}->flatten() /]
+[query public metaModelIncludes(aPackage : Package) : Set(Package) = OrderedSet{
+																			aPackage.member->filter(Class).attribute.type.getNearestPackage(),
+																			aPackage.member->filter(Class).ownedOperation.ownedParameter.type.getNearestPackage(),
+																			aPackage.member->filter(Class).attribute.getAppliedStereotypes().getNearestPackage(), 
+																			aPackage.member->filter(Class).interfaceRealization.supplier.getNearestPackage(), 
+																			aPackage.getCallOperationActions().operation.method->reject(oclIsUndefined()).ownedParameter.type.getNearestPackage(),
+																			aPackage.packageImport.importedPackage
+																		}->flatten() /]
 [query public isReflectionModel(aPackage : Package) : Boolean = if ((aPackage.name='UML') or (aPackage.name='Ecore')or (aPackage.name='PrimitiveTypes') or (aPackage.eAllContents()->filter(ecore::EAnnotation)->select(source = 'SDK')->notEmpty())) then true else false endif /]
 [query public metaModelIncludesWithoutReflection(aPackage : Package) : Set(Package) = aPackage.metaModelIncludes()->reject((name = aPackage.name) or (name = 'PrimitiveTypes') or (name = 'UML')or (name = 'Ecore'))/]
 [query public metaModelIncludesReflection(aPackage : Package) : Set(Package) = aPackage.metaModelIncludes()->select((not (name = aPackage.name) or (name = 'PrimitiveTypes') or (name = 'UML')or (name = 'Ecore')))/]
