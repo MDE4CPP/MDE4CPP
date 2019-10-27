@@ -281,7 +281,7 @@
 [let action : AddStructuralFeatureValueAction = self.oclAsType(AddStructuralFeatureValueAction)]
 	[action.input.initializePin()/]
 	[action.output.initializePin()/]
-	[action.memberName()/]->setStructuralFeature([action.structuralFeature.memberName()/]);
+	[action.memberName()/]->setStructuralFeature([action.structuralFeature.generatePackageGetterCall()/]);
 	[action.memberName()/]->setIsReplaceAll([action.isReplaceAll/]);
 [/let]
 [/template]
@@ -325,7 +325,7 @@
 [let action : ClearStructuralFeatureAction = self.oclAsType(ClearStructuralFeatureAction)]
 	[action.input.initializePin()/]
 	[action.output.initializePin()/]
-	[action.memberName()/]->setStructuralFeature([action.structuralFeature.memberName()/]);
+	[action.memberName()/]->setStructuralFeature([action.structuralFeature.generatePackageGetterCall()/]);
 [/let]
 [/template]
 [**
@@ -337,7 +337,7 @@
 [template private initializeActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(CreateObjectAction))]
 [let action : CreateObjectAction = self.oclAsType(CreateObjectAction)]
 [action.output.initializePin()/]
-[action.memberName()/]->setClassifier([action.classifier.memberName()/]);
+[action.memberName()/]->setClassifier([action.classifier.generatePackageGetterCall()/]);
 [/let]
 [/template]
 
@@ -388,7 +388,7 @@
 [let action : ReadStructuralFeatureAction = self.oclAsType(ReadStructuralFeatureAction)]
 	[action.input.initializePin()/]
 	[action.output.initializePin()/]
-	[action.memberName()/]->setStructuralFeature([action.structuralFeature.memberName()/]);
+	[action.memberName()/]->setStructuralFeature([action.structuralFeature.generatePackageGetterCall()/]);
 [/let]
 [/template]
 
@@ -404,7 +404,7 @@
 [let action : RemoveStructuralFeatureValueAction = self.oclAsType(RemoveStructuralFeatureValueAction)]
 	[action.input.initializePin()/]
 	[action.output.initializePin()/]
-	[action.memberName()/]->setStructuralFeature([action.structuralFeature.memberName()/]);
+	[action.memberName()/]->setStructuralFeature([action.structuralFeature.generatePackageGetterCall()/]);
 	[action.memberName()/]->setIsRemoveDuplicates([action.isRemoveDuplicates/]);
 [/let]
 [/template]
