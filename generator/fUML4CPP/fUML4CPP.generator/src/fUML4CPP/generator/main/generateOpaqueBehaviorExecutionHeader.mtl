@@ -12,37 +12,45 @@
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */]
-[module generateCallOperationActionExecutionHeader('http://www.eclipse.org/uml2/5.0.0/UML')]
+[module generateOpaqueBehaviorExecutionHeader('http://www.eclipse.org/uml2/5.0.0/UML')]
  
+[import fUML4CPP::generator::main::parameterHelper /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 
-[template public generateCallOperationActionExecutionHeader(anCallOperationAction : CallOperationAction, aPackage :Package) {
-	actionName : String = anCallOperationAction.name.sanitize().toUpperFirst().concat('Execution');
+[template public generateOpaqueBehaviorExecutionHeader(anOpaqueBehavior : OpaqueBehavior, aPackage :Package)]
+[anOpaqueBehavior.generateOpaqueBehaviorExecHeader(aPackage)/]
+[/template]
+
+[template public generateOpaqueBehaviorExecutionHeader(aCallOperationAction : CallOperationAction, aPackage :Package)]
+[aCallOperationAction.generateOpaqueBehaviorExecHeader(aPackage)/]
+[/template]
+
+[template private generateOpaqueBehaviorExecHeader(namedElement : NamedElement, aPackage :Package) {
+	behaviorName : String = namedElement.generateOpaqueBehaviorExecutionName();
 }]
 
-[file (aPackage.getPackageName().concat('Exec/').concat(actionName).concat('.hpp'), false, 'UTF-8')]
-[startGuard(anCallOperationAction,'Execution')/]
+[file (aPackage.getPackageName().concat('Exec/').concat(behaviorName).concat('.hpp'), false, 'UTF-8')]
+[startGuard(namedElement,'Execution')/]
 
 #include "fUML/impl/OpaqueBehaviorExecutionImpl.hpp"
 
 namespace [aPackage.name/] 
 {
-	class [actionName/] : virtual public fUML::OpaqueBehaviorExecutionImpl 
+	class [behaviorName/]: virtual public fUML::OpaqueBehaviorExecutionImpl 
 	{
 		public:
 		    //constructor
-		    [actionName/](const [actionName/] &obj);
-		    [actionName/]();
+		    [behaviorName/](const [behaviorName/] &obj);
+		    [behaviorName/]();
 		    //destructor
-		    virtual ~[actionName/]();
+		    virtual ~[behaviorName/]();
 		
 		    virtual void doBody(std::shared_ptr<Bag<fUML::ParameterValue> > inputParameters, std::shared_ptr<Bag<fUML::ParameterValue> > outputParameters);
 		    virtual std::shared_ptr<ecore::EObject> copy() const;
-			virtual void setThisExecutionPtr(std::weak_ptr<[actionName/]> thisExecutionPtr);
-		};
+			virtual void setThisExecutionPtr(std::weak_ptr<[behaviorName/]> thisExecutionPtr);
+	};
 }
-
-[endGuard(anCallOperationAction,'Execution')/]
+[endGuard(namedElement,'Execution')/]
 [/file]
 [/template]

@@ -133,17 +133,15 @@ int main()
 [if (aPackage.getCallOperationActions()->size()>0)]
 //OpaqueBehaviourExecutions
 [for (aCOA : CallOperationAction | aPackage.getCallOperationActions()->sortedBy(myQualifiedName()))]
-[if (not aCOA.hasCOAAMethod())][aCOA.generateInclude()/][/if]
+[aCOA.generateInclude()/]
 [/for]
 [/if]
 [/template]
 
 [template public generateActivityRelatedIncludes(anActivity : Activity, aPackage : Package)]
-[if (anActivity.ownedParameter->asSet()->parametersArePointers())]
 #include "fUML/Reference.hpp"
 #include "[aPackage.getPackageName()/]/[aPackage.getPackageName().toUpperFirst()/]Factory.hpp"
 #include "[aPackage.getPackageName()/]/[aPackage.getPackageName().toUpperFirst()/]Package.hpp"
-[/if]
 
 [for ( type : Type | anActivity->asOrderedSet()->first().ownedParameter.type->asOrderedSet())]
 [type.generateTypeInclude(aPackage)/]

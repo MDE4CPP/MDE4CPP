@@ -26,10 +26,7 @@ public class FUML4CPPEMtlResourceFactory extends UML4CPPEMtlResourceFactory {
 	
 	private void initalizeGeneralEmtls(String resourcePathPrefix)
 	{		
-		String[] moduleNames = {"generateBehaviorExecutionHeader",
-								"generateBehaviorExecutionSource",
-								"generateCallOperationActionExecutionHeader",
-								"generateCallOperationActionExecutionSource",
+		String[] moduleNames = {
 								"generateClassifierObjectHeader",
 								"generateClassifierObjectSource",
 								"generateExecutionBuildFile",
@@ -39,6 +36,8 @@ public class FUML4CPPEMtlResourceFactory extends UML4CPPEMtlResourceFactory {
 								"generateFUML",
 								"generateMainExecution",
 								"generateOpaqueBehaviorExecution",
+								"generateOpaqueBehaviorExecutionHeader",
+								"generateOpaqueBehaviorExecutionSource",
 								"parameterHelper"
 		};
 		generateFilePathMapData(moduleNames, "", resourcePathPrefix);

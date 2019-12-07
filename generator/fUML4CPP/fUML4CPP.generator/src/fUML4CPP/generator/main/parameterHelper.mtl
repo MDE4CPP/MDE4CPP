@@ -18,13 +18,13 @@
 [import UML4CPP::generator::main::components::generateType /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 
+[query public generateOpaqueBehaviorExecutionName(namedElement : NamedElement) : String = namedElement.name.sanitize().toUpperFirst().concat('Execution') /] 
+
 [query public pointerName(aClassifier : Classifier, aPackage : Package) : String = if (aPackage.name = aClassifier.namespace.myNamespaceName()) then aClassifier.name.toUpperFirst() else aClassifier.namespace.myNamespaceName().concat('::').concat(aClassifier.name.toUpperFirst()) endif /]
 [query public executionClassName(aClassifier : Classifier) : String = aClassifier.name.toUpperFirst().concat('Execution') /]
 [query public objectClassName(aClassifier : Classifier) : String = aClassifier.name.toUpperFirst().concat('Object') /]
 
 [query public supportedTypes(type : Type) : Boolean = (name = 'Integer') or (name = 'Boolean') or (name = 'String') or (name = 'Real') /]
-
-[query public parametersArePointers(parameters : Set(Parameter)) : Boolean = parameters->select(not type.supportedTypes())->asSet()->size()>0 /]
 
 [query public getClassiferExecutions(aPackage : Package) : Set(Classifier) = OrderedSet{
 				aPackage.ownedElement->filter(Class), 

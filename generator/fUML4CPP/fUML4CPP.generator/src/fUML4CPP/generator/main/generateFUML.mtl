@@ -14,10 +14,8 @@
  */]
 [module generateFUML('http://www.eclipse.org/uml2/5.0.0/UML')]
     
-[import fUML4CPP::generator::main::generateBehaviorExecutionHeader /]
-[import fUML4CPP::generator::main::generateBehaviorExecutionSource /]
-[import fUML4CPP::generator::main::generateCallOperationActionExecutionHeader /]
-[import fUML4CPP::generator::main::generateCallOperationActionExecutionSource /]
+[import fUML4CPP::generator::main::generateOpaqueBehaviorExecutionHeader /]
+[import fUML4CPP::generator::main::generateOpaqueBehaviorExecutionSource /]
 [import fUML4CPP::generator::main::generateClassifierObjectHeader /]
 [import fUML4CPP::generator::main::generateClassifierObjectSource /]
 [import fUML4CPP::generator::main::generateModelLocusHeader /]
@@ -56,15 +54,13 @@
 
 [template public generateFUMLModel(aPackage : Package)]
 //generate executionactivation for OpaqueBehaviorsCallOperationAction
-[aPackage.getOpaqueBehaviors().generateBehaviorExecutionHeader(aPackage)/]
-[aPackage.getOpaqueBehaviors().generateBehaviorExecutionSource(aPackage)/]
+[aPackage.getOpaqueBehaviors().generateOpaqueBehaviorExecutionHeader(aPackage)/]
+[aPackage.getOpaqueBehaviors().generateOpaqueBehaviorExecutionSource(aPackage)/]
 
-//generate executionactivation for 
+//generate execution activation for COA
 [for (aCOA : CallOperationAction | aPackage.getCallOperationActions())]
-[if(not aCOA.hasCOAAMethod())]
-[aCOA.generateCallOperationActionExecutionHeader(aPackage)/]
-[aCOA.generateCallOperationActionExecutionSource(aPackage)/]
-[/if]
+[aCOA.generateOpaqueBehaviorExecutionHeader(aPackage)/]
+[aCOA.generateOpaqueBehaviorExecutionSource(aPackage)/]
 [/for]
 
 //generate execution classifier
