@@ -169,8 +169,10 @@ void [packageName/]::createPackageActivities(std::shared_ptr<uml::Package> [aPac
 {
 [for (anActivity : Activity | (aPackage.allOwnedElements()->filter(Activity)->sortedBy(myQualifiedName()))) separator ('\n')]
 	[anActivity.generateActivityCreation()/]
-	//Node
-	[anActivity.ownedNode->sortedBy(name).generateActivityNodeCreation()/]
+	//OwnedNode
+	[anActivity.ownedNode->sortedBy(name).generateActivityNodeCreation()/]   
+	//StructuredNode
+	[anActivity.structuredNode->sortedBy(name).generateActivityNodeCreation()/]
 	//flow
 	[anActivity.edge->sortedBy(myQualifiedName()).generateActivityEdgeCreation()/]
 [/for]

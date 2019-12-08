@@ -19,10 +19,13 @@
  */]
 [module generateActivityNode('http://www.eclipse.org/uml2/5.0.0/UML')]
 
+[import UML4CPP::generator::main::components::generateActivityEdge /]
 [import UML4CPP::generator::main::components::generateType /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 [import UML4CPP::generator::main::validation::validateModel /]
+
+[query private getOwnerPropertyName(anActivityNode : ActivityNode) : String = if (anActivityNode.owner.oclIsKindOf(Activity)) then 'Activity' else 'InStructuredNode' endif /]
 
 [**
  * generate creation of meta model instance for an ActivtiyNode or derived element
@@ -33,7 +36,7 @@
 */]
 [template public generateActivityNodeCreation(anActivityNode : ActivityNode)]
 //ActivityNode [anActivityNode.name /] ([anActivityNode.eClass().name/])
-[anActivityNode.memberName()/] = factory->create[anActivityNode.eClass().name/]_in_Activity([anActivityNode.owner.oclAsType(NamedElement).memberName()/]);
+[anActivityNode.memberName()/] = factory->create[anActivityNode.eClass().name/]_in_[anActivityNode.getOwnerPropertyName()/]([anActivityNode.owner.oclAsType(NamedElement).memberName()/]);
 [anActivityNode.generateActivityNodeSpecial()/]
 
 [/template]
@@ -145,6 +148,16 @@
 	[action.target.memberName()/] = factory->create[action.target.eClass().name/]_in_DestroyObjectAction([action.target.owner.oclAsType(NamedElement).memberName()/]);
 	[action.memberName()/]->getInput()->push_back([action.target.memberName()/]); // subset/union in not implemented for upper=1
 [/if]
+[/let]
+[/template]
+
+[**
+ * generate elements for DestroyObjectAction
+*/]
+[template private generateActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(ExpansionRegion))]
+[let region : ExpansionRegion = self.oclAsType(ExpansionRegion)]
+	[region.node.generateActivityNodeCreation()/]
+	[region.edge.generateActivityEdgeCreation()/]
 [/let]
 [/template]
 

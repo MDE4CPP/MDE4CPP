@@ -22,11 +22,13 @@
 [import UML4CPP::generator::main::components::generateType /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 
+[query private getOwnerPropertyName(anActivityEdge : ActivityEdge) : String = if (anActivityEdge.owner.oclIsKindOf(Activity)) then 'Activity' else 'InStructuredNode' endif /]
+
 [**
  * generate creation of meta model instance for an ActivityEdge element
 */]
 [template public generateActivityEdgeCreation(anActivityEdge : ActivityEdge)]
-[memberName(anActivityEdge)/] = factory->create[anActivityEdge.eClass().name/]_in_Activity([anActivityEdge.activity.memberName()/]);
+[memberName(anActivityEdge)/] = factory->create[anActivityEdge.eClass().name/]_in_[anActivityEdge.getOwnerPropertyName()/]([anActivityEdge.owner.oclAsType(NamedElement).memberName()/]);
 
 [/template]
 
