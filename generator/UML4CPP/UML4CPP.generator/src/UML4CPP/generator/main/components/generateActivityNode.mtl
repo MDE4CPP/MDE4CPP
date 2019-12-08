@@ -152,7 +152,7 @@
 [/template]
 
 [**
- * generate elements for DestroyObjectAction
+ * generate elements for ExpansionRegion
 */]
 [template private generateActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(ExpansionRegion))]
 [let region : ExpansionRegion = self.oclAsType(ExpansionRegion)]
@@ -377,6 +377,38 @@
 [action.output.initializePin()/]
 [/let]
 [/template]
+
+[**
+ * generate initialization of meta model instance for an DestroyObjectAction element
+ * 
+ * this includes:
+ * - initialize pins
+*/]
+[template private initializeActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(ExpansionNode))]
+[let node : ExpansionNode = self.oclAsType(ExpansionNode)]
+	[node.memberName()/]->setType([node.type.generatePackageGetterCall(node)/]);
+[/let]
+[/template]
+
+[**
+ * generate initialization of meta model instance for an DestroyObjectAction element
+ * 
+ * this includes:
+ * - initialize pins
+*/]
+[template private initializeActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(ExpansionRegion))]
+[let region : ExpansionRegion = self.oclAsType(ExpansionRegion)]
+[for (input : ExpansionNode | region.inputElement)]
+	[region.memberName()/]->getInputElement()->push_back([input.memberName()/]);
+[/for]
+[for (output : ExpansionNode | region.outputElement)]
+	[region.memberName()/]->getOutputElement()->push_back([output.memberName()/]);
+[/for]
+	[region.node.initializeActivityNode()/]
+	[region.edge.initializeEdge()/]
+[/let]
+[/template]
+
 
 [**
  * generate initialization of meta model instance for an CreateObjectAction element
