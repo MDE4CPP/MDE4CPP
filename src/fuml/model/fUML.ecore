@@ -1870,6 +1870,20 @@
         upperBound="-1" eType="#//Token"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ExpansionActivationGroup" eSuperTypes="#//ActivityNodeActivationGroup">
+    <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+      <details key="includes" value="#include &quot;uml/ExpansionNode.hpp&quot;"/>
+    </eAnnotations>
+    <eOperations name="retrieveActivityExecution" ordered="false" lowerBound="1" eType="#//ActivityExecution">
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="std::shared_ptr&lt;ActivityExecution> activityExecution = this->getActivityExecution().lock();&#xA;    if (!activityExecution)&#xA;    {&#xA;    &#x9;auto activation=this->getRegionActivation();&#xA;    &#x9;if(activation)&#xA;    &#x9;{&#xA;    &#x9;&#x9;auto group=activation->getGroup().lock();&#xA;    &#x9;&#x9;if(group)&#xA;    &#x9;&#x9;{&#xA;    &#x9;&#x9;&#x9;activityExecution = group->retrieveActivityExecution();&#xA;    &#x9;&#x9;}&#xA;    &#x9;&#x9;else&#xA;    &#x9;&#x9;{&#xA;                DEBUG_MESSAGE(std::cout&lt;&lt;__PRETTY_FUNCTION__&lt;&lt; &quot; : invalid group&quot; &lt;&lt; std::endl;)&#xA;                throw &quot;invalid group&quot;;&#xA;    &#x9;&#x9;}&#xA;    &#x9;}&#xA;&#x9;&#x9;else&#xA;&#x9;&#x9;{&#xA;            DEBUG_MESSAGE(std::cout&lt;&lt;__PRETTY_FUNCTION__&lt;&lt; &quot;: invalid activation&quot; &lt;&lt; std::endl;)&#xA;            throw &quot;invalid activation&quot;;&#xA;&#x9;&#x9;}&#xA;    }&#xA;    return activityExecution;"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="getNodeActivation" ordered="false" lowerBound="1" eType="#//ActivityNodeActivation">
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="std::shared_ptr&lt;ActivityNodeActivation> activation = nullptr;&#xA;&#xA;&#x9;std::shared_ptr&lt;uml::ExpansionNode> expansionNode = std::dynamic_pointer_cast&lt;uml::ExpansionNode> (node);&#xA;&#x9;auto containingNodeActivation = this->getRegionActivation();&#xA;    if ((containingNodeActivation) &amp;&amp; (expansionNode))&#xA;    {&#xA;        activation = containingNodeActivation->getNodeActivation(expansionNode);&#xA;    }&#xA;&#xA;    if (activation == nullptr) &#xA;    {&#xA;        unsigned int i = 0;&#xA;        std::shared_ptr&lt;Bag&lt;fUML::ActivityNodeActivation>> nodeActivations=this->getNodeActivations();&#xA;        unsigned int nodeActivationsSize= nodeActivations->size();&#xA;        while ((!activation) &amp;&amp; (i &lt; nodeActivationsSize))&#xA;        {&#xA;        &#x9;activation = nodeActivations->at(i)->getNodeActivation(node);&#xA;            i = i + 1;&#xA;        }&#xA;    }&#xA;&#xA;    return activation;"/>
+      </eAnnotations>
+      <eParameters name="node" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//ActivityNode"/>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="regionActivation" ordered="false"
         lowerBound="1" eType="#//ExpansionRegionActivation"/>
   </eClassifiers>
@@ -1883,6 +1897,9 @@
     </eOperations>
     <eOperations name="getExpansionNodeActivation" ordered="false" lowerBound="1"
         eType="#//ExpansionNodeActivation">
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="std::shared_ptr&lt;fUML::ActivityNodeActivation> nodeActivation = this->getNodeActivation(node);&#xA;&#x9;return std::dynamic_pointer_cast&lt;fUML::ExpansionNodeActivation>(nodeActivation);"/>
+      </eAnnotations>
       <eParameters name="node" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//ExpansionNode"/>
     </eOperations>
     <eOperations name="numberOfValues" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
@@ -1895,6 +1912,12 @@
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
         <details key="body" value="std::shared_ptr&lt;Bag&lt;uml::ActivityEdge> > edges = (std::dynamic_pointer_cast&lt;uml::StructuredActivityNode> (this->getNode()))->getEdge();&#xA;&#x9;this->getActivationGroups()->front()->createEdgeInstance(edges);"/>
       </eAnnotations>
+    </eOperations>
+    <eOperations name="getNodeActivation" ordered="false" lowerBound="1" eType="#//ActivityNodeActivation">
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="std::shared_ptr&lt;ActivityNodeActivation> thisActivation = ActionActivationImpl::getNodeActivation(node);&#xA;&#xA;&#x9;std::shared_ptr&lt;ActivityNodeActivation> activation = nullptr;&#xA;    if (thisActivation != nullptr) &#xA;    {&#xA;        activation = thisActivation;&#xA;    }&#xA;    else&#xA;    {&#xA;    &#x9;std::shared_ptr&lt;uml::ExpansionNode> expansionNode = std::dynamic_pointer_cast&lt;uml::ExpansionNode> (node);&#xA;    &#x9;if (expansionNode)&#xA;    &#x9;{&#xA;    &#x9;&#x9;activation = getExpansionNodeActivation(expansionNode);&#xA;    &#x9;}&#xA;&#xA;    &#x9;Bag&lt;fUML::ExpansionActivationGroup>::iterator iter = m_activationGroups->begin();&#xA;    &#x9;Bag&lt;fUML::ExpansionActivationGroup>::iterator end = m_activationGroups->end();&#xA;    &#x9;while (!activation and (iter != end))&#xA;    &#x9;{&#xA;    &#x9;&#x9;activation = (*iter)->getNodeActivation(node);&#xA;    &#x9;&#x9;iter++;&#xA;    &#x9;}&#xA;    }&#xA;&#xA;    return activation;"/>
+      </eAnnotations>
+      <eParameters name="node" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//ActivityNode"/>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="inputTokens" ordered="false"
         upperBound="-1" eType="#//TokenSet"/>
