@@ -1119,7 +1119,7 @@
     </eOperations>
     <eOperations name="retrieveActivityExecution" ordered="false" lowerBound="1" eType="#//ActivityExecution">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="body" value="&#x9;std::shared_ptr&lt;ActivityExecution> activityExecution = this->getActivityExecution().lock();&#xD;&#xA;    if (!activityExecution)&#xD;&#xA;    {&#xD;&#xA;    &#x9;auto activation=this->getContainingNodeActivation().lock();&#xD;&#xA;    &#x9;if(activation)&#xD;&#xA;    &#x9;{&#xD;&#xA;    &#x9;&#x9;auto group=activation->getGroup().lock();&#xD;&#xA;    &#x9;&#x9;if(group)&#xD;&#xA;    &#x9;&#x9;{&#xD;&#xA;    &#x9;&#x9;&#x9;activityExecution = group->retrieveActivityExecution();&#xD;&#xA;    &#x9;&#x9;}&#xD;&#xA;    &#x9;&#x9;else&#xD;&#xA;    &#x9;&#x9;{&#xD;&#xA;                DEBUG_MESSAGE(std::cout&lt;&lt;__PRETTY_FUNCTION__&lt;&lt;std::endl;)&#xD;&#xA;                throw &quot;invalid group&quot;;&#xD;&#xA;    &#x9;&#x9;}&#xD;&#xA;    &#x9;}&#xD;&#xA;&#x9;&#x9;else&#xD;&#xA;&#x9;&#x9;{&#xD;&#xA;            DEBUG_MESSAGE(std::cout&lt;&lt;__PRETTY_FUNCTION__&lt;&lt;std::endl;)&#xD;&#xA;            throw &quot;invalid activation&quot;;&#xD;&#xA;&#x9;&#x9;}&#xD;&#xA;    }&#xD;&#xA;    return activityExecution;"/>
+        <details key="body" value="&#x9;std::shared_ptr&lt;ActivityExecution> activityExecution = this->getActivityExecution().lock();&#xA;    if (!activityExecution)&#xA;    {&#xA;    &#x9;auto activation=this->getContainingNodeActivation().lock();&#xA;    &#x9;if(activation)&#xA;    &#x9;{&#xA;    &#x9;&#x9;auto group=activation->getGroup().lock();&#xA;    &#x9;&#x9;if(group)&#xA;    &#x9;&#x9;{&#xA;    &#x9;&#x9;&#x9;activityExecution = group->retrieveActivityExecution();&#xA;    &#x9;&#x9;}&#xA;    &#x9;&#x9;else&#xA;    &#x9;&#x9;{&#xA;                DEBUG_MESSAGE(std::cout&lt;&lt;__PRETTY_FUNCTION__&lt;&lt;std::endl;)&#xA;                throw &quot;invalid group&quot;;&#xA;    &#x9;&#x9;}&#xA;    &#x9;}&#xA;&#x9;&#x9;else&#xA;&#x9;&#x9;{&#xA;            DEBUG_MESSAGE(std::cout&lt;&lt;__PRETTY_FUNCTION__&lt;&lt;std::endl;)&#xA;            throw &quot;invalid activation&quot;;&#xA;&#x9;&#x9;}&#xA;    }&#xA;    return activityExecution;"/>
       </eAnnotations>
     </eOperations>
     <eOperations name="getOutputParameterNodeActivations" ordered="false" lowerBound="1"
@@ -1874,6 +1874,9 @@
         lowerBound="1" eType="#//ExpansionRegionActivation"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ExpansionRegionActivation" eSuperTypes="#//ActionActivation">
+    <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+      <details key="includes" value="#include &quot;fUML/FUMLFactory.hpp&quot;&#xA;#include &quot;fUML/ObjectToken.hpp&quot;&#xA;#include &quot;uml/Action.hpp&quot;&#xA;#include &quot;uml/ActivityNode.hpp&quot;&#xA;#include &quot;uml/ExpansionRegion.hpp&quot;&#xA;#include &quot;uml/InputPin.hpp&quot;&#xA;#include &quot;uml/OutputPin.hpp&quot;"/>
+    </eAnnotations>
     <eOperations name="doStructuredActivity" ordered="false" lowerBound="1"/>
     <eOperations name="runGroup" ordered="false" lowerBound="1">
       <eParameters name="activationGroup" ordered="false" lowerBound="1" eType="#//ExpansionActivationGroup"/>
@@ -1883,6 +1886,16 @@
       <eParameters name="node" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//ExpansionNode"/>
     </eOperations>
     <eOperations name="numberOfValues" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eOperations name="createNodeActivations" ordered="false" lowerBound="1">
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="ActionActivationImpl::createNodeActivations();&#xA;&#xA;&#x9;std::shared_ptr&lt;fUML::ExpansionActivationGroup> activationGroup = std::shared_ptr&lt;fUML::ExpansionActivationGroup>(fUML::FUMLFactory::eInstance()->createExpansionActivationGroup());&#xA;&#x9;if (activationGroup == nullptr)&#xA;&#x9;{&#xA;&#x9;&#x9;return;&#xA;&#x9;}&#xA;&#x9;this->getActivationGroups()->push_back(activationGroup);&#xA;&#x9;activationGroup->setRegionActivation(getThisExpansionRegionActivationPtr());&#xA;&#xA;&#x9;std::shared_ptr&lt;uml::ExpansionRegion> expansionRegion = std::dynamic_pointer_cast&lt;uml::ExpansionRegion> (this->getNode());&#xA;&#x9;std::shared_ptr&lt;Bag&lt;uml::ActivityNode> > nodes = expansionRegion->getNode();&#xA;&#x9;activationGroup->createNodeActivations(nodes);"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="createEdgeInstances" ordered="false" lowerBound="1">
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="std::shared_ptr&lt;Bag&lt;uml::ActivityEdge> > edges = (std::dynamic_pointer_cast&lt;uml::StructuredActivityNode> (this->getNode()))->getEdge();&#xA;&#x9;this->getActivationGroups()->front()->createEdgeInstance(edges);"/>
+      </eAnnotations>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="inputTokens" ordered="false"
         upperBound="-1" eType="#//TokenSet"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="inputExpansionTokens" ordered="false"
