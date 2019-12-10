@@ -30,6 +30,14 @@
 
 [defineDebugMacro()/]
 
+[if (aPackage.getExpansionRegions()->size() > 0)]
+#include "uml/ExpansionRegion.hpp"
+#include "[packageName/]/[packageName/]Package.hpp"
+[for (anExpansionRegion : ExpansionRegion | aPackage.getExpansionRegions())]
+#include "[packageName/]Exec/[anExpansionRegion.getExpansionRegionActivationName()/].hpp"
+[/for]
+[/if]
+
 using namespace [packageName/];
 
 //*********************************
@@ -48,21 +56,20 @@ using namespace [packageName/];
 
 std::shared_ptr<fUML::SemanticVisitor> [className/]Impl::instantiateVisitor(std::shared_ptr<uml::Element> element)
 {
-	std::shared_ptr<fUML::SemanticVisitor> visitor = nullptr;
-//	switch (element->eClass()->getClassifierID()) {
-//		case uml::UmlPackage::LITERALBOOLEAN_CLASS:
-//		{
-//			visitor = FUMLFactory::eInstance()->createLiteralBooleanEvaluation();
-//			break;
-//		}
-//	}
-
-	if(!visitor) 
+[if (aPackage.getExpansionRegions()->size() > 0)]
+	std::shared_ptr<[packageName/]Package> package = [packageName/]Package::eInstance();
+[for (anExpansionRegion : ExpansionRegion | aPackage.getExpansionRegions())]
+	if (element == package->[anExpansionRegion.generatePackageGetterCall(aPackage)/])
 	{
-		visitor = ExecutionFactoryImpl::instantiateVisitor(element);
+		std::shared_ptr<[anExpansionRegion.getExpansionRegionActivationName()/]> activiation(new [anExpansionRegion.getExpansionRegionActivationName()/]());
+		activiation->setMetaElementID(-1);
+		activiation->setThisExecutionPtr(activiation);
+		return activiation;
 	}
+[/for]
 
-	return visitor;
+[/if]
+	return ExecutionFactoryImpl::instantiateVisitor(element);
 }
 [/file]
 [/template]

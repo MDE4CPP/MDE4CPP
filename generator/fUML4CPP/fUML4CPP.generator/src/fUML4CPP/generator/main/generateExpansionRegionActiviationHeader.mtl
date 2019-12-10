@@ -38,7 +38,7 @@ namespace [aPackage.name/]
 		    //destructor
 		    virtual ~[behaviorName/]();
 		
-		    virtual void doBody();
+		    virtual void doAction();
 		    virtual std::shared_ptr<ecore::EObject> copy() const;
 			virtual void setThisExecutionPtr(std::weak_ptr<[behaviorName/]> thisExecutionPtr);
 	};

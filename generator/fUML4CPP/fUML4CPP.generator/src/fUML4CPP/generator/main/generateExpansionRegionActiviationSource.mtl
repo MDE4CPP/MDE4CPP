@@ -55,7 +55,7 @@ std::shared_ptr<ecore::EObject> [behaviorName/]::copy() const
 	return element;
 }
 
-void [behaviorName/]::doBody()
+void [behaviorName/]::doAction()
 {
     std::cout << "Hi, I am still unimplemented :-) " << std::endl;
 	throw "unimplemented operation";
