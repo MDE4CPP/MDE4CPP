@@ -85,9 +85,6 @@ SET(SOURCE_FILES
 	impl/EventOccurrenceImpl.cpp
 	impl/ExecutionImpl.cpp
 	impl/ExecutionFactoryImpl.cpp
-	impl/ExecutionFactoryL1Impl.cpp
-	impl/ExecutionFactoryL2Impl.cpp
-	impl/ExecutionFactoryL3Impl.cpp
 	impl/ExecutorImpl.cpp
 	impl/ExpansionActivationGroupImpl.cpp
 	impl/ExpansionNodeActivationImpl.cpp

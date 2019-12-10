@@ -50,6 +50,14 @@ namespace fUML
 			//*********************************
 			// Operations
 			//*********************************
+			/*!
+			 */ 
+			virtual std::shared_ptr<fUML::ActivityNodeActivation> getNodeActivation(std::shared_ptr<uml::ActivityNode>  node) ;
+			
+			/*!
+			 */ 
+			virtual std::shared_ptr<fUML::ActivityExecution> retrieveActivityExecution() ;
+			
 			
 			
 			//*********************************

@@ -57,9 +57,6 @@ namespace fUML
 	class EventOccurrence;
 	class Execution;
 	class ExecutionFactory;
-	class ExecutionFactoryL1;
-	class ExecutionFactoryL2;
-	class ExecutionFactoryL3;
 	class Executor;
 	class ExpansionActivationGroup;
 	class ExpansionNodeActivation;
@@ -775,36 +772,6 @@ namespace fUML
 			
 			// End Class ExecutionFactory
 
-			// Begin Class ExecutionFactoryL1
-			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getExecutionFactoryL1_Class() const ;
-			
-			
-			
-			virtual std::shared_ptr<ecore::EOperation> getExecutionFactoryL1_Operation_instantiateVisitor_Element() const ;
-			
-			// End Class ExecutionFactoryL1
-
-			// Begin Class ExecutionFactoryL2
-			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getExecutionFactoryL2_Class() const ;
-			
-			
-			
-			virtual std::shared_ptr<ecore::EOperation> getExecutionFactoryL2_Operation_instantiateVisitor_Element() const ;
-			
-			// End Class ExecutionFactoryL2
-
-			// Begin Class ExecutionFactoryL3
-			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getExecutionFactoryL3_Class() const ;
-			
-			
-			
-			virtual std::shared_ptr<ecore::EOperation> getExecutionFactoryL3_Operation_instantiateVisitor_Element() const ;
-			
-			// End Class ExecutionFactoryL3
-
 			// Begin Class Executor
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getExecutor_Class() const ;
@@ -825,6 +792,8 @@ namespace fUML
 			
 			virtual std::shared_ptr<ecore::EReference> getExpansionActivationGroup_Attribute_regionActivation() const ;
 			
+			virtual std::shared_ptr<ecore::EOperation> getExpansionActivationGroup_Operation_getNodeActivation_ActivityNode() const ;
+			virtual std::shared_ptr<ecore::EOperation> getExpansionActivationGroup_Operation_retrieveActivityExecution() const ;
 			
 			// End Class ExpansionActivationGroup
 
@@ -847,8 +816,11 @@ namespace fUML
 			virtual std::shared_ptr<ecore::EReference> getExpansionRegionActivation_Attribute_inputExpansionTokens() const ;
 			virtual std::shared_ptr<ecore::EReference> getExpansionRegionActivation_Attribute_inputTokens() const ;
 			
+			virtual std::shared_ptr<ecore::EOperation> getExpansionRegionActivation_Operation_createEdgeInstances() const ;
+			virtual std::shared_ptr<ecore::EOperation> getExpansionRegionActivation_Operation_createNodeActivations() const ;
 			virtual std::shared_ptr<ecore::EOperation> getExpansionRegionActivation_Operation_doStructuredActivity() const ;
 			virtual std::shared_ptr<ecore::EOperation> getExpansionRegionActivation_Operation_getExpansionNodeActivation_ExpansionNode() const ;
+			virtual std::shared_ptr<ecore::EOperation> getExpansionRegionActivation_Operation_getNodeActivation_ActivityNode() const ;
 			virtual std::shared_ptr<ecore::EOperation> getExpansionRegionActivation_Operation_numberOfValues() const ;
 			virtual std::shared_ptr<ecore::EOperation> getExpansionRegionActivation_Operation_runGroup_ExpansionActivationGroup() const ;
 			
@@ -1701,9 +1673,6 @@ namespace fUML
 			std::shared_ptr<ecore::EClass> m_eventOccurrence_Class = nullptr;
 			std::shared_ptr<ecore::EClass> m_execution_Class = nullptr;
 			std::shared_ptr<ecore::EClass> m_executionFactory_Class = nullptr;
-			std::shared_ptr<ecore::EClass> m_executionFactoryL1_Class = nullptr;
-			std::shared_ptr<ecore::EClass> m_executionFactoryL2_Class = nullptr;
-			std::shared_ptr<ecore::EClass> m_executionFactoryL3_Class = nullptr;
 			std::shared_ptr<ecore::EClass> m_executor_Class = nullptr;
 			std::shared_ptr<ecore::EClass> m_expansionActivationGroup_Class = nullptr;
 			std::shared_ptr<ecore::EClass> m_expansionNodeActivation_Class = nullptr;
@@ -1919,6 +1888,7 @@ namespace fUML
 			std::shared_ptr<ecore::EOperation> m_activityNodeActivationGroup_Operation_createEdgeInstance_ActivityEdge = nullptr;
 			std::shared_ptr<ecore::EOperation> m_activityNodeActivation_Operation_createEdgeInstances = nullptr;
 			std::shared_ptr<ecore::EOperation> m_structuredActivityNodeActivation_Operation_createEdgeInstances = nullptr;
+			std::shared_ptr<ecore::EOperation> m_expansionRegionActivation_Operation_createEdgeInstances = nullptr;
 			std::shared_ptr<ecore::EOperation> m_executionFactory_Operation_createEvaluation_ValueSpecification = nullptr;
 			std::shared_ptr<ecore::EOperation> m_callEventExecution_Operation_createEventOccurrence = nullptr;
 			std::shared_ptr<ecore::EOperation> m_executionFactory_Operation_createExecution_Behavior_Object = nullptr;
@@ -1927,6 +1897,7 @@ namespace fUML
 			std::shared_ptr<ecore::EOperation> m_activityNodeActivationGroup_Operation_createNodeActivations_ActivityNode = nullptr;
 			std::shared_ptr<ecore::EOperation> m_activityNodeActivation_Operation_createNodeActivations = nullptr;
 			std::shared_ptr<ecore::EOperation> m_structuredActivityNodeActivation_Operation_createNodeActivations = nullptr;
+			std::shared_ptr<ecore::EOperation> m_expansionRegionActivation_Operation_createNodeActivations = nullptr;
 			std::shared_ptr<ecore::EOperation> m_actionActivation_Operation_createNodeActivations = nullptr;
 			std::shared_ptr<ecore::EOperation> m_reference_Operation_destroy = nullptr;
 			std::shared_ptr<ecore::EOperation> m_extensionalValue_Operation_destroy = nullptr;
@@ -2015,6 +1986,8 @@ namespace fUML
 			std::shared_ptr<ecore::EOperation> m_activityNodeActivationGroup_Operation_getNodeActivation_ActivityNode = nullptr;
 			std::shared_ptr<ecore::EOperation> m_activityNodeActivation_Operation_getNodeActivation_ActivityNode = nullptr;
 			std::shared_ptr<ecore::EOperation> m_structuredActivityNodeActivation_Operation_getNodeActivation_ActivityNode = nullptr;
+			std::shared_ptr<ecore::EOperation> m_expansionActivationGroup_Operation_getNodeActivation_ActivityNode = nullptr;
+			std::shared_ptr<ecore::EOperation> m_expansionRegionActivation_Operation_getNodeActivation_ActivityNode = nullptr;
 			std::shared_ptr<ecore::EOperation> m_activityEdgeInstance_Operation_getOfferedTokens = nullptr;
 			std::shared_ptr<ecore::EOperation> m_callEventExecution_Operation_getOperation = nullptr;
 			std::shared_ptr<ecore::EOperation> m_callEventOccurrence_Operation_getOperation = nullptr;
@@ -2055,9 +2028,6 @@ namespace fUML
 			std::shared_ptr<ecore::EOperation> m_locus_Operation_instantiate_Class = nullptr;
 			std::shared_ptr<ecore::EOperation> m_executionFactory_Operation_instantiateOpaqueBehaviorExecution_OpaqueBehavior = nullptr;
 			std::shared_ptr<ecore::EOperation> m_executionFactory_Operation_instantiateVisitor_Element = nullptr;
-			std::shared_ptr<ecore::EOperation> m_executionFactoryL1_Operation_instantiateVisitor_Element = nullptr;
-			std::shared_ptr<ecore::EOperation> m_executionFactoryL2_Operation_instantiateVisitor_Element = nullptr;
-			std::shared_ptr<ecore::EOperation> m_executionFactoryL3_Operation_instantiateVisitor_Element = nullptr;
 			std::shared_ptr<ecore::EOperation> m_callEventExecution_Operation_isCallerSuspended = nullptr;
 			std::shared_ptr<ecore::EOperation> m_token_Operation_isControl = nullptr;
 			std::shared_ptr<ecore::EOperation> m_objectToken_Operation_isControl = nullptr;
@@ -2121,6 +2091,7 @@ namespace fUML
 			std::shared_ptr<ecore::EOperation> m_activityNodeActivation_Operation_resume = nullptr;
 			std::shared_ptr<ecore::EOperation> m_structuredActivityNodeActivation_Operation_resume = nullptr;
 			std::shared_ptr<ecore::EOperation> m_activityNodeActivationGroup_Operation_retrieveActivityExecution = nullptr;
+			std::shared_ptr<ecore::EOperation> m_expansionActivationGroup_Operation_retrieveActivityExecution = nullptr;
 			std::shared_ptr<ecore::EOperation> m_locus_Operation_retrieveExtent_Classifier = nullptr;
 			std::shared_ptr<ecore::EOperation> m_structuredValue_Operation_retrieveFeatureValue_StructuralFeature = nullptr;
 			std::shared_ptr<ecore::EOperation> m_reference_Operation_retrieveFeatureValue_StructuralFeature = nullptr;
@@ -2278,9 +2249,6 @@ namespace fUML
 			void createEventOccurrenceContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
 			void createExecutionContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
 			void createExecutionFactoryContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
-			void createExecutionFactoryL1Content(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
-			void createExecutionFactoryL2Content(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
-			void createExecutionFactoryL3Content(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
 			void createExecutorContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
 			void createExpansionActivationGroupContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
 			void createExpansionNodeActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
@@ -2398,9 +2366,6 @@ namespace fUML
 			void initializeEventOccurrenceContent();
 			void initializeExecutionContent();
 			void initializeExecutionFactoryContent();
-			void initializeExecutionFactoryL1Content();
-			void initializeExecutionFactoryL2Content();
-			void initializeExecutionFactoryL3Content();
 			void initializeExecutorContent();
 			void initializeExpansionActivationGroupContent();
 			void initializeExpansionNodeActivationContent();

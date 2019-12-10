@@ -54,6 +54,11 @@ namespace uml
 
 namespace fUML 
 {
+	class ActivityNodeActivation;
+}
+
+namespace fUML 
+{
 	class ActivityNodeActivationGroup;
 }
 
@@ -129,11 +134,23 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
+			virtual void createEdgeInstances() = 0;
+			
+			/*!
+			 */ 
+			virtual void createNodeActivations() = 0;
+			
+			/*!
+			 */ 
 			virtual void doStructuredActivity() = 0;
 			
 			/*!
 			 */ 
 			virtual std::shared_ptr<fUML::ExpansionNodeActivation> getExpansionNodeActivation(std::shared_ptr<uml::ExpansionNode>  node) = 0;
+			
+			/*!
+			 */ 
+			virtual std::shared_ptr<fUML::ActivityNodeActivation> getNodeActivation(std::shared_ptr<uml::ActivityNode>  node) = 0;
 			
 			/*!
 			 */ 

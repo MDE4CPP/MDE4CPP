@@ -466,7 +466,7 @@ Any StructuredActivityNodeActivationImpl::eGet(int featureID, bool resolve, bool
 	switch(featureID)
 	{
 		case FUMLPackage::STRUCTUREDACTIVITYNODEACTIVATION_ATTRIBUTE_ACTIVATIONGROUP:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getActivationGroup())); //10810
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getActivationGroup())); //10510
 	}
 	return ActionActivationImpl::eGet(featureID, resolve, coreType);
 }
@@ -475,7 +475,7 @@ bool StructuredActivityNodeActivationImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case FUMLPackage::STRUCTUREDACTIVITYNODEACTIVATION_ATTRIBUTE_ACTIVATIONGROUP:
-			return getActivationGroup() != nullptr; //10810
+			return getActivationGroup() != nullptr; //10510
 	}
 	return ActionActivationImpl::internalEIsSet(featureID);
 }
@@ -488,7 +488,7 @@ bool StructuredActivityNodeActivationImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<fUML::ActivityNodeActivationGroup> _activationGroup = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(_temp);
-			setActivationGroup(_activationGroup); //10810
+			setActivationGroup(_activationGroup); //10510
 			return true;
 		}
 	}

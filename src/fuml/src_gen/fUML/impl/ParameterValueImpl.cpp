@@ -176,7 +176,7 @@ Any ParameterValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case FUMLPackage::PARAMETERVALUE_ATTRIBUTE_PARAMETER:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getParameter())); //860
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getParameter())); //830
 		case FUMLPackage::PARAMETERVALUE_ATTRIBUTE_VALUES:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -187,7 +187,7 @@ Any ParameterValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //861
+			return eAny(tempList); //831
 		}
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
@@ -197,9 +197,9 @@ bool ParameterValueImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case FUMLPackage::PARAMETERVALUE_ATTRIBUTE_PARAMETER:
-			return getParameter() != nullptr; //860
+			return getParameter() != nullptr; //830
 		case FUMLPackage::PARAMETERVALUE_ATTRIBUTE_VALUES:
-			return getValues() != nullptr; //861
+			return getValues() != nullptr; //831
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
@@ -212,7 +212,7 @@ bool ParameterValueImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Parameter> _parameter = std::dynamic_pointer_cast<uml::Parameter>(_temp);
-			setParameter(_parameter); //860
+			setParameter(_parameter); //830
 			return true;
 		}
 		case FUMLPackage::PARAMETERVALUE_ATTRIBUTE_VALUES:

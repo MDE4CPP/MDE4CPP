@@ -170,7 +170,7 @@ Any PrimitiveValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case FUMLPackage::PRIMITIVEVALUE_ATTRIBUTE_TYPE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getType())); //880
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getType())); //850
 	}
 	return ValueImpl::eGet(featureID, resolve, coreType);
 }
@@ -179,7 +179,7 @@ bool PrimitiveValueImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case FUMLPackage::PRIMITIVEVALUE_ATTRIBUTE_TYPE:
-			return getType() != nullptr; //880
+			return getType() != nullptr; //850
 	}
 	return ValueImpl::internalEIsSet(featureID);
 }
@@ -192,7 +192,7 @@ bool PrimitiveValueImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::PrimitiveType> _type = std::dynamic_pointer_cast<uml::PrimitiveType>(_temp);
-			setType(_type); //880
+			setType(_type); //850
 			return true;
 		}
 	}

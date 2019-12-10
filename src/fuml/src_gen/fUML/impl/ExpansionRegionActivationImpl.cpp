@@ -25,6 +25,13 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "fUML/impl/FUMLPackageImpl.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/ObjectToken.hpp"
+#include "uml/Action.hpp"
+#include "uml/ActivityNode.hpp"
+#include "uml/ExpansionRegion.hpp"
+#include "uml/InputPin.hpp"
+#include "uml/OutputPin.hpp"
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -41,6 +48,8 @@
 #include "fUML/ActivityEdgeInstance.hpp"
 
 #include "uml/ActivityNode.hpp"
+
+#include "fUML/ActivityNodeActivation.hpp"
 
 #include "fUML/ActivityNodeActivationGroup.hpp"
 
@@ -207,6 +216,35 @@ std::shared_ptr<ecore::EClass> ExpansionRegionActivationImpl::eStaticClass() con
 //*********************************
 // Operations
 //*********************************
+void ExpansionRegionActivationImpl::createEdgeInstances()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	std::shared_ptr<Bag<uml::ActivityEdge> > edges = (std::dynamic_pointer_cast<uml::StructuredActivityNode> (this->getNode()))->getEdge();
+	this->getActivationGroups()->front()->createEdgeInstance(edges);
+	//end of body
+}
+
+void ExpansionRegionActivationImpl::createNodeActivations()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	ActionActivationImpl::createNodeActivations();
+
+	std::shared_ptr<fUML::ExpansionActivationGroup> activationGroup = std::shared_ptr<fUML::ExpansionActivationGroup>(fUML::FUMLFactory::eInstance()->createExpansionActivationGroup());
+	if (activationGroup == nullptr)
+	{
+		return;
+	}
+	this->getActivationGroups()->push_back(activationGroup);
+	activationGroup->setRegionActivation(getThisExpansionRegionActivationPtr());
+
+	std::shared_ptr<uml::ExpansionRegion> expansionRegion = std::dynamic_pointer_cast<uml::ExpansionRegion> (this->getNode());
+	std::shared_ptr<Bag<uml::ActivityNode> > nodes = expansionRegion->getNode();
+	activationGroup->createNodeActivations(nodes);
+	//end of body
+}
+
 void ExpansionRegionActivationImpl::doStructuredActivity()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
@@ -215,8 +253,32 @@ void ExpansionRegionActivationImpl::doStructuredActivity()
 
 std::shared_ptr<fUML::ExpansionNodeActivation> ExpansionRegionActivationImpl::getExpansionNodeActivation(std::shared_ptr<uml::ExpansionNode>  node)
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	std::shared_ptr<fUML::ActivityNodeActivation> nodeActivation = this->getNodeActivation(node);
+	return std::dynamic_pointer_cast<fUML::ExpansionNodeActivation>(nodeActivation);
+	//end of body
+}
+
+std::shared_ptr<fUML::ActivityNodeActivation> ExpansionRegionActivationImpl::getNodeActivation(std::shared_ptr<uml::ActivityNode>  node)
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	std::shared_ptr<ActivityNodeActivation> activation = ActionActivationImpl::getNodeActivation(node);
+    if (activation == nullptr)
+    {
+    	Bag<fUML::ExpansionActivationGroup>::iterator iter = m_activationGroups->begin();
+    	Bag<fUML::ExpansionActivationGroup>::iterator end = m_activationGroups->end();
+
+    	while (!activation and (iter != end))
+    	{
+    		activation = (*iter)->getNodeActivation(node);
+    		iter++;
+    	}
+    }
+
+    return activation;
+	//end of body
 }
 
 int ExpansionRegionActivationImpl::numberOfValues()
@@ -299,7 +361,7 @@ Any ExpansionRegionActivationImpl::eGet(int featureID, bool resolve, bool coreTy
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //5112
+			return eAny(tempList); //4812
 		}
 		case FUMLPackage::EXPANSIONREGIONACTIVATION_ATTRIBUTE_INPUTEXPANSIONTOKENS:
 		{
@@ -311,7 +373,7 @@ Any ExpansionRegionActivationImpl::eGet(int featureID, bool resolve, bool coreTy
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //5111
+			return eAny(tempList); //4811
 		}
 		case FUMLPackage::EXPANSIONREGIONACTIVATION_ATTRIBUTE_INPUTTOKENS:
 		{
@@ -323,7 +385,7 @@ Any ExpansionRegionActivationImpl::eGet(int featureID, bool resolve, bool coreTy
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //5110
+			return eAny(tempList); //4810
 		}
 	}
 	return ActionActivationImpl::eGet(featureID, resolve, coreType);
@@ -333,11 +395,11 @@ bool ExpansionRegionActivationImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case FUMLPackage::EXPANSIONREGIONACTIVATION_ATTRIBUTE_ACTIVATIONGROUPS:
-			return getActivationGroups() != nullptr; //5112
+			return getActivationGroups() != nullptr; //4812
 		case FUMLPackage::EXPANSIONREGIONACTIVATION_ATTRIBUTE_INPUTEXPANSIONTOKENS:
-			return getInputExpansionTokens() != nullptr; //5111
+			return getInputExpansionTokens() != nullptr; //4811
 		case FUMLPackage::EXPANSIONREGIONACTIVATION_ATTRIBUTE_INPUTTOKENS:
-			return getInputTokens() != nullptr; //5110
+			return getInputTokens() != nullptr; //4810
 	}
 	return ActionActivationImpl::internalEIsSet(featureID);
 }

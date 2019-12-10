@@ -78,9 +78,6 @@ void FUMLPackageImpl::createPackageContents(std::shared_ptr<ecore::EPackage> pac
 	createEventOccurrenceContent(package, factory);
 	createExecutionContent(package, factory);
 	createExecutionFactoryContent(package, factory);
-	createExecutionFactoryL1Content(package, factory);
-	createExecutionFactoryL2Content(package, factory);
-	createExecutionFactoryL3Content(package, factory);
 	createExecutorContent(package, factory);
 	createExpansionActivationGroupContent(package, factory);
 	createExpansionNodeActivationContent(package, factory);
@@ -734,33 +731,6 @@ void FUMLPackageImpl::createExecutionFactoryContent(std::shared_ptr<ecore::EPack
 	
 }
 
-void FUMLPackageImpl::createExecutionFactoryL1Content(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
-{
-	m_executionFactoryL1_Class = factory->createEClass_in_EPackage(package, EXECUTIONFACTORYL1_CLASS);
-	
-	
-	m_executionFactoryL1_Operation_instantiateVisitor_Element = factory->createEOperation_in_EContainingClass(m_executionFactoryL1_Class, EXECUTIONFACTORYL1_OPERATION_INSTANTIATEVISITOR_ELEMENT);
-	
-}
-
-void FUMLPackageImpl::createExecutionFactoryL2Content(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
-{
-	m_executionFactoryL2_Class = factory->createEClass_in_EPackage(package, EXECUTIONFACTORYL2_CLASS);
-	
-	
-	m_executionFactoryL2_Operation_instantiateVisitor_Element = factory->createEOperation_in_EContainingClass(m_executionFactoryL2_Class, EXECUTIONFACTORYL2_OPERATION_INSTANTIATEVISITOR_ELEMENT);
-	
-}
-
-void FUMLPackageImpl::createExecutionFactoryL3Content(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
-{
-	m_executionFactoryL3_Class = factory->createEClass_in_EPackage(package, EXECUTIONFACTORYL3_CLASS);
-	
-	
-	m_executionFactoryL3_Operation_instantiateVisitor_Element = factory->createEOperation_in_EContainingClass(m_executionFactoryL3_Class, EXECUTIONFACTORYL3_OPERATION_INSTANTIATEVISITOR_ELEMENT);
-	
-}
-
 void FUMLPackageImpl::createExecutorContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
 {
 	m_executor_Class = factory->createEClass_in_EPackage(package, EXECUTOR_CLASS);
@@ -779,6 +749,8 @@ void FUMLPackageImpl::createExpansionActivationGroupContent(std::shared_ptr<ecor
 	
 	m_expansionActivationGroup_Attribute_regionActivation = factory->createEReference_in_EContainingClass(m_expansionActivationGroup_Class, EXPANSIONACTIVATIONGROUP_ATTRIBUTE_REGIONACTIVATION);
 	
+	m_expansionActivationGroup_Operation_getNodeActivation_ActivityNode = factory->createEOperation_in_EContainingClass(m_expansionActivationGroup_Class, EXPANSIONACTIVATIONGROUP_OPERATION_GETNODEACTIVATION_ACTIVITYNODE);
+	m_expansionActivationGroup_Operation_retrieveActivityExecution = factory->createEOperation_in_EContainingClass(m_expansionActivationGroup_Class, EXPANSIONACTIVATIONGROUP_OPERATION_RETRIEVEACTIVITYEXECUTION);
 	
 }
 
@@ -799,8 +771,11 @@ void FUMLPackageImpl::createExpansionRegionActivationContent(std::shared_ptr<eco
 	m_expansionRegionActivation_Attribute_inputExpansionTokens = factory->createEReference_in_EContainingClass(m_expansionRegionActivation_Class, EXPANSIONREGIONACTIVATION_ATTRIBUTE_INPUTEXPANSIONTOKENS);
 	m_expansionRegionActivation_Attribute_inputTokens = factory->createEReference_in_EContainingClass(m_expansionRegionActivation_Class, EXPANSIONREGIONACTIVATION_ATTRIBUTE_INPUTTOKENS);
 	
+	m_expansionRegionActivation_Operation_createEdgeInstances = factory->createEOperation_in_EContainingClass(m_expansionRegionActivation_Class, EXPANSIONREGIONACTIVATION_OPERATION_CREATEEDGEINSTANCES);
+	m_expansionRegionActivation_Operation_createNodeActivations = factory->createEOperation_in_EContainingClass(m_expansionRegionActivation_Class, EXPANSIONREGIONACTIVATION_OPERATION_CREATENODEACTIVATIONS);
 	m_expansionRegionActivation_Operation_doStructuredActivity = factory->createEOperation_in_EContainingClass(m_expansionRegionActivation_Class, EXPANSIONREGIONACTIVATION_OPERATION_DOSTRUCTUREDACTIVITY);
 	m_expansionRegionActivation_Operation_getExpansionNodeActivation_ExpansionNode = factory->createEOperation_in_EContainingClass(m_expansionRegionActivation_Class, EXPANSIONREGIONACTIVATION_OPERATION_GETEXPANSIONNODEACTIVATION_EXPANSIONNODE);
+	m_expansionRegionActivation_Operation_getNodeActivation_ActivityNode = factory->createEOperation_in_EContainingClass(m_expansionRegionActivation_Class, EXPANSIONREGIONACTIVATION_OPERATION_GETNODEACTIVATION_ACTIVITYNODE);
 	m_expansionRegionActivation_Operation_numberOfValues = factory->createEOperation_in_EContainingClass(m_expansionRegionActivation_Class, EXPANSIONREGIONACTIVATION_OPERATION_NUMBEROFVALUES);
 	m_expansionRegionActivation_Operation_runGroup_ExpansionActivationGroup = factory->createEOperation_in_EContainingClass(m_expansionRegionActivation_Class, EXPANSIONREGIONACTIVATION_OPERATION_RUNGROUP_EXPANSIONACTIVATIONGROUP);
 	

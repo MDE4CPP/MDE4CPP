@@ -71,9 +71,6 @@ void FUMLPackageImpl::initializePackageContents()
 	m_enumerationValue_Class->getESuperTypes()->push_back(getValue_Class());
 	m_evaluation_Class->getESuperTypes()->push_back(getSemanticVisitor_Class());
 	m_execution_Class->getESuperTypes()->push_back(getObject_Class());
-	m_executionFactoryL1_Class->getESuperTypes()->push_back(getExecutionFactory_Class());
-	m_executionFactoryL2_Class->getESuperTypes()->push_back(getExecutionFactoryL1_Class());
-	m_executionFactoryL3_Class->getESuperTypes()->push_back(getExecutionFactoryL2_Class());
 	m_expansionActivationGroup_Class->getESuperTypes()->push_back(getActivityNodeActivationGroup_Class());
 	m_expansionNodeActivation_Class->getESuperTypes()->push_back(getObjectNodeActivation_Class());
 	m_expansionRegionActivation_Class->getESuperTypes()->push_back(getActionActivation_Class());
@@ -181,9 +178,6 @@ void FUMLPackageImpl::initializePackageContents()
 	initializeEventOccurrenceContent();
 	initializeExecutionContent();
 	initializeExecutionFactoryContent();
-	initializeExecutionFactoryL1Content();
-	initializeExecutionFactoryL2Content();
-	initializeExecutionFactoryL3Content();
 	initializeExecutorContent();
 	initializeExpansionActivationGroupContent();
 	initializeExpansionNodeActivationContent();
@@ -3952,7 +3946,7 @@ void FUMLPackageImpl::initializeExecutionContent()
 void FUMLPackageImpl::initializeExecutionFactoryContent()
 {
 	m_executionFactory_Class->setName("ExecutionFactory");
-	m_executionFactory_Class->setAbstract(true);
+	m_executionFactory_Class->setAbstract(false);
 	m_executionFactory_Class->setInterface(false);
 	
 	
@@ -4240,90 +4234,6 @@ void FUMLPackageImpl::initializeExecutionFactoryContent()
 	
 }
 
-void FUMLPackageImpl::initializeExecutionFactoryL1Content()
-{
-	m_executionFactoryL1_Class->setName("ExecutionFactoryL1");
-	m_executionFactoryL1_Class->setAbstract(false);
-	m_executionFactoryL1_Class->setInterface(false);
-	
-	
-	
-	m_executionFactoryL1_Operation_instantiateVisitor_Element->setEType(getSemanticVisitor_Class());
-	m_executionFactoryL1_Operation_instantiateVisitor_Element->setName("instantiateVisitor");
-	m_executionFactoryL1_Operation_instantiateVisitor_Element->setLowerBound(1);
-	m_executionFactoryL1_Operation_instantiateVisitor_Element->setUpperBound(1);
-	m_executionFactoryL1_Operation_instantiateVisitor_Element->setUnique(true);
-	m_executionFactoryL1_Operation_instantiateVisitor_Element->setOrdered(false);
-	
-	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_executionFactoryL1_Operation_instantiateVisitor_Element);
-		parameter->setName("element");
-		parameter->setEType(uml::UmlPackage::eInstance()->getElement_Class());
-		parameter->setLowerBound(0);
-		parameter->setUpperBound(1);
-		parameter->setUnique(true);
-		parameter->setOrdered(true);
-	}
-	
-	
-}
-
-void FUMLPackageImpl::initializeExecutionFactoryL2Content()
-{
-	m_executionFactoryL2_Class->setName("ExecutionFactoryL2");
-	m_executionFactoryL2_Class->setAbstract(false);
-	m_executionFactoryL2_Class->setInterface(false);
-	
-	
-	
-	m_executionFactoryL2_Operation_instantiateVisitor_Element->setEType(getSemanticVisitor_Class());
-	m_executionFactoryL2_Operation_instantiateVisitor_Element->setName("instantiateVisitor");
-	m_executionFactoryL2_Operation_instantiateVisitor_Element->setLowerBound(1);
-	m_executionFactoryL2_Operation_instantiateVisitor_Element->setUpperBound(1);
-	m_executionFactoryL2_Operation_instantiateVisitor_Element->setUnique(true);
-	m_executionFactoryL2_Operation_instantiateVisitor_Element->setOrdered(false);
-	
-	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_executionFactoryL2_Operation_instantiateVisitor_Element);
-		parameter->setName("element");
-		parameter->setEType(uml::UmlPackage::eInstance()->getElement_Class());
-		parameter->setLowerBound(0);
-		parameter->setUpperBound(1);
-		parameter->setUnique(true);
-		parameter->setOrdered(true);
-	}
-	
-	
-}
-
-void FUMLPackageImpl::initializeExecutionFactoryL3Content()
-{
-	m_executionFactoryL3_Class->setName("ExecutionFactoryL3");
-	m_executionFactoryL3_Class->setAbstract(false);
-	m_executionFactoryL3_Class->setInterface(false);
-	
-	
-	
-	m_executionFactoryL3_Operation_instantiateVisitor_Element->setEType(getSemanticVisitor_Class());
-	m_executionFactoryL3_Operation_instantiateVisitor_Element->setName("instantiateVisitor");
-	m_executionFactoryL3_Operation_instantiateVisitor_Element->setLowerBound(1);
-	m_executionFactoryL3_Operation_instantiateVisitor_Element->setUpperBound(1);
-	m_executionFactoryL3_Operation_instantiateVisitor_Element->setUnique(true);
-	m_executionFactoryL3_Operation_instantiateVisitor_Element->setOrdered(false);
-	
-	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_executionFactoryL3_Operation_instantiateVisitor_Element);
-		parameter->setName("element");
-		parameter->setEType(uml::UmlPackage::eInstance()->getElement_Class());
-		parameter->setLowerBound(0);
-		parameter->setUpperBound(1);
-		parameter->setUnique(true);
-		parameter->setOrdered(true);
-	}
-	
-	
-}
-
 void FUMLPackageImpl::initializeExecutorContent()
 {
 	m_executor_Class->setName("Executor");
@@ -4474,6 +4384,31 @@ void FUMLPackageImpl::initializeExpansionActivationGroupContent()
 	    }
 	}
 	
+	m_expansionActivationGroup_Operation_getNodeActivation_ActivityNode->setEType(getActivityNodeActivation_Class());
+	m_expansionActivationGroup_Operation_getNodeActivation_ActivityNode->setName("getNodeActivation");
+	m_expansionActivationGroup_Operation_getNodeActivation_ActivityNode->setLowerBound(1);
+	m_expansionActivationGroup_Operation_getNodeActivation_ActivityNode->setUpperBound(1);
+	m_expansionActivationGroup_Operation_getNodeActivation_ActivityNode->setUnique(true);
+	m_expansionActivationGroup_Operation_getNodeActivation_ActivityNode->setOrdered(false);
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_expansionActivationGroup_Operation_getNodeActivation_ActivityNode);
+		parameter->setName("node");
+		parameter->setEType(uml::UmlPackage::eInstance()->getActivityNode_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	m_expansionActivationGroup_Operation_retrieveActivityExecution->setEType(getActivityExecution_Class());
+	m_expansionActivationGroup_Operation_retrieveActivityExecution->setName("retrieveActivityExecution");
+	m_expansionActivationGroup_Operation_retrieveActivityExecution->setLowerBound(1);
+	m_expansionActivationGroup_Operation_retrieveActivityExecution->setUpperBound(1);
+	m_expansionActivationGroup_Operation_retrieveActivityExecution->setUnique(true);
+	m_expansionActivationGroup_Operation_retrieveActivityExecution->setOrdered(false);
+	
+	
 	
 }
 
@@ -4579,6 +4514,22 @@ void FUMLPackageImpl::initializeExpansionRegionActivationContent()
 	    }
 	}
 	
+	m_expansionRegionActivation_Operation_createEdgeInstances->setEType(nullptr);
+	m_expansionRegionActivation_Operation_createEdgeInstances->setName("createEdgeInstances");
+	m_expansionRegionActivation_Operation_createEdgeInstances->setLowerBound(1);
+	m_expansionRegionActivation_Operation_createEdgeInstances->setUpperBound(1);
+	m_expansionRegionActivation_Operation_createEdgeInstances->setUnique(true);
+	m_expansionRegionActivation_Operation_createEdgeInstances->setOrdered(false);
+	
+	
+	m_expansionRegionActivation_Operation_createNodeActivations->setEType(nullptr);
+	m_expansionRegionActivation_Operation_createNodeActivations->setName("createNodeActivations");
+	m_expansionRegionActivation_Operation_createNodeActivations->setLowerBound(1);
+	m_expansionRegionActivation_Operation_createNodeActivations->setUpperBound(1);
+	m_expansionRegionActivation_Operation_createNodeActivations->setUnique(true);
+	m_expansionRegionActivation_Operation_createNodeActivations->setOrdered(false);
+	
+	
 	m_expansionRegionActivation_Operation_doStructuredActivity->setEType(nullptr);
 	m_expansionRegionActivation_Operation_doStructuredActivity->setName("doStructuredActivity");
 	m_expansionRegionActivation_Operation_doStructuredActivity->setLowerBound(1);
@@ -4598,6 +4549,23 @@ void FUMLPackageImpl::initializeExpansionRegionActivationContent()
 		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_expansionRegionActivation_Operation_getExpansionNodeActivation_ExpansionNode);
 		parameter->setName("node");
 		parameter->setEType(uml::UmlPackage::eInstance()->getExpansionNode_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	m_expansionRegionActivation_Operation_getNodeActivation_ActivityNode->setEType(getActivityNodeActivation_Class());
+	m_expansionRegionActivation_Operation_getNodeActivation_ActivityNode->setName("getNodeActivation");
+	m_expansionRegionActivation_Operation_getNodeActivation_ActivityNode->setLowerBound(1);
+	m_expansionRegionActivation_Operation_getNodeActivation_ActivityNode->setUpperBound(1);
+	m_expansionRegionActivation_Operation_getNodeActivation_ActivityNode->setUnique(true);
+	m_expansionRegionActivation_Operation_getNodeActivation_ActivityNode->setOrdered(false);
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_expansionRegionActivation_Operation_getNodeActivation_ActivityNode);
+		parameter->setName("node");
+		parameter->setEType(uml::UmlPackage::eInstance()->getActivityNode_Class());
 		parameter->setLowerBound(0);
 		parameter->setUpperBound(1);
 		parameter->setUnique(true);

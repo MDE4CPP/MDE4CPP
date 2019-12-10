@@ -24,13 +24,108 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "fUML/impl/FUMLPackageImpl.hpp"
-#include "fUML/FUMLPackage.hpp"
-#include "uml/OpaqueBehavior.hpp"
-#include "fUML/OpaqueBehaviorExecution.hpp"
-#include "fUML/Value.hpp"
+#include "fUML/AcceptEventActionActivation.hpp"
+#include "fUML/ActivityExecution.hpp"
+#include "fUML/ActivityFinalNodeActivation.hpp"
+#include "fUML/ActivityParameterNodeActivation.hpp"
+#include "fUML/AddStructuralFeatureValueActionActivation.hpp"
+#include "fUML/CallBehaviorActionActivation.hpp"
+#include "fUML/CallOperationActionActivation.hpp"
+#include "fUML/ClearAssociationActionActivation.hpp"
+#include "fUML/ClearStructuralFeatureActionActivation.hpp"
+#include "fUML/ConditionalNodeActivation.hpp"
+#include "fUML/CreateLinkActionActivation.hpp"
+#include "fUML/CreateObjectActionActivation.hpp"
+#include "fUML/DataStoreNodeActivation.hpp"
+#include "fUML/DecisionNodeActivation.hpp"
+#include "fUML/DestroyLinkActionActivation.hpp"
+#include "fUML/DestroyObjectActionActivation.hpp"
 #include "fUML/Evaluation.hpp"
+#include "fUML/ExpansionNodeActivation.hpp"
+#include "fUML/ExpansionRegionActivation.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include "fUML/FlowFinalNodeActivation.hpp"
+#include "fUML/ForkNodeActivation.hpp"
+#include "fUML/InitialNodeActivation.hpp"
+#include "fUML/InputPinActivation.hpp"
+#include "fUML/InstanceValueEvaluation.hpp"
+#include "fUML/JoinNodeActivation.hpp"
+#include "fUML/LiteralBooleanEvaluation.hpp"
+#include "fUML/LiteralIntegerEvaluation.hpp"
+#include "fUML/LiteralNullEvaluation.hpp"
+#include "fUML/LiteralRealEvaluation.hpp"
+#include "fUML/LiteralStringEvaluation.hpp"
+#include "fUML/LiteralUnlimitedNaturalEvaluation.hpp"
+#include "fUML/LoopNodeActivation.hpp"
+#include "fUML/MergeNodeActivation.hpp"
+#include "fUML/OpaqueBehaviorExecution.hpp"
+#include "fUML/OutputPinActivation.hpp"
+#include "fUML/ReadExtentActionActivation.hpp"
+#include "fUML/ReadIsClassifiedObjectActionActivation.hpp"
+#include "fUML/ReadLinkActionActivation.hpp"
+#include "fUML/ReadSelfActionActivation.hpp"
+#include "fUML/ReadStructuralFeatureActionActivation.hpp"
+#include "fUML/ReclassifyObjectActionActivation.hpp"
+#include "fUML/ReduceActionActivation.hpp"
+#include "fUML/RemoveStructuralFeatureValueActivation.hpp"
+#include "fUML/SendSignalActionActivation.hpp"
+#include "fUML/StartClassifierBehaviorActionActivation.hpp"
+#include "fUML/StartObjectBehaviorActionActivation.hpp"
+#include "fUML/StructuredActivityNodeActivation.hpp"
+#include "fUML/TestIdentityActionActivation.hpp"
+#include "fUML/Value.hpp"
+#include "fUML/ValueSpecificationActionActivation.hpp"
+#include "uml/AcceptEventAction.hpp"
+#include "uml/Activity.hpp"
+#include "uml/ActivityFinalNode.hpp"
+#include "uml/ActivityParameterNode.hpp"
+#include "uml/AddStructuralFeatureValueAction.hpp"
+#include "uml/CallBehaviorAction.hpp"
+#include "uml/CallOperationAction.hpp"
+#include "uml/ClearAssociationAction.hpp"
+#include "uml/ClearStructuralFeatureAction.hpp"
+#include "uml/ConditionalNode.hpp"
+#include "uml/CreateLinkAction.hpp"
+#include "uml/CreateObjectAction.hpp"
+#include "uml/DataStoreNode.hpp"
+#include "uml/DecisionNode.hpp"
+#include "uml/DestroyLinkAction.hpp"
+#include "uml/DestroyObjectAction.hpp"
 #include "uml/Element.hpp"
+#include "uml/ExpansionNode.hpp"
+#include "uml/ExpansionRegion.hpp"
+#include "uml/FlowFinalNode.hpp"
+#include "uml/ForkNode.hpp"
+#include "uml/InitialNode.hpp"
+#include "uml/InputPin.hpp"
+#include "uml/InstanceValue.hpp"
+#include "uml/JoinNode.hpp"
+#include "uml/LiteralBoolean.hpp"
+#include "uml/LiteralInteger.hpp"
+#include "uml/LiteralNull.hpp"
+#include "uml/LiteralReal.hpp"
+#include "uml/LiteralString.hpp"
+#include "uml/LiteralUnlimitedNatural.hpp"
+#include "uml/LoopNode.hpp"
+#include "uml/MergeNode.hpp"
+#include "uml/OpaqueBehavior.hpp"
+#include "uml/OutputPin.hpp"
+#include "uml/ReadExtentAction.hpp"
+#include "uml/ReadIsClassifiedObjectAction.hpp"
+#include "uml/ReadLinkAction.hpp"
+#include "uml/ReadSelfAction.hpp"
+#include "uml/ReadStructuralFeatureAction.hpp"
+#include "uml/ReclassifyObjectAction.hpp"
+#include "uml/ReduceAction.hpp"
+#include "uml/RemoveStructuralFeatureValueAction.hpp"
+#include "uml/SendSignalAction.hpp"
+#include "uml/StartClassifierBehaviorAction.hpp"
+#include "uml/StartObjectBehaviorAction.hpp"
+#include "uml/TestIdentityAction.hpp"
+#include "uml/UmlPackage.hpp"
 #include "uml/ValueSpecification.hpp"
+#include "uml/ValueSpecificationAction.hpp"
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -364,8 +459,254 @@ std::shared_ptr<fUML::OpaqueBehaviorExecution> ExecutionFactoryImpl::instantiate
 
 std::shared_ptr<fUML::SemanticVisitor> ExecutionFactoryImpl::instantiateVisitor(std::shared_ptr<uml::Element>  element)
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	std::shared_ptr<fUML::SemanticVisitor> visitor = nullptr;
+
+	switch (element->eClass()->getClassifierID()) {
+		case uml::UmlPackage::LITERALBOOLEAN_CLASS:
+		{
+			visitor = FUMLFactory::eInstance()->createLiteralBooleanEvaluation();
+			break;
+		}
+		case uml::UmlPackage::LITERALSTRING_CLASS:
+		{
+			visitor = FUMLFactory::eInstance()->createLiteralStringEvaluation();
+			break;
+		}
+		case uml::UmlPackage::LITERALNULL_CLASS:
+		{
+			visitor =  FUMLFactory::eInstance()->createLiteralNullEvaluation();
+			break;
+		}
+		case uml::UmlPackage::INSTANCEVALUE_CLASS:
+		{
+			visitor = FUMLFactory::eInstance()->createInstanceValueEvaluation();
+			break;
+		}
+		case uml::UmlPackage::LITERALUNLIMITEDNATURAL_CLASS:
+		{
+			visitor = FUMLFactory::eInstance()->createLiteralUnlimitedNaturalEvaluation();
+			break;
+		}
+		case uml::UmlPackage::LITERALINTEGER_CLASS:
+		{
+			visitor = FUMLFactory::eInstance()->createLiteralIntegerEvaluation();
+			break;
+		}
+		case uml::UmlPackage::LITERALREAL_CLASS:
+		{
+			visitor = FUMLFactory::eInstance()->createLiteralRealEvaluation();
+			break;
+		}
+		case uml::UmlPackage::ACTIVITY_CLASS:
+		{
+			visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createActivityExecution());
+			break;
+		}
+		case uml::UmlPackage::ACTIVITYPARAMETERNODE_CLASS:
+		{
+			visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createActivityParameterNodeActivation());
+			break;
+		}
+		case uml::UmlPackage::INITIALNODE_CLASS:
+		{
+			visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createInitialNodeActivation());
+			break;
+		}
+		case uml::UmlPackage::ACTIVITYFINALNODE_CLASS:
+		{
+			visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createActivityFinalNodeActivation());
+			break;
+		}
+		case uml::UmlPackage::FLOWFINALNODE_CLASS:
+		{
+			visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createFlowFinalNodeActivation());
+			break;
+		}
+		case uml::UmlPackage::JOINNODE_CLASS:
+		{
+			visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createJoinNodeActivation());
+			break;
+		}
+		case uml::UmlPackage::MERGENODE_CLASS:
+		{
+			visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createMergeNodeActivation());
+			break;
+		}
+		case uml::UmlPackage::FORKNODE_CLASS:
+		{
+			visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createForkNodeActivation());
+			break;
+		}
+		case uml::UmlPackage::DECISIONNODE_CLASS:
+		{
+			visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createDecisionNodeActivation());
+			break;
+		}
+		case uml::UmlPackage::INPUTPIN_CLASS:
+		{
+			visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createInputPinActivation());
+			break;
+		}
+		case uml::UmlPackage::OUTPUTPIN_CLASS:
+		{
+			visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createOutputPinActivation());
+			break;
+		}
+		case uml::UmlPackage::CALLBEHAVIORACTION_CLASS:
+		{
+			visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createCallBehaviorActionActivation());
+			break;
+		}
+		case uml::UmlPackage::CALLOPERATIONACTION_CLASS:
+		{
+			visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createCallOperationActionActivation());
+			break;
+		}
+		case uml::UmlPackage::SENDSIGNALACTION_CLASS:
+		{
+			visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createSendSignalActionActivation());
+			break;
+		}
+		case uml::UmlPackage::READSELFACTION_CLASS:
+		{
+			visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createReadSelfActionActivation());
+			break;
+		}
+		case uml::UmlPackage:: TESTIDENTITYACTION_CLASS:
+		{
+			visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createTestIdentityActionActivation());
+			break;
+		}
+		case uml::UmlPackage::VALUESPECIFICATIONACTION_CLASS:
+		{
+			visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createValueSpecificationActionActivation());
+			break;
+		}
+		case uml::UmlPackage::CREATEOBJECTACTION_CLASS:
+		{
+			visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createCreateObjectActionActivation());
+			break;
+		}
+		case uml::UmlPackage::DESTROYOBJECTACTION_CLASS:
+		{
+			visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createDestroyObjectActionActivation());
+			break;
+		}
+		case uml::UmlPackage::READSTRUCTURALFEATUREACTION_CLASS:
+		{
+			visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createReadStructuralFeatureActionActivation());
+			break;
+		}
+		case uml::UmlPackage::CLEARSTRUCTURALFEATUREACTION_CLASS:
+		{
+			visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createClearStructuralFeatureActionActivation());
+			break;
+		}
+		case uml::UmlPackage::ADDSTRUCTURALFEATUREVALUEACTION_CLASS:
+		{
+			visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createAddStructuralFeatureValueActionActivation());
+			break;
+		}
+		case uml::UmlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_CLASS:
+		{
+			visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createRemoveStructuralFeatureValueActivation());
+			break;
+		}
+		case uml::UmlPackage::READLINKACTION_CLASS:
+		{
+			visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createReadLinkActionActivation());
+			break;
+		}
+		case uml::UmlPackage::CLEARASSOCIATIONACTION_CLASS:
+		{
+			visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createClearAssociationActionActivation());
+			break;
+		}
+		case uml::UmlPackage::CREATELINKACTION_CLASS:
+		{
+			visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createCreateLinkActionActivation());
+			break;
+		}
+		case uml::UmlPackage::DESTROYLINKACTION_CLASS:
+		{
+			visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createDestroyLinkActionActivation());
+			break;
+		}
+		case uml::UmlPackage::CONDITIONALNODE_CLASS: 
+		{
+			visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createConditionalNodeActivation());
+			break;
+		}
+		case uml::UmlPackage::LOOPNODE_CLASS: 
+		{
+			visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createLoopNodeActivation());
+			break;
+		}
+		case uml::UmlPackage::EXPANSIONREGION_CLASS: 
+		{
+			visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createExpansionRegionActivation());
+			break;
+		}
+		case uml::UmlPackage::STRUCTUREDACTIVITYNODE_CLASS: 
+		{
+			visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createStructuredActivityNodeActivation());
+			break;
+		}
+		case uml::UmlPackage::EXPANSIONNODE_CLASS: 
+		{
+			visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createExpansionNodeActivation());
+			break;
+		}
+		case uml::UmlPackage::READEXTENTACTION_CLASS: 
+		{
+			visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createReadExtentActionActivation());
+			break;
+		}
+		case uml::UmlPackage::READISCLASSIFIEDOBJECTACTION_CLASS: 
+		{
+			visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createReadIsClassifiedObjectActionActivation());
+			break;
+		}
+		case uml::UmlPackage::RECLASSIFYOBJECTACTION_CLASS: 
+		{
+			visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createReclassifyObjectActionActivation());
+			break;
+		}
+		case uml::UmlPackage::STARTOBJECTBEHAVIORACTION_CLASS: 
+		{
+			visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createStartObjectBehaviorActionActivation());
+			break;
+		}
+		case uml::UmlPackage::STARTCLASSIFIERBEHAVIORACTION_CLASS: 
+		{
+			visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createStartClassifierBehaviorActionActivation());
+			break;
+		}
+		case uml::UmlPackage::ACCEPTEVENTACTION_CLASS: 
+		{
+			visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createAcceptEventActionActivation());
+			break;
+		}
+		case uml::UmlPackage::REDUCEACTION_CLASS: 
+		{
+			visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createReduceActionActivation());
+			break;
+		}
+		case uml::UmlPackage::DATASTORENODE_CLASS: 
+		{
+			visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createDataStoreNodeActivation());
+			break;
+		}
+		default: 
+		{
+			std::cerr << __PRETTY_FUNCTION__ << " - Unknown visitor type" << std::endl;
+		}
+	}
+	
+	return visitor;
+	//end of body
 }
 
 //*********************************

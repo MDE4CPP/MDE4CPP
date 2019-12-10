@@ -206,7 +206,7 @@ Any UnlimitedNaturalValueImpl::eGet(int featureID, bool resolve, bool coreType) 
 	switch(featureID)
 	{
 		case FUMLPackage::UNLIMITEDNATURALVALUE_ATTRIBUTE_VALUE:
-			return eAny(getValue()); //1131
+			return eAny(getValue()); //1101
 	}
 	return PrimitiveValueImpl::eGet(featureID, resolve, coreType);
 }
@@ -215,7 +215,7 @@ bool UnlimitedNaturalValueImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case FUMLPackage::UNLIMITEDNATURALVALUE_ATTRIBUTE_VALUE:
-			return getValue() != 0; //1131
+			return getValue() != 0; //1101
 	}
 	return PrimitiveValueImpl::internalEIsSet(featureID);
 }
@@ -227,7 +227,7 @@ bool UnlimitedNaturalValueImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			int _value = newValue->get<int>();
-			setValue(_value); //1131
+			setValue(_value); //1101
 			return true;
 		}
 	}

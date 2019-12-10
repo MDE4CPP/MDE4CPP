@@ -48,11 +48,23 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
+			virtual void createEdgeInstances() ;
+			
+			/*!
+			 */ 
+			virtual void createNodeActivations() ;
+			
+			/*!
+			 */ 
 			virtual void doStructuredActivity() ;
 			
 			/*!
 			 */ 
 			virtual std::shared_ptr<fUML::ExpansionNodeActivation> getExpansionNodeActivation(std::shared_ptr<uml::ExpansionNode>  node) ;
+			
+			/*!
+			 */ 
+			virtual std::shared_ptr<fUML::ActivityNodeActivation> getNodeActivation(std::shared_ptr<uml::ActivityNode>  node) ;
 			
 			/*!
 			 */ 

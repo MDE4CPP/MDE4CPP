@@ -50,9 +50,6 @@
 #include "fUML/impl/EventOccurrenceImpl.hpp"
 #include "fUML/impl/ExecutionImpl.hpp"
 #include "fUML/impl/ExecutionFactoryImpl.hpp"
-#include "fUML/impl/ExecutionFactoryL1Impl.hpp"
-#include "fUML/impl/ExecutionFactoryL2Impl.hpp"
-#include "fUML/impl/ExecutionFactoryL3Impl.hpp"
 #include "fUML/impl/ExecutorImpl.hpp"
 #include "fUML/impl/ExpansionActivationGroupImpl.hpp"
 #include "fUML/impl/ExpansionNodeActivationImpl.hpp"
@@ -175,9 +172,7 @@ FUMLFactoryImpl::FUMLFactoryImpl()
 	m_idMap.insert(std::make_pair("EnumerationValue", FUMLPackage::ENUMERATIONVALUE_CLASS));
 	m_idMap.insert(std::make_pair("EventDispatchLoop", FUMLPackage::EVENTDISPATCHLOOP_CLASS));
 	m_idMap.insert(std::make_pair("EventOccurrence", FUMLPackage::EVENTOCCURRENCE_CLASS));
-	m_idMap.insert(std::make_pair("ExecutionFactoryL1", FUMLPackage::EXECUTIONFACTORYL1_CLASS));
-	m_idMap.insert(std::make_pair("ExecutionFactoryL2", FUMLPackage::EXECUTIONFACTORYL2_CLASS));
-	m_idMap.insert(std::make_pair("ExecutionFactoryL3", FUMLPackage::EXECUTIONFACTORYL3_CLASS));
+	m_idMap.insert(std::make_pair("ExecutionFactory", FUMLPackage::EXECUTIONFACTORY_CLASS));
 	m_idMap.insert(std::make_pair("Executor", FUMLPackage::EXECUTOR_CLASS));
 	m_idMap.insert(std::make_pair("ExpansionActivationGroup", FUMLPackage::EXPANSIONACTIVATIONGROUP_CLASS));
 	m_idMap.insert(std::make_pair("ExpansionNodeActivation", FUMLPackage::EXPANSIONNODEACTIVATION_CLASS));
@@ -579,43 +574,17 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const int metaElementID,
 				return this->createEventOccurrence(metaElementID);
 			
 		}
-		case FUMLPackage::EXECUTIONFACTORYL1_CLASS:
+		case FUMLPackage::EXECUTIONFACTORY_CLASS:
 		{
 			if (nullptr == container)
 			{
-				return this->createExecutionFactoryL1(metaElementID);
+				return this->createExecutionFactory(metaElementID);
 			}
 			else
 			{
 				std::shared_ptr<fUML::Locus> castedContainer = std::dynamic_pointer_cast<fUML::Locus>(container);
 				assert(castedContainer);
-				return std::shared_ptr<fUML::ExecutionFactoryL1>(this->createExecutionFactoryL1_in_Locus(castedContainer,metaElementID));
-			}
-		}
-		case FUMLPackage::EXECUTIONFACTORYL2_CLASS:
-		{
-			if (nullptr == container)
-			{
-				return this->createExecutionFactoryL2(metaElementID);
-			}
-			else
-			{
-				std::shared_ptr<fUML::Locus> castedContainer = std::dynamic_pointer_cast<fUML::Locus>(container);
-				assert(castedContainer);
-				return std::shared_ptr<fUML::ExecutionFactoryL2>(this->createExecutionFactoryL2_in_Locus(castedContainer,metaElementID));
-			}
-		}
-		case FUMLPackage::EXECUTIONFACTORYL3_CLASS:
-		{
-			if (nullptr == container)
-			{
-				return this->createExecutionFactoryL3(metaElementID);
-			}
-			else
-			{
-				std::shared_ptr<fUML::Locus> castedContainer = std::dynamic_pointer_cast<fUML::Locus>(container);
-				assert(castedContainer);
-				return std::shared_ptr<fUML::ExecutionFactoryL3>(this->createExecutionFactoryL3_in_Locus(castedContainer,metaElementID));
+				return std::shared_ptr<fUML::ExecutionFactory>(this->createExecutionFactory_in_Locus(castedContainer,metaElementID));
 			}
 		}
 		case FUMLPackage::EXECUTOR_CLASS:
@@ -1604,60 +1573,22 @@ std::shared_ptr<EventOccurrence> FUMLFactoryImpl::createEventOccurrence(const in
 	element->setThisEventOccurrencePtr(element);
 	return element;
 }
-std::shared_ptr<ExecutionFactoryL1> FUMLFactoryImpl::createExecutionFactoryL1(const int metaElementID/*=-1*/) const
+std::shared_ptr<ExecutionFactory> FUMLFactoryImpl::createExecutionFactory(const int metaElementID/*=-1*/) const
 {
-	std::shared_ptr<ExecutionFactoryL1Impl> element(new ExecutionFactoryL1Impl());
+	std::shared_ptr<ExecutionFactoryImpl> element(new ExecutionFactoryImpl());
 	element->setMetaElementID(metaElementID);
-	element->setThisExecutionFactoryL1Ptr(element);
+	element->setThisExecutionFactoryPtr(element);
 	return element;
 }
-std::shared_ptr<ExecutionFactoryL1> FUMLFactoryImpl::createExecutionFactoryL1_in_Locus(std::weak_ptr<fUML::Locus > par_locus, const int metaElementID) const
+std::shared_ptr<ExecutionFactory> FUMLFactoryImpl::createExecutionFactory_in_Locus(std::weak_ptr<fUML::Locus > par_locus, const int metaElementID) const
 {
-	std::shared_ptr<ExecutionFactoryL1Impl> element(new ExecutionFactoryL1Impl(par_locus));
+	std::shared_ptr<ExecutionFactoryImpl> element(new ExecutionFactoryImpl(par_locus));
 	element->setMetaElementID(metaElementID);
 	if(auto wp = par_locus.lock())
 	{
 			wp->setFactory(element);
 	}
-	element->setThisExecutionFactoryL1Ptr(element);
-	return element;
-	
-}
-std::shared_ptr<ExecutionFactoryL2> FUMLFactoryImpl::createExecutionFactoryL2(const int metaElementID/*=-1*/) const
-{
-	std::shared_ptr<ExecutionFactoryL2Impl> element(new ExecutionFactoryL2Impl());
-	element->setMetaElementID(metaElementID);
-	element->setThisExecutionFactoryL2Ptr(element);
-	return element;
-}
-std::shared_ptr<ExecutionFactoryL2> FUMLFactoryImpl::createExecutionFactoryL2_in_Locus(std::weak_ptr<fUML::Locus > par_locus, const int metaElementID) const
-{
-	std::shared_ptr<ExecutionFactoryL2Impl> element(new ExecutionFactoryL2Impl(par_locus));
-	element->setMetaElementID(metaElementID);
-	if(auto wp = par_locus.lock())
-	{
-			wp->setFactory(element);
-	}
-	element->setThisExecutionFactoryL2Ptr(element);
-	return element;
-	
-}
-std::shared_ptr<ExecutionFactoryL3> FUMLFactoryImpl::createExecutionFactoryL3(const int metaElementID/*=-1*/) const
-{
-	std::shared_ptr<ExecutionFactoryL3Impl> element(new ExecutionFactoryL3Impl());
-	element->setMetaElementID(metaElementID);
-	element->setThisExecutionFactoryL3Ptr(element);
-	return element;
-}
-std::shared_ptr<ExecutionFactoryL3> FUMLFactoryImpl::createExecutionFactoryL3_in_Locus(std::weak_ptr<fUML::Locus > par_locus, const int metaElementID) const
-{
-	std::shared_ptr<ExecutionFactoryL3Impl> element(new ExecutionFactoryL3Impl(par_locus));
-	element->setMetaElementID(metaElementID);
-	if(auto wp = par_locus.lock())
-	{
-			wp->setFactory(element);
-	}
-	element->setThisExecutionFactoryL3Ptr(element);
+	element->setThisExecutionFactoryPtr(element);
 	return element;
 	
 }

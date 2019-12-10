@@ -273,7 +273,7 @@ Any LoopNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType) con
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //7711
+			return eAny(tempList); //7411
 		}
 	}
 	return StructuredActivityNodeActivationImpl::eGet(featureID, resolve, coreType);
@@ -283,7 +283,7 @@ bool LoopNodeActivationImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case FUMLPackage::LOOPNODEACTIVATION_ATTRIBUTE_BODYOUTPUTLISTS:
-			return getBodyOutputLists() != nullptr; //7711
+			return getBodyOutputLists() != nullptr; //7411
 	}
 	return StructuredActivityNodeActivationImpl::internalEIsSet(featureID);
 }

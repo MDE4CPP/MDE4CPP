@@ -1444,51 +1444,6 @@ std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getExecutionFactory_Operatio
 
 // End Class ExecutionFactory
 
-// Begin Class ExecutionFactoryL1
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getExecutionFactoryL1_Class() const
-{
-	return m_executionFactoryL1_Class;
-}
-
-
-
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getExecutionFactoryL1_Operation_instantiateVisitor_Element() const
-{
-	return m_executionFactoryL1_Operation_instantiateVisitor_Element;
-}
-
-// End Class ExecutionFactoryL1
-
-// Begin Class ExecutionFactoryL2
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getExecutionFactoryL2_Class() const
-{
-	return m_executionFactoryL2_Class;
-}
-
-
-
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getExecutionFactoryL2_Operation_instantiateVisitor_Element() const
-{
-	return m_executionFactoryL2_Operation_instantiateVisitor_Element;
-}
-
-// End Class ExecutionFactoryL2
-
-// Begin Class ExecutionFactoryL3
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getExecutionFactoryL3_Class() const
-{
-	return m_executionFactoryL3_Class;
-}
-
-
-
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getExecutionFactoryL3_Operation_instantiateVisitor_Element() const
-{
-	return m_executionFactoryL3_Operation_instantiateVisitor_Element;
-}
-
-// End Class ExecutionFactoryL3
-
 // Begin Class Executor
 std::shared_ptr<ecore::EClass> FUMLPackageImpl::getExecutor_Class() const
 {
@@ -1528,6 +1483,14 @@ std::shared_ptr<ecore::EReference> FUMLPackageImpl::getExpansionActivationGroup_
 	return m_expansionActivationGroup_Attribute_regionActivation;
 }
 
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getExpansionActivationGroup_Operation_getNodeActivation_ActivityNode() const
+{
+	return m_expansionActivationGroup_Operation_getNodeActivation_ActivityNode;
+}
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getExpansionActivationGroup_Operation_retrieveActivityExecution() const
+{
+	return m_expansionActivationGroup_Operation_retrieveActivityExecution;
+}
 
 // End Class ExpansionActivationGroup
 
@@ -1566,6 +1529,14 @@ std::shared_ptr<ecore::EReference> FUMLPackageImpl::getExpansionRegionActivation
 	return m_expansionRegionActivation_Attribute_inputTokens;
 }
 
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getExpansionRegionActivation_Operation_createEdgeInstances() const
+{
+	return m_expansionRegionActivation_Operation_createEdgeInstances;
+}
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getExpansionRegionActivation_Operation_createNodeActivations() const
+{
+	return m_expansionRegionActivation_Operation_createNodeActivations;
+}
 std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getExpansionRegionActivation_Operation_doStructuredActivity() const
 {
 	return m_expansionRegionActivation_Operation_doStructuredActivity;
@@ -1573,6 +1544,10 @@ std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getExpansionRegionActivation
 std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getExpansionRegionActivation_Operation_getExpansionNodeActivation_ExpansionNode() const
 {
 	return m_expansionRegionActivation_Operation_getExpansionNodeActivation_ExpansionNode;
+}
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getExpansionRegionActivation_Operation_getNodeActivation_ActivityNode() const
+{
+	return m_expansionRegionActivation_Operation_getNodeActivation_ActivityNode;
 }
 std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getExpansionRegionActivation_Operation_numberOfValues() const
 {

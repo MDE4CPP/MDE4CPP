@@ -46,6 +46,11 @@ namespace fUML
 	class ActivityExecution;
 }
 
+namespace uml 
+{
+	class ActivityNode;
+}
+
 namespace fUML 
 {
 	class ActivityNodeActivation;
@@ -96,6 +101,14 @@ namespace fUML
 			//*********************************
 			// Operations
 			//*********************************
+			/*!
+			 */ 
+			virtual std::shared_ptr<fUML::ActivityNodeActivation> getNodeActivation(std::shared_ptr<uml::ActivityNode>  node) = 0;
+			
+			/*!
+			 */ 
+			virtual std::shared_ptr<fUML::ActivityExecution> retrieveActivityExecution() = 0;
+			
 			
 			//*********************************
 			// Attributes Getter Setter

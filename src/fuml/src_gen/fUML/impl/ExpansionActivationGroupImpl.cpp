@@ -24,6 +24,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "fUML/impl/FUMLPackageImpl.hpp"
+#include "uml/ExpansionNode.hpp"
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -40,6 +41,8 @@
 #include "fUML/ActivityEdgeInstance.hpp"
 
 #include "fUML/ActivityExecution.hpp"
+
+#include "uml/ActivityNode.hpp"
 
 #include "fUML/ActivityNodeActivation.hpp"
 
@@ -167,6 +170,54 @@ std::shared_ptr<ecore::EClass> ExpansionActivationGroupImpl::eStaticClass() cons
 //*********************************
 // Operations
 //*********************************
+std::shared_ptr<fUML::ActivityNodeActivation> ExpansionActivationGroupImpl::getNodeActivation(std::shared_ptr<uml::ActivityNode>  node)
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	std::shared_ptr<ActivityNodeActivation> activation = nullptr;
+	Bag<fUML::ActivityNodeActivation>::iterator iter = m_nodeActivations->begin();
+	Bag<fUML::ActivityNodeActivation>::iterator end = m_nodeActivations->end();
+
+	while ((!activation) and (iter != end))
+	{
+       	activation =(*iter)->getNodeActivation(node);
+       	iter++;
+	}
+
+	return activation;
+	//end of body
+}
+
+std::shared_ptr<fUML::ActivityExecution> ExpansionActivationGroupImpl::retrieveActivityExecution()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	std::shared_ptr<ActivityExecution> activityExecution = this->getActivityExecution().lock();
+    if (!activityExecution)
+    {
+    	auto activation=this->getRegionActivation();
+    	if(activation)
+    	{
+    		auto group=activation->getGroup().lock();
+    		if(group)
+    		{
+    			activityExecution = group->retrieveActivityExecution();
+    		}
+    		else
+    		{
+                DEBUG_MESSAGE(std::cout<<__PRETTY_FUNCTION__<< " : invalid group" << std::endl;)
+                throw "invalid group";
+    		}
+    	}
+		else
+		{
+            DEBUG_MESSAGE(std::cout<<__PRETTY_FUNCTION__<< ": invalid activation" << std::endl;)
+            throw "invalid activation";
+		}
+    }
+    return activityExecution;
+	//end of body
+}
 
 //*********************************
 // References
@@ -217,7 +268,7 @@ Any ExpansionActivationGroupImpl::eGet(int featureID, bool resolve, bool coreTyp
 	switch(featureID)
 	{
 		case FUMLPackage::EXPANSIONACTIVATIONGROUP_ATTRIBUTE_REGIONACTIVATION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getRegionActivation())); //495
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getRegionActivation())); //465
 	}
 	return ActivityNodeActivationGroupImpl::eGet(featureID, resolve, coreType);
 }
@@ -226,7 +277,7 @@ bool ExpansionActivationGroupImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case FUMLPackage::EXPANSIONACTIVATIONGROUP_ATTRIBUTE_REGIONACTIVATION:
-			return getRegionActivation() != nullptr; //495
+			return getRegionActivation() != nullptr; //465
 	}
 	return ActivityNodeActivationGroupImpl::internalEIsSet(featureID);
 }
@@ -239,7 +290,7 @@ bool ExpansionActivationGroupImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<fUML::ExpansionRegionActivation> _regionActivation = std::dynamic_pointer_cast<fUML::ExpansionRegionActivation>(_temp);
-			setRegionActivation(_regionActivation); //495
+			setRegionActivation(_regionActivation); //465
 			return true;
 		}
 	}
