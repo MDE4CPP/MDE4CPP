@@ -1897,7 +1897,27 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ExpansionNodeActivation" eSuperTypes="#//ObjectNodeActivation">
     <eOperations name="getExpansionRegionActivation" ordered="false" lowerBound="1"
-        eType="#//ExpansionRegionActivation"/>
+        eType="#//ExpansionRegionActivation">
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="/*&#xA;// Return the expansion region activation corresponding to this&#xA;// expansion node, in the context of the activity node activation group&#xA;// this expansion node activation is in.&#xA;&#xA;ExpansionNode node = (ExpansionNode) (this.node);&#xA;&#xA;ExpansionRegion region = node.regionAsInput;&#xA;if (region == null) {&#xA;&#x9;region = node.regionAsOutput;&#xA;}&#xA;&#xA;return (ExpansionRegionActivation) (this.group&#xA;&#x9;&#x9;.getNodeActivation(region));&#xA;*/&#xA;throw &quot;convert to cpp&quot;;"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="fire" ordered="false" lowerBound="1">
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="this->getTokens()->insert(*incomingTokens);"/>
+      </eAnnotations>
+      <eParameters name="incomingTokens" ordered="false" upperBound="-1" eType="#//Token"/>
+    </eOperations>
+    <eOperations name="receiveOffer" ordered="false" lowerBound="1">
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="/*&#xA;//DEBUG_MESSAGE(std::cout&lt;&lt;&quot;[receiveOffer] &quot;&#xA; //&lt;&lt; (this->getNode() == nullptr ? &quot;...&quot; : (&quot;node = &quot; + this->getNode()->getName()))&lt;&lt;std::endl;)&#xA;&#xA;//    _beginIsolation();&#xA;&#xA;//    bool ready = this->isReady();&#xA;&#xA;   // std::shared_ptr&lt;Bag&lt;Token> > tokens;&#xA;//    if (ready) &#xA;   // {&#xA;//        DEBUG_MESSAGE(std::cout&lt;&lt;&quot;[receiveOffer] Firing.&quot;&lt;&lt;std::endl;)&#xA;      //  tokens = this->takeOfferedTokens();&#xA;   // }&#xA;//&#xA;   // _endIsolation();&#xA;//&#xA;//    if (ready) &#xA;//    {&#xA;  //      DEBUG_MESSAGE(std::cout&lt;&lt; &quot;Firing &quot;&lt;&lt;tokens->size()&lt;&lt;&quot; token(s)&quot;&lt;&lt;std::endl;)&#xA;//        this->fire(tokens);&#xA;  //  }&#xA; //   else&#xA;//    {&#xA;//       DEBUG_MESSAGE(std::cout&lt;&lt; &quot;Node&quot;&lt;&lt;(this->getNode() == nullptr ? &quot;...&quot; : &quot;node = &quot; + this->getNode()->getName())&lt;&lt;&quot; is not ready to execute.&quot;&lt;&lt;std::endl;)&#xA;//    }&#xA;&#xA;// Forward the offer on to the expansion region.&#xA;&#xA;// this.getExpansionRegionActivation().receiveOffer();&#xA;*/&#xA;throw &quot;convert to cpp&quot;;&#xA;"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="isReady" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="return false;"/>
+      </eAnnotations>
+    </eOperations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ActionActivation" abstract="true" eSuperTypes="#//ActivityNodeActivation">
     <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
