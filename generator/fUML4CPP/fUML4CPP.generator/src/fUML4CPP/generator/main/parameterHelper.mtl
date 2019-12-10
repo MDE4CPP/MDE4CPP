@@ -19,6 +19,7 @@
 [import UML4CPP::generator::main::helpers::nameHelper /]
 
 [query public getFactoryName(aPackage : Package) : String = aPackage.getPackageName().concat('ExecutionFactory').sanitize().toUpperFirst() /]
+[query public getExpansionRegionActivationName(anExpansionRegion : ExpansionRegion) : String = anExpansionRegion.name.concat('Activiation').sanitize().toUpperFirst() /]
 
 [query public generateOpaqueBehaviorExecutionName(namedElement : NamedElement) : String = namedElement.name.sanitize().toUpperFirst().concat('Execution') /] 
 
@@ -36,6 +37,8 @@
 				aPackage.allOwnedElements()->filter(AddStructuralFeatureValueAction).structuralFeature.type,
 				aPackage.allOwnedElements()->filter(RemoveStructuralFeatureValueAction).structuralFeature.type
 			}->flatten()->reject(oclIsKindOf(Activity))->reject(supportedTypes())->sortedBy(name)/]
+
+[query public getExpansionRegions(aPackage : Package) : Set(ExpansionRegion) = aPackage.allOwnedElements()->filter(ExpansionRegion) /]
 
 [comment]INPUT SWITCH ----------------------------------------------------------[/comment]
 [template public generateInputParameter(par : Parameter, index:Integer)]

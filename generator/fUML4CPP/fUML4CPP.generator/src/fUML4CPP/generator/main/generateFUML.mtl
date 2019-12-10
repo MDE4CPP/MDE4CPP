@@ -14,10 +14,10 @@
  */]
 [module generateFUML('http://www.eclipse.org/uml2/5.0.0/UML')]
     
-[import fUML4CPP::generator::main::generateOpaqueBehaviorExecutionHeader /]
-[import fUML4CPP::generator::main::generateOpaqueBehaviorExecutionSource /]
 [import fUML4CPP::generator::main::generateClassifierObjectHeader /]
 [import fUML4CPP::generator::main::generateClassifierObjectSource /]
+[import fUML4CPP::generator::main::generateExpansionRegionActiviationHeader /]
+[import fUML4CPP::generator::main::generateExpansionRegionActiviationSource /]
 [import fUML4CPP::generator::main::generateModelExecutionFactoryHeader /]
 [import fUML4CPP::generator::main::generateModelExecutionFactorySource /]
 [import fUML4CPP::generator::main::generateModelLocusHeader /]
@@ -25,6 +25,8 @@
 [import fUML4CPP::generator::main::generateExecutionBuildFile /]
 [import fUML4CPP::generator::main::generateMainExecution /]
 [import fUML4CPP::generator::main::generateOpaqueBehaviorExecution /]
+[import fUML4CPP::generator::main::generateOpaqueBehaviorExecutionHeader /]
+[import fUML4CPP::generator::main::generateOpaqueBehaviorExecutionSource /]
 [import fUML4CPP::generator::main::parameterHelper /]
 [import fUML4CPP::generator::main::plugin::generateExecutionPlugin /]
 [import UML4CPP::generator::main::generate /]
@@ -65,9 +67,13 @@
 [aCOA.generateOpaqueBehaviorExecutionSource(aPackage)/]
 [/for]
 
+//generate expansion region execution
+[aPackage.getExpansionRegions().generateExpansionRegionActivationHeader(aPackage)/]
+[aPackage.getExpansionRegions().generateExpansionRegionActivationSource(aPackage)/]
+
 //generate execution classifier
-[getClassiferExecutions().generateClassifierObjectHeader(aPackage)/]
-[getClassiferExecutions().generateClassifierObjectSource(aPackage)/]
+[aPackage.getClassiferExecutions().generateClassifierObjectHeader(aPackage)/]
+[aPackage.getClassiferExecutions().generateClassifierObjectSource(aPackage)/]
 
 [if (not buildLibrary())]
 //generate main
