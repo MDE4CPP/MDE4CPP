@@ -96,7 +96,6 @@ int main()
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "fUML/Executor.hpp"
 #include "fUML/DispatchStrategy.hpp"
-#include "fUML/ExecutionFactory.hpp"
 #include "fUML/FirstChoiceStrategy.hpp"
 #include "fUML/FUMLFactory.hpp"
 #include "fUML/Locus.hpp"
@@ -112,6 +111,7 @@ int main()
 
 
 //include Model locus and package
+#include "[aPackage.getPackageName()/]Exec/impl/[aPackage.getFactoryName()/]Impl.hpp"
 #include "[aPackage.getPackageName()/]Exec/[aPackage.getPackageName().toUpperFirst()/]Locus.hpp"
 #include "[aPackage.getPackageName()/]Exec/impl/[aPackage.getPackageName().toUpperFirst()/]LocusImpl.hpp"
 #include "[aPackage.getPackageName()/]/[aPackage.getPackageName().toUpperFirst().concat('Package')/].hpp"
@@ -153,16 +153,16 @@ int main()
 DEBUG_MESSAGE(std::cout<<"Main function is executing"<<std::endl;)
 std::shared_ptr<fUML::FUMLFactory> fumlFac(fUML::FUMLFactory::eInstance());
 
-
 std::shared_ptr<[locusName/]Impl> locus(new [locusName/]Impl);
 locus->setThisLocusPtr(locus);
 
 std::shared_ptr<fUML::Executor> executor(fumlFac->createExecutor());
 executor->setLocus(locus);
-
-std::shared_ptr<fUML::ExecutionFactory> factory(fumlFac->createExecutionFactory_in_Locus(locus));
-
 locus->setExecutor(executor);
+
+std::shared_ptr<[aPackage.getFactoryName()/]> factory(new [aPackage.getFactoryName()/]Impl());
+factory->setLocus(locus);
+locus->setFactory(factory);
 
 locus->getFactory()->assignStrategy(std::shared_ptr<fUML::FirstChoiceStrategy>(fumlFac->createFirstChoiceStrategy()));
 locus->getFactory()->assignStrategy(std::shared_ptr<fUML::DispatchStrategy>(fumlFac->createDispatchStrategy()));

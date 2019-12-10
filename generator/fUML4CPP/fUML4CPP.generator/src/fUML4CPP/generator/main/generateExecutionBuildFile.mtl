@@ -80,6 +80,7 @@ SET(SOURCE_FILES
 [for (aClassifier : Classifier | getClassiferExecutions()->sortedBy(name))]
 	[aClassifier.name.toUpperFirst()/]Object.cpp
 [/for]
+	impl/[aPackage.name.toUpperFirst()/]ExecutionFactoryImpl.cpp
 	impl/[aPackage.name.toUpperFirst()/]LocusImpl.cpp
 [if (buildLibrary)]
 	[packageName.concat('ExecPlugin.cpp')/]

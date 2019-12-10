@@ -18,6 +18,8 @@
 [import fUML4CPP::generator::main::generateOpaqueBehaviorExecutionSource /]
 [import fUML4CPP::generator::main::generateClassifierObjectHeader /]
 [import fUML4CPP::generator::main::generateClassifierObjectSource /]
+[import fUML4CPP::generator::main::generateModelExecutionFactoryHeader /]
+[import fUML4CPP::generator::main::generateModelExecutionFactorySource /]
 [import fUML4CPP::generator::main::generateModelLocusHeader /]
 [import fUML4CPP::generator::main::generateModelLocusSource /]
 [import fUML4CPP::generator::main::generateExecutionBuildFile /]
@@ -73,6 +75,10 @@
 [else]
 [aPackage.generateExecutionPlugin()/]
 [/if]
+
+//generate model execution factory
+[aPackage.generateModelExecutionFactoryHeader()/]
+[aPackage.generateModelExecutionFactorySource()/]
 
 //generate model locus
 [aPackage.generateModelLocusHeader()/]
