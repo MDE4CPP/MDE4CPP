@@ -96,7 +96,7 @@ int main()
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "fUML/Executor.hpp"
 #include "fUML/DispatchStrategy.hpp"
-#include "fUML/ExecutionFactoryL3.hpp"
+#include "fUML/ExecutionFactory.hpp"
 #include "fUML/FirstChoiceStrategy.hpp"
 #include "fUML/FUMLFactory.hpp"
 #include "fUML/Locus.hpp"
@@ -160,7 +160,7 @@ locus->setThisLocusPtr(locus);
 std::shared_ptr<fUML::Executor> executor(fumlFac->createExecutor());
 executor->setLocus(locus);
 
-std::shared_ptr<fUML::ExecutionFactoryL3> factory(fumlFac->createExecutionFactoryL3_in_Locus(locus));
+std::shared_ptr<fUML::ExecutionFactory> factory(fumlFac->createExecutionFactory_in_Locus(locus));
 
 locus->setExecutor(executor);
 
