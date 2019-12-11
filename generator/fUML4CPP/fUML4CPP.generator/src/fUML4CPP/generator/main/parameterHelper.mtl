@@ -38,7 +38,7 @@
 				aPackage.allOwnedElements()->filter(RemoveStructuralFeatureValueAction).structuralFeature.type
 			}->flatten()->reject(oclIsKindOf(Activity))->reject(supportedTypes())->sortedBy(name)/]
 
-[query public getExpansionRegions(aPackage : Package) : Set(ExpansionRegion) = aPackage.allOwnedElements()->filter(ExpansionRegion) /]
+[query public getExpansionRegions(aPackage : Package) : Set(ExpansionRegion) = Set{} /]
 
 [comment]INPUT SWITCH ----------------------------------------------------------[/comment]
 [template public generateInputParameter(par : Parameter, index:Integer)]
