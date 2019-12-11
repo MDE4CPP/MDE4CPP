@@ -31,6 +31,7 @@
 [query public keyIncludes(any : OclAny) : String = 'includes'/]	[**	indicates a header include specification /]
 [query public keyAggregationKind(any : OclAny) : String = 'AggregationKind'/]	[** indicates a AggregationKind specifiation, values: 'shared' -> indicates a back reference, otherwise -> no action/]
 [query public keyNoBackReference(any : OclAny) : String = 'no_back_reference'/] [** indicates that no back reference for a reference should exists/]
+[query public keyWeakptr(any : OclAny) : String = 'weakptr'/] [** indicates that an operation with upper=1 should return an weak pointer/]
 
 [** indicates, that an operation is only on implementation layer existing (not in header file), 
  * 	values: 'true' -> operation exists only on implementation layer, otherwise -> operation exists also in header file

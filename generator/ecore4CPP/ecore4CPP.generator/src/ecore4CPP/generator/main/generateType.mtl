@@ -51,12 +51,14 @@ std::shared_ptr<[eParameter.eGenericType.generateCppType()/]> [else]
 [eParameter.eGenericType.generateCppType()/] [/if]
 [/template]
 
+[query private getPointerType(anOperation : EOperation) : String = if (anOperation.hasKey(anOperation.keyWeakptr())) then 'std::weak_ptr' else 'std::shared_ptr' endif /]
+
 [template public generateOperationType(eOperation : EOperation) post(trim())]
 [if (not (eOperation.upperBound = 1))]
 [if (not eOperation.eGenericType.oclIsKindOf(EDataType))]
 std::shared_ptr<Bag<[eOperation.eGenericType.generateCppType()/]> >[/if]
 [elseif ((not eOperation.eType.oclIsUndefined()) and ((not eOperation.eType.oclIsKindOf(EDataType)) or (eOperation.eType.name = 'EEList') or (eOperation.eType.name = 'ETreeIterator') ))]
-std::shared_ptr<[eOperation.eGenericType.generateCppType()/]> [else] 
+[eOperation.getPointerType()/]<[eOperation.eGenericType.generateCppType()/]> [else] 
 [eOperation.eGenericType.generateCppType()/] [/if]
 
 [/template]
