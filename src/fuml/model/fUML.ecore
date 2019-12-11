@@ -1990,10 +1990,13 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="next" eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//Integer"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ExpansionNodeActivation" eSuperTypes="#//ObjectNodeActivation">
+    <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+      <details key="includes" value="#include &quot;uml/ExpansionNode.hpp&quot;&#xA;#include &quot;uml/ExpansionRegion.hpp&quot;"/>
+    </eAnnotations>
     <eOperations name="getExpansionRegionActivation" ordered="false" lowerBound="1"
         eType="#//ExpansionRegionActivation">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="body" value="/*&#xA;// Return the expansion region activation corresponding to this&#xA;// expansion node, in the context of the activity node activation group&#xA;// this expansion node activation is in.&#xA;&#xA;ExpansionNode node = (ExpansionNode) (this.node);&#xA;&#xA;ExpansionRegion region = node.regionAsInput;&#xA;if (region == null) {&#xA;&#x9;region = node.regionAsOutput;&#xA;}&#xA;&#xA;return (ExpansionRegionActivation) (this.group&#xA;&#x9;&#x9;.getNodeActivation(region));&#xA;*/&#xA;throw &quot;convert to cpp&quot;;"/>
+        <details key="body" value="std::shared_ptr&lt;uml::ExpansionNode> node = std::dynamic_pointer_cast&lt;uml::ExpansionNode>(m_node);&#xA;&#x9;std::shared_ptr&lt;uml::ExpansionRegion> region = node->getRegionAsInput();&#xA;&#x9;if (region == nullptr)&#xA;&#x9;{&#xA;&#x9;&#x9;region = node->getRegionAsOutput();&#xA;&#x9;}&#xA;&#xA;&#x9;auto group = m_group.lock();&#xA;&#x9;if (group == nullptr)&#xA;&#x9;{&#xA;        DEBUG_MESSAGE(std::cout &lt;&lt; __PRETTY_FUNCTION__ &lt;&lt; &quot;: unknown group&quot; &lt;&lt; std::endl;)&#xA;&#x9;&#x9;throw &quot;unknown group&quot;;&#xA;&#x9;}&#xA;&#xA;&#x9;return std::dynamic_pointer_cast&lt;fUML::ExpansionRegionActivation>(group->getNodeActivation(region));"/>
       </eAnnotations>
     </eOperations>
     <eOperations name="fire" ordered="false" lowerBound="1">
@@ -2004,7 +2007,7 @@
     </eOperations>
     <eOperations name="receiveOffer" ordered="false" lowerBound="1">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="body" value="/*&#xA;//DEBUG_MESSAGE(std::cout&lt;&lt;&quot;[receiveOffer] &quot;&#xA; //&lt;&lt; (this->getNode() == nullptr ? &quot;...&quot; : (&quot;node = &quot; + this->getNode()->getName()))&lt;&lt;std::endl;)&#xA;&#xA;//    _beginIsolation();&#xA;&#xA;//    bool ready = this->isReady();&#xA;&#xA;   // std::shared_ptr&lt;Bag&lt;Token> > tokens;&#xA;//    if (ready) &#xA;   // {&#xA;//        DEBUG_MESSAGE(std::cout&lt;&lt;&quot;[receiveOffer] Firing.&quot;&lt;&lt;std::endl;)&#xA;      //  tokens = this->takeOfferedTokens();&#xA;   // }&#xA;//&#xA;   // _endIsolation();&#xA;//&#xA;//    if (ready) &#xA;//    {&#xA;  //      DEBUG_MESSAGE(std::cout&lt;&lt; &quot;Firing &quot;&lt;&lt;tokens->size()&lt;&lt;&quot; token(s)&quot;&lt;&lt;std::endl;)&#xA;//        this->fire(tokens);&#xA;  //  }&#xA; //   else&#xA;//    {&#xA;//       DEBUG_MESSAGE(std::cout&lt;&lt; &quot;Node&quot;&lt;&lt;(this->getNode() == nullptr ? &quot;...&quot; : &quot;node = &quot; + this->getNode()->getName())&lt;&lt;&quot; is not ready to execute.&quot;&lt;&lt;std::endl;)&#xA;//    }&#xA;&#xA;// Forward the offer on to the expansion region.&#xA;&#xA;// this.getExpansionRegionActivation().receiveOffer();&#xA;*/&#xA;throw &quot;convert to cpp&quot;;&#xA;"/>
+        <details key="body" value="getExpansionRegionActivation()->recieveOffer();"/>
       </eAnnotations>
     </eOperations>
     <eOperations name="isReady" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
