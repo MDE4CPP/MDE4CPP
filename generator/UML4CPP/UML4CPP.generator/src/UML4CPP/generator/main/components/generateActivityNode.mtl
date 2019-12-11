@@ -387,6 +387,12 @@
 [template private initializeActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(ExpansionNode))]
 [let node : ExpansionNode = self.oclAsType(ExpansionNode)]
 	[node.memberName()/]->setType([node.type.generatePackageGetterCall(node)/]);
+[if (not node.regionAsInput.oclIsUndefined())]
+	[node.memberName()/]->setRegionAsInput([node.regionAsInput.memberName()/]);
+[/if]
+[if (not node.regionAsOutput.oclIsUndefined())]
+	[node.memberName()/]->setRegionAsOutput([node.regionAsOutput.memberName()/]);
+[/if]
 [/let]
 [/template]
 
