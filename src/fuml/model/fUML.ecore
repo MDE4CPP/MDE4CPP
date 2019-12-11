@@ -1123,7 +1123,9 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="edgeInstances" ordered="false"
         upperBound="-1" eType="#//ActivityEdgeInstance" containment="true" eOpposite="#//ActivityEdgeInstance/group"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="nodeActivations" ordered="false"
-        upperBound="-1" eType="#//ActivityNodeActivation" containment="true" eOpposite="#//ActivityNodeActivation/group"/>
+        upperBound="-1" eType="#//ActivityNodeActivation" containment="true" eOpposite="#//ActivityNodeActivation/group">
+      <eAnnotations source="union"/>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="activityExecution" eType="#//ActivityExecution"
         eOpposite="#//ActivityExecution/activationGroup"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="containingNodeActivation"
@@ -1842,38 +1844,46 @@
     <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
       <details key="includes" value="#include &quot;uml/ExpansionNode.hpp&quot;"/>
     </eAnnotations>
-    <eOperations name="getActivityExecution2" lowerBound="1" eType="#//ActivityExecution">
+    <eOperations name="getActivityExecution" lowerBound="1" eType="#//ActivityExecution">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="body" value="/*&#xA;// Get the activity execution that contains the expansion region&#xA;// activation for this activation group.&#xA;&#xA;return this.regionActivation.getActivityExecution();&#xA;*/&#xA;&#xA;throw &quot;convert to cpp&quot;;"/>
+        <details key="body" value="return m_regionActivation->getActivityExecution();"/>
+        <details key="const" value="1"/>
+        <details key="weakptr" value="1"/>
       </eAnnotations>
     </eOperations>
     <eOperations name="getNodeActivation" ordered="false" lowerBound="1" eType="#//ActivityNodeActivation">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="body" value="/*&#xA;// If the given node is an input pin of the expansion region, then&#xA;// return the corresponding region-input output-pin activation.&#xA;// If the given node is an input expansion node of the expansion region,&#xA;// then return the corresponding group-input output-pin activation.&#xA;// If the given node is an output expansion node of the expansion&#xA;// region, then return the corresponding group-output output-pin&#xA;// activation.&#xA;// Otherwise return the node activation from the activation group, as&#xA;// usual.&#xA;&#xA;ExpansionRegion region = (ExpansionRegion) (this.regionActivation.node);&#xA;&#xA;InputPinList inputs = region.input;&#xA;ActivityNodeActivation activation = null;&#xA;&#xA;int i = 1;&#xA;while (activation == null &amp;amp; i &amp;lt;= region.input.size()) {&#xA;&#x9;if (node == region.input.getValue(i - 1)) {&#xA;&#x9;&#x9;activation = this.regionInputs.getValue(i - 1);&#xA;&#x9;}&#xA;&#x9;i = i + 1;&#xA;}&#xA;&#xA;int j = 1;&#xA;while (activation == null &amp;amp; j &amp;lt;= region.inputElement.size()) {&#xA;&#x9;if (node == region.inputElement.getValue(j - 1)) {&#xA;&#x9;&#x9;activation = this.groupInputs.getValue(j - 1);&#xA;&#x9;}&#xA;&#x9;j = j + 1;&#xA;}&#xA;&#xA;int k = 1;&#xA;while (activation == null &amp;amp; k &amp;lt;= region.outputElement.size()) {&#xA;&#x9;if (node == region.outputElement.getValue(k - 1)) {&#xA;&#x9;&#x9;activation = this.groupOutputs.getValue(k - 1);&#xA;&#x9;}&#xA;&#x9;k = k + 1;&#xA;}&#xA;&#xA;if (activation == null) {&#xA;&#x9;activation = super.getNodeActivation(node);&#xA;}&#xA;&#xA;return activation;&#xA;*/&#xA;&#xA;std::shared_ptr&lt;ActivityNodeActivation> activation = nullptr;&#xA;&#x9;Bag&lt;fUML::ActivityNodeActivation>::iterator iter = m_nodeActivations->begin();&#xA;&#x9;Bag&lt;fUML::ActivityNodeActivation>::iterator end = m_nodeActivations->end();&#xA;&#xA;&#x9;while ((!activation) and (iter != end))&#xA;&#x9;{&#xA;       &#x9;activation =(*iter)->getNodeActivation(node);&#xA;       &#x9;iter++;&#xA;&#x9;}&#xA;&#xA;&#x9;return activation;"/>
+        <details key="body" value="std::shared_ptr&lt;ActivityNodeActivation> activation = nullptr;&#xA;&#x9;Bag&lt;fUML::ActivityNodeActivation>::iterator iter = m_nodeActivations->begin();&#xA;&#x9;Bag&lt;fUML::ActivityNodeActivation>::iterator end = m_nodeActivations->end();&#xA;&#xA;&#x9;while ((!activation) and (iter != end))&#xA;&#x9;{&#xA;       &#x9;activation =(*iter)->getNodeActivation(node);&#xA;       &#x9;iter++;&#xA;&#x9;}&#xA;&#xA;&#x9;return activation;"/>
       </eAnnotations>
       <eParameters name="node" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//ActivityNode"/>
     </eOperations>
     <eOperations name="resume">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="body" value="/*&#xA;// Resume the given activation in this activation group. If this is the&#xA;// last suspended activation, then resume the associated region&#xA;// activation.&#xA;&#xA;super.resume(activation);&#xA;if (!this.isSuspended()) {&#xA;&#x9;this.regionActivation.resume(this);&#xA;}&#xA;*/&#xA;&#xA;throw &quot;convert to cpp&quot;;"/>
+        <details key="body" value="ActivityNodeActivationGroupImpl::resume(activation);&#xA;&#x9;if (isSuspended())&#xA;&#x9;{&#xA;&#x9;&#x9;m_regionActivation->resume(getThisExpansionActivationGroupPtr());&#xA;&#x9;}"/>
       </eAnnotations>
-      <eParameters name="activationGroup" eType="#//ExpansionActivationGroup"/>
+      <eParameters name="activation" eType="#//ActivityNodeActivation"/>
     </eOperations>
     <eOperations name="suspend">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="body" value="/*&#xA;// Suspend the given activation in this activation group. If this is&#xA;// the only suspended activation, then suspend the associated region&#xA;// activation.&#xA;&#xA;if (!this.isSuspended()) {&#xA;&#x9;this.regionActivation.suspend();&#xA;}&#xA;super.suspend(activation);&#xA;*/&#xA;&#xA;throw &quot;convert to cpp&quot;;"/>
+        <details key="body" value="if (!isSuspended())&#xA;&#x9;{&#xA;&#x9;&#x9;m_regionActivation->suspend();&#xA;&#x9;}&#xA;&#x9;ActivityNodeActivationGroupImpl::suspend(activation);"/>
       </eAnnotations>
-      <eParameters name="activationGroup" eType="#//ExpansionActivationGroup"/>
+      <eParameters name="activation" eType="#//ActivityNodeActivation"/>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="groupInputs" upperBound="-1"
-        eType="#//OutputPinActivation"/>
+        eType="#//InputPinActivation">
+      <eAnnotations source="subsets" references="#//ActivityNodeActivationGroup/nodeActivations"/>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="groupOutputs" upperBound="-1"
-        eType="#//OutputPinActivation"/>
+        eType="#//OutputPinActivation">
+      <eAnnotations source="subsets" references="#//ActivityNodeActivationGroup/nodeActivations"/>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="index" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//Integer"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="regionActivation" ordered="false"
         lowerBound="1" eType="#//ExpansionRegionActivation"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="regionInputs" upperBound="-1"
-        eType="#//OutputPinActivation"/>
+        eType="#//InputPinActivation">
+      <eAnnotations source="subsets" references="#//ActivityNodeActivationGroup/nodeActivations"/>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ExpansionRegionActivation" eSuperTypes="#//ActionActivation">
     <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
