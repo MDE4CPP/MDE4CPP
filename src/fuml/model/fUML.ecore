@@ -1870,7 +1870,7 @@
       <eParameters name="activation" eType="#//ActivityNodeActivation"/>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="groupInputs" upperBound="-1"
-        eType="#//InputPinActivation">
+        eType="#//OutputPinActivation">
       <eAnnotations source="subsets" references="#//ActivityNodeActivationGroup/nodeActivations"/>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="groupOutputs" upperBound="-1"
@@ -1881,7 +1881,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="regionActivation" ordered="false"
         lowerBound="1" eType="#//ExpansionRegionActivation"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="regionInputs" upperBound="-1"
-        eType="#//InputPinActivation">
+        eType="#//OutputPinActivation">
       <eAnnotations source="subsets" references="#//ActivityNodeActivationGroup/nodeActivations"/>
     </eStructuralFeatures>
   </eClassifiers>
@@ -1945,23 +1945,23 @@
     </eOperations>
     <eOperations name="runGroup" ordered="false" lowerBound="1">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="body" value="/*&#xA;// Set up the inputs for the group with the given index, run the group&#xA;// and then fire the group outputs.&#xA;&#xA;if (this.isRunning()) {&#xA;&#x9;TokenSetList inputTokens = this.inputTokens;&#xA;&#x9;for (int j = 0; j &amp;lt; inputTokens.size(); j++) {&#xA;&#x9;&#x9;TokenSet tokenSet = inputTokens.getValue(j);&#xA;&#x9;&#x9;OutputPinActivation regionInput = activationGroup.regionInputs&#xA;&#x9;&#x9;&#x9;&#x9;.getValue(j);&#xA;&#x9;&#x9;regionInput.clearTokens();&#xA;&#x9;&#x9;regionInput.addTokens(tokenSet.tokens);&#xA;&#x9;&#x9;regionInput.sendUnofferedTokens();&#xA;&#x9;}&#xA;&#xA;&#x9;TokenSetList inputExpansionTokens = this.inputExpansionTokens;&#xA;&#x9;for (int j = 0; j &amp;lt; inputExpansionTokens.size(); j++) {&#xA;&#x9;&#x9;TokenSet tokenSet = inputExpansionTokens.getValue(j);&#xA;&#x9;&#x9;OutputPinActivation groupInput = activationGroup.groupInputs&#xA;&#x9;&#x9;&#x9;&#x9;.getValue(j);&#xA;&#x9;&#x9;groupInput.clearTokens();&#xA;&#x9;&#x9;if (tokenSet.tokens.size() &amp;gt;= activationGroup.index) {&#xA;&#x9;&#x9;&#x9;groupInput.addToken(tokenSet.tokens&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;.getValue(activationGroup.index - 1));&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;groupInput.sendUnofferedTokens();&#xA;&#x9;}&#xA;&#xA;&#x9;activationGroup.run(activationGroup.nodeActivations);&#xA;&#xA;&#x9;this.terminateGroup(activationGroup);&#xA;}&#xA;&#xA;*/&#xA;&#xA;throw &quot;convert to cpp&quot;;"/>
+        <details key="body" value="if (isRunning())&#xA;&#x9;{&#xA;&#x9;&#x9;unsigned int size = m_inputTokens->size();&#xA;&#x9;&#x9;for (unsigned int i=0; i&lt;size; i++)&#xA;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;std::shared_ptr&lt;TokenSet> tokenSet = m_inputTokens->at(i);&#xA;&#x9;&#x9;&#x9;std::shared_ptr&lt;OutputPinActivation> regionInput = activationGroup->getRegionInputs()->at(i);&#xA;&#x9;&#x9;&#x9;regionInput->clearTokens();&#xA;&#x9;&#x9;&#x9;regionInput->addTokens(tokenSet->getTokens());&#xA;&#x9;&#x9;&#x9;regionInput->sendUnofferedTokens();&#xA;&#x9;&#x9;}&#xA;&#xA;&#x9;&#x9;size = m_inputExpansionTokens->size();&#xA;&#x9;&#x9;for (unsigned int i=0; i&lt;size; i++)&#xA;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;std::shared_ptr&lt;TokenSet> tokenSet = m_inputExpansionTokens->at(i);&#xA;&#x9;&#x9;&#x9;std::shared_ptr&lt;OutputPinActivation> groupInput = activationGroup->getGroupInputs()->at(i);&#xA;&#x9;&#x9;&#x9;groupInput->clearTokens();&#xA;&#x9;&#x9;&#x9;groupInput->addTokens(tokenSet->getTokens());&#xA;&#x9;&#x9;&#x9;groupInput->sendUnofferedTokens();&#xA;&#x9;&#x9;&#x9;unsigned int index = activationGroup->getIndex();&#xA;&#x9;&#x9;&#x9;if (tokenSet->getTokens()->size() > index)&#xA;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;groupInput->addToken(tokenSet->getTokens()->at(index-1));&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;groupInput->sendUnofferedTokens();&#xA;&#x9;&#x9;}&#xA;&#xA;&#x9;&#x9;activationGroup->run(activationGroup->getNodeActivations());&#xA;&#xA;&#x9;&#x9;terminateGroup(activationGroup);&#xA;&#x9;}"/>
       </eAnnotations>
       <eParameters name="activationGroup" ordered="false" lowerBound="1" eType="#//ExpansionActivationGroup"/>
     </eOperations>
     <eOperations name="runIterative">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="body" value="/*&#xA;// Run the body of the region iteratively, either until all activation&#xA;// groups have run or until the region is suspended.&#xA;&#xA;ExpansionActivationGroupList activationGroups = this.activationGroups;&#xA;&#xA;while (this.next &amp;lt;= activationGroups.size() &amp;amp; !this.isSuspended()) {&#xA;&#x9;ExpansionActivationGroup activationGroup = activationGroups&#xA;&#x9;&#x9;&#x9;.getValue(this.next - 1);&#xA;&#x9;this.runGroup(activationGroup);&#xA;&#x9;this.next = this.next + 1;&#xA;}&#xA;&#xA;*/&#xA;&#xA;throw &quot;convert to cpp&quot;;"/>
+        <details key="body" value="int size = m_activationGroups->size();&#xA;&#x9;while (m_next &lt; size and !isSuspended())&#xA;&#x9;{&#xA;&#x9;&#x9;std::shared_ptr&lt;ExpansionActivationGroup> activationGroup = m_activationGroups->at(m_next);&#xA;&#x9;&#x9;runGroup(activationGroup);&#xA;&#x9;&#x9;m_next++;&#xA;&#x9;}"/>
       </eAnnotations>
     </eOperations>
     <eOperations name="runParallel">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="body" value="/*&#xA;// Run the body of the region concurrently.&#xA;&#xA;ExpansionActivationGroupList activationGroups = this.activationGroups;&#xA;&#xA;// *** Activate all groups concurrently. ***&#xA;for (Iterator i = activationGroups.iterator(); i.hasNext();) {&#xA;&#x9;ExpansionActivationGroup activationGroup = (ExpansionActivationGroup) i&#xA;&#x9;&#x9;&#x9;.next();&#xA;&#x9;this.runGroup(activationGroup);&#xA;}&#xA;*/&#xA;&#xA;throw &quot;convert to cpp&quot;;"/>
+        <details key="body" value="Bag&lt;ExpansionActivationGroup>::iterator iter = m_activationGroups->begin();&#xA;&#x9;Bag&lt;ExpansionActivationGroup>::iterator end = m_activationGroups->end();&#xA;&#x9;while (iter != end)&#xA;&#x9;{&#xA;&#x9;&#x9;runGroup(*iter);&#xA;&#x9;&#x9;iter++;&#xA;&#x9;}"/>
       </eAnnotations>
     </eOperations>
     <eOperations name="sendOffers">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="body" value="/*&#xA;// Fire all output expansion nodes and send offers on all outgoing&#xA;// control flows.&#xA;&#xA;ExpansionRegion region = (ExpansionRegion) (this.node);&#xA;&#xA;// *** Send offers from all output expansion nodes concurrently. ***&#xA;ExpansionNodeList outputElements = region.outputElement;&#xA;for (Iterator i = outputElements.iterator(); i.hasNext();) {&#xA;&#x9;ExpansionNode outputElement = (ExpansionNode) i.next();&#xA;&#x9;this.getExpansionNodeActivation(outputElement)&#xA;&#x9;&#x9;&#x9;.sendUnofferedTokens();&#xA;}&#xA;&#xA;// Send offers on all outgoing control flows.&#xA;super.sendOffers();&#xA;&#xA;*/&#xA;&#xA;throw &quot;convert to cpp&quot;;"/>
+        <details key="body" value="std::shared_ptr&lt;uml::ExpansionRegion> region = std::dynamic_pointer_cast&lt;uml::ExpansionRegion>(m_node);&#xA;&#x9;std::shared_ptr&lt;Bag&lt;uml::ExpansionNode>> outputElement = region->getOutputElement();&#xA;&#xA;&#x9;Bag&lt;uml::ExpansionNode>::iterator iter = outputElement->begin();&#xA;&#x9;Bag&lt;uml::ExpansionNode>::iterator end = outputElement->end();&#xA;&#xA;&#x9;while (iter != end)&#xA;&#x9;{&#xA;&#x9;&#x9;std::shared_ptr&lt;fUML::ExpansionNodeActivation> activation = getExpansionNodeActivation(*iter);&#xA;&#x9;&#x9;if (activation == nullptr)&#xA;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;DEBUG_MESSAGE(std::cout &lt;&lt; __PRETTY_FUNCTION__ &lt;&lt; &quot;: unknown activation&quot; &lt;&lt; std::endl;)&#xA;&#x9;&#x9;&#x9;throw &quot;unknown group&quot;;&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;activation->sendUnofferedTokens();&#xA;&#x9;}&#xA;&#xA;&#x9;sendOffers();"/>
       </eAnnotations>
     </eOperations>
     <eOperations name="takeOfferedTokens" ordered="false" upperBound="-1" eType="#//Token">
