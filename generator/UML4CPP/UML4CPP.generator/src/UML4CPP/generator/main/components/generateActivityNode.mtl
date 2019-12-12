@@ -404,6 +404,7 @@
 */]
 [template private initializeActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(ExpansionRegion))]
 [let region : ExpansionRegion = self.oclAsType(ExpansionRegion)]
+	[region.memberName()/]->setMode(uml::ExpansionKind::[region.mode.toString().toUpperCase()/]);
 [for (input : ExpansionNode | region.inputElement)]
 	[region.memberName()/]->getInputElement()->push_back([input.memberName()/]);
 [/for]
