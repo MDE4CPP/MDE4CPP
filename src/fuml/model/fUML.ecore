@@ -1889,16 +1889,6 @@
     <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
       <details key="includes" value="#include &quot;fUML/FUMLFactory.hpp&quot;&#xA;#include &quot;fUML/ObjectToken.hpp&quot;&#xA;#include &quot;uml/Action.hpp&quot;&#xA;#include &quot;uml/ActivityNode.hpp&quot;&#xA;#include &quot;uml/ExpansionRegion.hpp&quot;&#xA;#include &quot;uml/InputPin.hpp&quot;&#xA;#include &quot;uml/OutputPin.hpp&quot;"/>
     </eAnnotations>
-    <eOperations name="createNodeActivations" ordered="false" lowerBound="1">
-      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="body" value="ActionActivationImpl::createNodeActivations();&#xA;&#xA;&#x9;std::shared_ptr&lt;fUML::ExpansionActivationGroup> activationGroup = std::shared_ptr&lt;fUML::ExpansionActivationGroup>(fUML::FUMLFactory::eInstance()->createExpansionActivationGroup());&#xA;&#x9;if (activationGroup == nullptr)&#xA;&#x9;{&#xA;&#x9;&#x9;return;&#xA;&#x9;}&#xA;&#x9;this->getActivationGroups()->push_back(activationGroup);&#xA;&#x9;activationGroup->setRegionActivation(getThisExpansionRegionActivationPtr());&#xA;&#xA;&#x9;std::shared_ptr&lt;uml::ExpansionRegion> expansionRegion = std::dynamic_pointer_cast&lt;uml::ExpansionRegion> (this->getNode());&#xA;&#x9;std::shared_ptr&lt;Bag&lt;uml::ActivityNode> > nodes = expansionRegion->getNode();&#xA;&#x9;activationGroup->createNodeActivations(nodes);"/>
-      </eAnnotations>
-    </eOperations>
-    <eOperations name="createEdgeInstances" ordered="false" lowerBound="1">
-      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="body" value="std::shared_ptr&lt;Bag&lt;uml::ActivityEdge> > edges = (std::dynamic_pointer_cast&lt;uml::StructuredActivityNode> (this->getNode()))->getEdge();&#xA;&#x9;this->getActivationGroups()->front()->createEdgeInstance(edges);"/>
-      </eAnnotations>
-    </eOperations>
     <eOperations name="doAction">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
         <details key="body" value="std::shared_ptr&lt;uml::StructuredActivityNode> node = std::dynamic_pointer_cast&lt;uml::StructuredActivityNode>(m_node);&#xA;&#x9;if (node->getMustIsolate())&#xA;&#x9;{&#xA;&#x9;&#x9;_beginIsolation();&#xA;&#x9;&#x9;doStructuredActivity();&#xA;&#x9;&#x9;_endIsolation();&#xA;&#x9;}&#xA;&#x9;else&#xA;&#x9;{&#xA;&#x9;&#x9;doStructuredActivity();&#xA;&#x9;}"/>
@@ -1917,15 +1907,9 @@
     <eOperations name="getExpansionNodeActivation" ordered="false" lowerBound="1"
         eType="#//ExpansionNodeActivation">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="body" value="std::shared_ptr&lt;fUML::ActivityNodeActivation> nodeActivation = this->getNodeActivation(node);&#xA;&#x9;return std::dynamic_pointer_cast&lt;fUML::ExpansionNodeActivation>(nodeActivation);"/>
+        <details key="body" value="auto group = m_group.lock();&#xA;&#x9;if (group != nullptr)&#xA;&#x9;{&#xA;&#x9;&#x9;std::shared_ptr&lt;fUML::ActivityNodeActivation> nodeActivation = group->getNodeActivation(node);&#xA;&#x9;&#x9;return std::dynamic_pointer_cast&lt;fUML::ExpansionNodeActivation>(nodeActivation);&#xA;&#x9;}&#xA;&#x9;return nullptr;"/>
       </eAnnotations>
       <eParameters name="node" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//ExpansionNode"/>
-    </eOperations>
-    <eOperations name="getNodeActivation" ordered="false" lowerBound="1" eType="#//ActivityNodeActivation">
-      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="body" value="std::shared_ptr&lt;ActivityNodeActivation> activation = ActionActivationImpl::getNodeActivation(node);&#xA;    if (activation == nullptr)&#xA;    {&#xA;    &#x9;Bag&lt;fUML::ExpansionActivationGroup>::iterator iter = m_activationGroups->begin();&#xA;    &#x9;Bag&lt;fUML::ExpansionActivationGroup>::iterator end = m_activationGroups->end();&#xA;&#xA;    &#x9;while (!activation and (iter != end))&#xA;    &#x9;{&#xA;    &#x9;&#x9;activation = (*iter)->getNodeActivation(node);&#xA;    &#x9;&#x9;iter++;&#xA;    &#x9;}&#xA;    }&#xA;&#xA;    return activation;"/>
-      </eAnnotations>
-      <eParameters name="node" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//ActivityNode"/>
     </eOperations>
     <eOperations name="isSuspended" eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//Boolean">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
