@@ -1853,7 +1853,7 @@
     </eOperations>
     <eOperations name="getNodeActivation" ordered="false" lowerBound="1" eType="#//ActivityNodeActivation">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="body" value="std::shared_ptr&lt;ActivityNodeActivation> activation = nullptr;&#xA;&#x9;Bag&lt;fUML::ActivityNodeActivation>::iterator iter = m_nodeActivations->begin();&#xA;&#x9;Bag&lt;fUML::ActivityNodeActivation>::iterator end = m_nodeActivations->end();&#xA;&#xA;&#x9;while ((!activation) and (iter != end))&#xA;&#x9;{&#xA;       &#x9;activation =(*iter)->getNodeActivation(node);&#xA;       &#x9;iter++;&#xA;&#x9;}&#xA;&#xA;&#x9;return activation;"/>
+        <details key="body" value="std::shared_ptr&lt;ActivityNodeActivation> activation = nullptr;&#xA;&#x9;Bag&lt;fUML::OutputPinActivation>::iterator iter = m_regionInputs->begin();&#xA;&#x9;Bag&lt;fUML::OutputPinActivation>::iterator end = m_regionInputs->end();&#xA;&#x9;while ((!activation) and (iter != end))&#xA;&#x9;{&#xA;       &#x9;activation =(*iter)->getNodeActivation(node);&#xA;       &#x9;iter++;&#xA;&#x9;}&#xA;&#xA;&#x9;iter = m_groupInputs->begin();&#xA;&#x9;end = m_groupInputs->end();&#xA;&#x9;while ((!activation) and (iter != end))&#xA;&#x9;{&#xA;&#x9;&#x9;activation =(*iter)->getNodeActivation(node);&#xA;&#x9;&#x9;iter++;&#xA;&#x9;}&#xA;&#xA;&#x9;iter = m_groupOutputs->begin();&#xA;&#x9;end = m_groupOutputs->end();&#xA;&#x9;while ((!activation) and (iter != end))&#xA;&#x9;{&#xA;&#x9;&#x9;activation =(*iter)->getNodeActivation(node);&#xA;&#x9;&#x9;iter++;&#xA;&#x9;}&#xA;&#xA;&#x9;if (activation == nullptr)&#xA;&#x9;{&#xA;&#x9;&#x9;return ActivityNodeActivationGroupImpl::getNodeActivation(node);&#xA;&#x9;}&#xA;&#xA;&#x9;return activation;"/>
       </eAnnotations>
       <eParameters name="node" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//ActivityNode"/>
     </eOperations>
@@ -1870,20 +1870,14 @@
       <eParameters name="activation" eType="#//ActivityNodeActivation"/>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="groupInputs" upperBound="-1"
-        eType="#//OutputPinActivation">
-      <eAnnotations source="subsets" references="#//ActivityNodeActivationGroup/nodeActivations"/>
-    </eStructuralFeatures>
+        eType="#//OutputPinActivation"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="groupOutputs" upperBound="-1"
-        eType="#//OutputPinActivation">
-      <eAnnotations source="subsets" references="#//ActivityNodeActivationGroup/nodeActivations"/>
-    </eStructuralFeatures>
+        eType="#//OutputPinActivation"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="index" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//Integer"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="regionActivation" ordered="false"
         lowerBound="1" eType="#//ExpansionRegionActivation"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="regionInputs" upperBound="-1"
-        eType="#//OutputPinActivation">
-      <eAnnotations source="subsets" references="#//ActivityNodeActivationGroup/nodeActivations"/>
-    </eStructuralFeatures>
+        eType="#//OutputPinActivation"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ExpansionRegionActivation" eSuperTypes="#//ActionActivation">
     <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
