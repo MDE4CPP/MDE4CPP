@@ -163,7 +163,7 @@ void [className/]::removeValue(std::shared_ptr<uml::StructuralFeature> feature, 
 				std::shared_ptr<Bag<[aProperty.type.generateCppType(true)/]>> valueList = m_umlValue->[aProperty.getterName()/];
 				Bag<int>::iterator iter = valueList->begin();
 				Bag<int>::iterator end = valueList->end();
-				whie (iter != end)
+				while (iter != end)
 				{
 					if (specificValue == *iter)
 					{

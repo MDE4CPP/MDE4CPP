@@ -200,12 +200,40 @@ assert(target != nullptr);
 
 [for ( par : Parameter | aParameterList->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in))->sortedBy(name))]
 [par.generateInputParameter(aParameterList->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in))->sortedBy(name)->indexOf(par)-1)/]
-
-[if (not par.type.supportedTypes())]
-[par.name/] = std::dynamic_pointer_cast<[par.type.name/]Object>([par.name/]Value->getReferent())->getUmlValue[if(not (par.upper = 1))]s[/if]();
-if([par.name/] != nullptr)
+[if (par.upper = 1)]
+	[if (not par.type.supportedTypes())]
+	std::shared_ptr<fUML::Reference> [par.name/]Value = std::dynamic_pointer_cast<fUML::Reference>([par.name/]ValueList->front());
+	[par.name/] = std::dynamic_pointer_cast<[par.type.name/]Object>([par.name/]Value->getReferent())->getUmlValue();
+	if([par.name/] == nullptr)
+	{
+		DEBUG_MESSAGE(std::cout << "received instance of type [par.type.generateCppType(true)/] is null" << std::endl;);
+	}
+	[else]
+	std::shared_ptr<fUML::[par.type.name.toUpperFirst()/]Value> [par.name/]Value = std::dynamic_pointer_cast<fUML::[par.type.name.toUpperFirst()/]Value>([par.name/]ValueList->front());
+	[par.name/] = [par.name/]Value->getValue();
+	[/if]
+[else]
+Bag<fUML::Value>::iterator [par.name.toLowerFirst()/]Iter = [par.name.toLowerFirst()/]ValueList->begin();
+Bag<fUML::Value>::iterator [par.name.toLowerFirst()/]End = [par.name.toLowerFirst()/]ValueList->end();
+while ([par.name.toLowerFirst()/]Iter != [par.name.toLowerFirst()/]End)
 {
-	DEBUG_MESSAGE(std::cout << "received instance of type [par.type.generateCppType(true)/] is null" << std::endl;);
+	[if (not par.type.supportedTypes())]
+	std::shared_ptr<fUML::Reference> [par.name/]Value = std::dynamic_pointer_cast<fUML::Reference>(*[par.name.toLowerFirst()/]Iter);
+	[par.type.generateCppType(false)/] [par.name/]Temp = std::dynamic_pointer_cast<[par.type.name/]Object>([par.name/]Value->getReferent())->getUmlValue();
+	if([par.name/]Temp == nullptr)
+	{
+		DEBUG_MESSAGE(std::cout << "received instance of type [par.type.generateCppType(true)/] is null" << std::endl;);
+	}
+	else
+	{
+		[par.name/]->push_back([par.name/]Temp);
+	}
+	[else]
+	std::cerr << __PRETTY_FUNCTION__ << ": generation of supported types with upper > 0 is missing" << std::endl;
+	throw "ERROR" << std::endl;
+	[/if]
+
+	[par.name.toLowerFirst()/]Iter++;
 }
 [else]
 [par.name/] = [par.name/]Value->getValue();
@@ -222,7 +250,14 @@ if([par.name/] != nullptr)
 [par.name/]UmlLinker->setLocus(this->getLocus());
 [par.name/]Value->setReferent([par.name/]UmlLinker);
 [else]
-[par.name/]Value->setValue([par.name/]);
+Bag<B>::iterator [par.name.toLowerFirst()/]Iter = [par.name.toLowerFirst()/]->begin();
+Bag<B>::iterator [par.name.toLowerFirst()/]End = [par.name.toLowerFirst()/]->end();
+while ([par.name.toLowerFirst()/]Iter != [par.name.toLowerFirst()/]End)
+{
+	[par.type.generateCppType(false)/] [par.name.toLowerFirst()/]Temp = *[par.name.toLowerFirst()/]Iter;
+	[par.generateValue(aParameterList, par.name.concat('Temp'))/]
+	[par.name.toLowerFirst()/]Iter++;
+}
 [/if]
 outputParameters->at([aParameterList->select((direction = ParameterDirectionKind::_out) or (direction = ParameterDirectionKind::return))->sortedBy(name)->indexOf(par)-1/])->getValues()->push_back([par.name/]Value);
 [/for]

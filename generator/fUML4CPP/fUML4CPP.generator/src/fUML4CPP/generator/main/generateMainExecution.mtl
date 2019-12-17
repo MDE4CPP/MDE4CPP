@@ -198,8 +198,15 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> [par.name/]P(fu
 [if(par.type.supportedTypes())]
 [par.name/]Value->setValue([par.name.toLowerFirst()/]);
 [else]
-[par.name/]UmlLinker->setLocus(locus);
-[par.name/]Value->setReferent([par.name/]UmlLinker);
+
+Bag<B>::iterator [par.name.toLowerFirst()/]Iter = [par.name.toLowerFirst()/]List->begin();
+Bag<B>::iterator [par.name.toLowerFirst()/]End = [par.name.toLowerFirst()/]List->end();
+while ([par.name.toLowerFirst()/]Iter != [par.name.toLowerFirst()/]End)
+{
+	[par.type.generateCppType(false)/] [par.name.toLowerFirst()/][if (par.upper <> 1)]Temp[/if] = *[par.name.toLowerFirst()/]Iter;
+	[par.generateValue()/]
+	[par.name.toLowerFirst()/]Iter++;
+}
 [/if]
 [par.name/]P->getValues()->push_back([par.name/]Value);
 pList->push_back([par.name/]P);
