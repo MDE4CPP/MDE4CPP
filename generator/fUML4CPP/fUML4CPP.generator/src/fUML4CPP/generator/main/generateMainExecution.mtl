@@ -12,6 +12,7 @@
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */]
+[**FERTIG*/]
 [module generateMainExecution('http://www.eclipse.org/uml2/5.0.0/UML')]
 
 [import fUML4CPP::generator::main::generateOpaqueBehaviorExecution /]
@@ -94,14 +95,13 @@ int main()
 
 [template public generateMainIncludes(aPackage : Package)]
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "fUML/Executor.hpp"
-#include "fUML/DispatchStrategy.hpp"
-#include "fUML/ExecutionFactory.hpp"
-#include "fUML/FirstChoiceStrategy.hpp"
+#include "fUML/Semantics/Loci/Executor.hpp"
+#include "fUML/Semantics/StructuredClassifiers/DispatchStrategy.hpp"
+#include "fUML/Semantics/Loci/FirstChoiceStrategy.hpp"
 #include "fUML/FUMLFactory.hpp"
-#include "fUML/Locus.hpp"
-#include "fUML/ParameterValue.hpp"
-#include "fUML/Value.hpp"
+#include "fUML/Semantics/Loci/Locus.hpp"
+#include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
+#include "fUML/Semantics/Values/Value.hpp"
 #include "uml/Activity.hpp"
 #include "uml/FunctionBehavior.hpp"
 #include "uml/Interface.hpp"
@@ -112,6 +112,7 @@ int main()
 
 
 //include Model locus and package
+#include "[aPackage.getPackageName()/]Exec/impl/[aPackage.getFactoryName()/]Impl.hpp"
 #include "[aPackage.getPackageName()/]Exec/[aPackage.getPackageName().toUpperFirst()/]Locus.hpp"
 #include "[aPackage.getPackageName()/]Exec/impl/[aPackage.getPackageName().toUpperFirst()/]LocusImpl.hpp"
 #include "[aPackage.getPackageName()/]/[aPackage.getPackageName().toUpperFirst().concat('Package')/].hpp"
@@ -139,7 +140,7 @@ int main()
 [/template]
 
 [template public generateActivityRelatedIncludes(anActivity : Activity, aPackage : Package)]
-#include "fUML/Reference.hpp"
+#include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
 #include "[aPackage.getPackageName()/]/[aPackage.getPackageName().toUpperFirst()/]Factory.hpp"
 #include "[aPackage.getPackageName()/]/[aPackage.getPackageName().toUpperFirst()/]Package.hpp"
 
@@ -156,15 +157,16 @@ std::shared_ptr<fUML::FUMLFactory> fumlFac(fUML::FUMLFactory::eInstance());
 std::shared_ptr<[locusName/]Impl> locus(new [locusName/]Impl);
 locus->setThisLocusPtr(locus);
 
-std::shared_ptr<fUML::Executor> executor(fumlFac->createExecutor());
+std::shared_ptr<fUML::Semantics::Loci::Executor> executor(fumlFac->createExecutor());
 executor->setLocus(locus);
 locus->setExecutor(executor);
 
-std::shared_ptr<fUML::ExecutionFactory> factory(fumlFac->createExecutionFactory_in_Locus(locus));
-locus->setExecutor(executor);
+std::shared_ptr<[aPackage.getFactoryName()/]> factory(new [aPackage.getFactoryName()/]Impl());
+factory->setLocus(locus);
+locus->setFactory(factory);
 
-locus->getFactory()->assignStrategy(std::shared_ptr<fUML::FirstChoiceStrategy>(fumlFac->createFirstChoiceStrategy()));
-locus->getFactory()->assignStrategy(std::shared_ptr<fUML::DispatchStrategy>(fumlFac->createDispatchStrategy()));
+locus->getFactory()->assignStrategy(std::shared_ptr<fUML::Semantics::Loci::FirstChoiceStrategy>(fumlFac->createFirstChoiceStrategy()));
+locus->getFactory()->assignStrategy(std::shared_ptr<fUML::Semantics::StructuredClassifiers::DispatchStrategy>(fumlFac->createDispatchStrategy()));
 [/template]
 
 [template public generateParameterInstances(anActivity : Activity, aPackage : Package)]
@@ -187,14 +189,16 @@ locus->getFactory()->assignStrategy(std::shared_ptr<fUML::DispatchStrategy>(fuml
 [aPackage.getCallOperationActions()->sortedBy(myQualifiedName()).generateCallOperationActionCreation()/]
 [/if]
 
-std::shared_ptr<Bag<fUML::ParameterValue> > pList(new Bag<fUML::ParameterValue>());
+std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > pList(new Bag<fUML::Semantics::CommonBehavior::ParameterValue>());
 [for (par : Parameter | anActivity.ownedParameter->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in))->sortedBy(name))]
 //INput parameter [par.name/] 
-std::shared_ptr<fUML::ParameterValue> [par.name/]P(fumlFac->createParameterValue());
+std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> [par.name/]P(fumlFac->createParameterValue());
 [par.name/]P->setParameter([par.generatePackageGetterCall()/]);
-[if (par.upper = 1)]
-[par.generateValue()/]
+[par.generateOutputParameter()/]
+[if(par.type.supportedTypes())]
+[par.name/]Value->setValue([par.name.toLowerFirst()/]);
 [else]
+
 Bag<B>::iterator [par.name.toLowerFirst()/]Iter = [par.name.toLowerFirst()/]List->begin();
 Bag<B>::iterator [par.name.toLowerFirst()/]End = [par.name.toLowerFirst()/]List->end();
 while ([par.name.toLowerFirst()/]Iter != [par.name.toLowerFirst()/]End)
@@ -204,6 +208,7 @@ while ([par.name.toLowerFirst()/]Iter != [par.name.toLowerFirst()/]End)
 	[par.name.toLowerFirst()/]Iter++;
 }
 [/if]
+[par.name/]P->getValues()->push_back([par.name/]Value);
 pList->push_back([par.name/]P);
 
 [/for]
@@ -213,7 +218,7 @@ object->setThis[anActivity.owner.oclAsType(Classifier).name.toUpperFirst()/]Obje
 object->setUmlValue(std::dynamic_pointer_cast<[anActivity.owner.oclAsType(Classifier).namespace.myNamespaceName()/]::[anActivity.owner.oclAsType(Classifier).name.toUpperFirst()/]>(element));
 object->setLocus(locus);
 [/if]
-std::shared_ptr<Bag<fUML::ParameterValue>> resultPList = locus->getExecutor()->execute([anActivity.generatePackageGetterCall()/], [if (objectUsed)]object[else]nullptr[/if], pList);
+std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> resultPList = locus->getExecutor()->execute([anActivity.generatePackageGetterCall()/], [if (objectUsed)]object[else]nullptr[/if], pList);
 
 [if (aPackage.getCallOperationActions()->size() > 0)]
 [aPackage.getCallOperationActions().generateCallOperationActionClearing()/]
@@ -221,13 +226,3 @@ std::shared_ptr<Bag<fUML::ParameterValue>> resultPList = locus->getExecutor()->e
 
 [/template]
 
-[template private generateValue(aParameter : Parameter)]
-[aParameter.generateOutputParameter()/]
-[if(aParameter.type.supportedTypes())]
-[aParameter.name/]Value->setValue([aParameter.name.toLowerFirst()/]);
-[else]
-[aParameter.name/]UmlLinker->setLocus(locus);
-[aParameter.name/]Value->setReferent([aParameter.name/]UmlLinker);
-[/if]
-[aParameter.name/]P->getValues()->push_back([aParameter.name/]Value);
-[/template]

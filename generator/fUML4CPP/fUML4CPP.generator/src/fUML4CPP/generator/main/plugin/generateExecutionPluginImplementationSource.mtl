@@ -110,7 +110,7 @@ Any [packageName/]::executeActivity(std::shared_ptr<uml::Activity> activity, std
 
 [template public generateParameterFromAny(anActivity : Activity, aPackage : Package)]
 [for (par : Parameter | anActivity.ownedParameter->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in)))]
-[par.generateCppType(true)/] [par.name.toLowerFirst()/][if (par.upper <> 1)]List[/if] = parameterList->at([par.listNumber(anActivity)/])->get<[par.generateCppType(true)/]>();
+[par.generateCppType(true)/] [par.name.toLowerFirst()/] = parameterList->at([par.listNumber(anActivity)/])->get<[par.generateCppType(true)/]>();
 
 [/for]
 [/template]

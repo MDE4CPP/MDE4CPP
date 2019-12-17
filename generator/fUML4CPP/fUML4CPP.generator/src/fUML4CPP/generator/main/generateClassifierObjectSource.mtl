@@ -12,6 +12,7 @@
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */]
+[**FERTIG*/]
 [module generateClassifierObjectSource('http://www.eclipse.org/uml2/5.0.0/UML')]
  
 [import fUML4CPP::generator::main::parameterHelper /]
@@ -41,11 +42,11 @@
 [if (aPackage.getStructuralFeaturesFromRSTA(aClassifier)->size() > 0)]
 #include "fUML/FUMLFactory.hpp"
 [/if]
-#include "fUML/Reference.hpp"
-#include "fUML/Value.hpp"
+#include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
+#include "fUML/Semantics/Values/Value.hpp"
 [for (property : Property | attributes->sortedBy(qualifiedName))]
 [if (property.type.oclIsKindOf(PrimitiveType))]
-#include "fUML/[property.type.name.toUpperFirst()/]Value.hpp"
+#include "fUML/Semantics/SimpleClassifiers/[property.type.name.toUpperFirst()/]Value.hpp"
 [else]
 #include "[aPackage.getPackageName()/]Exec/[property.type.oclAsType(Classifier).objectClassName()/].hpp"
 [/if]
@@ -61,7 +62,14 @@
 using namespace [aPackage.name/];
 
 [className/]::[className/](std::shared_ptr<[pointerName/]> _element):
-	m_umlValue(_element)
+	m_umlValue(_element),
+	m_umlValues(nullptr)
+{
+}
+
+[className/]::[className/](std::shared_ptr<Bag<[pointerName/]>> _element):
+	m_umlValue(nullptr),
+	m_umlValues(_element)
 {
 }
 
@@ -90,9 +98,19 @@ std::shared_ptr<[pointerName/]> [className/]::getUmlValue() const
 	return m_umlValue;
 }
 
+std::shared_ptr<Bag<[pointerName/]>> [className/]::getUmlValues() const
+{
+	return m_umlValues;
+}
+
 void [className/]::setUmlValue(std::shared_ptr<[pointerName/]> _element)
 {
 	m_umlValue = _element;
+}
+
+void [className/]::setUmlValues(std::shared_ptr<Bag<[pointerName/]>> _element)
+{
+	m_umlValues = _element;
 }
 
 void [className/]::setThis[className/]Ptr(std::weak_ptr<[className/]> thisObjectPtr)
@@ -101,7 +119,7 @@ void [className/]::setThis[className/]Ptr(std::weak_ptr<[className/]> thisObject
 }
 [if (aPackage.getStructuralFeaturesFromRSTVA(aClassifier)->size() > 0)]
 
-void [className/]::removeValue(std::shared_ptr<uml::StructuralFeature> feature, std::shared_ptr<fUML::Value> value)
+void [className/]::removeValue(std::shared_ptr<uml::StructuralFeature> feature, std::shared_ptr<fUML::Semantics::Values::Value> value)
 {
 	std::shared_ptr<uml::Property> property = std::dynamic_pointer_cast<uml::Property>(feature);
 	if (property == nullptr)
@@ -156,7 +174,7 @@ void [className/]::removeValue(std::shared_ptr<uml::StructuralFeature> feature, 
 				}
 			}
 [else]
-			std::shared_ptr<fUML::Reference> reference = std::dynamic_pointer_cast<fUML::Reference>(value);
+			std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> reference = std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Reference>(value);
 			std::shared_ptr<[aProperty.type.getValueClass()/]> inputValue = std::dynamic_pointer_cast<[aProperty.type.getValueClass()/]>(reference->getReferent());
 			if (inputValue != nullptr)
 			{
@@ -171,7 +189,7 @@ void [className/]::removeValue(std::shared_ptr<uml::StructuralFeature> feature, 
 [/if]
 [if (aPackage.getStructuralFeaturesFromRSTA(aClassifier)->size() > 0)]
 
-std::shared_ptr<Bag<fUML::Value>> [className/]::getValues(std::shared_ptr<uml::StructuralFeature> feature, std::shared_ptr<Bag<fUML::FeatureValue>> featureValues)
+std::shared_ptr<Bag<fUML::Semantics::Values::Value>> [className/]::getValues(std::shared_ptr<uml::StructuralFeature> feature, std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> featureValues)
 {
 	std::shared_ptr<uml::Property> property = std::dynamic_pointer_cast<uml::Property>(feature);
 	if (property == nullptr)
@@ -186,7 +204,7 @@ std::shared_ptr<Bag<fUML::Value>> [className/]::getValues(std::shared_ptr<uml::S
 		throw "UnsupportedParameterException";	
 	}
 
-	std::shared_ptr<Bag<fUML::Value>> values(new Bag<fUML::Value>());
+	std::shared_ptr<Bag<fUML::Semantics::Values::Value>> values(new Bag<fUML::Semantics::Values::Value>());
 [for (aProperty : Property | aPackage.getStructuralFeaturesFromRSTA(aClassifier).oclAsType(Property))]
 	if (property == [aProperty.getModelPackage()/][aProperty.generatePackageGetterCall(aProperty)/])
 	{
@@ -195,26 +213,11 @@ std::shared_ptr<Bag<fUML::Value>> [className/]::getValues(std::shared_ptr<uml::S
 		value->setValue(m_umlValue->[aProperty.getterName()/]());
 		values->add(value);
 [else]
-[if (aProperty.upper = 1)]
 		std::shared_ptr<[aProperty.type.getValueClass()/]> value(new [aProperty.type.oclAsType(Classifier).objectClassName()/]());
-		value->setUmlValue(m_umlValue->[aProperty.getterName()/]());
-		std::shared_ptr<fUML::Reference> reference= fUML::FUMLFactory::eInstance()->createReference();
+		value->setUmlValue[if (aProperty.upper <> 1)]s[/if](m_umlValue->[aProperty.getterName()/]());
+		std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> reference= fUML::FUMLFactory::eInstance()->createReference();
 		reference->setReferent(value);
 		values->add(reference);
-[else]
-		[aProperty.generateCppType()/] [aProperty.name.toLowerFirst()/]List = m_umlValue->[aProperty.getterName()/]();
-		Bag<B>::iterator iter = [aProperty.name.toLowerFirst()/]List->begin();
-		Bag<B>::iterator end = [aProperty.name.toLowerFirst()/]List->end();
-		while (iter != end)
-		{
-			std::shared_ptr<[aProperty.type.getValueClass()/]> value(new [aProperty.type.oclAsType(Classifier).objectClassName()/]());
-			value->setUmlValue(*iter);
-			std::shared_ptr<fUML::Reference> reference= fUML::FUMLFactory::eInstance()->createReference();
-			reference->setReferent(value);
-			values->add(reference);
-			iter++;
-		} 
-[/if]
 [/if]
 	}
 [/for]	
@@ -223,7 +226,7 @@ std::shared_ptr<Bag<fUML::Value>> [className/]::getValues(std::shared_ptr<uml::S
 [/if]
 [if (aPackage.getStructuralFeaturesFromASTVA(aClassifier)->size() > 0)]
 
-void [className/]::setFeatureValue(std::shared_ptr<uml::StructuralFeature> feature, std::shared_ptr<Bag<fUML::Value>> values, int position)
+void [className/]::setFeatureValue(std::shared_ptr<uml::StructuralFeature> feature, std::shared_ptr<Bag<fUML::Semantics::Values::Value>> values, int position)
 {
 	std::shared_ptr<uml::Property> property = std::dynamic_pointer_cast<uml::Property>(feature);
 	if (property == nullptr)
@@ -235,28 +238,33 @@ void [className/]::setFeatureValue(std::shared_ptr<uml::StructuralFeature> featu
 	if (m_umlValue == nullptr)
 	{
 		std::cerr << __PRETTY_FUNCTION__ << ": not implemented for object lists" << std::endl;
-		throw "UnsupportedParameterException";	
-	}
+		throw "UnsupportedParameterException";	}
 
 	if (values->size() == 0)
 	{
 		std::cout << __PRETTY_FUNCTION__ << ": no input value given" << std::endl;
 		return;
 	}
+	std::shared_ptr<Value> inputValue = values->at(0);
 [for (aProperty : Property | aPackage.getStructuralFeaturesFromASTVA(aClassifier).oclAsType(Property))]
 	if (property == [aProperty.getModelPackage()/][aProperty.generatePackageGetterCall(aProperty)/])
 	{
-[if (aProperty.upper = 1)]
-		std::shared_ptr<Value> inputValue = values->at(0);
-		[aProperty.generateSetFeatureValue()/]
-[else]
-		Bag<fUML::Value>::iterator iter = values->begin();
-		Bag<fUML::Value>::iterator end = values->end();
-		while (iter != end)
+[if (aProperty.isPrimitiveTypedProperty())]
+		std::shared_ptr<[aProperty.type.getValueClass()/]> value = std::dynamic_pointer_cast<[aProperty.type.getValueClass()/]>(inputValue);
+		if (value != nullptr)
 		{
-			std::shared_ptr<Value> inputValue = *iter;
-			[aProperty.generateSetFeatureValue()/]
-			iter++;
+			m_umlValue->[aProperty.setterName()/](value->[aProperty.getterPrefix()/]Value());
+		}
+[else]
+		std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> reference = std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Reference>(inputValue);
+		std::shared_ptr<[aProperty.type.getValueClass()/]> value = std::dynamic_pointer_cast<[aProperty.type.getValueClass()/]>(reference->getReferent());
+		if (value != nullptr)
+		{
+[if (aProperty.upper = 1)]
+			m_umlValue->[aProperty.setterName()/](value->getUmlValue());
+[else]
+			m_umlValue->[aProperty.getterName()/]()->push_back(value->getUmlValue());
+[/if]
 		}
 [/if]
 	}
@@ -266,26 +274,5 @@ void [className/]::setFeatureValue(std::shared_ptr<uml::StructuralFeature> featu
 [/file]
 [/template]
 
-[template private generateSetFeatureValue(aProperty : Property)]
-[if (aProperty.isPrimitiveTypedProperty())]
-std::shared_ptr<[aProperty.type.getValueClass()/]> value = std::dynamic_pointer_cast<[aProperty.type.getValueClass()/]>(inputValue);
-if (value != nullptr)
-{
-	m_umlValue->[aProperty.setterName()/](value->[aProperty.getterPrefix()/]Value());
-}
-[else]
-std::shared_ptr<fUML::Reference> reference = std::dynamic_pointer_cast<fUML::Reference>(inputValue);
-std::shared_ptr<[aProperty.type.getValueClass()/]> value = std::dynamic_pointer_cast<[aProperty.type.getValueClass()/]>(reference->getReferent());
-if (value != nullptr)
-{
-[if (aProperty.upper = 1)]
-	m_umlValue->[aProperty.setterName()/](value->getUmlValue());
-[else]
-	m_umlValue->[aProperty.getterName()/]()->push_back(value->getUmlValue());
-[/if]
-}
-[/if]
-[/template]
-
-[query private getValueClass(aType : Type) : String = if (aType.oclIsKindOf(PrimitiveType)) then 'fUML::'.concat(aType.name.toUpperFirst()).concat('Value') else aType.oclAsType(Classifier).objectClassName() endif /]
+[query private getValueClass(aType : Type) : String = if (aType.oclIsKindOf(PrimitiveType)) then 'fUML::Semantics::SimpleClassifiers::'.concat(aType.name.toUpperFirst()).concat('Value') else aType.oclAsType(Classifier).objectClassName() endif /]
 [query private isPrimitiveTypedProperty(aProperty : Property) : Boolean = aProperty.type.oclIsKindOf(PrimitiveType) /] 

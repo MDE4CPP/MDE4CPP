@@ -12,6 +12,7 @@
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */]
+[**FERTIG*/]
 [module generateModelLocusSource('http://www.eclipse.org/uml2/5.0.0/UML')]
  
 [import fUML4CPP::generator::main::parameterHelper /]
@@ -63,7 +64,7 @@ using namespace [originalName/];
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete [upperName/]Locus "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-std::shared_ptr<fUML::Object> [upperName/]LocusImpl::instantiate(std::shared_ptr<uml::Class>  type)
+std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> [upperName/]LocusImpl::instantiate(std::shared_ptr<uml::Class>  type)
 {
 [let packageList : Set(Package) = aPackage.getClassPackagesOfCreateObjectAction()]
 [if (packageList->size() > 0)]
@@ -89,14 +90,14 @@ std::shared_ptr<fUML::Object> [upperName/]LocusImpl::instantiate(std::shared_ptr
 [/let]
 			default:
 			{
-				return LocusImpl::instantiate(type);
+				return fUML::Semantics::Loci::LocusImpl::instantiate(type);
 			}
 		}
 	}
 [/for]
 [/if]
 [/let]
-	return LocusImpl::instantiate(type);
+	return fUML::Semantics::Loci::LocusImpl::instantiate(type);
 }
 [/file]
 [/template]
