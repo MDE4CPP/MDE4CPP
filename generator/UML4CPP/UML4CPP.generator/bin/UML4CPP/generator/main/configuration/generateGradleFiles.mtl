@@ -1,0 +1,132 @@
+[comment encoding = UTF-8 /]
+[**
+ * Copyright (c) 2017 TU Ilmenau, Systems and Software Engineering Group
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
+ * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+ * and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ ****************************************************************************************************************************************************************
+ * 
+ * module to generate gradle build files
+ * 
+ */]
+[module generateGradleFiles('http://www.eclipse.org/uml2/5.0.0/UML')]
+
+[import UML4CPP::generator::main::helpers::collectionHelper /]
+[import UML4CPP::generator::main::helpers::generalHelper /]
+[import UML4CPP::generator::main::helpers::nameHelper /]
+
+[template public generateGradleFiles(aPackage : Package)]
+[aPackage.generateBasicGradleFile()/]
+[aPackage.generateModelGradleFile()/]
+[aPackage.generateCodeGenGradleFile()/]
+[/template]
+
+[comment gradle file for build command /]
+[template private generateBasicGradleFile(aPackage : Package) { packageName : String = getPackageName(); }]
+[file ('../build.gradle', false, 'UTF-8')]
+description 'Build tasks for project: [packageName/]'
+
+task build[packageName.toUpperFirst()/]() {
+	group '[packageName/]'
+	description 'build [packageName/]'
+
+	dependsOn 'model:generate[packageName.toUpperFirst()/]'
+	dependsOn 'src_gen:compile[packageName.toUpperFirst()/]'
+[if(aPackage.prepareApplication())]
+	dependsOn 'application:compileApplicationFor[packageName.toUpperFirst()/]'
+[/if]
+[for (packName : String | aPackage.collectIncludingModelNames()) ? (not(packName = aPackage.name))]
+	dependsOn getRootProject().getTasksByName('build[packName.toUpperFirst()/]', true)
+[/for]
+}
+
+tasks.getByPath('src_gen:compile[packageName.toUpperFirst()/]').mustRunAfter tasks.getByPath('model:generate[packageName.toUpperFirst()/]')
+[/file]
+[/template]
+
+[comment gradle file for generate command /]
+[template private generateModelGradleFile(aPackage : Package) { packageName : String = getPackageName(); }]
+[file ('../model/build.gradle', false, 'UTF-8')]
+plugins {
+	id "tui.sse.mde4cpp.mde4cpp-generate-plugin" version "0.4"
+}
+
+description 'Generate tasks for project: [packageName/]'
+
+task generate[packageName.toUpperFirst()/](type: tui.sse.mde4cpp.MDE4CPPGenerate) {
+	group '[packageName/]'
+	description 'generate C++ code of [packageName/].uml model'
+
+	modelFilePath = file('.' + File.separator + '[packageName/].uml')
+	structureOnly = true
+
+	relatedModels = ['['/][aPackage.generateRelatedModelNameList()/][']'/]
+}
+[/file]
+[/template]
+
+[comment gradle file for compile command /]
+[template private generateCodeGenGradleFile(aPackage : Package) { packageName : String = getPackageName(); }]
+[file ('build.gradle', false, 'UTF-8')]
+plugins {
+	id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.5"
+}
+
+description 'Compile tasks for project: [packageName/]'
+
+task compile[packageName.toUpperFirst()/](type: tui.sse.mde4cpp.MDE4CPPCompile) {
+	group '[packageName/]'
+	description 'compile [packageName/]'
+
+	projectFolder = file('.' + File.separator + '[packageName/]')
+
+	inputs.files(fileTree('.') {
+        exclude '[packageName/]/.cmake/**'
+    })
+	if(!file('.' + File.separator + '[packageName/]' + File.separator + '.cmake' + File.separator).exists()) {
+		outputs.upToDateWhen { false }
+	}
+	outputs.file file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'bin' + File.separator + '[packageName/].dll')
+	outputs.file file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'bin' + File.separator + '[packageName/]d.dll')
+	outputs.dir file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'include' + File.separator + '[packageName/]')
+
+	// dependency to basic interfaces
+	dependsOn getRootProject().getTasksByName('deliverBasicInterfaces', true) 
+	outputs.dir file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'include' + File.separator + 'abstractDataTypes')
+	outputs.dir file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'include' + File.separator + 'persistence' + File.separator + 'interfaces')
+	outputs.dir file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'include' + File.separator + 'pluginFramework')
+	outputs.dir file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'include' + File.separator + 'util')
+[for (packName : String | aPackage.collectIncludingModelNames()) ? (not(packName = aPackage.name))]
+
+	// dependency to model '[packName/]'
+	def [packName/] = getRootProject().getTasksByName('compile[packName.toUpperFirst()/]', true)
+	dependsOn [packName/]
+	inputs.files([packName/].outputs)
+[/for]
+}
+
+task clean {
+	doFirst {
+		def cmakeFolder = file('.' + File.separator + '[packageName/]' + File.separator + '.cmake' + File.separator)
+		if(cmakeFolder.exists()) {
+    		delete cmakeFolder.absolutePath
+   			println "deleting folder " + cmakeFolder.absolutePath
+		}
+	}
+}
+[/file]
+
+[/template]
+
+[template private generateRelatedModelNameList(aPackage : Package) post (trim())]
+[for (packName : String | aPackage.collectIncludingModelNames()) separator (', ') ? (not(packName = aPackage.name))]
+'[packName/]'[/for]
+[/template]

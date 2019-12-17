@@ -1,0 +1,73 @@
+[comment encoding = UTF-8 /]
+[**
+ * Copyright (c) 2017 TU Ilmenau, Systems and Software Engineering Group
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
+ * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+ * and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ ****************************************************************************************************************************************************************
+ * 
+ * module for generation of UML InstanceSpecification artefacts
+ * 
+ */]
+[module generateInstanceSpecification('http://www.eclipse.org/uml2/5.0.0/UML')]
+ 
+[import UML4CPP::generator::main::components::generateValueSpecification /]
+[import UML4CPP::generator::main::helpers::generalHelper /]
+[import UML4CPP::generator::main::helpers::nameHelper /]
+
+[**
+ * generate creation of meta model instance for an InstanceSpecification element
+*/]
+[template public generateInstanceSpecificationCreation(anInstSpec : InstanceSpecification)]
+[anInstSpec.memberName()/] = factory->createInstanceSpecification_in_Namespace([anInstSpec.owner.oclAsType(NamedElement).memberName()/]); // TODO: set owner
+[anInstSpec.ancestors(Package)->first().memberName()/]->getPackagedElement()->push_back([anInstSpec.memberName()/]);
+[/template]
+
+[**
+ * generate initialization of meta model instance for an InstanceSpecification element
+ * 
+ * this includes:
+ * - set InstanceSpecification name
+ * - set classifier
+ * - create and initialize slots
+*/]
+[template public generateInstanceSpecificationInitialization(anInstSpec : InstanceSpecification)]
+[anInstSpec.memberName()/]->setName("[anInstSpec.name/]");
+[for (aClassifer : Classifier | anInstSpec.classifier->sortedBy(myQualifiedName()))]
+[anInstSpec.memberName()/]->getClassifier()->push_back([aClassifer.generatePackageGetterCall(anInstSpec)/]);
+
+[for (aSlot : Slot | anInstSpec.slot->asOrderedSet()->sortedBy(definingFeature.myQualifiedName()))]
+[aSlot.generateSlotCreation(anInstSpec)/]
+[/for]
+[/for]
+
+[/template]
+
+[**
+ * generate creation and initialization of meta model instance for a Slot element
+*/]
+[template private generateSlotCreation(aSlot : Slot, anInstSpec : InstanceSpecification)]
+{
+	std::shared_ptr<uml::Slot> slot(uml::UmlFactory::eInstance()->createSlot_in_OwningInstance([anInstSpec.memberName()/]));
+	slot->setDefiningFeature([aSlot.definingFeature.memberName()/]);
+[for (aValueSpec : ValueSpecification | aSlot.value->asOrderedSet()->sortedBy(myQualifiedName()))]
+	{
+		std::shared_ptr<uml::[aValueSpec.eClass().name/]> literal = uml::UmlFactory::eInstance()->create[aValueSpec.eClass().name/]_in_OwningSlot(slot);
+[if (aValueSpec.oclIsKindOf(LiteralSpecification))]
+		literal->setValue([aValueSpec.oclAsType(LiteralSpecification).generateLiteralValue()/]);
+[elseif(aValueSpec.oclIsKindOf(InstanceValue))]
+		literal->setInstance([aValueSpec.oclAsType(InstanceValue).instance.memberName()/]);
+[/if]
+		this->getOwnedElement()->push_back(literal);
+	}
+[/for]
+}
+[/template]

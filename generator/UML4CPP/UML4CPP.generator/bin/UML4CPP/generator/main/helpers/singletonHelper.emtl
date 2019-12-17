@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:mtl="http://www.eclipse.org/acceleo/mtl/3.0" xmlns:ocl.ecore="http://www.eclipse.org/ocl/1.1.0/Ecore">
+  <mtl:Module name="singletonHelper" nsURI="UML4CPP::generator::main::helpers::singletonHelper" startHeaderPosition="1406" endHeaderPosition="1470">
+    <documentation xsi:type="mtl:ModuleDocumentation">
+      <body startPosition="33" endPosition="1402" value="&#xD;&#xA;Copyright (c) 2017 TU Ilmenau, Systems and Software Engineering Group&#xD;&#xA;&#xD;&#xA;Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the &quot;Software&quot;),&#xD;&#xA;to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense,&#xD;&#xA;and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:&#xD;&#xA;&#xD;&#xA;The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.&#xD;&#xA;&#xD;&#xA;THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,&#xD;&#xA;FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,&#xD;&#xA;WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.&#xD;&#xA;&#xD;&#xA;***************************************************************************************************************************************************************&#xD;&#xA;&#xD;&#xA;module for generation of singleton elements&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;"/>
+    </documentation>
+    <input>
+      <takesTypesFrom href="http://www.eclipse.org/uml2/5.0.0/UML#/"/>
+    </input>
+    <ownedModuleElement xsi:type="mtl:Template" name="generateSingletonDecl" visibility="Public">
+      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#xD;&#xA;private:&#xD;&#xA;&#x9;static std::shared_ptr&lt;"/>
+      <body xsi:type="ocl.ecore:VariableExp" name="packageName" referredVariable="/0/generateSingletonDecl/packageName.2">
+        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+      </body>
+      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="> instance;&#xD;&#xA;public:&#xD;&#xA;&#x9;static std::shared_ptr&lt;"/>
+      <body xsi:type="ocl.ecore:VariableExp" name="packageName" referredVariable="/0/generateSingletonDecl/packageName.2">
+        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+      </body>
+      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="> eInstance();"/>
+      <documentation xsi:type="mtl:ModuleElementDocumentation">
+        <body startPosition="1479" endPosition="1558" value="&#xD;&#xA;generate singleton declaration with static variable and getter function&#xD;&#xA;&#xD;&#xA;"/>
+      </documentation>
+      <parameter name="packageName">
+        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+      </parameter>
+    </ownedModuleElement>
+    <ownedModuleElement xsi:type="mtl:Template" name="generateSingletonImpl" visibility="Public">
+      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="std::shared_ptr&lt;"/>
+      <body xsi:type="ocl.ecore:VariableExp" name="packageName" referredVariable="/0/generateSingletonImpl/packageName.4">
+        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+      </body>
+      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="> "/>
+      <body xsi:type="ocl.ecore:VariableExp" name="packageName" referredVariable="/0/generateSingletonImpl/packageName.4">
+        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+      </body>
+      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="::instance;&#xD;&#xA;&#xD;&#xA;std::shared_ptr&lt;"/>
+      <body xsi:type="ocl.ecore:VariableExp" name="packageName" referredVariable="/0/generateSingletonImpl/packageName.4">
+        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+      </body>
+      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="> "/>
+      <body xsi:type="ocl.ecore:VariableExp" name="packageName" referredVariable="/0/generateSingletonImpl/packageName.4">
+        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+      </body>
+      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="::eInstance()&#xD;&#xA;{&#xD;&#xA;&#x9;if(instance==nullptr)&#xD;&#xA;&#x9;{&#xD;&#xA;&#x9;&#x9;//create a new Singelton Instance&#xD;&#xA;&#x9;&#x9;instance.reset("/>
+      <body xsi:type="ocl.ecore:OperationCallExp">
+        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+        <source xsi:type="ocl.ecore:VariableExp" name="packageName" referredVariable="/0/generateSingletonImpl/packageName.4">
+          <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+        </source>
+        <argument xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="Impl">
+          <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+        </argument>
+        <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String_Class/concat"/>
+      </body>
+      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="::create());&#xD;&#xA;"/>
+      <body xsi:type="mtl:IfBlock">
+        <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#x9;&#x9;std::dynamic_pointer_cast&lt;"/>
+        <body xsi:type="ocl.ecore:OperationCallExp">
+          <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+          <source xsi:type="ocl.ecore:VariableExp" name="packageName" referredVariable="/0/generateSingletonImpl/packageName.4">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+          </source>
+          <argument xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="Impl">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+          </argument>
+          <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String_Class/concat"/>
+        </body>
+        <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=">(instance)->init(instance);&#xD;&#xA;"/>
+        <ifExpr xsi:type="ocl.ecore:VariableExp" name="callInit" referredVariable="/0/generateSingletonImpl/callInit">
+          <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+        </ifExpr>
+      </body>
+      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#x9;}&#x9;&#xD;&#xA;&#x9;return instance;&#xD;&#xA;}"/>
+      <documentation xsi:type="mtl:ModuleElementDocumentation">
+        <body startPosition="1769" endPosition="1866" value="&#xD;&#xA;generate singleton implementation with option to call function init of singleton instance&#xD;&#xA;&#xD;&#xA;"/>
+      </documentation>
+      <parameter name="packageName">
+        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+      </parameter>
+      <parameter name="callInit">
+        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+      </parameter>
+    </ownedModuleElement>
+  </mtl:Module>
+  <ecore:EPackage name="additions">
+    <eClassifiers xsi:type="ecore:EClass" name="oclstdlib_String_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="oclstdlib_Integer_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Integer"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="oclstdlib_Real_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Real"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ecore_EObject_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+      </eAnnotations>
+      <eOperations name="generateSingletonDecl">
+        <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+          <contents xsi:type="ocl.ecore:Constraint"/>
+        </eAnnotations>
+        <eAnnotations source="MTL" references="/0/generateSingletonDecl"/>
+        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+        <eParameters name="packageName">
+          <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+        </eParameters>
+      </eOperations>
+      <eOperations name="generateSingletonImpl">
+        <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+          <contents xsi:type="ocl.ecore:Constraint"/>
+        </eAnnotations>
+        <eAnnotations source="MTL" references="/0/generateSingletonImpl"/>
+        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+        <eParameters name="packageName">
+          <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+        </eParameters>
+        <eParameters name="callInit">
+          <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+        </eParameters>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="oclstdlib_OclAny_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="oclstdlib_Collection(T)_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Collection(T)"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="oclstdlib_Sequence(T)_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Sequence(T)"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="oclstdlib_OrderedSet(T)_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OrderedSet(T)"/>
+      </eAnnotations>
+    </eClassifiers>
+  </ecore:EPackage>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+  </ocl.ecore:Variable>
+  <ecore:EAnnotation source="positions">
+    <eAnnotations source="positions.0" references="/0/%">
+      <details key="start" value="30"/>
+      <details key="end" value="1404"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.1" references="/0/generateSingletonDecl">
+      <details key="start" value="1562"/>
+      <details key="end" value="1762"/>
+      <details key="line" value="25"/>
+    </eAnnotations>
+    <eAnnotations source="positions.2" references="/0/generateSingletonDecl/%">
+      <details key="start" value="1625"/>
+      <details key="end" value="1661"/>
+      <details key="line" value="26"/>
+    </eAnnotations>
+    <eAnnotations source="positions.3" references="/0/generateSingletonDecl/packageName">
+      <details key="start" value="1662"/>
+      <details key="end" value="1673"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.4" references="/0/generateSingletonDecl/%.1">
+      <details key="start" value="1675"/>
+      <details key="end" value="1721"/>
+      <details key="line" value="28"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5" references="/0/generateSingletonDecl/packageName.1">
+      <details key="start" value="1722"/>
+      <details key="end" value="1733"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.6" references="/0/generateSingletonDecl/%.2">
+      <details key="start" value="1735"/>
+      <details key="end" value="1749"/>
+      <details key="line" value="30"/>
+    </eAnnotations>
+    <eAnnotations source="positions.7" references="/0/generateSingletonDecl/%.3">
+      <details key="start" value="1476"/>
+      <details key="end" value="1560"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.8" references="/0/generateSingletonDecl/packageName.2">
+      <details key="start" value="1601"/>
+      <details key="end" value="1621"/>
+      <details key="line" value="25"/>
+    </eAnnotations>
+    <eAnnotations source="positions.9" references="/0/generateSingletonImpl">
+      <details key="start" value="1870"/>
+      <details key="end" value="2352"/>
+      <details key="line" value="36"/>
+    </eAnnotations>
+    <eAnnotations source="positions.10" references="/0/generateSingletonImpl/%">
+      <details key="start" value="1953"/>
+      <details key="end" value="1969"/>
+      <details key="line" value="37"/>
+    </eAnnotations>
+    <eAnnotations source="positions.11" references="/0/generateSingletonImpl/packageName">
+      <details key="start" value="1970"/>
+      <details key="end" value="1981"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.12" references="/0/generateSingletonImpl/%.1">
+      <details key="start" value="1983"/>
+      <details key="end" value="1985"/>
+      <details key="line" value="37"/>
+    </eAnnotations>
+    <eAnnotations source="positions.13" references="/0/generateSingletonImpl/packageName.1">
+      <details key="start" value="1986"/>
+      <details key="end" value="1997"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.14" references="/0/generateSingletonImpl/%.2">
+      <details key="start" value="1999"/>
+      <details key="end" value="2030"/>
+      <details key="line" value="37"/>
+    </eAnnotations>
+    <eAnnotations source="positions.15" references="/0/generateSingletonImpl/packageName.2">
+      <details key="start" value="2031"/>
+      <details key="end" value="2042"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.16" references="/0/generateSingletonImpl/%.3">
+      <details key="start" value="2044"/>
+      <details key="end" value="2046"/>
+      <details key="line" value="39"/>
+    </eAnnotations>
+    <eAnnotations source="positions.17" references="/0/generateSingletonImpl/packageName.3">
+      <details key="start" value="2047"/>
+      <details key="end" value="2058"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.18" references="/0/generateSingletonImpl/%.4">
+      <details key="start" value="2060"/>
+      <details key="end" value="2160"/>
+      <details key="line" value="39"/>
+    </eAnnotations>
+    <eAnnotations source="positions.19" references="/0/generateSingletonImpl/%.5">
+      <details key="start" value="2161"/>
+      <details key="end" value="2187"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.20" references="/0/generateSingletonImpl/%.5/packageName">
+      <details key="start" value="2161"/>
+      <details key="end" value="2172"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.21" references="/0/generateSingletonImpl/%.5/%">
+      <details key="start" value="2180"/>
+      <details key="end" value="2186"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.22" references="/0/generateSingletonImpl/%.6">
+      <details key="start" value="2189"/>
+      <details key="end" value="2203"/>
+      <details key="line" value="44"/>
+    </eAnnotations>
+    <eAnnotations source="positions.23" references="/0/generateSingletonImpl/%.7">
+      <details key="start" value="2203"/>
+      <details key="end" value="2312"/>
+      <details key="line" value="45"/>
+    </eAnnotations>
+    <eAnnotations source="positions.24" references="/0/generateSingletonImpl/%.7/%">
+      <details key="start" value="2220"/>
+      <details key="end" value="2248"/>
+      <details key="line" value="46"/>
+    </eAnnotations>
+    <eAnnotations source="positions.25" references="/0/generateSingletonImpl/%.7/%.1">
+      <details key="start" value="2249"/>
+      <details key="end" value="2275"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.26" references="/0/generateSingletonImpl/%.7/%.1/packageName">
+      <details key="start" value="2249"/>
+      <details key="end" value="2260"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.27" references="/0/generateSingletonImpl/%.7/%.1/%">
+      <details key="start" value="2268"/>
+      <details key="end" value="2274"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.28" references="/0/generateSingletonImpl/%.7/%.2">
+      <details key="start" value="2277"/>
+      <details key="end" value="2307"/>
+      <details key="line" value="46"/>
+    </eAnnotations>
+    <eAnnotations source="positions.29" references="/0/generateSingletonImpl/%.7/callInit">
+      <details key="start" value="2207"/>
+      <details key="end" value="2217"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.30" references="/0/generateSingletonImpl/%.8">
+      <details key="start" value="2314"/>
+      <details key="end" value="2339"/>
+      <details key="line" value="48"/>
+    </eAnnotations>
+    <eAnnotations source="positions.31" references="/0/generateSingletonImpl/%.9">
+      <details key="start" value="1766"/>
+      <details key="end" value="1868"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.32" references="/0/generateSingletonImpl/packageName.4">
+      <details key="start" value="1909"/>
+      <details key="end" value="1929"/>
+      <details key="line" value="36"/>
+    </eAnnotations>
+    <eAnnotations source="positions.33" references="/0/generateSingletonImpl/callInit">
+      <details key="start" value="1931"/>
+      <details key="end" value="1949"/>
+      <details key="line" value="36"/>
+    </eAnnotations>
+  </ecore:EAnnotation>
+</xmi:XMI>

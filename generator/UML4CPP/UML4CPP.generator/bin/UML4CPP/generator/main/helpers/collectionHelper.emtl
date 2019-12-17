@@ -1,0 +1,2542 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:mtl="http://www.eclipse.org/acceleo/mtl/3.0" xmlns:ocl.ecore="http://www.eclipse.org/ocl/1.1.0/Ecore">
+  <mtl:Module name="collectionHelper" nsURI="UML4CPP::generator::main::helpers::collectionHelper" startHeaderPosition="1478" endHeaderPosition="1605">
+    <documentation xsi:type="mtl:ModuleDocumentation">
+      <body startPosition="33" endPosition="1474" value="&#xD;&#xA;Copyright (c) 2017 TU Ilmenau, Systems and Software Engineering Group&#xD;&#xA;&#xD;&#xA;Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the &quot;Software&quot;),&#xD;&#xA;to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense,&#xD;&#xA;and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:&#xD;&#xA;&#xD;&#xA;The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.&#xD;&#xA;&#xD;&#xA;THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,&#xD;&#xA;FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,&#xD;&#xA;WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.&#xD;&#xA;&#xD;&#xA;***************************************************************************************************************************************************************&#xD;&#xA;&#xD;&#xA;module to provide queries collecting models required by configuration modules to generate projects and build files&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;"/>
+    </documentation>
+    <input>
+      <takesTypesFrom href="http://www.eclipse.org/uml2/5.0.0/UML#/"/>
+    </input>
+    <imports href="generalHelper.emtl#/0"/>
+    <imports href="keywords.emtl#/0"/>
+    <imports href="nameHelper.emtl#/0"/>
+    <ownedModuleElement xsi:type="mtl:Query" name="collectModelIncludes" type="/3/Set(Package)">
+      <documentation xsi:type="mtl:ModuleElementDocumentation">
+        <body startPosition="1729" endPosition="2376" value="&#xD;&#xA;query to collect all related packages, which are used by current model&#xD;&#xA;&#xD;&#xA;Following packages are included:&#xD;&#xA;- packages of attribute types of classes&#xD;&#xA;- packages of applied stereotypes on class attributes&#xD;&#xA;- packages of parameter types of class operations&#xD;&#xA;- packages of interfaces realized by classes&#xD;&#xA;- packages of applied stereotypes on dependencies&#xD;&#xA;&#xD;&#xA;Following packages are rejects:&#xD;&#xA;- current package (aPackage)&#xD;&#xA;- undefined packages&#xD;&#xA;- 'Ecore', 'UML' and 'PrimitiveTypes' packages&#xD;&#xA;&#xD;&#xA;Each package is only include once. Undefined packages are rejected. Also 'aPackage' is rejected.&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;"/>
+      </documentation>
+      <parameter name="aPackage">
+        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
+      </parameter>
+      <expression xsi:type="ocl.ecore:IteratorExp" name="reject" eType="/3/Set(Package)">
+        <source xsi:type="ocl.ecore:IteratorExp" name="reject" eType="/3/Set(Package)">
+          <source xsi:type="ocl.ecore:OperationCallExp" eType="/3/Set(Package)">
+            <source xsi:type="ocl.ecore:CollectionLiteralExp" eType="/3/OrderedSet(Bag(Package))" kind="OrderedSet">
+              <part xsi:type="ocl.ecore:CollectionItem" eType="/3/Bag(Package)">
+                <item xsi:type="ocl.ecore:IteratorExp" name="collect" eType="/3/Bag(Package)">
+                  <source xsi:type="ocl.ecore:IteratorExp" name="collect" eType="/3/Bag(Type)">
+                    <source xsi:type="ocl.ecore:IteratorExp" name="collect" eType="/3/Bag(Property)">
+                      <source xsi:type="ocl.ecore:OperationCallExp" eType="/3/Set(Class)" referredOperation="/1/oclstdlib_Collection(T)_Class/filter">
+                        <source xsi:type="ocl.ecore:PropertyCallExp" eType="/3/Set(NamedElement)">
+                          <source xsi:type="ocl.ecore:VariableExp" name="aPackage" referredVariable="/0/collectModelIncludes/aPackage">
+                            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
+                          </source>
+                          <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/uml2/5.0.0/UML#//Namespace/member"/>
+                        </source>
+                        <argument xsi:type="ocl.ecore:TypeExp" eType="/5/Class">
+                          <referredType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Class"/>
+                        </argument>
+                      </source>
+                      <body xsi:type="ocl.ecore:PropertyCallExp" eType="/3/OrderedSet(Property)">
+                        <source xsi:type="ocl.ecore:VariableExp" name="temp1" referredVariable="/0/collectModelIncludes/reject/reject/%/%/%/collect/collect/collect/temp1">
+                          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Class"/>
+                        </source>
+                        <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/uml2/5.0.0/UML#//Classifier/attribute"/>
+                      </body>
+                      <iterator xsi:type="ocl.ecore:Variable" name="temp1">
+                        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Class"/>
+                      </iterator>
+                    </source>
+                    <body xsi:type="ocl.ecore:PropertyCallExp">
+                      <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Type"/>
+                      <source xsi:type="ocl.ecore:VariableExp" name="temp2" referredVariable="/0/collectModelIncludes/reject/reject/%/%/%/collect/collect/temp2">
+                        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Property"/>
+                      </source>
+                      <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/uml2/5.0.0/UML#//TypedElement/type"/>
+                    </body>
+                    <iterator xsi:type="ocl.ecore:Variable" name="temp2">
+                      <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Property"/>
+                    </iterator>
+                  </source>
+                  <body xsi:type="ocl.ecore:OperationCallExp">
+                    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
+                    <source xsi:type="ocl.ecore:VariableExp" name="temp3" referredVariable="/0/collectModelIncludes/reject/reject/%/%/%/collect/temp3">
+                      <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Type"/>
+                    </source>
+                    <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/uml2/5.0.0/UML#//Element/getNearestPackage"/>
+                  </body>
+                  <iterator xsi:type="ocl.ecore:Variable" name="temp3">
+                    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Type"/>
+                  </iterator>
+                </item>
+              </part>
+              <part xsi:type="ocl.ecore:CollectionItem" eType="/3/Bag(Package)">
+                <item xsi:type="ocl.ecore:IteratorExp" name="collect" eType="/3/Bag(Package)">
+                  <source xsi:type="ocl.ecore:IteratorExp" name="collect" eType="/3/Bag(Stereotype)">
+                    <source xsi:type="ocl.ecore:IteratorExp" name="collect" eType="/3/Bag(Property)">
+                      <source xsi:type="ocl.ecore:OperationCallExp" eType="/3/Set(Class)" referredOperation="/1/oclstdlib_Collection(T)_Class/filter">
+                        <source xsi:type="ocl.ecore:PropertyCallExp" eType="/3/Set(NamedElement)">
+                          <source xsi:type="ocl.ecore:VariableExp" name="aPackage" referredVariable="/0/collectModelIncludes/aPackage">
+                            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
+                          </source>
+                          <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/uml2/5.0.0/UML#//Namespace/member"/>
+                        </source>
+                        <argument xsi:type="ocl.ecore:TypeExp" eType="/5/Class">
+                          <referredType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Class"/>
+                        </argument>
+                      </source>
+                      <body xsi:type="ocl.ecore:PropertyCallExp" eType="/3/OrderedSet(Property)">
+                        <source xsi:type="ocl.ecore:VariableExp" name="temp4" referredVariable="/0/collectModelIncludes/reject/reject/%/%/%.1/collect/collect/collect/temp4">
+                          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Class"/>
+                        </source>
+                        <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/uml2/5.0.0/UML#//Classifier/attribute"/>
+                      </body>
+                      <iterator xsi:type="ocl.ecore:Variable" name="temp4">
+                        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Class"/>
+                      </iterator>
+                    </source>
+                    <body xsi:type="ocl.ecore:OperationCallExp" eType="/3/Set(Stereotype)">
+                      <source xsi:type="ocl.ecore:VariableExp" name="temp5" referredVariable="/0/collectModelIncludes/reject/reject/%/%/%.1/collect/collect/temp5">
+                        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Property"/>
+                      </source>
+                      <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/uml2/5.0.0/UML#//Element/getAppliedStereotypes"/>
+                    </body>
+                    <iterator xsi:type="ocl.ecore:Variable" name="temp5">
+                      <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Property"/>
+                    </iterator>
+                  </source>
+                  <body xsi:type="ocl.ecore:OperationCallExp">
+                    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
+                    <source xsi:type="ocl.ecore:VariableExp" name="temp6" referredVariable="/0/collectModelIncludes/reject/reject/%/%/%.1/collect/temp6">
+                      <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Stereotype"/>
+                    </source>
+                    <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/uml2/5.0.0/UML#//Element/getNearestPackage"/>
+                  </body>
+                  <iterator xsi:type="ocl.ecore:Variable" name="temp6">
+                    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Stereotype"/>
+                  </iterator>
+                </item>
+              </part>
+              <part xsi:type="ocl.ecore:CollectionItem" eType="/3/Bag(Package)">
+                <item xsi:type="ocl.ecore:IteratorExp" name="collect" eType="/3/Bag(Package)">
+                  <source xsi:type="ocl.ecore:IteratorExp" name="reject" eType="/3/Bag(Type)">
+                    <source xsi:type="ocl.ecore:IteratorExp" name="collect" eType="/3/Bag(Type)">
+                      <source xsi:type="ocl.ecore:IteratorExp" name="collect" eType="/3/Bag(Parameter)">
+                        <source xsi:type="ocl.ecore:IteratorExp" name="collect" eType="/3/Bag(Operation)">
+                          <source xsi:type="ocl.ecore:OperationCallExp" eType="/3/Set(Class)" referredOperation="/1/oclstdlib_Collection(T)_Class/filter">
+                            <source xsi:type="ocl.ecore:PropertyCallExp" eType="/3/Set(NamedElement)">
+                              <source xsi:type="ocl.ecore:VariableExp" name="aPackage" referredVariable="/0/collectModelIncludes/aPackage">
+                                <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
+                              </source>
+                              <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/uml2/5.0.0/UML#//Namespace/member"/>
+                            </source>
+                            <argument xsi:type="ocl.ecore:TypeExp" eType="/5/Class">
+                              <referredType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Class"/>
+                            </argument>
+                          </source>
+                          <body xsi:type="ocl.ecore:PropertyCallExp" eType="/3/OrderedSet(Operation)">
+                            <source xsi:type="ocl.ecore:VariableExp" name="temp7" referredVariable="/0/collectModelIncludes/reject/reject/%/%/%.2/collect/reject/collect/collect/collect/temp7">
+                              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Class"/>
+                            </source>
+                            <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/uml2/5.0.0/UML#//Class/ownedOperation"/>
+                          </body>
+                          <iterator xsi:type="ocl.ecore:Variable" name="temp7">
+                            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Class"/>
+                          </iterator>
+                        </source>
+                        <body xsi:type="ocl.ecore:PropertyCallExp" eType="/3/OrderedSet(Parameter)">
+                          <source xsi:type="ocl.ecore:VariableExp" name="temp8" referredVariable="/0/collectModelIncludes/reject/reject/%/%/%.2/collect/reject/collect/collect/temp8">
+                            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Operation"/>
+                          </source>
+                          <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/uml2/5.0.0/UML#//BehavioralFeature/ownedParameter"/>
+                        </body>
+                        <iterator xsi:type="ocl.ecore:Variable" name="temp8">
+                          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Operation"/>
+                        </iterator>
+                      </source>
+                      <body xsi:type="ocl.ecore:PropertyCallExp">
+                        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Type"/>
+                        <source xsi:type="ocl.ecore:VariableExp" name="temp9" referredVariable="/0/collectModelIncludes/reject/reject/%/%/%.2/collect/reject/collect/temp9">
+                          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Parameter"/>
+                        </source>
+                        <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/uml2/5.0.0/UML#//TypedElement/type"/>
+                      </body>
+                      <iterator xsi:type="ocl.ecore:Variable" name="temp9">
+                        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Parameter"/>
+                      </iterator>
+                    </source>
+                    <body xsi:type="ocl.ecore:OperationCallExp">
+                      <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+                      <source xsi:type="ocl.ecore:VariableExp" name="temp10" referredVariable="/0/collectModelIncludes/reject/reject/%/%/%.2/collect/reject/temp10">
+                        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Type"/>
+                      </source>
+                      <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/oclIsUndefined"/>
+                    </body>
+                    <iterator xsi:type="ocl.ecore:Variable" name="temp10">
+                      <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Type"/>
+                    </iterator>
+                  </source>
+                  <body xsi:type="ocl.ecore:OperationCallExp">
+                    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
+                    <source xsi:type="ocl.ecore:VariableExp" name="temp11" referredVariable="/0/collectModelIncludes/reject/reject/%/%/%.2/collect/temp11">
+                      <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Type"/>
+                    </source>
+                    <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/uml2/5.0.0/UML#//Element/getNearestPackage"/>
+                  </body>
+                  <iterator xsi:type="ocl.ecore:Variable" name="temp11">
+                    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Type"/>
+                  </iterator>
+                </item>
+              </part>
+              <part xsi:type="ocl.ecore:CollectionItem" eType="/3/Bag(Package)">
+                <item xsi:type="ocl.ecore:IteratorExp" name="collect" eType="/3/Bag(Package)">
+                  <source xsi:type="ocl.ecore:IteratorExp" name="reject" eType="/3/Bag(NamedElement)">
+                    <source xsi:type="ocl.ecore:IteratorExp" name="collect" eType="/3/Bag(NamedElement)">
+                      <source xsi:type="ocl.ecore:IteratorExp" name="collect" eType="/3/Bag(InterfaceRealization)">
+                        <source xsi:type="ocl.ecore:OperationCallExp" eType="/3/Set(Class)" referredOperation="/1/oclstdlib_Collection(T)_Class/filter">
+                          <source xsi:type="ocl.ecore:PropertyCallExp" eType="/3/Set(NamedElement)">
+                            <source xsi:type="ocl.ecore:VariableExp" name="aPackage" referredVariable="/0/collectModelIncludes/aPackage">
+                              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
+                            </source>
+                            <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/uml2/5.0.0/UML#//Namespace/member"/>
+                          </source>
+                          <argument xsi:type="ocl.ecore:TypeExp" eType="/5/Class">
+                            <referredType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Class"/>
+                          </argument>
+                        </source>
+                        <body xsi:type="ocl.ecore:PropertyCallExp" eType="/3/Set(InterfaceRealization)">
+                          <source xsi:type="ocl.ecore:VariableExp" name="temp12" referredVariable="/0/collectModelIncludes/reject/reject/%/%/%.3/collect/reject/collect/collect/temp12">
+                            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Class"/>
+                          </source>
+                          <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/uml2/5.0.0/UML#//BehavioredClassifier/interfaceRealization"/>
+                        </body>
+                        <iterator xsi:type="ocl.ecore:Variable" name="temp12">
+                          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Class"/>
+                        </iterator>
+                      </source>
+                      <body xsi:type="ocl.ecore:PropertyCallExp" eType="/3/Set(NamedElement)">
+                        <source xsi:type="ocl.ecore:VariableExp" name="temp13" referredVariable="/0/collectModelIncludes/reject/reject/%/%/%.3/collect/reject/collect/temp13">
+                          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//InterfaceRealization"/>
+                        </source>
+                        <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/uml2/5.0.0/UML#//Dependency/supplier"/>
+                      </body>
+                      <iterator xsi:type="ocl.ecore:Variable" name="temp13">
+                        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//InterfaceRealization"/>
+                      </iterator>
+                    </source>
+                    <body xsi:type="ocl.ecore:OperationCallExp">
+                      <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+                      <source xsi:type="ocl.ecore:VariableExp" name="temp14" referredVariable="/0/collectModelIncludes/reject/reject/%/%/%.3/collect/reject/temp14">
+                        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//NamedElement"/>
+                      </source>
+                      <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/oclIsUndefined"/>
+                    </body>
+                    <iterator xsi:type="ocl.ecore:Variable" name="temp14">
+                      <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//NamedElement"/>
+                    </iterator>
+                  </source>
+                  <body xsi:type="ocl.ecore:OperationCallExp">
+                    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
+                    <source xsi:type="ocl.ecore:VariableExp" name="temp15" referredVariable="/0/collectModelIncludes/reject/reject/%/%/%.3/collect/temp15">
+                      <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//NamedElement"/>
+                    </source>
+                    <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/uml2/5.0.0/UML#//Element/getNearestPackage"/>
+                  </body>
+                  <iterator xsi:type="ocl.ecore:Variable" name="temp15">
+                    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//NamedElement"/>
+                  </iterator>
+                </item>
+              </part>
+              <part xsi:type="ocl.ecore:CollectionItem" eType="/3/Bag(Package)">
+                <item xsi:type="ocl.ecore:IteratorExp" name="collect" eType="/3/Bag(Package)">
+                  <source xsi:type="ocl.ecore:IteratorExp" name="collect" eType="/3/Bag(Stereotype)">
+                    <source xsi:type="ocl.ecore:OperationCallExp" eType="/3/Set(Dependency)" referredOperation="/1/oclstdlib_Collection(T)_Class/filter">
+                      <source xsi:type="ocl.ecore:PropertyCallExp" eType="/3/Set(NamedElement)">
+                        <source xsi:type="ocl.ecore:VariableExp" name="aPackage" referredVariable="/0/collectModelIncludes/aPackage">
+                          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
+                        </source>
+                        <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/uml2/5.0.0/UML#//Namespace/member"/>
+                      </source>
+                      <argument xsi:type="ocl.ecore:TypeExp" eType="/5/Dependency">
+                        <referredType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Dependency"/>
+                      </argument>
+                    </source>
+                    <body xsi:type="ocl.ecore:OperationCallExp" eType="/3/Set(Stereotype)">
+                      <source xsi:type="ocl.ecore:VariableExp" name="temp16" referredVariable="/0/collectModelIncludes/reject/reject/%/%/%.4/collect/collect/temp16">
+                        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Dependency"/>
+                      </source>
+                      <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/uml2/5.0.0/UML#//Element/getAppliedStereotypes"/>
+                    </body>
+                    <iterator xsi:type="ocl.ecore:Variable" name="temp16">
+                      <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Dependency"/>
+                    </iterator>
+                  </source>
+                  <body xsi:type="ocl.ecore:OperationCallExp">
+                    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
+                    <source xsi:type="ocl.ecore:VariableExp" name="temp17" referredVariable="/0/collectModelIncludes/reject/reject/%/%/%.4/collect/temp17">
+                      <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Stereotype"/>
+                    </source>
+                    <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/uml2/5.0.0/UML#//Element/getNearestPackage"/>
+                  </body>
+                  <iterator xsi:type="ocl.ecore:Variable" name="temp17">
+                    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Stereotype"/>
+                  </iterator>
+                </item>
+              </part>
+            </source>
+            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OrderedSet(T)_Class/flatten"/>
+          </source>
+          <body xsi:type="ocl.ecore:OperationCallExp">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+            <source xsi:type="ocl.ecore:VariableExp" name="temp18" referredVariable="/0/collectModelIncludes/reject/reject/temp18">
+              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
+            </source>
+            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/oclIsUndefined"/>
+          </body>
+          <iterator xsi:type="ocl.ecore:Variable" name="temp18">
+            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
+          </iterator>
+        </source>
+        <body xsi:type="ocl.ecore:OperationCallExp">
+          <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+          <source xsi:type="ocl.ecore:OperationCallExp">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+            <source xsi:type="ocl.ecore:VariableExp" name="pack" referredVariable="/0/collectModelIncludes/reject/pack">
+              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
+            </source>
+            <argument xsi:type="ocl.ecore:VariableExp" name="aPackage" referredVariable="/0/collectModelIncludes/aPackage">
+              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
+            </argument>
+            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/="/>
+          </source>
+          <argument xsi:type="mtl:QueryInvocation" definition="/0/isReflectionModel">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+            <argument xsi:type="ocl.ecore:VariableExp" name="pack" referredVariable="/0/collectModelIncludes/reject/pack">
+              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
+            </argument>
+          </argument>
+          <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean_Class/or"/>
+        </body>
+        <iterator xsi:type="ocl.ecore:Variable" name="pack">
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
+        </iterator>
+      </expression>
+    </ownedModuleElement>
+    <ownedModuleElement xsi:type="mtl:Query" name="isReflectionModel" visibility="Public">
+      <documentation xsi:type="mtl:ModuleElementDocumentation">
+        <body startPosition="3152" endPosition="3201" value="&#xD;&#xA;checks if a package is a reflection model&#xD;&#xA;&#xD;&#xA;"/>
+      </documentation>
+      <parameter name="aPackage">
+        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
+      </parameter>
+      <expression xsi:type="ocl.ecore:OperationCallExp">
+        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+        <source xsi:type="ocl.ecore:OperationCallExp">
+          <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+          <source xsi:type="ocl.ecore:OperationCallExp">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+            <source xsi:type="ocl.ecore:PropertyCallExp">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+              <source xsi:type="ocl.ecore:VariableExp" name="aPackage" referredVariable="/0/isReflectionModel/aPackage">
+                <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
+              </source>
+              <referredProperty xsi:type="ecore:EAttribute" href="http://www.eclipse.org/uml2/5.0.0/UML#//NamedElement/name"/>
+            </source>
+            <argument xsi:type="mtl:QueryInvocation">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+              <definition href="keywords.emtl#/0/keyUML"/>
+              <argument xsi:type="ocl.ecore:VariableExp" name="self" referredVariable="/9">
+                <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
+              </argument>
+            </argument>
+            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String_Class/="/>
+          </source>
+          <argument xsi:type="ocl.ecore:OperationCallExp">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+            <source xsi:type="ocl.ecore:PropertyCallExp">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+              <source xsi:type="ocl.ecore:VariableExp" name="aPackage" referredVariable="/0/isReflectionModel/aPackage">
+                <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
+              </source>
+              <referredProperty xsi:type="ecore:EAttribute" href="http://www.eclipse.org/uml2/5.0.0/UML#//NamedElement/name"/>
+            </source>
+            <argument xsi:type="mtl:QueryInvocation">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+              <definition href="keywords.emtl#/0/keyEcore"/>
+              <argument xsi:type="ocl.ecore:VariableExp" name="self" referredVariable="/9">
+                <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
+              </argument>
+            </argument>
+            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String_Class/="/>
+          </argument>
+          <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean_Class/or"/>
+        </source>
+        <argument xsi:type="ocl.ecore:OperationCallExp">
+          <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+          <source xsi:type="ocl.ecore:PropertyCallExp">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+            <source xsi:type="ocl.ecore:VariableExp" name="aPackage" referredVariable="/0/isReflectionModel/aPackage">
+              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
+            </source>
+            <referredProperty xsi:type="ecore:EAttribute" href="http://www.eclipse.org/uml2/5.0.0/UML#//NamedElement/name"/>
+          </source>
+          <argument xsi:type="mtl:QueryInvocation">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+            <definition href="keywords.emtl#/0/keyPrimitiveTypes"/>
+            <argument xsi:type="ocl.ecore:VariableExp" name="self" referredVariable="/9">
+              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
+            </argument>
+          </argument>
+          <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String_Class/="/>
+        </argument>
+        <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean_Class/or"/>
+      </expression>
+      <type xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+    </ownedModuleElement>
+    <ownedModuleElement xsi:type="mtl:Query" name="collectIncludingModelNamesForNonReflectionModels" type="/3/Set(String)">
+      <documentation xsi:type="mtl:ModuleElementDocumentation">
+        <body startPosition="3380" endPosition="3516" value="&#xD;&#xA;collect query for reflection models&#xD;&#xA;&#xD;&#xA;include basic models and reflections models as well as packages used by given model&#xD;&#xA;&#xD;&#xA;"/>
+      </documentation>
+      <parameter name="aPackage">
+        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
+      </parameter>
+      <expression xsi:type="ocl.ecore:OperationCallExp" eType="/3/Set(String)">
+        <source xsi:type="ocl.ecore:OperationCallExp" eType="/3/OrderedSet(String)" referredOperation="/1/oclstdlib_Collection(T)_Class/addAll">
+          <source xsi:type="ocl.ecore:CollectionLiteralExp" eType="/3/OrderedSet(String)" kind="OrderedSet">
+            <part xsi:type="ocl.ecore:CollectionItem">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+              <item xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="ecore">
+                <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+              </item>
+            </part>
+            <part xsi:type="ocl.ecore:CollectionItem">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+              <item xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="uml">
+                <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+              </item>
+            </part>
+            <part xsi:type="ocl.ecore:CollectionItem">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+              <item xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="ecoreReflection">
+                <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+              </item>
+            </part>
+            <part xsi:type="ocl.ecore:CollectionItem">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+              <item xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="primitivetypesReflection">
+                <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+              </item>
+            </part>
+            <part xsi:type="ocl.ecore:CollectionItem">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+              <item xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="umlReflection">
+                <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+              </item>
+            </part>
+          </source>
+          <argument xsi:type="ocl.ecore:IteratorExp" name="collect" eType="/3/Sequence(String)">
+            <source xsi:type="ocl.ecore:IteratorExp" name="sortedBy" eType="/3/OrderedSet(Package)">
+              <source xsi:type="mtl:QueryInvocation" eType="/3/Set(Package)" definition="/0/collectModelIncludes">
+                <argument xsi:type="ocl.ecore:VariableExp" name="self" referredVariable="/12">
+                  <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
+                </argument>
+              </source>
+              <body xsi:type="ocl.ecore:PropertyCallExp">
+                <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                <source xsi:type="ocl.ecore:VariableExp" name="temp1" referredVariable="/0/collectIncludingModelNamesForNonReflectionModels/%.1/%/collect/sortedBy/temp19">
+                  <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
+                </source>
+                <referredProperty xsi:type="ecore:EAttribute" href="http://www.eclipse.org/uml2/5.0.0/UML#//NamedElement/name"/>
+              </body>
+              <iterator xsi:type="ocl.ecore:Variable" name="temp19">
+                <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
+              </iterator>
+            </source>
+            <body xsi:type="ocl.ecore:PropertyCallExp">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+              <source xsi:type="ocl.ecore:VariableExp" name="temp2" referredVariable="/0/collectIncludingModelNamesForNonReflectionModels/%.1/%/collect/temp20">
+                <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
+              </source>
+              <referredProperty xsi:type="ecore:EAttribute" href="http://www.eclipse.org/uml2/5.0.0/UML#//NamedElement/name"/>
+            </body>
+            <iterator xsi:type="ocl.ecore:Variable" name="temp20">
+              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
+            </iterator>
+          </argument>
+        </source>
+        <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OrderedSet(T)_Class/flatten"/>
+      </expression>
+    </ownedModuleElement>
+    <ownedModuleElement xsi:type="mtl:Query" name="collectIncludingModelNamesForReflectionModels" type="/3/Set(String)">
+      <documentation xsi:type="mtl:ModuleElementDocumentation">
+        <body startPosition="3784" endPosition="3827" value="&#xD;&#xA;collect query for reflection models&#xD;&#xA;&#xD;&#xA;"/>
+      </documentation>
+      <parameter name="aPackage">
+        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
+      </parameter>
+      <expression xsi:type="ocl.ecore:IfExp" eType="/3/OrderedSet(String)">
+        <condition xsi:type="ocl.ecore:OperationCallExp">
+          <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+          <source xsi:type="ocl.ecore:OperationCallExp">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+            <source xsi:type="ocl.ecore:PropertyCallExp">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+              <source xsi:type="ocl.ecore:VariableExp" name="aPackage" referredVariable="/0/collectIncludingModelNamesForReflectionModels/aPackage">
+                <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
+              </source>
+              <referredProperty xsi:type="ecore:EAttribute" href="http://www.eclipse.org/uml2/5.0.0/UML#//NamedElement/name"/>
+            </source>
+            <argument xsi:type="mtl:QueryInvocation">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+              <definition href="keywords.emtl#/0/keyUML"/>
+              <argument xsi:type="ocl.ecore:VariableExp" name="self" referredVariable="/15">
+                <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
+              </argument>
+            </argument>
+            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String_Class/="/>
+          </source>
+          <argument xsi:type="ocl.ecore:OperationCallExp">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+            <source xsi:type="ocl.ecore:IteratorExp" name="select" eType="/3/Sequence(EAnnotation)">
+              <source xsi:type="ocl.ecore:OperationCallExp" eType="/3/Sequence(EAnnotation)" referredOperation="/1/oclstdlib_Collection(T)_Class/filter">
+                <source xsi:type="ocl.ecore:OperationCallExp" eType="/3/Sequence(OclAny)" referredOperation="/1/ecore_EObject_Class/eAllContents">
+                  <source xsi:type="ocl.ecore:VariableExp" name="aPackage" referredVariable="/0/collectIncludingModelNamesForReflectionModels/aPackage">
+                    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
+                  </source>
+                </source>
+                <argument xsi:type="ocl.ecore:TypeExp" eType="/5/EAnnotation">
+                  <referredType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EAnnotation"/>
+                </argument>
+              </source>
+              <body xsi:type="ocl.ecore:OperationCallExp">
+                <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+                <source xsi:type="ocl.ecore:PropertyCallExp">
+                  <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                  <source xsi:type="ocl.ecore:VariableExp" name="temp1" referredVariable="/0/collectIncludingModelNamesForReflectionModels/%.1/%/%.1/select/temp21">
+                    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EAnnotation"/>
+                  </source>
+                  <referredProperty xsi:type="ecore:EAttribute" href="http://www.eclipse.org/emf/2002/Ecore#//EAnnotation/source"/>
+                </source>
+                <argument xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="SDK">
+                  <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                </argument>
+                <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String_Class/="/>
+              </body>
+              <iterator xsi:type="ocl.ecore:Variable" name="temp21">
+                <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EAnnotation"/>
+              </iterator>
+            </source>
+            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Sequence(T)_Class/notEmpty"/>
+          </argument>
+          <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean_Class/or"/>
+        </condition>
+        <thenExpression xsi:type="ocl.ecore:CollectionLiteralExp" eType="/3/OrderedSet(String)" kind="OrderedSet">
+          <part xsi:type="ocl.ecore:CollectionItem">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+            <item xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="ecore">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+            </item>
+          </part>
+          <part xsi:type="ocl.ecore:CollectionItem">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+            <item xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="uml">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+            </item>
+          </part>
+          <part xsi:type="ocl.ecore:CollectionItem">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+            <item xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="ecoreReflection">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+            </item>
+          </part>
+          <part xsi:type="ocl.ecore:CollectionItem">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+            <item xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="primitivetypesReflection">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+            </item>
+          </part>
+        </thenExpression>
+        <elseExpression xsi:type="ocl.ecore:CollectionLiteralExp" eType="/3/OrderedSet(String)" kind="OrderedSet">
+          <part xsi:type="ocl.ecore:CollectionItem">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+            <item xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="ecore">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+            </item>
+          </part>
+          <part xsi:type="ocl.ecore:CollectionItem">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+            <item xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="uml">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+            </item>
+          </part>
+        </elseExpression>
+      </expression>
+    </ownedModuleElement>
+    <ownedModuleElement xsi:type="mtl:Query" name="collectIncludingModelNames" visibility="Public">
+      <documentation xsi:type="mtl:ModuleElementDocumentation">
+        <body startPosition="4178" endPosition="4450" value="&#xD;&#xA;query to collect all related packages names, which are used by current model&#xD;&#xA;&#xD;&#xA;if current model is a reflection model, query 'collectIncludingModelNamesForReflectionModels' is used&#xD;&#xA;otherwise 'collectIncludingModelNamesForNonReflectionModels' is used&#xD;&#xA;&#xD;&#xA;"/>
+      </documentation>
+      <parameter name="aPackage">
+        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
+      </parameter>
+      <expression xsi:type="ocl.ecore:IfExp" eType="/3/Set(String)">
+        <condition xsi:type="mtl:QueryInvocation" definition="/0/isReflectionModel">
+          <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+          <argument xsi:type="ocl.ecore:VariableExp" name="aPackage" referredVariable="/0/collectIncludingModelNames/aPackage">
+            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
+          </argument>
+        </condition>
+        <thenExpression xsi:type="mtl:QueryInvocation" eType="/3/Set(String)" definition="/0/collectIncludingModelNamesForReflectionModels">
+          <argument xsi:type="ocl.ecore:VariableExp" name="self" referredVariable="/18">
+            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
+          </argument>
+        </thenExpression>
+        <elseExpression xsi:type="mtl:QueryInvocation" eType="/3/Set(String)" definition="/0/collectIncludingModelNamesForNonReflectionModels">
+          <argument xsi:type="ocl.ecore:VariableExp" name="self" referredVariable="/18">
+            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
+          </argument>
+        </elseExpression>
+      </expression>
+      <type xsi:type="ocl.ecore:SetType" href="../configuration/generateCMakeFiles.emtl#/3/Set(String)"/>
+    </ownedModuleElement>
+    <ownedModuleElement xsi:type="mtl:Query" name="collectModelClassesForFactory" visibility="Public">
+      <documentation xsi:type="mtl:ModuleElementDocumentation">
+        <body startPosition="4688" endPosition="4971" value="&#xD;&#xA;query to collect model classes and interfaces, which are relevant for create functions in model factory&#xD;&#xA;&#xD;&#xA;This are all classes of the model except abstract classes and classes with active singleton annotation.&#xD;&#xA;The resulting class list is sorted by myQualifiedName.&#xD;&#xA;&#xD;&#xA;"/>
+      </documentation>
+      <parameter name="aPackage">
+        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
+      </parameter>
+      <expression xsi:type="ocl.ecore:IteratorExp" name="sortedBy" eType="/3/OrderedSet(Class)">
+        <source xsi:type="ocl.ecore:OperationCallExp" eType="/3/OrderedSet(Class)" referredOperation="/1/oclstdlib_Collection(T)_Class/addAll">
+          <source xsi:type="mtl:QueryInvocation" eType="/3/OrderedSet(Class)" definition="/0/collectModelClassesForFactoryInternal">
+            <argument xsi:type="ocl.ecore:VariableExp" name="aPackage" referredVariable="/0/collectModelClassesForFactory/aPackage">
+              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
+            </argument>
+          </source>
+          <argument xsi:type="mtl:QueryInvocation" eType="/3/OrderedSet(Class)" definition="/0/collectModelStereotypesForFactory">
+            <argument xsi:type="ocl.ecore:VariableExp" name="aPackage" referredVariable="/0/collectModelClassesForFactory/aPackage">
+              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
+            </argument>
+          </argument>
+        </source>
+        <body xsi:type="mtl:QueryInvocation">
+          <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+          <definition href="nameHelper.emtl#/0/myQualifiedName"/>
+          <argument xsi:type="ocl.ecore:VariableExp" name="temp1" referredVariable="/0/collectModelClassesForFactory/sortedBy/temp22">
+            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Class"/>
+          </argument>
+        </body>
+        <iterator xsi:type="ocl.ecore:Variable" name="temp22">
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Class"/>
+        </iterator>
+      </expression>
+      <type xsi:type="ocl.ecore:OrderedSetType" href="../configuration/generateCMakeFiles.emtl#/3/OrderedSet(Class)"/>
+    </ownedModuleElement>
+    <ownedModuleElement xsi:type="mtl:Query" name="collectModelStereotypesForFactory" type="/3/OrderedSet(Class)">
+      <parameter name="aPackage">
+        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
+      </parameter>
+      <expression xsi:type="ocl.ecore:IteratorExp" name="sortedBy" eType="/3/OrderedSet(Stereotype)">
+        <source xsi:type="ocl.ecore:IteratorExp" name="reject" eType="/3/Set(Stereotype)">
+          <source xsi:type="ocl.ecore:OperationCallExp" eType="/3/Set(Stereotype)">
+            <source xsi:type="ocl.ecore:PropertyCallExp" eType="/3/Set(NamedElement)">
+              <source xsi:type="ocl.ecore:VariableExp" name="aPackage" referredVariable="/0/collectModelStereotypesForFactory/aPackage">
+                <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
+              </source>
+              <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/uml2/5.0.0/UML#//Namespace/ownedMember"/>
+            </source>
+            <argument xsi:type="ocl.ecore:TypeExp" eType="/5/Stereotype">
+              <referredType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Stereotype"/>
+            </argument>
+            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Set(T)_Class/selectByType"/>
+          </source>
+          <body xsi:type="ocl.ecore:OperationCallExp">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+            <source xsi:type="mtl:QueryInvocation">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+              <definition href="generalHelper.emtl#/0/isSingleton"/>
+              <argument xsi:type="ocl.ecore:VariableExp" name="temp1" referredVariable="/0/collectModelStereotypesForFactory/sortedBy/reject/temp23">
+                <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Stereotype"/>
+              </argument>
+            </source>
+            <argument xsi:type="ocl.ecore:OperationCallExp">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+              <source xsi:type="ocl.ecore:PropertyCallExp">
+                <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+                <source xsi:type="ocl.ecore:VariableExp" name="temp1" referredVariable="/0/collectModelStereotypesForFactory/sortedBy/reject/temp23">
+                  <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Stereotype"/>
+                </source>
+                <referredProperty xsi:type="ecore:EAttribute" href="http://www.eclipse.org/uml2/5.0.0/UML#//Classifier/isAbstract"/>
+              </source>
+              <argument xsi:type="ocl.ecore:BooleanLiteralExp" booleanSymbol="true">
+                <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+              </argument>
+              <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean_Class/="/>
+            </argument>
+            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean_Class/or"/>
+          </body>
+          <iterator xsi:type="ocl.ecore:Variable" name="temp23">
+            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Stereotype"/>
+          </iterator>
+        </source>
+        <body xsi:type="mtl:QueryInvocation">
+          <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+          <definition href="nameHelper.emtl#/0/myQualifiedName"/>
+          <argument xsi:type="ocl.ecore:VariableExp" name="temp2" referredVariable="/0/collectModelStereotypesForFactory/sortedBy/temp24">
+            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Stereotype"/>
+          </argument>
+        </body>
+        <iterator xsi:type="ocl.ecore:Variable" name="temp24">
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Stereotype"/>
+        </iterator>
+      </expression>
+    </ownedModuleElement>
+    <ownedModuleElement xsi:type="mtl:Query" name="collectModelClassesForFactoryInternal" type="/3/OrderedSet(Class)">
+      <parameter name="aPackage">
+        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
+      </parameter>
+      <expression xsi:type="ocl.ecore:IteratorExp" name="sortedBy" eType="/3/OrderedSet(Class)">
+        <source xsi:type="ocl.ecore:IteratorExp" name="reject" eType="/3/Set(Class)">
+          <source xsi:type="ocl.ecore:OperationCallExp" eType="/3/Set(Class)">
+            <source xsi:type="ocl.ecore:PropertyCallExp" eType="/3/Set(NamedElement)">
+              <source xsi:type="ocl.ecore:VariableExp" name="aPackage" referredVariable="/0/collectModelClassesForFactoryInternal/aPackage">
+                <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
+              </source>
+              <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/uml2/5.0.0/UML#//Namespace/ownedMember"/>
+            </source>
+            <argument xsi:type="ocl.ecore:TypeExp" eType="/5/Class">
+              <referredType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Class"/>
+            </argument>
+            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Set(T)_Class/selectByType"/>
+          </source>
+          <body xsi:type="ocl.ecore:OperationCallExp">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+            <source xsi:type="mtl:QueryInvocation">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+              <definition href="generalHelper.emtl#/0/isSingleton"/>
+              <argument xsi:type="ocl.ecore:VariableExp" name="temp1" referredVariable="/0/collectModelClassesForFactoryInternal/sortedBy/reject/temp25">
+                <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Class"/>
+              </argument>
+            </source>
+            <argument xsi:type="ocl.ecore:OperationCallExp">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+              <source xsi:type="ocl.ecore:PropertyCallExp">
+                <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+                <source xsi:type="ocl.ecore:VariableExp" name="temp1" referredVariable="/0/collectModelClassesForFactoryInternal/sortedBy/reject/temp25">
+                  <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Class"/>
+                </source>
+                <referredProperty xsi:type="ecore:EAttribute" href="http://www.eclipse.org/uml2/5.0.0/UML#//Classifier/isAbstract"/>
+              </source>
+              <argument xsi:type="ocl.ecore:BooleanLiteralExp" booleanSymbol="true">
+                <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+              </argument>
+              <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean_Class/="/>
+            </argument>
+            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean_Class/or"/>
+          </body>
+          <iterator xsi:type="ocl.ecore:Variable" name="temp25">
+            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Class"/>
+          </iterator>
+        </source>
+        <body xsi:type="mtl:QueryInvocation">
+          <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+          <definition href="nameHelper.emtl#/0/myQualifiedName"/>
+          <argument xsi:type="ocl.ecore:VariableExp" name="temp2" referredVariable="/0/collectModelClassesForFactoryInternal/sortedBy/temp26">
+            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Class"/>
+          </argument>
+        </body>
+        <iterator xsi:type="ocl.ecore:Variable" name="temp26">
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Class"/>
+        </iterator>
+      </expression>
+    </ownedModuleElement>
+    <ownedModuleElement xsi:type="mtl:Query" name="collectModelInterfacesForFactory" visibility="Public">
+      <parameter name="aPackage">
+        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
+      </parameter>
+      <expression xsi:type="ocl.ecore:IteratorExp" name="sortedBy" eType="/3/OrderedSet(Interface)">
+        <source xsi:type="ocl.ecore:IteratorExp" name="reject" eType="/3/Set(Interface)">
+          <source xsi:type="ocl.ecore:OperationCallExp" eType="/3/Set(Interface)">
+            <source xsi:type="ocl.ecore:PropertyCallExp" eType="/3/Set(NamedElement)">
+              <source xsi:type="ocl.ecore:VariableExp" name="aPackage" referredVariable="/0/collectModelInterfacesForFactory/aPackage">
+                <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
+              </source>
+              <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/uml2/5.0.0/UML#//Namespace/ownedMember"/>
+            </source>
+            <argument xsi:type="ocl.ecore:TypeExp" eType="/5/Interface">
+              <referredType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Interface"/>
+            </argument>
+            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Set(T)_Class/selectByType"/>
+          </source>
+          <body xsi:type="ocl.ecore:OperationCallExp">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+            <source xsi:type="mtl:QueryInvocation">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+              <definition href="generalHelper.emtl#/0/isSingleton"/>
+              <argument xsi:type="ocl.ecore:VariableExp" name="temp1" referredVariable="/0/collectModelInterfacesForFactory/sortedBy/reject/temp27">
+                <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Interface"/>
+              </argument>
+            </source>
+            <argument xsi:type="ocl.ecore:OperationCallExp">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+              <source xsi:type="ocl.ecore:PropertyCallExp">
+                <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+                <source xsi:type="ocl.ecore:VariableExp" name="temp1" referredVariable="/0/collectModelInterfacesForFactory/sortedBy/reject/temp27">
+                  <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Interface"/>
+                </source>
+                <referredProperty xsi:type="ecore:EAttribute" href="http://www.eclipse.org/uml2/5.0.0/UML#//Classifier/isAbstract"/>
+              </source>
+              <argument xsi:type="ocl.ecore:BooleanLiteralExp" booleanSymbol="true">
+                <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+              </argument>
+              <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean_Class/="/>
+            </argument>
+            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean_Class/or"/>
+          </body>
+          <iterator xsi:type="ocl.ecore:Variable" name="temp27">
+            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Interface"/>
+          </iterator>
+        </source>
+        <body xsi:type="mtl:QueryInvocation">
+          <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+          <definition href="nameHelper.emtl#/0/myQualifiedName"/>
+          <argument xsi:type="ocl.ecore:VariableExp" name="temp2" referredVariable="/0/collectModelInterfacesForFactory/sortedBy/temp28">
+            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Interface"/>
+          </argument>
+        </body>
+        <iterator xsi:type="ocl.ecore:Variable" name="temp28">
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Interface"/>
+        </iterator>
+      </expression>
+      <type xsi:type="ocl.ecore:OrderedSetType" href="../configuration/generateCMakeFiles.emtl#/3/OrderedSet(Interface)"/>
+    </ownedModuleElement>
+  </mtl:Module>
+  <ecore:EPackage name="additions">
+    <eClassifiers xsi:type="ecore:EClass" name="oclstdlib_String_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="oclstdlib_Integer_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Integer"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="oclstdlib_Real_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Real"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ecore_EObject_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+      </eAnnotations>
+      <eOperations name="eAllContents">
+        <eAnnotations source="MTL non-standard"/>
+        <eType xsi:type="ocl.ecore:SequenceType" href="http://www.eclipse.org/acceleo/mtl/3.0/mtlnonstdlib.ecore#//Sequence(OclAny)"/>
+      </eOperations>
+      <eOperations name="collectModelIncludes" eType="/3/Set(Package)">
+        <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+          <contents xsi:type="ocl.ecore:Constraint"/>
+        </eAnnotations>
+        <eAnnotations source="MTL" references="/0/collectModelIncludes"/>
+        <eParameters name="aPackage">
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
+        </eParameters>
+      </eOperations>
+      <eOperations name="isReflectionModel">
+        <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+          <contents xsi:type="ocl.ecore:Constraint"/>
+        </eAnnotations>
+        <eAnnotations source="MTL" references="/0/isReflectionModel"/>
+        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+        <eParameters name="aPackage">
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
+        </eParameters>
+      </eOperations>
+      <eOperations name="collectIncludingModelNamesForNonReflectionModels" eType="/3/Set(String)">
+        <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+          <contents xsi:type="ocl.ecore:Constraint"/>
+        </eAnnotations>
+        <eAnnotations source="MTL" references="/0/collectIncludingModelNamesForNonReflectionModels"/>
+        <eParameters name="aPackage">
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
+        </eParameters>
+      </eOperations>
+      <eOperations name="collectIncludingModelNamesForReflectionModels" eType="/3/Set(String)">
+        <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+          <contents xsi:type="ocl.ecore:Constraint"/>
+        </eAnnotations>
+        <eAnnotations source="MTL" references="/0/collectIncludingModelNamesForReflectionModels"/>
+        <eParameters name="aPackage">
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
+        </eParameters>
+      </eOperations>
+      <eOperations name="collectIncludingModelNames">
+        <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+          <contents xsi:type="ocl.ecore:Constraint"/>
+        </eAnnotations>
+        <eAnnotations source="MTL" references="/0/collectIncludingModelNames"/>
+        <eType xsi:type="ocl.ecore:SetType" href="../configuration/generateCMakeFiles.emtl#/3/Set(String)"/>
+        <eParameters name="aPackage">
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
+        </eParameters>
+      </eOperations>
+      <eOperations name="collectModelClassesForFactory">
+        <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+          <contents xsi:type="ocl.ecore:Constraint"/>
+        </eAnnotations>
+        <eAnnotations source="MTL" references="/0/collectModelClassesForFactory"/>
+        <eType xsi:type="ocl.ecore:OrderedSetType" href="../configuration/generateCMakeFiles.emtl#/3/OrderedSet(Class)"/>
+        <eParameters name="aPackage">
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
+        </eParameters>
+      </eOperations>
+      <eOperations name="collectModelStereotypesForFactory" eType="/3/OrderedSet(Class)">
+        <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+          <contents xsi:type="ocl.ecore:Constraint"/>
+        </eAnnotations>
+        <eAnnotations source="MTL" references="/0/collectModelStereotypesForFactory"/>
+        <eParameters name="aPackage">
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
+        </eParameters>
+      </eOperations>
+      <eOperations name="collectModelClassesForFactoryInternal" eType="/3/OrderedSet(Class)">
+        <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+          <contents xsi:type="ocl.ecore:Constraint"/>
+        </eAnnotations>
+        <eAnnotations source="MTL" references="/0/collectModelClassesForFactoryInternal"/>
+        <eParameters name="aPackage">
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
+        </eParameters>
+      </eOperations>
+      <eOperations name="collectModelInterfacesForFactory">
+        <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+          <contents xsi:type="ocl.ecore:Constraint"/>
+        </eAnnotations>
+        <eAnnotations source="MTL" references="/0/collectModelInterfacesForFactory"/>
+        <eType xsi:type="ocl.ecore:OrderedSetType" href="../configuration/generateCMakeFiles.emtl#/3/OrderedSet(Interface)"/>
+        <eParameters name="aPackage">
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
+        </eParameters>
+      </eOperations>
+      <eOperations name="isSingleton">
+        <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+          <contents xsi:type="ocl.ecore:Constraint"/>
+        </eAnnotations>
+        <eAnnotations source="MTL">
+          <references href="generalHelper.emtl#/0/isSingleton"/>
+        </eAnnotations>
+        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+        <eParameters name="anElement">
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Element"/>
+        </eParameters>
+      </eOperations>
+      <eOperations name="keyUML">
+        <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+          <contents xsi:type="ocl.ecore:Constraint"/>
+        </eAnnotations>
+        <eAnnotations source="MTL">
+          <references href="keywords.emtl#/0/keyUML"/>
+        </eAnnotations>
+        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+        <eParameters name="any">
+          <eType xsi:type="ocl.ecore:AnyType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny"/>
+        </eParameters>
+      </eOperations>
+      <eOperations name="keyEcore">
+        <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+          <contents xsi:type="ocl.ecore:Constraint"/>
+        </eAnnotations>
+        <eAnnotations source="MTL">
+          <references href="keywords.emtl#/0/keyEcore"/>
+        </eAnnotations>
+        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+        <eParameters name="any">
+          <eType xsi:type="ocl.ecore:AnyType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny"/>
+        </eParameters>
+      </eOperations>
+      <eOperations name="keyPrimitiveTypes">
+        <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+          <contents xsi:type="ocl.ecore:Constraint"/>
+        </eAnnotations>
+        <eAnnotations source="MTL">
+          <references href="keywords.emtl#/0/keyPrimitiveTypes"/>
+        </eAnnotations>
+        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+        <eParameters name="any">
+          <eType xsi:type="ocl.ecore:AnyType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny"/>
+        </eParameters>
+      </eOperations>
+      <eOperations name="myQualifiedName">
+        <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+          <contents xsi:type="ocl.ecore:Constraint"/>
+        </eAnnotations>
+        <eAnnotations source="MTL">
+          <references href="nameHelper.emtl#/0/myQualifiedName"/>
+        </eAnnotations>
+        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+        <eParameters name="anElement">
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//NamedElement"/>
+        </eParameters>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="oclstdlib_OclAny_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="oclstdlib_Collection(T)_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Collection(T)"/>
+      </eAnnotations>
+      <eOperations name="filter">
+        <eAnnotations source="MTL non-standard"/>
+        <eType xsi:type="ocl.ecore:CollectionType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Collection(T)"/>
+        <eParameters name="filter">
+          <eType xsi:type="ocl.ecore:TypeType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclType"/>
+        </eParameters>
+      </eOperations>
+      <eOperations name="addAll">
+        <eAnnotations source="MTL non-standard"/>
+        <eType xsi:type="ocl.ecore:CollectionType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Collection(T)"/>
+        <eParameters name="otherCollection">
+          <eType xsi:type="ocl.ecore:CollectionType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Collection(T)"/>
+        </eParameters>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="oclstdlib_Sequence(T)_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Sequence(T)"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="oclstdlib_OrderedSet(T)_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OrderedSet(T)"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="uml_Package_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="oclstdlib_Boolean_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="uml_Element_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/uml2/5.0.0/UML#//Element"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="uml_Class_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/uml2/5.0.0/UML#//Class"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="uml_Interface_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/uml2/5.0.0/UML#//Interface"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="uml_NamedElement_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/uml2/5.0.0/UML#//NamedElement"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="uml_Type_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/uml2/5.0.0/UML#//Type"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="uml_ConnectorEnd_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/uml2/5.0.0/UML#//ConnectorEnd"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="uml_StructuralFeature_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/uml2/5.0.0/UML#//StructuralFeature"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="uml_Namespace_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/uml2/5.0.0/UML#//Namespace"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="uml_Classifier_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/uml2/5.0.0/UML#//Classifier"/>
+      </eAnnotations>
+    </eClassifiers>
+  </ecore:EPackage>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+  </ocl.ecore:Variable>
+  <ecore:EPackage name="collections">
+    <eClassifiers xsi:type="ocl.ecore:SetType" name="Set(Package)" instanceClassName="java.util.Set">
+      <elementType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ocl.ecore:SetType" name="Set(String)" instanceClassName="java.util.Set">
+      <elementType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ocl.ecore:OrderedSetType" name="OrderedSet(Class)" instanceClassName="java.util.LinkedHashSet">
+      <elementType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Class"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ocl.ecore:SetType" name="Set(NamedElement)" instanceClassName="java.util.Set">
+      <elementType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//NamedElement"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ocl.ecore:SetType" name="Set(Class)" instanceClassName="java.util.Set">
+      <elementType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Class"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ocl.ecore:OrderedSetType" name="OrderedSet(Property)" instanceClassName="java.util.LinkedHashSet">
+      <elementType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Property"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ocl.ecore:BagType" name="Bag(Property)" instanceClassName="org.eclipse.ocl.util.Bag">
+      <elementType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Property"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ocl.ecore:BagType" name="Bag(Type)" instanceClassName="org.eclipse.ocl.util.Bag">
+      <elementType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Type"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ocl.ecore:BagType" name="Bag(Package)" instanceClassName="org.eclipse.ocl.util.Bag">
+      <elementType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ocl.ecore:SetType" name="Set(Stereotype)" instanceClassName="java.util.Set">
+      <elementType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Stereotype"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ocl.ecore:BagType" name="Bag(Stereotype)" instanceClassName="org.eclipse.ocl.util.Bag">
+      <elementType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Stereotype"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ocl.ecore:OrderedSetType" name="OrderedSet(Operation)" instanceClassName="java.util.LinkedHashSet">
+      <elementType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Operation"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ocl.ecore:BagType" name="Bag(Operation)" instanceClassName="org.eclipse.ocl.util.Bag">
+      <elementType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Operation"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ocl.ecore:OrderedSetType" name="OrderedSet(Parameter)" instanceClassName="java.util.LinkedHashSet">
+      <elementType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Parameter"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ocl.ecore:BagType" name="Bag(Parameter)" instanceClassName="org.eclipse.ocl.util.Bag">
+      <elementType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Parameter"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ocl.ecore:SetType" name="Set(InterfaceRealization)" instanceClassName="java.util.Set">
+      <elementType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//InterfaceRealization"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ocl.ecore:BagType" name="Bag(InterfaceRealization)" instanceClassName="org.eclipse.ocl.util.Bag">
+      <elementType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//InterfaceRealization"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ocl.ecore:BagType" name="Bag(NamedElement)" instanceClassName="org.eclipse.ocl.util.Bag">
+      <elementType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//NamedElement"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ocl.ecore:SetType" name="Set(Dependency)" instanceClassName="java.util.Set">
+      <elementType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Dependency"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ocl.ecore:OrderedSetType" name="OrderedSet(Bag(Package))" instanceClassName="java.util.LinkedHashSet" elementType="/3/Bag(Package)"/>
+    <eClassifiers xsi:type="ocl.ecore:SetType" name="Set(Bag(Package))" instanceClassName="java.util.Set" elementType="/3/Bag(Package)"/>
+    <eClassifiers xsi:type="ocl.ecore:OrderedSetType" name="OrderedSet(String)" instanceClassName="java.util.LinkedHashSet">
+      <elementType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ocl.ecore:OrderedSetType" name="OrderedSet(Package)" instanceClassName="java.util.LinkedHashSet">
+      <elementType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ocl.ecore:SequenceType" name="Sequence(String)" instanceClassName="java.util.List">
+      <elementType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ocl.ecore:CollectionType" name="Collection(String)" instanceClassName="java.util.Collection">
+      <elementType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ocl.ecore:SequenceType" name="Sequence(OclAny)" instanceClassName="java.util.List">
+      <elementType xsi:type="ocl.ecore:AnyType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ocl.ecore:SequenceType" name="Sequence(EAnnotation)" instanceClassName="java.util.List">
+      <elementType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EAnnotation"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ocl.ecore:CollectionType" name="Collection(Class)" instanceClassName="java.util.Collection">
+      <elementType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Class"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ocl.ecore:OrderedSetType" name="OrderedSet(Stereotype)" instanceClassName="java.util.LinkedHashSet">
+      <elementType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Stereotype"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ocl.ecore:SetType" name="Set(Interface)" instanceClassName="java.util.Set">
+      <elementType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Interface"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ocl.ecore:OrderedSetType" name="OrderedSet(Interface)" instanceClassName="java.util.LinkedHashSet">
+      <elementType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Interface"/>
+    </eClassifiers>
+  </ecore:EPackage>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
+  </ocl.ecore:Variable>
+  <ecore:EPackage name="types">
+    <eClassifiers xsi:type="ocl.ecore:TypeType" name="Class">
+      <referredType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Class"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ocl.ecore:TypeType" name="Dependency">
+      <referredType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Dependency"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ocl.ecore:TypeType" name="EAnnotation">
+      <referredType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EAnnotation"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ocl.ecore:TypeType" name="Stereotype">
+      <referredType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Stereotype"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ocl.ecore:TypeType" name="Interface">
+      <referredType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Interface"/>
+    </eClassifiers>
+  </ecore:EPackage>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+  </ocl.ecore:Variable>
+  <ecore:EAnnotation source="positions">
+    <eAnnotations source="positions.0" references="/0/%">
+      <details key="start" value="30"/>
+      <details key="end" value="1476"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.1" references="/0/collectModelIncludes">
+      <details key="start" value="2380"/>
+      <details key="end" value="3145"/>
+      <details key="line" value="45"/>
+    </eAnnotations>
+    <eAnnotations source="positions.2" references="/0/collectModelIncludes/%">
+      <details key="start" value="1726"/>
+      <details key="end" value="2378"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.3" references="/0/collectModelIncludes/aPackage">
+      <details key="start" value="2416"/>
+      <details key="end" value="2434"/>
+      <details key="line" value="45"/>
+    </eAnnotations>
+    <eAnnotations source="positions.4" references="/0/collectModelIncludes/reject">
+      <details key="start" value="2453"/>
+      <details key="end" value="3142"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5" references="/0/collectModelIncludes/reject/reject">
+      <details key="start" value="2453"/>
+      <details key="end" value="3070"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.6" references="/0/collectModelIncludes/reject/reject/%">
+      <details key="start" value="2453"/>
+      <details key="end" value="3044"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.7" references="/0/collectModelIncludes/reject/reject/%/%">
+      <details key="start" value="2453"/>
+      <details key="end" value="3033"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.8" references="/0/collectModelIncludes/reject/reject/%/%/%/collect">
+      <details key="start" value="2484"/>
+      <details key="end" value="2549"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.9" references="/0/collectModelIncludes/reject/reject/%/%/%/collect/collect">
+      <details key="start" value="2484"/>
+      <details key="end" value="2529"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.10" references="/0/collectModelIncludes/reject/reject/%/%/%/collect/collect/collect">
+      <details key="start" value="2484"/>
+      <details key="end" value="2524"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.11" references="/0/collectModelIncludes/reject/reject/%/%/%/collect/collect/collect/%">
+      <details key="start" value="2484"/>
+      <details key="end" value="2514"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.12" references="/0/collectModelIncludes/reject/reject/%/%/%/collect/collect/collect/%/%">
+      <details key="start" value="2484"/>
+      <details key="end" value="2499"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.13" references="/0/collectModelIncludes/reject/reject/%/%/%/collect/collect/collect/%/%/aPackage">
+      <details key="start" value="2484"/>
+      <details key="end" value="2492"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.14" references="/0/collectModelIncludes/reject/reject/%/%/%/collect/collect/collect/%/%.1">
+      <details key="start" value="2508"/>
+      <details key="end" value="2513"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.15" references="/0/collectModelIncludes/reject/reject/%/%/%/collect/collect/collect/%.1">
+      <details key="start" value="2515"/>
+      <details key="end" value="2524"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.16" references="/0/collectModelIncludes/reject/reject/%/%/%/collect/collect/collect/%.1/temp1">
+      <details key="start" value="-1"/>
+      <details key="end" value="-1"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.17" references="/0/collectModelIncludes/reject/reject/%/%/%/collect/collect/collect/temp1">
+      <details key="start" value="-1"/>
+      <details key="end" value="-1"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.18" references="/0/collectModelIncludes/reject/reject/%/%/%/collect/collect/%">
+      <details key="start" value="2525"/>
+      <details key="end" value="2529"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.19" references="/0/collectModelIncludes/reject/reject/%/%/%/collect/collect/%/temp2">
+      <details key="start" value="-1"/>
+      <details key="end" value="-1"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.20" references="/0/collectModelIncludes/reject/reject/%/%/%/collect/collect/temp2">
+      <details key="start" value="-1"/>
+      <details key="end" value="-1"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.21" references="/0/collectModelIncludes/reject/reject/%/%/%/collect/%">
+      <details key="start" value="-1"/>
+      <details key="end" value="-1"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.22" references="/0/collectModelIncludes/reject/reject/%/%/%/collect/%/temp3">
+      <details key="start" value="-1"/>
+      <details key="end" value="-1"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.23" references="/0/collectModelIncludes/reject/reject/%/%/%/collect/temp3">
+      <details key="start" value="-1"/>
+      <details key="end" value="-1"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.24" references="/0/collectModelIncludes/reject/reject/%/%/%.1/collect">
+      <details key="start" value="2570"/>
+      <details key="end" value="2654"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.25" references="/0/collectModelIncludes/reject/reject/%/%/%.1/collect/collect">
+      <details key="start" value="2570"/>
+      <details key="end" value="2634"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.26" references="/0/collectModelIncludes/reject/reject/%/%/%.1/collect/collect/collect">
+      <details key="start" value="2570"/>
+      <details key="end" value="2610"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.27" references="/0/collectModelIncludes/reject/reject/%/%/%.1/collect/collect/collect/%">
+      <details key="start" value="2570"/>
+      <details key="end" value="2600"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.28" references="/0/collectModelIncludes/reject/reject/%/%/%.1/collect/collect/collect/%/%">
+      <details key="start" value="2570"/>
+      <details key="end" value="2585"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.29" references="/0/collectModelIncludes/reject/reject/%/%/%.1/collect/collect/collect/%/%/aPackage">
+      <details key="start" value="2570"/>
+      <details key="end" value="2578"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.30" references="/0/collectModelIncludes/reject/reject/%/%/%.1/collect/collect/collect/%/%.1">
+      <details key="start" value="2594"/>
+      <details key="end" value="2599"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.31" references="/0/collectModelIncludes/reject/reject/%/%/%.1/collect/collect/collect/%.1">
+      <details key="start" value="2601"/>
+      <details key="end" value="2610"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.32" references="/0/collectModelIncludes/reject/reject/%/%/%.1/collect/collect/collect/%.1/temp4">
+      <details key="start" value="-1"/>
+      <details key="end" value="-1"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.33" references="/0/collectModelIncludes/reject/reject/%/%/%.1/collect/collect/collect/temp4">
+      <details key="start" value="-1"/>
+      <details key="end" value="-1"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.34" references="/0/collectModelIncludes/reject/reject/%/%/%.1/collect/collect/%">
+      <details key="start" value="-1"/>
+      <details key="end" value="-1"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.35" references="/0/collectModelIncludes/reject/reject/%/%/%.1/collect/collect/%/temp5">
+      <details key="start" value="-1"/>
+      <details key="end" value="-1"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.36" references="/0/collectModelIncludes/reject/reject/%/%/%.1/collect/collect/temp5">
+      <details key="start" value="-1"/>
+      <details key="end" value="-1"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.37" references="/0/collectModelIncludes/reject/reject/%/%/%.1/collect/%">
+      <details key="start" value="-1"/>
+      <details key="end" value="-1"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.38" references="/0/collectModelIncludes/reject/reject/%/%/%.1/collect/%/temp6">
+      <details key="start" value="-1"/>
+      <details key="end" value="-1"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.39" references="/0/collectModelIncludes/reject/reject/%/%/%.1/collect/temp6">
+      <details key="start" value="-1"/>
+      <details key="end" value="-1"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.40" references="/0/collectModelIncludes/reject/reject/%/%/%.2/collect">
+      <details key="start" value="2675"/>
+      <details key="end" value="2786"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.41" references="/0/collectModelIncludes/reject/reject/%/%/%.2/collect/reject">
+      <details key="start" value="2675"/>
+      <details key="end" value="2766"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.42" references="/0/collectModelIncludes/reject/reject/%/%/%.2/collect/reject/collect">
+      <details key="start" value="2675"/>
+      <details key="end" value="2740"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.43" references="/0/collectModelIncludes/reject/reject/%/%/%.2/collect/reject/collect/collect">
+      <details key="start" value="2675"/>
+      <details key="end" value="2735"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.44" references="/0/collectModelIncludes/reject/reject/%/%/%.2/collect/reject/collect/collect/collect">
+      <details key="start" value="2675"/>
+      <details key="end" value="2720"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.45" references="/0/collectModelIncludes/reject/reject/%/%/%.2/collect/reject/collect/collect/collect/%">
+      <details key="start" value="2675"/>
+      <details key="end" value="2705"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.46" references="/0/collectModelIncludes/reject/reject/%/%/%.2/collect/reject/collect/collect/collect/%/%">
+      <details key="start" value="2675"/>
+      <details key="end" value="2690"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.47" references="/0/collectModelIncludes/reject/reject/%/%/%.2/collect/reject/collect/collect/collect/%/%/aPackage">
+      <details key="start" value="2675"/>
+      <details key="end" value="2683"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.48" references="/0/collectModelIncludes/reject/reject/%/%/%.2/collect/reject/collect/collect/collect/%/%.1">
+      <details key="start" value="2699"/>
+      <details key="end" value="2704"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.49" references="/0/collectModelIncludes/reject/reject/%/%/%.2/collect/reject/collect/collect/collect/%.1">
+      <details key="start" value="2706"/>
+      <details key="end" value="2720"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.50" references="/0/collectModelIncludes/reject/reject/%/%/%.2/collect/reject/collect/collect/collect/%.1/temp7">
+      <details key="start" value="-1"/>
+      <details key="end" value="-1"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.51" references="/0/collectModelIncludes/reject/reject/%/%/%.2/collect/reject/collect/collect/collect/temp7">
+      <details key="start" value="-1"/>
+      <details key="end" value="-1"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.52" references="/0/collectModelIncludes/reject/reject/%/%/%.2/collect/reject/collect/collect/%">
+      <details key="start" value="2721"/>
+      <details key="end" value="2735"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.53" references="/0/collectModelIncludes/reject/reject/%/%/%.2/collect/reject/collect/collect/%/temp8">
+      <details key="start" value="-1"/>
+      <details key="end" value="-1"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.54" references="/0/collectModelIncludes/reject/reject/%/%/%.2/collect/reject/collect/collect/temp8">
+      <details key="start" value="-1"/>
+      <details key="end" value="-1"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.55" references="/0/collectModelIncludes/reject/reject/%/%/%.2/collect/reject/collect/%">
+      <details key="start" value="2736"/>
+      <details key="end" value="2740"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.56" references="/0/collectModelIncludes/reject/reject/%/%/%.2/collect/reject/collect/%/temp9">
+      <details key="start" value="-1"/>
+      <details key="end" value="-1"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.57" references="/0/collectModelIncludes/reject/reject/%/%/%.2/collect/reject/collect/temp9">
+      <details key="start" value="-1"/>
+      <details key="end" value="-1"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.58" references="/0/collectModelIncludes/reject/reject/%/%/%.2/collect/reject/%">
+      <details key="start" value="2749"/>
+      <details key="end" value="2765"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.59" references="/0/collectModelIncludes/reject/reject/%/%/%.2/collect/reject/%/temp10">
+      <details key="start" value="-1"/>
+      <details key="end" value="-1"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.60" references="/0/collectModelIncludes/reject/reject/%/%/%.2/collect/reject/temp10">
+      <details key="start" value="-1"/>
+      <details key="end" value="-1"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.61" references="/0/collectModelIncludes/reject/reject/%/%/%.2/collect/%">
+      <details key="start" value="-1"/>
+      <details key="end" value="-1"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.62" references="/0/collectModelIncludes/reject/reject/%/%/%.2/collect/%/temp11">
+      <details key="start" value="-1"/>
+      <details key="end" value="-1"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.63" references="/0/collectModelIncludes/reject/reject/%/%/%.2/collect/temp11">
+      <details key="start" value="-1"/>
+      <details key="end" value="-1"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.64" references="/0/collectModelIncludes/reject/reject/%/%/%.3/collect">
+      <details key="start" value="2807"/>
+      <details key="end" value="2913"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.65" references="/0/collectModelIncludes/reject/reject/%/%/%.3/collect/reject">
+      <details key="start" value="2807"/>
+      <details key="end" value="2893"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.66" references="/0/collectModelIncludes/reject/reject/%/%/%.3/collect/reject/collect">
+      <details key="start" value="2807"/>
+      <details key="end" value="2867"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.67" references="/0/collectModelIncludes/reject/reject/%/%/%.3/collect/reject/collect/collect">
+      <details key="start" value="2807"/>
+      <details key="end" value="2858"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.68" references="/0/collectModelIncludes/reject/reject/%/%/%.3/collect/reject/collect/collect/%">
+      <details key="start" value="2807"/>
+      <details key="end" value="2837"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.69" references="/0/collectModelIncludes/reject/reject/%/%/%.3/collect/reject/collect/collect/%/%">
+      <details key="start" value="2807"/>
+      <details key="end" value="2822"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.70" references="/0/collectModelIncludes/reject/reject/%/%/%.3/collect/reject/collect/collect/%/%/aPackage">
+      <details key="start" value="2807"/>
+      <details key="end" value="2815"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.71" references="/0/collectModelIncludes/reject/reject/%/%/%.3/collect/reject/collect/collect/%/%.1">
+      <details key="start" value="2831"/>
+      <details key="end" value="2836"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.72" references="/0/collectModelIncludes/reject/reject/%/%/%.3/collect/reject/collect/collect/%.1">
+      <details key="start" value="2838"/>
+      <details key="end" value="2858"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.73" references="/0/collectModelIncludes/reject/reject/%/%/%.3/collect/reject/collect/collect/%.1/temp12">
+      <details key="start" value="-1"/>
+      <details key="end" value="-1"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.74" references="/0/collectModelIncludes/reject/reject/%/%/%.3/collect/reject/collect/collect/temp12">
+      <details key="start" value="-1"/>
+      <details key="end" value="-1"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.75" references="/0/collectModelIncludes/reject/reject/%/%/%.3/collect/reject/collect/%">
+      <details key="start" value="2859"/>
+      <details key="end" value="2867"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.76" references="/0/collectModelIncludes/reject/reject/%/%/%.3/collect/reject/collect/%/temp13">
+      <details key="start" value="-1"/>
+      <details key="end" value="-1"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.77" references="/0/collectModelIncludes/reject/reject/%/%/%.3/collect/reject/collect/temp13">
+      <details key="start" value="-1"/>
+      <details key="end" value="-1"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.78" references="/0/collectModelIncludes/reject/reject/%/%/%.3/collect/reject/%">
+      <details key="start" value="2876"/>
+      <details key="end" value="2892"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.79" references="/0/collectModelIncludes/reject/reject/%/%/%.3/collect/reject/%/temp14">
+      <details key="start" value="-1"/>
+      <details key="end" value="-1"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.80" references="/0/collectModelIncludes/reject/reject/%/%/%.3/collect/reject/temp14">
+      <details key="start" value="-1"/>
+      <details key="end" value="-1"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.81" references="/0/collectModelIncludes/reject/reject/%/%/%.3/collect/%">
+      <details key="start" value="-1"/>
+      <details key="end" value="-1"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.82" references="/0/collectModelIncludes/reject/reject/%/%/%.3/collect/%/temp15">
+      <details key="start" value="-1"/>
+      <details key="end" value="-1"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.83" references="/0/collectModelIncludes/reject/reject/%/%/%.3/collect/temp15">
+      <details key="start" value="-1"/>
+      <details key="end" value="-1"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.84" references="/0/collectModelIncludes/reject/reject/%/%/%.4/collect">
+      <details key="start" value="2934"/>
+      <details key="end" value="3013"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.85" references="/0/collectModelIncludes/reject/reject/%/%/%.4/collect/collect">
+      <details key="start" value="2934"/>
+      <details key="end" value="2993"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.86" references="/0/collectModelIncludes/reject/reject/%/%/%.4/collect/collect/%">
+      <details key="start" value="2934"/>
+      <details key="end" value="2969"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.87" references="/0/collectModelIncludes/reject/reject/%/%/%.4/collect/collect/%/%">
+      <details key="start" value="2934"/>
+      <details key="end" value="2949"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.88" references="/0/collectModelIncludes/reject/reject/%/%/%.4/collect/collect/%/%/aPackage">
+      <details key="start" value="2934"/>
+      <details key="end" value="2942"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.89" references="/0/collectModelIncludes/reject/reject/%/%/%.4/collect/collect/%/%.1">
+      <details key="start" value="2958"/>
+      <details key="end" value="2968"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.90" references="/0/collectModelIncludes/reject/reject/%/%/%.4/collect/collect/%.1">
+      <details key="start" value="-1"/>
+      <details key="end" value="-1"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.91" references="/0/collectModelIncludes/reject/reject/%/%/%.4/collect/collect/%.1/temp16">
+      <details key="start" value="-1"/>
+      <details key="end" value="-1"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.92" references="/0/collectModelIncludes/reject/reject/%/%/%.4/collect/collect/temp16">
+      <details key="start" value="-1"/>
+      <details key="end" value="-1"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.93" references="/0/collectModelIncludes/reject/reject/%/%/%.4/collect/%">
+      <details key="start" value="-1"/>
+      <details key="end" value="-1"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.94" references="/0/collectModelIncludes/reject/reject/%/%/%.4/collect/%/temp17">
+      <details key="start" value="-1"/>
+      <details key="end" value="-1"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.95" references="/0/collectModelIncludes/reject/reject/%/%/%.4/collect/temp17">
+      <details key="start" value="-1"/>
+      <details key="end" value="-1"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.96" references="/0/collectModelIncludes/reject/reject/%.1">
+      <details key="start" value="3053"/>
+      <details key="end" value="3069"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.97" references="/0/collectModelIncludes/reject/reject/%.1/temp18">
+      <details key="start" value="-1"/>
+      <details key="end" value="-1"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.98" references="/0/collectModelIncludes/reject/reject/temp18">
+      <details key="start" value="-1"/>
+      <details key="end" value="-1"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.99" references="/0/collectModelIncludes/reject/%">
+      <details key="start" value="3096"/>
+      <details key="end" value="3141"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.100" references="/0/collectModelIncludes/reject/%/%">
+      <details key="start" value="3096"/>
+      <details key="end" value="3113"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.101" references="/0/collectModelIncludes/reject/%/%/pack">
+      <details key="start" value="3097"/>
+      <details key="end" value="3101"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.102" references="/0/collectModelIncludes/reject/%/%/aPackage">
+      <details key="start" value="3104"/>
+      <details key="end" value="3112"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.103" references="/0/collectModelIncludes/reject/%/%.1">
+      <details key="start" value="3117"/>
+      <details key="end" value="3141"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.104" references="/0/collectModelIncludes/reject/%/%.1/pack">
+      <details key="start" value="3117"/>
+      <details key="end" value="3121"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.105" references="/0/collectModelIncludes/reject/pack">
+      <details key="start" value="3079"/>
+      <details key="end" value="3093"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.106" references="/0/isReflectionModel">
+      <details key="start" value="3205"/>
+      <details key="end" value="3373"/>
+      <details key="line" value="56"/>
+    </eAnnotations>
+    <eAnnotations source="positions.107" references="/0/isReflectionModel/%">
+      <details key="start" value="3149"/>
+      <details key="end" value="3203"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.108" references="/0/isReflectionModel/aPackage">
+      <details key="start" value="3237"/>
+      <details key="end" value="3255"/>
+      <details key="line" value="56"/>
+    </eAnnotations>
+    <eAnnotations source="positions.109" references="/0/isReflectionModel/%.1">
+      <details key="start" value="3269"/>
+      <details key="end" value="3370"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.110" references="/0/isReflectionModel/%.1/%">
+      <details key="start" value="3270"/>
+      <details key="end" value="3328"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.111" references="/0/isReflectionModel/%.1/%/%">
+      <details key="start" value="3270"/>
+      <details key="end" value="3296"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.112" references="/0/isReflectionModel/%.1/%/%/%">
+      <details key="start" value="3271"/>
+      <details key="end" value="3284"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.113" references="/0/isReflectionModel/%.1/%/%/%/aPackage">
+      <details key="start" value="3271"/>
+      <details key="end" value="3279"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.114" references="/0/isReflectionModel/%.1/%/%/%.1">
+      <details key="start" value="3287"/>
+      <details key="end" value="3295"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.115" references="/0/isReflectionModel/%.1/%/%/%.1/self">
+      <details key="start" value="-1"/>
+      <details key="end" value="-1"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.116" references="/0/isReflectionModel/%.1/%/%.1">
+      <details key="start" value="3300"/>
+      <details key="end" value="3328"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.117" references="/0/isReflectionModel/%.1/%/%.1/%">
+      <details key="start" value="3301"/>
+      <details key="end" value="3314"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.118" references="/0/isReflectionModel/%.1/%/%.1/%/aPackage">
+      <details key="start" value="3301"/>
+      <details key="end" value="3309"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.119" references="/0/isReflectionModel/%.1/%/%.1/%.1">
+      <details key="start" value="3317"/>
+      <details key="end" value="3327"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.120" references="/0/isReflectionModel/%.1/%/%.1/%.1/self">
+      <details key="start" value="-1"/>
+      <details key="end" value="-1"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.121" references="/0/isReflectionModel/%.1/%.1">
+      <details key="start" value="3332"/>
+      <details key="end" value="3369"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.122" references="/0/isReflectionModel/%.1/%.1/%">
+      <details key="start" value="3333"/>
+      <details key="end" value="3346"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.123" references="/0/isReflectionModel/%.1/%.1/%/aPackage">
+      <details key="start" value="3333"/>
+      <details key="end" value="3341"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.124" references="/0/isReflectionModel/%.1/%.1/%.1">
+      <details key="start" value="3349"/>
+      <details key="end" value="3368"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.125" references="/0/isReflectionModel/%.1/%.1/%.1/self">
+      <details key="start" value="-1"/>
+      <details key="end" value="-1"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.126" references="/0/collectIncludingModelNamesForNonReflectionModels">
+      <details key="start" value="3520"/>
+      <details key="end" value="3777"/>
+      <details key="line" value="63"/>
+    </eAnnotations>
+    <eAnnotations source="positions.127" references="/0/collectIncludingModelNamesForNonReflectionModels/%">
+      <details key="start" value="3377"/>
+      <details key="end" value="3518"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.128" references="/0/collectIncludingModelNamesForNonReflectionModels/aPackage">
+      <details key="start" value="3584"/>
+      <details key="end" value="3602"/>
+      <details key="line" value="63"/>
+    </eAnnotations>
+    <eAnnotations source="positions.129" references="/0/collectIncludingModelNamesForNonReflectionModels/%.1">
+      <details key="start" value="3620"/>
+      <details key="end" value="3774"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.130" references="/0/collectIncludingModelNamesForNonReflectionModels/%.1/%">
+      <details key="start" value="3620"/>
+      <details key="end" value="3763"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.131" references="/0/collectIncludingModelNamesForNonReflectionModels/%.1/%/%">
+      <details key="start" value="3620"/>
+      <details key="end" value="3710"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.132" references="/0/collectIncludingModelNamesForNonReflectionModels/%.1/%/%/%/%">
+      <details key="start" value="3631"/>
+      <details key="end" value="3638"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.133" references="/0/collectIncludingModelNamesForNonReflectionModels/%.1/%/%/%.1/%">
+      <details key="start" value="3640"/>
+      <details key="end" value="3645"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.134" references="/0/collectIncludingModelNamesForNonReflectionModels/%.1/%/%/%.2/%">
+      <details key="start" value="3647"/>
+      <details key="end" value="3664"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.135" references="/0/collectIncludingModelNamesForNonReflectionModels/%.1/%/%/%.3/%">
+      <details key="start" value="3666"/>
+      <details key="end" value="3692"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.136" references="/0/collectIncludingModelNamesForNonReflectionModels/%.1/%/%/%.4/%">
+      <details key="start" value="3694"/>
+      <details key="end" value="3709"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.137" references="/0/collectIncludingModelNamesForNonReflectionModels/%.1/%/collect">
+      <details key="start" value="3719"/>
+      <details key="end" value="3762"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.138" references="/0/collectIncludingModelNamesForNonReflectionModels/%.1/%/collect/sortedBy">
+      <details key="start" value="3719"/>
+      <details key="end" value="3757"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.139" references="/0/collectIncludingModelNamesForNonReflectionModels/%.1/%/collect/sortedBy/%">
+      <details key="start" value="3719"/>
+      <details key="end" value="3741"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.140" references="/0/collectIncludingModelNamesForNonReflectionModels/%.1/%/collect/sortedBy/%/self">
+      <details key="start" value="-1"/>
+      <details key="end" value="-1"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.141" references="/0/collectIncludingModelNamesForNonReflectionModels/%.1/%/collect/sortedBy/%.1">
+      <details key="start" value="3752"/>
+      <details key="end" value="3756"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.142" references="/0/collectIncludingModelNamesForNonReflectionModels/%.1/%/collect/sortedBy/%.1/temp1">
+      <details key="start" value="-1"/>
+      <details key="end" value="-1"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.143" references="/0/collectIncludingModelNamesForNonReflectionModels/%.1/%/collect/sortedBy/temp19">
+      <details key="start" value="-1"/>
+      <details key="end" value="-1"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.144" references="/0/collectIncludingModelNamesForNonReflectionModels/%.1/%/collect/%">
+      <details key="start" value="3758"/>
+      <details key="end" value="3762"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.145" references="/0/collectIncludingModelNamesForNonReflectionModels/%.1/%/collect/%/temp2">
+      <details key="start" value="-1"/>
+      <details key="end" value="-1"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.146" references="/0/collectIncludingModelNamesForNonReflectionModels/%.1/%/collect/temp20">
+      <details key="start" value="-1"/>
+      <details key="end" value="-1"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.147" references="/0/collectIncludingModelNamesForReflectionModels">
+      <details key="start" value="3831"/>
+      <details key="end" value="4171"/>
+      <details key="line" value="68"/>
+    </eAnnotations>
+    <eAnnotations source="positions.148" references="/0/collectIncludingModelNamesForReflectionModels/%">
+      <details key="start" value="3781"/>
+      <details key="end" value="3829"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.149" references="/0/collectIncludingModelNamesForReflectionModels/aPackage">
+      <details key="start" value="3892"/>
+      <details key="end" value="3910"/>
+      <details key="line" value="68"/>
+    </eAnnotations>
+    <eAnnotations source="positions.150" references="/0/collectIncludingModelNamesForReflectionModels/%.1">
+      <details key="start" value="3928"/>
+      <details key="end" value="4169"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.151" references="/0/collectIncludingModelNamesForReflectionModels/%.1/%">
+      <details key="start" value="3931"/>
+      <details key="end" value="4052"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.152" references="/0/collectIncludingModelNamesForReflectionModels/%.1/%/%">
+      <details key="start" value="3932"/>
+      <details key="end" value="3958"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.153" references="/0/collectIncludingModelNamesForReflectionModels/%.1/%/%/%">
+      <details key="start" value="3933"/>
+      <details key="end" value="3946"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.154" references="/0/collectIncludingModelNamesForReflectionModels/%.1/%/%/%/aPackage">
+      <details key="start" value="3933"/>
+      <details key="end" value="3941"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.155" references="/0/collectIncludingModelNamesForReflectionModels/%.1/%/%/%.1">
+      <details key="start" value="3949"/>
+      <details key="end" value="3957"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.156" references="/0/collectIncludingModelNamesForReflectionModels/%.1/%/%/%.1/self">
+      <details key="start" value="-1"/>
+      <details key="end" value="-1"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.157" references="/0/collectIncludingModelNamesForReflectionModels/%.1/%/%.1">
+      <details key="start" value="3962"/>
+      <details key="end" value="4051"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.158" references="/0/collectIncludingModelNamesForReflectionModels/%.1/%/%.1/select">
+      <details key="start" value="3963"/>
+      <details key="end" value="4038"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.159" references="/0/collectIncludingModelNamesForReflectionModels/%.1/%/%.1/select/%">
+      <details key="start" value="3963"/>
+      <details key="end" value="4014"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.160" references="/0/collectIncludingModelNamesForReflectionModels/%.1/%/%.1/select/%/%">
+      <details key="start" value="3963"/>
+      <details key="end" value="3986"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.161" references="/0/collectIncludingModelNamesForReflectionModels/%.1/%/%.1/select/%/%/aPackage">
+      <details key="start" value="3963"/>
+      <details key="end" value="3971"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.162" references="/0/collectIncludingModelNamesForReflectionModels/%.1/%/%.1/select/%/%.1">
+      <details key="start" value="3995"/>
+      <details key="end" value="4013"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.163" references="/0/collectIncludingModelNamesForReflectionModels/%.1/%/%.1/select/%.1">
+      <details key="start" value="4023"/>
+      <details key="end" value="4037"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.164" references="/0/collectIncludingModelNamesForReflectionModels/%.1/%/%.1/select/%.1/%">
+      <details key="start" value="4023"/>
+      <details key="end" value="4029"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.165" references="/0/collectIncludingModelNamesForReflectionModels/%.1/%/%.1/select/%.1/%/temp1">
+      <details key="start" value="-1"/>
+      <details key="end" value="-1"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.166" references="/0/collectIncludingModelNamesForReflectionModels/%.1/%/%.1/select/%.1/%.1">
+      <details key="start" value="4032"/>
+      <details key="end" value="4037"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.167" references="/0/collectIncludingModelNamesForReflectionModels/%.1/%/%.1/select/temp21">
+      <details key="start" value="-1"/>
+      <details key="end" value="-1"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.168" references="/0/collectIncludingModelNamesForReflectionModels/%.1/%.1">
+      <details key="start" value="4058"/>
+      <details key="end" value="4131"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.169" references="/0/collectIncludingModelNamesForReflectionModels/%.1/%.1/%/%">
+      <details key="start" value="4069"/>
+      <details key="end" value="4076"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.170" references="/0/collectIncludingModelNamesForReflectionModels/%.1/%.1/%.1/%">
+      <details key="start" value="4078"/>
+      <details key="end" value="4083"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.171" references="/0/collectIncludingModelNamesForReflectionModels/%.1/%.1/%.2/%">
+      <details key="start" value="4085"/>
+      <details key="end" value="4102"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.172" references="/0/collectIncludingModelNamesForReflectionModels/%.1/%.1/%.3/%">
+      <details key="start" value="4104"/>
+      <details key="end" value="4130"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.173" references="/0/collectIncludingModelNamesForReflectionModels/%.1/%.2">
+      <details key="start" value="4137"/>
+      <details key="end" value="4163"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.174" references="/0/collectIncludingModelNamesForReflectionModels/%.1/%.2/%/%">
+      <details key="start" value="4148"/>
+      <details key="end" value="4155"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.175" references="/0/collectIncludingModelNamesForReflectionModels/%.1/%.2/%.1/%">
+      <details key="start" value="4157"/>
+      <details key="end" value="4162"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.176" references="/0/collectIncludingModelNames">
+      <details key="start" value="4454"/>
+      <details key="end" value="4681"/>
+      <details key="line" value="76"/>
+    </eAnnotations>
+    <eAnnotations source="positions.177" references="/0/collectIncludingModelNames/%">
+      <details key="start" value="4175"/>
+      <details key="end" value="4452"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.178" references="/0/collectIncludingModelNames/aPackage">
+      <details key="start" value="4495"/>
+      <details key="end" value="4513"/>
+      <details key="line" value="76"/>
+    </eAnnotations>
+    <eAnnotations source="positions.179" references="/0/collectIncludingModelNames/%.1">
+      <details key="start" value="4531"/>
+      <details key="end" value="4679"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.180" references="/0/collectIncludingModelNames/%.1/%">
+      <details key="start" value="4534"/>
+      <details key="end" value="4564"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.181" references="/0/collectIncludingModelNames/%.1/%/aPackage">
+      <details key="start" value="4535"/>
+      <details key="end" value="4543"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.182" references="/0/collectIncludingModelNames/%.1/%.1">
+      <details key="start" value="4570"/>
+      <details key="end" value="4617"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.183" references="/0/collectIncludingModelNames/%.1/%.1/self">
+      <details key="start" value="-1"/>
+      <details key="end" value="-1"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.184" references="/0/collectIncludingModelNames/%.1/%.2">
+      <details key="start" value="4623"/>
+      <details key="end" value="4673"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.185" references="/0/collectIncludingModelNames/%.1/%.2/self">
+      <details key="start" value="-1"/>
+      <details key="end" value="-1"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.186" references="/0/collectModelClassesForFactory">
+      <details key="start" value="4975"/>
+      <details key="end" value="5193"/>
+      <details key="line" value="84"/>
+    </eAnnotations>
+    <eAnnotations source="positions.187" references="/0/collectModelClassesForFactory/%">
+      <details key="start" value="4685"/>
+      <details key="end" value="4973"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.188" references="/0/collectModelClassesForFactory/aPackage">
+      <details key="start" value="5019"/>
+      <details key="end" value="5037"/>
+      <details key="line" value="84"/>
+    </eAnnotations>
+    <eAnnotations source="positions.189" references="/0/collectModelClassesForFactory/sortedBy">
+      <details key="start" value="5061"/>
+      <details key="end" value="5190"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.190" references="/0/collectModelClassesForFactory/sortedBy/%">
+      <details key="start" value="5061"/>
+      <details key="end" value="5161"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.191" references="/0/collectModelClassesForFactory/sortedBy/%/%">
+      <details key="start" value="5061"/>
+      <details key="end" value="5108"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.192" references="/0/collectModelClassesForFactory/sortedBy/%/%/aPackage">
+      <details key="start" value="5099"/>
+      <details key="end" value="5107"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.193" references="/0/collectModelClassesForFactory/sortedBy/%/%.1">
+      <details key="start" value="5117"/>
+      <details key="end" value="5160"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.194" references="/0/collectModelClassesForFactory/sortedBy/%/%.1/aPackage">
+      <details key="start" value="5151"/>
+      <details key="end" value="5159"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.195" references="/0/collectModelClassesForFactory/sortedBy/%.1">
+      <details key="start" value="5172"/>
+      <details key="end" value="5189"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.196" references="/0/collectModelClassesForFactory/sortedBy/%.1/temp1">
+      <details key="start" value="-1"/>
+      <details key="end" value="-1"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.197" references="/0/collectModelClassesForFactory/sortedBy/temp22">
+      <details key="start" value="-1"/>
+      <details key="end" value="-1"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.198" references="/0/collectModelStereotypesForFactory">
+      <details key="start" value="5195"/>
+      <details key="end" value="5408"/>
+      <details key="line" value="85"/>
+    </eAnnotations>
+    <eAnnotations source="positions.199" references="/0/collectModelStereotypesForFactory/aPackage">
+      <details key="start" value="5244"/>
+      <details key="end" value="5262"/>
+      <details key="line" value="85"/>
+    </eAnnotations>
+    <eAnnotations source="positions.200" references="/0/collectModelStereotypesForFactory/sortedBy">
+      <details key="start" value="5286"/>
+      <details key="end" value="5405"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.201" references="/0/collectModelStereotypesForFactory/sortedBy/reject">
+      <details key="start" value="5286"/>
+      <details key="end" value="5376"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.202" references="/0/collectModelStereotypesForFactory/sortedBy/reject/%">
+      <details key="start" value="5286"/>
+      <details key="end" value="5332"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.203" references="/0/collectModelStereotypesForFactory/sortedBy/reject/%/%">
+      <details key="start" value="5286"/>
+      <details key="end" value="5306"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.204" references="/0/collectModelStereotypesForFactory/sortedBy/reject/%/%/aPackage">
+      <details key="start" value="5286"/>
+      <details key="end" value="5294"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.205" references="/0/collectModelStereotypesForFactory/sortedBy/reject/%/%.1">
+      <details key="start" value="5321"/>
+      <details key="end" value="5331"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.206" references="/0/collectModelStereotypesForFactory/sortedBy/reject/%.1">
+      <details key="start" value="5341"/>
+      <details key="end" value="5375"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.207" references="/0/collectModelStereotypesForFactory/sortedBy/reject/%.1/%">
+      <details key="start" value="5341"/>
+      <details key="end" value="5354"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.208" references="/0/collectModelStereotypesForFactory/sortedBy/reject/%.1/%/temp1">
+      <details key="start" value="-1"/>
+      <details key="end" value="-1"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.209" references="/0/collectModelStereotypesForFactory/sortedBy/reject/%.1/%.1">
+      <details key="start" value="5358"/>
+      <details key="end" value="5375"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.210" references="/0/collectModelStereotypesForFactory/sortedBy/reject/%.1/%.1/%">
+      <details key="start" value="5358"/>
+      <details key="end" value="5368"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.211" references="/0/collectModelStereotypesForFactory/sortedBy/reject/%.1/%.1/%/temp1">
+      <details key="start" value="-1"/>
+      <details key="end" value="-1"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.212" references="/0/collectModelStereotypesForFactory/sortedBy/reject/%.1/%.1/%.1">
+      <details key="start" value="5371"/>
+      <details key="end" value="5375"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.213" references="/0/collectModelStereotypesForFactory/sortedBy/reject/temp23">
+      <details key="start" value="-1"/>
+      <details key="end" value="-1"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.214" references="/0/collectModelStereotypesForFactory/sortedBy/%">
+      <details key="start" value="5387"/>
+      <details key="end" value="5404"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.215" references="/0/collectModelStereotypesForFactory/sortedBy/%/temp2">
+      <details key="start" value="-1"/>
+      <details key="end" value="-1"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.216" references="/0/collectModelStereotypesForFactory/sortedBy/temp24">
+      <details key="start" value="-1"/>
+      <details key="end" value="-1"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.217" references="/0/collectModelClassesForFactoryInternal">
+      <details key="start" value="5410"/>
+      <details key="end" value="5622"/>
+      <details key="line" value="86"/>
+    </eAnnotations>
+    <eAnnotations source="positions.218" references="/0/collectModelClassesForFactoryInternal/aPackage">
+      <details key="start" value="5463"/>
+      <details key="end" value="5481"/>
+      <details key="line" value="86"/>
+    </eAnnotations>
+    <eAnnotations source="positions.219" references="/0/collectModelClassesForFactoryInternal/sortedBy">
+      <details key="start" value="5505"/>
+      <details key="end" value="5619"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.220" references="/0/collectModelClassesForFactoryInternal/sortedBy/reject">
+      <details key="start" value="5505"/>
+      <details key="end" value="5590"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.221" references="/0/collectModelClassesForFactoryInternal/sortedBy/reject/%">
+      <details key="start" value="5505"/>
+      <details key="end" value="5546"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.222" references="/0/collectModelClassesForFactoryInternal/sortedBy/reject/%/%">
+      <details key="start" value="5505"/>
+      <details key="end" value="5525"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.223" references="/0/collectModelClassesForFactoryInternal/sortedBy/reject/%/%/aPackage">
+      <details key="start" value="5505"/>
+      <details key="end" value="5513"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.224" references="/0/collectModelClassesForFactoryInternal/sortedBy/reject/%/%.1">
+      <details key="start" value="5540"/>
+      <details key="end" value="5545"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.225" references="/0/collectModelClassesForFactoryInternal/sortedBy/reject/%.1">
+      <details key="start" value="5555"/>
+      <details key="end" value="5589"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.226" references="/0/collectModelClassesForFactoryInternal/sortedBy/reject/%.1/%">
+      <details key="start" value="5555"/>
+      <details key="end" value="5568"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.227" references="/0/collectModelClassesForFactoryInternal/sortedBy/reject/%.1/%/temp1">
+      <details key="start" value="-1"/>
+      <details key="end" value="-1"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.228" references="/0/collectModelClassesForFactoryInternal/sortedBy/reject/%.1/%.1">
+      <details key="start" value="5572"/>
+      <details key="end" value="5589"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.229" references="/0/collectModelClassesForFactoryInternal/sortedBy/reject/%.1/%.1/%">
+      <details key="start" value="5572"/>
+      <details key="end" value="5582"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.230" references="/0/collectModelClassesForFactoryInternal/sortedBy/reject/%.1/%.1/%/temp1">
+      <details key="start" value="-1"/>
+      <details key="end" value="-1"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.231" references="/0/collectModelClassesForFactoryInternal/sortedBy/reject/%.1/%.1/%.1">
+      <details key="start" value="5585"/>
+      <details key="end" value="5589"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.232" references="/0/collectModelClassesForFactoryInternal/sortedBy/reject/temp25">
+      <details key="start" value="-1"/>
+      <details key="end" value="-1"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.233" references="/0/collectModelClassesForFactoryInternal/sortedBy/%">
+      <details key="start" value="5601"/>
+      <details key="end" value="5618"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.234" references="/0/collectModelClassesForFactoryInternal/sortedBy/%/temp2">
+      <details key="start" value="-1"/>
+      <details key="end" value="-1"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.235" references="/0/collectModelClassesForFactoryInternal/sortedBy/temp26">
+      <details key="start" value="-1"/>
+      <details key="end" value="-1"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.236" references="/0/collectModelInterfacesForFactory">
+      <details key="start" value="5624"/>
+      <details key="end" value="5838"/>
+      <details key="line" value="87"/>
+    </eAnnotations>
+    <eAnnotations source="positions.237" references="/0/collectModelInterfacesForFactory/aPackage">
+      <details key="start" value="5671"/>
+      <details key="end" value="5689"/>
+      <details key="line" value="87"/>
+    </eAnnotations>
+    <eAnnotations source="positions.238" references="/0/collectModelInterfacesForFactory/sortedBy">
+      <details key="start" value="5717"/>
+      <details key="end" value="5835"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.239" references="/0/collectModelInterfacesForFactory/sortedBy/reject">
+      <details key="start" value="5717"/>
+      <details key="end" value="5806"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.240" references="/0/collectModelInterfacesForFactory/sortedBy/reject/%">
+      <details key="start" value="5717"/>
+      <details key="end" value="5762"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.241" references="/0/collectModelInterfacesForFactory/sortedBy/reject/%/%">
+      <details key="start" value="5717"/>
+      <details key="end" value="5737"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.242" references="/0/collectModelInterfacesForFactory/sortedBy/reject/%/%/aPackage">
+      <details key="start" value="5717"/>
+      <details key="end" value="5725"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.243" references="/0/collectModelInterfacesForFactory/sortedBy/reject/%/%.1">
+      <details key="start" value="5752"/>
+      <details key="end" value="5761"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.244" references="/0/collectModelInterfacesForFactory/sortedBy/reject/%.1">
+      <details key="start" value="5771"/>
+      <details key="end" value="5805"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.245" references="/0/collectModelInterfacesForFactory/sortedBy/reject/%.1/%">
+      <details key="start" value="5771"/>
+      <details key="end" value="5784"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.246" references="/0/collectModelInterfacesForFactory/sortedBy/reject/%.1/%/temp1">
+      <details key="start" value="-1"/>
+      <details key="end" value="-1"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.247" references="/0/collectModelInterfacesForFactory/sortedBy/reject/%.1/%.1">
+      <details key="start" value="5788"/>
+      <details key="end" value="5805"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.248" references="/0/collectModelInterfacesForFactory/sortedBy/reject/%.1/%.1/%">
+      <details key="start" value="5788"/>
+      <details key="end" value="5798"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.249" references="/0/collectModelInterfacesForFactory/sortedBy/reject/%.1/%.1/%/temp1">
+      <details key="start" value="-1"/>
+      <details key="end" value="-1"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.250" references="/0/collectModelInterfacesForFactory/sortedBy/reject/%.1/%.1/%.1">
+      <details key="start" value="5801"/>
+      <details key="end" value="5805"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.251" references="/0/collectModelInterfacesForFactory/sortedBy/reject/temp27">
+      <details key="start" value="-1"/>
+      <details key="end" value="-1"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.252" references="/0/collectModelInterfacesForFactory/sortedBy/%">
+      <details key="start" value="5817"/>
+      <details key="end" value="5834"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.253" references="/0/collectModelInterfacesForFactory/sortedBy/%/temp2">
+      <details key="start" value="-1"/>
+      <details key="end" value="-1"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.254" references="/0/collectModelInterfacesForFactory/sortedBy/temp28">
+      <details key="start" value="-1"/>
+      <details key="end" value="-1"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+  </ecore:EAnnotation>
+</xmi:XMI>

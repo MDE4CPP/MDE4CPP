@@ -1,0 +1,74 @@
+[comment encoding = UTF-8 /]
+[**
+ * Copyright (c) 2017 TU Ilmenau, Systems and Software Engineering Group
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
+ * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+ * and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ ****************************************************************************************************************************************************************
+ * 
+ * module for generation of UML FunctionBehavior artefacts
+ * 
+ */]
+[module generateFunctionBehavior('http://www.eclipse.org/uml2/5.0.0/UML')]
+
+[import UML4CPP::generator::main::components::generateParameter /]
+[import UML4CPP::generator::main::helpers::nameHelper /]
+
+[**
+ * generate creation of meta model instance for an FunctionBehavior element
+ * 
+ * this includes:
+ * - creation of function behavior
+ * - creation of function behavior parameter
+*/]
+[template public generateOpaqueBehaviorCreation(aOpaqueBehavior : OpaqueBehavior)]
+[aOpaqueBehavior.memberName()/] = factory->createOpaqueBehavior_in_BehavioredClassifier([aOpaqueBehavior.owner.oclAsType(NamedElement).memberName()/]);
+[for (aParameter : Parameter | aOpaqueBehavior.ownedParameter) separator ('\n')]
+[aParameter.generateParameterCreation()/]
+[/for]
+[/template]
+
+[template public generateFunctionBehaviorCreation(aFunctionBehavior : FunctionBehavior)]
+[aFunctionBehavior.memberName()/] = factory->createFunctionBehavior_in_BehavioredClassifier([aFunctionBehavior.owner.oclAsType(NamedElement).memberName()/]);
+[for (aParameter : Parameter | aFunctionBehavior.ownedParameter) separator ('\n')]
+[aParameter.generateParameterCreation()/]
+[/for]
+[/template]
+
+[**
+ * generate initialization of meta model instance for an FunctionBehavior element
+ * 
+ * this includes:
+ * - set function behavior name
+ * - initialization of function behavior parameter
+*/]
+[template public generateOpaqueBehaviorInitialization(aOpaqueBehavior : OpaqueBehavior)]
+[aOpaqueBehavior.memberName()/]->setName("[aOpaqueBehavior.name/]");
+[aOpaqueBehavior.memberName()/]->setContext([aOpaqueBehavior._context.memberName()/]);
+[for (aParameter : Parameter | aOpaqueBehavior.ownedParameter) separator ('\n')]
+[aParameter.generateParameterInitialization()/]
+[/for]
+[/template]
+
+[**
+ * generate initialization of meta model instance for an FunctionBehavior element
+ * 
+ * this includes:
+ * - set function behavior name
+ * - initialization of function behavior parameter
+*/]
+[template public generateFunctionBehaviorInitialization(aFunctionBehavior : FunctionBehavior)]
+[aFunctionBehavior.memberName()/]->setName("[aFunctionBehavior.name/]");
+[aFunctionBehavior.memberName()/]->setContext([aFunctionBehavior._context.memberName()/]);
+[for (aParameter : Parameter | aFunctionBehavior.ownedParameter) separator ('\n')]
+[aParameter.generateParameterInitialization()/]
+[/for]
+[/template]

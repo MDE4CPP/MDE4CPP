@@ -1,0 +1,21 @@
+Manifest-Version: 1.0
+Rsrc-Class-Path: ./ org.eclipse.acceleo.engine_3.7.6.201810050612.jar 
+ org.eclipse.acceleo.model_3.7.6.201810050612.jar org.eclipse.core.run
+ time_3.15.0.v20180817-1401.jar org.eclipse.emf.common_2.15.0.v2018072
+ 3-1316.jar org.eclipse.emf.ecore.xmi_2.15.0.v20180706-1146.jar org.ec
+ lipse.emf.ecore_2.15.0.v20180722-1159.jar org.eclipse.osgi_3.13.100.v
+ 20180827-1536.jar org.eclipse.uml2.types_2.4.0.v20180903-1400.jar org
+ .eclipse.uml2.uml_5.4.0.v20180903-1400.jar com.google.guava_21.0.0.v2
+ 0170206-1425.jar javax.inject_1.0.0.v20091030.jar lpg.runtime.java_2.
+ 0.17.v201004271640.jar org.eclipse.acceleo.common_3.7.6.201810050612.
+ jar org.eclipse.equinox.app_1.3.600.v20180827-1235.jar org.eclipse.eq
+ uinox.common_3.10.100.v20180827-1235.jar org.eclipse.equinox.preferen
+ ces_3.7.200.v20180827-1235.jar org.eclipse.equinox.registry_3.8.100.v
+ 20180827-1235.jar org.eclipse.ocl.common_1.8.0.v20180916-1223.jar org
+ .eclipse.ocl.ecore_3.10.0.v20180916-1223.jar org.eclipse.ocl_3.10.0.v
+ 20180916-1223.jar org.eclipse.uml2.common_2.4.0.v20180903-1400.jar or
+ g.eclipse.uml2.uml.resources_5.4.0.v20180903-1400.jar
+Class-Path: .
+Rsrc-Main-Class: UML4CPP.generator.main.Generate
+Main-Class: org.eclipse.jdt.internal.jarinjarloader.JarRsrcLoader
+

@@ -1,0 +1,45 @@
+[comment encoding = UTF-8 /]
+[**
+ * Copyright (c) 2017 TU Ilmenau, Systems and Software Engineering Group
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
+ * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+ * and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ ****************************************************************************************************************************************************************
+ * 
+ * module to trigger model package generation
+ * 
+ * The model package class represents the model on C++ layer. 
+ * The class is realized as singleton.  
+ * 
+ * The package provides the following functionality:
+ * - static variable for model meta data (name, ns_uri, ns_prefix)
+ * - getter function for all NamedElement elements except ValueSpecification elements 
+ * 
+ * Following files will be generated:
+ * - interface header file
+ * - interface source file
+ * - implementation header file
+ * - implementation source file
+ * 
+ */]
+[module generatePackage('http://www.eclipse.org/uml2/5.0.0/UML')]
+
+[import UML4CPP::generator::main::package::generatePackageInterface /]
+[import UML4CPP::generator::main::package::generatePackageInterfaceSource /]
+[import UML4CPP::generator::main::package::generatePackageImplementationHeader /]
+[import UML4CPP::generator::main::package::generatePackageImplementationSource /]
+
+[template public generatePackageFiles(aPackage : Package)]
+[aPackage.generatePackageInterface()/]
+[aPackage.generatePackageInterfaceSource()/]
+[aPackage.generatePackageImplHeader()/]
+[aPackage.generatePackageImplSource()/]
+[/template]

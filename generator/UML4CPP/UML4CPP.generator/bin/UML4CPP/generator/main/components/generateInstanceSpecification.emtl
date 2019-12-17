@@ -1,0 +1,1272 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:mtl="http://www.eclipse.org/acceleo/mtl/3.0" xmlns:ocl.ecore="http://www.eclipse.org/ocl/1.1.0/Ecore">
+  <mtl:Module name="generateInstanceSpecification" nsURI="UML4CPP::generator::main::components::generateInstanceSpecification" startHeaderPosition="1423" endHeaderPosition="1580">
+    <documentation xsi:type="mtl:ModuleDocumentation">
+      <body startPosition="33" endPosition="1419" value="&#xD;&#xA;Copyright (c) 2017 TU Ilmenau, Systems and Software Engineering Group&#xD;&#xA;&#xD;&#xA;Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the &quot;Software&quot;),&#xD;&#xA;to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense,&#xD;&#xA;and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:&#xD;&#xA;&#xD;&#xA;The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.&#xD;&#xA;&#xD;&#xA;THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,&#xD;&#xA;FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,&#xD;&#xA;WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.&#xD;&#xA;&#xD;&#xA;***************************************************************************************************************************************************************&#xD;&#xA;&#xD;&#xA;module for generation of UML InstanceSpecification artefacts&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;"/>
+    </documentation>
+    <input>
+      <takesTypesFrom href="http://www.eclipse.org/uml2/5.0.0/UML#/"/>
+    </input>
+    <imports href="generateValueSpecification.emtl#/0"/>
+    <imports href="../helpers/generalHelper.emtl#/0"/>
+    <imports href="../helpers/nameHelper.emtl#/0"/>
+    <ownedModuleElement xsi:type="mtl:Template" name="generateInstanceSpecificationCreation" visibility="Public">
+      <body xsi:type="mtl:QueryInvocation">
+        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+        <definition href="../helpers/nameHelper.emtl#/0/memberName"/>
+        <argument xsi:type="ocl.ecore:VariableExp" name="anInstSpec" referredVariable="/0/generateInstanceSpecificationCreation/anInstSpec">
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//InstanceSpecification"/>
+        </argument>
+      </body>
+      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=" = factory->createInstanceSpecification_in_Namespace("/>
+      <body xsi:type="mtl:QueryInvocation">
+        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+        <definition href="../helpers/nameHelper.emtl#/0/memberName"/>
+        <argument xsi:type="ocl.ecore:OperationCallExp">
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//NamedElement"/>
+          <source xsi:type="ocl.ecore:PropertyCallExp">
+            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Element"/>
+            <source xsi:type="ocl.ecore:VariableExp" name="anInstSpec" referredVariable="/0/generateInstanceSpecificationCreation/anInstSpec">
+              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//InstanceSpecification"/>
+            </source>
+            <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/uml2/5.0.0/UML#//Element/owner"/>
+          </source>
+          <argument xsi:type="ocl.ecore:TypeExp" eType="/7/NamedElement">
+            <referredType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//NamedElement"/>
+          </argument>
+          <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/oclAsType"/>
+        </argument>
+      </body>
+      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="); // TODO: set owner&#xD;&#xA;"/>
+      <body xsi:type="mtl:QueryInvocation">
+        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+        <definition href="../helpers/nameHelper.emtl#/0/memberName"/>
+        <argument xsi:type="ocl.ecore:OperationCallExp">
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
+          <source xsi:type="ocl.ecore:OperationCallExp" eType="/9/Sequence(Package)" referredOperation="/1/ecore_EObject_Class/ancestors">
+            <source xsi:type="ocl.ecore:VariableExp" name="anInstSpec" referredVariable="/0/generateInstanceSpecificationCreation/anInstSpec">
+              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//InstanceSpecification"/>
+            </source>
+            <argument xsi:type="ocl.ecore:TypeExp" eType="/7/Package">
+              <referredType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
+            </argument>
+          </source>
+          <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Sequence(T)_Class/first"/>
+        </argument>
+      </body>
+      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="->getPackagedElement()->push_back("/>
+      <body xsi:type="mtl:QueryInvocation">
+        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+        <definition href="../helpers/nameHelper.emtl#/0/memberName"/>
+        <argument xsi:type="ocl.ecore:VariableExp" name="anInstSpec" referredVariable="/0/generateInstanceSpecificationCreation/anInstSpec">
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//InstanceSpecification"/>
+        </argument>
+      </body>
+      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=");"/>
+      <documentation xsi:type="mtl:ModuleElementDocumentation">
+        <body startPosition="1708" endPosition="1793" value="&#xD;&#xA;generate creation of meta model instance for an InstanceSpecification element&#xD;&#xA;&#xD;&#xA;"/>
+      </documentation>
+      <parameter name="anInstSpec">
+        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//InstanceSpecification"/>
+      </parameter>
+    </ownedModuleElement>
+    <ownedModuleElement xsi:type="mtl:Template" name="generateInstanceSpecificationInitialization" visibility="Public">
+      <body xsi:type="mtl:QueryInvocation">
+        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+        <definition href="../helpers/nameHelper.emtl#/0/memberName"/>
+        <argument xsi:type="ocl.ecore:VariableExp" name="anInstSpec" referredVariable="/0/generateInstanceSpecificationInitialization/anInstSpec">
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//InstanceSpecification"/>
+        </argument>
+      </body>
+      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="->setName(&quot;"/>
+      <body xsi:type="ocl.ecore:PropertyCallExp">
+        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+        <source xsi:type="ocl.ecore:VariableExp" name="anInstSpec" referredVariable="/0/generateInstanceSpecificationInitialization/anInstSpec">
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//InstanceSpecification"/>
+        </source>
+        <referredProperty xsi:type="ecore:EAttribute" href="http://www.eclipse.org/uml2/5.0.0/UML#//NamedElement/name"/>
+      </body>
+      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&quot;);&#xD;&#xA;"/>
+      <body xsi:type="mtl:ForBlock">
+        <body xsi:type="mtl:QueryInvocation">
+          <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+          <definition href="../helpers/nameHelper.emtl#/0/memberName"/>
+          <argument xsi:type="ocl.ecore:VariableExp" name="anInstSpec" referredVariable="/0/generateInstanceSpecificationInitialization/anInstSpec">
+            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//InstanceSpecification"/>
+          </argument>
+        </body>
+        <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="->getClassifier()->push_back("/>
+        <body xsi:type="mtl:QueryInvocation">
+          <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+          <definition href="../helpers/generalHelper.emtl#/0/generatePackageGetterCall.2"/>
+          <argument xsi:type="ocl.ecore:VariableExp" name="aClassifer" referredVariable="/0/generateInstanceSpecificationInitialization/%.4/aClassifer">
+            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Classifier"/>
+          </argument>
+          <argument xsi:type="ocl.ecore:VariableExp" name="anInstSpec" referredVariable="/0/generateInstanceSpecificationInitialization/anInstSpec">
+            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//InstanceSpecification"/>
+          </argument>
+        </body>
+        <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=");&#xD;&#xA;&#xD;&#xA;"/>
+        <body xsi:type="mtl:ForBlock">
+          <body xsi:type="mtl:TemplateInvocation" definition="/0/generateSlotCreation">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+            <argument xsi:type="ocl.ecore:VariableExp" name="aSlot" referredVariable="/0/generateInstanceSpecificationInitialization/%.4/%.4/aSlot">
+              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Slot"/>
+            </argument>
+            <argument xsi:type="ocl.ecore:VariableExp" name="anInstSpec" referredVariable="/0/generateInstanceSpecificationInitialization/anInstSpec">
+              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//InstanceSpecification"/>
+            </argument>
+          </body>
+          <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#xD;&#xA;"/>
+          <loopVariable name="aSlot">
+            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Slot"/>
+          </loopVariable>
+          <iterSet xsi:type="ocl.ecore:IteratorExp" name="sortedBy" eType="/9/OrderedSet(Slot)">
+            <source xsi:type="ocl.ecore:OperationCallExp" eType="/9/OrderedSet(Slot)">
+              <source xsi:type="ocl.ecore:PropertyCallExp" eType="/9/Set(Slot)">
+                <source xsi:type="ocl.ecore:VariableExp" name="anInstSpec" referredVariable="/0/generateInstanceSpecificationInitialization/anInstSpec">
+                  <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//InstanceSpecification"/>
+                </source>
+                <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/uml2/5.0.0/UML#//InstanceSpecification/slot"/>
+              </source>
+              <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Set(T)_Class/asOrderedSet"/>
+            </source>
+            <body xsi:type="mtl:QueryInvocation">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+              <definition href="../helpers/nameHelper.emtl#/0/myQualifiedName"/>
+              <argument xsi:type="ocl.ecore:PropertyCallExp">
+                <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//StructuralFeature"/>
+                <source xsi:type="ocl.ecore:VariableExp" name="temp1" referredVariable="/0/generateInstanceSpecificationInitialization/%.4/%.4/sortedBy/temp1">
+                  <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Slot"/>
+                </source>
+                <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/uml2/5.0.0/UML#//Slot/definingFeature"/>
+              </argument>
+            </body>
+            <iterator xsi:type="ocl.ecore:Variable" name="temp1">
+              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Slot"/>
+            </iterator>
+          </iterSet>
+        </body>
+        <loopVariable name="aClassifer">
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Classifier"/>
+        </loopVariable>
+        <iterSet xsi:type="ocl.ecore:IteratorExp" name="sortedBy" eType="/9/OrderedSet(Classifier)">
+          <source xsi:type="ocl.ecore:PropertyCallExp" eType="/9/Set(Classifier)">
+            <source xsi:type="ocl.ecore:VariableExp" name="anInstSpec" referredVariable="/0/generateInstanceSpecificationInitialization/anInstSpec">
+              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//InstanceSpecification"/>
+            </source>
+            <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/uml2/5.0.0/UML#//InstanceSpecification/classifier"/>
+          </source>
+          <body xsi:type="mtl:QueryInvocation">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+            <definition href="../helpers/nameHelper.emtl#/0/myQualifiedName"/>
+            <argument xsi:type="ocl.ecore:VariableExp" name="temp1" referredVariable="/0/generateInstanceSpecificationInitialization/%.4/sortedBy/temp2">
+              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Classifier"/>
+            </argument>
+          </body>
+          <iterator xsi:type="ocl.ecore:Variable" name="temp2">
+            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Classifier"/>
+          </iterator>
+        </iterSet>
+      </body>
+      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#xD;&#xA;"/>
+      <documentation xsi:type="mtl:ModuleElementDocumentation">
+        <body startPosition="2184" endPosition="2391" value="&#xD;&#xA;generate initialization of meta model instance for an InstanceSpecification element&#xD;&#xA;&#xD;&#xA;this includes:&#xD;&#xA;- set InstanceSpecification name&#xD;&#xA;- set classifier&#xD;&#xA;- create and initialize slots&#xD;&#xA;&#xD;&#xA;"/>
+      </documentation>
+      <parameter name="anInstSpec">
+        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//InstanceSpecification"/>
+      </parameter>
+    </ownedModuleElement>
+    <ownedModuleElement xsi:type="mtl:Template" name="generateSlotCreation">
+      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="{&#xD;&#xA;&#x9;std::shared_ptr&lt;uml::Slot> slot(uml::UmlFactory::eInstance()->createSlot_in_OwningInstance("/>
+      <body xsi:type="mtl:QueryInvocation">
+        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+        <definition href="../helpers/nameHelper.emtl#/0/memberName"/>
+        <argument xsi:type="ocl.ecore:VariableExp" name="anInstSpec" referredVariable="/0/generateSlotCreation/anInstSpec">
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//InstanceSpecification"/>
+        </argument>
+      </body>
+      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="));&#xD;&#xA;&#x9;slot->setDefiningFeature("/>
+      <body xsi:type="mtl:QueryInvocation">
+        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+        <definition href="../helpers/nameHelper.emtl#/0/memberName"/>
+        <argument xsi:type="ocl.ecore:PropertyCallExp">
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//StructuralFeature"/>
+          <source xsi:type="ocl.ecore:VariableExp" name="aSlot" referredVariable="/0/generateSlotCreation/aSlot">
+            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Slot"/>
+          </source>
+          <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/uml2/5.0.0/UML#//Slot/definingFeature"/>
+        </argument>
+      </body>
+      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=");&#xD;&#xA;"/>
+      <body xsi:type="mtl:ForBlock">
+        <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#x9;{&#xD;&#xA;&#x9;&#x9;std::shared_ptr&lt;uml::"/>
+        <body xsi:type="ocl.ecore:PropertyCallExp">
+          <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+          <source xsi:type="ocl.ecore:OperationCallExp">
+            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EClass"/>
+            <source xsi:type="ocl.ecore:VariableExp" name="aValueSpec" referredVariable="/0/generateSlotCreation/%.5/aValueSpec">
+              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//ValueSpecification"/>
+            </source>
+            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/emf/2002/Ecore#//EObject/eClass"/>
+          </source>
+          <referredProperty xsi:type="ecore:EAttribute" href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
+        </body>
+        <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="> literal = uml::UmlFactory::eInstance()->create"/>
+        <body xsi:type="ocl.ecore:PropertyCallExp">
+          <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+          <source xsi:type="ocl.ecore:OperationCallExp">
+            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EClass"/>
+            <source xsi:type="ocl.ecore:VariableExp" name="aValueSpec" referredVariable="/0/generateSlotCreation/%.5/aValueSpec">
+              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//ValueSpecification"/>
+            </source>
+            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/emf/2002/Ecore#//EObject/eClass"/>
+          </source>
+          <referredProperty xsi:type="ecore:EAttribute" href="http://www.eclipse.org/emf/2002/Ecore#//ENamedElement/name"/>
+        </body>
+        <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="_in_OwningSlot(slot);&#xD;&#xA;"/>
+        <body xsi:type="mtl:IfBlock">
+          <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#x9;&#x9;literal->setValue("/>
+          <body xsi:type="mtl:TemplateInvocation">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+            <definition href="generateValueSpecification.emtl#/0/generateLiteralValue"/>
+            <argument xsi:type="ocl.ecore:OperationCallExp">
+              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//LiteralSpecification"/>
+              <source xsi:type="ocl.ecore:VariableExp" name="aValueSpec" referredVariable="/0/generateSlotCreation/%.5/aValueSpec">
+                <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//ValueSpecification"/>
+              </source>
+              <argument xsi:type="ocl.ecore:TypeExp" eType="/7/LiteralSpecification">
+                <referredType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//LiteralSpecification"/>
+              </argument>
+              <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/oclAsType"/>
+            </argument>
+          </body>
+          <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=");&#xD;&#xA;"/>
+          <ifExpr xsi:type="ocl.ecore:OperationCallExp">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+            <source xsi:type="ocl.ecore:VariableExp" name="aValueSpec" referredVariable="/0/generateSlotCreation/%.5/aValueSpec">
+              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//ValueSpecification"/>
+            </source>
+            <argument xsi:type="ocl.ecore:TypeExp" eType="/7/LiteralSpecification">
+              <referredType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//LiteralSpecification"/>
+            </argument>
+            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/oclIsKindOf"/>
+          </ifExpr>
+          <elseIf>
+            <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#x9;&#x9;literal->setInstance("/>
+            <body xsi:type="mtl:QueryInvocation">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+              <definition href="../helpers/nameHelper.emtl#/0/memberName"/>
+              <argument xsi:type="ocl.ecore:PropertyCallExp">
+                <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//InstanceSpecification"/>
+                <source xsi:type="ocl.ecore:OperationCallExp">
+                  <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//InstanceValue"/>
+                  <source xsi:type="ocl.ecore:VariableExp" name="aValueSpec" referredVariable="/0/generateSlotCreation/%.5/aValueSpec">
+                    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//ValueSpecification"/>
+                  </source>
+                  <argument xsi:type="ocl.ecore:TypeExp" eType="/7/InstanceValue">
+                    <referredType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//InstanceValue"/>
+                  </argument>
+                  <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/oclAsType"/>
+                </source>
+                <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/uml2/5.0.0/UML#//InstanceValue/instance"/>
+              </argument>
+            </body>
+            <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=");&#xD;&#xA;"/>
+            <ifExpr xsi:type="ocl.ecore:OperationCallExp">
+              <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+              <source xsi:type="ocl.ecore:VariableExp" name="aValueSpec" referredVariable="/0/generateSlotCreation/%.5/aValueSpec">
+                <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//ValueSpecification"/>
+              </source>
+              <argument xsi:type="ocl.ecore:TypeExp" eType="/7/InstanceValue">
+                <referredType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//InstanceValue"/>
+              </argument>
+              <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/oclIsKindOf"/>
+            </ifExpr>
+          </elseIf>
+        </body>
+        <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#x9;&#x9;this->getOwnedElement()->push_back(literal);&#xD;&#xA;&#x9;}&#xD;&#xA;"/>
+        <loopVariable name="aValueSpec">
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//ValueSpecification"/>
+        </loopVariable>
+        <iterSet xsi:type="ocl.ecore:IteratorExp" name="sortedBy" eType="/9/OrderedSet(ValueSpecification)">
+          <source xsi:type="ocl.ecore:OperationCallExp" eType="/9/OrderedSet(ValueSpecification)">
+            <source xsi:type="ocl.ecore:PropertyCallExp" eType="/9/OrderedSet(ValueSpecification)">
+              <source xsi:type="ocl.ecore:VariableExp" name="aSlot" referredVariable="/0/generateSlotCreation/aSlot">
+                <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Slot"/>
+              </source>
+              <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/uml2/5.0.0/UML#//Slot/value"/>
+            </source>
+            <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OrderedSet(T)_Class/asOrderedSet"/>
+          </source>
+          <body xsi:type="mtl:QueryInvocation">
+            <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+            <definition href="../helpers/nameHelper.emtl#/0/myQualifiedName"/>
+            <argument xsi:type="ocl.ecore:VariableExp" name="temp1" referredVariable="/0/generateSlotCreation/%.5/sortedBy/temp3">
+              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//ValueSpecification"/>
+            </argument>
+          </body>
+          <iterator xsi:type="ocl.ecore:Variable" name="temp3">
+            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//ValueSpecification"/>
+          </iterator>
+        </iterSet>
+      </body>
+      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="}"/>
+      <documentation xsi:type="mtl:ModuleElementDocumentation">
+        <body startPosition="2932" endPosition="3018" value="&#xD;&#xA;generate creation and initialization of meta model instance for a Slot element&#xD;&#xA;&#xD;&#xA;"/>
+      </documentation>
+      <parameter name="aSlot">
+        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Slot"/>
+      </parameter>
+      <parameter name="anInstSpec">
+        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//InstanceSpecification"/>
+      </parameter>
+    </ownedModuleElement>
+  </mtl:Module>
+  <ecore:EPackage name="additions">
+    <eClassifiers xsi:type="ecore:EClass" name="oclstdlib_String_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="oclstdlib_Integer_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Integer"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="oclstdlib_Real_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Real"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ecore_EObject_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+      </eAnnotations>
+      <eOperations name="ancestors">
+        <eAnnotations source="MTL non-standard"/>
+        <eType xsi:type="ocl.ecore:SequenceType" href="http://www.eclipse.org/acceleo/mtl/3.0/mtlnonstdlib.ecore#//Sequence(OclAny)"/>
+        <eParameters name="filter">
+          <eType xsi:type="ocl.ecore:TypeType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclType"/>
+        </eParameters>
+      </eOperations>
+      <eOperations name="generateInstanceSpecificationCreation">
+        <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+          <contents xsi:type="ocl.ecore:Constraint"/>
+        </eAnnotations>
+        <eAnnotations source="MTL" references="/0/generateInstanceSpecificationCreation"/>
+        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+        <eParameters name="anInstSpec">
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//InstanceSpecification"/>
+        </eParameters>
+      </eOperations>
+      <eOperations name="generateInstanceSpecificationInitialization">
+        <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+          <contents xsi:type="ocl.ecore:Constraint"/>
+        </eAnnotations>
+        <eAnnotations source="MTL" references="/0/generateInstanceSpecificationInitialization"/>
+        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+        <eParameters name="anInstSpec">
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//InstanceSpecification"/>
+        </eParameters>
+      </eOperations>
+      <eOperations name="generateSlotCreation">
+        <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+          <contents xsi:type="ocl.ecore:Constraint"/>
+        </eAnnotations>
+        <eAnnotations source="MTL" references="/0/generateSlotCreation"/>
+        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+        <eParameters name="aSlot">
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Slot"/>
+        </eParameters>
+        <eParameters name="anInstSpec">
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//InstanceSpecification"/>
+        </eParameters>
+      </eOperations>
+      <eOperations name="generateLiteralValue">
+        <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+          <contents xsi:type="ocl.ecore:Constraint"/>
+        </eAnnotations>
+        <eAnnotations source="MTL">
+          <references href="generateValueSpecification.emtl#/0/generateLiteralValue"/>
+        </eAnnotations>
+        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+        <eParameters name="aLiteralspec">
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//LiteralSpecification"/>
+        </eParameters>
+      </eOperations>
+      <eOperations name="generatePackageGetterCall">
+        <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+          <contents xsi:type="ocl.ecore:Constraint"/>
+        </eAnnotations>
+        <eAnnotations source="MTL">
+          <references href="../helpers/generalHelper.emtl#/0/generatePackageGetterCall.2"/>
+        </eAnnotations>
+        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+        <eParameters name="anElement1">
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//NamedElement"/>
+        </eParameters>
+        <eParameters name="anElement2">
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//NamedElement"/>
+        </eParameters>
+      </eOperations>
+      <eOperations name="myQualifiedName">
+        <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+          <contents xsi:type="ocl.ecore:Constraint"/>
+        </eAnnotations>
+        <eAnnotations source="MTL">
+          <references href="../helpers/nameHelper.emtl#/0/myQualifiedName"/>
+        </eAnnotations>
+        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+        <eParameters name="anElement">
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//NamedElement"/>
+        </eParameters>
+      </eOperations>
+      <eOperations name="memberName">
+        <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+          <contents xsi:type="ocl.ecore:Constraint"/>
+        </eAnnotations>
+        <eAnnotations source="MTL">
+          <references href="../helpers/nameHelper.emtl#/0/memberName"/>
+        </eAnnotations>
+        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+        <eParameters name="anElement">
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//NamedElement"/>
+        </eParameters>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="oclstdlib_OclAny_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="oclstdlib_Collection(T)_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Collection(T)"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="oclstdlib_Sequence(T)_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Sequence(T)"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="oclstdlib_OrderedSet(T)_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OrderedSet(T)"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="uml_InstanceSpecification_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/uml2/5.0.0/UML#//InstanceSpecification"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="uml_Slot_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/uml2/5.0.0/UML#//Slot"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="uml_ValueSpecification_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/uml2/5.0.0/UML#//ValueSpecification"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="uml_LiteralSpecification_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/uml2/5.0.0/UML#//LiteralSpecification"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="oclstdlib_Boolean_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="uml_Element_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/uml2/5.0.0/UML#//Element"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="uml_Package_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="uml_Class_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/uml2/5.0.0/UML#//Class"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="uml_Interface_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/uml2/5.0.0/UML#//Interface"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="uml_NamedElement_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/uml2/5.0.0/UML#//NamedElement"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="uml_Type_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/uml2/5.0.0/UML#//Type"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="uml_ConnectorEnd_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/uml2/5.0.0/UML#//ConnectorEnd"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="uml_StructuralFeature_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/uml2/5.0.0/UML#//StructuralFeature"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="uml_Namespace_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/uml2/5.0.0/UML#//Namespace"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="uml_Classifier_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/uml2/5.0.0/UML#//Classifier"/>
+      </eAnnotations>
+    </eClassifiers>
+  </ecore:EPackage>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//InstanceSpecification"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//InstanceSpecification"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//InstanceSpecification"/>
+  </ocl.ecore:Variable>
+  <ecore:EPackage name="types">
+    <eClassifiers xsi:type="ocl.ecore:TypeType" name="NamedElement">
+      <referredType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//NamedElement"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ocl.ecore:TypeType" name="Package">
+      <referredType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ocl.ecore:TypeType" name="LiteralSpecification">
+      <referredType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//LiteralSpecification"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ocl.ecore:TypeType" name="InstanceValue">
+      <referredType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//InstanceValue"/>
+    </eClassifiers>
+  </ecore:EPackage>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//InstanceSpecification"/>
+  </ocl.ecore:Variable>
+  <ecore:EPackage name="collections">
+    <eClassifiers xsi:type="ocl.ecore:SequenceType" name="Sequence(OclAny)" instanceClassName="java.util.List">
+      <elementType xsi:type="ocl.ecore:AnyType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ocl.ecore:SequenceType" name="Sequence(Package)" instanceClassName="java.util.List">
+      <elementType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ocl.ecore:SetType" name="Set(Classifier)" instanceClassName="java.util.Set">
+      <elementType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Classifier"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ocl.ecore:OrderedSetType" name="OrderedSet(Classifier)" instanceClassName="java.util.LinkedHashSet">
+      <elementType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Classifier"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ocl.ecore:SetType" name="Set(Slot)" instanceClassName="java.util.Set">
+      <elementType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Slot"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ocl.ecore:OrderedSetType" name="OrderedSet(Slot)" instanceClassName="java.util.LinkedHashSet">
+      <elementType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Slot"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ocl.ecore:OrderedSetType" name="OrderedSet(ValueSpecification)" instanceClassName="java.util.LinkedHashSet">
+      <elementType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//ValueSpecification"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ocl.ecore:SetType" instanceClassName="java.util.Set">
+      <elementType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//ValueSpecification"/>
+    </eClassifiers>
+  </ecore:EPackage>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//InstanceSpecification"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//InstanceSpecification"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//InstanceSpecification"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//InstanceSpecification"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//InstanceSpecification"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//InstanceSpecification"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//InstanceSpecification"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Classifier"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Classifier"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Classifier"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Classifier"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Slot"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Slot"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Classifier"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="i">
+    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Integer"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//InstanceSpecification"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="i">
+    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Integer"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Slot"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Slot"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Slot"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Slot"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Slot"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//ValueSpecification"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//ValueSpecification"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//ValueSpecification"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//ValueSpecification"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//ValueSpecification"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//ValueSpecification"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//ValueSpecification"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Slot"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="i">
+    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Integer"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+  </ocl.ecore:Variable>
+  <ecore:EAnnotation source="positions">
+    <eAnnotations source="positions.0" references="/0/%">
+      <details key="start" value="30"/>
+      <details key="end" value="1421"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.1" references="/0/generateInstanceSpecificationCreation">
+      <details key="start" value="1797"/>
+      <details key="end" value="2177"/>
+      <details key="line" value="29"/>
+    </eAnnotations>
+    <eAnnotations source="positions.2" references="/0/generateInstanceSpecificationCreation/%">
+      <details key="start" value="1891"/>
+      <details key="end" value="1914"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.3" references="/0/generateInstanceSpecificationCreation/%/anInstSpec">
+      <details key="start" value="1891"/>
+      <details key="end" value="1901"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.4" references="/0/generateInstanceSpecificationCreation/%.1">
+      <details key="start" value="1916"/>
+      <details key="end" value="1969"/>
+      <details key="line" value="30"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5" references="/0/generateInstanceSpecificationCreation/%.2">
+      <details key="start" value="1970"/>
+      <details key="end" value="2023"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.6" references="/0/generateInstanceSpecificationCreation/%.2/%">
+      <details key="start" value="1970"/>
+      <details key="end" value="2010"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.7" references="/0/generateInstanceSpecificationCreation/%.2/%/%">
+      <details key="start" value="1970"/>
+      <details key="end" value="1986"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.8" references="/0/generateInstanceSpecificationCreation/%.2/%/%/anInstSpec">
+      <details key="start" value="1970"/>
+      <details key="end" value="1980"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.9" references="/0/generateInstanceSpecificationCreation/%.2/%/%.1">
+      <details key="start" value="1997"/>
+      <details key="end" value="2009"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.10" references="/0/generateInstanceSpecificationCreation/%.3">
+      <details key="start" value="2025"/>
+      <details key="end" value="2048"/>
+      <details key="line" value="30"/>
+    </eAnnotations>
+    <eAnnotations source="positions.11" references="/0/generateInstanceSpecificationCreation/%.4">
+      <details key="start" value="2049"/>
+      <details key="end" value="2100"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.12" references="/0/generateInstanceSpecificationCreation/%.4/%">
+      <details key="start" value="2049"/>
+      <details key="end" value="2087"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.13" references="/0/generateInstanceSpecificationCreation/%.4/%/%">
+      <details key="start" value="2049"/>
+      <details key="end" value="2078"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.14" references="/0/generateInstanceSpecificationCreation/%.4/%/%/anInstSpec">
+      <details key="start" value="2049"/>
+      <details key="end" value="2059"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.15" references="/0/generateInstanceSpecificationCreation/%.4/%/%/%">
+      <details key="start" value="2070"/>
+      <details key="end" value="2077"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.16" references="/0/generateInstanceSpecificationCreation/%.5">
+      <details key="start" value="2102"/>
+      <details key="end" value="2136"/>
+      <details key="line" value="31"/>
+    </eAnnotations>
+    <eAnnotations source="positions.17" references="/0/generateInstanceSpecificationCreation/%.6">
+      <details key="start" value="2137"/>
+      <details key="end" value="2160"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.18" references="/0/generateInstanceSpecificationCreation/%.6/anInstSpec">
+      <details key="start" value="2137"/>
+      <details key="end" value="2147"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.19" references="/0/generateInstanceSpecificationCreation/%.7">
+      <details key="start" value="2162"/>
+      <details key="end" value="2164"/>
+      <details key="line" value="31"/>
+    </eAnnotations>
+    <eAnnotations source="positions.20" references="/0/generateInstanceSpecificationCreation/%.8">
+      <details key="start" value="1705"/>
+      <details key="end" value="1795"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.21" references="/0/generateInstanceSpecificationCreation/anInstSpec">
+      <details key="start" value="1852"/>
+      <details key="end" value="1886"/>
+      <details key="line" value="29"/>
+    </eAnnotations>
+    <eAnnotations source="positions.22" references="/0/generateInstanceSpecificationInitialization">
+      <details key="start" value="2395"/>
+      <details key="end" value="2925"/>
+      <details key="line" value="42"/>
+    </eAnnotations>
+    <eAnnotations source="positions.23" references="/0/generateInstanceSpecificationInitialization/%">
+      <details key="start" value="2495"/>
+      <details key="end" value="2518"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.24" references="/0/generateInstanceSpecificationInitialization/%/anInstSpec">
+      <details key="start" value="2495"/>
+      <details key="end" value="2505"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.25" references="/0/generateInstanceSpecificationInitialization/%.1">
+      <details key="start" value="2520"/>
+      <details key="end" value="2531"/>
+      <details key="line" value="43"/>
+    </eAnnotations>
+    <eAnnotations source="positions.26" references="/0/generateInstanceSpecificationInitialization/%.2">
+      <details key="start" value="2532"/>
+      <details key="end" value="2547"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.27" references="/0/generateInstanceSpecificationInitialization/%.2/anInstSpec">
+      <details key="start" value="2532"/>
+      <details key="end" value="2542"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.28" references="/0/generateInstanceSpecificationInitialization/%.3">
+      <details key="start" value="2549"/>
+      <details key="end" value="2554"/>
+      <details key="line" value="43"/>
+    </eAnnotations>
+    <eAnnotations source="positions.29" references="/0/generateInstanceSpecificationInitialization/%.4">
+      <details key="start" value="2554"/>
+      <details key="end" value="2910"/>
+      <details key="line" value="44"/>
+    </eAnnotations>
+    <eAnnotations source="positions.30" references="/0/generateInstanceSpecificationInitialization/%.4/%">
+      <details key="start" value="2641"/>
+      <details key="end" value="2664"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.31" references="/0/generateInstanceSpecificationInitialization/%.4/%/anInstSpec">
+      <details key="start" value="2641"/>
+      <details key="end" value="2651"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.32" references="/0/generateInstanceSpecificationInitialization/%.4/%.1">
+      <details key="start" value="2666"/>
+      <details key="end" value="2695"/>
+      <details key="line" value="45"/>
+    </eAnnotations>
+    <eAnnotations source="positions.33" references="/0/generateInstanceSpecificationInitialization/%.4/%.2">
+      <details key="start" value="2696"/>
+      <details key="end" value="2744"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.34" references="/0/generateInstanceSpecificationInitialization/%.4/%.2/aClassifer">
+      <details key="start" value="2696"/>
+      <details key="end" value="2706"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.35" references="/0/generateInstanceSpecificationInitialization/%.4/%.2/anInstSpec">
+      <details key="start" value="2733"/>
+      <details key="end" value="2743"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.36" references="/0/generateInstanceSpecificationInitialization/%.4/%.3">
+      <details key="start" value="2746"/>
+      <details key="end" value="2752"/>
+      <details key="line" value="45"/>
+    </eAnnotations>
+    <eAnnotations source="positions.37" references="/0/generateInstanceSpecificationInitialization/%.4/%.4">
+      <details key="start" value="2752"/>
+      <details key="end" value="2902"/>
+      <details key="line" value="47"/>
+    </eAnnotations>
+    <eAnnotations source="positions.38" references="/0/generateInstanceSpecificationInitialization/%.4/%.4/%">
+      <details key="start" value="2854"/>
+      <details key="end" value="2892"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.39" references="/0/generateInstanceSpecificationInitialization/%.4/%.4/%/aSlot">
+      <details key="start" value="2854"/>
+      <details key="end" value="2859"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.40" references="/0/generateInstanceSpecificationInitialization/%.4/%.4/%/anInstSpec">
+      <details key="start" value="2881"/>
+      <details key="end" value="2891"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.41" references="/0/generateInstanceSpecificationInitialization/%.4/%.4/%.1">
+      <details key="start" value="2894"/>
+      <details key="end" value="2896"/>
+      <details key="line" value="49"/>
+    </eAnnotations>
+    <eAnnotations source="positions.42" references="/0/generateInstanceSpecificationInitialization/%.4/%.4/aSlot">
+      <details key="start" value="2758"/>
+      <details key="end" value="2770"/>
+      <details key="line" value="47"/>
+    </eAnnotations>
+    <eAnnotations source="positions.43" references="/0/generateInstanceSpecificationInitialization/%.4/%.4/sortedBy">
+      <details key="start" value="2773"/>
+      <details key="end" value="2849"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.44" references="/0/generateInstanceSpecificationInitialization/%.4/%.4/sortedBy/%">
+      <details key="start" value="2773"/>
+      <details key="end" value="2804"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.45" references="/0/generateInstanceSpecificationInitialization/%.4/%.4/sortedBy/%/%">
+      <details key="start" value="2773"/>
+      <details key="end" value="2788"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.46" references="/0/generateInstanceSpecificationInitialization/%.4/%.4/sortedBy/%/%/anInstSpec">
+      <details key="start" value="2773"/>
+      <details key="end" value="2783"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.47" references="/0/generateInstanceSpecificationInitialization/%.4/%.4/sortedBy/%.1">
+      <details key="start" value="2815"/>
+      <details key="end" value="2848"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.48" references="/0/generateInstanceSpecificationInitialization/%.4/%.4/sortedBy/%.1/%">
+      <details key="start" value="2815"/>
+      <details key="end" value="2830"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.49" references="/0/generateInstanceSpecificationInitialization/%.4/%.4/sortedBy/%.1/%/temp1">
+      <details key="start" value="-1"/>
+      <details key="end" value="-1"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.50" references="/0/generateInstanceSpecificationInitialization/%.4/%.4/sortedBy/temp1">
+      <details key="start" value="-1"/>
+      <details key="end" value="-1"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.51" references="/0/generateInstanceSpecificationInitialization/%.4/aClassifer">
+      <details key="start" value="2560"/>
+      <details key="end" value="2583"/>
+      <details key="line" value="44"/>
+    </eAnnotations>
+    <eAnnotations source="positions.52" references="/0/generateInstanceSpecificationInitialization/%.4/sortedBy">
+      <details key="start" value="2586"/>
+      <details key="end" value="2636"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.53" references="/0/generateInstanceSpecificationInitialization/%.4/sortedBy/%">
+      <details key="start" value="2586"/>
+      <details key="end" value="2607"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.54" references="/0/generateInstanceSpecificationInitialization/%.4/sortedBy/%/anInstSpec">
+      <details key="start" value="2586"/>
+      <details key="end" value="2596"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.55" references="/0/generateInstanceSpecificationInitialization/%.4/sortedBy/%.1">
+      <details key="start" value="2618"/>
+      <details key="end" value="2635"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.56" references="/0/generateInstanceSpecificationInitialization/%.4/sortedBy/%.1/temp1">
+      <details key="start" value="-1"/>
+      <details key="end" value="-1"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.57" references="/0/generateInstanceSpecificationInitialization/%.4/sortedBy/temp2">
+      <details key="start" value="-1"/>
+      <details key="end" value="-1"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.58" references="/0/generateInstanceSpecificationInitialization/%.5">
+      <details key="start" value="2912"/>
+      <details key="end" value="2914"/>
+      <details key="line" value="51"/>
+    </eAnnotations>
+    <eAnnotations source="positions.59" references="/0/generateInstanceSpecificationInitialization/%.6">
+      <details key="start" value="2181"/>
+      <details key="end" value="2393"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.60" references="/0/generateInstanceSpecificationInitialization/anInstSpec">
+      <details key="start" value="2456"/>
+      <details key="end" value="2490"/>
+      <details key="line" value="42"/>
+    </eAnnotations>
+    <eAnnotations source="positions.61" references="/0/generateSlotCreation">
+      <details key="start" value="3022"/>
+      <details key="end" value="3920"/>
+      <details key="line" value="57"/>
+    </eAnnotations>
+    <eAnnotations source="positions.62" references="/0/generateSlotCreation/%">
+      <details key="start" value="3113"/>
+      <details key="end" value="3208"/>
+      <details key="line" value="58"/>
+    </eAnnotations>
+    <eAnnotations source="positions.63" references="/0/generateSlotCreation/%.1">
+      <details key="start" value="3209"/>
+      <details key="end" value="3232"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.64" references="/0/generateSlotCreation/%.1/anInstSpec">
+      <details key="start" value="3209"/>
+      <details key="end" value="3219"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.65" references="/0/generateSlotCreation/%.2">
+      <details key="start" value="3234"/>
+      <details key="end" value="3265"/>
+      <details key="line" value="59"/>
+    </eAnnotations>
+    <eAnnotations source="positions.66" references="/0/generateSlotCreation/%.3">
+      <details key="start" value="3266"/>
+      <details key="end" value="3300"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.67" references="/0/generateSlotCreation/%.3/%">
+      <details key="start" value="3266"/>
+      <details key="end" value="3287"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.68" references="/0/generateSlotCreation/%.3/%/aSlot">
+      <details key="start" value="3266"/>
+      <details key="end" value="3271"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.69" references="/0/generateSlotCreation/%.4">
+      <details key="start" value="3302"/>
+      <details key="end" value="3306"/>
+      <details key="line" value="60"/>
+    </eAnnotations>
+    <eAnnotations source="positions.70" references="/0/generateSlotCreation/%.5">
+      <details key="start" value="3306"/>
+      <details key="end" value="3904"/>
+      <details key="line" value="61"/>
+    </eAnnotations>
+    <eAnnotations source="positions.71" references="/0/generateSlotCreation/%.5/%">
+      <details key="start" value="3406"/>
+      <details key="end" value="3433"/>
+      <details key="line" value="62"/>
+    </eAnnotations>
+    <eAnnotations source="positions.72" references="/0/generateSlotCreation/%.5/%.1">
+      <details key="start" value="3434"/>
+      <details key="end" value="3458"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.73" references="/0/generateSlotCreation/%.5/%.1/%">
+      <details key="start" value="3434"/>
+      <details key="end" value="3453"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.74" references="/0/generateSlotCreation/%.5/%.1/%/aValueSpec">
+      <details key="start" value="3434"/>
+      <details key="end" value="3444"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.75" references="/0/generateSlotCreation/%.5/%.2">
+      <details key="start" value="3460"/>
+      <details key="end" value="3508"/>
+      <details key="line" value="63"/>
+    </eAnnotations>
+    <eAnnotations source="positions.76" references="/0/generateSlotCreation/%.5/%.3">
+      <details key="start" value="3509"/>
+      <details key="end" value="3533"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.77" references="/0/generateSlotCreation/%.5/%.3/%">
+      <details key="start" value="3509"/>
+      <details key="end" value="3528"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.78" references="/0/generateSlotCreation/%.5/%.3/%/aValueSpec">
+      <details key="start" value="3509"/>
+      <details key="end" value="3519"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.79" references="/0/generateSlotCreation/%.5/%.4">
+      <details key="start" value="3535"/>
+      <details key="end" value="3558"/>
+      <details key="line" value="63"/>
+    </eAnnotations>
+    <eAnnotations source="positions.80" references="/0/generateSlotCreation/%.5/%.5">
+      <details key="start" value="3558"/>
+      <details key="end" value="3844"/>
+      <details key="line" value="64"/>
+    </eAnnotations>
+    <eAnnotations source="positions.81" references="/0/generateSlotCreation/%.5/%.5/%">
+      <details key="start" value="3611"/>
+      <details key="end" value="3631"/>
+      <details key="line" value="65"/>
+    </eAnnotations>
+    <eAnnotations source="positions.82" references="/0/generateSlotCreation/%.5/%.5/%.1">
+      <details key="start" value="3632"/>
+      <details key="end" value="3697"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.83" references="/0/generateSlotCreation/%.5/%.5/%.1/%">
+      <details key="start" value="3632"/>
+      <details key="end" value="3674"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.84" references="/0/generateSlotCreation/%.5/%.5/%.1/%/aValueSpec">
+      <details key="start" value="3632"/>
+      <details key="end" value="3642"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.85" references="/0/generateSlotCreation/%.5/%.5/%.1/%/%">
+      <details key="start" value="3653"/>
+      <details key="end" value="3673"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.86" references="/0/generateSlotCreation/%.5/%.5/%.2">
+      <details key="start" value="3699"/>
+      <details key="end" value="3703"/>
+      <details key="line" value="65"/>
+    </eAnnotations>
+    <eAnnotations source="positions.87" references="/0/generateSlotCreation/%.5/%.5/%.3">
+      <details key="start" value="3562"/>
+      <details key="end" value="3608"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.88" references="/0/generateSlotCreation/%.5/%.5/%.3/aValueSpec">
+      <details key="start" value="3563"/>
+      <details key="end" value="3573"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.89" references="/0/generateSlotCreation/%.5/%.5/%.3/%">
+      <details key="start" value="3586"/>
+      <details key="end" value="3606"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.90" references="/0/generateSlotCreation/%.5/%.5/%.4">
+      <details key="start" value="3703"/>
+      <details key="end" value="3839"/>
+      <details key="line" value="66"/>
+    </eAnnotations>
+    <eAnnotations source="positions.91" references="/0/generateSlotCreation/%.5/%.5/%.4/%">
+      <details key="start" value="3752"/>
+      <details key="end" value="3775"/>
+      <details key="line" value="67"/>
+    </eAnnotations>
+    <eAnnotations source="positions.92" references="/0/generateSlotCreation/%.5/%.5/%.4/%.1">
+      <details key="start" value="3776"/>
+      <details key="end" value="3833"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.93" references="/0/generateSlotCreation/%.5/%.5/%.4/%.1/%">
+      <details key="start" value="3776"/>
+      <details key="end" value="3820"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.94" references="/0/generateSlotCreation/%.5/%.5/%.4/%.1/%/%">
+      <details key="start" value="3776"/>
+      <details key="end" value="3811"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.95" references="/0/generateSlotCreation/%.5/%.5/%.4/%.1/%/%/aValueSpec">
+      <details key="start" value="3776"/>
+      <details key="end" value="3786"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.96" references="/0/generateSlotCreation/%.5/%.5/%.4/%.1/%/%/%">
+      <details key="start" value="3797"/>
+      <details key="end" value="3810"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.97" references="/0/generateSlotCreation/%.5/%.5/%.4/%.2">
+      <details key="start" value="3835"/>
+      <details key="end" value="3839"/>
+      <details key="line" value="67"/>
+    </eAnnotations>
+    <eAnnotations source="positions.98" references="/0/generateSlotCreation/%.5/%.5/%.4/%.3">
+      <details key="start" value="3710"/>
+      <details key="end" value="3749"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.99" references="/0/generateSlotCreation/%.5/%.5/%.4/%.3/aValueSpec">
+      <details key="start" value="3711"/>
+      <details key="end" value="3721"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.100" references="/0/generateSlotCreation/%.5/%.5/%.4/%.3/%">
+      <details key="start" value="3734"/>
+      <details key="end" value="3747"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.101" references="/0/generateSlotCreation/%.5/%.6">
+      <details key="start" value="3846"/>
+      <details key="end" value="3898"/>
+      <details key="line" value="69"/>
+    </eAnnotations>
+    <eAnnotations source="positions.102" references="/0/generateSlotCreation/%.5/aValueSpec">
+      <details key="start" value="3312"/>
+      <details key="end" value="3343"/>
+      <details key="line" value="61"/>
+    </eAnnotations>
+    <eAnnotations source="positions.103" references="/0/generateSlotCreation/%.5/sortedBy">
+      <details key="start" value="3346"/>
+      <details key="end" value="3402"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.104" references="/0/generateSlotCreation/%.5/sortedBy/%">
+      <details key="start" value="3346"/>
+      <details key="end" value="3373"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.105" references="/0/generateSlotCreation/%.5/sortedBy/%/%">
+      <details key="start" value="3346"/>
+      <details key="end" value="3357"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.106" references="/0/generateSlotCreation/%.5/sortedBy/%/%/aSlot">
+      <details key="start" value="3346"/>
+      <details key="end" value="3351"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.107" references="/0/generateSlotCreation/%.5/sortedBy/%.1">
+      <details key="start" value="3384"/>
+      <details key="end" value="3401"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.108" references="/0/generateSlotCreation/%.5/sortedBy/%.1/temp1">
+      <details key="start" value="-1"/>
+      <details key="end" value="-1"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.109" references="/0/generateSlotCreation/%.5/sortedBy/temp3">
+      <details key="start" value="-1"/>
+      <details key="end" value="-1"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.110" references="/0/generateSlotCreation/%.6">
+      <details key="start" value="3906"/>
+      <details key="end" value="3907"/>
+      <details key="line" value="72"/>
+    </eAnnotations>
+    <eAnnotations source="positions.111" references="/0/generateSlotCreation/%.7">
+      <details key="start" value="2929"/>
+      <details key="end" value="3020"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.112" references="/0/generateSlotCreation/aSlot">
+      <details key="start" value="3061"/>
+      <details key="end" value="3073"/>
+      <details key="line" value="57"/>
+    </eAnnotations>
+    <eAnnotations source="positions.113" references="/0/generateSlotCreation/anInstSpec">
+      <details key="start" value="3075"/>
+      <details key="end" value="3109"/>
+      <details key="line" value="57"/>
+    </eAnnotations>
+  </ecore:EAnnotation>
+</xmi:XMI>
