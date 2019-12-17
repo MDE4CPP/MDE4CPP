@@ -118,16 +118,38 @@ Any [packageName/]::executeActivity(std::shared_ptr<uml::Activity> activity, std
 [template public generateReturnParameter(anActivity : Activity, aPackage : Package)]
 [if (anActivity.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->notEmpty())]
 //The activity has a return parameter
-assert(resultPList->front());
 [let par : Parameter = anActivity.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->sortedBy(name)->first()]
 [if(par.type.supportedTypes())]
+[if (par.upper =1)]
+assert(resultPList->front());
 std::shared_ptr<fUML::[par.type.name/]Value> ret = std::dynamic_pointer_cast<fUML::[par.type.name/]Value>(resultPList->front()->getValues()->front());
 assert(ret != nullptr);
 return eAny(ret->getValue());
 [else]
+std::cout << "generation is missing for return parameter with supported types and upper <> 1" << std::endl;
+throw "error";
+[/if]
+[else]
+[if (par.upper =1)]
+assert(resultPList->front());
 std::shared_ptr<fUML::Reference> [par.name/]Value = std::dynamic_pointer_cast<fUML::Reference>(resultPList->front()->getValues()->front());
 std::shared_ptr<[par.type.name.toUpperFirst()/]Object> [par.name/]UmlLinker = std::dynamic_pointer_cast<[par.type.name.toUpperFirst()/]Object>([par.name/]Value->getReferent());
 return eAny([par.name/]UmlLinker->getUmlValue[if(not (par.upper = 1))]s[/if]());
+[else]
+std::shared_ptr<fUML::ParameterValue> returnParameter = resultPList->front();
+std::shared_ptr<Bag<fUML::Value>> returnValues = returnParameter->getValues();
+Bag<fUML::Value>::iterator valueIter = returnValues->begin();
+Bag<fUML::Value>::iterator valueEnd = returnValues->end();
+std::shared_ptr<Bag<[par.type.name.toUpperFirst()/]>> returnList(new Bag<[par.type.name.toUpperFirst()/]>());
+while (valueIter != valueEnd)
+{
+	std::shared_ptr<fUML::Reference> returnValue = std::dynamic_pointer_cast<fUML::Reference>(*valueIter);
+	std::shared_ptr<[par.type.name.toUpperFirst()/]Object> returnObject = std::dynamic_pointer_cast<[par.type.name.toUpperFirst()/]Object>(returnValue->getReferent());
+	returnList->push_back(returnObject->getUmlValue());
+	valueIter++;
+}
+return eAny(returnList);
+[/if]
 [/if]
 [/let]
 [else]
