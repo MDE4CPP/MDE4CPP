@@ -213,12 +213,12 @@ assert(target != nullptr);
 	[par.name/] = [par.name/]Value->getValue();
 	[/if]
 [else]
-Bag<fUML::Value>::iterator iter = [par.name.toLowerFirst()/]ValueList->begin();
-Bag<fUML::Value>::iterator end = [par.name.toLowerFirst()/]ValueList->end();
-while (iter != end)
+Bag<fUML::Value>::iterator [par.name.toLowerFirst()/]Iter = [par.name.toLowerFirst()/]ValueList->begin();
+Bag<fUML::Value>::iterator [par.name.toLowerFirst()/]End = [par.name.toLowerFirst()/]ValueList->end();
+while ([par.name.toLowerFirst()/]Iter != [par.name.toLowerFirst()/]End)
 {
 	[if (not par.type.supportedTypes())]
-	std::shared_ptr<fUML::Reference> [par.name/]Value = std::dynamic_pointer_cast<fUML::Reference>(*iter);
+	std::shared_ptr<fUML::Reference> [par.name/]Value = std::dynamic_pointer_cast<fUML::Reference>(*[par.name.toLowerFirst()/]Iter);
 	[par.type.generateCppType(false)/] [par.name/]Temp = std::dynamic_pointer_cast<[par.type.name/]Object>([par.name/]Value->getReferent())->getUmlValue();
 	if([par.name/]Temp == nullptr)
 	{
@@ -233,7 +233,7 @@ while (iter != end)
 	throw "ERROR" << std::endl;
 	[/if]
 
-	iter++;
+	[par.name.toLowerFirst()/]Iter++;
 }
 [/if]
 [/for]
@@ -245,13 +245,13 @@ while (iter != end)
 [if (par.upper = 1)]
 [par.generateValue(aParameterList, par.name)/]
 [else]
-Bag<B>::iterator iter = [par.name.toLowerFirst()/]->begin();
-Bag<B>::iterator end = [par.name.toLowerFirst()/]->end();
-while (iter != end)
+Bag<B>::iterator [par.name.toLowerFirst()/]Iter = [par.name.toLowerFirst()/]->begin();
+Bag<B>::iterator [par.name.toLowerFirst()/]End = [par.name.toLowerFirst()/]->end();
+while ([par.name.toLowerFirst()/]Iter != [par.name.toLowerFirst()/]End)
 {
-	[par.type.generateCppType(false)/] [par.name.toLowerFirst()/]Temp = *iter;
+	[par.type.generateCppType(false)/] [par.name.toLowerFirst()/]Temp = *[par.name.toLowerFirst()/]Iter;
 	[par.generateValue(aParameterList, par.name.concat('Temp'))/]
-	iter++;
+	[par.name.toLowerFirst()/]Iter++;
 }
 [/if]
 

@@ -195,13 +195,13 @@ std::shared_ptr<fUML::ParameterValue> [par.name/]P(fumlFac->createParameterValue
 [if (par.upper = 1)]
 [par.generateValue()/]
 [else]
-Bag<B>::iterator iter = [par.name.toLowerFirst()/]List->begin();
-Bag<B>::iterator end = [par.name.toLowerFirst()/]List->end();
-while (iter != end)
+Bag<B>::iterator [par.name.toLowerFirst()/]Iter = [par.name.toLowerFirst()/]List->begin();
+Bag<B>::iterator [par.name.toLowerFirst()/]End = [par.name.toLowerFirst()/]List->end();
+while ([par.name.toLowerFirst()/]Iter != [par.name.toLowerFirst()/]End)
 {
-	[par.type.generateCppType(false)/] [par.name.toLowerFirst()/][if (par.upper <> 1)]Temp[/if] = *iter;
+	[par.type.generateCppType(false)/] [par.name.toLowerFirst()/][if (par.upper <> 1)]Temp[/if] = *[par.name.toLowerFirst()/]Iter;
 	[par.generateValue()/]
-	iter++;
+	[par.name.toLowerFirst()/]Iter++;
 }
 [/if]
 pList->push_back([par.name/]P);
