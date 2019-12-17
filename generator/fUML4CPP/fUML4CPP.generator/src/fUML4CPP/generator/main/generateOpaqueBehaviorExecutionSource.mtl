@@ -12,6 +12,7 @@
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */]
+[**FERTIG*/]
 [module generateOpaqueBehaviorExecutionSource('http://www.eclipse.org/uml2/5.0.0/UML')]
 
 [import fUML4CPP::generator::main::parameterHelper /]
@@ -45,7 +46,7 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp" 
 #include "fUML/FUMLFactory.hpp"
-#include "fUML/ParameterValue.hpp"
+#include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
 #include "uml/Behavior.hpp"
 
 [aNamedElement.generateIncludes(aPackage)/]
@@ -77,7 +78,7 @@ std::shared_ptr<ecore::EObject> [behaviorName/]::copy() const
 	return element;
 }
 
-void [behaviorName/]::doBody(std::shared_ptr<Bag<fUML::ParameterValue> > inputParameters, std::shared_ptr<Bag<fUML::ParameterValue> > outputParameters)
+void [behaviorName/]::doBody(std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > inputParameters, std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > outputParameters)
 {
     DEBUG_MESSAGE(std::cout << "Printing from "<< this->getBehavior()->getName() << std::endl;)
     DEBUG_MESSAGE(std::cout << "__________________________" << std::endl;)
@@ -103,7 +104,7 @@ void [behaviorName/]::setThisExecutionPtr(std::weak_ptr<[behaviorName/]> thisExe
 [anOpaqueBehavior._body->at(index)/]
 [/if][/let][/if]
 
-#include "fUML/Reference.hpp"
+#include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
 [for (type : Type | anOpaqueBehavior.ownedParameter.type->asOrderedSet())]
 [type.generateTypeInclude(aPackage)/]
 [/for]
@@ -123,7 +124,7 @@ void [behaviorName/]::setThisExecutionPtr(std::weak_ptr<[behaviorName/]> thisExe
 #include "[aPackage.getPackageName()/]Exec/[aCallOperationAction.target.type.name.toUpperFirst()/]Object.hpp"
 [/if]
 
-#include "fUML/Reference.hpp"
+#include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
 [for (type : Type | aCallOperationAction.input.type->asOrderedSet())]
 [type.generateTypeInclude(aPackage)/]
 [/for]
@@ -153,7 +154,7 @@ std::cout << __PRETTY_FUNCTION__ << std::endl;
 throw "UnsupportedOperationException";
 [/if]
 		
-[anOpaqueBehavior.ownedParameter->asSet()->generateOutgoingParameters()/]
+
 [/let]
 [/template]
 
@@ -194,47 +195,20 @@ assert(target != nullptr);
 
 [template private generateIncomingParameters(aParameterList : Set(Parameter))]
 [for ( par : Parameter | aParameterList)]
-[par.generateCppType(false)/] [par.name/][if (par.upper <> 1)](new Bag<[par.type.generateCppType(true)/]>())[/if];
+[par.generateCppType(false)/] [par.name/][if (par.direction = ParameterDirectionKind::out and not (par.type.isPrimitive() or par.type.oclIsKindOf(Enumeration)))](new [if (par.upper <> 1)]Bag<[/if][par.type.generateCppType(true)/][if (par.upper <> 1)]>[/if]())[/if];
 [/for]
-
 
 [for ( par : Parameter | aParameterList->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in))->sortedBy(name))]
 [par.generateInputParameter(aParameterList->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in))->sortedBy(name)->indexOf(par)-1)/]
-[if (par.upper = 1)]
-	[if (not par.type.supportedTypes())]
-	std::shared_ptr<fUML::Reference> [par.name/]Value = std::dynamic_pointer_cast<fUML::Reference>([par.name/]ValueList->front());
-	[par.name/] = std::dynamic_pointer_cast<[par.type.name/]Object>([par.name/]Value->getReferent())->getUmlValue();
-	if([par.name/] == nullptr)
-	{
-		DEBUG_MESSAGE(std::cout << "received instance of type [par.type.generateCppType(true)/] is null" << std::endl;);
-	}
-	[else]
-	std::shared_ptr<fUML::[par.type.name.toUpperFirst()/]Value> [par.name/]Value = std::dynamic_pointer_cast<fUML::[par.type.name.toUpperFirst()/]Value>([par.name/]ValueList->front());
-	[par.name/] = [par.name/]Value->getValue();
-	[/if]
-[else]
-Bag<fUML::Value>::iterator iter = [par.name.toLowerFirst()/]ValueList->begin();
-Bag<fUML::Value>::iterator end = [par.name.toLowerFirst()/]ValueList->end();
-while (iter != end)
-{
-	[if (not par.type.supportedTypes())]
-	std::shared_ptr<fUML::Reference> [par.name/]Value = std::dynamic_pointer_cast<fUML::Reference>(*iter);
-	[par.type.generateCppType(false)/] [par.name/]Temp = std::dynamic_pointer_cast<[par.type.name/]Object>([par.name/]Value->getReferent())->getUmlValue();
-	if([par.name/]Temp == nullptr)
-	{
-		DEBUG_MESSAGE(std::cout << "received instance of type [par.type.generateCppType(true)/] is null" << std::endl;);
-	}
-	else
-	{
-		[par.name/]->push_back([par.name/]Temp);
-	}
-	[else]
-	std::cerr << __PRETTY_FUNCTION__ << ": generation of supported types with upper > 0 is missing" << std::endl;
-	throw "ERROR" << std::endl;
-	[/if]
 
-	iter++;
+[if (not par.type.supportedTypes())]
+[par.name/] = std::dynamic_pointer_cast<[par.type.name/]Object>([par.name/]Value->getReferent())->getUmlValue[if(not (par.upper = 1))]s[/if]();
+if([par.name/] != nullptr)
+{
+	DEBUG_MESSAGE(std::cout << "received instance of type [par.type.generateCppType(true)/] is null" << std::endl;);
 }
+[else]
+[par.name/] = [par.name/]Value->getValue();
 [/if]
 [/for]
 [/template]
@@ -242,19 +216,15 @@ while (iter != end)
 [template private generateOutgoingParameters(aParameterList : Set(Parameter))]
 //set return / out parameters
 [for ( par : Parameter | aParameterList->select((direction = ParameterDirectionKind::_out) or (direction = ParameterDirectionKind::return))->sortedBy(name))]
-[if (par.upper = 1)]
-[par.generateValue(aParameterList, par.name)/]
+[par.generateOutputParameter()/]
+[if (not par.type.supportedTypes())]
+[par.name/]UmlLinker->setUmlValue[if(not (par.upper = 1))]s[/if]([par.name/]);
+[par.name/]UmlLinker->setLocus(this->getLocus());
+[par.name/]Value->setReferent([par.name/]UmlLinker);
 [else]
-Bag<B>::iterator iter = [par.name.toLowerFirst()/]->begin();
-Bag<B>::iterator end = [par.name.toLowerFirst()/]->end();
-while (iter != end)
-{
-	[par.type.generateCppType(false)/] [par.name.toLowerFirst()/]Temp = *iter;
-	[par.generateValue(aParameterList, par.name.concat('Temp'))/]
-	iter++;
-}
+[par.name/]Value->setValue([par.name/]);
 [/if]
-
+outputParameters->at([aParameterList->select((direction = ParameterDirectionKind::_out) or (direction = ParameterDirectionKind::return))->sortedBy(name)->indexOf(par)-1/])->getValues()->push_back([par.name/]Value);
 [/for]
 
 //set InOut parameters
@@ -273,16 +243,4 @@ while (iter != end)
 [/if]
 //outputParameters->push_back(inputParameters->at([aParameterList->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in))->sortedBy(name)->indexOf(par)-1/]));
 [/for]
-[/template]
-
-[template private generateValue(aParameter : Parameter, aParameterList : Set(Parameter), variableName : String)]
-[aParameter.generateOutputParameter()/]
-[if (not aParameter.type.supportedTypes())]
-[aParameter.name/]UmlLinker->setUmlValue([variableName/]);
-[aParameter.name/]UmlLinker->setLocus(this->getLocus());
-[aParameter.name/]Value->setReferent([aParameter.name/]UmlLinker);
-[else]
-[aParameter.name/]Value->setValue([aParameter.name/]);
-[/if]
-outputParameters->at([aParameterList->select((direction = ParameterDirectionKind::_out) or (direction = ParameterDirectionKind::return))->sortedBy(name)->indexOf(aParameter)-1/])->getValues()->push_back([aParameter.name/]Value);
 [/template]

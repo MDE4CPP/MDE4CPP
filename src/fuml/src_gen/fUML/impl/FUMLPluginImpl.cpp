@@ -49,10 +49,10 @@ std::string FUMLPluginImpl::eNAME()
 
 std::string FUMLPluginImpl::eNS_URI()
 {
-	return "http://www.eclipse.org/emf/2002/fUML";
+	return "http://www.omg.org/spec/FUML/20180501";
 }
 
 std::string FUMLPluginImpl::eNS_PREFIX()
 {
-	return "fUML";
+	return "fUML_Semantics";
 }

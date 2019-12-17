@@ -12,6 +12,7 @@
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */]
+[**FERTIG*/]
 [module generateOpaqueBehaviorExecutionHeader('http://www.eclipse.org/uml2/5.0.0/UML')]
  
 [import fUML4CPP::generator::main::parameterHelper /]
@@ -33,11 +34,11 @@
 [file (aPackage.getPackageName().concat('Exec/').concat(behaviorName).concat('.hpp'), false, 'UTF-8')]
 [startGuard(namedElement,'Execution')/]
 
-#include "fUML/impl/OpaqueBehaviorExecutionImpl.hpp"
+#include "fUML/Semantics/CommonBehavior/impl/OpaqueBehaviorExecutionImpl.hpp"
 
 namespace [aPackage.name/] 
 {
-	class [behaviorName/]: virtual public fUML::OpaqueBehaviorExecutionImpl 
+	class [behaviorName/]: virtual public fUML::Semantics::CommonBehavior::OpaqueBehaviorExecutionImpl 
 	{
 		public:
 		    //constructor
@@ -46,7 +47,7 @@ namespace [aPackage.name/]
 		    //destructor
 		    virtual ~[behaviorName/]();
 		
-		    virtual void doBody(std::shared_ptr<Bag<fUML::ParameterValue> > inputParameters, std::shared_ptr<Bag<fUML::ParameterValue> > outputParameters);
+		    virtual void doBody(std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > inputParameters, std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > outputParameters);
 		    virtual std::shared_ptr<ecore::EObject> copy() const;
 			virtual void setThisExecutionPtr(std::weak_ptr<[behaviorName/]> thisExecutionPtr);
 	};

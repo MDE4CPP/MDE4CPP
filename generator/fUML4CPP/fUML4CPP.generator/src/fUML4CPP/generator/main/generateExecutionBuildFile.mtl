@@ -77,9 +77,13 @@ SET(SOURCE_FILES
 [for (aCOA : CallOperationAction | aPackage.getCallOperationActions()->sortedBy(name))]
 	[aCOA.name.sanitize().toUpperFirst()/]Execution.cpp
 [/for]
+[for (anExpansionRegion : ExpansionRegion | aPackage.getExpansionRegions()->sortedBy(name))]
+	[anExpansionRegion.getExpansionRegionActivationName()/].cpp
+[/for]
 [for (aClassifier : Classifier | getClassiferExecutions()->sortedBy(name))]
 	[aClassifier.name.toUpperFirst()/]Object.cpp
 [/for]
+	impl/[aPackage.name.toUpperFirst()/]ExecutionFactoryImpl.cpp
 	impl/[aPackage.name.toUpperFirst()/]LocusImpl.cpp
 [if (buildLibrary)]
 	[packageName.concat('ExecPlugin.cpp')/]

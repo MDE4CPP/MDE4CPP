@@ -16,6 +16,10 @@
     
 [import fUML4CPP::generator::main::generateClassifierObjectHeader /]
 [import fUML4CPP::generator::main::generateClassifierObjectSource /]
+[import fUML4CPP::generator::main::generateExpansionRegionActiviationHeader /]
+[import fUML4CPP::generator::main::generateExpansionRegionActiviationSource /]
+[import fUML4CPP::generator::main::generateModelExecutionFactoryHeader /]
+[import fUML4CPP::generator::main::generateModelExecutionFactorySource /]
 [import fUML4CPP::generator::main::generateModelLocusHeader /]
 [import fUML4CPP::generator::main::generateModelLocusSource /]
 [import fUML4CPP::generator::main::generateExecutionBuildFile /]
@@ -63,6 +67,10 @@
 [aCOA.generateOpaqueBehaviorExecutionSource(aPackage)/]
 [/for]
 
+//generate expansion region execution
+[aPackage.getExpansionRegions().generateExpansionRegionActivationHeader(aPackage)/]
+[aPackage.getExpansionRegions().generateExpansionRegionActivationSource(aPackage)/]
+
 //generate execution classifier
 [aPackage.getClassiferExecutions().generateClassifierObjectHeader(aPackage)/]
 [aPackage.getClassiferExecutions().generateClassifierObjectSource(aPackage)/]
@@ -73,6 +81,10 @@
 [else]
 [aPackage.generateExecutionPlugin()/]
 [/if]
+
+//generate model execution factory
+[aPackage.generateModelExecutionFactoryHeader()/]
+[aPackage.generateModelExecutionFactorySource()/]
 
 //generate model locus
 [aPackage.generateModelLocusHeader()/]

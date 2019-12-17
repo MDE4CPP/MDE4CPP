@@ -12,6 +12,7 @@
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */]
+[**FERTIG*/]
 [module generateModelLocusHeader('http://www.eclipse.org/uml2/5.0.0/UML')]
 
 [import UML4CPP::generator::main::helpers::generalHelper /]
@@ -23,13 +24,13 @@ upperName : String = aPackage.getPackageName().sanitize().toUpperFirst(); origin
 [file (originalName.concat('Exec/') + upperName.concat('Locus.hpp'), false, 'UTF-8')]
 [startGuard(aPackage,'LocusExecution')/]
 
-#include "fUML/Locus.hpp"
+#include "fUML/Semantics/Loci/Locus.hpp"
 
 #include "ecore/impl/EObjectImpl.hpp"
 
 namespace [originalName/] 
 {
-	class [upperName/]Locus: virtual public fUML::Locus
+	class [upperName/]Locus: virtual public fUML::Semantics::Loci::Locus
 	{
 		public: 
 			[upperName/]Locus (){};
@@ -40,7 +41,7 @@ namespace [originalName/]
 			//*********************************
 			// Operations
 			//*********************************
-			virtual std::shared_ptr<fUML::Object> instantiate(std::shared_ptr<uml::Class>  type) = 0;
+			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> instantiate(std::shared_ptr<uml::Class>  type) = 0;
 	};
 }
 [endGuard(aPackage,'LocusExecution')/]
@@ -50,13 +51,13 @@ namespace [originalName/]
 [startGuard(aPackage,'LocusImpl_Execution')/]
 
 #include "../[upperName/]Locus.hpp"
-#include "fUML/impl/LocusImpl.hpp"
+#include "fUML/Semantics/Loci/impl/LocusImpl.hpp"
 
 #include "ecore/impl/EObjectImpl.hpp"
 
 namespace [originalName/] 
 {
-	class [upperName/]LocusImpl :virtual public fUML::LocusImpl, virtual public [upperName/]Locus
+	class [upperName/]LocusImpl :virtual public fUML::Semantics::Loci::LocusImpl, virtual public [upperName/]Locus
 	{
 		private:    
 			[upperName/]LocusImpl& operator=([upperName/]LocusImpl const&) = delete;
@@ -70,8 +71,8 @@ namespace [originalName/]
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Object> instantiate(std::shared_ptr<uml::Class>  type) ;
-			virtual void setThisLocusPtr(std::weak_ptr<Locus> thisLocusPtr){LocusImpl::setThisLocusPtr(thisLocusPtr);};
+			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> instantiate(std::shared_ptr<uml::Class>  type) ;
+			virtual void setThisLocusPtr(std::weak_ptr<fUML::Semantics::Loci::Locus> thisLocusPtr){fUML::Semantics::Loci::LocusImpl::setThisLocusPtr(thisLocusPtr);};
 	};
 }
 [endGuard(aPackage,'LocusImpl_Execution')/]

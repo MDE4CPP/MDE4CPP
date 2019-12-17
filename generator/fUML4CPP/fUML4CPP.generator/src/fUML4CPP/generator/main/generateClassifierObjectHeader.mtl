@@ -12,6 +12,7 @@
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */]
+[**FERTIG*/]
 [module generateClassifierObjectHeader('http://www.eclipse.org/uml2/5.0.0/UML')]
 
 [import fUML4CPP::generator::main::generateClassifierObjectSource /]
@@ -27,7 +28,7 @@
 [file (aPackage.getPackageName().concat('Exec/').concat(className).concat('.hpp'), false, 'UTF-8')]
 [startGuard(aClassifier,'Execution')/]
 
-#include "fUML/impl/ObjectImpl.hpp"
+#include "fUML/Semantics/StructuredClassifiers/impl/ObjectImpl.hpp"
 
 template <class T> 
 class Bag;
@@ -39,12 +40,13 @@ namespace [aClassifier.getNearestPackage().myNamespaceName()/]
 
 namespace [aPackage.name/] 
 {
-	class [className/] : virtual public fUML::ObjectImpl 
+	class [className/] : virtual public fUML::Semantics::StructuredClassifiers::ObjectImpl
 	{
 		public:
 		    //constructors
 		    [className/]([className/] &obj);
 		    [className/](std::shared_ptr<[pointerName/]>);
+		    [className/](std::shared_ptr<Bag<[pointerName/]>>);
 		 	[className/]();
 		    //destructor
 		    virtual ~[className/]();
@@ -52,20 +54,23 @@ namespace [aPackage.name/]
 		    virtual std::shared_ptr<ecore::EObject> copy();
 			
 			virtual std::shared_ptr<[pointerName/]> getUmlValue() const;
+			virtual std::shared_ptr<Bag<[pointerName/]>> getUmlValues() const;
 			virtual void setUmlValue(std::shared_ptr<[pointerName/]>);
+			virtual void setUmlValues(std::shared_ptr<Bag<[pointerName/]>>);;
 			virtual void setThis[className/]Ptr(std::weak_ptr<[className/]> thisObjectPtr);
 [if (aPackage.getStructuralFeaturesFromRSTVA(aClassifier)->size() > 0)]
-			virtual void removeValue(std::shared_ptr<uml::StructuralFeature> feature, std::shared_ptr<fUML::Value> values);
+			virtual void removeValue(std::shared_ptr<uml::StructuralFeature> feature, std::shared_ptr<fUML::Semantics::Values::Value> values);
 [/if]
 [if (aPackage.getStructuralFeaturesFromRSTA(aClassifier)->size() > 0)]
-			virtual std::shared_ptr<Bag<fUML::Value>> getValues(std::shared_ptr<uml::StructuralFeature> feature, std::shared_ptr<Bag<fUML::FeatureValue>> featureValues);
+			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value>> getValues(std::shared_ptr<uml::StructuralFeature> feature, std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> featureValues);
 [/if]
 [if (aPackage.getStructuralFeaturesFromASTVA(aClassifier)->size() > 0)]
-			virtual void setFeatureValue(std::shared_ptr<uml::StructuralFeature> feature, std::shared_ptr<Bag<fUML::Value>> value, int position);
+			virtual void setFeatureValue(std::shared_ptr<uml::StructuralFeature> feature, std::shared_ptr<Bag<fUML::Semantics::Values::Value>> value, int position);
 [/if]
 		
 		protected:
 			std::shared_ptr<[pointerName/]> m_umlValue = nullptr;
+			std::shared_ptr<Bag<[pointerName/]>> m_umlValues = nullptr;
 	};
 }
 [endGuard(aClassifier,'Object')/]
