@@ -149,7 +149,15 @@ namespace fUML::Semantics::StructuredClassifiers
 			
 			/*!
 			 */ 
+			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value> > getValues(std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue> >  featureValues) = 0;
+			
+			/*!
+			 */ 
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> new_() = 0;
+			
+			/*!
+			 */ 
+			virtual void removeValue(std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<fUML::Semantics::Values::Value>  value) = 0;
 			
 			/*!
 			 */ 
@@ -166,6 +174,10 @@ namespace fUML::Semantics::StructuredClassifiers
 			/*!
 			 */ 
 			virtual void send(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>  eventOccurrence) = 0;
+			
+			/*!
+			 */ 
+			virtual void setFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<Bag<fUML::Semantics::Values::Value> >  values,int position) = 0;
 			
 			/*!
 			 */ 

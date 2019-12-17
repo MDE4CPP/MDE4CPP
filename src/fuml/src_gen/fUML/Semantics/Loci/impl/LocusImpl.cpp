@@ -331,7 +331,7 @@ Any LocusImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case fUML::FUMLPackage::LOCUS_ATTRIBUTE_EXECUTOR:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getExecutor())); //800
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getExecutor())); //770
 		case fUML::FUMLPackage::LOCUS_ATTRIBUTE_EXTENSIONALVALUES:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -342,10 +342,10 @@ Any LocusImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //802
+			return eAny(tempList); //772
 		}
 		case fUML::FUMLPackage::LOCUS_ATTRIBUTE_FACTORY:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getFactory())); //801
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getFactory())); //771
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
@@ -354,11 +354,11 @@ bool LocusImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case fUML::FUMLPackage::LOCUS_ATTRIBUTE_EXECUTOR:
-			return getExecutor() != nullptr; //800
+			return getExecutor() != nullptr; //770
 		case fUML::FUMLPackage::LOCUS_ATTRIBUTE_EXTENSIONALVALUES:
-			return getExtensionalValues() != nullptr; //802
+			return getExtensionalValues() != nullptr; //772
 		case fUML::FUMLPackage::LOCUS_ATTRIBUTE_FACTORY:
-			return getFactory() != nullptr; //801
+			return getFactory() != nullptr; //771
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
@@ -371,7 +371,7 @@ bool LocusImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<fUML::Semantics::Loci::Executor> _executor = std::dynamic_pointer_cast<fUML::Semantics::Loci::Executor>(_temp);
-			setExecutor(_executor); //800
+			setExecutor(_executor); //770
 			return true;
 		}
 		case fUML::FUMLPackage::LOCUS_ATTRIBUTE_EXTENSIONALVALUES:
@@ -415,7 +415,7 @@ bool LocusImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory> _factory = std::dynamic_pointer_cast<fUML::Semantics::Loci::ExecutionFactory>(_temp);
-			setFactory(_factory); //801
+			setFactory(_factory); //771
 			return true;
 		}
 	}

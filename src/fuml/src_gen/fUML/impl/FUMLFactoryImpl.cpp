@@ -108,9 +108,6 @@
 
 #include "fUML/Semantics/Loci/impl/ChoiceStrategyImpl.hpp"
 #include "fUML/Semantics/Loci/impl/ExecutionFactoryImpl.hpp"
-#include "fUML/Semantics/Loci/impl/ExecutionFactoryL1Impl.hpp"
-#include "fUML/Semantics/Loci/impl/ExecutionFactoryL2Impl.hpp"
-#include "fUML/Semantics/Loci/impl/ExecutionFactoryL3Impl.hpp"
 #include "fUML/Semantics/Loci/impl/ExecutorImpl.hpp"
 #include "fUML/Semantics/Loci/impl/FirstChoiceStrategyImpl.hpp"
 #include "fUML/Semantics/Loci/impl/LocusImpl.hpp"
@@ -205,9 +202,6 @@ FUMLFactoryImpl::FUMLFactoryImpl()
 	m_idMap.insert(std::make_pair("fUML::Semantics::CommonBehavior::EventDispatchLoop", FUMLPackage::EVENTDISPATCHLOOP_CLASS));
 	m_idMap.insert(std::make_pair("fUML::Semantics::CommonBehavior::EventOccurrence", FUMLPackage::EVENTOCCURRENCE_CLASS));
 	m_idMap.insert(std::make_pair("fUML::Semantics::Loci::ExecutionFactory", FUMLPackage::EXECUTIONFACTORY_CLASS));
-	m_idMap.insert(std::make_pair("fUML::Semantics::Loci::ExecutionFactoryL1", FUMLPackage::EXECUTIONFACTORYL1_CLASS));
-	m_idMap.insert(std::make_pair("fUML::Semantics::Loci::ExecutionFactoryL2", FUMLPackage::EXECUTIONFACTORYL2_CLASS));
-	m_idMap.insert(std::make_pair("fUML::Semantics::Loci::ExecutionFactoryL3", FUMLPackage::EXECUTIONFACTORYL3_CLASS));
 	m_idMap.insert(std::make_pair("fUML::Semantics::Loci::Executor", FUMLPackage::EXECUTOR_CLASS));
 	m_idMap.insert(std::make_pair("fUML::Semantics::Activities::ExpansionActivationGroup", FUMLPackage::EXPANSIONACTIVATIONGROUP_CLASS));
 	m_idMap.insert(std::make_pair("fUML::Semantics::Activities::ExpansionNodeActivation", FUMLPackage::EXPANSIONNODEACTIVATION_CLASS));
@@ -647,45 +641,6 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const int metaElementID,
 				std::shared_ptr<fUML::Semantics::Loci::Locus> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Loci::Locus>(container);
 				assert(castedContainer);
 				return std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory>(this->createExecutionFactory_in_Locus(castedContainer,metaElementID));
-			}
-		}
-		case FUMLPackage::EXECUTIONFACTORYL1_CLASS:
-		{
-			if (nullptr == container)
-			{
-				return this->createExecutionFactoryL1(metaElementID);
-			}
-			else
-			{
-				std::shared_ptr<fUML::Semantics::Loci::Locus> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Loci::Locus>(container);
-				assert(castedContainer);
-				return std::shared_ptr<fUML::Semantics::Loci::ExecutionFactoryL1>(this->createExecutionFactoryL1_in_Locus(castedContainer,metaElementID));
-			}
-		}
-		case FUMLPackage::EXECUTIONFACTORYL2_CLASS:
-		{
-			if (nullptr == container)
-			{
-				return this->createExecutionFactoryL2(metaElementID);
-			}
-			else
-			{
-				std::shared_ptr<fUML::Semantics::Loci::Locus> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Loci::Locus>(container);
-				assert(castedContainer);
-				return std::shared_ptr<fUML::Semantics::Loci::ExecutionFactoryL2>(this->createExecutionFactoryL2_in_Locus(castedContainer,metaElementID));
-			}
-		}
-		case FUMLPackage::EXECUTIONFACTORYL3_CLASS:
-		{
-			if (nullptr == container)
-			{
-				return this->createExecutionFactoryL3(metaElementID);
-			}
-			else
-			{
-				std::shared_ptr<fUML::Semantics::Loci::Locus> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Loci::Locus>(container);
-				assert(castedContainer);
-				return std::shared_ptr<fUML::Semantics::Loci::ExecutionFactoryL3>(this->createExecutionFactoryL3_in_Locus(castedContainer,metaElementID));
 			}
 		}
 		case FUMLPackage::EXECUTOR_CLASS:
@@ -1751,63 +1706,6 @@ std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory> FUMLFactoryImpl::create
 			wp->setFactory(element);
 	}
 	element->setThisExecutionFactoryPtr(element);
-	return element;
-	
-}
-std::shared_ptr<fUML::Semantics::Loci::ExecutionFactoryL1> FUMLFactoryImpl::createExecutionFactoryL1(const int metaElementID/*=-1*/) const
-{
-	std::shared_ptr<fUML::Semantics::Loci::ExecutionFactoryL1Impl> element(new fUML::Semantics::Loci::ExecutionFactoryL1Impl());
-	element->setMetaElementID(metaElementID);
-	element->setThisExecutionFactoryL1Ptr(element);
-	return element;
-}
-std::shared_ptr<fUML::Semantics::Loci::ExecutionFactoryL1> FUMLFactoryImpl::createExecutionFactoryL1_in_Locus(std::weak_ptr<fUML::Semantics::Loci::Locus > par_locus, const int metaElementID) const
-{
-	std::shared_ptr<fUML::Semantics::Loci::ExecutionFactoryL1Impl> element(new fUML::Semantics::Loci::ExecutionFactoryL1Impl(par_locus));
-	element->setMetaElementID(metaElementID);
-	if(auto wp = par_locus.lock())
-	{
-			wp->setFactory(element);
-	}
-	element->setThisExecutionFactoryL1Ptr(element);
-	return element;
-	
-}
-std::shared_ptr<fUML::Semantics::Loci::ExecutionFactoryL2> FUMLFactoryImpl::createExecutionFactoryL2(const int metaElementID/*=-1*/) const
-{
-	std::shared_ptr<fUML::Semantics::Loci::ExecutionFactoryL2Impl> element(new fUML::Semantics::Loci::ExecutionFactoryL2Impl());
-	element->setMetaElementID(metaElementID);
-	element->setThisExecutionFactoryL2Ptr(element);
-	return element;
-}
-std::shared_ptr<fUML::Semantics::Loci::ExecutionFactoryL2> FUMLFactoryImpl::createExecutionFactoryL2_in_Locus(std::weak_ptr<fUML::Semantics::Loci::Locus > par_locus, const int metaElementID) const
-{
-	std::shared_ptr<fUML::Semantics::Loci::ExecutionFactoryL2Impl> element(new fUML::Semantics::Loci::ExecutionFactoryL2Impl(par_locus));
-	element->setMetaElementID(metaElementID);
-	if(auto wp = par_locus.lock())
-	{
-			wp->setFactory(element);
-	}
-	element->setThisExecutionFactoryL2Ptr(element);
-	return element;
-	
-}
-std::shared_ptr<fUML::Semantics::Loci::ExecutionFactoryL3> FUMLFactoryImpl::createExecutionFactoryL3(const int metaElementID/*=-1*/) const
-{
-	std::shared_ptr<fUML::Semantics::Loci::ExecutionFactoryL3Impl> element(new fUML::Semantics::Loci::ExecutionFactoryL3Impl());
-	element->setMetaElementID(metaElementID);
-	element->setThisExecutionFactoryL3Ptr(element);
-	return element;
-}
-std::shared_ptr<fUML::Semantics::Loci::ExecutionFactoryL3> FUMLFactoryImpl::createExecutionFactoryL3_in_Locus(std::weak_ptr<fUML::Semantics::Loci::Locus > par_locus, const int metaElementID) const
-{
-	std::shared_ptr<fUML::Semantics::Loci::ExecutionFactoryL3Impl> element(new fUML::Semantics::Loci::ExecutionFactoryL3Impl(par_locus));
-	element->setMetaElementID(metaElementID);
-	if(auto wp = par_locus.lock())
-	{
-			wp->setFactory(element);
-	}
-	element->setThisExecutionFactoryL3Ptr(element);
 	return element;
 	
 }

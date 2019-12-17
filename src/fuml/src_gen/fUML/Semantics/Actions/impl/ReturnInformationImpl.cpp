@@ -248,7 +248,7 @@ Any ReturnInformationImpl::eGet(int featureID, bool resolve, bool coreType) cons
 	switch(featureID)
 	{
 		case fUML::FUMLPackage::RETURNINFORMATION_ATTRIBUTE_CALLEVENTOCCURRENCE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getCallEventOccurrence())); //1050
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getCallEventOccurrence())); //1020
 	}
 	return fUML::Semantics::Values::ValueImpl::eGet(featureID, resolve, coreType);
 }
@@ -257,7 +257,7 @@ bool ReturnInformationImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case fUML::FUMLPackage::RETURNINFORMATION_ATTRIBUTE_CALLEVENTOCCURRENCE:
-			return getCallEventOccurrence() != nullptr; //1050
+			return getCallEventOccurrence() != nullptr; //1020
 	}
 	return fUML::Semantics::Values::ValueImpl::internalEIsSet(featureID);
 }
@@ -270,7 +270,7 @@ bool ReturnInformationImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<fUML::Semantics::CommonBehavior::CallEventOccurrence> _callEventOccurrence = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::CallEventOccurrence>(_temp);
-			setCallEventOccurrence(_callEventOccurrence); //1050
+			setCallEventOccurrence(_callEventOccurrence); //1020
 			return true;
 		}
 	}

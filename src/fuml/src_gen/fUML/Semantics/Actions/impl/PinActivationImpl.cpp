@@ -168,44 +168,47 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > PinActivationImpl::tak
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	int count = this->countUnofferedTokens();
-    int upper = -1;
+	int upper = -1;
 
-    //Note: A pin activation used in an expansion activation group will have this.node == null
-    if (this->getNode() != nullptr) 
-    {
-    	std::shared_ptr<uml::Pin> pin = std::dynamic_pointer_cast<uml::Pin>(this->getNode());
-        upper = pin->getUpper();
-    }
+	//Note: A pin activation used in an expansion activation group will have this.node == null
+	if (this->getNode() != nullptr) 
+	{
+		std::shared_ptr<uml::Pin> pin = std::dynamic_pointer_cast<uml::Pin>(this->getNode());
+		if (pin != nullptr)
+		{
+			upper = pin->getUpper();
+		}
+	}
 
-    std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > tokens(new Bag<fUML::Semantics::Activities::Token>());
+	std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > tokens(new Bag<fUML::Semantics::Activities::Token>());
 
-    if (upper < 0 || count < upper) 
-    {
-    	std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance> > incomingEdges = this->getIncomingEdges();
-        for (unsigned int i = 0; i < incomingEdges->size(); i++) 
-        {
-        	std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> edge = incomingEdges->at(i);
-            int incomingCount = edge->countOfferedValue();
-            std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > incomingTokens(new Bag<fUML::Semantics::Activities::Token>());
-            if (upper < 0 || incomingCount < upper - count) 
-            {
-                incomingTokens = edge->takeOfferedTokens();
-                count = count + incomingCount;
-            }
-            else if (count < upper) 
-            {
-                incomingTokens = edge->takeOfferedTokens(upper - count);
-                count = upper;
-            }
-            for (unsigned int j = 0; j < incomingTokens->size(); j++) 
-            {
-            	std::shared_ptr<fUML::Semantics::Activities::Token> token = incomingTokens->at(j);
-                tokens->push_back(token);
-            }
-        }
-    }
+	if (upper < 0 || count < upper) 
+	{
+		std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance> > incomingEdges = this->getIncomingEdges();
+		for (unsigned int i = 0; i < incomingEdges->size(); i++) 
+		{
+			std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> edge = incomingEdges->at(i);
+			int incomingCount = edge->countOfferedValue();
+			std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > incomingTokens(new Bag<fUML::Semantics::Activities::Token>());
+			if (upper < 0 || incomingCount < upper - count) 
+			{
+				incomingTokens = edge->takeOfferedTokens();
+				count = count + incomingCount;
+			}
+			else if (count < upper) 
+			{
+				incomingTokens = edge->takeOfferedTokens(upper - count);
+				count = upper;
+			}
+			for (unsigned int j = 0; j < incomingTokens->size(); j++) 
+			{
+				std::shared_ptr<fUML::Semantics::Activities::Token> token = incomingTokens->at(j);
+				tokens->push_back(token);
+			}
+		}
+	}
 
-    return tokens;
+	return tokens;
 	//end of body
 }
 
@@ -253,7 +256,7 @@ Any PinActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case fUML::FUMLPackage::PINACTIVATION_ATTRIBUTE_ACTIONACTIVATION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getActionActivation().lock())); //917
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getActionActivation().lock())); //887
 	}
 	return fUML::Semantics::Activities::ObjectNodeActivationImpl::eGet(featureID, resolve, coreType);
 }
@@ -262,7 +265,7 @@ bool PinActivationImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case fUML::FUMLPackage::PINACTIVATION_ATTRIBUTE_ACTIONACTIVATION:
-			return getActionActivation().lock() != nullptr; //917
+			return getActionActivation().lock() != nullptr; //887
 	}
 	return fUML::Semantics::Activities::ObjectNodeActivationImpl::internalEIsSet(featureID);
 }
@@ -275,7 +278,7 @@ bool PinActivationImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<fUML::Semantics::Actions::ActionActivation> _actionActivation = std::dynamic_pointer_cast<fUML::Semantics::Actions::ActionActivation>(_temp);
-			setActionActivation(_actionActivation); //917
+			setActionActivation(_actionActivation); //887
 			return true;
 		}
 	}

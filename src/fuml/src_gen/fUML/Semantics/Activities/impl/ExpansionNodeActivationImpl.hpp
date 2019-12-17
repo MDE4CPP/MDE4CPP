@@ -49,7 +49,19 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			/*!
 			 */ 
+			virtual void fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token> >  incomingTokens) ;
+			
+			/*!
+			 */ 
 			virtual std::shared_ptr<fUML::Semantics::Activities::ExpansionRegionActivation> getExpansionRegionActivation() ;
+			
+			/*!
+			 */ 
+			virtual bool isReady() ;
+			
+			/*!
+			 */ 
+			virtual void receiveOffer() ;
 			
 			
 			

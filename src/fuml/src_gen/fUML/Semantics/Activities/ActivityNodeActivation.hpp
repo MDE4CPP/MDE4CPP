@@ -182,7 +182,7 @@ namespace fUML::Semantics::Activities
 			
 			/*!
 			 */ 
-			virtual void recieveOffer() = 0;
+			virtual void receiveOffer() = 0;
 			
 			/*!
 			 */ 

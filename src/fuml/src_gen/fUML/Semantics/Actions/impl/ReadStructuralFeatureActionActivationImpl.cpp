@@ -25,6 +25,11 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "fUML/impl/FUMLPackageImpl.hpp"
+#include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
+#include "fUML/Semantics/SimpleClassifiers/StructuredValue.hpp"
+#include "fUML/Semantics/Values/Value.hpp"
+#include "uml/ReadStructuralFeatureAction.hpp"
+#include "uml/StructuralFeature.hpp"
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -171,6 +176,27 @@ std::shared_ptr<ecore::EClass> ReadStructuralFeatureActionActivationImpl::eStati
 //*********************************
 // Operations
 //*********************************
+void ReadStructuralFeatureActionActivationImpl::doAction()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	std::shared_ptr<uml::ReadStructuralFeatureAction> action = std::dynamic_pointer_cast<uml::ReadStructuralFeatureAction>(m_node);
+	std::shared_ptr<uml::StructuralFeature> feature = action->getStructuralFeature();
+
+	std::shared_ptr<fUML::Semantics::Values::Value> value = takeTokens(action->getObject())->at(0);
+	std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> featureValues(new Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>());
+	std::shared_ptr<fUML::Semantics::SimpleClassifiers::StructuredValue> structuredValue = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::StructuredValue>(value);
+	if (structuredValue)
+	{
+		std::shared_ptr<Bag<fUML::Semantics::Values::Value>> values = structuredValue->getValues(feature, featureValues);
+		putTokens(action->getResult(), values);
+	}
+	else
+	{
+		throw "unhandled fUML::Value instance";
+	}
+	//end of body
+}
 
 //*********************************
 // References

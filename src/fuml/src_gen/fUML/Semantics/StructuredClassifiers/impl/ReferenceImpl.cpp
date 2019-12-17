@@ -183,11 +183,27 @@ std::shared_ptr<Bag<uml::Classifier> > ReferenceImpl::getTypes()
 	//end of body
 }
 
+std::shared_ptr<Bag<fUML::Semantics::Values::Value> > ReferenceImpl::getValues(std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue> >  featureValues)
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	return this->getReferent()->getValues(feature,featureValues);
+	//end of body
+}
+
 std::shared_ptr<fUML::Semantics::Values::Value> ReferenceImpl::new_()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	return std::shared_ptr<fUML::Semantics::Values::Value>(FUMLFactory::eInstance()->createReference());
+	//end of body
+}
+
+void ReferenceImpl::removeValue(std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<fUML::Semantics::Values::Value>  value)
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	this->getReferent()->removeValue(feature, value);
 	//end of body
 }
 
@@ -220,6 +236,14 @@ void ReferenceImpl::send(std::shared_ptr<fUML::Semantics::CommonBehavior::EventO
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	
+	//end of body
+}
+
+void ReferenceImpl::setFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<Bag<fUML::Semantics::Values::Value> >  values,int position)
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	this->getReferent()->setFeatureValue(feature,values,position);
 	//end of body
 }
 
@@ -279,7 +303,7 @@ Any ReferenceImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case fUML::FUMLPackage::REFERENCE_ATTRIBUTE_REFERENT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getReferent())); //1020
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getReferent())); //990
 	}
 	return fUML::Semantics::SimpleClassifiers::StructuredValueImpl::eGet(featureID, resolve, coreType);
 }
@@ -288,7 +312,7 @@ bool ReferenceImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case fUML::FUMLPackage::REFERENCE_ATTRIBUTE_REFERENT:
-			return getReferent() != nullptr; //1020
+			return getReferent() != nullptr; //990
 	}
 	return fUML::Semantics::SimpleClassifiers::StructuredValueImpl::internalEIsSet(featureID);
 }
@@ -301,7 +325,7 @@ bool ReferenceImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> _referent = std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Object>(_temp);
-			setReferent(_referent); //1020
+			setReferent(_referent); //990
 			return true;
 		}
 	}

@@ -200,7 +200,7 @@ Any IntegerValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case fUML::FUMLPackage::INTEGERVALUE_ATTRIBUTE_VALUE:
-			return eAny(getValue()); //671
+			return eAny(getValue()); //641
 	}
 	return PrimitiveValueImpl::eGet(featureID, resolve, coreType);
 }
@@ -209,7 +209,7 @@ bool IntegerValueImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case fUML::FUMLPackage::INTEGERVALUE_ATTRIBUTE_VALUE:
-			return getValue() != 0; //671
+			return getValue() != 0; //641
 	}
 	return PrimitiveValueImpl::internalEIsSet(featureID);
 }
@@ -221,7 +221,7 @@ bool IntegerValueImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			int _value = newValue->get<int>();
-			setValue(_value); //671
+			setValue(_value); //641
 			return true;
 		}
 	}

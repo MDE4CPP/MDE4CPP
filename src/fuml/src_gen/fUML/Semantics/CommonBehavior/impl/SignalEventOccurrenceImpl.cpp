@@ -171,7 +171,7 @@ Any SignalEventOccurrenceImpl::eGet(int featureID, bool resolve, bool coreType) 
 	switch(featureID)
 	{
 		case fUML::FUMLPackage::SIGNALEVENTOCCURRENCE_ATTRIBUTE_SIGNALINSTANCE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSignalInstance())); //1091
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSignalInstance())); //1061
 	}
 	return EventOccurrenceImpl::eGet(featureID, resolve, coreType);
 }
@@ -180,7 +180,7 @@ bool SignalEventOccurrenceImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case fUML::FUMLPackage::SIGNALEVENTOCCURRENCE_ATTRIBUTE_SIGNALINSTANCE:
-			return getSignalInstance() != nullptr; //1091
+			return getSignalInstance() != nullptr; //1061
 	}
 	return EventOccurrenceImpl::internalEIsSet(featureID);
 }
@@ -193,7 +193,7 @@ bool SignalEventOccurrenceImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> _signalInstance = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::SignalInstance>(_temp);
-			setSignalInstance(_signalInstance); //1091
+			setSignalInstance(_signalInstance); //1061
 			return true;
 		}
 	}

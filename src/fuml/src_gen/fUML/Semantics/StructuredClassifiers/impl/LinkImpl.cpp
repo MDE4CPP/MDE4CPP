@@ -222,7 +222,7 @@ Any LinkImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case fUML::FUMLPackage::LINK_ATTRIBUTE_TYPE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getType())); //712
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getType())); //682
 	}
 	return ExtensionalValueImpl::eGet(featureID, resolve, coreType);
 }
@@ -231,7 +231,7 @@ bool LinkImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case fUML::FUMLPackage::LINK_ATTRIBUTE_TYPE:
-			return getType() != nullptr; //712
+			return getType() != nullptr; //682
 	}
 	return ExtensionalValueImpl::internalEIsSet(featureID);
 }
@@ -244,7 +244,7 @@ bool LinkImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Association> _type = std::dynamic_pointer_cast<uml::Association>(_temp);
-			setType(_type); //712
+			setType(_type); //682
 			return true;
 		}
 	}

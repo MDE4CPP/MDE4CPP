@@ -466,173 +466,256 @@ std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> ExecutionFactoryImpl::in
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-			// Instantiate a visitor object for the given element.
-
 	std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> visitor = nullptr;
-		
-		//Formerly Level L1
-		
-		if(std::dynamic_pointer_cast<uml::LiteralBoolean>(element) != nullptr) {
-			visitor = FUMLFactory::eInstance()->createLiteralBooleanEvaluation();
-		}
-		else if(std::dynamic_pointer_cast<uml::LiteralString>(element) != nullptr) {
-			visitor = FUMLFactory::eInstance()->createLiteralStringEvaluation();
-		}
-		else if(std::dynamic_pointer_cast<uml::LiteralNull>(element) != nullptr) {
-			visitor = FUMLFactory::eInstance()->createLiteralNullEvaluation();
-		}
-		else if(std::dynamic_pointer_cast<uml::InstanceValue>(element) != nullptr) {
-			visitor = FUMLFactory::eInstance()->createInstanceValueEvaluation();
-		}
-		else if(std::dynamic_pointer_cast<uml::LiteralUnlimitedNatural>(element) != nullptr) {
-			visitor = FUMLFactory::eInstance()->createLiteralUnlimitedNaturalEvaluation();
-		}
-		else if(std::dynamic_pointer_cast<uml::LiteralInteger>(element) != nullptr) {
-			visitor = FUMLFactory::eInstance()->createLiteralIntegerEvaluation();
-		}
-		else if(std::dynamic_pointer_cast<uml::LiteralReal>(element) != nullptr) {
-			visitor = FUMLFactory::eInstance()->createLiteralRealEvaluation();
-		}
-		else if(std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::CallEventBehavior>(element) != nullptr) {
-			visitor = FUMLFactory::eInstance()->createCallEventExecution();
-		}
 
-		// Formerly Level L2
-		else if(std::dynamic_pointer_cast<uml::Activity>(element) != nullptr) {
-			visitor = FUMLFactory::eInstance()->createActivityExecution();
-		}	
-		else if(std::dynamic_pointer_cast<uml::ActivityParameterNode>(element) != nullptr) {
-			visitor = FUMLFactory::eInstance()->createActivityParameterNodeActivation();
-		}		
-		else if(std::dynamic_pointer_cast<uml::CentralBufferNode>(element) != nullptr) {
-			visitor = FUMLFactory::eInstance()->createCentralBufferNodeActivation();
-		}
-		 else if(std::dynamic_pointer_cast<uml::InitialNode>(element) != nullptr) {
-			visitor = FUMLFactory::eInstance()->createInitialNodeActivation();
-		}
-		else if(std::dynamic_pointer_cast<uml::ActivityFinalNode>(element) != nullptr) {
-			visitor = FUMLFactory::eInstance()->createActivityFinalNodeActivation();
-		}		
-		else if(std::dynamic_pointer_cast<uml::FlowFinalNode>(element) != nullptr) {
-			visitor = FUMLFactory::eInstance()->createFlowFinalNodeActivation();
-		}
-		else if(std::dynamic_pointer_cast<uml::JoinNode>(element) != nullptr) {
-			visitor = FUMLFactory::eInstance()->createJoinNodeActivation();
-		}
-		else if(std::dynamic_pointer_cast<uml::MergeNode>(element) != nullptr) {
-			visitor = FUMLFactory::eInstance()->createMergeNodeActivation();
-		}		
-		else if(std::dynamic_pointer_cast<uml::ForkNode>(element) != nullptr) {
-			visitor = FUMLFactory::eInstance()->createForkNodeActivation();
-		}		
-		else if(std::dynamic_pointer_cast<uml::DecisionNode>(element) != nullptr) {
-			visitor = std::dynamic_pointer_cast<fUML::Semantics::Loci::SemanticVisitor>(FUMLFactory::eInstance()->createDecisionNodeActivation());
-		}		
-		else if(std::dynamic_pointer_cast<uml::InputPin>(element) != nullptr) {
-			visitor = FUMLFactory::eInstance()->createInputPinActivation();
-		}			
-		else if(std::dynamic_pointer_cast<uml::OutputPin>(element) != nullptr) {
-			visitor = FUMLFactory::eInstance()->createOutputPinActivation();
-		}		
-		else if(std::dynamic_pointer_cast<uml::CallBehaviorAction>(element) != nullptr) {
-			visitor = FUMLFactory::eInstance()->createCallBehaviorActionActivation();
-		}			
-		else if(std::dynamic_pointer_cast<uml::CallOperationAction>(element) != nullptr) {
-			visitor = FUMLFactory::eInstance()->createCallOperationActionActivation();
-		}
-		else if(std::dynamic_pointer_cast<uml::SendSignalAction>(element) != nullptr) {
-			visitor = FUMLFactory::eInstance()->createSendSignalActionActivation();
-		}		
-		else if(std::dynamic_pointer_cast<uml::ReadSelfAction>(element) != nullptr) {
-			visitor = FUMLFactory::eInstance()->createReadSelfActionActivation();
-		}	
-		else if(std::dynamic_pointer_cast<uml::TestIdentityAction>(element) != nullptr) {
-			visitor = FUMLFactory::eInstance()->createTestIdentityActionActivation();
-		}		
-		else if(std::dynamic_pointer_cast<uml::ValueSpecificationAction>(element) != nullptr) {
-			visitor = std::dynamic_pointer_cast<fUML::Semantics::Loci::SemanticVisitor>(FUMLFactory::eInstance()->createValueSpecificationActionActivation());
-		}
-		else if(std::dynamic_pointer_cast<uml::CreateObjectAction>(element) != nullptr) {
-			visitor = FUMLFactory::eInstance()->createCreateObjectActionActivation();
-		}	
-		else if(std::dynamic_pointer_cast<uml::DestroyObjectAction>(element) != nullptr) {
-			visitor = FUMLFactory::eInstance()->createDestroyObjectActionActivation();
-		}	
-		else if(std::dynamic_pointer_cast<uml::ReadStructuralFeatureAction>(element) != nullptr) {
-			visitor = FUMLFactory::eInstance()->createReadStructuralFeatureActionActivation();
-		}
-		else if(std::dynamic_pointer_cast<uml::ClearStructuralFeatureAction>(element) != nullptr) {
-			visitor = FUMLFactory::eInstance()->createClearStructuralFeatureActionActivation();
-		}
-		else if(std::dynamic_pointer_cast<uml::AddStructuralFeatureValueAction>(element) != nullptr) {
-			visitor = FUMLFactory::eInstance()->createAddStructuralFeatureValueActionActivation();
-		}		
-		else if(std::dynamic_pointer_cast<uml::RemoveStructuralFeatureValueAction>(element) != nullptr) {
-			visitor = FUMLFactory::eInstance()->createRemoveStructuralFeatureValueActivation();
-		}
-		else if(std::dynamic_pointer_cast<uml::ReadLinkAction>(element) != nullptr) {
-			visitor = FUMLFactory::eInstance()->createReadLinkActionActivation();
-		}
-		else if(std::dynamic_pointer_cast<uml::ClearAssociationAction>(element) != nullptr) {
-			visitor = FUMLFactory::eInstance()->createClearAssociationActionActivation();
-		}
-		else if(std::dynamic_pointer_cast<uml::CreateLinkAction>(element) != nullptr) {
-			visitor = FUMLFactory::eInstance()->createCreateLinkActionActivation();
-		}		
-		else if(std::dynamic_pointer_cast<uml::DestroyLinkAction>(element) != nullptr) {
-			visitor = FUMLFactory::eInstance()->createDestroyLinkActionActivation();
-		}
+	if(std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::CallEventBehavior>(element) != nullptr) {
+		return FUMLFactory::eInstance()->createCallEventExecution();
+	}
 
-	     // Formerly Level L3
-		 else if(std::dynamic_pointer_cast<uml::ConditionalNode>(element) != nullptr) {
-			visitor = FUMLFactory::eInstance()->createConditionalNodeActivation();
-		}
-		else if(std::dynamic_pointer_cast<uml::LoopNode>(element) != nullptr) {
-			visitor = FUMLFactory::eInstance()->createLoopNodeActivation();
-		}
-		else if(std::dynamic_pointer_cast<uml::ExpansionRegion>(element) != nullptr) {
-			visitor = FUMLFactory::eInstance()->createExpansionRegionActivation();
-		}
-		else if(std::dynamic_pointer_cast<uml::StructuredActivityNode>(element) != nullptr) {
-			visitor = FUMLFactory::eInstance()->createStructuredActivityNodeActivation();
-		}
-		else if(std::dynamic_pointer_cast<uml::ExpansionNode>(element) != nullptr) {
-			visitor = FUMLFactory::eInstance()->createExpansionNodeActivation();
-		}
-		else if(std::dynamic_pointer_cast<uml::ReadExtentAction>(element) != nullptr) {
-			visitor = FUMLFactory::eInstance()->createReadExtentActionActivation();
-		}
-		else if(std::dynamic_pointer_cast<uml::ReadIsClassifiedObjectAction>(element) != nullptr) {
-			visitor = FUMLFactory::eInstance()->createReadIsClassifiedObjectActionActivation();
-		}
-		else if(std::dynamic_pointer_cast<uml::ReclassifyObjectAction>(element) != nullptr) {
-			visitor = FUMLFactory::eInstance()->createReclassifyObjectActionActivation();
-		}		
-		else if(std::dynamic_pointer_cast<uml::StartObjectBehaviorAction>(element) != nullptr) {
-			visitor = FUMLFactory::eInstance()->createStartObjectBehaviorActionActivation();
-		}
-		else if(std::dynamic_pointer_cast<uml::StartClassifierBehaviorAction>(element) != nullptr) {
-			visitor = FUMLFactory::eInstance()->createStartClassifierBehaviorActionActivation();
-		}
-		else if(std::dynamic_pointer_cast<uml::AcceptEventAction>(element) != nullptr) {
-			visitor = FUMLFactory::eInstance()->createAcceptEventActionActivation();
-		}
-		else if(std::dynamic_pointer_cast<uml::ReduceAction>(element) != nullptr) {
-			visitor = FUMLFactory::eInstance()->createReduceActionActivation();
-		}
-		else if(std::dynamic_pointer_cast<uml::DataStoreNode>(element) != nullptr) {
-			visitor = FUMLFactory::eInstance()->createDataStoreNodeActivation();
-		}
-		
-		else
+	switch (element->eClass()->getClassifierID()) 
 	{
-			std::cerr << __PRETTY_FUNCTION__ << " - Unknown visitor type" << std::endl;
-
+		case uml::UmlPackage::LITERALBOOLEAN_CLASS:
+		{
+			visitor = FUMLFactory::eInstance()->createLiteralBooleanEvaluation();
+			break;
 		}
-
-
-
-		return visitor;
+		case uml::UmlPackage::LITERALSTRING_CLASS:
+		{
+			visitor = FUMLFactory::eInstance()->createLiteralStringEvaluation();
+			break;
+		}
+		case uml::UmlPackage::LITERALNULL_CLASS:
+		{
+			visitor =  FUMLFactory::eInstance()->createLiteralNullEvaluation();
+			break;
+		}
+		case uml::UmlPackage::INSTANCEVALUE_CLASS:
+		{
+			visitor = FUMLFactory::eInstance()->createInstanceValueEvaluation();
+			break;
+		}
+		case uml::UmlPackage::LITERALUNLIMITEDNATURAL_CLASS:
+		{
+			visitor = FUMLFactory::eInstance()->createLiteralUnlimitedNaturalEvaluation();
+			break;
+		}
+		case uml::UmlPackage::LITERALINTEGER_CLASS:
+		{
+			visitor = FUMLFactory::eInstance()->createLiteralIntegerEvaluation();
+			break;
+		}
+		case uml::UmlPackage::LITERALREAL_CLASS:
+		{
+			visitor = FUMLFactory::eInstance()->createLiteralRealEvaluation();
+			break;
+		}
+		case uml::UmlPackage::ACTIVITY_CLASS:
+		{
+			visitor = std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>(FUMLFactory::eInstance()->createActivityExecution());
+			break;
+		}
+		case uml::UmlPackage::ACTIVITYPARAMETERNODE_CLASS:
+		{
+			visitor = std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>(FUMLFactory::eInstance()->createActivityParameterNodeActivation());
+			break;
+		}
+		case uml::UmlPackage::INITIALNODE_CLASS:
+		{
+			visitor = std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>(FUMLFactory::eInstance()->createInitialNodeActivation());
+			break;
+		}
+		case uml::UmlPackage::ACTIVITYFINALNODE_CLASS:
+		{
+			visitor = std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>(FUMLFactory::eInstance()->createActivityFinalNodeActivation());
+			break;
+		}
+		case uml::UmlPackage::FLOWFINALNODE_CLASS:
+		{
+			visitor = std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>(FUMLFactory::eInstance()->createFlowFinalNodeActivation());
+			break;
+		}
+		case uml::UmlPackage::JOINNODE_CLASS:
+		{
+			visitor = std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>(FUMLFactory::eInstance()->createJoinNodeActivation());
+			break;
+		}
+		case uml::UmlPackage::MERGENODE_CLASS:
+		{
+			visitor = std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>(FUMLFactory::eInstance()->createMergeNodeActivation());
+			break;
+		}
+		case uml::UmlPackage::FORKNODE_CLASS:
+		{
+			visitor = std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>(FUMLFactory::eInstance()->createForkNodeActivation());
+			break;
+		}
+		case uml::UmlPackage::DECISIONNODE_CLASS:
+		{
+			visitor = std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>(FUMLFactory::eInstance()->createDecisionNodeActivation());
+			break;
+		}
+		case uml::UmlPackage::INPUTPIN_CLASS:
+		{
+			visitor = std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>(FUMLFactory::eInstance()->createInputPinActivation());
+			break;
+		}
+		case uml::UmlPackage::OUTPUTPIN_CLASS:
+		{
+			visitor = std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>(FUMLFactory::eInstance()->createOutputPinActivation());
+			break;
+		}
+		case uml::UmlPackage::CALLBEHAVIORACTION_CLASS:
+		{
+			visitor = std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>(FUMLFactory::eInstance()->createCallBehaviorActionActivation());
+			break;
+		}
+		case uml::UmlPackage::CALLOPERATIONACTION_CLASS:
+		{
+			visitor = std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>(FUMLFactory::eInstance()->createCallOperationActionActivation());
+			break;
+		}
+		case uml::UmlPackage::SENDSIGNALACTION_CLASS:
+		{
+			visitor = std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>(FUMLFactory::eInstance()->createSendSignalActionActivation());
+			break;
+		}
+		case uml::UmlPackage::READSELFACTION_CLASS:
+		{
+			visitor = std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>(FUMLFactory::eInstance()->createReadSelfActionActivation());
+			break;
+		}
+		case uml::UmlPackage:: TESTIDENTITYACTION_CLASS:
+		{
+			visitor = std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>(FUMLFactory::eInstance()->createTestIdentityActionActivation());
+			break;
+		}
+		case uml::UmlPackage::VALUESPECIFICATIONACTION_CLASS:
+		{
+			visitor = std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>(FUMLFactory::eInstance()->createValueSpecificationActionActivation());
+			break;
+		}
+		case uml::UmlPackage::CREATEOBJECTACTION_CLASS:
+		{
+			visitor = std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>(FUMLFactory::eInstance()->createCreateObjectActionActivation());
+			break;
+		}
+		case uml::UmlPackage::DESTROYOBJECTACTION_CLASS:
+		{
+			visitor = std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>(FUMLFactory::eInstance()->createDestroyObjectActionActivation());
+			break;
+		}
+		case uml::UmlPackage::READSTRUCTURALFEATUREACTION_CLASS:
+		{
+			visitor = std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>(FUMLFactory::eInstance()->createReadStructuralFeatureActionActivation());
+			break;
+		}
+		case uml::UmlPackage::CLEARSTRUCTURALFEATUREACTION_CLASS:
+		{
+			visitor = std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>(FUMLFactory::eInstance()->createClearStructuralFeatureActionActivation());
+			break;
+		}
+		case uml::UmlPackage::ADDSTRUCTURALFEATUREVALUEACTION_CLASS:
+		{
+			visitor = std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>(FUMLFactory::eInstance()->createAddStructuralFeatureValueActionActivation());
+			break;
+		}
+		case uml::UmlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_CLASS:
+		{
+			visitor = std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>(FUMLFactory::eInstance()->createRemoveStructuralFeatureValueActivation());
+			break;
+		}
+		case uml::UmlPackage::READLINKACTION_CLASS:
+		{
+			visitor = std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>(FUMLFactory::eInstance()->createReadLinkActionActivation());
+			break;
+		}
+		case uml::UmlPackage::CLEARASSOCIATIONACTION_CLASS:
+		{
+			visitor = std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>(FUMLFactory::eInstance()->createClearAssociationActionActivation());
+			break;
+		}
+		case uml::UmlPackage::CREATELINKACTION_CLASS:
+		{
+			visitor = std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>(FUMLFactory::eInstance()->createCreateLinkActionActivation());
+			break;
+		}
+		case uml::UmlPackage::DESTROYLINKACTION_CLASS:
+		{
+			visitor = std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>(FUMLFactory::eInstance()->createDestroyLinkActionActivation());
+			break;
+		}
+		case uml::UmlPackage::CONDITIONALNODE_CLASS: 
+		{
+			visitor = std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>(FUMLFactory::eInstance()->createConditionalNodeActivation());
+			break;
+		}
+		case uml::UmlPackage::LOOPNODE_CLASS: 
+		{
+			visitor = std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>(FUMLFactory::eInstance()->createLoopNodeActivation());
+			break;
+		}
+		case uml::UmlPackage::EXPANSIONREGION_CLASS: 
+		{
+			visitor = std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>(FUMLFactory::eInstance()->createExpansionRegionActivation());
+			break;
+		}
+		case uml::UmlPackage::STRUCTUREDACTIVITYNODE_CLASS: 
+		{
+			visitor = std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>(FUMLFactory::eInstance()->createStructuredActivityNodeActivation());
+			break;
+		}
+		case uml::UmlPackage::EXPANSIONNODE_CLASS: 
+		{
+			visitor = std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>(FUMLFactory::eInstance()->createExpansionNodeActivation());
+			break;
+		}
+		case uml::UmlPackage::READEXTENTACTION_CLASS: 
+		{
+			visitor = std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>(FUMLFactory::eInstance()->createReadExtentActionActivation());
+			break;
+		}
+		case uml::UmlPackage::READISCLASSIFIEDOBJECTACTION_CLASS: 
+		{
+			visitor = std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>(FUMLFactory::eInstance()->createReadIsClassifiedObjectActionActivation());
+			break;
+		}
+		case uml::UmlPackage::RECLASSIFYOBJECTACTION_CLASS: 
+		{
+			visitor = std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>(FUMLFactory::eInstance()->createReclassifyObjectActionActivation());
+			break;
+		}
+		case uml::UmlPackage::STARTOBJECTBEHAVIORACTION_CLASS: 
+		{
+			visitor = std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>(FUMLFactory::eInstance()->createStartObjectBehaviorActionActivation());
+			break;
+		}
+		case uml::UmlPackage::STARTCLASSIFIERBEHAVIORACTION_CLASS: 
+		{
+			visitor = std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>(FUMLFactory::eInstance()->createStartClassifierBehaviorActionActivation());
+			break;
+		}
+		case uml::UmlPackage::ACCEPTEVENTACTION_CLASS: 
+		{
+			visitor = std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>(FUMLFactory::eInstance()->createAcceptEventActionActivation());
+			break;
+		}
+		case uml::UmlPackage::REDUCEACTION_CLASS: 
+		{
+			visitor = std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>(FUMLFactory::eInstance()->createReduceActionActivation());
+			break;
+		}
+		case uml::UmlPackage::DATASTORENODE_CLASS: 
+		{
+			visitor = std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>(FUMLFactory::eInstance()->createDataStoreNodeActivation());
+			break;
+		}
+		default: 
+		{
+			std::cerr << __PRETTY_FUNCTION__ << " - Unknown visitor type" << std::endl;
+		}
+	}
+	
+	return visitor;
 	//end of body
 }
 

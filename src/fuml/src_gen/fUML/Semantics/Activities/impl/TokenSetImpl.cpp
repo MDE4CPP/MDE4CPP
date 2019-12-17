@@ -159,7 +159,7 @@ Any TokenSetImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //1190
+			return eAny(tempList); //1160
 		}
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
@@ -169,7 +169,7 @@ bool TokenSetImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case fUML::FUMLPackage::TOKENSET_ATTRIBUTE_TOKENS:
-			return getTokens() != nullptr; //1190
+			return getTokens() != nullptr; //1160
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }

@@ -49,6 +49,14 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			/*!
 			 */ 
+			virtual void doAction() ;
+			
+			/*!
+			 */ 
+			virtual void doOutput() ;
+			
+			/*!
+			 */ 
 			virtual void doStructuredActivity() ;
 			
 			/*!
@@ -57,17 +65,57 @@ namespace fUML::Semantics::Activities
 			
 			/*!
 			 */ 
+			virtual bool isSuspended() ;
+			
+			/*!
+			 */ 
 			virtual int numberOfValues() ;
 			
 			/*!
 			 */ 
+			virtual void resume(std::shared_ptr<fUML::Semantics::Activities::ExpansionActivationGroup>  activationGroup) ;
+			
+			/*!
+			 */ 
 			virtual void runGroup(std::shared_ptr<fUML::Semantics::Activities::ExpansionActivationGroup>  activationGroup) ;
+			
+			/*!
+			 */ 
+			virtual void runIterative() ;
+			
+			/*!
+			 */ 
+			virtual void runParallel() ;
+			
+			/*!
+			 */ 
+			virtual void sendOffers() ;
+			
+			/*!
+			 */ 
+			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > takeOfferedTokens() ;
+			
+			/*!
+			 */ 
+			virtual void terminate() ;
+			
+			/*!
+			 */ 
+			virtual void terminateGroup(std::shared_ptr<fUML::Semantics::Activities::ExpansionActivationGroup>  activationGroup) ;
 			
 			
 			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
+			/*!
+			 */ 
+			virtual int getNext() const ;
+			
+			/*!
+			 */ 
+			virtual void setNext (int _next); 
+			
 			
 			
 			//*********************************

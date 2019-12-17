@@ -102,7 +102,7 @@ namespace fUML::Semantics::Actions
 			
 			/*!
 			 */ 
-			virtual void recieveOffer() = 0;
+			virtual void receiveOffer() = 0;
 			
 			
 			//*********************************

@@ -153,18 +153,6 @@ namespace fUML
 			//Add containing object
 			virtual std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory> createExecutionFactory_in_Locus(std::weak_ptr<fUML::Semantics::Loci::Locus > par_locus, const int metaElementID=-1) const ;
 			
-			virtual std::shared_ptr<fUML::Semantics::Loci::ExecutionFactoryL1> createExecutionFactoryL1(const int metaElementID=-1) const ;
-			//Add containing object
-			virtual std::shared_ptr<fUML::Semantics::Loci::ExecutionFactoryL1> createExecutionFactoryL1_in_Locus(std::weak_ptr<fUML::Semantics::Loci::Locus > par_locus, const int metaElementID=-1) const ;
-			
-			virtual std::shared_ptr<fUML::Semantics::Loci::ExecutionFactoryL2> createExecutionFactoryL2(const int metaElementID=-1) const ;
-			//Add containing object
-			virtual std::shared_ptr<fUML::Semantics::Loci::ExecutionFactoryL2> createExecutionFactoryL2_in_Locus(std::weak_ptr<fUML::Semantics::Loci::Locus > par_locus, const int metaElementID=-1) const ;
-			
-			virtual std::shared_ptr<fUML::Semantics::Loci::ExecutionFactoryL3> createExecutionFactoryL3(const int metaElementID=-1) const ;
-			//Add containing object
-			virtual std::shared_ptr<fUML::Semantics::Loci::ExecutionFactoryL3> createExecutionFactoryL3_in_Locus(std::weak_ptr<fUML::Semantics::Loci::Locus > par_locus, const int metaElementID=-1) const ;
-			
 			virtual std::shared_ptr<fUML::Semantics::Loci::Executor> createExecutor(const int metaElementID=-1) const ;
 			//Add containing object
 			virtual std::shared_ptr<fUML::Semantics::Loci::Executor> createExecutor_in_Locus(std::weak_ptr<fUML::Semantics::Loci::Locus > par_locus, const int metaElementID=-1) const ;

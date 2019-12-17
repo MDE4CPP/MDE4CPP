@@ -24,6 +24,8 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "fUML/impl/FUMLPackageImpl.hpp"
+#include "uml/ExpansionNode.hpp"
+#include "uml/ExpansionRegion.hpp"
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -147,10 +149,50 @@ std::shared_ptr<ecore::EClass> ExpansionNodeActivationImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
+void ExpansionNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token> >  incomingTokens)
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	addTokens(incomingTokens);
+	//end of body
+}
+
 std::shared_ptr<fUML::Semantics::Activities::ExpansionRegionActivation> ExpansionNodeActivationImpl::getExpansionRegionActivation()
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	std::shared_ptr<uml::ExpansionNode> node = std::dynamic_pointer_cast<uml::ExpansionNode>(m_node);
+	std::shared_ptr<uml::ExpansionRegion> region = node->getRegionAsInput();
+	if (region == nullptr)
+	{
+		region = node->getRegionAsOutput();
+	}
+
+	auto group = m_group.lock();
+	if (group == nullptr)
+	{
+        DEBUG_MESSAGE(std::cout << __PRETTY_FUNCTION__ << ": unknown group" << std::endl;)
+		throw "unknown group";
+	}
+
+	return std::dynamic_pointer_cast<fUML::Semantics::Activities::ExpansionRegionActivation>(group->getNodeActivation(region));
+	//end of body
+}
+
+bool ExpansionNodeActivationImpl::isReady()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	return false;
+	//end of body
+}
+
+void ExpansionNodeActivationImpl::receiveOffer()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	getExpansionRegionActivation()->receiveOffer();
+	//end of body
 }
 
 //*********************************

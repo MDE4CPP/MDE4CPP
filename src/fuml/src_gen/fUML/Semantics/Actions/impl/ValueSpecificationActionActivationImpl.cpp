@@ -25,6 +25,10 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "fUML/impl/FUMLPackageImpl.hpp"
+#include "fUML/Semantics/Loci/Locus.hpp"
+#include "fUML/Semantics/Loci/Executor.hpp"
+#include "uml/ValueSpecification.hpp"
+#include "uml/ValueSpecificationAction.hpp"
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -171,6 +175,23 @@ std::shared_ptr<ecore::EClass> ValueSpecificationActionActivationImpl::eStaticCl
 //*********************************
 // Operations
 //*********************************
+void ValueSpecificationActionActivationImpl::doAction()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	std::shared_ptr<uml::ValueSpecificationAction> action = std::dynamic_pointer_cast<uml::ValueSpecificationAction>(m_node);
+	if (action != nullptr)
+	{
+		std::shared_ptr<uml::ValueSpecification> valueSpecificaton = action->getValue();
+		if (valueSpecificaton == nullptr)
+		{
+			throw "value of ValueSpecificationAction is null";
+		}
+		std::shared_ptr<fUML::Semantics::Values::Value> value = getExecutionLocus()->getExecutor()->evaluate(valueSpecificaton);
+		putToken(action->getResult(), value);
+	}
+	//end of body
+}
 
 //*********************************
 // References

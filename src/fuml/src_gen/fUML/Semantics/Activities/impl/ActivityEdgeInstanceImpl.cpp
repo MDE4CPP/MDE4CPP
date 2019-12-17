@@ -224,7 +224,7 @@ void ActivityEdgeInstanceImpl::sendOffer(std::shared_ptr<Bag<fUML::Semantics::Ac
     }
     else
     {
-    	target->recieveOffer();
+    	target->receiveOffer();
     }
 	//end of body
 }

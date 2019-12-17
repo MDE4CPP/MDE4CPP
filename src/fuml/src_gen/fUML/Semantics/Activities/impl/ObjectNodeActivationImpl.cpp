@@ -335,7 +335,7 @@ Any ObjectNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType) c
 	switch(featureID)
 	{
 		case fUML::FUMLPackage::OBJECTNODEACTIVATION_ATTRIBUTE_OFFEREDTOKENCOUNT:
-			return eAny(getOfferedTokenCount()); //856
+			return eAny(getOfferedTokenCount()); //826
 	}
 	return ActivityNodeActivationImpl::eGet(featureID, resolve, coreType);
 }
@@ -344,7 +344,7 @@ bool ObjectNodeActivationImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case fUML::FUMLPackage::OBJECTNODEACTIVATION_ATTRIBUTE_OFFEREDTOKENCOUNT:
-			return getOfferedTokenCount() != 0; //856
+			return getOfferedTokenCount() != 0; //826
 	}
 	return ActivityNodeActivationImpl::internalEIsSet(featureID);
 }
@@ -356,7 +356,7 @@ bool ObjectNodeActivationImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			int _offeredTokenCount = newValue->get<int>();
-			setOfferedTokenCount(_offeredTokenCount); //856
+			setOfferedTokenCount(_offeredTokenCount); //826
 			return true;
 		}
 	}

@@ -388,7 +388,7 @@ bool ActivityNodeActivationImpl::isSourceFor(std::shared_ptr<fUML::Semantics::Ac
 	//end of body
 }
 
-void ActivityNodeActivationImpl::recieveOffer()
+void ActivityNodeActivationImpl::receiveOffer()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation

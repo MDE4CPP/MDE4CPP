@@ -178,7 +178,7 @@ Any ObjectTokenImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case fUML::FUMLPackage::OBJECTTOKEN_ATTRIBUTE_VALUE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getValue())); //862
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getValue())); //832
 	}
 	return TokenImpl::eGet(featureID, resolve, coreType);
 }
@@ -187,7 +187,7 @@ bool ObjectTokenImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case fUML::FUMLPackage::OBJECTTOKEN_ATTRIBUTE_VALUE:
-			return getValue() != nullptr; //862
+			return getValue() != nullptr; //832
 	}
 	return TokenImpl::internalEIsSet(featureID);
 }
@@ -200,7 +200,7 @@ bool ObjectTokenImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<fUML::Semantics::Values::Value> _value = std::dynamic_pointer_cast<fUML::Semantics::Values::Value>(_temp);
-			setValue(_value); //862
+			setValue(_value); //832
 			return true;
 		}
 	}

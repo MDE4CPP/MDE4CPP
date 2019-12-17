@@ -194,7 +194,7 @@ Any StringValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case fUML::FUMLPackage::STRINGVALUE_ATTRIBUTE_VALUE:
-			return eAny(getValue()); //1131
+			return eAny(getValue()); //1101
 	}
 	return PrimitiveValueImpl::eGet(featureID, resolve, coreType);
 }
@@ -203,7 +203,7 @@ bool StringValueImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case fUML::FUMLPackage::STRINGVALUE_ATTRIBUTE_VALUE:
-			return getValue() != ""; //1131
+			return getValue() != ""; //1101
 	}
 	return PrimitiveValueImpl::internalEIsSet(featureID);
 }
@@ -215,7 +215,7 @@ bool StringValueImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::string _value = newValue->get<std::string>();
-			setValue(_value); //1131
+			setValue(_value); //1101
 			return true;
 		}
 	}

@@ -181,7 +181,7 @@ Any InvocationEventOccurrenceImpl::eGet(int featureID, bool resolve, bool coreTy
 	switch(featureID)
 	{
 		case fUML::FUMLPackage::INVOCATIONEVENTOCCURRENCE_ATTRIBUTE_EXECUTION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getExecution())); //691
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getExecution())); //661
 	}
 	return EventOccurrenceImpl::eGet(featureID, resolve, coreType);
 }
@@ -190,7 +190,7 @@ bool InvocationEventOccurrenceImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case fUML::FUMLPackage::INVOCATIONEVENTOCCURRENCE_ATTRIBUTE_EXECUTION:
-			return getExecution() != nullptr; //691
+			return getExecution() != nullptr; //661
 	}
 	return EventOccurrenceImpl::internalEIsSet(featureID);
 }
@@ -203,7 +203,7 @@ bool InvocationEventOccurrenceImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> _execution = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::Execution>(_temp);
-			setExecution(_execution); //691
+			setExecution(_execution); //661
 			return true;
 		}
 	}

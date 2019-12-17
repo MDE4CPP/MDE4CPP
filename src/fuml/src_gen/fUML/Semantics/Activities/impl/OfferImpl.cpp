@@ -251,7 +251,7 @@ Any OfferImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //870
+			return eAny(tempList); //840
 		}
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
@@ -261,7 +261,7 @@ bool OfferImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case fUML::FUMLPackage::OFFER_ATTRIBUTE_OFFEREDTOKENS:
-			return getOfferedTokens() != nullptr; //870
+			return getOfferedTokens() != nullptr; //840
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }

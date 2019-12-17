@@ -88,9 +88,6 @@ SET(SOURCE_FILES
 	Semantics/CommonBehavior/impl/EventOccurrenceImpl.cpp
 	Semantics/CommonBehavior/impl/ExecutionImpl.cpp
 	Semantics/Loci/impl/ExecutionFactoryImpl.cpp
-	Semantics/Loci/impl/ExecutionFactoryL1Impl.cpp
-	Semantics/Loci/impl/ExecutionFactoryL2Impl.cpp
-	Semantics/Loci/impl/ExecutionFactoryL3Impl.cpp
 	Semantics/Loci/impl/ExecutorImpl.cpp
 	Semantics/Activities/impl/ExpansionActivationGroupImpl.cpp
 	Semantics/Activities/impl/ExpansionNodeActivationImpl.cpp

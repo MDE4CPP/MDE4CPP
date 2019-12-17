@@ -53,7 +53,7 @@ namespace fUML::Semantics::Actions
 			
 			/*!
 			 */ 
-			virtual void recieveOffer() ;
+			virtual void receiveOffer() ;
 			
 			
 			

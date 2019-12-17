@@ -74,9 +74,6 @@ void FUMLPackageImpl::initializePackageContents()
 	m_enumerationValue_Class->getESuperTypes()->push_back(fUML::FUMLPackage::eInstance()->getValue_Class());
 	m_evaluation_Class->getESuperTypes()->push_back(fUML::FUMLPackage::eInstance()->getSemanticVisitor_Class());
 	m_execution_Class->getESuperTypes()->push_back(fUML::FUMLPackage::eInstance()->getObject_Class());
-	m_executionFactoryL1_Class->getESuperTypes()->push_back(getExecutionFactory_Class());
-	m_executionFactoryL2_Class->getESuperTypes()->push_back(getExecutionFactoryL1_Class());
-	m_executionFactoryL3_Class->getESuperTypes()->push_back(getExecutionFactoryL2_Class());
 	m_expansionActivationGroup_Class->getESuperTypes()->push_back(getActivityNodeActivationGroup_Class());
 	m_expansionNodeActivation_Class->getESuperTypes()->push_back(getObjectNodeActivation_Class());
 	m_expansionRegionActivation_Class->getESuperTypes()->push_back(fUML::FUMLPackage::eInstance()->getActionActivation_Class());
@@ -191,9 +188,6 @@ void FUMLPackageImpl::initializePackageContents()
 	initializeEventOccurrenceContent();
 	initializeExecutionContent();
 	initializeExecutionFactoryContent();
-	initializeExecutionFactoryL1Content();
-	initializeExecutionFactoryL2Content();
-	initializeExecutionFactoryL3Content();
 	initializeExecutorContent();
 	initializeExpansionActivationGroupContent();
 	initializeExpansionNodeActivationContent();
@@ -1543,12 +1537,12 @@ void FUMLPackageImpl::initializeActivityNodeActivationContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_activityNodeActivation_Operation_recieveOffer->setEType(nullptr);
-	m_activityNodeActivation_Operation_recieveOffer->setName("recieveOffer");
-	m_activityNodeActivation_Operation_recieveOffer->setLowerBound(1);
-	m_activityNodeActivation_Operation_recieveOffer->setUpperBound(1);
-	m_activityNodeActivation_Operation_recieveOffer->setUnique(true);
-	m_activityNodeActivation_Operation_recieveOffer->setOrdered(false);
+	m_activityNodeActivation_Operation_receiveOffer->setEType(nullptr);
+	m_activityNodeActivation_Operation_receiveOffer->setName("receiveOffer");
+	m_activityNodeActivation_Operation_receiveOffer->setLowerBound(1);
+	m_activityNodeActivation_Operation_receiveOffer->setUpperBound(1);
+	m_activityNodeActivation_Operation_receiveOffer->setUnique(true);
+	m_activityNodeActivation_Operation_receiveOffer->setOrdered(false);
 	
 	
 	m_activityNodeActivation_Operation_removeToken_Token->setEType(ecore::EcorePackage::eInstance()->getEInt_Class());
@@ -2087,6 +2081,14 @@ void FUMLPackageImpl::initializeAddStructuralFeatureValueActionActivationContent
 	m_addStructuralFeatureValueActionActivation_Class->setAbstract(false);
 	m_addStructuralFeatureValueActionActivation_Class->setInterface(false);
 	
+	
+	
+	m_addStructuralFeatureValueActionActivation_Operation_doAction->setEType(nullptr);
+	m_addStructuralFeatureValueActionActivation_Operation_doAction->setName("doAction");
+	m_addStructuralFeatureValueActionActivation_Operation_doAction->setLowerBound(0);
+	m_addStructuralFeatureValueActionActivation_Operation_doAction->setUpperBound(1);
+	m_addStructuralFeatureValueActionActivation_Operation_doAction->setUnique(true);
+	m_addStructuralFeatureValueActionActivation_Operation_doAction->setOrdered(true);
 	
 	
 	
@@ -3058,6 +3060,14 @@ void FUMLPackageImpl::initializeClearStructuralFeatureActionActivationContent()
 	m_clearStructuralFeatureActionActivation_Class->setAbstract(false);
 	m_clearStructuralFeatureActionActivation_Class->setInterface(false);
 	
+	
+	
+	m_clearStructuralFeatureActionActivation_Operation_doAction->setEType(nullptr);
+	m_clearStructuralFeatureActionActivation_Operation_doAction->setName("doAction");
+	m_clearStructuralFeatureActionActivation_Operation_doAction->setLowerBound(0);
+	m_clearStructuralFeatureActionActivation_Operation_doAction->setUpperBound(1);
+	m_clearStructuralFeatureActionActivation_Operation_doAction->setUnique(true);
+	m_clearStructuralFeatureActionActivation_Operation_doAction->setOrdered(true);
 	
 	
 	
@@ -4634,90 +4644,6 @@ void FUMLPackageImpl::initializeExecutionFactoryContent()
 	
 }
 
-void FUMLPackageImpl::initializeExecutionFactoryL1Content()
-{
-	m_executionFactoryL1_Class->setName("ExecutionFactoryL1");
-	m_executionFactoryL1_Class->setAbstract(false);
-	m_executionFactoryL1_Class->setInterface(false);
-	
-	
-	
-	m_executionFactoryL1_Operation_instantiateVisitor_Element->setEType(getSemanticVisitor_Class());
-	m_executionFactoryL1_Operation_instantiateVisitor_Element->setName("instantiateVisitor");
-	m_executionFactoryL1_Operation_instantiateVisitor_Element->setLowerBound(1);
-	m_executionFactoryL1_Operation_instantiateVisitor_Element->setUpperBound(1);
-	m_executionFactoryL1_Operation_instantiateVisitor_Element->setUnique(true);
-	m_executionFactoryL1_Operation_instantiateVisitor_Element->setOrdered(false);
-	
-	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_executionFactoryL1_Operation_instantiateVisitor_Element);
-		parameter->setName("element");
-		parameter->setEType(uml::UmlPackage::eInstance()->getElement_Class());
-		parameter->setLowerBound(0);
-		parameter->setUpperBound(1);
-		parameter->setUnique(true);
-		parameter->setOrdered(true);
-	}
-	
-	
-}
-
-void FUMLPackageImpl::initializeExecutionFactoryL2Content()
-{
-	m_executionFactoryL2_Class->setName("ExecutionFactoryL2");
-	m_executionFactoryL2_Class->setAbstract(false);
-	m_executionFactoryL2_Class->setInterface(false);
-	
-	
-	
-	m_executionFactoryL2_Operation_instantiateVisitor_Element->setEType(getSemanticVisitor_Class());
-	m_executionFactoryL2_Operation_instantiateVisitor_Element->setName("instantiateVisitor");
-	m_executionFactoryL2_Operation_instantiateVisitor_Element->setLowerBound(1);
-	m_executionFactoryL2_Operation_instantiateVisitor_Element->setUpperBound(1);
-	m_executionFactoryL2_Operation_instantiateVisitor_Element->setUnique(true);
-	m_executionFactoryL2_Operation_instantiateVisitor_Element->setOrdered(false);
-	
-	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_executionFactoryL2_Operation_instantiateVisitor_Element);
-		parameter->setName("element");
-		parameter->setEType(uml::UmlPackage::eInstance()->getElement_Class());
-		parameter->setLowerBound(0);
-		parameter->setUpperBound(1);
-		parameter->setUnique(true);
-		parameter->setOrdered(true);
-	}
-	
-	
-}
-
-void FUMLPackageImpl::initializeExecutionFactoryL3Content()
-{
-	m_executionFactoryL3_Class->setName("ExecutionFactoryL3");
-	m_executionFactoryL3_Class->setAbstract(false);
-	m_executionFactoryL3_Class->setInterface(false);
-	
-	
-	
-	m_executionFactoryL3_Operation_instantiateVisitor_Element->setEType(getSemanticVisitor_Class());
-	m_executionFactoryL3_Operation_instantiateVisitor_Element->setName("instantiateVisitor");
-	m_executionFactoryL3_Operation_instantiateVisitor_Element->setLowerBound(1);
-	m_executionFactoryL3_Operation_instantiateVisitor_Element->setUpperBound(1);
-	m_executionFactoryL3_Operation_instantiateVisitor_Element->setUnique(true);
-	m_executionFactoryL3_Operation_instantiateVisitor_Element->setOrdered(false);
-	
-	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_executionFactoryL3_Operation_instantiateVisitor_Element);
-		parameter->setName("element");
-		parameter->setEType(uml::UmlPackage::eInstance()->getElement_Class());
-		parameter->setLowerBound(0);
-		parameter->setUpperBound(1);
-		parameter->setUnique(true);
-		parameter->setOrdered(true);
-	}
-	
-	
-}
-
 void FUMLPackageImpl::initializeExecutorContent()
 {
 	m_executor_Class->setName("Executor");
@@ -4841,7 +4767,77 @@ void FUMLPackageImpl::initializeExpansionActivationGroupContent()
 	m_expansionActivationGroup_Class->setAbstract(false);
 	m_expansionActivationGroup_Class->setInterface(false);
 	
+	m_expansionActivationGroup_Attribute_index = getExpansionActivationGroup_Attribute_index();
+	m_expansionActivationGroup_Attribute_index->setName("index");
+	m_expansionActivationGroup_Attribute_index->setEType(types::TypesPackage::eInstance()->getInteger_Class());
+	m_expansionActivationGroup_Attribute_index->setLowerBound(1);
+	m_expansionActivationGroup_Attribute_index->setUpperBound(1);
+	m_expansionActivationGroup_Attribute_index->setTransient(false);
+	m_expansionActivationGroup_Attribute_index->setVolatile(false);
+	m_expansionActivationGroup_Attribute_index->setChangeable(true);
+	m_expansionActivationGroup_Attribute_index->setUnsettable(false);
+	m_expansionActivationGroup_Attribute_index->setUnique(true);
+	m_expansionActivationGroup_Attribute_index->setDerived(false);
+	m_expansionActivationGroup_Attribute_index->setOrdered(true);
+	m_expansionActivationGroup_Attribute_index->setID(false);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+		   m_expansionActivationGroup_Attribute_index->setDefaultValueLiteral(defaultValue);
+		}
+	}
 	
+	m_expansionActivationGroup_Attribute_groupInputs->setName("groupInputs");
+	m_expansionActivationGroup_Attribute_groupInputs->setEType(fUML::FUMLPackage::eInstance()->getOutputPinActivation_Class());
+	m_expansionActivationGroup_Attribute_groupInputs->setLowerBound(0);
+	m_expansionActivationGroup_Attribute_groupInputs->setUpperBound(-1);
+	m_expansionActivationGroup_Attribute_groupInputs->setTransient(false);
+	m_expansionActivationGroup_Attribute_groupInputs->setVolatile(false);
+	m_expansionActivationGroup_Attribute_groupInputs->setChangeable(true);
+	m_expansionActivationGroup_Attribute_groupInputs->setUnsettable(false);
+	m_expansionActivationGroup_Attribute_groupInputs->setUnique(true);
+	m_expansionActivationGroup_Attribute_groupInputs->setDerived(false);
+	m_expansionActivationGroup_Attribute_groupInputs->setOrdered(true);
+	m_expansionActivationGroup_Attribute_groupInputs->setContainment(false);
+	m_expansionActivationGroup_Attribute_groupInputs->setResolveProxies(true);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			m_expansionActivationGroup_Attribute_groupInputs->setDefaultValueLiteral(defaultValue);
+		}
+		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
+		if (otherEnd != nullptr)
+	    {
+	   		m_expansionActivationGroup_Attribute_groupInputs->setEOpposite(otherEnd);
+	    }
+	}
+	m_expansionActivationGroup_Attribute_groupOutputs->setName("groupOutputs");
+	m_expansionActivationGroup_Attribute_groupOutputs->setEType(fUML::FUMLPackage::eInstance()->getOutputPinActivation_Class());
+	m_expansionActivationGroup_Attribute_groupOutputs->setLowerBound(0);
+	m_expansionActivationGroup_Attribute_groupOutputs->setUpperBound(-1);
+	m_expansionActivationGroup_Attribute_groupOutputs->setTransient(false);
+	m_expansionActivationGroup_Attribute_groupOutputs->setVolatile(false);
+	m_expansionActivationGroup_Attribute_groupOutputs->setChangeable(true);
+	m_expansionActivationGroup_Attribute_groupOutputs->setUnsettable(false);
+	m_expansionActivationGroup_Attribute_groupOutputs->setUnique(true);
+	m_expansionActivationGroup_Attribute_groupOutputs->setDerived(false);
+	m_expansionActivationGroup_Attribute_groupOutputs->setOrdered(true);
+	m_expansionActivationGroup_Attribute_groupOutputs->setContainment(false);
+	m_expansionActivationGroup_Attribute_groupOutputs->setResolveProxies(true);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			m_expansionActivationGroup_Attribute_groupOutputs->setDefaultValueLiteral(defaultValue);
+		}
+		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
+		if (otherEnd != nullptr)
+	    {
+	   		m_expansionActivationGroup_Attribute_groupOutputs->setEOpposite(otherEnd);
+	    }
+	}
 	m_expansionActivationGroup_Attribute_regionActivation->setName("regionActivation");
 	m_expansionActivationGroup_Attribute_regionActivation->setEType(getExpansionRegionActivation_Class());
 	m_expansionActivationGroup_Attribute_regionActivation->setLowerBound(1);
@@ -4867,6 +4863,90 @@ void FUMLPackageImpl::initializeExpansionActivationGroupContent()
 	   		m_expansionActivationGroup_Attribute_regionActivation->setEOpposite(otherEnd);
 	    }
 	}
+	m_expansionActivationGroup_Attribute_regionInputs->setName("regionInputs");
+	m_expansionActivationGroup_Attribute_regionInputs->setEType(fUML::FUMLPackage::eInstance()->getOutputPinActivation_Class());
+	m_expansionActivationGroup_Attribute_regionInputs->setLowerBound(0);
+	m_expansionActivationGroup_Attribute_regionInputs->setUpperBound(-1);
+	m_expansionActivationGroup_Attribute_regionInputs->setTransient(false);
+	m_expansionActivationGroup_Attribute_regionInputs->setVolatile(false);
+	m_expansionActivationGroup_Attribute_regionInputs->setChangeable(true);
+	m_expansionActivationGroup_Attribute_regionInputs->setUnsettable(false);
+	m_expansionActivationGroup_Attribute_regionInputs->setUnique(true);
+	m_expansionActivationGroup_Attribute_regionInputs->setDerived(false);
+	m_expansionActivationGroup_Attribute_regionInputs->setOrdered(true);
+	m_expansionActivationGroup_Attribute_regionInputs->setContainment(false);
+	m_expansionActivationGroup_Attribute_regionInputs->setResolveProxies(true);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			m_expansionActivationGroup_Attribute_regionInputs->setDefaultValueLiteral(defaultValue);
+		}
+		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
+		if (otherEnd != nullptr)
+	    {
+	   		m_expansionActivationGroup_Attribute_regionInputs->setEOpposite(otherEnd);
+	    }
+	}
+	
+	m_expansionActivationGroup_Operation_getActivityExecution->setEType(getActivityExecution_Class());
+	m_expansionActivationGroup_Operation_getActivityExecution->setName("getActivityExecution");
+	m_expansionActivationGroup_Operation_getActivityExecution->setLowerBound(1);
+	m_expansionActivationGroup_Operation_getActivityExecution->setUpperBound(1);
+	m_expansionActivationGroup_Operation_getActivityExecution->setUnique(true);
+	m_expansionActivationGroup_Operation_getActivityExecution->setOrdered(true);
+	
+	
+	m_expansionActivationGroup_Operation_getNodeActivation_ActivityNode->setEType(getActivityNodeActivation_Class());
+	m_expansionActivationGroup_Operation_getNodeActivation_ActivityNode->setName("getNodeActivation");
+	m_expansionActivationGroup_Operation_getNodeActivation_ActivityNode->setLowerBound(1);
+	m_expansionActivationGroup_Operation_getNodeActivation_ActivityNode->setUpperBound(1);
+	m_expansionActivationGroup_Operation_getNodeActivation_ActivityNode->setUnique(true);
+	m_expansionActivationGroup_Operation_getNodeActivation_ActivityNode->setOrdered(false);
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_expansionActivationGroup_Operation_getNodeActivation_ActivityNode);
+		parameter->setName("node");
+		parameter->setEType(uml::UmlPackage::eInstance()->getActivityNode_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	m_expansionActivationGroup_Operation_resume_ActivityNodeActivation->setEType(nullptr);
+	m_expansionActivationGroup_Operation_resume_ActivityNodeActivation->setName("resume");
+	m_expansionActivationGroup_Operation_resume_ActivityNodeActivation->setLowerBound(0);
+	m_expansionActivationGroup_Operation_resume_ActivityNodeActivation->setUpperBound(1);
+	m_expansionActivationGroup_Operation_resume_ActivityNodeActivation->setUnique(true);
+	m_expansionActivationGroup_Operation_resume_ActivityNodeActivation->setOrdered(true);
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_expansionActivationGroup_Operation_resume_ActivityNodeActivation);
+		parameter->setName("activation");
+		parameter->setEType(nullptr);
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	m_expansionActivationGroup_Operation_suspend_ActivityNodeActivation->setEType(nullptr);
+	m_expansionActivationGroup_Operation_suspend_ActivityNodeActivation->setName("suspend");
+	m_expansionActivationGroup_Operation_suspend_ActivityNodeActivation->setLowerBound(0);
+	m_expansionActivationGroup_Operation_suspend_ActivityNodeActivation->setUpperBound(1);
+	m_expansionActivationGroup_Operation_suspend_ActivityNodeActivation->setUnique(true);
+	m_expansionActivationGroup_Operation_suspend_ActivityNodeActivation->setOrdered(true);
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_expansionActivationGroup_Operation_suspend_ActivityNodeActivation);
+		parameter->setName("activation");
+		parameter->setEType(nullptr);
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
 	
 	
 }
@@ -4879,12 +4959,45 @@ void FUMLPackageImpl::initializeExpansionNodeActivationContent()
 	
 	
 	
+	m_expansionNodeActivation_Operation_fire_Token->setEType(nullptr);
+	m_expansionNodeActivation_Operation_fire_Token->setName("fire");
+	m_expansionNodeActivation_Operation_fire_Token->setLowerBound(1);
+	m_expansionNodeActivation_Operation_fire_Token->setUpperBound(1);
+	m_expansionNodeActivation_Operation_fire_Token->setUnique(true);
+	m_expansionNodeActivation_Operation_fire_Token->setOrdered(false);
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_expansionNodeActivation_Operation_fire_Token);
+		parameter->setName("incomingTokens");
+		parameter->setEType(nullptr);
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
 	m_expansionNodeActivation_Operation_getExpansionRegionActivation->setEType(getExpansionRegionActivation_Class());
 	m_expansionNodeActivation_Operation_getExpansionRegionActivation->setName("getExpansionRegionActivation");
 	m_expansionNodeActivation_Operation_getExpansionRegionActivation->setLowerBound(1);
 	m_expansionNodeActivation_Operation_getExpansionRegionActivation->setUpperBound(1);
 	m_expansionNodeActivation_Operation_getExpansionRegionActivation->setUnique(true);
 	m_expansionNodeActivation_Operation_getExpansionRegionActivation->setOrdered(false);
+	
+	
+	m_expansionNodeActivation_Operation_isReady->setEType(ecore::EcorePackage::eInstance()->getEBoolean_Class());
+	m_expansionNodeActivation_Operation_isReady->setName("isReady");
+	m_expansionNodeActivation_Operation_isReady->setLowerBound(1);
+	m_expansionNodeActivation_Operation_isReady->setUpperBound(1);
+	m_expansionNodeActivation_Operation_isReady->setUnique(true);
+	m_expansionNodeActivation_Operation_isReady->setOrdered(false);
+	
+	
+	m_expansionNodeActivation_Operation_receiveOffer->setEType(nullptr);
+	m_expansionNodeActivation_Operation_receiveOffer->setName("receiveOffer");
+	m_expansionNodeActivation_Operation_receiveOffer->setLowerBound(1);
+	m_expansionNodeActivation_Operation_receiveOffer->setUpperBound(1);
+	m_expansionNodeActivation_Operation_receiveOffer->setUnique(true);
+	m_expansionNodeActivation_Operation_receiveOffer->setOrdered(false);
 	
 	
 	
@@ -4896,6 +5009,26 @@ void FUMLPackageImpl::initializeExpansionRegionActivationContent()
 	m_expansionRegionActivation_Class->setAbstract(false);
 	m_expansionRegionActivation_Class->setInterface(false);
 	
+	m_expansionRegionActivation_Attribute_next = getExpansionRegionActivation_Attribute_next();
+	m_expansionRegionActivation_Attribute_next->setName("next");
+	m_expansionRegionActivation_Attribute_next->setEType(types::TypesPackage::eInstance()->getInteger_Class());
+	m_expansionRegionActivation_Attribute_next->setLowerBound(0);
+	m_expansionRegionActivation_Attribute_next->setUpperBound(1);
+	m_expansionRegionActivation_Attribute_next->setTransient(false);
+	m_expansionRegionActivation_Attribute_next->setVolatile(false);
+	m_expansionRegionActivation_Attribute_next->setChangeable(true);
+	m_expansionRegionActivation_Attribute_next->setUnsettable(false);
+	m_expansionRegionActivation_Attribute_next->setUnique(true);
+	m_expansionRegionActivation_Attribute_next->setDerived(false);
+	m_expansionRegionActivation_Attribute_next->setOrdered(true);
+	m_expansionRegionActivation_Attribute_next->setID(false);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+		   m_expansionRegionActivation_Attribute_next->setDefaultValueLiteral(defaultValue);
+		}
+	}
 	
 	m_expansionRegionActivation_Attribute_activationGroups->setName("activationGroups");
 	m_expansionRegionActivation_Attribute_activationGroups->setEType(getExpansionActivationGroup_Class());
@@ -4973,6 +5106,22 @@ void FUMLPackageImpl::initializeExpansionRegionActivationContent()
 	    }
 	}
 	
+	m_expansionRegionActivation_Operation_doAction->setEType(nullptr);
+	m_expansionRegionActivation_Operation_doAction->setName("doAction");
+	m_expansionRegionActivation_Operation_doAction->setLowerBound(0);
+	m_expansionRegionActivation_Operation_doAction->setUpperBound(1);
+	m_expansionRegionActivation_Operation_doAction->setUnique(true);
+	m_expansionRegionActivation_Operation_doAction->setOrdered(true);
+	
+	
+	m_expansionRegionActivation_Operation_doOutput->setEType(nullptr);
+	m_expansionRegionActivation_Operation_doOutput->setName("doOutput");
+	m_expansionRegionActivation_Operation_doOutput->setLowerBound(0);
+	m_expansionRegionActivation_Operation_doOutput->setUpperBound(1);
+	m_expansionRegionActivation_Operation_doOutput->setUnique(true);
+	m_expansionRegionActivation_Operation_doOutput->setOrdered(true);
+	
+	
 	m_expansionRegionActivation_Operation_doStructuredActivity->setEType(nullptr);
 	m_expansionRegionActivation_Operation_doStructuredActivity->setName("doStructuredActivity");
 	m_expansionRegionActivation_Operation_doStructuredActivity->setLowerBound(1);
@@ -4998,6 +5147,14 @@ void FUMLPackageImpl::initializeExpansionRegionActivationContent()
 		parameter->setOrdered(true);
 	}
 	
+	m_expansionRegionActivation_Operation_isSuspended->setEType(types::TypesPackage::eInstance()->getBoolean_Class());
+	m_expansionRegionActivation_Operation_isSuspended->setName("isSuspended");
+	m_expansionRegionActivation_Operation_isSuspended->setLowerBound(0);
+	m_expansionRegionActivation_Operation_isSuspended->setUpperBound(1);
+	m_expansionRegionActivation_Operation_isSuspended->setUnique(true);
+	m_expansionRegionActivation_Operation_isSuspended->setOrdered(true);
+	
+	
 	m_expansionRegionActivation_Operation_numberOfValues->setEType(ecore::EcorePackage::eInstance()->getEInt_Class());
 	m_expansionRegionActivation_Operation_numberOfValues->setName("numberOfValues");
 	m_expansionRegionActivation_Operation_numberOfValues->setLowerBound(1);
@@ -5005,6 +5162,23 @@ void FUMLPackageImpl::initializeExpansionRegionActivationContent()
 	m_expansionRegionActivation_Operation_numberOfValues->setUnique(true);
 	m_expansionRegionActivation_Operation_numberOfValues->setOrdered(false);
 	
+	
+	m_expansionRegionActivation_Operation_resume_ExpansionActivationGroup->setEType(nullptr);
+	m_expansionRegionActivation_Operation_resume_ExpansionActivationGroup->setName("resume");
+	m_expansionRegionActivation_Operation_resume_ExpansionActivationGroup->setLowerBound(0);
+	m_expansionRegionActivation_Operation_resume_ExpansionActivationGroup->setUpperBound(1);
+	m_expansionRegionActivation_Operation_resume_ExpansionActivationGroup->setUnique(true);
+	m_expansionRegionActivation_Operation_resume_ExpansionActivationGroup->setOrdered(true);
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_expansionRegionActivation_Operation_resume_ExpansionActivationGroup);
+		parameter->setName("activationGroup");
+		parameter->setEType(nullptr);
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
 	
 	m_expansionRegionActivation_Operation_runGroup_ExpansionActivationGroup->setEType(nullptr);
 	m_expansionRegionActivation_Operation_runGroup_ExpansionActivationGroup->setName("runGroup");
@@ -5015,6 +5189,63 @@ void FUMLPackageImpl::initializeExpansionRegionActivationContent()
 	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_expansionRegionActivation_Operation_runGroup_ExpansionActivationGroup);
+		parameter->setName("activationGroup");
+		parameter->setEType(nullptr);
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	m_expansionRegionActivation_Operation_runIterative->setEType(nullptr);
+	m_expansionRegionActivation_Operation_runIterative->setName("runIterative");
+	m_expansionRegionActivation_Operation_runIterative->setLowerBound(0);
+	m_expansionRegionActivation_Operation_runIterative->setUpperBound(1);
+	m_expansionRegionActivation_Operation_runIterative->setUnique(true);
+	m_expansionRegionActivation_Operation_runIterative->setOrdered(true);
+	
+	
+	m_expansionRegionActivation_Operation_runParallel->setEType(nullptr);
+	m_expansionRegionActivation_Operation_runParallel->setName("runParallel");
+	m_expansionRegionActivation_Operation_runParallel->setLowerBound(0);
+	m_expansionRegionActivation_Operation_runParallel->setUpperBound(1);
+	m_expansionRegionActivation_Operation_runParallel->setUnique(true);
+	m_expansionRegionActivation_Operation_runParallel->setOrdered(true);
+	
+	
+	m_expansionRegionActivation_Operation_sendOffers->setEType(nullptr);
+	m_expansionRegionActivation_Operation_sendOffers->setName("sendOffers");
+	m_expansionRegionActivation_Operation_sendOffers->setLowerBound(0);
+	m_expansionRegionActivation_Operation_sendOffers->setUpperBound(1);
+	m_expansionRegionActivation_Operation_sendOffers->setUnique(true);
+	m_expansionRegionActivation_Operation_sendOffers->setOrdered(true);
+	
+	
+	m_expansionRegionActivation_Operation_takeOfferedTokens->setEType(getToken_Class());
+	m_expansionRegionActivation_Operation_takeOfferedTokens->setName("takeOfferedTokens");
+	m_expansionRegionActivation_Operation_takeOfferedTokens->setLowerBound(0);
+	m_expansionRegionActivation_Operation_takeOfferedTokens->setUpperBound(-1);
+	m_expansionRegionActivation_Operation_takeOfferedTokens->setUnique(true);
+	m_expansionRegionActivation_Operation_takeOfferedTokens->setOrdered(false);
+	
+	
+	m_expansionRegionActivation_Operation_terminate->setEType(nullptr);
+	m_expansionRegionActivation_Operation_terminate->setName("terminate");
+	m_expansionRegionActivation_Operation_terminate->setLowerBound(0);
+	m_expansionRegionActivation_Operation_terminate->setUpperBound(1);
+	m_expansionRegionActivation_Operation_terminate->setUnique(true);
+	m_expansionRegionActivation_Operation_terminate->setOrdered(true);
+	
+	
+	m_expansionRegionActivation_Operation_terminateGroup_ExpansionActivationGroup->setEType(nullptr);
+	m_expansionRegionActivation_Operation_terminateGroup_ExpansionActivationGroup->setName("terminateGroup");
+	m_expansionRegionActivation_Operation_terminateGroup_ExpansionActivationGroup->setLowerBound(0);
+	m_expansionRegionActivation_Operation_terminateGroup_ExpansionActivationGroup->setUpperBound(1);
+	m_expansionRegionActivation_Operation_terminateGroup_ExpansionActivationGroup->setUnique(true);
+	m_expansionRegionActivation_Operation_terminateGroup_ExpansionActivationGroup->setOrdered(true);
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_expansionRegionActivation_Operation_terminateGroup_ExpansionActivationGroup);
 		parameter->setName("activationGroup");
 		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);
@@ -5558,12 +5789,12 @@ void FUMLPackageImpl::initializeInputPinActivationContent()
 	m_inputPinActivation_Operation_isReady->setOrdered(false);
 	
 	
-	m_inputPinActivation_Operation_recieveOffer->setEType(nullptr);
-	m_inputPinActivation_Operation_recieveOffer->setName("recieveOffer");
-	m_inputPinActivation_Operation_recieveOffer->setLowerBound(1);
-	m_inputPinActivation_Operation_recieveOffer->setUpperBound(1);
-	m_inputPinActivation_Operation_recieveOffer->setUnique(true);
-	m_inputPinActivation_Operation_recieveOffer->setOrdered(false);
+	m_inputPinActivation_Operation_receiveOffer->setEType(nullptr);
+	m_inputPinActivation_Operation_receiveOffer->setName("receiveOffer");
+	m_inputPinActivation_Operation_receiveOffer->setLowerBound(1);
+	m_inputPinActivation_Operation_receiveOffer->setUpperBound(1);
+	m_inputPinActivation_Operation_receiveOffer->setUnique(true);
+	m_inputPinActivation_Operation_receiveOffer->setOrdered(false);
 	
 	
 	
@@ -7396,6 +7627,14 @@ void FUMLPackageImpl::initializeReadStructuralFeatureActionActivationContent()
 	
 	
 	
+	m_readStructuralFeatureActionActivation_Operation_doAction->setEType(nullptr);
+	m_readStructuralFeatureActionActivation_Operation_doAction->setName("doAction");
+	m_readStructuralFeatureActionActivation_Operation_doAction->setLowerBound(0);
+	m_readStructuralFeatureActionActivation_Operation_doAction->setUpperBound(1);
+	m_readStructuralFeatureActionActivation_Operation_doAction->setUnique(true);
+	m_readStructuralFeatureActionActivation_Operation_doAction->setOrdered(true);
+	
+	
 	
 }
 
@@ -7695,6 +7934,33 @@ void FUMLPackageImpl::initializeReferenceContent()
 	m_reference_Operation_getTypes->setOrdered(false);
 	
 	
+	m_reference_Operation_getValues_StructuralFeature_FeatureValue->setEType(fUML::FUMLPackage::eInstance()->getValue_Class());
+	m_reference_Operation_getValues_StructuralFeature_FeatureValue->setName("getValues");
+	m_reference_Operation_getValues_StructuralFeature_FeatureValue->setLowerBound(0);
+	m_reference_Operation_getValues_StructuralFeature_FeatureValue->setUpperBound(-1);
+	m_reference_Operation_getValues_StructuralFeature_FeatureValue->setUnique(true);
+	m_reference_Operation_getValues_StructuralFeature_FeatureValue->setOrdered(false);
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_reference_Operation_getValues_StructuralFeature_FeatureValue);
+		parameter->setName("feature");
+		parameter->setEType(uml::UmlPackage::eInstance()->getStructuralFeature_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_reference_Operation_getValues_StructuralFeature_FeatureValue);
+		parameter->setName("featureValues");
+		parameter->setEType(fUML::FUMLPackage::eInstance()->getFeatureValue_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
 	m_reference_Operation_new_->setEType(fUML::FUMLPackage::eInstance()->getValue_Class());
 	m_reference_Operation_new_->setName("new_");
 	m_reference_Operation_new_->setLowerBound(1);
@@ -7702,6 +7968,33 @@ void FUMLPackageImpl::initializeReferenceContent()
 	m_reference_Operation_new_->setUnique(true);
 	m_reference_Operation_new_->setOrdered(false);
 	
+	
+	m_reference_Operation_removeValue_StructuralFeature_Value->setEType(nullptr);
+	m_reference_Operation_removeValue_StructuralFeature_Value->setName("removeValue");
+	m_reference_Operation_removeValue_StructuralFeature_Value->setLowerBound(1);
+	m_reference_Operation_removeValue_StructuralFeature_Value->setUpperBound(1);
+	m_reference_Operation_removeValue_StructuralFeature_Value->setUnique(true);
+	m_reference_Operation_removeValue_StructuralFeature_Value->setOrdered(false);
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_reference_Operation_removeValue_StructuralFeature_Value);
+		parameter->setName("feature");
+		parameter->setEType(nullptr);
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_reference_Operation_removeValue_StructuralFeature_Value);
+		parameter->setName("value");
+		parameter->setEType(nullptr);
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
 	
 	m_reference_Operation_retrieveFeatureValue_StructuralFeature->setEType(fUML::FUMLPackage::eInstance()->getFeatureValue_Class());
 	m_reference_Operation_retrieveFeatureValue_StructuralFeature->setName("retrieveFeatureValue");
@@ -7762,6 +8055,43 @@ void FUMLPackageImpl::initializeReferenceContent()
 		parameter->setOrdered(true);
 	}
 	
+	m_reference_Operation_setFeatureValue_StructuralFeature_EInt->setEType(nullptr);
+	m_reference_Operation_setFeatureValue_StructuralFeature_EInt->setName("setFeatureValue");
+	m_reference_Operation_setFeatureValue_StructuralFeature_EInt->setLowerBound(1);
+	m_reference_Operation_setFeatureValue_StructuralFeature_EInt->setUpperBound(1);
+	m_reference_Operation_setFeatureValue_StructuralFeature_EInt->setUnique(true);
+	m_reference_Operation_setFeatureValue_StructuralFeature_EInt->setOrdered(false);
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_reference_Operation_setFeatureValue_StructuralFeature_EInt);
+		parameter->setName("feature");
+		parameter->setEType(nullptr);
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_reference_Operation_setFeatureValue_StructuralFeature_EInt);
+		parameter->setName("values");
+		parameter->setEType(nullptr);
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_reference_Operation_setFeatureValue_StructuralFeature_EInt);
+		parameter->setName("position");
+		parameter->setEType(nullptr);
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
 	m_reference_Operation_startBehavior_Class_ParameterValue->setEType(nullptr);
 	m_reference_Operation_startBehavior_Class_ParameterValue->setName("startBehavior");
 	m_reference_Operation_startBehavior_Class_ParameterValue->setLowerBound(1);
@@ -7806,6 +8136,14 @@ void FUMLPackageImpl::initializeRemoveStructuralFeatureValueActivationContent()
 	m_removeStructuralFeatureValueActivation_Class->setAbstract(false);
 	m_removeStructuralFeatureValueActivation_Class->setInterface(false);
 	
+	
+	
+	m_removeStructuralFeatureValueActivation_Operation_doAction->setEType(nullptr);
+	m_removeStructuralFeatureValueActivation_Operation_doAction->setName("doAction");
+	m_removeStructuralFeatureValueActivation_Operation_doAction->setLowerBound(0);
+	m_removeStructuralFeatureValueActivation_Operation_doAction->setUpperBound(1);
+	m_removeStructuralFeatureValueActivation_Operation_doAction->setUnique(true);
+	m_removeStructuralFeatureValueActivation_Operation_doAction->setOrdered(true);
 	
 	
 	
@@ -8607,6 +8945,60 @@ void FUMLPackageImpl::initializeStructuredValueContent()
 	m_structuredValue_Operation_createFeatureValues->setOrdered(true);
 	
 	
+	m_structuredValue_Operation_getValues_StructuralFeature_FeatureValue->setEType(fUML::FUMLPackage::eInstance()->getValue_Class());
+	m_structuredValue_Operation_getValues_StructuralFeature_FeatureValue->setName("getValues");
+	m_structuredValue_Operation_getValues_StructuralFeature_FeatureValue->setLowerBound(0);
+	m_structuredValue_Operation_getValues_StructuralFeature_FeatureValue->setUpperBound(-1);
+	m_structuredValue_Operation_getValues_StructuralFeature_FeatureValue->setUnique(true);
+	m_structuredValue_Operation_getValues_StructuralFeature_FeatureValue->setOrdered(false);
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_structuredValue_Operation_getValues_StructuralFeature_FeatureValue);
+		parameter->setName("feature");
+		parameter->setEType(uml::UmlPackage::eInstance()->getStructuralFeature_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_structuredValue_Operation_getValues_StructuralFeature_FeatureValue);
+		parameter->setName("featureValues");
+		parameter->setEType(getFeatureValue_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	m_structuredValue_Operation_removeValue_StructuralFeature_Value->setEType(nullptr);
+	m_structuredValue_Operation_removeValue_StructuralFeature_Value->setName("removeValue");
+	m_structuredValue_Operation_removeValue_StructuralFeature_Value->setLowerBound(1);
+	m_structuredValue_Operation_removeValue_StructuralFeature_Value->setUpperBound(1);
+	m_structuredValue_Operation_removeValue_StructuralFeature_Value->setUnique(true);
+	m_structuredValue_Operation_removeValue_StructuralFeature_Value->setOrdered(false);
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_structuredValue_Operation_removeValue_StructuralFeature_Value);
+		parameter->setName("feature");
+		parameter->setEType(nullptr);
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_structuredValue_Operation_removeValue_StructuralFeature_Value);
+		parameter->setName("value");
+		parameter->setEType(nullptr);
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
 	m_structuredValue_Operation_retrieveFeatureValue_StructuralFeature->setEType(getFeatureValue_Class());
 	m_structuredValue_Operation_retrieveFeatureValue_StructuralFeature->setName("retrieveFeatureValue");
 	m_structuredValue_Operation_retrieveFeatureValue_StructuralFeature->setLowerBound(1);
@@ -8631,6 +9023,43 @@ void FUMLPackageImpl::initializeStructuredValueContent()
 	m_structuredValue_Operation_retrieveFeatureValues->setUnique(true);
 	m_structuredValue_Operation_retrieveFeatureValues->setOrdered(false);
 	
+	
+	m_structuredValue_Operation_setFeatureValue_StructuralFeature_EInt->setEType(nullptr);
+	m_structuredValue_Operation_setFeatureValue_StructuralFeature_EInt->setName("setFeatureValue");
+	m_structuredValue_Operation_setFeatureValue_StructuralFeature_EInt->setLowerBound(1);
+	m_structuredValue_Operation_setFeatureValue_StructuralFeature_EInt->setUpperBound(1);
+	m_structuredValue_Operation_setFeatureValue_StructuralFeature_EInt->setUnique(true);
+	m_structuredValue_Operation_setFeatureValue_StructuralFeature_EInt->setOrdered(false);
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_structuredValue_Operation_setFeatureValue_StructuralFeature_EInt);
+		parameter->setName("feature");
+		parameter->setEType(nullptr);
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_structuredValue_Operation_setFeatureValue_StructuralFeature_EInt);
+		parameter->setName("values");
+		parameter->setEType(nullptr);
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_structuredValue_Operation_setFeatureValue_StructuralFeature_EInt);
+		parameter->setName("position");
+		parameter->setEType(nullptr);
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
 	
 	m_structuredValue_Operation_specify->setEType(uml::UmlPackage::eInstance()->getValueSpecification_Class());
 	m_structuredValue_Operation_specify->setName("specify");
@@ -8978,6 +9407,14 @@ void FUMLPackageImpl::initializeValueSpecificationActionActivationContent()
 	m_valueSpecificationActionActivation_Class->setAbstract(false);
 	m_valueSpecificationActionActivation_Class->setInterface(false);
 	
+	
+	
+	m_valueSpecificationActionActivation_Operation_doAction->setEType(nullptr);
+	m_valueSpecificationActionActivation_Operation_doAction->setName("doAction");
+	m_valueSpecificationActionActivation_Operation_doAction->setLowerBound(0);
+	m_valueSpecificationActionActivation_Operation_doAction->setUpperBound(1);
+	m_valueSpecificationActionActivation_Operation_doAction->setUnique(true);
+	m_valueSpecificationActionActivation_Operation_doAction->setOrdered(true);
 	
 	
 	

@@ -170,11 +170,11 @@ bool InputPinActivationImpl::isReady()
 	//end of body
 }
 
-void InputPinActivationImpl::recieveOffer()
+void InputPinActivationImpl::receiveOffer()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	this->getActionActivation().lock()->recieveOffer();
+	this->getActionActivation().lock()->receiveOffer();
 	//end of body
 }
 

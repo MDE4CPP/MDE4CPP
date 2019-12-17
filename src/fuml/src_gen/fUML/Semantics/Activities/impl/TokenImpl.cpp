@@ -218,9 +218,9 @@ Any TokenImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case fUML::FUMLPackage::TOKEN_ATTRIBUTE_HOLDER:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getHolder().lock())); //1180
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getHolder().lock())); //1150
 		case fUML::FUMLPackage::TOKEN_ATTRIBUTE_WITHDRAWN:
-			return eAny(isWithdrawn()); //1181
+			return eAny(isWithdrawn()); //1151
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
@@ -229,9 +229,9 @@ bool TokenImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case fUML::FUMLPackage::TOKEN_ATTRIBUTE_HOLDER:
-			return getHolder().lock() != nullptr; //1180
+			return getHolder().lock() != nullptr; //1150
 		case fUML::FUMLPackage::TOKEN_ATTRIBUTE_WITHDRAWN:
-			return isWithdrawn() != true; //1181
+			return isWithdrawn() != true; //1151
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
@@ -244,14 +244,14 @@ bool TokenImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> _holder = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityNodeActivation>(_temp);
-			setHolder(_holder); //1180
+			setHolder(_holder); //1150
 			return true;
 		}
 		case fUML::FUMLPackage::TOKEN_ATTRIBUTE_WITHDRAWN:
 		{
 			// BOOST CAST
 			bool _withdrawn = newValue->get<bool>();
-			setWithdrawn(_withdrawn); //1181
+			setWithdrawn(_withdrawn); //1151
 			return true;
 		}
 	}

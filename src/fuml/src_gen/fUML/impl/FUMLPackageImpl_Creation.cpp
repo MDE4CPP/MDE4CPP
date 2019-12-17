@@ -82,9 +82,6 @@ void FUMLPackageImpl::createPackageContents(std::shared_ptr<ecore::EPackage> pac
 	createEventOccurrenceContent(package, factory);
 	createExecutionContent(package, factory);
 	createExecutionFactoryContent(package, factory);
-	createExecutionFactoryL1Content(package, factory);
-	createExecutionFactoryL2Content(package, factory);
-	createExecutionFactoryL3Content(package, factory);
 	createExecutorContent(package, factory);
 	createExpansionActivationGroupContent(package, factory);
 	createExpansionNodeActivationContent(package, factory);
@@ -307,7 +304,7 @@ void FUMLPackageImpl::createActivityNodeActivationContent(std::shared_ptr<ecore:
 	m_activityNodeActivation_Operation_getTokens = factory->createEOperation_in_EContainingClass(m_activityNodeActivation_Class, ACTIVITYNODEACTIVATION_OPERATION_GETTOKENS);
 	m_activityNodeActivation_Operation_isReady = factory->createEOperation_in_EContainingClass(m_activityNodeActivation_Class, ACTIVITYNODEACTIVATION_OPERATION_ISREADY);
 	m_activityNodeActivation_Operation_isSourceFor_ActivityEdgeInstance = factory->createEOperation_in_EContainingClass(m_activityNodeActivation_Class, ACTIVITYNODEACTIVATION_OPERATION_ISSOURCEFOR_ACTIVITYEDGEINSTANCE);
-	m_activityNodeActivation_Operation_recieveOffer = factory->createEOperation_in_EContainingClass(m_activityNodeActivation_Class, ACTIVITYNODEACTIVATION_OPERATION_RECIEVEOFFER);
+	m_activityNodeActivation_Operation_receiveOffer = factory->createEOperation_in_EContainingClass(m_activityNodeActivation_Class, ACTIVITYNODEACTIVATION_OPERATION_RECEIVEOFFER);
 	m_activityNodeActivation_Operation_removeToken_Token = factory->createEOperation_in_EContainingClass(m_activityNodeActivation_Class, ACTIVITYNODEACTIVATION_OPERATION_REMOVETOKEN_TOKEN);
 	m_activityNodeActivation_Operation_resume = factory->createEOperation_in_EContainingClass(m_activityNodeActivation_Class, ACTIVITYNODEACTIVATION_OPERATION_RESUME);
 	m_activityNodeActivation_Operation_run = factory->createEOperation_in_EContainingClass(m_activityNodeActivation_Class, ACTIVITYNODEACTIVATION_OPERATION_RUN);
@@ -364,6 +361,7 @@ void FUMLPackageImpl::createAddStructuralFeatureValueActionActivationContent(std
 	m_addStructuralFeatureValueActionActivation_Class = factory->createEClass_in_EPackage(package, ADDSTRUCTURALFEATUREVALUEACTIONACTIVATION_CLASS);
 	
 	
+	m_addStructuralFeatureValueActionActivation_Operation_doAction = factory->createEOperation_in_EContainingClass(m_addStructuralFeatureValueActionActivation_Class, ADDSTRUCTURALFEATUREVALUEACTIONACTIVATION_OPERATION_DOACTION);
 	
 }
 
@@ -549,6 +547,7 @@ void FUMLPackageImpl::createClearStructuralFeatureActionActivationContent(std::s
 	m_clearStructuralFeatureActionActivation_Class = factory->createEClass_in_EPackage(package, CLEARSTRUCTURALFEATUREACTIONACTIVATION_CLASS);
 	
 	
+	m_clearStructuralFeatureActionActivation_Operation_doAction = factory->createEOperation_in_EContainingClass(m_clearStructuralFeatureActionActivation_Class, CLEARSTRUCTURALFEATUREACTIONACTIVATION_OPERATION_DOACTION);
 	
 }
 
@@ -785,33 +784,6 @@ void FUMLPackageImpl::createExecutionFactoryContent(std::shared_ptr<ecore::EPack
 	
 }
 
-void FUMLPackageImpl::createExecutionFactoryL1Content(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
-{
-	m_executionFactoryL1_Class = factory->createEClass_in_EPackage(package, EXECUTIONFACTORYL1_CLASS);
-	
-	
-	m_executionFactoryL1_Operation_instantiateVisitor_Element = factory->createEOperation_in_EContainingClass(m_executionFactoryL1_Class, EXECUTIONFACTORYL1_OPERATION_INSTANTIATEVISITOR_ELEMENT);
-	
-}
-
-void FUMLPackageImpl::createExecutionFactoryL2Content(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
-{
-	m_executionFactoryL2_Class = factory->createEClass_in_EPackage(package, EXECUTIONFACTORYL2_CLASS);
-	
-	
-	m_executionFactoryL2_Operation_instantiateVisitor_Element = factory->createEOperation_in_EContainingClass(m_executionFactoryL2_Class, EXECUTIONFACTORYL2_OPERATION_INSTANTIATEVISITOR_ELEMENT);
-	
-}
-
-void FUMLPackageImpl::createExecutionFactoryL3Content(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
-{
-	m_executionFactoryL3_Class = factory->createEClass_in_EPackage(package, EXECUTIONFACTORYL3_CLASS);
-	
-	
-	m_executionFactoryL3_Operation_instantiateVisitor_Element = factory->createEOperation_in_EContainingClass(m_executionFactoryL3_Class, EXECUTIONFACTORYL3_OPERATION_INSTANTIATEVISITOR_ELEMENT);
-	
-}
-
 void FUMLPackageImpl::createExecutorContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
 {
 	m_executor_Class = factory->createEClass_in_EPackage(package, EXECUTOR_CLASS);
@@ -827,9 +799,17 @@ void FUMLPackageImpl::createExecutorContent(std::shared_ptr<ecore::EPackage> pac
 void FUMLPackageImpl::createExpansionActivationGroupContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
 {
 	m_expansionActivationGroup_Class = factory->createEClass_in_EPackage(package, EXPANSIONACTIVATIONGROUP_CLASS);
+	m_expansionActivationGroup_Attribute_index = factory->createEAttribute_in_EContainingClass(m_expansionActivationGroup_Class, EXPANSIONACTIVATIONGROUP_ATTRIBUTE_INDEX);
 	
+	m_expansionActivationGroup_Attribute_groupInputs = factory->createEReference_in_EContainingClass(m_expansionActivationGroup_Class, EXPANSIONACTIVATIONGROUP_ATTRIBUTE_GROUPINPUTS);
+	m_expansionActivationGroup_Attribute_groupOutputs = factory->createEReference_in_EContainingClass(m_expansionActivationGroup_Class, EXPANSIONACTIVATIONGROUP_ATTRIBUTE_GROUPOUTPUTS);
 	m_expansionActivationGroup_Attribute_regionActivation = factory->createEReference_in_EContainingClass(m_expansionActivationGroup_Class, EXPANSIONACTIVATIONGROUP_ATTRIBUTE_REGIONACTIVATION);
+	m_expansionActivationGroup_Attribute_regionInputs = factory->createEReference_in_EContainingClass(m_expansionActivationGroup_Class, EXPANSIONACTIVATIONGROUP_ATTRIBUTE_REGIONINPUTS);
 	
+	m_expansionActivationGroup_Operation_getActivityExecution = factory->createEOperation_in_EContainingClass(m_expansionActivationGroup_Class, EXPANSIONACTIVATIONGROUP_OPERATION_GETACTIVITYEXECUTION);
+	m_expansionActivationGroup_Operation_getNodeActivation_ActivityNode = factory->createEOperation_in_EContainingClass(m_expansionActivationGroup_Class, EXPANSIONACTIVATIONGROUP_OPERATION_GETNODEACTIVATION_ACTIVITYNODE);
+	m_expansionActivationGroup_Operation_resume_ActivityNodeActivation = factory->createEOperation_in_EContainingClass(m_expansionActivationGroup_Class, EXPANSIONACTIVATIONGROUP_OPERATION_RESUME_ACTIVITYNODEACTIVATION);
+	m_expansionActivationGroup_Operation_suspend_ActivityNodeActivation = factory->createEOperation_in_EContainingClass(m_expansionActivationGroup_Class, EXPANSIONACTIVATIONGROUP_OPERATION_SUSPEND_ACTIVITYNODEACTIVATION);
 	
 }
 
@@ -838,22 +818,36 @@ void FUMLPackageImpl::createExpansionNodeActivationContent(std::shared_ptr<ecore
 	m_expansionNodeActivation_Class = factory->createEClass_in_EPackage(package, EXPANSIONNODEACTIVATION_CLASS);
 	
 	
+	m_expansionNodeActivation_Operation_fire_Token = factory->createEOperation_in_EContainingClass(m_expansionNodeActivation_Class, EXPANSIONNODEACTIVATION_OPERATION_FIRE_TOKEN);
 	m_expansionNodeActivation_Operation_getExpansionRegionActivation = factory->createEOperation_in_EContainingClass(m_expansionNodeActivation_Class, EXPANSIONNODEACTIVATION_OPERATION_GETEXPANSIONREGIONACTIVATION);
+	m_expansionNodeActivation_Operation_isReady = factory->createEOperation_in_EContainingClass(m_expansionNodeActivation_Class, EXPANSIONNODEACTIVATION_OPERATION_ISREADY);
+	m_expansionNodeActivation_Operation_receiveOffer = factory->createEOperation_in_EContainingClass(m_expansionNodeActivation_Class, EXPANSIONNODEACTIVATION_OPERATION_RECEIVEOFFER);
 	
 }
 
 void FUMLPackageImpl::createExpansionRegionActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
 {
 	m_expansionRegionActivation_Class = factory->createEClass_in_EPackage(package, EXPANSIONREGIONACTIVATION_CLASS);
+	m_expansionRegionActivation_Attribute_next = factory->createEAttribute_in_EContainingClass(m_expansionRegionActivation_Class, EXPANSIONREGIONACTIVATION_ATTRIBUTE_NEXT);
 	
 	m_expansionRegionActivation_Attribute_activationGroups = factory->createEReference_in_EContainingClass(m_expansionRegionActivation_Class, EXPANSIONREGIONACTIVATION_ATTRIBUTE_ACTIVATIONGROUPS);
 	m_expansionRegionActivation_Attribute_inputExpansionTokens = factory->createEReference_in_EContainingClass(m_expansionRegionActivation_Class, EXPANSIONREGIONACTIVATION_ATTRIBUTE_INPUTEXPANSIONTOKENS);
 	m_expansionRegionActivation_Attribute_inputTokens = factory->createEReference_in_EContainingClass(m_expansionRegionActivation_Class, EXPANSIONREGIONACTIVATION_ATTRIBUTE_INPUTTOKENS);
 	
+	m_expansionRegionActivation_Operation_doAction = factory->createEOperation_in_EContainingClass(m_expansionRegionActivation_Class, EXPANSIONREGIONACTIVATION_OPERATION_DOACTION);
+	m_expansionRegionActivation_Operation_doOutput = factory->createEOperation_in_EContainingClass(m_expansionRegionActivation_Class, EXPANSIONREGIONACTIVATION_OPERATION_DOOUTPUT);
 	m_expansionRegionActivation_Operation_doStructuredActivity = factory->createEOperation_in_EContainingClass(m_expansionRegionActivation_Class, EXPANSIONREGIONACTIVATION_OPERATION_DOSTRUCTUREDACTIVITY);
 	m_expansionRegionActivation_Operation_getExpansionNodeActivation_ExpansionNode = factory->createEOperation_in_EContainingClass(m_expansionRegionActivation_Class, EXPANSIONREGIONACTIVATION_OPERATION_GETEXPANSIONNODEACTIVATION_EXPANSIONNODE);
+	m_expansionRegionActivation_Operation_isSuspended = factory->createEOperation_in_EContainingClass(m_expansionRegionActivation_Class, EXPANSIONREGIONACTIVATION_OPERATION_ISSUSPENDED);
 	m_expansionRegionActivation_Operation_numberOfValues = factory->createEOperation_in_EContainingClass(m_expansionRegionActivation_Class, EXPANSIONREGIONACTIVATION_OPERATION_NUMBEROFVALUES);
+	m_expansionRegionActivation_Operation_resume_ExpansionActivationGroup = factory->createEOperation_in_EContainingClass(m_expansionRegionActivation_Class, EXPANSIONREGIONACTIVATION_OPERATION_RESUME_EXPANSIONACTIVATIONGROUP);
 	m_expansionRegionActivation_Operation_runGroup_ExpansionActivationGroup = factory->createEOperation_in_EContainingClass(m_expansionRegionActivation_Class, EXPANSIONREGIONACTIVATION_OPERATION_RUNGROUP_EXPANSIONACTIVATIONGROUP);
+	m_expansionRegionActivation_Operation_runIterative = factory->createEOperation_in_EContainingClass(m_expansionRegionActivation_Class, EXPANSIONREGIONACTIVATION_OPERATION_RUNITERATIVE);
+	m_expansionRegionActivation_Operation_runParallel = factory->createEOperation_in_EContainingClass(m_expansionRegionActivation_Class, EXPANSIONREGIONACTIVATION_OPERATION_RUNPARALLEL);
+	m_expansionRegionActivation_Operation_sendOffers = factory->createEOperation_in_EContainingClass(m_expansionRegionActivation_Class, EXPANSIONREGIONACTIVATION_OPERATION_SENDOFFERS);
+	m_expansionRegionActivation_Operation_takeOfferedTokens = factory->createEOperation_in_EContainingClass(m_expansionRegionActivation_Class, EXPANSIONREGIONACTIVATION_OPERATION_TAKEOFFEREDTOKENS);
+	m_expansionRegionActivation_Operation_terminate = factory->createEOperation_in_EContainingClass(m_expansionRegionActivation_Class, EXPANSIONREGIONACTIVATION_OPERATION_TERMINATE);
+	m_expansionRegionActivation_Operation_terminateGroup_ExpansionActivationGroup = factory->createEOperation_in_EContainingClass(m_expansionRegionActivation_Class, EXPANSIONREGIONACTIVATION_OPERATION_TERMINATEGROUP_EXPANSIONACTIVATIONGROUP);
 	
 }
 
@@ -967,7 +961,7 @@ void FUMLPackageImpl::createInputPinActivationContent(std::shared_ptr<ecore::EPa
 	
 	
 	m_inputPinActivation_Operation_isReady = factory->createEOperation_in_EContainingClass(m_inputPinActivation_Class, INPUTPINACTIVATION_OPERATION_ISREADY);
-	m_inputPinActivation_Operation_recieveOffer = factory->createEOperation_in_EContainingClass(m_inputPinActivation_Class, INPUTPINACTIVATION_OPERATION_RECIEVEOFFER);
+	m_inputPinActivation_Operation_receiveOffer = factory->createEOperation_in_EContainingClass(m_inputPinActivation_Class, INPUTPINACTIVATION_OPERATION_RECEIVEOFFER);
 	
 }
 
@@ -1318,6 +1312,7 @@ void FUMLPackageImpl::createReadStructuralFeatureActionActivationContent(std::sh
 	m_readStructuralFeatureActionActivation_Class = factory->createEClass_in_EPackage(package, READSTRUCTURALFEATUREACTIONACTIVATION_CLASS);
 	
 	
+	m_readStructuralFeatureActionActivation_Operation_doAction = factory->createEOperation_in_EContainingClass(m_readStructuralFeatureActionActivation_Class, READSTRUCTURALFEATUREACTIONACTIVATION_OPERATION_DOACTION);
 	
 }
 
@@ -1371,11 +1366,14 @@ void FUMLPackageImpl::createReferenceContent(std::shared_ptr<ecore::EPackage> pa
 	m_reference_Operation_dispatch_Operation = factory->createEOperation_in_EContainingClass(m_reference_Class, REFERENCE_OPERATION_DISPATCH_OPERATION);
 	m_reference_Operation_equals_Value = factory->createEOperation_in_EContainingClass(m_reference_Class, REFERENCE_OPERATION_EQUALS_VALUE);
 	m_reference_Operation_getTypes = factory->createEOperation_in_EContainingClass(m_reference_Class, REFERENCE_OPERATION_GETTYPES);
+	m_reference_Operation_getValues_StructuralFeature_FeatureValue = factory->createEOperation_in_EContainingClass(m_reference_Class, REFERENCE_OPERATION_GETVALUES_STRUCTURALFEATURE_FEATUREVALUE);
 	m_reference_Operation_new_ = factory->createEOperation_in_EContainingClass(m_reference_Class, REFERENCE_OPERATION_NEW_);
+	m_reference_Operation_removeValue_StructuralFeature_Value = factory->createEOperation_in_EContainingClass(m_reference_Class, REFERENCE_OPERATION_REMOVEVALUE_STRUCTURALFEATURE_VALUE);
 	m_reference_Operation_retrieveFeatureValue_StructuralFeature = factory->createEOperation_in_EContainingClass(m_reference_Class, REFERENCE_OPERATION_RETRIEVEFEATUREVALUE_STRUCTURALFEATURE);
 	m_reference_Operation_retrieveFeatureValues = factory->createEOperation_in_EContainingClass(m_reference_Class, REFERENCE_OPERATION_RETRIEVEFEATUREVALUES);
 	m_reference_Operation_send_SignalInstance = factory->createEOperation_in_EContainingClass(m_reference_Class, REFERENCE_OPERATION_SEND_SIGNALINSTANCE);
 	m_reference_Operation_send_EventOccurrence = factory->createEOperation_in_EContainingClass(m_reference_Class, REFERENCE_OPERATION_SEND_EVENTOCCURRENCE);
+	m_reference_Operation_setFeatureValue_StructuralFeature_EInt = factory->createEOperation_in_EContainingClass(m_reference_Class, REFERENCE_OPERATION_SETFEATUREVALUE_STRUCTURALFEATURE_EINT);
 	m_reference_Operation_startBehavior_Class_ParameterValue = factory->createEOperation_in_EContainingClass(m_reference_Class, REFERENCE_OPERATION_STARTBEHAVIOR_CLASS_PARAMETERVALUE);
 	m_reference_Operation_toString = factory->createEOperation_in_EContainingClass(m_reference_Class, REFERENCE_OPERATION_TOSTRING);
 	
@@ -1386,6 +1384,7 @@ void FUMLPackageImpl::createRemoveStructuralFeatureValueActivationContent(std::s
 	m_removeStructuralFeatureValueActivation_Class = factory->createEClass_in_EPackage(package, REMOVESTRUCTURALFEATUREVALUEACTIVATION_CLASS);
 	
 	
+	m_removeStructuralFeatureValueActivation_Operation_doAction = factory->createEOperation_in_EContainingClass(m_removeStructuralFeatureValueActivation_Class, REMOVESTRUCTURALFEATUREVALUEACTIVATION_OPERATION_DOACTION);
 	
 }
 
@@ -1535,8 +1534,11 @@ void FUMLPackageImpl::createStructuredValueContent(std::shared_ptr<ecore::EPacka
 	
 	m_structuredValue_Operation_assignFeatureValue_StructuralFeature_EInt = factory->createEOperation_in_EContainingClass(m_structuredValue_Class, STRUCTUREDVALUE_OPERATION_ASSIGNFEATUREVALUE_STRUCTURALFEATURE_EINT);
 	m_structuredValue_Operation_createFeatureValues = factory->createEOperation_in_EContainingClass(m_structuredValue_Class, STRUCTUREDVALUE_OPERATION_CREATEFEATUREVALUES);
+	m_structuredValue_Operation_getValues_StructuralFeature_FeatureValue = factory->createEOperation_in_EContainingClass(m_structuredValue_Class, STRUCTUREDVALUE_OPERATION_GETVALUES_STRUCTURALFEATURE_FEATUREVALUE);
+	m_structuredValue_Operation_removeValue_StructuralFeature_Value = factory->createEOperation_in_EContainingClass(m_structuredValue_Class, STRUCTUREDVALUE_OPERATION_REMOVEVALUE_STRUCTURALFEATURE_VALUE);
 	m_structuredValue_Operation_retrieveFeatureValue_StructuralFeature = factory->createEOperation_in_EContainingClass(m_structuredValue_Class, STRUCTUREDVALUE_OPERATION_RETRIEVEFEATUREVALUE_STRUCTURALFEATURE);
 	m_structuredValue_Operation_retrieveFeatureValues = factory->createEOperation_in_EContainingClass(m_structuredValue_Class, STRUCTUREDVALUE_OPERATION_RETRIEVEFEATUREVALUES);
+	m_structuredValue_Operation_setFeatureValue_StructuralFeature_EInt = factory->createEOperation_in_EContainingClass(m_structuredValue_Class, STRUCTUREDVALUE_OPERATION_SETFEATUREVALUE_STRUCTURALFEATURE_EINT);
 	m_structuredValue_Operation_specify = factory->createEOperation_in_EContainingClass(m_structuredValue_Class, STRUCTUREDVALUE_OPERATION_SPECIFY);
 	
 }
@@ -1605,6 +1607,7 @@ void FUMLPackageImpl::createValueSpecificationActionActivationContent(std::share
 	m_valueSpecificationActionActivation_Class = factory->createEClass_in_EPackage(package, VALUESPECIFICATIONACTIONACTIVATION_CLASS);
 	
 	
+	m_valueSpecificationActionActivation_Operation_doAction = factory->createEOperation_in_EContainingClass(m_valueSpecificationActionActivation_Class, VALUESPECIFICATIONACTIONACTIVATION_OPERATION_DOACTION);
 	
 }
 

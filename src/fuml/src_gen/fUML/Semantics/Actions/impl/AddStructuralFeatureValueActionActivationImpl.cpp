@@ -25,6 +25,11 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "fUML/impl/FUMLPackageImpl.hpp"
+#include "fUML/Semantics/SimpleClassifiers/StructuredValue.hpp"
+#include "fUML/Semantics/SimpleClassifiers/UnlimitedNaturalValue.hpp"
+#include "fUML/Semantics/Values/Value.hpp"
+#include "uml/AddStructuralFeatureValueAction.hpp"
+#include "uml/StructuralFeature.hpp"
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -171,6 +176,41 @@ std::shared_ptr<ecore::EClass> AddStructuralFeatureValueActionActivationImpl::eS
 //*********************************
 // Operations
 //*********************************
+void AddStructuralFeatureValueActionActivationImpl::doAction()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	std::shared_ptr<uml::AddStructuralFeatureValueAction> action = std::dynamic_pointer_cast<uml::AddStructuralFeatureValueAction>(m_node);
+	std::shared_ptr<uml::StructuralFeature> feature = action->getStructuralFeature();
+
+	std::shared_ptr<fUML::Semantics::Values::Value> value = takeTokens(action->getObject())->at(0);
+	std::shared_ptr<Bag<fUML::Semantics::Values::Value>> inputValues = takeTokens(action->getValue());
+
+	int insertAt = -1;
+	if (action->getInsertAt() != nullptr)
+	{
+		std::shared_ptr<fUML::Semantics::Values::Value> insertValue = takeTokens(action->getInsertAt())->at(0);
+		std::shared_ptr<fUML::Semantics::SimpleClassifiers::UnlimitedNaturalValue> unlimitedValue = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::UnlimitedNaturalValue>(insertValue);
+		if (unlimitedValue != nullptr)
+		{
+			insertAt = unlimitedValue->getValue();
+		}
+	}
+
+	// TODO handle isRemoveAll
+
+	std::shared_ptr<fUML::Semantics::SimpleClassifiers::StructuredValue> structuredValue = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::StructuredValue>(value);
+	if (structuredValue)
+	{
+		structuredValue->setFeatureValue(feature, inputValues, insertAt);
+	}
+	else
+	{
+		throw "unhandled fUML::Value instance";
+	}
+	putToken(action->getResult(), value);
+	//end of body
+}
 
 //*********************************
 // References

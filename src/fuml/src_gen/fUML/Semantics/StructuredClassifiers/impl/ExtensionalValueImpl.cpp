@@ -173,7 +173,7 @@ Any ExtensionalValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case fUML::FUMLPackage::EXTENSIONALVALUE_ATTRIBUTE_LOCUS:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getLocus())); //551
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getLocus())); //521
 	}
 	return fUML::Semantics::SimpleClassifiers::CompoundValueImpl::eGet(featureID, resolve, coreType);
 }
@@ -182,7 +182,7 @@ bool ExtensionalValueImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case fUML::FUMLPackage::EXTENSIONALVALUE_ATTRIBUTE_LOCUS:
-			return getLocus() != nullptr; //551
+			return getLocus() != nullptr; //521
 	}
 	return fUML::Semantics::SimpleClassifiers::CompoundValueImpl::internalEIsSet(featureID);
 }
@@ -195,7 +195,7 @@ bool ExtensionalValueImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<fUML::Semantics::Loci::Locus> _locus = std::dynamic_pointer_cast<fUML::Semantics::Loci::Locus>(_temp);
-			setLocus(_locus); //551
+			setLocus(_locus); //521
 			return true;
 		}
 	}
