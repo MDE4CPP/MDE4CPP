@@ -20,11 +20,13 @@
 
 #include "abstractDataTypes/Bag.hpp"
 
-#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "PSCS/impl/PSCSPackageImpl.hpp"
+#include "fUML/FUMLFactory.hpp"
+
+#include "PSCS/Semantics/CommonBehavior/CS_EventOccurrence.hpp"
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -40,9 +42,19 @@
 
 #include "uml/Classifier.hpp"
 
+#include "fUML/Semantics/CommonBehavior/EventOccurrence.hpp"
+
+#include "fUML/Semantics/CommonBehavior/Execution.hpp"
+
+#include "fUML/Semantics/StructuredClassifiers/Object.hpp"
+
 #include "uml/Operation.hpp"
 
+#include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
+
 #include "uml/Port.hpp"
+
+#include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
 
 #include "ecore/EcorePackage.hpp"
 #include "ecore/EcoreFactory.hpp"
@@ -99,6 +111,8 @@ CS_InteractionPointImpl::CS_InteractionPointImpl(const CS_InteractionPointImpl &
 
 	m_owner  = obj.getOwner();
 
+	m_referent  = obj.getReferent();
+
 
 	//Clone references with containment (deep copy)
 
@@ -126,26 +140,49 @@ std::shared_ptr<ecore::EClass> CS_InteractionPointImpl::eStaticClass() const
 //*********************************
 bool CS_InteractionPointImpl::checkAllParents(std::shared_ptr<uml::Classifier>  type,std::shared_ptr<uml::Classifier>  classifier)
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+		// Delegates the type checking to the reference
+	return std::dynamic_pointer_cast<CS_InteractionPoint>(this->getReferent())->checkAllParents(type, classifier);
+	//end of body
 }
 
-Any CS_InteractionPointImpl::dispatch(std::shared_ptr<uml::Operation>  operation)
+std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> CS_InteractionPointImpl::dispatch(std::shared_ptr<uml::Operation>  operation)
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+		// Delegates dispatching to the owning object
+	return this->getOwner()->dispatchIn(operation, getThisCS_InteractionPointPtr());
+	//end of body
 }
 
-void CS_InteractionPointImpl::send(Any eventOccurrence)
+void CS_InteractionPointImpl::send(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>  eventOccurrence)
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+		// An event occurrence that passes through a CS_InteractionPoint is
+	// (if necessary) wrapped in a CS_EventOccurrence. This event occurrence
+	// is then sent to the owning object.
+
+	std::shared_ptr<PSCS::Semantics::CommonBehavior::CS_EventOccurrence> wrappingEventOccurrence = nullptr;
+	if(std::dynamic_pointer_cast<PSCS::Semantics::CommonBehavior::CS_EventOccurrence>(eventOccurrence) != nullptr) {
+		wrappingEventOccurrence = std::dynamic_pointer_cast<PSCS::Semantics::CommonBehavior::CS_EventOccurrence>(eventOccurrence);
+	}
+	else {
+		wrappingEventOccurrence = PSCS::PSCSFactory::eInstance()->createCS_EventOccurrence();
+		wrappingEventOccurrence->setWrappedEventOccurrence(eventOccurrence);
+	}
+	wrappingEventOccurrence->setInteractionPoint(getThisCS_InteractionPointPtr());
+	this->getOwner()->sendIn(wrappingEventOccurrence, getThisCS_InteractionPointPtr());
+	//end of body
 }
 
-void CS_InteractionPointImpl::startBehavior(std::shared_ptr<uml::Class>  classifier,std::shared_ptr<Bag<Any> >  inputs)
+void CS_InteractionPointImpl::startBehavior(std::shared_ptr<uml::Class>  classifier,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> >  inputs)
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Overriden to do nothing
+	//end of body
 }
 
 //*********************************
@@ -183,6 +220,7 @@ std::shared_ptr<CS_InteractionPoint> CS_InteractionPointImpl::getThisCS_Interact
 void CS_InteractionPointImpl::setThisCS_InteractionPointPtr(std::weak_ptr<CS_InteractionPoint> thisCS_InteractionPointPtr)
 {
 	m_thisCS_InteractionPointPtr = thisCS_InteractionPointPtr;
+	setThisReferencePtr(thisCS_InteractionPointPtr);
 }
 std::shared_ptr<ecore::EObject> CS_InteractionPointImpl::eContainer() const
 {
@@ -197,22 +235,22 @@ Any CS_InteractionPointImpl::eGet(int featureID, bool resolve, bool coreType) co
 	switch(featureID)
 	{
 		case PSCS::PSCSPackage::CS_INTERACTIONPOINT_ATTRIBUTE_DEFININGPORT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getDefiningPort())); //171
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getDefiningPort())); //172
 		case PSCS::PSCSPackage::CS_INTERACTIONPOINT_ATTRIBUTE_OWNER:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getOwner())); //170
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getOwner())); //171
 	}
-	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
+	return fUML::Semantics::StructuredClassifiers::ReferenceImpl::eGet(featureID, resolve, coreType);
 }
 bool CS_InteractionPointImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
 		case PSCS::PSCSPackage::CS_INTERACTIONPOINT_ATTRIBUTE_DEFININGPORT:
-			return getDefiningPort() != nullptr; //171
+			return getDefiningPort() != nullptr; //172
 		case PSCS::PSCSPackage::CS_INTERACTIONPOINT_ATTRIBUTE_OWNER:
-			return getOwner() != nullptr; //170
+			return getOwner() != nullptr; //171
 	}
-	return ecore::EObjectImpl::internalEIsSet(featureID);
+	return fUML::Semantics::StructuredClassifiers::ReferenceImpl::internalEIsSet(featureID);
 }
 bool CS_InteractionPointImpl::eSet(int featureID, Any newValue)
 {
@@ -223,7 +261,7 @@ bool CS_InteractionPointImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Port> _definingPort = std::dynamic_pointer_cast<uml::Port>(_temp);
-			setDefiningPort(_definingPort); //171
+			setDefiningPort(_definingPort); //172
 			return true;
 		}
 		case PSCS::PSCSPackage::CS_INTERACTIONPOINT_ATTRIBUTE_OWNER:
@@ -231,12 +269,12 @@ bool CS_InteractionPointImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> _owner = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(_temp);
-			setOwner(_owner); //170
+			setOwner(_owner); //171
 			return true;
 		}
 	}
 
-	return ecore::EObjectImpl::eSet(featureID, newValue);
+	return fUML::Semantics::StructuredClassifiers::ReferenceImpl::eSet(featureID, newValue);
 }
 
 //*********************************
@@ -288,14 +326,14 @@ void CS_InteractionPointImpl::loadAttributes(std::shared_ptr<persistence::interf
 		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
 	}
 
-	ecore::EObjectImpl::loadAttributes(loadHandler, attr_list);
+	fUML::Semantics::StructuredClassifiers::ReferenceImpl::loadAttributes(loadHandler, attr_list);
 }
 
 void CS_InteractionPointImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<PSCS::PSCSFactory> modelFactory)
 {
 
 
-	ecore::EObjectImpl::loadNode(nodeName, loadHandler, ecore::EcoreFactory::eInstance());
+	fUML::Semantics::StructuredClassifiers::ReferenceImpl::loadNode(nodeName, loadHandler, fUML::FUMLFactory::eInstance());
 }
 
 void CS_InteractionPointImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
@@ -326,15 +364,25 @@ void CS_InteractionPointImpl::resolveReferences(const int featureID, std::list<s
 			return;
 		}
 	}
-	ecore::EObjectImpl::resolveReferences(featureID, references);
+	fUML::Semantics::StructuredClassifiers::ReferenceImpl::resolveReferences(featureID, references);
 }
 
 void CS_InteractionPointImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	saveContent(saveHandler);
 
+	fUML::Semantics::StructuredClassifiers::ReferenceImpl::saveContent(saveHandler);
+	
+	fUML::Semantics::SimpleClassifiers::StructuredValueImpl::saveContent(saveHandler);
+	
+	fUML::Semantics::Values::ValueImpl::saveContent(saveHandler);
+	
+	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
 	
 }
 

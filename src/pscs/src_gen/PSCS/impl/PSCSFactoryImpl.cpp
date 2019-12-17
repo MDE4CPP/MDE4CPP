@@ -20,14 +20,21 @@
 #include "PSCS/Semantics/Actions/impl/CS_RemoveStructuralFeatureValueActionActivationImpl.hpp"
 #include "PSCS/Semantics/Actions/impl/CS_SendSignalActionActivationImpl.hpp"
 
+#include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
+
 #include "PSCS/Semantics/Classification/impl/CS_InstanceValueEvaluationImpl.hpp"
+
 
 #include "PSCS/Semantics/CommonBehavior/impl/CS_CallEventExecutionImpl.hpp"
 #include "PSCS/Semantics/CommonBehavior/impl/CS_EventOccurrenceImpl.hpp"
 
+
 #include "PSCS/Semantics/Loci/impl/CS_ExecutionFactoryImpl.hpp"
 #include "PSCS/Semantics/Loci/impl/CS_ExecutorImpl.hpp"
 #include "PSCS/Semantics/Loci/impl/CS_LocusImpl.hpp"
+
+#include "fUML/Semantics/Loci/Locus.hpp"
+#include "fUML/Semantics/Loci/Locus.hpp"
 
 #include "PSCS/Semantics/StructuredClassifiers/impl/CS_DefaultRequestPropagationStrategyImpl.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/impl/CS_DispatchOperationOfInterfaceStrategyImpl.hpp"
@@ -39,7 +46,11 @@
 #include "PSCS/Semantics/StructuredClassifiers/impl/CS_RequestPropagationStrategyImpl.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/impl/CS_StructuralFeatureOfInterfaceAccessStrategyImpl.hpp"
 
+
 #include "PSCS/Semantics/Values/impl/CS_OpaqueExpressionEvaluationImpl.hpp"
+
+
+
 
 
 
@@ -99,18 +110,42 @@ std::shared_ptr<ecore::EObject> PSCSFactoryImpl::create(const int metaElementID,
 	{
 		case PSCSPackage::CS_ACCEPTCALLACTIONACTIVATION_CLASS:
 		{
+			if (nullptr == container)
+			{
 				return this->createCS_AcceptCallActionActivation(metaElementID);
-			
+			}
+			else
+			{
+				std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityNodeActivationGroup>(container);
+				assert(castedContainer);
+				return std::shared_ptr<PSCS::Semantics::Actions::CS_AcceptCallActionActivation>(this->createCS_AcceptCallActionActivation_in_Group(castedContainer,metaElementID));
+			}
 		}
 		case PSCSPackage::CS_ACCEPTEVENTACTIONACTIVATION_CLASS:
 		{
+			if (nullptr == container)
+			{
 				return this->createCS_AcceptEventActionActivation(metaElementID);
-			
+			}
+			else
+			{
+				std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityNodeActivationGroup>(container);
+				assert(castedContainer);
+				return std::shared_ptr<PSCS::Semantics::Actions::CS_AcceptEventActionActivation>(this->createCS_AcceptEventActionActivation_in_Group(castedContainer,metaElementID));
+			}
 		}
 		case PSCSPackage::CS_ADDSTRUCTURALFEATUREVALUEACTIONACTIVATION_CLASS:
 		{
+			if (nullptr == container)
+			{
 				return this->createCS_AddStructuralFeatureValueActionActivation(metaElementID);
-			
+			}
+			else
+			{
+				std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityNodeActivationGroup>(container);
+				assert(castedContainer);
+				return std::shared_ptr<PSCS::Semantics::Actions::CS_AddStructuralFeatureValueActionActivation>(this->createCS_AddStructuralFeatureValueActionActivation_in_Group(castedContainer,metaElementID));
+			}
 		}
 		case PSCSPackage::CS_CALLEVENTEXECUTION_CLASS:
 		{
@@ -119,23 +154,55 @@ std::shared_ptr<ecore::EObject> PSCSFactoryImpl::create(const int metaElementID,
 		}
 		case PSCSPackage::CS_CALLOPERATIONACTIONACTIVATION_CLASS:
 		{
+			if (nullptr == container)
+			{
 				return this->createCS_CallOperationActionActivation(metaElementID);
-			
+			}
+			else
+			{
+				std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityNodeActivationGroup>(container);
+				assert(castedContainer);
+				return std::shared_ptr<PSCS::Semantics::Actions::CS_CallOperationActionActivation>(this->createCS_CallOperationActionActivation_in_Group(castedContainer,metaElementID));
+			}
 		}
 		case PSCSPackage::CS_CLEARSTRUCTURALFEATUREACTIONACTIVATION_CLASS:
 		{
+			if (nullptr == container)
+			{
 				return this->createCS_ClearStructuralFeatureActionActivation(metaElementID);
-			
+			}
+			else
+			{
+				std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityNodeActivationGroup>(container);
+				assert(castedContainer);
+				return std::shared_ptr<PSCS::Semantics::Actions::CS_ClearStructuralFeatureActionActivation>(this->createCS_ClearStructuralFeatureActionActivation_in_Group(castedContainer,metaElementID));
+			}
 		}
 		case PSCSPackage::CS_CREATELINKACTIONACTIVATION_CLASS:
 		{
+			if (nullptr == container)
+			{
 				return this->createCS_CreateLinkActionActivation(metaElementID);
-			
+			}
+			else
+			{
+				std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityNodeActivationGroup>(container);
+				assert(castedContainer);
+				return std::shared_ptr<PSCS::Semantics::Actions::CS_CreateLinkActionActivation>(this->createCS_CreateLinkActionActivation_in_Group(castedContainer,metaElementID));
+			}
 		}
 		case PSCSPackage::CS_CREATEOBJECTACTIONACTIVATION_CLASS:
 		{
+			if (nullptr == container)
+			{
 				return this->createCS_CreateObjectActionActivation(metaElementID);
-			
+			}
+			else
+			{
+				std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityNodeActivationGroup>(container);
+				assert(castedContainer);
+				return std::shared_ptr<PSCS::Semantics::Actions::CS_CreateObjectActionActivation>(this->createCS_CreateObjectActionActivation_in_Group(castedContainer,metaElementID));
+			}
 		}
 		case PSCSPackage::CS_DEFAULTCONSTRUCTSTRATEGY_CLASS:
 		{
@@ -159,13 +226,29 @@ std::shared_ptr<ecore::EObject> PSCSFactoryImpl::create(const int metaElementID,
 		}
 		case PSCSPackage::CS_EXECUTIONFACTORY_CLASS:
 		{
+			if (nullptr == container)
+			{
 				return this->createCS_ExecutionFactory(metaElementID);
-			
+			}
+			else
+			{
+				std::shared_ptr<fUML::Semantics::Loci::Locus> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Loci::Locus>(container);
+				assert(castedContainer);
+				return std::shared_ptr<PSCS::Semantics::Loci::CS_ExecutionFactory>(this->createCS_ExecutionFactory_in_Locus(castedContainer,metaElementID));
+			}
 		}
 		case PSCSPackage::CS_EXECUTOR_CLASS:
 		{
+			if (nullptr == container)
+			{
 				return this->createCS_Executor(metaElementID);
-			
+			}
+			else
+			{
+				std::shared_ptr<fUML::Semantics::Loci::Locus> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Loci::Locus>(container);
+				assert(castedContainer);
+				return std::shared_ptr<PSCS::Semantics::Loci::CS_Executor>(this->createCS_Executor_in_Locus(castedContainer,metaElementID));
+			}
 		}
 		case PSCSPackage::CS_INSTANCEVALUEEVALUATION_CLASS:
 		{
@@ -204,13 +287,29 @@ std::shared_ptr<ecore::EObject> PSCSFactoryImpl::create(const int metaElementID,
 		}
 		case PSCSPackage::CS_READEXTENTACTIONACTIVATION_CLASS:
 		{
+			if (nullptr == container)
+			{
 				return this->createCS_ReadExtentActionActivation(metaElementID);
-			
+			}
+			else
+			{
+				std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityNodeActivationGroup>(container);
+				assert(castedContainer);
+				return std::shared_ptr<PSCS::Semantics::Actions::CS_ReadExtentActionActivation>(this->createCS_ReadExtentActionActivation_in_Group(castedContainer,metaElementID));
+			}
 		}
 		case PSCSPackage::CS_READSELFACTIONACTIVATION_CLASS:
 		{
+			if (nullptr == container)
+			{
 				return this->createCS_ReadSelfActionActivation(metaElementID);
-			
+			}
+			else
+			{
+				std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityNodeActivationGroup>(container);
+				assert(castedContainer);
+				return std::shared_ptr<PSCS::Semantics::Actions::CS_ReadSelfActionActivation>(this->createCS_ReadSelfActionActivation_in_Group(castedContainer,metaElementID));
+			}
 		}
 		case PSCSPackage::CS_REFERENCE_CLASS:
 		{
@@ -219,13 +318,29 @@ std::shared_ptr<ecore::EObject> PSCSFactoryImpl::create(const int metaElementID,
 		}
 		case PSCSPackage::CS_REMOVESTRUCTURALFEATUREVALUEACTIONACTIVATION_CLASS:
 		{
+			if (nullptr == container)
+			{
 				return this->createCS_RemoveStructuralFeatureValueActionActivation(metaElementID);
-			
+			}
+			else
+			{
+				std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityNodeActivationGroup>(container);
+				assert(castedContainer);
+				return std::shared_ptr<PSCS::Semantics::Actions::CS_RemoveStructuralFeatureValueActionActivation>(this->createCS_RemoveStructuralFeatureValueActionActivation_in_Group(castedContainer,metaElementID));
+			}
 		}
 		case PSCSPackage::CS_SENDSIGNALACTIONACTIVATION_CLASS:
 		{
+			if (nullptr == container)
+			{
 				return this->createCS_SendSignalActionActivation(metaElementID);
-			
+			}
+			else
+			{
+				std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityNodeActivationGroup>(container);
+				assert(castedContainer);
+				return std::shared_ptr<PSCS::Semantics::Actions::CS_SendSignalActionActivation>(this->createCS_SendSignalActionActivation_in_Group(castedContainer,metaElementID));
+			}
 		}
 	default:
 	   	    std::cerr << __PRETTY_FUNCTION__ << " ID " << metaElementID <<" not found" << std::endl;
@@ -262,6 +377,18 @@ std::shared_ptr<PSCS::Semantics::Actions::CS_AcceptCallActionActivation> PSCSFac
 	element->setThisCS_AcceptCallActionActivationPtr(element);
 	return element;
 }
+std::shared_ptr<PSCS::Semantics::Actions::CS_AcceptCallActionActivation> PSCSFactoryImpl::createCS_AcceptCallActionActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group, const int metaElementID) const
+{
+	std::shared_ptr<PSCS::Semantics::Actions::CS_AcceptCallActionActivationImpl> element(new PSCS::Semantics::Actions::CS_AcceptCallActionActivationImpl(par_group));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_group.lock())
+	{
+			wp->getNodeActivations()->push_back(element);
+	}
+	element->setThisCS_AcceptCallActionActivationPtr(element);
+	return element;
+	
+}
 std::shared_ptr<PSCS::Semantics::Actions::CS_AcceptEventActionActivation> PSCSFactoryImpl::createCS_AcceptEventActionActivation(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<PSCS::Semantics::Actions::CS_AcceptEventActionActivationImpl> element(new PSCS::Semantics::Actions::CS_AcceptEventActionActivationImpl());
@@ -269,12 +396,36 @@ std::shared_ptr<PSCS::Semantics::Actions::CS_AcceptEventActionActivation> PSCSFa
 	element->setThisCS_AcceptEventActionActivationPtr(element);
 	return element;
 }
+std::shared_ptr<PSCS::Semantics::Actions::CS_AcceptEventActionActivation> PSCSFactoryImpl::createCS_AcceptEventActionActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group, const int metaElementID) const
+{
+	std::shared_ptr<PSCS::Semantics::Actions::CS_AcceptEventActionActivationImpl> element(new PSCS::Semantics::Actions::CS_AcceptEventActionActivationImpl(par_group));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_group.lock())
+	{
+			wp->getNodeActivations()->push_back(element);
+	}
+	element->setThisCS_AcceptEventActionActivationPtr(element);
+	return element;
+	
+}
 std::shared_ptr<PSCS::Semantics::Actions::CS_AddStructuralFeatureValueActionActivation> PSCSFactoryImpl::createCS_AddStructuralFeatureValueActionActivation(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<PSCS::Semantics::Actions::CS_AddStructuralFeatureValueActionActivationImpl> element(new PSCS::Semantics::Actions::CS_AddStructuralFeatureValueActionActivationImpl());
 	element->setMetaElementID(metaElementID);
 	element->setThisCS_AddStructuralFeatureValueActionActivationPtr(element);
 	return element;
+}
+std::shared_ptr<PSCS::Semantics::Actions::CS_AddStructuralFeatureValueActionActivation> PSCSFactoryImpl::createCS_AddStructuralFeatureValueActionActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group, const int metaElementID) const
+{
+	std::shared_ptr<PSCS::Semantics::Actions::CS_AddStructuralFeatureValueActionActivationImpl> element(new PSCS::Semantics::Actions::CS_AddStructuralFeatureValueActionActivationImpl(par_group));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_group.lock())
+	{
+			wp->getNodeActivations()->push_back(element);
+	}
+	element->setThisCS_AddStructuralFeatureValueActionActivationPtr(element);
+	return element;
+	
 }
 std::shared_ptr<PSCS::Semantics::CommonBehavior::CS_CallEventExecution> PSCSFactoryImpl::createCS_CallEventExecution(const int metaElementID/*=-1*/) const
 {
@@ -290,12 +441,36 @@ std::shared_ptr<PSCS::Semantics::Actions::CS_CallOperationActionActivation> PSCS
 	element->setThisCS_CallOperationActionActivationPtr(element);
 	return element;
 }
+std::shared_ptr<PSCS::Semantics::Actions::CS_CallOperationActionActivation> PSCSFactoryImpl::createCS_CallOperationActionActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group, const int metaElementID) const
+{
+	std::shared_ptr<PSCS::Semantics::Actions::CS_CallOperationActionActivationImpl> element(new PSCS::Semantics::Actions::CS_CallOperationActionActivationImpl(par_group));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_group.lock())
+	{
+			wp->getNodeActivations()->push_back(element);
+	}
+	element->setThisCS_CallOperationActionActivationPtr(element);
+	return element;
+	
+}
 std::shared_ptr<PSCS::Semantics::Actions::CS_ClearStructuralFeatureActionActivation> PSCSFactoryImpl::createCS_ClearStructuralFeatureActionActivation(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<PSCS::Semantics::Actions::CS_ClearStructuralFeatureActionActivationImpl> element(new PSCS::Semantics::Actions::CS_ClearStructuralFeatureActionActivationImpl());
 	element->setMetaElementID(metaElementID);
 	element->setThisCS_ClearStructuralFeatureActionActivationPtr(element);
 	return element;
+}
+std::shared_ptr<PSCS::Semantics::Actions::CS_ClearStructuralFeatureActionActivation> PSCSFactoryImpl::createCS_ClearStructuralFeatureActionActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group, const int metaElementID) const
+{
+	std::shared_ptr<PSCS::Semantics::Actions::CS_ClearStructuralFeatureActionActivationImpl> element(new PSCS::Semantics::Actions::CS_ClearStructuralFeatureActionActivationImpl(par_group));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_group.lock())
+	{
+			wp->getNodeActivations()->push_back(element);
+	}
+	element->setThisCS_ClearStructuralFeatureActionActivationPtr(element);
+	return element;
+	
 }
 std::shared_ptr<PSCS::Semantics::Actions::CS_CreateLinkActionActivation> PSCSFactoryImpl::createCS_CreateLinkActionActivation(const int metaElementID/*=-1*/) const
 {
@@ -304,12 +479,36 @@ std::shared_ptr<PSCS::Semantics::Actions::CS_CreateLinkActionActivation> PSCSFac
 	element->setThisCS_CreateLinkActionActivationPtr(element);
 	return element;
 }
+std::shared_ptr<PSCS::Semantics::Actions::CS_CreateLinkActionActivation> PSCSFactoryImpl::createCS_CreateLinkActionActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group, const int metaElementID) const
+{
+	std::shared_ptr<PSCS::Semantics::Actions::CS_CreateLinkActionActivationImpl> element(new PSCS::Semantics::Actions::CS_CreateLinkActionActivationImpl(par_group));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_group.lock())
+	{
+			wp->getNodeActivations()->push_back(element);
+	}
+	element->setThisCS_CreateLinkActionActivationPtr(element);
+	return element;
+	
+}
 std::shared_ptr<PSCS::Semantics::Actions::CS_CreateObjectActionActivation> PSCSFactoryImpl::createCS_CreateObjectActionActivation(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<PSCS::Semantics::Actions::CS_CreateObjectActionActivationImpl> element(new PSCS::Semantics::Actions::CS_CreateObjectActionActivationImpl());
 	element->setMetaElementID(metaElementID);
 	element->setThisCS_CreateObjectActionActivationPtr(element);
 	return element;
+}
+std::shared_ptr<PSCS::Semantics::Actions::CS_CreateObjectActionActivation> PSCSFactoryImpl::createCS_CreateObjectActionActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group, const int metaElementID) const
+{
+	std::shared_ptr<PSCS::Semantics::Actions::CS_CreateObjectActionActivationImpl> element(new PSCS::Semantics::Actions::CS_CreateObjectActionActivationImpl(par_group));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_group.lock())
+	{
+			wp->getNodeActivations()->push_back(element);
+	}
+	element->setThisCS_CreateObjectActionActivationPtr(element);
+	return element;
+	
 }
 std::shared_ptr<PSCS::Semantics::Actions::CS_DefaultConstructStrategy> PSCSFactoryImpl::createCS_DefaultConstructStrategy(const int metaElementID/*=-1*/) const
 {
@@ -346,12 +545,36 @@ std::shared_ptr<PSCS::Semantics::Loci::CS_ExecutionFactory> PSCSFactoryImpl::cre
 	element->setThisCS_ExecutionFactoryPtr(element);
 	return element;
 }
+std::shared_ptr<PSCS::Semantics::Loci::CS_ExecutionFactory> PSCSFactoryImpl::createCS_ExecutionFactory_in_Locus(std::weak_ptr<fUML::Semantics::Loci::Locus > par_locus, const int metaElementID) const
+{
+	std::shared_ptr<PSCS::Semantics::Loci::CS_ExecutionFactoryImpl> element(new PSCS::Semantics::Loci::CS_ExecutionFactoryImpl(par_locus));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_locus.lock())
+	{
+			wp->setFactory(element);
+	}
+	element->setThisCS_ExecutionFactoryPtr(element);
+	return element;
+	
+}
 std::shared_ptr<PSCS::Semantics::Loci::CS_Executor> PSCSFactoryImpl::createCS_Executor(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<PSCS::Semantics::Loci::CS_ExecutorImpl> element(new PSCS::Semantics::Loci::CS_ExecutorImpl());
 	element->setMetaElementID(metaElementID);
 	element->setThisCS_ExecutorPtr(element);
 	return element;
+}
+std::shared_ptr<PSCS::Semantics::Loci::CS_Executor> PSCSFactoryImpl::createCS_Executor_in_Locus(std::weak_ptr<fUML::Semantics::Loci::Locus > par_locus, const int metaElementID) const
+{
+	std::shared_ptr<PSCS::Semantics::Loci::CS_ExecutorImpl> element(new PSCS::Semantics::Loci::CS_ExecutorImpl(par_locus));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_locus.lock())
+	{
+			wp->setExecutor(element);
+	}
+	element->setThisCS_ExecutorPtr(element);
+	return element;
+	
 }
 std::shared_ptr<PSCS::Semantics::Classification::CS_InstanceValueEvaluation> PSCSFactoryImpl::createCS_InstanceValueEvaluation(const int metaElementID/*=-1*/) const
 {
@@ -409,12 +632,36 @@ std::shared_ptr<PSCS::Semantics::Actions::CS_ReadExtentActionActivation> PSCSFac
 	element->setThisCS_ReadExtentActionActivationPtr(element);
 	return element;
 }
+std::shared_ptr<PSCS::Semantics::Actions::CS_ReadExtentActionActivation> PSCSFactoryImpl::createCS_ReadExtentActionActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group, const int metaElementID) const
+{
+	std::shared_ptr<PSCS::Semantics::Actions::CS_ReadExtentActionActivationImpl> element(new PSCS::Semantics::Actions::CS_ReadExtentActionActivationImpl(par_group));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_group.lock())
+	{
+			wp->getNodeActivations()->push_back(element);
+	}
+	element->setThisCS_ReadExtentActionActivationPtr(element);
+	return element;
+	
+}
 std::shared_ptr<PSCS::Semantics::Actions::CS_ReadSelfActionActivation> PSCSFactoryImpl::createCS_ReadSelfActionActivation(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<PSCS::Semantics::Actions::CS_ReadSelfActionActivationImpl> element(new PSCS::Semantics::Actions::CS_ReadSelfActionActivationImpl());
 	element->setMetaElementID(metaElementID);
 	element->setThisCS_ReadSelfActionActivationPtr(element);
 	return element;
+}
+std::shared_ptr<PSCS::Semantics::Actions::CS_ReadSelfActionActivation> PSCSFactoryImpl::createCS_ReadSelfActionActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group, const int metaElementID) const
+{
+	std::shared_ptr<PSCS::Semantics::Actions::CS_ReadSelfActionActivationImpl> element(new PSCS::Semantics::Actions::CS_ReadSelfActionActivationImpl(par_group));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_group.lock())
+	{
+			wp->getNodeActivations()->push_back(element);
+	}
+	element->setThisCS_ReadSelfActionActivationPtr(element);
+	return element;
+	
 }
 std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> PSCSFactoryImpl::createCS_Reference(const int metaElementID/*=-1*/) const
 {
@@ -430,12 +677,36 @@ std::shared_ptr<PSCS::Semantics::Actions::CS_RemoveStructuralFeatureValueActionA
 	element->setThisCS_RemoveStructuralFeatureValueActionActivationPtr(element);
 	return element;
 }
+std::shared_ptr<PSCS::Semantics::Actions::CS_RemoveStructuralFeatureValueActionActivation> PSCSFactoryImpl::createCS_RemoveStructuralFeatureValueActionActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group, const int metaElementID) const
+{
+	std::shared_ptr<PSCS::Semantics::Actions::CS_RemoveStructuralFeatureValueActionActivationImpl> element(new PSCS::Semantics::Actions::CS_RemoveStructuralFeatureValueActionActivationImpl(par_group));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_group.lock())
+	{
+			wp->getNodeActivations()->push_back(element);
+	}
+	element->setThisCS_RemoveStructuralFeatureValueActionActivationPtr(element);
+	return element;
+	
+}
 std::shared_ptr<PSCS::Semantics::Actions::CS_SendSignalActionActivation> PSCSFactoryImpl::createCS_SendSignalActionActivation(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<PSCS::Semantics::Actions::CS_SendSignalActionActivationImpl> element(new PSCS::Semantics::Actions::CS_SendSignalActionActivationImpl());
 	element->setMetaElementID(metaElementID);
 	element->setThisCS_SendSignalActionActivationPtr(element);
 	return element;
+}
+std::shared_ptr<PSCS::Semantics::Actions::CS_SendSignalActionActivation> PSCSFactoryImpl::createCS_SendSignalActionActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group, const int metaElementID) const
+{
+	std::shared_ptr<PSCS::Semantics::Actions::CS_SendSignalActionActivationImpl> element(new PSCS::Semantics::Actions::CS_SendSignalActionActivationImpl(par_group));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_group.lock())
+	{
+			wp->getNodeActivations()->push_back(element);
+	}
+	element->setThisCS_SendSignalActionActivationPtr(element);
+	return element;
+	
 }
 
 std::shared_ptr<PSCSPackage> PSCSFactoryImpl::getPSCSPackage() const

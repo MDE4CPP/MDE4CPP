@@ -18,11 +18,14 @@
 #include <iostream>
 #include <sstream>
 
+#include "abstractDataTypes/Bag.hpp"
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "PSCS/impl/PSCSPackageImpl.hpp"
+#include "PSCS/Semantics/CommonBehavior/CS_EventOccurrence.hpp"
+#include "fUML/FUMLFactory.hpp"
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -33,6 +36,24 @@
 #include <exception> // used in Persistence
 
 #include "PSCS/Semantics/StructuredClassifiers/CS_InteractionPoint.hpp"
+
+#include "fUML/Semantics/CommonBehavior/CallEventExecution.hpp"
+
+#include "uml/Classifier.hpp"
+
+#include "fUML/Semantics/CommonBehavior/EventOccurrence.hpp"
+
+#include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
+
+#include "fUML/Semantics/Loci/Locus.hpp"
+
+#include "fUML/Semantics/StructuredClassifiers/Object.hpp"
+
+#include "fUML/Semantics/CommonBehavior/ObjectActivation.hpp"
+
+#include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
+
+#include "fUML/Semantics/Values/Value.hpp"
 
 #include "ecore/EcorePackage.hpp"
 #include "ecore/EcoreFactory.hpp"
@@ -78,14 +99,45 @@ CS_CallEventExecutionImpl::CS_CallEventExecutionImpl(const CS_CallEventExecution
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy CS_CallEventExecution "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	m_callerSuspended = obj.getCallerSuspended();
 
 	//copy references with no containment (soft copy)
 	
+	m_context  = obj.getContext();
+
 	m_interactionPoint  = obj.getInteractionPoint();
+
+	m_locus  = obj.getLocus();
+
+	std::shared_ptr<Bag<uml::Classifier>> _types = obj.getTypes();
+	m_types.reset(new Bag<uml::Classifier>(*(obj.getTypes().get())));
 
 
 	//Clone references with containment (deep copy)
 
+	std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> _featureValuesList = obj.getFeatureValues();
+	for(std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> _featureValues : *_featureValuesList)
+	{
+		this->getFeatureValues()->add(std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue>(std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::FeatureValue>(_featureValues->copy())));
+	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_featureValues" << std::endl;
+	#endif
+	if(obj.getObjectActivation()!=nullptr)
+	{
+		m_objectActivation = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ObjectActivation>(obj.getObjectActivation()->copy());
+	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_objectActivation" << std::endl;
+	#endif
+	std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> _parameterValuesList = obj.getParameterValues();
+	for(std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> _parameterValues : *_parameterValuesList)
+	{
+		this->getParameterValues()->add(std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue>(std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ParameterValue>(_parameterValues->copy())));
+	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_parameterValues" << std::endl;
+	#endif
 
 }
 
@@ -108,22 +160,29 @@ std::shared_ptr<ecore::EClass> CS_CallEventExecutionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-Any CS_CallEventExecutionImpl::copy()
+
+
+std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> CS_CallEventExecutionImpl::createEventOccurrence()
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+		// Wrap the created event occurrence within a CS_EventOccurrence which
+	// references the behavior port on which the call was dispatched.
+	std::shared_ptr<PSCS::Semantics::CommonBehavior::CS_EventOccurrence> wrappingEventOccurrence = PSCS::PSCSFactory::eInstance()->createCS_EventOccurrence();
+	wrappingEventOccurrence->setInteractionPoint(this->getInteractionPoint());
+	wrappingEventOccurrence->setWrappedEventOccurrence(fUML::Semantics::CommonBehavior::CallEventExecutionImpl::createEventOccurrence());
+	return wrappingEventOccurrence;
+	//end of body
 }
 
-Any CS_CallEventExecutionImpl::createEventOccurrence()
+std::shared_ptr<fUML::Semantics::Values::Value> CS_CallEventExecutionImpl::new_()
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
-}
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Create a new call event execution.
 
-Any CS_CallEventExecutionImpl::new_()
-{
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+return PSCS::PSCSFactory::eInstance()->createCS_CallEventExecution();
+	//end of body
 }
 
 //*********************************
@@ -151,6 +210,7 @@ std::shared_ptr<CS_CallEventExecution> CS_CallEventExecutionImpl::getThisCS_Call
 void CS_CallEventExecutionImpl::setThisCS_CallEventExecutionPtr(std::weak_ptr<CS_CallEventExecution> thisCS_CallEventExecutionPtr)
 {
 	m_thisCS_CallEventExecutionPtr = thisCS_CallEventExecutionPtr;
+	setThisCallEventExecutionPtr(thisCS_CallEventExecutionPtr);
 }
 std::shared_ptr<ecore::EObject> CS_CallEventExecutionImpl::eContainer() const
 {
@@ -165,18 +225,18 @@ Any CS_CallEventExecutionImpl::eGet(int featureID, bool resolve, bool coreType) 
 	switch(featureID)
 	{
 		case PSCS::PSCSPackage::CS_CALLEVENTEXECUTION_ATTRIBUTE_INTERACTIONPOINT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getInteractionPoint())); //40
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getInteractionPoint())); //47
 	}
-	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
+	return fUML::Semantics::CommonBehavior::CallEventExecutionImpl::eGet(featureID, resolve, coreType);
 }
 bool CS_CallEventExecutionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
 		case PSCS::PSCSPackage::CS_CALLEVENTEXECUTION_ATTRIBUTE_INTERACTIONPOINT:
-			return getInteractionPoint() != nullptr; //40
+			return getInteractionPoint() != nullptr; //47
 	}
-	return ecore::EObjectImpl::internalEIsSet(featureID);
+	return fUML::Semantics::CommonBehavior::CallEventExecutionImpl::internalEIsSet(featureID);
 }
 bool CS_CallEventExecutionImpl::eSet(int featureID, Any newValue)
 {
@@ -187,12 +247,12 @@ bool CS_CallEventExecutionImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> _interactionPoint = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint>(_temp);
-			setInteractionPoint(_interactionPoint); //40
+			setInteractionPoint(_interactionPoint); //47
 			return true;
 		}
 	}
 
-	return ecore::EObjectImpl::eSet(featureID, newValue);
+	return fUML::Semantics::CommonBehavior::CallEventExecutionImpl::eSet(featureID, newValue);
 }
 
 //*********************************
@@ -237,14 +297,14 @@ void CS_CallEventExecutionImpl::loadAttributes(std::shared_ptr<persistence::inte
 		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
 	}
 
-	ecore::EObjectImpl::loadAttributes(loadHandler, attr_list);
+	fUML::Semantics::CommonBehavior::CallEventExecutionImpl::loadAttributes(loadHandler, attr_list);
 }
 
 void CS_CallEventExecutionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<PSCS::PSCSFactory> modelFactory)
 {
 
 
-	ecore::EObjectImpl::loadNode(nodeName, loadHandler, ecore::EcoreFactory::eInstance());
+	fUML::Semantics::CommonBehavior::CallEventExecutionImpl::loadNode(nodeName, loadHandler, fUML::FUMLFactory::eInstance());
 }
 
 void CS_CallEventExecutionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
@@ -263,15 +323,37 @@ void CS_CallEventExecutionImpl::resolveReferences(const int featureID, std::list
 			return;
 		}
 	}
-	ecore::EObjectImpl::resolveReferences(featureID, references);
+	fUML::Semantics::CommonBehavior::CallEventExecutionImpl::resolveReferences(featureID, references);
 }
 
 void CS_CallEventExecutionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	saveContent(saveHandler);
 
+	fUML::Semantics::CommonBehavior::CallEventExecutionImpl::saveContent(saveHandler);
+	
+	fUML::Semantics::CommonBehavior::ExecutionImpl::saveContent(saveHandler);
+	
+	fUML::Semantics::StructuredClassifiers::ObjectImpl::saveContent(saveHandler);
+	
+	fUML::Semantics::StructuredClassifiers::ExtensionalValueImpl::saveContent(saveHandler);
+	
+	fUML::Semantics::SimpleClassifiers::CompoundValueImpl::saveContent(saveHandler);
+	
+	fUML::Semantics::SimpleClassifiers::StructuredValueImpl::saveContent(saveHandler);
+	
+	fUML::Semantics::Values::ValueImpl::saveContent(saveHandler);
+	
+	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+	
+	
+	
+	
 	
 }
 

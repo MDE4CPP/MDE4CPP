@@ -45,7 +45,7 @@ namespace PSCS::Semantics::Actions
 			//*********************************
 			/*!
 			 */ 
-			virtual void addStructuralFeatureValue(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference>  context,std::shared_ptr<uml::Property>  feature,Any value) ;
+			virtual void addStructuralFeatureValue(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference>  context,std::shared_ptr<uml::Property>  feature,std::shared_ptr<fUML::Semantics::Values::Value>  value) ;
 			
 			/*!
 			 */ 
@@ -53,7 +53,11 @@ namespace PSCS::Semantics::Actions
 			
 			/*!
 			 */ 
-			virtual Any constructObject(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object>  context,std::shared_ptr<uml::Class>  type) ;
+			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> construct(std::shared_ptr<uml::Operation>  constructor,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object>  context) ;
+			
+			/*!
+			 */ 
+			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> constructObject(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object>  context,std::shared_ptr<uml::Class>  type) ;
 			
 			/*!
 			 */ 
@@ -71,7 +75,9 @@ namespace PSCS::Semantics::Actions
 			 */ 
 			virtual int getCardinality(std::shared_ptr<uml::ConnectorEnd>  end) ;
 			
-			
+			/*!
+			 */ 
+			virtual std::shared_ptr<uml::Association> getDefaultAssociation() ;
 			
 			/*!
 			 */ 
@@ -79,11 +85,11 @@ namespace PSCS::Semantics::Actions
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<Any> > getValuesFromConnectorEnd(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference>  context,std::shared_ptr<uml::ConnectorEnd>  end) ;
+			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value> > getValuesFromConnectorEnd(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference>  context,std::shared_ptr<uml::ConnectorEnd>  end) ;
 			
 			/*!
 			 */ 
-			virtual Any instantiateInterface(std::shared_ptr<uml::Interface>  interface,Any locus) ;
+			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> instantiateInterface(std::shared_ptr<uml::Interface>  interface,std::shared_ptr<fUML::Semantics::Loci::Locus>  locus) ;
 			
 			/*!
 			 */ 
@@ -116,11 +122,11 @@ namespace PSCS::Semantics::Actions
 			
 			/*!
 			 */
-			virtual std::shared_ptr<fUML::Locus > getLocus() const ;
+			virtual std::shared_ptr<fUML::Semantics::Loci::Locus > getLocus() const ;
 			
 			/*!
 			 */
-			virtual void setLocus(std::shared_ptr<fUML::Locus> _locus_locus) ;
+			virtual void setLocus(std::shared_ptr<fUML::Semantics::Loci::Locus> _locus_locus) ;
 							
 			
 			//*********************************

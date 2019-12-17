@@ -14,14 +14,12 @@
 #include "../CS_OpaqueExpressionEvaluation.hpp"
 
 #include "PSCS/impl/PSCSFactoryImpl.hpp"
-
-#include "ecore/impl/EObjectImpl.hpp"
+#include "fUML/Semantics/Values/impl/EvaluationImpl.hpp"
 
 //*********************************
 namespace PSCS::Semantics::Values 
 {
-	class CS_OpaqueExpressionEvaluationImpl :virtual public ecore::EObjectImpl,
-virtual public CS_OpaqueExpressionEvaluation 
+	class CS_OpaqueExpressionEvaluationImpl :virtual public fUML::Semantics::Values::EvaluationImpl, virtual public CS_OpaqueExpressionEvaluation 
 	{
 		public: 
 			CS_OpaqueExpressionEvaluationImpl(const CS_OpaqueExpressionEvaluationImpl & obj);
@@ -47,11 +45,11 @@ virtual public CS_OpaqueExpressionEvaluation
 			//*********************************
 			/*!
 			 */ 
-			virtual Any evaluate() ;
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> evaluate() ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<Any> > executeExpressionBehavior() ;
+			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value> > executeExpressionBehavior() ;
 			
 			
 			

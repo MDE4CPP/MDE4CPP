@@ -14,14 +14,12 @@
 #include "../CS_RemoveStructuralFeatureValueActionActivation.hpp"
 
 #include "PSCS/impl/PSCSFactoryImpl.hpp"
-
-#include "ecore/impl/EObjectImpl.hpp"
+#include "fUML/Semantics/Actions/impl/RemoveStructuralFeatureValueActivationImpl.hpp"
 
 //*********************************
 namespace PSCS::Semantics::Actions 
 {
-	class CS_RemoveStructuralFeatureValueActionActivationImpl :virtual public ecore::EObjectImpl,
-virtual public CS_RemoveStructuralFeatureValueActionActivation 
+	class CS_RemoveStructuralFeatureValueActionActivationImpl :virtual public fUML::Semantics::Actions::RemoveStructuralFeatureValueActivationImpl, virtual public CS_RemoveStructuralFeatureValueActionActivation 
 	{
 		public: 
 			CS_RemoveStructuralFeatureValueActionActivationImpl(const CS_RemoveStructuralFeatureValueActionActivationImpl & obj);
@@ -35,6 +33,10 @@ virtual public CS_RemoveStructuralFeatureValueActionActivation
 			CS_RemoveStructuralFeatureValueActionActivationImpl();
 			virtual std::shared_ptr<CS_RemoveStructuralFeatureValueActionActivation> getThisCS_RemoveStructuralFeatureValueActionActivationPtr() const;
 			virtual void setThisCS_RemoveStructuralFeatureValueActionActivationPtr(std::weak_ptr<CS_RemoveStructuralFeatureValueActionActivation> thisCS_RemoveStructuralFeatureValueActionActivationPtr);
+
+			//Additional constructors for the containments back reference
+			CS_RemoveStructuralFeatureValueActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group);
+
 
 
 
@@ -51,11 +53,11 @@ virtual public CS_RemoveStructuralFeatureValueActionActivation
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Link> > getLinksToDestroy(Any value,std::shared_ptr<uml::StructuralFeature>  feature,Any removedValue) ;
+			virtual std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Link> > getLinksToDestroy(std::shared_ptr<fUML::Semantics::SimpleClassifiers::StructuredValue>  value,std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<fUML::Semantics::Values::Value>  removedValue) ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<Any> > getPotentialLinkEnds(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference>  context,std::shared_ptr<uml::StructuralFeature>  feature) ;
+			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value> > getPotentialLinkEnds(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference>  context,std::shared_ptr<uml::StructuralFeature>  feature) ;
 			
 			
 			
@@ -72,7 +74,9 @@ virtual public CS_RemoveStructuralFeatureValueActionActivation
 			//*********************************
 			// Union Getter
 			//*********************************
-			 
+			/*!
+			 */
+			virtual std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> getPinActivation() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

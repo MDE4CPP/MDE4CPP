@@ -14,14 +14,12 @@
 #include "../CS_CallOperationActionActivation.hpp"
 
 #include "PSCS/impl/PSCSFactoryImpl.hpp"
-
-#include "ecore/impl/EObjectImpl.hpp"
+#include "fUML/Semantics/Actions/impl/CallOperationActionActivationImpl.hpp"
 
 //*********************************
 namespace PSCS::Semantics::Actions 
 {
-	class CS_CallOperationActionActivationImpl :virtual public ecore::EObjectImpl,
-virtual public CS_CallOperationActionActivation 
+	class CS_CallOperationActionActivationImpl :virtual public fUML::Semantics::Actions::CallOperationActionActivationImpl, virtual public CS_CallOperationActionActivation 
 	{
 		public: 
 			CS_CallOperationActionActivationImpl(const CS_CallOperationActionActivationImpl & obj);
@@ -35,6 +33,10 @@ virtual public CS_CallOperationActionActivation
 			CS_CallOperationActionActivationImpl();
 			virtual std::shared_ptr<CS_CallOperationActionActivation> getThisCS_CallOperationActionActivationPtr() const;
 			virtual void setThisCS_CallOperationActionActivationPtr(std::weak_ptr<CS_CallOperationActionActivation> thisCS_CallOperationActionActivationPtr);
+
+			//Additional constructors for the containments back reference
+			CS_CallOperationActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group);
+
 
 
 
@@ -51,7 +53,7 @@ virtual public CS_CallOperationActionActivation
 			
 			/*!
 			 */ 
-			virtual Any getCallExecution() ;
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> getCallExecution() ;
 			
 			/*!
 			 */ 
@@ -80,7 +82,9 @@ virtual public CS_CallOperationActionActivation
 			//*********************************
 			// Union Getter
 			//*********************************
-			 
+			/*!
+			 */
+			virtual std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> getPinActivation() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

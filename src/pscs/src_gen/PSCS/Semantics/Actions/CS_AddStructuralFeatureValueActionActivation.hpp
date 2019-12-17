@@ -36,20 +36,58 @@ namespace PSCS
 }
 
 //Forward Declaration for used types
+namespace fUML::Semantics::Activities 
+{
+	class ActivityEdgeInstance;
+}
+
+namespace uml 
+{
+	class ActivityNode;
+}
+
+namespace fUML::Semantics::Activities 
+{
+	class ActivityNodeActivationGroup;
+}
+
+namespace fUML::Semantics::Actions 
+{
+	class AddStructuralFeatureValueActionActivation;
+}
+
+namespace fUML::Semantics::Actions 
+{
+	class InputPinActivation;
+}
+
+namespace fUML::Semantics::Actions 
+{
+	class OutputPinActivation;
+}
+
+namespace fUML::Semantics::Actions 
+{
+	class PinActivation;
+}
+
+namespace fUML::Semantics::Activities 
+{
+	class Token;
+}
 
 // base class includes
+#include "fUML/Semantics/Actions/AddStructuralFeatureValueActionActivation.hpp"
 
 // enum includes
 
-#include "ecore/EObject.hpp"
 
 //*********************************
 namespace PSCS::Semantics::Actions 
 {
 	/*!
 	 */
-	class CS_AddStructuralFeatureValueActionActivation : virtual public ecore::EObject 
-
+	class CS_AddStructuralFeatureValueActionActivation:virtual public fUML::Semantics::Actions::AddStructuralFeatureValueActionActivation
 	{
 		public:
  			CS_AddStructuralFeatureValueActionActivation(const CS_AddStructuralFeatureValueActionActivation &) {}
@@ -101,7 +139,9 @@ namespace PSCS::Semantics::Actions
 			//*********************************
 			// Union Getter
 			//*********************************
-			
+			/*!
+			 */
+			virtual std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> getPinActivation() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
 			

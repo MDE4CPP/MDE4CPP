@@ -14,14 +14,12 @@
 #include "../CS_CallEventExecution.hpp"
 
 #include "PSCS/impl/PSCSFactoryImpl.hpp"
-
-#include "ecore/impl/EObjectImpl.hpp"
+#include "fUML/Semantics/CommonBehavior/impl/CallEventExecutionImpl.hpp"
 
 //*********************************
 namespace PSCS::Semantics::CommonBehavior 
 {
-	class CS_CallEventExecutionImpl :virtual public ecore::EObjectImpl,
-virtual public CS_CallEventExecution 
+	class CS_CallEventExecutionImpl :virtual public fUML::Semantics::CommonBehavior::CallEventExecutionImpl, virtual public CS_CallEventExecution 
 	{
 		public: 
 			CS_CallEventExecutionImpl(const CS_CallEventExecutionImpl & obj);
@@ -45,17 +43,15 @@ virtual public CS_CallEventExecution
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
-			virtual Any copy() ;
+			
 			
 			/*!
 			 */ 
-			virtual Any createEventOccurrence() ;
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> createEventOccurrence() ;
 			
 			/*!
 			 */ 
-			virtual Any new_() ;
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> new_() ;
 			
 			
 			

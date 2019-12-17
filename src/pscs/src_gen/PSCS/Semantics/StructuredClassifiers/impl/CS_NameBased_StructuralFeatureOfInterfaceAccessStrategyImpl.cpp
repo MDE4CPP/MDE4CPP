@@ -24,6 +24,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "PSCS/impl/PSCSPackageImpl.hpp"
+#include "fUML/FUMLFactory.hpp"
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -33,7 +34,15 @@
 
 #include <exception> // used in Persistence
 
+#include "PSCS/Semantics/StructuredClassifiers/CS_Object.hpp"
+
 #include "PSCS/Semantics/StructuredClassifiers/CS_StructuralFeatureOfInterfaceAccessStrategy.hpp"
+
+#include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
+
+#include "uml/StructuralFeature.hpp"
+
+#include "fUML/Semantics/Values/Value.hpp"
 
 #include "ecore/EcorePackage.hpp"
 #include "ecore/EcoreFactory.hpp"
@@ -105,6 +114,54 @@ std::shared_ptr<ecore::EClass> CS_NameBased_StructuralFeatureOfInterfaceAccessSt
 //*********************************
 // Operations
 //*********************************
+std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> CS_NameBased_StructuralFeatureOfInterfaceAccessStrategyImpl::read(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object>  cs_Object,std::shared_ptr<uml::StructuralFeature>  feature)
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+			// returns a copy of the first feature value of cs_Object where the name
+	// of the corresponding feature matches the name of the feature given as a parameter
+	// Otherwise, returns an empty feature value
+	std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> featureValues = cs_Object->getFeatureValues();
+	std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> matchingFeatureValue = nullptr;
+	for(unsigned int i = 0; (i < featureValues->size()) && (matchingFeatureValue == nullptr); i++) {
+		std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> featureValue = featureValues->at(i);
+		if(featureValue->getFeature()->getName() == feature->getName()) {
+			matchingFeatureValue = featureValue;
+		}
+	}
+	if(matchingFeatureValue != nullptr) {
+		matchingFeatureValue = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::FeatureValue>(matchingFeatureValue->copy());
+		matchingFeatureValue->setFeature(feature);
+	}
+	else {
+		matchingFeatureValue = fUML::FUMLFactory::eInstance()->createFeatureValue();
+		matchingFeatureValue->setFeature(feature);
+		matchingFeatureValue->setPosition(0);
+	}
+	return matchingFeatureValue;
+	//end of body
+}
+
+void CS_NameBased_StructuralFeatureOfInterfaceAccessStrategyImpl::write(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object>  cs_Object,std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<Bag<fUML::Semantics::Values::Value> >  values,int position)
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+			// returns a copy of the first feature value of cs_Object where the name
+	// of the corresponding feature matches the name of the feature given as a parameter
+	// Otherwise, returns an empty feature value
+	std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> featureValues = cs_Object->getFeatureValues();
+	std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> matchingFeatureValue = nullptr;
+	for(unsigned int i = 0; (i < featureValues->size()) && (matchingFeatureValue == nullptr); i++) {
+		std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> featureValue = featureValues->at(i);
+		if(featureValue->getFeature()->getName() == feature->getName()) {
+			matchingFeatureValue = featureValue;
+		}
+	}
+	if(matchingFeatureValue != nullptr) {
+		cs_Object->assignFeatureValue(matchingFeatureValue->getFeature(), values, position);
+	}
+	//end of body
+}
 
 //*********************************
 // References
@@ -199,7 +256,10 @@ void CS_NameBased_StructuralFeatureOfInterfaceAccessStrategyImpl::save(std::shar
 
 	CS_StructuralFeatureOfInterfaceAccessStrategyImpl::saveContent(saveHandler);
 	
+	fUML::Semantics::Loci::SemanticStrategyImpl::saveContent(saveHandler);
+	
 	ecore::EObjectImpl::saveContent(saveHandler);
+	
 	
 }
 

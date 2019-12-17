@@ -14,14 +14,12 @@
 #include "../CS_AddStructuralFeatureValueActionActivation.hpp"
 
 #include "PSCS/impl/PSCSFactoryImpl.hpp"
-
-#include "ecore/impl/EObjectImpl.hpp"
+#include "fUML/Semantics/Actions/impl/AddStructuralFeatureValueActionActivationImpl.hpp"
 
 //*********************************
 namespace PSCS::Semantics::Actions 
 {
-	class CS_AddStructuralFeatureValueActionActivationImpl :virtual public ecore::EObjectImpl,
-virtual public CS_AddStructuralFeatureValueActionActivation 
+	class CS_AddStructuralFeatureValueActionActivationImpl :virtual public fUML::Semantics::Actions::AddStructuralFeatureValueActionActivationImpl, virtual public CS_AddStructuralFeatureValueActionActivation 
 	{
 		public: 
 			CS_AddStructuralFeatureValueActionActivationImpl(const CS_AddStructuralFeatureValueActionActivationImpl & obj);
@@ -35,6 +33,10 @@ virtual public CS_AddStructuralFeatureValueActionActivation
 			CS_AddStructuralFeatureValueActionActivationImpl();
 			virtual std::shared_ptr<CS_AddStructuralFeatureValueActionActivation> getThisCS_AddStructuralFeatureValueActionActivationPtr() const;
 			virtual void setThisCS_AddStructuralFeatureValueActionActivationPtr(std::weak_ptr<CS_AddStructuralFeatureValueActionActivation> thisCS_AddStructuralFeatureValueActionActivationPtr);
+
+			//Additional constructors for the containments back reference
+			CS_AddStructuralFeatureValueActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group);
+
 
 
 
@@ -68,7 +70,9 @@ virtual public CS_AddStructuralFeatureValueActionActivation
 			//*********************************
 			// Union Getter
 			//*********************************
-			 
+			/*!
+			 */
+			virtual std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> getPinActivation() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

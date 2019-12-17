@@ -14,14 +14,12 @@
 #include "../CS_Locus.hpp"
 
 #include "PSCS/impl/PSCSFactoryImpl.hpp"
-
-#include "ecore/impl/EObjectImpl.hpp"
+#include "fUML/Semantics/Loci/impl/LocusImpl.hpp"
 
 //*********************************
 namespace PSCS::Semantics::Loci 
 {
-	class CS_LocusImpl :virtual public ecore::EObjectImpl,
-virtual public CS_Locus 
+	class CS_LocusImpl :virtual public fUML::Semantics::Loci::LocusImpl, virtual public CS_Locus 
 	{
 		public: 
 			CS_LocusImpl(const CS_LocusImpl & obj);
@@ -47,7 +45,7 @@ virtual public CS_Locus
 			//*********************************
 			/*!
 			 */ 
-			virtual Any instantiate(std::shared_ptr<uml::Class>  type) ;
+			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> instantiate(std::shared_ptr<uml::Class>  type) ;
 			
 			
 			

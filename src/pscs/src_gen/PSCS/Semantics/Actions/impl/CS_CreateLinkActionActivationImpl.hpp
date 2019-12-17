@@ -14,14 +14,12 @@
 #include "../CS_CreateLinkActionActivation.hpp"
 
 #include "PSCS/impl/PSCSFactoryImpl.hpp"
-
-#include "ecore/impl/EObjectImpl.hpp"
+#include "fUML/Semantics/Actions/impl/CreateLinkActionActivationImpl.hpp"
 
 //*********************************
 namespace PSCS::Semantics::Actions 
 {
-	class CS_CreateLinkActionActivationImpl :virtual public ecore::EObjectImpl,
-virtual public CS_CreateLinkActionActivation 
+	class CS_CreateLinkActionActivationImpl :virtual public fUML::Semantics::Actions::CreateLinkActionActivationImpl, virtual public CS_CreateLinkActionActivation 
 	{
 		public: 
 			CS_CreateLinkActionActivationImpl(const CS_CreateLinkActionActivationImpl & obj);
@@ -35,6 +33,10 @@ virtual public CS_CreateLinkActionActivation
 			CS_CreateLinkActionActivationImpl();
 			virtual std::shared_ptr<CS_CreateLinkActionActivation> getThisCS_CreateLinkActionActivationPtr() const;
 			virtual void setThisCS_CreateLinkActionActivationPtr(std::weak_ptr<CS_CreateLinkActionActivation> thisCS_CreateLinkActionActivationPtr);
+
+			//Additional constructors for the containments back reference
+			CS_CreateLinkActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group);
+
 
 
 
@@ -64,7 +66,9 @@ virtual public CS_CreateLinkActionActivation
 			//*********************************
 			// Union Getter
 			//*********************************
-			 
+			/*!
+			 */
+			virtual std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> getPinActivation() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

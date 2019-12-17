@@ -41,24 +41,33 @@ namespace PSCS::Semantics::StructuredClassifiers
 	class CS_Object;
 }
 
+namespace fUML::Semantics::StructuredClassifiers 
+{
+	class Object;
+}
+
 namespace uml 
 {
 	class Operation;
 }
 
+namespace fUML::Semantics::Loci 
+{
+	class SemanticStrategy;
+}
+
 // base class includes
+#include "fUML/Semantics/Loci/SemanticStrategy.hpp"
 
 // enum includes
 
-#include "ecore/EObject.hpp"
 
 //*********************************
 namespace PSCS::Semantics::Actions 
 {
 	/*!
 	 */
-	class CS_ConstructStrategy : virtual public ecore::EObject 
-
+	class CS_ConstructStrategy:virtual public fUML::Semantics::Loci::SemanticStrategy
 	{
 		public:
  			CS_ConstructStrategy(const CS_ConstructStrategy &) {}
@@ -79,7 +88,7 @@ namespace PSCS::Semantics::Actions
 			//*********************************
 			/*!
 			 */ 
-			virtual Any construct(std::shared_ptr<uml::Operation>  constructor,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object>  context) = 0;
+			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> construct(std::shared_ptr<uml::Operation>  constructor,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object>  context) = 0;
 			
 			/*!
 			 */ 

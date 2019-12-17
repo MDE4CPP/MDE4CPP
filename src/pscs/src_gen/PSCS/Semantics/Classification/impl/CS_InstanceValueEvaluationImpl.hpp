@@ -14,14 +14,12 @@
 #include "../CS_InstanceValueEvaluation.hpp"
 
 #include "PSCS/impl/PSCSFactoryImpl.hpp"
-
-#include "ecore/impl/EObjectImpl.hpp"
+#include "fUML/Semantics/Classification/impl/InstanceValueEvaluationImpl.hpp"
 
 //*********************************
 namespace PSCS::Semantics::Classification 
 {
-	class CS_InstanceValueEvaluationImpl :virtual public ecore::EObjectImpl,
-virtual public CS_InstanceValueEvaluation 
+	class CS_InstanceValueEvaluationImpl :virtual public fUML::Semantics::Classification::InstanceValueEvaluationImpl, virtual public CS_InstanceValueEvaluation 
 	{
 		public: 
 			CS_InstanceValueEvaluationImpl(const CS_InstanceValueEvaluationImpl & obj);
@@ -47,7 +45,7 @@ virtual public CS_InstanceValueEvaluation
 			//*********************************
 			/*!
 			 */ 
-			virtual Any evaluate() ;
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> evaluate() ;
 			
 			
 			

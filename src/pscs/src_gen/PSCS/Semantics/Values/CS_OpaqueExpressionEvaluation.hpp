@@ -36,20 +36,38 @@ namespace PSCS
 }
 
 //Forward Declaration for used types
+namespace fUML::Semantics::Values 
+{
+	class Evaluation;
+}
+
+namespace fUML::Semantics::Loci 
+{
+	class Locus;
+}
+
+namespace fUML::Semantics::Values 
+{
+	class Value;
+}
+
+namespace uml 
+{
+	class ValueSpecification;
+}
 
 // base class includes
+#include "fUML/Semantics/Values/Evaluation.hpp"
 
 // enum includes
 
-#include "ecore/EObject.hpp"
 
 //*********************************
 namespace PSCS::Semantics::Values 
 {
 	/*!
 	 */
-	class CS_OpaqueExpressionEvaluation : virtual public ecore::EObject 
-
+	class CS_OpaqueExpressionEvaluation:virtual public fUML::Semantics::Values::Evaluation
 	{
 		public:
  			CS_OpaqueExpressionEvaluation(const CS_OpaqueExpressionEvaluation &) {}
@@ -70,11 +88,11 @@ namespace PSCS::Semantics::Values
 			//*********************************
 			/*!
 			 */ 
-			virtual Any evaluate() = 0;
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> evaluate() = 0;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<Any> > executeExpressionBehavior() = 0;
+			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value> > executeExpressionBehavior() = 0;
 			
 			
 			//*********************************

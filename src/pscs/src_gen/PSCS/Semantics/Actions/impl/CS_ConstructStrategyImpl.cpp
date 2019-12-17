@@ -23,6 +23,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "PSCS/impl/PSCSPackageImpl.hpp"
+#include "fUML/FUMLFactory.hpp"
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -34,7 +35,11 @@
 
 #include "PSCS/Semantics/StructuredClassifiers/CS_Object.hpp"
 
+#include "fUML/Semantics/StructuredClassifiers/Object.hpp"
+
 #include "uml/Operation.hpp"
+
+#include "fUML/Semantics/Loci/SemanticStrategy.hpp"
 
 #include "ecore/EcorePackage.hpp"
 #include "ecore/EcoreFactory.hpp"
@@ -106,7 +111,7 @@ std::shared_ptr<ecore::EClass> CS_ConstructStrategyImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-Any CS_ConstructStrategyImpl::construct(std::shared_ptr<uml::Operation>  constructor,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object>  context)
+std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> CS_ConstructStrategyImpl::construct(std::shared_ptr<uml::Operation>  constructor,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object>  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -114,8 +119,11 @@ Any CS_ConstructStrategyImpl::construct(std::shared_ptr<uml::Operation>  constru
 
 std::string CS_ConstructStrategyImpl::getName()
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+			// a CS_ConstructionStrategy is always named "constructStrategy"
+	return "constructStrategy";
+	//end of body
 }
 
 //*********************************
@@ -134,6 +142,7 @@ std::shared_ptr<CS_ConstructStrategy> CS_ConstructStrategyImpl::getThisCS_Constr
 void CS_ConstructStrategyImpl::setThisCS_ConstructStrategyPtr(std::weak_ptr<CS_ConstructStrategy> thisCS_ConstructStrategyPtr)
 {
 	m_thisCS_ConstructStrategyPtr = thisCS_ConstructStrategyPtr;
+	setThisSemanticStrategyPtr(thisCS_ConstructStrategyPtr);
 }
 std::shared_ptr<ecore::EObject> CS_ConstructStrategyImpl::eContainer() const
 {
@@ -148,14 +157,14 @@ Any CS_ConstructStrategyImpl::eGet(int featureID, bool resolve, bool coreType) c
 	switch(featureID)
 	{
 	}
-	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
+	return fUML::Semantics::Loci::SemanticStrategyImpl::eGet(featureID, resolve, coreType);
 }
 bool CS_ConstructStrategyImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
 	}
-	return ecore::EObjectImpl::internalEIsSet(featureID);
+	return fUML::Semantics::Loci::SemanticStrategyImpl::internalEIsSet(featureID);
 }
 bool CS_ConstructStrategyImpl::eSet(int featureID, Any newValue)
 {
@@ -163,7 +172,7 @@ bool CS_ConstructStrategyImpl::eSet(int featureID, Any newValue)
 	{
 	}
 
-	return ecore::EObjectImpl::eSet(featureID, newValue);
+	return fUML::Semantics::Loci::SemanticStrategyImpl::eSet(featureID, newValue);
 }
 
 //*********************************
@@ -189,25 +198,26 @@ void CS_ConstructStrategyImpl::load(std::shared_ptr<persistence::interfaces::XLo
 void CS_ConstructStrategyImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
 
-	ecore::EObjectImpl::loadAttributes(loadHandler, attr_list);
+	fUML::Semantics::Loci::SemanticStrategyImpl::loadAttributes(loadHandler, attr_list);
 }
 
 void CS_ConstructStrategyImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<PSCS::PSCSFactory> modelFactory)
 {
 
 
-	ecore::EObjectImpl::loadNode(nodeName, loadHandler, ecore::EcoreFactory::eInstance());
+	fUML::Semantics::Loci::SemanticStrategyImpl::loadNode(nodeName, loadHandler, fUML::FUMLFactory::eInstance());
 }
 
 void CS_ConstructStrategyImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
-	ecore::EObjectImpl::resolveReferences(featureID, references);
+	fUML::Semantics::Loci::SemanticStrategyImpl::resolveReferences(featureID, references);
 }
 
 void CS_ConstructStrategyImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	saveContent(saveHandler);
 
+	fUML::Semantics::Loci::SemanticStrategyImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
 	

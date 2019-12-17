@@ -14,14 +14,12 @@
 #include "../CS_ConstructStrategy.hpp"
 
 #include "PSCS/impl/PSCSFactoryImpl.hpp"
-
-#include "ecore/impl/EObjectImpl.hpp"
+#include "fUML/Semantics/Loci/impl/SemanticStrategyImpl.hpp"
 
 //*********************************
 namespace PSCS::Semantics::Actions 
 {
-	class CS_ConstructStrategyImpl :virtual public ecore::EObjectImpl,
-virtual public CS_ConstructStrategy 
+	class CS_ConstructStrategyImpl :virtual public fUML::Semantics::Loci::SemanticStrategyImpl, virtual public CS_ConstructStrategy 
 	{
 		public: 
 			CS_ConstructStrategyImpl(const CS_ConstructStrategyImpl & obj);
@@ -47,7 +45,7 @@ virtual public CS_ConstructStrategy
 			//*********************************
 			/*!
 			 */ 
-			virtual Any construct(std::shared_ptr<uml::Operation>  constructor,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object>  context) ;
+			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> construct(std::shared_ptr<uml::Operation>  constructor,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object>  context) ;
 			
 			/*!
 			 */ 

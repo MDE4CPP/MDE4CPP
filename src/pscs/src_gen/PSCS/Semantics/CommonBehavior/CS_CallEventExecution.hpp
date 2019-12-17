@@ -41,19 +41,63 @@ namespace PSCS::Semantics::StructuredClassifiers
 	class CS_InteractionPoint;
 }
 
+namespace fUML::Semantics::CommonBehavior 
+{
+	class CallEventExecution;
+}
+
+namespace uml 
+{
+	class Classifier;
+}
+
+namespace fUML::Semantics::CommonBehavior 
+{
+	class EventOccurrence;
+}
+
+namespace fUML::Semantics::SimpleClassifiers 
+{
+	class FeatureValue;
+}
+
+namespace fUML::Semantics::Loci 
+{
+	class Locus;
+}
+
+namespace fUML::Semantics::StructuredClassifiers 
+{
+	class Object;
+}
+
+namespace fUML::Semantics::CommonBehavior 
+{
+	class ObjectActivation;
+}
+
+namespace fUML::Semantics::CommonBehavior 
+{
+	class ParameterValue;
+}
+
+namespace fUML::Semantics::Values 
+{
+	class Value;
+}
+
 // base class includes
+#include "fUML/Semantics/CommonBehavior/CallEventExecution.hpp"
 
 // enum includes
 
-#include "ecore/EObject.hpp"
 
 //*********************************
 namespace PSCS::Semantics::CommonBehavior 
 {
 	/*!
 	 */
-	class CS_CallEventExecution : virtual public ecore::EObject 
-
+	class CS_CallEventExecution:virtual public fUML::Semantics::CommonBehavior::CallEventExecution
 	{
 		public:
  			CS_CallEventExecution(const CS_CallEventExecution &) {}
@@ -72,17 +116,15 @@ namespace PSCS::Semantics::CommonBehavior
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
-			virtual Any copy() = 0;
+			
 			
 			/*!
 			 */ 
-			virtual Any createEventOccurrence() = 0;
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> createEventOccurrence() = 0;
 			
 			/*!
 			 */ 
-			virtual Any new_() = 0;
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> new_() = 0;
 			
 			
 			//*********************************

@@ -16,8 +16,6 @@
 template<class T> class Bag;
 
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -44,19 +42,38 @@ namespace uml
 	class Class;
 }
 
+namespace fUML::Semantics::Loci 
+{
+	class Executor;
+}
+
+namespace fUML::Semantics::Loci 
+{
+	class Locus;
+}
+
+namespace fUML::Semantics::CommonBehavior 
+{
+	class ParameterValue;
+}
+
+namespace fUML::Semantics::StructuredClassifiers 
+{
+	class Reference;
+}
+
 // base class includes
+#include "fUML/Semantics/Loci/Executor.hpp"
 
 // enum includes
 
-#include "ecore/EObject.hpp"
 
 //*********************************
 namespace PSCS::Semantics::Loci 
 {
 	/*!
 	 */
-	class CS_Executor : virtual public ecore::EObject 
-
+	class CS_Executor:virtual public fUML::Semantics::Loci::Executor
 	{
 		public:
  			CS_Executor(const CS_Executor &) {}
@@ -77,7 +94,7 @@ namespace PSCS::Semantics::Loci
 			//*********************************
 			/*!
 			 */ 
-			virtual Any start(std::shared_ptr<uml::Class>  type,std::shared_ptr<Bag<Any> >  inputs) = 0;
+			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> start(std::shared_ptr<uml::Class>  type,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> >  inputs) = 0;
 			
 			
 			//*********************************

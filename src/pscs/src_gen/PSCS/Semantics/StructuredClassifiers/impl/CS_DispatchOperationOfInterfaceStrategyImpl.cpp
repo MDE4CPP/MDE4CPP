@@ -23,6 +23,11 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "PSCS/impl/PSCSPackageImpl.hpp"
+#include "fUML/FUMLFactory.hpp"
+
+#include "uml/Namespace.hpp"
+#include "uml/Interface.hpp"
+#include "uml/Parameter.hpp"
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -33,6 +38,8 @@
 #include <exception> // used in Persistence
 
 #include "uml/Operation.hpp"
+
+#include "fUML/Semantics/StructuredClassifiers/RedefinitionBasedDispatchStrategy.hpp"
 
 #include "ecore/EcorePackage.hpp"
 #include "ecore/EcoreFactory.hpp"
@@ -106,8 +113,33 @@ std::shared_ptr<ecore::EClass> CS_DispatchOperationOfInterfaceStrategyImpl::eSta
 //*********************************
 bool CS_DispatchOperationOfInterfaceStrategyImpl::operationsMatch(std::shared_ptr<uml::Operation>  ownedOperation,std::shared_ptr<uml::Operation>  baseOperation)
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+		// Override operationsMatch, in the case where baseOperation belongs 
+	// to an Interface.
+	// In this case, ownedOperation matches baseOperation if it has the same name and signature
+	// Otherwise, behaves like fUML RedefinitionBasedDispatchStrategy
+
+	bool matches = true;
+	if(std::dynamic_pointer_cast<uml::Interface>(baseOperation->getNamespace().lock()) != nullptr) {
+		matches = (baseOperation->getName()) == (ownedOperation->getName());
+		matches = matches && ((baseOperation->getOwnedParameter()->size()) == (ownedOperation->getOwnedParameter()->size()));
+		std::shared_ptr<Bag<uml::Parameter>> ownedOperationParameters = ownedOperation->getOwnedParameter();
+		std::shared_ptr<Bag<uml::Parameter>> baseOperationParameters = baseOperation->getOwnedParameter();
+		for(unsigned int i=0; (matches==true) && (i < ownedOperationParameters->size()); i++) {
+			std::shared_ptr<uml::Parameter> ownedParameter = ownedOperationParameters->at(i);
+			std::shared_ptr<uml::Parameter> baseParameter = baseOperationParameters->at(i);
+			matches = (ownedParameter->getType()) == (baseParameter->getType());
+			matches = (matches) && ((ownedParameter->getLower()) == (baseParameter->getLower()));
+			matches = (matches) && ((ownedParameter->getUpper()) == (baseParameter->getUpper()));
+			matches = (matches) && ((ownedParameter->getDirection()) == (baseParameter->getDirection()));
+		}
+	}
+	else {
+		matches = fUML::Semantics::StructuredClassifiers::RedefinitionBasedDispatchStrategyImpl::operationsMatch(ownedOperation, baseOperation);
+	}
+	return matches;
+	//end of body
 }
 
 //*********************************
@@ -126,6 +158,7 @@ std::shared_ptr<CS_DispatchOperationOfInterfaceStrategy> CS_DispatchOperationOfI
 void CS_DispatchOperationOfInterfaceStrategyImpl::setThisCS_DispatchOperationOfInterfaceStrategyPtr(std::weak_ptr<CS_DispatchOperationOfInterfaceStrategy> thisCS_DispatchOperationOfInterfaceStrategyPtr)
 {
 	m_thisCS_DispatchOperationOfInterfaceStrategyPtr = thisCS_DispatchOperationOfInterfaceStrategyPtr;
+	setThisRedefinitionBasedDispatchStrategyPtr(thisCS_DispatchOperationOfInterfaceStrategyPtr);
 }
 std::shared_ptr<ecore::EObject> CS_DispatchOperationOfInterfaceStrategyImpl::eContainer() const
 {
@@ -140,14 +173,14 @@ Any CS_DispatchOperationOfInterfaceStrategyImpl::eGet(int featureID, bool resolv
 	switch(featureID)
 	{
 	}
-	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
+	return fUML::Semantics::StructuredClassifiers::RedefinitionBasedDispatchStrategyImpl::eGet(featureID, resolve, coreType);
 }
 bool CS_DispatchOperationOfInterfaceStrategyImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
 	}
-	return ecore::EObjectImpl::internalEIsSet(featureID);
+	return fUML::Semantics::StructuredClassifiers::RedefinitionBasedDispatchStrategyImpl::internalEIsSet(featureID);
 }
 bool CS_DispatchOperationOfInterfaceStrategyImpl::eSet(int featureID, Any newValue)
 {
@@ -155,7 +188,7 @@ bool CS_DispatchOperationOfInterfaceStrategyImpl::eSet(int featureID, Any newVal
 	{
 	}
 
-	return ecore::EObjectImpl::eSet(featureID, newValue);
+	return fUML::Semantics::StructuredClassifiers::RedefinitionBasedDispatchStrategyImpl::eSet(featureID, newValue);
 }
 
 //*********************************
@@ -181,27 +214,34 @@ void CS_DispatchOperationOfInterfaceStrategyImpl::load(std::shared_ptr<persisten
 void CS_DispatchOperationOfInterfaceStrategyImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
 
-	ecore::EObjectImpl::loadAttributes(loadHandler, attr_list);
+	fUML::Semantics::StructuredClassifiers::RedefinitionBasedDispatchStrategyImpl::loadAttributes(loadHandler, attr_list);
 }
 
 void CS_DispatchOperationOfInterfaceStrategyImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<PSCS::PSCSFactory> modelFactory)
 {
 
 
-	ecore::EObjectImpl::loadNode(nodeName, loadHandler, ecore::EcoreFactory::eInstance());
+	fUML::Semantics::StructuredClassifiers::RedefinitionBasedDispatchStrategyImpl::loadNode(nodeName, loadHandler, fUML::FUMLFactory::eInstance());
 }
 
 void CS_DispatchOperationOfInterfaceStrategyImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
-	ecore::EObjectImpl::resolveReferences(featureID, references);
+	fUML::Semantics::StructuredClassifiers::RedefinitionBasedDispatchStrategyImpl::resolveReferences(featureID, references);
 }
 
 void CS_DispatchOperationOfInterfaceStrategyImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	saveContent(saveHandler);
 
+	fUML::Semantics::StructuredClassifiers::RedefinitionBasedDispatchStrategyImpl::saveContent(saveHandler);
+	
+	fUML::Semantics::StructuredClassifiers::DispatchStrategyImpl::saveContent(saveHandler);
+	
+	fUML::Semantics::Loci::SemanticStrategyImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
 	
 }
 

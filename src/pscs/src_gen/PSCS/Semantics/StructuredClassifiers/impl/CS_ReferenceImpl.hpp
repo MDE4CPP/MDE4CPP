@@ -14,14 +14,12 @@
 #include "../CS_Reference.hpp"
 
 #include "PSCS/impl/PSCSFactoryImpl.hpp"
-
-#include "ecore/impl/EObjectImpl.hpp"
+#include "fUML/Semantics/StructuredClassifiers/impl/ReferenceImpl.hpp"
 
 //*********************************
 namespace PSCS::Semantics::StructuredClassifiers 
 {
-	class CS_ReferenceImpl :virtual public ecore::EObjectImpl,
-virtual public CS_Reference 
+	class CS_ReferenceImpl :virtual public fUML::Semantics::StructuredClassifiers::ReferenceImpl, virtual public CS_Reference 
 	{
 		public: 
 			CS_ReferenceImpl(const CS_ReferenceImpl & obj);
@@ -45,41 +43,39 @@ virtual public CS_Reference
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
-			virtual Any copy() ;
+			
 			
 			/*!
 			 */ 
-			virtual Any dispatchIn(std::shared_ptr<uml::Operation>  operation,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint>  interactionPoint) ;
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> dispatchIn(std::shared_ptr<uml::Operation>  operation,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint>  interactionPoint) ;
 			
 			/*!
 			 */ 
-			virtual Any dispatchIn(std::shared_ptr<uml::Operation>  operation,std::shared_ptr<uml::Port>  onPort) ;
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> dispatchIn(std::shared_ptr<uml::Operation>  operation,std::shared_ptr<uml::Port>  onPort) ;
 			
 			/*!
 			 */ 
-			virtual Any dispatchOut(std::shared_ptr<uml::Operation>  operation,std::shared_ptr<uml::Port>  onPort) ;
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> dispatchOut(std::shared_ptr<uml::Operation>  operation,std::shared_ptr<uml::Port>  onPort) ;
 			
 			/*!
 			 */ 
-			virtual Any dispatchOut(std::shared_ptr<uml::Operation>  operation,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint>  interactionPoint) ;
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> dispatchOut(std::shared_ptr<uml::Operation>  operation,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint>  interactionPoint) ;
 			
 			/*!
 			 */ 
-			virtual void sendIn(Any eventOccurrence,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint>  interactionPoint) ;
+			virtual void sendIn(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>  eventOccurrence,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint>  interactionPoint) ;
 			
 			/*!
 			 */ 
-			virtual void sendIn(Any eventOccurrence,std::shared_ptr<uml::Port>  onPort) ;
+			virtual void sendIn(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>  eventOccurrence,std::shared_ptr<uml::Port>  onPort) ;
 			
 			/*!
 			 */ 
-			virtual void sendOut(Any eventOccurrence,std::shared_ptr<uml::Port>  onPort) ;
+			virtual void sendOut(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>  eventOccurrence,std::shared_ptr<uml::Port>  onPort) ;
 			
 			/*!
 			 */ 
-			virtual void sendOut(Any eventOccurrence,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint>  interactionPoint) ;
+			virtual void sendOut(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>  eventOccurrence,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint>  interactionPoint) ;
 			
 			
 			

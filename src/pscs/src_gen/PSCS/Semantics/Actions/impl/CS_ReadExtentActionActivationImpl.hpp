@@ -14,14 +14,12 @@
 #include "../CS_ReadExtentActionActivation.hpp"
 
 #include "PSCS/impl/PSCSFactoryImpl.hpp"
-
-#include "ecore/impl/EObjectImpl.hpp"
+#include "fUML/Semantics/Actions/impl/ReadExtentActionActivationImpl.hpp"
 
 //*********************************
 namespace PSCS::Semantics::Actions 
 {
-	class CS_ReadExtentActionActivationImpl :virtual public ecore::EObjectImpl,
-virtual public CS_ReadExtentActionActivation 
+	class CS_ReadExtentActionActivationImpl :virtual public fUML::Semantics::Actions::ReadExtentActionActivationImpl, virtual public CS_ReadExtentActionActivation 
 	{
 		public: 
 			CS_ReadExtentActionActivationImpl(const CS_ReadExtentActionActivationImpl & obj);
@@ -35,6 +33,10 @@ virtual public CS_ReadExtentActionActivation
 			CS_ReadExtentActionActivationImpl();
 			virtual std::shared_ptr<CS_ReadExtentActionActivation> getThisCS_ReadExtentActionActivationPtr() const;
 			virtual void setThisCS_ReadExtentActionActivationPtr(std::weak_ptr<CS_ReadExtentActionActivation> thisCS_ReadExtentActionActivationPtr);
+
+			//Additional constructors for the containments back reference
+			CS_ReadExtentActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group);
+
 
 
 
@@ -64,7 +66,9 @@ virtual public CS_ReadExtentActionActivation
 			//*********************************
 			// Union Getter
 			//*********************************
-			 
+			/*!
+			 */
+			virtual std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> getPinActivation() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

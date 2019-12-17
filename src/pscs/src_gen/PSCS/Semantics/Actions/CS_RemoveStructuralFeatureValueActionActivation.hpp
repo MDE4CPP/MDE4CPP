@@ -15,8 +15,6 @@
 // forward declarations
 
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -38,6 +36,21 @@ namespace PSCS
 }
 
 //Forward Declaration for used types
+namespace fUML::Semantics::Activities 
+{
+	class ActivityEdgeInstance;
+}
+
+namespace uml 
+{
+	class ActivityNode;
+}
+
+namespace fUML::Semantics::Activities 
+{
+	class ActivityNodeActivationGroup;
+}
+
 namespace PSCS::Semantics::StructuredClassifiers 
 {
 	class CS_Link;
@@ -48,24 +61,58 @@ namespace PSCS::Semantics::StructuredClassifiers
 	class CS_Reference;
 }
 
+namespace fUML::Semantics::Actions 
+{
+	class InputPinActivation;
+}
+
+namespace fUML::Semantics::Actions 
+{
+	class OutputPinActivation;
+}
+
+namespace fUML::Semantics::Actions 
+{
+	class PinActivation;
+}
+
+namespace fUML::Semantics::Actions 
+{
+	class RemoveStructuralFeatureValueActivation;
+}
+
 namespace uml 
 {
 	class StructuralFeature;
 }
 
+namespace fUML::Semantics::SimpleClassifiers 
+{
+	class StructuredValue;
+}
+
+namespace fUML::Semantics::Activities 
+{
+	class Token;
+}
+
+namespace fUML::Semantics::Values 
+{
+	class Value;
+}
+
 // base class includes
+#include "fUML/Semantics/Actions/RemoveStructuralFeatureValueActivation.hpp"
 
 // enum includes
 
-#include "ecore/EObject.hpp"
 
 //*********************************
 namespace PSCS::Semantics::Actions 
 {
 	/*!
 	 */
-	class CS_RemoveStructuralFeatureValueActionActivation : virtual public ecore::EObject 
-
+	class CS_RemoveStructuralFeatureValueActionActivation:virtual public fUML::Semantics::Actions::RemoveStructuralFeatureValueActivation
 	{
 		public:
  			CS_RemoveStructuralFeatureValueActionActivation(const CS_RemoveStructuralFeatureValueActionActivation &) {}
@@ -90,11 +137,11 @@ namespace PSCS::Semantics::Actions
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Link> > getLinksToDestroy(Any value,std::shared_ptr<uml::StructuralFeature>  feature,Any removedValue) = 0;
+			virtual std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Link> > getLinksToDestroy(std::shared_ptr<fUML::Semantics::SimpleClassifiers::StructuredValue>  value,std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<fUML::Semantics::Values::Value>  removedValue) = 0;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<Any> > getPotentialLinkEnds(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference>  context,std::shared_ptr<uml::StructuralFeature>  feature) = 0;
+			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value> > getPotentialLinkEnds(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference>  context,std::shared_ptr<uml::StructuralFeature>  feature) = 0;
 			
 			
 			//*********************************
@@ -121,7 +168,9 @@ namespace PSCS::Semantics::Actions
 			//*********************************
 			// Union Getter
 			//*********************************
-			
+			/*!
+			 */
+			virtual std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> getPinActivation() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
 			

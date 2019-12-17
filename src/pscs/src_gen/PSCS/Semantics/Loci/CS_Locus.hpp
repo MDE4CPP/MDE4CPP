@@ -41,19 +41,43 @@ namespace uml
 	class Class;
 }
 
+namespace fUML::Semantics::Loci 
+{
+	class ExecutionFactory;
+}
+
+namespace fUML::Semantics::Loci 
+{
+	class Executor;
+}
+
+namespace fUML::Semantics::StructuredClassifiers 
+{
+	class ExtensionalValue;
+}
+
+namespace fUML::Semantics::Loci 
+{
+	class Locus;
+}
+
+namespace fUML::Semantics::StructuredClassifiers 
+{
+	class Object;
+}
+
 // base class includes
+#include "fUML/Semantics/Loci/Locus.hpp"
 
 // enum includes
 
-#include "ecore/EObject.hpp"
 
 //*********************************
 namespace PSCS::Semantics::Loci 
 {
 	/*!
 	 */
-	class CS_Locus : virtual public ecore::EObject 
-
+	class CS_Locus:virtual public fUML::Semantics::Loci::Locus
 	{
 		public:
  			CS_Locus(const CS_Locus &) {}
@@ -74,7 +98,7 @@ namespace PSCS::Semantics::Loci
 			//*********************************
 			/*!
 			 */ 
-			virtual Any instantiate(std::shared_ptr<uml::Class>  type) = 0;
+			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> instantiate(std::shared_ptr<uml::Class>  type) = 0;
 			
 			
 			//*********************************

@@ -14,14 +14,12 @@
 #include "../CS_ReadSelfActionActivation.hpp"
 
 #include "PSCS/impl/PSCSFactoryImpl.hpp"
-
-#include "ecore/impl/EObjectImpl.hpp"
+#include "fUML/Semantics/Actions/impl/ReadSelfActionActivationImpl.hpp"
 
 //*********************************
 namespace PSCS::Semantics::Actions 
 {
-	class CS_ReadSelfActionActivationImpl :virtual public ecore::EObjectImpl,
-virtual public CS_ReadSelfActionActivation 
+	class CS_ReadSelfActionActivationImpl :virtual public fUML::Semantics::Actions::ReadSelfActionActivationImpl, virtual public CS_ReadSelfActionActivation 
 	{
 		public: 
 			CS_ReadSelfActionActivationImpl(const CS_ReadSelfActionActivationImpl & obj);
@@ -35,6 +33,10 @@ virtual public CS_ReadSelfActionActivation
 			CS_ReadSelfActionActivationImpl();
 			virtual std::shared_ptr<CS_ReadSelfActionActivation> getThisCS_ReadSelfActionActivationPtr() const;
 			virtual void setThisCS_ReadSelfActionActivationPtr(std::weak_ptr<CS_ReadSelfActionActivation> thisCS_ReadSelfActionActivationPtr);
+
+			//Additional constructors for the containments back reference
+			CS_ReadSelfActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group);
+
 
 
 
@@ -64,7 +66,9 @@ virtual public CS_ReadSelfActionActivation
 			//*********************************
 			// Union Getter
 			//*********************************
-			 
+			/*!
+			 */
+			virtual std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> getPinActivation() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

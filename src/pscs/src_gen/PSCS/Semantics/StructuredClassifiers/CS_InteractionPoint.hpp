@@ -16,8 +16,6 @@
 template<class T> class Bag;
 
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -54,9 +52,29 @@ namespace uml
 	class Classifier;
 }
 
+namespace fUML::Semantics::CommonBehavior 
+{
+	class EventOccurrence;
+}
+
+namespace fUML::Semantics::CommonBehavior 
+{
+	class Execution;
+}
+
+namespace fUML::Semantics::StructuredClassifiers 
+{
+	class Object;
+}
+
 namespace uml 
 {
 	class Operation;
+}
+
+namespace fUML::Semantics::CommonBehavior 
+{
+	class ParameterValue;
 }
 
 namespace uml 
@@ -64,19 +82,23 @@ namespace uml
 	class Port;
 }
 
+namespace fUML::Semantics::StructuredClassifiers 
+{
+	class Reference;
+}
+
 // base class includes
+#include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
 
 // enum includes
 
-#include "ecore/EObject.hpp"
 
 //*********************************
 namespace PSCS::Semantics::StructuredClassifiers 
 {
 	/*!
 	 */
-	class CS_InteractionPoint : virtual public ecore::EObject 
-
+	class CS_InteractionPoint:virtual public fUML::Semantics::StructuredClassifiers::Reference
 	{
 		public:
  			CS_InteractionPoint(const CS_InteractionPoint &) {}
@@ -101,15 +123,15 @@ namespace PSCS::Semantics::StructuredClassifiers
 			
 			/*!
 			 */ 
-			virtual Any dispatch(std::shared_ptr<uml::Operation>  operation) = 0;
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> dispatch(std::shared_ptr<uml::Operation>  operation) = 0;
 			
 			/*!
 			 */ 
-			virtual void send(Any eventOccurrence) = 0;
+			virtual void send(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>  eventOccurrence) = 0;
 			
 			/*!
 			 */ 
-			virtual void startBehavior(std::shared_ptr<uml::Class>  classifier,std::shared_ptr<Bag<Any> >  inputs) = 0;
+			virtual void startBehavior(std::shared_ptr<uml::Class>  classifier,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> >  inputs) = 0;
 			
 			
 			//*********************************

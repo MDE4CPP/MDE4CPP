@@ -36,20 +36,34 @@ namespace PSCS
 
 			//Creator functions
 			virtual std::shared_ptr<PSCS::Semantics::Actions::CS_AcceptCallActionActivation> createCS_AcceptCallActionActivation(const int metaElementID=-1) const ;
+			//Add containing object
+			virtual std::shared_ptr<PSCS::Semantics::Actions::CS_AcceptCallActionActivation> createCS_AcceptCallActionActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group, const int metaElementID=-1) const ;
 			
 			virtual std::shared_ptr<PSCS::Semantics::Actions::CS_AcceptEventActionActivation> createCS_AcceptEventActionActivation(const int metaElementID=-1) const ;
+			//Add containing object
+			virtual std::shared_ptr<PSCS::Semantics::Actions::CS_AcceptEventActionActivation> createCS_AcceptEventActionActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group, const int metaElementID=-1) const ;
 			
 			virtual std::shared_ptr<PSCS::Semantics::Actions::CS_AddStructuralFeatureValueActionActivation> createCS_AddStructuralFeatureValueActionActivation(const int metaElementID=-1) const ;
+			//Add containing object
+			virtual std::shared_ptr<PSCS::Semantics::Actions::CS_AddStructuralFeatureValueActionActivation> createCS_AddStructuralFeatureValueActionActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group, const int metaElementID=-1) const ;
 			
 			virtual std::shared_ptr<PSCS::Semantics::CommonBehavior::CS_CallEventExecution> createCS_CallEventExecution(const int metaElementID=-1) const ;
 			
 			virtual std::shared_ptr<PSCS::Semantics::Actions::CS_CallOperationActionActivation> createCS_CallOperationActionActivation(const int metaElementID=-1) const ;
+			//Add containing object
+			virtual std::shared_ptr<PSCS::Semantics::Actions::CS_CallOperationActionActivation> createCS_CallOperationActionActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group, const int metaElementID=-1) const ;
 			
 			virtual std::shared_ptr<PSCS::Semantics::Actions::CS_ClearStructuralFeatureActionActivation> createCS_ClearStructuralFeatureActionActivation(const int metaElementID=-1) const ;
+			//Add containing object
+			virtual std::shared_ptr<PSCS::Semantics::Actions::CS_ClearStructuralFeatureActionActivation> createCS_ClearStructuralFeatureActionActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group, const int metaElementID=-1) const ;
 			
 			virtual std::shared_ptr<PSCS::Semantics::Actions::CS_CreateLinkActionActivation> createCS_CreateLinkActionActivation(const int metaElementID=-1) const ;
+			//Add containing object
+			virtual std::shared_ptr<PSCS::Semantics::Actions::CS_CreateLinkActionActivation> createCS_CreateLinkActionActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group, const int metaElementID=-1) const ;
 			
 			virtual std::shared_ptr<PSCS::Semantics::Actions::CS_CreateObjectActionActivation> createCS_CreateObjectActionActivation(const int metaElementID=-1) const ;
+			//Add containing object
+			virtual std::shared_ptr<PSCS::Semantics::Actions::CS_CreateObjectActionActivation> createCS_CreateObjectActionActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group, const int metaElementID=-1) const ;
 			
 			virtual std::shared_ptr<PSCS::Semantics::Actions::CS_DefaultConstructStrategy> createCS_DefaultConstructStrategy(const int metaElementID=-1) const ;
 			
@@ -60,8 +74,12 @@ namespace PSCS
 			virtual std::shared_ptr<PSCS::Semantics::CommonBehavior::CS_EventOccurrence> createCS_EventOccurrence(const int metaElementID=-1) const ;
 			
 			virtual std::shared_ptr<PSCS::Semantics::Loci::CS_ExecutionFactory> createCS_ExecutionFactory(const int metaElementID=-1) const ;
+			//Add containing object
+			virtual std::shared_ptr<PSCS::Semantics::Loci::CS_ExecutionFactory> createCS_ExecutionFactory_in_Locus(std::weak_ptr<fUML::Semantics::Loci::Locus > par_locus, const int metaElementID=-1) const ;
 			
 			virtual std::shared_ptr<PSCS::Semantics::Loci::CS_Executor> createCS_Executor(const int metaElementID=-1) const ;
+			//Add containing object
+			virtual std::shared_ptr<PSCS::Semantics::Loci::CS_Executor> createCS_Executor_in_Locus(std::weak_ptr<fUML::Semantics::Loci::Locus > par_locus, const int metaElementID=-1) const ;
 			
 			virtual std::shared_ptr<PSCS::Semantics::Classification::CS_InstanceValueEvaluation> createCS_InstanceValueEvaluation(const int metaElementID=-1) const ;
 			
@@ -78,14 +96,22 @@ namespace PSCS
 			virtual std::shared_ptr<PSCS::Semantics::Values::CS_OpaqueExpressionEvaluation> createCS_OpaqueExpressionEvaluation(const int metaElementID=-1) const ;
 			
 			virtual std::shared_ptr<PSCS::Semantics::Actions::CS_ReadExtentActionActivation> createCS_ReadExtentActionActivation(const int metaElementID=-1) const ;
+			//Add containing object
+			virtual std::shared_ptr<PSCS::Semantics::Actions::CS_ReadExtentActionActivation> createCS_ReadExtentActionActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group, const int metaElementID=-1) const ;
 			
 			virtual std::shared_ptr<PSCS::Semantics::Actions::CS_ReadSelfActionActivation> createCS_ReadSelfActionActivation(const int metaElementID=-1) const ;
+			//Add containing object
+			virtual std::shared_ptr<PSCS::Semantics::Actions::CS_ReadSelfActionActivation> createCS_ReadSelfActionActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group, const int metaElementID=-1) const ;
 			
 			virtual std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> createCS_Reference(const int metaElementID=-1) const ;
 			
 			virtual std::shared_ptr<PSCS::Semantics::Actions::CS_RemoveStructuralFeatureValueActionActivation> createCS_RemoveStructuralFeatureValueActionActivation(const int metaElementID=-1) const ;
+			//Add containing object
+			virtual std::shared_ptr<PSCS::Semantics::Actions::CS_RemoveStructuralFeatureValueActionActivation> createCS_RemoveStructuralFeatureValueActionActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group, const int metaElementID=-1) const ;
 			
 			virtual std::shared_ptr<PSCS::Semantics::Actions::CS_SendSignalActionActivation> createCS_SendSignalActionActivation(const int metaElementID=-1) const ;
+			//Add containing object
+			virtual std::shared_ptr<PSCS::Semantics::Actions::CS_SendSignalActionActivation> createCS_SendSignalActionActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group, const int metaElementID=-1) const ;
 			
 			
 

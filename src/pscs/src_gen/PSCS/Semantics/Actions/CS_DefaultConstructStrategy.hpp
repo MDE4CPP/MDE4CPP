@@ -16,8 +16,6 @@
 template<class T> class Bag;
 
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -79,14 +77,29 @@ namespace uml
 	class Interface;
 }
 
-namespace fUML 
+namespace fUML::Semantics::Loci 
 {
 	class Locus;
+}
+
+namespace fUML::Semantics::StructuredClassifiers 
+{
+	class Object;
+}
+
+namespace uml 
+{
+	class Operation;
 }
 
 namespace uml 
 {
 	class Property;
+}
+
+namespace fUML::Semantics::Values 
+{
+	class Value;
 }
 
 // base class includes
@@ -121,7 +134,7 @@ namespace PSCS::Semantics::Actions
 			//*********************************
 			/*!
 			 */ 
-			virtual void addStructuralFeatureValue(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference>  context,std::shared_ptr<uml::Property>  feature,Any value) = 0;
+			virtual void addStructuralFeatureValue(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference>  context,std::shared_ptr<uml::Property>  feature,std::shared_ptr<fUML::Semantics::Values::Value>  value) = 0;
 			
 			/*!
 			 */ 
@@ -129,7 +142,11 @@ namespace PSCS::Semantics::Actions
 			
 			/*!
 			 */ 
-			virtual Any constructObject(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object>  context,std::shared_ptr<uml::Class>  type) = 0;
+			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> construct(std::shared_ptr<uml::Operation>  constructor,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object>  context) = 0;
+			
+			/*!
+			 */ 
+			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> constructObject(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object>  context,std::shared_ptr<uml::Class>  type) = 0;
 			
 			/*!
 			 */ 
@@ -147,7 +164,9 @@ namespace PSCS::Semantics::Actions
 			 */ 
 			virtual int getCardinality(std::shared_ptr<uml::ConnectorEnd>  end) = 0;
 			
-			
+			/*!
+			 */ 
+			virtual std::shared_ptr<uml::Association> getDefaultAssociation() = 0;
 			
 			/*!
 			 */ 
@@ -155,11 +174,11 @@ namespace PSCS::Semantics::Actions
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<Any> > getValuesFromConnectorEnd(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference>  context,std::shared_ptr<uml::ConnectorEnd>  end) = 0;
+			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value> > getValuesFromConnectorEnd(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference>  context,std::shared_ptr<uml::ConnectorEnd>  end) = 0;
 			
 			/*!
 			 */ 
-			virtual Any instantiateInterface(std::shared_ptr<uml::Interface>  interface,Any locus) = 0;
+			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> instantiateInterface(std::shared_ptr<uml::Interface>  interface,std::shared_ptr<fUML::Semantics::Loci::Locus>  locus) = 0;
 			
 			/*!
 			 */ 
@@ -190,11 +209,11 @@ namespace PSCS::Semantics::Actions
 			
 			/*!
 			 */
-			virtual std::shared_ptr<fUML::Locus > getLocus() const = 0;
+			virtual std::shared_ptr<fUML::Semantics::Loci::Locus > getLocus() const = 0;
 			
 			/*!
 			 */
-			virtual void setLocus(std::shared_ptr<fUML::Locus> _locus_locus) = 0;
+			virtual void setLocus(std::shared_ptr<fUML::Semantics::Loci::Locus> _locus_locus) = 0;
 			
 
 		protected:
@@ -214,7 +233,7 @@ namespace PSCS::Semantics::Actions
 			std::shared_ptr<Bag<uml::Class>> m_generatedRealizingClasses;
 			/*!
 			 */
-			std::shared_ptr<fUML::Locus > m_locus;
+			std::shared_ptr<fUML::Semantics::Loci::Locus > m_locus;
 			
 
 		public:

@@ -46,14 +46,24 @@ namespace PSCS::Semantics::StructuredClassifiers
 	class CS_Reference;
 }
 
-namespace fUML 
+namespace fUML::Semantics::CommonBehavior 
 {
 	class EventOccurrence;
+}
+
+namespace fUML::Semantics::CommonBehavior 
+{
+	class ParameterValue;
 }
 
 namespace uml 
 {
 	class Port;
+}
+
+namespace fUML::Semantics::StructuredClassifiers 
+{
+	class Reference;
 }
 
 namespace uml 
@@ -62,18 +72,17 @@ namespace uml
 }
 
 // base class includes
+#include "fUML/Semantics/CommonBehavior/EventOccurrence.hpp"
 
 // enum includes
 
-#include "ecore/EObject.hpp"
 
 //*********************************
 namespace PSCS::Semantics::CommonBehavior 
 {
 	/*!
 	 */
-	class CS_EventOccurrence : virtual public ecore::EObject 
-
+	class CS_EventOccurrence:virtual public fUML::Semantics::CommonBehavior::EventOccurrence
 	{
 		public:
  			CS_EventOccurrence(const CS_EventOccurrence &) {}
@@ -98,7 +107,7 @@ namespace PSCS::Semantics::CommonBehavior
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<Any> > getParameterValues() = 0;
+			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > getParameterValues() = 0;
 			
 			/*!
 			 */ 
@@ -118,7 +127,7 @@ namespace PSCS::Semantics::CommonBehavior
 			//*********************************
 			/*!
 			 */ 
-			virtual bool getPropagationInward() const = 0;
+			virtual bool isPropagationInward() const = 0;
 			
 			/*!
 			 */ 
@@ -144,11 +153,11 @@ namespace PSCS::Semantics::CommonBehavior
 			virtual void setOnPort(std::shared_ptr<uml::Port> _onPort_onPort) = 0;
 			/*!
 			 */
-			virtual std::shared_ptr<fUML::EventOccurrence > getWrappedEventOccurrence() const = 0;
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence > getWrappedEventOccurrence() const = 0;
 			
 			/*!
 			 */
-			virtual void setWrappedEventOccurrence(std::shared_ptr<fUML::EventOccurrence> _wrappedEventOccurrence_wrappedEventOccurrence) = 0;
+			virtual void setWrappedEventOccurrence(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> _wrappedEventOccurrence_wrappedEventOccurrence) = 0;
 			
 
 		protected:
@@ -171,7 +180,7 @@ namespace PSCS::Semantics::CommonBehavior
 			std::shared_ptr<uml::Port > m_onPort;
 			/*!
 			 */
-			std::shared_ptr<fUML::EventOccurrence > m_wrappedEventOccurrence;
+			std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence > m_wrappedEventOccurrence;
 			
 
 		public:

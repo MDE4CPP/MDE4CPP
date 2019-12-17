@@ -41,19 +41,23 @@ namespace uml
 	class Operation;
 }
 
+namespace fUML::Semantics::StructuredClassifiers 
+{
+	class RedefinitionBasedDispatchStrategy;
+}
+
 // base class includes
+#include "fUML/Semantics/StructuredClassifiers/RedefinitionBasedDispatchStrategy.hpp"
 
 // enum includes
 
-#include "ecore/EObject.hpp"
 
 //*********************************
 namespace PSCS::Semantics::StructuredClassifiers 
 {
 	/*!
 	 */
-	class CS_DispatchOperationOfInterfaceStrategy : virtual public ecore::EObject 
-
+	class CS_DispatchOperationOfInterfaceStrategy:virtual public fUML::Semantics::StructuredClassifiers::RedefinitionBasedDispatchStrategy
 	{
 		public:
  			CS_DispatchOperationOfInterfaceStrategy(const CS_DispatchOperationOfInterfaceStrategy &) {}
