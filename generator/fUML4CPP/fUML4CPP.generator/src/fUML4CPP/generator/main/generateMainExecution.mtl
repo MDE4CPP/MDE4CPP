@@ -193,14 +193,18 @@ std::shared_ptr<Bag<fUML::ParameterValue> > pList(new Bag<fUML::ParameterValue>(
 //INput parameter [par.name/] 
 std::shared_ptr<fUML::ParameterValue> [par.name/]P(fumlFac->createParameterValue());
 [par.name/]P->setParameter([par.generatePackageGetterCall()/]);
-[par.generateOutputParameter()/]
-[if(par.type.supportedTypes())]
-[par.name/]Value->setValue([par.name.toLowerFirst()/]);
+[if (par.upper = 1)]
+[par.generateValue()/]
 [else]
-[par.name/]UmlLinker->setLocus(locus);
-[par.name/]Value->setReferent([par.name/]UmlLinker);
+Bag<B>::iterator iter = [par.name.toLowerFirst()/]List->begin();
+Bag<B>::iterator end = [par.name.toLowerFirst()/]List->end();
+while (iter != end)
+{
+	[par.type.generateCppType(false)/] [par.name.toLowerFirst()/][if (par.upper <> 1)]Temp[/if] = *iter;
+	[par.generateValue()/]
+	iter++;
+}
 [/if]
-[par.name/]P->getValues()->push_back([par.name/]Value);
 pList->push_back([par.name/]P);
 
 [/for]
@@ -218,3 +222,13 @@ std::shared_ptr<Bag<fUML::ParameterValue>> resultPList = locus->getExecutor()->e
 
 [/template]
 
+[template private generateValue(aParameter : Parameter)]
+[aParameter.generateOutputParameter()/]
+[if(aParameter.type.supportedTypes())]
+[aParameter.name/]Value->setValue([aParameter.name.toLowerFirst()/]);
+[else]
+[aParameter.name/]UmlLinker->setLocus(locus);
+[aParameter.name/]Value->setReferent([aParameter.name/]UmlLinker);
+[/if]
+[aParameter.name/]P->getValues()->push_back([aParameter.name/]Value);
+[/template]

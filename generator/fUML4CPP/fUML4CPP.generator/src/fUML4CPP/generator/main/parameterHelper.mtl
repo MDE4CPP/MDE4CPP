@@ -59,13 +59,10 @@
 //Here some additional info that might help you to find it: [name/] - type: [type/]
 [/template]
 
-[template private generateInputParameter(name : String, type : Type, index:Integer) ? (not type.supportedTypes()) ]
-std::shared_ptr<fUML::Reference> [name/]Value = std::dynamic_pointer_cast<fUML::Reference>(inputParameters->at([index/])->getValues()->front());
+[template private generateInputParameter(name : String, type : Type, index:Integer) ? (not (name.oclIsUndefined() or type.name.oclIsUndefined()))]
+std::shared_ptr<Bag<fUML::Value>> [name/]ValueList = inputParameters->at([index/])->getValues();
 [/template]
 
-[template private generateInputParameter(name : String, type : Type, index:Integer) ? (type.supportedTypes())]
-std::shared_ptr<fUML::[type.name/]Value> [name/]Value = std::dynamic_pointer_cast<fUML::[type.name/]Value>(inputParameters->at([index/])->getValues()->front());
-[/template]
 
 
 
@@ -86,7 +83,7 @@ std::shared_ptr<fUML::[par.type.name/]Value> [par.name/]Value(fUML::FUMLFactory:
 [if (not (par.direction = ParameterDirectionKind::inout))]
 std::shared_ptr<fUML::Reference> [par.name/]Value(fUML::FUMLFactory::eInstance()->createReference());
 [/if]
-std::shared_ptr<[par.type.name.toUpperFirst()/]Object> [par.name/]UmlLinker(new [par.type.name.toUpperFirst()/]Object([par.name.toLowerFirst()/]));
+std::shared_ptr<[par.type.name.toUpperFirst()/]Object> [par.name/]UmlLinker(new [par.type.name.toUpperFirst()/]Object([par.name.toLowerFirst()/][if (par.upper <> 1)]Temp[/if]));
 [par.name/]UmlLinker->setThis[par.type.name.toUpperFirst()/]ObjectPtr([par.name/]UmlLinker);
 [/template]
 
