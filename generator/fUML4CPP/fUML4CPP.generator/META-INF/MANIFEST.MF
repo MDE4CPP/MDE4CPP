@@ -24,7 +24,8 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Eclipse-LazyStart: true
 Export-Package: fUML4CPP.generator,
- fUML4CPP.generator.main
+ fUML4CPP.generator.main,
+ fUML4CPP.generator.main.plugin
 Import-Package: org.eclipse.pde.internal.core.bundle,
  org.eclipse.swt.widgets,
  org.eclipse.uml2.uml
