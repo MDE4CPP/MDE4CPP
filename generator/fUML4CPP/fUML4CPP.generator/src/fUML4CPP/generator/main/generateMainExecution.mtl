@@ -12,7 +12,6 @@
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */]
-[**FERTIG*/]
 [module generateMainExecution('http://www.eclipse.org/uml2/5.0.0/UML')]
 
 [import fUML4CPP::generator::main::generateOpaqueBehaviorExecution /]
@@ -95,12 +94,13 @@ int main()
 
 [template public generateMainIncludes(aPackage : Package)]
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "fUML/Semantics/Loci/Executor.hpp"
-#include "fUML/Semantics/StructuredClassifiers/DispatchStrategy.hpp"
-#include "fUML/Semantics/Loci/FirstChoiceStrategy.hpp"
 #include "fUML/FUMLFactory.hpp"
-#include "fUML/Semantics/Loci/Locus.hpp"
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
+#include "fUML/Semantics/Loci/ExecutionFactory.hpp"
+#include "fUML/Semantics/Loci/Executor.hpp"
+#include "fUML/Semantics/Loci/FirstChoiceStrategy.hpp"
+#include "fUML/Semantics/Loci/Locus.hpp"
+#include "fUML/Semantics/StructuredClassifiers/DispatchStrategy.hpp"
 #include "fUML/Semantics/Values/Value.hpp"
 #include "uml/Activity.hpp"
 #include "uml/FunctionBehavior.hpp"
@@ -112,7 +112,6 @@ int main()
 
 
 //include Model locus and package
-#include "[aPackage.getPackageName()/]Exec/impl/[aPackage.getFactoryName()/]Impl.hpp"
 #include "[aPackage.getPackageName()/]Exec/[aPackage.getPackageName().toUpperFirst()/]Locus.hpp"
 #include "[aPackage.getPackageName()/]Exec/impl/[aPackage.getPackageName().toUpperFirst()/]LocusImpl.hpp"
 #include "[aPackage.getPackageName()/]/[aPackage.getPackageName().toUpperFirst().concat('Package')/].hpp"
@@ -161,9 +160,8 @@ std::shared_ptr<fUML::Semantics::Loci::Executor> executor(fumlFac->createExecuto
 executor->setLocus(locus);
 locus->setExecutor(executor);
 
-std::shared_ptr<[aPackage.getFactoryName()/]> factory(new [aPackage.getFactoryName()/]Impl());
-factory->setLocus(locus);
-locus->setFactory(factory);
+std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory> factory(fumlFac->createExecutionFactory_in_Locus(locus));
+locus->setExecutor(executor);
 
 locus->getFactory()->assignStrategy(std::shared_ptr<fUML::Semantics::Loci::FirstChoiceStrategy>(fumlFac->createFirstChoiceStrategy()));
 locus->getFactory()->assignStrategy(std::shared_ptr<fUML::Semantics::StructuredClassifiers::DispatchStrategy>(fumlFac->createDispatchStrategy()));
@@ -194,9 +192,8 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > pList(new
 //INput parameter [par.name/] 
 std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> [par.name/]P(fumlFac->createParameterValue());
 [par.name/]P->setParameter([par.generatePackageGetterCall()/]);
-[par.generateOutputParameter()/]
-[if(par.type.supportedTypes())]
-[par.name/]Value->setValue([par.name.toLowerFirst()/]);
+[if (par.upper = 1)]
+[par.generateValue()/]
 [else]
 
 Bag<B>::iterator [par.name.toLowerFirst()/]Iter = [par.name.toLowerFirst()/]List->begin();
@@ -208,7 +205,6 @@ while ([par.name.toLowerFirst()/]Iter != [par.name.toLowerFirst()/]End)
 	[par.name.toLowerFirst()/]Iter++;
 }
 [/if]
-[par.name/]P->getValues()->push_back([par.name/]Value);
 pList->push_back([par.name/]P);
 
 [/for]
@@ -226,3 +222,13 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> resultPLis
 
 [/template]
 
+[template private generateValue(aParameter : Parameter)]
+[aParameter.generateOutputParameter()/]
+[if(aParameter.type.supportedTypes())]
+[aParameter.name/]Value->setValue([aParameter.name.toLowerFirst()/]);
+[else]
+[aParameter.name/]UmlLinker->setLocus(locus);
+[aParameter.name/]Value->setReferent([aParameter.name/]UmlLinker);
+[/if]
+[aParameter.name/]P->getValues()->push_back([aParameter.name/]Value);
+[/template]

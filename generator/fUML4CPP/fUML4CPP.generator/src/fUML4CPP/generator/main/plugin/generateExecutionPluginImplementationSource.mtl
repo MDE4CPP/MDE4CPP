@@ -110,7 +110,7 @@ Any [packageName/]::executeActivity(std::shared_ptr<uml::Activity> activity, std
 
 [template public generateParameterFromAny(anActivity : Activity, aPackage : Package)]
 [for (par : Parameter | anActivity.ownedParameter->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in)))]
-[par.generateCppType(true)/] [par.name.toLowerFirst()/] = parameterList->at([par.listNumber(anActivity)/])->get<[par.generateCppType(true)/]>();
+[par.generateCppType(true)/] [par.name.toLowerFirst()/][if (par.upper <> 1)]List[/if] = parameterList->at([par.listNumber(anActivity)/])->get<[par.generateCppType(true)/]>();
 
 [/for]
 [/template]
@@ -122,7 +122,7 @@ Any [packageName/]::executeActivity(std::shared_ptr<uml::Activity> activity, std
 [if(par.type.supportedTypes())]
 [if (par.upper =1)]
 assert(resultPList->front());
-std::shared_ptr<fUML::[par.type.name/]Value> ret = std::dynamic_pointer_cast<fUML::[par.type.name/]Value>(resultPList->front()->getValues()->front());
+std::shared_ptr<fUML::Semantics::SimpleClassifiers::[par.type.name/]Value> ret = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::[par.type.name/]Value>(resultPList->front()->getValues()->front());
 assert(ret != nullptr);
 return eAny(ret->getValue());
 [else]
@@ -132,18 +132,18 @@ throw "error";
 [else]
 [if (par.upper =1)]
 assert(resultPList->front());
-std::shared_ptr<fUML::Reference> [par.name/]Value = std::dynamic_pointer_cast<fUML::Reference>(resultPList->front()->getValues()->front());
+std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> [par.name/]Value = std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Reference>(resultPList->front()->getValues()->front());
 std::shared_ptr<[par.type.name.toUpperFirst()/]Object> [par.name/]UmlLinker = std::dynamic_pointer_cast<[par.type.name.toUpperFirst()/]Object>([par.name/]Value->getReferent());
 return eAny([par.name/]UmlLinker->getUmlValue[if(not (par.upper = 1))]s[/if]());
 [else]
-std::shared_ptr<fUML::ParameterValue> returnParameter = resultPList->front();
-std::shared_ptr<Bag<fUML::Value>> returnValues = returnParameter->getValues();
-Bag<fUML::Value>::iterator valueIter = returnValues->begin();
-Bag<fUML::Value>::iterator valueEnd = returnValues->end();
+std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> returnParameter = resultPList->front();
+std::shared_ptr<Bag<fUML::Semantics::Values::Value>> returnValues = returnParameter->getValues();
+Bag<fUML::Semantics::Values::Value>::iterator valueIter = returnValues->begin();
+Bag<fUML::Semantics::Values::Value>::iterator valueEnd = returnValues->end();
 std::shared_ptr<Bag<[par.type.name.toUpperFirst()/]>> returnList(new Bag<[par.type.name.toUpperFirst()/]>());
 while (valueIter != valueEnd)
 {
-	std::shared_ptr<fUML::Reference> returnValue = std::dynamic_pointer_cast<fUML::Reference>(*valueIter);
+	std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> returnValue = std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Reference>(*valueIter);
 	std::shared_ptr<[par.type.name.toUpperFirst()/]Object> returnObject = std::dynamic_pointer_cast<[par.type.name.toUpperFirst()/]Object>(returnValue->getReferent());
 	returnList->push_back(returnObject->getUmlValue());
 	valueIter++;
