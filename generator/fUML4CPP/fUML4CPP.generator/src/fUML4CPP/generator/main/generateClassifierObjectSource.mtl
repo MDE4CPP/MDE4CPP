@@ -203,8 +203,8 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> [className/]::getValues(std
 		values->add(reference);
 [else]
 		[aProperty.generateCppType()/] [aProperty.name.toLowerFirst()/]List = m_umlValue->[aProperty.getterName()/]();
-		Bag<B>::iterator iter = [aProperty.name.toLowerFirst()/]List->begin();
-		Bag<B>::iterator end = [aProperty.name.toLowerFirst()/]List->end();
+		Bag<[aProperty.type.generateCppType(true)/]>::iterator iter = [aProperty.name.toLowerFirst()/]List->begin();
+		Bag<[aProperty.type.generateCppType(true)/]>::iterator end = [aProperty.name.toLowerFirst()/]List->end();
 		while (iter != end)
 		{
 			std::shared_ptr<[aProperty.type.getValueClass()/]> value(new [aProperty.type.oclAsType(Classifier).objectClassName()/]());

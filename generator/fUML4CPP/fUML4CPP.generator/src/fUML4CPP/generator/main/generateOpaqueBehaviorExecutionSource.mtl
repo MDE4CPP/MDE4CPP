@@ -174,12 +174,12 @@ assert(target != nullptr);
 	std::shared_ptr<[aCallOperationAction.target.type.namespace.myNamespaceName()/]::[aCallOperationAction.target.type.name.toUpperFirst()/]> subtarget = std::dynamic_pointer_cast<[aCallOperationAction.target.type.namespace.myNamespaceName()/]::[aCallOperationAction.target.type.name.toUpperFirst()/]>(target->get[aCallOperationAction.target.name.substitute('self.', '').toUpperFirst()/]());
     assert(subtarget != nullptr);
 [/if]
-[if (aCallOperationAction.name.startsWith('self.'))]
+[if (aCallOperationAction.target.name.startsWith('self.'))]
 	if (target != nullptr && subtarget != nullptr)
 	{
 [/if]
 	[let retPar : Set(Parameter) = aCallOperationAction.operation.ownedParameter->select(p :Parameter | (p.direction = ParameterDirectionKind::return))->asSet()]
-	[if(not retPar->isEmpty())][if (not retPar->asOrderedSet()->first().oclIsInvalid())]		[retPar.name/] = [/if][/if][/let]  [if (aCallOperationAction.name.startsWith('self.'))]subtarget[else]target[/if]->[aCallOperationAction.operation.name/]([for (sParameter : Parameter | aCallOperationAction.operation.ownedParameter->select(p :Parameter | not (p.direction = ParameterDirectionKind::return))) separator (',')][sParameter.name/][/for]);
+		[if(not retPar->isEmpty())][if (not retPar->asOrderedSet()->first().oclIsInvalid())][retPar.name/] = [/if][/if][/let][if (aCallOperationAction.target.name.startsWith('self.'))]subtarget[else]target[/if]->[aCallOperationAction.operation.name/]([for (sParameter : Parameter | aCallOperationAction.operation.ownedParameter->select(p :Parameter | not (p.direction = ParameterDirectionKind::return))) separator (',')][sParameter.name/][/for]);
 [if (aCallOperationAction.target.name.startsWith('self.'))]
 	}
 	else
@@ -244,8 +244,8 @@ while ([par.name.toLowerFirst()/]Iter != [par.name.toLowerFirst()/]End)
 [if (par.upper = 1)]
 [par.generateValue(aParameterList, par.name)/]
 [else]
-Bag<B>::iterator [par.name.toLowerFirst()/]Iter = [par.name.toLowerFirst()/]->begin();
-Bag<B>::iterator [par.name.toLowerFirst()/]End = [par.name.toLowerFirst()/]->end();
+Bag<[par.type.generateCppType(true)/]>::iterator [par.name.toLowerFirst()/]Iter = [par.name.toLowerFirst()/]->begin();
+Bag<[par.type.generateCppType(true)/]>::iterator [par.name.toLowerFirst()/]End = [par.name.toLowerFirst()/]->end();
 while ([par.name.toLowerFirst()/]Iter != [par.name.toLowerFirst()/]End)
 {
 	[par.type.generateCppType(false)/] [par.name.toLowerFirst()/]Temp = *[par.name.toLowerFirst()/]Iter;

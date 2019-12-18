@@ -27,7 +27,10 @@
 [query public supportedTypes(type : Type) : Boolean = (name = 'Integer') or (name = 'Boolean') or (name = 'String') or (name = 'Real') /]
 
 [query public getClassiferExecutions(aPackage : Package) : Set(Classifier) = OrderedSet{
-				aPackage.ownedElement->filter(Class), 
+				aPackage.ownedElement->filter(Class),
+				aPackage.allOwnedElements()->filter(CallOperationAction).target.type,
+				aPackage.allOwnedElements()->filter(CallOperationAction).operation.ownedParameter->select(type.oclIsKindOf(Interface)).type,
+				aPackage.allOwnedElements()->filter(CallOperationAction).operation.ownedParameter->select(type.oclIsKindOf(Class)).type,
 				aPackage.allOwnedElements()->filter(Parameter)->select(type.oclIsKindOf(Interface)).type,
 				aPackage.allOwnedElements()->filter(Parameter)->select(type.oclIsKindOf(Class)).type,
 				aPackage.allOwnedElements()->filter(ReadStructuralFeatureAction).structuralFeature.type,

@@ -140,7 +140,7 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> returnParameter
 std::shared_ptr<Bag<fUML::Semantics::Values::Value>> returnValues = returnParameter->getValues();
 Bag<fUML::Semantics::Values::Value>::iterator valueIter = returnValues->begin();
 Bag<fUML::Semantics::Values::Value>::iterator valueEnd = returnValues->end();
-std::shared_ptr<Bag<[par.type.name.toUpperFirst()/]>> returnList(new Bag<[par.type.name.toUpperFirst()/]>());
+std::shared_ptr<Bag<[par.type.generateCppType(true)/]>> returnList(new Bag<[par.type.generateCppType(true)/]>());
 while (valueIter != valueEnd)
 {
 	std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> returnValue = std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Reference>(*valueIter);
