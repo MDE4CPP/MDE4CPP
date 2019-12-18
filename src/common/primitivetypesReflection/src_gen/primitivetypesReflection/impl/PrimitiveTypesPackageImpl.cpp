@@ -13,8 +13,8 @@
 
 //depending model packages
 
-#include "ecore/EDataType.hpp"
 #include "ecore/EPackage.hpp"
+
 
 using namespace PrimitiveTypes;
 
@@ -213,5 +213,6 @@ std::shared_ptr<uml::PrimitiveType> PrimitiveTypesPackageImpl::get_PrimitiveType
 {
 	return primitiveTypes_UnlimitedNatural;
 }
+
 
 

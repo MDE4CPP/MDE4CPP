@@ -17,6 +17,7 @@ namespace uml
 	class PrimitiveType;
 	class Property;
 	class RedefinableTemplateSignature;
+	class ConnectorEnd;
 }
 
 namespace Ecore 
@@ -343,6 +344,7 @@ namespace Ecore
 			virtual std::shared_ptr<uml::Property> get_Ecore_ETypedElement_required() = 0;  
 			virtual std::shared_ptr<uml::Property> get_Ecore_ETypedElement_unique() = 0;  
 			virtual std::shared_ptr<uml::Property> get_Ecore_ETypedElement_upperBound() = 0;  
+			
 			
 
 			//Singleton Instance and Getter

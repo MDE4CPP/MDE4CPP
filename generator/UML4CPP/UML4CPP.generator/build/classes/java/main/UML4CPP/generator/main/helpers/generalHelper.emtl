@@ -1514,7 +1514,7 @@
       </expression>
       <type xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
     </ownedModuleElement>
-    <ownedModuleElement xsi:type="mtl:Query" name="getModelPackage">
+    <ownedModuleElement xsi:type="mtl:Query" name="getModelPackage" visibility="Public">
       <parameter name="anElement1">
         <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Element"/>
       </parameter>
@@ -5068,212 +5068,212 @@
     </eAnnotations>
     <eAnnotations source="positions.475" references="/0/getModelPackage">
       <details key="start" value="9726"/>
-      <details key="end" value="9944"/>
+      <details key="end" value="9943"/>
       <details key="line" value="150"/>
     </eAnnotations>
     <eAnnotations source="positions.476" references="/0/getModelPackage/anElement1">
-      <details key="start" value="9757"/>
-      <details key="end" value="9777"/>
+      <details key="start" value="9756"/>
+      <details key="end" value="9776"/>
       <details key="line" value="150"/>
     </eAnnotations>
     <eAnnotations source="positions.477" references="/0/getModelPackage/%">
-      <details key="start" value="9790"/>
-      <details key="end" value="9941"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.478" references="/0/getModelPackage/%/%">
-      <details key="start" value="9790"/>
-      <details key="end" value="9915"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.479" references="/0/getModelPackage/%/%/%">
-      <details key="start" value="9790"/>
-      <details key="end" value="9897"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.480" references="/0/getModelPackage/%/%/%/%">
-      <details key="start" value="9790"/>
-      <details key="end" value="9838"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.481" references="/0/getModelPackage/%/%/%/%/%">
-      <details key="start" value="9790"/>
-      <details key="end" value="9825"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.482" references="/0/getModelPackage/%/%/%/%/%/%">
-      <details key="start" value="9790"/>
-      <details key="end" value="9820"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.483" references="/0/getModelPackage/%/%/%/%/%/%/anElement1">
-      <details key="start" value="9790"/>
-      <details key="end" value="9800"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.484" references="/0/getModelPackage/%/%/%/%/%.1">
-      <details key="start" value="9833"/>
-      <details key="end" value="9837"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.485" references="/0/getModelPackage/%/%/%/%.1">
-      <details key="start" value="9846"/>
-      <details key="end" value="9896"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.486" references="/0/getModelPackage/%/%/%/%.1/%">
-      <details key="start" value="9846"/>
-      <details key="end" value="9881"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.487" references="/0/getModelPackage/%/%/%/%.1/%/%">
-      <details key="start" value="9846"/>
-      <details key="end" value="9876"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.488" references="/0/getModelPackage/%/%/%/%.1/%/%/anElement1">
-      <details key="start" value="9846"/>
-      <details key="end" value="9856"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.489" references="/0/getModelPackage/%/%/%.1">
-      <details key="start" value="9905"/>
-      <details key="end" value="9914"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.490" references="/0/getModelPackage/%/%.1">
-      <details key="start" value="9923"/>
+      <details key="start" value="9789"/>
       <details key="end" value="9940"/>
       <details key="line" value="0"/>
     </eAnnotations>
+    <eAnnotations source="positions.478" references="/0/getModelPackage/%/%">
+      <details key="start" value="9789"/>
+      <details key="end" value="9914"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.479" references="/0/getModelPackage/%/%/%">
+      <details key="start" value="9789"/>
+      <details key="end" value="9896"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.480" references="/0/getModelPackage/%/%/%/%">
+      <details key="start" value="9789"/>
+      <details key="end" value="9837"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.481" references="/0/getModelPackage/%/%/%/%/%">
+      <details key="start" value="9789"/>
+      <details key="end" value="9824"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.482" references="/0/getModelPackage/%/%/%/%/%/%">
+      <details key="start" value="9789"/>
+      <details key="end" value="9819"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.483" references="/0/getModelPackage/%/%/%/%/%/%/anElement1">
+      <details key="start" value="9789"/>
+      <details key="end" value="9799"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.484" references="/0/getModelPackage/%/%/%/%/%.1">
+      <details key="start" value="9832"/>
+      <details key="end" value="9836"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.485" references="/0/getModelPackage/%/%/%/%.1">
+      <details key="start" value="9845"/>
+      <details key="end" value="9895"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.486" references="/0/getModelPackage/%/%/%/%.1/%">
+      <details key="start" value="9845"/>
+      <details key="end" value="9880"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.487" references="/0/getModelPackage/%/%/%/%.1/%/%">
+      <details key="start" value="9845"/>
+      <details key="end" value="9875"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.488" references="/0/getModelPackage/%/%/%/%.1/%/%/anElement1">
+      <details key="start" value="9845"/>
+      <details key="end" value="9855"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.489" references="/0/getModelPackage/%/%/%.1">
+      <details key="start" value="9904"/>
+      <details key="end" value="9913"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.490" references="/0/getModelPackage/%/%.1">
+      <details key="start" value="9922"/>
+      <details key="end" value="9939"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
     <eAnnotations source="positions.491" references="/0/handlePackageGetterError">
-      <details key="start" value="9948"/>
-      <details key="end" value="10183"/>
+      <details key="start" value="9947"/>
+      <details key="end" value="10182"/>
       <details key="line" value="152"/>
     </eAnnotations>
     <eAnnotations source="positions.492" references="/0/handlePackageGetterError/%">
-      <details key="start" value="10039"/>
-      <details key="end" value="10046"/>
+      <details key="start" value="10038"/>
+      <details key="end" value="10045"/>
       <details key="line" value="153"/>
     </eAnnotations>
     <eAnnotations source="positions.493" references="/0/handlePackageGetterError/%.1">
-      <details key="start" value="10047"/>
-      <details key="end" value="10168"/>
+      <details key="start" value="10046"/>
+      <details key="end" value="10167"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.494" references="/0/handlePackageGetterError/%.1/%">
-      <details key="start" value="10047"/>
-      <details key="end" value="10152"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.495" references="/0/handlePackageGetterError/%.1/%/%">
-      <details key="start" value="10047"/>
-      <details key="end" value="10139"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.496" references="/0/handlePackageGetterError/%.1/%/%/%">
-      <details key="start" value="10047"/>
-      <details key="end" value="10119"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.497" references="/0/handlePackageGetterError/%.1/%/%/%/%">
-      <details key="start" value="10047"/>
-      <details key="end" value="10085"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.498" references="/0/handlePackageGetterError/%.1/%/%/%/%.1">
-      <details key="start" value="10093"/>
-      <details key="end" value="10118"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.499" references="/0/handlePackageGetterError/%.1/%/%/%/%.1/failureElement">
-      <details key="start" value="10093"/>
-      <details key="end" value="10107"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.500" references="/0/handlePackageGetterError/%.1/%/%/%.1">
-      <details key="start" value="10127"/>
-      <details key="end" value="10138"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.501" references="/0/handlePackageGetterError/%.1/%/name">
-      <details key="start" value="10147"/>
+      <details key="start" value="10046"/>
       <details key="end" value="10151"/>
       <details key="line" value="0"/>
     </eAnnotations>
+    <eAnnotations source="positions.495" references="/0/handlePackageGetterError/%.1/%/%">
+      <details key="start" value="10046"/>
+      <details key="end" value="10138"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.496" references="/0/handlePackageGetterError/%.1/%/%/%">
+      <details key="start" value="10046"/>
+      <details key="end" value="10118"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.497" references="/0/handlePackageGetterError/%.1/%/%/%/%">
+      <details key="start" value="10046"/>
+      <details key="end" value="10084"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.498" references="/0/handlePackageGetterError/%.1/%/%/%/%.1">
+      <details key="start" value="10092"/>
+      <details key="end" value="10117"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.499" references="/0/handlePackageGetterError/%.1/%/%/%/%.1/failureElement">
+      <details key="start" value="10092"/>
+      <details key="end" value="10106"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.500" references="/0/handlePackageGetterError/%.1/%/%/%.1">
+      <details key="start" value="10126"/>
+      <details key="end" value="10137"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.501" references="/0/handlePackageGetterError/%.1/%/name">
+      <details key="start" value="10146"/>
+      <details key="end" value="10150"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
     <eAnnotations source="positions.502" references="/0/handlePackageGetterError/failureElement">
-      <details key="start" value="9991"/>
-      <details key="end" value="10020"/>
+      <details key="start" value="9990"/>
+      <details key="end" value="10019"/>
       <details key="line" value="152"/>
     </eAnnotations>
     <eAnnotations source="positions.503" references="/0/handlePackageGetterError/name">
-      <details key="start" value="10022"/>
-      <details key="end" value="10035"/>
+      <details key="start" value="10021"/>
+      <details key="end" value="10034"/>
       <details key="line" value="152"/>
     </eAnnotations>
     <eAnnotations source="positions.504" references="/0/handlePackageGetterError.1">
-      <details key="start" value="10185"/>
-      <details key="end" value="10420"/>
+      <details key="start" value="10184"/>
+      <details key="end" value="10419"/>
       <details key="line" value="155"/>
     </eAnnotations>
     <eAnnotations source="positions.505" references="/0/handlePackageGetterError.1/%">
-      <details key="start" value="10276"/>
-      <details key="end" value="10283"/>
+      <details key="start" value="10275"/>
+      <details key="end" value="10282"/>
       <details key="line" value="156"/>
     </eAnnotations>
     <eAnnotations source="positions.506" references="/0/handlePackageGetterError.1/%.1">
-      <details key="start" value="10284"/>
-      <details key="end" value="10405"/>
+      <details key="start" value="10283"/>
+      <details key="end" value="10404"/>
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.507" references="/0/handlePackageGetterError.1/%.1/%">
-      <details key="start" value="10284"/>
-      <details key="end" value="10389"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.508" references="/0/handlePackageGetterError.1/%.1/%/%">
-      <details key="start" value="10284"/>
-      <details key="end" value="10376"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.509" references="/0/handlePackageGetterError.1/%.1/%/%/%">
-      <details key="start" value="10284"/>
-      <details key="end" value="10356"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.510" references="/0/handlePackageGetterError.1/%.1/%/%/%/%">
-      <details key="start" value="10284"/>
-      <details key="end" value="10322"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.511" references="/0/handlePackageGetterError.1/%.1/%/%/%/%.1">
-      <details key="start" value="10330"/>
-      <details key="end" value="10355"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.512" references="/0/handlePackageGetterError.1/%.1/%/%/%/%.1/failureElement">
-      <details key="start" value="10330"/>
-      <details key="end" value="10344"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.513" references="/0/handlePackageGetterError.1/%.1/%/%/%.1">
-      <details key="start" value="10364"/>
-      <details key="end" value="10375"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.514" references="/0/handlePackageGetterError.1/%.1/%/name">
-      <details key="start" value="10384"/>
+      <details key="start" value="10283"/>
       <details key="end" value="10388"/>
       <details key="line" value="0"/>
     </eAnnotations>
+    <eAnnotations source="positions.508" references="/0/handlePackageGetterError.1/%.1/%/%">
+      <details key="start" value="10283"/>
+      <details key="end" value="10375"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.509" references="/0/handlePackageGetterError.1/%.1/%/%/%">
+      <details key="start" value="10283"/>
+      <details key="end" value="10355"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.510" references="/0/handlePackageGetterError.1/%.1/%/%/%/%">
+      <details key="start" value="10283"/>
+      <details key="end" value="10321"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.511" references="/0/handlePackageGetterError.1/%.1/%/%/%/%.1">
+      <details key="start" value="10329"/>
+      <details key="end" value="10354"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.512" references="/0/handlePackageGetterError.1/%.1/%/%/%/%.1/failureElement">
+      <details key="start" value="10329"/>
+      <details key="end" value="10343"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.513" references="/0/handlePackageGetterError.1/%.1/%/%/%.1">
+      <details key="start" value="10363"/>
+      <details key="end" value="10374"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.514" references="/0/handlePackageGetterError.1/%.1/%/name">
+      <details key="start" value="10383"/>
+      <details key="end" value="10387"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
     <eAnnotations source="positions.515" references="/0/handlePackageGetterError.1/failureElement">
-      <details key="start" value="10228"/>
-      <details key="end" value="10257"/>
+      <details key="start" value="10227"/>
+      <details key="end" value="10256"/>
       <details key="line" value="155"/>
     </eAnnotations>
     <eAnnotations source="positions.516" references="/0/handlePackageGetterError.1/name">
-      <details key="start" value="10259"/>
-      <details key="end" value="10272"/>
+      <details key="start" value="10258"/>
+      <details key="end" value="10271"/>
       <details key="line" value="155"/>
     </eAnnotations>
   </ecore:EAnnotation>

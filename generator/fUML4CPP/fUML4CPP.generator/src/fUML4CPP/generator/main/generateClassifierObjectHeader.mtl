@@ -12,7 +12,6 @@
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */]
-[**FERTIG*/]
 [module generateClassifierObjectHeader('http://www.eclipse.org/uml2/5.0.0/UML')]
 
 [import fUML4CPP::generator::main::generateClassifierObjectSource /]
@@ -46,7 +45,6 @@ namespace [aPackage.name/]
 		    //constructors
 		    [className/]([className/] &obj);
 		    [className/](std::shared_ptr<[pointerName/]>);
-		    [className/](std::shared_ptr<Bag<[pointerName/]>>);
 		 	[className/]();
 		    //destructor
 		    virtual ~[className/]();
@@ -54,9 +52,7 @@ namespace [aPackage.name/]
 		    virtual std::shared_ptr<ecore::EObject> copy();
 			
 			virtual std::shared_ptr<[pointerName/]> getUmlValue() const;
-			virtual std::shared_ptr<Bag<[pointerName/]>> getUmlValues() const;
 			virtual void setUmlValue(std::shared_ptr<[pointerName/]>);
-			virtual void setUmlValues(std::shared_ptr<Bag<[pointerName/]>>);;
 			virtual void setThis[className/]Ptr(std::weak_ptr<[className/]> thisObjectPtr);
 [if (aPackage.getStructuralFeaturesFromRSTVA(aClassifier)->size() > 0)]
 			virtual void removeValue(std::shared_ptr<uml::StructuralFeature> feature, std::shared_ptr<fUML::Semantics::Values::Value> values);
@@ -70,7 +66,6 @@ namespace [aPackage.name/]
 		
 		protected:
 			std::shared_ptr<[pointerName/]> m_umlValue = nullptr;
-			std::shared_ptr<Bag<[pointerName/]>> m_umlValues = nullptr;
 	};
 }
 [endGuard(aClassifier,'Object')/]

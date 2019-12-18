@@ -57,7 +57,7 @@
 */]
 [query public setterName(feature : StructuralFeature) : String = 'set'.concat(name.toUpperFirst()) /]
 [query public getterName(feature : StructuralFeature) : String = getterPrefix().concat(name.toUpperFirst()) /]
-[query private getterPrefix(feature : StructuralFeature) : String = if feature.type.name = 'Boolean' then 'is' else 'get' endif/]
+[query public getterPrefix(feature : StructuralFeature) : String = if feature.type.name = 'Boolean' then 'is' else 'get' endif/]
 
 [**
  * query to replace characters, which are not permitted in names of classes, variable, macros, ... in C++

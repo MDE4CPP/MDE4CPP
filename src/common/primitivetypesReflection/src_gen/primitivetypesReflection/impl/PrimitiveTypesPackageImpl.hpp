@@ -34,6 +34,7 @@ namespace PrimitiveTypes
 			virtual std::shared_ptr<uml::PrimitiveType> get_PrimitiveTypes_String();  
 			virtual std::shared_ptr<uml::PrimitiveType> get_PrimitiveTypes_UnlimitedNatural();  
 			
+			
 
 		private:
 			//private variables for ownedMember of the metamodel package
@@ -42,6 +43,7 @@ namespace PrimitiveTypes
 			std::shared_ptr<uml::PrimitiveType> primitiveTypes_Real = nullptr;
 			std::shared_ptr<uml::PrimitiveType> primitiveTypes_String = nullptr;
 			std::shared_ptr<uml::PrimitiveType> primitiveTypes_UnlimitedNatural = nullptr;
+			
 			
 
 			static PrimitiveTypesPackage* create();
