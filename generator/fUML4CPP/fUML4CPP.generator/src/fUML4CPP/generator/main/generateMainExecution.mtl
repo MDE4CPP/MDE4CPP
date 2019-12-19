@@ -56,7 +56,7 @@ int main()
 [if (act.owner.oclIsKindOf(Classifier))]
 	std::shared_ptr<[act.owner.oclAsType(Classifier).name.toUpperFirst()/]> element = [act.owner.oclAsType(Classifier).namespace.myNamespaceName()/]::[act.owner.oclAsType(Classifier).namespace.myNamespaceName().toUpperFirst()/]Factory::eInstance()->create[act.owner.oclAsType(Classifier).name.toUpperFirst()/]();
 [/if]
-	[act.generateStartActivityExecution(aPackage)/]   
+	[act.generateStartActivityExecution()/]   
 	[/let]
 
 	if(nullptr == resultPList)
@@ -178,13 +178,13 @@ locus->getFactory()->assignStrategy(std::shared_ptr<fUML::Semantics::StructuredC
 [/for]
 [/template]
 
-[template public generateStartActivityExecution(anActivity : Activity, aPackage : Package)]
-[if (aPackage.getOpaqueBehaviors()->size() > 0)]
-[aPackage.getOpaqueBehaviors()->sortedBy(myQualifiedName()).generateOpaqueBehaviorCreation()/]
+[template public generateStartActivityExecution(anActivity : Activity)]
+[if (anActivity.getOpaqueBehaviors()->size() > 0)]
+[anActivity.getOpaqueBehaviors()->sortedBy(myQualifiedName()).generateOpaqueBehaviorCreation()/]
 [/if]
 
-[if (aPackage.getCallOperationActions()->size() > 0)]
-[aPackage.getCallOperationActions()->sortedBy(myQualifiedName()).generateCallOperationActionCreation()/]
+[if (anActivity.getCallOperationActions()->size() > 0)]
+[anActivity.getCallOperationActions()->sortedBy(myQualifiedName()).generateCallOperationActionCreation()/]
 [/if]
 
 std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > pList(new Bag<fUML::Semantics::CommonBehavior::ParameterValue>());
@@ -216,8 +216,8 @@ object->setLocus(locus);
 [/if]
 std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> resultPList = locus->getExecutor()->execute([anActivity.generatePackageGetterCall()/], [if (anActivity.owner.oclIsKindOf(Class))]object[else]nullptr[/if], pList);
 
-[if (aPackage.getCallOperationActions()->size() > 0)]
-[aPackage.getCallOperationActions().generateCallOperationActionClearing()/]
+[if (anActivity.getCallOperationActions()->size() > 0)]
+[anActivity.getCallOperationActions().generateCallOperationActionClearing()/]
 [/if]
 
 [/template]

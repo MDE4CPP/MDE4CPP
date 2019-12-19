@@ -95,9 +95,9 @@ Any [packageName/]::executeActivity(std::shared_ptr<uml::Activity> activity, std
 [for (act : Activity | aPackage.allOwnedElements()->filter(Activity)->sortedBy(myQualifiedName()))]
 	if (activity == [act.getNearestPackage().myNamespaceName()/]::[act.getNearestPackage().myName()/]Package::eInstance()->[act.generatePackageGetterCall()/])
 	{
-		[act.generateParameterFromAny(aPackage)/]
-		[act.generateStartActivityExecution(aPackage)/]   
-		[act.generateReturnParameter(aPackage)/]
+		[act.generateParameterFromAny()/]
+		[act.generateStartActivityExecution()/]   
+		[act.generateReturnParameter()/]
 	}
 [/for]
 	return nullptr;
@@ -108,14 +108,14 @@ Any [packageName/]::executeActivity(std::shared_ptr<uml::Activity> activity, std
 
 [query public listNumber(aParameter : Parameter, anActivity : Activity) : Integer =  anActivity.ownedParameter->select((direction = ParameterDirectionKind::_out) or (direction = ParameterDirectionKind::_in))->sortedBy(name)->indexOf(aParameter)-1 /]
 
-[template public generateParameterFromAny(anActivity : Activity, aPackage : Package)]
+[template public generateParameterFromAny(anActivity : Activity)]
 [for (par : Parameter | anActivity.ownedParameter->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in)))]
 [par.generateCppType(true)/] [par.name.toLowerFirst()/][if (par.upper <> 1)]List[/if] = parameterList->at([par.listNumber(anActivity)/])->get<[par.generateCppType(true)/]>();
 
 [/for]
 [/template]
 
-[template public generateReturnParameter(anActivity : Activity, aPackage : Package)]
+[template public generateReturnParameter(anActivity : Activity)]
 [if (anActivity.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->notEmpty())]
 //The activity has a return parameter
 [let par : Parameter = anActivity.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->sortedBy(name)->first()]
