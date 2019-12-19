@@ -26,6 +26,7 @@
 #include "PSCS/impl/PSCSPackageImpl.hpp"
 #include "fUML/FUMLFactory.hpp"
 #include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
 #include "fUML/Semantics/StructuredClassifiers/ExtensionalValue.hpp"
 
 #include "uml/ReadExtentAction.hpp"
@@ -222,55 +223,87 @@ std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> CS_ExecutionFactoryImpl:
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-			// Extends fUML semantics in the sense that newly introduced 
+		// Extends fUML semantics in the sense that newly introduced 
 	// semantic visitors are instantiated instead of fUML visitors
 	std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> visitor = nullptr;
 	
-	if(std::dynamic_pointer_cast<uml::ReadExtentAction>(element) != nullptr) {
-		visitor = PSCS::PSCSFactory::eInstance()->createCS_ReadExtentActionActivation();
+	if(std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::CallEventBehavior>(element) != nullptr) {
+		return PSCS::PSCSFactory::eInstance()->createCS_CallEventExecution();
 	}
-	else if(std::dynamic_pointer_cast<uml::AddStructuralFeatureValueAction>(element) != nullptr) {
-		visitor = PSCS::PSCSFactory::eInstance()->createCS_AddStructuralFeatureValueActionActivation();
+	
+	switch(element->eClass()->getClassifierID())
+	{
+		case uml::UmlPackage::READEXTENTACTION_CLASS: 
+		{
+			visitor = PSCS::PSCSFactory::eInstance()->createCS_ReadExtentActionActivation();
+			break;
+		}
+		case uml::UmlPackage::ADDSTRUCTURALFEATUREVALUEACTION_CLASS:
+		{
+			visitor = PSCS::PSCSFactory::eInstance()->createCS_AddStructuralFeatureValueActionActivation();
+			break;
+		}
+		case uml::UmlPackage::CLEARSTRUCTURALFEATUREACTION_CLASS:
+		{
+			visitor = PSCS::PSCSFactory::eInstance()->createCS_ClearStructuralFeatureActionActivation();
+			break;
+		}
+		case uml::UmlPackage::CREATELINKACTION_CLASS:
+		{
+			visitor = PSCS::PSCSFactory::eInstance()->createCS_CreateLinkActionActivation();
+			break;
+		}
+		case uml::UmlPackage::CREATEOBJECTACTION_CLASS:
+		{
+			visitor = PSCS::PSCSFactory::eInstance()->createCS_CreateObjectActionActivation();
+			break;
+		}
+		case uml::UmlPackage::READSELFACTION_CLASS:
+		{
+			visitor = PSCS::PSCSFactory::eInstance()->createCS_ReadSelfActionActivation();
+			break;
+		}
+		case uml::UmlPackage::ACCEPTCALLACTION_CLASS:
+		{
+			visitor = PSCS::PSCSFactory::eInstance()->createCS_AcceptCallActionActivation();
+			break;
+		}
+		case uml::UmlPackage::INSTANCEVALUE_CLASS:
+		{
+			visitor = PSCS::PSCSFactory::eInstance()->createCS_InstanceValueEvaluation();
+			break;
+		}
+		case uml::UmlPackage::ACCEPTEVENTACTION_CLASS: 
+		{
+			visitor = PSCS::PSCSFactory::eInstance()->createCS_AcceptEventActionActivation();
+			break;
+		}
+		case uml::UmlPackage::CALLOPERATIONACTION_CLASS:
+		{
+			visitor = PSCS::PSCSFactory::eInstance()->createCS_CallOperationActionActivation();
+			break;
+		}
+		case uml::UmlPackage::SENDSIGNALACTION_CLASS:
+		{
+			visitor = PSCS::PSCSFactory::eInstance()->createCS_SendSignalActionActivation();
+			break;
+		}
+		case uml::UmlPackage::OPAQUEEXPRESSION_CLASS:
+		{
+			visitor = PSCS::PSCSFactory::eInstance()->createCS_OpaqueExpressionEvaluation();
+			break;
+		}
+		case uml::UmlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_CLASS:
+		{
+			visitor = PSCS::PSCSFactory::eInstance()->createCS_RemoveStructuralFeatureValueActionActivation();
+			break;
+		}
+		default:
+		{
+			visitor = fUML::Semantics::Loci::ExecutionFactoryImpl::instantiateVisitor(element);
+		}
 	}
-	else if(std::dynamic_pointer_cast<uml::ClearStructuralFeatureAction>(element) != nullptr) {
-		visitor = PSCS::PSCSFactory::eInstance()->createCS_ClearStructuralFeatureActionActivation();
-	}
-	else if(std::dynamic_pointer_cast<uml::CreateLinkAction>(element) != nullptr) {
-		visitor = PSCS::PSCSFactory::eInstance()->createCS_CreateLinkActionActivation();
-	}
-	else if(std::dynamic_pointer_cast<uml::CreateObjectAction>(element) != nullptr) {
-		visitor = PSCS::PSCSFactory::eInstance()->createCS_CreateObjectActionActivation();
-	}
-	else if(std::dynamic_pointer_cast<uml::ReadSelfAction>(element) != nullptr) {
-		visitor = PSCS::PSCSFactory::eInstance()->createCS_ReadSelfActionActivation();
-	}
-	else if(std::dynamic_pointer_cast<uml::AcceptCallAction>(element) != nullptr) {
-		visitor = PSCS::PSCSFactory::eInstance()->createCS_AcceptCallActionActivation();
-	}
-	else if(std::dynamic_pointer_cast<uml::InstanceValue>(element) != nullptr) {
-		visitor = PSCS::PSCSFactory::eInstance()->createCS_InstanceValueEvaluation();
-	}
-	else if(std::dynamic_pointer_cast<uml::AcceptEventAction>(element) != nullptr) {
-		visitor = PSCS::PSCSFactory::eInstance()->createCS_AcceptEventActionActivation();
-	}
-	else if(std::dynamic_pointer_cast<uml::CallOperationAction>(element) != nullptr) {
-		visitor = PSCS::PSCSFactory::eInstance()->createCS_CallOperationActionActivation();
-	}
-	else if(std::dynamic_pointer_cast<uml::SendSignalAction>(element) != nullptr) {
-		visitor = PSCS::PSCSFactory::eInstance()->createCS_SendSignalActionActivation();
-	}
-	else if(std::dynamic_pointer_cast<uml::OpaqueExpression>(element) != nullptr) {
-		visitor = PSCS::PSCSFactory::eInstance()->createCS_OpaqueExpressionEvaluation();
-	}
-	else if(std::dynamic_pointer_cast<uml::RemoveStructuralFeatureValueAction>(element) != nullptr) {
-		visitor = PSCS::PSCSFactory::eInstance()->createCS_RemoveStructuralFeatureValueActionActivation();
-	}
-	else if(std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::CallEventBehavior>(element) != nullptr) {
-		visitor = PSCS::PSCSFactory::eInstance()->createCS_CallEventExecution();
-	}
-	else {
-		visitor = fUML::Semantics::Loci::ExecutionFactoryImpl::instantiateVisitor(element);
-	}
+
 	return visitor;
 	//end of body
 }
