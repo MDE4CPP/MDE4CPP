@@ -21,8 +21,7 @@
 [import UML4CPP::generator::main::helpers::nameHelper /]
 
 [query private getActivity(anAction : Action) : Activity = if (anAction.activity.oclIsUndefined()) then anAction.inStructuredNode.getActivity() else anAction.activity endif /]
-[query private isActivityOwnerAClassifier(anActivity : Activity) : Boolean = anActivity.owner.oclIsKindOf(Classifier) /]
-[query private getOwnerOrTargetType(aCOA : CallOperationAction) : Type = if (aCOA.getActivity().isActivityOwnerAClassifier()) then aCOA.getActivity().owner.oclAsType(Type) else aCOA.target.type endif /]
+[query private getOwnerOrTargetType(aCOA : CallOperationAction) : Type = if (aCOA.target.isSelfAttribute() or aCOA.target.isSelf()) then aCOA.getActivity().owner.oclAsType(Type) else aCOA.target.type endif /]
 [query public hasGenerateOwnerVariable(aElement : Element) : Boolean = aElement.valueKey('generateOwnerVariable') = 'true'/]
 [query private getSelf(action : Action) : Classifier = action.getActivity().owner.oclAsType(Classifier)/]
 [query private getSelfAttribute(pin : Pin, action : Action) : Property = action.getSelf().attribute->select(pin.name = 'self.'.concat(name))->asOrderedSet()->first()/]
