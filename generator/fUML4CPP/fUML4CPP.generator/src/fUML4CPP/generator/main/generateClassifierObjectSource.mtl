@@ -197,8 +197,8 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> [className/]::getValues(std
 		values->add(value);
 [else]
 		std::shared_ptr<Bag<[aProperty.type.generateCppType(true)/]>> valueList = m_umlValue->[aProperty.getterName()/]();
-		Bag<double>::iterator iter = valueList->begin();
-		Bag<double>::iterator end = valueList->end();
+		Bag<[aProperty.type.generateCppType(true)/]>::iterator iter = valueList->begin();
+		Bag<[aProperty.type.generateCppType(true)/]>::iterator end = valueList->end();
 		while (iter != end)
 		{
 			std::shared_ptr<[aProperty.type.getValueClass()/]> value = fUML::FUMLFactory::eInstance()->create[aProperty.type.name.toUpperFirst()/]Value();
