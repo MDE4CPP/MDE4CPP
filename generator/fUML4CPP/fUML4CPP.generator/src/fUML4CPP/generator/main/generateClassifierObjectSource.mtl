@@ -191,9 +191,22 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> [className/]::getValues(std
 	if (property == [aProperty.getModelPackage()/][aProperty.generatePackageGetterCall(aProperty)/])
 	{
 [if (aProperty.isPrimitiveTypedProperty())]
+[if (aProperty.upper = 1)]
 		std::shared_ptr<[aProperty.type.getValueClass()/]> value = fUML::FUMLFactory::eInstance()->create[aProperty.type.name.toUpperFirst()/]Value();
 		value->setValue(m_umlValue->[aProperty.getterName()/]());
 		values->add(value);
+[else]
+		std::shared_ptr<Bag<[aProperty.type.generateCppType(true)/]>> valueList = m_umlValue->[aProperty.getterName()/]();
+		Bag<double>::iterator iter = valueList->begin();
+		Bag<double>::iterator end = valueList->end();
+		while (iter != end)
+		{
+			std::shared_ptr<[aProperty.type.getValueClass()/]> value = fUML::FUMLFactory::eInstance()->create[aProperty.type.name.toUpperFirst()/]Value();
+			value->setValue(*(*iter));
+			values->push_back(value);
+			iter++;
+		}
+[/if]
 [else]
 [if (aProperty.upper = 1)]
 		std::shared_ptr<[aProperty.type.getValueClass()/]> value(new [aProperty.type.oclAsType(Classifier).objectClassName()/]());
