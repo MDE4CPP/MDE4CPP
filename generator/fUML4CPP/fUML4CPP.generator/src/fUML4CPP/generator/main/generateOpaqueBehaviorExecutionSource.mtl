@@ -233,7 +233,7 @@ while ([aPin.name.toLowerFirst()/]Iter != [aPin.name.toLowerFirst()/]End)
 	}
 	[else]
 	std::cerr << __PRETTY_FUNCTION__ << ": generation of supported types with upper > 0 is missing" << std::endl;
-	throw "ERROR" << std::endl;
+	throw "ERROR";
 	[/if]
 
 	[aPin.name.toLowerFirst()/]Iter++;
@@ -278,7 +278,7 @@ while ([par.name.toLowerFirst()/]Iter != [par.name.toLowerFirst()/]End)
 	}
 	[else]
 	std::cerr << __PRETTY_FUNCTION__ << ": generation of supported types with upper > 0 is missing" << std::endl;
-	throw "ERROR" << std::endl;
+	throw "ERROR;
 	[/if]
 
 	[par.name.toLowerFirst()/]Iter++;
