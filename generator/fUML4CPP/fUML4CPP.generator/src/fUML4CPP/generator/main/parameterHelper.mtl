@@ -18,6 +18,8 @@
 [import UML4CPP::generator::main::components::generateType /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 
+[query public getValueClass(aType : Type) : String = if (aType.oclIsKindOf(PrimitiveType)) then 'fUML::Semantics::SimpleClassifiers::'.concat(aType.name.toUpperFirst()).concat('Value') else aType.oclAsType(Classifier).objectClassName() endif /]
+
 [query public generateOpaqueBehaviorExecutionName(namedElement : NamedElement) : String = namedElement.name.sanitize().toUpperFirst().concat('Execution') /] 
 
 [query public pointerName(aClassifier : Classifier, aPackage : Package) : String = if (aPackage.name = aClassifier.namespace.myNamespaceName()) then aClassifier.name.toUpperFirst() else aClassifier.namespace.myNamespaceName().concat('::').concat(aClassifier.name.toUpperFirst()) endif /]

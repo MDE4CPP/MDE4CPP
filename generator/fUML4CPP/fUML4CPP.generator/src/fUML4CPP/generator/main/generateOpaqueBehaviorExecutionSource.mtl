@@ -232,8 +232,9 @@ while ([aPin.name.toLowerFirst()/]Iter != [aPin.name.toLowerFirst()/]End)
 		[aPin.name/]->push_back([aPin.name/]Temp);
 	}
 	[else]
-	std::cerr << __PRETTY_FUNCTION__ << ": generation of supported types with upper > 0 is missing" << std::endl;
-	throw "ERROR";
+	std::shared_ptr<[aPin.type.getValueClass()/]> valueObject = std::dynamic_pointer_cast<[aPin.type.getValueClass()/]>(*valueListIter);
+	std::shared_ptr<[aPin.type.generateCppType(true)/]> value(new [aPin.type.generateCppType(true)/](valueObject->getValue()));
+	valueList->push_back(value);
 	[/if]
 
 	[aPin.name.toLowerFirst()/]Iter++;
@@ -277,10 +278,10 @@ while ([par.name.toLowerFirst()/]Iter != [par.name.toLowerFirst()/]End)
 		[par.name/]->push_back([par.name/]Temp);
 	}
 	[else]
-	std::cerr << __PRETTY_FUNCTION__ << ": generation of supported types with upper > 0 is missing" << std::endl;
-	throw "ERROR;
+	std::shared_ptr<[par.type.getValueClass()/]> valueObject = std::dynamic_pointer_cast<[par.type.getValueClass()/]>(*valueListIter);
+	std::shared_ptr<[par.type.generateCppType(true)/]> value(new [par.type.generateCppType(true)/](valueObject->getValue()));
+	valueList->push_back(value);
 	[/if]
-
 	[par.name.toLowerFirst()/]Iter++;
 }
 [/if]
@@ -297,7 +298,7 @@ Bag<[par.type.generateCppType(true)/]>::iterator [par.name.toLowerFirst()/]Iter 
 Bag<[par.type.generateCppType(true)/]>::iterator [par.name.toLowerFirst()/]End = [par.name.toLowerFirst()/]->end();
 while ([par.name.toLowerFirst()/]Iter != [par.name.toLowerFirst()/]End)
 {
-	[par.type.generateCppType(false)/] [par.name.toLowerFirst()/]Temp = *[par.name.toLowerFirst()/]Iter;
+	[par.type.generateCppType(false)/] [par.name.toLowerFirst()/]Temp = [if(par.type.supportedTypes())]*([/if]*[par.name.toLowerFirst()/]Iter[if(par.type.supportedTypes())])[/if];
 	[par.generateValue(aParameterList, par.name.concat('Temp'))/]
 	[par.name.toLowerFirst()/]Iter++;
 }

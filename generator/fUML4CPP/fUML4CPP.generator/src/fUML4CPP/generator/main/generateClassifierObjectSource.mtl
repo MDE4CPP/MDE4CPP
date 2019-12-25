@@ -301,5 +301,4 @@ if (value != nullptr)
 [/if]
 [/template]
 
-[query private getValueClass(aType : Type) : String = if (aType.oclIsKindOf(PrimitiveType)) then 'fUML::Semantics::SimpleClassifiers::'.concat(aType.name.toUpperFirst()).concat('Value') else aType.oclAsType(Classifier).objectClassName() endif /]
 [query private isPrimitiveTypedProperty(aProperty : Property) : Boolean = aProperty.type.oclIsKindOf(PrimitiveType) /] 
