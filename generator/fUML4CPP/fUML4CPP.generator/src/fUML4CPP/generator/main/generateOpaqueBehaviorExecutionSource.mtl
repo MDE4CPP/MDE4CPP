@@ -185,7 +185,7 @@ if (target == nullptr)
 
 [for (pin : InputPin | aCallOperationAction.argument)]
 [if (not (pin.isSelf() or pin.isSelfAttribute()))]
-	[pin.generateIncomingPin(aCallOperationAction.argument->sortedBy(name)->indexOf(pin)-1)/]
+	[pin.generateIncomingPin(aCallOperationAction.argument->indexOf(pin)-1)/]
 [else]
 	[pin.generateCppType(false)/] [pin.name.replaceFirst('self.', '')/] = [pin.generateArgumentGetter(aCallOperationAction)/]
 [/if]
@@ -248,7 +248,7 @@ while ([aPin.name.toLowerFirst()/]Iter != [aPin.name.toLowerFirst()/]End)
 [/for]
 
 [for ( par : Parameter | aParameterList->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in))->sortedBy(name))]
-[par.generateInputParameter(aParameterList->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in))->sortedBy(name)->indexOf(par)-1)/]
+[par.generateInputParameter(aParameterList->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in))->asOrderedSet()->indexOf(par)-1)/]
 [if (par.upper = 1)]
 	[if (not par.type.supportedTypes())]
 	std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> [par.name/]Value = std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Reference>([par.name/]ValueList->front());
@@ -319,7 +319,7 @@ while ([par.name.toLowerFirst()/]Iter != [par.name.toLowerFirst()/]End)
 //Simple type
 [par.name/]Value->setValue([par.name/]);
 [/if]
-//outputParameters->push_back(inputParameters->at([aParameterList->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in))->sortedBy(name)->indexOf(par)-1/]));
+//outputParameters->push_back(inputParameters->at([aParameterList->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in))->asOrderedSet()->indexOf(par)-1/]));
 [/for]
 [/template]
 
@@ -332,7 +332,7 @@ while ([par.name.toLowerFirst()/]Iter != [par.name.toLowerFirst()/]End)
 [else]
 [aParameter.name/]Value->setValue([aParameter.name/]);
 [/if]
-outputParameters->at([aParameterList->select((direction = ParameterDirectionKind::_out) or (direction = ParameterDirectionKind::return))->sortedBy(name)->indexOf(aParameter)-1/])->getValues()->push_back([aParameter.name/]Value);
+outputParameters->at([aParameterList->select((direction = ParameterDirectionKind::_out) or (direction = ParameterDirectionKind::return))->asOrderedSet()->indexOf(aParameter)-1/])->getValues()->push_back([aParameter.name/]Value);
 [/template]
 
 [template private generateArgumentGetter(pin : Pin, action : Action) ? (pin.name = 'self')]
