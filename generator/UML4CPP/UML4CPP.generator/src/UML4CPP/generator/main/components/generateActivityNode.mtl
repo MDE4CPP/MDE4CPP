@@ -493,5 +493,7 @@
 */]
 [template private initializePin(pin : Pin)]
 [pin.memberName()/]->setName("[pin.name/]");
+[pin.memberName()/]->setLower([pin.lower/]);
+[pin.memberName()/]->setUpper([pin.upper/]);
 
 [/template]
