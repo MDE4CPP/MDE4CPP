@@ -183,8 +183,8 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> [className/]::getValues(std
 
 	if (m_umlValue == nullptr)
 	{
-		std::cerr << __PRETTY_FUNCTION__ << ": not implemented for object lists" << std::endl;
-		throw "UnsupportedParameterException";	
+		std::cerr << __PRETTY_FUNCTION__ << ": no value stored inside [className/]" << std::endl;
+		throw "NullPointerException";	
 	}
 
 	std::shared_ptr<Bag<fUML::Semantics::Values::Value>> values(new Bag<fUML::Semantics::Values::Value>());
