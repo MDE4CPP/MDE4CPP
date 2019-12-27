@@ -330,7 +330,7 @@ while ([par.name.toLowerFirst()/]Iter != [par.name.toLowerFirst()/]End)
 [aParameter.name/]UmlLinker->setLocus(this->getLocus());
 [aParameter.name/]Value->setReferent([aParameter.name/]UmlLinker);
 [else]
-[aParameter.name/]Value->setValue([aParameter.name/]);
+[aParameter.name/]Value->setValue([variableName/]);
 [/if]
 outputParameters->at([aParameterList->select((direction = ParameterDirectionKind::_out) or (direction = ParameterDirectionKind::return))->asOrderedSet()->indexOf(aParameter)-1/])->getValues()->push_back([aParameter.name/]Value);
 [/template]
