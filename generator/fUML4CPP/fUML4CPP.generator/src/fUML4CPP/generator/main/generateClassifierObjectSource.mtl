@@ -32,7 +32,7 @@
 [file (aPackage.getPackageName().concat('Exec/').concat(className).concat('.cpp'), false, 'UTF-8')]
 #include "[aPackage.getPackageName()/]Exec/[className/].hpp"
 
-#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
 #include "[aClassifier.getNearestPackage().myNamespaceName()/]/[aClassifier.name.toUpperFirst()/].hpp"
 [let attributes : Set(Property)= aPackage.getStructuralFeaturesFromRSTA(aClassifier)->addAll(aPackage.getStructuralFeaturesFromASTVA(aClassifier))->addAll(aPackage.getStructuralFeaturesFromRSTVA(aClassifier).oclAsType(Property)->flatten())]
 [if (attributes->size() > 0)]
@@ -48,12 +48,13 @@
 #include "fUML/Semantics/SimpleClassifiers/[property.type.name.toUpperFirst()/]Value.hpp"
 [else]
 #include "[aPackage.getPackageName()/]Exec/[property.type.oclAsType(Classifier).objectClassName()/].hpp"
+#include "[if (aClassifier._package.name = 'UML')]uml[else][aClassifier._package.name/][/if]/[aClassifier.name/].hpp"
 [/if]
 [/for]
 #include "uml/Property.hpp"
 
 [for (aPack : Package | attributes.getNearestPackage()->asSet()->flatten()->sortedBy(name))]
-#include "[aPack.getPackageName()/]/[aPack.getPackageName()/]Package.hpp"
+#include "[aPack.getPackageName()/]/[aPack.name/]Package.hpp"
 [/for]
 [/if]
 [/let]
