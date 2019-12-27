@@ -283,10 +283,15 @@ void [className/]::setFeatureValue(std::shared_ptr<uml::StructuralFeature> featu
 
 [template private generateSetFeatureValue(aProperty : Property)]
 [if (aProperty.isPrimitiveTypedProperty())]
-std::shared_ptr<[aProperty.type.getValueClass()/]> value = std::dynamic_pointer_cast<[aProperty.type.getValueClass()/]>(inputValue);
-if (value != nullptr)
+std::shared_ptr<[aProperty.type.getValueClass()/]> valueObject = std::dynamic_pointer_cast<[aProperty.type.getValueClass()/]>(inputValue);
+if (valueObject != nullptr)
 {
-	m_umlValue->[aProperty.setterName()/](value->[aProperty.getterPrefix()/]Value());
+[if (aProperty.upper = 1)]
+	m_umlValue->[aProperty.setterName()/](valueObject->getValue());
+[else]
+	std::shared_ptr<[aProperty.type.generateCppType(true)/]> value(new [aProperty.type.generateCppType(true)/](valueObject->getValue()));
+	m_umlValue->[aProperty.getterName()/]()->push_back(value);
+[/if]
 }
 [else]
 std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> reference = std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Reference>(inputValue);
