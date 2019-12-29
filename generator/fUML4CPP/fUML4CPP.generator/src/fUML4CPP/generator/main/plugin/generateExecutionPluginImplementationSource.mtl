@@ -126,8 +126,18 @@ std::shared_ptr<fUML::Semantics::SimpleClassifiers::[par.type.name/]Value> ret =
 assert(ret != nullptr);
 return eAny(ret->getValue());
 [else]
-std::cout << "generation is missing for return parameter with supported types and upper <> 1" << std::endl;
-throw "error";
+std::shared_ptr<Bag<[par.type.generateCppType(true)/]>> [par.name/](new Bag<[par.type.generateCppType(true)/]>());
+std::shared_ptr<Bag<fUML::Semantics::Values::Value>> returnValues = resultPList->front()->getValues();
+Bag<fUML::Semantics::Values::Value>::iterator returnValuesIter = returnValues->begin();
+Bag<fUML::Semantics::Values::Value>::iterator returnValuesEnd = returnValues->end();
+while (returnValuesIter != returnValuesEnd)
+{
+	std::shared_ptr<[par.type.getValueClass()/]> valueObject = std::dynamic_pointer_cast<[par.type.getValueClass()/]>(*returnValuesIter);
+	std::shared_ptr<[par.type.generateCppType(true)/]> value(new [par.type.generateCppType(true)/](valueObject->getValue()));
+	[par.name/]->push_back(value);
+	returnValuesIter++;
+}
+return eAny([par.name/]);
 [/if]
 [else]
 [if (par.upper =1)]
