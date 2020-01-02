@@ -142,7 +142,7 @@ void [behaviorName/]::setThisExecutionPtr(std::weak_ptr<[behaviorName/]> thisExe
 
 [template private generateBody(aNamedElement : NamedElement, aPackage : Package) ? (aNamedElement.oclIsKindOf(OpaqueBehavior))]
 [let anOpaqueBehavior : OpaqueBehavior = aNamedElement.oclAsType(OpaqueBehavior)]
-[anOpaqueBehavior.ownedParameter->asSet()->generateIncomingParameters()/]
+[anOpaqueBehavior.ownedParameter->generateIncomingParameters()/]
 
 //Body of the Opaquebehavior
 //Start ---------------------------
@@ -151,16 +151,16 @@ std::shared_ptr<[anOpaqueBehavior.owner.oclAsType(Classifier).namespace.myNamesp
 [/if]
 
 [if (anOpaqueBehavior.language->includes(keyCPP()))]
-[let index : Integer = anOpaqueBehavior.language->asOrderedSet()->indexOf(keyCPP())]
+[let index : Integer = anOpaqueBehavior.language->indexOf(keyCPP())]
 [if (0 < index and index <= anOpaqueBehavior._body->size())]
-[anOpaqueBehavior._body->asOrderedSet()->at(index)/]
+[anOpaqueBehavior._body->at(index)/]
 [/if][/let]
 [else]
 std::cout << __PRETTY_FUNCTION__ << std::endl;
 throw "UnsupportedOperationException";
 [/if]
 		
-[anOpaqueBehavior.ownedParameter->asSet()->generateOutgoingParameters()/]
+[anOpaqueBehavior.ownedParameter->generateOutgoingParameters()/]
 [/let]
 [/template]
 
@@ -192,11 +192,11 @@ if (target == nullptr)
 [/for]
 
 //Calling the associated operation.
-[let retPar : Set(Parameter) = aCallOperationAction.operation.ownedParameter->select(p :Parameter | (p.direction = ParameterDirectionKind::return))->asSet()]
-[if(not retPar->isEmpty())][if (not retPar->asOrderedSet()->first().oclIsInvalid())][retPar.generateCppType(false)/] [retPar.name/] = [/if][/if]target->[aCallOperationAction.operation.name/]([for (par : Parameter | aCallOperationAction.operation.ownedParameter->select(param : Parameter | not (param.direction = ParameterDirectionKind::return))) separator (',')] [par.name/][/for]);
+[let retPar : OrderedSet(Parameter) = aCallOperationAction.operation.ownedParameter->select(p :Parameter | (p.direction = ParameterDirectionKind::return))]
+[if(not retPar->isEmpty())][if (not retPar->first().oclIsInvalid())][retPar.generateCppType(false)/] [retPar.name/] = [/if][/if]target->[aCallOperationAction.operation.name/]([for (par : Parameter | aCallOperationAction.operation.ownedParameter->select(param : Parameter | not (param.direction = ParameterDirectionKind::return))) separator (',')] [par.name/][/for]);
 [/let]	
 
-[aCallOperationAction.operation.ownedParameter->asSet()->generateOutgoingParameters()/]
+[aCallOperationAction.operation.ownedParameter->generateOutgoingParameters()/]
 [/let]
 [/template]
 
@@ -242,13 +242,13 @@ while ([aPin.name.toLowerFirst()/]Iter != [aPin.name.toLowerFirst()/]End)
 [/if]
 [/template]
 
-[template private generateIncomingParameters(aParameterList : Set(Parameter))]
+[template private generateIncomingParameters(aParameterList : OrderedSet(Parameter))]
 [for ( par : Parameter | aParameterList)]
 [par.generateCppType(false)/] [par.name/][if (par.upper <> 1)](new Bag<[par.type.generateCppType(true)/]>())[/if];
 [/for]
 
-[for ( par : Parameter | aParameterList->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in))->sortedBy(name))]
-[par.generateInputParameter(aParameterList->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in))->asOrderedSet()->indexOf(par)-1)/]
+[for ( par : Parameter | aParameterList->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in)))]
+[par.generateInputParameter(aParameterList->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in))->indexOf(par)-1)/]
 [if (par.upper = 1)]
 	[if (not par.type.supportedTypes())]
 	std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> [par.name/]Value = std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Reference>([par.name/]ValueList->front());
@@ -288,7 +288,7 @@ while ([par.name.toLowerFirst()/]ValueIter != [par.name.toLowerFirst()/]ValueEnd
 [/for]
 [/template]
 
-[template private generateOutgoingParameters(aParameterList : Set(Parameter))]
+[template private generateOutgoingParameters(aParameterList : OrderedSet(Parameter))]
 //set return / out parameters
 [for ( par : Parameter | aParameterList->select((direction = ParameterDirectionKind::_out) or (direction = ParameterDirectionKind::return))->sortedBy(name))]
 [if (par.upper = 1)]
@@ -306,7 +306,7 @@ while ([par.name.toLowerFirst()/]Iter != [par.name.toLowerFirst()/]End)
 [/for]
 
 //set InOut parameters
-[for ( par : Parameter | aParameterList->asOrderedSet()->select(direction = ParameterDirectionKind::inout)->sortedBy(name))]
+[for ( par : Parameter | aParameterList->select(direction = ParameterDirectionKind::inout))]
 [if (par.direction <> ParameterDirectionKind::inout or not par.type.supportedTypes())]
 [par.generateOutputParameter()/]
 [/if]
@@ -320,7 +320,7 @@ while ([par.name.toLowerFirst()/]Iter != [par.name.toLowerFirst()/]End)
 [if (par.upper = 1)]
 [par.name/]Value->setValue([par.name/]);
 [else]
-//	[par.name/]ValueList = outputParameters->at([aParameterList->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in))->asOrderedSet()->indexOf(par)-1/])->getValues();
+//	[par.name/]ValueList = outputParameters->at([aParameterList->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in))->indexOf(par)-1/])->getValues();
 [par.name/]ValueList->clear();
 Bag<[par.type.generateCppType(true)/]>::iterator [par.name/]Iter = [par.name/]->begin();
 Bag<[par.type.generateCppType(true)/]>::iterator [par.name/]End = [par.name/]->end();
@@ -333,11 +333,11 @@ while ([par.name/]Iter != [par.name/]End)
 }
 [/if]
 [/if]
-//outputParameters->push_back(inputParameters->at([aParameterList->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in))->asOrderedSet()->indexOf(par)-1/]));
+//outputParameters->push_back(inputParameters->at([aParameterList->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in))->indexOf(par)-1/]));
 [/for]
 [/template]
 
-[template private generateValue(aParameter : Parameter, aParameterList : Set(Parameter), variableName : String)]
+[template private generateValue(aParameter : Parameter, aParameterList : OrderedSet(Parameter), variableName : String)]
 [aParameter.generateOutputParameter()/]
 [if (not aParameter.type.supportedTypes())]
 [aParameter.name/]UmlLinker->setUmlValue([variableName/]);
@@ -346,7 +346,7 @@ while ([par.name/]Iter != [par.name/]End)
 [else]
 [aParameter.name/]Value->setValue([variableName/]);
 [/if]
-outputParameters->at([aParameterList->select((direction = ParameterDirectionKind::_out) or (direction = ParameterDirectionKind::return))->asOrderedSet()->indexOf(aParameter)-1/])->getValues()->push_back([aParameter.name/]Value);
+outputParameters->at([aParameterList->select((direction = ParameterDirectionKind::_out) or (direction = ParameterDirectionKind::return))->indexOf(aParameter)-1/])->getValues()->push_back([aParameter.name/]Value);
 [/template]
 
 [template private generateArgumentGetter(pin : Pin, action : Action) ? (pin.name = 'self')]
