@@ -1,0 +1,14 @@
+description 'Build task for project: StandardProfile'
+
+task buildStandardProfile() {
+	group 'StandardProfile'
+	description 'build StandardProfile'
+
+	dependsOn 'model:generateStandardProfile'
+	dependsOn 'src_gen:compileStandardProfile'
+
+	dependsOn getRootProject().getTasksByName('buildEcore', true)
+	dependsOn getRootProject().getTasksByName('buildUml', true)
+}
+
+tasks.getByPath('src_gen:compileStandardProfile').mustRunAfter tasks.getByPath('model:generateStandardProfile')
