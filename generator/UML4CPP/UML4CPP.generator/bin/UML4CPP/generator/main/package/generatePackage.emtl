@@ -158,6 +158,9 @@
   </ocl.ecore:Variable>
   <ecore:EPackage name="collections">
     <eClassifiers xsi:type="ocl.ecore:SetType" instanceClassName="java.util.Set">
+      <elementType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Stereotype"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ocl.ecore:SetType" instanceClassName="java.util.Set">
       <elementType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Package"/>
     </eClassifiers>
   </ecore:EPackage>

@@ -1187,6 +1187,14 @@
           <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
         </each>
       </body>
+      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#xD;&#xA;"/>
+      <body xsi:type="mtl:TemplateInvocation">
+        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+        <definition href="generateStereotype.emtl#/0/generateStereotypeApplication"/>
+        <argument xsi:type="ocl.ecore:VariableExp" name="aOperation" referredVariable="/0/initalizeOperation/aOperation">
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Operation"/>
+        </argument>
+      </body>
       <documentation xsi:type="mtl:ModuleElementDocumentation">
         <body startPosition="7574" endPosition="7758" value="&#xD;&#xA;generate initialization of meta model instance for an aOperation element&#xD;&#xA;&#xD;&#xA;this includes:&#xD;&#xA;- set operation name&#xD;&#xA;- set methods&#xD;&#xA;- initialize operation parameter&#xD;&#xA;&#xD;&#xA;"/>
       </documentation>
@@ -1300,6 +1308,18 @@
         <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
         <eParameters name="aParameter">
           <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Parameter"/>
+        </eParameters>
+      </eOperations>
+      <eOperations name="generateStereotypeApplication">
+        <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+          <contents xsi:type="ocl.ecore:Constraint"/>
+        </eAnnotations>
+        <eAnnotations source="MTL">
+          <references href="generateStereotype.emtl#/0/generateStereotypeApplication"/>
+        </eAnnotations>
+        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+        <eParameters name="aElement">
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Element"/>
         </eParameters>
       </eOperations>
       <eOperations name="generateCppType">
@@ -1850,6 +1870,9 @@
   </ocl.ecore:Variable>
   <ocl.ecore:Variable name="i">
     <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Integer"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Operation"/>
   </ocl.ecore:Variable>
   <ocl.ecore:Variable name="self">
     <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
@@ -3707,7 +3730,7 @@
     </eAnnotations>
     <eAnnotations source="positions.370" references="/0/initalizeOperation">
       <details key="start" value="7762"/>
-      <details key="end" value="8181"/>
+      <details key="end" value="8230"/>
       <details key="line" value="135"/>
     </eAnnotations>
     <eAnnotations source="positions.371" references="/0/initalizeOperation/%">
@@ -3841,11 +3864,26 @@
       <details key="line" value="0"/>
     </eAnnotations>
     <eAnnotations source="positions.397" references="/0/initalizeOperation/%.7">
+      <details key="start" value="8170"/>
+      <details key="end" value="8172"/>
+      <details key="line" value="143"/>
+    </eAnnotations>
+    <eAnnotations source="positions.398" references="/0/initalizeOperation/%.8">
+      <details key="start" value="8173"/>
+      <details key="end" value="8215"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.399" references="/0/initalizeOperation/%.8/aOperation">
+      <details key="start" value="8173"/>
+      <details key="end" value="8183"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.400" references="/0/initalizeOperation/%.9">
       <details key="start" value="7571"/>
       <details key="end" value="7760"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.398" references="/0/initalizeOperation/aOperation">
+    <eAnnotations source="positions.401" references="/0/initalizeOperation/aOperation">
       <details key="start" value="7798"/>
       <details key="end" value="7820"/>
       <details key="line" value="135"/>
