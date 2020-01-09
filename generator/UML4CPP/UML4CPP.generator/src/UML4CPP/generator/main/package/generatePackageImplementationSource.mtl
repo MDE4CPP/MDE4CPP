@@ -50,7 +50,8 @@
 								aPackage.allOwnedElements()->filter(TypedElement)->select(not type.oclIsUndefined()).type.getNearestPackage(),
 								aPackage.allOwnedElements()->filter(CallBehaviorAction).behavior.getNearestPackage(),
 								aPackage.allOwnedElements()->filter(Element).getAppliedStereotypes().getProfile(), 
-								aPackage.member->filter(Element).allOwnedElements()->filter(InterfaceRealization).contract.getNearestPackage()
+								aPackage.member->filter(Element).allOwnedElements()->filter(InterfaceRealization).contract.getNearestPackage(),
+								aPackage.member->filter(Element).allOwnedElements()->filter(Generalization).general.getNearestPackage()
 							}->flatten() /]
 [query private getMetaMetaModelIncludes(aPackage : Package) : Set(EClass) = OrderedSet{
 								aPackage.allOwnedElements().eClass(), 
