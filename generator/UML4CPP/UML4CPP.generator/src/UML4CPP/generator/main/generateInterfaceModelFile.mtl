@@ -65,9 +65,14 @@
 [if (not element.getNearestPackage().ignoreNamespace())]}[/if]
 [/for]
 
+// base class includes
+[if (aInterface.generalization.general->asBag()->isEmpty())]
+#include "uml/Element.hpp"
+[else]
 [for (elements : Classifier| aInterface.generalization.general->asOrderedSet()->sortedBy(myQualifiedName()))]
 #include "[elements.getNearestPackage().getPackageName()/]/[elements.name.toUpperFirst().concat('.hpp')/]"
 [/for]
+[/if]
 
 [if (aInterface.oclIsKindOf(Stereotype))]
 #include "uml/Stereotype.hpp"
@@ -81,8 +86,8 @@
 [if (not aInterface.getNearestPackage().ignoreNamespace())]namespace [aPackage.name/] 
 {
 [/if]
-	class [aInterface.name/] [for (aClassifier : Classifier | aInterface.generalization.general->asOrderedSet()->sortedBy(myQualifiedName())) before (':') separator (',') after ('\n')]
-virtual public [aClassifier.getClassifierName(aInterface, ignoreNamespace(aClassifier))/][/for]
+	class [aInterface.name/] [if (aInterface.generalization.general->asBag()->isEmpty())] : virtual public uml::Element[else][for (aClassifier : Classifier | aInterface.generalization.general->asOrderedSet()->sortedBy(myQualifiedName())) before (':') separator (',') after ('\n')]
+virtual public [aClassifier.getClassifierName(aInterface, ignoreNamespace(aClassifier))/][/for][/if]
 
 	{
 		protected:
