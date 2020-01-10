@@ -47,6 +47,7 @@
 																		aPackage.member->filter(Class).attribute.getAppliedStereotypes().getNearestPackage(),
 																		aPackage.member->filter(Class).ownedOperation.ownedParameter.type->reject(oclIsUndefined()).getNearestPackage(),
 																		aPackage.member->filter(Class).interfaceRealization.supplier->reject(oclIsUndefined()).getNearestPackage(),
+																		aPackage.member->filter(Class).generalization.general->reject(oclIsUndefined()).getNearestPackage(),
 																		aPackage.member->filter(Dependency).getAppliedStereotypes().getNearestPackage(),
 																		aPackage.packageImport.importedPackage
 																	}->flatten()->reject(oclIsUndefined())->reject(pack : Package | (pack = aPackage) or pack.isReflectionModel()) /]
