@@ -121,7 +121,23 @@ Any [aClass.name.toUpperFirst().concat('Impl')/]::get(std::shared_ptr<uml::Prope
         //invoke the getter function
         return iter->second();
     }
+[let classList : OrderedSet(Class) = aClass.superClass->reject(oclIsUndefined() and name.oclIsUndefined())->sortedBy(name)]
+[if (classList->size() = 1)]
+	return [classList->first().owner.oclAsType(NamedElement).name/]::[classList->first().name.toUpperFirst()/]Impl::get(_property);
+[elseif (classList->size() > 1)]
+	Any value;
+[for (sClass : Class | aClass.superClass->reject(oclIsUndefined() and name.oclIsUndefined()))]
+	value = [sClass.owner.oclAsType(NamedElement).name/]::[sClass.name.toUpperFirst()/]Impl::get(_property);
+	if (value != null)
+	{
+		return value;
+	}
+[/for]
+	return value;
+[else]
 	return eAny(nullptr);
+[/if]
+[/let]
 }
 
 void [aClass.name.toUpperFirst().concat('Impl')/]::set(std::shared_ptr<uml::Property> _property, Any value)
@@ -134,6 +150,9 @@ void [aClass.name.toUpperFirst().concat('Impl')/]::set(std::shared_ptr<uml::Prop
         //invoke the getter function
         iter->second(value);
     }
+[for (sClass : Class | aClass.superClass->reject(oclIsUndefined() and name.oclIsUndefined()))]
+	[sClass.owner.oclAsType(NamedElement).name/]::[sClass.name.toUpperFirst()/]Impl::set(_property, value);
+[/for]
 }
 
 void [aClass.name.toUpperFirst().concat('Impl')/]::unset(std::shared_ptr<uml::Property> _property)
@@ -146,5 +165,8 @@ void [aClass.name.toUpperFirst().concat('Impl')/]::unset(std::shared_ptr<uml::Pr
         //invoke the getter function
         iter->second();
     }
+[for (sClass : Class | aClass.superClass->reject(oclIsUndefined() and name.oclIsUndefined()))]
+	[sClass.owner.oclAsType(NamedElement).name/]::[sClass.name.toUpperFirst()/]Impl::unset(_property);
+[/for]
 }
 [/template]
