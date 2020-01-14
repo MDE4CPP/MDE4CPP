@@ -191,6 +191,10 @@ if (target == nullptr)
 [/if]
 [/for]
 
+[for (outPar : Parameter | aCallOperationAction.operation.ownedParameter->select(p :Parameter | (p.direction = ParameterDirectionKind::out)))]
+[outPar.generateCppType(false)/] [outPar.name/][if (outPar.upper <> 1)](new Bag<[outPar.type.generateCppType(true)/]>())[/if];
+[/for]	
+
 //Calling the associated operation.
 [let retPar : OrderedSet(Parameter) = aCallOperationAction.operation.ownedParameter->select(p :Parameter | (p.direction = ParameterDirectionKind::return))]
 [if(not retPar->isEmpty())][if (not retPar->first().oclIsInvalid())][retPar.generateCppType(false)/] [retPar.name/] = [/if][/if]target->[aCallOperationAction.operation.name/]([for (par : Parameter | aCallOperationAction.operation.ownedParameter->select(param : Parameter | not (param.direction = ParameterDirectionKind::return))) separator (',')] [par.name/][/for]);
