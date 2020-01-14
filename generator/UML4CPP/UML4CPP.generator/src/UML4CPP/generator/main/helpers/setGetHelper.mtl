@@ -51,12 +51,15 @@ std::map<std::string,std::function<void(Any)>> m_setterMap;
 std::map<std::string,std::function<void()>> m_unsetterMap;
 [/template]
 
+[query private getSetGetProperties(aClass : Class) : OrderedSet(Property) = aClass.attribute->addAll(aClass.interfaceRealization.contract.attribute)->sortedBy(myQualifiedName())/]
+
 [**
  * generate the creation of {property name, function} pairs and their insertion into the corresponding map
 */]
 [template public generateGetSetInit(aClass : Class)]
 //getter init
-[for (prop : Property | aClass.allFeatures()->filter(Property)->asOrderedSet()->sortedBy(myQualifiedName()))]
+[let propList : OrderedSet(Property) = aClass.getSetGetProperties()]
+[for (prop : Property | propList)]
 [if (prop.type.oclIsKindOf(PrimitiveType) or prop.type.oclIsKindOf(Enumeration))]
 m_getterMap.insert(std::pair<std::string,std::function<Any()>>("[prop.qualifiedName/]",[ '[' /]this[ ']' /](){ return eAny(this->[prop.getterName()/]());}));
 [else][if (prop.upper=1)]
@@ -67,7 +70,7 @@ m_getterMap.insert(std::pair<std::string,std::function<Any()>>("[prop.qualifiedN
 [/if]
 [/for]
 
-[for (aFeature : StructuralFeature | aClass.allFeatures()->filter(StructuralFeature)->asOrderedSet()->sortedBy(myQualifiedName())) ? (aFeature.hasSetter())]
+[for (aFeature : Property | propList) ? (aFeature.hasSetter())]
 [if (aFeature.type.oclIsKindOf(Enumeration))]
 m_setterMap.insert(std::pair<std::string,std::function<void(Any)>>("[aFeature.qualifiedName/]",[ '[' /]this[ ']' /](Any object){this->[aFeature.setterName()/](object->get<std::shared_ptr<uml::EnumerationLiteral>>());}));
 [else]
@@ -75,13 +78,14 @@ m_setterMap.insert(std::pair<std::string,std::function<void(Any)>>("[aFeature.qu
 [/if]
 [/for]
 
-[for (prop : Property | aClass.allFeatures()->filter(Property)->asOrderedSet()->sortedBy(myQualifiedName())) ? (not(prop.type.oclIsKindOf(PrimitiveType) or prop.type.oclIsKindOf(Enumeration)))]
+[for (prop : Property | propList) ? (not(prop.type.oclIsKindOf(PrimitiveType) or prop.type.oclIsKindOf(Enumeration)))]
 [if (prop.upper=1)]
 m_unsetterMap.insert(std::pair<std::string,std::function<void()>>("[prop.qualifiedName/]",[ '[' /]this[ ']' /](){m_[prop.name/] = std::shared_ptr<[prop.type.transformType()/]>(nullptr);}));
 [else]
 m_unsetterMap.insert(std::pair<std::string,std::function<void()>>("[prop.qualifiedName/]",[ '[' /]this[ ']' /](){m_[prop.name/]->clear();}));
 [/if]
 [/for]
+[/let]
 [/template]
 
 [**
