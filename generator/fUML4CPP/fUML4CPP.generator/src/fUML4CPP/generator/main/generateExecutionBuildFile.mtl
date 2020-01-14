@@ -24,6 +24,7 @@
 																			aPackage.member->filter(Class).ownedOperation.ownedParameter.type.getNearestPackage(),
 																			aPackage.member->filter(Class).attribute.getAppliedStereotypes().getNearestPackage(), 
 																			aPackage.member->filter(Class).interfaceRealization.supplier.getNearestPackage(), 
+																			aPackage.member->filter(Class).generalization.general.getNearestPackage(), 
 																			aPackage.getCallOperationActions().operation.method->reject(oclIsUndefined()).ownedParameter.type.getNearestPackage(),
 																			aPackage.packageImport.importedPackage
 																		}->flatten() /]
