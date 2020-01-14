@@ -19,14 +19,14 @@
 [import UML4CPP::generator::main::helpers::nameHelper /]
 
 [query public getOpaqueBehaviors(aPackage : Package) : Set(OpaqueBehavior) = Set{
-		aPackage.allOwnedElements()->selectByKind(Activity).ownedNode->filter(CallBehaviorAction)->asSet().behavior.oclAsType(OpaqueBehavior)->reject(oclIsUndefined())->asSet(),
-		aPackage.allOwnedElements()->selectByKind(ExpansionRegion).node->filter(CallBehaviorAction)->asSet().behavior.oclAsType(OpaqueBehavior)->reject(oclIsUndefined())->asSet(),
+		aPackage.allOwnedElements()->selectByKind(Activity).ownedNode->filter(CallBehaviorAction)->asSet().behavior->selectByKind(OpaqueBehavior)->reject(oclIsUndefined())->asSet(),
+		aPackage.allOwnedElements()->selectByKind(ExpansionRegion).node->filter(CallBehaviorAction)->asSet().behavior->selectByKind(OpaqueBehavior)->reject(oclIsUndefined())->asSet(),
 		aPackage.allOwnedElements()->selectByKind(DecisionNode).decisionInput->asSet()->reject(oclIsUndefined())->asSet().oclAsType(OpaqueBehavior)->asSet()
 	}->flatten()
  /]
 
 [query public getOpaqueBehaviors(aActivity : Activity) : Set(OpaqueBehavior) = OrderedSet{
-		aActivity.allOwnedElements()->filter(CallBehaviorAction)->asSet().behavior.oclAsType(OpaqueBehavior)->reject(oclIsUndefined())->asSet(),
+		aActivity.allOwnedElements()->filter(CallBehaviorAction)->asSet().behavior->selectByKind(OpaqueBehavior)->reject(oclIsUndefined())->asSet(),
 		aActivity.allOwnedElements()->selectByKind(DecisionNode).decisionInput->asSet()->reject(oclIsUndefined())->asSet().oclAsType(OpaqueBehavior)->asSet()
 	}->flatten()->sortedBy(name)
 /]
