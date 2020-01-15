@@ -21,24 +21,28 @@
 [query public getOpaqueBehaviors(aPackage : Package) : Set(OpaqueBehavior) = Set{
 		aPackage.allOwnedElements()->selectByKind(Activity).ownedNode->filter(CallBehaviorAction)->asSet().behavior->selectByKind(OpaqueBehavior)->reject(oclIsUndefined())->asSet(),
 		aPackage.allOwnedElements()->selectByKind(ExpansionRegion).node->filter(CallBehaviorAction)->asSet().behavior->selectByKind(OpaqueBehavior)->reject(oclIsUndefined())->asSet(),
-		aPackage.allOwnedElements()->selectByKind(DecisionNode).decisionInput->asSet()->reject(oclIsUndefined())->asSet().oclAsType(OpaqueBehavior)->asSet()
+		aPackage.allOwnedElements()->selectByKind(DecisionNode).decisionInput->asSet()->reject(oclIsUndefined())->asSet().oclAsType(OpaqueBehavior)->asSet(),
+		aPackage.allOwnedElements()->filter(CallBehaviorAction)->asSet().behavior->selectByKind(Activity)->reject(oclIsUndefined()).getOpaqueBehaviors()
 	}->flatten()
  /]
 
 [query public getOpaqueBehaviors(aActivity : Activity) : Set(OpaqueBehavior) = OrderedSet{
 		aActivity.allOwnedElements()->filter(CallBehaviorAction)->asSet().behavior->selectByKind(OpaqueBehavior)->reject(oclIsUndefined())->asSet(),
-		aActivity.allOwnedElements()->selectByKind(DecisionNode).decisionInput->asSet()->reject(oclIsUndefined())->asSet().oclAsType(OpaqueBehavior)->asSet()
+		aActivity.allOwnedElements()->selectByKind(DecisionNode).decisionInput->asSet()->reject(oclIsUndefined())->asSet().oclAsType(OpaqueBehavior)->asSet(),
+		aActivity.allOwnedElements()->filter(CallBehaviorAction)->asSet().behavior->selectByKind(Activity)->reject(oclIsUndefined()).getOpaqueBehaviors()
 	}->flatten()->sortedBy(name)
 /]
 
 [query public getCallOperationActions(aPackage : Package) : Set(CallOperationAction) = OrderedSet{
-		aPackage.allOwnedElements()->selectByKind(Activity).ownedNode->filter(CallOperationAction)->asOrderedSet()->sortedBy(name),
-		aPackage.allOwnedElements()->selectByKind(ExpansionRegion).node->filter(CallOperationAction)->asOrderedSet()->sortedBy(name) 
+		aPackage.allOwnedElements()->selectByKind(Activity).ownedNode->filter(CallOperationAction)->asOrderedSet(),
+		aPackage.allOwnedElements()->selectByKind(ExpansionRegion).node->filter(CallOperationAction)->asOrderedSet(),
+		aPackage.allOwnedElements()->filter(CallBehaviorAction)->asSet().behavior->selectByKind(Activity)->reject(oclIsUndefined()).getCallOperationActions()
 	}->flatten()->sortedBy(name)
 /]
 
 [query public getCallOperationActions(anActivity : Activity) : Set(CallOperationAction) = OrderedSet{
-		anActivity.allOwnedElements()->filter(CallOperationAction)->asOrderedSet()->sortedBy(name) 
+		anActivity.allOwnedElements()->filter(CallOperationAction)->asOrderedSet()->sortedBy(name),
+		anActivity.allOwnedElements()->filter(CallBehaviorAction)->asSet().behavior->selectByKind(Activity)->reject(oclIsUndefined()).getCallOperationActions()
 	}->flatten()->sortedBy(name)
 /]
 
@@ -59,6 +63,7 @@ factory->addPrimitiveBehaviorPrototype([memberName(anOpaqueBehavior)/]Execution)
 [if (not aCallOperationAction.name.oclIsUndefined())]
 std::shared_ptr<uml::OpaqueBehavior> [aCallOperationAction.getFBPackageElement()/](uml::UmlFactory::eInstance()->createOpaqueBehavior_in_Package([aCallOperationAction.getNearestPackage().name.concat('::').concat(aCallOperationAction.getNearestPackage().name.toUpperFirst()).concat('Package').concat('::eInstance()')/]));
 [aCallOperationAction.getFBPackageElement()/]->setName("[aCallOperationAction.getFBPackageElement()/]");
+[aCallOperationAction.getFBPackageElement()/]->setContext([aCallOperationAction._context.generatePackageGetterCall()/]);
 [aCallOperationAction.operation->asOrderedSet()->first().generatePackageGetterCall()/]->getMethod()->insert([aCallOperationAction.operation->asOrderedSet()->first().generatePackageGetterCall()/]->getMethod()->begin(), [aCallOperationAction.getFBPackageElement()/]);
 
 [for (aParameter : Parameter | aCallOperationAction.operation->asOrderedSet()->first().ownedParameter)]

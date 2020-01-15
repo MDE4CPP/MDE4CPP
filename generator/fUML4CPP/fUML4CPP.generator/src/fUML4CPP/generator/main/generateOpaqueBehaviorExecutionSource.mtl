@@ -350,7 +350,7 @@ while ([par.name/]Iter != [par.name/]End)
 [else]
 [aParameter.name/]Value->setValue([variableName/]);
 [/if]
-outputParameters->at([aParameterList->select((direction = ParameterDirectionKind::_out) or (direction = ParameterDirectionKind::return))->indexOf(aParameter)-1/])->getValues()->push_back([aParameter.name/]Value);
+outputParameters->at([aParameterList->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_out) or (direction = ParameterDirectionKind::return))->indexOf(aParameter)-1/])->getValues()->push_back([aParameter.name/]Value);
 [/template]
 
 [template private generateArgumentGetter(pin : Pin, action : Action) ? (pin.name = 'self')]
