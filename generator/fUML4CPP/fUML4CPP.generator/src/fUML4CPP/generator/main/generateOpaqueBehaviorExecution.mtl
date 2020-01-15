@@ -63,7 +63,9 @@ factory->addPrimitiveBehaviorPrototype([memberName(anOpaqueBehavior)/]Execution)
 [if (not aCallOperationAction.name.oclIsUndefined())]
 std::shared_ptr<uml::OpaqueBehavior> [aCallOperationAction.getFBPackageElement()/](uml::UmlFactory::eInstance()->createOpaqueBehavior_in_Package([aCallOperationAction.getNearestPackage().name.concat('::').concat(aCallOperationAction.getNearestPackage().name.toUpperFirst()).concat('Package').concat('::eInstance()')/]));
 [aCallOperationAction.getFBPackageElement()/]->setName("[aCallOperationAction.getFBPackageElement()/]");
+[if (aCallOperationAction._context.oclIsKindOf(BehavioredClassifier))]
 [aCallOperationAction.getFBPackageElement()/]->setContext([aCallOperationAction._context.generatePackageGetterCall()/]);
+[/if]
 [aCallOperationAction.operation->asOrderedSet()->first().generatePackageGetterCall()/]->getMethod()->insert([aCallOperationAction.operation->asOrderedSet()->first().generatePackageGetterCall()/]->getMethod()->begin(), [aCallOperationAction.getFBPackageElement()/]);
 
 [for (aParameter : Parameter | aCallOperationAction.operation->asOrderedSet()->first().ownedParameter)]
