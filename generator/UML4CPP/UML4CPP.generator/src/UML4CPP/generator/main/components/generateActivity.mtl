@@ -47,5 +47,6 @@
 // activity [anActivity.name/]
 [anActivity.memberName()/]->setName("[anActivity.name/]");
 [anActivity.ownedParameter.generateParameterInitialization()/]
+[anActivity.memberName()/]->setContext([anActivity.owner.oclAsType(NamedElement).memberName()/]);
 
 [/template]
