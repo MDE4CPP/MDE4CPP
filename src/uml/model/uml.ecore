@@ -3385,8 +3385,14 @@
       </eAnnotations>
     </eOperations>
     <eOperations name="isComposite" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//Boolean">
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="includes" value="#include &quot;uml/AggregationKind.hpp&quot;"/>
+      </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The value of isComposite is true only if aggregation is composite.&#xA;result = (aggregation = AggregationKind::composite)&#xA;&lt;p>From package UML::Classification.&lt;/p>"/>
+      </eAnnotations>
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="return (getAggregation() == AggregationKind::COMPOSITE);"/>
       </eAnnotations>
     </eOperations>
     <eOperations name="isNavigable" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//Boolean">
