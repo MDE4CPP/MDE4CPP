@@ -381,6 +381,7 @@ void [packageName/]::initializePackageValueSpecifications()
 }
 
 [(aPackage.allOwnedElements()->filter(NamedElement)-aPackage.allOwnedElements()->filter(ValueSpecification))->sortedBy(myQualifiedName()).generatePackageMemberGetterImpl()/]
+[(aPackage.allOwnedElements()->filter(ConnectorEnd)-aPackage.allOwnedElements()->filter(ValueSpecification))->sortedBy(myQualifiedName()).generatePackageMemberGetterImpl()/]
 
 [/file]
 [/template]

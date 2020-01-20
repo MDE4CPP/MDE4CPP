@@ -22,6 +22,7 @@
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::keywords /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
+
  
 [**
  * query to collect all related packages, which are used by current model
@@ -42,12 +43,13 @@
  * 
  * 
 */]
+
 [query private collectModelIncludes(aPackage : Package) : Set(Package) = OrderedSet{
 																		aPackage.member->filter(Class).attribute.type.getNearestPackage(),
-																		aPackage.member->filter(Class).attribute.getAppliedStereotypes().getNearestPackage(),
 																		aPackage.member->filter(Class).ownedOperation.ownedParameter.type->reject(oclIsUndefined()).getNearestPackage(),
 																		aPackage.member->filter(Class).interfaceRealization.supplier->reject(oclIsUndefined()).getNearestPackage(),
-																		aPackage.member->filter(Dependency).getAppliedStereotypes().getNearestPackage()
+																		aPackage.allOwnedElements().getAppliedStereotypes()._package,
+																		aPackage.getAppliedStereotypes()._package
 																	}->flatten()->reject(oclIsUndefined())->reject(pack : Package | (pack = aPackage) or pack.isReflectionModel()) /]
 
 [**
