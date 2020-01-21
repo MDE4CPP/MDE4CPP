@@ -163,7 +163,7 @@ return eAny(returnList);
 [/if]
 [/let]
 [else]
-std::cout << "Activity [anActivity.myQualifiedName()/] has no return parameter" << std::endl;
+DEBUG_MESSAGE(std::cout << "Activity [anActivity.myQualifiedName()/] has no return parameter" << std::endl;)
 return nullptr;
 [/if]
 [/template]
