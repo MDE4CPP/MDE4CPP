@@ -36,7 +36,7 @@
 #include <cassert>
 
 [comment  Generate Includes for the Factory/]
-[for (aClass : Class | aPackage.collectModelClassesForFactory())]
+[for (aClass : Class | aPackage.collectModelClassesForFactoryDeclaration())]
 #include "[aPackage.getPackageName()/]/impl/[aClass.name.toUpperFirst().concat('Impl.hpp')/]"
 [/for]
 
@@ -47,7 +47,7 @@
 [comment  generate standard constructor/]
 [className/]::[className/]()
 {
-	[for (aClass : Class | aPackage.collectModelClassesForFactory())]
+	[for (aClass : Class | aPackage.collectModelClassesForFactoryFunctions())]
 	m_idMap.insert(std::make_pair("[aClass.qualifiedName/]", [aPackage.name.toUpperFirst()/]Package::[aClass.getMemberName().toUpperCase()/]));
 	[/for]
 }
@@ -70,7 +70,7 @@ std::shared_ptr<uml::Element> [className/]::create(const unsigned int _metaClass
 {
 	switch(_metaClassId)
 	{
-	[for (aClass : Class | aPackage.collectModelClassesForFactory())]
+	[for (aClass : Class | aPackage.collectModelClassesForFactoryFunctions())]
 	[let ref:OrderedSet(Association) = aClass.getCompositionsToClass()]
 		case [aPackage.name.toUpperFirst()/]Package::[aClass.getMemberName().toUpperCase()/]:
 		{
@@ -144,7 +144,7 @@ std::shared_ptr<uml::Element> [className/]::create(std::string _className, std::
     return nullptr;
 }
 [comment  generate create operations with string in Container/]
-[for (aClass : Class | aPackage.collectModelClassesForFactory())]
+[for (aClass : Class | aPackage.collectModelClassesForFactoryFunctions())]
 std::shared_ptr<[aClass.generateCppType(true)/]> [className/]::create[aClass.name.toUpperFirst()/](const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<[aClass.generateCppType(true)/]Impl> element(new [aClass.name.toUpperFirst()/]Impl());
