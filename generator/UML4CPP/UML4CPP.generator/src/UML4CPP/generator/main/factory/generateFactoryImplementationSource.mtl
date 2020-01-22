@@ -105,7 +105,9 @@ std::shared_ptr<uml::Element> [className/]::create(const unsigned int _metaClass
 				[let containerProperty : Property = ref->first().memberEnd->select(type = aClass)->asOrderedSet()->first()]
 				[let containmentProperty : Property = ref->first().memberEnd->select(not (type = aClass))->asOrderedSet()->first()]
 				[containmentProperty.generateCppType()/] castedContainer = std::dynamic_pointer_cast<[if (containmentProperty.upper <> 1)]Bag<[/if][containmentProperty.type.transformType()/][if (containmentProperty.upper <> 1)]>[/if]>(container);
+[if (not containmentProperty.isBackReference())]
 				assert(castedContainer);
+[/if]
 				return std::shared_ptr<[aClass.name.toUpperFirst()/]>(this->create[aClass.name/]_in_[containmentProperty.name.toUpperFirst()/](castedContainer,_metaClassId));
 				[/let]
 				[/let]
