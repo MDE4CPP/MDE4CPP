@@ -129,7 +129,7 @@
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy [aClass.name.toUpperFirst()/] "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
-[for (att : Property | aClass.getAllAttributes()->sortedBy(name))]
+[for (att : Property | aClass.getAllAttributes()->reject(isBackReference())->sortedBy(name))]
 [if (att.upper = 1)]
 	m_[att.name/] = [if (not (att.type.isPrimitive() or att.type.oclIsKindOf(Enumeration)))]std::dynamic_pointer_cast<[att.type.generateCppType(true)/]>([/if]obj.[att.getterName()/]()[if (not (att.type.isPrimitive() or att.type.oclIsKindOf(Enumeration)))]->copy())[/if];
 [else]
