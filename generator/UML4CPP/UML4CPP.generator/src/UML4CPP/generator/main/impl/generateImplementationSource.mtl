@@ -29,7 +29,7 @@
 [import UML4CPP::generator::main::helpers::setGetHelper /]
 [import UML4CPP::generator::main::validation::validateModel /]
 
-[query private includes(aClass : Class)  : Set(Type) = OrderedSet{aClass.member->selectByKind(TypedElement)->select(not type.oclIsUndefined()).type, aClass.ownedOperation.ownedParameter.type, aClass.getAllAttributes().type}->flatten() /]
+[query private includes(aClass : Class)  : Set(Type) = OrderedSet{aClass.member->selectByKind(TypedElement)->select(not type.oclIsUndefined()).type, aClass.ownedOperation.ownedParameter.type, aClass.getAllAttributes().type, aClass.importedMember}->flatten() /]
 
 [query private getAllAttributes(anInterface : Interface) : Set(Property) = OrderedSet{anInterface.ownedAttribute, anInterface.generalization.general->selectByType(Interface).getAllAttributes()} /]
 [query private getAllAttributes(aClass : Class) : Set(Property) = OrderedSet{aClass.ownedAttribute, aClass.generalization.general->selectByType(Class).getAllAttributes(), aClass.interfaceRealization.contract.getAllAttributes()}->flatten() /]
