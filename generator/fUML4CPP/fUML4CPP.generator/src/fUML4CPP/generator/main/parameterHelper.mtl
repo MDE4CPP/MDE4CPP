@@ -33,8 +33,8 @@
 				aPackage.allOwnedElements()->filter(CallOperationAction).target.type,
 				aPackage.allOwnedElements()->filter(CallOperationAction).operation.ownedParameter->select(type.oclIsKindOf(Interface)).type,
 				aPackage.allOwnedElements()->filter(CallOperationAction).operation.ownedParameter->select(type.oclIsKindOf(Class)).type,
-				aPackage.allOwnedElements()->filter(Parameter)->select(type.oclIsKindOf(Interface)).type,
-				aPackage.allOwnedElements()->filter(Parameter)->select(type.oclIsKindOf(Class)).type,
+				aPackage.allOwnedElements()->filter(CallBehaviorAction).behavior->filter(OpaqueBehavior).ownedParameter->select(type.oclIsKindOf(Interface)).type,
+				aPackage.allOwnedElements()->filter(CallBehaviorAction).behavior->filter(OpaqueBehavior).ownedParameter->select(type.oclIsKindOf(Class)).type,
 				aPackage.allOwnedElements()->filter(ReadStructuralFeatureAction).structuralFeature.type,
 				aPackage.allOwnedElements()->filter(AddStructuralFeatureValueAction).structuralFeature.type,
 				aPackage.allOwnedElements()->filter(RemoveStructuralFeatureValueAction).structuralFeature.type
