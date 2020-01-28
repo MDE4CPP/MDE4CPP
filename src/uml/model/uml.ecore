@@ -3090,6 +3090,9 @@
         <eParameters name="redefiningElement" ordered="false" lowerBound="1" eType="#//RedefinableElement"/>
       </contents>
     </eAnnotations>
+    <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+      <details key="includes" value="#include &quot;uml/AggregationKind.hpp&quot;"/>
+    </eAnnotations>
     <eOperations name="subsetting_context_conforms" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Subsetting may only occur when the context of the subsetting property conforms to the context of the subsetted property.&#xA;subsettedProperty->notEmpty() implies&#xA;  (subsettingContext()->notEmpty() and subsettingContext()->forAll (sc |&#xA;    subsettedProperty->forAll(sp |&#xA;      sp.subsettingContext()->exists(c | sc.conformsTo(c)))))"/>
@@ -3385,9 +3388,6 @@
       </eAnnotations>
     </eOperations>
     <eOperations name="isComposite" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//Boolean">
-      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="includes" value="#include &quot;uml/AggregationKind.hpp&quot;"/>
-      </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The value of isComposite is true only if aggregation is composite.&#xA;result = (aggregation = AggregationKind::composite)&#xA;&lt;p>From package UML::Classification.&lt;/p>"/>
       </eAnnotations>
