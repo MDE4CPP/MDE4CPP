@@ -131,7 +131,13 @@
 	#endif
 [for (att : Property | aClass.getAllAttributes()->reject(isBackReference())->sortedBy(name))]
 [if (att.upper = 1)]
-	m_[att.name/] = [if (not (att.type.isPrimitive() or att.type.oclIsKindOf(Enumeration)))]std::dynamic_pointer_cast<[att.type.generateCppType(true)/]>([/if]obj.[att.getterName()/]()[if (not (att.type.isPrimitive() or att.type.oclIsKindOf(Enumeration)))]->copy())[/if];
+[if (not (att.type.isPrimitive() or att.type.oclIsKindOf(Enumeration)))]
+	if (obj.[att.getterName()/]() != nullptr)
+	{
+	[/if]	m_[att.name/] = [if (not (att.type.isPrimitive() or att.type.oclIsKindOf(Enumeration)))]std::dynamic_pointer_cast<[att.type.generateCppType(true)/]>([/if]obj.[att.getterName()/]()[if (not (att.type.isPrimitive() or att.type.oclIsKindOf(Enumeration)))]->copy())[/if];
+[if (not (att.type.isPrimitive() or att.type.oclIsKindOf(Enumeration)))]
+	}
+[/if]
 [else]
 	[att.generateCppType()/] [att.name/]List = obj.[att.getterName()/]();
 	Bag<[att.type.generateCppType(true)/]>::iterator [att.name/]Iter = [att.name/]List->begin();
