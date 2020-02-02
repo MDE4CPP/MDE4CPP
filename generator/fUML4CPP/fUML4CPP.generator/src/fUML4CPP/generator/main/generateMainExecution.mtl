@@ -103,6 +103,7 @@ int main()
 #include "fUML/Semantics/StructuredClassifiers/DispatchStrategy.hpp"
 #include "fUML/Semantics/Values/Value.hpp"
 #include "uml/Activity.hpp"
+#include "uml/Enumeration.hpp"
 #include "uml/FunctionBehavior.hpp"
 #include "uml/Interface.hpp"
 #include "uml/Operation.hpp"

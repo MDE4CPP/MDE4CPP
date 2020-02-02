@@ -98,6 +98,8 @@ std::shared_ptr<[par.type.name.toUpperFirst()/]Object> [par.name/]UmlLinker(new 
 
 [template public generateTypeInclude(type : Type, aPackage : Package) ? (not type.supportedTypes() and type.oclIsKindOf(Enumeration))]
 #include "fUML/Semantics/SimpleClassifiers/EnumerationValue.hpp"
+#include "[aPackage.name/]/[type.name/].hpp"
+#include "[aPackage.name/]/[aPackage.name.toUpperFirst()/]Package.hpp"
 [/template]
 
 [template public generateTypeInclude(type : Type, aPackage : Package) ? (supportedTypes())]

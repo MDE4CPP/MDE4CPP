@@ -64,7 +64,7 @@
 [/if]
 [if (not(aOperation.upper=1))]
 std::shared_ptr<Bag<[aOperation.type.transformType()/]>>
-[elseif ((not aOperation.type.oclIsUndefined()) and (not aOperation.type.isPrimitive() and (not aOperation.type.oclIsKindOf(Enumeration))))]
+[elseif ((not aOperation.type.oclIsUndefined()) and (not aOperation.type.isPrimitive()) and (not aOperation.type.oclIsKindOf(Enumeration)))]
 std::shared_ptr<[aOperation.type.transformType()/]>
 [else]
 [aOperation.type.transformType()/][/if]
@@ -83,8 +83,6 @@ std::shared_ptr<[aOperation.type.transformType()/]>
 [/if]
 [if (not aParameter.type.oclIsUndefined() and not (aParameter.type.isPrimitive() or aParameter.type.oclIsKindOf(Enumeration)))]
 std::shared_ptr<[if (aParameter.upper <> 1)]Bag<[/if][aParameter.type.transformType()/]>[if (aParameter.upper <> 1)]>[/if]
-[elseif (aParameter.type.oclIsKindOf(Enumeration))]
-std::shared_ptr<uml::EnumerationLiteral>
 [else]
 [if (aParameter.upper <> 1)]std::shared_ptr<Bag<[/if][aParameter.type.transformType()/][if(useReference and (aParameter.direction = ParameterDirectionKind::inout or aParameter.direction = ParameterDirectionKind::out) and aParameter.upper = 1)]&[/if][if (aParameter.upper <> 1)]>>[/if][/if]
 [/template]
@@ -102,8 +100,6 @@ std::shared_ptr<uml::EnumerationLiteral>
 [/if]
 [if (not aPin.type.oclIsUndefined() and not (aPin.type.isPrimitive() or aPin.type.oclIsKindOf(Enumeration)))]
 std::shared_ptr<[if (aPin.upper <> 1)]Bag<[/if][aPin.type.transformType()/]>[if (aPin.upper <> 1)]>[/if]
-[elseif (aPin.type.oclIsKindOf(Enumeration))]
-std::shared_ptr<uml::EnumerationLiteral>
 [else]
 [if (aPin.upper <> 1)]std::shared_ptr<Bag<[/if][aPin.type.transformType()/][if (aPin.upper <> 1)]>>[/if][/if]
 [/template]

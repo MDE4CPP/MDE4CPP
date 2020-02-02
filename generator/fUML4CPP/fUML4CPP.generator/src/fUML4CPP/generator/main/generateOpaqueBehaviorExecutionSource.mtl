@@ -215,9 +215,6 @@ if (target == nullptr)
 	{
 		DEBUG_MESSAGE(std::cout << "received instance of type [aPin.type.generateCppType(true)/] is null" << std::endl;);
 	}
-[elseif (aPin.type.oclIsKindOf(Enumeration))]
-	std::shared_ptr<fUML::Semantics::SimpleClassifiers::EnumerationValue> [aPin.name/]Value = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::EnumerationValue>([aPin.name/]ValueList->front());
-	[aPin.name/] = [aPin.name/]Value->getLiteral();
 [else]
 	std::shared_ptr<fUML::Semantics::SimpleClassifiers::[aPin.type.name.toUpperFirst()/]Value> [aPin.name/]Value = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::[aPin.type.name.toUpperFirst()/]Value>([aPin.name/]ValueList->front());
 	[aPin.name/] = [aPin.name/]Value->getValue();
@@ -350,7 +347,12 @@ while ([par.name/]Iter != [par.name/]End)
 [template private generateValue(aParameter : Parameter, aParameterList : OrderedSet(Parameter), variableName : String)]
 [aParameter.generateOutputParameter()/]
 [if (aParameter.type.oclIsKindOf(Enumeration))]
-[aParameter.name/]Value->setLiteral([aParameter.name/]);
+[for (literal : EnumerationLiteral | aParameter.type.oclAsType(Enumeration).ownedLiteral)]
+if ([aParameter.name/] == [literal.enumeration.namespace.name/]::[literal.enumeration.name/]::[literal.name.toUpperCase()/])
+{
+	[aParameter.name/]Value->setLiteral([literal.generatePackageGetterCall()/]);
+}
+[/for]
 [elseif (not aParameter.type.supportedTypes())]
 [aParameter.name/]UmlLinker->setUmlValue([variableName/]);
 [aParameter.name/]UmlLinker->setLocus(this->getLocus());
