@@ -208,17 +208,20 @@ if (target == nullptr)
 [aPin.generateCppType(false)/] [aPin.name/][if (aPin.upper <> 1)](new Bag<[aPin.type.generateCppType(true)/]>())[/if];
 [aPin.generateInputParameter(index)/]
 [if (aPin.upper = 1)]
-	[if (not aPin.type.supportedTypes())]
+[if (not aPin.type.supportedTypes())]
 	std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> [aPin.name/]Value = std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Reference>([aPin.name/]ValueList->front());
 	[aPin.name/] = std::dynamic_pointer_cast<[aPin.type.name/]Object>([aPin.name/]Value->getReferent())->getUmlValue();
 	if([aPin.name/] == nullptr)
 	{
 		DEBUG_MESSAGE(std::cout << "received instance of type [aPin.type.generateCppType(true)/] is null" << std::endl;);
 	}
-	[else]
+[elseif (aPin.type.oclIsKindOf(Enumeration))]
+	std::shared_ptr<fUML::Semantics::SimpleClassifiers::EnumerationValue> [aPin.name/]Value = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::EnumerationValue>([aPin.name/]ValueList->front());
+	[aPin.name/] = [aPin.name/]Value->getLiteral();
+[else]
 	std::shared_ptr<fUML::Semantics::SimpleClassifiers::[aPin.type.name.toUpperFirst()/]Value> [aPin.name/]Value = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::[aPin.type.name.toUpperFirst()/]Value>([aPin.name/]ValueList->front());
 	[aPin.name/] = [aPin.name/]Value->getValue();
-	[/if]
+[/if]
 [else]
 Bag<fUML::Semantics::Values::Value>::iterator [aPin.name.toLowerFirst()/]Iter = [aPin.name.toLowerFirst()/]ValueList->begin();
 Bag<fUML::Semantics::Values::Value>::iterator [aPin.name.toLowerFirst()/]End = [aPin.name.toLowerFirst()/]ValueList->end();
@@ -314,7 +317,10 @@ while ([par.name.toLowerFirst()/]Iter != [par.name.toLowerFirst()/]End)
 [if (par.direction <> ParameterDirectionKind::inout or not par.type.supportedTypes())]
 [par.generateOutputParameter()/]
 [/if]
-[if (not par.type.supportedTypes())]
+
+[if (par.type.oclIsKindOf(Enumeration))]
+[par.name/]Value->setLiteral([par.name/]);
+[elseif (not par.type.supportedTypes())]
 //Pointer type
 [par.name/]UmlLinker->setUmlValue[if(not (par.upper = 1))]s[/if]([par.name/]);
 [par.name/]UmlLinker->setLocus(this->getLocus());
@@ -343,7 +349,9 @@ while ([par.name/]Iter != [par.name/]End)
 
 [template private generateValue(aParameter : Parameter, aParameterList : OrderedSet(Parameter), variableName : String)]
 [aParameter.generateOutputParameter()/]
-[if (not aParameter.type.supportedTypes())]
+[if (aParameter.type.oclIsKindOf(Enumeration))]
+[aParameter.name/]Value->setLiteral([aParameter.name/]);
+[elseif (not aParameter.type.supportedTypes())]
 [aParameter.name/]UmlLinker->setUmlValue([variableName/]);
 [aParameter.name/]UmlLinker->setLocus(this->getLocus());
 [aParameter.name/]Value->setReferent([aParameter.name/]UmlLinker);
