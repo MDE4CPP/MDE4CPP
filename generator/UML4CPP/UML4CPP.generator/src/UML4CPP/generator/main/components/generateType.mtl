@@ -58,13 +58,15 @@
  * - upper <> 1 -> Bag used  
  * - error message, if Operation type is undefined or Operation type name is undefined
 */]
-[template public generateCppType(aOperation : Operation)]
+[template public generateCppType(aOperation : Operation) post (trim())]
 [if (not aOperation.type.oclIsUndefined() and aOperation.type.name.oclIsUndefined())]
 ['type of operation '.concat(aOperation.qualifiedName).concat(' is invalid (').concat(aOperation.type.toString()).concat(')').registerError() /]undefined
 [/if]
 [if (not(aOperation.upper=1))]
-std::shared_ptr<Bag<[aOperation.type.transformType()/]>>[elseif ((not aOperation.type.oclIsUndefined()) and (not aOperation.type.isPrimitive()))]
-std::shared_ptr<[aOperation.type.transformType()/]> [else]
+std::shared_ptr<Bag<[aOperation.type.transformType()/]>>
+[elseif ((not aOperation.type.oclIsUndefined()) and (not aOperation.type.isPrimitive() and (not aOperation.type.oclIsKindOf(Enumeration))))]
+std::shared_ptr<[aOperation.type.transformType()/]>
+[else]
 [aOperation.type.transformType()/][/if]
 [/template]
 
