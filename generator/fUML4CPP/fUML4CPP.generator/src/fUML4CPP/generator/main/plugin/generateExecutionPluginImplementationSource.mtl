@@ -34,10 +34,10 @@
 #include "uml/Activity.hpp"
 #include "uml/Element.hpp"
 
-[if (aPackage.allOwnedElements()->filter(Activity)->size() > 0)]
+[if (aPackage.allOwnedElements()->filter(Activity)->reject(specification.oclIsUndefined())->size() > 0)]
 [generateMainIncludes()/]
 [/if]
-[for (act : Activity | aPackage.allOwnedElements()->filter(Activity)->select(owner.oclIsKindOf(Class)))]
+[for (act : Activity | aPackage.allOwnedElements()->filter(Activity)->reject(specification.oclIsUndefined())->select(owner.oclIsKindOf(Class)))]
 [generateActivityRelatedIncludes(act, aPackage)/]
 #include "[act.owner.oclAsType(Classifier).namespace.myNamespaceName()/]Exec/[act.owner.oclAsType(Classifier).name.toUpperFirst()/]Object.hpp"
 #include "[act.owner.oclAsType(Classifier).namespace.myNamespaceName()/]/[act.owner.oclAsType(Classifier).name.toUpperFirst()/].hpp"
@@ -92,7 +92,7 @@ Any [packageName/]::executeActivity(std::shared_ptr<uml::Activity> activity, std
 	[generateLocusInitialization()/]
 [/if]
 
-[for (act : Activity | aPackage.allOwnedElements()->filter(Activity)->sortedBy(myQualifiedName()))]
+[for (act : Activity | aPackage.allOwnedElements()->filter(Activity)->reject(specification.oclIsUndefined())->sortedBy(myQualifiedName()))]
 	if (activity == [act.getNearestPackage().myNamespaceName()/]::[act.getNearestPackage().myName()/]Package::eInstance()->[act.generatePackageGetterCall()/])
 	{
 		[act.generateParameterFromAny()/]
