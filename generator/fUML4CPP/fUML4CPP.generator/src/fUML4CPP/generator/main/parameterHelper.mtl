@@ -84,9 +84,7 @@ std::shared_ptr<fUML::Semantics::SimpleClassifiers::EnumerationValue> [par.name/
 [/template]
 
 [template public generateOutputParameter(par : Parameter) ? ((not type.supportedTypes()) and (not type.oclIsKindOf(Enumeration)))]
-[if (not (par.direction = ParameterDirectionKind::inout))]
 std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> [par.name/]Value(fUML::FUMLFactory::eInstance()->createReference());
-[/if]
 std::shared_ptr<[par.type.name.toUpperFirst()/]Object> [par.name/]UmlLinker(new [par.type.name.toUpperFirst()/]Object([par.name.toLowerFirst()/][if (par.upper <> 1)]Temp[/if]));
 [par.name/]UmlLinker->setThis[par.type.name.toUpperFirst()/]ObjectPtr([par.name/]UmlLinker);
 [/template]

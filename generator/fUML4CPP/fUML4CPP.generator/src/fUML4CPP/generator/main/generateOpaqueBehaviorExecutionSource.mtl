@@ -311,37 +311,20 @@ while ([par.name.toLowerFirst()/]Iter != [par.name.toLowerFirst()/]End)
 
 //set InOut parameters
 [for ( par : Parameter | aParameterList->select(direction = ParameterDirectionKind::inout))]
-[if (par.direction <> ParameterDirectionKind::inout or not par.type.supportedTypes())]
-[par.generateOutputParameter()/]
-[/if]
-
-[if (par.type.oclIsKindOf(Enumeration))]
-[par.name/]Value->setLiteral([par.name/]);
-[elseif (not par.type.supportedTypes())]
-//Pointer type
-[par.name/]UmlLinker->setUmlValue[if(not (par.upper = 1))]s[/if]([par.name/]);
-[par.name/]UmlLinker->setLocus(this->getLocus());
-[par.name/]Value->setReferent([par.name/]UmlLinker);
-[else]
-//Simple type
 [if (par.upper = 1)]
-[par.name/]Value->setValue([par.name/]);
+[par.generateValue(aParameterList, par.name)/]
 [else]
-//	[par.name/]ValueList = outputParameters->at([aParameterList->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in))->indexOf(par)-1/])->getValues();
-[par.name/]ValueList->clear();
-Bag<[par.type.generateCppType(true)/]>::iterator [par.name/]Iter = [par.name/]->begin();
-Bag<[par.type.generateCppType(true)/]>::iterator [par.name/]End = [par.name/]->end();
-while ([par.name/]Iter != [par.name/]End)
+Bag<[par.type.generateCppType(true)/]>::iterator [par.name.toLowerFirst()/]OutIter = [par.name.toLowerFirst()/]->begin();
+Bag<[par.type.generateCppType(true)/]>::iterator [par.name.toLowerFirst()/]OutEnd = [par.name.toLowerFirst()/]->end();
+while ([par.name.toLowerFirst()/]OutIter != [par.name.toLowerFirst()/]OutEnd)
 {
-	std::shared_ptr<fUML::Semantics::SimpleClassifiers::[par.type.name/]Value> [par.name/]Object = fUML::FUMLFactory::eInstance()->create[par.type.name/]Value();
-	[par.name/]Object->setValue(*(*[par.name/]Iter));
-	[par.name/]ValueList->push_back([par.name/]Object);
-	[par.name/]Iter++;
+	[par.type.generateCppType(false)/] [par.name.toLowerFirst()/]Temp = [if(par.type.supportedTypes())]*([/if]*[par.name.toLowerFirst()/]OutIter[if(par.type.supportedTypes())])[/if];
+	[par.generateValue(aParameterList, par.name.concat('Temp'))/]
+	[par.name.toLowerFirst()/]OutIter++;
 }
 [/if]
-[/if]
-//outputParameters->push_back(inputParameters->at([aParameterList->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in))->indexOf(par)-1/]));
 [/for]
+
 [/template]
 
 [template private generateValue(aParameter : Parameter, aParameterList : OrderedSet(Parameter), variableName : String)]
