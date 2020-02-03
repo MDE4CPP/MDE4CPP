@@ -37,8 +37,10 @@
 				aPackage.allOwnedElements()->filter(CallBehaviorAction).behavior->filter(OpaqueBehavior).ownedParameter->select(type.oclIsKindOf(Class)).type,
 				aPackage.allOwnedElements()->filter(ReadStructuralFeatureAction).structuralFeature.type,
 				aPackage.allOwnedElements()->filter(AddStructuralFeatureValueAction).structuralFeature.type,
-				aPackage.allOwnedElements()->filter(RemoveStructuralFeatureValueAction).structuralFeature.type
-			}->flatten()->reject(oclIsKindOf(Activity))->reject(supportedTypes())->sortedBy(name)/]
+				aPackage.allOwnedElements()->filter(RemoveStructuralFeatureValueAction).structuralFeature.type,
+				aPackage.allOwnedElements()->filter(Action).input.type,
+				aPackage.allOwnedElements()->filter(Action).output.type	
+			}->flatten()->reject(oclIsKindOf(Activity))->reject(supportedTypes())->reject(oclIsKindOf(Enumeration))->sortedBy(name)/]
 
 [comment]INPUT SWITCH ----------------------------------------------------------[/comment]
 [template public generateInputParameter(par : Parameter, index:Integer)]
