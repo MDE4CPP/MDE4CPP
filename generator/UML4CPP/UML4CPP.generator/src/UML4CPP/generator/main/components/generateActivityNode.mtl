@@ -361,9 +361,14 @@
  * - set decisionInput if defined
 */]
 [template private initializeActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(DecisionNode))]
-[if (not anActivityNode.oclAsType(DecisionNode).decisionInput.oclIsUndefined())]
-[anActivityNode.memberName()/]->setDecisionInput([memberName(anActivityNode.oclAsType(DecisionNode).decisionInput)/]);
+[let decisionNode : DecisionNode = self.oclAsType(DecisionNode)]
+[if (not decisionNode.decisionInput.oclIsUndefined())]
+[anActivityNode.memberName()/]->setDecisionInput([memberName(decisionNode.decisionInput)/]);
 [/if]
+[if (not decisionNode.decisionInputFlow.oclIsUndefined())]
+[anActivityNode.memberName()/]->setDecisionInputFlow([memberName(decisionNode.decisionInputFlow)/]);
+[/if]
+[/let]
 [/template]
 
 [**
