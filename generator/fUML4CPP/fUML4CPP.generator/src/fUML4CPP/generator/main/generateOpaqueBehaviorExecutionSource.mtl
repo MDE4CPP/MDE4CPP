@@ -342,7 +342,9 @@ while ([par.name.toLowerFirst()/]OutIter != [par.name.toLowerFirst()/]OutEnd)
 [/template]
 
 [template private generateValue(aParameter : Parameter, aParameterList : OrderedSet(Parameter), variableName : String)]
+[if (not (aParameter.direction = ParameterDirectionKind::inout) or aParameter.upper <> 1)]
 [aParameter.generateOutputParameter()/]
+[/if]
 [if (aParameter.type.oclIsKindOf(Enumeration))]
 [for (literal : EnumerationLiteral | aParameter.type.oclAsType(Enumeration).ownedLiteral)]
 if ([aParameter.name/] == [literal.enumeration.namespace.name/]::[literal.enumeration.name/]::[literal.name.toUpperCase()/])
