@@ -287,7 +287,7 @@ std::shared_ptr<[aProperty.type.getValueClass()/]> valueObject = std::dynamic_po
 if (valueObject != nullptr)
 {
 [if (aProperty.upper = 1)]
-	m_umlValue->[aProperty.setterName()/](valueObject->getValue());
+	m_umlValue->[aProperty.setterName()/](valueObject->[aProperty.getterPrefix()/]Value());
 [else]
 	std::shared_ptr<[aProperty.type.generateCppType(true)/]> value(new [aProperty.type.generateCppType(true)/](valueObject->getValue()));
 	m_umlValue->[aProperty.getterName()/]()->push_back(value);
