@@ -54,8 +54,7 @@
 #include "[cl.getNearestPackage().myNamespaceName()/]/[cl.name.toUpperFirst()/].hpp"
 [/if]
 [/for]
-
-[for (aPackage : Package | aClass.ownedAttribute->select(type.oclIsKindOf(Enumeration)).type._package->flatten()->sortedBy(name))]
+[for (aPackage : Package | aClass.ownedAttribute->select(type.oclIsKindOf(Enumeration)).type._package->flatten()->reject(pack : Package | pack = aPackage)->sortedBy(name))]
 #include "[aPackage.getPackageName()/]/[aPackage.getPackageName()/]Package.hpp"
 [/for]
 
