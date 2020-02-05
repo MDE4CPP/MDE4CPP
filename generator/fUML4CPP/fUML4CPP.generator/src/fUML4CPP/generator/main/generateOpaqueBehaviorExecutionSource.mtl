@@ -338,7 +338,6 @@ while ([par.name.toLowerFirst()/]OutIter != [par.name.toLowerFirst()/]OutEnd)
 }
 [/if]
 [/for]
-
 [/template]
 
 [template private generateValue(aParameter : Parameter, aParameterList : OrderedSet(Parameter), variableName : String)]
