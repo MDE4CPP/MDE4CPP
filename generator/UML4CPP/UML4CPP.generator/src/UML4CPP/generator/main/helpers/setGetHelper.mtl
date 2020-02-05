@@ -104,7 +104,7 @@ void [aClass.name.toUpperFirst()/]Impl::[aProperty.setterName()/](std::shared_pt
 [for (literal : EnumerationLiteral | aProperty.type.oclAsType(Enumeration).ownedLiteral)]		
 	if (literal == [literal.generatePackageGetterCall()/])
 	{	
-		[aProperty.setterName()/]([literal.enumeration.name/]::[literal.name.toUpper()/]);
+		[aProperty.setterName()/]([if (not (literal.getNearestPackage() = aClass.getNearestPackage()))][literal.getNearestPackage().name/]::[/if][literal.enumeration.name/]::[literal.name.toUpper()/]);
 		return;
 	}
 [/for]

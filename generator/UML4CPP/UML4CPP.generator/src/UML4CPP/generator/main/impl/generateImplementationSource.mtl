@@ -55,6 +55,10 @@
 [/if]
 [/for]
 
+[for (aPackage : Package | aClass.ownedAttribute->select(type.oclIsKindOf(Enumeration)).type._package->flatten()->sortedBy(name))]
+#include "[aPackage.getPackageName()/]/[aPackage.getPackageName()/]Package.hpp"
+[/for]
+
 [if (aClass.ownedOperation.method->notEmpty())][if(ownedOperation.method->filter(Activity)->notEmpty())]
 #include "pluginFramework/PluginFramework.hpp"
 #include "pluginFramework/UMLExecutionModelPlugin.hpp"

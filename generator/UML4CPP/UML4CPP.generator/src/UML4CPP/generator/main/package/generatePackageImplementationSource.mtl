@@ -50,6 +50,7 @@
 								aPackage.allOwnedElements()->filter(TypedElement)->select(not type.oclIsUndefined()).type.getNearestPackage(),
 								aPackage.allOwnedElements()->filter(CallBehaviorAction).behavior.getNearestPackage(),
 								aPackage.allOwnedElements()->filter(Element).getAppliedStereotypes().getProfile(), 
+								aPackage.allOwnedElements()->filter(InstanceValue).instance.getNearestPackage(), 
 								aPackage.member->filter(Element).allOwnedElements()->filter(InterfaceRealization).contract.getNearestPackage(),
 								aPackage.member->filter(Element).allOwnedElements()->filter(Generalization).general.getNearestPackage()
 							}->flatten() /]
@@ -62,7 +63,8 @@
 								aPackage.allOwnedElements()->selectByKind(Class).ownedBehavior->filter(OpaqueBehavior).ownedParameter->select(not type.oclIsUndefined()).type.eClass(),
 								aPackage.allOwnedElements()->selectByKind(Class).ownedElement->filter(InterfaceRealization).supplier.oclAsType(Interface).ownedAttribute.eClass(),
 								aPackage.allOwnedElements()->selectByKind(Class).ownedElement->filter(InterfaceRealization).contract.eClass(),
-								aPackage.allOwnedElements()->selectByKind(StructuralFeatureAction).structuralFeature.eClass()
+								aPackage.allOwnedElements()->selectByKind(StructuralFeatureAction).structuralFeature.eClass(),
+								aPackage.allOwnedElements()->filter(InstanceValue).instance.eClass()
 							}->flatten()->sortedBy(name)/]
 
 [template public generatePackageImplSource(aPackage : Package) {packageName : String = aPackage.name.concat('PackageImpl').toUpperFirst();}]
