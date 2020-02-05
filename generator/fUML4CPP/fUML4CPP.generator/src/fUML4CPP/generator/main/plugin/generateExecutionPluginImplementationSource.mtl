@@ -21,6 +21,11 @@
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 
+[query private getActivitiesUsedByCallBehaviorAction(aPackage : Package) : Set(Activity) = aPackage.allOwnedElements()->filter(CallBehaviorAction).behavior->reject(oclIsUndefined())->reject(not oclIsKindOf(Activity))->asSet()/]
+[query private getActivitiesUsedByDecisionNode(aPackage : Package) : Set(Activity) = aPackage.allOwnedElements()->filter(DecisionNode).decisionInput->reject(oclIsUndefined())->reject(not oclIsKindOf(Activity))->asSet()/]
+[query private getActivitiesUsedByOperation(aPackage : Package) : Set(Activity) = aPackage.allOwnedElements()->filter(Operation).method->reject(oclIsUndefined())->reject(not oclIsKindOf(Activity))->asSet()/]
+[query private getUsedActivities (aPackage : Package) : OrderedSet(Activity) = Set{aPackage.getActivitiesUsedByCallBehaviorAction(), aPackage.getActivitiesUsedByDecisionNode(), aPackage.getActivitiesUsedByOperation()}->flatten()->sortedBy(name)/]
+
 [template public generateExecutionPluginImplSource(aPackage : Package) { packageName : String = aPackage.name.toUpperFirst().concat('ExecPluginImpl'); }]
 [file (aPackage.getPackageName().concat('Exec/impl/').concat(packageName).concat('.cpp'), false, 'UTF-8')]
 #include "[aPackage.getPackageName()/]Exec/impl/[packageName/].hpp"
@@ -34,10 +39,10 @@
 #include "uml/Activity.hpp"
 #include "uml/Element.hpp"
 
-[if (aPackage.allOwnedElements()->filter(Activity)->reject(specification.oclIsUndefined())->size() > 0)]
+[if (aPackage.getUsedActivities()->size() > 0)]
 [generateMainIncludes()/]
 [/if]
-[for (act : Activity | aPackage.allOwnedElements()->filter(Activity)->reject(specification.oclIsUndefined())->select(owner.oclIsKindOf(Class)))]
+[for (act : Activity | aPackage.getUsedActivities()->select(owner.oclIsKindOf(Class)))]
 [generateActivityRelatedIncludes(act, aPackage)/]
 #include "[act.owner.oclAsType(Classifier).namespace.myNamespaceName()/]Exec/[act.owner.oclAsType(Classifier).name.toUpperFirst()/]Object.hpp"
 #include "[act.owner.oclAsType(Classifier).namespace.myNamespaceName()/]/[act.owner.oclAsType(Classifier).name.toUpperFirst()/].hpp"
@@ -92,7 +97,7 @@ Any [packageName/]::executeActivity(std::shared_ptr<uml::Activity> activity, std
 	[generateLocusInitialization()/]
 [/if]
 
-[for (act : Activity | aPackage.allOwnedElements()->filter(Activity)->reject(specification.oclIsUndefined())->sortedBy(myQualifiedName()))]
+[for (act : Activity | aPackage.getUsedActivities()->sortedBy(myQualifiedName()))]
 	if (activity == [act.getNearestPackage().myNamespaceName()/]::[act.getNearestPackage().myName()/]Package::eInstance()->[act.generatePackageGetterCall()/])
 	{
 		[act.generateParameterFromAny()/]
