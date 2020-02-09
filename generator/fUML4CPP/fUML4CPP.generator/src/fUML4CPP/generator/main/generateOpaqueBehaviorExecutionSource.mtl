@@ -341,24 +341,21 @@ while ([par.name.toLowerFirst()/]OutIter != [par.name.toLowerFirst()/]OutEnd)
 [/template]
 
 [template private generateValue(aParameter : Parameter, aParameterList : OrderedSet(Parameter), variableName : String)]
-[if (not (aParameter.direction = ParameterDirectionKind::inout) or aParameter.upper <> 1)]
 [aParameter.generateOutputParameter()/]
-[/if]
 [if (aParameter.type.oclIsKindOf(Enumeration))]
 [for (literal : EnumerationLiteral | aParameter.type.oclAsType(Enumeration).ownedLiteral)]
 if ([aParameter.name/] == [literal.enumeration.namespace.name/]::[literal.enumeration.name/]::[literal.name.toUpperCase()/])
 {
-	[aParameter.name/]Value->setLiteral([literal.generatePackageGetterCall()/]);
+	[aParameter.name/]OutValue->setLiteral([literal.generatePackageGetterCall()/]);
 }
 [/for]
 [elseif (not aParameter.type.supportedTypes())]
-[aParameter.name/]UmlLinker->setUmlValue([variableName/]);
-[aParameter.name/]UmlLinker->setLocus(this->getLocus());
-[aParameter.name/]Value->setReferent([aParameter.name/]UmlLinker);
+[aParameter.name/]OutUmlLinker->setLocus(this->getLocus());
+[aParameter.name/]OutValue->setReferent([aParameter.name/]OutUmlLinker);
 [else]
-[aParameter.name/]Value->setValue([variableName/]);
+[aParameter.name/]OutValue->setValue([variableName/]);
 [/if]
-outputParameters->at([aParameterList->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_out) or (direction = ParameterDirectionKind::return))->indexOf(aParameter)-1/])->getValues()->push_back([aParameter.name/]Value);
+outputParameters->at([aParameterList->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_out) or (direction = ParameterDirectionKind::return))->indexOf(aParameter)-1/])->getValues()->push_back([aParameter.name/]OutValue);
 [/template]
 
 [template private generateArgumentGetter(pin : Pin, action : Action) ? (pin.name = 'self')]

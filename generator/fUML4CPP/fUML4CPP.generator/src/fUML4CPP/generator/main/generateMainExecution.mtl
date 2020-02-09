@@ -227,10 +227,10 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> resultPLis
 [template private generateValue(aParameter : Parameter)]
 [aParameter.generateOutputParameter()/]
 [if(aParameter.type.supportedTypes())]
-[aParameter.name/]Value->setValue([aParameter.name.toLowerFirst()/]);
+[aParameter.name/]OutValue->setValue([aParameter.name.toLowerFirst()/]);
 [else]
-[aParameter.name/]UmlLinker->setLocus(locus);
-[aParameter.name/]Value->setReferent([aParameter.name/]UmlLinker);
+[aParameter.name/]OutUmlLinker->setLocus(locus);
+[aParameter.name/]OutValue->setReferent([aParameter.name/]OutUmlLinker);
 [/if]
-[aParameter.name/]P->getValues()->push_back([aParameter.name/]Value);
+[aParameter.name/]P->getValues()->push_back([aParameter.name/]OutValue);
 [/template]
