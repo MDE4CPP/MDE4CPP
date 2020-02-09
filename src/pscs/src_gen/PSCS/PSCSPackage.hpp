@@ -136,9 +136,10 @@ namespace PSCS
 			//Class and Feature IDs 
 			static const unsigned int CS_CALLOPERATIONACTIONACTIVATION_CLASS = 5;
 			static const unsigned int CS_CALLOPERATIONACTIONACTIVATION_CLASS_FEATURE_COUNT = 11;
-			static const unsigned int CS_CALLOPERATIONACTIONACTIVATION_CLASS_OPERATION_COUNT = 57;
+			static const unsigned int CS_CALLOPERATIONACTIONACTIVATION_CLASS_OPERATION_COUNT = 58;
 			
 			
+			static const int CS_CALLOPERATIONACTIONACTIVATION_OPERATION__ISCREATE_OPERATION = 568;
 			static const int CS_CALLOPERATIONACTIONACTIVATION_OPERATION_DOACTION = 564;
 			static const int CS_CALLOPERATIONACTIONACTIVATION_OPERATION_GETCALLEXECUTION = 563;
 			static const int CS_CALLOPERATIONACTIONACTIVATION_OPERATION_ISCREATE_OPERATION = 567;
@@ -150,6 +151,7 @@ namespace PSCS
 			
 			
 			
+			virtual std::shared_ptr<ecore::EOperation> getCS_CallOperationActionActivation_Operation__isCreate_Operation() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getCS_CallOperationActionActivation_Operation_doAction() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getCS_CallOperationActionActivation_Operation_getCallExecution() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getCS_CallOperationActionActivation_Operation_isCreate_Operation() const = 0;

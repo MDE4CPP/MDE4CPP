@@ -144,6 +144,10 @@ std::shared_ptr<ecore::EClass> PSCSPackageImpl::getCS_CallOperationActionActivat
 
 
 
+std::shared_ptr<ecore::EOperation> PSCSPackageImpl::getCS_CallOperationActionActivation_Operation__isCreate_Operation() const
+{
+	return m_cS_CallOperationActionActivation_Operation__isCreate_Operation;
+}
 std::shared_ptr<ecore::EOperation> PSCSPackageImpl::getCS_CallOperationActionActivation_Operation_doAction() const
 {
 	return m_cS_CallOperationActionActivation_Operation_doAction;

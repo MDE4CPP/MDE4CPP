@@ -27,6 +27,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/AggregationKind.hpp"
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -561,8 +562,10 @@ bool PropertyImpl::isAttribute()
 
 bool PropertyImpl::isComposite()
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	return (getAggregation() == AggregationKind::COMPOSITE);
+	//end of body
 }
 
 bool PropertyImpl::isNavigable()

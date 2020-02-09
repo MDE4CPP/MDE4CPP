@@ -36,9 +36,10 @@
 #include "primitivetypesReflection/PrimitiveTypesPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
-#include "ecore/EReference.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EOperation.hpp"
 #include "ecore/EPackage.hpp"
-
+#include "ecore/EReference.hpp"
 
 using namespace UML;
 
@@ -14058,6 +14059,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Action_allActions_result->setUpper(-1);
 	uML_Action_allActions_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 	uML_Action_allOwnedNodes__->setName("allOwnedNodes");
 	
@@ -14067,6 +14069,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Action_allOwnedNodes_result->setLower(0);
 	uML_Action_allOwnedNodes_result->setUpper(-1);
 	uML_Action_allOwnedNodes_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 	uML_Action_containingBehavior__->setName("containingBehavior");
@@ -14078,6 +14081,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Action_containingBehavior_result->setUpper(1);
 	uML_Action_containingBehavior_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 	uML_Action_context__->setName("context");
 	
@@ -14087,6 +14091,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Action_context_result->setLower(0);
 	uML_Action_context_result->setUpper(1);
 	uML_Action_context_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 
@@ -14331,6 +14336,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_ActivityEdge_isConsistentWith_RedefinableElement_RedefinableElement_redefiningElement->setDirection(uml::ParameterDirectionKind::IN);
 	
+	
 
 
     //-------------------------------------------
@@ -14401,6 +14407,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ActivityGroup_containingActivity_result->setLower(0);
 	uML_ActivityGroup_containingActivity_result->setUpper(1);
 	uML_ActivityGroup_containingActivity_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 
@@ -14488,6 +14495,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ActivityNode_containingActivity_result->setUpper(1);
 	uML_ActivityNode_containingActivity_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 	uML_ActivityNode_isConsistentWith_RedefinableElement_RedefinableElement->setName("isConsistentWith");
 	
@@ -14509,6 +14517,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ActivityNode_isConsistentWith_RedefinableElement_RedefinableElement_redefiningElement->setUpper(1);
 	
 	uML_ActivityNode_isConsistentWith_RedefinableElement_RedefinableElement_redefiningElement->setDirection(uml::ParameterDirectionKind::IN);
+	
 	
 
 
@@ -14781,6 +14790,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_Artifact_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_upper->setDirection(uml::ParameterDirectionKind::IN);
 	
+	
 
 	uML_Artifact_createOwnedOperation_String_String_Type_Type_String_String_Type_Type->setName("createOwnedOperation");
 	
@@ -14838,6 +14848,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Artifact_createOwnedOperation_String_String_Type_Type_String_String_Type_Type_returnType->setUpper(1);
 	
 	uML_Artifact_createOwnedOperation_String_String_Type_Type_String_String_Type_Type_returnType->setDirection(uml::ParameterDirectionKind::IN);
+	
 	
 
 
@@ -14904,6 +14915,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Association_endType_result->setUpper(-1);
 	uML_Association_endType_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 	uML_Association_isBinary__->setName("isBinary");
 	
@@ -14913,6 +14925,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Association_isBinary__return->setLower(1);
 	uML_Association_isBinary__return->setUpper(1);
 	uML_Association_isBinary__return->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 
@@ -15024,6 +15037,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_Behavior_behavioredClassifier_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 	uML_Behavior_context__->setName("context");
 	
@@ -15033,6 +15047,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Behavior_context_result->setLower(0);
 	uML_Behavior_context_result->setUpper(1);
 	uML_Behavior_context_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 	uML_Behavior_inputParameters__->setName("inputParameters");
@@ -15044,6 +15059,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Behavior_inputParameters_result->setUpper(-1);
 	uML_Behavior_inputParameters_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 	uML_Behavior_outputParameters__->setName("outputParameters");
 	
@@ -15053,6 +15069,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Behavior_outputParameters_result->setLower(0);
 	uML_Behavior_outputParameters_result->setUpper(-1);
 	uML_Behavior_outputParameters_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 
@@ -15170,6 +15187,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_BehavioralFeature_createReturnResult_String_Type_String_Type_type->setDirection(uml::ParameterDirectionKind::IN);
 	
+	
 
 	uML_BehavioralFeature_inputParameters__->setName("inputParameters");
 	
@@ -15179,6 +15197,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_BehavioralFeature_inputParameters_result->setLower(0);
 	uML_BehavioralFeature_inputParameters_result->setUpper(-1);
 	uML_BehavioralFeature_inputParameters_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 	uML_BehavioralFeature_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace->setName("isDistinguishableFrom");
@@ -15214,6 +15233,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_BehavioralFeature_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace_ns->setDirection(uml::ParameterDirectionKind::IN);
 	
+	
 
 	uML_BehavioralFeature_outputParameters__->setName("outputParameters");
 	
@@ -15223,6 +15243,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_BehavioralFeature_outputParameters_result->setLower(0);
 	uML_BehavioralFeature_outputParameters_result->setUpper(-1);
 	uML_BehavioralFeature_outputParameters_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 
@@ -15270,6 +15291,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_BehavioredClassifier_getAllImplementedInterfaces__return->setUpper(-1);
 	uML_BehavioredClassifier_getAllImplementedInterfaces__return->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 	uML_BehavioredClassifier_getImplementedInterfaces__->setName("getImplementedInterfaces");
 	
@@ -15279,6 +15301,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_BehavioredClassifier_getImplementedInterfaces__return->setLower(0);
 	uML_BehavioredClassifier_getImplementedInterfaces__return->setUpper(-1);
 	uML_BehavioredClassifier_getImplementedInterfaces__return->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 
@@ -15337,6 +15360,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_CallAction_inputParameters_result->setUpper(-1);
 	uML_CallAction_inputParameters_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 	uML_CallAction_outputParameters__->setName("outputParameters");
 	
@@ -15346,6 +15370,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_CallAction_outputParameters_result->setLower(0);
 	uML_CallAction_outputParameters_result->setUpper(-1);
 	uML_CallAction_outputParameters_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 
@@ -15377,6 +15402,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_CallBehaviorAction_inputParameters_result->setUpper(-1);
 	uML_CallBehaviorAction_inputParameters_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 	uML_CallBehaviorAction_outputParameters__->setName("outputParameters");
 	
@@ -15386,6 +15412,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_CallBehaviorAction_outputParameters_result->setLower(0);
 	uML_CallBehaviorAction_outputParameters_result->setUpper(-1);
 	uML_CallBehaviorAction_outputParameters_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 
@@ -15444,6 +15471,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_CallOperationAction_inputParameters_result->setUpper(-1);
 	uML_CallOperationAction_inputParameters_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 	uML_CallOperationAction_outputParameters__->setName("outputParameters");
 	
@@ -15453,6 +15481,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_CallOperationAction_outputParameters_result->setLower(0);
 	uML_CallOperationAction_outputParameters_result->setUpper(-1);
 	uML_CallOperationAction_outputParameters_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 
@@ -15619,6 +15648,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_Class_createOwnedOperation_String_String_Type_Type_String_String_Type_Type_returnType->setDirection(uml::ParameterDirectionKind::IN);
 	
+	
 
 	uML_Class_extension__->setName("extension");
 	
@@ -15628,6 +15658,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Class_extension_result->setLower(0);
 	uML_Class_extension_result->setUpper(-1);
 	uML_Class_extension_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 	uML_Class_isMetaclass__->setName("isMetaclass");
@@ -15639,6 +15670,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Class_isMetaclass__return->setUpper(1);
 	uML_Class_isMetaclass__return->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 	uML_Class_superClass__->setName("superClass");
 	
@@ -15648,6 +15680,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Class_superClass_result->setLower(0);
 	uML_Class_superClass_result->setUpper(-1);
 	uML_Class_superClass_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 
@@ -15808,6 +15841,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Classifier_allAttributes_result->setUpper(-1);
 	uML_Classifier_allAttributes_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 	uML_Classifier_allFeatures__->setName("allFeatures");
 	
@@ -15817,6 +15851,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Classifier_allFeatures_result->setLower(0);
 	uML_Classifier_allFeatures_result->setUpper(-1);
 	uML_Classifier_allFeatures_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 	uML_Classifier_allParents__->setName("allParents");
@@ -15828,6 +15863,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Classifier_allParents_result->setUpper(-1);
 	uML_Classifier_allParents_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 	uML_Classifier_allRealizedInterfaces__->setName("allRealizedInterfaces");
 	
@@ -15837,6 +15873,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Classifier_allRealizedInterfaces_result->setLower(0);
 	uML_Classifier_allRealizedInterfaces_result->setUpper(-1);
 	uML_Classifier_allRealizedInterfaces_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 	uML_Classifier_allSlottableFeatures__->setName("allSlottableFeatures");
@@ -15848,6 +15885,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Classifier_allSlottableFeatures_result->setUpper(-1);
 	uML_Classifier_allSlottableFeatures_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 	uML_Classifier_allUsedInterfaces__->setName("allUsedInterfaces");
 	
@@ -15857,6 +15895,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Classifier_allUsedInterfaces_result->setLower(0);
 	uML_Classifier_allUsedInterfaces_result->setUpper(-1);
 	uML_Classifier_allUsedInterfaces_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 	uML_Classifier_conformsTo_Type_Type->setName("conformsTo");
@@ -15880,6 +15919,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_Classifier_conformsTo_Type_Type_other->setDirection(uml::ParameterDirectionKind::IN);
 	
+	
 
 	uML_Classifier_directlyRealizedInterfaces__->setName("directlyRealizedInterfaces");
 	
@@ -15889,6 +15929,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Classifier_directlyRealizedInterfaces_result->setLower(0);
 	uML_Classifier_directlyRealizedInterfaces_result->setUpper(-1);
 	uML_Classifier_directlyRealizedInterfaces_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 	uML_Classifier_directlyUsedInterfaces__->setName("directlyUsedInterfaces");
@@ -15900,6 +15941,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Classifier_directlyUsedInterfaces_result->setUpper(-1);
 	uML_Classifier_directlyUsedInterfaces_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 	uML_Classifier_general__->setName("general");
 	
@@ -15909,6 +15951,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Classifier_general_result->setLower(0);
 	uML_Classifier_general_result->setUpper(-1);
 	uML_Classifier_general_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 	uML_Classifier_getAllAttributes__->setName("getAllAttributes");
@@ -15920,6 +15963,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Classifier_getAllAttributes__return->setUpper(-1);
 	uML_Classifier_getAllAttributes__return->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 	uML_Classifier_getAllOperations__->setName("getAllOperations");
 	
@@ -15930,6 +15974,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Classifier_getAllOperations__return->setUpper(-1);
 	uML_Classifier_getAllOperations__return->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 	uML_Classifier_getAllUsedInterfaces__->setName("getAllUsedInterfaces");
 	
@@ -15939,6 +15984,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Classifier_getAllUsedInterfaces__return->setLower(0);
 	uML_Classifier_getAllUsedInterfaces__return->setUpper(-1);
 	uML_Classifier_getAllUsedInterfaces__return->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 	uML_Classifier_getOperation_String_String_Type_String_String_Type->setName("getOperation");
@@ -15985,6 +16031,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Classifier_getOperation_String_String_Type_String_String_Type_parameterTypes->setUpper(-1);
 	
 	uML_Classifier_getOperation_String_String_Type_String_String_Type_parameterTypes->setDirection(uml::ParameterDirectionKind::IN);
+	
 	
 
 	uML_Classifier_getOperation_String_String_Type_Boolean_String_String_Type_Boolean->setName("getOperation");
@@ -16044,6 +16091,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_Classifier_getOperation_String_String_Type_Boolean_String_String_Type_Boolean_ignoreCase->setDirection(uml::ParameterDirectionKind::IN);
 	
+	
 
 	uML_Classifier_getOperations__->setName("getOperations");
 	
@@ -16054,6 +16102,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Classifier_getOperations__return->setUpper(-1);
 	uML_Classifier_getOperations__return->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 	uML_Classifier_getUsedInterfaces__->setName("getUsedInterfaces");
 	
@@ -16063,6 +16112,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Classifier_getUsedInterfaces__return->setLower(0);
 	uML_Classifier_getUsedInterfaces__return->setUpper(-1);
 	uML_Classifier_getUsedInterfaces__return->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 	uML_Classifier_hasVisibilityOf_NamedElement_NamedElement->setName("hasVisibilityOf");
@@ -16086,6 +16136,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_Classifier_hasVisibilityOf_NamedElement_NamedElement_n->setDirection(uml::ParameterDirectionKind::IN);
 	
+	
 
 	uML_Classifier_inherit_NamedElement_NamedElement->setName("inherit");
 	
@@ -16107,6 +16158,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Classifier_inherit_NamedElement_NamedElement_inhs->setUpper(-1);
 	
 	uML_Classifier_inherit_NamedElement_NamedElement_inhs->setDirection(uml::ParameterDirectionKind::IN);
+	
 	
 
 	uML_Classifier_inheritableMembers_Classifier_Classifier->setName("inheritableMembers");
@@ -16130,6 +16182,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_Classifier_inheritableMembers_Classifier_Classifier_c->setDirection(uml::ParameterDirectionKind::IN);
 	
+	
 
 	uML_Classifier_inheritedMember__->setName("inheritedMember");
 	
@@ -16139,6 +16192,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Classifier_inheritedMember_result->setLower(0);
 	uML_Classifier_inheritedMember_result->setUpper(-1);
 	uML_Classifier_inheritedMember_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 	uML_Classifier_isSubstitutableFor_Classifier_Classifier->setName("isSubstitutableFor");
@@ -16162,6 +16216,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_Classifier_isSubstitutableFor_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 	uML_Classifier_isTemplate__->setName("isTemplate");
 	
@@ -16171,6 +16226,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Classifier_isTemplate_result->setLower(1);
 	uML_Classifier_isTemplate_result->setUpper(1);
 	uML_Classifier_isTemplate_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 	uML_Classifier_maySpecializeType_Classifier_Classifier->setName("maySpecializeType");
@@ -16194,6 +16250,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_Classifier_maySpecializeType_Classifier_Classifier_c->setDirection(uml::ParameterDirectionKind::IN);
 	
+	
 
 	uML_Classifier_parents__->setName("parents");
 	
@@ -16203,6 +16260,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Classifier_parents_result->setLower(0);
 	uML_Classifier_parents_result->setUpper(-1);
 	uML_Classifier_parents_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 
@@ -16559,6 +16617,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_Component_createOwnedClass_String_Boolean_String_Boolean_isAbstract->setDirection(uml::ParameterDirectionKind::IN);
 	
+	
 
 	uML_Component_createOwnedEnumeration_String_String->setName("createOwnedEnumeration");
 	
@@ -16580,6 +16639,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Component_createOwnedEnumeration_String_String_name->setUpper(1);
 	
 	uML_Component_createOwnedEnumeration_String_String_name->setDirection(uml::ParameterDirectionKind::IN);
+	
 	
 
 	uML_Component_createOwnedInterface_String_String->setName("createOwnedInterface");
@@ -16603,6 +16663,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_Component_createOwnedInterface_String_String_name->setDirection(uml::ParameterDirectionKind::IN);
 	
+	
 
 	uML_Component_createOwnedPrimitiveType_String_String->setName("createOwnedPrimitiveType");
 	
@@ -16625,6 +16686,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_Component_createOwnedPrimitiveType_String_String_name->setDirection(uml::ParameterDirectionKind::IN);
 	
+	
 
 	uML_Component_provided__->setName("provided");
 	
@@ -16635,6 +16697,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Component_provided_result->setUpper(-1);
 	uML_Component_provided_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 	uML_Component_required__->setName("required");
 	
@@ -16644,6 +16707,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Component_required_result->setLower(0);
 	uML_Component_required_result->setUpper(-1);
 	uML_Component_required_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 
@@ -16726,6 +16790,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ConditionalNode_allActions_result->setUpper(-1);
 	uML_ConditionalNode_allActions_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 
     //-------------------------------------------
@@ -16766,6 +16831,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ConnectableElement_end_result->setLower(0);
 	uML_ConnectableElement_end_result->setUpper(-1);
 	uML_ConnectableElement_end_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 
@@ -16883,6 +16949,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Connector_kind_result->setUpper(1);
 	uML_Connector_kind_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 
     //-------------------------------------------
@@ -16928,6 +16995,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ConnectorEnd_definingEnd_result->setLower(0);
 	uML_ConnectorEnd_definingEnd_result->setUpper(1);
 	uML_ConnectorEnd_definingEnd_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 
@@ -17180,6 +17248,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_DataType_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_upper->setDirection(uml::ParameterDirectionKind::IN);
 	
+	
 
 	uML_DataType_createOwnedOperation_String_String_Type_Type_String_String_Type_Type->setName("createOwnedOperation");
 	
@@ -17237,6 +17306,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_DataType_createOwnedOperation_String_String_Type_Type_String_String_Type_Type_returnType->setUpper(1);
 	
 	uML_DataType_createOwnedOperation_String_String_Type_Type_String_String_Type_Type_returnType->setDirection(uml::ParameterDirectionKind::IN);
+	
 	
 
 
@@ -17412,6 +17482,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_DeploymentTarget_deployedElement_result->setUpper(-1);
 	uML_DeploymentTarget_deployedElement_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 
     //-------------------------------------------
@@ -17548,6 +17619,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Duration_stringValue__return->setLower(1);
 	uML_Duration_stringValue__return->setUpper(1);
 	uML_Duration_stringValue__return->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 
@@ -17688,6 +17760,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_Element_addKeyword_String_String_keyword->setDirection(uml::ParameterDirectionKind::IN);
 	
+	
 
 	uML_Element_allOwnedElements__->setName("allOwnedElements");
 	
@@ -17697,6 +17770,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Element_allOwnedElements_result->setLower(0);
 	uML_Element_allOwnedElements_result->setUpper(-1);
 	uML_Element_allOwnedElements_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 	uML_Element_applyStereotype_Stereotype_Stereotype->setName("applyStereotype");
@@ -17720,6 +17794,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_Element_applyStereotype_Stereotype_Stereotype_stereotype->setDirection(uml::ParameterDirectionKind::IN);
 	
+	
 
 	uML_Element_createEAnnotation_String_String->setName("createEAnnotation");
 	
@@ -17742,8 +17817,10 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_Element_createEAnnotation_String_String_source->setDirection(uml::ParameterDirectionKind::IN);
 	
+	
 
 	uML_Element_destroy__->setName("destroy");
+	
 	
 	
 
@@ -17768,6 +17845,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_Element_getApplicableStereotype_String_String_qualifiedName->setDirection(uml::ParameterDirectionKind::IN);
 	
+	
 
 	uML_Element_getApplicableStereotypes__->setName("getApplicableStereotypes");
 	
@@ -17777,6 +17855,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Element_getApplicableStereotypes__return->setLower(0);
 	uML_Element_getApplicableStereotypes__return->setUpper(-1);
 	uML_Element_getApplicableStereotypes__return->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 	uML_Element_getAppliedStereotype_String_String->setName("getAppliedStereotype");
@@ -17800,6 +17879,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_Element_getAppliedStereotype_String_String_qualifiedName->setDirection(uml::ParameterDirectionKind::IN);
 	
+	
 
 	uML_Element_getAppliedStereotypes__->setName("getAppliedStereotypes");
 	
@@ -17809,6 +17889,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Element_getAppliedStereotypes__return->setLower(0);
 	uML_Element_getAppliedStereotypes__return->setUpper(-1);
 	uML_Element_getAppliedStereotypes__return->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 	uML_Element_getAppliedSubstereotype_Stereotype_String_Stereotype_String->setName("getAppliedSubstereotype");
@@ -17844,6 +17925,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_Element_getAppliedSubstereotype_Stereotype_String_Stereotype_String_qualifiedName->setDirection(uml::ParameterDirectionKind::IN);
 	
+	
 
 	uML_Element_getAppliedSubstereotypes_Stereotype_Stereotype->setName("getAppliedSubstereotypes");
 	
@@ -17866,6 +17948,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_Element_getAppliedSubstereotypes_Stereotype_Stereotype_stereotype->setDirection(uml::ParameterDirectionKind::IN);
 	
+	
 
 	uML_Element_getKeywords__->setName("getKeywords");
 	
@@ -17875,6 +17958,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Element_getKeywords__return->setLower(0);
 	uML_Element_getKeywords__return->setUpper(-1);
 	uML_Element_getKeywords__return->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 	uML_Element_getModel__->setName("getModel");
@@ -17886,6 +17970,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Element_getModel__return->setUpper(1);
 	uML_Element_getModel__return->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 	uML_Element_getNearestPackage__->setName("getNearestPackage");
 	
@@ -17896,6 +17981,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Element_getNearestPackage__return->setUpper(1);
 	uML_Element_getNearestPackage__return->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 	uML_Element_getRelationships__->setName("getRelationships");
 	
@@ -17905,6 +17991,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Element_getRelationships__return->setLower(0);
 	uML_Element_getRelationships__return->setUpper(-1);
 	uML_Element_getRelationships__return->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 	uML_Element_getRelationships_EClass_EClass->setName("getRelationships");
@@ -17928,6 +18015,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_Element_getRelationships_EClass_EClass_eClass->setDirection(uml::ParameterDirectionKind::IN);
 	
+	
 
 	uML_Element_getRequiredStereotype_String_String->setName("getRequiredStereotype");
 	
@@ -17950,6 +18038,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_Element_getRequiredStereotype_String_String_qualifiedName->setDirection(uml::ParameterDirectionKind::IN);
 	
+	
 
 	uML_Element_getRequiredStereotypes__->setName("getRequiredStereotypes");
 	
@@ -17960,6 +18049,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Element_getRequiredStereotypes__return->setUpper(-1);
 	uML_Element_getRequiredStereotypes__return->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 	uML_Element_getSourceDirectedRelationships__->setName("getSourceDirectedRelationships");
 	
@@ -17969,6 +18059,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Element_getSourceDirectedRelationships__return->setLower(0);
 	uML_Element_getSourceDirectedRelationships__return->setUpper(-1);
 	uML_Element_getSourceDirectedRelationships__return->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 	uML_Element_getSourceDirectedRelationships_EClass_EClass->setName("getSourceDirectedRelationships");
@@ -17992,6 +18083,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_Element_getSourceDirectedRelationships_EClass_EClass_eClass->setDirection(uml::ParameterDirectionKind::IN);
 	
+	
 
 	uML_Element_getStereotypeApplication_Stereotype_Stereotype->setName("getStereotypeApplication");
 	
@@ -18014,6 +18106,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_Element_getStereotypeApplication_Stereotype_Stereotype_stereotype->setDirection(uml::ParameterDirectionKind::IN);
 	
+	
 
 	uML_Element_getStereotypeApplications__->setName("getStereotypeApplications");
 	
@@ -18024,6 +18117,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Element_getStereotypeApplications__return->setUpper(-1);
 	uML_Element_getStereotypeApplications__return->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 	uML_Element_getTargetDirectedRelationships__->setName("getTargetDirectedRelationships");
 	
@@ -18033,6 +18127,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Element_getTargetDirectedRelationships__return->setLower(0);
 	uML_Element_getTargetDirectedRelationships__return->setUpper(-1);
 	uML_Element_getTargetDirectedRelationships__return->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 	uML_Element_getTargetDirectedRelationships_EClass_EClass->setName("getTargetDirectedRelationships");
@@ -18055,6 +18150,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Element_getTargetDirectedRelationships_EClass_EClass_eClass->setUpper(1);
 	
 	uML_Element_getTargetDirectedRelationships_EClass_EClass_eClass->setDirection(uml::ParameterDirectionKind::IN);
+	
 	
 
 	uML_Element_getValue_Stereotype_String_Stereotype_String->setName("getValue");
@@ -18090,6 +18186,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_Element_getValue_Stereotype_String_Stereotype_String_propertyName->setDirection(uml::ParameterDirectionKind::IN);
 	
+	
 
 	uML_Element_hasKeyword_String_String->setName("hasKeyword");
 	
@@ -18111,6 +18208,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Element_hasKeyword_String_String_keyword->setUpper(1);
 	
 	uML_Element_hasKeyword_String_String_keyword->setDirection(uml::ParameterDirectionKind::IN);
+	
 	
 
 	uML_Element_hasValue_Stereotype_String_Stereotype_String->setName("hasValue");
@@ -18146,6 +18244,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_Element_hasValue_Stereotype_String_Stereotype_String_propertyName->setDirection(uml::ParameterDirectionKind::IN);
 	
+	
 
 	uML_Element_isStereotypeApplicable_Stereotype_Stereotype->setName("isStereotypeApplicable");
 	
@@ -18167,6 +18266,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Element_isStereotypeApplicable_Stereotype_Stereotype_stereotype->setUpper(1);
 	
 	uML_Element_isStereotypeApplicable_Stereotype_Stereotype_stereotype->setDirection(uml::ParameterDirectionKind::IN);
+	
 	
 
 	uML_Element_isStereotypeApplied_Stereotype_Stereotype->setName("isStereotypeApplied");
@@ -18190,6 +18290,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_Element_isStereotypeApplied_Stereotype_Stereotype_stereotype->setDirection(uml::ParameterDirectionKind::IN);
 	
+	
 
 	uML_Element_isStereotypeRequired_Stereotype_Stereotype->setName("isStereotypeRequired");
 	
@@ -18212,6 +18313,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_Element_isStereotypeRequired_Stereotype_Stereotype_stereotype->setDirection(uml::ParameterDirectionKind::IN);
 	
+	
 
 	uML_Element_mustBeOwned__->setName("mustBeOwned");
 	
@@ -18221,6 +18323,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Element_mustBeOwned_result->setLower(1);
 	uML_Element_mustBeOwned_result->setUpper(1);
 	uML_Element_mustBeOwned_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 	uML_Element_removeKeyword_String_String->setName("removeKeyword");
@@ -18243,6 +18346,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Element_removeKeyword_String_String_keyword->setUpper(1);
 	
 	uML_Element_removeKeyword_String_String_keyword->setDirection(uml::ParameterDirectionKind::IN);
+	
 	
 
 	uML_Element_setValue_Stereotype_String_EJavaObject_Stereotype_String_EJavaObject->setName("setValue");
@@ -18278,6 +18382,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_Element_setValue_Stereotype_String_EJavaObject_Stereotype_String_EJavaObject_newValue->setDirection(uml::ParameterDirectionKind::IN);
 	
+	
 
 	uML_Element_unapplyStereotype_Stereotype_Stereotype->setName("unapplyStereotype");
 	
@@ -18299,6 +18404,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Element_unapplyStereotype_Stereotype_Stereotype_stereotype->setUpper(1);
 	
 	uML_Element_unapplyStereotype_Stereotype_Stereotype_stereotype->setDirection(uml::ParameterDirectionKind::IN);
+	
 	
 
 
@@ -18354,6 +18460,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ElementImport_getName_result->setUpper(1);
 	uML_ElementImport_getName_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 
     //-------------------------------------------
@@ -18383,6 +18490,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_EncapsulatedClassifier_ownedPort_result->setLower(0);
 	uML_EncapsulatedClassifier_ownedPort_result->setUpper(-1);
 	uML_EncapsulatedClassifier_ownedPort_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 
@@ -18441,6 +18549,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_EnumerationLiteral_classifier_result->setUpper(1);
 	uML_EnumerationLiteral_classifier_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 	uML_EnumerationLiteral_getClassifiers__->setName("getClassifiers");
 	
@@ -18450,6 +18559,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_EnumerationLiteral_getClassifiers__return->setLower(0);
 	uML_EnumerationLiteral_getClassifiers__return->setUpper(-1);
 	uML_EnumerationLiteral_getClassifiers__return->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 
@@ -18758,6 +18868,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Extension_getStereotype__return->setUpper(1);
 	uML_Extension_getStereotype__return->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 	uML_Extension_getStereotypeEnd__->setName("getStereotypeEnd");
 	
@@ -18767,6 +18878,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Extension_getStereotypeEnd__return->setLower(0);
 	uML_Extension_getStereotypeEnd__return->setUpper(1);
 	uML_Extension_getStereotypeEnd__return->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 	uML_Extension_isRequired__->setName("isRequired");
@@ -18778,6 +18890,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Extension_isRequired_result->setUpper(1);
 	uML_Extension_isRequired_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 	uML_Extension_metaclass__->setName("metaclass");
 	
@@ -18788,6 +18901,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Extension_metaclass_result->setUpper(1);
 	uML_Extension_metaclass_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 	uML_Extension_metaclassEnd__->setName("metaclassEnd");
 	
@@ -18797,6 +18911,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Extension_metaclassEnd_result->setLower(1);
 	uML_Extension_metaclassEnd_result->setUpper(1);
 	uML_Extension_metaclassEnd_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 
@@ -18836,6 +18951,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ExtensionEnd_getLower__return->setUpper(1);
 	uML_ExtensionEnd_getLower__return->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 	uML_ExtensionEnd_lowerBound__->setName("lowerBound");
 	
@@ -18846,6 +18962,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ExtensionEnd_lowerBound_result->setUpper(1);
 	uML_ExtensionEnd_lowerBound_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 	uML_ExtensionEnd_setLower_Integer_Integer->setName("setLower");
 	
@@ -18855,6 +18972,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ExtensionEnd_setLower_Integer_Integer_newLower->setLower(1);
 	uML_ExtensionEnd_setLower_Integer_Integer_newLower->setUpper(1);
 	uML_ExtensionEnd_setLower_Integer_Integer_newLower->setDirection(uml::ParameterDirectionKind::IN);
+	
 	
 
 
@@ -18970,6 +19088,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_FunctionBehavior_hasAllDataTypeAttributes_DataType_DataType_d->setDirection(uml::ParameterDirectionKind::IN);
 	
+	
 
 
     //-------------------------------------------
@@ -18990,6 +19109,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Gate_getName_result->setUpper(1);
 	uML_Gate_getName_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 	uML_Gate_getOperand__->setName("getOperand");
 	
@@ -19000,6 +19120,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Gate_getOperand_result->setUpper(1);
 	uML_Gate_getOperand_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 	uML_Gate_isActual__->setName("isActual");
 	
@@ -19009,6 +19130,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Gate_isActual_result->setLower(1);
 	uML_Gate_isActual_result->setUpper(1);
 	uML_Gate_isActual_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 	uML_Gate_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace->setName("isDistinguishableFrom");
@@ -19044,6 +19166,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_Gate_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace_ns->setDirection(uml::ParameterDirectionKind::IN);
 	
+	
 
 	uML_Gate_isFormal__->setName("isFormal");
 	
@@ -19053,6 +19176,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Gate_isFormal_result->setLower(1);
 	uML_Gate_isFormal_result->setUpper(1);
 	uML_Gate_isFormal_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 	uML_Gate_isInsideCF__->setName("isInsideCF");
@@ -19064,6 +19188,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Gate_isInsideCF_result->setUpper(1);
 	uML_Gate_isInsideCF_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 	uML_Gate_isOutsideCF__->setName("isOutsideCF");
 	
@@ -19073,6 +19198,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Gate_isOutsideCF_result->setLower(1);
 	uML_Gate_isOutsideCF_result->setUpper(1);
 	uML_Gate_isOutsideCF_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 	uML_Gate_matches_Gate_Gate->setName("matches");
@@ -19095,6 +19221,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Gate_matches_Gate_Gate_gateToMatch->setUpper(1);
 	
 	uML_Gate_matches_Gate_Gate_gateToMatch->setDirection(uml::ParameterDirectionKind::IN);
+	
 	
 
 
@@ -19452,6 +19579,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_InstanceValue_stringValue__return->setUpper(1);
 	uML_InstanceValue_stringValue__return->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 
     //-------------------------------------------
@@ -19775,6 +19903,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_Interface_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_upper->setDirection(uml::ParameterDirectionKind::IN);
 	
+	
 
 	uML_Interface_createOwnedOperation_String_String_Type_Type_String_String_Type_Type->setName("createOwnedOperation");
 	
@@ -19832,6 +19961,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Interface_createOwnedOperation_String_String_Type_Type_String_String_Type_Type_returnType->setUpper(1);
 	
 	uML_Interface_createOwnedOperation_String_String_Type_Type_String_String_Type_Type_returnType->setDirection(uml::ParameterDirectionKind::IN);
+	
 	
 
 
@@ -20076,6 +20206,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_LinkAction_association_result->setUpper(1);
 	uML_LinkAction_association_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 
     //-------------------------------------------
@@ -20113,6 +20244,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_LinkEndCreationData_allPins_result->setLower(0);
 	uML_LinkEndCreationData_allPins_result->setUpper(-1);
 	uML_LinkEndCreationData_allPins_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 
@@ -20160,6 +20292,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_LinkEndData_allPins_result->setUpper(-1);
 	uML_LinkEndData_allPins_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 
     //-------------------------------------------
@@ -20198,6 +20331,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_LinkEndDestructionData_allPins_result->setUpper(-1);
 	uML_LinkEndDestructionData_allPins_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 
     //-------------------------------------------
@@ -20228,6 +20362,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_LiteralBoolean_booleanValue_result->setUpper(1);
 	uML_LiteralBoolean_booleanValue_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 	uML_LiteralBoolean_isComputable__->setName("isComputable");
 	
@@ -20238,6 +20373,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_LiteralBoolean_isComputable_result->setUpper(1);
 	uML_LiteralBoolean_isComputable_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 	uML_LiteralBoolean_stringValue__->setName("stringValue");
 	
@@ -20247,6 +20383,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_LiteralBoolean_stringValue__return->setLower(1);
 	uML_LiteralBoolean_stringValue__return->setUpper(1);
 	uML_LiteralBoolean_stringValue__return->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 
@@ -20278,6 +20415,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_LiteralInteger_integerValue_result->setUpper(1);
 	uML_LiteralInteger_integerValue_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 	uML_LiteralInteger_isComputable__->setName("isComputable");
 	
@@ -20288,6 +20426,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_LiteralInteger_isComputable_result->setUpper(1);
 	uML_LiteralInteger_isComputable_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 	uML_LiteralInteger_stringValue__->setName("stringValue");
 	
@@ -20297,6 +20436,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_LiteralInteger_stringValue__return->setLower(1);
 	uML_LiteralInteger_stringValue__return->setUpper(1);
 	uML_LiteralInteger_stringValue__return->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 
@@ -20318,6 +20458,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_LiteralNull_isComputable_result->setUpper(1);
 	uML_LiteralNull_isComputable_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 	uML_LiteralNull_isNull__->setName("isNull");
 	
@@ -20327,6 +20468,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_LiteralNull_isNull_result->setLower(1);
 	uML_LiteralNull_isNull_result->setUpper(1);
 	uML_LiteralNull_isNull_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 
@@ -20358,6 +20500,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_LiteralReal_isComputable_result->setUpper(1);
 	uML_LiteralReal_isComputable_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 	uML_LiteralReal_realValue__->setName("realValue");
 	
@@ -20368,6 +20511,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_LiteralReal_realValue_result->setUpper(1);
 	uML_LiteralReal_realValue_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 	uML_LiteralReal_stringValue__->setName("stringValue");
 	
@@ -20377,6 +20521,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_LiteralReal_stringValue__return->setLower(1);
 	uML_LiteralReal_stringValue__return->setUpper(1);
 	uML_LiteralReal_stringValue__return->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 
@@ -20417,6 +20562,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_LiteralString_integerValue__return->setUpper(1);
 	uML_LiteralString_integerValue__return->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 	uML_LiteralString_isComputable__->setName("isComputable");
 	
@@ -20426,6 +20572,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_LiteralString_isComputable_result->setLower(1);
 	uML_LiteralString_isComputable_result->setUpper(1);
 	uML_LiteralString_isComputable_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 	uML_LiteralString_stringValue__->setName("stringValue");
@@ -20437,6 +20584,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_LiteralString_stringValue_result->setUpper(1);
 	uML_LiteralString_stringValue_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 	uML_LiteralString_unlimitedValue__->setName("unlimitedValue");
 	
@@ -20446,6 +20594,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_LiteralString_unlimitedValue__return->setLower(1);
 	uML_LiteralString_unlimitedValue__return->setUpper(1);
 	uML_LiteralString_unlimitedValue__return->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 
@@ -20477,6 +20626,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_LiteralUnlimitedNatural_isComputable_result->setUpper(1);
 	uML_LiteralUnlimitedNatural_isComputable_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 	uML_LiteralUnlimitedNatural_stringValue__->setName("stringValue");
 	
@@ -20487,6 +20637,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_LiteralUnlimitedNatural_stringValue__return->setUpper(1);
 	uML_LiteralUnlimitedNatural_stringValue__return->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 	uML_LiteralUnlimitedNatural_unlimitedValue__->setName("unlimitedValue");
 	
@@ -20496,6 +20647,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_LiteralUnlimitedNatural_unlimitedValue_result->setLower(1);
 	uML_LiteralUnlimitedNatural_unlimitedValue_result->setUpper(1);
 	uML_LiteralUnlimitedNatural_unlimitedValue_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 
@@ -20591,6 +20743,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_LoopNode_allActions_result->setUpper(-1);
 	uML_LoopNode_allActions_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 	uML_LoopNode_sourceNodes__->setName("sourceNodes");
 	
@@ -20600,6 +20753,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_LoopNode_sourceNodes_result->setLower(0);
 	uML_LoopNode_sourceNodes_result->setUpper(-1);
 	uML_LoopNode_sourceNodes_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 
@@ -20739,6 +20893,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_Message_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace_ns->setDirection(uml::ParameterDirectionKind::IN);
 	
+	
 
 	uML_Message_messageKind__->setName("messageKind");
 	
@@ -20748,6 +20903,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Message_messageKind_result->setLower(1);
 	uML_Message_messageKind_result->setUpper(1);
 	uML_Message_messageKind_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 
@@ -20779,6 +20935,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_MessageEnd_enclosingFragment_result->setUpper(-1);
 	uML_MessageEnd_enclosingFragment_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 	uML_MessageEnd_isReceive__->setName("isReceive");
 	
@@ -20788,6 +20945,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_MessageEnd_isReceive_result->setLower(1);
 	uML_MessageEnd_isReceive_result->setUpper(1);
 	uML_MessageEnd_isReceive_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 	uML_MessageEnd_isSend__->setName("isSend");
@@ -20799,6 +20957,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_MessageEnd_isSend_result->setUpper(1);
 	uML_MessageEnd_isSend_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 	uML_MessageEnd_oppositeEnd__->setName("oppositeEnd");
 	
@@ -20808,6 +20967,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_MessageEnd_oppositeEnd_result->setLower(0);
 	uML_MessageEnd_oppositeEnd_result->setUpper(-1);
 	uML_MessageEnd_oppositeEnd_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 
@@ -20859,6 +21019,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Model_isMetamodel__return->setLower(1);
 	uML_Model_isMetamodel__return->setUpper(1);
 	uML_Model_isMetamodel__return->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 
@@ -20942,6 +21103,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_MultiplicityElement_compatibleWith_MultiplicityElement_MultiplicityElement_other->setDirection(uml::ParameterDirectionKind::IN);
 	
+	
 
 	uML_MultiplicityElement_includesMultiplicity_MultiplicityElement_MultiplicityElement->setName("includesMultiplicity");
 	
@@ -20963,6 +21125,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_MultiplicityElement_includesMultiplicity_MultiplicityElement_MultiplicityElement_M->setUpper(1);
 	
 	uML_MultiplicityElement_includesMultiplicity_MultiplicityElement_MultiplicityElement_M->setDirection(uml::ParameterDirectionKind::IN);
+	
 	
 
 	uML_MultiplicityElement_is_Integer_UnlimitedNatural_Integer_UnlimitedNatural->setName("is");
@@ -20998,6 +21161,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_MultiplicityElement_is_Integer_UnlimitedNatural_Integer_UnlimitedNatural_upperbound->setDirection(uml::ParameterDirectionKind::IN);
 	
+	
 
 	uML_MultiplicityElement_isMultivalued__->setName("isMultivalued");
 	
@@ -21007,6 +21171,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_MultiplicityElement_isMultivalued_result->setLower(1);
 	uML_MultiplicityElement_isMultivalued_result->setUpper(1);
 	uML_MultiplicityElement_isMultivalued_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 	uML_MultiplicityElement_lower__->setName("lower");
@@ -21018,6 +21183,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_MultiplicityElement_lower_result->setUpper(1);
 	uML_MultiplicityElement_lower_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 	uML_MultiplicityElement_lowerBound__->setName("lowerBound");
 	
@@ -21027,6 +21193,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_MultiplicityElement_lowerBound_result->setLower(1);
 	uML_MultiplicityElement_lowerBound_result->setUpper(1);
 	uML_MultiplicityElement_lowerBound_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 	uML_MultiplicityElement_setLower_Integer_Integer->setName("setLower");
@@ -21038,6 +21205,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_MultiplicityElement_setLower_Integer_Integer_newLower->setUpper(1);
 	uML_MultiplicityElement_setLower_Integer_Integer_newLower->setDirection(uml::ParameterDirectionKind::IN);
 	
+	
 
 	uML_MultiplicityElement_setUpper_UnlimitedNatural_UnlimitedNatural->setName("setUpper");
 	
@@ -21047,6 +21215,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_MultiplicityElement_setUpper_UnlimitedNatural_UnlimitedNatural_newUpper->setLower(1);
 	uML_MultiplicityElement_setUpper_UnlimitedNatural_UnlimitedNatural_newUpper->setUpper(1);
 	uML_MultiplicityElement_setUpper_UnlimitedNatural_UnlimitedNatural_newUpper->setDirection(uml::ParameterDirectionKind::IN);
+	
 	
 
 	uML_MultiplicityElement_upper__->setName("upper");
@@ -21058,6 +21227,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_MultiplicityElement_upper_result->setUpper(1);
 	uML_MultiplicityElement_upper_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 	uML_MultiplicityElement_upperBound__->setName("upperBound");
 	
@@ -21067,6 +21237,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_MultiplicityElement_upperBound_result->setLower(1);
 	uML_MultiplicityElement_upperBound_result->setUpper(1);
 	uML_MultiplicityElement_upperBound_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 
@@ -21138,6 +21309,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_NamedElement_allNamespaces_result->setUpper(-1);
 	uML_NamedElement_allNamespaces_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 	uML_NamedElement_allOwningPackages__->setName("allOwningPackages");
 	
@@ -21148,6 +21320,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_NamedElement_allOwningPackages_result->setUpper(-1);
 	uML_NamedElement_allOwningPackages_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 	uML_NamedElement_clientDependency__->setName("clientDependency");
 	
@@ -21157,6 +21330,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_NamedElement_clientDependency_result->setLower(0);
 	uML_NamedElement_clientDependency_result->setUpper(-1);
 	uML_NamedElement_clientDependency_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 	uML_NamedElement_createDependency_NamedElement_NamedElement->setName("createDependency");
@@ -21180,6 +21354,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_NamedElement_createDependency_NamedElement_NamedElement_supplier->setDirection(uml::ParameterDirectionKind::IN);
 	
+	
 
 	uML_NamedElement_createUsage_NamedElement_NamedElement->setName("createUsage");
 	
@@ -21202,6 +21377,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_NamedElement_createUsage_NamedElement_NamedElement_supplier->setDirection(uml::ParameterDirectionKind::IN);
 	
+	
 
 	uML_NamedElement_getLabel__->setName("getLabel");
 	
@@ -21211,6 +21387,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_NamedElement_getLabel__return->setLower(0);
 	uML_NamedElement_getLabel__return->setUpper(1);
 	uML_NamedElement_getLabel__return->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 	uML_NamedElement_getLabel_Boolean_Boolean->setName("getLabel");
@@ -21233,6 +21410,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_NamedElement_getLabel_Boolean_Boolean_localize->setUpper(1);
 	
 	uML_NamedElement_getLabel_Boolean_Boolean_localize->setDirection(uml::ParameterDirectionKind::IN);
+	
 	
 
 	uML_NamedElement_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace->setName("isDistinguishableFrom");
@@ -21268,6 +21446,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_NamedElement_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace_ns->setDirection(uml::ParameterDirectionKind::IN);
 	
+	
 
 	uML_NamedElement_namespace__->setName("namespace");
 	
@@ -21277,6 +21456,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_NamedElement_namespace_result->setLower(0);
 	uML_NamedElement_namespace_result->setUpper(1);
 	uML_NamedElement_namespace_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 	uML_NamedElement_qualifiedName__->setName("qualifiedName");
@@ -21288,6 +21468,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_NamedElement_qualifiedName_result->setUpper(1);
 	uML_NamedElement_qualifiedName_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 	uML_NamedElement_separator__->setName("separator");
 	
@@ -21297,6 +21478,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_NamedElement_separator_result->setLower(1);
 	uML_NamedElement_separator_result->setUpper(1);
 	uML_NamedElement_separator_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 
@@ -21392,6 +21574,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_Namespace_createElementImport_PackageableElement_VisibilityKind_PackageableElement_VisibilityKind_visibility->setDirection(uml::ParameterDirectionKind::IN);
 	
+	
 
 	uML_Namespace_createPackageImport_Package_VisibilityKind_Package_VisibilityKind->setName("createPackageImport");
 	
@@ -21426,6 +21609,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_Namespace_createPackageImport_Package_VisibilityKind_Package_VisibilityKind_visibility->setDirection(uml::ParameterDirectionKind::IN);
 	
+	
 
 	uML_Namespace_excludeCollisions_PackageableElement_PackageableElement->setName("excludeCollisions");
 	
@@ -21448,6 +21632,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_Namespace_excludeCollisions_PackageableElement_PackageableElement_imps->setDirection(uml::ParameterDirectionKind::IN);
 	
+	
 
 	uML_Namespace_getImportedElements__->setName("getImportedElements");
 	
@@ -21458,6 +21643,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Namespace_getImportedElements__return->setUpper(-1);
 	uML_Namespace_getImportedElements__return->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 	uML_Namespace_getImportedPackages__->setName("getImportedPackages");
 	
@@ -21467,6 +21653,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Namespace_getImportedPackages__return->setLower(0);
 	uML_Namespace_getImportedPackages__return->setUpper(-1);
 	uML_Namespace_getImportedPackages__return->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 	uML_Namespace_getNamesOfMember_NamedElement_NamedElement->setName("getNamesOfMember");
@@ -21490,6 +21677,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_Namespace_getNamesOfMember_NamedElement_NamedElement_element->setDirection(uml::ParameterDirectionKind::IN);
 	
+	
 
 	uML_Namespace_importMembers_PackageableElement_PackageableElement->setName("importMembers");
 	
@@ -21512,6 +21700,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_Namespace_importMembers_PackageableElement_PackageableElement_imps->setDirection(uml::ParameterDirectionKind::IN);
 	
+	
 
 	uML_Namespace_importedMember__->setName("importedMember");
 	
@@ -21521,6 +21710,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Namespace_importedMember_result->setLower(0);
 	uML_Namespace_importedMember_result->setUpper(-1);
 	uML_Namespace_importedMember_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 	uML_Namespace_membersAreDistinguishable__->setName("membersAreDistinguishable");
@@ -21532,6 +21722,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Namespace_membersAreDistinguishable_result->setUpper(1);
 	uML_Namespace_membersAreDistinguishable_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 	uML_Namespace_ownedMember__->setName("ownedMember");
 	
@@ -21541,6 +21732,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Namespace_ownedMember_result->setLower(0);
 	uML_Namespace_ownedMember_result->setUpper(-1);
 	uML_Namespace_ownedMember_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 
@@ -21707,6 +21899,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end2Upper->setDirection(uml::ParameterDirectionKind::IN);
 	
+	
 
 	uML_Node_getCommunicationPaths__->setName("getCommunicationPaths");
 	
@@ -21716,6 +21909,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Node_getCommunicationPaths__return->setLower(0);
 	uML_Node_getCommunicationPaths__return->setUpper(-1);
 	uML_Node_getCommunicationPaths__return->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 
@@ -21869,6 +22063,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_OccurrenceSpecification_getCovered__return->setUpper(1);
 	uML_OccurrenceSpecification_getCovered__return->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 	uML_OccurrenceSpecification_setCovered_Lifeline_Lifeline->setName("setCovered");
 	
@@ -21878,6 +22073,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_OccurrenceSpecification_setCovered_Lifeline_Lifeline_value->setLower(1);
 	uML_OccurrenceSpecification_setCovered_Lifeline_Lifeline_value->setUpper(1);
 	uML_OccurrenceSpecification_setCovered_Lifeline_Lifeline_value->setDirection(uml::ParameterDirectionKind::IN);
+	
 	
 
 
@@ -22003,6 +22199,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_OpaqueExpression_isIntegral_result->setUpper(1);
 	uML_OpaqueExpression_isIntegral_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 	uML_OpaqueExpression_isNonNegative__->setName("isNonNegative");
 	
@@ -22012,6 +22209,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_OpaqueExpression_isNonNegative_result->setLower(1);
 	uML_OpaqueExpression_isNonNegative_result->setUpper(1);
 	uML_OpaqueExpression_isNonNegative_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 	uML_OpaqueExpression_isPositive__->setName("isPositive");
@@ -22023,6 +22221,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_OpaqueExpression_isPositive_result->setUpper(1);
 	uML_OpaqueExpression_isPositive_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 	uML_OpaqueExpression_result__->setName("result");
 	
@@ -22032,6 +22231,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_OpaqueExpression_result_result->setLower(0);
 	uML_OpaqueExpression_result_result->setUpper(1);
 	uML_OpaqueExpression_result_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 	uML_OpaqueExpression_stringValue__->setName("stringValue");
@@ -22043,6 +22243,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_OpaqueExpression_stringValue__return->setUpper(1);
 	uML_OpaqueExpression_stringValue__return->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 	uML_OpaqueExpression_value__->setName("value");
 	
@@ -22052,6 +22253,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_OpaqueExpression_value_result->setLower(1);
 	uML_OpaqueExpression_value_result->setUpper(1);
 	uML_OpaqueExpression_value_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 
@@ -22209,6 +22411,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Operation_getReturnResult__return->setUpper(1);
 	uML_Operation_getReturnResult__return->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 	uML_Operation_isConsistentWith_RedefinableElement_RedefinableElement->setName("isConsistentWith");
 	
@@ -22231,6 +22434,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_Operation_isConsistentWith_RedefinableElement_RedefinableElement_redefiningElement->setDirection(uml::ParameterDirectionKind::IN);
 	
+	
 
 	uML_Operation_isOrdered__->setName("isOrdered");
 	
@@ -22240,6 +22444,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Operation_isOrdered_result->setLower(1);
 	uML_Operation_isOrdered_result->setUpper(1);
 	uML_Operation_isOrdered_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 	uML_Operation_isUnique__->setName("isUnique");
@@ -22251,6 +22456,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Operation_isUnique_result->setUpper(1);
 	uML_Operation_isUnique_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 	uML_Operation_lower__->setName("lower");
 	
@@ -22260,6 +22466,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Operation_lower_result->setLower(1);
 	uML_Operation_lower_result->setUpper(1);
 	uML_Operation_lower_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 	uML_Operation_returnResult__->setName("returnResult");
@@ -22271,6 +22478,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Operation_returnResult_result->setUpper(-1);
 	uML_Operation_returnResult_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 	uML_Operation_setIsOrdered_Boolean_Boolean->setName("setIsOrdered");
 	
@@ -22280,6 +22488,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Operation_setIsOrdered_Boolean_Boolean_newIsOrdered->setLower(1);
 	uML_Operation_setIsOrdered_Boolean_Boolean_newIsOrdered->setUpper(1);
 	uML_Operation_setIsOrdered_Boolean_Boolean_newIsOrdered->setDirection(uml::ParameterDirectionKind::IN);
+	
 	
 
 	uML_Operation_setIsUnique_Boolean_Boolean->setName("setIsUnique");
@@ -22291,6 +22500,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Operation_setIsUnique_Boolean_Boolean_newIsUnique->setUpper(1);
 	uML_Operation_setIsUnique_Boolean_Boolean_newIsUnique->setDirection(uml::ParameterDirectionKind::IN);
 	
+	
 
 	uML_Operation_setLower_Integer_Integer->setName("setLower");
 	
@@ -22300,6 +22510,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Operation_setLower_Integer_Integer_newLower->setLower(1);
 	uML_Operation_setLower_Integer_Integer_newLower->setUpper(1);
 	uML_Operation_setLower_Integer_Integer_newLower->setDirection(uml::ParameterDirectionKind::IN);
+	
 	
 
 	uML_Operation_setType_Type_Type->setName("setType");
@@ -22311,6 +22522,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Operation_setType_Type_Type_newType->setUpper(1);
 	uML_Operation_setType_Type_Type_newType->setDirection(uml::ParameterDirectionKind::IN);
 	
+	
 
 	uML_Operation_setUpper_UnlimitedNatural_UnlimitedNatural->setName("setUpper");
 	
@@ -22320,6 +22532,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Operation_setUpper_UnlimitedNatural_UnlimitedNatural_newUpper->setLower(1);
 	uML_Operation_setUpper_UnlimitedNatural_UnlimitedNatural_newUpper->setUpper(1);
 	uML_Operation_setUpper_UnlimitedNatural_UnlimitedNatural_newUpper->setDirection(uml::ParameterDirectionKind::IN);
+	
 	
 
 	uML_Operation_type__->setName("type");
@@ -22331,6 +22544,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Operation_type_result->setUpper(1);
 	uML_Operation_type_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 	uML_Operation_upper__->setName("upper");
 	
@@ -22340,6 +22554,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Operation_upper_result->setLower(1);
 	uML_Operation_upper_result->setUpper(1);
 	uML_Operation_upper_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 
@@ -22461,6 +22676,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Package_allApplicableStereotypes_result->setUpper(-1);
 	uML_Package_allApplicableStereotypes_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 	uML_Package_applyProfile_Profile_Profile->setName("applyProfile");
 	
@@ -22483,6 +22699,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_Package_applyProfile_Profile_Profile_profile->setDirection(uml::ParameterDirectionKind::IN);
 	
+	
 
 	uML_Package_containingProfile__->setName("containingProfile");
 	
@@ -22492,6 +22709,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Package_containingProfile_result->setLower(0);
 	uML_Package_containingProfile_result->setUpper(1);
 	uML_Package_containingProfile_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 	uML_Package_createOwnedClass_String_Boolean_String_Boolean->setName("createOwnedClass");
@@ -22527,6 +22745,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_Package_createOwnedClass_String_Boolean_String_Boolean_isAbstract->setDirection(uml::ParameterDirectionKind::IN);
 	
+	
 
 	uML_Package_createOwnedEnumeration_String_String->setName("createOwnedEnumeration");
 	
@@ -22548,6 +22767,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Package_createOwnedEnumeration_String_String_name->setUpper(1);
 	
 	uML_Package_createOwnedEnumeration_String_String_name->setDirection(uml::ParameterDirectionKind::IN);
+	
 	
 
 	uML_Package_createOwnedInterface_String_String->setName("createOwnedInterface");
@@ -22571,6 +22791,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_Package_createOwnedInterface_String_String_name->setDirection(uml::ParameterDirectionKind::IN);
 	
+	
 
 	uML_Package_createOwnedPrimitiveType_String_String->setName("createOwnedPrimitiveType");
 	
@@ -22592,6 +22813,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Package_createOwnedPrimitiveType_String_String_name->setUpper(1);
 	
 	uML_Package_createOwnedPrimitiveType_String_String_name->setDirection(uml::ParameterDirectionKind::IN);
+	
 	
 
 	uML_Package_createOwnedStereotype_String_Boolean_String_Boolean->setName("createOwnedStereotype");
@@ -22627,6 +22849,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_Package_createOwnedStereotype_String_Boolean_String_Boolean_isAbstract->setDirection(uml::ParameterDirectionKind::IN);
 	
+	
 
 	uML_Package_getAllAppliedProfiles__->setName("getAllAppliedProfiles");
 	
@@ -22637,6 +22860,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Package_getAllAppliedProfiles__return->setUpper(-1);
 	uML_Package_getAllAppliedProfiles__return->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 	uML_Package_getAllProfileApplications__->setName("getAllProfileApplications");
 	
@@ -22646,6 +22870,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Package_getAllProfileApplications__return->setLower(0);
 	uML_Package_getAllProfileApplications__return->setUpper(-1);
 	uML_Package_getAllProfileApplications__return->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 	uML_Package_getAppliedProfile_String_String->setName("getAppliedProfile");
@@ -22668,6 +22893,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Package_getAppliedProfile_String_String_qualifiedName->setUpper(1);
 	
 	uML_Package_getAppliedProfile_String_String_qualifiedName->setDirection(uml::ParameterDirectionKind::IN);
+	
 	
 
 	uML_Package_getAppliedProfile_String_Boolean_String_Boolean->setName("getAppliedProfile");
@@ -22703,6 +22929,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_Package_getAppliedProfile_String_Boolean_String_Boolean_recurse->setDirection(uml::ParameterDirectionKind::IN);
 	
+	
 
 	uML_Package_getAppliedProfiles__->setName("getAppliedProfiles");
 	
@@ -22712,6 +22939,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Package_getAppliedProfiles__return->setLower(0);
 	uML_Package_getAppliedProfiles__return->setUpper(-1);
 	uML_Package_getAppliedProfiles__return->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 	uML_Package_getProfileApplication_Profile_Profile->setName("getProfileApplication");
@@ -22734,6 +22962,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Package_getProfileApplication_Profile_Profile_profile->setUpper(1);
 	
 	uML_Package_getProfileApplication_Profile_Profile_profile->setDirection(uml::ParameterDirectionKind::IN);
+	
 	
 
 	uML_Package_getProfileApplication_Profile_Boolean_Profile_Boolean->setName("getProfileApplication");
@@ -22769,6 +22998,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_Package_getProfileApplication_Profile_Boolean_Profile_Boolean_recurse->setDirection(uml::ParameterDirectionKind::IN);
 	
+	
 
 	uML_Package_isModelLibrary__->setName("isModelLibrary");
 	
@@ -22778,6 +23008,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Package_isModelLibrary__return->setLower(1);
 	uML_Package_isModelLibrary__return->setUpper(1);
 	uML_Package_isModelLibrary__return->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 	uML_Package_isProfileApplied_Profile_Profile->setName("isProfileApplied");
@@ -22801,6 +23032,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_Package_isProfileApplied_Profile_Profile_profile->setDirection(uml::ParameterDirectionKind::IN);
 	
+	
 
 	uML_Package_makesVisible_NamedElement_NamedElement->setName("makesVisible");
 	
@@ -22823,6 +23055,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_Package_makesVisible_NamedElement_NamedElement_el->setDirection(uml::ParameterDirectionKind::IN);
 	
+	
 
 	uML_Package_mustBeOwned__->setName("mustBeOwned");
 	
@@ -22832,6 +23065,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Package_mustBeOwned_result->setLower(1);
 	uML_Package_mustBeOwned_result->setUpper(1);
 	uML_Package_mustBeOwned_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 	uML_Package_nestedPackage__->setName("nestedPackage");
@@ -22843,6 +23077,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Package_nestedPackage_result->setUpper(-1);
 	uML_Package_nestedPackage_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 	uML_Package_ownedStereotype__->setName("ownedStereotype");
 	
@@ -22853,6 +23088,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Package_ownedStereotype_result->setUpper(-1);
 	uML_Package_ownedStereotype_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 	uML_Package_ownedType__->setName("ownedType");
 	
@@ -22862,6 +23098,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Package_ownedType_result->setLower(0);
 	uML_Package_ownedType_result->setUpper(-1);
 	uML_Package_ownedType_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 	uML_Package_unapplyProfile_Profile_Profile->setName("unapplyProfile");
@@ -22885,6 +23122,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_Package_unapplyProfile_Profile_Profile_profile->setDirection(uml::ParameterDirectionKind::IN);
 	
+	
 
 	uML_Package_visibleMembers__->setName("visibleMembers");
 	
@@ -22894,6 +23132,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Package_visibleMembers_result->setLower(0);
 	uML_Package_visibleMembers_result->setUpper(-1);
 	uML_Package_visibleMembers_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 
@@ -23068,6 +23307,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Parameter_default_result->setUpper(1);
 	uML_Parameter_default_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 	uML_Parameter_isSetDefault__->setName("isSetDefault");
 	
@@ -23077,6 +23317,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Parameter_isSetDefault__return->setLower(1);
 	uML_Parameter_isSetDefault__return->setUpper(1);
 	uML_Parameter_isSetDefault__return->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 	uML_Parameter_setBooleanDefaultValue_Boolean_Boolean->setName("setBooleanDefaultValue");
@@ -23088,6 +23329,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Parameter_setBooleanDefaultValue_Boolean_Boolean_value->setUpper(1);
 	uML_Parameter_setBooleanDefaultValue_Boolean_Boolean_value->setDirection(uml::ParameterDirectionKind::IN);
 	
+	
 
 	uML_Parameter_setDefault_String_String->setName("setDefault");
 	
@@ -23097,6 +23339,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Parameter_setDefault_String_String_newDefault->setLower(1);
 	uML_Parameter_setDefault_String_String_newDefault->setUpper(1);
 	uML_Parameter_setDefault_String_String_newDefault->setDirection(uml::ParameterDirectionKind::IN);
+	
 	
 
 	uML_Parameter_setIntegerDefaultValue_Integer_Integer->setName("setIntegerDefaultValue");
@@ -23108,8 +23351,10 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Parameter_setIntegerDefaultValue_Integer_Integer_value->setUpper(1);
 	uML_Parameter_setIntegerDefaultValue_Integer_Integer_value->setDirection(uml::ParameterDirectionKind::IN);
 	
+	
 
 	uML_Parameter_setNullDefaultValue__->setName("setNullDefaultValue");
+	
 	
 	
 
@@ -23122,6 +23367,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Parameter_setRealDefaultValue_Real_Real_value->setUpper(1);
 	uML_Parameter_setRealDefaultValue_Real_Real_value->setDirection(uml::ParameterDirectionKind::IN);
 	
+	
 
 	uML_Parameter_setStringDefaultValue_String_String->setName("setStringDefaultValue");
 	
@@ -23131,6 +23377,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Parameter_setStringDefaultValue_String_String_value->setLower(1);
 	uML_Parameter_setStringDefaultValue_String_String_value->setUpper(1);
 	uML_Parameter_setStringDefaultValue_String_String_value->setDirection(uml::ParameterDirectionKind::IN);
+	
 	
 
 	uML_Parameter_setUnlimitedNaturalDefaultValue_UnlimitedNatural_UnlimitedNatural->setName("setUnlimitedNaturalDefaultValue");
@@ -23142,8 +23389,10 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Parameter_setUnlimitedNaturalDefaultValue_UnlimitedNatural_UnlimitedNatural_value->setUpper(1);
 	uML_Parameter_setUnlimitedNaturalDefaultValue_UnlimitedNatural_UnlimitedNatural_value->setDirection(uml::ParameterDirectionKind::IN);
 	
+	
 
 	uML_Parameter_unsetDefault__->setName("unsetDefault");
+	
 	
 	
 
@@ -23223,6 +23472,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_ParameterableElement_isCompatibleWith_ParameterableElement_ParameterableElement_p->setDirection(uml::ParameterDirectionKind::IN);
 	
+	
 
 	uML_ParameterableElement_isTemplateParameter__->setName("isTemplateParameter");
 	
@@ -23232,6 +23482,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ParameterableElement_isTemplateParameter_result->setLower(1);
 	uML_ParameterableElement_isTemplateParameter_result->setUpper(1);
 	uML_ParameterableElement_isTemplateParameter_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 
@@ -23342,6 +23593,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Port_basicProvided_result->setUpper(-1);
 	uML_Port_basicProvided_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 	uML_Port_basicRequired__->setName("basicRequired");
 	
@@ -23351,6 +23603,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Port_basicRequired_result->setLower(0);
 	uML_Port_basicRequired_result->setUpper(-1);
 	uML_Port_basicRequired_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 	uML_Port_provided__->setName("provided");
@@ -23362,6 +23615,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Port_provided_result->setUpper(-1);
 	uML_Port_provided_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 	uML_Port_required__->setName("required");
 	
@@ -23371,6 +23625,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Port_required_result->setLower(0);
 	uML_Port_required_result->setUpper(-1);
 	uML_Port_required_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 
@@ -23431,6 +23686,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_Profile_create_Classifier_Classifier_classifier->setDirection(uml::ParameterDirectionKind::IN);
 	
+	
 
 	uML_Profile_define__->setName("define");
 	
@@ -23441,6 +23697,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Profile_define__return->setUpper(1);
 	uML_Profile_define__return->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 	uML_Profile_getDefinition__->setName("getDefinition");
 	
@@ -23450,6 +23707,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Profile_getDefinition__return->setLower(0);
 	uML_Profile_getDefinition__return->setUpper(1);
 	uML_Profile_getDefinition__return->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 	uML_Profile_getDefinition_NamedElement_NamedElement->setName("getDefinition");
@@ -23473,6 +23731,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_Profile_getDefinition_NamedElement_NamedElement_namedElement->setDirection(uml::ParameterDirectionKind::IN);
 	
+	
 
 	uML_Profile_getOwnedExtensions_Boolean_Boolean->setName("getOwnedExtensions");
 	
@@ -23495,6 +23754,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_Profile_getOwnedExtensions_Boolean_Boolean_requiredOnly->setDirection(uml::ParameterDirectionKind::IN);
 	
+	
 
 	uML_Profile_getReferencedMetaclasses__->setName("getReferencedMetaclasses");
 	
@@ -23504,6 +23764,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Profile_getReferencedMetaclasses__return->setLower(0);
 	uML_Profile_getReferencedMetaclasses__return->setUpper(-1);
 	uML_Profile_getReferencedMetaclasses__return->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 	uML_Profile_getReferencedMetamodels__->setName("getReferencedMetamodels");
@@ -23515,6 +23776,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Profile_getReferencedMetamodels__return->setUpper(-1);
 	uML_Profile_getReferencedMetamodels__return->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 	uML_Profile_isDefined__->setName("isDefined");
 	
@@ -23524,6 +23786,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Profile_isDefined__return->setLower(1);
 	uML_Profile_isDefined__return->setUpper(1);
 	uML_Profile_isDefined__return->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 
@@ -23571,6 +23834,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ProfileApplication_getAppliedDefinition__return->setUpper(1);
 	uML_ProfileApplication_getAppliedDefinition__return->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 	uML_ProfileApplication_getAppliedDefinition_NamedElement_NamedElement->setName("getAppliedDefinition");
 	
@@ -23592,6 +23856,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ProfileApplication_getAppliedDefinition_NamedElement_NamedElement_namedElement->setUpper(1);
 	
 	uML_ProfileApplication_getAppliedDefinition_NamedElement_NamedElement_namedElement->setDirection(uml::ParameterDirectionKind::IN);
+	
 	
 
 
@@ -23757,6 +24022,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Property_getDefault_result->setUpper(1);
 	uML_Property_getDefault_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 	uML_Property_getOtherEnd__->setName("getOtherEnd");
 	
@@ -23767,6 +24033,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Property_getOtherEnd__return->setUpper(1);
 	uML_Property_getOtherEnd__return->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 	uML_Property_isAttribute__->setName("isAttribute");
 	
@@ -23776,6 +24043,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Property_isAttribute_result->setLower(1);
 	uML_Property_isAttribute_result->setUpper(1);
 	uML_Property_isAttribute_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 	uML_Property_isCompatibleWith_ParameterableElement_ParameterableElement->setName("isCompatibleWith");
@@ -23799,6 +24067,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_Property_isCompatibleWith_ParameterableElement_ParameterableElement_p->setDirection(uml::ParameterDirectionKind::IN);
 	
+	
 
 	uML_Property_isComposite__->setName("isComposite");
 	
@@ -23808,6 +24077,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Property_isComposite_result->setLower(1);
 	uML_Property_isComposite_result->setUpper(1);
 	uML_Property_isComposite_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 	uML_Property_isConsistentWith_RedefinableElement_RedefinableElement->setName("isConsistentWith");
@@ -23831,6 +24101,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_Property_isConsistentWith_RedefinableElement_RedefinableElement_redefiningElement->setDirection(uml::ParameterDirectionKind::IN);
 	
+	
 
 	uML_Property_isNavigable__->setName("isNavigable");
 	
@@ -23840,6 +24111,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Property_isNavigable_result->setLower(1);
 	uML_Property_isNavigable_result->setUpper(1);
 	uML_Property_isNavigable_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 	uML_Property_isSetDefault__->setName("isSetDefault");
@@ -23851,6 +24123,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Property_isSetDefault__return->setUpper(1);
 	uML_Property_isSetDefault__return->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 	uML_Property_opposite__->setName("opposite");
 	
@@ -23860,6 +24133,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Property_opposite_result->setLower(0);
 	uML_Property_opposite_result->setUpper(1);
 	uML_Property_opposite_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 	uML_Property_setBooleanDefaultValue_Boolean_Boolean->setName("setBooleanDefaultValue");
@@ -23871,6 +24145,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Property_setBooleanDefaultValue_Boolean_Boolean_value->setUpper(1);
 	uML_Property_setBooleanDefaultValue_Boolean_Boolean_value->setDirection(uml::ParameterDirectionKind::IN);
 	
+	
 
 	uML_Property_setDefault_String_String->setName("setDefault");
 	
@@ -23880,6 +24155,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Property_setDefault_String_String_newDefault->setLower(1);
 	uML_Property_setDefault_String_String_newDefault->setUpper(1);
 	uML_Property_setDefault_String_String_newDefault->setDirection(uml::ParameterDirectionKind::IN);
+	
 	
 
 	uML_Property_setIntegerDefaultValue_Integer_Integer->setName("setIntegerDefaultValue");
@@ -23891,6 +24167,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Property_setIntegerDefaultValue_Integer_Integer_value->setUpper(1);
 	uML_Property_setIntegerDefaultValue_Integer_Integer_value->setDirection(uml::ParameterDirectionKind::IN);
 	
+	
 
 	uML_Property_setIsComposite_Boolean_Boolean->setName("setIsComposite");
 	
@@ -23900,6 +24177,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Property_setIsComposite_Boolean_Boolean_newIsComposite->setLower(1);
 	uML_Property_setIsComposite_Boolean_Boolean_newIsComposite->setUpper(1);
 	uML_Property_setIsComposite_Boolean_Boolean_newIsComposite->setDirection(uml::ParameterDirectionKind::IN);
+	
 	
 
 	uML_Property_setIsNavigable_Boolean_Boolean->setName("setIsNavigable");
@@ -23911,8 +24189,10 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Property_setIsNavigable_Boolean_Boolean_isNavigable->setUpper(1);
 	uML_Property_setIsNavigable_Boolean_Boolean_isNavigable->setDirection(uml::ParameterDirectionKind::IN);
 	
+	
 
 	uML_Property_setNullDefaultValue__->setName("setNullDefaultValue");
+	
 	
 	
 
@@ -23925,6 +24205,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Property_setOpposite_Property_Property_newOpposite->setUpper(1);
 	uML_Property_setOpposite_Property_Property_newOpposite->setDirection(uml::ParameterDirectionKind::IN);
 	
+	
 
 	uML_Property_setRealDefaultValue_Real_Real->setName("setRealDefaultValue");
 	
@@ -23934,6 +24215,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Property_setRealDefaultValue_Real_Real_value->setLower(1);
 	uML_Property_setRealDefaultValue_Real_Real_value->setUpper(1);
 	uML_Property_setRealDefaultValue_Real_Real_value->setDirection(uml::ParameterDirectionKind::IN);
+	
 	
 
 	uML_Property_setStringDefaultValue_String_String->setName("setStringDefaultValue");
@@ -23945,6 +24227,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Property_setStringDefaultValue_String_String_value->setUpper(1);
 	uML_Property_setStringDefaultValue_String_String_value->setDirection(uml::ParameterDirectionKind::IN);
 	
+	
 
 	uML_Property_setUnlimitedNaturalDefaultValue_UnlimitedNatural_UnlimitedNatural->setName("setUnlimitedNaturalDefaultValue");
 	
@@ -23954,6 +24237,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Property_setUnlimitedNaturalDefaultValue_UnlimitedNatural_UnlimitedNatural_value->setLower(1);
 	uML_Property_setUnlimitedNaturalDefaultValue_UnlimitedNatural_UnlimitedNatural_value->setUpper(1);
 	uML_Property_setUnlimitedNaturalDefaultValue_UnlimitedNatural_UnlimitedNatural_value->setDirection(uml::ParameterDirectionKind::IN);
+	
 	
 
 	uML_Property_subsettingContext__->setName("subsettingContext");
@@ -23965,8 +24249,10 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Property_subsettingContext_result->setUpper(-1);
 	uML_Property_subsettingContext_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 	uML_Property_unsetDefault__->setName("unsetDefault");
+	
 	
 	
 
@@ -24060,6 +24346,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ProtocolTransition_referred_result->setLower(0);
 	uML_ProtocolTransition_referred_result->setUpper(-1);
 	uML_ProtocolTransition_referred_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 
@@ -24241,6 +24528,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ReadLinkAction_openEnd_result->setLower(0);
 	uML_ReadLinkAction_openEnd_result->setUpper(-1);
 	uML_ReadLinkAction_openEnd_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 
@@ -24498,6 +24786,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_RedefinableElement_isConsistentWith_RedefinableElement_RedefinableElement_redefiningElement->setDirection(uml::ParameterDirectionKind::IN);
 	
+	
 
 	uML_RedefinableElement_isRedefinitionContextValid_RedefinableElement_RedefinableElement->setName("isRedefinitionContextValid");
 	
@@ -24519,6 +24808,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_RedefinableElement_isRedefinitionContextValid_RedefinableElement_RedefinableElement_redefinedElement->setUpper(1);
 	
 	uML_RedefinableElement_isRedefinitionContextValid_RedefinableElement_RedefinableElement_redefinedElement->setDirection(uml::ParameterDirectionKind::IN);
+	
 	
 
 
@@ -24569,6 +24859,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_RedefinableTemplateSignature_inheritedParameter_result->setUpper(-1);
 	uML_RedefinableTemplateSignature_inheritedParameter_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 	uML_RedefinableTemplateSignature_isConsistentWith_RedefinableElement_RedefinableElement->setName("isConsistentWith");
 	
@@ -24590,6 +24881,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_RedefinableTemplateSignature_isConsistentWith_RedefinableElement_RedefinableElement_redefiningElement->setUpper(1);
 	
 	uML_RedefinableTemplateSignature_isConsistentWith_RedefinableElement_RedefinableElement_redefiningElement->setDirection(uml::ParameterDirectionKind::IN);
+	
 	
 
 
@@ -24707,6 +24999,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Region_belongsToPSM_result->setUpper(1);
 	uML_Region_belongsToPSM_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 	uML_Region_containingStateMachine__->setName("containingStateMachine");
 	
@@ -24716,6 +25009,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Region_containingStateMachine_result->setLower(1);
 	uML_Region_containingStateMachine_result->setUpper(1);
 	uML_Region_containingStateMachine_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 	uML_Region_isConsistentWith_RedefinableElement_RedefinableElement->setName("isConsistentWith");
@@ -24739,6 +25033,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_Region_isConsistentWith_RedefinableElement_RedefinableElement_redefiningElement->setDirection(uml::ParameterDirectionKind::IN);
 	
+	
 
 	uML_Region_isRedefinitionContextValid_RedefinableElement_RedefinableElement->setName("isRedefinitionContextValid");
 	
@@ -24761,6 +25056,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_Region_isRedefinitionContextValid_RedefinableElement_RedefinableElement_redefinedElement->setDirection(uml::ParameterDirectionKind::IN);
 	
+	
 
 	uML_Region_redefinitionContext__->setName("redefinitionContext");
 	
@@ -24770,6 +25066,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Region_redefinitionContext_result->setLower(1);
 	uML_Region_redefinitionContext_result->setUpper(1);
 	uML_Region_redefinitionContext_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 
@@ -25030,6 +25327,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_Signal_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_upper->setDirection(uml::ParameterDirectionKind::IN);
 	
+	
 
 
     //-------------------------------------------
@@ -25133,6 +25431,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_StartObjectBehaviorAction_behavior_result->setUpper(1);
 	uML_StartObjectBehaviorAction_behavior_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 	uML_StartObjectBehaviorAction_inputParameters__->setName("inputParameters");
 	
@@ -25143,6 +25442,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_StartObjectBehaviorAction_inputParameters_result->setUpper(-1);
 	uML_StartObjectBehaviorAction_inputParameters_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 	uML_StartObjectBehaviorAction_outputParameters__->setName("outputParameters");
 	
@@ -25152,6 +25452,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_StartObjectBehaviorAction_outputParameters_result->setLower(0);
 	uML_StartObjectBehaviorAction_outputParameters_result->setUpper(-1);
 	uML_StartObjectBehaviorAction_outputParameters_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 
@@ -25301,6 +25602,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_State_containingStateMachine_result->setUpper(1);
 	uML_State_containingStateMachine_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 	uML_State_isComposite__->setName("isComposite");
 	
@@ -25310,6 +25612,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_State_isComposite_result->setLower(1);
 	uML_State_isComposite_result->setUpper(1);
 	uML_State_isComposite_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 	uML_State_isConsistentWith_RedefinableElement_RedefinableElement->setName("isConsistentWith");
@@ -25333,6 +25636,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_State_isConsistentWith_RedefinableElement_RedefinableElement_redefiningElement->setDirection(uml::ParameterDirectionKind::IN);
 	
+	
 
 	uML_State_isOrthogonal__->setName("isOrthogonal");
 	
@@ -25342,6 +25646,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_State_isOrthogonal_result->setLower(1);
 	uML_State_isOrthogonal_result->setUpper(1);
 	uML_State_isOrthogonal_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 	uML_State_isRedefinitionContextValid_RedefinableElement_RedefinableElement->setName("isRedefinitionContextValid");
@@ -25365,6 +25670,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_State_isRedefinitionContextValid_RedefinableElement_RedefinableElement_redefinedElement->setDirection(uml::ParameterDirectionKind::IN);
 	
+	
 
 	uML_State_isSimple__->setName("isSimple");
 	
@@ -25374,6 +25680,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_State_isSimple_result->setLower(1);
 	uML_State_isSimple_result->setUpper(1);
 	uML_State_isSimple_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 	uML_State_isSubmachineState__->setName("isSubmachineState");
@@ -25385,6 +25692,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_State_isSubmachineState_result->setUpper(1);
 	uML_State_isSubmachineState_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 	uML_State_redefinitionContext__->setName("redefinitionContext");
 	
@@ -25394,6 +25702,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_State_redefinitionContext_result->setLower(1);
 	uML_State_redefinitionContext_result->setUpper(1);
 	uML_State_redefinitionContext_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 
@@ -25500,6 +25809,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_StateMachine_LCA_Vertex_Vertex_Vertex_Vertex_s2->setDirection(uml::ParameterDirectionKind::IN);
 	
+	
 
 	uML_StateMachine_LCAState_Vertex_Vertex_Vertex_Vertex->setName("LCAState");
 	
@@ -25533,6 +25843,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_StateMachine_LCAState_Vertex_Vertex_Vertex_Vertex_v2->setUpper(1);
 	
 	uML_StateMachine_LCAState_Vertex_Vertex_Vertex_Vertex_v2->setDirection(uml::ParameterDirectionKind::IN);
+	
 	
 
 	uML_StateMachine_ancestor_Vertex_Vertex_Vertex_Vertex->setName("ancestor");
@@ -25568,6 +25879,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_StateMachine_ancestor_Vertex_Vertex_Vertex_Vertex_s2->setDirection(uml::ParameterDirectionKind::IN);
 	
+	
 
 	uML_StateMachine_isConsistentWith_RedefinableElement_RedefinableElement->setName("isConsistentWith");
 	
@@ -25590,6 +25902,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_StateMachine_isConsistentWith_RedefinableElement_RedefinableElement_redefiningElement->setDirection(uml::ParameterDirectionKind::IN);
 	
+	
 
 	uML_StateMachine_isRedefinitionContextValid_RedefinableElement_RedefinableElement->setName("isRedefinitionContextValid");
 	
@@ -25611,6 +25924,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_StateMachine_isRedefinitionContextValid_RedefinableElement_RedefinableElement_redefinedElement->setUpper(1);
 	
 	uML_StateMachine_isRedefinitionContextValid_RedefinableElement_RedefinableElement_redefinedElement->setDirection(uml::ParameterDirectionKind::IN);
+	
 	
 
 
@@ -25650,6 +25964,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Stereotype_containingProfile_result->setUpper(1);
 	uML_Stereotype_containingProfile_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 	uML_Stereotype_createExtension_Class_Boolean_Class_Boolean->setName("createExtension");
 	
@@ -25684,6 +25999,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_Stereotype_createExtension_Class_Boolean_Class_Boolean_isRequired->setDirection(uml::ParameterDirectionKind::IN);
 	
+	
 
 	uML_Stereotype_createIcon_String_String->setName("createIcon");
 	
@@ -25705,6 +26021,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Stereotype_createIcon_String_String_location->setUpper(1);
 	
 	uML_Stereotype_createIcon_String_String_location->setDirection(uml::ParameterDirectionKind::IN);
+	
 	
 
 	uML_Stereotype_createIcon_String_String_String_String->setName("createIcon");
@@ -25740,6 +26057,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_Stereotype_createIcon_String_String_String_String_content->setDirection(uml::ParameterDirectionKind::IN);
 	
+	
 
 	uML_Stereotype_getAllExtendedMetaclasses__->setName("getAllExtendedMetaclasses");
 	
@@ -25749,6 +26067,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Stereotype_getAllExtendedMetaclasses__return->setLower(0);
 	uML_Stereotype_getAllExtendedMetaclasses__return->setUpper(-1);
 	uML_Stereotype_getAllExtendedMetaclasses__return->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 	uML_Stereotype_getDefinition__->setName("getDefinition");
@@ -25760,6 +26079,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Stereotype_getDefinition__return->setUpper(1);
 	uML_Stereotype_getDefinition__return->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 	uML_Stereotype_getExtendedMetaclasses__->setName("getExtendedMetaclasses");
 	
@@ -25770,6 +26090,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Stereotype_getExtendedMetaclasses__return->setUpper(-1);
 	uML_Stereotype_getExtendedMetaclasses__return->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 	uML_Stereotype_getKeyword__->setName("getKeyword");
 	
@@ -25779,6 +26100,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Stereotype_getKeyword__return->setLower(1);
 	uML_Stereotype_getKeyword__return->setUpper(1);
 	uML_Stereotype_getKeyword__return->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 	uML_Stereotype_getKeyword_Boolean_Boolean->setName("getKeyword");
@@ -25802,6 +26124,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_Stereotype_getKeyword_Boolean_Boolean_localize->setDirection(uml::ParameterDirectionKind::IN);
 	
+	
 
 	uML_Stereotype_profile__->setName("profile");
 	
@@ -25811,6 +26134,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Stereotype_profile_result->setLower(1);
 	uML_Stereotype_profile_result->setUpper(1);
 	uML_Stereotype_profile_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 
@@ -25852,6 +26176,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_StringExpression_stringValue_result->setLower(1);
 	uML_StringExpression_stringValue_result->setUpper(1);
 	uML_StringExpression_stringValue_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 
@@ -25989,6 +26314,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_StructuredActivityNode_allActions_result->setUpper(-1);
 	uML_StructuredActivityNode_allActions_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 	uML_StructuredActivityNode_allOwnedNodes__->setName("allOwnedNodes");
 	
@@ -25998,6 +26324,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_StructuredActivityNode_allOwnedNodes_result->setLower(0);
 	uML_StructuredActivityNode_allOwnedNodes_result->setUpper(-1);
 	uML_StructuredActivityNode_allOwnedNodes_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 	uML_StructuredActivityNode_containingActivity__->setName("containingActivity");
@@ -26009,6 +26336,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_StructuredActivityNode_containingActivity_result->setUpper(1);
 	uML_StructuredActivityNode_containingActivity_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 	uML_StructuredActivityNode_sourceNodes__->setName("sourceNodes");
 	
@@ -26019,6 +26347,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_StructuredActivityNode_sourceNodes_result->setUpper(-1);
 	uML_StructuredActivityNode_sourceNodes_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 	uML_StructuredActivityNode_targetNodes__->setName("targetNodes");
 	
@@ -26028,6 +26357,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_StructuredActivityNode_targetNodes_result->setLower(0);
 	uML_StructuredActivityNode_targetNodes_result->setUpper(-1);
 	uML_StructuredActivityNode_targetNodes_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 
@@ -26082,6 +26412,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_StructuredClassifier_allRoles_result->setLower(0);
 	uML_StructuredClassifier_allRoles_result->setUpper(-1);
 	uML_StructuredClassifier_allRoles_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 	uML_StructuredClassifier_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural->setName("createOwnedAttribute");
@@ -26141,6 +26472,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_StructuredClassifier_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_upper->setDirection(uml::ParameterDirectionKind::IN);
 	
+	
 
 	uML_StructuredClassifier_part__->setName("part");
 	
@@ -26150,6 +26482,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_StructuredClassifier_part_result->setLower(0);
 	uML_StructuredClassifier_part_result->setUpper(-1);
 	uML_StructuredClassifier_part_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 
@@ -26380,6 +26713,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_TemplateableElement_isTemplate_result->setUpper(1);
 	uML_TemplateableElement_isTemplate_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 	uML_TemplateableElement_parameterableElements__->setName("parameterableElements");
 	
@@ -26389,6 +26723,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_TemplateableElement_parameterableElements_result->setLower(0);
 	uML_TemplateableElement_parameterableElements_result->setUpper(-1);
 	uML_TemplateableElement_parameterableElements_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 
@@ -26516,6 +26851,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_TimeExpression_stringValue__return->setLower(1);
 	uML_TimeExpression_stringValue__return->setUpper(1);
 	uML_TimeExpression_stringValue__return->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 
@@ -26668,6 +27004,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Transition_containingStateMachine_result->setUpper(1);
 	uML_Transition_containingStateMachine_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 	uML_Transition_isConsistentWith_RedefinableElement_RedefinableElement->setName("isConsistentWith");
 	
@@ -26690,6 +27027,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_Transition_isConsistentWith_RedefinableElement_RedefinableElement_redefiningElement->setDirection(uml::ParameterDirectionKind::IN);
 	
+	
 
 	uML_Transition_redefinitionContext__->setName("redefinitionContext");
 	
@@ -26699,6 +27037,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Transition_redefinitionContext_result->setLower(1);
 	uML_Transition_redefinitionContext_result->setUpper(1);
 	uML_Transition_redefinitionContext_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 
@@ -26768,6 +27107,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Type_conformsTo_Type_Type_other->setUpper(1);
 	
 	uML_Type_conformsTo_Type_Type_other->setDirection(uml::ParameterDirectionKind::IN);
+	
 	
 
 	uML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural->setName("createAssociation");
@@ -26911,6 +27251,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end2Upper->setDirection(uml::ParameterDirectionKind::IN);
 	
+	
 
 	uML_Type_getAssociations__->setName("getAssociations");
 	
@@ -26920,6 +27261,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Type_getAssociations__return->setLower(0);
 	uML_Type_getAssociations__return->setUpper(-1);
 	uML_Type_getAssociations__return->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 
@@ -27038,6 +27380,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_UseCase_allIncludedUseCases_result->setUpper(-1);
 	uML_UseCase_allIncludedUseCases_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 
     //-------------------------------------------
@@ -27080,6 +27423,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ValueSpecification_booleanValue_result->setUpper(1);
 	uML_ValueSpecification_booleanValue_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 	uML_ValueSpecification_integerValue__->setName("integerValue");
 	
@@ -27089,6 +27433,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ValueSpecification_integerValue_result->setLower(0);
 	uML_ValueSpecification_integerValue_result->setUpper(1);
 	uML_ValueSpecification_integerValue_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 	uML_ValueSpecification_isCompatibleWith_ParameterableElement_ParameterableElement->setName("isCompatibleWith");
@@ -27112,6 +27457,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_ValueSpecification_isCompatibleWith_ParameterableElement_ParameterableElement_p->setDirection(uml::ParameterDirectionKind::IN);
 	
+	
 
 	uML_ValueSpecification_isComputable__->setName("isComputable");
 	
@@ -27121,6 +27467,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ValueSpecification_isComputable_result->setLower(1);
 	uML_ValueSpecification_isComputable_result->setUpper(1);
 	uML_ValueSpecification_isComputable_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 	uML_ValueSpecification_isNull__->setName("isNull");
@@ -27132,6 +27479,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ValueSpecification_isNull_result->setUpper(1);
 	uML_ValueSpecification_isNull_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 	uML_ValueSpecification_realValue__->setName("realValue");
 	
@@ -27141,6 +27489,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ValueSpecification_realValue_result->setLower(0);
 	uML_ValueSpecification_realValue_result->setUpper(1);
 	uML_ValueSpecification_realValue_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 	uML_ValueSpecification_stringValue__->setName("stringValue");
@@ -27152,6 +27501,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ValueSpecification_stringValue_result->setUpper(1);
 	uML_ValueSpecification_stringValue_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 	uML_ValueSpecification_unlimitedValue__->setName("unlimitedValue");
 	
@@ -27161,6 +27511,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ValueSpecification_unlimitedValue_result->setLower(0);
 	uML_ValueSpecification_unlimitedValue_result->setUpper(1);
 	uML_ValueSpecification_unlimitedValue_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 
@@ -27242,6 +27593,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_Variable_isAccessibleBy_Action_Action_a->setDirection(uml::ParameterDirectionKind::IN);
 	
+	
 
 
     //-------------------------------------------
@@ -27307,6 +27659,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Vertex_containingStateMachine_result->setUpper(1);
 	uML_Vertex_containingStateMachine_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 
 	uML_Vertex_incoming__->setName("incoming");
 	
@@ -27316,6 +27669,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Vertex_incoming_result->setLower(0);
 	uML_Vertex_incoming_result->setUpper(-1);
 	uML_Vertex_incoming_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 	uML_Vertex_isContainedInRegion_Region_Region->setName("isContainedInRegion");
@@ -27339,6 +27693,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_Vertex_isContainedInRegion_Region_Region_r->setDirection(uml::ParameterDirectionKind::IN);
 	
+	
 
 	uML_Vertex_isContainedInState_State_State->setName("isContainedInState");
 	
@@ -27361,6 +27716,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_Vertex_isContainedInState_State_State_s->setDirection(uml::ParameterDirectionKind::IN);
 	
+	
 
 	uML_Vertex_outgoing__->setName("outgoing");
 	
@@ -27370,6 +27726,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Vertex_outgoing_result->setLower(0);
 	uML_Vertex_outgoing_result->setUpper(-1);
 	uML_Vertex_outgoing_result->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 
 

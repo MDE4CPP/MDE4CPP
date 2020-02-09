@@ -258,6 +258,23 @@ void PSCSPackageImpl::initializeCS_CallOperationActionActivationContent()
 	
 	
 	
+	m_cS_CallOperationActionActivation_Operation__isCreate_Operation->setEType(ecore::EcorePackage::eInstance()->getEBoolean_Class());
+	m_cS_CallOperationActionActivation_Operation__isCreate_Operation->setName("_isCreate");
+	m_cS_CallOperationActionActivation_Operation__isCreate_Operation->setLowerBound(1);
+	m_cS_CallOperationActionActivation_Operation__isCreate_Operation->setUpperBound(1);
+	m_cS_CallOperationActionActivation_Operation__isCreate_Operation->setUnique(true);
+	m_cS_CallOperationActionActivation_Operation__isCreate_Operation->setOrdered(true);
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_cS_CallOperationActionActivation_Operation__isCreate_Operation);
+		parameter->setName("operation");
+		parameter->setEType(uml::UmlPackage::eInstance()->getOperation_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
 	m_cS_CallOperationActionActivation_Operation_doAction->setEType(nullptr);
 	m_cS_CallOperationActionActivation_Operation_doAction->setName("doAction");
 	m_cS_CallOperationActionActivation_Operation_doAction->setLowerBound(1);

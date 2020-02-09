@@ -86,6 +86,7 @@ namespace PSCS
 			
 			
 			
+			virtual std::shared_ptr<ecore::EOperation> getCS_CallOperationActionActivation_Operation__isCreate_Operation() const ;
 			virtual std::shared_ptr<ecore::EOperation> getCS_CallOperationActionActivation_Operation_doAction() const ;
 			virtual std::shared_ptr<ecore::EOperation> getCS_CallOperationActionActivation_Operation_getCallExecution() const ;
 			virtual std::shared_ptr<ecore::EOperation> getCS_CallOperationActionActivation_Operation_isCreate_Operation() const ;
@@ -458,6 +459,7 @@ namespace PSCS
 			std::shared_ptr<ecore::EReference> m_cS_InteractionPoint_Attribute_owner = nullptr;
 			std::shared_ptr<ecore::EReference> m_cS_EventOccurrence_Attribute_wrappedEventOccurrence = nullptr;
 			
+			std::shared_ptr<ecore::EOperation> m_cS_CallOperationActionActivation_Operation__isCreate_Operation = nullptr;
 			std::shared_ptr<ecore::EOperation> m_cS_AcceptCallActionActivation_Operation_accept_EventOccurrence = nullptr;
 			std::shared_ptr<ecore::EOperation> m_cS_AcceptEventActionActivation_Operation_accept_EventOccurrence = nullptr;
 			std::shared_ptr<ecore::EOperation> m_cS_DefaultConstructStrategy_Operation_addStructuralFeatureValue_CS_Reference_Value = nullptr;

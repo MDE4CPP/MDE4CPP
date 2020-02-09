@@ -13,8 +13,8 @@
 
 //depending model packages
 
+#include "ecore/EDataType.hpp"
 #include "ecore/EPackage.hpp"
-
 
 using namespace PrimitiveTypes;
 

@@ -19,11 +19,7 @@
 #include "StandardProfile/StandardProfileFactory.hpp"
 
 //depending model packages
-#include "ecoreReflection/EcorePackage.hpp"
 #include "umlReflection/UMLPackage.hpp"
-
-#include "ecore/EAttribute.hpp"
-#include "ecore/EReference.hpp"
 
 
 using namespace StandardProfile;
