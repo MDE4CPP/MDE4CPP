@@ -49,6 +49,10 @@ namespace PSCS::Semantics::Actions
 			//*********************************
 			/*!
 			 */ 
+			virtual bool _isCreate(std::shared_ptr<uml::Operation>  operation) ;
+			
+			/*!
+			 */ 
 			virtual void doAction() ;
 			
 			/*!

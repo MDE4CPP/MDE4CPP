@@ -203,6 +203,24 @@ std::shared_ptr<ecore::EClass> CS_CallOperationActionActivationImpl::eStaticClas
 //*********************************
 // Operations
 //*********************************
+bool CS_CallOperationActionActivationImpl::_isCreate(std::shared_ptr<uml::Operation>  operation)
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+		std::string stereotypeQualifiedName = "StandardProfile::Create";
+	std::shared_ptr<uml::Stereotype> stereotypeClass = operation->getAppliedStereotype(stereotypeQualifiedName);
+
+	if(stereotypeClass != nullptr){
+		DEBUG_MESSAGE(std::cout<<"Stereotype '"<<stereotypeQualifiedName<<"' applied..."<<std::endl;)
+		return true;
+	}
+	else {
+		DEBUG_MESSAGE(std::cout<<"Stereotype '"<<stereotypeQualifiedName<<"' not applied..."<<std::endl;)
+		return false;
+	}
+	//end of body
+}
+
 void CS_CallOperationActionActivationImpl::doAction()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
@@ -215,11 +233,11 @@ void CS_CallOperationActionActivationImpl::doAction()
 	// The default construction strategy is used if no method is associated with the
 	// <<Create>> operation.
 	// Otherwise, behaves like in fUML.
-	if((action->getOnPort() == nullptr) && (this->isCreate(action->getOperation())) && (action->getOperation()->getMethod()->size() == 0)) {
+	if((action->getOnPort() == nullptr) && (this->_isCreate(action->getOperation())) && (action->getOperation()->getMethod()->size() == 0)) {
 		std::shared_ptr<fUML::Semantics::Loci::Locus> locus = this->getExecutionLocus();
 		std::shared_ptr<PSCS::Semantics::Actions::CS_ConstructStrategy> strategy = std::dynamic_pointer_cast<PSCS::Semantics::Actions::CS_ConstructStrategy>(locus->getFactory()->getStrategy("constructStrategy"));
 		std::shared_ptr<fUML::Semantics::Values::Value> target = this->takeTokens(action->getTarget())->at(0);
-		if(std::dynamic_pointer_cast<PSCS::Semantics::Actions::CS_ConstructStrategy>(target) != nullptr) {
+		if(std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(target) != nullptr) {
 			strategy->construct(action->getOperation(), (std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(target))->getCompositeReferent());
 			std::shared_ptr<Bag<uml::Parameter>> parameters = action->getOperation()->getOwnedParameter();
 			std::shared_ptr<Bag<uml::OutputPin>> resultPins = action->getResult();
