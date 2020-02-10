@@ -32,7 +32,7 @@
 [file (aPackage.getPackageName().concat('Exec/').concat(className).concat('.cpp'), false, 'UTF-8')]
 #include "[aPackage.getPackageName()/]Exec/[className/].hpp"
 
-#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
 #include "[aClassifier.getNearestPackage().myNamespaceName()/]/[aClassifier.name.toUpperFirst()/].hpp"
 [let attributes : Set(Property)= aPackage.getStructuralFeaturesFromRSTA(aClassifier)->addAll(aPackage.getStructuralFeaturesFromASTVA(aClassifier))->addAll(aPackage.getStructuralFeaturesFromRSTVA(aClassifier).oclAsType(Property)->flatten())]
 [if (attributes->size() > 0)]
@@ -48,12 +48,13 @@
 #include "fUML/Semantics/SimpleClassifiers/[property.type.name.toUpperFirst()/]Value.hpp"
 [else]
 #include "[aPackage.getPackageName()/]Exec/[property.type.oclAsType(Classifier).objectClassName()/].hpp"
+#include "[if (aClassifier._package.name = 'UML')]uml[else][aClassifier._package.name/][/if]/[aClassifier.name/].hpp"
 [/if]
 [/for]
 #include "uml/Property.hpp"
 
 [for (aPack : Package | attributes.getNearestPackage()->asSet()->flatten()->sortedBy(name))]
-#include "[aPack.getPackageName()/]/[aPack.getPackageName()/]Package.hpp"
+#include "[aPack.getPackageName()/]/[aPack.name/]Package.hpp"
 [/for]
 [/if]
 [/let]
@@ -182,8 +183,8 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> [className/]::getValues(std
 
 	if (m_umlValue == nullptr)
 	{
-		std::cerr << __PRETTY_FUNCTION__ << ": not implemented for object lists" << std::endl;
-		throw "UnsupportedParameterException";	
+		std::cerr << __PRETTY_FUNCTION__ << ": no value stored inside [className/]" << std::endl;
+		throw "NullPointerException";	
 	}
 
 	std::shared_ptr<Bag<fUML::Semantics::Values::Value>> values(new Bag<fUML::Semantics::Values::Value>());
@@ -191,9 +192,22 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> [className/]::getValues(std
 	if (property == [aProperty.getModelPackage()/][aProperty.generatePackageGetterCall(aProperty)/])
 	{
 [if (aProperty.isPrimitiveTypedProperty())]
+[if (aProperty.upper = 1)]
 		std::shared_ptr<[aProperty.type.getValueClass()/]> value = fUML::FUMLFactory::eInstance()->create[aProperty.type.name.toUpperFirst()/]Value();
 		value->setValue(m_umlValue->[aProperty.getterName()/]());
 		values->add(value);
+[else]
+		std::shared_ptr<Bag<[aProperty.type.generateCppType(true)/]>> valueList = m_umlValue->[aProperty.getterName()/]();
+		Bag<[aProperty.type.generateCppType(true)/]>::iterator iter = valueList->begin();
+		Bag<[aProperty.type.generateCppType(true)/]>::iterator end = valueList->end();
+		while (iter != end)
+		{
+			std::shared_ptr<[aProperty.type.getValueClass()/]> value = fUML::FUMLFactory::eInstance()->create[aProperty.type.name.toUpperFirst()/]Value();
+			value->setValue(*(*iter));
+			values->push_back(value);
+			iter++;
+		}
+[/if]
 [else]
 [if (aProperty.upper = 1)]
 		std::shared_ptr<[aProperty.type.getValueClass()/]> value(new [aProperty.type.oclAsType(Classifier).objectClassName()/]());
@@ -269,10 +283,15 @@ void [className/]::setFeatureValue(std::shared_ptr<uml::StructuralFeature> featu
 
 [template private generateSetFeatureValue(aProperty : Property)]
 [if (aProperty.isPrimitiveTypedProperty())]
-std::shared_ptr<[aProperty.type.getValueClass()/]> value = std::dynamic_pointer_cast<[aProperty.type.getValueClass()/]>(inputValue);
-if (value != nullptr)
+std::shared_ptr<[aProperty.type.getValueClass()/]> valueObject = std::dynamic_pointer_cast<[aProperty.type.getValueClass()/]>(inputValue);
+if (valueObject != nullptr)
 {
-	m_umlValue->[aProperty.setterName()/](value->[aProperty.getterPrefix()/]Value());
+[if (aProperty.upper = 1)]
+	m_umlValue->[aProperty.setterName()/](valueObject->[aProperty.getterPrefix()/]Value());
+[else]
+	std::shared_ptr<[aProperty.type.generateCppType(true)/]> value(new [aProperty.type.generateCppType(true)/](valueObject->getValue()));
+	m_umlValue->[aProperty.getterName()/]()->push_back(value);
+[/if]
 }
 [else]
 std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> reference = std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Reference>(inputValue);
@@ -288,5 +307,4 @@ if (value != nullptr)
 [/if]
 [/template]
 
-[query private getValueClass(aType : Type) : String = if (aType.oclIsKindOf(PrimitiveType)) then 'fUML::Semantics::SimpleClassifiers::'.concat(aType.name.toUpperFirst()).concat('Value') else aType.oclAsType(Classifier).objectClassName() endif /]
 [query private isPrimitiveTypedProperty(aProperty : Property) : Boolean = aProperty.type.oclIsKindOf(PrimitiveType) /] 

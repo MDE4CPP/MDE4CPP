@@ -36,7 +36,7 @@
 [if (not aPackage.ignoreNamespace())]namespace [aPackage.name/] 
 {
 [/if]
-[for (elements : Class| aPackage.collectModelClassesForFactory()) separator ('\n')]
+[for (elements : Class| aPackage.collectModelClassesForFactoryDeclaration()) separator ('\n')]
 	class [elements.name.toUpperFirst()/];[/for]
 
 [for (elements : Interface| aPackage.collectModelInterfacesForFactory()) separator ('\n')]

@@ -32,5 +32,6 @@
 [for (lit : EnumerationLiteral | anEnum.ownedLiteral->asOrderedSet()->sortedBy(myQualifiedName())) ]
 [lit.memberName()/] = factory->createEnumerationLiteral_in_Enumeration([anEnum.memberName()/]);
 [lit.memberName()/]->setName("[lit.name/]");
+[lit.memberName()/]->getClassifier()->push_back([anEnum.memberName()/]);
 [/for]
 [/template]

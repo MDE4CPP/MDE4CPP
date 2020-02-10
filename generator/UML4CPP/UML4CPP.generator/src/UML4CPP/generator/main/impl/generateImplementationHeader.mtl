@@ -68,8 +68,11 @@ namespace uml
 virtual public [sClass.getClassifierName(aClass, ignoreNamespace(sClass))/]Impl[/for][if (aClass.superClass->isEmpty())]
  : virtual public uml::[aClass.getGeneralSuperClassName()/]Impl[/if], virtual public [aClass.name.toUpperFirst()/]
 	{
+		public: 
+			[className/](const [className/] & obj);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+
 		private:    
-			[className/]([className/] const&) = delete;
 			[className/]& operator=([className/] const&) = delete;
 
 		protected:
@@ -93,6 +96,7 @@ virtual public [sClass.getClassifierName(aClass, ignoreNamespace(sClass))/]Impl[
 [/for]
 
 		public:
+
 			//destructor
 			virtual ~[className/]();
 

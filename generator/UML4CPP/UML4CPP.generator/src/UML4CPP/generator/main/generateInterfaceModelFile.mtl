@@ -67,6 +67,7 @@
 [if (not element.getNearestPackage().ignoreNamespace())]}[/if]
 [/for]
 
+// base class includes
 [if (aInterface.generalization->isEmpty())]
 #include "uml/Element.hpp"
 [else]
@@ -87,10 +88,8 @@
 [if (not aInterface.getNearestPackage().ignoreNamespace())]namespace [aPackage.name/] 
 {
 [/if]
-	class [aInterface.name/] [if (aInterface.generalization->isEmpty())] : virtual public uml::[aInterface.getGeneralSuperClassName()/]
-[else] [for (aClassifier : Classifier | aInterface.generalization.general->asOrderedSet()->sortedBy(myQualifiedName())) before (':') separator (',') after ('\n')]
-virtual public [aClassifier.getClassifierName(aInterface, ignoreNamespace(aClassifier))/][/for]
-[/if]
+	class [aInterface.name/] [if (aInterface.generalization->isEmpty())] : virtual public uml::[aInterface.getGeneralSuperClassName()/][else][for (aClassifier : Classifier | aInterface.generalization.general->asOrderedSet()->sortedBy(myQualifiedName())) before (':') separator (',') after ('\n')]
+virtual public [aClassifier.getClassifierName(aInterface, ignoreNamespace(aClassifier))/][/for][/if]
 
 	{
 		protected:

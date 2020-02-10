@@ -61,12 +61,15 @@ std::map<std::string,std::function<void(Any)>> m_setterMap;
 std::map<std::string,std::function<void()>> m_unsetterMap;
 [/template]
 
+[query private getSetGetProperties(aClass : Class) : OrderedSet(Property) = aClass.attribute->addAll(aClass.interfaceRealization.contract.attribute)->sortedBy(myQualifiedName())/]
+
 [**
  * generate the creation of {property name, function} pairs and their insertion into the corresponding map
 */]
 [template public generateGetSetInit(aClass : Class)]
 //getter init
-[for (prop : Property | aClass.allFeatures()->filter(Property)->asOrderedSet()->sortedBy(myQualifiedName()))]
+[let propList : OrderedSet(Property) = aClass.getSetGetProperties()]
+[for (prop : Property | propList)]
 [if (prop.type.oclIsKindOf(PrimitiveType) or prop.type.oclIsKindOf(Enumeration))]
 m_getterMap.insert(std::pair<std::string,std::function<Any()>>("[prop.qualifiedName/]",[ '[' /]this[ ']' /](){ return eAny(this->[prop.getterName()/]());}));
 [else][if (prop.upper=1)]
@@ -77,7 +80,7 @@ m_getterMap.insert(std::pair<std::string,std::function<Any()>>("[prop.qualifiedN
 [/if]
 [/for]
 
-[for (aFeature : StructuralFeature | aClass.allFeatures()->filter(StructuralFeature)->asOrderedSet()->sortedBy(myQualifiedName())) ? (aFeature.hasSetter())]
+[for (aFeature : Property | propList) ? (aFeature.hasSetter())]
 [if (aFeature.type.oclIsKindOf(Enumeration))]
 m_setterMap.insert(std::pair<std::string,std::function<void(Any)>>("[aFeature.qualifiedName/]",[ '[' /]this[ ']' /](Any object){this->[aFeature.setterName()/](object->get<std::shared_ptr<uml::EnumerationLiteral>>());}));
 [else]
@@ -85,13 +88,14 @@ m_setterMap.insert(std::pair<std::string,std::function<void(Any)>>("[aFeature.qu
 [/if]
 [/for]
 
-[for (prop : Property | aClass.allFeatures()->filter(Property)->asOrderedSet()->sortedBy(myQualifiedName())) ? (not(prop.type.oclIsKindOf(PrimitiveType) or prop.type.oclIsKindOf(Enumeration)))]
+[for (prop : Property | propList) ? (not(prop.type.oclIsKindOf(PrimitiveType) or prop.type.oclIsKindOf(Enumeration)))]
 [if (prop.upper=1)]
 m_unsetterMap.insert(std::pair<std::string,std::function<void()>>("[prop.qualifiedName/]",[ '[' /]this[ ']' /](){m_[prop.name/] = std::shared_ptr<[prop.type.transformType()/]>(nullptr);}));
 [else]
 m_unsetterMap.insert(std::pair<std::string,std::function<void()>>("[prop.qualifiedName/]",[ '[' /]this[ ']' /](){m_[prop.name/]->clear();}));
 [/if]
 [/for]
+[/let]
 [/template]
 
 [**
@@ -143,7 +147,7 @@ void [aClass.name.toUpperFirst()/]Impl::[aProperty.setterName()/](std::shared_pt
 [for (literal : EnumerationLiteral | aProperty.type.oclAsType(Enumeration).ownedLiteral)]		
 	if (literal == [literal.generatePackageGetterCall()/])
 	{	
-		[aProperty.setterName()/]([literal.enumeration.name/]::[literal.name.toUpper()/]);
+		[aProperty.setterName()/]([if (not (literal.getNearestPackage() = aClass.getNearestPackage()))][literal.getNearestPackage().name/]::[/if][literal.enumeration.name/]::[literal.name.toUpper()/]);
 		return;
 	}
 [/for]
@@ -180,7 +184,23 @@ Any [aClass.name.toUpperFirst().concat('Impl')/]::get(std::shared_ptr<uml::Prope
         //invoke the getter function
         return iter->second();
     }
+[let classList : OrderedSet(Class) = aClass.superClass->reject(oclIsUndefined() and name.oclIsUndefined())->sortedBy(name)]
+[if (classList->size() = 1)]
+	return [classList->first().owner.oclAsType(NamedElement).name/]::[classList->first().name.toUpperFirst()/]Impl::get(_property);
+[elseif (classList->size() > 1)]
+	Any value;
+[for (sClass : Class | aClass.superClass->reject(oclIsUndefined() and name.oclIsUndefined()))]
+	value = [sClass.owner.oclAsType(NamedElement).name/]::[sClass.name.toUpperFirst()/]Impl::get(_property);
+	if (value != null)
+	{
+		return value;
+	}
+[/for]
+	return value;
+[else]
 	return eAny(nullptr);
+[/if]
+[/let]
 }
 
 void [aClass.name.toUpperFirst().concat('Impl')/]::set(std::shared_ptr<uml::Property> _property, Any value)
@@ -193,6 +213,9 @@ void [aClass.name.toUpperFirst().concat('Impl')/]::set(std::shared_ptr<uml::Prop
         //invoke the getter function
         iter->second(value);
     }
+[for (sClass : Class | aClass.superClass->reject(oclIsUndefined() and name.oclIsUndefined()))]
+	[sClass.owner.oclAsType(NamedElement).name/]::[sClass.name.toUpperFirst()/]Impl::set(_property, value);
+[/for]
 }
 
 void [aClass.name.toUpperFirst().concat('Impl')/]::unset(std::shared_ptr<uml::Property> _property)
@@ -205,6 +228,9 @@ void [aClass.name.toUpperFirst().concat('Impl')/]::unset(std::shared_ptr<uml::Pr
         //invoke the getter function
         iter->second();
     }
+[for (sClass : Class | aClass.superClass->reject(oclIsUndefined() and name.oclIsUndefined()))]
+	[sClass.owner.oclAsType(NamedElement).name/]::[sClass.name.toUpperFirst()/]Impl::unset(_property);
+[/for]
 }
 [/template]
 

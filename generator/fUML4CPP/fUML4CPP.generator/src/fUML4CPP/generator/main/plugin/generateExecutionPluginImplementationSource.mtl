@@ -21,6 +21,11 @@
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 
+[query private getActivitiesUsedByCallBehaviorAction(aPackage : Package) : Set(Activity) = aPackage.allOwnedElements()->filter(CallBehaviorAction).behavior->reject(oclIsUndefined())->reject(not oclIsKindOf(Activity))->asSet()/]
+[query private getActivitiesUsedByDecisionNode(aPackage : Package) : Set(Activity) = aPackage.allOwnedElements()->filter(DecisionNode).decisionInput->reject(oclIsUndefined())->reject(not oclIsKindOf(Activity))->asSet()/]
+[query private getActivitiesUsedByOperation(aPackage : Package) : Set(Activity) = aPackage.allOwnedElements()->filter(Operation).method->reject(oclIsUndefined())->reject(not oclIsKindOf(Activity))->asSet()/]
+[query private getUsedActivities (aPackage : Package) : OrderedSet(Activity) = Set{aPackage.getActivitiesUsedByCallBehaviorAction(), aPackage.getActivitiesUsedByDecisionNode(), aPackage.getActivitiesUsedByOperation()}->flatten()->sortedBy(name)/]
+
 [template public generateExecutionPluginImplSource(aPackage : Package) { packageName : String = aPackage.name.toUpperFirst().concat('ExecPluginImpl'); }]
 [file (aPackage.getPackageName().concat('Exec/impl/').concat(packageName).concat('.cpp'), false, 'UTF-8')]
 #include "[aPackage.getPackageName()/]Exec/impl/[packageName/].hpp"
@@ -34,10 +39,10 @@
 #include "uml/Activity.hpp"
 #include "uml/Element.hpp"
 
-[if (aPackage.allOwnedElements()->filter(Activity)->size() > 0)]
+[if (aPackage.getUsedActivities()->size() > 0)]
 [generateMainIncludes()/]
 [/if]
-[for (act : Activity | aPackage.allOwnedElements()->filter(Activity)->select(owner.oclIsKindOf(Class)))]
+[for (act : Activity | aPackage.getUsedActivities()->select(owner.oclIsKindOf(Class)))]
 [generateActivityRelatedIncludes(act, aPackage)/]
 #include "[act.owner.oclAsType(Classifier).namespace.myNamespaceName()/]Exec/[act.owner.oclAsType(Classifier).name.toUpperFirst()/]Object.hpp"
 #include "[act.owner.oclAsType(Classifier).namespace.myNamespaceName()/]/[act.owner.oclAsType(Classifier).name.toUpperFirst()/].hpp"
@@ -92,12 +97,12 @@ Any [packageName/]::executeActivity(std::shared_ptr<uml::Activity> activity, std
 	[generateLocusInitialization()/]
 [/if]
 
-[for (act : Activity | aPackage.allOwnedElements()->filter(Activity)->sortedBy(myQualifiedName()))]
+[for (act : Activity | aPackage.getUsedActivities()->sortedBy(myQualifiedName()))]
 	if (activity == [act.getNearestPackage().myNamespaceName()/]::[act.getNearestPackage().myName()/]Package::eInstance()->[act.generatePackageGetterCall()/])
 	{
-		[act.generateParameterFromAny(aPackage)/]
-		[act.generateStartActivityExecution(aPackage, act.ownedParameter->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in))->size() > 0)/]   
-		[act.generateReturnParameter(aPackage)/]
+		[act.generateParameterFromAny()/]
+		[act.generateStartActivityExecution()/]   
+		[act.generateReturnParameter()/]
 	}
 [/for]
 	return nullptr;
@@ -106,16 +111,16 @@ Any [packageName/]::executeActivity(std::shared_ptr<uml::Activity> activity, std
 [/file]
 [/template]
 
-[query public listNumber(aParameter : Parameter, anActivity : Activity) : Integer =  anActivity.ownedParameter->select((direction = ParameterDirectionKind::_out) or (direction = ParameterDirectionKind::_in))->sortedBy(name)->indexOf(aParameter)-1 /]
+[query public listNumber(aParameter : Parameter, anActivity : Activity) : Integer =  anActivity.ownedParameter->select((direction = ParameterDirectionKind::_out) or (direction = ParameterDirectionKind::_in))->indexOf(aParameter)-1 /]
 
-[template public generateParameterFromAny(anActivity : Activity, aPackage : Package)]
+[template public generateParameterFromAny(anActivity : Activity)]
 [for (par : Parameter | anActivity.ownedParameter->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in)))]
 [par.generateCppType(true)/] [par.name.toLowerFirst()/][if (par.upper <> 1)]List[/if] = parameterList->at([par.listNumber(anActivity)/])->get<[par.generateCppType(true)/]>();
 
 [/for]
 [/template]
 
-[template public generateReturnParameter(anActivity : Activity, aPackage : Package)]
+[template public generateReturnParameter(anActivity : Activity)]
 [if (anActivity.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->notEmpty())]
 //The activity has a return parameter
 [let par : Parameter = anActivity.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->sortedBy(name)->first()]
@@ -126,8 +131,18 @@ std::shared_ptr<fUML::Semantics::SimpleClassifiers::[par.type.name/]Value> ret =
 assert(ret != nullptr);
 return eAny(ret->getValue());
 [else]
-std::cout << "generation is missing for return parameter with supported types and upper <> 1" << std::endl;
-throw "error";
+std::shared_ptr<Bag<[par.type.generateCppType(true)/]>> [par.name/](new Bag<[par.type.generateCppType(true)/]>());
+std::shared_ptr<Bag<fUML::Semantics::Values::Value>> returnValues = resultPList->front()->getValues();
+Bag<fUML::Semantics::Values::Value>::iterator returnValuesIter = returnValues->begin();
+Bag<fUML::Semantics::Values::Value>::iterator returnValuesEnd = returnValues->end();
+while (returnValuesIter != returnValuesEnd)
+{
+	std::shared_ptr<[par.type.getValueClass()/]> valueObject = std::dynamic_pointer_cast<[par.type.getValueClass()/]>(*returnValuesIter);
+	std::shared_ptr<[par.type.generateCppType(true)/]> value(new [par.type.generateCppType(true)/](valueObject->getValue()));
+	[par.name/]->push_back(value);
+	returnValuesIter++;
+}
+return eAny([par.name/]);
 [/if]
 [else]
 [if (par.upper =1)]
@@ -153,7 +168,7 @@ return eAny(returnList);
 [/if]
 [/let]
 [else]
-std::cout << "Activity [anActivity.myQualifiedName()/] has no return parameter" << std::endl;
+DEBUG_MESSAGE(std::cout << "Activity [anActivity.myQualifiedName()/] has no return parameter" << std::endl;)
 return nullptr;
 [/if]
 [/template]

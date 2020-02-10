@@ -55,7 +55,6 @@
 			[aPackage.collectModelClassesForFactory().generateClassCreate(true)/]
 			[aPackage.collectModelInterfacesForFactory().generateInterfaceCreate(true)/]
 
-
 			//Package
 			virtual std::shared_ptr<[aPackage.name.toUpperFirst()/]Package> get[aPackage.name.toUpperFirst()/]Package();
 

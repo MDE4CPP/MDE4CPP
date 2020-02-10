@@ -46,5 +46,7 @@
 // activity [anActivity.name/]
 [anActivity.memberName()/]->setName("[anActivity.name/]");
 [anActivity.ownedParameter.generateParameterInitialization()/]
-
+[if (anActivity.owner.oclIsKindOf(BehavioredClassifier))]
+[anActivity.memberName()/]->setContext([anActivity.owner.oclAsType(BehavioredClassifier).memberName()/]);
+[/if]
 [/template]

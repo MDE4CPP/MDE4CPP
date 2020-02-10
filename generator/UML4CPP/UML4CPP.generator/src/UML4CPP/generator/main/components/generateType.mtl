@@ -58,13 +58,15 @@
  * - upper <> 1 -> Bag used  
  * - error message, if Operation type is undefined or Operation type name is undefined
 */]
-[template public generateCppType(aOperation : Operation)]
+[template public generateCppType(aOperation : Operation) post (trim())]
 [if (not aOperation.type.oclIsUndefined() and aOperation.type.name.oclIsUndefined())]
 ['type of operation '.concat(aOperation.qualifiedName).concat(' is invalid (').concat(aOperation.type.toString()).concat(')').registerError() /]undefined
 [/if]
 [if (not(aOperation.upper=1))]
-std::shared_ptr<Bag<[aOperation.type.transformType()/]>>[elseif ((not aOperation.type.oclIsUndefined()) and (not aOperation.type.isPrimitive()))]
-std::shared_ptr<[aOperation.type.transformType()/]> [else]
+std::shared_ptr<Bag<[aOperation.type.transformType()/]>>
+[elseif ((not aOperation.type.oclIsUndefined()) and (not aOperation.type.isPrimitive()) and (not aOperation.type.oclIsKindOf(Enumeration)))]
+std::shared_ptr<[aOperation.type.transformType()/]>
+[else]
 [aOperation.type.transformType()/][/if]
 [/template]
 
@@ -75,13 +77,31 @@ std::shared_ptr<[aOperation.type.transformType()/]> [else]
  * - upper <> 1 -> Bag used  
  * - error message, if Parameter type is undefined or Parameter type name is undefined
 */]
-[template public generateCppType(aParameter : Parameter, useReference : Boolean)]
+[template public generateCppType(aParameter : Parameter, useReference : Boolean) post (trim())]
 [if (not aParameter.type.oclIsUndefined() and aParameter.type.name.oclIsUndefined())]
 ['type of parameter '.concat(aParameter.qualifiedName).concat(' is invalid (').concat(aParameter.type.toString()).concat(')').registerError() /]undefined
 [/if]
 [if (not aParameter.type.oclIsUndefined() and not (aParameter.type.isPrimitive() or aParameter.type.oclIsKindOf(Enumeration)))]
-std::shared_ptr<[if (aParameter.upper <> 1)]Bag<[/if][aParameter.type.transformType()/]>[if (aParameter.upper <> 1)]>[/if][else]
+std::shared_ptr<[if (aParameter.upper <> 1)]Bag<[/if][aParameter.type.transformType()/]>[if (aParameter.upper <> 1)]>[/if]
+[else]
 [if (aParameter.upper <> 1)]std::shared_ptr<Bag<[/if][aParameter.type.transformType()/][if(useReference and (aParameter.direction = ParameterDirectionKind::inout or aParameter.direction = ParameterDirectionKind::out) and aParameter.upper = 1)]&[/if][if (aParameter.upper <> 1)]>>[/if][/if]
+[/template]
+
+[**
+ * generate the C++ representation of a type for a Pin
+ * 
+ * - shared pointer for types, which are not primitive or enumeration
+ * - upper <> 1 -> Bag used  
+ * - error message, if Parameter type is undefined or Parameter type name is undefined
+*/]
+[template public generateCppType(aPin : Pin, useReference : Boolean) post (trim())]
+[if (not aPin.type.oclIsUndefined() and aPin.type.name.oclIsUndefined())]
+['type of parameter '.concat(aPin.qualifiedName).concat(' is invalid (').concat(aPin.type.toString()).concat(')').registerError() /]undefined
+[/if]
+[if (not aPin.type.oclIsUndefined() and not (aPin.type.isPrimitive() or aPin.type.oclIsKindOf(Enumeration)))]
+std::shared_ptr<[if (aPin.upper <> 1)]Bag<[/if][aPin.type.transformType()/]>[if (aPin.upper <> 1)]>[/if]
+[else]
+[if (aPin.upper <> 1)]std::shared_ptr<Bag<[/if][aPin.type.transformType()/][if (aPin.upper <> 1)]>>[/if][/if]
 [/template]
 
 [**

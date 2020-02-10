@@ -19,6 +19,7 @@
  */]
 [module generateValueSpecification('http://www.eclipse.org/uml2/5.0.0/UML')]
 
+[import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 
 [**
@@ -42,7 +43,8 @@
 */]
 [template public generateValueSpecificationInitialization(aValueSpecification : ValueSpecification) post (trim())]
 [if (aValueSpecification.oclIsKindOf(InstanceValue))]
-[aValueSpecification.memberName()/]->setInstance([aValueSpecification.oclAsType(InstanceValue).instance.memberName()/]);
+[aValueSpecification.memberName()/]->setInstance([aValueSpecification.oclAsType(InstanceValue).instance.generatePackageGetterCall(aValueSpecification)/]);
+[aValueSpecification.memberName()/]->setType([aValueSpecification.oclAsType(InstanceValue).type.generatePackageGetterCall(aValueSpecification)/]);
 [elseif (aValueSpecification.oclIsKindOf(LiteralSpecification))]
 [aValueSpecification.memberName()/]->setValue([aValueSpecification.oclAsType(LiteralSpecification).generateLiteralValue()/]);
 [/if]

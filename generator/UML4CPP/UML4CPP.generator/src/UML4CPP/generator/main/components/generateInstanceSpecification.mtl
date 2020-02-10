@@ -64,7 +64,7 @@
 [if (aValueSpec.oclIsKindOf(LiteralSpecification))]
 		literal->setValue([aValueSpec.oclAsType(LiteralSpecification).generateLiteralValue()/]);
 [elseif(aValueSpec.oclIsKindOf(InstanceValue))]
-		literal->setInstance([aValueSpec.oclAsType(InstanceValue).instance.memberName()/]);
+		literal->setInstance([aValueSpec.oclAsType(InstanceValue).instance.generatePackageGetterCall(aValueSpec)/]);
 [/if]
 		this->getOwnedElement()->push_back(literal);
 	}

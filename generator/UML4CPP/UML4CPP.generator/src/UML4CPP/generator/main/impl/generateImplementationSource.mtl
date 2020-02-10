@@ -30,8 +30,11 @@
 [import UML4CPP::generator::main::helpers::setGetHelper /]
 [import UML4CPP::generator::main::validation::validateModel /]
 
-[query private includes(aClass : Class)  : Set(Type) = OrderedSet{aClass.member->selectByKind(TypedElement)->select(not type.oclIsUndefined()).type, aClass.ownedOperation.ownedParameter.type}->flatten() /]
+[query private includes(aClass : Class)  : Set(Type) = OrderedSet{aClass.member->selectByKind(TypedElement)->select(not type.oclIsUndefined()).type, aClass.ownedOperation.ownedParameter.type, aClass.getAllAttributes().type, aClass.importedMember}->flatten() /]
 [query private includes(aInterface : Interface)  : Set(Type) = OrderedSet{aInterface.member->selectByKind(TypedElement)->select(not type.oclIsUndefined()).type, aInterface.ownedOperation.ownedParameter.type}->flatten() /]
+
+[query private getAllAttributes(anInterface : Interface) : Set(Property) = OrderedSet{anInterface.ownedAttribute, anInterface.generalization.general->selectByType(Interface).getAllAttributes()} /]
+[query private getAllAttributes(aClass : Class) : Set(Property) = OrderedSet{aClass.ownedAttribute, aClass.generalization.general->selectByType(Class).getAllAttributes(), aClass.interfaceRealization.contract.getAllAttributes()}->flatten() /]
 
 [template public generateImplementationSource(aClass : Class) { className : String = aClass.name.toUpperFirst().concat('Impl'); aPackage : Package = aClass.ancestors()->filter(Package)->first(); }]
 [file (aPackage.getPackageName().concat('/impl/').concat(className).concat('.cpp'), false, 'UTF-8')]
@@ -46,12 +49,15 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "[aPackage.getPackageName()/]/impl/[aPackage.name.toUpperFirst().concat('PackageImpl')/].hpp"
 #include "[aClass.eClass().ePackage.name/]/[aClass.eClass().name/].hpp"
-[for (cl : Type | aClass.includes()->sortedBy(myQualifiedName())) ? ( oclIsKindOf(Class) or oclIsKindOf(Interface))]
+[for (cl : Type | aClass.includes()->sortedBy(myQualifiedName())) ? ( oclIsKindOf(Class) or oclIsKindOf(Interface) or oclIsKindOf(Enumeration))]
 [if (cl.oclIsUndefined() or cl.name.oclIsUndefined())]
 // undefined  [cl.eClass().name/] ([cl.toString()/]) ['class '.concat(aClass.name).concat(': header include failed for undefined ').concat(cl.eClass().name).concat(' ').concat(cl.toString()).registerError()/]
 [else]
 #include "[cl.getNearestPackage().myNamespaceName()/]/[cl.name.toUpperFirst()/].hpp"
 [/if]
+[/for]
+[for (aPackage : Package | aClass.ownedAttribute->select(type.oclIsKindOf(Enumeration)).type._package->flatten()->reject(pack : Package | pack = aPackage)->sortedBy(name))]
+#include "[aPackage.getPackageName()/]/[aPackage.getPackageName()/]Package.hpp"
 [/for]
 
 [if (aClass.ownedOperation.method->notEmpty())][if(ownedOperation.method->filter(Activity)->notEmpty())]
@@ -122,6 +128,46 @@
 {
 }
 
+[className/]::[className/](const [className/] & obj):[className/]()
+{
+	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy [aClass.name.toUpperFirst()/] "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
+[for (att : Property | aClass.getAllAttributes()->reject(isBackReference())->sortedBy(name))]
+[if (att.upper = 1)]
+[if (not (att.type.isPrimitive() or att.type.oclIsKindOf(Enumeration)))]
+	if (obj.[att.getterName()/]() != nullptr)
+	{
+	[/if]	m_[att.name/] = [if (not (att.type.isPrimitive() or att.type.oclIsKindOf(Enumeration)))]std::dynamic_pointer_cast<[att.type.generateCppType(true)/]>([/if]obj.[att.getterName()/]()[if (not (att.type.isPrimitive() or att.type.oclIsKindOf(Enumeration)))]->copy())[/if];
+[if (not (att.type.isPrimitive() or att.type.oclIsKindOf(Enumeration)))]
+	}
+[/if]
+[else]
+	[att.generateCppType()/] [att.name/]List = obj.[att.getterName()/]();
+	Bag<[att.type.generateCppType(true)/]>::iterator [att.name/]Iter = [att.name/]List->begin();
+	Bag<[att.type.generateCppType(true)/]>::iterator [att.name/]End = [att.name/]List->end();
+	while ([att.name/]Iter != [att.name/]End) 
+	{
+[if (att.type.isPrimitive())]
+		std::shared_ptr<[att.type.generateCppType(true)/]> temp(new [att.type.generateCppType(true)/](*(*[att.name/]Iter)));
+[else]
+		std::shared_ptr<[att.type.generateCppType(true)/]> temp = std::dynamic_pointer_cast<[att.type.generateCppType(true)/]>((*[att.name/]Iter)->copy());
+[/if]
+		m_[att.name/]->push_back(temp);
+		[att.name/]Iter++;
+	}
+[/if]
+[/for]
+}
+
+std::shared_ptr<ecore::EObject>  [className/]::copy() const
+{
+	std::shared_ptr<[className/]> element(new [className/](*this));
+	element->[generateGetThisPtrPropertySetterName()/](element);
+	return element;
+}
+
 [if (isSingleton())]
 [aClass.name.toUpperFirst()/]* [className/]::create()
 {
@@ -162,7 +208,6 @@ std::shared_ptr<uml::Class> [className/]::getMetaClass()
 [aClass.generateGetThisPtrCPP()/]
 [/file]
 [/template]
-
 
 [template public generateImplementationSource(aInterface : Interface) { interfaceName : String = aInterface.name.toUpperFirst().concat('Impl'); aPackage : Package = aInterface.ancestors()->filter(Package)->first(); }]
 [file (aPackage.getPackageName().concat('/impl/').concat(interfaceName).concat('.cpp'), false, 'UTF-8')]

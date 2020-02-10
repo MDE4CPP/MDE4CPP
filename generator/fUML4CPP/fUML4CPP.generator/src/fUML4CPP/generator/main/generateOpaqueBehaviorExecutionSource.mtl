@@ -20,7 +20,14 @@
 [import UML4CPP::generator::main::helpers::keywords /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 
+[query private getActivity(anAction : Action) : Activity = if (anAction.activity.oclIsUndefined()) then anAction.inStructuredNode.getActivity() else anAction.activity endif /]
+[query private getOwnerOrTargetType(aCOA : CallOperationAction) : Type = if (aCOA.target.isSelfAttribute() or aCOA.target.isSelf()) then aCOA.getActivity().owner.oclAsType(Type) else aCOA.target.type endif /]
 [query public hasGenerateOwnerVariable(aElement : Element) : Boolean = aElement.valueKey('generateOwnerVariable') = 'true'/]
+[query private getSelf(action : Action) : Classifier = action.getActivity().owner.oclAsType(Classifier)/]
+[query private getSelfAttribute(pin : Pin, action : Action) : Property = action.getSelf().attribute->select(pin.name = 'self.'.concat(name))->asOrderedSet()->first()/]
+[query private isSelf(pin : Pin) : Boolean = pin.name = 'self'/]
+[query private isSelfAttribute(pin : Pin) : Boolean = pin.name.startsWith('self.')/]
+[query private getPinType(pin : Pin, action : Action) : Type = if (pin.isSelf()) then action.getSelf() else (if pin.isSelfAttribute() then pin.getSelfAttribute(action).type else pin.type endif) endif /]
 
 [template public generateOpaqueBehaviorExecutionSource(anOpaqueBehavior : OpaqueBehavior, aPackage :Package)]
 [anOpaqueBehavior.generateOpaqueBehaviorExecSource(aPackage)/]
@@ -116,8 +123,8 @@ void [behaviorName/]::setThisExecutionPtr(std::weak_ptr<[behaviorName/]> thisExe
 [if (aCallOperationAction.target.name.startsWith('self.'))]
 #include "[aCallOperationAction.target.type.getNearestPackage().myNamespaceName()/]/[aCallOperationAction.target.type.name/].hpp"
 [/if]
-#include "[aCallOperationAction.activity.owner.oclAsType(Classifier).getNearestPackage().myNamespaceName()/]/[aCallOperationAction.activity.owner.oclAsType(Classifier).name.toUpperFirst()/].hpp"
-#include "[aPackage.getPackageName()/]Exec/[aCallOperationAction.activity.owner.oclAsType(Classifier).name.toUpperFirst()/]Object.hpp"
+#include "[aCallOperationAction.getActivity().owner.oclAsType(Classifier).getNearestPackage().myNamespaceName()/]/[aCallOperationAction.getActivity().owner.oclAsType(Classifier).name.toUpperFirst()/].hpp"
+#include "[aPackage.getPackageName()/]Exec/[aCallOperationAction.getActivity().owner.oclAsType(Classifier).name.toUpperFirst()/]Object.hpp"
 [else]
 #include "[aCallOperationAction.target.type.getNearestPackage().myNamespaceName()/]/[aCallOperationAction.target.type.name.toUpperFirst()/].hpp"
 #include "[aPackage.getPackageName()/]Exec/[aCallOperationAction.target.type.name.toUpperFirst()/]Object.hpp"
@@ -135,7 +142,7 @@ void [behaviorName/]::setThisExecutionPtr(std::weak_ptr<[behaviorName/]> thisExe
 
 [template private generateBody(aNamedElement : NamedElement, aPackage : Package) ? (aNamedElement.oclIsKindOf(OpaqueBehavior))]
 [let anOpaqueBehavior : OpaqueBehavior = aNamedElement.oclAsType(OpaqueBehavior)]
-[anOpaqueBehavior.ownedParameter->asSet()->generateIncomingParameters()/]
+[anOpaqueBehavior.ownedParameter->generateIncomingParameters()/]
 
 //Body of the Opaquebehavior
 //Start ---------------------------
@@ -144,61 +151,119 @@ std::shared_ptr<[anOpaqueBehavior.owner.oclAsType(Classifier).namespace.myNamesp
 [/if]
 
 [if (anOpaqueBehavior.language->includes(keyCPP()))]
-[let index : Integer = anOpaqueBehavior.language->asOrderedSet()->indexOf(keyCPP())]
+[let index : Integer = anOpaqueBehavior.language->indexOf(keyCPP())]
 [if (0 < index and index <= anOpaqueBehavior._body->size())]
-[anOpaqueBehavior._body->asOrderedSet()->at(index)/]
+[anOpaqueBehavior._body->at(index)/]
 [/if][/let]
 [else]
 std::cout << __PRETTY_FUNCTION__ << std::endl;
 throw "UnsupportedOperationException";
 [/if]
-		
-[anOpaqueBehavior.ownedParameter->asSet()->generateOutgoingParameters()/]
+
+[anOpaqueBehavior.ownedParameter->generateOutgoingParameters()/]
 [/let]
 [/template]
 
 [template private generateBody(aNamedElement : NamedElement, aPackage : Package) ? (aNamedElement.oclIsKindOf(CallOperationAction))]
 [let aCallOperationAction : CallOperationAction = aNamedElement.oclAsType(CallOperationAction)]
-[aCallOperationAction.operation.ownedParameter->asSet()->generateIncomingParameters()/]
+[let type : Classifier = aCallOperationAction.getOwnerOrTargetType()]
+std::shared_ptr<[type.namespace.myNamespaceName()/]::[type.name.toUpperFirst()/]> context = std::dynamic_pointer_cast<[type.name.toUpperFirst()/]Object>(this->getContext())->getUmlValue();
+if (context == nullptr)
+{
+	std::cerr << "context of CallOperationAction '[aCallOperationAction.name/]'is not set" << std::endl;
+    return;
+}
+[let targetPin : Pin = aCallOperationAction.target]
+std::shared_ptr<[targetPin.getPinType(aCallOperationAction).namespace.myNamespaceName()/]::[targetPin.getPinType(aCallOperationAction).name.toUpperFirst()/]> target = context[if (targetPin.isSelfAttribute())]->[targetPin.getSelfAttribute(aCallOperationAction).getterName()/]()[/if];
+[/let]
+[/let]
+if (target == nullptr)
+{
+	std::cerr << "target of CallOperationAction '[aCallOperationAction.name/]'is null" << std::endl;
+	throw "target is null";
+}
 
-//Call Operation action target
-[if (aCallOperationAction.target.name.startsWith('self'))]
-std::shared_ptr<[aCallOperationAction.activity.owner.oclAsType(Classifier).namespace.myNamespaceName()/]::[aCallOperationAction.activity.owner.oclAsType(Classifier).name.toUpperFirst()/]> target = std::dynamic_pointer_cast<[aCallOperationAction.activity.owner.oclAsType(Classifier).name.toUpperFirst()/]Object>(this->getContext())->getUmlValue();
+[for (pin : InputPin | aCallOperationAction.argument)]
+[if (not (pin.isSelf() or pin.isSelfAttribute()))]
+	[pin.generateIncomingPin(aCallOperationAction.argument->indexOf(pin)-1)/]
 [else]
-std::shared_ptr<[aCallOperationAction.target.type.namespace.myNamespaceName()/]::[aCallOperationAction.target.type.name.toUpperFirst()/]> target = std::dynamic_pointer_cast<[aCallOperationAction.target.type.name.toUpperFirst()/]Object>(this->getContext())->getUmlValue();
+	[pin.generateCppType(false)/] [pin.name.replaceFirst('self.', '')/] = [pin.generateArgumentGetter(aCallOperationAction)/]
 [/if]
-assert(target != nullptr);
+[/for]
+
+[for (outPar : Parameter | aCallOperationAction.operation.ownedParameter->select(p :Parameter | (p.direction = ParameterDirectionKind::out)))]
+[outPar.generateCppType(false)/] [outPar.name/][if (outPar.upper <> 1)](new Bag<[outPar.type.generateCppType(true)/]>())[/if];
+[/for]	
 
 //Calling the associated operation.
-[if (aCallOperationAction.target.name.startsWith('self.'))]
-	std::shared_ptr<[aCallOperationAction.target.type.namespace.myNamespaceName()/]::[aCallOperationAction.target.type.name.toUpperFirst()/]> subtarget = std::dynamic_pointer_cast<[aCallOperationAction.target.type.namespace.myNamespaceName()/]::[aCallOperationAction.target.type.name.toUpperFirst()/]>(target->get[aCallOperationAction.target.name.substitute('self.', '').toUpperFirst()/]());
-    assert(subtarget != nullptr);
-[/if]
-[if (aCallOperationAction.target.name.startsWith('self.'))]
-	if (target != nullptr && subtarget != nullptr)
-	{
-[/if]
-	[let retPar : Set(Parameter) = aCallOperationAction.operation.ownedParameter->select(p :Parameter | (p.direction = ParameterDirectionKind::return))->asSet()]
-		[if(not retPar->isEmpty())][if (not retPar->asOrderedSet()->first().oclIsInvalid())][retPar.name/] = [/if][/if][/let][if (aCallOperationAction.target.name.startsWith('self.'))]subtarget[else]target[/if]->[aCallOperationAction.operation.name/]([for (sParameter : Parameter | aCallOperationAction.operation.ownedParameter->select(p :Parameter | not (p.direction = ParameterDirectionKind::return))) separator (',')][sParameter.name/][/for]);
-[if (aCallOperationAction.target.name.startsWith('self.'))]
-	}
-	else
-	{
-		std::cerr << "attribute [aCallOperationAction.target.name/] is not set" << std::endl;
-	}
-[/if]
+[let retPar : OrderedSet(Parameter) = aCallOperationAction.operation.ownedParameter->select(p :Parameter | (p.direction = ParameterDirectionKind::return))]
+[if(not retPar->isEmpty())][if (not retPar->first().oclIsInvalid())][retPar.generateCppType(false)/] [retPar.name/] = [/if][/if]target->[aCallOperationAction.operation.name/]([for (par : Parameter | aCallOperationAction.operation.ownedParameter->select(param : Parameter | not (param.direction = ParameterDirectionKind::return))) separator (',')] [par.name/][/for]);
+[/let]	
 
-[aCallOperationAction.operation.ownedParameter->asSet()->generateOutgoingParameters()/]
+[aCallOperationAction.operation.ownedParameter->generateOutgoingParameters()/]
 [/let]
 [/template]
 
-[template private generateIncomingParameters(aParameterList : Set(Parameter))]
+[template private generateIncomingPin(aPin : InputPin, index : Integer)]
+[aPin.generateCppType(false)/] [aPin.name/][if (aPin.upper <> 1)](new Bag<[aPin.type.generateCppType(true)/]>())[/if];
+[aPin.generateInputParameter(index)/]
+[if (aPin.lower = 0)]
+if ([aPin.name/]ValueList->size() > 0)
+{
+[/if]
+[if (aPin.upper = 1)]
+[if (not aPin.type.supportedTypes())]
+	std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> [aPin.name/]Value = std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Reference>([aPin.name/]ValueList->front());
+	[aPin.name/] = std::dynamic_pointer_cast<[aPin.type.name/]Object>([aPin.name/]Value->getReferent())->getUmlValue();
+	if([aPin.name/] == nullptr)
+	{
+		DEBUG_MESSAGE(std::cout << "received instance of type [aPin.type.generateCppType(true)/] is null" << std::endl;);
+	}
+[else]
+	std::shared_ptr<fUML::Semantics::SimpleClassifiers::[aPin.type.name.toUpperFirst()/]Value> [aPin.name/]Value = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::[aPin.type.name.toUpperFirst()/]Value>([aPin.name/]ValueList->front());
+	[aPin.name/] = [aPin.name/]Value->getValue();
+[/if]
+[else]
+Bag<fUML::Semantics::Values::Value>::iterator [aPin.name.toLowerFirst()/]Iter = [aPin.name.toLowerFirst()/]ValueList->begin();
+Bag<fUML::Semantics::Values::Value>::iterator [aPin.name.toLowerFirst()/]End = [aPin.name.toLowerFirst()/]ValueList->end();
+while ([aPin.name.toLowerFirst()/]Iter != [aPin.name.toLowerFirst()/]End)
+{
+	[if (not aPin.type.supportedTypes())]
+	std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> [aPin.name/]Value = std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Reference>(*[aPin.name.toLowerFirst()/]Iter);
+	[aPin.type.generateCppType(false)/] [aPin.name/]Temp = std::dynamic_pointer_cast<[aPin.type.name/]Object>([aPin.name/]Value->getReferent())->getUmlValue();
+	if([aPin.name/]Temp == nullptr)
+	{
+		DEBUG_MESSAGE(std::cout << "received instance of type [aPin.type.generateCppType(true)/] is null" << std::endl;);
+	}
+	else
+	{
+		[aPin.name/]->push_back([aPin.name/]Temp);
+	}
+	[else]
+	std::shared_ptr<[aPin.type.getValueClass()/]> valueObject = std::dynamic_pointer_cast<[aPin.type.getValueClass()/]>(*[aPin.name/]Iter);
+	std::shared_ptr<[aPin.type.generateCppType(true)/]> value(new [aPin.type.generateCppType(true)/](valueObject->getValue()));
+	[aPin.name/]->push_back(value);
+	[/if]
+
+	[aPin.name.toLowerFirst()/]Iter++;
+}
+[/if]
+[if (aPin.lower = 0)]
+}
+[/if]
+[/template]
+
+[template private generateIncomingParameters(aParameterList : OrderedSet(Parameter))]
 [for ( par : Parameter | aParameterList)]
 [par.generateCppType(false)/] [par.name/][if (par.upper <> 1)](new Bag<[par.type.generateCppType(true)/]>())[/if];
 [/for]
 
-[for ( par : Parameter | aParameterList->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in))->sortedBy(name))]
-[par.generateInputParameter(aParameterList->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in))->sortedBy(name)->indexOf(par)-1)/]
+[for ( par : Parameter | aParameterList->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in)))]
+[par.generateInputParameter(aParameterList->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in))->indexOf(par)-1)/]
+[if (par.lower = 0)]
+if ([par.name/]ValueList->size() > 0)
+{
+[/if]
 [if (par.upper = 1)]
 	[if (not par.type.supportedTypes())]
 	std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> [par.name/]Value = std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Reference>([par.name/]ValueList->front());
@@ -212,12 +277,12 @@ assert(target != nullptr);
 	[par.name/] = [par.name/]Value->getValue();
 	[/if]
 [else]
-Bag<fUML::Semantics::Values::Value>::iterator [par.name.toLowerFirst()/]Iter = [par.name.toLowerFirst()/]ValueList->begin();
-Bag<fUML::Semantics::Values::Value>::iterator [par.name.toLowerFirst()/]End = [par.name.toLowerFirst()/]ValueList->end();
-while ([par.name.toLowerFirst()/]Iter != [par.name.toLowerFirst()/]End)
+Bag<fUML::Semantics::Values::Value>::iterator [par.name.toLowerFirst()/]ValueIter = [par.name.toLowerFirst()/]ValueList->begin();
+Bag<fUML::Semantics::Values::Value>::iterator [par.name.toLowerFirst()/]ValueEnd = [par.name.toLowerFirst()/]ValueList->end();
+while ([par.name.toLowerFirst()/]ValueIter != [par.name.toLowerFirst()/]ValueEnd)
 {
 	[if (not par.type.supportedTypes())]
-	std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> [par.name/]Value = std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Reference>(*[par.name.toLowerFirst()/]Iter);
+	std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> [par.name/]Value = std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Reference>(*[par.name.toLowerFirst()/]ValueIter);
 	[par.type.generateCppType(false)/] [par.name/]Temp = std::dynamic_pointer_cast<[par.type.name/]Object>([par.name/]Value->getReferent())->getUmlValue();
 	if([par.name/]Temp == nullptr)
 	{
@@ -228,17 +293,20 @@ while ([par.name.toLowerFirst()/]Iter != [par.name.toLowerFirst()/]End)
 		[par.name/]->push_back([par.name/]Temp);
 	}
 	[else]
-	std::cerr << __PRETTY_FUNCTION__ << ": generation of supported types with upper > 0 is missing" << std::endl;
-	throw "ERROR" << std::endl;
+	std::shared_ptr<[par.type.getValueClass()/]> valueObject = std::dynamic_pointer_cast<[par.type.getValueClass()/]>(*[par.name/]ValueIter);
+	std::shared_ptr<[par.type.generateCppType(true)/]> value(new [par.type.generateCppType(true)/](valueObject->getValue()));
+	[par.name/]->push_back(value);
 	[/if]
-
-	[par.name.toLowerFirst()/]Iter++;
+	[par.name.toLowerFirst()/]ValueIter++;
+}
+[/if]
+[if (par.lower = 0)]
 }
 [/if]
 [/for]
 [/template]
 
-[template private generateOutgoingParameters(aParameterList : Set(Parameter))]
+[template private generateOutgoingParameters(aParameterList : OrderedSet(Parameter))]
 //set return / out parameters
 [for ( par : Parameter | aParameterList->select((direction = ParameterDirectionKind::_out) or (direction = ParameterDirectionKind::return))->sortedBy(name))]
 [if (par.upper = 1)]
@@ -248,7 +316,7 @@ Bag<[par.type.generateCppType(true)/]>::iterator [par.name.toLowerFirst()/]Iter 
 Bag<[par.type.generateCppType(true)/]>::iterator [par.name.toLowerFirst()/]End = [par.name.toLowerFirst()/]->end();
 while ([par.name.toLowerFirst()/]Iter != [par.name.toLowerFirst()/]End)
 {
-	[par.type.generateCppType(false)/] [par.name.toLowerFirst()/]Temp = *[par.name.toLowerFirst()/]Iter;
+	[par.type.generateCppType(false)/] [par.name.toLowerFirst()/]Temp = [if(par.type.supportedTypes())]*([/if]*[par.name.toLowerFirst()/]Iter[if(par.type.supportedTypes())])[/if];
 	[par.generateValue(aParameterList, par.name.concat('Temp'))/]
 	[par.name.toLowerFirst()/]Iter++;
 }
@@ -256,31 +324,53 @@ while ([par.name.toLowerFirst()/]Iter != [par.name.toLowerFirst()/]End)
 [/for]
 
 //set InOut parameters
-[for ( par : Parameter | aParameterList->asOrderedSet()->select(direction = ParameterDirectionKind::inout)->sortedBy(name))]
-[if (par.direction <> ParameterDirectionKind::inout or not par.type.supportedTypes())]
-[par.generateOutputParameter()/]
-[/if]
-[if (not par.type.supportedTypes())]
-//Pointer type
-[par.name/]UmlLinker->setUmlValue[if(not (par.upper = 1))]s[/if]([par.name/]);
-[par.name/]UmlLinker->setLocus(this->getLocus());
-[par.name/]Value->setReferent([par.name/]UmlLinker);
+[for ( par : Parameter | aParameterList->select(direction = ParameterDirectionKind::inout))]
+[if (par.upper = 1)]
+[par.generateValue(aParameterList, par.name)/]
 [else]
-//Simple type
-[par.name/]Value->setValue([par.name/]);
+Bag<[par.type.generateCppType(true)/]>::iterator [par.name.toLowerFirst()/]OutIter = [par.name.toLowerFirst()/]->begin();
+Bag<[par.type.generateCppType(true)/]>::iterator [par.name.toLowerFirst()/]OutEnd = [par.name.toLowerFirst()/]->end();
+while ([par.name.toLowerFirst()/]OutIter != [par.name.toLowerFirst()/]OutEnd)
+{
+	[par.type.generateCppType(false)/] [par.name.toLowerFirst()/]Temp = [if(par.type.supportedTypes())]*([/if]*[par.name.toLowerFirst()/]OutIter[if(par.type.supportedTypes())])[/if];
+	[par.generateValue(aParameterList, par.name.concat('Temp'))/]
+	[par.name.toLowerFirst()/]OutIter++;
+}
 [/if]
-//outputParameters->push_back(inputParameters->at([aParameterList->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in))->sortedBy(name)->indexOf(par)-1/]));
 [/for]
 [/template]
 
-[template private generateValue(aParameter : Parameter, aParameterList : Set(Parameter), variableName : String)]
+[template private generateValue(aParameter : Parameter, aParameterList : OrderedSet(Parameter), variableName : String)]
 [aParameter.generateOutputParameter()/]
-[if (not aParameter.type.supportedTypes())]
-[aParameter.name/]UmlLinker->setUmlValue([variableName/]);
-[aParameter.name/]UmlLinker->setLocus(this->getLocus());
-[aParameter.name/]Value->setReferent([aParameter.name/]UmlLinker);
+[if (aParameter.type.oclIsKindOf(Enumeration))]
+[for (literal : EnumerationLiteral | aParameter.type.oclAsType(Enumeration).ownedLiteral)]
+if ([aParameter.name/] == [literal.enumeration.namespace.name/]::[literal.enumeration.name/]::[literal.name.toUpperCase()/])
+{
+	[aParameter.name/]OutValue->setLiteral([literal.generatePackageGetterCall()/]);
+}
+[/for]
+[elseif (not aParameter.type.supportedTypes())]
+[aParameter.name/]OutUmlLinker->setLocus(this->getLocus());
+[aParameter.name/]OutValue->setReferent([aParameter.name/]OutUmlLinker);
 [else]
-[aParameter.name/]Value->setValue([aParameter.name/]);
+[aParameter.name/]OutValue->setValue([variableName/]);
 [/if]
-outputParameters->at([aParameterList->select((direction = ParameterDirectionKind::_out) or (direction = ParameterDirectionKind::return))->sortedBy(name)->indexOf(aParameter)-1/])->getValues()->push_back([aParameter.name/]Value);
+outputParameters->at([aParameterList->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_out) or (direction = ParameterDirectionKind::return))->indexOf(aParameter)-1/])->getValues()->push_back([aParameter.name/]OutValue);
+[/template]
+
+[template private generateArgumentGetter(pin : Pin, action : Action) ? (pin.name = 'self')]
+context;
+[/template]
+
+[template private generateArgumentGetter(pin : Pin, action : Action) ? (pin.name.contains('self.'))]
+context->[pin.getSelfAttribute(action).getterName()/]();
+[/template]
+
+[template private generateArgumentGetter(pin : Pin, action : Action) ? (not (pin.name.contains('self') and pin.type.supportedTypes()))]
+std::dynamic_pointer_cast<[pin.type.name/]Object>([pin.name/]Value->getReferent())->getUmlValue[if(not (pin.upper = 1))]s[/if]();
+assert([pin.name/] != nullptr);
+[/template]
+
+[template private generateArgumentGetter(pin : Pin, action : Action) ? (not pin.name.contains('self') and pin.type.supportedTypes())]
+[pin.name/]Value->getValue();
 [/template]
