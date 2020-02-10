@@ -39,9 +39,10 @@
 [for (elements : Class| aPackage.collectModelClassesForFactoryDeclaration()) separator ('\n')]
 	class [elements.name.toUpperFirst()/];[/for]
 
+[comment] DISABLE INTERFACE IMPLEMENTATION 
 [for (elements : Interface| aPackage.collectModelInterfacesForFactory()) separator ('\n')]
 	class [elements.name.toUpperFirst()/];[/for]
-
+[/comment]
 	class [aPackage.name.toUpperFirst().concat('Package')/];
 	class [packageName/];
 
