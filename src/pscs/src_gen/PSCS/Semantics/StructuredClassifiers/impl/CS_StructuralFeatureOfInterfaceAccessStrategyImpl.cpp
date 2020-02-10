@@ -20,11 +20,11 @@
 
 #include "abstractDataTypes/Bag.hpp"
 
-#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "PSCS/impl/PSCSPackageImpl.hpp"
+#include "fUML/FUMLFactory.hpp"
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -36,7 +36,13 @@
 
 #include "PSCS/Semantics/StructuredClassifiers/CS_Object.hpp"
 
+#include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
+
+#include "fUML/Semantics/Loci/SemanticStrategy.hpp"
+
 #include "uml/StructuralFeature.hpp"
+
+#include "fUML/Semantics/Values/Value.hpp"
 
 #include "ecore/EcorePackage.hpp"
 #include "ecore/EcoreFactory.hpp"
@@ -110,17 +116,20 @@ std::shared_ptr<ecore::EClass> CS_StructuralFeatureOfInterfaceAccessStrategyImpl
 //*********************************
 std::string CS_StructuralFeatureOfInterfaceAccessStrategyImpl::getName()
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// StructuralFeatureAccessStrategy are always named "structuralFeature"
+	return "structuralFeature";
+	//end of body
 }
 
-Any CS_StructuralFeatureOfInterfaceAccessStrategyImpl::read(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object>  cs_Object,std::shared_ptr<uml::StructuralFeature>  feature)
+std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> CS_StructuralFeatureOfInterfaceAccessStrategyImpl::read(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object>  cs_Object,std::shared_ptr<uml::StructuralFeature>  feature)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void CS_StructuralFeatureOfInterfaceAccessStrategyImpl::write(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object>  cs_Object,std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<Bag<Any> >  values,int position)
+void CS_StructuralFeatureOfInterfaceAccessStrategyImpl::write(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object>  cs_Object,std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<Bag<fUML::Semantics::Values::Value> >  values,int position)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -142,6 +151,7 @@ std::shared_ptr<CS_StructuralFeatureOfInterfaceAccessStrategy> CS_StructuralFeat
 void CS_StructuralFeatureOfInterfaceAccessStrategyImpl::setThisCS_StructuralFeatureOfInterfaceAccessStrategyPtr(std::weak_ptr<CS_StructuralFeatureOfInterfaceAccessStrategy> thisCS_StructuralFeatureOfInterfaceAccessStrategyPtr)
 {
 	m_thisCS_StructuralFeatureOfInterfaceAccessStrategyPtr = thisCS_StructuralFeatureOfInterfaceAccessStrategyPtr;
+	setThisSemanticStrategyPtr(thisCS_StructuralFeatureOfInterfaceAccessStrategyPtr);
 }
 std::shared_ptr<ecore::EObject> CS_StructuralFeatureOfInterfaceAccessStrategyImpl::eContainer() const
 {
@@ -156,14 +166,14 @@ Any CS_StructuralFeatureOfInterfaceAccessStrategyImpl::eGet(int featureID, bool 
 	switch(featureID)
 	{
 	}
-	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
+	return fUML::Semantics::Loci::SemanticStrategyImpl::eGet(featureID, resolve, coreType);
 }
 bool CS_StructuralFeatureOfInterfaceAccessStrategyImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
 	}
-	return ecore::EObjectImpl::internalEIsSet(featureID);
+	return fUML::Semantics::Loci::SemanticStrategyImpl::internalEIsSet(featureID);
 }
 bool CS_StructuralFeatureOfInterfaceAccessStrategyImpl::eSet(int featureID, Any newValue)
 {
@@ -171,7 +181,7 @@ bool CS_StructuralFeatureOfInterfaceAccessStrategyImpl::eSet(int featureID, Any 
 	{
 	}
 
-	return ecore::EObjectImpl::eSet(featureID, newValue);
+	return fUML::Semantics::Loci::SemanticStrategyImpl::eSet(featureID, newValue);
 }
 
 //*********************************
@@ -197,25 +207,26 @@ void CS_StructuralFeatureOfInterfaceAccessStrategyImpl::load(std::shared_ptr<per
 void CS_StructuralFeatureOfInterfaceAccessStrategyImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
 
-	ecore::EObjectImpl::loadAttributes(loadHandler, attr_list);
+	fUML::Semantics::Loci::SemanticStrategyImpl::loadAttributes(loadHandler, attr_list);
 }
 
 void CS_StructuralFeatureOfInterfaceAccessStrategyImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<PSCS::PSCSFactory> modelFactory)
 {
 
 
-	ecore::EObjectImpl::loadNode(nodeName, loadHandler, ecore::EcoreFactory::eInstance());
+	fUML::Semantics::Loci::SemanticStrategyImpl::loadNode(nodeName, loadHandler, fUML::FUMLFactory::eInstance());
 }
 
 void CS_StructuralFeatureOfInterfaceAccessStrategyImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
-	ecore::EObjectImpl::resolveReferences(featureID, references);
+	fUML::Semantics::Loci::SemanticStrategyImpl::resolveReferences(featureID, references);
 }
 
 void CS_StructuralFeatureOfInterfaceAccessStrategyImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	saveContent(saveHandler);
 
+	fUML::Semantics::Loci::SemanticStrategyImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
 	

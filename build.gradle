@@ -8,6 +8,7 @@ task buildAll() {
 	dependsOn 'generator:createAllGenerators'
 	dependsOn 'src:buildEcoreModels'
 	dependsOn 'src:buildReflectionModels'
+	dependsOn 'src:buildUMLProfiles'
 	dependsOn 'src:common:pluginFramework:compilePluginFramework'
 	dependsOn 'src:common:persistence:compilePersistence'
 	dependsOn 'src:deliverBasicInterfaces'
@@ -19,6 +20,7 @@ task compileAll() {
 
 	dependsOn 'src:compileEcoreModels'
 	dependsOn 'src:compileReflectionModels'
+	dependsOn 'src:compileUMLProfiles'
 	dependsOn 'src:common:pluginFramework:compilePluginFramework'
 	dependsOn 'src:common:persistence:compilePersistence'
 	dependsOn 'src:deliverBasicInterfaces'
@@ -30,6 +32,7 @@ task generateAll() {
 
 	dependsOn 'src:generateEcoreModels'
 	dependsOn 'src:generateReflectionModels'
+	dependsOn 'src:generateUMLProfiles'
 }
 
 task installationInstruction() {

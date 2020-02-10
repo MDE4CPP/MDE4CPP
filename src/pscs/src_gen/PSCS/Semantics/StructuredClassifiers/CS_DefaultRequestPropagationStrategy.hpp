@@ -13,6 +13,7 @@
 
 
 // forward declarations
+template<class T> class Bag;
 
 
 
@@ -39,6 +40,16 @@ namespace PSCS
 namespace PSCS::Semantics::StructuredClassifiers 
 {
 	class CS_RequestPropagationStrategy;
+}
+
+namespace fUML::Semantics::StructuredClassifiers 
+{
+	class Reference;
+}
+
+namespace fUML::Semantics::Loci 
+{
+	class SemanticVisitor;
 }
 
 // base class includes
@@ -71,6 +82,10 @@ namespace PSCS::Semantics::StructuredClassifiers
 			//*********************************
 			// Operations
 			//*********************************
+			/*!
+			 */ 
+			virtual std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference> > select(std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference> >  potentialTargets,std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>  context) = 0;
+			
 			
 			//*********************************
 			// Attributes Getter Setter

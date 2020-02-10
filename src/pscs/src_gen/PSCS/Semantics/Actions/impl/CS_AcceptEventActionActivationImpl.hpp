@@ -14,14 +14,12 @@
 #include "../CS_AcceptEventActionActivation.hpp"
 
 #include "PSCS/impl/PSCSFactoryImpl.hpp"
-
-#include "ecore/impl/EObjectImpl.hpp"
+#include "fUML/Semantics/Actions/impl/AcceptEventActionActivationImpl.hpp"
 
 //*********************************
 namespace PSCS::Semantics::Actions 
 {
-	class CS_AcceptEventActionActivationImpl :virtual public ecore::EObjectImpl,
-virtual public CS_AcceptEventActionActivation 
+	class CS_AcceptEventActionActivationImpl :virtual public fUML::Semantics::Actions::AcceptEventActionActivationImpl, virtual public CS_AcceptEventActionActivation 
 	{
 		public: 
 			CS_AcceptEventActionActivationImpl(const CS_AcceptEventActionActivationImpl & obj);
@@ -36,6 +34,10 @@ virtual public CS_AcceptEventActionActivation
 			virtual std::shared_ptr<CS_AcceptEventActionActivation> getThisCS_AcceptEventActionActivationPtr() const;
 			virtual void setThisCS_AcceptEventActionActivationPtr(std::weak_ptr<CS_AcceptEventActionActivation> thisCS_AcceptEventActionActivationPtr);
 
+			//Additional constructors for the containments back reference
+			CS_AcceptEventActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group);
+
+
 
 
 		public:
@@ -47,7 +49,7 @@ virtual public CS_AcceptEventActionActivation
 			//*********************************
 			/*!
 			 */ 
-			virtual void accept(Any eventOccurrence) ;
+			virtual void accept(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>  eventOccurrence) ;
 			
 			
 			
@@ -64,7 +66,9 @@ virtual public CS_AcceptEventActionActivation
 			//*********************************
 			// Union Getter
 			//*********************************
-			 
+			/*!
+			 */
+			virtual std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> getPinActivation() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

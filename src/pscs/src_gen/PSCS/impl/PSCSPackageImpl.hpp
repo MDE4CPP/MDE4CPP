@@ -42,7 +42,7 @@ namespace PSCS
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getCS_AcceptCallActionActivation_Operation_accept_EJavaObject() const ;
+			virtual std::shared_ptr<ecore::EOperation> getCS_AcceptCallActionActivation_Operation_accept_EventOccurrence() const ;
 			
 			// End Class CS_AcceptCallActionActivation
 
@@ -52,7 +52,7 @@ namespace PSCS
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getCS_AcceptEventActionActivation_Operation_accept_EJavaObject() const ;
+			virtual std::shared_ptr<ecore::EOperation> getCS_AcceptEventActionActivation_Operation_accept_EventOccurrence() const ;
 			
 			// End Class CS_AcceptEventActionActivation
 
@@ -86,6 +86,7 @@ namespace PSCS
 			
 			
 			
+			virtual std::shared_ptr<ecore::EOperation> getCS_CallOperationActionActivation_Operation__isCreate_Operation() const ;
 			virtual std::shared_ptr<ecore::EOperation> getCS_CallOperationActionActivation_Operation_doAction() const ;
 			virtual std::shared_ptr<ecore::EOperation> getCS_CallOperationActionActivation_Operation_getCallExecution() const ;
 			virtual std::shared_ptr<ecore::EOperation> getCS_CallOperationActionActivation_Operation_isCreate_Operation() const ;
@@ -101,7 +102,7 @@ namespace PSCS
 			
 			
 			virtual std::shared_ptr<ecore::EOperation> getCS_ClearStructuralFeatureActionActivation_Operation_doAction() const ;
-			virtual std::shared_ptr<ecore::EOperation> getCS_ClearStructuralFeatureActionActivation_Operation_getLinksToDestroy_EJavaObject_StructuralFeature() const ;
+			virtual std::shared_ptr<ecore::EOperation> getCS_ClearStructuralFeatureActionActivation_Operation_getLinksToDestroy_StructuredValue_StructuralFeature() const ;
 			virtual std::shared_ptr<ecore::EOperation> getCS_ClearStructuralFeatureActionActivation_Operation_getPotentialLinkEnds_CS_Reference_StructuralFeature() const ;
 			
 			// End Class CS_ClearStructuralFeatureActionActivation
@@ -146,17 +147,18 @@ namespace PSCS
 			virtual std::shared_ptr<ecore::EReference> getCS_DefaultConstructStrategy_Attribute_generatedRealizingClasses() const ;
 			virtual std::shared_ptr<ecore::EReference> getCS_DefaultConstructStrategy_Attribute_locus() const ;
 			
-			virtual std::shared_ptr<ecore::EOperation> getCS_DefaultConstructStrategy_Operation_addStructuralFeatureValue_CS_Reference_EJavaObject() const ;
+			virtual std::shared_ptr<ecore::EOperation> getCS_DefaultConstructStrategy_Operation_addStructuralFeatureValue_CS_Reference_Value() const ;
 			virtual std::shared_ptr<ecore::EOperation> getCS_DefaultConstructStrategy_Operation_canInstantiate_Property() const ;
+			virtual std::shared_ptr<ecore::EOperation> getCS_DefaultConstructStrategy_Operation_construct_Operation_CS_Object() const ;
 			virtual std::shared_ptr<ecore::EOperation> getCS_DefaultConstructStrategy_Operation_constructObject_CS_Object_Class() const ;
 			virtual std::shared_ptr<ecore::EOperation> getCS_DefaultConstructStrategy_Operation_generateArrayPattern_CS_Reference_Connector() const ;
-			virtual std::shared_ptr<ecore::EOperation> getCS_DefaultConstructStrategy_Operation_generateRealizingClass_Interface_String() const ;
+			virtual std::shared_ptr<ecore::EOperation> getCS_DefaultConstructStrategy_Operation_generateRealizingClass_Interface_EString() const ;
 			virtual std::shared_ptr<ecore::EOperation> getCS_DefaultConstructStrategy_Operation_generateStarPattern_CS_Reference_Connector() const ;
 			virtual std::shared_ptr<ecore::EOperation> getCS_DefaultConstructStrategy_Operation_getCardinality_ConnectorEnd() const ;
 			virtual std::shared_ptr<ecore::EOperation> getCS_DefaultConstructStrategy_Operation_getDefaultAssociation() const ;
 			virtual std::shared_ptr<ecore::EOperation> getCS_DefaultConstructStrategy_Operation_getRealizingClass_Interface() const ;
 			virtual std::shared_ptr<ecore::EOperation> getCS_DefaultConstructStrategy_Operation_getValuesFromConnectorEnd_CS_Reference_ConnectorEnd() const ;
-			virtual std::shared_ptr<ecore::EOperation> getCS_DefaultConstructStrategy_Operation_instantiateInterface_Interface_EJavaObject() const ;
+			virtual std::shared_ptr<ecore::EOperation> getCS_DefaultConstructStrategy_Operation_instantiateInterface_Interface_Locus() const ;
 			virtual std::shared_ptr<ecore::EOperation> getCS_DefaultConstructStrategy_Operation_isArrayPattern_Connector() const ;
 			virtual std::shared_ptr<ecore::EOperation> getCS_DefaultConstructStrategy_Operation_isStarPattern_Connector() const ;
 			
@@ -168,6 +170,7 @@ namespace PSCS
 			
 			
 			
+			virtual std::shared_ptr<ecore::EOperation> getCS_DefaultRequestPropagationStrategy_Operation_select_Reference_SemanticVisitor() const ;
 			
 			// End Class CS_DefaultRequestPropagationStrategy
 
@@ -207,7 +210,7 @@ namespace PSCS
 			virtual std::shared_ptr<ecore::EReference> getCS_ExecutionFactory_Attribute_appliedProfiles() const ;
 			
 			virtual std::shared_ptr<ecore::EOperation> getCS_ExecutionFactory_Operation_getStereotypeApplication_Class_Element() const ;
-			virtual std::shared_ptr<ecore::EOperation> getCS_ExecutionFactory_Operation_getStereotypeClass_String_String() const ;
+			virtual std::shared_ptr<ecore::EOperation> getCS_ExecutionFactory_Operation_getStereotypeClass_EString_EString() const ;
 			virtual std::shared_ptr<ecore::EOperation> getCS_ExecutionFactory_Operation_instantiateVisitor_Element() const ;
 			
 			// End Class CS_ExecutionFactory
@@ -218,7 +221,7 @@ namespace PSCS
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getCS_Executor_Operation_start_Class_EJavaObject() const ;
+			virtual std::shared_ptr<ecore::EOperation> getCS_Executor_Operation_start_Class_ParameterValue() const ;
 			
 			// End Class CS_Executor
 
@@ -242,8 +245,8 @@ namespace PSCS
 			
 			virtual std::shared_ptr<ecore::EOperation> getCS_InteractionPoint_Operation_checkAllParents_Classifier_Classifier() const ;
 			virtual std::shared_ptr<ecore::EOperation> getCS_InteractionPoint_Operation_dispatch_Operation() const ;
-			virtual std::shared_ptr<ecore::EOperation> getCS_InteractionPoint_Operation_send_EJavaObject() const ;
-			virtual std::shared_ptr<ecore::EOperation> getCS_InteractionPoint_Operation_startBehavior_Class_EJavaObject() const ;
+			virtual std::shared_ptr<ecore::EOperation> getCS_InteractionPoint_Operation_send_EventOccurrence() const ;
+			virtual std::shared_ptr<ecore::EOperation> getCS_InteractionPoint_Operation_startBehavior_Class_ParameterValue() const ;
 			
 			// End Class CS_InteractionPoint
 
@@ -253,8 +256,8 @@ namespace PSCS
 			
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getCS_Link_Operation_getFeature_EJavaObject() const ;
-			virtual std::shared_ptr<ecore::EOperation> getCS_Link_Operation_hasValueForAFeature_EJavaObject() const ;
+			virtual std::shared_ptr<ecore::EOperation> getCS_Link_Operation_getFeature_Value() const ;
+			virtual std::shared_ptr<ecore::EOperation> getCS_Link_Operation_hasValueForAFeature_Value() const ;
 			
 			// End Class CS_Link
 
@@ -274,6 +277,8 @@ namespace PSCS
 			
 			
 			
+			virtual std::shared_ptr<ecore::EOperation> getCS_NameBased_StructuralFeatureOfInterfaceAccessStrategy_Operation_read_CS_Object_StructuralFeature() const ;
+			virtual std::shared_ptr<ecore::EOperation> getCS_NameBased_StructuralFeatureOfInterfaceAccessStrategy_Operation_write_CS_Object_EInt() const ;
 			
 			// End Class CS_NameBased_StructuralFeatureOfInterfaceAccessStrategy
 
@@ -284,8 +289,8 @@ namespace PSCS
 			
 			
 			virtual std::shared_ptr<ecore::EOperation> getCS_Object_Operation_checkAllParents_Classifier_Classifier() const ;
-			virtual std::shared_ptr<ecore::EOperation> getCS_Object_Operation_contains_EJavaObject() const ;
-			virtual std::shared_ptr<ecore::EOperation> getCS_Object_Operation_directlyContains_EJavaObject() const ;
+			virtual std::shared_ptr<ecore::EOperation> getCS_Object_Operation_contains_Object() const ;
+			virtual std::shared_ptr<ecore::EOperation> getCS_Object_Operation_directlyContains_Object() const ;
 			virtual std::shared_ptr<ecore::EOperation> getCS_Object_Operation_dispatchIn_Operation_CS_InteractionPoint() const ;
 			virtual std::shared_ptr<ecore::EOperation> getCS_Object_Operation_dispatchIn_Operation_Port() const ;
 			virtual std::shared_ptr<ecore::EOperation> getCS_Object_Operation_dispatchOut_Operation_CS_InteractionPoint() const ;
@@ -294,18 +299,18 @@ namespace PSCS
 			virtual std::shared_ptr<ecore::EOperation> getCS_Object_Operation_getFeatureValue_StructuralFeature() const ;
 			virtual std::shared_ptr<ecore::EOperation> getCS_Object_Operation_getLinkKind_CS_Link_CS_InteractionPoint() const ;
 			virtual std::shared_ptr<ecore::EOperation> getCS_Object_Operation_getLinks_CS_InteractionPoint() const ;
-			virtual std::shared_ptr<ecore::EOperation> getCS_Object_Operation_hasValueForAFeature_EJavaObject() const ;
+			virtual std::shared_ptr<ecore::EOperation> getCS_Object_Operation_hasValueForAFeature_Value() const ;
 			virtual std::shared_ptr<ecore::EOperation> getCS_Object_Operation_isDescendant_Interface_Interface() const ;
-			virtual std::shared_ptr<ecore::EOperation> getCS_Object_Operation_isOperationProvided_EJavaObject_Operation() const ;
-			virtual std::shared_ptr<ecore::EOperation> getCS_Object_Operation_isOperationRequired_EJavaObject_Operation() const ;
+			virtual std::shared_ptr<ecore::EOperation> getCS_Object_Operation_isOperationProvided_Reference_Operation() const ;
+			virtual std::shared_ptr<ecore::EOperation> getCS_Object_Operation_isOperationRequired_Reference_Operation() const ;
 			virtual std::shared_ptr<ecore::EOperation> getCS_Object_Operation_realizesInterface_Class_Interface() const ;
-			virtual std::shared_ptr<ecore::EOperation> getCS_Object_Operation_selectTargetsForDispatching_CS_Link_Boolean() const ;
-			virtual std::shared_ptr<ecore::EOperation> getCS_Object_Operation_selectTargetsForSending_CS_Link_Boolean() const ;
-			virtual std::shared_ptr<ecore::EOperation> getCS_Object_Operation_sendIn_EJavaObject_CS_InteractionPoint() const ;
-			virtual std::shared_ptr<ecore::EOperation> getCS_Object_Operation_sendIn_EJavaObject_Port() const ;
-			virtual std::shared_ptr<ecore::EOperation> getCS_Object_Operation_sendOut_EJavaObject_CS_InteractionPoint() const ;
-			virtual std::shared_ptr<ecore::EOperation> getCS_Object_Operation_sendOut_EJavaObject_Port() const ;
-			virtual std::shared_ptr<ecore::EOperation> getCS_Object_Operation_setFeatureValue_StructuralFeature_Integer() const ;
+			virtual std::shared_ptr<ecore::EOperation> getCS_Object_Operation_selectTargetsForDispatching_CS_Link_EBoolean() const ;
+			virtual std::shared_ptr<ecore::EOperation> getCS_Object_Operation_selectTargetsForSending_CS_Link_EBoolean() const ;
+			virtual std::shared_ptr<ecore::EOperation> getCS_Object_Operation_sendIn_EventOccurrence_CS_InteractionPoint() const ;
+			virtual std::shared_ptr<ecore::EOperation> getCS_Object_Operation_sendIn_EventOccurrence_Port() const ;
+			virtual std::shared_ptr<ecore::EOperation> getCS_Object_Operation_sendOut_EventOccurrence_CS_InteractionPoint() const ;
+			virtual std::shared_ptr<ecore::EOperation> getCS_Object_Operation_sendOut_EventOccurrence_Port() const ;
+			virtual std::shared_ptr<ecore::EOperation> getCS_Object_Operation_setFeatureValue_StructuralFeature_EInt() const ;
 			
 			// End Class CS_Object
 
@@ -352,10 +357,10 @@ namespace PSCS
 			virtual std::shared_ptr<ecore::EOperation> getCS_Reference_Operation_dispatchIn_Operation_Port() const ;
 			virtual std::shared_ptr<ecore::EOperation> getCS_Reference_Operation_dispatchOut_Operation_Port() const ;
 			virtual std::shared_ptr<ecore::EOperation> getCS_Reference_Operation_dispatchOut_Operation_CS_InteractionPoint() const ;
-			virtual std::shared_ptr<ecore::EOperation> getCS_Reference_Operation_sendIn_EJavaObject_CS_InteractionPoint() const ;
-			virtual std::shared_ptr<ecore::EOperation> getCS_Reference_Operation_sendIn_EJavaObject_Port() const ;
-			virtual std::shared_ptr<ecore::EOperation> getCS_Reference_Operation_sendOut_EJavaObject_Port() const ;
-			virtual std::shared_ptr<ecore::EOperation> getCS_Reference_Operation_sendOut_EJavaObject_CS_InteractionPoint() const ;
+			virtual std::shared_ptr<ecore::EOperation> getCS_Reference_Operation_sendIn_EventOccurrence_CS_InteractionPoint() const ;
+			virtual std::shared_ptr<ecore::EOperation> getCS_Reference_Operation_sendIn_EventOccurrence_Port() const ;
+			virtual std::shared_ptr<ecore::EOperation> getCS_Reference_Operation_sendOut_EventOccurrence_Port() const ;
+			virtual std::shared_ptr<ecore::EOperation> getCS_Reference_Operation_sendOut_EventOccurrence_CS_InteractionPoint() const ;
 			
 			// End Class CS_Reference
 
@@ -366,7 +371,7 @@ namespace PSCS
 			
 			
 			virtual std::shared_ptr<ecore::EOperation> getCS_RemoveStructuralFeatureValueActionActivation_Operation_doAction() const ;
-			virtual std::shared_ptr<ecore::EOperation> getCS_RemoveStructuralFeatureValueActionActivation_Operation_getLinksToDestroy_EJavaObject_EJavaObject() const ;
+			virtual std::shared_ptr<ecore::EOperation> getCS_RemoveStructuralFeatureValueActionActivation_Operation_getLinksToDestroy_StructuredValue_Value() const ;
 			virtual std::shared_ptr<ecore::EOperation> getCS_RemoveStructuralFeatureValueActionActivation_Operation_getPotentialLinkEnds_CS_Reference_StructuralFeature() const ;
 			
 			// End Class CS_RemoveStructuralFeatureValueActionActivation
@@ -378,7 +383,7 @@ namespace PSCS
 			
 			
 			virtual std::shared_ptr<ecore::EOperation> getCS_RequestPropagationStrategy_Operation_getName() const ;
-			virtual std::shared_ptr<ecore::EOperation> getCS_RequestPropagationStrategy_Operation_select_EJavaObject_EJavaObject() const ;
+			virtual std::shared_ptr<ecore::EOperation> getCS_RequestPropagationStrategy_Operation_select_Reference_SemanticVisitor() const ;
 			
 			// End Class CS_RequestPropagationStrategy
 
@@ -454,19 +459,21 @@ namespace PSCS
 			std::shared_ptr<ecore::EReference> m_cS_InteractionPoint_Attribute_owner = nullptr;
 			std::shared_ptr<ecore::EReference> m_cS_EventOccurrence_Attribute_wrappedEventOccurrence = nullptr;
 			
-			std::shared_ptr<ecore::EOperation> m_cS_AcceptCallActionActivation_Operation_accept_EJavaObject = nullptr;
-			std::shared_ptr<ecore::EOperation> m_cS_AcceptEventActionActivation_Operation_accept_EJavaObject = nullptr;
-			std::shared_ptr<ecore::EOperation> m_cS_DefaultConstructStrategy_Operation_addStructuralFeatureValue_CS_Reference_EJavaObject = nullptr;
+			std::shared_ptr<ecore::EOperation> m_cS_CallOperationActionActivation_Operation__isCreate_Operation = nullptr;
+			std::shared_ptr<ecore::EOperation> m_cS_AcceptCallActionActivation_Operation_accept_EventOccurrence = nullptr;
+			std::shared_ptr<ecore::EOperation> m_cS_AcceptEventActionActivation_Operation_accept_EventOccurrence = nullptr;
+			std::shared_ptr<ecore::EOperation> m_cS_DefaultConstructStrategy_Operation_addStructuralFeatureValue_CS_Reference_Value = nullptr;
 			std::shared_ptr<ecore::EOperation> m_cS_DefaultConstructStrategy_Operation_canInstantiate_Property = nullptr;
 			std::shared_ptr<ecore::EOperation> m_cS_Object_Operation_checkAllParents_Classifier_Classifier = nullptr;
 			std::shared_ptr<ecore::EOperation> m_cS_InteractionPoint_Operation_checkAllParents_Classifier_Classifier = nullptr;
 			std::shared_ptr<ecore::EOperation> m_cS_ConstructStrategy_Operation_construct_Operation_CS_Object = nullptr;
+			std::shared_ptr<ecore::EOperation> m_cS_DefaultConstructStrategy_Operation_construct_Operation_CS_Object = nullptr;
 			std::shared_ptr<ecore::EOperation> m_cS_DefaultConstructStrategy_Operation_constructObject_CS_Object_Class = nullptr;
-			std::shared_ptr<ecore::EOperation> m_cS_Object_Operation_contains_EJavaObject = nullptr;
+			std::shared_ptr<ecore::EOperation> m_cS_Object_Operation_contains_Object = nullptr;
 			std::shared_ptr<ecore::EOperation> m_cS_Reference_Operation_copy = nullptr;
 			std::shared_ptr<ecore::EOperation> m_cS_CallEventExecution_Operation_copy = nullptr;
 			std::shared_ptr<ecore::EOperation> m_cS_CallEventExecution_Operation_createEventOccurrence = nullptr;
-			std::shared_ptr<ecore::EOperation> m_cS_Object_Operation_directlyContains_EJavaObject = nullptr;
+			std::shared_ptr<ecore::EOperation> m_cS_Object_Operation_directlyContains_Object = nullptr;
 			std::shared_ptr<ecore::EOperation> m_cS_InteractionPoint_Operation_dispatch_Operation = nullptr;
 			std::shared_ptr<ecore::EOperation> m_cS_Object_Operation_dispatchIn_Operation_CS_InteractionPoint = nullptr;
 			std::shared_ptr<ecore::EOperation> m_cS_Object_Operation_dispatchIn_Operation_Port = nullptr;
@@ -491,18 +498,18 @@ namespace PSCS
 			std::shared_ptr<ecore::EOperation> m_cS_InstanceValueEvaluation_Operation_evaluate = nullptr;
 			std::shared_ptr<ecore::EOperation> m_cS_OpaqueExpressionEvaluation_Operation_executeExpressionBehavior = nullptr;
 			std::shared_ptr<ecore::EOperation> m_cS_DefaultConstructStrategy_Operation_generateArrayPattern_CS_Reference_Connector = nullptr;
-			std::shared_ptr<ecore::EOperation> m_cS_DefaultConstructStrategy_Operation_generateRealizingClass_Interface_String = nullptr;
+			std::shared_ptr<ecore::EOperation> m_cS_DefaultConstructStrategy_Operation_generateRealizingClass_Interface_EString = nullptr;
 			std::shared_ptr<ecore::EOperation> m_cS_DefaultConstructStrategy_Operation_generateStarPattern_CS_Reference_Connector = nullptr;
 			std::shared_ptr<ecore::EOperation> m_cS_CallOperationActionActivation_Operation_getCallExecution = nullptr;
 			std::shared_ptr<ecore::EOperation> m_cS_DefaultConstructStrategy_Operation_getCardinality_ConnectorEnd = nullptr;
 			std::shared_ptr<ecore::EOperation> m_cS_DefaultConstructStrategy_Operation_getDefaultAssociation = nullptr;
 			std::shared_ptr<ecore::EOperation> m_cS_Object_Operation_getDirectContainers = nullptr;
-			std::shared_ptr<ecore::EOperation> m_cS_Link_Operation_getFeature_EJavaObject = nullptr;
+			std::shared_ptr<ecore::EOperation> m_cS_Link_Operation_getFeature_Value = nullptr;
 			std::shared_ptr<ecore::EOperation> m_cS_Object_Operation_getFeatureValue_StructuralFeature = nullptr;
 			std::shared_ptr<ecore::EOperation> m_cS_Object_Operation_getLinkKind_CS_Link_CS_InteractionPoint = nullptr;
 			std::shared_ptr<ecore::EOperation> m_cS_Object_Operation_getLinks_CS_InteractionPoint = nullptr;
-			std::shared_ptr<ecore::EOperation> m_cS_RemoveStructuralFeatureValueActionActivation_Operation_getLinksToDestroy_EJavaObject_EJavaObject = nullptr;
-			std::shared_ptr<ecore::EOperation> m_cS_ClearStructuralFeatureActionActivation_Operation_getLinksToDestroy_EJavaObject_StructuralFeature = nullptr;
+			std::shared_ptr<ecore::EOperation> m_cS_RemoveStructuralFeatureValueActionActivation_Operation_getLinksToDestroy_StructuredValue_Value = nullptr;
+			std::shared_ptr<ecore::EOperation> m_cS_ClearStructuralFeatureActionActivation_Operation_getLinksToDestroy_StructuredValue_StructuralFeature = nullptr;
 			std::shared_ptr<ecore::EOperation> m_cS_ConstructStrategy_Operation_getName = nullptr;
 			std::shared_ptr<ecore::EOperation> m_cS_StructuralFeatureOfInterfaceAccessStrategy_Operation_getName = nullptr;
 			std::shared_ptr<ecore::EOperation> m_cS_RequestPropagationStrategy_Operation_getName = nullptr;
@@ -511,43 +518,46 @@ namespace PSCS
 			std::shared_ptr<ecore::EOperation> m_cS_ClearStructuralFeatureActionActivation_Operation_getPotentialLinkEnds_CS_Reference_StructuralFeature = nullptr;
 			std::shared_ptr<ecore::EOperation> m_cS_DefaultConstructStrategy_Operation_getRealizingClass_Interface = nullptr;
 			std::shared_ptr<ecore::EOperation> m_cS_ExecutionFactory_Operation_getStereotypeApplication_Class_Element = nullptr;
-			std::shared_ptr<ecore::EOperation> m_cS_ExecutionFactory_Operation_getStereotypeClass_String_String = nullptr;
+			std::shared_ptr<ecore::EOperation> m_cS_ExecutionFactory_Operation_getStereotypeClass_EString_EString = nullptr;
 			std::shared_ptr<ecore::EOperation> m_cS_DefaultConstructStrategy_Operation_getValuesFromConnectorEnd_CS_Reference_ConnectorEnd = nullptr;
-			std::shared_ptr<ecore::EOperation> m_cS_Object_Operation_hasValueForAFeature_EJavaObject = nullptr;
-			std::shared_ptr<ecore::EOperation> m_cS_Link_Operation_hasValueForAFeature_EJavaObject = nullptr;
+			std::shared_ptr<ecore::EOperation> m_cS_Object_Operation_hasValueForAFeature_Value = nullptr;
+			std::shared_ptr<ecore::EOperation> m_cS_Link_Operation_hasValueForAFeature_Value = nullptr;
 			std::shared_ptr<ecore::EOperation> m_cS_Locus_Operation_instantiate_Class = nullptr;
-			std::shared_ptr<ecore::EOperation> m_cS_DefaultConstructStrategy_Operation_instantiateInterface_Interface_EJavaObject = nullptr;
+			std::shared_ptr<ecore::EOperation> m_cS_DefaultConstructStrategy_Operation_instantiateInterface_Interface_Locus = nullptr;
 			std::shared_ptr<ecore::EOperation> m_cS_ExecutionFactory_Operation_instantiateVisitor_Element = nullptr;
 			std::shared_ptr<ecore::EOperation> m_cS_DefaultConstructStrategy_Operation_isArrayPattern_Connector = nullptr;
 			std::shared_ptr<ecore::EOperation> m_cS_CallOperationActionActivation_Operation_isCreate_Operation = nullptr;
 			std::shared_ptr<ecore::EOperation> m_cS_Object_Operation_isDescendant_Interface_Interface = nullptr;
 			std::shared_ptr<ecore::EOperation> m_cS_CallOperationActionActivation_Operation_isOperationProvided_Port_Operation = nullptr;
-			std::shared_ptr<ecore::EOperation> m_cS_Object_Operation_isOperationProvided_EJavaObject_Operation = nullptr;
+			std::shared_ptr<ecore::EOperation> m_cS_Object_Operation_isOperationProvided_Reference_Operation = nullptr;
 			std::shared_ptr<ecore::EOperation> m_cS_CallOperationActionActivation_Operation_isOperationRequired_Port_Operation = nullptr;
-			std::shared_ptr<ecore::EOperation> m_cS_Object_Operation_isOperationRequired_EJavaObject_Operation = nullptr;
+			std::shared_ptr<ecore::EOperation> m_cS_Object_Operation_isOperationRequired_Reference_Operation = nullptr;
 			std::shared_ptr<ecore::EOperation> m_cS_DefaultConstructStrategy_Operation_isStarPattern_Connector = nullptr;
 			std::shared_ptr<ecore::EOperation> m_cS_EventOccurrence_Operation_match_Trigger = nullptr;
 			std::shared_ptr<ecore::EOperation> m_cS_CallEventExecution_Operation_new_ = nullptr;
 			std::shared_ptr<ecore::EOperation> m_cS_DispatchOperationOfInterfaceStrategy_Operation_operationsMatch_Operation_Operation = nullptr;
+			std::shared_ptr<ecore::EOperation> m_cS_NameBased_StructuralFeatureOfInterfaceAccessStrategy_Operation_read_CS_Object_StructuralFeature = nullptr;
 			std::shared_ptr<ecore::EOperation> m_cS_StructuralFeatureOfInterfaceAccessStrategy_Operation_read_CS_Object_StructuralFeature = nullptr;
 			std::shared_ptr<ecore::EOperation> m_cS_Object_Operation_realizesInterface_Class_Interface = nullptr;
-			std::shared_ptr<ecore::EOperation> m_cS_RequestPropagationStrategy_Operation_select_EJavaObject_EJavaObject = nullptr;
-			std::shared_ptr<ecore::EOperation> m_cS_Object_Operation_selectTargetsForDispatching_CS_Link_Boolean = nullptr;
-			std::shared_ptr<ecore::EOperation> m_cS_Object_Operation_selectTargetsForSending_CS_Link_Boolean = nullptr;
-			std::shared_ptr<ecore::EOperation> m_cS_InteractionPoint_Operation_send_EJavaObject = nullptr;
-			std::shared_ptr<ecore::EOperation> m_cS_Object_Operation_sendIn_EJavaObject_CS_InteractionPoint = nullptr;
-			std::shared_ptr<ecore::EOperation> m_cS_Object_Operation_sendIn_EJavaObject_Port = nullptr;
-			std::shared_ptr<ecore::EOperation> m_cS_Reference_Operation_sendIn_EJavaObject_CS_InteractionPoint = nullptr;
-			std::shared_ptr<ecore::EOperation> m_cS_Reference_Operation_sendIn_EJavaObject_Port = nullptr;
+			std::shared_ptr<ecore::EOperation> m_cS_RequestPropagationStrategy_Operation_select_Reference_SemanticVisitor = nullptr;
+			std::shared_ptr<ecore::EOperation> m_cS_DefaultRequestPropagationStrategy_Operation_select_Reference_SemanticVisitor = nullptr;
+			std::shared_ptr<ecore::EOperation> m_cS_Object_Operation_selectTargetsForDispatching_CS_Link_EBoolean = nullptr;
+			std::shared_ptr<ecore::EOperation> m_cS_Object_Operation_selectTargetsForSending_CS_Link_EBoolean = nullptr;
+			std::shared_ptr<ecore::EOperation> m_cS_InteractionPoint_Operation_send_EventOccurrence = nullptr;
+			std::shared_ptr<ecore::EOperation> m_cS_Object_Operation_sendIn_EventOccurrence_CS_InteractionPoint = nullptr;
+			std::shared_ptr<ecore::EOperation> m_cS_Object_Operation_sendIn_EventOccurrence_Port = nullptr;
+			std::shared_ptr<ecore::EOperation> m_cS_Reference_Operation_sendIn_EventOccurrence_CS_InteractionPoint = nullptr;
+			std::shared_ptr<ecore::EOperation> m_cS_Reference_Operation_sendIn_EventOccurrence_Port = nullptr;
 			std::shared_ptr<ecore::EOperation> m_cS_EventOccurrence_Operation_sendInTo_CS_Reference_Port = nullptr;
-			std::shared_ptr<ecore::EOperation> m_cS_Object_Operation_sendOut_EJavaObject_CS_InteractionPoint = nullptr;
-			std::shared_ptr<ecore::EOperation> m_cS_Object_Operation_sendOut_EJavaObject_Port = nullptr;
-			std::shared_ptr<ecore::EOperation> m_cS_Reference_Operation_sendOut_EJavaObject_Port = nullptr;
-			std::shared_ptr<ecore::EOperation> m_cS_Reference_Operation_sendOut_EJavaObject_CS_InteractionPoint = nullptr;
+			std::shared_ptr<ecore::EOperation> m_cS_Object_Operation_sendOut_EventOccurrence_CS_InteractionPoint = nullptr;
+			std::shared_ptr<ecore::EOperation> m_cS_Object_Operation_sendOut_EventOccurrence_Port = nullptr;
+			std::shared_ptr<ecore::EOperation> m_cS_Reference_Operation_sendOut_EventOccurrence_Port = nullptr;
+			std::shared_ptr<ecore::EOperation> m_cS_Reference_Operation_sendOut_EventOccurrence_CS_InteractionPoint = nullptr;
 			std::shared_ptr<ecore::EOperation> m_cS_EventOccurrence_Operation_sendOutTo_CS_Reference_Port = nullptr;
-			std::shared_ptr<ecore::EOperation> m_cS_Object_Operation_setFeatureValue_StructuralFeature_Integer = nullptr;
-			std::shared_ptr<ecore::EOperation> m_cS_Executor_Operation_start_Class_EJavaObject = nullptr;
-			std::shared_ptr<ecore::EOperation> m_cS_InteractionPoint_Operation_startBehavior_Class_EJavaObject = nullptr;
+			std::shared_ptr<ecore::EOperation> m_cS_Object_Operation_setFeatureValue_StructuralFeature_EInt = nullptr;
+			std::shared_ptr<ecore::EOperation> m_cS_Executor_Operation_start_Class_ParameterValue = nullptr;
+			std::shared_ptr<ecore::EOperation> m_cS_InteractionPoint_Operation_startBehavior_Class_ParameterValue = nullptr;
+			std::shared_ptr<ecore::EOperation> m_cS_NameBased_StructuralFeatureOfInterfaceAccessStrategy_Operation_write_CS_Object_EInt = nullptr;
 			std::shared_ptr<ecore::EOperation> m_cS_StructuralFeatureOfInterfaceAccessStrategy_Operation_write_CS_Object_Integer = nullptr;
 			
 

@@ -36,20 +36,38 @@ namespace PSCS
 }
 
 //Forward Declaration for used types
+namespace fUML::Semantics::Classification 
+{
+	class InstanceValueEvaluation;
+}
+
+namespace fUML::Semantics::Loci 
+{
+	class Locus;
+}
+
+namespace fUML::Semantics::Values 
+{
+	class Value;
+}
+
+namespace uml 
+{
+	class ValueSpecification;
+}
 
 // base class includes
+#include "fUML/Semantics/Classification/InstanceValueEvaluation.hpp"
 
 // enum includes
 
-#include "ecore/EObject.hpp"
 
 //*********************************
 namespace PSCS::Semantics::Classification 
 {
 	/*!
 	 */
-	class CS_InstanceValueEvaluation : virtual public ecore::EObject 
-
+	class CS_InstanceValueEvaluation:virtual public fUML::Semantics::Classification::InstanceValueEvaluation
 	{
 		public:
  			CS_InstanceValueEvaluation(const CS_InstanceValueEvaluation &) {}
@@ -70,7 +88,7 @@ namespace PSCS::Semantics::Classification
 			//*********************************
 			/*!
 			 */ 
-			virtual Any evaluate() = 0;
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> evaluate() = 0;
 			
 			
 			//*********************************

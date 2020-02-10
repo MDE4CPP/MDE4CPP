@@ -20,11 +20,11 @@
 
 #include "abstractDataTypes/Bag.hpp"
 
-#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "PSCS/impl/PSCSPackageImpl.hpp"
+#include "fUML/FUMLFactory.hpp"
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -34,6 +34,11 @@
 
 #include <exception> // used in Persistence
 
+#include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
+
+#include "fUML/Semantics/Loci/SemanticStrategy.hpp"
+
+#include "fUML/Semantics/Loci/SemanticVisitor.hpp"
 
 #include "ecore/EcorePackage.hpp"
 #include "ecore/EcoreFactory.hpp"
@@ -107,11 +112,14 @@ std::shared_ptr<ecore::EClass> CS_RequestPropagationStrategyImpl::eStaticClass()
 //*********************************
 std::string CS_RequestPropagationStrategyImpl::getName()
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// a CS_RequestPropagationStrategy are always named "requestPropagation"
+	return "requestPropagation";
+	//end of body
 }
 
-std::shared_ptr<Bag<Any> > CS_RequestPropagationStrategyImpl::select(std::shared_ptr<Bag<Any> >  potentialTargets,Any context)
+std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference> > CS_RequestPropagationStrategyImpl::select(std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference> >  potentialTargets,std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -133,6 +141,7 @@ std::shared_ptr<CS_RequestPropagationStrategy> CS_RequestPropagationStrategyImpl
 void CS_RequestPropagationStrategyImpl::setThisCS_RequestPropagationStrategyPtr(std::weak_ptr<CS_RequestPropagationStrategy> thisCS_RequestPropagationStrategyPtr)
 {
 	m_thisCS_RequestPropagationStrategyPtr = thisCS_RequestPropagationStrategyPtr;
+	setThisSemanticStrategyPtr(thisCS_RequestPropagationStrategyPtr);
 }
 std::shared_ptr<ecore::EObject> CS_RequestPropagationStrategyImpl::eContainer() const
 {
@@ -147,14 +156,14 @@ Any CS_RequestPropagationStrategyImpl::eGet(int featureID, bool resolve, bool co
 	switch(featureID)
 	{
 	}
-	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
+	return fUML::Semantics::Loci::SemanticStrategyImpl::eGet(featureID, resolve, coreType);
 }
 bool CS_RequestPropagationStrategyImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
 	}
-	return ecore::EObjectImpl::internalEIsSet(featureID);
+	return fUML::Semantics::Loci::SemanticStrategyImpl::internalEIsSet(featureID);
 }
 bool CS_RequestPropagationStrategyImpl::eSet(int featureID, Any newValue)
 {
@@ -162,7 +171,7 @@ bool CS_RequestPropagationStrategyImpl::eSet(int featureID, Any newValue)
 	{
 	}
 
-	return ecore::EObjectImpl::eSet(featureID, newValue);
+	return fUML::Semantics::Loci::SemanticStrategyImpl::eSet(featureID, newValue);
 }
 
 //*********************************
@@ -188,25 +197,26 @@ void CS_RequestPropagationStrategyImpl::load(std::shared_ptr<persistence::interf
 void CS_RequestPropagationStrategyImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
 
-	ecore::EObjectImpl::loadAttributes(loadHandler, attr_list);
+	fUML::Semantics::Loci::SemanticStrategyImpl::loadAttributes(loadHandler, attr_list);
 }
 
 void CS_RequestPropagationStrategyImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<PSCS::PSCSFactory> modelFactory)
 {
 
 
-	ecore::EObjectImpl::loadNode(nodeName, loadHandler, ecore::EcoreFactory::eInstance());
+	fUML::Semantics::Loci::SemanticStrategyImpl::loadNode(nodeName, loadHandler, fUML::FUMLFactory::eInstance());
 }
 
 void CS_RequestPropagationStrategyImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
-	ecore::EObjectImpl::resolveReferences(featureID, references);
+	fUML::Semantics::Loci::SemanticStrategyImpl::resolveReferences(featureID, references);
 }
 
 void CS_RequestPropagationStrategyImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	saveContent(saveHandler);
 
+	fUML::Semantics::Loci::SemanticStrategyImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
 	

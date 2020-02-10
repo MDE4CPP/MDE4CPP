@@ -36,6 +36,7 @@ namespace uml
 [for (nE : EClass | OrderedSet{(aPackage.allOwnedElements()->filter(NamedElement)-aPackage.allOwnedElements()->filter(ValueSpecification)).eClass()}->flatten()->sortedBy(name))]
 	class [nE.name/];
 [/for]
+	class ConnectorEnd;
 }
 
 [comment namespace /]
@@ -60,6 +61,7 @@ namespace uml
 
 			//getter for the ownedMember
 			[(aPackage.allOwnedElements()->filter(NamedElement)-aPackage.allOwnedElements()->filter(ValueSpecification))->asOrderedSet()->sortedBy(myQualifiedName()).generatePackageMemberGetter(false)/]
+			[(aPackage.allOwnedElements()->filter(ConnectorEnd))->asOrderedSet()->sortedBy(myQualifiedName()).generatePackageMemberGetter(false)/]
 
 			//Singleton Instance and Getter
 			[generateSingletonDecl(packageName)/]

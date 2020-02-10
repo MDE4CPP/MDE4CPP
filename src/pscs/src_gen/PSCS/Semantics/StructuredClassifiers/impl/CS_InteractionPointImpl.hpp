@@ -14,14 +14,12 @@
 #include "../CS_InteractionPoint.hpp"
 
 #include "PSCS/impl/PSCSFactoryImpl.hpp"
-
-#include "ecore/impl/EObjectImpl.hpp"
+#include "fUML/Semantics/StructuredClassifiers/impl/ReferenceImpl.hpp"
 
 //*********************************
 namespace PSCS::Semantics::StructuredClassifiers 
 {
-	class CS_InteractionPointImpl :virtual public ecore::EObjectImpl,
-virtual public CS_InteractionPoint 
+	class CS_InteractionPointImpl :virtual public fUML::Semantics::StructuredClassifiers::ReferenceImpl, virtual public CS_InteractionPoint 
 	{
 		public: 
 			CS_InteractionPointImpl(const CS_InteractionPointImpl & obj);
@@ -51,15 +49,15 @@ virtual public CS_InteractionPoint
 			
 			/*!
 			 */ 
-			virtual Any dispatch(std::shared_ptr<uml::Operation>  operation) ;
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> dispatch(std::shared_ptr<uml::Operation>  operation) ;
 			
 			/*!
 			 */ 
-			virtual void send(Any eventOccurrence) ;
+			virtual void send(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>  eventOccurrence) ;
 			
 			/*!
 			 */ 
-			virtual void startBehavior(std::shared_ptr<uml::Class>  classifier,std::shared_ptr<Bag<Any> >  inputs) ;
+			virtual void startBehavior(std::shared_ptr<uml::Class>  classifier,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> >  inputs) ;
 			
 			
 			

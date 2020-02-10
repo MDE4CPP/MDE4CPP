@@ -14,14 +14,12 @@
 #include "../CS_Executor.hpp"
 
 #include "PSCS/impl/PSCSFactoryImpl.hpp"
-
-#include "ecore/impl/EObjectImpl.hpp"
+#include "fUML/Semantics/Loci/impl/ExecutorImpl.hpp"
 
 //*********************************
 namespace PSCS::Semantics::Loci 
 {
-	class CS_ExecutorImpl :virtual public ecore::EObjectImpl,
-virtual public CS_Executor 
+	class CS_ExecutorImpl :virtual public fUML::Semantics::Loci::ExecutorImpl, virtual public CS_Executor 
 	{
 		public: 
 			CS_ExecutorImpl(const CS_ExecutorImpl & obj);
@@ -36,6 +34,10 @@ virtual public CS_Executor
 			virtual std::shared_ptr<CS_Executor> getThisCS_ExecutorPtr() const;
 			virtual void setThisCS_ExecutorPtr(std::weak_ptr<CS_Executor> thisCS_ExecutorPtr);
 
+			//Additional constructors for the containments back reference
+			CS_ExecutorImpl(std::weak_ptr<fUML::Semantics::Loci::Locus > par_locus);
+
+
 
 
 		public:
@@ -47,7 +49,7 @@ virtual public CS_Executor
 			//*********************************
 			/*!
 			 */ 
-			virtual Any start(std::shared_ptr<uml::Class>  type,std::shared_ptr<Bag<Any> >  inputs) ;
+			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> start(std::shared_ptr<uml::Class>  type,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> >  inputs) ;
 			
 			
 			

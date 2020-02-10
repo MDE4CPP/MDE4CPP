@@ -1,0 +1,15 @@
+plugins {
+	id "tui.sse.mde4cpp.mde4cpp-generate-plugin" version "0.4"
+}
+
+description 'Generate tasks for project: StandardProfile'
+
+task generateStandardProfile(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
+	group 'StandardProfile'
+	description 'generate C++ code of StandardProfile.uml model'
+
+	modelFilePath = file('.' + File.separator + 'StandardProfile.uml')
+	structureOnly = true
+
+	relatedModels = ['ecore', 'uml', 'ecoreReflection', 'primitivetypesReflection', 'umlReflection']
+}

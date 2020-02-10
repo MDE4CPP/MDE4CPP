@@ -15,8 +15,6 @@
 // forward declarations
 
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -38,20 +36,68 @@ namespace PSCS
 }
 
 //Forward Declaration for used types
+namespace fUML::Semantics::Actions 
+{
+	class AcceptEventActionActivation;
+}
+
+namespace fUML::Semantics::Actions 
+{
+	class AcceptEventActionEventAccepter;
+}
+
+namespace fUML::Semantics::Activities 
+{
+	class ActivityEdgeInstance;
+}
+
+namespace uml 
+{
+	class ActivityNode;
+}
+
+namespace fUML::Semantics::Activities 
+{
+	class ActivityNodeActivationGroup;
+}
+
+namespace fUML::Semantics::CommonBehavior 
+{
+	class EventOccurrence;
+}
+
+namespace fUML::Semantics::Actions 
+{
+	class InputPinActivation;
+}
+
+namespace fUML::Semantics::Actions 
+{
+	class OutputPinActivation;
+}
+
+namespace fUML::Semantics::Actions 
+{
+	class PinActivation;
+}
+
+namespace fUML::Semantics::Activities 
+{
+	class Token;
+}
 
 // base class includes
+#include "fUML/Semantics/Actions/AcceptEventActionActivation.hpp"
 
 // enum includes
 
-#include "ecore/EObject.hpp"
 
 //*********************************
 namespace PSCS::Semantics::Actions 
 {
 	/*!
 	 */
-	class CS_AcceptEventActionActivation : virtual public ecore::EObject 
-
+	class CS_AcceptEventActionActivation:virtual public fUML::Semantics::Actions::AcceptEventActionActivation
 	{
 		public:
  			CS_AcceptEventActionActivation(const CS_AcceptEventActionActivation &) {}
@@ -72,7 +118,7 @@ namespace PSCS::Semantics::Actions
 			//*********************************
 			/*!
 			 */ 
-			virtual void accept(Any eventOccurrence) = 0;
+			virtual void accept(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>  eventOccurrence) = 0;
 			
 			
 			//*********************************
@@ -99,7 +145,9 @@ namespace PSCS::Semantics::Actions
 			//*********************************
 			// Union Getter
 			//*********************************
-			
+			/*!
+			 */
+			virtual std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> getPinActivation() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
 			

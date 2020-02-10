@@ -20,6 +20,7 @@
 [module generateFactoryInterface('http://www.eclipse.org/uml2/5.0.0/UML')]
 
 [import UML4CPP::generator::main::components::generateClass /]
+[import UML4CPP::generator::main::components::generateInterface /]
 [import UML4CPP::generator::main::helpers::collectionHelper /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
@@ -36,6 +37,9 @@
 {
 [/if]
 [for (elements : Class| aPackage.collectModelClassesForFactoryDeclaration()) separator ('\n')]
+	class [elements.name.toUpperFirst()/];[/for]
+
+[for (elements : Interface| aPackage.collectModelInterfacesForFactory()) separator ('\n')]
 	class [elements.name.toUpperFirst()/];[/for]
 
 	class [aPackage.name.toUpperFirst().concat('Package')/];
@@ -55,7 +59,8 @@
 			virtual std::shared_ptr<uml::Element> create(const std::shared_ptr<uml::Class> _class,  std::shared_ptr<uml::Element> container= nullptr, const unsigned int referenceID = -1) const = 0;
 			virtual std::shared_ptr<uml::Element> create(const std::string _className,  std::shared_ptr<uml::Element> container= nullptr, const unsigned int referenceID = -1) const = 0;
 
-			[aPackage.collectModelClassesForFactoryFunctions().generateClassCreate(false)/]
+			[aPackage.collectModelClassesForFactory().generateClassCreate(false)/]
+			[aPackage.collectModelInterfacesForFactory().generateInterfaceCreate(false)/]
 
 			//Package
 			virtual std::shared_ptr<[aPackage.name.toUpperFirst().concat('Package')/]> get[aPackage.name.toUpperFirst().concat('Package')/]() = 0;

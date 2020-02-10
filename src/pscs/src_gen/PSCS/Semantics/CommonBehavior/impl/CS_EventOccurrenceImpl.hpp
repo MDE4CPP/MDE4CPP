@@ -14,14 +14,12 @@
 #include "../CS_EventOccurrence.hpp"
 
 #include "PSCS/impl/PSCSFactoryImpl.hpp"
-
-#include "ecore/impl/EObjectImpl.hpp"
+#include "fUML/Semantics/CommonBehavior/impl/EventOccurrenceImpl.hpp"
 
 //*********************************
 namespace PSCS::Semantics::CommonBehavior 
 {
-	class CS_EventOccurrenceImpl :virtual public ecore::EObjectImpl,
-virtual public CS_EventOccurrence 
+	class CS_EventOccurrenceImpl :virtual public fUML::Semantics::CommonBehavior::EventOccurrenceImpl, virtual public CS_EventOccurrence 
 	{
 		public: 
 			CS_EventOccurrenceImpl(const CS_EventOccurrenceImpl & obj);
@@ -51,7 +49,7 @@ virtual public CS_EventOccurrence
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<Any> > getParameterValues() ;
+			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > getParameterValues() ;
 			
 			/*!
 			 */ 
@@ -72,7 +70,7 @@ virtual public CS_EventOccurrence
 			//*********************************
 			/*!
 			 */ 
-			virtual bool getPropagationInward() const ;
+			virtual bool isPropagationInward() const ;
 			
 			/*!
 			 */ 
@@ -99,11 +97,11 @@ virtual public CS_EventOccurrence
 			virtual void setOnPort(std::shared_ptr<uml::Port> _onPort_onPort) ;
 			/*!
 			 */
-			virtual std::shared_ptr<fUML::EventOccurrence > getWrappedEventOccurrence() const ;
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence > getWrappedEventOccurrence() const ;
 			
 			/*!
 			 */
-			virtual void setWrappedEventOccurrence(std::shared_ptr<fUML::EventOccurrence> _wrappedEventOccurrence_wrappedEventOccurrence) ;
+			virtual void setWrappedEventOccurrence(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> _wrappedEventOccurrence_wrappedEventOccurrence) ;
 							
 			
 			//*********************************

@@ -14,14 +14,12 @@
 #include "../CS_ExecutionFactory.hpp"
 
 #include "PSCS/impl/PSCSFactoryImpl.hpp"
-
-#include "ecore/impl/EObjectImpl.hpp"
+#include "fUML/Semantics/Loci/impl/ExecutionFactoryImpl.hpp"
 
 //*********************************
 namespace PSCS::Semantics::Loci 
 {
-	class CS_ExecutionFactoryImpl :virtual public ecore::EObjectImpl,
-virtual public CS_ExecutionFactory 
+	class CS_ExecutionFactoryImpl :virtual public fUML::Semantics::Loci::ExecutionFactoryImpl, virtual public CS_ExecutionFactory 
 	{
 		public: 
 			CS_ExecutionFactoryImpl(const CS_ExecutionFactoryImpl & obj);
@@ -36,6 +34,10 @@ virtual public CS_ExecutionFactory
 			virtual std::shared_ptr<CS_ExecutionFactory> getThisCS_ExecutionFactoryPtr() const;
 			virtual void setThisCS_ExecutionFactoryPtr(std::weak_ptr<CS_ExecutionFactory> thisCS_ExecutionFactoryPtr);
 
+			//Additional constructors for the containments back reference
+			CS_ExecutionFactoryImpl(std::weak_ptr<fUML::Semantics::Loci::Locus > par_locus);
+
+
 
 
 		public:
@@ -47,15 +49,15 @@ virtual public CS_ExecutionFactory
 			//*********************************
 			/*!
 			 */ 
-			virtual Any getStereotypeApplication(std::shared_ptr<uml::Class>  stereotype,std::shared_ptr<uml::Element>  element) ;
+			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> getStereotypeApplication(std::shared_ptr<uml::Class>  stereotype,std::shared_ptr<uml::Element>  element) ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<uml::Class> getStereotypeClass(std::string profileName,std::string stereotypeName) ;
+			virtual std::shared_ptr<uml::Classifier> getStereotypeClass(std::string profileName,std::string stereotypeName) ;
 			
 			/*!
 			 */ 
-			virtual Any instantiateVisitor(std::shared_ptr<uml::Element>  element) ;
+			virtual std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> instantiateVisitor(std::shared_ptr<uml::Element>  element) ;
 			
 			
 			

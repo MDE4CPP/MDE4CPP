@@ -53,10 +53,13 @@ namespace uml
 
 			//getter for the ownedMember
 			[(aPackage.allOwnedElements()->filter(NamedElement)-aPackage.allOwnedElements()->filter(ValueSpecification))->sortedBy(myQualifiedName()).generatePackageMemberGetter(true)/]
+			[(aPackage.allOwnedElements()->filter(ConnectorEnd))->sortedBy(myQualifiedName()).generatePackageMemberGetter(true)/]
 
 		private:
 			//private variables for ownedMember of the metamodel package
+			[comment [(aPackage.allOwnedElements()->filter(NamedElement))->reject(owner.oclIsKindOf(Slot))->sortedBy(myQualifiedName()).generatePackageMember()/]
 			[(aPackage.allOwnedElements()->filter(NamedElement))->reject(owner.oclIsKindOf(Slot))->sortedBy(myQualifiedName()).generatePackageMember()/]
+			[(aPackage.allOwnedElements()->filter(ConnectorEnd))->reject(owner.oclIsKindOf(Slot))->sortedBy(myQualifiedName()).generatePackageMember()/]
 
 			static [aPackage.name.concat('Package').toUpperFirst()/]* create();
 			static bool isInited;

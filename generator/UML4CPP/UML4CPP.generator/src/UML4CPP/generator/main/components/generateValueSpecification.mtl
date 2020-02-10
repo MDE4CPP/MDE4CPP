@@ -26,7 +26,12 @@
  * generate creation of meta model instance for an Activity element
 */]
 [template public generateValueSpecificationCreation(aValueSpecification : ValueSpecification)]
+[if (aValueSpecification.owner.oclIsKindOf(NamedElement))]
 [aValueSpecification.memberName()/] = factory->create[aValueSpecification.eClass().name/]_in_Owner([aValueSpecification.owner.oclAsType(NamedElement).memberName()/]);
+[elseif (aValueSpecification.owner.oclIsTypeOf(ConnectorEnd))]
+[aValueSpecification.memberName()/] = factory->create[aValueSpecification.eClass().name/]_in_Owner([aValueSpecification.owner.oclAsType(ConnectorEnd).memberName()/]);
+[else]
+[/if]
 [/template]
 
 [**

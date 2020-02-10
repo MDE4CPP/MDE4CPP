@@ -68,9 +68,9 @@ std::shared_ptr<ecore::EClass> PSCSPackageImpl::getCS_AcceptCallActionActivation
 
 
 
-std::shared_ptr<ecore::EOperation> PSCSPackageImpl::getCS_AcceptCallActionActivation_Operation_accept_EJavaObject() const
+std::shared_ptr<ecore::EOperation> PSCSPackageImpl::getCS_AcceptCallActionActivation_Operation_accept_EventOccurrence() const
 {
-	return m_cS_AcceptCallActionActivation_Operation_accept_EJavaObject;
+	return m_cS_AcceptCallActionActivation_Operation_accept_EventOccurrence;
 }
 
 // End Class CS_AcceptCallActionActivation
@@ -83,9 +83,9 @@ std::shared_ptr<ecore::EClass> PSCSPackageImpl::getCS_AcceptEventActionActivatio
 
 
 
-std::shared_ptr<ecore::EOperation> PSCSPackageImpl::getCS_AcceptEventActionActivation_Operation_accept_EJavaObject() const
+std::shared_ptr<ecore::EOperation> PSCSPackageImpl::getCS_AcceptEventActionActivation_Operation_accept_EventOccurrence() const
 {
-	return m_cS_AcceptEventActionActivation_Operation_accept_EJavaObject;
+	return m_cS_AcceptEventActionActivation_Operation_accept_EventOccurrence;
 }
 
 // End Class CS_AcceptEventActionActivation
@@ -144,6 +144,10 @@ std::shared_ptr<ecore::EClass> PSCSPackageImpl::getCS_CallOperationActionActivat
 
 
 
+std::shared_ptr<ecore::EOperation> PSCSPackageImpl::getCS_CallOperationActionActivation_Operation__isCreate_Operation() const
+{
+	return m_cS_CallOperationActionActivation_Operation__isCreate_Operation;
+}
 std::shared_ptr<ecore::EOperation> PSCSPackageImpl::getCS_CallOperationActionActivation_Operation_doAction() const
 {
 	return m_cS_CallOperationActionActivation_Operation_doAction;
@@ -179,9 +183,9 @@ std::shared_ptr<ecore::EOperation> PSCSPackageImpl::getCS_ClearStructuralFeature
 {
 	return m_cS_ClearStructuralFeatureActionActivation_Operation_doAction;
 }
-std::shared_ptr<ecore::EOperation> PSCSPackageImpl::getCS_ClearStructuralFeatureActionActivation_Operation_getLinksToDestroy_EJavaObject_StructuralFeature() const
+std::shared_ptr<ecore::EOperation> PSCSPackageImpl::getCS_ClearStructuralFeatureActionActivation_Operation_getLinksToDestroy_StructuredValue_StructuralFeature() const
 {
-	return m_cS_ClearStructuralFeatureActionActivation_Operation_getLinksToDestroy_EJavaObject_StructuralFeature;
+	return m_cS_ClearStructuralFeatureActionActivation_Operation_getLinksToDestroy_StructuredValue_StructuralFeature;
 }
 std::shared_ptr<ecore::EOperation> PSCSPackageImpl::getCS_ClearStructuralFeatureActionActivation_Operation_getPotentialLinkEnds_CS_Reference_StructuralFeature() const
 {
@@ -259,13 +263,17 @@ std::shared_ptr<ecore::EReference> PSCSPackageImpl::getCS_DefaultConstructStrate
 	return m_cS_DefaultConstructStrategy_Attribute_locus;
 }
 
-std::shared_ptr<ecore::EOperation> PSCSPackageImpl::getCS_DefaultConstructStrategy_Operation_addStructuralFeatureValue_CS_Reference_EJavaObject() const
+std::shared_ptr<ecore::EOperation> PSCSPackageImpl::getCS_DefaultConstructStrategy_Operation_addStructuralFeatureValue_CS_Reference_Value() const
 {
-	return m_cS_DefaultConstructStrategy_Operation_addStructuralFeatureValue_CS_Reference_EJavaObject;
+	return m_cS_DefaultConstructStrategy_Operation_addStructuralFeatureValue_CS_Reference_Value;
 }
 std::shared_ptr<ecore::EOperation> PSCSPackageImpl::getCS_DefaultConstructStrategy_Operation_canInstantiate_Property() const
 {
 	return m_cS_DefaultConstructStrategy_Operation_canInstantiate_Property;
+}
+std::shared_ptr<ecore::EOperation> PSCSPackageImpl::getCS_DefaultConstructStrategy_Operation_construct_Operation_CS_Object() const
+{
+	return m_cS_DefaultConstructStrategy_Operation_construct_Operation_CS_Object;
 }
 std::shared_ptr<ecore::EOperation> PSCSPackageImpl::getCS_DefaultConstructStrategy_Operation_constructObject_CS_Object_Class() const
 {
@@ -275,9 +283,9 @@ std::shared_ptr<ecore::EOperation> PSCSPackageImpl::getCS_DefaultConstructStrate
 {
 	return m_cS_DefaultConstructStrategy_Operation_generateArrayPattern_CS_Reference_Connector;
 }
-std::shared_ptr<ecore::EOperation> PSCSPackageImpl::getCS_DefaultConstructStrategy_Operation_generateRealizingClass_Interface_String() const
+std::shared_ptr<ecore::EOperation> PSCSPackageImpl::getCS_DefaultConstructStrategy_Operation_generateRealizingClass_Interface_EString() const
 {
-	return m_cS_DefaultConstructStrategy_Operation_generateRealizingClass_Interface_String;
+	return m_cS_DefaultConstructStrategy_Operation_generateRealizingClass_Interface_EString;
 }
 std::shared_ptr<ecore::EOperation> PSCSPackageImpl::getCS_DefaultConstructStrategy_Operation_generateStarPattern_CS_Reference_Connector() const
 {
@@ -299,9 +307,9 @@ std::shared_ptr<ecore::EOperation> PSCSPackageImpl::getCS_DefaultConstructStrate
 {
 	return m_cS_DefaultConstructStrategy_Operation_getValuesFromConnectorEnd_CS_Reference_ConnectorEnd;
 }
-std::shared_ptr<ecore::EOperation> PSCSPackageImpl::getCS_DefaultConstructStrategy_Operation_instantiateInterface_Interface_EJavaObject() const
+std::shared_ptr<ecore::EOperation> PSCSPackageImpl::getCS_DefaultConstructStrategy_Operation_instantiateInterface_Interface_Locus() const
 {
-	return m_cS_DefaultConstructStrategy_Operation_instantiateInterface_Interface_EJavaObject;
+	return m_cS_DefaultConstructStrategy_Operation_instantiateInterface_Interface_Locus;
 }
 std::shared_ptr<ecore::EOperation> PSCSPackageImpl::getCS_DefaultConstructStrategy_Operation_isArrayPattern_Connector() const
 {
@@ -322,6 +330,10 @@ std::shared_ptr<ecore::EClass> PSCSPackageImpl::getCS_DefaultRequestPropagationS
 
 
 
+std::shared_ptr<ecore::EOperation> PSCSPackageImpl::getCS_DefaultRequestPropagationStrategy_Operation_select_Reference_SemanticVisitor() const
+{
+	return m_cS_DefaultRequestPropagationStrategy_Operation_select_Reference_SemanticVisitor;
+}
 
 // End Class CS_DefaultRequestPropagationStrategy
 
@@ -403,9 +415,9 @@ std::shared_ptr<ecore::EOperation> PSCSPackageImpl::getCS_ExecutionFactory_Opera
 {
 	return m_cS_ExecutionFactory_Operation_getStereotypeApplication_Class_Element;
 }
-std::shared_ptr<ecore::EOperation> PSCSPackageImpl::getCS_ExecutionFactory_Operation_getStereotypeClass_String_String() const
+std::shared_ptr<ecore::EOperation> PSCSPackageImpl::getCS_ExecutionFactory_Operation_getStereotypeClass_EString_EString() const
 {
-	return m_cS_ExecutionFactory_Operation_getStereotypeClass_String_String;
+	return m_cS_ExecutionFactory_Operation_getStereotypeClass_EString_EString;
 }
 std::shared_ptr<ecore::EOperation> PSCSPackageImpl::getCS_ExecutionFactory_Operation_instantiateVisitor_Element() const
 {
@@ -422,9 +434,9 @@ std::shared_ptr<ecore::EClass> PSCSPackageImpl::getCS_Executor_Class() const
 
 
 
-std::shared_ptr<ecore::EOperation> PSCSPackageImpl::getCS_Executor_Operation_start_Class_EJavaObject() const
+std::shared_ptr<ecore::EOperation> PSCSPackageImpl::getCS_Executor_Operation_start_Class_ParameterValue() const
 {
-	return m_cS_Executor_Operation_start_Class_EJavaObject;
+	return m_cS_Executor_Operation_start_Class_ParameterValue;
 }
 
 // End Class CS_Executor
@@ -468,13 +480,13 @@ std::shared_ptr<ecore::EOperation> PSCSPackageImpl::getCS_InteractionPoint_Opera
 {
 	return m_cS_InteractionPoint_Operation_dispatch_Operation;
 }
-std::shared_ptr<ecore::EOperation> PSCSPackageImpl::getCS_InteractionPoint_Operation_send_EJavaObject() const
+std::shared_ptr<ecore::EOperation> PSCSPackageImpl::getCS_InteractionPoint_Operation_send_EventOccurrence() const
 {
-	return m_cS_InteractionPoint_Operation_send_EJavaObject;
+	return m_cS_InteractionPoint_Operation_send_EventOccurrence;
 }
-std::shared_ptr<ecore::EOperation> PSCSPackageImpl::getCS_InteractionPoint_Operation_startBehavior_Class_EJavaObject() const
+std::shared_ptr<ecore::EOperation> PSCSPackageImpl::getCS_InteractionPoint_Operation_startBehavior_Class_ParameterValue() const
 {
-	return m_cS_InteractionPoint_Operation_startBehavior_Class_EJavaObject;
+	return m_cS_InteractionPoint_Operation_startBehavior_Class_ParameterValue;
 }
 
 // End Class CS_InteractionPoint
@@ -487,13 +499,13 @@ std::shared_ptr<ecore::EClass> PSCSPackageImpl::getCS_Link_Class() const
 
 
 
-std::shared_ptr<ecore::EOperation> PSCSPackageImpl::getCS_Link_Operation_getFeature_EJavaObject() const
+std::shared_ptr<ecore::EOperation> PSCSPackageImpl::getCS_Link_Operation_getFeature_Value() const
 {
-	return m_cS_Link_Operation_getFeature_EJavaObject;
+	return m_cS_Link_Operation_getFeature_Value;
 }
-std::shared_ptr<ecore::EOperation> PSCSPackageImpl::getCS_Link_Operation_hasValueForAFeature_EJavaObject() const
+std::shared_ptr<ecore::EOperation> PSCSPackageImpl::getCS_Link_Operation_hasValueForAFeature_Value() const
 {
-	return m_cS_Link_Operation_hasValueForAFeature_EJavaObject;
+	return m_cS_Link_Operation_hasValueForAFeature_Value;
 }
 
 // End Class CS_Link
@@ -521,6 +533,14 @@ std::shared_ptr<ecore::EClass> PSCSPackageImpl::getCS_NameBased_StructuralFeatur
 
 
 
+std::shared_ptr<ecore::EOperation> PSCSPackageImpl::getCS_NameBased_StructuralFeatureOfInterfaceAccessStrategy_Operation_read_CS_Object_StructuralFeature() const
+{
+	return m_cS_NameBased_StructuralFeatureOfInterfaceAccessStrategy_Operation_read_CS_Object_StructuralFeature;
+}
+std::shared_ptr<ecore::EOperation> PSCSPackageImpl::getCS_NameBased_StructuralFeatureOfInterfaceAccessStrategy_Operation_write_CS_Object_EInt() const
+{
+	return m_cS_NameBased_StructuralFeatureOfInterfaceAccessStrategy_Operation_write_CS_Object_EInt;
+}
 
 // End Class CS_NameBased_StructuralFeatureOfInterfaceAccessStrategy
 
@@ -536,13 +556,13 @@ std::shared_ptr<ecore::EOperation> PSCSPackageImpl::getCS_Object_Operation_check
 {
 	return m_cS_Object_Operation_checkAllParents_Classifier_Classifier;
 }
-std::shared_ptr<ecore::EOperation> PSCSPackageImpl::getCS_Object_Operation_contains_EJavaObject() const
+std::shared_ptr<ecore::EOperation> PSCSPackageImpl::getCS_Object_Operation_contains_Object() const
 {
-	return m_cS_Object_Operation_contains_EJavaObject;
+	return m_cS_Object_Operation_contains_Object;
 }
-std::shared_ptr<ecore::EOperation> PSCSPackageImpl::getCS_Object_Operation_directlyContains_EJavaObject() const
+std::shared_ptr<ecore::EOperation> PSCSPackageImpl::getCS_Object_Operation_directlyContains_Object() const
 {
-	return m_cS_Object_Operation_directlyContains_EJavaObject;
+	return m_cS_Object_Operation_directlyContains_Object;
 }
 std::shared_ptr<ecore::EOperation> PSCSPackageImpl::getCS_Object_Operation_dispatchIn_Operation_CS_InteractionPoint() const
 {
@@ -576,53 +596,53 @@ std::shared_ptr<ecore::EOperation> PSCSPackageImpl::getCS_Object_Operation_getLi
 {
 	return m_cS_Object_Operation_getLinks_CS_InteractionPoint;
 }
-std::shared_ptr<ecore::EOperation> PSCSPackageImpl::getCS_Object_Operation_hasValueForAFeature_EJavaObject() const
+std::shared_ptr<ecore::EOperation> PSCSPackageImpl::getCS_Object_Operation_hasValueForAFeature_Value() const
 {
-	return m_cS_Object_Operation_hasValueForAFeature_EJavaObject;
+	return m_cS_Object_Operation_hasValueForAFeature_Value;
 }
 std::shared_ptr<ecore::EOperation> PSCSPackageImpl::getCS_Object_Operation_isDescendant_Interface_Interface() const
 {
 	return m_cS_Object_Operation_isDescendant_Interface_Interface;
 }
-std::shared_ptr<ecore::EOperation> PSCSPackageImpl::getCS_Object_Operation_isOperationProvided_EJavaObject_Operation() const
+std::shared_ptr<ecore::EOperation> PSCSPackageImpl::getCS_Object_Operation_isOperationProvided_Reference_Operation() const
 {
-	return m_cS_Object_Operation_isOperationProvided_EJavaObject_Operation;
+	return m_cS_Object_Operation_isOperationProvided_Reference_Operation;
 }
-std::shared_ptr<ecore::EOperation> PSCSPackageImpl::getCS_Object_Operation_isOperationRequired_EJavaObject_Operation() const
+std::shared_ptr<ecore::EOperation> PSCSPackageImpl::getCS_Object_Operation_isOperationRequired_Reference_Operation() const
 {
-	return m_cS_Object_Operation_isOperationRequired_EJavaObject_Operation;
+	return m_cS_Object_Operation_isOperationRequired_Reference_Operation;
 }
 std::shared_ptr<ecore::EOperation> PSCSPackageImpl::getCS_Object_Operation_realizesInterface_Class_Interface() const
 {
 	return m_cS_Object_Operation_realizesInterface_Class_Interface;
 }
-std::shared_ptr<ecore::EOperation> PSCSPackageImpl::getCS_Object_Operation_selectTargetsForDispatching_CS_Link_Boolean() const
+std::shared_ptr<ecore::EOperation> PSCSPackageImpl::getCS_Object_Operation_selectTargetsForDispatching_CS_Link_EBoolean() const
 {
-	return m_cS_Object_Operation_selectTargetsForDispatching_CS_Link_Boolean;
+	return m_cS_Object_Operation_selectTargetsForDispatching_CS_Link_EBoolean;
 }
-std::shared_ptr<ecore::EOperation> PSCSPackageImpl::getCS_Object_Operation_selectTargetsForSending_CS_Link_Boolean() const
+std::shared_ptr<ecore::EOperation> PSCSPackageImpl::getCS_Object_Operation_selectTargetsForSending_CS_Link_EBoolean() const
 {
-	return m_cS_Object_Operation_selectTargetsForSending_CS_Link_Boolean;
+	return m_cS_Object_Operation_selectTargetsForSending_CS_Link_EBoolean;
 }
-std::shared_ptr<ecore::EOperation> PSCSPackageImpl::getCS_Object_Operation_sendIn_EJavaObject_CS_InteractionPoint() const
+std::shared_ptr<ecore::EOperation> PSCSPackageImpl::getCS_Object_Operation_sendIn_EventOccurrence_CS_InteractionPoint() const
 {
-	return m_cS_Object_Operation_sendIn_EJavaObject_CS_InteractionPoint;
+	return m_cS_Object_Operation_sendIn_EventOccurrence_CS_InteractionPoint;
 }
-std::shared_ptr<ecore::EOperation> PSCSPackageImpl::getCS_Object_Operation_sendIn_EJavaObject_Port() const
+std::shared_ptr<ecore::EOperation> PSCSPackageImpl::getCS_Object_Operation_sendIn_EventOccurrence_Port() const
 {
-	return m_cS_Object_Operation_sendIn_EJavaObject_Port;
+	return m_cS_Object_Operation_sendIn_EventOccurrence_Port;
 }
-std::shared_ptr<ecore::EOperation> PSCSPackageImpl::getCS_Object_Operation_sendOut_EJavaObject_CS_InteractionPoint() const
+std::shared_ptr<ecore::EOperation> PSCSPackageImpl::getCS_Object_Operation_sendOut_EventOccurrence_CS_InteractionPoint() const
 {
-	return m_cS_Object_Operation_sendOut_EJavaObject_CS_InteractionPoint;
+	return m_cS_Object_Operation_sendOut_EventOccurrence_CS_InteractionPoint;
 }
-std::shared_ptr<ecore::EOperation> PSCSPackageImpl::getCS_Object_Operation_sendOut_EJavaObject_Port() const
+std::shared_ptr<ecore::EOperation> PSCSPackageImpl::getCS_Object_Operation_sendOut_EventOccurrence_Port() const
 {
-	return m_cS_Object_Operation_sendOut_EJavaObject_Port;
+	return m_cS_Object_Operation_sendOut_EventOccurrence_Port;
 }
-std::shared_ptr<ecore::EOperation> PSCSPackageImpl::getCS_Object_Operation_setFeatureValue_StructuralFeature_Integer() const
+std::shared_ptr<ecore::EOperation> PSCSPackageImpl::getCS_Object_Operation_setFeatureValue_StructuralFeature_EInt() const
 {
-	return m_cS_Object_Operation_setFeatureValue_StructuralFeature_Integer;
+	return m_cS_Object_Operation_setFeatureValue_StructuralFeature_EInt;
 }
 
 // End Class CS_Object
@@ -708,21 +728,21 @@ std::shared_ptr<ecore::EOperation> PSCSPackageImpl::getCS_Reference_Operation_di
 {
 	return m_cS_Reference_Operation_dispatchOut_Operation_CS_InteractionPoint;
 }
-std::shared_ptr<ecore::EOperation> PSCSPackageImpl::getCS_Reference_Operation_sendIn_EJavaObject_CS_InteractionPoint() const
+std::shared_ptr<ecore::EOperation> PSCSPackageImpl::getCS_Reference_Operation_sendIn_EventOccurrence_CS_InteractionPoint() const
 {
-	return m_cS_Reference_Operation_sendIn_EJavaObject_CS_InteractionPoint;
+	return m_cS_Reference_Operation_sendIn_EventOccurrence_CS_InteractionPoint;
 }
-std::shared_ptr<ecore::EOperation> PSCSPackageImpl::getCS_Reference_Operation_sendIn_EJavaObject_Port() const
+std::shared_ptr<ecore::EOperation> PSCSPackageImpl::getCS_Reference_Operation_sendIn_EventOccurrence_Port() const
 {
-	return m_cS_Reference_Operation_sendIn_EJavaObject_Port;
+	return m_cS_Reference_Operation_sendIn_EventOccurrence_Port;
 }
-std::shared_ptr<ecore::EOperation> PSCSPackageImpl::getCS_Reference_Operation_sendOut_EJavaObject_Port() const
+std::shared_ptr<ecore::EOperation> PSCSPackageImpl::getCS_Reference_Operation_sendOut_EventOccurrence_Port() const
 {
-	return m_cS_Reference_Operation_sendOut_EJavaObject_Port;
+	return m_cS_Reference_Operation_sendOut_EventOccurrence_Port;
 }
-std::shared_ptr<ecore::EOperation> PSCSPackageImpl::getCS_Reference_Operation_sendOut_EJavaObject_CS_InteractionPoint() const
+std::shared_ptr<ecore::EOperation> PSCSPackageImpl::getCS_Reference_Operation_sendOut_EventOccurrence_CS_InteractionPoint() const
 {
-	return m_cS_Reference_Operation_sendOut_EJavaObject_CS_InteractionPoint;
+	return m_cS_Reference_Operation_sendOut_EventOccurrence_CS_InteractionPoint;
 }
 
 // End Class CS_Reference
@@ -739,9 +759,9 @@ std::shared_ptr<ecore::EOperation> PSCSPackageImpl::getCS_RemoveStructuralFeatur
 {
 	return m_cS_RemoveStructuralFeatureValueActionActivation_Operation_doAction;
 }
-std::shared_ptr<ecore::EOperation> PSCSPackageImpl::getCS_RemoveStructuralFeatureValueActionActivation_Operation_getLinksToDestroy_EJavaObject_EJavaObject() const
+std::shared_ptr<ecore::EOperation> PSCSPackageImpl::getCS_RemoveStructuralFeatureValueActionActivation_Operation_getLinksToDestroy_StructuredValue_Value() const
 {
-	return m_cS_RemoveStructuralFeatureValueActionActivation_Operation_getLinksToDestroy_EJavaObject_EJavaObject;
+	return m_cS_RemoveStructuralFeatureValueActionActivation_Operation_getLinksToDestroy_StructuredValue_Value;
 }
 std::shared_ptr<ecore::EOperation> PSCSPackageImpl::getCS_RemoveStructuralFeatureValueActionActivation_Operation_getPotentialLinkEnds_CS_Reference_StructuralFeature() const
 {
@@ -762,9 +782,9 @@ std::shared_ptr<ecore::EOperation> PSCSPackageImpl::getCS_RequestPropagationStra
 {
 	return m_cS_RequestPropagationStrategy_Operation_getName;
 }
-std::shared_ptr<ecore::EOperation> PSCSPackageImpl::getCS_RequestPropagationStrategy_Operation_select_EJavaObject_EJavaObject() const
+std::shared_ptr<ecore::EOperation> PSCSPackageImpl::getCS_RequestPropagationStrategy_Operation_select_Reference_SemanticVisitor() const
 {
-	return m_cS_RequestPropagationStrategy_Operation_select_EJavaObject_EJavaObject;
+	return m_cS_RequestPropagationStrategy_Operation_select_Reference_SemanticVisitor;
 }
 
 // End Class CS_RequestPropagationStrategy

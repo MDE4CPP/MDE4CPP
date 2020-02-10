@@ -18,11 +18,13 @@
 #include <iostream>
 #include <sstream>
 
+#include "abstractDataTypes/Bag.hpp"
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "PSCS/impl/PSCSPackageImpl.hpp"
+#include "fUML/FUMLFactory.hpp"
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -36,9 +38,13 @@
 
 #include "PSCS/Semantics/StructuredClassifiers/CS_Reference.hpp"
 
-#include "fUML/EventOccurrence.hpp"
+#include "fUML/Semantics/CommonBehavior/EventOccurrence.hpp"
+
+#include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
 
 #include "uml/Port.hpp"
+
+#include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
 
 #include "uml/Trigger.hpp"
 
@@ -94,13 +100,15 @@ CS_EventOccurrenceImpl::CS_EventOccurrenceImpl(const CS_EventOccurrenceImpl & ob
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy CS_EventOccurrence "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
-	m_propagationInward = obj.getPropagationInward();
+	m_propagationInward = obj.isPropagationInward();
 
 	//copy references with no containment (soft copy)
 	
 	m_interactionPoint  = obj.getInteractionPoint();
 
 	m_onPort  = obj.getOnPort();
+
+	m_target  = obj.getTarget();
 
 	m_wrappedEventOccurrence  = obj.getWrappedEventOccurrence();
 
@@ -130,7 +138,7 @@ void CS_EventOccurrenceImpl::setPropagationInward(bool _propagationInward)
 	m_propagationInward = _propagationInward;
 } 
 
-bool CS_EventOccurrenceImpl::getPropagationInward() const 
+bool CS_EventOccurrenceImpl::isPropagationInward() const 
 {
 	return m_propagationInward;
 }
@@ -140,32 +148,87 @@ bool CS_EventOccurrenceImpl::getPropagationInward() const
 //*********************************
 void CS_EventOccurrenceImpl::doSend()
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+		// If the specified target is a CS_Reference and the propagation must be done
+	// to the environment, then the operation sendOut(EventOccurrence, Port) is called
+	// and make the propagation to continue.
+	// If the specified target is a CS_Reference but the propagation must be done to
+	// the internals then the operation sendIn(EventOccurrence, Port) is called.
+	// In the case were the target is not a CS_EventOccurrence then send(EventOccurence)
+	// is called.
+	if(std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(this->getTarget()) != nullptr) {
+		if(this->isPropagationInward()) {
+			std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(this->getTarget())->sendIn(this->getThisCS_EventOccurrencePtr(), this->getOnPort());
+		}
+		else {
+			std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(this->getTarget())->sendOut(this->getThisCS_EventOccurrencePtr(), this->getOnPort());
+		}
+	}
+	else {
+		fUML::Semantics::CommonBehavior::EventOccurrenceImpl::doSend();
+	}
+	//end of body
 }
 
-std::shared_ptr<Bag<Any> > CS_EventOccurrenceImpl::getParameterValues()
+std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > CS_EventOccurrenceImpl::getParameterValues()
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Return the parametric data of the referenced event occurrence
+return this->getWrappedEventOccurrence()->getParameterValues();
+	//end of body
 }
 
 bool CS_EventOccurrenceImpl::match(std::shared_ptr<uml::Trigger>  trigger)
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+		// If the trigger references ports then to match this latter it is required that 
+	// 1] the interaction point is instance of port referenced by the trigger
+	// 2] the referenced event occurrence match operation returns true.
+	// If the trigger does not reference ports then the behavior is the same than for fUML.
+
+	bool matches = false;
+	if(trigger->getPort()->size() > 0) {
+		unsigned int i = 1;
+		while((!matches) && (i <= trigger->getPort()->size())) {
+			if(this->getInteractionPoint()->getDefiningPort() == trigger->getPort()->at(i-1)){
+				matches = true;
+			}
+			i++;
+		}
+		if(matches)	{
+			matches = this->getWrappedEventOccurrence()->match(trigger);
+		}
+	}
+	else {
+		matches = this->getWrappedEventOccurrence()->match(trigger);
+	}
+	return matches;
+	//end of body
 }
 
 void CS_EventOccurrenceImpl::sendInTo(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference>  target,std::shared_ptr<uml::Port>  port)
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+		// Propagate the sending of the event occurrence to the internals
+	this->setOnPort(port);
+	this->setPropagationInward(true);
+	this->sendTo(std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Reference>(target));
+	//end of body
 }
 
 void CS_EventOccurrenceImpl::sendOutTo(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference>  target,std::shared_ptr<uml::Port>  port)
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+		// Propagate the sending of the event occurrence to the environment
+	this->setOnPort(port);
+	this->setPropagationInward(false);
+	this->sendTo(std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Reference>(target));
+	//end of body
 }
 
 //*********************************
@@ -191,12 +254,12 @@ void CS_EventOccurrenceImpl::setOnPort(std::shared_ptr<uml::Port> _onPort)
     m_onPort = _onPort;
 }
 
-std::shared_ptr<fUML::EventOccurrence > CS_EventOccurrenceImpl::getWrappedEventOccurrence() const
+std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence > CS_EventOccurrenceImpl::getWrappedEventOccurrence() const
 {
 
     return m_wrappedEventOccurrence;
 }
-void CS_EventOccurrenceImpl::setWrappedEventOccurrence(std::shared_ptr<fUML::EventOccurrence> _wrappedEventOccurrence)
+void CS_EventOccurrenceImpl::setWrappedEventOccurrence(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> _wrappedEventOccurrence)
 {
     m_wrappedEventOccurrence = _wrappedEventOccurrence;
 }
@@ -213,6 +276,7 @@ std::shared_ptr<CS_EventOccurrence> CS_EventOccurrenceImpl::getThisCS_EventOccur
 void CS_EventOccurrenceImpl::setThisCS_EventOccurrencePtr(std::weak_ptr<CS_EventOccurrence> thisCS_EventOccurrencePtr)
 {
 	m_thisCS_EventOccurrencePtr = thisCS_EventOccurrencePtr;
+	setThisEventOccurrencePtr(thisCS_EventOccurrencePtr);
 }
 std::shared_ptr<ecore::EObject> CS_EventOccurrenceImpl::eContainer() const
 {
@@ -227,30 +291,30 @@ Any CS_EventOccurrenceImpl::eGet(int featureID, bool resolve, bool coreType) con
 	switch(featureID)
 	{
 		case PSCS::PSCSPackage::CS_EVENTOCCURRENCE_ATTRIBUTE_INTERACTIONPOINT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getInteractionPoint())); //130
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getInteractionPoint())); //131
 		case PSCS::PSCSPackage::CS_EVENTOCCURRENCE_ATTRIBUTE_ONPORT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getOnPort())); //133
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getOnPort())); //134
 		case PSCS::PSCSPackage::CS_EVENTOCCURRENCE_ATTRIBUTE_PROPAGATIONINWARD:
-			return eAny(getPropagationInward()); //132
+			return eAny(isPropagationInward()); //133
 		case PSCS::PSCSPackage::CS_EVENTOCCURRENCE_ATTRIBUTE_WRAPPEDEVENTOCCURRENCE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getWrappedEventOccurrence())); //131
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getWrappedEventOccurrence())); //132
 	}
-	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
+	return fUML::Semantics::CommonBehavior::EventOccurrenceImpl::eGet(featureID, resolve, coreType);
 }
 bool CS_EventOccurrenceImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
 		case PSCS::PSCSPackage::CS_EVENTOCCURRENCE_ATTRIBUTE_INTERACTIONPOINT:
-			return getInteractionPoint() != nullptr; //130
+			return getInteractionPoint() != nullptr; //131
 		case PSCS::PSCSPackage::CS_EVENTOCCURRENCE_ATTRIBUTE_ONPORT:
-			return getOnPort() != nullptr; //133
+			return getOnPort() != nullptr; //134
 		case PSCS::PSCSPackage::CS_EVENTOCCURRENCE_ATTRIBUTE_PROPAGATIONINWARD:
-			return getPropagationInward() != false; //132
+			return isPropagationInward() != false; //133
 		case PSCS::PSCSPackage::CS_EVENTOCCURRENCE_ATTRIBUTE_WRAPPEDEVENTOCCURRENCE:
-			return getWrappedEventOccurrence() != nullptr; //131
+			return getWrappedEventOccurrence() != nullptr; //132
 	}
-	return ecore::EObjectImpl::internalEIsSet(featureID);
+	return fUML::Semantics::CommonBehavior::EventOccurrenceImpl::internalEIsSet(featureID);
 }
 bool CS_EventOccurrenceImpl::eSet(int featureID, Any newValue)
 {
@@ -261,7 +325,7 @@ bool CS_EventOccurrenceImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> _interactionPoint = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint>(_temp);
-			setInteractionPoint(_interactionPoint); //130
+			setInteractionPoint(_interactionPoint); //131
 			return true;
 		}
 		case PSCS::PSCSPackage::CS_EVENTOCCURRENCE_ATTRIBUTE_ONPORT:
@@ -269,27 +333,27 @@ bool CS_EventOccurrenceImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Port> _onPort = std::dynamic_pointer_cast<uml::Port>(_temp);
-			setOnPort(_onPort); //133
+			setOnPort(_onPort); //134
 			return true;
 		}
 		case PSCS::PSCSPackage::CS_EVENTOCCURRENCE_ATTRIBUTE_PROPAGATIONINWARD:
 		{
 			// BOOST CAST
 			bool _propagationInward = newValue->get<bool>();
-			setPropagationInward(_propagationInward); //132
+			setPropagationInward(_propagationInward); //133
 			return true;
 		}
 		case PSCS::PSCSPackage::CS_EVENTOCCURRENCE_ATTRIBUTE_WRAPPEDEVENTOCCURRENCE:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<fUML::EventOccurrence> _wrappedEventOccurrence = std::dynamic_pointer_cast<fUML::EventOccurrence>(_temp);
-			setWrappedEventOccurrence(_wrappedEventOccurrence); //131
+			std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> _wrappedEventOccurrence = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::EventOccurrence>(_temp);
+			setWrappedEventOccurrence(_wrappedEventOccurrence); //132
 			return true;
 		}
 	}
 
-	return ecore::EObjectImpl::eSet(featureID, newValue);
+	return fUML::Semantics::CommonBehavior::EventOccurrenceImpl::eSet(featureID, newValue);
 }
 
 //*********************************
@@ -357,14 +421,14 @@ void CS_EventOccurrenceImpl::loadAttributes(std::shared_ptr<persistence::interfa
 		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
 	}
 
-	ecore::EObjectImpl::loadAttributes(loadHandler, attr_list);
+	fUML::Semantics::CommonBehavior::EventOccurrenceImpl::loadAttributes(loadHandler, attr_list);
 }
 
 void CS_EventOccurrenceImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<PSCS::PSCSFactory> modelFactory)
 {
 
 
-	ecore::EObjectImpl::loadNode(nodeName, loadHandler, ecore::EcoreFactory::eInstance());
+	fUML::Semantics::CommonBehavior::EventOccurrenceImpl::loadNode(nodeName, loadHandler, fUML::FUMLFactory::eInstance());
 }
 
 void CS_EventOccurrenceImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
@@ -400,20 +464,21 @@ void CS_EventOccurrenceImpl::resolveReferences(const int featureID, std::list<st
 			if (references.size() == 1)
 			{
 				// Cast object to correct type
-				std::shared_ptr<fUML::EventOccurrence> _wrappedEventOccurrence = std::dynamic_pointer_cast<fUML::EventOccurrence>( references.front() );
+				std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> _wrappedEventOccurrence = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::EventOccurrence>( references.front() );
 				setWrappedEventOccurrence(_wrappedEventOccurrence);
 			}
 			
 			return;
 		}
 	}
-	ecore::EObjectImpl::resolveReferences(featureID, references);
+	fUML::Semantics::CommonBehavior::EventOccurrenceImpl::resolveReferences(featureID, references);
 }
 
 void CS_EventOccurrenceImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	saveContent(saveHandler);
 
+	fUML::Semantics::CommonBehavior::EventOccurrenceImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
 	
@@ -430,7 +495,7 @@ void CS_EventOccurrenceImpl::saveContent(std::shared_ptr<persistence::interfaces
 		// Add attributes
 		if ( this->eIsSet(package->getCS_EventOccurrence_Attribute_propagationInward()) )
 		{
-			saveHandler->addAttribute("propagationInward", this->getPropagationInward());
+			saveHandler->addAttribute("propagationInward", this->isPropagationInward());
 		}
 
 		// Add references

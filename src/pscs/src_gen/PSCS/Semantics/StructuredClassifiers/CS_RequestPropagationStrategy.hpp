@@ -16,8 +16,6 @@
 template<class T> class Bag;
 
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -39,20 +37,33 @@ namespace PSCS
 }
 
 //Forward Declaration for used types
+namespace fUML::Semantics::StructuredClassifiers 
+{
+	class Reference;
+}
+
+namespace fUML::Semantics::Loci 
+{
+	class SemanticStrategy;
+}
+
+namespace fUML::Semantics::Loci 
+{
+	class SemanticVisitor;
+}
 
 // base class includes
+#include "fUML/Semantics/Loci/SemanticStrategy.hpp"
 
 // enum includes
 
-#include "ecore/EObject.hpp"
 
 //*********************************
 namespace PSCS::Semantics::StructuredClassifiers 
 {
 	/*!
 	 */
-	class CS_RequestPropagationStrategy : virtual public ecore::EObject 
-
+	class CS_RequestPropagationStrategy:virtual public fUML::Semantics::Loci::SemanticStrategy
 	{
 		public:
  			CS_RequestPropagationStrategy(const CS_RequestPropagationStrategy &) {}
@@ -77,7 +88,7 @@ namespace PSCS::Semantics::StructuredClassifiers
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<Any> > select(std::shared_ptr<Bag<Any> >  potentialTargets,Any context) = 0;
+			virtual std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference> > select(std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference> >  potentialTargets,std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>  context) = 0;
 			
 			
 			//*********************************

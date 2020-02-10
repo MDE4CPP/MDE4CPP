@@ -18,20 +18,49 @@
 #include <iostream>
 #include <sstream>
 
-
+#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/Union.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "PSCS/impl/PSCSPackageImpl.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
+
+#include "uml/CreateObjectAction.hpp"
+#include "uml/Class.hpp"
+#include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
+#include "fUML/Semantics/StructuredClassifiers/Object.hpp"
+#include "fUML/Semantics/Loci/Locus.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/CS_Object.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/CS_Reference.hpp"
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "PSCS/PSCSFactory.hpp"
 #include "PSCS/PSCSPackage.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
 
 #include <exception> // used in Persistence
 
+#include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
+
+#include "uml/ActivityNode.hpp"
+
+#include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
+
+#include "fUML/Semantics/Actions/CreateObjectActionActivation.hpp"
+
+#include "fUML/Semantics/Actions/InputPinActivation.hpp"
+
+#include "fUML/Semantics/Actions/OutputPinActivation.hpp"
+
+#include "fUML/Semantics/Actions/PinActivation.hpp"
+
+#include "fUML/Semantics/Activities/Token.hpp"
 
 #include "ecore/EcorePackage.hpp"
 #include "ecore/EcoreFactory.hpp"
@@ -67,6 +96,16 @@ CS_CreateObjectActionActivationImpl::~CS_CreateObjectActionActivationImpl()
 }
 
 
+//Additional constructor for the containments back reference
+			CS_CreateObjectActionActivationImpl::CS_CreateObjectActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
+			:CS_CreateObjectActionActivationImpl()
+			{
+			    m_group = par_group;
+			}
+
+
+
+
 
 
 CS_CreateObjectActionActivationImpl::CS_CreateObjectActionActivationImpl(const CS_CreateObjectActionActivationImpl & obj):CS_CreateObjectActionActivationImpl()
@@ -75,12 +114,51 @@ CS_CreateObjectActionActivationImpl::CS_CreateObjectActionActivationImpl(const C
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy CS_CreateObjectActionActivation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	m_firing = obj.isFiring();
+	m_running = obj.isRunning();
 
 	//copy references with no containment (soft copy)
 	
+	m_group  = obj.getGroup();
+
+	std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> _incomingEdges = obj.getIncomingEdges();
+	m_incomingEdges.reset(new Bag<fUML::Semantics::Activities::ActivityEdgeInstance>(*(obj.getIncomingEdges().get())));
+
+	m_node  = obj.getNode();
+
+	std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> _outgoingEdges = obj.getOutgoingEdges();
+	m_outgoingEdges.reset(new Bag<fUML::Semantics::Activities::ActivityEdgeInstance>(*(obj.getOutgoingEdges().get())));
+
+	std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> _pinActivation = obj.getPinActivation();
+	m_pinActivation.reset(new Union<fUML::Semantics::Actions::PinActivation>(*(obj.getPinActivation().get())));
+
 
 	//Clone references with containment (deep copy)
 
+	std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> _heldTokensList = obj.getHeldTokens();
+	for(std::shared_ptr<fUML::Semantics::Activities::Token> _heldTokens : *_heldTokensList)
+	{
+		this->getHeldTokens()->add(std::shared_ptr<fUML::Semantics::Activities::Token>(std::dynamic_pointer_cast<fUML::Semantics::Activities::Token>(_heldTokens->copy())));
+	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_heldTokens" << std::endl;
+	#endif
+	std::shared_ptr<Bag<fUML::Semantics::Actions::InputPinActivation>> _inputPinActivationList = obj.getInputPinActivation();
+	for(std::shared_ptr<fUML::Semantics::Actions::InputPinActivation> _inputPinActivation : *_inputPinActivationList)
+	{
+		this->getInputPinActivation()->add(std::shared_ptr<fUML::Semantics::Actions::InputPinActivation>(std::dynamic_pointer_cast<fUML::Semantics::Actions::InputPinActivation>(_inputPinActivation->copy())));
+	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_inputPinActivation" << std::endl;
+	#endif
+	std::shared_ptr<Bag<fUML::Semantics::Actions::OutputPinActivation>> _outputPinActivationList = obj.getOutputPinActivation();
+	for(std::shared_ptr<fUML::Semantics::Actions::OutputPinActivation> _outputPinActivation : *_outputPinActivationList)
+	{
+		this->getOutputPinActivation()->add(std::shared_ptr<fUML::Semantics::Actions::OutputPinActivation>(std::dynamic_pointer_cast<fUML::Semantics::Actions::OutputPinActivation>(_outputPinActivation->copy())));
+	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_outputPinActivation" << std::endl;
+	#endif
 
 }
 
@@ -105,8 +183,34 @@ std::shared_ptr<ecore::EClass> CS_CreateObjectActionActivationImpl::eStaticClass
 //*********************************
 void CS_CreateObjectActionActivationImpl::doAction()
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+		// Create an object with the given classifier (which must be a class) as
+	// its type, at the same locus as the action activation.
+	// Place a reference to the object on the result pin of the action.
+	// Extends fUML semantics in the sense that the reference placed
+	// on the result pin is a CS_Reference (in the case where the instantiated object
+	// is a CS_Object) not a Reference
+	// Note that Locus.instantiate(Class) is extended in this specification
+	// to produce a CS_Object instead of an Object in the case where the class
+	// to be instantiated is not a behavior
+
+	std::shared_ptr<uml::CreateObjectAction> action = std::dynamic_pointer_cast<uml::CreateObjectAction>(this->getNode());
+	
+	std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> reference;
+	std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> referent = this->getExecutionLocus()->instantiate(std::dynamic_pointer_cast<uml::Class>(action->getClassifier()));
+	
+	if(std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Object>(referent) != nullptr) {
+		reference = PSCS::PSCSFactory::eInstance()->createCS_Reference();
+		(std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(reference))->setCompositeReferent(std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Object>(referent));
+	}
+	else {
+		reference = fUML::FUMLFactory::eInstance()->createReference();
+	}
+	reference->setReferent(referent);
+	
+	this->putToken(action->getResult(), reference);
+	//end of body
 }
 
 //*********************************
@@ -116,6 +220,10 @@ void CS_CreateObjectActionActivationImpl::doAction()
 //*********************************
 // Union Getter
 //*********************************
+std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> CS_CreateObjectActionActivationImpl::getPinActivation() const
+{
+	return m_pinActivation;
+}
 
 
 std::shared_ptr<CS_CreateObjectActionActivation> CS_CreateObjectActionActivationImpl::getThisCS_CreateObjectActionActivationPtr() const
@@ -125,9 +233,14 @@ std::shared_ptr<CS_CreateObjectActionActivation> CS_CreateObjectActionActivation
 void CS_CreateObjectActionActivationImpl::setThisCS_CreateObjectActionActivationPtr(std::weak_ptr<CS_CreateObjectActionActivation> thisCS_CreateObjectActionActivationPtr)
 {
 	m_thisCS_CreateObjectActionActivationPtr = thisCS_CreateObjectActionActivationPtr;
+	setThisCreateObjectActionActivationPtr(thisCS_CreateObjectActionActivationPtr);
 }
 std::shared_ptr<ecore::EObject> CS_CreateObjectActionActivationImpl::eContainer() const
 {
+	if(auto wp = m_group.lock())
+	{
+		return wp;
+	}
 	return nullptr;
 }
 
@@ -139,14 +252,14 @@ Any CS_CreateObjectActionActivationImpl::eGet(int featureID, bool resolve, bool 
 	switch(featureID)
 	{
 	}
-	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
+	return fUML::Semantics::Actions::CreateObjectActionActivationImpl::eGet(featureID, resolve, coreType);
 }
 bool CS_CreateObjectActionActivationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
 	}
-	return ecore::EObjectImpl::internalEIsSet(featureID);
+	return fUML::Semantics::Actions::CreateObjectActionActivationImpl::internalEIsSet(featureID);
 }
 bool CS_CreateObjectActionActivationImpl::eSet(int featureID, Any newValue)
 {
@@ -154,7 +267,7 @@ bool CS_CreateObjectActionActivationImpl::eSet(int featureID, Any newValue)
 	{
 	}
 
-	return ecore::EObjectImpl::eSet(featureID, newValue);
+	return fUML::Semantics::Actions::CreateObjectActionActivationImpl::eSet(featureID, newValue);
 }
 
 //*********************************
@@ -180,27 +293,37 @@ void CS_CreateObjectActionActivationImpl::load(std::shared_ptr<persistence::inte
 void CS_CreateObjectActionActivationImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
 
-	ecore::EObjectImpl::loadAttributes(loadHandler, attr_list);
+	fUML::Semantics::Actions::CreateObjectActionActivationImpl::loadAttributes(loadHandler, attr_list);
 }
 
 void CS_CreateObjectActionActivationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<PSCS::PSCSFactory> modelFactory)
 {
 
 
-	ecore::EObjectImpl::loadNode(nodeName, loadHandler, ecore::EcoreFactory::eInstance());
+	fUML::Semantics::Actions::CreateObjectActionActivationImpl::loadNode(nodeName, loadHandler, fUML::FUMLFactory::eInstance());
 }
 
 void CS_CreateObjectActionActivationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
-	ecore::EObjectImpl::resolveReferences(featureID, references);
+	fUML::Semantics::Actions::CreateObjectActionActivationImpl::resolveReferences(featureID, references);
 }
 
 void CS_CreateObjectActionActivationImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	saveContent(saveHandler);
 
+	fUML::Semantics::Actions::CreateObjectActionActivationImpl::saveContent(saveHandler);
+	
+	fUML::Semantics::Actions::ActionActivationImpl::saveContent(saveHandler);
+	
+	fUML::Semantics::Activities::ActivityNodeActivationImpl::saveContent(saveHandler);
+	
+	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
 	
 }
 

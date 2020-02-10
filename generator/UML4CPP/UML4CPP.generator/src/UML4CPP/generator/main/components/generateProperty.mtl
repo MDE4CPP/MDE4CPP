@@ -78,6 +78,13 @@ m_[instVal.owner.oclAsType(NamedElement).name/] = [instVal.type._package.getPack
 }
 [/template]
 
+[template public generateAttributeGetterImplementationCpp(aProperty : Property, aInterface : Interface)]
+[aProperty.generateCppType()/] [aInterface.name.toUpperFirst()/]Impl::[aProperty.getterName()/]() const 
+{
+	return m_[aProperty.name/];
+}
+[/template]
+
 [**
  * generate property setter implementation
 */]
@@ -92,14 +99,30 @@ void [aClass.name.toUpperFirst()/]Impl::[aProperty.setterName()/]([aProperty.gen
 }
 [/template]
 
+[template public generateAttributeSetterImplementationCpp(aProperty : Property, aInterface : Interface) ? (aProperty.hasSetter())]
+void [aInterface.name.toUpperFirst()/]Impl::[aProperty.setterName()/]([aProperty.generateCppType()/] _[aProperty.name/])
+{
+	m_[aProperty.name/] = _[aProperty.name/];
+}
+[/template]
+
+
 [**
  * generate creation of meta model instance for an Property element
 */]
 [template public generateAttributeCreation(aProperty : Property) post(trim())]
 [if (not aProperty.class.oclIsUndefined())]
-[aProperty.memberName()/] = factory->createProperty_in_Class([aProperty.class.memberName()/]);
+	[if (aProperty.oclIsTypeOf(Property))]
+	[aProperty.memberName()/] = factory->createProperty_in_Class([aProperty.class.memberName()/]);
+	[elseif (aProperty.oclIsTypeOf(Port))]
+	[aProperty.memberName()/] = factory->createPort_in_Class([aProperty.class.memberName()/]);
+	[/if]
 [else][if (not aProperty.interface.oclIsUndefined())]
-[aProperty.memberName()/] = factory->createProperty_in_Interface([aProperty.interface.memberName()/]);
+	[if (aProperty.oclIsTypeOf(Property))]
+	[aProperty.memberName()/] = factory->createProperty_in_Interface([aProperty.interface.memberName()/]);
+	[elseif (aProperty.oclIsTypeOf(Port))]
+	[aProperty.memberName()/] = factory->createPort_in_Interface([aProperty.interface.memberName()/]);
+	[/if]
 [/if][/if]
 [/template]
 

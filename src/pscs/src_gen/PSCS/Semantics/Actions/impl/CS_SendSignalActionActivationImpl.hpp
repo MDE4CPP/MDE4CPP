@@ -14,14 +14,12 @@
 #include "../CS_SendSignalActionActivation.hpp"
 
 #include "PSCS/impl/PSCSFactoryImpl.hpp"
-
-#include "ecore/impl/EObjectImpl.hpp"
+#include "fUML/Semantics/Actions/impl/SendSignalActionActivationImpl.hpp"
 
 //*********************************
 namespace PSCS::Semantics::Actions 
 {
-	class CS_SendSignalActionActivationImpl :virtual public ecore::EObjectImpl,
-virtual public CS_SendSignalActionActivation 
+	class CS_SendSignalActionActivationImpl :virtual public fUML::Semantics::Actions::SendSignalActionActivationImpl, virtual public CS_SendSignalActionActivation 
 	{
 		public: 
 			CS_SendSignalActionActivationImpl(const CS_SendSignalActionActivationImpl & obj);
@@ -35,6 +33,10 @@ virtual public CS_SendSignalActionActivation
 			CS_SendSignalActionActivationImpl();
 			virtual std::shared_ptr<CS_SendSignalActionActivation> getThisCS_SendSignalActionActivationPtr() const;
 			virtual void setThisCS_SendSignalActionActivationPtr(std::weak_ptr<CS_SendSignalActionActivation> thisCS_SendSignalActionActivationPtr);
+
+			//Additional constructors for the containments back reference
+			CS_SendSignalActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group);
+
 
 
 
@@ -64,7 +66,9 @@ virtual public CS_SendSignalActionActivation
 			//*********************************
 			// Union Getter
 			//*********************************
-			 
+			/*!
+			 */
+			virtual std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> getPinActivation() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

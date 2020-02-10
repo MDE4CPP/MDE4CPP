@@ -336,6 +336,7 @@ namespace Ecore
 			virtual std::shared_ptr<uml::Property> get_Ecore_ETypedElement_unique();  
 			virtual std::shared_ptr<uml::Property> get_Ecore_ETypedElement_upperBound();  
 			
+			
 
 		private:
 			//private variables for ownedMember of the metamodel package
@@ -801,6 +802,7 @@ namespace Ecore
 			std::shared_ptr<uml::LiteralInteger> ecore_ETypedElement_unique_lowerValue_LiteralInteger_Ecore_ETypedElement_unique = nullptr;
 			std::shared_ptr<uml::Property> ecore_ETypedElement_upperBound = nullptr;
 			std::shared_ptr<uml::LiteralInteger> ecore_ETypedElement_upperBound_lowerValue_LiteralInteger_Ecore_ETypedElement_upperBound = nullptr;
+			
 			
 
 			static EcorePackage* create();

@@ -140,4 +140,6 @@ virtual [aOperation.generateCppType()/] [aOperation.name/]([for (sParameter : Pa
 [for (anOwnedParameter : Parameter | aOperation.ownedParameter) separator ('\n')]
 [anOwnedParameter.generateParameterInitialization()/]
 [/for]
+
+[aOperation.generateStereotypeApplication()/]
 [/template]

@@ -44,7 +44,32 @@ namespace uml
 
 namespace uml 
 {
+	class Classifier;
+}
+
+namespace uml 
+{
 	class Element;
+}
+
+namespace fUML::Semantics::Loci 
+{
+	class ExecutionFactory;
+}
+
+namespace fUML::Semantics::Loci 
+{
+	class Locus;
+}
+
+namespace fUML::Semantics::StructuredClassifiers 
+{
+	class Object;
+}
+
+namespace fUML::Semantics::CommonBehavior 
+{
+	class OpaqueBehaviorExecution;
 }
 
 namespace uml 
@@ -52,19 +77,33 @@ namespace uml
 	class Package;
 }
 
+namespace uml 
+{
+	class PrimitiveType;
+}
+
+namespace fUML::Semantics::Loci 
+{
+	class SemanticStrategy;
+}
+
+namespace fUML::Semantics::Loci 
+{
+	class SemanticVisitor;
+}
+
 // base class includes
+#include "fUML/Semantics/Loci/ExecutionFactory.hpp"
 
 // enum includes
 
-#include "ecore/EObject.hpp"
 
 //*********************************
 namespace PSCS::Semantics::Loci 
 {
 	/*!
 	 */
-	class CS_ExecutionFactory : virtual public ecore::EObject 
-
+	class CS_ExecutionFactory:virtual public fUML::Semantics::Loci::ExecutionFactory
 	{
 		public:
  			CS_ExecutionFactory(const CS_ExecutionFactory &) {}
@@ -85,15 +124,15 @@ namespace PSCS::Semantics::Loci
 			//*********************************
 			/*!
 			 */ 
-			virtual Any getStereotypeApplication(std::shared_ptr<uml::Class>  stereotype,std::shared_ptr<uml::Element>  element) = 0;
+			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> getStereotypeApplication(std::shared_ptr<uml::Class>  stereotype,std::shared_ptr<uml::Element>  element) = 0;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<uml::Class> getStereotypeClass(std::string profileName,std::string stereotypeName) = 0;
+			virtual std::shared_ptr<uml::Classifier> getStereotypeClass(std::string profileName,std::string stereotypeName) = 0;
 			
 			/*!
 			 */ 
-			virtual Any instantiateVisitor(std::shared_ptr<uml::Element>  element) = 0;
+			virtual std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> instantiateVisitor(std::shared_ptr<uml::Element>  element) = 0;
 			
 			
 			//*********************************

@@ -85,7 +85,7 @@
 [query public packageGetter(aEClassifier : EClassifier, aStruct : EStructuralFeature) : String = packageGetter(aEClassifier,aStruct.eContainingClass) /]
 [query public packageGetter(aEClass : EClass, supertype : EClass) : String = packageGetter(supertype.oclAsType(EClassifier),aEClass.oclAsType(EClassifier)) /]
 [query public packageGetter(aEClassifier1 : EClassifier, aEClassifier2 : EClassifier) : String = needMetaModelPackageGetter(aEClassifier1, aEClassifier2).concat('get').concat(aEClassifier1.getMemberNameUpperFirst()).concat('()') /]
-[query public needMetaModelPackageGetter(aClassifier1 : EClassifier ,aClassifier2 : EClassifier ) : String = if(aClassifier1.ePackage.name = aClassifier2.ePackage.name) then '' else  aClassifier1.getRootPackage().name.concat('::').concat(aClassifier1.getRootPackage().name.toUpperFirst()).concat('Package').concat('::eInstance()->')  endif /]
+[query public needMetaModelPackageGetter(aClassifier1 : EClassifier ,aClassifier2 : EClassifier ) : String = if(aClassifier1.generateNamespaceDefinition() = aClassifier2.generateNamespaceDefinition()) then '' else  aClassifier1.getRootPackage().name.concat('::').concat(aClassifier1.getRootPackage().name.toUpperFirst()).concat('Package').concat('::eInstance()->')  endif /]
 
 [**
  * Subset Union helper queries
@@ -115,7 +115,7 @@
 
 [query public needNamespace(anPackage : EPackage,str :String) : String = if not( anPackage.name = 'ecore') then 'ecore::'.concat(str) else str endif /]
 
-[query public ClassWithNamespace(aClass : EClass, base : EClass) : String = if aClass.ePackage.name = base.ePackage.name then base.name else base.generateNamespaceDefinition().concat('::').concat(base.name) endif /]
+[query public ClassWithNamespace(aClass : EClass, base : EClass) : String = if aClass.generateNamespaceDefinition() = base.generateNamespaceDefinition() then base.name else base.generateNamespaceDefinition().concat('::').concat(base.name) endif /] 
 
 [query private getGuardName(namedelement : ENamedElement, sufix: String) : String = 
 		if (namedelement.eContainer().oclIsUndefined()) 

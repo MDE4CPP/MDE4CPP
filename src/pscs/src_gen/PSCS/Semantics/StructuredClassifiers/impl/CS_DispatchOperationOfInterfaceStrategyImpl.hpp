@@ -14,14 +14,12 @@
 #include "../CS_DispatchOperationOfInterfaceStrategy.hpp"
 
 #include "PSCS/impl/PSCSFactoryImpl.hpp"
-
-#include "ecore/impl/EObjectImpl.hpp"
+#include "fUML/Semantics/StructuredClassifiers/impl/RedefinitionBasedDispatchStrategyImpl.hpp"
 
 //*********************************
 namespace PSCS::Semantics::StructuredClassifiers 
 {
-	class CS_DispatchOperationOfInterfaceStrategyImpl :virtual public ecore::EObjectImpl,
-virtual public CS_DispatchOperationOfInterfaceStrategy 
+	class CS_DispatchOperationOfInterfaceStrategyImpl :virtual public fUML::Semantics::StructuredClassifiers::RedefinitionBasedDispatchStrategyImpl, virtual public CS_DispatchOperationOfInterfaceStrategy 
 	{
 		public: 
 			CS_DispatchOperationOfInterfaceStrategyImpl(const CS_DispatchOperationOfInterfaceStrategyImpl & obj);

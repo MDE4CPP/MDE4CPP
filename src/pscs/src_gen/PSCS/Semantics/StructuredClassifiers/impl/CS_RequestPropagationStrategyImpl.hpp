@@ -14,14 +14,12 @@
 #include "../CS_RequestPropagationStrategy.hpp"
 
 #include "PSCS/impl/PSCSFactoryImpl.hpp"
-
-#include "ecore/impl/EObjectImpl.hpp"
+#include "fUML/Semantics/Loci/impl/SemanticStrategyImpl.hpp"
 
 //*********************************
 namespace PSCS::Semantics::StructuredClassifiers 
 {
-	class CS_RequestPropagationStrategyImpl :virtual public ecore::EObjectImpl,
-virtual public CS_RequestPropagationStrategy 
+	class CS_RequestPropagationStrategyImpl :virtual public fUML::Semantics::Loci::SemanticStrategyImpl, virtual public CS_RequestPropagationStrategy 
 	{
 		public: 
 			CS_RequestPropagationStrategyImpl(const CS_RequestPropagationStrategyImpl & obj);
@@ -51,7 +49,7 @@ virtual public CS_RequestPropagationStrategy
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<Any> > select(std::shared_ptr<Bag<Any> >  potentialTargets,Any context) ;
+			virtual std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference> > select(std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference> >  potentialTargets,std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>  context) ;
 			
 			
 			

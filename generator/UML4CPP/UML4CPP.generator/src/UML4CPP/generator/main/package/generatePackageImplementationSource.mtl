@@ -96,11 +96,11 @@
 #include "[pack.getPackageName()/]/[pack.name.concat('Package').toUpperFirst()/].hpp"
 [elseif (pack.oclIsKindOf(Profile) and not pack.name.endsWith('Profile'))]
 #include "[pack.getPackageName()/]/[pack.name.concat('ProfilePackage').toUpperFirst()/].hpp"
-[else][if (not (pack.name='StandardProfile'))]
+[else]
 #include "[pack.getPackageName()/]/[pack.name.concat('Package').toUpperFirst()/].hpp"
-[/if][/if]
 [/if]
-[if (not((pack.name = keyUML()) or (pack.name='Ecore') or (pack.name='PrimitiveTypes') or (pack.name='StandardProfile')))]
+[/if]
+[if (not((pack.name = keyUML()) or (pack.name='Ecore') or (pack.name='PrimitiveTypes')))]
 #include "[pack.getPackageName()/]/[pack.name.concat('Factory').toUpperFirst()/].hpp"
 [/if]
 [/for]
@@ -384,6 +384,7 @@ void [packageName/]::initializePackageValueSpecifications()
 }
 
 [(aPackage.allOwnedElements()->filter(NamedElement)-aPackage.allOwnedElements()->filter(ValueSpecification))->sortedBy(myQualifiedName()).generatePackageMemberGetterImpl()/]
+[(aPackage.allOwnedElements()->filter(ConnectorEnd)-aPackage.allOwnedElements()->filter(ValueSpecification))->sortedBy(myQualifiedName()).generatePackageMemberGetterImpl()/]
 
 [/file]
 [/template]

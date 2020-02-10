@@ -20,21 +20,34 @@
 
 #include "abstractDataTypes/Bag.hpp"
 
-#include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "PSCS/impl/PSCSPackageImpl.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/CS_Object.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/CS_Reference.hpp"
+#include "fUML/Semantics/StructuredClassifiers/Object.hpp"
+#include "fUML/FUMLFactory.hpp"
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "PSCS/PSCSFactory.hpp"
 #include "PSCS/PSCSPackage.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
 
 #include <exception> // used in Persistence
 
 #include "uml/Class.hpp"
+
+#include "fUML/Semantics/Loci/Executor.hpp"
+
+#include "fUML/Semantics/Loci/Locus.hpp"
+
+#include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
+
+#include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
 
 #include "ecore/EcorePackage.hpp"
 #include "ecore/EcoreFactory.hpp"
@@ -70,6 +83,16 @@ CS_ExecutorImpl::~CS_ExecutorImpl()
 }
 
 
+//Additional constructor for the containments back reference
+			CS_ExecutorImpl::CS_ExecutorImpl(std::weak_ptr<fUML::Semantics::Loci::Locus > par_locus)
+			:CS_ExecutorImpl()
+			{
+			    m_locus = par_locus;
+			}
+
+
+
+
 
 
 CS_ExecutorImpl::CS_ExecutorImpl(const CS_ExecutorImpl & obj):CS_ExecutorImpl()
@@ -81,6 +104,8 @@ CS_ExecutorImpl::CS_ExecutorImpl(const CS_ExecutorImpl & obj):CS_ExecutorImpl()
 
 	//copy references with no containment (soft copy)
 	
+	m_locus  = obj.getLocus();
+
 
 	//Clone references with containment (deep copy)
 
@@ -106,10 +131,36 @@ std::shared_ptr<ecore::EClass> CS_ExecutorImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-Any CS_ExecutorImpl::start(std::shared_ptr<uml::Class>  type,std::shared_ptr<Bag<Any> >  inputs)
+std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> CS_ExecutorImpl::start(std::shared_ptr<uml::Class>  type,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> >  inputs)
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+		// Instantiate the given class and start any behavior of the resulting
+	// object.
+	// (The behavior of an object includes any classifier behaviors for an
+	// active object or the class of the object itself, if that is a
+	// behavior.)
+	// fUML semantics is extended in the sense that when the instantiated object
+	// is a CS_Object, a CS_Reference is returned (instead of a Reference)
+	DEBUG_MESSAGE(std::cout << "[start] Starting " << type->getName() << "..." << std::endl;)
+	
+	std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> object = this->getLocus().lock()->instantiate(type);
+	
+	DEBUG_MESSAGE(std::cout << "[start] Object = " << object->toString() << std::endl;)
+	object->startBehavior(type, inputs);
+	
+	std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> reference;
+	if(std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Object>(object) != nullptr) {
+		reference = PSCS::PSCSFactory::eInstance()->createCS_Reference();
+		(std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(reference))->setCompositeReferent(std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Object>(object));
+	}
+	else {
+		reference = fUML::FUMLFactory::eInstance()->createReference();
+	}
+	reference->setReferent(object);
+	
+	return reference;
+	//end of body
 }
 
 //*********************************
@@ -128,9 +179,14 @@ std::shared_ptr<CS_Executor> CS_ExecutorImpl::getThisCS_ExecutorPtr() const
 void CS_ExecutorImpl::setThisCS_ExecutorPtr(std::weak_ptr<CS_Executor> thisCS_ExecutorPtr)
 {
 	m_thisCS_ExecutorPtr = thisCS_ExecutorPtr;
+	setThisExecutorPtr(thisCS_ExecutorPtr);
 }
 std::shared_ptr<ecore::EObject> CS_ExecutorImpl::eContainer() const
 {
+	if(auto wp = m_locus.lock())
+	{
+		return wp;
+	}
 	return nullptr;
 }
 
@@ -142,14 +198,14 @@ Any CS_ExecutorImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 	}
-	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
+	return fUML::Semantics::Loci::ExecutorImpl::eGet(featureID, resolve, coreType);
 }
 bool CS_ExecutorImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
 	}
-	return ecore::EObjectImpl::internalEIsSet(featureID);
+	return fUML::Semantics::Loci::ExecutorImpl::internalEIsSet(featureID);
 }
 bool CS_ExecutorImpl::eSet(int featureID, Any newValue)
 {
@@ -157,7 +213,7 @@ bool CS_ExecutorImpl::eSet(int featureID, Any newValue)
 	{
 	}
 
-	return ecore::EObjectImpl::eSet(featureID, newValue);
+	return fUML::Semantics::Loci::ExecutorImpl::eSet(featureID, newValue);
 }
 
 //*********************************
@@ -183,25 +239,26 @@ void CS_ExecutorImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler
 void CS_ExecutorImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
 
-	ecore::EObjectImpl::loadAttributes(loadHandler, attr_list);
+	fUML::Semantics::Loci::ExecutorImpl::loadAttributes(loadHandler, attr_list);
 }
 
 void CS_ExecutorImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<PSCS::PSCSFactory> modelFactory)
 {
 
 
-	ecore::EObjectImpl::loadNode(nodeName, loadHandler, ecore::EcoreFactory::eInstance());
+	fUML::Semantics::Loci::ExecutorImpl::loadNode(nodeName, loadHandler, fUML::FUMLFactory::eInstance());
 }
 
 void CS_ExecutorImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
-	ecore::EObjectImpl::resolveReferences(featureID, references);
+	fUML::Semantics::Loci::ExecutorImpl::resolveReferences(featureID, references);
 }
 
 void CS_ExecutorImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	saveContent(saveHandler);
 
+	fUML::Semantics::Loci::ExecutorImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
 	

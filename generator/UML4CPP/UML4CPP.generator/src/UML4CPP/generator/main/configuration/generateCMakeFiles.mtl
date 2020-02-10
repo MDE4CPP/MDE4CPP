@@ -71,6 +71,9 @@ SET(SOURCE_FILES
 	[aClass.name.toUpperFirst()/].cpp
 [/if]
 [/for]
+[for (anInterface : Interface | aPackage.allOwnedElements()->filter(Interface)->sortedBy(myQualifiedName()))]
+	impl/[anInterface.name.toUpperFirst()/]Impl.cpp
+[/for]
 [/if]
 )
 

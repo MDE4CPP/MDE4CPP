@@ -15,8 +15,6 @@
 // forward declarations
 
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -48,6 +46,21 @@ namespace PSCS::Semantics::StructuredClassifiers
 	class CS_Object;
 }
 
+namespace fUML::Semantics::CommonBehavior 
+{
+	class EventOccurrence;
+}
+
+namespace fUML::Semantics::CommonBehavior 
+{
+	class Execution;
+}
+
+namespace fUML::Semantics::StructuredClassifiers 
+{
+	class Object;
+}
+
 namespace uml 
 {
 	class Operation;
@@ -58,19 +71,28 @@ namespace uml
 	class Port;
 }
 
+namespace fUML::Semantics::StructuredClassifiers 
+{
+	class Reference;
+}
+
+namespace fUML::Semantics::Values 
+{
+	class Value;
+}
+
 // base class includes
+#include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
 
 // enum includes
 
-#include "ecore/EObject.hpp"
 
 //*********************************
 namespace PSCS::Semantics::StructuredClassifiers 
 {
 	/*!
 	 */
-	class CS_Reference : virtual public ecore::EObject 
-
+	class CS_Reference:virtual public fUML::Semantics::StructuredClassifiers::Reference
 	{
 		public:
  			CS_Reference(const CS_Reference &) {}
@@ -89,41 +111,39 @@ namespace PSCS::Semantics::StructuredClassifiers
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
-			virtual Any copy() = 0;
+			
 			
 			/*!
 			 */ 
-			virtual Any dispatchIn(std::shared_ptr<uml::Operation>  operation,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint>  interactionPoint) = 0;
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> dispatchIn(std::shared_ptr<uml::Operation>  operation,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint>  interactionPoint) = 0;
 			
 			/*!
 			 */ 
-			virtual Any dispatchIn(std::shared_ptr<uml::Operation>  operation,std::shared_ptr<uml::Port>  onPort) = 0;
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> dispatchIn(std::shared_ptr<uml::Operation>  operation,std::shared_ptr<uml::Port>  onPort) = 0;
 			
 			/*!
 			 */ 
-			virtual Any dispatchOut(std::shared_ptr<uml::Operation>  operation,std::shared_ptr<uml::Port>  onPort) = 0;
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> dispatchOut(std::shared_ptr<uml::Operation>  operation,std::shared_ptr<uml::Port>  onPort) = 0;
 			
 			/*!
 			 */ 
-			virtual Any dispatchOut(std::shared_ptr<uml::Operation>  operation,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint>  interactionPoint) = 0;
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> dispatchOut(std::shared_ptr<uml::Operation>  operation,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint>  interactionPoint) = 0;
 			
 			/*!
 			 */ 
-			virtual void sendIn(Any eventOccurrence,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint>  interactionPoint) = 0;
+			virtual void sendIn(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>  eventOccurrence,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint>  interactionPoint) = 0;
 			
 			/*!
 			 */ 
-			virtual void sendIn(Any eventOccurrence,std::shared_ptr<uml::Port>  onPort) = 0;
+			virtual void sendIn(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>  eventOccurrence,std::shared_ptr<uml::Port>  onPort) = 0;
 			
 			/*!
 			 */ 
-			virtual void sendOut(Any eventOccurrence,std::shared_ptr<uml::Port>  onPort) = 0;
+			virtual void sendOut(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>  eventOccurrence,std::shared_ptr<uml::Port>  onPort) = 0;
 			
 			/*!
 			 */ 
-			virtual void sendOut(Any eventOccurrence,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint>  interactionPoint) = 0;
+			virtual void sendOut(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>  eventOccurrence,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint>  interactionPoint) = 0;
 			
 			
 			//*********************************

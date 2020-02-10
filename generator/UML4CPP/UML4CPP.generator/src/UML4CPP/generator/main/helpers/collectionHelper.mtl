@@ -22,6 +22,7 @@
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::keywords /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
+
  
 [**
  * query to collect all related packages, which are used by current model
@@ -42,13 +43,14 @@
  * 
  * 
 */]
+
 [query private collectModelIncludes(aPackage : Package) : Set(Package) = OrderedSet{
 																		aPackage.member->filter(Class).attribute.type.getNearestPackage(),
-																		aPackage.member->filter(Class).attribute.getAppliedStereotypes().getNearestPackage(),
 																		aPackage.member->filter(Class).ownedOperation.ownedParameter.type->reject(oclIsUndefined()).getNearestPackage(),
 																		aPackage.member->filter(Class).interfaceRealization.supplier->reject(oclIsUndefined()).getNearestPackage(),
+																		aPackage.allOwnedElements().getAppliedStereotypes()._package,
+																		aPackage.getAppliedStereotypes()._package
 																		aPackage.member->filter(Class).generalization.general->reject(oclIsUndefined()).getNearestPackage(),
-																		aPackage.member->filter(Dependency).getAppliedStereotypes().getNearestPackage(),
 																		aPackage.packageImport.importedPackage
 																	}->flatten()->reject(oclIsUndefined())->reject(pack : Package | (pack = aPackage) or pack.isReflectionModel()) /]
 
@@ -76,9 +78,9 @@
  *  otherwise 'collectIncludingModelNamesForNonReflectionModels' is used
 */]
 [query public collectIncludingModelNames(aPackage : Package) : Set(String) = if (aPackage.isReflectionModel()) then collectIncludingModelNamesForReflectionModels() else collectIncludingModelNamesForNonReflectionModels() endif/]
-
+leo
 [**
- * query to collect model classes, which are relevant for create functions in model factory
+ * query to collect model classes and interfaces, which are relevant for create functions in model factory
  * 
  * This are all classes of the model except abstract classes and classes with active singleton annotation.
  * The resulting class list is sorted by myQualifiedName.
@@ -87,3 +89,4 @@
 [query public collectModelClassesForFactoryFunctions(aPackage : Package) : OrderedSet(Class) = collectModelClassesForFactoryInternal(aPackage)->addAll(collectModelStereotypesForFactory(aPackage))->reject(isSingleton() or isAbstract = true)->sortedBy(myQualifiedName()) /]
 [query private collectModelStereotypesForFactory(aPackage : Package) : Set(Class) = aPackage.ownedMember->selectByType(Stereotype) /]
 [query private collectModelClassesForFactoryInternal(aPackage : Package) : Set(Class) = aPackage.ownedMember->selectByType(Class) /]
+[query public collectModelInterfacesForFactory(aPackage : Package) : OrderedSet(Interface) = aPackage.ownedMember->selectByType(Interface)->reject(isSingleton() or isAbstract = true)->sortedBy(myQualifiedName()) /]

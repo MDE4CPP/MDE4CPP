@@ -24,20 +24,73 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "PSCS/impl/PSCSPackageImpl.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "fUML/Semantics/StructuredClassifiers/ExtensionalValue.hpp"
+
+#include "uml/ReadExtentAction.hpp"
+#include "uml/AddStructuralFeatureValueAction.hpp"
+#include "uml/ClearStructuralFeatureAction.hpp"
+#include "uml/CreateLinkAction.hpp"
+#include "uml/CreateObjectAction.hpp"
+#include "uml/ReadSelfAction.hpp"
+#include "uml/AcceptCallAction.hpp"
+#include "uml/InstanceValue.hpp"
+#include "uml/AcceptEventAction.hpp"
+#include "uml/CallOperationAction.hpp"
+#include "uml/SendSignalAction.hpp"
+#include "uml/OpaqueExpression.hpp"
+#include "uml/RemoveStructuralFeatureValueAction.hpp"
+#include "uml/Classifier.hpp"
+#include "fUML/Semantics/CommonBehavior/CallEventBehavior.hpp"
+
+#include "PSCS/Semantics/Actions/CS_ReadExtentActionActivation.hpp"
+#include "PSCS/Semantics/Actions/CS_AddStructuralFeatureValueActionActivation.hpp"
+#include "PSCS/Semantics/Actions/CS_ClearStructuralFeatureActionActivation.hpp"
+#include "PSCS/Semantics/Actions/CS_CreateLinkActionActivation.hpp"
+#include "PSCS/Semantics/Actions/CS_CreateObjectActionActivation.hpp"
+#include "PSCS/Semantics/Actions/CS_ReadSelfActionActivation.hpp"
+#include "PSCS/Semantics/Actions/CS_AcceptCallActionActivation.hpp"
+#include "PSCS/Semantics/Classification/CS_InstanceValueEvaluation.hpp"
+#include "PSCS/Semantics/Actions/CS_AcceptEventActionActivation.hpp"
+#include "PSCS/Semantics/Actions/CS_CallOperationActionActivation.hpp"
+#include "PSCS/Semantics/Actions/CS_SendSignalActionActivation.hpp"
+#include "PSCS/Semantics/Actions/CS_RemoveStructuralFeatureValueActionActivation.hpp"
+#include "PSCS/Semantics/Values/CS_OpaqueExpressionEvaluation.hpp"
+#include "PSCS/Semantics/CommonBehavior/CS_CallEventExecution.hpp"
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "PSCS/PSCSFactory.hpp"
 #include "PSCS/PSCSPackage.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
 
 #include <exception> // used in Persistence
 
 #include "uml/Class.hpp"
 
+#include "uml/Classifier.hpp"
+
 #include "uml/Element.hpp"
 
+#include "fUML/Semantics/Loci/ExecutionFactory.hpp"
+
+#include "fUML/Semantics/Loci/Locus.hpp"
+
+#include "fUML/Semantics/StructuredClassifiers/Object.hpp"
+
+#include "fUML/Semantics/CommonBehavior/OpaqueBehaviorExecution.hpp"
+
 #include "uml/Package.hpp"
+
+#include "uml/PrimitiveType.hpp"
+
+#include "fUML/Semantics/Loci/SemanticStrategy.hpp"
+
+#include "fUML/Semantics/Loci/SemanticVisitor.hpp"
 
 #include "ecore/EcorePackage.hpp"
 #include "ecore/EcoreFactory.hpp"
@@ -78,6 +131,16 @@ CS_ExecutionFactoryImpl::~CS_ExecutionFactoryImpl()
 }
 
 
+//Additional constructor for the containments back reference
+			CS_ExecutionFactoryImpl::CS_ExecutionFactoryImpl(std::weak_ptr<fUML::Semantics::Loci::Locus > par_locus)
+			:CS_ExecutionFactoryImpl()
+			{
+			    m_locus = par_locus;
+			}
+
+
+
+
 
 
 CS_ExecutionFactoryImpl::CS_ExecutionFactoryImpl(const CS_ExecutionFactoryImpl & obj):CS_ExecutionFactoryImpl()
@@ -91,6 +154,17 @@ CS_ExecutionFactoryImpl::CS_ExecutionFactoryImpl(const CS_ExecutionFactoryImpl &
 	
 	std::shared_ptr<Bag<uml::Package>> _appliedProfiles = obj.getAppliedProfiles();
 	m_appliedProfiles.reset(new Bag<uml::Package>(*(obj.getAppliedProfiles().get())));
+
+	std::shared_ptr<Bag<uml::PrimitiveType>> _builtInTypes = obj.getBuiltInTypes();
+	m_builtInTypes.reset(new Bag<uml::PrimitiveType>(*(obj.getBuiltInTypes().get())));
+
+	m_locus  = obj.getLocus();
+
+	std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution>> _primitiveBehaviorPrototypes = obj.getPrimitiveBehaviorPrototypes();
+	m_primitiveBehaviorPrototypes.reset(new Bag<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution>(*(obj.getPrimitiveBehaviorPrototypes().get())));
+
+	std::shared_ptr<Bag<fUML::Semantics::Loci::SemanticStrategy>> _strategies = obj.getStrategies();
+	m_strategies.reset(new Bag<fUML::Semantics::Loci::SemanticStrategy>(*(obj.getStrategies().get())));
 
 
 	//Clone references with containment (deep copy)
@@ -117,22 +191,121 @@ std::shared_ptr<ecore::EClass> CS_ExecutionFactoryImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-Any CS_ExecutionFactoryImpl::getStereotypeApplication(std::shared_ptr<uml::Class>  stereotype,std::shared_ptr<uml::Element>  element)
+std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> CS_ExecutionFactoryImpl::getStereotypeApplication(std::shared_ptr<uml::Class>  stereotype,std::shared_ptr<uml::Element>  element)
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+			std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>> extent = this->getLocus().lock()->retrieveExtent(stereotype);
+	std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> extensionObject = nullptr;
+	unsigned int i = 1;
+	while((i <= extent->size()) && (extensionObject == nullptr)) {
+		std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> object = extent->at(i-1);
+		
+	//Aktuell nicht funktionfähig, unbekannte Variable "baseEnd"
+		/*if(object->retrieveFeatureValue(baseEnd)->getValues()->at(0)->equals(element)) {
+			extensionObject = dynamic_pointer_cast<fUML::Object>(object);
+		}*/
+		i++;
+	}
+	return extensionObject;
+	//end of body
 }
 
-std::shared_ptr<uml::Class> CS_ExecutionFactoryImpl::getStereotypeClass(std::string profileName,std::string stereotypeName)
+std::shared_ptr<uml::Classifier> CS_ExecutionFactoryImpl::getStereotypeClass(std::string profileName,std::string stereotypeName)
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	return nullptr;
+	//end of body
 }
 
-Any CS_ExecutionFactoryImpl::instantiateVisitor(std::shared_ptr<uml::Element>  element)
+std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> CS_ExecutionFactoryImpl::instantiateVisitor(std::shared_ptr<uml::Element>  element)
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+		// Extends fUML semantics in the sense that newly introduced 
+	// semantic visitors are instantiated instead of fUML visitors
+	std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> visitor = nullptr;
+	
+	if(std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::CallEventBehavior>(element) != nullptr) {
+		return PSCS::PSCSFactory::eInstance()->createCS_CallEventExecution();
+	}
+	
+	switch(element->eClass()->getClassifierID())
+	{
+		case uml::UmlPackage::READEXTENTACTION_CLASS: 
+		{
+			visitor = PSCS::PSCSFactory::eInstance()->createCS_ReadExtentActionActivation();
+			break;
+		}
+		case uml::UmlPackage::ADDSTRUCTURALFEATUREVALUEACTION_CLASS:
+		{
+			visitor = PSCS::PSCSFactory::eInstance()->createCS_AddStructuralFeatureValueActionActivation();
+			break;
+		}
+		case uml::UmlPackage::CLEARSTRUCTURALFEATUREACTION_CLASS:
+		{
+			visitor = PSCS::PSCSFactory::eInstance()->createCS_ClearStructuralFeatureActionActivation();
+			break;
+		}
+		case uml::UmlPackage::CREATELINKACTION_CLASS:
+		{
+			visitor = PSCS::PSCSFactory::eInstance()->createCS_CreateLinkActionActivation();
+			break;
+		}
+		case uml::UmlPackage::CREATEOBJECTACTION_CLASS:
+		{
+			visitor = PSCS::PSCSFactory::eInstance()->createCS_CreateObjectActionActivation();
+			break;
+		}
+		case uml::UmlPackage::READSELFACTION_CLASS:
+		{
+			visitor = PSCS::PSCSFactory::eInstance()->createCS_ReadSelfActionActivation();
+			break;
+		}
+		case uml::UmlPackage::ACCEPTCALLACTION_CLASS:
+		{
+			visitor = PSCS::PSCSFactory::eInstance()->createCS_AcceptCallActionActivation();
+			break;
+		}
+		case uml::UmlPackage::INSTANCEVALUE_CLASS:
+		{
+			visitor = PSCS::PSCSFactory::eInstance()->createCS_InstanceValueEvaluation();
+			break;
+		}
+		case uml::UmlPackage::ACCEPTEVENTACTION_CLASS: 
+		{
+			visitor = PSCS::PSCSFactory::eInstance()->createCS_AcceptEventActionActivation();
+			break;
+		}
+		case uml::UmlPackage::CALLOPERATIONACTION_CLASS:
+		{
+			visitor = PSCS::PSCSFactory::eInstance()->createCS_CallOperationActionActivation();
+			break;
+		}
+		case uml::UmlPackage::SENDSIGNALACTION_CLASS:
+		{
+			visitor = PSCS::PSCSFactory::eInstance()->createCS_SendSignalActionActivation();
+			break;
+		}
+		case uml::UmlPackage::OPAQUEEXPRESSION_CLASS:
+		{
+			visitor = PSCS::PSCSFactory::eInstance()->createCS_OpaqueExpressionEvaluation();
+			break;
+		}
+		case uml::UmlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_CLASS:
+		{
+			visitor = PSCS::PSCSFactory::eInstance()->createCS_RemoveStructuralFeatureValueActionActivation();
+			break;
+		}
+		default:
+		{
+			visitor = fUML::Semantics::Loci::ExecutionFactoryImpl::instantiateVisitor(element);
+		}
+	}
+
+	return visitor;
+	//end of body
 }
 
 //*********************************
@@ -157,9 +330,14 @@ std::shared_ptr<CS_ExecutionFactory> CS_ExecutionFactoryImpl::getThisCS_Executio
 void CS_ExecutionFactoryImpl::setThisCS_ExecutionFactoryPtr(std::weak_ptr<CS_ExecutionFactory> thisCS_ExecutionFactoryPtr)
 {
 	m_thisCS_ExecutionFactoryPtr = thisCS_ExecutionFactoryPtr;
+	setThisExecutionFactoryPtr(thisCS_ExecutionFactoryPtr);
 }
 std::shared_ptr<ecore::EObject> CS_ExecutionFactoryImpl::eContainer() const
 {
+	if(auto wp = m_locus.lock())
+	{
+		return wp;
+	}
 	return nullptr;
 }
 
@@ -180,19 +358,19 @@ Any CS_ExecutionFactoryImpl::eGet(int featureID, bool resolve, bool coreType) co
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //140
+			return eAny(tempList); //144
 		}
 	}
-	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
+	return fUML::Semantics::Loci::ExecutionFactoryImpl::eGet(featureID, resolve, coreType);
 }
 bool CS_ExecutionFactoryImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
 		case PSCS::PSCSPackage::CS_EXECUTIONFACTORY_ATTRIBUTE_APPLIEDPROFILES:
-			return getAppliedProfiles() != nullptr; //140
+			return getAppliedProfiles() != nullptr; //144
 	}
-	return ecore::EObjectImpl::internalEIsSet(featureID);
+	return fUML::Semantics::Loci::ExecutionFactoryImpl::internalEIsSet(featureID);
 }
 bool CS_ExecutionFactoryImpl::eSet(int featureID, Any newValue)
 {
@@ -236,7 +414,7 @@ bool CS_ExecutionFactoryImpl::eSet(int featureID, Any newValue)
 		}
 	}
 
-	return ecore::EObjectImpl::eSet(featureID, newValue);
+	return fUML::Semantics::Loci::ExecutionFactoryImpl::eSet(featureID, newValue);
 }
 
 //*********************************
@@ -281,14 +459,14 @@ void CS_ExecutionFactoryImpl::loadAttributes(std::shared_ptr<persistence::interf
 		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
 	}
 
-	ecore::EObjectImpl::loadAttributes(loadHandler, attr_list);
+	fUML::Semantics::Loci::ExecutionFactoryImpl::loadAttributes(loadHandler, attr_list);
 }
 
 void CS_ExecutionFactoryImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<PSCS::PSCSFactory> modelFactory)
 {
 
 
-	ecore::EObjectImpl::loadNode(nodeName, loadHandler, ecore::EcoreFactory::eInstance());
+	fUML::Semantics::Loci::ExecutionFactoryImpl::loadNode(nodeName, loadHandler, fUML::FUMLFactory::eInstance());
 }
 
 void CS_ExecutionFactoryImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
@@ -309,13 +487,14 @@ void CS_ExecutionFactoryImpl::resolveReferences(const int featureID, std::list<s
 			return;
 		}
 	}
-	ecore::EObjectImpl::resolveReferences(featureID, references);
+	fUML::Semantics::Loci::ExecutionFactoryImpl::resolveReferences(featureID, references);
 }
 
 void CS_ExecutionFactoryImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	saveContent(saveHandler);
 
+	fUML::Semantics::Loci::ExecutionFactoryImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
 	

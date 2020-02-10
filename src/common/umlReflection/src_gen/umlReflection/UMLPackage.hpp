@@ -20,6 +20,7 @@ namespace uml
 	class Parameter;
 	class PrimitiveType;
 	class Property;
+	class ConnectorEnd;
 }
 
 namespace UML 
@@ -3294,6 +3295,7 @@ namespace UML
 			virtual std::shared_ptr<uml::Constraint> get_UML_WriteVariableAction_multiplicity() = 0;  
 			virtual std::shared_ptr<uml::Property> get_UML_WriteVariableAction_value() = 0;  
 			virtual std::shared_ptr<uml::Constraint> get_UML_WriteVariableAction_value_type() = 0;  
+			
 			
 
 			//Singleton Instance and Getter

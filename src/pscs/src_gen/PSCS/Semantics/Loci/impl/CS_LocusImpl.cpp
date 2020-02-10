@@ -18,11 +18,15 @@
 #include <iostream>
 #include <sstream>
 
+#include "abstractDataTypes/Bag.hpp"
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "PSCS/impl/PSCSPackageImpl.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "uml/Behavior.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/CS_Object.hpp"
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -33,6 +37,16 @@
 #include <exception> // used in Persistence
 
 #include "uml/Class.hpp"
+
+#include "fUML/Semantics/Loci/ExecutionFactory.hpp"
+
+#include "fUML/Semantics/Loci/Executor.hpp"
+
+#include "fUML/Semantics/StructuredClassifiers/ExtensionalValue.hpp"
+
+#include "fUML/Semantics/Loci/Locus.hpp"
+
+#include "fUML/Semantics/StructuredClassifiers/Object.hpp"
 
 #include "ecore/EcorePackage.hpp"
 #include "ecore/EcoreFactory.hpp"
@@ -82,6 +96,28 @@ CS_LocusImpl::CS_LocusImpl(const CS_LocusImpl & obj):CS_LocusImpl()
 
 	//Clone references with containment (deep copy)
 
+	if(obj.getExecutor()!=nullptr)
+	{
+		m_executor = std::dynamic_pointer_cast<fUML::Semantics::Loci::Executor>(obj.getExecutor()->copy());
+	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_executor" << std::endl;
+	#endif
+	std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>> _extensionalValuesList = obj.getExtensionalValues();
+	for(std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> _extensionalValues : *_extensionalValuesList)
+	{
+		this->getExtensionalValues()->add(std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue>(std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::ExtensionalValue>(_extensionalValues->copy())));
+	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_extensionalValues" << std::endl;
+	#endif
+	if(obj.getFactory()!=nullptr)
+	{
+		m_factory = std::dynamic_pointer_cast<fUML::Semantics::Loci::ExecutionFactory>(obj.getFactory()->copy());
+	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_factory" << std::endl;
+	#endif
 
 }
 
@@ -104,10 +140,25 @@ std::shared_ptr<ecore::EClass> CS_LocusImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-Any CS_LocusImpl::instantiate(std::shared_ptr<uml::Class>  type)
+std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> CS_LocusImpl::instantiate(std::shared_ptr<uml::Class>  type)
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+		// Extends fUML semantics by instantiating a CS_Object
+	// in the case where type is not a Behavior.
+	// Otherwise behaves like in fUML
+	std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> object = nullptr;
+	if(std::dynamic_pointer_cast<uml::Behavior>(type) != nullptr) {
+		object = fUML::Semantics::Loci::LocusImpl::instantiate(type);
+	}
+	else  {
+		object = PSCS::PSCSFactory::eInstance()->createCS_Object();
+		object->getTypes()->add(type);
+		object->createFeatureValues();
+		this->add(object);
+	}
+	return object;
+	//end of body
 }
 
 //*********************************
@@ -126,6 +177,7 @@ std::shared_ptr<CS_Locus> CS_LocusImpl::getThisCS_LocusPtr() const
 void CS_LocusImpl::setThisCS_LocusPtr(std::weak_ptr<CS_Locus> thisCS_LocusPtr)
 {
 	m_thisCS_LocusPtr = thisCS_LocusPtr;
+	setThisLocusPtr(thisCS_LocusPtr);
 }
 std::shared_ptr<ecore::EObject> CS_LocusImpl::eContainer() const
 {
@@ -140,14 +192,14 @@ Any CS_LocusImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 	}
-	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
+	return fUML::Semantics::Loci::LocusImpl::eGet(featureID, resolve, coreType);
 }
 bool CS_LocusImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
 	}
-	return ecore::EObjectImpl::internalEIsSet(featureID);
+	return fUML::Semantics::Loci::LocusImpl::internalEIsSet(featureID);
 }
 bool CS_LocusImpl::eSet(int featureID, Any newValue)
 {
@@ -155,7 +207,7 @@ bool CS_LocusImpl::eSet(int featureID, Any newValue)
 	{
 	}
 
-	return ecore::EObjectImpl::eSet(featureID, newValue);
+	return fUML::Semantics::Loci::LocusImpl::eSet(featureID, newValue);
 }
 
 //*********************************
@@ -181,25 +233,26 @@ void CS_LocusImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> l
 void CS_LocusImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
 
-	ecore::EObjectImpl::loadAttributes(loadHandler, attr_list);
+	fUML::Semantics::Loci::LocusImpl::loadAttributes(loadHandler, attr_list);
 }
 
 void CS_LocusImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<PSCS::PSCSFactory> modelFactory)
 {
 
 
-	ecore::EObjectImpl::loadNode(nodeName, loadHandler, ecore::EcoreFactory::eInstance());
+	fUML::Semantics::Loci::LocusImpl::loadNode(nodeName, loadHandler, fUML::FUMLFactory::eInstance());
 }
 
 void CS_LocusImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
-	ecore::EObjectImpl::resolveReferences(featureID, references);
+	fUML::Semantics::Loci::LocusImpl::resolveReferences(featureID, references);
 }
 
 void CS_LocusImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	saveContent(saveHandler);
 
+	fUML::Semantics::Loci::LocusImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
 	

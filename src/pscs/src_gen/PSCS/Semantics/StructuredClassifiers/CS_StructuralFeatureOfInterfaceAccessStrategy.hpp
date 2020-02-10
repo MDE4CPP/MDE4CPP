@@ -16,8 +16,6 @@
 template<class T> class Bag;
 
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -44,24 +42,38 @@ namespace PSCS::Semantics::StructuredClassifiers
 	class CS_Object;
 }
 
+namespace fUML::Semantics::SimpleClassifiers 
+{
+	class FeatureValue;
+}
+
+namespace fUML::Semantics::Loci 
+{
+	class SemanticStrategy;
+}
+
 namespace uml 
 {
 	class StructuralFeature;
 }
 
+namespace fUML::Semantics::Values 
+{
+	class Value;
+}
+
 // base class includes
+#include "fUML/Semantics/Loci/SemanticStrategy.hpp"
 
 // enum includes
 
-#include "ecore/EObject.hpp"
 
 //*********************************
 namespace PSCS::Semantics::StructuredClassifiers 
 {
 	/*!
 	 */
-	class CS_StructuralFeatureOfInterfaceAccessStrategy : virtual public ecore::EObject 
-
+	class CS_StructuralFeatureOfInterfaceAccessStrategy:virtual public fUML::Semantics::Loci::SemanticStrategy
 	{
 		public:
  			CS_StructuralFeatureOfInterfaceAccessStrategy(const CS_StructuralFeatureOfInterfaceAccessStrategy &) {}
@@ -86,11 +98,11 @@ namespace PSCS::Semantics::StructuredClassifiers
 			
 			/*!
 			 */ 
-			virtual Any read(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object>  cs_Object,std::shared_ptr<uml::StructuralFeature>  feature) = 0;
+			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> read(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object>  cs_Object,std::shared_ptr<uml::StructuralFeature>  feature) = 0;
 			
 			/*!
 			 */ 
-			virtual void write(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object>  cs_Object,std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<Bag<Any> >  values,int position) = 0;
+			virtual void write(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object>  cs_Object,std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<Bag<fUML::Semantics::Values::Value> >  values,int position) = 0;
 			
 			
 			//*********************************

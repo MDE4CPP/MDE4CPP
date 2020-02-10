@@ -18,21 +18,46 @@
 #include <iostream>
 #include <sstream>
 
-
-#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/Union.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "PSCS/impl/PSCSPackageImpl.hpp"
+#include "PSCS/Semantics/CommonBehavior/CS_EventOccurrence.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "PSCS/PSCSFactory.hpp"
 #include "PSCS/PSCSPackage.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
 
 #include <exception> // used in Persistence
 
+#include "fUML/Semantics/Actions/AcceptCallActionActivation.hpp"
+
+#include "fUML/Semantics/Actions/AcceptEventActionEventAccepter.hpp"
+
+#include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
+
+#include "uml/ActivityNode.hpp"
+
+#include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
+
+#include "fUML/Semantics/CommonBehavior/EventOccurrence.hpp"
+
+#include "fUML/Semantics/Actions/InputPinActivation.hpp"
+
+#include "fUML/Semantics/Actions/OutputPinActivation.hpp"
+
+#include "fUML/Semantics/Actions/PinActivation.hpp"
+
+#include "fUML/Semantics/Activities/Token.hpp"
 
 #include "ecore/EcorePackage.hpp"
 #include "ecore/EcoreFactory.hpp"
@@ -68,6 +93,16 @@ CS_AcceptCallActionActivationImpl::~CS_AcceptCallActionActivationImpl()
 }
 
 
+//Additional constructor for the containments back reference
+			CS_AcceptCallActionActivationImpl::CS_AcceptCallActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
+			:CS_AcceptCallActionActivationImpl()
+			{
+			    m_group = par_group;
+			}
+
+
+
+
 
 
 CS_AcceptCallActionActivationImpl::CS_AcceptCallActionActivationImpl(const CS_AcceptCallActionActivationImpl & obj):CS_AcceptCallActionActivationImpl()
@@ -76,12 +111,54 @@ CS_AcceptCallActionActivationImpl::CS_AcceptCallActionActivationImpl(const CS_Ac
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy CS_AcceptCallActionActivation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	m_firing = obj.isFiring();
+	m_running = obj.isRunning();
+	m_waiting = obj.isWaiting();
 
 	//copy references with no containment (soft copy)
 	
+	m_eventAccepter  = obj.getEventAccepter();
+
+	m_group  = obj.getGroup();
+
+	std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> _incomingEdges = obj.getIncomingEdges();
+	m_incomingEdges.reset(new Bag<fUML::Semantics::Activities::ActivityEdgeInstance>(*(obj.getIncomingEdges().get())));
+
+	m_node  = obj.getNode();
+
+	std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> _outgoingEdges = obj.getOutgoingEdges();
+	m_outgoingEdges.reset(new Bag<fUML::Semantics::Activities::ActivityEdgeInstance>(*(obj.getOutgoingEdges().get())));
+
+	std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> _pinActivation = obj.getPinActivation();
+	m_pinActivation.reset(new Union<fUML::Semantics::Actions::PinActivation>(*(obj.getPinActivation().get())));
+
 
 	//Clone references with containment (deep copy)
 
+	std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> _heldTokensList = obj.getHeldTokens();
+	for(std::shared_ptr<fUML::Semantics::Activities::Token> _heldTokens : *_heldTokensList)
+	{
+		this->getHeldTokens()->add(std::shared_ptr<fUML::Semantics::Activities::Token>(std::dynamic_pointer_cast<fUML::Semantics::Activities::Token>(_heldTokens->copy())));
+	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_heldTokens" << std::endl;
+	#endif
+	std::shared_ptr<Bag<fUML::Semantics::Actions::InputPinActivation>> _inputPinActivationList = obj.getInputPinActivation();
+	for(std::shared_ptr<fUML::Semantics::Actions::InputPinActivation> _inputPinActivation : *_inputPinActivationList)
+	{
+		this->getInputPinActivation()->add(std::shared_ptr<fUML::Semantics::Actions::InputPinActivation>(std::dynamic_pointer_cast<fUML::Semantics::Actions::InputPinActivation>(_inputPinActivation->copy())));
+	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_inputPinActivation" << std::endl;
+	#endif
+	std::shared_ptr<Bag<fUML::Semantics::Actions::OutputPinActivation>> _outputPinActivationList = obj.getOutputPinActivation();
+	for(std::shared_ptr<fUML::Semantics::Actions::OutputPinActivation> _outputPinActivation : *_outputPinActivationList)
+	{
+		this->getOutputPinActivation()->add(std::shared_ptr<fUML::Semantics::Actions::OutputPinActivation>(std::dynamic_pointer_cast<fUML::Semantics::Actions::OutputPinActivation>(_outputPinActivation->copy())));
+	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_outputPinActivation" << std::endl;
+	#endif
 
 }
 
@@ -104,10 +181,20 @@ std::shared_ptr<ecore::EClass> CS_AcceptCallActionActivationImpl::eStaticClass()
 //*********************************
 // Operations
 //*********************************
-void CS_AcceptCallActionActivationImpl::accept(Any eventOccurrence)
+void CS_AcceptCallActionActivationImpl::accept(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>  eventOccurrence)
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+		// If the accepted event occurrence is a CS_EventOccurrence then the wrapped
+	// event occurrence is extracted. The acceptance process is the one define
+	// by AcceptCallActionActivation defined in fUML.
+	if(std::dynamic_pointer_cast<PSCS::Semantics::CommonBehavior::CS_EventOccurrence>(eventOccurrence) != nullptr) {
+		fUML::Semantics::Actions::AcceptCallActionActivationImpl::accept((std::dynamic_pointer_cast<PSCS::Semantics::CommonBehavior::CS_EventOccurrence>(eventOccurrence))->getWrappedEventOccurrence());
+	}
+	else {
+		fUML::Semantics::Actions::AcceptCallActionActivationImpl::accept(eventOccurrence);
+	}
+	//end of body
 }
 
 //*********************************
@@ -117,6 +204,10 @@ void CS_AcceptCallActionActivationImpl::accept(Any eventOccurrence)
 //*********************************
 // Union Getter
 //*********************************
+std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> CS_AcceptCallActionActivationImpl::getPinActivation() const
+{
+	return m_pinActivation;
+}
 
 
 std::shared_ptr<CS_AcceptCallActionActivation> CS_AcceptCallActionActivationImpl::getThisCS_AcceptCallActionActivationPtr() const
@@ -126,9 +217,14 @@ std::shared_ptr<CS_AcceptCallActionActivation> CS_AcceptCallActionActivationImpl
 void CS_AcceptCallActionActivationImpl::setThisCS_AcceptCallActionActivationPtr(std::weak_ptr<CS_AcceptCallActionActivation> thisCS_AcceptCallActionActivationPtr)
 {
 	m_thisCS_AcceptCallActionActivationPtr = thisCS_AcceptCallActionActivationPtr;
+	setThisAcceptCallActionActivationPtr(thisCS_AcceptCallActionActivationPtr);
 }
 std::shared_ptr<ecore::EObject> CS_AcceptCallActionActivationImpl::eContainer() const
 {
+	if(auto wp = m_group.lock())
+	{
+		return wp;
+	}
 	return nullptr;
 }
 
@@ -140,14 +236,14 @@ Any CS_AcceptCallActionActivationImpl::eGet(int featureID, bool resolve, bool co
 	switch(featureID)
 	{
 	}
-	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
+	return fUML::Semantics::Actions::AcceptCallActionActivationImpl::eGet(featureID, resolve, coreType);
 }
 bool CS_AcceptCallActionActivationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
 	}
-	return ecore::EObjectImpl::internalEIsSet(featureID);
+	return fUML::Semantics::Actions::AcceptCallActionActivationImpl::internalEIsSet(featureID);
 }
 bool CS_AcceptCallActionActivationImpl::eSet(int featureID, Any newValue)
 {
@@ -155,7 +251,7 @@ bool CS_AcceptCallActionActivationImpl::eSet(int featureID, Any newValue)
 	{
 	}
 
-	return ecore::EObjectImpl::eSet(featureID, newValue);
+	return fUML::Semantics::Actions::AcceptCallActionActivationImpl::eSet(featureID, newValue);
 }
 
 //*********************************
@@ -181,27 +277,40 @@ void CS_AcceptCallActionActivationImpl::load(std::shared_ptr<persistence::interf
 void CS_AcceptCallActionActivationImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
 
-	ecore::EObjectImpl::loadAttributes(loadHandler, attr_list);
+	fUML::Semantics::Actions::AcceptCallActionActivationImpl::loadAttributes(loadHandler, attr_list);
 }
 
 void CS_AcceptCallActionActivationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<PSCS::PSCSFactory> modelFactory)
 {
 
 
-	ecore::EObjectImpl::loadNode(nodeName, loadHandler, ecore::EcoreFactory::eInstance());
+	fUML::Semantics::Actions::AcceptCallActionActivationImpl::loadNode(nodeName, loadHandler, fUML::FUMLFactory::eInstance());
 }
 
 void CS_AcceptCallActionActivationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
-	ecore::EObjectImpl::resolveReferences(featureID, references);
+	fUML::Semantics::Actions::AcceptCallActionActivationImpl::resolveReferences(featureID, references);
 }
 
 void CS_AcceptCallActionActivationImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	saveContent(saveHandler);
 
+	fUML::Semantics::Actions::AcceptCallActionActivationImpl::saveContent(saveHandler);
+	
+	fUML::Semantics::Actions::AcceptEventActionActivationImpl::saveContent(saveHandler);
+	
+	fUML::Semantics::Actions::ActionActivationImpl::saveContent(saveHandler);
+	
+	fUML::Semantics::Activities::ActivityNodeActivationImpl::saveContent(saveHandler);
+	
+	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
+	
+	
+	
+	
 	
 }
 

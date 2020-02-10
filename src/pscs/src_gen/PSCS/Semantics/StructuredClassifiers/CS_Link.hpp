@@ -15,8 +15,6 @@
 // forward declarations
 
 
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
@@ -40,22 +38,46 @@ namespace PSCS
 //Forward Declaration for used types
 namespace uml 
 {
+	class Association;
+}
+
+namespace fUML::Semantics::SimpleClassifiers 
+{
+	class FeatureValue;
+}
+
+namespace fUML::Semantics::StructuredClassifiers 
+{
+	class Link;
+}
+
+namespace fUML::Semantics::Loci 
+{
+	class Locus;
+}
+
+namespace uml 
+{
 	class StructuralFeature;
 }
 
+namespace fUML::Semantics::Values 
+{
+	class Value;
+}
+
 // base class includes
+#include "fUML/Semantics/StructuredClassifiers/Link.hpp"
 
 // enum includes
 
-#include "ecore/EObject.hpp"
 
 //*********************************
 namespace PSCS::Semantics::StructuredClassifiers 
 {
 	/*!
 	 */
-	class CS_Link : virtual public ecore::EObject 
-
+	class CS_Link:virtual public fUML::Semantics::StructuredClassifiers::Link
 	{
 		public:
  			CS_Link(const CS_Link &) {}
@@ -76,11 +98,11 @@ namespace PSCS::Semantics::StructuredClassifiers
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<uml::StructuralFeature> getFeature(Any value) = 0;
+			virtual std::shared_ptr<uml::StructuralFeature> getFeature(std::shared_ptr<fUML::Semantics::Values::Value>  value) = 0;
 			
 			/*!
 			 */ 
-			virtual bool hasValueForAFeature(Any value) = 0;
+			virtual bool hasValueForAFeature(std::shared_ptr<fUML::Semantics::Values::Value>  value) = 0;
 			
 			
 			//*********************************

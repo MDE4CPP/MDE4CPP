@@ -25,10 +25,12 @@
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 
+[query private includes(aInterface : Interface) : Set(Type) = Set(Type){aInterface.ownedAttribute.type, aInterface.ownedOperation.ownedParameter.type}->flatten() /]
+
 [**
  * generate interface model file
 */]
-[template public generateInterfaceHeaderFile(aInterface : Interface) {aPackage:Package = aInterface.ancestors()->filter(Package)->first();}]
+[template public generateModel(aInterface : Interface) {aPackage:Package = aInterface.ancestors()->filter(Package)->first();}]
 [file (aPackage.getPackageName().concat('/').concat(aInterface.name).concat('.hpp'), false, 'UTF-8')]
 [startGuard(aInterface)/]
 
@@ -66,7 +68,7 @@
 [/for]
 
 // base class includes
-[if (aInterface.generalization.general->asBag()->isEmpty())]
+[if (aInterface.generalization->isEmpty())]
 #include "uml/Element.hpp"
 [else]
 [for (elements : Classifier| aInterface.generalization.general->asOrderedSet()->sortedBy(myQualifiedName()))]
@@ -86,7 +88,7 @@
 [if (not aInterface.getNearestPackage().ignoreNamespace())]namespace [aPackage.name/] 
 {
 [/if]
-	class [aInterface.name/] [if (aInterface.generalization.general->asBag()->isEmpty())] : virtual public uml::Element[else][for (aClassifier : Classifier | aInterface.generalization.general->asOrderedSet()->sortedBy(myQualifiedName())) before (':') separator (',') after ('\n')]
+	class [aInterface.name/] [if (aInterface.generalization->isEmpty())] : virtual public uml::[aInterface.getGeneralSuperClassName()/][else][for (aClassifier : Classifier | aInterface.generalization.general->asOrderedSet()->sortedBy(myQualifiedName())) before (':') separator (',') after ('\n')]
 virtual public [aClassifier.getClassifierName(aInterface, ignoreNamespace(aClassifier))/][/for][/if]
 
 	{

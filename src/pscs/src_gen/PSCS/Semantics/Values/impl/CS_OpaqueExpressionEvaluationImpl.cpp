@@ -23,6 +23,13 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "PSCS/impl/PSCSPackageImpl.hpp"
+#include "abstractDataTypes/Subset.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/Semantics/Loci/Locus.hpp"
+#include "fUML/Semantics/Loci/Executor.hpp"
+#include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
+#include "uml/OpaqueExpression.hpp"
+#include "uml/Behavior.hpp"
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -32,6 +39,13 @@
 
 #include <exception> // used in Persistence
 
+#include "fUML/Semantics/Values/Evaluation.hpp"
+
+#include "fUML/Semantics/Loci/Locus.hpp"
+
+#include "fUML/Semantics/Values/Value.hpp"
+
+#include "uml/ValueSpecification.hpp"
 
 #include "ecore/EcorePackage.hpp"
 #include "ecore/EcoreFactory.hpp"
@@ -78,6 +92,10 @@ CS_OpaqueExpressionEvaluationImpl::CS_OpaqueExpressionEvaluationImpl(const CS_Op
 
 	//copy references with no containment (soft copy)
 	
+	m_locus  = obj.getLocus();
+
+	m_specification  = obj.getSpecification();
+
 
 	//Clone references with containment (deep copy)
 
@@ -103,16 +121,59 @@ std::shared_ptr<ecore::EClass> CS_OpaqueExpressionEvaluationImpl::eStaticClass()
 //*********************************
 // Operations
 //*********************************
-Any CS_OpaqueExpressionEvaluationImpl::evaluate()
+std::shared_ptr<fUML::Semantics::Values::Value> CS_OpaqueExpressionEvaluationImpl::evaluate()
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+		// Execute the behavior associated with the context OpaqueExpression, if any.
+	// If multiple return values are computed, then return the first one.
+	// If no values are computed, return null
+
+	std::shared_ptr<Bag<fUML::Semantics::Values::Value>> evaluation = this->executeExpressionBehavior();
+
+	if(evaluation->size() > 0) {
+		return evaluation->at(0);
+	}
+	else {
+		return nullptr;
+	}
+	//end of body
 }
 
-std::shared_ptr<Bag<Any> > CS_OpaqueExpressionEvaluationImpl::executeExpressionBehavior()
+std::shared_ptr<Bag<fUML::Semantics::Values::Value> > CS_OpaqueExpressionEvaluationImpl::executeExpressionBehavior()
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+		// If a behavior is associated with the context OpaqueExpression,
+	// then execute this behavior, and return computed values.
+	// Otherwise, return an empty list of values.
+
+	std::shared_ptr<Bag<fUML::Semantics::Values::Value>> evaluation(new Bag<fUML::Semantics::Values::Value>());
+	std::shared_ptr<uml::OpaqueExpression> expression = std::dynamic_pointer_cast<uml::OpaqueExpression>(this->getSpecification());
+	std::shared_ptr<uml::Behavior> behavior = expression->getBehavior();
+
+	if(behavior != nullptr) {
+		std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> inputs (new Bag<fUML::Semantics::CommonBehavior::ParameterValue>());
+		std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> results = this->getLocus()->getExecutor()->execute(behavior, nullptr, inputs);
+
+		Bag<fUML::Semantics::CommonBehavior::ParameterValue>::const_iterator resultsIter;
+
+		for(resultsIter = results->begin(); resultsIter != results->end(); resultsIter++) {
+			std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> parameterValue = (*resultsIter);
+			std::shared_ptr<Bag<fUML::Semantics::Values::Value>> values = parameterValue->getValues();
+
+			Bag<fUML::Semantics::Values::Value>::const_iterator valuesIter;
+
+			for(valuesIter = values->begin(); valuesIter != values->end(); valuesIter++) {
+				evaluation->add((*valuesIter));
+			}
+
+		}
+
+	}
+
+	return evaluation;
+	//end of body
 }
 
 //*********************************
@@ -131,6 +192,7 @@ std::shared_ptr<CS_OpaqueExpressionEvaluation> CS_OpaqueExpressionEvaluationImpl
 void CS_OpaqueExpressionEvaluationImpl::setThisCS_OpaqueExpressionEvaluationPtr(std::weak_ptr<CS_OpaqueExpressionEvaluation> thisCS_OpaqueExpressionEvaluationPtr)
 {
 	m_thisCS_OpaqueExpressionEvaluationPtr = thisCS_OpaqueExpressionEvaluationPtr;
+	setThisEvaluationPtr(thisCS_OpaqueExpressionEvaluationPtr);
 }
 std::shared_ptr<ecore::EObject> CS_OpaqueExpressionEvaluationImpl::eContainer() const
 {
@@ -145,14 +207,14 @@ Any CS_OpaqueExpressionEvaluationImpl::eGet(int featureID, bool resolve, bool co
 	switch(featureID)
 	{
 	}
-	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
+	return fUML::Semantics::Values::EvaluationImpl::eGet(featureID, resolve, coreType);
 }
 bool CS_OpaqueExpressionEvaluationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
 	}
-	return ecore::EObjectImpl::internalEIsSet(featureID);
+	return fUML::Semantics::Values::EvaluationImpl::internalEIsSet(featureID);
 }
 bool CS_OpaqueExpressionEvaluationImpl::eSet(int featureID, Any newValue)
 {
@@ -160,7 +222,7 @@ bool CS_OpaqueExpressionEvaluationImpl::eSet(int featureID, Any newValue)
 	{
 	}
 
-	return ecore::EObjectImpl::eSet(featureID, newValue);
+	return fUML::Semantics::Values::EvaluationImpl::eSet(featureID, newValue);
 }
 
 //*********************************
@@ -186,27 +248,31 @@ void CS_OpaqueExpressionEvaluationImpl::load(std::shared_ptr<persistence::interf
 void CS_OpaqueExpressionEvaluationImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
 
-	ecore::EObjectImpl::loadAttributes(loadHandler, attr_list);
+	fUML::Semantics::Values::EvaluationImpl::loadAttributes(loadHandler, attr_list);
 }
 
 void CS_OpaqueExpressionEvaluationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<PSCS::PSCSFactory> modelFactory)
 {
 
 
-	ecore::EObjectImpl::loadNode(nodeName, loadHandler, ecore::EcoreFactory::eInstance());
+	fUML::Semantics::Values::EvaluationImpl::loadNode(nodeName, loadHandler, fUML::FUMLFactory::eInstance());
 }
 
 void CS_OpaqueExpressionEvaluationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
-	ecore::EObjectImpl::resolveReferences(featureID, references);
+	fUML::Semantics::Values::EvaluationImpl::resolveReferences(featureID, references);
 }
 
 void CS_OpaqueExpressionEvaluationImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
 {
 	saveContent(saveHandler);
 
+	fUML::Semantics::Values::EvaluationImpl::saveContent(saveHandler);
+	
+	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
+	
 	
 }
 

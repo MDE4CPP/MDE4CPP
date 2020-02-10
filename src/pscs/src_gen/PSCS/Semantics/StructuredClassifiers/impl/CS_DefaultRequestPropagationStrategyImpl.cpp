@@ -24,6 +24,7 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "PSCS/impl/PSCSPackageImpl.hpp"
+#include "fUML/Semantics/Actions/SendSignalActionActivation.hpp"
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -34,6 +35,10 @@
 #include <exception> // used in Persistence
 
 #include "PSCS/Semantics/StructuredClassifiers/CS_RequestPropagationStrategy.hpp"
+
+#include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
+
+#include "fUML/Semantics/Loci/SemanticVisitor.hpp"
 
 #include "ecore/EcorePackage.hpp"
 #include "ecore/EcoreFactory.hpp"
@@ -105,6 +110,26 @@ std::shared_ptr<ecore::EClass> CS_DefaultRequestPropagationStrategyImpl::eStatic
 //*********************************
 // Operations
 //*********************************
+std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference> > CS_DefaultRequestPropagationStrategyImpl::select(std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference> >  potentialTargets,std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>  context)
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+			// returns all potential targets in the case where the context is a SendSignalActionActivation
+	// returns the first potential target in the case where the context is anything else
+	std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference>> selectedTargets(new Bag<fUML::Semantics::StructuredClassifiers::Reference>());
+	if(std::dynamic_pointer_cast<fUML::Semantics::Actions::SendSignalActionActivation>(context) != nullptr) {
+		for(unsigned int i = 0; i < potentialTargets->size(); i++) {
+			selectedTargets->add(potentialTargets->at(i));
+		}
+	}
+	else {
+		if(potentialTargets->size() >= 1) {
+			selectedTargets->add(potentialTargets->at(0));
+		}
+	}
+	return selectedTargets;
+	//end of body
+}
 
 //*********************************
 // References
@@ -199,7 +224,10 @@ void CS_DefaultRequestPropagationStrategyImpl::save(std::shared_ptr<persistence:
 
 	CS_RequestPropagationStrategyImpl::saveContent(saveHandler);
 	
+	fUML::Semantics::Loci::SemanticStrategyImpl::saveContent(saveHandler);
+	
 	ecore::EObjectImpl::saveContent(saveHandler);
+	
 	
 }
 

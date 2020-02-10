@@ -50,7 +50,7 @@
 	[aPackage.generateConfigurationFiles(false)/]
 	[aPackage.generateFactoryFiles()/]
 	[aPackage.allOwnedElements()->select(e|e.oclIsKindOf(uml::Class))->select(e|not (e.oclIsKindOf(FunctionBehavior) or e.oclIsKindOf(OpaqueBehavior) or e.oclIsKindOf(Activity))).oclAsType(uml::Class).generateElement()/]
-	[aPackage.allOwnedElements()->select(e|e.oclIsKindOf(uml::Interface)).oclAsType(uml::Interface).generateInterfaceHeaderFile()/]
+	[aPackage.allOwnedElements()->select(e|e.oclIsKindOf(uml::Interface)).oclAsType(uml::Interface).generateElement()/]
 	[aPackage.ownedMember->filter(Enumeration).generateEnumerationFile()/]
 	[aPackage.generateUMLPluginFiles(false)/]
 [/if]
@@ -65,4 +65,9 @@
 [template public generateElement(aClass : Class)]
 [aClass.generateModel()/]
 [aClass.generateImplementation()/]
+[/template]
+
+[template public generateElement(aInterface : Interface)]
+[aInterface.generateModel()/]
+[aInterface.generateImplementation()/]
 [/template]
