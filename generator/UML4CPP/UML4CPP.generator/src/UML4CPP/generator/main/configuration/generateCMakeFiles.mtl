@@ -71,9 +71,11 @@ SET(SOURCE_FILES
 	[aClass.name.toUpperFirst()/].cpp
 [/if]
 [/for]
+[comment] DISABLE INTERFACE IMPLEMENTATION
 [for (anInterface : Interface | aPackage.allOwnedElements()->filter(Interface)->sortedBy(myQualifiedName()))]
 	impl/[anInterface.name.toUpperFirst()/]Impl.cpp
 [/for]
+[/comment]
 [/if]
 )
 

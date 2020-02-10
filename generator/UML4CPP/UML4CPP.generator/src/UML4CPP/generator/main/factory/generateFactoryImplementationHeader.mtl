@@ -53,7 +53,7 @@
 
 			//Creator functions
 			[aPackage.collectModelClassesForFactoryFunctions().generateClassCreate(true)/]
-			[aPackage.collectModelInterfacesForFactory().generateInterfaceCreate(true)/]
+[comment] DISABLE INTERFACE IMPLEMENTATION aPackage.collectModelInterfacesForFactory().generateInterfaceCreate(true)/][/comment]
 
 			//Package
 			virtual std::shared_ptr<[aPackage.name.toUpperFirst()/]Package> get[aPackage.name.toUpperFirst()/]Package();
