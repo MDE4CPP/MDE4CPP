@@ -49,7 +49,7 @@
 																		aPackage.member->filter(Class).ownedOperation.ownedParameter.type->reject(oclIsUndefined()).getNearestPackage(),
 																		aPackage.member->filter(Class).interfaceRealization.supplier->reject(oclIsUndefined()).getNearestPackage(),
 																		aPackage.allOwnedElements().getAppliedStereotypes()._package,
-																		aPackage.getAppliedStereotypes()._package
+																		aPackage.getAppliedStereotypes()._package,
 																		aPackage.member->filter(Class).generalization.general->reject(oclIsUndefined()).getNearestPackage(),
 																		aPackage.packageImport.importedPackage
 																	}->flatten()->reject(oclIsUndefined())->reject(pack : Package | (pack = aPackage) or pack.isReflectionModel()) /]
@@ -78,7 +78,7 @@
  *  otherwise 'collectIncludingModelNamesForNonReflectionModels' is used
 */]
 [query public collectIncludingModelNames(aPackage : Package) : Set(String) = if (aPackage.isReflectionModel()) then collectIncludingModelNamesForReflectionModels() else collectIncludingModelNamesForNonReflectionModels() endif/]
-leo
+
 [**
  * query to collect model classes and interfaces, which are relevant for create functions in model factory
  * 

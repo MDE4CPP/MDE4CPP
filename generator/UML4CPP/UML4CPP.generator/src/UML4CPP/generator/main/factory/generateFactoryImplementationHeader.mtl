@@ -52,7 +52,7 @@
 			virtual std::shared_ptr<uml::Element> create(const std::string _className,  std::shared_ptr<uml::Element> container= nullptr, const unsigned int referenceID = -1) const;
 
 			//Creator functions
-			[aPackage.collectModelClassesForFactory().generateClassCreate(true)/]
+			[aPackage.collectModelClassesForFactoryFunctions().generateClassCreate(true)/]
 			[aPackage.collectModelInterfacesForFactory().generateInterfaceCreate(true)/]
 
 			//Package
