@@ -97,8 +97,8 @@
 */]
 [query public getMetaClassName(anElement : Element) : String = if anElement.getNearestPackage().name = anElement.eClass().ePackage.name then anElement.eClass().name else anElement.eClass().ePackage.name.concat('::').concat(anElement.eClass().name) endif /]
 
-[query public getStaticClassID_ID(aClass : Class) : String = aClass._package.allOwnedElements()->asOrderedSet()->indexOf(aClass)/]
-[query public getStaticInterfaceID_ID(aInterface : Interface) : String = aInterface._package.allOwnedElements()->asOrderedSet()->indexOf(aInterface)/]
+[query public getStaticClassID_ID(aClass : Class) : String = aClass._package.allOwnedElements()->asOrderedSet()->indexOf(aClass).toString()/]
+[query public getStaticInterfaceID_ID(aInterface : Interface) : String = aInterface._package.allOwnedElements()->asOrderedSet()->indexOf(aInterface).toString()/]
 
 [** 
  * generate member names for package generation 
