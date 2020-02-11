@@ -25,10 +25,9 @@
 [** 
  *  queries to generate qualified name, required for elements without defined name
 */]
-[query public myQualifiedName (anElement : NamedElement) : String = if oclIsUndefined() then handleUndefinedElement() else myInputPinName().sanitize() endif/] 
-[query private myInputPinName (anElement : NamedElement) : String = if(oclIsKindOf(InputPin)) then 'InputPin'.concat('_').concat(anElement.myElementQualifiedName())  else myOutputPinName() endif/]
-[query private myOutputPinName (anElement : NamedElement) : String = if(oclIsKindOf(OutputPin)) then 'OutputPin'.concat('_').concat(anElement.myElementQualifiedName()) else myElementQualifiedName() endif/]
-[query private myElementQualifiedName (anElement : NamedElement) : String = if (namespace.oclIsUndefined() or ''=namespace) and (not owner.oclIsUndefined()) and (not owner.oclAsType(NamedElement).qualifiedName.oclIsUndefined()) and (not (qualifiedName.oclIsUndefined())) then (owner.oclAsType(NamedElement).qualifiedName).concat('_').concat(eClass().name).concat('_').concat(qualifiedName).substituteAll('.', '_') else myLiteralSpecificationName() endif /]
+[query public myQualifiedName (anElement : NamedElement) : String = if oclIsUndefined() then anElement.handleUndefinedElement() else myPinName().sanitize() endif /] 
+[query private myPinName (anElement : NamedElement) : String = if(oclIsKindOf(Pin)) then eClass().name.concat('_').concat(owner.owner.oclAsType(NamedElement).name).concat('_').concat(owner.oclAsType(NamedElement).name).concat('_').concat(name) else myElementQualifiedName() endif /]
+[query private myElementQualifiedName (anElement : NamedElement) : String = if (namespace.oclIsUndefined() or ''=namespace) and (not owner.oclIsUndefined()) and (not owner.oclAsType(NamedElement).qualifiedName.oclIsUndefined()) and (not (qualifiedName.oclIsUndefined())) then (owner.oclAsType(NamedElement).myQualifiedName()).concat('_').concat(eClass().name).concat('_').concat(qualifiedName).substituteAll('.', '_') else myLiteralSpecificationName() endif /]
 [query private myLiteralSpecificationName(anElement :NamedElement) : String = if (oclIsKindOf(LiteralSpecification)) then if (owner.oclIsTypeOf(ConnectorEnd)) then myValuSpecName().concat('_').concat(owner.oclAsType(ConnectorEnd).myQualifiedName()) else myValuSpecName().concat('_').concat(owner.mySlotName())endif else myValuSpecName()endif /]
 [query private mySlotName(anElement : Element) : String = if (oclIsTypeOf(Slot)) then oclAsType(Slot).definingFeature.name else myOwnerName() endif /]
 [query private myValuSpecName (anElement : NamedElement) : String = if(oclIsKindOf(ValueSpecification)) then owner.myOwnerName().concat('_').concat(eContainingFeature().name).concat('_').concat(anElement.eClass().name) else myParameterReturnName() endif /]
@@ -63,7 +62,7 @@
 [**
  * query to replace characters, which are not permitted in names of classes, variable, macros, ... in C++
 */]
-[query public sanitize(str : String) : String = if ((str.oclIsUndefined()) or (str.size()<=0)) then '' else str.replaceAll(' ', '_').replaceAll('-', '_').replaceAll('::', '_') endif/] 
+[query public sanitize(str : String) : String = if ((str.oclIsUndefined()) or (str.size()<=0)) then '' else str.replaceAll(' ', '_').replaceAll('-', '_').replaceAll('::', '_').substituteAll('.', '_') endif/] 
 
 [**
 * query to transform namespace characters
