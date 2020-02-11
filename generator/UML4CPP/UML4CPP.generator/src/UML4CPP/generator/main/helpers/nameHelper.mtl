@@ -62,7 +62,7 @@
 [**
  * query to replace characters, which are not permitted in names of classes, variable, macros, ... in C++
 */]
-[query public sanitize(str : String) : String = if ((str.oclIsUndefined()) or (str.size()<=0)) then '' else str.replaceAll(' ', '_').replaceAll('-', '_').replaceAll('::', '_').substituteAll('.', '_') endif/] 
+[query public sanitize(str : String) : String = if ((str.oclIsUndefined()) or (str.size()<=0)) then '' else str.substituteAll(' ', '_').substituteAll('-', '_').substituteAll('::', '_').substituteAll('.', '_').substituteAll('+', '_') endif/] 
 
 [**
 * query to transform namespace characters
