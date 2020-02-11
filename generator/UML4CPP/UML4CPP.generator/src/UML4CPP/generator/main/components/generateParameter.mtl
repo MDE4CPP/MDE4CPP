@@ -55,19 +55,19 @@
  * generate default value for parameter with type String
 */]
 [template public genDefault(aParameter : Parameter) ? (aParameter.type.name='String' or aParameter.type.name='EString')]
-"[aParameter.default/]"
+[if (aParameter.default.oclIsUndefined())]""[else]"[aParameter.default/]"[/if]
 [/template]
 
 [**
  * generate default value for numeric parameter
 */]
 [template public genDefault(aParameter : Parameter) ? ((aParameter.type.name='Integer') or (aParameter.type.name='Real') or (aParameter.type.name='Boolean') or (aParameter.type.name='UnlimitedNatural') or (aParameter.type.name='EInt') or (aParameter.type.name='EDouble') or (aParameter.type.name='EBoolean') or (aParameter.type.name='EFloat'))]
-[aParameter.default/]
+[if (aParameter.default.oclIsUndefined())]0[else][aParameter.default/][/if]
 [/template]
 
 [**
  * generate default value for parameter with enumeration type
 */]
 [template public genDefault(aParameter : Parameter) ? (aParameter.type.oclIsKindOf(Enumeration))]
-[aParameter.type.qualifiedName/]::[aParameter.default.toUpper()/]
+[aParameter.type.qualifiedName/]::[if (aParameter.default.oclIsUndefined())][aParameter.type.oclAsType(Enumeration).ownedLiteral->first().toString().toUpper()/][else][aParameter.default.toUpper()/][/if]
 [/template]
