@@ -26,7 +26,7 @@
 [query public executionClassName(aClassifier : Classifier) : String = aClassifier.name.toUpperFirst().concat('Execution') /]
 [query public objectClassName(aClassifier : Classifier) : String = aClassifier.name.toUpperFirst().concat('Object') /]
 
-[query public supportedTypes(type : Type) : Boolean = (name = 'Integer') or (name = 'Boolean') or (name = 'String') or (name = 'Real') /]
+[query public supportedTypes(type : Type) : Boolean = (name = 'Integer') or (name = 'Boolean') or (name = 'String') or (name = 'Real') or (name = 'UnlimitedNatural') /]
 
 [query public getClassiferExecutions(aPackage : Package) : Set(Classifier) = OrderedSet{
 				aPackage.allOwnedElements()->filter(Activity)._context,
