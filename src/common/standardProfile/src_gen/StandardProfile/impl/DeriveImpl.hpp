@@ -27,8 +27,11 @@ namespace StandardProfile
 {
 	class DeriveImpl : virtual public uml::StereotypeImpl, virtual public Derive
 	{
+		public: 
+			DeriveImpl(const DeriveImpl & obj);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+
 		private:    
-			DeriveImpl(DeriveImpl const&) = delete;
 			DeriveImpl& operator=(DeriveImpl const&) = delete;
 
 		protected:
@@ -40,6 +43,7 @@ namespace StandardProfile
 
 
 		public:
+
 			//destructor
 			virtual ~DeriveImpl();
 

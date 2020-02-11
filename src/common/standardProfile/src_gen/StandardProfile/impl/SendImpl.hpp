@@ -27,8 +27,11 @@ namespace StandardProfile
 {
 	class SendImpl : virtual public uml::StereotypeImpl, virtual public Send
 	{
+		public: 
+			SendImpl(const SendImpl & obj);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+
 		private:    
-			SendImpl(SendImpl const&) = delete;
 			SendImpl& operator=(SendImpl const&) = delete;
 
 		protected:
@@ -40,6 +43,7 @@ namespace StandardProfile
 
 
 		public:
+
 			//destructor
 			virtual ~SendImpl();
 

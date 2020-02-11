@@ -46,6 +46,21 @@ RefineImpl::~RefineImpl()
 {
 }
 
+RefineImpl::RefineImpl(const RefineImpl & obj):RefineImpl()
+{
+	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Refine "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
+}
+
+std::shared_ptr<ecore::EObject>  RefineImpl::copy() const
+{
+	std::shared_ptr<RefineImpl> element(new RefineImpl(*this));
+	element->setThisRefinePtr(element);
+	return element;
+}
+
 
 std::shared_ptr<uml::Class> RefineImpl::getMetaClass()
 {

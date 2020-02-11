@@ -27,8 +27,11 @@ namespace StandardProfile
 {
 	class MetaclassImpl : virtual public uml::StereotypeImpl, virtual public Metaclass
 	{
+		public: 
+			MetaclassImpl(const MetaclassImpl & obj);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+
 		private:    
-			MetaclassImpl(MetaclassImpl const&) = delete;
 			MetaclassImpl& operator=(MetaclassImpl const&) = delete;
 
 		protected:
@@ -40,6 +43,7 @@ namespace StandardProfile
 
 
 		public:
+
 			//destructor
 			virtual ~MetaclassImpl();
 

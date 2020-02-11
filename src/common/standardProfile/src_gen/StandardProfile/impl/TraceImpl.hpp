@@ -27,8 +27,11 @@ namespace StandardProfile
 {
 	class TraceImpl : virtual public uml::StereotypeImpl, virtual public Trace
 	{
+		public: 
+			TraceImpl(const TraceImpl & obj);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+
 		private:    
-			TraceImpl(TraceImpl const&) = delete;
 			TraceImpl& operator=(TraceImpl const&) = delete;
 
 		protected:
@@ -40,6 +43,7 @@ namespace StandardProfile
 
 
 		public:
+
 			//destructor
 			virtual ~TraceImpl();
 

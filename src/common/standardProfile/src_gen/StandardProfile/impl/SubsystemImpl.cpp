@@ -46,6 +46,21 @@ SubsystemImpl::~SubsystemImpl()
 {
 }
 
+SubsystemImpl::SubsystemImpl(const SubsystemImpl & obj):SubsystemImpl()
+{
+	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Subsystem "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
+}
+
+std::shared_ptr<ecore::EObject>  SubsystemImpl::copy() const
+{
+	std::shared_ptr<SubsystemImpl> element(new SubsystemImpl(*this));
+	element->setThisSubsystemPtr(element);
+	return element;
+}
+
 
 std::shared_ptr<uml::Class> SubsystemImpl::getMetaClass()
 {

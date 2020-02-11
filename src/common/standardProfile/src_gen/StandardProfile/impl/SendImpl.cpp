@@ -46,6 +46,21 @@ SendImpl::~SendImpl()
 {
 }
 
+SendImpl::SendImpl(const SendImpl & obj):SendImpl()
+{
+	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Send "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
+}
+
+std::shared_ptr<ecore::EObject>  SendImpl::copy() const
+{
+	std::shared_ptr<SendImpl> element(new SendImpl(*this));
+	element->setThisSendPtr(element);
+	return element;
+}
+
 
 std::shared_ptr<uml::Class> SendImpl::getMetaClass()
 {

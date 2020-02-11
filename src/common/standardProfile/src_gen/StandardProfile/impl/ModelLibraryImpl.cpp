@@ -46,6 +46,21 @@ ModelLibraryImpl::~ModelLibraryImpl()
 {
 }
 
+ModelLibraryImpl::ModelLibraryImpl(const ModelLibraryImpl & obj):ModelLibraryImpl()
+{
+	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ModelLibrary "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
+}
+
+std::shared_ptr<ecore::EObject>  ModelLibraryImpl::copy() const
+{
+	std::shared_ptr<ModelLibraryImpl> element(new ModelLibraryImpl(*this));
+	element->setThisModelLibraryPtr(element);
+	return element;
+}
+
 
 std::shared_ptr<uml::Class> ModelLibraryImpl::getMetaClass()
 {

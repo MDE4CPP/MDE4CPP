@@ -19,6 +19,7 @@
 #include "StandardProfile/StandardProfileFactory.hpp"
 
 //depending model packages
+#include "ecoreReflection/EcorePackage.hpp"
 #include "umlReflection/UMLPackage.hpp"
 
 

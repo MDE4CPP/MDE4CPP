@@ -27,8 +27,11 @@ namespace StandardProfile
 {
 	class FrameworkImpl : virtual public uml::StereotypeImpl, virtual public Framework
 	{
+		public: 
+			FrameworkImpl(const FrameworkImpl & obj);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+
 		private:    
-			FrameworkImpl(FrameworkImpl const&) = delete;
 			FrameworkImpl& operator=(FrameworkImpl const&) = delete;
 
 		protected:
@@ -40,6 +43,7 @@ namespace StandardProfile
 
 
 		public:
+
 			//destructor
 			virtual ~FrameworkImpl();
 

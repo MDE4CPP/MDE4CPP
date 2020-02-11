@@ -27,8 +27,11 @@ namespace StandardProfile
 {
 	class ExecutableImpl:virtual public FileImpl, virtual public Executable
 	{
+		public: 
+			ExecutableImpl(const ExecutableImpl & obj);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+
 		private:    
-			ExecutableImpl(ExecutableImpl const&) = delete;
 			ExecutableImpl& operator=(ExecutableImpl const&) = delete;
 
 		protected:
@@ -40,6 +43,7 @@ namespace StandardProfile
 
 
 		public:
+
 			//destructor
 			virtual ~ExecutableImpl();
 

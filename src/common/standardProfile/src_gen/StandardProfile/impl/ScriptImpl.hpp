@@ -27,8 +27,11 @@ namespace StandardProfile
 {
 	class ScriptImpl:virtual public FileImpl, virtual public Script
 	{
+		public: 
+			ScriptImpl(const ScriptImpl & obj);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+
 		private:    
-			ScriptImpl(ScriptImpl const&) = delete;
 			ScriptImpl& operator=(ScriptImpl const&) = delete;
 
 		protected:
@@ -40,6 +43,7 @@ namespace StandardProfile
 
 
 		public:
+
 			//destructor
 			virtual ~ScriptImpl();
 

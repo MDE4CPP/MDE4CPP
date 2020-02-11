@@ -27,8 +27,11 @@ namespace StandardProfile
 {
 	class CreateImpl : virtual public uml::StereotypeImpl, virtual public Create
 	{
+		public: 
+			CreateImpl(const CreateImpl & obj);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+
 		private:    
-			CreateImpl(CreateImpl const&) = delete;
 			CreateImpl& operator=(CreateImpl const&) = delete;
 
 		protected:
@@ -40,6 +43,7 @@ namespace StandardProfile
 
 
 		public:
+
 			//destructor
 			virtual ~CreateImpl();
 

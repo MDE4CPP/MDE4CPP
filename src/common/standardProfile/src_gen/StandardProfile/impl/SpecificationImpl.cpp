@@ -46,6 +46,21 @@ SpecificationImpl::~SpecificationImpl()
 {
 }
 
+SpecificationImpl::SpecificationImpl(const SpecificationImpl & obj):SpecificationImpl()
+{
+	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Specification "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
+}
+
+std::shared_ptr<ecore::EObject>  SpecificationImpl::copy() const
+{
+	std::shared_ptr<SpecificationImpl> element(new SpecificationImpl(*this));
+	element->setThisSpecificationPtr(element);
+	return element;
+}
+
 
 std::shared_ptr<uml::Class> SpecificationImpl::getMetaClass()
 {

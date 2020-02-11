@@ -27,8 +27,11 @@ namespace StandardProfile
 {
 	class TypeImpl : virtual public uml::StereotypeImpl, virtual public Type
 	{
+		public: 
+			TypeImpl(const TypeImpl & obj);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+
 		private:    
-			TypeImpl(TypeImpl const&) = delete;
 			TypeImpl& operator=(TypeImpl const&) = delete;
 
 		protected:
@@ -40,6 +43,7 @@ namespace StandardProfile
 
 
 		public:
+
 			//destructor
 			virtual ~TypeImpl();
 

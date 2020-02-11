@@ -27,8 +27,11 @@ namespace StandardProfile
 {
 	class BuildComponentImpl : virtual public uml::StereotypeImpl, virtual public BuildComponent
 	{
+		public: 
+			BuildComponentImpl(const BuildComponentImpl & obj);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+
 		private:    
-			BuildComponentImpl(BuildComponentImpl const&) = delete;
 			BuildComponentImpl& operator=(BuildComponentImpl const&) = delete;
 
 		protected:
@@ -40,6 +43,7 @@ namespace StandardProfile
 
 
 		public:
+
 			//destructor
 			virtual ~BuildComponentImpl();
 

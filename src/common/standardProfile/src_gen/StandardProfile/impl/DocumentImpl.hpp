@@ -27,8 +27,11 @@ namespace StandardProfile
 {
 	class DocumentImpl:virtual public FileImpl, virtual public Document
 	{
+		public: 
+			DocumentImpl(const DocumentImpl & obj);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+
 		private:    
-			DocumentImpl(DocumentImpl const&) = delete;
 			DocumentImpl& operator=(DocumentImpl const&) = delete;
 
 		protected:
@@ -40,6 +43,7 @@ namespace StandardProfile
 
 
 		public:
+
 			//destructor
 			virtual ~DocumentImpl();
 

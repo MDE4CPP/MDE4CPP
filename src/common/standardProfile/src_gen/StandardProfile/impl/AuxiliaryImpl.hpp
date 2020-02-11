@@ -27,8 +27,11 @@ namespace StandardProfile
 {
 	class AuxiliaryImpl : virtual public uml::StereotypeImpl, virtual public Auxiliary
 	{
+		public: 
+			AuxiliaryImpl(const AuxiliaryImpl & obj);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+
 		private:    
-			AuxiliaryImpl(AuxiliaryImpl const&) = delete;
 			AuxiliaryImpl& operator=(AuxiliaryImpl const&) = delete;
 
 		protected:
@@ -40,6 +43,7 @@ namespace StandardProfile
 
 
 		public:
+
 			//destructor
 			virtual ~AuxiliaryImpl();
 

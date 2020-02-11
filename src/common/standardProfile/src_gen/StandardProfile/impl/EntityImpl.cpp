@@ -46,6 +46,21 @@ EntityImpl::~EntityImpl()
 {
 }
 
+EntityImpl::EntityImpl(const EntityImpl & obj):EntityImpl()
+{
+	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Entity "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
+}
+
+std::shared_ptr<ecore::EObject>  EntityImpl::copy() const
+{
+	std::shared_ptr<EntityImpl> element(new EntityImpl(*this));
+	element->setThisEntityPtr(element);
+	return element;
+}
+
 
 std::shared_ptr<uml::Class> EntityImpl::getMetaClass()
 {

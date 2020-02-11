@@ -27,8 +27,11 @@ namespace StandardProfile
 {
 	class FocusImpl : virtual public uml::StereotypeImpl, virtual public Focus
 	{
+		public: 
+			FocusImpl(const FocusImpl & obj);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+
 		private:    
-			FocusImpl(FocusImpl const&) = delete;
 			FocusImpl& operator=(FocusImpl const&) = delete;
 
 		protected:
@@ -40,6 +43,7 @@ namespace StandardProfile
 
 
 		public:
+
 			//destructor
 			virtual ~FocusImpl();
 

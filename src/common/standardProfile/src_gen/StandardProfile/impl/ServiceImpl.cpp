@@ -46,6 +46,21 @@ ServiceImpl::~ServiceImpl()
 {
 }
 
+ServiceImpl::ServiceImpl(const ServiceImpl & obj):ServiceImpl()
+{
+	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Service "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
+}
+
+std::shared_ptr<ecore::EObject>  ServiceImpl::copy() const
+{
+	std::shared_ptr<ServiceImpl> element(new ServiceImpl(*this));
+	element->setThisServicePtr(element);
+	return element;
+}
+
 
 std::shared_ptr<uml::Class> ServiceImpl::getMetaClass()
 {

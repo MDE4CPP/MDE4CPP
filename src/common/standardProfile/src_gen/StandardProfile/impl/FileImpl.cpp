@@ -46,6 +46,21 @@ FileImpl::~FileImpl()
 {
 }
 
+FileImpl::FileImpl(const FileImpl & obj):FileImpl()
+{
+	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy File "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
+}
+
+std::shared_ptr<ecore::EObject>  FileImpl::copy() const
+{
+	std::shared_ptr<FileImpl> element(new FileImpl(*this));
+	element->setThisFilePtr(element);
+	return element;
+}
+
 
 std::shared_ptr<uml::Class> FileImpl::getMetaClass()
 {

@@ -27,8 +27,11 @@ namespace StandardProfile
 {
 	class SpecificationImpl : virtual public uml::StereotypeImpl, virtual public Specification
 	{
+		public: 
+			SpecificationImpl(const SpecificationImpl & obj);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+
 		private:    
-			SpecificationImpl(SpecificationImpl const&) = delete;
 			SpecificationImpl& operator=(SpecificationImpl const&) = delete;
 
 		protected:
@@ -40,6 +43,7 @@ namespace StandardProfile
 
 
 		public:
+
 			//destructor
 			virtual ~SpecificationImpl();
 

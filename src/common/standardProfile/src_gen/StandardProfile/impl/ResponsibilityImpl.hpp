@@ -27,8 +27,11 @@ namespace StandardProfile
 {
 	class ResponsibilityImpl : virtual public uml::StereotypeImpl, virtual public Responsibility
 	{
+		public: 
+			ResponsibilityImpl(const ResponsibilityImpl & obj);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+
 		private:    
-			ResponsibilityImpl(ResponsibilityImpl const&) = delete;
 			ResponsibilityImpl& operator=(ResponsibilityImpl const&) = delete;
 
 		protected:
@@ -40,6 +43,7 @@ namespace StandardProfile
 
 
 		public:
+
 			//destructor
 			virtual ~ResponsibilityImpl();
 

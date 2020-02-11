@@ -46,6 +46,21 @@ TypeImpl::~TypeImpl()
 {
 }
 
+TypeImpl::TypeImpl(const TypeImpl & obj):TypeImpl()
+{
+	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Type "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
+}
+
+std::shared_ptr<ecore::EObject>  TypeImpl::copy() const
+{
+	std::shared_ptr<TypeImpl> element(new TypeImpl(*this));
+	element->setThisTypePtr(element);
+	return element;
+}
+
 
 std::shared_ptr<uml::Class> TypeImpl::getMetaClass()
 {

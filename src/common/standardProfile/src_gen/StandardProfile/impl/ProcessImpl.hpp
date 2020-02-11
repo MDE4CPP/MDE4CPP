@@ -27,8 +27,11 @@ namespace StandardProfile
 {
 	class ProcessImpl : virtual public uml::StereotypeImpl, virtual public Process
 	{
+		public: 
+			ProcessImpl(const ProcessImpl & obj);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+
 		private:    
-			ProcessImpl(ProcessImpl const&) = delete;
 			ProcessImpl& operator=(ProcessImpl const&) = delete;
 
 		protected:
@@ -40,6 +43,7 @@ namespace StandardProfile
 
 
 		public:
+
 			//destructor
 			virtual ~ProcessImpl();
 

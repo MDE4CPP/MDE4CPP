@@ -46,6 +46,21 @@ MetaclassImpl::~MetaclassImpl()
 {
 }
 
+MetaclassImpl::MetaclassImpl(const MetaclassImpl & obj):MetaclassImpl()
+{
+	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Metaclass "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
+}
+
+std::shared_ptr<ecore::EObject>  MetaclassImpl::copy() const
+{
+	std::shared_ptr<MetaclassImpl> element(new MetaclassImpl(*this));
+	element->setThisMetaclassPtr(element);
+	return element;
+}
+
 
 std::shared_ptr<uml::Class> MetaclassImpl::getMetaClass()
 {
