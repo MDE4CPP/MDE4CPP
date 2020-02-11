@@ -46,6 +46,21 @@ RealizationImpl::~RealizationImpl()
 {
 }
 
+RealizationImpl::RealizationImpl(const RealizationImpl & obj):RealizationImpl()
+{
+	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Realization "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
+}
+
+std::shared_ptr<ecore::EObject>  RealizationImpl::copy() const
+{
+	std::shared_ptr<RealizationImpl> element(new RealizationImpl(*this));
+	element->setThisRealizationPtr(element);
+	return element;
+}
+
 
 std::shared_ptr<uml::Class> RealizationImpl::getMetaClass()
 {

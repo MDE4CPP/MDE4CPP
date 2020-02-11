@@ -27,8 +27,11 @@ namespace StandardProfile
 {
 	class FileImpl : virtual public uml::StereotypeImpl, virtual public File
 	{
+		public: 
+			FileImpl(const FileImpl & obj);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+
 		private:    
-			FileImpl(FileImpl const&) = delete;
 			FileImpl& operator=(FileImpl const&) = delete;
 
 		protected:
@@ -40,6 +43,7 @@ namespace StandardProfile
 
 
 		public:
+
 			//destructor
 			virtual ~FileImpl();
 

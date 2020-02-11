@@ -46,6 +46,21 @@ UtilityImpl::~UtilityImpl()
 {
 }
 
+UtilityImpl::UtilityImpl(const UtilityImpl & obj):UtilityImpl()
+{
+	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Utility "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
+}
+
+std::shared_ptr<ecore::EObject>  UtilityImpl::copy() const
+{
+	std::shared_ptr<UtilityImpl> element(new UtilityImpl(*this));
+	element->setThisUtilityPtr(element);
+	return element;
+}
+
 
 std::shared_ptr<uml::Class> UtilityImpl::getMetaClass()
 {

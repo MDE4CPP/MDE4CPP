@@ -51,6 +51,21 @@ CreateImpl::~CreateImpl()
 {
 }
 
+CreateImpl::CreateImpl(const CreateImpl & obj):CreateImpl()
+{
+	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Create "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
+}
+
+std::shared_ptr<ecore::EObject>  CreateImpl::copy() const
+{
+	std::shared_ptr<CreateImpl> element(new CreateImpl(*this));
+	element->setThisCreatePtr(element);
+	return element;
+}
+
 
 std::shared_ptr<uml::Class> CreateImpl::getMetaClass()
 {

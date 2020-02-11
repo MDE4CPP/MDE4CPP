@@ -46,6 +46,21 @@ BuildComponentImpl::~BuildComponentImpl()
 {
 }
 
+BuildComponentImpl::BuildComponentImpl(const BuildComponentImpl & obj):BuildComponentImpl()
+{
+	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy BuildComponent "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
+}
+
+std::shared_ptr<ecore::EObject>  BuildComponentImpl::copy() const
+{
+	std::shared_ptr<BuildComponentImpl> element(new BuildComponentImpl(*this));
+	element->setThisBuildComponentPtr(element);
+	return element;
+}
+
 
 std::shared_ptr<uml::Class> BuildComponentImpl::getMetaClass()
 {

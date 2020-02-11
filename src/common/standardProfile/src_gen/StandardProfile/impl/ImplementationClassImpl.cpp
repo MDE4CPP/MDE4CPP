@@ -46,6 +46,21 @@ ImplementationClassImpl::~ImplementationClassImpl()
 {
 }
 
+ImplementationClassImpl::ImplementationClassImpl(const ImplementationClassImpl & obj):ImplementationClassImpl()
+{
+	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ImplementationClass "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
+}
+
+std::shared_ptr<ecore::EObject>  ImplementationClassImpl::copy() const
+{
+	std::shared_ptr<ImplementationClassImpl> element(new ImplementationClassImpl(*this));
+	element->setThisImplementationClassPtr(element);
+	return element;
+}
+
 
 std::shared_ptr<uml::Class> ImplementationClassImpl::getMetaClass()
 {

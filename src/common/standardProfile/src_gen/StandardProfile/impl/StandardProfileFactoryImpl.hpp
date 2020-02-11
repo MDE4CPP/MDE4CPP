@@ -96,8 +96,6 @@ namespace StandardProfile
 			virtual std::shared_ptr<StandardProfile::Utility> createUtility(const int metaElementID=-1) const ;
 			
 			
-			
-
 
 			//Package
 			virtual std::shared_ptr<StandardProfilePackage> getStandardProfilePackage();

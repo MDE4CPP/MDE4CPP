@@ -46,6 +46,21 @@ DeriveImpl::~DeriveImpl()
 {
 }
 
+DeriveImpl::DeriveImpl(const DeriveImpl & obj):DeriveImpl()
+{
+	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Derive "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
+}
+
+std::shared_ptr<ecore::EObject>  DeriveImpl::copy() const
+{
+	std::shared_ptr<DeriveImpl> element(new DeriveImpl(*this));
+	element->setThisDerivePtr(element);
+	return element;
+}
+
 
 std::shared_ptr<uml::Class> DeriveImpl::getMetaClass()
 {

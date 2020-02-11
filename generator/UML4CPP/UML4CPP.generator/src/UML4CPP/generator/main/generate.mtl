@@ -50,7 +50,8 @@
 	[aPackage.generateConfigurationFiles(false)/]
 	[aPackage.generateFactoryFiles()/]
 	[aPackage.allOwnedElements()->select(e|e.oclIsKindOf(uml::Class))->select(e|not (e.oclIsKindOf(FunctionBehavior) or e.oclIsKindOf(OpaqueBehavior) or e.oclIsKindOf(Activity))).oclAsType(uml::Class).generateElement()/]
-	[aPackage.allOwnedElements()->select(e|e.oclIsKindOf(uml::Interface)).oclAsType(uml::Interface).generateElement()/]
+[comment] DISABLE INTERFACE IMPLEMENTATION [aPackage.allOwnedElements()->select(e|e.oclIsKindOf(uml::Interface)).oclAsType(uml::Interface).generateElement()/][/comment]
+	[aPackage.allOwnedElements()->select(e|e.oclIsKindOf(uml::Interface)).oclAsType(uml::Interface).generateInterfaceHeaderFile()/]
 	[aPackage.ownedMember->filter(Enumeration).generateEnumerationFile()/]
 	[aPackage.generateUMLPluginFiles(false)/]
 [/if]
@@ -67,7 +68,9 @@
 [aClass.generateImplementation()/]
 [/template]
 
+[comment] DISABLE INTERFACE IMPLEMENTATION
 [template public generateElement(aInterface : Interface)]
 [aInterface.generateModel()/]
 [aInterface.generateImplementation()/]
 [/template]
+[/comment]

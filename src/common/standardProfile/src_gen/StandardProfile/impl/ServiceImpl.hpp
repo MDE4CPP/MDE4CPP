@@ -27,8 +27,11 @@ namespace StandardProfile
 {
 	class ServiceImpl : virtual public uml::StereotypeImpl, virtual public Service
 	{
+		public: 
+			ServiceImpl(const ServiceImpl & obj);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+
 		private:    
-			ServiceImpl(ServiceImpl const&) = delete;
 			ServiceImpl& operator=(ServiceImpl const&) = delete;
 
 		protected:
@@ -40,6 +43,7 @@ namespace StandardProfile
 
 
 		public:
+
 			//destructor
 			virtual ~ServiceImpl();
 

@@ -27,8 +27,11 @@ namespace StandardProfile
 {
 	class SourceImpl:virtual public FileImpl, virtual public Source
 	{
+		public: 
+			SourceImpl(const SourceImpl & obj);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+
 		private:    
-			SourceImpl(SourceImpl const&) = delete;
 			SourceImpl& operator=(SourceImpl const&) = delete;
 
 		protected:
@@ -40,6 +43,7 @@ namespace StandardProfile
 
 
 		public:
+
 			//destructor
 			virtual ~SourceImpl();
 

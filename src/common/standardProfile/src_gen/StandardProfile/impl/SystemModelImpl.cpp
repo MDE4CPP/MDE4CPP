@@ -46,6 +46,21 @@ SystemModelImpl::~SystemModelImpl()
 {
 }
 
+SystemModelImpl::SystemModelImpl(const SystemModelImpl & obj):SystemModelImpl()
+{
+	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy SystemModel "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
+}
+
+std::shared_ptr<ecore::EObject>  SystemModelImpl::copy() const
+{
+	std::shared_ptr<SystemModelImpl> element(new SystemModelImpl(*this));
+	element->setThisSystemModelPtr(element);
+	return element;
+}
+
 
 std::shared_ptr<uml::Class> SystemModelImpl::getMetaClass()
 {

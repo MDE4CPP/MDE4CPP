@@ -40,9 +40,12 @@
 [for (aClass : Class | aPackage.collectModelClassesForFactoryDeclaration())]
 #include "[aPackage.getPackageName()/]/impl/[aClass.name.toUpperFirst().concat('Impl.hpp')/]"
 [/for]
+
+[comment] DISABLE INTERFACE IMPLEMENTATION
 [for (aInterface : Interface | aPackage.collectModelInterfacesForFactory())]
 #include "[aPackage.getPackageName()/]/impl/[aInterface.name.toUpperFirst().concat('Impl.hpp')/]"
 [/for]
+[/comment]
 
 [if (not aPackage.ignoreNamespace())]using namespace [aPackage.name/];[/if]
 //*********************************
@@ -123,6 +126,7 @@ std::shared_ptr<uml::Element> [className/]::create(const unsigned int _metaClass
 		}
 	[/let]
 	[/for]
+[comment] DISABLE INTERFACE IMPLEMENTATION
 	[for (aInterface : Interface | aPackage.collectModelInterfacesForFactory())]
 	[let ref:OrderedSet(Association) = aInterface.getCompositionsToInterface()]
 		case [aPackage.name.toUpperFirst()/]Package::[aInterface.getMemberName().toUpperCase()/]:
@@ -167,6 +171,7 @@ std::shared_ptr<uml::Element> [className/]::create(const unsigned int _metaClass
 		}
 	[/let]
 	[/for]
+[/comment]
 	default:
 	   	    std::cerr << __PRETTY_FUNCTION__ << " ID " << _metaClassId <<" not found" << std::endl;
 	}
@@ -227,6 +232,7 @@ std::shared_ptr<[aClass.generateCppType(true)/]> [className/]::create[aClass.nam
 [/let]
 [/for][/for]
 
+[comment]
 [for (aInterface : Interface | aPackage.collectModelInterfacesForFactory())]
 std::shared_ptr<[aInterface.generateCppType(true)/]> [className/]::create[aInterface.name.toUpperFirst()/](const int metaElementID/*=-1*/) const
 {
@@ -257,6 +263,7 @@ std::shared_ptr<[aInterface.generateCppType(true)/]> [className/]::create[aInter
 [/let]
 [/for]
 [/for]
+[/comment]
 
 
 std::shared_ptr<[aPackage.name.toUpperFirst().concat('Package')/]> [className/]::get[aPackage.name.toUpperFirst().concat('Package')/]()

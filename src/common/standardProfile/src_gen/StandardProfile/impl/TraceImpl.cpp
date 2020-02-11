@@ -46,6 +46,21 @@ TraceImpl::~TraceImpl()
 {
 }
 
+TraceImpl::TraceImpl(const TraceImpl & obj):TraceImpl()
+{
+	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Trace "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
+}
+
+std::shared_ptr<ecore::EObject>  TraceImpl::copy() const
+{
+	std::shared_ptr<TraceImpl> element(new TraceImpl(*this));
+	element->setThisTracePtr(element);
+	return element;
+}
+
 
 std::shared_ptr<uml::Class> TraceImpl::getMetaClass()
 {

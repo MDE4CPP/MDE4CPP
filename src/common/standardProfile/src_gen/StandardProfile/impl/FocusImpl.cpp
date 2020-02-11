@@ -46,6 +46,21 @@ FocusImpl::~FocusImpl()
 {
 }
 
+FocusImpl::FocusImpl(const FocusImpl & obj):FocusImpl()
+{
+	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Focus "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
+}
+
+std::shared_ptr<ecore::EObject>  FocusImpl::copy() const
+{
+	std::shared_ptr<FocusImpl> element(new FocusImpl(*this));
+	element->setThisFocusPtr(element);
+	return element;
+}
+
 
 std::shared_ptr<uml::Class> FocusImpl::getMetaClass()
 {

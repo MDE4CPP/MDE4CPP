@@ -27,8 +27,11 @@ namespace StandardProfile
 {
 	class CallImpl : virtual public uml::StereotypeImpl, virtual public Call
 	{
+		public: 
+			CallImpl(const CallImpl & obj);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+
 		private:    
-			CallImpl(CallImpl const&) = delete;
 			CallImpl& operator=(CallImpl const&) = delete;
 
 		protected:
@@ -40,6 +43,7 @@ namespace StandardProfile
 
 
 		public:
+
 			//destructor
 			virtual ~CallImpl();
 

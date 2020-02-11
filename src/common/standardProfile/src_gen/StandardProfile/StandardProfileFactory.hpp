@@ -44,7 +44,6 @@ namespace StandardProfile
 	class Trace;
 	class Type;
 	class Utility;
-
 	class StandardProfilePackage;
 	class StandardProfileFactory;
 
@@ -131,7 +130,6 @@ namespace StandardProfile
 			virtual std::shared_ptr<StandardProfile::Type> createType(const int metaElementID=-1) const  = 0;
 			
 			virtual std::shared_ptr<StandardProfile::Utility> createUtility(const int metaElementID=-1) const  = 0;
-			
 			
 			
 

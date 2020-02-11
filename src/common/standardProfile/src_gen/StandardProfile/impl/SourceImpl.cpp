@@ -28,13 +28,10 @@ SourceImpl::SourceImpl()
 	//***********************************
 	// init Get Set
 	//getter init
-	m_getterMap.insert(std::pair<std::string,std::function<Any()>>("StandardProfile::File::base_Artifact",[this](){ return eAny(this->getBase_Artifact());}));
 	m_getterMap.insert(std::pair<std::string,std::function<Any()>>("StandardProfile::Source::base_Artifact",[this](){ return eAny(this->getBase_Artifact());}));
 	
-	m_setterMap.insert(std::pair<std::string,std::function<void(Any)>>("StandardProfile::File::base_Artifact",[this](Any object){this->setBase_Artifact(object->get<std::shared_ptr<uml::Artifact>>());}));
 	m_setterMap.insert(std::pair<std::string,std::function<void(Any)>>("StandardProfile::Source::base_Artifact",[this](Any object){this->setBase_Artifact(object->get<std::shared_ptr<uml::Artifact>>());}));
 	
-	m_unsetterMap.insert(std::pair<std::string,std::function<void()>>("StandardProfile::File::base_Artifact",[this](){m_base_Artifact = std::shared_ptr<uml::Artifact>(nullptr);}));
 	m_unsetterMap.insert(std::pair<std::string,std::function<void()>>("StandardProfile::Source::base_Artifact",[this](){m_base_Artifact = std::shared_ptr<uml::Artifact>(nullptr);}));
 	 
 
@@ -47,6 +44,21 @@ SourceImpl::SourceImpl()
 
 SourceImpl::~SourceImpl()
 {
+}
+
+SourceImpl::SourceImpl(const SourceImpl & obj):SourceImpl()
+{
+	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Source "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
+}
+
+std::shared_ptr<ecore::EObject>  SourceImpl::copy() const
+{
+	std::shared_ptr<SourceImpl> element(new SourceImpl(*this));
+	element->setThisSourcePtr(element);
+	return element;
 }
 
 
@@ -84,7 +96,7 @@ Any SourceImpl::get(std::shared_ptr<uml::Property> _property) const
         //invoke the getter function
         return iter->second();
     }
-	return eAny(nullptr);
+	return StandardProfile::FileImpl::get(_property);
 }
 
 void SourceImpl::set(std::shared_ptr<uml::Property> _property, Any value)
@@ -97,6 +109,7 @@ void SourceImpl::set(std::shared_ptr<uml::Property> _property, Any value)
         //invoke the getter function
         iter->second(value);
     }
+	StandardProfile::FileImpl::set(_property, value);
 }
 
 void SourceImpl::unset(std::shared_ptr<uml::Property> _property)
@@ -109,6 +122,7 @@ void SourceImpl::unset(std::shared_ptr<uml::Property> _property)
         //invoke the getter function
         iter->second();
     }
+	StandardProfile::FileImpl::unset(_property);
 }
 
 

@@ -46,6 +46,21 @@ InstantiateImpl::~InstantiateImpl()
 {
 }
 
+InstantiateImpl::InstantiateImpl(const InstantiateImpl & obj):InstantiateImpl()
+{
+	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Instantiate "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
+}
+
+std::shared_ptr<ecore::EObject>  InstantiateImpl::copy() const
+{
+	std::shared_ptr<InstantiateImpl> element(new InstantiateImpl(*this));
+	element->setThisInstantiatePtr(element);
+	return element;
+}
+
 
 std::shared_ptr<uml::Class> InstantiateImpl::getMetaClass()
 {

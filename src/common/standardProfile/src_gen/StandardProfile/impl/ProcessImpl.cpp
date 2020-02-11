@@ -46,6 +46,21 @@ ProcessImpl::~ProcessImpl()
 {
 }
 
+ProcessImpl::ProcessImpl(const ProcessImpl & obj):ProcessImpl()
+{
+	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Process "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
+}
+
+std::shared_ptr<ecore::EObject>  ProcessImpl::copy() const
+{
+	std::shared_ptr<ProcessImpl> element(new ProcessImpl(*this));
+	element->setThisProcessPtr(element);
+	return element;
+}
+
 
 std::shared_ptr<uml::Class> ProcessImpl::getMetaClass()
 {

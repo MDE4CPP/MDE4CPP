@@ -27,8 +27,11 @@ namespace StandardProfile
 {
 	class RefineImpl : virtual public uml::StereotypeImpl, virtual public Refine
 	{
+		public: 
+			RefineImpl(const RefineImpl & obj);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+
 		private:    
-			RefineImpl(RefineImpl const&) = delete;
 			RefineImpl& operator=(RefineImpl const&) = delete;
 
 		protected:
@@ -40,6 +43,7 @@ namespace StandardProfile
 
 
 		public:
+
 			//destructor
 			virtual ~RefineImpl();
 

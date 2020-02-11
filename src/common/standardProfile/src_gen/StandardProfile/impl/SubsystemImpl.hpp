@@ -27,8 +27,11 @@ namespace StandardProfile
 {
 	class SubsystemImpl : virtual public uml::StereotypeImpl, virtual public Subsystem
 	{
+		public: 
+			SubsystemImpl(const SubsystemImpl & obj);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+
 		private:    
-			SubsystemImpl(SubsystemImpl const&) = delete;
 			SubsystemImpl& operator=(SubsystemImpl const&) = delete;
 
 		protected:
@@ -40,6 +43,7 @@ namespace StandardProfile
 
 
 		public:
+
 			//destructor
 			virtual ~SubsystemImpl();
 

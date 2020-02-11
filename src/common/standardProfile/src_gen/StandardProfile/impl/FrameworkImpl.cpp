@@ -46,6 +46,21 @@ FrameworkImpl::~FrameworkImpl()
 {
 }
 
+FrameworkImpl::FrameworkImpl(const FrameworkImpl & obj):FrameworkImpl()
+{
+	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Framework "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
+}
+
+std::shared_ptr<ecore::EObject>  FrameworkImpl::copy() const
+{
+	std::shared_ptr<FrameworkImpl> element(new FrameworkImpl(*this));
+	element->setThisFrameworkPtr(element);
+	return element;
+}
+
 
 std::shared_ptr<uml::Class> FrameworkImpl::getMetaClass()
 {

@@ -46,6 +46,21 @@ ResponsibilityImpl::~ResponsibilityImpl()
 {
 }
 
+ResponsibilityImpl::ResponsibilityImpl(const ResponsibilityImpl & obj):ResponsibilityImpl()
+{
+	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Responsibility "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
+}
+
+std::shared_ptr<ecore::EObject>  ResponsibilityImpl::copy() const
+{
+	std::shared_ptr<ResponsibilityImpl> element(new ResponsibilityImpl(*this));
+	element->setThisResponsibilityPtr(element);
+	return element;
+}
+
 
 std::shared_ptr<uml::Class> ResponsibilityImpl::getMetaClass()
 {

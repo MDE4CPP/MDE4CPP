@@ -27,8 +27,11 @@ namespace StandardProfile
 {
 	class LibraryImpl:virtual public FileImpl, virtual public Library
 	{
+		public: 
+			LibraryImpl(const LibraryImpl & obj);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+
 		private:    
-			LibraryImpl(LibraryImpl const&) = delete;
 			LibraryImpl& operator=(LibraryImpl const&) = delete;
 
 		protected:
@@ -40,6 +43,7 @@ namespace StandardProfile
 
 
 		public:
+
 			//destructor
 			virtual ~LibraryImpl();
 

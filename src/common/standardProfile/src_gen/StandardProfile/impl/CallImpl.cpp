@@ -46,6 +46,21 @@ CallImpl::~CallImpl()
 {
 }
 
+CallImpl::CallImpl(const CallImpl & obj):CallImpl()
+{
+	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Call "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
+}
+
+std::shared_ptr<ecore::EObject>  CallImpl::copy() const
+{
+	std::shared_ptr<CallImpl> element(new CallImpl(*this));
+	element->setThisCallPtr(element);
+	return element;
+}
+
 
 std::shared_ptr<uml::Class> CallImpl::getMetaClass()
 {
