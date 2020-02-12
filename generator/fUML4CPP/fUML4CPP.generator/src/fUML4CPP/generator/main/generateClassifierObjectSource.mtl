@@ -257,7 +257,6 @@ void [className/]::setFeatureValue(std::shared_ptr<uml::StructuralFeature> featu
 		std::cout << __PRETTY_FUNCTION__ << ": no input value given" << std::endl;
 		return;
 	}
-	std::shared_ptr<Value> inputValue = values->at(0);
 [for (aProperty : Property | aPackage.getStructuralFeaturesFromASTVA(aClassifier).oclAsType(Property))]
 	if (property == [aProperty.getModelPackage()/][aProperty.generatePackageGetterCall(aProperty)/])
 	{
