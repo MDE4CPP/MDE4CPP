@@ -329,7 +329,7 @@
           </eAnnotations>
         </eOperations>
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" ordered="false"
-            lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat"/>
+            lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="SignalInstance" eSuperTypes="#//Semantics/SimpleClassifiers/CompoundValue">
         <eStructuralFeatures xsi:type="ecore:EReference" name="type" ordered="false"
