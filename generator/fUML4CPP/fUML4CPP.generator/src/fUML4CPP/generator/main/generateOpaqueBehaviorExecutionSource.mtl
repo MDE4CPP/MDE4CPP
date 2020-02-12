@@ -14,6 +14,7 @@
  */]
 [module generateOpaqueBehaviorExecutionSource('http://www.eclipse.org/uml2/5.0.0/UML')]
 
+[import fUML4CPP::generator::main::generateOpaqueBehaviorExecution /]
 [import fUML4CPP::generator::main::parameterHelper /]
 [import UML4CPP::generator::main::components::generateType /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
@@ -29,15 +30,7 @@
 [query private isSelfAttribute(pin : Pin) : Boolean = pin.name.startsWith('self.')/]
 [query private getPinType(pin : Pin, action : Action) : Type = if (pin.isSelf()) then action.getSelf() else (if pin.isSelfAttribute() then pin.getSelfAttribute(action).type else pin.type endif) endif /]
 
-[template public generateOpaqueBehaviorExecutionSource(anOpaqueBehavior : OpaqueBehavior, aPackage :Package)]
-[anOpaqueBehavior.generateOpaqueBehaviorExecSource(aPackage)/]
-[/template]
-
-[template public generateOpaqueBehaviorExecutionSource(aCallOperationAction : CallOperationAction, aPackage :Package)]
-[aCallOperationAction.generateOpaqueBehaviorExecSource(aPackage)/]
-[/template]
-
-[template public generateOpaqueBehaviorExecSource(aNamedElement : NamedElement, aPackage :Package) {
+[template public generateOpaqueBehaviorExecutionSource(aNamedElement : NamedElement, aPackage :Package) {
 	behaviorName : String = aNamedElement.generateOpaqueBehaviorExecutionName(); 
 }]
 
@@ -56,11 +49,6 @@
 #include "uml/Behavior.hpp"
 
 [aNamedElement.generateIncludes(aPackage)/]
-
-[if (aNamedElement.hasGenerateOwnerVariable())]
-#include "[aNamedElement.owner.oclAsType(Classifier).getNearestPackage().myNamespaceName()/]/[aNamedElement.owner.oclAsType(Classifier).name.toUpperFirst()/].hpp"
-#include "[aPackage.getPackageName()/]Exec/[aNamedElement.owner.oclAsType(Classifier).name.toUpperFirst()/]Object.hpp"
-[/if]
 
 using namespace [aPackage.name/];
 
@@ -101,20 +89,8 @@ void [behaviorName/]::setThisExecutionPtr(std::weak_ptr<[behaviorName/]> thisExe
 [/file]
 [/template]
 
-[template private generateIncludes(aNamedElement : NamedElement, aPackage : Package) ? (aNamedElement.oclIsKindOf(OpaqueBehavior))]
-[let anOpaqueBehavior : OpaqueBehavior = aNamedElement.oclAsType(OpaqueBehavior)]
-[if (anOpaqueBehavior.language->includes(keyInclude()))]
-[let index : Integer = anOpaqueBehavior.language->indexOf(keyInclude())]
-[if (0 < index and index <= anOpaqueBehavior._body->size())]
-//Included from function behavior "[anOpaqueBehavior.name/]"
-[anOpaqueBehavior._body->at(index)/]
-[/if][/let][/if]
-
-#include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
-[for (type : Type | anOpaqueBehavior.ownedParameter.type->asOrderedSet())]
-[type.generateTypeInclude(aPackage)/]
-[/for]
-[/let]
+[template private generateIncludes(aNamedElement : NamedElement, aPackage : Package) ? (aNamedElement.oclIsKindOf(CallBehaviorAction))]
+[aNamedElement.oclAsType(CallBehaviorAction).behavior.oclAsType(OpaqueBehavior).generateIncludesOpaqueBehavior(aPackage)/]
 [/template]
 
 [template private generateIncludes(aNamedElement : NamedElement, aPackage : Package) ? (aNamedElement.oclIsKindOf(CallOperationAction))]
@@ -140,8 +116,31 @@ void [behaviorName/]::setThisExecutionPtr(std::weak_ptr<[behaviorName/]> thisExe
 [/let]
 [/template]
 
-[template private generateBody(aNamedElement : NamedElement, aPackage : Package) ? (aNamedElement.oclIsKindOf(OpaqueBehavior))]
-[let anOpaqueBehavior : OpaqueBehavior = aNamedElement.oclAsType(OpaqueBehavior)]
+[template private generateIncludes(aNamedElement : NamedElement, aPackage : Package) ? (aNamedElement.oclIsKindOf(DecisionNode))]
+[aNamedElement.oclAsType(DecisionNode).decisionInput.oclAsType(OpaqueBehavior).generateIncludesOpaqueBehavior(aPackage)/]
+[/template]
+
+[template private generateIncludesOpaqueBehavior(anOpaqueBehavior : OpaqueBehavior, aPackage : Package)]
+[if (anOpaqueBehavior.language->includes(keyInclude()))]
+[let index : Integer = anOpaqueBehavior.language->indexOf(keyInclude())]
+[if (0 < index and index <= anOpaqueBehavior._body->size())]
+//Included from function behavior "[anOpaqueBehavior.name/]"
+[anOpaqueBehavior._body->at(index)/]
+[/if][/let][/if]
+
+#include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
+[for (type : Type | anOpaqueBehavior.ownedParameter.type->asOrderedSet())]
+[type.generateTypeInclude(aPackage)/]
+[/for]
+[if (anOpaqueBehavior.hasGenerateOwnerVariable())]
+
+#include "[anOpaqueBehavior.owner.oclAsType(Classifier).getNearestPackage().myNamespaceName()/]/[anOpaqueBehavior.owner.oclAsType(Classifier).name.toUpperFirst()/].hpp"
+#include "[aPackage.getPackageName()/]Exec/[anOpaqueBehavior.owner.oclAsType(Classifier).name.toUpperFirst()/]Object.hpp"
+[/if]
+[/template]
+
+[template private generateBody(aNamedElement : NamedElement, aPackage : Package) ? (aNamedElement.oclIsKindOf(CallBehaviorAction))]
+[let anOpaqueBehavior : OpaqueBehavior = aNamedElement.oclAsType(CallBehaviorAction).behavior.oclAsType(OpaqueBehavior)]
 [anOpaqueBehavior.ownedParameter->generateIncomingParameters()/]
 
 //Body of the Opaquebehavior
@@ -157,7 +156,7 @@ std::shared_ptr<[anOpaqueBehavior.owner.oclAsType(Classifier).namespace.myNamesp
 [/if][/let]
 [else]
 std::cout << __PRETTY_FUNCTION__ << std::endl;
-throw "UnsupportedOperationException";
+throw "UnsupportedBehaviorException";
 [/if]
 
 [anOpaqueBehavior.ownedParameter->generateOutgoingParameters()/]
@@ -201,6 +200,30 @@ if (target == nullptr)
 [/let]	
 
 [aCallOperationAction.operation.ownedParameter->generateOutgoingParameters()/]
+[/let]
+[/template]
+
+[template private generateBody(aNamedElement : NamedElement, aPackage : Package) ? (aNamedElement.oclIsKindOf(DecisionNode))]
+[let anOpaqueBehavior : OpaqueBehavior = aNamedElement.oclAsType(DecisionNode).decisionInput.oclAsType(OpaqueBehavior)]
+[anOpaqueBehavior.ownedParameter->generateIncomingParameters()/]
+
+//Body of the Opaquebehavior
+//Start ---------------------------
+[if (anOpaqueBehavior.hasGenerateOwnerVariable())]
+std::shared_ptr<[anOpaqueBehavior.owner.oclAsType(Classifier).namespace.myNamespaceName()/]::[anOpaqueBehavior.owner.oclAsType(Classifier).name.toUpperFirst()/]> owner = std::dynamic_pointer_cast<[anOpaqueBehavior.owner.oclAsType(Classifier).name.toUpperFirst()/]Object>(this->getContext())->getUmlValue();
+[/if]
+
+[if (anOpaqueBehavior.language->includes(keyCPP()))]
+[let index : Integer = anOpaqueBehavior.language->indexOf(keyCPP())]
+[if (0 < index and index <= anOpaqueBehavior._body->size())]
+[anOpaqueBehavior._body->at(index)/]
+[/if][/let]
+[else]
+std::cout << __PRETTY_FUNCTION__ << std::endl;
+throw "UnsupportedBehaviorException";
+[/if]
+
+[anOpaqueBehavior.ownedParameter->generateOutgoingParameters()/]
 [/let]
 [/template]
 

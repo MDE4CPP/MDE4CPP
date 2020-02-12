@@ -92,6 +92,12 @@ int main()
 [/file]
 [/template]
 
+[query private findPackagesForOpaqueBehaviorExecutions(aPackage : Package) : OrderedSet(Package) = OrderedSet(Package){
+						aPackage.getCallBehaviorActionsWithOB().behavior.getNearestPackage(),
+						aPackage.getCallOperationActions().operation.getNearestPackage(),
+						aPackage.getDecisionNodesWithOB().decisionInput.getNearestPackage()
+					}->flatten()->sortedBy(name) /]
+
 [template public generateMainIncludes(aPackage : Package)]
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "fUML/FUMLFactory.hpp"
@@ -117,7 +123,7 @@ int main()
 #include "[aPackage.getPackageName()/]Exec/impl/[aPackage.getPackageName().toUpperFirst()/]LocusImpl.hpp"
 #include "[aPackage.getPackageName()/]/[aPackage.getPackageName().toUpperFirst().concat('Package')/].hpp"
 
-[for (anotherPackage : Package | aPackage.getOpaqueBehaviors().getNearestPackage()->addAll(aPackage.getCallOperationActions().operation.getNearestPackage())->asSet()->sortedBy(name))]
+[for (anotherPackage : Package | aPackage.findPackagesForOpaqueBehaviorExecutions())]
 #include "[anotherPackage.getPackageName()/]/[anotherPackage.getPackageName().toUpperFirst().concat('Package')/].hpp" 
 [/for] 
 [for (pack : Package | aPackage.getCallOperationActions().operation.ownedParameter.type.getNearestPackage()->asSet()->sortedBy(name))]
@@ -126,18 +132,10 @@ int main()
 [/if]
 [/for]
 
-
-[if (aPackage.getOpaqueBehaviors()->size()>0)]
 //OpaqueBehaviourExecutions
-[aPackage.getOpaqueBehaviors()->sortedBy(myQualifiedName()).generateInclude()/]
-[/if]
-
-[if (aPackage.getCallOperationActions()->size()>0)]
-//OpaqueBehaviourExecutions
-[for (aCOA : CallOperationAction | aPackage.getCallOperationActions()->sortedBy(myQualifiedName()))]
-[aCOA.generateInclude()/]
-[/for]
-[/if]
+[aPackage.getCallBehaviorActionsWithOB().generateInclude()/]
+[aPackage.getDecisionNodesWithOB().generateInclude()/]
+[aPackage.getCallOperationActions().generateInclude()/]
 [/template]
 
 [template public generateActivityRelatedIncludes(anActivity : Activity, aPackage : Package)]
@@ -181,13 +179,17 @@ locus->getFactory()->assignStrategy(std::shared_ptr<fUML::Semantics::StructuredC
 [/template]
 
 [template public generateStartActivityExecution(anActivity : Activity)]
-[if (anActivity.getOpaqueBehaviors()->size() > 0)]
-[anActivity.getOpaqueBehaviors()->sortedBy(myQualifiedName()).generateOpaqueBehaviorCreation()/]
-[/if]
+[for (aDecisionNode : DecisionNode | anActivity.getDecisionNodesWithOB())]
+[aDecisionNode.decisionInput.oclAsType(OpaqueBehavior).generateOpaqueBehaviorCreation(aDecisionNode.generateOpaqueBehaviorExecutionName())/]
+[/for]
 
-[if (anActivity.getCallOperationActions()->size() > 0)]
-[anActivity.getCallOperationActions()->sortedBy(myQualifiedName()).generateCallOperationActionCreation()/]
-[/if]
+[for (aCBA : CallBehaviorAction | anActivity.getCallBehaviorActionsWithOB())]
+[aCBA.behavior.oclAsType(OpaqueBehavior).generateOpaqueBehaviorCreation(aCBA.generateOpaqueBehaviorExecutionName())/]
+[/for]
+
+[for (aCOA : CallOperationAction | anActivity.getCallOperationActions())]
+[aCOA.generateCallOperationActionCreation()/]
+[/for]
 
 std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > pList(new Bag<fUML::Semantics::CommonBehavior::ParameterValue>());
 [for (par : Parameter | anActivity.ownedParameter->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in))->sortedBy(name))]
