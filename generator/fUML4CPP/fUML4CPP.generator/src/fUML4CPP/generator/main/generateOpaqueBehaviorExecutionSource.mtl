@@ -23,7 +23,7 @@
 
 [query private getActivity(anAction : Action) : Activity = if (anAction.activity.oclIsUndefined()) then anAction.inStructuredNode.getActivity() else anAction.activity endif /]
 [query private getOwnerOrTargetType(aCOA : CallOperationAction) : Type = if (aCOA.target.isSelfAttribute() or aCOA.target.isSelf()) then aCOA.getActivity().owner.oclAsType(Type) else aCOA.target.type endif /]
-[query public hasGenerateOwnerVariable(aElement : Element) : Boolean = aElement.valueKey('generateOwnerVariable') = 'true'/]
+[query public hasGenerateContextVariable(aElement : Element) : Boolean = aElement.valueKey('generateContextVariable') = 'true'/]
 [query private getSelf(action : Action) : Classifier = action.getActivity().owner.oclAsType(Classifier)/]
 [query private getSelfAttribute(pin : Pin, action : Action) : Property = action.getSelf().attribute->select(pin.name = 'self.'.concat(name))->asOrderedSet()->first()/]
 [query private isSelf(pin : Pin) : Boolean = pin.name = 'self'/]
@@ -132,7 +132,7 @@ void [behaviorName/]::setThisExecutionPtr(std::weak_ptr<[behaviorName/]> thisExe
 [for (type : Type | anOpaqueBehavior.ownedParameter.type->asOrderedSet())]
 [type.generateTypeInclude(aPackage)/]
 [/for]
-[if (anOpaqueBehavior.hasGenerateOwnerVariable() or requiresContext)]
+[if (anOpaqueBehavior.hasGenerateContextVariable() or requiresContext)]
 
 #include "[anOpaqueBehavior.owner.oclAsType(Classifier).getNearestPackage().myNamespaceName()/]/[anOpaqueBehavior.owner.oclAsType(Classifier).name.toUpperFirst()/].hpp"
 #include "[aPackage.getPackageName()/]Exec/[anOpaqueBehavior.owner.oclAsType(Classifier).name.toUpperFirst()/]Object.hpp"
@@ -142,7 +142,7 @@ void [behaviorName/]::setThisExecutionPtr(std::weak_ptr<[behaviorName/]> thisExe
 [template private generateBody(aNamedElement : NamedElement, aPackage : Package) ? (aNamedElement.oclIsKindOf(CallBehaviorAction))]
 [let aCallBehaviorAction : CallBehaviorAction = aNamedElement.oclAsType(CallBehaviorAction)]
 [let anOpaqueBehavior : OpaqueBehavior = aCallBehaviorAction.behavior.oclAsType(OpaqueBehavior)]
-[if (anOpaqueBehavior.hasGenerateOwnerVariable() or aCallBehaviorAction.argument->select(isSelf() or isSelfAttribute())->size() > 0)]
+[if (anOpaqueBehavior.hasGenerateContextVariable() or aCallBehaviorAction.argument->select(isSelf() or isSelfAttribute())->size() > 0)]
 std::shared_ptr<[anOpaqueBehavior.getContext().namespace.myNamespaceName()/]::[anOpaqueBehavior.getContext().name.toUpperFirst()/]> context = std::dynamic_pointer_cast<[anOpaqueBehavior.getContext().name.toUpperFirst()/]Object>(this->getContext())->getUmlValue();
 DEBUG_MESSAGE(
 	if (context == nullptr)
@@ -231,7 +231,7 @@ DEBUG_MESSAGE(
 
 //Body of the Opaquebehavior
 //Start ---------------------------
-[if (anOpaqueBehavior.hasGenerateOwnerVariable())]
+[if (anOpaqueBehavior.hasGenerateContextVariable())]
 std::shared_ptr<[anOpaqueBehavior.owner.oclAsType(Classifier).namespace.myNamespaceName()/]::[anOpaqueBehavior.owner.oclAsType(Classifier).name.toUpperFirst()/]> context = std::dynamic_pointer_cast<[anOpaqueBehavior.owner.oclAsType(Classifier).name.toUpperFirst()/]Object>(this->getContext())->getUmlValue();
 [/if]
 
