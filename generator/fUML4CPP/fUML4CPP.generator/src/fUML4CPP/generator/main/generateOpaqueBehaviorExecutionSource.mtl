@@ -90,7 +90,7 @@ void [behaviorName/]::setThisExecutionPtr(std::weak_ptr<[behaviorName/]> thisExe
 [/template]
 
 [template private generateIncludes(aNamedElement : NamedElement, aPackage : Package) ? (aNamedElement.oclIsKindOf(CallBehaviorAction))]
-[aNamedElement.oclAsType(CallBehaviorAction).behavior.oclAsType(OpaqueBehavior).generateIncludesOpaqueBehavior(aPackage)/]
+[aNamedElement.oclAsType(CallBehaviorAction).behavior.oclAsType(OpaqueBehavior).generateIncludesOpaqueBehavior(aNamedElement.oclAsType(CallBehaviorAction).argument->select(isSelf() or isSelfAttribute())->size() > 0, aPackage)/]
 [/template]
 
 [template private generateIncludes(aNamedElement : NamedElement, aPackage : Package) ? (aNamedElement.oclIsKindOf(CallOperationAction))]
@@ -117,10 +117,10 @@ void [behaviorName/]::setThisExecutionPtr(std::weak_ptr<[behaviorName/]> thisExe
 [/template]
 
 [template private generateIncludes(aNamedElement : NamedElement, aPackage : Package) ? (aNamedElement.oclIsKindOf(DecisionNode))]
-[aNamedElement.oclAsType(DecisionNode).decisionInput.oclAsType(OpaqueBehavior).generateIncludesOpaqueBehavior(aPackage)/]
+[aNamedElement.oclAsType(DecisionNode).decisionInput.oclAsType(OpaqueBehavior).generateIncludesOpaqueBehavior(false, aPackage)/]
 [/template]
 
-[template private generateIncludesOpaqueBehavior(anOpaqueBehavior : OpaqueBehavior, aPackage : Package)]
+[template private generateIncludesOpaqueBehavior(anOpaqueBehavior : OpaqueBehavior, requiresContext : Boolean, aPackage : Package)]
 [if (anOpaqueBehavior.language->includes(keyInclude()))]
 [let index : Integer = anOpaqueBehavior.language->indexOf(keyInclude())]
 [if (0 < index and index <= anOpaqueBehavior._body->size())]
@@ -132,7 +132,7 @@ void [behaviorName/]::setThisExecutionPtr(std::weak_ptr<[behaviorName/]> thisExe
 [for (type : Type | anOpaqueBehavior.ownedParameter.type->asOrderedSet())]
 [type.generateTypeInclude(aPackage)/]
 [/for]
-[if (anOpaqueBehavior.hasGenerateOwnerVariable())]
+[if (anOpaqueBehavior.hasGenerateOwnerVariable() or requiresContext)]
 
 #include "[anOpaqueBehavior.owner.oclAsType(Classifier).getNearestPackage().myNamespaceName()/]/[anOpaqueBehavior.owner.oclAsType(Classifier).name.toUpperFirst()/].hpp"
 #include "[aPackage.getPackageName()/]Exec/[anOpaqueBehavior.owner.oclAsType(Classifier).name.toUpperFirst()/]Object.hpp"
@@ -140,15 +140,32 @@ void [behaviorName/]::setThisExecutionPtr(std::weak_ptr<[behaviorName/]> thisExe
 [/template]
 
 [template private generateBody(aNamedElement : NamedElement, aPackage : Package) ? (aNamedElement.oclIsKindOf(CallBehaviorAction))]
-[let anOpaqueBehavior : OpaqueBehavior = aNamedElement.oclAsType(CallBehaviorAction).behavior.oclAsType(OpaqueBehavior)]
-[anOpaqueBehavior.ownedParameter->generateIncomingParameters()/]
-
-//Body of the Opaquebehavior
-//Start ---------------------------
-[if (anOpaqueBehavior.hasGenerateOwnerVariable())]
-std::shared_ptr<[anOpaqueBehavior.owner.oclAsType(Classifier).namespace.myNamespaceName()/]::[anOpaqueBehavior.owner.oclAsType(Classifier).name.toUpperFirst()/]> owner = std::dynamic_pointer_cast<[anOpaqueBehavior.owner.oclAsType(Classifier).name.toUpperFirst()/]Object>(this->getContext())->getUmlValue();
+[let aCallBehaviorAction : CallBehaviorAction = aNamedElement.oclAsType(CallBehaviorAction)]
+[let anOpaqueBehavior : OpaqueBehavior = aCallBehaviorAction.behavior.oclAsType(OpaqueBehavior)]
+[if (anOpaqueBehavior.hasGenerateOwnerVariable() or aCallBehaviorAction.argument->select(isSelf() or isSelfAttribute())->size() > 0)]
+std::shared_ptr<[anOpaqueBehavior.getContext().namespace.myNamespaceName()/]::[anOpaqueBehavior.getContext().name.toUpperFirst()/]> context = std::dynamic_pointer_cast<[anOpaqueBehavior.getContext().name.toUpperFirst()/]Object>(this->getContext())->getUmlValue();
+DEBUG_MESSAGE(
+	if (context == nullptr)
+	{
+		std::cerr << "context of CallOperationAction '[anOpaqueBehavior.name/]'is not set" << std::endl;
+	    throw "error";
+	}
+)
 [/if]
 
+[for (pin : InputPin | aCallBehaviorAction.argument)]
+[if (not (pin.isSelf() or pin.isSelfAttribute()))]
+[pin.generateIncomingPin(aCallBehaviorAction.argument->indexOf(pin)-1)/]
+[else]
+[pin.generateCppType(false)/] [pin.name.replaceFirst('self.', '')/] = [pin.generateArgumentGetter(aCallBehaviorAction)/]
+[/if]
+[/for]
+
+[for (outPar : Parameter | aCallBehaviorAction.behavior.ownedParameter->select(p :Parameter | (p.direction = ParameterDirectionKind::out or p.direction = ParameterDirectionKind::return)))]
+[outPar.generateCppType(false)/] [outPar.name/][if (outPar.upper <> 1)](new Bag<[outPar.type.generateCppType(true)/]>())[/if];
+[/for]	
+
+//Body of the Opaquebehavior
 [if (anOpaqueBehavior.language->includes(keyCPP()))]
 [let index : Integer = anOpaqueBehavior.language->indexOf(keyCPP())]
 [if (0 < index and index <= anOpaqueBehavior._body->size())]
@@ -161,32 +178,37 @@ throw "UnsupportedBehaviorException";
 
 [anOpaqueBehavior.ownedParameter->generateOutgoingParameters()/]
 [/let]
+[/let]
 [/template]
 
 [template private generateBody(aNamedElement : NamedElement, aPackage : Package) ? (aNamedElement.oclIsKindOf(CallOperationAction))]
 [let aCallOperationAction : CallOperationAction = aNamedElement.oclAsType(CallOperationAction)]
 [let type : Classifier = aCallOperationAction.getOwnerOrTargetType()]
 std::shared_ptr<[type.namespace.myNamespaceName()/]::[type.name.toUpperFirst()/]> context = std::dynamic_pointer_cast<[type.name.toUpperFirst()/]Object>(this->getContext())->getUmlValue();
-if (context == nullptr)
-{
-	std::cerr << "context of CallOperationAction '[aCallOperationAction.name/]'is not set" << std::endl;
-    return;
-}
+DEBUG_MESSAGE(
+	if (context == nullptr)
+	{
+		std::cerr << "context of CallOperationAction '[aCallOperationAction.name/]'is not set" << std::endl;
+	    throw "error";
+	}
+)
 [let targetPin : Pin = aCallOperationAction.target]
 std::shared_ptr<[targetPin.getPinType(aCallOperationAction).namespace.myNamespaceName()/]::[targetPin.getPinType(aCallOperationAction).name.toUpperFirst()/]> target = context[if (targetPin.isSelfAttribute())]->[targetPin.getSelfAttribute(aCallOperationAction).getterName()/]()[/if];
 [/let]
 [/let]
-if (target == nullptr)
-{
-	std::cerr << "target of CallOperationAction '[aCallOperationAction.name/]'is null" << std::endl;
-	throw "target is null";
-}
+DEBUG_MESSAGE(
+	if (target == nullptr)
+	{
+		std::cerr << "target of CallOperationAction '[aCallOperationAction.name/]'is null" << std::endl;
+		throw "target is null";
+	}
+)
 
 [for (pin : InputPin | aCallOperationAction.argument)]
 [if (not (pin.isSelf() or pin.isSelfAttribute()))]
-	[pin.generateIncomingPin(aCallOperationAction.argument->indexOf(pin)-1)/]
+[pin.generateIncomingPin(aCallOperationAction.argument->indexOf(pin)-1)/]
 [else]
-	[pin.generateCppType(false)/] [pin.name.replaceFirst('self.', '')/] = [pin.generateArgumentGetter(aCallOperationAction)/]
+[pin.generateCppType(false)/] [pin.name.replaceFirst('self.', '')/] = [pin.generateArgumentGetter(aCallOperationAction)/]
 [/if]
 [/for]
 
@@ -210,7 +232,7 @@ if (target == nullptr)
 //Body of the Opaquebehavior
 //Start ---------------------------
 [if (anOpaqueBehavior.hasGenerateOwnerVariable())]
-std::shared_ptr<[anOpaqueBehavior.owner.oclAsType(Classifier).namespace.myNamespaceName()/]::[anOpaqueBehavior.owner.oclAsType(Classifier).name.toUpperFirst()/]> owner = std::dynamic_pointer_cast<[anOpaqueBehavior.owner.oclAsType(Classifier).name.toUpperFirst()/]Object>(this->getContext())->getUmlValue();
+std::shared_ptr<[anOpaqueBehavior.owner.oclAsType(Classifier).namespace.myNamespaceName()/]::[anOpaqueBehavior.owner.oclAsType(Classifier).name.toUpperFirst()/]> context = std::dynamic_pointer_cast<[anOpaqueBehavior.owner.oclAsType(Classifier).name.toUpperFirst()/]Object>(this->getContext())->getUmlValue();
 [/if]
 
 [if (anOpaqueBehavior.language->includes(keyCPP()))]
