@@ -20,6 +20,7 @@
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::keywords /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
+[import UML4CPP::generator::main::validation::validateModel /]
 
 [query private getActivity(anAction : Action) : Activity = if (anAction.activity.oclIsUndefined()) then anAction.inStructuredNode.getActivity() else anAction.activity endif /]
 [query private getOwnerOrTargetType(aCOA : CallOperationAction) : Type = if (aCOA.target.isSelfAttribute() or aCOA.target.isSelf()) then aCOA.getActivity().owner.oclAsType(Type) else aCOA.target.type endif /]
@@ -153,13 +154,21 @@ DEBUG_MESSAGE(
 )
 [/if]
 
+[let parameterList : OrderedSet(Parameter) = anOpaqueBehavior.ownedParameter->select(direction = ParameterDirectionKind::_in or direction = ParameterDirectionKind::inout)]
 [for (pin : InputPin | aCallBehaviorAction.argument)]
 [if (not (pin.isSelf() or pin.isSelfAttribute()))]
-[pin.generateIncomingPin(aCallBehaviorAction.argument->indexOf(pin)-1)/]
+[let matchingParameter : OrderedSet(Parameter) = parameterList->select(name = pin.name)]
+[if (matchingParameter->size() > 0)]
+[pin.generateIncomingPin(parameterList->indexOf(matchingParameter->first())-1)/]
+[else]
+['Cannot find parameter with name '.concat(pin.name).concat(' in OpaqueBehavior \'').concat(anOpaqueBehavior.name).concat('\'').registerError()/]
+[/if]
+[/let]
 [else]
 [pin.generateCppType(false)/] [pin.name.replaceFirst('self.', '')/] = [pin.generateArgumentGetter(aCallBehaviorAction)/]
 [/if]
 [/for]
+[/let]
 
 [for (outPar : Parameter | aCallBehaviorAction.behavior.ownedParameter->select(p :Parameter | (p.direction = ParameterDirectionKind::out or p.direction = ParameterDirectionKind::return)))]
 [outPar.generateCppType(false)/] [outPar.name/][if (outPar.upper <> 1)](new Bag<[outPar.type.generateCppType(true)/]>())[/if];
@@ -183,6 +192,7 @@ throw "UnsupportedBehaviorException";
 
 [template private generateBody(aNamedElement : NamedElement, aPackage : Package) ? (aNamedElement.oclIsKindOf(CallOperationAction))]
 [let aCallOperationAction : CallOperationAction = aNamedElement.oclAsType(CallOperationAction)]
+[let aOperation : Operation = aCallOperationAction.operation]
 [let type : Classifier = aCallOperationAction.getOwnerOrTargetType()]
 std::shared_ptr<[type.namespace.myNamespaceName()/]::[type.name.toUpperFirst()/]> context = std::dynamic_pointer_cast<[type.name.toUpperFirst()/]Object>(this->getContext())->getUmlValue();
 DEBUG_MESSAGE(
@@ -204,24 +214,33 @@ DEBUG_MESSAGE(
 	}
 )
 
+[let parameterList : OrderedSet(Parameter) = aOperation.ownedParameter->select(direction = ParameterDirectionKind::_in or direction = ParameterDirectionKind::inout)]
 [for (pin : InputPin | aCallOperationAction.argument)]
 [if (not (pin.isSelf() or pin.isSelfAttribute()))]
-[pin.generateIncomingPin(aCallOperationAction.argument->indexOf(pin)-1)/]
+[let matchingParameter : OrderedSet(Parameter) = parameterList->select(name = pin.name)]
+[if (matchingParameter->size() > 0)]
+[pin.generateIncomingPin(parameterList->indexOf(matchingParameter->first())-1)/]
+[else]
+['Cannot find parameter with name '.concat(pin.name).concat(' in Operation \'').concat(aOperation.name).concat('\'').registerError()/]
+[/if]
+[/let]
 [else]
 [pin.generateCppType(false)/] [pin.name.replaceFirst('self.', '')/] = [pin.generateArgumentGetter(aCallOperationAction)/]
 [/if]
 [/for]
+[/let]
 
-[for (outPar : Parameter | aCallOperationAction.operation.ownedParameter->select(p :Parameter | (p.direction = ParameterDirectionKind::out)))]
+[for (outPar : Parameter | aOperation.ownedParameter->select(p :Parameter | (p.direction = ParameterDirectionKind::out)))]
 [outPar.generateCppType(false)/] [outPar.name/][if (outPar.upper <> 1)](new Bag<[outPar.type.generateCppType(true)/]>())[/if];
 [/for]	
 
 //Calling the associated operation.
-[let retPar : OrderedSet(Parameter) = aCallOperationAction.operation.ownedParameter->select(p :Parameter | (p.direction = ParameterDirectionKind::return))]
-[if(not retPar->isEmpty())][if (not retPar->first().oclIsInvalid())][retPar.generateCppType(false)/] [retPar.name/] = [/if][/if]target->[aCallOperationAction.operation.name/]([for (par : Parameter | aCallOperationAction.operation.ownedParameter->select(param : Parameter | not (param.direction = ParameterDirectionKind::return))) separator (',')] [par.name/][/for]);
+[let retPar : OrderedSet(Parameter) = aOperation.ownedParameter->select(p :Parameter | (p.direction = ParameterDirectionKind::return))]
+[if(not retPar->isEmpty())][if (not retPar->first().oclIsInvalid())][retPar.generateCppType(false)/] [retPar.name/] = [/if][/if]target->[aOperation.name/]([for (par : Parameter | aOperation.ownedParameter->select(param : Parameter | not (param.direction = ParameterDirectionKind::return))) separator (',')] [par.name/][/for]);
 [/let]	
 
-[aCallOperationAction.operation.ownedParameter->generateOutgoingParameters()/]
+[aOperation.ownedParameter->generateOutgoingParameters()/]
+[/let]
 [/let]
 [/template]
 
