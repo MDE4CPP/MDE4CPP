@@ -77,6 +77,7 @@ public class UML4CPPEMtlResourceFactory extends EMtlResourceFactoryImpl {
 		initializeImplEmtls(resourcePathPrefix);
 		initializePackageEmtls(resourcePathPrefix);
 		initializePluginEmtls(resourcePathPrefix);
+		initializePscsEmtls(resourcePathPrefix);
 		initializeValidationEmtls(resourcePathPrefix);
 	}
 	
@@ -181,6 +182,13 @@ public class UML4CPPEMtlResourceFactory extends EMtlResourceFactoryImpl {
 								};
 		generateFilePathMapData(moduleNames, "plugin", resourcePathPrefix);
 	}
+	
+    private void initializePscsEmtls(String resourcePathPrefix)
+    {
+        String[] moduleNames = {"generatePSCS"};
+        generateFilePathMapData(moduleNames, "pscs", resourcePathPrefix);
+    }
+
 	
 	private void initializeValidationEmtls(String resourcePathPrefix)
 	{

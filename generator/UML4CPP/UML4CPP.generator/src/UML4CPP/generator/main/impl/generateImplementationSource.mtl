@@ -29,6 +29,7 @@
 [import UML4CPP::generator::main::helpers::nameHelper /]
 [import UML4CPP::generator::main::helpers::setGetHelper /]
 [import UML4CPP::generator::main::validation::validateModel /]
+[import UML4CPP::generator::main::pscs::generatePSCS/]
 
 [query private includes(aClass : Class)  : Set(Type) = OrderedSet{aClass.member->selectByKind(TypedElement)->select(not type.oclIsUndefined()).type, aClass.ownedOperation.ownedParameter.type, aClass.getAllAttributes().type, aClass.importedMember}->flatten() /]
 [query private includes(aInterface : Interface)  : Set(Type) = OrderedSet{aInterface.member->selectByKind(TypedElement)->select(not type.oclIsUndefined()).type, aInterface.ownedOperation.ownedParameter.type}->flatten() /]
@@ -47,6 +48,7 @@
 [generateAbstractDataTypesIncludes()/]
 #include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
+#include "[aPackage.getPackageName()/]/[aPackage.name.toUpperFirst().concat('Factory')/].hpp"
 #include "[aPackage.getPackageName()/]/impl/[aPackage.name.toUpperFirst().concat('PackageImpl')/].hpp"
 #include "[aClass.eClass().ePackage.name/]/[aClass.eClass().name/].hpp"
 [for (cl : Type | aClass.includes()->sortedBy(myQualifiedName())) ? ( oclIsKindOf(Class) or oclIsKindOf(Interface) or oclIsKindOf(Enumeration))]
@@ -100,7 +102,7 @@
 
 	// init properties without default
 	[for (aProperty : Property | aClass.ownedAttribute->sortedBy(myQualifiedName()))]
-	[if (aProperty.default->isEmpty() and aProperty.upper <> 1)][aProperty.initAttributeProtectedMember()/][/if]
+	[if (aProperty.default->isEmpty() and aProperty.upper <> 1)][aProperty.generateAttributeInstantiation()/][/if]
 	[/for]
 
 	[for (instVal : InstanceValue | aClass.ownedAttribute.defaultValue->reject(oclIsUndefined())->selectByType(InstanceValue)->reject(type.oclIsUndefined() or type.oclIsKindOf(Enumeration))->sortedBy(myQualifiedName()))]

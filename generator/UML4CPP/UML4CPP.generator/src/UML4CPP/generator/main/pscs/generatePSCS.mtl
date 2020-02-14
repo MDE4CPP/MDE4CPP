@@ -1,0 +1,50 @@
+[comment encoding = UTF-8 /]
+[module generatePSCS('http://www.eclipse.org/uml2/5.0.0/UML')]
+
+[import UML4CPP::generator::main::components::generateType /]
+
+[template public generateAttributeInstantiation(aProperty : Property)]
+m_[aProperty.name/].reset(new Bag<[aProperty.type.transformType()/]>());
+[if (aProperty.canInstantiate() and aProperty.getUpper() = -1)]
+for(unsigned int i = 1; i <= [aProperty.getLower()/]; i++)
+{
+	[if (aProperty.oclIsTypeOf(Port) and aProperty.type.oclIsTypeOf(Interface))]
+	//TODO implement Interface instatiation conforming to PSCS semantics
+	/*
+	[aProperty.generatePortInstantiation()/]
+	*/
+	[else]
+	[aProperty.generatePartInstantiation()/]
+	[/if]
+} 
+[/if]
+[/template]
+
+[template private generatePortInstantiation(aProperty : Property) {aPackage : Package = aProperty.ancestors()->filter(Package)->first(); factoryName : String = aPackage.name.toUpperFirst().concat('Factory');}]
+	std::shared_ptr<[aProperty.type.transformType()/]> value = [aPackage.name/]::[factoryName/]::eInstance()->create(); [comment [aProperty.type.oclAsType(Interface).getFirstRealizingClass(aPackage).name/]
+	m_[aProperty.name/]->add(value);
+[/template]
+
+[template private generatePartInstantiation(aProperty : Property) {aPackage : Package = aProperty.ancestors()->filter(Package)->first(); factoryName : String = aPackage.name.toUpperFirst().concat('Factory');}]
+	std::shared_ptr<[aProperty.type.transformType()/]> value = [aPackage.name/]::[factoryName/]::eInstance()->create[aProperty.type.name/]();
+	m_[aProperty.name/]->add(value);
+[/template]
+
+[query private canInstantiate(aProperty : Property) : Boolean = 
+if (aProperty.isComposite()) then
+	if(aProperty.oclIsKindOf(TypedElement)) then
+		if(aProperty.type.oclIsTypeOf(Class)) then
+			not aProperty.type.oclAsType(Class).isAbstract 
+		else if (aProperty.type.oclIsTypeOf(Interface)) then
+			aProperty.oclIsTypeOf(Port)
+			else false
+			endif
+		endif
+	else false
+	endif
+else false
+endif
+/]
+
+[query private getFirstRealizingClass(anInterface : Interface, aPackage: Package) : Class = anInterface.getInterfaceRealizationCandidates(aPackage)->at(1).owner.oclAsType(Class)/]
+[query private getInterfaceRealizationCandidates(anInterface : Interface, aPackage : Package) : Sequence(InterfaceRealization) = Sequence{aPackage.eContents(InterfaceRealization)->reject(inter : InterfaceRealization | inter.contract.name <> anInterface.name)}/]
