@@ -26,7 +26,7 @@
 [query private getOwnerOrTargetType(aCOA : CallOperationAction) : Type = if (aCOA.target.isSelfAttribute() or aCOA.target.isSelf()) then aCOA.getActivity().owner.oclAsType(Type) else aCOA.target.type endif /]
 [query public hasGenerateContextVariable(aElement : Element) : Boolean = aElement.valueKey('generateContextVariable') = 'true'/]
 [query private getSelf(action : Action) : Classifier = action.getActivity().owner.oclAsType(Classifier)/]
-[query private getSelfAttribute(pin : Pin, action : Action) : Property = action.getSelf().attribute->select(pin.name = 'self.'.concat(name))->asOrderedSet()->first()/]
+[query private getSelfAttribute(pin : Pin, action : Action) : Property = action.getSelf().allAttributes()->select(pin.name = 'self.'.concat(name))->asOrderedSet()->first()/]
 [query private isSelf(pin : Pin) : Boolean = pin.name = 'self'/]
 [query private isSelfAttribute(pin : Pin) : Boolean = pin.name.startsWith('self.')/]
 [query private getPinType(pin : Pin, action : Action) : Type = if (pin.isSelf()) then action.getSelf() else (if pin.isSelfAttribute() then pin.getSelfAttribute(action).type else pin.type endif) endif /]
