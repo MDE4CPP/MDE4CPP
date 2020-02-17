@@ -248,7 +248,7 @@
     <ownedDiagramElements xmi:type="diagram:DNodeContainer" uid="_Q8VWoBmREeqOHbkWkfH76A" name="ActDoB">
       <target xmi:type="uml:Activity" href="RegionTest.uml#__OsQMBmQEeqOHbkWkfH76A"/>
       <semanticElements xmi:type="uml:Activity" href="RegionTest.uml#__OsQMBmQEeqOHbkWkfH76A"/>
-      <ownedBorderedNodes xmi:type="diagram:DNode" uid="_VPTnsBmREeqOHbkWkfH76A" name="b : B" outgoingEdges="_qnGrsBmREeqOHbkWkfH76A _izQI9FF4EeqZFpgZNElIJA" width="15" height="5">
+      <ownedBorderedNodes xmi:type="diagram:DNode" uid="_VPTnsBmREeqOHbkWkfH76A" name="b : B" outgoingEdges="_izQI9FF4EeqZFpgZNElIJA" width="15" height="5">
         <target xmi:type="uml:ActivityParameterNode" href="RegionTest.uml#_SS5g8BmREeqOHbkWkfH76A"/>
         <semanticElements xmi:type="uml:ActivityParameterNode" href="RegionTest.uml#_SS5g8BmREeqOHbkWkfH76A"/>
         <semanticElements xmi:type="uml:Parameter" href="RegionTest.uml#_SS2doBmREeqOHbkWkfH76A"/>
@@ -289,7 +289,7 @@
         <ownedDiagramElements xmi:type="diagram:DNodeContainer" uid="_tmIooBmREeqOHbkWkfH76A" name="call B::print">
           <target xmi:type="uml:CallOperationAction" href="RegionTest.uml#_rBgvwBmREeqOHbkWkfH76A"/>
           <semanticElements xmi:type="uml:CallOperationAction" href="RegionTest.uml#_rBgvwBmREeqOHbkWkfH76A"/>
-          <ownedBorderedNodes xmi:type="diagram:DNode" uid="_tmJ2wBmREeqOHbkWkfH76A" name="target : B" incomingEdges="_u_MtUhmREeqOHbkWkfH76A _izQI-VF4EeqZFpgZNElIJA" width="2" height="2">
+          <ownedBorderedNodes xmi:type="diagram:DNode" uid="_tmJ2wBmREeqOHbkWkfH76A" name="target : B" incomingEdges="_izQI-VF4EeqZFpgZNElIJA" width="2" height="2">
             <target xmi:type="uml:InputPin" href="RegionTest.uml#_rBgvwRmREeqOHbkWkfH76A"/>
             <semanticElements xmi:type="uml:InputPin" href="RegionTest.uml#_rBgvwRmREeqOHbkWkfH76A"/>
             <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
@@ -310,24 +310,6 @@
           <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.obeonetwork.dsl.uml2.core.design/description/uml2core.odesign#//@ownedViewpoints[name='Reused']/@ownedRepresentations[name='Activity%20Diagram']/@defaultLayer/@containerMappings[name='AD_Activity']/@subContainerMappings[name='AD_CallOperationAction']"/>
         </ownedDiagramElements>
       </ownedDiagramElements>
-    </ownedDiagramElements>
-    <ownedDiagramElements xmi:type="diagram:DEdge" uid="_qnGrsBmREeqOHbkWkfH76A" sourceNode="_VPTnsBmREeqOHbkWkfH76A">
-      <target xmi:type="uml:ObjectFlow" href="RegionTest.uml#_qnFdkBmREeqOHbkWkfH76A"/>
-      <semanticElements xmi:type="uml:ObjectFlow" href="RegionTest.uml#_qnFdkBmREeqOHbkWkfH76A"/>
-      <ownedStyle xmi:type="diagram:EdgeStyle" uid="_qnGrsRmREeqOHbkWkfH76A" routingStyle="manhattan" strokeColor="0,0,0">
-        <description xmi:type="style:EdgeStyleDescription" href="platform:/plugin/org.obeonetwork.dsl.uml2.core.design/description/uml2core.odesign#//@ownedViewpoints[name='Reused']/@ownedRepresentations[name='Activity%20Diagram']/@defaultLayer/@edgeMappings[name='AD_ObjectFlow']/@style"/>
-        <centerLabelStyle xmi:type="diagram:CenterLabelStyle" uid="_qnGrshmREeqOHbkWkfH76A" showIcon="false"/>
-      </ownedStyle>
-      <actualMapping xmi:type="description_1:EdgeMapping" href="platform:/plugin/org.obeonetwork.dsl.uml2.core.design/description/uml2core.odesign#//@ownedViewpoints[name='Reused']/@ownedRepresentations[name='Activity%20Diagram']/@defaultLayer/@edgeMappings[name='AD_ObjectFlow']"/>
-    </ownedDiagramElements>
-    <ownedDiagramElements xmi:type="diagram:DEdge" uid="_u_MtUhmREeqOHbkWkfH76A" targetNode="_tmJ2wBmREeqOHbkWkfH76A">
-      <target xmi:type="uml:ObjectFlow" href="RegionTest.uml#_u_LfMBmREeqOHbkWkfH76A"/>
-      <semanticElements xmi:type="uml:ObjectFlow" href="RegionTest.uml#_u_LfMBmREeqOHbkWkfH76A"/>
-      <ownedStyle xmi:type="diagram:EdgeStyle" uid="_u_MtUxmREeqOHbkWkfH76A" routingStyle="manhattan" strokeColor="0,0,0">
-        <description xmi:type="style:EdgeStyleDescription" href="platform:/plugin/org.obeonetwork.dsl.uml2.core.design/description/uml2core.odesign#//@ownedViewpoints[name='Reused']/@ownedRepresentations[name='Activity%20Diagram']/@defaultLayer/@edgeMappings[name='AD_ObjectFlow']/@style"/>
-        <centerLabelStyle xmi:type="diagram:CenterLabelStyle" uid="_u_MtVBmREeqOHbkWkfH76A" showIcon="false"/>
-      </ownedStyle>
-      <actualMapping xmi:type="description_1:EdgeMapping" href="platform:/plugin/org.obeonetwork.dsl.uml2.core.design/description/uml2core.odesign#//@ownedViewpoints[name='Reused']/@ownedRepresentations[name='Activity%20Diagram']/@defaultLayer/@edgeMappings[name='AD_ObjectFlow']"/>
     </ownedDiagramElements>
     <ownedDiagramElements xmi:type="diagram:DEdge" uid="_izQI9FF4EeqZFpgZNElIJA" sourceNode="_VPTnsBmREeqOHbkWkfH76A" targetNode="_izNFoFF4EeqZFpgZNElIJA">
       <target xmi:type="uml:ObjectFlow" href="RegionTest.uml#_qnFdkBmREeqOHbkWkfH76A"/>
