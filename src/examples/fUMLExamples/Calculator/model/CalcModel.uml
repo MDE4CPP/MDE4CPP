@@ -99,7 +99,7 @@
         <guard xmi:type="uml:LiteralBoolean" xmi:id="_y4JNgDy9EeiNErdsza5ATQ" name="Initial1_To_coaIsOdd_guard" value="true"/>
         <weight xmi:type="uml:LiteralInteger" xmi:id="_y4MQ0Dy9EeiNErdsza5ATQ" name="Initial1_To_coaIsOdd_weight"/>
       </edge>
-      <node xmi:type="uml:DecisionNode" xmi:id="_7XVkAIxzEeazCdUXohZ79Q" name="dn_divides" incoming="_MAdiII7UEeajycJcSh2X6Q" outgoing="_ZZjacIx0EeazCdUXohZ79Q _xEha8Ix0EeazCdUXohZ79Q" decisionInputFlow="_MAdiII7UEeajycJcSh2X6Q"/>
+      <node xmi:type="uml:DecisionNode" xmi:id="_7XVkAIxzEeazCdUXohZ79Q" name="dn_divides" incoming="_MAdiII7UEeajycJcSh2X6Q" outgoing="_ZZjacIx0EeazCdUXohZ79Q _xEha8Ix0EeazCdUXohZ79Q"/>
       <node xmi:type="uml:MergeNode" xmi:id="_-az8EIxzEeazCdUXohZ79Q" name="Merge" incoming="_VwIh4I7TEeajycJcSh2X6Q _sxrVcI7UEeajycJcSh2X6Q" outgoing="_3a3-MI7TEeajycJcSh2X6Q"/>
       <node xmi:type="uml:CallBehaviorAction" xmi:id="_QJrKgIx0EeazCdUXohZ79Q" name="cbaPrintNotPrime2" incoming="_WsgDgI7TEeajycJcSh2X6Q" outgoing="_We8DcIx0EeazCdUXohZ79Q" behavior="_4BcRIIxxEeazCdUXohZ79Q"/>
       <node xmi:type="uml:ActivityFinalNode" xmi:id="_Vf7dgIx0EeazCdUXohZ79Q" name="ActivityFinal1" incoming="_We8DcIx0EeazCdUXohZ79Q"/>
@@ -108,7 +108,7 @@
       <node xmi:type="uml:CallOperationAction" xmi:id="_fCIMgIx0EeazCdUXohZ79Q" name="coaNext" incoming="_xEha8Ix0EeazCdUXohZ79Q" outgoing="_Tvp9QIx1EeazCdUXohZ79Q" operation="_UtQZgIxrEeazCdUXohZ79Q">
         <target xmi:id="_fCKowIx0EeazCdUXohZ79Q" name="self" type="_As0b8IxpEeazCdUXohZ79Q"/>
       </node>
-      <node xmi:type="uml:DecisionNode" xmi:id="_8C8QUIx0EeazCdUXohZ79Q" name="dn_isNotFinished" incoming="_j5U0sI7UEeajycJcSh2X6Q" outgoing="_P49YgIx1EeazCdUXohZ79Q _sxrVcI7UEeajycJcSh2X6Q" decisionInputFlow="_j5U0sI7UEeajycJcSh2X6Q"/>
+      <node xmi:type="uml:DecisionNode" xmi:id="_8C8QUIx0EeazCdUXohZ79Q" name="dn_isNotFinished" incoming="_j5U0sI7UEeajycJcSh2X6Q" outgoing="_P49YgIx1EeazCdUXohZ79Q _sxrVcI7UEeajycJcSh2X6Q"/>
       <node xmi:type="uml:CallBehaviorAction" xmi:id="_PBb6oIx1EeazCdUXohZ79Q" name="cbaPrintIsPrime" incoming="_P49YgIx1EeazCdUXohZ79Q" outgoing="_S_DmwIx1EeazCdUXohZ79Q" behavior="_3KBg8IxxEeazCdUXohZ79Q"/>
       <node xmi:type="uml:ActivityFinalNode" xmi:id="_SI3loIx1EeazCdUXohZ79Q" name="ActivityFinal3" incoming="_S_DmwIx1EeazCdUXohZ79Q"/>
       <node xmi:type="uml:CallOperationAction" xmi:id="_aYAhkIyGEeaffY4wOnNpKQ" name="coaIsOdd" incoming="_y4ImcDy9EeiNErdsza5ATQ" operation="_QBniEIxxEeazCdUXohZ79Q">
@@ -129,13 +129,12 @@
         </result>
         <target xmi:id="_RV6EMI7REeaDf9S-W91Htg" name="self" type="_As0b8IxpEeazCdUXohZ79Q"/>
       </node>
-      <node xmi:type="uml:DecisionNode" xmi:id="_AXMOYI7TEeaDf9S-W91Htg" name="dn_IsOdd" incoming="_PQBq4I7TEeajycJcSh2X6Q" outgoing="_VwIh4I7TEeajycJcSh2X6Q _WsgDgI7TEeajycJcSh2X6Q" decisionInputFlow="_PQBq4I7TEeajycJcSh2X6Q"/>
+      <node xmi:type="uml:DecisionNode" xmi:id="_AXMOYI7TEeaDf9S-W91Htg" name="dn_IsOdd" incoming="_PQBq4I7TEeajycJcSh2X6Q" outgoing="_VwIh4I7TEeajycJcSh2X6Q _WsgDgI7TEeajycJcSh2X6Q"/>
       <node xmi:type="uml:InitialNode" xmi:id="_xG4rQDy9EeiNErdsza5ATQ" name="Initial1" outgoing="_y4ImcDy9EeiNErdsza5ATQ"/>
     </ownedBehavior>
     <ownedOperation xmi:id="_uxuS4IxpEeazCdUXohZ79Q" name="divides" method="_19O9sIxxEeazCdUXohZ79Q">
       <ownedParameter xmi:id="_Rhj1YIxyEeazCdUXohZ79Q" name="isDivisible" direction="return">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
-        <defaultValue xmi:type="uml:LiteralString" xmi:id="_Rhj1YYxyEeazCdUXohZ79Q" value=""/>
       </ownedParameter>
     </ownedOperation>
     <ownedOperation xmi:id="_UtQZgIxrEeazCdUXohZ79Q" name="next" method="_3E-o4IxxEeazCdUXohZ79Q"/>
@@ -144,7 +143,6 @@
     <ownedOperation xmi:id="_QBniEIxxEeazCdUXohZ79Q" name="isOdd" method="_37xG8IxxEeazCdUXohZ79Q">
       <ownedParameter xmi:id="__gLYwI7QEeaDf9S-W91Htg" name="isOdd" direction="return">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
-        <defaultValue xmi:type="uml:LiteralString" xmi:id="__gLYwY7QEeaDf9S-W91Htg" value=""/>
       </ownedParameter>
     </ownedOperation>
     <ownedOperation xmi:id="_FtjmYIxzEeazCdUXohZ79Q" name="isNotFinished" method="_MhsMoIxzEeazCdUXohZ79Q">
