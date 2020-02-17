@@ -48,7 +48,7 @@
       <language>CPP</language>
       <body>isNotFinished = this->getDivider() &lt;= this->getNumber() / 2;</body>
     </ownedBehavior>
-    <ownedBehavior xmi:type="uml:Activity" xmi:id="_196CMIxoEeazCdUXohZ79Q" name="CheckIfPrime" node="_7XVkAIxzEeazCdUXohZ79Q _-az8EIxzEeazCdUXohZ79Q _QJrKgIx0EeazCdUXohZ79Q _Vf7dgIx0EeazCdUXohZ79Q _Yq_EQIx0EeazCdUXohZ79Q _bDbiUIx0EeazCdUXohZ79Q _8C8QUIx0EeazCdUXohZ79Q _PBb6oIx1EeazCdUXohZ79Q _SI3loIx1EeazCdUXohZ79Q _fCIMgIx0EeazCdUXohZ79Q _aYAhkIyGEeaffY4wOnNpKQ _LYTdUI7REeaDf9S-W91Htg _MUDT4I7REeaDf9S-W91Htg _AXMOYI7TEeaDf9S-W91Htg _xG4rQDy9EeiNErdsza5ATQ">
+    <ownedBehavior xmi:type="uml:Activity" xmi:id="_196CMIxoEeazCdUXohZ79Q" name="CheckIfPrime" node="_7XVkAIxzEeazCdUXohZ79Q _-az8EIxzEeazCdUXohZ79Q _QJrKgIx0EeazCdUXohZ79Q _Vf7dgIx0EeazCdUXohZ79Q _Yq_EQIx0EeazCdUXohZ79Q _bDbiUIx0EeazCdUXohZ79Q _8C8QUIx0EeazCdUXohZ79Q _PBb6oIx1EeazCdUXohZ79Q _SI3loIx1EeazCdUXohZ79Q _fCIMgIx0EeazCdUXohZ79Q _aYAhkIyGEeaffY4wOnNpKQ _LYTdUI7REeaDf9S-W91Htg _MUDT4I7REeaDf9S-W91Htg _AXMOYI7TEeaDf9S-W91Htg _xG4rQDy9EeiNErdsza5ATQ _qOEZEFGWEeqeyKUsnKD-hQ">
       <ownedParameter xmi:id="_7Bd8gIyFEeaE8Ot-1J8eNg" name="actInputNode" type="_As0b8IxpEeazCdUXohZ79Q"/>
       <edge xmi:type="uml:ControlFlow" xmi:id="_We8DcIx0EeazCdUXohZ79Q" target="_Vf7dgIx0EeazCdUXohZ79Q" source="_QJrKgIx0EeazCdUXohZ79Q">
         <guard xmi:type="uml:LiteralBoolean" xmi:id="_We8qgIx0EeazCdUXohZ79Q" name="_To_ActivityFinal1_guard" value="true"/>
@@ -95,9 +95,13 @@
       <edge xmi:type="uml:ControlFlow" xmi:id="_sxrVcI7UEeajycJcSh2X6Q" target="_-az8EIxzEeazCdUXohZ79Q" source="_8C8QUIx0EeazCdUXohZ79Q">
         <guard xmi:type="uml:LiteralBoolean" xmi:id="_3PLPEI7UEeajycJcSh2X6Q" name="isNotFinishedGuard" value="true"/>
       </edge>
-      <edge xmi:type="uml:ControlFlow" xmi:id="_y4ImcDy9EeiNErdsza5ATQ" target="_aYAhkIyGEeaffY4wOnNpKQ" source="_xG4rQDy9EeiNErdsza5ATQ">
-        <guard xmi:type="uml:LiteralBoolean" xmi:id="_y4JNgDy9EeiNErdsza5ATQ" name="Initial1_To_coaIsOdd_guard" value="true"/>
-        <weight xmi:type="uml:LiteralInteger" xmi:id="_y4MQ0Dy9EeiNErdsza5ATQ" name="Initial1_To_coaIsOdd_weight"/>
+      <edge xmi:type="uml:ControlFlow" xmi:id="_Pk2pUFGXEeqeyKUsnKD-hQ" target="_qOEZEFGWEeqeyKUsnKD-hQ" source="_xG4rQDy9EeiNErdsza5ATQ">
+        <guard xmi:type="uml:LiteralBoolean" xmi:id="_Pk2pUVGXEeqeyKUsnKD-hQ" name="Initial1_To_enterNumber_guard" value="true"/>
+        <weight xmi:type="uml:LiteralInteger" xmi:id="_Pk3QYFGXEeqeyKUsnKD-hQ" name="Initial1_To_enterNumber_weight"/>
+      </edge>
+      <edge xmi:type="uml:ControlFlow" xmi:id="_QPrvAFGXEeqeyKUsnKD-hQ" target="_aYAhkIyGEeaffY4wOnNpKQ" source="_qOEZEFGWEeqeyKUsnKD-hQ">
+        <guard xmi:type="uml:LiteralBoolean" xmi:id="_QPsWEFGXEeqeyKUsnKD-hQ" name="enterNumber_To_coaIsOdd_guard" value="true"/>
+        <weight xmi:type="uml:LiteralInteger" xmi:id="_QPsWEVGXEeqeyKUsnKD-hQ" name="enterNumber_To_coaIsOdd_weight"/>
       </edge>
       <node xmi:type="uml:DecisionNode" xmi:id="_7XVkAIxzEeazCdUXohZ79Q" name="dn_divides" incoming="_MAdiII7UEeajycJcSh2X6Q" outgoing="_ZZjacIx0EeazCdUXohZ79Q _xEha8Ix0EeazCdUXohZ79Q"/>
       <node xmi:type="uml:MergeNode" xmi:id="_-az8EIxzEeazCdUXohZ79Q" name="Merge" incoming="_VwIh4I7TEeajycJcSh2X6Q _sxrVcI7UEeajycJcSh2X6Q" outgoing="_3a3-MI7TEeajycJcSh2X6Q"/>
@@ -111,7 +115,7 @@
       <node xmi:type="uml:DecisionNode" xmi:id="_8C8QUIx0EeazCdUXohZ79Q" name="dn_isNotFinished" incoming="_j5U0sI7UEeajycJcSh2X6Q" outgoing="_P49YgIx1EeazCdUXohZ79Q _sxrVcI7UEeajycJcSh2X6Q"/>
       <node xmi:type="uml:CallBehaviorAction" xmi:id="_PBb6oIx1EeazCdUXohZ79Q" name="cbaPrintIsPrime" incoming="_P49YgIx1EeazCdUXohZ79Q" outgoing="_S_DmwIx1EeazCdUXohZ79Q" behavior="_3KBg8IxxEeazCdUXohZ79Q"/>
       <node xmi:type="uml:ActivityFinalNode" xmi:id="_SI3loIx1EeazCdUXohZ79Q" name="ActivityFinal3" incoming="_S_DmwIx1EeazCdUXohZ79Q"/>
-      <node xmi:type="uml:CallOperationAction" xmi:id="_aYAhkIyGEeaffY4wOnNpKQ" name="coaIsOdd" incoming="_y4ImcDy9EeiNErdsza5ATQ" operation="_QBniEIxxEeazCdUXohZ79Q">
+      <node xmi:type="uml:CallOperationAction" xmi:id="_aYAhkIyGEeaffY4wOnNpKQ" name="coaIsOdd" incoming="_QPrvAFGXEeqeyKUsnKD-hQ" operation="_QBniEIxxEeazCdUXohZ79Q">
         <result xmi:id="_0LbcII7SEeaDf9S-W91Htg" name="isOdd" outgoing="_PQBq4I7TEeajycJcSh2X6Q">
           <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
         </result>
@@ -130,7 +134,18 @@
         <target xmi:id="_RV6EMI7REeaDf9S-W91Htg" name="self" type="_As0b8IxpEeazCdUXohZ79Q"/>
       </node>
       <node xmi:type="uml:DecisionNode" xmi:id="_AXMOYI7TEeaDf9S-W91Htg" name="dn_IsOdd" incoming="_PQBq4I7TEeajycJcSh2X6Q" outgoing="_VwIh4I7TEeajycJcSh2X6Q _WsgDgI7TEeajycJcSh2X6Q"/>
-      <node xmi:type="uml:InitialNode" xmi:id="_xG4rQDy9EeiNErdsza5ATQ" name="Initial1" outgoing="_y4ImcDy9EeiNErdsza5ATQ"/>
+      <node xmi:type="uml:InitialNode" xmi:id="_xG4rQDy9EeiNErdsza5ATQ" name="Initial1" outgoing="_Pk2pUFGXEeqeyKUsnKD-hQ"/>
+      <node xmi:type="uml:CallOperationAction" xmi:id="_qOEZEFGWEeqeyKUsnKD-hQ" name="coa_enterNumber" incoming="_Pk2pUFGXEeqeyKUsnKD-hQ" outgoing="_QPrvAFGXEeqeyKUsnKD-hQ" operation="_jMpkwFGWEeqeyKUsnKD-hQ">
+        <target xmi:id="_qOFAIFGWEeqeyKUsnKD-hQ" name="self" type="_As0b8IxpEeazCdUXohZ79Q"/>
+      </node>
+    </ownedBehavior>
+    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_zg094FGWEeqeyKUsnKD-hQ" name="enterNumber" specification="_jMpkwFGWEeqeyKUsnKD-hQ">
+      <language>CPP</language>
+      <language>INCLUDE</language>
+      <body>std::cout &lt;&lt; &quot;Please enter a number: &quot;;&#xD;
+std::cin >> this->m_number;</body>
+      <body>#include &lt;iostream></body>
+      <body>//LIBRARY</body>
     </ownedBehavior>
     <ownedOperation xmi:id="_uxuS4IxpEeazCdUXohZ79Q" name="divides" method="_19O9sIxxEeazCdUXohZ79Q">
       <ownedParameter xmi:id="_Rhj1YIxyEeazCdUXohZ79Q" name="isDivisible" direction="return">
@@ -150,6 +165,7 @@
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
       </ownedParameter>
     </ownedOperation>
+    <ownedOperation xmi:id="_jMpkwFGWEeqeyKUsnKD-hQ" name="enterNumber" method="_zg094FGWEeqeyKUsnKD-hQ"/>
   </packagedElement>
   <packagedElement xmi:type="uml:ChangeEvent" xmi:id="_ez5VsN_vEeexC-rsnTgvBg" name="ChangeEvent1"/>
 </uml:Model>
