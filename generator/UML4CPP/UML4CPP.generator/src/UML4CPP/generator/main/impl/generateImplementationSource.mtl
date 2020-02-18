@@ -84,8 +84,19 @@
 [if (instVal.type.oclIsUndefined() or instVal.type.name.oclIsUndefined())]
 // undefined type of InstanceValue [instVal.qualifiedName/] ([instVal.type.toString()/]) ['class '.concat(aClass.name).concat(': undefined type of InstanceValue ').concat(instVal.qualifiedName).concat(' (').concat(instVal.type.toString()).registerError()/]
 [else]
-#include "[instVal.type._package.getPackageName()/]/[instVal.type._package.getPackageName()/]Factory.hpp"
+#include "[instVal.type._package.getPackageName()/]/[instVal.type._package.getPackageName().toUpperFirst()/]Factory.hpp"
 #include "[instVal.type._package.getPackageName()/]/[instVal.type.name.toUpperFirst()/].hpp"
+[/if]
+[/for]
+
+//Included from from Ports typed by interface
+[for (aPort : Port | aClass.ownedAttribute->filter(Port))]
+[if (aPort.type.oclIsTypeOf(Interface))]
+[for (anInterfaceRealization : InterfaceRealization | aPackage.getInterfaceRealizations(aPort.type.oclAsType(Interface)))]
+[let realizingClass : Class = anInterfaceRealization.owner.oclAsType(Class)]
+#include "[realizingClass._package.getPackageName()/]/[realizingClass.name.toUpperFirst()/].hpp"
+[/let]
+[/for]
 [/if]
 [/for]
 
@@ -104,7 +115,8 @@
 	[for (aProperty : Property | aClass.ownedAttribute->sortedBy(myQualifiedName()))]
 	[if (aProperty.default->isEmpty() and aProperty.upper <> 1)][aProperty.generateAttributeInstantiation()/][/if]
 	[/for]
-
+	
+	// init properties with default
 	[for (instVal : InstanceValue | aClass.ownedAttribute.defaultValue->reject(oclIsUndefined())->selectByType(InstanceValue)->reject(type.oclIsUndefined() or type.oclIsKindOf(Enumeration))->sortedBy(myQualifiedName()))]
 	[if (instVal.type.oclIsUndefined() or instVal.type.name.oclIsUndefined())]
 	// undefined type of InstanceValue [instVal.qualifiedName/] ([instVal.type.toString()/]) ['class '.concat(aClass.name).concat(': undefined type of InstanceValue ').concat(instVal.qualifiedName).concat(' (').concat(instVal.type.toString()).registerError()/]
@@ -112,7 +124,13 @@
 	[instVal.initPropertyFromInstanceValue()/]
 	[/if]
 	[/for]
-	
+
+	// init connectors
+	[for (aConnector : Connector | aClass.ownedConnector->sortedBy(myQualifiedName()))]
+	[if ((not(aConnector.type.oclIsUndefined())) and (not(aConnector.type.name.oclIsUndefined())))]
+	[aConnector.generateConnectorInstantiation()/]
+	[/if]
+	[/for]
 }
 
 [for (anAssociation : Association | aClass.getCompositionsToClass())]

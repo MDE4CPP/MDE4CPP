@@ -60,8 +60,49 @@ m_[aProperty.name/].reset(new Bag<[aProperty.type.transformType()/]>());
  * generate attribute member initialization for properties with InstanceValue as default value
 */]
 [template public initPropertyFromInstanceValue(instVal : InstanceValue)]
-m_[instVal.owner.oclAsType(NamedElement).name/] = [instVal.type._package.getPackageName()/]::[instVal.type._package.getPackageName()/]Factory::eInstance()->create[instVal.type.name.toUpperFirst()/]();
+m_[instVal.owner.oclAsType(NamedElement).name/] = [instVal.type._package.getPackageName()/]::[instVal.type._package.getPackageName().toUpperFirst()/]Factory::eInstance()->create[instVal.type.name.toUpperFirst()/]();
+[let specification: InstanceSpecification = instVal.instance]
+[for (aSlot : Slot | specification.slot)]
+[comment Implemented just for PrimitiveTypes by now /]
+[if (aSlot.definingFeature.type.isPrimitive())]
+[if (aSlot.definingFeature.getUpper() = 1)]
+[aSlot.initPrimitiveValueFromSingleLiteralSpecification(instVal.owner.oclAsType(NamedElement).name)/]
+[else]
+[aSlot.initPrimitiveValueFromMultipleLiteralSpecifications(instVal.owner.oclAsType(NamedElement).name) /]
+[/if]
+[/if]
+[/for]
+[/let]
+[/template]
 
+[**
+ * generate call of attribute setter to set value (upper = 1) as defined by Slot
+*/]
+[template private initPrimitiveValueFromSingleLiteralSpecification(aSlot : Slot, featureName : String)]
+[let slotType : String = aSlot.definingFeature.type.name]
+[if (slotType = 'Boolean' or slotType = 'EBoolean')]m_[featureName/]->set[aSlot.definingFeature.name.toUpperFirst()/]([aSlot.value->first().oclAsType(LiteralBoolean).value/]);
+[elseif (slotType = 'UnlimitedNatural')]m_[featureName/]->set[aSlot.definingFeature.name.toUpperFirst()/]([aSlot.value->first().oclAsType(LiteralUnlimitedNatural).value/]);
+[elseif (slotType = 'Integer' or slotType = 'EInt')]m_[featureName/]->set[aSlot.definingFeature.name.toUpperFirst()/]([aSlot.value->first().oclAsType(LiteralInteger).value/]);
+[elseif (slotType = 'Real' or slotType = 'EDouble' or slotType = 'EFloat')]m_[featureName/]->set[aSlot.definingFeature.name.toUpperFirst()/]([aSlot.value->first().oclAsType(LiteralReal).value/]);
+[elseif (aSlot.definingFeature.type.oclIsKindOf(PrimitiveType) and slotType = 'String' or slotType = 'EString')]m_[featureName/]->set[aSlot.definingFeature.name.toUpperFirst()/]("[aSlot.value->first().oclAsType(LiteralString).value/]");
+[/if]
+[/let]
+[/template]
+
+[**
+ * generate call of attribute setter to set values (upper != 1) as defined by Slot
+*/]
+[template private initPrimitiveValueFromMultipleLiteralSpecifications(aSlot : Slot, featureName : String)]
+[let slotType : String = aSlot.definingFeature.type.name]
+[for (aValueSpecification : ValueSpecification | aSlot.value)]
+[if (slotType = 'Boolean' or slotType = 'EBoolean')]m_[featureName/]->get[aSlot.definingFeature.name.toUpperFirst()/]->add([aValueSpecification.oclAsType(LiteralBoolean).value/]);
+[elseif (slotType = 'UnlimitedNatural')]m_[featureName/]->get[aSlot.definingFeature.name.toUpperFirst()/]->add([aValueSpecification.oclAsType(LiteralUnlimitedNatural).value/]);
+[elseif (slotType = 'Integer' or slotType = 'EInt')]m_[featureName/]->get[aSlot.definingFeature.name.toUpperFirst()/]->add([ aValueSpecification.oclAsType(LiteralInteger).value/]);
+[elseif (slotType = 'Real' or slotType = 'EDouble' or slotType = 'EFloat')]m_[featureName/]->get[aSlot.definingFeature.name.toUpperFirst()/]->add([aValueSpecification.oclAsType(LiteralReal).value/]);
+[elseif (aSlot.definingFeature.type.oclIsKindOf(PrimitiveType) and slotType = 'String' or slotType = 'EString')]m_[featureName/]->get[aSlot.definingFeature.name.toUpperFirst()/]->add("[aValueSpecification.oclAsType(LiteralString).value/]");
+[/if]
+[/for]
+[/let]
 [/template]
 
 [***
