@@ -8,7 +8,6 @@ task buildEcoreModels() {
 	dependsOn 'ecore:types:buildTypes'
 	dependsOn 'uml:buildUml'
 	dependsOn 'fuml:buildFUML'
-	dependsOn 'pscs:buildPSCS'
 }
 
 task buildReflectionModels() {
@@ -36,7 +35,6 @@ task compileEcoreModels() {
 	dependsOn 'ecore:types:src_gen:compileTypes'
 	dependsOn 'uml:src_gen:compileUml'
 	dependsOn 'fuml:src_gen:compileFUML'
-	dependsOn 'pscs:src_gen:compilePSCS'
 }
 
 // Compile all without generating the models
@@ -64,7 +62,6 @@ task generateEcoreModels() {
 	dependsOn 'ecore:types:model:generateTypes'
 	dependsOn 'uml:model:generateUml'
 	dependsOn 'fuml:model:generateFUML'
-	dependsOn 'pscs:model:generatePSCS'
 }
 
 task generateReflectionModels() {
