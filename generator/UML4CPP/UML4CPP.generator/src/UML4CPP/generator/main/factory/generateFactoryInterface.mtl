@@ -39,10 +39,6 @@
 [for (elements : Class| aPackage.collectModelClassesForFactoryDeclaration()) separator ('\n')]
 	class [elements.name.toUpperFirst()/];[/for]
 
-[comment] DISABLE INTERFACE IMPLEMENTATION 
-[for (elements : Interface| aPackage.collectModelInterfacesForFactory()) separator ('\n')]
-	class [elements.name.toUpperFirst()/];[/for]
-[/comment]
 	class [aPackage.name.toUpperFirst().concat('Package')/];
 	class [packageName/];
 
@@ -61,8 +57,6 @@
 			virtual std::shared_ptr<uml::Element> create(const std::string _className,  std::shared_ptr<uml::Element> container= nullptr, const unsigned int referenceID = -1) const = 0;
 
 			[aPackage.collectModelClassesForFactoryFunctions().generateClassCreate(false)/]
-[comment] DISABLE INTERFACE IMPLEMENTATION aPackage.collectModelInterfacesForFactory().generateInterfaceCreate(false)/][/comment]
-
 			//Package
 			virtual std::shared_ptr<[aPackage.name.toUpperFirst().concat('Package')/]> get[aPackage.name.toUpperFirst().concat('Package')/]() = 0;
 	};
