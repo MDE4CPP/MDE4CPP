@@ -27,7 +27,7 @@
 [query public supportedTypes(type : Type) : Boolean = (name = 'Integer') or (name = 'Boolean') or (name = 'String') or (name = 'Real') or (name = 'UnlimitedNatural') /]
 
 [query public getClassiferExecutions(aPackage : Package) : Set(Classifier) = OrderedSet{
-				aPackage.allOwnedElements()->filter(Activity)._context,
+				aPackage.allOwnedElements()->filter(Activity)._context->reject(oclIsUndefined()),
 				aPackage.allOwnedElements()->filter(CallOperationAction).target.type,
 				aPackage.allOwnedElements()->filter(CallOperationAction).operation.ownedParameter->select(type.oclIsKindOf(Interface)).type,
 				aPackage.allOwnedElements()->filter(CallOperationAction).operation.ownedParameter->select(type.oclIsKindOf(Class)).type,
