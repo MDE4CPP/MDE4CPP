@@ -95,11 +95,11 @@ m_[instVal.owner.oclAsType(NamedElement).name/] = [instVal.type._package.getPack
 [template private initPrimitiveValueFromMultipleLiteralSpecifications(aSlot : Slot, featureName : String)]
 [let slotType : String = aSlot.definingFeature.type.name]
 [for (aValueSpecification : ValueSpecification | aSlot.value)]
-[if (slotType = 'Boolean' or slotType = 'EBoolean')]m_[featureName/]->get[aSlot.definingFeature.name.toUpperFirst()/]->add([aValueSpecification.oclAsType(LiteralBoolean).value/]);
-[elseif (slotType = 'UnlimitedNatural')]m_[featureName/]->get[aSlot.definingFeature.name.toUpperFirst()/]->add([aValueSpecification.oclAsType(LiteralUnlimitedNatural).value/]);
-[elseif (slotType = 'Integer' or slotType = 'EInt')]m_[featureName/]->get[aSlot.definingFeature.name.toUpperFirst()/]->add([ aValueSpecification.oclAsType(LiteralInteger).value/]);
-[elseif (slotType = 'Real' or slotType = 'EDouble' or slotType = 'EFloat')]m_[featureName/]->get[aSlot.definingFeature.name.toUpperFirst()/]->add([aValueSpecification.oclAsType(LiteralReal).value/]);
-[elseif (aSlot.definingFeature.type.oclIsKindOf(PrimitiveType) and slotType = 'String' or slotType = 'EString')]m_[featureName/]->get[aSlot.definingFeature.name.toUpperFirst()/]->add("[aValueSpecification.oclAsType(LiteralString).value/]");
+[if (slotType = 'Boolean' or slotType = 'EBoolean')]m_[featureName/]->get[aSlot.definingFeature.name.toUpperFirst()/]()->add([aValueSpecification.oclAsType(LiteralBoolean).value/]);
+[elseif (slotType = 'UnlimitedNatural')]m_[featureName/]->get[aSlot.definingFeature.name.toUpperFirst()/]()->add([aValueSpecification.oclAsType(LiteralUnlimitedNatural).value/]);
+[elseif (slotType = 'Integer' or slotType = 'EInt')]m_[featureName/]->get[aSlot.definingFeature.name.toUpperFirst()/]()->add([ aValueSpecification.oclAsType(LiteralInteger).value/]);
+[elseif (slotType = 'Real' or slotType = 'EDouble' or slotType = 'EFloat')]m_[featureName/]->get[aSlot.definingFeature.name.toUpperFirst()/]()->add([aValueSpecification.oclAsType(LiteralReal).value/]);
+[elseif (aSlot.definingFeature.type.oclIsKindOf(PrimitiveType) and slotType = 'String' or slotType = 'EString')]m_[featureName/]->get[aSlot.definingFeature.name.toUpperFirst()/]()->add("[aValueSpecification.oclAsType(LiteralString).value/]");
 [/if]
 [/for]
 [/let]
