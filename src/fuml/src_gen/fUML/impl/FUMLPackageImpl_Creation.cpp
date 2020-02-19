@@ -1010,6 +1010,7 @@ void FUMLPackageImpl::createJoinNodeActivationContent(std::shared_ptr<ecore::EPa
 	m_joinNodeActivation_Class = factory->createEClass_in_EPackage(package, JOINNODEACTIVATION_CLASS);
 	
 	
+	m_joinNodeActivation_Operation_fire_Token = factory->createEOperation_in_EContainingClass(m_joinNodeActivation_Class, JOINNODEACTIVATION_OPERATION_FIRE_TOKEN);
 	m_joinNodeActivation_Operation_isReady = factory->createEOperation_in_EContainingClass(m_joinNodeActivation_Class, JOINNODEACTIVATION_OPERATION_ISREADY);
 	
 }

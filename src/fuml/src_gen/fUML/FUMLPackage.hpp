@@ -1804,16 +1804,18 @@ namespace fUML
 			//Class and Feature IDs 
 			static const unsigned int JOINNODEACTIVATION_CLASS = 67;
 			static const unsigned int JOINNODEACTIVATION_CLASS_FEATURE_COUNT = 6;
-			static const unsigned int JOINNODEACTIVATION_CLASS_OPERATION_COUNT = 29;
+			static const unsigned int JOINNODEACTIVATION_CLASS_OPERATION_COUNT = 30;
 			
 			
-			static const int JOINNODEACTIVATION_OPERATION_ISREADY = 6734;
+			static const int JOINNODEACTIVATION_OPERATION_FIRE_TOKEN = 6734;
+			static const int JOINNODEACTIVATION_OPERATION_ISREADY = 6735;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getJoinNodeActivation_Class() const = 0;
 			
 			
 			
+			virtual std::shared_ptr<ecore::EOperation> getJoinNodeActivation_Operation_fire_Token() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getJoinNodeActivation_Operation_isReady() const = 0;
 			
 			// End Class JoinNodeActivation

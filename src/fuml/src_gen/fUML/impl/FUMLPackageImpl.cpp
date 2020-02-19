@@ -2055,6 +2055,10 @@ std::shared_ptr<ecore::EClass> FUMLPackageImpl::getJoinNodeActivation_Class() co
 
 
 
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getJoinNodeActivation_Operation_fire_Token() const
+{
+	return m_joinNodeActivation_Operation_fire_Token;
+}
 std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getJoinNodeActivation_Operation_isReady() const
 {
 	return m_joinNodeActivation_Operation_isReady;

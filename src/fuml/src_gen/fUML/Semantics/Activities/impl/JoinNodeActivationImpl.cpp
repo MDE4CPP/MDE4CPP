@@ -24,6 +24,8 @@
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
 #include "fUML/impl/FUMLPackageImpl.hpp"
+#include "fUML/Semantics/Activities/ControlToken.hpp"
+#include "uml/ActivityNode.hpp"
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -144,6 +146,52 @@ std::shared_ptr<ecore::EClass> JoinNodeActivationImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
+void JoinNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token> >  incomingTokens)
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+		DEBUG_MESSAGE(
+		if (this->getNode() != nullptr)
+		{
+			std::cout<<"[fire] Control node " << this->getNode()->getName() << "..."<<std::endl;
+		}
+	)
+
+	int controlTokenID = fUML::FUMLPackage::CONTROLTOKEN_CLASS;
+	std::shared_ptr<Bag<fUML::Semantics::Activities::ControlToken>> controlTokenList(new Bag<fUML::Semantics::Activities::ControlToken>());
+
+	Bag<fUML::Semantics::Activities::Token>::iterator tokenIter = incomingTokens->begin();
+	Bag<fUML::Semantics::Activities::Token>::iterator tokenEnd = incomingTokens->end();
+	while (tokenIter != tokenEnd)
+	{
+		if ((*tokenIter)->getMetaElementID() == controlTokenID)
+		{
+			controlTokenList->push_back(std::dynamic_pointer_cast<fUML::Semantics::Activities::ControlToken>(*tokenIter));
+		}
+		tokenIter++;
+	}
+
+	DEBUG_MESSAGE(std::cout << "found " << std::to_string(controlTokenList->size()) << " control tokens inside list with " << std::to_string(incomingTokens->size()) << std::endl;)
+	if (controlTokenList->size() == incomingTokens->size()) // all incoming tokens are ControlToken -> only one token should be offered
+	{
+		incomingTokens.reset(new Bag<fUML::Semantics::Activities::Token>());
+		incomingTokens->push_back(controlTokenList->front());
+	}
+	else // remove all ControlToken and offer only ObjectToken
+	{
+		Bag<fUML::Semantics::Activities::Token>::iterator controlIter = incomingTokens->begin();
+		Bag<fUML::Semantics::Activities::Token>::iterator controlEnd = incomingTokens->end();
+		while (controlIter != controlEnd)
+		{
+			incomingTokens->erase(*controlIter);
+			controlIter++;
+		}
+	}
+
+	this->sendOffers(incomingTokens);
+	//end of body
+}
+
 bool JoinNodeActivationImpl::isReady()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)

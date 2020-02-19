@@ -9255,164 +9255,226 @@ void UMLPackageImpl::createPackageEnumerationLiterals(std::shared_ptr<uml::Packa
 	
 	uML_AggregationKind_composite = factory->createEnumerationLiteral_in_Enumeration(uML_AggregationKind);
 	uML_AggregationKind_composite->setName("composite");
+	uML_AggregationKind_composite->getClassifier()->push_back(uML_AggregationKind);
 	uML_AggregationKind_none = factory->createEnumerationLiteral_in_Enumeration(uML_AggregationKind);
 	uML_AggregationKind_none->setName("none");
+	uML_AggregationKind_none->getClassifier()->push_back(uML_AggregationKind);
 	uML_AggregationKind_shared = factory->createEnumerationLiteral_in_Enumeration(uML_AggregationKind);
 	uML_AggregationKind_shared->setName("shared");
+	uML_AggregationKind_shared->getClassifier()->push_back(uML_AggregationKind);
 	uML_CallConcurrencyKind = factory->createEnumeration_in_Namespace(uML); // TODO Package, Owner
 	uML_CallConcurrencyKind->setName("CallConcurrencyKind");
 	
 	uML_CallConcurrencyKind_concurrent = factory->createEnumerationLiteral_in_Enumeration(uML_CallConcurrencyKind);
 	uML_CallConcurrencyKind_concurrent->setName("concurrent");
+	uML_CallConcurrencyKind_concurrent->getClassifier()->push_back(uML_CallConcurrencyKind);
 	uML_CallConcurrencyKind_guarded = factory->createEnumerationLiteral_in_Enumeration(uML_CallConcurrencyKind);
 	uML_CallConcurrencyKind_guarded->setName("guarded");
+	uML_CallConcurrencyKind_guarded->getClassifier()->push_back(uML_CallConcurrencyKind);
 	uML_CallConcurrencyKind_sequential = factory->createEnumerationLiteral_in_Enumeration(uML_CallConcurrencyKind);
 	uML_CallConcurrencyKind_sequential->setName("sequential");
+	uML_CallConcurrencyKind_sequential->getClassifier()->push_back(uML_CallConcurrencyKind);
 	uML_ConnectorKind = factory->createEnumeration_in_Namespace(uML); // TODO Package, Owner
 	uML_ConnectorKind->setName("ConnectorKind");
 	
 	uML_ConnectorKind_assembly = factory->createEnumerationLiteral_in_Enumeration(uML_ConnectorKind);
 	uML_ConnectorKind_assembly->setName("assembly");
+	uML_ConnectorKind_assembly->getClassifier()->push_back(uML_ConnectorKind);
 	uML_ConnectorKind_delegation = factory->createEnumerationLiteral_in_Enumeration(uML_ConnectorKind);
 	uML_ConnectorKind_delegation->setName("delegation");
+	uML_ConnectorKind_delegation->getClassifier()->push_back(uML_ConnectorKind);
 	uML_ExpansionKind = factory->createEnumeration_in_Namespace(uML); // TODO Package, Owner
 	uML_ExpansionKind->setName("ExpansionKind");
 	
 	uML_ExpansionKind_iterative = factory->createEnumerationLiteral_in_Enumeration(uML_ExpansionKind);
 	uML_ExpansionKind_iterative->setName("iterative");
+	uML_ExpansionKind_iterative->getClassifier()->push_back(uML_ExpansionKind);
 	uML_ExpansionKind_parallel = factory->createEnumerationLiteral_in_Enumeration(uML_ExpansionKind);
 	uML_ExpansionKind_parallel->setName("parallel");
+	uML_ExpansionKind_parallel->getClassifier()->push_back(uML_ExpansionKind);
 	uML_ExpansionKind_stream = factory->createEnumerationLiteral_in_Enumeration(uML_ExpansionKind);
 	uML_ExpansionKind_stream->setName("stream");
+	uML_ExpansionKind_stream->getClassifier()->push_back(uML_ExpansionKind);
 	uML_InteractionOperatorKind = factory->createEnumeration_in_Namespace(uML); // TODO Package, Owner
 	uML_InteractionOperatorKind->setName("InteractionOperatorKind");
 	
 	uML_InteractionOperatorKind_alt = factory->createEnumerationLiteral_in_Enumeration(uML_InteractionOperatorKind);
 	uML_InteractionOperatorKind_alt->setName("alt");
+	uML_InteractionOperatorKind_alt->getClassifier()->push_back(uML_InteractionOperatorKind);
 	uML_InteractionOperatorKind_assert = factory->createEnumerationLiteral_in_Enumeration(uML_InteractionOperatorKind);
 	uML_InteractionOperatorKind_assert->setName("assert");
+	uML_InteractionOperatorKind_assert->getClassifier()->push_back(uML_InteractionOperatorKind);
 	uML_InteractionOperatorKind_break = factory->createEnumerationLiteral_in_Enumeration(uML_InteractionOperatorKind);
 	uML_InteractionOperatorKind_break->setName("break");
+	uML_InteractionOperatorKind_break->getClassifier()->push_back(uML_InteractionOperatorKind);
 	uML_InteractionOperatorKind_consider = factory->createEnumerationLiteral_in_Enumeration(uML_InteractionOperatorKind);
 	uML_InteractionOperatorKind_consider->setName("consider");
+	uML_InteractionOperatorKind_consider->getClassifier()->push_back(uML_InteractionOperatorKind);
 	uML_InteractionOperatorKind_critical = factory->createEnumerationLiteral_in_Enumeration(uML_InteractionOperatorKind);
 	uML_InteractionOperatorKind_critical->setName("critical");
+	uML_InteractionOperatorKind_critical->getClassifier()->push_back(uML_InteractionOperatorKind);
 	uML_InteractionOperatorKind_ignore = factory->createEnumerationLiteral_in_Enumeration(uML_InteractionOperatorKind);
 	uML_InteractionOperatorKind_ignore->setName("ignore");
+	uML_InteractionOperatorKind_ignore->getClassifier()->push_back(uML_InteractionOperatorKind);
 	uML_InteractionOperatorKind_loop = factory->createEnumerationLiteral_in_Enumeration(uML_InteractionOperatorKind);
 	uML_InteractionOperatorKind_loop->setName("loop");
+	uML_InteractionOperatorKind_loop->getClassifier()->push_back(uML_InteractionOperatorKind);
 	uML_InteractionOperatorKind_neg = factory->createEnumerationLiteral_in_Enumeration(uML_InteractionOperatorKind);
 	uML_InteractionOperatorKind_neg->setName("neg");
+	uML_InteractionOperatorKind_neg->getClassifier()->push_back(uML_InteractionOperatorKind);
 	uML_InteractionOperatorKind_opt = factory->createEnumerationLiteral_in_Enumeration(uML_InteractionOperatorKind);
 	uML_InteractionOperatorKind_opt->setName("opt");
+	uML_InteractionOperatorKind_opt->getClassifier()->push_back(uML_InteractionOperatorKind);
 	uML_InteractionOperatorKind_par = factory->createEnumerationLiteral_in_Enumeration(uML_InteractionOperatorKind);
 	uML_InteractionOperatorKind_par->setName("par");
+	uML_InteractionOperatorKind_par->getClassifier()->push_back(uML_InteractionOperatorKind);
 	uML_InteractionOperatorKind_seq = factory->createEnumerationLiteral_in_Enumeration(uML_InteractionOperatorKind);
 	uML_InteractionOperatorKind_seq->setName("seq");
+	uML_InteractionOperatorKind_seq->getClassifier()->push_back(uML_InteractionOperatorKind);
 	uML_InteractionOperatorKind_strict = factory->createEnumerationLiteral_in_Enumeration(uML_InteractionOperatorKind);
 	uML_InteractionOperatorKind_strict->setName("strict");
+	uML_InteractionOperatorKind_strict->getClassifier()->push_back(uML_InteractionOperatorKind);
 	uML_MessageKind = factory->createEnumeration_in_Namespace(uML); // TODO Package, Owner
 	uML_MessageKind->setName("MessageKind");
 	
 	uML_MessageKind_complete = factory->createEnumerationLiteral_in_Enumeration(uML_MessageKind);
 	uML_MessageKind_complete->setName("complete");
+	uML_MessageKind_complete->getClassifier()->push_back(uML_MessageKind);
 	uML_MessageKind_found = factory->createEnumerationLiteral_in_Enumeration(uML_MessageKind);
 	uML_MessageKind_found->setName("found");
+	uML_MessageKind_found->getClassifier()->push_back(uML_MessageKind);
 	uML_MessageKind_lost = factory->createEnumerationLiteral_in_Enumeration(uML_MessageKind);
 	uML_MessageKind_lost->setName("lost");
+	uML_MessageKind_lost->getClassifier()->push_back(uML_MessageKind);
 	uML_MessageKind_unknown = factory->createEnumerationLiteral_in_Enumeration(uML_MessageKind);
 	uML_MessageKind_unknown->setName("unknown");
+	uML_MessageKind_unknown->getClassifier()->push_back(uML_MessageKind);
 	uML_MessageSort = factory->createEnumeration_in_Namespace(uML); // TODO Package, Owner
 	uML_MessageSort->setName("MessageSort");
 	
 	uML_MessageSort_asynchCall = factory->createEnumerationLiteral_in_Enumeration(uML_MessageSort);
 	uML_MessageSort_asynchCall->setName("asynchCall");
+	uML_MessageSort_asynchCall->getClassifier()->push_back(uML_MessageSort);
 	uML_MessageSort_asynchSignal = factory->createEnumerationLiteral_in_Enumeration(uML_MessageSort);
 	uML_MessageSort_asynchSignal->setName("asynchSignal");
+	uML_MessageSort_asynchSignal->getClassifier()->push_back(uML_MessageSort);
 	uML_MessageSort_createMessage = factory->createEnumerationLiteral_in_Enumeration(uML_MessageSort);
 	uML_MessageSort_createMessage->setName("createMessage");
+	uML_MessageSort_createMessage->getClassifier()->push_back(uML_MessageSort);
 	uML_MessageSort_deleteMessage = factory->createEnumerationLiteral_in_Enumeration(uML_MessageSort);
 	uML_MessageSort_deleteMessage->setName("deleteMessage");
+	uML_MessageSort_deleteMessage->getClassifier()->push_back(uML_MessageSort);
 	uML_MessageSort_reply = factory->createEnumerationLiteral_in_Enumeration(uML_MessageSort);
 	uML_MessageSort_reply->setName("reply");
+	uML_MessageSort_reply->getClassifier()->push_back(uML_MessageSort);
 	uML_MessageSort_synchCall = factory->createEnumerationLiteral_in_Enumeration(uML_MessageSort);
 	uML_MessageSort_synchCall->setName("synchCall");
+	uML_MessageSort_synchCall->getClassifier()->push_back(uML_MessageSort);
 	uML_ObjectNodeOrderingKind = factory->createEnumeration_in_Namespace(uML); // TODO Package, Owner
 	uML_ObjectNodeOrderingKind->setName("ObjectNodeOrderingKind");
 	
 	uML_ObjectNodeOrderingKind_FIFO = factory->createEnumerationLiteral_in_Enumeration(uML_ObjectNodeOrderingKind);
 	uML_ObjectNodeOrderingKind_FIFO->setName("FIFO");
+	uML_ObjectNodeOrderingKind_FIFO->getClassifier()->push_back(uML_ObjectNodeOrderingKind);
 	uML_ObjectNodeOrderingKind_LIFO = factory->createEnumerationLiteral_in_Enumeration(uML_ObjectNodeOrderingKind);
 	uML_ObjectNodeOrderingKind_LIFO->setName("LIFO");
+	uML_ObjectNodeOrderingKind_LIFO->getClassifier()->push_back(uML_ObjectNodeOrderingKind);
 	uML_ObjectNodeOrderingKind_ordered = factory->createEnumerationLiteral_in_Enumeration(uML_ObjectNodeOrderingKind);
 	uML_ObjectNodeOrderingKind_ordered->setName("ordered");
+	uML_ObjectNodeOrderingKind_ordered->getClassifier()->push_back(uML_ObjectNodeOrderingKind);
 	uML_ObjectNodeOrderingKind_unordered = factory->createEnumerationLiteral_in_Enumeration(uML_ObjectNodeOrderingKind);
 	uML_ObjectNodeOrderingKind_unordered->setName("unordered");
+	uML_ObjectNodeOrderingKind_unordered->getClassifier()->push_back(uML_ObjectNodeOrderingKind);
 	uML_ParameterDirectionKind = factory->createEnumeration_in_Namespace(uML); // TODO Package, Owner
 	uML_ParameterDirectionKind->setName("ParameterDirectionKind");
 	
 	uML_ParameterDirectionKind_in = factory->createEnumerationLiteral_in_Enumeration(uML_ParameterDirectionKind);
 	uML_ParameterDirectionKind_in->setName("in");
+	uML_ParameterDirectionKind_in->getClassifier()->push_back(uML_ParameterDirectionKind);
 	uML_ParameterDirectionKind_inout = factory->createEnumerationLiteral_in_Enumeration(uML_ParameterDirectionKind);
 	uML_ParameterDirectionKind_inout->setName("inout");
+	uML_ParameterDirectionKind_inout->getClassifier()->push_back(uML_ParameterDirectionKind);
 	uML_ParameterDirectionKind_out = factory->createEnumerationLiteral_in_Enumeration(uML_ParameterDirectionKind);
 	uML_ParameterDirectionKind_out->setName("out");
+	uML_ParameterDirectionKind_out->getClassifier()->push_back(uML_ParameterDirectionKind);
 	uML_ParameterDirectionKind_return = factory->createEnumerationLiteral_in_Enumeration(uML_ParameterDirectionKind);
 	uML_ParameterDirectionKind_return->setName("return");
+	uML_ParameterDirectionKind_return->getClassifier()->push_back(uML_ParameterDirectionKind);
 	uML_ParameterEffectKind = factory->createEnumeration_in_Namespace(uML); // TODO Package, Owner
 	uML_ParameterEffectKind->setName("ParameterEffectKind");
 	
 	uML_ParameterEffectKind_create = factory->createEnumerationLiteral_in_Enumeration(uML_ParameterEffectKind);
 	uML_ParameterEffectKind_create->setName("create");
+	uML_ParameterEffectKind_create->getClassifier()->push_back(uML_ParameterEffectKind);
 	uML_ParameterEffectKind_delete = factory->createEnumerationLiteral_in_Enumeration(uML_ParameterEffectKind);
 	uML_ParameterEffectKind_delete->setName("delete");
+	uML_ParameterEffectKind_delete->getClassifier()->push_back(uML_ParameterEffectKind);
 	uML_ParameterEffectKind_read = factory->createEnumerationLiteral_in_Enumeration(uML_ParameterEffectKind);
 	uML_ParameterEffectKind_read->setName("read");
+	uML_ParameterEffectKind_read->getClassifier()->push_back(uML_ParameterEffectKind);
 	uML_ParameterEffectKind_update = factory->createEnumerationLiteral_in_Enumeration(uML_ParameterEffectKind);
 	uML_ParameterEffectKind_update->setName("update");
+	uML_ParameterEffectKind_update->getClassifier()->push_back(uML_ParameterEffectKind);
 	uML_PseudostateKind = factory->createEnumeration_in_Namespace(uML); // TODO Package, Owner
 	uML_PseudostateKind->setName("PseudostateKind");
 	
 	uML_PseudostateKind_choice = factory->createEnumerationLiteral_in_Enumeration(uML_PseudostateKind);
 	uML_PseudostateKind_choice->setName("choice");
+	uML_PseudostateKind_choice->getClassifier()->push_back(uML_PseudostateKind);
 	uML_PseudostateKind_deepHistory = factory->createEnumerationLiteral_in_Enumeration(uML_PseudostateKind);
 	uML_PseudostateKind_deepHistory->setName("deepHistory");
+	uML_PseudostateKind_deepHistory->getClassifier()->push_back(uML_PseudostateKind);
 	uML_PseudostateKind_entryPoint = factory->createEnumerationLiteral_in_Enumeration(uML_PseudostateKind);
 	uML_PseudostateKind_entryPoint->setName("entryPoint");
+	uML_PseudostateKind_entryPoint->getClassifier()->push_back(uML_PseudostateKind);
 	uML_PseudostateKind_exitPoint = factory->createEnumerationLiteral_in_Enumeration(uML_PseudostateKind);
 	uML_PseudostateKind_exitPoint->setName("exitPoint");
+	uML_PseudostateKind_exitPoint->getClassifier()->push_back(uML_PseudostateKind);
 	uML_PseudostateKind_fork = factory->createEnumerationLiteral_in_Enumeration(uML_PseudostateKind);
 	uML_PseudostateKind_fork->setName("fork");
+	uML_PseudostateKind_fork->getClassifier()->push_back(uML_PseudostateKind);
 	uML_PseudostateKind_initial = factory->createEnumerationLiteral_in_Enumeration(uML_PseudostateKind);
 	uML_PseudostateKind_initial->setName("initial");
+	uML_PseudostateKind_initial->getClassifier()->push_back(uML_PseudostateKind);
 	uML_PseudostateKind_join = factory->createEnumerationLiteral_in_Enumeration(uML_PseudostateKind);
 	uML_PseudostateKind_join->setName("join");
+	uML_PseudostateKind_join->getClassifier()->push_back(uML_PseudostateKind);
 	uML_PseudostateKind_junction = factory->createEnumerationLiteral_in_Enumeration(uML_PseudostateKind);
 	uML_PseudostateKind_junction->setName("junction");
+	uML_PseudostateKind_junction->getClassifier()->push_back(uML_PseudostateKind);
 	uML_PseudostateKind_shallowHistory = factory->createEnumerationLiteral_in_Enumeration(uML_PseudostateKind);
 	uML_PseudostateKind_shallowHistory->setName("shallowHistory");
+	uML_PseudostateKind_shallowHistory->getClassifier()->push_back(uML_PseudostateKind);
 	uML_PseudostateKind_terminate = factory->createEnumerationLiteral_in_Enumeration(uML_PseudostateKind);
 	uML_PseudostateKind_terminate->setName("terminate");
+	uML_PseudostateKind_terminate->getClassifier()->push_back(uML_PseudostateKind);
 	uML_TransitionKind = factory->createEnumeration_in_Namespace(uML); // TODO Package, Owner
 	uML_TransitionKind->setName("TransitionKind");
 	
 	uML_TransitionKind_external = factory->createEnumerationLiteral_in_Enumeration(uML_TransitionKind);
 	uML_TransitionKind_external->setName("external");
+	uML_TransitionKind_external->getClassifier()->push_back(uML_TransitionKind);
 	uML_TransitionKind_internal = factory->createEnumerationLiteral_in_Enumeration(uML_TransitionKind);
 	uML_TransitionKind_internal->setName("internal");
+	uML_TransitionKind_internal->getClassifier()->push_back(uML_TransitionKind);
 	uML_TransitionKind_local = factory->createEnumerationLiteral_in_Enumeration(uML_TransitionKind);
 	uML_TransitionKind_local->setName("local");
+	uML_TransitionKind_local->getClassifier()->push_back(uML_TransitionKind);
 	uML_VisibilityKind = factory->createEnumeration_in_Namespace(uML); // TODO Package, Owner
 	uML_VisibilityKind->setName("VisibilityKind");
 	
 	uML_VisibilityKind_package = factory->createEnumerationLiteral_in_Enumeration(uML_VisibilityKind);
 	uML_VisibilityKind_package->setName("package");
+	uML_VisibilityKind_package->getClassifier()->push_back(uML_VisibilityKind);
 	uML_VisibilityKind_private = factory->createEnumerationLiteral_in_Enumeration(uML_VisibilityKind);
 	uML_VisibilityKind_private->setName("private");
+	uML_VisibilityKind_private->getClassifier()->push_back(uML_VisibilityKind);
 	uML_VisibilityKind_protected = factory->createEnumerationLiteral_in_Enumeration(uML_VisibilityKind);
 	uML_VisibilityKind_protected->setName("protected");
+	uML_VisibilityKind_protected->getClassifier()->push_back(uML_VisibilityKind);
 	uML_VisibilityKind_public = factory->createEnumerationLiteral_in_Enumeration(uML_VisibilityKind);
 	uML_VisibilityKind_public->setName("public");
+	uML_VisibilityKind_public->getClassifier()->push_back(uML_VisibilityKind);
 	
 }
 
@@ -13256,7 +13318,7 @@ void UMLPackageImpl::createPackageValueSpecifications(std::shared_ptr<uml::Packa
 	
 	uML_RedefinableTemplateSignature_isConsistentWith_pre_specification_OpaqueExpression = factory->createOpaqueExpression_in_Owner(uML_RedefinableTemplateSignature_isConsistentWith_pre);
 	
-	uML_RedefinableTemplateSignature_isConsistentWith_specspec = factory->createOpaqueExpression_in_Owner(uML_RedefinableTemplateSignature_isConsistentWith_spec);
+	uML_RedefinableTemplateSignature_isConsistentWith_spec_OpaqueExpression_spec = factory->createOpaqueExpression_in_Owner(uML_RedefinableTemplateSignature_isConsistentWith_spec);
 	
 	uML_RedefinableTemplateSignature_redefines_parents_specification_OpaqueExpression = factory->createOpaqueExpression_in_Owner(uML_RedefinableTemplateSignature_redefines_parents);
 	
@@ -29141,7 +29203,8 @@ void UMLPackageImpl::initializePackageValueSpecifications()
 
 	
 
-	uML_BehavioralFeature_concurrency_defaultValue_InstanceValue->setInstance(uML_CallConcurrencyKind_sequential);
+	uML_BehavioralFeature_concurrency_defaultValue_InstanceValue->setInstance(get_UML_CallConcurrencyKind_sequential());
+	uML_BehavioralFeature_concurrency_defaultValue_InstanceValue->setType(get_UML_CallConcurrencyKind());
 
 	uML_BehavioralFeature_createReturnResult_String_Type_String_Type_name_lowerValue_LiteralInteger_UML_BehavioralFeature_createReturnResult_String_Type_String_Type_name->setValue(0);
 
@@ -29599,7 +29662,8 @@ void UMLPackageImpl::initializePackageValueSpecifications()
 
 	
 
-	uML_CombinedFragment_interactionOperator_defaultValue_InstanceValue->setInstance(uML_InteractionOperatorKind_seq);
+	uML_CombinedFragment_interactionOperator_defaultValue_InstanceValue->setInstance(get_UML_InteractionOperatorKind_seq());
+	uML_CombinedFragment_interactionOperator_defaultValue_InstanceValue->setType(get_UML_InteractionOperatorKind());
 
 	uML_CombinedFragment_operand_upperValue_LiteralUnlimitedNatural_UML_CombinedFragment_operand->setValue(-1);
 
@@ -29931,7 +29995,8 @@ void UMLPackageImpl::initializePackageValueSpecifications()
 
 	
 
-	uML_ElementImport_visibility_defaultValue_InstanceValue->setInstance(uML_VisibilityKind_public);
+	uML_ElementImport_visibility_defaultValue_InstanceValue->setInstance(get_UML_VisibilityKind_public());
+	uML_ElementImport_visibility_defaultValue_InstanceValue->setType(get_UML_VisibilityKind());
 
 	
 
@@ -30087,7 +30152,8 @@ void UMLPackageImpl::initializePackageValueSpecifications()
 
 	uML_ExpansionRegion_inputElement_upperValue_LiteralUnlimitedNatural_UML_ExpansionRegion_inputElement->setValue(-1);
 
-	uML_ExpansionRegion_mode_defaultValue_InstanceValue->setInstance(uML_ExpansionKind_iterative);
+	uML_ExpansionRegion_mode_defaultValue_InstanceValue->setInstance(get_UML_ExpansionKind_iterative());
+	uML_ExpansionRegion_mode_defaultValue_InstanceValue->setType(get_UML_ExpansionKind());
 
 	uML_ExpansionRegion_outputElement_lowerValue_LiteralInteger_UML_ExpansionRegion_outputElement->setValue(0);
 
@@ -30651,11 +30717,13 @@ void UMLPackageImpl::initializePackageValueSpecifications()
 
 	
 
-	uML_Message_messageKind_defaultValue_InstanceValue->setInstance(uML_MessageKind_unknown);
+	uML_Message_messageKind_defaultValue_InstanceValue->setInstance(get_UML_MessageKind_unknown());
+	uML_Message_messageKind_defaultValue_InstanceValue->setType(nullptr);
 
 	
 
-	uML_Message_messageSort_defaultValue_InstanceValue->setInstance(uML_MessageSort_synchCall);
+	uML_Message_messageSort_defaultValue_InstanceValue->setInstance(get_UML_MessageSort_synchCall());
+	uML_Message_messageSort_defaultValue_InstanceValue->setType(get_UML_MessageSort());
 
 	
 
@@ -30901,7 +30969,8 @@ void UMLPackageImpl::initializePackageValueSpecifications()
 
 	
 
-	uML_ObjectNode_ordering_defaultValue_InstanceValue->setInstance(uML_ObjectNodeOrderingKind_FIFO);
+	uML_ObjectNode_ordering_defaultValue_InstanceValue->setInstance(get_UML_ObjectNodeOrderingKind_FIFO());
+	uML_ObjectNode_ordering_defaultValue_InstanceValue->setType(get_UML_ObjectNodeOrderingKind());
 
 	
 
@@ -31061,7 +31130,8 @@ void UMLPackageImpl::initializePackageValueSpecifications()
 
 	
 
-	uML_PackageImport_visibility_defaultValue_InstanceValue->setInstance(uML_VisibilityKind_public);
+	uML_PackageImport_visibility_defaultValue_InstanceValue->setInstance(get_UML_VisibilityKind_public());
+	uML_PackageImport_visibility_defaultValue_InstanceValue->setType(get_UML_VisibilityKind());
 
 	uML_Package_URI_lowerValue_LiteralInteger_UML_Package_URI->setValue(0);
 
@@ -31171,7 +31241,8 @@ void UMLPackageImpl::initializePackageValueSpecifications()
 
 	
 
-	uML_PackageableElement_visibility_defaultValue_InstanceValue->setInstance(uML_VisibilityKind_public);
+	uML_PackageableElement_visibility_defaultValue_InstanceValue->setInstance(get_UML_VisibilityKind_public());
+	uML_PackageableElement_visibility_defaultValue_InstanceValue->setType(get_UML_VisibilityKind());
 
 	uML_PackageableElement_visibility_lowerValue_LiteralInteger_UML_PackageableElement_visibility->setValue(0);
 
@@ -31199,7 +31270,8 @@ void UMLPackageImpl::initializePackageValueSpecifications()
 
 	
 
-	uML_Parameter_direction_defaultValue_InstanceValue->setInstance(uML_ParameterDirectionKind_in);
+	uML_Parameter_direction_defaultValue_InstanceValue->setInstance(get_UML_ParameterDirectionKind_in());
+	uML_Parameter_direction_defaultValue_InstanceValue->setType(get_UML_ParameterDirectionKind());
 
 	uML_Parameter_effect_lowerValue_LiteralInteger_UML_Parameter_effect->setValue(0);
 
@@ -31339,7 +31411,8 @@ void UMLPackageImpl::initializePackageValueSpecifications()
 
 	
 
-	uML_Property_aggregation_defaultValue_InstanceValue->setInstance(uML_AggregationKind_none);
+	uML_Property_aggregation_defaultValue_InstanceValue->setInstance(get_UML_AggregationKind_none());
+	uML_Property_aggregation_defaultValue_InstanceValue->setType(get_UML_AggregationKind());
 
 	uML_Property_associationEnd_lowerValue_LiteralInteger_UML_Property_associationEnd->setValue(0);
 
@@ -31475,7 +31548,8 @@ void UMLPackageImpl::initializePackageValueSpecifications()
 
 	
 
-	uML_Pseudostate_kind_defaultValue_InstanceValue->setInstance(uML_PseudostateKind_initial);
+	uML_Pseudostate_kind_defaultValue_InstanceValue->setInstance(get_UML_PseudostateKind_initial());
+	uML_Pseudostate_kind_defaultValue_InstanceValue->setType(get_UML_PseudostateKind());
 
 	
 
@@ -32081,7 +32155,8 @@ void UMLPackageImpl::initializePackageValueSpecifications()
 
 	
 
-	uML_Transition_kind_defaultValue_InstanceValue->setInstance(uML_TransitionKind_external);
+	uML_Transition_kind_defaultValue_InstanceValue->setInstance(get_UML_TransitionKind_external());
+	uML_Transition_kind_defaultValue_InstanceValue->setType(get_UML_TransitionKind());
 
 	
 
