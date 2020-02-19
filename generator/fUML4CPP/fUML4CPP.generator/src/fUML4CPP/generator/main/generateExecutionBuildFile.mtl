@@ -72,11 +72,14 @@ SET(CMAKE_CXX_FLAGS_RELEASE " -O3 -DNDEBUG")
 string(REPLACE "\\" "/" MDE4CPP_HOME $ENV{MDE4CPP_HOME})
 
 SET(SOURCE_FILES
-[for (aBehavior : OpaqueBehavior | aPackage.getOpaqueBehaviors()->sortedBy(name))]
-	[aBehavior.name.sanitize().toUpperFirst()/]Execution.cpp
+[for (aDecisionNode : DecisionNode | aPackage.getDecisionNodesWithOB())]
+	[aDecisionNode.generateOpaqueBehaviorExecutionName()/].cpp
+[/for]
+[for (aCBA : CallBehaviorAction | aPackage.getCallBehaviorActionsWithOB())]
+	[aCBA.generateOpaqueBehaviorExecutionName()/].cpp
 [/for]
 [for (aCOA : CallOperationAction | aPackage.getCallOperationActions()->sortedBy(name))]
-	[aCOA.name.sanitize().toUpperFirst()/]Execution.cpp
+	[aCOA.generateOpaqueBehaviorExecutionName()/].cpp
 [/for]
 [for (aClassifier : Classifier | getClassiferExecutions()->sortedBy(name))]
 	[aClassifier.name.toUpperFirst()/]Object.cpp

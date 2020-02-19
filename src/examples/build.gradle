@@ -42,9 +42,14 @@ task generateAllModelExamples() {
 		[  	'./commonExamples/SubsetUnionExample/SubsetUnion/model/', 
 			'./commonExamples/SubsetUnionExample/SubsetUnionDepth/model/', 
 			'./ecoreExamples/ecoreModelExample/model/', 
+			'./fUMLExamples/ActionTest/model/', 
 			'./fUMLExamples/Calculator/model/', 
 			'./fUMLExamples/ForkNodeTest/model/', 
+			'./fUMLExamples/JoinNodeTest/model/', 
 			'./fUMLExamples/MultiplePins/model/', 
+			'./fUMLExamples/RegionTest/model/', 
+			'./fUMLExamples/SimpleBehaviorTest/model/', 
+			'./fUMLExamples/ThreePhilosophers/model/', 
 			'./UMLExamples/UMLModelExample/model/'
 		].each { path ->
 			exec
@@ -63,8 +68,13 @@ task buildAllModelExamples() {
 	dependsOn getRootProject().getTasksByName('buildSubsetUnion', true)
 	dependsOn getRootProject().getTasksByName('buildSubsetUnionDepth', true)
 	dependsOn getRootProject().getTasksByName('buildLibraryModel_ecore', true)
+	dependsOn getRootProject().getTasksByName('buildActionTest', true)
 	dependsOn getRootProject().getTasksByName('buildCalcModel', true)
 	dependsOn getRootProject().getTasksByName('buildForkNodeTest', true)
+	dependsOn getRootProject().getTasksByName('buildJoinNodeTest', true)
 	dependsOn getRootProject().getTasksByName('buildFUMLMultiplePins', true)
+	dependsOn getRootProject().getTasksByName('buildRegionTest', true)
+	dependsOn getRootProject().getTasksByName('SimpleBehaviorTest', true)
+	dependsOn getRootProject().getTasksByName('ThreePhilosophers', true)
 	dependsOn getRootProject().getTasksByName('buildLibraryModel_uml', true)
 }

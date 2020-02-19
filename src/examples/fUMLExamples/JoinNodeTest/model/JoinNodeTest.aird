@@ -64,7 +64,7 @@
               </children>
               <children xmi:type="notation:Node" xmi:id="__97xjkw1Eeqt1NEMZ6cUVA" type="3012" element="__91D0Ew1Eeqt1NEMZ6cUVA">
                 <children xmi:type="notation:Node" xmi:id="__97xkUw1Eeqt1NEMZ6cUVA" type="5010">
-                  <layoutConstraint xmi:type="notation:Location" xmi:id="__97xkkw1Eeqt1NEMZ6cUVA" x="21"/>
+                  <layoutConstraint xmi:type="notation:Location" xmi:id="__97xkkw1Eeqt1NEMZ6cUVA" x="-23" y="6"/>
                 </children>
                 <children xmi:type="notation:Node" xmi:id="__-BREEw1Eeqt1NEMZ6cUVA" type="3003" element="__91D0Uw1Eeqt1NEMZ6cUVA">
                   <styles xmi:type="notation:ShapeStyle" xmi:id="__-BREUw1Eeqt1NEMZ6cUVA" fontName="Arial" fontHeight="8"/>

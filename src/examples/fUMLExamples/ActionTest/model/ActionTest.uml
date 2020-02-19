@@ -105,7 +105,9 @@ for (int i=0; i&lt;size; i++)&#xD;
       </value>
     </node>
     <node xmi:type="uml:ValueSpecificationAction" xmi:id="_FGGisPDEEemaRoNal_vgxw" name="ValSpec5" incoming="_sBPhoPDEEemaRoNal_vgxw">
-      <result xmi:id="_FGGisfDEEemaRoNal_vgxw" name="out" outgoing="_JNDxAPDEEemaRoNal_vgxw"/>
+      <result xmi:id="_FGGisfDEEemaRoNal_vgxw" name="out" outgoing="_JNDxAPDEEemaRoNal_vgxw">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </result>
       <value xmi:type="uml:LiteralInteger" xmi:id="_SFFaQPDHEemaRoNal_vgxw" value="5"/>
     </node>
     <node xmi:type="uml:ForkNode" xmi:id="_gjw8QPDFEemaRoNal_vgxw" name="Fork2" incoming="_iES64PDFEemaRoNal_vgxw" outgoing="_itRmcPDFEemaRoNal_vgxw _rzjOcPDFEemaRoNal_vgxw __S9NcPDFEemaRoNal_vgxw"/>
