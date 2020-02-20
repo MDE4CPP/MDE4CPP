@@ -33,6 +33,15 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Classifier.hpp"
@@ -40,8 +49,6 @@
 #include "uml/Comment.hpp"
 
 #include "uml/Dependency.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -184,14 +191,6 @@ GeneralizationSetImpl::GeneralizationSetImpl(const GeneralizationSetImpl & obj):
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	if(obj.getNameExpression()!=nullptr)
 	{
 		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
@@ -219,7 +218,7 @@ std::shared_ptr<ecore::EObject>  GeneralizationSetImpl::copy() const
 
 std::shared_ptr<ecore::EClass> GeneralizationSetImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getGeneralizationSet_EClass();
+	return UmlPackageImpl::eInstance()->getGeneralizationSet_Class();
 }
 
 //*********************************
@@ -337,14 +336,24 @@ Any GeneralizationSetImpl::eGet(int featureID, bool resolve, bool coreType) cons
 {
 	switch(featureID)
 	{
-		case UmlPackage::GENERALIZATIONSET_EREFERENCE_GENERALIZATION:
-			return eAny(getGeneralization()); //9616
-		case UmlPackage::GENERALIZATIONSET_EATTRIBUTE_ISCOVERING:
-			return eAny(getIsCovering()); //9613
-		case UmlPackage::GENERALIZATIONSET_EATTRIBUTE_ISDISJOINT:
-			return eAny(getIsDisjoint()); //9614
-		case UmlPackage::GENERALIZATIONSET_EREFERENCE_POWERTYPE:
-			return eAny(getPowertype()); //9615
+		case UmlPackage::GENERALIZATIONSET_ATTRIBUTE_GENERALIZATION:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Generalization>::iterator iter = m_generalization->begin();
+			Bag<uml::Generalization>::iterator end = m_generalization->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //11115
+		}
+		case UmlPackage::GENERALIZATIONSET_ATTRIBUTE_ISCOVERING:
+			return eAny(getIsCovering()); //11112
+		case UmlPackage::GENERALIZATIONSET_ATTRIBUTE_ISDISJOINT:
+			return eAny(getIsDisjoint()); //11113
+		case UmlPackage::GENERALIZATIONSET_ATTRIBUTE_POWERTYPE:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getPowertype())); //11114
 	}
 	return PackageableElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -352,14 +361,14 @@ bool GeneralizationSetImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::GENERALIZATIONSET_EREFERENCE_GENERALIZATION:
-			return getGeneralization() != nullptr; //9616
-		case UmlPackage::GENERALIZATIONSET_EATTRIBUTE_ISCOVERING:
-			return getIsCovering() != false; //9613
-		case UmlPackage::GENERALIZATIONSET_EATTRIBUTE_ISDISJOINT:
-			return getIsDisjoint() != false; //9614
-		case UmlPackage::GENERALIZATIONSET_EREFERENCE_POWERTYPE:
-			return getPowertype() != nullptr; //9615
+		case UmlPackage::GENERALIZATIONSET_ATTRIBUTE_GENERALIZATION:
+			return getGeneralization() != nullptr; //11115
+		case UmlPackage::GENERALIZATIONSET_ATTRIBUTE_ISCOVERING:
+			return getIsCovering() != false; //11112
+		case UmlPackage::GENERALIZATIONSET_ATTRIBUTE_ISDISJOINT:
+			return getIsDisjoint() != false; //11113
+		case UmlPackage::GENERALIZATIONSET_ATTRIBUTE_POWERTYPE:
+			return getPowertype() != nullptr; //11114
 	}
 	return PackageableElementImpl::internalEIsSet(featureID);
 }
@@ -367,25 +376,62 @@ bool GeneralizationSetImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::GENERALIZATIONSET_EATTRIBUTE_ISCOVERING:
+		case UmlPackage::GENERALIZATIONSET_ATTRIBUTE_GENERALIZATION:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Generalization>> generalizationList(new Bag<uml::Generalization>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				generalizationList->add(std::dynamic_pointer_cast<uml::Generalization>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Generalization>::iterator iterGeneralization = m_generalization->begin();
+			Bag<uml::Generalization>::iterator endGeneralization = m_generalization->end();
+			while (iterGeneralization != endGeneralization)
+			{
+				if (generalizationList->find(*iterGeneralization) == -1)
+				{
+					m_generalization->erase(*iterGeneralization);
+				}
+				iterGeneralization++;
+			}
+
+			iterGeneralization = generalizationList->begin();
+			endGeneralization = generalizationList->end();
+			while (iterGeneralization != endGeneralization)
+			{
+				if (m_generalization->find(*iterGeneralization) == -1)
+				{
+					m_generalization->add(*iterGeneralization);
+				}
+				iterGeneralization++;			
+			}
+			return true;
+		}
+		case UmlPackage::GENERALIZATIONSET_ATTRIBUTE_ISCOVERING:
 		{
 			// BOOST CAST
 			bool _isCovering = newValue->get<bool>();
-			setIsCovering(_isCovering); //9613
+			setIsCovering(_isCovering); //11112
 			return true;
 		}
-		case UmlPackage::GENERALIZATIONSET_EATTRIBUTE_ISDISJOINT:
+		case UmlPackage::GENERALIZATIONSET_ATTRIBUTE_ISDISJOINT:
 		{
 			// BOOST CAST
 			bool _isDisjoint = newValue->get<bool>();
-			setIsDisjoint(_isDisjoint); //9614
+			setIsDisjoint(_isDisjoint); //11113
 			return true;
 		}
-		case UmlPackage::GENERALIZATIONSET_EREFERENCE_POWERTYPE:
+		case UmlPackage::GENERALIZATIONSET_ATTRIBUTE_POWERTYPE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Classifier> _powertype = newValue->get<std::shared_ptr<uml::Classifier>>();
-			setPowertype(_powertype); //9615
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Classifier> _powertype = std::dynamic_pointer_cast<uml::Classifier>(_temp);
+			setPowertype(_powertype); //11114
 			return true;
 		}
 	}
@@ -474,7 +520,7 @@ void GeneralizationSetImpl::resolveReferences(const int featureID, std::list<std
 {
 	switch(featureID)
 	{
-		case UmlPackage::GENERALIZATIONSET_EREFERENCE_GENERALIZATION:
+		case UmlPackage::GENERALIZATIONSET_ATTRIBUTE_GENERALIZATION:
 		{
 			std::shared_ptr<Bag<uml::Generalization>> _generalization = getGeneralization();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -488,7 +534,7 @@ void GeneralizationSetImpl::resolveReferences(const int featureID, std::list<std
 			return;
 		}
 
-		case UmlPackage::GENERALIZATIONSET_EREFERENCE_POWERTYPE:
+		case UmlPackage::GENERALIZATIONSET_ATTRIBUTE_POWERTYPE:
 		{
 			if (references.size() == 1)
 			{
@@ -514,7 +560,6 @@ void GeneralizationSetImpl::save(std::shared_ptr<persistence::interfaces::XSaveH
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
@@ -533,12 +578,12 @@ void GeneralizationSetImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getGeneralizationSet_EAttribute_isCovering()) )
+		if ( this->eIsSet(package->getGeneralizationSet_Attribute_isCovering()) )
 		{
 			saveHandler->addAttribute("isCovering", this->getIsCovering());
 		}
 
-		if ( this->eIsSet(package->getGeneralizationSet_EAttribute_isDisjoint()) )
+		if ( this->eIsSet(package->getGeneralizationSet_Attribute_isDisjoint()) )
 		{
 			saveHandler->addAttribute("isDisjoint", this->getIsDisjoint());
 		}

@@ -17,6 +17,7 @@ namespace types
 	class TypesPackage;
 }
 
+
 namespace types 
 {
 	class TypesFactory : virtual public ecore::EFactory 
@@ -34,9 +35,9 @@ namespace types
 				static std::shared_ptr<TypesFactory> eInstance();
 		
 			//Creator functions
-			virtual std::shared_ptr<ecore::EObject> create(std::string _className) const = 0;
-			virtual std::shared_ptr<ecore::EObject> create(std::string _className, std::shared_ptr<EObject> _container, 	const unsigned int referenceID = -1) const = 0;
-			virtual std::shared_ptr<ecore::EObject> create(const unsigned int classID, std::shared_ptr<EObject> _container = nullptr, 	const unsigned int referenceID = -1) const = 0;
+			virtual std::shared_ptr<ecore::EObject> create(std::string _className,  std::shared_ptr<ecore::EObject> container=nullptr, const int referenceID = -1) const = 0;
+			virtual std::shared_ptr<ecore::EObject> create(const int classID,  std::shared_ptr<ecore::EObject> container = nullptr, const int referenceID = -1) const = 0;
+			virtual std::shared_ptr<ecore::EObject> create(std::shared_ptr<ecore::EClass> _class, std::shared_ptr<EObject> _container=nullptr, const int referenceID = -1) const = 0;
 
 			
 			//Package

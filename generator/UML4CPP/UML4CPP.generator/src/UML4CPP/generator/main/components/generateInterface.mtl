@@ -1,0 +1,114 @@
+[comment encoding = UTF-8 /]
+[**
+ * Copyright (c) 2017 TU Ilmenau, Systems and Software Engineering Group
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
+ * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+ * and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ ****************************************************************************************************************************************************************
+ * 
+ * module for generation of UML Interface artefacts
+ * 
+ */]
+[module generateInterface('http://www.eclipse.org/uml2/5.0.0/UML')]
+ 
+[import UML4CPP::generator::main::components::generateOperation /]
+[import UML4CPP::generator::main::components::generateProperty /]
+[import UML4CPP::generator::main::components::generateType /]
+[import UML4CPP::generator::main::helpers::generalHelper /]
+[import UML4CPP::generator::main::helpers::nameHelper /]
+
+
+[** 
+ * get all associations where aInterface is memberType
+*/]
+[query private getAssociationsToInterface(aInterface : Interface) : Set(Association) = aInterface.getNearestPackage().ownedMember->select(oclIsKindOf(Association))->asOrderedSet() /]
+[query private isCompositionForInterface(anAssociation : Association, aInterface : Interface) : Boolean = anAssociation.memberEnd->select(type = aInterface and isComposite and (not owner.oclIsKindOf(Association)))->size() > 0/]
+[query public getCompositionsToInterface(aInterface : Interface) : Set(Association) = getAssociationsToInterface()->select(isCompositionForInterface(aInterface))->asOrderedSet()->sortedBy(myQualifiedName()) /]
+
+[**
+ * generate creation of meta model instance for an Interface element
+*/]
+[template public generateInterfaceCreation(anInterface : Interface)]
+[anInterface.memberName()/] = factory->createInterface_in_Package([anInterface.ancestors(Package)->first().memberName()/][anInterface.oclAsType(NamedElement).getStaticClassID_Name()/]);
+
+[/template]
+
+[**
+ * generate initialization of meta model instance for an Interface element
+ * 
+ * this includes:
+ * - set interface name
+ * - set isAbstract flag
+*/]
+[template public generateInterfaceInitialization(anInterface : Interface)]
+[anInterface.memberName()/]->setName("[anInterface.name/]");
+[anInterface.memberName()/]->setIsAbstract([anInterface.isAbstract/]);
+
+[/template]
+
+[template public generateStaticInterfaceID(aInterface : Interface)]
+static const unsigned int [aInterface.getMemberName().toUpperCase()/] = [aInterface.getStaticInterfaceID_ID()/];
+static const unsigned int [aInterface.getMemberName().toUpperCase()/]_FEATURE_COUNT = [aInterface.allFeatures()->size()/];
+static const unsigned int [aInterface.getMemberName().toUpperCase()/]_OPERATION_COUNT = [aInterface.ownedOperation->size()/];
+
+[/template]
+
+
+[**
+ * template to generate create function declarations
+*/]
+[template public generateInterfaceCreate(aInterface : Interface,impl : Boolean)]
+virtual std::shared_ptr<[aInterface.generateCppType(true)/]> create[aInterface.name.toUpperFirst()/](const int metaElementID=-1) const [abstractSuffix(impl)/];
+[for (anAssociation : Association | aInterface.getCompositionsToInterface())]
+[let containerProperty : Property = anAssociation.memberEnd->select(type = aInterface)->asOrderedSet()->first()]
+[let containmentProperty : Property = anAssociation.memberEnd->select(not (type = aInterface))->asOrderedSet()->first()]
+virtual std::shared_ptr<[aInterface.generateCppType(true)/]> create[aInterface.name.toUpperFirst()/]_in_[containmentProperty.name.toUpperFirst()/]([containmentProperty.generateCppType()/] [containmentProperty.name.toLowerFirst()/], const int metaElementID=-1) const [abstractSuffix(impl)/] ; 
+[/let]
+[/let]
+[/for]
+[/template]
+
+[**
+ * generate function declaration for getThisPtr and setThisPtr functions
+*/]
+[template public generateThisPtrFunctionDeclaration(aInterface : Interface)]
+virtual std::shared_ptr<[aInterface.name.toUpperFirst()/]> [generateGetThisPtrPropertyGetterName()/]();
+virtual void [generateGetThisPtrPropertySetterName()/](std::weak_ptr<[aInterface.name.toUpperFirst()/]> [generateGetThisPtrPropertyName()/]);
+[/template]
+
+[**
+ * generate function implementation for getThisPtr and setThisPtr functions
+*/]
+[template public generateGetThisPtrCPP(aInterface: Interface)]
+std::shared_ptr<[aInterface.name.toUpperFirst()/]> [aInterface.name.toUpperFirst()/]Impl::[generateGetThisPtrPropertyGetterName()/]()
+{
+	return m_[generateGetThisPtrPropertyName()/].lock();
+}
+void [aInterface.name.toUpperFirst()/]Impl::[generateGetThisPtrPropertySetterName()/](std::weak_ptr<[aInterface.name.toUpperFirst()/]> [generateGetThisPtrPropertyName()/])
+{
+	m_[generateGetThisPtrPropertyName()/] = [generateGetThisPtrPropertyName()/];
+[for (sInterface : Interface | aInterface.redefinedInterface->asOrderedSet()->sortedBy(name))]
+	[sInterface.generateGetThisPtrPropertySetterName()/]([aInterface.generateGetThisPtrPropertyName()/]);
+[/for]
+[if (aInterface.redefinedInterface->isEmpty() and not aInterface.oclIsKindOf(Stereotype))]
+	setThisElementPtr([aInterface.generateGetThisPtrPropertyName()/]);
+[elseif (aInterface.redefinedInterface->isEmpty() and aInterface.oclIsKindOf(Stereotype))]
+	setThisStereotypePtr([aInterface.generateGetThisPtrPropertyName()/]);
+[/if]
+}
+[/template]
+
+[**
+ * queries for thisPtrNames
+*/]
+[query public generateGetThisPtrPropertyName(aInterface : Interface) : String = 'this'.concat(aInterface.name.toUpperFirst()).concat('Ptr')/]
+[query public generateGetThisPtrPropertySetterName(aInterface : Interface) : String = 'set'.concat(generateGetThisPtrPropertyName().toUpperFirst())/]
+[query public generateGetThisPtrPropertyGetterName(aInterface : Interface) : String = 'get'.concat(generateGetThisPtrPropertyName().toUpperFirst())/]

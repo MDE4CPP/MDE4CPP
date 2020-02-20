@@ -31,11 +31,12 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -104,14 +105,6 @@ ImageImpl::ImageImpl(const ImageImpl & obj):ImageImpl()
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
 	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
@@ -132,7 +125,7 @@ std::shared_ptr<ecore::EObject>  ImageImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ImageImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getImage_EClass();
+	return UmlPackageImpl::eInstance()->getImage_Class();
 }
 
 //*********************************
@@ -210,12 +203,12 @@ Any ImageImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::IMAGE_EATTRIBUTE_CONTENT:
-			return eAny(getContent()); //114
-		case UmlPackage::IMAGE_EATTRIBUTE_FORMAT:
-			return eAny(getFormat()); //115
-		case UmlPackage::IMAGE_EATTRIBUTE_LOCATION:
-			return eAny(getLocation()); //116
+		case UmlPackage::IMAGE_ATTRIBUTE_CONTENT:
+			return eAny(getContent()); //1123
+		case UmlPackage::IMAGE_ATTRIBUTE_FORMAT:
+			return eAny(getFormat()); //1124
+		case UmlPackage::IMAGE_ATTRIBUTE_LOCATION:
+			return eAny(getLocation()); //1125
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -223,12 +216,12 @@ bool ImageImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::IMAGE_EATTRIBUTE_CONTENT:
-			return getContent() != ""; //114
-		case UmlPackage::IMAGE_EATTRIBUTE_FORMAT:
-			return getFormat() != ""; //115
-		case UmlPackage::IMAGE_EATTRIBUTE_LOCATION:
-			return getLocation() != ""; //116
+		case UmlPackage::IMAGE_ATTRIBUTE_CONTENT:
+			return getContent() != ""; //1123
+		case UmlPackage::IMAGE_ATTRIBUTE_FORMAT:
+			return getFormat() != ""; //1124
+		case UmlPackage::IMAGE_ATTRIBUTE_LOCATION:
+			return getLocation() != ""; //1125
 	}
 	return ElementImpl::internalEIsSet(featureID);
 }
@@ -236,25 +229,25 @@ bool ImageImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::IMAGE_EATTRIBUTE_CONTENT:
+		case UmlPackage::IMAGE_ATTRIBUTE_CONTENT:
 		{
 			// BOOST CAST
 			std::string _content = newValue->get<std::string>();
-			setContent(_content); //114
+			setContent(_content); //1123
 			return true;
 		}
-		case UmlPackage::IMAGE_EATTRIBUTE_FORMAT:
+		case UmlPackage::IMAGE_ATTRIBUTE_FORMAT:
 		{
 			// BOOST CAST
 			std::string _format = newValue->get<std::string>();
-			setFormat(_format); //115
+			setFormat(_format); //1124
 			return true;
 		}
-		case UmlPackage::IMAGE_EATTRIBUTE_LOCATION:
+		case UmlPackage::IMAGE_ATTRIBUTE_LOCATION:
 		{
 			// BOOST CAST
 			std::string _location = newValue->get<std::string>();
-			setLocation(_location); //116
+			setLocation(_location); //1125
 			return true;
 		}
 	}
@@ -345,7 +338,6 @@ void ImageImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> save
 
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
@@ -362,17 +354,17 @@ void ImageImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandle
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getImage_EAttribute_content()) )
+		if ( this->eIsSet(package->getImage_Attribute_content()) )
 		{
 			saveHandler->addAttribute("content", this->getContent());
 		}
 
-		if ( this->eIsSet(package->getImage_EAttribute_format()) )
+		if ( this->eIsSet(package->getImage_Attribute_format()) )
 		{
 			saveHandler->addAttribute("format", this->getFormat());
 		}
 
-		if ( this->eIsSet(package->getImage_EAttribute_location()) )
+		if ( this->eIsSet(package->getImage_Attribute_location()) )
 		{
 			saveHandler->addAttribute("location", this->getLocation());
 		}

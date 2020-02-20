@@ -130,12 +130,12 @@ namespace uml
 			/*!
 			 Indicates the precise type of the Transition.
 			<p>From package UML::StateMachines.</p> */ 
-			virtual TransitionKind getKind() const ;
+			virtual uml::TransitionKind getKind() const ;
 			
 			/*!
 			 Indicates the precise type of the Transition.
 			<p>From package UML::StateMachines.</p> */ 
-			virtual void setKind (TransitionKind _kind); 
+			virtual void setKind (uml::TransitionKind _kind); 
 			
 			
 			

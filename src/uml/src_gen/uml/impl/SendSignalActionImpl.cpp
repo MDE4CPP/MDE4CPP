@@ -33,6 +33,15 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Activity.hpp"
@@ -52,8 +61,6 @@
 #include "uml/Constraint.hpp"
 
 #include "uml/Dependency.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -224,14 +231,6 @@ SendSignalActionImpl::SendSignalActionImpl(const SendSignalActionImpl & obj):Sen
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_argument" << std::endl;
 	#endif
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::ExceptionHandler>> _handlerList = obj.getHandler();
 	for(std::shared_ptr<uml::ExceptionHandler> _handler : *_handlerList)
 	{
@@ -315,7 +314,7 @@ std::shared_ptr<ecore::EObject>  SendSignalActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> SendSignalActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getSendSignalAction_EClass();
+	return UmlPackageImpl::eInstance()->getSendSignalAction_Class();
 }
 
 //*********************************
@@ -431,10 +430,10 @@ Any SendSignalActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::SENDSIGNALACTION_EREFERENCE_SIGNAL:
-			return eAny(getSignal()); //17330
-		case UmlPackage::SENDSIGNALACTION_EREFERENCE_TARGET:
-			return eAny(getTarget()); //17331
+		case UmlPackage::SENDSIGNALACTION_ATTRIBUTE_SIGNAL:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSignal())); //21429
+		case UmlPackage::SENDSIGNALACTION_ATTRIBUTE_TARGET:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getTarget())); //21430
 	}
 	return InvocationActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -442,10 +441,10 @@ bool SendSignalActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::SENDSIGNALACTION_EREFERENCE_SIGNAL:
-			return getSignal() != nullptr; //17330
-		case UmlPackage::SENDSIGNALACTION_EREFERENCE_TARGET:
-			return getTarget() != nullptr; //17331
+		case UmlPackage::SENDSIGNALACTION_ATTRIBUTE_SIGNAL:
+			return getSignal() != nullptr; //21429
+		case UmlPackage::SENDSIGNALACTION_ATTRIBUTE_TARGET:
+			return getTarget() != nullptr; //21430
 	}
 	return InvocationActionImpl::internalEIsSet(featureID);
 }
@@ -453,18 +452,20 @@ bool SendSignalActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::SENDSIGNALACTION_EREFERENCE_SIGNAL:
+		case UmlPackage::SENDSIGNALACTION_ATTRIBUTE_SIGNAL:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Signal> _signal = newValue->get<std::shared_ptr<uml::Signal>>();
-			setSignal(_signal); //17330
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Signal> _signal = std::dynamic_pointer_cast<uml::Signal>(_temp);
+			setSignal(_signal); //21429
 			return true;
 		}
-		case UmlPackage::SENDSIGNALACTION_EREFERENCE_TARGET:
+		case UmlPackage::SENDSIGNALACTION_ATTRIBUTE_TARGET:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::InputPin> _target = newValue->get<std::shared_ptr<uml::InputPin>>();
-			setTarget(_target); //17331
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::InputPin> _target = std::dynamic_pointer_cast<uml::InputPin>(_temp);
+			setTarget(_target); //21430
 			return true;
 		}
 	}
@@ -554,7 +555,7 @@ void SendSignalActionImpl::resolveReferences(const int featureID, std::list<std:
 {
 	switch(featureID)
 	{
-		case UmlPackage::SENDSIGNALACTION_EREFERENCE_SIGNAL:
+		case UmlPackage::SENDSIGNALACTION_ATTRIBUTE_SIGNAL:
 		{
 			if (references.size() == 1)
 			{
@@ -588,7 +589,6 @@ void SendSignalActionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHa
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
@@ -612,7 +612,7 @@ void SendSignalActionImpl::saveContent(std::shared_ptr<persistence::interfaces::
 		std::shared_ptr<uml::InputPin > target = this->getTarget();
 		if (target != nullptr)
 		{
-			saveHandler->addReference(target, "target", target->eClass() != package->getInputPin_EClass());
+			saveHandler->addReference(target, "target", target->eClass() != package->getInputPin_Class());
 		}
 	
 

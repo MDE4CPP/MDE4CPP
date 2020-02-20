@@ -32,13 +32,24 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
 
 #include "uml/Dependency.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -55,6 +66,8 @@
 #include "uml/Type.hpp"
 
 #include "uml/ValueSpecification.hpp"
+
+#include "uml/ValueSpecificationAction.hpp"
 
 #include "ecore/EcorePackage.hpp"
 #include "ecore/EcoreFactory.hpp"
@@ -163,6 +176,18 @@ ExpressionImpl::~ExpressionImpl()
 
 
 
+//Additional constructor for the containments back reference
+			ExpressionImpl::ExpressionImpl(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction)
+			:ExpressionImpl()
+			{
+			    m_valueSpecificationAction = par_valueSpecificationAction;
+				m_owner = par_valueSpecificationAction;
+			}
+
+
+
+
+
 
 ExpressionImpl::ExpressionImpl(const ExpressionImpl & obj):ExpressionImpl()
 {
@@ -194,17 +219,11 @@ ExpressionImpl::ExpressionImpl(const ExpressionImpl & obj):ExpressionImpl()
 
 	m_type  = obj.getType();
 
+	m_valueSpecificationAction  = obj.getValueSpecificationAction();
+
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	if(obj.getNameExpression()!=nullptr)
 	{
 		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
@@ -247,7 +266,7 @@ std::shared_ptr<ecore::EObject>  ExpressionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ExpressionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getExpression_EClass();
+	return UmlPackageImpl::eInstance()->getExpression_Class();
 }
 
 //*********************************
@@ -329,6 +348,11 @@ std::shared_ptr<ecore::EObject> ExpressionImpl::eContainer() const
 	{
 		return wp;
 	}
+
+	if(auto wp = m_valueSpecificationAction.lock())
+	{
+		return wp;
+	}
 	return nullptr;
 }
 
@@ -339,10 +363,20 @@ Any ExpressionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::EXPRESSION_EREFERENCE_OPERAND:
-			return eAny(getOperand()); //8815
-		case UmlPackage::EXPRESSION_EATTRIBUTE_SYMBOL:
-			return eAny(getSymbol()); //8816
+		case UmlPackage::EXPRESSION_ATTRIBUTE_OPERAND:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::ValueSpecification>::iterator iter = m_operand->begin();
+			Bag<uml::ValueSpecification>::iterator end = m_operand->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //9615
+		}
+		case UmlPackage::EXPRESSION_ATTRIBUTE_SYMBOL:
+			return eAny(getSymbol()); //9616
 	}
 	return ValueSpecificationImpl::eGet(featureID, resolve, coreType);
 }
@@ -350,10 +384,10 @@ bool ExpressionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::EXPRESSION_EREFERENCE_OPERAND:
-			return getOperand() != nullptr; //8815
-		case UmlPackage::EXPRESSION_EATTRIBUTE_SYMBOL:
-			return getSymbol() != ""; //8816
+		case UmlPackage::EXPRESSION_ATTRIBUTE_OPERAND:
+			return getOperand() != nullptr; //9615
+		case UmlPackage::EXPRESSION_ATTRIBUTE_SYMBOL:
+			return getSymbol() != ""; //9616
 	}
 	return ValueSpecificationImpl::internalEIsSet(featureID);
 }
@@ -361,11 +395,47 @@ bool ExpressionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::EXPRESSION_EATTRIBUTE_SYMBOL:
+		case UmlPackage::EXPRESSION_ATTRIBUTE_OPERAND:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::ValueSpecification>> operandList(new Bag<uml::ValueSpecification>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				operandList->add(std::dynamic_pointer_cast<uml::ValueSpecification>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::ValueSpecification>::iterator iterOperand = m_operand->begin();
+			Bag<uml::ValueSpecification>::iterator endOperand = m_operand->end();
+			while (iterOperand != endOperand)
+			{
+				if (operandList->find(*iterOperand) == -1)
+				{
+					m_operand->erase(*iterOperand);
+				}
+				iterOperand++;
+			}
+
+			iterOperand = operandList->begin();
+			endOperand = operandList->end();
+			while (iterOperand != endOperand)
+			{
+				if (m_operand->find(*iterOperand) == -1)
+				{
+					m_operand->add(*iterOperand);
+				}
+				iterOperand++;			
+			}
+			return true;
+		}
+		case UmlPackage::EXPRESSION_ATTRIBUTE_SYMBOL:
 		{
 			// BOOST CAST
 			std::string _symbol = newValue->get<std::string>();
-			setSymbol(_symbol); //8816
+			setSymbol(_symbol); //9616
 			return true;
 		}
 	}
@@ -474,7 +544,6 @@ void ExpressionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler>
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
@@ -494,12 +563,12 @@ void ExpressionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 		// Save 'operand'
 		for (std::shared_ptr<uml::ValueSpecification> operand : *this->getOperand()) 
 		{
-			saveHandler->addReference(operand, "operand", operand->eClass() != package->getValueSpecification_EClass());
+			saveHandler->addReference(operand, "operand", operand->eClass() != package->getValueSpecification_Class());
 		}
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getExpression_EAttribute_symbol()) )
+		if ( this->eIsSet(package->getExpression_Attribute_symbol()) )
 		{
 			saveHandler->addAttribute("symbol", this->getSymbol());
 		}

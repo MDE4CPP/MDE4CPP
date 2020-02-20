@@ -34,6 +34,10 @@ namespace ecore
 			virtual void setThisEClassPtr(std::weak_ptr<EClass> thisEClassPtr);
 
 			//Additional constructors for the containments back reference
+			EClassImpl(std::weak_ptr<ecore::EObject > par_eContainer);
+
+
+			//Additional constructors for the containments back reference
 			EClassImpl(std::weak_ptr<ecore::EPackage > par_ePackage);
 
 
@@ -154,7 +158,10 @@ namespace ecore
 			
 			/*!
 			 */
-			virtual std::shared_ptr<Bag<ecore::EOperation>> getEOperations() const ;
+			virtual void setEIDAttribute(std::shared_ptr<ecore::EAttribute> _eIDAttribute_eIDAttribute) ;
+			/*!
+			 */
+			virtual std::shared_ptr<Subset<ecore::EOperation, ecore::EObject>> getEOperations() const ;
 			
 			/*!
 			 */
@@ -172,7 +179,9 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<Union<ecore::EStructuralFeature>> getEStructuralFeatures() const ; 
+			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const ;/*!
+			 */
+			virtual std::shared_ptr<SubsetUnion<ecore::EStructuralFeature, ecore::EObject>> getEStructuralFeatures() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

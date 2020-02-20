@@ -10,12 +10,11 @@
 //meta meta model factory
 #include "uml/UmlFactory.hpp"
 
-//metamodel factory
 
 //depending model packages
 
+#include "ecore/EDataType.hpp"
 #include "ecore/EPackage.hpp"
-
 
 using namespace PrimitiveTypes;
 
@@ -86,7 +85,7 @@ void PrimitiveTypesPackageImpl::createPackageClasses(std::shared_ptr<uml::Packag
 	std::shared_ptr<uml::Constraint> con = nullptr;
 	std::shared_ptr<uml::OpaqueExpression> oe = nullptr;
 
-}
+} 
 
 void PrimitiveTypesPackageImpl::createPackageDependencies(std::shared_ptr<uml::Package> primitiveTypes, std::shared_ptr<uml::UmlFactory> factory)
 {
@@ -214,5 +213,6 @@ std::shared_ptr<uml::PrimitiveType> PrimitiveTypesPackageImpl::get_PrimitiveType
 {
 	return primitiveTypes_UnlimitedNatural;
 }
+
 
 

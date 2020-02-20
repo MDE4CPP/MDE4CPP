@@ -33,6 +33,17 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Classifier.hpp"
@@ -44,8 +55,6 @@
 #include "uml/Constraint.hpp"
 
 #include "uml/Dependency.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -146,24 +155,24 @@ InformationItemImpl::~InformationItemImpl()
 
 
 //Additional constructor for the containments back reference
-			InformationItemImpl::InformationItemImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id)
-			:InformationItemImpl()
-			{
-				switch(reference_id)
-				{	
-				case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
-					m_owningPackage = par_Package;
-					m_namespace = par_Package;
-					 return;
-				case UmlPackage::TYPE_EREFERENCE_PACKAGE:
-					m_package = par_Package;
-					m_namespace = par_Package;
-					 return;
-				default:
-				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
-				}
-			   
-			}
+InformationItemImpl::InformationItemImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id)
+:InformationItemImpl()
+{
+	switch(reference_id)
+	{	
+	case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
+		m_owningPackage = par_Package;
+		m_namespace = par_Package;
+		 return;
+	case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
+		m_package = par_Package;
+		m_namespace = par_Package;
+		 return;
+	default:
+	std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
+	}
+   
+}
 
 
 
@@ -249,14 +258,6 @@ InformationItemImpl::InformationItemImpl(const InformationItemImpl & obj):Inform
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_collaborationUse" << std::endl;
-	#endif
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
 	#endif
 	std::shared_ptr<Bag<uml::ElementImport>> _elementImportList = obj.getElementImport();
 	for(std::shared_ptr<uml::ElementImport> _elementImport : *_elementImportList)
@@ -379,7 +380,7 @@ std::shared_ptr<ecore::EObject>  InformationItemImpl::copy() const
 
 std::shared_ptr<ecore::EClass> InformationItemImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getInformationItem_EClass();
+	return UmlPackageImpl::eInstance()->getInformationItem_Class();
 }
 
 //*********************************
@@ -495,8 +496,18 @@ Any InformationItemImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::INFORMATIONITEM_EREFERENCE_REPRESENTED:
-			return eAny(getRepresented()); //22439
+		case UmlPackage::INFORMATIONITEM_ATTRIBUTE_REPRESENTED:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Classifier>::iterator iter = m_represented->begin();
+			Bag<uml::Classifier>::iterator end = m_represented->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //11538
+		}
 	}
 	return ClassifierImpl::eGet(featureID, resolve, coreType);
 }
@@ -504,8 +515,8 @@ bool InformationItemImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::INFORMATIONITEM_EREFERENCE_REPRESENTED:
-			return getRepresented() != nullptr; //22439
+		case UmlPackage::INFORMATIONITEM_ATTRIBUTE_REPRESENTED:
+			return getRepresented() != nullptr; //11538
 	}
 	return ClassifierImpl::internalEIsSet(featureID);
 }
@@ -513,6 +524,42 @@ bool InformationItemImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
+		case UmlPackage::INFORMATIONITEM_ATTRIBUTE_REPRESENTED:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Classifier>> representedList(new Bag<uml::Classifier>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				representedList->add(std::dynamic_pointer_cast<uml::Classifier>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Classifier>::iterator iterRepresented = m_represented->begin();
+			Bag<uml::Classifier>::iterator endRepresented = m_represented->end();
+			while (iterRepresented != endRepresented)
+			{
+				if (representedList->find(*iterRepresented) == -1)
+				{
+					m_represented->erase(*iterRepresented);
+				}
+				iterRepresented++;
+			}
+
+			iterRepresented = representedList->begin();
+			endRepresented = representedList->end();
+			while (iterRepresented != endRepresented)
+			{
+				if (m_represented->find(*iterRepresented) == -1)
+				{
+					m_represented->add(*iterRepresented);
+				}
+				iterRepresented++;			
+			}
+			return true;
+		}
 	}
 
 	return ClassifierImpl::eSet(featureID, newValue);
@@ -574,7 +621,7 @@ void InformationItemImpl::resolveReferences(const int featureID, std::list<std::
 {
 	switch(featureID)
 	{
-		case UmlPackage::INFORMATIONITEM_EREFERENCE_REPRESENTED:
+		case UmlPackage::INFORMATIONITEM_ATTRIBUTE_REPRESENTED:
 		{
 			std::shared_ptr<Bag<uml::Classifier>> _represented = getRepresented();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -609,7 +656,6 @@ void InformationItemImpl::save(std::shared_ptr<persistence::interfaces::XSaveHan
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

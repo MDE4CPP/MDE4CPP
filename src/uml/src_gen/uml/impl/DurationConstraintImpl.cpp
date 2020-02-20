@@ -33,13 +33,22 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
 
 #include "uml/Dependency.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -90,24 +99,24 @@ DurationConstraintImpl::~DurationConstraintImpl()
 
 
 //Additional constructor for the containments back reference
-			DurationConstraintImpl::DurationConstraintImpl(std::weak_ptr<uml::Namespace > par_Namespace, const int reference_id)
-			:DurationConstraintImpl()
-			{
-				switch(reference_id)
-				{	
-				case UmlPackage::CONSTRAINT_EREFERENCE_CONTEXT:
-					m_context = par_Namespace;
-					m_namespace = par_Namespace;
-					 return;
-				case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE:
-					m_namespace = par_Namespace;
-					m_owner = par_Namespace;
-					 return;
-				default:
-				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
-				}
-			   
-			}
+DurationConstraintImpl::DurationConstraintImpl(std::weak_ptr<uml::Namespace > par_Namespace, const int reference_id)
+:DurationConstraintImpl()
+{
+	switch(reference_id)
+	{	
+	case UmlPackage::CONSTRAINT_ATTRIBUTE_CONTEXT:
+		m_context = par_Namespace;
+		m_namespace = par_Namespace;
+		 return;
+	case UmlPackage::NAMEDELEMENT_ATTRIBUTE_NAMESPACE:
+		m_namespace = par_Namespace;
+		m_owner = par_Namespace;
+		 return;
+	default:
+	std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
+	}
+   
+}
 
 
 
@@ -189,14 +198,6 @@ DurationConstraintImpl::DurationConstraintImpl(const DurationConstraintImpl & ob
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	if(obj.getNameExpression()!=nullptr)
 	{
 		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
@@ -231,7 +232,7 @@ std::shared_ptr<ecore::EObject>  DurationConstraintImpl::copy() const
 
 std::shared_ptr<ecore::EClass> DurationConstraintImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getDurationConstraint_EClass();
+	return UmlPackageImpl::eInstance()->getDurationConstraint_Class();
 }
 
 //*********************************
@@ -325,8 +326,8 @@ Any DurationConstraintImpl::eGet(int featureID, bool resolve, bool coreType) con
 {
 	switch(featureID)
 	{
-		case UmlPackage::DURATIONCONSTRAINT_EATTRIBUTE_FIRSTEVENT:
-			return eAny(getFirstEvent()); //24316
+		case UmlPackage::DURATIONCONSTRAINT_ATTRIBUTE_FIRSTEVENT:
+			return eAny(getFirstEvent()); //7915
 	}
 	return IntervalConstraintImpl::eGet(featureID, resolve, coreType);
 }
@@ -334,8 +335,8 @@ bool DurationConstraintImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::DURATIONCONSTRAINT_EATTRIBUTE_FIRSTEVENT:
-			return !getFirstEvent()->empty(); //24316
+		case UmlPackage::DURATIONCONSTRAINT_ATTRIBUTE_FIRSTEVENT:
+			return !getFirstEvent()->empty(); //7915
 	}
 	return IntervalConstraintImpl::internalEIsSet(featureID);
 }
@@ -343,6 +344,12 @@ bool DurationConstraintImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
+		case UmlPackage::DURATIONCONSTRAINT_ATTRIBUTE_FIRSTEVENT:
+		{
+			// BOOST CAST
+			// nothing to do
+			return true;
+		}
 	}
 
 	return IntervalConstraintImpl::eSet(featureID, newValue);
@@ -417,7 +424,6 @@ void DurationConstraintImpl::save(std::shared_ptr<persistence::interfaces::XSave
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
@@ -438,7 +444,7 @@ void DurationConstraintImpl::saveContent(std::shared_ptr<persistence::interfaces
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getDurationConstraint_EAttribute_firstEvent()) )
+		if ( this->eIsSet(package->getDurationConstraint_Attribute_firstEvent()) )
 		{
 			for (std::shared_ptr<bool> value : *m_firstEvent)
 			{

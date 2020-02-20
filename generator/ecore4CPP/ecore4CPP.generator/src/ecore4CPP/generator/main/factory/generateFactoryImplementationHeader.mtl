@@ -51,11 +51,9 @@ namespace [anEPackage.name/]
 
 		public:
 			virtual ~[anEPackage.name.toUpperFirst().concat('FactoryImpl')/]();
-			virtual std::shared_ptr<ecore::EObject> create(std::string _className,  std::shared_ptr<ecore::EObject> container, const unsigned int referenceID = -1)[if (not generateObjectMonitoring())] const[/if];
-			virtual std::shared_ptr<ecore::EObject> create(const unsigned int classID,  std::shared_ptr<ecore::EObject> container = nullptr, const unsigned int referenceID = -1)[if (not generateObjectMonitoring())] const[/if];
-			virtual std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> create(std::shared_ptr<[needNamespace(anEPackage, 'EClass')/]> _class)[if (not generateObjectMonitoring())] const[/if];
-			virtual std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> create(std::shared_ptr<[needNamespace(anEPackage, 'EClass')/]> _class, std::shared_ptr<EObject> _container)[if (not generateObjectMonitoring())] const[/if];
-			virtual std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> create(std::string _className)[if (not generateObjectMonitoring())] const[/if];
+			virtual std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> create(std::string _className,  std::shared_ptr<ecore::EObject> container=nullptr, const int referenceID = -1)[if (not generateObjectMonitoring())] const[/if];
+			virtual std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> create(const int classID,  std::shared_ptr<ecore::EObject> container = nullptr, const int referenceID = -1)[if (not generateObjectMonitoring())] const[/if];
+			virtual std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> create(std::shared_ptr<[needNamespace(anEPackage, 'EClass')/]> _class, std::shared_ptr<EObject> _container=nullptr, const int referenceID = -1)[if (not generateObjectMonitoring())] const[/if];
 
 			//Creator functions
 			[anEPackage.eAllContents(EClass)->sortedBy(name).generateClassCreate(true)/]
@@ -69,7 +67,7 @@ namespace [anEPackage.name/]
 
 		private:
 			static [anEPackage.name.toUpperFirst().concat('Factory')/]* create();
-            std::map<std::string,unsigned int> m_idMap;
+            std::map<std::string,int> m_idMap;
 [if (generateObjectMonitoring())]
 			std::shared_ptr<Bag<ecore::EObject>> m_createdElements;
 			void clearCreatedElements();

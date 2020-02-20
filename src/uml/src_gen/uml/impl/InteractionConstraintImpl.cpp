@@ -33,6 +33,17 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
@@ -40,8 +51,6 @@
 #include "uml/Constraint.hpp"
 
 #include "uml/Dependency.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -96,24 +105,24 @@ InteractionConstraintImpl::~InteractionConstraintImpl()
 
 
 //Additional constructor for the containments back reference
-			InteractionConstraintImpl::InteractionConstraintImpl(std::weak_ptr<uml::Namespace > par_Namespace, const int reference_id)
-			:InteractionConstraintImpl()
-			{
-				switch(reference_id)
-				{	
-				case UmlPackage::CONSTRAINT_EREFERENCE_CONTEXT:
-					m_context = par_Namespace;
-					m_namespace = par_Namespace;
-					 return;
-				case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE:
-					m_namespace = par_Namespace;
-					m_owner = par_Namespace;
-					 return;
-				default:
-				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
-				}
-			   
-			}
+InteractionConstraintImpl::InteractionConstraintImpl(std::weak_ptr<uml::Namespace > par_Namespace, const int reference_id)
+:InteractionConstraintImpl()
+{
+	switch(reference_id)
+	{	
+	case UmlPackage::CONSTRAINT_ATTRIBUTE_CONTEXT:
+		m_context = par_Namespace;
+		m_namespace = par_Namespace;
+		 return;
+	case UmlPackage::NAMEDELEMENT_ATTRIBUTE_NAMESPACE:
+		m_namespace = par_Namespace;
+		m_owner = par_Namespace;
+		 return;
+	default:
+	std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
+	}
+   
+}
 
 
 
@@ -194,14 +203,6 @@ InteractionConstraintImpl::InteractionConstraintImpl(const InteractionConstraint
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	if(obj.getMaxint()!=nullptr)
 	{
 		m_maxint = std::dynamic_pointer_cast<uml::ValueSpecification>(obj.getMaxint()->copy());
@@ -253,7 +254,7 @@ std::shared_ptr<ecore::EObject>  InteractionConstraintImpl::copy() const
 
 std::shared_ptr<ecore::EClass> InteractionConstraintImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getInteractionConstraint_EClass();
+	return UmlPackageImpl::eInstance()->getInteractionConstraint_Class();
 }
 
 //*********************************
@@ -384,10 +385,10 @@ Any InteractionConstraintImpl::eGet(int featureID, bool resolve, bool coreType) 
 {
 	switch(featureID)
 	{
-		case UmlPackage::INTERACTIONCONSTRAINT_EREFERENCE_MAXINT:
-			return eAny(getMaxint()); //21916
-		case UmlPackage::INTERACTIONCONSTRAINT_EREFERENCE_MININT:
-			return eAny(getMinint()); //21917
+		case UmlPackage::INTERACTIONCONSTRAINT_ATTRIBUTE_MAXINT:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getMaxint())); //12115
+		case UmlPackage::INTERACTIONCONSTRAINT_ATTRIBUTE_MININT:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getMinint())); //12116
 	}
 	return ConstraintImpl::eGet(featureID, resolve, coreType);
 }
@@ -395,10 +396,10 @@ bool InteractionConstraintImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::INTERACTIONCONSTRAINT_EREFERENCE_MAXINT:
-			return getMaxint() != nullptr; //21916
-		case UmlPackage::INTERACTIONCONSTRAINT_EREFERENCE_MININT:
-			return getMinint() != nullptr; //21917
+		case UmlPackage::INTERACTIONCONSTRAINT_ATTRIBUTE_MAXINT:
+			return getMaxint() != nullptr; //12115
+		case UmlPackage::INTERACTIONCONSTRAINT_ATTRIBUTE_MININT:
+			return getMinint() != nullptr; //12116
 	}
 	return ConstraintImpl::internalEIsSet(featureID);
 }
@@ -406,18 +407,20 @@ bool InteractionConstraintImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::INTERACTIONCONSTRAINT_EREFERENCE_MAXINT:
+		case UmlPackage::INTERACTIONCONSTRAINT_ATTRIBUTE_MAXINT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::ValueSpecification> _maxint = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
-			setMaxint(_maxint); //21916
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::ValueSpecification> _maxint = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
+			setMaxint(_maxint); //12115
 			return true;
 		}
-		case UmlPackage::INTERACTIONCONSTRAINT_EREFERENCE_MININT:
+		case UmlPackage::INTERACTIONCONSTRAINT_ATTRIBUTE_MININT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::ValueSpecification> _minint = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
-			setMinint(_minint); //21917
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::ValueSpecification> _minint = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
+			setMinint(_minint); //12116
 			return true;
 		}
 	}
@@ -520,7 +523,6 @@ void InteractionConstraintImpl::save(std::shared_ptr<persistence::interfaces::XS
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
@@ -541,14 +543,14 @@ void InteractionConstraintImpl::saveContent(std::shared_ptr<persistence::interfa
 		std::shared_ptr<uml::ValueSpecification > maxint = this->getMaxint();
 		if (maxint != nullptr)
 		{
-			saveHandler->addReference(maxint, "maxint", maxint->eClass() != package->getValueSpecification_EClass());
+			saveHandler->addReference(maxint, "maxint", maxint->eClass() != package->getValueSpecification_Class());
 		}
 
 		// Save 'minint'
 		std::shared_ptr<uml::ValueSpecification > minint = this->getMinint();
 		if (minint != nullptr)
 		{
-			saveHandler->addReference(minint, "minint", minint->eClass() != package->getValueSpecification_EClass());
+			saveHandler->addReference(minint, "minint", minint->eClass() != package->getValueSpecification_Class());
 		}
 	
 

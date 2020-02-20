@@ -40,6 +40,7 @@ SET(SOURCE_FILES
 	xml/xerces/DOMTreeErrorReporter.cpp
 	xml/xerces/WStr.cpp
 	xml/xerces/XStr.cpp
+	crossguid/guid.cpp
 )
 
 INCLUDE_DIRECTORIES(
@@ -55,6 +56,8 @@ endif(APPLE)
 
 IF(UNIX AND NOT APPLE)
     # for Linux, BSD, Solaris, Minix
+	SET(CMAKE_CXX_FLAGS "-DGUID_LIBUUID")
+
 	IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
 		FIND_LIBRARY(PLUGINFRAMEWORK_DEBUG pluginFrameworkd.so ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(ECORE_DEBUG ecored.so ${MDE4CPP_HOME}/application/bin)
@@ -67,6 +70,8 @@ IF(UNIX AND NOT APPLE)
 		FIND_LIBRARY(XERCES_RELEASE xerces-c ${MDE4CPP_HOME}/application/bin)
 	ENDIF()
 ELSEIF(APPLE)
+	SET(CMAKE_CXX_FLAGS "-DGUID_CFUUID")
+
 	IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
 		FIND_LIBRARY(PLUGINFRAMEWORK_DEBUG pluginFrameworkd.dylib ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(ECORE_DEBUG ecored.dylib ${MDE4CPP_HOME}/application/bin)
@@ -79,6 +84,8 @@ ELSEIF(APPLE)
 		FIND_LIBRARY(XERCES_RELEASE xerces-c ${MDE4CPP_HOME}/application/bin)		
 	ENDIF()
 ELSE()
+	SET(CMAKE_CXX_FLAGS "-DGUID_WINDOWS")
+
 	IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
 		FIND_LIBRARY(PLUGINFRAMEWORK_DEBUG pluginFrameworkd ${MDE4CPP_HOME}/application/lib)
 		FIND_LIBRARY(ECORE_DEBUG ecored ${MDE4CPP_HOME}/application/lib)

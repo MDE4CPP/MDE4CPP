@@ -32,13 +32,24 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
 
 #include "uml/Dependency.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -55,6 +66,8 @@
 #include "uml/Type.hpp"
 
 #include "uml/ValueSpecification.hpp"
+
+#include "uml/ValueSpecificationAction.hpp"
 
 #include "ecore/EcorePackage.hpp"
 #include "ecore/EcoreFactory.hpp"
@@ -155,6 +168,18 @@ IntervalImpl::~IntervalImpl()
 
 
 
+//Additional constructor for the containments back reference
+			IntervalImpl::IntervalImpl(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction)
+			:IntervalImpl()
+			{
+			    m_valueSpecificationAction = par_valueSpecificationAction;
+				m_owner = par_valueSpecificationAction;
+			}
+
+
+
+
+
 
 IntervalImpl::IntervalImpl(const IntervalImpl & obj):IntervalImpl()
 {
@@ -189,17 +214,11 @@ IntervalImpl::IntervalImpl(const IntervalImpl & obj):IntervalImpl()
 
 	m_type  = obj.getType();
 
+	m_valueSpecificationAction  = obj.getValueSpecificationAction();
+
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	if(obj.getNameExpression()!=nullptr)
 	{
 		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
@@ -227,7 +246,7 @@ std::shared_ptr<ecore::EObject>  IntervalImpl::copy() const
 
 std::shared_ptr<ecore::EClass> IntervalImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getInterval_EClass();
+	return UmlPackageImpl::eInstance()->getInterval_Class();
 }
 
 //*********************************
@@ -313,6 +332,11 @@ std::shared_ptr<ecore::EObject> IntervalImpl::eContainer() const
 	{
 		return wp;
 	}
+
+	if(auto wp = m_valueSpecificationAction.lock())
+	{
+		return wp;
+	}
 	return nullptr;
 }
 
@@ -323,10 +347,10 @@ Any IntervalImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::INTERVAL_EREFERENCE_MAX:
-			return eAny(getMax()); //24515
-		case UmlPackage::INTERVAL_EREFERENCE_MIN:
-			return eAny(getMin()); //24516
+		case UmlPackage::INTERVAL_ATTRIBUTE_MAX:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getMax())); //12915
+		case UmlPackage::INTERVAL_ATTRIBUTE_MIN:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getMin())); //12916
 	}
 	return ValueSpecificationImpl::eGet(featureID, resolve, coreType);
 }
@@ -334,10 +358,10 @@ bool IntervalImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::INTERVAL_EREFERENCE_MAX:
-			return getMax() != nullptr; //24515
-		case UmlPackage::INTERVAL_EREFERENCE_MIN:
-			return getMin() != nullptr; //24516
+		case UmlPackage::INTERVAL_ATTRIBUTE_MAX:
+			return getMax() != nullptr; //12915
+		case UmlPackage::INTERVAL_ATTRIBUTE_MIN:
+			return getMin() != nullptr; //12916
 	}
 	return ValueSpecificationImpl::internalEIsSet(featureID);
 }
@@ -345,18 +369,20 @@ bool IntervalImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::INTERVAL_EREFERENCE_MAX:
+		case UmlPackage::INTERVAL_ATTRIBUTE_MAX:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::ValueSpecification> _max = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
-			setMax(_max); //24515
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::ValueSpecification> _max = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
+			setMax(_max); //12915
 			return true;
 		}
-		case UmlPackage::INTERVAL_EREFERENCE_MIN:
+		case UmlPackage::INTERVAL_ATTRIBUTE_MIN:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::ValueSpecification> _min = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
-			setMin(_min); //24516
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::ValueSpecification> _min = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
+			setMin(_min); //12916
 			return true;
 		}
 	}
@@ -427,7 +453,7 @@ void IntervalImpl::resolveReferences(const int featureID, std::list<std::shared_
 {
 	switch(featureID)
 	{
-		case UmlPackage::INTERVAL_EREFERENCE_MAX:
+		case UmlPackage::INTERVAL_ATTRIBUTE_MAX:
 		{
 			if (references.size() == 1)
 			{
@@ -439,7 +465,7 @@ void IntervalImpl::resolveReferences(const int featureID, std::list<std::shared_
 			return;
 		}
 
-		case UmlPackage::INTERVAL_EREFERENCE_MIN:
+		case UmlPackage::INTERVAL_ATTRIBUTE_MIN:
 		{
 			if (references.size() == 1)
 			{
@@ -468,7 +494,6 @@ void IntervalImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> s
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

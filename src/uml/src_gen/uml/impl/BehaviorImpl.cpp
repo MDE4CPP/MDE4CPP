@@ -33,6 +33,19 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Behavior.hpp"
@@ -56,8 +69,6 @@
 #include "uml/Constraint.hpp"
 
 #include "uml/Dependency.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -269,24 +280,24 @@ BehaviorImpl::~BehaviorImpl()
 
 
 //Additional constructor for the containments back reference
-			BehaviorImpl::BehaviorImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id)
-			:BehaviorImpl()
-			{
-				switch(reference_id)
-				{	
-				case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
-					m_owningPackage = par_Package;
-					m_namespace = par_Package;
-					 return;
-				case UmlPackage::TYPE_EREFERENCE_PACKAGE:
-					m_package = par_Package;
-					m_namespace = par_Package;
-					 return;
-				default:
-				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
-				}
-			   
-			}
+BehaviorImpl::BehaviorImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id)
+:BehaviorImpl()
+{
+	switch(reference_id)
+	{	
+	case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
+		m_owningPackage = par_Package;
+		m_namespace = par_Package;
+		 return;
+	case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
+		m_package = par_Package;
+		m_namespace = par_Package;
+		 return;
+	default:
+	std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
+	}
+   
+}
 
 
 
@@ -398,14 +409,6 @@ BehaviorImpl::BehaviorImpl(const BehaviorImpl & obj):BehaviorImpl()
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_context" << std::endl;
-	#endif
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
 	#endif
 	std::shared_ptr<Bag<uml::ElementImport>> _elementImportList = obj.getElementImport();
 	for(std::shared_ptr<uml::ElementImport> _elementImport : *_elementImportList)
@@ -647,7 +650,7 @@ std::shared_ptr<ecore::EObject>  BehaviorImpl::copy() const
 
 std::shared_ptr<ecore::EClass> BehaviorImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getBehavior_EClass();
+	return UmlPackageImpl::eInstance()->getBehavior_Class();
 }
 
 //*********************************
@@ -867,24 +870,74 @@ Any BehaviorImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::BEHAVIOR_EREFERENCE_BEHAVIOREDCLASSIFIER:
-			return eAny(getBehavioredClassifier()); //261
-		case UmlPackage::BEHAVIOR_EREFERENCE_CONTEXT:
-			return eAny(getContext()); //254
-		case UmlPackage::BEHAVIOR_EATTRIBUTE_ISREENTRANT:
-			return eAny(getIsReentrant()); //255
-		case UmlPackage::BEHAVIOR_EREFERENCE_OWNEDPARAMETER:
-			return eAny(getOwnedParameter()); //256
-		case UmlPackage::BEHAVIOR_EREFERENCE_OWNEDPARAMETERSET:
-			return eAny(getOwnedParameterSet()); //257
-		case UmlPackage::BEHAVIOR_EREFERENCE_POSTCONDITION:
-			return eAny(getPostcondition()); //258
-		case UmlPackage::BEHAVIOR_EREFERENCE_PRECONDITION:
-			return eAny(getPrecondition()); //259
-		case UmlPackage::BEHAVIOR_EREFERENCE_REDEFINEDBEHAVIOR:
-			return eAny(getRedefinedBehavior()); //260
-		case UmlPackage::BEHAVIOR_EREFERENCE_SPECIFICATION:
-			return eAny(getSpecification()); //253
+		case UmlPackage::BEHAVIOR_ATTRIBUTE_BEHAVIOREDCLASSIFIER:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getBehavioredClassifier().lock())); //2460
+		case UmlPackage::BEHAVIOR_ATTRIBUTE_CONTEXT:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getContext())); //2453
+		case UmlPackage::BEHAVIOR_ATTRIBUTE_ISREENTRANT:
+			return eAny(getIsReentrant()); //2454
+		case UmlPackage::BEHAVIOR_ATTRIBUTE_OWNEDPARAMETER:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Parameter>::iterator iter = m_ownedParameter->begin();
+			Bag<uml::Parameter>::iterator end = m_ownedParameter->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //2455
+		}
+		case UmlPackage::BEHAVIOR_ATTRIBUTE_OWNEDPARAMETERSET:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::ParameterSet>::iterator iter = m_ownedParameterSet->begin();
+			Bag<uml::ParameterSet>::iterator end = m_ownedParameterSet->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //2456
+		}
+		case UmlPackage::BEHAVIOR_ATTRIBUTE_POSTCONDITION:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Constraint>::iterator iter = m_postcondition->begin();
+			Bag<uml::Constraint>::iterator end = m_postcondition->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //2457
+		}
+		case UmlPackage::BEHAVIOR_ATTRIBUTE_PRECONDITION:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Constraint>::iterator iter = m_precondition->begin();
+			Bag<uml::Constraint>::iterator end = m_precondition->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //2458
+		}
+		case UmlPackage::BEHAVIOR_ATTRIBUTE_REDEFINEDBEHAVIOR:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Behavior>::iterator iter = m_redefinedBehavior->begin();
+			Bag<uml::Behavior>::iterator end = m_redefinedBehavior->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //2459
+		}
+		case UmlPackage::BEHAVIOR_ATTRIBUTE_SPECIFICATION:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSpecification())); //2452
 	}
 	return ClassImpl::eGet(featureID, resolve, coreType);
 }
@@ -892,24 +945,24 @@ bool BehaviorImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::BEHAVIOR_EREFERENCE_BEHAVIOREDCLASSIFIER:
-			return getBehavioredClassifier().lock() != nullptr; //261
-		case UmlPackage::BEHAVIOR_EREFERENCE_CONTEXT:
-			return getContext() != nullptr; //254
-		case UmlPackage::BEHAVIOR_EATTRIBUTE_ISREENTRANT:
-			return getIsReentrant() != true; //255
-		case UmlPackage::BEHAVIOR_EREFERENCE_OWNEDPARAMETER:
-			return getOwnedParameter() != nullptr; //256
-		case UmlPackage::BEHAVIOR_EREFERENCE_OWNEDPARAMETERSET:
-			return getOwnedParameterSet() != nullptr; //257
-		case UmlPackage::BEHAVIOR_EREFERENCE_POSTCONDITION:
-			return getPostcondition() != nullptr; //258
-		case UmlPackage::BEHAVIOR_EREFERENCE_PRECONDITION:
-			return getPrecondition() != nullptr; //259
-		case UmlPackage::BEHAVIOR_EREFERENCE_REDEFINEDBEHAVIOR:
-			return getRedefinedBehavior() != nullptr; //260
-		case UmlPackage::BEHAVIOR_EREFERENCE_SPECIFICATION:
-			return getSpecification() != nullptr; //253
+		case UmlPackage::BEHAVIOR_ATTRIBUTE_BEHAVIOREDCLASSIFIER:
+			return getBehavioredClassifier().lock() != nullptr; //2460
+		case UmlPackage::BEHAVIOR_ATTRIBUTE_CONTEXT:
+			return getContext() != nullptr; //2453
+		case UmlPackage::BEHAVIOR_ATTRIBUTE_ISREENTRANT:
+			return getIsReentrant() != true; //2454
+		case UmlPackage::BEHAVIOR_ATTRIBUTE_OWNEDPARAMETER:
+			return getOwnedParameter() != nullptr; //2455
+		case UmlPackage::BEHAVIOR_ATTRIBUTE_OWNEDPARAMETERSET:
+			return getOwnedParameterSet() != nullptr; //2456
+		case UmlPackage::BEHAVIOR_ATTRIBUTE_POSTCONDITION:
+			return getPostcondition() != nullptr; //2457
+		case UmlPackage::BEHAVIOR_ATTRIBUTE_PRECONDITION:
+			return getPrecondition() != nullptr; //2458
+		case UmlPackage::BEHAVIOR_ATTRIBUTE_REDEFINEDBEHAVIOR:
+			return getRedefinedBehavior() != nullptr; //2459
+		case UmlPackage::BEHAVIOR_ATTRIBUTE_SPECIFICATION:
+			return getSpecification() != nullptr; //2452
 	}
 	return ClassImpl::internalEIsSet(featureID);
 }
@@ -917,32 +970,215 @@ bool BehaviorImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::BEHAVIOR_EREFERENCE_BEHAVIOREDCLASSIFIER:
+		case UmlPackage::BEHAVIOR_ATTRIBUTE_BEHAVIOREDCLASSIFIER:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::BehavioredClassifier> _behavioredClassifier = newValue->get<std::shared_ptr<uml::BehavioredClassifier>>();
-			setBehavioredClassifier(_behavioredClassifier); //261
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::BehavioredClassifier> _behavioredClassifier = std::dynamic_pointer_cast<uml::BehavioredClassifier>(_temp);
+			setBehavioredClassifier(_behavioredClassifier); //2460
 			return true;
 		}
-		case UmlPackage::BEHAVIOR_EREFERENCE_CONTEXT:
+		case UmlPackage::BEHAVIOR_ATTRIBUTE_CONTEXT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::BehavioredClassifier> _context = newValue->get<std::shared_ptr<uml::BehavioredClassifier>>();
-			setContext(_context); //254
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::BehavioredClassifier> _context = std::dynamic_pointer_cast<uml::BehavioredClassifier>(_temp);
+			setContext(_context); //2453
 			return true;
 		}
-		case UmlPackage::BEHAVIOR_EATTRIBUTE_ISREENTRANT:
+		case UmlPackage::BEHAVIOR_ATTRIBUTE_ISREENTRANT:
 		{
 			// BOOST CAST
 			bool _isReentrant = newValue->get<bool>();
-			setIsReentrant(_isReentrant); //255
+			setIsReentrant(_isReentrant); //2454
 			return true;
 		}
-		case UmlPackage::BEHAVIOR_EREFERENCE_SPECIFICATION:
+		case UmlPackage::BEHAVIOR_ATTRIBUTE_OWNEDPARAMETER:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::BehavioralFeature> _specification = newValue->get<std::shared_ptr<uml::BehavioralFeature>>();
-			setSpecification(_specification); //253
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Parameter>> ownedParameterList(new Bag<uml::Parameter>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				ownedParameterList->add(std::dynamic_pointer_cast<uml::Parameter>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Parameter>::iterator iterOwnedParameter = m_ownedParameter->begin();
+			Bag<uml::Parameter>::iterator endOwnedParameter = m_ownedParameter->end();
+			while (iterOwnedParameter != endOwnedParameter)
+			{
+				if (ownedParameterList->find(*iterOwnedParameter) == -1)
+				{
+					m_ownedParameter->erase(*iterOwnedParameter);
+				}
+				iterOwnedParameter++;
+			}
+
+			iterOwnedParameter = ownedParameterList->begin();
+			endOwnedParameter = ownedParameterList->end();
+			while (iterOwnedParameter != endOwnedParameter)
+			{
+				if (m_ownedParameter->find(*iterOwnedParameter) == -1)
+				{
+					m_ownedParameter->add(*iterOwnedParameter);
+				}
+				iterOwnedParameter++;			
+			}
+			return true;
+		}
+		case UmlPackage::BEHAVIOR_ATTRIBUTE_OWNEDPARAMETERSET:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::ParameterSet>> ownedParameterSetList(new Bag<uml::ParameterSet>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				ownedParameterSetList->add(std::dynamic_pointer_cast<uml::ParameterSet>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::ParameterSet>::iterator iterOwnedParameterSet = m_ownedParameterSet->begin();
+			Bag<uml::ParameterSet>::iterator endOwnedParameterSet = m_ownedParameterSet->end();
+			while (iterOwnedParameterSet != endOwnedParameterSet)
+			{
+				if (ownedParameterSetList->find(*iterOwnedParameterSet) == -1)
+				{
+					m_ownedParameterSet->erase(*iterOwnedParameterSet);
+				}
+				iterOwnedParameterSet++;
+			}
+
+			iterOwnedParameterSet = ownedParameterSetList->begin();
+			endOwnedParameterSet = ownedParameterSetList->end();
+			while (iterOwnedParameterSet != endOwnedParameterSet)
+			{
+				if (m_ownedParameterSet->find(*iterOwnedParameterSet) == -1)
+				{
+					m_ownedParameterSet->add(*iterOwnedParameterSet);
+				}
+				iterOwnedParameterSet++;			
+			}
+			return true;
+		}
+		case UmlPackage::BEHAVIOR_ATTRIBUTE_POSTCONDITION:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Constraint>> postconditionList(new Bag<uml::Constraint>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				postconditionList->add(std::dynamic_pointer_cast<uml::Constraint>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Constraint>::iterator iterPostcondition = m_postcondition->begin();
+			Bag<uml::Constraint>::iterator endPostcondition = m_postcondition->end();
+			while (iterPostcondition != endPostcondition)
+			{
+				if (postconditionList->find(*iterPostcondition) == -1)
+				{
+					m_postcondition->erase(*iterPostcondition);
+				}
+				iterPostcondition++;
+			}
+
+			iterPostcondition = postconditionList->begin();
+			endPostcondition = postconditionList->end();
+			while (iterPostcondition != endPostcondition)
+			{
+				if (m_postcondition->find(*iterPostcondition) == -1)
+				{
+					m_postcondition->add(*iterPostcondition);
+				}
+				iterPostcondition++;			
+			}
+			return true;
+		}
+		case UmlPackage::BEHAVIOR_ATTRIBUTE_PRECONDITION:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Constraint>> preconditionList(new Bag<uml::Constraint>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				preconditionList->add(std::dynamic_pointer_cast<uml::Constraint>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Constraint>::iterator iterPrecondition = m_precondition->begin();
+			Bag<uml::Constraint>::iterator endPrecondition = m_precondition->end();
+			while (iterPrecondition != endPrecondition)
+			{
+				if (preconditionList->find(*iterPrecondition) == -1)
+				{
+					m_precondition->erase(*iterPrecondition);
+				}
+				iterPrecondition++;
+			}
+
+			iterPrecondition = preconditionList->begin();
+			endPrecondition = preconditionList->end();
+			while (iterPrecondition != endPrecondition)
+			{
+				if (m_precondition->find(*iterPrecondition) == -1)
+				{
+					m_precondition->add(*iterPrecondition);
+				}
+				iterPrecondition++;			
+			}
+			return true;
+		}
+		case UmlPackage::BEHAVIOR_ATTRIBUTE_REDEFINEDBEHAVIOR:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Behavior>> redefinedBehaviorList(new Bag<uml::Behavior>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				redefinedBehaviorList->add(std::dynamic_pointer_cast<uml::Behavior>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Behavior>::iterator iterRedefinedBehavior = m_redefinedBehavior->begin();
+			Bag<uml::Behavior>::iterator endRedefinedBehavior = m_redefinedBehavior->end();
+			while (iterRedefinedBehavior != endRedefinedBehavior)
+			{
+				if (redefinedBehaviorList->find(*iterRedefinedBehavior) == -1)
+				{
+					m_redefinedBehavior->erase(*iterRedefinedBehavior);
+				}
+				iterRedefinedBehavior++;
+			}
+
+			iterRedefinedBehavior = redefinedBehaviorList->begin();
+			endRedefinedBehavior = redefinedBehaviorList->end();
+			while (iterRedefinedBehavior != endRedefinedBehavior)
+			{
+				if (m_redefinedBehavior->find(*iterRedefinedBehavior) == -1)
+				{
+					m_redefinedBehavior->add(*iterRedefinedBehavior);
+				}
+				iterRedefinedBehavior++;			
+			}
+			return true;
+		}
+		case UmlPackage::BEHAVIOR_ATTRIBUTE_SPECIFICATION:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::BehavioralFeature> _specification = std::dynamic_pointer_cast<uml::BehavioralFeature>(_temp);
+			setSpecification(_specification); //2452
 			return true;
 		}
 	}
@@ -1044,7 +1280,7 @@ void BehaviorImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::i
 			{
 				typeName = "Parameter";
 			}
-			std::shared_ptr<ecore::EObject> ownedParameter = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::PARAMETER_EREFERENCE_BEHAVIOR);
+			std::shared_ptr<ecore::EObject> ownedParameter = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::PARAMETER_ATTRIBUTE_BEHAVIOR);
 			if (ownedParameter != nullptr)
 			{
 				loadHandler->handleChild(ownedParameter);
@@ -1085,7 +1321,7 @@ void BehaviorImpl::resolveReferences(const int featureID, std::list<std::shared_
 {
 	switch(featureID)
 	{
-		case UmlPackage::BEHAVIOR_EREFERENCE_BEHAVIOREDCLASSIFIER:
+		case UmlPackage::BEHAVIOR_ATTRIBUTE_BEHAVIOREDCLASSIFIER:
 		{
 			if (references.size() == 1)
 			{
@@ -1097,7 +1333,7 @@ void BehaviorImpl::resolveReferences(const int featureID, std::list<std::shared_
 			return;
 		}
 
-		case UmlPackage::BEHAVIOR_EREFERENCE_CONTEXT:
+		case UmlPackage::BEHAVIOR_ATTRIBUTE_CONTEXT:
 		{
 			if (references.size() == 1)
 			{
@@ -1109,7 +1345,7 @@ void BehaviorImpl::resolveReferences(const int featureID, std::list<std::shared_
 			return;
 		}
 
-		case UmlPackage::BEHAVIOR_EREFERENCE_POSTCONDITION:
+		case UmlPackage::BEHAVIOR_ATTRIBUTE_POSTCONDITION:
 		{
 			std::shared_ptr<Bag<uml::Constraint>> _postcondition = getPostcondition();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -1123,7 +1359,7 @@ void BehaviorImpl::resolveReferences(const int featureID, std::list<std::shared_
 			return;
 		}
 
-		case UmlPackage::BEHAVIOR_EREFERENCE_PRECONDITION:
+		case UmlPackage::BEHAVIOR_ATTRIBUTE_PRECONDITION:
 		{
 			std::shared_ptr<Bag<uml::Constraint>> _precondition = getPrecondition();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -1137,7 +1373,7 @@ void BehaviorImpl::resolveReferences(const int featureID, std::list<std::shared_
 			return;
 		}
 
-		case UmlPackage::BEHAVIOR_EREFERENCE_REDEFINEDBEHAVIOR:
+		case UmlPackage::BEHAVIOR_ATTRIBUTE_REDEFINEDBEHAVIOR:
 		{
 			std::shared_ptr<Bag<uml::Behavior>> _redefinedBehavior = getRedefinedBehavior();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -1151,7 +1387,7 @@ void BehaviorImpl::resolveReferences(const int featureID, std::list<std::shared_
 			return;
 		}
 
-		case UmlPackage::BEHAVIOR_EREFERENCE_SPECIFICATION:
+		case UmlPackage::BEHAVIOR_ATTRIBUTE_SPECIFICATION:
 		{
 			if (references.size() == 1)
 			{
@@ -1191,7 +1427,6 @@ void BehaviorImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> s
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
@@ -1215,18 +1450,18 @@ void BehaviorImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 		// Save 'ownedParameter'
 		for (std::shared_ptr<uml::Parameter> ownedParameter : *this->getOwnedParameter()) 
 		{
-			saveHandler->addReference(ownedParameter, "ownedParameter", ownedParameter->eClass() != package->getParameter_EClass());
+			saveHandler->addReference(ownedParameter, "ownedParameter", ownedParameter->eClass() != package->getParameter_Class());
 		}
 
 		// Save 'ownedParameterSet'
 		for (std::shared_ptr<uml::ParameterSet> ownedParameterSet : *this->getOwnedParameterSet()) 
 		{
-			saveHandler->addReference(ownedParameterSet, "ownedParameterSet", ownedParameterSet->eClass() != package->getParameterSet_EClass());
+			saveHandler->addReference(ownedParameterSet, "ownedParameterSet", ownedParameterSet->eClass() != package->getParameterSet_Class());
 		}
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getBehavior_EAttribute_isReentrant()) )
+		if ( this->eIsSet(package->getBehavior_Attribute_isReentrant()) )
 		{
 			saveHandler->addAttribute("isReentrant", this->getIsReentrant());
 		}

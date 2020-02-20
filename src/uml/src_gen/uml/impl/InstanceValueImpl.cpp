@@ -32,13 +32,24 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
 
 #include "uml/Dependency.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -57,6 +68,8 @@
 #include "uml/Type.hpp"
 
 #include "uml/ValueSpecification.hpp"
+
+#include "uml/ValueSpecificationAction.hpp"
 
 #include "ecore/EcorePackage.hpp"
 #include "ecore/EcoreFactory.hpp"
@@ -153,6 +166,18 @@ InstanceValueImpl::~InstanceValueImpl()
 
 
 
+//Additional constructor for the containments back reference
+			InstanceValueImpl::InstanceValueImpl(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction)
+			:InstanceValueImpl()
+			{
+			    m_valueSpecificationAction = par_valueSpecificationAction;
+				m_owner = par_valueSpecificationAction;
+			}
+
+
+
+
+
 
 InstanceValueImpl::InstanceValueImpl(const InstanceValueImpl & obj):InstanceValueImpl()
 {
@@ -185,17 +210,11 @@ InstanceValueImpl::InstanceValueImpl(const InstanceValueImpl & obj):InstanceValu
 
 	m_type  = obj.getType();
 
+	m_valueSpecificationAction  = obj.getValueSpecificationAction();
+
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	if(obj.getNameExpression()!=nullptr)
 	{
 		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
@@ -223,7 +242,7 @@ std::shared_ptr<ecore::EObject>  InstanceValueImpl::copy() const
 
 std::shared_ptr<ecore::EClass> InstanceValueImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getInstanceValue_EClass();
+	return UmlPackageImpl::eInstance()->getInstanceValue_Class();
 }
 
 //*********************************
@@ -299,6 +318,11 @@ std::shared_ptr<ecore::EObject> InstanceValueImpl::eContainer() const
 	{
 		return wp;
 	}
+
+	if(auto wp = m_valueSpecificationAction.lock())
+	{
+		return wp;
+	}
 	return nullptr;
 }
 
@@ -309,8 +333,8 @@ Any InstanceValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::INSTANCEVALUE_EREFERENCE_INSTANCE:
-			return eAny(getInstance()); //19415
+		case UmlPackage::INSTANCEVALUE_ATTRIBUTE_INSTANCE:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getInstance())); //11915
 	}
 	return ValueSpecificationImpl::eGet(featureID, resolve, coreType);
 }
@@ -318,8 +342,8 @@ bool InstanceValueImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::INSTANCEVALUE_EREFERENCE_INSTANCE:
-			return getInstance() != nullptr; //19415
+		case UmlPackage::INSTANCEVALUE_ATTRIBUTE_INSTANCE:
+			return getInstance() != nullptr; //11915
 	}
 	return ValueSpecificationImpl::internalEIsSet(featureID);
 }
@@ -327,11 +351,12 @@ bool InstanceValueImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::INSTANCEVALUE_EREFERENCE_INSTANCE:
+		case UmlPackage::INSTANCEVALUE_ATTRIBUTE_INSTANCE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::InstanceSpecification> _instance = newValue->get<std::shared_ptr<uml::InstanceSpecification>>();
-			setInstance(_instance); //19415
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::InstanceSpecification> _instance = std::dynamic_pointer_cast<uml::InstanceSpecification>(_temp);
+			setInstance(_instance); //11915
 			return true;
 		}
 	}
@@ -395,7 +420,7 @@ void InstanceValueImpl::resolveReferences(const int featureID, std::list<std::sh
 {
 	switch(featureID)
 	{
-		case UmlPackage::INSTANCEVALUE_EREFERENCE_INSTANCE:
+		case UmlPackage::INSTANCEVALUE_ATTRIBUTE_INSTANCE:
 		{
 			if (references.size() == 1)
 			{
@@ -424,7 +449,6 @@ void InstanceValueImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandl
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

@@ -33,6 +33,15 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Activity.hpp"
@@ -52,8 +61,6 @@
 #include "uml/Constraint.hpp"
 
 #include "uml/Dependency.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -209,14 +216,6 @@ RemoveVariableValueActionImpl::RemoveVariableValueActionImpl(const RemoveVariabl
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::ExceptionHandler>> _handlerList = obj.getHandler();
 	for(std::shared_ptr<uml::ExceptionHandler> _handler : *_handlerList)
 	{
@@ -307,7 +306,7 @@ std::shared_ptr<ecore::EObject>  RemoveVariableValueActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> RemoveVariableValueActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getRemoveVariableValueAction_EClass();
+	return UmlPackageImpl::eInstance()->getRemoveVariableValueAction_Class();
 }
 
 //*********************************
@@ -410,10 +409,10 @@ Any RemoveVariableValueActionImpl::eGet(int featureID, bool resolve, bool coreTy
 {
 	switch(featureID)
 	{
-		case UmlPackage::REMOVEVARIABLEVALUEACTION_EATTRIBUTE_ISREMOVEDUPLICATES:
-			return eAny(getIsRemoveDuplicates()); //17030
-		case UmlPackage::REMOVEVARIABLEVALUEACTION_EREFERENCE_REMOVEAT:
-			return eAny(getRemoveAt()); //17031
+		case UmlPackage::REMOVEVARIABLEVALUEACTION_ATTRIBUTE_ISREMOVEDUPLICATES:
+			return eAny(getIsRemoveDuplicates()); //21129
+		case UmlPackage::REMOVEVARIABLEVALUEACTION_ATTRIBUTE_REMOVEAT:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getRemoveAt())); //21130
 	}
 	return WriteVariableActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -421,10 +420,10 @@ bool RemoveVariableValueActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::REMOVEVARIABLEVALUEACTION_EATTRIBUTE_ISREMOVEDUPLICATES:
-			return getIsRemoveDuplicates() != false; //17030
-		case UmlPackage::REMOVEVARIABLEVALUEACTION_EREFERENCE_REMOVEAT:
-			return getRemoveAt() != nullptr; //17031
+		case UmlPackage::REMOVEVARIABLEVALUEACTION_ATTRIBUTE_ISREMOVEDUPLICATES:
+			return getIsRemoveDuplicates() != false; //21129
+		case UmlPackage::REMOVEVARIABLEVALUEACTION_ATTRIBUTE_REMOVEAT:
+			return getRemoveAt() != nullptr; //21130
 	}
 	return WriteVariableActionImpl::internalEIsSet(featureID);
 }
@@ -432,18 +431,19 @@ bool RemoveVariableValueActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::REMOVEVARIABLEVALUEACTION_EATTRIBUTE_ISREMOVEDUPLICATES:
+		case UmlPackage::REMOVEVARIABLEVALUEACTION_ATTRIBUTE_ISREMOVEDUPLICATES:
 		{
 			// BOOST CAST
 			bool _isRemoveDuplicates = newValue->get<bool>();
-			setIsRemoveDuplicates(_isRemoveDuplicates); //17030
+			setIsRemoveDuplicates(_isRemoveDuplicates); //21129
 			return true;
 		}
-		case UmlPackage::REMOVEVARIABLEVALUEACTION_EREFERENCE_REMOVEAT:
+		case UmlPackage::REMOVEVARIABLEVALUEACTION_ATTRIBUTE_REMOVEAT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::InputPin> _removeAt = newValue->get<std::shared_ptr<uml::InputPin>>();
-			setRemoveAt(_removeAt); //17031
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::InputPin> _removeAt = std::dynamic_pointer_cast<uml::InputPin>(_temp);
+			setRemoveAt(_removeAt); //21130
 			return true;
 		}
 	}
@@ -557,7 +557,6 @@ void RemoveVariableValueActionImpl::save(std::shared_ptr<persistence::interfaces
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
@@ -582,12 +581,12 @@ void RemoveVariableValueActionImpl::saveContent(std::shared_ptr<persistence::int
 		std::shared_ptr<uml::InputPin > removeAt = this->getRemoveAt();
 		if (removeAt != nullptr)
 		{
-			saveHandler->addReference(removeAt, "removeAt", removeAt->eClass() != package->getInputPin_EClass());
+			saveHandler->addReference(removeAt, "removeAt", removeAt->eClass() != package->getInputPin_Class());
 		}
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getRemoveVariableValueAction_EAttribute_isRemoveDuplicates()) )
+		if ( this->eIsSet(package->getRemoveVariableValueAction_Attribute_isRemoveDuplicates()) )
 		{
 			saveHandler->addAttribute("isRemoveDuplicates", this->getIsRemoveDuplicates());
 		}

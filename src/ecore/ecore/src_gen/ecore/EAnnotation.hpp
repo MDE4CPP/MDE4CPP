@@ -14,6 +14,7 @@
 
 // forward declarations
 template<class T> class Bag;
+template<class T, class ... U> class Subset;
 
 
 
@@ -80,6 +81,10 @@ namespace ecore
 
 			//Additional constructors for the containments back reference
 
+			EAnnotation(std::weak_ptr<ecore::EObject > par_eContainer);
+
+			//Additional constructors for the containments back reference
+
 			EAnnotation(std::weak_ptr<ecore::EModelElement > par_eModelElement);
 
 		public:
@@ -109,7 +114,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<Bag<ecore::EObject>> getContents() const = 0;
+			virtual std::shared_ptr<Subset<ecore::EObject, ecore::EObject>> getContents() const = 0;
 			
 			/*!
 			 */
@@ -142,7 +147,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			std::shared_ptr<Bag<ecore::EObject>> m_contents;
+			std::shared_ptr<Subset<ecore::EObject, ecore::EObject>> m_contents;
 			/*!
 			 */
 			std::shared_ptr<Bag<ecore::EStringToStringMapEntry>> m_details;
@@ -158,7 +163,9 @@ namespace ecore
 			//*********************************
 			// Union Getter
 			//*********************************
-			
+			/*!
+			 */
+			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
 			

@@ -32,6 +32,17 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Action.hpp"
@@ -45,8 +56,6 @@
 #include "uml/ConnectorEnd.hpp"
 
 #include "uml/Dependency.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -203,14 +212,6 @@ VariableImpl::VariableImpl(const VariableImpl & obj):VariableImpl()
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	if(obj.getLowerValue()!=nullptr)
 	{
 		m_lowerValue = std::dynamic_pointer_cast<uml::ValueSpecification>(obj.getLowerValue()->copy());
@@ -252,7 +253,7 @@ std::shared_ptr<ecore::EObject>  VariableImpl::copy() const
 
 std::shared_ptr<ecore::EClass> VariableImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getVariable_EClass();
+	return UmlPackageImpl::eInstance()->getVariable_Class();
 }
 
 //*********************************
@@ -354,10 +355,10 @@ Any VariableImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::VARIABLE_EREFERENCE_ACTIVITYSCOPE:
-			return eAny(getActivityScope()); //12120
-		case UmlPackage::VARIABLE_EREFERENCE_SCOPE:
-			return eAny(getScope()); //12121
+		case UmlPackage::VARIABLE_ATTRIBUTE_ACTIVITYSCOPE:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getActivityScope().lock())); //25319
+		case UmlPackage::VARIABLE_ATTRIBUTE_SCOPE:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getScope().lock())); //25320
 	}
 	Any result;
 	result = ConnectableElementImpl::eGet(featureID, resolve, coreType);
@@ -372,10 +373,10 @@ bool VariableImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::VARIABLE_EREFERENCE_ACTIVITYSCOPE:
-			return getActivityScope().lock() != nullptr; //12120
-		case UmlPackage::VARIABLE_EREFERENCE_SCOPE:
-			return getScope().lock() != nullptr; //12121
+		case UmlPackage::VARIABLE_ATTRIBUTE_ACTIVITYSCOPE:
+			return getActivityScope().lock() != nullptr; //25319
+		case UmlPackage::VARIABLE_ATTRIBUTE_SCOPE:
+			return getScope().lock() != nullptr; //25320
 	}
 	bool result = false;
 	result = ConnectableElementImpl::internalEIsSet(featureID);
@@ -390,18 +391,20 @@ bool VariableImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::VARIABLE_EREFERENCE_ACTIVITYSCOPE:
+		case UmlPackage::VARIABLE_ATTRIBUTE_ACTIVITYSCOPE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Activity> _activityScope = newValue->get<std::shared_ptr<uml::Activity>>();
-			setActivityScope(_activityScope); //12120
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Activity> _activityScope = std::dynamic_pointer_cast<uml::Activity>(_temp);
+			setActivityScope(_activityScope); //25319
 			return true;
 		}
-		case UmlPackage::VARIABLE_EREFERENCE_SCOPE:
+		case UmlPackage::VARIABLE_ATTRIBUTE_SCOPE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::StructuredActivityNode> _scope = newValue->get<std::shared_ptr<uml::StructuredActivityNode>>();
-			setScope(_scope); //12121
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::StructuredActivityNode> _scope = std::dynamic_pointer_cast<uml::StructuredActivityNode>(_temp);
+			setScope(_scope); //25320
 			return true;
 		}
 	}
@@ -455,7 +458,7 @@ void VariableImpl::resolveReferences(const int featureID, std::list<std::shared_
 {
 	switch(featureID)
 	{
-		case UmlPackage::VARIABLE_EREFERENCE_ACTIVITYSCOPE:
+		case UmlPackage::VARIABLE_ATTRIBUTE_ACTIVITYSCOPE:
 		{
 			if (references.size() == 1)
 			{
@@ -467,7 +470,7 @@ void VariableImpl::resolveReferences(const int featureID, std::list<std::shared_
 			return;
 		}
 
-		case UmlPackage::VARIABLE_EREFERENCE_SCOPE:
+		case UmlPackage::VARIABLE_ATTRIBUTE_SCOPE:
 		{
 			if (references.size() == 1)
 			{
@@ -497,7 +500,6 @@ void VariableImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> s
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

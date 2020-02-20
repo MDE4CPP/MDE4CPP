@@ -33,6 +33,11 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Collaboration.hpp"
@@ -40,8 +45,6 @@
 #include "uml/Comment.hpp"
 
 #include "uml/Dependency.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -151,14 +154,6 @@ CollaborationUseImpl::CollaborationUseImpl(const CollaborationUseImpl & obj):Col
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	if(obj.getNameExpression()!=nullptr)
 	{
 		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
@@ -201,7 +196,7 @@ std::shared_ptr<ecore::EObject>  CollaborationUseImpl::copy() const
 
 std::shared_ptr<ecore::EClass> CollaborationUseImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getCollaborationUse_EClass();
+	return UmlPackageImpl::eInstance()->getCollaborationUse_Class();
 }
 
 //*********************************
@@ -292,10 +287,20 @@ Any CollaborationUseImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::COLLABORATIONUSE_EREFERENCE_ROLEBINDING:
-			return eAny(getRoleBinding()); //9010
-		case UmlPackage::COLLABORATIONUSE_EREFERENCE_TYPE:
-			return eAny(getType()); //9011
+		case UmlPackage::COLLABORATIONUSE_ATTRIBUTE_ROLEBINDING:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Dependency>::iterator iter = m_roleBinding->begin();
+			Bag<uml::Dependency>::iterator end = m_roleBinding->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //449
+		}
+		case UmlPackage::COLLABORATIONUSE_ATTRIBUTE_TYPE:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getType())); //4410
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -303,10 +308,10 @@ bool CollaborationUseImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::COLLABORATIONUSE_EREFERENCE_ROLEBINDING:
-			return getRoleBinding() != nullptr; //9010
-		case UmlPackage::COLLABORATIONUSE_EREFERENCE_TYPE:
-			return getType() != nullptr; //9011
+		case UmlPackage::COLLABORATIONUSE_ATTRIBUTE_ROLEBINDING:
+			return getRoleBinding() != nullptr; //449
+		case UmlPackage::COLLABORATIONUSE_ATTRIBUTE_TYPE:
+			return getType() != nullptr; //4410
 	}
 	return NamedElementImpl::internalEIsSet(featureID);
 }
@@ -314,11 +319,48 @@ bool CollaborationUseImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::COLLABORATIONUSE_EREFERENCE_TYPE:
+		case UmlPackage::COLLABORATIONUSE_ATTRIBUTE_ROLEBINDING:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Collaboration> _type = newValue->get<std::shared_ptr<uml::Collaboration>>();
-			setType(_type); //9011
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Dependency>> roleBindingList(new Bag<uml::Dependency>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				roleBindingList->add(std::dynamic_pointer_cast<uml::Dependency>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Dependency>::iterator iterRoleBinding = m_roleBinding->begin();
+			Bag<uml::Dependency>::iterator endRoleBinding = m_roleBinding->end();
+			while (iterRoleBinding != endRoleBinding)
+			{
+				if (roleBindingList->find(*iterRoleBinding) == -1)
+				{
+					m_roleBinding->erase(*iterRoleBinding);
+				}
+				iterRoleBinding++;
+			}
+
+			iterRoleBinding = roleBindingList->begin();
+			endRoleBinding = roleBindingList->end();
+			while (iterRoleBinding != endRoleBinding)
+			{
+				if (m_roleBinding->find(*iterRoleBinding) == -1)
+				{
+					m_roleBinding->add(*iterRoleBinding);
+				}
+				iterRoleBinding++;			
+			}
+			return true;
+		}
+		case UmlPackage::COLLABORATIONUSE_ATTRIBUTE_TYPE:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Collaboration> _type = std::dynamic_pointer_cast<uml::Collaboration>(_temp);
+			setType(_type); //4410
 			return true;
 		}
 	}
@@ -409,7 +451,7 @@ void CollaborationUseImpl::resolveReferences(const int featureID, std::list<std:
 {
 	switch(featureID)
 	{
-		case UmlPackage::COLLABORATIONUSE_EREFERENCE_TYPE:
+		case UmlPackage::COLLABORATIONUSE_ATTRIBUTE_TYPE:
 		{
 			if (references.size() == 1)
 			{
@@ -432,7 +474,6 @@ void CollaborationUseImpl::save(std::shared_ptr<persistence::interfaces::XSaveHa
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
@@ -450,7 +491,7 @@ void CollaborationUseImpl::saveContent(std::shared_ptr<persistence::interfaces::
 		// Save 'roleBinding'
 		for (std::shared_ptr<uml::Dependency> roleBinding : *this->getRoleBinding()) 
 		{
-			saveHandler->addReference(roleBinding, "roleBinding", roleBinding->eClass() != package->getDependency_EClass());
+			saveHandler->addReference(roleBinding, "roleBinding", roleBinding->eClass() != package->getDependency_Class());
 		}
 	
 

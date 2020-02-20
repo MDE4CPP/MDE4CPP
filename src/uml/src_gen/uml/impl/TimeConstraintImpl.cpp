@@ -33,13 +33,22 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
 
 #include "uml/Dependency.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -90,24 +99,24 @@ TimeConstraintImpl::~TimeConstraintImpl()
 
 
 //Additional constructor for the containments back reference
-			TimeConstraintImpl::TimeConstraintImpl(std::weak_ptr<uml::Namespace > par_Namespace, const int reference_id)
-			:TimeConstraintImpl()
-			{
-				switch(reference_id)
-				{	
-				case UmlPackage::CONSTRAINT_EREFERENCE_CONTEXT:
-					m_context = par_Namespace;
-					m_namespace = par_Namespace;
-					 return;
-				case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE:
-					m_namespace = par_Namespace;
-					m_owner = par_Namespace;
-					 return;
-				default:
-				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
-				}
-			   
-			}
+TimeConstraintImpl::TimeConstraintImpl(std::weak_ptr<uml::Namespace > par_Namespace, const int reference_id)
+:TimeConstraintImpl()
+{
+	switch(reference_id)
+	{	
+	case UmlPackage::CONSTRAINT_ATTRIBUTE_CONTEXT:
+		m_context = par_Namespace;
+		m_namespace = par_Namespace;
+		 return;
+	case UmlPackage::NAMEDELEMENT_ATTRIBUTE_NAMESPACE:
+		m_namespace = par_Namespace;
+		m_owner = par_Namespace;
+		 return;
+	default:
+	std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
+	}
+   
+}
 
 
 
@@ -189,14 +198,6 @@ TimeConstraintImpl::TimeConstraintImpl(const TimeConstraintImpl & obj):TimeConst
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	if(obj.getNameExpression()!=nullptr)
 	{
 		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
@@ -231,7 +232,7 @@ std::shared_ptr<ecore::EObject>  TimeConstraintImpl::copy() const
 
 std::shared_ptr<ecore::EClass> TimeConstraintImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getTimeConstraint_EClass();
+	return UmlPackageImpl::eInstance()->getTimeConstraint_Class();
 }
 
 //*********************************
@@ -322,8 +323,8 @@ Any TimeConstraintImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::TIMECONSTRAINT_EATTRIBUTE_FIRSTEVENT:
-			return eAny(getFirstEvent()); //25516
+		case UmlPackage::TIMECONSTRAINT_ATTRIBUTE_FIRSTEVENT:
+			return eAny(getFirstEvent()); //23715
 	}
 	return IntervalConstraintImpl::eGet(featureID, resolve, coreType);
 }
@@ -331,8 +332,8 @@ bool TimeConstraintImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::TIMECONSTRAINT_EATTRIBUTE_FIRSTEVENT:
-			return getFirstEvent() != true; //25516
+		case UmlPackage::TIMECONSTRAINT_ATTRIBUTE_FIRSTEVENT:
+			return getFirstEvent() != true; //23715
 	}
 	return IntervalConstraintImpl::internalEIsSet(featureID);
 }
@@ -340,11 +341,11 @@ bool TimeConstraintImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::TIMECONSTRAINT_EATTRIBUTE_FIRSTEVENT:
+		case UmlPackage::TIMECONSTRAINT_ATTRIBUTE_FIRSTEVENT:
 		{
 			// BOOST CAST
 			bool _firstEvent = newValue->get<bool>();
-			setFirstEvent(_firstEvent); //25516
+			setFirstEvent(_firstEvent); //23715
 			return true;
 		}
 	}
@@ -426,7 +427,6 @@ void TimeConstraintImpl::save(std::shared_ptr<persistence::interfaces::XSaveHand
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
@@ -447,7 +447,7 @@ void TimeConstraintImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getTimeConstraint_EAttribute_firstEvent()) )
+		if ( this->eIsSet(package->getTimeConstraint_Attribute_firstEvent()) )
 		{
 			saveHandler->addAttribute("firstEvent", this->getFirstEvent());
 		}

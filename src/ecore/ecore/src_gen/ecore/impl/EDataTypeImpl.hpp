@@ -34,6 +34,10 @@ namespace ecore
 			virtual void setThisEDataTypePtr(std::weak_ptr<EDataType> thisEDataTypePtr);
 
 			//Additional constructors for the containments back reference
+			EDataTypeImpl(std::weak_ptr<ecore::EObject > par_eContainer);
+
+
+			//Additional constructors for the containments back reference
 			EDataTypeImpl(std::weak_ptr<ecore::EPackage > par_ePackage);
 
 
@@ -69,7 +73,9 @@ namespace ecore
 			//*********************************
 			// Union Getter
 			//*********************************
-			 
+			/*!
+			 */
+			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

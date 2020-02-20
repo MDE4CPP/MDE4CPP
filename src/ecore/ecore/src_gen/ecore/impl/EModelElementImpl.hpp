@@ -13,14 +13,12 @@
 //Model includes
 #include "../EModelElement.hpp"
 
-
 #include "ecore/impl/EObjectImpl.hpp"
 
 //*********************************
 namespace ecore 
 {
-	class EModelElementImpl :virtual public ecore::EObjectImpl,
-virtual public EModelElement 
+	class EModelElementImpl :virtual public EObjectImpl, virtual public EModelElement 
 	{
 		public: 
 			EModelElementImpl(const EModelElementImpl & obj);
@@ -34,6 +32,10 @@ virtual public EModelElement
 			EModelElementImpl();
 			virtual std::shared_ptr<EModelElement> getThisEModelElementPtr() const;
 			virtual void setThisEModelElementPtr(std::weak_ptr<EModelElement> thisEModelElementPtr);
+
+			//Additional constructors for the containments back reference
+			EModelElementImpl(std::weak_ptr<ecore::EObject > par_eContainer);
+
 
 
 
@@ -60,14 +62,16 @@ virtual public EModelElement
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<Bag<ecore::EAnnotation>> getEAnnotations() const ;
+			virtual std::shared_ptr<Subset<ecore::EAnnotation, ecore::EObject>> getEAnnotations() const ;
 			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
-			 
+			/*!
+			 */
+			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

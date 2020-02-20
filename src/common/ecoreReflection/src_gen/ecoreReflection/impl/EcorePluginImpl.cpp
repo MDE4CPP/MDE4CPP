@@ -5,6 +5,7 @@
 #else
   #define DEBUG_MESSAGE(a) a
 #endif
+#include <iostream>
 
 
 #include "ecoreReflection/EcorePackage.hpp"
@@ -22,8 +23,13 @@ EcorePluginImpl::~EcorePluginImpl()
 {
 }
 
-std::shared_ptr<ecore::EObject> EcorePluginImpl::create(const std::string& name)
+std::shared_ptr<ecore::EObject> EcorePluginImpl::create(const std::string& name) const
 {		
+	return nullptr;
+}
+
+std::shared_ptr<ecore::EObject> EcorePluginImpl::create(const std::string& name, std::shared_ptr<ecore::EObject> container, const unsigned int referenceID) const
+{
 	return nullptr;
 }
 

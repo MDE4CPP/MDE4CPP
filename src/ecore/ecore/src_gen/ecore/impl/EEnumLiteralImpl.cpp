@@ -19,7 +19,8 @@
 #include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
-
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/Union.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -30,6 +31,11 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "ecore/EcoreFactory.hpp"
 #include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "ecore/EcorePackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "ecore/EAnnotation.hpp"
@@ -37,6 +43,8 @@
 #include "ecore/EEnum.hpp"
 
 #include "ecore/ENamedElement.hpp"
+
+#include "ecore/EObject.hpp"
 
 #include "ecore/EcorePackage.hpp"
 #include "ecore/EcoreFactory.hpp"
@@ -77,6 +85,17 @@ EEnumLiteralImpl::~EEnumLiteralImpl()
 
 
 //Additional constructor for the containments back reference
+			EEnumLiteralImpl::EEnumLiteralImpl(std::weak_ptr<ecore::EObject > par_eContainer)
+			:EEnumLiteralImpl()
+			{
+			    m_eContainer = par_eContainer;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
 			EEnumLiteralImpl::EEnumLiteralImpl(std::weak_ptr<ecore::EEnum > par_eEnum)
 			:EEnumLiteralImpl()
 			{
@@ -96,11 +115,14 @@ EEnumLiteralImpl::EEnumLiteralImpl(const EEnumLiteralImpl & obj):EEnumLiteralImp
 	#endif
 	m_instance = obj.getInstance();
 	m_literal = obj.getLiteral();
+	m_metaElementID = obj.getMetaElementID();
 	m_name = obj.getName();
 	m_value = obj.getValue();
 
 	//copy references with no containment (soft copy)
 	
+	m_eContainer  = obj.getEContainer();
+
 	m_eEnum  = obj.getEEnum();
 
 
@@ -126,7 +148,7 @@ std::shared_ptr<ecore::EObject>  EEnumLiteralImpl::copy() const
 
 std::shared_ptr<EClass> EEnumLiteralImpl::eStaticClass() const
 {
-	return EcorePackageImpl::eInstance()->getEEnumLiteral_EClass();
+	return EcorePackageImpl::eInstance()->getEEnumLiteral_Class();
 }
 
 //*********************************
@@ -179,6 +201,10 @@ std::weak_ptr<ecore::EEnum > EEnumLiteralImpl::getEEnum() const
 //*********************************
 // Union Getter
 //*********************************
+std::shared_ptr<Union<ecore::EObject>> EEnumLiteralImpl::getEContens() const
+{
+	return m_eContens;
+}
 
 
 std::shared_ptr<EEnumLiteral> EEnumLiteralImpl::getThisEEnumLiteralPtr() const
@@ -192,6 +218,11 @@ void EEnumLiteralImpl::setThisEEnumLiteralPtr(std::weak_ptr<EEnumLiteral> thisEE
 }
 std::shared_ptr<ecore::EObject> EEnumLiteralImpl::eContainer() const
 {
+	if(auto wp = m_eContainer.lock())
+	{
+		return wp;
+	}
+
 	if(auto wp = m_eEnum.lock())
 	{
 		return wp;
@@ -206,14 +237,14 @@ Any EEnumLiteralImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case EcorePackage::EENUMLITERAL_EREFERENCE_EENUM:
-			return eAny(getEEnum()); //65
-		case EcorePackage::EENUMLITERAL_EATTRIBUTE_INSTANCE:
-			return eAny(getInstance()); //63
-		case EcorePackage::EENUMLITERAL_EATTRIBUTE_LITERAL:
-			return eAny(getLiteral()); //64
-		case EcorePackage::EENUMLITERAL_EATTRIBUTE_VALUE:
-			return eAny(getValue()); //62
+		case EcorePackage::EENUMLITERAL_ATTRIBUTE_EENUM:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEEnum().lock())); //218
+		case EcorePackage::EENUMLITERAL_ATTRIBUTE_INSTANCE:
+			return eAny(getInstance()); //216
+		case EcorePackage::EENUMLITERAL_ATTRIBUTE_LITERAL:
+			return eAny(getLiteral()); //217
+		case EcorePackage::EENUMLITERAL_ATTRIBUTE_VALUE:
+			return eAny(getValue()); //215
 	}
 	return ENamedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -221,14 +252,14 @@ bool EEnumLiteralImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case EcorePackage::EENUMLITERAL_EREFERENCE_EENUM:
-			return getEEnum().lock() != nullptr; //65
-		case EcorePackage::EENUMLITERAL_EATTRIBUTE_INSTANCE:
-			return !getInstance()->isEmpty(); //63
-		case EcorePackage::EENUMLITERAL_EATTRIBUTE_LITERAL:
-			return getLiteral() != ""; //64
-		case EcorePackage::EENUMLITERAL_EATTRIBUTE_VALUE:
-			return getValue() != 0; //62
+		case EcorePackage::EENUMLITERAL_ATTRIBUTE_EENUM:
+			return getEEnum().lock() != nullptr; //218
+		case EcorePackage::EENUMLITERAL_ATTRIBUTE_INSTANCE:
+			return getInstance() != nullptr; //216
+		case EcorePackage::EENUMLITERAL_ATTRIBUTE_LITERAL:
+			return getLiteral() != ""; //217
+		case EcorePackage::EENUMLITERAL_ATTRIBUTE_VALUE:
+			return getValue() != 0; //215
 	}
 	return ENamedElementImpl::internalEIsSet(featureID);
 }
@@ -236,25 +267,25 @@ bool EEnumLiteralImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case EcorePackage::EENUMLITERAL_EATTRIBUTE_INSTANCE:
+		case EcorePackage::EENUMLITERAL_ATTRIBUTE_INSTANCE:
 		{
 			// BOOST CAST
 			Any _instance = newValue->get<Any>();
-			setInstance(_instance); //63
+			setInstance(_instance); //216
 			return true;
 		}
-		case EcorePackage::EENUMLITERAL_EATTRIBUTE_LITERAL:
+		case EcorePackage::EENUMLITERAL_ATTRIBUTE_LITERAL:
 		{
 			// BOOST CAST
 			std::string _literal = newValue->get<std::string>();
-			setLiteral(_literal); //64
+			setLiteral(_literal); //217
 			return true;
 		}
-		case EcorePackage::EENUMLITERAL_EATTRIBUTE_VALUE:
+		case EcorePackage::EENUMLITERAL_ATTRIBUTE_VALUE:
 		{
 			// BOOST CAST
 			int _value = newValue->get<int>();
-			setValue(_value); //62
+			setValue(_value); //215
 			return true;
 		}
 	}
@@ -338,7 +369,10 @@ void EEnumLiteralImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandle
 	
 	EModelElementImpl::saveContent(saveHandler);
 	
+	EObjectImpl::saveContent(saveHandler);
+	
 	ecore::EObjectImpl::saveContent(saveHandler);
+	
 	
 	
 }
@@ -352,12 +386,12 @@ void EEnumLiteralImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getEEnumLiteral_EAttribute_literal()) )
+		if ( this->eIsSet(package->getEEnumLiteral_Attribute_literal()) )
 		{
 			saveHandler->addAttribute("literal", this->getLiteral());
 		}
 
-		if ( this->eIsSet(package->getEEnumLiteral_EAttribute_value()) )
+		if ( this->eIsSet(package->getEEnumLiteral_Attribute_value()) )
 		{
 			saveHandler->addAttribute("value", this->getValue());
 		}

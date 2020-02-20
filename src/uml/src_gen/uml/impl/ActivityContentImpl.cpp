@@ -29,6 +29,7 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Activity.hpp"
@@ -93,7 +94,7 @@ std::shared_ptr<ecore::EObject>  ActivityContentImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ActivityContentImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getActivityContent_EClass();
+	return UmlPackageImpl::eInstance()->getActivityContent_Class();
 }
 
 //*********************************

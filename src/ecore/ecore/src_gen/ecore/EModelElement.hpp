@@ -13,7 +13,7 @@
 
 
 // forward declarations
-template<class T> class Bag;
+template<class T, class ... U> class Subset;
 
 
 
@@ -42,19 +42,23 @@ namespace ecore
 	class EAnnotation;
 }
 
+namespace ecore 
+{
+	class EObject;
+}
+
 // base class includes
+#include "ecore/EObject.hpp"
 
 // enum includes
 
-#include "ecore/EObject.hpp"
 
 //*********************************
 namespace ecore 
 {
 	/*!
 	 */
-	class EModelElement : virtual public ecore::EObject 
-
+	class EModelElement:virtual public EObject
 	{
 		public:
  			EModelElement(const EModelElement &) {}
@@ -87,7 +91,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<Bag<ecore::EAnnotation>> getEAnnotations() const = 0;
+			virtual std::shared_ptr<Subset<ecore::EAnnotation, ecore::EObject>> getEAnnotations() const = 0;
 			
 			
 
@@ -102,14 +106,16 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			std::shared_ptr<Bag<ecore::EAnnotation>> m_eAnnotations;
+			std::shared_ptr<Subset<ecore::EAnnotation, ecore::EObject>> m_eAnnotations;
 			
 
 		public:
 			//*********************************
 			// Union Getter
 			//*********************************
-			
+			/*!
+			 */
+			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
 			

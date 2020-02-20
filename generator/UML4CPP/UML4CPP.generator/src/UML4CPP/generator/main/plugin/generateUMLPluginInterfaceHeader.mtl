@@ -11,10 +11,16 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ ****************************************************************************************************************************************************************
+ * 
+ * module to generate plugin class interface header file
+ * 
  */]
 [module generateUMLPluginInterfaceHeader('http://www.eclipse.org/uml2/5.0.0/UML')]
 
-[import UML4CPP::generator::main::helper /]
+[import UML4CPP::generator::main::helpers::generalHelper /]
+[import UML4CPP::generator::main::helpers::nameHelper /]
 
 [template public generateUMLPluginInterfaceHeader(aPackage : Package){packageName : String = aPackage.name.toUpperFirst().concat('Plugin');}]
 [file (aPackage.getPackageName().concat('/').concat(packageName).concat('.hpp'), false, 'UTF-8')]
@@ -35,7 +41,8 @@
 			virtual std::string eNS_URI() = 0;
 			virtual std::string eNS_PREFIX() = 0;
 	
-			virtual std::shared_ptr<ecore::EObject> create(const std::string& name) = 0;
+			virtual std::shared_ptr<ecore::EObject> create(const std::string& name) const = 0;
+			virtual std::shared_ptr<ecore::EObject> create(const std::string& name, std::shared_ptr<ecore::EObject> container, const unsigned int referenceID = -1) const = 0;
 			virtual std::shared_ptr<uml::Factory> getFactory() = 0;
 			virtual std::shared_ptr<uml::Package> getPackage() = 0;
 	

@@ -32,6 +32,17 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Association.hpp"
@@ -39,8 +50,6 @@
 #include "uml/Comment.hpp"
 
 #include "uml/Dependency.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -116,24 +125,24 @@ TypeImpl::~TypeImpl()
 
 
 //Additional constructor for the containments back reference
-			TypeImpl::TypeImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id)
-			:TypeImpl()
-			{
-				switch(reference_id)
-				{	
-				case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
-					m_owningPackage = par_Package;
-					m_namespace = par_Package;
-					 return;
-				case UmlPackage::TYPE_EREFERENCE_PACKAGE:
-					m_package = par_Package;
-					m_namespace = par_Package;
-					 return;
-				default:
-				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
-				}
-			   
-			}
+TypeImpl::TypeImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id)
+:TypeImpl()
+{
+	switch(reference_id)
+	{	
+	case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
+		m_owningPackage = par_Package;
+		m_namespace = par_Package;
+		 return;
+	case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
+		m_package = par_Package;
+		m_namespace = par_Package;
+		 return;
+	default:
+	std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
+	}
+   
+}
 
 
 
@@ -188,14 +197,6 @@ TypeImpl::TypeImpl(const TypeImpl & obj):TypeImpl()
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	if(obj.getNameExpression()!=nullptr)
 	{
 		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
@@ -223,7 +224,7 @@ std::shared_ptr<ecore::EObject>  TypeImpl::copy() const
 
 std::shared_ptr<ecore::EClass> TypeImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getType_EClass();
+	return UmlPackageImpl::eInstance()->getType_Class();
 }
 
 //*********************************
@@ -239,7 +240,7 @@ bool TypeImpl::conformsTo(std::shared_ptr<uml::Type>  other)
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::Association> TypeImpl::createAssociation(bool end1IsNavigable,AggregationKind end1Aggregation,std::string end1Name,int end1Lower,int end1Upper,std::shared_ptr<uml::Type>  end1Type,bool end2IsNavigable,AggregationKind end2Aggregation,std::string end2Name,int end2Lower,int end2Upper)
+std::shared_ptr<uml::Association> TypeImpl::createAssociation(bool end1IsNavigable,uml::AggregationKind end1Aggregation,std::string end1Name,int end1Lower,int end1Upper,std::shared_ptr<uml::Type>  end1Type,bool end2IsNavigable,uml::AggregationKind end2Aggregation,std::string end2Name,int end2Lower,int end2Upper)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -326,8 +327,8 @@ Any TypeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::TYPE_EREFERENCE_PACKAGE:
-			return eAny(getPackage()); //2613
+		case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getPackage().lock())); //24512
 	}
 	return PackageableElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -335,8 +336,8 @@ bool TypeImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::TYPE_EREFERENCE_PACKAGE:
-			return getPackage().lock() != nullptr; //2613
+		case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
+			return getPackage().lock() != nullptr; //24512
 	}
 	return PackageableElementImpl::internalEIsSet(featureID);
 }
@@ -344,11 +345,12 @@ bool TypeImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::TYPE_EREFERENCE_PACKAGE:
+		case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Package> _package = newValue->get<std::shared_ptr<uml::Package>>();
-			setPackage(_package); //2613
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Package> _package = std::dynamic_pointer_cast<uml::Package>(_temp);
+			setPackage(_package); //24512
 			return true;
 		}
 	}
@@ -393,7 +395,7 @@ void TypeImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<
 {
 	switch(featureID)
 	{
-		case UmlPackage::TYPE_EREFERENCE_PACKAGE:
+		case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
 		{
 			if (references.size() == 1)
 			{
@@ -419,7 +421,6 @@ void TypeImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveH
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

@@ -19,7 +19,8 @@
 #include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
-
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/Union.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -30,6 +31,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "ecore/EcoreFactory.hpp"
 #include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "ecore/EcorePackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "ecore/EAnnotation.hpp"
@@ -39,6 +43,8 @@
 #include "ecore/EGenericType.hpp"
 
 #include "ecore/ENamedElement.hpp"
+
+#include "ecore/EObject.hpp"
 
 #include "ecore/EcorePackage.hpp"
 #include "ecore/EcoreFactory.hpp"
@@ -85,6 +91,16 @@ ETypedElementImpl::~ETypedElementImpl()
 }
 
 
+//Additional constructor for the containments back reference
+			ETypedElementImpl::ETypedElementImpl(std::weak_ptr<ecore::EObject > par_eContainer)
+			:ETypedElementImpl()
+			{
+			    m_eContainer = par_eContainer;
+			}
+
+
+
+
 
 
 ETypedElementImpl::ETypedElementImpl(const ETypedElementImpl & obj):ETypedElementImpl()
@@ -95,6 +111,7 @@ ETypedElementImpl::ETypedElementImpl(const ETypedElementImpl & obj):ETypedElemen
 	#endif
 	m_lowerBound = obj.getLowerBound();
 	m_many = obj.isMany();
+	m_metaElementID = obj.getMetaElementID();
 	m_name = obj.getName();
 	m_ordered = obj.isOrdered();
 	m_required = obj.isRequired();
@@ -103,6 +120,8 @@ ETypedElementImpl::ETypedElementImpl(const ETypedElementImpl & obj):ETypedElemen
 
 	//copy references with no containment (soft copy)
 	
+	m_eContainer  = obj.getEContainer();
+
 	m_eType  = obj.getEType();
 
 
@@ -136,7 +155,7 @@ std::shared_ptr<ecore::EObject>  ETypedElementImpl::copy() const
 
 std::shared_ptr<EClass> ETypedElementImpl::eStaticClass() const
 {
-	return EcorePackageImpl::eInstance()->getETypedElement_EClass();
+	return EcorePackageImpl::eInstance()->getETypedElement_Class();
 }
 
 //*********************************
@@ -169,7 +188,10 @@ bool ETypedElementImpl::isOrdered() const
 	return m_ordered;
 }
 
-
+void ETypedElementImpl::setRequired(bool _required)
+{
+	m_required = _required;
+} 
 
 bool ETypedElementImpl::isRequired() const 
 {
@@ -226,6 +248,10 @@ void ETypedElementImpl::setEType(std::shared_ptr<ecore::EClassifier> _eType)
 //*********************************
 // Union Getter
 //*********************************
+std::shared_ptr<Union<ecore::EObject>> ETypedElementImpl::getEContens() const
+{
+	return m_eContens;
+}
 
 
 std::shared_ptr<ETypedElement> ETypedElementImpl::getThisETypedElementPtr() const
@@ -239,6 +265,10 @@ void ETypedElementImpl::setThisETypedElementPtr(std::weak_ptr<ETypedElement> thi
 }
 std::shared_ptr<ecore::EObject> ETypedElementImpl::eContainer() const
 {
+	if(auto wp = m_eContainer.lock())
+	{
+		return wp;
+	}
 	return nullptr;
 }
 
@@ -249,22 +279,22 @@ Any ETypedElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case EcorePackage::ETYPEDELEMENT_EREFERENCE_EGENERICTYPE:
-			return eAny(getEGenericType()); //169
-		case EcorePackage::ETYPEDELEMENT_EREFERENCE_ETYPE:
-			return eAny(getEType()); //168
-		case EcorePackage::ETYPEDELEMENT_EATTRIBUTE_LOWERBOUND:
-			return eAny(getLowerBound()); //164
-		case EcorePackage::ETYPEDELEMENT_EATTRIBUTE_MANY:
-			return eAny(isMany()); //166
-		case EcorePackage::ETYPEDELEMENT_EATTRIBUTE_ORDERED:
-			return eAny(isOrdered()); //162
-		case EcorePackage::ETYPEDELEMENT_EATTRIBUTE_REQUIRED:
-			return eAny(isRequired()); //167
-		case EcorePackage::ETYPEDELEMENT_EATTRIBUTE_UNIQUE:
-			return eAny(isUnique()); //163
-		case EcorePackage::ETYPEDELEMENT_EATTRIBUTE_UPPERBOUND:
-			return eAny(getUpperBound()); //165
+		case EcorePackage::ETYPEDELEMENT_ATTRIBUTE_EGENERICTYPE:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEGenericType())); //5312
+		case EcorePackage::ETYPEDELEMENT_ATTRIBUTE_ETYPE:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEType())); //5311
+		case EcorePackage::ETYPEDELEMENT_ATTRIBUTE_LOWERBOUND:
+			return eAny(getLowerBound()); //537
+		case EcorePackage::ETYPEDELEMENT_ATTRIBUTE_MANY:
+			return eAny(isMany()); //539
+		case EcorePackage::ETYPEDELEMENT_ATTRIBUTE_ORDERED:
+			return eAny(isOrdered()); //535
+		case EcorePackage::ETYPEDELEMENT_ATTRIBUTE_REQUIRED:
+			return eAny(isRequired()); //5310
+		case EcorePackage::ETYPEDELEMENT_ATTRIBUTE_UNIQUE:
+			return eAny(isUnique()); //536
+		case EcorePackage::ETYPEDELEMENT_ATTRIBUTE_UPPERBOUND:
+			return eAny(getUpperBound()); //538
 	}
 	return ENamedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -272,22 +302,22 @@ bool ETypedElementImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case EcorePackage::ETYPEDELEMENT_EREFERENCE_EGENERICTYPE:
-			return getEGenericType() != nullptr; //169
-		case EcorePackage::ETYPEDELEMENT_EREFERENCE_ETYPE:
-			return getEType() != nullptr; //168
-		case EcorePackage::ETYPEDELEMENT_EATTRIBUTE_LOWERBOUND:
-			return getLowerBound() != 0; //164
-		case EcorePackage::ETYPEDELEMENT_EATTRIBUTE_MANY:
-			return isMany() != false; //166
-		case EcorePackage::ETYPEDELEMENT_EATTRIBUTE_ORDERED:
-			return isOrdered() != true; //162
-		case EcorePackage::ETYPEDELEMENT_EATTRIBUTE_REQUIRED:
-			return isRequired() != false; //167
-		case EcorePackage::ETYPEDELEMENT_EATTRIBUTE_UNIQUE:
-			return isUnique() != true; //163
-		case EcorePackage::ETYPEDELEMENT_EATTRIBUTE_UPPERBOUND:
-			return getUpperBound() != 1; //165
+		case EcorePackage::ETYPEDELEMENT_ATTRIBUTE_EGENERICTYPE:
+			return getEGenericType() != nullptr; //5312
+		case EcorePackage::ETYPEDELEMENT_ATTRIBUTE_ETYPE:
+			return getEType() != nullptr; //5311
+		case EcorePackage::ETYPEDELEMENT_ATTRIBUTE_LOWERBOUND:
+			return getLowerBound() != 0; //537
+		case EcorePackage::ETYPEDELEMENT_ATTRIBUTE_MANY:
+			return isMany() != false; //539
+		case EcorePackage::ETYPEDELEMENT_ATTRIBUTE_ORDERED:
+			return isOrdered() != true; //535
+		case EcorePackage::ETYPEDELEMENT_ATTRIBUTE_REQUIRED:
+			return isRequired() != false; //5310
+		case EcorePackage::ETYPEDELEMENT_ATTRIBUTE_UNIQUE:
+			return isUnique() != true; //536
+		case EcorePackage::ETYPEDELEMENT_ATTRIBUTE_UPPERBOUND:
+			return getUpperBound() != 1; //538
 	}
 	return ENamedElementImpl::internalEIsSet(featureID);
 }
@@ -295,46 +325,55 @@ bool ETypedElementImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case EcorePackage::ETYPEDELEMENT_EREFERENCE_EGENERICTYPE:
+		case EcorePackage::ETYPEDELEMENT_ATTRIBUTE_EGENERICTYPE:
 		{
 			// BOOST CAST
-			std::shared_ptr<ecore::EGenericType> _eGenericType = newValue->get<std::shared_ptr<ecore::EGenericType>>();
-			setEGenericType(_eGenericType); //169
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<ecore::EGenericType> _eGenericType = std::dynamic_pointer_cast<ecore::EGenericType>(_temp);
+			setEGenericType(_eGenericType); //5312
 			return true;
 		}
-		case EcorePackage::ETYPEDELEMENT_EREFERENCE_ETYPE:
+		case EcorePackage::ETYPEDELEMENT_ATTRIBUTE_ETYPE:
 		{
 			// BOOST CAST
-			std::shared_ptr<ecore::EClassifier> _eType = newValue->get<std::shared_ptr<ecore::EClassifier>>();
-			setEType(_eType); //168
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<ecore::EClassifier> _eType = std::dynamic_pointer_cast<ecore::EClassifier>(_temp);
+			setEType(_eType); //5311
 			return true;
 		}
-		case EcorePackage::ETYPEDELEMENT_EATTRIBUTE_LOWERBOUND:
+		case EcorePackage::ETYPEDELEMENT_ATTRIBUTE_LOWERBOUND:
 		{
 			// BOOST CAST
 			int _lowerBound = newValue->get<int>();
-			setLowerBound(_lowerBound); //164
+			setLowerBound(_lowerBound); //537
 			return true;
 		}
-		case EcorePackage::ETYPEDELEMENT_EATTRIBUTE_ORDERED:
+		case EcorePackage::ETYPEDELEMENT_ATTRIBUTE_ORDERED:
 		{
 			// BOOST CAST
 			bool _ordered = newValue->get<bool>();
-			setOrdered(_ordered); //162
+			setOrdered(_ordered); //535
 			return true;
 		}
-		case EcorePackage::ETYPEDELEMENT_EATTRIBUTE_UNIQUE:
+		case EcorePackage::ETYPEDELEMENT_ATTRIBUTE_REQUIRED:
+		{
+			// BOOST CAST
+			bool _required = newValue->get<bool>();
+			setRequired(_required); //5310
+			return true;
+		}
+		case EcorePackage::ETYPEDELEMENT_ATTRIBUTE_UNIQUE:
 		{
 			// BOOST CAST
 			bool _unique = newValue->get<bool>();
-			setUnique(_unique); //163
+			setUnique(_unique); //536
 			return true;
 		}
-		case EcorePackage::ETYPEDELEMENT_EATTRIBUTE_UPPERBOUND:
+		case EcorePackage::ETYPEDELEMENT_ATTRIBUTE_UPPERBOUND:
 		{
 			// BOOST CAST
 			int _upperBound = newValue->get<int>();
-			setUpperBound(_upperBound); //165
+			setUpperBound(_upperBound); //538
 			return true;
 		}
 	}
@@ -460,7 +499,7 @@ void ETypedElementImpl::resolveReferences(const int featureID, std::list<std::sh
 {
 	switch(featureID)
 	{
-		case EcorePackage::ETYPEDELEMENT_EREFERENCE_ETYPE:
+		case EcorePackage::ETYPEDELEMENT_ATTRIBUTE_ETYPE:
 		{
 			if (references.size() == 1)
 			{
@@ -483,7 +522,10 @@ void ETypedElementImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandl
 	
 	EModelElementImpl::saveContent(saveHandler);
 	
+	EObjectImpl::saveContent(saveHandler);
+	
 	ecore::EObjectImpl::saveContent(saveHandler);
+	
 	
 	
 }
@@ -497,22 +539,22 @@ void ETypedElementImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getETypedElement_EAttribute_lowerBound()) )
+		if ( this->eIsSet(package->getETypedElement_Attribute_lowerBound()) )
 		{
 			saveHandler->addAttribute("lowerBound", this->getLowerBound());
 		}
 
-		if ( this->eIsSet(package->getETypedElement_EAttribute_ordered()) )
+		if ( this->eIsSet(package->getETypedElement_Attribute_ordered()) )
 		{
 			saveHandler->addAttribute("ordered", this->isOrdered());
 		}
 
-		if ( this->eIsSet(package->getETypedElement_EAttribute_unique()) )
+		if ( this->eIsSet(package->getETypedElement_Attribute_unique()) )
 		{
 			saveHandler->addAttribute("unique", this->isUnique());
 		}
 
-		if ( this->eIsSet(package->getETypedElement_EAttribute_upperBound()) )
+		if ( this->eIsSet(package->getETypedElement_Attribute_upperBound()) )
 		{
 			saveHandler->addAttribute("upperBound", this->getUpperBound());
 		}
@@ -529,7 +571,7 @@ void ETypedElementImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 		std::shared_ptr<ecore::EGenericType > eGenericType = this->getEGenericType();
 		if (eGenericType != nullptr)
 		{
-			saveHandler->addReference(eGenericType, "eGenericType", eGenericType->eClass() != package->getEGenericType_EClass());
+			saveHandler->addReference(eGenericType, "eGenericType", eGenericType->eClass() != package->getEGenericType_Class());
 		}
 	}
 	catch (std::exception& e)

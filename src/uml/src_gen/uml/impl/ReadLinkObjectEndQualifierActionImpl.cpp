@@ -33,6 +33,15 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Action.hpp"
@@ -54,8 +63,6 @@
 #include "uml/Constraint.hpp"
 
 #include "uml/Dependency.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -216,14 +223,6 @@ ReadLinkObjectEndQualifierActionImpl::ReadLinkObjectEndQualifierActionImpl(const
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::ExceptionHandler>> _handlerList = obj.getHandler();
 	for(std::shared_ptr<uml::ExceptionHandler> _handler : *_handlerList)
 	{
@@ -316,7 +315,7 @@ std::shared_ptr<ecore::EObject>  ReadLinkObjectEndQualifierActionImpl::copy() co
 
 std::shared_ptr<ecore::EClass> ReadLinkObjectEndQualifierActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getReadLinkObjectEndQualifierAction_EClass();
+	return UmlPackageImpl::eInstance()->getReadLinkObjectEndQualifierAction_Class();
 }
 
 //*********************************
@@ -476,12 +475,12 @@ Any ReadLinkObjectEndQualifierActionImpl::eGet(int featureID, bool resolve, bool
 {
 	switch(featureID)
 	{
-		case UmlPackage::READLINKOBJECTENDQUALIFIERACTION_EREFERENCE_OBJECT:
-			return eAny(getObject()); //16328
-		case UmlPackage::READLINKOBJECTENDQUALIFIERACTION_EREFERENCE_QUALIFIER:
-			return eAny(getQualifier()); //16329
-		case UmlPackage::READLINKOBJECTENDQUALIFIERACTION_EREFERENCE_RESULT:
-			return eAny(getResult()); //16330
+		case UmlPackage::READLINKOBJECTENDQUALIFIERACTION_ATTRIBUTE_OBJECT:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getObject())); //19827
+		case UmlPackage::READLINKOBJECTENDQUALIFIERACTION_ATTRIBUTE_QUALIFIER:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getQualifier())); //19828
+		case UmlPackage::READLINKOBJECTENDQUALIFIERACTION_ATTRIBUTE_RESULT:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getResult())); //19829
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -489,12 +488,12 @@ bool ReadLinkObjectEndQualifierActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::READLINKOBJECTENDQUALIFIERACTION_EREFERENCE_OBJECT:
-			return getObject() != nullptr; //16328
-		case UmlPackage::READLINKOBJECTENDQUALIFIERACTION_EREFERENCE_QUALIFIER:
-			return getQualifier() != nullptr; //16329
-		case UmlPackage::READLINKOBJECTENDQUALIFIERACTION_EREFERENCE_RESULT:
-			return getResult() != nullptr; //16330
+		case UmlPackage::READLINKOBJECTENDQUALIFIERACTION_ATTRIBUTE_OBJECT:
+			return getObject() != nullptr; //19827
+		case UmlPackage::READLINKOBJECTENDQUALIFIERACTION_ATTRIBUTE_QUALIFIER:
+			return getQualifier() != nullptr; //19828
+		case UmlPackage::READLINKOBJECTENDQUALIFIERACTION_ATTRIBUTE_RESULT:
+			return getResult() != nullptr; //19829
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }
@@ -502,25 +501,28 @@ bool ReadLinkObjectEndQualifierActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::READLINKOBJECTENDQUALIFIERACTION_EREFERENCE_OBJECT:
+		case UmlPackage::READLINKOBJECTENDQUALIFIERACTION_ATTRIBUTE_OBJECT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::InputPin> _object = newValue->get<std::shared_ptr<uml::InputPin>>();
-			setObject(_object); //16328
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::InputPin> _object = std::dynamic_pointer_cast<uml::InputPin>(_temp);
+			setObject(_object); //19827
 			return true;
 		}
-		case UmlPackage::READLINKOBJECTENDQUALIFIERACTION_EREFERENCE_QUALIFIER:
+		case UmlPackage::READLINKOBJECTENDQUALIFIERACTION_ATTRIBUTE_QUALIFIER:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Property> _qualifier = newValue->get<std::shared_ptr<uml::Property>>();
-			setQualifier(_qualifier); //16329
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Property> _qualifier = std::dynamic_pointer_cast<uml::Property>(_temp);
+			setQualifier(_qualifier); //19828
 			return true;
 		}
-		case UmlPackage::READLINKOBJECTENDQUALIFIERACTION_EREFERENCE_RESULT:
+		case UmlPackage::READLINKOBJECTENDQUALIFIERACTION_ATTRIBUTE_RESULT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::OutputPin> _result = newValue->get<std::shared_ptr<uml::OutputPin>>();
-			setResult(_result); //16330
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::OutputPin> _result = std::dynamic_pointer_cast<uml::OutputPin>(_temp);
+			setResult(_result); //19829
 			return true;
 		}
 	}
@@ -626,7 +628,7 @@ void ReadLinkObjectEndQualifierActionImpl::resolveReferences(const int featureID
 {
 	switch(featureID)
 	{
-		case UmlPackage::READLINKOBJECTENDQUALIFIERACTION_EREFERENCE_QUALIFIER:
+		case UmlPackage::READLINKOBJECTENDQUALIFIERACTION_ATTRIBUTE_QUALIFIER:
 		{
 			if (references.size() == 1)
 			{
@@ -658,7 +660,6 @@ void ReadLinkObjectEndQualifierActionImpl::save(std::shared_ptr<persistence::int
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
@@ -681,14 +682,14 @@ void ReadLinkObjectEndQualifierActionImpl::saveContent(std::shared_ptr<persisten
 		std::shared_ptr<uml::InputPin > object = this->getObject();
 		if (object != nullptr)
 		{
-			saveHandler->addReference(object, "object", object->eClass() != package->getInputPin_EClass());
+			saveHandler->addReference(object, "object", object->eClass() != package->getInputPin_Class());
 		}
 
 		// Save 'result'
 		std::shared_ptr<uml::OutputPin > result = this->getResult();
 		if (result != nullptr)
 		{
-			saveHandler->addReference(result, "result", result->eClass() != package->getOutputPin_EClass());
+			saveHandler->addReference(result, "result", result->eClass() != package->getOutputPin_Class());
 		}
 	
 

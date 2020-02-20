@@ -33,6 +33,15 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Activity.hpp"
@@ -56,8 +65,6 @@
 #include "uml/Constraint.hpp"
 
 #include "uml/Dependency.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -219,14 +226,6 @@ StartObjectBehaviorActionImpl::StartObjectBehaviorActionImpl(const StartObjectBe
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_argument" << std::endl;
 	#endif
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::ExceptionHandler>> _handlerList = obj.getHandler();
 	for(std::shared_ptr<uml::ExceptionHandler> _handler : *_handlerList)
 	{
@@ -318,7 +317,7 @@ std::shared_ptr<ecore::EObject>  StartObjectBehaviorActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> StartObjectBehaviorActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getStartObjectBehaviorAction_EClass();
+	return UmlPackageImpl::eInstance()->getStartObjectBehaviorAction_Class();
 }
 
 //*********************************
@@ -434,8 +433,8 @@ Any StartObjectBehaviorActionImpl::eGet(int featureID, bool resolve, bool coreTy
 {
 	switch(featureID)
 	{
-		case UmlPackage::STARTOBJECTBEHAVIORACTION_EREFERENCE_OBJECT:
-			return eAny(getObject()); //17632
+		case UmlPackage::STARTOBJECTBEHAVIORACTION_ATTRIBUTE_OBJECT:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getObject())); //22031
 	}
 	return CallActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -443,8 +442,8 @@ bool StartObjectBehaviorActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::STARTOBJECTBEHAVIORACTION_EREFERENCE_OBJECT:
-			return getObject() != nullptr; //17632
+		case UmlPackage::STARTOBJECTBEHAVIORACTION_ATTRIBUTE_OBJECT:
+			return getObject() != nullptr; //22031
 	}
 	return CallActionImpl::internalEIsSet(featureID);
 }
@@ -452,11 +451,12 @@ bool StartObjectBehaviorActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::STARTOBJECTBEHAVIORACTION_EREFERENCE_OBJECT:
+		case UmlPackage::STARTOBJECTBEHAVIORACTION_ATTRIBUTE_OBJECT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::InputPin> _object = newValue->get<std::shared_ptr<uml::InputPin>>();
-			setObject(_object); //17632
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::InputPin> _object = std::dynamic_pointer_cast<uml::InputPin>(_temp);
+			setObject(_object); //22031
 			return true;
 		}
 	}
@@ -549,7 +549,6 @@ void StartObjectBehaviorActionImpl::save(std::shared_ptr<persistence::interfaces
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
@@ -574,7 +573,7 @@ void StartObjectBehaviorActionImpl::saveContent(std::shared_ptr<persistence::int
 		std::shared_ptr<uml::InputPin > object = this->getObject();
 		if (object != nullptr)
 		{
-			saveHandler->addReference(object, "object", object->eClass() != package->getInputPin_EClass());
+			saveHandler->addReference(object, "object", object->eClass() != package->getInputPin_Class());
 		}
 	
 

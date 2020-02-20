@@ -33,6 +33,10 @@ namespace ecore
 			virtual std::shared_ptr<ETypeParameter> getThisETypeParameterPtr() const;
 			virtual void setThisETypeParameterPtr(std::weak_ptr<ETypeParameter> thisETypeParameterPtr);
 
+			//Additional constructors for the containments back reference
+			ETypeParameterImpl(std::weak_ptr<ecore::EObject > par_eContainer);
+
+
 
 
 		public:
@@ -61,7 +65,9 @@ namespace ecore
 			//*********************************
 			// Union Getter
 			//*********************************
-			 
+			/*!
+			 */
+			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

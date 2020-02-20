@@ -8,6 +8,7 @@ task buildFUML() {
 	dependsOn 'src_gen:compileFUML'
 
 	dependsOn getRootProject().getTasksByName('buildEcore', true)
+	dependsOn getRootProject().getTasksByName('buildTypes', true)
 	dependsOn getRootProject().getTasksByName('buildUml', true)
 }
 

@@ -32,13 +32,16 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
 
 #include "uml/Dependency.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -138,14 +141,6 @@ MessageEndImpl::MessageEndImpl(const MessageEndImpl & obj):MessageEndImpl()
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	if(obj.getNameExpression()!=nullptr)
 	{
 		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
@@ -173,7 +168,7 @@ std::shared_ptr<ecore::EObject>  MessageEndImpl::copy() const
 
 std::shared_ptr<ecore::EClass> MessageEndImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getMessageEnd_EClass();
+	return UmlPackageImpl::eInstance()->getMessageEnd_Class();
 }
 
 //*********************************
@@ -263,8 +258,8 @@ Any MessageEndImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::MESSAGEEND_EREFERENCE_MESSAGE:
-			return eAny(getMessage()); //21710
+		case UmlPackage::MESSAGEEND_ATTRIBUTE_MESSAGE:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getMessage())); //1499
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -272,8 +267,8 @@ bool MessageEndImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::MESSAGEEND_EREFERENCE_MESSAGE:
-			return getMessage() != nullptr; //21710
+		case UmlPackage::MESSAGEEND_ATTRIBUTE_MESSAGE:
+			return getMessage() != nullptr; //1499
 	}
 	return NamedElementImpl::internalEIsSet(featureID);
 }
@@ -281,11 +276,12 @@ bool MessageEndImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::MESSAGEEND_EREFERENCE_MESSAGE:
+		case UmlPackage::MESSAGEEND_ATTRIBUTE_MESSAGE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Message> _message = newValue->get<std::shared_ptr<uml::Message>>();
-			setMessage(_message); //21710
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Message> _message = std::dynamic_pointer_cast<uml::Message>(_temp);
+			setMessage(_message); //1499
 			return true;
 		}
 	}
@@ -349,7 +345,7 @@ void MessageEndImpl::resolveReferences(const int featureID, std::list<std::share
 {
 	switch(featureID)
 	{
-		case UmlPackage::MESSAGEEND_EREFERENCE_MESSAGE:
+		case UmlPackage::MESSAGEEND_ATTRIBUTE_MESSAGE:
 		{
 			if (references.size() == 1)
 			{
@@ -372,7 +368,6 @@ void MessageEndImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler>
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

@@ -67,11 +67,6 @@ namespace ecore
 
 namespace ecore 
 {
-	class EModelElement;
-}
-
-namespace ecore 
-{
 	class EObject;
 }
 
@@ -106,8 +101,6 @@ namespace uml
 }
 
 // base class includes
-#include "ecore/EModelElement.hpp"
-
 #include "uml/Object.hpp"
 
 // enum includes
@@ -119,7 +112,7 @@ namespace uml
 	/*!
 	 An Element is a constituent of a model. As such, it has the capability of owning other Elements.
 	<p>From package UML::CommonStructure.</p> */
-	class Element:virtual public ecore::EModelElement,virtual public Object
+	class Element:virtual public Object
 	{
 		public:
  			Element(const Element &) {}

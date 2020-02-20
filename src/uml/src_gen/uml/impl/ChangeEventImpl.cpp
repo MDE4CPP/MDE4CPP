@@ -32,13 +32,20 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
 
 #include "uml/Dependency.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -173,14 +180,6 @@ ChangeEventImpl::ChangeEventImpl(const ChangeEventImpl & obj):ChangeEventImpl()
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_changeExpression" << std::endl;
 	#endif
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	if(obj.getNameExpression()!=nullptr)
 	{
 		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
@@ -209,7 +208,7 @@ std::shared_ptr<ecore::EObject>  ChangeEventImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ChangeEventImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getChangeEvent_EClass();
+	return UmlPackageImpl::eInstance()->getChangeEvent_Class();
 }
 
 //*********************************
@@ -290,8 +289,8 @@ Any ChangeEventImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::CHANGEEVENT_EREFERENCE_CHANGEEXPRESSION:
-			return eAny(getChangeExpression()); //19813
+		case UmlPackage::CHANGEEVENT_ATTRIBUTE_CHANGEEXPRESSION:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getChangeExpression())); //3512
 	}
 	return EventImpl::eGet(featureID, resolve, coreType);
 }
@@ -299,8 +298,8 @@ bool ChangeEventImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::CHANGEEVENT_EREFERENCE_CHANGEEXPRESSION:
-			return getChangeExpression() != nullptr; //19813
+		case UmlPackage::CHANGEEVENT_ATTRIBUTE_CHANGEEXPRESSION:
+			return getChangeExpression() != nullptr; //3512
 	}
 	return EventImpl::internalEIsSet(featureID);
 }
@@ -308,11 +307,12 @@ bool ChangeEventImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::CHANGEEVENT_EREFERENCE_CHANGEEXPRESSION:
+		case UmlPackage::CHANGEEVENT_ATTRIBUTE_CHANGEEXPRESSION:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::ValueSpecification> _changeExpression = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
-			setChangeExpression(_changeExpression); //19813
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::ValueSpecification> _changeExpression = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
+			setChangeExpression(_changeExpression); //3512
 			return true;
 		}
 	}
@@ -398,7 +398,6 @@ void ChangeEventImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
@@ -419,7 +418,7 @@ void ChangeEventImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 		std::shared_ptr<uml::ValueSpecification > changeExpression = this->getChangeExpression();
 		if (changeExpression != nullptr)
 		{
-			saveHandler->addReference(changeExpression, "changeExpression", changeExpression->eClass() != package->getValueSpecification_EClass());
+			saveHandler->addReference(changeExpression, "changeExpression", changeExpression->eClass() != package->getValueSpecification_Class());
 		}
 	
 

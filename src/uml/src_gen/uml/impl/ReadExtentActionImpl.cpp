@@ -33,6 +33,15 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Action.hpp"
@@ -54,8 +63,6 @@
 #include "uml/Constraint.hpp"
 
 #include "uml/Dependency.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -210,14 +217,6 @@ ReadExtentActionImpl::ReadExtentActionImpl(const ReadExtentActionImpl & obj):Rea
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::ExceptionHandler>> _handlerList = obj.getHandler();
 	for(std::shared_ptr<uml::ExceptionHandler> _handler : *_handlerList)
 	{
@@ -301,7 +300,7 @@ std::shared_ptr<ecore::EObject>  ReadExtentActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ReadExtentActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getReadExtentAction_EClass();
+	return UmlPackageImpl::eInstance()->getReadExtentAction_Class();
 }
 
 //*********************************
@@ -411,10 +410,10 @@ Any ReadExtentActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::READEXTENTACTION_EREFERENCE_CLASSIFIER:
-			return eAny(getClassifier()); //15928
-		case UmlPackage::READEXTENTACTION_EREFERENCE_RESULT:
-			return eAny(getResult()); //15929
+		case UmlPackage::READEXTENTACTION_ATTRIBUTE_CLASSIFIER:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getClassifier())); //19427
+		case UmlPackage::READEXTENTACTION_ATTRIBUTE_RESULT:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getResult())); //19428
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -422,10 +421,10 @@ bool ReadExtentActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::READEXTENTACTION_EREFERENCE_CLASSIFIER:
-			return getClassifier() != nullptr; //15928
-		case UmlPackage::READEXTENTACTION_EREFERENCE_RESULT:
-			return getResult() != nullptr; //15929
+		case UmlPackage::READEXTENTACTION_ATTRIBUTE_CLASSIFIER:
+			return getClassifier() != nullptr; //19427
+		case UmlPackage::READEXTENTACTION_ATTRIBUTE_RESULT:
+			return getResult() != nullptr; //19428
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }
@@ -433,18 +432,20 @@ bool ReadExtentActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::READEXTENTACTION_EREFERENCE_CLASSIFIER:
+		case UmlPackage::READEXTENTACTION_ATTRIBUTE_CLASSIFIER:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Classifier> _classifier = newValue->get<std::shared_ptr<uml::Classifier>>();
-			setClassifier(_classifier); //15928
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Classifier> _classifier = std::dynamic_pointer_cast<uml::Classifier>(_temp);
+			setClassifier(_classifier); //19427
 			return true;
 		}
-		case UmlPackage::READEXTENTACTION_EREFERENCE_RESULT:
+		case UmlPackage::READEXTENTACTION_ATTRIBUTE_RESULT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::OutputPin> _result = newValue->get<std::shared_ptr<uml::OutputPin>>();
-			setResult(_result); //15929
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::OutputPin> _result = std::dynamic_pointer_cast<uml::OutputPin>(_temp);
+			setResult(_result); //19428
 			return true;
 		}
 	}
@@ -534,7 +535,7 @@ void ReadExtentActionImpl::resolveReferences(const int featureID, std::list<std:
 {
 	switch(featureID)
 	{
-		case UmlPackage::READEXTENTACTION_EREFERENCE_CLASSIFIER:
+		case UmlPackage::READEXTENTACTION_ATTRIBUTE_CLASSIFIER:
 		{
 			if (references.size() == 1)
 			{
@@ -566,7 +567,6 @@ void ReadExtentActionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHa
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
@@ -589,7 +589,7 @@ void ReadExtentActionImpl::saveContent(std::shared_ptr<persistence::interfaces::
 		std::shared_ptr<uml::OutputPin > result = this->getResult();
 		if (result != nullptr)
 		{
-			saveHandler->addReference(result, "result", result->eClass() != package->getOutputPin_EClass());
+			saveHandler->addReference(result, "result", result->eClass() != package->getOutputPin_Class());
 		}
 	
 

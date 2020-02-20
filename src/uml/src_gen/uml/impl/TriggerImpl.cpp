@@ -33,13 +33,16 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
 
 #include "uml/Dependency.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -147,14 +150,6 @@ TriggerImpl::TriggerImpl(const TriggerImpl & obj):TriggerImpl()
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	if(obj.getNameExpression()!=nullptr)
 	{
 		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
@@ -182,7 +177,7 @@ std::shared_ptr<ecore::EObject>  TriggerImpl::copy() const
 
 std::shared_ptr<ecore::EClass> TriggerImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getTrigger_EClass();
+	return UmlPackageImpl::eInstance()->getTrigger_Class();
 }
 
 //*********************************
@@ -261,10 +256,20 @@ Any TriggerImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::TRIGGER_EREFERENCE_EVENT:
-			return eAny(getEvent()); //6510
-		case UmlPackage::TRIGGER_EREFERENCE_PORT:
-			return eAny(getPort()); //6511
+		case UmlPackage::TRIGGER_ATTRIBUTE_EVENT:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEvent())); //2449
+		case UmlPackage::TRIGGER_ATTRIBUTE_PORT:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Port>::iterator iter = m_port->begin();
+			Bag<uml::Port>::iterator end = m_port->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //24410
+		}
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -272,10 +277,10 @@ bool TriggerImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::TRIGGER_EREFERENCE_EVENT:
-			return getEvent() != nullptr; //6510
-		case UmlPackage::TRIGGER_EREFERENCE_PORT:
-			return getPort() != nullptr; //6511
+		case UmlPackage::TRIGGER_ATTRIBUTE_EVENT:
+			return getEvent() != nullptr; //2449
+		case UmlPackage::TRIGGER_ATTRIBUTE_PORT:
+			return getPort() != nullptr; //24410
 	}
 	return NamedElementImpl::internalEIsSet(featureID);
 }
@@ -283,11 +288,48 @@ bool TriggerImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::TRIGGER_EREFERENCE_EVENT:
+		case UmlPackage::TRIGGER_ATTRIBUTE_EVENT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Event> _event = newValue->get<std::shared_ptr<uml::Event>>();
-			setEvent(_event); //6510
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Event> _event = std::dynamic_pointer_cast<uml::Event>(_temp);
+			setEvent(_event); //2449
+			return true;
+		}
+		case UmlPackage::TRIGGER_ATTRIBUTE_PORT:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Port>> portList(new Bag<uml::Port>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				portList->add(std::dynamic_pointer_cast<uml::Port>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Port>::iterator iterPort = m_port->begin();
+			Bag<uml::Port>::iterator endPort = m_port->end();
+			while (iterPort != endPort)
+			{
+				if (portList->find(*iterPort) == -1)
+				{
+					m_port->erase(*iterPort);
+				}
+				iterPort++;
+			}
+
+			iterPort = portList->begin();
+			endPort = portList->end();
+			while (iterPort != endPort)
+			{
+				if (m_port->find(*iterPort) == -1)
+				{
+					m_port->add(*iterPort);
+				}
+				iterPort++;			
+			}
 			return true;
 		}
 	}
@@ -358,7 +400,7 @@ void TriggerImpl::resolveReferences(const int featureID, std::list<std::shared_p
 {
 	switch(featureID)
 	{
-		case UmlPackage::TRIGGER_EREFERENCE_EVENT:
+		case UmlPackage::TRIGGER_ATTRIBUTE_EVENT:
 		{
 			if (references.size() == 1)
 			{
@@ -370,7 +412,7 @@ void TriggerImpl::resolveReferences(const int featureID, std::list<std::shared_p
 			return;
 		}
 
-		case UmlPackage::TRIGGER_EREFERENCE_PORT:
+		case UmlPackage::TRIGGER_ATTRIBUTE_PORT:
 		{
 			std::shared_ptr<Bag<uml::Port>> _port = getPort();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -395,7 +437,6 @@ void TriggerImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> sa
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

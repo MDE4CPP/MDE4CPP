@@ -33,6 +33,17 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Association.hpp"
@@ -48,8 +59,6 @@
 #include "uml/Constraint.hpp"
 
 #include "uml/Dependency.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -151,24 +160,24 @@ ExtensionImpl::~ExtensionImpl()
 
 
 //Additional constructor for the containments back reference
-			ExtensionImpl::ExtensionImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id)
-			:ExtensionImpl()
-			{
-				switch(reference_id)
-				{	
-				case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
-					m_owningPackage = par_Package;
-					m_namespace = par_Package;
-					 return;
-				case UmlPackage::TYPE_EREFERENCE_PACKAGE:
-					m_package = par_Package;
-					m_namespace = par_Package;
-					 return;
-				default:
-				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
-				}
-			   
-			}
+ExtensionImpl::ExtensionImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id)
+:ExtensionImpl()
+{
+	switch(reference_id)
+	{	
+	case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
+		m_owningPackage = par_Package;
+		m_namespace = par_Package;
+		 return;
+	case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
+		m_package = par_Package;
+		m_namespace = par_Package;
+		 return;
+	default:
+	std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
+	}
+   
+}
 
 
 
@@ -258,14 +267,6 @@ ExtensionImpl::ExtensionImpl(const ExtensionImpl & obj):ExtensionImpl()
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_collaborationUse" << std::endl;
-	#endif
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
 	#endif
 	std::shared_ptr<Bag<uml::ElementImport>> _elementImportList = obj.getElementImport();
 	for(std::shared_ptr<uml::ElementImport> _elementImport : *_elementImportList)
@@ -420,7 +421,7 @@ std::shared_ptr<ecore::EObject>  ExtensionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ExtensionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getExtension_EClass();
+	return UmlPackageImpl::eInstance()->getExtension_Class();
 }
 
 //*********************************
@@ -566,10 +567,10 @@ Any ExtensionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::EXTENSION_EATTRIBUTE_ISREQUIRED:
-			return eAny(getIsRequired()); //8445
-		case UmlPackage::EXTENSION_EREFERENCE_METACLASS:
-			return eAny(getMetaclass()); //8446
+		case UmlPackage::EXTENSION_ATTRIBUTE_ISREQUIRED:
+			return eAny(getIsRequired()); //9844
+		case UmlPackage::EXTENSION_ATTRIBUTE_METACLASS:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getMetaclass())); //9845
 	}
 	return AssociationImpl::eGet(featureID, resolve, coreType);
 }
@@ -577,10 +578,10 @@ bool ExtensionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::EXTENSION_EATTRIBUTE_ISREQUIRED:
-			return getIsRequired() != false; //8445
-		case UmlPackage::EXTENSION_EREFERENCE_METACLASS:
-			return getMetaclass() != nullptr; //8446
+		case UmlPackage::EXTENSION_ATTRIBUTE_ISREQUIRED:
+			return getIsRequired() != false; //9844
+		case UmlPackage::EXTENSION_ATTRIBUTE_METACLASS:
+			return getMetaclass() != nullptr; //9845
 	}
 	return AssociationImpl::internalEIsSet(featureID);
 }
@@ -652,7 +653,6 @@ void ExtensionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> 
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

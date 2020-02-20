@@ -33,6 +33,15 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Activity.hpp"
@@ -52,8 +61,6 @@
 #include "uml/Constraint.hpp"
 
 #include "uml/Dependency.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -220,14 +227,6 @@ SendObjectActionImpl::SendObjectActionImpl(const SendObjectActionImpl & obj):Sen
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_argument" << std::endl;
 	#endif
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::ExceptionHandler>> _handlerList = obj.getHandler();
 	for(std::shared_ptr<uml::ExceptionHandler> _handler : *_handlerList)
 	{
@@ -320,7 +319,7 @@ std::shared_ptr<ecore::EObject>  SendObjectActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> SendObjectActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getSendObjectAction_EClass();
+	return UmlPackageImpl::eInstance()->getSendObjectAction_Class();
 }
 
 //*********************************
@@ -424,10 +423,10 @@ Any SendObjectActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::SENDOBJECTACTION_EREFERENCE_REQUEST:
-			return eAny(getRequest()); //17230
-		case UmlPackage::SENDOBJECTACTION_EREFERENCE_TARGET:
-			return eAny(getTarget()); //17231
+		case UmlPackage::SENDOBJECTACTION_ATTRIBUTE_REQUEST:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getRequest())); //21329
+		case UmlPackage::SENDOBJECTACTION_ATTRIBUTE_TARGET:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getTarget())); //21330
 	}
 	return InvocationActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -435,10 +434,10 @@ bool SendObjectActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::SENDOBJECTACTION_EREFERENCE_REQUEST:
-			return getRequest() != nullptr; //17230
-		case UmlPackage::SENDOBJECTACTION_EREFERENCE_TARGET:
-			return getTarget() != nullptr; //17231
+		case UmlPackage::SENDOBJECTACTION_ATTRIBUTE_REQUEST:
+			return getRequest() != nullptr; //21329
+		case UmlPackage::SENDOBJECTACTION_ATTRIBUTE_TARGET:
+			return getTarget() != nullptr; //21330
 	}
 	return InvocationActionImpl::internalEIsSet(featureID);
 }
@@ -446,18 +445,20 @@ bool SendObjectActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::SENDOBJECTACTION_EREFERENCE_REQUEST:
+		case UmlPackage::SENDOBJECTACTION_ATTRIBUTE_REQUEST:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::InputPin> _request = newValue->get<std::shared_ptr<uml::InputPin>>();
-			setRequest(_request); //17230
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::InputPin> _request = std::dynamic_pointer_cast<uml::InputPin>(_temp);
+			setRequest(_request); //21329
 			return true;
 		}
-		case UmlPackage::SENDOBJECTACTION_EREFERENCE_TARGET:
+		case UmlPackage::SENDOBJECTACTION_ATTRIBUTE_TARGET:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::InputPin> _target = newValue->get<std::shared_ptr<uml::InputPin>>();
-			setTarget(_target); //17231
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::InputPin> _target = std::dynamic_pointer_cast<uml::InputPin>(_temp);
+			setTarget(_target); //21330
 			return true;
 		}
 	}
@@ -564,7 +565,6 @@ void SendObjectActionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHa
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
@@ -588,7 +588,7 @@ void SendObjectActionImpl::saveContent(std::shared_ptr<persistence::interfaces::
 		std::shared_ptr<uml::InputPin > target = this->getTarget();
 		if (target != nullptr)
 		{
-			saveHandler->addReference(target, "target", target->eClass() != package->getInputPin_EClass());
+			saveHandler->addReference(target, "target", target->eClass() != package->getInputPin_Class());
 		}
 	
 
@@ -601,7 +601,7 @@ void SendObjectActionImpl::saveContent(std::shared_ptr<persistence::interfaces::
 		std::shared_ptr<uml::InputPin > request = this->getRequest();
 		if (request != nullptr)
 		{
-			saveHandler->addReference(request, "request", request->eClass() != package->getInputPin_EClass());
+			saveHandler->addReference(request, "request", request->eClass() != package->getInputPin_Class());
 		}
 	}
 	catch (std::exception& e)

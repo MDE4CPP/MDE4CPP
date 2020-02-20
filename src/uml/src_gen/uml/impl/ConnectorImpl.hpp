@@ -60,7 +60,7 @@ namespace uml
 			else ConnectorKind::assembly 
 			endif)
 			<p>From package UML::StructuredClassifiers.</p> */ 
-			virtual ConnectorKind getKind() ;
+			virtual uml::ConnectorKind getKind() ;
 			
 			/*!
 			 The ConnectableElements attached as roles to each ConnectorEnd owned by a Connector must be owned or inherited roles of the Classifier that owned the Connector, or they must be Ports of such roles.
@@ -86,7 +86,7 @@ namespace uml
 			/*!
 			 Indicates the kind of Connector. This is derived: a Connector with one or more ends connected to a Port which is not on a Part and which is not a behavior port is a delegation; otherwise it is an assembly.
 			<p>From package UML::StructuredClassifiers.</p> */ 
-			virtual ConnectorKind getKind() const ;
+			virtual uml::ConnectorKind getKind() const ;
 			
 			
 			

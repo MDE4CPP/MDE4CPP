@@ -33,6 +33,15 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Activity.hpp"
@@ -54,8 +63,6 @@
 #include "uml/ControlNode.hpp"
 
 #include "uml/Dependency.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -205,14 +212,6 @@ DecisionNodeImpl::DecisionNodeImpl(const DecisionNodeImpl & obj):DecisionNodeImp
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::InterruptibleActivityRegion>> _inInterruptibleRegionList = obj.getInInterruptibleRegion();
 	for(std::shared_ptr<uml::InterruptibleActivityRegion> _inInterruptibleRegion : *_inInterruptibleRegionList)
 	{
@@ -264,7 +263,7 @@ std::shared_ptr<ecore::EObject>  DecisionNodeImpl::copy() const
 
 std::shared_ptr<ecore::EClass> DecisionNodeImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getDecisionNode_EClass();
+	return UmlPackageImpl::eInstance()->getDecisionNode_Class();
 }
 
 //*********************************
@@ -406,10 +405,10 @@ Any DecisionNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::DECISIONNODE_EREFERENCE_DECISIONINPUT:
-			return eAny(getDecisionInput()); //18721
-		case UmlPackage::DECISIONNODE_EREFERENCE_DECISIONINPUTFLOW:
-			return eAny(getDecisionInputFlow()); //18722
+		case UmlPackage::DECISIONNODE_ATTRIBUTE_DECISIONINPUT:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getDecisionInput())); //6720
+		case UmlPackage::DECISIONNODE_ATTRIBUTE_DECISIONINPUTFLOW:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getDecisionInputFlow())); //6721
 	}
 	return ControlNodeImpl::eGet(featureID, resolve, coreType);
 }
@@ -417,10 +416,10 @@ bool DecisionNodeImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::DECISIONNODE_EREFERENCE_DECISIONINPUT:
-			return getDecisionInput() != nullptr; //18721
-		case UmlPackage::DECISIONNODE_EREFERENCE_DECISIONINPUTFLOW:
-			return getDecisionInputFlow() != nullptr; //18722
+		case UmlPackage::DECISIONNODE_ATTRIBUTE_DECISIONINPUT:
+			return getDecisionInput() != nullptr; //6720
+		case UmlPackage::DECISIONNODE_ATTRIBUTE_DECISIONINPUTFLOW:
+			return getDecisionInputFlow() != nullptr; //6721
 	}
 	return ControlNodeImpl::internalEIsSet(featureID);
 }
@@ -428,18 +427,20 @@ bool DecisionNodeImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::DECISIONNODE_EREFERENCE_DECISIONINPUT:
+		case UmlPackage::DECISIONNODE_ATTRIBUTE_DECISIONINPUT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Behavior> _decisionInput = newValue->get<std::shared_ptr<uml::Behavior>>();
-			setDecisionInput(_decisionInput); //18721
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Behavior> _decisionInput = std::dynamic_pointer_cast<uml::Behavior>(_temp);
+			setDecisionInput(_decisionInput); //6720
 			return true;
 		}
-		case UmlPackage::DECISIONNODE_EREFERENCE_DECISIONINPUTFLOW:
+		case UmlPackage::DECISIONNODE_ATTRIBUTE_DECISIONINPUTFLOW:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::ObjectFlow> _decisionInputFlow = newValue->get<std::shared_ptr<uml::ObjectFlow>>();
-			setDecisionInputFlow(_decisionInputFlow); //18722
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::ObjectFlow> _decisionInputFlow = std::dynamic_pointer_cast<uml::ObjectFlow>(_temp);
+			setDecisionInputFlow(_decisionInputFlow); //6721
 			return true;
 		}
 	}
@@ -510,7 +511,7 @@ void DecisionNodeImpl::resolveReferences(const int featureID, std::list<std::sha
 {
 	switch(featureID)
 	{
-		case UmlPackage::DECISIONNODE_EREFERENCE_DECISIONINPUT:
+		case UmlPackage::DECISIONNODE_ATTRIBUTE_DECISIONINPUT:
 		{
 			if (references.size() == 1)
 			{
@@ -522,7 +523,7 @@ void DecisionNodeImpl::resolveReferences(const int featureID, std::list<std::sha
 			return;
 		}
 
-		case UmlPackage::DECISIONNODE_EREFERENCE_DECISIONINPUTFLOW:
+		case UmlPackage::DECISIONNODE_ATTRIBUTE_DECISIONINPUTFLOW:
 		{
 			if (references.size() == 1)
 			{
@@ -552,7 +553,6 @@ void DecisionNodeImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandle
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

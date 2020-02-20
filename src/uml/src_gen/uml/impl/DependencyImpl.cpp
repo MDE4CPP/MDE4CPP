@@ -32,6 +32,15 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
@@ -39,8 +48,6 @@
 #include "uml/Dependency.hpp"
 
 #include "uml/DirectedRelationship.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -207,14 +214,6 @@ DependencyImpl::DependencyImpl(const DependencyImpl & obj):DependencyImpl()
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_client" << std::endl;
 	#endif
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	if(obj.getNameExpression()!=nullptr)
 	{
 		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
@@ -250,7 +249,7 @@ std::shared_ptr<ecore::EObject>  DependencyImpl::copy() const
 
 std::shared_ptr<ecore::EClass> DependencyImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getDependency_EClass();
+	return UmlPackageImpl::eInstance()->getDependency_Class();
 }
 
 //*********************************
@@ -348,10 +347,30 @@ Any DependencyImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::DEPENDENCY_EREFERENCE_CLIENT:
-			return eAny(getClient()); //3716
-		case UmlPackage::DEPENDENCY_EREFERENCE_SUPPLIER:
-			return eAny(getSupplier()); //3717
+		case UmlPackage::DEPENDENCY_ATTRIBUTE_CLIENT:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::NamedElement>::iterator iter = m_client->begin();
+			Bag<uml::NamedElement>::iterator end = m_client->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //6815
+		}
+		case UmlPackage::DEPENDENCY_ATTRIBUTE_SUPPLIER:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::NamedElement>::iterator iter = m_supplier->begin();
+			Bag<uml::NamedElement>::iterator end = m_supplier->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //6816
+		}
 	}
 	Any result;
 	result = DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
@@ -366,10 +385,10 @@ bool DependencyImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::DEPENDENCY_EREFERENCE_CLIENT:
-			return getClient() != nullptr; //3716
-		case UmlPackage::DEPENDENCY_EREFERENCE_SUPPLIER:
-			return getSupplier() != nullptr; //3717
+		case UmlPackage::DEPENDENCY_ATTRIBUTE_CLIENT:
+			return getClient() != nullptr; //6815
+		case UmlPackage::DEPENDENCY_ATTRIBUTE_SUPPLIER:
+			return getSupplier() != nullptr; //6816
 	}
 	bool result = false;
 	result = DirectedRelationshipImpl::internalEIsSet(featureID);
@@ -384,6 +403,78 @@ bool DependencyImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
+		case UmlPackage::DEPENDENCY_ATTRIBUTE_CLIENT:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::NamedElement>> clientList(new Bag<uml::NamedElement>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				clientList->add(std::dynamic_pointer_cast<uml::NamedElement>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::NamedElement>::iterator iterClient = m_client->begin();
+			Bag<uml::NamedElement>::iterator endClient = m_client->end();
+			while (iterClient != endClient)
+			{
+				if (clientList->find(*iterClient) == -1)
+				{
+					m_client->erase(*iterClient);
+				}
+				iterClient++;
+			}
+
+			iterClient = clientList->begin();
+			endClient = clientList->end();
+			while (iterClient != endClient)
+			{
+				if (m_client->find(*iterClient) == -1)
+				{
+					m_client->add(*iterClient);
+				}
+				iterClient++;			
+			}
+			return true;
+		}
+		case UmlPackage::DEPENDENCY_ATTRIBUTE_SUPPLIER:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::NamedElement>> supplierList(new Bag<uml::NamedElement>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				supplierList->add(std::dynamic_pointer_cast<uml::NamedElement>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::NamedElement>::iterator iterSupplier = m_supplier->begin();
+			Bag<uml::NamedElement>::iterator endSupplier = m_supplier->end();
+			while (iterSupplier != endSupplier)
+			{
+				if (supplierList->find(*iterSupplier) == -1)
+				{
+					m_supplier->erase(*iterSupplier);
+				}
+				iterSupplier++;
+			}
+
+			iterSupplier = supplierList->begin();
+			endSupplier = supplierList->end();
+			while (iterSupplier != endSupplier)
+			{
+				if (m_supplier->find(*iterSupplier) == -1)
+				{
+					m_supplier->add(*iterSupplier);
+				}
+				iterSupplier++;			
+			}
+			return true;
+		}
 	}
 
 	bool result = false;
@@ -461,7 +552,7 @@ void DependencyImpl::resolveReferences(const int featureID, std::list<std::share
 {
 	switch(featureID)
 	{
-		case UmlPackage::DEPENDENCY_EREFERENCE_CLIENT:
+		case UmlPackage::DEPENDENCY_ATTRIBUTE_CLIENT:
 		{
 			std::shared_ptr<Bag<uml::NamedElement>> _client = getClient();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -475,7 +566,7 @@ void DependencyImpl::resolveReferences(const int featureID, std::list<std::share
 			return;
 		}
 
-		case UmlPackage::DEPENDENCY_EREFERENCE_SUPPLIER:
+		case UmlPackage::DEPENDENCY_ATTRIBUTE_SUPPLIER:
 		{
 			std::shared_ptr<Bag<uml::NamedElement>> _supplier = getSupplier();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -506,7 +597,6 @@ void DependencyImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler>
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

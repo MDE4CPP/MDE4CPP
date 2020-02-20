@@ -33,6 +33,15 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Activity.hpp"
@@ -52,8 +61,6 @@
 #include "uml/Comment.hpp"
 
 #include "uml/Dependency.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -206,14 +213,6 @@ ObjectFlowImpl::ObjectFlowImpl(const ObjectFlowImpl & obj):ObjectFlowImpl()
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	if(obj.getGuard()!=nullptr)
 	{
 		m_guard = std::dynamic_pointer_cast<uml::ValueSpecification>(obj.getGuard()->copy());
@@ -271,7 +270,7 @@ std::shared_ptr<ecore::EObject>  ObjectFlowImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ObjectFlowImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getObjectFlow_EClass();
+	return UmlPackageImpl::eInstance()->getObjectFlow_Class();
 }
 
 //*********************************
@@ -432,14 +431,14 @@ Any ObjectFlowImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::OBJECTFLOW_EATTRIBUTE_ISMULTICAST:
-			return eAny(getIsMulticast()); //18823
-		case UmlPackage::OBJECTFLOW_EATTRIBUTE_ISMULTIRECEIVE:
-			return eAny(getIsMultireceive()); //18824
-		case UmlPackage::OBJECTFLOW_EREFERENCE_SELECTION:
-			return eAny(getSelection()); //18825
-		case UmlPackage::OBJECTFLOW_EREFERENCE_TRANSFORMATION:
-			return eAny(getTransformation()); //18826
+		case UmlPackage::OBJECTFLOW_ATTRIBUTE_ISMULTICAST:
+			return eAny(getIsMulticast()); //16022
+		case UmlPackage::OBJECTFLOW_ATTRIBUTE_ISMULTIRECEIVE:
+			return eAny(getIsMultireceive()); //16023
+		case UmlPackage::OBJECTFLOW_ATTRIBUTE_SELECTION:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSelection())); //16024
+		case UmlPackage::OBJECTFLOW_ATTRIBUTE_TRANSFORMATION:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getTransformation())); //16025
 	}
 	return ActivityEdgeImpl::eGet(featureID, resolve, coreType);
 }
@@ -447,14 +446,14 @@ bool ObjectFlowImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::OBJECTFLOW_EATTRIBUTE_ISMULTICAST:
-			return getIsMulticast() != false; //18823
-		case UmlPackage::OBJECTFLOW_EATTRIBUTE_ISMULTIRECEIVE:
-			return getIsMultireceive() != false; //18824
-		case UmlPackage::OBJECTFLOW_EREFERENCE_SELECTION:
-			return getSelection() != nullptr; //18825
-		case UmlPackage::OBJECTFLOW_EREFERENCE_TRANSFORMATION:
-			return getTransformation() != nullptr; //18826
+		case UmlPackage::OBJECTFLOW_ATTRIBUTE_ISMULTICAST:
+			return getIsMulticast() != false; //16022
+		case UmlPackage::OBJECTFLOW_ATTRIBUTE_ISMULTIRECEIVE:
+			return getIsMultireceive() != false; //16023
+		case UmlPackage::OBJECTFLOW_ATTRIBUTE_SELECTION:
+			return getSelection() != nullptr; //16024
+		case UmlPackage::OBJECTFLOW_ATTRIBUTE_TRANSFORMATION:
+			return getTransformation() != nullptr; //16025
 	}
 	return ActivityEdgeImpl::internalEIsSet(featureID);
 }
@@ -462,32 +461,34 @@ bool ObjectFlowImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::OBJECTFLOW_EATTRIBUTE_ISMULTICAST:
+		case UmlPackage::OBJECTFLOW_ATTRIBUTE_ISMULTICAST:
 		{
 			// BOOST CAST
 			bool _isMulticast = newValue->get<bool>();
-			setIsMulticast(_isMulticast); //18823
+			setIsMulticast(_isMulticast); //16022
 			return true;
 		}
-		case UmlPackage::OBJECTFLOW_EATTRIBUTE_ISMULTIRECEIVE:
+		case UmlPackage::OBJECTFLOW_ATTRIBUTE_ISMULTIRECEIVE:
 		{
 			// BOOST CAST
 			bool _isMultireceive = newValue->get<bool>();
-			setIsMultireceive(_isMultireceive); //18824
+			setIsMultireceive(_isMultireceive); //16023
 			return true;
 		}
-		case UmlPackage::OBJECTFLOW_EREFERENCE_SELECTION:
+		case UmlPackage::OBJECTFLOW_ATTRIBUTE_SELECTION:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Behavior> _selection = newValue->get<std::shared_ptr<uml::Behavior>>();
-			setSelection(_selection); //18825
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Behavior> _selection = std::dynamic_pointer_cast<uml::Behavior>(_temp);
+			setSelection(_selection); //16024
 			return true;
 		}
-		case UmlPackage::OBJECTFLOW_EREFERENCE_TRANSFORMATION:
+		case UmlPackage::OBJECTFLOW_ATTRIBUTE_TRANSFORMATION:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Behavior> _transformation = newValue->get<std::shared_ptr<uml::Behavior>>();
-			setTransformation(_transformation); //18826
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Behavior> _transformation = std::dynamic_pointer_cast<uml::Behavior>(_temp);
+			setTransformation(_transformation); //16025
 			return true;
 		}
 	}
@@ -576,7 +577,7 @@ void ObjectFlowImpl::resolveReferences(const int featureID, std::list<std::share
 {
 	switch(featureID)
 	{
-		case UmlPackage::OBJECTFLOW_EREFERENCE_SELECTION:
+		case UmlPackage::OBJECTFLOW_ATTRIBUTE_SELECTION:
 		{
 			if (references.size() == 1)
 			{
@@ -588,7 +589,7 @@ void ObjectFlowImpl::resolveReferences(const int featureID, std::list<std::share
 			return;
 		}
 
-		case UmlPackage::OBJECTFLOW_EREFERENCE_TRANSFORMATION:
+		case UmlPackage::OBJECTFLOW_ATTRIBUTE_TRANSFORMATION:
 		{
 			if (references.size() == 1)
 			{
@@ -615,7 +616,6 @@ void ObjectFlowImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler>
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
@@ -635,12 +635,12 @@ void ObjectFlowImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getObjectFlow_EAttribute_isMulticast()) )
+		if ( this->eIsSet(package->getObjectFlow_Attribute_isMulticast()) )
 		{
 			saveHandler->addAttribute("isMulticast", this->getIsMulticast());
 		}
 
-		if ( this->eIsSet(package->getObjectFlow_EAttribute_isMultireceive()) )
+		if ( this->eIsSet(package->getObjectFlow_Attribute_isMultireceive()) )
 		{
 			saveHandler->addAttribute("isMultireceive", this->getIsMultireceive());
 		}

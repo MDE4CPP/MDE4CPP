@@ -19,7 +19,7 @@
 #include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
-
+#include "abstractDataTypes/Union.hpp"
 #include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
@@ -31,6 +31,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "ecore/EcoreFactory.hpp"
 #include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "ecore/EcorePackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "ecore/EClass.hpp"
@@ -60,13 +63,26 @@ EObjectImpl::EObjectImpl()
 	//*********************************
 	// Attribute Members
 	//*********************************
-
+	
 	//*********************************
 	// Reference Members
 	//*********************************
 	//References
+	
+
+		/*Union*/
+		m_eContens.reset(new Union<ecore::EObject>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_eContens - Union<ecore::EObject>()" << std::endl;
+		#endif
+	
+	
 
 	//Init references
+	
+
+	
+	
 }
 
 EObjectImpl::~EObjectImpl()
@@ -77,6 +93,16 @@ EObjectImpl::~EObjectImpl()
 }
 
 
+//Additional constructor for the containments back reference
+			EObjectImpl::EObjectImpl(std::weak_ptr<ecore::EObject > par_eContainer)
+			:EObjectImpl()
+			{
+			    m_eContainer = par_eContainer;
+			}
+
+
+
+
 
 
 EObjectImpl::EObjectImpl(const EObjectImpl & obj):EObjectImpl()
@@ -85,9 +111,12 @@ EObjectImpl::EObjectImpl(const EObjectImpl & obj):EObjectImpl()
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy EObject "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	m_metaElementID = obj.getMetaElementID();
 
 	//copy references with no containment (soft copy)
 	
+	m_eContainer  = obj.getEContainer();
+
 
 	//Clone references with containment (deep copy)
 
@@ -103,17 +132,26 @@ std::shared_ptr<ecore::EObject>  EObjectImpl::copy() const
 
 std::shared_ptr<EClass> EObjectImpl::eStaticClass() const
 {
-	return EcorePackageImpl::eInstance()->getEObject_EClass();
+	return EcorePackageImpl::eInstance()->getEObject_Class();
 }
 
 //*********************************
 // Attribute Setter Getter
 //*********************************
+void EObjectImpl::setMetaElementID(int _metaElementID)
+{
+	m_metaElementID = _metaElementID;
+} 
+
+int EObjectImpl::getMetaElementID() const 
+{
+	return m_metaElementID;
+}
 
 //*********************************
 // Operations
 //*********************************
-Bag <   ecore::EObject > EObjectImpl::eAllContents() const
+std::shared_ptr<Bag <   ecore::EObject > > EObjectImpl::eAllContents() const
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -141,13 +179,13 @@ std::shared_ptr<ecore::EReference> EObjectImpl::eContainmentFeature() const
 	throw "UnsupportedOperationException";
 }
 
-Bag <   ecore::EObject > EObjectImpl::eContents() const
+std::shared_ptr<Bag <   ecore::EObject > > EObjectImpl::eContents() const
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-Bag <   ecore::EObject > EObjectImpl::eCrossReferences() const
+std::shared_ptr<Bag <   ecore::EObject > > EObjectImpl::eCrossReferences() const
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -212,10 +250,26 @@ void EObjectImpl::eUnset(std::shared_ptr<ecore::EStructuralFeature>  feature) co
 //*********************************
 // References
 //*********************************
+std::weak_ptr<ecore::EObject > EObjectImpl::getEContainer() const
+{
+
+    return m_eContainer;
+}
+void EObjectImpl::setEContainer(std::shared_ptr<ecore::EObject> _eContainer)
+{
+    m_eContainer = _eContainer;
+}
+
+
+
 
 //*********************************
 // Union Getter
 //*********************************
+std::shared_ptr<Union<ecore::EObject>> EObjectImpl::getEContens() const
+{
+	return m_eContens;
+}
 
 
 std::shared_ptr<EObject> EObjectImpl::getThisEObjectPtr() const
@@ -228,6 +282,10 @@ void EObjectImpl::setThisEObjectPtr(std::weak_ptr<EObject> thisEObjectPtr)
 }
 std::shared_ptr<ecore::EObject> EObjectImpl::eContainer() const
 {
+	if(auto wp = m_eContainer.lock())
+	{
+		return wp;
+	}
 	return nullptr;
 }
 
@@ -238,6 +296,22 @@ Any EObjectImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
+		case EcorePackage::EOBJECT_ATTRIBUTE_ECONTAINER:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEContainer().lock())); //391
+		case EcorePackage::EOBJECT_ATTRIBUTE_ECONTENS:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<ecore::EObject>::iterator iter = m_eContens->begin();
+			Bag<ecore::EObject>::iterator end = m_eContens->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //390
+		}
+		case EcorePackage::EOBJECT_ATTRIBUTE_METAELEMENTID:
+			return eAny(getMetaElementID()); //392
 	}
 	Any result;
 	return result;
@@ -246,6 +320,12 @@ bool EObjectImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
+		case EcorePackage::EOBJECT_ATTRIBUTE_ECONTAINER:
+			return getEContainer().lock() != nullptr; //391
+		case EcorePackage::EOBJECT_ATTRIBUTE_ECONTENS:
+			return getEContens() != nullptr; //390
+		case EcorePackage::EOBJECT_ATTRIBUTE_METAELEMENTID:
+			return getMetaElementID() != 0; //392
 	}
 	bool result = false;
 	return result;
@@ -254,6 +334,57 @@ bool EObjectImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
+		case EcorePackage::EOBJECT_ATTRIBUTE_ECONTAINER:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<ecore::EObject> _eContainer = std::dynamic_pointer_cast<ecore::EObject>(_temp);
+			setEContainer(_eContainer); //391
+			return true;
+		}
+		case EcorePackage::EOBJECT_ATTRIBUTE_ECONTENS:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<ecore::EObject>> eContensList(new Bag<ecore::EObject>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				eContensList->add(std::dynamic_pointer_cast<ecore::EObject>(*iter));
+				iter++;
+			}
+			
+			Bag<ecore::EObject>::iterator iterEContens = m_eContens->begin();
+			Bag<ecore::EObject>::iterator endEContens = m_eContens->end();
+			while (iterEContens != endEContens)
+			{
+				if (eContensList->find(*iterEContens) == -1)
+				{
+					m_eContens->erase(*iterEContens);
+				}
+				iterEContens++;
+			}
+
+			iterEContens = eContensList->begin();
+			endEContens = eContensList->end();
+			while (iterEContens != endEContens)
+			{
+				if (m_eContens->find(*iterEContens) == -1)
+				{
+					m_eContens->add(*iterEContens);
+				}
+				iterEContens++;			
+			}
+			return true;
+		}
+		case EcorePackage::EOBJECT_ATTRIBUTE_METAELEMENTID:
+		{
+			// BOOST CAST
+			int _metaElementID = newValue->get<int>();
+			setMetaElementID(_metaElementID); //392
+			return true;
+		}
 	}
 
 	bool result = false;
@@ -282,17 +413,77 @@ void EObjectImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> lo
 
 void EObjectImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+	
+		iter = attr_list.find("metaElementID");
+		if ( iter != attr_list.end() )
+		{
+			// this attribute is a 'int'
+			int value;
+			std::istringstream ( iter->second ) >> value;
+			this->setMetaElementID(value);
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
 
 }
 
 void EObjectImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<ecore::EcoreFactory> modelFactory)
 {
 
+	try
+	{
+		if ( nodeName.compare("eContens") == 0 )
+		{
+  			std::string typeName = loadHandler->getCurrentXSITypeName();
+			if (typeName.empty())
+			{
+				typeName = "EObject";
+			}
+			std::shared_ptr<ecore::EObject> eContens = modelFactory->create(typeName, loadHandler->getCurrentObject(), EcorePackage::EOBJECT_ATTRIBUTE_ECONTAINER);
+			if (eContens != nullptr)
+			{
+				loadHandler->handleChild(eContens);
+			}
+			return;
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
 
 }
 
 void EObjectImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<EObject> > references)
 {
+	switch(featureID)
+	{
+		case EcorePackage::EOBJECT_ATTRIBUTE_ECONTAINER:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<ecore::EObject> _eContainer = std::dynamic_pointer_cast<ecore::EObject>( references.front() );
+				setEContainer(_eContainer);
+			}
+			
+			return;
+		}
+	}
 }
 
 void EObjectImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -311,7 +502,24 @@ void EObjectImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 		std::shared_ptr<ecore::EcorePackage> package = ecore::EcorePackage::eInstance();
 
 	
+ 
+		// Add attributes
+		if ( this->eIsSet(package->getEObject_Attribute_metaElementID()) )
+		{
+			saveHandler->addAttribute("metaElementID", this->getMetaElementID());
+		}
 
+
+		//
+		// Add new tags (from references)
+		//
+		std::shared_ptr<EClass> metaClass = this->eClass();
+		// Save 'eContens'
+		std::shared_ptr<Union<ecore::EObject>> list_eContens = this->getEContens();
+		for (std::shared_ptr<ecore::EObject> eContens : *list_eContens) 
+		{
+			saveHandler->addReference(eContens, "eContens", eContens->eClass() != package->getEObject_Class());
+		}
 	}
 	catch (std::exception& e)
 	{

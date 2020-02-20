@@ -33,6 +33,15 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Activity.hpp"
@@ -52,8 +61,6 @@
 #include "uml/Constraint.hpp"
 
 #include "uml/Dependency.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -208,14 +215,6 @@ ReadLinkActionImpl::ReadLinkActionImpl(const ReadLinkActionImpl & obj):ReadLinkA
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::LinkEndData>> _endDataList = obj.getEndData();
 	for(std::shared_ptr<uml::LinkEndData> _endData : *_endDataList)
 	{
@@ -315,7 +314,7 @@ std::shared_ptr<ecore::EObject>  ReadLinkActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ReadLinkActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getReadLinkAction_EClass();
+	return UmlPackageImpl::eInstance()->getReadLinkAction_Class();
 }
 
 //*********************************
@@ -443,8 +442,8 @@ Any ReadLinkActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::READLINKACTION_EREFERENCE_RESULT:
-			return eAny(getResult()); //16130
+		case UmlPackage::READLINKACTION_ATTRIBUTE_RESULT:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getResult())); //19629
 	}
 	return LinkActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -452,8 +451,8 @@ bool ReadLinkActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::READLINKACTION_EREFERENCE_RESULT:
-			return getResult() != nullptr; //16130
+		case UmlPackage::READLINKACTION_ATTRIBUTE_RESULT:
+			return getResult() != nullptr; //19629
 	}
 	return LinkActionImpl::internalEIsSet(featureID);
 }
@@ -461,11 +460,12 @@ bool ReadLinkActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::READLINKACTION_EREFERENCE_RESULT:
+		case UmlPackage::READLINKACTION_ATTRIBUTE_RESULT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::OutputPin> _result = newValue->get<std::shared_ptr<uml::OutputPin>>();
-			setResult(_result); //16130
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::OutputPin> _result = std::dynamic_pointer_cast<uml::OutputPin>(_temp);
+			setResult(_result); //19629
 			return true;
 		}
 	}
@@ -556,7 +556,6 @@ void ReadLinkActionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHand
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
@@ -580,7 +579,7 @@ void ReadLinkActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 		std::shared_ptr<uml::OutputPin > result = this->getResult();
 		if (result != nullptr)
 		{
-			saveHandler->addReference(result, "result", result->eClass() != package->getOutputPin_EClass());
+			saveHandler->addReference(result, "result", result->eClass() != package->getOutputPin_Class());
 		}
 	
 

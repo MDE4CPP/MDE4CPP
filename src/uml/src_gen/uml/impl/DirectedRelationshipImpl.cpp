@@ -32,11 +32,12 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -135,14 +136,6 @@ DirectedRelationshipImpl::DirectedRelationshipImpl(const DirectedRelationshipImp
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
 	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
@@ -163,7 +156,7 @@ std::shared_ptr<ecore::EObject>  DirectedRelationshipImpl::copy() const
 
 std::shared_ptr<ecore::EClass> DirectedRelationshipImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getDirectedRelationship_EClass();
+	return UmlPackageImpl::eInstance()->getDirectedRelationship_Class();
 }
 
 //*********************************
@@ -229,10 +222,30 @@ Any DirectedRelationshipImpl::eGet(int featureID, bool resolve, bool coreType) c
 {
 	switch(featureID)
 	{
-		case UmlPackage::DIRECTEDRELATIONSHIP_EREFERENCE_SOURCE:
-			return eAny(getSource()); //205
-		case UmlPackage::DIRECTEDRELATIONSHIP_EREFERENCE_TARGET:
-			return eAny(getTarget()); //206
+		case UmlPackage::DIRECTEDRELATIONSHIP_ATTRIBUTE_SOURCE:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Element>::iterator iter = m_source->begin();
+			Bag<uml::Element>::iterator end = m_source->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //774
+		}
+		case UmlPackage::DIRECTEDRELATIONSHIP_ATTRIBUTE_TARGET:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Element>::iterator iter = m_target->begin();
+			Bag<uml::Element>::iterator end = m_target->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //775
+		}
 	}
 	return RelationshipImpl::eGet(featureID, resolve, coreType);
 }
@@ -240,10 +253,10 @@ bool DirectedRelationshipImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::DIRECTEDRELATIONSHIP_EREFERENCE_SOURCE:
-			return getSource() != nullptr; //205
-		case UmlPackage::DIRECTEDRELATIONSHIP_EREFERENCE_TARGET:
-			return getTarget() != nullptr; //206
+		case UmlPackage::DIRECTEDRELATIONSHIP_ATTRIBUTE_SOURCE:
+			return getSource() != nullptr; //774
+		case UmlPackage::DIRECTEDRELATIONSHIP_ATTRIBUTE_TARGET:
+			return getTarget() != nullptr; //775
 	}
 	return RelationshipImpl::internalEIsSet(featureID);
 }
@@ -302,7 +315,6 @@ void DirectedRelationshipImpl::save(std::shared_ptr<persistence::interfaces::XSa
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

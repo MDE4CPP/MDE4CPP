@@ -33,6 +33,15 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Action.hpp"
@@ -56,8 +65,6 @@
 #include "uml/Constraint.hpp"
 
 #include "uml/Dependency.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -236,14 +243,6 @@ LinkActionImpl::LinkActionImpl(const LinkActionImpl & obj):LinkActionImpl()
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::LinkEndData>> _endDataList = obj.getEndData();
 	for(std::shared_ptr<uml::LinkEndData> _endData : *_endDataList)
 	{
@@ -350,7 +349,7 @@ std::shared_ptr<ecore::EObject>  LinkActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> LinkActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getLinkAction_EClass();
+	return UmlPackageImpl::eInstance()->getLinkAction_Class();
 }
 
 //*********************************
@@ -466,10 +465,30 @@ Any LinkActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::LINKACTION_EREFERENCE_ENDDATA:
-			return eAny(getEndData()); //12528
-		case UmlPackage::LINKACTION_EREFERENCE_INPUTVALUE:
-			return eAny(getInputValue()); //12529
+		case UmlPackage::LINKACTION_ATTRIBUTE_ENDDATA:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::LinkEndData>::iterator iter = m_endData->begin();
+			Bag<uml::LinkEndData>::iterator end = m_endData->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //13427
+		}
+		case UmlPackage::LINKACTION_ATTRIBUTE_INPUTVALUE:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::InputPin>::iterator iter = m_inputValue->begin();
+			Bag<uml::InputPin>::iterator end = m_inputValue->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //13428
+		}
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -477,10 +496,10 @@ bool LinkActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::LINKACTION_EREFERENCE_ENDDATA:
-			return getEndData() != nullptr; //12528
-		case UmlPackage::LINKACTION_EREFERENCE_INPUTVALUE:
-			return getInputValue() != nullptr; //12529
+		case UmlPackage::LINKACTION_ATTRIBUTE_ENDDATA:
+			return getEndData() != nullptr; //13427
+		case UmlPackage::LINKACTION_ATTRIBUTE_INPUTVALUE:
+			return getInputValue() != nullptr; //13428
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }
@@ -488,6 +507,78 @@ bool LinkActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
+		case UmlPackage::LINKACTION_ATTRIBUTE_ENDDATA:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::LinkEndData>> endDataList(new Bag<uml::LinkEndData>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				endDataList->add(std::dynamic_pointer_cast<uml::LinkEndData>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::LinkEndData>::iterator iterEndData = m_endData->begin();
+			Bag<uml::LinkEndData>::iterator endEndData = m_endData->end();
+			while (iterEndData != endEndData)
+			{
+				if (endDataList->find(*iterEndData) == -1)
+				{
+					m_endData->erase(*iterEndData);
+				}
+				iterEndData++;
+			}
+
+			iterEndData = endDataList->begin();
+			endEndData = endDataList->end();
+			while (iterEndData != endEndData)
+			{
+				if (m_endData->find(*iterEndData) == -1)
+				{
+					m_endData->add(*iterEndData);
+				}
+				iterEndData++;			
+			}
+			return true;
+		}
+		case UmlPackage::LINKACTION_ATTRIBUTE_INPUTVALUE:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::InputPin>> inputValueList(new Bag<uml::InputPin>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				inputValueList->add(std::dynamic_pointer_cast<uml::InputPin>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::InputPin>::iterator iterInputValue = m_inputValue->begin();
+			Bag<uml::InputPin>::iterator endInputValue = m_inputValue->end();
+			while (iterInputValue != endInputValue)
+			{
+				if (inputValueList->find(*iterInputValue) == -1)
+				{
+					m_inputValue->erase(*iterInputValue);
+				}
+				iterInputValue++;
+			}
+
+			iterInputValue = inputValueList->begin();
+			endInputValue = inputValueList->end();
+			while (iterInputValue != endInputValue)
+			{
+				if (m_inputValue->find(*iterInputValue) == -1)
+				{
+					m_inputValue->add(*iterInputValue);
+				}
+				iterInputValue++;			
+			}
+			return true;
+		}
 	}
 
 	return ActionImpl::eSet(featureID, newValue);
@@ -592,7 +683,6 @@ void LinkActionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler>
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
@@ -614,13 +704,13 @@ void LinkActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 		// Save 'endData'
 		for (std::shared_ptr<uml::LinkEndData> endData : *this->getEndData()) 
 		{
-			saveHandler->addReference(endData, "endData", endData->eClass() != package->getLinkEndData_EClass());
+			saveHandler->addReference(endData, "endData", endData->eClass() != package->getLinkEndData_Class());
 		}
 
 		// Save 'inputValue'
 		for (std::shared_ptr<uml::InputPin> inputValue : *this->getInputValue()) 
 		{
-			saveHandler->addReference(inputValue, "inputValue", inputValue->eClass() != package->getInputPin_EClass());
+			saveHandler->addReference(inputValue, "inputValue", inputValue->eClass() != package->getInputPin_Class());
 		}
 	
 

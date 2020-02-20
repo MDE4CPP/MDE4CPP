@@ -33,6 +33,15 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Activity.hpp"
@@ -52,8 +61,6 @@
 #include "uml/Comment.hpp"
 
 #include "uml/Dependency.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -215,14 +222,6 @@ PinImpl::PinImpl(const PinImpl & obj):PinImpl()
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::InterruptibleActivityRegion>> _inInterruptibleRegionList = obj.getInInterruptibleRegion();
 	for(std::shared_ptr<uml::InterruptibleActivityRegion> _inInterruptibleRegion : *_inInterruptibleRegionList)
 	{
@@ -295,7 +294,7 @@ std::shared_ptr<ecore::EObject>  PinImpl::copy() const
 
 std::shared_ptr<ecore::EClass> PinImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getPin_EClass();
+	return UmlPackageImpl::eInstance()->getPin_Class();
 }
 
 //*********************************
@@ -392,8 +391,8 @@ Any PinImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::PIN_EATTRIBUTE_ISCONTROL:
-			return eAny(getIsControl()); //11933
+		case UmlPackage::PIN_ATTRIBUTE_ISCONTROL:
+			return eAny(getIsControl()); //18132
 	}
 	Any result;
 	result = MultiplicityElementImpl::eGet(featureID, resolve, coreType);
@@ -408,8 +407,8 @@ bool PinImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::PIN_EATTRIBUTE_ISCONTROL:
-			return getIsControl() != false; //11933
+		case UmlPackage::PIN_ATTRIBUTE_ISCONTROL:
+			return getIsControl() != false; //18132
 	}
 	bool result = false;
 	result = MultiplicityElementImpl::internalEIsSet(featureID);
@@ -424,11 +423,11 @@ bool PinImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::PIN_EATTRIBUTE_ISCONTROL:
+		case UmlPackage::PIN_ATTRIBUTE_ISCONTROL:
 		{
 			// BOOST CAST
 			bool _isControl = newValue->get<bool>();
-			setIsControl(_isControl); //11933
+			setIsControl(_isControl); //18132
 			return true;
 		}
 	}
@@ -522,7 +521,6 @@ void PinImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHa
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
@@ -543,7 +541,7 @@ void PinImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler>
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getPin_EAttribute_isControl()) )
+		if ( this->eIsSet(package->getPin_Attribute_isControl()) )
 		{
 			saveHandler->addAttribute("isControl", this->getIsControl());
 		}

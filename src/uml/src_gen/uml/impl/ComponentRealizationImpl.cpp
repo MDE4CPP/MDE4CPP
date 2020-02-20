@@ -32,6 +32,17 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Classifier.hpp"
@@ -41,8 +52,6 @@
 #include "uml/Component.hpp"
 
 #include "uml/Dependency.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -213,14 +222,6 @@ ComponentRealizationImpl::ComponentRealizationImpl(const ComponentRealizationImp
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_client" << std::endl;
 	#endif
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	if(obj.getMapping()!=nullptr)
 	{
 		m_mapping = std::dynamic_pointer_cast<uml::OpaqueExpression>(obj.getMapping()->copy());
@@ -271,7 +272,7 @@ std::shared_ptr<ecore::EObject>  ComponentRealizationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ComponentRealizationImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getComponentRealization_EClass();
+	return UmlPackageImpl::eInstance()->getComponentRealization_Class();
 }
 
 //*********************************
@@ -376,10 +377,20 @@ Any ComponentRealizationImpl::eGet(int featureID, bool resolve, bool coreType) c
 {
 	switch(featureID)
 	{
-		case UmlPackage::COMPONENTREALIZATION_EREFERENCE_ABSTRACTION:
-			return eAny(getAbstraction()); //24020
-		case UmlPackage::COMPONENTREALIZATION_EREFERENCE_REALIZINGCLASSIFIER:
-			return eAny(getRealizingClassifier()); //24019
+		case UmlPackage::COMPONENTREALIZATION_ATTRIBUTE_ABSTRACTION:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getAbstraction().lock())); //4919
+		case UmlPackage::COMPONENTREALIZATION_ATTRIBUTE_REALIZINGCLASSIFIER:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Classifier>::iterator iter = m_realizingClassifier->begin();
+			Bag<uml::Classifier>::iterator end = m_realizingClassifier->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //4918
+		}
 	}
 	return RealizationImpl::eGet(featureID, resolve, coreType);
 }
@@ -387,10 +398,10 @@ bool ComponentRealizationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::COMPONENTREALIZATION_EREFERENCE_ABSTRACTION:
-			return getAbstraction().lock() != nullptr; //24020
-		case UmlPackage::COMPONENTREALIZATION_EREFERENCE_REALIZINGCLASSIFIER:
-			return getRealizingClassifier() != nullptr; //24019
+		case UmlPackage::COMPONENTREALIZATION_ATTRIBUTE_ABSTRACTION:
+			return getAbstraction().lock() != nullptr; //4919
+		case UmlPackage::COMPONENTREALIZATION_ATTRIBUTE_REALIZINGCLASSIFIER:
+			return getRealizingClassifier() != nullptr; //4918
 	}
 	return RealizationImpl::internalEIsSet(featureID);
 }
@@ -398,11 +409,48 @@ bool ComponentRealizationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::COMPONENTREALIZATION_EREFERENCE_ABSTRACTION:
+		case UmlPackage::COMPONENTREALIZATION_ATTRIBUTE_ABSTRACTION:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Component> _abstraction = newValue->get<std::shared_ptr<uml::Component>>();
-			setAbstraction(_abstraction); //24020
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Component> _abstraction = std::dynamic_pointer_cast<uml::Component>(_temp);
+			setAbstraction(_abstraction); //4919
+			return true;
+		}
+		case UmlPackage::COMPONENTREALIZATION_ATTRIBUTE_REALIZINGCLASSIFIER:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Classifier>> realizingClassifierList(new Bag<uml::Classifier>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				realizingClassifierList->add(std::dynamic_pointer_cast<uml::Classifier>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Classifier>::iterator iterRealizingClassifier = m_realizingClassifier->begin();
+			Bag<uml::Classifier>::iterator endRealizingClassifier = m_realizingClassifier->end();
+			while (iterRealizingClassifier != endRealizingClassifier)
+			{
+				if (realizingClassifierList->find(*iterRealizingClassifier) == -1)
+				{
+					m_realizingClassifier->erase(*iterRealizingClassifier);
+				}
+				iterRealizingClassifier++;
+			}
+
+			iterRealizingClassifier = realizingClassifierList->begin();
+			endRealizingClassifier = realizingClassifierList->end();
+			while (iterRealizingClassifier != endRealizingClassifier)
+			{
+				if (m_realizingClassifier->find(*iterRealizingClassifier) == -1)
+				{
+					m_realizingClassifier->add(*iterRealizingClassifier);
+				}
+				iterRealizingClassifier++;			
+			}
 			return true;
 		}
 	}
@@ -466,7 +514,7 @@ void ComponentRealizationImpl::resolveReferences(const int featureID, std::list<
 {
 	switch(featureID)
 	{
-		case UmlPackage::COMPONENTREALIZATION_EREFERENCE_ABSTRACTION:
+		case UmlPackage::COMPONENTREALIZATION_ATTRIBUTE_ABSTRACTION:
 		{
 			if (references.size() == 1)
 			{
@@ -478,7 +526,7 @@ void ComponentRealizationImpl::resolveReferences(const int featureID, std::list<
 			return;
 		}
 
-		case UmlPackage::COMPONENTREALIZATION_EREFERENCE_REALIZINGCLASSIFIER:
+		case UmlPackage::COMPONENTREALIZATION_ATTRIBUTE_REALIZINGCLASSIFIER:
 		{
 			std::shared_ptr<Bag<uml::Classifier>> _realizingClassifier = getRealizingClassifier();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -514,7 +562,6 @@ void ComponentRealizationImpl::save(std::shared_ptr<persistence::interfaces::XSa
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

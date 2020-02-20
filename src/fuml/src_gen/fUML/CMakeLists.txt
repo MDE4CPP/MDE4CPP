@@ -41,120 +41,128 @@ SET(SOURCE_FILES
 	FUMLPackage.cpp
 	impl/FUMLPluginImpl.cpp
 	FUMLPlugin.cpp
-	impl/AcceptEventActionActivationImpl.cpp
-	impl/AcceptEventActionEventAccepterImpl.cpp
-	impl/ActionActivationImpl.cpp
-	impl/ActivityEdgeInstanceImpl.cpp
-	impl/ActivityExecutionImpl.cpp
-	impl/ActivityFinalNodeActivationImpl.cpp
-	impl/ActivityNodeActivationImpl.cpp
-	impl/ActivityNodeActivationGroupImpl.cpp
-	impl/ActivityParameterNodeActivationImpl.cpp
-	impl/AddStructuralFeatureValueActionActivationImpl.cpp
-	impl/BooleanValueImpl.cpp
-	impl/CallActionActivationImpl.cpp
-	impl/CallBehaviorActionActivationImpl.cpp
-	impl/CallOperationActionActivationImpl.cpp
-	impl/CentralBufferNodeActivationImpl.cpp
-	impl/ChoiceStrategyImpl.cpp
-	impl/ClassifierBehaviorExecutionImpl.cpp
-	impl/ClassifierBehaviorExecutionActivityImpl.cpp
-	impl/ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl.cpp
-	impl/ClauseActivationImpl.cpp
-	impl/ClearAssociationActionActivationImpl.cpp
-	impl/ClearStructuralFeatureActionActivationImpl.cpp
-	impl/CompoundValueImpl.cpp
-	impl/ConditionalNodeActivationImpl.cpp
-	impl/ControlNodeActivationImpl.cpp
-	impl/ControlTokenImpl.cpp
-	impl/CreateLinkActionActivationImpl.cpp
-	impl/CreateObjectActionActivationImpl.cpp
-	impl/DataStoreNodeActivationImpl.cpp
-	impl/DataValueImpl.cpp
-	impl/DecisionNodeActivationImpl.cpp
-	impl/DestroyLinkActionActivationImpl.cpp
-	impl/DestroyObjectActionActivationImpl.cpp
-	impl/DispatchStrategyImpl.cpp
-	impl/EnumerationValueImpl.cpp
-	impl/EvaluationImpl.cpp
-	impl/EventAccepterImpl.cpp
-	impl/EventDispatchLoopImpl.cpp
-	impl/ExecutionImpl.cpp
-	impl/ExecutionFactoryImpl.cpp
-	impl/ExecutionFactoryL1Impl.cpp
-	impl/ExecutionFactoryL2Impl.cpp
-	impl/ExecutionFactoryL3Impl.cpp
-	impl/ExecutorImpl.cpp
-	impl/ExpansionActivationGroupImpl.cpp
-	impl/ExpansionNodeActivationImpl.cpp
-	impl/ExpansionRegionActivationImpl.cpp
-	impl/ExtensionalValueImpl.cpp
-	impl/ExtensionalValueListImpl.cpp
-	impl/FIFOGetNextEventStrategyImpl.cpp
-	impl/FeatureValueImpl.cpp
-	impl/FirstChoiceStrategyImpl.cpp
-	impl/FlowFinalNodeActivationImpl.cpp
-	impl/ForkNodeActivationImpl.cpp
-	impl/ForkedTokenImpl.cpp
-	impl/GetNextEventStrategyImpl.cpp
-	impl/InitialNodeActivationImpl.cpp
-	impl/InputPinActivationImpl.cpp
-	impl/InstanceValueEvaluationImpl.cpp
-	impl/IntegerValueImpl.cpp
-	impl/InvocationActionActivationImpl.cpp
-	impl/JoinNodeActivationImpl.cpp
-	impl/LinkImpl.cpp
-	impl/LinkActionActivationImpl.cpp
-	impl/LiteralBooleanEvaluationImpl.cpp
-	impl/LiteralEvaluationImpl.cpp
-	impl/LiteralIntegerEvaluationImpl.cpp
-	impl/LiteralNullEvaluationImpl.cpp
-	impl/LiteralRealEvaluationImpl.cpp
-	impl/LiteralStringEvaluationImpl.cpp
-	impl/LiteralUnlimitedNaturalEvaluationImpl.cpp
-	impl/LocusImpl.cpp
-	impl/LoopNodeActivationImpl.cpp
-	impl/MergeNodeActivationImpl.cpp
-	impl/ObjectImpl.cpp
-	impl/ObjectActivationImpl.cpp
-	impl/ObjectNodeActivationImpl.cpp
-	impl/ObjectTokenImpl.cpp
-	impl/OfferImpl.cpp
-	impl/OpaqueBehaviorExecutionImpl.cpp
-	impl/OutputPinActivationImpl.cpp
-	impl/ParameterValueImpl.cpp
-	impl/PinActivationImpl.cpp
-	impl/PrimitiveValueImpl.cpp
-	impl/ReadExtentActionActivationImpl.cpp
-	impl/ReadIsClassifiedObjectActionActivationImpl.cpp
-	impl/ReadLinkActionActivationImpl.cpp
-	impl/ReadSelfActionActivationImpl.cpp
-	impl/ReadStructuralFeatureActionActivationImpl.cpp
-	impl/RealValueImpl.cpp
-	impl/ReclassifyObjectActionActivationImpl.cpp
-	impl/RedefinitionBasedDispatchStrategyImpl.cpp
-	impl/ReduceActionActivationImpl.cpp
-	impl/ReferenceImpl.cpp
-	impl/RemoveStructuralFeatureValueActivationImpl.cpp
-	impl/SemanticStrategyImpl.cpp
-	impl/SemanticVisitorImpl.cpp
-	impl/SendSignalActionActivationImpl.cpp
-	impl/SignalInstanceImpl.cpp
-	impl/StartClassifierBehaviorActionActivationImpl.cpp
-	impl/StartObjectBehaviorActionActivationImpl.cpp
-	impl/StringValueImpl.cpp
-	impl/StructuralFeatureActionActivationImpl.cpp
-	impl/StructuredActivityNodeActivationImpl.cpp
-	impl/StructuredValueImpl.cpp
-	impl/TestIdentityActionActivationImpl.cpp
-	impl/TokenImpl.cpp
-	impl/TokenSetImpl.cpp
-	impl/UnlimitedNaturalValueImpl.cpp
-	impl/ValueImpl.cpp
-	impl/ValueSpecificActionActivationImpl.cpp
-	impl/ValuesImpl.cpp
-	impl/WriteLinkActionActivationImpl.cpp
-	impl/WriteStructuralFeatureActionActivationImpl.cpp
+	Semantics/Actions/impl/AcceptCallActionActivationImpl.cpp
+	Semantics/Actions/impl/AcceptCallActionActivationsImpl.cpp
+	Semantics/Actions/impl/AcceptEventActionActivationImpl.cpp
+	Semantics/Actions/impl/AcceptEventActionEventAccepterImpl.cpp
+	Semantics/Actions/impl/ActionActivationImpl.cpp
+	Semantics/Activities/impl/ActivityEdgeInstanceImpl.cpp
+	Semantics/Activities/impl/ActivityExecutionImpl.cpp
+	Semantics/Activities/impl/ActivityFinalNodeActivationImpl.cpp
+	Semantics/Activities/impl/ActivityNodeActivationImpl.cpp
+	Semantics/Activities/impl/ActivityNodeActivationGroupImpl.cpp
+	Semantics/Activities/impl/ActivityParameterNodeActivationImpl.cpp
+	Semantics/Actions/impl/AddStructuralFeatureValueActionActivationImpl.cpp
+	Semantics/SimpleClassifiers/impl/BooleanValueImpl.cpp
+	Semantics/Actions/impl/CallActionActivationImpl.cpp
+	Semantics/Actions/impl/CallBehaviorActionActivationImpl.cpp
+	Semantics/CommonBehavior/impl/CallEventBehaviorImpl.cpp
+	Semantics/CommonBehavior/impl/CallEventExecutionImpl.cpp
+	Semantics/CommonBehavior/impl/CallEventOccurrenceImpl.cpp
+	Semantics/Actions/impl/CallOperationActionActivationImpl.cpp
+	Semantics/Activities/impl/CentralBufferNodeActivationImpl.cpp
+	Semantics/Loci/impl/ChoiceStrategyImpl.cpp
+	Semantics/CommonBehavior/impl/ClassifierBehaviorExecutionImpl.cpp
+	Semantics/Activities/impl/ClassifierBehaviorExecutionActivityImpl.cpp
+	Semantics/Activities/impl/ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl.cpp
+	Semantics/CommonBehavior/impl/ClassifierBehaviorInvocationEventAccepterImpl.cpp
+	Semantics/Actions/impl/ClauseActivationImpl.cpp
+	Semantics/Actions/impl/ClearAssociationActionActivationImpl.cpp
+	Semantics/Actions/impl/ClearStructuralFeatureActionActivationImpl.cpp
+	Semantics/SimpleClassifiers/impl/CompoundValueImpl.cpp
+	Semantics/Actions/impl/ConditionalNodeActivationImpl.cpp
+	Semantics/Activities/impl/ControlNodeActivationImpl.cpp
+	Semantics/Activities/impl/ControlTokenImpl.cpp
+	Semantics/Actions/impl/CreateLinkActionActivationImpl.cpp
+	Semantics/Actions/impl/CreateObjectActionActivationImpl.cpp
+	Semantics/Activities/impl/DataStoreNodeActivationImpl.cpp
+	Semantics/SimpleClassifiers/impl/DataValueImpl.cpp
+	Semantics/Activities/impl/DecisionNodeActivationImpl.cpp
+	Semantics/Actions/impl/DestroyLinkActionActivationImpl.cpp
+	Semantics/Actions/impl/DestroyObjectActionActivationImpl.cpp
+	Semantics/StructuredClassifiers/impl/DispatchStrategyImpl.cpp
+	Semantics/SimpleClassifiers/impl/EnumerationValueImpl.cpp
+	Semantics/Values/impl/EvaluationImpl.cpp
+	Semantics/CommonBehavior/impl/EventAccepterImpl.cpp
+	Semantics/CommonBehavior/impl/EventDispatchLoopImpl.cpp
+	Semantics/CommonBehavior/impl/EventOccurrenceImpl.cpp
+	Semantics/CommonBehavior/impl/ExecutionImpl.cpp
+	Semantics/Loci/impl/ExecutionFactoryImpl.cpp
+	Semantics/Loci/impl/ExecutorImpl.cpp
+	Semantics/Activities/impl/ExpansionActivationGroupImpl.cpp
+	Semantics/Activities/impl/ExpansionNodeActivationImpl.cpp
+	Semantics/Activities/impl/ExpansionRegionActivationImpl.cpp
+	Semantics/StructuredClassifiers/impl/ExtensionalValueImpl.cpp
+	Semantics/StructuredClassifiers/impl/ExtensionalValueListImpl.cpp
+	Semantics/CommonBehavior/impl/FIFOGetNextEventStrategyImpl.cpp
+	Semantics/SimpleClassifiers/impl/FeatureValueImpl.cpp
+	Semantics/Loci/impl/FirstChoiceStrategyImpl.cpp
+	Semantics/Activities/impl/FlowFinalNodeActivationImpl.cpp
+	Semantics/Activities/impl/ForkNodeActivationImpl.cpp
+	Semantics/Activities/impl/ForkedTokenImpl.cpp
+	Semantics/CommonBehavior/impl/GetNextEventStrategyImpl.cpp
+	Semantics/Activities/impl/InitialNodeActivationImpl.cpp
+	Semantics/Actions/impl/InputPinActivationImpl.cpp
+	Semantics/Classification/impl/InstanceValueEvaluationImpl.cpp
+	Semantics/SimpleClassifiers/impl/IntegerValueImpl.cpp
+	Semantics/Actions/impl/InvocationActionActivationImpl.cpp
+	Semantics/CommonBehavior/impl/InvocationEventOccurrenceImpl.cpp
+	Semantics/Activities/impl/JoinNodeActivationImpl.cpp
+	Semantics/StructuredClassifiers/impl/LinkImpl.cpp
+	Semantics/Actions/impl/LinkActionActivationImpl.cpp
+	Semantics/Values/impl/LiteralBooleanEvaluationImpl.cpp
+	Semantics/Values/impl/LiteralEvaluationImpl.cpp
+	Semantics/Values/impl/LiteralIntegerEvaluationImpl.cpp
+	Semantics/Values/impl/LiteralNullEvaluationImpl.cpp
+	Semantics/Values/impl/LiteralRealEvaluationImpl.cpp
+	Semantics/Values/impl/LiteralStringEvaluationImpl.cpp
+	Semantics/Values/impl/LiteralUnlimitedNaturalEvaluationImpl.cpp
+	Semantics/Loci/impl/LocusImpl.cpp
+	Semantics/Actions/impl/LoopNodeActivationImpl.cpp
+	Semantics/Activities/impl/MergeNodeActivationImpl.cpp
+	Semantics/StructuredClassifiers/impl/ObjectImpl.cpp
+	Semantics/CommonBehavior/impl/ObjectActivationImpl.cpp
+	Semantics/Activities/impl/ObjectNodeActivationImpl.cpp
+	Semantics/Activities/impl/ObjectTokenImpl.cpp
+	Semantics/Activities/impl/OfferImpl.cpp
+	Semantics/CommonBehavior/impl/OpaqueBehaviorExecutionImpl.cpp
+	Semantics/Actions/impl/OutputPinActivationImpl.cpp
+	Semantics/CommonBehavior/impl/ParameterValueImpl.cpp
+	Semantics/Actions/impl/PinActivationImpl.cpp
+	Semantics/SimpleClassifiers/impl/PrimitiveValueImpl.cpp
+	Semantics/Actions/impl/ReadExtentActionActivationImpl.cpp
+	Semantics/Actions/impl/ReadIsClassifiedObjectActionActivationImpl.cpp
+	Semantics/Actions/impl/ReadLinkActionActivationImpl.cpp
+	Semantics/Actions/impl/ReadSelfActionActivationImpl.cpp
+	Semantics/Actions/impl/ReadStructuralFeatureActionActivationImpl.cpp
+	Semantics/SimpleClassifiers/impl/RealValueImpl.cpp
+	Semantics/Actions/impl/ReclassifyObjectActionActivationImpl.cpp
+	Semantics/StructuredClassifiers/impl/RedefinitionBasedDispatchStrategyImpl.cpp
+	Semantics/Actions/impl/ReduceActionActivationImpl.cpp
+	Semantics/StructuredClassifiers/impl/ReferenceImpl.cpp
+	Semantics/Actions/impl/RemoveStructuralFeatureValueActivationImpl.cpp
+	Semantics/Actions/impl/ReplyActionActivationImpl.cpp
+	Semantics/Actions/impl/ReturnInformationImpl.cpp
+	Semantics/Loci/impl/SemanticStrategyImpl.cpp
+	Semantics/Loci/impl/SemanticVisitorImpl.cpp
+	Semantics/Actions/impl/SendSignalActionActivationImpl.cpp
+	Semantics/CommonBehavior/impl/SignalEventOccurrenceImpl.cpp
+	Semantics/SimpleClassifiers/impl/SignalInstanceImpl.cpp
+	Semantics/Actions/impl/StartClassifierBehaviorActionActivationImpl.cpp
+	Semantics/Actions/impl/StartObjectBehaviorActionActivationImpl.cpp
+	Semantics/SimpleClassifiers/impl/StringValueImpl.cpp
+	Semantics/Actions/impl/StructuralFeatureActionActivationImpl.cpp
+	Semantics/Actions/impl/StructuredActivityNodeActivationImpl.cpp
+	Semantics/SimpleClassifiers/impl/StructuredValueImpl.cpp
+	Semantics/Actions/impl/TestIdentityActionActivationImpl.cpp
+	Semantics/Activities/impl/TokenImpl.cpp
+	Semantics/Activities/impl/TokenSetImpl.cpp
+	Semantics/SimpleClassifiers/impl/UnlimitedNaturalValueImpl.cpp
+	Semantics/Values/impl/ValueImpl.cpp
+	Semantics/Actions/impl/ValueSpecificationActionActivationImpl.cpp
+	Semantics/Actions/impl/ValuesImpl.cpp
+	Semantics/Actions/impl/WriteLinkActionActivationImpl.cpp
+	Semantics/Actions/impl/WriteStructuralFeatureActionActivationImpl.cpp
 	#${MDE4CPP_HOME}/application/include/util/ProfileCallCount.cpp
 )
 
@@ -173,30 +181,36 @@ IF(UNIX AND NOT APPLE)
     # for Linux, BSD, Solaris, Minix
 	IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
 		FIND_LIBRARY(ECORE_DEBUG ecored.so ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(TYPES_DEBUG typesd.so ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(UML_DEBUG umld.so ${MDE4CPP_HOME}/application/bin)
 		
 	ELSE()
 		FIND_LIBRARY(ECORE_RELEASE ecore.so ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(TYPES_RELEASE types.so ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(UML_RELEASE uml.so ${MDE4CPP_HOME}/application/bin)
 		
 	ENDIF()
 ELSEIF(APPLE)
 	IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
 		FIND_LIBRARY(ECORE_DEBUG ecored.dylib ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(TYPES_DEBUG typesd.dylib ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(UML_DEBUG umld.dylib ${MDE4CPP_HOME}/application/bin)
 		
 	ELSE()
 		FIND_LIBRARY(ECORE_RELEASE ecore.dylib ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(TYPES_RELEASE types.dylib ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(UML_RELEASE uml.dylib ${MDE4CPP_HOME}/application/bin)
 		
 	ENDIF()
 ELSE()
 	IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
 		FIND_LIBRARY(ECORE_DEBUG ecored ${MDE4CPP_HOME}/application/lib)
+		FIND_LIBRARY(TYPES_DEBUG typesd ${MDE4CPP_HOME}/application/lib)
 		FIND_LIBRARY(UML_DEBUG umld ${MDE4CPP_HOME}/application/lib)
 		
 	ELSE()
 		FIND_LIBRARY(ECORE_RELEASE ecore ${MDE4CPP_HOME}/application/lib)
+		FIND_LIBRARY(TYPES_RELEASE types ${MDE4CPP_HOME}/application/lib)
 		FIND_LIBRARY(UML_RELEASE uml ${MDE4CPP_HOME}/application/lib)
 		
 	ENDIF()
@@ -208,11 +222,13 @@ SET_TARGET_PROPERTIES(${PROJECT_NAME} PROPERTIES PREFIX "")
 IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
 	TARGET_LINK_LIBRARIES(${PROJECT_NAME}
 		debug ${ECORE_DEBUG}
+		debug ${TYPES_DEBUG}
 		debug ${UML_DEBUG}
 	)
 ELSE()
 	TARGET_LINK_LIBRARIES(${PROJECT_NAME}
 		optimized ${ECORE_RELEASE}
+		optimized ${TYPES_RELEASE}
 		optimized ${UML_RELEASE}
 	)
 ENDIF()

@@ -33,6 +33,15 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Activity.hpp"
@@ -52,8 +61,6 @@
 #include "uml/Constraint.hpp"
 
 #include "uml/Dependency.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -212,14 +219,6 @@ WriteStructuralFeatureActionImpl::WriteStructuralFeatureActionImpl(const WriteSt
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::ExceptionHandler>> _handlerList = obj.getHandler();
 	for(std::shared_ptr<uml::ExceptionHandler> _handler : *_handlerList)
 	{
@@ -319,7 +318,7 @@ std::shared_ptr<ecore::EObject>  WriteStructuralFeatureActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> WriteStructuralFeatureActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getWriteStructuralFeatureAction_EClass();
+	return UmlPackageImpl::eInstance()->getWriteStructuralFeatureAction_Class();
 }
 
 //*********************************
@@ -445,10 +444,10 @@ Any WriteStructuralFeatureActionImpl::eGet(int featureID, bool resolve, bool cor
 {
 	switch(featureID)
 	{
-		case UmlPackage::WRITESTRUCTURALFEATUREACTION_EREFERENCE_RESULT:
-			return eAny(getResult()); //12830
-		case UmlPackage::WRITESTRUCTURALFEATUREACTION_EREFERENCE_VALUE:
-			return eAny(getValue()); //12831
+		case UmlPackage::WRITESTRUCTURALFEATUREACTION_ATTRIBUTE_RESULT:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getResult())); //25829
+		case UmlPackage::WRITESTRUCTURALFEATUREACTION_ATTRIBUTE_VALUE:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getValue())); //25830
 	}
 	return StructuralFeatureActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -456,10 +455,10 @@ bool WriteStructuralFeatureActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::WRITESTRUCTURALFEATUREACTION_EREFERENCE_RESULT:
-			return getResult() != nullptr; //12830
-		case UmlPackage::WRITESTRUCTURALFEATUREACTION_EREFERENCE_VALUE:
-			return getValue() != nullptr; //12831
+		case UmlPackage::WRITESTRUCTURALFEATUREACTION_ATTRIBUTE_RESULT:
+			return getResult() != nullptr; //25829
+		case UmlPackage::WRITESTRUCTURALFEATUREACTION_ATTRIBUTE_VALUE:
+			return getValue() != nullptr; //25830
 	}
 	return StructuralFeatureActionImpl::internalEIsSet(featureID);
 }
@@ -467,18 +466,20 @@ bool WriteStructuralFeatureActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::WRITESTRUCTURALFEATUREACTION_EREFERENCE_RESULT:
+		case UmlPackage::WRITESTRUCTURALFEATUREACTION_ATTRIBUTE_RESULT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::OutputPin> _result = newValue->get<std::shared_ptr<uml::OutputPin>>();
-			setResult(_result); //12830
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::OutputPin> _result = std::dynamic_pointer_cast<uml::OutputPin>(_temp);
+			setResult(_result); //25829
 			return true;
 		}
-		case UmlPackage::WRITESTRUCTURALFEATUREACTION_EREFERENCE_VALUE:
+		case UmlPackage::WRITESTRUCTURALFEATUREACTION_ATTRIBUTE_VALUE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::InputPin> _value = newValue->get<std::shared_ptr<uml::InputPin>>();
-			setValue(_value); //12831
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::InputPin> _value = std::dynamic_pointer_cast<uml::InputPin>(_temp);
+			setValue(_value); //25830
 			return true;
 		}
 	}
@@ -524,10 +525,9 @@ void WriteStructuralFeatureActionImpl::loadNode(std::string nodeName, std::share
 			{
 				typeName = "OutputPin";
 			}
-			std::shared_ptr<uml::OutputPin> result = std::dynamic_pointer_cast<uml::OutputPin>(modelFactory->create(typeName));
+			std::shared_ptr<ecore::EObject> result = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::OUTPUTPIN_ATTRIBUTE_WRITESTRUCTURALFEATUREACTION);
 			if (result != nullptr)
 			{
-				this->setResult(result);
 				loadHandler->handleChild(result);
 			}
 			return;
@@ -540,10 +540,9 @@ void WriteStructuralFeatureActionImpl::loadNode(std::string nodeName, std::share
 			{
 				typeName = "InputPin";
 			}
-			std::shared_ptr<uml::InputPin> value = std::dynamic_pointer_cast<uml::InputPin>(modelFactory->create(typeName));
+			std::shared_ptr<ecore::EObject> value = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::INPUTPIN_ATTRIBUTE_WRITESTRUCTURALFEATUREACTION);
 			if (value != nullptr)
 			{
-				this->setValue(value);
 				loadHandler->handleChild(value);
 			}
 			return;
@@ -585,7 +584,6 @@ void WriteStructuralFeatureActionImpl::save(std::shared_ptr<persistence::interfa
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
@@ -609,14 +607,14 @@ void WriteStructuralFeatureActionImpl::saveContent(std::shared_ptr<persistence::
 		std::shared_ptr<uml::OutputPin > result = this->getResult();
 		if (result != nullptr)
 		{
-			saveHandler->addReference(result, "result", result->eClass() != package->getOutputPin_EClass());
+			saveHandler->addReference(result, "result", result->eClass() != package->getOutputPin_Class());
 		}
 
 		// Save 'value'
 		std::shared_ptr<uml::InputPin > value = this->getValue();
 		if (value != nullptr)
 		{
-			saveHandler->addReference(value, "value", value->eClass() != package->getInputPin_EClass());
+			saveHandler->addReference(value, "value", value->eClass() != package->getInputPin_Class());
 		}
 	
 

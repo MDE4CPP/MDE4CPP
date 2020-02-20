@@ -33,13 +33,22 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
 
 #include "uml/Dependency.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -103,24 +112,24 @@ ConstraintImpl::~ConstraintImpl()
 
 
 //Additional constructor for the containments back reference
-			ConstraintImpl::ConstraintImpl(std::weak_ptr<uml::Namespace > par_Namespace, const int reference_id)
-			:ConstraintImpl()
-			{
-				switch(reference_id)
-				{	
-				case UmlPackage::CONSTRAINT_EREFERENCE_CONTEXT:
-					m_context = par_Namespace;
-					m_namespace = par_Namespace;
-					 return;
-				case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE:
-					m_namespace = par_Namespace;
-					m_owner = par_Namespace;
-					 return;
-				default:
-				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
-				}
-			   
-			}
+ConstraintImpl::ConstraintImpl(std::weak_ptr<uml::Namespace > par_Namespace, const int reference_id)
+:ConstraintImpl()
+{
+	switch(reference_id)
+	{	
+	case UmlPackage::CONSTRAINT_ATTRIBUTE_CONTEXT:
+		m_context = par_Namespace;
+		m_namespace = par_Namespace;
+		 return;
+	case UmlPackage::NAMEDELEMENT_ATTRIBUTE_NAMESPACE:
+		m_namespace = par_Namespace;
+		m_owner = par_Namespace;
+		 return;
+	default:
+	std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
+	}
+   
+}
 
 
 
@@ -201,14 +210,6 @@ ConstraintImpl::ConstraintImpl(const ConstraintImpl & obj):ConstraintImpl()
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	if(obj.getNameExpression()!=nullptr)
 	{
 		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
@@ -244,7 +245,7 @@ std::shared_ptr<ecore::EObject>  ConstraintImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ConstraintImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getConstraint_EClass();
+	return UmlPackageImpl::eInstance()->getConstraint_Class();
 }
 
 //*********************************
@@ -364,12 +365,22 @@ Any ConstraintImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::CONSTRAINT_EREFERENCE_CONSTRAINEDELEMENT:
-			return eAny(getConstrainedElement()); //5313
-		case UmlPackage::CONSTRAINT_EREFERENCE_CONTEXT:
-			return eAny(getContext()); //5314
-		case UmlPackage::CONSTRAINT_EREFERENCE_SPECIFICATION:
-			return eAny(getSpecification()); //5315
+		case UmlPackage::CONSTRAINT_ATTRIBUTE_CONSTRAINEDELEMENT:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Element>::iterator iter = m_constrainedElement->begin();
+			Bag<uml::Element>::iterator end = m_constrainedElement->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //5812
+		}
+		case UmlPackage::CONSTRAINT_ATTRIBUTE_CONTEXT:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getContext().lock())); //5813
+		case UmlPackage::CONSTRAINT_ATTRIBUTE_SPECIFICATION:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSpecification())); //5814
 	}
 	return PackageableElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -377,12 +388,12 @@ bool ConstraintImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::CONSTRAINT_EREFERENCE_CONSTRAINEDELEMENT:
-			return getConstrainedElement() != nullptr; //5313
-		case UmlPackage::CONSTRAINT_EREFERENCE_CONTEXT:
-			return getContext().lock() != nullptr; //5314
-		case UmlPackage::CONSTRAINT_EREFERENCE_SPECIFICATION:
-			return getSpecification() != nullptr; //5315
+		case UmlPackage::CONSTRAINT_ATTRIBUTE_CONSTRAINEDELEMENT:
+			return getConstrainedElement() != nullptr; //5812
+		case UmlPackage::CONSTRAINT_ATTRIBUTE_CONTEXT:
+			return getContext().lock() != nullptr; //5813
+		case UmlPackage::CONSTRAINT_ATTRIBUTE_SPECIFICATION:
+			return getSpecification() != nullptr; //5814
 	}
 	return PackageableElementImpl::internalEIsSet(featureID);
 }
@@ -390,18 +401,56 @@ bool ConstraintImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::CONSTRAINT_EREFERENCE_CONTEXT:
+		case UmlPackage::CONSTRAINT_ATTRIBUTE_CONSTRAINEDELEMENT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Namespace> _context = newValue->get<std::shared_ptr<uml::Namespace>>();
-			setContext(_context); //5314
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Element>> constrainedElementList(new Bag<uml::Element>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				constrainedElementList->add(std::dynamic_pointer_cast<uml::Element>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Element>::iterator iterConstrainedElement = m_constrainedElement->begin();
+			Bag<uml::Element>::iterator endConstrainedElement = m_constrainedElement->end();
+			while (iterConstrainedElement != endConstrainedElement)
+			{
+				if (constrainedElementList->find(*iterConstrainedElement) == -1)
+				{
+					m_constrainedElement->erase(*iterConstrainedElement);
+				}
+				iterConstrainedElement++;
+			}
+
+			iterConstrainedElement = constrainedElementList->begin();
+			endConstrainedElement = constrainedElementList->end();
+			while (iterConstrainedElement != endConstrainedElement)
+			{
+				if (m_constrainedElement->find(*iterConstrainedElement) == -1)
+				{
+					m_constrainedElement->add(*iterConstrainedElement);
+				}
+				iterConstrainedElement++;			
+			}
 			return true;
 		}
-		case UmlPackage::CONSTRAINT_EREFERENCE_SPECIFICATION:
+		case UmlPackage::CONSTRAINT_ATTRIBUTE_CONTEXT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::ValueSpecification> _specification = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
-			setSpecification(_specification); //5315
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Namespace> _context = std::dynamic_pointer_cast<uml::Namespace>(_temp);
+			setContext(_context); //5813
+			return true;
+		}
+		case UmlPackage::CONSTRAINT_ATTRIBUTE_SPECIFICATION:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::ValueSpecification> _specification = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
+			setSpecification(_specification); //5814
 			return true;
 		}
 	}
@@ -492,7 +541,7 @@ void ConstraintImpl::resolveReferences(const int featureID, std::list<std::share
 {
 	switch(featureID)
 	{
-		case UmlPackage::CONSTRAINT_EREFERENCE_CONSTRAINEDELEMENT:
+		case UmlPackage::CONSTRAINT_ATTRIBUTE_CONSTRAINEDELEMENT:
 		{
 			std::shared_ptr<Bag<uml::Element>> _constrainedElement = getConstrainedElement();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -506,7 +555,7 @@ void ConstraintImpl::resolveReferences(const int featureID, std::list<std::share
 			return;
 		}
 
-		case UmlPackage::CONSTRAINT_EREFERENCE_CONTEXT:
+		case UmlPackage::CONSTRAINT_ATTRIBUTE_CONTEXT:
 		{
 			if (references.size() == 1)
 			{
@@ -532,7 +581,6 @@ void ConstraintImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler>
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
@@ -552,7 +600,7 @@ void ConstraintImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 		std::shared_ptr<uml::ValueSpecification > specification = this->getSpecification();
 		if (specification != nullptr)
 		{
-			saveHandler->addReference(specification, "specification", specification->eClass() != package->getValueSpecification_EClass());
+			saveHandler->addReference(specification, "specification", specification->eClass() != package->getValueSpecification_Class());
 		}
 	
 

@@ -33,6 +33,15 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Activity.hpp"
@@ -56,8 +65,6 @@
 #include "uml/Constraint.hpp"
 
 #include "uml/Dependency.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -221,14 +228,6 @@ CallBehaviorActionImpl::CallBehaviorActionImpl(const CallBehaviorActionImpl & ob
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_argument" << std::endl;
 	#endif
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::ExceptionHandler>> _handlerList = obj.getHandler();
 	for(std::shared_ptr<uml::ExceptionHandler> _handler : *_handlerList)
 	{
@@ -312,7 +311,7 @@ std::shared_ptr<ecore::EObject>  CallBehaviorActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> CallBehaviorActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getCallBehaviorAction_EClass();
+	return UmlPackageImpl::eInstance()->getCallBehaviorAction_Class();
 }
 
 //*********************************
@@ -410,8 +409,8 @@ Any CallBehaviorActionImpl::eGet(int featureID, bool resolve, bool coreType) con
 {
 	switch(featureID)
 	{
-		case UmlPackage::CALLBEHAVIORACTION_EREFERENCE_BEHAVIOR:
-			return eAny(getBehavior()); //14032
+		case UmlPackage::CALLBEHAVIORACTION_ATTRIBUTE_BEHAVIOR:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getBehavior())); //3031
 	}
 	return CallActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -419,8 +418,8 @@ bool CallBehaviorActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::CALLBEHAVIORACTION_EREFERENCE_BEHAVIOR:
-			return getBehavior() != nullptr; //14032
+		case UmlPackage::CALLBEHAVIORACTION_ATTRIBUTE_BEHAVIOR:
+			return getBehavior() != nullptr; //3031
 	}
 	return CallActionImpl::internalEIsSet(featureID);
 }
@@ -428,11 +427,12 @@ bool CallBehaviorActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::CALLBEHAVIORACTION_EREFERENCE_BEHAVIOR:
+		case UmlPackage::CALLBEHAVIORACTION_ATTRIBUTE_BEHAVIOR:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Behavior> _behavior = newValue->get<std::shared_ptr<uml::Behavior>>();
-			setBehavior(_behavior); //14032
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Behavior> _behavior = std::dynamic_pointer_cast<uml::Behavior>(_temp);
+			setBehavior(_behavior); //3031
 			return true;
 		}
 	}
@@ -496,7 +496,7 @@ void CallBehaviorActionImpl::resolveReferences(const int featureID, std::list<st
 {
 	switch(featureID)
 	{
-		case UmlPackage::CALLBEHAVIORACTION_EREFERENCE_BEHAVIOR:
+		case UmlPackage::CALLBEHAVIORACTION_ATTRIBUTE_BEHAVIOR:
 		{
 			if (references.size() == 1)
 			{
@@ -532,7 +532,6 @@ void CallBehaviorActionImpl::save(std::shared_ptr<persistence::interfaces::XSave
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

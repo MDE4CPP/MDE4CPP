@@ -33,6 +33,17 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Classifier.hpp"
@@ -44,8 +55,6 @@
 #include "uml/Constraint.hpp"
 
 #include "uml/Dependency.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -233,24 +242,24 @@ InterfaceImpl::~InterfaceImpl()
 
 
 //Additional constructor for the containments back reference
-			InterfaceImpl::InterfaceImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id)
-			:InterfaceImpl()
-			{
-				switch(reference_id)
-				{	
-				case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
-					m_owningPackage = par_Package;
-					m_namespace = par_Package;
-					 return;
-				case UmlPackage::TYPE_EREFERENCE_PACKAGE:
-					m_package = par_Package;
-					m_namespace = par_Package;
-					 return;
-				default:
-				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
-				}
-			   
-			}
+InterfaceImpl::InterfaceImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id)
+:InterfaceImpl()
+{
+	switch(reference_id)
+	{	
+	case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
+		m_owningPackage = par_Package;
+		m_namespace = par_Package;
+		 return;
+	case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
+		m_package = par_Package;
+		m_namespace = par_Package;
+		 return;
+	default:
+	std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
+	}
+   
+}
 
 
 
@@ -333,14 +342,6 @@ InterfaceImpl::InterfaceImpl(const InterfaceImpl & obj):InterfaceImpl()
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_collaborationUse" << std::endl;
-	#endif
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
 	#endif
 	std::shared_ptr<Bag<uml::ElementImport>> _elementImportList = obj.getElementImport();
 	for(std::shared_ptr<uml::ElementImport> _elementImport : *_elementImportList)
@@ -543,7 +544,7 @@ std::shared_ptr<ecore::EObject>  InterfaceImpl::copy() const
 
 std::shared_ptr<ecore::EClass> InterfaceImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getInterface_EClass();
+	return UmlPackageImpl::eInstance()->getInterface_Class();
 }
 
 //*********************************
@@ -701,18 +702,68 @@ Any InterfaceImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::INTERFACE_EREFERENCE_NESTEDCLASSIFIER:
-			return eAny(getNestedClassifier()); //5539
-		case UmlPackage::INTERFACE_EREFERENCE_OWNEDATTRIBUTE:
-			return eAny(getOwnedAttribute()); //5540
-		case UmlPackage::INTERFACE_EREFERENCE_OWNEDOPERATION:
-			return eAny(getOwnedOperation()); //5544
-		case UmlPackage::INTERFACE_EREFERENCE_OWNEDRECEPTION:
-			return eAny(getOwnedReception()); //5541
-		case UmlPackage::INTERFACE_EREFERENCE_PROTOCOL:
-			return eAny(getProtocol()); //5542
-		case UmlPackage::INTERFACE_EREFERENCE_REDEFINEDINTERFACE:
-			return eAny(getRedefinedInterface()); //5543
+		case UmlPackage::INTERFACE_ATTRIBUTE_NESTEDCLASSIFIER:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Classifier>::iterator iter = m_nestedClassifier->begin();
+			Bag<uml::Classifier>::iterator end = m_nestedClassifier->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //12638
+		}
+		case UmlPackage::INTERFACE_ATTRIBUTE_OWNEDATTRIBUTE:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Property>::iterator iter = m_ownedAttribute->begin();
+			Bag<uml::Property>::iterator end = m_ownedAttribute->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //12639
+		}
+		case UmlPackage::INTERFACE_ATTRIBUTE_OWNEDOPERATION:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Operation>::iterator iter = m_ownedOperation->begin();
+			Bag<uml::Operation>::iterator end = m_ownedOperation->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //12643
+		}
+		case UmlPackage::INTERFACE_ATTRIBUTE_OWNEDRECEPTION:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Reception>::iterator iter = m_ownedReception->begin();
+			Bag<uml::Reception>::iterator end = m_ownedReception->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //12640
+		}
+		case UmlPackage::INTERFACE_ATTRIBUTE_PROTOCOL:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getProtocol())); //12641
+		case UmlPackage::INTERFACE_ATTRIBUTE_REDEFINEDINTERFACE:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Interface>::iterator iter = m_redefinedInterface->begin();
+			Bag<uml::Interface>::iterator end = m_redefinedInterface->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //12642
+		}
 	}
 	return ClassifierImpl::eGet(featureID, resolve, coreType);
 }
@@ -720,18 +771,18 @@ bool InterfaceImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::INTERFACE_EREFERENCE_NESTEDCLASSIFIER:
-			return getNestedClassifier() != nullptr; //5539
-		case UmlPackage::INTERFACE_EREFERENCE_OWNEDATTRIBUTE:
-			return getOwnedAttribute() != nullptr; //5540
-		case UmlPackage::INTERFACE_EREFERENCE_OWNEDOPERATION:
-			return getOwnedOperation() != nullptr; //5544
-		case UmlPackage::INTERFACE_EREFERENCE_OWNEDRECEPTION:
-			return getOwnedReception() != nullptr; //5541
-		case UmlPackage::INTERFACE_EREFERENCE_PROTOCOL:
-			return getProtocol() != nullptr; //5542
-		case UmlPackage::INTERFACE_EREFERENCE_REDEFINEDINTERFACE:
-			return getRedefinedInterface() != nullptr; //5543
+		case UmlPackage::INTERFACE_ATTRIBUTE_NESTEDCLASSIFIER:
+			return getNestedClassifier() != nullptr; //12638
+		case UmlPackage::INTERFACE_ATTRIBUTE_OWNEDATTRIBUTE:
+			return getOwnedAttribute() != nullptr; //12639
+		case UmlPackage::INTERFACE_ATTRIBUTE_OWNEDOPERATION:
+			return getOwnedOperation() != nullptr; //12643
+		case UmlPackage::INTERFACE_ATTRIBUTE_OWNEDRECEPTION:
+			return getOwnedReception() != nullptr; //12640
+		case UmlPackage::INTERFACE_ATTRIBUTE_PROTOCOL:
+			return getProtocol() != nullptr; //12641
+		case UmlPackage::INTERFACE_ATTRIBUTE_REDEFINEDINTERFACE:
+			return getRedefinedInterface() != nullptr; //12642
 	}
 	return ClassifierImpl::internalEIsSet(featureID);
 }
@@ -739,11 +790,192 @@ bool InterfaceImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::INTERFACE_EREFERENCE_PROTOCOL:
+		case UmlPackage::INTERFACE_ATTRIBUTE_NESTEDCLASSIFIER:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::ProtocolStateMachine> _protocol = newValue->get<std::shared_ptr<uml::ProtocolStateMachine>>();
-			setProtocol(_protocol); //5542
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Classifier>> nestedClassifierList(new Bag<uml::Classifier>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				nestedClassifierList->add(std::dynamic_pointer_cast<uml::Classifier>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Classifier>::iterator iterNestedClassifier = m_nestedClassifier->begin();
+			Bag<uml::Classifier>::iterator endNestedClassifier = m_nestedClassifier->end();
+			while (iterNestedClassifier != endNestedClassifier)
+			{
+				if (nestedClassifierList->find(*iterNestedClassifier) == -1)
+				{
+					m_nestedClassifier->erase(*iterNestedClassifier);
+				}
+				iterNestedClassifier++;
+			}
+
+			iterNestedClassifier = nestedClassifierList->begin();
+			endNestedClassifier = nestedClassifierList->end();
+			while (iterNestedClassifier != endNestedClassifier)
+			{
+				if (m_nestedClassifier->find(*iterNestedClassifier) == -1)
+				{
+					m_nestedClassifier->add(*iterNestedClassifier);
+				}
+				iterNestedClassifier++;			
+			}
+			return true;
+		}
+		case UmlPackage::INTERFACE_ATTRIBUTE_OWNEDATTRIBUTE:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Property>> ownedAttributeList(new Bag<uml::Property>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				ownedAttributeList->add(std::dynamic_pointer_cast<uml::Property>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Property>::iterator iterOwnedAttribute = m_ownedAttribute->begin();
+			Bag<uml::Property>::iterator endOwnedAttribute = m_ownedAttribute->end();
+			while (iterOwnedAttribute != endOwnedAttribute)
+			{
+				if (ownedAttributeList->find(*iterOwnedAttribute) == -1)
+				{
+					m_ownedAttribute->erase(*iterOwnedAttribute);
+				}
+				iterOwnedAttribute++;
+			}
+
+			iterOwnedAttribute = ownedAttributeList->begin();
+			endOwnedAttribute = ownedAttributeList->end();
+			while (iterOwnedAttribute != endOwnedAttribute)
+			{
+				if (m_ownedAttribute->find(*iterOwnedAttribute) == -1)
+				{
+					m_ownedAttribute->add(*iterOwnedAttribute);
+				}
+				iterOwnedAttribute++;			
+			}
+			return true;
+		}
+		case UmlPackage::INTERFACE_ATTRIBUTE_OWNEDOPERATION:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Operation>> ownedOperationList(new Bag<uml::Operation>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				ownedOperationList->add(std::dynamic_pointer_cast<uml::Operation>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Operation>::iterator iterOwnedOperation = m_ownedOperation->begin();
+			Bag<uml::Operation>::iterator endOwnedOperation = m_ownedOperation->end();
+			while (iterOwnedOperation != endOwnedOperation)
+			{
+				if (ownedOperationList->find(*iterOwnedOperation) == -1)
+				{
+					m_ownedOperation->erase(*iterOwnedOperation);
+				}
+				iterOwnedOperation++;
+			}
+
+			iterOwnedOperation = ownedOperationList->begin();
+			endOwnedOperation = ownedOperationList->end();
+			while (iterOwnedOperation != endOwnedOperation)
+			{
+				if (m_ownedOperation->find(*iterOwnedOperation) == -1)
+				{
+					m_ownedOperation->add(*iterOwnedOperation);
+				}
+				iterOwnedOperation++;			
+			}
+			return true;
+		}
+		case UmlPackage::INTERFACE_ATTRIBUTE_OWNEDRECEPTION:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Reception>> ownedReceptionList(new Bag<uml::Reception>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				ownedReceptionList->add(std::dynamic_pointer_cast<uml::Reception>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Reception>::iterator iterOwnedReception = m_ownedReception->begin();
+			Bag<uml::Reception>::iterator endOwnedReception = m_ownedReception->end();
+			while (iterOwnedReception != endOwnedReception)
+			{
+				if (ownedReceptionList->find(*iterOwnedReception) == -1)
+				{
+					m_ownedReception->erase(*iterOwnedReception);
+				}
+				iterOwnedReception++;
+			}
+
+			iterOwnedReception = ownedReceptionList->begin();
+			endOwnedReception = ownedReceptionList->end();
+			while (iterOwnedReception != endOwnedReception)
+			{
+				if (m_ownedReception->find(*iterOwnedReception) == -1)
+				{
+					m_ownedReception->add(*iterOwnedReception);
+				}
+				iterOwnedReception++;			
+			}
+			return true;
+		}
+		case UmlPackage::INTERFACE_ATTRIBUTE_PROTOCOL:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::ProtocolStateMachine> _protocol = std::dynamic_pointer_cast<uml::ProtocolStateMachine>(_temp);
+			setProtocol(_protocol); //12641
+			return true;
+		}
+		case UmlPackage::INTERFACE_ATTRIBUTE_REDEFINEDINTERFACE:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Interface>> redefinedInterfaceList(new Bag<uml::Interface>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				redefinedInterfaceList->add(std::dynamic_pointer_cast<uml::Interface>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Interface>::iterator iterRedefinedInterface = m_redefinedInterface->begin();
+			Bag<uml::Interface>::iterator endRedefinedInterface = m_redefinedInterface->end();
+			while (iterRedefinedInterface != endRedefinedInterface)
+			{
+				if (redefinedInterfaceList->find(*iterRedefinedInterface) == -1)
+				{
+					m_redefinedInterface->erase(*iterRedefinedInterface);
+				}
+				iterRedefinedInterface++;
+			}
+
+			iterRedefinedInterface = redefinedInterfaceList->begin();
+			endRedefinedInterface = redefinedInterfaceList->end();
+			while (iterRedefinedInterface != endRedefinedInterface)
+			{
+				if (m_redefinedInterface->find(*iterRedefinedInterface) == -1)
+				{
+					m_redefinedInterface->add(*iterRedefinedInterface);
+				}
+				iterRedefinedInterface++;			
+			}
 			return true;
 		}
 	}
@@ -826,7 +1058,7 @@ void InterfaceImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::
 			{
 				typeName = "Property";
 			}
-			std::shared_ptr<ecore::EObject> ownedAttribute = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::PROPERTY_EREFERENCE_INTERFACE);
+			std::shared_ptr<ecore::EObject> ownedAttribute = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::PROPERTY_ATTRIBUTE_INTERFACE);
 			if (ownedAttribute != nullptr)
 			{
 				loadHandler->handleChild(ownedAttribute);
@@ -841,7 +1073,7 @@ void InterfaceImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::
 			{
 				typeName = "Operation";
 			}
-			std::shared_ptr<ecore::EObject> ownedOperation = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::OPERATION_EREFERENCE_INTERFACE);
+			std::shared_ptr<ecore::EObject> ownedOperation = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::OPERATION_ATTRIBUTE_INTERFACE);
 			if (ownedOperation != nullptr)
 			{
 				loadHandler->handleChild(ownedOperation);
@@ -898,7 +1130,7 @@ void InterfaceImpl::resolveReferences(const int featureID, std::list<std::shared
 {
 	switch(featureID)
 	{
-		case UmlPackage::INTERFACE_EREFERENCE_REDEFINEDINTERFACE:
+		case UmlPackage::INTERFACE_ATTRIBUTE_REDEFINEDINTERFACE:
 		{
 			std::shared_ptr<Bag<uml::Interface>> _redefinedInterface = getRedefinedInterface();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -933,7 +1165,6 @@ void InterfaceImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> 
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
@@ -954,32 +1185,32 @@ void InterfaceImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 		// Save 'nestedClassifier'
 		for (std::shared_ptr<uml::Classifier> nestedClassifier : *this->getNestedClassifier()) 
 		{
-			saveHandler->addReference(nestedClassifier, "nestedClassifier", nestedClassifier->eClass() != package->getClassifier_EClass());
+			saveHandler->addReference(nestedClassifier, "nestedClassifier", nestedClassifier->eClass() != package->getClassifier_Class());
 		}
 
 		// Save 'ownedAttribute'
 		for (std::shared_ptr<uml::Property> ownedAttribute : *this->getOwnedAttribute()) 
 		{
-			saveHandler->addReference(ownedAttribute, "ownedAttribute", ownedAttribute->eClass() != package->getProperty_EClass());
+			saveHandler->addReference(ownedAttribute, "ownedAttribute", ownedAttribute->eClass() != package->getProperty_Class());
 		}
 
 		// Save 'ownedOperation'
 		for (std::shared_ptr<uml::Operation> ownedOperation : *this->getOwnedOperation()) 
 		{
-			saveHandler->addReference(ownedOperation, "ownedOperation", ownedOperation->eClass() != package->getOperation_EClass());
+			saveHandler->addReference(ownedOperation, "ownedOperation", ownedOperation->eClass() != package->getOperation_Class());
 		}
 
 		// Save 'ownedReception'
 		for (std::shared_ptr<uml::Reception> ownedReception : *this->getOwnedReception()) 
 		{
-			saveHandler->addReference(ownedReception, "ownedReception", ownedReception->eClass() != package->getReception_EClass());
+			saveHandler->addReference(ownedReception, "ownedReception", ownedReception->eClass() != package->getReception_Class());
 		}
 
 		// Save 'protocol'
 		std::shared_ptr<uml::ProtocolStateMachine > protocol = this->getProtocol();
 		if (protocol != nullptr)
 		{
-			saveHandler->addReference(protocol, "protocol", protocol->eClass() != package->getProtocolStateMachine_EClass());
+			saveHandler->addReference(protocol, "protocol", protocol->eClass() != package->getProtocolStateMachine_Class());
 		}
 	
 

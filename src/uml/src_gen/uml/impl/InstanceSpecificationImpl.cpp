@@ -33,6 +33,15 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Classifier.hpp"
@@ -46,8 +55,6 @@
 #include "uml/Deployment.hpp"
 
 #include "uml/DeploymentTarget.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -214,14 +221,6 @@ InstanceSpecificationImpl::InstanceSpecificationImpl(const InstanceSpecification
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_deployment" << std::endl;
 	#endif
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	if(obj.getNameExpression()!=nullptr)
 	{
 		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
@@ -273,7 +272,7 @@ std::shared_ptr<ecore::EObject>  InstanceSpecificationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> InstanceSpecificationImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getInstanceSpecification_EClass();
+	return UmlPackageImpl::eInstance()->getInstanceSpecification_Class();
 }
 
 //*********************************
@@ -393,12 +392,32 @@ Any InstanceSpecificationImpl::eGet(int featureID, bool resolve, bool coreType) 
 {
 	switch(featureID)
 	{
-		case UmlPackage::INSTANCESPECIFICATION_EREFERENCE_CLASSIFIER:
-			return eAny(getClassifier()); //7915
-		case UmlPackage::INSTANCESPECIFICATION_EREFERENCE_SLOT:
-			return eAny(getSlot()); //7916
-		case UmlPackage::INSTANCESPECIFICATION_EREFERENCE_SPECIFICATION:
-			return eAny(getSpecification()); //7917
+		case UmlPackage::INSTANCESPECIFICATION_ATTRIBUTE_CLASSIFIER:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Classifier>::iterator iter = m_classifier->begin();
+			Bag<uml::Classifier>::iterator end = m_classifier->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //11814
+		}
+		case UmlPackage::INSTANCESPECIFICATION_ATTRIBUTE_SLOT:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Slot>::iterator iter = m_slot->begin();
+			Bag<uml::Slot>::iterator end = m_slot->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //11815
+		}
+		case UmlPackage::INSTANCESPECIFICATION_ATTRIBUTE_SPECIFICATION:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSpecification())); //11816
 	}
 	Any result;
 	result = DeployedArtifactImpl::eGet(featureID, resolve, coreType);
@@ -418,12 +437,12 @@ bool InstanceSpecificationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::INSTANCESPECIFICATION_EREFERENCE_CLASSIFIER:
-			return getClassifier() != nullptr; //7915
-		case UmlPackage::INSTANCESPECIFICATION_EREFERENCE_SLOT:
-			return getSlot() != nullptr; //7916
-		case UmlPackage::INSTANCESPECIFICATION_EREFERENCE_SPECIFICATION:
-			return getSpecification() != nullptr; //7917
+		case UmlPackage::INSTANCESPECIFICATION_ATTRIBUTE_CLASSIFIER:
+			return getClassifier() != nullptr; //11814
+		case UmlPackage::INSTANCESPECIFICATION_ATTRIBUTE_SLOT:
+			return getSlot() != nullptr; //11815
+		case UmlPackage::INSTANCESPECIFICATION_ATTRIBUTE_SPECIFICATION:
+			return getSpecification() != nullptr; //11816
 	}
 	bool result = false;
 	result = DeployedArtifactImpl::internalEIsSet(featureID);
@@ -443,11 +462,84 @@ bool InstanceSpecificationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::INSTANCESPECIFICATION_EREFERENCE_SPECIFICATION:
+		case UmlPackage::INSTANCESPECIFICATION_ATTRIBUTE_CLASSIFIER:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::ValueSpecification> _specification = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
-			setSpecification(_specification); //7917
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Classifier>> classifierList(new Bag<uml::Classifier>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				classifierList->add(std::dynamic_pointer_cast<uml::Classifier>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Classifier>::iterator iterClassifier = m_classifier->begin();
+			Bag<uml::Classifier>::iterator endClassifier = m_classifier->end();
+			while (iterClassifier != endClassifier)
+			{
+				if (classifierList->find(*iterClassifier) == -1)
+				{
+					m_classifier->erase(*iterClassifier);
+				}
+				iterClassifier++;
+			}
+
+			iterClassifier = classifierList->begin();
+			endClassifier = classifierList->end();
+			while (iterClassifier != endClassifier)
+			{
+				if (m_classifier->find(*iterClassifier) == -1)
+				{
+					m_classifier->add(*iterClassifier);
+				}
+				iterClassifier++;			
+			}
+			return true;
+		}
+		case UmlPackage::INSTANCESPECIFICATION_ATTRIBUTE_SLOT:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Slot>> slotList(new Bag<uml::Slot>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				slotList->add(std::dynamic_pointer_cast<uml::Slot>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Slot>::iterator iterSlot = m_slot->begin();
+			Bag<uml::Slot>::iterator endSlot = m_slot->end();
+			while (iterSlot != endSlot)
+			{
+				if (slotList->find(*iterSlot) == -1)
+				{
+					m_slot->erase(*iterSlot);
+				}
+				iterSlot++;
+			}
+
+			iterSlot = slotList->begin();
+			endSlot = slotList->end();
+			while (iterSlot != endSlot)
+			{
+				if (m_slot->find(*iterSlot) == -1)
+				{
+					m_slot->add(*iterSlot);
+				}
+				iterSlot++;			
+			}
+			return true;
+		}
+		case UmlPackage::INSTANCESPECIFICATION_ATTRIBUTE_SPECIFICATION:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::ValueSpecification> _specification = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
+			setSpecification(_specification); //11816
 			return true;
 		}
 	}
@@ -526,7 +618,7 @@ void InstanceSpecificationImpl::loadNode(std::string nodeName, std::shared_ptr<p
 			{
 				typeName = "Slot";
 			}
-			std::shared_ptr<ecore::EObject> slot = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::SLOT_EREFERENCE_OWNINGINSTANCE);
+			std::shared_ptr<ecore::EObject> slot = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::SLOT_ATTRIBUTE_OWNINGINSTANCE);
 			if (slot != nullptr)
 			{
 				loadHandler->handleChild(slot);
@@ -569,7 +661,7 @@ void InstanceSpecificationImpl::resolveReferences(const int featureID, std::list
 {
 	switch(featureID)
 	{
-		case UmlPackage::INSTANCESPECIFICATION_EREFERENCE_CLASSIFIER:
+		case UmlPackage::INSTANCESPECIFICATION_ATTRIBUTE_CLASSIFIER:
 		{
 			std::shared_ptr<Bag<uml::Classifier>> _classifier = getClassifier();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -601,7 +693,6 @@ void InstanceSpecificationImpl::save(std::shared_ptr<persistence::interfaces::XS
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
@@ -620,14 +711,14 @@ void InstanceSpecificationImpl::saveContent(std::shared_ptr<persistence::interfa
 		// Save 'slot'
 		for (std::shared_ptr<uml::Slot> slot : *this->getSlot()) 
 		{
-			saveHandler->addReference(slot, "slot", slot->eClass() != package->getSlot_EClass());
+			saveHandler->addReference(slot, "slot", slot->eClass() != package->getSlot_Class());
 		}
 
 		// Save 'specification'
 		std::shared_ptr<uml::ValueSpecification > specification = this->getSpecification();
 		if (specification != nullptr)
 		{
-			saveHandler->addReference(specification, "specification", specification->eClass() != package->getValueSpecification_EClass());
+			saveHandler->addReference(specification, "specification", specification->eClass() != package->getValueSpecification_Class());
 		}
 	
 

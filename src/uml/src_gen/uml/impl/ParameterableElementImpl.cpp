@@ -31,11 +31,14 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -125,14 +128,6 @@ ParameterableElementImpl::ParameterableElementImpl(const ParameterableElementImp
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
 	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
@@ -153,7 +148,7 @@ std::shared_ptr<ecore::EObject>  ParameterableElementImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ParameterableElementImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getParameterableElement_EClass();
+	return UmlPackageImpl::eInstance()->getParameterableElement_Class();
 }
 
 //*********************************
@@ -241,10 +236,10 @@ Any ParameterableElementImpl::eGet(int featureID, bool resolve, bool coreType) c
 {
 	switch(featureID)
 	{
-		case UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER:
-			return eAny(getOwningTemplateParameter()); //154
-		case UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_TEMPLATEPARAMETER:
-			return eAny(getTemplateParameter()); //155
+		case UmlPackage::PARAMETERABLEELEMENT_ATTRIBUTE_OWNINGTEMPLATEPARAMETER:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getOwningTemplateParameter().lock())); //1793
+		case UmlPackage::PARAMETERABLEELEMENT_ATTRIBUTE_TEMPLATEPARAMETER:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getTemplateParameter())); //1794
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -252,10 +247,10 @@ bool ParameterableElementImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER:
-			return getOwningTemplateParameter().lock() != nullptr; //154
-		case UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_TEMPLATEPARAMETER:
-			return getTemplateParameter() != nullptr; //155
+		case UmlPackage::PARAMETERABLEELEMENT_ATTRIBUTE_OWNINGTEMPLATEPARAMETER:
+			return getOwningTemplateParameter().lock() != nullptr; //1793
+		case UmlPackage::PARAMETERABLEELEMENT_ATTRIBUTE_TEMPLATEPARAMETER:
+			return getTemplateParameter() != nullptr; //1794
 	}
 	return ElementImpl::internalEIsSet(featureID);
 }
@@ -263,18 +258,20 @@ bool ParameterableElementImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER:
+		case UmlPackage::PARAMETERABLEELEMENT_ATTRIBUTE_OWNINGTEMPLATEPARAMETER:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::TemplateParameter> _owningTemplateParameter = newValue->get<std::shared_ptr<uml::TemplateParameter>>();
-			setOwningTemplateParameter(_owningTemplateParameter); //154
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::TemplateParameter> _owningTemplateParameter = std::dynamic_pointer_cast<uml::TemplateParameter>(_temp);
+			setOwningTemplateParameter(_owningTemplateParameter); //1793
 			return true;
 		}
-		case UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_TEMPLATEPARAMETER:
+		case UmlPackage::PARAMETERABLEELEMENT_ATTRIBUTE_TEMPLATEPARAMETER:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::TemplateParameter> _templateParameter = newValue->get<std::shared_ptr<uml::TemplateParameter>>();
-			setTemplateParameter(_templateParameter); //155
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::TemplateParameter> _templateParameter = std::dynamic_pointer_cast<uml::TemplateParameter>(_temp);
+			setTemplateParameter(_templateParameter); //1794
 			return true;
 		}
 	}
@@ -338,7 +335,7 @@ void ParameterableElementImpl::resolveReferences(const int featureID, std::list<
 {
 	switch(featureID)
 	{
-		case UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER:
+		case UmlPackage::PARAMETERABLEELEMENT_ATTRIBUTE_OWNINGTEMPLATEPARAMETER:
 		{
 			if (references.size() == 1)
 			{
@@ -350,7 +347,7 @@ void ParameterableElementImpl::resolveReferences(const int featureID, std::list<
 			return;
 		}
 
-		case UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_TEMPLATEPARAMETER:
+		case UmlPackage::PARAMETERABLEELEMENT_ATTRIBUTE_TEMPLATEPARAMETER:
 		{
 			if (references.size() == 1)
 			{
@@ -371,7 +368,6 @@ void ParameterableElementImpl::save(std::shared_ptr<persistence::interfaces::XSa
 
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

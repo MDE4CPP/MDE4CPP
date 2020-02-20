@@ -32,13 +32,24 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
 
 #include "uml/Dependency.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -55,6 +66,8 @@
 #include "uml/TemplateParameter.hpp"
 
 #include "uml/Type.hpp"
+
+#include "uml/ValueSpecificationAction.hpp"
 
 #include "ecore/EcorePackage.hpp"
 #include "ecore/EcoreFactory.hpp"
@@ -149,6 +162,18 @@ LiteralNullImpl::~LiteralNullImpl()
 
 
 
+//Additional constructor for the containments back reference
+			LiteralNullImpl::LiteralNullImpl(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction)
+			:LiteralNullImpl()
+			{
+			    m_valueSpecificationAction = par_valueSpecificationAction;
+				m_owner = par_valueSpecificationAction;
+			}
+
+
+
+
+
 
 LiteralNullImpl::LiteralNullImpl(const LiteralNullImpl & obj):LiteralNullImpl()
 {
@@ -179,17 +204,11 @@ LiteralNullImpl::LiteralNullImpl(const LiteralNullImpl & obj):LiteralNullImpl()
 
 	m_type  = obj.getType();
 
+	m_valueSpecificationAction  = obj.getValueSpecificationAction();
+
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	if(obj.getNameExpression()!=nullptr)
 	{
 		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
@@ -217,7 +236,7 @@ std::shared_ptr<ecore::EObject>  LiteralNullImpl::copy() const
 
 std::shared_ptr<ecore::EClass> LiteralNullImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getLiteralNull_EClass();
+	return UmlPackageImpl::eInstance()->getLiteralNull_Class();
 }
 
 //*********************************
@@ -281,6 +300,11 @@ std::shared_ptr<ecore::EObject> LiteralNullImpl::eContainer() const
 	}
 
 	if(auto wp = m_owningTemplateParameter.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_valueSpecificationAction.lock())
 	{
 		return wp;
 	}
@@ -367,7 +391,6 @@ void LiteralNullImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

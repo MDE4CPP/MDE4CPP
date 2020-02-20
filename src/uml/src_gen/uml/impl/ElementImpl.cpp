@@ -35,6 +35,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Class.hpp"
@@ -46,8 +49,6 @@
 #include "ecore/EAnnotation.hpp"
 
 #include "ecore/EClass.hpp"
-
-#include "ecore/EModelElement.hpp"
 
 #include "ecore/EObject.hpp"
 
@@ -152,14 +153,6 @@ ElementImpl::ElementImpl(const ElementImpl & obj):ElementImpl()
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
 	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
@@ -187,7 +180,7 @@ std::shared_ptr<ecore::EObject>  ElementImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ElementImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getElement_EClass();
+	return UmlPackageImpl::eInstance()->getElement_Class();
 }
 
 //*********************************
@@ -494,7 +487,6 @@ std::shared_ptr<Element> ElementImpl::getThisElementPtr() const
 void ElementImpl::setThisElementPtr(std::weak_ptr<Element> thisElementPtr)
 {
 	m_thisElementPtr = thisElementPtr;
-	setThisEModelElementPtr(thisElementPtr);
 	setThisObjectPtr(thisElementPtr);
 }
 std::shared_ptr<ecore::EObject> ElementImpl::eContainer() const
@@ -513,56 +505,91 @@ Any ElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::ELEMENT_EREFERENCE_OWNEDCOMMENT:
-			return eAny(getOwnedComment()); //81
-		case UmlPackage::ELEMENT_EREFERENCE_OWNEDELEMENT:
-			return eAny(getOwnedElement()); //82
-		case UmlPackage::ELEMENT_EREFERENCE_OWNER:
-			return eAny(getOwner()); //83
+		case UmlPackage::ELEMENT_ATTRIBUTE_OWNEDCOMMENT:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Comment>::iterator iter = m_ownedComment->begin();
+			Bag<uml::Comment>::iterator end = m_ownedComment->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //820
+		}
+		case UmlPackage::ELEMENT_ATTRIBUTE_OWNEDELEMENT:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Element>::iterator iter = m_ownedElement->begin();
+			Bag<uml::Element>::iterator end = m_ownedElement->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //821
+		}
+		case UmlPackage::ELEMENT_ATTRIBUTE_OWNER:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getOwner().lock())); //822
 	}
-	Any result;
-	result = ecore::EModelElementImpl::eGet(featureID, resolve, coreType);
-	if (!result->isEmpty())
-	{
-		return result;
-	}
-	result = ObjectImpl::eGet(featureID, resolve, coreType);
-	return result;
+	return ObjectImpl::eGet(featureID, resolve, coreType);
 }
 bool ElementImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::ELEMENT_EREFERENCE_OWNEDCOMMENT:
-			return getOwnedComment() != nullptr; //81
-		case UmlPackage::ELEMENT_EREFERENCE_OWNEDELEMENT:
-			return getOwnedElement() != nullptr; //82
-		case UmlPackage::ELEMENT_EREFERENCE_OWNER:
-			return getOwner().lock() != nullptr; //83
+		case UmlPackage::ELEMENT_ATTRIBUTE_OWNEDCOMMENT:
+			return getOwnedComment() != nullptr; //820
+		case UmlPackage::ELEMENT_ATTRIBUTE_OWNEDELEMENT:
+			return getOwnedElement() != nullptr; //821
+		case UmlPackage::ELEMENT_ATTRIBUTE_OWNER:
+			return getOwner().lock() != nullptr; //822
 	}
-	bool result = false;
-	result = ecore::EModelElementImpl::internalEIsSet(featureID);
-	if (result)
-	{
-		return result;
-	}
-	result = ObjectImpl::internalEIsSet(featureID);
-	return result;
+	return ObjectImpl::internalEIsSet(featureID);
 }
 bool ElementImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
+		case UmlPackage::ELEMENT_ATTRIBUTE_OWNEDCOMMENT:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Comment>> ownedCommentList(new Bag<uml::Comment>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				ownedCommentList->add(std::dynamic_pointer_cast<uml::Comment>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Comment>::iterator iterOwnedComment = m_ownedComment->begin();
+			Bag<uml::Comment>::iterator endOwnedComment = m_ownedComment->end();
+			while (iterOwnedComment != endOwnedComment)
+			{
+				if (ownedCommentList->find(*iterOwnedComment) == -1)
+				{
+					m_ownedComment->erase(*iterOwnedComment);
+				}
+				iterOwnedComment++;
+			}
+
+			iterOwnedComment = ownedCommentList->begin();
+			endOwnedComment = ownedCommentList->end();
+			while (iterOwnedComment != endOwnedComment)
+			{
+				if (m_ownedComment->find(*iterOwnedComment) == -1)
+				{
+					m_ownedComment->add(*iterOwnedComment);
+				}
+				iterOwnedComment++;			
+			}
+			return true;
+		}
 	}
 
-	bool result = false;
-	result = ecore::EModelElementImpl::eSet(featureID, newValue);
-	if (result)
-	{
-		return result;
-	}
-	result = ObjectImpl::eSet(featureID, newValue);
-	return result;
+	return ObjectImpl::eSet(featureID, newValue);
 }
 
 //*********************************
@@ -588,7 +615,6 @@ void ElementImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> lo
 void ElementImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
 
-	ecore::EModelElementImpl::loadAttributes(loadHandler, attr_list);
 	ObjectImpl::loadAttributes(loadHandler, attr_list);
 }
 
@@ -604,7 +630,7 @@ void ElementImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::in
 			{
 				typeName = "Comment";
 			}
-			std::shared_ptr<ecore::EObject> ownedComment = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::ELEMENT_EREFERENCE_OWNER);
+			std::shared_ptr<ecore::EObject> ownedComment = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::ELEMENT_ATTRIBUTE_OWNER);
 			if (ownedComment != nullptr)
 			{
 				loadHandler->handleChild(ownedComment);
@@ -620,7 +646,7 @@ void ElementImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::in
 				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			std::shared_ptr<ecore::EObject> ownedElement = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::ELEMENT_EREFERENCE_OWNER);
+			std::shared_ptr<ecore::EObject> ownedElement = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::ELEMENT_ATTRIBUTE_OWNER);
 			if (ownedElement != nullptr)
 			{
 				loadHandler->handleChild(ownedElement);
@@ -637,13 +663,11 @@ void ElementImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::in
 		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
 	}
 
-	ecore::EModelElementImpl::loadNode(nodeName, loadHandler, ecore::EcoreFactory::eInstance());
 	ObjectImpl::loadNode(nodeName, loadHandler, modelFactory);
 }
 
 void ElementImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
-	ecore::EModelElementImpl::resolveReferences(featureID, references);
 	ObjectImpl::resolveReferences(featureID, references);
 }
 
@@ -651,7 +675,6 @@ void ElementImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> sa
 {
 	saveContent(saveHandler);
 
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
@@ -667,7 +690,7 @@ void ElementImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 		// Save 'ownedComment'
 		for (std::shared_ptr<uml::Comment> ownedComment : *this->getOwnedComment()) 
 		{
-			saveHandler->addReference(ownedComment, "ownedComment", ownedComment->eClass() != package->getComment_EClass());
+			saveHandler->addReference(ownedComment, "ownedComment", ownedComment->eClass() != package->getComment_Class());
 		}
 	
 
@@ -680,7 +703,7 @@ void ElementImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 		std::shared_ptr<Union<uml::Element>> list_ownedElement = this->getOwnedElement();
 		for (std::shared_ptr<uml::Element> ownedElement : *list_ownedElement) 
 		{
-			saveHandler->addReference(ownedElement, "ownedElement", ownedElement->eClass() != package->getElement_EClass());
+			saveHandler->addReference(ownedElement, "ownedElement", ownedElement->eClass() != package->getElement_Class());
 		}
 	}
 	catch (std::exception& e)

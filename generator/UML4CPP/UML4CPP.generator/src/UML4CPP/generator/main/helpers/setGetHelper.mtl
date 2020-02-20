@@ -1,0 +1,277 @@
+[comment encoding = UTF-8 /]
+[**
+ * Copyright (c) 2017 TU Ilmenau, Systems and Software Engineering Group
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
+ * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+ * and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ ****************************************************************************************************************************************************************
+ * 
+ * module for generation of eSet/ eGet artefacts
+ * 
+ */]
+[module setGetHelper('http://www.eclipse.org/uml2/5.0.0/UML')]
+
+[import UML4CPP::generator::main::components::generateProperty /]
+[import UML4CPP::generator::main::components::generateType /]
+[import UML4CPP::generator::main::helpers::generalHelper /]
+[import UML4CPP::generator::main::helpers::nameHelper /]
+
+[**
+ * checks if setter for a StructuralFeature should be generated
+ * 
+ * setter should not exist for:
+ * - feature with upper bound > 1 (realized by list and getter)
+ * - feature is read only
+*/]
+[query public hasSetter(aFeature : StructuralFeature) : Boolean = not (( not (aFeature.upper = 1) ) and (not aFeature.oclAsType(Property).isReadOnly)) /]
+
+[**
+ * generate get, set and unset function declaration
+*/]
+[template public generateeGetSetDel(aClass : Class,impl : Boolean)]
+virtual Any get(std::shared_ptr<uml::Property> _property) const [abstractSuffix(impl)/];
+virtual void set(std::shared_ptr<uml::Property> _property, Any value) [abstractSuffix(impl)/];
+virtual void unset(std::shared_ptr<uml::Property> _property) [abstractSuffix(impl)/];
+[/template]
+[template public generateeGetSetDel(aInterface : Interface,impl : Boolean)]
+virtual Any get(std::shared_ptr<uml::Property> _property) const [abstractSuffix(impl)/];
+virtual void set(std::shared_ptr<uml::Property> _property, Any value) [abstractSuffix(impl)/];
+virtual void unset(std::shared_ptr<uml::Property> _property) [abstractSuffix(impl)/];
+[/template]
+
+[**
+ * generate maps for storing pairs of property name and function (get, set and unset)
+*/]
+[template public generateGetSetMemeberInit(aClass : Class)]
+std::map<std::string,std::function<Any()>> m_getterMap;
+std::map<std::string,std::function<void(Any)>> m_setterMap;
+std::map<std::string,std::function<void()>> m_unsetterMap;
+[/template]
+[template public generateGetSetMemeberInit(aInterface : Interface)]
+std::map<std::string,std::function<Any()>> m_getterMap;
+std::map<std::string,std::function<void(Any)>> m_setterMap;
+std::map<std::string,std::function<void()>> m_unsetterMap;
+[/template]
+
+[query private getSetGetProperties(aClass : Class) : OrderedSet(Property) = aClass.attribute->addAll(aClass.interfaceRealization.contract.attribute)->sortedBy(myQualifiedName())/]
+
+[**
+ * generate the creation of {property name, function} pairs and their insertion into the corresponding map
+*/]
+[template public generateGetSetInit(aClass : Class)]
+//getter init
+[let propList : OrderedSet(Property) = aClass.getSetGetProperties()]
+[for (prop : Property | propList)]
+[if (prop.type.oclIsKindOf(PrimitiveType) or prop.type.oclIsKindOf(Enumeration))]
+m_getterMap.insert(std::pair<std::string,std::function<Any()>>("[prop.qualifiedName/]",[ '[' /]this[ ']' /](){ return eAny(this->[prop.getterName()/]());}));
+[else][if (prop.upper=1)]
+m_getterMap.insert(std::pair<std::string,std::function<Any()>>("[prop.qualifiedName/]",[ '[' /]this[ ']' /](){ return eAny(this->[prop.getterName()/]());}));
+[else]
+m_getterMap.insert(std::pair<std::string,std::function<Any()>>("[prop.qualifiedName/]",[ '[' /]this[ ']' /](){ return eAny(this->[prop.getterName()/]());}));
+[/if]
+[/if]
+[/for]
+
+[for (aFeature : Property | propList) ? (aFeature.hasSetter())]
+[if (aFeature.type.oclIsKindOf(Enumeration))]
+m_setterMap.insert(std::pair<std::string,std::function<void(Any)>>("[aFeature.qualifiedName/]",[ '[' /]this[ ']' /](Any object){this->[aFeature.setterName()/](object->get<std::shared_ptr<uml::EnumerationLiteral>>());}));
+[else]
+m_setterMap.insert(std::pair<std::string,std::function<void(Any)>>("[aFeature.qualifiedName/]",[ '[' /]this[ ']' /](Any object){this->[aFeature.setterName()/](object->get<[if (aFeature.upper<>1)]std::shared_ptr<Bag[/if][aFeature.type.generateCppType(false)/][if (aFeature.upper<>1)]>[/if]>());}));
+[/if]
+[/for]
+
+[for (prop : Property | propList) ? (not(prop.type.oclIsKindOf(PrimitiveType) or prop.type.oclIsKindOf(Enumeration)))]
+[if (prop.upper=1)]
+m_unsetterMap.insert(std::pair<std::string,std::function<void()>>("[prop.qualifiedName/]",[ '[' /]this[ ']' /](){m_[prop.name/] = std::shared_ptr<[prop.type.transformType()/]>(nullptr);}));
+[else]
+m_unsetterMap.insert(std::pair<std::string,std::function<void()>>("[prop.qualifiedName/]",[ '[' /]this[ ']' /](){m_[prop.name/]->clear();}));
+[/if]
+[/for]
+[/let]
+[/template]
+
+[**
+ * generate the creation of {property name, function} pairs and their insertion into the corresponding map (Interface)
+*/]
+[template public generateGetSetInit(aInterface : Interface)]
+//getter init
+[for (prop : Property | aInterface.allFeatures()->filter(Property)->asOrderedSet()->sortedBy(myQualifiedName()))]
+[if (prop.type.oclIsKindOf(PrimitiveType) or prop.type.oclIsKindOf(Enumeration))]
+m_getterMap.insert(std::pair<std::string,std::function<Any()>>("[prop.qualifiedName/]",[ '[' /]this[ ']' /](){ return eAny(this->[prop.getterName()/]());}));
+[else][if (prop.upper=1)]
+m_getterMap.insert(std::pair<std::string,std::function<Any()>>("[prop.qualifiedName/]",[ '[' /]this[ ']' /](){ return eAny(this->[prop.getterName()/]());}));
+[else]
+m_getterMap.insert(std::pair<std::string,std::function<Any()>>("[prop.qualifiedName/]",[ '[' /]this[ ']' /](){ return eAny(this->[prop.getterName()/]());}));
+[/if]
+[/if]
+[/for]
+
+[for (aFeature : StructuralFeature | aInterface.allFeatures()->filter(StructuralFeature)->asOrderedSet()->sortedBy(myQualifiedName())) ? (aFeature.hasSetter())]
+[if (aFeature.type.oclIsKindOf(Enumeration))]
+m_setterMap.insert(std::pair<std::string,std::function<void(Any)>>("[aFeature.qualifiedName/]",[ '[' /]this[ ']' /](Any object){this->[aFeature.setterName()/](object->get<std::shared_ptr<uml::EnumerationLiteral>>());}));
+[else]
+m_setterMap.insert(std::pair<std::string,std::function<void(Any)>>("[aFeature.qualifiedName/]",[ '[' /]this[ ']' /](Any object){this->[aFeature.setterName()/](object->get<[if (aFeature.upper<>1)]std::shared_ptr<Bag[/if][aFeature.type.generateCppType(false)/][if (aFeature.upper<>1)]>[/if]>());}));
+[/if]
+[/for]
+
+[for (prop : Property | aInterface.allFeatures()->filter(Property)->asOrderedSet()->sortedBy(myQualifiedName())) ? (not(prop.type.oclIsKindOf(PrimitiveType) or prop.type.oclIsKindOf(Enumeration)))]
+[if (prop.upper=1)]
+m_unsetterMap.insert(std::pair<std::string,std::function<void()>>("[prop.qualifiedName/]",[ '[' /]this[ ']' /](){m_[prop.name/] = std::shared_ptr<[prop.type.transformType()/]>(nullptr);}));
+[else]
+m_unsetterMap.insert(std::pair<std::string,std::function<void()>>("[prop.qualifiedName/]",[ '[' /]this[ ']' /](){m_[prop.name/]->clear();}));
+[/if]
+[/for]
+[/template]
+
+[**
+ * generate special set function declaration for properties with enumeration type
+*/]
+[template public generateESetFunctionForEnumerationDecl(aProperty : Property)]
+virtual void [aProperty.setterName()/](std::shared_ptr<uml::EnumerationLiteral> literal); 
+[/template]
+
+[**
+ * generate special set function implementation for properties with enumeration type
+*/]
+[template public generateESetFunctionForEnumerationImpl(aProperty : Property, aClass : Class)]
+void [aClass.name.toUpperFirst()/]Impl::[aProperty.setterName()/](std::shared_ptr<uml::EnumerationLiteral> literal)
+{
+[for (literal : EnumerationLiteral | aProperty.type.oclAsType(Enumeration).ownedLiteral)]		
+	if (literal == [literal.generatePackageGetterCall()/])
+	{	
+		[aProperty.setterName()/]([if (not (literal.getNearestPackage() = aClass.getNearestPackage()))][literal.getNearestPackage().name/]::[/if][literal.enumeration.name/]::[literal.name.toUpper()/]);
+		return;
+	}
+[/for]
+}
+[/template]
+
+[**
+ * generate special set function implementation for properties with enumeration type (Interface)
+*/]
+[template public generateESetFunctionForEnumerationImpl(aProperty : Property, aInterface : Interface)]
+void [aInterface.name.toUpperFirst()/]Impl::[aProperty.setterName()/](std::shared_ptr<uml::EnumerationLiteral> literal)
+{
+[for (literal : EnumerationLiteral | aProperty.type.oclAsType(Enumeration).ownedLiteral)]		
+	if (literal == [literal.generatePackageGetterCall()/])
+	{	
+		[aProperty.setterName()/]([literal.enumeration.name/]::[literal.name.toUpper()/]);
+		return;
+	}
+[/for]
+}
+[/template]
+
+[**
+ * generate get, set and unset function implementation
+*/]
+[template public generateeGetSetImpl(aClass : Class)]
+Any [aClass.name.toUpperFirst().concat('Impl')/]::get(std::shared_ptr<uml::Property> _property) const
+{
+	//TODO: still two times run through map (contains and [ '[' /][ ']' /])
+	std::string qName = _property->getQualifiedName();
+	std::map<std::string, std::function<Any()>>::const_iterator iter = m_getterMap.find(qName);
+    if(iter != m_getterMap.cend())
+    {
+        //invoke the getter function
+        return iter->second();
+    }
+[let classList : OrderedSet(Class) = aClass.superClass->reject(oclIsUndefined() and name.oclIsUndefined())->sortedBy(name)]
+[if (classList->size() = 1)]
+	return [classList->first().owner.oclAsType(NamedElement).name/]::[classList->first().name.toUpperFirst()/]Impl::get(_property);
+[elseif (classList->size() > 1)]
+	Any value;
+[for (sClass : Class | aClass.superClass->reject(oclIsUndefined() and name.oclIsUndefined()))]
+	value = [sClass.owner.oclAsType(NamedElement).name/]::[sClass.name.toUpperFirst()/]Impl::get(_property);
+	if (value != null)
+	{
+		return value;
+	}
+[/for]
+	return value;
+[else]
+	return eAny(nullptr);
+[/if]
+[/let]
+}
+
+void [aClass.name.toUpperFirst().concat('Impl')/]::set(std::shared_ptr<uml::Property> _property, Any value)
+{
+	//TODO: still two times run through map (contains and [ '[' /][ ']' /])
+	std::string qName = _property->getQualifiedName();
+	std::map<std::string, std::function<void(Any)>>::iterator iter = m_setterMap.find(qName);
+    if(iter != m_setterMap.end())
+    {
+        //invoke the getter function
+        iter->second(value);
+    }
+[for (sClass : Class | aClass.superClass->reject(oclIsUndefined() and name.oclIsUndefined()))]
+	[sClass.owner.oclAsType(NamedElement).name/]::[sClass.name.toUpperFirst()/]Impl::set(_property, value);
+[/for]
+}
+
+void [aClass.name.toUpperFirst().concat('Impl')/]::unset(std::shared_ptr<uml::Property> _property)
+{
+	//TODO: still two times run through map (contains and [ '[' /][ ']' /])
+	std::string qName = _property->getQualifiedName();
+	std::map<std::string,std::function<void()>>::iterator iter = m_unsetterMap.find(qName);
+    if(iter != m_unsetterMap.end())
+    {
+        //invoke the getter function
+        iter->second();
+    }
+[for (sClass : Class | aClass.superClass->reject(oclIsUndefined() and name.oclIsUndefined()))]
+	[sClass.owner.oclAsType(NamedElement).name/]::[sClass.name.toUpperFirst()/]Impl::unset(_property);
+[/for]
+}
+[/template]
+
+[**
+ * generate get, set and unset function implementation (Interface)
+*/]
+[template public generateeGetSetImpl(aInterface : Interface)]
+Any [aInterface.name.toUpperFirst().concat('Impl')/]::get(std::shared_ptr<uml::Property> _property) const
+{
+	//TODO: still two times run through map (contains and [ '[' /][ ']' /])
+	std::string qName = _property->getQualifiedName();
+	std::map<std::string, std::function<Any()>>::const_iterator iter = m_getterMap.find(qName);
+    if(iter != m_getterMap.cend())
+    {
+        //invoke the getter function
+        return iter->second();
+    }
+	return eAny(nullptr);
+}
+
+void [aInterface.name.toUpperFirst().concat('Impl')/]::set(std::shared_ptr<uml::Property> _property, Any value)
+{
+	//TODO: still two times run through map (contains and [ '[' /][ ']' /])
+	std::string qName = _property->getQualifiedName();
+	std::map<std::string, std::function<void(Any)>>::iterator iter = m_setterMap.find(qName);
+    if(iter != m_setterMap.end())
+    {
+        //invoke the getter function
+        iter->second(value);
+    }
+}
+
+void [aInterface.name.toUpperFirst().concat('Impl')/]::unset(std::shared_ptr<uml::Property> _property)
+{
+	//TODO: still two times run through map (contains and [ '[' /][ ']' /])
+	std::string qName = _property->getQualifiedName();
+	std::map<std::string,std::function<void()>>::iterator iter = m_unsetterMap.find(qName);
+    if(iter != m_unsetterMap.end())
+    {
+        //invoke the getter function
+        iter->second();
+    }
+}
+[/template]

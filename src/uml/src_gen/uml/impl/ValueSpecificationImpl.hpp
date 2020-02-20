@@ -54,6 +54,10 @@ namespace uml
 			ValueSpecificationImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
 
 
+			//Additional constructors for the containments back reference
+			ValueSpecificationImpl(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction);
+
+
 
 
 		public:
@@ -122,6 +126,13 @@ namespace uml
 			/*!
 			 */
 			virtual void setOwningSlot(std::shared_ptr<uml::Slot> _owningSlot_owningSlot) ;
+			/*!
+			 */
+			virtual std::weak_ptr<uml::ValueSpecificationAction > getValueSpecificationAction() const ;
+			
+			/*!
+			 */
+			virtual void setValueSpecificationAction(std::shared_ptr<uml::ValueSpecificationAction> _valueSpecificationAction_valueSpecificationAction) ;
 							
 			
 			//*********************************

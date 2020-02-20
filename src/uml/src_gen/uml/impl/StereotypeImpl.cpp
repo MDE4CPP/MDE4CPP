@@ -33,6 +33,17 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Behavior.hpp"
@@ -52,8 +63,6 @@
 #include "uml/Constraint.hpp"
 
 #include "uml/Dependency.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "ecore/EClass.hpp"
 
@@ -183,24 +192,24 @@ StereotypeImpl::~StereotypeImpl()
 
 
 //Additional constructor for the containments back reference
-			StereotypeImpl::StereotypeImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id)
-			:StereotypeImpl()
-			{
-				switch(reference_id)
-				{	
-				case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
-					m_owningPackage = par_Package;
-					m_namespace = par_Package;
-					 return;
-				case UmlPackage::TYPE_EREFERENCE_PACKAGE:
-					m_package = par_Package;
-					m_namespace = par_Package;
-					 return;
-				default:
-				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
-				}
-			   
-			}
+StereotypeImpl::StereotypeImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id)
+:StereotypeImpl()
+{
+	switch(reference_id)
+	{	
+	case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
+		m_owningPackage = par_Package;
+		m_namespace = par_Package;
+		 return;
+	case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
+		m_package = par_Package;
+		m_namespace = par_Package;
+		 return;
+	default:
+	std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
+	}
+   
+}
 
 
 
@@ -302,14 +311,6 @@ StereotypeImpl::StereotypeImpl(const StereotypeImpl & obj):StereotypeImpl()
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_collaborationUse" << std::endl;
-	#endif
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
 	#endif
 	std::shared_ptr<Bag<uml::ElementImport>> _elementImportList = obj.getElementImport();
 	for(std::shared_ptr<uml::ElementImport> _elementImport : *_elementImportList)
@@ -511,7 +512,7 @@ std::shared_ptr<ecore::EObject>  StereotypeImpl::copy() const
 
 std::shared_ptr<ecore::EClass> StereotypeImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getStereotype_EClass();
+	return UmlPackageImpl::eInstance()->getStereotype_Class();
 }
 
 //*********************************
@@ -722,10 +723,20 @@ Any StereotypeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::STEREOTYPE_EREFERENCE_ICON:
-			return eAny(getIcon()); //1053
-		case UmlPackage::STEREOTYPE_EREFERENCE_PROFILE:
-			return eAny(getProfile()); //1054
+		case UmlPackage::STEREOTYPE_ATTRIBUTE_ICON:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Image>::iterator iter = m_icon->begin();
+			Bag<uml::Image>::iterator end = m_icon->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //22452
+		}
+		case UmlPackage::STEREOTYPE_ATTRIBUTE_PROFILE:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getProfile())); //22453
 	}
 	return ClassImpl::eGet(featureID, resolve, coreType);
 }
@@ -733,10 +744,10 @@ bool StereotypeImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::STEREOTYPE_EREFERENCE_ICON:
-			return getIcon() != nullptr; //1053
-		case UmlPackage::STEREOTYPE_EREFERENCE_PROFILE:
-			return getProfile() != nullptr; //1054
+		case UmlPackage::STEREOTYPE_ATTRIBUTE_ICON:
+			return getIcon() != nullptr; //22452
+		case UmlPackage::STEREOTYPE_ATTRIBUTE_PROFILE:
+			return getProfile() != nullptr; //22453
 	}
 	return ClassImpl::internalEIsSet(featureID);
 }
@@ -744,6 +755,42 @@ bool StereotypeImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
+		case UmlPackage::STEREOTYPE_ATTRIBUTE_ICON:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Image>> iconList(new Bag<uml::Image>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				iconList->add(std::dynamic_pointer_cast<uml::Image>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Image>::iterator iterIcon = m_icon->begin();
+			Bag<uml::Image>::iterator endIcon = m_icon->end();
+			while (iterIcon != endIcon)
+			{
+				if (iconList->find(*iterIcon) == -1)
+				{
+					m_icon->erase(*iterIcon);
+				}
+				iterIcon++;
+			}
+
+			iterIcon = iconList->begin();
+			endIcon = iconList->end();
+			while (iterIcon != endIcon)
+			{
+				if (m_icon->find(*iterIcon) == -1)
+				{
+					m_icon->add(*iterIcon);
+				}
+				iterIcon++;			
+			}
+			return true;
+		}
 	}
 
 	return ClassImpl::eSet(featureID, newValue);
@@ -839,7 +886,6 @@ void StereotypeImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler>
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
@@ -863,7 +909,7 @@ void StereotypeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 		// Save 'icon'
 		for (std::shared_ptr<uml::Image> icon : *this->getIcon()) 
 		{
-			saveHandler->addReference(icon, "icon", icon->eClass() != package->getImage_EClass());
+			saveHandler->addReference(icon, "icon", icon->eClass() != package->getImage_Class());
 		}
 	
 

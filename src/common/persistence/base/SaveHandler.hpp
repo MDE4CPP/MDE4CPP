@@ -41,26 +41,22 @@ namespace persistence
 				void addAttribute(const std::string &name, bool value);
 				virtual void addAttribute(const std::string &name, const std::string& value) = 0;
 
-				void addReference(const std::string &name, std::shared_ptr<ecore::EObject> object);
 				virtual void addReferences(const std::string &name, std::shared_ptr<ecore::EObject> object) = 0;
-				virtual void addReference(const std::shared_ptr<ecore::EObject> object, const std::string &tagName, const bool typeRequired);
+
 				virtual void release() = 0;
+				virtual void finalize() = 0;
 				virtual void setThisPtr(std::shared_ptr<SaveHandler> thisPtr);
 				virtual void setIsXSIMode(bool value);
 				virtual void setTypesMap(std::map<std::string, std::shared_ptr<ecore::EObject>> typesMap);
-				virtual void addTypeReference(const std::string& href, const std::string& xmitype) = 0;
-				virtual std::string getVersion();
-				virtual std::string getXmlnsXMI();
+//				virtual void addTypeReference(const std::string& href, const std::string& xmitype) = 0;
 
 			protected:
 				std::shared_ptr<ecore::EObject> m_rootObject;
 				std::string m_rootPrefix;
-				std::map<std::shared_ptr<ecore::EObject>, std::string> m_refToObject_map;
+				std::map<std::shared_ptr<ecore::EObject>, std::string> m_refObjectName_map; // map of known reference names which are stored in container. Used for references to this objects
 				bool m_isXSIMode;
-
-			private:
+				std::shared_ptr<Bag<ecore::EObject>> m_savedObjects; // List of allready saved Objejts to avoid multiple save
 				std::shared_ptr<SaveHandler> m_thisPtr;
-				std::shared_ptr<Bag<ecore::EObject>> m_savedObjects;
 		};
 	} /* namespace base */
 } /* namespace persistence */

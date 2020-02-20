@@ -32,13 +32,16 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
 
 #include "uml/Dependency.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -134,14 +137,6 @@ TypedElementImpl::TypedElementImpl(const TypedElementImpl & obj):TypedElementImp
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	if(obj.getNameExpression()!=nullptr)
 	{
 		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
@@ -169,7 +164,7 @@ std::shared_ptr<ecore::EObject>  TypedElementImpl::copy() const
 
 std::shared_ptr<ecore::EClass> TypedElementImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getTypedElement_EClass();
+	return UmlPackageImpl::eInstance()->getTypedElement_Class();
 }
 
 //*********************************
@@ -236,8 +231,8 @@ Any TypedElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::TYPEDELEMENT_EREFERENCE_TYPE:
-			return eAny(getType()); //3010
+		case UmlPackage::TYPEDELEMENT_ATTRIBUTE_TYPE:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getType())); //2469
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -245,8 +240,8 @@ bool TypedElementImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::TYPEDELEMENT_EREFERENCE_TYPE:
-			return getType() != nullptr; //3010
+		case UmlPackage::TYPEDELEMENT_ATTRIBUTE_TYPE:
+			return getType() != nullptr; //2469
 	}
 	return NamedElementImpl::internalEIsSet(featureID);
 }
@@ -254,11 +249,12 @@ bool TypedElementImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::TYPEDELEMENT_EREFERENCE_TYPE:
+		case UmlPackage::TYPEDELEMENT_ATTRIBUTE_TYPE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Type> _type = newValue->get<std::shared_ptr<uml::Type>>();
-			setType(_type); //3010
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Type> _type = std::dynamic_pointer_cast<uml::Type>(_temp);
+			setType(_type); //2469
 			return true;
 		}
 	}
@@ -330,7 +326,7 @@ void TypedElementImpl::resolveReferences(const int featureID, std::list<std::sha
 {
 	switch(featureID)
 	{
-		case UmlPackage::TYPEDELEMENT_EREFERENCE_TYPE:
+		case UmlPackage::TYPEDELEMENT_ATTRIBUTE_TYPE:
 		{
 			if (references.size() == 1)
 			{
@@ -353,7 +349,6 @@ void TypedElementImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandle
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

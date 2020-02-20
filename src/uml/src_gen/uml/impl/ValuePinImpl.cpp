@@ -33,7 +33,32 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
+
+#include "uml/Action.hpp"
 
 #include "uml/Activity.hpp"
 
@@ -45,6 +70,8 @@
 
 #include "uml/ActivityPartition.hpp"
 
+#include "uml/AddStructuralFeatureValueAction.hpp"
+
 #include "uml/Behavior.hpp"
 
 #include "uml/CallOperationAction.hpp"
@@ -55,7 +82,7 @@
 
 #include "uml/Dependency.hpp"
 
-#include "ecore/EAnnotation.hpp"
+#include "uml/DestroyObjectAction.hpp"
 
 #include "uml/Element.hpp"
 
@@ -80,6 +107,8 @@
 #include "uml/Type.hpp"
 
 #include "uml/ValueSpecification.hpp"
+
+#include "uml/WriteStructuralFeatureAction.hpp"
 
 #include "ecore/EcorePackage.hpp"
 #include "ecore/EcoreFactory.hpp"
@@ -118,6 +147,18 @@ ValuePinImpl::~ValuePinImpl()
 
 
 //Additional constructor for the containments back reference
+			ValuePinImpl::ValuePinImpl(std::weak_ptr<uml::Action > par_action)
+			:ValuePinImpl()
+			{
+			    m_action = par_action;
+				m_owner = par_action;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
 			ValuePinImpl::ValuePinImpl(std::weak_ptr<uml::Activity > par_activity)
 			:ValuePinImpl()
 			{
@@ -130,10 +171,32 @@ ValuePinImpl::~ValuePinImpl()
 
 
 //Additional constructor for the containments back reference
+			ValuePinImpl::ValuePinImpl(std::weak_ptr<uml::AddStructuralFeatureValueAction > par_addStructuralFeatureValueAction)
+			:ValuePinImpl()
+			{
+			    m_addStructuralFeatureValueAction = par_addStructuralFeatureValueAction;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
 			ValuePinImpl::ValuePinImpl(std::weak_ptr<uml::CallOperationAction > par_callOperationAction)
 			:ValuePinImpl()
 			{
 			    m_callOperationAction = par_callOperationAction;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			ValuePinImpl::ValuePinImpl(std::weak_ptr<uml::DestroyObjectAction > par_destroyObjectAction)
+			:ValuePinImpl()
+			{
+			    m_destroyObjectAction = par_destroyObjectAction;
 			}
 
 
@@ -197,6 +260,17 @@ ValuePinImpl::~ValuePinImpl()
 
 
 
+//Additional constructor for the containments back reference
+			ValuePinImpl::ValuePinImpl(std::weak_ptr<uml::WriteStructuralFeatureAction > par_writeStructuralFeatureAction)
+			:ValuePinImpl()
+			{
+			    m_writeStructuralFeatureAction = par_writeStructuralFeatureAction;
+			}
+
+
+
+
+
 
 ValuePinImpl::ValuePinImpl(const ValuePinImpl & obj):ValuePinImpl()
 {
@@ -218,12 +292,18 @@ ValuePinImpl::ValuePinImpl(const ValuePinImpl & obj):ValuePinImpl()
 
 	//copy references with no containment (soft copy)
 	
+	m_action  = obj.getAction();
+
 	m_activity  = obj.getActivity();
+
+	m_addStructuralFeatureValueAction  = obj.getAddStructuralFeatureValueAction();
 
 	m_callOperationAction  = obj.getCallOperationAction();
 
 	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
 	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
+
+	m_destroyObjectAction  = obj.getDestroyObjectAction();
 
 	std::shared_ptr<Union<uml::ActivityGroup>> _inGroup = obj.getInGroup();
 	m_inGroup.reset(new Union<uml::ActivityGroup>(*(obj.getInGroup().get())));
@@ -257,17 +337,11 @@ ValuePinImpl::ValuePinImpl(const ValuePinImpl & obj):ValuePinImpl()
 
 	m_type  = obj.getType();
 
+	m_writeStructuralFeatureAction  = obj.getWriteStructuralFeatureAction();
+
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::InterruptibleActivityRegion>> _inInterruptibleRegionList = obj.getInInterruptibleRegion();
 	for(std::shared_ptr<uml::InterruptibleActivityRegion> _inInterruptibleRegion : *_inInterruptibleRegionList)
 	{
@@ -348,7 +422,7 @@ std::shared_ptr<ecore::EObject>  ValuePinImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ValuePinImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getValuePin_EClass();
+	return UmlPackageImpl::eInstance()->getValuePin_Class();
 }
 
 //*********************************
@@ -415,12 +489,27 @@ void ValuePinImpl::setThisValuePinPtr(std::weak_ptr<ValuePin> thisValuePinPtr)
 }
 std::shared_ptr<ecore::EObject> ValuePinImpl::eContainer() const
 {
+	if(auto wp = m_action.lock())
+	{
+		return wp;
+	}
+
 	if(auto wp = m_activity.lock())
 	{
 		return wp;
 	}
 
+	if(auto wp = m_addStructuralFeatureValueAction.lock())
+	{
+		return wp;
+	}
+
 	if(auto wp = m_callOperationAction.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_destroyObjectAction.lock())
 	{
 		return wp;
 	}
@@ -449,6 +538,11 @@ std::shared_ptr<ecore::EObject> ValuePinImpl::eContainer() const
 	{
 		return wp;
 	}
+
+	if(auto wp = m_writeStructuralFeatureAction.lock())
+	{
+		return wp;
+	}
 	return nullptr;
 }
 
@@ -459,8 +553,8 @@ Any ValuePinImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::VALUEPIN_EREFERENCE_VALUE:
-			return eAny(getValue()); //17937
+		case UmlPackage::VALUEPIN_ATTRIBUTE_VALUE:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getValue())); //25040
 	}
 	return InputPinImpl::eGet(featureID, resolve, coreType);
 }
@@ -468,8 +562,8 @@ bool ValuePinImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::VALUEPIN_EREFERENCE_VALUE:
-			return getValue() != nullptr; //17937
+		case UmlPackage::VALUEPIN_ATTRIBUTE_VALUE:
+			return getValue() != nullptr; //25040
 	}
 	return InputPinImpl::internalEIsSet(featureID);
 }
@@ -477,11 +571,12 @@ bool ValuePinImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::VALUEPIN_EREFERENCE_VALUE:
+		case UmlPackage::VALUEPIN_ATTRIBUTE_VALUE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::ValueSpecification> _value = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
-			setValue(_value); //17937
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::ValueSpecification> _value = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
+			setValue(_value); //25040
 			return true;
 		}
 	}
@@ -575,7 +670,6 @@ void ValuePinImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> s
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
@@ -599,7 +693,7 @@ void ValuePinImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 		std::shared_ptr<uml::ValueSpecification > value = this->getValue();
 		if (value != nullptr)
 		{
-			saveHandler->addReference(value, "value", value->eClass() != package->getValueSpecification_EClass());
+			saveHandler->addReference(value, "value", value->eClass() != package->getValueSpecification_Class());
 		}
 	
 

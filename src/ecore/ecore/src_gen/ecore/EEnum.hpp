@@ -13,7 +13,7 @@
 
 
 // forward declarations
-template<class T> class Bag;
+template<class T, class ... U> class Subset;
 
 
 
@@ -50,6 +50,11 @@ namespace ecore
 namespace ecore 
 {
 	class EEnumLiteral;
+}
+
+namespace ecore 
+{
+	class EObject;
 }
 
 namespace ecore 
@@ -114,7 +119,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<Bag<ecore::EEnumLiteral>> getELiterals() const = 0;
+			virtual std::shared_ptr<Subset<ecore::EEnumLiteral, ecore::EObject>> getELiterals() const = 0;
 			
 			
 
@@ -129,14 +134,16 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			std::shared_ptr<Bag<ecore::EEnumLiteral>> m_eLiterals;
+			std::shared_ptr<Subset<ecore::EEnumLiteral, ecore::EObject>> m_eLiterals;
 			
 
 		public:
 			//*********************************
 			// Union Getter
 			//*********************************
-			
+			/*!
+			 */
+			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
 			

@@ -33,6 +33,17 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Class.hpp"
@@ -44,8 +55,6 @@
 #include "uml/Constraint.hpp"
 
 #include "uml/Dependency.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "ecore/ENamedElement.hpp"
 
@@ -164,24 +173,24 @@ ProfileImpl::~ProfileImpl()
 
 
 //Additional constructor for the containments back reference
-			ProfileImpl::ProfileImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id)
-			:ProfileImpl()
-			{
-				switch(reference_id)
-				{	
-				case UmlPackage::PACKAGE_EREFERENCE_NESTINGPACKAGE:
-					m_nestingPackage = par_Package;
-					m_namespace = par_Package;
-					 return;
-				case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
-					m_owningPackage = par_Package;
-					m_namespace = par_Package;
-					 return;
-				default:
-				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
-				}
-			   
-			}
+ProfileImpl::ProfileImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id)
+:ProfileImpl()
+{
+	switch(reference_id)
+	{	
+	case UmlPackage::PACKAGE_ATTRIBUTE_NESTINGPACKAGE:
+		m_nestingPackage = par_Package;
+		m_namespace = par_Package;
+		 return;
+	case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
+		m_owningPackage = par_Package;
+		m_namespace = par_Package;
+		 return;
+	default:
+	std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
+	}
+   
+}
 
 
 
@@ -251,14 +260,6 @@ ProfileImpl::ProfileImpl(const ProfileImpl & obj):ProfileImpl()
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::ElementImport>> _elementImportList = obj.getElementImport();
 	for(std::shared_ptr<uml::ElementImport> _elementImport : *_elementImportList)
 	{
@@ -397,7 +398,7 @@ std::shared_ptr<ecore::EObject>  ProfileImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ProfileImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getProfile_EClass();
+	return UmlPackageImpl::eInstance()->getProfile_Class();
 }
 
 //*********************************
@@ -560,10 +561,30 @@ Any ProfileImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::PROFILE_EREFERENCE_METACLASSREFERENCE:
-			return eAny(getMetaclassReference()); //1229
-		case UmlPackage::PROFILE_EREFERENCE_METAMODELREFERENCE:
-			return eAny(getMetamodelReference()); //1230
+		case UmlPackage::PROFILE_ATTRIBUTE_METACLASSREFERENCE:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::ElementImport>::iterator iter = m_metaclassReference->begin();
+			Bag<uml::ElementImport>::iterator end = m_metaclassReference->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //18428
+		}
+		case UmlPackage::PROFILE_ATTRIBUTE_METAMODELREFERENCE:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::PackageImport>::iterator iter = m_metamodelReference->begin();
+			Bag<uml::PackageImport>::iterator end = m_metamodelReference->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //18429
+		}
 	}
 	return PackageImpl::eGet(featureID, resolve, coreType);
 }
@@ -571,10 +592,10 @@ bool ProfileImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::PROFILE_EREFERENCE_METACLASSREFERENCE:
-			return getMetaclassReference() != nullptr; //1229
-		case UmlPackage::PROFILE_EREFERENCE_METAMODELREFERENCE:
-			return getMetamodelReference() != nullptr; //1230
+		case UmlPackage::PROFILE_ATTRIBUTE_METACLASSREFERENCE:
+			return getMetaclassReference() != nullptr; //18428
+		case UmlPackage::PROFILE_ATTRIBUTE_METAMODELREFERENCE:
+			return getMetamodelReference() != nullptr; //18429
 	}
 	return PackageImpl::internalEIsSet(featureID);
 }
@@ -582,6 +603,78 @@ bool ProfileImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
+		case UmlPackage::PROFILE_ATTRIBUTE_METACLASSREFERENCE:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::ElementImport>> metaclassReferenceList(new Bag<uml::ElementImport>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				metaclassReferenceList->add(std::dynamic_pointer_cast<uml::ElementImport>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::ElementImport>::iterator iterMetaclassReference = m_metaclassReference->begin();
+			Bag<uml::ElementImport>::iterator endMetaclassReference = m_metaclassReference->end();
+			while (iterMetaclassReference != endMetaclassReference)
+			{
+				if (metaclassReferenceList->find(*iterMetaclassReference) == -1)
+				{
+					m_metaclassReference->erase(*iterMetaclassReference);
+				}
+				iterMetaclassReference++;
+			}
+
+			iterMetaclassReference = metaclassReferenceList->begin();
+			endMetaclassReference = metaclassReferenceList->end();
+			while (iterMetaclassReference != endMetaclassReference)
+			{
+				if (m_metaclassReference->find(*iterMetaclassReference) == -1)
+				{
+					m_metaclassReference->add(*iterMetaclassReference);
+				}
+				iterMetaclassReference++;			
+			}
+			return true;
+		}
+		case UmlPackage::PROFILE_ATTRIBUTE_METAMODELREFERENCE:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::PackageImport>> metamodelReferenceList(new Bag<uml::PackageImport>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				metamodelReferenceList->add(std::dynamic_pointer_cast<uml::PackageImport>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::PackageImport>::iterator iterMetamodelReference = m_metamodelReference->begin();
+			Bag<uml::PackageImport>::iterator endMetamodelReference = m_metamodelReference->end();
+			while (iterMetamodelReference != endMetamodelReference)
+			{
+				if (metamodelReferenceList->find(*iterMetamodelReference) == -1)
+				{
+					m_metamodelReference->erase(*iterMetamodelReference);
+				}
+				iterMetamodelReference++;
+			}
+
+			iterMetamodelReference = metamodelReferenceList->begin();
+			endMetamodelReference = metamodelReferenceList->end();
+			while (iterMetamodelReference != endMetamodelReference)
+			{
+				if (m_metamodelReference->find(*iterMetamodelReference) == -1)
+				{
+					m_metamodelReference->add(*iterMetamodelReference);
+				}
+				iterMetamodelReference++;			
+			}
+			return true;
+		}
 	}
 
 	return PackageImpl::eSet(featureID, newValue);
@@ -650,7 +743,7 @@ void ProfileImpl::resolveReferences(const int featureID, std::list<std::shared_p
 {
 	switch(featureID)
 	{
-		case UmlPackage::PROFILE_EREFERENCE_METACLASSREFERENCE:
+		case UmlPackage::PROFILE_ATTRIBUTE_METACLASSREFERENCE:
 		{
 			std::shared_ptr<Bag<uml::ElementImport>> _metaclassReference = getMetaclassReference();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -664,7 +757,7 @@ void ProfileImpl::resolveReferences(const int featureID, std::list<std::shared_p
 			return;
 		}
 
-		case UmlPackage::PROFILE_EREFERENCE_METAMODELREFERENCE:
+		case UmlPackage::PROFILE_ATTRIBUTE_METAMODELREFERENCE:
 		{
 			std::shared_ptr<Bag<uml::PackageImport>> _metamodelReference = getMetamodelReference();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -696,7 +789,6 @@ void ProfileImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> sa
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

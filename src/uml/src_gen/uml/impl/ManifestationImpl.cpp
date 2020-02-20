@@ -32,6 +32,15 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Abstraction.hpp"
@@ -39,8 +48,6 @@
 #include "uml/Comment.hpp"
 
 #include "uml/Dependency.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -181,14 +188,6 @@ ManifestationImpl::ManifestationImpl(const ManifestationImpl & obj):Manifestatio
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_client" << std::endl;
 	#endif
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	if(obj.getMapping()!=nullptr)
 	{
 		m_mapping = std::dynamic_pointer_cast<uml::OpaqueExpression>(obj.getMapping()->copy());
@@ -238,7 +237,7 @@ std::shared_ptr<ecore::EObject>  ManifestationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ManifestationImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getManifestation_EClass();
+	return UmlPackageImpl::eInstance()->getManifestation_Class();
 }
 
 //*********************************
@@ -331,8 +330,8 @@ Any ManifestationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::MANIFESTATION_EREFERENCE_UTILIZEDELEMENT:
-			return eAny(getUtilizedElement()); //4119
+		case UmlPackage::MANIFESTATION_ATTRIBUTE_UTILIZEDELEMENT:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getUtilizedElement())); //14618
 	}
 	return AbstractionImpl::eGet(featureID, resolve, coreType);
 }
@@ -340,8 +339,8 @@ bool ManifestationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::MANIFESTATION_EREFERENCE_UTILIZEDELEMENT:
-			return getUtilizedElement() != nullptr; //4119
+		case UmlPackage::MANIFESTATION_ATTRIBUTE_UTILIZEDELEMENT:
+			return getUtilizedElement() != nullptr; //14618
 	}
 	return AbstractionImpl::internalEIsSet(featureID);
 }
@@ -349,11 +348,12 @@ bool ManifestationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::MANIFESTATION_EREFERENCE_UTILIZEDELEMENT:
+		case UmlPackage::MANIFESTATION_ATTRIBUTE_UTILIZEDELEMENT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::PackageableElement> _utilizedElement = newValue->get<std::shared_ptr<uml::PackageableElement>>();
-			setUtilizedElement(_utilizedElement); //4119
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::PackageableElement> _utilizedElement = std::dynamic_pointer_cast<uml::PackageableElement>(_temp);
+			setUtilizedElement(_utilizedElement); //14618
 			return true;
 		}
 	}
@@ -417,7 +417,7 @@ void ManifestationImpl::resolveReferences(const int featureID, std::list<std::sh
 {
 	switch(featureID)
 	{
-		case UmlPackage::MANIFESTATION_EREFERENCE_UTILIZEDELEMENT:
+		case UmlPackage::MANIFESTATION_ATTRIBUTE_UTILIZEDELEMENT:
 		{
 			if (references.size() == 1)
 			{
@@ -449,7 +449,6 @@ void ManifestationImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandl
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

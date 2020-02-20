@@ -10,5 +10,5 @@ task generateFUML(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
 	
 	modelFilePath = file('.' + File.separator + 'fUML.ecore')
 
-	relatedModels = ['ecore', 'uml']
+	relatedModels = ['ecore', 'types', 'uml']
 }

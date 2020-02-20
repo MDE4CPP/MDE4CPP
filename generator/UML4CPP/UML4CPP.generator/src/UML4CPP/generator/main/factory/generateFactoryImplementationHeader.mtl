@@ -11,11 +11,19 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ ****************************************************************************************************************************************************************
+ * 
+ * module to generate model factory implementation header file
+ * 
  */]
 [module generateFactoryImplementationHeader('http://www.eclipse.org/uml2/5.0.0/UML')]
 
-[import UML4CPP::generator::main::generateClass /]
-[import UML4CPP::generator::main::helper /]
+[import UML4CPP::generator::main::components::generateClass /]
+[import UML4CPP::generator::main::components::generateInterface /]
+[import UML4CPP::generator::main::helpers::collectionHelper /]
+[import UML4CPP::generator::main::helpers::generalHelper /]
+[import UML4CPP::generator::main::helpers::nameHelper /]
 
 [template public generateFactoryImplHeader(aPackage : Package)]
 [file (aPackage.getPackageName().concat('/impl/').concat(aPackage.name.toUpperFirst()).concat('FactoryImpl.hpp'), false, 'UTF-8')]
@@ -39,19 +47,19 @@
 
 		public:
 			virtual ~[aPackage.name.toUpperFirst().concat('FactoryImpl')/]();
-			virtual std::shared_ptr<uml::Element> create(std::shared_ptr<uml::Class> _class);
-			virtual std::shared_ptr<uml::Element> create(std::string _className);
+			virtual std::shared_ptr<uml::Element> create(const unsigned int _metaClassId,  std::shared_ptr<uml::Element> container= nullptr, const unsigned int referenceID = -1) const;
+			virtual std::shared_ptr<uml::Element> create(const std::shared_ptr<uml::Class> _class,  std::shared_ptr<uml::Element> container= nullptr, const unsigned int referenceID = -1) const;
+			virtual std::shared_ptr<uml::Element> create(const std::string _className,  std::shared_ptr<uml::Element> container= nullptr, const unsigned int referenceID = -1) const;
 
 			//Creator functions
-			[(aPackage.packagedElement->selectByKind(Class))->reject(isSingleton())->sortedBy(myQualifiedName()).generateClassCreate(true)/]
+			[aPackage.collectModelClassesForFactoryFunctions().generateClassCreate(true)/]
 
 			//Package
 			virtual std::shared_ptr<[aPackage.name.toUpperFirst()/]Package> get[aPackage.name.toUpperFirst()/]Package();
 
 		private:
 			static [aPackage.name.toUpperFirst().concat('Factory')/] * create();
-			std::map<std::string,std::function<std::shared_ptr<uml::Element>()>> m_creatorMap;
-
+			std::map<std::string,unsigned int> m_idMap;
 			virtual void init() {}
 	};
 [if (not aPackage.ignoreNamespace())]}[/if]

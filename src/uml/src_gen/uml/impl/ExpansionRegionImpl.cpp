@@ -32,6 +32,19 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Activity.hpp"
@@ -51,8 +64,6 @@
 #include "uml/Constraint.hpp"
 
 #include "uml/Dependency.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -131,24 +142,24 @@ ExpansionRegionImpl::~ExpansionRegionImpl()
 
 
 //Additional constructor for the containments back reference
-			ExpansionRegionImpl::ExpansionRegionImpl(std::weak_ptr<uml::Activity > par_Activity, const int reference_id)
-			:ExpansionRegionImpl()
-			{
-				switch(reference_id)
-				{	
-				case UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY:
-					m_activity = par_Activity;
-					m_owner = par_Activity;
-					 return;
-				case UmlPackage::ACTIVITYGROUP_EREFERENCE_INACTIVITY:
-					m_inActivity = par_Activity;
-					m_owner = par_Activity;
-					 return;
-				default:
-				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
-				}
-			   
-			}
+ExpansionRegionImpl::ExpansionRegionImpl(std::weak_ptr<uml::Activity > par_Activity, const int reference_id)
+:ExpansionRegionImpl()
+{
+	switch(reference_id)
+	{	
+	case UmlPackage::ACTIVITYNODE_ATTRIBUTE_ACTIVITY:
+		m_activity = par_Activity;
+		m_owner = par_Activity;
+		 return;
+	case UmlPackage::ACTIVITYGROUP_ATTRIBUTE_INACTIVITY:
+		m_inActivity = par_Activity;
+		m_owner = par_Activity;
+		 return;
+	default:
+	std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
+	}
+   
+}
 
 
 
@@ -274,14 +285,6 @@ ExpansionRegionImpl::ExpansionRegionImpl(const ExpansionRegionImpl & obj):Expans
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::ActivityEdge>> _edgeList = obj.getEdge();
 	for(std::shared_ptr<uml::ActivityEdge> _edge : *_edgeList)
 	{
@@ -429,18 +432,18 @@ std::shared_ptr<ecore::EObject>  ExpansionRegionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ExpansionRegionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getExpansionRegion_EClass();
+	return UmlPackageImpl::eInstance()->getExpansionRegion_Class();
 }
 
 //*********************************
 // Attribute Setter Getter
 //*********************************
-void ExpansionRegionImpl::setMode(ExpansionKind _mode)
+void ExpansionRegionImpl::setMode(uml::ExpansionKind _mode)
 {
 	m_mode = _mode;
 } 
 
-ExpansionKind ExpansionRegionImpl::getMode() const 
+uml::ExpansionKind ExpansionRegionImpl::getMode() const 
 {
 	return m_mode;
 }
@@ -561,12 +564,32 @@ Any ExpansionRegionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::EXPANSIONREGION_EREFERENCE_INPUTELEMENT:
-			return eAny(getInputElement()); //15547
-		case UmlPackage::EXPANSIONREGION_EATTRIBUTE_MODE:
-			return eAny(getMode()); //15545
-		case UmlPackage::EXPANSIONREGION_EREFERENCE_OUTPUTELEMENT:
-			return eAny(getOutputElement()); //15546
+		case UmlPackage::EXPANSIONREGION_ATTRIBUTE_INPUTELEMENT:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::ExpansionNode>::iterator iter = m_inputElement->begin();
+			Bag<uml::ExpansionNode>::iterator end = m_inputElement->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //9546
+		}
+		case UmlPackage::EXPANSIONREGION_ATTRIBUTE_MODE:
+			return eAny(getMode()); //9544
+		case UmlPackage::EXPANSIONREGION_ATTRIBUTE_OUTPUTELEMENT:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::ExpansionNode>::iterator iter = m_outputElement->begin();
+			Bag<uml::ExpansionNode>::iterator end = m_outputElement->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //9545
+		}
 	}
 	return StructuredActivityNodeImpl::eGet(featureID, resolve, coreType);
 }
@@ -574,12 +597,12 @@ bool ExpansionRegionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::EXPANSIONREGION_EREFERENCE_INPUTELEMENT:
-			return getInputElement() != nullptr; //15547
-		case UmlPackage::EXPANSIONREGION_EATTRIBUTE_MODE:
-			return m_mode != ExpansionKind::ITERATIVE;; //15545
-		case UmlPackage::EXPANSIONREGION_EREFERENCE_OUTPUTELEMENT:
-			return getOutputElement() != nullptr; //15546
+		case UmlPackage::EXPANSIONREGION_ATTRIBUTE_INPUTELEMENT:
+			return getInputElement() != nullptr; //9546
+		case UmlPackage::EXPANSIONREGION_ATTRIBUTE_MODE:
+			return m_mode != ExpansionKind::ITERATIVE;; //9544
+		case UmlPackage::EXPANSIONREGION_ATTRIBUTE_OUTPUTELEMENT:
+			return getOutputElement() != nullptr; //9545
 	}
 	return StructuredActivityNodeImpl::internalEIsSet(featureID);
 }
@@ -587,11 +610,83 @@ bool ExpansionRegionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::EXPANSIONREGION_EATTRIBUTE_MODE:
+		case UmlPackage::EXPANSIONREGION_ATTRIBUTE_INPUTELEMENT:
 		{
 			// BOOST CAST
-			ExpansionKind _mode = newValue->get<ExpansionKind>();
-			setMode(_mode); //15545
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::ExpansionNode>> inputElementList(new Bag<uml::ExpansionNode>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				inputElementList->add(std::dynamic_pointer_cast<uml::ExpansionNode>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::ExpansionNode>::iterator iterInputElement = m_inputElement->begin();
+			Bag<uml::ExpansionNode>::iterator endInputElement = m_inputElement->end();
+			while (iterInputElement != endInputElement)
+			{
+				if (inputElementList->find(*iterInputElement) == -1)
+				{
+					m_inputElement->erase(*iterInputElement);
+				}
+				iterInputElement++;
+			}
+
+			iterInputElement = inputElementList->begin();
+			endInputElement = inputElementList->end();
+			while (iterInputElement != endInputElement)
+			{
+				if (m_inputElement->find(*iterInputElement) == -1)
+				{
+					m_inputElement->add(*iterInputElement);
+				}
+				iterInputElement++;			
+			}
+			return true;
+		}
+		case UmlPackage::EXPANSIONREGION_ATTRIBUTE_MODE:
+		{
+			// BOOST CAST
+			uml::ExpansionKind _mode = newValue->get<uml::ExpansionKind>();
+			setMode(_mode); //9544
+			return true;
+		}
+		case UmlPackage::EXPANSIONREGION_ATTRIBUTE_OUTPUTELEMENT:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::ExpansionNode>> outputElementList(new Bag<uml::ExpansionNode>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				outputElementList->add(std::dynamic_pointer_cast<uml::ExpansionNode>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::ExpansionNode>::iterator iterOutputElement = m_outputElement->begin();
+			Bag<uml::ExpansionNode>::iterator endOutputElement = m_outputElement->end();
+			while (iterOutputElement != endOutputElement)
+			{
+				if (outputElementList->find(*iterOutputElement) == -1)
+				{
+					m_outputElement->erase(*iterOutputElement);
+				}
+				iterOutputElement++;
+			}
+
+			iterOutputElement = outputElementList->begin();
+			endOutputElement = outputElementList->end();
+			while (iterOutputElement != endOutputElement)
+			{
+				if (m_outputElement->find(*iterOutputElement) == -1)
+				{
+					m_outputElement->add(*iterOutputElement);
+				}
+				iterOutputElement++;			
+			}
 			return true;
 		}
 	}
@@ -628,7 +723,7 @@ void ExpansionRegionImpl::loadAttributes(std::shared_ptr<persistence::interfaces
 		iter = attr_list.find("mode");
 		if ( iter != attr_list.end() )
 		{
-			ExpansionKind value = ExpansionKind::ITERATIVE;
+			uml::ExpansionKind value = ExpansionKind::ITERATIVE;
 			std::string literal = iter->second;
 			if (literal == "parallel")
 			{
@@ -682,7 +777,7 @@ void ExpansionRegionImpl::resolveReferences(const int featureID, std::list<std::
 {
 	switch(featureID)
 	{
-		case UmlPackage::EXPANSIONREGION_EREFERENCE_INPUTELEMENT:
+		case UmlPackage::EXPANSIONREGION_ATTRIBUTE_INPUTELEMENT:
 		{
 			std::shared_ptr<Bag<uml::ExpansionNode>> _inputElement = getInputElement();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -696,7 +791,7 @@ void ExpansionRegionImpl::resolveReferences(const int featureID, std::list<std::
 			return;
 		}
 
-		case UmlPackage::EXPANSIONREGION_EREFERENCE_OUTPUTELEMENT:
+		case UmlPackage::EXPANSIONREGION_ATTRIBUTE_OUTPUTELEMENT:
 		{
 			std::shared_ptr<Bag<uml::ExpansionNode>> _outputElement = getOutputElement();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -734,7 +829,6 @@ void ExpansionRegionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHan
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
@@ -757,9 +851,9 @@ void ExpansionRegionImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getExpansionRegion_EAttribute_mode()) )
+		if ( this->eIsSet(package->getExpansionRegion_Attribute_mode()) )
 		{
-			ExpansionKind value = this->getMode();
+			uml::ExpansionKind value = this->getMode();
 			std::string literal = "";
 			if (value == ExpansionKind::PARALLEL)
 			{

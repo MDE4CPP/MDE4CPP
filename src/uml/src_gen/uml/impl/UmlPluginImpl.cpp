@@ -17,9 +17,14 @@ UmlPluginImpl::~UmlPluginImpl()
 }
 
 
-std::shared_ptr<ecore::EObject> UmlPluginImpl::create(const std::string& name)
+std::shared_ptr<ecore::EObject> UmlPluginImpl::create(const std::string& name) const
 {
 	return UmlFactory::eInstance()->create(name);
+}
+
+std::shared_ptr<ecore::EObject> UmlPluginImpl::create(const std::string& name, std::shared_ptr<ecore::EObject> container, const unsigned int referenceID) const
+{
+	return UmlFactory::eInstance()->create(name, container, referenceID);
 }
 
 std::shared_ptr<ecore::EFactory> UmlPluginImpl::getEFactory()

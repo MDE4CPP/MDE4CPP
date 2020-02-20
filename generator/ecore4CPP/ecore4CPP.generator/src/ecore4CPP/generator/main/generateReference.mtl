@@ -17,6 +17,7 @@
 [import ecore4CPP::generator::main::generateClass /]
 [import ecore4CPP::generator::main::generateType /]
 [import ecore4CPP::generator::main::helper /]
+[import ecore4CPP::generator::main::helpers::keywords /]
 
 [query public hasSetter(anEReference : EReference) : EBoolean = (anEReference.changeable and anEReference.upperBound=1) or hasKey('setterbody') /]
 [query public hasGetter(anEReference : EReference) : EBoolean = not hasKey('noGetter') or hasKey('getterbody') /]
@@ -103,9 +104,9 @@ std::shared_ptr<Bag<[anEReference.eGenericType.generateCppType()/]> > _[anERefer
 [template public generateReferenceSetterCpp(anEReference : EReference) ? (hasSetter())]
 void [anEReference.eContainingClass.name.toUpperFirst()/]Impl::[anEReference.SetterName()/]([generateReferenceParameter(anEReference)/])
 {
-[if (hasKey('setterbody'))]
+[if (hasKey(keySetterBody()))]
 //generated from setterbody annotation
-[valueKey('setterbody')/] 
+[valueKey(keySetterBody())/] 
 //end of body
 [else]
     m_[anEReference.name/] = _[anEReference.name/];
@@ -116,9 +117,9 @@ void [anEReference.eContainingClass.name.toUpperFirst()/]Impl::[anEReference.Set
 [template public generateReferenceGetterCpp(anEReference : EReference) ? (hasGetter()and (not isUnion()))]
 [anEReference.generateReferenceType()/] [anEReference.eContainingClass.name.toUpperFirst()/]Impl::[anEReference.GetterName()/]() const
 {
-[if (hasKey('getterbody'))]
+[if (hasKey(keyGetterBody()))]
 //generated from getterbody annotation
-[valueKey('getterbody')/]
+[valueKey(keyGetterBody())/]
 //end of body
 [else]
 [if(anEReference.lowerBound>0)]//assert(m_[anEReference.name/]);[/if]

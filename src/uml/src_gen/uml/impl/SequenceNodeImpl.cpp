@@ -32,6 +32,19 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Activity.hpp"
@@ -51,8 +64,6 @@
 #include "uml/Constraint.hpp"
 
 #include "uml/Dependency.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -124,24 +135,24 @@ SequenceNodeImpl::~SequenceNodeImpl()
 
 
 //Additional constructor for the containments back reference
-			SequenceNodeImpl::SequenceNodeImpl(std::weak_ptr<uml::Activity > par_Activity, const int reference_id)
-			:SequenceNodeImpl()
-			{
-				switch(reference_id)
-				{	
-				case UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY:
-					m_activity = par_Activity;
-					m_owner = par_Activity;
-					 return;
-				case UmlPackage::ACTIVITYGROUP_EREFERENCE_INACTIVITY:
-					m_inActivity = par_Activity;
-					m_owner = par_Activity;
-					 return;
-				default:
-				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
-				}
-			   
-			}
+SequenceNodeImpl::SequenceNodeImpl(std::weak_ptr<uml::Activity > par_Activity, const int reference_id)
+:SequenceNodeImpl()
+{
+	switch(reference_id)
+	{	
+	case UmlPackage::ACTIVITYNODE_ATTRIBUTE_ACTIVITY:
+		m_activity = par_Activity;
+		m_owner = par_Activity;
+		 return;
+	case UmlPackage::ACTIVITYGROUP_ATTRIBUTE_INACTIVITY:
+		m_inActivity = par_Activity;
+		m_owner = par_Activity;
+		 return;
+	default:
+	std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
+	}
+   
+}
 
 
 
@@ -260,14 +271,6 @@ SequenceNodeImpl::SequenceNodeImpl(const SequenceNodeImpl & obj):SequenceNodeImp
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::ActivityEdge>> _edgeList = obj.getEdge();
 	for(std::shared_ptr<uml::ActivityEdge> _edge : *_edgeList)
 	{
@@ -425,7 +428,7 @@ std::shared_ptr<ecore::EObject>  SequenceNodeImpl::copy() const
 
 std::shared_ptr<ecore::EClass> SequenceNodeImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getSequenceNode_EClass();
+	return UmlPackageImpl::eInstance()->getSequenceNode_Class();
 }
 
 //*********************************
@@ -541,8 +544,18 @@ Any SequenceNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::SEQUENCENODE_EREFERENCE_EXECUTABLENODE:
-			return eAny(getExecutableNode()); //17445
+		case UmlPackage::SEQUENCENODE_ATTRIBUTE_EXECUTABLENODE:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::ExecutableNode>::iterator iter = m_executableNode->begin();
+			Bag<uml::ExecutableNode>::iterator end = m_executableNode->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //21544
+		}
 	}
 	return StructuredActivityNodeImpl::eGet(featureID, resolve, coreType);
 }
@@ -550,8 +563,8 @@ bool SequenceNodeImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::SEQUENCENODE_EREFERENCE_EXECUTABLENODE:
-			return getExecutableNode() != nullptr; //17445
+		case UmlPackage::SEQUENCENODE_ATTRIBUTE_EXECUTABLENODE:
+			return getExecutableNode() != nullptr; //21544
 	}
 	return StructuredActivityNodeImpl::internalEIsSet(featureID);
 }
@@ -559,6 +572,42 @@ bool SequenceNodeImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
+		case UmlPackage::SEQUENCENODE_ATTRIBUTE_EXECUTABLENODE:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::ExecutableNode>> executableNodeList(new Bag<uml::ExecutableNode>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				executableNodeList->add(std::dynamic_pointer_cast<uml::ExecutableNode>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::ExecutableNode>::iterator iterExecutableNode = m_executableNode->begin();
+			Bag<uml::ExecutableNode>::iterator endExecutableNode = m_executableNode->end();
+			while (iterExecutableNode != endExecutableNode)
+			{
+				if (executableNodeList->find(*iterExecutableNode) == -1)
+				{
+					m_executableNode->erase(*iterExecutableNode);
+				}
+				iterExecutableNode++;
+			}
+
+			iterExecutableNode = executableNodeList->begin();
+			endExecutableNode = executableNodeList->end();
+			while (iterExecutableNode != endExecutableNode)
+			{
+				if (m_executableNode->find(*iterExecutableNode) == -1)
+				{
+					m_executableNode->add(*iterExecutableNode);
+				}
+				iterExecutableNode++;			
+			}
+			return true;
+		}
 	}
 
 	return StructuredActivityNodeImpl::eSet(featureID, newValue);
@@ -651,7 +700,6 @@ void SequenceNodeImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandle
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
@@ -682,7 +730,7 @@ void SequenceNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 		std::shared_ptr<Bag<uml::ExecutableNode>> list_executableNode = this->getExecutableNode();
 		for (std::shared_ptr<uml::ExecutableNode> executableNode : *list_executableNode) 
 		{
-			saveHandler->addReference(executableNode, "executableNode", executableNode->eClass() != package->getExecutableNode_EClass());
+			saveHandler->addReference(executableNode, "executableNode", executableNode->eClass() != package->getExecutableNode_Class());
 		}
 	}
 	catch (std::exception& e)

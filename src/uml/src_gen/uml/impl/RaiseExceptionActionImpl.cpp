@@ -32,6 +32,15 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Action.hpp"
@@ -53,8 +62,6 @@
 #include "uml/Constraint.hpp"
 
 #include "uml/Dependency.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -203,14 +210,6 @@ RaiseExceptionActionImpl::RaiseExceptionActionImpl(const RaiseExceptionActionImp
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	if(obj.getException()!=nullptr)
 	{
 		m_exception = std::dynamic_pointer_cast<uml::InputPin>(obj.getException()->copy());
@@ -294,7 +293,7 @@ std::shared_ptr<ecore::EObject>  RaiseExceptionActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> RaiseExceptionActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getRaiseExceptionAction_EClass();
+	return UmlPackageImpl::eInstance()->getRaiseExceptionAction_Class();
 }
 
 //*********************************
@@ -383,8 +382,8 @@ Any RaiseExceptionActionImpl::eGet(int featureID, bool resolve, bool coreType) c
 {
 	switch(featureID)
 	{
-		case UmlPackage::RAISEEXCEPTIONACTION_EREFERENCE_EXCEPTION:
-			return eAny(getException()); //15828
+		case UmlPackage::RAISEEXCEPTIONACTION_ATTRIBUTE_EXCEPTION:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getException())); //19327
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -392,8 +391,8 @@ bool RaiseExceptionActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::RAISEEXCEPTIONACTION_EREFERENCE_EXCEPTION:
-			return getException() != nullptr; //15828
+		case UmlPackage::RAISEEXCEPTIONACTION_ATTRIBUTE_EXCEPTION:
+			return getException() != nullptr; //19327
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }
@@ -401,11 +400,12 @@ bool RaiseExceptionActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::RAISEEXCEPTIONACTION_EREFERENCE_EXCEPTION:
+		case UmlPackage::RAISEEXCEPTIONACTION_ATTRIBUTE_EXCEPTION:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::InputPin> _exception = newValue->get<std::shared_ptr<uml::InputPin>>();
-			setException(_exception); //15828
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::InputPin> _exception = std::dynamic_pointer_cast<uml::InputPin>(_temp);
+			setException(_exception); //19327
 			return true;
 		}
 	}
@@ -494,7 +494,6 @@ void RaiseExceptionActionImpl::save(std::shared_ptr<persistence::interfaces::XSa
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
@@ -517,7 +516,7 @@ void RaiseExceptionActionImpl::saveContent(std::shared_ptr<persistence::interfac
 		std::shared_ptr<uml::InputPin > exception = this->getException();
 		if (exception != nullptr)
 		{
-			saveHandler->addReference(exception, "exception", exception->eClass() != package->getInputPin_EClass());
+			saveHandler->addReference(exception, "exception", exception->eClass() != package->getInputPin_Class());
 		}
 	
 

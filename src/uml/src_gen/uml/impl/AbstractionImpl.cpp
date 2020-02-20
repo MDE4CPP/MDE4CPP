@@ -32,13 +32,20 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
 
 #include "uml/Dependency.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -177,14 +184,6 @@ AbstractionImpl::AbstractionImpl(const AbstractionImpl & obj):AbstractionImpl()
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_client" << std::endl;
 	#endif
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	if(obj.getMapping()!=nullptr)
 	{
 		m_mapping = std::dynamic_pointer_cast<uml::OpaqueExpression>(obj.getMapping()->copy());
@@ -228,7 +227,7 @@ std::shared_ptr<ecore::EObject>  AbstractionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> AbstractionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getAbstraction_EClass();
+	return UmlPackageImpl::eInstance()->getAbstraction_Class();
 }
 
 //*********************************
@@ -321,8 +320,8 @@ Any AbstractionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::ABSTRACTION_EREFERENCE_MAPPING:
-			return eAny(getMapping()); //4218
+		case UmlPackage::ABSTRACTION_ATTRIBUTE_MAPPING:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getMapping())); //117
 	}
 	return DependencyImpl::eGet(featureID, resolve, coreType);
 }
@@ -330,8 +329,8 @@ bool AbstractionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::ABSTRACTION_EREFERENCE_MAPPING:
-			return getMapping() != nullptr; //4218
+		case UmlPackage::ABSTRACTION_ATTRIBUTE_MAPPING:
+			return getMapping() != nullptr; //117
 	}
 	return DependencyImpl::internalEIsSet(featureID);
 }
@@ -339,11 +338,12 @@ bool AbstractionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::ABSTRACTION_EREFERENCE_MAPPING:
+		case UmlPackage::ABSTRACTION_ATTRIBUTE_MAPPING:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::OpaqueExpression> _mapping = newValue->get<std::shared_ptr<uml::OpaqueExpression>>();
-			setMapping(_mapping); //4218
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::OpaqueExpression> _mapping = std::dynamic_pointer_cast<uml::OpaqueExpression>(_temp);
+			setMapping(_mapping); //117
 			return true;
 		}
 	}
@@ -430,7 +430,6 @@ void AbstractionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
@@ -451,7 +450,7 @@ void AbstractionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 		std::shared_ptr<uml::OpaqueExpression > mapping = this->getMapping();
 		if (mapping != nullptr)
 		{
-			saveHandler->addReference(mapping, "mapping", mapping->eClass() != package->getOpaqueExpression_EClass());
+			saveHandler->addReference(mapping, "mapping", mapping->eClass() != package->getOpaqueExpression_Class());
 		}
 	
 

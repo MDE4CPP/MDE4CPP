@@ -32,13 +32,20 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
 
 #include "uml/Dependency.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -179,14 +186,6 @@ ExecutionOccurrenceSpecificationImpl::ExecutionOccurrenceSpecificationImpl(const
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::GeneralOrdering>> _generalOrderingList = obj.getGeneralOrdering();
 	for(std::shared_ptr<uml::GeneralOrdering> _generalOrdering : *_generalOrderingList)
 	{
@@ -222,7 +221,7 @@ std::shared_ptr<ecore::EObject>  ExecutionOccurrenceSpecificationImpl::copy() co
 
 std::shared_ptr<ecore::EClass> ExecutionOccurrenceSpecificationImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getExecutionOccurrenceSpecification_EClass();
+	return UmlPackageImpl::eInstance()->getExecutionOccurrenceSpecification_Class();
 }
 
 //*********************************
@@ -303,8 +302,8 @@ Any ExecutionOccurrenceSpecificationImpl::eGet(int featureID, bool resolve, bool
 {
 	switch(featureID)
 	{
-		case UmlPackage::EXECUTIONOCCURRENCESPECIFICATION_EREFERENCE_EXECUTION:
-			return eAny(getExecution()); //23416
+		case UmlPackage::EXECUTIONOCCURRENCESPECIFICATION_ATTRIBUTE_EXECUTION:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getExecution())); //9115
 	}
 	return OccurrenceSpecificationImpl::eGet(featureID, resolve, coreType);
 }
@@ -312,8 +311,8 @@ bool ExecutionOccurrenceSpecificationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::EXECUTIONOCCURRENCESPECIFICATION_EREFERENCE_EXECUTION:
-			return getExecution() != nullptr; //23416
+		case UmlPackage::EXECUTIONOCCURRENCESPECIFICATION_ATTRIBUTE_EXECUTION:
+			return getExecution() != nullptr; //9115
 	}
 	return OccurrenceSpecificationImpl::internalEIsSet(featureID);
 }
@@ -321,11 +320,12 @@ bool ExecutionOccurrenceSpecificationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::EXECUTIONOCCURRENCESPECIFICATION_EREFERENCE_EXECUTION:
+		case UmlPackage::EXECUTIONOCCURRENCESPECIFICATION_ATTRIBUTE_EXECUTION:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::ExecutionSpecification> _execution = newValue->get<std::shared_ptr<uml::ExecutionSpecification>>();
-			setExecution(_execution); //23416
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::ExecutionSpecification> _execution = std::dynamic_pointer_cast<uml::ExecutionSpecification>(_temp);
+			setExecution(_execution); //9115
 			return true;
 		}
 	}
@@ -389,7 +389,7 @@ void ExecutionOccurrenceSpecificationImpl::resolveReferences(const int featureID
 {
 	switch(featureID)
 	{
-		case UmlPackage::EXECUTIONOCCURRENCESPECIFICATION_EREFERENCE_EXECUTION:
+		case UmlPackage::EXECUTIONOCCURRENCESPECIFICATION_ATTRIBUTE_EXECUTION:
 		{
 			if (references.size() == 1)
 			{
@@ -416,7 +416,6 @@ void ExecutionOccurrenceSpecificationImpl::save(std::shared_ptr<persistence::int
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

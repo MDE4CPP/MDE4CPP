@@ -32,13 +32,20 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
 
 #include "uml/Dependency.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -169,14 +176,6 @@ TimeObservationImpl::TimeObservationImpl(const TimeObservationImpl & obj):TimeOb
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	if(obj.getNameExpression()!=nullptr)
 	{
 		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
@@ -204,7 +203,7 @@ std::shared_ptr<ecore::EObject>  TimeObservationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> TimeObservationImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getTimeObservation_EClass();
+	return UmlPackageImpl::eInstance()->getTimeObservation_Class();
 }
 
 //*********************************
@@ -294,10 +293,10 @@ Any TimeObservationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::TIMEOBSERVATION_EREFERENCE_EVENT:
-			return eAny(getEvent()); //25713
-		case UmlPackage::TIMEOBSERVATION_EATTRIBUTE_FIRSTEVENT:
-			return eAny(getFirstEvent()); //25714
+		case UmlPackage::TIMEOBSERVATION_ATTRIBUTE_EVENT:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEvent())); //24112
+		case UmlPackage::TIMEOBSERVATION_ATTRIBUTE_FIRSTEVENT:
+			return eAny(getFirstEvent()); //24113
 	}
 	return ObservationImpl::eGet(featureID, resolve, coreType);
 }
@@ -305,10 +304,10 @@ bool TimeObservationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::TIMEOBSERVATION_EREFERENCE_EVENT:
-			return getEvent() != nullptr; //25713
-		case UmlPackage::TIMEOBSERVATION_EATTRIBUTE_FIRSTEVENT:
-			return getFirstEvent() != true; //25714
+		case UmlPackage::TIMEOBSERVATION_ATTRIBUTE_EVENT:
+			return getEvent() != nullptr; //24112
+		case UmlPackage::TIMEOBSERVATION_ATTRIBUTE_FIRSTEVENT:
+			return getFirstEvent() != true; //24113
 	}
 	return ObservationImpl::internalEIsSet(featureID);
 }
@@ -316,18 +315,19 @@ bool TimeObservationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::TIMEOBSERVATION_EREFERENCE_EVENT:
+		case UmlPackage::TIMEOBSERVATION_ATTRIBUTE_EVENT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::NamedElement> _event = newValue->get<std::shared_ptr<uml::NamedElement>>();
-			setEvent(_event); //25713
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::NamedElement> _event = std::dynamic_pointer_cast<uml::NamedElement>(_temp);
+			setEvent(_event); //24112
 			return true;
 		}
-		case UmlPackage::TIMEOBSERVATION_EATTRIBUTE_FIRSTEVENT:
+		case UmlPackage::TIMEOBSERVATION_ATTRIBUTE_FIRSTEVENT:
 		{
 			// BOOST CAST
 			bool _firstEvent = newValue->get<bool>();
-			setFirstEvent(_firstEvent); //25714
+			setFirstEvent(_firstEvent); //24113
 			return true;
 		}
 	}
@@ -400,7 +400,7 @@ void TimeObservationImpl::resolveReferences(const int featureID, std::list<std::
 {
 	switch(featureID)
 	{
-		case UmlPackage::TIMEOBSERVATION_EREFERENCE_EVENT:
+		case UmlPackage::TIMEOBSERVATION_ATTRIBUTE_EVENT:
 		{
 			if (references.size() == 1)
 			{
@@ -428,7 +428,6 @@ void TimeObservationImpl::save(std::shared_ptr<persistence::interfaces::XSaveHan
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
@@ -448,7 +447,7 @@ void TimeObservationImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getTimeObservation_EAttribute_firstEvent()) )
+		if ( this->eIsSet(package->getTimeObservation_Attribute_firstEvent()) )
 		{
 			saveHandler->addAttribute("firstEvent", this->getFirstEvent());
 		}

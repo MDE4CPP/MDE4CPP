@@ -145,22 +145,22 @@ namespace uml
 			/*!
 			 Indicates whether a parameter is being sent into or out of a behavioral element.
 			<p>From package UML::Classification.</p> */ 
-			virtual ParameterDirectionKind getDirection() const ;
+			virtual uml::ParameterDirectionKind getDirection() const ;
 			
 			/*!
 			 Indicates whether a parameter is being sent into or out of a behavioral element.
 			<p>From package UML::Classification.</p> */ 
-			virtual void setDirection (ParameterDirectionKind _direction); 
+			virtual void setDirection (uml::ParameterDirectionKind _direction); 
 			
 			/*!
 			 Specifies the effect that executions of the owner of the Parameter have on objects passed in or out of the parameter.
 			<p>From package UML::Classification.</p> */ 
-			virtual ParameterEffectKind getEffect() const ;
+			virtual uml::ParameterEffectKind getEffect() const ;
 			
 			/*!
 			 Specifies the effect that executions of the owner of the Parameter have on objects passed in or out of the parameter.
 			<p>From package UML::Classification.</p> */ 
-			virtual void setEffect (ParameterEffectKind _effect); 
+			virtual void setEffect (uml::ParameterEffectKind _effect); 
 			
 			/*!
 			 Tells whether an output parameter may emit a value to the exclusion of the other outputs.

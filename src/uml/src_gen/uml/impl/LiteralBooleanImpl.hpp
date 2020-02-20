@@ -53,6 +53,10 @@ namespace uml
 			LiteralBooleanImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
 
 
+			//Additional constructors for the containments back reference
+			LiteralBooleanImpl(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction);
+
+
 
 
 		public:

@@ -17,9 +17,14 @@ EcorePluginImpl::~EcorePluginImpl()
 }
 
 
-std::shared_ptr<ecore::EObject> EcorePluginImpl::create(const std::string& name)
+std::shared_ptr<ecore::EObject> EcorePluginImpl::create(const std::string& name) const
 {
 	return EcoreFactory::eInstance()->create(name);
+}
+
+std::shared_ptr<ecore::EObject> EcorePluginImpl::create(const std::string& name, std::shared_ptr<ecore::EObject> container, const unsigned int referenceID) const
+{
+	return EcoreFactory::eInstance()->create(name, container, referenceID);
 }
 
 std::shared_ptr<ecore::EFactory> EcorePluginImpl::getEFactory()

@@ -15,6 +15,7 @@
 [module generateType( 'http://www.eclipse.org/emf/2002/Ecore')]
 
 [import ecore4CPP::generator::main::helper /]
+[import ecore4CPP::generator::main::helpers::keywords /]
 
 
 [template public generateParameterList(aOperation:EOperation) post(trim())]
@@ -50,12 +51,14 @@ std::shared_ptr<[eParameter.eGenericType.generateCppType()/]> [else]
 [eParameter.eGenericType.generateCppType()/] [/if]
 [/template]
 
+[query private getPointerType(anOperation : EOperation) : String = if (anOperation.hasKey(anOperation.keyWeakptr())) then 'std::weak_ptr' else 'std::shared_ptr' endif /]
+
 [template public generateOperationType(eOperation : EOperation) post(trim())]
 [if (not (eOperation.upperBound = 1))]
 [if (not eOperation.eGenericType.oclIsKindOf(EDataType))]
 std::shared_ptr<Bag<[eOperation.eGenericType.generateCppType()/]> >[/if]
-[elseif ((not eOperation.eType.oclIsUndefined()) and (not eOperation.eType.oclIsKindOf(EDataType)))]
-std::shared_ptr<[eOperation.eGenericType.generateCppType()/]> [else]
+[elseif ((not eOperation.eType.oclIsUndefined()) and ((not eOperation.eType.oclIsKindOf(EDataType)) or (eOperation.eType.name = 'EEList') or (eOperation.eType.name = 'ETreeIterator') ))]
+[eOperation.getPointerType()/]<[eOperation.eGenericType.generateCppType()/]> [else] 
 [eOperation.eGenericType.generateCppType()/] [/if]
 
 [/template]
@@ -96,7 +99,7 @@ m_[m.oclAsType(EReference).name/][/for][/let]
 [/if]
 [/template]
 
-[query private isShared(aReference : EReference) : Boolean = if (aReference.hasKey('AggregationKind')) then aReference.valueKey('AggregationKind')='shared' else false endif/]
+[query private isShared(aReference : EReference) : Boolean = if (aReference.hasKey(keyAggregationKind())) then aReference.valueKey(keyAggregationKind())='shared' else false endif/]
 [query public isBackReference(aReference:EReference) : Boolean = aReference.container or isShared()/]
 [query public hasAbstractType(aReference : EReference) : Boolean = if (aReference.eType.oclIsKindOf(EClass)) then eType.oclAsType(EClass).abstract else false endif /]
 
@@ -202,11 +205,11 @@ std::string
 [/template]
 
 [template public transformType(anEClassifier : EClassifier) ? (not oclIsKindOf(EDataType))]
-[anEClassifier.ePackage.name/]::[anEClassifier.name/]
+[anEClassifier.generateNamespaceDefinition()/]::[anEClassifier.name/]
 [/template]
 
 [template public transformType(anEClassifier : EClassifier) ? (oclIsKindOf(EEnum))]
-[anEClassifier.name/]
+[anEClassifier.generateNamespaceDefinition()/]::[anEClassifier.name/]
 [/template]
 
 [query public getDefaultValue(anEClassifier : EClassifier) : String = 
@@ -256,7 +259,7 @@ std::string
 /]
 
 [query private getDefaultBooleanValue(anEClassifier : EClassifier) : String = 'false'/]
-[query private getDefaultCharValue(anEClassifier : EClassifier) : String = '\'\''/]
+[query private getDefaultCharValue(anEClassifier : EClassifier) : String = '\'\\0\''/]
 [query private getDefaultNumberValue(anEClassifier : EClassifier) : String = '0'/]
 [query private getDefaultPointerValue(anEClassifier : EClassifier) : String = 'nullptr'/]
 [query private getDefaultStringValue(anEClassifier : EClassifier) : String = '""'/]

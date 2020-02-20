@@ -33,6 +33,13 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Classifier.hpp"
@@ -40,8 +47,6 @@
 #include "uml/Comment.hpp"
 
 #include "uml/Dependency.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -156,14 +161,6 @@ ExtensionPointImpl::ExtensionPointImpl(const ExtensionPointImpl & obj):Extension
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	if(obj.getNameExpression()!=nullptr)
 	{
 		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
@@ -191,7 +188,7 @@ std::shared_ptr<ecore::EObject>  ExtensionPointImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ExtensionPointImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getExtensionPoint_EClass();
+	return UmlPackageImpl::eInstance()->getExtensionPoint_Class();
 }
 
 //*********************************
@@ -272,8 +269,8 @@ Any ExtensionPointImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::EXTENSIONPOINT_EREFERENCE_USECASE:
-			return eAny(getUseCase()); //10013
+		case UmlPackage::EXTENSIONPOINT_ATTRIBUTE_USECASE:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getUseCase().lock())); //10012
 	}
 	return RedefinableElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -281,8 +278,8 @@ bool ExtensionPointImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::EXTENSIONPOINT_EREFERENCE_USECASE:
-			return getUseCase().lock() != nullptr; //10013
+		case UmlPackage::EXTENSIONPOINT_ATTRIBUTE_USECASE:
+			return getUseCase().lock() != nullptr; //10012
 	}
 	return RedefinableElementImpl::internalEIsSet(featureID);
 }
@@ -290,11 +287,12 @@ bool ExtensionPointImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::EXTENSIONPOINT_EREFERENCE_USECASE:
+		case UmlPackage::EXTENSIONPOINT_ATTRIBUTE_USECASE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::UseCase> _useCase = newValue->get<std::shared_ptr<uml::UseCase>>();
-			setUseCase(_useCase); //10013
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::UseCase> _useCase = std::dynamic_pointer_cast<uml::UseCase>(_temp);
+			setUseCase(_useCase); //10012
 			return true;
 		}
 	}
@@ -339,7 +337,7 @@ void ExtensionPointImpl::resolveReferences(const int featureID, std::list<std::s
 {
 	switch(featureID)
 	{
-		case UmlPackage::EXTENSIONPOINT_EREFERENCE_USECASE:
+		case UmlPackage::EXTENSIONPOINT_ATTRIBUTE_USECASE:
 		{
 			if (references.size() == 1)
 			{
@@ -364,7 +362,6 @@ void ExtensionPointImpl::save(std::shared_ptr<persistence::interfaces::XSaveHand
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

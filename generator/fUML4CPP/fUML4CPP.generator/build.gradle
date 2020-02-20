@@ -41,7 +41,8 @@ dependencies {
 sourceSets {
 	main {
 		java {
-			srcDir 'src'
+			srcDirs = ['src', '../../UML4CPP/UML4CPP.generator/src']
+			excludes = ['UML4CPP/generator/Activator.java', 'UML4CPP/generator/main/Generate.java']
 		}
 	}
 }
@@ -49,7 +50,7 @@ sourceSets {
 jar.archiveName = 'fUML4CPP.jar'
 
 executableJar {
-   mainClass 'fUML4CPP.generator.main.Generate'
+   mainClass 'fUML4CPP.generator.main.GenerateFUML'
 }
 task deliverFUML4CPP(type: Copy) {
 	description 'deliver fUML4CPP.jar to %MDE4CPP_HOME%/application/generator'

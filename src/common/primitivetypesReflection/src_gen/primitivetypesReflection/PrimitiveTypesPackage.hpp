@@ -6,11 +6,12 @@
 
 #ifndef PRIMITIVETYPES_METAMODELPACKAGE_HPP
 #define PRIMITIVETYPES_METAMODELPACKAGE_HPP
-#include "uml/Package.hpp"	
+#include "uml/Model.hpp"
 
 namespace uml 
 {
 	class PrimitiveType;
+	class ConnectorEnd;
 }
 
 namespace PrimitiveTypes 
@@ -19,7 +20,7 @@ namespace PrimitiveTypes
 	The Metamodel Package for the PrimitiveTypes metamodel. This package is used to enable the reflection of model elements. It contains all model elements
 	which were described in an ecore file.
 	*/
-	class PrimitiveTypesPackage : virtual public uml::Package
+	class PrimitiveTypesPackage : virtual public uml::Model
 	{
 		//protected default construcotr
 		protected:
@@ -32,11 +33,12 @@ namespace PrimitiveTypes
 			static const std::string eNS_PREFIX;
 
 			//getter for the ownedMember
-			virtual std::shared_ptr<uml::PrimitiveType> get_PrimitiveTypes_Boolean() = 0;
-			virtual std::shared_ptr<uml::PrimitiveType> get_PrimitiveTypes_Integer() = 0;
-			virtual std::shared_ptr<uml::PrimitiveType> get_PrimitiveTypes_Real() = 0;
-			virtual std::shared_ptr<uml::PrimitiveType> get_PrimitiveTypes_String() = 0;
-			virtual std::shared_ptr<uml::PrimitiveType> get_PrimitiveTypes_UnlimitedNatural() = 0;
+			virtual std::shared_ptr<uml::PrimitiveType> get_PrimitiveTypes_Boolean() = 0;  
+			virtual std::shared_ptr<uml::PrimitiveType> get_PrimitiveTypes_Integer() = 0;  
+			virtual std::shared_ptr<uml::PrimitiveType> get_PrimitiveTypes_Real() = 0;  
+			virtual std::shared_ptr<uml::PrimitiveType> get_PrimitiveTypes_String() = 0;  
+			virtual std::shared_ptr<uml::PrimitiveType> get_PrimitiveTypes_UnlimitedNatural() = 0;  
+			
 			
 
 			//Singleton Instance and Getter
@@ -45,6 +47,7 @@ namespace PrimitiveTypes
 				static std::shared_ptr<PrimitiveTypesPackage> instance;
 			public:
 				static std::shared_ptr<PrimitiveTypesPackage> eInstance();
+
 	};
 }
 #endif /* end of include guard: PRIMITIVETYPES_METAMODELPACKAGE_HPP */

@@ -33,6 +33,13 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Behavior.hpp"
@@ -44,8 +51,6 @@
 #include "uml/Constraint.hpp"
 
 #include "uml/Dependency.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -220,14 +225,6 @@ TransitionImpl::TransitionImpl(const TransitionImpl & obj):TransitionImpl()
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	if(obj.getEffect()!=nullptr)
 	{
 		m_effect = std::dynamic_pointer_cast<uml::Behavior>(obj.getEffect()->copy());
@@ -325,18 +322,18 @@ std::shared_ptr<ecore::EObject>  TransitionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> TransitionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getTransition_EClass();
+	return UmlPackageImpl::eInstance()->getTransition_Class();
 }
 
 //*********************************
 // Attribute Setter Getter
 //*********************************
-void TransitionImpl::setKind(TransitionKind _kind)
+void TransitionImpl::setKind(uml::TransitionKind _kind)
 {
 	m_kind = _kind;
 } 
 
-TransitionKind TransitionImpl::getKind() const 
+uml::TransitionKind TransitionImpl::getKind() const 
 {
 	return m_kind;
 }
@@ -545,22 +542,32 @@ Any TransitionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::TRANSITION_EREFERENCE_CONTAINER:
-			return eAny(getContainer()); //6826
-		case UmlPackage::TRANSITION_EREFERENCE_EFFECT:
-			return eAny(getEffect()); //6819
-		case UmlPackage::TRANSITION_EREFERENCE_GUARD:
-			return eAny(getGuard()); //6820
-		case UmlPackage::TRANSITION_EATTRIBUTE_KIND:
-			return eAny(getKind()); //6821
-		case UmlPackage::TRANSITION_EREFERENCE_REDEFINEDTRANSITION:
-			return eAny(getRedefinedTransition()); //6822
-		case UmlPackage::TRANSITION_EREFERENCE_SOURCE:
-			return eAny(getSource()); //6823
-		case UmlPackage::TRANSITION_EREFERENCE_TARGET:
-			return eAny(getTarget()); //6824
-		case UmlPackage::TRANSITION_EREFERENCE_TRIGGER:
-			return eAny(getTrigger()); //6825
+		case UmlPackage::TRANSITION_ATTRIBUTE_CONTAINER:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getContainer().lock())); //24225
+		case UmlPackage::TRANSITION_ATTRIBUTE_EFFECT:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEffect())); //24218
+		case UmlPackage::TRANSITION_ATTRIBUTE_GUARD:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getGuard())); //24219
+		case UmlPackage::TRANSITION_ATTRIBUTE_KIND:
+			return eAny(getKind()); //24220
+		case UmlPackage::TRANSITION_ATTRIBUTE_REDEFINEDTRANSITION:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getRedefinedTransition())); //24221
+		case UmlPackage::TRANSITION_ATTRIBUTE_SOURCE:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSource())); //24222
+		case UmlPackage::TRANSITION_ATTRIBUTE_TARGET:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getTarget())); //24223
+		case UmlPackage::TRANSITION_ATTRIBUTE_TRIGGER:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Trigger>::iterator iter = m_trigger->begin();
+			Bag<uml::Trigger>::iterator end = m_trigger->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //24224
+		}
 	}
 	Any result;
 	result = NamespaceImpl::eGet(featureID, resolve, coreType);
@@ -575,22 +582,22 @@ bool TransitionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::TRANSITION_EREFERENCE_CONTAINER:
-			return getContainer().lock() != nullptr; //6826
-		case UmlPackage::TRANSITION_EREFERENCE_EFFECT:
-			return getEffect() != nullptr; //6819
-		case UmlPackage::TRANSITION_EREFERENCE_GUARD:
-			return getGuard() != nullptr; //6820
-		case UmlPackage::TRANSITION_EATTRIBUTE_KIND:
-			return m_kind != TransitionKind::EXTERNAL;; //6821
-		case UmlPackage::TRANSITION_EREFERENCE_REDEFINEDTRANSITION:
-			return getRedefinedTransition() != nullptr; //6822
-		case UmlPackage::TRANSITION_EREFERENCE_SOURCE:
-			return getSource() != nullptr; //6823
-		case UmlPackage::TRANSITION_EREFERENCE_TARGET:
-			return getTarget() != nullptr; //6824
-		case UmlPackage::TRANSITION_EREFERENCE_TRIGGER:
-			return getTrigger() != nullptr; //6825
+		case UmlPackage::TRANSITION_ATTRIBUTE_CONTAINER:
+			return getContainer().lock() != nullptr; //24225
+		case UmlPackage::TRANSITION_ATTRIBUTE_EFFECT:
+			return getEffect() != nullptr; //24218
+		case UmlPackage::TRANSITION_ATTRIBUTE_GUARD:
+			return getGuard() != nullptr; //24219
+		case UmlPackage::TRANSITION_ATTRIBUTE_KIND:
+			return m_kind != TransitionKind::EXTERNAL;; //24220
+		case UmlPackage::TRANSITION_ATTRIBUTE_REDEFINEDTRANSITION:
+			return getRedefinedTransition() != nullptr; //24221
+		case UmlPackage::TRANSITION_ATTRIBUTE_SOURCE:
+			return getSource() != nullptr; //24222
+		case UmlPackage::TRANSITION_ATTRIBUTE_TARGET:
+			return getTarget() != nullptr; //24223
+		case UmlPackage::TRANSITION_ATTRIBUTE_TRIGGER:
+			return getTrigger() != nullptr; //24224
 	}
 	bool result = false;
 	result = NamespaceImpl::internalEIsSet(featureID);
@@ -605,53 +612,95 @@ bool TransitionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::TRANSITION_EREFERENCE_CONTAINER:
+		case UmlPackage::TRANSITION_ATTRIBUTE_CONTAINER:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Region> _container = newValue->get<std::shared_ptr<uml::Region>>();
-			setContainer(_container); //6826
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Region> _container = std::dynamic_pointer_cast<uml::Region>(_temp);
+			setContainer(_container); //24225
 			return true;
 		}
-		case UmlPackage::TRANSITION_EREFERENCE_EFFECT:
+		case UmlPackage::TRANSITION_ATTRIBUTE_EFFECT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Behavior> _effect = newValue->get<std::shared_ptr<uml::Behavior>>();
-			setEffect(_effect); //6819
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Behavior> _effect = std::dynamic_pointer_cast<uml::Behavior>(_temp);
+			setEffect(_effect); //24218
 			return true;
 		}
-		case UmlPackage::TRANSITION_EREFERENCE_GUARD:
+		case UmlPackage::TRANSITION_ATTRIBUTE_GUARD:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Constraint> _guard = newValue->get<std::shared_ptr<uml::Constraint>>();
-			setGuard(_guard); //6820
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Constraint> _guard = std::dynamic_pointer_cast<uml::Constraint>(_temp);
+			setGuard(_guard); //24219
 			return true;
 		}
-		case UmlPackage::TRANSITION_EATTRIBUTE_KIND:
+		case UmlPackage::TRANSITION_ATTRIBUTE_KIND:
 		{
 			// BOOST CAST
-			TransitionKind _kind = newValue->get<TransitionKind>();
-			setKind(_kind); //6821
+			uml::TransitionKind _kind = newValue->get<uml::TransitionKind>();
+			setKind(_kind); //24220
 			return true;
 		}
-		case UmlPackage::TRANSITION_EREFERENCE_REDEFINEDTRANSITION:
+		case UmlPackage::TRANSITION_ATTRIBUTE_REDEFINEDTRANSITION:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Transition> _redefinedTransition = newValue->get<std::shared_ptr<uml::Transition>>();
-			setRedefinedTransition(_redefinedTransition); //6822
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Transition> _redefinedTransition = std::dynamic_pointer_cast<uml::Transition>(_temp);
+			setRedefinedTransition(_redefinedTransition); //24221
 			return true;
 		}
-		case UmlPackage::TRANSITION_EREFERENCE_SOURCE:
+		case UmlPackage::TRANSITION_ATTRIBUTE_SOURCE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Vertex> _source = newValue->get<std::shared_ptr<uml::Vertex>>();
-			setSource(_source); //6823
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Vertex> _source = std::dynamic_pointer_cast<uml::Vertex>(_temp);
+			setSource(_source); //24222
 			return true;
 		}
-		case UmlPackage::TRANSITION_EREFERENCE_TARGET:
+		case UmlPackage::TRANSITION_ATTRIBUTE_TARGET:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Vertex> _target = newValue->get<std::shared_ptr<uml::Vertex>>();
-			setTarget(_target); //6824
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Vertex> _target = std::dynamic_pointer_cast<uml::Vertex>(_temp);
+			setTarget(_target); //24223
+			return true;
+		}
+		case UmlPackage::TRANSITION_ATTRIBUTE_TRIGGER:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Trigger>> triggerList(new Bag<uml::Trigger>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				triggerList->add(std::dynamic_pointer_cast<uml::Trigger>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Trigger>::iterator iterTrigger = m_trigger->begin();
+			Bag<uml::Trigger>::iterator endTrigger = m_trigger->end();
+			while (iterTrigger != endTrigger)
+			{
+				if (triggerList->find(*iterTrigger) == -1)
+				{
+					m_trigger->erase(*iterTrigger);
+				}
+				iterTrigger++;
+			}
+
+			iterTrigger = triggerList->begin();
+			endTrigger = triggerList->end();
+			while (iterTrigger != endTrigger)
+			{
+				if (m_trigger->find(*iterTrigger) == -1)
+				{
+					m_trigger->add(*iterTrigger);
+				}
+				iterTrigger++;			
+			}
 			return true;
 		}
 	}
@@ -695,7 +744,7 @@ void TransitionImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLo
 		iter = attr_list.find("kind");
 		if ( iter != attr_list.end() )
 		{
-			TransitionKind value = TransitionKind::EXTERNAL;
+			uml::TransitionKind value = TransitionKind::EXTERNAL;
 			std::string literal = iter->second;
 			if (literal == "internal")
 			{
@@ -809,7 +858,7 @@ void TransitionImpl::resolveReferences(const int featureID, std::list<std::share
 {
 	switch(featureID)
 	{
-		case UmlPackage::TRANSITION_EREFERENCE_CONTAINER:
+		case UmlPackage::TRANSITION_ATTRIBUTE_CONTAINER:
 		{
 			if (references.size() == 1)
 			{
@@ -821,7 +870,7 @@ void TransitionImpl::resolveReferences(const int featureID, std::list<std::share
 			return;
 		}
 
-		case UmlPackage::TRANSITION_EREFERENCE_GUARD:
+		case UmlPackage::TRANSITION_ATTRIBUTE_GUARD:
 		{
 			if (references.size() == 1)
 			{
@@ -833,7 +882,7 @@ void TransitionImpl::resolveReferences(const int featureID, std::list<std::share
 			return;
 		}
 
-		case UmlPackage::TRANSITION_EREFERENCE_REDEFINEDTRANSITION:
+		case UmlPackage::TRANSITION_ATTRIBUTE_REDEFINEDTRANSITION:
 		{
 			if (references.size() == 1)
 			{
@@ -845,7 +894,7 @@ void TransitionImpl::resolveReferences(const int featureID, std::list<std::share
 			return;
 		}
 
-		case UmlPackage::TRANSITION_EREFERENCE_SOURCE:
+		case UmlPackage::TRANSITION_ATTRIBUTE_SOURCE:
 		{
 			if (references.size() == 1)
 			{
@@ -857,7 +906,7 @@ void TransitionImpl::resolveReferences(const int featureID, std::list<std::share
 			return;
 		}
 
-		case UmlPackage::TRANSITION_EREFERENCE_TARGET:
+		case UmlPackage::TRANSITION_ATTRIBUTE_TARGET:
 		{
 			if (references.size() == 1)
 			{
@@ -884,7 +933,6 @@ void TransitionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler>
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
@@ -904,20 +952,20 @@ void TransitionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 		std::shared_ptr<uml::Behavior > effect = this->getEffect();
 		if (effect != nullptr)
 		{
-			saveHandler->addReference(effect, "effect", effect->eClass() != package->getBehavior_EClass());
+			saveHandler->addReference(effect, "effect", effect->eClass() != package->getBehavior_Class());
 		}
 
 		// Save 'trigger'
 		for (std::shared_ptr<uml::Trigger> trigger : *this->getTrigger()) 
 		{
-			saveHandler->addReference(trigger, "trigger", trigger->eClass() != package->getTrigger_EClass());
+			saveHandler->addReference(trigger, "trigger", trigger->eClass() != package->getTrigger_Class());
 		}
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getTransition_EAttribute_kind()) )
+		if ( this->eIsSet(package->getTransition_Attribute_kind()) )
 		{
-			TransitionKind value = this->getKind();
+			uml::TransitionKind value = this->getKind();
 			std::string literal = "";
 			if (value == TransitionKind::INTERNAL)
 			{

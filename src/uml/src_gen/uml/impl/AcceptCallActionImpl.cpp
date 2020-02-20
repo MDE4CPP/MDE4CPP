@@ -33,6 +33,15 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/AcceptEventAction.hpp"
@@ -54,8 +63,6 @@
 #include "uml/Constraint.hpp"
 
 #include "uml/Dependency.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -207,14 +214,6 @@ AcceptCallActionImpl::AcceptCallActionImpl(const AcceptCallActionImpl & obj):Acc
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::ExceptionHandler>> _handlerList = obj.getHandler();
 	for(std::shared_ptr<uml::ExceptionHandler> _handler : *_handlerList)
 	{
@@ -314,7 +313,7 @@ std::shared_ptr<ecore::EObject>  AcceptCallActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> AcceptCallActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getAcceptCallAction_EClass();
+	return UmlPackageImpl::eInstance()->getAcceptCallAction_Class();
 }
 
 //*********************************
@@ -420,8 +419,8 @@ Any AcceptCallActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::ACCEPTCALLACTION_EREFERENCE_RETURNINFORMATION:
-			return eAny(getReturnInformation()); //13231
+		case UmlPackage::ACCEPTCALLACTION_ATTRIBUTE_RETURNINFORMATION:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getReturnInformation())); //230
 	}
 	return AcceptEventActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -429,8 +428,8 @@ bool AcceptCallActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::ACCEPTCALLACTION_EREFERENCE_RETURNINFORMATION:
-			return getReturnInformation() != nullptr; //13231
+		case UmlPackage::ACCEPTCALLACTION_ATTRIBUTE_RETURNINFORMATION:
+			return getReturnInformation() != nullptr; //230
 	}
 	return AcceptEventActionImpl::internalEIsSet(featureID);
 }
@@ -438,11 +437,12 @@ bool AcceptCallActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::ACCEPTCALLACTION_EREFERENCE_RETURNINFORMATION:
+		case UmlPackage::ACCEPTCALLACTION_ATTRIBUTE_RETURNINFORMATION:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::OutputPin> _returnInformation = newValue->get<std::shared_ptr<uml::OutputPin>>();
-			setReturnInformation(_returnInformation); //13231
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::OutputPin> _returnInformation = std::dynamic_pointer_cast<uml::OutputPin>(_temp);
+			setReturnInformation(_returnInformation); //230
 			return true;
 		}
 	}
@@ -533,7 +533,6 @@ void AcceptCallActionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHa
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
@@ -557,7 +556,7 @@ void AcceptCallActionImpl::saveContent(std::shared_ptr<persistence::interfaces::
 		std::shared_ptr<uml::OutputPin > returnInformation = this->getReturnInformation();
 		if (returnInformation != nullptr)
 		{
-			saveHandler->addReference(returnInformation, "returnInformation", returnInformation->eClass() != package->getOutputPin_EClass());
+			saveHandler->addReference(returnInformation, "returnInformation", returnInformation->eClass() != package->getOutputPin_Class());
 		}
 	
 

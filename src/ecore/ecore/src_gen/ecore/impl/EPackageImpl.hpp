@@ -34,6 +34,10 @@ namespace ecore
 			virtual void setThisEPackagePtr(std::weak_ptr<EPackage> thisEPackagePtr);
 
 			//Additional constructors for the containments back reference
+			EPackageImpl(std::weak_ptr<ecore::EObject > par_eContainer);
+
+
+			//Additional constructors for the containments back reference
 			EPackageImpl(std::weak_ptr<ecore::EPackage > par_eSuperPackage);
 
 
@@ -78,7 +82,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<Bag<ecore::EClassifier>> getEClassifiers() const ;
+			virtual std::shared_ptr<Subset<ecore::EClassifier, ecore::EObject>> getEClassifiers() const ;
 			
 			/*!
 			 */
@@ -100,7 +104,9 @@ namespace ecore
 			//*********************************
 			// Union Getter
 			//*********************************
-			 
+			/*!
+			 */
+			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

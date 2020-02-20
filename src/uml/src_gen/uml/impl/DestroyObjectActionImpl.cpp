@@ -33,6 +33,15 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Action.hpp"
@@ -54,8 +63,6 @@
 #include "uml/Constraint.hpp"
 
 #include "uml/Dependency.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -207,14 +214,6 @@ DestroyObjectActionImpl::DestroyObjectActionImpl(const DestroyObjectActionImpl &
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::ExceptionHandler>> _handlerList = obj.getHandler();
 	for(std::shared_ptr<uml::ExceptionHandler> _handler : *_handlerList)
 	{
@@ -298,7 +297,7 @@ std::shared_ptr<ecore::EObject>  DestroyObjectActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> DestroyObjectActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getDestroyObjectAction_EClass();
+	return UmlPackageImpl::eInstance()->getDestroyObjectAction_Class();
 }
 
 //*********************************
@@ -417,12 +416,12 @@ Any DestroyObjectActionImpl::eGet(int featureID, bool resolve, bool coreType) co
 {
 	switch(featureID)
 	{
-		case UmlPackage::DESTROYOBJECTACTION_EATTRIBUTE_ISDESTROYLINKS:
-			return eAny(getIsDestroyLinks()); //15328
-		case UmlPackage::DESTROYOBJECTACTION_EATTRIBUTE_ISDESTROYOWNEDOBJECTS:
-			return eAny(getIsDestroyOwnedObjects()); //15329
-		case UmlPackage::DESTROYOBJECTACTION_EREFERENCE_TARGET:
-			return eAny(getTarget()); //15330
+		case UmlPackage::DESTROYOBJECTACTION_ATTRIBUTE_ISDESTROYLINKS:
+			return eAny(getIsDestroyLinks()); //7427
+		case UmlPackage::DESTROYOBJECTACTION_ATTRIBUTE_ISDESTROYOWNEDOBJECTS:
+			return eAny(getIsDestroyOwnedObjects()); //7428
+		case UmlPackage::DESTROYOBJECTACTION_ATTRIBUTE_TARGET:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getTarget())); //7429
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -430,12 +429,12 @@ bool DestroyObjectActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::DESTROYOBJECTACTION_EATTRIBUTE_ISDESTROYLINKS:
-			return getIsDestroyLinks() != false; //15328
-		case UmlPackage::DESTROYOBJECTACTION_EATTRIBUTE_ISDESTROYOWNEDOBJECTS:
-			return getIsDestroyOwnedObjects() != false; //15329
-		case UmlPackage::DESTROYOBJECTACTION_EREFERENCE_TARGET:
-			return getTarget() != nullptr; //15330
+		case UmlPackage::DESTROYOBJECTACTION_ATTRIBUTE_ISDESTROYLINKS:
+			return getIsDestroyLinks() != false; //7427
+		case UmlPackage::DESTROYOBJECTACTION_ATTRIBUTE_ISDESTROYOWNEDOBJECTS:
+			return getIsDestroyOwnedObjects() != false; //7428
+		case UmlPackage::DESTROYOBJECTACTION_ATTRIBUTE_TARGET:
+			return getTarget() != nullptr; //7429
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }
@@ -443,25 +442,26 @@ bool DestroyObjectActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::DESTROYOBJECTACTION_EATTRIBUTE_ISDESTROYLINKS:
+		case UmlPackage::DESTROYOBJECTACTION_ATTRIBUTE_ISDESTROYLINKS:
 		{
 			// BOOST CAST
 			bool _isDestroyLinks = newValue->get<bool>();
-			setIsDestroyLinks(_isDestroyLinks); //15328
+			setIsDestroyLinks(_isDestroyLinks); //7427
 			return true;
 		}
-		case UmlPackage::DESTROYOBJECTACTION_EATTRIBUTE_ISDESTROYOWNEDOBJECTS:
+		case UmlPackage::DESTROYOBJECTACTION_ATTRIBUTE_ISDESTROYOWNEDOBJECTS:
 		{
 			// BOOST CAST
 			bool _isDestroyOwnedObjects = newValue->get<bool>();
-			setIsDestroyOwnedObjects(_isDestroyOwnedObjects); //15329
+			setIsDestroyOwnedObjects(_isDestroyOwnedObjects); //7428
 			return true;
 		}
-		case UmlPackage::DESTROYOBJECTACTION_EREFERENCE_TARGET:
+		case UmlPackage::DESTROYOBJECTACTION_ATTRIBUTE_TARGET:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::InputPin> _target = newValue->get<std::shared_ptr<uml::InputPin>>();
-			setTarget(_target); //15330
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::InputPin> _target = std::dynamic_pointer_cast<uml::InputPin>(_temp);
+			setTarget(_target); //7429
 			return true;
 		}
 	}
@@ -537,10 +537,9 @@ void DestroyObjectActionImpl::loadNode(std::string nodeName, std::shared_ptr<per
 			{
 				typeName = "InputPin";
 			}
-			std::shared_ptr<uml::InputPin> target = std::dynamic_pointer_cast<uml::InputPin>(modelFactory->create(typeName));
+			std::shared_ptr<ecore::EObject> target = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::INPUTPIN_ATTRIBUTE_DESTROYOBJECTACTION);
 			if (target != nullptr)
 			{
-				this->setTarget(target);
 				loadHandler->handleChild(target);
 			}
 			return;
@@ -580,7 +579,6 @@ void DestroyObjectActionImpl::save(std::shared_ptr<persistence::interfaces::XSav
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
@@ -603,17 +601,17 @@ void DestroyObjectActionImpl::saveContent(std::shared_ptr<persistence::interface
 		std::shared_ptr<uml::InputPin > target = this->getTarget();
 		if (target != nullptr)
 		{
-			saveHandler->addReference(target, "target", target->eClass() != package->getInputPin_EClass());
+			saveHandler->addReference(target, "target", target->eClass() != package->getInputPin_Class());
 		}
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getDestroyObjectAction_EAttribute_isDestroyLinks()) )
+		if ( this->eIsSet(package->getDestroyObjectAction_Attribute_isDestroyLinks()) )
 		{
 			saveHandler->addAttribute("isDestroyLinks", this->getIsDestroyLinks());
 		}
 
-		if ( this->eIsSet(package->getDestroyObjectAction_EAttribute_isDestroyOwnedObjects()) )
+		if ( this->eIsSet(package->getDestroyObjectAction_Attribute_isDestroyOwnedObjects()) )
 		{
 			saveHandler->addAttribute("isDestroyOwnedObjects", this->getIsDestroyOwnedObjects());
 		}

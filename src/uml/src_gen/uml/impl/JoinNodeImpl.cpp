@@ -33,6 +33,15 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Activity.hpp"
@@ -52,8 +61,6 @@
 #include "uml/ControlNode.hpp"
 
 #include "uml/Dependency.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -196,14 +203,6 @@ JoinNodeImpl::JoinNodeImpl(const JoinNodeImpl & obj):JoinNodeImpl()
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::InterruptibleActivityRegion>> _inInterruptibleRegionList = obj.getInInterruptibleRegion();
 	for(std::shared_ptr<uml::InterruptibleActivityRegion> _inInterruptibleRegion : *_inInterruptibleRegionList)
 	{
@@ -263,7 +262,7 @@ std::shared_ptr<ecore::EObject>  JoinNodeImpl::copy() const
 
 std::shared_ptr<ecore::EClass> JoinNodeImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getJoinNode_EClass();
+	return UmlPackageImpl::eInstance()->getJoinNode_Class();
 }
 
 //*********************************
@@ -368,10 +367,10 @@ Any JoinNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::JOINNODE_EATTRIBUTE_ISCOMBINEDUPLICATE:
-			return eAny(getIsCombineDuplicate()); //19221
-		case UmlPackage::JOINNODE_EREFERENCE_JOINSPEC:
-			return eAny(getJoinSpec()); //19222
+		case UmlPackage::JOINNODE_ATTRIBUTE_ISCOMBINEDUPLICATE:
+			return eAny(getIsCombineDuplicate()); //13220
+		case UmlPackage::JOINNODE_ATTRIBUTE_JOINSPEC:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getJoinSpec())); //13221
 	}
 	return ControlNodeImpl::eGet(featureID, resolve, coreType);
 }
@@ -379,10 +378,10 @@ bool JoinNodeImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::JOINNODE_EATTRIBUTE_ISCOMBINEDUPLICATE:
-			return getIsCombineDuplicate() != true; //19221
-		case UmlPackage::JOINNODE_EREFERENCE_JOINSPEC:
-			return getJoinSpec() != nullptr; //19222
+		case UmlPackage::JOINNODE_ATTRIBUTE_ISCOMBINEDUPLICATE:
+			return getIsCombineDuplicate() != true; //13220
+		case UmlPackage::JOINNODE_ATTRIBUTE_JOINSPEC:
+			return getJoinSpec() != nullptr; //13221
 	}
 	return ControlNodeImpl::internalEIsSet(featureID);
 }
@@ -390,18 +389,19 @@ bool JoinNodeImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::JOINNODE_EATTRIBUTE_ISCOMBINEDUPLICATE:
+		case UmlPackage::JOINNODE_ATTRIBUTE_ISCOMBINEDUPLICATE:
 		{
 			// BOOST CAST
 			bool _isCombineDuplicate = newValue->get<bool>();
-			setIsCombineDuplicate(_isCombineDuplicate); //19221
+			setIsCombineDuplicate(_isCombineDuplicate); //13220
 			return true;
 		}
-		case UmlPackage::JOINNODE_EREFERENCE_JOINSPEC:
+		case UmlPackage::JOINNODE_ATTRIBUTE_JOINSPEC:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::ValueSpecification> _joinSpec = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
-			setJoinSpec(_joinSpec); //19222
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::ValueSpecification> _joinSpec = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
+			setJoinSpec(_joinSpec); //13221
 			return true;
 		}
 	}
@@ -510,7 +510,6 @@ void JoinNodeImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> s
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
@@ -532,12 +531,12 @@ void JoinNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 		std::shared_ptr<uml::ValueSpecification > joinSpec = this->getJoinSpec();
 		if (joinSpec != nullptr)
 		{
-			saveHandler->addReference(joinSpec, "joinSpec", joinSpec->eClass() != package->getValueSpecification_EClass());
+			saveHandler->addReference(joinSpec, "joinSpec", joinSpec->eClass() != package->getValueSpecification_Class());
 		}
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getJoinNode_EAttribute_isCombineDuplicate()) )
+		if ( this->eIsSet(package->getJoinNode_Attribute_isCombineDuplicate()) )
 		{
 			saveHandler->addAttribute("isCombineDuplicate", this->getIsCombineDuplicate());
 		}

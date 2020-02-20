@@ -14,7 +14,8 @@
  */]
 [module generateExecutionPluginInterfaceHeader('http://www.eclipse.org/uml2/5.0.0/UML')]
 
-[import UML4CPP::generator::main::helper /]
+[import UML4CPP::generator::main::helpers::generalHelper /]
+[import UML4CPP::generator::main::helpers::nameHelper /]
 
 [template public generateExecutionPluginInterfaceHeader(aPackage : Package){packageName : String = aPackage.name.toUpperFirst().concat('ExecPlugin');}]
 [file (aPackage.name.concat('Exec/').concat(packageName).concat('.hpp'), false, 'UTF-8')]
@@ -34,7 +35,8 @@ namespace [aPackage.name/]
 			virtual std::string eNS_URI() = 0;
 			virtual std::string eNS_PREFIX() = 0;
 	
-			virtual std::shared_ptr<ecore::EObject> create(const std::string& name) = 0;
+			virtual std::shared_ptr<ecore::EObject> create(const std::string& name) const = 0;
+			virtual std::shared_ptr<ecore::EObject> create(const std::string& name, std::shared_ptr<ecore::EObject> container, const unsigned int referenceID = -1) const = 0;
 			virtual Any executeActivity(std::shared_ptr<uml::Activity> activity, std::shared_ptr<std::vector<Any>> parameterList, std::shared_ptr<uml::Element> element) = 0;
 
 		protected:

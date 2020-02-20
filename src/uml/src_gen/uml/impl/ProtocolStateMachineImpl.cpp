@@ -33,6 +33,19 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Behavior.hpp"
@@ -56,8 +69,6 @@
 #include "uml/Constraint.hpp"
 
 #include "uml/Dependency.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -203,24 +214,24 @@ ProtocolStateMachineImpl::~ProtocolStateMachineImpl()
 
 
 //Additional constructor for the containments back reference
-			ProtocolStateMachineImpl::ProtocolStateMachineImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id)
-			:ProtocolStateMachineImpl()
-			{
-				switch(reference_id)
-				{	
-				case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
-					m_owningPackage = par_Package;
-					m_namespace = par_Package;
-					 return;
-				case UmlPackage::TYPE_EREFERENCE_PACKAGE:
-					m_package = par_Package;
-					m_namespace = par_Package;
-					 return;
-				default:
-				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
-				}
-			   
-			}
+ProtocolStateMachineImpl::ProtocolStateMachineImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id)
+:ProtocolStateMachineImpl()
+{
+	switch(reference_id)
+	{	
+	case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
+		m_owningPackage = par_Package;
+		m_namespace = par_Package;
+		 return;
+	case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
+		m_package = par_Package;
+		m_namespace = par_Package;
+		 return;
+	default:
+	std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
+	}
+   
+}
 
 
 
@@ -354,14 +365,6 @@ ProtocolStateMachineImpl::ProtocolStateMachineImpl(const ProtocolStateMachineImp
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_context" << std::endl;
-	#endif
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
 	#endif
 	std::shared_ptr<Bag<uml::ElementImport>> _elementImportList = obj.getElementImport();
 	for(std::shared_ptr<uml::ElementImport> _elementImport : *_elementImportList)
@@ -603,7 +606,7 @@ std::shared_ptr<ecore::EObject>  ProtocolStateMachineImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ProtocolStateMachineImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getProtocolStateMachine_EClass();
+	return UmlPackageImpl::eInstance()->getProtocolStateMachine_Class();
 }
 
 //*********************************
@@ -736,8 +739,18 @@ Any ProtocolStateMachineImpl::eGet(int featureID, bool resolve, bool coreType) c
 {
 	switch(featureID)
 	{
-		case UmlPackage::PROTOCOLSTATEMACHINE_EREFERENCE_CONFORMANCE:
-			return eAny(getConformance()); //5866
+		case UmlPackage::PROTOCOLSTATEMACHINE_ATTRIBUTE_CONFORMANCE:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::ProtocolConformance>::iterator iter = m_conformance->begin();
+			Bag<uml::ProtocolConformance>::iterator end = m_conformance->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //18865
+		}
 	}
 	return StateMachineImpl::eGet(featureID, resolve, coreType);
 }
@@ -745,8 +758,8 @@ bool ProtocolStateMachineImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::PROTOCOLSTATEMACHINE_EREFERENCE_CONFORMANCE:
-			return getConformance() != nullptr; //5866
+		case UmlPackage::PROTOCOLSTATEMACHINE_ATTRIBUTE_CONFORMANCE:
+			return getConformance() != nullptr; //18865
 	}
 	return StateMachineImpl::internalEIsSet(featureID);
 }
@@ -754,6 +767,42 @@ bool ProtocolStateMachineImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
+		case UmlPackage::PROTOCOLSTATEMACHINE_ATTRIBUTE_CONFORMANCE:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::ProtocolConformance>> conformanceList(new Bag<uml::ProtocolConformance>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				conformanceList->add(std::dynamic_pointer_cast<uml::ProtocolConformance>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::ProtocolConformance>::iterator iterConformance = m_conformance->begin();
+			Bag<uml::ProtocolConformance>::iterator endConformance = m_conformance->end();
+			while (iterConformance != endConformance)
+			{
+				if (conformanceList->find(*iterConformance) == -1)
+				{
+					m_conformance->erase(*iterConformance);
+				}
+				iterConformance++;
+			}
+
+			iterConformance = conformanceList->begin();
+			endConformance = conformanceList->end();
+			while (iterConformance != endConformance)
+			{
+				if (m_conformance->find(*iterConformance) == -1)
+				{
+					m_conformance->add(*iterConformance);
+				}
+				iterConformance++;			
+			}
+			return true;
+		}
 	}
 
 	return StateMachineImpl::eSet(featureID, newValue);
@@ -797,7 +846,7 @@ void ProtocolStateMachineImpl::loadNode(std::string nodeName, std::shared_ptr<pe
 			{
 				typeName = "ProtocolConformance";
 			}
-			std::shared_ptr<ecore::EObject> conformance = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::PROTOCOLCONFORMANCE_EREFERENCE_SPECIFICMACHINE);
+			std::shared_ptr<ecore::EObject> conformance = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::PROTOCOLCONFORMANCE_ATTRIBUTE_SPECIFICMACHINE);
 			if (conformance != nullptr)
 			{
 				loadHandler->handleChild(conformance);
@@ -851,7 +900,6 @@ void ProtocolStateMachineImpl::save(std::shared_ptr<persistence::interfaces::XSa
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
@@ -877,7 +925,7 @@ void ProtocolStateMachineImpl::saveContent(std::shared_ptr<persistence::interfac
 		// Save 'conformance'
 		for (std::shared_ptr<uml::ProtocolConformance> conformance : *this->getConformance()) 
 		{
-			saveHandler->addReference(conformance, "conformance", conformance->eClass() != package->getProtocolConformance_EClass());
+			saveHandler->addReference(conformance, "conformance", conformance->eClass() != package->getProtocolConformance_Class());
 		}
 	
 

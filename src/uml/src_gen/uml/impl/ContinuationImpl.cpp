@@ -33,13 +33,20 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
 
 #include "uml/Dependency.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -169,14 +176,6 @@ ContinuationImpl::ContinuationImpl(const ContinuationImpl & obj):ContinuationImp
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::GeneralOrdering>> _generalOrderingList = obj.getGeneralOrdering();
 	for(std::shared_ptr<uml::GeneralOrdering> _generalOrdering : *_generalOrderingList)
 	{
@@ -212,7 +211,7 @@ std::shared_ptr<ecore::EObject>  ContinuationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ContinuationImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getContinuation_EClass();
+	return UmlPackageImpl::eInstance()->getContinuation_Class();
 }
 
 //*********************************
@@ -310,8 +309,8 @@ Any ContinuationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::CONTINUATION_EATTRIBUTE_SETTING:
-			return eAny(getSetting()); //23114
+		case UmlPackage::CONTINUATION_ATTRIBUTE_SETTING:
+			return eAny(getSetting()); //5913
 	}
 	return InteractionFragmentImpl::eGet(featureID, resolve, coreType);
 }
@@ -319,8 +318,8 @@ bool ContinuationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::CONTINUATION_EATTRIBUTE_SETTING:
-			return getSetting() != true; //23114
+		case UmlPackage::CONTINUATION_ATTRIBUTE_SETTING:
+			return getSetting() != true; //5913
 	}
 	return InteractionFragmentImpl::internalEIsSet(featureID);
 }
@@ -328,11 +327,11 @@ bool ContinuationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::CONTINUATION_EATTRIBUTE_SETTING:
+		case UmlPackage::CONTINUATION_ATTRIBUTE_SETTING:
 		{
 			// BOOST CAST
 			bool _setting = newValue->get<bool>();
-			setSetting(_setting); //23114
+			setSetting(_setting); //5913
 			return true;
 		}
 	}
@@ -409,7 +408,6 @@ void ContinuationImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandle
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
@@ -428,7 +426,7 @@ void ContinuationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getContinuation_EAttribute_setting()) )
+		if ( this->eIsSet(package->getContinuation_Attribute_setting()) )
 		{
 			saveHandler->addAttribute("setting", this->getSetting());
 		}

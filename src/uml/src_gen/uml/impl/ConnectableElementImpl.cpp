@@ -32,6 +32,13 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
@@ -39,8 +46,6 @@
 #include "uml/ConnectorEnd.hpp"
 
 #include "uml/Dependency.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -162,14 +167,6 @@ ConnectableElementImpl::ConnectableElementImpl(const ConnectableElementImpl & ob
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	if(obj.getNameExpression()!=nullptr)
 	{
 		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
@@ -197,7 +194,7 @@ std::shared_ptr<ecore::EObject>  ConnectableElementImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ConnectableElementImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getConnectableElement_EClass();
+	return UmlPackageImpl::eInstance()->getConnectableElement_Class();
 }
 
 //*********************************
@@ -272,8 +269,18 @@ Any ConnectableElementImpl::eGet(int featureID, bool resolve, bool coreType) con
 {
 	switch(featureID)
 	{
-		case UmlPackage::CONNECTABLEELEMENT_EREFERENCE_END:
-			return eAny(getEnd()); //2913
+		case UmlPackage::CONNECTABLEELEMENT_ATTRIBUTE_END:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::ConnectorEnd>::iterator iter = m_end->begin();
+			Bag<uml::ConnectorEnd>::iterator end = m_end->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //5112
+		}
 	}
 	Any result;
 	result = ParameterableElementImpl::eGet(featureID, resolve, coreType);
@@ -288,8 +295,8 @@ bool ConnectableElementImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::CONNECTABLEELEMENT_EREFERENCE_END:
-			return getEnd() != nullptr; //2913
+		case UmlPackage::CONNECTABLEELEMENT_ATTRIBUTE_END:
+			return getEnd() != nullptr; //5112
 	}
 	bool result = false;
 	result = ParameterableElementImpl::internalEIsSet(featureID);
@@ -368,7 +375,6 @@ void ConnectableElementImpl::save(std::shared_ptr<persistence::interfaces::XSave
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

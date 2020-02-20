@@ -66,11 +66,6 @@ namespace uml
 	class Dependency;
 }
 
-namespace ecore 
-{
-	class EAnnotation;
-}
-
 namespace uml 
 {
 	class Element;
@@ -255,22 +250,22 @@ namespace uml
 			/*!
 			 Indicates whether a parameter is being sent into or out of a behavioral element.
 			<p>From package UML::Classification.</p> */ 
-			virtual ParameterDirectionKind getDirection() const = 0;
+			virtual uml::ParameterDirectionKind getDirection() const = 0;
 			
 			/*!
 			 Indicates whether a parameter is being sent into or out of a behavioral element.
 			<p>From package UML::Classification.</p> */ 
-			virtual void setDirection (ParameterDirectionKind _direction)= 0; 
+			virtual void setDirection (uml::ParameterDirectionKind _direction)= 0; 
 			
 			/*!
 			 Specifies the effect that executions of the owner of the Parameter have on objects passed in or out of the parameter.
 			<p>From package UML::Classification.</p> */ 
-			virtual ParameterEffectKind getEffect() const = 0;
+			virtual uml::ParameterEffectKind getEffect() const = 0;
 			
 			/*!
 			 Specifies the effect that executions of the owner of the Parameter have on objects passed in or out of the parameter.
 			<p>From package UML::Classification.</p> */ 
-			virtual void setEffect (ParameterEffectKind _effect)= 0; 
+			virtual void setEffect (uml::ParameterEffectKind _effect)= 0; 
 			
 			/*!
 			 Tells whether an output parameter may emit a value to the exclusion of the other outputs.
@@ -335,11 +330,11 @@ namespace uml
 			/*!
 			 Indicates whether a parameter is being sent into or out of a behavioral element.
 			<p>From package UML::Classification.</p> */ 
-			ParameterDirectionKind m_direction = ParameterDirectionKind::IN;
+			uml::ParameterDirectionKind m_direction = ParameterDirectionKind::IN;
 			/*!
 			 Specifies the effect that executions of the owner of the Parameter have on objects passed in or out of the parameter.
 			<p>From package UML::Classification.</p> */ 
-			ParameterEffectKind m_effect = ParameterEffectKind::CREATE;
+			uml::ParameterEffectKind m_effect = ParameterEffectKind::CREATE;
 			/*!
 			 Tells whether an output parameter may emit a value to the exclusion of the other outputs.
 			<p>From package UML::Classification.</p> */ 

@@ -33,6 +33,15 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Activity.hpp"
@@ -52,8 +61,6 @@
 #include "uml/Constraint.hpp"
 
 #include "uml/Dependency.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -208,14 +215,6 @@ WriteVariableActionImpl::WriteVariableActionImpl(const WriteVariableActionImpl &
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::ExceptionHandler>> _handlerList = obj.getHandler();
 	for(std::shared_ptr<uml::ExceptionHandler> _handler : *_handlerList)
 	{
@@ -299,7 +298,7 @@ std::shared_ptr<ecore::EObject>  WriteVariableActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> WriteVariableActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getWriteVariableAction_EClass();
+	return UmlPackageImpl::eInstance()->getWriteVariableAction_Class();
 }
 
 //*********************************
@@ -399,8 +398,8 @@ Any WriteVariableActionImpl::eGet(int featureID, bool resolve, bool coreType) co
 {
 	switch(featureID)
 	{
-		case UmlPackage::WRITEVARIABLEACTION_EREFERENCE_VALUE:
-			return eAny(getValue()); //13029
+		case UmlPackage::WRITEVARIABLEACTION_ATTRIBUTE_VALUE:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getValue())); //25928
 	}
 	return VariableActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -408,8 +407,8 @@ bool WriteVariableActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::WRITEVARIABLEACTION_EREFERENCE_VALUE:
-			return getValue() != nullptr; //13029
+		case UmlPackage::WRITEVARIABLEACTION_ATTRIBUTE_VALUE:
+			return getValue() != nullptr; //25928
 	}
 	return VariableActionImpl::internalEIsSet(featureID);
 }
@@ -417,11 +416,12 @@ bool WriteVariableActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::WRITEVARIABLEACTION_EREFERENCE_VALUE:
+		case UmlPackage::WRITEVARIABLEACTION_ATTRIBUTE_VALUE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::InputPin> _value = newValue->get<std::shared_ptr<uml::InputPin>>();
-			setValue(_value); //13029
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::InputPin> _value = std::dynamic_pointer_cast<uml::InputPin>(_temp);
+			setValue(_value); //25928
 			return true;
 		}
 	}
@@ -512,7 +512,6 @@ void WriteVariableActionImpl::save(std::shared_ptr<persistence::interfaces::XSav
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
@@ -536,7 +535,7 @@ void WriteVariableActionImpl::saveContent(std::shared_ptr<persistence::interface
 		std::shared_ptr<uml::InputPin > value = this->getValue();
 		if (value != nullptr)
 		{
-			saveHandler->addReference(value, "value", value->eClass() != package->getInputPin_EClass());
+			saveHandler->addReference(value, "value", value->eClass() != package->getInputPin_Class());
 		}
 	
 

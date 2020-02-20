@@ -19,7 +19,8 @@
 #include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
-
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/Union.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -30,6 +31,11 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "ecore/EcoreFactory.hpp"
 #include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "ecore/EcorePackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "ecore/EAnnotation.hpp"
@@ -37,6 +43,8 @@
 #include "ecore/EClassifier.hpp"
 
 #include "ecore/EGenericType.hpp"
+
+#include "ecore/EObject.hpp"
 
 #include "ecore/EOperation.hpp"
 
@@ -79,6 +87,17 @@ EParameterImpl::~EParameterImpl()
 
 
 //Additional constructor for the containments back reference
+			EParameterImpl::EParameterImpl(std::weak_ptr<ecore::EObject > par_eContainer)
+			:EParameterImpl()
+			{
+			    m_eContainer = par_eContainer;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
 			EParameterImpl::EParameterImpl(std::weak_ptr<ecore::EOperation > par_eOperation)
 			:EParameterImpl()
 			{
@@ -98,6 +117,7 @@ EParameterImpl::EParameterImpl(const EParameterImpl & obj):EParameterImpl()
 	#endif
 	m_lowerBound = obj.getLowerBound();
 	m_many = obj.isMany();
+	m_metaElementID = obj.getMetaElementID();
 	m_name = obj.getName();
 	m_ordered = obj.isOrdered();
 	m_required = obj.isRequired();
@@ -106,6 +126,8 @@ EParameterImpl::EParameterImpl(const EParameterImpl & obj):EParameterImpl()
 
 	//copy references with no containment (soft copy)
 	
+	m_eContainer  = obj.getEContainer();
+
 	m_eOperation  = obj.getEOperation();
 
 	m_eType  = obj.getEType();
@@ -140,7 +162,7 @@ std::shared_ptr<ecore::EObject>  EParameterImpl::copy() const
 
 std::shared_ptr<EClass> EParameterImpl::eStaticClass() const
 {
-	return EcorePackageImpl::eInstance()->getEParameter_EClass();
+	return EcorePackageImpl::eInstance()->getEParameter_Class();
 }
 
 //*********************************
@@ -164,6 +186,10 @@ std::weak_ptr<ecore::EOperation > EParameterImpl::getEOperation() const
 //*********************************
 // Union Getter
 //*********************************
+std::shared_ptr<Union<ecore::EObject>> EParameterImpl::getEContens() const
+{
+	return m_eContens;
+}
 
 
 std::shared_ptr<EParameter> EParameterImpl::getThisEParameterPtr() const
@@ -177,6 +203,11 @@ void EParameterImpl::setThisEParameterPtr(std::weak_ptr<EParameter> thisEParamet
 }
 std::shared_ptr<ecore::EObject> EParameterImpl::eContainer() const
 {
+	if(auto wp = m_eContainer.lock())
+	{
+		return wp;
+	}
+
 	if(auto wp = m_eOperation.lock())
 	{
 		return wp;
@@ -191,8 +222,8 @@ Any EParameterImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case EcorePackage::EPARAMETER_EREFERENCE_EOPERATION:
-			return eAny(getEOperation()); //1310
+		case EcorePackage::EPARAMETER_ATTRIBUTE_EOPERATION:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEOperation().lock())); //4213
 	}
 	return ETypedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -200,8 +231,8 @@ bool EParameterImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case EcorePackage::EPARAMETER_EREFERENCE_EOPERATION:
-			return getEOperation().lock() != nullptr; //1310
+		case EcorePackage::EPARAMETER_ATTRIBUTE_EOPERATION:
+			return getEOperation().lock() != nullptr; //4213
 	}
 	return ETypedElementImpl::internalEIsSet(featureID);
 }
@@ -262,7 +293,10 @@ void EParameterImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler>
 	
 	EModelElementImpl::saveContent(saveHandler);
 	
+	EObjectImpl::saveContent(saveHandler);
+	
 	ecore::EObjectImpl::saveContent(saveHandler);
+	
 	
 	
 	

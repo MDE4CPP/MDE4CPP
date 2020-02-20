@@ -11,12 +11,20 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ ****************************************************************************************************************************************************************
+ * 
+ * module to generate model factory interface header file
+ * 
  */]
 [module generateFactoryInterface('http://www.eclipse.org/uml2/5.0.0/UML')]
 
-[import UML4CPP::generator::main::generateClass /]
-[import UML4CPP::generator::main::generateSingleton /]
-[import UML4CPP::generator::main::helper /]
+[import UML4CPP::generator::main::components::generateClass /]
+[import UML4CPP::generator::main::components::generateInterface /]
+[import UML4CPP::generator::main::helpers::collectionHelper /]
+[import UML4CPP::generator::main::helpers::generalHelper /]
+[import UML4CPP::generator::main::helpers::nameHelper /]
+[import UML4CPP::generator::main::helpers::singletonHelper /]
 
 [template public generateFactoryInterface(aPackage : Package){packageName : String = aPackage.name.toUpperFirst().concat('Factory');}]
 [file (aPackage.name.concat('/').concat(packageName).concat('.hpp'), false, 'UTF-8')]
@@ -28,7 +36,7 @@
 [if (not aPackage.ignoreNamespace())]namespace [aPackage.name/] 
 {
 [/if]
-[for (elements : Class| aPackage.ownedMember->selectByKind(Class)->reject(isSingleton())->sortedBy(myQualifiedName())) separator ('\n')]
+[for (elements : Class| aPackage.collectModelClassesForFactoryDeclaration()) separator ('\n')]
 	class [elements.name.toUpperFirst()/];[/for]
 
 	class [aPackage.name.toUpperFirst().concat('Package')/];
@@ -44,10 +52,11 @@
 			[generateSingletonDecl(packageName)/]
 
 			//Creator functions
-			virtual std::shared_ptr<uml::Element> create(std::string _className) = 0;
+			virtual std::shared_ptr<uml::Element> create(const unsigned int _metaClassId,  std::shared_ptr<uml::Element> container= nullptr, const unsigned int referenceID = -1) const = 0;
+			virtual std::shared_ptr<uml::Element> create(const std::shared_ptr<uml::Class> _class,  std::shared_ptr<uml::Element> container= nullptr, const unsigned int referenceID = -1) const = 0;
+			virtual std::shared_ptr<uml::Element> create(const std::string _className,  std::shared_ptr<uml::Element> container= nullptr, const unsigned int referenceID = -1) const = 0;
 
-			[(aPackage.ownedMember->selectByKind(Class))->reject(isSingleton())->sortedBy(name).generateClassCreate(false)/]
-
+			[aPackage.collectModelClassesForFactoryFunctions().generateClassCreate(false)/]
 			//Package
 			virtual std::shared_ptr<[aPackage.name.toUpperFirst().concat('Package')/]> get[aPackage.name.toUpperFirst().concat('Package')/]() = 0;
 	};

@@ -33,6 +33,15 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Action.hpp"
@@ -54,8 +63,6 @@
 #include "uml/Constraint.hpp"
 
 #include "uml/Dependency.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -208,14 +215,6 @@ VariableActionImpl::VariableActionImpl(const VariableActionImpl & obj):VariableA
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::ExceptionHandler>> _handlerList = obj.getHandler();
 	for(std::shared_ptr<uml::ExceptionHandler> _handler : *_handlerList)
 	{
@@ -291,7 +290,7 @@ std::shared_ptr<ecore::EObject>  VariableActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> VariableActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getVariableAction_EClass();
+	return UmlPackageImpl::eInstance()->getVariableAction_Class();
 }
 
 //*********************************
@@ -381,8 +380,8 @@ Any VariableActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::VARIABLEACTION_EREFERENCE_VARIABLE:
-			return eAny(getVariable()); //12328
+		case UmlPackage::VARIABLEACTION_ATTRIBUTE_VARIABLE:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getVariable())); //25427
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -390,8 +389,8 @@ bool VariableActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::VARIABLEACTION_EREFERENCE_VARIABLE:
-			return getVariable() != nullptr; //12328
+		case UmlPackage::VARIABLEACTION_ATTRIBUTE_VARIABLE:
+			return getVariable() != nullptr; //25427
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }
@@ -399,11 +398,12 @@ bool VariableActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::VARIABLEACTION_EREFERENCE_VARIABLE:
+		case UmlPackage::VARIABLEACTION_ATTRIBUTE_VARIABLE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Variable> _variable = newValue->get<std::shared_ptr<uml::Variable>>();
-			setVariable(_variable); //12328
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Variable> _variable = std::dynamic_pointer_cast<uml::Variable>(_temp);
+			setVariable(_variable); //25427
 			return true;
 		}
 	}
@@ -467,7 +467,7 @@ void VariableActionImpl::resolveReferences(const int featureID, std::list<std::s
 {
 	switch(featureID)
 	{
-		case UmlPackage::VARIABLEACTION_EREFERENCE_VARIABLE:
+		case UmlPackage::VARIABLEACTION_ATTRIBUTE_VARIABLE:
 		{
 			if (references.size() == 1)
 			{
@@ -499,7 +499,6 @@ void VariableActionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHand
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

@@ -18,6 +18,7 @@
 [import ecore4CPP::generator::main::generateClass /]
 [import ecore4CPP::generator::main::generateType /]
 [import ecore4CPP::generator::main::helper /]
+[import ecore4CPP::generator::main::helpers::keywords /]
 
 
 [template public generatePersistenceNSPath(path : EBoolean)]
@@ -36,17 +37,26 @@ namespace persistence
 	}
 }
 
-namespace [aClass.ePackage.name/]
+namespace [aClass.getRootPackage().name/]
 {
-	class [aClass.ePackage.name.toUpperFirst()/]Factory;
+	class [aClass.getRootPackage().name.toUpperFirst()/]Factory;
 }
 [/template]
 
 [template public generatePersistenceInclude(aClass : EClass) ]
 #include "[generatePersistenceNSPath(true)/]/XLoadHandler.hpp" // used for Persistence
 #include "[generatePersistenceNSPath(true)/]/XSaveHandler.hpp" // used for Persistence
-#include "[aClass.ePackage.name/]/[aClass.ePackage.name.toUpperFirst()/]Factory.hpp"
-#include "[aClass.ePackage.name/]/[aClass.ePackage.name.toUpperFirst()/]Package.hpp"
+#include "[aClass.getRootPackage().name/]/[aClass.getRootPackage().name.toUpperFirst()/]Factory.hpp"
+#include "[aClass.getRootPackage().name/]/[aClass.getRootPackage().name.toUpperFirst()/]Package.hpp"
+[for (anEPackage : EPackage | aClass.eReferences->select(eRef: EReference|(eRef.containment = true)).eType.getRootPackage()->sortedBy(name)->flatten()) ? (not (aClass.getRootPackage() = anEPackage))]
+#include "[anEPackage.name/]/[anEPackage.name.toUpperFirst()/]Factory.hpp"
+#include "[anEPackage.name/]/[anEPackage.name.toUpperFirst()/]Package.hpp"
+[/for]
+[for (anEPackage : EPackage | aClass.getAllContainers().eType.getRootPackage()->sortedBy(name)->flatten()->reject(self = aClass.getRootPackage()))]
+#include "[anEPackage.name/]/[anEPackage.name.toUpperFirst()/]Factory.hpp"
+#include "[anEPackage.name/]/[anEPackage.name.toUpperFirst()/]Package.hpp"
+[/for]
+
 #include <exception> // used in Persistence
 [/template]
 
@@ -60,7 +70,7 @@ namespace [aClass.ePackage.name/]
 virtual void load(std::shared_ptr<[generatePersistenceNSPath(false)/]::XLoadHandler> loadHandler) [abstractSufix(impl)/];
 [if (impl)]
 virtual void loadAttributes(std::shared_ptr<[generatePersistenceNSPath(false)/]::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-virtual void loadNode(std::string nodeName, std::shared_ptr<[generatePersistenceNSPath(false)/]::XLoadHandler> loadHandler, std::shared_ptr<[aClass.ePackage.name/]::[aClass.ePackage.name.toUpperFirst()/]Factory> modelFactory);
+virtual void loadNode(std::string nodeName, std::shared_ptr<[generatePersistenceNSPath(false)/]::XLoadHandler> loadHandler, std::shared_ptr<[aClass.getRootPackage().name/]::[aClass.getRootPackage().name.toUpperFirst()/]Factory> modelFactory);
 [/if]
 [/template]
 [template public generatePersistenceResolveReferenceDecl(aClass: EClass, impl : EBoolean)]
@@ -91,8 +101,8 @@ void [aClass.name.concat('Impl')/]::load(std::shared_ptr<[generatePersistenceNSP
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get [aClass.ePackage.name.toUpperFirst()/]Factory
-	std::shared_ptr<[aClass.ePackage.name/]::[aClass.ePackage.name.toUpperFirst()/]Factory> modelFactory = [aClass.ePackage.name/]::[aClass.ePackage.name.toUpperFirst()/]Factory::eInstance();
+	// get [aClass.getRootPackage().name.toUpperFirst()/]Factory
+	std::shared_ptr<[aClass.getRootPackage().name/]::[aClass.getRootPackage().name.toUpperFirst()/]Factory> modelFactory = [aClass.getRootPackage().name/]::[aClass.getRootPackage().name.toUpperFirst()/]Factory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -123,6 +133,10 @@ void [aClass.name.concat('Impl')/]::loadAttributes(std::shared_ptr<[generatePers
 			bool value;
 			std::istringstream(iter->second) >> std::boolalpha >> value;
 		  [elseif ((generateType(aAttribute.eType) = 'int'))]
+			// this attribute is a 'int'
+			int value;
+			std::istringstream ( iter->second ) >> value;
+ 		  [elseif ((generateType(aAttribute.eType) = 'unlimitedNatural'))]
 			// this attribute is a 'int'
 			int value;
 			std::istringstream ( iter->second ) >> value;
@@ -206,7 +220,7 @@ if (literal == "[aLiteral.name/]")
 [/if]
 }
 
-void [aClass.name.concat('Impl')/]::loadNode(std::string nodeName, std::shared_ptr<[generatePersistenceNSPath(false)/]::XLoadHandler> loadHandler, std::shared_ptr<[aClass.ePackage.name/]::[aClass.ePackage.name.toUpperFirst()/]Factory> modelFactory)
+void [aClass.name.concat('Impl')/]::loadNode(std::string nodeName, std::shared_ptr<[generatePersistenceNSPath(false)/]::XLoadHandler> loadHandler, std::shared_ptr<[aClass.getRootPackage().name/]::[aClass.getRootPackage().name.toUpperFirst()/]Factory> modelFactory)
 {
 [let attrList : OrderedSet(EAttribute) = aClass.eAttributes->select(eAtt: EAttribute|(eAtt.transient = false) and eAtt.upperBound <> 1)->asOrderedSet()->sortedBy(name)]
 [if (attrList->size() > 0)]
@@ -257,16 +271,16 @@ void [aClass.name.concat('Impl')/]::loadNode(std::string nodeName, std::shared_p
 			[/if]		
 			}
 			[if (ref->size() = 1)]
-			std::shared_ptr<ecore::EObject> [aReference.name/] = [if (aEClass.ePackage = aClass.ePackage)]modelFactory[else][aEClass.ePackage.name/]::[aEClass.ePackage.name.toUpperFirst()/]Factory::eInstance()[/if]->create(typeName, loadHandler->getCurrentObject(), [aReference.metamodelPackageNameForEstructuralFeture(aClass)/]::[ref->first().getStaticAttributeIDName()/]);
+			std::shared_ptr<ecore::EObject> [aReference.name/] = [if (aEClass.getRootPackage() = aClass.getRootPackage())]modelFactory[else][aEClass.getRootPackage().name/]::[aEClass.getRootPackage().name.toUpperFirst()/]Factory::eInstance()[/if]->create(typeName, loadHandler->getCurrentObject(), [aReference.metamodelPackageNameForEstructuralFeture(aClass)/]::[ref->first().getStaticAttributeIDName()/]);
 			[elseif( ref->size() > 1)]
 			// TODO here are multiple containers of same object. Check this!
 			std::cout << "| ERROR    | " << __PRETTY_FUNCTION__ << " '[aReference.name/]' has more then one back-reference Object." << std::endl;
 			std::shared_ptr<ecore::EObject> [aReference.name/];
 			[for(aBackReference : EReference | ref->select(eType = aClass)->sortedBy(name))]
-				[aReference.name/] = [if (aEClass.ePackage = aClass.ePackage)]modelFactory[else][aEClass.ePackage.name/]::[aEClass.ePackage.name.toUpperFirst()/]Factory::eInstance()[/if]->create(typeName, loadHandler->getCurrentObject(), [aReference.metamodelPackageNameForEstructuralFeture(aClass)/]::[aBackReference.getStaticAttributeIDName()/]);
+				[aReference.name/] = [if (aEClass.getRootPackage() = aClass.getRootPackage())]modelFactory[else][aEClass.getRootPackage().name/]::[aEClass.getRootPackage().name.toUpperFirst()/]Factory::eInstance()[/if]->create(typeName, loadHandler->getCurrentObject(), [aReference.metamodelPackageNameForEstructuralFeture(aClass)/]::[aBackReference.getStaticAttributeIDName()/]);
 			[/for]
 			[else]
-			std::shared_ptr<[aReference.eType.generateType()/]> [aReference.name/] = std::dynamic_pointer_cast<[aReference.eType.generateType()/]>([if (aEClass.ePackage = aClass.ePackage)]modelFactory[else][aEClass.ePackage.name/]::[aEClass.ePackage.name.toUpperFirst()/]Factory::eInstance()[/if]->create(typeName));
+			std::shared_ptr<[aReference.eType.generateType()/]> [aReference.name/] = std::dynamic_pointer_cast<[aReference.eType.generateType()/]>([if (aEClass.getRootPackage() = aClass.getRootPackage())]modelFactory[else][aEClass.getRootPackage().name/]::[aEClass.getRootPackage().name.toUpperFirst()/]Factory::eInstance()[/if]->create(typeName));
 			[/if]
 			if ([aReference.name/] != nullptr)
 			{
@@ -301,7 +315,7 @@ void [aClass.name.concat('Impl')/]::loadNode(std::string nodeName, std::shared_p
 	ecore::EObjectImpl::loadNode(nodeName, loadHandler, ecore::EcoreFactory::eInstance());
 [else]
 	[for (sClass : EClass | aClass.eSuperTypes->asOrderedSet()->sortedBy(name))]
-	[ClassWithNamespace(aClass,sClass)/]Impl::loadNode(nodeName, loadHandler, [if (sClass.ePackage = aClass.ePackage)]modelFactory[else][sClass.ePackage.name/]::[sClass.ePackage.name.toUpperFirst()/]Factory::eInstance()[/if]);
+	[ClassWithNamespace(aClass,sClass)/]Impl::loadNode(nodeName, loadHandler, [if (sClass.getRootPackage() = aClass.getRootPackage())]modelFactory[else][sClass.getRootPackage().name/]::[sClass.getRootPackage().name.toUpperFirst()/]Factory::eInstance()[/if]);
 	[/for]
 [/if]
 }
@@ -375,7 +389,7 @@ void [aClass.name.concat('Impl')/]::saveContent(std::shared_ptr<[generatePersist
 {
 	try
 	{
-		std::shared_ptr<[aClass.ePackage.name/]::[aClass.ePackage.name.toUpperFirst()/]Package> package = [aClass.ePackage.name/]::[aClass.ePackage.name.toUpperFirst()/]Package::eInstance();
+		std::shared_ptr<[aClass.getRootPackage().name/]::[aClass.getRootPackage().name.toUpperFirst()/]Package> package = [aClass.getRootPackage().name/]::[aClass.getRootPackage().name.toUpperFirst()/]Package::eInstance();
 
 [let refList : OrderedSet(EReference) =  aClass.eReferences->select(eRef: EReference|(eRef.containment = true and eRef.hasSubset() and (not eRef.isSubsetUnion())))->asOrderedSet()->sortedBy(name)]
 [if (refList->size() > 0)]
@@ -459,13 +473,13 @@ if (value == [aAttribute.eType.name/]::[aLiteral.name.toUpperCase()/])
 		[aReference.generateReferenceType()/] [aReference.name/] = this->[aReference.GetterName()/]();
 		if ([aReference.name/] != nullptr)
 		{
-			saveHandler->addReference([aReference.name/], "[aReference.name/]", [aReference.name/]->eClass() != package->[aReference.eType.packageGetter(aClass)/]);
+			saveHandler->addReference([aReference.name/], "[aReference.name/]", [aReference.name/]->eClass() != [if (aReference.eType.getRootPackage().name = aClass.getRootPackage().name)]package->[/if][aReference.eType.packageGetter(aClass)/]);
 		}
 	[else]
 		[aReference.generateReferenceType()/] list_[aReference.name/] = this->[aReference.GetterName()/]();
 		for (std::shared_ptr<[aReference.eType.generateType()/]> [aReference.name/] : *list_[aReference.name/]) 
 		{
-			saveHandler->addReference([aReference.name/], "[aReference.name/]", [aReference.name/]->eClass() != package->[aReference.eType.packageGetter(aClass)/]);
+			saveHandler->addReference([aReference.name/], "[aReference.name/]", [aReference.name/]->eClass() != [if (aReference.eType.getRootPackage().name = aClass.getRootPackage().name)]package->[/if][aReference.eType.packageGetter(aClass)/]);
 		}
 	[/if]
 [/for][/if][/let]
@@ -478,9 +492,9 @@ if (value == [aAttribute.eType.name/]::[aLiteral.name.toUpperCase()/])
 [/template]
 
 
-[query public hasExtendedMetaData(aModelElement : EModelElement) : Boolean = eAnnotations->select(source = 'http:///org/eclipse/emf/ecore/util/ExtendedMetaData')->notEmpty()  /]
-[query public getExtendedMetaData(aModelElement : EModelElement) : EAnnotation = eAnnotations->select(source = 'http:///org/eclipse/emf/ecore/util/ExtendedMetaData')->first() /]
-[query public hasKindKey(aModelElement : EModelElement) : Boolean = if aModelElement.hasExtendedMetaData() then aModelElement.getExtendedMetaData().details->select(key = 'kind')->notEmpty() else false endif /]
-[query public getKindValue(aModelElement : EModelElement) : String = aModelElement.getExtendedMetaData().details->select(key = 'kind')->first().value /]
+[query public hasExtendedMetaData(aModelElement : EModelElement) : Boolean = eAnnotations->select(source = sourceNameExtendedMetaData())->notEmpty()  /]
+[query public getExtendedMetaData(aModelElement : EModelElement) : EAnnotation = eAnnotations->select(source = sourceNameExtendedMetaData())->first() /]
+[query public hasKindKey(aModelElement : EModelElement) : Boolean = if aModelElement.hasExtendedMetaData() then aModelElement.getExtendedMetaData().details->select(key = keyKind())->notEmpty() else false endif /]
+[query public getKindValue(aModelElement : EModelElement) : String = aModelElement.getExtendedMetaData().details->select(key = keyKind())->first().value /]
 
 [query private hasAttributeExtention(aRef : EReference) : Boolean = if (hasKindKey()) then getKindValue() = 'attribute' else false endif/]

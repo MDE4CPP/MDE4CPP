@@ -33,6 +33,17 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Classifier.hpp"
@@ -46,8 +57,6 @@
 #include "uml/DataType.hpp"
 
 #include "uml/Dependency.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -161,24 +170,24 @@ EnumerationImpl::~EnumerationImpl()
 
 
 //Additional constructor for the containments back reference
-			EnumerationImpl::EnumerationImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id)
-			:EnumerationImpl()
-			{
-				switch(reference_id)
-				{	
-				case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
-					m_owningPackage = par_Package;
-					m_namespace = par_Package;
-					 return;
-				case UmlPackage::TYPE_EREFERENCE_PACKAGE:
-					m_package = par_Package;
-					m_namespace = par_Package;
-					 return;
-				default:
-				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
-				}
-			   
-			}
+EnumerationImpl::EnumerationImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id)
+:EnumerationImpl()
+{
+	switch(reference_id)
+	{	
+	case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
+		m_owningPackage = par_Package;
+		m_namespace = par_Package;
+		 return;
+	case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
+		m_package = par_Package;
+		m_namespace = par_Package;
+		 return;
+	default:
+	std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
+	}
+   
+}
 
 
 
@@ -261,14 +270,6 @@ EnumerationImpl::EnumerationImpl(const EnumerationImpl & obj):EnumerationImpl()
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_collaborationUse" << std::endl;
-	#endif
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
 	#endif
 	std::shared_ptr<Bag<uml::ElementImport>> _elementImportList = obj.getElementImport();
 	for(std::shared_ptr<uml::ElementImport> _elementImport : *_elementImportList)
@@ -422,7 +423,7 @@ std::shared_ptr<ecore::EObject>  EnumerationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> EnumerationImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getEnumeration_EClass();
+	return UmlPackageImpl::eInstance()->getEnumeration_Class();
 }
 
 //*********************************
@@ -530,8 +531,18 @@ Any EnumerationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::ENUMERATION_EREFERENCE_OWNEDLITERAL:
-			return eAny(getOwnedLiteral()); //7741
+		case UmlPackage::ENUMERATION_ATTRIBUTE_OWNEDLITERAL:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::EnumerationLiteral>::iterator iter = m_ownedLiteral->begin();
+			Bag<uml::EnumerationLiteral>::iterator end = m_ownedLiteral->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //8540
+		}
 	}
 	return DataTypeImpl::eGet(featureID, resolve, coreType);
 }
@@ -539,8 +550,8 @@ bool EnumerationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::ENUMERATION_EREFERENCE_OWNEDLITERAL:
-			return getOwnedLiteral() != nullptr; //7741
+		case UmlPackage::ENUMERATION_ATTRIBUTE_OWNEDLITERAL:
+			return getOwnedLiteral() != nullptr; //8540
 	}
 	return DataTypeImpl::internalEIsSet(featureID);
 }
@@ -548,6 +559,42 @@ bool EnumerationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
+		case UmlPackage::ENUMERATION_ATTRIBUTE_OWNEDLITERAL:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::EnumerationLiteral>> ownedLiteralList(new Bag<uml::EnumerationLiteral>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				ownedLiteralList->add(std::dynamic_pointer_cast<uml::EnumerationLiteral>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::EnumerationLiteral>::iterator iterOwnedLiteral = m_ownedLiteral->begin();
+			Bag<uml::EnumerationLiteral>::iterator endOwnedLiteral = m_ownedLiteral->end();
+			while (iterOwnedLiteral != endOwnedLiteral)
+			{
+				if (ownedLiteralList->find(*iterOwnedLiteral) == -1)
+				{
+					m_ownedLiteral->erase(*iterOwnedLiteral);
+				}
+				iterOwnedLiteral++;
+			}
+
+			iterOwnedLiteral = ownedLiteralList->begin();
+			endOwnedLiteral = ownedLiteralList->end();
+			while (iterOwnedLiteral != endOwnedLiteral)
+			{
+				if (m_ownedLiteral->find(*iterOwnedLiteral) == -1)
+				{
+					m_ownedLiteral->add(*iterOwnedLiteral);
+				}
+				iterOwnedLiteral++;			
+			}
+			return true;
+		}
 	}
 
 	return DataTypeImpl::eSet(featureID, newValue);
@@ -591,7 +638,7 @@ void EnumerationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence
 			{
 				typeName = "EnumerationLiteral";
 			}
-			std::shared_ptr<ecore::EObject> ownedLiteral = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::ENUMERATIONLITERAL_EREFERENCE_ENUMERATION);
+			std::shared_ptr<ecore::EObject> ownedLiteral = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::ENUMERATIONLITERAL_ATTRIBUTE_ENUMERATION);
 			if (ownedLiteral != nullptr)
 			{
 				loadHandler->handleChild(ownedLiteral);
@@ -636,7 +683,6 @@ void EnumerationImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
@@ -658,7 +704,7 @@ void EnumerationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 		// Save 'ownedLiteral'
 		for (std::shared_ptr<uml::EnumerationLiteral> ownedLiteral : *this->getOwnedLiteral()) 
 		{
-			saveHandler->addReference(ownedLiteral, "ownedLiteral", ownedLiteral->eClass() != package->getEnumerationLiteral_EClass());
+			saveHandler->addReference(ownedLiteral, "ownedLiteral", ownedLiteral->eClass() != package->getEnumerationLiteral_Class());
 		}
 	
 

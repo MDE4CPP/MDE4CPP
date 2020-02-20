@@ -33,6 +33,19 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/ActivityEdge.hpp"
@@ -64,8 +77,6 @@
 #include "uml/Constraint.hpp"
 
 #include "uml/Dependency.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -318,24 +329,24 @@ ActivityImpl::~ActivityImpl()
 
 
 //Additional constructor for the containments back reference
-			ActivityImpl::ActivityImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id)
-			:ActivityImpl()
-			{
-				switch(reference_id)
-				{	
-				case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
-					m_owningPackage = par_Package;
-					m_namespace = par_Package;
-					 return;
-				case UmlPackage::TYPE_EREFERENCE_PACKAGE:
-					m_package = par_Package;
-					m_namespace = par_Package;
-					 return;
-				default:
-				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
-				}
-			   
-			}
+ActivityImpl::ActivityImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id)
+:ActivityImpl()
+{
+	switch(reference_id)
+	{	
+	case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
+		m_owningPackage = par_Package;
+		m_namespace = par_Package;
+		 return;
+	case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
+		m_package = par_Package;
+		m_namespace = par_Package;
+		 return;
+	default:
+	std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
+	}
+   
+}
 
 
 
@@ -449,14 +460,6 @@ ActivityImpl::ActivityImpl(const ActivityImpl & obj):ActivityImpl()
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_context" << std::endl;
-	#endif
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
 	#endif
 	std::shared_ptr<Bag<uml::ActivityEdge>> _edgeList = obj.getEdge();
 	for(std::shared_ptr<uml::ActivityEdge> _edge : *_edgeList)
@@ -786,7 +789,7 @@ std::shared_ptr<ecore::EObject>  ActivityImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ActivityImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getActivity_EClass();
+	return UmlPackageImpl::eInstance()->getActivity_Class();
 }
 
 //*********************************
@@ -981,26 +984,106 @@ Any ActivityImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::ACTIVITY_EREFERENCE_EDGE:
-			return eAny(getEdge()); //163
-		case UmlPackage::ACTIVITY_EREFERENCE_GROUP:
-			return eAny(getGroup()); //166
-		case UmlPackage::ACTIVITY_EATTRIBUTE_ISREADONLY:
-			return eAny(getIsReadOnly()); //168
-		case UmlPackage::ACTIVITY_EATTRIBUTE_ISSINGLEEXECUTION:
-			return eAny(getIsSingleExecution()); //169
-		case UmlPackage::ACTIVITY_EREFERENCE_NODE:
-			return eAny(getNode()); //164
-		case UmlPackage::ACTIVITY_EREFERENCE_OWNEDGROUP:
-			return eAny(getOwnedGroup()); //162
-		case UmlPackage::ACTIVITY_EREFERENCE_OWNEDNODE:
-			return eAny(getOwnedNode()); //167
-		case UmlPackage::ACTIVITY_EREFERENCE_PARTITION:
-			return eAny(getPartition()); //170
-		case UmlPackage::ACTIVITY_EREFERENCE_STRUCTUREDNODE:
-			return eAny(getStructuredNode()); //171
-		case UmlPackage::ACTIVITY_EREFERENCE_VARIABLE:
-			return eAny(getVariable()); //165
+		case UmlPackage::ACTIVITY_ATTRIBUTE_EDGE:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::ActivityEdge>::iterator iter = m_edge->begin();
+			Bag<uml::ActivityEdge>::iterator end = m_edge->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //762
+		}
+		case UmlPackage::ACTIVITY_ATTRIBUTE_GROUP:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::ActivityGroup>::iterator iter = m_group->begin();
+			Bag<uml::ActivityGroup>::iterator end = m_group->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //765
+		}
+		case UmlPackage::ACTIVITY_ATTRIBUTE_ISREADONLY:
+			return eAny(getIsReadOnly()); //767
+		case UmlPackage::ACTIVITY_ATTRIBUTE_ISSINGLEEXECUTION:
+			return eAny(getIsSingleExecution()); //768
+		case UmlPackage::ACTIVITY_ATTRIBUTE_NODE:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::ActivityNode>::iterator iter = m_node->begin();
+			Bag<uml::ActivityNode>::iterator end = m_node->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //763
+		}
+		case UmlPackage::ACTIVITY_ATTRIBUTE_OWNEDGROUP:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::ActivityGroup>::iterator iter = m_ownedGroup->begin();
+			Bag<uml::ActivityGroup>::iterator end = m_ownedGroup->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //761
+		}
+		case UmlPackage::ACTIVITY_ATTRIBUTE_OWNEDNODE:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::ActivityNode>::iterator iter = m_ownedNode->begin();
+			Bag<uml::ActivityNode>::iterator end = m_ownedNode->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //766
+		}
+		case UmlPackage::ACTIVITY_ATTRIBUTE_PARTITION:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::ActivityPartition>::iterator iter = m_partition->begin();
+			Bag<uml::ActivityPartition>::iterator end = m_partition->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //769
+		}
+		case UmlPackage::ACTIVITY_ATTRIBUTE_STRUCTUREDNODE:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::StructuredActivityNode>::iterator iter = m_structuredNode->begin();
+			Bag<uml::StructuredActivityNode>::iterator end = m_structuredNode->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //770
+		}
+		case UmlPackage::ACTIVITY_ATTRIBUTE_VARIABLE:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Variable>::iterator iter = m_variable->begin();
+			Bag<uml::Variable>::iterator end = m_variable->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //764
+		}
 	}
 	return BehaviorImpl::eGet(featureID, resolve, coreType);
 }
@@ -1008,26 +1091,26 @@ bool ActivityImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::ACTIVITY_EREFERENCE_EDGE:
-			return getEdge() != nullptr; //163
-		case UmlPackage::ACTIVITY_EREFERENCE_GROUP:
-			return getGroup() != nullptr; //166
-		case UmlPackage::ACTIVITY_EATTRIBUTE_ISREADONLY:
-			return getIsReadOnly() != false; //168
-		case UmlPackage::ACTIVITY_EATTRIBUTE_ISSINGLEEXECUTION:
-			return getIsSingleExecution() != false; //169
-		case UmlPackage::ACTIVITY_EREFERENCE_NODE:
-			return getNode() != nullptr; //164
-		case UmlPackage::ACTIVITY_EREFERENCE_OWNEDGROUP:
-			return getOwnedGroup() != nullptr; //162
-		case UmlPackage::ACTIVITY_EREFERENCE_OWNEDNODE:
-			return getOwnedNode() != nullptr; //167
-		case UmlPackage::ACTIVITY_EREFERENCE_PARTITION:
-			return getPartition() != nullptr; //170
-		case UmlPackage::ACTIVITY_EREFERENCE_STRUCTUREDNODE:
-			return getStructuredNode() != nullptr; //171
-		case UmlPackage::ACTIVITY_EREFERENCE_VARIABLE:
-			return getVariable() != nullptr; //165
+		case UmlPackage::ACTIVITY_ATTRIBUTE_EDGE:
+			return getEdge() != nullptr; //762
+		case UmlPackage::ACTIVITY_ATTRIBUTE_GROUP:
+			return getGroup() != nullptr; //765
+		case UmlPackage::ACTIVITY_ATTRIBUTE_ISREADONLY:
+			return getIsReadOnly() != false; //767
+		case UmlPackage::ACTIVITY_ATTRIBUTE_ISSINGLEEXECUTION:
+			return getIsSingleExecution() != false; //768
+		case UmlPackage::ACTIVITY_ATTRIBUTE_NODE:
+			return getNode() != nullptr; //763
+		case UmlPackage::ACTIVITY_ATTRIBUTE_OWNEDGROUP:
+			return getOwnedGroup() != nullptr; //761
+		case UmlPackage::ACTIVITY_ATTRIBUTE_OWNEDNODE:
+			return getOwnedNode() != nullptr; //766
+		case UmlPackage::ACTIVITY_ATTRIBUTE_PARTITION:
+			return getPartition() != nullptr; //769
+		case UmlPackage::ACTIVITY_ATTRIBUTE_STRUCTUREDNODE:
+			return getStructuredNode() != nullptr; //770
+		case UmlPackage::ACTIVITY_ATTRIBUTE_VARIABLE:
+			return getVariable() != nullptr; //764
 	}
 	return BehaviorImpl::internalEIsSet(featureID);
 }
@@ -1035,18 +1118,306 @@ bool ActivityImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::ACTIVITY_EATTRIBUTE_ISREADONLY:
+		case UmlPackage::ACTIVITY_ATTRIBUTE_EDGE:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::ActivityEdge>> edgeList(new Bag<uml::ActivityEdge>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				edgeList->add(std::dynamic_pointer_cast<uml::ActivityEdge>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::ActivityEdge>::iterator iterEdge = m_edge->begin();
+			Bag<uml::ActivityEdge>::iterator endEdge = m_edge->end();
+			while (iterEdge != endEdge)
+			{
+				if (edgeList->find(*iterEdge) == -1)
+				{
+					m_edge->erase(*iterEdge);
+				}
+				iterEdge++;
+			}
+
+			iterEdge = edgeList->begin();
+			endEdge = edgeList->end();
+			while (iterEdge != endEdge)
+			{
+				if (m_edge->find(*iterEdge) == -1)
+				{
+					m_edge->add(*iterEdge);
+				}
+				iterEdge++;			
+			}
+			return true;
+		}
+		case UmlPackage::ACTIVITY_ATTRIBUTE_GROUP:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::ActivityGroup>> groupList(new Bag<uml::ActivityGroup>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				groupList->add(std::dynamic_pointer_cast<uml::ActivityGroup>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::ActivityGroup>::iterator iterGroup = m_group->begin();
+			Bag<uml::ActivityGroup>::iterator endGroup = m_group->end();
+			while (iterGroup != endGroup)
+			{
+				if (groupList->find(*iterGroup) == -1)
+				{
+					m_group->erase(*iterGroup);
+				}
+				iterGroup++;
+			}
+
+			iterGroup = groupList->begin();
+			endGroup = groupList->end();
+			while (iterGroup != endGroup)
+			{
+				if (m_group->find(*iterGroup) == -1)
+				{
+					m_group->add(*iterGroup);
+				}
+				iterGroup++;			
+			}
+			return true;
+		}
+		case UmlPackage::ACTIVITY_ATTRIBUTE_ISREADONLY:
 		{
 			// BOOST CAST
 			bool _isReadOnly = newValue->get<bool>();
-			setIsReadOnly(_isReadOnly); //168
+			setIsReadOnly(_isReadOnly); //767
 			return true;
 		}
-		case UmlPackage::ACTIVITY_EATTRIBUTE_ISSINGLEEXECUTION:
+		case UmlPackage::ACTIVITY_ATTRIBUTE_ISSINGLEEXECUTION:
 		{
 			// BOOST CAST
 			bool _isSingleExecution = newValue->get<bool>();
-			setIsSingleExecution(_isSingleExecution); //169
+			setIsSingleExecution(_isSingleExecution); //768
+			return true;
+		}
+		case UmlPackage::ACTIVITY_ATTRIBUTE_NODE:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::ActivityNode>> nodeList(new Bag<uml::ActivityNode>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				nodeList->add(std::dynamic_pointer_cast<uml::ActivityNode>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::ActivityNode>::iterator iterNode = m_node->begin();
+			Bag<uml::ActivityNode>::iterator endNode = m_node->end();
+			while (iterNode != endNode)
+			{
+				if (nodeList->find(*iterNode) == -1)
+				{
+					m_node->erase(*iterNode);
+				}
+				iterNode++;
+			}
+
+			iterNode = nodeList->begin();
+			endNode = nodeList->end();
+			while (iterNode != endNode)
+			{
+				if (m_node->find(*iterNode) == -1)
+				{
+					m_node->add(*iterNode);
+				}
+				iterNode++;			
+			}
+			return true;
+		}
+		case UmlPackage::ACTIVITY_ATTRIBUTE_OWNEDGROUP:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::ActivityGroup>> ownedGroupList(new Bag<uml::ActivityGroup>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				ownedGroupList->add(std::dynamic_pointer_cast<uml::ActivityGroup>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::ActivityGroup>::iterator iterOwnedGroup = m_ownedGroup->begin();
+			Bag<uml::ActivityGroup>::iterator endOwnedGroup = m_ownedGroup->end();
+			while (iterOwnedGroup != endOwnedGroup)
+			{
+				if (ownedGroupList->find(*iterOwnedGroup) == -1)
+				{
+					m_ownedGroup->erase(*iterOwnedGroup);
+				}
+				iterOwnedGroup++;
+			}
+
+			iterOwnedGroup = ownedGroupList->begin();
+			endOwnedGroup = ownedGroupList->end();
+			while (iterOwnedGroup != endOwnedGroup)
+			{
+				if (m_ownedGroup->find(*iterOwnedGroup) == -1)
+				{
+					m_ownedGroup->add(*iterOwnedGroup);
+				}
+				iterOwnedGroup++;			
+			}
+			return true;
+		}
+		case UmlPackage::ACTIVITY_ATTRIBUTE_OWNEDNODE:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::ActivityNode>> ownedNodeList(new Bag<uml::ActivityNode>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				ownedNodeList->add(std::dynamic_pointer_cast<uml::ActivityNode>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::ActivityNode>::iterator iterOwnedNode = m_ownedNode->begin();
+			Bag<uml::ActivityNode>::iterator endOwnedNode = m_ownedNode->end();
+			while (iterOwnedNode != endOwnedNode)
+			{
+				if (ownedNodeList->find(*iterOwnedNode) == -1)
+				{
+					m_ownedNode->erase(*iterOwnedNode);
+				}
+				iterOwnedNode++;
+			}
+
+			iterOwnedNode = ownedNodeList->begin();
+			endOwnedNode = ownedNodeList->end();
+			while (iterOwnedNode != endOwnedNode)
+			{
+				if (m_ownedNode->find(*iterOwnedNode) == -1)
+				{
+					m_ownedNode->add(*iterOwnedNode);
+				}
+				iterOwnedNode++;			
+			}
+			return true;
+		}
+		case UmlPackage::ACTIVITY_ATTRIBUTE_PARTITION:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::ActivityPartition>> partitionList(new Bag<uml::ActivityPartition>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				partitionList->add(std::dynamic_pointer_cast<uml::ActivityPartition>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::ActivityPartition>::iterator iterPartition = m_partition->begin();
+			Bag<uml::ActivityPartition>::iterator endPartition = m_partition->end();
+			while (iterPartition != endPartition)
+			{
+				if (partitionList->find(*iterPartition) == -1)
+				{
+					m_partition->erase(*iterPartition);
+				}
+				iterPartition++;
+			}
+
+			iterPartition = partitionList->begin();
+			endPartition = partitionList->end();
+			while (iterPartition != endPartition)
+			{
+				if (m_partition->find(*iterPartition) == -1)
+				{
+					m_partition->add(*iterPartition);
+				}
+				iterPartition++;			
+			}
+			return true;
+		}
+		case UmlPackage::ACTIVITY_ATTRIBUTE_STRUCTUREDNODE:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::StructuredActivityNode>> structuredNodeList(new Bag<uml::StructuredActivityNode>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				structuredNodeList->add(std::dynamic_pointer_cast<uml::StructuredActivityNode>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::StructuredActivityNode>::iterator iterStructuredNode = m_structuredNode->begin();
+			Bag<uml::StructuredActivityNode>::iterator endStructuredNode = m_structuredNode->end();
+			while (iterStructuredNode != endStructuredNode)
+			{
+				if (structuredNodeList->find(*iterStructuredNode) == -1)
+				{
+					m_structuredNode->erase(*iterStructuredNode);
+				}
+				iterStructuredNode++;
+			}
+
+			iterStructuredNode = structuredNodeList->begin();
+			endStructuredNode = structuredNodeList->end();
+			while (iterStructuredNode != endStructuredNode)
+			{
+				if (m_structuredNode->find(*iterStructuredNode) == -1)
+				{
+					m_structuredNode->add(*iterStructuredNode);
+				}
+				iterStructuredNode++;			
+			}
+			return true;
+		}
+		case UmlPackage::ACTIVITY_ATTRIBUTE_VARIABLE:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Variable>> variableList(new Bag<uml::Variable>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				variableList->add(std::dynamic_pointer_cast<uml::Variable>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Variable>::iterator iterVariable = m_variable->begin();
+			Bag<uml::Variable>::iterator endVariable = m_variable->end();
+			while (iterVariable != endVariable)
+			{
+				if (variableList->find(*iterVariable) == -1)
+				{
+					m_variable->erase(*iterVariable);
+				}
+				iterVariable++;
+			}
+
+			iterVariable = variableList->begin();
+			endVariable = variableList->end();
+			while (iterVariable != endVariable)
+			{
+				if (m_variable->find(*iterVariable) == -1)
+				{
+					m_variable->add(*iterVariable);
+				}
+				iterVariable++;			
+			}
 			return true;
 		}
 	}
@@ -1130,7 +1501,7 @@ void ActivityImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::i
 				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			std::shared_ptr<ecore::EObject> edge = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::ACTIVITYEDGE_EREFERENCE_ACTIVITY);
+			std::shared_ptr<ecore::EObject> edge = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::ACTIVITYEDGE_ATTRIBUTE_ACTIVITY);
 			if (edge != nullptr)
 			{
 				loadHandler->handleChild(edge);
@@ -1146,7 +1517,7 @@ void ActivityImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::i
 				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			std::shared_ptr<ecore::EObject> group = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::ACTIVITYGROUP_EREFERENCE_INACTIVITY);
+			std::shared_ptr<ecore::EObject> group = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::ACTIVITYGROUP_ATTRIBUTE_INACTIVITY);
 			if (group != nullptr)
 			{
 				loadHandler->handleChild(group);
@@ -1162,7 +1533,7 @@ void ActivityImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::i
 				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			std::shared_ptr<ecore::EObject> node = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY);
+			std::shared_ptr<ecore::EObject> node = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::ACTIVITYNODE_ATTRIBUTE_ACTIVITY);
 			if (node != nullptr)
 			{
 				loadHandler->handleChild(node);
@@ -1178,7 +1549,7 @@ void ActivityImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::i
 				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			std::shared_ptr<ecore::EObject> ownedGroup = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::ACTIVITYGROUP_EREFERENCE_INACTIVITY);
+			std::shared_ptr<ecore::EObject> ownedGroup = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::ACTIVITYGROUP_ATTRIBUTE_INACTIVITY);
 			if (ownedGroup != nullptr)
 			{
 				loadHandler->handleChild(ownedGroup);
@@ -1194,7 +1565,7 @@ void ActivityImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::i
 				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			std::shared_ptr<ecore::EObject> ownedNode = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY);
+			std::shared_ptr<ecore::EObject> ownedNode = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::ACTIVITYNODE_ATTRIBUTE_ACTIVITY);
 			if (ownedNode != nullptr)
 			{
 				loadHandler->handleChild(ownedNode);
@@ -1212,8 +1583,8 @@ void ActivityImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::i
 			// TODO here are multiple containers of same object. Check this!
 			std::cout << "| ERROR    | " << __PRETTY_FUNCTION__ << " 'structuredNode' has more then one back-reference Object." << std::endl;
 			std::shared_ptr<ecore::EObject> structuredNode;
-				structuredNode = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY);
-				structuredNode = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::ACTIVITYGROUP_EREFERENCE_INACTIVITY);
+				structuredNode = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::ACTIVITYNODE_ATTRIBUTE_ACTIVITY);
+				structuredNode = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::ACTIVITYGROUP_ATTRIBUTE_INACTIVITY);
 			if (structuredNode != nullptr)
 			{
 				loadHandler->handleChild(structuredNode);
@@ -1228,7 +1599,7 @@ void ActivityImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::i
 			{
 				typeName = "Variable";
 			}
-			std::shared_ptr<ecore::EObject> variable = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::VARIABLE_EREFERENCE_ACTIVITYSCOPE);
+			std::shared_ptr<ecore::EObject> variable = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::VARIABLE_ATTRIBUTE_ACTIVITYSCOPE);
 			if (variable != nullptr)
 			{
 				loadHandler->handleChild(variable);
@@ -1252,7 +1623,7 @@ void ActivityImpl::resolveReferences(const int featureID, std::list<std::shared_
 {
 	switch(featureID)
 	{
-		case UmlPackage::ACTIVITY_EREFERENCE_PARTITION:
+		case UmlPackage::ACTIVITY_ATTRIBUTE_PARTITION:
 		{
 			std::shared_ptr<Bag<uml::ActivityPartition>> _partition = getPartition();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -1296,7 +1667,6 @@ void ActivityImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> s
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
@@ -1321,35 +1691,35 @@ void ActivityImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 		// Save 'edge'
 		for (std::shared_ptr<uml::ActivityEdge> edge : *this->getEdge()) 
 		{
-			saveHandler->addReference(edge, "edge", edge->eClass() != package->getActivityEdge_EClass());
+			saveHandler->addReference(edge, "edge", edge->eClass() != package->getActivityEdge_Class());
 		}
 
 		// Save 'ownedNode'
 		for (std::shared_ptr<uml::ActivityNode> ownedNode : *this->getOwnedNode()) 
 		{
-			saveHandler->addReference(ownedNode, "ownedNode", ownedNode->eClass() != package->getActivityNode_EClass());
+			saveHandler->addReference(ownedNode, "ownedNode", ownedNode->eClass() != package->getActivityNode_Class());
 		}
 
 		// Save 'structuredNode'
 		for (std::shared_ptr<uml::StructuredActivityNode> structuredNode : *this->getStructuredNode()) 
 		{
-			saveHandler->addReference(structuredNode, "structuredNode", structuredNode->eClass() != package->getStructuredActivityNode_EClass());
+			saveHandler->addReference(structuredNode, "structuredNode", structuredNode->eClass() != package->getStructuredActivityNode_Class());
 		}
 
 		// Save 'variable'
 		for (std::shared_ptr<uml::Variable> variable : *this->getVariable()) 
 		{
-			saveHandler->addReference(variable, "variable", variable->eClass() != package->getVariable_EClass());
+			saveHandler->addReference(variable, "variable", variable->eClass() != package->getVariable_Class());
 		}
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getActivity_EAttribute_isReadOnly()) )
+		if ( this->eIsSet(package->getActivity_Attribute_isReadOnly()) )
 		{
 			saveHandler->addAttribute("isReadOnly", this->getIsReadOnly());
 		}
 
-		if ( this->eIsSet(package->getActivity_EAttribute_isSingleExecution()) )
+		if ( this->eIsSet(package->getActivity_Attribute_isSingleExecution()) )
 		{
 			saveHandler->addAttribute("isSingleExecution", this->getIsSingleExecution());
 		}
@@ -1380,21 +1750,21 @@ void ActivityImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 		std::shared_ptr<SubsetUnion<uml::ActivityGroup, uml::Element>> list_group = this->getGroup();
 		for (std::shared_ptr<uml::ActivityGroup> group : *list_group) 
 		{
-			saveHandler->addReference(group, "group", group->eClass() != package->getActivityGroup_EClass());
+			saveHandler->addReference(group, "group", group->eClass() != package->getActivityGroup_Class());
 		}
 
 		// Save 'node'
 		std::shared_ptr<SubsetUnion<uml::ActivityNode, uml::Element>> list_node = this->getNode();
 		for (std::shared_ptr<uml::ActivityNode> node : *list_node) 
 		{
-			saveHandler->addReference(node, "node", node->eClass() != package->getActivityNode_EClass());
+			saveHandler->addReference(node, "node", node->eClass() != package->getActivityNode_Class());
 		}
 
 		// Save 'ownedGroup'
 		std::shared_ptr<SubsetUnion<uml::ActivityGroup, uml::ActivityGroup>> list_ownedGroup = this->getOwnedGroup();
 		for (std::shared_ptr<uml::ActivityGroup> ownedGroup : *list_ownedGroup) 
 		{
-			saveHandler->addReference(ownedGroup, "ownedGroup", ownedGroup->eClass() != package->getActivityGroup_EClass());
+			saveHandler->addReference(ownedGroup, "ownedGroup", ownedGroup->eClass() != package->getActivityGroup_Class());
 		}
 	}
 	catch (std::exception& e)

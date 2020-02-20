@@ -1,22 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.2"?>
 <plugin>
-   <extension point="org.eclipse.ui.popupMenus">
-      <objectContribution
-            adaptable="true"
-            objectClass="org.eclipse.core.resources.IFile"
-            nameFilter="*.uml"
-            id="fUML4CPP.generator.ui.popupMenus.contribution.IFile">
-         <menu id="org.eclipse.acceleo.module.menu" label="MDE4CPP Generators" path="additionsAcceleo">
-               <groupMarker name="acceleo"/> 
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            allPopups="false"
+            locationURI="popup:org.eclipse.ui.popup.any?before=additions">
+         <menu
+               id="menuMDE4CPP"
+               label="MDE4CPP">
+            <command
+                  commandId="fUML4CPP.generator.ui.generateCommand"
+                  label="Generate with fUML4CPP"
+                  style="push">
+               <visibleWhen
+                     checkEnabled="false">
+                  <iterate
+                        ifEmpty="false"
+                        operator="or">
+                     <test
+                           property="org.eclipse.core.resources.name"
+                           value="*.uml">
+                     </test>
+                  </iterate>
+               </visibleWhen>
+            </command>
          </menu>
-         <action
-               class="fUML4CPP.generator.ui.popupMenus.AcceleoGeneratefUMLGeneratorAction"
-               enablesFor="+"
-               id="fUML4CPP.generator.ui.popupMenus.acceleoGeneratefUMLGeneratorAction"
-               icon="icons/default.gif"
-               label="Generate with fUML4CPP"
-               menubarPath="org.eclipse.acceleo.module.menu/acceleo"/>
-      </objectContribution>
+      </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            defaultHandler="fUML4CPP.generator.ui.common.fMLGeneraterCommand"
+            id="fUML4CPP.generator.ui.generateCommand"
+            name="Generate with fUML4CPP">
+      </command>
    </extension>
 </plugin>

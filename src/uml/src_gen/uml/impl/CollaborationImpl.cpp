@@ -32,6 +32,17 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Behavior.hpp"
@@ -51,8 +62,6 @@
 #include "uml/Constraint.hpp"
 
 #include "uml/Dependency.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -166,24 +175,24 @@ CollaborationImpl::~CollaborationImpl()
 
 
 //Additional constructor for the containments back reference
-			CollaborationImpl::CollaborationImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id)
-			:CollaborationImpl()
-			{
-				switch(reference_id)
-				{	
-				case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
-					m_owningPackage = par_Package;
-					m_namespace = par_Package;
-					 return;
-				case UmlPackage::TYPE_EREFERENCE_PACKAGE:
-					m_package = par_Package;
-					m_namespace = par_Package;
-					 return;
-				default:
-				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
-				}
-			   
-			}
+CollaborationImpl::CollaborationImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id)
+:CollaborationImpl()
+{
+	switch(reference_id)
+	{	
+	case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
+		m_owningPackage = par_Package;
+		m_namespace = par_Package;
+		 return;
+	case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
+		m_package = par_Package;
+		m_namespace = par_Package;
+		 return;
+	default:
+	std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
+	}
+   
+}
 
 
 
@@ -284,14 +293,6 @@ CollaborationImpl::CollaborationImpl(const CollaborationImpl & obj):Collaboratio
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_collaborationUse" << std::endl;
-	#endif
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
 	#endif
 	std::shared_ptr<Bag<uml::ElementImport>> _elementImportList = obj.getElementImport();
 	for(std::shared_ptr<uml::ElementImport> _elementImport : *_elementImportList)
@@ -446,7 +447,7 @@ std::shared_ptr<ecore::EObject>  CollaborationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> CollaborationImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getCollaboration_EClass();
+	return UmlPackageImpl::eInstance()->getCollaboration_Class();
 }
 
 //*********************************
@@ -554,8 +555,18 @@ Any CollaborationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::COLLABORATION_EREFERENCE_COLLABORATIONROLE:
-			return eAny(getCollaborationRole()); //9146
+		case UmlPackage::COLLABORATION_ATTRIBUTE_COLLABORATIONROLE:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::ConnectableElement>::iterator iter = m_collaborationRole->begin();
+			Bag<uml::ConnectableElement>::iterator end = m_collaborationRole->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //4345
+		}
 	}
 	Any result;
 	result = BehavioredClassifierImpl::eGet(featureID, resolve, coreType);
@@ -570,8 +581,8 @@ bool CollaborationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::COLLABORATION_EREFERENCE_COLLABORATIONROLE:
-			return getCollaborationRole() != nullptr; //9146
+		case UmlPackage::COLLABORATION_ATTRIBUTE_COLLABORATIONROLE:
+			return getCollaborationRole() != nullptr; //4345
 	}
 	bool result = false;
 	result = BehavioredClassifierImpl::internalEIsSet(featureID);
@@ -586,6 +597,42 @@ bool CollaborationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
+		case UmlPackage::COLLABORATION_ATTRIBUTE_COLLABORATIONROLE:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::ConnectableElement>> collaborationRoleList(new Bag<uml::ConnectableElement>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				collaborationRoleList->add(std::dynamic_pointer_cast<uml::ConnectableElement>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::ConnectableElement>::iterator iterCollaborationRole = m_collaborationRole->begin();
+			Bag<uml::ConnectableElement>::iterator endCollaborationRole = m_collaborationRole->end();
+			while (iterCollaborationRole != endCollaborationRole)
+			{
+				if (collaborationRoleList->find(*iterCollaborationRole) == -1)
+				{
+					m_collaborationRole->erase(*iterCollaborationRole);
+				}
+				iterCollaborationRole++;
+			}
+
+			iterCollaborationRole = collaborationRoleList->begin();
+			endCollaborationRole = collaborationRoleList->end();
+			while (iterCollaborationRole != endCollaborationRole)
+			{
+				if (m_collaborationRole->find(*iterCollaborationRole) == -1)
+				{
+					m_collaborationRole->add(*iterCollaborationRole);
+				}
+				iterCollaborationRole++;			
+			}
+			return true;
+		}
 	}
 
 	bool result = false;
@@ -656,7 +703,7 @@ void CollaborationImpl::resolveReferences(const int featureID, std::list<std::sh
 {
 	switch(featureID)
 	{
-		case UmlPackage::COLLABORATION_EREFERENCE_COLLABORATIONROLE:
+		case UmlPackage::COLLABORATION_ATTRIBUTE_COLLABORATIONROLE:
 		{
 			std::shared_ptr<Bag<uml::ConnectableElement>> _collaborationRole = getCollaborationRole();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -695,7 +742,6 @@ void CollaborationImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandl
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

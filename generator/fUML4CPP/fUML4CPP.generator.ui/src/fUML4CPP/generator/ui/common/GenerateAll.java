@@ -71,7 +71,7 @@ public class GenerateAll {
 			targetFolder.mkdirs();
 		}
 		monitor.subTask("Loading...");
-		fUML4CPP.generator.main.Generate gen0 = new fUML4CPP.generator.main.Generate(modelURI, targetFolder, arguments);
+		fUML4CPP.generator.main.GenerateFUML gen0 = new fUML4CPP.generator.main.GenerateFUML(modelURI, targetFolder, arguments);
 		monitor.worked(1);
 		String generationID = org.eclipse.acceleo.engine.utils.AcceleoLaunchingUtil.computeUIProjectID("fUML4CPP.generator", "fUML4CPP.generator.main.Generate", modelURI.toString(), targetFolder.toString(), new ArrayList<String>());
 		gen0.setGenerationID(generationID);

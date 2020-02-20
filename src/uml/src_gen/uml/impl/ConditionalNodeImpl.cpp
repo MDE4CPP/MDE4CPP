@@ -33,6 +33,19 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Activity.hpp"
@@ -54,8 +67,6 @@
 #include "uml/Constraint.hpp"
 
 #include "uml/Dependency.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -142,24 +153,24 @@ ConditionalNodeImpl::~ConditionalNodeImpl()
 
 
 //Additional constructor for the containments back reference
-			ConditionalNodeImpl::ConditionalNodeImpl(std::weak_ptr<uml::Activity > par_Activity, const int reference_id)
-			:ConditionalNodeImpl()
-			{
-				switch(reference_id)
-				{	
-				case UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY:
-					m_activity = par_Activity;
-					m_owner = par_Activity;
-					 return;
-				case UmlPackage::ACTIVITYGROUP_EREFERENCE_INACTIVITY:
-					m_inActivity = par_Activity;
-					m_owner = par_Activity;
-					 return;
-				default:
-				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
-				}
-			   
-			}
+ConditionalNodeImpl::ConditionalNodeImpl(std::weak_ptr<uml::Activity > par_Activity, const int reference_id)
+:ConditionalNodeImpl()
+{
+	switch(reference_id)
+	{	
+	case UmlPackage::ACTIVITYNODE_ATTRIBUTE_ACTIVITY:
+		m_activity = par_Activity;
+		m_owner = par_Activity;
+		 return;
+	case UmlPackage::ACTIVITYGROUP_ATTRIBUTE_INACTIVITY:
+		m_inActivity = par_Activity;
+		m_owner = par_Activity;
+		 return;
+	default:
+	std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
+	}
+   
+}
 
 
 
@@ -287,14 +298,6 @@ ConditionalNodeImpl::ConditionalNodeImpl(const ConditionalNodeImpl & obj):Condit
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_clause" << std::endl;
-	#endif
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
 	#endif
 	std::shared_ptr<Bag<uml::ActivityEdge>> _edgeList = obj.getEdge();
 	for(std::shared_ptr<uml::ActivityEdge> _edge : *_edgeList)
@@ -461,7 +464,7 @@ std::shared_ptr<ecore::EObject>  ConditionalNodeImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ConditionalNodeImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getConditionalNode_EClass();
+	return UmlPackageImpl::eInstance()->getConditionalNode_Class();
 }
 
 //*********************************
@@ -638,14 +641,34 @@ Any ConditionalNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::CONDITIONALNODE_EREFERENCE_CLAUSE:
-			return eAny(getClause()); //14645
-		case UmlPackage::CONDITIONALNODE_EATTRIBUTE_ISASSURED:
-			return eAny(getIsAssured()); //14646
-		case UmlPackage::CONDITIONALNODE_EATTRIBUTE_ISDETERMINATE:
-			return eAny(getIsDeterminate()); //14647
-		case UmlPackage::CONDITIONALNODE_EREFERENCE_RESULT:
-			return eAny(getResult()); //14648
+		case UmlPackage::CONDITIONALNODE_ATTRIBUTE_CLAUSE:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Clause>::iterator iter = m_clause->begin();
+			Bag<uml::Clause>::iterator end = m_clause->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //5044
+		}
+		case UmlPackage::CONDITIONALNODE_ATTRIBUTE_ISASSURED:
+			return eAny(getIsAssured()); //5045
+		case UmlPackage::CONDITIONALNODE_ATTRIBUTE_ISDETERMINATE:
+			return eAny(getIsDeterminate()); //5046
+		case UmlPackage::CONDITIONALNODE_ATTRIBUTE_RESULT:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::OutputPin>::iterator iter = m_result->begin();
+			Bag<uml::OutputPin>::iterator end = m_result->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //5047
+		}
 	}
 	return StructuredActivityNodeImpl::eGet(featureID, resolve, coreType);
 }
@@ -653,14 +676,14 @@ bool ConditionalNodeImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::CONDITIONALNODE_EREFERENCE_CLAUSE:
-			return getClause() != nullptr; //14645
-		case UmlPackage::CONDITIONALNODE_EATTRIBUTE_ISASSURED:
-			return getIsAssured() != false; //14646
-		case UmlPackage::CONDITIONALNODE_EATTRIBUTE_ISDETERMINATE:
-			return getIsDeterminate() != false; //14647
-		case UmlPackage::CONDITIONALNODE_EREFERENCE_RESULT:
-			return getResult() != nullptr; //14648
+		case UmlPackage::CONDITIONALNODE_ATTRIBUTE_CLAUSE:
+			return getClause() != nullptr; //5044
+		case UmlPackage::CONDITIONALNODE_ATTRIBUTE_ISASSURED:
+			return getIsAssured() != false; //5045
+		case UmlPackage::CONDITIONALNODE_ATTRIBUTE_ISDETERMINATE:
+			return getIsDeterminate() != false; //5046
+		case UmlPackage::CONDITIONALNODE_ATTRIBUTE_RESULT:
+			return getResult() != nullptr; //5047
 	}
 	return StructuredActivityNodeImpl::internalEIsSet(featureID);
 }
@@ -668,18 +691,90 @@ bool ConditionalNodeImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::CONDITIONALNODE_EATTRIBUTE_ISASSURED:
+		case UmlPackage::CONDITIONALNODE_ATTRIBUTE_CLAUSE:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Clause>> clauseList(new Bag<uml::Clause>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				clauseList->add(std::dynamic_pointer_cast<uml::Clause>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Clause>::iterator iterClause = m_clause->begin();
+			Bag<uml::Clause>::iterator endClause = m_clause->end();
+			while (iterClause != endClause)
+			{
+				if (clauseList->find(*iterClause) == -1)
+				{
+					m_clause->erase(*iterClause);
+				}
+				iterClause++;
+			}
+
+			iterClause = clauseList->begin();
+			endClause = clauseList->end();
+			while (iterClause != endClause)
+			{
+				if (m_clause->find(*iterClause) == -1)
+				{
+					m_clause->add(*iterClause);
+				}
+				iterClause++;			
+			}
+			return true;
+		}
+		case UmlPackage::CONDITIONALNODE_ATTRIBUTE_ISASSURED:
 		{
 			// BOOST CAST
 			bool _isAssured = newValue->get<bool>();
-			setIsAssured(_isAssured); //14646
+			setIsAssured(_isAssured); //5045
 			return true;
 		}
-		case UmlPackage::CONDITIONALNODE_EATTRIBUTE_ISDETERMINATE:
+		case UmlPackage::CONDITIONALNODE_ATTRIBUTE_ISDETERMINATE:
 		{
 			// BOOST CAST
 			bool _isDeterminate = newValue->get<bool>();
-			setIsDeterminate(_isDeterminate); //14647
+			setIsDeterminate(_isDeterminate); //5046
+			return true;
+		}
+		case UmlPackage::CONDITIONALNODE_ATTRIBUTE_RESULT:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::OutputPin>> resultList(new Bag<uml::OutputPin>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				resultList->add(std::dynamic_pointer_cast<uml::OutputPin>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::OutputPin>::iterator iterResult = m_result->begin();
+			Bag<uml::OutputPin>::iterator endResult = m_result->end();
+			while (iterResult != endResult)
+			{
+				if (resultList->find(*iterResult) == -1)
+				{
+					m_result->erase(*iterResult);
+				}
+				iterResult++;
+			}
+
+			iterResult = resultList->begin();
+			endResult = resultList->end();
+			while (iterResult != endResult)
+			{
+				if (m_result->find(*iterResult) == -1)
+				{
+					m_result->add(*iterResult);
+				}
+				iterResult++;			
+			}
 			return true;
 		}
 	}
@@ -820,7 +915,6 @@ void ConditionalNodeImpl::save(std::shared_ptr<persistence::interfaces::XSaveHan
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
@@ -843,17 +937,17 @@ void ConditionalNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 		// Save 'clause'
 		for (std::shared_ptr<uml::Clause> clause : *this->getClause()) 
 		{
-			saveHandler->addReference(clause, "clause", clause->eClass() != package->getClause_EClass());
+			saveHandler->addReference(clause, "clause", clause->eClass() != package->getClause_Class());
 		}
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getConditionalNode_EAttribute_isAssured()) )
+		if ( this->eIsSet(package->getConditionalNode_Attribute_isAssured()) )
 		{
 			saveHandler->addAttribute("isAssured", this->getIsAssured());
 		}
 
-		if ( this->eIsSet(package->getConditionalNode_EAttribute_isDeterminate()) )
+		if ( this->eIsSet(package->getConditionalNode_Attribute_isDeterminate()) )
 		{
 			saveHandler->addAttribute("isDeterminate", this->getIsDeterminate());
 		}
@@ -867,7 +961,7 @@ void ConditionalNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 		std::shared_ptr<Bag<uml::OutputPin>> list_result = this->getResult();
 		for (std::shared_ptr<uml::OutputPin> result : *list_result) 
 		{
-			saveHandler->addReference(result, "result", result->eClass() != package->getOutputPin_EClass());
+			saveHandler->addReference(result, "result", result->eClass() != package->getOutputPin_Class());
 		}
 	}
 	catch (std::exception& e)

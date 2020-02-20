@@ -5,6 +5,7 @@
 #else
   #define DEBUG_MESSAGE(a) a
 #endif
+#include <iostream>
 
 
 #include "umlReflection/UMLPackage.hpp"
@@ -22,8 +23,13 @@ UMLPluginImpl::~UMLPluginImpl()
 {
 }
 
-std::shared_ptr<ecore::EObject> UMLPluginImpl::create(const std::string& name)
+std::shared_ptr<ecore::EObject> UMLPluginImpl::create(const std::string& name) const
 {		
+	return nullptr;
+}
+
+std::shared_ptr<ecore::EObject> UMLPluginImpl::create(const std::string& name, std::shared_ptr<ecore::EObject> container, const unsigned int referenceID) const
+{
 	return nullptr;
 }
 

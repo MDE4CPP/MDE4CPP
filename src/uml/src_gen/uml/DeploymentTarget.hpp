@@ -53,11 +53,6 @@ namespace uml
 	class Deployment;
 }
 
-namespace ecore 
-{
-	class EAnnotation;
-}
-
 namespace uml 
 {
 	class Element;

@@ -66,11 +66,6 @@ namespace uml
 	class Dependency;
 }
 
-namespace ecore 
-{
-	class EAnnotation;
-}
-
 namespace uml 
 {
 	class Element;
@@ -258,12 +253,12 @@ namespace uml
 			/*!
 			 Indicates the precise type of the Transition.
 			<p>From package UML::StateMachines.</p> */ 
-			virtual TransitionKind getKind() const = 0;
+			virtual uml::TransitionKind getKind() const = 0;
 			
 			/*!
 			 Indicates the precise type of the Transition.
 			<p>From package UML::StateMachines.</p> */ 
-			virtual void setKind (TransitionKind _kind)= 0; 
+			virtual void setKind (uml::TransitionKind _kind)= 0; 
 			
 			
 			//*********************************
@@ -337,7 +332,7 @@ namespace uml
 			/*!
 			 Indicates the precise type of the Transition.
 			<p>From package UML::StateMachines.</p> */ 
-			TransitionKind m_kind = TransitionKind::EXTERNAL;
+			uml::TransitionKind m_kind = TransitionKind::EXTERNAL;
 			
 			
 			//*********************************

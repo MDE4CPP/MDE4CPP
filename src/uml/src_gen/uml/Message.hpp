@@ -55,11 +55,6 @@ namespace uml
 	class Dependency;
 }
 
-namespace ecore 
-{
-	class EAnnotation;
-}
-
 namespace uml 
 {
 	class Element;
@@ -162,7 +157,7 @@ namespace uml
 			 This query returns the MessageKind value for this Message.
 			result = (messageKind)
 			<p>From package UML::Interactions.</p> */ 
-			virtual MessageKind getMessageKind() = 0;
+			virtual uml::MessageKind getMessageKind() = 0;
 			
 			/*!
 			 If the MessageEnds are both OccurrenceSpecifications, then the connector must go between the Parts represented by the Lifelines of the two MessageEnds. */ 
@@ -234,17 +229,17 @@ namespace uml
 			/*!
 			 The derived kind of the Message (complete, lost, found, or unknown).
 			<p>From package UML::Interactions.</p> */ 
-			virtual MessageKind getMessageKind() const = 0;
+			virtual uml::MessageKind getMessageKind() const = 0;
 			
 			/*!
 			 The sort of communication reflected by the Message.
 			<p>From package UML::Interactions.</p> */ 
-			virtual MessageSort getMessageSort() const = 0;
+			virtual uml::MessageSort getMessageSort() const = 0;
 			
 			/*!
 			 The sort of communication reflected by the Message.
 			<p>From package UML::Interactions.</p> */ 
-			virtual void setMessageSort (MessageSort _messageSort)= 0; 
+			virtual void setMessageSort (uml::MessageSort _messageSort)= 0; 
 			
 			
 			//*********************************
@@ -309,11 +304,11 @@ namespace uml
 			/*!
 			 The derived kind of the Message (complete, lost, found, or unknown).
 			<p>From package UML::Interactions.</p> */ 
-			MessageKind m_messageKind = MessageKind::UNKNOWN;
+			uml::MessageKind m_messageKind = MessageKind::UNKNOWN;
 			/*!
 			 The sort of communication reflected by the Message.
 			<p>From package UML::Interactions.</p> */ 
-			MessageSort m_messageSort = MessageSort::SYNCHCALL;
+			uml::MessageSort m_messageSort = MessageSort::SYNCHCALL;
 			
 			
 			//*********************************

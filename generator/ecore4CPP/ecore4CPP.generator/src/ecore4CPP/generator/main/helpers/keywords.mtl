@@ -1,0 +1,65 @@
+[comment encoding = UTF-8 /]
+[**
+ * Copyright (c) 2019 TU Ilmenau, Systems and Software Engineering Group
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
+ * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+ * and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ ****************************************************************************************************************************************************************
+ * 
+ * module for providing keywords used by models
+ * 
+ */]
+[module keywords('http://www.eclipse.org/emf/2002/Ecore')]
+
+[** 
+ * keywords for source name and keys of CodeGen annoation
+*/]
+[query public sourceNameCodeGen(any : OclAny) : String = 'http://sse.tu-ilmenau.de/codegen' /]	[** source name of annotation, which will be evaluated in MDE4CPP project /]
+[query public keyBody(any : OclAny) : String = 'body'/]	[**	indicates a source code specification for an operation/]
+[query public keyGetterBody(any : OclAny) : String = 'getterbody'/]	[**	indicates a source code specification for a getter function /]
+[query public keySetterBody(any : OclAny) : String = 'setterbody'/]	[**	indicates a source code specification for a setter function/]
+[query public keyGetterName(any : OclAny) : String = 'includes'/]	[**	indicates the name of getter function /]
+[query public keySetterName(any : OclAny) : String = 'includes'/]	[**	indicates the name of setter function /]
+[query public keyIncludes(any : OclAny) : String = 'includes'/]	[**	indicates a header include specification /]
+[query public keyAggregationKind(any : OclAny) : String = 'AggregationKind'/]	[** indicates a AggregationKind specifiation, values: 'shared' -> indicates a back reference, otherwise -> no action/]
+[query public keyNoBackReference(any : OclAny) : String = 'no_back_reference'/] [** indicates that no back reference for a reference should exists/]
+[query public keyWeakptr(any : OclAny) : String = 'weakptr'/] [** indicates that an operation with upper=1 should return an weak pointer/]
+
+[** indicates, that an operation is only on implementation layer existing (not in header file), 
+ * 	values: 'true' -> operation exists only on implementation layer, otherwise -> operation exists also in header file
+*/]
+[query public keyImplOnly(any : OclAny) : String = 'implOnly'/]
+
+[** indicates, that an operation or a parameter should not be generated, 
+ * 	values: 'true' -> not generated, otherwise -> generated
+*/]
+[query public keyDoNotGenerate(any : OclAny) : String = 'doNotGenerate'/]
+
+[** indicates, that an attribute has only a setter function on implementation layer (not in header file), 
+ * 	values: 'true' -> setter function for an attribute exists only on implementation layer, otherwise -> operation exists also in header file
+*/]
+[query public keyImplSetterOnly(any : OclAny) : String = 'implSetterOnly'/]
+
+[query public sourceNameUnion(any : OclAny) : String = 'union'/]	[** source name for annotation, which indicates a union attribute /]
+[query public sourceNameSubset(any : OclAny) : String = 'subsets'/]	[** source name for annotation, which indicates a subsets attribute /]
+[query public sourceNameIgnore(any : OclAny) : String = 'ignore'/]	[** source name for annotation, which indicates to ignore the element /]
+[query public sourceNameExtendedMetaData(any : OclAny) : String = 'http:///org/eclipse/emf/ecore/util/ExtendedMetaData'/]	[** source name for annotation, which indicates that extended meta data is existing /]
+[query public keyKind(any : OclAny) : String = 'kind'/] [** indicates the kind of extended meta data/]
+[query public sourceNameGenModel(any : OclAny) : String = 'http://www.eclipse.org/emf/2002/GenModel' /]	[** source name for annotation, which indicates GenModel information  /]
+[query public keyDocumentation(any : OclAny) : String = 'documentation' /]	[** indicates a documentation of an element /]
+
+
+[** 
+ * keywords for source name and keys of prepareApplication annoation
+*/]
+[query public sourceNamePrepareApplication(any : OclAny) : String = 'prepareApplication' /]	[** special source for generating class with main function /]
+[query public keyMainIncludes(any : OclAny) : String = 'sourceCodeIncludes'/]	[**	specifiy header to be included for main function /] 
+[query public keyMainSourceCode(any : OclAny) : String = 'sourceCodeMain'/]	[**	specifiy source code of main function /] 

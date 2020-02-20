@@ -19,7 +19,8 @@
 #include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
-
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/Union.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -30,11 +31,16 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "ecore/EcoreFactory.hpp"
 #include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "ecore/EcorePackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "ecore/EAnnotation.hpp"
 
 #include "ecore/EModelElement.hpp"
+
+#include "ecore/EObject.hpp"
 
 #include "ecore/EcorePackage.hpp"
 #include "ecore/EcoreFactory.hpp"
@@ -70,6 +76,16 @@ ENamedElementImpl::~ENamedElementImpl()
 }
 
 
+//Additional constructor for the containments back reference
+			ENamedElementImpl::ENamedElementImpl(std::weak_ptr<ecore::EObject > par_eContainer)
+			:ENamedElementImpl()
+			{
+			    m_eContainer = par_eContainer;
+			}
+
+
+
+
 
 
 ENamedElementImpl::ENamedElementImpl(const ENamedElementImpl & obj):ENamedElementImpl()
@@ -78,10 +94,13 @@ ENamedElementImpl::ENamedElementImpl(const ENamedElementImpl & obj):ENamedElemen
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ENamedElement "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	m_metaElementID = obj.getMetaElementID();
 	m_name = obj.getName();
 
 	//copy references with no containment (soft copy)
 	
+	m_eContainer  = obj.getEContainer();
+
 
 	//Clone references with containment (deep copy)
 
@@ -105,7 +124,7 @@ std::shared_ptr<ecore::EObject>  ENamedElementImpl::copy() const
 
 std::shared_ptr<EClass> ENamedElementImpl::eStaticClass() const
 {
-	return EcorePackageImpl::eInstance()->getENamedElement_EClass();
+	return EcorePackageImpl::eInstance()->getENamedElement_Class();
 }
 
 //*********************************
@@ -132,6 +151,10 @@ std::string ENamedElementImpl::getName() const
 //*********************************
 // Union Getter
 //*********************************
+std::shared_ptr<Union<ecore::EObject>> ENamedElementImpl::getEContens() const
+{
+	return m_eContens;
+}
 
 
 std::shared_ptr<ENamedElement> ENamedElementImpl::getThisENamedElementPtr() const
@@ -145,6 +168,10 @@ void ENamedElementImpl::setThisENamedElementPtr(std::weak_ptr<ENamedElement> thi
 }
 std::shared_ptr<ecore::EObject> ENamedElementImpl::eContainer() const
 {
+	if(auto wp = m_eContainer.lock())
+	{
+		return wp;
+	}
 	return nullptr;
 }
 
@@ -155,8 +182,8 @@ Any ENamedElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case EcorePackage::ENAMEDELEMENT_EATTRIBUTE_NAME:
-			return eAny(getName()); //91
+		case EcorePackage::ENAMEDELEMENT_ATTRIBUTE_NAME:
+			return eAny(getName()); //384
 	}
 	return EModelElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -164,8 +191,8 @@ bool ENamedElementImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case EcorePackage::ENAMEDELEMENT_EATTRIBUTE_NAME:
-			return getName() != ""; //91
+		case EcorePackage::ENAMEDELEMENT_ATTRIBUTE_NAME:
+			return getName() != ""; //384
 	}
 	return EModelElementImpl::internalEIsSet(featureID);
 }
@@ -173,11 +200,11 @@ bool ENamedElementImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case EcorePackage::ENAMEDELEMENT_EATTRIBUTE_NAME:
+		case EcorePackage::ENAMEDELEMENT_ATTRIBUTE_NAME:
 		{
 			// BOOST CAST
 			std::string _name = newValue->get<std::string>();
-			setName(_name); //91
+			setName(_name); //384
 			return true;
 		}
 	}
@@ -250,7 +277,10 @@ void ENamedElementImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandl
 
 	EModelElementImpl::saveContent(saveHandler);
 	
+	EObjectImpl::saveContent(saveHandler);
+	
 	ecore::EObjectImpl::saveContent(saveHandler);
+	
 	
 }
 
@@ -263,7 +293,7 @@ void ENamedElementImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getENamedElement_EAttribute_name()) )
+		if ( this->eIsSet(package->getENamedElement_Attribute_name()) )
 		{
 			saveHandler->addAttribute("name", this->getName());
 		}

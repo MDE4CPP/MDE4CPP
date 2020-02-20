@@ -1,5 +1,6 @@
 description 'MDE4CPP root project'
 
+
 task buildAll() {
 	group 'MDE4CPP'
 	description 'build generators and all models'
@@ -7,6 +8,7 @@ task buildAll() {
 	dependsOn 'generator:createAllGenerators'
 	dependsOn 'src:buildEcoreModels'
 	dependsOn 'src:buildReflectionModels'
+	dependsOn 'src:buildUMLProfiles'
 	dependsOn 'src:common:pluginFramework:compilePluginFramework'
 	dependsOn 'src:common:persistence:compilePersistence'
 	dependsOn 'src:deliverBasicInterfaces'
@@ -18,6 +20,7 @@ task compileAll() {
 
 	dependsOn 'src:compileEcoreModels'
 	dependsOn 'src:compileReflectionModels'
+	dependsOn 'src:compileUMLProfiles'
 	dependsOn 'src:common:pluginFramework:compilePluginFramework'
 	dependsOn 'src:common:persistence:compilePersistence'
 	dependsOn 'src:deliverBasicInterfaces'
@@ -29,6 +32,7 @@ task generateAll() {
 
 	dependsOn 'src:generateEcoreModels'
 	dependsOn 'src:generateReflectionModels'
+	dependsOn 'src:generateUMLProfiles'
 }
 
 task installationInstruction() {
@@ -37,38 +41,243 @@ task installationInstruction() {
 	description	'installation instruction'
 
 	def instructionMessage = '' +
-		'##############################################################################\n' +
-		'#                    Installation instruction for MDE4CPP                    #\n' +
-		'##############################################################################\n' +
-		'\n' +
-		'Welcome to MDE4CPP framework!\n' +
-		'To start the work with MDE4CPP, you have to configure the environment settings.\n' +
-		'A pattern is prepared for it:\n' +
-		'- for Windows systems: setenv.bat.default\n' +
-		'- for Unix systems: setenv.default.\n' +
-		'Copy the file and remove the extension \'default\' first.\n' +
-		'Open this file and configure the variables afterwards.\n' +
-		'Run the file in a console. Note, that the environment is set inside the console\n' +
-		'and has to be redone at each season start\n' +
-		'More information see https://github.com/MDE4CPP/MDE4CPP\n' +
-		'\n'
+	'##############################################################################\n' +
+	'#                    Installation instruction for MDE4CPP                    #\n' +
+	'##############################################################################\n' +
+	'\n' +
+	'Welcome to MDE4CPP framework!\n' +
+	'To start the work with MDE4CPP, you have to configure the environment settings.\n' +
+	'A pattern is prepared for it:\n' +
+	'- for Windows systems: setenv.bat.default\n' +
+	'- for Unix systems: setenv.default.\n' +
+	'Copy the file and remove the extension \'default\' first.\n' +
+	'Open this file and configure the variables afterwards.\n' +
+	'Run the file in a console. Note, that the environment is set inside the console\n' +
+	'and has to be redone at each season start\n' +
+	'More information see https://github.com/MDE4CPP/MDE4CPP\n' +
+	'\n'
 
-	/*def files = file("$projectDir").listFiles(new FileFilter() {
-		public boolean accept(File pathname) {
-			def extension = ".sh"
-			if (System.properties['os.name'].toLowerCase().contains('windows')) {
-				extension = ".bat"
-			}
-
-			return pathname.getName().endsWith(extension);
-		}
-	})*/
-
-	/*if (files.length == 0) {
-		println instructionMessage
-	} else {*/
-		doFirst {
-			println instructionMessage
-		}
-	//}
+	/*def files = file('$projectDir').listFiles(new FileFilter() {
+	public boolean accept(File pathname) {
+	def extension = '.sh'
+	if (System.properties['os.name'].toLowerCase().contains('windows')) {
+	extension = '.bat'
 }
+
+return pathname.getName().endsWith(extension);
+}
+})*/
+
+/*if (files.length == 0) {
+println instructionMessage
+} else {*/
+doFirst {
+	println instructionMessage
+}
+//}
+}
+
+task setEnvironment(type:Exec){
+	workingDir System.getenv('MDE4CPP_HOME')
+	if (System.getProperty('os.name').toLowerCase(Locale.ROOT).contains('windows')) {
+		//on windows:
+		commandLine 'cmd', '/c', 'setenv.bat'
+		} else {
+			//on linux
+			commandLine '. ./setenv'
+		}
+		doLast {
+			println 'Environment variable have been set.'
+		}
+	}
+
+	task startEclipseModeling(type:Exec){
+		group 'Utilities'
+		description 'sets and checks the environment variables and starts the Eclipse instance (EMF) specified in the setenv file'
+
+		dependsOn 'checkEnvironment'
+		workingDir System.getenv('MDE4CPP_ECLIPSE_HOME') //No need to check it here, if it does not exist checkEnvironment will fail with an exception
+
+		if (System.getProperty('os.name').toLowerCase(Locale.ROOT).contains('windows')) {
+			//on windows:
+			commandLine 'cmd', '/c', 'start eclipse.exe'
+			} else {
+				//on linux
+				commandLine './eclipse'
+			}
+		}
+
+		task startCPPIDE(type:Exec){
+			group 'Utilities'
+			description 'sets and checks the environment variables and starts the C++ IDE specified in the setenv file'
+
+			dependsOn 'checkEnvironment'
+
+			doFirst{
+				if(System.getenv('CPP_IDE_EXECUTABLE') == null)
+				{
+					throw new GradleException("The required variable CPP_IDE_EXECUTABLE has not been set in your setEnv file.")
+				}
+
+				if (System.getProperty('os.name').toLowerCase(Locale.ROOT).contains('windows')) 
+				{
+					//on windows:
+					commandLine 'cmd', '/c', ('start "" "' + System.getenv('CPP_IDE_EXECUTABLE') + '"')
+				} 
+				else 
+				{
+					//on linux
+					commandLine 'bash ' , System.getenv('CPP_IDE_EXECUTABLE')
+				}
+			}
+		}
+
+
+			task checkEnvironment(){
+				dependsOn 'setEnvironment'
+				group 'Utilities'
+				description 'Check that all required variables defined in the setenv file are set and can be found'
+
+				ext.checkPath = { path ->
+					if(path == null || ! new File(path).exists()){
+						return false;
+					}
+					return true;
+				}
+
+				ext.checkVariableExists = { variable_name, should_fail ->
+					println ''
+					def my_var = System.getenv(variable_name);
+					if(my_var == null)
+					{
+						if(should_fail){
+							throw new GradleException(variable_name + ' variable has not been set')
+						}
+						else
+						{
+							println printColor('Warning:', 'yellow') +  ' variable not set: ' + variable_name;
+							return false;
+						}
+					}
+					print variable_name + ': ' + my_var
+					return true;
+				}
+
+				ext.printColor = { text, color ->
+					def fg;
+					def finalString;
+					def bg = 49;
+					switch(color) {
+						case "red":
+						fg = 31;
+						break
+						case "green":
+						fg = 32;
+						break
+
+						case "yellow":
+						fg = 33;
+						break
+
+						default:
+						throw new GradleException('color "'+color+'" not defined')
+						break
+					}
+					def style = "${(char)27}[$fg;$bg"+"m"
+					finalString = style + text
+					//Restore the original color:
+					finalString += "${(char)27}[39;49m"
+					return finalString;
+				}
+
+				ext.checkAndPrintPath = { path ->
+					println ''
+					path = path.replace('\\', '/')
+					if(! checkPath(path)){
+						println path + printColor(' <- Warning! Path element not found!', 'yellow');
+						return
+					}
+					println path + printColor(' (exists)', 'green');
+				}
+
+				ext.checkCompilerIncludes = {
+					println '\n\n---------------------------'
+					println 'YOUR COMPILER INCLUDE PATHS'
+					println '---------------------------'
+					println 'you can ignore these if you are not using Eclipse as your C++ IDE'
+
+					checkVariableExists('COMPILER_DELIVERY_NAME', false);
+					checkVariableExists('COMPILER_VERSION', false);
+
+					def home = System.getenv('COMPILER_HOME');
+					def delivery = System.getenv('COMPILER_DELIVERY_NAME');
+					def version = System.getenv('COMPILER_VERSION');
+
+					println ''
+					checkAndPrintPath(home + "/include")
+					checkAndPrintPath(home + "/lib/gcc/" + delivery + "/" + version + "/include/c++")
+					checkAndPrintPath(home + "/lib/gcc/" + delivery + "/" + version + "/include/c++/backward")
+					checkAndPrintPath(home + "/lib/gcc/" + delivery + "/" + version + "/include/c++/" + delivery)
+					checkAndPrintPath(home + "/lib/gcc/" + delivery + "/" + version + "/include-fixed")
+					checkAndPrintPath(home + "/lib/gcc/" + delivery + "/" + version + "/include")
+					checkAndPrintPath(System.getenv('MDE4CPP_HOME') + "/application/include")
+				}
+
+				ext.checkMyVariablePath = { variable_name, should_fail ->
+					checkVariableExists(variable_name, should_fail)
+					if(! checkPath(System.getenv(variable_name))){
+						if(should_fail){
+							throw new GradleException('Path for variable ' + variable_name + ' cannot be found.' + System.getenv(variable_name))
+						}
+						return;
+					}
+					println printColor(' (exists)', 'green');
+				}
+
+				doFirst{
+					println '------------------'
+					println 'YOUR PATH VARIABLE'
+					println '------------------'
+
+					println 'PATH: ' + System.getenv('PATH')
+					def path_elements = System.getenv('PATH').split(';');
+
+					println '\nAnalyzing all path elements...'
+					path_elements.each{el ->
+						if(! checkPath(el))
+						{
+							println 'PATH contains an invalid element: ' + el;
+						}
+						else{
+							println '\t' + el + printColor(' (exists)', 'green');
+						}
+					}
+
+					println '\n------------------------------'
+					println 'YOUR ENV VARIABLES WITH A PATH'
+					println '------------------------------'
+
+					checkMyVariablePath('MDE4CPP_HOME', true)
+					checkMyVariablePath('MDE4CPP_ECLIPSE_HOME', true)
+
+					checkMyVariablePath('COMPILER_HOME', false)
+					checkMyVariablePath('CMAKE_HOME', false)
+					checkMyVariablePath('JAVA_HOME', false)
+					checkMyVariablePath('CPP_IDE_EXECUTABLE', false)
+
+					println '\n---------------------------------------'
+					println 'YOUR ENV VARIABLES WITH A CONFIGURATION'
+					println '---------------------------------------'
+
+					checkVariableExists('GRADLE_OPTS', false);
+					checkVariableExists('ORG_GRADLE_PROJECT_WORKER', false);
+					checkVariableExists('ORG_GRADLE_PROJECT_RELEASE', false);
+					checkVariableExists('ORG_GRADLE_PROJECT_DEBUG', false);
+					checkVariableExists('ORG_GRADLE_PROJECT_DEBUG_MESSAGE_FUML', false);
+					checkVariableExists('ORG_GRADLE_PROJECT_ACTIVITY_DEBUG_ON', false);
+					checkVariableExists('COMPILER_DELIVERY_NAME', false);
+					checkVariableExists('COMPILER_VERSION', false);
+
+					checkCompilerIncludes();
+				}
+			}

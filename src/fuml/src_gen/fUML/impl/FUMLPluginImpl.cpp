@@ -17,9 +17,14 @@ FUMLPluginImpl::~FUMLPluginImpl()
 }
 
 
-std::shared_ptr<ecore::EObject> FUMLPluginImpl::create(const std::string& name)
+std::shared_ptr<ecore::EObject> FUMLPluginImpl::create(const std::string& name) const
 {
 	return FUMLFactory::eInstance()->create(name);
+}
+
+std::shared_ptr<ecore::EObject> FUMLPluginImpl::create(const std::string& name, std::shared_ptr<ecore::EObject> container, const unsigned int referenceID) const
+{
+	return FUMLFactory::eInstance()->create(name, container, referenceID);
 }
 
 std::shared_ptr<ecore::EFactory> FUMLPluginImpl::getEFactory()
@@ -44,10 +49,10 @@ std::string FUMLPluginImpl::eNAME()
 
 std::string FUMLPluginImpl::eNS_URI()
 {
-	return "http://www.eclipse.org/emf/2002/fUML";
+	return "http://www.omg.org/spec/FUML/20180501";
 }
 
 std::string FUMLPluginImpl::eNS_PREFIX()
 {
-	return "fUML";
+	return "fUML_Semantics";
 }

@@ -6,15 +6,7 @@
  */
 
 #include "persistence/base/LoadHandler.hpp"
-
-#ifdef NDEBUG
-#define MSG_DEBUG(a) /**/
-#else
-#define MSG_DEBUG(a) std::cout << "| DEBUG    | " << a << std::endl
-#endif
-#define MSG_WARNING(a) std::cout << "| WARNING  | "<< a << std::endl
-#define MSG_ERROR(a) std::cout << "| ERROR    | " << a << std::endl
-#define MSG_FLF __FILE__ << ":" << __LINE__ << " " << __FUNCTION__ << "() "
+#include "PersistenceDefine.hpp"
 
 #include <iostream>
 #include <sstream> // used for getLevel()
@@ -36,6 +28,8 @@
 #include "pluginFramework/PluginFramework.hpp"
 #include "pluginFramework/EcoreModelPlugin.hpp"
 #include "pluginFramework/UMLModelPlugin.hpp"
+
+#include "abstractDataTypes/SubsetUnion.hpp"
 
 using namespace persistence::base;
 
@@ -120,8 +114,6 @@ void LoadHandler::addToMap(std::shared_ptr<ecore::EObject> object, bool useCurre
 
 			MSG_DEBUG("Add to map: '" << ref << "'  eClass: '" << object->eClass()->getName() << "'");
 		}
-
-
 	}
 }
 /**/
@@ -268,27 +260,36 @@ void LoadHandler::resolveReferences()
 				std::list<std::string> _strs;
 				std::string _tmpStr;
 
-				size_t pos = name.find(" ");
-				size_t initPos = 0;
-				while( pos != std::string::npos )
+				int nameSize=name.size();
+				if(nameSize>0)
 				{
-					_strs.push_back( name.substr( initPos, pos - initPos ) );
-					initPos = pos + 1;
+					size_t pos = name.find(" ");
+					size_t initPos = 0;
 
-					pos = name.find( " ", initPos );
-				}
-
-				while (_strs.size() > 0)
-				{
-					_tmpStr = _strs.front();
-					if (std::string::npos != _tmpStr.find("#//") || !m_isXSIMode)
+					while( pos != std::string::npos )
 					{
-						solve(_tmpStr, references, object, esf);
+						_strs.push_back( name.substr( initPos, pos - initPos ) );
+
+						initPos = pos + 1;
+
+						pos = name.find( " ", initPos );
 					}
-					_strs.pop_front();
+
+					// Add last reference
+					_strs.push_back( name.substr( initPos, nameSize - initPos ) );
+
+					while (_strs.size() > 0)
+					{
+						_tmpStr = _strs.front();
+						if (std::string::npos != _tmpStr.find("#//") || !m_isXSIMode)
+						{
+							solve(_tmpStr, references, object, esf);
+						}
+						_strs.pop_front();
+					}
+					// Call resolveReferences() of corresponding 'object'
+					object->resolveReferences(esf->getFeatureID(), references);
 				}
-				// Call resolveReferences() of corresponding 'object'
-				object->resolveReferences(esf->getFeatureID(), references);
 			}
 		}
 		catch (std::exception& e)
@@ -320,12 +321,28 @@ void LoadHandler::solve(const std::string& name, std::list<std::shared_ptr<ecore
 		}
 		else
 		{
-			if (libraryLoaded)
+			std::string adr= std::to_string ((long long)(&(*object)));
+			std::string adrName="#//";
+			adrName=adrName+ object->eClass()->getName() + "_" +adr;
+
+			std::shared_ptr<ecore::EObject> resolved_object = this->getObjectByRef(adrName);
+			if (resolved_object)
 			{
-				return;
+				references.push_back(resolved_object);
+				// Call resolveReferences() of corresponding 'object'
+				object->resolveReferences(esf->getFeatureID(), references);
+				found = true;
 			}
-			loadTypes(name);
-			libraryLoaded = true;
+			else
+			{
+
+				if (libraryLoaded)
+				{
+					return;
+				}
+				loadTypes(name);
+				libraryLoaded = true;
+			}
 		}
 	}
 }
@@ -366,7 +383,7 @@ void LoadHandler::loadTypes(const std::string& name)
 
 void LoadHandler::loadTypes(std::shared_ptr<ecore::EPackage> package, const std::string& uri)
 {
-	std::shared_ptr<Bag<ecore::EClassifier>> eClassifiers = package->getEClassifiers();
+	std::shared_ptr<Subset<ecore::EClassifier, ecore::EObject>> eClassifiers = package->getEClassifiers();
 	for (std::shared_ptr<ecore::EClassifier> eClassifier : *eClassifiers)
 	{
 		// Filter only EDataType objects and add to handler's internal map

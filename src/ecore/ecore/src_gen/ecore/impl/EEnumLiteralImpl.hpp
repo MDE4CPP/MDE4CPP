@@ -34,6 +34,10 @@ namespace ecore
 			virtual void setThisEEnumLiteralPtr(std::weak_ptr<EEnumLiteral> thisEEnumLiteralPtr);
 
 			//Additional constructors for the containments back reference
+			EEnumLiteralImpl(std::weak_ptr<ecore::EObject > par_eContainer);
+
+
+			//Additional constructors for the containments back reference
 			EEnumLiteralImpl(std::weak_ptr<ecore::EEnum > par_eEnum);
 
 
@@ -89,7 +93,9 @@ namespace ecore
 			//*********************************
 			// Union Getter
 			//*********************************
-			 
+			/*!
+			 */
+			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

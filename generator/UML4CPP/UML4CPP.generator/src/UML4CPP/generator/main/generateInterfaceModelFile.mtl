@@ -1,0 +1,120 @@
+[comment encoding = UTF-8 /]
+[**
+ * Copyright (c) 2017 TU Ilmenau, Systems and Software Engineering Group
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
+ * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+ * and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ ****************************************************************************************************************************************************************
+ * 
+ * module for generation of UML Interface artefacts
+ * 
+ */]
+[module generateInterfaceModelFile('http://www.eclipse.org/uml2/5.0.0/UML')]
+ 
+[import UML4CPP::generator::main::components::generateOperation /]
+[import UML4CPP::generator::main::components::generateProperty /]
+[import UML4CPP::generator::main::components::generateType /]
+[import UML4CPP::generator::main::helpers::generalHelper /]
+[import UML4CPP::generator::main::helpers::nameHelper /]
+
+[**
+ * generate interface model file
+*/]
+[template public generateInterfaceHeaderFile(aInterface : Interface) {aPackage:Package = aInterface.ancestors()->filter(Package)->first();}]
+[file (aPackage.getPackageName().concat('/').concat(aInterface.name).concat('.hpp'), false, 'UTF-8')]
+[startGuard(aInterface)/]
+
+#include <memory>
+#include <string> 
+
+//*********************************
+// generated Includes
+
+[generateAbstractDataTypesForwardDeclaration()/]
+
+//Forward Declaration for used types
+[for (element : Interface| aInterface.ownedAttribute.type->flatten()->filter(Interface)->asOrderedSet()->sortedBy(myQualifiedName())) separator ('\n')]
+[if (not element.getNearestPackage().ignoreNamespace())]namespace [element.namespace.myNamespaceName()/] 
+{
+[/if]
+	class [element.name/];
+[if (not element.getNearestPackage().ignoreNamespace())]}[/if]
+[/for]
+
+[for (element : Class| aInterface.ownedAttribute.type->flatten()->filter(Class)->asOrderedSet()->sortedBy(myQualifiedName())) separator ('\n')]
+[if (not element.getNearestPackage().ignoreNamespace())]namespace [element.namespace.myNamespaceName()/] 
+{
+[/if]
+	class [element.name/];
+[if (not element.getNearestPackage().ignoreNamespace())]}[/if]
+[/for]
+
+[for (element : Type | aInterface.allOwnedElements()->filter(Operation).ownedParameter.type->asOrderedSet()->sortedBy(myQualifiedName())) separator ('\n')]
+[if (not element.getNearestPackage().ignoreNamespace())]namespace [element.namespace.myNamespaceName()/]
+{
+[/if]
+	class [element.name/];
+[if (not element.getNearestPackage().ignoreNamespace())]}[/if]
+[/for]
+
+// base class includes
+[if (aInterface.generalization->isEmpty())]
+#include "uml/Element.hpp"
+[else]
+[for (elements : Classifier| aInterface.generalization.general->asOrderedSet()->sortedBy(myQualifiedName()))]
+#include "[elements.getNearestPackage().getPackageName()/]/[elements.name.toUpperFirst().concat('.hpp')/]"
+[/for]
+[/if]
+
+[if (aInterface.oclIsKindOf(Stereotype))]
+#include "uml/Stereotype.hpp"
+[/if]
+// enum includes
+[for (elements : Enumeration| aInterface.allOwnedElements()->selectByKind(Enumeration)->asOrderedSet()->sortedBy(myQualifiedName())) separator ('\n')]
+#include "[elements.getNearestPackage().getPackageName()/]/[elements.name.concat('.hpp')/]"[/for]
+
+//*********************************
+
+[if (not aInterface.getNearestPackage().ignoreNamespace())]namespace [aPackage.name/] 
+{
+[/if]
+	class [aInterface.name/] [if (aInterface.generalization->isEmpty())] : virtual public uml::Element[else][for (aClassifier : Classifier | aInterface.generalization.general->asOrderedSet()->sortedBy(myQualifiedName())) before (':') separator (',') after ('\n')]
+virtual public [aClassifier.getClassifierName(aInterface, ignoreNamespace(aClassifier))/][/for][/if]
+
+	{
+		protected:
+			[aInterface.name/](){}
+
+		public:
+			//destructor
+			virtual ~[aInterface.name/]() {}
+			
+			//*********************************
+			// Getter Setter
+			//*********************************
+			[aInterface.ownedAttribute.generateAttributeAccessorsDeclaration(false)/]
+			
+			//*********************************
+			// Operations
+			//*********************************
+			[aInterface.ownedOperation.generateOperationDecl(false)/]
+
+		protected:
+			//*********************************
+			// Members
+			//*********************************
+			[aInterface.ownedAttribute.generateAttributeProtectedMember()/]
+	};
+[if (not aInterface.getNearestPackage().ignoreNamespace())]}[/if]
+[endGuard(aInterface)/]
+[/file]
+[/template]
+

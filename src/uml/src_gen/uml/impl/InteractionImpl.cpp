@@ -33,6 +33,23 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Action.hpp"
@@ -58,8 +75,6 @@
 #include "uml/Constraint.hpp"
 
 #include "uml/Dependency.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -297,24 +312,24 @@ InteractionImpl::~InteractionImpl()
 
 
 //Additional constructor for the containments back reference
-			InteractionImpl::InteractionImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id)
-			:InteractionImpl()
-			{
-				switch(reference_id)
-				{	
-				case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
-					m_owningPackage = par_Package;
-					m_namespace = par_Package;
-					 return;
-				case UmlPackage::TYPE_EREFERENCE_PACKAGE:
-					m_package = par_Package;
-					m_namespace = par_Package;
-					 return;
-				default:
-				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
-				}
-			   
-			}
+InteractionImpl::InteractionImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id)
+:InteractionImpl()
+{
+	switch(reference_id)
+	{	
+	case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
+		m_owningPackage = par_Package;
+		m_namespace = par_Package;
+		 return;
+	case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
+		m_package = par_Package;
+		m_namespace = par_Package;
+		 return;
+	default:
+	std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
+	}
+   
+}
 
 
 
@@ -441,14 +456,6 @@ InteractionImpl::InteractionImpl(const InteractionImpl & obj):InteractionImpl()
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_context" << std::endl;
-	#endif
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
 	#endif
 	std::shared_ptr<Bag<uml::ElementImport>> _elementImportList = obj.getElementImport();
 	for(std::shared_ptr<uml::ElementImport> _elementImport : *_elementImportList)
@@ -754,7 +761,7 @@ std::shared_ptr<ecore::EObject>  InteractionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> InteractionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getInteraction_EClass();
+	return UmlPackageImpl::eInstance()->getInteraction_Class();
 }
 
 //*********************************
@@ -914,16 +921,66 @@ Any InteractionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::INTERACTION_EREFERENCE_ACTION:
-			return eAny(getAction()); //21168
-		case UmlPackage::INTERACTION_EREFERENCE_FORMALGATE:
-			return eAny(getFormalGate()); //21169
-		case UmlPackage::INTERACTION_EREFERENCE_FRAGMENT:
-			return eAny(getFragment()); //21167
-		case UmlPackage::INTERACTION_EREFERENCE_LIFELINE:
-			return eAny(getLifeline()); //21166
-		case UmlPackage::INTERACTION_EREFERENCE_MESSAGE:
-			return eAny(getMessage()); //21170
+		case UmlPackage::INTERACTION_ATTRIBUTE_ACTION:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Action>::iterator iter = m_action->begin();
+			Bag<uml::Action>::iterator end = m_action->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //12067
+		}
+		case UmlPackage::INTERACTION_ATTRIBUTE_FORMALGATE:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Gate>::iterator iter = m_formalGate->begin();
+			Bag<uml::Gate>::iterator end = m_formalGate->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //12068
+		}
+		case UmlPackage::INTERACTION_ATTRIBUTE_FRAGMENT:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::InteractionFragment>::iterator iter = m_fragment->begin();
+			Bag<uml::InteractionFragment>::iterator end = m_fragment->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //12066
+		}
+		case UmlPackage::INTERACTION_ATTRIBUTE_LIFELINE:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Lifeline>::iterator iter = m_lifeline->begin();
+			Bag<uml::Lifeline>::iterator end = m_lifeline->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //12065
+		}
+		case UmlPackage::INTERACTION_ATTRIBUTE_MESSAGE:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Message>::iterator iter = m_message->begin();
+			Bag<uml::Message>::iterator end = m_message->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //12069
+		}
 	}
 	Any result;
 	result = BehaviorImpl::eGet(featureID, resolve, coreType);
@@ -938,16 +995,16 @@ bool InteractionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::INTERACTION_EREFERENCE_ACTION:
-			return getAction() != nullptr; //21168
-		case UmlPackage::INTERACTION_EREFERENCE_FORMALGATE:
-			return getFormalGate() != nullptr; //21169
-		case UmlPackage::INTERACTION_EREFERENCE_FRAGMENT:
-			return getFragment() != nullptr; //21167
-		case UmlPackage::INTERACTION_EREFERENCE_LIFELINE:
-			return getLifeline() != nullptr; //21166
-		case UmlPackage::INTERACTION_EREFERENCE_MESSAGE:
-			return getMessage() != nullptr; //21170
+		case UmlPackage::INTERACTION_ATTRIBUTE_ACTION:
+			return getAction() != nullptr; //12067
+		case UmlPackage::INTERACTION_ATTRIBUTE_FORMALGATE:
+			return getFormalGate() != nullptr; //12068
+		case UmlPackage::INTERACTION_ATTRIBUTE_FRAGMENT:
+			return getFragment() != nullptr; //12066
+		case UmlPackage::INTERACTION_ATTRIBUTE_LIFELINE:
+			return getLifeline() != nullptr; //12065
+		case UmlPackage::INTERACTION_ATTRIBUTE_MESSAGE:
+			return getMessage() != nullptr; //12069
 	}
 	bool result = false;
 	result = BehaviorImpl::internalEIsSet(featureID);
@@ -962,6 +1019,186 @@ bool InteractionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
+		case UmlPackage::INTERACTION_ATTRIBUTE_ACTION:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Action>> actionList(new Bag<uml::Action>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				actionList->add(std::dynamic_pointer_cast<uml::Action>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Action>::iterator iterAction = m_action->begin();
+			Bag<uml::Action>::iterator endAction = m_action->end();
+			while (iterAction != endAction)
+			{
+				if (actionList->find(*iterAction) == -1)
+				{
+					m_action->erase(*iterAction);
+				}
+				iterAction++;
+			}
+
+			iterAction = actionList->begin();
+			endAction = actionList->end();
+			while (iterAction != endAction)
+			{
+				if (m_action->find(*iterAction) == -1)
+				{
+					m_action->add(*iterAction);
+				}
+				iterAction++;			
+			}
+			return true;
+		}
+		case UmlPackage::INTERACTION_ATTRIBUTE_FORMALGATE:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Gate>> formalGateList(new Bag<uml::Gate>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				formalGateList->add(std::dynamic_pointer_cast<uml::Gate>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Gate>::iterator iterFormalGate = m_formalGate->begin();
+			Bag<uml::Gate>::iterator endFormalGate = m_formalGate->end();
+			while (iterFormalGate != endFormalGate)
+			{
+				if (formalGateList->find(*iterFormalGate) == -1)
+				{
+					m_formalGate->erase(*iterFormalGate);
+				}
+				iterFormalGate++;
+			}
+
+			iterFormalGate = formalGateList->begin();
+			endFormalGate = formalGateList->end();
+			while (iterFormalGate != endFormalGate)
+			{
+				if (m_formalGate->find(*iterFormalGate) == -1)
+				{
+					m_formalGate->add(*iterFormalGate);
+				}
+				iterFormalGate++;			
+			}
+			return true;
+		}
+		case UmlPackage::INTERACTION_ATTRIBUTE_FRAGMENT:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::InteractionFragment>> fragmentList(new Bag<uml::InteractionFragment>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				fragmentList->add(std::dynamic_pointer_cast<uml::InteractionFragment>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::InteractionFragment>::iterator iterFragment = m_fragment->begin();
+			Bag<uml::InteractionFragment>::iterator endFragment = m_fragment->end();
+			while (iterFragment != endFragment)
+			{
+				if (fragmentList->find(*iterFragment) == -1)
+				{
+					m_fragment->erase(*iterFragment);
+				}
+				iterFragment++;
+			}
+
+			iterFragment = fragmentList->begin();
+			endFragment = fragmentList->end();
+			while (iterFragment != endFragment)
+			{
+				if (m_fragment->find(*iterFragment) == -1)
+				{
+					m_fragment->add(*iterFragment);
+				}
+				iterFragment++;			
+			}
+			return true;
+		}
+		case UmlPackage::INTERACTION_ATTRIBUTE_LIFELINE:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Lifeline>> lifelineList(new Bag<uml::Lifeline>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				lifelineList->add(std::dynamic_pointer_cast<uml::Lifeline>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Lifeline>::iterator iterLifeline = m_lifeline->begin();
+			Bag<uml::Lifeline>::iterator endLifeline = m_lifeline->end();
+			while (iterLifeline != endLifeline)
+			{
+				if (lifelineList->find(*iterLifeline) == -1)
+				{
+					m_lifeline->erase(*iterLifeline);
+				}
+				iterLifeline++;
+			}
+
+			iterLifeline = lifelineList->begin();
+			endLifeline = lifelineList->end();
+			while (iterLifeline != endLifeline)
+			{
+				if (m_lifeline->find(*iterLifeline) == -1)
+				{
+					m_lifeline->add(*iterLifeline);
+				}
+				iterLifeline++;			
+			}
+			return true;
+		}
+		case UmlPackage::INTERACTION_ATTRIBUTE_MESSAGE:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Message>> messageList(new Bag<uml::Message>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				messageList->add(std::dynamic_pointer_cast<uml::Message>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Message>::iterator iterMessage = m_message->begin();
+			Bag<uml::Message>::iterator endMessage = m_message->end();
+			while (iterMessage != endMessage)
+			{
+				if (messageList->find(*iterMessage) == -1)
+				{
+					m_message->erase(*iterMessage);
+				}
+				iterMessage++;
+			}
+
+			iterMessage = messageList->begin();
+			endMessage = messageList->end();
+			while (iterMessage != endMessage)
+			{
+				if (m_message->find(*iterMessage) == -1)
+				{
+					m_message->add(*iterMessage);
+				}
+				iterMessage++;			
+			}
+			return true;
+		}
 	}
 
 	bool result = false;
@@ -1049,7 +1286,7 @@ void InteractionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence
 				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			std::shared_ptr<ecore::EObject> fragment = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_ENCLOSINGINTERACTION);
+			std::shared_ptr<ecore::EObject> fragment = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_ENCLOSINGINTERACTION);
 			if (fragment != nullptr)
 			{
 				loadHandler->handleChild(fragment);
@@ -1064,7 +1301,7 @@ void InteractionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence
 			{
 				typeName = "Lifeline";
 			}
-			std::shared_ptr<ecore::EObject> lifeline = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::LIFELINE_EREFERENCE_INTERACTION);
+			std::shared_ptr<ecore::EObject> lifeline = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::LIFELINE_ATTRIBUTE_INTERACTION);
 			if (lifeline != nullptr)
 			{
 				loadHandler->handleChild(lifeline);
@@ -1079,7 +1316,7 @@ void InteractionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence
 			{
 				typeName = "Message";
 			}
-			std::shared_ptr<ecore::EObject> message = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::MESSAGE_EREFERENCE_INTERACTION);
+			std::shared_ptr<ecore::EObject> message = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::MESSAGE_ATTRIBUTE_INTERACTION);
 			if (message != nullptr)
 			{
 				loadHandler->handleChild(message);
@@ -1134,7 +1371,6 @@ void InteractionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
@@ -1159,31 +1395,31 @@ void InteractionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 		// Save 'action'
 		for (std::shared_ptr<uml::Action> action : *this->getAction()) 
 		{
-			saveHandler->addReference(action, "action", action->eClass() != package->getAction_EClass());
+			saveHandler->addReference(action, "action", action->eClass() != package->getAction_Class());
 		}
 
 		// Save 'formalGate'
 		for (std::shared_ptr<uml::Gate> formalGate : *this->getFormalGate()) 
 		{
-			saveHandler->addReference(formalGate, "formalGate", formalGate->eClass() != package->getGate_EClass());
+			saveHandler->addReference(formalGate, "formalGate", formalGate->eClass() != package->getGate_Class());
 		}
 
 		// Save 'fragment'
 		for (std::shared_ptr<uml::InteractionFragment> fragment : *this->getFragment()) 
 		{
-			saveHandler->addReference(fragment, "fragment", fragment->eClass() != package->getInteractionFragment_EClass());
+			saveHandler->addReference(fragment, "fragment", fragment->eClass() != package->getInteractionFragment_Class());
 		}
 
 		// Save 'lifeline'
 		for (std::shared_ptr<uml::Lifeline> lifeline : *this->getLifeline()) 
 		{
-			saveHandler->addReference(lifeline, "lifeline", lifeline->eClass() != package->getLifeline_EClass());
+			saveHandler->addReference(lifeline, "lifeline", lifeline->eClass() != package->getLifeline_Class());
 		}
 
 		// Save 'message'
 		for (std::shared_ptr<uml::Message> message : *this->getMessage()) 
 		{
-			saveHandler->addReference(message, "message", message->eClass() != package->getMessage_EClass());
+			saveHandler->addReference(message, "message", message->eClass() != package->getMessage_Class());
 		}
 	
 

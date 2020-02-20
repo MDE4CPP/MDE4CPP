@@ -32,6 +32,13 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
@@ -39,8 +46,6 @@
 #include "uml/Dependency.hpp"
 
 #include "uml/DirectedRelationship.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -162,14 +167,6 @@ IncludeImpl::IncludeImpl(const IncludeImpl & obj):IncludeImpl()
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_addition" << std::endl;
 	#endif
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	if(obj.getNameExpression()!=nullptr)
 	{
 		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
@@ -197,7 +194,7 @@ std::shared_ptr<ecore::EObject>  IncludeImpl::copy() const
 
 std::shared_ptr<ecore::EClass> IncludeImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getInclude_EClass();
+	return UmlPackageImpl::eInstance()->getInclude_Class();
 }
 
 //*********************************
@@ -296,10 +293,10 @@ Any IncludeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::INCLUDE_EREFERENCE_ADDITION:
-			return eAny(getAddition()); //10113
-		case UmlPackage::INCLUDE_EREFERENCE_INCLUDINGCASE:
-			return eAny(getIncludingCase()); //10114
+		case UmlPackage::INCLUDE_ATTRIBUTE_ADDITION:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getAddition())); //11312
+		case UmlPackage::INCLUDE_ATTRIBUTE_INCLUDINGCASE:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getIncludingCase().lock())); //11313
 	}
 	Any result;
 	result = DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
@@ -314,10 +311,10 @@ bool IncludeImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::INCLUDE_EREFERENCE_ADDITION:
-			return getAddition() != nullptr; //10113
-		case UmlPackage::INCLUDE_EREFERENCE_INCLUDINGCASE:
-			return getIncludingCase().lock() != nullptr; //10114
+		case UmlPackage::INCLUDE_ATTRIBUTE_ADDITION:
+			return getAddition() != nullptr; //11312
+		case UmlPackage::INCLUDE_ATTRIBUTE_INCLUDINGCASE:
+			return getIncludingCase().lock() != nullptr; //11313
 	}
 	bool result = false;
 	result = DirectedRelationshipImpl::internalEIsSet(featureID);
@@ -332,18 +329,20 @@ bool IncludeImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::INCLUDE_EREFERENCE_ADDITION:
+		case UmlPackage::INCLUDE_ATTRIBUTE_ADDITION:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::UseCase> _addition = newValue->get<std::shared_ptr<uml::UseCase>>();
-			setAddition(_addition); //10113
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::UseCase> _addition = std::dynamic_pointer_cast<uml::UseCase>(_temp);
+			setAddition(_addition); //11312
 			return true;
 		}
-		case UmlPackage::INCLUDE_EREFERENCE_INCLUDINGCASE:
+		case UmlPackage::INCLUDE_ATTRIBUTE_INCLUDINGCASE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::UseCase> _includingCase = newValue->get<std::shared_ptr<uml::UseCase>>();
-			setIncludingCase(_includingCase); //10114
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::UseCase> _includingCase = std::dynamic_pointer_cast<uml::UseCase>(_temp);
+			setIncludingCase(_includingCase); //11313
 			return true;
 		}
 	}
@@ -416,7 +415,7 @@ void IncludeImpl::resolveReferences(const int featureID, std::list<std::shared_p
 {
 	switch(featureID)
 	{
-		case UmlPackage::INCLUDE_EREFERENCE_ADDITION:
+		case UmlPackage::INCLUDE_ATTRIBUTE_ADDITION:
 		{
 			if (references.size() == 1)
 			{
@@ -428,7 +427,7 @@ void IncludeImpl::resolveReferences(const int featureID, std::list<std::shared_p
 			return;
 		}
 
-		case UmlPackage::INCLUDE_EREFERENCE_INCLUDINGCASE:
+		case UmlPackage::INCLUDE_ATTRIBUTE_INCLUDINGCASE:
 		{
 			if (references.size() == 1)
 			{
@@ -455,7 +454,6 @@ void IncludeImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> sa
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

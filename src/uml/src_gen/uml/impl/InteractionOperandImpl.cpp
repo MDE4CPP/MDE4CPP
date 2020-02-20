@@ -33,6 +33,15 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
@@ -40,8 +49,6 @@
 #include "uml/Constraint.hpp"
 
 #include "uml/Dependency.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -201,14 +208,6 @@ InteractionOperandImpl::InteractionOperandImpl(const InteractionOperandImpl & ob
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::ElementImport>> _elementImportList = obj.getElementImport();
 	for(std::shared_ptr<uml::ElementImport> _elementImport : *_elementImportList)
 	{
@@ -300,7 +299,7 @@ std::shared_ptr<ecore::EObject>  InteractionOperandImpl::copy() const
 
 std::shared_ptr<ecore::EClass> InteractionOperandImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getInteractionOperand_EClass();
+	return UmlPackageImpl::eInstance()->getInteractionOperand_Class();
 }
 
 //*********************************
@@ -408,10 +407,20 @@ Any InteractionOperandImpl::eGet(int featureID, bool resolve, bool coreType) con
 {
 	switch(featureID)
 	{
-		case UmlPackage::INTERACTIONOPERAND_EREFERENCE_FRAGMENT:
-			return eAny(getFragment()); //21820
-		case UmlPackage::INTERACTIONOPERAND_EREFERENCE_GUARD:
-			return eAny(getGuard()); //21821
+		case UmlPackage::INTERACTIONOPERAND_ATTRIBUTE_FRAGMENT:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::InteractionFragment>::iterator iter = m_fragment->begin();
+			Bag<uml::InteractionFragment>::iterator end = m_fragment->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //12319
+		}
+		case UmlPackage::INTERACTIONOPERAND_ATTRIBUTE_GUARD:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getGuard())); //12320
 	}
 	Any result;
 	result = InteractionFragmentImpl::eGet(featureID, resolve, coreType);
@@ -426,10 +435,10 @@ bool InteractionOperandImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::INTERACTIONOPERAND_EREFERENCE_FRAGMENT:
-			return getFragment() != nullptr; //21820
-		case UmlPackage::INTERACTIONOPERAND_EREFERENCE_GUARD:
-			return getGuard() != nullptr; //21821
+		case UmlPackage::INTERACTIONOPERAND_ATTRIBUTE_FRAGMENT:
+			return getFragment() != nullptr; //12319
+		case UmlPackage::INTERACTIONOPERAND_ATTRIBUTE_GUARD:
+			return getGuard() != nullptr; //12320
 	}
 	bool result = false;
 	result = InteractionFragmentImpl::internalEIsSet(featureID);
@@ -444,11 +453,48 @@ bool InteractionOperandImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::INTERACTIONOPERAND_EREFERENCE_GUARD:
+		case UmlPackage::INTERACTIONOPERAND_ATTRIBUTE_FRAGMENT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::InteractionConstraint> _guard = newValue->get<std::shared_ptr<uml::InteractionConstraint>>();
-			setGuard(_guard); //21821
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::InteractionFragment>> fragmentList(new Bag<uml::InteractionFragment>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				fragmentList->add(std::dynamic_pointer_cast<uml::InteractionFragment>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::InteractionFragment>::iterator iterFragment = m_fragment->begin();
+			Bag<uml::InteractionFragment>::iterator endFragment = m_fragment->end();
+			while (iterFragment != endFragment)
+			{
+				if (fragmentList->find(*iterFragment) == -1)
+				{
+					m_fragment->erase(*iterFragment);
+				}
+				iterFragment++;
+			}
+
+			iterFragment = fragmentList->begin();
+			endFragment = fragmentList->end();
+			while (iterFragment != endFragment)
+			{
+				if (m_fragment->find(*iterFragment) == -1)
+				{
+					m_fragment->add(*iterFragment);
+				}
+				iterFragment++;			
+			}
+			return true;
+		}
+		case UmlPackage::INTERACTIONOPERAND_ATTRIBUTE_GUARD:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::InteractionConstraint> _guard = std::dynamic_pointer_cast<uml::InteractionConstraint>(_temp);
+			setGuard(_guard); //12320
 			return true;
 		}
 	}
@@ -503,7 +549,7 @@ void InteractionOperandImpl::loadNode(std::string nodeName, std::shared_ptr<pers
 				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			std::shared_ptr<ecore::EObject> fragment = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_ENCLOSINGOPERAND);
+			std::shared_ptr<ecore::EObject> fragment = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_ENCLOSINGOPERAND);
 			if (fragment != nullptr)
 			{
 				loadHandler->handleChild(fragment);
@@ -557,7 +603,6 @@ void InteractionOperandImpl::save(std::shared_ptr<persistence::interfaces::XSave
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
@@ -576,14 +621,14 @@ void InteractionOperandImpl::saveContent(std::shared_ptr<persistence::interfaces
 		// Save 'fragment'
 		for (std::shared_ptr<uml::InteractionFragment> fragment : *this->getFragment()) 
 		{
-			saveHandler->addReference(fragment, "fragment", fragment->eClass() != package->getInteractionFragment_EClass());
+			saveHandler->addReference(fragment, "fragment", fragment->eClass() != package->getInteractionFragment_Class());
 		}
 
 		// Save 'guard'
 		std::shared_ptr<uml::InteractionConstraint > guard = this->getGuard();
 		if (guard != nullptr)
 		{
-			saveHandler->addReference(guard, "guard", guard->eClass() != package->getInteractionConstraint_EClass());
+			saveHandler->addReference(guard, "guard", guard->eClass() != package->getInteractionConstraint_Class());
 		}
 	
 

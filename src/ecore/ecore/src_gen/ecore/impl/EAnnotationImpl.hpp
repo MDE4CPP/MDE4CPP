@@ -34,6 +34,10 @@ namespace ecore
 			virtual void setThisEAnnotationPtr(std::weak_ptr<EAnnotation> thisEAnnotationPtr);
 
 			//Additional constructors for the containments back reference
+			EAnnotationImpl(std::weak_ptr<ecore::EObject > par_eContainer);
+
+
+			//Additional constructors for the containments back reference
 			EAnnotationImpl(std::weak_ptr<ecore::EModelElement > par_eModelElement);
 
 
@@ -66,7 +70,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<Bag<ecore::EObject>> getContents() const ;
+			virtual std::shared_ptr<Subset<ecore::EObject, ecore::EObject>> getContents() const ;
 			
 			/*!
 			 */
@@ -88,7 +92,9 @@ namespace ecore
 			//*********************************
 			// Union Getter
 			//*********************************
-			 
+			/*!
+			 */
+			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

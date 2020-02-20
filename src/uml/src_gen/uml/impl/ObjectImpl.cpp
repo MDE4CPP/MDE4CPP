@@ -18,6 +18,7 @@
 #include <iostream>
 #include <sstream>
 
+#include "abstractDataTypes/Bag.hpp"
 
 #include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -30,7 +31,14 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
+
+#include "uml/Argument.hpp"
+
+#include "uml/Object.hpp"
+
+#include "uml/Operation.hpp"
 
 #include "uml/Property.hpp"
 
@@ -94,7 +102,7 @@ std::shared_ptr<ecore::EObject>  ObjectImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ObjectImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getObject_EClass();
+	return UmlPackageImpl::eInstance()->getObject_Class();
 }
 
 //*********************************
@@ -105,6 +113,12 @@ std::shared_ptr<ecore::EClass> ObjectImpl::eStaticClass() const
 // Operations
 //*********************************
 Any ObjectImpl::get(std::shared_ptr<uml::Property>  property) const
+{
+	std::cout << __PRETTY_FUNCTION__  << std::endl;
+	throw "UnsupportedOperationException";
+}
+
+std::shared_ptr<Bag<uml::Object> > ObjectImpl::invoke(std::shared_ptr<uml::Operation>  op,std::shared_ptr<Bag<uml::Argument> >  arguments)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";

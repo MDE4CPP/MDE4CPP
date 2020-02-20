@@ -33,13 +33,20 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
 
 #include "uml/Dependency.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -167,14 +174,6 @@ PackageableElementImpl::PackageableElementImpl(const PackageableElementImpl & ob
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	if(obj.getNameExpression()!=nullptr)
 	{
 		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
@@ -202,7 +201,7 @@ std::shared_ptr<ecore::EObject>  PackageableElementImpl::copy() const
 
 std::shared_ptr<ecore::EClass> PackageableElementImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getPackageableElement_EClass();
+	return UmlPackageImpl::eInstance()->getPackageableElement_Class();
 }
 
 //*********************************
@@ -289,8 +288,8 @@ Any PackageableElementImpl::eGet(int featureID, bool resolve, bool coreType) con
 {
 	switch(featureID)
 	{
-		case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
-			return eAny(getOwningPackage()); //1412
+		case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getOwningPackage().lock())); //17411
 	}
 	Any result;
 	result = NamedElementImpl::eGet(featureID, resolve, coreType);
@@ -305,8 +304,8 @@ bool PackageableElementImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
-			return getOwningPackage().lock() != nullptr; //1412
+		case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
+			return getOwningPackage().lock() != nullptr; //17411
 	}
 	bool result = false;
 	result = NamedElementImpl::internalEIsSet(featureID);
@@ -321,11 +320,12 @@ bool PackageableElementImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
+		case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Package> _owningPackage = newValue->get<std::shared_ptr<uml::Package>>();
-			setOwningPackage(_owningPackage); //1412
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Package> _owningPackage = std::dynamic_pointer_cast<uml::Package>(_temp);
+			setOwningPackage(_owningPackage); //17411
 			return true;
 		}
 	}
@@ -379,7 +379,7 @@ void PackageableElementImpl::resolveReferences(const int featureID, std::list<st
 {
 	switch(featureID)
 	{
-		case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
+		case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
 		{
 			if (references.size() == 1)
 			{
@@ -404,7 +404,6 @@ void PackageableElementImpl::save(std::shared_ptr<persistence::interfaces::XSave
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

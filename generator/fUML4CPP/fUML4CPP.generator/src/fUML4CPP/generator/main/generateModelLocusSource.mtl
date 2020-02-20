@@ -1,0 +1,102 @@
+[comment encoding = UTF-8 /]
+[**
+ * Copyright (c) 2017 TU Ilmenau, Systems and Software Engineering Group
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
+ * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+ * and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */]
+[module generateModelLocusSource('http://www.eclipse.org/uml2/5.0.0/UML')]
+ 
+[import fUML4CPP::generator::main::parameterHelper /]
+[import UML4CPP::generator::main::components::generateType /]
+[import UML4CPP::generator::main::helpers::nameHelper /]
+[import UML4CPP::generator::main::helpers::generalHelper /]
+
+[query private getClassesOfCreateObjectAction(aPackage : Package) : Set(Class) = aPackage.allOwnedElements()->filter(CreateObjectAction).classifier->asSet()->flatten()->filter(Class) /]
+[query private getClassesOfCreateObjectActionForPackage(aPackage : Package, classPackage : Package) : Set(Class) = aPackage.getClassesOfCreateObjectAction()->select(aClass : Class | aClass.getNearestPackage() = classPackage)->sortedBy(name) /]
+[query private getClassPackagesOfCreateObjectAction(aPackage : Package) : Set(Package) = aPackage.getClassesOfCreateObjectAction().getNamespace()->asSet()->flatten()->sortedBy(name) /]
+
+[template public generateModelLocusSource(aPackage : Package) 
+{
+upperName : String = aPackage.getPackageName().sanitize().toUpperFirst(); 
+originalName : String = aPackage.getPackageName();
+}]
+
+[file (originalName.concat('Exec/impl/') + upperName.concat('LocusImpl.cpp'), false, 'UTF-8')]
+#include "[upperName/]LocusImpl.hpp"
+#include <iostream>
+
+[defineDebugMacro()/]
+
+#include "uml/Class.hpp"
+
+[for (classPackage : Package | aPackage.getClassPackagesOfCreateObjectAction())]
+#include "[classPackage.name/]/[classPackage.name.toUpperFirst()/]Factory.hpp"
+#include "[classPackage.name/]/[classPackage.name.toUpperFirst()/]Package.hpp"
+[for (aClass : Class | aPackage.getClassesOfCreateObjectActionForPackage(classPackage))]
+#include "[aClass.getNearestPackage().name/]/[aClass.name.toUpperFirst()/].hpp"
+#include "[originalName/]Exec/[aClass.name.toUpperFirst()/]Object.hpp"
+[/for]
+[/for]
+
+
+using namespace fUML;
+using namespace [originalName/];
+
+//*********************************
+// Constructor / Destructor
+//*********************************
+[upperName/]LocusImpl::[upperName/]LocusImpl()
+{
+}
+
+[upperName/]LocusImpl::~[upperName/]LocusImpl()
+{
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete [upperName/]Locus "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
+}
+std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> [upperName/]LocusImpl::instantiate(std::shared_ptr<uml::Class>  type)
+{
+[let packageList : Set(Package) = aPackage.getClassPackagesOfCreateObjectAction()]
+[if (packageList->size() > 0)]
+	std::shared_ptr<uml::Package> typePackage = type->getPackage().lock();
+[for (classPackage : Package | packageList)]
+[let packageName : String = classPackage.name]
+	if (typePackage == [packageName/]::[packageName.toUpperFirst()/]Package::eInstance())
+	{		
+		switch(type->getMetaElementID())
+		{
+[for (aClass : Class | aPackage.getClassesOfCreateObjectActionForPackage(classPackage)) separator('\n')]
+[let className : String = aClass.name.toUpperFirst()]
+			case [packageName/]::[packageName.toUpperFirst()/]Package::[aClass.getMemberName().toUpperCase()/]:
+			{
+				std::shared_ptr<[originalName/]::[className/]Object> object(new [originalName/]::[className/]Object());
+				object->setThis[className/]ObjectPtr(object);
+				object->setUmlValue([packageName/]::[packageName.toUpperFirst()/]Factory::eInstance()->create[aClass.name.toUpperFirst()/]());
+				object->setLocus(this->getThisLocusPtr());
+				return object;
+			}
+[/let]
+[/for]
+[/let]
+			default:
+			{
+				return fUML::Semantics::Loci::LocusImpl::instantiate(type);
+			}
+		}
+	}
+[/for]
+[/if]
+[/let]
+	return fUML::Semantics::Loci::LocusImpl::instantiate(type);
+}
+[/file]
+[/template]

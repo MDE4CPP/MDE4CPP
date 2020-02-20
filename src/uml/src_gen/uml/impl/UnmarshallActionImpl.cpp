@@ -33,6 +33,15 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Action.hpp"
@@ -54,8 +63,6 @@
 #include "uml/Constraint.hpp"
 
 #include "uml/Dependency.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -226,14 +233,6 @@ UnmarshallActionImpl::UnmarshallActionImpl(const UnmarshallActionImpl & obj):Unm
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::ExceptionHandler>> _handlerList = obj.getHandler();
 	for(std::shared_ptr<uml::ExceptionHandler> _handler : *_handlerList)
 	{
@@ -333,7 +332,7 @@ std::shared_ptr<ecore::EObject>  UnmarshallActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> UnmarshallActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getUnmarshallAction_EClass();
+	return UmlPackageImpl::eInstance()->getUnmarshallAction_Class();
 }
 
 //*********************************
@@ -472,12 +471,22 @@ Any UnmarshallActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::UNMARSHALLACTION_EREFERENCE_OBJECT:
-			return eAny(getObject()); //17828
-		case UmlPackage::UNMARSHALLACTION_EREFERENCE_RESULT:
-			return eAny(getResult()); //17829
-		case UmlPackage::UNMARSHALLACTION_EREFERENCE_UNMARSHALLTYPE:
-			return eAny(getUnmarshallType()); //17830
+		case UmlPackage::UNMARSHALLACTION_ATTRIBUTE_OBJECT:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getObject())); //24727
+		case UmlPackage::UNMARSHALLACTION_ATTRIBUTE_RESULT:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::OutputPin>::iterator iter = m_result->begin();
+			Bag<uml::OutputPin>::iterator end = m_result->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //24728
+		}
+		case UmlPackage::UNMARSHALLACTION_ATTRIBUTE_UNMARSHALLTYPE:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getUnmarshallType())); //24729
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -485,12 +494,12 @@ bool UnmarshallActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::UNMARSHALLACTION_EREFERENCE_OBJECT:
-			return getObject() != nullptr; //17828
-		case UmlPackage::UNMARSHALLACTION_EREFERENCE_RESULT:
-			return getResult() != nullptr; //17829
-		case UmlPackage::UNMARSHALLACTION_EREFERENCE_UNMARSHALLTYPE:
-			return getUnmarshallType() != nullptr; //17830
+		case UmlPackage::UNMARSHALLACTION_ATTRIBUTE_OBJECT:
+			return getObject() != nullptr; //24727
+		case UmlPackage::UNMARSHALLACTION_ATTRIBUTE_RESULT:
+			return getResult() != nullptr; //24728
+		case UmlPackage::UNMARSHALLACTION_ATTRIBUTE_UNMARSHALLTYPE:
+			return getUnmarshallType() != nullptr; //24729
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }
@@ -498,18 +507,56 @@ bool UnmarshallActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::UNMARSHALLACTION_EREFERENCE_OBJECT:
+		case UmlPackage::UNMARSHALLACTION_ATTRIBUTE_OBJECT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::InputPin> _object = newValue->get<std::shared_ptr<uml::InputPin>>();
-			setObject(_object); //17828
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::InputPin> _object = std::dynamic_pointer_cast<uml::InputPin>(_temp);
+			setObject(_object); //24727
 			return true;
 		}
-		case UmlPackage::UNMARSHALLACTION_EREFERENCE_UNMARSHALLTYPE:
+		case UmlPackage::UNMARSHALLACTION_ATTRIBUTE_RESULT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Classifier> _unmarshallType = newValue->get<std::shared_ptr<uml::Classifier>>();
-			setUnmarshallType(_unmarshallType); //17830
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::OutputPin>> resultList(new Bag<uml::OutputPin>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				resultList->add(std::dynamic_pointer_cast<uml::OutputPin>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::OutputPin>::iterator iterResult = m_result->begin();
+			Bag<uml::OutputPin>::iterator endResult = m_result->end();
+			while (iterResult != endResult)
+			{
+				if (resultList->find(*iterResult) == -1)
+				{
+					m_result->erase(*iterResult);
+				}
+				iterResult++;
+			}
+
+			iterResult = resultList->begin();
+			endResult = resultList->end();
+			while (iterResult != endResult)
+			{
+				if (m_result->find(*iterResult) == -1)
+				{
+					m_result->add(*iterResult);
+				}
+				iterResult++;			
+			}
+			return true;
+		}
+		case UmlPackage::UNMARSHALLACTION_ATTRIBUTE_UNMARSHALLTYPE:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Classifier> _unmarshallType = std::dynamic_pointer_cast<uml::Classifier>(_temp);
+			setUnmarshallType(_unmarshallType); //24729
 			return true;
 		}
 	}
@@ -616,7 +663,7 @@ void UnmarshallActionImpl::resolveReferences(const int featureID, std::list<std:
 {
 	switch(featureID)
 	{
-		case UmlPackage::UNMARSHALLACTION_EREFERENCE_UNMARSHALLTYPE:
+		case UmlPackage::UNMARSHALLACTION_ATTRIBUTE_UNMARSHALLTYPE:
 		{
 			if (references.size() == 1)
 			{
@@ -648,7 +695,6 @@ void UnmarshallActionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHa
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
@@ -671,13 +717,13 @@ void UnmarshallActionImpl::saveContent(std::shared_ptr<persistence::interfaces::
 		std::shared_ptr<uml::InputPin > object = this->getObject();
 		if (object != nullptr)
 		{
-			saveHandler->addReference(object, "object", object->eClass() != package->getInputPin_EClass());
+			saveHandler->addReference(object, "object", object->eClass() != package->getInputPin_Class());
 		}
 
 		// Save 'result'
 		for (std::shared_ptr<uml::OutputPin> result : *this->getResult()) 
 		{
-			saveHandler->addReference(result, "result", result->eClass() != package->getOutputPin_EClass());
+			saveHandler->addReference(result, "result", result->eClass() != package->getOutputPin_Class());
 		}
 	
 

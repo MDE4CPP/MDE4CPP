@@ -82,11 +82,6 @@ namespace uml
 	class Dependency;
 }
 
-namespace ecore 
-{
-	class EAnnotation;
-}
-
 namespace uml 
 {
 	class Element;
@@ -203,12 +198,12 @@ namespace uml
 			/*!
 			 The mode in which the ExpansionRegion executes its contents. If parallel, executions are concurrent. If iterative, executions are sequential. If stream, a stream of values flows into a single execution.
 			<p>From package UML::Actions.</p> */ 
-			virtual ExpansionKind getMode() const = 0;
+			virtual uml::ExpansionKind getMode() const = 0;
 			
 			/*!
 			 The mode in which the ExpansionRegion executes its contents. If parallel, executions are concurrent. If iterative, executions are sequential. If stream, a stream of values flows into a single execution.
 			<p>From package UML::Actions.</p> */ 
-			virtual void setMode (ExpansionKind _mode)= 0; 
+			virtual void setMode (uml::ExpansionKind _mode)= 0; 
 			
 			
 			//*********************************
@@ -233,7 +228,7 @@ namespace uml
 			/*!
 			 The mode in which the ExpansionRegion executes its contents. If parallel, executions are concurrent. If iterative, executions are sequential. If stream, a stream of values flows into a single execution.
 			<p>From package UML::Actions.</p> */ 
-			ExpansionKind m_mode = ExpansionKind::ITERATIVE;
+			uml::ExpansionKind m_mode = ExpansionKind::ITERATIVE;
 			
 			
 			//*********************************

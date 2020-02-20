@@ -32,6 +32,17 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
@@ -39,8 +50,6 @@
 #include "uml/Constraint.hpp"
 
 #include "uml/Dependency.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -89,24 +98,24 @@ IntervalConstraintImpl::~IntervalConstraintImpl()
 
 
 //Additional constructor for the containments back reference
-			IntervalConstraintImpl::IntervalConstraintImpl(std::weak_ptr<uml::Namespace > par_Namespace, const int reference_id)
-			:IntervalConstraintImpl()
-			{
-				switch(reference_id)
-				{	
-				case UmlPackage::CONSTRAINT_EREFERENCE_CONTEXT:
-					m_context = par_Namespace;
-					m_namespace = par_Namespace;
-					 return;
-				case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE:
-					m_namespace = par_Namespace;
-					m_owner = par_Namespace;
-					 return;
-				default:
-				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
-				}
-			   
-			}
+IntervalConstraintImpl::IntervalConstraintImpl(std::weak_ptr<uml::Namespace > par_Namespace, const int reference_id)
+:IntervalConstraintImpl()
+{
+	switch(reference_id)
+	{	
+	case UmlPackage::CONSTRAINT_ATTRIBUTE_CONTEXT:
+		m_context = par_Namespace;
+		m_namespace = par_Namespace;
+		 return;
+	case UmlPackage::NAMEDELEMENT_ATTRIBUTE_NAMESPACE:
+		m_namespace = par_Namespace;
+		m_owner = par_Namespace;
+		 return;
+	default:
+	std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
+	}
+   
+}
 
 
 
@@ -187,14 +196,6 @@ IntervalConstraintImpl::IntervalConstraintImpl(const IntervalConstraintImpl & ob
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	if(obj.getNameExpression()!=nullptr)
 	{
 		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
@@ -229,7 +230,7 @@ std::shared_ptr<ecore::EObject>  IntervalConstraintImpl::copy() const
 
 std::shared_ptr<ecore::EClass> IntervalConstraintImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getIntervalConstraint_EClass();
+	return UmlPackageImpl::eInstance()->getIntervalConstraint_Class();
 }
 
 //*********************************
@@ -376,7 +377,6 @@ void IntervalConstraintImpl::save(std::shared_ptr<persistence::interfaces::XSave
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

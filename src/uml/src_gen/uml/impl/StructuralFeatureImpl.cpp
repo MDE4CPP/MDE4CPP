@@ -32,6 +32,11 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Classifier.hpp"
@@ -39,8 +44,6 @@
 #include "uml/Comment.hpp"
 
 #include "uml/Dependency.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -158,14 +161,6 @@ StructuralFeatureImpl::StructuralFeatureImpl(const StructuralFeatureImpl & obj):
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	if(obj.getLowerValue()!=nullptr)
 	{
 		m_lowerValue = std::dynamic_pointer_cast<uml::ValueSpecification>(obj.getLowerValue()->copy());
@@ -207,7 +202,7 @@ std::shared_ptr<ecore::EObject>  StructuralFeatureImpl::copy() const
 
 std::shared_ptr<ecore::EClass> StructuralFeatureImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getStructuralFeature_EClass();
+	return UmlPackageImpl::eInstance()->getStructuralFeature_Class();
 }
 
 //*********************************
@@ -276,8 +271,8 @@ Any StructuralFeatureImpl::eGet(int featureID, bool resolve, bool coreType) cons
 {
 	switch(featureID)
 	{
-		case UmlPackage::STRUCTURALFEATURE_EATTRIBUTE_ISREADONLY:
-			return eAny(getIsReadOnly()); //7322
+		case UmlPackage::STRUCTURALFEATURE_ATTRIBUTE_ISREADONLY:
+			return eAny(getIsReadOnly()); //22621
 	}
 	Any result;
 	result = FeatureImpl::eGet(featureID, resolve, coreType);
@@ -297,8 +292,8 @@ bool StructuralFeatureImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::STRUCTURALFEATURE_EATTRIBUTE_ISREADONLY:
-			return getIsReadOnly() != false; //7322
+		case UmlPackage::STRUCTURALFEATURE_ATTRIBUTE_ISREADONLY:
+			return getIsReadOnly() != false; //22621
 	}
 	bool result = false;
 	result = FeatureImpl::internalEIsSet(featureID);
@@ -318,11 +313,11 @@ bool StructuralFeatureImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::STRUCTURALFEATURE_EATTRIBUTE_ISREADONLY:
+		case UmlPackage::STRUCTURALFEATURE_ATTRIBUTE_ISREADONLY:
 		{
 			// BOOST CAST
 			bool _isReadOnly = newValue->get<bool>();
-			setIsReadOnly(_isReadOnly); //7322
+			setIsReadOnly(_isReadOnly); //22621
 			return true;
 		}
 	}
@@ -421,7 +416,6 @@ void StructuralFeatureImpl::save(std::shared_ptr<persistence::interfaces::XSaveH
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
@@ -441,7 +435,7 @@ void StructuralFeatureImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getStructuralFeature_EAttribute_isReadOnly()) )
+		if ( this->eIsSet(package->getStructuralFeature_Attribute_isReadOnly()) )
 		{
 			saveHandler->addAttribute("isReadOnly", this->getIsReadOnly());
 		}

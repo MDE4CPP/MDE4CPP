@@ -50,6 +50,11 @@ namespace ecore
 
 namespace ecore 
 {
+	class EObject;
+}
+
+namespace ecore 
+{
 	class EPackage;
 }
 
@@ -81,6 +86,10 @@ namespace ecore
 
 			//Additional constructors for the containments back reference
 
+			EClassifier(std::weak_ptr<ecore::EObject > par_eContainer);
+
+			//Additional constructors for the containments back reference
+
 			EClassifier(std::weak_ptr<ecore::EPackage > par_ePackage);
 
 		public:
@@ -92,7 +101,9 @@ namespace ecore
 			//*********************************
 			// Operations
 			//*********************************
-			
+			/*!
+			 */ 
+			virtual int getClassifierID() = 0;
 			
 			/*!
 			 */ 
@@ -104,11 +115,11 @@ namespace ecore
 			//*********************************
 			/*!
 			 */ 
-			virtual int getClassifierID() const = 0;
+			virtual Any getDefaultValue() const = 0;
 			
 			/*!
 			 */ 
-			virtual Any getDefaultValue() const = 0;
+			virtual void setDefaultValue (Any _defaultValue)= 0; 
 			
 			/*!
 			 */ 
@@ -150,9 +161,6 @@ namespace ecore
 			//*********************************
 			/*!
 			 */ 
-			int m_classifierID = -1;
-			/*!
-			 */ 
 			Any m_defaultValue = nullptr;
 			/*!
 			 */ 
@@ -180,7 +188,9 @@ namespace ecore
 			//*********************************
 			// Union Getter
 			//*********************************
-			
+			/*!
+			 */
+			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
 			

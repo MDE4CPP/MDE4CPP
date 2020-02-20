@@ -50,11 +50,6 @@ namespace uml
 	class DirectedRelationship;
 }
 
-namespace ecore 
-{
-	class EAnnotation;
-}
-
 namespace uml 
 {
 	class Element;
@@ -147,12 +142,12 @@ namespace uml
 			/*!
 			 Specifies the visibility of the imported PackageableElement within the importingNamespace, i.e., whether the  importedElement will in turn be visible to other Namespaces. If the ElementImport is public, the importedElement will be visible outside the importingNamespace while, if the ElementImport is private, it will not.
 			<p>From package UML::CommonStructure.</p> */ 
-			virtual VisibilityKind getVisibility() const = 0;
+			virtual uml::VisibilityKind getVisibility() const = 0;
 			
 			/*!
 			 Specifies the visibility of the imported PackageableElement within the importingNamespace, i.e., whether the  importedElement will in turn be visible to other Namespaces. If the ElementImport is public, the importedElement will be visible outside the importingNamespace while, if the ElementImport is private, it will not.
 			<p>From package UML::CommonStructure.</p> */ 
-			virtual void setVisibility (VisibilityKind _visibility)= 0; 
+			virtual void setVisibility (uml::VisibilityKind _visibility)= 0; 
 			
 			
 			//*********************************
@@ -189,7 +184,7 @@ namespace uml
 			/*!
 			 Specifies the visibility of the imported PackageableElement within the importingNamespace, i.e., whether the  importedElement will in turn be visible to other Namespaces. If the ElementImport is public, the importedElement will be visible outside the importingNamespace while, if the ElementImport is private, it will not.
 			<p>From package UML::CommonStructure.</p> */ 
-			VisibilityKind m_visibility = VisibilityKind::PUBLIC;
+			uml::VisibilityKind m_visibility = VisibilityKind::PUBLIC;
 			
 			
 			//*********************************

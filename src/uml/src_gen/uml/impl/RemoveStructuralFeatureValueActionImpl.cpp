@@ -33,6 +33,15 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Activity.hpp"
@@ -52,8 +61,6 @@
 #include "uml/Constraint.hpp"
 
 #include "uml/Dependency.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -209,14 +216,6 @@ RemoveStructuralFeatureValueActionImpl::RemoveStructuralFeatureValueActionImpl(c
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::ExceptionHandler>> _handlerList = obj.getHandler();
 	for(std::shared_ptr<uml::ExceptionHandler> _handler : *_handlerList)
 	{
@@ -321,7 +320,7 @@ std::shared_ptr<ecore::EObject>  RemoveStructuralFeatureValueActionImpl::copy() 
 
 std::shared_ptr<ecore::EClass> RemoveStructuralFeatureValueActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getRemoveStructuralFeatureValueAction_EClass();
+	return UmlPackageImpl::eInstance()->getRemoveStructuralFeatureValueAction_Class();
 }
 
 //*********************************
@@ -428,10 +427,10 @@ Any RemoveStructuralFeatureValueActionImpl::eGet(int featureID, bool resolve, bo
 {
 	switch(featureID)
 	{
-		case UmlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_EATTRIBUTE_ISREMOVEDUPLICATES:
-			return eAny(getIsRemoveDuplicates()); //16932
-		case UmlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_EREFERENCE_REMOVEAT:
-			return eAny(getRemoveAt()); //16933
+		case UmlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_ATTRIBUTE_ISREMOVEDUPLICATES:
+			return eAny(getIsRemoveDuplicates()); //21031
+		case UmlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_ATTRIBUTE_REMOVEAT:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getRemoveAt())); //21032
 	}
 	return WriteStructuralFeatureActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -439,10 +438,10 @@ bool RemoveStructuralFeatureValueActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_EATTRIBUTE_ISREMOVEDUPLICATES:
-			return getIsRemoveDuplicates() != false; //16932
-		case UmlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_EREFERENCE_REMOVEAT:
-			return getRemoveAt() != nullptr; //16933
+		case UmlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_ATTRIBUTE_ISREMOVEDUPLICATES:
+			return getIsRemoveDuplicates() != false; //21031
+		case UmlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_ATTRIBUTE_REMOVEAT:
+			return getRemoveAt() != nullptr; //21032
 	}
 	return WriteStructuralFeatureActionImpl::internalEIsSet(featureID);
 }
@@ -450,18 +449,19 @@ bool RemoveStructuralFeatureValueActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_EATTRIBUTE_ISREMOVEDUPLICATES:
+		case UmlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_ATTRIBUTE_ISREMOVEDUPLICATES:
 		{
 			// BOOST CAST
 			bool _isRemoveDuplicates = newValue->get<bool>();
-			setIsRemoveDuplicates(_isRemoveDuplicates); //16932
+			setIsRemoveDuplicates(_isRemoveDuplicates); //21031
 			return true;
 		}
-		case UmlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_EREFERENCE_REMOVEAT:
+		case UmlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_ATTRIBUTE_REMOVEAT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::InputPin> _removeAt = newValue->get<std::shared_ptr<uml::InputPin>>();
-			setRemoveAt(_removeAt); //16933
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::InputPin> _removeAt = std::dynamic_pointer_cast<uml::InputPin>(_temp);
+			setRemoveAt(_removeAt); //21032
 			return true;
 		}
 	}
@@ -575,7 +575,6 @@ void RemoveStructuralFeatureValueActionImpl::save(std::shared_ptr<persistence::i
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
@@ -600,12 +599,12 @@ void RemoveStructuralFeatureValueActionImpl::saveContent(std::shared_ptr<persist
 		std::shared_ptr<uml::InputPin > removeAt = this->getRemoveAt();
 		if (removeAt != nullptr)
 		{
-			saveHandler->addReference(removeAt, "removeAt", removeAt->eClass() != package->getInputPin_EClass());
+			saveHandler->addReference(removeAt, "removeAt", removeAt->eClass() != package->getInputPin_Class());
 		}
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getRemoveStructuralFeatureValueAction_EAttribute_isRemoveDuplicates()) )
+		if ( this->eIsSet(package->getRemoveStructuralFeatureValueAction_Attribute_isRemoveDuplicates()) )
 		{
 			saveHandler->addAttribute("isRemoveDuplicates", this->getIsRemoveDuplicates());
 		}

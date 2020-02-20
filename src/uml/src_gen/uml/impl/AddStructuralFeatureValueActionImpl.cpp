@@ -33,6 +33,15 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Activity.hpp"
@@ -52,8 +61,6 @@
 #include "uml/Constraint.hpp"
 
 #include "uml/Dependency.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -209,14 +216,6 @@ AddStructuralFeatureValueActionImpl::AddStructuralFeatureValueActionImpl(const A
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::ExceptionHandler>> _handlerList = obj.getHandler();
 	for(std::shared_ptr<uml::ExceptionHandler> _handler : *_handlerList)
 	{
@@ -321,7 +320,7 @@ std::shared_ptr<ecore::EObject>  AddStructuralFeatureValueActionImpl::copy() con
 
 std::shared_ptr<ecore::EClass> AddStructuralFeatureValueActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getAddStructuralFeatureValueAction_EClass();
+	return UmlPackageImpl::eInstance()->getAddStructuralFeatureValueAction_Class();
 }
 
 //*********************************
@@ -434,10 +433,10 @@ Any AddStructuralFeatureValueActionImpl::eGet(int featureID, bool resolve, bool 
 {
 	switch(featureID)
 	{
-		case UmlPackage::ADDSTRUCTURALFEATUREVALUEACTION_EREFERENCE_INSERTAT:
-			return eAny(getInsertAt()); //13532
-		case UmlPackage::ADDSTRUCTURALFEATUREVALUEACTION_EATTRIBUTE_ISREPLACEALL:
-			return eAny(getIsReplaceAll()); //13533
+		case UmlPackage::ADDSTRUCTURALFEATUREVALUEACTION_ATTRIBUTE_INSERTAT:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getInsertAt())); //1631
+		case UmlPackage::ADDSTRUCTURALFEATUREVALUEACTION_ATTRIBUTE_ISREPLACEALL:
+			return eAny(getIsReplaceAll()); //1632
 	}
 	return WriteStructuralFeatureActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -445,10 +444,10 @@ bool AddStructuralFeatureValueActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::ADDSTRUCTURALFEATUREVALUEACTION_EREFERENCE_INSERTAT:
-			return getInsertAt() != nullptr; //13532
-		case UmlPackage::ADDSTRUCTURALFEATUREVALUEACTION_EATTRIBUTE_ISREPLACEALL:
-			return getIsReplaceAll() != false; //13533
+		case UmlPackage::ADDSTRUCTURALFEATUREVALUEACTION_ATTRIBUTE_INSERTAT:
+			return getInsertAt() != nullptr; //1631
+		case UmlPackage::ADDSTRUCTURALFEATUREVALUEACTION_ATTRIBUTE_ISREPLACEALL:
+			return getIsReplaceAll() != false; //1632
 	}
 	return WriteStructuralFeatureActionImpl::internalEIsSet(featureID);
 }
@@ -456,18 +455,19 @@ bool AddStructuralFeatureValueActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::ADDSTRUCTURALFEATUREVALUEACTION_EREFERENCE_INSERTAT:
+		case UmlPackage::ADDSTRUCTURALFEATUREVALUEACTION_ATTRIBUTE_INSERTAT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::InputPin> _insertAt = newValue->get<std::shared_ptr<uml::InputPin>>();
-			setInsertAt(_insertAt); //13532
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::InputPin> _insertAt = std::dynamic_pointer_cast<uml::InputPin>(_temp);
+			setInsertAt(_insertAt); //1631
 			return true;
 		}
-		case UmlPackage::ADDSTRUCTURALFEATUREVALUEACTION_EATTRIBUTE_ISREPLACEALL:
+		case UmlPackage::ADDSTRUCTURALFEATUREVALUEACTION_ATTRIBUTE_ISREPLACEALL:
 		{
 			// BOOST CAST
 			bool _isReplaceAll = newValue->get<bool>();
-			setIsReplaceAll(_isReplaceAll); //13533
+			setIsReplaceAll(_isReplaceAll); //1632
 			return true;
 		}
 	}
@@ -534,10 +534,9 @@ void AddStructuralFeatureValueActionImpl::loadNode(std::string nodeName, std::sh
 			{
 				typeName = "InputPin";
 			}
-			std::shared_ptr<uml::InputPin> insertAt = std::dynamic_pointer_cast<uml::InputPin>(modelFactory->create(typeName));
+			std::shared_ptr<ecore::EObject> insertAt = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::INPUTPIN_ATTRIBUTE_ADDSTRUCTURALFEATUREVALUEACTION);
 			if (insertAt != nullptr)
 			{
-				this->setInsertAt(insertAt);
 				loadHandler->handleChild(insertAt);
 			}
 			return;
@@ -581,7 +580,6 @@ void AddStructuralFeatureValueActionImpl::save(std::shared_ptr<persistence::inte
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
@@ -606,12 +604,12 @@ void AddStructuralFeatureValueActionImpl::saveContent(std::shared_ptr<persistenc
 		std::shared_ptr<uml::InputPin > insertAt = this->getInsertAt();
 		if (insertAt != nullptr)
 		{
-			saveHandler->addReference(insertAt, "insertAt", insertAt->eClass() != package->getInputPin_EClass());
+			saveHandler->addReference(insertAt, "insertAt", insertAt->eClass() != package->getInputPin_Class());
 		}
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getAddStructuralFeatureValueAction_EAttribute_isReplaceAll()) )
+		if ( this->eIsSet(package->getAddStructuralFeatureValueAction_Attribute_isReplaceAll()) )
 		{
 			saveHandler->addAttribute("isReplaceAll", this->getIsReplaceAll());
 		}

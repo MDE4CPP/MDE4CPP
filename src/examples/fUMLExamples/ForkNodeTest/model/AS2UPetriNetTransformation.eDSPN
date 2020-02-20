@@ -1,0 +1,571 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eDSPN:EDSPNNet xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:eDSPN="http://pdv.cs.tu-berlin.de/TimeNET/schema/eDSPN" xsi:schemaLocation="http://pdv.cs.tu-berlin.de/TimeNET/schema/eDSPN ../Common Utilities/ecore/eDSPN.ecore" gridActive="true" id="MyActivity" netclass="eDSPN" sharpEdges="false">
+  <place id="InitialNode_place_id" type="node" initialMarking="1">
+    <graphics orientation="0" x="30" y="30"/>
+    <label id="InitialNode_id" type="text" text="InitialNode">
+      <graphics x="30" y="30"/>
+    </label>
+  </place>
+  <place id="FlowFinal_place_id" type="node" initialMarking="0">
+    <graphics orientation="0" x="30" y="30"/>
+    <label id="FlowFinal_id" type="text" text="FlowFinal">
+      <graphics x="30" y="30"/>
+    </label>
+  </place>
+  <place id="FlowFinal2_place_id" type="node" initialMarking="0">
+    <graphics orientation="0" x="30" y="30"/>
+    <label id="FlowFinal2_id" type="text" text="FlowFinal2">
+      <graphics x="30" y="30"/>
+    </label>
+  </place>
+  <place id="ActivityFinal2_place_id" type="node" initialMarking="0">
+    <graphics orientation="0" x="30" y="30"/>
+    <label id="ActivityFinal2_id" type="text" text="ActivityFinal2">
+      <graphics x="30" y="30"/>
+    </label>
+  </place>
+  <place id="ActivityFinal1_place_id" type="node" initialMarking="0">
+    <graphics orientation="0" x="30" y="30"/>
+    <label id="ActivityFinal1_id" type="text" text="ActivityFinal1">
+      <graphics x="30" y="30"/>
+    </label>
+  </place>
+  <place id="DecisionNode_place_id" type="node" initialMarking="0">
+    <graphics orientation="0" x="30" y="30"/>
+    <label id="DecisionNode_id" type="text" text="DecisionNode">
+      <graphics x="30" y="30"/>
+    </label>
+  </place>
+  <place id="Merge_place_id" type="node" initialMarking="0">
+    <graphics orientation="0" x="30" y="30"/>
+    <label id="Merge_id" type="text" text="Merge">
+      <graphics x="30" y="30"/>
+    </label>
+  </place>
+  <place id="ForkNode_ended_place_id" type="node" initialMarking="0">
+    <graphics orientation="0" x="30" y="30"/>
+    <label id="ForkNode_ended_id" type="text" text="ForkNode_ended">
+      <graphics x="30" y="30"/>
+    </label>
+  </place>
+  <place id="ForkNode_Flow6_finished_place_id" type="node" initialMarking="0">
+    <graphics orientation="0" x="30" y="30"/>
+    <label id="ForkNode_Flow6_finished_id" type="text" text="ForkNode_Flow6_finished">
+      <graphics x="30" y="30"/>
+    </label>
+  </place>
+  <place id="Flow4_fake_place_id" type="node" initialMarking="0">
+    <graphics orientation="0" x="30" y="30"/>
+    <label id="Flow4_fake_id" type="text" text="Flow4_fake">
+      <graphics x="30" y="30"/>
+    </label>
+  </place>
+  <place id="ForkNode_Flow4_finished_place_id" type="node" initialMarking="0">
+    <graphics orientation="0" x="30" y="30"/>
+    <label id="ForkNode_Flow4_finished_id" type="text" text="ForkNode_Flow4_finished">
+      <graphics x="30" y="30"/>
+    </label>
+  </place>
+  <place id="ForkNode_Flow5_finished_place_id" type="node" initialMarking="0">
+    <graphics orientation="0" x="30" y="30"/>
+    <label id="ForkNode_Flow5_finished_id" type="text" text="ForkNode_Flow5_finished">
+      <graphics x="30" y="30"/>
+    </label>
+  </place>
+  <place id="ForkNode_Flow2_place_id" type="node" initialMarking="0">
+    <graphics orientation="0" x="30" y="30"/>
+    <label id="ForkNode_Flow2_id" type="text" text="ForkNode_Flow2">
+      <graphics x="30" y="30"/>
+    </label>
+  </place>
+  <place id="ForkNode_Flow2_finished_place_id" type="node" initialMarking="0">
+    <graphics orientation="0" x="30" y="30"/>
+    <label id="ForkNode_Flow2_finished_id" type="text" text="ForkNode_Flow2_finished">
+      <graphics x="30" y="30"/>
+    </label>
+  </place>
+  <place id="ForkNode_Flow6_start_place_id" type="node" initialMarking="0">
+    <graphics orientation="0" x="30" y="30"/>
+    <label id="ForkNode_Flow6_start_id" type="text" text="ForkNode_Flow6_start">
+      <graphics x="30" y="30"/>
+    </label>
+  </place>
+  <place id="ForkNode_Flow3_place_id" type="node" initialMarking="0">
+    <graphics orientation="0" x="30" y="30"/>
+    <label id="ForkNode_Flow3_id" type="text" text="ForkNode_Flow3">
+      <graphics x="30" y="30"/>
+    </label>
+  </place>
+  <place id="ForkNode_Flow3_start_place_id" type="node" initialMarking="0">
+    <graphics orientation="0" x="30" y="30"/>
+    <label id="ForkNode_Flow3_start_id" type="text" text="ForkNode_Flow3_start">
+      <graphics x="30" y="30"/>
+    </label>
+  </place>
+  <place id="ForkNode_Flow4_place_id" type="node" initialMarking="0">
+    <graphics orientation="0" x="30" y="30"/>
+    <label id="ForkNode_Flow4_id" type="text" text="ForkNode_Flow4">
+      <graphics x="30" y="30"/>
+    </label>
+  </place>
+  <place id="ForkNode_Flow4_start_place_id" type="node" initialMarking="0">
+    <graphics orientation="0" x="30" y="30"/>
+    <label id="ForkNode_Flow4_start_id" type="text" text="ForkNode_Flow4_start">
+      <graphics x="30" y="30"/>
+    </label>
+  </place>
+  <place id="ForkNode_Flow5_place_id" type="node" initialMarking="0">
+    <graphics orientation="0" x="30" y="30"/>
+    <label id="ForkNode_Flow5_id" type="text" text="ForkNode_Flow5">
+      <graphics x="30" y="30"/>
+    </label>
+  </place>
+  <place id="ForkNode_Flow1_place_id" type="node" initialMarking="0">
+    <graphics orientation="0" x="30" y="30"/>
+    <label id="ForkNode_Flow1_id" type="text" text="ForkNode_Flow1">
+      <graphics x="30" y="30"/>
+    </label>
+  </place>
+  <place id="ForkNode_Flow3_finished_place_id" type="node" initialMarking="0">
+    <graphics orientation="0" x="30" y="30"/>
+    <label id="ForkNode_Flow3_finished_id" type="text" text="ForkNode_Flow3_finished">
+      <graphics x="30" y="30"/>
+    </label>
+  </place>
+  <place id="ForkNode_Flow2_start_place_id" type="node" initialMarking="0">
+    <graphics orientation="0" x="30" y="30"/>
+    <label id="ForkNode_Flow2_start_id" type="text" text="ForkNode_Flow2_start">
+      <graphics x="30" y="30"/>
+    </label>
+  </place>
+  <place id="ForkNode_Flow5_start_place_id" type="node" initialMarking="0">
+    <graphics orientation="0" x="30" y="30"/>
+    <label id="ForkNode_Flow5_start_id" type="text" text="ForkNode_Flow5_start">
+      <graphics x="30" y="30"/>
+    </label>
+  </place>
+  <place id="ForkNode_Flow1_finished_place_id" type="node" initialMarking="0">
+    <graphics orientation="0" x="30" y="30"/>
+    <label id="ForkNode_Flow1_finished_id" type="text" text="ForkNode_Flow1_finished">
+      <graphics x="30" y="30"/>
+    </label>
+  </place>
+  <place id="ForkNode_Flow6_place_id" type="node" initialMarking="0">
+    <graphics orientation="0" x="30" y="30"/>
+    <label id="ForkNode_Flow6_id" type="text" text="ForkNode_Flow6">
+      <graphics x="30" y="30"/>
+    </label>
+  </place>
+  <place id="fake_ForkNodeOpaqueAction2_place_id" type="node" initialMarking="0">
+    <graphics orientation="0" x="30" y="30"/>
+    <label id="f_ForkNode_to_OpaqueAction2_id" type="text" text="f_ForkNode_to_OpaqueAction2">
+      <graphics x="30" y="30"/>
+    </label>
+  </place>
+  <place id="fake_ForkNodeOpaqueAction_place_id" type="node" initialMarking="0">
+    <graphics orientation="0" x="30" y="30"/>
+    <label id="f_ForkNode_to_OpaqueAction_id" type="text" text="f_ForkNode_to_OpaqueAction">
+      <graphics x="30" y="30"/>
+    </label>
+  </place>
+  <place id="fake_OpaqueActionJoin_place_id" type="node" initialMarking="0">
+    <graphics orientation="0" x="30" y="30"/>
+    <label id="f_OpaqueAction_to_Join_id" type="text" text="f_OpaqueAction_to_Join">
+      <graphics x="30" y="30"/>
+    </label>
+  </place>
+  <place id="fake_ForkNodeJoin_place_id" type="node" initialMarking="0">
+    <graphics orientation="0" x="30" y="30"/>
+    <label id="f_ForkNode_to_Join_id" type="text" text="f_ForkNode_to_Join">
+      <graphics x="30" y="30"/>
+    </label>
+  </place>
+  <exponentialTransition id="OpaqueAction2_exp_trans_id" type="node" delay="1.0" DTSPNpriority="1" preemptionPolicy="PRD" serverType="ExclusiveServer">
+    <graphics orientation="0" x="30" y="30"/>
+    <label id="OpaqueAction2_id" type="text" text="OpaqueAction2">
+      <graphics x="30" y="30"/>
+    </label>
+  </exponentialTransition>
+  <exponentialTransition id="OpaqueAction_exp_trans_id" type="node" delay="1.0" DTSPNpriority="1" preemptionPolicy="PRD" serverType="ExclusiveServer">
+    <graphics orientation="0" x="30" y="30"/>
+    <label id="OpaqueAction_id" type="text" text="OpaqueAction">
+      <graphics x="30" y="30"/>
+    </label>
+  </exponentialTransition>
+  <exponentialTransition id="ForkNode_Start1_exp_trans_id" type="node" delay="1.0" DTSPNpriority="1" preemptionPolicy="PRD" serverType="ExclusiveServer">
+    <graphics orientation="0" x="30" y="30"/>
+    <label id="ForkNode_Start1_id" type="text" text="ForkNode_Start1">
+      <graphics x="30" y="30"/>
+    </label>
+  </exponentialTransition>
+  <exponentialTransition id="ForkNode_exp_trans_id" type="node" delay="1.0" DTSPNpriority="1" preemptionPolicy="PRD" serverType="ExclusiveServer">
+    <graphics orientation="0" x="30" y="30"/>
+    <label id="ForkNode_id" type="text" text="ForkNode">
+      <graphics x="30" y="30"/>
+    </label>
+  </exponentialTransition>
+  <exponentialTransition id="ForkNode_Start2_exp_trans_id" type="node" delay="1.0" DTSPNpriority="1" preemptionPolicy="PRD" serverType="ExclusiveServer">
+    <graphics orientation="0" x="30" y="30"/>
+    <label id="ForkNode_Start2_id" type="text" text="ForkNode_Start2">
+      <graphics x="30" y="30"/>
+    </label>
+  </exponentialTransition>
+  <exponentialTransition id="ForkNode_Start3_exp_trans_id" type="node" delay="1.0" DTSPNpriority="1" preemptionPolicy="PRD" serverType="ExclusiveServer">
+    <graphics orientation="0" x="30" y="30"/>
+    <label id="ForkNode_Start3_id" type="text" text="ForkNode_Start3">
+      <graphics x="30" y="30"/>
+    </label>
+  </exponentialTransition>
+  <exponentialTransition id="ForkNode_Start5_exp_trans_id" type="node" delay="1.0" DTSPNpriority="1" preemptionPolicy="PRD" serverType="ExclusiveServer">
+    <graphics orientation="0" x="30" y="30"/>
+    <label id="ForkNode_Start5_id" type="text" text="ForkNode_Start5">
+      <graphics x="30" y="30"/>
+    </label>
+  </exponentialTransition>
+  <exponentialTransition id="ForkNode_Start6_exp_trans_id" type="node" delay="1.0" DTSPNpriority="1" preemptionPolicy="PRD" serverType="ExclusiveServer">
+    <graphics orientation="0" x="30" y="30"/>
+    <label id="ForkNode_Start6_id" type="text" text="ForkNode_Start6">
+      <graphics x="30" y="30"/>
+    </label>
+  </exponentialTransition>
+  <exponentialTransition id="ForkNode_t_ended_exp_trans_id" type="node" delay="1.0" DTSPNpriority="1" preemptionPolicy="PRD" serverType="ExclusiveServer">
+    <graphics orientation="0" x="30" y="30"/>
+    <label id="ForkNode_t_ended_id" type="text" text="ForkNode_t_ended">
+      <graphics x="30" y="30"/>
+    </label>
+  </exponentialTransition>
+  <exponentialTransition id="ForkNode_Start4_exp_trans_id" type="node" delay="1.0" DTSPNpriority="1" preemptionPolicy="PRD" serverType="ExclusiveServer">
+    <graphics orientation="0" x="30" y="30"/>
+    <label id="ForkNode_Start4_id" type="text" text="ForkNode_Start4">
+      <graphics x="30" y="30"/>
+    </label>
+  </exponentialTransition>
+  <immediateTransition id="Join_imm_tran_id" type="node" enablingFunction="" priority="1" weight="1">
+    <graphics orientation="0" x="30" y="30"/>
+    <label id="Join_id" type="text" text="Join">
+      <graphics x="30" y="30"/>
+    </label>
+  </immediateTransition>
+  <immediateTransition id="DecisionNodearc_1_imm_tran_id" type="node" enablingFunction="" priority="1" weight="1">
+    <graphics orientation="0" x="30" y="30"/>
+    <label id="DecisionNodearc_1_id" type="text" text="DecisionNodearc_1">
+      <graphics x="30" y="30"/>
+    </label>
+  </immediateTransition>
+  <immediateTransition id="DecisionNodearc_2_imm_tran_id" type="node" enablingFunction="" priority="1" weight="1">
+    <graphics orientation="0" x="30" y="30"/>
+    <label id="DecisionNodearc_2_id" type="text" text="DecisionNodearc_2">
+      <graphics x="30" y="30"/>
+    </label>
+  </immediateTransition>
+  <immediateTransition id="ForkNode_End1_imm_tran_id" type="node" enablingFunction="" priority="1" weight="1">
+    <graphics orientation="0" x="30" y="30"/>
+    <label id="ForkNode_End1_id" type="text" text="ForkNode_End1">
+      <graphics x="30" y="30"/>
+    </label>
+  </immediateTransition>
+  <immediateTransition id="ForkNode_End2_imm_tran_id" type="node" enablingFunction="" priority="1" weight="1">
+    <graphics orientation="0" x="30" y="30"/>
+    <label id="ForkNode_End2_id" type="text" text="ForkNode_End2">
+      <graphics x="30" y="30"/>
+    </label>
+  </immediateTransition>
+  <immediateTransition id="ForkNode_End4_imm_tran_id" type="node" enablingFunction="" priority="1" weight="1">
+    <graphics orientation="0" x="30" y="30"/>
+    <label id="ForkNode_End4_id" type="text" text="ForkNode_End4">
+      <graphics x="30" y="30"/>
+    </label>
+  </immediateTransition>
+  <immediateTransition id="ForkNode_End5_imm_tran_id" type="node" enablingFunction="" priority="1" weight="1">
+    <graphics orientation="0" x="30" y="30"/>
+    <label id="ForkNode_End5_id" type="text" text="ForkNode_End5">
+      <graphics x="30" y="30"/>
+    </label>
+  </immediateTransition>
+  <immediateTransition id="fake_InitialNodeMerge_transition_id" type="node" enablingFunction="" priority="1" weight="1">
+    <graphics orientation="0" x="30" y="30"/>
+    <label id="it_id" type="text" text="fake_InitialNodeMerge_transition_id">
+      <graphics x="30" y="30"/>
+    </label>
+  </immediateTransition>
+  <arc fromNode="DecisionNode_place_id" id="DecisionNode_place_id_to_DecisionNodearc_1_imm_tran_id_arc_id" toNode="DecisionNodearc_1_imm_tran_id" type="connector">
+    <inscription id="anonymous_inscription_id" type="inscriptionText" text="1">
+      <graphics x="30" y="30"/>
+    </inscription>
+  </arc>
+  <arc fromNode="DecisionNode_place_id" id="DecisionNode_place_id_to_DecisionNodearc_2_imm_tran_id_arc_id" toNode="DecisionNodearc_2_imm_tran_id" type="connector">
+    <inscription id="anonymous_inscription_id" type="inscriptionText" text="1">
+      <graphics x="30" y="30"/>
+    </inscription>
+  </arc>
+  <arc fromNode="ForkNode_Flow1_finished_place_id" id="ae2_Flow_1" toNode="ForkNode_t_ended_exp_trans_id" type="connector">
+    <inscription id="anonymous_inscription_id" type="inscriptionText" text="1">
+      <graphics x="30" y="30"/>
+    </inscription>
+  </arc>
+  <arc fromNode="ForkNode_Flow3_place_id" id="ForkNode_Flow3_arc2" toNode="ForkNode_Start3_exp_trans_id" type="connector">
+    <inscription id="anonymous_inscription_id" type="inscriptionText" text="1">
+      <graphics x="30" y="30"/>
+    </inscription>
+  </arc>
+  <arc fromNode="ForkNode_End4_imm_tran_id" id="ae1_Flow_4" toNode="ForkNode_Flow4_finished_place_id" type="connector">
+    <inscription id="anonymous_inscription_id" type="inscriptionText" text="1">
+      <graphics x="30" y="30"/>
+    </inscription>
+  </arc>
+  <arc fromNode="FlowFinal_place_id" id="ForkNode_Flow2_arc_P2I" toNode="ForkNode_End2_imm_tran_id" type="connector">
+    <inscription id="anonymous_inscription_id" type="inscriptionText" text="1">
+      <graphics x="30" y="30"/>
+    </inscription>
+  </arc>
+  <arc fromNode="ForkNode_exp_trans_id" id="ForkNode_Flow6_arc1" toNode="ForkNode_Flow6_place_id" type="connector">
+    <inscription id="anonymous_inscription_id" type="inscriptionText" text="1">
+      <graphics x="30" y="30"/>
+    </inscription>
+  </arc>
+  <arc fromNode="ForkNode_Flow6_start_place_id" id="ForkNode_Flow6_arc" toNode="ForkNode_Start6_exp_trans_id" type="connector">
+    <inscription id="anonymous_inscription_id" type="inscriptionText" text="1">
+      <graphics x="30" y="30"/>
+    </inscription>
+  </arc>
+  <arc fromNode="ForkNode_Flow4_start_place_id" id="ForkNode_Flow4_arc" toNode="ForkNode_Start4_exp_trans_id" type="connector">
+    <inscription id="anonymous_inscription_id" type="inscriptionText" text="1">
+      <graphics x="30" y="30"/>
+    </inscription>
+  </arc>
+  <arc fromNode="ForkNode_Flow5_start_place_id" id="ForkNode_Flow5_arc" toNode="ForkNode_Start5_exp_trans_id" type="connector">
+    <inscription id="anonymous_inscription_id" type="inscriptionText" text="1">
+      <graphics x="30" y="30"/>
+    </inscription>
+  </arc>
+  <arc fromNode="ForkNode_exp_trans_id" id="ForkNode_Flow4_arc1" toNode="ForkNode_Flow4_place_id" type="connector">
+    <inscription id="anonymous_inscription_id" type="inscriptionText" text="1">
+      <graphics x="30" y="30"/>
+    </inscription>
+  </arc>
+  <arc fromNode="OpaqueAction2_exp_trans_id" id="Flow4_fake_left_arc_id" toNode="Flow4_fake_place_id" type="connector">
+    <inscription id="anonymous_inscription_id" type="inscriptionText" text="1">
+      <graphics x="30" y="30"/>
+    </inscription>
+  </arc>
+  <arc fromNode="ForkNode_Flow2_finished_place_id" id="ae2_Flow_2" toNode="ForkNode_t_ended_exp_trans_id" type="connector">
+    <inscription id="anonymous_inscription_id" type="inscriptionText" text="1">
+      <graphics x="30" y="30"/>
+    </inscription>
+  </arc>
+  <arc fromNode="ForkNode_exp_trans_id" id="ForkNode_Flow1_arc1" toNode="ForkNode_Flow1_place_id" type="connector">
+    <inscription id="anonymous_inscription_id" type="inscriptionText" text="1">
+      <graphics x="30" y="30"/>
+    </inscription>
+  </arc>
+  <arc fromNode="ForkNode_Flow6_start_place_id" id="arcJoinCanStart_5" toNode="Join_imm_tran_id" type="connector">
+    <inscription id="anonymous_inscription_id" type="inscriptionText" text="1">
+      <graphics x="30" y="30"/>
+    </inscription>
+  </arc>
+  <arc fromNode="ForkNode_Flow2_place_id" id="ForkNode_Flow2_arc2" toNode="ForkNode_Start2_exp_trans_id" type="connector">
+    <inscription id="anonymous_inscription_id" type="inscriptionText" text="1">
+      <graphics x="30" y="30"/>
+    </inscription>
+  </arc>
+  <arc fromNode="ForkNode_exp_trans_id" id="ForkNode_Flow3_arc1" toNode="ForkNode_Flow3_place_id" type="connector">
+    <inscription id="anonymous_inscription_id" type="inscriptionText" text="1">
+      <graphics x="30" y="30"/>
+    </inscription>
+  </arc>
+  <arc fromNode="ForkNode_Flow3_finished_place_id" id="ae2_Flow_3" toNode="ForkNode_t_ended_exp_trans_id" type="connector">
+    <inscription id="anonymous_inscription_id" type="inscriptionText" text="1">
+      <graphics x="30" y="30"/>
+    </inscription>
+  </arc>
+  <arc fromNode="ForkNode_Flow1_place_id" id="ForkNode_Flow1_arc2" toNode="ForkNode_Start1_exp_trans_id" type="connector">
+    <inscription id="anonymous_inscription_id" type="inscriptionText" text="1">
+      <graphics x="30" y="30"/>
+    </inscription>
+  </arc>
+  <arc fromNode="ForkNode_Flow2_start_place_id" id="ForkNode_Flow2_arc" toNode="ForkNode_Start2_exp_trans_id" type="connector">
+    <inscription id="anonymous_inscription_id" type="inscriptionText" text="1">
+      <graphics x="30" y="30"/>
+    </inscription>
+  </arc>
+  <arc fromNode="ForkNode_t_ended_exp_trans_id" id="ForkNode_ended_arc" toNode="ForkNode_ended_place_id" type="connector">
+    <inscription id="anonymous_inscription_id" type="inscriptionText" text="1">
+      <graphics x="30" y="30"/>
+    </inscription>
+  </arc>
+  <arc fromNode="ForkNode_Flow4_place_id" id="ForkNode_Flow4_arc2" toNode="ForkNode_Start4_exp_trans_id" type="connector">
+    <inscription id="anonymous_inscription_id" type="inscriptionText" text="1">
+      <graphics x="30" y="30"/>
+    </inscription>
+  </arc>
+  <arc fromNode="ForkNode_End2_imm_tran_id" id="ae1_Flow_2" toNode="ForkNode_Flow2_finished_place_id" type="connector">
+    <inscription id="anonymous_inscription_id" type="inscriptionText" text="1">
+      <graphics x="30" y="30"/>
+    </inscription>
+  </arc>
+  <arc fromNode="ForkNode_Flow5_place_id" id="ForkNode_Flow5_arc2" toNode="ForkNode_Start5_exp_trans_id" type="connector">
+    <inscription id="anonymous_inscription_id" type="inscriptionText" text="1">
+      <graphics x="30" y="30"/>
+    </inscription>
+  </arc>
+  <arc fromNode="ForkNode_End5_imm_tran_id" id="ae1_Flow_5" toNode="ForkNode_Flow5_finished_place_id" type="connector">
+    <inscription id="anonymous_inscription_id" type="inscriptionText" text="1">
+      <graphics x="30" y="30"/>
+    </inscription>
+  </arc>
+  <arc fromNode="ForkNode_Flow3_start_place_id" id="ForkNode_Flow3_arc" toNode="ForkNode_Start3_exp_trans_id" type="connector">
+    <inscription id="anonymous_inscription_id" type="inscriptionText" text="1">
+      <graphics x="30" y="30"/>
+    </inscription>
+  </arc>
+  <arc fromNode="ForkNode_End5_imm_tran_id" id="arcCanStart_Flow_5" toNode="ForkNode_Flow6_start_place_id" type="connector">
+    <inscription id="anonymous_inscription_id" type="inscriptionText" text="1">
+      <graphics x="30" y="30"/>
+    </inscription>
+  </arc>
+  <arc fromNode="ForkNode_Flow2_start_place_id" id="arcJoinCanStart_1" toNode="Join_imm_tran_id" type="connector">
+    <inscription id="anonymous_inscription_id" type="inscriptionText" text="1">
+      <graphics x="30" y="30"/>
+    </inscription>
+  </arc>
+  <arc fromNode="ForkNode_End1_imm_tran_id" id="ae1_Flow_1" toNode="ForkNode_Flow1_finished_place_id" type="connector">
+    <inscription id="anonymous_inscription_id" type="inscriptionText" text="1">
+      <graphics x="30" y="30"/>
+    </inscription>
+  </arc>
+  <arc fromNode="ForkNode_exp_trans_id" id="ForkNode_Flow2_arc1" toNode="ForkNode_Flow2_place_id" type="connector">
+    <inscription id="anonymous_inscription_id" type="inscriptionText" text="1">
+      <graphics x="30" y="30"/>
+    </inscription>
+  </arc>
+  <arc fromNode="ForkNode_exp_trans_id" id="ForkNode_Flow5_arc1" toNode="ForkNode_Flow5_place_id" type="connector">
+    <inscription id="anonymous_inscription_id" type="inscriptionText" text="1">
+      <graphics x="30" y="30"/>
+    </inscription>
+  </arc>
+  <arc fromNode="ForkNode_End1_imm_tran_id" id="arcCanStart_Flow_1" toNode="ForkNode_Flow2_start_place_id" type="connector">
+    <inscription id="anonymous_inscription_id" type="inscriptionText" text="1">
+      <graphics x="30" y="30"/>
+    </inscription>
+  </arc>
+  <arc fromNode="ForkNode_End2_imm_tran_id" id="arcCanStart_Flow_2" toNode="ForkNode_Flow3_start_place_id" type="connector">
+    <inscription id="anonymous_inscription_id" type="inscriptionText" text="1">
+      <graphics x="30" y="30"/>
+    </inscription>
+  </arc>
+  <arc fromNode="ForkNode_Flow6_place_id" id="ForkNode_Flow6_arc2" toNode="ForkNode_Start6_exp_trans_id" type="connector">
+    <inscription id="anonymous_inscription_id" type="inscriptionText" text="1">
+      <graphics x="30" y="30"/>
+    </inscription>
+  </arc>
+  <arc fromNode="ForkNode_Flow6_finished_place_id" id="ae2_Flow_6" toNode="ForkNode_t_ended_exp_trans_id" type="connector">
+    <inscription id="anonymous_inscription_id" type="inscriptionText" text="1">
+      <graphics x="30" y="30"/>
+    </inscription>
+  </arc>
+  <arc fromNode="ForkNode_Flow4_finished_place_id" id="ae2_Flow_4" toNode="ForkNode_t_ended_exp_trans_id" type="connector">
+    <inscription id="anonymous_inscription_id" type="inscriptionText" text="1">
+      <graphics x="30" y="30"/>
+    </inscription>
+  </arc>
+  <arc fromNode="ForkNode_End4_imm_tran_id" id="arcCanStart_Flow_4" toNode="ForkNode_Flow5_start_place_id" type="connector">
+    <inscription id="anonymous_inscription_id" type="inscriptionText" text="1">
+      <graphics x="30" y="30"/>
+    </inscription>
+  </arc>
+  <arc fromNode="ForkNode_Flow5_finished_place_id" id="ae2_Flow_5" toNode="ForkNode_t_ended_exp_trans_id" type="connector">
+    <inscription id="anonymous_inscription_id" type="inscriptionText" text="1">
+      <graphics x="30" y="30"/>
+    </inscription>
+  </arc>
+  <arc fromNode="Flow4_fake_place_id" id="Flow4_fake_right_arc_id" toNode="ForkNode_End4_imm_tran_id" type="connector">
+    <inscription id="anonymous_inscription_id" type="inscriptionText" text="1">
+      <graphics x="30" y="30"/>
+    </inscription>
+  </arc>
+  <arc fromNode="InitialNode_place_id" id="InitialNode_to_Merge_left_arc_id" toNode="fake_InitialNodeMerge_transition_id" type="connector">
+    <inscription id="anonymous_inscription_id" type="inscriptionText" text="1">
+      <graphics x="30" y="30"/>
+    </inscription>
+  </arc>
+  <arc fromNode="fake_InitialNodeMerge_transition_id" id="InitialNode_to_Merge_right_arc_id" toNode="Merge_place_id" type="connector">
+    <inscription id="anonymous_inscription_id" type="inscriptionText" text="1">
+      <graphics x="30" y="30"/>
+    </inscription>
+  </arc>
+  <arc fromNode="fake_ForkNodeOpaqueAction2_place_id" id="ForkNode_to_OpaqueAction2_right_arc_id" toNode="OpaqueAction2_exp_trans_id" type="connector">
+    <inscription id="anonymous_inscription_id" type="inscriptionText" text="1">
+      <graphics x="30" y="30"/>
+    </inscription>
+  </arc>
+  <arc fromNode="ForkNode_Start1_exp_trans_id" id="ForkNode_to_Join_left_arc_id" toNode="fake_ForkNodeJoin_place_id" type="connector">
+    <inscription id="anonymous_inscription_id" type="inscriptionText" text="1">
+      <graphics x="30" y="30"/>
+    </inscription>
+  </arc>
+  <arc fromNode="fake_ForkNodeJoin_place_id" id="ForkNode_to_Join_right_arc_id" toNode="Join_imm_tran_id" type="connector">
+    <inscription id="anonymous_inscription_id" type="inscriptionText" text="1">
+      <graphics x="30" y="30"/>
+    </inscription>
+  </arc>
+  <arc fromNode="OpaqueAction_exp_trans_id" id="OpaqueAction_to_Join_left_arc_id" toNode="fake_OpaqueActionJoin_place_id" type="connector">
+    <inscription id="anonymous_inscription_id" type="inscriptionText" text="1">
+      <graphics x="30" y="30"/>
+    </inscription>
+  </arc>
+  <arc fromNode="fake_OpaqueActionJoin_place_id" id="OpaqueAction_to_Join_right_arc_id" toNode="Join_imm_tran_id" type="connector">
+    <inscription id="anonymous_inscription_id" type="inscriptionText" text="1">
+      <graphics x="30" y="30"/>
+    </inscription>
+  </arc>
+  <arc fromNode="ForkNode_Start4_exp_trans_id" id="ForkNode_to_OpaqueAction2_left_arc_id" toNode="fake_ForkNodeOpaqueAction2_place_id" type="connector">
+    <inscription id="anonymous_inscription_id" type="inscriptionText" text="1">
+      <graphics x="30" y="30"/>
+    </inscription>
+  </arc>
+  <arc fromNode="ForkNode_Start5_exp_trans_id" id="ForkNode_to_OpaqueAction_left_arc_id" toNode="fake_ForkNodeOpaqueAction_place_id" type="connector">
+    <inscription id="anonymous_inscription_id" type="inscriptionText" text="1">
+      <graphics x="30" y="30"/>
+    </inscription>
+  </arc>
+  <arc fromNode="fake_ForkNodeOpaqueAction_place_id" id="ForkNode_to_OpaqueAction_right_arc_id" toNode="OpaqueAction_exp_trans_id" type="connector">
+    <inscription id="anonymous_inscription_id" type="inscriptionText" text="1">
+      <graphics x="30" y="30"/>
+    </inscription>
+  </arc>
+  <arc fromNode="Merge_place_id" id="Merge_to_ForkNode_arc_id" toNode="ForkNode_exp_trans_id" type="connector">
+    <inscription id="anonymous_inscription_id" type="inscriptionText" text="1">
+      <graphics x="30" y="30"/>
+    </inscription>
+  </arc>
+  <arc fromNode="DecisionNodearc_2_imm_tran_id" id="DecisionNode_to_ActivityFinal2_arc_id" toNode="ActivityFinal2_place_id" type="connector">
+    <inscription id="anonymous_inscription_id" type="inscriptionText" text="1">
+      <graphics x="30" y="30"/>
+    </inscription>
+  </arc>
+  <arc fromNode="ForkNode_Start2_exp_trans_id" id="ForkNode_to_FlowFinal_arc_id" toNode="FlowFinal_place_id" type="connector">
+    <inscription id="anonymous_inscription_id" type="inscriptionText" text="1">
+      <graphics x="30" y="30"/>
+    </inscription>
+  </arc>
+  <arc fromNode="DecisionNodearc_1_imm_tran_id" id="DecisionNode_to_FlowFinal2_arc_id" toNode="FlowFinal2_place_id" type="connector">
+    <inscription id="anonymous_inscription_id" type="inscriptionText" text="1">
+      <graphics x="30" y="30"/>
+    </inscription>
+  </arc>
+  <arc fromNode="Join_imm_tran_id" id="Join_to_DecisionNode_arc_id" toNode="DecisionNode_place_id" type="connector">
+    <inscription id="anonymous_inscription_id" type="inscriptionText" text="1">
+      <graphics x="30" y="30"/>
+    </inscription>
+  </arc>
+  <arc fromNode="ForkNode_Start3_exp_trans_id" id="ForkNode_to_Merge_arc_id" toNode="Merge_place_id" type="connector">
+    <inscription id="anonymous_inscription_id" type="inscriptionText" text="1">
+      <graphics x="30" y="30"/>
+    </inscription>
+  </arc>
+  <arc fromNode="ForkNode_Start6_exp_trans_id" id="ForkNode_to_ActivityFinal1_arc_id" toNode="ActivityFinal1_place_id" type="connector">
+    <inscription id="anonymous_inscription_id" type="inscriptionText" text="1">
+      <graphics x="30" y="30"/>
+    </inscription>
+  </arc>
+</eDSPN:EDSPNNet>

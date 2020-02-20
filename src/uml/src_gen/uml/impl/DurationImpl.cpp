@@ -33,13 +33,24 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
 
 #include "uml/Dependency.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -58,6 +69,8 @@
 #include "uml/Type.hpp"
 
 #include "uml/ValueSpecification.hpp"
+
+#include "uml/ValueSpecificationAction.hpp"
 
 #include "ecore/EcorePackage.hpp"
 #include "ecore/EcoreFactory.hpp"
@@ -161,6 +174,18 @@ DurationImpl::~DurationImpl()
 
 
 
+//Additional constructor for the containments back reference
+			DurationImpl::DurationImpl(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction)
+			:DurationImpl()
+			{
+			    m_valueSpecificationAction = par_valueSpecificationAction;
+				m_owner = par_valueSpecificationAction;
+			}
+
+
+
+
+
 
 DurationImpl::DurationImpl(const DurationImpl & obj):DurationImpl()
 {
@@ -194,17 +219,11 @@ DurationImpl::DurationImpl(const DurationImpl & obj):DurationImpl()
 
 	m_type  = obj.getType();
 
+	m_valueSpecificationAction  = obj.getValueSpecificationAction();
+
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	if(obj.getExpr()!=nullptr)
 	{
 		m_expr = std::dynamic_pointer_cast<uml::ValueSpecification>(obj.getExpr()->copy());
@@ -240,7 +259,7 @@ std::shared_ptr<ecore::EObject>  DurationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> DurationImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getDuration_EClass();
+	return UmlPackageImpl::eInstance()->getDuration_Class();
 }
 
 //*********************************
@@ -328,6 +347,11 @@ std::shared_ptr<ecore::EObject> DurationImpl::eContainer() const
 	{
 		return wp;
 	}
+
+	if(auto wp = m_valueSpecificationAction.lock())
+	{
+		return wp;
+	}
 	return nullptr;
 }
 
@@ -338,10 +362,20 @@ Any DurationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::DURATION_EREFERENCE_EXPR:
-			return eAny(getExpr()); //24215
-		case UmlPackage::DURATION_EREFERENCE_OBSERVATION:
-			return eAny(getObservation()); //24216
+		case UmlPackage::DURATION_ATTRIBUTE_EXPR:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getExpr())); //7815
+		case UmlPackage::DURATION_ATTRIBUTE_OBSERVATION:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Observation>::iterator iter = m_observation->begin();
+			Bag<uml::Observation>::iterator end = m_observation->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //7816
+		}
 	}
 	return ValueSpecificationImpl::eGet(featureID, resolve, coreType);
 }
@@ -349,10 +383,10 @@ bool DurationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::DURATION_EREFERENCE_EXPR:
-			return getExpr() != nullptr; //24215
-		case UmlPackage::DURATION_EREFERENCE_OBSERVATION:
-			return getObservation() != nullptr; //24216
+		case UmlPackage::DURATION_ATTRIBUTE_EXPR:
+			return getExpr() != nullptr; //7815
+		case UmlPackage::DURATION_ATTRIBUTE_OBSERVATION:
+			return getObservation() != nullptr; //7816
 	}
 	return ValueSpecificationImpl::internalEIsSet(featureID);
 }
@@ -360,11 +394,48 @@ bool DurationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::DURATION_EREFERENCE_EXPR:
+		case UmlPackage::DURATION_ATTRIBUTE_EXPR:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::ValueSpecification> _expr = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
-			setExpr(_expr); //24215
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::ValueSpecification> _expr = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
+			setExpr(_expr); //7815
+			return true;
+		}
+		case UmlPackage::DURATION_ATTRIBUTE_OBSERVATION:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Observation>> observationList(new Bag<uml::Observation>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				observationList->add(std::dynamic_pointer_cast<uml::Observation>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Observation>::iterator iterObservation = m_observation->begin();
+			Bag<uml::Observation>::iterator endObservation = m_observation->end();
+			while (iterObservation != endObservation)
+			{
+				if (observationList->find(*iterObservation) == -1)
+				{
+					m_observation->erase(*iterObservation);
+				}
+				iterObservation++;
+			}
+
+			iterObservation = observationList->begin();
+			endObservation = observationList->end();
+			while (iterObservation != endObservation)
+			{
+				if (m_observation->find(*iterObservation) == -1)
+				{
+					m_observation->add(*iterObservation);
+				}
+				iterObservation++;			
+			}
 			return true;
 		}
 	}
@@ -455,7 +526,7 @@ void DurationImpl::resolveReferences(const int featureID, std::list<std::shared_
 {
 	switch(featureID)
 	{
-		case UmlPackage::DURATION_EREFERENCE_OBSERVATION:
+		case UmlPackage::DURATION_ATTRIBUTE_OBSERVATION:
 		{
 			std::shared_ptr<Bag<uml::Observation>> _observation = getObservation();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -486,7 +557,6 @@ void DurationImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> s
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
@@ -507,7 +577,7 @@ void DurationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 		std::shared_ptr<uml::ValueSpecification > expr = this->getExpr();
 		if (expr != nullptr)
 		{
-			saveHandler->addReference(expr, "expr", expr->eClass() != package->getValueSpecification_EClass());
+			saveHandler->addReference(expr, "expr", expr->eClass() != package->getValueSpecification_Class());
 		}
 	
 

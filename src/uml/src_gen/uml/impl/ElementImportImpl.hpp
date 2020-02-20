@@ -88,12 +88,12 @@ namespace uml
 			/*!
 			 Specifies the visibility of the imported PackageableElement within the importingNamespace, i.e., whether the  importedElement will in turn be visible to other Namespaces. If the ElementImport is public, the importedElement will be visible outside the importingNamespace while, if the ElementImport is private, it will not.
 			<p>From package UML::CommonStructure.</p> */ 
-			virtual VisibilityKind getVisibility() const ;
+			virtual uml::VisibilityKind getVisibility() const ;
 			
 			/*!
 			 Specifies the visibility of the imported PackageableElement within the importingNamespace, i.e., whether the  importedElement will in turn be visible to other Namespaces. If the ElementImport is public, the importedElement will be visible outside the importingNamespace while, if the ElementImport is private, it will not.
 			<p>From package UML::CommonStructure.</p> */ 
-			virtual void setVisibility (VisibilityKind _visibility); 
+			virtual void setVisibility (uml::VisibilityKind _visibility); 
 			
 			
 			

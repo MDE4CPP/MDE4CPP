@@ -33,6 +33,11 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Classifier.hpp"
@@ -40,8 +45,6 @@
 #include "uml/Comment.hpp"
 
 #include "uml/Dependency.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -160,14 +163,6 @@ RedefinableElementImpl::RedefinableElementImpl(const RedefinableElementImpl & ob
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	if(obj.getNameExpression()!=nullptr)
 	{
 		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
@@ -195,7 +190,7 @@ std::shared_ptr<ecore::EObject>  RedefinableElementImpl::copy() const
 
 std::shared_ptr<ecore::EClass> RedefinableElementImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getRedefinableElement_EClass();
+	return UmlPackageImpl::eInstance()->getRedefinableElement_Class();
 }
 
 //*********************************
@@ -304,12 +299,32 @@ Any RedefinableElementImpl::eGet(int featureID, bool resolve, bool coreType) con
 {
 	switch(featureID)
 	{
-		case UmlPackage::REDEFINABLEELEMENT_EATTRIBUTE_ISLEAF:
-			return eAny(getIsLeaf()); //5010
-		case UmlPackage::REDEFINABLEELEMENT_EREFERENCE_REDEFINEDELEMENT:
-			return eAny(getRedefinedElement()); //5011
-		case UmlPackage::REDEFINABLEELEMENT_EREFERENCE_REDEFINITIONCONTEXT:
-			return eAny(getRedefinitionContext()); //5012
+		case UmlPackage::REDEFINABLEELEMENT_ATTRIBUTE_ISLEAF:
+			return eAny(getIsLeaf()); //2059
+		case UmlPackage::REDEFINABLEELEMENT_ATTRIBUTE_REDEFINEDELEMENT:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::RedefinableElement>::iterator iter = m_redefinedElement->begin();
+			Bag<uml::RedefinableElement>::iterator end = m_redefinedElement->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //20510
+		}
+		case UmlPackage::REDEFINABLEELEMENT_ATTRIBUTE_REDEFINITIONCONTEXT:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Classifier>::iterator iter = m_redefinitionContext->begin();
+			Bag<uml::Classifier>::iterator end = m_redefinitionContext->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //20511
+		}
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -317,12 +332,12 @@ bool RedefinableElementImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::REDEFINABLEELEMENT_EATTRIBUTE_ISLEAF:
-			return getIsLeaf() != false; //5010
-		case UmlPackage::REDEFINABLEELEMENT_EREFERENCE_REDEFINEDELEMENT:
-			return getRedefinedElement() != nullptr; //5011
-		case UmlPackage::REDEFINABLEELEMENT_EREFERENCE_REDEFINITIONCONTEXT:
-			return getRedefinitionContext() != nullptr; //5012
+		case UmlPackage::REDEFINABLEELEMENT_ATTRIBUTE_ISLEAF:
+			return getIsLeaf() != false; //2059
+		case UmlPackage::REDEFINABLEELEMENT_ATTRIBUTE_REDEFINEDELEMENT:
+			return getRedefinedElement() != nullptr; //20510
+		case UmlPackage::REDEFINABLEELEMENT_ATTRIBUTE_REDEFINITIONCONTEXT:
+			return getRedefinitionContext() != nullptr; //20511
 	}
 	return NamedElementImpl::internalEIsSet(featureID);
 }
@@ -330,11 +345,11 @@ bool RedefinableElementImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::REDEFINABLEELEMENT_EATTRIBUTE_ISLEAF:
+		case UmlPackage::REDEFINABLEELEMENT_ATTRIBUTE_ISLEAF:
 		{
 			// BOOST CAST
 			bool _isLeaf = newValue->get<bool>();
-			setIsLeaf(_isLeaf); //5010
+			setIsLeaf(_isLeaf); //2059
 			return true;
 		}
 	}
@@ -409,7 +424,6 @@ void RedefinableElementImpl::save(std::shared_ptr<persistence::interfaces::XSave
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
@@ -427,7 +441,7 @@ void RedefinableElementImpl::saveContent(std::shared_ptr<persistence::interfaces
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getRedefinableElement_EAttribute_isLeaf()) )
+		if ( this->eIsSet(package->getRedefinableElement_Attribute_isLeaf()) )
 		{
 			saveHandler->addAttribute("isLeaf", this->getIsLeaf());
 		}

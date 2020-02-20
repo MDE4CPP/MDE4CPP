@@ -17,6 +17,11 @@ import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 
 import org.eclipse.acceleo.parser.compiler.AcceleoCompilerHelper;
 
+/**
+ * 
+ *
+ */
+@SuppressWarnings("deprecation")
 public class CompileAcceleoGenerator 
 {
 
@@ -81,6 +86,9 @@ public class CompileAcceleoGenerator
 	}
 	
 	
+	/**
+	 * @throws Exception exception
+	 */
 	public void execute() throws Exception 
 	{
 		registerResourceFactories();
@@ -161,7 +169,10 @@ public class CompileAcceleoGenerator
 		}
 	}
 	
-	 public static void main(final String[] args) {
+	 /**
+	 * @param args {source folder, target folder}
+	 */
+	public static void main(final String[] args) {
         try 
         {
             if (args.length != 2) 

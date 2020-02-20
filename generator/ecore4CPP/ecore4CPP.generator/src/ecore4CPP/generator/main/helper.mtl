@@ -14,6 +14,7 @@
  */]
 [module helper('http://www.eclipse.org/emf/2002/Ecore')]
 
+[import ecore4CPP::generator::main::helpers::keywords /]
 
 [**
  * Helper for c++ abstract function sufix
@@ -24,18 +25,31 @@
 [**
  * check if application should be prepared
 */]
-[query public prepareApplication(ePackage : EPackage) : Boolean = eAllContents()->filter(ecore::EAnnotation)->select(source = 'prepareApplication')->notEmpty() /]
-[query public hasMainSourceCode(ePackage : EPackage) : Boolean = if (prepareApplication()) then eAllContents()->filter(ecore::EAnnotation)->select(source = 'prepareApplication')->first().details->select(key = 'sourceCodeMain')->notEmpty() else false endif /]
-[query public getMainSourceCode(ePackage : EPackage) : String = eAllContents()->filter(ecore::EAnnotation)->select(source = 'prepareApplication')->first().details->select(key = 'sourceCodeMain')->first().value /]
+[query public prepareApplication(ePackage : EPackage) : Boolean = eAllContents()->filter(ecore::EAnnotation)->select(source = sourceNamePrepareApplication())->notEmpty() /]
+[query public hasMainSourceCode(ePackage : EPackage) : Boolean = if (prepareApplication()) then eAllContents()->filter(ecore::EAnnotation)->select(source = sourceNamePrepareApplication())->first().details->select(key = keyMainSourceCode())->notEmpty() else false endif /]
+[query public getMainSourceCode(ePackage : EPackage) : String = eAllContents()->filter(ecore::EAnnotation)->select(source = sourceNamePrepareApplication())->first().details->select(key = keyMainSourceCode())->first().value /]
 
-[query public hasMainSourceIncludes(ePackage : EPackage) : Boolean = if (prepareApplication()) then eAllContents()->filter(ecore::EAnnotation)->select(source = 'prepareApplication')->first().details->select(key = 'sourceCodeIncludes')->notEmpty() else false endif /]
-[query public getMainSourceIncludes(ePackage : EPackage) : String = eAllContents()->filter(ecore::EAnnotation)->select(source = 'prepareApplication')->first().details->select(key = 'sourceCodeIncludes')->first().value /]
+[query public hasMainSourceIncludes(ePackage : EPackage) : Boolean = if (prepareApplication()) then eAllContents()->filter(ecore::EAnnotation)->select(source = sourceNamePrepareApplication())->first().details->select(key = keyMainIncludes())->notEmpty() else false endif /]
+[query public getMainSourceIncludes(ePackage : EPackage) : String = eAllContents()->filter(ecore::EAnnotation)->select(source = sourceNamePrepareApplication())->first().details->select(key = keyMainIncludes())->first().value /]
+
+[**
+ * namespace generation
+*/]
+[query private getRootPackageName(anEPackage : EPackage, ignoreRoot : Boolean) : String = if (ignoreRoot) then '' else anEPackage.name endif /]
+[query private getNamespace(aEPackage : EPackage, separator : String, ignoreRoot : Boolean) : String = if(eSuperPackage.oclIsUndefined()) then getRootPackageName(ignoreRoot) else eSuperPackage.getNamespace(separator, ignoreRoot).concat(separator).concat(aEPackage.name) endif/]
+[query public generateNamespacePath(anEClassifier : EClassifier) : String = anEClassifier.ePackage.getNamespace('/', false) /]
+[query public generateNamespaceDefinition(anEClassifier : EClassifier) : String = anEClassifier.ePackage.getNamespace('::', false) /]
+[query public generateNamespaceDefinition(anEPackage : EPackage) : String = anEPackage.getNamespace('::', false) /]
+[query public getRootPackage(aEPackage : EPackage) : EPackage = if(eSuperPackage.oclIsUndefined()) then aEPackage else eSuperPackage.getRootPackage() endif /]
+[query public getRootPackage(aEClassifier : EClassifier) : EPackage = if(ePackage.oclIsUndefined()) then ePackage else ePackage.getRootPackage() endif /]
+
+[query public getNamespacePathWithoutRoot(anEClassifier : EClassifier) : String = anEClassifier.ePackage.getNamespace('/', true).concat('/').substring(2) /] [comment first char is '/', which should be removed, index starts at 1 /] 
 
 [**
  * Helper for sourcegen annotations
 */]
-[query public hasSourceGen(aModelElement : EModelElement) : Boolean = eAnnotations->select(source = 'http://sse.tu-ilmenau.de/codegen')->notEmpty()  /]
-[query public SourceGen(aModelElement : EModelElement) : EAnnotation = eAnnotations->select(source = 'http://sse.tu-ilmenau.de/codegen')->first() /]
+[query public hasSourceGen(aModelElement : EModelElement) : Boolean = eAnnotations->select(source = sourceNameCodeGen())->notEmpty()  /]
+[query public SourceGen(aModelElement : EModelElement) : EAnnotation = eAnnotations->select(source = sourceNameCodeGen())->first() /]
 
 [**
  * check and get key value from sourcegen eannotation
@@ -46,24 +60,24 @@
 [query public containsContainerAttribute(aClass : EClass) : Boolean =  getContainsContainerAttribute()->notEmpty() /]
 [query public getContainsContainerAttribute(aClass : EClass) : OrderedSet(EReference) =  aClass.eReferences->select(isContainerAttribute())->sortedBy(name) /]
 
-[query public isContainerAttribute(aRef : EReference) : Boolean =  not (aRef.hasKey('no_back_reference')) and  aRef.container or (aRef->closure(eAnnotations->select(source='subsets').references.oclAsType(EReference))->select(container)->size() > 0)  /]
+[query public isContainerAttribute(aRef : EReference) : Boolean =  not (aRef.hasKey(keyNoBackReference())) and  aRef.container or (aRef->closure(eAnnotations->select(source=sourceNameSubset()).references.oclAsType(EReference))->select(container)->size() > 0)  /]
 
 [query public getSuperTypeContainers(aClass:EClass) : OrderedSet(EReference) = if not(aClass.eSuperTypes->isEmpty()) then aClass.eSuperTypes.getAllContainers()->flatten()->asOrderedSet() else OrderedSet{} endif /]
 
 [query public getAllContainers(aClass : EClass) : OrderedSet(EReference) =  if getContainsContainerAttribute()->notEmpty() then if getSuperTypeContainers()->isEmpty() then getContainsContainerAttribute() else OrderedSet{getContainsContainerAttribute()}->append(getSuperTypeContainers()->flatten()->reject(oclIsUndefined())->asOrderedSet())->flatten()->asOrderedSet() endif else getSuperTypeContainers()->asOrderedSet() endif /]
 [comment][query public getFirstContainer(aClass : EClass) : EReference =  if getContainsContainerAttribute()->notEmpty() then getContainsContainerAttribute()->first() else if not(aClass.eSuperTypes->isEmpty()) then aClass.eSuperTypes.getFirstContainer()->flatten() else null endif endif /][/comment]
 
-[query public hasImplOnly(aModelElement : EModelElement) : Boolean =  if aModelElement.hasKey('implOnly') then aModelElement.valueKey('implOnly')='true' else false endif /]
-[query public doNotGenerate(aModelElement : EModelElement) : Boolean =  if aModelElement.hasKey('doNotGenerate') then aModelElement.valueKey('doNotGenerate')='true' else false endif /]
-[query public hasImplSetterOnly(aModelElement : EModelElement) : Boolean = if aModelElement.hasKey('implSetterOnly') then aModelElement.valueKey('implSetterOnly')='true' else false endif/]
+[query public hasImplOnly(aModelElement : EModelElement) : Boolean =  if aModelElement.hasKey(keyImplOnly()) then aModelElement.valueKey(keyImplOnly())='true' else false endif /]
+[query public doNotGenerate(aModelElement : EModelElement) : Boolean =  if aModelElement.hasKey(keyDoNotGenerate()) then aModelElement.valueKey(keyDoNotGenerate())='true' else false endif /]
+[query public hasImplSetterOnly(aModelElement : EModelElement) : Boolean = if aModelElement.hasKey(keyImplSetterOnly()) then aModelElement.valueKey(keyImplSetterOnly())='true' else false endif/]
 
-[query public SetterName(feature : EStructuralFeature) : String = if hasKey('SetterName') then valueKey('SetterName') else 'set'.concat(name.toUpperFirst()) endif/]
-[query public GetterName(feature : EStructuralFeature) : String = if hasKey('GetterName') then valueKey('GetterName') else getterPrefix().concat(name.toUpperFirst()) endif/]
+[query public SetterName(feature : EStructuralFeature) : String = if hasKey(keySetterName()) then valueKey(keySetterName()) else 'set'.concat(name.toUpperFirst()) endif/]
+[query public GetterName(feature : EStructuralFeature) : String = if hasKey(keyGetterName()) then valueKey(keyGetterName()) else getterPrefix().concat(name.toUpperFirst()) endif/]
 
 [query public packageGetter(aReference : EReference) : String = if oclIsUndefined() then 'nullptr' else getterPrefix().concat(getMemberNameUpperFirst()).concat('()') endif/]
 [query public packageGetter(aAttribute : EAttribute) : String = 'get'.concat(getMemberNameUpperFirst()).concat('()') /]
 
-[query public metamodelPackageNameForEstructuralFeture(aStructural : EStructuralFeature,aClass: EClass) : String = if( aStructural.eContainingClass.ePackage = aClass.ePackage  ) then aStructural.eContainingClass.ePackage.name.concat('Package').toUpperFirst() else aStructural.eContainingClass.ePackage.name.concat('::').concat(aStructural.eContainingClass.ePackage.name.concat('Package').toUpperFirst()) endif/]
+[query public metamodelPackageNameForEstructuralFeture(aStructural : EStructuralFeature,aClass: EClass) : String = if( aStructural.eContainingClass.ePackage = aClass.getRootPackage()) then aStructural.eContainingClass.ePackage.name.concat('Package').toUpperFirst() else aStructural.eContainingClass.getRootPackage().name.concat('::').concat(aStructural.eContainingClass.getRootPackage().name.concat('Package').toUpperFirst()) endif/]
 
 [**
  * Get a string of the getterfunction for the element in the corresponding metamodel package 
@@ -71,17 +85,17 @@
 [query public packageGetter(aEClassifier : EClassifier, aStruct : EStructuralFeature) : String = packageGetter(aEClassifier,aStruct.eContainingClass) /]
 [query public packageGetter(aEClass : EClass, supertype : EClass) : String = packageGetter(supertype.oclAsType(EClassifier),aEClass.oclAsType(EClassifier)) /]
 [query public packageGetter(aEClassifier1 : EClassifier, aEClassifier2 : EClassifier) : String = needMetaModelPackageGetter(aEClassifier1, aEClassifier2).concat('get').concat(aEClassifier1.getMemberNameUpperFirst()).concat('()') /]
-[query public needMetaModelPackageGetter(aClassifier1 : EClassifier ,aClassifier2 : EClassifier ) : String = if(aClassifier1.ePackage.name = aClassifier2.ePackage.name )then '' else  aClassifier1.ePackage.nsPrefix.concat('::').concat(aClassifier1.ePackage.name.toUpperFirst()).concat('Package').concat('::eInstance()->')  endif /]
+[query public needMetaModelPackageGetter(aClassifier1 : EClassifier ,aClassifier2 : EClassifier ) : String = if(aClassifier1.generateNamespaceDefinition() = aClassifier2.generateNamespaceDefinition()) then '' else  aClassifier1.getRootPackage().name.concat('::').concat(aClassifier1.getRootPackage().name.toUpperFirst()).concat('Package').concat('::eInstance()->')  endif /]
 
 [**
  * Subset Union helper queries
 */]
-[query public hasSubset(aModelElement : EModelElement) : Boolean = eAnnotations->select(source = 'subsets')->notEmpty()  /]
-[query public isUnion(aModelElement : EModelElement) : Boolean = eAnnotations->select(source = 'union')->notEmpty()  /]
+[query public hasSubset(aModelElement : EModelElement) : Boolean = eAnnotations->select(source = sourceNameSubset())->notEmpty()  /]
+[query public isUnion(aModelElement : EModelElement) : Boolean = eAnnotations->select(source = sourceNameUnion())->notEmpty()  /]
 [query public isSubsetUnion(aModelElement: EModelElement) : Boolean = hasSubset() and (isUnion() or subsetIsUnion())/]
-[query public Subset(aModelElement : EModelElement) : Set(EObject) = eAnnotations->select(source = 'subsets')->asOrderedSet()->first().references /]
+[query public Subset(aModelElement : EModelElement) : Set(EObject) = eAnnotations->select(source = sourceNameSubset())->asOrderedSet()->first().references /]
 
-[query public subsetIsUnion(aModelElement : EModelElement) : Boolean = aModelElement.ancestors(EPackage).eAllContents()->filter(EAnnotation)->select(a:EAnnotation|a.source='subsets').references->includes(self) /]
+[query public subsetIsUnion(aModelElement : EModelElement) : Boolean = aModelElement.ancestors(EPackage).eAllContents()->filter(EAnnotation)->select(a:EAnnotation|a.source=sourceNameSubset()).references->includes(self) /]
 
 [query public findLowerSubset(owner: EClass, thisClass : EClass, ref : EReference) : EReference = let r : EReference = owner.getSubsetsForUnion(ref)->select(aRef : EReference | aRef.eType = thisClass)->asOrderedSet()->first() in if r.oclIsUndefined() then ref else r endif /]
 
@@ -89,24 +103,24 @@
 [**
  * 
 */]
-[template public generateTypeClass(anEDataType : EClass)]
-[anEDataType.name/]
-[/template]
 
-[query public metamodelaTypedElementString(aStructuralFeature : EStructuralFeature) : String = if aStructuralFeature.eContainingClass.ePackage = aStructuralFeature.eClass().ePackage then aStructuralFeature.eClass().generateTypeClass() else aStructuralFeature.eClass().ePackage.name.concat('::').concat(aStructuralFeature.eClass().generateTypeClass()) endif /]
-[query public metamodelaTypedElementString(aOperation : EOperation) : String = if aOperation.eContainingClass.ePackage = aOperation.eClass().ePackage then aOperation.eClass().generateTypeClass() else aOperation.eClass().ePackage.name.concat('::').concat(aOperation.eClass().generateTypeClass()) endif /]
+[query public generateTypeClass(anEClass : EClass, ignoreNamespace : Boolean) : String = if (ignoreNamespace) then anEClass.name else anEClass.generateNamespaceDefinition().concat('::').concat(anEClass.name) endif /]
+[query public generateTypeClass(anEClass : EClass) : String = anEClass.generateTypeClass(anEClass.ePackage = anEClass.getRootPackage()) /]
+
+[query public metamodelaTypedElementString(aStructuralFeature : EStructuralFeature) : String = aStructuralFeature.eClass().generateTypeClass(aStructuralFeature.eContainingClass.ePackage = aStructuralFeature.eClass().ePackage) /]
+[query public metamodelaTypedElementString(aOperation : EOperation) : String = aOperation.eClass().generateTypeClass(aOperation.eContainingClass.ePackage = aOperation.eClass().ePackage) /]
 
 [query public metaModelTypeString(aClass : EClassifier) : String = metaModelTypeString(aClass, aClass.ePackage) /]
-[query public metaModelTypeString(anENamedElement : ENamedElement, anEPackage : EPackage) : String = if anEPackage = anENamedElement.eClass().ePackage then anENamedElement.eClass().generateTypeClass() else anENamedElement.eClass().ePackage.name.concat('::').concat(anENamedElement.eClass().generateTypeClass()) endif /]
+[query public metaModelTypeString(anENamedElement : ENamedElement, anEPackage : EPackage) : String = anENamedElement.eClass().generateTypeClass(anEPackage = anENamedElement.eClass()) /]
 
 [query public needNamespace(anPackage : EPackage,str :String) : String = if not( anPackage.name = 'ecore') then 'ecore::'.concat(str) else str endif /]
 
-[query public ClassWithNamespace(aClass : EClass, base : EClass) : String = if aClass.ePackage.name = base.ePackage.name then base.name else base.ePackage.name.concat('::').concat(base.name) endif /]
+[query public ClassWithNamespace(aClass : EClass, base : EClass) : String = if aClass.generateNamespaceDefinition() = base.generateNamespaceDefinition() then base.name else base.generateNamespaceDefinition().concat('::').concat(base.name) endif /] 
 
 [query private getGuardName(namedelement : ENamedElement, sufix: String) : String = 
 		if (namedelement.eContainer().oclIsUndefined()) 
 		then namedelement.name.concat(sufix).concat('_hpp').toUpperCase() 
-		else namedelement.eContainer().oclAsType(EPackage).name.concat('_').concat(namedelement.name).concat(sufix).concat('_hpp').toUpperCase()
+		else namedelement.eContainer().oclAsType(EPackage).getNamespace('_', false).concat('_').concat(namedelement.name).concat(sufix).concat('_hpp').toUpperCase()
 		endif/]
 
 [**
@@ -151,11 +165,11 @@
 #endif /* end of include guard: [getGuardName(sufix)/] */
 [/template]
 
-[query public hasDocumentationnAnnotation(aModelElement : EModelElement) : Boolean = eAnnotations->select(source = 'http://www.eclipse.org/emf/2002/GenModel')->notEmpty()  /]
-[query public DocumentationAnnotation(aModelElement : EModelElement) : EAnnotation = eAnnotations->select(source = 'http://www.eclipse.org/emf/2002/GenModel')->first() /]
+[query public hasDocumentationnAnnotation(aModelElement : EModelElement) : Boolean = eAnnotations->select(source = sourceNameGenModel())->notEmpty()  /]
+[query public DocumentationAnnotation(aModelElement : EModelElement) : EAnnotation = eAnnotations->select(source = sourceNameGenModel())->first() /]
 
-[query public hasDocKey(aModelElement : EModelElement) : Boolean = if aModelElement.hasDocumentationnAnnotation() then aModelElement.DocumentationAnnotation().details->select(key = 'documentation')->notEmpty() else false endif /]
-[query public docDescription(aModelElement : EModelElement) : String = aModelElement.DocumentationAnnotation().details->select(key = 'documentation')->first().value /]
+[query public hasDocKey(aModelElement : EModelElement) : Boolean = if aModelElement.hasDocumentationnAnnotation() then aModelElement.DocumentationAnnotation().details->select(key = keyDocumentation())->notEmpty() else false endif /]
+[query public docDescription(aModelElement : EModelElement) : String = aModelElement.DocumentationAnnotation().details->select(key = keyDocumentation())->first().value /]
 
 [**
  * Add the doxygen documentation for .
@@ -167,16 +181,16 @@
 */
 [/template]
 
-[query public ignore(aModelElement : EModelElement) : Boolean = eAnnotations->select(source = 'ignore')->notEmpty()  /]
+[query public ignore(aModelElement : EModelElement) : Boolean = eAnnotations->select(source = sourceNameIgnore())->notEmpty()  /]
 
 [query public getUnionsReference(aClass : EClass) : Set(EReference) = OrderedSet{aClass.getSubsetedUnionsReference(),aClass.eReferences->select(isUnion())}->flatten()->sortedBy(name) /]
 
 [query public getSubsetedUnionsReference(aClass : EClass): Set(EReference) =  aClass.eAllReferences->select(if hasSubset() then not Subset()->forAll(e| not e.oclAsType(EModelElement).isUnion()) else false endif ).Subset().oclAsType(EReference)->asOrderedSet()->sortedBy(name)/]
 [query public getSubsetsForUnion(aClass : EClass,union : EReference): Set(EReference) =  aClass.eAllReferences->select(if hasSubset() then not Subset()->forAll(e| not (e.oclAsType(EReference) = union)) else false endif ).oclAsType(EReference)->asOrderedSet()->sortedBy(name)/]
 
-[query public getClassifierIDName(anEClass : EClass) : String = if(name = 'EClass' or name = 'EDataType' or name = 'EEnum') then 'Classifier' else getFeatureIDName(anEClass) endif/]
+[query public getClassifierIDName(anEClass : EClass) : String = if(name = 'EClass' or name = 'EDataType' or name = 'EEnum') then 'MetaElement' else getFeatureIDName(anEClass) endif/]
 [query public getFeatureIDName(anEClass : EClass) : String = if(name = 'EAttribute' or name = 'EReference') then 'Feature' else getOperationIDName(anEClass) endif/]
-[query public getOperationIDName(anEClass : EClass) : String = if(name = 'EOperation') then 'Operation' else '' endif/]
+[query public getOperationIDName(anEClass : EClass) : String = if(name = 'EOperation') then 'Operation' else 'MetaElement' endif/]
 
 [**
  * generate member names for package generation
@@ -190,15 +204,15 @@
 [query public getMemberName(anENamedElement : ENamedElement) : String = if (anENamedElement.oclIsKindOf(EClassifier)) then anENamedElement.oclAsType(EClassifier).getMemberName() else anENamedElement.getMemberNameStructFeat() endif/]
 [query private getMemberNameStructFeat(anENamedElement : ENamedElement) : String = if (anENamedElement.oclIsKindOf(EStructuralFeature)) then anENamedElement.oclAsType(EStructuralFeature).getMemberName() else anENamedElement.getMemberNameOperation() endif/]
 [query private getMemberNameOperation(anENamedElement : ENamedElement) : String = if (anENamedElement.oclIsKindOf(EOperation)) then anENamedElement.oclAsType(EOperation).getMemberName() else anENamedElement.getMemberNameGeneral() endif/]
-[query private getMemberNameGeneral(anENamedElement : ENamedElement) : String = anENamedElement.name.toLowerFirst().concat('_').concat(anENamedElement.eClass().name) /]
+[query private getMemberNameGeneral(anENamedElement : ENamedElement) : String = anENamedElement.name.toLowerFirst().concat('_') /]
 
-[query public getMemberName(anEClassifier : EClassifier) : String = anEClassifier.name.toLowerFirst().concat('_').concat(anEClassifier.eClass().name) /]
-[query public getMemberName(aStructural : EStructuralFeature) : String = eContainingClass.name.toLowerFirst().concat('_').concat(aStructural.eClass().name).concat('_').concat(aStructural.name.toLowerFirst()) /]
-[query public getMemberName(aOperation : EOperation) : String = aOperation.eContainingClass.name.toLowerFirst().concat('_').concat(aOperation.eClass().name).concat('_'.concat(aOperation.name.toLowerFirst()).concat(aOperation.parameterListName())) /]
+[query public getMemberName(anEClassifier : EClassifier) : String = anEClassifier.name.toLowerFirst().concat('_Class') /]
+[query public getMemberName(aStructural : EStructuralFeature) : String = eContainingClass.name.toLowerFirst().concat('_Attribute_').concat(aStructural.name.toLowerFirst()) /]
+[query public getMemberName(aOperation : EOperation) : String = aOperation.eContainingClass.name.toLowerFirst().concat('_Operation_'.concat(aOperation.name.toLowerFirst()).concat(aOperation.parameterListName())) /]
 
 [query public parameterListName( aOperation : EOperation) : String = if aOperation.eParameters->notEmpty() then '_'.concat(aOperation.singlemultipleParameter()) else '' endif /]
 [query public singlemultipleParameter(aOperation : EOperation) : String = if aOperation.eParameters->size()>1 then aOperation.eParameters->first().eType.name.concat('_').concat(aOperation.eParameters->last().eType.name) else aOperation.eParameters->first().eType.name endif /]
-[query public getMyClassifierID(anEClassifier : EClassifier) : EInt = if (anEClassifier.getClassifierID() = 0) then anEClassifier.ePackage.eClassifiers->selectByKind(EClassifier)->size() else anEClassifier.getClassifierID() endif/]
+[query public getMyClassifierID(anEClassifier : EClassifier) : EInt = anEClassifier.getRootPackage().eAllContents()->selectByKind(EClassifier)->sortedBy(name)->indexOf(anEClassifier) /]
 
 [template public generateAbstractDataTypesForwardDeclaration(anEClass : EClass)]
 [if (anEClass.eReferences->select(upperBound <> 1 and not hasSubset() and not isUnion())->size() > 0 or anEClass.eOperations.eParameters->select((eType.requiresBag()  or upperBound <> 1) and not doNotGenerate())->size() > 0)]

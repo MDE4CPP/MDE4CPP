@@ -33,6 +33,15 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Classifier.hpp"
@@ -42,8 +51,6 @@
 #include "uml/Constraint.hpp"
 
 #include "uml/Dependency.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -231,14 +238,6 @@ RegionImpl::RegionImpl(const RegionImpl & obj):RegionImpl()
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::ElementImport>> _elementImportList = obj.getElementImport();
 	for(std::shared_ptr<uml::ElementImport> _elementImport : *_elementImportList)
 	{
@@ -336,7 +335,7 @@ std::shared_ptr<ecore::EObject>  RegionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> RegionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getRegion_EClass();
+	return UmlPackageImpl::eInstance()->getRegion_Class();
 }
 
 //*********************************
@@ -505,16 +504,36 @@ Any RegionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::REGION_EREFERENCE_EXTENDEDREGION:
-			return eAny(getExtendedRegion()); //6219
-		case UmlPackage::REGION_EREFERENCE_STATE:
-			return eAny(getState()); //6220
-		case UmlPackage::REGION_EREFERENCE_STATEMACHINE:
-			return eAny(getStateMachine()); //6221
-		case UmlPackage::REGION_EREFERENCE_SUBVERTEX:
-			return eAny(getSubvertex()); //6223
-		case UmlPackage::REGION_EREFERENCE_TRANSITION:
-			return eAny(getTransition()); //6222
+		case UmlPackage::REGION_ATTRIBUTE_EXTENDEDREGION:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getExtendedRegion())); //20818
+		case UmlPackage::REGION_ATTRIBUTE_STATE:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getState().lock())); //20819
+		case UmlPackage::REGION_ATTRIBUTE_STATEMACHINE:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getStateMachine().lock())); //20820
+		case UmlPackage::REGION_ATTRIBUTE_SUBVERTEX:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Vertex>::iterator iter = m_subvertex->begin();
+			Bag<uml::Vertex>::iterator end = m_subvertex->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //20822
+		}
+		case UmlPackage::REGION_ATTRIBUTE_TRANSITION:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Transition>::iterator iter = m_transition->begin();
+			Bag<uml::Transition>::iterator end = m_transition->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //20821
+		}
 	}
 	Any result;
 	result = NamespaceImpl::eGet(featureID, resolve, coreType);
@@ -529,16 +548,16 @@ bool RegionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::REGION_EREFERENCE_EXTENDEDREGION:
-			return getExtendedRegion() != nullptr; //6219
-		case UmlPackage::REGION_EREFERENCE_STATE:
-			return getState().lock() != nullptr; //6220
-		case UmlPackage::REGION_EREFERENCE_STATEMACHINE:
-			return getStateMachine().lock() != nullptr; //6221
-		case UmlPackage::REGION_EREFERENCE_SUBVERTEX:
-			return getSubvertex() != nullptr; //6223
-		case UmlPackage::REGION_EREFERENCE_TRANSITION:
-			return getTransition() != nullptr; //6222
+		case UmlPackage::REGION_ATTRIBUTE_EXTENDEDREGION:
+			return getExtendedRegion() != nullptr; //20818
+		case UmlPackage::REGION_ATTRIBUTE_STATE:
+			return getState().lock() != nullptr; //20819
+		case UmlPackage::REGION_ATTRIBUTE_STATEMACHINE:
+			return getStateMachine().lock() != nullptr; //20820
+		case UmlPackage::REGION_ATTRIBUTE_SUBVERTEX:
+			return getSubvertex() != nullptr; //20822
+		case UmlPackage::REGION_ATTRIBUTE_TRANSITION:
+			return getTransition() != nullptr; //20821
 	}
 	bool result = false;
 	result = NamespaceImpl::internalEIsSet(featureID);
@@ -553,25 +572,100 @@ bool RegionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::REGION_EREFERENCE_EXTENDEDREGION:
+		case UmlPackage::REGION_ATTRIBUTE_EXTENDEDREGION:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Region> _extendedRegion = newValue->get<std::shared_ptr<uml::Region>>();
-			setExtendedRegion(_extendedRegion); //6219
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Region> _extendedRegion = std::dynamic_pointer_cast<uml::Region>(_temp);
+			setExtendedRegion(_extendedRegion); //20818
 			return true;
 		}
-		case UmlPackage::REGION_EREFERENCE_STATE:
+		case UmlPackage::REGION_ATTRIBUTE_STATE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::State> _state = newValue->get<std::shared_ptr<uml::State>>();
-			setState(_state); //6220
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::State> _state = std::dynamic_pointer_cast<uml::State>(_temp);
+			setState(_state); //20819
 			return true;
 		}
-		case UmlPackage::REGION_EREFERENCE_STATEMACHINE:
+		case UmlPackage::REGION_ATTRIBUTE_STATEMACHINE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::StateMachine> _stateMachine = newValue->get<std::shared_ptr<uml::StateMachine>>();
-			setStateMachine(_stateMachine); //6221
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::StateMachine> _stateMachine = std::dynamic_pointer_cast<uml::StateMachine>(_temp);
+			setStateMachine(_stateMachine); //20820
+			return true;
+		}
+		case UmlPackage::REGION_ATTRIBUTE_SUBVERTEX:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Vertex>> subvertexList(new Bag<uml::Vertex>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				subvertexList->add(std::dynamic_pointer_cast<uml::Vertex>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Vertex>::iterator iterSubvertex = m_subvertex->begin();
+			Bag<uml::Vertex>::iterator endSubvertex = m_subvertex->end();
+			while (iterSubvertex != endSubvertex)
+			{
+				if (subvertexList->find(*iterSubvertex) == -1)
+				{
+					m_subvertex->erase(*iterSubvertex);
+				}
+				iterSubvertex++;
+			}
+
+			iterSubvertex = subvertexList->begin();
+			endSubvertex = subvertexList->end();
+			while (iterSubvertex != endSubvertex)
+			{
+				if (m_subvertex->find(*iterSubvertex) == -1)
+				{
+					m_subvertex->add(*iterSubvertex);
+				}
+				iterSubvertex++;			
+			}
+			return true;
+		}
+		case UmlPackage::REGION_ATTRIBUTE_TRANSITION:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Transition>> transitionList(new Bag<uml::Transition>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				transitionList->add(std::dynamic_pointer_cast<uml::Transition>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Transition>::iterator iterTransition = m_transition->begin();
+			Bag<uml::Transition>::iterator endTransition = m_transition->end();
+			while (iterTransition != endTransition)
+			{
+				if (transitionList->find(*iterTransition) == -1)
+				{
+					m_transition->erase(*iterTransition);
+				}
+				iterTransition++;
+			}
+
+			iterTransition = transitionList->begin();
+			endTransition = transitionList->end();
+			while (iterTransition != endTransition)
+			{
+				if (m_transition->find(*iterTransition) == -1)
+				{
+					m_transition->add(*iterTransition);
+				}
+				iterTransition++;			
+			}
 			return true;
 		}
 	}
@@ -645,7 +739,7 @@ void RegionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::int
 				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			std::shared_ptr<ecore::EObject> subvertex = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::VERTEX_EREFERENCE_CONTAINER);
+			std::shared_ptr<ecore::EObject> subvertex = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::VERTEX_ATTRIBUTE_CONTAINER);
 			if (subvertex != nullptr)
 			{
 				loadHandler->handleChild(subvertex);
@@ -660,7 +754,7 @@ void RegionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::int
 			{
 				typeName = "Transition";
 			}
-			std::shared_ptr<ecore::EObject> transition = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::TRANSITION_EREFERENCE_CONTAINER);
+			std::shared_ptr<ecore::EObject> transition = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::TRANSITION_ATTRIBUTE_CONTAINER);
 			if (transition != nullptr)
 			{
 				loadHandler->handleChild(transition);
@@ -685,7 +779,7 @@ void RegionImpl::resolveReferences(const int featureID, std::list<std::shared_pt
 {
 	switch(featureID)
 	{
-		case UmlPackage::REGION_EREFERENCE_EXTENDEDREGION:
+		case UmlPackage::REGION_ATTRIBUTE_EXTENDEDREGION:
 		{
 			if (references.size() == 1)
 			{
@@ -697,7 +791,7 @@ void RegionImpl::resolveReferences(const int featureID, std::list<std::shared_pt
 			return;
 		}
 
-		case UmlPackage::REGION_EREFERENCE_STATE:
+		case UmlPackage::REGION_ATTRIBUTE_STATE:
 		{
 			if (references.size() == 1)
 			{
@@ -709,7 +803,7 @@ void RegionImpl::resolveReferences(const int featureID, std::list<std::shared_pt
 			return;
 		}
 
-		case UmlPackage::REGION_EREFERENCE_STATEMACHINE:
+		case UmlPackage::REGION_ATTRIBUTE_STATEMACHINE:
 		{
 			if (references.size() == 1)
 			{
@@ -736,7 +830,6 @@ void RegionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> sav
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
@@ -755,13 +848,13 @@ void RegionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandl
 		// Save 'subvertex'
 		for (std::shared_ptr<uml::Vertex> subvertex : *this->getSubvertex()) 
 		{
-			saveHandler->addReference(subvertex, "subvertex", subvertex->eClass() != package->getVertex_EClass());
+			saveHandler->addReference(subvertex, "subvertex", subvertex->eClass() != package->getVertex_Class());
 		}
 
 		// Save 'transition'
 		for (std::shared_ptr<uml::Transition> transition : *this->getTransition()) 
 		{
-			saveHandler->addReference(transition, "transition", transition->eClass() != package->getTransition_EClass());
+			saveHandler->addReference(transition, "transition", transition->eClass() != package->getTransition_Class());
 		}
 	
 

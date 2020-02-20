@@ -32,13 +32,24 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
 
 #include "uml/Dependency.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -55,6 +66,8 @@
 #include "uml/TemplateParameter.hpp"
 
 #include "uml/Type.hpp"
+
+#include "uml/ValueSpecificationAction.hpp"
 
 #include "ecore/EcorePackage.hpp"
 #include "ecore/EcoreFactory.hpp"
@@ -149,6 +162,18 @@ LiteralIntegerImpl::~LiteralIntegerImpl()
 
 
 
+//Additional constructor for the containments back reference
+			LiteralIntegerImpl::LiteralIntegerImpl(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction)
+			:LiteralIntegerImpl()
+			{
+			    m_valueSpecificationAction = par_valueSpecificationAction;
+				m_owner = par_valueSpecificationAction;
+			}
+
+
+
+
+
 
 LiteralIntegerImpl::LiteralIntegerImpl(const LiteralIntegerImpl & obj):LiteralIntegerImpl()
 {
@@ -180,17 +205,11 @@ LiteralIntegerImpl::LiteralIntegerImpl(const LiteralIntegerImpl & obj):LiteralIn
 
 	m_type  = obj.getType();
 
+	m_valueSpecificationAction  = obj.getValueSpecificationAction();
+
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	if(obj.getNameExpression()!=nullptr)
 	{
 		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
@@ -218,7 +237,7 @@ std::shared_ptr<ecore::EObject>  LiteralIntegerImpl::copy() const
 
 std::shared_ptr<ecore::EClass> LiteralIntegerImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getLiteralInteger_EClass();
+	return UmlPackageImpl::eInstance()->getLiteralInteger_Class();
 }
 
 //*********************************
@@ -294,6 +313,11 @@ std::shared_ptr<ecore::EObject> LiteralIntegerImpl::eContainer() const
 	{
 		return wp;
 	}
+
+	if(auto wp = m_valueSpecificationAction.lock())
+	{
+		return wp;
+	}
 	return nullptr;
 }
 
@@ -304,8 +328,8 @@ Any LiteralIntegerImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::LITERALINTEGER_EATTRIBUTE_VALUE:
-			return eAny(getValue()); //25015
+		case UmlPackage::LITERALINTEGER_ATTRIBUTE_VALUE:
+			return eAny(getValue()); //13915
 	}
 	return LiteralSpecificationImpl::eGet(featureID, resolve, coreType);
 }
@@ -313,8 +337,8 @@ bool LiteralIntegerImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::LITERALINTEGER_EATTRIBUTE_VALUE:
-			return getValue() != 0; //25015
+		case UmlPackage::LITERALINTEGER_ATTRIBUTE_VALUE:
+			return getValue() != 0; //13915
 	}
 	return LiteralSpecificationImpl::internalEIsSet(featureID);
 }
@@ -322,11 +346,11 @@ bool LiteralIntegerImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::LITERALINTEGER_EATTRIBUTE_VALUE:
+		case UmlPackage::LITERALINTEGER_ATTRIBUTE_VALUE:
 		{
 			// BOOST CAST
 			int _value = newValue->get<int>();
-			setValue(_value); //25015
+			setValue(_value); //13915
 			return true;
 		}
 	}
@@ -409,7 +433,6 @@ void LiteralIntegerImpl::save(std::shared_ptr<persistence::interfaces::XSaveHand
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
@@ -430,7 +453,7 @@ void LiteralIntegerImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getLiteralInteger_EAttribute_value()) )
+		if ( this->eIsSet(package->getLiteralInteger_Attribute_value()) )
 		{
 			saveHandler->addAttribute("value", this->getValue());
 		}

@@ -73,11 +73,6 @@ namespace uml
 	class DeployedArtifact;
 }
 
-namespace ecore 
-{
-	class EAnnotation;
-}
-
 namespace uml 
 {
 	class Element;

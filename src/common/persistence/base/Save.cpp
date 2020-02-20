@@ -6,15 +6,7 @@
  */
 
 #include "persistence/base/Save.hpp"
-
-#ifdef NDEBUG
-#define MSG_DEBUG(a) /**/
-#else
-#define MSG_DEBUG(a) std::cout << "| DEBUG    | " << a << std::endl
-#endif
-#define MSG_WARNING(a) std::cout << "| WARNING  | "<< a << std::endl
-#define MSG_ERROR(a) std::cout << "| ERROR    | " << a << std::endl
-#define MSG_FLF __FILE__ << ":" << __LINE__ << " " << __FUNCTION__ << "() "
+#include "PersistenceDefine.hpp"
 
 #include <iostream>
 
@@ -48,7 +40,7 @@ bool Save::save ( const std::string &filename, std::shared_ptr<ecore::EObject> m
 	MSG_DEBUG( m_handler->extractType( model ) );
 
 	model->save( m_handler );
-	m_handler->release();
+	m_handler->finalize();
 
 	// Call write() method in corresponding derived class
 	return write( filename );

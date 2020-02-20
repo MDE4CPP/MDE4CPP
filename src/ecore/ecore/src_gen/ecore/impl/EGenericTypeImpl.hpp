@@ -78,6 +78,9 @@ virtual public EGenericType
 			
 			/*!
 			 */
+			virtual void setERawType(std::shared_ptr<ecore::EClassifier> _eRawType_eRawType) ;
+			/*!
+			 */
 			virtual std::shared_ptr<Bag<ecore::EGenericType>> getETypeArguments() const ;
 			
 			/*!

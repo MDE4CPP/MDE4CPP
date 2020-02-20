@@ -1,21 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.2"?>
 <plugin>
-   <extension point="org.eclipse.ui.popupMenus">
-      <objectContribution
-            adaptable="true"
-            objectClass="org.eclipse.core.resources.IFile"
-            nameFilter="*.ecore"
-            id="ecore4CPP.generator.ui.popupMenus.contribution.IFile">
-         <menu id="org.eclipse.acceleo.module.menu" label="MDE4CPP Generators" path="additionsAcceleo">
-               <groupMarker name="acceleo"/> 
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            allPopups="false"
+            locationURI="popup:org.eclipse.ui.popup.any?before=additions">
+         <menu
+               id="menuMDE4CPP"
+               label="MDE4CPP">
+            <command
+                  commandId="ecore4CPP.generator.ui.generateCommand"
+                  label="Generate with Ecore4CPP"
+                  style="push">
+               <visibleWhen
+                     checkEnabled="false">
+                  <iterate
+                        ifEmpty="false"
+                        operator="or">
+                     <test
+                           property="org.eclipse.core.resources.name"
+                           value="*.ecore">
+                     </test>
+                  </iterate>
+               </visibleWhen>
+            </command>
          </menu>
-         <action
-               class="ecore4CPP.generator.ui.popupMenus.AcceleoGenerateEcoreGeneratorAction"
-               enablesFor="+"
-               id="ecore4CPP.generator.ui.popupMenus.acceleoGenerateEcoreGeneratorAction"
-               label="Generate with ecore4CPP"
-               menubarPath="org.eclipse.acceleo.module.menu/acceleo"/>
-      </objectContribution>
+      </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            defaultHandler="ecore4CPP.generator.ui.common.EcoreGeneratorCommand"
+            id="ecore4CPP.generator.ui.generateCommand"
+            name="GenerateEcore4CPP">
+      </command>
    </extension>
 </plugin>

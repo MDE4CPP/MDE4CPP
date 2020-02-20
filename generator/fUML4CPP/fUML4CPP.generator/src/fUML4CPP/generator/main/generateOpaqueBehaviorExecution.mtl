@@ -14,74 +14,115 @@
  */]
 [module generateOpaqueBehaviorExecution('http://www.eclipse.org/uml2/5.0.0/UML')]
 
-[import UML4CPP::generator::main::generateType /]
-[import UML4CPP::generator::main::helper /]
+[import UML4CPP::generator::main::components::generateType /]
+[import UML4CPP::generator::main::helpers::generalHelper /]
+[import UML4CPP::generator::main::helpers::nameHelper /]
 
-[query public getOpaqueBehaviors(aPackage : Package) : Set(OpaqueBehavior) = Set{
-		aPackage.allOwnedElements()->selectByKind(Activity).ownedNode->filter(CallOperationAction)->asSet().operation.method->select(oclIsKindOf(OpaqueBehavior))->asSet(),
-		aPackage.allOwnedElements()->selectByKind(Activity).ownedNode->filter(CallBehaviorAction)->asSet().behavior.oclAsType(OpaqueBehavior)->reject(oclIsUndefined())->asSet(),
-		aPackage.allOwnedElements()->selectByKind(DecisionNode).decisionInput->asSet()->reject(oclIsUndefined())->asSet().oclAsType(OpaqueBehavior)->asSet()
-	}->flatten()
+
+[template public generateOpaqueBehaviorExecutionName(aNamedElement : NamedElement) ? (aNamedElement.oclIsKindOf(DecisionNode))]
+[aNamedElement.oclAsType(DecisionNode).decisionInput.name.sanitize().toUpperFirst().concat('Execution')/]
+[/template]
+
+[template public generateOpaqueBehaviorExecutionName(aNamedElement : NamedElement) ? (aNamedElement.oclIsKindOf(CallBehaviorAction))]
+[aNamedElement.oclAsType(CallBehaviorAction).behavior.name.sanitize().toUpperFirst().concat('Execution')/]
+[/template]
+
+[template public generateOpaqueBehaviorExecutionName(aNamedElement : NamedElement) ? (aNamedElement.oclIsKindOf(CallOperationAction))]
+[aNamedElement.oclAsType(CallOperationAction).name.sanitize().toUpperFirst().concat('Execution')/]
+[/template] 
+
+[query public getDecisionNodesWithOB(aPackage : Package) : OrderedSet(DecisionNode) = OrderedSet{
+		aPackage.allOwnedElements()->selectByKind(DecisionNode)
+	}->flatten()->reject(decisionInput.oclIsUndefined())->select(decisionInput.oclIsKindOf(OpaqueBehavior))->sortedBy(name)
  /]
 
-[query public getOpaqueBehaviors(aActivity : Activity) : Set(OpaqueBehavior) = OrderedSet{
-		aActivity.ownedNode->filter(CallOperationAction).operation->asSet()->reject(oclIsUndefined()).method->asSet()->reject(oclIsUndefined())->select(oclIsKindOf(OpaqueBehavior))->asSet().oclAsType(OpaqueBehavior)->asSet(),
-		aActivity.ownedNode->filter(CallBehaviorAction)->asSet().behavior.oclAsType(OpaqueBehavior)->reject(oclIsUndefined())->asSet(),		
-		aActivity.allOwnedElements()->selectByKind(DecisionNode).decisionInput->asSet()->reject(oclIsUndefined())->asSet().oclAsType(OpaqueBehavior)->asSet()
+[query public getDecisionNodesWithOB(anActivity : Activity) : OrderedSet(DecisionNode) = OrderedSet{
+		anActivity.allOwnedElements()->selectByKind(DecisionNode)
+	}->flatten()->reject(decisionInput.oclIsUndefined())->select(node : DecisionNode | node.decisionInput.oclIsKindOf(OpaqueBehavior))->sortedBy(name)
+/]
+
+[query public getCallBehaviorActionsWithOB(aPackage : Package) : OrderedSet(CallBehaviorAction) = OrderedSet{
+		aPackage.allOwnedElements()->selectByKind(Activity).ownedNode->filter(CallBehaviorAction),
+		aPackage.allOwnedElements()->selectByKind(ExpansionRegion).node->filter(CallBehaviorAction),
+		aPackage.allOwnedElements()->filter(CallBehaviorAction).behavior->selectByKind(Activity)->reject(oclIsUndefined()).getCallBehaviorActionsWithOB()
+	}->flatten()->reject(behavior.oclIsUndefined())->select(behavior.oclIsKindOf(OpaqueBehavior))->sortedBy(name)
+/]
+
+[query public getCallBehaviorActionsWithOB(anActivity : Activity) : OrderedSet(CallBehaviorAction) = OrderedSet{
+		anActivity.allOwnedElements()->filter(CallBehaviorAction),
+		anActivity.allOwnedElements()->filter(CallBehaviorAction).behavior->selectByKind(Activity)->reject(oclIsUndefined()).getCallBehaviorActionsWithOB()
+	}->flatten()->reject(behavior.oclIsUndefined())->select(behavior.oclIsKindOf(OpaqueBehavior))->sortedBy(name)
+/]
+
+[query public getCallOperationActions(aPackage : Package) : OrderedSet(CallOperationAction) = OrderedSet{
+		aPackage.allOwnedElements()->selectByKind(Activity).ownedNode->filter(CallOperationAction),
+		aPackage.allOwnedElements()->selectByKind(ExpansionRegion).node->filter(CallOperationAction),
+		aPackage.allOwnedElements()->filter(CallBehaviorAction).behavior->selectByKind(Activity)->reject(oclIsUndefined()).getCallOperationActions()
 	}->flatten()->sortedBy(name)
 /]
 
-[query public hasCOAAMethod(aCOA : CallOperationAction) : Boolean = aCOA.operation.method->size() > 0 /]
-[query public getCallOperationActions(aPackage : Package) : Set(CallOperationAction) = aPackage.allOwnedElements()->selectByKind(Activity).ownedNode->filter(CallOperationAction)->asOrderedSet()->sortedBy(name) /]
+[query public getCallOperationActions(anActivity : Activity) : OrderedSet(CallOperationAction) = OrderedSet{
+		anActivity.allOwnedElements()->filter(CallOperationAction),
+		anActivity.allOwnedElements()->filter(CallBehaviorAction).behavior->selectByKind(Activity)->reject(oclIsUndefined()).getCallOperationActions()
+	}->flatten()->sortedBy(name)
+/]
 
-[template public generateOpaqueBehaviorCreation(anOpaqueBehavior : OpaqueBehavior) ]
-[if (not anOpaqueBehavior.name.oclIsUndefined())]
-std::shared_ptr<[anOpaqueBehavior.getNearestPackage().ns()/]::[anOpaqueBehavior.name.toUpperFirst()/]Execution> [memberName(anOpaqueBehavior)/]Execution(new [anOpaqueBehavior.getNearestPackage().ns()/]::[anOpaqueBehavior.name.toUpperFirst()/]Execution());
-[memberName(anOpaqueBehavior)/]Execution->setThisExecutionPtr([memberName(anOpaqueBehavior)/]Execution);
-[memberName(anOpaqueBehavior)/]Execution->getTypes()->push_back([anOpaqueBehavior.packageGetter()/]);
-[memberName(anOpaqueBehavior)/]Execution->setLocus(factory->getLocus().lock());
-factory->addPrimitiveBehaviorPrototype([memberName(anOpaqueBehavior)/]Execution);
+[template public generateOpaqueBehaviorCreation(anOpaqueBehavior : OpaqueBehavior, executionName : String) ]
+{
+	[if (not anOpaqueBehavior.name.oclIsUndefined())]
+	std::shared_ptr<[anOpaqueBehavior.getNearestPackage().myNamespaceName()/]::[executionName/]> [memberName(anOpaqueBehavior)/]Execution(new [anOpaqueBehavior.getNearestPackage().myNamespaceName()/]::[executionName/]());
+	[memberName(anOpaqueBehavior)/]Execution->setThisExecutionPtr([memberName(anOpaqueBehavior)/]Execution);
+	[memberName(anOpaqueBehavior)/]Execution->getTypes()->push_back([anOpaqueBehavior.generatePackageGetterCall()/]);
+	[memberName(anOpaqueBehavior)/]Execution->setLocus(locus);
+	factory->addPrimitiveBehaviorPrototype([memberName(anOpaqueBehavior)/]Execution);
+}
 [/if]
-
 [/template]
 
-[query public getFBPackageElement(aCOA : CallOperationAction) : String = 'fb'.concat(aCOA.myName())/]
+[query public getFBPackageElement(aCOA : CallOperationAction) : String = 'ob_'.concat(aCOA.owner.oclAsType(NamedElement).name.replaceAll(' ', '')).concat('_').concat(aCOA.myName().sanitize())/]
 
-[template public generateCallOperationActionCreation(aCallOperationAction : CallOperationAction) ? (not hasCOAAMethod())]
+[template public generateCallOperationActionCreation(aCallOperationAction : CallOperationAction)]
 [if (not aCallOperationAction.name.oclIsUndefined())]
-std::shared_ptr<uml::FunctionBehavior> [aCallOperationAction.getFBPackageElement()/](uml::UmlFactory::eInstance()->createFunctionBehavior_in_Package([aCallOperationAction.getNearestPackage().name.concat('::').concat(aCallOperationAction.getNearestPackage().name.toUpperFirst()).concat('Package').concat('::eInstance()')/]));
+std::shared_ptr<uml::OpaqueBehavior> [aCallOperationAction.getFBPackageElement()/](uml::UmlFactory::eInstance()->createOpaqueBehavior_in_Package([aCallOperationAction.getNearestPackage().name.concat('::').concat(aCallOperationAction.getNearestPackage().name.toUpperFirst()).concat('Package').concat('::eInstance()')/]));
 [aCallOperationAction.getFBPackageElement()/]->setName("[aCallOperationAction.getFBPackageElement()/]");
-[aCallOperationAction.operation->asOrderedSet()->first().packageGetter()/]->getMethod()->push_back([aCallOperationAction.getFBPackageElement()/]);
+[if (aCallOperationAction._context.oclIsKindOf(BehavioredClassifier))]
+[aCallOperationAction.getFBPackageElement()/]->setContext([aCallOperationAction._context.generatePackageGetterCall()/]);
+[/if]
+[aCallOperationAction.operation->asOrderedSet()->first().generatePackageGetterCall()/]->getMethod()->insert([aCallOperationAction.operation->asOrderedSet()->first().generatePackageGetterCall()/]->getMethod()->begin(), [aCallOperationAction.getFBPackageElement()/]);
 
 [for (aParameter : Parameter | aCallOperationAction.operation->asOrderedSet()->first().ownedParameter)]
-std::shared_ptr<uml::Parameter> [memberName(aParameter)/](uml::UmlFactory::eInstance()->createParameter_in_Behavior([aCallOperationAction.getFBPackageElement()/]));
-[memberName(aParameter)/]->setName("[aParameter.name/]");
-[memberName(aParameter)/]->setType([if(aParameter.type.getNearestPackage() = aParameter.getNearestPackage())][aParameter.getNearestPackage().ns().concat('::').concat(aParameter.getNearestPackage().name.toUpperFirst()).concat('Package').concat('::eInstance()->')/][/if][aParameter.type.packageGetter(aParameter)/]);
-[memberName(aParameter)/]->setLower([aParameter.lower/]);
-[memberName(aParameter)/]->setUpper([aParameter.upper/]);
-[memberName(aParameter)/]->setDirection(uml::ParameterDirectionKind::[direction.toString().toUpper()/]);
-//[aCallOperationAction.getFBPackageElement()/]->getOwnedParameter()->push_back([memberName(aParameter)/]);
-
+{
+	std::shared_ptr<uml::Parameter> [memberName(aParameter)/](uml::UmlFactory::eInstance()->createParameter_in_Behavior([aCallOperationAction.getFBPackageElement()/]));
+	[memberName(aParameter)/]->setName("[aParameter.name/]");
+	[memberName(aParameter)/]->setType([if(aParameter.type.getNearestPackage() = aParameter.getNearestPackage())][aParameter.getNearestPackage().myNamespaceName().concat('::').concat(aParameter.getNearestPackage().name.toUpperFirst()).concat('Package').concat('::eInstance()->')/][/if][aParameter.type.generatePackageGetterCall(aParameter)/]);
+	[memberName(aParameter)/]->setLower([aParameter.lower/]);
+	[memberName(aParameter)/]->setUpper([aParameter.upper/]);
+	[memberName(aParameter)/]->setDirection(uml::ParameterDirectionKind::[direction.toString().toUpper()/]);
+	//[aCallOperationAction.getFBPackageElement()/]->getOwnedParameter()->push_back([memberName(aParameter)/]);
+}
 [/for]
-
-std::shared_ptr<[aCallOperationAction.getNearestPackage().ns()/]::[aCallOperationAction.name.toUpperFirst()/]Execution> [memberName(aCallOperationAction)/]Execution(new [aCallOperationAction.getNearestPackage().ns()/]::[aCallOperationAction.name.toUpperFirst()/]Execution());
-[memberName(aCallOperationAction)/]Execution->setThisExecutionPtr([memberName(aCallOperationAction)/]Execution);
-[memberName(aCallOperationAction)/]Execution->getTypes()->push_back([aCallOperationAction.getFBPackageElement()/]);
-[memberName(aCallOperationAction)/]Execution->setLocus(factory->getLocus().lock());
-factory->addPrimitiveBehaviorPrototype([memberName(aCallOperationAction)/]Execution);
+{
+	std::shared_ptr<[aCallOperationAction.getNearestPackage().myNamespaceName()/]::[aCallOperationAction.generateOpaqueBehaviorExecutionName()/]> [memberName(aCallOperationAction)/]Execution(new [aCallOperationAction.getNearestPackage().myNamespaceName()/]::[aCallOperationAction.generateOpaqueBehaviorExecutionName()/]());
+	[memberName(aCallOperationAction)/]Execution->setThisExecutionPtr([memberName(aCallOperationAction)/]Execution);
+	[memberName(aCallOperationAction)/]Execution->getTypes()->push_back([aCallOperationAction.getFBPackageElement()/]);
+	[memberName(aCallOperationAction)/]Execution->setLocus(locus);
+	factory->addPrimitiveBehaviorPrototype([memberName(aCallOperationAction)/]Execution);
+}
+[else]
+std::cerr << "a CallOperationAction without name" << std::endl;
+throw "error";
 [/if]
+[/template]
+
+[template public generateCallOperationActionClearing(aCallOperationAction : CallOperationAction)]
+[aCallOperationAction.operation->asOrderedSet()->first().generatePackageGetterCall()/]->getMethod()->erase([aCallOperationAction.getFBPackageElement()/]);
 
 [/template]
 
-[template public generateCallOperationActionClearing(aCallOperationAction : CallOperationAction) ? (not hasCOAAMethod()) ]
-[aCallOperationAction.operation->asOrderedSet()->first().packageGetter()/]->getMethod()->erase([aCallOperationAction.getFBPackageElement()/]);
-
-[/template]
-
-[template public generateInclude(anOpaqueBehavior : OpaqueBehavior)]
-[if (not anOpaqueBehavior.oclIsUndefined())]
-[if (not anOpaqueBehavior.name.oclIsUndefined())]
-#include "[anOpaqueBehavior.getNearestPackage().getPackageName()/]Exec/[anOpaqueBehavior.name.toUpperFirst()/]Execution.hpp"
+[template public generateInclude(aCallBehaviorAction : CallBehaviorAction)]
+[if (not aCallBehaviorAction.behavior.oclIsUndefined())]
+[if (not aCallBehaviorAction.behavior.name.oclIsUndefined())]
+#include "[aCallBehaviorAction.getNearestPackage().getPackageName()/]Exec/[aCallBehaviorAction.generateOpaqueBehaviorExecutionName()/].hpp"
 [/if]
 [/if]
 [/template]
@@ -89,7 +130,15 @@ factory->addPrimitiveBehaviorPrototype([memberName(aCallOperationAction)/]Execut
 [template public generateInclude(aCallOperationAction : CallOperationAction)]
 [if (not aCallOperationAction.oclIsUndefined())]
 [if (not aCallOperationAction.name.oclIsUndefined())]
-#include "[aCallOperationAction.getNearestPackage().getPackageName()/]Exec/[aCallOperationAction.name.toUpperFirst()/]Execution.hpp"
+#include "[aCallOperationAction.getNearestPackage().getPackageName()/]Exec/[aCallOperationAction.generateOpaqueBehaviorExecutionName()/].hpp"
+[/if]
+[/if]
+[/template]
+
+[template public generateInclude(aDecisionNode : DecisionNode)]
+[if (not aDecisionNode.decisionInput.oclIsUndefined())]
+[if (not aDecisionNode.decisionInput.name.oclIsUndefined())]
+#include "[aDecisionNode.getNearestPackage().getPackageName()/]Exec/[aDecisionNode.generateOpaqueBehaviorExecutionName()/].hpp"
 [/if]
 [/if]
 [/template]

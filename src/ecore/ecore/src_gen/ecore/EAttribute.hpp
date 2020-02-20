@@ -63,6 +63,11 @@ namespace ecore
 
 namespace ecore 
 {
+	class EObject;
+}
+
+namespace ecore 
+{
 	class EStructuralFeature;
 }
 
@@ -139,7 +144,9 @@ namespace ecore
 			//*********************************
 			// Union Getter
 			//*********************************
-			
+			/*!
+			 */
+			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
 			

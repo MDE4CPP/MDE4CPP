@@ -24,10 +24,11 @@
 [import ecore4CPP::generator::main::generateUnion /]
 [import ecore4CPP::generator::main::generateModel /]
 [import ecore4CPP::generator::main::helper /]
+[import ecore4CPP::generator::main::helpers::keywords /]
 
 [template public generateImplementationSource(aClass : EClass) { className : String = aClass.name.toUpperFirst().concat('Impl'); }]
-[file (aClass.ePackage.name.concat('/impl/').concat(className).concat('.cpp'), false, 'UTF-8')]
-#include "[aClass.ePackage.name/]/impl/[className.concat('.hpp')/]"
+[file (aClass.generateNamespacePath().concat('/impl/').concat(className).concat('.cpp'), false, 'UTF-8')]
+#include "[aClass.generateNamespacePath()/]/impl/[className.concat('.hpp')/]"
 
 [defineDebugMacros()/]
 
@@ -35,7 +36,7 @@
 #include <iostream>
 #include <sstream>
 [if (generateObjectMonitoring())]
-#include "[ePackage.name/]/[aClass.ePackage.name.toUpperFirst()/]Factory.hpp"
+#include "[getRootPackage().name/]/[aClass.getRootPackage().name.toUpperFirst()/]Factory.hpp"
 [/if]
 
 [generateAbstractDataTypesIncludes()/]
@@ -45,27 +46,27 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "[aClass.ePackage.name/]/impl/[aClass.ePackage.name.toUpperFirst().concat('PackageImpl')/].hpp"
-[if (aClass.hasKey('includes'))]
-[aClass.valueKey('includes')/]
+#include "[getRootPackage().name/]/impl/[aClass.getRootPackage().name.toUpperFirst().concat('PackageImpl')/].hpp"
+[if (aClass.hasKey(keyIncludes()))]
+[aClass.valueKey(keyIncludes())/]
 [/if]
 
 //Forward declaration includes
 [generatePersistenceInclude()/]
 
 [for (element : EClassifier| aClass.includes()->selectByKind(EClass)->asOrderedSet()->sortedBy(name)) separator ('\n')]
-#include "[element.ePackage.name/]/[element.name.toUpperFirst()/].hpp"
+#include "[element.generateNamespacePath()/]/[element.name.toUpperFirst()/].hpp"
 [/for]
 
-#include "[aClass.eClass().ePackage.name/]/[aClass.eClass().ePackage.name.toUpperFirst()/]Package.hpp"
-#include "[aClass.eClass().ePackage.name/]/[aClass.eClass().ePackage.name.toUpperFirst()/]Factory.hpp"
-#include "[aClass.ePackage.name/]/[aClass.ePackage.name.toUpperFirst()/]Package.hpp"
-#include "[aClass.ePackage.name/]/[aClass.ePackage.name.toUpperFirst()/]Factory.hpp"
+#include "[aClass.eClass().getRootPackage().name/]/[aClass.eClass().getRootPackage().name.toUpperFirst()/]Package.hpp"
+#include "[aClass.eClass().getRootPackage().name/]/[aClass.eClass().getRootPackage().name.toUpperFirst()/]Factory.hpp"
+#include "[aClass.getRootPackage().name/]/[aClass.getRootPackage().name.toUpperFirst()/]Package.hpp"
+#include "[aClass.getRootPackage().name/]/[aClass.getRootPackage().name.toUpperFirst()/]Factory.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
 [comment namespace /]
-using namespace [aClass.ePackage.name/];
+using namespace [aClass.generateNamespaceDefinition()/];
 
 //*********************************
 // Constructor / Destructor
@@ -111,25 +112,25 @@ using namespace [aClass.ePackage.name/];
 //Additional constructor for the containments back reference
 [if(ref->select(eType.name = aReference.eType.name)->size()>1 )]
 	[if(ref->select(eType.name = aReference.eType.name)->asOrderedSet()->sortedBy(name)->first() = aReference)]
-			[className/]::[className/]([aReference.generateReferenceType(true)/] par_[aReference.eType.name/], const int reference_id)
-			:[className/]()
-			{
-				switch(reference_id)
-				{	
-				[for(multipleRef : EReference | ref->select(eType.name = aReference.eType.name)->sortedBy(name))]
-				case [aClass.ePackage.name.toUpperFirst()/]Package::[multipleRef.getStaticAttributeIDName()/]:
-					m_[multipleRef.name/] = par_[aReference.eType.name/];
-					[if (multipleRef.hasSubset() and multipleRef.upperBound = 1)]
-					[for (m : EReference | multipleRef.oclAsType(EReference).Subset()->selectByKind(EReference).oclAsType(EReference)->select(isBackReference())->asOrderedSet())]
-					m_[m.name/] = par_[aReference.eType.name/];
-					[/for][/if]
-					 return;
-				[/for]
-				default:
-				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
-				}
-			   
-			}
+[className/]::[className/]([aReference.generateReferenceType(true)/] par_[aReference.eType.name/], const int reference_id)
+:[className/]()
+{
+	switch(reference_id)
+	{	
+	[for(multipleRef : EReference | ref->select(eType.name = aReference.eType.name)->sortedBy(name))]
+	case [aClass.getRootPackage().name.toUpperFirst()/]Package::[multipleRef.getStaticAttributeIDName()/]:
+		m_[multipleRef.name/] = par_[aReference.eType.name/];
+		[if (multipleRef.hasSubset() and multipleRef.upperBound = 1)]
+		[for (m : EReference | multipleRef.oclAsType(EReference).Subset()->selectByKind(EReference).oclAsType(EReference)->select(isBackReference())->asOrderedSet())]
+		m_[m.name/] = par_[aReference.eType.name/];
+		[/for][/if]
+		 return;
+	[/for]
+	default:
+	std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
+	}
+   
+}
 	[/if]
 	[else]
 			[className/]::[className/]([aReference.generateReferenceType(true)/] par_[aReference.name/])
@@ -212,14 +213,14 @@ std::shared_ptr<ecore::EObject>  [className/]::copy() const
 	std::shared_ptr<[className/]> element(new [className/](*this));
 	element->[generateGetThisPtrPropertySetterName()/](element);
 [if (generateObjectMonitoring())]
-	[aClass.ePackage.name.toUpperFirst()/]Factory::eInstance()->add(element);
+	[aClass.getRootPackage().name.toUpperFirst()/]Factory::eInstance()->add(element);
 [/if]
 	return element;
 }
 
 std::shared_ptr<[needNamespace(aClass.ePackage, 'EClass')/]> [className/]::eStaticClass() const
 {
-	return [aClass.ePackage.name.concat('PackageImpl').toUpperFirst()/]::eInstance()->get[aClass.getMemberNameUpperFirst()/]();
+	return [aClass.getRootPackage().name.concat('PackageImpl').toUpperFirst()/]::eInstance()->get[aClass.getMemberNameUpperFirst()/]();
 }
 
 //*********************************

@@ -11,12 +11,16 @@
 
 namespace ecore 
 {
+	class EAnnotation;
 	class EAttribute;
 	class EClass;
 	class EDataType;
+	class EGenericType;
 	class EOperation;
 	class EParameter;
 	class EReference;
+	class EStringToStringMapEntry;
+	class ETypeParameter;
 }
 
 namespace ecore 
@@ -44,26 +48,26 @@ namespace ecore
 
 			// Begin Class EAnnotation
 			//Class and Feature IDs 
-			static const unsigned int EANNOTATION_ECLASS = 1;
-			static const unsigned int EANNOTATION_ECLASS_FEATURE_COUNT = 6;
-			static const unsigned int EANNOTATION_ECLASS_OPERATION_COUNT = 1;
-			static const int EANNOTATION_EATTRIBUTE_SOURCE = 101;
+			static const unsigned int EANNOTATION_CLASS = 1;
+			static const unsigned int EANNOTATION_CLASS_FEATURE_COUNT = 9;
+			static const unsigned int EANNOTATION_CLASS_OPERATION_COUNT = 16;
+			static const int EANNOTATION_ATTRIBUTE_SOURCE = 104;
 			
-			static const int EANNOTATION_EREFERENCE_CONTENTS = 104;
-			static const int EANNOTATION_EREFERENCE_DETAILS = 102;
-			static const int EANNOTATION_EREFERENCE_EMODELELEMENT = 103;
-			static const int EANNOTATION_EREFERENCE_REFERENCES = 105;
+			static const int EANNOTATION_ATTRIBUTE_CONTENTS = 107;
+			static const int EANNOTATION_ATTRIBUTE_DETAILS = 105;
+			static const int EANNOTATION_ATTRIBUTE_EMODELELEMENT = 106;
+			static const int EANNOTATION_ATTRIBUTE_REFERENCES = 108;
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getEAnnotation_EClass() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getEAnnotation_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getEAnnotation_EAttribute_source() const = 0;
+			virtual std::shared_ptr<ecore::EAttribute> getEAnnotation_Attribute_source() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getEAnnotation_EReference_contents() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getEAnnotation_EReference_details() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getEAnnotation_EReference_eModelElement() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getEAnnotation_EReference_references() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getEAnnotation_Attribute_contents() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getEAnnotation_Attribute_details() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getEAnnotation_Attribute_eModelElement() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getEAnnotation_Attribute_references() const = 0;
 			
 			
 			// End Class EAnnotation
@@ -71,20 +75,20 @@ namespace ecore
 
 			// Begin Class EAttribute
 			//Class and Feature IDs 
-			static const unsigned int EATTRIBUTE_ECLASS = 53;
-			static const unsigned int EATTRIBUTE_ECLASS_FEATURE_COUNT = 21;
-			static const unsigned int EATTRIBUTE_ECLASS_OPERATION_COUNT = 3;
-			static const int EATTRIBUTE_EATTRIBUTE_ID = 5319;
+			static const unsigned int EATTRIBUTE_CLASS = 2;
+			static const unsigned int EATTRIBUTE_CLASS_FEATURE_COUNT = 24;
+			static const unsigned int EATTRIBUTE_CLASS_OPERATION_COUNT = 18;
+			static const int EATTRIBUTE_ATTRIBUTE_ID = 222;
 			
-			static const int EATTRIBUTE_EREFERENCE_EATTRIBUTETYPE = 5320;
+			static const int EATTRIBUTE_ATTRIBUTE_EATTRIBUTETYPE = 223;
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getEAttribute_EClass() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getEAttribute_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getEAttribute_EAttribute_iD() const = 0;
+			virtual std::shared_ptr<ecore::EAttribute> getEAttribute_Attribute_iD() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getEAttribute_EReference_eAttributeType() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getEAttribute_Attribute_eAttributeType() const = 0;
 			
 			
 			// End Class EAttribute
@@ -92,121 +96,119 @@ namespace ecore
 
 			// Begin Class EClass
 			//Class and Feature IDs 
-			static const unsigned int ECLASS_ECLASS = 2;
-			static const unsigned int ECLASS_ECLASS_FEATURE_COUNT = 25;
-			static const unsigned int ECLASS_ECLASS_OPERATION_COUNT = 13;
-			static const int ECLASS_EATTRIBUTE_ABSTRACT = 209;
-			static const int ECLASS_EATTRIBUTE_INTERFACE = 210;
+			static const unsigned int ECLASS_CLASS = 12;
+			static const unsigned int ECLASS_CLASS_FEATURE_COUNT = 27;
+			static const unsigned int ECLASS_CLASS_OPERATION_COUNT = 28;
+			static const int ECLASS_ATTRIBUTE_ABSTRACT = 1211;
+			static const int ECLASS_ATTRIBUTE_INTERFACE = 1212;
 			
-			static const int ECLASS_EREFERENCE_EALLATTRIBUTES = 213;
-			static const int ECLASS_EREFERENCE_EALLCONTAINMENTS = 217;
-			static const int ECLASS_EREFERENCE_EALLGENERICSUPERTYPES = 224;
-			static const int ECLASS_EREFERENCE_EALLOPERATIONS = 218;
-			static const int ECLASS_EREFERENCE_EALLREFERENCES = 214;
-			static const int ECLASS_EREFERENCE_EALLSTRUCTURALFEATURES = 219;
-			static const int ECLASS_EREFERENCE_EALLSUPERTYPES = 220;
-			static const int ECLASS_EREFERENCE_EATTRIBUTES = 216;
-			static const int ECLASS_EREFERENCE_EGENERICSUPERTYPES = 223;
-			static const int ECLASS_EREFERENCE_EIDATTRIBUTE = 221;
-			static const int ECLASS_EREFERENCE_EOPERATIONS = 212;
-			static const int ECLASS_EREFERENCE_EREFERENCES = 215;
-			static const int ECLASS_EREFERENCE_ESTRUCTURALFEATURES = 222;
-			static const int ECLASS_EREFERENCE_ESUPERTYPES = 211;
+			static const int ECLASS_ATTRIBUTE_EALLATTRIBUTES = 1215;
+			static const int ECLASS_ATTRIBUTE_EALLCONTAINMENTS = 1219;
+			static const int ECLASS_ATTRIBUTE_EALLGENERICSUPERTYPES = 1226;
+			static const int ECLASS_ATTRIBUTE_EALLOPERATIONS = 1220;
+			static const int ECLASS_ATTRIBUTE_EALLREFERENCES = 1216;
+			static const int ECLASS_ATTRIBUTE_EALLSTRUCTURALFEATURES = 1221;
+			static const int ECLASS_ATTRIBUTE_EALLSUPERTYPES = 1222;
+			static const int ECLASS_ATTRIBUTE_EATTRIBUTES = 1218;
+			static const int ECLASS_ATTRIBUTE_EGENERICSUPERTYPES = 1225;
+			static const int ECLASS_ATTRIBUTE_EIDATTRIBUTE = 1223;
+			static const int ECLASS_ATTRIBUTE_EOPERATIONS = 1214;
+			static const int ECLASS_ATTRIBUTE_EREFERENCES = 1217;
+			static const int ECLASS_ATTRIBUTE_ESTRUCTURALFEATURES = 1224;
+			static const int ECLASS_ATTRIBUTE_ESUPERTYPES = 1213;
 			
-			static const int ECLASS_EOPERATION_GETEOPERATION_EINT = 234;
-			static const int ECLASS_EOPERATION_GETESTRUCTURALFEATURE_EINT = 230;
-			static const int ECLASS_EOPERATION_GETESTRUCTURALFEATURE_ESTRING = 232;
-			static const int ECLASS_EOPERATION_GETFEATURECOUNT = 229;
-			static const int ECLASS_EOPERATION_GETFEATUREID_ESTRUCTURALFEATURE = 231;
-			static const int ECLASS_EOPERATION_GETFEATURETYPE_ESTRUCTURALFEATURE = 237;
-			static const int ECLASS_EOPERATION_GETOPERATIONCOUNT = 233;
-			static const int ECLASS_EOPERATION_GETOPERATIONID_EOPERATION = 235;
-			static const int ECLASS_EOPERATION_GETOVERRIDE_EOPERATION = 236;
-			static const int ECLASS_EOPERATION_ISSUPERTYPEOF_ECLASS = 228;
+			static const int ECLASS_OPERATION_GETEOPERATION_EINT = 1251;
+			static const int ECLASS_OPERATION_GETESTRUCTURALFEATURE_EINT = 1247;
+			static const int ECLASS_OPERATION_GETESTRUCTURALFEATURE_ESTRING = 1249;
+			static const int ECLASS_OPERATION_GETFEATURECOUNT = 1246;
+			static const int ECLASS_OPERATION_GETFEATUREID_ESTRUCTURALFEATURE = 1248;
+			static const int ECLASS_OPERATION_GETFEATURETYPE_ESTRUCTURALFEATURE = 1254;
+			static const int ECLASS_OPERATION_GETOPERATIONCOUNT = 1250;
+			static const int ECLASS_OPERATION_GETOPERATIONID_EOPERATION = 1252;
+			static const int ECLASS_OPERATION_GETOVERRIDE_EOPERATION = 1253;
+			static const int ECLASS_OPERATION_ISSUPERTYPEOF_ECLASS = 1245;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getEClass_EClass() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getEClass_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getEClass_EAttribute_abstract() const = 0;
-			virtual std::shared_ptr<ecore::EAttribute> getEClass_EAttribute_interface() const = 0;
+			virtual std::shared_ptr<ecore::EAttribute> getEClass_Attribute_abstract() const = 0;
+			virtual std::shared_ptr<ecore::EAttribute> getEClass_Attribute_interface() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getEClass_EReference_eAllAttributes() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getEClass_EReference_eAllContainments() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getEClass_EReference_eAllGenericSuperTypes() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getEClass_EReference_eAllOperations() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getEClass_EReference_eAllReferences() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getEClass_EReference_eAllStructuralFeatures() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getEClass_EReference_eAllSuperTypes() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getEClass_EReference_eAttributes() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getEClass_EReference_eGenericSuperTypes() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getEClass_EReference_eIDAttribute() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getEClass_EReference_eOperations() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getEClass_EReference_eReferences() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getEClass_EReference_eStructuralFeatures() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getEClass_EReference_eSuperTypes() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getEClass_Attribute_eAllAttributes() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getEClass_Attribute_eAllContainments() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getEClass_Attribute_eAllGenericSuperTypes() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getEClass_Attribute_eAllOperations() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getEClass_Attribute_eAllReferences() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getEClass_Attribute_eAllStructuralFeatures() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getEClass_Attribute_eAllSuperTypes() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getEClass_Attribute_eAttributes() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getEClass_Attribute_eGenericSuperTypes() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getEClass_Attribute_eIDAttribute() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getEClass_Attribute_eOperations() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getEClass_Attribute_eReferences() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getEClass_Attribute_eStructuralFeatures() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getEClass_Attribute_eSuperTypes() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getEClass_EOperation_getEOperation_EInt() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getEClass_EOperation_getEStructuralFeature_EInt() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getEClass_EOperation_getEStructuralFeature_EString() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getEClass_EOperation_getFeatureCount() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getEClass_EOperation_getFeatureID_EStructuralFeature() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getEClass_EOperation_getFeatureType_EStructuralFeature() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getEClass_EOperation_getOperationCount() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getEClass_EOperation_getOperationID_EOperation() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getEClass_EOperation_getOverride_EOperation() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getEClass_EOperation_isSuperTypeOf_EClass() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getEClass_Operation_getEOperation_EInt() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getEClass_Operation_getEStructuralFeature_EInt() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getEClass_Operation_getEStructuralFeature_EString() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getEClass_Operation_getFeatureCount() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getEClass_Operation_getFeatureID_EStructuralFeature() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getEClass_Operation_getFeatureType_EStructuralFeature() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getEClass_Operation_getOperationCount() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getEClass_Operation_getOperationID_EOperation() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getEClass_Operation_getOverride_EOperation() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getEClass_Operation_isSuperTypeOf_EClass() const = 0;
 			
 			// End Class EClass
 
 
 			// Begin Class EClassifier
 			//Class and Feature IDs 
-			static const unsigned int ECLASSIFIER_ECLASS = 3;
-			static const unsigned int ECLASSIFIER_ECLASS_FEATURE_COUNT = 9;
-			static const unsigned int ECLASSIFIER_ECLASS_OPERATION_COUNT = 3;
-			static const int ECLASSIFIER_EATTRIBUTE_CLASSIFIERID = 305;
-			static const int ECLASSIFIER_EATTRIBUTE_DEFAULTVALUE = 304;
-			static const int ECLASSIFIER_EATTRIBUTE_INSTANCECLASS = 303;
-			static const int ECLASSIFIER_EATTRIBUTE_INSTANCECLASSNAME = 302;
-			static const int ECLASSIFIER_EATTRIBUTE_INSTANCETYPENAME = 306;
+			static const unsigned int ECLASSIFIER_CLASS = 13;
+			static const unsigned int ECLASSIFIER_CLASS_FEATURE_COUNT = 11;
+			static const unsigned int ECLASSIFIER_CLASS_OPERATION_COUNT = 18;
+			static const int ECLASSIFIER_ATTRIBUTE_DEFAULTVALUE = 1307;
+			static const int ECLASSIFIER_ATTRIBUTE_INSTANCECLASS = 1306;
+			static const int ECLASSIFIER_ATTRIBUTE_INSTANCECLASSNAME = 1305;
+			static const int ECLASSIFIER_ATTRIBUTE_INSTANCETYPENAME = 1308;
 			
-			static const int ECLASSIFIER_EREFERENCE_EPACKAGE = 307;
-			static const int ECLASSIFIER_EREFERENCE_ETYPEPARAMETERS = 308;
+			static const int ECLASSIFIER_ATTRIBUTE_EPACKAGE = 1309;
+			static const int ECLASSIFIER_ATTRIBUTE_ETYPEPARAMETERS = 1310;
 			
-			static const int ECLASSIFIER_EOPERATION_GETCLASSIFIERID = 311;
-			static const int ECLASSIFIER_EOPERATION_ISINSTANCE_EJAVAOBJECT = 310;
+			static const int ECLASSIFIER_OPERATION_GETCLASSIFIERID = 1328;
+			static const int ECLASSIFIER_OPERATION_ISINSTANCE_EJAVAOBJECT = 1327;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getEClassifier_EClass() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getEClassifier_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getEClassifier_EAttribute_classifierID() const = 0;
-			virtual std::shared_ptr<ecore::EAttribute> getEClassifier_EAttribute_defaultValue() const = 0;
-			virtual std::shared_ptr<ecore::EAttribute> getEClassifier_EAttribute_instanceClass() const = 0;
-			virtual std::shared_ptr<ecore::EAttribute> getEClassifier_EAttribute_instanceClassName() const = 0;
-			virtual std::shared_ptr<ecore::EAttribute> getEClassifier_EAttribute_instanceTypeName() const = 0;
+			virtual std::shared_ptr<ecore::EAttribute> getEClassifier_Attribute_defaultValue() const = 0;
+			virtual std::shared_ptr<ecore::EAttribute> getEClassifier_Attribute_instanceClass() const = 0;
+			virtual std::shared_ptr<ecore::EAttribute> getEClassifier_Attribute_instanceClassName() const = 0;
+			virtual std::shared_ptr<ecore::EAttribute> getEClassifier_Attribute_instanceTypeName() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getEClassifier_EReference_ePackage() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getEClassifier_EReference_eTypeParameters() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getEClassifier_Attribute_ePackage() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getEClassifier_Attribute_eTypeParameters() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getEClassifier_EOperation_getClassifierID() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getEClassifier_EOperation_isInstance_EJavaObject() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getEClassifier_Operation_getClassifierID() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getEClassifier_Operation_isInstance_EJavaObject() const = 0;
 			
 			// End Class EClassifier
 
 
 			// Begin Class EDataType
 			//Class and Feature IDs 
-			static const unsigned int EDATATYPE_ECLASS = 4;
-			static const unsigned int EDATATYPE_ECLASS_FEATURE_COUNT = 10;
-			static const unsigned int EDATATYPE_ECLASS_OPERATION_COUNT = 3;
-			static const int EDATATYPE_EATTRIBUTE_SERIALIZABLE = 409;
+			static const unsigned int EDATATYPE_CLASS = 14;
+			static const unsigned int EDATATYPE_CLASS_FEATURE_COUNT = 12;
+			static const unsigned int EDATATYPE_CLASS_OPERATION_COUNT = 18;
+			static const int EDATATYPE_ATTRIBUTE_SERIALIZABLE = 1411;
 			
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getEDataType_EClass() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getEDataType_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getEDataType_EAttribute_serializable() const = 0;
+			virtual std::shared_ptr<ecore::EAttribute> getEDataType_Attribute_serializable() const = 0;
 			
 			
 			
@@ -215,49 +217,49 @@ namespace ecore
 
 			// Begin Class EEnum
 			//Class and Feature IDs 
-			static const unsigned int EENUM_ECLASS = 5;
-			static const unsigned int EENUM_ECLASS_FEATURE_COUNT = 11;
-			static const unsigned int EENUM_ECLASS_OPERATION_COUNT = 6;
+			static const unsigned int EENUM_CLASS = 20;
+			static const unsigned int EENUM_CLASS_FEATURE_COUNT = 13;
+			static const unsigned int EENUM_CLASS_OPERATION_COUNT = 21;
 			
-			static const int EENUM_EREFERENCE_ELITERALS = 510;
+			static const int EENUM_ATTRIBUTE_ELITERALS = 2012;
 			
-			static const int EENUM_EOPERATION_GETEENUMLITERAL_ESTRING = 514;
-			static const int EENUM_EOPERATION_GETEENUMLITERAL_EINT = 515;
-			static const int EENUM_EOPERATION_GETEENUMLITERALBYLITERAL_ESTRING = 516;
+			static const int EENUM_OPERATION_GETEENUMLITERAL_ESTRING = 2031;
+			static const int EENUM_OPERATION_GETEENUMLITERAL_EINT = 2032;
+			static const int EENUM_OPERATION_GETEENUMLITERALBYLITERAL_ESTRING = 2033;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getEEnum_EClass() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getEEnum_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getEEnum_EReference_eLiterals() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getEEnum_Attribute_eLiterals() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getEEnum_EOperation_getEEnumLiteral_EString() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getEEnum_EOperation_getEEnumLiteral_EInt() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getEEnum_EOperation_getEEnumLiteralByLiteral_EString() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getEEnum_Operation_getEEnumLiteral_EString() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getEEnum_Operation_getEEnumLiteral_EInt() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getEEnum_Operation_getEEnumLiteralByLiteral_EString() const = 0;
 			
 			// End Class EEnum
 
 
 			// Begin Class EEnumLiteral
 			//Class and Feature IDs 
-			static const unsigned int EENUMLITERAL_ECLASS = 6;
-			static const unsigned int EENUMLITERAL_ECLASS_FEATURE_COUNT = 6;
-			static const unsigned int EENUMLITERAL_ECLASS_OPERATION_COUNT = 1;
-			static const int EENUMLITERAL_EATTRIBUTE_INSTANCE = 603;
-			static const int EENUMLITERAL_EATTRIBUTE_LITERAL = 604;
-			static const int EENUMLITERAL_EATTRIBUTE_VALUE = 602;
+			static const unsigned int EENUMLITERAL_CLASS = 21;
+			static const unsigned int EENUMLITERAL_CLASS_FEATURE_COUNT = 9;
+			static const unsigned int EENUMLITERAL_CLASS_OPERATION_COUNT = 16;
+			static const int EENUMLITERAL_ATTRIBUTE_INSTANCE = 2106;
+			static const int EENUMLITERAL_ATTRIBUTE_LITERAL = 2107;
+			static const int EENUMLITERAL_ATTRIBUTE_VALUE = 2105;
 			
-			static const int EENUMLITERAL_EREFERENCE_EENUM = 605;
+			static const int EENUMLITERAL_ATTRIBUTE_EENUM = 2108;
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getEEnumLiteral_EClass() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getEEnumLiteral_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getEEnumLiteral_EAttribute_instance() const = 0;
-			virtual std::shared_ptr<ecore::EAttribute> getEEnumLiteral_EAttribute_literal() const = 0;
-			virtual std::shared_ptr<ecore::EAttribute> getEEnumLiteral_EAttribute_value() const = 0;
+			virtual std::shared_ptr<ecore::EAttribute> getEEnumLiteral_Attribute_instance() const = 0;
+			virtual std::shared_ptr<ecore::EAttribute> getEEnumLiteral_Attribute_literal() const = 0;
+			virtual std::shared_ptr<ecore::EAttribute> getEEnumLiteral_Attribute_value() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getEEnumLiteral_EReference_eEnum() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getEEnumLiteral_Attribute_eEnum() const = 0;
 			
 			
 			// End Class EEnumLiteral
@@ -265,94 +267,94 @@ namespace ecore
 
 			// Begin Class EFactory
 			//Class and Feature IDs 
-			static const unsigned int EFACTORY_ECLASS = 7;
-			static const unsigned int EFACTORY_ECLASS_FEATURE_COUNT = 2;
-			static const unsigned int EFACTORY_ECLASS_OPERATION_COUNT = 4;
+			static const unsigned int EFACTORY_CLASS = 23;
+			static const unsigned int EFACTORY_CLASS_FEATURE_COUNT = 5;
+			static const unsigned int EFACTORY_CLASS_OPERATION_COUNT = 19;
 			
-			static const int EFACTORY_EREFERENCE_EPACKAGE = 701;
+			static const int EFACTORY_ATTRIBUTE_EPACKAGE = 2304;
 			
-			static const int EFACTORY_EOPERATION_CONVERTTOSTRING_EDATATYPE_EJAVAOBJECT = 705;
-			static const int EFACTORY_EOPERATION_CREATE_ECLASS = 703;
-			static const int EFACTORY_EOPERATION_CREATEFROMSTRING_EDATATYPE_ESTRING = 704;
+			static const int EFACTORY_OPERATION_CONVERTTOSTRING_EDATATYPE_EJAVAOBJECT = 2323;
+			static const int EFACTORY_OPERATION_CREATE_ECLASS = 2321;
+			static const int EFACTORY_OPERATION_CREATEFROMSTRING_EDATATYPE_ESTRING = 2322;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getEFactory_EClass() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getEFactory_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getEFactory_EReference_ePackage() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getEFactory_Attribute_ePackage() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getEFactory_EOperation_convertToString_EDataType_EJavaObject() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getEFactory_EOperation_create_EClass() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getEFactory_EOperation_createFromString_EDataType_EString() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getEFactory_Operation_convertToString_EDataType_EJavaObject() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getEFactory_Operation_create_EClass() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getEFactory_Operation_createFromString_EDataType_EString() const = 0;
 			
 			// End Class EFactory
 
 
 			// Begin Class EGenericType
 			//Class and Feature IDs 
-			static const unsigned int EGENERICTYPE_ECLASS = 50;
-			static const unsigned int EGENERICTYPE_ECLASS_FEATURE_COUNT = 6;
-			static const unsigned int EGENERICTYPE_ECLASS_OPERATION_COUNT = 1;
+			static const unsigned int EGENERICTYPE_CLASS = 28;
+			static const unsigned int EGENERICTYPE_CLASS_FEATURE_COUNT = 6;
+			static const unsigned int EGENERICTYPE_CLASS_OPERATION_COUNT = 1;
 			
-			static const int EGENERICTYPE_EREFERENCE_ECLASSIFIER = 5005;
-			static const int EGENERICTYPE_EREFERENCE_ELOWERBOUND = 5003;
-			static const int EGENERICTYPE_EREFERENCE_ERAWTYPE = 5002;
-			static const int EGENERICTYPE_EREFERENCE_ETYPEARGUMENTS = 5001;
-			static const int EGENERICTYPE_EREFERENCE_ETYPEPARAMETER = 5004;
-			static const int EGENERICTYPE_EREFERENCE_EUPPERBOUND = 5000;
+			static const int EGENERICTYPE_ATTRIBUTE_ECLASSIFIER = 2805;
+			static const int EGENERICTYPE_ATTRIBUTE_ELOWERBOUND = 2803;
+			static const int EGENERICTYPE_ATTRIBUTE_ERAWTYPE = 2802;
+			static const int EGENERICTYPE_ATTRIBUTE_ETYPEARGUMENTS = 2801;
+			static const int EGENERICTYPE_ATTRIBUTE_ETYPEPARAMETER = 2804;
+			static const int EGENERICTYPE_ATTRIBUTE_EUPPERBOUND = 2800;
 			
-			static const int EGENERICTYPE_EOPERATION_ISINSTANCE_EJAVAOBJECT = 5006;
+			static const int EGENERICTYPE_OPERATION_ISINSTANCE_EJAVAOBJECT = 2806;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getEGenericType_EClass() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getEGenericType_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getEGenericType_EReference_eClassifier() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getEGenericType_EReference_eLowerBound() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getEGenericType_EReference_eRawType() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getEGenericType_EReference_eTypeArguments() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getEGenericType_EReference_eTypeParameter() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getEGenericType_EReference_eUpperBound() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getEGenericType_Attribute_eClassifier() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getEGenericType_Attribute_eLowerBound() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getEGenericType_Attribute_eRawType() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getEGenericType_Attribute_eTypeArguments() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getEGenericType_Attribute_eTypeParameter() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getEGenericType_Attribute_eUpperBound() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getEGenericType_EOperation_isInstance_EJavaObject() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getEGenericType_Operation_isInstance_EJavaObject() const = 0;
 			
 			// End Class EGenericType
 
 
 			// Begin Class EModelElement
 			//Class and Feature IDs 
-			static const unsigned int EMODELELEMENT_ECLASS = 8;
-			static const unsigned int EMODELELEMENT_ECLASS_FEATURE_COUNT = 1;
-			static const unsigned int EMODELELEMENT_ECLASS_OPERATION_COUNT = 1;
+			static const unsigned int EMODELELEMENT_CLASS = 37;
+			static const unsigned int EMODELELEMENT_CLASS_FEATURE_COUNT = 4;
+			static const unsigned int EMODELELEMENT_CLASS_OPERATION_COUNT = 16;
 			
-			static const int EMODELELEMENT_EREFERENCE_EANNOTATIONS = 800;
+			static const int EMODELELEMENT_ATTRIBUTE_EANNOTATIONS = 3703;
 			
-			static const int EMODELELEMENT_EOPERATION_GETEANNOTATION_ESTRING = 801;
+			static const int EMODELELEMENT_OPERATION_GETEANNOTATION_ESTRING = 3719;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getEModelElement_EClass() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getEModelElement_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getEModelElement_EReference_eAnnotations() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getEModelElement_Attribute_eAnnotations() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getEModelElement_EOperation_getEAnnotation_EString() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getEModelElement_Operation_getEAnnotation_EString() const = 0;
 			
 			// End Class EModelElement
 
 
 			// Begin Class ENamedElement
 			//Class and Feature IDs 
-			static const unsigned int ENAMEDELEMENT_ECLASS = 9;
-			static const unsigned int ENAMEDELEMENT_ECLASS_FEATURE_COUNT = 2;
-			static const unsigned int ENAMEDELEMENT_ECLASS_OPERATION_COUNT = 1;
-			static const int ENAMEDELEMENT_EATTRIBUTE_NAME = 901;
+			static const unsigned int ENAMEDELEMENT_CLASS = 38;
+			static const unsigned int ENAMEDELEMENT_CLASS_FEATURE_COUNT = 5;
+			static const unsigned int ENAMEDELEMENT_CLASS_OPERATION_COUNT = 16;
+			static const int ENAMEDELEMENT_ATTRIBUTE_NAME = 3804;
 			
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getENamedElement_EClass() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getENamedElement_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getENamedElement_EAttribute_name() const = 0;
+			virtual std::shared_ptr<ecore::EAttribute> getENamedElement_Attribute_name() const = 0;
 			
 			
 			
@@ -361,129 +363,135 @@ namespace ecore
 
 			// Begin Class EObject
 			//Class and Feature IDs 
-			static const unsigned int EOBJECT_ECLASS = 10;
-			static const unsigned int EOBJECT_ECLASS_FEATURE_COUNT = 0;
-			static const unsigned int EOBJECT_ECLASS_OPERATION_COUNT = 15;
+			static const unsigned int EOBJECT_CLASS = 39;
+			static const unsigned int EOBJECT_CLASS_FEATURE_COUNT = 3;
+			static const unsigned int EOBJECT_CLASS_OPERATION_COUNT = 15;
+			static const int EOBJECT_ATTRIBUTE_METAELEMENTID = 3902;
 			
+			static const int EOBJECT_ATTRIBUTE_ECONTAINER = 3901;
+			static const int EOBJECT_ATTRIBUTE_ECONTENS = 3900;
 			
-			static const int EOBJECT_EOPERATION_EALLCONTENTS = 1007;
-			static const int EOBJECT_EOPERATION_ECLASS = 1000;
-			static const int EOBJECT_EOPERATION_ECONTAINER = 1003;
-			static const int EOBJECT_EOPERATION_ECONTAININGFEATURE = 1004;
-			static const int EOBJECT_EOPERATION_ECONTAINMENTFEATURE = 1005;
-			static const int EOBJECT_EOPERATION_ECONTENTS = 1006;
-			static const int EOBJECT_EOPERATION_ECROSSREFERENCES = 1008;
-			static const int EOBJECT_EOPERATION_EGET_ESTRUCTURALFEATURE = 1009;
-			static const int EOBJECT_EOPERATION_EGET_ESTRUCTURALFEATURE_EBOOLEAN = 1010;
-			static const int EOBJECT_EOPERATION_EINVOKE_EOPERATION_EELIST = 1014;
-			static const int EOBJECT_EOPERATION_EISPROXY = 1001;
-			static const int EOBJECT_EOPERATION_EISSET_ESTRUCTURALFEATURE = 1012;
-			static const int EOBJECT_EOPERATION_ERESOURCE = 1002;
-			static const int EOBJECT_EOPERATION_ESET_ESTRUCTURALFEATURE_EJAVAOBJECT = 1011;
-			static const int EOBJECT_EOPERATION_EUNSET_ESTRUCTURALFEATURE = 1013;
+			static const int EOBJECT_OPERATION_EALLCONTENTS = 3910;
+			static const int EOBJECT_OPERATION_ECLASS = 3903;
+			static const int EOBJECT_OPERATION_ECONTAINER = 3906;
+			static const int EOBJECT_OPERATION_ECONTAININGFEATURE = 3907;
+			static const int EOBJECT_OPERATION_ECONTAINMENTFEATURE = 3908;
+			static const int EOBJECT_OPERATION_ECONTENTS = 3909;
+			static const int EOBJECT_OPERATION_ECROSSREFERENCES = 3911;
+			static const int EOBJECT_OPERATION_EGET_ESTRUCTURALFEATURE = 3912;
+			static const int EOBJECT_OPERATION_EGET_ESTRUCTURALFEATURE_EBOOLEAN = 3913;
+			static const int EOBJECT_OPERATION_EINVOKE_EOPERATION_EELIST = 3917;
+			static const int EOBJECT_OPERATION_EISPROXY = 3904;
+			static const int EOBJECT_OPERATION_EISSET_ESTRUCTURALFEATURE = 3915;
+			static const int EOBJECT_OPERATION_ERESOURCE = 3905;
+			static const int EOBJECT_OPERATION_ESET_ESTRUCTURALFEATURE_EJAVAOBJECT = 3914;
+			static const int EOBJECT_OPERATION_EUNSET_ESTRUCTURALFEATURE = 3916;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getEObject_EClass() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getEObject_Class() const = 0;
 			
+			virtual std::shared_ptr<ecore::EAttribute> getEObject_Attribute_metaElementID() const = 0;
 			
+			virtual std::shared_ptr<ecore::EReference> getEObject_Attribute_eContainer() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getEObject_Attribute_eContens() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getEObject_EOperation_eAllContents() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getEObject_EOperation_eClass() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getEObject_EOperation_eContainer() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getEObject_EOperation_eContainingFeature() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getEObject_EOperation_eContainmentFeature() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getEObject_EOperation_eContents() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getEObject_EOperation_eCrossReferences() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getEObject_EOperation_eGet_EStructuralFeature() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getEObject_EOperation_eGet_EStructuralFeature_EBoolean() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getEObject_EOperation_eInvoke_EOperation_EEList() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getEObject_EOperation_eIsProxy() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getEObject_EOperation_eIsSet_EStructuralFeature() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getEObject_EOperation_eResource() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getEObject_EOperation_eSet_EStructuralFeature_EJavaObject() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getEObject_EOperation_eUnset_EStructuralFeature() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getEObject_Operation_eAllContents() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getEObject_Operation_eClass() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getEObject_Operation_eContainer() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getEObject_Operation_eContainingFeature() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getEObject_Operation_eContainmentFeature() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getEObject_Operation_eContents() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getEObject_Operation_eCrossReferences() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getEObject_Operation_eGet_EStructuralFeature() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getEObject_Operation_eGet_EStructuralFeature_EBoolean() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getEObject_Operation_eInvoke_EOperation_EEList() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getEObject_Operation_eIsProxy() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getEObject_Operation_eIsSet_EStructuralFeature() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getEObject_Operation_eResource() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getEObject_Operation_eSet_EStructuralFeature_EJavaObject() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getEObject_Operation_eUnset_EStructuralFeature() const = 0;
 			
 			// End Class EObject
 
 
 			// Begin Class EOperation
 			//Class and Feature IDs 
-			static const unsigned int EOPERATION_ECLASS = 11;
-			static const unsigned int EOPERATION_ECLASS_FEATURE_COUNT = 16;
-			static const unsigned int EOPERATION_ECLASS_OPERATION_COUNT = 3;
-			static const int EOPERATION_EATTRIBUTE_OPERATIONID = 1110;
+			static const unsigned int EOPERATION_CLASS = 40;
+			static const unsigned int EOPERATION_CLASS_FEATURE_COUNT = 19;
+			static const unsigned int EOPERATION_CLASS_OPERATION_COUNT = 18;
+			static const int EOPERATION_ATTRIBUTE_OPERATIONID = 4013;
 			
-			static const int EOPERATION_EREFERENCE_ECONTAININGCLASS = 1111;
-			static const int EOPERATION_EREFERENCE_EEXCEPTIONS = 1114;
-			static const int EOPERATION_EREFERENCE_EGENERICEXCEPTIONS = 1115;
-			static const int EOPERATION_EREFERENCE_EPARAMETERS = 1113;
-			static const int EOPERATION_EREFERENCE_ETYPEPARAMETERS = 1112;
+			static const int EOPERATION_ATTRIBUTE_ECONTAININGCLASS = 4014;
+			static const int EOPERATION_ATTRIBUTE_EEXCEPTIONS = 4017;
+			static const int EOPERATION_ATTRIBUTE_EGENERICEXCEPTIONS = 4018;
+			static const int EOPERATION_ATTRIBUTE_EPARAMETERS = 4016;
+			static const int EOPERATION_ATTRIBUTE_ETYPEPARAMETERS = 4015;
 			
-			static const int EOPERATION_EOPERATION_GETOPERATIONID = 1117;
-			static const int EOPERATION_EOPERATION_ISOVERRIDEOF_EOPERATION = 1118;
+			static const int EOPERATION_OPERATION_GETOPERATIONID = 4035;
+			static const int EOPERATION_OPERATION_ISOVERRIDEOF_EOPERATION = 4036;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getEOperation_EClass() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getEOperation_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getEOperation_EAttribute_operationID() const = 0;
+			virtual std::shared_ptr<ecore::EAttribute> getEOperation_Attribute_operationID() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getEOperation_EReference_eContainingClass() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getEOperation_EReference_eExceptions() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getEOperation_EReference_eGenericExceptions() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getEOperation_EReference_eParameters() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getEOperation_EReference_eTypeParameters() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getEOperation_Attribute_eContainingClass() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getEOperation_Attribute_eExceptions() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getEOperation_Attribute_eGenericExceptions() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getEOperation_Attribute_eParameters() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getEOperation_Attribute_eTypeParameters() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getEOperation_EOperation_getOperationID() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getEOperation_EOperation_isOverrideOf_EOperation() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getEOperation_Operation_getOperationID() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getEOperation_Operation_isOverrideOf_EOperation() const = 0;
 			
 			// End Class EOperation
 
 
 			// Begin Class EPackage
 			//Class and Feature IDs 
-			static const unsigned int EPACKAGE_ECLASS = 12;
-			static const unsigned int EPACKAGE_ECLASS_FEATURE_COUNT = 8;
-			static const unsigned int EPACKAGE_ECLASS_OPERATION_COUNT = 2;
-			static const int EPACKAGE_EATTRIBUTE_NSPREFIX = 1203;
-			static const int EPACKAGE_EATTRIBUTE_NSURI = 1202;
+			static const unsigned int EPACKAGE_CLASS = 41;
+			static const unsigned int EPACKAGE_CLASS_FEATURE_COUNT = 11;
+			static const unsigned int EPACKAGE_CLASS_OPERATION_COUNT = 17;
+			static const int EPACKAGE_ATTRIBUTE_NSPREFIX = 4106;
+			static const int EPACKAGE_ATTRIBUTE_NSURI = 4105;
 			
-			static const int EPACKAGE_EREFERENCE_ECLASSIFIERS = 1205;
-			static const int EPACKAGE_EREFERENCE_EFACTORYINSTANCE = 1204;
-			static const int EPACKAGE_EREFERENCE_ESUBPACKAGES = 1206;
-			static const int EPACKAGE_EREFERENCE_ESUPERPACKAGE = 1207;
+			static const int EPACKAGE_ATTRIBUTE_ECLASSIFIERS = 4108;
+			static const int EPACKAGE_ATTRIBUTE_EFACTORYINSTANCE = 4107;
+			static const int EPACKAGE_ATTRIBUTE_ESUBPACKAGES = 4109;
+			static const int EPACKAGE_ATTRIBUTE_ESUPERPACKAGE = 4110;
 			
-			static const int EPACKAGE_EOPERATION_GETECLASSIFIER_ESTRING = 1209;
+			static const int EPACKAGE_OPERATION_GETECLASSIFIER_ESTRING = 4127;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getEPackage_EClass() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getEPackage_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getEPackage_EAttribute_nsPrefix() const = 0;
-			virtual std::shared_ptr<ecore::EAttribute> getEPackage_EAttribute_nsURI() const = 0;
+			virtual std::shared_ptr<ecore::EAttribute> getEPackage_Attribute_nsPrefix() const = 0;
+			virtual std::shared_ptr<ecore::EAttribute> getEPackage_Attribute_nsURI() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getEPackage_EReference_eClassifiers() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getEPackage_EReference_eFactoryInstance() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getEPackage_EReference_eSubpackages() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getEPackage_EReference_eSuperPackage() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getEPackage_Attribute_eClassifiers() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getEPackage_Attribute_eFactoryInstance() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getEPackage_Attribute_eSubpackages() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getEPackage_Attribute_eSuperPackage() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getEPackage_EOperation_getEClassifier_EString() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getEPackage_Operation_getEClassifier_EString() const = 0;
 			
 			// End Class EPackage
 
 
 			// Begin Class EParameter
 			//Class and Feature IDs 
-			static const unsigned int EPARAMETER_ECLASS = 13;
-			static const unsigned int EPARAMETER_ECLASS_FEATURE_COUNT = 11;
-			static const unsigned int EPARAMETER_ECLASS_OPERATION_COUNT = 1;
+			static const unsigned int EPARAMETER_CLASS = 42;
+			static const unsigned int EPARAMETER_CLASS_FEATURE_COUNT = 14;
+			static const unsigned int EPARAMETER_CLASS_OPERATION_COUNT = 16;
 			
-			static const int EPARAMETER_EREFERENCE_EOPERATION = 1310;
+			static const int EPARAMETER_ATTRIBUTE_EOPERATION = 4213;
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getEParameter_EClass() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getEParameter_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getEParameter_EReference_eOperation() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getEParameter_Attribute_eOperation() const = 0;
 			
 			
 			// End Class EParameter
@@ -491,28 +499,28 @@ namespace ecore
 
 			// Begin Class EReference
 			//Class and Feature IDs 
-			static const unsigned int EREFERENCE_ECLASS = 14;
-			static const unsigned int EREFERENCE_ECLASS_FEATURE_COUNT = 25;
-			static const unsigned int EREFERENCE_ECLASS_OPERATION_COUNT = 3;
-			static const int EREFERENCE_EATTRIBUTE_CONTAINER = 1420;
-			static const int EREFERENCE_EATTRIBUTE_CONTAINMENT = 1419;
-			static const int EREFERENCE_EATTRIBUTE_RESOLVEPROXIES = 1421;
+			static const unsigned int EREFERENCE_CLASS = 43;
+			static const unsigned int EREFERENCE_CLASS_FEATURE_COUNT = 28;
+			static const unsigned int EREFERENCE_CLASS_OPERATION_COUNT = 18;
+			static const int EREFERENCE_ATTRIBUTE_CONTAINER = 4323;
+			static const int EREFERENCE_ATTRIBUTE_CONTAINMENT = 4322;
+			static const int EREFERENCE_ATTRIBUTE_RESOLVEPROXIES = 4324;
 			
-			static const int EREFERENCE_EREFERENCE_EKEYS = 1424;
-			static const int EREFERENCE_EREFERENCE_EOPPOSITE = 1422;
-			static const int EREFERENCE_EREFERENCE_EREFERENCETYPE = 1423;
+			static const int EREFERENCE_ATTRIBUTE_EKEYS = 4327;
+			static const int EREFERENCE_ATTRIBUTE_EOPPOSITE = 4325;
+			static const int EREFERENCE_ATTRIBUTE_EREFERENCETYPE = 4326;
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getEReference_EClass() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getEReference_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getEReference_EAttribute_container() const = 0;
-			virtual std::shared_ptr<ecore::EAttribute> getEReference_EAttribute_containment() const = 0;
-			virtual std::shared_ptr<ecore::EAttribute> getEReference_EAttribute_resolveProxies() const = 0;
+			virtual std::shared_ptr<ecore::EAttribute> getEReference_Attribute_container() const = 0;
+			virtual std::shared_ptr<ecore::EAttribute> getEReference_Attribute_containment() const = 0;
+			virtual std::shared_ptr<ecore::EAttribute> getEReference_Attribute_resolveProxies() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getEReference_EReference_eKeys() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getEReference_EReference_eOpposite() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getEReference_EReference_eReferenceType() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getEReference_Attribute_eKeys() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getEReference_Attribute_eOpposite() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getEReference_Attribute_eReferenceType() const = 0;
 			
 			
 			// End Class EReference
@@ -520,19 +528,19 @@ namespace ecore
 
 			// Begin Class EStringToStringMapEntry
 			//Class and Feature IDs 
-			static const unsigned int ESTRINGTOSTRINGMAPENTRY_ECLASS = 48;
-			static const unsigned int ESTRINGTOSTRINGMAPENTRY_ECLASS_FEATURE_COUNT = 2;
-			static const unsigned int ESTRINGTOSTRINGMAPENTRY_ECLASS_OPERATION_COUNT = 0;
-			static const int ESTRINGTOSTRINGMAPENTRY_EATTRIBUTE_KEY = 4800;
-			static const int ESTRINGTOSTRINGMAPENTRY_EATTRIBUTE_VALUE = 4801;
+			static const unsigned int ESTRINGTOSTRINGMAPENTRY_CLASS = 49;
+			static const unsigned int ESTRINGTOSTRINGMAPENTRY_CLASS_FEATURE_COUNT = 2;
+			static const unsigned int ESTRINGTOSTRINGMAPENTRY_CLASS_OPERATION_COUNT = 0;
+			static const int ESTRINGTOSTRINGMAPENTRY_ATTRIBUTE_KEY = 4900;
+			static const int ESTRINGTOSTRINGMAPENTRY_ATTRIBUTE_VALUE = 4901;
 			
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getEStringToStringMapEntry_EClass() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getEStringToStringMapEntry_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getEStringToStringMapEntry_EAttribute_key() const = 0;
-			virtual std::shared_ptr<ecore::EAttribute> getEStringToStringMapEntry_EAttribute_value() const = 0;
+			virtual std::shared_ptr<ecore::EAttribute> getEStringToStringMapEntry_Attribute_key() const = 0;
+			virtual std::shared_ptr<ecore::EAttribute> getEStringToStringMapEntry_Attribute_value() const = 0;
 			
 			
 			
@@ -541,57 +549,57 @@ namespace ecore
 
 			// Begin Class EStructuralFeature
 			//Class and Feature IDs 
-			static const unsigned int ESTRUCTURALFEATURE_ECLASS = 15;
-			static const unsigned int ESTRUCTURALFEATURE_ECLASS_FEATURE_COUNT = 19;
-			static const unsigned int ESTRUCTURALFEATURE_ECLASS_OPERATION_COUNT = 3;
-			static const int ESTRUCTURALFEATURE_EATTRIBUTE_CHANGEABLE = 1510;
-			static const int ESTRUCTURALFEATURE_EATTRIBUTE_DEFAULTVALUE = 1514;
-			static const int ESTRUCTURALFEATURE_EATTRIBUTE_DEFAULTVALUELITERAL = 1513;
-			static const int ESTRUCTURALFEATURE_EATTRIBUTE_DERIVED = 1516;
-			static const int ESTRUCTURALFEATURE_EATTRIBUTE_FEATUREID = 1517;
-			static const int ESTRUCTURALFEATURE_EATTRIBUTE_TRANSIENT = 1512;
-			static const int ESTRUCTURALFEATURE_EATTRIBUTE_UNSETTABLE = 1515;
-			static const int ESTRUCTURALFEATURE_EATTRIBUTE_VOLATILE = 1511;
+			static const unsigned int ESTRUCTURALFEATURE_CLASS = 50;
+			static const unsigned int ESTRUCTURALFEATURE_CLASS_FEATURE_COUNT = 22;
+			static const unsigned int ESTRUCTURALFEATURE_CLASS_OPERATION_COUNT = 18;
+			static const int ESTRUCTURALFEATURE_ATTRIBUTE_CHANGEABLE = 5013;
+			static const int ESTRUCTURALFEATURE_ATTRIBUTE_DEFAULTVALUE = 5017;
+			static const int ESTRUCTURALFEATURE_ATTRIBUTE_DEFAULTVALUELITERAL = 5016;
+			static const int ESTRUCTURALFEATURE_ATTRIBUTE_DERIVED = 5019;
+			static const int ESTRUCTURALFEATURE_ATTRIBUTE_FEATUREID = 5020;
+			static const int ESTRUCTURALFEATURE_ATTRIBUTE_TRANSIENT = 5015;
+			static const int ESTRUCTURALFEATURE_ATTRIBUTE_UNSETTABLE = 5018;
+			static const int ESTRUCTURALFEATURE_ATTRIBUTE_VOLATILE = 5014;
 			
-			static const int ESTRUCTURALFEATURE_EREFERENCE_ECONTAININGCLASS = 1518;
+			static const int ESTRUCTURALFEATURE_ATTRIBUTE_ECONTAININGCLASS = 5021;
 			
-			static const int ESTRUCTURALFEATURE_EOPERATION_GETCONTAINERCLASS = 1521;
-			static const int ESTRUCTURALFEATURE_EOPERATION_GETFEATUREID = 1520;
+			static const int ESTRUCTURALFEATURE_OPERATION_GETCONTAINERCLASS = 5039;
+			static const int ESTRUCTURALFEATURE_OPERATION_GETFEATUREID = 5038;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getEStructuralFeature_EClass() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getEStructuralFeature_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getEStructuralFeature_EAttribute_changeable() const = 0;
-			virtual std::shared_ptr<ecore::EAttribute> getEStructuralFeature_EAttribute_defaultValue() const = 0;
-			virtual std::shared_ptr<ecore::EAttribute> getEStructuralFeature_EAttribute_defaultValueLiteral() const = 0;
-			virtual std::shared_ptr<ecore::EAttribute> getEStructuralFeature_EAttribute_derived() const = 0;
-			virtual std::shared_ptr<ecore::EAttribute> getEStructuralFeature_EAttribute_featureID() const = 0;
-			virtual std::shared_ptr<ecore::EAttribute> getEStructuralFeature_EAttribute_transient() const = 0;
-			virtual std::shared_ptr<ecore::EAttribute> getEStructuralFeature_EAttribute_unsettable() const = 0;
-			virtual std::shared_ptr<ecore::EAttribute> getEStructuralFeature_EAttribute_volatile() const = 0;
+			virtual std::shared_ptr<ecore::EAttribute> getEStructuralFeature_Attribute_changeable() const = 0;
+			virtual std::shared_ptr<ecore::EAttribute> getEStructuralFeature_Attribute_defaultValue() const = 0;
+			virtual std::shared_ptr<ecore::EAttribute> getEStructuralFeature_Attribute_defaultValueLiteral() const = 0;
+			virtual std::shared_ptr<ecore::EAttribute> getEStructuralFeature_Attribute_derived() const = 0;
+			virtual std::shared_ptr<ecore::EAttribute> getEStructuralFeature_Attribute_featureID() const = 0;
+			virtual std::shared_ptr<ecore::EAttribute> getEStructuralFeature_Attribute_transient() const = 0;
+			virtual std::shared_ptr<ecore::EAttribute> getEStructuralFeature_Attribute_unsettable() const = 0;
+			virtual std::shared_ptr<ecore::EAttribute> getEStructuralFeature_Attribute_volatile() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getEStructuralFeature_EReference_eContainingClass() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getEStructuralFeature_Attribute_eContainingClass() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getEStructuralFeature_EOperation_getContainerClass() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getEStructuralFeature_EOperation_getFeatureID() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getEStructuralFeature_Operation_getContainerClass() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getEStructuralFeature_Operation_getFeatureID() const = 0;
 			
 			// End Class EStructuralFeature
 
 
 			// Begin Class ETypeParameter
 			//Class and Feature IDs 
-			static const unsigned int ETYPEPARAMETER_ECLASS = 51;
-			static const unsigned int ETYPEPARAMETER_ECLASS_FEATURE_COUNT = 3;
-			static const unsigned int ETYPEPARAMETER_ECLASS_OPERATION_COUNT = 1;
+			static const unsigned int ETYPEPARAMETER_CLASS = 52;
+			static const unsigned int ETYPEPARAMETER_CLASS_FEATURE_COUNT = 6;
+			static const unsigned int ETYPEPARAMETER_CLASS_OPERATION_COUNT = 16;
 			
-			static const int ETYPEPARAMETER_EREFERENCE_EBOUNDS = 5102;
+			static const int ETYPEPARAMETER_ATTRIBUTE_EBOUNDS = 5205;
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getETypeParameter_EClass() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getETypeParameter_Class() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EReference> getETypeParameter_EReference_eBounds() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getETypeParameter_Attribute_eBounds() const = 0;
 			
 			
 			// End Class ETypeParameter
@@ -599,103 +607,103 @@ namespace ecore
 
 			// Begin Class ETypedElement
 			//Class and Feature IDs 
-			static const unsigned int ETYPEDELEMENT_ECLASS = 16;
-			static const unsigned int ETYPEDELEMENT_ECLASS_FEATURE_COUNT = 10;
-			static const unsigned int ETYPEDELEMENT_ECLASS_OPERATION_COUNT = 1;
-			static const int ETYPEDELEMENT_EATTRIBUTE_LOWERBOUND = 1604;
-			static const int ETYPEDELEMENT_EATTRIBUTE_MANY = 1606;
-			static const int ETYPEDELEMENT_EATTRIBUTE_ORDERED = 1602;
-			static const int ETYPEDELEMENT_EATTRIBUTE_REQUIRED = 1607;
-			static const int ETYPEDELEMENT_EATTRIBUTE_UNIQUE = 1603;
-			static const int ETYPEDELEMENT_EATTRIBUTE_UPPERBOUND = 1605;
+			static const unsigned int ETYPEDELEMENT_CLASS = 53;
+			static const unsigned int ETYPEDELEMENT_CLASS_FEATURE_COUNT = 13;
+			static const unsigned int ETYPEDELEMENT_CLASS_OPERATION_COUNT = 16;
+			static const int ETYPEDELEMENT_ATTRIBUTE_LOWERBOUND = 5307;
+			static const int ETYPEDELEMENT_ATTRIBUTE_MANY = 5309;
+			static const int ETYPEDELEMENT_ATTRIBUTE_ORDERED = 5305;
+			static const int ETYPEDELEMENT_ATTRIBUTE_REQUIRED = 5310;
+			static const int ETYPEDELEMENT_ATTRIBUTE_UNIQUE = 5306;
+			static const int ETYPEDELEMENT_ATTRIBUTE_UPPERBOUND = 5308;
 			
-			static const int ETYPEDELEMENT_EREFERENCE_EGENERICTYPE = 1609;
-			static const int ETYPEDELEMENT_EREFERENCE_ETYPE = 1608;
+			static const int ETYPEDELEMENT_ATTRIBUTE_EGENERICTYPE = 5312;
+			static const int ETYPEDELEMENT_ATTRIBUTE_ETYPE = 5311;
 			
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getETypedElement_EClass() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getETypedElement_Class() const = 0;
 			
-			virtual std::shared_ptr<ecore::EAttribute> getETypedElement_EAttribute_lowerBound() const = 0;
-			virtual std::shared_ptr<ecore::EAttribute> getETypedElement_EAttribute_many() const = 0;
-			virtual std::shared_ptr<ecore::EAttribute> getETypedElement_EAttribute_ordered() const = 0;
-			virtual std::shared_ptr<ecore::EAttribute> getETypedElement_EAttribute_required() const = 0;
-			virtual std::shared_ptr<ecore::EAttribute> getETypedElement_EAttribute_unique() const = 0;
-			virtual std::shared_ptr<ecore::EAttribute> getETypedElement_EAttribute_upperBound() const = 0;
+			virtual std::shared_ptr<ecore::EAttribute> getETypedElement_Attribute_lowerBound() const = 0;
+			virtual std::shared_ptr<ecore::EAttribute> getETypedElement_Attribute_many() const = 0;
+			virtual std::shared_ptr<ecore::EAttribute> getETypedElement_Attribute_ordered() const = 0;
+			virtual std::shared_ptr<ecore::EAttribute> getETypedElement_Attribute_required() const = 0;
+			virtual std::shared_ptr<ecore::EAttribute> getETypedElement_Attribute_unique() const = 0;
+			virtual std::shared_ptr<ecore::EAttribute> getETypedElement_Attribute_upperBound() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getETypedElement_EReference_eGenericType() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getETypedElement_EReference_eType() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getETypedElement_Attribute_eGenericType() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getETypedElement_Attribute_eType() const = 0;
 			
 			
 			// End Class ETypedElement
 
-			static const int EBIGDECIMAL_EDATATYPE = 17;
-			static const int EBIGINTEGER_EDATATYPE = 18;
-			static const int EBOOLEAN_EDATATYPE = 19;
-			static const int EBOOLEANOBJECT_EDATATYPE = 20;
-			static const int EBYTE_EDATATYPE = 21;
-			static const int EBYTEARRAY_EDATATYPE = 22;
-			static const int EBYTEOBJECT_EDATATYPE = 23;
-			static const int ECHAR_EDATATYPE = 24;
-			static const int ECHARACTEROBJECT_EDATATYPE = 25;
-			static const int EDATE_EDATATYPE = 26;
-			static const int EDIAGNOSTICCHAIN_EDATATYPE = 27;
-			static const int EDOUBLE_EDATATYPE = 28;
-			static const int EDOUBLEOBJECT_EDATATYPE = 29;
-			static const int EELIST_EDATATYPE = 30;
-			static const int EENUMERATOR_EDATATYPE = 31;
-			static const int EFEATUREMAP_EDATATYPE = 32;
-			static const int EFEATUREMAPENTRY_EDATATYPE = 33;
-			static const int EFLOAT_EDATATYPE = 34;
-			static const int EFLOATOBJECT_EDATATYPE = 35;
-			static const int EINT_EDATATYPE = 36;
-			static const int EINTEGEROBJECT_EDATATYPE = 37;
-			static const int EINVOCATIONTARGETEXCEPTION_EDATATYPE = 52;
-			static const int EJAVACLASS_EDATATYPE = 38;
-			static const int EJAVAOBJECT_EDATATYPE = 39;
-			static const int ELONG_EDATATYPE = 40;
-			static const int ELONGOBJECT_EDATATYPE = 41;
-			static const int EMAP_EDATATYPE = 42;
-			static const int ERESOURCE_EDATATYPE = 43;
-			static const int ERESOURCESET_EDATATYPE = 44;
-			static const int ESHORT_EDATATYPE = 45;
-			static const int ESHORTOBJECT_EDATATYPE = 46;
-			static const int ESTRING_EDATATYPE = 47;
-			static const int ETREEITERATOR_EDATATYPE = 49;
+			static const int EBIGDECIMAL_CLASS = 3;
+			static const int EBIGINTEGER_CLASS = 4;
+			static const int EBOOLEAN_CLASS = 5;
+			static const int EBOOLEANOBJECT_CLASS = 6;
+			static const int EBYTE_CLASS = 7;
+			static const int EBYTEARRAY_CLASS = 8;
+			static const int EBYTEOBJECT_CLASS = 9;
+			static const int ECHAR_CLASS = 10;
+			static const int ECHARACTEROBJECT_CLASS = 11;
+			static const int EDATE_CLASS = 15;
+			static const int EDIAGNOSTICCHAIN_CLASS = 16;
+			static const int EDOUBLE_CLASS = 17;
+			static const int EDOUBLEOBJECT_CLASS = 18;
+			static const int EELIST_CLASS = 19;
+			static const int EENUMERATOR_CLASS = 22;
+			static const int EFEATUREMAP_CLASS = 24;
+			static const int EFEATUREMAPENTRY_CLASS = 25;
+			static const int EFLOAT_CLASS = 26;
+			static const int EFLOATOBJECT_CLASS = 27;
+			static const int EINT_CLASS = 29;
+			static const int EINTEGEROBJECT_CLASS = 30;
+			static const int EINVOCATIONTARGETEXCEPTION_CLASS = 31;
+			static const int EJAVACLASS_CLASS = 32;
+			static const int EJAVAOBJECT_CLASS = 33;
+			static const int ELONG_CLASS = 34;
+			static const int ELONGOBJECT_CLASS = 35;
+			static const int EMAP_CLASS = 36;
+			static const int ERESOURCE_CLASS = 44;
+			static const int ERESOURCESET_CLASS = 45;
+			static const int ESHORT_CLASS = 46;
+			static const int ESHORTOBJECT_CLASS = 47;
+			static const int ESTRING_CLASS = 48;
+			static const int ETREEITERATOR_CLASS = 51;
 			
-			virtual std::shared_ptr<ecore::EDataType> getEBigDecimal_EDataType() const = 0;
-			virtual std::shared_ptr<ecore::EDataType> getEBigInteger_EDataType() const = 0;
-			virtual std::shared_ptr<ecore::EDataType> getEBoolean_EDataType() const = 0;
-			virtual std::shared_ptr<ecore::EDataType> getEBooleanObject_EDataType() const = 0;
-			virtual std::shared_ptr<ecore::EDataType> getEByte_EDataType() const = 0;
-			virtual std::shared_ptr<ecore::EDataType> getEByteArray_EDataType() const = 0;
-			virtual std::shared_ptr<ecore::EDataType> getEByteObject_EDataType() const = 0;
-			virtual std::shared_ptr<ecore::EDataType> getEChar_EDataType() const = 0;
-			virtual std::shared_ptr<ecore::EDataType> getECharacterObject_EDataType() const = 0;
-			virtual std::shared_ptr<ecore::EDataType> getEDate_EDataType() const = 0;
-			virtual std::shared_ptr<ecore::EDataType> getEDiagnosticChain_EDataType() const = 0;
-			virtual std::shared_ptr<ecore::EDataType> getEDouble_EDataType() const = 0;
-			virtual std::shared_ptr<ecore::EDataType> getEDoubleObject_EDataType() const = 0;
-			virtual std::shared_ptr<ecore::EDataType> getEEList_EDataType() const = 0;
-			virtual std::shared_ptr<ecore::EDataType> getEEnumerator_EDataType() const = 0;
-			virtual std::shared_ptr<ecore::EDataType> getEFeatureMap_EDataType() const = 0;
-			virtual std::shared_ptr<ecore::EDataType> getEFeatureMapEntry_EDataType() const = 0;
-			virtual std::shared_ptr<ecore::EDataType> getEFloat_EDataType() const = 0;
-			virtual std::shared_ptr<ecore::EDataType> getEFloatObject_EDataType() const = 0;
-			virtual std::shared_ptr<ecore::EDataType> getEInt_EDataType() const = 0;
-			virtual std::shared_ptr<ecore::EDataType> getEIntegerObject_EDataType() const = 0;
-			virtual std::shared_ptr<ecore::EDataType> getEInvocationTargetException_EDataType() const = 0;
-			virtual std::shared_ptr<ecore::EDataType> getEJavaClass_EDataType() const = 0;
-			virtual std::shared_ptr<ecore::EDataType> getEJavaObject_EDataType() const = 0;
-			virtual std::shared_ptr<ecore::EDataType> getELong_EDataType() const = 0;
-			virtual std::shared_ptr<ecore::EDataType> getELongObject_EDataType() const = 0;
-			virtual std::shared_ptr<ecore::EDataType> getEMap_EDataType() const = 0;
-			virtual std::shared_ptr<ecore::EDataType> getEResource_EDataType() const = 0;
-			virtual std::shared_ptr<ecore::EDataType> getEResourceSet_EDataType() const = 0;
-			virtual std::shared_ptr<ecore::EDataType> getEShort_EDataType() const = 0;
-			virtual std::shared_ptr<ecore::EDataType> getEShortObject_EDataType() const = 0;
-			virtual std::shared_ptr<ecore::EDataType> getEString_EDataType() const = 0;
-			virtual std::shared_ptr<ecore::EDataType> getETreeIterator_EDataType() const = 0;
+			virtual std::shared_ptr<ecore::EDataType> getEBigDecimal_Class() const = 0;
+			virtual std::shared_ptr<ecore::EDataType> getEBigInteger_Class() const = 0;
+			virtual std::shared_ptr<ecore::EDataType> getEBoolean_Class() const = 0;
+			virtual std::shared_ptr<ecore::EDataType> getEBooleanObject_Class() const = 0;
+			virtual std::shared_ptr<ecore::EDataType> getEByte_Class() const = 0;
+			virtual std::shared_ptr<ecore::EDataType> getEByteArray_Class() const = 0;
+			virtual std::shared_ptr<ecore::EDataType> getEByteObject_Class() const = 0;
+			virtual std::shared_ptr<ecore::EDataType> getEChar_Class() const = 0;
+			virtual std::shared_ptr<ecore::EDataType> getECharacterObject_Class() const = 0;
+			virtual std::shared_ptr<ecore::EDataType> getEDate_Class() const = 0;
+			virtual std::shared_ptr<ecore::EDataType> getEDiagnosticChain_Class() const = 0;
+			virtual std::shared_ptr<ecore::EDataType> getEDouble_Class() const = 0;
+			virtual std::shared_ptr<ecore::EDataType> getEDoubleObject_Class() const = 0;
+			virtual std::shared_ptr<ecore::EDataType> getEEList_Class() const = 0;
+			virtual std::shared_ptr<ecore::EDataType> getEEnumerator_Class() const = 0;
+			virtual std::shared_ptr<ecore::EDataType> getEFeatureMap_Class() const = 0;
+			virtual std::shared_ptr<ecore::EDataType> getEFeatureMapEntry_Class() const = 0;
+			virtual std::shared_ptr<ecore::EDataType> getEFloat_Class() const = 0;
+			virtual std::shared_ptr<ecore::EDataType> getEFloatObject_Class() const = 0;
+			virtual std::shared_ptr<ecore::EDataType> getEInt_Class() const = 0;
+			virtual std::shared_ptr<ecore::EDataType> getEIntegerObject_Class() const = 0;
+			virtual std::shared_ptr<ecore::EDataType> getEInvocationTargetException_Class() const = 0;
+			virtual std::shared_ptr<ecore::EDataType> getEJavaClass_Class() const = 0;
+			virtual std::shared_ptr<ecore::EDataType> getEJavaObject_Class() const = 0;
+			virtual std::shared_ptr<ecore::EDataType> getELong_Class() const = 0;
+			virtual std::shared_ptr<ecore::EDataType> getELongObject_Class() const = 0;
+			virtual std::shared_ptr<ecore::EDataType> getEMap_Class() const = 0;
+			virtual std::shared_ptr<ecore::EDataType> getEResource_Class() const = 0;
+			virtual std::shared_ptr<ecore::EDataType> getEResourceSet_Class() const = 0;
+			virtual std::shared_ptr<ecore::EDataType> getEShort_Class() const = 0;
+			virtual std::shared_ptr<ecore::EDataType> getEShortObject_Class() const = 0;
+			virtual std::shared_ptr<ecore::EDataType> getEString_Class() const = 0;
+			virtual std::shared_ptr<ecore::EDataType> getETreeIterator_Class() const = 0;
 			
 
 			//Singleton Instance and Getter

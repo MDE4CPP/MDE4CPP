@@ -32,11 +32,14 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -140,14 +143,6 @@ TemplateParameterImpl::TemplateParameterImpl(const TemplateParameterImpl & obj):
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
 	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
@@ -185,7 +180,7 @@ std::shared_ptr<ecore::EObject>  TemplateParameterImpl::copy() const
 
 std::shared_ptr<ecore::EClass> TemplateParameterImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getTemplateParameter_EClass();
+	return UmlPackageImpl::eInstance()->getTemplateParameter_Class();
 }
 
 //*********************************
@@ -297,16 +292,16 @@ Any TemplateParameterImpl::eGet(int featureID, bool resolve, bool coreType) cons
 {
 	switch(featureID)
 	{
-		case UmlPackage::TEMPLATEPARAMETER_EREFERENCE_DEFAULT:
-			return eAny(getDefault()); //164
-		case UmlPackage::TEMPLATEPARAMETER_EREFERENCE_OWNEDDEFAULT:
-			return eAny(getOwnedDefault()); //165
-		case UmlPackage::TEMPLATEPARAMETER_EREFERENCE_OWNEDPARAMETEREDELEMENT:
-			return eAny(getOwnedParameteredElement()); //168
-		case UmlPackage::TEMPLATEPARAMETER_EREFERENCE_PARAMETEREDELEMENT:
-			return eAny(getParameteredElement()); //166
-		case UmlPackage::TEMPLATEPARAMETER_EREFERENCE_SIGNATURE:
-			return eAny(getSignature()); //167
+		case UmlPackage::TEMPLATEPARAMETER_ATTRIBUTE_DEFAULT:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getDefault())); //2323
+		case UmlPackage::TEMPLATEPARAMETER_ATTRIBUTE_OWNEDDEFAULT:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getOwnedDefault())); //2324
+		case UmlPackage::TEMPLATEPARAMETER_ATTRIBUTE_OWNEDPARAMETEREDELEMENT:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getOwnedParameteredElement())); //2327
+		case UmlPackage::TEMPLATEPARAMETER_ATTRIBUTE_PARAMETEREDELEMENT:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getParameteredElement())); //2325
+		case UmlPackage::TEMPLATEPARAMETER_ATTRIBUTE_SIGNATURE:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSignature().lock())); //2326
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -314,16 +309,16 @@ bool TemplateParameterImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::TEMPLATEPARAMETER_EREFERENCE_DEFAULT:
-			return getDefault() != nullptr; //164
-		case UmlPackage::TEMPLATEPARAMETER_EREFERENCE_OWNEDDEFAULT:
-			return getOwnedDefault() != nullptr; //165
-		case UmlPackage::TEMPLATEPARAMETER_EREFERENCE_OWNEDPARAMETEREDELEMENT:
-			return getOwnedParameteredElement() != nullptr; //168
-		case UmlPackage::TEMPLATEPARAMETER_EREFERENCE_PARAMETEREDELEMENT:
-			return getParameteredElement() != nullptr; //166
-		case UmlPackage::TEMPLATEPARAMETER_EREFERENCE_SIGNATURE:
-			return getSignature().lock() != nullptr; //167
+		case UmlPackage::TEMPLATEPARAMETER_ATTRIBUTE_DEFAULT:
+			return getDefault() != nullptr; //2323
+		case UmlPackage::TEMPLATEPARAMETER_ATTRIBUTE_OWNEDDEFAULT:
+			return getOwnedDefault() != nullptr; //2324
+		case UmlPackage::TEMPLATEPARAMETER_ATTRIBUTE_OWNEDPARAMETEREDELEMENT:
+			return getOwnedParameteredElement() != nullptr; //2327
+		case UmlPackage::TEMPLATEPARAMETER_ATTRIBUTE_PARAMETEREDELEMENT:
+			return getParameteredElement() != nullptr; //2325
+		case UmlPackage::TEMPLATEPARAMETER_ATTRIBUTE_SIGNATURE:
+			return getSignature().lock() != nullptr; //2326
 	}
 	return ElementImpl::internalEIsSet(featureID);
 }
@@ -331,39 +326,44 @@ bool TemplateParameterImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::TEMPLATEPARAMETER_EREFERENCE_DEFAULT:
+		case UmlPackage::TEMPLATEPARAMETER_ATTRIBUTE_DEFAULT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::ParameterableElement> _default = newValue->get<std::shared_ptr<uml::ParameterableElement>>();
-			setDefault(_default); //164
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::ParameterableElement> _default = std::dynamic_pointer_cast<uml::ParameterableElement>(_temp);
+			setDefault(_default); //2323
 			return true;
 		}
-		case UmlPackage::TEMPLATEPARAMETER_EREFERENCE_OWNEDDEFAULT:
+		case UmlPackage::TEMPLATEPARAMETER_ATTRIBUTE_OWNEDDEFAULT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::ParameterableElement> _ownedDefault = newValue->get<std::shared_ptr<uml::ParameterableElement>>();
-			setOwnedDefault(_ownedDefault); //165
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::ParameterableElement> _ownedDefault = std::dynamic_pointer_cast<uml::ParameterableElement>(_temp);
+			setOwnedDefault(_ownedDefault); //2324
 			return true;
 		}
-		case UmlPackage::TEMPLATEPARAMETER_EREFERENCE_OWNEDPARAMETEREDELEMENT:
+		case UmlPackage::TEMPLATEPARAMETER_ATTRIBUTE_OWNEDPARAMETEREDELEMENT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::ParameterableElement> _ownedParameteredElement = newValue->get<std::shared_ptr<uml::ParameterableElement>>();
-			setOwnedParameteredElement(_ownedParameteredElement); //168
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::ParameterableElement> _ownedParameteredElement = std::dynamic_pointer_cast<uml::ParameterableElement>(_temp);
+			setOwnedParameteredElement(_ownedParameteredElement); //2327
 			return true;
 		}
-		case UmlPackage::TEMPLATEPARAMETER_EREFERENCE_PARAMETEREDELEMENT:
+		case UmlPackage::TEMPLATEPARAMETER_ATTRIBUTE_PARAMETEREDELEMENT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::ParameterableElement> _parameteredElement = newValue->get<std::shared_ptr<uml::ParameterableElement>>();
-			setParameteredElement(_parameteredElement); //166
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::ParameterableElement> _parameteredElement = std::dynamic_pointer_cast<uml::ParameterableElement>(_temp);
+			setParameteredElement(_parameteredElement); //2325
 			return true;
 		}
-		case UmlPackage::TEMPLATEPARAMETER_EREFERENCE_SIGNATURE:
+		case UmlPackage::TEMPLATEPARAMETER_ATTRIBUTE_SIGNATURE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::TemplateSignature> _signature = newValue->get<std::shared_ptr<uml::TemplateSignature>>();
-			setSignature(_signature); //167
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::TemplateSignature> _signature = std::dynamic_pointer_cast<uml::TemplateSignature>(_temp);
+			setSignature(_signature); //2326
 			return true;
 		}
 	}
@@ -436,7 +436,7 @@ void TemplateParameterImpl::loadNode(std::string nodeName, std::shared_ptr<persi
 				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			std::shared_ptr<ecore::EObject> ownedDefault = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER);
+			std::shared_ptr<ecore::EObject> ownedDefault = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::PARAMETERABLEELEMENT_ATTRIBUTE_OWNINGTEMPLATEPARAMETER);
 			if (ownedDefault != nullptr)
 			{
 				loadHandler->handleChild(ownedDefault);
@@ -452,7 +452,7 @@ void TemplateParameterImpl::loadNode(std::string nodeName, std::shared_ptr<persi
 				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			std::shared_ptr<ecore::EObject> ownedParameteredElement = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER);
+			std::shared_ptr<ecore::EObject> ownedParameteredElement = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::PARAMETERABLEELEMENT_ATTRIBUTE_OWNINGTEMPLATEPARAMETER);
 			if (ownedParameteredElement != nullptr)
 			{
 				loadHandler->handleChild(ownedParameteredElement);
@@ -476,7 +476,7 @@ void TemplateParameterImpl::resolveReferences(const int featureID, std::list<std
 {
 	switch(featureID)
 	{
-		case UmlPackage::TEMPLATEPARAMETER_EREFERENCE_DEFAULT:
+		case UmlPackage::TEMPLATEPARAMETER_ATTRIBUTE_DEFAULT:
 		{
 			if (references.size() == 1)
 			{
@@ -488,7 +488,7 @@ void TemplateParameterImpl::resolveReferences(const int featureID, std::list<std
 			return;
 		}
 
-		case UmlPackage::TEMPLATEPARAMETER_EREFERENCE_PARAMETEREDELEMENT:
+		case UmlPackage::TEMPLATEPARAMETER_ATTRIBUTE_PARAMETEREDELEMENT:
 		{
 			if (references.size() == 1)
 			{
@@ -500,7 +500,7 @@ void TemplateParameterImpl::resolveReferences(const int featureID, std::list<std
 			return;
 		}
 
-		case UmlPackage::TEMPLATEPARAMETER_EREFERENCE_SIGNATURE:
+		case UmlPackage::TEMPLATEPARAMETER_ATTRIBUTE_SIGNATURE:
 		{
 			if (references.size() == 1)
 			{
@@ -521,7 +521,6 @@ void TemplateParameterImpl::save(std::shared_ptr<persistence::interfaces::XSaveH
 
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
@@ -539,14 +538,14 @@ void TemplateParameterImpl::saveContent(std::shared_ptr<persistence::interfaces:
 		std::shared_ptr<uml::ParameterableElement > ownedDefault = this->getOwnedDefault();
 		if (ownedDefault != nullptr)
 		{
-			saveHandler->addReference(ownedDefault, "ownedDefault", ownedDefault->eClass() != package->getParameterableElement_EClass());
+			saveHandler->addReference(ownedDefault, "ownedDefault", ownedDefault->eClass() != package->getParameterableElement_Class());
 		}
 
 		// Save 'ownedParameteredElement'
 		std::shared_ptr<uml::ParameterableElement > ownedParameteredElement = this->getOwnedParameteredElement();
 		if (ownedParameteredElement != nullptr)
 		{
-			saveHandler->addReference(ownedParameteredElement, "ownedParameteredElement", ownedParameteredElement->eClass() != package->getParameterableElement_EClass());
+			saveHandler->addReference(ownedParameteredElement, "ownedParameteredElement", ownedParameteredElement->eClass() != package->getParameterableElement_Class());
 		}
 	
 

@@ -31,11 +31,12 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -111,14 +112,6 @@ RelationshipImpl::RelationshipImpl(const RelationshipImpl & obj):RelationshipImp
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
 	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
@@ -139,7 +132,7 @@ std::shared_ptr<ecore::EObject>  RelationshipImpl::copy() const
 
 std::shared_ptr<ecore::EClass> RelationshipImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getRelationship_EClass();
+	return UmlPackageImpl::eInstance()->getRelationship_Class();
 }
 
 //*********************************
@@ -194,8 +187,18 @@ Any RelationshipImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::RELATIONSHIP_EREFERENCE_RELATEDELEMENT:
-			return eAny(getRelatedElement()); //214
+		case UmlPackage::RELATIONSHIP_ATTRIBUTE_RELATEDELEMENT:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Element>::iterator iter = m_relatedElement->begin();
+			Bag<uml::Element>::iterator end = m_relatedElement->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //2093
+		}
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -203,8 +206,8 @@ bool RelationshipImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::RELATIONSHIP_EREFERENCE_RELATEDELEMENT:
-			return getRelatedElement() != nullptr; //214
+		case UmlPackage::RELATIONSHIP_ATTRIBUTE_RELATEDELEMENT:
+			return getRelatedElement() != nullptr; //2093
 	}
 	return ElementImpl::internalEIsSet(featureID);
 }
@@ -261,7 +264,6 @@ void RelationshipImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandle
 
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

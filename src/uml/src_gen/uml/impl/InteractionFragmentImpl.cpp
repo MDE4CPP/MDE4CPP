@@ -32,13 +32,20 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
 
 #include "uml/Dependency.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -196,14 +203,6 @@ InteractionFragmentImpl::InteractionFragmentImpl(const InteractionFragmentImpl &
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::GeneralOrdering>> _generalOrderingList = obj.getGeneralOrdering();
 	for(std::shared_ptr<uml::GeneralOrdering> _generalOrdering : *_generalOrderingList)
 	{
@@ -246,7 +245,7 @@ std::shared_ptr<ecore::EObject>  InteractionFragmentImpl::copy() const
 
 std::shared_ptr<ecore::EClass> InteractionFragmentImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getInteractionFragment_EClass();
+	return UmlPackageImpl::eInstance()->getInteractionFragment_Class();
 }
 
 //*********************************
@@ -351,14 +350,34 @@ Any InteractionFragmentImpl::eGet(int featureID, bool resolve, bool coreType) co
 {
 	switch(featureID)
 	{
-		case UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_COVERED:
-			return eAny(getCovered()); //21210
-		case UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_ENCLOSINGINTERACTION:
-			return eAny(getEnclosingInteraction()); //21212
-		case UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_ENCLOSINGOPERAND:
-			return eAny(getEnclosingOperand()); //21211
-		case UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_GENERALORDERING:
-			return eAny(getGeneralOrdering()); //21213
+		case UmlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_COVERED:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Lifeline>::iterator iter = m_covered->begin();
+			Bag<uml::Lifeline>::iterator end = m_covered->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //1229
+		}
+		case UmlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_ENCLOSINGINTERACTION:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEnclosingInteraction().lock())); //12211
+		case UmlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_ENCLOSINGOPERAND:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEnclosingOperand().lock())); //12210
+		case UmlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_GENERALORDERING:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::GeneralOrdering>::iterator iter = m_generalOrdering->begin();
+			Bag<uml::GeneralOrdering>::iterator end = m_generalOrdering->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //12212
+		}
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -366,14 +385,14 @@ bool InteractionFragmentImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_COVERED:
-			return getCovered() != nullptr; //21210
-		case UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_ENCLOSINGINTERACTION:
-			return getEnclosingInteraction().lock() != nullptr; //21212
-		case UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_ENCLOSINGOPERAND:
-			return getEnclosingOperand().lock() != nullptr; //21211
-		case UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_GENERALORDERING:
-			return getGeneralOrdering() != nullptr; //21213
+		case UmlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_COVERED:
+			return getCovered() != nullptr; //1229
+		case UmlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_ENCLOSINGINTERACTION:
+			return getEnclosingInteraction().lock() != nullptr; //12211
+		case UmlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_ENCLOSINGOPERAND:
+			return getEnclosingOperand().lock() != nullptr; //12210
+		case UmlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_GENERALORDERING:
+			return getGeneralOrdering() != nullptr; //12212
 	}
 	return NamedElementImpl::internalEIsSet(featureID);
 }
@@ -381,18 +400,92 @@ bool InteractionFragmentImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_ENCLOSINGINTERACTION:
+		case UmlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_COVERED:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Interaction> _enclosingInteraction = newValue->get<std::shared_ptr<uml::Interaction>>();
-			setEnclosingInteraction(_enclosingInteraction); //21212
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Lifeline>> coveredList(new Bag<uml::Lifeline>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				coveredList->add(std::dynamic_pointer_cast<uml::Lifeline>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Lifeline>::iterator iterCovered = m_covered->begin();
+			Bag<uml::Lifeline>::iterator endCovered = m_covered->end();
+			while (iterCovered != endCovered)
+			{
+				if (coveredList->find(*iterCovered) == -1)
+				{
+					m_covered->erase(*iterCovered);
+				}
+				iterCovered++;
+			}
+
+			iterCovered = coveredList->begin();
+			endCovered = coveredList->end();
+			while (iterCovered != endCovered)
+			{
+				if (m_covered->find(*iterCovered) == -1)
+				{
+					m_covered->add(*iterCovered);
+				}
+				iterCovered++;			
+			}
 			return true;
 		}
-		case UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_ENCLOSINGOPERAND:
+		case UmlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_ENCLOSINGINTERACTION:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::InteractionOperand> _enclosingOperand = newValue->get<std::shared_ptr<uml::InteractionOperand>>();
-			setEnclosingOperand(_enclosingOperand); //21211
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Interaction> _enclosingInteraction = std::dynamic_pointer_cast<uml::Interaction>(_temp);
+			setEnclosingInteraction(_enclosingInteraction); //12211
+			return true;
+		}
+		case UmlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_ENCLOSINGOPERAND:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::InteractionOperand> _enclosingOperand = std::dynamic_pointer_cast<uml::InteractionOperand>(_temp);
+			setEnclosingOperand(_enclosingOperand); //12210
+			return true;
+		}
+		case UmlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_GENERALORDERING:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::GeneralOrdering>> generalOrderingList(new Bag<uml::GeneralOrdering>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				generalOrderingList->add(std::dynamic_pointer_cast<uml::GeneralOrdering>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::GeneralOrdering>::iterator iterGeneralOrdering = m_generalOrdering->begin();
+			Bag<uml::GeneralOrdering>::iterator endGeneralOrdering = m_generalOrdering->end();
+			while (iterGeneralOrdering != endGeneralOrdering)
+			{
+				if (generalOrderingList->find(*iterGeneralOrdering) == -1)
+				{
+					m_generalOrdering->erase(*iterGeneralOrdering);
+				}
+				iterGeneralOrdering++;
+			}
+
+			iterGeneralOrdering = generalOrderingList->begin();
+			endGeneralOrdering = generalOrderingList->end();
+			while (iterGeneralOrdering != endGeneralOrdering)
+			{
+				if (m_generalOrdering->find(*iterGeneralOrdering) == -1)
+				{
+					m_generalOrdering->add(*iterGeneralOrdering);
+				}
+				iterGeneralOrdering++;			
+			}
 			return true;
 		}
 	}
@@ -483,7 +576,7 @@ void InteractionFragmentImpl::resolveReferences(const int featureID, std::list<s
 {
 	switch(featureID)
 	{
-		case UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_COVERED:
+		case UmlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_COVERED:
 		{
 			std::shared_ptr<Bag<uml::Lifeline>> _covered = getCovered();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -497,7 +590,7 @@ void InteractionFragmentImpl::resolveReferences(const int featureID, std::list<s
 			return;
 		}
 
-		case UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_ENCLOSINGINTERACTION:
+		case UmlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_ENCLOSINGINTERACTION:
 		{
 			if (references.size() == 1)
 			{
@@ -509,7 +602,7 @@ void InteractionFragmentImpl::resolveReferences(const int featureID, std::list<s
 			return;
 		}
 
-		case UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_ENCLOSINGOPERAND:
+		case UmlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_ENCLOSINGOPERAND:
 		{
 			if (references.size() == 1)
 			{
@@ -532,7 +625,6 @@ void InteractionFragmentImpl::save(std::shared_ptr<persistence::interfaces::XSav
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
@@ -550,7 +642,7 @@ void InteractionFragmentImpl::saveContent(std::shared_ptr<persistence::interface
 		// Save 'generalOrdering'
 		for (std::shared_ptr<uml::GeneralOrdering> generalOrdering : *this->getGeneralOrdering()) 
 		{
-			saveHandler->addReference(generalOrdering, "generalOrdering", generalOrdering->eClass() != package->getGeneralOrdering_EClass());
+			saveHandler->addReference(generalOrdering, "generalOrdering", generalOrdering->eClass() != package->getGeneralOrdering_Class());
 		}
 	
 

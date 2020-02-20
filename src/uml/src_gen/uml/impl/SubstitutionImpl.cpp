@@ -32,6 +32,17 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Classifier.hpp"
@@ -39,8 +50,6 @@
 #include "uml/Comment.hpp"
 
 #include "uml/Dependency.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -206,14 +215,6 @@ SubstitutionImpl::SubstitutionImpl(const SubstitutionImpl & obj):SubstitutionImp
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_contract" << std::endl;
 	#endif
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	if(obj.getMapping()!=nullptr)
 	{
 		m_mapping = std::dynamic_pointer_cast<uml::OpaqueExpression>(obj.getMapping()->copy());
@@ -256,7 +257,7 @@ std::shared_ptr<ecore::EObject>  SubstitutionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> SubstitutionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getSubstitution_EClass();
+	return UmlPackageImpl::eInstance()->getSubstitution_Class();
 }
 
 //*********************************
@@ -364,10 +365,10 @@ Any SubstitutionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::SUBSTITUTION_EREFERENCE_CONTRACT:
-			return eAny(getContract()); //10219
-		case UmlPackage::SUBSTITUTION_EREFERENCE_SUBSTITUTINGCLASSIFIER:
-			return eAny(getSubstitutingClassifier()); //10220
+		case UmlPackage::SUBSTITUTION_ATTRIBUTE_CONTRACT:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getContract())); //23018
+		case UmlPackage::SUBSTITUTION_ATTRIBUTE_SUBSTITUTINGCLASSIFIER:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSubstitutingClassifier().lock())); //23019
 	}
 	return RealizationImpl::eGet(featureID, resolve, coreType);
 }
@@ -375,10 +376,10 @@ bool SubstitutionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::SUBSTITUTION_EREFERENCE_CONTRACT:
-			return getContract() != nullptr; //10219
-		case UmlPackage::SUBSTITUTION_EREFERENCE_SUBSTITUTINGCLASSIFIER:
-			return getSubstitutingClassifier().lock() != nullptr; //10220
+		case UmlPackage::SUBSTITUTION_ATTRIBUTE_CONTRACT:
+			return getContract() != nullptr; //23018
+		case UmlPackage::SUBSTITUTION_ATTRIBUTE_SUBSTITUTINGCLASSIFIER:
+			return getSubstitutingClassifier().lock() != nullptr; //23019
 	}
 	return RealizationImpl::internalEIsSet(featureID);
 }
@@ -386,18 +387,20 @@ bool SubstitutionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::SUBSTITUTION_EREFERENCE_CONTRACT:
+		case UmlPackage::SUBSTITUTION_ATTRIBUTE_CONTRACT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Classifier> _contract = newValue->get<std::shared_ptr<uml::Classifier>>();
-			setContract(_contract); //10219
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Classifier> _contract = std::dynamic_pointer_cast<uml::Classifier>(_temp);
+			setContract(_contract); //23018
 			return true;
 		}
-		case UmlPackage::SUBSTITUTION_EREFERENCE_SUBSTITUTINGCLASSIFIER:
+		case UmlPackage::SUBSTITUTION_ATTRIBUTE_SUBSTITUTINGCLASSIFIER:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Classifier> _substitutingClassifier = newValue->get<std::shared_ptr<uml::Classifier>>();
-			setSubstitutingClassifier(_substitutingClassifier); //10220
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Classifier> _substitutingClassifier = std::dynamic_pointer_cast<uml::Classifier>(_temp);
+			setSubstitutingClassifier(_substitutingClassifier); //23019
 			return true;
 		}
 	}
@@ -461,7 +464,7 @@ void SubstitutionImpl::resolveReferences(const int featureID, std::list<std::sha
 {
 	switch(featureID)
 	{
-		case UmlPackage::SUBSTITUTION_EREFERENCE_CONTRACT:
+		case UmlPackage::SUBSTITUTION_ATTRIBUTE_CONTRACT:
 		{
 			if (references.size() == 1)
 			{
@@ -473,7 +476,7 @@ void SubstitutionImpl::resolveReferences(const int featureID, std::list<std::sha
 			return;
 		}
 
-		case UmlPackage::SUBSTITUTION_EREFERENCE_SUBSTITUTINGCLASSIFIER:
+		case UmlPackage::SUBSTITUTION_ATTRIBUTE_SUBSTITUTINGCLASSIFIER:
 		{
 			if (references.size() == 1)
 			{
@@ -507,7 +510,6 @@ void SubstitutionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandle
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

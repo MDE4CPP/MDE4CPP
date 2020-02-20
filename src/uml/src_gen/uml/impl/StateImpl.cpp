@@ -33,6 +33,13 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Behavior.hpp"
@@ -46,8 +53,6 @@
 #include "uml/Constraint.hpp"
 
 #include "uml/Dependency.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -315,14 +320,6 @@ StateImpl::StateImpl(const StateImpl & obj):StateImpl()
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_doActivity" << std::endl;
 	#endif
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::ElementImport>> _elementImportList = obj.getElementImport();
 	for(std::shared_ptr<uml::ElementImport> _elementImport : *_elementImportList)
 	{
@@ -455,7 +452,7 @@ std::shared_ptr<ecore::EObject>  StateImpl::copy() const
 
 std::shared_ptr<ecore::EClass> StateImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getState_EClass();
+	return UmlPackageImpl::eInstance()->getState_Class();
 }
 
 //*********************************
@@ -709,34 +706,74 @@ Any StateImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::STATE_EREFERENCE_CONNECTION:
-			return eAny(getConnection()); //6322
-		case UmlPackage::STATE_EREFERENCE_CONNECTIONPOINT:
-			return eAny(getConnectionPoint()); //6323
-		case UmlPackage::STATE_EREFERENCE_DEFERRABLETRIGGER:
-			return eAny(getDeferrableTrigger()); //6324
-		case UmlPackage::STATE_EREFERENCE_DOACTIVITY:
-			return eAny(getDoActivity()); //6325
-		case UmlPackage::STATE_EREFERENCE_ENTRY:
-			return eAny(getEntry()); //6326
-		case UmlPackage::STATE_EREFERENCE_EXIT:
-			return eAny(getExit()); //6327
-		case UmlPackage::STATE_EATTRIBUTE_ISCOMPOSITE:
-			return eAny(getIsComposite()); //6328
-		case UmlPackage::STATE_EATTRIBUTE_ISORTHOGONAL:
-			return eAny(getIsOrthogonal()); //6329
-		case UmlPackage::STATE_EATTRIBUTE_ISSIMPLE:
-			return eAny(getIsSimple()); //6330
-		case UmlPackage::STATE_EATTRIBUTE_ISSUBMACHINESTATE:
-			return eAny(getIsSubmachineState()); //6331
-		case UmlPackage::STATE_EREFERENCE_REDEFINEDSTATE:
-			return eAny(getRedefinedState()); //6332
-		case UmlPackage::STATE_EREFERENCE_REGION:
-			return eAny(getRegion()); //6335
-		case UmlPackage::STATE_EREFERENCE_STATEINVARIANT:
-			return eAny(getStateInvariant()); //6333
-		case UmlPackage::STATE_EREFERENCE_SUBMACHINE:
-			return eAny(getSubmachine()); //6334
+		case UmlPackage::STATE_ATTRIBUTE_CONNECTION:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::ConnectionPointReference>::iterator iter = m_connection->begin();
+			Bag<uml::ConnectionPointReference>::iterator end = m_connection->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //22121
+		}
+		case UmlPackage::STATE_ATTRIBUTE_CONNECTIONPOINT:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Pseudostate>::iterator iter = m_connectionPoint->begin();
+			Bag<uml::Pseudostate>::iterator end = m_connectionPoint->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //22122
+		}
+		case UmlPackage::STATE_ATTRIBUTE_DEFERRABLETRIGGER:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Trigger>::iterator iter = m_deferrableTrigger->begin();
+			Bag<uml::Trigger>::iterator end = m_deferrableTrigger->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //22123
+		}
+		case UmlPackage::STATE_ATTRIBUTE_DOACTIVITY:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getDoActivity())); //22124
+		case UmlPackage::STATE_ATTRIBUTE_ENTRY:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEntry())); //22125
+		case UmlPackage::STATE_ATTRIBUTE_EXIT:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getExit())); //22126
+		case UmlPackage::STATE_ATTRIBUTE_ISCOMPOSITE:
+			return eAny(getIsComposite()); //22127
+		case UmlPackage::STATE_ATTRIBUTE_ISORTHOGONAL:
+			return eAny(getIsOrthogonal()); //22128
+		case UmlPackage::STATE_ATTRIBUTE_ISSIMPLE:
+			return eAny(getIsSimple()); //22129
+		case UmlPackage::STATE_ATTRIBUTE_ISSUBMACHINESTATE:
+			return eAny(getIsSubmachineState()); //22130
+		case UmlPackage::STATE_ATTRIBUTE_REDEFINEDSTATE:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getRedefinedState())); //22131
+		case UmlPackage::STATE_ATTRIBUTE_REGION:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Region>::iterator iter = m_region->begin();
+			Bag<uml::Region>::iterator end = m_region->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //22134
+		}
+		case UmlPackage::STATE_ATTRIBUTE_STATEINVARIANT:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getStateInvariant())); //22132
+		case UmlPackage::STATE_ATTRIBUTE_SUBMACHINE:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSubmachine())); //22133
 	}
 	Any result;
 	result = NamespaceImpl::eGet(featureID, resolve, coreType);
@@ -756,34 +793,34 @@ bool StateImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::STATE_EREFERENCE_CONNECTION:
-			return getConnection() != nullptr; //6322
-		case UmlPackage::STATE_EREFERENCE_CONNECTIONPOINT:
-			return getConnectionPoint() != nullptr; //6323
-		case UmlPackage::STATE_EREFERENCE_DEFERRABLETRIGGER:
-			return getDeferrableTrigger() != nullptr; //6324
-		case UmlPackage::STATE_EREFERENCE_DOACTIVITY:
-			return getDoActivity() != nullptr; //6325
-		case UmlPackage::STATE_EREFERENCE_ENTRY:
-			return getEntry() != nullptr; //6326
-		case UmlPackage::STATE_EREFERENCE_EXIT:
-			return getExit() != nullptr; //6327
-		case UmlPackage::STATE_EATTRIBUTE_ISCOMPOSITE:
-			return getIsComposite() != false; //6328
-		case UmlPackage::STATE_EATTRIBUTE_ISORTHOGONAL:
-			return getIsOrthogonal() != false; //6329
-		case UmlPackage::STATE_EATTRIBUTE_ISSIMPLE:
-			return getIsSimple() != true; //6330
-		case UmlPackage::STATE_EATTRIBUTE_ISSUBMACHINESTATE:
-			return getIsSubmachineState() != false; //6331
-		case UmlPackage::STATE_EREFERENCE_REDEFINEDSTATE:
-			return getRedefinedState() != nullptr; //6332
-		case UmlPackage::STATE_EREFERENCE_REGION:
-			return getRegion() != nullptr; //6335
-		case UmlPackage::STATE_EREFERENCE_STATEINVARIANT:
-			return getStateInvariant() != nullptr; //6333
-		case UmlPackage::STATE_EREFERENCE_SUBMACHINE:
-			return getSubmachine() != nullptr; //6334
+		case UmlPackage::STATE_ATTRIBUTE_CONNECTION:
+			return getConnection() != nullptr; //22121
+		case UmlPackage::STATE_ATTRIBUTE_CONNECTIONPOINT:
+			return getConnectionPoint() != nullptr; //22122
+		case UmlPackage::STATE_ATTRIBUTE_DEFERRABLETRIGGER:
+			return getDeferrableTrigger() != nullptr; //22123
+		case UmlPackage::STATE_ATTRIBUTE_DOACTIVITY:
+			return getDoActivity() != nullptr; //22124
+		case UmlPackage::STATE_ATTRIBUTE_ENTRY:
+			return getEntry() != nullptr; //22125
+		case UmlPackage::STATE_ATTRIBUTE_EXIT:
+			return getExit() != nullptr; //22126
+		case UmlPackage::STATE_ATTRIBUTE_ISCOMPOSITE:
+			return getIsComposite() != false; //22127
+		case UmlPackage::STATE_ATTRIBUTE_ISORTHOGONAL:
+			return getIsOrthogonal() != false; //22128
+		case UmlPackage::STATE_ATTRIBUTE_ISSIMPLE:
+			return getIsSimple() != true; //22129
+		case UmlPackage::STATE_ATTRIBUTE_ISSUBMACHINESTATE:
+			return getIsSubmachineState() != false; //22130
+		case UmlPackage::STATE_ATTRIBUTE_REDEFINEDSTATE:
+			return getRedefinedState() != nullptr; //22131
+		case UmlPackage::STATE_ATTRIBUTE_REGION:
+			return getRegion() != nullptr; //22134
+		case UmlPackage::STATE_ATTRIBUTE_STATEINVARIANT:
+			return getStateInvariant() != nullptr; //22132
+		case UmlPackage::STATE_ATTRIBUTE_SUBMACHINE:
+			return getSubmachine() != nullptr; //22133
 	}
 	bool result = false;
 	result = NamespaceImpl::internalEIsSet(featureID);
@@ -803,46 +840,196 @@ bool StateImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::STATE_EREFERENCE_DOACTIVITY:
+		case UmlPackage::STATE_ATTRIBUTE_CONNECTION:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Behavior> _doActivity = newValue->get<std::shared_ptr<uml::Behavior>>();
-			setDoActivity(_doActivity); //6325
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::ConnectionPointReference>> connectionList(new Bag<uml::ConnectionPointReference>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				connectionList->add(std::dynamic_pointer_cast<uml::ConnectionPointReference>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::ConnectionPointReference>::iterator iterConnection = m_connection->begin();
+			Bag<uml::ConnectionPointReference>::iterator endConnection = m_connection->end();
+			while (iterConnection != endConnection)
+			{
+				if (connectionList->find(*iterConnection) == -1)
+				{
+					m_connection->erase(*iterConnection);
+				}
+				iterConnection++;
+			}
+
+			iterConnection = connectionList->begin();
+			endConnection = connectionList->end();
+			while (iterConnection != endConnection)
+			{
+				if (m_connection->find(*iterConnection) == -1)
+				{
+					m_connection->add(*iterConnection);
+				}
+				iterConnection++;			
+			}
 			return true;
 		}
-		case UmlPackage::STATE_EREFERENCE_ENTRY:
+		case UmlPackage::STATE_ATTRIBUTE_CONNECTIONPOINT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Behavior> _entry = newValue->get<std::shared_ptr<uml::Behavior>>();
-			setEntry(_entry); //6326
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Pseudostate>> connectionPointList(new Bag<uml::Pseudostate>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				connectionPointList->add(std::dynamic_pointer_cast<uml::Pseudostate>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Pseudostate>::iterator iterConnectionPoint = m_connectionPoint->begin();
+			Bag<uml::Pseudostate>::iterator endConnectionPoint = m_connectionPoint->end();
+			while (iterConnectionPoint != endConnectionPoint)
+			{
+				if (connectionPointList->find(*iterConnectionPoint) == -1)
+				{
+					m_connectionPoint->erase(*iterConnectionPoint);
+				}
+				iterConnectionPoint++;
+			}
+
+			iterConnectionPoint = connectionPointList->begin();
+			endConnectionPoint = connectionPointList->end();
+			while (iterConnectionPoint != endConnectionPoint)
+			{
+				if (m_connectionPoint->find(*iterConnectionPoint) == -1)
+				{
+					m_connectionPoint->add(*iterConnectionPoint);
+				}
+				iterConnectionPoint++;			
+			}
 			return true;
 		}
-		case UmlPackage::STATE_EREFERENCE_EXIT:
+		case UmlPackage::STATE_ATTRIBUTE_DEFERRABLETRIGGER:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Behavior> _exit = newValue->get<std::shared_ptr<uml::Behavior>>();
-			setExit(_exit); //6327
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Trigger>> deferrableTriggerList(new Bag<uml::Trigger>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				deferrableTriggerList->add(std::dynamic_pointer_cast<uml::Trigger>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Trigger>::iterator iterDeferrableTrigger = m_deferrableTrigger->begin();
+			Bag<uml::Trigger>::iterator endDeferrableTrigger = m_deferrableTrigger->end();
+			while (iterDeferrableTrigger != endDeferrableTrigger)
+			{
+				if (deferrableTriggerList->find(*iterDeferrableTrigger) == -1)
+				{
+					m_deferrableTrigger->erase(*iterDeferrableTrigger);
+				}
+				iterDeferrableTrigger++;
+			}
+
+			iterDeferrableTrigger = deferrableTriggerList->begin();
+			endDeferrableTrigger = deferrableTriggerList->end();
+			while (iterDeferrableTrigger != endDeferrableTrigger)
+			{
+				if (m_deferrableTrigger->find(*iterDeferrableTrigger) == -1)
+				{
+					m_deferrableTrigger->add(*iterDeferrableTrigger);
+				}
+				iterDeferrableTrigger++;			
+			}
 			return true;
 		}
-		case UmlPackage::STATE_EREFERENCE_REDEFINEDSTATE:
+		case UmlPackage::STATE_ATTRIBUTE_DOACTIVITY:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::State> _redefinedState = newValue->get<std::shared_ptr<uml::State>>();
-			setRedefinedState(_redefinedState); //6332
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Behavior> _doActivity = std::dynamic_pointer_cast<uml::Behavior>(_temp);
+			setDoActivity(_doActivity); //22124
 			return true;
 		}
-		case UmlPackage::STATE_EREFERENCE_STATEINVARIANT:
+		case UmlPackage::STATE_ATTRIBUTE_ENTRY:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Constraint> _stateInvariant = newValue->get<std::shared_ptr<uml::Constraint>>();
-			setStateInvariant(_stateInvariant); //6333
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Behavior> _entry = std::dynamic_pointer_cast<uml::Behavior>(_temp);
+			setEntry(_entry); //22125
 			return true;
 		}
-		case UmlPackage::STATE_EREFERENCE_SUBMACHINE:
+		case UmlPackage::STATE_ATTRIBUTE_EXIT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::StateMachine> _submachine = newValue->get<std::shared_ptr<uml::StateMachine>>();
-			setSubmachine(_submachine); //6334
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Behavior> _exit = std::dynamic_pointer_cast<uml::Behavior>(_temp);
+			setExit(_exit); //22126
+			return true;
+		}
+		case UmlPackage::STATE_ATTRIBUTE_REDEFINEDSTATE:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::State> _redefinedState = std::dynamic_pointer_cast<uml::State>(_temp);
+			setRedefinedState(_redefinedState); //22131
+			return true;
+		}
+		case UmlPackage::STATE_ATTRIBUTE_REGION:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Region>> regionList(new Bag<uml::Region>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				regionList->add(std::dynamic_pointer_cast<uml::Region>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Region>::iterator iterRegion = m_region->begin();
+			Bag<uml::Region>::iterator endRegion = m_region->end();
+			while (iterRegion != endRegion)
+			{
+				if (regionList->find(*iterRegion) == -1)
+				{
+					m_region->erase(*iterRegion);
+				}
+				iterRegion++;
+			}
+
+			iterRegion = regionList->begin();
+			endRegion = regionList->end();
+			while (iterRegion != endRegion)
+			{
+				if (m_region->find(*iterRegion) == -1)
+				{
+					m_region->add(*iterRegion);
+				}
+				iterRegion++;			
+			}
+			return true;
+		}
+		case UmlPackage::STATE_ATTRIBUTE_STATEINVARIANT:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Constraint> _stateInvariant = std::dynamic_pointer_cast<uml::Constraint>(_temp);
+			setStateInvariant(_stateInvariant); //22132
+			return true;
+		}
+		case UmlPackage::STATE_ATTRIBUTE_SUBMACHINE:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::StateMachine> _submachine = std::dynamic_pointer_cast<uml::StateMachine>(_temp);
+			setSubmachine(_submachine); //22133
 			return true;
 		}
 	}
@@ -935,7 +1122,7 @@ void StateImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inte
 			{
 				typeName = "ConnectionPointReference";
 			}
-			std::shared_ptr<ecore::EObject> connection = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::CONNECTIONPOINTREFERENCE_EREFERENCE_STATE);
+			std::shared_ptr<ecore::EObject> connection = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::CONNECTIONPOINTREFERENCE_ATTRIBUTE_STATE);
 			if (connection != nullptr)
 			{
 				loadHandler->handleChild(connection);
@@ -950,7 +1137,7 @@ void StateImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inte
 			{
 				typeName = "Pseudostate";
 			}
-			std::shared_ptr<ecore::EObject> connectionPoint = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::PSEUDOSTATE_EREFERENCE_STATE);
+			std::shared_ptr<ecore::EObject> connectionPoint = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::PSEUDOSTATE_ATTRIBUTE_STATE);
 			if (connectionPoint != nullptr)
 			{
 				loadHandler->handleChild(connectionPoint);
@@ -1033,7 +1220,7 @@ void StateImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inte
 			{
 				typeName = "Region";
 			}
-			std::shared_ptr<ecore::EObject> region = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::REGION_EREFERENCE_STATE);
+			std::shared_ptr<ecore::EObject> region = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::REGION_ATTRIBUTE_STATE);
 			if (region != nullptr)
 			{
 				loadHandler->handleChild(region);
@@ -1059,7 +1246,7 @@ void StateImpl::resolveReferences(const int featureID, std::list<std::shared_ptr
 {
 	switch(featureID)
 	{
-		case UmlPackage::STATE_EREFERENCE_REDEFINEDSTATE:
+		case UmlPackage::STATE_ATTRIBUTE_REDEFINEDSTATE:
 		{
 			if (references.size() == 1)
 			{
@@ -1071,7 +1258,7 @@ void StateImpl::resolveReferences(const int featureID, std::list<std::shared_ptr
 			return;
 		}
 
-		case UmlPackage::STATE_EREFERENCE_STATEINVARIANT:
+		case UmlPackage::STATE_ATTRIBUTE_STATEINVARIANT:
 		{
 			if (references.size() == 1)
 			{
@@ -1083,7 +1270,7 @@ void StateImpl::resolveReferences(const int featureID, std::list<std::shared_ptr
 			return;
 		}
 
-		case UmlPackage::STATE_EREFERENCE_SUBMACHINE:
+		case UmlPackage::STATE_ATTRIBUTE_SUBMACHINE:
 		{
 			if (references.size() == 1)
 			{
@@ -1112,7 +1299,6 @@ void StateImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> save
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
@@ -1131,46 +1317,46 @@ void StateImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandle
 		// Save 'connection'
 		for (std::shared_ptr<uml::ConnectionPointReference> connection : *this->getConnection()) 
 		{
-			saveHandler->addReference(connection, "connection", connection->eClass() != package->getConnectionPointReference_EClass());
+			saveHandler->addReference(connection, "connection", connection->eClass() != package->getConnectionPointReference_Class());
 		}
 
 		// Save 'connectionPoint'
 		for (std::shared_ptr<uml::Pseudostate> connectionPoint : *this->getConnectionPoint()) 
 		{
-			saveHandler->addReference(connectionPoint, "connectionPoint", connectionPoint->eClass() != package->getPseudostate_EClass());
+			saveHandler->addReference(connectionPoint, "connectionPoint", connectionPoint->eClass() != package->getPseudostate_Class());
 		}
 
 		// Save 'deferrableTrigger'
 		for (std::shared_ptr<uml::Trigger> deferrableTrigger : *this->getDeferrableTrigger()) 
 		{
-			saveHandler->addReference(deferrableTrigger, "deferrableTrigger", deferrableTrigger->eClass() != package->getTrigger_EClass());
+			saveHandler->addReference(deferrableTrigger, "deferrableTrigger", deferrableTrigger->eClass() != package->getTrigger_Class());
 		}
 
 		// Save 'doActivity'
 		std::shared_ptr<uml::Behavior > doActivity = this->getDoActivity();
 		if (doActivity != nullptr)
 		{
-			saveHandler->addReference(doActivity, "doActivity", doActivity->eClass() != package->getBehavior_EClass());
+			saveHandler->addReference(doActivity, "doActivity", doActivity->eClass() != package->getBehavior_Class());
 		}
 
 		// Save 'entry'
 		std::shared_ptr<uml::Behavior > entry = this->getEntry();
 		if (entry != nullptr)
 		{
-			saveHandler->addReference(entry, "entry", entry->eClass() != package->getBehavior_EClass());
+			saveHandler->addReference(entry, "entry", entry->eClass() != package->getBehavior_Class());
 		}
 
 		// Save 'exit'
 		std::shared_ptr<uml::Behavior > exit = this->getExit();
 		if (exit != nullptr)
 		{
-			saveHandler->addReference(exit, "exit", exit->eClass() != package->getBehavior_EClass());
+			saveHandler->addReference(exit, "exit", exit->eClass() != package->getBehavior_Class());
 		}
 
 		// Save 'region'
 		for (std::shared_ptr<uml::Region> region : *this->getRegion()) 
 		{
-			saveHandler->addReference(region, "region", region->eClass() != package->getRegion_EClass());
+			saveHandler->addReference(region, "region", region->eClass() != package->getRegion_Class());
 		}
 	
 

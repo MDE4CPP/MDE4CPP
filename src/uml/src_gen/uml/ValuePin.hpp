@@ -42,6 +42,11 @@ namespace uml
 //Forward Declaration for used types
 namespace uml 
 {
+	class Action;
+}
+
+namespace uml 
+{
 	class Activity;
 }
 
@@ -63,6 +68,11 @@ namespace uml
 namespace uml 
 {
 	class ActivityPartition;
+}
+
+namespace uml 
+{
+	class AddStructuralFeatureValueAction;
 }
 
 namespace uml 
@@ -90,9 +100,9 @@ namespace uml
 	class Dependency;
 }
 
-namespace ecore 
+namespace uml 
 {
-	class EAnnotation;
+	class DestroyObjectAction;
 }
 
 namespace uml 
@@ -153,6 +163,11 @@ namespace uml
 namespace uml 
 {
 	class ValueSpecification;
+}
+
+namespace uml 
+{
+	class WriteStructuralFeatureAction;
 }
 
 // base class includes

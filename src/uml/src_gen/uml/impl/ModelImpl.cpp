@@ -32,6 +32,17 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
@@ -39,8 +50,6 @@
 #include "uml/Constraint.hpp"
 
 #include "uml/Dependency.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -119,24 +128,24 @@ ModelImpl::~ModelImpl()
 
 
 //Additional constructor for the containments back reference
-			ModelImpl::ModelImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id)
-			:ModelImpl()
-			{
-				switch(reference_id)
-				{	
-				case UmlPackage::PACKAGE_EREFERENCE_NESTINGPACKAGE:
-					m_nestingPackage = par_Package;
-					m_namespace = par_Package;
-					 return;
-				case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
-					m_owningPackage = par_Package;
-					m_namespace = par_Package;
-					 return;
-				default:
-				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
-				}
-			   
-			}
+ModelImpl::ModelImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id)
+:ModelImpl()
+{
+	switch(reference_id)
+	{	
+	case UmlPackage::PACKAGE_ATTRIBUTE_NESTINGPACKAGE:
+		m_nestingPackage = par_Package;
+		m_namespace = par_Package;
+		 return;
+	case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
+		m_owningPackage = par_Package;
+		m_namespace = par_Package;
+		 return;
+	default:
+	std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
+	}
+   
+}
 
 
 
@@ -207,14 +216,6 @@ ModelImpl::ModelImpl(const ModelImpl & obj):ModelImpl()
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::ElementImport>> _elementImportList = obj.getElementImport();
 	for(std::shared_ptr<uml::ElementImport> _elementImport : *_elementImportList)
 	{
@@ -337,7 +338,7 @@ std::shared_ptr<ecore::EObject>  ModelImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ModelImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getModel_EClass();
+	return UmlPackageImpl::eInstance()->getModel_Class();
 }
 
 //*********************************
@@ -436,8 +437,8 @@ Any ModelImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::MODEL_EATTRIBUTE_VIEWPOINT:
-			return eAny(getViewpoint()); //8629
+		case UmlPackage::MODEL_ATTRIBUTE_VIEWPOINT:
+			return eAny(getViewpoint()); //15428
 	}
 	return PackageImpl::eGet(featureID, resolve, coreType);
 }
@@ -445,8 +446,8 @@ bool ModelImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::MODEL_EATTRIBUTE_VIEWPOINT:
-			return getViewpoint() != ""; //8629
+		case UmlPackage::MODEL_ATTRIBUTE_VIEWPOINT:
+			return getViewpoint() != ""; //15428
 	}
 	return PackageImpl::internalEIsSet(featureID);
 }
@@ -454,11 +455,11 @@ bool ModelImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::MODEL_EATTRIBUTE_VIEWPOINT:
+		case UmlPackage::MODEL_ATTRIBUTE_VIEWPOINT:
 		{
 			// BOOST CAST
 			std::string _viewpoint = newValue->get<std::string>();
-			setViewpoint(_viewpoint); //8629
+			setViewpoint(_viewpoint); //15428
 			return true;
 		}
 	}
@@ -540,7 +541,6 @@ void ModelImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> save
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
@@ -560,7 +560,7 @@ void ModelImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandle
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getModel_EAttribute_viewpoint()) )
+		if ( this->eIsSet(package->getModel_Attribute_viewpoint()) )
 		{
 			saveHandler->addAttribute("viewpoint", this->getViewpoint());
 		}

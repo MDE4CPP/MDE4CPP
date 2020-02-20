@@ -19,11 +19,12 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.uml2.types;bundle-version="2.0.0",
  org.eclipse.uml2.uml;bundle-version="5.0.2",
  org.eclipse.uml2.uml.resources;bundle-version="5.0.0"
-Bundle-RequiredExecutionEnvironment: JavaSE-10
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Eclipse-LazyStart: true
 Export-Package: UML4CPP.generator,
- UML4CPP.generator.main
+ UML4CPP.generator.main,
+ UML4CPP.generator.main.validation
 Import-Package: org.eclipse.pde.internal.core.bundle,
  org.eclipse.swt.widgets,
  org.eclipse.uml2.uml

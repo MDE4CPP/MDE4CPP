@@ -33,6 +33,17 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Behavior.hpp"
@@ -54,8 +65,6 @@
 #include "uml/Constraint.hpp"
 
 #include "uml/Dependency.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -225,24 +234,24 @@ ClassImpl::~ClassImpl()
 
 
 //Additional constructor for the containments back reference
-			ClassImpl::ClassImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id)
-			:ClassImpl()
-			{
-				switch(reference_id)
-				{	
-				case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
-					m_owningPackage = par_Package;
-					m_namespace = par_Package;
-					 return;
-				case UmlPackage::TYPE_EREFERENCE_PACKAGE:
-					m_package = par_Package;
-					m_namespace = par_Package;
-					 return;
-				default:
-				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
-				}
-			   
-			}
+ClassImpl::ClassImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id)
+:ClassImpl()
+{
+	switch(reference_id)
+	{	
+	case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
+		m_owningPackage = par_Package;
+		m_namespace = par_Package;
+		 return;
+	case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
+		m_package = par_Package;
+		m_namespace = par_Package;
+		 return;
+	default:
+	std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
+	}
+   
+}
 
 
 
@@ -342,14 +351,6 @@ ClassImpl::ClassImpl(const ClassImpl & obj):ClassImpl()
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_collaborationUse" << std::endl;
-	#endif
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
 	#endif
 	std::shared_ptr<Bag<uml::ElementImport>> _elementImportList = obj.getElementImport();
 	for(std::shared_ptr<uml::ElementImport> _elementImport : *_elementImportList)
@@ -559,7 +560,7 @@ std::shared_ptr<ecore::EObject>  ClassImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ClassImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getClass_EClass();
+	return UmlPackageImpl::eInstance()->getClass_Class();
 }
 
 //*********************************
@@ -746,18 +747,68 @@ Any ClassImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::CLASS_EREFERENCE_EXTENSION:
-			return eAny(getExtension()); //348
-		case UmlPackage::CLASS_EATTRIBUTE_ISACTIVE:
-			return eAny(getIsActive()); //349
-		case UmlPackage::CLASS_EREFERENCE_NESTEDCLASSIFIER:
-			return eAny(getNestedClassifier()); //350
-		case UmlPackage::CLASS_EREFERENCE_OWNEDOPERATION:
-			return eAny(getOwnedOperation()); //347
-		case UmlPackage::CLASS_EREFERENCE_OWNEDRECEPTION:
-			return eAny(getOwnedReception()); //351
-		case UmlPackage::CLASS_EREFERENCE_SUPERCLASS:
-			return eAny(getSuperClass()); //352
+		case UmlPackage::CLASS_ATTRIBUTE_EXTENSION:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Extension>::iterator iter = m_extension->begin();
+			Bag<uml::Extension>::iterator end = m_extension->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //3647
+		}
+		case UmlPackage::CLASS_ATTRIBUTE_ISACTIVE:
+			return eAny(getIsActive()); //3648
+		case UmlPackage::CLASS_ATTRIBUTE_NESTEDCLASSIFIER:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Classifier>::iterator iter = m_nestedClassifier->begin();
+			Bag<uml::Classifier>::iterator end = m_nestedClassifier->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //3649
+		}
+		case UmlPackage::CLASS_ATTRIBUTE_OWNEDOPERATION:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Operation>::iterator iter = m_ownedOperation->begin();
+			Bag<uml::Operation>::iterator end = m_ownedOperation->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //3646
+		}
+		case UmlPackage::CLASS_ATTRIBUTE_OWNEDRECEPTION:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Reception>::iterator iter = m_ownedReception->begin();
+			Bag<uml::Reception>::iterator end = m_ownedReception->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //3650
+		}
+		case UmlPackage::CLASS_ATTRIBUTE_SUPERCLASS:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Class>::iterator iter = m_superClass->begin();
+			Bag<uml::Class>::iterator end = m_superClass->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //3651
+		}
 	}
 	Any result;
 	result = BehavioredClassifierImpl::eGet(featureID, resolve, coreType);
@@ -772,18 +823,18 @@ bool ClassImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::CLASS_EREFERENCE_EXTENSION:
-			return getExtension() != nullptr; //348
-		case UmlPackage::CLASS_EATTRIBUTE_ISACTIVE:
-			return getIsActive() != false; //349
-		case UmlPackage::CLASS_EREFERENCE_NESTEDCLASSIFIER:
-			return getNestedClassifier() != nullptr; //350
-		case UmlPackage::CLASS_EREFERENCE_OWNEDOPERATION:
-			return getOwnedOperation() != nullptr; //347
-		case UmlPackage::CLASS_EREFERENCE_OWNEDRECEPTION:
-			return getOwnedReception() != nullptr; //351
-		case UmlPackage::CLASS_EREFERENCE_SUPERCLASS:
-			return getSuperClass() != nullptr; //352
+		case UmlPackage::CLASS_ATTRIBUTE_EXTENSION:
+			return getExtension() != nullptr; //3647
+		case UmlPackage::CLASS_ATTRIBUTE_ISACTIVE:
+			return getIsActive() != false; //3648
+		case UmlPackage::CLASS_ATTRIBUTE_NESTEDCLASSIFIER:
+			return getNestedClassifier() != nullptr; //3649
+		case UmlPackage::CLASS_ATTRIBUTE_OWNEDOPERATION:
+			return getOwnedOperation() != nullptr; //3646
+		case UmlPackage::CLASS_ATTRIBUTE_OWNEDRECEPTION:
+			return getOwnedReception() != nullptr; //3650
+		case UmlPackage::CLASS_ATTRIBUTE_SUPERCLASS:
+			return getSuperClass() != nullptr; //3651
 	}
 	bool result = false;
 	result = BehavioredClassifierImpl::internalEIsSet(featureID);
@@ -798,11 +849,155 @@ bool ClassImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::CLASS_EATTRIBUTE_ISACTIVE:
+		case UmlPackage::CLASS_ATTRIBUTE_ISACTIVE:
 		{
 			// BOOST CAST
 			bool _isActive = newValue->get<bool>();
-			setIsActive(_isActive); //349
+			setIsActive(_isActive); //3648
+			return true;
+		}
+		case UmlPackage::CLASS_ATTRIBUTE_NESTEDCLASSIFIER:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Classifier>> nestedClassifierList(new Bag<uml::Classifier>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				nestedClassifierList->add(std::dynamic_pointer_cast<uml::Classifier>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Classifier>::iterator iterNestedClassifier = m_nestedClassifier->begin();
+			Bag<uml::Classifier>::iterator endNestedClassifier = m_nestedClassifier->end();
+			while (iterNestedClassifier != endNestedClassifier)
+			{
+				if (nestedClassifierList->find(*iterNestedClassifier) == -1)
+				{
+					m_nestedClassifier->erase(*iterNestedClassifier);
+				}
+				iterNestedClassifier++;
+			}
+
+			iterNestedClassifier = nestedClassifierList->begin();
+			endNestedClassifier = nestedClassifierList->end();
+			while (iterNestedClassifier != endNestedClassifier)
+			{
+				if (m_nestedClassifier->find(*iterNestedClassifier) == -1)
+				{
+					m_nestedClassifier->add(*iterNestedClassifier);
+				}
+				iterNestedClassifier++;			
+			}
+			return true;
+		}
+		case UmlPackage::CLASS_ATTRIBUTE_OWNEDOPERATION:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Operation>> ownedOperationList(new Bag<uml::Operation>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				ownedOperationList->add(std::dynamic_pointer_cast<uml::Operation>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Operation>::iterator iterOwnedOperation = m_ownedOperation->begin();
+			Bag<uml::Operation>::iterator endOwnedOperation = m_ownedOperation->end();
+			while (iterOwnedOperation != endOwnedOperation)
+			{
+				if (ownedOperationList->find(*iterOwnedOperation) == -1)
+				{
+					m_ownedOperation->erase(*iterOwnedOperation);
+				}
+				iterOwnedOperation++;
+			}
+
+			iterOwnedOperation = ownedOperationList->begin();
+			endOwnedOperation = ownedOperationList->end();
+			while (iterOwnedOperation != endOwnedOperation)
+			{
+				if (m_ownedOperation->find(*iterOwnedOperation) == -1)
+				{
+					m_ownedOperation->add(*iterOwnedOperation);
+				}
+				iterOwnedOperation++;			
+			}
+			return true;
+		}
+		case UmlPackage::CLASS_ATTRIBUTE_OWNEDRECEPTION:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Reception>> ownedReceptionList(new Bag<uml::Reception>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				ownedReceptionList->add(std::dynamic_pointer_cast<uml::Reception>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Reception>::iterator iterOwnedReception = m_ownedReception->begin();
+			Bag<uml::Reception>::iterator endOwnedReception = m_ownedReception->end();
+			while (iterOwnedReception != endOwnedReception)
+			{
+				if (ownedReceptionList->find(*iterOwnedReception) == -1)
+				{
+					m_ownedReception->erase(*iterOwnedReception);
+				}
+				iterOwnedReception++;
+			}
+
+			iterOwnedReception = ownedReceptionList->begin();
+			endOwnedReception = ownedReceptionList->end();
+			while (iterOwnedReception != endOwnedReception)
+			{
+				if (m_ownedReception->find(*iterOwnedReception) == -1)
+				{
+					m_ownedReception->add(*iterOwnedReception);
+				}
+				iterOwnedReception++;			
+			}
+			return true;
+		}
+		case UmlPackage::CLASS_ATTRIBUTE_SUPERCLASS:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Class>> superClassList(new Bag<uml::Class>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				superClassList->add(std::dynamic_pointer_cast<uml::Class>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Class>::iterator iterSuperClass = m_superClass->begin();
+			Bag<uml::Class>::iterator endSuperClass = m_superClass->end();
+			while (iterSuperClass != endSuperClass)
+			{
+				if (superClassList->find(*iterSuperClass) == -1)
+				{
+					m_superClass->erase(*iterSuperClass);
+				}
+				iterSuperClass++;
+			}
+
+			iterSuperClass = superClassList->begin();
+			endSuperClass = superClassList->end();
+			while (iterSuperClass != endSuperClass)
+			{
+				if (m_superClass->find(*iterSuperClass) == -1)
+				{
+					m_superClass->add(*iterSuperClass);
+				}
+				iterSuperClass++;			
+			}
 			return true;
 		}
 	}
@@ -902,7 +1097,7 @@ void ClassImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inte
 			{
 				typeName = "Operation";
 			}
-			std::shared_ptr<ecore::EObject> ownedOperation = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::OPERATION_EREFERENCE_CLASS);
+			std::shared_ptr<ecore::EObject> ownedOperation = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::OPERATION_ATTRIBUTE_CLASS);
 			if (ownedOperation != nullptr)
 			{
 				loadHandler->handleChild(ownedOperation);
@@ -944,7 +1139,7 @@ void ClassImpl::resolveReferences(const int featureID, std::list<std::shared_ptr
 {
 	switch(featureID)
 	{
-		case UmlPackage::CLASS_EREFERENCE_SUPERCLASS:
+		case UmlPackage::CLASS_ATTRIBUTE_SUPERCLASS:
 		{
 			std::shared_ptr<Bag<uml::Class>> _superClass = getSuperClass();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -985,7 +1180,6 @@ void ClassImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> save
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
@@ -1008,24 +1202,24 @@ void ClassImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandle
 		// Save 'nestedClassifier'
 		for (std::shared_ptr<uml::Classifier> nestedClassifier : *this->getNestedClassifier()) 
 		{
-			saveHandler->addReference(nestedClassifier, "nestedClassifier", nestedClassifier->eClass() != package->getClassifier_EClass());
+			saveHandler->addReference(nestedClassifier, "nestedClassifier", nestedClassifier->eClass() != package->getClassifier_Class());
 		}
 
 		// Save 'ownedOperation'
 		for (std::shared_ptr<uml::Operation> ownedOperation : *this->getOwnedOperation()) 
 		{
-			saveHandler->addReference(ownedOperation, "ownedOperation", ownedOperation->eClass() != package->getOperation_EClass());
+			saveHandler->addReference(ownedOperation, "ownedOperation", ownedOperation->eClass() != package->getOperation_Class());
 		}
 
 		// Save 'ownedReception'
 		for (std::shared_ptr<uml::Reception> ownedReception : *this->getOwnedReception()) 
 		{
-			saveHandler->addReference(ownedReception, "ownedReception", ownedReception->eClass() != package->getReception_EClass());
+			saveHandler->addReference(ownedReception, "ownedReception", ownedReception->eClass() != package->getReception_Class());
 		}
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getClass_EAttribute_isActive()) )
+		if ( this->eIsSet(package->getClass_Attribute_isActive()) )
 		{
 			saveHandler->addAttribute("isActive", this->getIsActive());
 		}

@@ -37,20 +37,20 @@ namespace types
 			virtual ~TypesPackageImpl();
 
 
-			virtual std::shared_ptr<ecore::EDataType> getBoolean_EDataType() const ;
-			virtual std::shared_ptr<ecore::EDataType> getInteger_EDataType() const ;
-			virtual std::shared_ptr<ecore::EDataType> getReal_EDataType() const ;
-			virtual std::shared_ptr<ecore::EDataType> getString_EDataType() const ;
-			virtual std::shared_ptr<ecore::EDataType> getUnlimitedNatural_EDataType() const ;
+			virtual std::shared_ptr<ecore::EDataType> getBoolean_Class() const ;
+			virtual std::shared_ptr<ecore::EDataType> getInteger_Class() const ;
+			virtual std::shared_ptr<ecore::EDataType> getReal_Class() const ;
+			virtual std::shared_ptr<ecore::EDataType> getString_Class() const ;
+			virtual std::shared_ptr<ecore::EDataType> getUnlimitedNatural_Class() const ;
 			
 
 		private:
 			
-			std::shared_ptr<ecore::EDataType> m_boolean_EDataType = nullptr;
-			std::shared_ptr<ecore::EDataType> m_integer_EDataType = nullptr;
-			std::shared_ptr<ecore::EDataType> m_real_EDataType = nullptr;
-			std::shared_ptr<ecore::EDataType> m_string_EDataType = nullptr;
-			std::shared_ptr<ecore::EDataType> m_unlimitedNatural_EDataType = nullptr;
+			std::shared_ptr<ecore::EDataType> m_boolean_Class = nullptr;
+			std::shared_ptr<ecore::EDataType> m_integer_Class = nullptr;
+			std::shared_ptr<ecore::EDataType> m_real_Class = nullptr;
+			std::shared_ptr<ecore::EDataType> m_string_Class = nullptr;
+			std::shared_ptr<ecore::EDataType> m_unlimitedNatural_Class = nullptr;
 			
 			
 			

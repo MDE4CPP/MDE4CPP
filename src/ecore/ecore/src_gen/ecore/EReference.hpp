@@ -64,6 +64,11 @@ namespace ecore
 
 namespace ecore 
 {
+	class EObject;
+}
+
+namespace ecore 
+{
 	class EReference;
 }
 
@@ -145,6 +150,9 @@ namespace ecore
 			 */
 			virtual std::shared_ptr<ecore::EClass > getEReferenceType() const = 0;
 			
+			/*!
+			 */
+			virtual void setEReferenceType(std::shared_ptr<ecore::EClass> _eReferenceType_eReferenceType) = 0;
 			
 
 		protected:
@@ -180,7 +188,9 @@ namespace ecore
 			//*********************************
 			// Union Getter
 			//*********************************
-			
+			/*!
+			 */
+			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
 			

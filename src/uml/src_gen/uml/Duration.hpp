@@ -51,11 +51,6 @@ namespace uml
 	class Dependency;
 }
 
-namespace ecore 
-{
-	class EAnnotation;
-}
-
 namespace uml 
 {
 	class Element;
@@ -99,6 +94,11 @@ namespace uml
 namespace uml 
 {
 	class ValueSpecification;
+}
+
+namespace uml 
+{
+	class ValueSpecificationAction;
 }
 
 // base class includes

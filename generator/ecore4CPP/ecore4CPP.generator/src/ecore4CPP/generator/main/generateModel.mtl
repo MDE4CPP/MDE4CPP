@@ -26,7 +26,7 @@
 [query public includes(aClass : EClass) : Set(EClassifier) =OrderedSet{aClass.eSuperTypes,aClass.eAllStructuralFeatures.eType,aClass.eOperations.eType,aClass.eOperations.eParameters.eType}->flatten() /]
 
 [template public generateModel(aClass : EClass)]
-[file (aClass.ePackage.name.concat('/').concat(aClass.name.toUpperFirst()).concat('.hpp'), false, 'UTF-8')]
+[file (aClass.generateNamespacePath().concat('/').concat(aClass.name.toUpperFirst()).concat('.hpp'), false, 'UTF-8')]
 [startGuard(aClass)/]
 
 [if (aClass.eOperations.eParameters.eType->select(name = 'EMap')->size() > 0 or aClass.eAttributes.eType->select(name = 'EMap')->size() > 0)]
@@ -55,7 +55,7 @@ typedef std::shared_ptr<AnyObject> Any;
 
 //Forward Declaration for used types
 [for (element : EClassifier| aClass.includes()->selectByKind(EClass)->asOrderedSet()->sortedBy(name)) separator ('\n')]
-namespace [element.ePackage.name/] 
+namespace [element.generateNamespaceDefinition()/] 
 {
 	class [element.name/];
 }
@@ -63,12 +63,12 @@ namespace [element.ePackage.name/]
 
 // base class includes
 [for (elements : EClassifier| aClass.eSuperTypes->asOrderedSet()->sortedBy(name)) separator ('\n')]
-#include "[elements.ePackage.name/]/[elements.name.toUpperFirst().concat('.hpp')/]"
+#include "[elements.generateNamespacePath()/]/[elements.name.toUpperFirst().concat('.hpp')/]"
 [/for]
 
 // enum includes
 [for (elements : EEnum| aClass.includes()->selectByKind(EEnum)->asOrderedSet()->sortedBy(name)) separator ('\n')]
-#include "[elements.ePackage.name/]/[elements.name.toUpperFirst().concat('.hpp')/]"
+#include "[elements.generateNamespacePath()/]/[elements.name.toUpperFirst().concat('.hpp')/]"
 [/for]
 
 [if (aClass.eSuperTypes->isEmpty() and not (aClass.name ='EObject'))]
@@ -76,7 +76,7 @@ namespace [element.ePackage.name/]
 [/if]
 
 //*********************************
-namespace [aClass.ePackage.name/] 
+namespace [aClass.generateNamespaceDefinition()/] 
 {
 	[aClass.generateDokumentation()/]
 	class [aClass.name.toUpperFirst()/] [if (aClass.eSuperTypes->isEmpty() and not (aClass.name ='EObject'))] : virtual public ecore::EObject 

@@ -32,13 +32,24 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
 
 #include "uml/Dependency.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -57,6 +68,8 @@
 #include "uml/Type.hpp"
 
 #include "uml/TypedElement.hpp"
+
+#include "uml/ValueSpecificationAction.hpp"
 
 #include "ecore/EcorePackage.hpp"
 #include "ecore/EcoreFactory.hpp"
@@ -82,7 +95,11 @@ ValueSpecificationImpl::ValueSpecificationImpl()
 	//References
 	
 
+	
+
 	//Init references
+	
+
 	
 }
 
@@ -153,6 +170,18 @@ ValueSpecificationImpl::~ValueSpecificationImpl()
 
 
 
+//Additional constructor for the containments back reference
+			ValueSpecificationImpl::ValueSpecificationImpl(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction)
+			:ValueSpecificationImpl()
+			{
+			    m_valueSpecificationAction = par_valueSpecificationAction;
+				m_owner = par_valueSpecificationAction;
+			}
+
+
+
+
+
 
 ValueSpecificationImpl::ValueSpecificationImpl(const ValueSpecificationImpl & obj):ValueSpecificationImpl()
 {
@@ -183,17 +212,11 @@ ValueSpecificationImpl::ValueSpecificationImpl(const ValueSpecificationImpl & ob
 
 	m_type  = obj.getType();
 
+	m_valueSpecificationAction  = obj.getValueSpecificationAction();
+
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	if(obj.getNameExpression()!=nullptr)
 	{
 		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
@@ -221,7 +244,7 @@ std::shared_ptr<ecore::EObject>  ValueSpecificationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ValueSpecificationImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getValueSpecification_EClass();
+	return UmlPackageImpl::eInstance()->getValueSpecification_Class();
 }
 
 //*********************************
@@ -286,6 +309,16 @@ void ValueSpecificationImpl::setOwningSlot(std::shared_ptr<uml::Slot> _owningSlo
     m_owningSlot = _owningSlot;
 }
 
+std::weak_ptr<uml::ValueSpecificationAction > ValueSpecificationImpl::getValueSpecificationAction() const
+{
+
+    return m_valueSpecificationAction;
+}
+void ValueSpecificationImpl::setValueSpecificationAction(std::shared_ptr<uml::ValueSpecificationAction> _valueSpecificationAction)
+{
+    m_valueSpecificationAction = _valueSpecificationAction;
+}
+
 //*********************************
 // Union Getter
 //*********************************
@@ -339,6 +372,11 @@ std::shared_ptr<ecore::EObject> ValueSpecificationImpl::eContainer() const
 	{
 		return wp;
 	}
+
+	if(auto wp = m_valueSpecificationAction.lock())
+	{
+		return wp;
+	}
 	return nullptr;
 }
 
@@ -349,8 +387,10 @@ Any ValueSpecificationImpl::eGet(int featureID, bool resolve, bool coreType) con
 {
 	switch(featureID)
 	{
-		case UmlPackage::VALUESPECIFICATION_EREFERENCE_OWNINGSLOT:
-			return eAny(getOwningSlot()); //3314
+		case UmlPackage::VALUESPECIFICATION_ATTRIBUTE_OWNINGSLOT:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getOwningSlot().lock())); //25113
+		case UmlPackage::VALUESPECIFICATION_ATTRIBUTE_VALUESPECIFICATIONACTION:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getValueSpecificationAction().lock())); //25114
 	}
 	Any result;
 	result = PackageableElementImpl::eGet(featureID, resolve, coreType);
@@ -365,8 +405,10 @@ bool ValueSpecificationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::VALUESPECIFICATION_EREFERENCE_OWNINGSLOT:
-			return getOwningSlot().lock() != nullptr; //3314
+		case UmlPackage::VALUESPECIFICATION_ATTRIBUTE_OWNINGSLOT:
+			return getOwningSlot().lock() != nullptr; //25113
+		case UmlPackage::VALUESPECIFICATION_ATTRIBUTE_VALUESPECIFICATIONACTION:
+			return getValueSpecificationAction().lock() != nullptr; //25114
 	}
 	bool result = false;
 	result = PackageableElementImpl::internalEIsSet(featureID);
@@ -381,11 +423,20 @@ bool ValueSpecificationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::VALUESPECIFICATION_EREFERENCE_OWNINGSLOT:
+		case UmlPackage::VALUESPECIFICATION_ATTRIBUTE_OWNINGSLOT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Slot> _owningSlot = newValue->get<std::shared_ptr<uml::Slot>>();
-			setOwningSlot(_owningSlot); //3314
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Slot> _owningSlot = std::dynamic_pointer_cast<uml::Slot>(_temp);
+			setOwningSlot(_owningSlot); //25113
+			return true;
+		}
+		case UmlPackage::VALUESPECIFICATION_ATTRIBUTE_VALUESPECIFICATIONACTION:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::ValueSpecificationAction> _valueSpecificationAction = std::dynamic_pointer_cast<uml::ValueSpecificationAction>(_temp);
+			setValueSpecificationAction(_valueSpecificationAction); //25114
 			return true;
 		}
 	}
@@ -439,13 +490,25 @@ void ValueSpecificationImpl::resolveReferences(const int featureID, std::list<st
 {
 	switch(featureID)
 	{
-		case UmlPackage::VALUESPECIFICATION_EREFERENCE_OWNINGSLOT:
+		case UmlPackage::VALUESPECIFICATION_ATTRIBUTE_OWNINGSLOT:
 		{
 			if (references.size() == 1)
 			{
 				// Cast object to correct type
 				std::shared_ptr<uml::Slot> _owningSlot = std::dynamic_pointer_cast<uml::Slot>( references.front() );
 				setOwningSlot(_owningSlot);
+			}
+			
+			return;
+		}
+
+		case UmlPackage::VALUESPECIFICATION_ATTRIBUTE_VALUESPECIFICATIONACTION:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::ValueSpecificationAction> _valueSpecificationAction = std::dynamic_pointer_cast<uml::ValueSpecificationAction>( references.front() );
+				setValueSpecificationAction(_valueSpecificationAction);
 			}
 			
 			return;
@@ -467,7 +530,6 @@ void ValueSpecificationImpl::save(std::shared_ptr<persistence::interfaces::XSave
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

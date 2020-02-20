@@ -33,13 +33,20 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
 
 #include "uml/Dependency.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -236,14 +243,6 @@ InteractionUseImpl::InteractionUseImpl(const InteractionUseImpl & obj):Interacti
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_argument" << std::endl;
 	#endif
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::GeneralOrdering>> _generalOrderingList = obj.getGeneralOrdering();
 	for(std::shared_ptr<uml::GeneralOrdering> _generalOrdering : *_generalOrderingList)
 	{
@@ -303,7 +302,7 @@ std::shared_ptr<ecore::EObject>  InteractionUseImpl::copy() const
 
 std::shared_ptr<ecore::EClass> InteractionUseImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getInteractionUse_EClass();
+	return UmlPackageImpl::eInstance()->getInteractionUse_Class();
 }
 
 //*********************************
@@ -453,16 +452,36 @@ Any InteractionUseImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::INTERACTIONUSE_EREFERENCE_ACTUALGATE:
-			return eAny(getActualGate()); //21514
-		case UmlPackage::INTERACTIONUSE_EREFERENCE_ARGUMENT:
-			return eAny(getArgument()); //21515
-		case UmlPackage::INTERACTIONUSE_EREFERENCE_REFERSTO:
-			return eAny(getRefersTo()); //21516
-		case UmlPackage::INTERACTIONUSE_EREFERENCE_RETURNVALUE:
-			return eAny(getReturnValue()); //21517
-		case UmlPackage::INTERACTIONUSE_EREFERENCE_RETURNVALUERECIPIENT:
-			return eAny(getReturnValueRecipient()); //21518
+		case UmlPackage::INTERACTIONUSE_ATTRIBUTE_ACTUALGATE:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Gate>::iterator iter = m_actualGate->begin();
+			Bag<uml::Gate>::iterator end = m_actualGate->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //12513
+		}
+		case UmlPackage::INTERACTIONUSE_ATTRIBUTE_ARGUMENT:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::ValueSpecification>::iterator iter = m_argument->begin();
+			Bag<uml::ValueSpecification>::iterator end = m_argument->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //12514
+		}
+		case UmlPackage::INTERACTIONUSE_ATTRIBUTE_REFERSTO:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getRefersTo())); //12515
+		case UmlPackage::INTERACTIONUSE_ATTRIBUTE_RETURNVALUE:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getReturnValue())); //12516
+		case UmlPackage::INTERACTIONUSE_ATTRIBUTE_RETURNVALUERECIPIENT:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getReturnValueRecipient())); //12517
 	}
 	return InteractionFragmentImpl::eGet(featureID, resolve, coreType);
 }
@@ -470,16 +489,16 @@ bool InteractionUseImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::INTERACTIONUSE_EREFERENCE_ACTUALGATE:
-			return getActualGate() != nullptr; //21514
-		case UmlPackage::INTERACTIONUSE_EREFERENCE_ARGUMENT:
-			return getArgument() != nullptr; //21515
-		case UmlPackage::INTERACTIONUSE_EREFERENCE_REFERSTO:
-			return getRefersTo() != nullptr; //21516
-		case UmlPackage::INTERACTIONUSE_EREFERENCE_RETURNVALUE:
-			return getReturnValue() != nullptr; //21517
-		case UmlPackage::INTERACTIONUSE_EREFERENCE_RETURNVALUERECIPIENT:
-			return getReturnValueRecipient() != nullptr; //21518
+		case UmlPackage::INTERACTIONUSE_ATTRIBUTE_ACTUALGATE:
+			return getActualGate() != nullptr; //12513
+		case UmlPackage::INTERACTIONUSE_ATTRIBUTE_ARGUMENT:
+			return getArgument() != nullptr; //12514
+		case UmlPackage::INTERACTIONUSE_ATTRIBUTE_REFERSTO:
+			return getRefersTo() != nullptr; //12515
+		case UmlPackage::INTERACTIONUSE_ATTRIBUTE_RETURNVALUE:
+			return getReturnValue() != nullptr; //12516
+		case UmlPackage::INTERACTIONUSE_ATTRIBUTE_RETURNVALUERECIPIENT:
+			return getReturnValueRecipient() != nullptr; //12517
 	}
 	return InteractionFragmentImpl::internalEIsSet(featureID);
 }
@@ -487,25 +506,100 @@ bool InteractionUseImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::INTERACTIONUSE_EREFERENCE_REFERSTO:
+		case UmlPackage::INTERACTIONUSE_ATTRIBUTE_ACTUALGATE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Interaction> _refersTo = newValue->get<std::shared_ptr<uml::Interaction>>();
-			setRefersTo(_refersTo); //21516
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Gate>> actualGateList(new Bag<uml::Gate>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				actualGateList->add(std::dynamic_pointer_cast<uml::Gate>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Gate>::iterator iterActualGate = m_actualGate->begin();
+			Bag<uml::Gate>::iterator endActualGate = m_actualGate->end();
+			while (iterActualGate != endActualGate)
+			{
+				if (actualGateList->find(*iterActualGate) == -1)
+				{
+					m_actualGate->erase(*iterActualGate);
+				}
+				iterActualGate++;
+			}
+
+			iterActualGate = actualGateList->begin();
+			endActualGate = actualGateList->end();
+			while (iterActualGate != endActualGate)
+			{
+				if (m_actualGate->find(*iterActualGate) == -1)
+				{
+					m_actualGate->add(*iterActualGate);
+				}
+				iterActualGate++;			
+			}
 			return true;
 		}
-		case UmlPackage::INTERACTIONUSE_EREFERENCE_RETURNVALUE:
+		case UmlPackage::INTERACTIONUSE_ATTRIBUTE_ARGUMENT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::ValueSpecification> _returnValue = newValue->get<std::shared_ptr<uml::ValueSpecification>>();
-			setReturnValue(_returnValue); //21517
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::ValueSpecification>> argumentList(new Bag<uml::ValueSpecification>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				argumentList->add(std::dynamic_pointer_cast<uml::ValueSpecification>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::ValueSpecification>::iterator iterArgument = m_argument->begin();
+			Bag<uml::ValueSpecification>::iterator endArgument = m_argument->end();
+			while (iterArgument != endArgument)
+			{
+				if (argumentList->find(*iterArgument) == -1)
+				{
+					m_argument->erase(*iterArgument);
+				}
+				iterArgument++;
+			}
+
+			iterArgument = argumentList->begin();
+			endArgument = argumentList->end();
+			while (iterArgument != endArgument)
+			{
+				if (m_argument->find(*iterArgument) == -1)
+				{
+					m_argument->add(*iterArgument);
+				}
+				iterArgument++;			
+			}
 			return true;
 		}
-		case UmlPackage::INTERACTIONUSE_EREFERENCE_RETURNVALUERECIPIENT:
+		case UmlPackage::INTERACTIONUSE_ATTRIBUTE_REFERSTO:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Property> _returnValueRecipient = newValue->get<std::shared_ptr<uml::Property>>();
-			setReturnValueRecipient(_returnValueRecipient); //21518
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Interaction> _refersTo = std::dynamic_pointer_cast<uml::Interaction>(_temp);
+			setRefersTo(_refersTo); //12515
+			return true;
+		}
+		case UmlPackage::INTERACTIONUSE_ATTRIBUTE_RETURNVALUE:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::ValueSpecification> _returnValue = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
+			setReturnValue(_returnValue); //12516
+			return true;
+		}
+		case UmlPackage::INTERACTIONUSE_ATTRIBUTE_RETURNVALUERECIPIENT:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Property> _returnValueRecipient = std::dynamic_pointer_cast<uml::Property>(_temp);
+			setReturnValueRecipient(_returnValueRecipient); //12517
 			return true;
 		}
 	}
@@ -638,7 +732,7 @@ void InteractionUseImpl::resolveReferences(const int featureID, std::list<std::s
 {
 	switch(featureID)
 	{
-		case UmlPackage::INTERACTIONUSE_EREFERENCE_REFERSTO:
+		case UmlPackage::INTERACTIONUSE_ATTRIBUTE_REFERSTO:
 		{
 			if (references.size() == 1)
 			{
@@ -650,7 +744,7 @@ void InteractionUseImpl::resolveReferences(const int featureID, std::list<std::s
 			return;
 		}
 
-		case UmlPackage::INTERACTIONUSE_EREFERENCE_RETURNVALUERECIPIENT:
+		case UmlPackage::INTERACTIONUSE_ATTRIBUTE_RETURNVALUERECIPIENT:
 		{
 			if (references.size() == 1)
 			{
@@ -675,7 +769,6 @@ void InteractionUseImpl::save(std::shared_ptr<persistence::interfaces::XSaveHand
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
@@ -694,20 +787,20 @@ void InteractionUseImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 		// Save 'actualGate'
 		for (std::shared_ptr<uml::Gate> actualGate : *this->getActualGate()) 
 		{
-			saveHandler->addReference(actualGate, "actualGate", actualGate->eClass() != package->getGate_EClass());
+			saveHandler->addReference(actualGate, "actualGate", actualGate->eClass() != package->getGate_Class());
 		}
 
 		// Save 'argument'
 		for (std::shared_ptr<uml::ValueSpecification> argument : *this->getArgument()) 
 		{
-			saveHandler->addReference(argument, "argument", argument->eClass() != package->getValueSpecification_EClass());
+			saveHandler->addReference(argument, "argument", argument->eClass() != package->getValueSpecification_Class());
 		}
 
 		// Save 'returnValue'
 		std::shared_ptr<uml::ValueSpecification > returnValue = this->getReturnValue();
 		if (returnValue != nullptr)
 		{
-			saveHandler->addReference(returnValue, "returnValue", returnValue->eClass() != package->getValueSpecification_EClass());
+			saveHandler->addReference(returnValue, "returnValue", returnValue->eClass() != package->getValueSpecification_Class());
 		}
 	
 

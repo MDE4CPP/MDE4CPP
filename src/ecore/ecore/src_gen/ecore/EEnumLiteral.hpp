@@ -52,6 +52,11 @@ namespace ecore
 	class ENamedElement;
 }
 
+namespace ecore 
+{
+	class EObject;
+}
+
 // base class includes
 #include "ecore/ENamedElement.hpp"
 
@@ -72,6 +77,10 @@ namespace ecore
 		protected:
 			EEnumLiteral(){}
 
+
+			//Additional constructors for the containments back reference
+
+			EEnumLiteral(std::weak_ptr<ecore::EObject > par_eContainer);
 
 			//Additional constructors for the containments back reference
 
@@ -151,7 +160,9 @@ namespace ecore
 			//*********************************
 			// Union Getter
 			//*********************************
-			
+			/*!
+			 */
+			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
 			

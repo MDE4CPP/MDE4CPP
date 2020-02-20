@@ -33,6 +33,15 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Action.hpp"
@@ -54,8 +63,6 @@
 #include "uml/Constraint.hpp"
 
 #include "uml/Dependency.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -228,14 +235,6 @@ ReplyActionImpl::ReplyActionImpl(const ReplyActionImpl & obj):ReplyActionImpl()
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::ExceptionHandler>> _handlerList = obj.getHandler();
 	for(std::shared_ptr<uml::ExceptionHandler> _handler : *_handlerList)
 	{
@@ -335,7 +334,7 @@ std::shared_ptr<ecore::EObject>  ReplyActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ReplyActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getReplyAction_EClass();
+	return UmlPackageImpl::eInstance()->getReplyAction_Class();
 }
 
 //*********************************
@@ -452,12 +451,22 @@ Any ReplyActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::REPLYACTION_EREFERENCE_REPLYTOCALL:
-			return eAny(getReplyToCall()); //17128
-		case UmlPackage::REPLYACTION_EREFERENCE_REPLYVALUE:
-			return eAny(getReplyValue()); //17129
-		case UmlPackage::REPLYACTION_EREFERENCE_RETURNINFORMATION:
-			return eAny(getReturnInformation()); //17130
+		case UmlPackage::REPLYACTION_ATTRIBUTE_REPLYTOCALL:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getReplyToCall())); //21227
+		case UmlPackage::REPLYACTION_ATTRIBUTE_REPLYVALUE:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::InputPin>::iterator iter = m_replyValue->begin();
+			Bag<uml::InputPin>::iterator end = m_replyValue->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //21228
+		}
+		case UmlPackage::REPLYACTION_ATTRIBUTE_RETURNINFORMATION:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getReturnInformation())); //21229
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -465,12 +474,12 @@ bool ReplyActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::REPLYACTION_EREFERENCE_REPLYTOCALL:
-			return getReplyToCall() != nullptr; //17128
-		case UmlPackage::REPLYACTION_EREFERENCE_REPLYVALUE:
-			return getReplyValue() != nullptr; //17129
-		case UmlPackage::REPLYACTION_EREFERENCE_RETURNINFORMATION:
-			return getReturnInformation() != nullptr; //17130
+		case UmlPackage::REPLYACTION_ATTRIBUTE_REPLYTOCALL:
+			return getReplyToCall() != nullptr; //21227
+		case UmlPackage::REPLYACTION_ATTRIBUTE_REPLYVALUE:
+			return getReplyValue() != nullptr; //21228
+		case UmlPackage::REPLYACTION_ATTRIBUTE_RETURNINFORMATION:
+			return getReturnInformation() != nullptr; //21229
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }
@@ -478,18 +487,56 @@ bool ReplyActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::REPLYACTION_EREFERENCE_REPLYTOCALL:
+		case UmlPackage::REPLYACTION_ATTRIBUTE_REPLYTOCALL:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Trigger> _replyToCall = newValue->get<std::shared_ptr<uml::Trigger>>();
-			setReplyToCall(_replyToCall); //17128
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Trigger> _replyToCall = std::dynamic_pointer_cast<uml::Trigger>(_temp);
+			setReplyToCall(_replyToCall); //21227
 			return true;
 		}
-		case UmlPackage::REPLYACTION_EREFERENCE_RETURNINFORMATION:
+		case UmlPackage::REPLYACTION_ATTRIBUTE_REPLYVALUE:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::InputPin> _returnInformation = newValue->get<std::shared_ptr<uml::InputPin>>();
-			setReturnInformation(_returnInformation); //17130
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::InputPin>> replyValueList(new Bag<uml::InputPin>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				replyValueList->add(std::dynamic_pointer_cast<uml::InputPin>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::InputPin>::iterator iterReplyValue = m_replyValue->begin();
+			Bag<uml::InputPin>::iterator endReplyValue = m_replyValue->end();
+			while (iterReplyValue != endReplyValue)
+			{
+				if (replyValueList->find(*iterReplyValue) == -1)
+				{
+					m_replyValue->erase(*iterReplyValue);
+				}
+				iterReplyValue++;
+			}
+
+			iterReplyValue = replyValueList->begin();
+			endReplyValue = replyValueList->end();
+			while (iterReplyValue != endReplyValue)
+			{
+				if (m_replyValue->find(*iterReplyValue) == -1)
+				{
+					m_replyValue->add(*iterReplyValue);
+				}
+				iterReplyValue++;			
+			}
+			return true;
+		}
+		case UmlPackage::REPLYACTION_ATTRIBUTE_RETURNINFORMATION:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::InputPin> _returnInformation = std::dynamic_pointer_cast<uml::InputPin>(_temp);
+			setReturnInformation(_returnInformation); //21229
 			return true;
 		}
 	}
@@ -596,7 +643,7 @@ void ReplyActionImpl::resolveReferences(const int featureID, std::list<std::shar
 {
 	switch(featureID)
 	{
-		case UmlPackage::REPLYACTION_EREFERENCE_REPLYTOCALL:
+		case UmlPackage::REPLYACTION_ATTRIBUTE_REPLYTOCALL:
 		{
 			if (references.size() == 1)
 			{
@@ -628,7 +675,6 @@ void ReplyActionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
@@ -650,14 +696,14 @@ void ReplyActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 		// Save 'replyValue'
 		for (std::shared_ptr<uml::InputPin> replyValue : *this->getReplyValue()) 
 		{
-			saveHandler->addReference(replyValue, "replyValue", replyValue->eClass() != package->getInputPin_EClass());
+			saveHandler->addReference(replyValue, "replyValue", replyValue->eClass() != package->getInputPin_Class());
 		}
 
 		// Save 'returnInformation'
 		std::shared_ptr<uml::InputPin > returnInformation = this->getReturnInformation();
 		if (returnInformation != nullptr)
 		{
-			saveHandler->addReference(returnInformation, "returnInformation", returnInformation->eClass() != package->getInputPin_EClass());
+			saveHandler->addReference(returnInformation, "returnInformation", returnInformation->eClass() != package->getInputPin_Class());
 		}
 	
 

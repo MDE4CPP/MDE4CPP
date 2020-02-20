@@ -33,6 +33,15 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Action.hpp"
@@ -54,8 +63,6 @@
 #include "uml/Constraint.hpp"
 
 #include "uml/Dependency.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -215,14 +222,6 @@ ReadIsClassifiedObjectActionImpl::ReadIsClassifiedObjectActionImpl(const ReadIsC
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::ExceptionHandler>> _handlerList = obj.getHandler();
 	for(std::shared_ptr<uml::ExceptionHandler> _handler : *_handlerList)
 	{
@@ -315,7 +314,7 @@ std::shared_ptr<ecore::EObject>  ReadIsClassifiedObjectActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ReadIsClassifiedObjectActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getReadIsClassifiedObjectAction_EClass();
+	return UmlPackageImpl::eInstance()->getReadIsClassifiedObjectAction_Class();
 }
 
 //*********************************
@@ -460,14 +459,14 @@ Any ReadIsClassifiedObjectActionImpl::eGet(int featureID, bool resolve, bool cor
 {
 	switch(featureID)
 	{
-		case UmlPackage::READISCLASSIFIEDOBJECTACTION_EREFERENCE_CLASSIFIER:
-			return eAny(getClassifier()); //16028
-		case UmlPackage::READISCLASSIFIEDOBJECTACTION_EATTRIBUTE_ISDIRECT:
-			return eAny(getIsDirect()); //16029
-		case UmlPackage::READISCLASSIFIEDOBJECTACTION_EREFERENCE_OBJECT:
-			return eAny(getObject()); //16030
-		case UmlPackage::READISCLASSIFIEDOBJECTACTION_EREFERENCE_RESULT:
-			return eAny(getResult()); //16031
+		case UmlPackage::READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_CLASSIFIER:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getClassifier())); //19527
+		case UmlPackage::READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_ISDIRECT:
+			return eAny(getIsDirect()); //19528
+		case UmlPackage::READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_OBJECT:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getObject())); //19529
+		case UmlPackage::READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_RESULT:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getResult())); //19530
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -475,14 +474,14 @@ bool ReadIsClassifiedObjectActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::READISCLASSIFIEDOBJECTACTION_EREFERENCE_CLASSIFIER:
-			return getClassifier() != nullptr; //16028
-		case UmlPackage::READISCLASSIFIEDOBJECTACTION_EATTRIBUTE_ISDIRECT:
-			return getIsDirect() != false; //16029
-		case UmlPackage::READISCLASSIFIEDOBJECTACTION_EREFERENCE_OBJECT:
-			return getObject() != nullptr; //16030
-		case UmlPackage::READISCLASSIFIEDOBJECTACTION_EREFERENCE_RESULT:
-			return getResult() != nullptr; //16031
+		case UmlPackage::READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_CLASSIFIER:
+			return getClassifier() != nullptr; //19527
+		case UmlPackage::READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_ISDIRECT:
+			return getIsDirect() != false; //19528
+		case UmlPackage::READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_OBJECT:
+			return getObject() != nullptr; //19529
+		case UmlPackage::READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_RESULT:
+			return getResult() != nullptr; //19530
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }
@@ -490,32 +489,35 @@ bool ReadIsClassifiedObjectActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::READISCLASSIFIEDOBJECTACTION_EREFERENCE_CLASSIFIER:
+		case UmlPackage::READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_CLASSIFIER:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Classifier> _classifier = newValue->get<std::shared_ptr<uml::Classifier>>();
-			setClassifier(_classifier); //16028
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Classifier> _classifier = std::dynamic_pointer_cast<uml::Classifier>(_temp);
+			setClassifier(_classifier); //19527
 			return true;
 		}
-		case UmlPackage::READISCLASSIFIEDOBJECTACTION_EATTRIBUTE_ISDIRECT:
+		case UmlPackage::READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_ISDIRECT:
 		{
 			// BOOST CAST
 			bool _isDirect = newValue->get<bool>();
-			setIsDirect(_isDirect); //16029
+			setIsDirect(_isDirect); //19528
 			return true;
 		}
-		case UmlPackage::READISCLASSIFIEDOBJECTACTION_EREFERENCE_OBJECT:
+		case UmlPackage::READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_OBJECT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::InputPin> _object = newValue->get<std::shared_ptr<uml::InputPin>>();
-			setObject(_object); //16030
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::InputPin> _object = std::dynamic_pointer_cast<uml::InputPin>(_temp);
+			setObject(_object); //19529
 			return true;
 		}
-		case UmlPackage::READISCLASSIFIEDOBJECTACTION_EREFERENCE_RESULT:
+		case UmlPackage::READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_RESULT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::OutputPin> _result = newValue->get<std::shared_ptr<uml::OutputPin>>();
-			setResult(_result); //16031
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::OutputPin> _result = std::dynamic_pointer_cast<uml::OutputPin>(_temp);
+			setResult(_result); //19530
 			return true;
 		}
 	}
@@ -630,7 +632,7 @@ void ReadIsClassifiedObjectActionImpl::resolveReferences(const int featureID, st
 {
 	switch(featureID)
 	{
-		case UmlPackage::READISCLASSIFIEDOBJECTACTION_EREFERENCE_CLASSIFIER:
+		case UmlPackage::READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_CLASSIFIER:
 		{
 			if (references.size() == 1)
 			{
@@ -662,7 +664,6 @@ void ReadIsClassifiedObjectActionImpl::save(std::shared_ptr<persistence::interfa
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
@@ -685,19 +686,19 @@ void ReadIsClassifiedObjectActionImpl::saveContent(std::shared_ptr<persistence::
 		std::shared_ptr<uml::InputPin > object = this->getObject();
 		if (object != nullptr)
 		{
-			saveHandler->addReference(object, "object", object->eClass() != package->getInputPin_EClass());
+			saveHandler->addReference(object, "object", object->eClass() != package->getInputPin_Class());
 		}
 
 		// Save 'result'
 		std::shared_ptr<uml::OutputPin > result = this->getResult();
 		if (result != nullptr)
 		{
-			saveHandler->addReference(result, "result", result->eClass() != package->getOutputPin_EClass());
+			saveHandler->addReference(result, "result", result->eClass() != package->getOutputPin_Class());
 		}
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getReadIsClassifiedObjectAction_EAttribute_isDirect()) )
+		if ( this->eIsSet(package->getReadIsClassifiedObjectAction_Attribute_isDirect()) )
 		{
 			saveHandler->addAttribute("isDirect", this->getIsDirect());
 		}

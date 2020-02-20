@@ -6,17 +6,11 @@
  */
 
 #include "persistence/base/HandlerHelper.hpp"
-
-#ifdef NDEBUG
-#define MSG_DEBUG(a) /**/
-#else
-#define MSG_DEBUG(a) std::cout << "| DEBUG    | " << a << std::endl
-#endif
-#define MSG_WARNING(a) std::cout << "| WARNING  | "<< a << std::endl
-#define MSG_ERROR(a) std::cout << "| ERROR    | " << a << std::endl
-#define MSG_FLF __FILE__ << ":" << __LINE__ << " " << __FUNCTION__ << "() "
+#include "PersistenceDefine.hpp"
 
 #include <sstream> // used for extractType()
+
+#include "abstractDataTypes/SubsetUnion.hpp"
 
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -155,7 +149,7 @@ std::string HandlerHelper::extractReference(const std::shared_ptr<ecore::EObject
 				int count = 0;
 				int meetingIndex = 0;
 
-				std::shared_ptr<Bag<ecore::EStructuralFeature>> structFeastureList = classObj->getEStructuralFeatures();
+				std::shared_ptr<SubsetUnion<ecore::EStructuralFeature, ecore::EObject>> structFeastureList = classObj->getEStructuralFeatures();
 				for (std::shared_ptr<ecore::EStructuralFeature> structFeat : *structFeastureList)
 				{
 					if (structFeat->getName() == targetObj->getName())

@@ -19,6 +19,8 @@
 #include <sstream>
 
 #include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
 #include "abstractDataTypes/Union.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
@@ -30,6 +32,11 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "ecore/EcoreFactory.hpp"
 #include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "ecore/EcorePackage.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "ecore/EcorePackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "ecore/EAnnotation.hpp"
@@ -41,6 +48,8 @@
 #include "ecore/EDataType.hpp"
 
 #include "ecore/EGenericType.hpp"
+
+#include "ecore/EObject.hpp"
 
 #include "ecore/EStructuralFeature.hpp"
 
@@ -81,6 +90,17 @@ EAttributeImpl::~EAttributeImpl()
 
 
 //Additional constructor for the containments back reference
+			EAttributeImpl::EAttributeImpl(std::weak_ptr<ecore::EObject > par_eContainer)
+			:EAttributeImpl()
+			{
+			    m_eContainer = par_eContainer;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
 			EAttributeImpl::EAttributeImpl(std::weak_ptr<ecore::EClass > par_eContainingClass)
 			:EAttributeImpl()
 			{
@@ -106,6 +126,7 @@ EAttributeImpl::EAttributeImpl(const EAttributeImpl & obj):EAttributeImpl()
 	m_iD = obj.isID();
 	m_lowerBound = obj.getLowerBound();
 	m_many = obj.isMany();
+	m_metaElementID = obj.getMetaElementID();
 	m_name = obj.getName();
 	m_ordered = obj.isOrdered();
 	m_required = obj.isRequired();
@@ -118,6 +139,8 @@ EAttributeImpl::EAttributeImpl(const EAttributeImpl & obj):EAttributeImpl()
 	//copy references with no containment (soft copy)
 	
 	m_eAttributeType  = obj.getEAttributeType();
+
+	m_eContainer  = obj.getEContainer();
 
 	m_eContainingClass  = obj.getEContainingClass();
 
@@ -153,7 +176,7 @@ std::shared_ptr<ecore::EObject>  EAttributeImpl::copy() const
 
 std::shared_ptr<EClass> EAttributeImpl::eStaticClass() const
 {
-	return EcorePackageImpl::eInstance()->getEAttribute_EClass();
+	return EcorePackageImpl::eInstance()->getEAttribute_Class();
 }
 
 //*********************************
@@ -186,6 +209,10 @@ std::shared_ptr<ecore::EDataType > EAttributeImpl::getEAttributeType() const
 //*********************************
 // Union Getter
 //*********************************
+std::shared_ptr<Union<ecore::EObject>> EAttributeImpl::getEContens() const
+{
+	return m_eContens;
+}
 
 
 std::shared_ptr<EAttribute> EAttributeImpl::getThisEAttributePtr() const
@@ -199,6 +226,11 @@ void EAttributeImpl::setThisEAttributePtr(std::weak_ptr<EAttribute> thisEAttribu
 }
 std::shared_ptr<ecore::EObject> EAttributeImpl::eContainer() const
 {
+	if(auto wp = m_eContainer.lock())
+	{
+		return wp;
+	}
+
 	if(auto wp = m_eContainingClass.lock())
 	{
 		return wp;
@@ -213,10 +245,10 @@ Any EAttributeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case EcorePackage::EATTRIBUTE_EREFERENCE_EATTRIBUTETYPE:
-			return eAny(getEAttributeType()); //5320
-		case EcorePackage::EATTRIBUTE_EATTRIBUTE_ID:
-			return eAny(isID()); //5319
+		case EcorePackage::EATTRIBUTE_ATTRIBUTE_EATTRIBUTETYPE:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEAttributeType())); //223
+		case EcorePackage::EATTRIBUTE_ATTRIBUTE_ID:
+			return eAny(isID()); //222
 	}
 	return EStructuralFeatureImpl::eGet(featureID, resolve, coreType);
 }
@@ -224,10 +256,10 @@ bool EAttributeImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case EcorePackage::EATTRIBUTE_EREFERENCE_EATTRIBUTETYPE:
-			return getEAttributeType() != nullptr; //5320
-		case EcorePackage::EATTRIBUTE_EATTRIBUTE_ID:
-			return isID() != false; //5319
+		case EcorePackage::EATTRIBUTE_ATTRIBUTE_EATTRIBUTETYPE:
+			return getEAttributeType() != nullptr; //223
+		case EcorePackage::EATTRIBUTE_ATTRIBUTE_ID:
+			return isID() != false; //222
 	}
 	return EStructuralFeatureImpl::internalEIsSet(featureID);
 }
@@ -235,11 +267,11 @@ bool EAttributeImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case EcorePackage::EATTRIBUTE_EATTRIBUTE_ID:
+		case EcorePackage::EATTRIBUTE_ATTRIBUTE_ID:
 		{
 			// BOOST CAST
 			bool _iD = newValue->get<bool>();
-			setID(_iD); //5319
+			setID(_iD); //222
 			return true;
 		}
 	}
@@ -318,7 +350,10 @@ void EAttributeImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler>
 	
 	EModelElementImpl::saveContent(saveHandler);
 	
+	EObjectImpl::saveContent(saveHandler);
+	
 	ecore::EObjectImpl::saveContent(saveHandler);
+	
 	
 	
 	
@@ -334,7 +369,7 @@ void EAttributeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	
  
 		// Add attributes
-		if ( this->eIsSet(package->getEAttribute_EAttribute_iD()) )
+		if ( this->eIsSet(package->getEAttribute_Attribute_iD()) )
 		{
 			saveHandler->addAttribute("iD", this->isID());
 		}

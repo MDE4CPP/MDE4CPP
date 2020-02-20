@@ -23,7 +23,9 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="contents" upperBound="-1"
-        eType="#//EObject" containment="true" resolveProxies="false"/>
+        eType="#//EObject" containment="true" resolveProxies="false">
+      <eAnnotations source="subsets" references="#//EObject/eContens"/>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="references" upperBound="-1"
         eType="#//EObject"/>
   </eClassifiers>
@@ -107,7 +109,9 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="eOperations" upperBound="-1"
-        eType="#//EOperation" containment="true" resolveProxies="false" eOpposite="#//EOperation/eContainingClass"/>
+        eType="#//EOperation" containment="true" resolveProxies="false" eOpposite="#//EOperation/eContainingClass">
+      <eAnnotations source="subsets" references="#//EObject/eContens"/>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="eAllAttributes" upperBound="-1"
         eType="#//EAttribute" changeable="false" volatile="true" transient="true"
         derived="true">
@@ -123,12 +127,12 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="eReferences" upperBound="-1"
-        eType="#//EReference" changeable="false" volatile="true" transient="true"
+        eType="#//EReference" changeable="true" volatile="true" transient="true"
         derived="true">
       <eAnnotations source="subsets" references="#//EClass/eStructuralFeatures"/>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="eAttributes" upperBound="-1"
-        eType="#//EAttribute" changeable="false" volatile="true" transient="true"
+        eType="#//EAttribute" changeable="true" volatile="true" transient="true"
         derived="true">
       <eAnnotations source="subsets" references="#//EClass/eStructuralFeatures"/>
     </eStructuralFeatures>
@@ -156,10 +160,11 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="eIDAttribute" eType="#//EAttribute"
-        changeable="false" volatile="true" transient="true" derived="true" resolveProxies="false"/>
+        changeable="true" volatile="true" transient="true" derived="true" resolveProxies="false"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="eStructuralFeatures" upperBound="-1"
         eType="#//EStructuralFeature" containment="true" resolveProxies="false" eOpposite="#//EStructuralFeature/eContainingClass">
       <eAnnotations source="union"/>
+      <eAnnotations source="subsets" references="#//EObject/eContens"/>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="eGenericSuperTypes" upperBound="-1"
         eType="#//EGenericType" unsettable="true" containment="true" resolveProxies="false">
@@ -176,6 +181,9 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
       <details key="constraints" value="WellFormedInstanceTypeName UniqueTypeParameterNames"/>
     </eAnnotations>
+    <eAnnotations source="http://www.obeo.fr/dsl/dnc/archetype">
+      <details key="archetype" value="Description"/>
+    </eAnnotations>
     <eOperations name="isInstance" eType="#//EBoolean">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
         <details key="const"/>
@@ -184,7 +192,7 @@
     </eOperations>
     <eOperations name="getClassifierID" eType="#//EInt">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="doNotGenerate" value="true"/>
+        <details key="body" value="return getMetaElementID();"/>
       </eAnnotations>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="instanceClassName" eType="#//EString"
@@ -201,13 +209,7 @@
       </eGenericType>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="defaultValue" eType="#//EJavaObject"
-        changeable="false" volatile="true" transient="true" derived="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="classifierID" eType="#//EInt"
-        changeable="false" defaultValueLiteral="-1">
-      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="implSetterOnly" value="true"/>
-      </eAnnotations>
-    </eStructuralFeatures>
+        changeable="true" volatile="true" transient="true" derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="instanceTypeName" eType="#//EString"
         volatile="true" unsettable="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -254,7 +256,9 @@
       <eParameters name="literal" eType="#//EString"/>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="eLiterals" upperBound="-1"
-        eType="#//EEnumLiteral" containment="true" resolveProxies="false" eOpposite="#//EEnumLiteral/eEnum"/>
+        eType="#//EEnumLiteral" containment="true" resolveProxies="false" eOpposite="#//EEnumLiteral/eEnum">
+      <eAnnotations source="subsets" references="#//EObject/eContens"/>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EEnumLiteral" eSuperTypes="#//ENamedElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="#//EInt"/>
@@ -292,7 +296,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="ePackage" lowerBound="1"
         eType="#//EPackage" transient="true" resolveProxies="false" eOpposite="#//EPackage/eFactoryInstance"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="EModelElement" abstract="true">
+  <eClassifiers xsi:type="ecore:EClass" name="EModelElement" abstract="true" eSuperTypes="#//EObject">
     <eOperations name="getEAnnotation" eType="#//EAnnotation">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
         <details key="body" value="    for(std::shared_ptr&lt;EAnnotation> a : *m_eAnnotations)&#xD;&#xA;    {&#xD;&#xA;&#x9;    if(a->getSource()==source)&#xD;&#xA;&#x9;    {&#xD;&#xA;&#x9;&#x9;    return a;&#xD;&#xA;&#x9;    }&#xD;&#xA;    }&#xD;&#xA;    return std::shared_ptr&lt;ecore::EAnnotation>();"/>
@@ -300,7 +304,9 @@
       <eParameters name="source" eType="#//EString"/>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="eAnnotations" upperBound="-1"
-        eType="#//EAnnotation" containment="true" resolveProxies="false" eOpposite="#//EAnnotation/eModelElement"/>
+        eType="#//EAnnotation" containment="true" resolveProxies="false" eOpposite="#//EAnnotation/eModelElement">
+      <eAnnotations source="subsets" references="#//EObject/eContens"/>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ENamedElement" abstract="true" eSuperTypes="#//EModelElement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
@@ -413,6 +419,18 @@
         </eGenericType>
       </eParameters>
     </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eContens" upperBound="-1"
+        eType="#//EObject" containment="true" eOpposite="#//EObject/eContainer.1">
+      <eAnnotations source="union"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eContainer" eType="#//EObject"
+        eOpposite="#//EObject/eContens"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="metaElementID" eType="#//EInt"
+        defaultValueLiteral="0" unsettable="true">
+      <eAnnotations source="http://sse.tu-ilmenau.de/modelChange">
+        <details value="realization of ClassifierID or MetaType-ID for reflection support for ecore, UML and Evore/UML based models"/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EOperation" eSuperTypes="#//ETypedElement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
@@ -446,7 +464,9 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="eTypeParameters" upperBound="-1"
         eType="#//ETypeParameter" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="eParameters" upperBound="-1"
-        eType="#//EParameter" containment="true" resolveProxies="false" eOpposite="#//EParameter/eOperation"/>
+        eType="#//EParameter" containment="true" resolveProxies="false" eOpposite="#//EParameter/eOperation">
+      <eAnnotations source="subsets" references="#//EObject/eContens"/>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="eExceptions" upperBound="-1"
         eType="#//EClassifier" unsettable="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -481,7 +501,9 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="eFactoryInstance" lowerBound="1"
         eType="#//EFactory" transient="true" resolveProxies="false" eOpposite="#//EFactory/ePackage"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="eClassifiers" upperBound="-1"
-        eType="#//EClassifier" containment="true" eOpposite="#//EClassifier/ePackage"/>
+        eType="#//EClassifier" containment="true" eOpposite="#//EClassifier/ePackage">
+      <eAnnotations source="subsets" references="#//EObject/eContens"/>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="eSubpackages" upperBound="-1"
         eType="#//EPackage" containment="true" eOpposite="#//EPackage/eSuperPackage"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="eSuperPackage" eType="#//EPackage"
@@ -510,7 +532,7 @@
         defaultValueLiteral="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="eOpposite" eType="#//EReference"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="eReferenceType" lowerBound="1"
-        eType="#//EClass" changeable="false" volatile="true" transient="true" derived="true"/>
+        eType="#//EClass" changeable="true" volatile="true" transient="true" derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="eKeys" upperBound="-1"
         eType="#//EAttribute"/>
   </eClassifiers>
@@ -535,7 +557,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="transient" eType="#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="defaultValueLiteral" eType="#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="defaultValue" eType="#//EJavaObject"
-        changeable="false" volatile="true" transient="true" derived="true"/>
+        changeable="true" volatile="true" transient="true" derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="unsettable" eType="#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="derived" eType="#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="featureID" eType="#//EInt"
@@ -565,7 +587,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="many" eType="#//EBoolean"
         changeable="false" volatile="true" transient="true" derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="required" eType="#//EBoolean"
-        changeable="false" volatile="true" transient="true" derived="true"/>
+        changeable="true" volatile="true" transient="true" derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="eType" eType="#//EClassifier"
         volatile="true" unsettable="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -734,7 +756,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="eTypeArguments" upperBound="-1"
         eType="#//EGenericType" containment="true" resolveProxies="false"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="eRawType" lowerBound="1"
-        eType="#//EClassifier" changeable="false" transient="true" derived="true"/>
+        eType="#//EClassifier" changeable="true" transient="true" derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="eLowerBound" eType="#//EGenericType"
         containment="true" resolveProxies="false"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="eTypeParameter" eType="#//ETypeParameter"

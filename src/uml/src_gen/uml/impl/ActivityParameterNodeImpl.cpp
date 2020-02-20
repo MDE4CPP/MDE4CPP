@@ -33,6 +33,15 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Activity.hpp"
@@ -52,8 +61,6 @@
 #include "uml/Comment.hpp"
 
 #include "uml/Dependency.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -214,14 +221,6 @@ ActivityParameterNodeImpl::ActivityParameterNodeImpl(const ActivityParameterNode
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::InterruptibleActivityRegion>> _inInterruptibleRegionList = obj.getInInterruptibleRegion();
 	for(std::shared_ptr<uml::InterruptibleActivityRegion> _inInterruptibleRegion : *_inInterruptibleRegionList)
 	{
@@ -280,7 +279,7 @@ std::shared_ptr<ecore::EObject>  ActivityParameterNodeImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ActivityParameterNodeImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getActivityParameterNode_EClass();
+	return UmlPackageImpl::eInstance()->getActivityParameterNode_Class();
 }
 
 //*********************************
@@ -394,8 +393,8 @@ Any ActivityParameterNodeImpl::eGet(int featureID, bool resolve, bool coreType) 
 {
 	switch(featureID)
 	{
-		case UmlPackage::ACTIVITYPARAMETERNODE_EREFERENCE_PARAMETER:
-			return eAny(getParameter()); //18327
+		case UmlPackage::ACTIVITYPARAMETERNODE_ATTRIBUTE_PARAMETER:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getParameter())); //1326
 	}
 	return ObjectNodeImpl::eGet(featureID, resolve, coreType);
 }
@@ -403,8 +402,8 @@ bool ActivityParameterNodeImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::ACTIVITYPARAMETERNODE_EREFERENCE_PARAMETER:
-			return getParameter() != nullptr; //18327
+		case UmlPackage::ACTIVITYPARAMETERNODE_ATTRIBUTE_PARAMETER:
+			return getParameter() != nullptr; //1326
 	}
 	return ObjectNodeImpl::internalEIsSet(featureID);
 }
@@ -412,11 +411,12 @@ bool ActivityParameterNodeImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::ACTIVITYPARAMETERNODE_EREFERENCE_PARAMETER:
+		case UmlPackage::ACTIVITYPARAMETERNODE_ATTRIBUTE_PARAMETER:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::Parameter> _parameter = newValue->get<std::shared_ptr<uml::Parameter>>();
-			setParameter(_parameter); //18327
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Parameter> _parameter = std::dynamic_pointer_cast<uml::Parameter>(_temp);
+			setParameter(_parameter); //1326
 			return true;
 		}
 	}
@@ -480,7 +480,7 @@ void ActivityParameterNodeImpl::resolveReferences(const int featureID, std::list
 {
 	switch(featureID)
 	{
-		case UmlPackage::ACTIVITYPARAMETERNODE_EREFERENCE_PARAMETER:
+		case UmlPackage::ACTIVITYPARAMETERNODE_ATTRIBUTE_PARAMETER:
 		{
 			if (references.size() == 1)
 			{
@@ -511,7 +511,6 @@ void ActivityParameterNodeImpl::save(std::shared_ptr<persistence::interfaces::XS
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);

@@ -33,6 +33,15 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Activity.hpp"
@@ -52,8 +61,6 @@
 #include "uml/Constraint.hpp"
 
 #include "uml/Dependency.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -208,14 +215,6 @@ ReadStructuralFeatureActionImpl::ReadStructuralFeatureActionImpl(const ReadStruc
 
 	//Clone references with containment (deep copy)
 
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::ExceptionHandler>> _handlerList = obj.getHandler();
 	for(std::shared_ptr<uml::ExceptionHandler> _handler : *_handlerList)
 	{
@@ -306,7 +305,7 @@ std::shared_ptr<ecore::EObject>  ReadStructuralFeatureActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ReadStructuralFeatureActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getReadStructuralFeatureAction_EClass();
+	return UmlPackageImpl::eInstance()->getReadStructuralFeatureAction_Class();
 }
 
 //*********************************
@@ -404,8 +403,8 @@ Any ReadStructuralFeatureActionImpl::eGet(int featureID, bool resolve, bool core
 {
 	switch(featureID)
 	{
-		case UmlPackage::READSTRUCTURALFEATUREACTION_EREFERENCE_RESULT:
-			return eAny(getResult()); //16530
+		case UmlPackage::READSTRUCTURALFEATUREACTION_ATTRIBUTE_RESULT:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getResult())); //20029
 	}
 	return StructuralFeatureActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -413,8 +412,8 @@ bool ReadStructuralFeatureActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::READSTRUCTURALFEATUREACTION_EREFERENCE_RESULT:
-			return getResult() != nullptr; //16530
+		case UmlPackage::READSTRUCTURALFEATUREACTION_ATTRIBUTE_RESULT:
+			return getResult() != nullptr; //20029
 	}
 	return StructuralFeatureActionImpl::internalEIsSet(featureID);
 }
@@ -422,11 +421,12 @@ bool ReadStructuralFeatureActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::READSTRUCTURALFEATUREACTION_EREFERENCE_RESULT:
+		case UmlPackage::READSTRUCTURALFEATUREACTION_ATTRIBUTE_RESULT:
 		{
 			// BOOST CAST
-			std::shared_ptr<uml::OutputPin> _result = newValue->get<std::shared_ptr<uml::OutputPin>>();
-			setResult(_result); //16530
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::OutputPin> _result = std::dynamic_pointer_cast<uml::OutputPin>(_temp);
+			setResult(_result); //20029
 			return true;
 		}
 	}
@@ -472,10 +472,9 @@ void ReadStructuralFeatureActionImpl::loadNode(std::string nodeName, std::shared
 			{
 				typeName = "OutputPin";
 			}
-			std::shared_ptr<uml::OutputPin> result = std::dynamic_pointer_cast<uml::OutputPin>(modelFactory->create(typeName));
+			std::shared_ptr<ecore::EObject> result = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::OUTPUTPIN_ATTRIBUTE_READSTRUCTURALFEATUREACTION);
 			if (result != nullptr)
 			{
-				this->setResult(result);
 				loadHandler->handleChild(result);
 			}
 			return;
@@ -517,7 +516,6 @@ void ReadStructuralFeatureActionImpl::save(std::shared_ptr<persistence::interfac
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
@@ -541,7 +539,7 @@ void ReadStructuralFeatureActionImpl::saveContent(std::shared_ptr<persistence::i
 		std::shared_ptr<uml::OutputPin > result = this->getResult();
 		if (result != nullptr)
 		{
-			saveHandler->addReference(result, "result", result->eClass() != package->getOutputPin_EClass());
+			saveHandler->addReference(result, "result", result->eClass() != package->getOutputPin_Class());
 		}
 	
 

@@ -33,6 +33,17 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+
 #include <exception> // used in Persistence
 
 #include "uml/Behavior.hpp"
@@ -58,8 +69,6 @@
 #include "uml/Deployment.hpp"
 
 #include "uml/DeploymentTarget.hpp"
-
-#include "ecore/EAnnotation.hpp"
 
 #include "uml/Element.hpp"
 
@@ -181,24 +190,24 @@ NodeImpl::~NodeImpl()
 
 
 //Additional constructor for the containments back reference
-			NodeImpl::NodeImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id)
-			:NodeImpl()
-			{
-				switch(reference_id)
-				{	
-				case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
-					m_owningPackage = par_Package;
-					m_namespace = par_Package;
-					 return;
-				case UmlPackage::TYPE_EREFERENCE_PACKAGE:
-					m_package = par_Package;
-					m_namespace = par_Package;
-					 return;
-				default:
-				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
-				}
-			   
-			}
+NodeImpl::NodeImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id)
+:NodeImpl()
+{
+	switch(reference_id)
+	{	
+	case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
+		m_owningPackage = par_Package;
+		m_namespace = par_Package;
+		 return;
+	case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
+		m_package = par_Package;
+		m_namespace = par_Package;
+		 return;
+	default:
+	std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
+	}
+   
+}
 
 
 
@@ -309,14 +318,6 @@ NodeImpl::NodeImpl(const NodeImpl & obj):NodeImpl()
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_deployment" << std::endl;
-	#endif
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
 	#endif
 	std::shared_ptr<Bag<uml::ElementImport>> _elementImportList = obj.getElementImport();
 	for(std::shared_ptr<uml::ElementImport> _elementImport : *_elementImportList)
@@ -518,7 +519,7 @@ std::shared_ptr<ecore::EObject>  NodeImpl::copy() const
 
 std::shared_ptr<ecore::EClass> NodeImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getNode_EClass();
+	return UmlPackageImpl::eInstance()->getNode_Class();
 }
 
 //*********************************
@@ -528,7 +529,7 @@ std::shared_ptr<ecore::EClass> NodeImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<uml::CommunicationPath> NodeImpl::createCommunicationPath(bool end1IsNavigable,AggregationKind end1Aggregation,std::string end1Name,int end1Lower,int end1Upper,std::shared_ptr<uml::Node>  end1Node,bool end2IsNavigable,AggregationKind end2Aggregation,std::string end2Name,int end2Lower,int end2Upper)
+std::shared_ptr<uml::CommunicationPath> NodeImpl::createCommunicationPath(bool end1IsNavigable,uml::AggregationKind end1Aggregation,std::string end1Name,int end1Lower,int end1Upper,std::shared_ptr<uml::Node>  end1Node,bool end2IsNavigable,uml::AggregationKind end2Aggregation,std::string end2Name,int end2Lower,int end2Upper)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -643,8 +644,18 @@ Any NodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::NODE_EREFERENCE_NESTEDNODE:
-			return eAny(getNestedNode()); //20755
+		case UmlPackage::NODE_ATTRIBUTE_NESTEDNODE:
+		{
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Node>::iterator iter = m_nestedNode->begin();
+			Bag<uml::Node>::iterator end = m_nestedNode->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //15854
+		}
 	}
 	Any result;
 	result = ClassImpl::eGet(featureID, resolve, coreType);
@@ -659,8 +670,8 @@ bool NodeImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::NODE_EREFERENCE_NESTEDNODE:
-			return getNestedNode() != nullptr; //20755
+		case UmlPackage::NODE_ATTRIBUTE_NESTEDNODE:
+			return getNestedNode() != nullptr; //15854
 	}
 	bool result = false;
 	result = ClassImpl::internalEIsSet(featureID);
@@ -675,6 +686,42 @@ bool NodeImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
+		case UmlPackage::NODE_ATTRIBUTE_NESTEDNODE:
+		{
+			// BOOST CAST
+			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
+			std::shared_ptr<Bag<uml::Node>> nestedNodeList(new Bag<uml::Node>());
+			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+			while (iter != end)
+			{
+				nestedNodeList->add(std::dynamic_pointer_cast<uml::Node>(*iter));
+				iter++;
+			}
+			
+			Bag<uml::Node>::iterator iterNestedNode = m_nestedNode->begin();
+			Bag<uml::Node>::iterator endNestedNode = m_nestedNode->end();
+			while (iterNestedNode != endNestedNode)
+			{
+				if (nestedNodeList->find(*iterNestedNode) == -1)
+				{
+					m_nestedNode->erase(*iterNestedNode);
+				}
+				iterNestedNode++;
+			}
+
+			iterNestedNode = nestedNodeList->begin();
+			endNestedNode = nestedNodeList->end();
+			while (iterNestedNode != endNestedNode)
+			{
+				if (m_nestedNode->find(*iterNestedNode) == -1)
+				{
+					m_nestedNode->add(*iterNestedNode);
+				}
+				iterNestedNode++;			
+			}
+			return true;
+		}
 	}
 
 	bool result = false;
@@ -781,7 +828,6 @@ void NodeImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveH
 	
 	ElementImpl::saveContent(saveHandler);
 	
-	ecore::EModelElementImpl::saveContent(saveHandler);
 	ObjectImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
@@ -805,7 +851,7 @@ void NodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler
 		// Save 'nestedNode'
 		for (std::shared_ptr<uml::Node> nestedNode : *this->getNestedNode()) 
 		{
-			saveHandler->addReference(nestedNode, "nestedNode", nestedNode->eClass() != package->getNode_EClass());
+			saveHandler->addReference(nestedNode, "nestedNode", nestedNode->eClass() != package->getNode_Class());
 		}
 	
 

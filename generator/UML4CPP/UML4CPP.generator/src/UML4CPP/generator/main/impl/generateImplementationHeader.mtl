@@ -11,23 +11,23 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ ****************************************************************************************************************************************************************
+ * 
+ * module to generate class implementation header file
+ * 
  */]
 [module generateImplementationHeader('http://www.eclipse.org/uml2/5.0.0/UML')]
 
-[import UML4CPP::generator::main::generateAttribute /]
-[import UML4CPP::generator::main::generateClass /]
-[import UML4CPP::generator::main::generateOperation /]
-[import UML4CPP::generator::main::generateSetGet /]
-[import UML4CPP::generator::main::generateType /]
-[import UML4CPP::generator::main::helper /]
-
-[template public baseClass(aClass : Class) ?(oclIsKindOf(Stereotype))]
-virtual public uml::StereotypeImpl
-[/template]
-
-[template public baseClass(aClass : Class) ?(not oclIsKindOf(Stereotype))]
-virtual public uml::ClassImpl
-[/template]
+[import UML4CPP::generator::main::components::generateClass /]
+[import UML4CPP::generator::main::components::generateInterface /]
+[import UML4CPP::generator::main::components::generateOperation /]
+[import UML4CPP::generator::main::components::generateProperty /]
+[import UML4CPP::generator::main::components::generateType /]
+[import UML4CPP::generator::main::helpers::generalHelper /]
+[import UML4CPP::generator::main::helpers::nameHelper /]
+[import UML4CPP::generator::main::helpers::setGetHelper /]
+[import UML4CPP::generator::main::validation::validateModel /]
 
 [template public generateImplementationHeader(aClass : Class) {className : String = aClass.name.toUpperFirst().concat('Impl'); aPackage : Package = aClass.ancestors()->filter(Package)->first()}]
 [file (aPackage.getPackageName().concat('/impl/').concat(className).concat('.hpp'), false, 'UTF-8')]
@@ -38,12 +38,14 @@ virtual public uml::ClassImpl
 //Model includes
 #include "../[aClass.name.toUpperFirst().concat('.hpp')/]"
 [for (sClass : Class | aClass.superClass->asOrderedSet()->sortedBy(myQualifiedName()))]
+[if (sClass.oclIsUndefined() or sClass.name.oclIsUndefined())]
+// undefined superclass [sClass.toString()/]['class: '.concat(aClass.name).concat('Impl: undefined superclass: ').concat(sClass.toString()).registerError()/]
+[else]
 #include "[sClass.getNearestPackage().getPackageName()/]/impl/[sClass.name.toUpperFirst()/]Impl.hpp"
+[/if]
 [/for]
-[if (aClass.superClass->isEmpty() and not aClass.oclIsKindOf(Stereotype))]
-#include "uml/impl/ClassImpl.hpp"
-[elseif (aClass.superClass->isEmpty() and aClass.oclIsKindOf(Stereotype))]
-#include "uml/impl/StereotypeImpl.hpp"
+[if (aClass.superClass->isEmpty())]
+#include "uml/impl/[aClass.getGeneralSuperClassName()/]Impl.hpp"
 [/if]
 #include "uml/Property.hpp"
 
@@ -62,23 +64,26 @@ namespace uml
 [if (not aPackage.ignoreNamespace())]namespace [aPackage.name/]
 {
 [/if]
-	class [className/] [for (sClass : Class | aClass.superClass) before (':') separator (',')]
-virtual public [ClassWithNamespace(aClass, sClass)/]Impl[/for][if (aClass.superClass->isEmpty())]
- : [aClass.baseClass()/][/if], virtual public [aClass.name.toUpperFirst()/]
+	class [className/] [for (sClass : Class | aClass.superClass->reject(oclIsUndefined() and name.oclIsUndefined())) before (':') separator (',')]
+virtual public [sClass.getClassifierName(aClass, ignoreNamespace(sClass))/]Impl[/for][if (aClass.superClass->isEmpty())]
+ : virtual public uml::[aClass.getGeneralSuperClassName()/]Impl[/if], virtual public [aClass.name.toUpperFirst()/]
 	{
+		public: 
+			[className/](const [className/] & obj);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+
 		private:    
-			[className/]([className/] const&) = delete;
 			[className/]& operator=([className/] const&) = delete;
 
 		protected:
 [if (isSingleton())]
 			friend class [aClass.name.toUpperFirst()/];
 [else]
-			friend class [aClass.getNearestPackage().ns().concat('FactoryImpl').toUpperFirst()/];
+			friend class [aClass.getNearestPackage().myNamespaceName().concat('FactoryImpl').toUpperFirst()/];
 [/if]
 			//constructor
 			[className/]();
-			[aClass.generateGetThisPtr()/]
+			[aClass.generateThisPtrFunctionDeclaration()/]
 
 [for (anAssociation : Association | aClass.getCompositionsToClass())]
 [let containerProperty : Property = anAssociation.memberEnd->select(type = aClass)->asOrderedSet()->first()]
@@ -91,6 +96,7 @@ virtual public [ClassWithNamespace(aClass, sClass)/]Impl[/for][if (aClass.superC
 [/for]
 
 		public:
+
 			//destructor
 			virtual ~[className/]();
 
@@ -102,13 +108,13 @@ virtual public [ClassWithNamespace(aClass, sClass)/]Impl[/for][if (aClass.superC
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			[aClass.ownedAttribute.generateAttributeAccessorsDecl(true)/]
+			[aClass.ownedAttribute.generateAttributeAccessorsDeclaration(true)/]
 			[for (interfaceR : InterfaceRealization | aClass.ownedElement->filter(InterfaceRealization)->sortedBy(myQualifiedName()))] [for (aAttribute : Property | interfaceR.supplier.oclAsType(Interface).ownedAttribute->sortedBy(myQualifiedName())) separator ('\n')] [if (aClass.ownedAttribute->select(name=aAttribute.name)->size() = 0)]
-			[aAttribute.generateAttributeAccessorsDecl(true)/]
+			[aAttribute.generateAttributeAccessorsDeclaration(true)/]
 			[/if][/for][/for]
 
 		protected:
-			virtual std::shared_ptr<[aClass.metamodelClassTypeString('Class')/]> getMetaClass();
+			virtual std::shared_ptr<uml::Class> getMetaClass();
 
 		public:
 			//*********************************
@@ -126,5 +132,108 @@ virtual public [ClassWithNamespace(aClass, sClass)/]Impl[/for][if (aClass.superC
 	};
 [if (not aPackage.ignoreNamespace())]}[/if]
 [endGuard(className)/]
+[/file]
+[/template]
+
+
+[template public generateImplementationHeader(aInterface : Interface) {interfaceName : String = aInterface.name.toUpperFirst().concat('Impl'); aPackage : Package = aInterface.ancestors()->filter(Package)->first()}]
+[file (aPackage.getPackageName().concat('/impl/').concat(interfaceName).concat('.hpp'), false, 'UTF-8')]
+[startGuard(interfaceName)/]
+
+#include <functional>
+
+//Model includes
+#include "../[aInterface.name.toUpperFirst().concat('.hpp')/]"
+[for (sClassifier : Classifier | aInterface.generalization.general->asOrderedSet()->sortedBy(myQualifiedName()))]
+[if (sClassifier.oclIsUndefined() or sClassifier.name.oclIsUndefined())]
+// undefined superclass [sClassifier.toString()/]['class: '.concat(aInterface.name).concat('Impl: undefined superclass: ').concat(sClassifier.toString()).registerError()/]
+[else]
+#include "[sClassifier.getNearestPackage().getPackageName()/]/impl/[sClassifier.name.toUpperFirst()/]Impl.hpp"
+[/if]
+[/for]
+[if (aInterface.generalization->isEmpty())]
+#include "uml/impl/[aInterface.getGeneralSuperClassName()/]Impl.hpp"
+[/if]
+#include "uml/Property.hpp"
+
+class AnyObject;
+typedef std::shared_ptr<AnyObject> Any;
+
+namespace uml
+{
+	class Property;
+[if (aInterface.ownedAttribute->select(hasSetter())->select(type.oclIsKindOf(Enumeration))->size() > 0)]
+	class EnumerationLiteral;
+[/if]
+}
+
+//*********************************
+[if (not aPackage.ignoreNamespace())]namespace [aPackage.name/]
+{
+[/if]
+	class [interfaceName/] [for (sClassifier : Classifier | aInterface.generalization.general->reject(oclIsUndefined() and name.oclIsUndefined())) before (':') separator (',')]
+virtual public [sClassifier.getClassifierName(aInterface, ignoreNamespace(sClassifier))/]Impl[/for][if (aInterface.generalization->isEmpty())]
+ : virtual public uml::[aInterface.getGeneralSuperClassName()/]Impl[/if], virtual public [aInterface.name.toUpperFirst()/]
+	{
+		private:    
+			[interfaceName/]([interfaceName/] const&) = delete;
+			[interfaceName/]& operator=([interfaceName/] const&) = delete;
+
+		protected:
+[if (isSingleton())]
+			friend class [aInterface.name.toUpperFirst()/];
+[else]
+			friend class [aInterface.getNearestPackage().myNamespaceName().concat('FactoryImpl').toUpperFirst()/];
+[/if]
+			//constructor
+			[interfaceName/]();
+			[aInterface.generateThisPtrFunctionDeclaration()/]
+
+[for (anAssociation : Association | aInterface.getCompositionsToInterface())]
+[let containerProperty : Property = anAssociation.memberEnd->select(type = aInterface)->asOrderedSet()->first()]
+[let containmentProperty : Property = anAssociation.memberEnd->select(not (type = aInterface))->asOrderedSet()->first()]
+[if (containmentProperty.isBackReference())]
+			[interfaceName/]([containmentProperty.generateCppType()/] [containmentProperty.name.toLowerFirst()/]);
+[/if] 
+[/let]
+[/let]
+[/for]
+
+		public:
+			//destructor
+			virtual ~[interfaceName/]();
+
+			//*********************************
+			// Operations
+			//*********************************
+			[aInterface.ownedOperation.generateOperationDecl(true)/]
+			
+			//*********************************
+			// Attributes Getter Setter
+			//*********************************
+			[aInterface.ownedAttribute.generateAttributeAccessorsDeclaration(true)/]
+			[for (interfaceR : InterfaceRealization | aInterface.ownedElement->filter(InterfaceRealization)->sortedBy(myQualifiedName()))] [for (aAttribute : Property | interfaceR.supplier.oclAsType(Interface).ownedAttribute->sortedBy(myQualifiedName())) separator ('\n')] [if (aInterface.ownedAttribute->select(name=aAttribute.name)->size() = 0)]
+			[aAttribute.generateAttributeAccessorsDeclaration(true)/]
+			[/if][/for][/for]
+
+		protected:
+			//virtual std::shared_ptr<uml::Class> getMetaClass();
+
+		public:
+			//*********************************
+			// Structural Feature Getter/Setter
+			//*********************************
+			[aInterface.generateeGetSetDel(true)/]
+			[aInterface.ownedAttribute->filter(Property)->select(hasSetter())->select(type.oclIsKindOf(Enumeration)).generateESetFunctionForEnumerationDecl()/]
+		
+		private:
+[if (isSingleton())]
+			static [aInterface.name.toUpperFirst()/] * create();
+[/if]
+			std::weak_ptr<[aInterface.name.toUpperFirst()/]> m_[generateGetThisPtrPropertyName()/];
+			[aInterface.generateGetSetMemeberInit()/]
+	};
+[if (not aPackage.ignoreNamespace())]}[/if]
+[endGuard(interfaceName)/]
 [/file]
 [/template]
