@@ -22,8 +22,9 @@
 [import UML4CPP::generator::main::components::generateType /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 
+
 [**
- * Templates and quieries for generation of property instatiation (parts & ports) of composite structures
+ * Template for generation of property instatiation (parts & ports) of composite structures
 */]
 [template public generateAttributeInstantiation(aProperty : Property)]
 m_[aProperty.name/].reset(new Bag<[aProperty.type.transformType()/]>());
@@ -39,6 +40,10 @@ for(unsigned int i = 1; i <= [aProperty.getLower()/]; i++)
 [/if]
 [/template]
 
+
+[**
+ * Template for generation of instantiation of a port typed by an interface
+*/]
 [template private generatePortInstantiation(aProperty : Property) {aPackage : Package = aProperty.ancestors()->filter(Package)->first(); factoryName : String = aPackage.name.toUpperFirst().concat('Factory');}]
 	[let interfaceOfPort : Interface = aProperty.type.oclAsType(Interface)]
 	std::shared_ptr<[aProperty.type.transformType()/]> value = [aPackage.name/]::[factoryName/]::eInstance()->create[aPackage.getInterfaceRealizations(interfaceOfPort)->asOrderedSet()->first().owner.oclAsType(Class).name/]();
@@ -46,10 +51,149 @@ for(unsigned int i = 1; i <= [aProperty.getLower()/]; i++)
 	m_[aProperty.name/]->add(value);
 [/template]
 
+
+[**
+ * Template for generation of instantiation of a part
+*/]
 [template private generatePartInstantiation(aProperty : Property) {aPackage : Package = aProperty.ancestors()->filter(Package)->first(); factoryName : String = aPackage.name.toUpperFirst().concat('Factory');}]
 	std::shared_ptr<[aProperty.type.transformType()/]> value = [aPackage.name/]::[factoryName/]::eInstance()->create[aProperty.type.name/]();
 	m_[aProperty.name/]->add(value);
 [/template]
+
+
+[**
+ * Template for generation of connector patterns
+*/]
+[template public generateConnectorInstantiation(aConnector : Connector)]
+[if (aConnector.isArrayPattern())]
+	//instantiate array pattern for connector [aConnector.name/]
+	[aConnector.generateArrayPatternInstantiation()/]
+[elseif (aConnector.isStarPattern())]
+	//instantiate star pattern for connector [aConnector.name/]
+	[aConnector.generateStarPatternInstantiation()/]
+[/if]
+[/template]
+
+
+[**
+ * Template for generation of array pattern
+*/]
+[template private generateArrayPatternInstantiation(aConnector : Connector){end1 : ConnectorEnd = aConnector.end->at(1); end2 : ConnectorEnd = aConnector.end->at(2); definingAssociation : Association = aConnector.type;}]
+[comment TODO: Implement instatiation if ends are parts with ports /]
+[if(not definingAssociation.oclIsUndefined())]
+[if(end1.partWithPort.oclIsUndefined() and end2.partWithPort.oclIsUndefined())]
+[aConnector.initArrayPattern_P_P()/]
+[elseif(end1.partWithPort.oclIsUndefined() and (not end2.partWithPort.oclIsUndefined()))]
+[aConnector.initArrayPattern_P_PWP()/]
+[elseif((not end1.partWithPort.oclIsUndefined()) and end2.partWithPort.oclIsUndefined())]
+[aConnector.initArrayPattern_PWP_P()/]
+[else]
+[aConnector.initArrayPattern_PWP_PWP()/]
+[/if]
+[else]
+/*
+Error: Untyped connector '[aConnector.name/]'. A connector must have one and only one association set as its type.
+*/
+[/if]
+[/template]
+
+
+[**
+ * Template for generation of array pattern between a part and a part
+*/]
+[template private initArrayPattern_P_P(aConnector : Connector){end1 : ConnectorEnd = aConnector.end->at(1); end2 : ConnectorEnd = aConnector.end->at(2); definingAssociation : Association = aConnector.type;}]
+[if(definingAssociation.memberEnd->at(1).getUpper() <> 1)] [comment *-multiplicity/]
+for(unsigned int i = 0; i < [end1.role.oclAsType(MultiplicityElement).getLower()/]; i++)
+{
+	this->get[end1.role.name.toUpperFirst()/]()->at(i)->get[end1.getDefiningEnd().name.toUpperFirst()/]()->add(this->get[end2.role.name.toUpperFirst()/]()->at(i));
+	this->get[end2.role.name.toUpperFirst()/]()->at(i)->get[end2.getDefiningEnd().name.toUpperFirst()/]()->add(this->get[end1.role.name.toUpperFirst()/]()->at(i));
+}
+[else] [comment 1-multiplicity/]
+this->get[end1.role.name.toUpperFirst()/]()->set[end1.getDefiningEnd().name.toUpperFirst()/](this->get([end2.role.name.toUpperFirst()/]))
+this->get[end2.role.name.toUpperFirst()/]()->set[end2.getDefiningEnd().name.toUpperFirst()/](this->get([end1.role.name.toUpperFirst()/]))
+[/if]
+[/template]
+
+
+[**
+ * Template for generation of array pattern between a part and a part with port
+*/]
+[template private initArrayPattern_P_PWP(aConnector : Connector){end1 : ConnectorEnd = aConnector.end->at(1); end2 : ConnectorEnd = aConnector.end->at(2); definingAssociation : Association = aConnector.type;}]
+[if(definingAssociation.memberEnd->at(1).getUpper() <> 1)] [comment *-multiplicity/]
+[else] [comment 1-multiplicity/]
+[/if]
+[/template]
+
+
+[**
+ * Template for generation of array pattern between a part with port and a part
+*/]
+[template private initArrayPattern_PWP_P(aConnector : Connector){end1 : ConnectorEnd = aConnector.end->at(1); end2 : ConnectorEnd = aConnector.end->at(2); definingAssociation : Association = aConnector.type;}]
+[if(definingAssociation.memberEnd->at(1).getUpper() <> 1)] [comment *-multiplicity/]
+[else] [comment 1-multiplicity/]
+[/if]
+[/template]
+
+
+[**
+ * Template for generation of array pattern between a part with port and a part with port
+*/]
+[template private initArrayPattern_PWP_PWP(aConnector : Connector){end1 : ConnectorEnd = aConnector.end->at(1); end2 : ConnectorEnd = aConnector.end->at(2); definingAssociation : Association = aConnector.type;}]
+[if(definingAssociation.memberEnd->at(1).getUpper() <> 1)] [comment *-multiplicity/]
+[else] [comment 1-multiplicity/]
+[/if]
+[/template]
+
+
+
+
+
+[template private generateStarPatternInstantiation(aConnector : Connector){end1 : ConnectorEnd = aConnector.end->at(1); end2 : ConnectorEnd = aConnector.end->at(2); definingAssociation : Association = aConnector.type;}]
+[comment TODO: Implement instatiation if ends are parts with ports /]
+[if(not definingAssociation.oclIsUndefined())]
+[if(end1.partWithPort.oclIsUndefined() and end2.partWithPort.oclIsUndefined())]
+[aConnector.initStarPattern_P_P()/]
+[elseif(end1.partWithPort.oclIsUndefined() and (not end2.partWithPort.oclIsUndefined()))]
+
+[elseif((not end1.partWithPort.oclIsUndefined()) and end2.partWithPort.oclIsUndefined())]
+
+[else]
+
+[/if]
+[else]
+/*
+Error: Untyped connector '[aConnector.name/]'. A connector must have one and only one association set as its type.
+*/
+[/if]
+[/template]
+
+
+[**
+ * Template for generation of star pattern between a part and a part
+*/]
+[template private initStarPattern_P_P(aConnector : Connector){end1 : ConnectorEnd = aConnector.end->at(1); end2 : ConnectorEnd = aConnector.end->at(2); definingAssociation : Association = aConnector.type;}]
+[if(definingAssociation.memberEnd->at(1).getUpper() <> 1)] [comment *-multiplicity/]
+for(unsigned int i = 0; i < [end1.role.oclAsType(MultiplicityElement).getLower()/]; i++)
+{
+	for(unsigned int j = 0; j < [end2.role.oclAsType(MultiplicityElement).getLower()/]; j++)
+	{
+		this->get[end1.role.name.toUpperFirst()/]()->at(i)->get[end1.getDefiningEnd().name.toUpperFirst()/]()->add(this->get[end2.role.name.toUpperFirst()/]()->at(j));
+		this->get[end2.role.name.toUpperFirst()/]()->at(j)->get[end2.getDefiningEnd().name.toUpperFirst()/]()->add(this->get[end1.role.name.toUpperFirst()/]()->at(i));
+	}
+}
+[else] [comment 1-multiplicity/]
+this->get[end1.role.name.toUpperFirst()/]()->set[end1.getDefiningEnd().name.toUpperFirst()/](this->get([end2.role.name.toUpperFirst()/]))
+this->get[end2.role.name.toUpperFirst()/]()->set[end2.getDefiningEnd().name.toUpperFirst()/](this->get([end1.role.name.toUpperFirst()/]))
+[/if]
+[/template]
+
+
+
+
+[**
+ *****************************************************************************************************************************************************************************************
+ *****************************************************************************************************************************************************************************************
+*/]
 
 [query public getInterfaceRealizations(aPackage : Package, anInterface : Interface) : Set(InterfaceRealization) = aPackage.allOwnedElements()->selectByType(InterfaceRealization)->reject(not (contract.name = anInterface.name))/]
 
@@ -69,28 +213,12 @@ else false
 endif
 /]
 
-
-
-[**
- * Templates and quieries for generation of property instatiation (parts & ports) of composite structures
-*/]
-
-[template public generateConnectorInstantiation(aConnector : Connector)]
-[if (aConnector.isArrayPattern())]
-	//instantiate array pattern for connector [aConnector.name/]
-	[aConnector.generateArrayPatternInstantiation()/]
-[elseif (aConnector.isStarPattern())]
-	//instantiate star pattern for connector [aConnector.name/]
-	[aConnector.generateStarPatternInstantiation()/]
-[/if]
-[/template]
-
 [query private getCardinality(aConnectorEnd : ConnectorEnd) : Integer = 
 if(aConnectorEnd.role.oclIsKindOf(MultiplicityElement)) then
 	if(aConnectorEnd.role.oclAsType(MultiplicityElement).getLower() = 0) then
 		0
 	else 
-		if (aConnectorEnd.partWithPort.oclIsInvalid()) then
+		if (aConnectorEnd.partWithPort.oclIsUndefined()) then
 			(aConnectorEnd.role.oclAsType(MultiplicityElement).getLower())
 		else ((aConnectorEnd.role.oclAsType(MultiplicityElement).getLower()) * (aConnectorEnd.partWithPort.getLower()))
 		endif
@@ -101,12 +229,12 @@ endif
 
 [query private isArrayPattern(aConnector : Connector) : Boolean =
 if(aConnector.end->size() = 2) then
-	if(aConnector.end->at(0).role.oclIsKindOf(MultiplicityElement)) then
-		if(aConnector.end->at(0).role.oclAsType(MultiplicityElement).getLower() = 1) then
-			if(aConnector.end->at(1).role.oclIsTypeOf(MultiplicityElement)) then
-				if(aConnector.end->at(1).role.oclAsType(MultiplicityElement).getLower() = 1) then
-					if((aConnector.end->at(0).role.oclAsType(Property).canInstantiate()) and (aConnector.end->at(1).role.oclAsType(Property).canInstantiate())) then
-						((aConnector.end->at(0).getCardinality()) = (aConnector.end->at(1).getCardinality()))
+	if(aConnector.end->at(1).role.oclIsKindOf(MultiplicityElement)) then
+		if(aConnector.end->at(1).getLower() = 1) then
+			if(aConnector.end->at(2).role.oclIsKindOf(MultiplicityElement)) then
+				if(aConnector.end->at(2).getLower() = 1) then
+					if((aConnector.end->at(1).role.oclAsType(Property).canInstantiate()) and (aConnector.end->at(2).role.oclAsType(Property).canInstantiate())) then
+						((aConnector.end->at(1).getCardinality()) = (aConnector.end->at(2).getCardinality()) and aConnector.end->at(1).getCardinality() > 0 and aConnector.end->at(2).getCardinality() > 0)
 					else false
 					endif
 				else false
@@ -123,11 +251,11 @@ endif
 
 [query private isStarPattern(aConnector : Connector) : Boolean =
 if(aConnector.end->size() = 2) then
-	if(aConnector.end->at(0).role.oclIsKindOf(MultiplicityElement)) then
-		if(aConnector.end->at(1).role.oclIsTypeOf(MultiplicityElement)) then
-			if((aConnector.end->at(0).role.oclAsType(Property).canInstantiate()) and (aConnector.end->at(1).role.oclAsType(Property).canInstantiate())) then
-				if((aConnector.end->at(0).getCardinality()) = (aConnector.end->at(0).role.oclAsType(MultiplicityElement).getLower())) then
-					((aConnector.end->at(1).getCardinality()) = (aConnector.end->at(1).role.oclAsType(MultiplicityElement).getLower()))
+	if(aConnector.end->at(1).role.oclIsKindOf(MultiplicityElement)) then
+		if(aConnector.end->at(2).role.oclIsKindOf(MultiplicityElement)) then
+			if((aConnector.end->at(1).role.oclAsType(Property).canInstantiate()) and (aConnector.end->at(2).role.oclAsType(Property).canInstantiate())) then
+				if((aConnector.end->at(1).getCardinality()) = (aConnector.end->at(1).getLower()) and aConnector.end->at(1).getLower() > 0) then
+					((aConnector.end->at(2).getCardinality()) = (aConnector.end->at(2).getLower()) and aConnector.end->at(2).getLower() > 0)
 				else false
 				endif
 			else false
@@ -140,14 +268,5 @@ else false
 endif
 /]
 
-[template private generateArrayPatternInstantiation(aConnector : Connector)]
-/*
-TODO: instantiate array pattern
-*/
-[/template]
 
-[template private generateStarPatternInstantiation(aConnector : Connector)]
-/*
-TODO: instantiate array pattern
-*/
-[/template]
+[query private getDefiningEnd(aConnectorEnd : ConnectorEnd) : Property = (aConnectorEnd.owner.oclAsType(Connector).type.memberEnd->asOrderedSet()->select(type = aConnectorEnd.role.type))->first()/]
