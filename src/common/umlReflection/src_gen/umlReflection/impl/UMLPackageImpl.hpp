@@ -7942,7 +7942,7 @@ namespace UML
 			std::shared_ptr<uml::OpaqueExpression> uML_RedefinableTemplateSignature_isConsistentWith_pre_specification_OpaqueExpression = nullptr;
 			std::shared_ptr<uml::Parameter> uML_RedefinableTemplateSignature_isConsistentWith_result = nullptr;
 			std::shared_ptr<uml::Constraint> uML_RedefinableTemplateSignature_isConsistentWith_spec = nullptr;
-			std::shared_ptr<uml::OpaqueExpression> uML_RedefinableTemplateSignature_isConsistentWith_specspec = nullptr;
+			std::shared_ptr<uml::OpaqueExpression> uML_RedefinableTemplateSignature_isConsistentWith_spec_OpaqueExpression_spec = nullptr;
 			std::shared_ptr<uml::Constraint> uML_RedefinableTemplateSignature_redefines_parents = nullptr;
 			std::shared_ptr<uml::OpaqueExpression> uML_RedefinableTemplateSignature_redefines_parents_specification_OpaqueExpression = nullptr;
 			std::shared_ptr<uml::Class> uML_ReduceAction = nullptr;
