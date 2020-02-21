@@ -25,7 +25,7 @@
 [query public metaModelIncludes(anEPackage : EPackage) : Set(EPackage) = OrderedSet{anEPackage.eAllContents(EClass).eAllSuperTypes.getRootPackage(),anEPackage.eAllContents(EStructuralFeature).eType.getRootPackage(),anEPackage.eAllContents(EParameter).eType.getRootPackage()}->flatten() /]
 
 [template public generatePackageImplSource(anEPackage : EPackage) { packageName : String = anEPackage.name.toUpperFirst().concat('PackageImpl').toUpperFirst(); }]
-[file (anEPackage.name.concat('/impl/').concat(packageName).concat('.cpp'), false, 'UTF-8')]
+[file (anEPackage.generateNamespacePath().concat('/impl/').concat(packageName).concat('.cpp'), false, 'UTF-8')]
 #include "[anEPackage.name/]/impl/[packageName/].hpp"
 
 #include <cassert>
@@ -43,6 +43,9 @@
 [for (pack : EPackage | anEPackage.metaModelIncludes()->asOrderedSet()->sortedBy(name)) ? (not ( pack=anEPackage))]
 #include "[pack.name/]/[pack.name.concat('Package').toUpperFirst()/].hpp"
 [/for]
+[for (aSubPackage: EPackage| anEPackage.eSubpackages->selectByKind(EPackage)->sortedBy(name)) separator ('\n')]
+#include "[anEPackage.name/]/[aSubPackage.name.toUpperFirst()/]/impl/[aSubPackage.name.toUpperFirst()/]PackageImpl.hpp"[/for] 
+
 
 using namespace [anEPackage.name/];
 
@@ -72,13 +75,18 @@ bool [packageName/]::isInited = false;
 
 void [packageName/]::init(std::shared_ptr<ecore::EPackage> package)
 {
+    // Initialize SubPackages	
+	[anEPackage.eSubpackages->sortedBy(name).generateSubPackageInit()/]
+
     // Initialize created meta-data
 	createPackageContents(package);
 	setThisEPackagePtr(package);
     initializePackageContents();   
 }
 
-[for (aClass : EClass | anEPackage.eAllContents(EClass)->asOrderedSet()->sortedBy(name)) separator ('\n')]
+[anEPackage.eSubpackages->sortedBy(name).generateSubPackageGetterImpl(anEPackage)/]
+
+[for (aClass : EClass | anEPackage.eClassifiers->selectByKind(EClass)->asOrderedSet()->sortedBy(name)) separator ('\n')]
 // Begin Class [aClass.name.toUpperFirst()/]
 [aClass.generateModelElementGetterImpl(anEPackage)/]
 [aClass.eAttributes->sortedBy(name).generateModelElementGetterImpl(anEPackage)/]
@@ -86,12 +94,12 @@ void [packageName/]::init(std::shared_ptr<ecore::EPackage> package)
 [aClass.eOperations->sortedBy(name).generateModelElementGetterImpl(anEPackage)/]
 // End Class [aClass.name.toUpperFirst()/]
 [/for]
-[anEPackage.eAllContents(EDataType)->sortedBy(name).generateModelElementGetterImpl(anEPackage)/]
+[anEPackage.eClassifiers->selectByKind(EDataType)->sortedBy(name).generateModelElementGetterImpl(anEPackage)/]
 [/file]
 
 [comment] create additional file for create function to reduce comiling time
 [/comment]
-[file (anEPackage.name.concat('/impl/').concat(packageName).concat('_Creation.cpp'), false, 'UTF-8')]
+[file (anEPackage.generateNamespacePath().concat('/impl/').concat(packageName).concat('_Creation.cpp'), false, 'UTF-8')]
 #include "[anEPackage.name/]/impl/[packageName/].hpp"
 
 // metametamodel factory
@@ -122,14 +130,14 @@ void [packageName/]::createPackageContents(std::shared_ptr<ecore::EPackage> pack
 
 	std::shared_ptr<ecore::EcoreFactory> factory = ecore::EcoreFactory::eInstance();
 
-[for (aClass : EClass | anEPackage.eAllContents(EClass)->asOrderedSet()->sortedBy(name))]
+[for (aClass : EClass | anEPackage.eClassifiers->selectByKind(EClass)->asOrderedSet()->sortedBy(name))]
 	create[aClass.name.toUpperFirst()/]Content(package, factory);
 [/for]
 
 	createPackageEDataTypes(package, factory);
 }
 
-[for (aClass : EClass | anEPackage.eAllContents(EClass)->asOrderedSet()->sortedBy(name)) separator ('\n')]
+[for (aClass : EClass | anEPackage.eClassifiers->selectByKind(EClass)->asOrderedSet()->sortedBy(name)) separator ('\n')]
 void [packageName/]::create[aClass.name.toUpperFirst()/]Content(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
 {
 	[aClass.generateClassCreation()/]
@@ -141,13 +149,13 @@ void [packageName/]::create[aClass.name.toUpperFirst()/]Content(std::shared_ptr<
 
 void [packageName/]::createPackageEDataTypes(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
 {
-	[anEPackage.eAllContents(EDataType)->sortedBy(name).generateEDatatypeCreation()/]
+	[anEPackage.eClassifiers->selectByKind(EDataType)->sortedBy(name).generateEDatatypeCreation()/]
 }
 [/file]
 
 [comment] create additional file for initialize function to reduce comiling time
 [/comment]
-[file (anEPackage.name.concat('/impl/').concat(packageName).concat('_Initialization.cpp'), false, 'UTF-8')]
+[file (anEPackage.generateNamespacePath().concat('/impl/').concat(packageName).concat('_Initialization.cpp'), false, 'UTF-8')]
 #include "[anEPackage.name/]/impl/[packageName/].hpp"
 
 #include <cassert>
@@ -182,17 +190,17 @@ void [packageName/]::initializePackageContents()
 	setNsURI(eNS_URI);
 	
 	// Add supertypes to classes
-	[anEPackage.eAllContents(EClass)->sortedBy(name).initSuperTypes()/]
+	[anEPackage.eClassifiers->selectByKind(EClass)->sortedBy(name).initSuperTypes()/]
 
  	// Initialize classes and features; add operations and parameters
-[for (aClass : EClass | anEPackage.eAllContents(EClass)->asOrderedSet()->sortedBy(name))]
+[for (aClass : EClass | anEPackage.eClassifiers->selectByKind(EClass)->asOrderedSet()->sortedBy(name))]
 	initialize[aClass.name.toUpperFirst()/]Content();
 [/for]
 
 	initializePackageEDataTypes();
 }
 
-[for (aClass : EClass | anEPackage.eAllContents(EClass)->asOrderedSet()->sortedBy(name)) separator ('\n')]
+[for (aClass : EClass | anEPackage.eClassifiers->selectByKind(EClass)->asOrderedSet()->sortedBy(name)) separator ('\n')]
 void [packageName/]::initialize[aClass.name.toUpperFirst()/]Content()
 {
 	[aClass.generateClassInit()/]
@@ -204,7 +212,8 @@ void [packageName/]::initialize[aClass.name.toUpperFirst()/]Content()
 
 void [packageName/]::initializePackageEDataTypes()
 {
-	[anEPackage.eAllContents(EDataType)->sortedBy(name).generateEDatatypeInitialization()/]
+	[anEPackage.eClassifiers->selectByKind(EDataType)->sortedBy(name).generateEDatatypeInitialization()/]
 }
+
 [/file]
 [/template]

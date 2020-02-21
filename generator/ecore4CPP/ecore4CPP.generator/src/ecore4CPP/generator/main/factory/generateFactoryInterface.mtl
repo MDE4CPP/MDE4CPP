@@ -20,7 +20,7 @@
 [import ecore4CPP::generator::main::helper /]
  
 [template public generateFactoryInterface(anEPackage : EPackage) {packageName : String = anEPackage.name.toUpperFirst().concat('Factory');}]
-[file (anEPackage.name.concat('/').concat(packageName).concat('.hpp'), false, 'UTF-8')]
+[file (anEPackage.generateNamespacePath().concat('/').concat(packageName).concat('.hpp'), false, 'UTF-8')]
 [startGuard(anEPackage,'Factory')/]
 
 #include <map>
@@ -50,7 +50,7 @@ namespace [anEPackage.name/]
 			virtual std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> create(const int classID,  std::shared_ptr<ecore::EObject> container = nullptr, const int referenceID = -1)[if (not generateObjectMonitoring())] const[/if] = 0;
 			virtual std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> create(std::shared_ptr<[needNamespace(anEPackage, 'EClass')/]> _class, std::shared_ptr<EObject> _container=nullptr, const int referenceID = -1)[if (not generateObjectMonitoring())] const[/if] = 0;
 
-			[anEPackage.eAllContents(EClass)->sortedBy(name).generateClassCreate(false)/]
+			[anEPackage.eClassifiers->selectByKind(EClass)->sortedBy(name).generateClassCreate(false)/]
 			//Package
 			virtual std::shared_ptr<[anEPackage.name.toUpperFirst().concat('Package')/]> get[anEPackage.name.toUpperFirst().concat('Package')/]() const = 0;
 [if (generateObjectMonitoring())]

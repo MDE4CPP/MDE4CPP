@@ -24,7 +24,7 @@
 [import ecore4CPP::generator::main::package::generatePackageHelper /]
 
 [template public generatePackageInterface(anEPackage : EPackage) { packageName : String = anEPackage.name.toUpperFirst().concat('Package'); }]
-[file (anEPackage.name.concat('/').concat(packageName).concat('.hpp'), false, 'UTF-8')]
+[file (anEPackage.generateNamespacePath().concat('/').concat(packageName).concat('.hpp'), false, 'UTF-8')]
 [startGuard(anEPackage,'Package')/]
 
 #include "ecore/EPackage.hpp"
@@ -59,7 +59,7 @@ namespace [anEPackage.name/]
 			static const std::string eNS_URI;
 			static const std::string eNS_PREFIX;
 
-[for (aClass : EClass | anEPackage.eAllContents(EClass)->asOrderedSet()->sortedBy(name)) separator ('\n')]
+[for (aClass : EClass | anEPackage.eClassifiers->selectByKind(EClass)->asOrderedSet()->sortedBy(name)) separator ('\n')]
 			// Begin Class [aClass.name.toUpperFirst()/]
 			//Class and Feature IDs 
 			[aClass.generateStaticClassID()/]
@@ -74,8 +74,10 @@ namespace [anEPackage.name/]
 			// End Class [aClass.name.toUpperFirst()/]
 
 [/for]
-			[anEPackage.eAllContents(EDataType)->sortedBy(name).generateStaticDatatypeID()/]
-			[anEPackage.eAllContents(EDataType)->sortedBy(name).generateModelElementGetter(anEPackage, false)/]
+			[anEPackage.eClassifiers->selectByKind(EDataType)->sortedBy(name).generateStaticDatatypeID()/]
+			[anEPackage.eClassifiers->selectByKind(EDataType)->sortedBy(name).generateModelElementGetter(anEPackage, false)/]
+
+			[anEPackage.eSubpackages->sortedBy(name).generateSubPackageGetter(false)/]
 
 			//Singleton Instance and Getter
 			[generateSingletonDecl(packageName)/]

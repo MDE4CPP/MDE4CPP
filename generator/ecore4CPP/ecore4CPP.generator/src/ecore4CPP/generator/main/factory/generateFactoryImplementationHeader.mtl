@@ -18,7 +18,7 @@
 [import ecore4CPP::generator::main::helper /]
 
 [template public generateFactoryImplHeader(anEPackage : EPackage)]
-[file (anEPackage.name.concat('/impl/').concat(anEPackage.name.toUpperFirst()).concat('FactoryImpl.hpp'), false, 'UTF-8')]
+[file (anEPackage.generateNamespacePath().concat('/impl/').concat(anEPackage.name.toUpperFirst()).concat('FactoryImpl.hpp'), false, 'UTF-8')]
 [startGuard(anEPackage,'FactoryImpl')/]
 
 #include "ecore/impl/EFactoryImpl.hpp"
@@ -56,7 +56,7 @@ namespace [anEPackage.name/]
 			virtual std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> create(std::shared_ptr<[needNamespace(anEPackage, 'EClass')/]> _class, std::shared_ptr<EObject> _container=nullptr, const int referenceID = -1)[if (not generateObjectMonitoring())] const[/if];
 
 			//Creator functions
-			[anEPackage.eAllContents(EClass)->sortedBy(name).generateClassCreate(true)/]
+			 [anEPackage.eClassifiers->selectByKind(EClass)->sortedBy(name).generateClassCreate(true)/]
 
 			//Package
 			virtual std::shared_ptr<[anEPackage.name.toUpperFirst()/]Package> get[anEPackage.name.toUpperFirst()/]Package() const;

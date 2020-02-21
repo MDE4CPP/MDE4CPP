@@ -18,7 +18,7 @@
 
 [query public metaModelLibraries(anEPackage : EPackage) : Set(EPackage) = OrderedSet{anEPackage.eAllContents().eClass().getRootPackage(),anEPackage.eAllContents(EClass).eAllSuperTypes.getRootPackage(),anEPackage.eAllContents(EStructuralFeature).eType.getRootPackage(),anEPackage.eAllContents(EParameter).eType.getRootPackage()}->flatten()->sortedBy(name) /]
 
-[template public generateBuildFile(aPackage : EPackage) { packageName : String = aPackage.name; }]
+[template public generateBuildFile(aPackage : EPackage) { packageName : String = aPackage.generateNamespacePath(); }]
 [comment	generate CMakeLists.txt for model libary/]
 [file (packageName.concat('/').concat('CMakeLists.txt'), false, 'UTF-8')]
 #############################################################################

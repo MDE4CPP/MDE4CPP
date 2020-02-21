@@ -23,7 +23,7 @@
 [import ecore4CPP::generator::main::package::generatePackageHelper /]
 
 [template public generatePackageImplHeader(anEPackage : EPackage)]
-[file (anEPackage.name.concat('/impl/').concat(anEPackage.name.toUpperFirst()).concat('PackageImpl.hpp'), false, 'UTF-8')]
+[file (anEPackage.generateNamespacePath().concat('/impl/').concat(anEPackage.name.toUpperFirst()).concat('PackageImpl.hpp'), false, 'UTF-8')]
 [startGuard(anEPackage,'PackageImpl')/]
 
 [comment  Generate Includes for the Factory/]
@@ -31,13 +31,16 @@
 #include "ecore/impl/EPackageImpl.hpp"
 
 [if (not(anEPackage.name = 'ecore') )]
-#include "[anEPackage.name/]/[anEPackage.name.toUpperFirst().concat('Package')/].hpp"
+#include "[anEPackage.name/]/[anEPackage.name.toUpperFirst().concat('Package')/].hpp" 
 [/if]
 
-namespace [anEPackage.name/] 
-{[for (elements : EClassifier| OrderedSet{anEPackage.eClassifiers}->flatten()->selectByKind(EClass)->sortedBy(name)) separator ('\n')]
-	class [elements.name/];[/for]
 
+namespace [anEPackage.name/] 
+{
+[for (elements : EClass| anEPackage.eClassifiers->selectByKind(EClass)->sortedBy(name)) separator ('\n')]
+	class [elements.name/];[/for]
+[for (aSubPackage : EPackage| anEPackage.eSubpackages->selectByKind(EPackage)->sortedBy(name)) separator ('\n')]
+	class [aSubPackage.name/]::[aSubPackage.name/]Package;[/for]
 }
 
 namespace ecore
@@ -60,7 +63,7 @@ namespace [anEPackage.name/]
 		public:
 			virtual ~[anEPackage.name.toUpperFirst().concat('PackageImpl')/]();
 
-[for (aClass : EClass | anEPackage.eAllContents(EClass)->asOrderedSet()->sortedBy(name)) separator ('\n')]
+[for (aClass : EClass | anEPackage.eClassifiers->selectByKind(EClass)->asOrderedSet()->sortedBy(name)) separator ('\n')]
 			// Begin Class [aClass.name.toUpperFirst()/]
 			//Class and Feature Getter
 			[aClass.generateModelElementGetter(anEPackage, true)/]
@@ -70,14 +73,18 @@ namespace [anEPackage.name/]
 			// End Class [aClass.name.toUpperFirst()/]
 [/for]
 
-			[anEPackage.eAllContents(EDataType).generateModelElementGetter(anEPackage, true)/]
+			[anEPackage.eClassifiers->selectByKind(EDataType).generateModelElementGetter(anEPackage, true)/]
+			// SubPackages Getters
+			[anEPackage.eSubpackages->sortedBy(name).generateSubPackageGetter(true)/]
 
 		private:
-			[anEPackage.eAllContents(EClass)->sortedBy(name).generatePrivatePackageMember(anEPackage)/]
-			[anEPackage.eAllContents(EDataType)->sortedBy(name).generatePrivatePackageMember(anEPackage)/]
-			[anEPackage.eAllContents(EClass).eAttributes->sortedBy(name).generatePrivatePackageMember(anEPackage)/]
-			[anEPackage.eAllContents(EClass).eReferences->sortedBy(name).generatePrivatePackageMember(anEPackage)/]
-			[anEPackage.eAllContents(EClass).eOperations->sortedBy(name).generatePrivatePackageMember(anEPackage)/]
+			[anEPackage.eClassifiers->selectByKind(EClass)->sortedBy(name).generatePrivatePackageMember(anEPackage)/]
+			[anEPackage.eClassifiers->selectByKind(EDataType)->sortedBy(name).generatePrivatePackageMember(anEPackage)/]
+			[anEPackage.eClassifiers->selectByKind(EClass).eAttributes->sortedBy(name).generatePrivatePackageMember(anEPackage)/]
+			[anEPackage.eClassifiers->selectByKind(EClass).eReferences->sortedBy(name).generatePrivatePackageMember(anEPackage)/]
+			[anEPackage.eClassifiers->selectByKind(EClass).eOperations->sortedBy(name).generatePrivatePackageMember(anEPackage)/]
+			// Reference to SubPackages			
+			[anEPackage.eSubpackages->sortedBy(name).generateSubPackageMember()/]
 
 			friend class [anEPackage.name.concat('Package').toUpperFirst()/];
 
@@ -93,12 +100,12 @@ namespace [anEPackage.name/]
 			void initializePackageContents();
 
 		private:
-[for (aClass : EClass | anEPackage.eAllContents(EClass)->asOrderedSet()->sortedBy(name))]
+[for (aClass : EClass | anEPackage.eClassifiers->selectByKind(EClass)->asOrderedSet()->sortedBy(name))]
 			void create[aClass.name.toUpperFirst()/]Content(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
 [/for]
 			void createPackageEDataTypes(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
 
-[for (aClass : EClass | anEPackage.eAllContents(EClass)->asOrderedSet()->sortedBy(name))]
+[for (aClass : EClass | anEPackage.eClassifiers->selectByKind(EClass)->asOrderedSet()->sortedBy(name))]
 			void initialize[aClass.name.toUpperFirst()/]Content();
 [/for]
 			void initializePackageEDataTypes();

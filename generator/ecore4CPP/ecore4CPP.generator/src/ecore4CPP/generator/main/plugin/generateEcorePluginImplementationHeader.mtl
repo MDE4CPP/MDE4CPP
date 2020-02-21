@@ -17,7 +17,7 @@
 [import ecore4CPP::generator::main::helper /]
 
 [template public generateEcorePluginImplHeader(aPackage : EPackage)]
-[file (aPackage.name.concat('/impl/').concat(aPackage.name.toUpperFirst()).concat('PluginImpl.hpp'), false, 'UTF-8')]
+[file (aPackage.generateNamespacePath().concat('/impl/').concat(aPackage.name.toUpperFirst()).concat('PluginImpl.hpp'), false, 'UTF-8')]
 [startGuard(aPackage,'PluginImpl')/]
 
 #include "[aPackage.name/]/[aPackage.name.toUpperFirst()/]Plugin.hpp"
