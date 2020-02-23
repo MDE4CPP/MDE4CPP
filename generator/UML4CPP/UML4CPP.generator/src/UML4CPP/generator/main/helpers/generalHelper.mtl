@@ -41,6 +41,7 @@
 */]
 [query public ignoreNamespace(anElement : Element) : Boolean = anElement.getNearestPackage().valueKey(sourceNameCodeGen(), keyIgnoreNamespace()) = '1' /] [** check, if namespace should be igored./]
 [query public isSingleton(anElement : Element) : Boolean = anElement.valueKey(sourceNameCodeGen(), keySingleton()) = '1' /]	[** check, if a singleton construct should be generated /]
+[query public isConst(anElement : Element) : Boolean = anElement.valueKey(sourceNameCodeGen(), keyConst()) = '1' /]	[** check, if an operation with const construct should be generated /]
 
 [**
  * queries to check values of prepareApplication annotation keys

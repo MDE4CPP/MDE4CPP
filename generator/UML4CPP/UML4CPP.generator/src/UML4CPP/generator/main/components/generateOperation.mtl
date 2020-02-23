@@ -30,7 +30,7 @@
  * generate operation declaration
  */]
 [template public generateOperationDecl(aOperation : Operation, impl: Boolean)]
-virtual [aOperation.generateCppType()/] [aOperation.name/]([for (sParameter : Parameter | aOperation.ownedParameter->select(p :Parameter | not (p.direction = ParameterDirectionKind::return))) separator (', ')][sParameter.generateCppType(true)/] [sParameter.name/][if (sParameter.default->notEmpty())] = [sParameter.genDefault()/][/if][/for]) [abstractSuffix(impl)/];
+virtual [aOperation.generateCppType()/] [aOperation.name/]([for (sParameter : Parameter | aOperation.ownedParameter->select(p :Parameter | not (p.direction = ParameterDirectionKind::return))) separator (', ')][sParameter.generateCppType(true)/] [sParameter.name/][if (sParameter.default->notEmpty())] = [sParameter.genDefault()/][/if][/for])[if (aOperation.isConst())] const[/if] [abstractSuffix(impl)/];
 
 [/template]
 
@@ -44,7 +44,7 @@ virtual [aOperation.generateCppType()/] [aOperation.name/]([for (sParameter : Pa
 */]
 [template public generateOperationImplementation(aOperation : Operation)]
 [aOperation.generateCppType()/] [aOperation.class.name.toUpperFirst()/]Impl::[aOperation.name/]([for (sParameter : Parameter | aOperation.ownedParameter->select(p :Parameter | not (p.direction = ParameterDirectionKind::return))) separator (',')]
-[sParameter.generateCppType(true)/] [sParameter.name/][/for])
+[sParameter.generateCppType(true)/] [sParameter.name/][/for])[if (aOperation.isConst())] const[/if] 
 {
 [if (aOperation.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->notEmpty())]
 [let parameter : Parameter = aOperation.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->first()]
