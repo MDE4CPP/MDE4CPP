@@ -62,11 +62,11 @@ namespace fUML::Semantics::SimpleClassifiers
 			//*********************************
 			/*!
 			 */ 
-			virtual float getValue() const ;
+			virtual double getValue() const ;
 			
 			/*!
 			 */ 
-			virtual void setValue (float _value); 
+			virtual void setValue (double _value); 
 			
 			
 			

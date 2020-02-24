@@ -11,12 +11,15 @@
 
 #include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
+#include "StandardProfile/StandardProfileFactory.hpp"
 #include "StandardProfile/impl/StandardProfilePackageImpl.hpp"
 #include "uml/Stereotype.hpp"
 #include "uml/Component.hpp"
 
 
 
+
+//Included from from Ports typed by interface
 
 using namespace StandardProfile;
 
@@ -37,8 +40,10 @@ ServiceImpl::ServiceImpl()
 
 	// init properties without default
 	
-
 	
+	// init properties with default
+
+	// init connectors
 }
 
 

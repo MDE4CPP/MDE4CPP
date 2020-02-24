@@ -24,7 +24,7 @@ task buildUMLProfiles() {
 	group 'Source'
 	description 'generate and compile uml profile models'
 	
-	dependsOn 'common:standardProfile:src_gen:buildStandardProfile'
+	dependsOn 'common:standardProfile:buildStandardProfile'
 }
 
 // Compile all without generating the models
@@ -80,7 +80,7 @@ task generateUMLProfiles() {
 	group 'Source'
 	description 'generate all uml profile models'
 	
-	dependsOn 'common:standardProfile:src_gen:generateStandardProfile'
+	dependsOn 'common:standardProfile:model:generateStandardProfile'
 }
 
 task deliverBasicInterfaces() {

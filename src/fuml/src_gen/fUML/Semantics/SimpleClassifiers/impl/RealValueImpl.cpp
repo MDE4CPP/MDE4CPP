@@ -116,12 +116,12 @@ std::shared_ptr<ecore::EClass> RealValueImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
-void RealValueImpl::setValue(float _value)
+void RealValueImpl::setValue(double _value)
 {
 	m_value = _value;
 } 
 
-float RealValueImpl::getValue() const 
+double RealValueImpl::getValue() const 
 {
 	return m_value;
 }
@@ -218,7 +218,7 @@ bool RealValueImpl::eSet(int featureID, Any newValue)
 		case fUML::FUMLPackage::REALVALUE_ATTRIBUTE_VALUE:
 		{
 			// BOOST CAST
-			float _value = newValue->get<float>();
+			double _value = newValue->get<double>();
 			setValue(_value); //951
 			return true;
 		}
@@ -256,8 +256,8 @@ void RealValueImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoa
 		iter = attr_list.find("value");
 		if ( iter != attr_list.end() )
 		{
-			// this attribute is a 'float'
-			float value;
+			// this attribute is a 'double'
+			double value;
 			std::istringstream ( iter->second ) >> value;
 			this->setValue(value);
 		}

@@ -952,6 +952,7 @@ namespace fUML
 			
 			
 			
+			virtual std::shared_ptr<ecore::EOperation> getJoinNodeActivation_Operation_fire_Token() const ;
 			virtual std::shared_ptr<ecore::EOperation> getJoinNodeActivation_Operation_isReady() const ;
 			
 			// End Class JoinNodeActivation
@@ -2002,6 +2003,7 @@ namespace fUML
 			std::shared_ptr<ecore::EOperation> m_decisionNodeActivation_Operation_fire_Token = nullptr;
 			std::shared_ptr<ecore::EOperation> m_forkNodeActivation_Operation_fire_Token = nullptr;
 			std::shared_ptr<ecore::EOperation> m_initialNodeActivation_Operation_fire_Token = nullptr;
+			std::shared_ptr<ecore::EOperation> m_joinNodeActivation_Operation_fire_Token = nullptr;
 			std::shared_ptr<ecore::EOperation> m_expansionNodeActivation_Operation_fire_Token = nullptr;
 			std::shared_ptr<ecore::EOperation> m_activityNodeActivation_Operation_getActivityExecution = nullptr;
 			std::shared_ptr<ecore::EOperation> m_expansionActivationGroup_Operation_getActivityExecution = nullptr;

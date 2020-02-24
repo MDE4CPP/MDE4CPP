@@ -5963,6 +5963,23 @@ void FUMLPackageImpl::initializeJoinNodeActivationContent()
 	
 	
 	
+	m_joinNodeActivation_Operation_fire_Token->setEType(nullptr);
+	m_joinNodeActivation_Operation_fire_Token->setName("fire");
+	m_joinNodeActivation_Operation_fire_Token->setLowerBound(1);
+	m_joinNodeActivation_Operation_fire_Token->setUpperBound(1);
+	m_joinNodeActivation_Operation_fire_Token->setUnique(true);
+	m_joinNodeActivation_Operation_fire_Token->setOrdered(false);
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_joinNodeActivation_Operation_fire_Token);
+		parameter->setName("incomingTokens");
+		parameter->setEType(nullptr);
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
 	m_joinNodeActivation_Operation_isReady->setEType(ecore::EcorePackage::eInstance()->getEBoolean_Class());
 	m_joinNodeActivation_Operation_isReady->setName("isReady");
 	m_joinNodeActivation_Operation_isReady->setLowerBound(1);
@@ -7646,7 +7663,7 @@ void FUMLPackageImpl::initializeRealValueContent()
 	
 	m_realValue_Attribute_value = getRealValue_Attribute_value();
 	m_realValue_Attribute_value->setName("value");
-	m_realValue_Attribute_value->setEType(ecore::EcorePackage::eInstance()->getEFloat_Class());
+	m_realValue_Attribute_value->setEType(ecore::EcorePackage::eInstance()->getEDouble_Class());
 	m_realValue_Attribute_value->setLowerBound(1);
 	m_realValue_Attribute_value->setUpperBound(1);
 	m_realValue_Attribute_value->setTransient(false);
