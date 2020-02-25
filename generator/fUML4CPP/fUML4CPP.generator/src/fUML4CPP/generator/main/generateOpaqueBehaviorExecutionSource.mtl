@@ -135,8 +135,8 @@ void [behaviorName/]::setThisExecutionPtr(std::weak_ptr<[behaviorName/]> thisExe
 [/for]
 [if (anOpaqueBehavior.hasGenerateContextVariable() or requiresContext)]
 
-#include "[anOpaqueBehavior.owner.oclAsType(Classifier).getNearestPackage().myNamespaceName()/]/[anOpaqueBehavior.owner.oclAsType(Classifier).name.toUpperFirst()/].hpp"
-#include "[aPackage.getPackageName()/]Exec/[anOpaqueBehavior.owner.oclAsType(Classifier).name.toUpperFirst()/]Object.hpp"
+#include "[anOpaqueBehavior.owner.oclAsType(Classifier).getNearestPackage().myNamespaceName()/]/[anOpaqueBehavior._context.oclAsType(Classifier).name.toUpperFirst()/].hpp"
+#include "[aPackage.getPackageName()/]Exec/[anOpaqueBehavior._context.oclAsType(Classifier).name.toUpperFirst()/]Object.hpp"
 [/if]
 [/template]
 
@@ -276,16 +276,24 @@ if ([aPin.name/]ValueList->size() > 0)
 {
 [/if]
 [if (aPin.upper = 1)]
-[if (not aPin.type.supportedTypes())]
-	std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> [aPin.name/]Value = std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Reference>([aPin.name/]ValueList->front());
-	[aPin.name/] = std::dynamic_pointer_cast<[aPin.type.name/]Object>([aPin.name/]Value->getReferent())->getUmlValue();
-	if([aPin.name/] == nullptr)
-	{
-		DEBUG_MESSAGE(std::cout << "received instance of type [aPin.type.generateCppType(true)/] is null" << std::endl;);
-	}
+[if (aPin.type.oclIsKindOf(Enumeration))]
+std::shared_ptr<uml::EnumerationLiteral> literal[aPin.name.toUpperFirst()/] = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::EnumerationValue>([aPin.name/]ValueList->front())->getLiteral();
+[for (literal : EnumerationLiteral | aPin.type.oclAsType(Enumeration).ownedLiteral)]
+if (literal[aPin.name.toUpperFirst()/] == [literal.generatePackageGetterCall()/])
+{
+	[aPin.name/] = [literal.enumeration.namespace.name/]::[literal.enumeration.name/]::[literal.name.toUpperCase()/];
+}
+[/for]
+[elseif (not aPin.type.supportedTypes())]
+std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> [aPin.name/]Value = std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Reference>([aPin.name/]ValueList->front());
+[aPin.name/] = std::dynamic_pointer_cast<[aPin.type.name/]Object>([aPin.name/]Value->getReferent())->getUmlValue();
+if([aPin.name/] == nullptr)
+{
+	DEBUG_MESSAGE(std::cout << "received instance of type [aPin.type.generateCppType(true)/] is null" << std::endl;);
+}
 [else]
-	std::shared_ptr<fUML::Semantics::SimpleClassifiers::[aPin.type.name.toUpperFirst()/]Value> [aPin.name/]Value = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::[aPin.type.name.toUpperFirst()/]Value>([aPin.name/]ValueList->front());
-	[aPin.name/] = [aPin.name/]Value->getValue();
+std::shared_ptr<fUML::Semantics::SimpleClassifiers::[aPin.type.name.toUpperFirst()/]Value> [aPin.name/]Value = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::[aPin.type.name.toUpperFirst()/]Value>([aPin.name/]ValueList->front());
+[aPin.name/] = [aPin.name/]Value->getValue();
 [/if]
 [else]
 Bag<fUML::Semantics::Values::Value>::iterator [aPin.name.toLowerFirst()/]Iter = [aPin.name.toLowerFirst()/]ValueList->begin();
@@ -329,17 +337,25 @@ if ([par.name/]ValueList->size() > 0)
 {
 [/if]
 [if (par.upper = 1)]
-	[if (not par.type.supportedTypes())]
-	std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> [par.name/]Value = std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Reference>([par.name/]ValueList->front());
-	[par.name/] = std::dynamic_pointer_cast<[par.type.name/]Object>([par.name/]Value->getReferent())->getUmlValue();
-	if([par.name/] == nullptr)
-	{
-		DEBUG_MESSAGE(std::cout << "received instance of type [par.type.generateCppType(true)/] is null" << std::endl;);
-	}
-	[else]
-	std::shared_ptr<fUML::Semantics::SimpleClassifiers::[par.type.name.toUpperFirst()/]Value> [par.name/]Value = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::[par.type.name.toUpperFirst()/]Value>([par.name/]ValueList->front());
-	[par.name/] = [par.name/]Value->getValue();
-	[/if]
+[if (par.type.oclIsKindOf(Enumeration))]
+std::shared_ptr<uml::EnumerationLiteral> literal[par.name.toUpperFirst()/] = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::EnumerationValue>([par.name/]ValueList->front())->getLiteral();
+[for (literal : EnumerationLiteral | par.type.oclAsType(Enumeration).ownedLiteral)]
+if (literal[par.name.toUpperFirst()/] == [literal.generatePackageGetterCall()/])
+{
+	[par.name/] = [literal.enumeration.namespace.name/]::[literal.enumeration.name/]::[literal.name.toUpperCase()/];
+}
+[/for]
+[elseif (not par.type.supportedTypes())]
+std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> [par.name/]Value = std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Reference>([par.name/]ValueList->front());
+[par.name/] = std::dynamic_pointer_cast<[par.type.name/]Object>([par.name/]Value->getReferent())->getUmlValue();
+if([par.name/] == nullptr)
+{
+	DEBUG_MESSAGE(std::cout << "received instance of type [par.type.generateCppType(true)/] is null" << std::endl;);
+}
+[else]
+std::shared_ptr<fUML::Semantics::SimpleClassifiers::[par.type.name.toUpperFirst()/]Value> [par.name/]Value = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::[par.type.name.toUpperFirst()/]Value>([par.name/]ValueList->front());
+[par.name/] = [par.name/]Value->getValue();
+[/if]
 [else]
 Bag<fUML::Semantics::Values::Value>::iterator [par.name.toLowerFirst()/]ValueIter = [par.name.toLowerFirst()/]ValueList->begin();
 Bag<fUML::Semantics::Values::Value>::iterator [par.name.toLowerFirst()/]ValueEnd = [par.name.toLowerFirst()/]ValueList->end();

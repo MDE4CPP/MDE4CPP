@@ -1,0 +1,16 @@
+# -----------------------------------------------------------------------------
+# Handle line endings
+# @see https://help.github.com/en/github/using-git/configuring-git-to-handle-line-endings
+# -----------------------------------------------------------------------------
+
+* text=auto
+
+# Explicit normalized and converted file types to native line endings on checkout
+*.bat text
+*.c text
+*.cpp text
+*.h text
+*.hpp text
+
+# Explicit format of line endings on checkout
+*.sln text eol=crlf

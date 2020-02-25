@@ -22,6 +22,7 @@
 
 [query public supportedTypes(type : Type) : Boolean = (type.name = 'Integer') or (type.name = 'Boolean') /]
 [query public getStructuralFeaturesFromRSTA(aPackage : Package, aClassifier : Classifier) : OrderedSet(StructuralFeature) = aPackage.allOwnedElements()->filter(ReadStructuralFeatureAction)->select(object.type=aClassifier).structuralFeature->asOrderedSet()->sortedBy(name)/]
+[query public getASTVA(aPackage : Package, aClassifier : Classifier) : OrderedSet(AddStructuralFeatureValueAction) = aPackage.allOwnedElements()->filter(AddStructuralFeatureValueAction)->select(object.type=aClassifier)->asOrderedSet()->sortedBy(name)/]
 [query public getStructuralFeaturesFromASTVA(aPackage : Package, aClassifier : Classifier) : OrderedSet(StructuralFeature) = aPackage.allOwnedElements()->filter(AddStructuralFeatureValueAction)->select(object.type=aClassifier).structuralFeature->asOrderedSet()->sortedBy(name)/]
 [query public getStructuralFeaturesFromRSTVA(aPackage : Package, aClassifier : Classifier) : OrderedSet(StructuralFeature) = aPackage.allOwnedElements()->filter(RemoveStructuralFeatureValueAction)->select(object.type=aClassifier).structuralFeature->asOrderedSet()->sortedBy(name)/]
 
@@ -44,12 +45,7 @@
 #include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
 #include "fUML/Semantics/Values/Value.hpp"
 [for (property : Property | attributes->sortedBy(qualifiedName))]
-[if (property.type.oclIsKindOf(PrimitiveType))]
-#include "fUML/Semantics/SimpleClassifiers/[property.type.name.toUpperFirst()/]Value.hpp"
-[else]
-#include "[aPackage.getPackageName()/]Exec/[property.type.oclAsType(Classifier).objectClassName()/].hpp"
-#include "[if (aClassifier._package.name = 'UML')]uml[else][aClassifier._package.name/][/if]/[aClassifier.name/].hpp"
-[/if]
+[property.type.generateTypeInclude(aPackage)/]
 [/for]
 #include "uml/Property.hpp"
 
@@ -58,6 +54,11 @@
 [/for]
 [/if]
 [/let]
+[for (action : AddStructuralFeatureValueAction | aPackage.getASTVA(aClassifier)->select(not (structuralFeature.type = value.type)))]
+#include "[aPackage.getPackageName()/]Exec/[action.value.type.oclAsType(Classifier).objectClassName()/].hpp"
+#include "[action.value.type._package.myNamespaceName()/]/[action.value.type.name/].hpp"
+[/for]
+
 
 using namespace [aPackage.name/];
 
@@ -191,7 +192,17 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> [className/]::getValues(std
 [for (aProperty : Property | aPackage.getStructuralFeaturesFromRSTA(aClassifier).oclAsType(Property))]
 	if (property == [aProperty.getModelPackage()/][aProperty.generatePackageGetterCall(aProperty)/])
 	{
-[if (aProperty.isPrimitiveTypedProperty())]
+[if (aProperty.type.oclIsKindOf(Enumeration))]
+		[aProperty.type.generateCppType(false)/] [aProperty.name/] = m_umlValue->[aProperty.getterName()/]();
+		std::shared_ptr<fUML::Semantics::SimpleClassifiers::EnumerationValue> value = fUML::FUMLFactory::eInstance()->createEnumerationValue();
+[for (literal : EnumerationLiteral | aProperty.type.oclAsType(Enumeration).ownedLiteral)]
+		if ([aProperty.name/] == [literal.enumeration.namespace.name/]::[literal.enumeration.name/]::[literal.name.toUpperCase()/])
+		{
+			value->setLiteral([literal.generatePackageGetterCall()/]);
+		}
+[/for]
+		values->add(value);
+[elseif (aProperty.isPrimitiveTypedProperty())]
 [if (aProperty.upper = 1)]
 		std::shared_ptr<[aProperty.type.getValueClass()/]> value = fUML::FUMLFactory::eInstance()->create[aProperty.type.name.toUpperFirst()/]Value();
 		value->setValue(m_umlValue->[aProperty.getterName()/]());
@@ -213,7 +224,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> [className/]::getValues(std
 		std::shared_ptr<[aProperty.type.getValueClass()/]> value(new [aProperty.type.oclAsType(Classifier).objectClassName()/]());
 		value->setThis[aProperty.type.oclAsType(Classifier).objectClassName()/]Ptr(value);
 		value->setLocus(this->getLocus());
-		value->setUmlValue(m_umlValue->[aProperty.getterName()/]());
+		value->setUmlValue(m_umlValue->[aProperty.getterName()/]()[if(aProperty.isBackReference())].lock()[/if]);
 		std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> reference= fUML::FUMLFactory::eInstance()->createReference();
 		reference->setReferent(value);
 		values->add(reference);
@@ -261,30 +272,32 @@ void [className/]::setFeatureValue(std::shared_ptr<uml::StructuralFeature> featu
 		std::cout << __PRETTY_FUNCTION__ << ": no input value given" << std::endl;
 		return;
 	}
-[for (aProperty : Property | aPackage.getStructuralFeaturesFromASTVA(aClassifier).oclAsType(Property))]
-	if (property == [aProperty.getModelPackage()/][aProperty.generatePackageGetterCall(aProperty)/])
+[for (action : AddStructuralFeatureValueAction | aPackage.getASTVA(aClassifier))]
+[let aProperty : Property = action.structuralFeature.oclAsType(Property)]
+	if (property == [action.structuralFeature.getModelPackage()/][aProperty.generatePackageGetterCall(aProperty)/])
 	{
 [if (aProperty.upper = 1)]
 		std::shared_ptr<Value> inputValue = values->at(0);
-		[aProperty.generateSetFeatureValue()/]
+		[aProperty.generateSetFeatureValue(action.value)/]
 [else]
 		Bag<fUML::Semantics::Values::Value>::iterator iter = values->begin();
 		Bag<fUML::Semantics::Values::Value>::iterator end = values->end();
 		while (iter != end)
 		{
 			std::shared_ptr<Value> inputValue = *iter;
-			[aProperty.generateSetFeatureValue()/]
+			[aProperty.generateSetFeatureValue(action.value)/]
 			iter++;
 		}
 [/if]
 	}
+[/let]
 [/for]
 }
 [/if]
 [/file]
 [/template]
 
-[template private generateSetFeatureValue(aProperty : Property)]
+[template private generateSetFeatureValue(aProperty : Property, valuePin : InputPin)]
 [if (aProperty.isPrimitiveTypedProperty())]
 std::shared_ptr<[aProperty.type.getValueClass()/]> valueObject = std::dynamic_pointer_cast<[aProperty.type.getValueClass()/]>(inputValue);
 if (valueObject != nullptr)
@@ -298,7 +311,7 @@ if (valueObject != nullptr)
 }
 [else]
 std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> reference = std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Reference>(inputValue);
-std::shared_ptr<[aProperty.type.getValueClass()/]> value = std::dynamic_pointer_cast<[aProperty.type.getValueClass()/]>(reference->getReferent());
+std::shared_ptr<[valuePin.type.getValueClass()/]> value = std::dynamic_pointer_cast<[valuePin.type.getValueClass()/]>(reference->getReferent());
 if (value != nullptr)
 {
 [if (aProperty.upper = 1)]
