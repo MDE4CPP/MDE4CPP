@@ -180,7 +180,39 @@ end2Part->set[end2.getDefiningEnd().name.toUpperFirst()/](end1Port);
 */]
 [template private initArrayPattern_PWP_PWP(aConnector : Connector){end1 : ConnectorEnd = aConnector.end->at(1); end2 : ConnectorEnd = aConnector.end->at(2); definingAssociation : Association = aConnector.type;}]
 [if(definingAssociation.memberEnd->at(1).getUpper() <> 1)] [comment *-multiplicity/]
+unsigned int end1PartIndex = 0, end2PartIndex = 0, end1PortIndex = 0, end2PortIndex = 0;
+while((end1PartIndex < [end1.partWithPort.getLower()/]) &&(end2PartIndex < [end2.partWithPort.getLower()/]))
+{
+	std::shared_ptr<[end1.partWithPort.type.transformType()/]> end1Part = this->get[end1.partWithPort.name.toUpperFirst()/]()->at(end1PartIndex);
+	std::shared_ptr<[end2.partWithPort.type.transformType()/]> end2Part = this->get[end2.partWithPort.name.toUpperFirst()/]()->at(end2PartIndex);
+
+	while((end1PortIndex < [end1.role.oclAsType(MultiplicityElement).getLower()/]) && (end2PortIndex < [end2.role.oclAsType(MultiplicityElement).getLower()/]))
+	{
+		std::shared_ptr<[end1.role.type.transformType()/]> end1Port = end1Part->get[end1.role.name.toUpperFirst()/]()->at(end1PortIndex);
+		std::shared_ptr<[end2.role.type.transformType()/]> end2Port = end2Part->get[end2.role.name.toUpperFirst()/]()->at(end2PortIndex);
+
+		end1Port->get[end1.getDefiningEnd().name.toUpperFirst()/]()->add(end2Port);
+		end2Port->get[end2.getDefiningEnd().name.toUpperFirst()/]()->add(end1Port);
+
+		end1PortIndex++;
+		end2PortIndex++;
+	}
+	if(end1PortIndex >= [end1.role.oclAsType(MultiplicityElement).getLower()/])
+	{
+		end1PortIndex = 0;
+		end1PartIndex++;
+	}
+	if(end2PortIndex >= [end2.role.oclAsType(MultiplicityElement).getLower()/])
+	{
+		end2PortIndex = 0;
+		end2PartIndex++;
+	}
+}
 [else] [comment 1-multiplicity/]
+std::shared_ptr<[end1.role.type.transformType()/]> end1Port = this->get[end1.partWithPort.name.toUpperFirst()/]()->get[end1.role.name.toUpperFirst()/]();
+std::shared_ptr<[end2.role.type.transformType()/]> end2Port = this->get[end2.partWithPort.name.toUpperFirst()/]()->get[end2.role.name.toUpperFirst()/]();
+end1Port->set[end1.getDefiningEnd().name.toUpperFirst()/](end2Port);
+end2Port->set[end2.getDefiningEnd().name.toUpperFirst()/](end1Port);
 [/if]
 [/template]
 
@@ -295,9 +327,32 @@ end2Part->set[end2.getDefiningEnd().name.toUpperFirst()/](end1Port);
 */]
 [template private initStarPattern_PWP_PWP(aConnector : Connector){end1 : ConnectorEnd = aConnector.end->at(1); end2 : ConnectorEnd = aConnector.end->at(2); definingAssociation : Association = aConnector.type;}]
 [if(definingAssociation.memberEnd->at(1).getUpper() <> 1)] [comment *-multiplicity/]
+for(unsigned int i = 0; i < [end1.partWithPort.getLower()/]; i++)
+{
+	std::shared_ptr<[end1.partWithPort.type.transformType()/]> end1Part = this->get[end1.partWithPort.name.toUpperFirst()/]()->at(i);
 
+	for(unsigned int j = 0; j < [end1.role.oclAsType(MultiplicityElement).getLower()/]; j++)
+	{
+		std::shared_ptr<[end1.role.type.transformType()/]> end1Port = end1Part->get[end1.role.name.toUpperFirst()/]()->at(j);
+
+		for(unsigned int k = 0; k < [end2.partWithPort.getLower()/]; k++)
+		{
+			std::shared_ptr<[end2.partWithPort.type.transformType()/]> end2Part = this->get[end2.partWithPort.name.toUpperFirst()/]()->at(k);
+
+			for(unsigned int l = 0; l < [end2.role.oclAsType(MultiplicityElement).getLower()/]; l++)
+			{
+				std::shared_ptr<[end2.role.type.transformType()/]> end2Port = end2Part->get[end2.role.name.toUpperFirst()/]()->at(l);
+				end1Port->get[end1.getDefiningEnd().name.toUpperFirst()/]()->add(end2Port);
+				end2Port->get[end2.getDefiningEnd().name.toUpperFirst()/]()->add(end1Port);
+			}
+		}		
+	}
+}
 [else] [comment 1-multiplicity/]
-
+std::shared_ptr<[end1.role.type.transformType()/]> end1Port = this->get[end1.partWithPort.name.toUpperFirst()/]()->get[end1.role.name.toUpperFirst()/]();
+std::shared_ptr<[end2.role.type.transformType()/]> end2Port = this->get[end2.partWithPort.name.toUpperFirst()/]()->get[end2.role.name.toUpperFirst()/]();
+end1Port->set[end1.getDefiningEnd().name.toUpperFirst()/](end2Port);
+end2Port->set[end2.getDefiningEnd().name.toUpperFirst()/](end1Port);
 [/if]
 [/template]
 
