@@ -89,7 +89,7 @@
 [/if]
 [/for]
 
-//Included from from Ports typed by interface
+//Included from Ports typed by interface
 [for (aPort : Port | aClass.ownedAttribute->filter(Port))]
 [if (aPort.type.oclIsTypeOf(Interface))]
 [for (anInterfaceRealization : InterfaceRealization | aPackage.getInterfaceRealizations(aPort.type.oclAsType(Interface)))]
@@ -99,6 +99,11 @@
 [/for]
 [/if]
 [/for]
+
+//Included from roles of ConnectorEnds
+[for (aConnector : Connector | aClass.ownedConnector)][for (anEnd : ConnectorEnd | aConnector.end)]
+#include "[anEnd.role.type._package.getPackageName()/]/[anEnd.role.type.name.toUpperFirst()/].hpp"
+[/for][/for]
 
 [if (not aPackage.ignoreNamespace())]using namespace [aPackage.name/];[/if]
 

@@ -120,7 +120,27 @@ this->get[end2.role.name.toUpperFirst()/]()->set[end2.getDefiningEnd().name.toUp
 */]
 [template private initArrayPattern_P_PWP(aConnector : Connector){end1 : ConnectorEnd = aConnector.end->at(1); end2 : ConnectorEnd = aConnector.end->at(2); definingAssociation : Association = aConnector.type;}]
 [if(definingAssociation.memberEnd->at(1).getUpper() <> 1)] [comment *-multiplicity/]
+unsigned int k = 0;
+for(unsigned int i = 0; i < [end2.partWithPort.getLower()/]; i++)
+{
+	std::shared_ptr<[end2.partWithPort.type.transformType()/]> end2Part = this->get[end2.partWithPort.name.toUpperFirst()/]()->at(i);
+
+	for(unsigned int j = 0; j < [end2.role.oclAsType(MultiplicityElement).getLower()/]; j++)
+	{
+		std::shared_ptr<[end2.role.type.transformType()/]> end2Port = end2Part->get[end2.role.name.toUpperFirst()/]()->at(j);
+		std::shared_ptr<[end1.role.type.transformType()/]> end1Part = this->get[end1.role.name.toUpperFirst()/]()->at(k);
+
+		end2Port->get[end2.getDefiningEnd().name.toUpperFirst()/]()->add(end1Part);
+		end1Part->get[end1.getDefiningEnd().name.toUpperFirst()/]()->add(end2Port);
+
+		k++;
+	}
+}
 [else] [comment 1-multiplicity/]
+std::shared_ptr<[end1.role.type.transformType()/]> end1Part = this->get[end1.role.name.toUpperFirst()/]();
+std::shared_ptr<[end2.role.type.transformType()/]> end2Port = this->get[end2.partWithPort.name.toUpperFirst()/]()->get[end2.role.name.toUpperFirst()/]();
+end1Part->set[end1.getDefiningEnd().name.toUpperFirst()/](end2Port);
+end2Port->set[end2.getDefiningEnd().name.toUpperFirst()/](end1Part);
 [/if]
 [/template]
 
@@ -130,7 +150,27 @@ this->get[end2.role.name.toUpperFirst()/]()->set[end2.getDefiningEnd().name.toUp
 */]
 [template private initArrayPattern_PWP_P(aConnector : Connector){end1 : ConnectorEnd = aConnector.end->at(1); end2 : ConnectorEnd = aConnector.end->at(2); definingAssociation : Association = aConnector.type;}]
 [if(definingAssociation.memberEnd->at(1).getUpper() <> 1)] [comment *-multiplicity/]
+unsigned int k = 0;
+for(unsigned int i = 0; i < [end1.partWithPort.getLower()/]; i++)
+{
+	std::shared_ptr<[end1.partWithPort.type.transformType()/]> end1Part = this->get[end1.partWithPort.name.toUpperFirst()/]()->at(i);
+
+	for(unsigned int j = 0; j < [end1.role.oclAsType(MultiplicityElement).getLower()/]; j++)
+	{
+		std::shared_ptr<[end1.role.type.transformType()/]> end1Port = end1Part->get[end1.role.name.toUpperFirst()/]()->at(j);
+		std::shared_ptr<[end2.role.type.transformType()/]> end2Part = this->get[end2.role.name.toUpperFirst()/]()->at(k);
+
+		end1Port->get[end1.getDefiningEnd().name.toUpperFirst()/]()->add(end2Part);
+		end2Part->get[end2.getDefiningEnd().name.toUpperFirst()/]()->add(end1Port);
+
+		k++;
+	}
+}
 [else] [comment 1-multiplicity/]
+std::shared_ptr<[end1.role.type.transformType()/]> end1Port = this->get[end1.partWithPort.name.toUpperFirst()/]()->get[end1.role.name.toUpperFirst()/]();
+std::shared_ptr<[end2.role.type.transformType()/]> end2Part = this->get[end2.role.name.toUpperFirst()/]();
+end1Port->set[end1.getDefiningEnd().name.toUpperFirst()/](end2Part);
+end2Part->set[end2.getDefiningEnd().name.toUpperFirst()/](end1Port);
 [/if]
 [/template]
 
@@ -154,11 +194,11 @@ this->get[end2.role.name.toUpperFirst()/]()->set[end2.getDefiningEnd().name.toUp
 [if(end1.partWithPort.oclIsUndefined() and end2.partWithPort.oclIsUndefined())]
 [aConnector.initStarPattern_P_P()/]
 [elseif(end1.partWithPort.oclIsUndefined() and (not end2.partWithPort.oclIsUndefined()))]
-
+[aConnector.initStarPattern_P_PWP()/]
 [elseif((not end1.partWithPort.oclIsUndefined()) and end2.partWithPort.oclIsUndefined())]
-
+[aConnector.initStarPattern_PWP_P()/]
 [else]
-
+[aConnector.initStarPattern_PWP_PWP()/]
 [/if]
 [else]
 /*
@@ -188,6 +228,78 @@ this->get[end2.role.name.toUpperFirst()/]()->set[end2.getDefiningEnd().name.toUp
 [/template]
 
 
+[**
+ * Template for generation of star pattern between a part and a part with port
+*/]
+[template private initStarPattern_P_PWP(aConnector : Connector){end1 : ConnectorEnd = aConnector.end->at(1); end2 : ConnectorEnd = aConnector.end->at(2); definingAssociation : Association = aConnector.type;}]
+[if(definingAssociation.memberEnd->at(1).getUpper() <> 1)] [comment *-multiplicity/]
+for(unsigned int i = 0; i < [end2.partWithPort.getLower()/]; i++)
+{
+	std::shared_ptr<[end2.partWithPort.type.transformType()/]> end2Part = this->get[end2.partWithPort.name.toUpperFirst()/]()->at(i);
+
+	for(unsigned int j = 0; j < [end2.role.oclAsType(MultiplicityElement).getLower()/]; j++)
+	{
+		std::shared_ptr<[end2.role.type.transformType()/]> end2Port = end2Part->get[end2.role.name.toUpperFirst()/]()->at(j);
+
+		for(unsigned int k = 0; k < [end1.role.oclAsType(MultiplicityElement).getLower()/]; k++)
+		{
+			std::shared_ptr<[end1.role.type.transformType()/]> end1Part = this->get[end1.role.name.toUpperFirst()/]()->at(k);
+
+			end2Port->get[end2.getDefiningEnd().name.toUpperFirst()/]()->add(end1Part);
+			end1Part->get[end1.getDefiningEnd().name.toUpperFirst()/]()->add(end2Port);
+		}
+	}
+}
+[else] [comment 1-multiplicity/]
+std::shared_ptr<[end1.role.type.transformType()/]> end1Part = this->get[end1.role.name.toUpperFirst()/]();
+std::shared_ptr<[end2.role.type.transformType()/]> end2Port = this->get[end2.partWithPort.name.toUpperFirst()/]()->get[end2.role.name.toUpperFirst()/]();
+end1Part->set[end1.getDefiningEnd().name.toUpperFirst()/](end2Port);
+end2Port->set[end2.getDefiningEnd().name.toUpperFirst()/](end1Part);
+[/if]
+[/template]
+
+
+[**
+ * Template for generation of star pattern between a part with port and a part
+*/]
+[template private initStarPattern_PWP_P(aConnector : Connector){end1 : ConnectorEnd = aConnector.end->at(1); end2 : ConnectorEnd = aConnector.end->at(2); definingAssociation : Association = aConnector.type;}]
+[if(definingAssociation.memberEnd->at(1).getUpper() <> 1)] [comment *-multiplicity/]
+for(unsigned int i = 0; i < [end1.partWithPort.getLower()/]; i++)
+{
+	std::shared_ptr<[end1.partWithPort.type.transformType()/]> end1Part = this->get[end1.partWithPort.name.toUpperFirst()/]()->at(i);
+
+	for(unsigned int j = 0; j < [end1.role.oclAsType(MultiplicityElement).getLower()/]; j++)
+	{
+		std::shared_ptr<[end1.role.type.transformType()/]> end1Port = end1Part->get[end1.role.name.toUpperFirst()/]()->at(j);
+
+		for(unsigned int k = 0; k < [end2.role.oclAsType(MultiplicityElement).getLower()/]; k++)
+		{
+			std::shared_ptr<[end2.role.type.transformType()/]> end2Part = this->get[end2.role.name.toUpperFirst()/]()->at(k);
+
+			end1Port->get[end1.getDefiningEnd().name.toUpperFirst()/]()->add(end2Part);
+			end2Part->get[end2.getDefiningEnd().name.toUpperFirst()/]()->add(end1Port);
+		}
+	}
+}
+[else] [comment 1-multiplicity/]
+std::shared_ptr<[end1.role.type.transformType()/]> end1Port = this->get[end1.partWithPort.name.toUpperFirst()/]()->get[end1.role.name.toUpperFirst()/]();
+std::shared_ptr<[end2.role.type.transformType()/]> end2Part = this->get[end2.role.name.toUpperFirst()/]();
+end1Port->set[end1.getDefiningEnd().name.toUpperFirst()/](end2Part);
+end2Part->set[end2.getDefiningEnd().name.toUpperFirst()/](end1Port);
+[/if]
+[/template]
+
+
+[**
+ * Template for generation of star pattern between a part with port and a part with port
+*/]
+[template private initStarPattern_PWP_PWP(aConnector : Connector){end1 : ConnectorEnd = aConnector.end->at(1); end2 : ConnectorEnd = aConnector.end->at(2); definingAssociation : Association = aConnector.type;}]
+[if(definingAssociation.memberEnd->at(1).getUpper() <> 1)] [comment *-multiplicity/]
+
+[else] [comment 1-multiplicity/]
+
+[/if]
+[/template]
 
 
 [**
