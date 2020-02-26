@@ -205,7 +205,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> [className/]::getValues(std
 [elseif (aProperty.isPrimitiveTypedProperty())]
 [if (aProperty.upper = 1)]
 		std::shared_ptr<[aProperty.type.getValueClass()/]> value = fUML::FUMLFactory::eInstance()->create[aProperty.type.name.toUpperFirst()/]Value();
-		value->setValue(m_umlValue->[aProperty.getterName()/]());
+		value->setValue(m_umlValue->[if (aClassifier.getNearestPackage().name.toLower() = 'uml')]get[aProperty.name.toUpperFirst()/][else][aProperty.getterName()/][/if]());
 		values->add(value);
 [else]
 		std::shared_ptr<Bag<[aProperty.type.generateCppType(true)/]>> valueList = m_umlValue->[aProperty.getterName()/]();
