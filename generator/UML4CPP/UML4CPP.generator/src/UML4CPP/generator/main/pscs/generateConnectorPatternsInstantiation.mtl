@@ -14,51 +14,14 @@
  *
  ****************************************************************************************************************************************************************
  * 
- * module to generate class implementation source file
+ * module to generate connector pattern instantiation code conforming to PSCS instantiation semantics
  * 
  */]
-[module generatePSCS('http://www.eclipse.org/uml2/5.0.0/UML')]
+[module generateConnectorPatternsInstantiation('http://www.eclipse.org/uml2/5.0.0/UML')]
 
 [import UML4CPP::generator::main::components::generateType /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
-
-
-[**
- * Template for generation of property instatiation (parts & ports) of composite structures
-*/]
-[template public generateAttributeInstantiation(aProperty : Property)]
-m_[aProperty.name/].reset(new Bag<[aProperty.type.transformType()/]>());
-[if (aProperty.canInstantiate() and aProperty.getUpper() = -1 and aProperty.getLower() > 0)]
-for(unsigned int i = 1; i <= [aProperty.getLower()/]; i++)
-{
-	[if (aProperty.oclIsTypeOf(Port) and aProperty.type.oclIsTypeOf(Interface))]
-	[aProperty.generatePortInstantiation()/]
-	[else]
-	[aProperty.generatePartInstantiation()/]
-	[/if]
-} 
-[/if]
-[/template]
-
-
-[**
- * Template for generation of instantiation of a port typed by an interface
-*/]
-[template private generatePortInstantiation(aProperty : Property) {aPackage : Package = aProperty.ancestors()->filter(Package)->first(); factoryName : String = aPackage.name.toUpperFirst().concat('Factory');}]
-	[let interfaceOfPort : Interface = aProperty.type.oclAsType(Interface)]
-	std::shared_ptr<[aProperty.type.transformType()/]> value = [aPackage.name/]::[factoryName/]::eInstance()->create[aPackage.getInterfaceRealizations(interfaceOfPort)->asOrderedSet()->first().owner.oclAsType(Class).name/]();
-	[/let]
-	m_[aProperty.name/]->add(value);
-[/template]
-
-
-[**
- * Template for generation of instantiation of a part
-*/]
-[template private generatePartInstantiation(aProperty : Property) {aPackage : Package = aProperty.ancestors()->filter(Package)->first(); factoryName : String = aPackage.name.toUpperFirst().concat('Factory');}]
-	std::shared_ptr<[aProperty.type.transformType()/]> value = [aPackage.name/]::[factoryName/]::eInstance()->create[aProperty.type.name/]();
-	m_[aProperty.name/]->add(value);
-[/template]
+[import UML4CPP::generator::main::pscs::generatePropertyInstantiation /]
 
 
 [**
@@ -362,23 +325,6 @@ end2Port->set[end2.getDefiningEnd().name.toUpperFirst()/](end1Port);
  *****************************************************************************************************************************************************************************************
 */]
 
-[query public getInterfaceRealizations(aPackage : Package, anInterface : Interface) : Set(InterfaceRealization) = aPackage.allOwnedElements()->selectByType(InterfaceRealization)->reject(not (contract.name = anInterface.name))/]
-
-[query private canInstantiate(aProperty : Property) : Boolean = 
-if (aProperty.isComposite()) then
-	if(aProperty.oclIsKindOf(TypedElement)) then
-		if(aProperty.type.oclIsTypeOf(Class)) then
-			not aProperty.type.oclAsType(Class).isAbstract 
-		else if (aProperty.type.oclIsTypeOf(Interface)) then
-			aProperty.oclIsTypeOf(Port)
-			else false
-			endif
-		endif
-	else false
-	endif
-else false
-endif
-/]
 
 [query private getCardinality(aConnectorEnd : ConnectorEnd) : Integer = 
 if(aConnectorEnd.role.oclIsKindOf(MultiplicityElement)) then

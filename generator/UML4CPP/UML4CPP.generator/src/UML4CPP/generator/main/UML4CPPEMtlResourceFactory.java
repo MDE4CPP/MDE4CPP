@@ -185,7 +185,9 @@ public class UML4CPPEMtlResourceFactory extends EMtlResourceFactoryImpl {
 	
     private void initializePscsEmtls(String resourcePathPrefix)
     {
-        String[] moduleNames = {"generatePSCS"};
+        String[] moduleNames = {"generatePropertyInstantiation",
+        						"generateConnectorPatternsInstantiation"
+        						};
         generateFilePathMapData(moduleNames, "pscs", resourcePathPrefix);
     }
 

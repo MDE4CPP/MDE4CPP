@@ -1,0 +1,144 @@
+[comment encoding = UTF-8 /]
+[**
+ * Copyright (c) 2017 TU Ilmenau, Systems and Software Engineering Group
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
+ * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+ * and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ ****************************************************************************************************************************************************************
+ * 
+ * module to generate property instantiation code conforming to PSCS instantiation semantics
+ * 
+ */]
+[module generatePropertyInstantiation('http://www.eclipse.org/uml2/5.0.0/UML')]
+
+[import UML4CPP::generator::main::components::generateType /]
+[import UML4CPP::generator::main::helpers::nameHelper /]
+
+
+[**
+ * Template for generation of property instatiation (parts & ports) of composite structures
+*/]
+[template public generateAttributeInstantiation(aProperty : Property)]
+m_[aProperty.name/].reset(new Bag<[aProperty.type.transformType()/]>());
+[if (aProperty.canInstantiate() and aProperty.getUpper() = -1 and aProperty.getLower() > 0)]
+for(unsigned int i = 1; i <= [aProperty.getLower()/]; i++)
+{
+	[if (aProperty.oclIsTypeOf(Port) and aProperty.type.oclIsTypeOf(Interface))]
+	[aProperty.generatePortInstantiation()/]
+	[else]
+	[aProperty.generatePartInstantiation()/]
+	[/if]
+} 
+[/if]
+[/template]
+
+
+[**
+ * Template for generation of instantiation of a port typed by an interface
+*/]
+[template private generatePortInstantiation(aProperty : Property) {aPackage : Package = aProperty.ancestors()->filter(Package)->first(); factoryName : String = aPackage.name.toUpperFirst().concat('Factory');}]
+	[let interfaceOfPort : Interface = aProperty.type.oclAsType(Interface)]
+	std::shared_ptr<[aProperty.type.transformType()/]> value = [aPackage.name/]::[factoryName/]::eInstance()->create[aPackage.getInterfaceRealizations(interfaceOfPort)->asOrderedSet()->first().owner.oclAsType(Class).name/]();
+	[/let]
+	m_[aProperty.name/]->add(value);
+[/template]
+
+
+[**
+ * Template for generation of instantiation of a part
+*/]
+[template private generatePartInstantiation(aProperty : Property) {aPackage : Package = aProperty.ancestors()->filter(Package)->first(); factoryName : String = aPackage.name.toUpperFirst().concat('Factory');}]
+	std::shared_ptr<[aProperty.type.transformType()/]> value = [aPackage.name/]::[factoryName/]::eInstance()->create[aProperty.type.name/]();
+	m_[aProperty.name/]->add(value);
+[/template]
+
+
+[**
+ * generate attribute member initialization for properties with InstanceValue as default value
+*/]
+[template public generateAttributeDefaultInstantiation(aProperty : Property){instVal : InstanceValue = aProperty.defaultValue.oclAsType(InstanceValue);}]
+[let specification : InstanceSpecification = instVal.instance]
+[if (aProperty.upper <> 1)] [comment *-multiplicity /]
+for(unsigned int i = 0; i < [aProperty.lower/]; i++)
+{
+[for (aSlot : Slot | specification.slot) ? (aSlot.definingFeature.type.isPrimitive())]
+	m_[aProperty.name/]->at(i)->[aSlot.generateSlotInitialization()/][/for]
+}
+[else] [comment 1-multiplicity /]
+m_[aProperty.name/] = [aProperty.type._package.getPackageName()/]::[aProperty.type._package.getPackageName().toUpperFirst()/]Factory::eInstance()->create[aProperty.type.name.toUpperFirst()/]();
+[for (aSlot : Slot | specification.slot) ? (aSlot.definingFeature.type.isPrimitive())]
+m_[aProperty.name/]->[aSlot.generateSlotInitialization()/]
+[/for]
+[/if]
+[/let]
+[/template]
+
+[**
+ * generate instantiation of a slot of an instance specification
+*/]
+[template private generateSlotInitialization(aSlot : Slot)]
+[if (aSlot.definingFeature.getUpper() <> 1)]
+[aSlot.initPrimitiveValueFromMultipleLiteralSpecifications()/]
+[else]
+[aSlot.initPrimitiveValueFromSingleLiteralSpecification()/]
+[/if]
+[/template]
+
+[**
+ * generate call of attribute setter to set value (upper = 1) as defined by Slot
+*/]
+[template private initPrimitiveValueFromSingleLiteralSpecification(aSlot : Slot)]
+[let slotType : String = aSlot.definingFeature.type.name]
+[if (slotType = 'Boolean' or slotType = 'EBoolean')]set[aSlot.definingFeature.name.toUpperFirst()/]([aSlot.value->first().oclAsType(LiteralBoolean).value/]);
+[elseif (slotType = 'UnlimitedNatural')]set[aSlot.definingFeature.name.toUpperFirst()/]([aSlot.value->first().oclAsType(LiteralUnlimitedNatural).value/]);
+[elseif (slotType = 'Integer' or slotType = 'EInt')]set[aSlot.definingFeature.name.toUpperFirst()/]([aSlot.value->first().oclAsType(LiteralInteger).value/]);
+[elseif (slotType = 'Real' or slotType = 'EDouble' or slotType = 'EFloat')]set[aSlot.definingFeature.name.toUpperFirst()/]([aSlot.value->first().oclAsType(LiteralReal).value/]);
+[elseif (aSlot.definingFeature.type.oclIsKindOf(PrimitiveType) and slotType = 'String' or slotType = 'EString')]set[aSlot.definingFeature.name.toUpperFirst()/]("[aSlot.value->first().oclAsType(LiteralString).value/]");
+[/if]
+[/let]
+[/template]
+
+[**
+ * generate call of attribute setter to set values (upper != 1) as defined by Slot
+*/]
+[template private initPrimitiveValueFromMultipleLiteralSpecifications(aSlot : Slot)]
+[let slotType : String = aSlot.definingFeature.type.name]
+[for (aValueSpecification : ValueSpecification | aSlot.value)]
+[if (slotType = 'Boolean' or slotType = 'EBoolean')]get[aSlot.definingFeature.name.toUpperFirst()/]()->add([aValueSpecification.oclAsType(LiteralBoolean).value/]);
+[elseif (slotType = 'UnlimitedNatural')]get[aSlot.definingFeature.name.toUpperFirst()/]()->add([aValueSpecification.oclAsType(LiteralUnlimitedNatural).value/]);
+[elseif (slotType = 'Integer' or slotType = 'EInt')]get[aSlot.definingFeature.name.toUpperFirst()/]()->add([ aValueSpecification.oclAsType(LiteralInteger).value/]);
+[elseif (slotType = 'Real' or slotType = 'EDouble' or slotType = 'EFloat')]get[aSlot.definingFeature.name.toUpperFirst()/]()->add([aValueSpecification.oclAsType(LiteralReal).value/]);
+[elseif (aSlot.definingFeature.type.oclIsKindOf(PrimitiveType) and slotType = 'String' or slotType = 'EString')]get[aSlot.definingFeature.name.toUpperFirst()/]()->add("[aValueSpecification.oclAsType(LiteralString).value/]");
+[/if]
+[/for]
+[/let]
+[/template]
+
+
+
+
+[query public getInterfaceRealizations(aPackage : Package, anInterface : Interface) : Set(InterfaceRealization) = aPackage.allOwnedElements()->selectByType(InterfaceRealization)->reject(not (contract.name = anInterface.name))/]
+
+[query public canInstantiate(aProperty : Property) : Boolean = 
+if (aProperty.isComposite()) then
+	if(aProperty.oclIsKindOf(TypedElement)) then
+		if(aProperty.type.oclIsTypeOf(Class)) then
+			not aProperty.type.oclAsType(Class).isAbstract 
+		else if (aProperty.type.oclIsTypeOf(Interface)) then
+			aProperty.oclIsTypeOf(Port)
+			else false
+			endif
+		endif
+	else false
+	endif
+else false
+endif
+/]

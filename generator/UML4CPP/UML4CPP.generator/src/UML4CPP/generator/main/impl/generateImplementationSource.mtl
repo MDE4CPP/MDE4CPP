@@ -29,7 +29,8 @@
 [import UML4CPP::generator::main::helpers::nameHelper /]
 [import UML4CPP::generator::main::helpers::setGetHelper /]
 [import UML4CPP::generator::main::validation::validateModel /]
-[import UML4CPP::generator::main::pscs::generatePSCS/]
+[import UML4CPP::generator::main::pscs::generatePropertyInstantiation/]
+[import UML4CPP::generator::main::pscs::generateConnectorPatternsInstantiation/]
 
 [query private includes(aClass : Class)  : Set(Type) = OrderedSet{aClass.member->selectByKind(TypedElement)->select(not type.oclIsUndefined()).type, aClass.ownedOperation.ownedParameter.type, aClass.getAllAttributes().type, aClass.importedMember}->flatten() /]
 [query private includes(aInterface : Interface)  : Set(Type) = OrderedSet{aInterface.member->selectByKind(TypedElement)->select(not type.oclIsUndefined()).type, aInterface.ownedOperation.ownedParameter.type}->flatten() /]
@@ -122,11 +123,13 @@
 	[/for]
 	
 	// init properties with default
-	[for (instVal : InstanceValue | aClass.ownedAttribute.defaultValue->reject(oclIsUndefined())->selectByType(InstanceValue)->reject(type.oclIsUndefined() or type.oclIsKindOf(Enumeration))->sortedBy(myQualifiedName()))]
-	[if (instVal.type.oclIsUndefined() or instVal.type.name.oclIsUndefined())]
-	// undefined type of InstanceValue [instVal.qualifiedName/] ([instVal.type.toString()/]) ['class '.concat(aClass.name).concat(': undefined type of InstanceValue ').concat(instVal.qualifiedName).concat(' (').concat(instVal.type.toString()).registerError()/]
+	[for (aProperty : Property | aClass.ownedAttribute->sortedBy(myQualifiedName()))]
+	[if ((not aProperty.defaultValue.oclIsUndefined()) and (aProperty.defaultValue.oclIsTypeOf(InstanceValue)))]
+	[if (aProperty.defaultValue.type.oclIsUndefined() or aProperty.defaultValue.name.oclIsUndefined())]
+	// undefined type of InstanceValue [aProperty.defaultValue.qualifiedName/] ([aProperty.defaultValue.type.toString()/]) ['class '.concat(aClass.name).concat(': undefined type of InstanceValue ').concat(aProperty.defaultValue.qualifiedName).concat(' (').concat(aProperty.defaultValue.type.toString()).registerError()/]
 	[else]
-	[instVal.initPropertyFromInstanceValue()/]
+	[aProperty.generateAttributeDefaultInstantiation()/]
+	[/if]
 	[/if]
 	[/for]
 
@@ -302,7 +305,6 @@ std::shared_ptr<uml::Class> [className/]::getMetaClass()
 	[if (instVal.type.oclIsUndefined() or instVal.type.name.oclIsUndefined())]
 	// undefined type of InstanceValue [instVal.qualifiedName/] ([instVal.type.toString()/]) ['class '.concat(aInterface.name).concat(': undefined type of InstanceValue ').concat(instVal.qualifiedName).concat(' (').concat(instVal.type.toString()).registerError()/]
 	[else]
-	[instVal.initPropertyFromInstanceValue()/]
 	[/if]
 	[/for]
 	
