@@ -36,8 +36,21 @@ namespace [anEPackage.eClass().ePackage.name/]
 [/for]
 }
 
+namespace [anEPackage.generateNamespaceDefinition()/] 
+{
+[for (elements : EClass| anEPackage.eClassifiers->selectByKind(EClass)->sortedBy(name)) separator ('\n')]
+	class [elements.name/];[/for]
+[for (aSubPackage : EPackage| anEPackage.eSubpackages->selectByKind(EPackage)->sortedBy(name)) separator ('\n')]
+	namespace [aSubPackage.name/] 
+	{
+		class [aSubPackage.name/]Package;
+	}
+[/for]
+
+}
+
 [comment namespace /]
-namespace [anEPackage.name/] 
+namespace [anEPackage.generateNamespaceDefinition()/] 
 {
 	/*!
 	The Metamodel Package for the [anEPackage.name/] metamodel. This package is used to enable the reflection of model elements. It contains all model elements

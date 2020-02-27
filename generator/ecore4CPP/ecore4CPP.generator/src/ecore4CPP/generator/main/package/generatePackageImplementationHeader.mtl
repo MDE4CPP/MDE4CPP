@@ -31,16 +31,20 @@
 #include "ecore/impl/EPackageImpl.hpp"
 
 [if (not(anEPackage.name = 'ecore') )]
-#include "[anEPackage.name/]/[anEPackage.name.toUpperFirst().concat('Package')/].hpp" 
+#include "[anEPackage.getRootPackage().name/]/[anEPackage.getNamespacePathWithoutRoot()/][anEPackage.name.toUpperFirst().concat('Package')/].hpp" 
 [/if]
 
 
-namespace [anEPackage.name/] 
+namespace [anEPackage.generateNamespaceDefinition()/] 
 {
 [for (elements : EClass| anEPackage.eClassifiers->selectByKind(EClass)->sortedBy(name)) separator ('\n')]
 	class [elements.name/];[/for]
 [for (aSubPackage : EPackage| anEPackage.eSubpackages->selectByKind(EPackage)->sortedBy(name)) separator ('\n')]
-	class [aSubPackage.name/]::[aSubPackage.name/]Package;[/for]
+	namespace [aSubPackage.name/] 
+	{
+		class [aSubPackage.name/]Package;
+	}
+[/for]
 }
 
 namespace ecore
@@ -48,8 +52,7 @@ namespace ecore
 	class EcoreFactory;
 }
 
-
-namespace [anEPackage.name/]
+namespace [anEPackage.generateNamespaceDefinition()/]
 {
 	class [anEPackage.name.toUpperFirst().concat('PackageImpl')/] : public [anEPackage.needNamespace('EPackageImpl')/] ,virtual public [anEPackage.name.toUpperFirst().concat('Package')/]
 	{
@@ -83,8 +86,6 @@ namespace [anEPackage.name/]
 			[anEPackage.eClassifiers->selectByKind(EClass).eAttributes->sortedBy(name).generatePrivatePackageMember(anEPackage)/]
 			[anEPackage.eClassifiers->selectByKind(EClass).eReferences->sortedBy(name).generatePrivatePackageMember(anEPackage)/]
 			[anEPackage.eClassifiers->selectByKind(EClass).eOperations->sortedBy(name).generatePrivatePackageMember(anEPackage)/]
-			// Reference to SubPackages			
-			[anEPackage.eSubpackages->sortedBy(name).generateSubPackageMember()/]
 
 			friend class [anEPackage.name.concat('Package').toUpperFirst()/];
 

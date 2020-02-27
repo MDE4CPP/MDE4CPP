@@ -20,7 +20,7 @@
 
 [template public generateFactoryImplSource(anEPackage : EPackage) {className : String = anEPackage.name.toUpperFirst().concat('FactoryImpl');}]
 [file (anEPackage.generateNamespacePath().concat('/impl/').concat(className).concat('.cpp'), false, 'UTF-8')]
-#include "[anEPackage.name/]/impl/[className/].hpp"
+#include "[anEPackage.generateNamespacePath()/]/impl/[className/].hpp"
 
 #include <cassert>
 
@@ -31,12 +31,15 @@
 [if(anEPackage.name = 'uml')]
 #include "uml/impl/ElementImpl.hpp"
 [/if]
-
-#include "[anEPackage.name/]/[anEPackage.name.toUpperFirst().concat('Package')/].hpp"
+[if (not (anEPackage = anEPackage.getRootPackage()))]
+#include "[anEPackage.getRootPackage().name/]/[anEPackage.getNamespacePathWithoutRoot()/][anEPackage.name/]Package.hpp"
+[else]
+#include "[anEPackage.getRootPackage().name/]/[anEPackage.getRootPackage().name/]Package.hpp"
+[/if]
 [generateFactoryImports()/]
 
 [comment namespace /]
-using namespace [anEPackage.name/];
+using namespace [anEPackage.generateNamespaceDefinition()/];
 
 //*********************************
 // Constructor / Destructor
@@ -215,10 +218,12 @@ std::shared_ptr<[aClass.generateTypeClass()/]> [className/]::create[aClass.name/
 [/let]
 [/for]
 
+[comment] kein Paket in Fectory notwendig... ???
 std::shared_ptr<[anEPackage.name.toUpperFirst().concat('Package')/]> [className/]::get[anEPackage.name.toUpperFirst().concat('Package')/]() const
 {
 	return [anEPackage.name.toUpperFirst().concat('Package')/]::eInstance();
 }
+[/comment]
 [/file]
 [/template]
 
@@ -258,9 +263,11 @@ return element;
 [for (elements : EClassifier| anEPackage.eClassifiers->selectByKind(EClass)->asOrderedSet()->sortedBy(name))]
 #include "[elements.generateNamespacePath()/]/impl/[elements.name.toUpperFirst().concat('Impl.hpp')/]"
 [/for]
+[comment] keine Subpackages in Factories --> SubFactories
 [for (subPackage : EPackage | anEPackage.eSubpackages->sortedBy(name))]
 [subPackage.generateFactoryImports()/]
 [/for]
+[/comment]
 [let ref:OrderedSet(EReference) = OrderedSet{anEPackage.eClassifiers}->flatten()->selectByKind(EClass).getAllContainers()->asOrderedSet()->sortedBy(name)]
 
 [for(aReference:EReference | ref->select(not (ref.eType.getRootPackage() = anEPackage.getRootPackage())))]

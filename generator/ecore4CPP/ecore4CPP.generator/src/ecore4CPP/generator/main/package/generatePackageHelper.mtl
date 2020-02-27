@@ -44,26 +44,16 @@ std::shared_ptr<[metaModelTypeString(anENamedElement, anEPackage)/]> [anEPackage
 
 [/template]
 
-[template public generateSubPackageMember(anEPackage : EPackage)]
-std::shared_ptr<[anEPackage.name.toUpperFirst()/]::[anEPackage.name.toUpperFirst()/]Package> m_[anEPackage.name.toLowerFirst()/]PackageInstance;
-
-[/template]
-
 [template public generateSubPackageGetter(anEPackage : EPackage, impl : Boolean) ? ( not hasImplOnly()) ]			
-virtual std::shared_ptr<[anEPackage.name.toUpperFirst()/]::[anEPackage.name.toUpperFirst()/]Package> get[anEPackage.getMemberNameUpperFirst()/]PackageInstance() const [abstractSufix(impl)/];
+virtual std::shared_ptr<[anEPackage.name.toUpperFirst()/]::[anEPackage.name.toUpperFirst()/]Package> get[anEPackage.getMemberNameUpperFirst()/]Package() const [abstractSufix(impl)/];
 
 [/template]
 
 [template public generateSubPackageGetterImpl(aSubPackage: EPackage, anEPackage: EPackage)]
-std::shared_ptr<[aSubPackage.name.toUpperFirst()/]::[aSubPackage.name.toUpperFirst()/]Package> [anEPackage.name.toUpperFirst()/]PackageImpl::get[aSubPackage.getMemberNameUpperFirst()/]PackageInstance() const
+std::shared_ptr<[aSubPackage.name.toUpperFirst()/]::[aSubPackage.name.toUpperFirst()/]Package> [anEPackage.name.toUpperFirst()/]PackageImpl::get[aSubPackage.getMemberNameUpperFirst()/]Package() const
 {
-	return m_[aSubPackage.name.toLowerFirst()/]PackageInstance;
+	return [aSubPackage.name/]::[aSubPackage.name/]Package::eInstance();
 } 
-
-[/template]
-
-[template public generateSubPackageInit(aSubPackage: EPackage)]
-m_[aSubPackage.name.toLowerFirst()/]PackageInstance= [aSubPackage.name.toUpperFirst()/]::[aSubPackage.name.toUpperFirst()/]Package::eInstance();
 
 [/template]
 

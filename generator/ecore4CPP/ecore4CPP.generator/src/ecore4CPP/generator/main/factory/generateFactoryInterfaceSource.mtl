@@ -19,11 +19,11 @@
 
 [template public generateFactoryCpp(anPackage : EPackage) {packageName : String = anPackage.name.toUpperFirst().concat('Factory').toUpperFirst();}]
 [file  (anPackage.generateNamespacePath().concat('/').concat(packageName).concat('.cpp'), false, 'UTF-8')]
-#include "[anPackage.name/]/[packageName/].hpp"
-#include "[anPackage.name/]/impl/[packageName.concat('Impl')/].hpp"
+#include "[anPackage.generateNamespacePath()/]/[packageName/].hpp"
+#include "[anPackage.generateNamespacePath()/]/impl/[packageName.concat('Impl')/].hpp"
 
-using namespace [anPackage.name/];
-
+using namespace [anPackage.generateNamespaceDefinition()/];
+				 
 //static initialisation
 [generateSingletonImpl(packageName, false)/]
 [/file]

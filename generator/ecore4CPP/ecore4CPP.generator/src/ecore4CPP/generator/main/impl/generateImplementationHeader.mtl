@@ -35,7 +35,7 @@
 #include "../[aClass.name.toUpperFirst().concat('.hpp')/]"
 
 [if (not (aClass.ePackage = aClass.getRootPackage()))]
-#include "[aClass.getRootPackage().name/]/impl/[aClass.getRootPackage().name.concat('FactoryImpl').toUpperFirst()/].hpp"
+#include "[aClass.getRootPackage().name/]/[aClass.getNamespacePathWithoutRoot()/]Impl/[aClass.ePackage.name.toUpperFirst()/]FactoryImpl.hpp"
 [/if]
 [for (aEClass : EClass | aClass.eSuperTypes->asOrderedSet()->sortedBy(name)) separator ('\n')]
 #include "[aEClass.generateNamespacePath()/]/impl/[aEClass.name.toUpperFirst()/]Impl.hpp"[/for]
@@ -61,7 +61,11 @@ virtual public [ClassWithNamespace(aClass, sClass)/]Impl[/for][if (aClass.eSuper
 			[className/]& operator=([className/] const&) = delete;
 
 		protected:
-			friend class [if (not (aClass.ePackage = aClass.getRootPackage()))][aClass.getRootPackage().name/]::[/if][aClass.getRootPackage().name.concat('FactoryImpl').toUpperFirst()/];
+			[if (not (aClass.ePackage = aClass.getRootPackage()))]
+			friend class [aClass.getRootPackage().name/][aClass.getPackageAccess(true)/]::[aClass.ePackage.name.toUpperFirst()/]FactoryImpl;
+			[else]
+			friend class [aClass.getRootPackage().name/][aClass.ePackage.name.toUpperFirst()/]FactoryImpl;
+			[/if]
 			[className/]();
 			[aClass.generateGetThisPtr()/]
 

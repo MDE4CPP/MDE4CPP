@@ -32,7 +32,7 @@
 [anEPackage.generateForwardDeclarations()/]
 
 [comment namespace /]
-namespace [anEPackage.name/] 
+namespace [anEPackage.generateNamespaceDefinition()/] 
 {
 	class [packageName/] : virtual public [needNamespace(anEPackage, 'EFactory')/] 
 	{
@@ -51,8 +51,10 @@ namespace [anEPackage.name/]
 			virtual std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> create(std::shared_ptr<[needNamespace(anEPackage, 'EClass')/]> _class, std::shared_ptr<EObject> _container=nullptr, const int referenceID = -1)[if (not generateObjectMonitoring())] const[/if] = 0;
 
 			[anEPackage.eClassifiers->selectByKind(EClass)->sortedBy(name).generateClassCreate(false)/]
+[comment] Package in Factory notwendig???
 			//Package
 			virtual std::shared_ptr<[anEPackage.name.toUpperFirst().concat('Package')/]> get[anEPackage.name.toUpperFirst().concat('Package')/]() const = 0;
+[/comment]
 [if (generateObjectMonitoring())]
 			virtual void print() = 0;
 			virtual void add(std::shared_ptr<ecore::EObject> obj) = 0;
