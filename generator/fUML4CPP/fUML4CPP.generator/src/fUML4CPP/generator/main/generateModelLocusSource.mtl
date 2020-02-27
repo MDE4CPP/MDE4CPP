@@ -80,7 +80,7 @@ std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> [upperName/]Locu
 			{
 				std::shared_ptr<[originalName/]::[className/]Object> object(new [originalName/]::[className/]Object());
 				object->setThis[className/]ObjectPtr(object);
-				object->setUmlValue([packageName/]::[packageName.toUpperFirst()/]Factory::eInstance()->create[aClass.name.toUpperFirst()/]());
+				object->setUmlValue([packageName/]::[getPackageAccess(classPackage, true)/]::[classPackage.name.toUpperFirst()/]Factory::eInstance()->create[aClass.name.toUpperFirst()/]());
 				object->setLocus(this->getThisLocusPtr());
 				return object;
 			}
