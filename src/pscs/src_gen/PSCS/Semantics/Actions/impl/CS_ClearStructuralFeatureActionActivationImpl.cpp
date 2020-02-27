@@ -181,7 +181,7 @@ std::shared_ptr<ecore::EObject>  CS_ClearStructuralFeatureActionActivationImpl::
 
 std::shared_ptr<ecore::EClass> CS_ClearStructuralFeatureActionActivationImpl::eStaticClass() const
 {
-	return pSCS::Semantics::Actions::ActionsPackage::eInstance()->getCS_ClearStructuralFeatureActionActivation_Class();
+	return PSCS::Semantics::Actions::ActionsPackage::eInstance()->getCS_ClearStructuralFeatureActionActivation_Class();
 }
 
 //*********************************
@@ -473,7 +473,7 @@ void CS_ClearStructuralFeatureActionActivationImpl::saveContent(std::shared_ptr<
 {
 	try
 	{
-		std::shared_ptr<pSCS::Semantics::Actions::ActionsPackage> package = pSCS::Semantics::Actions::ActionsPackage::eInstance();
+		std::shared_ptr<PSCS::Semantics::Actions::ActionsPackage> package = PSCS::Semantics::Actions::ActionsPackage::eInstance();
 
 	
 

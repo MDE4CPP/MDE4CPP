@@ -25,16 +25,17 @@
 #include "ecore/EClass.hpp"
 
 //Includes from codegen annotation
-#include "fUML/FUMLFactory.hpp"
 #include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
 
 #include "uml/ReadExtentAction.hpp"
 #include "fUML/Semantics/Values/Value.hpp"
 #include "fUML/Semantics/StructuredClassifiers/Object.hpp"
 #include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
+#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/CS_Object.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/CS_Reference.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -169,7 +170,7 @@ std::shared_ptr<ecore::EObject>  CS_ReadExtentActionActivationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> CS_ReadExtentActionActivationImpl::eStaticClass() const
 {
-	return pSCS::Semantics::Actions::ActionsPackage::eInstance()->getCS_ReadExtentActionActivation_Class();
+	return PSCS::Semantics::Actions::ActionsPackage::eInstance()->getCS_ReadExtentActionActivation_Class();
 }
 
 //*********************************
@@ -198,11 +199,11 @@ void CS_ReadExtentActionActivationImpl::doAction()
 		std::shared_ptr<fUML::Semantics::Values::Value> object = objects->at(i);
 		std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> reference = nullptr;
 		if(std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Object>(object) != nullptr) {
-			reference = PSCS::PSCSFactory::eInstance()->createCS_Reference();
+			reference = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Reference();
 			(std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(reference))->setCompositeReferent(std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Object>(object));
 		}
 		else {
-			reference = fUML::FUMLFactory::eInstance()->createReference();
+			reference = fUML::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createReference();
 		}
 		reference->setReferent(std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Object>(object));
 		references->add(reference);
@@ -329,7 +330,7 @@ void CS_ReadExtentActionActivationImpl::saveContent(std::shared_ptr<persistence:
 {
 	try
 	{
-		std::shared_ptr<pSCS::Semantics::Actions::ActionsPackage> package = pSCS::Semantics::Actions::ActionsPackage::eInstance();
+		std::shared_ptr<PSCS::Semantics::Actions::ActionsPackage> package = PSCS::Semantics::Actions::ActionsPackage::eInstance();
 
 	
 

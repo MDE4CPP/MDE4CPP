@@ -104,7 +104,7 @@ std::shared_ptr<ecore::EObject>  CS_DispatchOperationOfInterfaceStrategyImpl::co
 
 std::shared_ptr<ecore::EClass> CS_DispatchOperationOfInterfaceStrategyImpl::eStaticClass() const
 {
-	return pSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getCS_DispatchOperationOfInterfaceStrategy_Class();
+	return PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getCS_DispatchOperationOfInterfaceStrategy_Class();
 }
 
 //*********************************
@@ -252,7 +252,7 @@ void CS_DispatchOperationOfInterfaceStrategyImpl::saveContent(std::shared_ptr<pe
 {
 	try
 	{
-		std::shared_ptr<pSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage> package = pSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance();
+		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage> package = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance();
 
 	
 

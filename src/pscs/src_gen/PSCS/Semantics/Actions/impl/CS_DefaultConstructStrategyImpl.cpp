@@ -32,6 +32,7 @@
 #include "uml/ValueSpecification.hpp"
 #include "uml/InterfaceRealization.hpp"
 #include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
 #include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
 #include "fUML/Semantics/Values/Evaluation.hpp"
 #include "fUML/Semantics/Loci/ExecutionFactory.hpp"
@@ -39,6 +40,7 @@
 #include "PSCS/Semantics/StructuredClassifiers/CS_InteractionPoint.hpp"
 #include "PSCS/Semantics/Values/CS_OpaqueExpressionEvaluation.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/CS_Link.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -171,7 +173,7 @@ std::shared_ptr<ecore::EObject>  CS_DefaultConstructStrategyImpl::copy() const
 
 std::shared_ptr<ecore::EClass> CS_DefaultConstructStrategyImpl::eStaticClass() const
 {
-	return pSCS::Semantics::Actions::ActionsPackage::eInstance()->getCS_DefaultConstructStrategy_Class();
+	return PSCS::Semantics::Actions::ActionsPackage::eInstance()->getCS_DefaultConstructStrategy_Class();
 }
 
 //*********************************
@@ -190,7 +192,7 @@ void CS_DefaultConstructStrategyImpl::addStructuralFeatureValue(std::shared_ptr<
 		std::shared_ptr<Bag<fUML::Semantics::Values::Value>> values = featureValue->getValues();
 		if(std::dynamic_pointer_cast<uml::Port>(feature) != nullptr) {
 			// insert an interaction point
-			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> interactionPoint = PSCS::PSCSFactory::eInstance()->createCS_InteractionPoint();
+			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> interactionPoint = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_InteractionPoint();
 			interactionPoint->setDefiningPort(std::dynamic_pointer_cast<uml::Port>(feature));
 			interactionPoint->setReferent(std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Object>(value));
 			interactionPoint->setOwner(context);
@@ -198,7 +200,7 @@ void CS_DefaultConstructStrategyImpl::addStructuralFeatureValue(std::shared_ptr<
 		}
 		else if (std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Object>(value) != nullptr) {
 			// insert a reference
-			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference = PSCS::PSCSFactory::eInstance()->createCS_Reference();
+			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Reference();
 			reference->setCompositeReferent(std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Object>(value));
 			reference->setReferent(std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Object>(value));
 			values->add(reference);
@@ -249,7 +251,7 @@ std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> CS_DefaultConstr
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> referenceToContext = PSCS::PSCSFactory::eInstance()->createCS_Reference();
+			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> referenceToContext = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Reference();
 	referenceToContext->setReferent(context);
 	referenceToContext->setCompositeReferent(std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Object>(context));
 	// FIXME detect infinite recursive instantiation
@@ -329,7 +331,7 @@ void CS_DefaultConstructStrategyImpl::generateArrayPattern(std::shared_ptr<PSCS:
 	std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference>> end1Values = std::dynamic_pointer_cast<Bag<fUML::Semantics::StructuredClassifiers::Reference>>(this->getValuesFromConnectorEnd(context, end1));
 	std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference>> end2Values = std::dynamic_pointer_cast<Bag<fUML::Semantics::StructuredClassifiers::Reference>>(this->getValuesFromConnectorEnd(context, end2));
 	for(unsigned int i = 0; i < end1Values->size(); i++) {
-		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Link> link = PSCS::PSCSFactory::eInstance()->createCS_Link();
+		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Link> link = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Link();
 		if(connector->getType() == nullptr) {
 			link->setType(this->getDefaultAssociation());
 		}
@@ -373,7 +375,7 @@ void CS_DefaultConstructStrategyImpl::generateStarPattern(std::shared_ptr<PSCS::
 	std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference>> end2Values = std::dynamic_pointer_cast<Bag<fUML::Semantics::StructuredClassifiers::Reference>>(this->getValuesFromConnectorEnd(context, end2));
 	for(unsigned int i = 0; i < end1Values->size(); i++) {
 		for(unsigned int j = 0; j < end2Values->size(); j++) {
-			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Link> link = PSCS::PSCSFactory::eInstance()->createCS_Link();
+			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Link> link = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Link();
 			if(connector->getType() == nullptr) {
 				link->setType(this->getDefaultAssociation());
 			}
@@ -874,7 +876,7 @@ void CS_DefaultConstructStrategyImpl::saveContent(std::shared_ptr<persistence::i
 {
 	try
 	{
-		std::shared_ptr<pSCS::Semantics::Actions::ActionsPackage> package = pSCS::Semantics::Actions::ActionsPackage::eInstance();
+		std::shared_ptr<PSCS::Semantics::Actions::ActionsPackage> package = PSCS::Semantics::Actions::ActionsPackage::eInstance();
 
 	
 

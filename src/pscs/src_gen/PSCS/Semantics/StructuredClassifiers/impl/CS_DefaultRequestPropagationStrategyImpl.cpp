@@ -103,7 +103,7 @@ std::shared_ptr<ecore::EObject>  CS_DefaultRequestPropagationStrategyImpl::copy(
 
 std::shared_ptr<ecore::EClass> CS_DefaultRequestPropagationStrategyImpl::eStaticClass() const
 {
-	return pSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getCS_DefaultRequestPropagationStrategy_Class();
+	return PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getCS_DefaultRequestPropagationStrategy_Class();
 }
 
 //*********************************
@@ -238,7 +238,7 @@ void CS_DefaultRequestPropagationStrategyImpl::saveContent(std::shared_ptr<persi
 {
 	try
 	{
-		std::shared_ptr<pSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage> package = pSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance();
+		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage> package = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance();
 
 	
 

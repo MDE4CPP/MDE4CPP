@@ -31,6 +31,8 @@
 #include "PSCS/Semantics/StructuredClassifiers/CS_InteractionPoint.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/CS_Reference.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/CS_Link.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
+
 #include "uml/AddStructuralFeatureValueAction.hpp"
 #include "uml/Port.hpp"
 #include "uml/StructuralFeature.hpp"
@@ -179,7 +181,7 @@ std::shared_ptr<ecore::EObject>  CS_AddStructuralFeatureValueActionActivationImp
 
 std::shared_ptr<ecore::EClass> CS_AddStructuralFeatureValueActionActivationImpl::eStaticClass() const
 {
-	return pSCS::Semantics::Actions::ActionsPackage::eInstance()->getCS_AddStructuralFeatureValueActionActivation_Class();
+	return PSCS::Semantics::Actions::ActionsPackage::eInstance()->getCS_AddStructuralFeatureValueActionActivation_Class();
 }
 
 //*********************************
@@ -213,7 +215,7 @@ void CS_AddStructuralFeatureValueActionActivationImpl::doAction()
 		if(std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Reference>(inputValue) != nullptr) {
 			// First constructs an InteractionPoint from the inputValue
 			std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> reference = std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Reference>(inputValue);
-			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> interactionPoint = PSCS::PSCSFactory::eInstance()->createCS_InteractionPoint();
+			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> interactionPoint = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_InteractionPoint();
 			interactionPoint->setReferent(reference->getReferent());
 			interactionPoint->setDefiningPort(std::dynamic_pointer_cast<uml::Port>(feature));
 			// The value on action.object is necessarily instanceof
@@ -336,7 +338,7 @@ void CS_AddStructuralFeatureValueActionActivationImpl::doActionDefault()
 			}
 		}
 		
-		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Link> newLink = PSCS::PSCSFactory::eInstance()->createCS_Link();
+		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Link> newLink = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Link();
 		newLink->setType(association);
 		
 		// This necessary when setting a feature value with an insertAt
@@ -519,7 +521,7 @@ void CS_AddStructuralFeatureValueActionActivationImpl::saveContent(std::shared_p
 {
 	try
 	{
-		std::shared_ptr<pSCS::Semantics::Actions::ActionsPackage> package = pSCS::Semantics::Actions::ActionsPackage::eInstance();
+		std::shared_ptr<PSCS::Semantics::Actions::ActionsPackage> package = PSCS::Semantics::Actions::ActionsPackage::eInstance();
 
 	
 

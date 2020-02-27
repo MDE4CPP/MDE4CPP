@@ -169,7 +169,7 @@ std::shared_ptr<ecore::EObject>  CS_AcceptEventActionActivationImpl::copy() cons
 
 std::shared_ptr<ecore::EClass> CS_AcceptEventActionActivationImpl::eStaticClass() const
 {
-	return pSCS::Semantics::Actions::ActionsPackage::eInstance()->getCS_AcceptEventActionActivation_Class();
+	return PSCS::Semantics::Actions::ActionsPackage::eInstance()->getCS_AcceptEventActionActivation_Class();
 }
 
 //*********************************
@@ -313,7 +313,7 @@ void CS_AcceptEventActionActivationImpl::saveContent(std::shared_ptr<persistence
 {
 	try
 	{
-		std::shared_ptr<pSCS::Semantics::Actions::ActionsPackage> package = pSCS::Semantics::Actions::ActionsPackage::eInstance();
+		std::shared_ptr<PSCS::Semantics::Actions::ActionsPackage> package = PSCS::Semantics::Actions::ActionsPackage::eInstance();
 
 	
 

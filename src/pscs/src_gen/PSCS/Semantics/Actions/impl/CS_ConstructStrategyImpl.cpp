@@ -104,7 +104,7 @@ std::shared_ptr<ecore::EObject>  CS_ConstructStrategyImpl::copy() const
 
 std::shared_ptr<ecore::EClass> CS_ConstructStrategyImpl::eStaticClass() const
 {
-	return pSCS::Semantics::Actions::ActionsPackage::eInstance()->getCS_ConstructStrategy_Class();
+	return PSCS::Semantics::Actions::ActionsPackage::eInstance()->getCS_ConstructStrategy_Class();
 }
 
 //*********************************
@@ -230,7 +230,7 @@ void CS_ConstructStrategyImpl::saveContent(std::shared_ptr<persistence::interfac
 {
 	try
 	{
-		std::shared_ptr<pSCS::Semantics::Actions::ActionsPackage> package = pSCS::Semantics::Actions::ActionsPackage::eInstance();
+		std::shared_ptr<PSCS::Semantics::Actions::ActionsPackage> package = PSCS::Semantics::Actions::ActionsPackage::eInstance();
 
 	
 

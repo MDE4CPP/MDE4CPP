@@ -130,7 +130,7 @@ std::shared_ptr<ecore::EObject>  CS_EventOccurrenceImpl::copy() const
 
 std::shared_ptr<ecore::EClass> CS_EventOccurrenceImpl::eStaticClass() const
 {
-	return pSCS::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getCS_EventOccurrence_Class();
+	return PSCS::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getCS_EventOccurrence_Class();
 }
 
 //*********************************
@@ -491,7 +491,7 @@ void CS_EventOccurrenceImpl::saveContent(std::shared_ptr<persistence::interfaces
 {
 	try
 	{
-		std::shared_ptr<pSCS::Semantics::CommonBehavior::CommonBehaviorPackage> package = pSCS::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance();
+		std::shared_ptr<PSCS::Semantics::CommonBehavior::CommonBehaviorPackage> package = PSCS::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance();
 
 	
 		// Add attributes

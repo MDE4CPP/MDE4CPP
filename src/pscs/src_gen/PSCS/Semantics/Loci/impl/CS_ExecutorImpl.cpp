@@ -26,7 +26,9 @@
 //Includes from codegen annotation
 #include "PSCS/Semantics/StructuredClassifiers/CS_Object.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/CS_Reference.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
 #include "fUML/Semantics/StructuredClassifiers/Object.hpp"
+#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
 #include "fUML/FUMLFactory.hpp"
 
 //Forward declaration includes
@@ -119,7 +121,7 @@ std::shared_ptr<ecore::EObject>  CS_ExecutorImpl::copy() const
 
 std::shared_ptr<ecore::EClass> CS_ExecutorImpl::eStaticClass() const
 {
-	return pSCS::Semantics::Loci::LociPackage::eInstance()->getCS_Executor_Class();
+	return PSCS::Semantics::Loci::LociPackage::eInstance()->getCS_Executor_Class();
 }
 
 //*********************************
@@ -149,11 +151,11 @@ std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> CS_ExecutorIm
 	
 	std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> reference;
 	if(std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Object>(object) != nullptr) {
-		reference = PSCS::PSCSFactory::eInstance()->createCS_Reference();
+		reference = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Reference();
 		(std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(reference))->setCompositeReferent(std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Object>(object));
 	}
 	else {
-		reference = fUML::FUMLFactory::eInstance()->createReference();
+		reference = fUML::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createReference();
 	}
 	reference->setReferent(object);
 	
@@ -266,7 +268,7 @@ void CS_ExecutorImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 {
 	try
 	{
-		std::shared_ptr<pSCS::Semantics::Loci::LociPackage> package = pSCS::Semantics::Loci::LociPackage::eInstance();
+		std::shared_ptr<PSCS::Semantics::Loci::LociPackage> package = PSCS::Semantics::Loci::LociPackage::eInstance();
 
 	
 

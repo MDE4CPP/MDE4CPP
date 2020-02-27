@@ -114,7 +114,7 @@ std::shared_ptr<ecore::EObject>  CS_OpaqueExpressionEvaluationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> CS_OpaqueExpressionEvaluationImpl::eStaticClass() const
 {
-	return pSCS::Semantics::Values::ValuesPackage::eInstance()->getCS_OpaqueExpressionEvaluation_Class();
+	return PSCS::Semantics::Values::ValuesPackage::eInstance()->getCS_OpaqueExpressionEvaluation_Class();
 }
 
 //*********************************
@@ -283,7 +283,7 @@ void CS_OpaqueExpressionEvaluationImpl::saveContent(std::shared_ptr<persistence:
 {
 	try
 	{
-		std::shared_ptr<pSCS::Semantics::Values::ValuesPackage> package = pSCS::Semantics::Values::ValuesPackage::eInstance();
+		std::shared_ptr<PSCS::Semantics::Values::ValuesPackage> package = PSCS::Semantics::Values::ValuesPackage::eInstance();
 
 	
 

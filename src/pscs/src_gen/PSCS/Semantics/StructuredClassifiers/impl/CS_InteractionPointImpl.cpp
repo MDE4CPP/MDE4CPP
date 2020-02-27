@@ -24,9 +24,8 @@
 #include "ecore/EClass.hpp"
 
 //Includes from codegen annotation
-#include "fUML/FUMLFactory.hpp"
-
 #include "PSCS/Semantics/CommonBehavior/CS_EventOccurrence.hpp"
+#include "PSCS/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -131,7 +130,7 @@ std::shared_ptr<ecore::EObject>  CS_InteractionPointImpl::copy() const
 
 std::shared_ptr<ecore::EClass> CS_InteractionPointImpl::eStaticClass() const
 {
-	return pSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getCS_InteractionPoint_Class();
+	return PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getCS_InteractionPoint_Class();
 }
 
 //*********************************
@@ -172,7 +171,7 @@ void CS_InteractionPointImpl::send(std::shared_ptr<fUML::Semantics::CommonBehavi
 		wrappingEventOccurrence = std::dynamic_pointer_cast<PSCS::Semantics::CommonBehavior::CS_EventOccurrence>(eventOccurrence);
 	}
 	else {
-		wrappingEventOccurrence = PSCS::PSCSFactory::eInstance()->createCS_EventOccurrence();
+		wrappingEventOccurrence = PSCS::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createCS_EventOccurrence();
 		wrappingEventOccurrence->setWrappedEventOccurrence(eventOccurrence);
 	}
 	wrappingEventOccurrence->setInteractionPoint(getThisCS_InteractionPointPtr());
@@ -393,7 +392,7 @@ void CS_InteractionPointImpl::saveContent(std::shared_ptr<persistence::interface
 {
 	try
 	{
-		std::shared_ptr<pSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage> package = pSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance();
+		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage> package = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance();
 
 	
 

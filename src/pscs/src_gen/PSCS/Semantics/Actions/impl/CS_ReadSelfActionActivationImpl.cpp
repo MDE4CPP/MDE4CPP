@@ -25,11 +25,10 @@
 #include "ecore/EClass.hpp"
 
 //Includes from codegen annotation
-#include "fUML/FUMLFactory.hpp"
 #include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
-
 #include "PSCS/Semantics/StructuredClassifiers/CS_Object.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/CS_Reference.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
 #include "uml/OutputPin.hpp"
 #include "uml/ReadSelfAction.hpp"
 
@@ -166,7 +165,7 @@ std::shared_ptr<ecore::EObject>  CS_ReadSelfActionActivationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> CS_ReadSelfActionActivationImpl::eStaticClass() const
 {
-	return pSCS::Semantics::Actions::ActionsPackage::eInstance()->getCS_ReadSelfActionActivation_Class();
+	return PSCS::Semantics::Actions::ActionsPackage::eInstance()->getCS_ReadSelfActionActivation_Class();
 }
 
 //*********************************
@@ -188,7 +187,7 @@ void CS_ReadSelfActionActivationImpl::doAction()
 
 	//DEBUG_MESSAGE(std::cout << "[ReadSelfActionActivation] Start..." << std::endl;)
 	
-	std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> context = PSCS::PSCSFactory::eInstance()->createCS_Reference();
+	std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> context = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Reference();
 	context->setReferent(this->getExecutionContext());
 	if(std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Object>(context->getReferent()) != nullptr) {
 		// i.e. alternatively, it can be an execution
@@ -320,7 +319,7 @@ void CS_ReadSelfActionActivationImpl::saveContent(std::shared_ptr<persistence::i
 {
 	try
 	{
-		std::shared_ptr<pSCS::Semantics::Actions::ActionsPackage> package = pSCS::Semantics::Actions::ActionsPackage::eInstance();
+		std::shared_ptr<PSCS::Semantics::Actions::ActionsPackage> package = PSCS::Semantics::Actions::ActionsPackage::eInstance();
 
 	
 

@@ -191,7 +191,7 @@ std::shared_ptr<ecore::EObject>  CS_CallOperationActionActivationImpl::copy() co
 
 std::shared_ptr<ecore::EClass> CS_CallOperationActionActivationImpl::eStaticClass() const
 {
-	return pSCS::Semantics::Actions::ActionsPackage::eInstance()->getCS_CallOperationActionActivation_Class();
+	return PSCS::Semantics::Actions::ActionsPackage::eInstance()->getCS_CallOperationActionActivation_Class();
 }
 
 //*********************************
@@ -514,7 +514,7 @@ void CS_CallOperationActionActivationImpl::saveContent(std::shared_ptr<persisten
 {
 	try
 	{
-		std::shared_ptr<pSCS::Semantics::Actions::ActionsPackage> package = pSCS::Semantics::Actions::ActionsPackage::eInstance();
+		std::shared_ptr<PSCS::Semantics::Actions::ActionsPackage> package = PSCS::Semantics::Actions::ActionsPackage::eInstance();
 
 	
 

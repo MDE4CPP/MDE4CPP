@@ -153,7 +153,7 @@ std::shared_ptr<ecore::EObject>  CS_CallEventExecutionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> CS_CallEventExecutionImpl::eStaticClass() const
 {
-	return pSCS::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getCS_CallEventExecution_Class();
+	return PSCS::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getCS_CallEventExecution_Class();
 }
 
 //*********************************
@@ -171,7 +171,7 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> CS_CallEventEx
 	//generated from body annotation
 		// Wrap the created event occurrence within a CS_EventOccurrence which
 	// references the behavior port on which the call was dispatched.
-	std::shared_ptr<PSCS::Semantics::CommonBehavior::CS_EventOccurrence> wrappingEventOccurrence = PSCS::PSCSFactory::eInstance()->createCS_EventOccurrence();
+	std::shared_ptr<PSCS::Semantics::CommonBehavior::CS_EventOccurrence> wrappingEventOccurrence = PSCS::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createCS_EventOccurrence();
 	wrappingEventOccurrence->setInteractionPoint(this->getInteractionPoint());
 	wrappingEventOccurrence->setWrappedEventOccurrence(fUML::Semantics::CommonBehavior::CallEventExecutionImpl::createEventOccurrence());
 	return wrappingEventOccurrence;
@@ -184,7 +184,7 @@ std::shared_ptr<fUML::Semantics::Values::Value> CS_CallEventExecutionImpl::new_(
 	//generated from body annotation
 	// Create a new call event execution.
 
-return PSCS::PSCSFactory::eInstance()->createCS_CallEventExecution();
+return PSCS::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createCS_CallEventExecution();
 	//end of body
 }
 
@@ -364,7 +364,7 @@ void CS_CallEventExecutionImpl::saveContent(std::shared_ptr<persistence::interfa
 {
 	try
 	{
-		std::shared_ptr<pSCS::Semantics::CommonBehavior::CommonBehaviorPackage> package = pSCS::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance();
+		std::shared_ptr<PSCS::Semantics::CommonBehavior::CommonBehaviorPackage> package = PSCS::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance();
 
 	
 

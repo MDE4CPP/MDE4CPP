@@ -38,6 +38,7 @@
 #include "fUML/Semantics/SimpleClassifiers/UnlimitedNaturalValue.hpp"
 #include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/CS_Link.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -172,7 +173,7 @@ std::shared_ptr<ecore::EObject>  CS_CreateLinkActionActivationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> CS_CreateLinkActionActivationImpl::eStaticClass() const
 {
-	return pSCS::Semantics::Actions::ActionsPackage::eInstance()->getCS_CreateLinkActionActivation_Class();
+	return PSCS::Semantics::Actions::ActionsPackage::eInstance()->getCS_CreateLinkActionActivation_Class();
 }
 
 //*********************************
@@ -220,7 +221,7 @@ void CS_CreateLinkActionActivationImpl::doAction()
 		}
 	}
 	
-	std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Link> newLink = PSCS::PSCSFactory::eInstance()->createCS_Link();
+	std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Link> newLink = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Link();
 	newLink->setType(linkAssociation);
 	// This is necessary when setting a feature value with an insertAt position
 	newLink->setLocus(this->getExecutionLocus());
@@ -371,7 +372,7 @@ void CS_CreateLinkActionActivationImpl::saveContent(std::shared_ptr<persistence:
 {
 	try
 	{
-		std::shared_ptr<pSCS::Semantics::Actions::ActionsPackage> package = pSCS::Semantics::Actions::ActionsPackage::eInstance();
+		std::shared_ptr<PSCS::Semantics::Actions::ActionsPackage> package = PSCS::Semantics::Actions::ActionsPackage::eInstance();
 
 	
 

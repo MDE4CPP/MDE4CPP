@@ -24,7 +24,7 @@
 #include "ecore/EClass.hpp"
 
 //Includes from codegen annotation
-#include "fUML/FUMLFactory.hpp"
+#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -107,7 +107,7 @@ std::shared_ptr<ecore::EObject>  CS_NameBased_StructuralFeatureOfInterfaceAccess
 
 std::shared_ptr<ecore::EClass> CS_NameBased_StructuralFeatureOfInterfaceAccessStrategyImpl::eStaticClass() const
 {
-	return pSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getCS_NameBased_StructuralFeatureOfInterfaceAccessStrategy_Class();
+	return PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getCS_NameBased_StructuralFeatureOfInterfaceAccessStrategy_Class();
 }
 
 //*********************************
@@ -137,7 +137,7 @@ std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> CS_NameBased_S
 		matchingFeatureValue->setFeature(feature);
 	}
 	else {
-		matchingFeatureValue = fUML::FUMLFactory::eInstance()->createFeatureValue();
+		matchingFeatureValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createFeatureValue();
 		matchingFeatureValue->setFeature(feature);
 		matchingFeatureValue->setPosition(0);
 	}
@@ -270,7 +270,7 @@ void CS_NameBased_StructuralFeatureOfInterfaceAccessStrategyImpl::saveContent(st
 {
 	try
 	{
-		std::shared_ptr<pSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage> package = pSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance();
+		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage> package = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance();
 
 	
 

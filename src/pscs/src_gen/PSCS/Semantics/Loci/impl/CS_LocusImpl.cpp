@@ -24,9 +24,9 @@
 #include "ecore/EClass.hpp"
 
 //Includes from codegen annotation
-#include "fUML/FUMLFactory.hpp"
 #include "uml/Behavior.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/CS_Object.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -133,7 +133,7 @@ std::shared_ptr<ecore::EObject>  CS_LocusImpl::copy() const
 
 std::shared_ptr<ecore::EClass> CS_LocusImpl::eStaticClass() const
 {
-	return pSCS::Semantics::Loci::LociPackage::eInstance()->getCS_Locus_Class();
+	return PSCS::Semantics::Loci::LociPackage::eInstance()->getCS_Locus_Class();
 }
 
 //*********************************
@@ -155,7 +155,7 @@ std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> CS_LocusImpl::in
 		object = fUML::Semantics::Loci::LocusImpl::instantiate(type);
 	}
 	else  {
-		object = PSCS::PSCSFactory::eInstance()->createCS_Object();
+		object = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Object();
 		object->getTypes()->add(type);
 		object->createFeatureValues();
 		this->add(object);
@@ -265,7 +265,7 @@ void CS_LocusImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 {
 	try
 	{
-		std::shared_ptr<pSCS::Semantics::Loci::LociPackage> package = pSCS::Semantics::Loci::LociPackage::eInstance();
+		std::shared_ptr<PSCS::Semantics::Loci::LociPackage> package = PSCS::Semantics::Loci::LociPackage::eInstance();
 
 	
 
