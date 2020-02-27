@@ -17,21 +17,19 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "fUML/impl/FUMLPackageImpl.hpp"
+
+//Includes from codegen annotation
+#include "fUML/Semantics/Activities/ControlToken.hpp"
+#include "uml/ActivityNode.hpp"
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -45,10 +43,15 @@
 
 #include "fUML/Semantics/Activities/Token.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
+//Factories an Package includes
+#include "fUML/Semantics/Activities/Impl/ActivitiesFactoryImpl.hpp"
+#include "fUML/Semantics/Activities/Impl/ActivitiesPackageImpl.hpp"
+
+#include "fUML/Semantics/SemanticsFactory.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -85,9 +88,6 @@ JoinNodeActivationImpl::~JoinNodeActivationImpl()
 			{
 			    m_group = par_group;
 			}
-
-
-
 
 
 
@@ -134,7 +134,7 @@ std::shared_ptr<ecore::EObject>  JoinNodeActivationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> JoinNodeActivationImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getJoinNodeActivation_Class();
+	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getJoinNodeActivation_Class();
 }
 
 //*********************************
@@ -144,6 +144,52 @@ std::shared_ptr<ecore::EClass> JoinNodeActivationImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
+void JoinNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token> >  incomingTokens)
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+		DEBUG_MESSAGE(
+		if (this->getNode() != nullptr)
+		{
+			std::cout<<"[fire] Control node " << this->getNode()->getName() << "..."<<std::endl;
+		}
+	)
+
+	int controlTokenID = fUML::Semantics::Activities::ActivitiesPackage::CONTROLTOKEN_CLASS;
+	std::shared_ptr<Bag<fUML::Semantics::Activities::ControlToken>> controlTokenList(new Bag<fUML::Semantics::Activities::ControlToken>());
+
+	Bag<fUML::Semantics::Activities::Token>::iterator tokenIter = incomingTokens->begin();
+	Bag<fUML::Semantics::Activities::Token>::iterator tokenEnd = incomingTokens->end();
+	while (tokenIter != tokenEnd)
+	{
+		if ((*tokenIter)->getMetaElementID() == controlTokenID)
+		{
+			controlTokenList->push_back(std::dynamic_pointer_cast<fUML::Semantics::Activities::ControlToken>(*tokenIter));
+		}
+		tokenIter++;
+	}
+
+	DEBUG_MESSAGE(std::cout << "found " << std::to_string(controlTokenList->size()) << " control tokens inside list with " << std::to_string(incomingTokens->size()) << std::endl;)
+	if (controlTokenList->size() == incomingTokens->size()) // all incoming tokens are ControlToken -> only one token should be offered
+	{
+		incomingTokens.reset(new Bag<fUML::Semantics::Activities::Token>());
+		incomingTokens->push_back(controlTokenList->front());
+	}
+	else // remove all ControlToken and offer only ObjectToken
+	{
+		Bag<fUML::Semantics::Activities::Token>::iterator controlIter = incomingTokens->begin();
+		Bag<fUML::Semantics::Activities::Token>::iterator controlEnd = incomingTokens->end();
+		while (controlIter != controlEnd)
+		{
+			incomingTokens->erase(*controlIter);
+			controlIter++;
+		}
+	}
+
+	this->sendOffers(incomingTokens);
+	//end of body
+}
+
 bool JoinNodeActivationImpl::isReady()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
@@ -224,11 +270,10 @@ void JoinNodeActivationImpl::load(std::shared_ptr<persistence::interfaces::XLoad
 	// Create new objects (from references (containment == true))
 	//
 	// get FUMLFactory
-	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -238,11 +283,12 @@ void JoinNodeActivationImpl::loadAttributes(std::shared_ptr<persistence::interfa
 	ControlNodeActivationImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void JoinNodeActivationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+void JoinNodeActivationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<fUML::Semantics::Activities::ActivitiesFactory> modelFactory=fUML::Semantics::Activities::ActivitiesFactory::eInstance();
 
-
-	ControlNodeActivationImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	ControlNodeActivationImpl::loadNode(nodeName, loadHandler);
 }
 
 void JoinNodeActivationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
@@ -270,7 +316,7 @@ void JoinNodeActivationImpl::saveContent(std::shared_ptr<persistence::interfaces
 {
 	try
 	{
-		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+		std::shared_ptr<fUML::Semantics::Activities::ActivitiesPackage> package = fUML::Semantics::Activities::ActivitiesPackage::eInstance();
 
 	
 

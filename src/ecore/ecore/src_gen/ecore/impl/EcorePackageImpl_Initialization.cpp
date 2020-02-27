@@ -2935,3 +2935,4 @@ void EcorePackageImpl::initializePackageEDataTypes()
 	m_eTreeIterator_Class->setSerializable(false);
 	
 }
+

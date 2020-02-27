@@ -706,6 +706,8 @@ namespace ecore
 			virtual std::shared_ptr<ecore::EDataType> getETreeIterator_Class() const = 0;
 			
 
+			
+
 			//Singleton Instance and Getter
 			private:
 				static std::shared_ptr<EcorePackage> instance;

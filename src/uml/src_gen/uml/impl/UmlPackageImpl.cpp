@@ -23,6 +23,7 @@
 #include "ecore/EcorePackage.hpp"
 #include "types/TypesPackage.hpp"
 
+
 using namespace uml;
 
 bool UmlPackageImpl::isInited = false;
@@ -56,6 +57,8 @@ void UmlPackageImpl::init(std::shared_ptr<ecore::EPackage> package)
 	setThisEPackagePtr(package);
     initializePackageContents();   
 }
+
+
 
 // Begin Class Abstraction
 std::shared_ptr<ecore::EClass> UmlPackageImpl::getAbstraction_Class() const

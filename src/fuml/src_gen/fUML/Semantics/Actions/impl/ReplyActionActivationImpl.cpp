@@ -17,27 +17,24 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/Union.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "fUML/impl/FUMLPackageImpl.hpp"
+
+//Includes from codegen annotation
 #include "uml/ReplyAction.hpp"
 #include "uml/CallEvent.hpp"
 #include "uml/Trigger.hpp"
 #include "fUML/Semantics/Actions/ReturnInformation.hpp"
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -57,10 +54,15 @@
 
 #include "fUML/Semantics/Activities/Token.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
+//Factories an Package includes
+#include "fUML/Semantics/Actions/Impl/ActionsFactoryImpl.hpp"
+#include "fUML/Semantics/Actions/Impl/ActionsPackageImpl.hpp"
+
+#include "fUML/Semantics/SemanticsFactory.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -97,9 +99,6 @@ ReplyActionActivationImpl::~ReplyActionActivationImpl()
 			{
 			    m_group = par_group;
 			}
-
-
-
 
 
 
@@ -166,7 +165,7 @@ std::shared_ptr<ecore::EObject>  ReplyActionActivationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ReplyActionActivationImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getReplyActionActivation_Class();
+	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getReplyActionActivation_Class();
 }
 
 //*********************************
@@ -198,7 +197,7 @@ if((std::dynamic_pointer_cast<uml::CallEvent>(replyToCall->getEvent()) != nullpt
 	unsigned int i = 1;
 
 	while(i <= replyValuePins->size()){
-		std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> parameterValue = fUML::FUMLFactory::eInstance()->createParameterValue();
+		std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> parameterValue = fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createParameterValue();
 		std::shared_ptr<Bag<fUML::Semantics::Values::Value>> currentValues = this->takeTokens(replyValuePins->at(i-1)); 
 		
 		for(unsigned int j = 0; j < currentValues->size(); j++)
@@ -282,11 +281,10 @@ void ReplyActionActivationImpl::load(std::shared_ptr<persistence::interfaces::XL
 	// Create new objects (from references (containment == true))
 	//
 	// get FUMLFactory
-	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -296,11 +294,12 @@ void ReplyActionActivationImpl::loadAttributes(std::shared_ptr<persistence::inte
 	ActionActivationImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void ReplyActionActivationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+void ReplyActionActivationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<fUML::Semantics::Actions::ActionsFactory> modelFactory=fUML::Semantics::Actions::ActionsFactory::eInstance();
 
-
-	ActionActivationImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	ActionActivationImpl::loadNode(nodeName, loadHandler);
 }
 
 void ReplyActionActivationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
@@ -328,7 +327,7 @@ void ReplyActionActivationImpl::saveContent(std::shared_ptr<persistence::interfa
 {
 	try
 	{
-		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+		std::shared_ptr<fUML::Semantics::Actions::ActionsPackage> package = fUML::Semantics::Actions::ActionsPackage::eInstance();
 
 	
 

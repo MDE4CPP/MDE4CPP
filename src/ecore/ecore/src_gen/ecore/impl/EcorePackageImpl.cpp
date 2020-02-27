@@ -20,6 +20,7 @@
 
 //depending model packages
 
+
 using namespace ecore;
 
 bool EcorePackageImpl::isInited = false;
@@ -53,6 +54,8 @@ void EcorePackageImpl::init(std::shared_ptr<ecore::EPackage> package)
 	setThisEPackagePtr(package);
     initializePackageContents();   
 }
+
+
 
 // Begin Class EAnnotation
 std::shared_ptr<ecore::EClass> EcorePackageImpl::getEAnnotation_Class() const

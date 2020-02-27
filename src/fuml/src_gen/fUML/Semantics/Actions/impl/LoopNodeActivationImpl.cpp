@@ -17,22 +17,18 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/Union.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "fUML/impl/FUMLPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -54,10 +50,15 @@
 
 #include "fUML/Semantics/Actions/Values.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
+//Factories an Package includes
+#include "fUML/Semantics/Actions/Impl/ActionsFactoryImpl.hpp"
+#include "fUML/Semantics/Actions/Impl/ActionsPackageImpl.hpp"
+
+#include "fUML/Semantics/SemanticsFactory.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -99,9 +100,6 @@ LoopNodeActivationImpl::~LoopNodeActivationImpl()
 			{
 			    m_group = par_group;
 			}
-
-
-
 
 
 
@@ -185,7 +183,7 @@ std::shared_ptr<ecore::EObject>  LoopNodeActivationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> LoopNodeActivationImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getLoopNodeActivation_Class();
+	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getLoopNodeActivation_Class();
 }
 
 //*********************************
@@ -263,7 +261,7 @@ Any LoopNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType) con
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::LOOPNODEACTIVATION_ATTRIBUTE_BODYOUTPUTLISTS:
+		case fUML::Semantics::Actions::ActionsPackage::LOOPNODEACTIVATION_ATTRIBUTE_BODYOUTPUTLISTS:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<fUML::Semantics::Actions::Values>::iterator iter = m_bodyOutputLists->begin();
@@ -282,7 +280,7 @@ bool LoopNodeActivationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::LOOPNODEACTIVATION_ATTRIBUTE_BODYOUTPUTLISTS:
+		case fUML::Semantics::Actions::ActionsPackage::LOOPNODEACTIVATION_ATTRIBUTE_BODYOUTPUTLISTS:
 			return getBodyOutputLists() != nullptr; //7811
 	}
 	return StructuredActivityNodeActivationImpl::internalEIsSet(featureID);
@@ -291,7 +289,7 @@ bool LoopNodeActivationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::LOOPNODEACTIVATION_ATTRIBUTE_BODYOUTPUTLISTS:
+		case fUML::Semantics::Actions::ActionsPackage::LOOPNODEACTIVATION_ATTRIBUTE_BODYOUTPUTLISTS:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -344,11 +342,10 @@ void LoopNodeActivationImpl::load(std::shared_ptr<persistence::interfaces::XLoad
 	// Create new objects (from references (containment == true))
 	//
 	// get FUMLFactory
-	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -358,8 +355,9 @@ void LoopNodeActivationImpl::loadAttributes(std::shared_ptr<persistence::interfa
 	StructuredActivityNodeActivationImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void LoopNodeActivationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+void LoopNodeActivationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<fUML::Semantics::Actions::ActionsFactory> modelFactory=fUML::Semantics::Actions::ActionsFactory::eInstance();
 
 	try
 	{
@@ -388,8 +386,8 @@ void LoopNodeActivationImpl::loadNode(std::string nodeName, std::shared_ptr<pers
 	{
 		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
 	}
-
-	StructuredActivityNodeActivationImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	StructuredActivityNodeActivationImpl::loadNode(nodeName, loadHandler);
 }
 
 void LoopNodeActivationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
@@ -420,7 +418,7 @@ void LoopNodeActivationImpl::saveContent(std::shared_ptr<persistence::interfaces
 {
 	try
 	{
-		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+		std::shared_ptr<fUML::Semantics::Actions::ActionsPackage> package = fUML::Semantics::Actions::ActionsPackage::eInstance();
 
 	
 
@@ -433,7 +431,7 @@ void LoopNodeActivationImpl::saveContent(std::shared_ptr<persistence::interfaces
 		std::shared_ptr<Bag<fUML::Semantics::Actions::Values>> list_bodyOutputLists = this->getBodyOutputLists();
 		for (std::shared_ptr<fUML::Semantics::Actions::Values> bodyOutputLists : *list_bodyOutputLists) 
 		{
-			saveHandler->addReference(bodyOutputLists, "bodyOutputLists", bodyOutputLists->eClass() != package->getValues_Class());
+			saveHandler->addReference(bodyOutputLists, "bodyOutputLists", bodyOutputLists->eClass() !=fUML::Semantics::Actions::ActionsPackage::eInstance()->getValues_Class());
 		}
 	}
 	catch (std::exception& e)

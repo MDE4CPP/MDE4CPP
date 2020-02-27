@@ -34265,3 +34265,4 @@ void UmlPackageImpl::initializePackageEDataTypes()
 	m_visibilityKind_Class->setName("VisibilityKind");
 	
 }
+

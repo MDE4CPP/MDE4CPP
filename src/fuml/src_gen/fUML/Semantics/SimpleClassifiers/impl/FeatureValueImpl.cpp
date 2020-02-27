@@ -17,22 +17,19 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "fUML/impl/FUMLPackageImpl.hpp"
-#include "fUML/FUMLFactory.hpp"
-#include "uml/StructuralFeature.hpp"
 
+//Includes from codegen annotation
+#include "uml/StructuralFeature.hpp"
+#include "fUML/Semantics/Values/ValuesPackage.hpp"
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -42,10 +39,15 @@
 
 #include "fUML/Semantics/Values/Value.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
+//Factories an Package includes
+#include "fUML/Semantics/SimpleClassifiers/Impl/SimpleClassifiersFactoryImpl.hpp"
+#include "fUML/Semantics/SimpleClassifiers/Impl/SimpleClassifiersPackageImpl.hpp"
+
+#include "fUML/Semantics/SemanticsFactory.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -124,7 +126,7 @@ std::shared_ptr<ecore::EObject>  FeatureValueImpl::copy() const
 
 std::shared_ptr<ecore::EClass> FeatureValueImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getFeatureValue_Class();
+	return fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance()->getFeatureValue_Class();
 }
 
 //*********************************
@@ -169,7 +171,7 @@ bool FeatureValueImpl::hasEqualValues(std::shared_ptr<fUML::Semantics::SimpleCla
         }
         else
         {
-        	std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> otherFeatureValues(FUMLFactory::eInstance()->createFeatureValue());
+        	std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> otherFeatureValues(fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createFeatureValue());
         	std::shared_ptr<Bag<fUML::Semantics::Values::Value> > values = other->getValues();
             for(unsigned int i = 0; i < values->size(); i++)
             {
@@ -247,11 +249,11 @@ Any FeatureValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::FEATUREVALUE_ATTRIBUTE_FEATURE:
+		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_ATTRIBUTE_FEATURE:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getFeature())); //552
-		case fUML::FUMLPackage::FEATUREVALUE_ATTRIBUTE_POSITION:
+		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_ATTRIBUTE_POSITION:
 			return eAny(getPosition()); //551
-		case fUML::FUMLPackage::FEATUREVALUE_ATTRIBUTE_VALUES:
+		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_ATTRIBUTE_VALUES:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<fUML::Semantics::Values::Value>::iterator iter = m_values->begin();
@@ -270,11 +272,11 @@ bool FeatureValueImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::FEATUREVALUE_ATTRIBUTE_FEATURE:
+		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_ATTRIBUTE_FEATURE:
 			return getFeature() != nullptr; //552
-		case fUML::FUMLPackage::FEATUREVALUE_ATTRIBUTE_POSITION:
+		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_ATTRIBUTE_POSITION:
 			return getPosition() != 0; //551
-		case fUML::FUMLPackage::FEATUREVALUE_ATTRIBUTE_VALUES:
+		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_ATTRIBUTE_VALUES:
 			return getValues() != nullptr; //550
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
@@ -283,7 +285,7 @@ bool FeatureValueImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::FEATUREVALUE_ATTRIBUTE_FEATURE:
+		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_ATTRIBUTE_FEATURE:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -291,14 +293,14 @@ bool FeatureValueImpl::eSet(int featureID, Any newValue)
 			setFeature(_feature); //552
 			return true;
 		}
-		case fUML::FUMLPackage::FEATUREVALUE_ATTRIBUTE_POSITION:
+		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_ATTRIBUTE_POSITION:
 		{
 			// BOOST CAST
 			int _position = newValue->get<int>();
 			setPosition(_position); //551
 			return true;
 		}
-		case fUML::FUMLPackage::FEATUREVALUE_ATTRIBUTE_VALUES:
+		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_ATTRIBUTE_VALUES:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -351,11 +353,10 @@ void FeatureValueImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandle
 	// Create new objects (from references (containment == true))
 	//
 	// get FUMLFactory
-	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -393,8 +394,9 @@ void FeatureValueImpl::loadAttributes(std::shared_ptr<persistence::interfaces::X
 	ecore::EObjectImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void FeatureValueImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+void FeatureValueImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory> modelFactory=fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance();
 
 	try
 	{
@@ -424,15 +426,14 @@ void FeatureValueImpl::loadNode(std::string nodeName, std::shared_ptr<persistenc
 	{
 		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
 	}
-
-	ecore::EObjectImpl::loadNode(nodeName, loadHandler, ecore::EcoreFactory::eInstance());
+	//load BasePackage Nodes
 }
 
 void FeatureValueImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::FEATUREVALUE_ATTRIBUTE_FEATURE:
+		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_ATTRIBUTE_FEATURE:
 		{
 			if (references.size() == 1)
 			{
@@ -460,10 +461,9 @@ void FeatureValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 {
 	try
 	{
-		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+		std::shared_ptr<fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage> package = fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance();
 
 	
- 
 		// Add attributes
 		if ( this->eIsSet(package->getFeatureValue_Attribute_position()) )
 		{
@@ -482,7 +482,7 @@ void FeatureValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 		std::shared_ptr<Bag<fUML::Semantics::Values::Value>> list_values = this->getValues();
 		for (std::shared_ptr<fUML::Semantics::Values::Value> values : *list_values) 
 		{
-			saveHandler->addReference(values, "values", values->eClass() != package->fUML::FUMLPackage::eInstance()->getValue_Class());
+			saveHandler->addReference(values, "values", values->eClass() !=fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
 		}
 	}
 	catch (std::exception& e)

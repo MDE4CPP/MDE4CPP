@@ -18,11 +18,11 @@
 #include <iostream>
 #include <sstream>
 
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "fUML/impl/FUMLPackageImpl.hpp"
+
+//Includes from codegen annotation
 #include "fUML/FUMLFactory.hpp"
 #include "uml/Class.hpp"
 #include "uml/Enumeration.hpp"
@@ -34,8 +34,6 @@
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -49,10 +47,15 @@
 
 #include "uml/ValueSpecification.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
+//Factories an Package includes
+#include "fUML/Semantics/SimpleClassifiers/Impl/SimpleClassifiersFactoryImpl.hpp"
+#include "fUML/Semantics/SimpleClassifiers/Impl/SimpleClassifiersPackageImpl.hpp"
+
+#include "fUML/Semantics/SemanticsFactory.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -119,7 +122,7 @@ std::shared_ptr<ecore::EObject>  EnumerationValueImpl::copy() const
 
 std::shared_ptr<ecore::EClass> EnumerationValueImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getEnumerationValue_Class();
+	return fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance()->getEnumerationValue_Class();
 }
 
 //*********************************
@@ -157,7 +160,7 @@ std::shared_ptr<fUML::Semantics::Values::Value> EnumerationValueImpl::new_()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	return std::shared_ptr<fUML::Semantics::Values::Value>(FUMLFactory::eInstance()->createEnumerationValue());
+	return std::shared_ptr<fUML::Semantics::Values::Value>(fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createEnumerationValue());
 	//end of body
 }
 
@@ -233,9 +236,9 @@ Any EnumerationValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::ENUMERATIONVALUE_ATTRIBUTE_LITERAL:
+		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::ENUMERATIONVALUE_ATTRIBUTE_LITERAL:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getLiteral())); //410
-		case fUML::FUMLPackage::ENUMERATIONVALUE_ATTRIBUTE_TYPE:
+		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::ENUMERATIONVALUE_ATTRIBUTE_TYPE:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getType())); //411
 	}
 	return fUML::Semantics::Values::ValueImpl::eGet(featureID, resolve, coreType);
@@ -244,9 +247,9 @@ bool EnumerationValueImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::ENUMERATIONVALUE_ATTRIBUTE_LITERAL:
+		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::ENUMERATIONVALUE_ATTRIBUTE_LITERAL:
 			return getLiteral() != nullptr; //410
-		case fUML::FUMLPackage::ENUMERATIONVALUE_ATTRIBUTE_TYPE:
+		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::ENUMERATIONVALUE_ATTRIBUTE_TYPE:
 			return getType() != nullptr; //411
 	}
 	return fUML::Semantics::Values::ValueImpl::internalEIsSet(featureID);
@@ -255,7 +258,7 @@ bool EnumerationValueImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::ENUMERATIONVALUE_ATTRIBUTE_LITERAL:
+		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::ENUMERATIONVALUE_ATTRIBUTE_LITERAL:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -263,7 +266,7 @@ bool EnumerationValueImpl::eSet(int featureID, Any newValue)
 			setLiteral(_literal); //410
 			return true;
 		}
-		case fUML::FUMLPackage::ENUMERATIONVALUE_ATTRIBUTE_TYPE:
+		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::ENUMERATIONVALUE_ATTRIBUTE_TYPE:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -288,11 +291,10 @@ void EnumerationValueImpl::load(std::shared_ptr<persistence::interfaces::XLoadHa
 	// Create new objects (from references (containment == true))
 	//
 	// get FUMLFactory
-	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -328,18 +330,19 @@ void EnumerationValueImpl::loadAttributes(std::shared_ptr<persistence::interface
 	fUML::Semantics::Values::ValueImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void EnumerationValueImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+void EnumerationValueImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory> modelFactory=fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance();
 
-
-	fUML::Semantics::Values::ValueImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	fUML::Semantics::Values::ValueImpl::loadNode(nodeName, loadHandler);
 }
 
 void EnumerationValueImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::ENUMERATIONVALUE_ATTRIBUTE_LITERAL:
+		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::ENUMERATIONVALUE_ATTRIBUTE_LITERAL:
 		{
 			if (references.size() == 1)
 			{
@@ -351,7 +354,7 @@ void EnumerationValueImpl::resolveReferences(const int featureID, std::list<std:
 			return;
 		}
 
-		case fUML::FUMLPackage::ENUMERATIONVALUE_ATTRIBUTE_TYPE:
+		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::ENUMERATIONVALUE_ATTRIBUTE_TYPE:
 		{
 			if (references.size() == 1)
 			{
@@ -383,7 +386,7 @@ void EnumerationValueImpl::saveContent(std::shared_ptr<persistence::interfaces::
 {
 	try
 	{
-		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+		std::shared_ptr<fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage> package = fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance();
 
 	
 

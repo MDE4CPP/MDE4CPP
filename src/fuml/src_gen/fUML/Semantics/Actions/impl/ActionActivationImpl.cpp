@@ -17,14 +17,14 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/Union.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "fUML/impl/FUMLPackageImpl.hpp"
+
+//Includes from codegen annotation
 #include <algorithm>
 #include <iterator>
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -53,10 +53,6 @@
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -88,10 +84,15 @@
 
 #include "fUML/Semantics/Values/Value.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
+//Factories an Package includes
+#include "fUML/Semantics/Actions/Impl/ActionsFactoryImpl.hpp"
+#include "fUML/Semantics/Actions/Impl/ActionsPackageImpl.hpp"
+
+#include "fUML/Semantics/SemanticsFactory.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -172,9 +173,6 @@ ActionActivationImpl::~ActionActivationImpl()
 
 
 
-
-
-
 ActionActivationImpl::ActionActivationImpl(const ActionActivationImpl & obj):ActionActivationImpl()
 {
 	//create copy of all Attributes
@@ -238,7 +236,7 @@ std::shared_ptr<ecore::EObject>  ActionActivationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ActionActivationImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getActionActivation_Class();
+	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getActionActivation_Class();
 }
 
 //*********************************
@@ -287,7 +285,7 @@ void ActionActivationImpl::addOutgoingEdge(std::shared_ptr<fUML::Semantics::Acti
 
 			forkNodeActivation = this->getGroup().lock()->createNodeActivation(newForkNode);
 
-			std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> newEdge(fUML::FUMLFactory::eInstance()->createActivityEdgeInstance());
+			std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> newEdge(fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createActivityEdgeInstance());
 			fUML::Semantics::Activities::ActivityNodeActivationImpl::addOutgoingEdge(newEdge);
 			forkNodeActivation->addIncomingEdge(newEdge);
 			edge->setSource(forkNodeActivation);
@@ -314,14 +312,14 @@ void ActionActivationImpl::addPinActivation(std::shared_ptr<fUML::Semantics::Act
 
 	switch(pinActivation->eClass()->getClassifierID())
 	{
-		case FUMLPackage::INPUTPINACTIVATION_CLASS:
+		case fUML::Semantics::Actions::ActionsPackage::INPUTPINACTIVATION_CLASS:
 		{
 			std::shared_ptr<fUML::Semantics::Actions::InputPinActivation> inPinActivation= std::dynamic_pointer_cast<fUML::Semantics::Actions::InputPinActivation> (pinActivation);
 			this->getInputPinActivation()->push_back(inPinActivation);
 			break;
 		}
 
-		case FUMLPackage::OUTPUTPINACTIVATION_CLASS:
+		case fUML::Semantics::Actions::ActionsPackage::OUTPUTPINACTIVATION_CLASS:
 		{
 			std::shared_ptr<fUML::Semantics::Actions::OutputPinActivation> outPinActivation= std::dynamic_pointer_cast<fUML::Semantics::Actions::OutputPinActivation> (pinActivation);
 			this->getOutputPinActivation()->push_back(outPinActivation);
@@ -563,7 +561,7 @@ void ActionActivationImpl::putToken(std::shared_ptr<uml::OutputPin>  pin,std::sh
 	    DEBUG_MESSAGE(std::cout<<("[putToken] node = " + this->getNode()->getName())<<std::endl;)
 
 
-	std::shared_ptr<fUML::Semantics::Activities::ObjectToken> token = fUML::FUMLFactory::eInstance()->createObjectToken();
+	std::shared_ptr<fUML::Semantics::Activities::ObjectToken> token = fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createObjectToken();
     token->setValue(value);
 
     std::shared_ptr<fUML::Semantics::Actions::PinActivation> pinActivation = this->retrievePinActivation(pin);
@@ -637,7 +635,7 @@ void ActionActivationImpl::sendOffers()
     // Send offers on all outgoing control flows.
     if (!this->getOutgoingEdges()->empty()) {
     	std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > tokens(new Bag<fUML::Semantics::Activities::Token>());
-        tokens->push_back(std::shared_ptr<fUML::Semantics::Activities::Token>(fUML::FUMLFactory::eInstance()->createControlToken()));
+        tokens->push_back(std::shared_ptr<fUML::Semantics::Activities::Token>(fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createControlToken()));
         this->addTokens(tokens);
         //front ok - because of adding anonymus fork node instead of multiple outgoing edges
         this->getOutgoingEdges()->front()->sendOffer(tokens);
@@ -806,9 +804,9 @@ Any ActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::ACTIONACTIVATION_ATTRIBUTE_FIRING:
+		case fUML::Semantics::Actions::ActionsPackage::ACTIONACTIVATION_ATTRIBUTE_FIRING:
 			return eAny(isFiring()); //57
-		case fUML::FUMLPackage::ACTIONACTIVATION_ATTRIBUTE_INPUTPINACTIVATION:
+		case fUML::Semantics::Actions::ActionsPackage::ACTIONACTIVATION_ATTRIBUTE_INPUTPINACTIVATION:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<fUML::Semantics::Actions::InputPinActivation>::iterator iter = m_inputPinActivation->begin();
@@ -820,7 +818,7 @@ Any ActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 			}
 			return eAny(tempList); //58
 		}
-		case fUML::FUMLPackage::ACTIONACTIVATION_ATTRIBUTE_OUTPUTPINACTIVATION:
+		case fUML::Semantics::Actions::ActionsPackage::ACTIONACTIVATION_ATTRIBUTE_OUTPUTPINACTIVATION:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<fUML::Semantics::Actions::OutputPinActivation>::iterator iter = m_outputPinActivation->begin();
@@ -832,7 +830,7 @@ Any ActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 			}
 			return eAny(tempList); //59
 		}
-		case fUML::FUMLPackage::ACTIONACTIVATION_ATTRIBUTE_PINACTIVATION:
+		case fUML::Semantics::Actions::ActionsPackage::ACTIONACTIVATION_ATTRIBUTE_PINACTIVATION:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<fUML::Semantics::Actions::PinActivation>::iterator iter = m_pinActivation->begin();
@@ -851,13 +849,13 @@ bool ActionActivationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::ACTIONACTIVATION_ATTRIBUTE_FIRING:
+		case fUML::Semantics::Actions::ActionsPackage::ACTIONACTIVATION_ATTRIBUTE_FIRING:
 			return isFiring() != false; //57
-		case fUML::FUMLPackage::ACTIONACTIVATION_ATTRIBUTE_INPUTPINACTIVATION:
+		case fUML::Semantics::Actions::ActionsPackage::ACTIONACTIVATION_ATTRIBUTE_INPUTPINACTIVATION:
 			return getInputPinActivation() != nullptr; //58
-		case fUML::FUMLPackage::ACTIONACTIVATION_ATTRIBUTE_OUTPUTPINACTIVATION:
+		case fUML::Semantics::Actions::ActionsPackage::ACTIONACTIVATION_ATTRIBUTE_OUTPUTPINACTIVATION:
 			return getOutputPinActivation() != nullptr; //59
-		case fUML::FUMLPackage::ACTIONACTIVATION_ATTRIBUTE_PINACTIVATION:
+		case fUML::Semantics::Actions::ActionsPackage::ACTIONACTIVATION_ATTRIBUTE_PINACTIVATION:
 			return getPinActivation() != nullptr; //56
 	}
 	return fUML::Semantics::Activities::ActivityNodeActivationImpl::internalEIsSet(featureID);
@@ -866,14 +864,14 @@ bool ActionActivationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::ACTIONACTIVATION_ATTRIBUTE_FIRING:
+		case fUML::Semantics::Actions::ActionsPackage::ACTIONACTIVATION_ATTRIBUTE_FIRING:
 		{
 			// BOOST CAST
 			bool _firing = newValue->get<bool>();
 			setFiring(_firing); //57
 			return true;
 		}
-		case fUML::FUMLPackage::ACTIONACTIVATION_ATTRIBUTE_INPUTPINACTIVATION:
+		case fUML::Semantics::Actions::ActionsPackage::ACTIONACTIVATION_ATTRIBUTE_INPUTPINACTIVATION:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -909,7 +907,7 @@ bool ActionActivationImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case fUML::FUMLPackage::ACTIONACTIVATION_ATTRIBUTE_OUTPUTPINACTIVATION:
+		case fUML::Semantics::Actions::ActionsPackage::ACTIONACTIVATION_ATTRIBUTE_OUTPUTPINACTIVATION:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -945,7 +943,7 @@ bool ActionActivationImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case fUML::FUMLPackage::ACTIONACTIVATION_ATTRIBUTE_PINACTIVATION:
+		case fUML::Semantics::Actions::ActionsPackage::ACTIONACTIVATION_ATTRIBUTE_PINACTIVATION:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -998,11 +996,10 @@ void ActionActivationImpl::load(std::shared_ptr<persistence::interfaces::XLoadHa
 	// Create new objects (from references (containment == true))
 	//
 	// get FUMLFactory
-	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -1054,18 +1051,19 @@ void ActionActivationImpl::loadAttributes(std::shared_ptr<persistence::interface
 	fUML::Semantics::Activities::ActivityNodeActivationImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void ActionActivationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+void ActionActivationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<fUML::Semantics::Actions::ActionsFactory> modelFactory=fUML::Semantics::Actions::ActionsFactory::eInstance();
 
-
-	fUML::Semantics::Activities::ActivityNodeActivationImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	fUML::Semantics::Activities::ActivityNodeActivationImpl::loadNode(nodeName, loadHandler);
 }
 
 void ActionActivationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::ACTIONACTIVATION_ATTRIBUTE_INPUTPINACTIVATION:
+		case fUML::Semantics::Actions::ActionsPackage::ACTIONACTIVATION_ATTRIBUTE_INPUTPINACTIVATION:
 		{
 			std::shared_ptr<Bag<fUML::Semantics::Actions::InputPinActivation>> _inputPinActivation = getInputPinActivation();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -1079,7 +1077,7 @@ void ActionActivationImpl::resolveReferences(const int featureID, std::list<std:
 			return;
 		}
 
-		case fUML::FUMLPackage::ACTIONACTIVATION_ATTRIBUTE_OUTPUTPINACTIVATION:
+		case fUML::Semantics::Actions::ActionsPackage::ACTIONACTIVATION_ATTRIBUTE_OUTPUTPINACTIVATION:
 		{
 			std::shared_ptr<Bag<fUML::Semantics::Actions::OutputPinActivation>> _outputPinActivation = getOutputPinActivation();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -1093,7 +1091,7 @@ void ActionActivationImpl::resolveReferences(const int featureID, std::list<std:
 			return;
 		}
 
-		case fUML::FUMLPackage::ACTIONACTIVATION_ATTRIBUTE_PINACTIVATION:
+		case fUML::Semantics::Actions::ActionsPackage::ACTIONACTIVATION_ATTRIBUTE_PINACTIVATION:
 		{
 			std::shared_ptr<Bag<fUML::Semantics::Actions::PinActivation>> _pinActivation = getPinActivation();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -1127,10 +1125,9 @@ void ActionActivationImpl::saveContent(std::shared_ptr<persistence::interfaces::
 {
 	try
 	{
-		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+		std::shared_ptr<fUML::Semantics::Actions::ActionsPackage> package = fUML::Semantics::Actions::ActionsPackage::eInstance();
 
 	
- 
 		// Add attributes
 		if ( this->eIsSet(package->getActionActivation_Attribute_firing()) )
 		{

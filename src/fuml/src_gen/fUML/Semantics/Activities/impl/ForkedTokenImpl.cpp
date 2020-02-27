@@ -18,18 +18,16 @@
 #include <iostream>
 #include <sstream>
 
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "fUML/impl/FUMLPackageImpl.hpp"
+
+//Includes from codegen annotation
  
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -39,10 +37,15 @@
 
 #include "fUML/Semantics/Values/Value.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
+//Factories an Package includes
+#include "fUML/Semantics/Activities/Impl/ActivitiesFactoryImpl.hpp"
+#include "fUML/Semantics/Activities/Impl/ActivitiesPackageImpl.hpp"
+
+#include "fUML/Semantics/SemanticsFactory.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -109,7 +112,7 @@ std::shared_ptr<ecore::EObject>  ForkedTokenImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ForkedTokenImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getForkedToken_Class();
+	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getForkedToken_Class();
 }
 
 //*********************************
@@ -220,11 +223,11 @@ Any ForkedTokenImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::FORKEDTOKEN_ATTRIBUTE_BASETOKEN:
+		case fUML::Semantics::Activities::ActivitiesPackage::FORKEDTOKEN_ATTRIBUTE_BASETOKEN:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getBaseToken())); //592
-		case fUML::FUMLPackage::FORKEDTOKEN_ATTRIBUTE_BASETOKENISWITHDRAWN:
+		case fUML::Semantics::Activities::ActivitiesPackage::FORKEDTOKEN_ATTRIBUTE_BASETOKENISWITHDRAWN:
 			return eAny(isBaseTokenIsWithdrawn()); //594
-		case fUML::FUMLPackage::FORKEDTOKEN_ATTRIBUTE_REMAININGOFFERSCOUNT:
+		case fUML::Semantics::Activities::ActivitiesPackage::FORKEDTOKEN_ATTRIBUTE_REMAININGOFFERSCOUNT:
 			return eAny(getRemainingOffersCount()); //593
 	}
 	return TokenImpl::eGet(featureID, resolve, coreType);
@@ -233,11 +236,11 @@ bool ForkedTokenImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::FORKEDTOKEN_ATTRIBUTE_BASETOKEN:
+		case fUML::Semantics::Activities::ActivitiesPackage::FORKEDTOKEN_ATTRIBUTE_BASETOKEN:
 			return getBaseToken() != nullptr; //592
-		case fUML::FUMLPackage::FORKEDTOKEN_ATTRIBUTE_BASETOKENISWITHDRAWN:
+		case fUML::Semantics::Activities::ActivitiesPackage::FORKEDTOKEN_ATTRIBUTE_BASETOKENISWITHDRAWN:
 			return isBaseTokenIsWithdrawn() != false; //594
-		case fUML::FUMLPackage::FORKEDTOKEN_ATTRIBUTE_REMAININGOFFERSCOUNT:
+		case fUML::Semantics::Activities::ActivitiesPackage::FORKEDTOKEN_ATTRIBUTE_REMAININGOFFERSCOUNT:
 			return getRemainingOffersCount() != 0; //593
 	}
 	return TokenImpl::internalEIsSet(featureID);
@@ -246,7 +249,7 @@ bool ForkedTokenImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::FORKEDTOKEN_ATTRIBUTE_BASETOKEN:
+		case fUML::Semantics::Activities::ActivitiesPackage::FORKEDTOKEN_ATTRIBUTE_BASETOKEN:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -254,14 +257,14 @@ bool ForkedTokenImpl::eSet(int featureID, Any newValue)
 			setBaseToken(_baseToken); //592
 			return true;
 		}
-		case fUML::FUMLPackage::FORKEDTOKEN_ATTRIBUTE_BASETOKENISWITHDRAWN:
+		case fUML::Semantics::Activities::ActivitiesPackage::FORKEDTOKEN_ATTRIBUTE_BASETOKENISWITHDRAWN:
 		{
 			// BOOST CAST
 			bool _baseTokenIsWithdrawn = newValue->get<bool>();
 			setBaseTokenIsWithdrawn(_baseTokenIsWithdrawn); //594
 			return true;
 		}
-		case fUML::FUMLPackage::FORKEDTOKEN_ATTRIBUTE_REMAININGOFFERSCOUNT:
+		case fUML::Semantics::Activities::ActivitiesPackage::FORKEDTOKEN_ATTRIBUTE_REMAININGOFFERSCOUNT:
 		{
 			// BOOST CAST
 			int _remainingOffersCount = newValue->get<int>();
@@ -285,11 +288,10 @@ void ForkedTokenImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler
 	// Create new objects (from references (containment == true))
 	//
 	// get FUMLFactory
-	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -336,18 +338,19 @@ void ForkedTokenImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XL
 	TokenImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void ForkedTokenImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+void ForkedTokenImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<fUML::Semantics::Activities::ActivitiesFactory> modelFactory=fUML::Semantics::Activities::ActivitiesFactory::eInstance();
 
-
-	TokenImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	TokenImpl::loadNode(nodeName, loadHandler);
 }
 
 void ForkedTokenImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::FORKEDTOKEN_ATTRIBUTE_BASETOKEN:
+		case fUML::Semantics::Activities::ActivitiesPackage::FORKEDTOKEN_ATTRIBUTE_BASETOKEN:
 		{
 			if (references.size() == 1)
 			{
@@ -376,10 +379,9 @@ void ForkedTokenImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 {
 	try
 	{
-		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+		std::shared_ptr<fUML::Semantics::Activities::ActivitiesPackage> package = fUML::Semantics::Activities::ActivitiesPackage::eInstance();
 
 	
- 
 		// Add attributes
 		if ( this->eIsSet(package->getForkedToken_Attribute_baseTokenIsWithdrawn()) )
 		{

@@ -13,7 +13,7 @@
 //Model includes
 #include "../ExecutionFactory.hpp"
 
-#include "fUML/impl/FUMLFactoryImpl.hpp"
+#include "fUML/Semantics/Loci/Impl/LociFactoryImpl.hpp"
 
 #include "ecore/impl/EObjectImpl.hpp"
 
@@ -31,7 +31,7 @@ virtual public ExecutionFactory
 			ExecutionFactoryImpl& operator=(ExecutionFactoryImpl const&) = delete;
 
 		protected:
-			friend class fUML::FUMLFactoryImpl;
+			friend class fUML::Semantics::Loci::LociFactoryImpl;
 			ExecutionFactoryImpl();
 			virtual std::shared_ptr<ExecutionFactory> getThisExecutionFactoryPtr() const;
 			virtual void setThisExecutionFactoryPtr(std::weak_ptr<ExecutionFactory> thisExecutionFactoryPtr);
@@ -136,7 +136,7 @@ virtual public ExecutionFactory
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
 			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;

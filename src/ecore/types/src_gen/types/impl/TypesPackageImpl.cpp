@@ -13,6 +13,7 @@
 
 //depending model packages
 
+
 using namespace types;
 
 bool TypesPackageImpl::isInited = false;
@@ -46,6 +47,8 @@ void TypesPackageImpl::init(std::shared_ptr<ecore::EPackage> package)
 	setThisEPackagePtr(package);
     initializePackageContents();   
 }
+
+
 
 std::shared_ptr<ecore::EDataType> TypesPackageImpl::getBoolean_Class() const
 {

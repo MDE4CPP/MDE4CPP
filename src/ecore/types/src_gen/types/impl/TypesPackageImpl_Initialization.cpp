@@ -51,3 +51,4 @@ void TypesPackageImpl::initializePackageEDataTypes()
 	m_unlimitedNatural_Class->setSerializable(true);
 	
 }
+

@@ -13,7 +13,7 @@
 //Model includes
 #include "../ExtensionalValue.hpp"
 
-#include "fUML/impl/FUMLFactoryImpl.hpp"
+#include "fUML/Semantics/StructuredClassifiers/Impl/StructuredClassifiersFactoryImpl.hpp"
 #include "fUML/Semantics/SimpleClassifiers/impl/CompoundValueImpl.hpp"
 
 //*********************************
@@ -29,7 +29,7 @@ namespace fUML::Semantics::StructuredClassifiers
 			ExtensionalValueImpl& operator=(ExtensionalValueImpl const&) = delete;
 
 		protected:
-			friend class fUML::FUMLFactoryImpl;
+			friend class fUML::Semantics::StructuredClassifiers::StructuredClassifiersFactoryImpl;
 			ExtensionalValueImpl();
 			virtual std::shared_ptr<ExtensionalValue> getThisExtensionalValuePtr() const;
 			virtual void setThisExtensionalValuePtr(std::weak_ptr<ExtensionalValue> thisExtensionalValuePtr);
@@ -82,7 +82,7 @@ namespace fUML::Semantics::StructuredClassifiers
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
 			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;

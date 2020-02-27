@@ -18,11 +18,11 @@
 #include <iostream>
 #include <sstream>
 
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "fUML/impl/FUMLPackageImpl.hpp"
+
+//Includes from codegen annotation
 #include <sstream>
 #include "fUML/FUMLFactory.hpp"
 #include "uml/Class.hpp"
@@ -34,8 +34,6 @@
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -47,10 +45,15 @@
 
 #include "uml/ValueSpecification.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
+//Factories an Package includes
+#include "fUML/Semantics/SimpleClassifiers/Impl/SimpleClassifiersFactoryImpl.hpp"
+#include "fUML/Semantics/SimpleClassifiers/Impl/SimpleClassifiersPackageImpl.hpp"
+
+#include "fUML/Semantics/SemanticsFactory.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -110,18 +113,18 @@ std::shared_ptr<ecore::EObject>  RealValueImpl::copy() const
 
 std::shared_ptr<ecore::EClass> RealValueImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getRealValue_Class();
+	return fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance()->getRealValue_Class();
 }
 
 //*********************************
 // Attribute Setter Getter
 //*********************************
-void RealValueImpl::setValue(float _value)
+void RealValueImpl::setValue(double _value)
 {
 	m_value = _value;
 } 
 
-float RealValueImpl::getValue() const 
+double RealValueImpl::getValue() const 
 {
 	return m_value;
 }
@@ -135,7 +138,7 @@ bool RealValueImpl::equals(std::shared_ptr<fUML::Semantics::Values::Value>  othe
 	//generated from body annotation
 		bool isEqual = false;
 
-    if(otherValue != nullptr && otherValue->eClass()->getClassifierID() == fUML::FUMLPackage::REALVALUE_CLASS)
+    if(otherValue != nullptr && otherValue->eClass()->getClassifierID() == fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::REALVALUE_CLASS)
     {
 		std::shared_ptr<fUML::Semantics::SimpleClassifiers::RealValue> otherRealValue = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::RealValue>(otherValue);
         isEqual = (otherRealValue->getValue() == this->getValue());
@@ -197,7 +200,7 @@ Any RealValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::REALVALUE_ATTRIBUTE_VALUE:
+		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::REALVALUE_ATTRIBUTE_VALUE:
 			return eAny(getValue()); //951
 	}
 	return PrimitiveValueImpl::eGet(featureID, resolve, coreType);
@@ -206,7 +209,7 @@ bool RealValueImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::REALVALUE_ATTRIBUTE_VALUE:
+		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::REALVALUE_ATTRIBUTE_VALUE:
 			return getValue() != 0; //951
 	}
 	return PrimitiveValueImpl::internalEIsSet(featureID);
@@ -215,10 +218,10 @@ bool RealValueImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::REALVALUE_ATTRIBUTE_VALUE:
+		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::REALVALUE_ATTRIBUTE_VALUE:
 		{
 			// BOOST CAST
-			float _value = newValue->get<float>();
+			double _value = newValue->get<double>();
 			setValue(_value); //951
 			return true;
 		}
@@ -239,11 +242,10 @@ void RealValueImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> 
 	// Create new objects (from references (containment == true))
 	//
 	// get FUMLFactory
-	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -256,8 +258,8 @@ void RealValueImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoa
 		iter = attr_list.find("value");
 		if ( iter != attr_list.end() )
 		{
-			// this attribute is a 'float'
-			float value;
+			// this attribute is a 'double'
+			double value;
 			std::istringstream ( iter->second ) >> value;
 			this->setValue(value);
 		}
@@ -274,11 +276,12 @@ void RealValueImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoa
 	PrimitiveValueImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void RealValueImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+void RealValueImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory> modelFactory=fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance();
 
-
-	PrimitiveValueImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	PrimitiveValueImpl::loadNode(nodeName, loadHandler);
 }
 
 void RealValueImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
@@ -306,10 +309,9 @@ void RealValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 {
 	try
 	{
-		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+		std::shared_ptr<fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage> package = fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance();
 
 	
- 
 		// Add attributes
 		if ( this->eIsSet(package->getRealValue_Attribute_value()) )
 		{

@@ -18,18 +18,21 @@
 #include <iostream>
 #include <sstream>
 
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "fUML/impl/FUMLPackageImpl.hpp"
+
+//Includes from codegen annotation
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
+#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
+
 #include "abstractDataTypes/Subset.hpp"
 #include "fUML/Semantics/SimpleClassifiers/DataValue.hpp"
 #include "fUML/Semantics/SimpleClassifiers/EnumerationValue.hpp"
 #include "fUML/Semantics/CommonBehavior/Execution.hpp"
 #include "fUML/Semantics/Loci/ExecutionFactory.hpp"
 #include "fUML/Semantics/Loci/Executor.hpp"
-#include "fUML/FUMLFactory.hpp"
 #include "fUML/Semantics/StructuredClassifiers/Object.hpp"
 #include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
 #include "fUML/Semantics/Values/Value.hpp"
@@ -47,8 +50,6 @@
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -60,10 +61,15 @@
 
 #include "uml/ValueSpecification.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
+//Factories an Package includes
+#include "fUML/Semantics/Classification/Impl/ClassificationFactoryImpl.hpp"
+#include "fUML/Semantics/Classification/Impl/ClassificationPackageImpl.hpp"
+
+#include "fUML/Semantics/SemanticsFactory.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -124,7 +130,7 @@ std::shared_ptr<ecore::EObject>  InstanceValueEvaluationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> InstanceValueEvaluationImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getInstanceValueEvaluation_Class();
+	return fUML::Semantics::Classification::ClassificationPackage::eInstance()->getInstanceValueEvaluation_Class();
 }
 
 //*********************************
@@ -148,7 +154,7 @@ std::shared_ptr<fUML::Semantics::Values::Value> InstanceValueEvaluationImpl::eva
     std::shared_ptr<uml::EnumerationLiteral> literal = std::dynamic_pointer_cast<uml::EnumerationLiteral>(instance);
     if(literal != nullptr)
     {
-    	std::shared_ptr<fUML::Semantics::SimpleClassifiers::EnumerationValue> enumerationValue(FUMLFactory::eInstance()->createEnumerationValue());
+    	std::shared_ptr<fUML::Semantics::SimpleClassifiers::EnumerationValue> enumerationValue(fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createEnumerationValue());
         enumerationValue->setType(std::dynamic_pointer_cast<uml::Enumeration>(myType));
         enumerationValue->setLiteral(literal);
         value = enumerationValue;
@@ -160,7 +166,7 @@ std::shared_ptr<fUML::Semantics::Values::Value> InstanceValueEvaluationImpl::eva
         if(type != nullptr)
         {
             // Debug.println("[evaluate] Type is a data type.");
-        	std::shared_ptr<fUML::Semantics::SimpleClassifiers::DataValue> dataValue(FUMLFactory::eInstance()->createDataValue());
+        	std::shared_ptr<fUML::Semantics::SimpleClassifiers::DataValue> dataValue(fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createDataValue());
             dataValue->setType(type);
             structuredValue = dataValue;
         }
@@ -176,7 +182,7 @@ std::shared_ptr<fUML::Semantics::Values::Value> InstanceValueEvaluationImpl::eva
             else
             {
                 // Debug.println("[evaluate] Type is a class.");
-                object = FUMLFactory::eInstance()->createObject();
+                object = fUML::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createObject();
                 for(unsigned int i = 0; i < types->size(); i++)
                 {
                 	std::shared_ptr<uml::Classifier> type = types->at(i);
@@ -186,7 +192,7 @@ std::shared_ptr<fUML::Semantics::Values::Value> InstanceValueEvaluationImpl::eva
 
             this->getLocus()->add(object);
 
-            std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> reference(FUMLFactory::eInstance()->createReference());
+            std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> reference(fUML::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createReference());
             reference->setReferent(object);
             structuredValue = reference;
         }
@@ -276,11 +282,10 @@ void InstanceValueEvaluationImpl::load(std::shared_ptr<persistence::interfaces::
 	// Create new objects (from references (containment == true))
 	//
 	// get FUMLFactory
-	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -290,11 +295,12 @@ void InstanceValueEvaluationImpl::loadAttributes(std::shared_ptr<persistence::in
 	fUML::Semantics::Values::EvaluationImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void InstanceValueEvaluationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+void InstanceValueEvaluationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<fUML::Semantics::Classification::ClassificationFactory> modelFactory=fUML::Semantics::Classification::ClassificationFactory::eInstance();
 
-
-	fUML::Semantics::Values::EvaluationImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	fUML::Semantics::Values::EvaluationImpl::loadNode(nodeName, loadHandler);
 }
 
 void InstanceValueEvaluationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
@@ -319,7 +325,7 @@ void InstanceValueEvaluationImpl::saveContent(std::shared_ptr<persistence::inter
 {
 	try
 	{
-		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+		std::shared_ptr<fUML::Semantics::Classification::ClassificationPackage> package = fUML::Semantics::Classification::ClassificationPackage::eInstance();
 
 	
 

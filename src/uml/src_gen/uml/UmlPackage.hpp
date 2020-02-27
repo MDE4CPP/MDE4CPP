@@ -6963,6 +6963,8 @@ namespace uml
 			virtual std::shared_ptr<ecore::EEnum> getVisibilityKind_Class() const = 0;
 			
 
+			
+
 			//Singleton Instance and Getter
 			private:
 				static std::shared_ptr<UmlPackage> instance;

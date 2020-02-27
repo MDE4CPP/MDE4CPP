@@ -18,18 +18,16 @@
 #include <iostream>
 #include <sstream>
 
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "fUML/impl/FUMLPackageImpl.hpp"
- #include "fUML/FUMLFactory.hpp"
+
+//Includes from codegen annotation
+ #include "fUML/Semantics/Values/ValuesPackage.hpp"
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -39,10 +37,15 @@
 
 #include "fUML/Semantics/Values/Value.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
+//Factories an Package includes
+#include "fUML/Semantics/Activities/Impl/ActivitiesFactoryImpl.hpp"
+#include "fUML/Semantics/Activities/Impl/ActivitiesPackageImpl.hpp"
+
+#include "fUML/Semantics/SemanticsFactory.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -112,7 +115,7 @@ std::shared_ptr<ecore::EObject>  ObjectTokenImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ObjectTokenImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getObjectToken_Class();
+	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getObjectToken_Class();
 }
 
 //*********************************
@@ -177,7 +180,7 @@ Any ObjectTokenImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::OBJECTTOKEN_ATTRIBUTE_VALUE:
+		case fUML::Semantics::Activities::ActivitiesPackage::OBJECTTOKEN_ATTRIBUTE_VALUE:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getValue())); //832
 	}
 	return TokenImpl::eGet(featureID, resolve, coreType);
@@ -186,7 +189,7 @@ bool ObjectTokenImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::OBJECTTOKEN_ATTRIBUTE_VALUE:
+		case fUML::Semantics::Activities::ActivitiesPackage::OBJECTTOKEN_ATTRIBUTE_VALUE:
 			return getValue() != nullptr; //832
 	}
 	return TokenImpl::internalEIsSet(featureID);
@@ -195,7 +198,7 @@ bool ObjectTokenImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::OBJECTTOKEN_ATTRIBUTE_VALUE:
+		case fUML::Semantics::Activities::ActivitiesPackage::OBJECTTOKEN_ATTRIBUTE_VALUE:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -220,11 +223,10 @@ void ObjectTokenImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler
 	// Create new objects (from references (containment == true))
 	//
 	// get FUMLFactory
-	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -234,8 +236,9 @@ void ObjectTokenImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XL
 	TokenImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void ObjectTokenImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+void ObjectTokenImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<fUML::Semantics::Activities::ActivitiesFactory> modelFactory=fUML::Semantics::Activities::ActivitiesFactory::eInstance();
 
 	try
 	{
@@ -264,8 +267,8 @@ void ObjectTokenImpl::loadNode(std::string nodeName, std::shared_ptr<persistence
 	{
 		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
 	}
-
-	TokenImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	TokenImpl::loadNode(nodeName, loadHandler);
 }
 
 void ObjectTokenImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
@@ -287,7 +290,7 @@ void ObjectTokenImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 {
 	try
 	{
-		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+		std::shared_ptr<fUML::Semantics::Activities::ActivitiesPackage> package = fUML::Semantics::Activities::ActivitiesPackage::eInstance();
 
 	
 
@@ -300,7 +303,7 @@ void ObjectTokenImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 		std::shared_ptr<fUML::Semantics::Values::Value > value = this->getValue();
 		if (value != nullptr)
 		{
-			saveHandler->addReference(value, "value", value->eClass() != package->fUML::FUMLPackage::eInstance()->getValue_Class());
+			saveHandler->addReference(value, "value", value->eClass() != fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
 		}
 	}
 	catch (std::exception& e)

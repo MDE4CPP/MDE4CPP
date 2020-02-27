@@ -17,23 +17,19 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "fUML/impl/FUMLPackageImpl.hpp"
+
+//Includes from codegen annotation
 #include <algorithm> 
 #include "fUML/FUMLFactory.hpp"
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -47,10 +43,15 @@
 
 #include "fUML/Semantics/Activities/Token.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
+//Factories an Package includes
+#include "fUML/Semantics/Activities/Impl/ActivitiesFactoryImpl.hpp"
+#include "fUML/Semantics/Activities/Impl/ActivitiesPackageImpl.hpp"
+
+#include "fUML/Semantics/SemanticsFactory.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -111,9 +112,6 @@ ActivityEdgeInstanceImpl::~ActivityEdgeInstanceImpl()
 
 
 
-
-
-
 ActivityEdgeInstanceImpl::ActivityEdgeInstanceImpl(const ActivityEdgeInstanceImpl & obj):ActivityEdgeInstanceImpl()
 {
 	//create copy of all Attributes
@@ -149,7 +147,7 @@ std::shared_ptr<ecore::EObject>  ActivityEdgeInstanceImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ActivityEdgeInstanceImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getActivityEdgeInstance_Class();
+	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getActivityEdgeInstance_Class();
 }
 
 //*********************************
@@ -214,7 +212,7 @@ void ActivityEdgeInstanceImpl::sendOffer(std::shared_ptr<Bag<fUML::Semantics::Ac
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-		std::shared_ptr<fUML::Semantics::Activities::Offer> offer(fUML::FUMLFactory::eInstance()->createOffer());
+		std::shared_ptr<fUML::Semantics::Activities::Offer> offer(fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createOffer());
     offer->getOfferedTokens()->insert(offer->getOfferedTokens()->end(), tokens->begin(), tokens->end());
     this->getOffers()->push_back(offer);
     auto target = this->getTarget().lock();
@@ -359,11 +357,11 @@ Any ActivityEdgeInstanceImpl::eGet(int featureID, bool resolve, bool coreType) c
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_EDGE:
+		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_EDGE:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEdge())); //60
-		case fUML::FUMLPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_GROUP:
+		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_GROUP:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getGroup().lock())); //64
-		case fUML::FUMLPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_OFFERS:
+		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_OFFERS:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<fUML::Semantics::Activities::Offer>::iterator iter = m_offers->begin();
@@ -375,9 +373,9 @@ Any ActivityEdgeInstanceImpl::eGet(int featureID, bool resolve, bool coreType) c
 			}
 			return eAny(tempList); //63
 		}
-		case fUML::FUMLPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_SOURCE:
+		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_SOURCE:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSource().lock())); //61
-		case fUML::FUMLPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_TARGET:
+		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_TARGET:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getTarget().lock())); //62
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
@@ -386,15 +384,15 @@ bool ActivityEdgeInstanceImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_EDGE:
+		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_EDGE:
 			return getEdge() != nullptr; //60
-		case fUML::FUMLPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_GROUP:
+		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_GROUP:
 			return getGroup().lock() != nullptr; //64
-		case fUML::FUMLPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_OFFERS:
+		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_OFFERS:
 			return getOffers() != nullptr; //63
-		case fUML::FUMLPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_SOURCE:
+		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_SOURCE:
 			return getSource().lock() != nullptr; //61
-		case fUML::FUMLPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_TARGET:
+		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_TARGET:
 			return getTarget().lock() != nullptr; //62
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
@@ -403,7 +401,7 @@ bool ActivityEdgeInstanceImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_EDGE:
+		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_EDGE:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -411,7 +409,7 @@ bool ActivityEdgeInstanceImpl::eSet(int featureID, Any newValue)
 			setEdge(_edge); //60
 			return true;
 		}
-		case fUML::FUMLPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_GROUP:
+		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_GROUP:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -419,7 +417,7 @@ bool ActivityEdgeInstanceImpl::eSet(int featureID, Any newValue)
 			setGroup(_group); //64
 			return true;
 		}
-		case fUML::FUMLPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_OFFERS:
+		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_OFFERS:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -455,7 +453,7 @@ bool ActivityEdgeInstanceImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case fUML::FUMLPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_SOURCE:
+		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_SOURCE:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -463,7 +461,7 @@ bool ActivityEdgeInstanceImpl::eSet(int featureID, Any newValue)
 			setSource(_source); //61
 			return true;
 		}
-		case fUML::FUMLPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_TARGET:
+		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_TARGET:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -488,11 +486,10 @@ void ActivityEdgeInstanceImpl::load(std::shared_ptr<persistence::interfaces::XLo
 	// Create new objects (from references (containment == true))
 	//
 	// get FUMLFactory
-	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -528,18 +525,18 @@ void ActivityEdgeInstanceImpl::loadAttributes(std::shared_ptr<persistence::inter
 	ecore::EObjectImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void ActivityEdgeInstanceImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+void ActivityEdgeInstanceImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<fUML::Semantics::Activities::ActivitiesFactory> modelFactory=fUML::Semantics::Activities::ActivitiesFactory::eInstance();
 
-
-	ecore::EObjectImpl::loadNode(nodeName, loadHandler, ecore::EcoreFactory::eInstance());
+	//load BasePackage Nodes
 }
 
 void ActivityEdgeInstanceImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_EDGE:
+		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_EDGE:
 		{
 			if (references.size() == 1)
 			{
@@ -551,7 +548,7 @@ void ActivityEdgeInstanceImpl::resolveReferences(const int featureID, std::list<
 			return;
 		}
 
-		case fUML::FUMLPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_GROUP:
+		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_GROUP:
 		{
 			if (references.size() == 1)
 			{
@@ -563,7 +560,7 @@ void ActivityEdgeInstanceImpl::resolveReferences(const int featureID, std::list<
 			return;
 		}
 
-		case fUML::FUMLPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_OFFERS:
+		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_OFFERS:
 		{
 			std::shared_ptr<Bag<fUML::Semantics::Activities::Offer>> _offers = getOffers();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -577,7 +574,7 @@ void ActivityEdgeInstanceImpl::resolveReferences(const int featureID, std::list<
 			return;
 		}
 
-		case fUML::FUMLPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_SOURCE:
+		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_SOURCE:
 		{
 			if (references.size() == 1)
 			{
@@ -589,7 +586,7 @@ void ActivityEdgeInstanceImpl::resolveReferences(const int featureID, std::list<
 			return;
 		}
 
-		case fUML::FUMLPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_TARGET:
+		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_TARGET:
 		{
 			if (references.size() == 1)
 			{
@@ -617,7 +614,7 @@ void ActivityEdgeInstanceImpl::saveContent(std::shared_ptr<persistence::interfac
 {
 	try
 	{
-		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+		std::shared_ptr<fUML::Semantics::Activities::ActivitiesPackage> package = fUML::Semantics::Activities::ActivitiesPackage::eInstance();
 
 	
 
