@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -26,21 +25,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -84,10 +74,11 @@
 
 #include "uml/VariableAction.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/Impl/UmlFactoryImpl.hpp"
+#include "uml/Impl/UmlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -129,9 +120,6 @@ ReadVariableActionImpl::~ReadVariableActionImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			ReadVariableActionImpl::ReadVariableActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
 			:ReadVariableActionImpl()
@@ -139,9 +127,6 @@ ReadVariableActionImpl::~ReadVariableActionImpl()
 			    m_inStructuredNode = par_inStructuredNode;
 				m_owner = par_inStructuredNode;
 			}
-
-
-
 
 
 //Additional constructor for the containments back reference
@@ -153,18 +138,12 @@ ReadVariableActionImpl::~ReadVariableActionImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			ReadVariableActionImpl::ReadVariableActionImpl(std::weak_ptr<uml::Element > par_owner)
 			:ReadVariableActionImpl()
 			{
 			    m_owner = par_owner;
 			}
-
-
-
 
 
 
@@ -298,7 +277,7 @@ std::shared_ptr<ecore::EObject>  ReadVariableActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ReadVariableActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getReadVariableAction_Class();
+	return uml::UmlPackage::eInstance()->getReadVariableAction_Class();
 }
 
 //*********************************
@@ -398,7 +377,7 @@ Any ReadVariableActionImpl::eGet(int featureID, bool resolve, bool coreType) con
 {
 	switch(featureID)
 	{
-		case UmlPackage::READVARIABLEACTION_ATTRIBUTE_RESULT:
+		case uml::UmlPackage::READVARIABLEACTION_ATTRIBUTE_RESULT:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getResult())); //20128
 	}
 	return VariableActionImpl::eGet(featureID, resolve, coreType);
@@ -407,7 +386,7 @@ bool ReadVariableActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::READVARIABLEACTION_ATTRIBUTE_RESULT:
+		case uml::UmlPackage::READVARIABLEACTION_ATTRIBUTE_RESULT:
 			return getResult() != nullptr; //20128
 	}
 	return VariableActionImpl::internalEIsSet(featureID);
@@ -416,7 +395,7 @@ bool ReadVariableActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::READVARIABLEACTION_ATTRIBUTE_RESULT:
+		case uml::UmlPackage::READVARIABLEACTION_ATTRIBUTE_RESULT:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -441,11 +420,10 @@ void ReadVariableActionImpl::load(std::shared_ptr<persistence::interfaces::XLoad
 	// Create new objects (from references (containment == true))
 	//
 	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -455,8 +433,9 @@ void ReadVariableActionImpl::loadAttributes(std::shared_ptr<persistence::interfa
 	VariableActionImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void ReadVariableActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void ReadVariableActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
 
 	try
 	{
@@ -484,8 +463,8 @@ void ReadVariableActionImpl::loadNode(std::string nodeName, std::shared_ptr<pers
 	{
 		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
 	}
-
-	VariableActionImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	VariableActionImpl::loadNode(nodeName, loadHandler);
 }
 
 void ReadVariableActionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)

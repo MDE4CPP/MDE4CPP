@@ -12,7 +12,8 @@
 #include "ecore/EStringToStringMapEntry.hpp"
 
 //depending model packages
-
+//include subpackages 
+ 
 using namespace types;
 
 void TypesPackageImpl::createPackageContents(std::shared_ptr<ecore::EPackage> package)
@@ -27,6 +28,7 @@ void TypesPackageImpl::createPackageContents(std::shared_ptr<ecore::EPackage> pa
 
 
 	createPackageEDataTypes(package, factory);
+
 }
 
 

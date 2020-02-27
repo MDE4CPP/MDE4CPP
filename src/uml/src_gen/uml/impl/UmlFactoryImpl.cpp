@@ -5,8 +5,7 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/ElementImpl.hpp"
-
-#include "uml/UmlPackage.hpp"
+#include "uml/umlPackage.hpp"
 #include "uml/impl/AbstractionImpl.hpp"
 #include "uml/impl/AcceptCallActionImpl.hpp"
 #include "uml/impl/AcceptEventActionImpl.hpp"
@@ -19781,7 +19780,3 @@ std::shared_ptr<Variable> UmlFactoryImpl::createVariable_in_Scope(std::weak_ptr<
 	
 }
 
-std::shared_ptr<UmlPackage> UmlFactoryImpl::getUmlPackage() const
-{
-	return UmlPackage::eInstance();
-}

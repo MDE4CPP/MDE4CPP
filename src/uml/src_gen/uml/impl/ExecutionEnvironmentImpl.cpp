@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -25,23 +24,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -113,10 +101,11 @@
 
 #include "uml/UseCase.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/Impl/UmlFactoryImpl.hpp"
+#include "uml/Impl/UmlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -156,18 +145,12 @@ ExecutionEnvironmentImpl::~ExecutionEnvironmentImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			ExecutionEnvironmentImpl::ExecutionEnvironmentImpl(std::weak_ptr<uml::Element > par_owner)
 			:ExecutionEnvironmentImpl()
 			{
 			    m_owner = par_owner;
 			}
-
-
-
 
 
 //Additional constructor for the containments back reference
@@ -191,9 +174,6 @@ ExecutionEnvironmentImpl::ExecutionEnvironmentImpl(std::weak_ptr<uml::Package > 
 }
 
 
-
-
-
 //Additional constructor for the containments back reference
 			ExecutionEnvironmentImpl::ExecutionEnvironmentImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
 			:ExecutionEnvironmentImpl()
@@ -203,13 +183,7 @@ ExecutionEnvironmentImpl::ExecutionEnvironmentImpl(std::weak_ptr<uml::Package > 
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
-
-
-
 
 
 
@@ -493,7 +467,7 @@ std::shared_ptr<ecore::EObject>  ExecutionEnvironmentImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ExecutionEnvironmentImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getExecutionEnvironment_Class();
+	return uml::UmlPackage::eInstance()->getExecutionEnvironment_Class();
 }
 
 //*********************************
@@ -625,11 +599,10 @@ void ExecutionEnvironmentImpl::load(std::shared_ptr<persistence::interfaces::XLo
 	// Create new objects (from references (containment == true))
 	//
 	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -639,11 +612,12 @@ void ExecutionEnvironmentImpl::loadAttributes(std::shared_ptr<persistence::inter
 	NodeImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void ExecutionEnvironmentImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void ExecutionEnvironmentImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
 
-
-	NodeImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	NodeImpl::loadNode(nodeName, loadHandler);
 }
 
 void ExecutionEnvironmentImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)

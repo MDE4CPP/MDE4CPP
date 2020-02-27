@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -26,21 +25,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -72,10 +62,11 @@
 
 #include "uml/ValueSpecification.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/Impl/UmlFactoryImpl.hpp"
+#include "uml/Impl/UmlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -140,18 +131,12 @@ InstanceSpecificationImpl::~InstanceSpecificationImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			InstanceSpecificationImpl::InstanceSpecificationImpl(std::weak_ptr<uml::Element > par_owner)
 			:InstanceSpecificationImpl()
 			{
 			    m_owner = par_owner;
 			}
-
-
-
 
 
 //Additional constructor for the containments back reference
@@ -163,9 +148,6 @@ InstanceSpecificationImpl::~InstanceSpecificationImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			InstanceSpecificationImpl::InstanceSpecificationImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
 			:InstanceSpecificationImpl()
@@ -173,9 +155,6 @@ InstanceSpecificationImpl::~InstanceSpecificationImpl()
 			    m_owningTemplateParameter = par_owningTemplateParameter;
 				m_owner = par_owningTemplateParameter;
 			}
-
-
-
 
 
 
@@ -272,7 +251,7 @@ std::shared_ptr<ecore::EObject>  InstanceSpecificationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> InstanceSpecificationImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getInstanceSpecification_Class();
+	return uml::UmlPackage::eInstance()->getInstanceSpecification_Class();
 }
 
 //*********************************
@@ -392,7 +371,7 @@ Any InstanceSpecificationImpl::eGet(int featureID, bool resolve, bool coreType) 
 {
 	switch(featureID)
 	{
-		case UmlPackage::INSTANCESPECIFICATION_ATTRIBUTE_CLASSIFIER:
+		case uml::UmlPackage::INSTANCESPECIFICATION_ATTRIBUTE_CLASSIFIER:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Classifier>::iterator iter = m_classifier->begin();
@@ -404,7 +383,7 @@ Any InstanceSpecificationImpl::eGet(int featureID, bool resolve, bool coreType) 
 			}
 			return eAny(tempList); //11814
 		}
-		case UmlPackage::INSTANCESPECIFICATION_ATTRIBUTE_SLOT:
+		case uml::UmlPackage::INSTANCESPECIFICATION_ATTRIBUTE_SLOT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Slot>::iterator iter = m_slot->begin();
@@ -416,7 +395,7 @@ Any InstanceSpecificationImpl::eGet(int featureID, bool resolve, bool coreType) 
 			}
 			return eAny(tempList); //11815
 		}
-		case UmlPackage::INSTANCESPECIFICATION_ATTRIBUTE_SPECIFICATION:
+		case uml::UmlPackage::INSTANCESPECIFICATION_ATTRIBUTE_SPECIFICATION:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSpecification())); //11816
 	}
 	Any result;
@@ -437,11 +416,11 @@ bool InstanceSpecificationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::INSTANCESPECIFICATION_ATTRIBUTE_CLASSIFIER:
+		case uml::UmlPackage::INSTANCESPECIFICATION_ATTRIBUTE_CLASSIFIER:
 			return getClassifier() != nullptr; //11814
-		case UmlPackage::INSTANCESPECIFICATION_ATTRIBUTE_SLOT:
+		case uml::UmlPackage::INSTANCESPECIFICATION_ATTRIBUTE_SLOT:
 			return getSlot() != nullptr; //11815
-		case UmlPackage::INSTANCESPECIFICATION_ATTRIBUTE_SPECIFICATION:
+		case uml::UmlPackage::INSTANCESPECIFICATION_ATTRIBUTE_SPECIFICATION:
 			return getSpecification() != nullptr; //11816
 	}
 	bool result = false;
@@ -462,7 +441,7 @@ bool InstanceSpecificationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::INSTANCESPECIFICATION_ATTRIBUTE_CLASSIFIER:
+		case uml::UmlPackage::INSTANCESPECIFICATION_ATTRIBUTE_CLASSIFIER:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -498,7 +477,7 @@ bool InstanceSpecificationImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case UmlPackage::INSTANCESPECIFICATION_ATTRIBUTE_SLOT:
+		case uml::UmlPackage::INSTANCESPECIFICATION_ATTRIBUTE_SLOT:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -534,7 +513,7 @@ bool InstanceSpecificationImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case UmlPackage::INSTANCESPECIFICATION_ATTRIBUTE_SPECIFICATION:
+		case uml::UmlPackage::INSTANCESPECIFICATION_ATTRIBUTE_SPECIFICATION:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -571,11 +550,10 @@ void InstanceSpecificationImpl::load(std::shared_ptr<persistence::interfaces::XL
 	// Create new objects (from references (containment == true))
 	//
 	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -606,8 +584,9 @@ void InstanceSpecificationImpl::loadAttributes(std::shared_ptr<persistence::inte
 	PackageableElementImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void InstanceSpecificationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void InstanceSpecificationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
 
 	try
 	{
@@ -618,7 +597,7 @@ void InstanceSpecificationImpl::loadNode(std::string nodeName, std::shared_ptr<p
 			{
 				typeName = "Slot";
 			}
-			std::shared_ptr<ecore::EObject> slot = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::SLOT_ATTRIBUTE_OWNINGINSTANCE);
+			std::shared_ptr<ecore::EObject> slot = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::UmlPackage::SLOT_ATTRIBUTE_OWNINGINSTANCE);
 			if (slot != nullptr)
 			{
 				loadHandler->handleChild(slot);
@@ -651,17 +630,17 @@ void InstanceSpecificationImpl::loadNode(std::string nodeName, std::shared_ptr<p
 	{
 		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
 	}
-
-	DeployedArtifactImpl::loadNode(nodeName, loadHandler, modelFactory);
-	DeploymentTargetImpl::loadNode(nodeName, loadHandler, modelFactory);
-	PackageableElementImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	DeployedArtifactImpl::loadNode(nodeName, loadHandler);
+	DeploymentTargetImpl::loadNode(nodeName, loadHandler);
+	PackageableElementImpl::loadNode(nodeName, loadHandler);
 }
 
 void InstanceSpecificationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
-		case UmlPackage::INSTANCESPECIFICATION_ATTRIBUTE_CLASSIFIER:
+		case uml::UmlPackage::INSTANCESPECIFICATION_ATTRIBUTE_CLASSIFIER:
 		{
 			std::shared_ptr<Bag<uml::Classifier>> _classifier = getClassifier();
 			for(std::shared_ptr<ecore::EObject> ref : references)

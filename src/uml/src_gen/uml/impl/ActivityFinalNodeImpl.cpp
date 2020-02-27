@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -25,21 +24,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -73,10 +63,11 @@
 
 #include "uml/StructuredActivityNode.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/Impl/UmlFactoryImpl.hpp"
+#include "uml/Impl/UmlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -116,9 +107,6 @@ ActivityFinalNodeImpl::~ActivityFinalNodeImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			ActivityFinalNodeImpl::ActivityFinalNodeImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
 			:ActivityFinalNodeImpl()
@@ -126,9 +114,6 @@ ActivityFinalNodeImpl::~ActivityFinalNodeImpl()
 			    m_inStructuredNode = par_inStructuredNode;
 				m_owner = par_inStructuredNode;
 			}
-
-
-
 
 
 //Additional constructor for the containments back reference
@@ -140,18 +125,12 @@ ActivityFinalNodeImpl::~ActivityFinalNodeImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			ActivityFinalNodeImpl::ActivityFinalNodeImpl(std::weak_ptr<uml::Element > par_owner)
 			:ActivityFinalNodeImpl()
 			{
 			    m_owner = par_owner;
 			}
-
-
-
 
 
 
@@ -248,7 +227,7 @@ std::shared_ptr<ecore::EObject>  ActivityFinalNodeImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ActivityFinalNodeImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getActivityFinalNode_Class();
+	return uml::UmlPackage::eInstance()->getActivityFinalNode_Class();
 }
 
 //*********************************
@@ -355,11 +334,10 @@ void ActivityFinalNodeImpl::load(std::shared_ptr<persistence::interfaces::XLoadH
 	// Create new objects (from references (containment == true))
 	//
 	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -369,11 +347,12 @@ void ActivityFinalNodeImpl::loadAttributes(std::shared_ptr<persistence::interfac
 	FinalNodeImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void ActivityFinalNodeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void ActivityFinalNodeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
 
-
-	FinalNodeImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	FinalNodeImpl::loadNode(nodeName, loadHandler);
 }
 
 void ActivityFinalNodeImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)

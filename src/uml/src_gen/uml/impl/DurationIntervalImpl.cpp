@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -25,25 +24,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -71,10 +57,11 @@
 
 #include "uml/ValueSpecificationAction.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/Impl/UmlFactoryImpl.hpp"
+#include "uml/Impl/UmlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -114,18 +101,12 @@ DurationIntervalImpl::~DurationIntervalImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			DurationIntervalImpl::DurationIntervalImpl(std::weak_ptr<uml::Element > par_owner)
 			:DurationIntervalImpl()
 			{
 			    m_owner = par_owner;
 			}
-
-
-
 
 
 //Additional constructor for the containments back reference
@@ -137,9 +118,6 @@ DurationIntervalImpl::~DurationIntervalImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			DurationIntervalImpl::DurationIntervalImpl(std::weak_ptr<uml::Slot > par_owningSlot)
 			:DurationIntervalImpl()
@@ -147,9 +125,6 @@ DurationIntervalImpl::~DurationIntervalImpl()
 			    m_owningSlot = par_owningSlot;
 				m_owner = par_owningSlot;
 			}
-
-
-
 
 
 //Additional constructor for the containments back reference
@@ -161,9 +136,6 @@ DurationIntervalImpl::~DurationIntervalImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			DurationIntervalImpl::DurationIntervalImpl(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction)
 			:DurationIntervalImpl()
@@ -171,9 +143,6 @@ DurationIntervalImpl::~DurationIntervalImpl()
 			    m_valueSpecificationAction = par_valueSpecificationAction;
 				m_owner = par_valueSpecificationAction;
 			}
-
-
-
 
 
 
@@ -242,7 +211,7 @@ std::shared_ptr<ecore::EObject>  DurationIntervalImpl::copy() const
 
 std::shared_ptr<ecore::EClass> DurationIntervalImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getDurationInterval_Class();
+	return uml::UmlPackage::eInstance()->getDurationInterval_Class();
 }
 
 //*********************************
@@ -355,11 +324,10 @@ void DurationIntervalImpl::load(std::shared_ptr<persistence::interfaces::XLoadHa
 	// Create new objects (from references (containment == true))
 	//
 	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -369,11 +337,12 @@ void DurationIntervalImpl::loadAttributes(std::shared_ptr<persistence::interface
 	IntervalImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void DurationIntervalImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void DurationIntervalImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
 
-
-	IntervalImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	IntervalImpl::loadNode(nodeName, loadHandler);
 }
 
 void DurationIntervalImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)

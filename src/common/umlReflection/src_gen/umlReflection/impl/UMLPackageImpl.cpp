@@ -105,6 +105,7 @@ void UMLPackageImpl::createPackageActivities(std::shared_ptr<uml::Package> uML, 
 {
 }
 
+
 void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std::shared_ptr<uml::UmlFactory> factory)
 {
 	std::shared_ptr<uml::Constraint> con = nullptr;
@@ -13976,6 +13977,7 @@ void UMLPackageImpl::initializePackageContents(std::shared_ptr<uml::Package> uML
 void UMLPackageImpl::initializePackageActivities()
 {
 }
+
 
 void UMLPackageImpl::initializePackageClasses()
 {

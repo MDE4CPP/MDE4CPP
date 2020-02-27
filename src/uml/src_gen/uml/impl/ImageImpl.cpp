@@ -17,22 +17,18 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/Union.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -40,10 +36,11 @@
 
 #include "uml/Element.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/Impl/UmlFactoryImpl.hpp"
+#include "uml/Impl/UmlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -85,9 +82,6 @@ ImageImpl::~ImageImpl()
 
 
 
-
-
-
 ImageImpl::ImageImpl(const ImageImpl & obj):ImageImpl()
 {
 	//create copy of all Attributes
@@ -125,7 +119,7 @@ std::shared_ptr<ecore::EObject>  ImageImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ImageImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getImage_Class();
+	return uml::UmlPackage::eInstance()->getImage_Class();
 }
 
 //*********************************
@@ -203,11 +197,11 @@ Any ImageImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::IMAGE_ATTRIBUTE_CONTENT:
+		case uml::UmlPackage::IMAGE_ATTRIBUTE_CONTENT:
 			return eAny(getContent()); //1123
-		case UmlPackage::IMAGE_ATTRIBUTE_FORMAT:
+		case uml::UmlPackage::IMAGE_ATTRIBUTE_FORMAT:
 			return eAny(getFormat()); //1124
-		case UmlPackage::IMAGE_ATTRIBUTE_LOCATION:
+		case uml::UmlPackage::IMAGE_ATTRIBUTE_LOCATION:
 			return eAny(getLocation()); //1125
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
@@ -216,11 +210,11 @@ bool ImageImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::IMAGE_ATTRIBUTE_CONTENT:
+		case uml::UmlPackage::IMAGE_ATTRIBUTE_CONTENT:
 			return getContent() != ""; //1123
-		case UmlPackage::IMAGE_ATTRIBUTE_FORMAT:
+		case uml::UmlPackage::IMAGE_ATTRIBUTE_FORMAT:
 			return getFormat() != ""; //1124
-		case UmlPackage::IMAGE_ATTRIBUTE_LOCATION:
+		case uml::UmlPackage::IMAGE_ATTRIBUTE_LOCATION:
 			return getLocation() != ""; //1125
 	}
 	return ElementImpl::internalEIsSet(featureID);
@@ -229,21 +223,21 @@ bool ImageImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::IMAGE_ATTRIBUTE_CONTENT:
+		case uml::UmlPackage::IMAGE_ATTRIBUTE_CONTENT:
 		{
 			// BOOST CAST
 			std::string _content = newValue->get<std::string>();
 			setContent(_content); //1123
 			return true;
 		}
-		case UmlPackage::IMAGE_ATTRIBUTE_FORMAT:
+		case uml::UmlPackage::IMAGE_ATTRIBUTE_FORMAT:
 		{
 			// BOOST CAST
 			std::string _format = newValue->get<std::string>();
 			setFormat(_format); //1124
 			return true;
 		}
-		case UmlPackage::IMAGE_ATTRIBUTE_LOCATION:
+		case uml::UmlPackage::IMAGE_ATTRIBUTE_LOCATION:
 		{
 			// BOOST CAST
 			std::string _location = newValue->get<std::string>();
@@ -267,11 +261,10 @@ void ImageImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> load
 	// Create new objects (from references (containment == true))
 	//
 	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -320,11 +313,12 @@ void ImageImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHan
 	ElementImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void ImageImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void ImageImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
 
-
-	ElementImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	ElementImpl::loadNode(nodeName, loadHandler);
 }
 
 void ImageImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
@@ -352,7 +346,6 @@ void ImageImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandle
 		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
 
 	
- 
 		// Add attributes
 		if ( this->eIsSet(package->getImage_Attribute_content()) )
 		{

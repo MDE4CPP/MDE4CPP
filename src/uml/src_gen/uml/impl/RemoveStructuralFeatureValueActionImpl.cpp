@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -26,21 +25,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -84,10 +74,11 @@
 
 #include "uml/WriteStructuralFeatureAction.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/Impl/UmlFactoryImpl.hpp"
+#include "uml/Impl/UmlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -129,9 +120,6 @@ RemoveStructuralFeatureValueActionImpl::~RemoveStructuralFeatureValueActionImpl(
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			RemoveStructuralFeatureValueActionImpl::RemoveStructuralFeatureValueActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
 			:RemoveStructuralFeatureValueActionImpl()
@@ -139,9 +127,6 @@ RemoveStructuralFeatureValueActionImpl::~RemoveStructuralFeatureValueActionImpl(
 			    m_inStructuredNode = par_inStructuredNode;
 				m_owner = par_inStructuredNode;
 			}
-
-
-
 
 
 //Additional constructor for the containments back reference
@@ -153,18 +138,12 @@ RemoveStructuralFeatureValueActionImpl::~RemoveStructuralFeatureValueActionImpl(
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			RemoveStructuralFeatureValueActionImpl::RemoveStructuralFeatureValueActionImpl(std::weak_ptr<uml::Element > par_owner)
 			:RemoveStructuralFeatureValueActionImpl()
 			{
 			    m_owner = par_owner;
 			}
-
-
-
 
 
 
@@ -320,7 +299,7 @@ std::shared_ptr<ecore::EObject>  RemoveStructuralFeatureValueActionImpl::copy() 
 
 std::shared_ptr<ecore::EClass> RemoveStructuralFeatureValueActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getRemoveStructuralFeatureValueAction_Class();
+	return uml::UmlPackage::eInstance()->getRemoveStructuralFeatureValueAction_Class();
 }
 
 //*********************************
@@ -427,9 +406,9 @@ Any RemoveStructuralFeatureValueActionImpl::eGet(int featureID, bool resolve, bo
 {
 	switch(featureID)
 	{
-		case UmlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_ATTRIBUTE_ISREMOVEDUPLICATES:
+		case uml::UmlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_ATTRIBUTE_ISREMOVEDUPLICATES:
 			return eAny(getIsRemoveDuplicates()); //21031
-		case UmlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_ATTRIBUTE_REMOVEAT:
+		case uml::UmlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_ATTRIBUTE_REMOVEAT:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getRemoveAt())); //21032
 	}
 	return WriteStructuralFeatureActionImpl::eGet(featureID, resolve, coreType);
@@ -438,9 +417,9 @@ bool RemoveStructuralFeatureValueActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_ATTRIBUTE_ISREMOVEDUPLICATES:
+		case uml::UmlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_ATTRIBUTE_ISREMOVEDUPLICATES:
 			return getIsRemoveDuplicates() != false; //21031
-		case UmlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_ATTRIBUTE_REMOVEAT:
+		case uml::UmlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_ATTRIBUTE_REMOVEAT:
 			return getRemoveAt() != nullptr; //21032
 	}
 	return WriteStructuralFeatureActionImpl::internalEIsSet(featureID);
@@ -449,14 +428,14 @@ bool RemoveStructuralFeatureValueActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_ATTRIBUTE_ISREMOVEDUPLICATES:
+		case uml::UmlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_ATTRIBUTE_ISREMOVEDUPLICATES:
 		{
 			// BOOST CAST
 			bool _isRemoveDuplicates = newValue->get<bool>();
 			setIsRemoveDuplicates(_isRemoveDuplicates); //21031
 			return true;
 		}
-		case UmlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_ATTRIBUTE_REMOVEAT:
+		case uml::UmlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_ATTRIBUTE_REMOVEAT:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -481,11 +460,10 @@ void RemoveStructuralFeatureValueActionImpl::load(std::shared_ptr<persistence::i
 	// Create new objects (from references (containment == true))
 	//
 	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -516,8 +494,9 @@ void RemoveStructuralFeatureValueActionImpl::loadAttributes(std::shared_ptr<pers
 	WriteStructuralFeatureActionImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void RemoveStructuralFeatureValueActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void RemoveStructuralFeatureValueActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
 
 	try
 	{
@@ -545,8 +524,8 @@ void RemoveStructuralFeatureValueActionImpl::loadNode(std::string nodeName, std:
 	{
 		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
 	}
-
-	WriteStructuralFeatureActionImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	WriteStructuralFeatureActionImpl::loadNode(nodeName, loadHandler);
 }
 
 void RemoveStructuralFeatureValueActionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
@@ -602,7 +581,6 @@ void RemoveStructuralFeatureValueActionImpl::saveContent(std::shared_ptr<persist
 			saveHandler->addReference(removeAt, "removeAt", removeAt->eClass() != package->getInputPin_Class());
 		}
 	
- 
 		// Add attributes
 		if ( this->eIsSet(package->getRemoveStructuralFeatureValueAction_Attribute_isRemoveDuplicates()) )
 		{

@@ -20,8 +20,10 @@
 #include "ecore/EcoreFactory.hpp"
 
 //depending model packages
+
 #include "ecore/EcorePackage.hpp"
 #include "types/TypesPackage.hpp"
+
 
 using namespace uml;
 
@@ -577,6 +579,7 @@ void UmlPackageImpl::initializePackageContents()
 	initializeWriteVariableActionContent();
 
 	initializePackageEDataTypes();
+
 }
 
 void UmlPackageImpl::initializeAbstractionContent()
@@ -604,12 +607,9 @@ void UmlPackageImpl::initializeAbstractionContent()
 		if (!defaultValue.empty())
 		{
 			m_abstraction_Attribute_mapping->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_abstraction_Attribute_mapping->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	
@@ -640,12 +640,9 @@ void UmlPackageImpl::initializeAcceptCallActionContent()
 		if (!defaultValue.empty())
 		{
 			m_acceptCallAction_Attribute_returnInformation->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_acceptCallAction_Attribute_returnInformation->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_acceptCallAction_Operation_result_pins_EDiagnosticChain_EMap->setEType(ecore::EcorePackage::eInstance()->getEBoolean_Class());
@@ -777,12 +774,9 @@ void UmlPackageImpl::initializeAcceptEventActionContent()
 		if (!defaultValue.empty())
 		{
 			m_acceptEventAction_Attribute_result->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_acceptEventAction_Attribute_result->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_acceptEventAction_Attribute_trigger->setName("trigger");
 	m_acceptEventAction_Attribute_trigger->setEType(getTrigger_Class());
@@ -802,12 +796,9 @@ void UmlPackageImpl::initializeAcceptEventActionContent()
 		if (!defaultValue.empty())
 		{
 			m_acceptEventAction_Attribute_trigger->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_acceptEventAction_Attribute_trigger->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_acceptEventAction_Operation_conforming_type_EDiagnosticChain_EMap->setEType(ecore::EcorePackage::eInstance()->getEBoolean_Class());
@@ -993,12 +984,9 @@ void UmlPackageImpl::initializeActionContent()
 		if (!defaultValue.empty())
 		{
 			m_action_Attribute_context->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_action_Attribute_context->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_action_Attribute_input->setName("input");
 	m_action_Attribute_input->setEType(getInputPin_Class());
@@ -1018,8 +1006,8 @@ void UmlPackageImpl::initializeActionContent()
 		if (!defaultValue.empty())
 		{
 			m_action_Attribute_input->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getInputPin_Attribute_action();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getInputPin_Attribute_action();
 		if (otherEnd != nullptr)
 	    {
 	   		m_action_Attribute_input->setEOpposite(otherEnd);
@@ -1043,12 +1031,9 @@ void UmlPackageImpl::initializeActionContent()
 		if (!defaultValue.empty())
 		{
 			m_action_Attribute_localPostcondition->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_action_Attribute_localPostcondition->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_action_Attribute_localPrecondition->setName("localPrecondition");
 	m_action_Attribute_localPrecondition->setEType(getConstraint_Class());
@@ -1068,12 +1053,9 @@ void UmlPackageImpl::initializeActionContent()
 		if (!defaultValue.empty())
 		{
 			m_action_Attribute_localPrecondition->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_action_Attribute_localPrecondition->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_action_Attribute_output->setName("output");
 	m_action_Attribute_output->setEType(getOutputPin_Class());
@@ -1093,8 +1075,8 @@ void UmlPackageImpl::initializeActionContent()
 		if (!defaultValue.empty())
 		{
 			m_action_Attribute_output->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getOutputPin_Attribute_action();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getOutputPin_Attribute_action();
 		if (otherEnd != nullptr)
 	    {
 	   		m_action_Attribute_output->setEOpposite(otherEnd);
@@ -1161,12 +1143,9 @@ void UmlPackageImpl::initializeActionExecutionSpecificationContent()
 		if (!defaultValue.empty())
 		{
 			m_actionExecutionSpecification_Attribute_action->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_actionExecutionSpecification_Attribute_action->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_actionExecutionSpecification_Operation_action_referenced_EDiagnosticChain_EMap->setEType(ecore::EcorePackage::eInstance()->getEBoolean_Class());
@@ -1224,12 +1203,9 @@ void UmlPackageImpl::initializeActionInputPinContent()
 		if (!defaultValue.empty())
 		{
 			m_actionInputPin_Attribute_fromAction->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_actionInputPin_Attribute_fromAction->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_actionInputPin_Operation_input_pin_EDiagnosticChain_EMap->setEType(ecore::EcorePackage::eInstance()->getEBoolean_Class());
@@ -1381,8 +1357,8 @@ void UmlPackageImpl::initializeActivityContent()
 		if (!defaultValue.empty())
 		{
 			m_activity_Attribute_edge->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getActivityEdge_Attribute_activity();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getActivityEdge_Attribute_activity();
 		if (otherEnd != nullptr)
 	    {
 	   		m_activity_Attribute_edge->setEOpposite(otherEnd);
@@ -1406,8 +1382,8 @@ void UmlPackageImpl::initializeActivityContent()
 		if (!defaultValue.empty())
 		{
 			m_activity_Attribute_group->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getActivityGroup_Attribute_inActivity();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getActivityGroup_Attribute_inActivity();
 		if (otherEnd != nullptr)
 	    {
 	   		m_activity_Attribute_group->setEOpposite(otherEnd);
@@ -1431,8 +1407,8 @@ void UmlPackageImpl::initializeActivityContent()
 		if (!defaultValue.empty())
 		{
 			m_activity_Attribute_node->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getActivityNode_Attribute_activity();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getActivityNode_Attribute_activity();
 		if (otherEnd != nullptr)
 	    {
 	   		m_activity_Attribute_node->setEOpposite(otherEnd);
@@ -1456,12 +1432,9 @@ void UmlPackageImpl::initializeActivityContent()
 		if (!defaultValue.empty())
 		{
 			m_activity_Attribute_ownedGroup->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_activity_Attribute_ownedGroup->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_activity_Attribute_ownedNode->setName("ownedNode");
 	m_activity_Attribute_ownedNode->setEType(getActivityNode_Class());
@@ -1481,12 +1454,9 @@ void UmlPackageImpl::initializeActivityContent()
 		if (!defaultValue.empty())
 		{
 			m_activity_Attribute_ownedNode->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_activity_Attribute_ownedNode->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_activity_Attribute_partition->setName("partition");
 	m_activity_Attribute_partition->setEType(getActivityPartition_Class());
@@ -1506,12 +1476,9 @@ void UmlPackageImpl::initializeActivityContent()
 		if (!defaultValue.empty())
 		{
 			m_activity_Attribute_partition->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_activity_Attribute_partition->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_activity_Attribute_structuredNode->setName("structuredNode");
 	m_activity_Attribute_structuredNode->setEType(getStructuredActivityNode_Class());
@@ -1531,12 +1498,9 @@ void UmlPackageImpl::initializeActivityContent()
 		if (!defaultValue.empty())
 		{
 			m_activity_Attribute_structuredNode->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_activity_Attribute_structuredNode->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_activity_Attribute_variable->setName("variable");
 	m_activity_Attribute_variable->setEType(getVariable_Class());
@@ -1556,8 +1520,8 @@ void UmlPackageImpl::initializeActivityContent()
 		if (!defaultValue.empty())
 		{
 			m_activity_Attribute_variable->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getVariable_Attribute_activityScope();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getVariable_Attribute_activityScope();
 		if (otherEnd != nullptr)
 	    {
 	   		m_activity_Attribute_variable->setEOpposite(otherEnd);
@@ -1665,8 +1629,8 @@ void UmlPackageImpl::initializeActivityEdgeContent()
 		if (!defaultValue.empty())
 		{
 			m_activityEdge_Attribute_activity->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getActivity_Attribute_edge();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getActivity_Attribute_edge();
 		if (otherEnd != nullptr)
 	    {
 	   		m_activityEdge_Attribute_activity->setEOpposite(otherEnd);
@@ -1690,12 +1654,9 @@ void UmlPackageImpl::initializeActivityEdgeContent()
 		if (!defaultValue.empty())
 		{
 			m_activityEdge_Attribute_guard->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_activityEdge_Attribute_guard->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_activityEdge_Attribute_inGroup->setName("inGroup");
 	m_activityEdge_Attribute_inGroup->setEType(getActivityGroup_Class());
@@ -1715,8 +1676,8 @@ void UmlPackageImpl::initializeActivityEdgeContent()
 		if (!defaultValue.empty())
 		{
 			m_activityEdge_Attribute_inGroup->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getActivityGroup_Attribute_containedEdge();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getActivityGroup_Attribute_containedEdge();
 		if (otherEnd != nullptr)
 	    {
 	   		m_activityEdge_Attribute_inGroup->setEOpposite(otherEnd);
@@ -1740,8 +1701,8 @@ void UmlPackageImpl::initializeActivityEdgeContent()
 		if (!defaultValue.empty())
 		{
 			m_activityEdge_Attribute_inPartition->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getActivityPartition_Attribute_edge();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getActivityPartition_Attribute_edge();
 		if (otherEnd != nullptr)
 	    {
 	   		m_activityEdge_Attribute_inPartition->setEOpposite(otherEnd);
@@ -1765,8 +1726,8 @@ void UmlPackageImpl::initializeActivityEdgeContent()
 		if (!defaultValue.empty())
 		{
 			m_activityEdge_Attribute_inStructuredNode->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getStructuredActivityNode_Attribute_edge();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getStructuredActivityNode_Attribute_edge();
 		if (otherEnd != nullptr)
 	    {
 	   		m_activityEdge_Attribute_inStructuredNode->setEOpposite(otherEnd);
@@ -1790,8 +1751,8 @@ void UmlPackageImpl::initializeActivityEdgeContent()
 		if (!defaultValue.empty())
 		{
 			m_activityEdge_Attribute_interrupts->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getInterruptibleActivityRegion_Attribute_interruptingEdge();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getInterruptibleActivityRegion_Attribute_interruptingEdge();
 		if (otherEnd != nullptr)
 	    {
 	   		m_activityEdge_Attribute_interrupts->setEOpposite(otherEnd);
@@ -1815,12 +1776,9 @@ void UmlPackageImpl::initializeActivityEdgeContent()
 		if (!defaultValue.empty())
 		{
 			m_activityEdge_Attribute_redefinedEdge->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_activityEdge_Attribute_redefinedEdge->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_activityEdge_Attribute_source->setName("source");
 	m_activityEdge_Attribute_source->setEType(getActivityNode_Class());
@@ -1840,8 +1798,8 @@ void UmlPackageImpl::initializeActivityEdgeContent()
 		if (!defaultValue.empty())
 		{
 			m_activityEdge_Attribute_source->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getActivityNode_Attribute_outgoing();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getActivityNode_Attribute_outgoing();
 		if (otherEnd != nullptr)
 	    {
 	   		m_activityEdge_Attribute_source->setEOpposite(otherEnd);
@@ -1865,8 +1823,8 @@ void UmlPackageImpl::initializeActivityEdgeContent()
 		if (!defaultValue.empty())
 		{
 			m_activityEdge_Attribute_target->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getActivityNode_Attribute_incoming();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getActivityNode_Attribute_incoming();
 		if (otherEnd != nullptr)
 	    {
 	   		m_activityEdge_Attribute_target->setEOpposite(otherEnd);
@@ -1890,12 +1848,9 @@ void UmlPackageImpl::initializeActivityEdgeContent()
 		if (!defaultValue.empty())
 		{
 			m_activityEdge_Attribute_weight->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_activityEdge_Attribute_weight->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_activityEdge_Operation_source_and_target_EDiagnosticChain_EMap->setEType(ecore::EcorePackage::eInstance()->getEBoolean_Class());
@@ -1964,8 +1919,8 @@ void UmlPackageImpl::initializeActivityGroupContent()
 		if (!defaultValue.empty())
 		{
 			m_activityGroup_Attribute_containedEdge->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getActivityEdge_Attribute_inGroup();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getActivityEdge_Attribute_inGroup();
 		if (otherEnd != nullptr)
 	    {
 	   		m_activityGroup_Attribute_containedEdge->setEOpposite(otherEnd);
@@ -1989,8 +1944,8 @@ void UmlPackageImpl::initializeActivityGroupContent()
 		if (!defaultValue.empty())
 		{
 			m_activityGroup_Attribute_containedNode->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getActivityNode_Attribute_inGroup();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getActivityNode_Attribute_inGroup();
 		if (otherEnd != nullptr)
 	    {
 	   		m_activityGroup_Attribute_containedNode->setEOpposite(otherEnd);
@@ -2014,8 +1969,8 @@ void UmlPackageImpl::initializeActivityGroupContent()
 		if (!defaultValue.empty())
 		{
 			m_activityGroup_Attribute_inActivity->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getActivity_Attribute_group();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getActivity_Attribute_group();
 		if (otherEnd != nullptr)
 	    {
 	   		m_activityGroup_Attribute_inActivity->setEOpposite(otherEnd);
@@ -2039,8 +1994,8 @@ void UmlPackageImpl::initializeActivityGroupContent()
 		if (!defaultValue.empty())
 		{
 			m_activityGroup_Attribute_subgroup->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getActivityGroup_Attribute_superGroup();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getActivityGroup_Attribute_superGroup();
 		if (otherEnd != nullptr)
 	    {
 	   		m_activityGroup_Attribute_subgroup->setEOpposite(otherEnd);
@@ -2064,8 +2019,8 @@ void UmlPackageImpl::initializeActivityGroupContent()
 		if (!defaultValue.empty())
 		{
 			m_activityGroup_Attribute_superGroup->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getActivityGroup_Attribute_subgroup();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getActivityGroup_Attribute_subgroup();
 		if (otherEnd != nullptr)
 	    {
 	   		m_activityGroup_Attribute_superGroup->setEOpposite(otherEnd);
@@ -2154,8 +2109,8 @@ void UmlPackageImpl::initializeActivityNodeContent()
 		if (!defaultValue.empty())
 		{
 			m_activityNode_Attribute_activity->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getActivity_Attribute_node();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getActivity_Attribute_node();
 		if (otherEnd != nullptr)
 	    {
 	   		m_activityNode_Attribute_activity->setEOpposite(otherEnd);
@@ -2179,8 +2134,8 @@ void UmlPackageImpl::initializeActivityNodeContent()
 		if (!defaultValue.empty())
 		{
 			m_activityNode_Attribute_inGroup->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getActivityGroup_Attribute_containedNode();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getActivityGroup_Attribute_containedNode();
 		if (otherEnd != nullptr)
 	    {
 	   		m_activityNode_Attribute_inGroup->setEOpposite(otherEnd);
@@ -2204,8 +2159,8 @@ void UmlPackageImpl::initializeActivityNodeContent()
 		if (!defaultValue.empty())
 		{
 			m_activityNode_Attribute_inInterruptibleRegion->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getInterruptibleActivityRegion_Attribute_node();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getInterruptibleActivityRegion_Attribute_node();
 		if (otherEnd != nullptr)
 	    {
 	   		m_activityNode_Attribute_inInterruptibleRegion->setEOpposite(otherEnd);
@@ -2229,8 +2184,8 @@ void UmlPackageImpl::initializeActivityNodeContent()
 		if (!defaultValue.empty())
 		{
 			m_activityNode_Attribute_inPartition->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getActivityPartition_Attribute_node();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getActivityPartition_Attribute_node();
 		if (otherEnd != nullptr)
 	    {
 	   		m_activityNode_Attribute_inPartition->setEOpposite(otherEnd);
@@ -2254,8 +2209,8 @@ void UmlPackageImpl::initializeActivityNodeContent()
 		if (!defaultValue.empty())
 		{
 			m_activityNode_Attribute_inStructuredNode->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getStructuredActivityNode_Attribute_node();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getStructuredActivityNode_Attribute_node();
 		if (otherEnd != nullptr)
 	    {
 	   		m_activityNode_Attribute_inStructuredNode->setEOpposite(otherEnd);
@@ -2279,8 +2234,8 @@ void UmlPackageImpl::initializeActivityNodeContent()
 		if (!defaultValue.empty())
 		{
 			m_activityNode_Attribute_incoming->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getActivityEdge_Attribute_target();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getActivityEdge_Attribute_target();
 		if (otherEnd != nullptr)
 	    {
 	   		m_activityNode_Attribute_incoming->setEOpposite(otherEnd);
@@ -2304,8 +2259,8 @@ void UmlPackageImpl::initializeActivityNodeContent()
 		if (!defaultValue.empty())
 		{
 			m_activityNode_Attribute_outgoing->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getActivityEdge_Attribute_source();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getActivityEdge_Attribute_source();
 		if (otherEnd != nullptr)
 	    {
 	   		m_activityNode_Attribute_outgoing->setEOpposite(otherEnd);
@@ -2329,12 +2284,9 @@ void UmlPackageImpl::initializeActivityNodeContent()
 		if (!defaultValue.empty())
 		{
 			m_activityNode_Attribute_redefinedNode->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_activityNode_Attribute_redefinedNode->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	
@@ -2365,12 +2317,9 @@ void UmlPackageImpl::initializeActivityParameterNodeContent()
 		if (!defaultValue.empty())
 		{
 			m_activityParameterNode_Attribute_parameter->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_activityParameterNode_Attribute_parameter->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_activityParameterNode_Operation_has_parameters_EDiagnosticChain_EMap->setEType(ecore::EcorePackage::eInstance()->getEBoolean_Class());
@@ -2576,8 +2525,8 @@ void UmlPackageImpl::initializeActivityPartitionContent()
 		if (!defaultValue.empty())
 		{
 			m_activityPartition_Attribute_edge->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getActivityEdge_Attribute_inPartition();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getActivityEdge_Attribute_inPartition();
 		if (otherEnd != nullptr)
 	    {
 	   		m_activityPartition_Attribute_edge->setEOpposite(otherEnd);
@@ -2601,8 +2550,8 @@ void UmlPackageImpl::initializeActivityPartitionContent()
 		if (!defaultValue.empty())
 		{
 			m_activityPartition_Attribute_node->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getActivityNode_Attribute_inPartition();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getActivityNode_Attribute_inPartition();
 		if (otherEnd != nullptr)
 	    {
 	   		m_activityPartition_Attribute_node->setEOpposite(otherEnd);
@@ -2626,12 +2575,9 @@ void UmlPackageImpl::initializeActivityPartitionContent()
 		if (!defaultValue.empty())
 		{
 			m_activityPartition_Attribute_represents->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_activityPartition_Attribute_represents->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_activityPartition_Attribute_subpartition->setName("subpartition");
 	m_activityPartition_Attribute_subpartition->setEType(getActivityPartition_Class());
@@ -2651,8 +2597,8 @@ void UmlPackageImpl::initializeActivityPartitionContent()
 		if (!defaultValue.empty())
 		{
 			m_activityPartition_Attribute_subpartition->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getActivityPartition_Attribute_superPartition();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getActivityPartition_Attribute_superPartition();
 		if (otherEnd != nullptr)
 	    {
 	   		m_activityPartition_Attribute_subpartition->setEOpposite(otherEnd);
@@ -2676,8 +2622,8 @@ void UmlPackageImpl::initializeActivityPartitionContent()
 		if (!defaultValue.empty())
 		{
 			m_activityPartition_Attribute_superPartition->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getActivityPartition_Attribute_subpartition();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getActivityPartition_Attribute_subpartition();
 		if (otherEnd != nullptr)
 	    {
 	   		m_activityPartition_Attribute_superPartition->setEOpposite(otherEnd);
@@ -2905,8 +2851,8 @@ void UmlPackageImpl::initializeAddStructuralFeatureValueActionContent()
 		if (!defaultValue.empty())
 		{
 			m_addStructuralFeatureValueAction_Attribute_insertAt->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getInputPin_Attribute_addStructuralFeatureValueAction();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getInputPin_Attribute_addStructuralFeatureValueAction();
 		if (otherEnd != nullptr)
 	    {
 	   		m_addStructuralFeatureValueAction_Attribute_insertAt->setEOpposite(otherEnd);
@@ -3015,12 +2961,9 @@ void UmlPackageImpl::initializeAddVariableValueActionContent()
 		if (!defaultValue.empty())
 		{
 			m_addVariableValueAction_Attribute_insertAt->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_addVariableValueAction_Attribute_insertAt->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_addVariableValueAction_Operation_insertAt_pin_EDiagnosticChain_EMap->setEType(ecore::EcorePackage::eInstance()->getEBoolean_Class());
@@ -3136,12 +3079,9 @@ void UmlPackageImpl::initializeArgumentContent()
 		if (!defaultValue.empty())
 		{
 			m_argument_Attribute_value->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_argument_Attribute_value->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	
@@ -3192,12 +3132,9 @@ void UmlPackageImpl::initializeArtifactContent()
 		if (!defaultValue.empty())
 		{
 			m_artifact_Attribute_manifestation->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_artifact_Attribute_manifestation->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_artifact_Attribute_nestedArtifact->setName("nestedArtifact");
 	m_artifact_Attribute_nestedArtifact->setEType(getArtifact_Class());
@@ -3217,12 +3154,9 @@ void UmlPackageImpl::initializeArtifactContent()
 		if (!defaultValue.empty())
 		{
 			m_artifact_Attribute_nestedArtifact->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_artifact_Attribute_nestedArtifact->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_artifact_Attribute_ownedAttribute->setName("ownedAttribute");
 	m_artifact_Attribute_ownedAttribute->setEType(getProperty_Class());
@@ -3242,12 +3176,9 @@ void UmlPackageImpl::initializeArtifactContent()
 		if (!defaultValue.empty())
 		{
 			m_artifact_Attribute_ownedAttribute->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_artifact_Attribute_ownedAttribute->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_artifact_Attribute_ownedOperation->setName("ownedOperation");
 	m_artifact_Attribute_ownedOperation->setEType(getOperation_Class());
@@ -3267,12 +3198,9 @@ void UmlPackageImpl::initializeArtifactContent()
 		if (!defaultValue.empty())
 		{
 			m_artifact_Attribute_ownedOperation->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_artifact_Attribute_ownedOperation->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_artifact_Operation_createOwnedAttribute_String_UnlimitedNatural->setEType(getProperty_Class());
@@ -3417,12 +3345,9 @@ void UmlPackageImpl::initializeAssociationContent()
 		if (!defaultValue.empty())
 		{
 			m_association_Attribute_endType->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_association_Attribute_endType->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_association_Attribute_memberEnd->setName("memberEnd");
 	m_association_Attribute_memberEnd->setEType(getProperty_Class());
@@ -3442,8 +3367,8 @@ void UmlPackageImpl::initializeAssociationContent()
 		if (!defaultValue.empty())
 		{
 			m_association_Attribute_memberEnd->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getProperty_Attribute_association();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getProperty_Attribute_association();
 		if (otherEnd != nullptr)
 	    {
 	   		m_association_Attribute_memberEnd->setEOpposite(otherEnd);
@@ -3467,12 +3392,9 @@ void UmlPackageImpl::initializeAssociationContent()
 		if (!defaultValue.empty())
 		{
 			m_association_Attribute_navigableOwnedEnd->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_association_Attribute_navigableOwnedEnd->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_association_Attribute_ownedEnd->setName("ownedEnd");
 	m_association_Attribute_ownedEnd->setEType(getProperty_Class());
@@ -3492,8 +3414,8 @@ void UmlPackageImpl::initializeAssociationContent()
 		if (!defaultValue.empty())
 		{
 			m_association_Attribute_ownedEnd->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getProperty_Attribute_owningAssociation();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getProperty_Attribute_owningAssociation();
 		if (otherEnd != nullptr)
 	    {
 	   		m_association_Attribute_ownedEnd->setEOpposite(otherEnd);
@@ -3764,8 +3686,8 @@ void UmlPackageImpl::initializeBehaviorContent()
 		if (!defaultValue.empty())
 		{
 			m_behavior_Attribute_behavioredClassifier->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getBehavioredClassifier_Attribute_ownedBehavior();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getBehavioredClassifier_Attribute_ownedBehavior();
 		if (otherEnd != nullptr)
 	    {
 	   		m_behavior_Attribute_behavioredClassifier->setEOpposite(otherEnd);
@@ -3789,12 +3711,9 @@ void UmlPackageImpl::initializeBehaviorContent()
 		if (!defaultValue.empty())
 		{
 			m_behavior_Attribute_context->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_behavior_Attribute_context->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_behavior_Attribute_ownedParameter->setName("ownedParameter");
 	m_behavior_Attribute_ownedParameter->setEType(getParameter_Class());
@@ -3814,8 +3733,8 @@ void UmlPackageImpl::initializeBehaviorContent()
 		if (!defaultValue.empty())
 		{
 			m_behavior_Attribute_ownedParameter->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getParameter_Attribute_behavior();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getParameter_Attribute_behavior();
 		if (otherEnd != nullptr)
 	    {
 	   		m_behavior_Attribute_ownedParameter->setEOpposite(otherEnd);
@@ -3839,12 +3758,9 @@ void UmlPackageImpl::initializeBehaviorContent()
 		if (!defaultValue.empty())
 		{
 			m_behavior_Attribute_ownedParameterSet->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_behavior_Attribute_ownedParameterSet->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_behavior_Attribute_postcondition->setName("postcondition");
 	m_behavior_Attribute_postcondition->setEType(getConstraint_Class());
@@ -3864,12 +3780,9 @@ void UmlPackageImpl::initializeBehaviorContent()
 		if (!defaultValue.empty())
 		{
 			m_behavior_Attribute_postcondition->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_behavior_Attribute_postcondition->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_behavior_Attribute_precondition->setName("precondition");
 	m_behavior_Attribute_precondition->setEType(getConstraint_Class());
@@ -3889,12 +3802,9 @@ void UmlPackageImpl::initializeBehaviorContent()
 		if (!defaultValue.empty())
 		{
 			m_behavior_Attribute_precondition->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_behavior_Attribute_precondition->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_behavior_Attribute_redefinedBehavior->setName("redefinedBehavior");
 	m_behavior_Attribute_redefinedBehavior->setEType(getBehavior_Class());
@@ -3914,12 +3824,9 @@ void UmlPackageImpl::initializeBehaviorContent()
 		if (!defaultValue.empty())
 		{
 			m_behavior_Attribute_redefinedBehavior->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_behavior_Attribute_redefinedBehavior->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_behavior_Attribute_specification->setName("specification");
 	m_behavior_Attribute_specification->setEType(getBehavioralFeature_Class());
@@ -3939,8 +3846,8 @@ void UmlPackageImpl::initializeBehaviorContent()
 		if (!defaultValue.empty())
 		{
 			m_behavior_Attribute_specification->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getBehavioralFeature_Attribute_method();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getBehavioralFeature_Attribute_method();
 		if (otherEnd != nullptr)
 	    {
 	   		m_behavior_Attribute_specification->setEOpposite(otherEnd);
@@ -4097,12 +4004,9 @@ void UmlPackageImpl::initializeBehaviorExecutionSpecificationContent()
 		if (!defaultValue.empty())
 		{
 			m_behaviorExecutionSpecification_Attribute_behavior->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_behaviorExecutionSpecification_Attribute_behavior->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	
@@ -4173,8 +4077,8 @@ void UmlPackageImpl::initializeBehavioralFeatureContent()
 		if (!defaultValue.empty())
 		{
 			m_behavioralFeature_Attribute_method->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getBehavior_Attribute_specification();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getBehavior_Attribute_specification();
 		if (otherEnd != nullptr)
 	    {
 	   		m_behavioralFeature_Attribute_method->setEOpposite(otherEnd);
@@ -4198,8 +4102,8 @@ void UmlPackageImpl::initializeBehavioralFeatureContent()
 		if (!defaultValue.empty())
 		{
 			m_behavioralFeature_Attribute_ownedParameter->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getParameter_Attribute_operation();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getParameter_Attribute_operation();
 		if (otherEnd != nullptr)
 	    {
 	   		m_behavioralFeature_Attribute_ownedParameter->setEOpposite(otherEnd);
@@ -4223,12 +4127,9 @@ void UmlPackageImpl::initializeBehavioralFeatureContent()
 		if (!defaultValue.empty())
 		{
 			m_behavioralFeature_Attribute_ownedParameterSet->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_behavioralFeature_Attribute_ownedParameterSet->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_behavioralFeature_Attribute_raisedException->setName("raisedException");
 	m_behavioralFeature_Attribute_raisedException->setEType(getType_Class());
@@ -4248,12 +4149,9 @@ void UmlPackageImpl::initializeBehavioralFeatureContent()
 		if (!defaultValue.empty())
 		{
 			m_behavioralFeature_Attribute_raisedException->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_behavioralFeature_Attribute_raisedException->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_behavioralFeature_Operation_abstract_no_method_EDiagnosticChain_EMap->setEType(ecore::EcorePackage::eInstance()->getEBoolean_Class());
@@ -4354,12 +4252,9 @@ void UmlPackageImpl::initializeBehavioredClassifierContent()
 		if (!defaultValue.empty())
 		{
 			m_behavioredClassifier_Attribute_classifierBehavior->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_behavioredClassifier_Attribute_classifierBehavior->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_behavioredClassifier_Attribute_interfaceRealization->setName("interfaceRealization");
 	m_behavioredClassifier_Attribute_interfaceRealization->setEType(getInterfaceRealization_Class());
@@ -4379,8 +4274,8 @@ void UmlPackageImpl::initializeBehavioredClassifierContent()
 		if (!defaultValue.empty())
 		{
 			m_behavioredClassifier_Attribute_interfaceRealization->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getInterfaceRealization_Attribute_implementingClassifier();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getInterfaceRealization_Attribute_implementingClassifier();
 		if (otherEnd != nullptr)
 	    {
 	   		m_behavioredClassifier_Attribute_interfaceRealization->setEOpposite(otherEnd);
@@ -4404,8 +4299,8 @@ void UmlPackageImpl::initializeBehavioredClassifierContent()
 		if (!defaultValue.empty())
 		{
 			m_behavioredClassifier_Attribute_ownedBehavior->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getBehavior_Attribute_behavioredClassifier();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getBehavior_Attribute_behavioredClassifier();
 		if (otherEnd != nullptr)
 	    {
 	   		m_behavioredClassifier_Attribute_ownedBehavior->setEOpposite(otherEnd);
@@ -4483,12 +4378,9 @@ void UmlPackageImpl::initializeBroadcastSignalActionContent()
 		if (!defaultValue.empty())
 		{
 			m_broadcastSignalAction_Attribute_signal->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_broadcastSignalAction_Attribute_signal->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_broadcastSignalAction_Operation_no_onport_EDiagnosticChain_EMap->setEType(ecore::EcorePackage::eInstance()->getEBoolean_Class());
@@ -4620,8 +4512,8 @@ void UmlPackageImpl::initializeCallActionContent()
 		if (!defaultValue.empty())
 		{
 			m_callAction_Attribute_result->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getOutputPin_Attribute_callAction();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getOutputPin_Attribute_callAction();
 		if (otherEnd != nullptr)
 	    {
 	   		m_callAction_Attribute_result->setEOpposite(otherEnd);
@@ -4753,12 +4645,9 @@ void UmlPackageImpl::initializeCallBehaviorActionContent()
 		if (!defaultValue.empty())
 		{
 			m_callBehaviorAction_Attribute_behavior->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_callBehaviorAction_Attribute_behavior->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_callBehaviorAction_Operation_no_onport_EDiagnosticChain_EMap->setEType(ecore::EcorePackage::eInstance()->getEBoolean_Class());
@@ -4816,12 +4705,9 @@ void UmlPackageImpl::initializeCallEventContent()
 		if (!defaultValue.empty())
 		{
 			m_callEvent_Attribute_operation->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_callEvent_Attribute_operation->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	
@@ -4852,12 +4738,9 @@ void UmlPackageImpl::initializeCallOperationActionContent()
 		if (!defaultValue.empty())
 		{
 			m_callOperationAction_Attribute_operation->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_callOperationAction_Attribute_operation->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_callOperationAction_Attribute_target->setName("target");
 	m_callOperationAction_Attribute_target->setEType(getInputPin_Class());
@@ -4877,8 +4760,8 @@ void UmlPackageImpl::initializeCallOperationActionContent()
 		if (!defaultValue.empty())
 		{
 			m_callOperationAction_Attribute_target->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getInputPin_Attribute_callOperationAction();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getInputPin_Attribute_callOperationAction();
 		if (otherEnd != nullptr)
 	    {
 	   		m_callOperationAction_Attribute_target->setEOpposite(otherEnd);
@@ -4951,12 +4834,9 @@ void UmlPackageImpl::initializeChangeEventContent()
 		if (!defaultValue.empty())
 		{
 			m_changeEvent_Attribute_changeExpression->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_changeEvent_Attribute_changeExpression->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	
@@ -5007,8 +4887,8 @@ void UmlPackageImpl::initializeClassContent()
 		if (!defaultValue.empty())
 		{
 			m_class_Attribute_extension->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getExtension_Attribute_metaclass();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getExtension_Attribute_metaclass();
 		if (otherEnd != nullptr)
 	    {
 	   		m_class_Attribute_extension->setEOpposite(otherEnd);
@@ -5032,12 +4912,9 @@ void UmlPackageImpl::initializeClassContent()
 		if (!defaultValue.empty())
 		{
 			m_class_Attribute_nestedClassifier->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_class_Attribute_nestedClassifier->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_class_Attribute_ownedOperation->setName("ownedOperation");
 	m_class_Attribute_ownedOperation->setEType(getOperation_Class());
@@ -5057,8 +4934,8 @@ void UmlPackageImpl::initializeClassContent()
 		if (!defaultValue.empty())
 		{
 			m_class_Attribute_ownedOperation->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getOperation_Attribute_class();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getOperation_Attribute_class();
 		if (otherEnd != nullptr)
 	    {
 	   		m_class_Attribute_ownedOperation->setEOpposite(otherEnd);
@@ -5082,12 +4959,9 @@ void UmlPackageImpl::initializeClassContent()
 		if (!defaultValue.empty())
 		{
 			m_class_Attribute_ownedReception->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_class_Attribute_ownedReception->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_class_Attribute_superClass->setName("superClass");
 	m_class_Attribute_superClass->setEType(getClass_Class());
@@ -5107,12 +4981,9 @@ void UmlPackageImpl::initializeClassContent()
 		if (!defaultValue.empty())
 		{
 			m_class_Attribute_superClass->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_class_Attribute_superClass->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_class_Operation_createOwnedOperation_String_Type->setEType(getOperation_Class());
@@ -5281,12 +5152,9 @@ void UmlPackageImpl::initializeClassifierContent()
 		if (!defaultValue.empty())
 		{
 			m_classifier_Attribute_attribute->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_classifier_Attribute_attribute->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_classifier_Attribute_collaborationUse->setName("collaborationUse");
 	m_classifier_Attribute_collaborationUse->setEType(getCollaborationUse_Class());
@@ -5306,12 +5174,9 @@ void UmlPackageImpl::initializeClassifierContent()
 		if (!defaultValue.empty())
 		{
 			m_classifier_Attribute_collaborationUse->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_classifier_Attribute_collaborationUse->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_classifier_Attribute_feature->setName("feature");
 	m_classifier_Attribute_feature->setEType(getFeature_Class());
@@ -5331,8 +5196,8 @@ void UmlPackageImpl::initializeClassifierContent()
 		if (!defaultValue.empty())
 		{
 			m_classifier_Attribute_feature->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getFeature_Attribute_featuringClassifier();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getFeature_Attribute_featuringClassifier();
 		if (otherEnd != nullptr)
 	    {
 	   		m_classifier_Attribute_feature->setEOpposite(otherEnd);
@@ -5356,12 +5221,9 @@ void UmlPackageImpl::initializeClassifierContent()
 		if (!defaultValue.empty())
 		{
 			m_classifier_Attribute_general->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_classifier_Attribute_general->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_classifier_Attribute_generalization->setName("generalization");
 	m_classifier_Attribute_generalization->setEType(getGeneralization_Class());
@@ -5381,8 +5243,8 @@ void UmlPackageImpl::initializeClassifierContent()
 		if (!defaultValue.empty())
 		{
 			m_classifier_Attribute_generalization->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getGeneralization_Attribute_specific();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getGeneralization_Attribute_specific();
 		if (otherEnd != nullptr)
 	    {
 	   		m_classifier_Attribute_generalization->setEOpposite(otherEnd);
@@ -5406,12 +5268,9 @@ void UmlPackageImpl::initializeClassifierContent()
 		if (!defaultValue.empty())
 		{
 			m_classifier_Attribute_inheritedMember->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_classifier_Attribute_inheritedMember->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_classifier_Attribute_ownedUseCase->setName("ownedUseCase");
 	m_classifier_Attribute_ownedUseCase->setEType(getUseCase_Class());
@@ -5431,12 +5290,9 @@ void UmlPackageImpl::initializeClassifierContent()
 		if (!defaultValue.empty())
 		{
 			m_classifier_Attribute_ownedUseCase->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_classifier_Attribute_ownedUseCase->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_classifier_Attribute_powertypeExtent->setName("powertypeExtent");
 	m_classifier_Attribute_powertypeExtent->setEType(getGeneralizationSet_Class());
@@ -5456,8 +5312,8 @@ void UmlPackageImpl::initializeClassifierContent()
 		if (!defaultValue.empty())
 		{
 			m_classifier_Attribute_powertypeExtent->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getGeneralizationSet_Attribute_powertype();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getGeneralizationSet_Attribute_powertype();
 		if (otherEnd != nullptr)
 	    {
 	   		m_classifier_Attribute_powertypeExtent->setEOpposite(otherEnd);
@@ -5481,12 +5337,9 @@ void UmlPackageImpl::initializeClassifierContent()
 		if (!defaultValue.empty())
 		{
 			m_classifier_Attribute_redefinedClassifier->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_classifier_Attribute_redefinedClassifier->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_classifier_Attribute_representation->setName("representation");
 	m_classifier_Attribute_representation->setEType(getCollaborationUse_Class());
@@ -5506,12 +5359,9 @@ void UmlPackageImpl::initializeClassifierContent()
 		if (!defaultValue.empty())
 		{
 			m_classifier_Attribute_representation->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_classifier_Attribute_representation->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_classifier_Attribute_substitution->setName("substitution");
 	m_classifier_Attribute_substitution->setEType(getSubstitution_Class());
@@ -5531,8 +5381,8 @@ void UmlPackageImpl::initializeClassifierContent()
 		if (!defaultValue.empty())
 		{
 			m_classifier_Attribute_substitution->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getSubstitution_Attribute_substitutingClassifier();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getSubstitution_Attribute_substitutingClassifier();
 		if (otherEnd != nullptr)
 	    {
 	   		m_classifier_Attribute_substitution->setEOpposite(otherEnd);
@@ -5556,8 +5406,8 @@ void UmlPackageImpl::initializeClassifierContent()
 		if (!defaultValue.empty())
 		{
 			m_classifier_Attribute_useCase->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getUseCase_Attribute_subject();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getUseCase_Attribute_subject();
 		if (otherEnd != nullptr)
 	    {
 	   		m_classifier_Attribute_useCase->setEOpposite(otherEnd);
@@ -6017,12 +5867,9 @@ void UmlPackageImpl::initializeClassifierTemplateParameterContent()
 		if (!defaultValue.empty())
 		{
 			m_classifierTemplateParameter_Attribute_constrainingClassifier->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_classifierTemplateParameter_Attribute_constrainingClassifier->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_classifierTemplateParameter_Operation_actual_is_classifier_EDiagnosticChain_EMap->setEType(ecore::EcorePackage::eInstance()->getEBoolean_Class());
@@ -6215,12 +6062,9 @@ void UmlPackageImpl::initializeClauseContent()
 		if (!defaultValue.empty())
 		{
 			m_clause_Attribute_body->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_clause_Attribute_body->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_clause_Attribute_bodyOutput->setName("bodyOutput");
 	m_clause_Attribute_bodyOutput->setEType(getOutputPin_Class());
@@ -6240,12 +6084,9 @@ void UmlPackageImpl::initializeClauseContent()
 		if (!defaultValue.empty())
 		{
 			m_clause_Attribute_bodyOutput->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_clause_Attribute_bodyOutput->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_clause_Attribute_decider->setName("decider");
 	m_clause_Attribute_decider->setEType(getOutputPin_Class());
@@ -6265,12 +6106,9 @@ void UmlPackageImpl::initializeClauseContent()
 		if (!defaultValue.empty())
 		{
 			m_clause_Attribute_decider->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_clause_Attribute_decider->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_clause_Attribute_predecessorClause->setName("predecessorClause");
 	m_clause_Attribute_predecessorClause->setEType(getClause_Class());
@@ -6290,8 +6128,8 @@ void UmlPackageImpl::initializeClauseContent()
 		if (!defaultValue.empty())
 		{
 			m_clause_Attribute_predecessorClause->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getClause_Attribute_successorClause();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getClause_Attribute_successorClause();
 		if (otherEnd != nullptr)
 	    {
 	   		m_clause_Attribute_predecessorClause->setEOpposite(otherEnd);
@@ -6315,8 +6153,8 @@ void UmlPackageImpl::initializeClauseContent()
 		if (!defaultValue.empty())
 		{
 			m_clause_Attribute_successorClause->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getClause_Attribute_predecessorClause();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getClause_Attribute_predecessorClause();
 		if (otherEnd != nullptr)
 	    {
 	   		m_clause_Attribute_successorClause->setEOpposite(otherEnd);
@@ -6340,12 +6178,9 @@ void UmlPackageImpl::initializeClauseContent()
 		if (!defaultValue.empty())
 		{
 			m_clause_Attribute_test->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_clause_Attribute_test->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_clause_Operation_body_output_pins_EDiagnosticChain_EMap->setEType(ecore::EcorePackage::eInstance()->getEBoolean_Class());
@@ -6457,12 +6292,9 @@ void UmlPackageImpl::initializeClearAssociationActionContent()
 		if (!defaultValue.empty())
 		{
 			m_clearAssociationAction_Attribute_association->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_clearAssociationAction_Attribute_association->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_clearAssociationAction_Attribute_object->setName("object");
 	m_clearAssociationAction_Attribute_object->setEType(getInputPin_Class());
@@ -6482,12 +6314,9 @@ void UmlPackageImpl::initializeClearAssociationActionContent()
 		if (!defaultValue.empty())
 		{
 			m_clearAssociationAction_Attribute_object->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_clearAssociationAction_Attribute_object->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_clearAssociationAction_Operation_multiplicity_EDiagnosticChain_EMap->setEType(ecore::EcorePackage::eInstance()->getEBoolean_Class());
@@ -6572,8 +6401,8 @@ void UmlPackageImpl::initializeClearStructuralFeatureActionContent()
 		if (!defaultValue.empty())
 		{
 			m_clearStructuralFeatureAction_Attribute_result->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getOutputPin_Attribute_clearStructuralFeatureAction();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getOutputPin_Attribute_clearStructuralFeatureAction();
 		if (otherEnd != nullptr)
 	    {
 	   		m_clearStructuralFeatureAction_Attribute_result->setEOpposite(otherEnd);
@@ -6673,12 +6502,9 @@ void UmlPackageImpl::initializeCollaborationContent()
 		if (!defaultValue.empty())
 		{
 			m_collaboration_Attribute_collaborationRole->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_collaboration_Attribute_collaborationRole->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	
@@ -6709,12 +6535,9 @@ void UmlPackageImpl::initializeCollaborationUseContent()
 		if (!defaultValue.empty())
 		{
 			m_collaborationUse_Attribute_roleBinding->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_collaborationUse_Attribute_roleBinding->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_collaborationUse_Attribute_type->setName("type");
 	m_collaborationUse_Attribute_type->setEType(getCollaboration_Class());
@@ -6734,12 +6557,9 @@ void UmlPackageImpl::initializeCollaborationUseContent()
 		if (!defaultValue.empty())
 		{
 			m_collaborationUse_Attribute_type->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_collaborationUse_Attribute_type->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_collaborationUse_Operation_client_elements_EDiagnosticChain_EMap->setEType(ecore::EcorePackage::eInstance()->getEBoolean_Class());
@@ -6871,12 +6691,9 @@ void UmlPackageImpl::initializeCombinedFragmentContent()
 		if (!defaultValue.empty())
 		{
 			m_combinedFragment_Attribute_cfragmentGate->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_combinedFragment_Attribute_cfragmentGate->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_combinedFragment_Attribute_operand->setName("operand");
 	m_combinedFragment_Attribute_operand->setEType(getInteractionOperand_Class());
@@ -6896,12 +6713,9 @@ void UmlPackageImpl::initializeCombinedFragmentContent()
 		if (!defaultValue.empty())
 		{
 			m_combinedFragment_Attribute_operand->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_combinedFragment_Attribute_operand->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_combinedFragment_Operation_break__EDiagnosticChain_EMap->setEType(ecore::EcorePackage::eInstance()->getEBoolean_Class());
@@ -7033,12 +6847,9 @@ void UmlPackageImpl::initializeCommentContent()
 		if (!defaultValue.empty())
 		{
 			m_comment_Attribute_annotatedElement->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_comment_Attribute_annotatedElement->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	
@@ -7100,12 +6911,9 @@ void UmlPackageImpl::initializeComponentContent()
 		if (!defaultValue.empty())
 		{
 			m_component_Attribute_packagedElement->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_component_Attribute_packagedElement->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_component_Attribute_provided->setName("provided");
 	m_component_Attribute_provided->setEType(getInterface_Class());
@@ -7125,12 +6933,9 @@ void UmlPackageImpl::initializeComponentContent()
 		if (!defaultValue.empty())
 		{
 			m_component_Attribute_provided->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_component_Attribute_provided->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_component_Attribute_realization->setName("realization");
 	m_component_Attribute_realization->setEType(getComponentRealization_Class());
@@ -7150,8 +6955,8 @@ void UmlPackageImpl::initializeComponentContent()
 		if (!defaultValue.empty())
 		{
 			m_component_Attribute_realization->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getComponentRealization_Attribute_abstraction();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getComponentRealization_Attribute_abstraction();
 		if (otherEnd != nullptr)
 	    {
 	   		m_component_Attribute_realization->setEOpposite(otherEnd);
@@ -7175,12 +6980,9 @@ void UmlPackageImpl::initializeComponentContent()
 		if (!defaultValue.empty())
 		{
 			m_component_Attribute_required->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_component_Attribute_required->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_component_Operation_createOwnedClass_String_Boolean->setEType(getClass_Class());
@@ -7359,8 +7161,8 @@ void UmlPackageImpl::initializeComponentRealizationContent()
 		if (!defaultValue.empty())
 		{
 			m_componentRealization_Attribute_abstraction->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getComponent_Attribute_realization();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getComponent_Attribute_realization();
 		if (otherEnd != nullptr)
 	    {
 	   		m_componentRealization_Attribute_abstraction->setEOpposite(otherEnd);
@@ -7384,12 +7186,9 @@ void UmlPackageImpl::initializeComponentRealizationContent()
 		if (!defaultValue.empty())
 		{
 			m_componentRealization_Attribute_realizingClassifier->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_componentRealization_Attribute_realizingClassifier->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	
@@ -7460,12 +7259,9 @@ void UmlPackageImpl::initializeConditionalNodeContent()
 		if (!defaultValue.empty())
 		{
 			m_conditionalNode_Attribute_clause->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_conditionalNode_Attribute_clause->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_conditionalNode_Attribute_result->setName("result");
 	m_conditionalNode_Attribute_result->setEType(getOutputPin_Class());
@@ -7485,12 +7281,9 @@ void UmlPackageImpl::initializeConditionalNodeContent()
 		if (!defaultValue.empty())
 		{
 			m_conditionalNode_Attribute_result->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_conditionalNode_Attribute_result->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_conditionalNode_Operation_clause_no_predecessor_EDiagnosticChain_EMap->setEType(ecore::EcorePackage::eInstance()->getEBoolean_Class());
@@ -7683,12 +7476,9 @@ void UmlPackageImpl::initializeConnectableElementContent()
 		if (!defaultValue.empty())
 		{
 			m_connectableElement_Attribute_end->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_connectableElement_Attribute_end->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_connectableElement_Operation_getEnds->setEType(getConnectorEnd_Class());
@@ -7738,12 +7528,9 @@ void UmlPackageImpl::initializeConnectionPointReferenceContent()
 		if (!defaultValue.empty())
 		{
 			m_connectionPointReference_Attribute_entry->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_connectionPointReference_Attribute_entry->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_connectionPointReference_Attribute_exit->setName("exit");
 	m_connectionPointReference_Attribute_exit->setEType(getPseudostate_Class());
@@ -7763,12 +7550,9 @@ void UmlPackageImpl::initializeConnectionPointReferenceContent()
 		if (!defaultValue.empty())
 		{
 			m_connectionPointReference_Attribute_exit->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_connectionPointReference_Attribute_exit->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_connectionPointReference_Attribute_state->setName("state");
 	m_connectionPointReference_Attribute_state->setEType(getState_Class());
@@ -7788,8 +7572,8 @@ void UmlPackageImpl::initializeConnectionPointReferenceContent()
 		if (!defaultValue.empty())
 		{
 			m_connectionPointReference_Attribute_state->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getState_Attribute_connection();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getState_Attribute_connection();
 		if (otherEnd != nullptr)
 	    {
 	   		m_connectionPointReference_Attribute_state->setEOpposite(otherEnd);
@@ -7898,12 +7682,9 @@ void UmlPackageImpl::initializeConnectorContent()
 		if (!defaultValue.empty())
 		{
 			m_connector_Attribute_contract->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_connector_Attribute_contract->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_connector_Attribute_end->setName("end");
 	m_connector_Attribute_end->setEType(getConnectorEnd_Class());
@@ -7923,12 +7704,9 @@ void UmlPackageImpl::initializeConnectorContent()
 		if (!defaultValue.empty())
 		{
 			m_connector_Attribute_end->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_connector_Attribute_end->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_connector_Attribute_redefinedConnector->setName("redefinedConnector");
 	m_connector_Attribute_redefinedConnector->setEType(getConnector_Class());
@@ -7948,12 +7726,9 @@ void UmlPackageImpl::initializeConnectorContent()
 		if (!defaultValue.empty())
 		{
 			m_connector_Attribute_redefinedConnector->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_connector_Attribute_redefinedConnector->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_connector_Attribute_type->setName("type");
 	m_connector_Attribute_type->setEType(getAssociation_Class());
@@ -7973,12 +7748,9 @@ void UmlPackageImpl::initializeConnectorContent()
 		if (!defaultValue.empty())
 		{
 			m_connector_Attribute_type->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_connector_Attribute_type->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_connector_Operation_getKind->setEType(getConnectorKind_Class());
@@ -8071,12 +7843,9 @@ void UmlPackageImpl::initializeConnectorEndContent()
 		if (!defaultValue.empty())
 		{
 			m_connectorEnd_Attribute_definingEnd->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_connectorEnd_Attribute_definingEnd->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_connectorEnd_Attribute_partWithPort->setName("partWithPort");
 	m_connectorEnd_Attribute_partWithPort->setEType(getProperty_Class());
@@ -8096,12 +7865,9 @@ void UmlPackageImpl::initializeConnectorEndContent()
 		if (!defaultValue.empty())
 		{
 			m_connectorEnd_Attribute_partWithPort->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_connectorEnd_Attribute_partWithPort->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_connectorEnd_Attribute_role->setName("role");
 	m_connectorEnd_Attribute_role->setEType(getConnectableElement_Class());
@@ -8121,12 +7887,9 @@ void UmlPackageImpl::initializeConnectorEndContent()
 		if (!defaultValue.empty())
 		{
 			m_connectorEnd_Attribute_role->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_connectorEnd_Attribute_role->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_connectorEnd_Operation_getDefiningEnd->setEType(getProperty_Class());
@@ -8273,12 +8036,9 @@ void UmlPackageImpl::initializeConsiderIgnoreFragmentContent()
 		if (!defaultValue.empty())
 		{
 			m_considerIgnoreFragment_Attribute_message->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_considerIgnoreFragment_Attribute_message->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_considerIgnoreFragment_Operation_consider_or_ignore_EDiagnosticChain_EMap->setEType(ecore::EcorePackage::eInstance()->getEBoolean_Class());
@@ -8363,12 +8123,9 @@ void UmlPackageImpl::initializeConstraintContent()
 		if (!defaultValue.empty())
 		{
 			m_constraint_Attribute_constrainedElement->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_constraint_Attribute_constrainedElement->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_constraint_Attribute_context->setName("context");
 	m_constraint_Attribute_context->setEType(getNamespace_Class());
@@ -8388,8 +8145,8 @@ void UmlPackageImpl::initializeConstraintContent()
 		if (!defaultValue.empty())
 		{
 			m_constraint_Attribute_context->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getNamespace_Attribute_ownedRule();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getNamespace_Attribute_ownedRule();
 		if (otherEnd != nullptr)
 	    {
 	   		m_constraint_Attribute_context->setEOpposite(otherEnd);
@@ -8413,12 +8170,9 @@ void UmlPackageImpl::initializeConstraintContent()
 		if (!defaultValue.empty())
 		{
 			m_constraint_Attribute_specification->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_constraint_Attribute_specification->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_constraint_Operation_boolean_value_EDiagnosticChain_EMap->setEType(ecore::EcorePackage::eInstance()->getEBoolean_Class());
@@ -8729,12 +8483,9 @@ void UmlPackageImpl::initializeCreateLinkObjectActionContent()
 		if (!defaultValue.empty())
 		{
 			m_createLinkObjectAction_Attribute_result->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_createLinkObjectAction_Attribute_result->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_createLinkObjectAction_Operation_association_class_EDiagnosticChain_EMap->setEType(ecore::EcorePackage::eInstance()->getEBoolean_Class());
@@ -8846,12 +8597,9 @@ void UmlPackageImpl::initializeCreateObjectActionContent()
 		if (!defaultValue.empty())
 		{
 			m_createObjectAction_Attribute_classifier->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_createObjectAction_Attribute_classifier->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_createObjectAction_Attribute_result->setName("result");
 	m_createObjectAction_Attribute_result->setEType(getOutputPin_Class());
@@ -8871,8 +8619,8 @@ void UmlPackageImpl::initializeCreateObjectActionContent()
 		if (!defaultValue.empty())
 		{
 			m_createObjectAction_Attribute_result->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getOutputPin_Attribute_createObjectAction();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getOutputPin_Attribute_createObjectAction();
 		if (otherEnd != nullptr)
 	    {
 	   		m_createObjectAction_Attribute_result->setEOpposite(otherEnd);
@@ -9026,8 +8774,8 @@ void UmlPackageImpl::initializeDataTypeContent()
 		if (!defaultValue.empty())
 		{
 			m_dataType_Attribute_ownedAttribute->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getProperty_Attribute_datatype();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getProperty_Attribute_datatype();
 		if (otherEnd != nullptr)
 	    {
 	   		m_dataType_Attribute_ownedAttribute->setEOpposite(otherEnd);
@@ -9051,8 +8799,8 @@ void UmlPackageImpl::initializeDataTypeContent()
 		if (!defaultValue.empty())
 		{
 			m_dataType_Attribute_ownedOperation->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getOperation_Attribute_datatype();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getOperation_Attribute_datatype();
 		if (otherEnd != nullptr)
 	    {
 	   		m_dataType_Attribute_ownedOperation->setEOpposite(otherEnd);
@@ -9181,12 +8929,9 @@ void UmlPackageImpl::initializeDecisionNodeContent()
 		if (!defaultValue.empty())
 		{
 			m_decisionNode_Attribute_decisionInput->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_decisionNode_Attribute_decisionInput->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_decisionNode_Attribute_decisionInputFlow->setName("decisionInputFlow");
 	m_decisionNode_Attribute_decisionInputFlow->setEType(getObjectFlow_Class());
@@ -9206,12 +8951,9 @@ void UmlPackageImpl::initializeDecisionNodeContent()
 		if (!defaultValue.empty())
 		{
 			m_decisionNode_Attribute_decisionInputFlow->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_decisionNode_Attribute_decisionInputFlow->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_decisionNode_Operation_decision_input_flow_incoming_EDiagnosticChain_EMap->setEType(ecore::EcorePackage::eInstance()->getEBoolean_Class());
@@ -9458,12 +9200,9 @@ void UmlPackageImpl::initializeDependencyContent()
 		if (!defaultValue.empty())
 		{
 			m_dependency_Attribute_client->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_dependency_Attribute_client->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_dependency_Attribute_supplier->setName("supplier");
 	m_dependency_Attribute_supplier->setEType(getNamedElement_Class());
@@ -9483,12 +9222,9 @@ void UmlPackageImpl::initializeDependencyContent()
 		if (!defaultValue.empty())
 		{
 			m_dependency_Attribute_supplier->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_dependency_Attribute_supplier->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	
@@ -9530,8 +9266,8 @@ void UmlPackageImpl::initializeDeploymentContent()
 		if (!defaultValue.empty())
 		{
 			m_deployment_Attribute_configuration->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getDeploymentSpecification_Attribute_deployment();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getDeploymentSpecification_Attribute_deployment();
 		if (otherEnd != nullptr)
 	    {
 	   		m_deployment_Attribute_configuration->setEOpposite(otherEnd);
@@ -9555,12 +9291,9 @@ void UmlPackageImpl::initializeDeploymentContent()
 		if (!defaultValue.empty())
 		{
 			m_deployment_Attribute_deployedArtifact->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_deployment_Attribute_deployedArtifact->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_deployment_Attribute_location->setName("location");
 	m_deployment_Attribute_location->setEType(getDeploymentTarget_Class());
@@ -9580,8 +9313,8 @@ void UmlPackageImpl::initializeDeploymentContent()
 		if (!defaultValue.empty())
 		{
 			m_deployment_Attribute_location->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getDeploymentTarget_Attribute_deployment();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getDeploymentTarget_Attribute_deployment();
 		if (otherEnd != nullptr)
 	    {
 	   		m_deployment_Attribute_location->setEOpposite(otherEnd);
@@ -9656,8 +9389,8 @@ void UmlPackageImpl::initializeDeploymentSpecificationContent()
 		if (!defaultValue.empty())
 		{
 			m_deploymentSpecification_Attribute_deployment->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getDeployment_Attribute_configuration();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getDeployment_Attribute_configuration();
 		if (otherEnd != nullptr)
 	    {
 	   		m_deploymentSpecification_Attribute_deployment->setEOpposite(otherEnd);
@@ -9746,12 +9479,9 @@ void UmlPackageImpl::initializeDeploymentTargetContent()
 		if (!defaultValue.empty())
 		{
 			m_deploymentTarget_Attribute_deployedElement->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_deploymentTarget_Attribute_deployedElement->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_deploymentTarget_Attribute_deployment->setName("deployment");
 	m_deploymentTarget_Attribute_deployment->setEType(getDeployment_Class());
@@ -9771,8 +9501,8 @@ void UmlPackageImpl::initializeDeploymentTargetContent()
 		if (!defaultValue.empty())
 		{
 			m_deploymentTarget_Attribute_deployment->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getDeployment_Attribute_location();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getDeployment_Attribute_location();
 		if (otherEnd != nullptr)
 	    {
 	   		m_deploymentTarget_Attribute_deployment->setEOpposite(otherEnd);
@@ -9866,8 +9596,8 @@ void UmlPackageImpl::initializeDestroyObjectActionContent()
 		if (!defaultValue.empty())
 		{
 			m_destroyObjectAction_Attribute_target->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getInputPin_Attribute_destroyObjectAction();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getInputPin_Attribute_destroyObjectAction();
 		if (otherEnd != nullptr)
 	    {
 	   		m_destroyObjectAction_Attribute_target->setEOpposite(otherEnd);
@@ -10005,12 +9735,9 @@ void UmlPackageImpl::initializeDirectedRelationshipContent()
 		if (!defaultValue.empty())
 		{
 			m_directedRelationship_Attribute_source->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_directedRelationship_Attribute_source->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_directedRelationship_Attribute_target->setName("target");
 	m_directedRelationship_Attribute_target->setEType(getElement_Class());
@@ -10030,12 +9757,9 @@ void UmlPackageImpl::initializeDirectedRelationshipContent()
 		if (!defaultValue.empty())
 		{
 			m_directedRelationship_Attribute_target->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_directedRelationship_Attribute_target->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	
@@ -10066,12 +9790,9 @@ void UmlPackageImpl::initializeDurationContent()
 		if (!defaultValue.empty())
 		{
 			m_duration_Attribute_expr->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_duration_Attribute_expr->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_duration_Attribute_observation->setName("observation");
 	m_duration_Attribute_observation->setEType(getObservation_Class());
@@ -10091,12 +9812,9 @@ void UmlPackageImpl::initializeDurationContent()
 		if (!defaultValue.empty())
 		{
 			m_duration_Attribute_observation->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_duration_Attribute_observation->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_duration_Operation_no_expr_requires_observation_EDiagnosticChain_EMap->setEType(ecore::EcorePackage::eInstance()->getEBoolean_Class());
@@ -10270,12 +9988,9 @@ void UmlPackageImpl::initializeDurationObservationContent()
 		if (!defaultValue.empty())
 		{
 			m_durationObservation_Attribute_event->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_durationObservation_Attribute_event->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_durationObservation_Operation_first_event_multiplicity_EDiagnosticChain_EMap->setEType(ecore::EcorePackage::eInstance()->getEBoolean_Class());
@@ -10333,12 +10048,9 @@ void UmlPackageImpl::initializeElementContent()
 		if (!defaultValue.empty())
 		{
 			m_element_Attribute_ownedComment->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_element_Attribute_ownedComment->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_element_Attribute_ownedElement->setName("ownedElement");
 	m_element_Attribute_ownedElement->setEType(getElement_Class());
@@ -10358,8 +10070,8 @@ void UmlPackageImpl::initializeElementContent()
 		if (!defaultValue.empty())
 		{
 			m_element_Attribute_ownedElement->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getElement_Attribute_owner();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getElement_Attribute_owner();
 		if (otherEnd != nullptr)
 	    {
 	   		m_element_Attribute_ownedElement->setEOpposite(otherEnd);
@@ -10383,8 +10095,8 @@ void UmlPackageImpl::initializeElementContent()
 		if (!defaultValue.empty())
 		{
 			m_element_Attribute_owner->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getElement_Attribute_ownedElement();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getElement_Attribute_ownedElement();
 		if (otherEnd != nullptr)
 	    {
 	   		m_element_Attribute_owner->setEOpposite(otherEnd);
@@ -11040,12 +10752,9 @@ void UmlPackageImpl::initializeElementImportContent()
 		if (!defaultValue.empty())
 		{
 			m_elementImport_Attribute_importedElement->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_elementImport_Attribute_importedElement->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_elementImport_Attribute_importingNamespace->setName("importingNamespace");
 	m_elementImport_Attribute_importingNamespace->setEType(getNamespace_Class());
@@ -11065,8 +10774,8 @@ void UmlPackageImpl::initializeElementImportContent()
 		if (!defaultValue.empty())
 		{
 			m_elementImport_Attribute_importingNamespace->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getNamespace_Attribute_elementImport();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getNamespace_Attribute_elementImport();
 		if (otherEnd != nullptr)
 	    {
 	   		m_elementImport_Attribute_importingNamespace->setEOpposite(otherEnd);
@@ -11163,12 +10872,9 @@ void UmlPackageImpl::initializeEncapsulatedClassifierContent()
 		if (!defaultValue.empty())
 		{
 			m_encapsulatedClassifier_Attribute_ownedPort->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_encapsulatedClassifier_Attribute_ownedPort->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_encapsulatedClassifier_Operation_getOwnedPorts->setEType(getPort_Class());
@@ -11207,8 +10913,8 @@ void UmlPackageImpl::initializeEnumerationContent()
 		if (!defaultValue.empty())
 		{
 			m_enumeration_Attribute_ownedLiteral->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getEnumerationLiteral_Attribute_enumeration();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getEnumerationLiteral_Attribute_enumeration();
 		if (otherEnd != nullptr)
 	    {
 	   		m_enumeration_Attribute_ownedLiteral->setEOpposite(otherEnd);
@@ -11270,8 +10976,8 @@ void UmlPackageImpl::initializeEnumerationLiteralContent()
 		if (!defaultValue.empty())
 		{
 			m_enumerationLiteral_Attribute_enumeration->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getEnumeration_Attribute_ownedLiteral();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getEnumeration_Attribute_ownedLiteral();
 		if (otherEnd != nullptr)
 	    {
 	   		m_enumerationLiteral_Attribute_enumeration->setEOpposite(otherEnd);
@@ -11333,12 +11039,9 @@ void UmlPackageImpl::initializeExceptionHandlerContent()
 		if (!defaultValue.empty())
 		{
 			m_exceptionHandler_Attribute_exceptionInput->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_exceptionHandler_Attribute_exceptionInput->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_exceptionHandler_Attribute_exceptionType->setName("exceptionType");
 	m_exceptionHandler_Attribute_exceptionType->setEType(getClassifier_Class());
@@ -11358,12 +11061,9 @@ void UmlPackageImpl::initializeExceptionHandlerContent()
 		if (!defaultValue.empty())
 		{
 			m_exceptionHandler_Attribute_exceptionType->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_exceptionHandler_Attribute_exceptionType->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_exceptionHandler_Attribute_handlerBody->setName("handlerBody");
 	m_exceptionHandler_Attribute_handlerBody->setEType(getExecutableNode_Class());
@@ -11383,12 +11083,9 @@ void UmlPackageImpl::initializeExceptionHandlerContent()
 		if (!defaultValue.empty())
 		{
 			m_exceptionHandler_Attribute_handlerBody->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_exceptionHandler_Attribute_handlerBody->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_exceptionHandler_Attribute_protectedNode->setName("protectedNode");
 	m_exceptionHandler_Attribute_protectedNode->setEType(getExecutableNode_Class());
@@ -11408,8 +11105,8 @@ void UmlPackageImpl::initializeExceptionHandlerContent()
 		if (!defaultValue.empty())
 		{
 			m_exceptionHandler_Attribute_protectedNode->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getExecutableNode_Attribute_handler();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getExecutableNode_Attribute_handler();
 		if (otherEnd != nullptr)
 	    {
 	   		m_exceptionHandler_Attribute_protectedNode->setEOpposite(otherEnd);
@@ -11606,8 +11303,8 @@ void UmlPackageImpl::initializeExecutableNodeContent()
 		if (!defaultValue.empty())
 		{
 			m_executableNode_Attribute_handler->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getExceptionHandler_Attribute_protectedNode();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getExceptionHandler_Attribute_protectedNode();
 		if (otherEnd != nullptr)
 	    {
 	   		m_executableNode_Attribute_handler->setEOpposite(otherEnd);
@@ -11653,12 +11350,9 @@ void UmlPackageImpl::initializeExecutionOccurrenceSpecificationContent()
 		if (!defaultValue.empty())
 		{
 			m_executionOccurrenceSpecification_Attribute_execution->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_executionOccurrenceSpecification_Attribute_execution->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	
@@ -11689,12 +11383,9 @@ void UmlPackageImpl::initializeExecutionSpecificationContent()
 		if (!defaultValue.empty())
 		{
 			m_executionSpecification_Attribute_finish->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_executionSpecification_Attribute_finish->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_executionSpecification_Attribute_start->setName("start");
 	m_executionSpecification_Attribute_start->setEType(getOccurrenceSpecification_Class());
@@ -11714,12 +11405,9 @@ void UmlPackageImpl::initializeExecutionSpecificationContent()
 		if (!defaultValue.empty())
 		{
 			m_executionSpecification_Attribute_start->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_executionSpecification_Attribute_start->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_executionSpecification_Operation_same_lifeline_EDiagnosticChain_EMap->setEType(ecore::EcorePackage::eInstance()->getEBoolean_Class());
@@ -11777,8 +11465,8 @@ void UmlPackageImpl::initializeExpansionNodeContent()
 		if (!defaultValue.empty())
 		{
 			m_expansionNode_Attribute_regionAsInput->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getExpansionRegion_Attribute_inputElement();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getExpansionRegion_Attribute_inputElement();
 		if (otherEnd != nullptr)
 	    {
 	   		m_expansionNode_Attribute_regionAsInput->setEOpposite(otherEnd);
@@ -11802,8 +11490,8 @@ void UmlPackageImpl::initializeExpansionNodeContent()
 		if (!defaultValue.empty())
 		{
 			m_expansionNode_Attribute_regionAsOutput->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getExpansionRegion_Attribute_outputElement();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getExpansionRegion_Attribute_outputElement();
 		if (otherEnd != nullptr)
 	    {
 	   		m_expansionNode_Attribute_regionAsOutput->setEOpposite(otherEnd);
@@ -11885,8 +11573,8 @@ void UmlPackageImpl::initializeExpansionRegionContent()
 		if (!defaultValue.empty())
 		{
 			m_expansionRegion_Attribute_inputElement->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getExpansionNode_Attribute_regionAsInput();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getExpansionNode_Attribute_regionAsInput();
 		if (otherEnd != nullptr)
 	    {
 	   		m_expansionRegion_Attribute_inputElement->setEOpposite(otherEnd);
@@ -11910,8 +11598,8 @@ void UmlPackageImpl::initializeExpansionRegionContent()
 		if (!defaultValue.empty())
 		{
 			m_expansionRegion_Attribute_outputElement->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getExpansionNode_Attribute_regionAsOutput();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getExpansionNode_Attribute_regionAsOutput();
 		if (otherEnd != nullptr)
 	    {
 	   		m_expansionRegion_Attribute_outputElement->setEOpposite(otherEnd);
@@ -11966,12 +11654,9 @@ void UmlPackageImpl::initializeExpressionContent()
 		if (!defaultValue.empty())
 		{
 			m_expression_Attribute_operand->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_expression_Attribute_operand->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	
@@ -12002,12 +11687,9 @@ void UmlPackageImpl::initializeExtendContent()
 		if (!defaultValue.empty())
 		{
 			m_extend_Attribute_condition->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_extend_Attribute_condition->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_extend_Attribute_extendedCase->setName("extendedCase");
 	m_extend_Attribute_extendedCase->setEType(getUseCase_Class());
@@ -12027,12 +11709,9 @@ void UmlPackageImpl::initializeExtendContent()
 		if (!defaultValue.empty())
 		{
 			m_extend_Attribute_extendedCase->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_extend_Attribute_extendedCase->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_extend_Attribute_extension->setName("extension");
 	m_extend_Attribute_extension->setEType(getUseCase_Class());
@@ -12052,8 +11731,8 @@ void UmlPackageImpl::initializeExtendContent()
 		if (!defaultValue.empty())
 		{
 			m_extend_Attribute_extension->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getUseCase_Attribute_extend();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getUseCase_Attribute_extend();
 		if (otherEnd != nullptr)
 	    {
 	   		m_extend_Attribute_extension->setEOpposite(otherEnd);
@@ -12077,12 +11756,9 @@ void UmlPackageImpl::initializeExtendContent()
 		if (!defaultValue.empty())
 		{
 			m_extend_Attribute_extensionLocation->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_extend_Attribute_extensionLocation->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_extend_Operation_extension_points_EDiagnosticChain_EMap->setEType(ecore::EcorePackage::eInstance()->getEBoolean_Class());
@@ -12160,8 +11836,8 @@ void UmlPackageImpl::initializeExtensionContent()
 		if (!defaultValue.empty())
 		{
 			m_extension_Attribute_metaclass->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getClass_Attribute_extension();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getClass_Attribute_extension();
 		if (otherEnd != nullptr)
 	    {
 	   		m_extension_Attribute_metaclass->setEOpposite(otherEnd);
@@ -12355,8 +12031,8 @@ void UmlPackageImpl::initializeExtensionPointContent()
 		if (!defaultValue.empty())
 		{
 			m_extensionPoint_Attribute_useCase->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getUseCase_Attribute_extensionPoint();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getUseCase_Attribute_extensionPoint();
 		if (otherEnd != nullptr)
 	    {
 	   		m_extensionPoint_Attribute_useCase->setEOpposite(otherEnd);
@@ -12466,8 +12142,8 @@ void UmlPackageImpl::initializeFeatureContent()
 		if (!defaultValue.empty())
 		{
 			m_feature_Attribute_featuringClassifier->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getClassifier_Attribute_feature();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getClassifier_Attribute_feature();
 		if (otherEnd != nullptr)
 	    {
 	   		m_feature_Attribute_featuringClassifier->setEOpposite(otherEnd);
@@ -13136,8 +12812,8 @@ void UmlPackageImpl::initializeGeneralOrderingContent()
 		if (!defaultValue.empty())
 		{
 			m_generalOrdering_Attribute_after->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getOccurrenceSpecification_Attribute_toBefore();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getOccurrenceSpecification_Attribute_toBefore();
 		if (otherEnd != nullptr)
 	    {
 	   		m_generalOrdering_Attribute_after->setEOpposite(otherEnd);
@@ -13161,8 +12837,8 @@ void UmlPackageImpl::initializeGeneralOrderingContent()
 		if (!defaultValue.empty())
 		{
 			m_generalOrdering_Attribute_before->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getOccurrenceSpecification_Attribute_toAfter();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getOccurrenceSpecification_Attribute_toAfter();
 		if (otherEnd != nullptr)
 	    {
 	   		m_generalOrdering_Attribute_before->setEOpposite(otherEnd);
@@ -13244,12 +12920,9 @@ void UmlPackageImpl::initializeGeneralizationContent()
 		if (!defaultValue.empty())
 		{
 			m_generalization_Attribute_general->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_generalization_Attribute_general->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_generalization_Attribute_generalizationSet->setName("generalizationSet");
 	m_generalization_Attribute_generalizationSet->setEType(getGeneralizationSet_Class());
@@ -13269,8 +12942,8 @@ void UmlPackageImpl::initializeGeneralizationContent()
 		if (!defaultValue.empty())
 		{
 			m_generalization_Attribute_generalizationSet->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getGeneralizationSet_Attribute_generalization();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getGeneralizationSet_Attribute_generalization();
 		if (otherEnd != nullptr)
 	    {
 	   		m_generalization_Attribute_generalizationSet->setEOpposite(otherEnd);
@@ -13294,8 +12967,8 @@ void UmlPackageImpl::initializeGeneralizationContent()
 		if (!defaultValue.empty())
 		{
 			m_generalization_Attribute_specific->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getClassifier_Attribute_generalization();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getClassifier_Attribute_generalization();
 		if (otherEnd != nullptr)
 	    {
 	   		m_generalization_Attribute_specific->setEOpposite(otherEnd);
@@ -13370,8 +13043,8 @@ void UmlPackageImpl::initializeGeneralizationSetContent()
 		if (!defaultValue.empty())
 		{
 			m_generalizationSet_Attribute_generalization->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getGeneralization_Attribute_generalizationSet();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getGeneralization_Attribute_generalizationSet();
 		if (otherEnd != nullptr)
 	    {
 	   		m_generalizationSet_Attribute_generalization->setEOpposite(otherEnd);
@@ -13395,8 +13068,8 @@ void UmlPackageImpl::initializeGeneralizationSetContent()
 		if (!defaultValue.empty())
 		{
 			m_generalizationSet_Attribute_powertype->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getClassifier_Attribute_powertypeExtent();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getClassifier_Attribute_powertypeExtent();
 		if (otherEnd != nullptr)
 	    {
 	   		m_generalizationSet_Attribute_powertype->setEOpposite(otherEnd);
@@ -13556,12 +13229,9 @@ void UmlPackageImpl::initializeIncludeContent()
 		if (!defaultValue.empty())
 		{
 			m_include_Attribute_addition->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_include_Attribute_addition->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_include_Attribute_includingCase->setName("includingCase");
 	m_include_Attribute_includingCase->setEType(getUseCase_Class());
@@ -13581,8 +13251,8 @@ void UmlPackageImpl::initializeIncludeContent()
 		if (!defaultValue.empty())
 		{
 			m_include_Attribute_includingCase->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getUseCase_Attribute_include();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getUseCase_Attribute_include();
 		if (otherEnd != nullptr)
 	    {
 	   		m_include_Attribute_includingCase->setEOpposite(otherEnd);
@@ -13617,12 +13287,9 @@ void UmlPackageImpl::initializeInformationFlowContent()
 		if (!defaultValue.empty())
 		{
 			m_informationFlow_Attribute_conveyed->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_informationFlow_Attribute_conveyed->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_informationFlow_Attribute_informationSource->setName("informationSource");
 	m_informationFlow_Attribute_informationSource->setEType(getNamedElement_Class());
@@ -13642,12 +13309,9 @@ void UmlPackageImpl::initializeInformationFlowContent()
 		if (!defaultValue.empty())
 		{
 			m_informationFlow_Attribute_informationSource->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_informationFlow_Attribute_informationSource->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_informationFlow_Attribute_informationTarget->setName("informationTarget");
 	m_informationFlow_Attribute_informationTarget->setEType(getNamedElement_Class());
@@ -13667,12 +13331,9 @@ void UmlPackageImpl::initializeInformationFlowContent()
 		if (!defaultValue.empty())
 		{
 			m_informationFlow_Attribute_informationTarget->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_informationFlow_Attribute_informationTarget->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_informationFlow_Attribute_realization->setName("realization");
 	m_informationFlow_Attribute_realization->setEType(getRelationship_Class());
@@ -13692,12 +13353,9 @@ void UmlPackageImpl::initializeInformationFlowContent()
 		if (!defaultValue.empty())
 		{
 			m_informationFlow_Attribute_realization->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_informationFlow_Attribute_realization->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_informationFlow_Attribute_realizingActivityEdge->setName("realizingActivityEdge");
 	m_informationFlow_Attribute_realizingActivityEdge->setEType(getActivityEdge_Class());
@@ -13717,12 +13375,9 @@ void UmlPackageImpl::initializeInformationFlowContent()
 		if (!defaultValue.empty())
 		{
 			m_informationFlow_Attribute_realizingActivityEdge->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_informationFlow_Attribute_realizingActivityEdge->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_informationFlow_Attribute_realizingConnector->setName("realizingConnector");
 	m_informationFlow_Attribute_realizingConnector->setEType(getConnector_Class());
@@ -13742,12 +13397,9 @@ void UmlPackageImpl::initializeInformationFlowContent()
 		if (!defaultValue.empty())
 		{
 			m_informationFlow_Attribute_realizingConnector->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_informationFlow_Attribute_realizingConnector->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_informationFlow_Attribute_realizingMessage->setName("realizingMessage");
 	m_informationFlow_Attribute_realizingMessage->setEType(getMessage_Class());
@@ -13767,12 +13419,9 @@ void UmlPackageImpl::initializeInformationFlowContent()
 		if (!defaultValue.empty())
 		{
 			m_informationFlow_Attribute_realizingMessage->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_informationFlow_Attribute_realizingMessage->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_informationFlow_Operation_convey_classifiers_EDiagnosticChain_EMap->setEType(ecore::EcorePackage::eInstance()->getEBoolean_Class());
@@ -13884,12 +13533,9 @@ void UmlPackageImpl::initializeInformationItemContent()
 		if (!defaultValue.empty())
 		{
 			m_informationItem_Attribute_represented->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_informationItem_Attribute_represented->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_informationItem_Operation_has_no_EDiagnosticChain_EMap->setEType(ecore::EcorePackage::eInstance()->getEBoolean_Class());
@@ -14066,8 +13712,8 @@ void UmlPackageImpl::initializeInputPinContent()
 		if (!defaultValue.empty())
 		{
 			m_inputPin_Attribute_action->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getAction_Attribute_input();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getAction_Attribute_input();
 		if (otherEnd != nullptr)
 	    {
 	   		m_inputPin_Attribute_action->setEOpposite(otherEnd);
@@ -14091,8 +13737,8 @@ void UmlPackageImpl::initializeInputPinContent()
 		if (!defaultValue.empty())
 		{
 			m_inputPin_Attribute_addStructuralFeatureValueAction->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getAddStructuralFeatureValueAction_Attribute_insertAt();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getAddStructuralFeatureValueAction_Attribute_insertAt();
 		if (otherEnd != nullptr)
 	    {
 	   		m_inputPin_Attribute_addStructuralFeatureValueAction->setEOpposite(otherEnd);
@@ -14116,8 +13762,8 @@ void UmlPackageImpl::initializeInputPinContent()
 		if (!defaultValue.empty())
 		{
 			m_inputPin_Attribute_callOperationAction->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getCallOperationAction_Attribute_target();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getCallOperationAction_Attribute_target();
 		if (otherEnd != nullptr)
 	    {
 	   		m_inputPin_Attribute_callOperationAction->setEOpposite(otherEnd);
@@ -14141,8 +13787,8 @@ void UmlPackageImpl::initializeInputPinContent()
 		if (!defaultValue.empty())
 		{
 			m_inputPin_Attribute_destroyObjectAction->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getDestroyObjectAction_Attribute_target();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getDestroyObjectAction_Attribute_target();
 		if (otherEnd != nullptr)
 	    {
 	   		m_inputPin_Attribute_destroyObjectAction->setEOpposite(otherEnd);
@@ -14166,8 +13812,8 @@ void UmlPackageImpl::initializeInputPinContent()
 		if (!defaultValue.empty())
 		{
 			m_inputPin_Attribute_invocationAction->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getInvocationAction_Attribute_argument();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getInvocationAction_Attribute_argument();
 		if (otherEnd != nullptr)
 	    {
 	   		m_inputPin_Attribute_invocationAction->setEOpposite(otherEnd);
@@ -14191,8 +13837,8 @@ void UmlPackageImpl::initializeInputPinContent()
 		if (!defaultValue.empty())
 		{
 			m_inputPin_Attribute_structuralFeatureAction->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getStructuralFeatureAction_Attribute_object();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getStructuralFeatureAction_Attribute_object();
 		if (otherEnd != nullptr)
 	    {
 	   		m_inputPin_Attribute_structuralFeatureAction->setEOpposite(otherEnd);
@@ -14216,8 +13862,8 @@ void UmlPackageImpl::initializeInputPinContent()
 		if (!defaultValue.empty())
 		{
 			m_inputPin_Attribute_writeStructuralFeatureAction->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getWriteStructuralFeatureAction_Attribute_value();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getWriteStructuralFeatureAction_Attribute_value();
 		if (otherEnd != nullptr)
 	    {
 	   		m_inputPin_Attribute_writeStructuralFeatureAction->setEOpposite(otherEnd);
@@ -14279,12 +13925,9 @@ void UmlPackageImpl::initializeInstanceSpecificationContent()
 		if (!defaultValue.empty())
 		{
 			m_instanceSpecification_Attribute_classifier->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_instanceSpecification_Attribute_classifier->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_instanceSpecification_Attribute_slot->setName("slot");
 	m_instanceSpecification_Attribute_slot->setEType(getSlot_Class());
@@ -14304,8 +13947,8 @@ void UmlPackageImpl::initializeInstanceSpecificationContent()
 		if (!defaultValue.empty())
 		{
 			m_instanceSpecification_Attribute_slot->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getSlot_Attribute_owningInstance();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getSlot_Attribute_owningInstance();
 		if (otherEnd != nullptr)
 	    {
 	   		m_instanceSpecification_Attribute_slot->setEOpposite(otherEnd);
@@ -14329,12 +13972,9 @@ void UmlPackageImpl::initializeInstanceSpecificationContent()
 		if (!defaultValue.empty())
 		{
 			m_instanceSpecification_Attribute_specification->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_instanceSpecification_Attribute_specification->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_instanceSpecification_Operation_defining_feature_EDiagnosticChain_EMap->setEType(ecore::EcorePackage::eInstance()->getEBoolean_Class());
@@ -14473,12 +14113,9 @@ void UmlPackageImpl::initializeInstanceValueContent()
 		if (!defaultValue.empty())
 		{
 			m_instanceValue_Attribute_instance->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_instanceValue_Attribute_instance->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	
@@ -14509,12 +14146,9 @@ void UmlPackageImpl::initializeInteractionContent()
 		if (!defaultValue.empty())
 		{
 			m_interaction_Attribute_action->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_interaction_Attribute_action->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_interaction_Attribute_formalGate->setName("formalGate");
 	m_interaction_Attribute_formalGate->setEType(getGate_Class());
@@ -14534,12 +14168,9 @@ void UmlPackageImpl::initializeInteractionContent()
 		if (!defaultValue.empty())
 		{
 			m_interaction_Attribute_formalGate->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_interaction_Attribute_formalGate->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_interaction_Attribute_fragment->setName("fragment");
 	m_interaction_Attribute_fragment->setEType(getInteractionFragment_Class());
@@ -14559,8 +14190,8 @@ void UmlPackageImpl::initializeInteractionContent()
 		if (!defaultValue.empty())
 		{
 			m_interaction_Attribute_fragment->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getInteractionFragment_Attribute_enclosingInteraction();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getInteractionFragment_Attribute_enclosingInteraction();
 		if (otherEnd != nullptr)
 	    {
 	   		m_interaction_Attribute_fragment->setEOpposite(otherEnd);
@@ -14584,8 +14215,8 @@ void UmlPackageImpl::initializeInteractionContent()
 		if (!defaultValue.empty())
 		{
 			m_interaction_Attribute_lifeline->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getLifeline_Attribute_interaction();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getLifeline_Attribute_interaction();
 		if (otherEnd != nullptr)
 	    {
 	   		m_interaction_Attribute_lifeline->setEOpposite(otherEnd);
@@ -14609,8 +14240,8 @@ void UmlPackageImpl::initializeInteractionContent()
 		if (!defaultValue.empty())
 		{
 			m_interaction_Attribute_message->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getMessage_Attribute_interaction();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getMessage_Attribute_interaction();
 		if (otherEnd != nullptr)
 	    {
 	   		m_interaction_Attribute_message->setEOpposite(otherEnd);
@@ -14672,12 +14303,9 @@ void UmlPackageImpl::initializeInteractionConstraintContent()
 		if (!defaultValue.empty())
 		{
 			m_interactionConstraint_Attribute_maxint->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_interactionConstraint_Attribute_maxint->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_interactionConstraint_Attribute_minint->setName("minint");
 	m_interactionConstraint_Attribute_minint->setEType(getValueSpecification_Class());
@@ -14697,12 +14325,9 @@ void UmlPackageImpl::initializeInteractionConstraintContent()
 		if (!defaultValue.empty())
 		{
 			m_interactionConstraint_Attribute_minint->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_interactionConstraint_Attribute_minint->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_interactionConstraint_Operation_dynamic_variables_EDiagnosticChain_EMap->setEType(ecore::EcorePackage::eInstance()->getEBoolean_Class());
@@ -14895,8 +14520,8 @@ void UmlPackageImpl::initializeInteractionFragmentContent()
 		if (!defaultValue.empty())
 		{
 			m_interactionFragment_Attribute_covered->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getLifeline_Attribute_coveredBy();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getLifeline_Attribute_coveredBy();
 		if (otherEnd != nullptr)
 	    {
 	   		m_interactionFragment_Attribute_covered->setEOpposite(otherEnd);
@@ -14920,8 +14545,8 @@ void UmlPackageImpl::initializeInteractionFragmentContent()
 		if (!defaultValue.empty())
 		{
 			m_interactionFragment_Attribute_enclosingInteraction->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getInteraction_Attribute_fragment();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getInteraction_Attribute_fragment();
 		if (otherEnd != nullptr)
 	    {
 	   		m_interactionFragment_Attribute_enclosingInteraction->setEOpposite(otherEnd);
@@ -14945,8 +14570,8 @@ void UmlPackageImpl::initializeInteractionFragmentContent()
 		if (!defaultValue.empty())
 		{
 			m_interactionFragment_Attribute_enclosingOperand->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getInteractionOperand_Attribute_fragment();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getInteractionOperand_Attribute_fragment();
 		if (otherEnd != nullptr)
 	    {
 	   		m_interactionFragment_Attribute_enclosingOperand->setEOpposite(otherEnd);
@@ -14970,12 +14595,9 @@ void UmlPackageImpl::initializeInteractionFragmentContent()
 		if (!defaultValue.empty())
 		{
 			m_interactionFragment_Attribute_generalOrdering->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_interactionFragment_Attribute_generalOrdering->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	
@@ -15006,8 +14628,8 @@ void UmlPackageImpl::initializeInteractionOperandContent()
 		if (!defaultValue.empty())
 		{
 			m_interactionOperand_Attribute_fragment->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getInteractionFragment_Attribute_enclosingOperand();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getInteractionFragment_Attribute_enclosingOperand();
 		if (otherEnd != nullptr)
 	    {
 	   		m_interactionOperand_Attribute_fragment->setEOpposite(otherEnd);
@@ -15031,12 +14653,9 @@ void UmlPackageImpl::initializeInteractionOperandContent()
 		if (!defaultValue.empty())
 		{
 			m_interactionOperand_Attribute_guard->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_interactionOperand_Attribute_guard->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_interactionOperand_Operation_guard_contain_references_EDiagnosticChain_EMap->setEType(ecore::EcorePackage::eInstance()->getEBoolean_Class());
@@ -15121,12 +14740,9 @@ void UmlPackageImpl::initializeInteractionUseContent()
 		if (!defaultValue.empty())
 		{
 			m_interactionUse_Attribute_actualGate->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_interactionUse_Attribute_actualGate->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_interactionUse_Attribute_argument->setName("argument");
 	m_interactionUse_Attribute_argument->setEType(getValueSpecification_Class());
@@ -15146,12 +14762,9 @@ void UmlPackageImpl::initializeInteractionUseContent()
 		if (!defaultValue.empty())
 		{
 			m_interactionUse_Attribute_argument->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_interactionUse_Attribute_argument->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_interactionUse_Attribute_refersTo->setName("refersTo");
 	m_interactionUse_Attribute_refersTo->setEType(getInteraction_Class());
@@ -15171,12 +14784,9 @@ void UmlPackageImpl::initializeInteractionUseContent()
 		if (!defaultValue.empty())
 		{
 			m_interactionUse_Attribute_refersTo->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_interactionUse_Attribute_refersTo->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_interactionUse_Attribute_returnValue->setName("returnValue");
 	m_interactionUse_Attribute_returnValue->setEType(getValueSpecification_Class());
@@ -15196,12 +14806,9 @@ void UmlPackageImpl::initializeInteractionUseContent()
 		if (!defaultValue.empty())
 		{
 			m_interactionUse_Attribute_returnValue->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_interactionUse_Attribute_returnValue->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_interactionUse_Attribute_returnValueRecipient->setName("returnValueRecipient");
 	m_interactionUse_Attribute_returnValueRecipient->setEType(getProperty_Class());
@@ -15221,12 +14828,9 @@ void UmlPackageImpl::initializeInteractionUseContent()
 		if (!defaultValue.empty())
 		{
 			m_interactionUse_Attribute_returnValueRecipient->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_interactionUse_Attribute_returnValueRecipient->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_interactionUse_Operation_all_lifelines_EDiagnosticChain_EMap->setEType(ecore::EcorePackage::eInstance()->getEBoolean_Class());
@@ -15419,12 +15023,9 @@ void UmlPackageImpl::initializeInterfaceContent()
 		if (!defaultValue.empty())
 		{
 			m_interface_Attribute_nestedClassifier->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_interface_Attribute_nestedClassifier->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_interface_Attribute_ownedAttribute->setName("ownedAttribute");
 	m_interface_Attribute_ownedAttribute->setEType(getProperty_Class());
@@ -15444,8 +15045,8 @@ void UmlPackageImpl::initializeInterfaceContent()
 		if (!defaultValue.empty())
 		{
 			m_interface_Attribute_ownedAttribute->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getProperty_Attribute_interface();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getProperty_Attribute_interface();
 		if (otherEnd != nullptr)
 	    {
 	   		m_interface_Attribute_ownedAttribute->setEOpposite(otherEnd);
@@ -15469,8 +15070,8 @@ void UmlPackageImpl::initializeInterfaceContent()
 		if (!defaultValue.empty())
 		{
 			m_interface_Attribute_ownedOperation->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getOperation_Attribute_interface();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getOperation_Attribute_interface();
 		if (otherEnd != nullptr)
 	    {
 	   		m_interface_Attribute_ownedOperation->setEOpposite(otherEnd);
@@ -15494,12 +15095,9 @@ void UmlPackageImpl::initializeInterfaceContent()
 		if (!defaultValue.empty())
 		{
 			m_interface_Attribute_ownedReception->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_interface_Attribute_ownedReception->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_interface_Attribute_protocol->setName("protocol");
 	m_interface_Attribute_protocol->setEType(getProtocolStateMachine_Class());
@@ -15519,12 +15117,9 @@ void UmlPackageImpl::initializeInterfaceContent()
 		if (!defaultValue.empty())
 		{
 			m_interface_Attribute_protocol->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_interface_Attribute_protocol->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_interface_Attribute_redefinedInterface->setName("redefinedInterface");
 	m_interface_Attribute_redefinedInterface->setEType(getInterface_Class());
@@ -15544,12 +15139,9 @@ void UmlPackageImpl::initializeInterfaceContent()
 		if (!defaultValue.empty())
 		{
 			m_interface_Attribute_redefinedInterface->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_interface_Attribute_redefinedInterface->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_interface_Operation_createOwnedAttribute_String_UnlimitedNatural->setEType(getProperty_Class());
@@ -15701,12 +15293,9 @@ void UmlPackageImpl::initializeInterfaceRealizationContent()
 		if (!defaultValue.empty())
 		{
 			m_interfaceRealization_Attribute_contract->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_interfaceRealization_Attribute_contract->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_interfaceRealization_Attribute_implementingClassifier->setName("implementingClassifier");
 	m_interfaceRealization_Attribute_implementingClassifier->setEType(getBehavioredClassifier_Class());
@@ -15726,8 +15315,8 @@ void UmlPackageImpl::initializeInterfaceRealizationContent()
 		if (!defaultValue.empty())
 		{
 			m_interfaceRealization_Attribute_implementingClassifier->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getBehavioredClassifier_Attribute_interfaceRealization();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getBehavioredClassifier_Attribute_interfaceRealization();
 		if (otherEnd != nullptr)
 	    {
 	   		m_interfaceRealization_Attribute_implementingClassifier->setEOpposite(otherEnd);
@@ -15762,8 +15351,8 @@ void UmlPackageImpl::initializeInterruptibleActivityRegionContent()
 		if (!defaultValue.empty())
 		{
 			m_interruptibleActivityRegion_Attribute_interruptingEdge->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getActivityEdge_Attribute_interrupts();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getActivityEdge_Attribute_interrupts();
 		if (otherEnd != nullptr)
 	    {
 	   		m_interruptibleActivityRegion_Attribute_interruptingEdge->setEOpposite(otherEnd);
@@ -15787,8 +15376,8 @@ void UmlPackageImpl::initializeInterruptibleActivityRegionContent()
 		if (!defaultValue.empty())
 		{
 			m_interruptibleActivityRegion_Attribute_node->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getActivityNode_Attribute_inInterruptibleRegion();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getActivityNode_Attribute_inInterruptibleRegion();
 		if (otherEnd != nullptr)
 	    {
 	   		m_interruptibleActivityRegion_Attribute_node->setEOpposite(otherEnd);
@@ -15850,12 +15439,9 @@ void UmlPackageImpl::initializeIntervalContent()
 		if (!defaultValue.empty())
 		{
 			m_interval_Attribute_max->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_interval_Attribute_max->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_interval_Attribute_min->setName("min");
 	m_interval_Attribute_min->setEType(getValueSpecification_Class());
@@ -15875,12 +15461,9 @@ void UmlPackageImpl::initializeIntervalContent()
 		if (!defaultValue.empty())
 		{
 			m_interval_Attribute_min->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_interval_Attribute_min->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	
@@ -15922,8 +15505,8 @@ void UmlPackageImpl::initializeInvocationActionContent()
 		if (!defaultValue.empty())
 		{
 			m_invocationAction_Attribute_argument->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getInputPin_Attribute_invocationAction();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getInputPin_Attribute_invocationAction();
 		if (otherEnd != nullptr)
 	    {
 	   		m_invocationAction_Attribute_argument->setEOpposite(otherEnd);
@@ -15947,12 +15530,9 @@ void UmlPackageImpl::initializeInvocationActionContent()
 		if (!defaultValue.empty())
 		{
 			m_invocationAction_Attribute_onPort->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_invocationAction_Attribute_onPort->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	
@@ -16003,12 +15583,9 @@ void UmlPackageImpl::initializeJoinNodeContent()
 		if (!defaultValue.empty())
 		{
 			m_joinNode_Attribute_joinSpec->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_joinNode_Attribute_joinSpec->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_joinNode_Operation_incoming_object_flow_EDiagnosticChain_EMap->setEType(ecore::EcorePackage::eInstance()->getEBoolean_Class());
@@ -16093,8 +15670,8 @@ void UmlPackageImpl::initializeLifelineContent()
 		if (!defaultValue.empty())
 		{
 			m_lifeline_Attribute_coveredBy->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getInteractionFragment_Attribute_covered();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getInteractionFragment_Attribute_covered();
 		if (otherEnd != nullptr)
 	    {
 	   		m_lifeline_Attribute_coveredBy->setEOpposite(otherEnd);
@@ -16118,12 +15695,9 @@ void UmlPackageImpl::initializeLifelineContent()
 		if (!defaultValue.empty())
 		{
 			m_lifeline_Attribute_decomposedAs->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_lifeline_Attribute_decomposedAs->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_lifeline_Attribute_interaction->setName("interaction");
 	m_lifeline_Attribute_interaction->setEType(getInteraction_Class());
@@ -16143,8 +15717,8 @@ void UmlPackageImpl::initializeLifelineContent()
 		if (!defaultValue.empty())
 		{
 			m_lifeline_Attribute_interaction->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getInteraction_Attribute_lifeline();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getInteraction_Attribute_lifeline();
 		if (otherEnd != nullptr)
 	    {
 	   		m_lifeline_Attribute_interaction->setEOpposite(otherEnd);
@@ -16168,12 +15742,9 @@ void UmlPackageImpl::initializeLifelineContent()
 		if (!defaultValue.empty())
 		{
 			m_lifeline_Attribute_represents->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_lifeline_Attribute_represents->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_lifeline_Attribute_selector->setName("selector");
 	m_lifeline_Attribute_selector->setEType(getValueSpecification_Class());
@@ -16193,12 +15764,9 @@ void UmlPackageImpl::initializeLifelineContent()
 		if (!defaultValue.empty())
 		{
 			m_lifeline_Attribute_selector->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_lifeline_Attribute_selector->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_lifeline_Operation_interaction_uses_share_lifeline_EDiagnosticChain_EMap->setEType(ecore::EcorePackage::eInstance()->getEBoolean_Class());
@@ -16337,12 +15905,9 @@ void UmlPackageImpl::initializeLinkActionContent()
 		if (!defaultValue.empty())
 		{
 			m_linkAction_Attribute_endData->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_linkAction_Attribute_endData->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_linkAction_Attribute_inputValue->setName("inputValue");
 	m_linkAction_Attribute_inputValue->setEType(getInputPin_Class());
@@ -16362,12 +15927,9 @@ void UmlPackageImpl::initializeLinkActionContent()
 		if (!defaultValue.empty())
 		{
 			m_linkAction_Attribute_inputValue->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_linkAction_Attribute_inputValue->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_linkAction_Operation_association->setEType(getAssociation_Class());
@@ -16507,12 +16069,9 @@ void UmlPackageImpl::initializeLinkEndCreationDataContent()
 		if (!defaultValue.empty())
 		{
 			m_linkEndCreationData_Attribute_insertAt->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_linkEndCreationData_Attribute_insertAt->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_linkEndCreationData_Operation_insertAt_pin_EDiagnosticChain_EMap->setEType(ecore::EcorePackage::eInstance()->getEBoolean_Class());
@@ -16570,12 +16129,9 @@ void UmlPackageImpl::initializeLinkEndDataContent()
 		if (!defaultValue.empty())
 		{
 			m_linkEndData_Attribute_end->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_linkEndData_Attribute_end->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_linkEndData_Attribute_qualifier->setName("qualifier");
 	m_linkEndData_Attribute_qualifier->setEType(getQualifierValue_Class());
@@ -16595,12 +16151,9 @@ void UmlPackageImpl::initializeLinkEndDataContent()
 		if (!defaultValue.empty())
 		{
 			m_linkEndData_Attribute_qualifier->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_linkEndData_Attribute_qualifier->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_linkEndData_Attribute_value->setName("value");
 	m_linkEndData_Attribute_value->setEType(getInputPin_Class());
@@ -16620,12 +16173,9 @@ void UmlPackageImpl::initializeLinkEndDataContent()
 		if (!defaultValue.empty())
 		{
 			m_linkEndData_Attribute_value->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_linkEndData_Attribute_value->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_linkEndData_Operation_allPins->setEType(getInputPin_Class());
@@ -16819,12 +16369,9 @@ void UmlPackageImpl::initializeLinkEndDestructionDataContent()
 		if (!defaultValue.empty())
 		{
 			m_linkEndDestructionData_Attribute_destroyAt->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_linkEndDestructionData_Attribute_destroyAt->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_linkEndDestructionData_Operation_destroyAt_pin_EDiagnosticChain_EMap->setEType(ecore::EcorePackage::eInstance()->getEBoolean_Class());
@@ -17079,12 +16626,9 @@ void UmlPackageImpl::initializeLoopNodeContent()
 		if (!defaultValue.empty())
 		{
 			m_loopNode_Attribute_bodyOutput->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_loopNode_Attribute_bodyOutput->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_loopNode_Attribute_bodyPart->setName("bodyPart");
 	m_loopNode_Attribute_bodyPart->setEType(getExecutableNode_Class());
@@ -17104,12 +16648,9 @@ void UmlPackageImpl::initializeLoopNodeContent()
 		if (!defaultValue.empty())
 		{
 			m_loopNode_Attribute_bodyPart->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_loopNode_Attribute_bodyPart->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_loopNode_Attribute_decider->setName("decider");
 	m_loopNode_Attribute_decider->setEType(getOutputPin_Class());
@@ -17129,12 +16670,9 @@ void UmlPackageImpl::initializeLoopNodeContent()
 		if (!defaultValue.empty())
 		{
 			m_loopNode_Attribute_decider->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_loopNode_Attribute_decider->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_loopNode_Attribute_loopVariable->setName("loopVariable");
 	m_loopNode_Attribute_loopVariable->setEType(getOutputPin_Class());
@@ -17154,12 +16692,9 @@ void UmlPackageImpl::initializeLoopNodeContent()
 		if (!defaultValue.empty())
 		{
 			m_loopNode_Attribute_loopVariable->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_loopNode_Attribute_loopVariable->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_loopNode_Attribute_loopVariableInput->setName("loopVariableInput");
 	m_loopNode_Attribute_loopVariableInput->setEType(getInputPin_Class());
@@ -17179,12 +16714,9 @@ void UmlPackageImpl::initializeLoopNodeContent()
 		if (!defaultValue.empty())
 		{
 			m_loopNode_Attribute_loopVariableInput->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_loopNode_Attribute_loopVariableInput->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_loopNode_Attribute_result->setName("result");
 	m_loopNode_Attribute_result->setEType(getOutputPin_Class());
@@ -17204,12 +16736,9 @@ void UmlPackageImpl::initializeLoopNodeContent()
 		if (!defaultValue.empty())
 		{
 			m_loopNode_Attribute_result->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_loopNode_Attribute_result->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_loopNode_Attribute_setupPart->setName("setupPart");
 	m_loopNode_Attribute_setupPart->setEType(getExecutableNode_Class());
@@ -17229,12 +16758,9 @@ void UmlPackageImpl::initializeLoopNodeContent()
 		if (!defaultValue.empty())
 		{
 			m_loopNode_Attribute_setupPart->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_loopNode_Attribute_setupPart->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_loopNode_Attribute_test->setName("test");
 	m_loopNode_Attribute_test->setEType(getExecutableNode_Class());
@@ -17254,12 +16780,9 @@ void UmlPackageImpl::initializeLoopNodeContent()
 		if (!defaultValue.empty())
 		{
 			m_loopNode_Attribute_test->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_loopNode_Attribute_test->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_loopNode_Operation_body_output_pins_EDiagnosticChain_EMap->setEType(ecore::EcorePackage::eInstance()->getEBoolean_Class());
@@ -17533,12 +17056,9 @@ void UmlPackageImpl::initializeManifestationContent()
 		if (!defaultValue.empty())
 		{
 			m_manifestation_Attribute_utilizedElement->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_manifestation_Attribute_utilizedElement->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	
@@ -17674,12 +17194,9 @@ void UmlPackageImpl::initializeMessageContent()
 		if (!defaultValue.empty())
 		{
 			m_message_Attribute_argument->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_message_Attribute_argument->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_message_Attribute_connector->setName("connector");
 	m_message_Attribute_connector->setEType(getConnector_Class());
@@ -17699,12 +17216,9 @@ void UmlPackageImpl::initializeMessageContent()
 		if (!defaultValue.empty())
 		{
 			m_message_Attribute_connector->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_message_Attribute_connector->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_message_Attribute_interaction->setName("interaction");
 	m_message_Attribute_interaction->setEType(getInteraction_Class());
@@ -17724,8 +17238,8 @@ void UmlPackageImpl::initializeMessageContent()
 		if (!defaultValue.empty())
 		{
 			m_message_Attribute_interaction->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getInteraction_Attribute_message();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getInteraction_Attribute_message();
 		if (otherEnd != nullptr)
 	    {
 	   		m_message_Attribute_interaction->setEOpposite(otherEnd);
@@ -17749,12 +17263,9 @@ void UmlPackageImpl::initializeMessageContent()
 		if (!defaultValue.empty())
 		{
 			m_message_Attribute_receiveEvent->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_message_Attribute_receiveEvent->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_message_Attribute_sendEvent->setName("sendEvent");
 	m_message_Attribute_sendEvent->setEType(getMessageEnd_Class());
@@ -17774,12 +17285,9 @@ void UmlPackageImpl::initializeMessageContent()
 		if (!defaultValue.empty())
 		{
 			m_message_Attribute_sendEvent->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_message_Attribute_sendEvent->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_message_Attribute_signature->setName("signature");
 	m_message_Attribute_signature->setEType(getNamedElement_Class());
@@ -17799,12 +17307,9 @@ void UmlPackageImpl::initializeMessageContent()
 		if (!defaultValue.empty())
 		{
 			m_message_Attribute_signature->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_message_Attribute_signature->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_message_Operation_arguments_EDiagnosticChain_EMap->setEType(ecore::EcorePackage::eInstance()->getEBoolean_Class());
@@ -18059,12 +17564,9 @@ void UmlPackageImpl::initializeMessageEndContent()
 		if (!defaultValue.empty())
 		{
 			m_messageEnd_Attribute_message->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_messageEnd_Attribute_message->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_messageEnd_Operation_enclosingFragment->setEType(getInteractionFragment_Class());
@@ -18268,12 +17770,9 @@ void UmlPackageImpl::initializeMultiplicityElementContent()
 		if (!defaultValue.empty())
 		{
 			m_multiplicityElement_Attribute_lowerValue->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_multiplicityElement_Attribute_lowerValue->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_multiplicityElement_Attribute_upperValue->setName("upperValue");
 	m_multiplicityElement_Attribute_upperValue->setEType(getValueSpecification_Class());
@@ -18293,12 +17792,9 @@ void UmlPackageImpl::initializeMultiplicityElementContent()
 		if (!defaultValue.empty())
 		{
 			m_multiplicityElement_Attribute_upperValue->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_multiplicityElement_Attribute_upperValue->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_multiplicityElement_Operation_compatibleWith_MultiplicityElement->setEType(types::TypesPackage::eInstance()->getBoolean_Class());
@@ -18636,12 +18132,9 @@ void UmlPackageImpl::initializeNamedElementContent()
 		if (!defaultValue.empty())
 		{
 			m_namedElement_Attribute_clientDependency->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_namedElement_Attribute_clientDependency->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_namedElement_Attribute_nameExpression->setName("nameExpression");
 	m_namedElement_Attribute_nameExpression->setEType(getStringExpression_Class());
@@ -18661,12 +18154,9 @@ void UmlPackageImpl::initializeNamedElementContent()
 		if (!defaultValue.empty())
 		{
 			m_namedElement_Attribute_nameExpression->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_namedElement_Attribute_nameExpression->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_namedElement_Attribute_namespace->setName("namespace");
 	m_namedElement_Attribute_namespace->setEType(getNamespace_Class());
@@ -18686,8 +18176,8 @@ void UmlPackageImpl::initializeNamedElementContent()
 		if (!defaultValue.empty())
 		{
 			m_namedElement_Attribute_namespace->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getNamespace_Attribute_ownedMember();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getNamespace_Attribute_ownedMember();
 		if (otherEnd != nullptr)
 	    {
 	   		m_namedElement_Attribute_namespace->setEOpposite(otherEnd);
@@ -18937,8 +18427,8 @@ void UmlPackageImpl::initializeNamespaceContent()
 		if (!defaultValue.empty())
 		{
 			m_namespace_Attribute_elementImport->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getElementImport_Attribute_importingNamespace();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getElementImport_Attribute_importingNamespace();
 		if (otherEnd != nullptr)
 	    {
 	   		m_namespace_Attribute_elementImport->setEOpposite(otherEnd);
@@ -18962,12 +18452,9 @@ void UmlPackageImpl::initializeNamespaceContent()
 		if (!defaultValue.empty())
 		{
 			m_namespace_Attribute_importedMember->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_namespace_Attribute_importedMember->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_namespace_Attribute_member->setName("member");
 	m_namespace_Attribute_member->setEType(getNamedElement_Class());
@@ -18987,12 +18474,9 @@ void UmlPackageImpl::initializeNamespaceContent()
 		if (!defaultValue.empty())
 		{
 			m_namespace_Attribute_member->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_namespace_Attribute_member->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_namespace_Attribute_ownedMember->setName("ownedMember");
 	m_namespace_Attribute_ownedMember->setEType(getNamedElement_Class());
@@ -19012,8 +18496,8 @@ void UmlPackageImpl::initializeNamespaceContent()
 		if (!defaultValue.empty())
 		{
 			m_namespace_Attribute_ownedMember->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getNamedElement_Attribute_namespace();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getNamedElement_Attribute_namespace();
 		if (otherEnd != nullptr)
 	    {
 	   		m_namespace_Attribute_ownedMember->setEOpposite(otherEnd);
@@ -19037,8 +18521,8 @@ void UmlPackageImpl::initializeNamespaceContent()
 		if (!defaultValue.empty())
 		{
 			m_namespace_Attribute_ownedRule->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getConstraint_Attribute_context();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getConstraint_Attribute_context();
 		if (otherEnd != nullptr)
 	    {
 	   		m_namespace_Attribute_ownedRule->setEOpposite(otherEnd);
@@ -19062,8 +18546,8 @@ void UmlPackageImpl::initializeNamespaceContent()
 		if (!defaultValue.empty())
 		{
 			m_namespace_Attribute_packageImport->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getPackageImport_Attribute_importingNamespace();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getPackageImport_Attribute_importingNamespace();
 		if (otherEnd != nullptr)
 	    {
 	   		m_namespace_Attribute_packageImport->setEOpposite(otherEnd);
@@ -19324,12 +18808,9 @@ void UmlPackageImpl::initializeNodeContent()
 		if (!defaultValue.empty())
 		{
 			m_node_Attribute_nestedNode->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_node_Attribute_nestedNode->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_node_Operation_createCommunicationPath_Boolean_UnlimitedNatural->setEType(getCommunicationPath_Class());
@@ -19651,12 +19132,9 @@ void UmlPackageImpl::initializeObjectFlowContent()
 		if (!defaultValue.empty())
 		{
 			m_objectFlow_Attribute_selection->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_objectFlow_Attribute_selection->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_objectFlow_Attribute_transformation->setName("transformation");
 	m_objectFlow_Attribute_transformation->setEType(getBehavior_Class());
@@ -19676,12 +19154,9 @@ void UmlPackageImpl::initializeObjectFlowContent()
 		if (!defaultValue.empty())
 		{
 			m_objectFlow_Attribute_transformation->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_objectFlow_Attribute_transformation->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_objectFlow_Operation_compatible_types_EDiagnosticChain_EMap->setEType(ecore::EcorePackage::eInstance()->getEBoolean_Class());
@@ -19968,12 +19443,9 @@ void UmlPackageImpl::initializeObjectNodeContent()
 		if (!defaultValue.empty())
 		{
 			m_objectNode_Attribute_inState->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_objectNode_Attribute_inState->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_objectNode_Attribute_selection->setName("selection");
 	m_objectNode_Attribute_selection->setEType(getBehavior_Class());
@@ -19993,12 +19465,9 @@ void UmlPackageImpl::initializeObjectNodeContent()
 		if (!defaultValue.empty())
 		{
 			m_objectNode_Attribute_selection->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_objectNode_Attribute_selection->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_objectNode_Attribute_upperBound->setName("upperBound");
 	m_objectNode_Attribute_upperBound->setEType(getValueSpecification_Class());
@@ -20018,12 +19487,9 @@ void UmlPackageImpl::initializeObjectNodeContent()
 		if (!defaultValue.empty())
 		{
 			m_objectNode_Attribute_upperBound->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_objectNode_Attribute_upperBound->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_objectNode_Operation_input_output_parameter_EDiagnosticChain_EMap->setEType(ecore::EcorePackage::eInstance()->getEBoolean_Class());
@@ -20146,8 +19612,8 @@ void UmlPackageImpl::initializeOccurrenceSpecificationContent()
 		if (!defaultValue.empty())
 		{
 			m_occurrenceSpecification_Attribute_toAfter->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getGeneralOrdering_Attribute_before();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getGeneralOrdering_Attribute_before();
 		if (otherEnd != nullptr)
 	    {
 	   		m_occurrenceSpecification_Attribute_toAfter->setEOpposite(otherEnd);
@@ -20171,8 +19637,8 @@ void UmlPackageImpl::initializeOccurrenceSpecificationContent()
 		if (!defaultValue.empty())
 		{
 			m_occurrenceSpecification_Attribute_toBefore->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getGeneralOrdering_Attribute_after();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getGeneralOrdering_Attribute_after();
 		if (otherEnd != nullptr)
 	    {
 	   		m_occurrenceSpecification_Attribute_toBefore->setEOpposite(otherEnd);
@@ -20272,12 +19738,9 @@ void UmlPackageImpl::initializeOpaqueActionContent()
 		if (!defaultValue.empty())
 		{
 			m_opaqueAction_Attribute_inputValue->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_opaqueAction_Attribute_inputValue->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_opaqueAction_Attribute_outputValue->setName("outputValue");
 	m_opaqueAction_Attribute_outputValue->setEType(getOutputPin_Class());
@@ -20297,12 +19760,9 @@ void UmlPackageImpl::initializeOpaqueActionContent()
 		if (!defaultValue.empty())
 		{
 			m_opaqueAction_Attribute_outputValue->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_opaqueAction_Attribute_outputValue->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_opaqueAction_Operation_language_body_size_EDiagnosticChain_EMap->setEType(ecore::EcorePackage::eInstance()->getEBoolean_Class());
@@ -20451,12 +19911,9 @@ void UmlPackageImpl::initializeOpaqueExpressionContent()
 		if (!defaultValue.empty())
 		{
 			m_opaqueExpression_Attribute_behavior->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_opaqueExpression_Attribute_behavior->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_opaqueExpression_Attribute_result->setName("result");
 	m_opaqueExpression_Attribute_result->setEType(getParameter_Class());
@@ -20476,12 +19933,9 @@ void UmlPackageImpl::initializeOpaqueExpressionContent()
 		if (!defaultValue.empty())
 		{
 			m_opaqueExpression_Attribute_result->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_opaqueExpression_Attribute_result->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_opaqueExpression_Operation_getResult->setEType(getParameter_Class());
@@ -20733,12 +20187,9 @@ void UmlPackageImpl::initializeOperationContent()
 		if (!defaultValue.empty())
 		{
 			m_operation_Attribute_bodyCondition->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_operation_Attribute_bodyCondition->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_operation_Attribute_class->setName("class");
 	m_operation_Attribute_class->setEType(getClass_Class());
@@ -20758,8 +20209,8 @@ void UmlPackageImpl::initializeOperationContent()
 		if (!defaultValue.empty())
 		{
 			m_operation_Attribute_class->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getClass_Attribute_ownedOperation();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getClass_Attribute_ownedOperation();
 		if (otherEnd != nullptr)
 	    {
 	   		m_operation_Attribute_class->setEOpposite(otherEnd);
@@ -20783,8 +20234,8 @@ void UmlPackageImpl::initializeOperationContent()
 		if (!defaultValue.empty())
 		{
 			m_operation_Attribute_datatype->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getDataType_Attribute_ownedOperation();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getDataType_Attribute_ownedOperation();
 		if (otherEnd != nullptr)
 	    {
 	   		m_operation_Attribute_datatype->setEOpposite(otherEnd);
@@ -20808,8 +20259,8 @@ void UmlPackageImpl::initializeOperationContent()
 		if (!defaultValue.empty())
 		{
 			m_operation_Attribute_interface->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getInterface_Attribute_ownedOperation();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getInterface_Attribute_ownedOperation();
 		if (otherEnd != nullptr)
 	    {
 	   		m_operation_Attribute_interface->setEOpposite(otherEnd);
@@ -20833,12 +20284,9 @@ void UmlPackageImpl::initializeOperationContent()
 		if (!defaultValue.empty())
 		{
 			m_operation_Attribute_postcondition->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_operation_Attribute_postcondition->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_operation_Attribute_precondition->setName("precondition");
 	m_operation_Attribute_precondition->setEType(getConstraint_Class());
@@ -20858,12 +20306,9 @@ void UmlPackageImpl::initializeOperationContent()
 		if (!defaultValue.empty())
 		{
 			m_operation_Attribute_precondition->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_operation_Attribute_precondition->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_operation_Attribute_redefinedOperation->setName("redefinedOperation");
 	m_operation_Attribute_redefinedOperation->setEType(getOperation_Class());
@@ -20883,12 +20328,9 @@ void UmlPackageImpl::initializeOperationContent()
 		if (!defaultValue.empty())
 		{
 			m_operation_Attribute_redefinedOperation->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_operation_Attribute_redefinedOperation->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_operation_Attribute_type->setName("type");
 	m_operation_Attribute_type->setEType(getType_Class());
@@ -20908,12 +20350,9 @@ void UmlPackageImpl::initializeOperationContent()
 		if (!defaultValue.empty())
 		{
 			m_operation_Attribute_type->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_operation_Attribute_type->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_operation_Operation_at_most_one_return_EDiagnosticChain_EMap->setEType(ecore::EcorePackage::eInstance()->getEBoolean_Class());
@@ -21177,8 +20616,8 @@ void UmlPackageImpl::initializeOutputPinContent()
 		if (!defaultValue.empty())
 		{
 			m_outputPin_Attribute_action->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getAction_Attribute_output();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getAction_Attribute_output();
 		if (otherEnd != nullptr)
 	    {
 	   		m_outputPin_Attribute_action->setEOpposite(otherEnd);
@@ -21202,8 +20641,8 @@ void UmlPackageImpl::initializeOutputPinContent()
 		if (!defaultValue.empty())
 		{
 			m_outputPin_Attribute_callAction->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getCallAction_Attribute_result();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getCallAction_Attribute_result();
 		if (otherEnd != nullptr)
 	    {
 	   		m_outputPin_Attribute_callAction->setEOpposite(otherEnd);
@@ -21227,8 +20666,8 @@ void UmlPackageImpl::initializeOutputPinContent()
 		if (!defaultValue.empty())
 		{
 			m_outputPin_Attribute_clearStructuralFeatureAction->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getClearStructuralFeatureAction_Attribute_result();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getClearStructuralFeatureAction_Attribute_result();
 		if (otherEnd != nullptr)
 	    {
 	   		m_outputPin_Attribute_clearStructuralFeatureAction->setEOpposite(otherEnd);
@@ -21252,8 +20691,8 @@ void UmlPackageImpl::initializeOutputPinContent()
 		if (!defaultValue.empty())
 		{
 			m_outputPin_Attribute_createObjectAction->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getCreateObjectAction_Attribute_result();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getCreateObjectAction_Attribute_result();
 		if (otherEnd != nullptr)
 	    {
 	   		m_outputPin_Attribute_createObjectAction->setEOpposite(otherEnd);
@@ -21277,8 +20716,8 @@ void UmlPackageImpl::initializeOutputPinContent()
 		if (!defaultValue.empty())
 		{
 			m_outputPin_Attribute_readSelfAction->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getReadSelfAction_Attribute_result();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getReadSelfAction_Attribute_result();
 		if (otherEnd != nullptr)
 	    {
 	   		m_outputPin_Attribute_readSelfAction->setEOpposite(otherEnd);
@@ -21302,8 +20741,8 @@ void UmlPackageImpl::initializeOutputPinContent()
 		if (!defaultValue.empty())
 		{
 			m_outputPin_Attribute_readStructuralFeatureAction->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getReadStructuralFeatureAction_Attribute_result();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getReadStructuralFeatureAction_Attribute_result();
 		if (otherEnd != nullptr)
 	    {
 	   		m_outputPin_Attribute_readStructuralFeatureAction->setEOpposite(otherEnd);
@@ -21327,8 +20766,8 @@ void UmlPackageImpl::initializeOutputPinContent()
 		if (!defaultValue.empty())
 		{
 			m_outputPin_Attribute_valueSpecificationAction->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getValueSpecificationAction_Attribute_result();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getValueSpecificationAction_Attribute_result();
 		if (otherEnd != nullptr)
 	    {
 	   		m_outputPin_Attribute_valueSpecificationAction->setEOpposite(otherEnd);
@@ -21352,8 +20791,8 @@ void UmlPackageImpl::initializeOutputPinContent()
 		if (!defaultValue.empty())
 		{
 			m_outputPin_Attribute_writeStructuralFeatureAction->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getWriteStructuralFeatureAction_Attribute_result();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getWriteStructuralFeatureAction_Attribute_result();
 		if (otherEnd != nullptr)
 	    {
 	   		m_outputPin_Attribute_writeStructuralFeatureAction->setEOpposite(otherEnd);
@@ -21435,8 +20874,8 @@ void UmlPackageImpl::initializePackageContent()
 		if (!defaultValue.empty())
 		{
 			m_package_Attribute_nestedPackage->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getPackage_Attribute_nestingPackage();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getPackage_Attribute_nestingPackage();
 		if (otherEnd != nullptr)
 	    {
 	   		m_package_Attribute_nestedPackage->setEOpposite(otherEnd);
@@ -21460,8 +20899,8 @@ void UmlPackageImpl::initializePackageContent()
 		if (!defaultValue.empty())
 		{
 			m_package_Attribute_nestingPackage->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getPackage_Attribute_nestedPackage();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getPackage_Attribute_nestedPackage();
 		if (otherEnd != nullptr)
 	    {
 	   		m_package_Attribute_nestingPackage->setEOpposite(otherEnd);
@@ -21485,12 +20924,9 @@ void UmlPackageImpl::initializePackageContent()
 		if (!defaultValue.empty())
 		{
 			m_package_Attribute_ownedStereotype->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_package_Attribute_ownedStereotype->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_package_Attribute_ownedType->setName("ownedType");
 	m_package_Attribute_ownedType->setEType(getType_Class());
@@ -21510,8 +20946,8 @@ void UmlPackageImpl::initializePackageContent()
 		if (!defaultValue.empty())
 		{
 			m_package_Attribute_ownedType->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getType_Attribute_package();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getType_Attribute_package();
 		if (otherEnd != nullptr)
 	    {
 	   		m_package_Attribute_ownedType->setEOpposite(otherEnd);
@@ -21535,8 +20971,8 @@ void UmlPackageImpl::initializePackageContent()
 		if (!defaultValue.empty())
 		{
 			m_package_Attribute_packageMerge->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getPackageMerge_Attribute_receivingPackage();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getPackageMerge_Attribute_receivingPackage();
 		if (otherEnd != nullptr)
 	    {
 	   		m_package_Attribute_packageMerge->setEOpposite(otherEnd);
@@ -21560,8 +20996,8 @@ void UmlPackageImpl::initializePackageContent()
 		if (!defaultValue.empty())
 		{
 			m_package_Attribute_packagedElement->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getPackageableElement_Attribute_owningPackage();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getPackageableElement_Attribute_owningPackage();
 		if (otherEnd != nullptr)
 	    {
 	   		m_package_Attribute_packagedElement->setEOpposite(otherEnd);
@@ -21585,8 +21021,8 @@ void UmlPackageImpl::initializePackageContent()
 		if (!defaultValue.empty())
 		{
 			m_package_Attribute_profileApplication->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getProfileApplication_Attribute_applyingPackage();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getProfileApplication_Attribute_applyingPackage();
 		if (otherEnd != nullptr)
 	    {
 	   		m_package_Attribute_profileApplication->setEOpposite(otherEnd);
@@ -22009,12 +21445,9 @@ void UmlPackageImpl::initializePackageImportContent()
 		if (!defaultValue.empty())
 		{
 			m_packageImport_Attribute_importedPackage->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_packageImport_Attribute_importedPackage->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_packageImport_Attribute_importingNamespace->setName("importingNamespace");
 	m_packageImport_Attribute_importingNamespace->setEType(getNamespace_Class());
@@ -22034,8 +21467,8 @@ void UmlPackageImpl::initializePackageImportContent()
 		if (!defaultValue.empty())
 		{
 			m_packageImport_Attribute_importingNamespace->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getNamespace_Attribute_packageImport();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getNamespace_Attribute_packageImport();
 		if (otherEnd != nullptr)
 	    {
 	   		m_packageImport_Attribute_importingNamespace->setEOpposite(otherEnd);
@@ -22097,12 +21530,9 @@ void UmlPackageImpl::initializePackageMergeContent()
 		if (!defaultValue.empty())
 		{
 			m_packageMerge_Attribute_mergedPackage->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_packageMerge_Attribute_mergedPackage->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_packageMerge_Attribute_receivingPackage->setName("receivingPackage");
 	m_packageMerge_Attribute_receivingPackage->setEType(getPackage_Class());
@@ -22122,8 +21552,8 @@ void UmlPackageImpl::initializePackageMergeContent()
 		if (!defaultValue.empty())
 		{
 			m_packageMerge_Attribute_receivingPackage->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getPackage_Attribute_packageMerge();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getPackage_Attribute_packageMerge();
 		if (otherEnd != nullptr)
 	    {
 	   		m_packageMerge_Attribute_receivingPackage->setEOpposite(otherEnd);
@@ -22158,8 +21588,8 @@ void UmlPackageImpl::initializePackageableElementContent()
 		if (!defaultValue.empty())
 		{
 			m_packageableElement_Attribute_owningPackage->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getPackage_Attribute_packagedElement();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getPackage_Attribute_packagedElement();
 		if (otherEnd != nullptr)
 	    {
 	   		m_packageableElement_Attribute_owningPackage->setEOpposite(otherEnd);
@@ -22321,8 +21751,8 @@ void UmlPackageImpl::initializeParameterContent()
 		if (!defaultValue.empty())
 		{
 			m_parameter_Attribute_behavior->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getBehavior_Attribute_ownedParameter();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getBehavior_Attribute_ownedParameter();
 		if (otherEnd != nullptr)
 	    {
 	   		m_parameter_Attribute_behavior->setEOpposite(otherEnd);
@@ -22346,12 +21776,9 @@ void UmlPackageImpl::initializeParameterContent()
 		if (!defaultValue.empty())
 		{
 			m_parameter_Attribute_defaultValue->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_parameter_Attribute_defaultValue->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_parameter_Attribute_operation->setName("operation");
 	m_parameter_Attribute_operation->setEType(getOperation_Class());
@@ -22371,8 +21798,8 @@ void UmlPackageImpl::initializeParameterContent()
 		if (!defaultValue.empty())
 		{
 			m_parameter_Attribute_operation->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getBehavioralFeature_Attribute_ownedParameter();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getBehavioralFeature_Attribute_ownedParameter();
 		if (otherEnd != nullptr)
 	    {
 	   		m_parameter_Attribute_operation->setEOpposite(otherEnd);
@@ -22396,8 +21823,8 @@ void UmlPackageImpl::initializeParameterContent()
 		if (!defaultValue.empty())
 		{
 			m_parameter_Attribute_parameterSet->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getParameterSet_Attribute_parameter();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getParameterSet_Attribute_parameter();
 		if (otherEnd != nullptr)
 	    {
 	   		m_parameter_Attribute_parameterSet->setEOpposite(otherEnd);
@@ -22703,12 +22130,9 @@ void UmlPackageImpl::initializeParameterSetContent()
 		if (!defaultValue.empty())
 		{
 			m_parameterSet_Attribute_condition->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_parameterSet_Attribute_condition->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_parameterSet_Attribute_parameter->setName("parameter");
 	m_parameterSet_Attribute_parameter->setEType(getParameter_Class());
@@ -22728,8 +22152,8 @@ void UmlPackageImpl::initializeParameterSetContent()
 		if (!defaultValue.empty())
 		{
 			m_parameterSet_Attribute_parameter->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getParameter_Attribute_parameterSet();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getParameter_Attribute_parameterSet();
 		if (otherEnd != nullptr)
 	    {
 	   		m_parameterSet_Attribute_parameter->setEOpposite(otherEnd);
@@ -22845,8 +22269,8 @@ void UmlPackageImpl::initializeParameterableElementContent()
 		if (!defaultValue.empty())
 		{
 			m_parameterableElement_Attribute_owningTemplateParameter->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getTemplateParameter_Attribute_ownedParameteredElement();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getTemplateParameter_Attribute_ownedParameteredElement();
 		if (otherEnd != nullptr)
 	    {
 	   		m_parameterableElement_Attribute_owningTemplateParameter->setEOpposite(otherEnd);
@@ -22870,8 +22294,8 @@ void UmlPackageImpl::initializeParameterableElementContent()
 		if (!defaultValue.empty())
 		{
 			m_parameterableElement_Attribute_templateParameter->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getTemplateParameter_Attribute_parameteredElement();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getTemplateParameter_Attribute_parameteredElement();
 		if (otherEnd != nullptr)
 	    {
 	   		m_parameterableElement_Attribute_templateParameter->setEOpposite(otherEnd);
@@ -23168,12 +22592,9 @@ void UmlPackageImpl::initializePortContent()
 		if (!defaultValue.empty())
 		{
 			m_port_Attribute_protocol->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_port_Attribute_protocol->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_port_Attribute_provided->setName("provided");
 	m_port_Attribute_provided->setEType(getInterface_Class());
@@ -23193,12 +22614,9 @@ void UmlPackageImpl::initializePortContent()
 		if (!defaultValue.empty())
 		{
 			m_port_Attribute_provided->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_port_Attribute_provided->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_port_Attribute_redefinedPort->setName("redefinedPort");
 	m_port_Attribute_redefinedPort->setEType(getPort_Class());
@@ -23218,12 +22636,9 @@ void UmlPackageImpl::initializePortContent()
 		if (!defaultValue.empty())
 		{
 			m_port_Attribute_redefinedPort->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_port_Attribute_redefinedPort->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_port_Attribute_required->setName("required");
 	m_port_Attribute_required->setEType(getInterface_Class());
@@ -23243,12 +22658,9 @@ void UmlPackageImpl::initializePortContent()
 		if (!defaultValue.empty())
 		{
 			m_port_Attribute_required->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_port_Attribute_required->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_port_Operation_basicProvided->setEType(getInterface_Class());
@@ -23403,12 +22815,9 @@ void UmlPackageImpl::initializeProfileContent()
 		if (!defaultValue.empty())
 		{
 			m_profile_Attribute_metaclassReference->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_profile_Attribute_metaclassReference->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_profile_Attribute_metamodelReference->setName("metamodelReference");
 	m_profile_Attribute_metamodelReference->setEType(getPackageImport_Class());
@@ -23428,12 +22837,9 @@ void UmlPackageImpl::initializeProfileContent()
 		if (!defaultValue.empty())
 		{
 			m_profile_Attribute_metamodelReference->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_profile_Attribute_metamodelReference->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_profile_Operation_create_Classifier->setEType(ecore::EcorePackage::eInstance()->getEObject_Class());
@@ -23666,12 +23072,9 @@ void UmlPackageImpl::initializeProfileApplicationContent()
 		if (!defaultValue.empty())
 		{
 			m_profileApplication_Attribute_appliedProfile->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_profileApplication_Attribute_appliedProfile->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_profileApplication_Attribute_applyingPackage->setName("applyingPackage");
 	m_profileApplication_Attribute_applyingPackage->setEType(getPackage_Class());
@@ -23691,8 +23094,8 @@ void UmlPackageImpl::initializeProfileApplicationContent()
 		if (!defaultValue.empty())
 		{
 			m_profileApplication_Attribute_applyingPackage->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getPackage_Attribute_profileApplication();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getPackage_Attribute_profileApplication();
 		if (otherEnd != nullptr)
 	    {
 	   		m_profileApplication_Attribute_applyingPackage->setEOpposite(otherEnd);
@@ -23872,8 +23275,8 @@ void UmlPackageImpl::initializePropertyContent()
 		if (!defaultValue.empty())
 		{
 			m_property_Attribute_association->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getAssociation_Attribute_memberEnd();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getAssociation_Attribute_memberEnd();
 		if (otherEnd != nullptr)
 	    {
 	   		m_property_Attribute_association->setEOpposite(otherEnd);
@@ -23897,8 +23300,8 @@ void UmlPackageImpl::initializePropertyContent()
 		if (!defaultValue.empty())
 		{
 			m_property_Attribute_associationEnd->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getProperty_Attribute_qualifier();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getProperty_Attribute_qualifier();
 		if (otherEnd != nullptr)
 	    {
 	   		m_property_Attribute_associationEnd->setEOpposite(otherEnd);
@@ -23922,8 +23325,8 @@ void UmlPackageImpl::initializePropertyContent()
 		if (!defaultValue.empty())
 		{
 			m_property_Attribute_class->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getStructuredClassifier_Attribute_ownedAttribute();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getStructuredClassifier_Attribute_ownedAttribute();
 		if (otherEnd != nullptr)
 	    {
 	   		m_property_Attribute_class->setEOpposite(otherEnd);
@@ -23947,8 +23350,8 @@ void UmlPackageImpl::initializePropertyContent()
 		if (!defaultValue.empty())
 		{
 			m_property_Attribute_datatype->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getDataType_Attribute_ownedAttribute();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getDataType_Attribute_ownedAttribute();
 		if (otherEnd != nullptr)
 	    {
 	   		m_property_Attribute_datatype->setEOpposite(otherEnd);
@@ -23972,12 +23375,9 @@ void UmlPackageImpl::initializePropertyContent()
 		if (!defaultValue.empty())
 		{
 			m_property_Attribute_defaultValue->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_property_Attribute_defaultValue->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_property_Attribute_interface->setName("interface");
 	m_property_Attribute_interface->setEType(getInterface_Class());
@@ -23997,8 +23397,8 @@ void UmlPackageImpl::initializePropertyContent()
 		if (!defaultValue.empty())
 		{
 			m_property_Attribute_interface->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getInterface_Attribute_ownedAttribute();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getInterface_Attribute_ownedAttribute();
 		if (otherEnd != nullptr)
 	    {
 	   		m_property_Attribute_interface->setEOpposite(otherEnd);
@@ -24022,12 +23422,9 @@ void UmlPackageImpl::initializePropertyContent()
 		if (!defaultValue.empty())
 		{
 			m_property_Attribute_opposite->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_property_Attribute_opposite->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_property_Attribute_owningAssociation->setName("owningAssociation");
 	m_property_Attribute_owningAssociation->setEType(getAssociation_Class());
@@ -24047,8 +23444,8 @@ void UmlPackageImpl::initializePropertyContent()
 		if (!defaultValue.empty())
 		{
 			m_property_Attribute_owningAssociation->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getAssociation_Attribute_ownedEnd();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getAssociation_Attribute_ownedEnd();
 		if (otherEnd != nullptr)
 	    {
 	   		m_property_Attribute_owningAssociation->setEOpposite(otherEnd);
@@ -24072,8 +23469,8 @@ void UmlPackageImpl::initializePropertyContent()
 		if (!defaultValue.empty())
 		{
 			m_property_Attribute_qualifier->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getProperty_Attribute_associationEnd();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getProperty_Attribute_associationEnd();
 		if (otherEnd != nullptr)
 	    {
 	   		m_property_Attribute_qualifier->setEOpposite(otherEnd);
@@ -24097,12 +23494,9 @@ void UmlPackageImpl::initializePropertyContent()
 		if (!defaultValue.empty())
 		{
 			m_property_Attribute_redefinedProperty->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_property_Attribute_redefinedProperty->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_property_Attribute_subsettedProperty->setName("subsettedProperty");
 	m_property_Attribute_subsettedProperty->setEType(getProperty_Class());
@@ -24122,12 +23516,9 @@ void UmlPackageImpl::initializePropertyContent()
 		if (!defaultValue.empty())
 		{
 			m_property_Attribute_subsettedProperty->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_property_Attribute_subsettedProperty->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_property_Operation_binding_to_attribute_EDiagnosticChain_EMap->setEType(ecore::EcorePackage::eInstance()->getEBoolean_Class());
@@ -24629,12 +24020,9 @@ void UmlPackageImpl::initializeProtocolConformanceContent()
 		if (!defaultValue.empty())
 		{
 			m_protocolConformance_Attribute_generalMachine->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_protocolConformance_Attribute_generalMachine->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_protocolConformance_Attribute_specificMachine->setName("specificMachine");
 	m_protocolConformance_Attribute_specificMachine->setEType(getProtocolStateMachine_Class());
@@ -24654,8 +24042,8 @@ void UmlPackageImpl::initializeProtocolConformanceContent()
 		if (!defaultValue.empty())
 		{
 			m_protocolConformance_Attribute_specificMachine->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getProtocolStateMachine_Attribute_conformance();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getProtocolStateMachine_Attribute_conformance();
 		if (otherEnd != nullptr)
 	    {
 	   		m_protocolConformance_Attribute_specificMachine->setEOpposite(otherEnd);
@@ -24690,8 +24078,8 @@ void UmlPackageImpl::initializeProtocolStateMachineContent()
 		if (!defaultValue.empty())
 		{
 			m_protocolStateMachine_Attribute_conformance->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getProtocolConformance_Attribute_specificMachine();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getProtocolConformance_Attribute_specificMachine();
 		if (otherEnd != nullptr)
 	    {
 	   		m_protocolStateMachine_Attribute_conformance->setEOpposite(otherEnd);
@@ -24807,12 +24195,9 @@ void UmlPackageImpl::initializeProtocolTransitionContent()
 		if (!defaultValue.empty())
 		{
 			m_protocolTransition_Attribute_postCondition->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_protocolTransition_Attribute_postCondition->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_protocolTransition_Attribute_preCondition->setName("preCondition");
 	m_protocolTransition_Attribute_preCondition->setEType(getConstraint_Class());
@@ -24832,12 +24217,9 @@ void UmlPackageImpl::initializeProtocolTransitionContent()
 		if (!defaultValue.empty())
 		{
 			m_protocolTransition_Attribute_preCondition->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_protocolTransition_Attribute_preCondition->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_protocolTransition_Attribute_referred->setName("referred");
 	m_protocolTransition_Attribute_referred->setEType(getOperation_Class());
@@ -24857,12 +24239,9 @@ void UmlPackageImpl::initializeProtocolTransitionContent()
 		if (!defaultValue.empty())
 		{
 			m_protocolTransition_Attribute_referred->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_protocolTransition_Attribute_referred->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_protocolTransition_Operation_associated_actions_EDiagnosticChain_EMap->setEType(ecore::EcorePackage::eInstance()->getEBoolean_Class());
@@ -25002,8 +24381,8 @@ void UmlPackageImpl::initializePseudostateContent()
 		if (!defaultValue.empty())
 		{
 			m_pseudostate_Attribute_state->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getState_Attribute_connectionPoint();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getState_Attribute_connectionPoint();
 		if (otherEnd != nullptr)
 	    {
 	   		m_pseudostate_Attribute_state->setEOpposite(otherEnd);
@@ -25027,8 +24406,8 @@ void UmlPackageImpl::initializePseudostateContent()
 		if (!defaultValue.empty())
 		{
 			m_pseudostate_Attribute_stateMachine->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getStateMachine_Attribute_connectionPoint();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getStateMachine_Attribute_connectionPoint();
 		if (otherEnd != nullptr)
 	    {
 	   		m_pseudostate_Attribute_stateMachine->setEOpposite(otherEnd);
@@ -25306,12 +24685,9 @@ void UmlPackageImpl::initializeQualifierValueContent()
 		if (!defaultValue.empty())
 		{
 			m_qualifierValue_Attribute_qualifier->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_qualifierValue_Attribute_qualifier->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_qualifierValue_Attribute_value->setName("value");
 	m_qualifierValue_Attribute_value->setEType(getInputPin_Class());
@@ -25331,12 +24707,9 @@ void UmlPackageImpl::initializeQualifierValueContent()
 		if (!defaultValue.empty())
 		{
 			m_qualifierValue_Attribute_value->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_qualifierValue_Attribute_value->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_qualifierValue_Operation_multiplicity_of_qualifier_EDiagnosticChain_EMap->setEType(ecore::EcorePackage::eInstance()->getEBoolean_Class());
@@ -25448,12 +24821,9 @@ void UmlPackageImpl::initializeRaiseExceptionActionContent()
 		if (!defaultValue.empty())
 		{
 			m_raiseExceptionAction_Attribute_exception->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_raiseExceptionAction_Attribute_exception->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	
@@ -25484,12 +24854,9 @@ void UmlPackageImpl::initializeReadExtentActionContent()
 		if (!defaultValue.empty())
 		{
 			m_readExtentAction_Attribute_classifier->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_readExtentAction_Attribute_classifier->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_readExtentAction_Attribute_result->setName("result");
 	m_readExtentAction_Attribute_result->setEType(getOutputPin_Class());
@@ -25509,12 +24876,9 @@ void UmlPackageImpl::initializeReadExtentActionContent()
 		if (!defaultValue.empty())
 		{
 			m_readExtentAction_Attribute_result->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_readExtentAction_Attribute_result->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_readExtentAction_Operation_multiplicity_of_result_EDiagnosticChain_EMap->setEType(ecore::EcorePackage::eInstance()->getEBoolean_Class());
@@ -25619,12 +24983,9 @@ void UmlPackageImpl::initializeReadIsClassifiedObjectActionContent()
 		if (!defaultValue.empty())
 		{
 			m_readIsClassifiedObjectAction_Attribute_classifier->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_readIsClassifiedObjectAction_Attribute_classifier->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_readIsClassifiedObjectAction_Attribute_object->setName("object");
 	m_readIsClassifiedObjectAction_Attribute_object->setEType(getInputPin_Class());
@@ -25644,12 +25005,9 @@ void UmlPackageImpl::initializeReadIsClassifiedObjectActionContent()
 		if (!defaultValue.empty())
 		{
 			m_readIsClassifiedObjectAction_Attribute_object->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_readIsClassifiedObjectAction_Attribute_object->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_readIsClassifiedObjectAction_Attribute_result->setName("result");
 	m_readIsClassifiedObjectAction_Attribute_result->setEType(getOutputPin_Class());
@@ -25669,12 +25027,9 @@ void UmlPackageImpl::initializeReadIsClassifiedObjectActionContent()
 		if (!defaultValue.empty())
 		{
 			m_readIsClassifiedObjectAction_Attribute_result->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_readIsClassifiedObjectAction_Attribute_result->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_readIsClassifiedObjectAction_Operation_boolean_result_EDiagnosticChain_EMap->setEType(ecore::EcorePackage::eInstance()->getEBoolean_Class());
@@ -25813,12 +25168,9 @@ void UmlPackageImpl::initializeReadLinkActionContent()
 		if (!defaultValue.empty())
 		{
 			m_readLinkAction_Attribute_result->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_readLinkAction_Attribute_result->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_readLinkAction_Operation_compatible_multiplicity_EDiagnosticChain_EMap->setEType(ecore::EcorePackage::eInstance()->getEBoolean_Class());
@@ -25992,12 +25344,9 @@ void UmlPackageImpl::initializeReadLinkObjectEndActionContent()
 		if (!defaultValue.empty())
 		{
 			m_readLinkObjectEndAction_Attribute_end->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_readLinkObjectEndAction_Attribute_end->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_readLinkObjectEndAction_Attribute_object->setName("object");
 	m_readLinkObjectEndAction_Attribute_object->setEType(getInputPin_Class());
@@ -26017,12 +25366,9 @@ void UmlPackageImpl::initializeReadLinkObjectEndActionContent()
 		if (!defaultValue.empty())
 		{
 			m_readLinkObjectEndAction_Attribute_object->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_readLinkObjectEndAction_Attribute_object->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_readLinkObjectEndAction_Attribute_result->setName("result");
 	m_readLinkObjectEndAction_Attribute_result->setEType(getOutputPin_Class());
@@ -26042,12 +25388,9 @@ void UmlPackageImpl::initializeReadLinkObjectEndActionContent()
 		if (!defaultValue.empty())
 		{
 			m_readLinkObjectEndAction_Attribute_result->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_readLinkObjectEndAction_Attribute_result->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_readLinkObjectEndAction_Operation_association_of_association_EDiagnosticChain_EMap->setEType(ecore::EcorePackage::eInstance()->getEBoolean_Class());
@@ -26267,12 +25610,9 @@ void UmlPackageImpl::initializeReadLinkObjectEndQualifierActionContent()
 		if (!defaultValue.empty())
 		{
 			m_readLinkObjectEndQualifierAction_Attribute_object->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_readLinkObjectEndQualifierAction_Attribute_object->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_readLinkObjectEndQualifierAction_Attribute_qualifier->setName("qualifier");
 	m_readLinkObjectEndQualifierAction_Attribute_qualifier->setEType(getProperty_Class());
@@ -26292,12 +25632,9 @@ void UmlPackageImpl::initializeReadLinkObjectEndQualifierActionContent()
 		if (!defaultValue.empty())
 		{
 			m_readLinkObjectEndQualifierAction_Attribute_qualifier->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_readLinkObjectEndQualifierAction_Attribute_qualifier->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_readLinkObjectEndQualifierAction_Attribute_result->setName("result");
 	m_readLinkObjectEndQualifierAction_Attribute_result->setEType(getOutputPin_Class());
@@ -26317,12 +25654,9 @@ void UmlPackageImpl::initializeReadLinkObjectEndQualifierActionContent()
 		if (!defaultValue.empty())
 		{
 			m_readLinkObjectEndQualifierAction_Attribute_result->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_readLinkObjectEndQualifierAction_Attribute_result->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_readLinkObjectEndQualifierAction_Operation_association_of_association_EDiagnosticChain_EMap->setEType(ecore::EcorePackage::eInstance()->getEBoolean_Class());
@@ -26569,8 +25903,8 @@ void UmlPackageImpl::initializeReadSelfActionContent()
 		if (!defaultValue.empty())
 		{
 			m_readSelfAction_Attribute_result->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getOutputPin_Attribute_readSelfAction();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getOutputPin_Attribute_readSelfAction();
 		if (otherEnd != nullptr)
 	    {
 	   		m_readSelfAction_Attribute_result->setEOpposite(otherEnd);
@@ -26713,8 +26047,8 @@ void UmlPackageImpl::initializeReadStructuralFeatureActionContent()
 		if (!defaultValue.empty())
 		{
 			m_readStructuralFeatureAction_Attribute_result->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getOutputPin_Attribute_readStructuralFeatureAction();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getOutputPin_Attribute_readStructuralFeatureAction();
 		if (otherEnd != nullptr)
 	    {
 	   		m_readStructuralFeatureAction_Attribute_result->setEOpposite(otherEnd);
@@ -26776,12 +26110,9 @@ void UmlPackageImpl::initializeReadVariableActionContent()
 		if (!defaultValue.empty())
 		{
 			m_readVariableAction_Attribute_result->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_readVariableAction_Attribute_result->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_readVariableAction_Operation_compatible_multiplicity_EDiagnosticChain_EMap->setEType(ecore::EcorePackage::eInstance()->getEBoolean_Class());
@@ -26877,12 +26208,9 @@ void UmlPackageImpl::initializeReceptionContent()
 		if (!defaultValue.empty())
 		{
 			m_reception_Attribute_signal->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_reception_Attribute_signal->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_reception_Operation_same_name_as_signal_EDiagnosticChain_EMap->setEType(ecore::EcorePackage::eInstance()->getEBoolean_Class());
@@ -26987,12 +26315,9 @@ void UmlPackageImpl::initializeReclassifyObjectActionContent()
 		if (!defaultValue.empty())
 		{
 			m_reclassifyObjectAction_Attribute_newClassifier->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_reclassifyObjectAction_Attribute_newClassifier->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_reclassifyObjectAction_Attribute_object->setName("object");
 	m_reclassifyObjectAction_Attribute_object->setEType(getInputPin_Class());
@@ -27012,12 +26337,9 @@ void UmlPackageImpl::initializeReclassifyObjectActionContent()
 		if (!defaultValue.empty())
 		{
 			m_reclassifyObjectAction_Attribute_object->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_reclassifyObjectAction_Attribute_object->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_reclassifyObjectAction_Attribute_oldClassifier->setName("oldClassifier");
 	m_reclassifyObjectAction_Attribute_oldClassifier->setEType(getClassifier_Class());
@@ -27037,12 +26359,9 @@ void UmlPackageImpl::initializeReclassifyObjectActionContent()
 		if (!defaultValue.empty())
 		{
 			m_reclassifyObjectAction_Attribute_oldClassifier->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_reclassifyObjectAction_Attribute_oldClassifier->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_reclassifyObjectAction_Operation_classifier_not_abstract_EDiagnosticChain_EMap->setEType(ecore::EcorePackage::eInstance()->getEBoolean_Class());
@@ -27174,12 +26493,9 @@ void UmlPackageImpl::initializeRedefinableElementContent()
 		if (!defaultValue.empty())
 		{
 			m_redefinableElement_Attribute_redefinedElement->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_redefinableElement_Attribute_redefinedElement->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_redefinableElement_Attribute_redefinitionContext->setName("redefinitionContext");
 	m_redefinableElement_Attribute_redefinitionContext->setEType(getClassifier_Class());
@@ -27199,12 +26515,9 @@ void UmlPackageImpl::initializeRedefinableElementContent()
 		if (!defaultValue.empty())
 		{
 			m_redefinableElement_Attribute_redefinitionContext->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_redefinableElement_Attribute_redefinitionContext->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_redefinableElement_Operation_isConsistentWith_RedefinableElement->setEType(types::TypesPackage::eInstance()->getBoolean_Class());
@@ -27350,12 +26663,9 @@ void UmlPackageImpl::initializeRedefinableTemplateSignatureContent()
 		if (!defaultValue.empty())
 		{
 			m_redefinableTemplateSignature_Attribute_classifier->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_redefinableTemplateSignature_Attribute_classifier->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_redefinableTemplateSignature_Attribute_extendedSignature->setName("extendedSignature");
 	m_redefinableTemplateSignature_Attribute_extendedSignature->setEType(getRedefinableTemplateSignature_Class());
@@ -27375,12 +26685,9 @@ void UmlPackageImpl::initializeRedefinableTemplateSignatureContent()
 		if (!defaultValue.empty())
 		{
 			m_redefinableTemplateSignature_Attribute_extendedSignature->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_redefinableTemplateSignature_Attribute_extendedSignature->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_redefinableTemplateSignature_Attribute_inheritedParameter->setName("inheritedParameter");
 	m_redefinableTemplateSignature_Attribute_inheritedParameter->setEType(getTemplateParameter_Class());
@@ -27400,12 +26707,9 @@ void UmlPackageImpl::initializeRedefinableTemplateSignatureContent()
 		if (!defaultValue.empty())
 		{
 			m_redefinableTemplateSignature_Attribute_inheritedParameter->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_redefinableTemplateSignature_Attribute_inheritedParameter->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_redefinableTemplateSignature_Operation_getInheritedParameters->setEType(getTemplateParameter_Class());
@@ -27491,12 +26795,9 @@ void UmlPackageImpl::initializeReduceActionContent()
 		if (!defaultValue.empty())
 		{
 			m_reduceAction_Attribute_collection->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_reduceAction_Attribute_collection->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_reduceAction_Attribute_reducer->setName("reducer");
 	m_reduceAction_Attribute_reducer->setEType(getBehavior_Class());
@@ -27516,12 +26817,9 @@ void UmlPackageImpl::initializeReduceActionContent()
 		if (!defaultValue.empty())
 		{
 			m_reduceAction_Attribute_reducer->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_reduceAction_Attribute_reducer->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_reduceAction_Attribute_result->setName("result");
 	m_reduceAction_Attribute_result->setEType(getOutputPin_Class());
@@ -27541,12 +26839,9 @@ void UmlPackageImpl::initializeReduceActionContent()
 		if (!defaultValue.empty())
 		{
 			m_reduceAction_Attribute_result->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_reduceAction_Attribute_result->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_reduceAction_Operation_input_type_is_collection_EDiagnosticChain_EMap->setEType(ecore::EcorePackage::eInstance()->getEBoolean_Class());
@@ -27658,12 +26953,9 @@ void UmlPackageImpl::initializeRegionContent()
 		if (!defaultValue.empty())
 		{
 			m_region_Attribute_extendedRegion->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_region_Attribute_extendedRegion->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_region_Attribute_state->setName("state");
 	m_region_Attribute_state->setEType(getState_Class());
@@ -27683,8 +26975,8 @@ void UmlPackageImpl::initializeRegionContent()
 		if (!defaultValue.empty())
 		{
 			m_region_Attribute_state->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getState_Attribute_region();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getState_Attribute_region();
 		if (otherEnd != nullptr)
 	    {
 	   		m_region_Attribute_state->setEOpposite(otherEnd);
@@ -27708,8 +27000,8 @@ void UmlPackageImpl::initializeRegionContent()
 		if (!defaultValue.empty())
 		{
 			m_region_Attribute_stateMachine->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getStateMachine_Attribute_region();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getStateMachine_Attribute_region();
 		if (otherEnd != nullptr)
 	    {
 	   		m_region_Attribute_stateMachine->setEOpposite(otherEnd);
@@ -27733,8 +27025,8 @@ void UmlPackageImpl::initializeRegionContent()
 		if (!defaultValue.empty())
 		{
 			m_region_Attribute_subvertex->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getVertex_Attribute_container();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getVertex_Attribute_container();
 		if (otherEnd != nullptr)
 	    {
 	   		m_region_Attribute_subvertex->setEOpposite(otherEnd);
@@ -27758,8 +27050,8 @@ void UmlPackageImpl::initializeRegionContent()
 		if (!defaultValue.empty())
 		{
 			m_region_Attribute_transition->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getTransition_Attribute_container();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getTransition_Attribute_container();
 		if (otherEnd != nullptr)
 	    {
 	   		m_region_Attribute_transition->setEOpposite(otherEnd);
@@ -27926,12 +27218,9 @@ void UmlPackageImpl::initializeRelationshipContent()
 		if (!defaultValue.empty())
 		{
 			m_relationship_Attribute_relatedElement->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_relationship_Attribute_relatedElement->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	
@@ -27982,12 +27271,9 @@ void UmlPackageImpl::initializeRemoveStructuralFeatureValueActionContent()
 		if (!defaultValue.empty())
 		{
 			m_removeStructuralFeatureValueAction_Attribute_removeAt->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_removeStructuralFeatureValueAction_Attribute_removeAt->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_removeStructuralFeatureValueAction_Operation_removeAt_and_value_EDiagnosticChain_EMap->setEType(ecore::EcorePackage::eInstance()->getEBoolean_Class());
@@ -28065,12 +27351,9 @@ void UmlPackageImpl::initializeRemoveVariableValueActionContent()
 		if (!defaultValue.empty())
 		{
 			m_removeVariableValueAction_Attribute_removeAt->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_removeVariableValueAction_Attribute_removeAt->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_removeVariableValueAction_Operation_removeAt_and_value_EDiagnosticChain_EMap->setEType(ecore::EcorePackage::eInstance()->getEBoolean_Class());
@@ -28128,12 +27411,9 @@ void UmlPackageImpl::initializeReplyActionContent()
 		if (!defaultValue.empty())
 		{
 			m_replyAction_Attribute_replyToCall->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_replyAction_Attribute_replyToCall->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_replyAction_Attribute_replyValue->setName("replyValue");
 	m_replyAction_Attribute_replyValue->setEType(getInputPin_Class());
@@ -28153,12 +27433,9 @@ void UmlPackageImpl::initializeReplyActionContent()
 		if (!defaultValue.empty())
 		{
 			m_replyAction_Attribute_replyValue->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_replyAction_Attribute_replyValue->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_replyAction_Attribute_returnInformation->setName("returnInformation");
 	m_replyAction_Attribute_returnInformation->setEType(getInputPin_Class());
@@ -28178,12 +27455,9 @@ void UmlPackageImpl::initializeReplyActionContent()
 		if (!defaultValue.empty())
 		{
 			m_replyAction_Attribute_returnInformation->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_replyAction_Attribute_returnInformation->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_replyAction_Operation_event_on_reply_to_call_trigger_EDiagnosticChain_EMap->setEType(ecore::EcorePackage::eInstance()->getEBoolean_Class());
@@ -28268,12 +27542,9 @@ void UmlPackageImpl::initializeSendObjectActionContent()
 		if (!defaultValue.empty())
 		{
 			m_sendObjectAction_Attribute_request->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_sendObjectAction_Attribute_request->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_sendObjectAction_Attribute_target->setName("target");
 	m_sendObjectAction_Attribute_target->setEType(getInputPin_Class());
@@ -28293,12 +27564,9 @@ void UmlPackageImpl::initializeSendObjectActionContent()
 		if (!defaultValue.empty())
 		{
 			m_sendObjectAction_Attribute_target->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_sendObjectAction_Attribute_target->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_sendObjectAction_Operation_type_target_pin_EDiagnosticChain_EMap->setEType(ecore::EcorePackage::eInstance()->getEBoolean_Class());
@@ -28356,12 +27624,9 @@ void UmlPackageImpl::initializeSendSignalActionContent()
 		if (!defaultValue.empty())
 		{
 			m_sendSignalAction_Attribute_signal->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_sendSignalAction_Attribute_signal->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_sendSignalAction_Attribute_target->setName("target");
 	m_sendSignalAction_Attribute_target->setEType(getInputPin_Class());
@@ -28381,12 +27646,9 @@ void UmlPackageImpl::initializeSendSignalActionContent()
 		if (!defaultValue.empty())
 		{
 			m_sendSignalAction_Attribute_target->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_sendSignalAction_Attribute_target->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_sendSignalAction_Operation_number_order_EDiagnosticChain_EMap->setEType(ecore::EcorePackage::eInstance()->getEBoolean_Class());
@@ -28498,12 +27760,9 @@ void UmlPackageImpl::initializeSequenceNodeContent()
 		if (!defaultValue.empty())
 		{
 			m_sequenceNode_Attribute_executableNode->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_sequenceNode_Attribute_executableNode->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	
@@ -28534,12 +27793,9 @@ void UmlPackageImpl::initializeSignalContent()
 		if (!defaultValue.empty())
 		{
 			m_signal_Attribute_ownedAttribute->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_signal_Attribute_ownedAttribute->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_signal_Operation_createOwnedAttribute_String_UnlimitedNatural->setEType(getProperty_Class());
@@ -28617,12 +27873,9 @@ void UmlPackageImpl::initializeSignalEventContent()
 		if (!defaultValue.empty())
 		{
 			m_signalEvent_Attribute_signal->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_signalEvent_Attribute_signal->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	
@@ -28653,12 +27906,9 @@ void UmlPackageImpl::initializeSlotContent()
 		if (!defaultValue.empty())
 		{
 			m_slot_Attribute_definingFeature->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_slot_Attribute_definingFeature->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_slot_Attribute_owningInstance->setName("owningInstance");
 	m_slot_Attribute_owningInstance->setEType(getInstanceSpecification_Class());
@@ -28678,8 +27928,8 @@ void UmlPackageImpl::initializeSlotContent()
 		if (!defaultValue.empty())
 		{
 			m_slot_Attribute_owningInstance->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getInstanceSpecification_Attribute_slot();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getInstanceSpecification_Attribute_slot();
 		if (otherEnd != nullptr)
 	    {
 	   		m_slot_Attribute_owningInstance->setEOpposite(otherEnd);
@@ -28703,8 +27953,8 @@ void UmlPackageImpl::initializeSlotContent()
 		if (!defaultValue.empty())
 		{
 			m_slot_Attribute_value->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getValueSpecification_Attribute_owningSlot();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getValueSpecification_Attribute_owningSlot();
 		if (otherEnd != nullptr)
 	    {
 	   		m_slot_Attribute_value->setEOpposite(otherEnd);
@@ -28739,12 +27989,9 @@ void UmlPackageImpl::initializeStartClassifierBehaviorActionContent()
 		if (!defaultValue.empty())
 		{
 			m_startClassifierBehaviorAction_Attribute_object->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_startClassifierBehaviorAction_Attribute_object->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_startClassifierBehaviorAction_Operation_multiplicity_EDiagnosticChain_EMap->setEType(ecore::EcorePackage::eInstance()->getEBoolean_Class());
@@ -28829,12 +28076,9 @@ void UmlPackageImpl::initializeStartObjectBehaviorActionContent()
 		if (!defaultValue.empty())
 		{
 			m_startObjectBehaviorAction_Attribute_object->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_startObjectBehaviorAction_Attribute_object->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_startObjectBehaviorAction_Operation_behavior->setEType(getBehavior_Class());
@@ -29034,8 +28278,8 @@ void UmlPackageImpl::initializeStateContent()
 		if (!defaultValue.empty())
 		{
 			m_state_Attribute_connection->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getConnectionPointReference_Attribute_state();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getConnectionPointReference_Attribute_state();
 		if (otherEnd != nullptr)
 	    {
 	   		m_state_Attribute_connection->setEOpposite(otherEnd);
@@ -29059,8 +28303,8 @@ void UmlPackageImpl::initializeStateContent()
 		if (!defaultValue.empty())
 		{
 			m_state_Attribute_connectionPoint->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getPseudostate_Attribute_state();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getPseudostate_Attribute_state();
 		if (otherEnd != nullptr)
 	    {
 	   		m_state_Attribute_connectionPoint->setEOpposite(otherEnd);
@@ -29084,12 +28328,9 @@ void UmlPackageImpl::initializeStateContent()
 		if (!defaultValue.empty())
 		{
 			m_state_Attribute_deferrableTrigger->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_state_Attribute_deferrableTrigger->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_state_Attribute_doActivity->setName("doActivity");
 	m_state_Attribute_doActivity->setEType(getBehavior_Class());
@@ -29109,12 +28350,9 @@ void UmlPackageImpl::initializeStateContent()
 		if (!defaultValue.empty())
 		{
 			m_state_Attribute_doActivity->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_state_Attribute_doActivity->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_state_Attribute_entry->setName("entry");
 	m_state_Attribute_entry->setEType(getBehavior_Class());
@@ -29134,12 +28372,9 @@ void UmlPackageImpl::initializeStateContent()
 		if (!defaultValue.empty())
 		{
 			m_state_Attribute_entry->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_state_Attribute_entry->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_state_Attribute_exit->setName("exit");
 	m_state_Attribute_exit->setEType(getBehavior_Class());
@@ -29159,12 +28394,9 @@ void UmlPackageImpl::initializeStateContent()
 		if (!defaultValue.empty())
 		{
 			m_state_Attribute_exit->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_state_Attribute_exit->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_state_Attribute_redefinedState->setName("redefinedState");
 	m_state_Attribute_redefinedState->setEType(getState_Class());
@@ -29184,12 +28416,9 @@ void UmlPackageImpl::initializeStateContent()
 		if (!defaultValue.empty())
 		{
 			m_state_Attribute_redefinedState->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_state_Attribute_redefinedState->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_state_Attribute_region->setName("region");
 	m_state_Attribute_region->setEType(getRegion_Class());
@@ -29209,8 +28438,8 @@ void UmlPackageImpl::initializeStateContent()
 		if (!defaultValue.empty())
 		{
 			m_state_Attribute_region->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getRegion_Attribute_state();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getRegion_Attribute_state();
 		if (otherEnd != nullptr)
 	    {
 	   		m_state_Attribute_region->setEOpposite(otherEnd);
@@ -29234,12 +28463,9 @@ void UmlPackageImpl::initializeStateContent()
 		if (!defaultValue.empty())
 		{
 			m_state_Attribute_stateInvariant->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_state_Attribute_stateInvariant->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_state_Attribute_submachine->setName("submachine");
 	m_state_Attribute_submachine->setEType(getStateMachine_Class());
@@ -29259,8 +28485,8 @@ void UmlPackageImpl::initializeStateContent()
 		if (!defaultValue.empty())
 		{
 			m_state_Attribute_submachine->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getStateMachine_Attribute_submachineState();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getStateMachine_Attribute_submachineState();
 		if (otherEnd != nullptr)
 	    {
 	   		m_state_Attribute_submachine->setEOpposite(otherEnd);
@@ -29470,12 +28696,9 @@ void UmlPackageImpl::initializeStateInvariantContent()
 		if (!defaultValue.empty())
 		{
 			m_stateInvariant_Attribute_invariant->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_stateInvariant_Attribute_invariant->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	
@@ -29506,8 +28729,8 @@ void UmlPackageImpl::initializeStateMachineContent()
 		if (!defaultValue.empty())
 		{
 			m_stateMachine_Attribute_connectionPoint->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getPseudostate_Attribute_stateMachine();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getPseudostate_Attribute_stateMachine();
 		if (otherEnd != nullptr)
 	    {
 	   		m_stateMachine_Attribute_connectionPoint->setEOpposite(otherEnd);
@@ -29531,12 +28754,9 @@ void UmlPackageImpl::initializeStateMachineContent()
 		if (!defaultValue.empty())
 		{
 			m_stateMachine_Attribute_extendedStateMachine->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_stateMachine_Attribute_extendedStateMachine->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_stateMachine_Attribute_region->setName("region");
 	m_stateMachine_Attribute_region->setEType(getRegion_Class());
@@ -29556,8 +28776,8 @@ void UmlPackageImpl::initializeStateMachineContent()
 		if (!defaultValue.empty())
 		{
 			m_stateMachine_Attribute_region->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getRegion_Attribute_stateMachine();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getRegion_Attribute_stateMachine();
 		if (otherEnd != nullptr)
 	    {
 	   		m_stateMachine_Attribute_region->setEOpposite(otherEnd);
@@ -29581,8 +28801,8 @@ void UmlPackageImpl::initializeStateMachineContent()
 		if (!defaultValue.empty())
 		{
 			m_stateMachine_Attribute_submachineState->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getState_Attribute_submachine();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getState_Attribute_submachine();
 		if (otherEnd != nullptr)
 	    {
 	   		m_stateMachine_Attribute_submachineState->setEOpposite(otherEnd);
@@ -29806,12 +29026,9 @@ void UmlPackageImpl::initializeStereotypeContent()
 		if (!defaultValue.empty())
 		{
 			m_stereotype_Attribute_icon->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_stereotype_Attribute_icon->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_stereotype_Attribute_profile->setName("profile");
 	m_stereotype_Attribute_profile->setEType(getProfile_Class());
@@ -29831,12 +29048,9 @@ void UmlPackageImpl::initializeStereotypeContent()
 		if (!defaultValue.empty())
 		{
 			m_stereotype_Attribute_profile->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_stereotype_Attribute_profile->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_stereotype_Operation_associationEndOwnership_EDiagnosticChain_EMap->setEType(ecore::EcorePackage::eInstance()->getEBoolean_Class());
@@ -30192,8 +29406,8 @@ void UmlPackageImpl::initializeStringExpressionContent()
 		if (!defaultValue.empty())
 		{
 			m_stringExpression_Attribute_owningExpression->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getStringExpression_Attribute_subExpression();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getStringExpression_Attribute_subExpression();
 		if (otherEnd != nullptr)
 	    {
 	   		m_stringExpression_Attribute_owningExpression->setEOpposite(otherEnd);
@@ -30217,8 +29431,8 @@ void UmlPackageImpl::initializeStringExpressionContent()
 		if (!defaultValue.empty())
 		{
 			m_stringExpression_Attribute_subExpression->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getStringExpression_Attribute_owningExpression();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getStringExpression_Attribute_owningExpression();
 		if (otherEnd != nullptr)
 	    {
 	   		m_stringExpression_Attribute_subExpression->setEOpposite(otherEnd);
@@ -30338,8 +29552,8 @@ void UmlPackageImpl::initializeStructuralFeatureActionContent()
 		if (!defaultValue.empty())
 		{
 			m_structuralFeatureAction_Attribute_object->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getInputPin_Attribute_structuralFeatureAction();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getInputPin_Attribute_structuralFeatureAction();
 		if (otherEnd != nullptr)
 	    {
 	   		m_structuralFeatureAction_Attribute_object->setEOpposite(otherEnd);
@@ -30363,12 +29577,9 @@ void UmlPackageImpl::initializeStructuralFeatureActionContent()
 		if (!defaultValue.empty())
 		{
 			m_structuralFeatureAction_Attribute_structuralFeature->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_structuralFeatureAction_Attribute_structuralFeature->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_structuralFeatureAction_Operation_multiplicity_EDiagnosticChain_EMap->setEType(ecore::EcorePackage::eInstance()->getEBoolean_Class());
@@ -30554,8 +29765,8 @@ void UmlPackageImpl::initializeStructuredActivityNodeContent()
 		if (!defaultValue.empty())
 		{
 			m_structuredActivityNode_Attribute_edge->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getActivityEdge_Attribute_inStructuredNode();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getActivityEdge_Attribute_inStructuredNode();
 		if (otherEnd != nullptr)
 	    {
 	   		m_structuredActivityNode_Attribute_edge->setEOpposite(otherEnd);
@@ -30579,8 +29790,8 @@ void UmlPackageImpl::initializeStructuredActivityNodeContent()
 		if (!defaultValue.empty())
 		{
 			m_structuredActivityNode_Attribute_node->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getActivityNode_Attribute_inStructuredNode();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getActivityNode_Attribute_inStructuredNode();
 		if (otherEnd != nullptr)
 	    {
 	   		m_structuredActivityNode_Attribute_node->setEOpposite(otherEnd);
@@ -30604,12 +29815,9 @@ void UmlPackageImpl::initializeStructuredActivityNodeContent()
 		if (!defaultValue.empty())
 		{
 			m_structuredActivityNode_Attribute_structuredNodeInput->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_structuredActivityNode_Attribute_structuredNodeInput->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_structuredActivityNode_Attribute_structuredNodeOutput->setName("structuredNodeOutput");
 	m_structuredActivityNode_Attribute_structuredNodeOutput->setEType(getOutputPin_Class());
@@ -30629,12 +29837,9 @@ void UmlPackageImpl::initializeStructuredActivityNodeContent()
 		if (!defaultValue.empty())
 		{
 			m_structuredActivityNode_Attribute_structuredNodeOutput->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_structuredActivityNode_Attribute_structuredNodeOutput->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_structuredActivityNode_Attribute_variable->setName("variable");
 	m_structuredActivityNode_Attribute_variable->setEType(getVariable_Class());
@@ -30654,8 +29859,8 @@ void UmlPackageImpl::initializeStructuredActivityNodeContent()
 		if (!defaultValue.empty())
 		{
 			m_structuredActivityNode_Attribute_variable->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getVariable_Attribute_scope();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getVariable_Attribute_scope();
 		if (otherEnd != nullptr)
 	    {
 	   		m_structuredActivityNode_Attribute_variable->setEOpposite(otherEnd);
@@ -30787,8 +29992,8 @@ void UmlPackageImpl::initializeStructuredClassifierContent()
 		if (!defaultValue.empty())
 		{
 			m_structuredClassifier_Attribute_ownedAttribute->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getProperty_Attribute_class();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getProperty_Attribute_class();
 		if (otherEnd != nullptr)
 	    {
 	   		m_structuredClassifier_Attribute_ownedAttribute->setEOpposite(otherEnd);
@@ -30812,12 +30017,9 @@ void UmlPackageImpl::initializeStructuredClassifierContent()
 		if (!defaultValue.empty())
 		{
 			m_structuredClassifier_Attribute_ownedConnector->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_structuredClassifier_Attribute_ownedConnector->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_structuredClassifier_Attribute_part->setName("part");
 	m_structuredClassifier_Attribute_part->setEType(getProperty_Class());
@@ -30837,12 +30039,9 @@ void UmlPackageImpl::initializeStructuredClassifierContent()
 		if (!defaultValue.empty())
 		{
 			m_structuredClassifier_Attribute_part->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_structuredClassifier_Attribute_part->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_structuredClassifier_Attribute_role->setName("role");
 	m_structuredClassifier_Attribute_role->setEType(getConnectableElement_Class());
@@ -30862,12 +30061,9 @@ void UmlPackageImpl::initializeStructuredClassifierContent()
 		if (!defaultValue.empty())
 		{
 			m_structuredClassifier_Attribute_role->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_structuredClassifier_Attribute_role->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_structuredClassifier_Operation_allRoles->setEType(getConnectableElement_Class());
@@ -30961,12 +30157,9 @@ void UmlPackageImpl::initializeSubstitutionContent()
 		if (!defaultValue.empty())
 		{
 			m_substitution_Attribute_contract->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_substitution_Attribute_contract->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_substitution_Attribute_substitutingClassifier->setName("substitutingClassifier");
 	m_substitution_Attribute_substitutingClassifier->setEType(getClassifier_Class());
@@ -30986,8 +30179,8 @@ void UmlPackageImpl::initializeSubstitutionContent()
 		if (!defaultValue.empty())
 		{
 			m_substitution_Attribute_substitutingClassifier->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getClassifier_Attribute_substitution();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getClassifier_Attribute_substitution();
 		if (otherEnd != nullptr)
 	    {
 	   		m_substitution_Attribute_substitutingClassifier->setEOpposite(otherEnd);
@@ -31022,8 +30215,8 @@ void UmlPackageImpl::initializeTemplateBindingContent()
 		if (!defaultValue.empty())
 		{
 			m_templateBinding_Attribute_boundElement->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getTemplateableElement_Attribute_templateBinding();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getTemplateableElement_Attribute_templateBinding();
 		if (otherEnd != nullptr)
 	    {
 	   		m_templateBinding_Attribute_boundElement->setEOpposite(otherEnd);
@@ -31047,8 +30240,8 @@ void UmlPackageImpl::initializeTemplateBindingContent()
 		if (!defaultValue.empty())
 		{
 			m_templateBinding_Attribute_parameterSubstitution->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getTemplateParameterSubstitution_Attribute_templateBinding();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getTemplateParameterSubstitution_Attribute_templateBinding();
 		if (otherEnd != nullptr)
 	    {
 	   		m_templateBinding_Attribute_parameterSubstitution->setEOpposite(otherEnd);
@@ -31072,12 +30265,9 @@ void UmlPackageImpl::initializeTemplateBindingContent()
 		if (!defaultValue.empty())
 		{
 			m_templateBinding_Attribute_signature->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_templateBinding_Attribute_signature->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_templateBinding_Operation_one_parameter_substitution_EDiagnosticChain_EMap->setEType(ecore::EcorePackage::eInstance()->getEBoolean_Class());
@@ -31162,12 +30352,9 @@ void UmlPackageImpl::initializeTemplateParameterContent()
 		if (!defaultValue.empty())
 		{
 			m_templateParameter_Attribute_default->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_templateParameter_Attribute_default->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_templateParameter_Attribute_ownedDefault->setName("ownedDefault");
 	m_templateParameter_Attribute_ownedDefault->setEType(getParameterableElement_Class());
@@ -31187,12 +30374,9 @@ void UmlPackageImpl::initializeTemplateParameterContent()
 		if (!defaultValue.empty())
 		{
 			m_templateParameter_Attribute_ownedDefault->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_templateParameter_Attribute_ownedDefault->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_templateParameter_Attribute_ownedParameteredElement->setName("ownedParameteredElement");
 	m_templateParameter_Attribute_ownedParameteredElement->setEType(getParameterableElement_Class());
@@ -31212,8 +30396,8 @@ void UmlPackageImpl::initializeTemplateParameterContent()
 		if (!defaultValue.empty())
 		{
 			m_templateParameter_Attribute_ownedParameteredElement->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getParameterableElement_Attribute_owningTemplateParameter();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getParameterableElement_Attribute_owningTemplateParameter();
 		if (otherEnd != nullptr)
 	    {
 	   		m_templateParameter_Attribute_ownedParameteredElement->setEOpposite(otherEnd);
@@ -31237,8 +30421,8 @@ void UmlPackageImpl::initializeTemplateParameterContent()
 		if (!defaultValue.empty())
 		{
 			m_templateParameter_Attribute_parameteredElement->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getParameterableElement_Attribute_templateParameter();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getParameterableElement_Attribute_templateParameter();
 		if (otherEnd != nullptr)
 	    {
 	   		m_templateParameter_Attribute_parameteredElement->setEOpposite(otherEnd);
@@ -31262,8 +30446,8 @@ void UmlPackageImpl::initializeTemplateParameterContent()
 		if (!defaultValue.empty())
 		{
 			m_templateParameter_Attribute_signature->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getTemplateSignature_Attribute_ownedParameter();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getTemplateSignature_Attribute_ownedParameter();
 		if (otherEnd != nullptr)
 	    {
 	   		m_templateParameter_Attribute_signature->setEOpposite(otherEnd);
@@ -31325,12 +30509,9 @@ void UmlPackageImpl::initializeTemplateParameterSubstitutionContent()
 		if (!defaultValue.empty())
 		{
 			m_templateParameterSubstitution_Attribute_actual->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_templateParameterSubstitution_Attribute_actual->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_templateParameterSubstitution_Attribute_formal->setName("formal");
 	m_templateParameterSubstitution_Attribute_formal->setEType(getTemplateParameter_Class());
@@ -31350,12 +30531,9 @@ void UmlPackageImpl::initializeTemplateParameterSubstitutionContent()
 		if (!defaultValue.empty())
 		{
 			m_templateParameterSubstitution_Attribute_formal->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_templateParameterSubstitution_Attribute_formal->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_templateParameterSubstitution_Attribute_ownedActual->setName("ownedActual");
 	m_templateParameterSubstitution_Attribute_ownedActual->setEType(getParameterableElement_Class());
@@ -31375,12 +30553,9 @@ void UmlPackageImpl::initializeTemplateParameterSubstitutionContent()
 		if (!defaultValue.empty())
 		{
 			m_templateParameterSubstitution_Attribute_ownedActual->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_templateParameterSubstitution_Attribute_ownedActual->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_templateParameterSubstitution_Attribute_templateBinding->setName("templateBinding");
 	m_templateParameterSubstitution_Attribute_templateBinding->setEType(getTemplateBinding_Class());
@@ -31400,8 +30575,8 @@ void UmlPackageImpl::initializeTemplateParameterSubstitutionContent()
 		if (!defaultValue.empty())
 		{
 			m_templateParameterSubstitution_Attribute_templateBinding->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getTemplateBinding_Attribute_parameterSubstitution();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getTemplateBinding_Attribute_parameterSubstitution();
 		if (otherEnd != nullptr)
 	    {
 	   		m_templateParameterSubstitution_Attribute_templateBinding->setEOpposite(otherEnd);
@@ -31463,8 +30638,8 @@ void UmlPackageImpl::initializeTemplateSignatureContent()
 		if (!defaultValue.empty())
 		{
 			m_templateSignature_Attribute_ownedParameter->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getTemplateParameter_Attribute_signature();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getTemplateParameter_Attribute_signature();
 		if (otherEnd != nullptr)
 	    {
 	   		m_templateSignature_Attribute_ownedParameter->setEOpposite(otherEnd);
@@ -31488,12 +30663,9 @@ void UmlPackageImpl::initializeTemplateSignatureContent()
 		if (!defaultValue.empty())
 		{
 			m_templateSignature_Attribute_parameter->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_templateSignature_Attribute_parameter->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_templateSignature_Attribute_template->setName("template");
 	m_templateSignature_Attribute_template->setEType(getTemplateableElement_Class());
@@ -31513,8 +30685,8 @@ void UmlPackageImpl::initializeTemplateSignatureContent()
 		if (!defaultValue.empty())
 		{
 			m_templateSignature_Attribute_template->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getTemplateableElement_Attribute_ownedTemplateSignature();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getTemplateableElement_Attribute_ownedTemplateSignature();
 		if (otherEnd != nullptr)
 	    {
 	   		m_templateSignature_Attribute_template->setEOpposite(otherEnd);
@@ -31603,8 +30775,8 @@ void UmlPackageImpl::initializeTemplateableElementContent()
 		if (!defaultValue.empty())
 		{
 			m_templateableElement_Attribute_ownedTemplateSignature->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getTemplateSignature_Attribute_template();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getTemplateSignature_Attribute_template();
 		if (otherEnd != nullptr)
 	    {
 	   		m_templateableElement_Attribute_ownedTemplateSignature->setEOpposite(otherEnd);
@@ -31628,8 +30800,8 @@ void UmlPackageImpl::initializeTemplateableElementContent()
 		if (!defaultValue.empty())
 		{
 			m_templateableElement_Attribute_templateBinding->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getTemplateBinding_Attribute_boundElement();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getTemplateBinding_Attribute_boundElement();
 		if (otherEnd != nullptr)
 	    {
 	   		m_templateableElement_Attribute_templateBinding->setEOpposite(otherEnd);
@@ -31680,12 +30852,9 @@ void UmlPackageImpl::initializeTestIdentityActionContent()
 		if (!defaultValue.empty())
 		{
 			m_testIdentityAction_Attribute_first->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_testIdentityAction_Attribute_first->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_testIdentityAction_Attribute_result->setName("result");
 	m_testIdentityAction_Attribute_result->setEType(getOutputPin_Class());
@@ -31705,12 +30874,9 @@ void UmlPackageImpl::initializeTestIdentityActionContent()
 		if (!defaultValue.empty())
 		{
 			m_testIdentityAction_Attribute_result->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_testIdentityAction_Attribute_result->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_testIdentityAction_Attribute_second->setName("second");
 	m_testIdentityAction_Attribute_second->setEType(getInputPin_Class());
@@ -31730,12 +30896,9 @@ void UmlPackageImpl::initializeTestIdentityActionContent()
 		if (!defaultValue.empty())
 		{
 			m_testIdentityAction_Attribute_second->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_testIdentityAction_Attribute_second->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_testIdentityAction_Operation_multiplicity_EDiagnosticChain_EMap->setEType(ecore::EcorePackage::eInstance()->getEBoolean_Class());
@@ -31925,12 +31088,9 @@ void UmlPackageImpl::initializeTimeEventContent()
 		if (!defaultValue.empty())
 		{
 			m_timeEvent_Attribute_when->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_timeEvent_Attribute_when->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_timeEvent_Operation_when_non_negative_EDiagnosticChain_EMap->setEType(ecore::EcorePackage::eInstance()->getEBoolean_Class());
@@ -31988,12 +31148,9 @@ void UmlPackageImpl::initializeTimeExpressionContent()
 		if (!defaultValue.empty())
 		{
 			m_timeExpression_Attribute_expr->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_timeExpression_Attribute_expr->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_timeExpression_Attribute_observation->setName("observation");
 	m_timeExpression_Attribute_observation->setEType(getObservation_Class());
@@ -32013,12 +31170,9 @@ void UmlPackageImpl::initializeTimeExpressionContent()
 		if (!defaultValue.empty())
 		{
 			m_timeExpression_Attribute_observation->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_timeExpression_Attribute_observation->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_timeExpression_Operation_no_expr_requires_observation_EDiagnosticChain_EMap->setEType(ecore::EcorePackage::eInstance()->getEBoolean_Class());
@@ -32107,12 +31261,9 @@ void UmlPackageImpl::initializeTimeObservationContent()
 		if (!defaultValue.empty())
 		{
 			m_timeObservation_Attribute_event->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_timeObservation_Attribute_event->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	
@@ -32163,8 +31314,8 @@ void UmlPackageImpl::initializeTransitionContent()
 		if (!defaultValue.empty())
 		{
 			m_transition_Attribute_container->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getRegion_Attribute_transition();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getRegion_Attribute_transition();
 		if (otherEnd != nullptr)
 	    {
 	   		m_transition_Attribute_container->setEOpposite(otherEnd);
@@ -32188,12 +31339,9 @@ void UmlPackageImpl::initializeTransitionContent()
 		if (!defaultValue.empty())
 		{
 			m_transition_Attribute_effect->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_transition_Attribute_effect->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_transition_Attribute_guard->setName("guard");
 	m_transition_Attribute_guard->setEType(getConstraint_Class());
@@ -32213,12 +31361,9 @@ void UmlPackageImpl::initializeTransitionContent()
 		if (!defaultValue.empty())
 		{
 			m_transition_Attribute_guard->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_transition_Attribute_guard->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_transition_Attribute_redefinedTransition->setName("redefinedTransition");
 	m_transition_Attribute_redefinedTransition->setEType(getTransition_Class());
@@ -32238,12 +31383,9 @@ void UmlPackageImpl::initializeTransitionContent()
 		if (!defaultValue.empty())
 		{
 			m_transition_Attribute_redefinedTransition->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_transition_Attribute_redefinedTransition->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_transition_Attribute_source->setName("source");
 	m_transition_Attribute_source->setEType(getVertex_Class());
@@ -32263,12 +31405,9 @@ void UmlPackageImpl::initializeTransitionContent()
 		if (!defaultValue.empty())
 		{
 			m_transition_Attribute_source->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_transition_Attribute_source->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_transition_Attribute_target->setName("target");
 	m_transition_Attribute_target->setEType(getVertex_Class());
@@ -32288,12 +31427,9 @@ void UmlPackageImpl::initializeTransitionContent()
 		if (!defaultValue.empty())
 		{
 			m_transition_Attribute_target->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_transition_Attribute_target->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_transition_Attribute_trigger->setName("trigger");
 	m_transition_Attribute_trigger->setEType(getTrigger_Class());
@@ -32313,12 +31449,9 @@ void UmlPackageImpl::initializeTransitionContent()
 		if (!defaultValue.empty())
 		{
 			m_transition_Attribute_trigger->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_transition_Attribute_trigger->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_transition_Operation_containingStateMachine->setEType(getStateMachine_Class());
@@ -32608,12 +31741,9 @@ void UmlPackageImpl::initializeTriggerContent()
 		if (!defaultValue.empty())
 		{
 			m_trigger_Attribute_event->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_trigger_Attribute_event->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_trigger_Attribute_port->setName("port");
 	m_trigger_Attribute_port->setEType(getPort_Class());
@@ -32633,12 +31763,9 @@ void UmlPackageImpl::initializeTriggerContent()
 		if (!defaultValue.empty())
 		{
 			m_trigger_Attribute_port->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_trigger_Attribute_port->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_trigger_Operation_trigger_with_ports_EDiagnosticChain_EMap->setEType(ecore::EcorePackage::eInstance()->getEBoolean_Class());
@@ -32696,8 +31823,8 @@ void UmlPackageImpl::initializeTypeContent()
 		if (!defaultValue.empty())
 		{
 			m_type_Attribute_package->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getPackage_Attribute_ownedType();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getPackage_Attribute_ownedType();
 		if (otherEnd != nullptr)
 	    {
 	   		m_type_Attribute_package->setEOpposite(otherEnd);
@@ -32874,12 +32001,9 @@ void UmlPackageImpl::initializeTypedElementContent()
 		if (!defaultValue.empty())
 		{
 			m_typedElement_Attribute_type->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_typedElement_Attribute_type->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	
@@ -32910,12 +32034,9 @@ void UmlPackageImpl::initializeUnmarshallActionContent()
 		if (!defaultValue.empty())
 		{
 			m_unmarshallAction_Attribute_object->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_unmarshallAction_Attribute_object->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_unmarshallAction_Attribute_result->setName("result");
 	m_unmarshallAction_Attribute_result->setEType(getOutputPin_Class());
@@ -32935,12 +32056,9 @@ void UmlPackageImpl::initializeUnmarshallActionContent()
 		if (!defaultValue.empty())
 		{
 			m_unmarshallAction_Attribute_result->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_unmarshallAction_Attribute_result->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_unmarshallAction_Attribute_unmarshallType->setName("unmarshallType");
 	m_unmarshallAction_Attribute_unmarshallType->setEType(getClassifier_Class());
@@ -32960,12 +32078,9 @@ void UmlPackageImpl::initializeUnmarshallActionContent()
 		if (!defaultValue.empty())
 		{
 			m_unmarshallAction_Attribute_unmarshallType->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_unmarshallAction_Attribute_unmarshallType->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_unmarshallAction_Operation_multiplicity_of_object_EDiagnosticChain_EMap->setEType(ecore::EcorePackage::eInstance()->getEBoolean_Class());
@@ -33142,8 +32257,8 @@ void UmlPackageImpl::initializeUseCaseContent()
 		if (!defaultValue.empty())
 		{
 			m_useCase_Attribute_extend->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getExtend_Attribute_extension();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getExtend_Attribute_extension();
 		if (otherEnd != nullptr)
 	    {
 	   		m_useCase_Attribute_extend->setEOpposite(otherEnd);
@@ -33167,8 +32282,8 @@ void UmlPackageImpl::initializeUseCaseContent()
 		if (!defaultValue.empty())
 		{
 			m_useCase_Attribute_extensionPoint->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getExtensionPoint_Attribute_useCase();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getExtensionPoint_Attribute_useCase();
 		if (otherEnd != nullptr)
 	    {
 	   		m_useCase_Attribute_extensionPoint->setEOpposite(otherEnd);
@@ -33192,8 +32307,8 @@ void UmlPackageImpl::initializeUseCaseContent()
 		if (!defaultValue.empty())
 		{
 			m_useCase_Attribute_include->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getInclude_Attribute_includingCase();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getInclude_Attribute_includingCase();
 		if (otherEnd != nullptr)
 	    {
 	   		m_useCase_Attribute_include->setEOpposite(otherEnd);
@@ -33217,8 +32332,8 @@ void UmlPackageImpl::initializeUseCaseContent()
 		if (!defaultValue.empty())
 		{
 			m_useCase_Attribute_subject->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getClassifier_Attribute_useCase();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getClassifier_Attribute_useCase();
 		if (otherEnd != nullptr)
 	    {
 	   		m_useCase_Attribute_subject->setEOpposite(otherEnd);
@@ -33369,12 +32484,9 @@ void UmlPackageImpl::initializeValuePinContent()
 		if (!defaultValue.empty())
 		{
 			m_valuePin_Attribute_value->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_valuePin_Attribute_value->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_valuePin_Operation_compatible_type_EDiagnosticChain_EMap->setEType(ecore::EcorePackage::eInstance()->getEBoolean_Class());
@@ -33459,8 +32571,8 @@ void UmlPackageImpl::initializeValueSpecificationContent()
 		if (!defaultValue.empty())
 		{
 			m_valueSpecification_Attribute_owningSlot->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getSlot_Attribute_value();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getSlot_Attribute_value();
 		if (otherEnd != nullptr)
 	    {
 	   		m_valueSpecification_Attribute_owningSlot->setEOpposite(otherEnd);
@@ -33484,8 +32596,8 @@ void UmlPackageImpl::initializeValueSpecificationContent()
 		if (!defaultValue.empty())
 		{
 			m_valueSpecification_Attribute_valueSpecificationAction->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getValueSpecificationAction_Attribute_value();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getValueSpecificationAction_Attribute_value();
 		if (otherEnd != nullptr)
 	    {
 	   		m_valueSpecification_Attribute_valueSpecificationAction->setEOpposite(otherEnd);
@@ -33576,8 +32688,8 @@ void UmlPackageImpl::initializeValueSpecificationActionContent()
 		if (!defaultValue.empty())
 		{
 			m_valueSpecificationAction_Attribute_result->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getOutputPin_Attribute_valueSpecificationAction();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getOutputPin_Attribute_valueSpecificationAction();
 		if (otherEnd != nullptr)
 	    {
 	   		m_valueSpecificationAction_Attribute_result->setEOpposite(otherEnd);
@@ -33601,8 +32713,8 @@ void UmlPackageImpl::initializeValueSpecificationActionContent()
 		if (!defaultValue.empty())
 		{
 			m_valueSpecificationAction_Attribute_value->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getValueSpecification_Attribute_valueSpecificationAction();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getValueSpecification_Attribute_valueSpecificationAction();
 		if (otherEnd != nullptr)
 	    {
 	   		m_valueSpecificationAction_Attribute_value->setEOpposite(otherEnd);
@@ -33691,8 +32803,8 @@ void UmlPackageImpl::initializeVariableContent()
 		if (!defaultValue.empty())
 		{
 			m_variable_Attribute_activityScope->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getActivity_Attribute_variable();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getActivity_Attribute_variable();
 		if (otherEnd != nullptr)
 	    {
 	   		m_variable_Attribute_activityScope->setEOpposite(otherEnd);
@@ -33716,8 +32828,8 @@ void UmlPackageImpl::initializeVariableContent()
 		if (!defaultValue.empty())
 		{
 			m_variable_Attribute_scope->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getStructuredActivityNode_Attribute_variable();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getStructuredActivityNode_Attribute_variable();
 		if (otherEnd != nullptr)
 	    {
 	   		m_variable_Attribute_scope->setEOpposite(otherEnd);
@@ -33769,12 +32881,9 @@ void UmlPackageImpl::initializeVariableActionContent()
 		if (!defaultValue.empty())
 		{
 			m_variableAction_Attribute_variable->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_variableAction_Attribute_variable->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_variableAction_Operation_scope_of_variable_EDiagnosticChain_EMap->setEType(ecore::EcorePackage::eInstance()->getEBoolean_Class());
@@ -33832,8 +32941,8 @@ void UmlPackageImpl::initializeVertexContent()
 		if (!defaultValue.empty())
 		{
 			m_vertex_Attribute_container->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getRegion_Attribute_subvertex();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getRegion_Attribute_subvertex();
 		if (otherEnd != nullptr)
 	    {
 	   		m_vertex_Attribute_container->setEOpposite(otherEnd);
@@ -33857,12 +32966,9 @@ void UmlPackageImpl::initializeVertexContent()
 		if (!defaultValue.empty())
 		{
 			m_vertex_Attribute_incoming->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_vertex_Attribute_incoming->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_vertex_Attribute_outgoing->setName("outgoing");
 	m_vertex_Attribute_outgoing->setEType(getTransition_Class());
@@ -33882,12 +32988,9 @@ void UmlPackageImpl::initializeVertexContent()
 		if (!defaultValue.empty())
 		{
 			m_vertex_Attribute_outgoing->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_vertex_Attribute_outgoing->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_vertex_Operation_containingStateMachine->setEType(getStateMachine_Class());
@@ -34014,8 +33117,8 @@ void UmlPackageImpl::initializeWriteStructuralFeatureActionContent()
 		if (!defaultValue.empty())
 		{
 			m_writeStructuralFeatureAction_Attribute_result->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getOutputPin_Attribute_writeStructuralFeatureAction();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getOutputPin_Attribute_writeStructuralFeatureAction();
 		if (otherEnd != nullptr)
 	    {
 	   		m_writeStructuralFeatureAction_Attribute_result->setEOpposite(otherEnd);
@@ -34039,8 +33142,8 @@ void UmlPackageImpl::initializeWriteStructuralFeatureActionContent()
 		if (!defaultValue.empty())
 		{
 			m_writeStructuralFeatureAction_Attribute_value->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getInputPin_Attribute_writeStructuralFeatureAction();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getInputPin_Attribute_writeStructuralFeatureAction();
 		if (otherEnd != nullptr)
 	    {
 	   		m_writeStructuralFeatureAction_Attribute_value->setEOpposite(otherEnd);
@@ -34183,12 +33286,9 @@ void UmlPackageImpl::initializeWriteVariableActionContent()
 		if (!defaultValue.empty())
 		{
 			m_writeVariableAction_Attribute_value->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_writeVariableAction_Attribute_value->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_writeVariableAction_Operation_multiplicity_EDiagnosticChain_EMap->setEType(ecore::EcorePackage::eInstance()->getEBoolean_Class());

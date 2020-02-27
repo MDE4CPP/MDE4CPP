@@ -391,12 +391,12 @@ void [aClass.name.concat('Impl')/]::saveContent(std::shared_ptr<[generatePersist
 		[aReference.generateReferenceType()/] [aReference.name/] = this->[aReference.GetterName()/]();
 		if ([aReference.name/] != nullptr)
 		{
-			saveHandler->addReference([aReference.name/], "[aReference.name/]", [aReference.name/]->eClass() != package->get[aReference.eType.getMemberNameUpperFirst()/]())
+			saveHandler->addReference([aReference.name/], "[aReference.name/]", [aReference.name/]->eClass() != package->get[aReference.eType.getMemberNameUpperFirst()/]());
 		}
 		[else]
 		for (std::shared_ptr<[aReference.eType.generateType()/]> [aReference.name/] : *this->[aReference.GetterName()/]()) 
 		{
-			saveHandler->addReference([aReference.name/], "[aReference.name/]", [aReference.name/]->eClass() != package->get[aReference.eType.getMemberNameUpperFirst()/]);
+			saveHandler->addReference([aReference.name/], "[aReference.name/]", [aReference.name/]->eClass() != package->get[aReference.eType.getMemberNameUpperFirst()/]());
 		}
 		[/if]
 [/for]

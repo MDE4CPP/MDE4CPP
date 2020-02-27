@@ -25,6 +25,30 @@ namespace ecore
 
 namespace ecore 
 {
+	class EAnnotation;
+	class EAttribute;
+	class EClass;
+	class EClassifier;
+	class EDataType;
+	class EEnum;
+	class EEnumLiteral;
+	class EFactory;
+	class EGenericType;
+	class EModelElement;
+	class ENamedElement;
+	class EObject;
+	class EOperation;
+	class EPackage;
+	class EParameter;
+	class EReference;
+	class EStringToStringMapEntry;
+	class EStructuralFeature;
+	class ETypeParameter;
+	class ETypedElement;
+}
+
+namespace ecore 
+{
 	/*!
 	The Metamodel Package for the ecore metamodel. This package is used to enable the reflection of model elements. It contains all model elements
 	which were described in an ecore file.

@@ -22,7 +22,8 @@
 //depending model packages
 #include "ecore/EcorePackage.hpp"
 #include "types/TypesPackage.hpp"
-
+//include subpackages 
+ 
 using namespace uml;
 
 void UmlPackageImpl::createPackageContents(std::shared_ptr<ecore::EPackage> package)
@@ -283,6 +284,7 @@ void UmlPackageImpl::createPackageContents(std::shared_ptr<ecore::EPackage> pack
 	createWriteVariableActionContent(package, factory);
 
 	createPackageEDataTypes(package, factory);
+
 }
 
 void UmlPackageImpl::createAbstractionContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)

@@ -37,9 +37,6 @@ namespace types
 			//Creator functions
 			 
 
-			//Package
-			virtual std::shared_ptr<TypesPackage> getTypesPackage() const;
-
 		private:
 			static TypesFactory* create();
             std::map<std::string,int> m_idMap;

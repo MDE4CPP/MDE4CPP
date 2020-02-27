@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -26,23 +25,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -64,10 +52,11 @@
 
 #include "uml/ValueSpecification.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/Impl/UmlFactoryImpl.hpp"
+#include "uml/Impl/UmlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -125,13 +114,7 @@ InteractionConstraintImpl::InteractionConstraintImpl(std::weak_ptr<uml::Namespac
 }
 
 
-
-
-
 //Additional constructor for the containments back reference
-
-
-
 
 
 //Additional constructor for the containments back reference
@@ -140,9 +123,6 @@ InteractionConstraintImpl::InteractionConstraintImpl(std::weak_ptr<uml::Namespac
 			{
 			    m_owner = par_owner;
 			}
-
-
-
 
 
 //Additional constructor for the containments back reference
@@ -154,9 +134,6 @@ InteractionConstraintImpl::InteractionConstraintImpl(std::weak_ptr<uml::Namespac
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			InteractionConstraintImpl::InteractionConstraintImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
 			:InteractionConstraintImpl()
@@ -164,9 +141,6 @@ InteractionConstraintImpl::InteractionConstraintImpl(std::weak_ptr<uml::Namespac
 			    m_owningTemplateParameter = par_owningTemplateParameter;
 				m_owner = par_owningTemplateParameter;
 			}
-
-
-
 
 
 
@@ -254,7 +228,7 @@ std::shared_ptr<ecore::EObject>  InteractionConstraintImpl::copy() const
 
 std::shared_ptr<ecore::EClass> InteractionConstraintImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getInteractionConstraint_Class();
+	return uml::UmlPackage::eInstance()->getInteractionConstraint_Class();
 }
 
 //*********************************
@@ -385,9 +359,9 @@ Any InteractionConstraintImpl::eGet(int featureID, bool resolve, bool coreType) 
 {
 	switch(featureID)
 	{
-		case UmlPackage::INTERACTIONCONSTRAINT_ATTRIBUTE_MAXINT:
+		case uml::UmlPackage::INTERACTIONCONSTRAINT_ATTRIBUTE_MAXINT:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getMaxint())); //12115
-		case UmlPackage::INTERACTIONCONSTRAINT_ATTRIBUTE_MININT:
+		case uml::UmlPackage::INTERACTIONCONSTRAINT_ATTRIBUTE_MININT:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getMinint())); //12116
 	}
 	return ConstraintImpl::eGet(featureID, resolve, coreType);
@@ -396,9 +370,9 @@ bool InteractionConstraintImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::INTERACTIONCONSTRAINT_ATTRIBUTE_MAXINT:
+		case uml::UmlPackage::INTERACTIONCONSTRAINT_ATTRIBUTE_MAXINT:
 			return getMaxint() != nullptr; //12115
-		case UmlPackage::INTERACTIONCONSTRAINT_ATTRIBUTE_MININT:
+		case uml::UmlPackage::INTERACTIONCONSTRAINT_ATTRIBUTE_MININT:
 			return getMinint() != nullptr; //12116
 	}
 	return ConstraintImpl::internalEIsSet(featureID);
@@ -407,7 +381,7 @@ bool InteractionConstraintImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::INTERACTIONCONSTRAINT_ATTRIBUTE_MAXINT:
+		case uml::UmlPackage::INTERACTIONCONSTRAINT_ATTRIBUTE_MAXINT:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -415,7 +389,7 @@ bool InteractionConstraintImpl::eSet(int featureID, Any newValue)
 			setMaxint(_maxint); //12115
 			return true;
 		}
-		case UmlPackage::INTERACTIONCONSTRAINT_ATTRIBUTE_MININT:
+		case uml::UmlPackage::INTERACTIONCONSTRAINT_ATTRIBUTE_MININT:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -440,11 +414,10 @@ void InteractionConstraintImpl::load(std::shared_ptr<persistence::interfaces::XL
 	// Create new objects (from references (containment == true))
 	//
 	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -454,8 +427,9 @@ void InteractionConstraintImpl::loadAttributes(std::shared_ptr<persistence::inte
 	ConstraintImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void InteractionConstraintImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void InteractionConstraintImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
 
 	try
 	{
@@ -501,8 +475,8 @@ void InteractionConstraintImpl::loadNode(std::string nodeName, std::shared_ptr<p
 	{
 		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
 	}
-
-	ConstraintImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	ConstraintImpl::loadNode(nodeName, loadHandler);
 }
 
 void InteractionConstraintImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)

@@ -13,7 +13,7 @@
 //Model includes
 #include "../CS_InstanceValueEvaluation.hpp"
 
-#include "PSCS/impl/PSCSFactoryImpl.hpp"
+#include "PSCS/Semantics/Classification/Impl/ClassificationFactoryImpl.hpp"
 #include "fUML/Semantics/Classification/impl/InstanceValueEvaluationImpl.hpp"
 
 //*********************************
@@ -29,7 +29,7 @@ namespace PSCS::Semantics::Classification
 			CS_InstanceValueEvaluationImpl& operator=(CS_InstanceValueEvaluationImpl const&) = delete;
 
 		protected:
-			friend class PSCS::PSCSFactoryImpl;
+			friend class PSCS::Semantics::Classification::ClassificationFactoryImpl;
 			CS_InstanceValueEvaluationImpl();
 			virtual std::shared_ptr<CS_InstanceValueEvaluation> getThisCS_InstanceValueEvaluationPtr() const;
 			virtual void setThisCS_InstanceValueEvaluationPtr(std::weak_ptr<CS_InstanceValueEvaluation> thisCS_InstanceValueEvaluationPtr);
@@ -75,7 +75,7 @@ namespace PSCS::Semantics::Classification
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<PSCS::PSCSFactory> modelFactory);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
 			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;

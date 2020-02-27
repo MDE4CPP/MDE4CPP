@@ -18,6 +18,11 @@ namespace ecore
 
 namespace types 
 {
+
+}
+
+namespace types 
+{
 	/*!
 	The Metamodel Package for the types metamodel. This package is used to enable the reflection of model elements. It contains all model elements
 	which were described in an ecore file.

@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -26,21 +25,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -70,10 +60,11 @@
 
 #include "uml/ValueSpecification.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/Impl/UmlFactoryImpl.hpp"
+#include "uml/Impl/UmlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -113,9 +104,6 @@ PartDecompositionImpl::~PartDecompositionImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			PartDecompositionImpl::PartDecompositionImpl(std::weak_ptr<uml::InteractionOperand > par_enclosingOperand)
 			:PartDecompositionImpl()
@@ -123,9 +111,6 @@ PartDecompositionImpl::~PartDecompositionImpl()
 			    m_enclosingOperand = par_enclosingOperand;
 				m_namespace = par_enclosingOperand;
 			}
-
-
-
 
 
 //Additional constructor for the containments back reference
@@ -137,18 +122,12 @@ PartDecompositionImpl::~PartDecompositionImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			PartDecompositionImpl::PartDecompositionImpl(std::weak_ptr<uml::Element > par_owner)
 			:PartDecompositionImpl()
 			{
 			    m_owner = par_owner;
 			}
-
-
-
 
 
 
@@ -243,7 +222,7 @@ std::shared_ptr<ecore::EObject>  PartDecompositionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> PartDecompositionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getPartDecomposition_Class();
+	return uml::UmlPackage::eInstance()->getPartDecomposition_Class();
 }
 
 //*********************************
@@ -363,11 +342,10 @@ void PartDecompositionImpl::load(std::shared_ptr<persistence::interfaces::XLoadH
 	// Create new objects (from references (containment == true))
 	//
 	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -377,11 +355,12 @@ void PartDecompositionImpl::loadAttributes(std::shared_ptr<persistence::interfac
 	InteractionUseImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void PartDecompositionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void PartDecompositionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
 
-
-	InteractionUseImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	InteractionUseImpl::loadNode(nodeName, loadHandler);
 }
 
 void PartDecompositionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)

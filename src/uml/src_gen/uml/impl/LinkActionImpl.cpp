@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -26,21 +25,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -86,10 +76,11 @@
 
 #include "uml/StructuredActivityNode.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/Impl/UmlFactoryImpl.hpp"
+#include "uml/Impl/UmlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -159,9 +150,6 @@ LinkActionImpl::~LinkActionImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			LinkActionImpl::LinkActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
 			:LinkActionImpl()
@@ -169,9 +157,6 @@ LinkActionImpl::~LinkActionImpl()
 			    m_inStructuredNode = par_inStructuredNode;
 				m_owner = par_inStructuredNode;
 			}
-
-
-
 
 
 //Additional constructor for the containments back reference
@@ -183,18 +168,12 @@ LinkActionImpl::~LinkActionImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			LinkActionImpl::LinkActionImpl(std::weak_ptr<uml::Element > par_owner)
 			:LinkActionImpl()
 			{
 			    m_owner = par_owner;
 			}
-
-
-
 
 
 
@@ -349,7 +328,7 @@ std::shared_ptr<ecore::EObject>  LinkActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> LinkActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getLinkAction_Class();
+	return uml::UmlPackage::eInstance()->getLinkAction_Class();
 }
 
 //*********************************
@@ -465,7 +444,7 @@ Any LinkActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::LINKACTION_ATTRIBUTE_ENDDATA:
+		case uml::UmlPackage::LINKACTION_ATTRIBUTE_ENDDATA:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::LinkEndData>::iterator iter = m_endData->begin();
@@ -477,7 +456,7 @@ Any LinkActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 			}
 			return eAny(tempList); //13427
 		}
-		case UmlPackage::LINKACTION_ATTRIBUTE_INPUTVALUE:
+		case uml::UmlPackage::LINKACTION_ATTRIBUTE_INPUTVALUE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::InputPin>::iterator iter = m_inputValue->begin();
@@ -496,9 +475,9 @@ bool LinkActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::LINKACTION_ATTRIBUTE_ENDDATA:
+		case uml::UmlPackage::LINKACTION_ATTRIBUTE_ENDDATA:
 			return getEndData() != nullptr; //13427
-		case UmlPackage::LINKACTION_ATTRIBUTE_INPUTVALUE:
+		case uml::UmlPackage::LINKACTION_ATTRIBUTE_INPUTVALUE:
 			return getInputValue() != nullptr; //13428
 	}
 	return ActionImpl::internalEIsSet(featureID);
@@ -507,7 +486,7 @@ bool LinkActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::LINKACTION_ATTRIBUTE_ENDDATA:
+		case uml::UmlPackage::LINKACTION_ATTRIBUTE_ENDDATA:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -543,7 +522,7 @@ bool LinkActionImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case UmlPackage::LINKACTION_ATTRIBUTE_INPUTVALUE:
+		case uml::UmlPackage::LINKACTION_ATTRIBUTE_INPUTVALUE:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -596,11 +575,10 @@ void LinkActionImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler>
 	// Create new objects (from references (containment == true))
 	//
 	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -610,8 +588,9 @@ void LinkActionImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLo
 	ActionImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void LinkActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void LinkActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
 
 	try
 	{
@@ -657,8 +636,8 @@ void LinkActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence:
 	{
 		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
 	}
-
-	ActionImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	ActionImpl::loadNode(nodeName, loadHandler);
 }
 
 void LinkActionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)

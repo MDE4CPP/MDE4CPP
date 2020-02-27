@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -26,21 +25,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -82,10 +72,11 @@
 
 #include "uml/StructuredActivityNode.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/Impl/UmlFactoryImpl.hpp"
+#include "uml/Impl/UmlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -135,9 +126,6 @@ ReadIsClassifiedObjectActionImpl::~ReadIsClassifiedObjectActionImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			ReadIsClassifiedObjectActionImpl::ReadIsClassifiedObjectActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
 			:ReadIsClassifiedObjectActionImpl()
@@ -145,9 +133,6 @@ ReadIsClassifiedObjectActionImpl::~ReadIsClassifiedObjectActionImpl()
 			    m_inStructuredNode = par_inStructuredNode;
 				m_owner = par_inStructuredNode;
 			}
-
-
-
 
 
 //Additional constructor for the containments back reference
@@ -159,18 +144,12 @@ ReadIsClassifiedObjectActionImpl::~ReadIsClassifiedObjectActionImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			ReadIsClassifiedObjectActionImpl::ReadIsClassifiedObjectActionImpl(std::weak_ptr<uml::Element > par_owner)
 			:ReadIsClassifiedObjectActionImpl()
 			{
 			    m_owner = par_owner;
 			}
-
-
-
 
 
 
@@ -314,7 +293,7 @@ std::shared_ptr<ecore::EObject>  ReadIsClassifiedObjectActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ReadIsClassifiedObjectActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getReadIsClassifiedObjectAction_Class();
+	return uml::UmlPackage::eInstance()->getReadIsClassifiedObjectAction_Class();
 }
 
 //*********************************
@@ -459,13 +438,13 @@ Any ReadIsClassifiedObjectActionImpl::eGet(int featureID, bool resolve, bool cor
 {
 	switch(featureID)
 	{
-		case UmlPackage::READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_CLASSIFIER:
+		case uml::UmlPackage::READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_CLASSIFIER:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getClassifier())); //19527
-		case UmlPackage::READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_ISDIRECT:
+		case uml::UmlPackage::READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_ISDIRECT:
 			return eAny(getIsDirect()); //19528
-		case UmlPackage::READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_OBJECT:
+		case uml::UmlPackage::READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_OBJECT:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getObject())); //19529
-		case UmlPackage::READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_RESULT:
+		case uml::UmlPackage::READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_RESULT:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getResult())); //19530
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
@@ -474,13 +453,13 @@ bool ReadIsClassifiedObjectActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_CLASSIFIER:
+		case uml::UmlPackage::READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_CLASSIFIER:
 			return getClassifier() != nullptr; //19527
-		case UmlPackage::READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_ISDIRECT:
+		case uml::UmlPackage::READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_ISDIRECT:
 			return getIsDirect() != false; //19528
-		case UmlPackage::READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_OBJECT:
+		case uml::UmlPackage::READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_OBJECT:
 			return getObject() != nullptr; //19529
-		case UmlPackage::READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_RESULT:
+		case uml::UmlPackage::READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_RESULT:
 			return getResult() != nullptr; //19530
 	}
 	return ActionImpl::internalEIsSet(featureID);
@@ -489,7 +468,7 @@ bool ReadIsClassifiedObjectActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_CLASSIFIER:
+		case uml::UmlPackage::READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_CLASSIFIER:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -497,14 +476,14 @@ bool ReadIsClassifiedObjectActionImpl::eSet(int featureID, Any newValue)
 			setClassifier(_classifier); //19527
 			return true;
 		}
-		case UmlPackage::READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_ISDIRECT:
+		case uml::UmlPackage::READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_ISDIRECT:
 		{
 			// BOOST CAST
 			bool _isDirect = newValue->get<bool>();
 			setIsDirect(_isDirect); //19528
 			return true;
 		}
-		case UmlPackage::READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_OBJECT:
+		case uml::UmlPackage::READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_OBJECT:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -512,7 +491,7 @@ bool ReadIsClassifiedObjectActionImpl::eSet(int featureID, Any newValue)
 			setObject(_object); //19529
 			return true;
 		}
-		case UmlPackage::READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_RESULT:
+		case uml::UmlPackage::READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_RESULT:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -537,11 +516,10 @@ void ReadIsClassifiedObjectActionImpl::load(std::shared_ptr<persistence::interfa
 	// Create new objects (from references (containment == true))
 	//
 	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -579,8 +557,9 @@ void ReadIsClassifiedObjectActionImpl::loadAttributes(std::shared_ptr<persistenc
 	ActionImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void ReadIsClassifiedObjectActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void ReadIsClassifiedObjectActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
 
 	try
 	{
@@ -624,15 +603,15 @@ void ReadIsClassifiedObjectActionImpl::loadNode(std::string nodeName, std::share
 	{
 		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
 	}
-
-	ActionImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	ActionImpl::loadNode(nodeName, loadHandler);
 }
 
 void ReadIsClassifiedObjectActionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
-		case UmlPackage::READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_CLASSIFIER:
+		case uml::UmlPackage::READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_CLASSIFIER:
 		{
 			if (references.size() == 1)
 			{
@@ -696,7 +675,6 @@ void ReadIsClassifiedObjectActionImpl::saveContent(std::shared_ptr<persistence::
 			saveHandler->addReference(result, "result", result->eClass() != package->getOutputPin_Class());
 		}
 	
- 
 		// Add attributes
 		if ( this->eIsSet(package->getReadIsClassifiedObjectAction_Attribute_isDirect()) )
 		{

@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -25,25 +24,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -69,10 +55,11 @@
 
 #include "uml/ValueSpecificationAction.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/Impl/UmlFactoryImpl.hpp"
+#include "uml/Impl/UmlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -126,18 +113,12 @@ ExpressionImpl::~ExpressionImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			ExpressionImpl::ExpressionImpl(std::weak_ptr<uml::Element > par_owner)
 			:ExpressionImpl()
 			{
 			    m_owner = par_owner;
 			}
-
-
-
 
 
 //Additional constructor for the containments back reference
@@ -149,9 +130,6 @@ ExpressionImpl::~ExpressionImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			ExpressionImpl::ExpressionImpl(std::weak_ptr<uml::Slot > par_owningSlot)
 			:ExpressionImpl()
@@ -159,9 +137,6 @@ ExpressionImpl::~ExpressionImpl()
 			    m_owningSlot = par_owningSlot;
 				m_owner = par_owningSlot;
 			}
-
-
-
 
 
 //Additional constructor for the containments back reference
@@ -173,9 +148,6 @@ ExpressionImpl::~ExpressionImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			ExpressionImpl::ExpressionImpl(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction)
 			:ExpressionImpl()
@@ -183,9 +155,6 @@ ExpressionImpl::~ExpressionImpl()
 			    m_valueSpecificationAction = par_valueSpecificationAction;
 				m_owner = par_valueSpecificationAction;
 			}
-
-
-
 
 
 
@@ -266,7 +235,7 @@ std::shared_ptr<ecore::EObject>  ExpressionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ExpressionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getExpression_Class();
+	return uml::UmlPackage::eInstance()->getExpression_Class();
 }
 
 //*********************************
@@ -363,7 +332,7 @@ Any ExpressionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::EXPRESSION_ATTRIBUTE_OPERAND:
+		case uml::UmlPackage::EXPRESSION_ATTRIBUTE_OPERAND:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::ValueSpecification>::iterator iter = m_operand->begin();
@@ -375,7 +344,7 @@ Any ExpressionImpl::eGet(int featureID, bool resolve, bool coreType) const
 			}
 			return eAny(tempList); //9615
 		}
-		case UmlPackage::EXPRESSION_ATTRIBUTE_SYMBOL:
+		case uml::UmlPackage::EXPRESSION_ATTRIBUTE_SYMBOL:
 			return eAny(getSymbol()); //9616
 	}
 	return ValueSpecificationImpl::eGet(featureID, resolve, coreType);
@@ -384,9 +353,9 @@ bool ExpressionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::EXPRESSION_ATTRIBUTE_OPERAND:
+		case uml::UmlPackage::EXPRESSION_ATTRIBUTE_OPERAND:
 			return getOperand() != nullptr; //9615
-		case UmlPackage::EXPRESSION_ATTRIBUTE_SYMBOL:
+		case uml::UmlPackage::EXPRESSION_ATTRIBUTE_SYMBOL:
 			return getSymbol() != ""; //9616
 	}
 	return ValueSpecificationImpl::internalEIsSet(featureID);
@@ -395,7 +364,7 @@ bool ExpressionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::EXPRESSION_ATTRIBUTE_OPERAND:
+		case uml::UmlPackage::EXPRESSION_ATTRIBUTE_OPERAND:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -431,7 +400,7 @@ bool ExpressionImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case UmlPackage::EXPRESSION_ATTRIBUTE_SYMBOL:
+		case uml::UmlPackage::EXPRESSION_ATTRIBUTE_SYMBOL:
 		{
 			// BOOST CAST
 			std::string _symbol = newValue->get<std::string>();
@@ -455,11 +424,10 @@ void ExpressionImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler>
 	// Create new objects (from references (containment == true))
 	//
 	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -490,8 +458,9 @@ void ExpressionImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLo
 	ValueSpecificationImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void ExpressionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void ExpressionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
 
 	try
 	{
@@ -521,8 +490,8 @@ void ExpressionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence:
 	{
 		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
 	}
-
-	ValueSpecificationImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	ValueSpecificationImpl::loadNode(nodeName, loadHandler);
 }
 
 void ExpressionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
@@ -566,7 +535,6 @@ void ExpressionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 			saveHandler->addReference(operand, "operand", operand->eClass() != package->getValueSpecification_Class());
 		}
 	
- 
 		// Add attributes
 		if ( this->eIsSet(package->getExpression_Attribute_symbol()) )
 		{

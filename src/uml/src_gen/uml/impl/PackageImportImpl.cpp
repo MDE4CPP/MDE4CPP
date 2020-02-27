@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -26,17 +25,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -50,10 +44,11 @@
 
 #include "uml/Package.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/Impl/UmlFactoryImpl.hpp"
+#include "uml/Impl/UmlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -99,18 +94,12 @@ PackageImportImpl::~PackageImportImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			PackageImportImpl::PackageImportImpl(std::weak_ptr<uml::Element > par_owner)
 			:PackageImportImpl()
 			{
 			    m_owner = par_owner;
 			}
-
-
-
 
 
 
@@ -161,7 +150,7 @@ std::shared_ptr<ecore::EObject>  PackageImportImpl::copy() const
 
 std::shared_ptr<ecore::EClass> PackageImportImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getPackageImport_Class();
+	return uml::UmlPackage::eInstance()->getPackageImport_Class();
 }
 
 //*********************************
@@ -264,11 +253,11 @@ Any PackageImportImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::PACKAGEIMPORT_ATTRIBUTE_IMPORTEDPACKAGE:
+		case uml::UmlPackage::PACKAGEIMPORT_ATTRIBUTE_IMPORTEDPACKAGE:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getImportedPackage())); //1726
-		case UmlPackage::PACKAGEIMPORT_ATTRIBUTE_IMPORTINGNAMESPACE:
+		case uml::UmlPackage::PACKAGEIMPORT_ATTRIBUTE_IMPORTINGNAMESPACE:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getImportingNamespace().lock())); //1727
-		case UmlPackage::PACKAGEIMPORT_ATTRIBUTE_VISIBILITY:
+		case uml::UmlPackage::PACKAGEIMPORT_ATTRIBUTE_VISIBILITY:
 			return eAny(getVisibility()); //1728
 	}
 	return DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
@@ -277,11 +266,11 @@ bool PackageImportImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::PACKAGEIMPORT_ATTRIBUTE_IMPORTEDPACKAGE:
+		case uml::UmlPackage::PACKAGEIMPORT_ATTRIBUTE_IMPORTEDPACKAGE:
 			return getImportedPackage() != nullptr; //1726
-		case UmlPackage::PACKAGEIMPORT_ATTRIBUTE_IMPORTINGNAMESPACE:
+		case uml::UmlPackage::PACKAGEIMPORT_ATTRIBUTE_IMPORTINGNAMESPACE:
 			return getImportingNamespace().lock() != nullptr; //1727
-		case UmlPackage::PACKAGEIMPORT_ATTRIBUTE_VISIBILITY:
+		case uml::UmlPackage::PACKAGEIMPORT_ATTRIBUTE_VISIBILITY:
 			return m_visibility != VisibilityKind::PUBLIC;; //1728
 	}
 	return DirectedRelationshipImpl::internalEIsSet(featureID);
@@ -290,7 +279,7 @@ bool PackageImportImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::PACKAGEIMPORT_ATTRIBUTE_IMPORTEDPACKAGE:
+		case uml::UmlPackage::PACKAGEIMPORT_ATTRIBUTE_IMPORTEDPACKAGE:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -298,7 +287,7 @@ bool PackageImportImpl::eSet(int featureID, Any newValue)
 			setImportedPackage(_importedPackage); //1726
 			return true;
 		}
-		case UmlPackage::PACKAGEIMPORT_ATTRIBUTE_IMPORTINGNAMESPACE:
+		case uml::UmlPackage::PACKAGEIMPORT_ATTRIBUTE_IMPORTINGNAMESPACE:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -306,7 +295,7 @@ bool PackageImportImpl::eSet(int featureID, Any newValue)
 			setImportingNamespace(_importingNamespace); //1727
 			return true;
 		}
-		case UmlPackage::PACKAGEIMPORT_ATTRIBUTE_VISIBILITY:
+		case uml::UmlPackage::PACKAGEIMPORT_ATTRIBUTE_VISIBILITY:
 		{
 			// BOOST CAST
 			uml::VisibilityKind _visibility = newValue->get<uml::VisibilityKind>();
@@ -330,11 +319,10 @@ void PackageImportImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandl
 	// Create new objects (from references (containment == true))
 	//
 	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -387,18 +375,19 @@ void PackageImportImpl::loadAttributes(std::shared_ptr<persistence::interfaces::
 	DirectedRelationshipImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void PackageImportImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void PackageImportImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
 
-
-	DirectedRelationshipImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	DirectedRelationshipImpl::loadNode(nodeName, loadHandler);
 }
 
 void PackageImportImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
-		case UmlPackage::PACKAGEIMPORT_ATTRIBUTE_IMPORTEDPACKAGE:
+		case uml::UmlPackage::PACKAGEIMPORT_ATTRIBUTE_IMPORTEDPACKAGE:
 		{
 			if (references.size() == 1)
 			{
@@ -410,7 +399,7 @@ void PackageImportImpl::resolveReferences(const int featureID, std::list<std::sh
 			return;
 		}
 
-		case UmlPackage::PACKAGEIMPORT_ATTRIBUTE_IMPORTINGNAMESPACE:
+		case uml::UmlPackage::PACKAGEIMPORT_ATTRIBUTE_IMPORTINGNAMESPACE:
 		{
 			if (references.size() == 1)
 			{
@@ -451,7 +440,6 @@ void PackageImportImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
 
 	
- 
 		// Add attributes
 		if ( this->eIsSet(package->getPackageImport_Attribute_visibility()) )
 		{

@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -26,21 +25,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -84,10 +74,11 @@
 
 #include "uml/StructuredActivityNode.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/Impl/UmlFactoryImpl.hpp"
+#include "uml/Impl/UmlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -133,9 +124,6 @@ SendObjectActionImpl::~SendObjectActionImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			SendObjectActionImpl::SendObjectActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
 			:SendObjectActionImpl()
@@ -143,9 +131,6 @@ SendObjectActionImpl::~SendObjectActionImpl()
 			    m_inStructuredNode = par_inStructuredNode;
 				m_owner = par_inStructuredNode;
 			}
-
-
-
 
 
 //Additional constructor for the containments back reference
@@ -157,18 +142,12 @@ SendObjectActionImpl::~SendObjectActionImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			SendObjectActionImpl::SendObjectActionImpl(std::weak_ptr<uml::Element > par_owner)
 			:SendObjectActionImpl()
 			{
 			    m_owner = par_owner;
 			}
-
-
-
 
 
 
@@ -319,7 +298,7 @@ std::shared_ptr<ecore::EObject>  SendObjectActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> SendObjectActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getSendObjectAction_Class();
+	return uml::UmlPackage::eInstance()->getSendObjectAction_Class();
 }
 
 //*********************************
@@ -423,9 +402,9 @@ Any SendObjectActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::SENDOBJECTACTION_ATTRIBUTE_REQUEST:
+		case uml::UmlPackage::SENDOBJECTACTION_ATTRIBUTE_REQUEST:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getRequest())); //21329
-		case UmlPackage::SENDOBJECTACTION_ATTRIBUTE_TARGET:
+		case uml::UmlPackage::SENDOBJECTACTION_ATTRIBUTE_TARGET:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getTarget())); //21330
 	}
 	return InvocationActionImpl::eGet(featureID, resolve, coreType);
@@ -434,9 +413,9 @@ bool SendObjectActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::SENDOBJECTACTION_ATTRIBUTE_REQUEST:
+		case uml::UmlPackage::SENDOBJECTACTION_ATTRIBUTE_REQUEST:
 			return getRequest() != nullptr; //21329
-		case UmlPackage::SENDOBJECTACTION_ATTRIBUTE_TARGET:
+		case uml::UmlPackage::SENDOBJECTACTION_ATTRIBUTE_TARGET:
 			return getTarget() != nullptr; //21330
 	}
 	return InvocationActionImpl::internalEIsSet(featureID);
@@ -445,7 +424,7 @@ bool SendObjectActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::SENDOBJECTACTION_ATTRIBUTE_REQUEST:
+		case uml::UmlPackage::SENDOBJECTACTION_ATTRIBUTE_REQUEST:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -453,7 +432,7 @@ bool SendObjectActionImpl::eSet(int featureID, Any newValue)
 			setRequest(_request); //21329
 			return true;
 		}
-		case UmlPackage::SENDOBJECTACTION_ATTRIBUTE_TARGET:
+		case uml::UmlPackage::SENDOBJECTACTION_ATTRIBUTE_TARGET:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -478,11 +457,10 @@ void SendObjectActionImpl::load(std::shared_ptr<persistence::interfaces::XLoadHa
 	// Create new objects (from references (containment == true))
 	//
 	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -492,8 +470,9 @@ void SendObjectActionImpl::loadAttributes(std::shared_ptr<persistence::interface
 	InvocationActionImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void SendObjectActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void SendObjectActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
 
 	try
 	{
@@ -537,8 +516,8 @@ void SendObjectActionImpl::loadNode(std::string nodeName, std::shared_ptr<persis
 	{
 		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
 	}
-
-	InvocationActionImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	InvocationActionImpl::loadNode(nodeName, loadHandler);
 }
 
 void SendObjectActionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
@@ -601,7 +580,7 @@ void SendObjectActionImpl::saveContent(std::shared_ptr<persistence::interfaces::
 		std::shared_ptr<uml::InputPin > request = this->getRequest();
 		if (request != nullptr)
 		{
-			saveHandler->addReference(request, "request", request->eClass() != package->getInputPin_Class());
+			saveHandler->addReference(request, "request", request->eClass() != uml::UmlPackage::eInstance()->getInputPin_Class());
 		}
 	}
 	catch (std::exception& e)

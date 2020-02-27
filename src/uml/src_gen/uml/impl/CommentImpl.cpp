@@ -17,22 +17,18 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/Union.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -40,10 +36,11 @@
 
 #include "uml/Element.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/Impl/UmlFactoryImpl.hpp"
+#include "uml/Impl/UmlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -88,9 +85,6 @@ CommentImpl::~CommentImpl()
 
 
 
-
-
-
 CommentImpl::CommentImpl(const CommentImpl & obj):CommentImpl()
 {
 	//create copy of all Attributes
@@ -129,7 +123,7 @@ std::shared_ptr<ecore::EObject>  CommentImpl::copy() const
 
 std::shared_ptr<ecore::EClass> CommentImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getComment_Class();
+	return uml::UmlPackage::eInstance()->getComment_Class();
 }
 
 //*********************************
@@ -193,7 +187,7 @@ Any CommentImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::COMMENT_ATTRIBUTE_ANNOTATEDELEMENT:
+		case uml::UmlPackage::COMMENT_ATTRIBUTE_ANNOTATEDELEMENT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Element>::iterator iter = m_annotatedElement->begin();
@@ -205,7 +199,7 @@ Any CommentImpl::eGet(int featureID, bool resolve, bool coreType) const
 			}
 			return eAny(tempList); //463
 		}
-		case UmlPackage::COMMENT_ATTRIBUTE_BODY:
+		case uml::UmlPackage::COMMENT_ATTRIBUTE_BODY:
 			return eAny(getBody()); //464
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
@@ -214,9 +208,9 @@ bool CommentImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::COMMENT_ATTRIBUTE_ANNOTATEDELEMENT:
+		case uml::UmlPackage::COMMENT_ATTRIBUTE_ANNOTATEDELEMENT:
 			return getAnnotatedElement() != nullptr; //463
-		case UmlPackage::COMMENT_ATTRIBUTE_BODY:
+		case uml::UmlPackage::COMMENT_ATTRIBUTE_BODY:
 			return getBody() != ""; //464
 	}
 	return ElementImpl::internalEIsSet(featureID);
@@ -225,7 +219,7 @@ bool CommentImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::COMMENT_ATTRIBUTE_ANNOTATEDELEMENT:
+		case uml::UmlPackage::COMMENT_ATTRIBUTE_ANNOTATEDELEMENT:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -261,7 +255,7 @@ bool CommentImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case UmlPackage::COMMENT_ATTRIBUTE_BODY:
+		case uml::UmlPackage::COMMENT_ATTRIBUTE_BODY:
 		{
 			// BOOST CAST
 			std::string _body = newValue->get<std::string>();
@@ -285,11 +279,10 @@ void CommentImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> lo
 	// Create new objects (from references (containment == true))
 	//
 	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -327,18 +320,19 @@ void CommentImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadH
 	ElementImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void CommentImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void CommentImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
 
-
-	ElementImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	ElementImpl::loadNode(nodeName, loadHandler);
 }
 
 void CommentImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
-		case UmlPackage::COMMENT_ATTRIBUTE_ANNOTATEDELEMENT:
+		case uml::UmlPackage::COMMENT_ATTRIBUTE_ANNOTATEDELEMENT:
 		{
 			std::shared_ptr<Bag<uml::Element>> _annotatedElement = getAnnotatedElement();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -375,7 +369,6 @@ void CommentImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
 
 	
- 
 		// Add attributes
 		if ( this->eIsSet(package->getComment_Attribute_body()) )
 		{

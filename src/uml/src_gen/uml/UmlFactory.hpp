@@ -2727,8 +2727,6 @@ namespace uml
 			virtual std::shared_ptr<Variable> createVariable_in_Scope(std::weak_ptr<uml::StructuredActivityNode > par_scope, const int metaElementID=-1) const = 0;
 			
 			
-			//Package
-			virtual std::shared_ptr<UmlPackage> getUmlPackage() const = 0;
 	};
 }
 #endif /* end of include guard: UMLFACTORY_HPP */

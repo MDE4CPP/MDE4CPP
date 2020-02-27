@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -26,19 +25,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -84,10 +76,11 @@
 
 #include "uml/Vertex.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/Impl/UmlFactoryImpl.hpp"
+#include "uml/Impl/UmlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -216,9 +209,6 @@ StateImpl::~StateImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			StateImpl::StateImpl(std::weak_ptr<uml::Namespace > par_namespace)
 			:StateImpl()
@@ -228,18 +218,12 @@ StateImpl::~StateImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			StateImpl::StateImpl(std::weak_ptr<uml::Element > par_owner)
 			:StateImpl()
 			{
 			    m_owner = par_owner;
 			}
-
-
-
 
 
 
@@ -452,7 +436,7 @@ std::shared_ptr<ecore::EObject>  StateImpl::copy() const
 
 std::shared_ptr<ecore::EClass> StateImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getState_Class();
+	return uml::UmlPackage::eInstance()->getState_Class();
 }
 
 //*********************************
@@ -706,7 +690,7 @@ Any StateImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::STATE_ATTRIBUTE_CONNECTION:
+		case uml::UmlPackage::STATE_ATTRIBUTE_CONNECTION:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::ConnectionPointReference>::iterator iter = m_connection->begin();
@@ -718,7 +702,7 @@ Any StateImpl::eGet(int featureID, bool resolve, bool coreType) const
 			}
 			return eAny(tempList); //22121
 		}
-		case UmlPackage::STATE_ATTRIBUTE_CONNECTIONPOINT:
+		case uml::UmlPackage::STATE_ATTRIBUTE_CONNECTIONPOINT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Pseudostate>::iterator iter = m_connectionPoint->begin();
@@ -730,7 +714,7 @@ Any StateImpl::eGet(int featureID, bool resolve, bool coreType) const
 			}
 			return eAny(tempList); //22122
 		}
-		case UmlPackage::STATE_ATTRIBUTE_DEFERRABLETRIGGER:
+		case uml::UmlPackage::STATE_ATTRIBUTE_DEFERRABLETRIGGER:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Trigger>::iterator iter = m_deferrableTrigger->begin();
@@ -742,23 +726,23 @@ Any StateImpl::eGet(int featureID, bool resolve, bool coreType) const
 			}
 			return eAny(tempList); //22123
 		}
-		case UmlPackage::STATE_ATTRIBUTE_DOACTIVITY:
+		case uml::UmlPackage::STATE_ATTRIBUTE_DOACTIVITY:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getDoActivity())); //22124
-		case UmlPackage::STATE_ATTRIBUTE_ENTRY:
+		case uml::UmlPackage::STATE_ATTRIBUTE_ENTRY:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEntry())); //22125
-		case UmlPackage::STATE_ATTRIBUTE_EXIT:
+		case uml::UmlPackage::STATE_ATTRIBUTE_EXIT:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getExit())); //22126
-		case UmlPackage::STATE_ATTRIBUTE_ISCOMPOSITE:
+		case uml::UmlPackage::STATE_ATTRIBUTE_ISCOMPOSITE:
 			return eAny(getIsComposite()); //22127
-		case UmlPackage::STATE_ATTRIBUTE_ISORTHOGONAL:
+		case uml::UmlPackage::STATE_ATTRIBUTE_ISORTHOGONAL:
 			return eAny(getIsOrthogonal()); //22128
-		case UmlPackage::STATE_ATTRIBUTE_ISSIMPLE:
+		case uml::UmlPackage::STATE_ATTRIBUTE_ISSIMPLE:
 			return eAny(getIsSimple()); //22129
-		case UmlPackage::STATE_ATTRIBUTE_ISSUBMACHINESTATE:
+		case uml::UmlPackage::STATE_ATTRIBUTE_ISSUBMACHINESTATE:
 			return eAny(getIsSubmachineState()); //22130
-		case UmlPackage::STATE_ATTRIBUTE_REDEFINEDSTATE:
+		case uml::UmlPackage::STATE_ATTRIBUTE_REDEFINEDSTATE:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getRedefinedState())); //22131
-		case UmlPackage::STATE_ATTRIBUTE_REGION:
+		case uml::UmlPackage::STATE_ATTRIBUTE_REGION:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Region>::iterator iter = m_region->begin();
@@ -770,9 +754,9 @@ Any StateImpl::eGet(int featureID, bool resolve, bool coreType) const
 			}
 			return eAny(tempList); //22134
 		}
-		case UmlPackage::STATE_ATTRIBUTE_STATEINVARIANT:
+		case uml::UmlPackage::STATE_ATTRIBUTE_STATEINVARIANT:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getStateInvariant())); //22132
-		case UmlPackage::STATE_ATTRIBUTE_SUBMACHINE:
+		case uml::UmlPackage::STATE_ATTRIBUTE_SUBMACHINE:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSubmachine())); //22133
 	}
 	Any result;
@@ -793,33 +777,33 @@ bool StateImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::STATE_ATTRIBUTE_CONNECTION:
+		case uml::UmlPackage::STATE_ATTRIBUTE_CONNECTION:
 			return getConnection() != nullptr; //22121
-		case UmlPackage::STATE_ATTRIBUTE_CONNECTIONPOINT:
+		case uml::UmlPackage::STATE_ATTRIBUTE_CONNECTIONPOINT:
 			return getConnectionPoint() != nullptr; //22122
-		case UmlPackage::STATE_ATTRIBUTE_DEFERRABLETRIGGER:
+		case uml::UmlPackage::STATE_ATTRIBUTE_DEFERRABLETRIGGER:
 			return getDeferrableTrigger() != nullptr; //22123
-		case UmlPackage::STATE_ATTRIBUTE_DOACTIVITY:
+		case uml::UmlPackage::STATE_ATTRIBUTE_DOACTIVITY:
 			return getDoActivity() != nullptr; //22124
-		case UmlPackage::STATE_ATTRIBUTE_ENTRY:
+		case uml::UmlPackage::STATE_ATTRIBUTE_ENTRY:
 			return getEntry() != nullptr; //22125
-		case UmlPackage::STATE_ATTRIBUTE_EXIT:
+		case uml::UmlPackage::STATE_ATTRIBUTE_EXIT:
 			return getExit() != nullptr; //22126
-		case UmlPackage::STATE_ATTRIBUTE_ISCOMPOSITE:
+		case uml::UmlPackage::STATE_ATTRIBUTE_ISCOMPOSITE:
 			return getIsComposite() != false; //22127
-		case UmlPackage::STATE_ATTRIBUTE_ISORTHOGONAL:
+		case uml::UmlPackage::STATE_ATTRIBUTE_ISORTHOGONAL:
 			return getIsOrthogonal() != false; //22128
-		case UmlPackage::STATE_ATTRIBUTE_ISSIMPLE:
+		case uml::UmlPackage::STATE_ATTRIBUTE_ISSIMPLE:
 			return getIsSimple() != true; //22129
-		case UmlPackage::STATE_ATTRIBUTE_ISSUBMACHINESTATE:
+		case uml::UmlPackage::STATE_ATTRIBUTE_ISSUBMACHINESTATE:
 			return getIsSubmachineState() != false; //22130
-		case UmlPackage::STATE_ATTRIBUTE_REDEFINEDSTATE:
+		case uml::UmlPackage::STATE_ATTRIBUTE_REDEFINEDSTATE:
 			return getRedefinedState() != nullptr; //22131
-		case UmlPackage::STATE_ATTRIBUTE_REGION:
+		case uml::UmlPackage::STATE_ATTRIBUTE_REGION:
 			return getRegion() != nullptr; //22134
-		case UmlPackage::STATE_ATTRIBUTE_STATEINVARIANT:
+		case uml::UmlPackage::STATE_ATTRIBUTE_STATEINVARIANT:
 			return getStateInvariant() != nullptr; //22132
-		case UmlPackage::STATE_ATTRIBUTE_SUBMACHINE:
+		case uml::UmlPackage::STATE_ATTRIBUTE_SUBMACHINE:
 			return getSubmachine() != nullptr; //22133
 	}
 	bool result = false;
@@ -840,7 +824,7 @@ bool StateImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::STATE_ATTRIBUTE_CONNECTION:
+		case uml::UmlPackage::STATE_ATTRIBUTE_CONNECTION:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -876,7 +860,7 @@ bool StateImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case UmlPackage::STATE_ATTRIBUTE_CONNECTIONPOINT:
+		case uml::UmlPackage::STATE_ATTRIBUTE_CONNECTIONPOINT:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -912,7 +896,7 @@ bool StateImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case UmlPackage::STATE_ATTRIBUTE_DEFERRABLETRIGGER:
+		case uml::UmlPackage::STATE_ATTRIBUTE_DEFERRABLETRIGGER:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -948,7 +932,7 @@ bool StateImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case UmlPackage::STATE_ATTRIBUTE_DOACTIVITY:
+		case uml::UmlPackage::STATE_ATTRIBUTE_DOACTIVITY:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -956,7 +940,7 @@ bool StateImpl::eSet(int featureID, Any newValue)
 			setDoActivity(_doActivity); //22124
 			return true;
 		}
-		case UmlPackage::STATE_ATTRIBUTE_ENTRY:
+		case uml::UmlPackage::STATE_ATTRIBUTE_ENTRY:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -964,7 +948,7 @@ bool StateImpl::eSet(int featureID, Any newValue)
 			setEntry(_entry); //22125
 			return true;
 		}
-		case UmlPackage::STATE_ATTRIBUTE_EXIT:
+		case uml::UmlPackage::STATE_ATTRIBUTE_EXIT:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -972,7 +956,7 @@ bool StateImpl::eSet(int featureID, Any newValue)
 			setExit(_exit); //22126
 			return true;
 		}
-		case UmlPackage::STATE_ATTRIBUTE_REDEFINEDSTATE:
+		case uml::UmlPackage::STATE_ATTRIBUTE_REDEFINEDSTATE:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -980,7 +964,7 @@ bool StateImpl::eSet(int featureID, Any newValue)
 			setRedefinedState(_redefinedState); //22131
 			return true;
 		}
-		case UmlPackage::STATE_ATTRIBUTE_REGION:
+		case uml::UmlPackage::STATE_ATTRIBUTE_REGION:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -1016,7 +1000,7 @@ bool StateImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case UmlPackage::STATE_ATTRIBUTE_STATEINVARIANT:
+		case uml::UmlPackage::STATE_ATTRIBUTE_STATEINVARIANT:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -1024,7 +1008,7 @@ bool StateImpl::eSet(int featureID, Any newValue)
 			setStateInvariant(_stateInvariant); //22132
 			return true;
 		}
-		case UmlPackage::STATE_ATTRIBUTE_SUBMACHINE:
+		case uml::UmlPackage::STATE_ATTRIBUTE_SUBMACHINE:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -1061,11 +1045,10 @@ void StateImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> load
 	// Create new objects (from references (containment == true))
 	//
 	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -1110,8 +1093,9 @@ void StateImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHan
 	VertexImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void StateImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void StateImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
 
 	try
 	{
@@ -1122,7 +1106,7 @@ void StateImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inte
 			{
 				typeName = "ConnectionPointReference";
 			}
-			std::shared_ptr<ecore::EObject> connection = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::CONNECTIONPOINTREFERENCE_ATTRIBUTE_STATE);
+			std::shared_ptr<ecore::EObject> connection = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::UmlPackage::CONNECTIONPOINTREFERENCE_ATTRIBUTE_STATE);
 			if (connection != nullptr)
 			{
 				loadHandler->handleChild(connection);
@@ -1137,7 +1121,7 @@ void StateImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inte
 			{
 				typeName = "Pseudostate";
 			}
-			std::shared_ptr<ecore::EObject> connectionPoint = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::PSEUDOSTATE_ATTRIBUTE_STATE);
+			std::shared_ptr<ecore::EObject> connectionPoint = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::UmlPackage::PSEUDOSTATE_ATTRIBUTE_STATE);
 			if (connectionPoint != nullptr)
 			{
 				loadHandler->handleChild(connectionPoint);
@@ -1220,7 +1204,7 @@ void StateImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inte
 			{
 				typeName = "Region";
 			}
-			std::shared_ptr<ecore::EObject> region = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::REGION_ATTRIBUTE_STATE);
+			std::shared_ptr<ecore::EObject> region = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::UmlPackage::REGION_ATTRIBUTE_STATE);
 			if (region != nullptr)
 			{
 				loadHandler->handleChild(region);
@@ -1236,17 +1220,17 @@ void StateImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inte
 	{
 		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
 	}
-
-	NamespaceImpl::loadNode(nodeName, loadHandler, modelFactory);
-	RedefinableElementImpl::loadNode(nodeName, loadHandler, modelFactory);
-	VertexImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	NamespaceImpl::loadNode(nodeName, loadHandler);
+	RedefinableElementImpl::loadNode(nodeName, loadHandler);
+	VertexImpl::loadNode(nodeName, loadHandler);
 }
 
 void StateImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
-		case UmlPackage::STATE_ATTRIBUTE_REDEFINEDSTATE:
+		case uml::UmlPackage::STATE_ATTRIBUTE_REDEFINEDSTATE:
 		{
 			if (references.size() == 1)
 			{
@@ -1258,7 +1242,7 @@ void StateImpl::resolveReferences(const int featureID, std::list<std::shared_ptr
 			return;
 		}
 
-		case UmlPackage::STATE_ATTRIBUTE_STATEINVARIANT:
+		case uml::UmlPackage::STATE_ATTRIBUTE_STATEINVARIANT:
 		{
 			if (references.size() == 1)
 			{
@@ -1270,7 +1254,7 @@ void StateImpl::resolveReferences(const int featureID, std::list<std::shared_ptr
 			return;
 		}
 
-		case UmlPackage::STATE_ATTRIBUTE_SUBMACHINE:
+		case uml::UmlPackage::STATE_ATTRIBUTE_SUBMACHINE:
 		{
 			if (references.size() == 1)
 			{

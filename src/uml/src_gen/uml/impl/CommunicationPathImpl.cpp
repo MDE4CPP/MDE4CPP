@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -25,23 +24,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -95,10 +83,11 @@
 
 #include "uml/UseCase.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/Impl/UmlFactoryImpl.hpp"
+#include "uml/Impl/UmlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -138,18 +127,12 @@ CommunicationPathImpl::~CommunicationPathImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			CommunicationPathImpl::CommunicationPathImpl(std::weak_ptr<uml::Element > par_owner)
 			:CommunicationPathImpl()
 			{
 			    m_owner = par_owner;
 			}
-
-
-
 
 
 //Additional constructor for the containments back reference
@@ -173,9 +156,6 @@ CommunicationPathImpl::CommunicationPathImpl(std::weak_ptr<uml::Package > par_Pa
 }
 
 
-
-
-
 //Additional constructor for the containments back reference
 			CommunicationPathImpl::CommunicationPathImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
 			:CommunicationPathImpl()
@@ -185,13 +165,7 @@ CommunicationPathImpl::CommunicationPathImpl(std::weak_ptr<uml::Package > par_Pa
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
-
-
-
 
 
 
@@ -411,7 +385,7 @@ std::shared_ptr<ecore::EObject>  CommunicationPathImpl::copy() const
 
 std::shared_ptr<ecore::EClass> CommunicationPathImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getCommunicationPath_Class();
+	return uml::UmlPackage::eInstance()->getCommunicationPath_Class();
 }
 
 //*********************************
@@ -539,11 +513,10 @@ void CommunicationPathImpl::load(std::shared_ptr<persistence::interfaces::XLoadH
 	// Create new objects (from references (containment == true))
 	//
 	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -553,11 +526,12 @@ void CommunicationPathImpl::loadAttributes(std::shared_ptr<persistence::interfac
 	AssociationImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void CommunicationPathImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void CommunicationPathImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
 
-
-	AssociationImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	AssociationImpl::loadNode(nodeName, loadHandler);
 }
 
 void CommunicationPathImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)

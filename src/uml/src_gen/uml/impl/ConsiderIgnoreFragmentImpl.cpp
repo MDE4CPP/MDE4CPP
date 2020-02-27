@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -26,21 +25,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -68,10 +58,11 @@
 
 #include "uml/StringExpression.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/Impl/UmlFactoryImpl.hpp"
+#include "uml/Impl/UmlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -116,9 +107,6 @@ ConsiderIgnoreFragmentImpl::~ConsiderIgnoreFragmentImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			ConsiderIgnoreFragmentImpl::ConsiderIgnoreFragmentImpl(std::weak_ptr<uml::InteractionOperand > par_enclosingOperand)
 			:ConsiderIgnoreFragmentImpl()
@@ -126,9 +114,6 @@ ConsiderIgnoreFragmentImpl::~ConsiderIgnoreFragmentImpl()
 			    m_enclosingOperand = par_enclosingOperand;
 				m_namespace = par_enclosingOperand;
 			}
-
-
-
 
 
 //Additional constructor for the containments back reference
@@ -140,18 +125,12 @@ ConsiderIgnoreFragmentImpl::~ConsiderIgnoreFragmentImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			ConsiderIgnoreFragmentImpl::ConsiderIgnoreFragmentImpl(std::weak_ptr<uml::Element > par_owner)
 			:ConsiderIgnoreFragmentImpl()
 			{
 			    m_owner = par_owner;
 			}
-
-
-
 
 
 
@@ -239,7 +218,7 @@ std::shared_ptr<ecore::EObject>  ConsiderIgnoreFragmentImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ConsiderIgnoreFragmentImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getConsiderIgnoreFragment_Class();
+	return uml::UmlPackage::eInstance()->getConsiderIgnoreFragment_Class();
 }
 
 //*********************************
@@ -328,7 +307,7 @@ Any ConsiderIgnoreFragmentImpl::eGet(int featureID, bool resolve, bool coreType)
 {
 	switch(featureID)
 	{
-		case UmlPackage::CONSIDERIGNOREFRAGMENT_ATTRIBUTE_MESSAGE:
+		case uml::UmlPackage::CONSIDERIGNOREFRAGMENT_ATTRIBUTE_MESSAGE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::NamedElement>::iterator iter = m_message->begin();
@@ -347,7 +326,7 @@ bool ConsiderIgnoreFragmentImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::CONSIDERIGNOREFRAGMENT_ATTRIBUTE_MESSAGE:
+		case uml::UmlPackage::CONSIDERIGNOREFRAGMENT_ATTRIBUTE_MESSAGE:
 			return getMessage() != nullptr; //5716
 	}
 	return CombinedFragmentImpl::internalEIsSet(featureID);
@@ -356,7 +335,7 @@ bool ConsiderIgnoreFragmentImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::CONSIDERIGNOREFRAGMENT_ATTRIBUTE_MESSAGE:
+		case uml::UmlPackage::CONSIDERIGNOREFRAGMENT_ATTRIBUTE_MESSAGE:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -409,11 +388,10 @@ void ConsiderIgnoreFragmentImpl::load(std::shared_ptr<persistence::interfaces::X
 	// Create new objects (from references (containment == true))
 	//
 	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -442,18 +420,19 @@ void ConsiderIgnoreFragmentImpl::loadAttributes(std::shared_ptr<persistence::int
 	CombinedFragmentImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void ConsiderIgnoreFragmentImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void ConsiderIgnoreFragmentImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
 
-
-	CombinedFragmentImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	CombinedFragmentImpl::loadNode(nodeName, loadHandler);
 }
 
 void ConsiderIgnoreFragmentImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
-		case UmlPackage::CONSIDERIGNOREFRAGMENT_ATTRIBUTE_MESSAGE:
+		case uml::UmlPackage::CONSIDERIGNOREFRAGMENT_ATTRIBUTE_MESSAGE:
 		{
 			std::shared_ptr<Bag<uml::NamedElement>> _message = getMessage();
 			for(std::shared_ptr<ecore::EObject> ref : references)

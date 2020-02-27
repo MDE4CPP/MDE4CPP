@@ -19,7 +19,8 @@
 #include "ecore/ETypeParameter.hpp"
 
 //depending model packages
-
+//include subpackages 
+ 
 using namespace ecore;
 
 void EcorePackageImpl::createPackageContents(std::shared_ptr<ecore::EPackage> package)
@@ -54,6 +55,7 @@ void EcorePackageImpl::createPackageContents(std::shared_ptr<ecore::EPackage> pa
 	createETypedElementContent(package, factory);
 
 	createPackageEDataTypes(package, factory);
+
 }
 
 void EcorePackageImpl::createEAnnotationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)

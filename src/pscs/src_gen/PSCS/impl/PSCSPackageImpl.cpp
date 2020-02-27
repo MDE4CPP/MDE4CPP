@@ -25,6 +25,7 @@
 #include "fUML/FUMLPackage.hpp"
 #include "types/TypesPackage.hpp"
 #include "uml/UmlPackage.hpp"
+#include "PSCS/Semantics/impl/SemanticsPackageImpl.hpp"
 
 using namespace PSCS;
 
@@ -59,5 +60,11 @@ void PSCSPackageImpl::init(std::shared_ptr<ecore::EPackage> package)
 	setThisEPackagePtr(package);
     initializePackageContents();   
 }
+
+std::shared_ptr<Semantics::SemanticsPackage> PSCSPackageImpl::getSemantics_Package() const
+{
+	return Semantics::SemanticsPackage::eInstance();
+} 
+
 
 

@@ -17,20 +17,18 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "PSCS/impl/PSCSPackageImpl.hpp"
+
+//Includes from codegen annotation
 #include "fUML/FUMLFactory.hpp"
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "PSCS/PSCSFactory.hpp"
-#include "PSCS/PSCSPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -48,10 +46,15 @@
 
 #include "uml/Trigger.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "PSCS/PSCSPackage.hpp"
+//Factories an Package includes
+#include "PSCS/Semantics/CommonBehavior/Impl/CommonBehaviorFactoryImpl.hpp"
+#include "PSCS/Semantics/CommonBehavior/Impl/CommonBehaviorPackageImpl.hpp"
+
+#include "PSCS/Semantics/SemanticsFactory.hpp"
+#include "PSCS/Semantics/SemanticsPackage.hpp"
 #include "PSCS/PSCSFactory.hpp"
+#include "PSCS/PSCSPackage.hpp"
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -127,7 +130,7 @@ std::shared_ptr<ecore::EObject>  CS_EventOccurrenceImpl::copy() const
 
 std::shared_ptr<ecore::EClass> CS_EventOccurrenceImpl::eStaticClass() const
 {
-	return PSCSPackageImpl::eInstance()->getCS_EventOccurrence_Class();
+	return pSCS::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getCS_EventOccurrence_Class();
 }
 
 //*********************************
@@ -290,13 +293,13 @@ Any CS_EventOccurrenceImpl::eGet(int featureID, bool resolve, bool coreType) con
 {
 	switch(featureID)
 	{
-		case PSCS::PSCSPackage::CS_EVENTOCCURRENCE_ATTRIBUTE_INTERACTIONPOINT:
+		case PSCS::Semantics::CommonBehavior::CommonBehaviorPackage::CS_EVENTOCCURRENCE_ATTRIBUTE_INTERACTIONPOINT:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getInteractionPoint())); //131
-		case PSCS::PSCSPackage::CS_EVENTOCCURRENCE_ATTRIBUTE_ONPORT:
+		case PSCS::Semantics::CommonBehavior::CommonBehaviorPackage::CS_EVENTOCCURRENCE_ATTRIBUTE_ONPORT:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getOnPort())); //134
-		case PSCS::PSCSPackage::CS_EVENTOCCURRENCE_ATTRIBUTE_PROPAGATIONINWARD:
+		case PSCS::Semantics::CommonBehavior::CommonBehaviorPackage::CS_EVENTOCCURRENCE_ATTRIBUTE_PROPAGATIONINWARD:
 			return eAny(isPropagationInward()); //133
-		case PSCS::PSCSPackage::CS_EVENTOCCURRENCE_ATTRIBUTE_WRAPPEDEVENTOCCURRENCE:
+		case PSCS::Semantics::CommonBehavior::CommonBehaviorPackage::CS_EVENTOCCURRENCE_ATTRIBUTE_WRAPPEDEVENTOCCURRENCE:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getWrappedEventOccurrence())); //132
 	}
 	return fUML::Semantics::CommonBehavior::EventOccurrenceImpl::eGet(featureID, resolve, coreType);
@@ -305,13 +308,13 @@ bool CS_EventOccurrenceImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case PSCS::PSCSPackage::CS_EVENTOCCURRENCE_ATTRIBUTE_INTERACTIONPOINT:
+		case PSCS::Semantics::CommonBehavior::CommonBehaviorPackage::CS_EVENTOCCURRENCE_ATTRIBUTE_INTERACTIONPOINT:
 			return getInteractionPoint() != nullptr; //131
-		case PSCS::PSCSPackage::CS_EVENTOCCURRENCE_ATTRIBUTE_ONPORT:
+		case PSCS::Semantics::CommonBehavior::CommonBehaviorPackage::CS_EVENTOCCURRENCE_ATTRIBUTE_ONPORT:
 			return getOnPort() != nullptr; //134
-		case PSCS::PSCSPackage::CS_EVENTOCCURRENCE_ATTRIBUTE_PROPAGATIONINWARD:
+		case PSCS::Semantics::CommonBehavior::CommonBehaviorPackage::CS_EVENTOCCURRENCE_ATTRIBUTE_PROPAGATIONINWARD:
 			return isPropagationInward() != false; //133
-		case PSCS::PSCSPackage::CS_EVENTOCCURRENCE_ATTRIBUTE_WRAPPEDEVENTOCCURRENCE:
+		case PSCS::Semantics::CommonBehavior::CommonBehaviorPackage::CS_EVENTOCCURRENCE_ATTRIBUTE_WRAPPEDEVENTOCCURRENCE:
 			return getWrappedEventOccurrence() != nullptr; //132
 	}
 	return fUML::Semantics::CommonBehavior::EventOccurrenceImpl::internalEIsSet(featureID);
@@ -320,7 +323,7 @@ bool CS_EventOccurrenceImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case PSCS::PSCSPackage::CS_EVENTOCCURRENCE_ATTRIBUTE_INTERACTIONPOINT:
+		case PSCS::Semantics::CommonBehavior::CommonBehaviorPackage::CS_EVENTOCCURRENCE_ATTRIBUTE_INTERACTIONPOINT:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -328,7 +331,7 @@ bool CS_EventOccurrenceImpl::eSet(int featureID, Any newValue)
 			setInteractionPoint(_interactionPoint); //131
 			return true;
 		}
-		case PSCS::PSCSPackage::CS_EVENTOCCURRENCE_ATTRIBUTE_ONPORT:
+		case PSCS::Semantics::CommonBehavior::CommonBehaviorPackage::CS_EVENTOCCURRENCE_ATTRIBUTE_ONPORT:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -336,14 +339,14 @@ bool CS_EventOccurrenceImpl::eSet(int featureID, Any newValue)
 			setOnPort(_onPort); //134
 			return true;
 		}
-		case PSCS::PSCSPackage::CS_EVENTOCCURRENCE_ATTRIBUTE_PROPAGATIONINWARD:
+		case PSCS::Semantics::CommonBehavior::CommonBehaviorPackage::CS_EVENTOCCURRENCE_ATTRIBUTE_PROPAGATIONINWARD:
 		{
 			// BOOST CAST
 			bool _propagationInward = newValue->get<bool>();
 			setPropagationInward(_propagationInward); //133
 			return true;
 		}
-		case PSCS::PSCSPackage::CS_EVENTOCCURRENCE_ATTRIBUTE_WRAPPEDEVENTOCCURRENCE:
+		case PSCS::Semantics::CommonBehavior::CommonBehaviorPackage::CS_EVENTOCCURRENCE_ATTRIBUTE_WRAPPEDEVENTOCCURRENCE:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -368,11 +371,10 @@ void CS_EventOccurrenceImpl::load(std::shared_ptr<persistence::interfaces::XLoad
 	// Create new objects (from references (containment == true))
 	//
 	// get PSCSFactory
-	std::shared_ptr<PSCS::PSCSFactory> modelFactory = PSCS::PSCSFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -424,18 +426,19 @@ void CS_EventOccurrenceImpl::loadAttributes(std::shared_ptr<persistence::interfa
 	fUML::Semantics::CommonBehavior::EventOccurrenceImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void CS_EventOccurrenceImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<PSCS::PSCSFactory> modelFactory)
+void CS_EventOccurrenceImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<PSCS::Semantics::CommonBehavior::CommonBehaviorFactory> modelFactory=PSCS::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance();
 
-
-	fUML::Semantics::CommonBehavior::EventOccurrenceImpl::loadNode(nodeName, loadHandler, fUML::FUMLFactory::eInstance());
+	//load BasePackage Nodes
+	fUML::Semantics::CommonBehavior::EventOccurrenceImpl::loadNode(nodeName, loadHandler);
 }
 
 void CS_EventOccurrenceImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
-		case PSCS::PSCSPackage::CS_EVENTOCCURRENCE_ATTRIBUTE_INTERACTIONPOINT:
+		case PSCS::Semantics::CommonBehavior::CommonBehaviorPackage::CS_EVENTOCCURRENCE_ATTRIBUTE_INTERACTIONPOINT:
 		{
 			if (references.size() == 1)
 			{
@@ -447,7 +450,7 @@ void CS_EventOccurrenceImpl::resolveReferences(const int featureID, std::list<st
 			return;
 		}
 
-		case PSCS::PSCSPackage::CS_EVENTOCCURRENCE_ATTRIBUTE_ONPORT:
+		case PSCS::Semantics::CommonBehavior::CommonBehaviorPackage::CS_EVENTOCCURRENCE_ATTRIBUTE_ONPORT:
 		{
 			if (references.size() == 1)
 			{
@@ -459,7 +462,7 @@ void CS_EventOccurrenceImpl::resolveReferences(const int featureID, std::list<st
 			return;
 		}
 
-		case PSCS::PSCSPackage::CS_EVENTOCCURRENCE_ATTRIBUTE_WRAPPEDEVENTOCCURRENCE:
+		case PSCS::Semantics::CommonBehavior::CommonBehaviorPackage::CS_EVENTOCCURRENCE_ATTRIBUTE_WRAPPEDEVENTOCCURRENCE:
 		{
 			if (references.size() == 1)
 			{
@@ -488,10 +491,9 @@ void CS_EventOccurrenceImpl::saveContent(std::shared_ptr<persistence::interfaces
 {
 	try
 	{
-		std::shared_ptr<PSCS::PSCSPackage> package = PSCS::PSCSPackage::eInstance();
+		std::shared_ptr<pSCS::Semantics::CommonBehavior::CommonBehaviorPackage> package = pSCS::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance();
 
 	
- 
 		// Add attributes
 		if ( this->eIsSet(package->getCS_EventOccurrence_Attribute_propagationInward()) )
 		{

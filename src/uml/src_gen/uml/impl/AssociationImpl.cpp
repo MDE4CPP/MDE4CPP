@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -26,23 +25,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -96,10 +84,11 @@
 
 #include "uml/UseCase.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/Impl/UmlFactoryImpl.hpp"
+#include "uml/Impl/UmlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -201,18 +190,12 @@ AssociationImpl::~AssociationImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			AssociationImpl::AssociationImpl(std::weak_ptr<uml::Element > par_owner)
 			:AssociationImpl()
 			{
 			    m_owner = par_owner;
 			}
-
-
-
 
 
 //Additional constructor for the containments back reference
@@ -236,9 +219,6 @@ AssociationImpl::AssociationImpl(std::weak_ptr<uml::Package > par_Package, const
 }
 
 
-
-
-
 //Additional constructor for the containments back reference
 			AssociationImpl::AssociationImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
 			:AssociationImpl()
@@ -248,13 +228,7 @@ AssociationImpl::AssociationImpl(std::weak_ptr<uml::Package > par_Package, const
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
-
-
-
 
 
 
@@ -481,7 +455,7 @@ std::shared_ptr<ecore::EObject>  AssociationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> AssociationImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getAssociation_Class();
+	return uml::UmlPackage::eInstance()->getAssociation_Class();
 }
 
 //*********************************
@@ -656,7 +630,7 @@ Any AssociationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::ASSOCIATION_ATTRIBUTE_ENDTYPE:
+		case uml::UmlPackage::ASSOCIATION_ATTRIBUTE_ENDTYPE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Type>::iterator iter = m_endType->begin();
@@ -668,9 +642,9 @@ Any AssociationImpl::eGet(int featureID, bool resolve, bool coreType) const
 			}
 			return eAny(tempList); //2239
 		}
-		case UmlPackage::ASSOCIATION_ATTRIBUTE_ISDERIVED:
+		case uml::UmlPackage::ASSOCIATION_ATTRIBUTE_ISDERIVED:
 			return eAny(getIsDerived()); //2240
-		case UmlPackage::ASSOCIATION_ATTRIBUTE_MEMBEREND:
+		case uml::UmlPackage::ASSOCIATION_ATTRIBUTE_MEMBEREND:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Property>::iterator iter = m_memberEnd->begin();
@@ -682,7 +656,7 @@ Any AssociationImpl::eGet(int featureID, bool resolve, bool coreType) const
 			}
 			return eAny(tempList); //2241
 		}
-		case UmlPackage::ASSOCIATION_ATTRIBUTE_NAVIGABLEOWNEDEND:
+		case uml::UmlPackage::ASSOCIATION_ATTRIBUTE_NAVIGABLEOWNEDEND:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Property>::iterator iter = m_navigableOwnedEnd->begin();
@@ -694,7 +668,7 @@ Any AssociationImpl::eGet(int featureID, bool resolve, bool coreType) const
 			}
 			return eAny(tempList); //2243
 		}
-		case UmlPackage::ASSOCIATION_ATTRIBUTE_OWNEDEND:
+		case uml::UmlPackage::ASSOCIATION_ATTRIBUTE_OWNEDEND:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Property>::iterator iter = m_ownedEnd->begin();
@@ -720,15 +694,15 @@ bool AssociationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::ASSOCIATION_ATTRIBUTE_ENDTYPE:
+		case uml::UmlPackage::ASSOCIATION_ATTRIBUTE_ENDTYPE:
 			return getEndType() != nullptr; //2239
-		case UmlPackage::ASSOCIATION_ATTRIBUTE_ISDERIVED:
+		case uml::UmlPackage::ASSOCIATION_ATTRIBUTE_ISDERIVED:
 			return getIsDerived() != false; //2240
-		case UmlPackage::ASSOCIATION_ATTRIBUTE_MEMBEREND:
+		case uml::UmlPackage::ASSOCIATION_ATTRIBUTE_MEMBEREND:
 			return getMemberEnd() != nullptr; //2241
-		case UmlPackage::ASSOCIATION_ATTRIBUTE_NAVIGABLEOWNEDEND:
+		case uml::UmlPackage::ASSOCIATION_ATTRIBUTE_NAVIGABLEOWNEDEND:
 			return getNavigableOwnedEnd() != nullptr; //2243
-		case UmlPackage::ASSOCIATION_ATTRIBUTE_OWNEDEND:
+		case uml::UmlPackage::ASSOCIATION_ATTRIBUTE_OWNEDEND:
 			return getOwnedEnd() != nullptr; //2242
 	}
 	bool result = false;
@@ -744,14 +718,14 @@ bool AssociationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::ASSOCIATION_ATTRIBUTE_ISDERIVED:
+		case uml::UmlPackage::ASSOCIATION_ATTRIBUTE_ISDERIVED:
 		{
 			// BOOST CAST
 			bool _isDerived = newValue->get<bool>();
 			setIsDerived(_isDerived); //2240
 			return true;
 		}
-		case UmlPackage::ASSOCIATION_ATTRIBUTE_MEMBEREND:
+		case uml::UmlPackage::ASSOCIATION_ATTRIBUTE_MEMBEREND:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -787,7 +761,7 @@ bool AssociationImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case UmlPackage::ASSOCIATION_ATTRIBUTE_NAVIGABLEOWNEDEND:
+		case uml::UmlPackage::ASSOCIATION_ATTRIBUTE_NAVIGABLEOWNEDEND:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -823,7 +797,7 @@ bool AssociationImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case UmlPackage::ASSOCIATION_ATTRIBUTE_OWNEDEND:
+		case uml::UmlPackage::ASSOCIATION_ATTRIBUTE_OWNEDEND:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -883,11 +857,10 @@ void AssociationImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler
 	// Create new objects (from references (containment == true))
 	//
 	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -933,8 +906,9 @@ void AssociationImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XL
 	RelationshipImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void AssociationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void AssociationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
 
 	try
 	{
@@ -945,7 +919,7 @@ void AssociationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence
 			{
 				typeName = "Property";
 			}
-			std::shared_ptr<ecore::EObject> ownedEnd = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::PROPERTY_ATTRIBUTE_OWNINGASSOCIATION);
+			std::shared_ptr<ecore::EObject> ownedEnd = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::UmlPackage::PROPERTY_ATTRIBUTE_OWNINGASSOCIATION);
 			if (ownedEnd != nullptr)
 			{
 				loadHandler->handleChild(ownedEnd);
@@ -961,16 +935,16 @@ void AssociationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence
 	{
 		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
 	}
-
-	ClassifierImpl::loadNode(nodeName, loadHandler, modelFactory);
-	RelationshipImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	ClassifierImpl::loadNode(nodeName, loadHandler);
+	RelationshipImpl::loadNode(nodeName, loadHandler);
 }
 
 void AssociationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
-		case UmlPackage::ASSOCIATION_ATTRIBUTE_MEMBEREND:
+		case uml::UmlPackage::ASSOCIATION_ATTRIBUTE_MEMBEREND:
 		{
 			std::shared_ptr<Bag<uml::Property>> _memberEnd = getMemberEnd();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -984,7 +958,7 @@ void AssociationImpl::resolveReferences(const int featureID, std::list<std::shar
 			return;
 		}
 
-		case UmlPackage::ASSOCIATION_ATTRIBUTE_NAVIGABLEOWNEDEND:
+		case uml::UmlPackage::ASSOCIATION_ATTRIBUTE_NAVIGABLEOWNEDEND:
 		{
 			std::shared_ptr<Bag<uml::Property>> _navigableOwnedEnd = getNavigableOwnedEnd();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -1039,7 +1013,6 @@ void AssociationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
 
 	
- 
 		// Add attributes
 		if ( this->eIsSet(package->getAssociation_Attribute_isDerived()) )
 		{
@@ -1067,7 +1040,7 @@ void AssociationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 		std::shared_ptr<SubsetUnion<uml::Property, uml::Property /*Subset does not reference a union*/,uml::Feature,uml::NamedElement>> list_ownedEnd = this->getOwnedEnd();
 		for (std::shared_ptr<uml::Property> ownedEnd : *list_ownedEnd) 
 		{
-			saveHandler->addReference(ownedEnd, "ownedEnd", ownedEnd->eClass() != package->getProperty_Class());
+			saveHandler->addReference(ownedEnd, "ownedEnd", ownedEnd->eClass() !=uml::UmlPackage::eInstance()->getProperty_Class());
 		}
 	}
 	catch (std::exception& e)

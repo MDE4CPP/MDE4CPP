@@ -18,26 +18,25 @@
 #include <iostream>
 #include <sstream>
 
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
 #include "uml/Object.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/Impl/UmlFactoryImpl.hpp"
+#include "uml/Impl/UmlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -99,7 +98,7 @@ std::shared_ptr<ecore::EObject>  ArgumentImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ArgumentImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getArgument_Class();
+	return uml::UmlPackage::eInstance()->getArgument_Class();
 }
 
 //*********************************
@@ -157,9 +156,9 @@ Any ArgumentImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::ARGUMENT_ATTRIBUTE_NAME:
+		case uml::UmlPackage::ARGUMENT_ATTRIBUTE_NAME:
 			return eAny(getName()); //200
-		case UmlPackage::ARGUMENT_ATTRIBUTE_VALUE:
+		case uml::UmlPackage::ARGUMENT_ATTRIBUTE_VALUE:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getValue())); //201
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
@@ -168,9 +167,9 @@ bool ArgumentImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::ARGUMENT_ATTRIBUTE_NAME:
+		case uml::UmlPackage::ARGUMENT_ATTRIBUTE_NAME:
 			return getName() != ""; //200
-		case UmlPackage::ARGUMENT_ATTRIBUTE_VALUE:
+		case uml::UmlPackage::ARGUMENT_ATTRIBUTE_VALUE:
 			return getValue() != nullptr; //201
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
@@ -179,14 +178,14 @@ bool ArgumentImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::ARGUMENT_ATTRIBUTE_NAME:
+		case uml::UmlPackage::ARGUMENT_ATTRIBUTE_NAME:
 		{
 			// BOOST CAST
 			std::string _name = newValue->get<std::string>();
 			setName(_name); //200
 			return true;
 		}
-		case UmlPackage::ARGUMENT_ATTRIBUTE_VALUE:
+		case uml::UmlPackage::ARGUMENT_ATTRIBUTE_VALUE:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -211,11 +210,10 @@ void ArgumentImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> l
 	// Create new objects (from references (containment == true))
 	//
 	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -253,18 +251,18 @@ void ArgumentImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoad
 	ecore::EObjectImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void ArgumentImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void ArgumentImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
 
-
-	ecore::EObjectImpl::loadNode(nodeName, loadHandler, ecore::EcoreFactory::eInstance());
+	//load BasePackage Nodes
 }
 
 void ArgumentImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
-		case UmlPackage::ARGUMENT_ATTRIBUTE_VALUE:
+		case uml::UmlPackage::ARGUMENT_ATTRIBUTE_VALUE:
 		{
 			if (references.size() == 1)
 			{
@@ -295,7 +293,6 @@ void ArgumentImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
 
 	
- 
 		// Add attributes
 		if ( this->eIsSet(package->getArgument_Attribute_name()) )
 		{

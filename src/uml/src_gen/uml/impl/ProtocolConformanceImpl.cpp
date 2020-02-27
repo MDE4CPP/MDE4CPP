@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -25,17 +24,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -47,10 +41,11 @@
 
 #include "uml/ProtocolStateMachine.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/Impl/UmlFactoryImpl.hpp"
+#include "uml/Impl/UmlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -95,9 +90,6 @@ ProtocolConformanceImpl::~ProtocolConformanceImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			ProtocolConformanceImpl::ProtocolConformanceImpl(std::weak_ptr<uml::ProtocolStateMachine > par_specificMachine)
 			:ProtocolConformanceImpl()
@@ -105,9 +97,6 @@ ProtocolConformanceImpl::~ProtocolConformanceImpl()
 			    m_specificMachine = par_specificMachine;
 				m_owner = par_specificMachine;
 			}
-
-
-
 
 
 
@@ -157,7 +146,7 @@ std::shared_ptr<ecore::EObject>  ProtocolConformanceImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ProtocolConformanceImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getProtocolConformance_Class();
+	return uml::UmlPackage::eInstance()->getProtocolConformance_Class();
 }
 
 //*********************************
@@ -246,9 +235,9 @@ Any ProtocolConformanceImpl::eGet(int featureID, bool resolve, bool coreType) co
 {
 	switch(featureID)
 	{
-		case UmlPackage::PROTOCOLCONFORMANCE_ATTRIBUTE_GENERALMACHINE:
+		case uml::UmlPackage::PROTOCOLCONFORMANCE_ATTRIBUTE_GENERALMACHINE:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getGeneralMachine())); //1876
-		case UmlPackage::PROTOCOLCONFORMANCE_ATTRIBUTE_SPECIFICMACHINE:
+		case uml::UmlPackage::PROTOCOLCONFORMANCE_ATTRIBUTE_SPECIFICMACHINE:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSpecificMachine().lock())); //1877
 	}
 	return DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
@@ -257,9 +246,9 @@ bool ProtocolConformanceImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::PROTOCOLCONFORMANCE_ATTRIBUTE_GENERALMACHINE:
+		case uml::UmlPackage::PROTOCOLCONFORMANCE_ATTRIBUTE_GENERALMACHINE:
 			return getGeneralMachine() != nullptr; //1876
-		case UmlPackage::PROTOCOLCONFORMANCE_ATTRIBUTE_SPECIFICMACHINE:
+		case uml::UmlPackage::PROTOCOLCONFORMANCE_ATTRIBUTE_SPECIFICMACHINE:
 			return getSpecificMachine().lock() != nullptr; //1877
 	}
 	return DirectedRelationshipImpl::internalEIsSet(featureID);
@@ -268,7 +257,7 @@ bool ProtocolConformanceImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::PROTOCOLCONFORMANCE_ATTRIBUTE_GENERALMACHINE:
+		case uml::UmlPackage::PROTOCOLCONFORMANCE_ATTRIBUTE_GENERALMACHINE:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -276,7 +265,7 @@ bool ProtocolConformanceImpl::eSet(int featureID, Any newValue)
 			setGeneralMachine(_generalMachine); //1876
 			return true;
 		}
-		case UmlPackage::PROTOCOLCONFORMANCE_ATTRIBUTE_SPECIFICMACHINE:
+		case uml::UmlPackage::PROTOCOLCONFORMANCE_ATTRIBUTE_SPECIFICMACHINE:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -301,11 +290,10 @@ void ProtocolConformanceImpl::load(std::shared_ptr<persistence::interfaces::XLoa
 	// Create new objects (from references (containment == true))
 	//
 	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -334,18 +322,19 @@ void ProtocolConformanceImpl::loadAttributes(std::shared_ptr<persistence::interf
 	DirectedRelationshipImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void ProtocolConformanceImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void ProtocolConformanceImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
 
-
-	DirectedRelationshipImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	DirectedRelationshipImpl::loadNode(nodeName, loadHandler);
 }
 
 void ProtocolConformanceImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
-		case UmlPackage::PROTOCOLCONFORMANCE_ATTRIBUTE_GENERALMACHINE:
+		case uml::UmlPackage::PROTOCOLCONFORMANCE_ATTRIBUTE_GENERALMACHINE:
 		{
 			if (references.size() == 1)
 			{
@@ -357,7 +346,7 @@ void ProtocolConformanceImpl::resolveReferences(const int featureID, std::list<s
 			return;
 		}
 
-		case UmlPackage::PROTOCOLCONFORMANCE_ATTRIBUTE_SPECIFICMACHINE:
+		case uml::UmlPackage::PROTOCOLCONFORMANCE_ATTRIBUTE_SPECIFICMACHINE:
 		{
 			if (references.size() == 1)
 			{

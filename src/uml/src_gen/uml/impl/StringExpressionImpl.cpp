@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -26,27 +25,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -80,10 +64,11 @@
 
 #include "uml/ValueSpecificationAction.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/Impl/UmlFactoryImpl.hpp"
+#include "uml/Impl/UmlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -141,18 +126,12 @@ StringExpressionImpl::~StringExpressionImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			StringExpressionImpl::StringExpressionImpl(std::weak_ptr<uml::Element > par_owner)
 			:StringExpressionImpl()
 			{
 			    m_owner = par_owner;
 			}
-
-
-
 
 
 //Additional constructor for the containments back reference
@@ -164,9 +143,6 @@ StringExpressionImpl::~StringExpressionImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			StringExpressionImpl::StringExpressionImpl(std::weak_ptr<uml::Package > par_owningPackage)
 			:StringExpressionImpl()
@@ -174,9 +150,6 @@ StringExpressionImpl::~StringExpressionImpl()
 			    m_owningPackage = par_owningPackage;
 				m_namespace = par_owningPackage;
 			}
-
-
-
 
 
 //Additional constructor for the containments back reference
@@ -188,9 +161,6 @@ StringExpressionImpl::~StringExpressionImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			StringExpressionImpl::StringExpressionImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
 			:StringExpressionImpl()
@@ -200,9 +170,6 @@ StringExpressionImpl::~StringExpressionImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			StringExpressionImpl::StringExpressionImpl(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction)
 			:StringExpressionImpl()
@@ -210,9 +177,6 @@ StringExpressionImpl::~StringExpressionImpl()
 			    m_valueSpecificationAction = par_valueSpecificationAction;
 				m_owner = par_valueSpecificationAction;
 			}
-
-
-
 
 
 
@@ -318,7 +282,7 @@ std::shared_ptr<ecore::EObject>  StringExpressionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> StringExpressionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getStringExpression_Class();
+	return uml::UmlPackage::eInstance()->getStringExpression_Class();
 }
 
 //*********************************
@@ -433,9 +397,9 @@ Any StringExpressionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::STRINGEXPRESSION_ATTRIBUTE_OWNINGEXPRESSION:
+		case uml::UmlPackage::STRINGEXPRESSION_ATTRIBUTE_OWNINGEXPRESSION:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getOwningExpression().lock())); //22519
-		case UmlPackage::STRINGEXPRESSION_ATTRIBUTE_SUBEXPRESSION:
+		case uml::UmlPackage::STRINGEXPRESSION_ATTRIBUTE_SUBEXPRESSION:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::StringExpression>::iterator iter = m_subExpression->begin();
@@ -461,9 +425,9 @@ bool StringExpressionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::STRINGEXPRESSION_ATTRIBUTE_OWNINGEXPRESSION:
+		case uml::UmlPackage::STRINGEXPRESSION_ATTRIBUTE_OWNINGEXPRESSION:
 			return getOwningExpression().lock() != nullptr; //22519
-		case UmlPackage::STRINGEXPRESSION_ATTRIBUTE_SUBEXPRESSION:
+		case uml::UmlPackage::STRINGEXPRESSION_ATTRIBUTE_SUBEXPRESSION:
 			return getSubExpression() != nullptr; //22520
 	}
 	bool result = false;
@@ -479,7 +443,7 @@ bool StringExpressionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::STRINGEXPRESSION_ATTRIBUTE_OWNINGEXPRESSION:
+		case uml::UmlPackage::STRINGEXPRESSION_ATTRIBUTE_OWNINGEXPRESSION:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -487,7 +451,7 @@ bool StringExpressionImpl::eSet(int featureID, Any newValue)
 			setOwningExpression(_owningExpression); //22519
 			return true;
 		}
-		case UmlPackage::STRINGEXPRESSION_ATTRIBUTE_SUBEXPRESSION:
+		case uml::UmlPackage::STRINGEXPRESSION_ATTRIBUTE_SUBEXPRESSION:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -547,11 +511,10 @@ void StringExpressionImpl::load(std::shared_ptr<persistence::interfaces::XLoadHa
 	// Create new objects (from references (containment == true))
 	//
 	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -562,8 +525,9 @@ void StringExpressionImpl::loadAttributes(std::shared_ptr<persistence::interface
 	TemplateableElementImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void StringExpressionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void StringExpressionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
 
 	try
 	{
@@ -574,7 +538,7 @@ void StringExpressionImpl::loadNode(std::string nodeName, std::shared_ptr<persis
 			{
 				typeName = "StringExpression";
 			}
-			std::shared_ptr<ecore::EObject> subExpression = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::STRINGEXPRESSION_ATTRIBUTE_OWNINGEXPRESSION);
+			std::shared_ptr<ecore::EObject> subExpression = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::UmlPackage::STRINGEXPRESSION_ATTRIBUTE_OWNINGEXPRESSION);
 			if (subExpression != nullptr)
 			{
 				loadHandler->handleChild(subExpression);
@@ -590,16 +554,16 @@ void StringExpressionImpl::loadNode(std::string nodeName, std::shared_ptr<persis
 	{
 		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
 	}
-
-	ExpressionImpl::loadNode(nodeName, loadHandler, modelFactory);
-	TemplateableElementImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	ExpressionImpl::loadNode(nodeName, loadHandler);
+	TemplateableElementImpl::loadNode(nodeName, loadHandler);
 }
 
 void StringExpressionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
-		case UmlPackage::STRINGEXPRESSION_ATTRIBUTE_OWNINGEXPRESSION:
+		case uml::UmlPackage::STRINGEXPRESSION_ATTRIBUTE_OWNINGEXPRESSION:
 		{
 			if (references.size() == 1)
 			{

@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -25,19 +24,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -61,10 +53,11 @@
 
 #include "uml/Transition.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/Impl/UmlFactoryImpl.hpp"
+#include "uml/Impl/UmlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -120,9 +113,6 @@ VertexImpl::~VertexImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			VertexImpl::VertexImpl(std::weak_ptr<uml::Namespace > par_namespace)
 			:VertexImpl()
@@ -132,18 +122,12 @@ VertexImpl::~VertexImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			VertexImpl::VertexImpl(std::weak_ptr<uml::Element > par_owner)
 			:VertexImpl()
 			{
 			    m_owner = par_owner;
 			}
-
-
-
 
 
 
@@ -204,7 +188,7 @@ std::shared_ptr<ecore::EObject>  VertexImpl::copy() const
 
 std::shared_ptr<ecore::EClass> VertexImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getVertex_Class();
+	return uml::UmlPackage::eInstance()->getVertex_Class();
 }
 
 //*********************************
@@ -323,9 +307,9 @@ Any VertexImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::VERTEX_ATTRIBUTE_CONTAINER:
+		case uml::UmlPackage::VERTEX_ATTRIBUTE_CONTAINER:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getContainer().lock())); //2559
-		case UmlPackage::VERTEX_ATTRIBUTE_INCOMING:
+		case uml::UmlPackage::VERTEX_ATTRIBUTE_INCOMING:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Transition>::iterator iter = m_incoming->begin();
@@ -337,7 +321,7 @@ Any VertexImpl::eGet(int featureID, bool resolve, bool coreType) const
 			}
 			return eAny(tempList); //25510
 		}
-		case UmlPackage::VERTEX_ATTRIBUTE_OUTGOING:
+		case uml::UmlPackage::VERTEX_ATTRIBUTE_OUTGOING:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Transition>::iterator iter = m_outgoing->begin();
@@ -356,11 +340,11 @@ bool VertexImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::VERTEX_ATTRIBUTE_CONTAINER:
+		case uml::UmlPackage::VERTEX_ATTRIBUTE_CONTAINER:
 			return getContainer().lock() != nullptr; //2559
-		case UmlPackage::VERTEX_ATTRIBUTE_INCOMING:
+		case uml::UmlPackage::VERTEX_ATTRIBUTE_INCOMING:
 			return getIncoming() != nullptr; //25510
-		case UmlPackage::VERTEX_ATTRIBUTE_OUTGOING:
+		case uml::UmlPackage::VERTEX_ATTRIBUTE_OUTGOING:
 			return getOutgoing() != nullptr; //25511
 	}
 	return NamedElementImpl::internalEIsSet(featureID);
@@ -369,7 +353,7 @@ bool VertexImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::VERTEX_ATTRIBUTE_CONTAINER:
+		case uml::UmlPackage::VERTEX_ATTRIBUTE_CONTAINER:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -394,11 +378,10 @@ void VertexImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loa
 	// Create new objects (from references (containment == true))
 	//
 	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -408,18 +391,19 @@ void VertexImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHa
 	NamedElementImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void VertexImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void VertexImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
 
-
-	NamedElementImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	NamedElementImpl::loadNode(nodeName, loadHandler);
 }
 
 void VertexImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
-		case UmlPackage::VERTEX_ATTRIBUTE_CONTAINER:
+		case uml::UmlPackage::VERTEX_ATTRIBUTE_CONTAINER:
 		{
 			if (references.size() == 1)
 			{

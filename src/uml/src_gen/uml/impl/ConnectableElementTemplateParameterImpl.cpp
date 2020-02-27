@@ -17,24 +17,18 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/Union.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -48,10 +42,11 @@
 
 #include "uml/TemplateSignature.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/Impl/UmlFactoryImpl.hpp"
+#include "uml/Impl/UmlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -90,9 +85,6 @@ ConnectableElementTemplateParameterImpl::~ConnectableElementTemplateParameterImp
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			ConnectableElementTemplateParameterImpl::ConnectableElementTemplateParameterImpl(std::weak_ptr<uml::TemplateSignature > par_signature)
 			:ConnectableElementTemplateParameterImpl()
@@ -100,9 +92,6 @@ ConnectableElementTemplateParameterImpl::~ConnectableElementTemplateParameterImp
 			    m_signature = par_signature;
 				m_owner = par_signature;
 			}
-
-
-
 
 
 
@@ -160,7 +149,7 @@ std::shared_ptr<ecore::EObject>  ConnectableElementTemplateParameterImpl::copy()
 
 std::shared_ptr<ecore::EClass> ConnectableElementTemplateParameterImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getConnectableElementTemplateParameter_Class();
+	return uml::UmlPackage::eInstance()->getConnectableElementTemplateParameter_Class();
 }
 
 //*********************************
@@ -249,11 +238,10 @@ void ConnectableElementTemplateParameterImpl::load(std::shared_ptr<persistence::
 	// Create new objects (from references (containment == true))
 	//
 	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -263,11 +251,12 @@ void ConnectableElementTemplateParameterImpl::loadAttributes(std::shared_ptr<per
 	TemplateParameterImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void ConnectableElementTemplateParameterImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void ConnectableElementTemplateParameterImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
 
-
-	TemplateParameterImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	TemplateParameterImpl::loadNode(nodeName, loadHandler);
 }
 
 void ConnectableElementTemplateParameterImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)

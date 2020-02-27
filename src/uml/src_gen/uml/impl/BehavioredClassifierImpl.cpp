@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -26,23 +25,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -98,10 +86,11 @@
 
 #include "uml/UseCase.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/Impl/UmlFactoryImpl.hpp"
+#include "uml/Impl/UmlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -175,18 +164,12 @@ BehavioredClassifierImpl::~BehavioredClassifierImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			BehavioredClassifierImpl::BehavioredClassifierImpl(std::weak_ptr<uml::Element > par_owner)
 			:BehavioredClassifierImpl()
 			{
 			    m_owner = par_owner;
 			}
-
-
-
 
 
 //Additional constructor for the containments back reference
@@ -210,9 +193,6 @@ BehavioredClassifierImpl::BehavioredClassifierImpl(std::weak_ptr<uml::Package > 
 }
 
 
-
-
-
 //Additional constructor for the containments back reference
 			BehavioredClassifierImpl::BehavioredClassifierImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
 			:BehavioredClassifierImpl()
@@ -222,13 +202,7 @@ BehavioredClassifierImpl::BehavioredClassifierImpl(std::weak_ptr<uml::Package > 
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
-
-
-
 
 
 
@@ -450,7 +424,7 @@ std::shared_ptr<ecore::EObject>  BehavioredClassifierImpl::copy() const
 
 std::shared_ptr<ecore::EClass> BehavioredClassifierImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getBehavioredClassifier_Class();
+	return uml::UmlPackage::eInstance()->getBehavioredClassifier_Class();
 }
 
 //*********************************
@@ -583,9 +557,9 @@ Any BehavioredClassifierImpl::eGet(int featureID, bool resolve, bool coreType) c
 {
 	switch(featureID)
 	{
-		case UmlPackage::BEHAVIOREDCLASSIFIER_ATTRIBUTE_CLASSIFIERBEHAVIOR:
+		case uml::UmlPackage::BEHAVIOREDCLASSIFIER_ATTRIBUTE_CLASSIFIERBEHAVIOR:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getClassifierBehavior())); //2738
-		case UmlPackage::BEHAVIOREDCLASSIFIER_ATTRIBUTE_INTERFACEREALIZATION:
+		case uml::UmlPackage::BEHAVIOREDCLASSIFIER_ATTRIBUTE_INTERFACEREALIZATION:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::InterfaceRealization>::iterator iter = m_interfaceRealization->begin();
@@ -597,7 +571,7 @@ Any BehavioredClassifierImpl::eGet(int featureID, bool resolve, bool coreType) c
 			}
 			return eAny(tempList); //2739
 		}
-		case UmlPackage::BEHAVIOREDCLASSIFIER_ATTRIBUTE_OWNEDBEHAVIOR:
+		case uml::UmlPackage::BEHAVIOREDCLASSIFIER_ATTRIBUTE_OWNEDBEHAVIOR:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Behavior>::iterator iter = m_ownedBehavior->begin();
@@ -616,11 +590,11 @@ bool BehavioredClassifierImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::BEHAVIOREDCLASSIFIER_ATTRIBUTE_CLASSIFIERBEHAVIOR:
+		case uml::UmlPackage::BEHAVIOREDCLASSIFIER_ATTRIBUTE_CLASSIFIERBEHAVIOR:
 			return getClassifierBehavior() != nullptr; //2738
-		case UmlPackage::BEHAVIOREDCLASSIFIER_ATTRIBUTE_INTERFACEREALIZATION:
+		case uml::UmlPackage::BEHAVIOREDCLASSIFIER_ATTRIBUTE_INTERFACEREALIZATION:
 			return getInterfaceRealization() != nullptr; //2739
-		case UmlPackage::BEHAVIOREDCLASSIFIER_ATTRIBUTE_OWNEDBEHAVIOR:
+		case uml::UmlPackage::BEHAVIOREDCLASSIFIER_ATTRIBUTE_OWNEDBEHAVIOR:
 			return getOwnedBehavior() != nullptr; //2740
 	}
 	return ClassifierImpl::internalEIsSet(featureID);
@@ -629,7 +603,7 @@ bool BehavioredClassifierImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::BEHAVIOREDCLASSIFIER_ATTRIBUTE_CLASSIFIERBEHAVIOR:
+		case uml::UmlPackage::BEHAVIOREDCLASSIFIER_ATTRIBUTE_CLASSIFIERBEHAVIOR:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -637,7 +611,7 @@ bool BehavioredClassifierImpl::eSet(int featureID, Any newValue)
 			setClassifierBehavior(_classifierBehavior); //2738
 			return true;
 		}
-		case UmlPackage::BEHAVIOREDCLASSIFIER_ATTRIBUTE_INTERFACEREALIZATION:
+		case uml::UmlPackage::BEHAVIOREDCLASSIFIER_ATTRIBUTE_INTERFACEREALIZATION:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -673,7 +647,7 @@ bool BehavioredClassifierImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case UmlPackage::BEHAVIOREDCLASSIFIER_ATTRIBUTE_OWNEDBEHAVIOR:
+		case uml::UmlPackage::BEHAVIOREDCLASSIFIER_ATTRIBUTE_OWNEDBEHAVIOR:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -726,11 +700,10 @@ void BehavioredClassifierImpl::load(std::shared_ptr<persistence::interfaces::XLo
 	// Create new objects (from references (containment == true))
 	//
 	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -759,8 +732,9 @@ void BehavioredClassifierImpl::loadAttributes(std::shared_ptr<persistence::inter
 	ClassifierImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void BehavioredClassifierImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void BehavioredClassifierImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
 
 	try
 	{
@@ -771,7 +745,7 @@ void BehavioredClassifierImpl::loadNode(std::string nodeName, std::shared_ptr<pe
 			{
 				typeName = "InterfaceRealization";
 			}
-			std::shared_ptr<ecore::EObject> interfaceRealization = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::INTERFACEREALIZATION_ATTRIBUTE_IMPLEMENTINGCLASSIFIER);
+			std::shared_ptr<ecore::EObject> interfaceRealization = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::UmlPackage::INTERFACEREALIZATION_ATTRIBUTE_IMPLEMENTINGCLASSIFIER);
 			if (interfaceRealization != nullptr)
 			{
 				loadHandler->handleChild(interfaceRealization);
@@ -787,7 +761,7 @@ void BehavioredClassifierImpl::loadNode(std::string nodeName, std::shared_ptr<pe
 				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			std::shared_ptr<ecore::EObject> ownedBehavior = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::BEHAVIOR_ATTRIBUTE_BEHAVIOREDCLASSIFIER);
+			std::shared_ptr<ecore::EObject> ownedBehavior = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::UmlPackage::BEHAVIOR_ATTRIBUTE_BEHAVIOREDCLASSIFIER);
 			if (ownedBehavior != nullptr)
 			{
 				loadHandler->handleChild(ownedBehavior);
@@ -803,15 +777,15 @@ void BehavioredClassifierImpl::loadNode(std::string nodeName, std::shared_ptr<pe
 	{
 		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
 	}
-
-	ClassifierImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	ClassifierImpl::loadNode(nodeName, loadHandler);
 }
 
 void BehavioredClassifierImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
-		case UmlPackage::BEHAVIOREDCLASSIFIER_ATTRIBUTE_CLASSIFIERBEHAVIOR:
+		case uml::UmlPackage::BEHAVIOREDCLASSIFIER_ATTRIBUTE_CLASSIFIERBEHAVIOR:
 		{
 			if (references.size() == 1)
 			{
@@ -880,7 +854,7 @@ void BehavioredClassifierImpl::saveContent(std::shared_ptr<persistence::interfac
 		std::shared_ptr<SubsetUnion<uml::Behavior, uml::NamedElement>> list_ownedBehavior = this->getOwnedBehavior();
 		for (std::shared_ptr<uml::Behavior> ownedBehavior : *list_ownedBehavior) 
 		{
-			saveHandler->addReference(ownedBehavior, "ownedBehavior", ownedBehavior->eClass() != package->getBehavior_Class());
+			saveHandler->addReference(ownedBehavior, "ownedBehavior", ownedBehavior->eClass() !=uml::UmlPackage::eInstance()->getBehavior_Class());
 		}
 	}
 	catch (std::exception& e)

@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/Union.hpp"
@@ -25,17 +24,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -49,10 +43,11 @@
 
 #include "uml/TemplateSignature.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/Impl/UmlFactoryImpl.hpp"
+#include "uml/Impl/UmlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -91,9 +86,6 @@ OperationTemplateParameterImpl::~OperationTemplateParameterImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			OperationTemplateParameterImpl::OperationTemplateParameterImpl(std::weak_ptr<uml::TemplateSignature > par_signature)
 			:OperationTemplateParameterImpl()
@@ -101,9 +93,6 @@ OperationTemplateParameterImpl::~OperationTemplateParameterImpl()
 			    m_signature = par_signature;
 				m_owner = par_signature;
 			}
-
-
-
 
 
 
@@ -161,7 +150,7 @@ std::shared_ptr<ecore::EObject>  OperationTemplateParameterImpl::copy() const
 
 std::shared_ptr<ecore::EClass> OperationTemplateParameterImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getOperationTemplateParameter_Class();
+	return uml::UmlPackage::eInstance()->getOperationTemplateParameter_Class();
 }
 
 //*********************************
@@ -255,11 +244,10 @@ void OperationTemplateParameterImpl::load(std::shared_ptr<persistence::interface
 	// Create new objects (from references (containment == true))
 	//
 	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -269,11 +257,12 @@ void OperationTemplateParameterImpl::loadAttributes(std::shared_ptr<persistence:
 	TemplateParameterImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void OperationTemplateParameterImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void OperationTemplateParameterImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
 
-
-	TemplateParameterImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	TemplateParameterImpl::loadNode(nodeName, loadHandler);
 }
 
 void OperationTemplateParameterImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)

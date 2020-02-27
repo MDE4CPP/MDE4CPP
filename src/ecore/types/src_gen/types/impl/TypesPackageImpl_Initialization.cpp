@@ -13,6 +13,8 @@
 
 //depending model packages
 
+
+
 using namespace types;
 
 void TypesPackageImpl::initializePackageContents()
@@ -34,6 +36,7 @@ void TypesPackageImpl::initializePackageContents()
  	// Initialize classes and features; add operations and parameters
 
 	initializePackageEDataTypes();
+
 }
 
 

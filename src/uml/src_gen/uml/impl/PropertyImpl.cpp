@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -26,30 +25,13 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 #include "uml/AggregationKind.hpp"
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -95,10 +77,11 @@
 
 #include "uml/ValueSpecification.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/Impl/UmlFactoryImpl.hpp"
+#include "uml/Impl/UmlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -212,9 +195,6 @@ PropertyImpl::~PropertyImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			PropertyImpl::PropertyImpl(std::weak_ptr<uml::Class > par_class)
 			:PropertyImpl()
@@ -222,9 +202,6 @@ PropertyImpl::~PropertyImpl()
 			    m_class = par_class;
 				m_namespace = par_class;
 			}
-
-
-
 
 
 //Additional constructor for the containments back reference
@@ -236,9 +213,6 @@ PropertyImpl::~PropertyImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			PropertyImpl::PropertyImpl(std::weak_ptr<uml::Interface > par_interface)
 			:PropertyImpl()
@@ -246,9 +220,6 @@ PropertyImpl::~PropertyImpl()
 			    m_interface = par_interface;
 				m_namespace = par_interface;
 			}
-
-
-
 
 
 //Additional constructor for the containments back reference
@@ -260,18 +231,12 @@ PropertyImpl::~PropertyImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			PropertyImpl::PropertyImpl(std::weak_ptr<uml::Element > par_owner)
 			:PropertyImpl()
 			{
 			    m_owner = par_owner;
 			}
-
-
-
 
 
 //Additional constructor for the containments back reference
@@ -283,9 +248,6 @@ PropertyImpl::~PropertyImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			PropertyImpl::PropertyImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
 			:PropertyImpl()
@@ -293,9 +255,6 @@ PropertyImpl::~PropertyImpl()
 			    m_owningTemplateParameter = par_owningTemplateParameter;
 				m_owner = par_owningTemplateParameter;
 			}
-
-
-
 
 
 
@@ -453,7 +412,7 @@ std::shared_ptr<ecore::EObject>  PropertyImpl::copy() const
 
 std::shared_ptr<ecore::EClass> PropertyImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getProperty_Class();
+	return uml::UmlPackage::eInstance()->getProperty_Class();
 }
 
 //*********************************
@@ -871,35 +830,35 @@ Any PropertyImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::PROPERTY_ATTRIBUTE_AGGREGATION:
+		case uml::UmlPackage::PROPERTY_ATTRIBUTE_AGGREGATION:
 			return eAny(getAggregation()); //18630
-		case UmlPackage::PROPERTY_ATTRIBUTE_ASSOCIATION:
+		case uml::UmlPackage::PROPERTY_ATTRIBUTE_ASSOCIATION:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getAssociation())); //18643
-		case UmlPackage::PROPERTY_ATTRIBUTE_ASSOCIATIONEND:
+		case uml::UmlPackage::PROPERTY_ATTRIBUTE_ASSOCIATIONEND:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getAssociationEnd().lock())); //18631
-		case UmlPackage::PROPERTY_ATTRIBUTE_CLASS:
+		case uml::UmlPackage::PROPERTY_ATTRIBUTE_CLASS:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getClass().lock())); //18633
-		case UmlPackage::PROPERTY_ATTRIBUTE_DATATYPE:
+		case uml::UmlPackage::PROPERTY_ATTRIBUTE_DATATYPE:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getDatatype().lock())); //18627
-		case UmlPackage::PROPERTY_ATTRIBUTE_DEFAULT:
+		case uml::UmlPackage::PROPERTY_ATTRIBUTE_DEFAULT:
 			return eAny(getDefault()); //18629
-		case UmlPackage::PROPERTY_ATTRIBUTE_DEFAULTVALUE:
+		case uml::UmlPackage::PROPERTY_ATTRIBUTE_DEFAULTVALUE:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getDefaultValue())); //18634
-		case UmlPackage::PROPERTY_ATTRIBUTE_INTERFACE:
+		case uml::UmlPackage::PROPERTY_ATTRIBUTE_INTERFACE:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getInterface().lock())); //18628
-		case UmlPackage::PROPERTY_ATTRIBUTE_ISCOMPOSITE:
+		case uml::UmlPackage::PROPERTY_ATTRIBUTE_ISCOMPOSITE:
 			return eAny(getIsComposite()); //18635
-		case UmlPackage::PROPERTY_ATTRIBUTE_ISDERIVED:
+		case uml::UmlPackage::PROPERTY_ATTRIBUTE_ISDERIVED:
 			return eAny(getIsDerived()); //18636
-		case UmlPackage::PROPERTY_ATTRIBUTE_ISDERIVEDUNION:
+		case uml::UmlPackage::PROPERTY_ATTRIBUTE_ISDERIVEDUNION:
 			return eAny(getIsDerivedUnion()); //18637
-		case UmlPackage::PROPERTY_ATTRIBUTE_ISID:
+		case uml::UmlPackage::PROPERTY_ATTRIBUTE_ISID:
 			return eAny(getIsID()); //18638
-		case UmlPackage::PROPERTY_ATTRIBUTE_OPPOSITE:
+		case uml::UmlPackage::PROPERTY_ATTRIBUTE_OPPOSITE:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getOpposite())); //18639
-		case UmlPackage::PROPERTY_ATTRIBUTE_OWNINGASSOCIATION:
+		case uml::UmlPackage::PROPERTY_ATTRIBUTE_OWNINGASSOCIATION:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getOwningAssociation().lock())); //18640
-		case UmlPackage::PROPERTY_ATTRIBUTE_QUALIFIER:
+		case uml::UmlPackage::PROPERTY_ATTRIBUTE_QUALIFIER:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Property>::iterator iter = m_qualifier->begin();
@@ -911,7 +870,7 @@ Any PropertyImpl::eGet(int featureID, bool resolve, bool coreType) const
 			}
 			return eAny(tempList); //18632
 		}
-		case UmlPackage::PROPERTY_ATTRIBUTE_REDEFINEDPROPERTY:
+		case uml::UmlPackage::PROPERTY_ATTRIBUTE_REDEFINEDPROPERTY:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Property>::iterator iter = m_redefinedProperty->begin();
@@ -923,7 +882,7 @@ Any PropertyImpl::eGet(int featureID, bool resolve, bool coreType) const
 			}
 			return eAny(tempList); //18641
 		}
-		case UmlPackage::PROPERTY_ATTRIBUTE_SUBSETTEDPROPERTY:
+		case uml::UmlPackage::PROPERTY_ATTRIBUTE_SUBSETTEDPROPERTY:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Property>::iterator iter = m_subsettedProperty->begin();
@@ -954,39 +913,39 @@ bool PropertyImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::PROPERTY_ATTRIBUTE_AGGREGATION:
+		case uml::UmlPackage::PROPERTY_ATTRIBUTE_AGGREGATION:
 			return m_aggregation != AggregationKind::NONE;; //18630
-		case UmlPackage::PROPERTY_ATTRIBUTE_ASSOCIATION:
+		case uml::UmlPackage::PROPERTY_ATTRIBUTE_ASSOCIATION:
 			return getAssociation() != nullptr; //18643
-		case UmlPackage::PROPERTY_ATTRIBUTE_ASSOCIATIONEND:
+		case uml::UmlPackage::PROPERTY_ATTRIBUTE_ASSOCIATIONEND:
 			return getAssociationEnd().lock() != nullptr; //18631
-		case UmlPackage::PROPERTY_ATTRIBUTE_CLASS:
+		case uml::UmlPackage::PROPERTY_ATTRIBUTE_CLASS:
 			return getClass().lock() != nullptr; //18633
-		case UmlPackage::PROPERTY_ATTRIBUTE_DATATYPE:
+		case uml::UmlPackage::PROPERTY_ATTRIBUTE_DATATYPE:
 			return getDatatype().lock() != nullptr; //18627
-		case UmlPackage::PROPERTY_ATTRIBUTE_DEFAULT:
+		case uml::UmlPackage::PROPERTY_ATTRIBUTE_DEFAULT:
 			return getDefault() != ""; //18629
-		case UmlPackage::PROPERTY_ATTRIBUTE_DEFAULTVALUE:
+		case uml::UmlPackage::PROPERTY_ATTRIBUTE_DEFAULTVALUE:
 			return getDefaultValue() != nullptr; //18634
-		case UmlPackage::PROPERTY_ATTRIBUTE_INTERFACE:
+		case uml::UmlPackage::PROPERTY_ATTRIBUTE_INTERFACE:
 			return getInterface().lock() != nullptr; //18628
-		case UmlPackage::PROPERTY_ATTRIBUTE_ISCOMPOSITE:
+		case uml::UmlPackage::PROPERTY_ATTRIBUTE_ISCOMPOSITE:
 			return getIsComposite() != false; //18635
-		case UmlPackage::PROPERTY_ATTRIBUTE_ISDERIVED:
+		case uml::UmlPackage::PROPERTY_ATTRIBUTE_ISDERIVED:
 			return getIsDerived() != false; //18636
-		case UmlPackage::PROPERTY_ATTRIBUTE_ISDERIVEDUNION:
+		case uml::UmlPackage::PROPERTY_ATTRIBUTE_ISDERIVEDUNION:
 			return getIsDerivedUnion() != false; //18637
-		case UmlPackage::PROPERTY_ATTRIBUTE_ISID:
+		case uml::UmlPackage::PROPERTY_ATTRIBUTE_ISID:
 			return getIsID() != false; //18638
-		case UmlPackage::PROPERTY_ATTRIBUTE_OPPOSITE:
+		case uml::UmlPackage::PROPERTY_ATTRIBUTE_OPPOSITE:
 			return getOpposite() != nullptr; //18639
-		case UmlPackage::PROPERTY_ATTRIBUTE_OWNINGASSOCIATION:
+		case uml::UmlPackage::PROPERTY_ATTRIBUTE_OWNINGASSOCIATION:
 			return getOwningAssociation().lock() != nullptr; //18640
-		case UmlPackage::PROPERTY_ATTRIBUTE_QUALIFIER:
+		case uml::UmlPackage::PROPERTY_ATTRIBUTE_QUALIFIER:
 			return getQualifier() != nullptr; //18632
-		case UmlPackage::PROPERTY_ATTRIBUTE_REDEFINEDPROPERTY:
+		case uml::UmlPackage::PROPERTY_ATTRIBUTE_REDEFINEDPROPERTY:
 			return getRedefinedProperty() != nullptr; //18641
-		case UmlPackage::PROPERTY_ATTRIBUTE_SUBSETTEDPROPERTY:
+		case uml::UmlPackage::PROPERTY_ATTRIBUTE_SUBSETTEDPROPERTY:
 			return getSubsettedProperty() != nullptr; //18642
 	}
 	bool result = false;
@@ -1007,14 +966,14 @@ bool PropertyImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::PROPERTY_ATTRIBUTE_AGGREGATION:
+		case uml::UmlPackage::PROPERTY_ATTRIBUTE_AGGREGATION:
 		{
 			// BOOST CAST
 			uml::AggregationKind _aggregation = newValue->get<uml::AggregationKind>();
 			setAggregation(_aggregation); //18630
 			return true;
 		}
-		case UmlPackage::PROPERTY_ATTRIBUTE_ASSOCIATION:
+		case uml::UmlPackage::PROPERTY_ATTRIBUTE_ASSOCIATION:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -1022,7 +981,7 @@ bool PropertyImpl::eSet(int featureID, Any newValue)
 			setAssociation(_association); //18643
 			return true;
 		}
-		case UmlPackage::PROPERTY_ATTRIBUTE_ASSOCIATIONEND:
+		case uml::UmlPackage::PROPERTY_ATTRIBUTE_ASSOCIATIONEND:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -1030,7 +989,7 @@ bool PropertyImpl::eSet(int featureID, Any newValue)
 			setAssociationEnd(_associationEnd); //18631
 			return true;
 		}
-		case UmlPackage::PROPERTY_ATTRIBUTE_CLASS:
+		case uml::UmlPackage::PROPERTY_ATTRIBUTE_CLASS:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -1038,7 +997,7 @@ bool PropertyImpl::eSet(int featureID, Any newValue)
 			setClass(_class); //18633
 			return true;
 		}
-		case UmlPackage::PROPERTY_ATTRIBUTE_DATATYPE:
+		case uml::UmlPackage::PROPERTY_ATTRIBUTE_DATATYPE:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -1046,14 +1005,14 @@ bool PropertyImpl::eSet(int featureID, Any newValue)
 			setDatatype(_datatype); //18627
 			return true;
 		}
-		case UmlPackage::PROPERTY_ATTRIBUTE_DEFAULT:
+		case uml::UmlPackage::PROPERTY_ATTRIBUTE_DEFAULT:
 		{
 			// BOOST CAST
 			std::string _default = newValue->get<std::string>();
 			setDefault(_default); //18629
 			return true;
 		}
-		case UmlPackage::PROPERTY_ATTRIBUTE_DEFAULTVALUE:
+		case uml::UmlPackage::PROPERTY_ATTRIBUTE_DEFAULTVALUE:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -1061,7 +1020,7 @@ bool PropertyImpl::eSet(int featureID, Any newValue)
 			setDefaultValue(_defaultValue); //18634
 			return true;
 		}
-		case UmlPackage::PROPERTY_ATTRIBUTE_INTERFACE:
+		case uml::UmlPackage::PROPERTY_ATTRIBUTE_INTERFACE:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -1069,35 +1028,35 @@ bool PropertyImpl::eSet(int featureID, Any newValue)
 			setInterface(_interface); //18628
 			return true;
 		}
-		case UmlPackage::PROPERTY_ATTRIBUTE_ISCOMPOSITE:
+		case uml::UmlPackage::PROPERTY_ATTRIBUTE_ISCOMPOSITE:
 		{
 			// BOOST CAST
 			bool _isComposite = newValue->get<bool>();
 			setIsComposite(_isComposite); //18635
 			return true;
 		}
-		case UmlPackage::PROPERTY_ATTRIBUTE_ISDERIVED:
+		case uml::UmlPackage::PROPERTY_ATTRIBUTE_ISDERIVED:
 		{
 			// BOOST CAST
 			bool _isDerived = newValue->get<bool>();
 			setIsDerived(_isDerived); //18636
 			return true;
 		}
-		case UmlPackage::PROPERTY_ATTRIBUTE_ISDERIVEDUNION:
+		case uml::UmlPackage::PROPERTY_ATTRIBUTE_ISDERIVEDUNION:
 		{
 			// BOOST CAST
 			bool _isDerivedUnion = newValue->get<bool>();
 			setIsDerivedUnion(_isDerivedUnion); //18637
 			return true;
 		}
-		case UmlPackage::PROPERTY_ATTRIBUTE_ISID:
+		case uml::UmlPackage::PROPERTY_ATTRIBUTE_ISID:
 		{
 			// BOOST CAST
 			bool _isID = newValue->get<bool>();
 			setIsID(_isID); //18638
 			return true;
 		}
-		case UmlPackage::PROPERTY_ATTRIBUTE_OPPOSITE:
+		case uml::UmlPackage::PROPERTY_ATTRIBUTE_OPPOSITE:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -1105,7 +1064,7 @@ bool PropertyImpl::eSet(int featureID, Any newValue)
 			setOpposite(_opposite); //18639
 			return true;
 		}
-		case UmlPackage::PROPERTY_ATTRIBUTE_OWNINGASSOCIATION:
+		case uml::UmlPackage::PROPERTY_ATTRIBUTE_OWNINGASSOCIATION:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -1113,7 +1072,7 @@ bool PropertyImpl::eSet(int featureID, Any newValue)
 			setOwningAssociation(_owningAssociation); //18640
 			return true;
 		}
-		case UmlPackage::PROPERTY_ATTRIBUTE_QUALIFIER:
+		case uml::UmlPackage::PROPERTY_ATTRIBUTE_QUALIFIER:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -1149,7 +1108,7 @@ bool PropertyImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case UmlPackage::PROPERTY_ATTRIBUTE_REDEFINEDPROPERTY:
+		case uml::UmlPackage::PROPERTY_ATTRIBUTE_REDEFINEDPROPERTY:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -1185,7 +1144,7 @@ bool PropertyImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case UmlPackage::PROPERTY_ATTRIBUTE_SUBSETTEDPROPERTY:
+		case uml::UmlPackage::PROPERTY_ATTRIBUTE_SUBSETTEDPROPERTY:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -1250,11 +1209,10 @@ void PropertyImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> l
 	// Create new objects (from references (containment == true))
 	//
 	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -1353,8 +1311,9 @@ void PropertyImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoad
 	StructuralFeatureImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void PropertyImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void PropertyImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
 
 	try
 	{
@@ -1382,7 +1341,7 @@ void PropertyImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::i
 			{
 				typeName = "Property";
 			}
-			std::shared_ptr<ecore::EObject> qualifier = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::PROPERTY_ATTRIBUTE_ASSOCIATIONEND);
+			std::shared_ptr<ecore::EObject> qualifier = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::UmlPackage::PROPERTY_ATTRIBUTE_ASSOCIATIONEND);
 			if (qualifier != nullptr)
 			{
 				loadHandler->handleChild(qualifier);
@@ -1398,17 +1357,17 @@ void PropertyImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::i
 	{
 		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
 	}
-
-	ConnectableElementImpl::loadNode(nodeName, loadHandler, modelFactory);
-	DeploymentTargetImpl::loadNode(nodeName, loadHandler, modelFactory);
-	StructuralFeatureImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	ConnectableElementImpl::loadNode(nodeName, loadHandler);
+	DeploymentTargetImpl::loadNode(nodeName, loadHandler);
+	StructuralFeatureImpl::loadNode(nodeName, loadHandler);
 }
 
 void PropertyImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
-		case UmlPackage::PROPERTY_ATTRIBUTE_ASSOCIATION:
+		case uml::UmlPackage::PROPERTY_ATTRIBUTE_ASSOCIATION:
 		{
 			if (references.size() == 1)
 			{
@@ -1420,7 +1379,7 @@ void PropertyImpl::resolveReferences(const int featureID, std::list<std::shared_
 			return;
 		}
 
-		case UmlPackage::PROPERTY_ATTRIBUTE_ASSOCIATIONEND:
+		case uml::UmlPackage::PROPERTY_ATTRIBUTE_ASSOCIATIONEND:
 		{
 			if (references.size() == 1)
 			{
@@ -1432,7 +1391,7 @@ void PropertyImpl::resolveReferences(const int featureID, std::list<std::shared_
 			return;
 		}
 
-		case UmlPackage::PROPERTY_ATTRIBUTE_CLASS:
+		case uml::UmlPackage::PROPERTY_ATTRIBUTE_CLASS:
 		{
 			if (references.size() == 1)
 			{
@@ -1444,7 +1403,7 @@ void PropertyImpl::resolveReferences(const int featureID, std::list<std::shared_
 			return;
 		}
 
-		case UmlPackage::PROPERTY_ATTRIBUTE_DATATYPE:
+		case uml::UmlPackage::PROPERTY_ATTRIBUTE_DATATYPE:
 		{
 			if (references.size() == 1)
 			{
@@ -1456,7 +1415,7 @@ void PropertyImpl::resolveReferences(const int featureID, std::list<std::shared_
 			return;
 		}
 
-		case UmlPackage::PROPERTY_ATTRIBUTE_INTERFACE:
+		case uml::UmlPackage::PROPERTY_ATTRIBUTE_INTERFACE:
 		{
 			if (references.size() == 1)
 			{
@@ -1468,7 +1427,7 @@ void PropertyImpl::resolveReferences(const int featureID, std::list<std::shared_
 			return;
 		}
 
-		case UmlPackage::PROPERTY_ATTRIBUTE_OPPOSITE:
+		case uml::UmlPackage::PROPERTY_ATTRIBUTE_OPPOSITE:
 		{
 			if (references.size() == 1)
 			{
@@ -1480,7 +1439,7 @@ void PropertyImpl::resolveReferences(const int featureID, std::list<std::shared_
 			return;
 		}
 
-		case UmlPackage::PROPERTY_ATTRIBUTE_OWNINGASSOCIATION:
+		case uml::UmlPackage::PROPERTY_ATTRIBUTE_OWNINGASSOCIATION:
 		{
 			if (references.size() == 1)
 			{
@@ -1492,7 +1451,7 @@ void PropertyImpl::resolveReferences(const int featureID, std::list<std::shared_
 			return;
 		}
 
-		case UmlPackage::PROPERTY_ATTRIBUTE_REDEFINEDPROPERTY:
+		case uml::UmlPackage::PROPERTY_ATTRIBUTE_REDEFINEDPROPERTY:
 		{
 			std::shared_ptr<Bag<uml::Property>> _redefinedProperty = getRedefinedProperty();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -1506,7 +1465,7 @@ void PropertyImpl::resolveReferences(const int featureID, std::list<std::shared_
 			return;
 		}
 
-		case UmlPackage::PROPERTY_ATTRIBUTE_SUBSETTEDPROPERTY:
+		case uml::UmlPackage::PROPERTY_ATTRIBUTE_SUBSETTEDPROPERTY:
 		{
 			std::shared_ptr<Bag<uml::Property>> _subsettedProperty = getSubsettedProperty();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -1574,7 +1533,6 @@ void PropertyImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 			saveHandler->addReference(qualifier, "qualifier", qualifier->eClass() != package->getProperty_Class());
 		}
 	
- 
 		// Add attributes
 		if ( this->eIsSet(package->getProperty_Attribute_aggregation()) )
 		{

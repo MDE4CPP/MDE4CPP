@@ -2338,9 +2338,6 @@ namespace uml
 			 
 			 
 
-			//Package
-			virtual std::shared_ptr<UmlPackage> getUmlPackage() const;
-
 		private:
 			static UmlFactory* create();
             std::map<std::string,int> m_idMap;

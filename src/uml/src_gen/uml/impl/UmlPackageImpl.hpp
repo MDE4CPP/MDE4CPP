@@ -267,7 +267,6 @@ namespace ecore
 	class EcoreFactory;
 }
 
-
 namespace uml
 {
 	class UmlPackageImpl : public ecore::EPackageImpl ,virtual public UmlPackage

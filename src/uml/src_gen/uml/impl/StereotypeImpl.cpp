@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -26,23 +25,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -116,10 +104,11 @@
 
 #include "uml/UseCase.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/Impl/UmlFactoryImpl.hpp"
+#include "uml/Impl/UmlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -177,18 +166,12 @@ StereotypeImpl::~StereotypeImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			StereotypeImpl::StereotypeImpl(std::weak_ptr<uml::Element > par_owner)
 			:StereotypeImpl()
 			{
 			    m_owner = par_owner;
 			}
-
-
-
 
 
 //Additional constructor for the containments back reference
@@ -212,9 +195,6 @@ StereotypeImpl::StereotypeImpl(std::weak_ptr<uml::Package > par_Package, const i
 }
 
 
-
-
-
 //Additional constructor for the containments back reference
 			StereotypeImpl::StereotypeImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
 			:StereotypeImpl()
@@ -224,13 +204,7 @@ StereotypeImpl::StereotypeImpl(std::weak_ptr<uml::Package > par_Package, const i
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
-
-
-
 
 
 
@@ -512,7 +486,7 @@ std::shared_ptr<ecore::EObject>  StereotypeImpl::copy() const
 
 std::shared_ptr<ecore::EClass> StereotypeImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getStereotype_Class();
+	return uml::UmlPackage::eInstance()->getStereotype_Class();
 }
 
 //*********************************
@@ -723,7 +697,7 @@ Any StereotypeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::STEREOTYPE_ATTRIBUTE_ICON:
+		case uml::UmlPackage::STEREOTYPE_ATTRIBUTE_ICON:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Image>::iterator iter = m_icon->begin();
@@ -735,7 +709,7 @@ Any StereotypeImpl::eGet(int featureID, bool resolve, bool coreType) const
 			}
 			return eAny(tempList); //22452
 		}
-		case UmlPackage::STEREOTYPE_ATTRIBUTE_PROFILE:
+		case uml::UmlPackage::STEREOTYPE_ATTRIBUTE_PROFILE:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getProfile())); //22453
 	}
 	return ClassImpl::eGet(featureID, resolve, coreType);
@@ -744,9 +718,9 @@ bool StereotypeImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::STEREOTYPE_ATTRIBUTE_ICON:
+		case uml::UmlPackage::STEREOTYPE_ATTRIBUTE_ICON:
 			return getIcon() != nullptr; //22452
-		case UmlPackage::STEREOTYPE_ATTRIBUTE_PROFILE:
+		case uml::UmlPackage::STEREOTYPE_ATTRIBUTE_PROFILE:
 			return getProfile() != nullptr; //22453
 	}
 	return ClassImpl::internalEIsSet(featureID);
@@ -755,7 +729,7 @@ bool StereotypeImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::STEREOTYPE_ATTRIBUTE_ICON:
+		case uml::UmlPackage::STEREOTYPE_ATTRIBUTE_ICON:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -808,11 +782,10 @@ void StereotypeImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler>
 	// Create new objects (from references (containment == true))
 	//
 	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -822,8 +795,9 @@ void StereotypeImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLo
 	ClassImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void StereotypeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void StereotypeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
 
 	try
 	{
@@ -852,8 +826,8 @@ void StereotypeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence:
 	{
 		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
 	}
-
-	ClassImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	ClassImpl::loadNode(nodeName, loadHandler);
 }
 
 void StereotypeImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)

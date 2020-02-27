@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -26,17 +25,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -56,10 +50,11 @@
 
 #include "uml/StringExpression.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/Impl/UmlFactoryImpl.hpp"
+#include "uml/Impl/UmlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -119,18 +114,12 @@ RedefinableElementImpl::~RedefinableElementImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			RedefinableElementImpl::RedefinableElementImpl(std::weak_ptr<uml::Element > par_owner)
 			:RedefinableElementImpl()
 			{
 			    m_owner = par_owner;
 			}
-
-
-
 
 
 
@@ -190,7 +179,7 @@ std::shared_ptr<ecore::EObject>  RedefinableElementImpl::copy() const
 
 std::shared_ptr<ecore::EClass> RedefinableElementImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getRedefinableElement_Class();
+	return uml::UmlPackage::eInstance()->getRedefinableElement_Class();
 }
 
 //*********************************
@@ -299,9 +288,9 @@ Any RedefinableElementImpl::eGet(int featureID, bool resolve, bool coreType) con
 {
 	switch(featureID)
 	{
-		case UmlPackage::REDEFINABLEELEMENT_ATTRIBUTE_ISLEAF:
+		case uml::UmlPackage::REDEFINABLEELEMENT_ATTRIBUTE_ISLEAF:
 			return eAny(getIsLeaf()); //2059
-		case UmlPackage::REDEFINABLEELEMENT_ATTRIBUTE_REDEFINEDELEMENT:
+		case uml::UmlPackage::REDEFINABLEELEMENT_ATTRIBUTE_REDEFINEDELEMENT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::RedefinableElement>::iterator iter = m_redefinedElement->begin();
@@ -313,7 +302,7 @@ Any RedefinableElementImpl::eGet(int featureID, bool resolve, bool coreType) con
 			}
 			return eAny(tempList); //20510
 		}
-		case UmlPackage::REDEFINABLEELEMENT_ATTRIBUTE_REDEFINITIONCONTEXT:
+		case uml::UmlPackage::REDEFINABLEELEMENT_ATTRIBUTE_REDEFINITIONCONTEXT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Classifier>::iterator iter = m_redefinitionContext->begin();
@@ -332,11 +321,11 @@ bool RedefinableElementImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::REDEFINABLEELEMENT_ATTRIBUTE_ISLEAF:
+		case uml::UmlPackage::REDEFINABLEELEMENT_ATTRIBUTE_ISLEAF:
 			return getIsLeaf() != false; //2059
-		case UmlPackage::REDEFINABLEELEMENT_ATTRIBUTE_REDEFINEDELEMENT:
+		case uml::UmlPackage::REDEFINABLEELEMENT_ATTRIBUTE_REDEFINEDELEMENT:
 			return getRedefinedElement() != nullptr; //20510
-		case UmlPackage::REDEFINABLEELEMENT_ATTRIBUTE_REDEFINITIONCONTEXT:
+		case uml::UmlPackage::REDEFINABLEELEMENT_ATTRIBUTE_REDEFINITIONCONTEXT:
 			return getRedefinitionContext() != nullptr; //20511
 	}
 	return NamedElementImpl::internalEIsSet(featureID);
@@ -345,7 +334,7 @@ bool RedefinableElementImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::REDEFINABLEELEMENT_ATTRIBUTE_ISLEAF:
+		case uml::UmlPackage::REDEFINABLEELEMENT_ATTRIBUTE_ISLEAF:
 		{
 			// BOOST CAST
 			bool _isLeaf = newValue->get<bool>();
@@ -369,11 +358,10 @@ void RedefinableElementImpl::load(std::shared_ptr<persistence::interfaces::XLoad
 	// Create new objects (from references (containment == true))
 	//
 	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -404,11 +392,12 @@ void RedefinableElementImpl::loadAttributes(std::shared_ptr<persistence::interfa
 	NamedElementImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void RedefinableElementImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void RedefinableElementImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
 
-
-	NamedElementImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	NamedElementImpl::loadNode(nodeName, loadHandler);
 }
 
 void RedefinableElementImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
@@ -439,7 +428,6 @@ void RedefinableElementImpl::saveContent(std::shared_ptr<persistence::interfaces
 		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
 
 	
- 
 		// Add attributes
 		if ( this->eIsSet(package->getRedefinableElement_Attribute_isLeaf()) )
 		{

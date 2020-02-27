@@ -33,14 +33,60 @@ SET(CMAKE_CXX_FLAGS_RELEASE " -O3  ${ENABLED_DEBUG_MESSAGE}")
 string(REPLACE "\\" "/" MDE4CPP_HOME $ENV{MDE4CPP_HOME})
 
 SET(SOURCE_FILES
-	impl/PSCSFactoryImpl.cpp
+# Factories and packages
 	PSCSFactory.cpp
+	impl/PSCSFactoryImpl.cpp
+	PSCSPackage.cpp
 	impl/PSCSPackageImpl.cpp
 	impl/PSCSPackageImpl_Creation.cpp
 	impl/PSCSPackageImpl_Initialization.cpp
-	PSCSPackage.cpp
+	Semantics/SemanticsFactory.cpp
+	Semantics/impl/SemanticsFactoryImpl.cpp
+	Semantics/SemanticsPackage.cpp
+	Semantics/impl/SemanticsPackageImpl.cpp
+	Semantics/impl/SemanticsPackageImpl_Creation.cpp
+	Semantics/impl/SemanticsPackageImpl_Initialization.cpp
+	Semantics/Actions/ActionsFactory.cpp
+	Semantics/Actions/impl/ActionsFactoryImpl.cpp
+	Semantics/Actions/ActionsPackage.cpp
+	Semantics/Actions/impl/ActionsPackageImpl.cpp
+	Semantics/Actions/impl/ActionsPackageImpl_Creation.cpp
+	Semantics/Actions/impl/ActionsPackageImpl_Initialization.cpp
+	Semantics/StructuredClassifiers/StructuredClassifiersFactory.cpp
+	Semantics/StructuredClassifiers/impl/StructuredClassifiersFactoryImpl.cpp
+	Semantics/StructuredClassifiers/StructuredClassifiersPackage.cpp
+	Semantics/StructuredClassifiers/impl/StructuredClassifiersPackageImpl.cpp
+	Semantics/StructuredClassifiers/impl/StructuredClassifiersPackageImpl_Creation.cpp
+	Semantics/StructuredClassifiers/impl/StructuredClassifiersPackageImpl_Initialization.cpp
+	Semantics/Loci/LociFactory.cpp
+	Semantics/Loci/impl/LociFactoryImpl.cpp
+	Semantics/Loci/LociPackage.cpp
+	Semantics/Loci/impl/LociPackageImpl.cpp
+	Semantics/Loci/impl/LociPackageImpl_Creation.cpp
+	Semantics/Loci/impl/LociPackageImpl_Initialization.cpp
+	Semantics/CommonBehavior/CommonBehaviorFactory.cpp
+	Semantics/CommonBehavior/impl/CommonBehaviorFactoryImpl.cpp
+	Semantics/CommonBehavior/CommonBehaviorPackage.cpp
+	Semantics/CommonBehavior/impl/CommonBehaviorPackageImpl.cpp
+	Semantics/CommonBehavior/impl/CommonBehaviorPackageImpl_Creation.cpp
+	Semantics/CommonBehavior/impl/CommonBehaviorPackageImpl_Initialization.cpp
+	Semantics/Values/ValuesFactory.cpp
+	Semantics/Values/impl/ValuesFactoryImpl.cpp
+	Semantics/Values/ValuesPackage.cpp
+	Semantics/Values/impl/ValuesPackageImpl.cpp
+	Semantics/Values/impl/ValuesPackageImpl_Creation.cpp
+	Semantics/Values/impl/ValuesPackageImpl_Initialization.cpp
+	Semantics/Classification/ClassificationFactory.cpp
+	Semantics/Classification/impl/ClassificationFactoryImpl.cpp
+	Semantics/Classification/ClassificationPackage.cpp
+	Semantics/Classification/impl/ClassificationPackageImpl.cpp
+	Semantics/Classification/impl/ClassificationPackageImpl_Creation.cpp
+	Semantics/Classification/impl/ClassificationPackageImpl_Initialization.cpp
+	
+# Package plugin
 	impl/PSCSPluginImpl.cpp
 	PSCSPlugin.cpp
+# Package content
 	Semantics/Actions/impl/CS_AcceptCallActionActivationImpl.cpp
 	Semantics/Actions/impl/CS_AcceptEventActionActivationImpl.cpp
 	Semantics/Actions/impl/CS_AddStructuralFeatureValueActionActivationImpl.cpp

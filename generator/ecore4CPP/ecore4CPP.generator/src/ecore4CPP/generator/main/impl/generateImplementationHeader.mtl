@@ -64,7 +64,7 @@ virtual public [ClassWithNamespace(aClass, sClass)/]Impl[/for][if (aClass.eSuper
 			[if (not (aClass.ePackage = aClass.getRootPackage()))]
 			friend class [aClass.getRootPackage().name/][aClass.getPackageAccess(true)/]::[aClass.ePackage.name.toUpperFirst()/]FactoryImpl;
 			[else]
-			friend class [aClass.getRootPackage().name/][aClass.ePackage.name.toUpperFirst()/]FactoryImpl;
+			friend class [aClass.ePackage.name.toUpperFirst()/]FactoryImpl;
 			[/if]
 			[className/]();
 			[aClass.generateGetThisPtr()/]

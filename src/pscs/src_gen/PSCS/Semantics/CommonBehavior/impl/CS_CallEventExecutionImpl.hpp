@@ -13,7 +13,7 @@
 //Model includes
 #include "../CS_CallEventExecution.hpp"
 
-#include "PSCS/impl/PSCSFactoryImpl.hpp"
+#include "PSCS/Semantics/CommonBehavior/Impl/CommonBehaviorFactoryImpl.hpp"
 #include "fUML/Semantics/CommonBehavior/impl/CallEventExecutionImpl.hpp"
 
 //*********************************
@@ -29,7 +29,7 @@ namespace PSCS::Semantics::CommonBehavior
 			CS_CallEventExecutionImpl& operator=(CS_CallEventExecutionImpl const&) = delete;
 
 		protected:
-			friend class PSCS::PSCSFactoryImpl;
+			friend class PSCS::Semantics::CommonBehavior::CommonBehaviorFactoryImpl;
 			CS_CallEventExecutionImpl();
 			virtual std::shared_ptr<CS_CallEventExecution> getThisCS_CallEventExecutionPtr() const;
 			virtual void setThisCS_CallEventExecutionPtr(std::weak_ptr<CS_CallEventExecution> thisCS_CallEventExecutionPtr);
@@ -88,7 +88,7 @@ namespace PSCS::Semantics::CommonBehavior
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<PSCS::PSCSFactory> modelFactory);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
 			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;

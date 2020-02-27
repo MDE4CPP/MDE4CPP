@@ -23,7 +23,6 @@
 #include "ecore/EcorePackage.hpp"
 #include "types/TypesPackage.hpp"
 
-
 using namespace uml;
 
 bool UmlPackageImpl::isInited = false;

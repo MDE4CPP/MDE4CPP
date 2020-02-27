@@ -17,22 +17,18 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/Union.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -40,10 +36,11 @@
 
 #include "uml/Element.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/Impl/UmlFactoryImpl.hpp"
+#include "uml/Impl/UmlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -92,9 +89,6 @@ RelationshipImpl::~RelationshipImpl()
 
 
 
-
-
-
 RelationshipImpl::RelationshipImpl(const RelationshipImpl & obj):RelationshipImpl()
 {
 	//create copy of all Attributes
@@ -132,7 +126,7 @@ std::shared_ptr<ecore::EObject>  RelationshipImpl::copy() const
 
 std::shared_ptr<ecore::EClass> RelationshipImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getRelationship_Class();
+	return uml::UmlPackage::eInstance()->getRelationship_Class();
 }
 
 //*********************************
@@ -187,7 +181,7 @@ Any RelationshipImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::RELATIONSHIP_ATTRIBUTE_RELATEDELEMENT:
+		case uml::UmlPackage::RELATIONSHIP_ATTRIBUTE_RELATEDELEMENT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Element>::iterator iter = m_relatedElement->begin();
@@ -206,7 +200,7 @@ bool RelationshipImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::RELATIONSHIP_ATTRIBUTE_RELATEDELEMENT:
+		case uml::UmlPackage::RELATIONSHIP_ATTRIBUTE_RELATEDELEMENT:
 			return getRelatedElement() != nullptr; //2093
 	}
 	return ElementImpl::internalEIsSet(featureID);
@@ -232,11 +226,10 @@ void RelationshipImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandle
 	// Create new objects (from references (containment == true))
 	//
 	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -246,11 +239,12 @@ void RelationshipImpl::loadAttributes(std::shared_ptr<persistence::interfaces::X
 	ElementImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void RelationshipImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void RelationshipImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
 
-
-	ElementImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	ElementImpl::loadNode(nodeName, loadHandler);
 }
 
 void RelationshipImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)

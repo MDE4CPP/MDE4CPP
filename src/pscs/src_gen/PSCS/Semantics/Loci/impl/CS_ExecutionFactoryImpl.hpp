@@ -13,7 +13,7 @@
 //Model includes
 #include "../CS_ExecutionFactory.hpp"
 
-#include "PSCS/impl/PSCSFactoryImpl.hpp"
+#include "PSCS/Semantics/Loci/Impl/LociFactoryImpl.hpp"
 #include "fUML/Semantics/Loci/impl/ExecutionFactoryImpl.hpp"
 
 //*********************************
@@ -29,7 +29,7 @@ namespace PSCS::Semantics::Loci
 			CS_ExecutionFactoryImpl& operator=(CS_ExecutionFactoryImpl const&) = delete;
 
 		protected:
-			friend class PSCS::PSCSFactoryImpl;
+			friend class PSCS::Semantics::Loci::LociFactoryImpl;
 			CS_ExecutionFactoryImpl();
 			virtual std::shared_ptr<CS_ExecutionFactory> getThisCS_ExecutionFactoryPtr() const;
 			virtual void setThisCS_ExecutionFactoryPtr(std::weak_ptr<CS_ExecutionFactory> thisCS_ExecutionFactoryPtr);
@@ -91,7 +91,7 @@ namespace PSCS::Semantics::Loci
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<PSCS::PSCSFactory> modelFactory);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
 			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;

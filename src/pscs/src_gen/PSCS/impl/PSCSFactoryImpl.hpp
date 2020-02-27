@@ -37,9 +37,6 @@ namespace PSCS
 			//Creator functions
 			 
 
-			//Package
-			virtual std::shared_ptr<PSCSPackage> getPSCSPackage() const;
-
 		private:
 			static PSCSFactory* create();
             std::map<std::string,int> m_idMap;

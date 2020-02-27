@@ -13,7 +13,7 @@
 //Model includes
 #include "../CS_InteractionPoint.hpp"
 
-#include "PSCS/impl/PSCSFactoryImpl.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/Impl/StructuredClassifiersFactoryImpl.hpp"
 #include "fUML/Semantics/StructuredClassifiers/impl/ReferenceImpl.hpp"
 
 //*********************************
@@ -29,7 +29,7 @@ namespace PSCS::Semantics::StructuredClassifiers
 			CS_InteractionPointImpl& operator=(CS_InteractionPointImpl const&) = delete;
 
 		protected:
-			friend class PSCS::PSCSFactoryImpl;
+			friend class PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactoryImpl;
 			CS_InteractionPointImpl();
 			virtual std::shared_ptr<CS_InteractionPoint> getThisCS_InteractionPointPtr() const;
 			virtual void setThisCS_InteractionPointPtr(std::weak_ptr<CS_InteractionPoint> thisCS_InteractionPointPtr);
@@ -101,7 +101,7 @@ namespace PSCS::Semantics::StructuredClassifiers
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<PSCS::PSCSFactory> modelFactory);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
 			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;

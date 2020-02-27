@@ -17,22 +17,18 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/Union.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "ecore/impl/EcorePackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "ecore/EcoreFactory.hpp"
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "ecore/EcorePackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -40,10 +36,11 @@
 
 #include "ecore/EObject.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
+//Factories an Package includes
+#include "ecore/Impl/EcoreFactoryImpl.hpp"
+#include "ecore/Impl/EcorePackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -97,9 +94,6 @@ EModelElementImpl::~EModelElementImpl()
 
 
 
-
-
-
 EModelElementImpl::EModelElementImpl(const EModelElementImpl & obj):EModelElementImpl()
 {
 	//create copy of all Attributes
@@ -142,7 +136,7 @@ std::shared_ptr<ecore::EObject>  EModelElementImpl::copy() const
 
 std::shared_ptr<EClass> EModelElementImpl::eStaticClass() const
 {
-	return EcorePackageImpl::eInstance()->getEModelElement_Class();
+	return ecore::EcorePackage::eInstance()->getEModelElement_Class();
 }
 
 //*********************************
@@ -211,7 +205,7 @@ Any EModelElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case EcorePackage::EMODELELEMENT_ATTRIBUTE_EANNOTATIONS:
+		case ecore::EcorePackage::EMODELELEMENT_ATTRIBUTE_EANNOTATIONS:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<ecore::EAnnotation>::iterator iter = m_eAnnotations->begin();
@@ -230,7 +224,7 @@ bool EModelElementImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case EcorePackage::EMODELELEMENT_ATTRIBUTE_EANNOTATIONS:
+		case ecore::EcorePackage::EMODELELEMENT_ATTRIBUTE_EANNOTATIONS:
 			return getEAnnotations() != nullptr; //373
 	}
 	return EObjectImpl::internalEIsSet(featureID);
@@ -239,7 +233,7 @@ bool EModelElementImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case EcorePackage::EMODELELEMENT_ATTRIBUTE_EANNOTATIONS:
+		case ecore::EcorePackage::EMODELELEMENT_ATTRIBUTE_EANNOTATIONS:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -292,11 +286,10 @@ void EModelElementImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandl
 	// Create new objects (from references (containment == true))
 	//
 	// get EcoreFactory
-	std::shared_ptr<ecore::EcoreFactory> modelFactory = ecore::EcoreFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -306,8 +299,9 @@ void EModelElementImpl::loadAttributes(std::shared_ptr<persistence::interfaces::
 	EObjectImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void EModelElementImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<ecore::EcoreFactory> modelFactory)
+void EModelElementImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<ecore::EcoreFactory> modelFactory=ecore::EcoreFactory::eInstance();
 
 	try
 	{
@@ -318,7 +312,7 @@ void EModelElementImpl::loadNode(std::string nodeName, std::shared_ptr<persisten
 			{
 				typeName = "EAnnotation";
 			}
-			std::shared_ptr<ecore::EObject> eAnnotations = modelFactory->create(typeName, loadHandler->getCurrentObject(), EcorePackage::EANNOTATION_ATTRIBUTE_EMODELELEMENT);
+			std::shared_ptr<ecore::EObject> eAnnotations = modelFactory->create(typeName, loadHandler->getCurrentObject(), ecore::EcorePackage::EANNOTATION_ATTRIBUTE_EMODELELEMENT);
 			if (eAnnotations != nullptr)
 			{
 				loadHandler->handleChild(eAnnotations);
@@ -334,8 +328,8 @@ void EModelElementImpl::loadNode(std::string nodeName, std::shared_ptr<persisten
 	{
 		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
 	}
-
-	EObjectImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	EObjectImpl::loadNode(nodeName, loadHandler);
 }
 
 void EModelElementImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<EObject> > references)

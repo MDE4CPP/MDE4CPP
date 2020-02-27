@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -26,21 +25,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -76,10 +66,11 @@
 
 #include "uml/ValueSpecification.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/Impl/UmlFactoryImpl.hpp"
+#include "uml/Impl/UmlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -121,9 +112,6 @@ JoinNodeImpl::~JoinNodeImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			JoinNodeImpl::JoinNodeImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
 			:JoinNodeImpl()
@@ -131,9 +119,6 @@ JoinNodeImpl::~JoinNodeImpl()
 			    m_inStructuredNode = par_inStructuredNode;
 				m_owner = par_inStructuredNode;
 			}
-
-
-
 
 
 //Additional constructor for the containments back reference
@@ -145,18 +130,12 @@ JoinNodeImpl::~JoinNodeImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			JoinNodeImpl::JoinNodeImpl(std::weak_ptr<uml::Element > par_owner)
 			:JoinNodeImpl()
 			{
 			    m_owner = par_owner;
 			}
-
-
-
 
 
 
@@ -262,7 +241,7 @@ std::shared_ptr<ecore::EObject>  JoinNodeImpl::copy() const
 
 std::shared_ptr<ecore::EClass> JoinNodeImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getJoinNode_Class();
+	return uml::UmlPackage::eInstance()->getJoinNode_Class();
 }
 
 //*********************************
@@ -367,9 +346,9 @@ Any JoinNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::JOINNODE_ATTRIBUTE_ISCOMBINEDUPLICATE:
+		case uml::UmlPackage::JOINNODE_ATTRIBUTE_ISCOMBINEDUPLICATE:
 			return eAny(getIsCombineDuplicate()); //13220
-		case UmlPackage::JOINNODE_ATTRIBUTE_JOINSPEC:
+		case uml::UmlPackage::JOINNODE_ATTRIBUTE_JOINSPEC:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getJoinSpec())); //13221
 	}
 	return ControlNodeImpl::eGet(featureID, resolve, coreType);
@@ -378,9 +357,9 @@ bool JoinNodeImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::JOINNODE_ATTRIBUTE_ISCOMBINEDUPLICATE:
+		case uml::UmlPackage::JOINNODE_ATTRIBUTE_ISCOMBINEDUPLICATE:
 			return getIsCombineDuplicate() != true; //13220
-		case UmlPackage::JOINNODE_ATTRIBUTE_JOINSPEC:
+		case uml::UmlPackage::JOINNODE_ATTRIBUTE_JOINSPEC:
 			return getJoinSpec() != nullptr; //13221
 	}
 	return ControlNodeImpl::internalEIsSet(featureID);
@@ -389,14 +368,14 @@ bool JoinNodeImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::JOINNODE_ATTRIBUTE_ISCOMBINEDUPLICATE:
+		case uml::UmlPackage::JOINNODE_ATTRIBUTE_ISCOMBINEDUPLICATE:
 		{
 			// BOOST CAST
 			bool _isCombineDuplicate = newValue->get<bool>();
 			setIsCombineDuplicate(_isCombineDuplicate); //13220
 			return true;
 		}
-		case UmlPackage::JOINNODE_ATTRIBUTE_JOINSPEC:
+		case uml::UmlPackage::JOINNODE_ATTRIBUTE_JOINSPEC:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -421,11 +400,10 @@ void JoinNodeImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> l
 	// Create new objects (from references (containment == true))
 	//
 	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -456,8 +434,9 @@ void JoinNodeImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoad
 	ControlNodeImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void JoinNodeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void JoinNodeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
 
 	try
 	{
@@ -486,8 +465,8 @@ void JoinNodeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::i
 	{
 		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
 	}
-
-	ControlNodeImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	ControlNodeImpl::loadNode(nodeName, loadHandler);
 }
 
 void JoinNodeImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
@@ -534,7 +513,6 @@ void JoinNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 			saveHandler->addReference(joinSpec, "joinSpec", joinSpec->eClass() != package->getValueSpecification_Class());
 		}
 	
- 
 		// Add attributes
 		if ( this->eIsSet(package->getJoinNode_Attribute_isCombineDuplicate()) )
 		{

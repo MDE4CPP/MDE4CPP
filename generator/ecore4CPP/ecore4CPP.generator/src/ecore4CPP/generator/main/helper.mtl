@@ -79,7 +79,7 @@
 [query public packageGetter(aReference : EReference) : String = if oclIsUndefined() then 'nullptr' else getterPrefix().concat(getMemberNameUpperFirst()).concat('()') endif/]
 [query public packageGetter(aAttribute : EAttribute) : String = 'get'.concat(getMemberNameUpperFirst()).concat('()') /]
 
-[query public metamodelPackageNameForEstructuralFeture(aStructural : EStructuralFeature,aClass: EClass) : String = if( aStructural.eContainingClass.ePackage = aClass.getRootPackage()) then generateNamespaceDefinition(aStructural.eContainingClass.ePackage).concat(aStructural.eContainingClass.ePackage.name).concat('Package') else generateNamespaceDefinition(aStructural.eContainingClass).concat('::').concat(aStructural.eContainingClass.ePackage.name).concat('Package') endif/]
+[query public metamodelPackageNameForEstructuralFeture(aStructural : EStructuralFeature,aClass: EClass) : String = if( aStructural.eContainingClass.ePackage = aClass.getRootPackage()) then generateNamespaceDefinition(aStructural.eContainingClass.ePackage).concat('::').concat(aStructural.eContainingClass.ePackage.name.toUpperFirst()).concat('Package') else generateNamespaceDefinition(aStructural.eContainingClass).concat('::').concat(aStructural.eContainingClass.ePackage.name).concat('Package') endif/]
 
 [**
  * Get a string of the getterfunction for the element in the corresponding metamodel package 

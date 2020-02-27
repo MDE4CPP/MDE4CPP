@@ -17,13 +17,13 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "PSCS/impl/PSCSPackageImpl.hpp"
+
+//Includes from codegen annotation
 #include "fUML/FUMLFactory.hpp"
 
 #include "PSCS/Semantics/CommonBehavior/CS_EventOccurrence.hpp"
@@ -31,8 +31,6 @@
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "PSCS/PSCSFactory.hpp"
-#include "PSCS/PSCSPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -56,10 +54,15 @@
 
 #include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "PSCS/PSCSPackage.hpp"
+//Factories an Package includes
+#include "PSCS/Semantics/StructuredClassifiers/Impl/StructuredClassifiersFactoryImpl.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/Impl/StructuredClassifiersPackageImpl.hpp"
+
+#include "PSCS/Semantics/SemanticsFactory.hpp"
+#include "PSCS/Semantics/SemanticsPackage.hpp"
 #include "PSCS/PSCSFactory.hpp"
+#include "PSCS/PSCSPackage.hpp"
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -128,7 +131,7 @@ std::shared_ptr<ecore::EObject>  CS_InteractionPointImpl::copy() const
 
 std::shared_ptr<ecore::EClass> CS_InteractionPointImpl::eStaticClass() const
 {
-	return PSCSPackageImpl::eInstance()->getCS_InteractionPoint_Class();
+	return pSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getCS_InteractionPoint_Class();
 }
 
 //*********************************
@@ -234,9 +237,9 @@ Any CS_InteractionPointImpl::eGet(int featureID, bool resolve, bool coreType) co
 {
 	switch(featureID)
 	{
-		case PSCS::PSCSPackage::CS_INTERACTIONPOINT_ATTRIBUTE_DEFININGPORT:
+		case PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::CS_INTERACTIONPOINT_ATTRIBUTE_DEFININGPORT:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getDefiningPort())); //172
-		case PSCS::PSCSPackage::CS_INTERACTIONPOINT_ATTRIBUTE_OWNER:
+		case PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::CS_INTERACTIONPOINT_ATTRIBUTE_OWNER:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getOwner())); //171
 	}
 	return fUML::Semantics::StructuredClassifiers::ReferenceImpl::eGet(featureID, resolve, coreType);
@@ -245,9 +248,9 @@ bool CS_InteractionPointImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case PSCS::PSCSPackage::CS_INTERACTIONPOINT_ATTRIBUTE_DEFININGPORT:
+		case PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::CS_INTERACTIONPOINT_ATTRIBUTE_DEFININGPORT:
 			return getDefiningPort() != nullptr; //172
-		case PSCS::PSCSPackage::CS_INTERACTIONPOINT_ATTRIBUTE_OWNER:
+		case PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::CS_INTERACTIONPOINT_ATTRIBUTE_OWNER:
 			return getOwner() != nullptr; //171
 	}
 	return fUML::Semantics::StructuredClassifiers::ReferenceImpl::internalEIsSet(featureID);
@@ -256,7 +259,7 @@ bool CS_InteractionPointImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case PSCS::PSCSPackage::CS_INTERACTIONPOINT_ATTRIBUTE_DEFININGPORT:
+		case PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::CS_INTERACTIONPOINT_ATTRIBUTE_DEFININGPORT:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -264,7 +267,7 @@ bool CS_InteractionPointImpl::eSet(int featureID, Any newValue)
 			setDefiningPort(_definingPort); //172
 			return true;
 		}
-		case PSCS::PSCSPackage::CS_INTERACTIONPOINT_ATTRIBUTE_OWNER:
+		case PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::CS_INTERACTIONPOINT_ATTRIBUTE_OWNER:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -289,11 +292,10 @@ void CS_InteractionPointImpl::load(std::shared_ptr<persistence::interfaces::XLoa
 	// Create new objects (from references (containment == true))
 	//
 	// get PSCSFactory
-	std::shared_ptr<PSCS::PSCSFactory> modelFactory = PSCS::PSCSFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -329,18 +331,19 @@ void CS_InteractionPointImpl::loadAttributes(std::shared_ptr<persistence::interf
 	fUML::Semantics::StructuredClassifiers::ReferenceImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void CS_InteractionPointImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<PSCS::PSCSFactory> modelFactory)
+void CS_InteractionPointImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory> modelFactory=PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance();
 
-
-	fUML::Semantics::StructuredClassifiers::ReferenceImpl::loadNode(nodeName, loadHandler, fUML::FUMLFactory::eInstance());
+	//load BasePackage Nodes
+	fUML::Semantics::StructuredClassifiers::ReferenceImpl::loadNode(nodeName, loadHandler);
 }
 
 void CS_InteractionPointImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
-		case PSCS::PSCSPackage::CS_INTERACTIONPOINT_ATTRIBUTE_DEFININGPORT:
+		case PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::CS_INTERACTIONPOINT_ATTRIBUTE_DEFININGPORT:
 		{
 			if (references.size() == 1)
 			{
@@ -352,7 +355,7 @@ void CS_InteractionPointImpl::resolveReferences(const int featureID, std::list<s
 			return;
 		}
 
-		case PSCS::PSCSPackage::CS_INTERACTIONPOINT_ATTRIBUTE_OWNER:
+		case PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::CS_INTERACTIONPOINT_ATTRIBUTE_OWNER:
 		{
 			if (references.size() == 1)
 			{
@@ -390,7 +393,7 @@ void CS_InteractionPointImpl::saveContent(std::shared_ptr<persistence::interface
 {
 	try
 	{
-		std::shared_ptr<PSCS::PSCSPackage> package = PSCS::PSCSPackage::eInstance();
+		std::shared_ptr<pSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage> package = pSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance();
 
 	
 

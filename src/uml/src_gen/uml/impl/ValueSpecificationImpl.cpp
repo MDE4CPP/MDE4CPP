@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -25,25 +24,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -71,10 +57,11 @@
 
 #include "uml/ValueSpecificationAction.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/Impl/UmlFactoryImpl.hpp"
+#include "uml/Impl/UmlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -120,18 +107,12 @@ ValueSpecificationImpl::~ValueSpecificationImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			ValueSpecificationImpl::ValueSpecificationImpl(std::weak_ptr<uml::Element > par_owner)
 			:ValueSpecificationImpl()
 			{
 			    m_owner = par_owner;
 			}
-
-
-
 
 
 //Additional constructor for the containments back reference
@@ -143,9 +124,6 @@ ValueSpecificationImpl::~ValueSpecificationImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			ValueSpecificationImpl::ValueSpecificationImpl(std::weak_ptr<uml::Slot > par_owningSlot)
 			:ValueSpecificationImpl()
@@ -153,9 +131,6 @@ ValueSpecificationImpl::~ValueSpecificationImpl()
 			    m_owningSlot = par_owningSlot;
 				m_owner = par_owningSlot;
 			}
-
-
-
 
 
 //Additional constructor for the containments back reference
@@ -167,9 +142,6 @@ ValueSpecificationImpl::~ValueSpecificationImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			ValueSpecificationImpl::ValueSpecificationImpl(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction)
 			:ValueSpecificationImpl()
@@ -177,9 +149,6 @@ ValueSpecificationImpl::~ValueSpecificationImpl()
 			    m_valueSpecificationAction = par_valueSpecificationAction;
 				m_owner = par_valueSpecificationAction;
 			}
-
-
-
 
 
 
@@ -244,7 +213,7 @@ std::shared_ptr<ecore::EObject>  ValueSpecificationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ValueSpecificationImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getValueSpecification_Class();
+	return uml::UmlPackage::eInstance()->getValueSpecification_Class();
 }
 
 //*********************************
@@ -387,9 +356,9 @@ Any ValueSpecificationImpl::eGet(int featureID, bool resolve, bool coreType) con
 {
 	switch(featureID)
 	{
-		case UmlPackage::VALUESPECIFICATION_ATTRIBUTE_OWNINGSLOT:
+		case uml::UmlPackage::VALUESPECIFICATION_ATTRIBUTE_OWNINGSLOT:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getOwningSlot().lock())); //25113
-		case UmlPackage::VALUESPECIFICATION_ATTRIBUTE_VALUESPECIFICATIONACTION:
+		case uml::UmlPackage::VALUESPECIFICATION_ATTRIBUTE_VALUESPECIFICATIONACTION:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getValueSpecificationAction().lock())); //25114
 	}
 	Any result;
@@ -405,9 +374,9 @@ bool ValueSpecificationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::VALUESPECIFICATION_ATTRIBUTE_OWNINGSLOT:
+		case uml::UmlPackage::VALUESPECIFICATION_ATTRIBUTE_OWNINGSLOT:
 			return getOwningSlot().lock() != nullptr; //25113
-		case UmlPackage::VALUESPECIFICATION_ATTRIBUTE_VALUESPECIFICATIONACTION:
+		case uml::UmlPackage::VALUESPECIFICATION_ATTRIBUTE_VALUESPECIFICATIONACTION:
 			return getValueSpecificationAction().lock() != nullptr; //25114
 	}
 	bool result = false;
@@ -423,7 +392,7 @@ bool ValueSpecificationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::VALUESPECIFICATION_ATTRIBUTE_OWNINGSLOT:
+		case uml::UmlPackage::VALUESPECIFICATION_ATTRIBUTE_OWNINGSLOT:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -431,7 +400,7 @@ bool ValueSpecificationImpl::eSet(int featureID, Any newValue)
 			setOwningSlot(_owningSlot); //25113
 			return true;
 		}
-		case UmlPackage::VALUESPECIFICATION_ATTRIBUTE_VALUESPECIFICATIONACTION:
+		case uml::UmlPackage::VALUESPECIFICATION_ATTRIBUTE_VALUESPECIFICATIONACTION:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -463,11 +432,10 @@ void ValueSpecificationImpl::load(std::shared_ptr<persistence::interfaces::XLoad
 	// Create new objects (from references (containment == true))
 	//
 	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -478,19 +446,20 @@ void ValueSpecificationImpl::loadAttributes(std::shared_ptr<persistence::interfa
 	TypedElementImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void ValueSpecificationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void ValueSpecificationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
 
-
-	PackageableElementImpl::loadNode(nodeName, loadHandler, modelFactory);
-	TypedElementImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	PackageableElementImpl::loadNode(nodeName, loadHandler);
+	TypedElementImpl::loadNode(nodeName, loadHandler);
 }
 
 void ValueSpecificationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
-		case UmlPackage::VALUESPECIFICATION_ATTRIBUTE_OWNINGSLOT:
+		case uml::UmlPackage::VALUESPECIFICATION_ATTRIBUTE_OWNINGSLOT:
 		{
 			if (references.size() == 1)
 			{
@@ -502,7 +471,7 @@ void ValueSpecificationImpl::resolveReferences(const int featureID, std::list<st
 			return;
 		}
 
-		case UmlPackage::VALUESPECIFICATION_ATTRIBUTE_VALUESPECIFICATIONACTION:
+		case uml::UmlPackage::VALUESPECIFICATION_ATTRIBUTE_VALUESPECIFICATIONACTION:
 		{
 			if (references.size() == 1)
 			{

@@ -132,9 +132,6 @@ namespace ecore
 			 
 			 
 
-			//Package
-			virtual std::shared_ptr<EcorePackage> getEcorePackage() const;
-
 		private:
 			static EcoreFactory* create();
             std::map<std::string,int> m_idMap;

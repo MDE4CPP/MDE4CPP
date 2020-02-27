@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -25,21 +24,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -61,10 +51,11 @@
 
 #include "uml/TemplateParameter.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/Impl/UmlFactoryImpl.hpp"
+#include "uml/Impl/UmlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -106,18 +97,12 @@ SignalEventImpl::~SignalEventImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			SignalEventImpl::SignalEventImpl(std::weak_ptr<uml::Element > par_owner)
 			:SignalEventImpl()
 			{
 			    m_owner = par_owner;
 			}
-
-
-
 
 
 //Additional constructor for the containments back reference
@@ -129,9 +114,6 @@ SignalEventImpl::~SignalEventImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			SignalEventImpl::SignalEventImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
 			:SignalEventImpl()
@@ -139,9 +121,6 @@ SignalEventImpl::~SignalEventImpl()
 			    m_owningTemplateParameter = par_owningTemplateParameter;
 				m_owner = par_owningTemplateParameter;
 			}
-
-
-
 
 
 
@@ -202,7 +181,7 @@ std::shared_ptr<ecore::EObject>  SignalEventImpl::copy() const
 
 std::shared_ptr<ecore::EClass> SignalEventImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getSignalEvent_Class();
+	return uml::UmlPackage::eInstance()->getSignalEvent_Class();
 }
 
 //*********************************
@@ -283,7 +262,7 @@ Any SignalEventImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::SIGNALEVENT_ATTRIBUTE_SIGNAL:
+		case uml::UmlPackage::SIGNALEVENT_ATTRIBUTE_SIGNAL:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSignal())); //21712
 	}
 	return MessageEventImpl::eGet(featureID, resolve, coreType);
@@ -292,7 +271,7 @@ bool SignalEventImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::SIGNALEVENT_ATTRIBUTE_SIGNAL:
+		case uml::UmlPackage::SIGNALEVENT_ATTRIBUTE_SIGNAL:
 			return getSignal() != nullptr; //21712
 	}
 	return MessageEventImpl::internalEIsSet(featureID);
@@ -301,7 +280,7 @@ bool SignalEventImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::SIGNALEVENT_ATTRIBUTE_SIGNAL:
+		case uml::UmlPackage::SIGNALEVENT_ATTRIBUTE_SIGNAL:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -326,11 +305,10 @@ void SignalEventImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler
 	// Create new objects (from references (containment == true))
 	//
 	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -359,18 +337,19 @@ void SignalEventImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XL
 	MessageEventImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void SignalEventImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void SignalEventImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
 
-
-	MessageEventImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	MessageEventImpl::loadNode(nodeName, loadHandler);
 }
 
 void SignalEventImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
-		case UmlPackage::SIGNALEVENT_ATTRIBUTE_SIGNAL:
+		case uml::UmlPackage::SIGNALEVENT_ATTRIBUTE_SIGNAL:
 		{
 			if (references.size() == 1)
 			{

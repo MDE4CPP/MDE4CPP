@@ -21,10 +21,13 @@
 #include "ecore/EcoreFactory.hpp"
 
 //depending model packages
+#include "PSCS/Semantics/impl/SemanticsPackageImpl.hpp"
+
 #include "ecore/EcorePackage.hpp"
 #include "fUML/FUMLPackage.hpp"
 #include "types/TypesPackage.hpp"
 #include "uml/UmlPackage.hpp"
+
 
 using namespace PSCS;
 
@@ -47,6 +50,8 @@ void PSCSPackageImpl::initializePackageContents()
  	// Initialize classes and features; add operations and parameters
 
 	initializePackageEDataTypes();
+
+	std::dynamic_pointer_cast<PSCS::Semantics::SemanticsPackageImpl>(getSemantics_Package())->initializePackageContents();
 }
 
 
@@ -54,3 +59,4 @@ void PSCSPackageImpl::initializePackageEDataTypes()
 {
 	
 }
+

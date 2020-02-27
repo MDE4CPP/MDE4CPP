@@ -40,8 +40,6 @@ namespace types
 			virtual std::shared_ptr<ecore::EObject> create(std::shared_ptr<ecore::EClass> _class, std::shared_ptr<EObject> _container=nullptr, const int referenceID = -1) const = 0;
 
 			
-			//Package
-			virtual std::shared_ptr<TypesPackage> getTypesPackage() const = 0;
 	};
 }
 #endif /* end of include guard: TYPESFACTORY_HPP */

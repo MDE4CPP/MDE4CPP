@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/Union.hpp"
@@ -25,17 +24,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -47,10 +41,11 @@
 
 #include "uml/TemplateableElement.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/Impl/UmlFactoryImpl.hpp"
+#include "uml/Impl/UmlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -118,9 +113,6 @@ TemplateSignatureImpl::~TemplateSignatureImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			TemplateSignatureImpl::TemplateSignatureImpl(std::weak_ptr<uml::TemplateableElement > par_template)
 			:TemplateSignatureImpl()
@@ -128,9 +120,6 @@ TemplateSignatureImpl::~TemplateSignatureImpl()
 			    m_template = par_template;
 				m_owner = par_template;
 			}
-
-
-
 
 
 
@@ -188,7 +177,7 @@ std::shared_ptr<ecore::EObject>  TemplateSignatureImpl::copy() const
 
 std::shared_ptr<ecore::EClass> TemplateSignatureImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getTemplateSignature_Class();
+	return uml::UmlPackage::eInstance()->getTemplateSignature_Class();
 }
 
 //*********************************
@@ -280,7 +269,7 @@ Any TemplateSignatureImpl::eGet(int featureID, bool resolve, bool coreType) cons
 {
 	switch(featureID)
 	{
-		case UmlPackage::TEMPLATESIGNATURE_ATTRIBUTE_OWNEDPARAMETER:
+		case uml::UmlPackage::TEMPLATESIGNATURE_ATTRIBUTE_OWNEDPARAMETER:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::TemplateParameter>::iterator iter = m_ownedParameter->begin();
@@ -292,7 +281,7 @@ Any TemplateSignatureImpl::eGet(int featureID, bool resolve, bool coreType) cons
 			}
 			return eAny(tempList); //2345
 		}
-		case UmlPackage::TEMPLATESIGNATURE_ATTRIBUTE_PARAMETER:
+		case uml::UmlPackage::TEMPLATESIGNATURE_ATTRIBUTE_PARAMETER:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::TemplateParameter>::iterator iter = m_parameter->begin();
@@ -304,7 +293,7 @@ Any TemplateSignatureImpl::eGet(int featureID, bool resolve, bool coreType) cons
 			}
 			return eAny(tempList); //2343
 		}
-		case UmlPackage::TEMPLATESIGNATURE_ATTRIBUTE_TEMPLATE:
+		case uml::UmlPackage::TEMPLATESIGNATURE_ATTRIBUTE_TEMPLATE:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getTemplate().lock())); //2344
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
@@ -313,11 +302,11 @@ bool TemplateSignatureImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::TEMPLATESIGNATURE_ATTRIBUTE_OWNEDPARAMETER:
+		case uml::UmlPackage::TEMPLATESIGNATURE_ATTRIBUTE_OWNEDPARAMETER:
 			return getOwnedParameter() != nullptr; //2345
-		case UmlPackage::TEMPLATESIGNATURE_ATTRIBUTE_PARAMETER:
+		case uml::UmlPackage::TEMPLATESIGNATURE_ATTRIBUTE_PARAMETER:
 			return getParameter() != nullptr; //2343
-		case UmlPackage::TEMPLATESIGNATURE_ATTRIBUTE_TEMPLATE:
+		case uml::UmlPackage::TEMPLATESIGNATURE_ATTRIBUTE_TEMPLATE:
 			return getTemplate().lock() != nullptr; //2344
 	}
 	return ElementImpl::internalEIsSet(featureID);
@@ -326,7 +315,7 @@ bool TemplateSignatureImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::TEMPLATESIGNATURE_ATTRIBUTE_OWNEDPARAMETER:
+		case uml::UmlPackage::TEMPLATESIGNATURE_ATTRIBUTE_OWNEDPARAMETER:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -362,7 +351,7 @@ bool TemplateSignatureImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case UmlPackage::TEMPLATESIGNATURE_ATTRIBUTE_PARAMETER:
+		case uml::UmlPackage::TEMPLATESIGNATURE_ATTRIBUTE_PARAMETER:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -398,7 +387,7 @@ bool TemplateSignatureImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case UmlPackage::TEMPLATESIGNATURE_ATTRIBUTE_TEMPLATE:
+		case uml::UmlPackage::TEMPLATESIGNATURE_ATTRIBUTE_TEMPLATE:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -423,11 +412,10 @@ void TemplateSignatureImpl::load(std::shared_ptr<persistence::interfaces::XLoadH
 	// Create new objects (from references (containment == true))
 	//
 	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -456,8 +444,9 @@ void TemplateSignatureImpl::loadAttributes(std::shared_ptr<persistence::interfac
 	ElementImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void TemplateSignatureImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void TemplateSignatureImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
 
 	try
 	{
@@ -468,7 +457,7 @@ void TemplateSignatureImpl::loadNode(std::string nodeName, std::shared_ptr<persi
 			{
 				typeName = "TemplateParameter";
 			}
-			std::shared_ptr<ecore::EObject> ownedParameter = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::TEMPLATEPARAMETER_ATTRIBUTE_SIGNATURE);
+			std::shared_ptr<ecore::EObject> ownedParameter = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::UmlPackage::TEMPLATEPARAMETER_ATTRIBUTE_SIGNATURE);
 			if (ownedParameter != nullptr)
 			{
 				loadHandler->handleChild(ownedParameter);
@@ -484,15 +473,15 @@ void TemplateSignatureImpl::loadNode(std::string nodeName, std::shared_ptr<persi
 	{
 		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
 	}
-
-	ElementImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	ElementImpl::loadNode(nodeName, loadHandler);
 }
 
 void TemplateSignatureImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
-		case UmlPackage::TEMPLATESIGNATURE_ATTRIBUTE_PARAMETER:
+		case uml::UmlPackage::TEMPLATESIGNATURE_ATTRIBUTE_PARAMETER:
 		{
 			std::shared_ptr<Bag<uml::TemplateParameter>> _parameter = getParameter();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -506,7 +495,7 @@ void TemplateSignatureImpl::resolveReferences(const int featureID, std::list<std
 			return;
 		}
 
-		case UmlPackage::TEMPLATESIGNATURE_ATTRIBUTE_TEMPLATE:
+		case uml::UmlPackage::TEMPLATESIGNATURE_ATTRIBUTE_TEMPLATE:
 		{
 			if (references.size() == 1)
 			{

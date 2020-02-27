@@ -13,7 +13,7 @@
 //Model includes
 #include "../CS_ClearStructuralFeatureActionActivation.hpp"
 
-#include "PSCS/impl/PSCSFactoryImpl.hpp"
+#include "PSCS/Semantics/Actions/Impl/ActionsFactoryImpl.hpp"
 #include "fUML/Semantics/Actions/impl/ClearStructuralFeatureActionActivationImpl.hpp"
 
 //*********************************
@@ -29,7 +29,7 @@ namespace PSCS::Semantics::Actions
 			CS_ClearStructuralFeatureActionActivationImpl& operator=(CS_ClearStructuralFeatureActionActivationImpl const&) = delete;
 
 		protected:
-			friend class PSCS::PSCSFactoryImpl;
+			friend class PSCS::Semantics::Actions::ActionsFactoryImpl;
 			CS_ClearStructuralFeatureActionActivationImpl();
 			virtual std::shared_ptr<CS_ClearStructuralFeatureActionActivation> getThisCS_ClearStructuralFeatureActionActivationPtr() const;
 			virtual void setThisCS_ClearStructuralFeatureActionActivationPtr(std::weak_ptr<CS_ClearStructuralFeatureActionActivation> thisCS_ClearStructuralFeatureActionActivationPtr);
@@ -89,7 +89,7 @@ namespace PSCS::Semantics::Actions
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<PSCS::PSCSFactory> modelFactory);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
 			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;

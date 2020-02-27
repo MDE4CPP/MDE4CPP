@@ -14,7 +14,7 @@
 #include "abstractDataTypes/Any.hpp"
 
 // forward declarations
-template<class T> class Bag;
+template<class T> class Bag; 
 
 
 

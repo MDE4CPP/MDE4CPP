@@ -11,7 +11,7 @@ const std::string PSCSPackage::eNS_PREFIX ="PSCS_Semantics";
 //Singleton 
 std::shared_ptr<PSCSPackage> PSCSPackage::instance;
 
-std::shared_ptr<PSCSPackage>PSCSPackage::eInstance()
+std::shared_ptr<PSCSPackage> PSCSPackage::eInstance()
 {
 	if(!instance)
 	{

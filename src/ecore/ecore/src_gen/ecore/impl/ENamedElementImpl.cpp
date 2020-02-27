@@ -17,22 +17,18 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/Union.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "ecore/impl/EcorePackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "ecore/EcoreFactory.hpp"
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "ecore/EcorePackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -42,10 +38,11 @@
 
 #include "ecore/EObject.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
+//Factories an Package includes
+#include "ecore/Impl/EcoreFactoryImpl.hpp"
+#include "ecore/Impl/EcorePackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -85,9 +82,6 @@ ENamedElementImpl::~ENamedElementImpl()
 
 
 
-
-
-
 ENamedElementImpl::ENamedElementImpl(const ENamedElementImpl & obj):ENamedElementImpl()
 {
 	//create copy of all Attributes
@@ -124,7 +118,7 @@ std::shared_ptr<ecore::EObject>  ENamedElementImpl::copy() const
 
 std::shared_ptr<EClass> ENamedElementImpl::eStaticClass() const
 {
-	return EcorePackageImpl::eInstance()->getENamedElement_Class();
+	return ecore::EcorePackage::eInstance()->getENamedElement_Class();
 }
 
 //*********************************
@@ -182,7 +176,7 @@ Any ENamedElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case EcorePackage::ENAMEDELEMENT_ATTRIBUTE_NAME:
+		case ecore::EcorePackage::ENAMEDELEMENT_ATTRIBUTE_NAME:
 			return eAny(getName()); //384
 	}
 	return EModelElementImpl::eGet(featureID, resolve, coreType);
@@ -191,7 +185,7 @@ bool ENamedElementImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case EcorePackage::ENAMEDELEMENT_ATTRIBUTE_NAME:
+		case ecore::EcorePackage::ENAMEDELEMENT_ATTRIBUTE_NAME:
 			return getName() != ""; //384
 	}
 	return EModelElementImpl::internalEIsSet(featureID);
@@ -200,7 +194,7 @@ bool ENamedElementImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case EcorePackage::ENAMEDELEMENT_ATTRIBUTE_NAME:
+		case ecore::EcorePackage::ENAMEDELEMENT_ATTRIBUTE_NAME:
 		{
 			// BOOST CAST
 			std::string _name = newValue->get<std::string>();
@@ -224,11 +218,10 @@ void ENamedElementImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandl
 	// Create new objects (from references (containment == true))
 	//
 	// get EcoreFactory
-	std::shared_ptr<ecore::EcoreFactory> modelFactory = ecore::EcoreFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -259,11 +252,12 @@ void ENamedElementImpl::loadAttributes(std::shared_ptr<persistence::interfaces::
 	EModelElementImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void ENamedElementImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<ecore::EcoreFactory> modelFactory)
+void ENamedElementImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<ecore::EcoreFactory> modelFactory=ecore::EcoreFactory::eInstance();
 
-
-	EModelElementImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	EModelElementImpl::loadNode(nodeName, loadHandler);
 }
 
 void ENamedElementImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<EObject> > references)
@@ -291,7 +285,6 @@ void ENamedElementImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 		std::shared_ptr<ecore::EcorePackage> package = ecore::EcorePackage::eInstance();
 
 	
- 
 		// Add attributes
 		if ( this->eIsSet(package->getENamedElement_Attribute_name()) )
 		{

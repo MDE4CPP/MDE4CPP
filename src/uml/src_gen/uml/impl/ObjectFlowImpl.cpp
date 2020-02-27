@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -26,21 +25,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -76,10 +66,11 @@
 
 #include "uml/ValueSpecification.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/Impl/UmlFactoryImpl.hpp"
+#include "uml/Impl/UmlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -126,9 +117,6 @@ ObjectFlowImpl::~ObjectFlowImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			ObjectFlowImpl::ObjectFlowImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
 			:ObjectFlowImpl()
@@ -136,9 +124,6 @@ ObjectFlowImpl::~ObjectFlowImpl()
 			    m_inStructuredNode = par_inStructuredNode;
 				m_owner = par_inStructuredNode;
 			}
-
-
-
 
 
 //Additional constructor for the containments back reference
@@ -150,18 +135,12 @@ ObjectFlowImpl::~ObjectFlowImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			ObjectFlowImpl::ObjectFlowImpl(std::weak_ptr<uml::Element > par_owner)
 			:ObjectFlowImpl()
 			{
 			    m_owner = par_owner;
 			}
-
-
-
 
 
 
@@ -270,7 +249,7 @@ std::shared_ptr<ecore::EObject>  ObjectFlowImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ObjectFlowImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getObjectFlow_Class();
+	return uml::UmlPackage::eInstance()->getObjectFlow_Class();
 }
 
 //*********************************
@@ -431,13 +410,13 @@ Any ObjectFlowImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::OBJECTFLOW_ATTRIBUTE_ISMULTICAST:
+		case uml::UmlPackage::OBJECTFLOW_ATTRIBUTE_ISMULTICAST:
 			return eAny(getIsMulticast()); //16022
-		case UmlPackage::OBJECTFLOW_ATTRIBUTE_ISMULTIRECEIVE:
+		case uml::UmlPackage::OBJECTFLOW_ATTRIBUTE_ISMULTIRECEIVE:
 			return eAny(getIsMultireceive()); //16023
-		case UmlPackage::OBJECTFLOW_ATTRIBUTE_SELECTION:
+		case uml::UmlPackage::OBJECTFLOW_ATTRIBUTE_SELECTION:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSelection())); //16024
-		case UmlPackage::OBJECTFLOW_ATTRIBUTE_TRANSFORMATION:
+		case uml::UmlPackage::OBJECTFLOW_ATTRIBUTE_TRANSFORMATION:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getTransformation())); //16025
 	}
 	return ActivityEdgeImpl::eGet(featureID, resolve, coreType);
@@ -446,13 +425,13 @@ bool ObjectFlowImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::OBJECTFLOW_ATTRIBUTE_ISMULTICAST:
+		case uml::UmlPackage::OBJECTFLOW_ATTRIBUTE_ISMULTICAST:
 			return getIsMulticast() != false; //16022
-		case UmlPackage::OBJECTFLOW_ATTRIBUTE_ISMULTIRECEIVE:
+		case uml::UmlPackage::OBJECTFLOW_ATTRIBUTE_ISMULTIRECEIVE:
 			return getIsMultireceive() != false; //16023
-		case UmlPackage::OBJECTFLOW_ATTRIBUTE_SELECTION:
+		case uml::UmlPackage::OBJECTFLOW_ATTRIBUTE_SELECTION:
 			return getSelection() != nullptr; //16024
-		case UmlPackage::OBJECTFLOW_ATTRIBUTE_TRANSFORMATION:
+		case uml::UmlPackage::OBJECTFLOW_ATTRIBUTE_TRANSFORMATION:
 			return getTransformation() != nullptr; //16025
 	}
 	return ActivityEdgeImpl::internalEIsSet(featureID);
@@ -461,21 +440,21 @@ bool ObjectFlowImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::OBJECTFLOW_ATTRIBUTE_ISMULTICAST:
+		case uml::UmlPackage::OBJECTFLOW_ATTRIBUTE_ISMULTICAST:
 		{
 			// BOOST CAST
 			bool _isMulticast = newValue->get<bool>();
 			setIsMulticast(_isMulticast); //16022
 			return true;
 		}
-		case UmlPackage::OBJECTFLOW_ATTRIBUTE_ISMULTIRECEIVE:
+		case uml::UmlPackage::OBJECTFLOW_ATTRIBUTE_ISMULTIRECEIVE:
 		{
 			// BOOST CAST
 			bool _isMultireceive = newValue->get<bool>();
 			setIsMultireceive(_isMultireceive); //16023
 			return true;
 		}
-		case UmlPackage::OBJECTFLOW_ATTRIBUTE_SELECTION:
+		case uml::UmlPackage::OBJECTFLOW_ATTRIBUTE_SELECTION:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -483,7 +462,7 @@ bool ObjectFlowImpl::eSet(int featureID, Any newValue)
 			setSelection(_selection); //16024
 			return true;
 		}
-		case UmlPackage::OBJECTFLOW_ATTRIBUTE_TRANSFORMATION:
+		case uml::UmlPackage::OBJECTFLOW_ATTRIBUTE_TRANSFORMATION:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -508,11 +487,10 @@ void ObjectFlowImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler>
 	// Create new objects (from references (containment == true))
 	//
 	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -566,18 +544,19 @@ void ObjectFlowImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLo
 	ActivityEdgeImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void ObjectFlowImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void ObjectFlowImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
 
-
-	ActivityEdgeImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	ActivityEdgeImpl::loadNode(nodeName, loadHandler);
 }
 
 void ObjectFlowImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
-		case UmlPackage::OBJECTFLOW_ATTRIBUTE_SELECTION:
+		case uml::UmlPackage::OBJECTFLOW_ATTRIBUTE_SELECTION:
 		{
 			if (references.size() == 1)
 			{
@@ -589,7 +568,7 @@ void ObjectFlowImpl::resolveReferences(const int featureID, std::list<std::share
 			return;
 		}
 
-		case UmlPackage::OBJECTFLOW_ATTRIBUTE_TRANSFORMATION:
+		case uml::UmlPackage::OBJECTFLOW_ATTRIBUTE_TRANSFORMATION:
 		{
 			if (references.size() == 1)
 			{
@@ -633,7 +612,6 @@ void ObjectFlowImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
 
 	
- 
 		// Add attributes
 		if ( this->eIsSet(package->getObjectFlow_Attribute_isMulticast()) )
 		{

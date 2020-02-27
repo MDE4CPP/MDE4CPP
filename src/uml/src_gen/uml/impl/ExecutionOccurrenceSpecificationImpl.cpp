@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -25,21 +24,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -65,10 +55,11 @@
 
 #include "uml/StringExpression.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/Impl/UmlFactoryImpl.hpp"
+#include "uml/Impl/UmlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -110,9 +101,6 @@ ExecutionOccurrenceSpecificationImpl::~ExecutionOccurrenceSpecificationImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			ExecutionOccurrenceSpecificationImpl::ExecutionOccurrenceSpecificationImpl(std::weak_ptr<uml::InteractionOperand > par_enclosingOperand)
 			:ExecutionOccurrenceSpecificationImpl()
@@ -120,9 +108,6 @@ ExecutionOccurrenceSpecificationImpl::~ExecutionOccurrenceSpecificationImpl()
 			    m_enclosingOperand = par_enclosingOperand;
 				m_namespace = par_enclosingOperand;
 			}
-
-
-
 
 
 //Additional constructor for the containments back reference
@@ -134,18 +119,12 @@ ExecutionOccurrenceSpecificationImpl::~ExecutionOccurrenceSpecificationImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			ExecutionOccurrenceSpecificationImpl::ExecutionOccurrenceSpecificationImpl(std::weak_ptr<uml::Element > par_owner)
 			:ExecutionOccurrenceSpecificationImpl()
 			{
 			    m_owner = par_owner;
 			}
-
-
-
 
 
 
@@ -221,7 +200,7 @@ std::shared_ptr<ecore::EObject>  ExecutionOccurrenceSpecificationImpl::copy() co
 
 std::shared_ptr<ecore::EClass> ExecutionOccurrenceSpecificationImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getExecutionOccurrenceSpecification_Class();
+	return uml::UmlPackage::eInstance()->getExecutionOccurrenceSpecification_Class();
 }
 
 //*********************************
@@ -302,7 +281,7 @@ Any ExecutionOccurrenceSpecificationImpl::eGet(int featureID, bool resolve, bool
 {
 	switch(featureID)
 	{
-		case UmlPackage::EXECUTIONOCCURRENCESPECIFICATION_ATTRIBUTE_EXECUTION:
+		case uml::UmlPackage::EXECUTIONOCCURRENCESPECIFICATION_ATTRIBUTE_EXECUTION:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getExecution())); //9115
 	}
 	return OccurrenceSpecificationImpl::eGet(featureID, resolve, coreType);
@@ -311,7 +290,7 @@ bool ExecutionOccurrenceSpecificationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::EXECUTIONOCCURRENCESPECIFICATION_ATTRIBUTE_EXECUTION:
+		case uml::UmlPackage::EXECUTIONOCCURRENCESPECIFICATION_ATTRIBUTE_EXECUTION:
 			return getExecution() != nullptr; //9115
 	}
 	return OccurrenceSpecificationImpl::internalEIsSet(featureID);
@@ -320,7 +299,7 @@ bool ExecutionOccurrenceSpecificationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::EXECUTIONOCCURRENCESPECIFICATION_ATTRIBUTE_EXECUTION:
+		case uml::UmlPackage::EXECUTIONOCCURRENCESPECIFICATION_ATTRIBUTE_EXECUTION:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -345,11 +324,10 @@ void ExecutionOccurrenceSpecificationImpl::load(std::shared_ptr<persistence::int
 	// Create new objects (from references (containment == true))
 	//
 	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -378,18 +356,19 @@ void ExecutionOccurrenceSpecificationImpl::loadAttributes(std::shared_ptr<persis
 	OccurrenceSpecificationImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void ExecutionOccurrenceSpecificationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void ExecutionOccurrenceSpecificationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
 
-
-	OccurrenceSpecificationImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	OccurrenceSpecificationImpl::loadNode(nodeName, loadHandler);
 }
 
 void ExecutionOccurrenceSpecificationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
-		case UmlPackage::EXECUTIONOCCURRENCESPECIFICATION_ATTRIBUTE_EXECUTION:
+		case uml::UmlPackage::EXECUTIONOCCURRENCESPECIFICATION_ATTRIBUTE_EXECUTION:
 		{
 			if (references.size() == 1)
 			{

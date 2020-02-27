@@ -33,14 +33,18 @@ SET(CMAKE_CXX_FLAGS_RELEASE " -O3  ${ENABLED_DEBUG_MESSAGE}")
 string(REPLACE "\\" "/" MDE4CPP_HOME $ENV{MDE4CPP_HOME})
 
 SET(SOURCE_FILES
-	impl/EcoreFactoryImpl.cpp
+# Factories and packages
 	EcoreFactory.cpp
+	impl/EcoreFactoryImpl.cpp
+	EcorePackage.cpp
 	impl/EcorePackageImpl.cpp
 	impl/EcorePackageImpl_Creation.cpp
 	impl/EcorePackageImpl_Initialization.cpp
-	EcorePackage.cpp
+	
+# Package plugin
 	impl/EcorePluginImpl.cpp
 	EcorePlugin.cpp
+# Package content
 	impl/EAnnotationImpl.cpp
 	impl/EAttributeImpl.cpp
 	impl/EClassImpl.cpp

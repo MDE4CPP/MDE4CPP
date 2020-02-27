@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -26,21 +25,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -70,10 +60,11 @@
 
 #include "uml/ValueSpecification.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/Impl/UmlFactoryImpl.hpp"
+#include "uml/Impl/UmlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -155,9 +146,6 @@ InteractionUseImpl::~InteractionUseImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			InteractionUseImpl::InteractionUseImpl(std::weak_ptr<uml::InteractionOperand > par_enclosingOperand)
 			:InteractionUseImpl()
@@ -165,9 +153,6 @@ InteractionUseImpl::~InteractionUseImpl()
 			    m_enclosingOperand = par_enclosingOperand;
 				m_namespace = par_enclosingOperand;
 			}
-
-
-
 
 
 //Additional constructor for the containments back reference
@@ -179,18 +164,12 @@ InteractionUseImpl::~InteractionUseImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			InteractionUseImpl::InteractionUseImpl(std::weak_ptr<uml::Element > par_owner)
 			:InteractionUseImpl()
 			{
 			    m_owner = par_owner;
 			}
-
-
-
 
 
 
@@ -302,7 +281,7 @@ std::shared_ptr<ecore::EObject>  InteractionUseImpl::copy() const
 
 std::shared_ptr<ecore::EClass> InteractionUseImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getInteractionUse_Class();
+	return uml::UmlPackage::eInstance()->getInteractionUse_Class();
 }
 
 //*********************************
@@ -452,7 +431,7 @@ Any InteractionUseImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::INTERACTIONUSE_ATTRIBUTE_ACTUALGATE:
+		case uml::UmlPackage::INTERACTIONUSE_ATTRIBUTE_ACTUALGATE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Gate>::iterator iter = m_actualGate->begin();
@@ -464,7 +443,7 @@ Any InteractionUseImpl::eGet(int featureID, bool resolve, bool coreType) const
 			}
 			return eAny(tempList); //12513
 		}
-		case UmlPackage::INTERACTIONUSE_ATTRIBUTE_ARGUMENT:
+		case uml::UmlPackage::INTERACTIONUSE_ATTRIBUTE_ARGUMENT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::ValueSpecification>::iterator iter = m_argument->begin();
@@ -476,11 +455,11 @@ Any InteractionUseImpl::eGet(int featureID, bool resolve, bool coreType) const
 			}
 			return eAny(tempList); //12514
 		}
-		case UmlPackage::INTERACTIONUSE_ATTRIBUTE_REFERSTO:
+		case uml::UmlPackage::INTERACTIONUSE_ATTRIBUTE_REFERSTO:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getRefersTo())); //12515
-		case UmlPackage::INTERACTIONUSE_ATTRIBUTE_RETURNVALUE:
+		case uml::UmlPackage::INTERACTIONUSE_ATTRIBUTE_RETURNVALUE:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getReturnValue())); //12516
-		case UmlPackage::INTERACTIONUSE_ATTRIBUTE_RETURNVALUERECIPIENT:
+		case uml::UmlPackage::INTERACTIONUSE_ATTRIBUTE_RETURNVALUERECIPIENT:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getReturnValueRecipient())); //12517
 	}
 	return InteractionFragmentImpl::eGet(featureID, resolve, coreType);
@@ -489,15 +468,15 @@ bool InteractionUseImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::INTERACTIONUSE_ATTRIBUTE_ACTUALGATE:
+		case uml::UmlPackage::INTERACTIONUSE_ATTRIBUTE_ACTUALGATE:
 			return getActualGate() != nullptr; //12513
-		case UmlPackage::INTERACTIONUSE_ATTRIBUTE_ARGUMENT:
+		case uml::UmlPackage::INTERACTIONUSE_ATTRIBUTE_ARGUMENT:
 			return getArgument() != nullptr; //12514
-		case UmlPackage::INTERACTIONUSE_ATTRIBUTE_REFERSTO:
+		case uml::UmlPackage::INTERACTIONUSE_ATTRIBUTE_REFERSTO:
 			return getRefersTo() != nullptr; //12515
-		case UmlPackage::INTERACTIONUSE_ATTRIBUTE_RETURNVALUE:
+		case uml::UmlPackage::INTERACTIONUSE_ATTRIBUTE_RETURNVALUE:
 			return getReturnValue() != nullptr; //12516
-		case UmlPackage::INTERACTIONUSE_ATTRIBUTE_RETURNVALUERECIPIENT:
+		case uml::UmlPackage::INTERACTIONUSE_ATTRIBUTE_RETURNVALUERECIPIENT:
 			return getReturnValueRecipient() != nullptr; //12517
 	}
 	return InteractionFragmentImpl::internalEIsSet(featureID);
@@ -506,7 +485,7 @@ bool InteractionUseImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::INTERACTIONUSE_ATTRIBUTE_ACTUALGATE:
+		case uml::UmlPackage::INTERACTIONUSE_ATTRIBUTE_ACTUALGATE:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -542,7 +521,7 @@ bool InteractionUseImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case UmlPackage::INTERACTIONUSE_ATTRIBUTE_ARGUMENT:
+		case uml::UmlPackage::INTERACTIONUSE_ATTRIBUTE_ARGUMENT:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -578,7 +557,7 @@ bool InteractionUseImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case UmlPackage::INTERACTIONUSE_ATTRIBUTE_REFERSTO:
+		case uml::UmlPackage::INTERACTIONUSE_ATTRIBUTE_REFERSTO:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -586,7 +565,7 @@ bool InteractionUseImpl::eSet(int featureID, Any newValue)
 			setRefersTo(_refersTo); //12515
 			return true;
 		}
-		case UmlPackage::INTERACTIONUSE_ATTRIBUTE_RETURNVALUE:
+		case uml::UmlPackage::INTERACTIONUSE_ATTRIBUTE_RETURNVALUE:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -594,7 +573,7 @@ bool InteractionUseImpl::eSet(int featureID, Any newValue)
 			setReturnValue(_returnValue); //12516
 			return true;
 		}
-		case UmlPackage::INTERACTIONUSE_ATTRIBUTE_RETURNVALUERECIPIENT:
+		case uml::UmlPackage::INTERACTIONUSE_ATTRIBUTE_RETURNVALUERECIPIENT:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -619,11 +598,10 @@ void InteractionUseImpl::load(std::shared_ptr<persistence::interfaces::XLoadHand
 	// Create new objects (from references (containment == true))
 	//
 	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -659,8 +637,9 @@ void InteractionUseImpl::loadAttributes(std::shared_ptr<persistence::interfaces:
 	InteractionFragmentImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void InteractionUseImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void InteractionUseImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
 
 	try
 	{
@@ -724,15 +703,15 @@ void InteractionUseImpl::loadNode(std::string nodeName, std::shared_ptr<persiste
 	{
 		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
 	}
-
-	InteractionFragmentImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	InteractionFragmentImpl::loadNode(nodeName, loadHandler);
 }
 
 void InteractionUseImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
-		case UmlPackage::INTERACTIONUSE_ATTRIBUTE_REFERSTO:
+		case uml::UmlPackage::INTERACTIONUSE_ATTRIBUTE_REFERSTO:
 		{
 			if (references.size() == 1)
 			{
@@ -744,7 +723,7 @@ void InteractionUseImpl::resolveReferences(const int featureID, std::list<std::s
 			return;
 		}
 
-		case UmlPackage::INTERACTIONUSE_ATTRIBUTE_RETURNVALUERECIPIENT:
+		case uml::UmlPackage::INTERACTIONUSE_ATTRIBUTE_RETURNVALUERECIPIENT:
 		{
 			if (references.size() == 1)
 			{

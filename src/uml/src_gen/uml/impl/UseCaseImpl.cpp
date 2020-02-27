@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -26,23 +25,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -104,10 +92,11 @@
 
 #include "uml/UseCase.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/Impl/UmlFactoryImpl.hpp"
+#include "uml/Impl/UmlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -200,18 +189,12 @@ UseCaseImpl::~UseCaseImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			UseCaseImpl::UseCaseImpl(std::weak_ptr<uml::Element > par_owner)
 			:UseCaseImpl()
 			{
 			    m_owner = par_owner;
 			}
-
-
-
 
 
 //Additional constructor for the containments back reference
@@ -235,9 +218,6 @@ UseCaseImpl::UseCaseImpl(std::weak_ptr<uml::Package > par_Package, const int ref
 }
 
 
-
-
-
 //Additional constructor for the containments back reference
 			UseCaseImpl::UseCaseImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
 			:UseCaseImpl()
@@ -247,13 +227,7 @@ UseCaseImpl::UseCaseImpl(std::weak_ptr<uml::Package > par_Package, const int ref
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
-
-
-
 
 
 
@@ -510,7 +484,7 @@ std::shared_ptr<ecore::EObject>  UseCaseImpl::copy() const
 
 std::shared_ptr<ecore::EClass> UseCaseImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getUseCase_Class();
+	return uml::UmlPackage::eInstance()->getUseCase_Class();
 }
 
 //*********************************
@@ -659,7 +633,7 @@ Any UseCaseImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::USECASE_ATTRIBUTE_EXTEND:
+		case uml::UmlPackage::USECASE_ATTRIBUTE_EXTEND:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Extend>::iterator iter = m_extend->begin();
@@ -671,7 +645,7 @@ Any UseCaseImpl::eGet(int featureID, bool resolve, bool coreType) const
 			}
 			return eAny(tempList); //24941
 		}
-		case UmlPackage::USECASE_ATTRIBUTE_EXTENSIONPOINT:
+		case uml::UmlPackage::USECASE_ATTRIBUTE_EXTENSIONPOINT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::ExtensionPoint>::iterator iter = m_extensionPoint->begin();
@@ -683,7 +657,7 @@ Any UseCaseImpl::eGet(int featureID, bool resolve, bool coreType) const
 			}
 			return eAny(tempList); //24942
 		}
-		case UmlPackage::USECASE_ATTRIBUTE_INCLUDE:
+		case uml::UmlPackage::USECASE_ATTRIBUTE_INCLUDE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Include>::iterator iter = m_include->begin();
@@ -695,7 +669,7 @@ Any UseCaseImpl::eGet(int featureID, bool resolve, bool coreType) const
 			}
 			return eAny(tempList); //24943
 		}
-		case UmlPackage::USECASE_ATTRIBUTE_SUBJECT:
+		case uml::UmlPackage::USECASE_ATTRIBUTE_SUBJECT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Classifier>::iterator iter = m_subject->begin();
@@ -714,13 +688,13 @@ bool UseCaseImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::USECASE_ATTRIBUTE_EXTEND:
+		case uml::UmlPackage::USECASE_ATTRIBUTE_EXTEND:
 			return getExtend() != nullptr; //24941
-		case UmlPackage::USECASE_ATTRIBUTE_EXTENSIONPOINT:
+		case uml::UmlPackage::USECASE_ATTRIBUTE_EXTENSIONPOINT:
 			return getExtensionPoint() != nullptr; //24942
-		case UmlPackage::USECASE_ATTRIBUTE_INCLUDE:
+		case uml::UmlPackage::USECASE_ATTRIBUTE_INCLUDE:
 			return getInclude() != nullptr; //24943
-		case UmlPackage::USECASE_ATTRIBUTE_SUBJECT:
+		case uml::UmlPackage::USECASE_ATTRIBUTE_SUBJECT:
 			return getSubject() != nullptr; //24944
 	}
 	return BehavioredClassifierImpl::internalEIsSet(featureID);
@@ -729,7 +703,7 @@ bool UseCaseImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::USECASE_ATTRIBUTE_EXTEND:
+		case uml::UmlPackage::USECASE_ATTRIBUTE_EXTEND:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -765,7 +739,7 @@ bool UseCaseImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case UmlPackage::USECASE_ATTRIBUTE_EXTENSIONPOINT:
+		case uml::UmlPackage::USECASE_ATTRIBUTE_EXTENSIONPOINT:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -801,7 +775,7 @@ bool UseCaseImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case UmlPackage::USECASE_ATTRIBUTE_INCLUDE:
+		case uml::UmlPackage::USECASE_ATTRIBUTE_INCLUDE:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -837,7 +811,7 @@ bool UseCaseImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case UmlPackage::USECASE_ATTRIBUTE_SUBJECT:
+		case uml::UmlPackage::USECASE_ATTRIBUTE_SUBJECT:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -890,11 +864,10 @@ void UseCaseImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> lo
 	// Create new objects (from references (containment == true))
 	//
 	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -923,8 +896,9 @@ void UseCaseImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadH
 	BehavioredClassifierImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void UseCaseImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void UseCaseImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
 
 	try
 	{
@@ -935,7 +909,7 @@ void UseCaseImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::in
 			{
 				typeName = "Extend";
 			}
-			std::shared_ptr<ecore::EObject> extend = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::EXTEND_ATTRIBUTE_EXTENSION);
+			std::shared_ptr<ecore::EObject> extend = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::UmlPackage::EXTEND_ATTRIBUTE_EXTENSION);
 			if (extend != nullptr)
 			{
 				loadHandler->handleChild(extend);
@@ -950,7 +924,7 @@ void UseCaseImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::in
 			{
 				typeName = "ExtensionPoint";
 			}
-			std::shared_ptr<ecore::EObject> extensionPoint = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::EXTENSIONPOINT_ATTRIBUTE_USECASE);
+			std::shared_ptr<ecore::EObject> extensionPoint = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::UmlPackage::EXTENSIONPOINT_ATTRIBUTE_USECASE);
 			if (extensionPoint != nullptr)
 			{
 				loadHandler->handleChild(extensionPoint);
@@ -965,7 +939,7 @@ void UseCaseImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::in
 			{
 				typeName = "Include";
 			}
-			std::shared_ptr<ecore::EObject> include = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::INCLUDE_ATTRIBUTE_INCLUDINGCASE);
+			std::shared_ptr<ecore::EObject> include = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::UmlPackage::INCLUDE_ATTRIBUTE_INCLUDINGCASE);
 			if (include != nullptr)
 			{
 				loadHandler->handleChild(include);
@@ -981,15 +955,15 @@ void UseCaseImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::in
 	{
 		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
 	}
-
-	BehavioredClassifierImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	BehavioredClassifierImpl::loadNode(nodeName, loadHandler);
 }
 
 void UseCaseImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
-		case UmlPackage::USECASE_ATTRIBUTE_SUBJECT:
+		case uml::UmlPackage::USECASE_ATTRIBUTE_SUBJECT:
 		{
 			std::shared_ptr<Bag<uml::Classifier>> _subject = getSubject();
 			for(std::shared_ptr<ecore::EObject> ref : references)

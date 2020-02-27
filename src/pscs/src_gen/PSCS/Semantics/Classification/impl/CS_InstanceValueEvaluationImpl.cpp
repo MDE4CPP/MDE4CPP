@@ -18,11 +18,11 @@
 #include <iostream>
 #include <sstream>
 
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "PSCS/impl/PSCSPackageImpl.hpp"
+
+//Includes from codegen annotation
 #include "PSCS/Semantics/StructuredClassifiers/CS_Object.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/CS_Reference.hpp"
 #include "fUML/FUMLFactory.hpp"
@@ -44,8 +44,6 @@
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "PSCS/PSCSFactory.hpp"
-#include "PSCS/PSCSPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -57,10 +55,15 @@
 
 #include "uml/ValueSpecification.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "PSCS/PSCSPackage.hpp"
+//Factories an Package includes
+#include "PSCS/Semantics/Classification/Impl/ClassificationFactoryImpl.hpp"
+#include "PSCS/Semantics/Classification/Impl/ClassificationPackageImpl.hpp"
+
+#include "PSCS/Semantics/SemanticsFactory.hpp"
+#include "PSCS/Semantics/SemanticsPackage.hpp"
 #include "PSCS/PSCSFactory.hpp"
+#include "PSCS/PSCSPackage.hpp"
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -121,7 +124,7 @@ std::shared_ptr<ecore::EObject>  CS_InstanceValueEvaluationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> CS_InstanceValueEvaluationImpl::eStaticClass() const
 {
-	return PSCSPackageImpl::eInstance()->getCS_InstanceValueEvaluation_Class();
+	return pSCS::Semantics::Classification::ClassificationPackage::eInstance()->getCS_InstanceValueEvaluation_Class();
 }
 
 //*********************************
@@ -296,11 +299,10 @@ void CS_InstanceValueEvaluationImpl::load(std::shared_ptr<persistence::interface
 	// Create new objects (from references (containment == true))
 	//
 	// get PSCSFactory
-	std::shared_ptr<PSCS::PSCSFactory> modelFactory = PSCS::PSCSFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -310,11 +312,12 @@ void CS_InstanceValueEvaluationImpl::loadAttributes(std::shared_ptr<persistence:
 	fUML::Semantics::Classification::InstanceValueEvaluationImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void CS_InstanceValueEvaluationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<PSCS::PSCSFactory> modelFactory)
+void CS_InstanceValueEvaluationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<PSCS::Semantics::Classification::ClassificationFactory> modelFactory=PSCS::Semantics::Classification::ClassificationFactory::eInstance();
 
-
-	fUML::Semantics::Classification::InstanceValueEvaluationImpl::loadNode(nodeName, loadHandler, fUML::FUMLFactory::eInstance());
+	//load BasePackage Nodes
+	fUML::Semantics::Classification::InstanceValueEvaluationImpl::loadNode(nodeName, loadHandler);
 }
 
 void CS_InstanceValueEvaluationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
@@ -342,7 +345,7 @@ void CS_InstanceValueEvaluationImpl::saveContent(std::shared_ptr<persistence::in
 {
 	try
 	{
-		std::shared_ptr<PSCS::PSCSPackage> package = PSCS::PSCSPackage::eInstance();
+		std::shared_ptr<pSCS::Semantics::Classification::ClassificationPackage> package = pSCS::Semantics::Classification::ClassificationPackage::eInstance();
 
 	
 

@@ -10,17 +10,21 @@
 #include "ecore/EcorePackage.hpp"
 #include "ecore/impl/EPackageImpl.hpp"
 
-#include "PSCS/PSCSPackage.hpp"
+#include "PSCS/PSCSPackage.hpp" 
+
 
 namespace PSCS 
 {
+	namespace Semantics 
+	{
+		class SemanticsPackage;
+	}
 }
 
 namespace ecore
 {
 	class EcoreFactory;
 }
-
 
 namespace PSCS
 {
@@ -37,6 +41,9 @@ namespace PSCS
 			virtual ~PSCSPackageImpl();
 
 
+			
+			// SubPackages Getters
+			virtual std::shared_ptr<Semantics::SemanticsPackage> getSemantics_Package() const ;
 			
 
 		private:

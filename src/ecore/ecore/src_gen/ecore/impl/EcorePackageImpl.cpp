@@ -20,7 +20,6 @@
 
 //depending model packages
 
-
 using namespace ecore;
 
 bool EcorePackageImpl::isInited = false;

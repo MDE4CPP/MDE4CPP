@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -26,19 +25,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -62,10 +54,11 @@
 
 #include "uml/UseCase.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/Impl/UmlFactoryImpl.hpp"
+#include "uml/Impl/UmlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -122,9 +115,6 @@ ExtendImpl::~ExtendImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			ExtendImpl::ExtendImpl(std::weak_ptr<uml::Namespace > par_namespace)
 			:ExtendImpl()
@@ -134,18 +124,12 @@ ExtendImpl::~ExtendImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			ExtendImpl::ExtendImpl(std::weak_ptr<uml::Element > par_owner)
 			:ExtendImpl()
 			{
 			    m_owner = par_owner;
 			}
-
-
-
 
 
 
@@ -221,7 +205,7 @@ std::shared_ptr<ecore::EObject>  ExtendImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ExtendImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getExtend_Class();
+	return uml::UmlPackage::eInstance()->getExtend_Class();
 }
 
 //*********************************
@@ -342,13 +326,13 @@ Any ExtendImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::EXTEND_ATTRIBUTE_CONDITION:
+		case uml::UmlPackage::EXTEND_ATTRIBUTE_CONDITION:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getCondition())); //9712
-		case UmlPackage::EXTEND_ATTRIBUTE_EXTENDEDCASE:
+		case uml::UmlPackage::EXTEND_ATTRIBUTE_EXTENDEDCASE:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getExtendedCase())); //9713
-		case UmlPackage::EXTEND_ATTRIBUTE_EXTENSION:
+		case uml::UmlPackage::EXTEND_ATTRIBUTE_EXTENSION:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getExtension().lock())); //9715
-		case UmlPackage::EXTEND_ATTRIBUTE_EXTENSIONLOCATION:
+		case uml::UmlPackage::EXTEND_ATTRIBUTE_EXTENSIONLOCATION:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::ExtensionPoint>::iterator iter = m_extensionLocation->begin();
@@ -374,13 +358,13 @@ bool ExtendImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::EXTEND_ATTRIBUTE_CONDITION:
+		case uml::UmlPackage::EXTEND_ATTRIBUTE_CONDITION:
 			return getCondition() != nullptr; //9712
-		case UmlPackage::EXTEND_ATTRIBUTE_EXTENDEDCASE:
+		case uml::UmlPackage::EXTEND_ATTRIBUTE_EXTENDEDCASE:
 			return getExtendedCase() != nullptr; //9713
-		case UmlPackage::EXTEND_ATTRIBUTE_EXTENSION:
+		case uml::UmlPackage::EXTEND_ATTRIBUTE_EXTENSION:
 			return getExtension().lock() != nullptr; //9715
-		case UmlPackage::EXTEND_ATTRIBUTE_EXTENSIONLOCATION:
+		case uml::UmlPackage::EXTEND_ATTRIBUTE_EXTENSIONLOCATION:
 			return getExtensionLocation() != nullptr; //9714
 	}
 	bool result = false;
@@ -396,7 +380,7 @@ bool ExtendImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::EXTEND_ATTRIBUTE_CONDITION:
+		case uml::UmlPackage::EXTEND_ATTRIBUTE_CONDITION:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -404,7 +388,7 @@ bool ExtendImpl::eSet(int featureID, Any newValue)
 			setCondition(_condition); //9712
 			return true;
 		}
-		case UmlPackage::EXTEND_ATTRIBUTE_EXTENDEDCASE:
+		case uml::UmlPackage::EXTEND_ATTRIBUTE_EXTENDEDCASE:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -412,7 +396,7 @@ bool ExtendImpl::eSet(int featureID, Any newValue)
 			setExtendedCase(_extendedCase); //9713
 			return true;
 		}
-		case UmlPackage::EXTEND_ATTRIBUTE_EXTENSION:
+		case uml::UmlPackage::EXTEND_ATTRIBUTE_EXTENSION:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -420,7 +404,7 @@ bool ExtendImpl::eSet(int featureID, Any newValue)
 			setExtension(_extension); //9715
 			return true;
 		}
-		case UmlPackage::EXTEND_ATTRIBUTE_EXTENSIONLOCATION:
+		case uml::UmlPackage::EXTEND_ATTRIBUTE_EXTENSIONLOCATION:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -480,11 +464,10 @@ void ExtendImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loa
 	// Create new objects (from references (containment == true))
 	//
 	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -521,8 +504,9 @@ void ExtendImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHa
 	NamedElementImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void ExtendImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void ExtendImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
 
 	try
 	{
@@ -550,16 +534,16 @@ void ExtendImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::int
 	{
 		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
 	}
-
-	DirectedRelationshipImpl::loadNode(nodeName, loadHandler, modelFactory);
-	NamedElementImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	DirectedRelationshipImpl::loadNode(nodeName, loadHandler);
+	NamedElementImpl::loadNode(nodeName, loadHandler);
 }
 
 void ExtendImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
-		case UmlPackage::EXTEND_ATTRIBUTE_EXTENDEDCASE:
+		case uml::UmlPackage::EXTEND_ATTRIBUTE_EXTENDEDCASE:
 		{
 			if (references.size() == 1)
 			{
@@ -571,7 +555,7 @@ void ExtendImpl::resolveReferences(const int featureID, std::list<std::shared_pt
 			return;
 		}
 
-		case UmlPackage::EXTEND_ATTRIBUTE_EXTENSION:
+		case uml::UmlPackage::EXTEND_ATTRIBUTE_EXTENSION:
 		{
 			if (references.size() == 1)
 			{
@@ -583,7 +567,7 @@ void ExtendImpl::resolveReferences(const int featureID, std::list<std::shared_pt
 			return;
 		}
 
-		case UmlPackage::EXTEND_ATTRIBUTE_EXTENSIONLOCATION:
+		case uml::UmlPackage::EXTEND_ATTRIBUTE_EXTENSIONLOCATION:
 		{
 			std::shared_ptr<Bag<uml::ExtensionPoint>> _extensionLocation = getExtensionLocation();
 			for(std::shared_ptr<ecore::EObject> ref : references)

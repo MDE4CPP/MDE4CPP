@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -25,17 +24,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -49,10 +43,11 @@
 
 #include "uml/GeneralizationSet.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/Impl/UmlFactoryImpl.hpp"
+#include "uml/Impl/UmlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -104,9 +99,6 @@ GeneralizationImpl::~GeneralizationImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			GeneralizationImpl::GeneralizationImpl(std::weak_ptr<uml::Classifier > par_specific)
 			:GeneralizationImpl()
@@ -114,9 +106,6 @@ GeneralizationImpl::~GeneralizationImpl()
 			    m_specific = par_specific;
 				m_owner = par_specific;
 			}
-
-
-
 
 
 
@@ -170,7 +159,7 @@ std::shared_ptr<ecore::EObject>  GeneralizationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> GeneralizationImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getGeneralization_Class();
+	return uml::UmlPackage::eInstance()->getGeneralization_Class();
 }
 
 //*********************************
@@ -275,9 +264,9 @@ Any GeneralizationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::GENERALIZATION_ATTRIBUTE_GENERAL:
+		case uml::UmlPackage::GENERALIZATION_ATTRIBUTE_GENERAL:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getGeneral())); //1106
-		case UmlPackage::GENERALIZATION_ATTRIBUTE_GENERALIZATIONSET:
+		case uml::UmlPackage::GENERALIZATION_ATTRIBUTE_GENERALIZATIONSET:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::GeneralizationSet>::iterator iter = m_generalizationSet->begin();
@@ -289,9 +278,9 @@ Any GeneralizationImpl::eGet(int featureID, bool resolve, bool coreType) const
 			}
 			return eAny(tempList); //1107
 		}
-		case UmlPackage::GENERALIZATION_ATTRIBUTE_ISSUBSTITUTABLE:
+		case uml::UmlPackage::GENERALIZATION_ATTRIBUTE_ISSUBSTITUTABLE:
 			return eAny(getIsSubstitutable()); //1108
-		case UmlPackage::GENERALIZATION_ATTRIBUTE_SPECIFIC:
+		case uml::UmlPackage::GENERALIZATION_ATTRIBUTE_SPECIFIC:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSpecific().lock())); //1109
 	}
 	return DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
@@ -300,13 +289,13 @@ bool GeneralizationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::GENERALIZATION_ATTRIBUTE_GENERAL:
+		case uml::UmlPackage::GENERALIZATION_ATTRIBUTE_GENERAL:
 			return getGeneral() != nullptr; //1106
-		case UmlPackage::GENERALIZATION_ATTRIBUTE_GENERALIZATIONSET:
+		case uml::UmlPackage::GENERALIZATION_ATTRIBUTE_GENERALIZATIONSET:
 			return getGeneralizationSet() != nullptr; //1107
-		case UmlPackage::GENERALIZATION_ATTRIBUTE_ISSUBSTITUTABLE:
+		case uml::UmlPackage::GENERALIZATION_ATTRIBUTE_ISSUBSTITUTABLE:
 			return getIsSubstitutable() != true; //1108
-		case UmlPackage::GENERALIZATION_ATTRIBUTE_SPECIFIC:
+		case uml::UmlPackage::GENERALIZATION_ATTRIBUTE_SPECIFIC:
 			return getSpecific().lock() != nullptr; //1109
 	}
 	return DirectedRelationshipImpl::internalEIsSet(featureID);
@@ -315,7 +304,7 @@ bool GeneralizationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::GENERALIZATION_ATTRIBUTE_GENERAL:
+		case uml::UmlPackage::GENERALIZATION_ATTRIBUTE_GENERAL:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -323,7 +312,7 @@ bool GeneralizationImpl::eSet(int featureID, Any newValue)
 			setGeneral(_general); //1106
 			return true;
 		}
-		case UmlPackage::GENERALIZATION_ATTRIBUTE_GENERALIZATIONSET:
+		case uml::UmlPackage::GENERALIZATION_ATTRIBUTE_GENERALIZATIONSET:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -359,14 +348,14 @@ bool GeneralizationImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case UmlPackage::GENERALIZATION_ATTRIBUTE_ISSUBSTITUTABLE:
+		case uml::UmlPackage::GENERALIZATION_ATTRIBUTE_ISSUBSTITUTABLE:
 		{
 			// BOOST CAST
 			bool _isSubstitutable = newValue->get<bool>();
 			setIsSubstitutable(_isSubstitutable); //1108
 			return true;
 		}
-		case UmlPackage::GENERALIZATION_ATTRIBUTE_SPECIFIC:
+		case uml::UmlPackage::GENERALIZATION_ATTRIBUTE_SPECIFIC:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -391,11 +380,10 @@ void GeneralizationImpl::load(std::shared_ptr<persistence::interfaces::XLoadHand
 	// Create new objects (from references (containment == true))
 	//
 	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -440,18 +428,19 @@ void GeneralizationImpl::loadAttributes(std::shared_ptr<persistence::interfaces:
 	DirectedRelationshipImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void GeneralizationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void GeneralizationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
 
-
-	DirectedRelationshipImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	DirectedRelationshipImpl::loadNode(nodeName, loadHandler);
 }
 
 void GeneralizationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
-		case UmlPackage::GENERALIZATION_ATTRIBUTE_GENERAL:
+		case uml::UmlPackage::GENERALIZATION_ATTRIBUTE_GENERAL:
 		{
 			if (references.size() == 1)
 			{
@@ -463,7 +452,7 @@ void GeneralizationImpl::resolveReferences(const int featureID, std::list<std::s
 			return;
 		}
 
-		case UmlPackage::GENERALIZATION_ATTRIBUTE_GENERALIZATIONSET:
+		case uml::UmlPackage::GENERALIZATION_ATTRIBUTE_GENERALIZATIONSET:
 		{
 			std::shared_ptr<Bag<uml::GeneralizationSet>> _generalizationSet = getGeneralizationSet();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -477,7 +466,7 @@ void GeneralizationImpl::resolveReferences(const int featureID, std::list<std::s
 			return;
 		}
 
-		case UmlPackage::GENERALIZATION_ATTRIBUTE_SPECIFIC:
+		case uml::UmlPackage::GENERALIZATION_ATTRIBUTE_SPECIFIC:
 		{
 			if (references.size() == 1)
 			{
@@ -518,7 +507,6 @@ void GeneralizationImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
 
 	
- 
 		// Add attributes
 		if ( this->eIsSet(package->getGeneralization_Attribute_isSubstitutable()) )
 		{

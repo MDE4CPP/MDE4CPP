@@ -22,7 +22,6 @@ namespace ecore
 	class EcoreFactory;
 }
 
-
 namespace types
 {
 	class TypesPackageImpl : public ecore::EPackageImpl ,virtual public TypesPackage

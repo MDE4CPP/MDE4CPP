@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -25,23 +24,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -65,10 +53,11 @@
 
 #include "uml/Type.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/Impl/UmlFactoryImpl.hpp"
+#include "uml/Impl/UmlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -110,18 +99,12 @@ TypeImpl::~TypeImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			TypeImpl::TypeImpl(std::weak_ptr<uml::Element > par_owner)
 			:TypeImpl()
 			{
 			    m_owner = par_owner;
 			}
-
-
-
 
 
 //Additional constructor for the containments back reference
@@ -145,9 +128,6 @@ TypeImpl::TypeImpl(std::weak_ptr<uml::Package > par_Package, const int reference
 }
 
 
-
-
-
 //Additional constructor for the containments back reference
 			TypeImpl::TypeImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
 			:TypeImpl()
@@ -157,13 +137,7 @@ TypeImpl::TypeImpl(std::weak_ptr<uml::Package > par_Package, const int reference
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
-
-
-
 
 
 
@@ -224,7 +198,7 @@ std::shared_ptr<ecore::EObject>  TypeImpl::copy() const
 
 std::shared_ptr<ecore::EClass> TypeImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getType_Class();
+	return uml::UmlPackage::eInstance()->getType_Class();
 }
 
 //*********************************
@@ -327,7 +301,7 @@ Any TypeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
+		case uml::UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getPackage().lock())); //24512
 	}
 	return PackageableElementImpl::eGet(featureID, resolve, coreType);
@@ -336,7 +310,7 @@ bool TypeImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
+		case uml::UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
 			return getPackage().lock() != nullptr; //24512
 	}
 	return PackageableElementImpl::internalEIsSet(featureID);
@@ -345,7 +319,7 @@ bool TypeImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
+		case uml::UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -370,11 +344,10 @@ void TypeImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadH
 	// Create new objects (from references (containment == true))
 	//
 	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -384,18 +357,19 @@ void TypeImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHand
 	PackageableElementImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void TypeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void TypeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
 
-
-	PackageableElementImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	PackageableElementImpl::loadNode(nodeName, loadHandler);
 }
 
 void TypeImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
-		case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
+		case uml::UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
 		{
 			if (references.size() == 1)
 			{

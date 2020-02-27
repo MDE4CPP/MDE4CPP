@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -25,17 +24,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -55,10 +49,11 @@
 
 #include "uml/Profile.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/Impl/UmlFactoryImpl.hpp"
+#include "uml/Impl/UmlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -104,18 +99,12 @@ ProfileApplicationImpl::~ProfileApplicationImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			ProfileApplicationImpl::ProfileApplicationImpl(std::weak_ptr<uml::Element > par_owner)
 			:ProfileApplicationImpl()
 			{
 			    m_owner = par_owner;
 			}
-
-
-
 
 
 
@@ -166,7 +155,7 @@ std::shared_ptr<ecore::EObject>  ProfileApplicationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ProfileApplicationImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getProfileApplication_Class();
+	return uml::UmlPackage::eInstance()->getProfileApplication_Class();
 }
 
 //*********************************
@@ -275,11 +264,11 @@ Any ProfileApplicationImpl::eGet(int featureID, bool resolve, bool coreType) con
 {
 	switch(featureID)
 	{
-		case UmlPackage::PROFILEAPPLICATION_ATTRIBUTE_APPLIEDPROFILE:
+		case uml::UmlPackage::PROFILEAPPLICATION_ATTRIBUTE_APPLIEDPROFILE:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getAppliedProfile())); //1856
-		case UmlPackage::PROFILEAPPLICATION_ATTRIBUTE_APPLYINGPACKAGE:
+		case uml::UmlPackage::PROFILEAPPLICATION_ATTRIBUTE_APPLYINGPACKAGE:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getApplyingPackage().lock())); //1858
-		case UmlPackage::PROFILEAPPLICATION_ATTRIBUTE_ISSTRICT:
+		case uml::UmlPackage::PROFILEAPPLICATION_ATTRIBUTE_ISSTRICT:
 			return eAny(getIsStrict()); //1857
 	}
 	return DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
@@ -288,11 +277,11 @@ bool ProfileApplicationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::PROFILEAPPLICATION_ATTRIBUTE_APPLIEDPROFILE:
+		case uml::UmlPackage::PROFILEAPPLICATION_ATTRIBUTE_APPLIEDPROFILE:
 			return getAppliedProfile() != nullptr; //1856
-		case UmlPackage::PROFILEAPPLICATION_ATTRIBUTE_APPLYINGPACKAGE:
+		case uml::UmlPackage::PROFILEAPPLICATION_ATTRIBUTE_APPLYINGPACKAGE:
 			return getApplyingPackage().lock() != nullptr; //1858
-		case UmlPackage::PROFILEAPPLICATION_ATTRIBUTE_ISSTRICT:
+		case uml::UmlPackage::PROFILEAPPLICATION_ATTRIBUTE_ISSTRICT:
 			return getIsStrict() != false; //1857
 	}
 	return DirectedRelationshipImpl::internalEIsSet(featureID);
@@ -301,7 +290,7 @@ bool ProfileApplicationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::PROFILEAPPLICATION_ATTRIBUTE_APPLIEDPROFILE:
+		case uml::UmlPackage::PROFILEAPPLICATION_ATTRIBUTE_APPLIEDPROFILE:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -309,7 +298,7 @@ bool ProfileApplicationImpl::eSet(int featureID, Any newValue)
 			setAppliedProfile(_appliedProfile); //1856
 			return true;
 		}
-		case UmlPackage::PROFILEAPPLICATION_ATTRIBUTE_APPLYINGPACKAGE:
+		case uml::UmlPackage::PROFILEAPPLICATION_ATTRIBUTE_APPLYINGPACKAGE:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -317,7 +306,7 @@ bool ProfileApplicationImpl::eSet(int featureID, Any newValue)
 			setApplyingPackage(_applyingPackage); //1858
 			return true;
 		}
-		case UmlPackage::PROFILEAPPLICATION_ATTRIBUTE_ISSTRICT:
+		case uml::UmlPackage::PROFILEAPPLICATION_ATTRIBUTE_ISSTRICT:
 		{
 			// BOOST CAST
 			bool _isStrict = newValue->get<bool>();
@@ -341,11 +330,10 @@ void ProfileApplicationImpl::load(std::shared_ptr<persistence::interfaces::XLoad
 	// Create new objects (from references (containment == true))
 	//
 	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -383,18 +371,19 @@ void ProfileApplicationImpl::loadAttributes(std::shared_ptr<persistence::interfa
 	DirectedRelationshipImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void ProfileApplicationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void ProfileApplicationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
 
-
-	DirectedRelationshipImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	DirectedRelationshipImpl::loadNode(nodeName, loadHandler);
 }
 
 void ProfileApplicationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
-		case UmlPackage::PROFILEAPPLICATION_ATTRIBUTE_APPLIEDPROFILE:
+		case uml::UmlPackage::PROFILEAPPLICATION_ATTRIBUTE_APPLIEDPROFILE:
 		{
 			if (references.size() == 1)
 			{
@@ -406,7 +395,7 @@ void ProfileApplicationImpl::resolveReferences(const int featureID, std::list<st
 			return;
 		}
 
-		case UmlPackage::PROFILEAPPLICATION_ATTRIBUTE_APPLYINGPACKAGE:
+		case uml::UmlPackage::PROFILEAPPLICATION_ATTRIBUTE_APPLYINGPACKAGE:
 		{
 			if (references.size() == 1)
 			{
@@ -447,7 +436,6 @@ void ProfileApplicationImpl::saveContent(std::shared_ptr<persistence::interfaces
 		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
 
 	
- 
 		// Add attributes
 		if ( this->eIsSet(package->getProfileApplication_Attribute_isStrict()) )
 		{

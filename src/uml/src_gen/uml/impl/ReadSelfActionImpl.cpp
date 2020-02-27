@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -26,21 +25,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -82,10 +72,11 @@
 
 #include "uml/StructuredActivityNode.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/Impl/UmlFactoryImpl.hpp"
+#include "uml/Impl/UmlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -127,9 +118,6 @@ ReadSelfActionImpl::~ReadSelfActionImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			ReadSelfActionImpl::ReadSelfActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
 			:ReadSelfActionImpl()
@@ -137,9 +125,6 @@ ReadSelfActionImpl::~ReadSelfActionImpl()
 			    m_inStructuredNode = par_inStructuredNode;
 				m_owner = par_inStructuredNode;
 			}
-
-
-
 
 
 //Additional constructor for the containments back reference
@@ -151,18 +136,12 @@ ReadSelfActionImpl::~ReadSelfActionImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			ReadSelfActionImpl::ReadSelfActionImpl(std::weak_ptr<uml::Element > par_owner)
 			:ReadSelfActionImpl()
 			{
 			    m_owner = par_owner;
 			}
-
-
-
 
 
 
@@ -294,7 +273,7 @@ std::shared_ptr<ecore::EObject>  ReadSelfActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ReadSelfActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getReadSelfAction_Class();
+	return uml::UmlPackage::eInstance()->getReadSelfAction_Class();
 }
 
 //*********************************
@@ -406,7 +385,7 @@ Any ReadSelfActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::READSELFACTION_ATTRIBUTE_RESULT:
+		case uml::UmlPackage::READSELFACTION_ATTRIBUTE_RESULT:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getResult())); //19927
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
@@ -415,7 +394,7 @@ bool ReadSelfActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::READSELFACTION_ATTRIBUTE_RESULT:
+		case uml::UmlPackage::READSELFACTION_ATTRIBUTE_RESULT:
 			return getResult() != nullptr; //19927
 	}
 	return ActionImpl::internalEIsSet(featureID);
@@ -424,7 +403,7 @@ bool ReadSelfActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::READSELFACTION_ATTRIBUTE_RESULT:
+		case uml::UmlPackage::READSELFACTION_ATTRIBUTE_RESULT:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -449,11 +428,10 @@ void ReadSelfActionImpl::load(std::shared_ptr<persistence::interfaces::XLoadHand
 	// Create new objects (from references (containment == true))
 	//
 	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -463,8 +441,9 @@ void ReadSelfActionImpl::loadAttributes(std::shared_ptr<persistence::interfaces:
 	ActionImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void ReadSelfActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void ReadSelfActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
 
 	try
 	{
@@ -475,7 +454,7 @@ void ReadSelfActionImpl::loadNode(std::string nodeName, std::shared_ptr<persiste
 			{
 				typeName = "OutputPin";
 			}
-			std::shared_ptr<ecore::EObject> result = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::OUTPUTPIN_ATTRIBUTE_READSELFACTION);
+			std::shared_ptr<ecore::EObject> result = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::UmlPackage::OUTPUTPIN_ATTRIBUTE_READSELFACTION);
 			if (result != nullptr)
 			{
 				loadHandler->handleChild(result);
@@ -491,8 +470,8 @@ void ReadSelfActionImpl::loadNode(std::string nodeName, std::shared_ptr<persiste
 	{
 		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
 	}
-
-	ActionImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	ActionImpl::loadNode(nodeName, loadHandler);
 }
 
 void ReadSelfActionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)

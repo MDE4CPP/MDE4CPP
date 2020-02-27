@@ -87,6 +87,7 @@ void StandardProfilePackageImpl::createPackageActivities(std::shared_ptr<uml::Pa
 {
 }
 
+
 void StandardProfilePackageImpl::createPackageClasses(std::shared_ptr<uml::Package> standardProfile, std::shared_ptr<uml::UmlFactory> factory)
 {
 	std::shared_ptr<uml::Constraint> con = nullptr;
@@ -419,6 +420,7 @@ void StandardProfilePackageImpl::initializePackageContents(std::shared_ptr<uml::
 void StandardProfilePackageImpl::initializePackageActivities()
 {
 }
+
 
 void StandardProfilePackageImpl::initializePackageClasses()
 {

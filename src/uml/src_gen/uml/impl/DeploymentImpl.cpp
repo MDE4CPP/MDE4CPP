@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -25,23 +24,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -67,10 +55,11 @@
 
 #include "uml/TemplateParameter.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/Impl/UmlFactoryImpl.hpp"
+#include "uml/Impl/UmlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -144,9 +133,6 @@ DeploymentImpl::~DeploymentImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			DeploymentImpl::DeploymentImpl(std::weak_ptr<uml::Namespace > par_namespace)
 			:DeploymentImpl()
@@ -156,18 +142,12 @@ DeploymentImpl::~DeploymentImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			DeploymentImpl::DeploymentImpl(std::weak_ptr<uml::Element > par_owner)
 			:DeploymentImpl()
 			{
 			    m_owner = par_owner;
 			}
-
-
-
 
 
 //Additional constructor for the containments back reference
@@ -179,9 +159,6 @@ DeploymentImpl::~DeploymentImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			DeploymentImpl::DeploymentImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
 			:DeploymentImpl()
@@ -189,9 +166,6 @@ DeploymentImpl::~DeploymentImpl()
 			    m_owningTemplateParameter = par_owningTemplateParameter;
 				m_owner = par_owningTemplateParameter;
 			}
-
-
-
 
 
 
@@ -294,7 +268,7 @@ std::shared_ptr<ecore::EObject>  DeploymentImpl::copy() const
 
 std::shared_ptr<ecore::EClass> DeploymentImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getDeployment_Class();
+	return uml::UmlPackage::eInstance()->getDeployment_Class();
 }
 
 //*********************************
@@ -406,7 +380,7 @@ Any DeploymentImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::DEPLOYMENT_ATTRIBUTE_CONFIGURATION:
+		case uml::UmlPackage::DEPLOYMENT_ATTRIBUTE_CONFIGURATION:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::DeploymentSpecification>::iterator iter = m_configuration->begin();
@@ -418,7 +392,7 @@ Any DeploymentImpl::eGet(int featureID, bool resolve, bool coreType) const
 			}
 			return eAny(tempList); //7017
 		}
-		case UmlPackage::DEPLOYMENT_ATTRIBUTE_DEPLOYEDARTIFACT:
+		case uml::UmlPackage::DEPLOYMENT_ATTRIBUTE_DEPLOYEDARTIFACT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::DeployedArtifact>::iterator iter = m_deployedArtifact->begin();
@@ -430,7 +404,7 @@ Any DeploymentImpl::eGet(int featureID, bool resolve, bool coreType) const
 			}
 			return eAny(tempList); //7018
 		}
-		case UmlPackage::DEPLOYMENT_ATTRIBUTE_LOCATION:
+		case uml::UmlPackage::DEPLOYMENT_ATTRIBUTE_LOCATION:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getLocation().lock())); //7019
 	}
 	return DependencyImpl::eGet(featureID, resolve, coreType);
@@ -439,11 +413,11 @@ bool DeploymentImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::DEPLOYMENT_ATTRIBUTE_CONFIGURATION:
+		case uml::UmlPackage::DEPLOYMENT_ATTRIBUTE_CONFIGURATION:
 			return getConfiguration() != nullptr; //7017
-		case UmlPackage::DEPLOYMENT_ATTRIBUTE_DEPLOYEDARTIFACT:
+		case uml::UmlPackage::DEPLOYMENT_ATTRIBUTE_DEPLOYEDARTIFACT:
 			return getDeployedArtifact() != nullptr; //7018
-		case UmlPackage::DEPLOYMENT_ATTRIBUTE_LOCATION:
+		case uml::UmlPackage::DEPLOYMENT_ATTRIBUTE_LOCATION:
 			return getLocation().lock() != nullptr; //7019
 	}
 	return DependencyImpl::internalEIsSet(featureID);
@@ -452,7 +426,7 @@ bool DeploymentImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::DEPLOYMENT_ATTRIBUTE_CONFIGURATION:
+		case uml::UmlPackage::DEPLOYMENT_ATTRIBUTE_CONFIGURATION:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -488,7 +462,7 @@ bool DeploymentImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case UmlPackage::DEPLOYMENT_ATTRIBUTE_DEPLOYEDARTIFACT:
+		case uml::UmlPackage::DEPLOYMENT_ATTRIBUTE_DEPLOYEDARTIFACT:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -524,7 +498,7 @@ bool DeploymentImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case UmlPackage::DEPLOYMENT_ATTRIBUTE_LOCATION:
+		case uml::UmlPackage::DEPLOYMENT_ATTRIBUTE_LOCATION:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -549,11 +523,10 @@ void DeploymentImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler>
 	// Create new objects (from references (containment == true))
 	//
 	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -582,8 +555,9 @@ void DeploymentImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLo
 	DependencyImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void DeploymentImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void DeploymentImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
 
 	try
 	{
@@ -594,7 +568,7 @@ void DeploymentImpl::loadNode(std::string nodeName, std::shared_ptr<persistence:
 			{
 				typeName = "DeploymentSpecification";
 			}
-			std::shared_ptr<ecore::EObject> configuration = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::DEPLOYMENTSPECIFICATION_ATTRIBUTE_DEPLOYMENT);
+			std::shared_ptr<ecore::EObject> configuration = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::UmlPackage::DEPLOYMENTSPECIFICATION_ATTRIBUTE_DEPLOYMENT);
 			if (configuration != nullptr)
 			{
 				loadHandler->handleChild(configuration);
@@ -610,15 +584,15 @@ void DeploymentImpl::loadNode(std::string nodeName, std::shared_ptr<persistence:
 	{
 		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
 	}
-
-	DependencyImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	DependencyImpl::loadNode(nodeName, loadHandler);
 }
 
 void DeploymentImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
-		case UmlPackage::DEPLOYMENT_ATTRIBUTE_DEPLOYEDARTIFACT:
+		case uml::UmlPackage::DEPLOYMENT_ATTRIBUTE_DEPLOYEDARTIFACT:
 		{
 			std::shared_ptr<Bag<uml::DeployedArtifact>> _deployedArtifact = getDeployedArtifact();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -632,7 +606,7 @@ void DeploymentImpl::resolveReferences(const int featureID, std::list<std::share
 			return;
 		}
 
-		case UmlPackage::DEPLOYMENT_ATTRIBUTE_LOCATION:
+		case uml::UmlPackage::DEPLOYMENT_ATTRIBUTE_LOCATION:
 		{
 			if (references.size() == 1)
 			{

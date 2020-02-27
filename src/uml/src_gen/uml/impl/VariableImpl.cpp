@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -25,23 +24,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -73,10 +61,11 @@
 
 #include "uml/ValueSpecification.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/Impl/UmlFactoryImpl.hpp"
+#include "uml/Impl/UmlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -122,9 +111,6 @@ VariableImpl::~VariableImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			VariableImpl::VariableImpl(std::weak_ptr<uml::Namespace > par_namespace)
 			:VariableImpl()
@@ -134,18 +120,12 @@ VariableImpl::~VariableImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			VariableImpl::VariableImpl(std::weak_ptr<uml::Element > par_owner)
 			:VariableImpl()
 			{
 			    m_owner = par_owner;
 			}
-
-
-
 
 
 //Additional constructor for the containments back reference
@@ -157,9 +137,6 @@ VariableImpl::~VariableImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			VariableImpl::VariableImpl(std::weak_ptr<uml::StructuredActivityNode > par_scope)
 			:VariableImpl()
@@ -167,9 +144,6 @@ VariableImpl::~VariableImpl()
 			    m_scope = par_scope;
 				m_namespace = par_scope;
 			}
-
-
-
 
 
 
@@ -253,7 +227,7 @@ std::shared_ptr<ecore::EObject>  VariableImpl::copy() const
 
 std::shared_ptr<ecore::EClass> VariableImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getVariable_Class();
+	return uml::UmlPackage::eInstance()->getVariable_Class();
 }
 
 //*********************************
@@ -355,9 +329,9 @@ Any VariableImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::VARIABLE_ATTRIBUTE_ACTIVITYSCOPE:
+		case uml::UmlPackage::VARIABLE_ATTRIBUTE_ACTIVITYSCOPE:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getActivityScope().lock())); //25319
-		case UmlPackage::VARIABLE_ATTRIBUTE_SCOPE:
+		case uml::UmlPackage::VARIABLE_ATTRIBUTE_SCOPE:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getScope().lock())); //25320
 	}
 	Any result;
@@ -373,9 +347,9 @@ bool VariableImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::VARIABLE_ATTRIBUTE_ACTIVITYSCOPE:
+		case uml::UmlPackage::VARIABLE_ATTRIBUTE_ACTIVITYSCOPE:
 			return getActivityScope().lock() != nullptr; //25319
-		case UmlPackage::VARIABLE_ATTRIBUTE_SCOPE:
+		case uml::UmlPackage::VARIABLE_ATTRIBUTE_SCOPE:
 			return getScope().lock() != nullptr; //25320
 	}
 	bool result = false;
@@ -391,7 +365,7 @@ bool VariableImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::VARIABLE_ATTRIBUTE_ACTIVITYSCOPE:
+		case uml::UmlPackage::VARIABLE_ATTRIBUTE_ACTIVITYSCOPE:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -399,7 +373,7 @@ bool VariableImpl::eSet(int featureID, Any newValue)
 			setActivityScope(_activityScope); //25319
 			return true;
 		}
-		case UmlPackage::VARIABLE_ATTRIBUTE_SCOPE:
+		case uml::UmlPackage::VARIABLE_ATTRIBUTE_SCOPE:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -431,11 +405,10 @@ void VariableImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> l
 	// Create new objects (from references (containment == true))
 	//
 	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -446,19 +419,20 @@ void VariableImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoad
 	MultiplicityElementImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void VariableImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void VariableImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
 
-
-	ConnectableElementImpl::loadNode(nodeName, loadHandler, modelFactory);
-	MultiplicityElementImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	ConnectableElementImpl::loadNode(nodeName, loadHandler);
+	MultiplicityElementImpl::loadNode(nodeName, loadHandler);
 }
 
 void VariableImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
-		case UmlPackage::VARIABLE_ATTRIBUTE_ACTIVITYSCOPE:
+		case uml::UmlPackage::VARIABLE_ATTRIBUTE_ACTIVITYSCOPE:
 		{
 			if (references.size() == 1)
 			{
@@ -470,7 +444,7 @@ void VariableImpl::resolveReferences(const int featureID, std::list<std::shared_
 			return;
 		}
 
-		case UmlPackage::VARIABLE_ATTRIBUTE_SCOPE:
+		case uml::UmlPackage::VARIABLE_ATTRIBUTE_SCOPE:
 		{
 			if (references.size() == 1)
 			{

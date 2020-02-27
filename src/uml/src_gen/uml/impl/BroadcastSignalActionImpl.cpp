@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -26,21 +25,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -86,10 +76,11 @@
 
 #include "uml/StructuredActivityNode.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/Impl/UmlFactoryImpl.hpp"
+#include "uml/Impl/UmlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -131,9 +122,6 @@ BroadcastSignalActionImpl::~BroadcastSignalActionImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			BroadcastSignalActionImpl::BroadcastSignalActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
 			:BroadcastSignalActionImpl()
@@ -141,9 +129,6 @@ BroadcastSignalActionImpl::~BroadcastSignalActionImpl()
 			    m_inStructuredNode = par_inStructuredNode;
 				m_owner = par_inStructuredNode;
 			}
-
-
-
 
 
 //Additional constructor for the containments back reference
@@ -155,18 +140,12 @@ BroadcastSignalActionImpl::~BroadcastSignalActionImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			BroadcastSignalActionImpl::BroadcastSignalActionImpl(std::weak_ptr<uml::Element > par_owner)
 			:BroadcastSignalActionImpl()
 			{
 			    m_owner = par_owner;
 			}
-
-
-
 
 
 
@@ -302,7 +281,7 @@ std::shared_ptr<ecore::EObject>  BroadcastSignalActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> BroadcastSignalActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getBroadcastSignalAction_Class();
+	return uml::UmlPackage::eInstance()->getBroadcastSignalAction_Class();
 }
 
 //*********************************
@@ -408,7 +387,7 @@ Any BroadcastSignalActionImpl::eGet(int featureID, bool resolve, bool coreType) 
 {
 	switch(featureID)
 	{
-		case UmlPackage::BROADCASTSIGNALACTION_ATTRIBUTE_SIGNAL:
+		case uml::UmlPackage::BROADCASTSIGNALACTION_ATTRIBUTE_SIGNAL:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSignal())); //2829
 	}
 	return InvocationActionImpl::eGet(featureID, resolve, coreType);
@@ -417,7 +396,7 @@ bool BroadcastSignalActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::BROADCASTSIGNALACTION_ATTRIBUTE_SIGNAL:
+		case uml::UmlPackage::BROADCASTSIGNALACTION_ATTRIBUTE_SIGNAL:
 			return getSignal() != nullptr; //2829
 	}
 	return InvocationActionImpl::internalEIsSet(featureID);
@@ -426,7 +405,7 @@ bool BroadcastSignalActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::BROADCASTSIGNALACTION_ATTRIBUTE_SIGNAL:
+		case uml::UmlPackage::BROADCASTSIGNALACTION_ATTRIBUTE_SIGNAL:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -451,11 +430,10 @@ void BroadcastSignalActionImpl::load(std::shared_ptr<persistence::interfaces::XL
 	// Create new objects (from references (containment == true))
 	//
 	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -484,18 +462,19 @@ void BroadcastSignalActionImpl::loadAttributes(std::shared_ptr<persistence::inte
 	InvocationActionImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void BroadcastSignalActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void BroadcastSignalActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
 
-
-	InvocationActionImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	InvocationActionImpl::loadNode(nodeName, loadHandler);
 }
 
 void BroadcastSignalActionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
-		case UmlPackage::BROADCASTSIGNALACTION_ATTRIBUTE_SIGNAL:
+		case uml::UmlPackage::BROADCASTSIGNALACTION_ATTRIBUTE_SIGNAL:
 		{
 			if (references.size() == 1)
 			{

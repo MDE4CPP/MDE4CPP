@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -26,23 +25,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -96,10 +84,11 @@
 
 #include "uml/Type.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/Impl/UmlFactoryImpl.hpp"
+#include "uml/Impl/UmlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -169,9 +158,6 @@ ProfileImpl::~ProfileImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 ProfileImpl::ProfileImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id)
 :ProfileImpl()
@@ -193,9 +179,6 @@ ProfileImpl::ProfileImpl(std::weak_ptr<uml::Package > par_Package, const int ref
 }
 
 
-
-
-
 //Additional constructor for the containments back reference
 			ProfileImpl::ProfileImpl(std::weak_ptr<uml::Element > par_owner)
 			:ProfileImpl()
@@ -204,13 +187,7 @@ ProfileImpl::ProfileImpl(std::weak_ptr<uml::Package > par_Package, const int ref
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
-
-
-
 
 
 //Additional constructor for the containments back reference
@@ -220,9 +197,6 @@ ProfileImpl::ProfileImpl(std::weak_ptr<uml::Package > par_Package, const int ref
 			    m_owningTemplateParameter = par_owningTemplateParameter;
 				m_owner = par_owningTemplateParameter;
 			}
-
-
-
 
 
 
@@ -398,7 +372,7 @@ std::shared_ptr<ecore::EObject>  ProfileImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ProfileImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getProfile_Class();
+	return uml::UmlPackage::eInstance()->getProfile_Class();
 }
 
 //*********************************
@@ -561,7 +535,7 @@ Any ProfileImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::PROFILE_ATTRIBUTE_METACLASSREFERENCE:
+		case uml::UmlPackage::PROFILE_ATTRIBUTE_METACLASSREFERENCE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::ElementImport>::iterator iter = m_metaclassReference->begin();
@@ -573,7 +547,7 @@ Any ProfileImpl::eGet(int featureID, bool resolve, bool coreType) const
 			}
 			return eAny(tempList); //18428
 		}
-		case UmlPackage::PROFILE_ATTRIBUTE_METAMODELREFERENCE:
+		case uml::UmlPackage::PROFILE_ATTRIBUTE_METAMODELREFERENCE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::PackageImport>::iterator iter = m_metamodelReference->begin();
@@ -592,9 +566,9 @@ bool ProfileImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::PROFILE_ATTRIBUTE_METACLASSREFERENCE:
+		case uml::UmlPackage::PROFILE_ATTRIBUTE_METACLASSREFERENCE:
 			return getMetaclassReference() != nullptr; //18428
-		case UmlPackage::PROFILE_ATTRIBUTE_METAMODELREFERENCE:
+		case uml::UmlPackage::PROFILE_ATTRIBUTE_METAMODELREFERENCE:
 			return getMetamodelReference() != nullptr; //18429
 	}
 	return PackageImpl::internalEIsSet(featureID);
@@ -603,7 +577,7 @@ bool ProfileImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::PROFILE_ATTRIBUTE_METACLASSREFERENCE:
+		case uml::UmlPackage::PROFILE_ATTRIBUTE_METACLASSREFERENCE:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -639,7 +613,7 @@ bool ProfileImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case UmlPackage::PROFILE_ATTRIBUTE_METAMODELREFERENCE:
+		case uml::UmlPackage::PROFILE_ATTRIBUTE_METAMODELREFERENCE:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -692,11 +666,10 @@ void ProfileImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> lo
 	// Create new objects (from references (containment == true))
 	//
 	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -732,18 +705,19 @@ void ProfileImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadH
 	PackageImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void ProfileImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void ProfileImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
 
-
-	PackageImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	PackageImpl::loadNode(nodeName, loadHandler);
 }
 
 void ProfileImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
-		case UmlPackage::PROFILE_ATTRIBUTE_METACLASSREFERENCE:
+		case uml::UmlPackage::PROFILE_ATTRIBUTE_METACLASSREFERENCE:
 		{
 			std::shared_ptr<Bag<uml::ElementImport>> _metaclassReference = getMetaclassReference();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -757,7 +731,7 @@ void ProfileImpl::resolveReferences(const int featureID, std::list<std::shared_p
 			return;
 		}
 
-		case UmlPackage::PROFILE_ATTRIBUTE_METAMODELREFERENCE:
+		case uml::UmlPackage::PROFILE_ATTRIBUTE_METAMODELREFERENCE:
 		{
 			std::shared_ptr<Bag<uml::PackageImport>> _metamodelReference = getMetamodelReference();
 			for(std::shared_ptr<ecore::EObject> ref : references)

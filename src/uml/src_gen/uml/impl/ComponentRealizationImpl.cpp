@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -25,23 +24,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -69,10 +57,11 @@
 
 #include "uml/TemplateParameter.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/Impl/UmlFactoryImpl.hpp"
+#include "uml/Impl/UmlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -130,9 +119,6 @@ ComponentRealizationImpl::~ComponentRealizationImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			ComponentRealizationImpl::ComponentRealizationImpl(std::weak_ptr<uml::Namespace > par_namespace)
 			:ComponentRealizationImpl()
@@ -142,18 +128,12 @@ ComponentRealizationImpl::~ComponentRealizationImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			ComponentRealizationImpl::ComponentRealizationImpl(std::weak_ptr<uml::Element > par_owner)
 			:ComponentRealizationImpl()
 			{
 			    m_owner = par_owner;
 			}
-
-
-
 
 
 //Additional constructor for the containments back reference
@@ -165,9 +145,6 @@ ComponentRealizationImpl::~ComponentRealizationImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			ComponentRealizationImpl::ComponentRealizationImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
 			:ComponentRealizationImpl()
@@ -175,9 +152,6 @@ ComponentRealizationImpl::~ComponentRealizationImpl()
 			    m_owningTemplateParameter = par_owningTemplateParameter;
 				m_owner = par_owningTemplateParameter;
 			}
-
-
-
 
 
 
@@ -272,7 +246,7 @@ std::shared_ptr<ecore::EObject>  ComponentRealizationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ComponentRealizationImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getComponentRealization_Class();
+	return uml::UmlPackage::eInstance()->getComponentRealization_Class();
 }
 
 //*********************************
@@ -377,9 +351,9 @@ Any ComponentRealizationImpl::eGet(int featureID, bool resolve, bool coreType) c
 {
 	switch(featureID)
 	{
-		case UmlPackage::COMPONENTREALIZATION_ATTRIBUTE_ABSTRACTION:
+		case uml::UmlPackage::COMPONENTREALIZATION_ATTRIBUTE_ABSTRACTION:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getAbstraction().lock())); //4919
-		case UmlPackage::COMPONENTREALIZATION_ATTRIBUTE_REALIZINGCLASSIFIER:
+		case uml::UmlPackage::COMPONENTREALIZATION_ATTRIBUTE_REALIZINGCLASSIFIER:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Classifier>::iterator iter = m_realizingClassifier->begin();
@@ -398,9 +372,9 @@ bool ComponentRealizationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::COMPONENTREALIZATION_ATTRIBUTE_ABSTRACTION:
+		case uml::UmlPackage::COMPONENTREALIZATION_ATTRIBUTE_ABSTRACTION:
 			return getAbstraction().lock() != nullptr; //4919
-		case UmlPackage::COMPONENTREALIZATION_ATTRIBUTE_REALIZINGCLASSIFIER:
+		case uml::UmlPackage::COMPONENTREALIZATION_ATTRIBUTE_REALIZINGCLASSIFIER:
 			return getRealizingClassifier() != nullptr; //4918
 	}
 	return RealizationImpl::internalEIsSet(featureID);
@@ -409,7 +383,7 @@ bool ComponentRealizationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::COMPONENTREALIZATION_ATTRIBUTE_ABSTRACTION:
+		case uml::UmlPackage::COMPONENTREALIZATION_ATTRIBUTE_ABSTRACTION:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -417,7 +391,7 @@ bool ComponentRealizationImpl::eSet(int featureID, Any newValue)
 			setAbstraction(_abstraction); //4919
 			return true;
 		}
-		case UmlPackage::COMPONENTREALIZATION_ATTRIBUTE_REALIZINGCLASSIFIER:
+		case uml::UmlPackage::COMPONENTREALIZATION_ATTRIBUTE_REALIZINGCLASSIFIER:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -470,11 +444,10 @@ void ComponentRealizationImpl::load(std::shared_ptr<persistence::interfaces::XLo
 	// Create new objects (from references (containment == true))
 	//
 	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -503,18 +476,19 @@ void ComponentRealizationImpl::loadAttributes(std::shared_ptr<persistence::inter
 	RealizationImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void ComponentRealizationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void ComponentRealizationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
 
-
-	RealizationImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	RealizationImpl::loadNode(nodeName, loadHandler);
 }
 
 void ComponentRealizationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
-		case UmlPackage::COMPONENTREALIZATION_ATTRIBUTE_ABSTRACTION:
+		case uml::UmlPackage::COMPONENTREALIZATION_ATTRIBUTE_ABSTRACTION:
 		{
 			if (references.size() == 1)
 			{
@@ -526,7 +500,7 @@ void ComponentRealizationImpl::resolveReferences(const int featureID, std::list<
 			return;
 		}
 
-		case UmlPackage::COMPONENTREALIZATION_ATTRIBUTE_REALIZINGCLASSIFIER:
+		case uml::UmlPackage::COMPONENTREALIZATION_ATTRIBUTE_REALIZINGCLASSIFIER:
 		{
 			std::shared_ptr<Bag<uml::Classifier>> _realizingClassifier = getRealizingClassifier();
 			for(std::shared_ptr<ecore::EObject> ref : references)

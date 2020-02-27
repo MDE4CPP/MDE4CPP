@@ -40,7 +40,6 @@ namespace ecore
 	class EcoreFactory;
 }
 
-
 namespace ecore
 {
 	class EcorePackageImpl : public EPackageImpl ,virtual public EcorePackage

@@ -25,7 +25,9 @@
 #include "fUML/FUMLPackage.hpp"
 #include "types/TypesPackage.hpp"
 #include "uml/UmlPackage.hpp"
-
+//include subpackages 
+#include "PSCS/Semantics/impl/SemanticsPackageImpl.hpp"
+ 
 using namespace PSCS;
 
 void PSCSPackageImpl::createPackageContents(std::shared_ptr<ecore::EPackage> package)
@@ -40,6 +42,9 @@ void PSCSPackageImpl::createPackageContents(std::shared_ptr<ecore::EPackage> pac
 
 
 	createPackageEDataTypes(package, factory);
+
+	std::dynamic_pointer_cast<PSCS::Semantics::SemanticsPackageImpl>(getSemantics_Package())->createPackageContents(getSemantics_Package());
+
 }
 
 

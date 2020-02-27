@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -26,21 +25,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -74,10 +64,11 @@
 
 #include "uml/TemplateParameter.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/Impl/UmlFactoryImpl.hpp"
+#include "uml/Impl/UmlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -182,18 +173,12 @@ InformationFlowImpl::~InformationFlowImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			InformationFlowImpl::InformationFlowImpl(std::weak_ptr<uml::Element > par_owner)
 			:InformationFlowImpl()
 			{
 			    m_owner = par_owner;
 			}
-
-
-
 
 
 //Additional constructor for the containments back reference
@@ -205,9 +190,6 @@ InformationFlowImpl::~InformationFlowImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			InformationFlowImpl::InformationFlowImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
 			:InformationFlowImpl()
@@ -215,9 +197,6 @@ InformationFlowImpl::~InformationFlowImpl()
 			    m_owningTemplateParameter = par_owningTemplateParameter;
 				m_owner = par_owningTemplateParameter;
 			}
-
-
-
 
 
 
@@ -310,7 +289,7 @@ std::shared_ptr<ecore::EObject>  InformationFlowImpl::copy() const
 
 std::shared_ptr<ecore::EClass> InformationFlowImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getInformationFlow_Class();
+	return uml::UmlPackage::eInstance()->getInformationFlow_Class();
 }
 
 //*********************************
@@ -460,7 +439,7 @@ Any InformationFlowImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::INFORMATIONFLOW_ATTRIBUTE_CONVEYED:
+		case uml::UmlPackage::INFORMATIONFLOW_ATTRIBUTE_CONVEYED:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Classifier>::iterator iter = m_conveyed->begin();
@@ -472,7 +451,7 @@ Any InformationFlowImpl::eGet(int featureID, bool resolve, bool coreType) const
 			}
 			return eAny(tempList); //11415
 		}
-		case UmlPackage::INFORMATIONFLOW_ATTRIBUTE_INFORMATIONSOURCE:
+		case uml::UmlPackage::INFORMATIONFLOW_ATTRIBUTE_INFORMATIONSOURCE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::NamedElement>::iterator iter = m_informationSource->begin();
@@ -484,7 +463,7 @@ Any InformationFlowImpl::eGet(int featureID, bool resolve, bool coreType) const
 			}
 			return eAny(tempList); //11416
 		}
-		case UmlPackage::INFORMATIONFLOW_ATTRIBUTE_INFORMATIONTARGET:
+		case uml::UmlPackage::INFORMATIONFLOW_ATTRIBUTE_INFORMATIONTARGET:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::NamedElement>::iterator iter = m_informationTarget->begin();
@@ -496,7 +475,7 @@ Any InformationFlowImpl::eGet(int featureID, bool resolve, bool coreType) const
 			}
 			return eAny(tempList); //11417
 		}
-		case UmlPackage::INFORMATIONFLOW_ATTRIBUTE_REALIZATION:
+		case uml::UmlPackage::INFORMATIONFLOW_ATTRIBUTE_REALIZATION:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Relationship>::iterator iter = m_realization->begin();
@@ -508,7 +487,7 @@ Any InformationFlowImpl::eGet(int featureID, bool resolve, bool coreType) const
 			}
 			return eAny(tempList); //11418
 		}
-		case UmlPackage::INFORMATIONFLOW_ATTRIBUTE_REALIZINGACTIVITYEDGE:
+		case uml::UmlPackage::INFORMATIONFLOW_ATTRIBUTE_REALIZINGACTIVITYEDGE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::ActivityEdge>::iterator iter = m_realizingActivityEdge->begin();
@@ -520,7 +499,7 @@ Any InformationFlowImpl::eGet(int featureID, bool resolve, bool coreType) const
 			}
 			return eAny(tempList); //11419
 		}
-		case UmlPackage::INFORMATIONFLOW_ATTRIBUTE_REALIZINGCONNECTOR:
+		case uml::UmlPackage::INFORMATIONFLOW_ATTRIBUTE_REALIZINGCONNECTOR:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Connector>::iterator iter = m_realizingConnector->begin();
@@ -532,7 +511,7 @@ Any InformationFlowImpl::eGet(int featureID, bool resolve, bool coreType) const
 			}
 			return eAny(tempList); //11420
 		}
-		case UmlPackage::INFORMATIONFLOW_ATTRIBUTE_REALIZINGMESSAGE:
+		case uml::UmlPackage::INFORMATIONFLOW_ATTRIBUTE_REALIZINGMESSAGE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Message>::iterator iter = m_realizingMessage->begin();
@@ -558,19 +537,19 @@ bool InformationFlowImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::INFORMATIONFLOW_ATTRIBUTE_CONVEYED:
+		case uml::UmlPackage::INFORMATIONFLOW_ATTRIBUTE_CONVEYED:
 			return getConveyed() != nullptr; //11415
-		case UmlPackage::INFORMATIONFLOW_ATTRIBUTE_INFORMATIONSOURCE:
+		case uml::UmlPackage::INFORMATIONFLOW_ATTRIBUTE_INFORMATIONSOURCE:
 			return getInformationSource() != nullptr; //11416
-		case UmlPackage::INFORMATIONFLOW_ATTRIBUTE_INFORMATIONTARGET:
+		case uml::UmlPackage::INFORMATIONFLOW_ATTRIBUTE_INFORMATIONTARGET:
 			return getInformationTarget() != nullptr; //11417
-		case UmlPackage::INFORMATIONFLOW_ATTRIBUTE_REALIZATION:
+		case uml::UmlPackage::INFORMATIONFLOW_ATTRIBUTE_REALIZATION:
 			return getRealization() != nullptr; //11418
-		case UmlPackage::INFORMATIONFLOW_ATTRIBUTE_REALIZINGACTIVITYEDGE:
+		case uml::UmlPackage::INFORMATIONFLOW_ATTRIBUTE_REALIZINGACTIVITYEDGE:
 			return getRealizingActivityEdge() != nullptr; //11419
-		case UmlPackage::INFORMATIONFLOW_ATTRIBUTE_REALIZINGCONNECTOR:
+		case uml::UmlPackage::INFORMATIONFLOW_ATTRIBUTE_REALIZINGCONNECTOR:
 			return getRealizingConnector() != nullptr; //11420
-		case UmlPackage::INFORMATIONFLOW_ATTRIBUTE_REALIZINGMESSAGE:
+		case uml::UmlPackage::INFORMATIONFLOW_ATTRIBUTE_REALIZINGMESSAGE:
 			return getRealizingMessage() != nullptr; //11421
 	}
 	bool result = false;
@@ -586,7 +565,7 @@ bool InformationFlowImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::INFORMATIONFLOW_ATTRIBUTE_CONVEYED:
+		case uml::UmlPackage::INFORMATIONFLOW_ATTRIBUTE_CONVEYED:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -622,7 +601,7 @@ bool InformationFlowImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case UmlPackage::INFORMATIONFLOW_ATTRIBUTE_INFORMATIONSOURCE:
+		case uml::UmlPackage::INFORMATIONFLOW_ATTRIBUTE_INFORMATIONSOURCE:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -658,7 +637,7 @@ bool InformationFlowImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case UmlPackage::INFORMATIONFLOW_ATTRIBUTE_INFORMATIONTARGET:
+		case uml::UmlPackage::INFORMATIONFLOW_ATTRIBUTE_INFORMATIONTARGET:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -694,7 +673,7 @@ bool InformationFlowImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case UmlPackage::INFORMATIONFLOW_ATTRIBUTE_REALIZATION:
+		case uml::UmlPackage::INFORMATIONFLOW_ATTRIBUTE_REALIZATION:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -730,7 +709,7 @@ bool InformationFlowImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case UmlPackage::INFORMATIONFLOW_ATTRIBUTE_REALIZINGACTIVITYEDGE:
+		case uml::UmlPackage::INFORMATIONFLOW_ATTRIBUTE_REALIZINGACTIVITYEDGE:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -766,7 +745,7 @@ bool InformationFlowImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case UmlPackage::INFORMATIONFLOW_ATTRIBUTE_REALIZINGCONNECTOR:
+		case uml::UmlPackage::INFORMATIONFLOW_ATTRIBUTE_REALIZINGCONNECTOR:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -802,7 +781,7 @@ bool InformationFlowImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case UmlPackage::INFORMATIONFLOW_ATTRIBUTE_REALIZINGMESSAGE:
+		case uml::UmlPackage::INFORMATIONFLOW_ATTRIBUTE_REALIZINGMESSAGE:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -862,11 +841,10 @@ void InformationFlowImpl::load(std::shared_ptr<persistence::interfaces::XLoadHan
 	// Create new objects (from references (containment == true))
 	//
 	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -938,19 +916,20 @@ void InformationFlowImpl::loadAttributes(std::shared_ptr<persistence::interfaces
 	PackageableElementImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void InformationFlowImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void InformationFlowImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
 
-
-	DirectedRelationshipImpl::loadNode(nodeName, loadHandler, modelFactory);
-	PackageableElementImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	DirectedRelationshipImpl::loadNode(nodeName, loadHandler);
+	PackageableElementImpl::loadNode(nodeName, loadHandler);
 }
 
 void InformationFlowImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
-		case UmlPackage::INFORMATIONFLOW_ATTRIBUTE_CONVEYED:
+		case uml::UmlPackage::INFORMATIONFLOW_ATTRIBUTE_CONVEYED:
 		{
 			std::shared_ptr<Bag<uml::Classifier>> _conveyed = getConveyed();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -964,7 +943,7 @@ void InformationFlowImpl::resolveReferences(const int featureID, std::list<std::
 			return;
 		}
 
-		case UmlPackage::INFORMATIONFLOW_ATTRIBUTE_INFORMATIONSOURCE:
+		case uml::UmlPackage::INFORMATIONFLOW_ATTRIBUTE_INFORMATIONSOURCE:
 		{
 			std::shared_ptr<Bag<uml::NamedElement>> _informationSource = getInformationSource();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -978,7 +957,7 @@ void InformationFlowImpl::resolveReferences(const int featureID, std::list<std::
 			return;
 		}
 
-		case UmlPackage::INFORMATIONFLOW_ATTRIBUTE_INFORMATIONTARGET:
+		case uml::UmlPackage::INFORMATIONFLOW_ATTRIBUTE_INFORMATIONTARGET:
 		{
 			std::shared_ptr<Bag<uml::NamedElement>> _informationTarget = getInformationTarget();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -992,7 +971,7 @@ void InformationFlowImpl::resolveReferences(const int featureID, std::list<std::
 			return;
 		}
 
-		case UmlPackage::INFORMATIONFLOW_ATTRIBUTE_REALIZATION:
+		case uml::UmlPackage::INFORMATIONFLOW_ATTRIBUTE_REALIZATION:
 		{
 			std::shared_ptr<Bag<uml::Relationship>> _realization = getRealization();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -1006,7 +985,7 @@ void InformationFlowImpl::resolveReferences(const int featureID, std::list<std::
 			return;
 		}
 
-		case UmlPackage::INFORMATIONFLOW_ATTRIBUTE_REALIZINGACTIVITYEDGE:
+		case uml::UmlPackage::INFORMATIONFLOW_ATTRIBUTE_REALIZINGACTIVITYEDGE:
 		{
 			std::shared_ptr<Bag<uml::ActivityEdge>> _realizingActivityEdge = getRealizingActivityEdge();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -1020,7 +999,7 @@ void InformationFlowImpl::resolveReferences(const int featureID, std::list<std::
 			return;
 		}
 
-		case UmlPackage::INFORMATIONFLOW_ATTRIBUTE_REALIZINGCONNECTOR:
+		case uml::UmlPackage::INFORMATIONFLOW_ATTRIBUTE_REALIZINGCONNECTOR:
 		{
 			std::shared_ptr<Bag<uml::Connector>> _realizingConnector = getRealizingConnector();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -1034,7 +1013,7 @@ void InformationFlowImpl::resolveReferences(const int featureID, std::list<std::
 			return;
 		}
 
-		case UmlPackage::INFORMATIONFLOW_ATTRIBUTE_REALIZINGMESSAGE:
+		case uml::UmlPackage::INFORMATIONFLOW_ATTRIBUTE_REALIZINGMESSAGE:
 		{
 			std::shared_ptr<Bag<uml::Message>> _realizingMessage = getRealizingMessage();
 			for(std::shared_ptr<ecore::EObject> ref : references)

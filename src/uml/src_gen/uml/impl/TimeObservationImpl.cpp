@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -25,21 +24,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -61,10 +51,11 @@
 
 #include "uml/TemplateParameter.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/Impl/UmlFactoryImpl.hpp"
+#include "uml/Impl/UmlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -106,18 +97,12 @@ TimeObservationImpl::~TimeObservationImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			TimeObservationImpl::TimeObservationImpl(std::weak_ptr<uml::Element > par_owner)
 			:TimeObservationImpl()
 			{
 			    m_owner = par_owner;
 			}
-
-
-
 
 
 //Additional constructor for the containments back reference
@@ -129,9 +114,6 @@ TimeObservationImpl::~TimeObservationImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			TimeObservationImpl::TimeObservationImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
 			:TimeObservationImpl()
@@ -139,9 +121,6 @@ TimeObservationImpl::~TimeObservationImpl()
 			    m_owningTemplateParameter = par_owningTemplateParameter;
 				m_owner = par_owningTemplateParameter;
 			}
-
-
-
 
 
 
@@ -203,7 +182,7 @@ std::shared_ptr<ecore::EObject>  TimeObservationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> TimeObservationImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getTimeObservation_Class();
+	return uml::UmlPackage::eInstance()->getTimeObservation_Class();
 }
 
 //*********************************
@@ -293,9 +272,9 @@ Any TimeObservationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::TIMEOBSERVATION_ATTRIBUTE_EVENT:
+		case uml::UmlPackage::TIMEOBSERVATION_ATTRIBUTE_EVENT:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEvent())); //24112
-		case UmlPackage::TIMEOBSERVATION_ATTRIBUTE_FIRSTEVENT:
+		case uml::UmlPackage::TIMEOBSERVATION_ATTRIBUTE_FIRSTEVENT:
 			return eAny(getFirstEvent()); //24113
 	}
 	return ObservationImpl::eGet(featureID, resolve, coreType);
@@ -304,9 +283,9 @@ bool TimeObservationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::TIMEOBSERVATION_ATTRIBUTE_EVENT:
+		case uml::UmlPackage::TIMEOBSERVATION_ATTRIBUTE_EVENT:
 			return getEvent() != nullptr; //24112
-		case UmlPackage::TIMEOBSERVATION_ATTRIBUTE_FIRSTEVENT:
+		case uml::UmlPackage::TIMEOBSERVATION_ATTRIBUTE_FIRSTEVENT:
 			return getFirstEvent() != true; //24113
 	}
 	return ObservationImpl::internalEIsSet(featureID);
@@ -315,7 +294,7 @@ bool TimeObservationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::TIMEOBSERVATION_ATTRIBUTE_EVENT:
+		case uml::UmlPackage::TIMEOBSERVATION_ATTRIBUTE_EVENT:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -323,7 +302,7 @@ bool TimeObservationImpl::eSet(int featureID, Any newValue)
 			setEvent(_event); //24112
 			return true;
 		}
-		case UmlPackage::TIMEOBSERVATION_ATTRIBUTE_FIRSTEVENT:
+		case uml::UmlPackage::TIMEOBSERVATION_ATTRIBUTE_FIRSTEVENT:
 		{
 			// BOOST CAST
 			bool _firstEvent = newValue->get<bool>();
@@ -347,11 +326,10 @@ void TimeObservationImpl::load(std::shared_ptr<persistence::interfaces::XLoadHan
 	// Create new objects (from references (containment == true))
 	//
 	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -389,18 +367,19 @@ void TimeObservationImpl::loadAttributes(std::shared_ptr<persistence::interfaces
 	ObservationImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void TimeObservationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void TimeObservationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
 
-
-	ObservationImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	ObservationImpl::loadNode(nodeName, loadHandler);
 }
 
 void TimeObservationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
-		case UmlPackage::TIMEOBSERVATION_ATTRIBUTE_EVENT:
+		case uml::UmlPackage::TIMEOBSERVATION_ATTRIBUTE_EVENT:
 		{
 			if (references.size() == 1)
 			{
@@ -445,7 +424,6 @@ void TimeObservationImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
 
 	
- 
 		// Add attributes
 		if ( this->eIsSet(package->getTimeObservation_Attribute_firstEvent()) )
 		{

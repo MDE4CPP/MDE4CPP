@@ -18,11 +18,11 @@
 #include <iostream>
 #include <sstream>
 
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "PSCS/impl/PSCSPackageImpl.hpp"
+
+//Includes from codegen annotation
 #include "abstractDataTypes/Subset.hpp"
 #include "fUML/FUMLFactory.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
@@ -34,8 +34,6 @@
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "PSCS/PSCSFactory.hpp"
-#include "PSCS/PSCSPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -47,10 +45,15 @@
 
 #include "uml/ValueSpecification.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "PSCS/PSCSPackage.hpp"
+//Factories an Package includes
+#include "PSCS/Semantics/Values/Impl/ValuesFactoryImpl.hpp"
+#include "PSCS/Semantics/Values/Impl/ValuesPackageImpl.hpp"
+
+#include "PSCS/Semantics/SemanticsFactory.hpp"
+#include "PSCS/Semantics/SemanticsPackage.hpp"
 #include "PSCS/PSCSFactory.hpp"
+#include "PSCS/PSCSPackage.hpp"
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -111,7 +114,7 @@ std::shared_ptr<ecore::EObject>  CS_OpaqueExpressionEvaluationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> CS_OpaqueExpressionEvaluationImpl::eStaticClass() const
 {
-	return PSCSPackageImpl::eInstance()->getCS_OpaqueExpressionEvaluation_Class();
+	return pSCS::Semantics::Values::ValuesPackage::eInstance()->getCS_OpaqueExpressionEvaluation_Class();
 }
 
 //*********************************
@@ -237,11 +240,10 @@ void CS_OpaqueExpressionEvaluationImpl::load(std::shared_ptr<persistence::interf
 	// Create new objects (from references (containment == true))
 	//
 	// get PSCSFactory
-	std::shared_ptr<PSCS::PSCSFactory> modelFactory = PSCS::PSCSFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -251,11 +253,12 @@ void CS_OpaqueExpressionEvaluationImpl::loadAttributes(std::shared_ptr<persisten
 	fUML::Semantics::Values::EvaluationImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void CS_OpaqueExpressionEvaluationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<PSCS::PSCSFactory> modelFactory)
+void CS_OpaqueExpressionEvaluationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<PSCS::Semantics::Values::ValuesFactory> modelFactory=PSCS::Semantics::Values::ValuesFactory::eInstance();
 
-
-	fUML::Semantics::Values::EvaluationImpl::loadNode(nodeName, loadHandler, fUML::FUMLFactory::eInstance());
+	//load BasePackage Nodes
+	fUML::Semantics::Values::EvaluationImpl::loadNode(nodeName, loadHandler);
 }
 
 void CS_OpaqueExpressionEvaluationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
@@ -280,7 +283,7 @@ void CS_OpaqueExpressionEvaluationImpl::saveContent(std::shared_ptr<persistence:
 {
 	try
 	{
-		std::shared_ptr<PSCS::PSCSPackage> package = PSCS::PSCSPackage::eInstance();
+		std::shared_ptr<pSCS::Semantics::Values::ValuesPackage> package = pSCS::Semantics::Values::ValuesPackage::eInstance();
 
 	
 
