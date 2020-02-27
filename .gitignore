@@ -11,4 +11,3 @@ setenv*
 /application/
 /gradle.properties
 xerces
-/.metadata/

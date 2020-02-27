@@ -119,7 +119,7 @@
 
 	// init properties without default
 	[for (aProperty : Property | aClass.ownedAttribute->sortedBy(myQualifiedName()))]
-	[if (aProperty.default->isEmpty() and aProperty.upper <> 1)][aProperty.generateAttributeInstantiation()/][/if]
+	[if (aProperty.default->isEmpty())][aProperty.generateAttributeInstantiation()/][/if]
 	[/for]
 	
 	// init properties with default
