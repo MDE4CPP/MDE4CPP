@@ -224,7 +224,7 @@ std::shared_ptr<ecore::EObject>  [className/]::copy() const
 
 std::shared_ptr<[needNamespace(aClass.ePackage, 'EClass')/]> [className/]::eStaticClass() const
 {
-	return [aClass.getRootPackage().name.toLowerFirst()/][getPackageAccess(aClass, true)/]::[aClass.ePackage.name.toUpperFirst()/]Package::eInstance()->get[aClass.getMemberNameUpperFirst()/]();
+	return [aClass.getRootPackage().name/][getPackageAccess(aClass, true)/]::[aClass.ePackage.name.toUpperFirst()/]Package::eInstance()->get[aClass.getMemberNameUpperFirst()/]();
 }
 
 //*********************************

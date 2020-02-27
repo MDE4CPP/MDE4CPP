@@ -218,7 +218,7 @@
 
 [query public getPackageAccess(aSubPackage : EPackage, usePackage : Boolean) : String = if usePackage = true then if not aSubPackage.eSuperPackage->isEmpty() then getPackageAccess(aSubPackage.eSuperPackage, usePackage).concat('::').concat(aSubPackage.name) else '' endif else  if not aSubPackage.eSuperPackage->isEmpty() then getPackageAccess(aSubPackage.eSuperPackage, usePackage).concat('->get').concat(aSubPackage.name).concat('_Package()') else ''  endif endif/]
 [query public getPackageAccess(aClass : EClassifier, usePackage : Boolean ) : String = if usePackage = true then getPackageAccess(aClass.ePackage, usePackage ) else getPackageAccess(aClass.ePackage, usePackage ) endif /]
-[query public getPackage_eInstance(aClass : EClassifier) : String = aClass.getRootPackage().name.toLowerFirst().concat(getPackageAccess(aClass, true)).concat('::').concat(aClass.ePackage.name.toUpperFirst()).concat('Package::eInstance()')/]
+[query public getPackage_eInstance(aClass : EClassifier) : String = aClass.getRootPackage().name.concat(getPackageAccess(aClass, true)).concat('::').concat(aClass.ePackage.name.toUpperFirst()).concat('Package::eInstance()')/]
 
 [template public generateAbstractDataTypesForwardDeclaration(anEClass : EClass)]
 [if (anEClass.eReferences->select(upperBound <> 1 and not hasSubset() and not isUnion())->size() > 0 or anEClass.eOperations.eParameters->select((eType.requiresBag()  or upperBound <> 1) and not doNotGenerate())->size() > 0)]

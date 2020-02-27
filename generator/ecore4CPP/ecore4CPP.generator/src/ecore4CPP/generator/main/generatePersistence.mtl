@@ -381,7 +381,7 @@ void [aClass.name.concat('Impl')/]::saveContent(std::shared_ptr<[generatePersist
 {
 	try
 	{
-		std::shared_ptr<[aClass.getRootPackage().name.toLowerFirst()/][getPackageAccess(aClass, true)/]::[aClass.ePackage.name.toUpperFirst()/]Package> package = [aClass.getRootPackage().name.toLowerFirst()/][getPackageAccess(aClass, true)/]::[aClass.ePackage.name.toUpperFirst()/]Package::eInstance();
+		std::shared_ptr<[aClass.getRootPackage().name/][getPackageAccess(aClass, true)/]::[aClass.ePackage.name.toUpperFirst()/]Package> package = [aClass.getRootPackage().name/][getPackageAccess(aClass, true)/]::[aClass.ePackage.name.toUpperFirst()/]Package::eInstance();
 
 [let refList : OrderedSet(EReference) =  aClass.eReferences->select(eRef: EReference|(eRef.containment = true and eRef.hasSubset() and (not eRef.isSubsetUnion())))->asOrderedSet()->sortedBy(name)]
 [if (refList->size() > 0)]
