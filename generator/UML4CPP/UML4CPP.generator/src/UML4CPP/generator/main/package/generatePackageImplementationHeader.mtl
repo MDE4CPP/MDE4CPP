@@ -75,6 +75,9 @@ namespace uml
 
 		private:
 			void createPackageActivities(std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::UmlFactory> factory);
+[for (anActivity : Activity | (aPackage.allOwnedElements()->filter(Activity)->sortedBy(myQualifiedName())))]
+			void createActivity_[anActivity.memberName()/](std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::UmlFactory> factory);
+[/for]
 			void createPackageClasses(std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::UmlFactory> factory);
 			void createPackageDependencies(std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::UmlFactory> factory);
 			void createPackageEnumerationLiterals(std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::UmlFactory> factory);
@@ -86,6 +89,9 @@ namespace uml
 			void createPackageValueSpecifications(std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::UmlFactory> factory);
 
 			void initializePackageActivities();
+[for (anActivity : Activity | (aPackage.allOwnedElements()->filter(Activity)->sortedBy(myQualifiedName())))]
+			void initializeActivity_[anActivity.memberName()/]();
+[/for]
 			void initializePackageClasses();
 			void initializePackageDependencies();
 			void initializePackageInstanceSpecifications();
