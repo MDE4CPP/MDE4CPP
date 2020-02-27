@@ -38,10 +38,13 @@ originalName : String = aPackage.getPackageName();
 #include "uml/Class.hpp"
 
 [for (classPackage : Package | aPackage.getClassPackagesOfCreateObjectAction())]
-#include "[classPackage.name/]/[classPackage.name.toUpperFirst()/]Factory.hpp"
-#include "[classPackage.name/]/[classPackage.name.toUpperFirst()/]Package.hpp"
+#include "[classPackage.myNamespaceName()/]/[classPackage.name.toUpperFirst()/]Factory.hpp"
+#include "[classPackage.myNamespaceName()/]/[classPackage.name.toUpperFirst()/]Package.hpp"
+[if (classPackage.isReflectionModel())]
+#include "[classPackage.getPackageName()/]/[classPackage.name.toUpperFirst()/]Package.hpp"
+[/if]
 [for (aClass : Class | aPackage.getClassesOfCreateObjectActionForPackage(classPackage))]
-#include "[aClass.getNearestPackage().name/]/[aClass.name.toUpperFirst()/].hpp"
+#include "[aClass.getNearestPackage().myNamespaceName()/]/[aClass.name.toUpperFirst()/].hpp"
 #include "[originalName/]Exec/[aClass.name.toUpperFirst()/]Object.hpp"
 [/for]
 [/for]
@@ -69,8 +72,8 @@ std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> [upperName/]Locu
 [if (packageList->size() > 0)]
 	std::shared_ptr<uml::Package> typePackage = type->getPackage().lock();
 [for (classPackage : Package | packageList)]
-[let packageName : String = classPackage.name]
-	if (typePackage == [packageName/]::[packageName.toUpperFirst()/]Package::eInstance())
+[let packageName : String = classPackage.myNamespaceName()]
+	if (typePackage == [classPackage.name/]::[classPackage.name.toUpperFirst()/]Package::eInstance())
 	{		
 		switch(type->getMetaElementID())
 		{

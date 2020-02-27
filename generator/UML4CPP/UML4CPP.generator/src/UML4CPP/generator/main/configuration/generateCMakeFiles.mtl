@@ -134,7 +134,9 @@ FIND_LIBRARY([packName.toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/] [
 [if (aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior).language->includes(keyLibrary()))]
 [let index : Integer = aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior).language->indexOf(keyLibrary())]
 [if (0 <index and index <= aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior)._body->size())]
-FIND_LIBRARY([aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior)._body->asOrderedSet()->at(index).toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/] [aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior)._body->asOrderedSet()->at(3)/][libraryNameSuffix(debugMode)/][ending/] ${MDE4CPP_HOME}/application/[folderName/])
+[for (libName : String | aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior)._body->asOrderedSet()->at(index).tokenize(lineSeparator()))]
+FIND_LIBRARY([libName.toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/] [libName/][libraryNameSuffix(debugMode)/][ending/] ${MDE4CPP_HOME}/application/[folderName/])
+[/for]
 [/if][/let][/if][/if][/for]
 [if(aPackage.eAllContents()->select(oclIsKindOf(Operation)).oclAsType(Operation).method->filter(Activity)->asSet()->notEmpty())]
 FIND_LIBRARY(PLUGINFRAMEWORK_[libraryVariableNameSuffix(debugMode)/] pluginFramework[libraryNameSuffix(debugMode)/][ending/] ${MDE4CPP_HOME}/application/[folderName/])[/if]
@@ -158,7 +160,9 @@ TARGET_LINK_LIBRARIES(${PROJECT_NAME}
 [if (aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior).language->includes(keyLibrary()))]
 [let index : Integer = aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior).language->indexOf(keyLibrary())]
 [if (0 <index and index <= aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior)._body->size())]
-	[buildModeCMakeProperty(debugMode)/] ${[aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior)._body->asOrderedSet()->at(index).toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/]}
+[for (libName : String | aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior)._body->asOrderedSet()->at(index).tokenize(lineSeparator()))]
+	[buildModeCMakeProperty(debugMode)/] ${[libName.toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/]}
+[/for]
 [/if][/let][/if][/if][/for]
 [if(aPackage.eAllContents()->select(oclIsKindOf(Operation)).oclAsType(Operation).method->filter(Activity)->asSet()->notEmpty())]
 	[buildModeCMakeProperty(debugMode)/] ${PLUGINFRAMEWORK_[libraryVariableNameSuffix(debugMode)/]}

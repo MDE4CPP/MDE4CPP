@@ -171,7 +171,14 @@ void [packageName/]::createPackageContents(std::shared_ptr<uml::Package> [aPacka
 
 void [packageName/]::createPackageActivities(std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::UmlFactory> factory)
 {
-[for (anActivity : Activity | (aPackage.allOwnedElements()->filter(Activity)->sortedBy(myQualifiedName()))) separator ('\n')]
+[for (anActivity : Activity | (aPackage.allOwnedElements()->filter(Activity)->sortedBy(myQualifiedName())))]
+	createActivity_[anActivity.memberName()/]([aPackage.memberName()/], factory);
+[/for]
+}
+
+[for (anActivity : Activity | (aPackage.allOwnedElements()->filter(Activity)->sortedBy(myQualifiedName())))]
+void [packageName/]::createActivity_[anActivity.memberName()/](std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::UmlFactory> factory)
+{
 	[anActivity.generateActivityCreation()/]
 	//OwnedNode
 	[anActivity.ownedNode->sortedBy(name).generateActivityNodeCreation()/]   
@@ -179,8 +186,9 @@ void [packageName/]::createPackageActivities(std::shared_ptr<uml::Package> [aPac
 	[anActivity.structuredNode->sortedBy(name).generateActivityNodeCreation()/]
 	//flow
 	[anActivity.edge->sortedBy(myQualifiedName()).generateActivityEdgeCreation()/]
-[/for]
 }
+
+[/for]
 
 [comment]Only Classes[/comment]
 void [packageName/]::createPackageClasses(std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::UmlFactory> factory)
@@ -197,7 +205,7 @@ void [packageName/]::createPackageClasses(std::shared_ptr<uml::Package> [aPackag
 	[for (anOperation : Operation | aClass.ownedOperation->sortedBy(name)) before ('    // '.concat(aClass.name).concat(' operations\n')) separator('\n')]
 	[anOperation.generateOperationCreation()/]
 	[/for]
-	[for (aOpaqueBehavior : OpaqueBehavior | aClass.ownedBehavior->filter(OpaqueBehavior)->sortedBy(myQualifiedName())) before ('    // '.concat(aClass.name).concat(' opaque behaviors\n'))  separator('\n')]
+	[for (aOpaqueBehavior : OpaqueBehavior | aClass.allOwnedElements()->filter(OpaqueBehavior)->sortedBy(myQualifiedName())) before ('    // '.concat(aClass.name).concat(' opaque behaviors\n'))  separator('\n')]
 	[if (aOpaqueBehavior.oclIsKindOf(FunctionBehavior))]
 	[aOpaqueBehavior.oclAsType(FunctionBehavior).generateFunctionBehaviorCreation()/]
 	[else]
@@ -298,12 +306,20 @@ void [packageName/]::initializePackageContents(std::shared_ptr<uml::Package> [aP
 //ActivityNodes and Edges
 void [packageName/]::initializePackageActivities()
 {
-	[for (anActivity : Activity | aPackage.allOwnedElements()->filter(Activity)->sortedBy(myQualifiedName())) separator ('\n')]
+[for (anActivity : Activity | (aPackage.allOwnedElements()->filter(Activity)->sortedBy(myQualifiedName())))]
+	initializeActivity_[anActivity.memberName()/]();
+[/for]
+}
+
+[for (anActivity : Activity | (aPackage.allOwnedElements()->filter(Activity)->sortedBy(myQualifiedName())))]
+void [packageName/]::initializeActivity_[anActivity.memberName()/]()
+{
 	[anActivity.generateActivityInitialization()/]
 	[anActivity.node->sortedBy(myQualifiedName()).initializeActivityNode()/]
 	[anActivity.edge->sortedBy(myQualifiedName()).initializeEdge()/]
-	[/for]
 }
+
+[/for]
 
 [comment]Only Classes[/comment]
 void [packageName/]::initializePackageClasses()
@@ -319,7 +335,7 @@ void [packageName/]::initializePackageClasses()
 	[for (anOperation : Operation | aClass.ownedOperation->sortedBy(name)) before ('    // '.concat(aClass.name).concat(' operations\n')) separator('\n') after ('\n')]
 	[anOperation.initalizeOperation()/]
 	[/for]
-	[for (aOpaqueBehavior : OpaqueBehavior | aClass.ownedBehavior->filter(OpaqueBehavior)->sortedBy(myQualifiedName())) before ('    // '.concat(aClass.name).concat(' opaque behaviors\n'))  separator('\n') after ('\n')]
+	[for (aOpaqueBehavior : OpaqueBehavior | aClass.allOwnedElements()->filter(OpaqueBehavior)->sortedBy(myQualifiedName())) before ('    // '.concat(aClass.name).concat(' opaque behaviors\n'))  separator('\n') after ('\n')]
 	[if (aOpaqueBehavior.oclIsKindOf(FunctionBehavior))]
 	[aOpaqueBehavior.oclAsType(FunctionBehavior).generateFunctionBehaviorInitialization()/]
 	[else]
