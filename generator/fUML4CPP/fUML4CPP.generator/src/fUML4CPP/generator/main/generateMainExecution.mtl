@@ -54,7 +54,7 @@ int main()
 	[let act : Activity = aPackage.allOwnedElements()->filter(Activity)->asOrderedSet()->first()]
 	[act.generateParameterInstances(aPackage)/]
 [if (act.owner.oclIsKindOf(Classifier))]
-	std::shared_ptr<[act.owner.oclAsType(Classifier).name.toUpperFirst()/]> element = [act.owner.oclAsType(Classifier).namespace.myNamespaceName()/][getPackageAccess(act.owner.oclAsType(Classifier).namespace, true)/]::[act.owner.oclAsType(Classifier).namespace.name.toUpperFirst()/]Factory::eInstance()->create[act.owner.oclAsType(Classifier).name.toUpperFirst()/]();
+	std::shared_ptr<[act.owner.oclAsType(Classifier).name.toUpperFirst()/]> element = [act.owner.oclAsType(Classifier).namespace.myNamespaceName()/]::[act.owner.oclAsType(Classifier).namespace.myNamespaceName().toUpperFirst()/]Factory::eInstance()->create[act.owner.oclAsType(Classifier).name.toUpperFirst()/]();
 [/if]
 	[act.generateStartActivityExecution()/]   
 	[/let]
@@ -100,7 +100,10 @@ int main()
 
 [template public generateMainIncludes(aPackage : Package)]
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "fUML/FUMLFactory.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
+#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
 #include "fUML/Semantics/Loci/ExecutionFactory.hpp"
 #include "fUML/Semantics/Loci/Executor.hpp"
@@ -151,20 +154,23 @@ int main()
 
 [template public generateLocusInitialization(aPackage : Package) {locusName : String = aPackage.getPackageName().sanitize().toUpperFirst() + 'Locus' ;}]
 DEBUG_MESSAGE(std::cout<<"Main function is executing"<<std::endl;)
-std::shared_ptr<fUML::FUMLFactory> fumlFac(fUML::FUMLFactory::eInstance());
+
+std::shared_ptr<fUML::Semantics::CommonBehavior::CommonBehaviorFactory> commonBehaviorFactory = [getCommonBehaviorFactory()/];
+std::shared_ptr<fUML::Semantics::Loci::LociFactory> lociFactory = [getLocusBehaviorFactory()/];
+std::shared_ptr<fUML::Semantics::StructuredClassifiers::StructuredClassifiersFactory> structuredClassifierFactory = [getStructuredClassifierFactory()/];
 
 std::shared_ptr<[locusName/]Impl> locus(new [locusName/]Impl);
 locus->setThisLocusPtr(locus);
 
-std::shared_ptr<fUML::Semantics::Loci::Executor> executor(fumlFac->createExecutor());
+std::shared_ptr<fUML::Semantics::Loci::Executor> executor = lociFactory->createExecutor();
 executor->setLocus(locus);
 locus->setExecutor(executor);
 
-std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory> factory(fumlFac->createExecutionFactory_in_Locus(locus));
+std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory> factory = lociFactory->createExecutionFactory_in_Locus(locus);
 locus->setExecutor(executor);
 
-locus->getFactory()->assignStrategy(std::shared_ptr<fUML::Semantics::Loci::FirstChoiceStrategy>(fumlFac->createFirstChoiceStrategy()));
-locus->getFactory()->assignStrategy(std::shared_ptr<fUML::Semantics::StructuredClassifiers::DispatchStrategy>(fumlFac->createDispatchStrategy()));
+locus->getFactory()->assignStrategy(lociFactory->createFirstChoiceStrategy());
+locus->getFactory()->assignStrategy(structuredClassifierFactory->createDispatchStrategy());
 [/template]
 
 [template public generateParameterInstances(anActivity : Activity, aPackage : Package)]
@@ -172,7 +178,7 @@ locus->getFactory()->assignStrategy(std::shared_ptr<fUML::Semantics::StructuredC
 [if(par.type.supportedTypes())]
 [par.generateCppType(true)/] [par.name.toLowerFirst()/] = [par.default/];
 [else]
-[par.generateCppType(true)/] [par.name.toLowerFirst()/]([aPackage.getPackageName()/][getPackageAccess(aPackage, true)/]::[aPackage.name.toUpperFirst()/]Factory::eInstance()->create[par.type.name.toUpperFirst()/]());
+[par.generateCppType(true)/] [par.name.toLowerFirst()/]([aPackage.getPackageName()/]::[aPackage.getPackageName().toUpperFirst()/]Factory::eInstance()->create[par.type.name.toUpperFirst()/]());
 [/if]
 
 [/for]
@@ -194,7 +200,7 @@ locus->getFactory()->assignStrategy(std::shared_ptr<fUML::Semantics::StructuredC
 std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > pList(new Bag<fUML::Semantics::CommonBehavior::ParameterValue>());
 [for (par : Parameter | anActivity.ownedParameter->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in))->sortedBy(name))]
 //INput parameter [par.name/] 
-std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> [par.name/]P(fumlFac->createParameterValue());
+std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> [par.name/]P = commonBehaviorFactory->createParameterValue();
 [par.name/]P->setParameter([par.generatePackageGetterCall()/]);
 [if (par.upper = 1)]
 [par.generateValue()/]

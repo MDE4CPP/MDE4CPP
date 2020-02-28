@@ -45,8 +45,9 @@
 #include <memory>
 
 #include "abstractDataTypes/SubsetUnion.hpp" 
-#include "fUML/FUMLFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
+#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
+#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
 #include "uml/Behavior.hpp"
 
 [aNamedElement.generateIncludes(aPackage)/]
