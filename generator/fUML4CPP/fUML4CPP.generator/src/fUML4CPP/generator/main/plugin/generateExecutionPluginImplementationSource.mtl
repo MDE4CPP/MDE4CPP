@@ -144,6 +144,19 @@ while (returnValuesIter != returnValuesEnd)
 }
 return eAny([par.name/]);
 [/if]
+[elseif (par.type.oclIsKindOf(Enumeration))]
+assert(resultPList->front());
+std::shared_ptr<fUML::Semantics::SimpleClassifiers::EnumerationValue> ret = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::EnumerationValue>(resultPList->front()->getValues()->front());
+assert(ret != nullptr);
+std::shared_ptr<uml::EnumerationLiteral> literal[par.name.toUpperFirst()/] = ret->getLiteral();
+[for (literal : EnumerationLiteral | par.type.oclAsType(Enumeration).ownedLiteral)]
+if (literal[par.name.toUpperFirst()/] == [literal.generatePackageGetterCall()/])
+{
+	return eAny([literal.enumeration.namespace.name/]::[literal.enumeration.name/]::[literal.name.toUpperCase()/]);
+}
+[/for]
+std::cerr << "unknown literal of [par.type.name/]" << std::endl;
+throw "error";
 [else]
 [if (par.upper =1)]
 assert(resultPList->front());
