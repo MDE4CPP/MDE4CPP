@@ -13,7 +13,7 @@
 //Model includes
 #include "../CS_OpaqueExpressionEvaluation.hpp"
 
-#include "PSCS/impl/PSCSFactoryImpl.hpp"
+#include "PSCS/Semantics/Values/Impl/ValuesFactoryImpl.hpp"
 #include "fUML/Semantics/Values/impl/EvaluationImpl.hpp"
 
 //*********************************
@@ -29,7 +29,7 @@ namespace PSCS::Semantics::Values
 			CS_OpaqueExpressionEvaluationImpl& operator=(CS_OpaqueExpressionEvaluationImpl const&) = delete;
 
 		protected:
-			friend class PSCS::PSCSFactoryImpl;
+			friend class PSCS::Semantics::Values::ValuesFactoryImpl;
 			CS_OpaqueExpressionEvaluationImpl();
 			virtual std::shared_ptr<CS_OpaqueExpressionEvaluation> getThisCS_OpaqueExpressionEvaluationPtr() const;
 			virtual void setThisCS_OpaqueExpressionEvaluationPtr(std::weak_ptr<CS_OpaqueExpressionEvaluation> thisCS_OpaqueExpressionEvaluationPtr);
@@ -79,7 +79,7 @@ namespace PSCS::Semantics::Values
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<PSCS::PSCSFactory> modelFactory);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
 			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;

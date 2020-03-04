@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -26,19 +25,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -62,10 +54,11 @@
 
 #include "uml/ValueSpecification.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/Impl/UmlFactoryImpl.hpp"
+#include "uml/Impl/UmlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -140,9 +133,6 @@ MessageImpl::~MessageImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			MessageImpl::MessageImpl(std::weak_ptr<uml::Namespace > par_namespace)
 			:MessageImpl()
@@ -152,18 +142,12 @@ MessageImpl::~MessageImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			MessageImpl::MessageImpl(std::weak_ptr<uml::Element > par_owner)
 			:MessageImpl()
 			{
 			    m_owner = par_owner;
 			}
-
-
-
 
 
 
@@ -243,7 +227,7 @@ std::shared_ptr<ecore::EObject>  MessageImpl::copy() const
 
 std::shared_ptr<ecore::EClass> MessageImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getMessage_Class();
+	return uml::UmlPackage::eInstance()->getMessage_Class();
 }
 
 //*********************************
@@ -435,7 +419,7 @@ Any MessageImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::MESSAGE_ATTRIBUTE_ARGUMENT:
+		case uml::UmlPackage::MESSAGE_ATTRIBUTE_ARGUMENT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::ValueSpecification>::iterator iter = m_argument->begin();
@@ -447,19 +431,19 @@ Any MessageImpl::eGet(int featureID, bool resolve, bool coreType) const
 			}
 			return eAny(tempList); //1489
 		}
-		case UmlPackage::MESSAGE_ATTRIBUTE_CONNECTOR:
+		case uml::UmlPackage::MESSAGE_ATTRIBUTE_CONNECTOR:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getConnector())); //14810
-		case UmlPackage::MESSAGE_ATTRIBUTE_INTERACTION:
+		case uml::UmlPackage::MESSAGE_ATTRIBUTE_INTERACTION:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getInteraction().lock())); //14811
-		case UmlPackage::MESSAGE_ATTRIBUTE_MESSAGEKIND:
+		case uml::UmlPackage::MESSAGE_ATTRIBUTE_MESSAGEKIND:
 			return eAny(getMessageKind()); //14812
-		case UmlPackage::MESSAGE_ATTRIBUTE_MESSAGESORT:
+		case uml::UmlPackage::MESSAGE_ATTRIBUTE_MESSAGESORT:
 			return eAny(getMessageSort()); //14813
-		case UmlPackage::MESSAGE_ATTRIBUTE_RECEIVEEVENT:
+		case uml::UmlPackage::MESSAGE_ATTRIBUTE_RECEIVEEVENT:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getReceiveEvent())); //14814
-		case UmlPackage::MESSAGE_ATTRIBUTE_SENDEVENT:
+		case uml::UmlPackage::MESSAGE_ATTRIBUTE_SENDEVENT:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSendEvent())); //14815
-		case UmlPackage::MESSAGE_ATTRIBUTE_SIGNATURE:
+		case uml::UmlPackage::MESSAGE_ATTRIBUTE_SIGNATURE:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSignature())); //14816
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
@@ -468,21 +452,21 @@ bool MessageImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::MESSAGE_ATTRIBUTE_ARGUMENT:
+		case uml::UmlPackage::MESSAGE_ATTRIBUTE_ARGUMENT:
 			return getArgument() != nullptr; //1489
-		case UmlPackage::MESSAGE_ATTRIBUTE_CONNECTOR:
+		case uml::UmlPackage::MESSAGE_ATTRIBUTE_CONNECTOR:
 			return getConnector() != nullptr; //14810
-		case UmlPackage::MESSAGE_ATTRIBUTE_INTERACTION:
+		case uml::UmlPackage::MESSAGE_ATTRIBUTE_INTERACTION:
 			return getInteraction().lock() != nullptr; //14811
-		case UmlPackage::MESSAGE_ATTRIBUTE_MESSAGEKIND:
+		case uml::UmlPackage::MESSAGE_ATTRIBUTE_MESSAGEKIND:
 			return m_messageKind != MessageKind::UNKNOWN;; //14812
-		case UmlPackage::MESSAGE_ATTRIBUTE_MESSAGESORT:
+		case uml::UmlPackage::MESSAGE_ATTRIBUTE_MESSAGESORT:
 			return m_messageSort != MessageSort::SYNCHCALL;; //14813
-		case UmlPackage::MESSAGE_ATTRIBUTE_RECEIVEEVENT:
+		case uml::UmlPackage::MESSAGE_ATTRIBUTE_RECEIVEEVENT:
 			return getReceiveEvent() != nullptr; //14814
-		case UmlPackage::MESSAGE_ATTRIBUTE_SENDEVENT:
+		case uml::UmlPackage::MESSAGE_ATTRIBUTE_SENDEVENT:
 			return getSendEvent() != nullptr; //14815
-		case UmlPackage::MESSAGE_ATTRIBUTE_SIGNATURE:
+		case uml::UmlPackage::MESSAGE_ATTRIBUTE_SIGNATURE:
 			return getSignature() != nullptr; //14816
 	}
 	return NamedElementImpl::internalEIsSet(featureID);
@@ -491,7 +475,7 @@ bool MessageImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::MESSAGE_ATTRIBUTE_ARGUMENT:
+		case uml::UmlPackage::MESSAGE_ATTRIBUTE_ARGUMENT:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -527,7 +511,7 @@ bool MessageImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case UmlPackage::MESSAGE_ATTRIBUTE_CONNECTOR:
+		case uml::UmlPackage::MESSAGE_ATTRIBUTE_CONNECTOR:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -535,7 +519,7 @@ bool MessageImpl::eSet(int featureID, Any newValue)
 			setConnector(_connector); //14810
 			return true;
 		}
-		case UmlPackage::MESSAGE_ATTRIBUTE_INTERACTION:
+		case uml::UmlPackage::MESSAGE_ATTRIBUTE_INTERACTION:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -543,14 +527,14 @@ bool MessageImpl::eSet(int featureID, Any newValue)
 			setInteraction(_interaction); //14811
 			return true;
 		}
-		case UmlPackage::MESSAGE_ATTRIBUTE_MESSAGESORT:
+		case uml::UmlPackage::MESSAGE_ATTRIBUTE_MESSAGESORT:
 		{
 			// BOOST CAST
 			uml::MessageSort _messageSort = newValue->get<uml::MessageSort>();
 			setMessageSort(_messageSort); //14813
 			return true;
 		}
-		case UmlPackage::MESSAGE_ATTRIBUTE_RECEIVEEVENT:
+		case uml::UmlPackage::MESSAGE_ATTRIBUTE_RECEIVEEVENT:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -558,7 +542,7 @@ bool MessageImpl::eSet(int featureID, Any newValue)
 			setReceiveEvent(_receiveEvent); //14814
 			return true;
 		}
-		case UmlPackage::MESSAGE_ATTRIBUTE_SENDEVENT:
+		case uml::UmlPackage::MESSAGE_ATTRIBUTE_SENDEVENT:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -566,7 +550,7 @@ bool MessageImpl::eSet(int featureID, Any newValue)
 			setSendEvent(_sendEvent); //14815
 			return true;
 		}
-		case UmlPackage::MESSAGE_ATTRIBUTE_SIGNATURE:
+		case uml::UmlPackage::MESSAGE_ATTRIBUTE_SIGNATURE:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -591,11 +575,10 @@ void MessageImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> lo
 	// Create new objects (from references (containment == true))
 	//
 	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -677,8 +660,9 @@ void MessageImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadH
 	NamedElementImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void MessageImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void MessageImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
 
 	try
 	{
@@ -708,15 +692,15 @@ void MessageImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::in
 	{
 		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
 	}
-
-	NamedElementImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	NamedElementImpl::loadNode(nodeName, loadHandler);
 }
 
 void MessageImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
-		case UmlPackage::MESSAGE_ATTRIBUTE_CONNECTOR:
+		case uml::UmlPackage::MESSAGE_ATTRIBUTE_CONNECTOR:
 		{
 			if (references.size() == 1)
 			{
@@ -728,7 +712,7 @@ void MessageImpl::resolveReferences(const int featureID, std::list<std::shared_p
 			return;
 		}
 
-		case UmlPackage::MESSAGE_ATTRIBUTE_INTERACTION:
+		case uml::UmlPackage::MESSAGE_ATTRIBUTE_INTERACTION:
 		{
 			if (references.size() == 1)
 			{
@@ -740,7 +724,7 @@ void MessageImpl::resolveReferences(const int featureID, std::list<std::shared_p
 			return;
 		}
 
-		case UmlPackage::MESSAGE_ATTRIBUTE_RECEIVEEVENT:
+		case uml::UmlPackage::MESSAGE_ATTRIBUTE_RECEIVEEVENT:
 		{
 			if (references.size() == 1)
 			{
@@ -752,7 +736,7 @@ void MessageImpl::resolveReferences(const int featureID, std::list<std::shared_p
 			return;
 		}
 
-		case UmlPackage::MESSAGE_ATTRIBUTE_SENDEVENT:
+		case uml::UmlPackage::MESSAGE_ATTRIBUTE_SENDEVENT:
 		{
 			if (references.size() == 1)
 			{
@@ -764,7 +748,7 @@ void MessageImpl::resolveReferences(const int featureID, std::list<std::shared_p
 			return;
 		}
 
-		case UmlPackage::MESSAGE_ATTRIBUTE_SIGNATURE:
+		case uml::UmlPackage::MESSAGE_ATTRIBUTE_SIGNATURE:
 		{
 			if (references.size() == 1)
 			{
@@ -807,7 +791,6 @@ void MessageImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 			saveHandler->addReference(argument, "argument", argument->eClass() != package->getValueSpecification_Class());
 		}
 	
- 
 		// Add attributes
 		if ( this->eIsSet(package->getMessage_Attribute_messageSort()) )
 		{

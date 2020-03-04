@@ -17,24 +17,18 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "fUML/impl/FUMLPackageImpl.hpp"
+
+//Includes from codegen annotation
 #include "uml/ExpansionNode.hpp"
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -54,10 +48,15 @@
 
 #include "fUML/Semantics/Actions/StructuredActivityNodeActivation.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
+//Factories an Package includes
+#include "fUML/Semantics/Activities/Impl/ActivitiesFactoryImpl.hpp"
+#include "fUML/Semantics/Activities/Impl/ActivitiesPackageImpl.hpp"
+
+#include "fUML/Semantics/SemanticsFactory.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -119,18 +118,12 @@ ExpansionActivationGroupImpl::~ExpansionActivationGroupImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			ExpansionActivationGroupImpl::ExpansionActivationGroupImpl(std::weak_ptr<fUML::Semantics::Actions::StructuredActivityNodeActivation > par_containingNodeActivation)
 			:ExpansionActivationGroupImpl()
 			{
 			    m_containingNodeActivation = par_containingNodeActivation;
 			}
-
-
-
 
 
 
@@ -193,7 +186,7 @@ std::shared_ptr<ecore::EObject>  ExpansionActivationGroupImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ExpansionActivationGroupImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getExpansionActivationGroup_Class();
+	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getExpansionActivationGroup_Class();
 }
 
 //*********************************
@@ -351,7 +344,7 @@ Any ExpansionActivationGroupImpl::eGet(int featureID, bool resolve, bool coreTyp
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::EXPANSIONACTIVATIONGROUP_ATTRIBUTE_GROUPINPUTS:
+		case fUML::Semantics::Activities::ActivitiesPackage::EXPANSIONACTIVATIONGROUP_ATTRIBUTE_GROUPINPUTS:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<fUML::Semantics::Actions::OutputPinActivation>::iterator iter = m_groupInputs->begin();
@@ -363,7 +356,7 @@ Any ExpansionActivationGroupImpl::eGet(int featureID, bool resolve, bool coreTyp
 			}
 			return eAny(tempList); //495
 		}
-		case fUML::FUMLPackage::EXPANSIONACTIVATIONGROUP_ATTRIBUTE_GROUPOUTPUTS:
+		case fUML::Semantics::Activities::ActivitiesPackage::EXPANSIONACTIVATIONGROUP_ATTRIBUTE_GROUPOUTPUTS:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<fUML::Semantics::Actions::OutputPinActivation>::iterator iter = m_groupOutputs->begin();
@@ -375,11 +368,11 @@ Any ExpansionActivationGroupImpl::eGet(int featureID, bool resolve, bool coreTyp
 			}
 			return eAny(tempList); //496
 		}
-		case fUML::FUMLPackage::EXPANSIONACTIVATIONGROUP_ATTRIBUTE_INDEX:
+		case fUML::Semantics::Activities::ActivitiesPackage::EXPANSIONACTIVATIONGROUP_ATTRIBUTE_INDEX:
 			return eAny(getIndex()); //497
-		case fUML::FUMLPackage::EXPANSIONACTIVATIONGROUP_ATTRIBUTE_REGIONACTIVATION:
+		case fUML::Semantics::Activities::ActivitiesPackage::EXPANSIONACTIVATIONGROUP_ATTRIBUTE_REGIONACTIVATION:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getRegionActivation())); //498
-		case fUML::FUMLPackage::EXPANSIONACTIVATIONGROUP_ATTRIBUTE_REGIONINPUTS:
+		case fUML::Semantics::Activities::ActivitiesPackage::EXPANSIONACTIVATIONGROUP_ATTRIBUTE_REGIONINPUTS:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<fUML::Semantics::Actions::OutputPinActivation>::iterator iter = m_regionInputs->begin();
@@ -398,15 +391,15 @@ bool ExpansionActivationGroupImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::EXPANSIONACTIVATIONGROUP_ATTRIBUTE_GROUPINPUTS:
+		case fUML::Semantics::Activities::ActivitiesPackage::EXPANSIONACTIVATIONGROUP_ATTRIBUTE_GROUPINPUTS:
 			return getGroupInputs() != nullptr; //495
-		case fUML::FUMLPackage::EXPANSIONACTIVATIONGROUP_ATTRIBUTE_GROUPOUTPUTS:
+		case fUML::Semantics::Activities::ActivitiesPackage::EXPANSIONACTIVATIONGROUP_ATTRIBUTE_GROUPOUTPUTS:
 			return getGroupOutputs() != nullptr; //496
-		case fUML::FUMLPackage::EXPANSIONACTIVATIONGROUP_ATTRIBUTE_INDEX:
+		case fUML::Semantics::Activities::ActivitiesPackage::EXPANSIONACTIVATIONGROUP_ATTRIBUTE_INDEX:
 			return getIndex() != 0; //497
-		case fUML::FUMLPackage::EXPANSIONACTIVATIONGROUP_ATTRIBUTE_REGIONACTIVATION:
+		case fUML::Semantics::Activities::ActivitiesPackage::EXPANSIONACTIVATIONGROUP_ATTRIBUTE_REGIONACTIVATION:
 			return getRegionActivation() != nullptr; //498
-		case fUML::FUMLPackage::EXPANSIONACTIVATIONGROUP_ATTRIBUTE_REGIONINPUTS:
+		case fUML::Semantics::Activities::ActivitiesPackage::EXPANSIONACTIVATIONGROUP_ATTRIBUTE_REGIONINPUTS:
 			return getRegionInputs() != nullptr; //499
 	}
 	return ActivityNodeActivationGroupImpl::internalEIsSet(featureID);
@@ -415,7 +408,7 @@ bool ExpansionActivationGroupImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::EXPANSIONACTIVATIONGROUP_ATTRIBUTE_GROUPINPUTS:
+		case fUML::Semantics::Activities::ActivitiesPackage::EXPANSIONACTIVATIONGROUP_ATTRIBUTE_GROUPINPUTS:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -451,7 +444,7 @@ bool ExpansionActivationGroupImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case fUML::FUMLPackage::EXPANSIONACTIVATIONGROUP_ATTRIBUTE_GROUPOUTPUTS:
+		case fUML::Semantics::Activities::ActivitiesPackage::EXPANSIONACTIVATIONGROUP_ATTRIBUTE_GROUPOUTPUTS:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -487,14 +480,14 @@ bool ExpansionActivationGroupImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case fUML::FUMLPackage::EXPANSIONACTIVATIONGROUP_ATTRIBUTE_INDEX:
+		case fUML::Semantics::Activities::ActivitiesPackage::EXPANSIONACTIVATIONGROUP_ATTRIBUTE_INDEX:
 		{
 			// BOOST CAST
 			int _index = newValue->get<int>();
 			setIndex(_index); //497
 			return true;
 		}
-		case fUML::FUMLPackage::EXPANSIONACTIVATIONGROUP_ATTRIBUTE_REGIONACTIVATION:
+		case fUML::Semantics::Activities::ActivitiesPackage::EXPANSIONACTIVATIONGROUP_ATTRIBUTE_REGIONACTIVATION:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -502,7 +495,7 @@ bool ExpansionActivationGroupImpl::eSet(int featureID, Any newValue)
 			setRegionActivation(_regionActivation); //498
 			return true;
 		}
-		case fUML::FUMLPackage::EXPANSIONACTIVATIONGROUP_ATTRIBUTE_REGIONINPUTS:
+		case fUML::Semantics::Activities::ActivitiesPackage::EXPANSIONACTIVATIONGROUP_ATTRIBUTE_REGIONINPUTS:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -555,11 +548,10 @@ void ExpansionActivationGroupImpl::load(std::shared_ptr<persistence::interfaces:
 	// Create new objects (from references (containment == true))
 	//
 	// get FUMLFactory
-	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -618,18 +610,19 @@ void ExpansionActivationGroupImpl::loadAttributes(std::shared_ptr<persistence::i
 	ActivityNodeActivationGroupImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void ExpansionActivationGroupImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+void ExpansionActivationGroupImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<fUML::Semantics::Activities::ActivitiesFactory> modelFactory=fUML::Semantics::Activities::ActivitiesFactory::eInstance();
 
-
-	ActivityNodeActivationGroupImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	ActivityNodeActivationGroupImpl::loadNode(nodeName, loadHandler);
 }
 
 void ExpansionActivationGroupImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::EXPANSIONACTIVATIONGROUP_ATTRIBUTE_GROUPINPUTS:
+		case fUML::Semantics::Activities::ActivitiesPackage::EXPANSIONACTIVATIONGROUP_ATTRIBUTE_GROUPINPUTS:
 		{
 			std::shared_ptr<Bag<fUML::Semantics::Actions::OutputPinActivation>> _groupInputs = getGroupInputs();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -643,7 +636,7 @@ void ExpansionActivationGroupImpl::resolveReferences(const int featureID, std::l
 			return;
 		}
 
-		case fUML::FUMLPackage::EXPANSIONACTIVATIONGROUP_ATTRIBUTE_GROUPOUTPUTS:
+		case fUML::Semantics::Activities::ActivitiesPackage::EXPANSIONACTIVATIONGROUP_ATTRIBUTE_GROUPOUTPUTS:
 		{
 			std::shared_ptr<Bag<fUML::Semantics::Actions::OutputPinActivation>> _groupOutputs = getGroupOutputs();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -657,7 +650,7 @@ void ExpansionActivationGroupImpl::resolveReferences(const int featureID, std::l
 			return;
 		}
 
-		case fUML::FUMLPackage::EXPANSIONACTIVATIONGROUP_ATTRIBUTE_REGIONACTIVATION:
+		case fUML::Semantics::Activities::ActivitiesPackage::EXPANSIONACTIVATIONGROUP_ATTRIBUTE_REGIONACTIVATION:
 		{
 			if (references.size() == 1)
 			{
@@ -669,7 +662,7 @@ void ExpansionActivationGroupImpl::resolveReferences(const int featureID, std::l
 			return;
 		}
 
-		case fUML::FUMLPackage::EXPANSIONACTIVATIONGROUP_ATTRIBUTE_REGIONINPUTS:
+		case fUML::Semantics::Activities::ActivitiesPackage::EXPANSIONACTIVATIONGROUP_ATTRIBUTE_REGIONINPUTS:
 		{
 			std::shared_ptr<Bag<fUML::Semantics::Actions::OutputPinActivation>> _regionInputs = getRegionInputs();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -700,10 +693,9 @@ void ExpansionActivationGroupImpl::saveContent(std::shared_ptr<persistence::inte
 {
 	try
 	{
-		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+		std::shared_ptr<fUML::Semantics::Activities::ActivitiesPackage> package = fUML::Semantics::Activities::ActivitiesPackage::eInstance();
 
 	
- 
 		// Add attributes
 		if ( this->eIsSet(package->getExpansionActivationGroup_Attribute_index()) )
 		{

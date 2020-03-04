@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -25,25 +24,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -69,10 +55,11 @@
 
 #include "uml/ValueSpecificationAction.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/Impl/UmlFactoryImpl.hpp"
+#include "uml/Impl/UmlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -118,18 +105,12 @@ IntervalImpl::~IntervalImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			IntervalImpl::IntervalImpl(std::weak_ptr<uml::Element > par_owner)
 			:IntervalImpl()
 			{
 			    m_owner = par_owner;
 			}
-
-
-
 
 
 //Additional constructor for the containments back reference
@@ -141,9 +122,6 @@ IntervalImpl::~IntervalImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			IntervalImpl::IntervalImpl(std::weak_ptr<uml::Slot > par_owningSlot)
 			:IntervalImpl()
@@ -151,9 +129,6 @@ IntervalImpl::~IntervalImpl()
 			    m_owningSlot = par_owningSlot;
 				m_owner = par_owningSlot;
 			}
-
-
-
 
 
 //Additional constructor for the containments back reference
@@ -165,9 +140,6 @@ IntervalImpl::~IntervalImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			IntervalImpl::IntervalImpl(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction)
 			:IntervalImpl()
@@ -175,9 +147,6 @@ IntervalImpl::~IntervalImpl()
 			    m_valueSpecificationAction = par_valueSpecificationAction;
 				m_owner = par_valueSpecificationAction;
 			}
-
-
-
 
 
 
@@ -246,7 +215,7 @@ std::shared_ptr<ecore::EObject>  IntervalImpl::copy() const
 
 std::shared_ptr<ecore::EClass> IntervalImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getInterval_Class();
+	return uml::UmlPackage::eInstance()->getInterval_Class();
 }
 
 //*********************************
@@ -347,9 +316,9 @@ Any IntervalImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::INTERVAL_ATTRIBUTE_MAX:
+		case uml::UmlPackage::INTERVAL_ATTRIBUTE_MAX:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getMax())); //12915
-		case UmlPackage::INTERVAL_ATTRIBUTE_MIN:
+		case uml::UmlPackage::INTERVAL_ATTRIBUTE_MIN:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getMin())); //12916
 	}
 	return ValueSpecificationImpl::eGet(featureID, resolve, coreType);
@@ -358,9 +327,9 @@ bool IntervalImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::INTERVAL_ATTRIBUTE_MAX:
+		case uml::UmlPackage::INTERVAL_ATTRIBUTE_MAX:
 			return getMax() != nullptr; //12915
-		case UmlPackage::INTERVAL_ATTRIBUTE_MIN:
+		case uml::UmlPackage::INTERVAL_ATTRIBUTE_MIN:
 			return getMin() != nullptr; //12916
 	}
 	return ValueSpecificationImpl::internalEIsSet(featureID);
@@ -369,7 +338,7 @@ bool IntervalImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::INTERVAL_ATTRIBUTE_MAX:
+		case uml::UmlPackage::INTERVAL_ATTRIBUTE_MAX:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -377,7 +346,7 @@ bool IntervalImpl::eSet(int featureID, Any newValue)
 			setMax(_max); //12915
 			return true;
 		}
-		case UmlPackage::INTERVAL_ATTRIBUTE_MIN:
+		case uml::UmlPackage::INTERVAL_ATTRIBUTE_MIN:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -402,11 +371,10 @@ void IntervalImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> l
 	// Create new objects (from references (containment == true))
 	//
 	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -442,18 +410,19 @@ void IntervalImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoad
 	ValueSpecificationImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void IntervalImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void IntervalImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
 
-
-	ValueSpecificationImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	ValueSpecificationImpl::loadNode(nodeName, loadHandler);
 }
 
 void IntervalImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
-		case UmlPackage::INTERVAL_ATTRIBUTE_MAX:
+		case uml::UmlPackage::INTERVAL_ATTRIBUTE_MAX:
 		{
 			if (references.size() == 1)
 			{
@@ -465,7 +434,7 @@ void IntervalImpl::resolveReferences(const int featureID, std::list<std::shared_
 			return;
 		}
 
-		case UmlPackage::INTERVAL_ATTRIBUTE_MIN:
+		case uml::UmlPackage::INTERVAL_ATTRIBUTE_MIN:
 		{
 			if (references.size() == 1)
 			{

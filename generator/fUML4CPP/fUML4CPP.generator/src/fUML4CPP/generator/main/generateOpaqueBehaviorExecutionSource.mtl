@@ -45,8 +45,9 @@
 #include <memory>
 
 #include "abstractDataTypes/SubsetUnion.hpp" 
-#include "fUML/FUMLFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
+#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
+#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
 #include "uml/Behavior.hpp"
 
 [aNamedElement.generateIncludes(aPackage)/]
@@ -293,7 +294,7 @@ if([aPin.name/] == nullptr)
 }
 [else]
 std::shared_ptr<fUML::Semantics::SimpleClassifiers::[aPin.type.name.toUpperFirst()/]Value> [aPin.name/]Value = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::[aPin.type.name.toUpperFirst()/]Value>([aPin.name/]ValueList->front());
-[aPin.name/] = [aPin.name/]Value->getValue();
+[aPin.name/] = [aPin.name/]Value->[aPin.type.getterPrefix()/]Value();
 [/if]
 [else]
 Bag<fUML::Semantics::Values::Value>::iterator [aPin.name.toLowerFirst()/]Iter = [aPin.name.toLowerFirst()/]ValueList->begin();
@@ -354,7 +355,7 @@ if([par.name/] == nullptr)
 }
 [else]
 std::shared_ptr<fUML::Semantics::SimpleClassifiers::[par.type.name.toUpperFirst()/]Value> [par.name/]Value = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::[par.type.name.toUpperFirst()/]Value>([par.name/]ValueList->front());
-[par.name/] = [par.name/]Value->getValue();
+[par.name/] = [par.name/]Value->[par.type.getterPrefix()/]Value();
 [/if]
 [else]
 Bag<fUML::Semantics::Values::Value>::iterator [par.name.toLowerFirst()/]ValueIter = [par.name.toLowerFirst()/]ValueList->begin();

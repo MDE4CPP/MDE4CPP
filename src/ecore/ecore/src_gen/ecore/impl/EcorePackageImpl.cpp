@@ -54,6 +54,8 @@ void EcorePackageImpl::init(std::shared_ptr<ecore::EPackage> package)
     initializePackageContents();   
 }
 
+
+
 // Begin Class EAnnotation
 std::shared_ptr<ecore::EClass> EcorePackageImpl::getEAnnotation_Class() const
 {

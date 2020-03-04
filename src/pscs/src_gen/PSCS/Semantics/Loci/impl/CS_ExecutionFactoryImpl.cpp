@@ -17,13 +17,13 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "PSCS/impl/PSCSPackageImpl.hpp"
+
+//Includes from codegen annotation
 #include "fUML/FUMLFactory.hpp"
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
@@ -59,14 +59,14 @@
 #include "PSCS/Semantics/Actions/CS_RemoveStructuralFeatureValueActionActivation.hpp"
 #include "PSCS/Semantics/Values/CS_OpaqueExpressionEvaluation.hpp"
 #include "PSCS/Semantics/CommonBehavior/CS_CallEventExecution.hpp"
+#include "PSCS/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
+#include "PSCS/Semantics/Actions/ActionsFactory.hpp"
+#include "PSCS/Semantics/Classification/ClassificationFactory.hpp"
+#include "PSCS/Semantics/Values/ValuesFactory.hpp"
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "PSCS/PSCSFactory.hpp"
-#include "PSCS/PSCSPackage.hpp"
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -92,10 +92,15 @@
 
 #include "fUML/Semantics/Loci/SemanticVisitor.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "PSCS/PSCSPackage.hpp"
+//Factories an Package includes
+#include "PSCS/Semantics/Loci/Impl/LociFactoryImpl.hpp"
+#include "PSCS/Semantics/Loci/Impl/LociPackageImpl.hpp"
+
+#include "PSCS/Semantics/SemanticsFactory.hpp"
+#include "PSCS/Semantics/SemanticsPackage.hpp"
 #include "PSCS/PSCSFactory.hpp"
+#include "PSCS/PSCSPackage.hpp"
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -140,9 +145,6 @@ CS_ExecutionFactoryImpl::~CS_ExecutionFactoryImpl()
 
 
 
-
-
-
 CS_ExecutionFactoryImpl::CS_ExecutionFactoryImpl(const CS_ExecutionFactoryImpl & obj):CS_ExecutionFactoryImpl()
 {
 	//create copy of all Attributes
@@ -181,7 +183,7 @@ std::shared_ptr<ecore::EObject>  CS_ExecutionFactoryImpl::copy() const
 
 std::shared_ptr<ecore::EClass> CS_ExecutionFactoryImpl::eStaticClass() const
 {
-	return PSCSPackageImpl::eInstance()->getCS_ExecutionFactory_Class();
+	return PSCS::Semantics::Loci::LociPackage::eInstance()->getCS_ExecutionFactory_Class();
 }
 
 //*********************************
@@ -223,79 +225,79 @@ std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> CS_ExecutionFactoryImpl:
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-		// Extends fUML semantics in the sense that newly introduced 
+	// Extends fUML semantics in the sense that newly introduced 
 	// semantic visitors are instantiated instead of fUML visitors
 	std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> visitor = nullptr;
 	
 	if(std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::CallEventBehavior>(element) != nullptr) {
-		return PSCS::PSCSFactory::eInstance()->createCS_CallEventExecution();
+		return PSCS::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createCS_CallEventExecution();
 	}
 	
 	switch(element->eClass()->getClassifierID())
 	{
 		case uml::UmlPackage::READEXTENTACTION_CLASS: 
 		{
-			visitor = PSCS::PSCSFactory::eInstance()->createCS_ReadExtentActionActivation();
+			visitor = PSCS::Semantics::Actions::ActionsFactory::eInstance()->createCS_ReadExtentActionActivation();
 			break;
 		}
 		case uml::UmlPackage::ADDSTRUCTURALFEATUREVALUEACTION_CLASS:
 		{
-			visitor = PSCS::PSCSFactory::eInstance()->createCS_AddStructuralFeatureValueActionActivation();
+			visitor = PSCS::Semantics::Actions::ActionsFactory::eInstance()->createCS_AddStructuralFeatureValueActionActivation();
 			break;
 		}
 		case uml::UmlPackage::CLEARSTRUCTURALFEATUREACTION_CLASS:
 		{
-			visitor = PSCS::PSCSFactory::eInstance()->createCS_ClearStructuralFeatureActionActivation();
+			visitor = PSCS::Semantics::Actions::ActionsFactory::eInstance()->createCS_ClearStructuralFeatureActionActivation();
 			break;
 		}
 		case uml::UmlPackage::CREATELINKACTION_CLASS:
 		{
-			visitor = PSCS::PSCSFactory::eInstance()->createCS_CreateLinkActionActivation();
+			visitor = PSCS::Semantics::Actions::ActionsFactory::eInstance()->createCS_CreateLinkActionActivation();
 			break;
 		}
 		case uml::UmlPackage::CREATEOBJECTACTION_CLASS:
 		{
-			visitor = PSCS::PSCSFactory::eInstance()->createCS_CreateObjectActionActivation();
+			visitor = PSCS::Semantics::Actions::ActionsFactory::eInstance()->createCS_CreateObjectActionActivation();
 			break;
 		}
 		case uml::UmlPackage::READSELFACTION_CLASS:
 		{
-			visitor = PSCS::PSCSFactory::eInstance()->createCS_ReadSelfActionActivation();
+			visitor = PSCS::Semantics::Actions::ActionsFactory::eInstance()->createCS_ReadSelfActionActivation();
 			break;
 		}
 		case uml::UmlPackage::ACCEPTCALLACTION_CLASS:
 		{
-			visitor = PSCS::PSCSFactory::eInstance()->createCS_AcceptCallActionActivation();
+			visitor = PSCS::Semantics::Actions::ActionsFactory::eInstance()->createCS_AcceptCallActionActivation();
 			break;
 		}
 		case uml::UmlPackage::INSTANCEVALUE_CLASS:
 		{
-			visitor = PSCS::PSCSFactory::eInstance()->createCS_InstanceValueEvaluation();
+			visitor = PSCS::Semantics::Classification::ClassificationFactory::eInstance()->createCS_InstanceValueEvaluation();
 			break;
 		}
 		case uml::UmlPackage::ACCEPTEVENTACTION_CLASS: 
 		{
-			visitor = PSCS::PSCSFactory::eInstance()->createCS_AcceptEventActionActivation();
+			visitor = PSCS::Semantics::Actions::ActionsFactory::eInstance()->createCS_AcceptEventActionActivation();
 			break;
 		}
 		case uml::UmlPackage::CALLOPERATIONACTION_CLASS:
 		{
-			visitor = PSCS::PSCSFactory::eInstance()->createCS_CallOperationActionActivation();
+			visitor = PSCS::Semantics::Actions::ActionsFactory::eInstance()->createCS_CallOperationActionActivation();
 			break;
 		}
 		case uml::UmlPackage::SENDSIGNALACTION_CLASS:
 		{
-			visitor = PSCS::PSCSFactory::eInstance()->createCS_SendSignalActionActivation();
+			visitor = PSCS::Semantics::Actions::ActionsFactory::eInstance()->createCS_SendSignalActionActivation();
 			break;
 		}
 		case uml::UmlPackage::OPAQUEEXPRESSION_CLASS:
 		{
-			visitor = PSCS::PSCSFactory::eInstance()->createCS_OpaqueExpressionEvaluation();
+			visitor = PSCS::Semantics::Values::ValuesFactory::eInstance()->createCS_OpaqueExpressionEvaluation();
 			break;
 		}
 		case uml::UmlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_CLASS:
 		{
-			visitor = PSCS::PSCSFactory::eInstance()->createCS_RemoveStructuralFeatureValueActionActivation();
+			visitor = PSCS::Semantics::Actions::ActionsFactory::eInstance()->createCS_RemoveStructuralFeatureValueActionActivation();
 			break;
 		}
 		default:
@@ -348,7 +350,7 @@ Any CS_ExecutionFactoryImpl::eGet(int featureID, bool resolve, bool coreType) co
 {
 	switch(featureID)
 	{
-		case PSCS::PSCSPackage::CS_EXECUTIONFACTORY_ATTRIBUTE_APPLIEDPROFILES:
+		case PSCS::Semantics::Loci::LociPackage::CS_EXECUTIONFACTORY_ATTRIBUTE_APPLIEDPROFILES:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Package>::iterator iter = m_appliedProfiles->begin();
@@ -367,7 +369,7 @@ bool CS_ExecutionFactoryImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case PSCS::PSCSPackage::CS_EXECUTIONFACTORY_ATTRIBUTE_APPLIEDPROFILES:
+		case PSCS::Semantics::Loci::LociPackage::CS_EXECUTIONFACTORY_ATTRIBUTE_APPLIEDPROFILES:
 			return getAppliedProfiles() != nullptr; //144
 	}
 	return fUML::Semantics::Loci::ExecutionFactoryImpl::internalEIsSet(featureID);
@@ -376,7 +378,7 @@ bool CS_ExecutionFactoryImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case PSCS::PSCSPackage::CS_EXECUTIONFACTORY_ATTRIBUTE_APPLIEDPROFILES:
+		case PSCS::Semantics::Loci::LociPackage::CS_EXECUTIONFACTORY_ATTRIBUTE_APPLIEDPROFILES:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -429,11 +431,10 @@ void CS_ExecutionFactoryImpl::load(std::shared_ptr<persistence::interfaces::XLoa
 	// Create new objects (from references (containment == true))
 	//
 	// get PSCSFactory
-	std::shared_ptr<PSCS::PSCSFactory> modelFactory = PSCS::PSCSFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -462,18 +463,19 @@ void CS_ExecutionFactoryImpl::loadAttributes(std::shared_ptr<persistence::interf
 	fUML::Semantics::Loci::ExecutionFactoryImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void CS_ExecutionFactoryImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<PSCS::PSCSFactory> modelFactory)
+void CS_ExecutionFactoryImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<PSCS::Semantics::Loci::LociFactory> modelFactory=PSCS::Semantics::Loci::LociFactory::eInstance();
 
-
-	fUML::Semantics::Loci::ExecutionFactoryImpl::loadNode(nodeName, loadHandler, fUML::FUMLFactory::eInstance());
+	//load BasePackage Nodes
+	fUML::Semantics::Loci::ExecutionFactoryImpl::loadNode(nodeName, loadHandler);
 }
 
 void CS_ExecutionFactoryImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
-		case PSCS::PSCSPackage::CS_EXECUTIONFACTORY_ATTRIBUTE_APPLIEDPROFILES:
+		case PSCS::Semantics::Loci::LociPackage::CS_EXECUTIONFACTORY_ATTRIBUTE_APPLIEDPROFILES:
 		{
 			std::shared_ptr<Bag<uml::Package>> _appliedProfiles = getAppliedProfiles();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -504,7 +506,7 @@ void CS_ExecutionFactoryImpl::saveContent(std::shared_ptr<persistence::interface
 {
 	try
 	{
-		std::shared_ptr<PSCS::PSCSPackage> package = PSCS::PSCSPackage::eInstance();
+		std::shared_ptr<PSCS::Semantics::Loci::LociPackage> package = PSCS::Semantics::Loci::LociPackage::eInstance();
 
 	
 

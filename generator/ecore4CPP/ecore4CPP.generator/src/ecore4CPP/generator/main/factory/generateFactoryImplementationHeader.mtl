@@ -18,7 +18,7 @@
 [import ecore4CPP::generator::main::helper /]
 
 [template public generateFactoryImplHeader(anEPackage : EPackage)]
-[file (anEPackage.name.concat('/impl/').concat(anEPackage.name.toUpperFirst()).concat('FactoryImpl.hpp'), false, 'UTF-8')]
+[file (anEPackage.generateNamespacePath().concat('/impl/').concat(anEPackage.name.toUpperFirst()).concat('FactoryImpl.hpp'), false, 'UTF-8')]
 [startGuard(anEPackage,'FactoryImpl')/]
 
 #include "ecore/impl/EFactoryImpl.hpp"
@@ -27,7 +27,11 @@
 [if (generateObjectMonitoring())]
 #include "abstractDataTypes/Bag.hpp"
 [/if]
-#include "[anEPackage.name/]/[anEPackage.name.toUpperFirst().concat('Factory')/].hpp"
+[if (not (anEPackage = anEPackage.getRootPackage()))]
+#include "[anEPackage.getRootPackage().name/]/[anEPackage.getNamespacePathWithoutRoot()/][anEPackage.name.toUpperFirst()/]Factory.hpp"
+[else]
+#include "[anEPackage.getRootPackage().name/]/[anEPackage.name.toUpperFirst()/]Factory.hpp"
+[/if]
 
 namespace [anEPackage.name/] 
 {[for (elements : EClassifier| OrderedSet{anEPackage.eClassifiers}->flatten()->selectByKind(EClass)->sortedBy(name)) separator ('\n')]
@@ -36,7 +40,7 @@ namespace [anEPackage.name/]
 }
 
 [comment namespace /]
-namespace [anEPackage.name/] 
+namespace [anEPackage.generateNamespaceDefinition()/] 
 {
 	class [anEPackage.name.toUpperFirst().concat('FactoryImpl')/] : virtual public [needNamespace(anEPackage, 'EFactoryImpl')/] , virtual public [anEPackage.name.toUpperFirst().concat('Factory')/] 
 	{
@@ -56,10 +60,11 @@ namespace [anEPackage.name/]
 			virtual std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> create(std::shared_ptr<[needNamespace(anEPackage, 'EClass')/]> _class, std::shared_ptr<EObject> _container=nullptr, const int referenceID = -1)[if (not generateObjectMonitoring())] const[/if];
 
 			//Creator functions
-			[anEPackage.eAllContents(EClass)->sortedBy(name).generateClassCreate(true)/]
-
+			 [anEPackage.eClassifiers->selectByKind(EClass)->sortedBy(name).generateClassCreate(true)/]
+[comment] Package in Factory notwendig???
 			//Package
 			virtual std::shared_ptr<[anEPackage.name.toUpperFirst()/]Package> get[anEPackage.name.toUpperFirst()/]Package() const;
+[/comment]
 [if (generateObjectMonitoring())]
 			virtual void print();
 			virtual void add(std::shared_ptr<ecore::EObject> obj);

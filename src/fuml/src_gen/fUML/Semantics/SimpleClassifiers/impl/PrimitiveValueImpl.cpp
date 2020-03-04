@@ -18,11 +18,11 @@
 #include <iostream>
 #include <sstream>
 
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "fUML/impl/FUMLPackageImpl.hpp"
+
+//Includes from codegen annotation
 #include "fUML/FUMLFactory.hpp"
 #include "uml/UmlFactory.hpp"
 #include "uml/PrimitiveType.hpp"
@@ -31,8 +31,6 @@
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -42,10 +40,15 @@
 
 #include "fUML/Semantics/Values/Value.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
+//Factories an Package includes
+#include "fUML/Semantics/SimpleClassifiers/Impl/SimpleClassifiersFactoryImpl.hpp"
+#include "fUML/Semantics/SimpleClassifiers/Impl/SimpleClassifiersPackageImpl.hpp"
+
+#include "fUML/Semantics/SemanticsFactory.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -106,7 +109,7 @@ std::shared_ptr<ecore::EObject>  PrimitiveValueImpl::copy() const
 
 std::shared_ptr<ecore::EClass> PrimitiveValueImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getPrimitiveValue_Class();
+	return fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance()->getPrimitiveValue_Class();
 }
 
 //*********************************
@@ -169,7 +172,7 @@ Any PrimitiveValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::PRIMITIVEVALUE_ATTRIBUTE_TYPE:
+		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::PRIMITIVEVALUE_ATTRIBUTE_TYPE:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getType())); //890
 	}
 	return fUML::Semantics::Values::ValueImpl::eGet(featureID, resolve, coreType);
@@ -178,7 +181,7 @@ bool PrimitiveValueImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::PRIMITIVEVALUE_ATTRIBUTE_TYPE:
+		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::PRIMITIVEVALUE_ATTRIBUTE_TYPE:
 			return getType() != nullptr; //890
 	}
 	return fUML::Semantics::Values::ValueImpl::internalEIsSet(featureID);
@@ -187,7 +190,7 @@ bool PrimitiveValueImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::PRIMITIVEVALUE_ATTRIBUTE_TYPE:
+		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::PRIMITIVEVALUE_ATTRIBUTE_TYPE:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -212,11 +215,10 @@ void PrimitiveValueImpl::load(std::shared_ptr<persistence::interfaces::XLoadHand
 	// Create new objects (from references (containment == true))
 	//
 	// get FUMLFactory
-	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -245,18 +247,19 @@ void PrimitiveValueImpl::loadAttributes(std::shared_ptr<persistence::interfaces:
 	fUML::Semantics::Values::ValueImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void PrimitiveValueImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+void PrimitiveValueImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory> modelFactory=fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance();
 
-
-	fUML::Semantics::Values::ValueImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	fUML::Semantics::Values::ValueImpl::loadNode(nodeName, loadHandler);
 }
 
 void PrimitiveValueImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::PRIMITIVEVALUE_ATTRIBUTE_TYPE:
+		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::PRIMITIVEVALUE_ATTRIBUTE_TYPE:
 		{
 			if (references.size() == 1)
 			{
@@ -288,7 +291,7 @@ void PrimitiveValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 {
 	try
 	{
-		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+		std::shared_ptr<fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage> package = fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance();
 
 	
 

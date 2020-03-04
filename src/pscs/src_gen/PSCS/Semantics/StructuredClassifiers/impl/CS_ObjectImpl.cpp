@@ -17,33 +17,31 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "PSCS/impl/PSCSPackageImpl.hpp"
-#include "fUML/FUMLFactory.hpp"
 
+//Includes from codegen annotation
 #include "PSCS/Semantics/StructuredClassifiers/CS_Reference.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/CS_RequestPropagationStrategy.hpp"
 #include "PSCS/Semantics/CommonBehavior/CS_CallEventExecution.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/CS_StructuralFeatureOfInterfaceAccessStrategy.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/CS_DispatchOperationOfInterfaceStrategy.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/CS_LinkKind.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
 #include "uml/ConnectorKind.hpp"
 #include "uml/InterfaceRealization.hpp"
 #include "fUML/Semantics/Loci/ExecutionFactory.hpp"
 #include "fUML/Semantics/Actions/CallOperationActionActivation.hpp"
 #include "fUML/Semantics/Actions/SendSignalActionActivation.hpp"
+#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "fUML/Semantics/Loci/ChoiceStrategy.hpp"
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "PSCS/PSCSFactory.hpp"
-#include "PSCS/PSCSPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -81,10 +79,15 @@
 
 #include "fUML/Semantics/Values/Value.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "PSCS/PSCSPackage.hpp"
+//Factories an Package includes
+#include "PSCS/Semantics/StructuredClassifiers/Impl/StructuredClassifiersFactoryImpl.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/Impl/StructuredClassifiersPackageImpl.hpp"
+
+#include "PSCS/Semantics/SemanticsFactory.hpp"
+#include "PSCS/Semantics/SemanticsPackage.hpp"
 #include "PSCS/PSCSFactory.hpp"
+#include "PSCS/PSCSPackage.hpp"
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -161,7 +164,7 @@ std::shared_ptr<ecore::EObject>  CS_ObjectImpl::copy() const
 
 std::shared_ptr<ecore::EClass> CS_ObjectImpl::eStaticClass() const
 {
-	return PSCSPackageImpl::eInstance()->getCS_Object_Class();
+	return PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getCS_Object_Class();
 }
 
 //*********************************
@@ -291,7 +294,7 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> CS_ObjectImpl::dispa
 		if(potentialTargets->size() != 0) {
 			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_RequestPropagationStrategy> strategy = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_RequestPropagationStrategy>(this->getLocus()->getFactory()->getStrategy("requestPropagation"));
 			// Choose one target non-deterministically
-			std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference>> targets = strategy->select(potentialTargets, fUML::FUMLFactory::eInstance()->createCallOperationActionActivation());
+			std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference>> targets = strategy->select(potentialTargets, fUML::Semantics::Actions::ActionsFactory::eInstance()->createCallOperationActionActivation());
 			std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> target = targets->at(0);
 			execution = target->dispatch(operation);
 		}
@@ -355,7 +358,7 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> CS_ObjectImpl::dispa
 	}
 
 	std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_RequestPropagationStrategy> strategy = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_RequestPropagationStrategy>(this->getLocus()->getFactory()->getStrategy("requestPropagation"));
-	std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference>> selectedTargets = strategy->select(allPotentialTargets, fUML::FUMLFactory::eInstance()->createSendSignalActionActivation());
+	std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference>> selectedTargets = strategy->select(allPotentialTargets, fUML::Semantics::Actions::ActionsFactory::eInstance()->createSendSignalActionActivation());
 
 	for(unsigned int j = 0; j < selectedTargets->size(); j++) {
 		std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> target = selectedTargets->at(j);
@@ -394,7 +397,7 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> CS_ObjectImpl::dispa
 		potentialTargets->add(std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Reference>(values->at(i)));
 	}
 	std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_RequestPropagationStrategy> strategy = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_RequestPropagationStrategy>(this->getLocus()->getFactory()->getStrategy("requestPropagation"));
-	std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference>> targets = strategy->select(potentialTargets, fUML::FUMLFactory::eInstance()->createCallOperationActionActivation());
+	std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference>> targets = strategy->select(potentialTargets, fUML::Semantics::Actions::ActionsFactory::eInstance()->createCallOperationActionActivation());
 	// if targets is empty, no dispatch target has been found,
 	// and the operation call is lost
 	if(targets->size() >= 1) {
@@ -613,7 +616,7 @@ bool CS_ObjectImpl::isOperationProvided(std::shared_ptr<fUML::Semantics::Structu
 				while((memberIndex <= members->size()) && (!isProvided)) {
 					std::shared_ptr<uml::NamedElement> cddOperation = members->at(memberIndex-1);
 					if(std::dynamic_pointer_cast<uml::Operation>(cddOperation)) {
-						std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_DispatchOperationOfInterfaceStrategy> strategy = PSCS::PSCSFactory::eInstance()->createCS_DispatchOperationOfInterfaceStrategy();
+						std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_DispatchOperationOfInterfaceStrategy> strategy = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_DispatchOperationOfInterfaceStrategy();
 						isProvided = strategy->operationsMatch(std::dynamic_pointer_cast<uml::Operation>(cddOperation), operation);
 					}
 					memberIndex += 1;
@@ -921,7 +924,7 @@ void CS_ObjectImpl::sendIn(std::shared_ptr<fUML::Semantics::CommonBehavior::Even
 		potentialTargets->add(std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Reference>(values->at(i)));
 	}
 	std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_RequestPropagationStrategy> strategy = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_RequestPropagationStrategy>(this->getLocus()->getFactory()->getStrategy("requestPropagation"));
-	std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference>> targets = strategy->select(potentialTargets, fUML::FUMLFactory::eInstance()->createSendSignalActionActivation());
+	std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference>> targets = strategy->select(potentialTargets, fUML::Semantics::Actions::ActionsFactory::eInstance()->createSendSignalActionActivation());
 	for(unsigned int i = 0; i < targets->size(); i++) {
 		std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> target = targets->at(i);
 		target->send(eventOccurrence);
@@ -969,7 +972,7 @@ void CS_ObjectImpl::sendOut(std::shared_ptr<fUML::Semantics::CommonBehavior::Eve
 	}
 
 	std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_RequestPropagationStrategy> strategy = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_RequestPropagationStrategy>(this->getLocus()->getFactory()->getStrategy("requestPropagation"));
-	std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference>> selectedTargets = strategy->select(allPotentialTargets, fUML::FUMLFactory::eInstance()->createSendSignalActionActivation());
+	std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference>> selectedTargets = strategy->select(allPotentialTargets, fUML::Semantics::Actions::ActionsFactory::eInstance()->createSendSignalActionActivation());
 
 	for(unsigned int j = 0; j < selectedTargets->size(); j++) {
 		std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> target = selectedTargets->at(j);
@@ -1006,7 +1009,7 @@ void CS_ObjectImpl::sendOut(std::shared_ptr<fUML::Semantics::CommonBehavior::Eve
 		potentialTargets->add(std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Reference>(values->at(i)));
 	}
 	std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_RequestPropagationStrategy> strategy = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_RequestPropagationStrategy>(this->getLocus()->getFactory()->getStrategy("requestPropagation"));
-	std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference>> targets = strategy->select(potentialTargets, fUML::FUMLFactory::eInstance()->createSendSignalActionActivation());
+	std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference>> targets = strategy->select(potentialTargets, fUML::Semantics::Actions::ActionsFactory::eInstance()->createSendSignalActionActivation());
 	for(unsigned int i = 0; i < targets->size(); i++) {
 		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> target = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint>(targets->at(i));
 		this->sendOut(eventOccurrence, target);
@@ -1093,11 +1096,10 @@ void CS_ObjectImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> 
 	// Create new objects (from references (containment == true))
 	//
 	// get PSCSFactory
-	std::shared_ptr<PSCS::PSCSFactory> modelFactory = PSCS::PSCSFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -1107,11 +1109,12 @@ void CS_ObjectImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoa
 	fUML::Semantics::StructuredClassifiers::ObjectImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void CS_ObjectImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<PSCS::PSCSFactory> modelFactory)
+void CS_ObjectImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory> modelFactory=PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance();
 
-
-	fUML::Semantics::StructuredClassifiers::ObjectImpl::loadNode(nodeName, loadHandler, fUML::FUMLFactory::eInstance());
+	//load BasePackage Nodes
+	fUML::Semantics::StructuredClassifiers::ObjectImpl::loadNode(nodeName, loadHandler);
 }
 
 void CS_ObjectImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
@@ -1148,7 +1151,7 @@ void CS_ObjectImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 {
 	try
 	{
-		std::shared_ptr<PSCS::PSCSPackage> package = PSCS::PSCSPackage::eInstance();
+		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage> package = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance();
 
 	
 

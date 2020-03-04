@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -26,25 +25,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -74,10 +60,11 @@
 
 #include "uml/ValueSpecificationAction.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/Impl/UmlFactoryImpl.hpp"
+#include "uml/Impl/UmlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -124,18 +111,12 @@ OpaqueExpressionImpl::~OpaqueExpressionImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			OpaqueExpressionImpl::OpaqueExpressionImpl(std::weak_ptr<uml::Element > par_owner)
 			:OpaqueExpressionImpl()
 			{
 			    m_owner = par_owner;
 			}
-
-
-
 
 
 //Additional constructor for the containments back reference
@@ -147,9 +128,6 @@ OpaqueExpressionImpl::~OpaqueExpressionImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			OpaqueExpressionImpl::OpaqueExpressionImpl(std::weak_ptr<uml::Slot > par_owningSlot)
 			:OpaqueExpressionImpl()
@@ -157,9 +135,6 @@ OpaqueExpressionImpl::~OpaqueExpressionImpl()
 			    m_owningSlot = par_owningSlot;
 				m_owner = par_owningSlot;
 			}
-
-
-
 
 
 //Additional constructor for the containments back reference
@@ -171,9 +146,6 @@ OpaqueExpressionImpl::~OpaqueExpressionImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			OpaqueExpressionImpl::OpaqueExpressionImpl(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction)
 			:OpaqueExpressionImpl()
@@ -181,9 +153,6 @@ OpaqueExpressionImpl::~OpaqueExpressionImpl()
 			    m_valueSpecificationAction = par_valueSpecificationAction;
 				m_owner = par_valueSpecificationAction;
 			}
-
-
-
 
 
 
@@ -254,7 +223,7 @@ std::shared_ptr<ecore::EObject>  OpaqueExpressionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> OpaqueExpressionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getOpaqueExpression_Class();
+	return uml::UmlPackage::eInstance()->getOpaqueExpression_Class();
 }
 
 //*********************************
@@ -408,13 +377,13 @@ Any OpaqueExpressionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::OPAQUEEXPRESSION_ATTRIBUTE_BEHAVIOR:
+		case uml::UmlPackage::OPAQUEEXPRESSION_ATTRIBUTE_BEHAVIOR:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getBehavior())); //16715
-		case UmlPackage::OPAQUEEXPRESSION_ATTRIBUTE_BODY:
+		case uml::UmlPackage::OPAQUEEXPRESSION_ATTRIBUTE_BODY:
 			return eAny(getBody()); //16716
-		case UmlPackage::OPAQUEEXPRESSION_ATTRIBUTE_LANGUAGE:
+		case uml::UmlPackage::OPAQUEEXPRESSION_ATTRIBUTE_LANGUAGE:
 			return eAny(getLanguage()); //16717
-		case UmlPackage::OPAQUEEXPRESSION_ATTRIBUTE_RESULT:
+		case uml::UmlPackage::OPAQUEEXPRESSION_ATTRIBUTE_RESULT:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getResult())); //16718
 	}
 	return ValueSpecificationImpl::eGet(featureID, resolve, coreType);
@@ -423,13 +392,13 @@ bool OpaqueExpressionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::OPAQUEEXPRESSION_ATTRIBUTE_BEHAVIOR:
+		case uml::UmlPackage::OPAQUEEXPRESSION_ATTRIBUTE_BEHAVIOR:
 			return getBehavior() != nullptr; //16715
-		case UmlPackage::OPAQUEEXPRESSION_ATTRIBUTE_BODY:
+		case uml::UmlPackage::OPAQUEEXPRESSION_ATTRIBUTE_BODY:
 			return !getBody()->empty(); //16716
-		case UmlPackage::OPAQUEEXPRESSION_ATTRIBUTE_LANGUAGE:
+		case uml::UmlPackage::OPAQUEEXPRESSION_ATTRIBUTE_LANGUAGE:
 			return !getLanguage()->empty(); //16717
-		case UmlPackage::OPAQUEEXPRESSION_ATTRIBUTE_RESULT:
+		case uml::UmlPackage::OPAQUEEXPRESSION_ATTRIBUTE_RESULT:
 			return getResult() != nullptr; //16718
 	}
 	return ValueSpecificationImpl::internalEIsSet(featureID);
@@ -438,7 +407,7 @@ bool OpaqueExpressionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::OPAQUEEXPRESSION_ATTRIBUTE_BEHAVIOR:
+		case uml::UmlPackage::OPAQUEEXPRESSION_ATTRIBUTE_BEHAVIOR:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -446,13 +415,13 @@ bool OpaqueExpressionImpl::eSet(int featureID, Any newValue)
 			setBehavior(_behavior); //16715
 			return true;
 		}
-		case UmlPackage::OPAQUEEXPRESSION_ATTRIBUTE_BODY:
+		case uml::UmlPackage::OPAQUEEXPRESSION_ATTRIBUTE_BODY:
 		{
 			// BOOST CAST
 			// nothing to do
 			return true;
 		}
-		case UmlPackage::OPAQUEEXPRESSION_ATTRIBUTE_LANGUAGE:
+		case uml::UmlPackage::OPAQUEEXPRESSION_ATTRIBUTE_LANGUAGE:
 		{
 			// BOOST CAST
 			// nothing to do
@@ -475,11 +444,10 @@ void OpaqueExpressionImpl::load(std::shared_ptr<persistence::interfaces::XLoadHa
 	// Create new objects (from references (containment == true))
 	//
 	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -508,8 +476,9 @@ void OpaqueExpressionImpl::loadAttributes(std::shared_ptr<persistence::interface
 	ValueSpecificationImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void OpaqueExpressionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void OpaqueExpressionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
 	try
 	{
 		if (nodeName.compare("body") == 0)
@@ -537,15 +506,15 @@ void OpaqueExpressionImpl::loadNode(std::string nodeName, std::shared_ptr<persis
 		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
 	}
 
-
-	ValueSpecificationImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	ValueSpecificationImpl::loadNode(nodeName, loadHandler);
 }
 
 void OpaqueExpressionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
-		case UmlPackage::OPAQUEEXPRESSION_ATTRIBUTE_BEHAVIOR:
+		case uml::UmlPackage::OPAQUEEXPRESSION_ATTRIBUTE_BEHAVIOR:
 		{
 			if (references.size() == 1)
 			{
@@ -591,7 +560,6 @@ void OpaqueExpressionImpl::saveContent(std::shared_ptr<persistence::interfaces::
 		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
 
 	
- 
 		// Add attributes
 		if ( this->eIsSet(package->getOpaqueExpression_Attribute_body()) )
 		{

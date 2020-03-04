@@ -17,26 +17,23 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/Union.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "fUML/impl/FUMLPackageImpl.hpp"
+
+//Includes from codegen annotation
 #include "uml/CreateObjectAction.hpp"
 #include "uml/Class.hpp"
 #include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
+#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -56,10 +53,15 @@
 
 #include "fUML/Semantics/Activities/Token.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
+//Factories an Package includes
+#include "fUML/Semantics/Actions/Impl/ActionsFactoryImpl.hpp"
+#include "fUML/Semantics/Actions/Impl/ActionsPackageImpl.hpp"
+
+#include "fUML/Semantics/SemanticsFactory.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -96,9 +98,6 @@ CreateObjectActionActivationImpl::~CreateObjectActionActivationImpl()
 			{
 			    m_group = par_group;
 			}
-
-
-
 
 
 
@@ -165,7 +164,7 @@ std::shared_ptr<ecore::EObject>  CreateObjectActionActivationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> CreateObjectActionActivationImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getCreateObjectActionActivation_Class();
+	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getCreateObjectActionActivation_Class();
 }
 
 //*********************************
@@ -185,7 +184,7 @@ void CreateObjectActionActivationImpl::doAction()
 std::shared_ptr<uml::CreateObjectAction> action = std::dynamic_pointer_cast<uml::CreateObjectAction>(this->m_node);
 if(action)
 {
-	std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> reference= fUML::FUMLFactory::eInstance()->createReference();
+	std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> reference= fUML::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createReference();
 	std::shared_ptr<uml::Class> type= std::dynamic_pointer_cast<uml::Class> (action->getClassifier());
 	if(type)
 	{
@@ -281,11 +280,10 @@ void CreateObjectActionActivationImpl::load(std::shared_ptr<persistence::interfa
 	// Create new objects (from references (containment == true))
 	//
 	// get FUMLFactory
-	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -295,11 +293,12 @@ void CreateObjectActionActivationImpl::loadAttributes(std::shared_ptr<persistenc
 	ActionActivationImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void CreateObjectActionActivationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+void CreateObjectActionActivationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<fUML::Semantics::Actions::ActionsFactory> modelFactory=fUML::Semantics::Actions::ActionsFactory::eInstance();
 
-
-	ActionActivationImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	ActionActivationImpl::loadNode(nodeName, loadHandler);
 }
 
 void CreateObjectActionActivationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
@@ -327,7 +326,7 @@ void CreateObjectActionActivationImpl::saveContent(std::shared_ptr<persistence::
 {
 	try
 	{
-		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+		std::shared_ptr<fUML::Semantics::Actions::ActionsPackage> package = fUML::Semantics::Actions::ActionsPackage::eInstance();
 
 	
 

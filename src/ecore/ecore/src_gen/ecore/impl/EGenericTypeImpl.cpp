@@ -17,20 +17,18 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 
 #include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "ecore/impl/EcorePackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "ecore/EcoreFactory.hpp"
-#include "ecore/EcorePackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -40,10 +38,11 @@
 
 #include "ecore/ETypeParameter.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
+//Factories an Package includes
+#include "ecore/Impl/EcoreFactoryImpl.hpp"
+#include "ecore/Impl/EcorePackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -159,7 +158,7 @@ std::shared_ptr<ecore::EObject>  EGenericTypeImpl::copy() const
 
 std::shared_ptr<EClass> EGenericTypeImpl::eStaticClass() const
 {
-	return EcorePackageImpl::eInstance()->getEGenericType_Class();
+	return ecore::EcorePackage::eInstance()->getEGenericType_Class();
 }
 
 //*********************************
@@ -260,13 +259,13 @@ Any EGenericTypeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case EcorePackage::EGENERICTYPE_ATTRIBUTE_ECLASSIFIER:
+		case ecore::EcorePackage::EGENERICTYPE_ATTRIBUTE_ECLASSIFIER:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEClassifier())); //285
-		case EcorePackage::EGENERICTYPE_ATTRIBUTE_ELOWERBOUND:
+		case ecore::EcorePackage::EGENERICTYPE_ATTRIBUTE_ELOWERBOUND:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getELowerBound())); //283
-		case EcorePackage::EGENERICTYPE_ATTRIBUTE_ERAWTYPE:
+		case ecore::EcorePackage::EGENERICTYPE_ATTRIBUTE_ERAWTYPE:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getERawType())); //282
-		case EcorePackage::EGENERICTYPE_ATTRIBUTE_ETYPEARGUMENTS:
+		case ecore::EcorePackage::EGENERICTYPE_ATTRIBUTE_ETYPEARGUMENTS:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<ecore::EGenericType>::iterator iter = m_eTypeArguments->begin();
@@ -278,9 +277,9 @@ Any EGenericTypeImpl::eGet(int featureID, bool resolve, bool coreType) const
 			}
 			return eAny(tempList); //281
 		}
-		case EcorePackage::EGENERICTYPE_ATTRIBUTE_ETYPEPARAMETER:
+		case ecore::EcorePackage::EGENERICTYPE_ATTRIBUTE_ETYPEPARAMETER:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getETypeParameter())); //284
-		case EcorePackage::EGENERICTYPE_ATTRIBUTE_EUPPERBOUND:
+		case ecore::EcorePackage::EGENERICTYPE_ATTRIBUTE_EUPPERBOUND:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEUpperBound())); //280
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
@@ -289,17 +288,17 @@ bool EGenericTypeImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case EcorePackage::EGENERICTYPE_ATTRIBUTE_ECLASSIFIER:
+		case ecore::EcorePackage::EGENERICTYPE_ATTRIBUTE_ECLASSIFIER:
 			return getEClassifier() != nullptr; //285
-		case EcorePackage::EGENERICTYPE_ATTRIBUTE_ELOWERBOUND:
+		case ecore::EcorePackage::EGENERICTYPE_ATTRIBUTE_ELOWERBOUND:
 			return getELowerBound() != nullptr; //283
-		case EcorePackage::EGENERICTYPE_ATTRIBUTE_ERAWTYPE:
+		case ecore::EcorePackage::EGENERICTYPE_ATTRIBUTE_ERAWTYPE:
 			return getERawType() != nullptr; //282
-		case EcorePackage::EGENERICTYPE_ATTRIBUTE_ETYPEARGUMENTS:
+		case ecore::EcorePackage::EGENERICTYPE_ATTRIBUTE_ETYPEARGUMENTS:
 			return getETypeArguments() != nullptr; //281
-		case EcorePackage::EGENERICTYPE_ATTRIBUTE_ETYPEPARAMETER:
+		case ecore::EcorePackage::EGENERICTYPE_ATTRIBUTE_ETYPEPARAMETER:
 			return getETypeParameter() != nullptr; //284
-		case EcorePackage::EGENERICTYPE_ATTRIBUTE_EUPPERBOUND:
+		case ecore::EcorePackage::EGENERICTYPE_ATTRIBUTE_EUPPERBOUND:
 			return getEUpperBound() != nullptr; //280
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
@@ -308,7 +307,7 @@ bool EGenericTypeImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case EcorePackage::EGENERICTYPE_ATTRIBUTE_ECLASSIFIER:
+		case ecore::EcorePackage::EGENERICTYPE_ATTRIBUTE_ECLASSIFIER:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -316,7 +315,7 @@ bool EGenericTypeImpl::eSet(int featureID, Any newValue)
 			setEClassifier(_eClassifier); //285
 			return true;
 		}
-		case EcorePackage::EGENERICTYPE_ATTRIBUTE_ELOWERBOUND:
+		case ecore::EcorePackage::EGENERICTYPE_ATTRIBUTE_ELOWERBOUND:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -324,7 +323,7 @@ bool EGenericTypeImpl::eSet(int featureID, Any newValue)
 			setELowerBound(_eLowerBound); //283
 			return true;
 		}
-		case EcorePackage::EGENERICTYPE_ATTRIBUTE_ERAWTYPE:
+		case ecore::EcorePackage::EGENERICTYPE_ATTRIBUTE_ERAWTYPE:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -332,7 +331,7 @@ bool EGenericTypeImpl::eSet(int featureID, Any newValue)
 			setERawType(_eRawType); //282
 			return true;
 		}
-		case EcorePackage::EGENERICTYPE_ATTRIBUTE_ETYPEARGUMENTS:
+		case ecore::EcorePackage::EGENERICTYPE_ATTRIBUTE_ETYPEARGUMENTS:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -368,7 +367,7 @@ bool EGenericTypeImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case EcorePackage::EGENERICTYPE_ATTRIBUTE_ETYPEPARAMETER:
+		case ecore::EcorePackage::EGENERICTYPE_ATTRIBUTE_ETYPEPARAMETER:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -376,7 +375,7 @@ bool EGenericTypeImpl::eSet(int featureID, Any newValue)
 			setETypeParameter(_eTypeParameter); //284
 			return true;
 		}
-		case EcorePackage::EGENERICTYPE_ATTRIBUTE_EUPPERBOUND:
+		case ecore::EcorePackage::EGENERICTYPE_ATTRIBUTE_EUPPERBOUND:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -401,11 +400,10 @@ void EGenericTypeImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandle
 	// Create new objects (from references (containment == true))
 	//
 	// get EcoreFactory
-	std::shared_ptr<ecore::EcoreFactory> modelFactory = ecore::EcoreFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -448,8 +446,9 @@ void EGenericTypeImpl::loadAttributes(std::shared_ptr<persistence::interfaces::X
 	ecore::EObjectImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void EGenericTypeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<ecore::EcoreFactory> modelFactory)
+void EGenericTypeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<ecore::EcoreFactory> modelFactory=ecore::EcoreFactory::eInstance();
 
 	try
 	{
@@ -510,15 +509,14 @@ void EGenericTypeImpl::loadNode(std::string nodeName, std::shared_ptr<persistenc
 	{
 		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
 	}
-
-	ecore::EObjectImpl::loadNode(nodeName, loadHandler, ecore::EcoreFactory::eInstance());
+	//load BasePackage Nodes
 }
 
 void EGenericTypeImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<EObject> > references)
 {
 	switch(featureID)
 	{
-		case EcorePackage::EGENERICTYPE_ATTRIBUTE_ECLASSIFIER:
+		case ecore::EcorePackage::EGENERICTYPE_ATTRIBUTE_ECLASSIFIER:
 		{
 			if (references.size() == 1)
 			{
@@ -530,7 +528,7 @@ void EGenericTypeImpl::resolveReferences(const int featureID, std::list<std::sha
 			return;
 		}
 
-		case EcorePackage::EGENERICTYPE_ATTRIBUTE_ERAWTYPE:
+		case ecore::EcorePackage::EGENERICTYPE_ATTRIBUTE_ERAWTYPE:
 		{
 			if (references.size() == 1)
 			{
@@ -542,7 +540,7 @@ void EGenericTypeImpl::resolveReferences(const int featureID, std::list<std::sha
 			return;
 		}
 
-		case EcorePackage::EGENERICTYPE_ATTRIBUTE_ETYPEPARAMETER:
+		case ecore::EcorePackage::EGENERICTYPE_ATTRIBUTE_ETYPEPARAMETER:
 		{
 			if (references.size() == 1)
 			{
@@ -588,21 +586,21 @@ void EGenericTypeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 		std::shared_ptr<ecore::EGenericType > eLowerBound = this->getELowerBound();
 		if (eLowerBound != nullptr)
 		{
-			saveHandler->addReference(eLowerBound, "eLowerBound", eLowerBound->eClass() != package->getEGenericType_Class());
+			saveHandler->addReference(eLowerBound, "eLowerBound", eLowerBound->eClass() != ecore::EcorePackage::eInstance()->getEGenericType_Class());
 		}
 
 		// Save 'eTypeArguments'
 		std::shared_ptr<Bag<ecore::EGenericType>> list_eTypeArguments = this->getETypeArguments();
 		for (std::shared_ptr<ecore::EGenericType> eTypeArguments : *list_eTypeArguments) 
 		{
-			saveHandler->addReference(eTypeArguments, "eTypeArguments", eTypeArguments->eClass() != package->getEGenericType_Class());
+			saveHandler->addReference(eTypeArguments, "eTypeArguments", eTypeArguments->eClass() !=ecore::EcorePackage::eInstance()->getEGenericType_Class());
 		}
 
 		// Save 'eUpperBound'
 		std::shared_ptr<ecore::EGenericType > eUpperBound = this->getEUpperBound();
 		if (eUpperBound != nullptr)
 		{
-			saveHandler->addReference(eUpperBound, "eUpperBound", eUpperBound->eClass() != package->getEGenericType_Class());
+			saveHandler->addReference(eUpperBound, "eUpperBound", eUpperBound->eClass() != ecore::EcorePackage::eInstance()->getEGenericType_Class());
 		}
 	}
 	catch (std::exception& e)

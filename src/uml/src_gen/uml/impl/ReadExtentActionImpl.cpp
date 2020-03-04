@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -26,21 +25,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -82,10 +72,11 @@
 
 #include "uml/StructuredActivityNode.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/Impl/UmlFactoryImpl.hpp"
+#include "uml/Impl/UmlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -131,9 +122,6 @@ ReadExtentActionImpl::~ReadExtentActionImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			ReadExtentActionImpl::ReadExtentActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
 			:ReadExtentActionImpl()
@@ -141,9 +129,6 @@ ReadExtentActionImpl::~ReadExtentActionImpl()
 			    m_inStructuredNode = par_inStructuredNode;
 				m_owner = par_inStructuredNode;
 			}
-
-
-
 
 
 //Additional constructor for the containments back reference
@@ -155,18 +140,12 @@ ReadExtentActionImpl::~ReadExtentActionImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			ReadExtentActionImpl::ReadExtentActionImpl(std::weak_ptr<uml::Element > par_owner)
 			:ReadExtentActionImpl()
 			{
 			    m_owner = par_owner;
 			}
-
-
-
 
 
 
@@ -300,7 +279,7 @@ std::shared_ptr<ecore::EObject>  ReadExtentActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ReadExtentActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getReadExtentAction_Class();
+	return uml::UmlPackage::eInstance()->getReadExtentAction_Class();
 }
 
 //*********************************
@@ -410,9 +389,9 @@ Any ReadExtentActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::READEXTENTACTION_ATTRIBUTE_CLASSIFIER:
+		case uml::UmlPackage::READEXTENTACTION_ATTRIBUTE_CLASSIFIER:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getClassifier())); //19427
-		case UmlPackage::READEXTENTACTION_ATTRIBUTE_RESULT:
+		case uml::UmlPackage::READEXTENTACTION_ATTRIBUTE_RESULT:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getResult())); //19428
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
@@ -421,9 +400,9 @@ bool ReadExtentActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::READEXTENTACTION_ATTRIBUTE_CLASSIFIER:
+		case uml::UmlPackage::READEXTENTACTION_ATTRIBUTE_CLASSIFIER:
 			return getClassifier() != nullptr; //19427
-		case UmlPackage::READEXTENTACTION_ATTRIBUTE_RESULT:
+		case uml::UmlPackage::READEXTENTACTION_ATTRIBUTE_RESULT:
 			return getResult() != nullptr; //19428
 	}
 	return ActionImpl::internalEIsSet(featureID);
@@ -432,7 +411,7 @@ bool ReadExtentActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::READEXTENTACTION_ATTRIBUTE_CLASSIFIER:
+		case uml::UmlPackage::READEXTENTACTION_ATTRIBUTE_CLASSIFIER:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -440,7 +419,7 @@ bool ReadExtentActionImpl::eSet(int featureID, Any newValue)
 			setClassifier(_classifier); //19427
 			return true;
 		}
-		case UmlPackage::READEXTENTACTION_ATTRIBUTE_RESULT:
+		case uml::UmlPackage::READEXTENTACTION_ATTRIBUTE_RESULT:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -465,11 +444,10 @@ void ReadExtentActionImpl::load(std::shared_ptr<persistence::interfaces::XLoadHa
 	// Create new objects (from references (containment == true))
 	//
 	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -498,8 +476,9 @@ void ReadExtentActionImpl::loadAttributes(std::shared_ptr<persistence::interface
 	ActionImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void ReadExtentActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void ReadExtentActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
 
 	try
 	{
@@ -527,15 +506,15 @@ void ReadExtentActionImpl::loadNode(std::string nodeName, std::shared_ptr<persis
 	{
 		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
 	}
-
-	ActionImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	ActionImpl::loadNode(nodeName, loadHandler);
 }
 
 void ReadExtentActionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
-		case UmlPackage::READEXTENTACTION_ATTRIBUTE_CLASSIFIER:
+		case uml::UmlPackage::READEXTENTACTION_ATTRIBUTE_CLASSIFIER:
 		{
 			if (references.size() == 1)
 			{

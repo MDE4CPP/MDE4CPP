@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -26,21 +25,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -84,10 +74,11 @@
 
 #include "uml/StructuredActivityNode.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/Impl/UmlFactoryImpl.hpp"
+#include "uml/Impl/UmlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -137,9 +128,6 @@ ReduceActionImpl::~ReduceActionImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			ReduceActionImpl::ReduceActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
 			:ReduceActionImpl()
@@ -147,9 +135,6 @@ ReduceActionImpl::~ReduceActionImpl()
 			    m_inStructuredNode = par_inStructuredNode;
 				m_owner = par_inStructuredNode;
 			}
-
-
-
 
 
 //Additional constructor for the containments back reference
@@ -161,18 +146,12 @@ ReduceActionImpl::~ReduceActionImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			ReduceActionImpl::ReduceActionImpl(std::weak_ptr<uml::Element > par_owner)
 			:ReduceActionImpl()
 			{
 			    m_owner = par_owner;
 			}
-
-
-
 
 
 
@@ -316,7 +295,7 @@ std::shared_ptr<ecore::EObject>  ReduceActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ReduceActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getReduceAction_Class();
+	return uml::UmlPackage::eInstance()->getReduceAction_Class();
 }
 
 //*********************************
@@ -455,13 +434,13 @@ Any ReduceActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::REDUCEACTION_ATTRIBUTE_COLLECTION:
+		case uml::UmlPackage::REDUCEACTION_ATTRIBUTE_COLLECTION:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getCollection())); //20727
-		case UmlPackage::REDUCEACTION_ATTRIBUTE_ISORDERED:
+		case uml::UmlPackage::REDUCEACTION_ATTRIBUTE_ISORDERED:
 			return eAny(getIsOrdered()); //20728
-		case UmlPackage::REDUCEACTION_ATTRIBUTE_REDUCER:
+		case uml::UmlPackage::REDUCEACTION_ATTRIBUTE_REDUCER:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getReducer())); //20729
-		case UmlPackage::REDUCEACTION_ATTRIBUTE_RESULT:
+		case uml::UmlPackage::REDUCEACTION_ATTRIBUTE_RESULT:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getResult())); //20730
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
@@ -470,13 +449,13 @@ bool ReduceActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::REDUCEACTION_ATTRIBUTE_COLLECTION:
+		case uml::UmlPackage::REDUCEACTION_ATTRIBUTE_COLLECTION:
 			return getCollection() != nullptr; //20727
-		case UmlPackage::REDUCEACTION_ATTRIBUTE_ISORDERED:
+		case uml::UmlPackage::REDUCEACTION_ATTRIBUTE_ISORDERED:
 			return getIsOrdered() != false; //20728
-		case UmlPackage::REDUCEACTION_ATTRIBUTE_REDUCER:
+		case uml::UmlPackage::REDUCEACTION_ATTRIBUTE_REDUCER:
 			return getReducer() != nullptr; //20729
-		case UmlPackage::REDUCEACTION_ATTRIBUTE_RESULT:
+		case uml::UmlPackage::REDUCEACTION_ATTRIBUTE_RESULT:
 			return getResult() != nullptr; //20730
 	}
 	return ActionImpl::internalEIsSet(featureID);
@@ -485,7 +464,7 @@ bool ReduceActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::REDUCEACTION_ATTRIBUTE_COLLECTION:
+		case uml::UmlPackage::REDUCEACTION_ATTRIBUTE_COLLECTION:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -493,14 +472,14 @@ bool ReduceActionImpl::eSet(int featureID, Any newValue)
 			setCollection(_collection); //20727
 			return true;
 		}
-		case UmlPackage::REDUCEACTION_ATTRIBUTE_ISORDERED:
+		case uml::UmlPackage::REDUCEACTION_ATTRIBUTE_ISORDERED:
 		{
 			// BOOST CAST
 			bool _isOrdered = newValue->get<bool>();
 			setIsOrdered(_isOrdered); //20728
 			return true;
 		}
-		case UmlPackage::REDUCEACTION_ATTRIBUTE_REDUCER:
+		case uml::UmlPackage::REDUCEACTION_ATTRIBUTE_REDUCER:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -508,7 +487,7 @@ bool ReduceActionImpl::eSet(int featureID, Any newValue)
 			setReducer(_reducer); //20729
 			return true;
 		}
-		case UmlPackage::REDUCEACTION_ATTRIBUTE_RESULT:
+		case uml::UmlPackage::REDUCEACTION_ATTRIBUTE_RESULT:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -533,11 +512,10 @@ void ReduceActionImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandle
 	// Create new objects (from references (containment == true))
 	//
 	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -575,8 +553,9 @@ void ReduceActionImpl::loadAttributes(std::shared_ptr<persistence::interfaces::X
 	ActionImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void ReduceActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void ReduceActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
 
 	try
 	{
@@ -620,15 +599,15 @@ void ReduceActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistenc
 	{
 		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
 	}
-
-	ActionImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	ActionImpl::loadNode(nodeName, loadHandler);
 }
 
 void ReduceActionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
-		case UmlPackage::REDUCEACTION_ATTRIBUTE_REDUCER:
+		case uml::UmlPackage::REDUCEACTION_ATTRIBUTE_REDUCER:
 		{
 			if (references.size() == 1)
 			{
@@ -692,7 +671,6 @@ void ReduceActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 			saveHandler->addReference(result, "result", result->eClass() != package->getOutputPin_Class());
 		}
 	
- 
 		// Add attributes
 		if ( this->eIsSet(package->getReduceAction_Attribute_isOrdered()) )
 		{

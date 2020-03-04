@@ -26,7 +26,7 @@
  *  queries to generate qualified name, required for elements without defined name
 */]
 [query public myQualifiedName (anElement : NamedElement) : String = if oclIsUndefined() then anElement.handleUndefinedElement() else myPinName().sanitize() endif /] 
-[query private myPinName (anElement : NamedElement) : String = if(oclIsKindOf(Pin)) then eClass().name.concat('_').concat(owner.owner.oclAsType(NamedElement).name).concat('_').concat(owner.oclAsType(NamedElement).name).concat('_').concat(name) else myElementQualifiedName() endif /]
+[query private myPinName (anElement : NamedElement) : String = if(oclIsKindOf(Pin)) then eClass().name.concat('_').concat(owner.oclAsType(Action)._context.name).concat('_').concat(owner.owner.oclAsType(NamedElement).name).concat('_').concat(owner.oclAsType(NamedElement).name).concat('_').concat(name) else myElementQualifiedName() endif /]
 [query private myElementQualifiedName (anElement : NamedElement) : String = if (namespace.oclIsUndefined() or ''=namespace) and (not owner.oclIsUndefined()) and (not owner.oclAsType(NamedElement).qualifiedName.oclIsUndefined()) and (not (qualifiedName.oclIsUndefined())) then (owner.oclAsType(NamedElement).myQualifiedName()).concat('_').concat(eClass().name).concat('_').concat(qualifiedName).substituteAll('.', '_') else myLiteralSpecificationName() endif /]
 [query private myLiteralSpecificationName(anElement :NamedElement) : String = if (oclIsKindOf(LiteralSpecification)) then if (owner.oclIsTypeOf(ConnectorEnd)) then myValuSpecName().concat('_').concat(owner.oclAsType(ConnectorEnd).myQualifiedName()) else myValuSpecName().concat('_').concat(owner.mySlotName())endif else myValuSpecName()endif /]
 [query private mySlotName(anElement : Element) : String = if (oclIsTypeOf(Slot)) then oclAsType(Slot).definingFeature.name else myOwnerName() endif /]
@@ -66,7 +66,8 @@
 */]
 [query public setterName(feature : StructuralFeature) : String = 'set'.concat(name.toUpperFirst()) /]
 [query public getterName(feature : StructuralFeature) : String = getterPrefix().concat(name.toUpperFirst()) /]
-[query public getterPrefix(feature : StructuralFeature) : String = if feature.type.name = 'Boolean' then 'is' else 'get' endif/]
+[query public getterPrefix(feature : StructuralFeature) : String = feature.type.getterPrefix() /]
+[query public getterPrefix(type : Type) : String = if type.name = 'Boolean' then 'is' else 'get' endif/]
 
 [**
  * query to replace characters, which are not permitted in names of classes, variable, macros, ... in C++

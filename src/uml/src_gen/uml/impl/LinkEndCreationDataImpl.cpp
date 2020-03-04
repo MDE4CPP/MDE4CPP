@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/Union.hpp"
@@ -25,15 +24,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -49,10 +45,11 @@
 
 #include "uml/QualifierValue.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/Impl/UmlFactoryImpl.hpp"
+#include "uml/Impl/UmlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -91,9 +88,6 @@ LinkEndCreationDataImpl::~LinkEndCreationDataImpl()
 			{
 			    m_owner = par_owner;
 			}
-
-
-
 
 
 
@@ -146,7 +140,7 @@ std::shared_ptr<ecore::EObject>  LinkEndCreationDataImpl::copy() const
 
 std::shared_ptr<ecore::EClass> LinkEndCreationDataImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getLinkEndCreationData_Class();
+	return uml::UmlPackage::eInstance()->getLinkEndCreationData_Class();
 }
 
 //*********************************
@@ -218,9 +212,9 @@ Any LinkEndCreationDataImpl::eGet(int featureID, bool resolve, bool coreType) co
 {
 	switch(featureID)
 	{
-		case UmlPackage::LINKENDCREATIONDATA_ATTRIBUTE_INSERTAT:
+		case uml::UmlPackage::LINKENDCREATIONDATA_ATTRIBUTE_INSERTAT:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getInsertAt())); //1356
-		case UmlPackage::LINKENDCREATIONDATA_ATTRIBUTE_ISREPLACEALL:
+		case uml::UmlPackage::LINKENDCREATIONDATA_ATTRIBUTE_ISREPLACEALL:
 			return eAny(getIsReplaceAll()); //1357
 	}
 	return LinkEndDataImpl::eGet(featureID, resolve, coreType);
@@ -229,9 +223,9 @@ bool LinkEndCreationDataImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::LINKENDCREATIONDATA_ATTRIBUTE_INSERTAT:
+		case uml::UmlPackage::LINKENDCREATIONDATA_ATTRIBUTE_INSERTAT:
 			return getInsertAt() != nullptr; //1356
-		case UmlPackage::LINKENDCREATIONDATA_ATTRIBUTE_ISREPLACEALL:
+		case uml::UmlPackage::LINKENDCREATIONDATA_ATTRIBUTE_ISREPLACEALL:
 			return getIsReplaceAll() != false; //1357
 	}
 	return LinkEndDataImpl::internalEIsSet(featureID);
@@ -240,7 +234,7 @@ bool LinkEndCreationDataImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::LINKENDCREATIONDATA_ATTRIBUTE_INSERTAT:
+		case uml::UmlPackage::LINKENDCREATIONDATA_ATTRIBUTE_INSERTAT:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -248,7 +242,7 @@ bool LinkEndCreationDataImpl::eSet(int featureID, Any newValue)
 			setInsertAt(_insertAt); //1356
 			return true;
 		}
-		case UmlPackage::LINKENDCREATIONDATA_ATTRIBUTE_ISREPLACEALL:
+		case uml::UmlPackage::LINKENDCREATIONDATA_ATTRIBUTE_ISREPLACEALL:
 		{
 			// BOOST CAST
 			bool _isReplaceAll = newValue->get<bool>();
@@ -272,11 +266,10 @@ void LinkEndCreationDataImpl::load(std::shared_ptr<persistence::interfaces::XLoa
 	// Create new objects (from references (containment == true))
 	//
 	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -314,18 +307,19 @@ void LinkEndCreationDataImpl::loadAttributes(std::shared_ptr<persistence::interf
 	LinkEndDataImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void LinkEndCreationDataImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void LinkEndCreationDataImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
 
-
-	LinkEndDataImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	LinkEndDataImpl::loadNode(nodeName, loadHandler);
 }
 
 void LinkEndCreationDataImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
-		case UmlPackage::LINKENDCREATIONDATA_ATTRIBUTE_INSERTAT:
+		case uml::UmlPackage::LINKENDCREATIONDATA_ATTRIBUTE_INSERTAT:
 		{
 			if (references.size() == 1)
 			{
@@ -363,7 +357,6 @@ void LinkEndCreationDataImpl::saveContent(std::shared_ptr<persistence::interface
 		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
 
 	
- 
 		// Add attributes
 		if ( this->eIsSet(package->getLinkEndCreationData_Attribute_isReplaceAll()) )
 		{

@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -26,23 +25,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -118,10 +106,11 @@
 
 #include "uml/UseCase.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/Impl/UmlFactoryImpl.hpp"
+#include "uml/Impl/UmlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -175,18 +164,12 @@ NodeImpl::~NodeImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			NodeImpl::NodeImpl(std::weak_ptr<uml::Element > par_owner)
 			:NodeImpl()
 			{
 			    m_owner = par_owner;
 			}
-
-
-
 
 
 //Additional constructor for the containments back reference
@@ -210,9 +193,6 @@ NodeImpl::NodeImpl(std::weak_ptr<uml::Package > par_Package, const int reference
 }
 
 
-
-
-
 //Additional constructor for the containments back reference
 			NodeImpl::NodeImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
 			:NodeImpl()
@@ -222,13 +202,7 @@ NodeImpl::NodeImpl(std::weak_ptr<uml::Package > par_Package, const int reference
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
-
-
-
 
 
 
@@ -519,7 +493,7 @@ std::shared_ptr<ecore::EObject>  NodeImpl::copy() const
 
 std::shared_ptr<ecore::EClass> NodeImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getNode_Class();
+	return uml::UmlPackage::eInstance()->getNode_Class();
 }
 
 //*********************************
@@ -644,7 +618,7 @@ Any NodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::NODE_ATTRIBUTE_NESTEDNODE:
+		case uml::UmlPackage::NODE_ATTRIBUTE_NESTEDNODE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Node>::iterator iter = m_nestedNode->begin();
@@ -670,7 +644,7 @@ bool NodeImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::NODE_ATTRIBUTE_NESTEDNODE:
+		case uml::UmlPackage::NODE_ATTRIBUTE_NESTEDNODE:
 			return getNestedNode() != nullptr; //15854
 	}
 	bool result = false;
@@ -686,7 +660,7 @@ bool NodeImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::NODE_ATTRIBUTE_NESTEDNODE:
+		case uml::UmlPackage::NODE_ATTRIBUTE_NESTEDNODE:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -746,11 +720,10 @@ void NodeImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadH
 	// Create new objects (from references (containment == true))
 	//
 	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -761,8 +734,9 @@ void NodeImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHand
 	DeploymentTargetImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void NodeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void NodeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
 
 	try
 	{
@@ -791,9 +765,9 @@ void NodeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inter
 	{
 		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
 	}
-
-	ClassImpl::loadNode(nodeName, loadHandler, modelFactory);
-	DeploymentTargetImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	ClassImpl::loadNode(nodeName, loadHandler);
+	DeploymentTargetImpl::loadNode(nodeName, loadHandler);
 }
 
 void NodeImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)

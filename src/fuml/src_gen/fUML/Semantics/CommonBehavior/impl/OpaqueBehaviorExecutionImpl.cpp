@@ -17,13 +17,13 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "fUML/impl/FUMLPackageImpl.hpp"
+
+//Includes from codegen annotation
 #include "abstractDataTypes/Subset.hpp"
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
 #include "uml/Behavior.hpp"
@@ -34,8 +34,6 @@
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -53,10 +51,15 @@
 
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
+//Factories an Package includes
+#include "fUML/Semantics/CommonBehavior/Impl/CommonBehaviorFactoryImpl.hpp"
+#include "fUML/Semantics/CommonBehavior/Impl/CommonBehaviorPackageImpl.hpp"
+
+#include "fUML/Semantics/SemanticsFactory.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -143,7 +146,7 @@ std::shared_ptr<ecore::EObject>  OpaqueBehaviorExecutionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> OpaqueBehaviorExecutionImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getOpaqueBehaviorExecution_Class();
+	return fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getOpaqueBehaviorExecution_Class();
 }
 
 //*********************************
@@ -182,7 +185,7 @@ void OpaqueBehaviorExecutionImpl::execute()
                 || (parameter->getDirection() == uml::ParameterDirectionKind::OUT)
                 || (parameter->getDirection() == uml::ParameterDirectionKind::RETURN)) 
         {
-        	std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> parameterValue(fUML::FUMLFactory::eInstance()->createParameterValue());
+        	std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> parameterValue(fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createParameterValue());
             parameterValue->setParameter(parameter);
 
             if(parameter->getDirection() != uml::ParameterDirectionKind::INOUT)
@@ -260,11 +263,10 @@ void OpaqueBehaviorExecutionImpl::load(std::shared_ptr<persistence::interfaces::
 	// Create new objects (from references (containment == true))
 	//
 	// get FUMLFactory
-	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -274,11 +276,12 @@ void OpaqueBehaviorExecutionImpl::loadAttributes(std::shared_ptr<persistence::in
 	ExecutionImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void OpaqueBehaviorExecutionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+void OpaqueBehaviorExecutionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<fUML::Semantics::CommonBehavior::CommonBehaviorFactory> modelFactory=fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance();
 
-
-	ExecutionImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	ExecutionImpl::loadNode(nodeName, loadHandler);
 }
 
 void OpaqueBehaviorExecutionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
@@ -318,7 +321,7 @@ void OpaqueBehaviorExecutionImpl::saveContent(std::shared_ptr<persistence::inter
 {
 	try
 	{
-		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+		std::shared_ptr<fUML::Semantics::CommonBehavior::CommonBehaviorPackage> package = fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance();
 
 	
 

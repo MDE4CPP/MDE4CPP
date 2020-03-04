@@ -17,23 +17,23 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
+<<<<<<< HEAD
 #include "fUML/impl/FUMLPackageImpl.hpp"
+=======
+
+//Includes from codegen annotation
+>>>>>>> 6da89415d34eadfee120c931945e66653629f773
 #include "fUML/Semantics/Activities/ControlToken.hpp"
 #include "uml/ActivityNode.hpp"
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -47,10 +47,15 @@
 
 #include "fUML/Semantics/Activities/Token.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
+//Factories an Package includes
+#include "fUML/Semantics/Activities/Impl/ActivitiesFactoryImpl.hpp"
+#include "fUML/Semantics/Activities/Impl/ActivitiesPackageImpl.hpp"
+
+#include "fUML/Semantics/SemanticsFactory.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -87,9 +92,6 @@ JoinNodeActivationImpl::~JoinNodeActivationImpl()
 			{
 			    m_group = par_group;
 			}
-
-
-
 
 
 
@@ -136,7 +138,7 @@ std::shared_ptr<ecore::EObject>  JoinNodeActivationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> JoinNodeActivationImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getJoinNodeActivation_Class();
+	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getJoinNodeActivation_Class();
 }
 
 //*********************************
@@ -157,7 +159,11 @@ void JoinNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Semantics::Activitie
 		}
 	)
 
+<<<<<<< HEAD
 	int controlTokenID = fUML::FUMLPackage::CONTROLTOKEN_CLASS;
+=======
+	int controlTokenID = fUML::Semantics::Activities::ActivitiesPackage::CONTROLTOKEN_CLASS;
+>>>>>>> 6da89415d34eadfee120c931945e66653629f773
 	std::shared_ptr<Bag<fUML::Semantics::Activities::ControlToken>> controlTokenList(new Bag<fUML::Semantics::Activities::ControlToken>());
 
 	Bag<fUML::Semantics::Activities::Token>::iterator tokenIter = incomingTokens->begin();
@@ -272,11 +278,10 @@ void JoinNodeActivationImpl::load(std::shared_ptr<persistence::interfaces::XLoad
 	// Create new objects (from references (containment == true))
 	//
 	// get FUMLFactory
-	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -286,11 +291,12 @@ void JoinNodeActivationImpl::loadAttributes(std::shared_ptr<persistence::interfa
 	ControlNodeActivationImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void JoinNodeActivationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+void JoinNodeActivationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<fUML::Semantics::Activities::ActivitiesFactory> modelFactory=fUML::Semantics::Activities::ActivitiesFactory::eInstance();
 
-
-	ControlNodeActivationImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	ControlNodeActivationImpl::loadNode(nodeName, loadHandler);
 }
 
 void JoinNodeActivationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
@@ -318,7 +324,7 @@ void JoinNodeActivationImpl::saveContent(std::shared_ptr<persistence::interfaces
 {
 	try
 	{
-		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+		std::shared_ptr<fUML::Semantics::Activities::ActivitiesPackage> package = fUML::Semantics::Activities::ActivitiesPackage::eInstance();
 
 	
 

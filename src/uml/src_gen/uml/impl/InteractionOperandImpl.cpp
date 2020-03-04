@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -26,21 +25,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -76,10 +66,11 @@
 
 #include "uml/StringExpression.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/Impl/UmlFactoryImpl.hpp"
+#include "uml/Impl/UmlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -137,9 +128,6 @@ InteractionOperandImpl::~InteractionOperandImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			InteractionOperandImpl::InteractionOperandImpl(std::weak_ptr<uml::InteractionOperand > par_enclosingOperand)
 			:InteractionOperandImpl()
@@ -147,9 +135,6 @@ InteractionOperandImpl::~InteractionOperandImpl()
 			    m_enclosingOperand = par_enclosingOperand;
 				m_namespace = par_enclosingOperand;
 			}
-
-
-
 
 
 //Additional constructor for the containments back reference
@@ -161,18 +146,12 @@ InteractionOperandImpl::~InteractionOperandImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			InteractionOperandImpl::InteractionOperandImpl(std::weak_ptr<uml::Element > par_owner)
 			:InteractionOperandImpl()
 			{
 			    m_owner = par_owner;
 			}
-
-
-
 
 
 
@@ -299,7 +278,7 @@ std::shared_ptr<ecore::EObject>  InteractionOperandImpl::copy() const
 
 std::shared_ptr<ecore::EClass> InteractionOperandImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getInteractionOperand_Class();
+	return uml::UmlPackage::eInstance()->getInteractionOperand_Class();
 }
 
 //*********************************
@@ -407,7 +386,7 @@ Any InteractionOperandImpl::eGet(int featureID, bool resolve, bool coreType) con
 {
 	switch(featureID)
 	{
-		case UmlPackage::INTERACTIONOPERAND_ATTRIBUTE_FRAGMENT:
+		case uml::UmlPackage::INTERACTIONOPERAND_ATTRIBUTE_FRAGMENT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::InteractionFragment>::iterator iter = m_fragment->begin();
@@ -419,7 +398,7 @@ Any InteractionOperandImpl::eGet(int featureID, bool resolve, bool coreType) con
 			}
 			return eAny(tempList); //12319
 		}
-		case UmlPackage::INTERACTIONOPERAND_ATTRIBUTE_GUARD:
+		case uml::UmlPackage::INTERACTIONOPERAND_ATTRIBUTE_GUARD:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getGuard())); //12320
 	}
 	Any result;
@@ -435,9 +414,9 @@ bool InteractionOperandImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::INTERACTIONOPERAND_ATTRIBUTE_FRAGMENT:
+		case uml::UmlPackage::INTERACTIONOPERAND_ATTRIBUTE_FRAGMENT:
 			return getFragment() != nullptr; //12319
-		case UmlPackage::INTERACTIONOPERAND_ATTRIBUTE_GUARD:
+		case uml::UmlPackage::INTERACTIONOPERAND_ATTRIBUTE_GUARD:
 			return getGuard() != nullptr; //12320
 	}
 	bool result = false;
@@ -453,7 +432,7 @@ bool InteractionOperandImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::INTERACTIONOPERAND_ATTRIBUTE_FRAGMENT:
+		case uml::UmlPackage::INTERACTIONOPERAND_ATTRIBUTE_FRAGMENT:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -489,7 +468,7 @@ bool InteractionOperandImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case UmlPackage::INTERACTIONOPERAND_ATTRIBUTE_GUARD:
+		case uml::UmlPackage::INTERACTIONOPERAND_ATTRIBUTE_GUARD:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -521,11 +500,10 @@ void InteractionOperandImpl::load(std::shared_ptr<persistence::interfaces::XLoad
 	// Create new objects (from references (containment == true))
 	//
 	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -536,8 +514,9 @@ void InteractionOperandImpl::loadAttributes(std::shared_ptr<persistence::interfa
 	NamespaceImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void InteractionOperandImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void InteractionOperandImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
 
 	try
 	{
@@ -549,7 +528,7 @@ void InteractionOperandImpl::loadNode(std::string nodeName, std::shared_ptr<pers
 				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			std::shared_ptr<ecore::EObject> fragment = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_ENCLOSINGOPERAND);
+			std::shared_ptr<ecore::EObject> fragment = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::UmlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_ENCLOSINGOPERAND);
 			if (fragment != nullptr)
 			{
 				loadHandler->handleChild(fragment);
@@ -581,9 +560,9 @@ void InteractionOperandImpl::loadNode(std::string nodeName, std::shared_ptr<pers
 	{
 		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
 	}
-
-	InteractionFragmentImpl::loadNode(nodeName, loadHandler, modelFactory);
-	NamespaceImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	InteractionFragmentImpl::loadNode(nodeName, loadHandler);
+	NamespaceImpl::loadNode(nodeName, loadHandler);
 }
 
 void InteractionOperandImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)

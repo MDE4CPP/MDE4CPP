@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -26,37 +25,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -114,10 +88,11 @@
 
 #include "uml/WriteStructuralFeatureAction.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/Impl/UmlFactoryImpl.hpp"
+#include "uml/Impl/UmlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -187,9 +162,6 @@ OutputPinImpl::~OutputPinImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			OutputPinImpl::OutputPinImpl(std::weak_ptr<uml::Activity > par_activity)
 			:OutputPinImpl()
@@ -197,9 +169,6 @@ OutputPinImpl::~OutputPinImpl()
 			    m_activity = par_activity;
 				m_owner = par_activity;
 			}
-
-
-
 
 
 //Additional constructor for the containments back reference
@@ -210,9 +179,6 @@ OutputPinImpl::~OutputPinImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			OutputPinImpl::OutputPinImpl(std::weak_ptr<uml::ClearStructuralFeatureAction > par_clearStructuralFeatureAction)
 			:OutputPinImpl()
@@ -221,18 +187,12 @@ OutputPinImpl::~OutputPinImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			OutputPinImpl::OutputPinImpl(std::weak_ptr<uml::CreateObjectAction > par_createObjectAction)
 			:OutputPinImpl()
 			{
 			    m_createObjectAction = par_createObjectAction;
 			}
-
-
-
 
 
 //Additional constructor for the containments back reference
@@ -244,9 +204,6 @@ OutputPinImpl::~OutputPinImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			OutputPinImpl::OutputPinImpl(std::weak_ptr<uml::Namespace > par_namespace)
 			:OutputPinImpl()
@@ -254,9 +211,6 @@ OutputPinImpl::~OutputPinImpl()
 			    m_namespace = par_namespace;
 				m_owner = par_namespace;
 			}
-
-
-
 
 
 //Additional constructor for the containments back reference
@@ -267,18 +221,12 @@ OutputPinImpl::~OutputPinImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			OutputPinImpl::OutputPinImpl(std::weak_ptr<uml::ReadSelfAction > par_readSelfAction)
 			:OutputPinImpl()
 			{
 			    m_readSelfAction = par_readSelfAction;
 			}
-
-
-
 
 
 //Additional constructor for the containments back reference
@@ -289,9 +237,6 @@ OutputPinImpl::~OutputPinImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			OutputPinImpl::OutputPinImpl(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction)
 			:OutputPinImpl()
@@ -300,18 +245,12 @@ OutputPinImpl::~OutputPinImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			OutputPinImpl::OutputPinImpl(std::weak_ptr<uml::WriteStructuralFeatureAction > par_writeStructuralFeatureAction)
 			:OutputPinImpl()
 			{
 			    m_writeStructuralFeatureAction = par_writeStructuralFeatureAction;
 			}
-
-
-
 
 
 
@@ -459,7 +398,7 @@ std::shared_ptr<ecore::EObject>  OutputPinImpl::copy() const
 
 std::shared_ptr<ecore::EClass> OutputPinImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getOutputPin_Class();
+	return uml::UmlPackage::eInstance()->getOutputPin_Class();
 }
 
 //*********************************
@@ -656,21 +595,21 @@ Any OutputPinImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::OUTPUTPIN_ATTRIBUTE_ACTION:
+		case uml::UmlPackage::OUTPUTPIN_ATTRIBUTE_ACTION:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getAction().lock())); //17034
-		case UmlPackage::OUTPUTPIN_ATTRIBUTE_CALLACTION:
+		case uml::UmlPackage::OUTPUTPIN_ATTRIBUTE_CALLACTION:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getCallAction().lock())); //17033
-		case UmlPackage::OUTPUTPIN_ATTRIBUTE_CLEARSTRUCTURALFEATUREACTION:
+		case uml::UmlPackage::OUTPUTPIN_ATTRIBUTE_CLEARSTRUCTURALFEATUREACTION:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getClearStructuralFeatureAction().lock())); //17038
-		case UmlPackage::OUTPUTPIN_ATTRIBUTE_CREATEOBJECTACTION:
+		case uml::UmlPackage::OUTPUTPIN_ATTRIBUTE_CREATEOBJECTACTION:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getCreateObjectAction().lock())); //17040
-		case UmlPackage::OUTPUTPIN_ATTRIBUTE_READSELFACTION:
+		case uml::UmlPackage::OUTPUTPIN_ATTRIBUTE_READSELFACTION:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getReadSelfAction().lock())); //17039
-		case UmlPackage::OUTPUTPIN_ATTRIBUTE_READSTRUCTURALFEATUREACTION:
+		case uml::UmlPackage::OUTPUTPIN_ATTRIBUTE_READSTRUCTURALFEATUREACTION:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getReadStructuralFeatureAction().lock())); //17037
-		case UmlPackage::OUTPUTPIN_ATTRIBUTE_VALUESPECIFICATIONACTION:
+		case uml::UmlPackage::OUTPUTPIN_ATTRIBUTE_VALUESPECIFICATIONACTION:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getValueSpecificationAction().lock())); //17035
-		case UmlPackage::OUTPUTPIN_ATTRIBUTE_WRITESTRUCTURALFEATUREACTION:
+		case uml::UmlPackage::OUTPUTPIN_ATTRIBUTE_WRITESTRUCTURALFEATUREACTION:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getWriteStructuralFeatureAction().lock())); //17036
 	}
 	return PinImpl::eGet(featureID, resolve, coreType);
@@ -679,21 +618,21 @@ bool OutputPinImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::OUTPUTPIN_ATTRIBUTE_ACTION:
+		case uml::UmlPackage::OUTPUTPIN_ATTRIBUTE_ACTION:
 			return getAction().lock() != nullptr; //17034
-		case UmlPackage::OUTPUTPIN_ATTRIBUTE_CALLACTION:
+		case uml::UmlPackage::OUTPUTPIN_ATTRIBUTE_CALLACTION:
 			return getCallAction().lock() != nullptr; //17033
-		case UmlPackage::OUTPUTPIN_ATTRIBUTE_CLEARSTRUCTURALFEATUREACTION:
+		case uml::UmlPackage::OUTPUTPIN_ATTRIBUTE_CLEARSTRUCTURALFEATUREACTION:
 			return getClearStructuralFeatureAction().lock() != nullptr; //17038
-		case UmlPackage::OUTPUTPIN_ATTRIBUTE_CREATEOBJECTACTION:
+		case uml::UmlPackage::OUTPUTPIN_ATTRIBUTE_CREATEOBJECTACTION:
 			return getCreateObjectAction().lock() != nullptr; //17040
-		case UmlPackage::OUTPUTPIN_ATTRIBUTE_READSELFACTION:
+		case uml::UmlPackage::OUTPUTPIN_ATTRIBUTE_READSELFACTION:
 			return getReadSelfAction().lock() != nullptr; //17039
-		case UmlPackage::OUTPUTPIN_ATTRIBUTE_READSTRUCTURALFEATUREACTION:
+		case uml::UmlPackage::OUTPUTPIN_ATTRIBUTE_READSTRUCTURALFEATUREACTION:
 			return getReadStructuralFeatureAction().lock() != nullptr; //17037
-		case UmlPackage::OUTPUTPIN_ATTRIBUTE_VALUESPECIFICATIONACTION:
+		case uml::UmlPackage::OUTPUTPIN_ATTRIBUTE_VALUESPECIFICATIONACTION:
 			return getValueSpecificationAction().lock() != nullptr; //17035
-		case UmlPackage::OUTPUTPIN_ATTRIBUTE_WRITESTRUCTURALFEATUREACTION:
+		case uml::UmlPackage::OUTPUTPIN_ATTRIBUTE_WRITESTRUCTURALFEATUREACTION:
 			return getWriteStructuralFeatureAction().lock() != nullptr; //17036
 	}
 	return PinImpl::internalEIsSet(featureID);
@@ -702,7 +641,7 @@ bool OutputPinImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::OUTPUTPIN_ATTRIBUTE_CALLACTION:
+		case uml::UmlPackage::OUTPUTPIN_ATTRIBUTE_CALLACTION:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -710,7 +649,7 @@ bool OutputPinImpl::eSet(int featureID, Any newValue)
 			setCallAction(_callAction); //17033
 			return true;
 		}
-		case UmlPackage::OUTPUTPIN_ATTRIBUTE_CLEARSTRUCTURALFEATUREACTION:
+		case uml::UmlPackage::OUTPUTPIN_ATTRIBUTE_CLEARSTRUCTURALFEATUREACTION:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -718,7 +657,7 @@ bool OutputPinImpl::eSet(int featureID, Any newValue)
 			setClearStructuralFeatureAction(_clearStructuralFeatureAction); //17038
 			return true;
 		}
-		case UmlPackage::OUTPUTPIN_ATTRIBUTE_CREATEOBJECTACTION:
+		case uml::UmlPackage::OUTPUTPIN_ATTRIBUTE_CREATEOBJECTACTION:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -726,7 +665,7 @@ bool OutputPinImpl::eSet(int featureID, Any newValue)
 			setCreateObjectAction(_createObjectAction); //17040
 			return true;
 		}
-		case UmlPackage::OUTPUTPIN_ATTRIBUTE_READSELFACTION:
+		case uml::UmlPackage::OUTPUTPIN_ATTRIBUTE_READSELFACTION:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -734,7 +673,7 @@ bool OutputPinImpl::eSet(int featureID, Any newValue)
 			setReadSelfAction(_readSelfAction); //17039
 			return true;
 		}
-		case UmlPackage::OUTPUTPIN_ATTRIBUTE_READSTRUCTURALFEATUREACTION:
+		case uml::UmlPackage::OUTPUTPIN_ATTRIBUTE_READSTRUCTURALFEATUREACTION:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -742,7 +681,7 @@ bool OutputPinImpl::eSet(int featureID, Any newValue)
 			setReadStructuralFeatureAction(_readStructuralFeatureAction); //17037
 			return true;
 		}
-		case UmlPackage::OUTPUTPIN_ATTRIBUTE_VALUESPECIFICATIONACTION:
+		case uml::UmlPackage::OUTPUTPIN_ATTRIBUTE_VALUESPECIFICATIONACTION:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -750,7 +689,7 @@ bool OutputPinImpl::eSet(int featureID, Any newValue)
 			setValueSpecificationAction(_valueSpecificationAction); //17035
 			return true;
 		}
-		case UmlPackage::OUTPUTPIN_ATTRIBUTE_WRITESTRUCTURALFEATUREACTION:
+		case uml::UmlPackage::OUTPUTPIN_ATTRIBUTE_WRITESTRUCTURALFEATUREACTION:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -775,11 +714,10 @@ void OutputPinImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> 
 	// Create new objects (from references (containment == true))
 	//
 	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -789,18 +727,19 @@ void OutputPinImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoa
 	PinImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void OutputPinImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void OutputPinImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
 
-
-	PinImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	PinImpl::loadNode(nodeName, loadHandler);
 }
 
 void OutputPinImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
-		case UmlPackage::OUTPUTPIN_ATTRIBUTE_CALLACTION:
+		case uml::UmlPackage::OUTPUTPIN_ATTRIBUTE_CALLACTION:
 		{
 			if (references.size() == 1)
 			{
@@ -812,7 +751,7 @@ void OutputPinImpl::resolveReferences(const int featureID, std::list<std::shared
 			return;
 		}
 
-		case UmlPackage::OUTPUTPIN_ATTRIBUTE_CLEARSTRUCTURALFEATUREACTION:
+		case uml::UmlPackage::OUTPUTPIN_ATTRIBUTE_CLEARSTRUCTURALFEATUREACTION:
 		{
 			if (references.size() == 1)
 			{
@@ -824,7 +763,7 @@ void OutputPinImpl::resolveReferences(const int featureID, std::list<std::shared
 			return;
 		}
 
-		case UmlPackage::OUTPUTPIN_ATTRIBUTE_CREATEOBJECTACTION:
+		case uml::UmlPackage::OUTPUTPIN_ATTRIBUTE_CREATEOBJECTACTION:
 		{
 			if (references.size() == 1)
 			{
@@ -836,7 +775,7 @@ void OutputPinImpl::resolveReferences(const int featureID, std::list<std::shared
 			return;
 		}
 
-		case UmlPackage::OUTPUTPIN_ATTRIBUTE_READSELFACTION:
+		case uml::UmlPackage::OUTPUTPIN_ATTRIBUTE_READSELFACTION:
 		{
 			if (references.size() == 1)
 			{
@@ -848,7 +787,7 @@ void OutputPinImpl::resolveReferences(const int featureID, std::list<std::shared
 			return;
 		}
 
-		case UmlPackage::OUTPUTPIN_ATTRIBUTE_READSTRUCTURALFEATUREACTION:
+		case uml::UmlPackage::OUTPUTPIN_ATTRIBUTE_READSTRUCTURALFEATUREACTION:
 		{
 			if (references.size() == 1)
 			{
@@ -860,7 +799,7 @@ void OutputPinImpl::resolveReferences(const int featureID, std::list<std::shared
 			return;
 		}
 
-		case UmlPackage::OUTPUTPIN_ATTRIBUTE_VALUESPECIFICATIONACTION:
+		case uml::UmlPackage::OUTPUTPIN_ATTRIBUTE_VALUESPECIFICATIONACTION:
 		{
 			if (references.size() == 1)
 			{
@@ -872,7 +811,7 @@ void OutputPinImpl::resolveReferences(const int featureID, std::list<std::shared
 			return;
 		}
 
-		case UmlPackage::OUTPUTPIN_ATTRIBUTE_WRITESTRUCTURALFEATUREACTION:
+		case uml::UmlPackage::OUTPUTPIN_ATTRIBUTE_WRITESTRUCTURALFEATUREACTION:
 		{
 			if (references.size() == 1)
 			{

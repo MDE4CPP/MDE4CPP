@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -26,21 +25,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -84,10 +74,11 @@
 
 #include "uml/Trigger.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/Impl/UmlFactoryImpl.hpp"
+#include "uml/Impl/UmlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -149,9 +140,6 @@ ReplyActionImpl::~ReplyActionImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			ReplyActionImpl::ReplyActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
 			:ReplyActionImpl()
@@ -159,9 +147,6 @@ ReplyActionImpl::~ReplyActionImpl()
 			    m_inStructuredNode = par_inStructuredNode;
 				m_owner = par_inStructuredNode;
 			}
-
-
-
 
 
 //Additional constructor for the containments back reference
@@ -173,18 +158,12 @@ ReplyActionImpl::~ReplyActionImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			ReplyActionImpl::ReplyActionImpl(std::weak_ptr<uml::Element > par_owner)
 			:ReplyActionImpl()
 			{
 			    m_owner = par_owner;
 			}
-
-
-
 
 
 
@@ -334,7 +313,7 @@ std::shared_ptr<ecore::EObject>  ReplyActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ReplyActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getReplyAction_Class();
+	return uml::UmlPackage::eInstance()->getReplyAction_Class();
 }
 
 //*********************************
@@ -451,9 +430,9 @@ Any ReplyActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::REPLYACTION_ATTRIBUTE_REPLYTOCALL:
+		case uml::UmlPackage::REPLYACTION_ATTRIBUTE_REPLYTOCALL:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getReplyToCall())); //21227
-		case UmlPackage::REPLYACTION_ATTRIBUTE_REPLYVALUE:
+		case uml::UmlPackage::REPLYACTION_ATTRIBUTE_REPLYVALUE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::InputPin>::iterator iter = m_replyValue->begin();
@@ -465,7 +444,7 @@ Any ReplyActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 			}
 			return eAny(tempList); //21228
 		}
-		case UmlPackage::REPLYACTION_ATTRIBUTE_RETURNINFORMATION:
+		case uml::UmlPackage::REPLYACTION_ATTRIBUTE_RETURNINFORMATION:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getReturnInformation())); //21229
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
@@ -474,11 +453,11 @@ bool ReplyActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::REPLYACTION_ATTRIBUTE_REPLYTOCALL:
+		case uml::UmlPackage::REPLYACTION_ATTRIBUTE_REPLYTOCALL:
 			return getReplyToCall() != nullptr; //21227
-		case UmlPackage::REPLYACTION_ATTRIBUTE_REPLYVALUE:
+		case uml::UmlPackage::REPLYACTION_ATTRIBUTE_REPLYVALUE:
 			return getReplyValue() != nullptr; //21228
-		case UmlPackage::REPLYACTION_ATTRIBUTE_RETURNINFORMATION:
+		case uml::UmlPackage::REPLYACTION_ATTRIBUTE_RETURNINFORMATION:
 			return getReturnInformation() != nullptr; //21229
 	}
 	return ActionImpl::internalEIsSet(featureID);
@@ -487,7 +466,7 @@ bool ReplyActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::REPLYACTION_ATTRIBUTE_REPLYTOCALL:
+		case uml::UmlPackage::REPLYACTION_ATTRIBUTE_REPLYTOCALL:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -495,7 +474,7 @@ bool ReplyActionImpl::eSet(int featureID, Any newValue)
 			setReplyToCall(_replyToCall); //21227
 			return true;
 		}
-		case UmlPackage::REPLYACTION_ATTRIBUTE_REPLYVALUE:
+		case uml::UmlPackage::REPLYACTION_ATTRIBUTE_REPLYVALUE:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -531,7 +510,7 @@ bool ReplyActionImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case UmlPackage::REPLYACTION_ATTRIBUTE_RETURNINFORMATION:
+		case uml::UmlPackage::REPLYACTION_ATTRIBUTE_RETURNINFORMATION:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -556,11 +535,10 @@ void ReplyActionImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler
 	// Create new objects (from references (containment == true))
 	//
 	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -589,8 +567,9 @@ void ReplyActionImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XL
 	ActionImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void ReplyActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void ReplyActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
 
 	try
 	{
@@ -635,15 +614,15 @@ void ReplyActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence
 	{
 		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
 	}
-
-	ActionImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	ActionImpl::loadNode(nodeName, loadHandler);
 }
 
 void ReplyActionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
-		case UmlPackage::REPLYACTION_ATTRIBUTE_REPLYTOCALL:
+		case uml::UmlPackage::REPLYACTION_ATTRIBUTE_REPLYTOCALL:
 		{
 			if (references.size() == 1)
 			{

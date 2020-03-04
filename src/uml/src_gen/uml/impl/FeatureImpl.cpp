@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -25,17 +24,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -53,10 +47,11 @@
 
 #include "uml/StringExpression.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/Impl/UmlFactoryImpl.hpp"
+#include "uml/Impl/UmlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -105,18 +100,12 @@ FeatureImpl::~FeatureImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			FeatureImpl::FeatureImpl(std::weak_ptr<uml::Element > par_owner)
 			:FeatureImpl()
 			{
 			    m_owner = par_owner;
 			}
-
-
-
 
 
 
@@ -180,7 +169,7 @@ std::shared_ptr<ecore::EObject>  FeatureImpl::copy() const
 
 std::shared_ptr<ecore::EClass> FeatureImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getFeature_Class();
+	return uml::UmlPackage::eInstance()->getFeature_Class();
 }
 
 //*********************************
@@ -253,7 +242,7 @@ Any FeatureImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::FEATURE_ATTRIBUTE_FEATURINGCLASSIFIER:
+		case uml::UmlPackage::FEATURE_ATTRIBUTE_FEATURINGCLASSIFIER:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Classifier>::iterator iter = m_featuringClassifier->begin();
@@ -265,7 +254,7 @@ Any FeatureImpl::eGet(int featureID, bool resolve, bool coreType) const
 			}
 			return eAny(tempList); //10212
 		}
-		case UmlPackage::FEATURE_ATTRIBUTE_ISSTATIC:
+		case uml::UmlPackage::FEATURE_ATTRIBUTE_ISSTATIC:
 			return eAny(getIsStatic()); //10213
 	}
 	return RedefinableElementImpl::eGet(featureID, resolve, coreType);
@@ -274,9 +263,9 @@ bool FeatureImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::FEATURE_ATTRIBUTE_FEATURINGCLASSIFIER:
+		case uml::UmlPackage::FEATURE_ATTRIBUTE_FEATURINGCLASSIFIER:
 			return getFeaturingClassifier() != nullptr; //10212
-		case UmlPackage::FEATURE_ATTRIBUTE_ISSTATIC:
+		case uml::UmlPackage::FEATURE_ATTRIBUTE_ISSTATIC:
 			return getIsStatic() != false; //10213
 	}
 	return RedefinableElementImpl::internalEIsSet(featureID);
@@ -285,7 +274,7 @@ bool FeatureImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::FEATURE_ATTRIBUTE_ISSTATIC:
+		case uml::UmlPackage::FEATURE_ATTRIBUTE_ISSTATIC:
 		{
 			// BOOST CAST
 			bool _isStatic = newValue->get<bool>();
@@ -309,11 +298,10 @@ void FeatureImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> lo
 	// Create new objects (from references (containment == true))
 	//
 	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -344,11 +332,12 @@ void FeatureImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadH
 	RedefinableElementImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void FeatureImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void FeatureImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
 
-
-	RedefinableElementImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	RedefinableElementImpl::loadNode(nodeName, loadHandler);
 }
 
 void FeatureImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
@@ -382,7 +371,6 @@ void FeatureImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
 
 	
- 
 		// Add attributes
 		if ( this->eIsSet(package->getFeature_Attribute_isStatic()) )
 		{

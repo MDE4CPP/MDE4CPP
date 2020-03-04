@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -25,25 +24,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -69,10 +55,11 @@
 
 #include "uml/ValueSpecificationAction.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/Impl/UmlFactoryImpl.hpp"
+#include "uml/Impl/UmlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -112,18 +99,12 @@ LiteralNullImpl::~LiteralNullImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			LiteralNullImpl::LiteralNullImpl(std::weak_ptr<uml::Element > par_owner)
 			:LiteralNullImpl()
 			{
 			    m_owner = par_owner;
 			}
-
-
-
 
 
 //Additional constructor for the containments back reference
@@ -135,9 +116,6 @@ LiteralNullImpl::~LiteralNullImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			LiteralNullImpl::LiteralNullImpl(std::weak_ptr<uml::Slot > par_owningSlot)
 			:LiteralNullImpl()
@@ -145,9 +123,6 @@ LiteralNullImpl::~LiteralNullImpl()
 			    m_owningSlot = par_owningSlot;
 				m_owner = par_owningSlot;
 			}
-
-
-
 
 
 //Additional constructor for the containments back reference
@@ -159,9 +134,6 @@ LiteralNullImpl::~LiteralNullImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			LiteralNullImpl::LiteralNullImpl(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction)
 			:LiteralNullImpl()
@@ -169,9 +141,6 @@ LiteralNullImpl::~LiteralNullImpl()
 			    m_valueSpecificationAction = par_valueSpecificationAction;
 				m_owner = par_valueSpecificationAction;
 			}
-
-
-
 
 
 
@@ -236,7 +205,7 @@ std::shared_ptr<ecore::EObject>  LiteralNullImpl::copy() const
 
 std::shared_ptr<ecore::EClass> LiteralNullImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getLiteralNull_Class();
+	return uml::UmlPackage::eInstance()->getLiteralNull_Class();
 }
 
 //*********************************
@@ -349,11 +318,10 @@ void LiteralNullImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler
 	// Create new objects (from references (containment == true))
 	//
 	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -363,11 +331,12 @@ void LiteralNullImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XL
 	LiteralSpecificationImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void LiteralNullImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void LiteralNullImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
 
-
-	LiteralSpecificationImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	LiteralSpecificationImpl::loadNode(nodeName, loadHandler);
 }
 
 void LiteralNullImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)

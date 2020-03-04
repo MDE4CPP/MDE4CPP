@@ -37,13 +37,15 @@
 */]
 [query private getRootPackageName(anEPackage : EPackage, ignoreRoot : Boolean) : String = if (ignoreRoot) then '' else anEPackage.name endif /]
 [query private getNamespace(aEPackage : EPackage, separator : String, ignoreRoot : Boolean) : String = if(eSuperPackage.oclIsUndefined()) then getRootPackageName(ignoreRoot) else eSuperPackage.getNamespace(separator, ignoreRoot).concat(separator).concat(aEPackage.name) endif/]
-[query public generateNamespacePath(anEClassifier : EClassifier) : String = anEClassifier.ePackage.getNamespace('/', false) /]
+[query public generateNamespacePath(anEPackage : EPackage) : String = anEPackage.getNamespace('/', false) /]
+[query public generateNamespacePath(anEClassifier : EClassifier) : String = anEClassifier.ePackage.generateNamespacePath() /]
 [query public generateNamespaceDefinition(anEClassifier : EClassifier) : String = anEClassifier.ePackage.getNamespace('::', false) /]
 [query public generateNamespaceDefinition(anEPackage : EPackage) : String = anEPackage.getNamespace('::', false) /]
 [query public getRootPackage(aEPackage : EPackage) : EPackage = if(eSuperPackage.oclIsUndefined()) then aEPackage else eSuperPackage.getRootPackage() endif /]
-[query public getRootPackage(aEClassifier : EClassifier) : EPackage = if(ePackage.oclIsUndefined()) then ePackage else ePackage.getRootPackage() endif /]
+[query public getRootPackage(aEClassifier : EClassifier) : EPackage = if(aEClassifier.ePackage.oclIsUndefined()) then aEClassifier.ePackage else aEClassifier.ePackage.getRootPackage() endif /]
 
 [query public getNamespacePathWithoutRoot(anEClassifier : EClassifier) : String = anEClassifier.ePackage.getNamespace('/', true).concat('/').substring(2) /] [comment first char is '/', which should be removed, index starts at 1 /] 
+[query public getNamespacePathWithoutRoot(anEPackage : EPackage) : String = anEPackage.getNamespace('/', true).concat('/').substring(2) /] [comment first char is '/', which should be removed, index starts at 1 /] 
 
 [**
  * Helper for sourcegen annotations
@@ -77,7 +79,7 @@
 [query public packageGetter(aReference : EReference) : String = if oclIsUndefined() then 'nullptr' else getterPrefix().concat(getMemberNameUpperFirst()).concat('()') endif/]
 [query public packageGetter(aAttribute : EAttribute) : String = 'get'.concat(getMemberNameUpperFirst()).concat('()') /]
 
-[query public metamodelPackageNameForEstructuralFeture(aStructural : EStructuralFeature,aClass: EClass) : String = if( aStructural.eContainingClass.ePackage = aClass.getRootPackage()) then aStructural.eContainingClass.ePackage.name.concat('Package').toUpperFirst() else aStructural.eContainingClass.getRootPackage().name.concat('::').concat(aStructural.eContainingClass.getRootPackage().name.concat('Package').toUpperFirst()) endif/]
+[query public metamodelPackageNameForEstructuralFeture(aStructural : EStructuralFeature,aClass: EClass) : String = if( aStructural.eContainingClass.ePackage = aClass.getRootPackage()) then generateNamespaceDefinition(aStructural.eContainingClass.ePackage).concat('::').concat(aStructural.eContainingClass.ePackage.name.toUpperFirst()).concat('Package') else generateNamespaceDefinition(aStructural.eContainingClass).concat('::').concat(aStructural.eContainingClass.ePackage.name).concat('Package') endif/]
 
 [**
  * Get a string of the getterfunction for the element in the corresponding metamodel package 
@@ -85,7 +87,7 @@
 [query public packageGetter(aEClassifier : EClassifier, aStruct : EStructuralFeature) : String = packageGetter(aEClassifier,aStruct.eContainingClass) /]
 [query public packageGetter(aEClass : EClass, supertype : EClass) : String = packageGetter(supertype.oclAsType(EClassifier),aEClass.oclAsType(EClassifier)) /]
 [query public packageGetter(aEClassifier1 : EClassifier, aEClassifier2 : EClassifier) : String = needMetaModelPackageGetter(aEClassifier1, aEClassifier2).concat('get').concat(aEClassifier1.getMemberNameUpperFirst()).concat('()') /]
-[query public needMetaModelPackageGetter(aClassifier1 : EClassifier ,aClassifier2 : EClassifier ) : String = if(aClassifier1.generateNamespaceDefinition() = aClassifier2.generateNamespaceDefinition()) then '' else  aClassifier1.getRootPackage().name.concat('::').concat(aClassifier1.getRootPackage().name.toUpperFirst()).concat('Package').concat('::eInstance()->')  endif /]
+[query public needMetaModelPackageGetter(aClassifier1 : EClassifier ,aClassifier2 : EClassifier ) : String = if(aClassifier1.generateNamespaceDefinition() = aClassifier2.generateNamespaceDefinition()) then '' else  aClassifier1.getPackage_eInstance().concat('->')  endif /]
 
 [**
  * Subset Union helper queries
@@ -214,9 +216,13 @@
 [query public singlemultipleParameter(aOperation : EOperation) : String = if aOperation.eParameters->size()>1 then aOperation.eParameters->first().eType.name.concat('_').concat(aOperation.eParameters->last().eType.name) else aOperation.eParameters->first().eType.name endif /]
 [query public getMyClassifierID(anEClassifier : EClassifier) : EInt = anEClassifier.getRootPackage().eAllContents()->selectByKind(EClassifier)->sortedBy(name)->indexOf(anEClassifier) /]
 
+[query public getPackageAccess(aSubPackage : EPackage, usePackage : Boolean) : String = if usePackage = true then if not aSubPackage.eSuperPackage->isEmpty() then getPackageAccess(aSubPackage.eSuperPackage, usePackage).concat('::').concat(aSubPackage.name) else '' endif else  if not aSubPackage.eSuperPackage->isEmpty() then getPackageAccess(aSubPackage.eSuperPackage, usePackage).concat('->get').concat(aSubPackage.name).concat('_Package()') else ''  endif endif/]
+[query public getPackageAccess(aClass : EClassifier, usePackage : Boolean ) : String = if usePackage = true then getPackageAccess(aClass.ePackage, usePackage ) else getPackageAccess(aClass.ePackage, usePackage ) endif /]
+[query public getPackage_eInstance(aClass : EClassifier) : String = aClass.getRootPackage().name.concat(getPackageAccess(aClass, true)).concat('::').concat(aClass.ePackage.name.toUpperFirst()).concat('Package::eInstance()')/]
+
 [template public generateAbstractDataTypesForwardDeclaration(anEClass : EClass)]
 [if (anEClass.eReferences->select(upperBound <> 1 and not hasSubset() and not isUnion())->size() > 0 or anEClass.eOperations.eParameters->select((eType.requiresBag()  or upperBound <> 1) and not doNotGenerate())->size() > 0)]
-template<class T> class Bag;
+template<class T> class Bag; 
 [/if]
 [if (anEClass.eReferences->select(hasSubset() and not isSubsetUnion())->size() > 0)]
 template<class T, class ... U> class Subset;

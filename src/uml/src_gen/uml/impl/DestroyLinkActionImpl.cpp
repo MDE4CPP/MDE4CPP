@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -25,21 +24,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -83,10 +73,11 @@
 
 #include "uml/WriteLinkAction.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/Impl/UmlFactoryImpl.hpp"
+#include "uml/Impl/UmlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -126,9 +117,6 @@ DestroyLinkActionImpl::~DestroyLinkActionImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			DestroyLinkActionImpl::DestroyLinkActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
 			:DestroyLinkActionImpl()
@@ -136,9 +124,6 @@ DestroyLinkActionImpl::~DestroyLinkActionImpl()
 			    m_inStructuredNode = par_inStructuredNode;
 				m_owner = par_inStructuredNode;
 			}
-
-
-
 
 
 //Additional constructor for the containments back reference
@@ -150,18 +135,12 @@ DestroyLinkActionImpl::~DestroyLinkActionImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			DestroyLinkActionImpl::DestroyLinkActionImpl(std::weak_ptr<uml::Element > par_owner)
 			:DestroyLinkActionImpl()
 			{
 			    m_owner = par_owner;
 			}
-
-
-
 
 
 
@@ -301,7 +280,7 @@ std::shared_ptr<ecore::EObject>  DestroyLinkActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> DestroyLinkActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getDestroyLinkAction_Class();
+	return uml::UmlPackage::eInstance()->getDestroyLinkAction_Class();
 }
 
 //*********************************
@@ -412,11 +391,10 @@ void DestroyLinkActionImpl::load(std::shared_ptr<persistence::interfaces::XLoadH
 	// Create new objects (from references (containment == true))
 	//
 	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -426,11 +404,12 @@ void DestroyLinkActionImpl::loadAttributes(std::shared_ptr<persistence::interfac
 	WriteLinkActionImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void DestroyLinkActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void DestroyLinkActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
 
-
-	WriteLinkActionImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	WriteLinkActionImpl::loadNode(nodeName, loadHandler);
 }
 
 void DestroyLinkActionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)

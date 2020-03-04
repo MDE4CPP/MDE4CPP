@@ -24,7 +24,7 @@
 [import ecore4CPP::generator::main::package::generatePackageHelper /]
 
 [template public generatePackageInterface(anEPackage : EPackage) { packageName : String = anEPackage.name.toUpperFirst().concat('Package'); }]
-[file (anEPackage.name.concat('/').concat(packageName).concat('.hpp'), false, 'UTF-8')]
+[file (anEPackage.generateNamespacePath().concat('/').concat(packageName).concat('.hpp'), false, 'UTF-8')]
 [startGuard(anEPackage,'Package')/]
 
 #include "ecore/EPackage.hpp"
@@ -36,8 +36,21 @@ namespace [anEPackage.eClass().ePackage.name/]
 [/for]
 }
 
+namespace [anEPackage.generateNamespaceDefinition()/] 
+{
+[for (elements : EClass| anEPackage.eClassifiers->selectByKind(EClass)->sortedBy(name)) separator ('\n')]
+	class [elements.name/];[/for]
+[for (aSubPackage : EPackage| anEPackage.eSubpackages->selectByKind(EPackage)->sortedBy(name)) separator ('\n')]
+	namespace [aSubPackage.name/] 
+	{
+		class [aSubPackage.name/]Package;
+	}
+[/for]
+
+}
+
 [comment namespace /]
-namespace [anEPackage.name/] 
+namespace [anEPackage.generateNamespaceDefinition()/] 
 {
 	/*!
 	The Metamodel Package for the [anEPackage.name/] metamodel. This package is used to enable the reflection of model elements. It contains all model elements
@@ -59,7 +72,7 @@ namespace [anEPackage.name/]
 			static const std::string eNS_URI;
 			static const std::string eNS_PREFIX;
 
-[for (aClass : EClass | anEPackage.eAllContents(EClass)->asOrderedSet()->sortedBy(name)) separator ('\n')]
+[for (aClass : EClass | anEPackage.eClassifiers->selectByKind(EClass)->asOrderedSet()->sortedBy(name)) separator ('\n')]
 			// Begin Class [aClass.name.toUpperFirst()/]
 			//Class and Feature IDs 
 			[aClass.generateStaticClassID()/]
@@ -74,8 +87,10 @@ namespace [anEPackage.name/]
 			// End Class [aClass.name.toUpperFirst()/]
 
 [/for]
-			[anEPackage.eAllContents(EDataType)->sortedBy(name).generateStaticDatatypeID()/]
-			[anEPackage.eAllContents(EDataType)->sortedBy(name).generateModelElementGetter(anEPackage, false)/]
+			[anEPackage.eClassifiers->selectByKind(EDataType)->sortedBy(name).generateStaticDatatypeID()/]
+			[anEPackage.eClassifiers->selectByKind(EDataType)->sortedBy(name).generateModelElementGetter(anEPackage, false)/]
+
+			[anEPackage.eSubpackages->sortedBy(name).generateSubPackageGetter(false)/]
 
 			//Singleton Instance and Getter
 			[generateSingletonDecl(packageName)/]

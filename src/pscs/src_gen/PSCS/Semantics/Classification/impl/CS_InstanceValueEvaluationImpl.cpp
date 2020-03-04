@@ -18,18 +18,21 @@
 #include <iostream>
 #include <sstream>
 
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "PSCS/impl/PSCSPackageImpl.hpp"
+
+//Includes from codegen annotation
 #include "PSCS/Semantics/StructuredClassifiers/CS_Object.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/CS_Reference.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
 #include "fUML/FUMLFactory.hpp"
 #include "fUML/Semantics/SimpleClassifiers/EnumerationValue.hpp"
 #include "fUML/Semantics/SimpleClassifiers/DataValue.hpp"
+#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "fUML/Semantics/Loci/ExecutionFactory.hpp"
 #include "fUML/Semantics/StructuredClassifiers/Object.hpp"
+#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/Execution.hpp"
 #include "fUML/Semantics/Loci/Executor.hpp"
 #include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
@@ -44,8 +47,6 @@
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "PSCS/PSCSFactory.hpp"
-#include "PSCS/PSCSPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -57,10 +58,15 @@
 
 #include "uml/ValueSpecification.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "PSCS/PSCSPackage.hpp"
+//Factories an Package includes
+#include "PSCS/Semantics/Classification/Impl/ClassificationFactoryImpl.hpp"
+#include "PSCS/Semantics/Classification/Impl/ClassificationPackageImpl.hpp"
+
+#include "PSCS/Semantics/SemanticsFactory.hpp"
+#include "PSCS/Semantics/SemanticsPackage.hpp"
 #include "PSCS/PSCSFactory.hpp"
+#include "PSCS/PSCSPackage.hpp"
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -121,7 +127,7 @@ std::shared_ptr<ecore::EObject>  CS_InstanceValueEvaluationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> CS_InstanceValueEvaluationImpl::eStaticClass() const
 {
-	return PSCSPackageImpl::eInstance()->getCS_InstanceValueEvaluation_Class();
+	return PSCS::Semantics::Classification::ClassificationPackage::eInstance()->getCS_InstanceValueEvaluation_Class();
 }
 
 //*********************************
@@ -162,7 +168,7 @@ std::shared_ptr<fUML::Semantics::Values::Value> CS_InstanceValueEvaluationImpl::
 	
 	if(std::dynamic_pointer_cast<uml::EnumerationLiteral>(instance) != nullptr) {
 		DEBUG_MESSAGE(std::cout << "[evaluate] Type is an enumeration." << std::endl;)
-		std::shared_ptr<fUML::Semantics::SimpleClassifiers::EnumerationValue> enumerationValue(fUML::FUMLFactory::eInstance()->createEnumerationValue());
+		std::shared_ptr<fUML::Semantics::SimpleClassifiers::EnumerationValue> enumerationValue(fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createEnumerationValue());
 
 		enumerationValue->setType(std::dynamic_pointer_cast<uml::Enumeration>(myType));
 		enumerationValue->setLiteral(std::dynamic_pointer_cast<uml::EnumerationLiteral>(instance));
@@ -173,7 +179,7 @@ std::shared_ptr<fUML::Semantics::Values::Value> CS_InstanceValueEvaluationImpl::
 		std::shared_ptr<fUML::Semantics::SimpleClassifiers::StructuredValue> structuredValue = nullptr;
 		if(std::dynamic_pointer_cast<uml::DataType>(myType) != nullptr){
 			DEBUG_MESSAGE(std::cout << "[evaluate] Type is a data type." << std::endl;)
-			std::shared_ptr<fUML::Semantics::SimpleClassifiers::DataValue> dataValue(fUML::FUMLFactory::eInstance()->createDataValue());
+			std::shared_ptr<fUML::Semantics::SimpleClassifiers::DataValue> dataValue(fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createDataValue());
 			dataValue->setType(std::dynamic_pointer_cast<uml::DataType>(myType));
 			structuredValue = dataValue;
 		}
@@ -186,7 +192,7 @@ std::shared_ptr<fUML::Semantics::Values::Value> CS_InstanceValueEvaluationImpl::
 			}
 			else {
 				DEBUG_MESSAGE(std::cout << "[evaluate] Type is a class." << std::endl;)
-				std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object> csObject(PSCS::PSCSFactory::eInstance()->createCS_Object());
+				std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object> csObject(PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Object());
 				object = std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Object>(csObject);
 				
 				for(Bag<uml::Classifier>::const_iterator itClass = types->begin(); itClass != types->end(); itClass++) {
@@ -198,11 +204,11 @@ std::shared_ptr<fUML::Semantics::Values::Value> CS_InstanceValueEvaluationImpl::
 			
 			std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> reference;
 			if(std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Object>(object) != nullptr){
-				reference = fUML::FUMLFactory::eInstance()->createReference();
+				reference = fUML::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createReference();
 				(std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(reference))->setCompositeReferent(std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Object>(object));
 			}
 			else{
-				reference = fUML::FUMLFactory::eInstance()->createReference();
+				reference = fUML::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createReference();
 			}
 			reference->setReferent(object);
 			structuredValue = reference;
@@ -296,11 +302,10 @@ void CS_InstanceValueEvaluationImpl::load(std::shared_ptr<persistence::interface
 	// Create new objects (from references (containment == true))
 	//
 	// get PSCSFactory
-	std::shared_ptr<PSCS::PSCSFactory> modelFactory = PSCS::PSCSFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -310,11 +315,12 @@ void CS_InstanceValueEvaluationImpl::loadAttributes(std::shared_ptr<persistence:
 	fUML::Semantics::Classification::InstanceValueEvaluationImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void CS_InstanceValueEvaluationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<PSCS::PSCSFactory> modelFactory)
+void CS_InstanceValueEvaluationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<PSCS::Semantics::Classification::ClassificationFactory> modelFactory=PSCS::Semantics::Classification::ClassificationFactory::eInstance();
 
-
-	fUML::Semantics::Classification::InstanceValueEvaluationImpl::loadNode(nodeName, loadHandler, fUML::FUMLFactory::eInstance());
+	//load BasePackage Nodes
+	fUML::Semantics::Classification::InstanceValueEvaluationImpl::loadNode(nodeName, loadHandler);
 }
 
 void CS_InstanceValueEvaluationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
@@ -342,7 +348,7 @@ void CS_InstanceValueEvaluationImpl::saveContent(std::shared_ptr<persistence::in
 {
 	try
 	{
-		std::shared_ptr<PSCS::PSCSPackage> package = PSCS::PSCSPackage::eInstance();
+		std::shared_ptr<PSCS::Semantics::Classification::ClassificationPackage> package = PSCS::Semantics::Classification::ClassificationPackage::eInstance();
 
 	
 

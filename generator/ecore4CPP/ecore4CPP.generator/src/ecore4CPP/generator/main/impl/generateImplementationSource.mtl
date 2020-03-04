@@ -35,10 +35,11 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+[comment] root factory notwendig? 
 [if (generateObjectMonitoring())]
 #include "[getRootPackage().name/]/[aClass.getRootPackage().name.toUpperFirst()/]Factory.hpp"
 [/if]
-
+[/comment]
 [generateAbstractDataTypesIncludes()/]
 [if (aClass.eAttributes.eType->select(requiresAny())->size() = 0 and aClass.eOperations.eParameters.eType->select(requiresAny())->size() > 0)]
 #include "abstractDataTypes/Any.hpp"
@@ -46,7 +47,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "[getRootPackage().name/]/impl/[aClass.getRootPackage().name.toUpperFirst().concat('PackageImpl')/].hpp"
+
+//Includes from codegen annotation
 [if (aClass.hasKey(keyIncludes()))]
 [aClass.valueKey(keyIncludes())/]
 [/if]
@@ -58,10 +60,15 @@
 #include "[element.generateNamespacePath()/]/[element.name.toUpperFirst()/].hpp"
 [/for]
 
-#include "[aClass.eClass().getRootPackage().name/]/[aClass.eClass().getRootPackage().name.toUpperFirst()/]Package.hpp"
-#include "[aClass.eClass().getRootPackage().name/]/[aClass.eClass().getRootPackage().name.toUpperFirst()/]Factory.hpp"
-#include "[aClass.getRootPackage().name/]/[aClass.getRootPackage().name.toUpperFirst()/]Package.hpp"
-#include "[aClass.getRootPackage().name/]/[aClass.getRootPackage().name.toUpperFirst()/]Factory.hpp"
+//Factories an Package includes
+#include "[aClass.ePackage.getRootPackage().name/]/[aClass.ePackage.getNamespacePathWithoutRoot()/]Impl/[aClass.ePackage.name.toUpperFirst()/]FactoryImpl.hpp"
+#include "[aClass.ePackage.getRootPackage().name/]/[aClass.ePackage.getNamespacePathWithoutRoot()/]Impl/[aClass.ePackage.name.toUpperFirst()/]PackageImpl.hpp"
+
+[for (anEPackage: EPackage| aClass.ePackage->closure(p|p.eSuperPackage)->asSet() )]
+#include "[anEPackage.getRootPackage().name/]/[anEPackage.getNamespacePathWithoutRoot()/][anEPackage.name.toUpperFirst()/]Factory.hpp"
+#include "[anEPackage.getRootPackage().name/]/[anEPackage.getNamespacePathWithoutRoot()/][anEPackage.name.toUpperFirst()/]Package.hpp"
+[/for]
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -144,9 +151,6 @@ using namespace [aClass.generateNamespaceDefinition()/];
 			}
 	[/if]
 
-
-
-
 [/for]
 [/let]
 
@@ -220,7 +224,7 @@ std::shared_ptr<ecore::EObject>  [className/]::copy() const
 
 std::shared_ptr<[needNamespace(aClass.ePackage, 'EClass')/]> [className/]::eStaticClass() const
 {
-	return [aClass.getRootPackage().name.concat('PackageImpl').toUpperFirst()/]::eInstance()->get[aClass.getMemberNameUpperFirst()/]();
+	return [aClass.getRootPackage().name/][getPackageAccess(aClass, true)/]::[aClass.ePackage.name.toUpperFirst()/]Package::eInstance()->get[aClass.getMemberNameUpperFirst()/]();
 }
 
 //*********************************

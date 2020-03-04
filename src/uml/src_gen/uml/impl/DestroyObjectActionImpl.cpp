@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -26,21 +25,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -82,10 +72,11 @@
 
 #include "uml/StructuredActivityNode.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/Impl/UmlFactoryImpl.hpp"
+#include "uml/Impl/UmlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -128,9 +119,6 @@ DestroyObjectActionImpl::~DestroyObjectActionImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			DestroyObjectActionImpl::DestroyObjectActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
 			:DestroyObjectActionImpl()
@@ -138,9 +126,6 @@ DestroyObjectActionImpl::~DestroyObjectActionImpl()
 			    m_inStructuredNode = par_inStructuredNode;
 				m_owner = par_inStructuredNode;
 			}
-
-
-
 
 
 //Additional constructor for the containments back reference
@@ -152,18 +137,12 @@ DestroyObjectActionImpl::~DestroyObjectActionImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			DestroyObjectActionImpl::DestroyObjectActionImpl(std::weak_ptr<uml::Element > par_owner)
 			:DestroyObjectActionImpl()
 			{
 			    m_owner = par_owner;
 			}
-
-
-
 
 
 
@@ -297,7 +276,7 @@ std::shared_ptr<ecore::EObject>  DestroyObjectActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> DestroyObjectActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getDestroyObjectAction_Class();
+	return uml::UmlPackage::eInstance()->getDestroyObjectAction_Class();
 }
 
 //*********************************
@@ -416,11 +395,11 @@ Any DestroyObjectActionImpl::eGet(int featureID, bool resolve, bool coreType) co
 {
 	switch(featureID)
 	{
-		case UmlPackage::DESTROYOBJECTACTION_ATTRIBUTE_ISDESTROYLINKS:
+		case uml::UmlPackage::DESTROYOBJECTACTION_ATTRIBUTE_ISDESTROYLINKS:
 			return eAny(getIsDestroyLinks()); //7427
-		case UmlPackage::DESTROYOBJECTACTION_ATTRIBUTE_ISDESTROYOWNEDOBJECTS:
+		case uml::UmlPackage::DESTROYOBJECTACTION_ATTRIBUTE_ISDESTROYOWNEDOBJECTS:
 			return eAny(getIsDestroyOwnedObjects()); //7428
-		case UmlPackage::DESTROYOBJECTACTION_ATTRIBUTE_TARGET:
+		case uml::UmlPackage::DESTROYOBJECTACTION_ATTRIBUTE_TARGET:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getTarget())); //7429
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
@@ -429,11 +408,11 @@ bool DestroyObjectActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::DESTROYOBJECTACTION_ATTRIBUTE_ISDESTROYLINKS:
+		case uml::UmlPackage::DESTROYOBJECTACTION_ATTRIBUTE_ISDESTROYLINKS:
 			return getIsDestroyLinks() != false; //7427
-		case UmlPackage::DESTROYOBJECTACTION_ATTRIBUTE_ISDESTROYOWNEDOBJECTS:
+		case uml::UmlPackage::DESTROYOBJECTACTION_ATTRIBUTE_ISDESTROYOWNEDOBJECTS:
 			return getIsDestroyOwnedObjects() != false; //7428
-		case UmlPackage::DESTROYOBJECTACTION_ATTRIBUTE_TARGET:
+		case uml::UmlPackage::DESTROYOBJECTACTION_ATTRIBUTE_TARGET:
 			return getTarget() != nullptr; //7429
 	}
 	return ActionImpl::internalEIsSet(featureID);
@@ -442,21 +421,21 @@ bool DestroyObjectActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::DESTROYOBJECTACTION_ATTRIBUTE_ISDESTROYLINKS:
+		case uml::UmlPackage::DESTROYOBJECTACTION_ATTRIBUTE_ISDESTROYLINKS:
 		{
 			// BOOST CAST
 			bool _isDestroyLinks = newValue->get<bool>();
 			setIsDestroyLinks(_isDestroyLinks); //7427
 			return true;
 		}
-		case UmlPackage::DESTROYOBJECTACTION_ATTRIBUTE_ISDESTROYOWNEDOBJECTS:
+		case uml::UmlPackage::DESTROYOBJECTACTION_ATTRIBUTE_ISDESTROYOWNEDOBJECTS:
 		{
 			// BOOST CAST
 			bool _isDestroyOwnedObjects = newValue->get<bool>();
 			setIsDestroyOwnedObjects(_isDestroyOwnedObjects); //7428
 			return true;
 		}
-		case UmlPackage::DESTROYOBJECTACTION_ATTRIBUTE_TARGET:
+		case uml::UmlPackage::DESTROYOBJECTACTION_ATTRIBUTE_TARGET:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -481,11 +460,10 @@ void DestroyObjectActionImpl::load(std::shared_ptr<persistence::interfaces::XLoa
 	// Create new objects (from references (containment == true))
 	//
 	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -525,8 +503,9 @@ void DestroyObjectActionImpl::loadAttributes(std::shared_ptr<persistence::interf
 	ActionImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void DestroyObjectActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void DestroyObjectActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
 
 	try
 	{
@@ -537,7 +516,7 @@ void DestroyObjectActionImpl::loadNode(std::string nodeName, std::shared_ptr<per
 			{
 				typeName = "InputPin";
 			}
-			std::shared_ptr<ecore::EObject> target = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::INPUTPIN_ATTRIBUTE_DESTROYOBJECTACTION);
+			std::shared_ptr<ecore::EObject> target = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::UmlPackage::INPUTPIN_ATTRIBUTE_DESTROYOBJECTACTION);
 			if (target != nullptr)
 			{
 				loadHandler->handleChild(target);
@@ -553,8 +532,8 @@ void DestroyObjectActionImpl::loadNode(std::string nodeName, std::shared_ptr<per
 	{
 		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
 	}
-
-	ActionImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	ActionImpl::loadNode(nodeName, loadHandler);
 }
 
 void DestroyObjectActionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
@@ -604,7 +583,6 @@ void DestroyObjectActionImpl::saveContent(std::shared_ptr<persistence::interface
 			saveHandler->addReference(target, "target", target->eClass() != package->getInputPin_Class());
 		}
 	
- 
 		// Add attributes
 		if ( this->eIsSet(package->getDestroyObjectAction_Attribute_isDestroyLinks()) )
 		{

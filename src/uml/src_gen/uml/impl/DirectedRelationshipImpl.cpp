@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -25,15 +24,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -43,10 +39,11 @@
 
 #include "uml/Relationship.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/Impl/UmlFactoryImpl.hpp"
+#include "uml/Impl/UmlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -116,9 +113,6 @@ DirectedRelationshipImpl::~DirectedRelationshipImpl()
 
 
 
-
-
-
 DirectedRelationshipImpl::DirectedRelationshipImpl(const DirectedRelationshipImpl & obj):DirectedRelationshipImpl()
 {
 	//create copy of all Attributes
@@ -156,7 +150,7 @@ std::shared_ptr<ecore::EObject>  DirectedRelationshipImpl::copy() const
 
 std::shared_ptr<ecore::EClass> DirectedRelationshipImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getDirectedRelationship_Class();
+	return uml::UmlPackage::eInstance()->getDirectedRelationship_Class();
 }
 
 //*********************************
@@ -222,7 +216,7 @@ Any DirectedRelationshipImpl::eGet(int featureID, bool resolve, bool coreType) c
 {
 	switch(featureID)
 	{
-		case UmlPackage::DIRECTEDRELATIONSHIP_ATTRIBUTE_SOURCE:
+		case uml::UmlPackage::DIRECTEDRELATIONSHIP_ATTRIBUTE_SOURCE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Element>::iterator iter = m_source->begin();
@@ -234,7 +228,7 @@ Any DirectedRelationshipImpl::eGet(int featureID, bool resolve, bool coreType) c
 			}
 			return eAny(tempList); //774
 		}
-		case UmlPackage::DIRECTEDRELATIONSHIP_ATTRIBUTE_TARGET:
+		case uml::UmlPackage::DIRECTEDRELATIONSHIP_ATTRIBUTE_TARGET:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Element>::iterator iter = m_target->begin();
@@ -253,9 +247,9 @@ bool DirectedRelationshipImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::DIRECTEDRELATIONSHIP_ATTRIBUTE_SOURCE:
+		case uml::UmlPackage::DIRECTEDRELATIONSHIP_ATTRIBUTE_SOURCE:
 			return getSource() != nullptr; //774
-		case UmlPackage::DIRECTEDRELATIONSHIP_ATTRIBUTE_TARGET:
+		case uml::UmlPackage::DIRECTEDRELATIONSHIP_ATTRIBUTE_TARGET:
 			return getTarget() != nullptr; //775
 	}
 	return RelationshipImpl::internalEIsSet(featureID);
@@ -281,11 +275,10 @@ void DirectedRelationshipImpl::load(std::shared_ptr<persistence::interfaces::XLo
 	// Create new objects (from references (containment == true))
 	//
 	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -295,11 +288,12 @@ void DirectedRelationshipImpl::loadAttributes(std::shared_ptr<persistence::inter
 	RelationshipImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void DirectedRelationshipImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void DirectedRelationshipImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
 
-
-	RelationshipImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	RelationshipImpl::loadNode(nodeName, loadHandler);
 }
 
 void DirectedRelationshipImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)

@@ -17,15 +17,14 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/Union.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "PSCS/impl/PSCSPackageImpl.hpp"
-#include "fUML/FUMLFactory.hpp"
+
+//Includes from codegen annotation
 #include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
 
 #include "uml/SendSignalAction.hpp"
@@ -33,21 +32,20 @@
 #include "uml/Port.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/CS_Reference.hpp"
 #include "PSCS/Semantics/CommonBehavior/CS_EventOccurrence.hpp"
+#include "PSCS/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "uml/Signal.hpp"
 #include "uml/Property.hpp"
 #include "uml/InputPin.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SignalInstance.hpp"
+#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/CS_Object.hpp"
 #include "fUML/Semantics/CommonBehavior/SignalEventOccurrence.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "fUML/Semantics/Activities/ActivityExecution.hpp"
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "PSCS/PSCSFactory.hpp"
-#include "PSCS/PSCSPackage.hpp"
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -67,10 +65,15 @@
 
 #include "fUML/Semantics/Activities/Token.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "PSCS/PSCSPackage.hpp"
+//Factories an Package includes
+#include "PSCS/Semantics/Actions/Impl/ActionsFactoryImpl.hpp"
+#include "PSCS/Semantics/Actions/Impl/ActionsPackageImpl.hpp"
+
+#include "PSCS/Semantics/SemanticsFactory.hpp"
+#include "PSCS/Semantics/SemanticsPackage.hpp"
 #include "PSCS/PSCSFactory.hpp"
+#include "PSCS/PSCSPackage.hpp"
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -107,9 +110,6 @@ CS_SendSignalActionActivationImpl::~CS_SendSignalActionActivationImpl()
 			{
 			    m_group = par_group;
 			}
-
-
-
 
 
 
@@ -176,7 +176,7 @@ std::shared_ptr<ecore::EObject>  CS_SendSignalActionActivationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> CS_SendSignalActionActivationImpl::eStaticClass() const
 {
-	return PSCSPackageImpl::eInstance()->getCS_SendSignalActionActivation_Class();
+	return PSCS::Semantics::Actions::ActionsPackage::eInstance()->getCS_SendSignalActionActivation_Class();
 }
 
 //*********************************
@@ -220,7 +220,7 @@ void CS_SendSignalActionActivationImpl::doAction()
 			// Constructs the signal instance
 			std::shared_ptr<uml::Signal> signal = action->getSignal();
 			
-			std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> signalInstance = fUML::FUMLFactory::eInstance()->createSignalInstance();
+			std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> signalInstance = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createSignalInstance();
 			signalInstance->setType(signal);
 			
 			std::shared_ptr<Bag<uml::Property>> attributes = signal->getOwnedAttribute();
@@ -234,10 +234,10 @@ void CS_SendSignalActionActivationImpl::doAction()
 				i += 1;
 			}
 			// Construct the signal event occurrence
-			std::shared_ptr<fUML::Semantics::CommonBehavior::SignalEventOccurrence> signalEventOccurrence = fUML::FUMLFactory::eInstance()->createSignalEventOccurrence();
+			std::shared_ptr<fUML::Semantics::CommonBehavior::SignalEventOccurrence> signalEventOccurrence = fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createSignalEventOccurrence();
 			signalEventOccurrence->setSignalInstance(std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::SignalInstance>(signalInstance->copy()));
 			
-			std::shared_ptr<PSCS::Semantics::CommonBehavior::CS_EventOccurrence> wrappingEventOccurence = PSCS::PSCSFactory::eInstance()->createCS_EventOccurrence();
+			std::shared_ptr<PSCS::Semantics::CommonBehavior::CS_EventOccurrence> wrappingEventOccurence = PSCS::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createCS_EventOccurrence();
 			wrappingEventOccurence->setWrappedEventOccurrence(signalEventOccurrence);
 			// Tries to determine if the signal has to be
 			// sent to the environment or to the internals of
@@ -324,11 +324,10 @@ void CS_SendSignalActionActivationImpl::load(std::shared_ptr<persistence::interf
 	// Create new objects (from references (containment == true))
 	//
 	// get PSCSFactory
-	std::shared_ptr<PSCS::PSCSFactory> modelFactory = PSCS::PSCSFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -338,11 +337,12 @@ void CS_SendSignalActionActivationImpl::loadAttributes(std::shared_ptr<persisten
 	fUML::Semantics::Actions::SendSignalActionActivationImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void CS_SendSignalActionActivationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<PSCS::PSCSFactory> modelFactory)
+void CS_SendSignalActionActivationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<PSCS::Semantics::Actions::ActionsFactory> modelFactory=PSCS::Semantics::Actions::ActionsFactory::eInstance();
 
-
-	fUML::Semantics::Actions::SendSignalActionActivationImpl::loadNode(nodeName, loadHandler, fUML::FUMLFactory::eInstance());
+	//load BasePackage Nodes
+	fUML::Semantics::Actions::SendSignalActionActivationImpl::loadNode(nodeName, loadHandler);
 }
 
 void CS_SendSignalActionActivationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
@@ -376,7 +376,7 @@ void CS_SendSignalActionActivationImpl::saveContent(std::shared_ptr<persistence:
 {
 	try
 	{
-		std::shared_ptr<PSCS::PSCSPackage> package = PSCS::PSCSPackage::eInstance();
+		std::shared_ptr<PSCS::Semantics::Actions::ActionsPackage> package = PSCS::Semantics::Actions::ActionsPackage::eInstance();
 
 	
 

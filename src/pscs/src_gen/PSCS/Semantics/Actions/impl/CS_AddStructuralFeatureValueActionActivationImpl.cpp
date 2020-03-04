@@ -17,20 +17,22 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/Union.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "PSCS/impl/PSCSPackageImpl.hpp"
+
+//Includes from codegen annotation
 #include "fUML/FUMLFactory.hpp"
 #include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
 
 #include "PSCS/Semantics/StructuredClassifiers/CS_InteractionPoint.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/CS_Reference.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/CS_Link.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
+
 #include "uml/AddStructuralFeatureValueAction.hpp"
 #include "uml/Port.hpp"
 #include "uml/StructuralFeature.hpp"
@@ -49,10 +51,6 @@
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "PSCS/PSCSFactory.hpp"
-#include "PSCS/PSCSPackage.hpp"
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -72,10 +70,15 @@
 
 #include "fUML/Semantics/Activities/Token.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "PSCS/PSCSPackage.hpp"
+//Factories an Package includes
+#include "PSCS/Semantics/Actions/Impl/ActionsFactoryImpl.hpp"
+#include "PSCS/Semantics/Actions/Impl/ActionsPackageImpl.hpp"
+
+#include "PSCS/Semantics/SemanticsFactory.hpp"
+#include "PSCS/Semantics/SemanticsPackage.hpp"
 #include "PSCS/PSCSFactory.hpp"
+#include "PSCS/PSCSPackage.hpp"
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -112,9 +115,6 @@ CS_AddStructuralFeatureValueActionActivationImpl::~CS_AddStructuralFeatureValueA
 			{
 			    m_group = par_group;
 			}
-
-
-
 
 
 
@@ -181,7 +181,7 @@ std::shared_ptr<ecore::EObject>  CS_AddStructuralFeatureValueActionActivationImp
 
 std::shared_ptr<ecore::EClass> CS_AddStructuralFeatureValueActionActivationImpl::eStaticClass() const
 {
-	return PSCSPackageImpl::eInstance()->getCS_AddStructuralFeatureValueActionActivation_Class();
+	return PSCS::Semantics::Actions::ActionsPackage::eInstance()->getCS_AddStructuralFeatureValueActionActivation_Class();
 }
 
 //*********************************
@@ -215,7 +215,7 @@ void CS_AddStructuralFeatureValueActionActivationImpl::doAction()
 		if(std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Reference>(inputValue) != nullptr) {
 			// First constructs an InteractionPoint from the inputValue
 			std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> reference = std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Reference>(inputValue);
-			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> interactionPoint = PSCS::PSCSFactory::eInstance()->createCS_InteractionPoint();
+			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> interactionPoint = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_InteractionPoint();
 			interactionPoint->setReferent(reference->getReferent());
 			interactionPoint->setDefiningPort(std::dynamic_pointer_cast<uml::Port>(feature));
 			// The value on action.object is necessarily instanceof
@@ -338,7 +338,7 @@ void CS_AddStructuralFeatureValueActionActivationImpl::doActionDefault()
 			}
 		}
 		
-		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Link> newLink = PSCS::PSCSFactory::eInstance()->createCS_Link();
+		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Link> newLink = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Link();
 		newLink->setType(association);
 		
 		// This necessary when setting a feature value with an insertAt
@@ -466,11 +466,10 @@ void CS_AddStructuralFeatureValueActionActivationImpl::load(std::shared_ptr<pers
 	// Create new objects (from references (containment == true))
 	//
 	// get PSCSFactory
-	std::shared_ptr<PSCS::PSCSFactory> modelFactory = PSCS::PSCSFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -480,11 +479,12 @@ void CS_AddStructuralFeatureValueActionActivationImpl::loadAttributes(std::share
 	fUML::Semantics::Actions::AddStructuralFeatureValueActionActivationImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void CS_AddStructuralFeatureValueActionActivationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<PSCS::PSCSFactory> modelFactory)
+void CS_AddStructuralFeatureValueActionActivationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<PSCS::Semantics::Actions::ActionsFactory> modelFactory=PSCS::Semantics::Actions::ActionsFactory::eInstance();
 
-
-	fUML::Semantics::Actions::AddStructuralFeatureValueActionActivationImpl::loadNode(nodeName, loadHandler, fUML::FUMLFactory::eInstance());
+	//load BasePackage Nodes
+	fUML::Semantics::Actions::AddStructuralFeatureValueActionActivationImpl::loadNode(nodeName, loadHandler);
 }
 
 void CS_AddStructuralFeatureValueActionActivationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
@@ -521,7 +521,7 @@ void CS_AddStructuralFeatureValueActionActivationImpl::saveContent(std::shared_p
 {
 	try
 	{
-		std::shared_ptr<PSCS::PSCSPackage> package = PSCS::PSCSPackage::eInstance();
+		std::shared_ptr<PSCS::Semantics::Actions::ActionsPackage> package = PSCS::Semantics::Actions::ActionsPackage::eInstance();
 
 	
 

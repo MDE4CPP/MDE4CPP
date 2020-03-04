@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -26,21 +25,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -84,10 +74,11 @@
 
 #include "uml/Trigger.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/Impl/UmlFactoryImpl.hpp"
+#include "uml/Impl/UmlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -129,9 +120,6 @@ AcceptCallActionImpl::~AcceptCallActionImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			AcceptCallActionImpl::AcceptCallActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
 			:AcceptCallActionImpl()
@@ -139,9 +127,6 @@ AcceptCallActionImpl::~AcceptCallActionImpl()
 			    m_inStructuredNode = par_inStructuredNode;
 				m_owner = par_inStructuredNode;
 			}
-
-
-
 
 
 //Additional constructor for the containments back reference
@@ -153,18 +138,12 @@ AcceptCallActionImpl::~AcceptCallActionImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			AcceptCallActionImpl::AcceptCallActionImpl(std::weak_ptr<uml::Element > par_owner)
 			:AcceptCallActionImpl()
 			{
 			    m_owner = par_owner;
 			}
-
-
-
 
 
 
@@ -313,7 +292,7 @@ std::shared_ptr<ecore::EObject>  AcceptCallActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> AcceptCallActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getAcceptCallAction_Class();
+	return uml::UmlPackage::eInstance()->getAcceptCallAction_Class();
 }
 
 //*********************************
@@ -419,7 +398,7 @@ Any AcceptCallActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::ACCEPTCALLACTION_ATTRIBUTE_RETURNINFORMATION:
+		case uml::UmlPackage::ACCEPTCALLACTION_ATTRIBUTE_RETURNINFORMATION:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getReturnInformation())); //230
 	}
 	return AcceptEventActionImpl::eGet(featureID, resolve, coreType);
@@ -428,7 +407,7 @@ bool AcceptCallActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::ACCEPTCALLACTION_ATTRIBUTE_RETURNINFORMATION:
+		case uml::UmlPackage::ACCEPTCALLACTION_ATTRIBUTE_RETURNINFORMATION:
 			return getReturnInformation() != nullptr; //230
 	}
 	return AcceptEventActionImpl::internalEIsSet(featureID);
@@ -437,7 +416,7 @@ bool AcceptCallActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::ACCEPTCALLACTION_ATTRIBUTE_RETURNINFORMATION:
+		case uml::UmlPackage::ACCEPTCALLACTION_ATTRIBUTE_RETURNINFORMATION:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -462,11 +441,10 @@ void AcceptCallActionImpl::load(std::shared_ptr<persistence::interfaces::XLoadHa
 	// Create new objects (from references (containment == true))
 	//
 	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -476,8 +454,9 @@ void AcceptCallActionImpl::loadAttributes(std::shared_ptr<persistence::interface
 	AcceptEventActionImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void AcceptCallActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void AcceptCallActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
 
 	try
 	{
@@ -505,8 +484,8 @@ void AcceptCallActionImpl::loadNode(std::string nodeName, std::shared_ptr<persis
 	{
 		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
 	}
-
-	AcceptEventActionImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	AcceptEventActionImpl::loadNode(nodeName, loadHandler);
 }
 
 void AcceptCallActionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)

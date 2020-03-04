@@ -20,6 +20,8 @@
 
 //depending model packages
 
+
+
 using namespace ecore;
 
 void EcorePackageImpl::initializePackageContents()
@@ -78,6 +80,7 @@ void EcorePackageImpl::initializePackageContents()
 	initializeETypedElementContent();
 
 	initializePackageEDataTypes();
+
 }
 
 void EcorePackageImpl::initializeEAnnotationContent()
@@ -125,12 +128,9 @@ void EcorePackageImpl::initializeEAnnotationContent()
 		if (!defaultValue.empty())
 		{
 			m_eAnnotation_Attribute_contents->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_eAnnotation_Attribute_contents->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_eAnnotation_Attribute_details->setName("details");
 	m_eAnnotation_Attribute_details->setEType(getEStringToStringMapEntry_Class());
@@ -150,12 +150,9 @@ void EcorePackageImpl::initializeEAnnotationContent()
 		if (!defaultValue.empty())
 		{
 			m_eAnnotation_Attribute_details->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_eAnnotation_Attribute_details->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_eAnnotation_Attribute_eModelElement->setName("eModelElement");
 	m_eAnnotation_Attribute_eModelElement->setEType(getEModelElement_Class());
@@ -175,8 +172,8 @@ void EcorePackageImpl::initializeEAnnotationContent()
 		if (!defaultValue.empty())
 		{
 			m_eAnnotation_Attribute_eModelElement->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getEModelElement_Attribute_eAnnotations();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = ecore::EcorePackage::eInstance()->getEModelElement_Attribute_eAnnotations();
 		if (otherEnd != nullptr)
 	    {
 	   		m_eAnnotation_Attribute_eModelElement->setEOpposite(otherEnd);
@@ -200,12 +197,9 @@ void EcorePackageImpl::initializeEAnnotationContent()
 		if (!defaultValue.empty())
 		{
 			m_eAnnotation_Attribute_references->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_eAnnotation_Attribute_references->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	
@@ -256,12 +250,9 @@ void EcorePackageImpl::initializeEAttributeContent()
 		if (!defaultValue.empty())
 		{
 			m_eAttribute_Attribute_eAttributeType->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_eAttribute_Attribute_eAttributeType->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	
@@ -332,12 +323,9 @@ void EcorePackageImpl::initializeEClassContent()
 		if (!defaultValue.empty())
 		{
 			m_eClass_Attribute_eAllAttributes->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_eClass_Attribute_eAllAttributes->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_eClass_Attribute_eAllContainments->setName("eAllContainments");
 	m_eClass_Attribute_eAllContainments->setEType(getEReference_Class());
@@ -357,12 +345,9 @@ void EcorePackageImpl::initializeEClassContent()
 		if (!defaultValue.empty())
 		{
 			m_eClass_Attribute_eAllContainments->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_eClass_Attribute_eAllContainments->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_eClass_Attribute_eAllGenericSuperTypes->setName("eAllGenericSuperTypes");
 	m_eClass_Attribute_eAllGenericSuperTypes->setEType(getEGenericType_Class());
@@ -382,12 +367,9 @@ void EcorePackageImpl::initializeEClassContent()
 		if (!defaultValue.empty())
 		{
 			m_eClass_Attribute_eAllGenericSuperTypes->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_eClass_Attribute_eAllGenericSuperTypes->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_eClass_Attribute_eAllOperations->setName("eAllOperations");
 	m_eClass_Attribute_eAllOperations->setEType(getEOperation_Class());
@@ -407,12 +389,9 @@ void EcorePackageImpl::initializeEClassContent()
 		if (!defaultValue.empty())
 		{
 			m_eClass_Attribute_eAllOperations->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_eClass_Attribute_eAllOperations->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_eClass_Attribute_eAllReferences->setName("eAllReferences");
 	m_eClass_Attribute_eAllReferences->setEType(getEReference_Class());
@@ -432,12 +411,9 @@ void EcorePackageImpl::initializeEClassContent()
 		if (!defaultValue.empty())
 		{
 			m_eClass_Attribute_eAllReferences->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_eClass_Attribute_eAllReferences->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_eClass_Attribute_eAllStructuralFeatures->setName("eAllStructuralFeatures");
 	m_eClass_Attribute_eAllStructuralFeatures->setEType(getEStructuralFeature_Class());
@@ -457,12 +433,9 @@ void EcorePackageImpl::initializeEClassContent()
 		if (!defaultValue.empty())
 		{
 			m_eClass_Attribute_eAllStructuralFeatures->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_eClass_Attribute_eAllStructuralFeatures->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_eClass_Attribute_eAllSuperTypes->setName("eAllSuperTypes");
 	m_eClass_Attribute_eAllSuperTypes->setEType(getEClass_Class());
@@ -482,12 +455,9 @@ void EcorePackageImpl::initializeEClassContent()
 		if (!defaultValue.empty())
 		{
 			m_eClass_Attribute_eAllSuperTypes->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_eClass_Attribute_eAllSuperTypes->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_eClass_Attribute_eAttributes->setName("eAttributes");
 	m_eClass_Attribute_eAttributes->setEType(getEAttribute_Class());
@@ -507,12 +477,9 @@ void EcorePackageImpl::initializeEClassContent()
 		if (!defaultValue.empty())
 		{
 			m_eClass_Attribute_eAttributes->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_eClass_Attribute_eAttributes->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_eClass_Attribute_eGenericSuperTypes->setName("eGenericSuperTypes");
 	m_eClass_Attribute_eGenericSuperTypes->setEType(getEGenericType_Class());
@@ -532,12 +499,9 @@ void EcorePackageImpl::initializeEClassContent()
 		if (!defaultValue.empty())
 		{
 			m_eClass_Attribute_eGenericSuperTypes->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_eClass_Attribute_eGenericSuperTypes->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_eClass_Attribute_eIDAttribute->setName("eIDAttribute");
 	m_eClass_Attribute_eIDAttribute->setEType(getEAttribute_Class());
@@ -557,12 +521,9 @@ void EcorePackageImpl::initializeEClassContent()
 		if (!defaultValue.empty())
 		{
 			m_eClass_Attribute_eIDAttribute->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_eClass_Attribute_eIDAttribute->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_eClass_Attribute_eOperations->setName("eOperations");
 	m_eClass_Attribute_eOperations->setEType(getEOperation_Class());
@@ -582,8 +543,8 @@ void EcorePackageImpl::initializeEClassContent()
 		if (!defaultValue.empty())
 		{
 			m_eClass_Attribute_eOperations->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getEOperation_Attribute_eContainingClass();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = ecore::EcorePackage::eInstance()->getEOperation_Attribute_eContainingClass();
 		if (otherEnd != nullptr)
 	    {
 	   		m_eClass_Attribute_eOperations->setEOpposite(otherEnd);
@@ -607,12 +568,9 @@ void EcorePackageImpl::initializeEClassContent()
 		if (!defaultValue.empty())
 		{
 			m_eClass_Attribute_eReferences->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_eClass_Attribute_eReferences->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_eClass_Attribute_eStructuralFeatures->setName("eStructuralFeatures");
 	m_eClass_Attribute_eStructuralFeatures->setEType(getEStructuralFeature_Class());
@@ -632,8 +590,8 @@ void EcorePackageImpl::initializeEClassContent()
 		if (!defaultValue.empty())
 		{
 			m_eClass_Attribute_eStructuralFeatures->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getEStructuralFeature_Attribute_eContainingClass();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = ecore::EcorePackage::eInstance()->getEStructuralFeature_Attribute_eContainingClass();
 		if (otherEnd != nullptr)
 	    {
 	   		m_eClass_Attribute_eStructuralFeatures->setEOpposite(otherEnd);
@@ -657,12 +615,9 @@ void EcorePackageImpl::initializeEClassContent()
 		if (!defaultValue.empty())
 		{
 			m_eClass_Attribute_eSuperTypes->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_eClass_Attribute_eSuperTypes->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_eClass_Operation_getEOperation_EInt->setEType(getEOperation_Class());
@@ -925,8 +880,8 @@ void EcorePackageImpl::initializeEClassifierContent()
 		if (!defaultValue.empty())
 		{
 			m_eClassifier_Attribute_ePackage->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getEPackage_Attribute_eClassifiers();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = ecore::EcorePackage::eInstance()->getEPackage_Attribute_eClassifiers();
 		if (otherEnd != nullptr)
 	    {
 	   		m_eClassifier_Attribute_ePackage->setEOpposite(otherEnd);
@@ -950,12 +905,9 @@ void EcorePackageImpl::initializeEClassifierContent()
 		if (!defaultValue.empty())
 		{
 			m_eClassifier_Attribute_eTypeParameters->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_eClassifier_Attribute_eTypeParameters->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_eClassifier_Operation_getClassifierID->setEType(getEInt_Class());
@@ -1042,8 +994,8 @@ void EcorePackageImpl::initializeEEnumContent()
 		if (!defaultValue.empty())
 		{
 			m_eEnum_Attribute_eLiterals->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getEEnumLiteral_Attribute_eEnum();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = ecore::EcorePackage::eInstance()->getEEnumLiteral_Attribute_eEnum();
 		if (otherEnd != nullptr)
 	    {
 	   		m_eEnum_Attribute_eLiterals->setEOpposite(otherEnd);
@@ -1189,8 +1141,8 @@ void EcorePackageImpl::initializeEEnumLiteralContent()
 		if (!defaultValue.empty())
 		{
 			m_eEnumLiteral_Attribute_eEnum->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getEEnum_Attribute_eLiterals();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = ecore::EcorePackage::eInstance()->getEEnum_Attribute_eLiterals();
 		if (otherEnd != nullptr)
 	    {
 	   		m_eEnumLiteral_Attribute_eEnum->setEOpposite(otherEnd);
@@ -1225,8 +1177,8 @@ void EcorePackageImpl::initializeEFactoryContent()
 		if (!defaultValue.empty())
 		{
 			m_eFactory_Attribute_ePackage->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getEPackage_Attribute_eFactoryInstance();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = ecore::EcorePackage::eInstance()->getEPackage_Attribute_eFactoryInstance();
 		if (otherEnd != nullptr)
 	    {
 	   		m_eFactory_Attribute_ePackage->setEOpposite(otherEnd);
@@ -1332,12 +1284,9 @@ void EcorePackageImpl::initializeEGenericTypeContent()
 		if (!defaultValue.empty())
 		{
 			m_eGenericType_Attribute_eClassifier->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_eGenericType_Attribute_eClassifier->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_eGenericType_Attribute_eLowerBound->setName("eLowerBound");
 	m_eGenericType_Attribute_eLowerBound->setEType(getEGenericType_Class());
@@ -1357,12 +1306,9 @@ void EcorePackageImpl::initializeEGenericTypeContent()
 		if (!defaultValue.empty())
 		{
 			m_eGenericType_Attribute_eLowerBound->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_eGenericType_Attribute_eLowerBound->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_eGenericType_Attribute_eRawType->setName("eRawType");
 	m_eGenericType_Attribute_eRawType->setEType(getEClassifier_Class());
@@ -1382,12 +1328,9 @@ void EcorePackageImpl::initializeEGenericTypeContent()
 		if (!defaultValue.empty())
 		{
 			m_eGenericType_Attribute_eRawType->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_eGenericType_Attribute_eRawType->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_eGenericType_Attribute_eTypeArguments->setName("eTypeArguments");
 	m_eGenericType_Attribute_eTypeArguments->setEType(getEGenericType_Class());
@@ -1407,12 +1350,9 @@ void EcorePackageImpl::initializeEGenericTypeContent()
 		if (!defaultValue.empty())
 		{
 			m_eGenericType_Attribute_eTypeArguments->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_eGenericType_Attribute_eTypeArguments->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_eGenericType_Attribute_eTypeParameter->setName("eTypeParameter");
 	m_eGenericType_Attribute_eTypeParameter->setEType(getETypeParameter_Class());
@@ -1432,12 +1372,9 @@ void EcorePackageImpl::initializeEGenericTypeContent()
 		if (!defaultValue.empty())
 		{
 			m_eGenericType_Attribute_eTypeParameter->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_eGenericType_Attribute_eTypeParameter->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_eGenericType_Attribute_eUpperBound->setName("eUpperBound");
 	m_eGenericType_Attribute_eUpperBound->setEType(getEGenericType_Class());
@@ -1457,12 +1394,9 @@ void EcorePackageImpl::initializeEGenericTypeContent()
 		if (!defaultValue.empty())
 		{
 			m_eGenericType_Attribute_eUpperBound->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_eGenericType_Attribute_eUpperBound->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_eGenericType_Operation_isInstance_EJavaObject->setEType(getEBoolean_Class());
@@ -1510,8 +1444,8 @@ void EcorePackageImpl::initializeEModelElementContent()
 		if (!defaultValue.empty())
 		{
 			m_eModelElement_Attribute_eAnnotations->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getEAnnotation_Attribute_eModelElement();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = ecore::EcorePackage::eInstance()->getEAnnotation_Attribute_eModelElement();
 		if (otherEnd != nullptr)
 	    {
 	   		m_eModelElement_Attribute_eAnnotations->setEOpposite(otherEnd);
@@ -1614,8 +1548,8 @@ void EcorePackageImpl::initializeEObjectContent()
 		if (!defaultValue.empty())
 		{
 			m_eObject_Attribute_eContainer->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getEObject_Attribute_eContens();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = ecore::EcorePackage::eInstance()->getEObject_Attribute_eContens();
 		if (otherEnd != nullptr)
 	    {
 	   		m_eObject_Attribute_eContainer->setEOpposite(otherEnd);
@@ -1639,8 +1573,8 @@ void EcorePackageImpl::initializeEObjectContent()
 		if (!defaultValue.empty())
 		{
 			m_eObject_Attribute_eContens->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getEObject_Attribute_eContainer();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = ecore::EcorePackage::eInstance()->getEObject_Attribute_eContainer();
 		if (otherEnd != nullptr)
 	    {
 	   		m_eObject_Attribute_eContens->setEOpposite(otherEnd);
@@ -1899,8 +1833,8 @@ void EcorePackageImpl::initializeEOperationContent()
 		if (!defaultValue.empty())
 		{
 			m_eOperation_Attribute_eContainingClass->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getEClass_Attribute_eOperations();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = ecore::EcorePackage::eInstance()->getEClass_Attribute_eOperations();
 		if (otherEnd != nullptr)
 	    {
 	   		m_eOperation_Attribute_eContainingClass->setEOpposite(otherEnd);
@@ -1924,12 +1858,9 @@ void EcorePackageImpl::initializeEOperationContent()
 		if (!defaultValue.empty())
 		{
 			m_eOperation_Attribute_eExceptions->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_eOperation_Attribute_eExceptions->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_eOperation_Attribute_eGenericExceptions->setName("eGenericExceptions");
 	m_eOperation_Attribute_eGenericExceptions->setEType(getEGenericType_Class());
@@ -1949,12 +1880,9 @@ void EcorePackageImpl::initializeEOperationContent()
 		if (!defaultValue.empty())
 		{
 			m_eOperation_Attribute_eGenericExceptions->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_eOperation_Attribute_eGenericExceptions->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_eOperation_Attribute_eParameters->setName("eParameters");
 	m_eOperation_Attribute_eParameters->setEType(getEParameter_Class());
@@ -1974,8 +1902,8 @@ void EcorePackageImpl::initializeEOperationContent()
 		if (!defaultValue.empty())
 		{
 			m_eOperation_Attribute_eParameters->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getEParameter_Attribute_eOperation();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = ecore::EcorePackage::eInstance()->getEParameter_Attribute_eOperation();
 		if (otherEnd != nullptr)
 	    {
 	   		m_eOperation_Attribute_eParameters->setEOpposite(otherEnd);
@@ -1999,12 +1927,9 @@ void EcorePackageImpl::initializeEOperationContent()
 		if (!defaultValue.empty())
 		{
 			m_eOperation_Attribute_eTypeParameters->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_eOperation_Attribute_eTypeParameters->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	m_eOperation_Operation_getOperationID->setEType(getEInt_Class());
@@ -2100,8 +2025,8 @@ void EcorePackageImpl::initializeEPackageContent()
 		if (!defaultValue.empty())
 		{
 			m_ePackage_Attribute_eClassifiers->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getEClassifier_Attribute_ePackage();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = ecore::EcorePackage::eInstance()->getEClassifier_Attribute_ePackage();
 		if (otherEnd != nullptr)
 	    {
 	   		m_ePackage_Attribute_eClassifiers->setEOpposite(otherEnd);
@@ -2125,8 +2050,8 @@ void EcorePackageImpl::initializeEPackageContent()
 		if (!defaultValue.empty())
 		{
 			m_ePackage_Attribute_eFactoryInstance->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getEFactory_Attribute_ePackage();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = ecore::EcorePackage::eInstance()->getEFactory_Attribute_ePackage();
 		if (otherEnd != nullptr)
 	    {
 	   		m_ePackage_Attribute_eFactoryInstance->setEOpposite(otherEnd);
@@ -2150,8 +2075,8 @@ void EcorePackageImpl::initializeEPackageContent()
 		if (!defaultValue.empty())
 		{
 			m_ePackage_Attribute_eSubpackages->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getEPackage_Attribute_eSuperPackage();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = ecore::EcorePackage::eInstance()->getEPackage_Attribute_eSuperPackage();
 		if (otherEnd != nullptr)
 	    {
 	   		m_ePackage_Attribute_eSubpackages->setEOpposite(otherEnd);
@@ -2175,8 +2100,8 @@ void EcorePackageImpl::initializeEPackageContent()
 		if (!defaultValue.empty())
 		{
 			m_ePackage_Attribute_eSuperPackage->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getEPackage_Attribute_eSubpackages();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = ecore::EcorePackage::eInstance()->getEPackage_Attribute_eSubpackages();
 		if (otherEnd != nullptr)
 	    {
 	   		m_ePackage_Attribute_eSuperPackage->setEOpposite(otherEnd);
@@ -2228,8 +2153,8 @@ void EcorePackageImpl::initializeEParameterContent()
 		if (!defaultValue.empty())
 		{
 			m_eParameter_Attribute_eOperation->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getEOperation_Attribute_eParameters();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = ecore::EcorePackage::eInstance()->getEOperation_Attribute_eParameters();
 		if (otherEnd != nullptr)
 	    {
 	   		m_eParameter_Attribute_eOperation->setEOpposite(otherEnd);
@@ -2324,12 +2249,9 @@ void EcorePackageImpl::initializeEReferenceContent()
 		if (!defaultValue.empty())
 		{
 			m_eReference_Attribute_eKeys->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_eReference_Attribute_eKeys->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_eReference_Attribute_eOpposite->setName("eOpposite");
 	m_eReference_Attribute_eOpposite->setEType(getEReference_Class());
@@ -2349,12 +2271,9 @@ void EcorePackageImpl::initializeEReferenceContent()
 		if (!defaultValue.empty())
 		{
 			m_eReference_Attribute_eOpposite->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_eReference_Attribute_eOpposite->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_eReference_Attribute_eReferenceType->setName("eReferenceType");
 	m_eReference_Attribute_eReferenceType->setEType(getEClass_Class());
@@ -2374,12 +2293,9 @@ void EcorePackageImpl::initializeEReferenceContent()
 		if (!defaultValue.empty())
 		{
 			m_eReference_Attribute_eReferenceType->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_eReference_Attribute_eReferenceType->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	
@@ -2621,8 +2537,8 @@ void EcorePackageImpl::initializeEStructuralFeatureContent()
 		if (!defaultValue.empty())
 		{
 			m_eStructuralFeature_Attribute_eContainingClass->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = getEClass_Attribute_eStructuralFeatures();
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = ecore::EcorePackage::eInstance()->getEClass_Attribute_eStructuralFeatures();
 		if (otherEnd != nullptr)
 	    {
 	   		m_eStructuralFeature_Attribute_eContainingClass->setEOpposite(otherEnd);
@@ -2673,12 +2589,9 @@ void EcorePackageImpl::initializeETypeParameterContent()
 		if (!defaultValue.empty())
 		{
 			m_eTypeParameter_Attribute_eBounds->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_eTypeParameter_Attribute_eBounds->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	
@@ -2829,12 +2742,9 @@ void EcorePackageImpl::initializeETypedElementContent()
 		if (!defaultValue.empty())
 		{
 			m_eTypedElement_Attribute_eGenericType->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_eTypedElement_Attribute_eGenericType->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_eTypedElement_Attribute_eType->setName("eType");
 	m_eTypedElement_Attribute_eType->setEType(getEClassifier_Class());
@@ -2854,12 +2764,9 @@ void EcorePackageImpl::initializeETypedElementContent()
 		if (!defaultValue.empty())
 		{
 			m_eTypedElement_Attribute_eType->setDefaultValueLiteral(defaultValue);
-		}
-		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
-		if (otherEnd != nullptr)
-	    {
-	   		m_eTypedElement_Attribute_eType->setEOpposite(otherEnd);
-	    }
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
 	
@@ -2935,3 +2842,4 @@ void EcorePackageImpl::initializePackageEDataTypes()
 	m_eTreeIterator_Class->setSerializable(false);
 	
 }
+

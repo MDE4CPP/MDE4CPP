@@ -18,20 +18,18 @@
 #include <iostream>
 #include <sstream>
 
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "fUML/impl/FUMLPackageImpl.hpp"
+
+//Includes from codegen annotation
 #include "fUML/Semantics/SimpleClassifiers/IntegerValue.hpp"
-#include "fUML/FUMLFactory.hpp"
+#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "uml/LiteralInteger.hpp"
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -43,10 +41,15 @@
 
 #include "uml/ValueSpecification.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
+//Factories an Package includes
+#include "fUML/Semantics/Values/Impl/ValuesFactoryImpl.hpp"
+#include "fUML/Semantics/Values/Impl/ValuesPackageImpl.hpp"
+
+#include "fUML/Semantics/SemanticsFactory.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -107,7 +110,7 @@ std::shared_ptr<ecore::EObject>  LiteralIntegerEvaluationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> LiteralIntegerEvaluationImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getLiteralIntegerEvaluation_Class();
+	return fUML::Semantics::Values::ValuesPackage::eInstance()->getLiteralIntegerEvaluation_Class();
 }
 
 //*********************************
@@ -122,7 +125,7 @@ std::shared_ptr<fUML::Semantics::Values::Value> LiteralIntegerEvaluationImpl::ev
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	std::shared_ptr<uml::LiteralInteger> literal = std::dynamic_pointer_cast<uml::LiteralInteger>(getSpecification());
-	std::shared_ptr<fUML::Semantics::SimpleClassifiers::IntegerValue> integerValue(FUMLFactory::eInstance()->createIntegerValue());
+	std::shared_ptr<fUML::Semantics::SimpleClassifiers::IntegerValue> integerValue(fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createIntegerValue());
     integerValue ->setType(this->getType("Integer"));
     integerValue ->setValue(literal->getValue());
 
@@ -191,11 +194,10 @@ void LiteralIntegerEvaluationImpl::load(std::shared_ptr<persistence::interfaces:
 	// Create new objects (from references (containment == true))
 	//
 	// get FUMLFactory
-	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -205,11 +207,12 @@ void LiteralIntegerEvaluationImpl::loadAttributes(std::shared_ptr<persistence::i
 	LiteralEvaluationImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void LiteralIntegerEvaluationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+void LiteralIntegerEvaluationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<fUML::Semantics::Values::ValuesFactory> modelFactory=fUML::Semantics::Values::ValuesFactory::eInstance();
 
-
-	LiteralEvaluationImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	LiteralEvaluationImpl::loadNode(nodeName, loadHandler);
 }
 
 void LiteralIntegerEvaluationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
@@ -237,7 +240,7 @@ void LiteralIntegerEvaluationImpl::saveContent(std::shared_ptr<persistence::inte
 {
 	try
 	{
-		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+		std::shared_ptr<fUML::Semantics::Values::ValuesPackage> package = fUML::Semantics::Values::ValuesPackage::eInstance();
 
 	
 

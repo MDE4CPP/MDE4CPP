@@ -13,7 +13,7 @@
 //Model includes
 #include "../GetNextEventStrategy.hpp"
 
-#include "fUML/impl/FUMLFactoryImpl.hpp"
+#include "fUML/Semantics/CommonBehavior/Impl/CommonBehaviorFactoryImpl.hpp"
 #include "fUML/Semantics/Loci/impl/SemanticStrategyImpl.hpp"
 
 //*********************************
@@ -29,7 +29,7 @@ namespace fUML::Semantics::CommonBehavior
 			GetNextEventStrategyImpl& operator=(GetNextEventStrategyImpl const&) = delete;
 
 		protected:
-			friend class fUML::FUMLFactoryImpl;
+			friend class fUML::Semantics::CommonBehavior::CommonBehaviorFactoryImpl;
 			GetNextEventStrategyImpl();
 			virtual std::shared_ptr<GetNextEventStrategy> getThisGetNextEventStrategyPtr() const;
 			virtual void setThisGetNextEventStrategyPtr(std::weak_ptr<GetNextEventStrategy> thisGetNextEventStrategyPtr);
@@ -79,7 +79,7 @@ namespace fUML::Semantics::CommonBehavior
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
 			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;

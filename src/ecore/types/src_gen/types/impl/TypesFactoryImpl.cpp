@@ -4,8 +4,7 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EClass.hpp"
-
-#include "types/TypesPackage.hpp"
+#include "types/typesPackage.hpp"
 
 
 
@@ -65,7 +64,3 @@ std::shared_ptr<ecore::EObject> TypesFactoryImpl::create(std::string _className,
 }
 
 
-std::shared_ptr<TypesPackage> TypesFactoryImpl::getTypesPackage() const
-{
-	return TypesPackage::eInstance();
-}

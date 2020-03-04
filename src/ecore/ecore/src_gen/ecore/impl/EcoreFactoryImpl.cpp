@@ -3,8 +3,7 @@
 #include <cassert>
 
 #include "abstractDataTypes/SubsetUnion.hpp"
-
-#include "ecore/EcorePackage.hpp"
+#include "ecore/ecorePackage.hpp"
 #include "ecore/impl/EAnnotationImpl.hpp"
 #include "ecore/impl/EAttributeImpl.hpp"
 #include "ecore/impl/EClassImpl.hpp"
@@ -807,7 +806,3 @@ std::shared_ptr<ETypeParameter> EcoreFactoryImpl::createETypeParameter_in_EConta
 	
 }
 
-std::shared_ptr<EcorePackage> EcoreFactoryImpl::getEcorePackage() const
-{
-	return EcorePackage::eInstance();
-}

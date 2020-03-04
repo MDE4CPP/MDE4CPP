@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -25,21 +24,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -63,10 +53,11 @@
 
 #include "uml/StringExpression.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/Impl/UmlFactoryImpl.hpp"
+#include "uml/Impl/UmlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -118,9 +109,6 @@ OccurrenceSpecificationImpl::~OccurrenceSpecificationImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			OccurrenceSpecificationImpl::OccurrenceSpecificationImpl(std::weak_ptr<uml::InteractionOperand > par_enclosingOperand)
 			:OccurrenceSpecificationImpl()
@@ -128,9 +116,6 @@ OccurrenceSpecificationImpl::~OccurrenceSpecificationImpl()
 			    m_enclosingOperand = par_enclosingOperand;
 				m_namespace = par_enclosingOperand;
 			}
-
-
-
 
 
 //Additional constructor for the containments back reference
@@ -142,18 +127,12 @@ OccurrenceSpecificationImpl::~OccurrenceSpecificationImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			OccurrenceSpecificationImpl::OccurrenceSpecificationImpl(std::weak_ptr<uml::Element > par_owner)
 			:OccurrenceSpecificationImpl()
 			{
 			    m_owner = par_owner;
 			}
-
-
-
 
 
 
@@ -227,7 +206,7 @@ std::shared_ptr<ecore::EObject>  OccurrenceSpecificationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> OccurrenceSpecificationImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getOccurrenceSpecification_Class();
+	return uml::UmlPackage::eInstance()->getOccurrenceSpecification_Class();
 }
 
 //*********************************
@@ -319,7 +298,7 @@ Any OccurrenceSpecificationImpl::eGet(int featureID, bool resolve, bool coreType
 {
 	switch(featureID)
 	{
-		case UmlPackage::OCCURRENCESPECIFICATION_ATTRIBUTE_TOAFTER:
+		case uml::UmlPackage::OCCURRENCESPECIFICATION_ATTRIBUTE_TOAFTER:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::GeneralOrdering>::iterator iter = m_toAfter->begin();
@@ -331,7 +310,7 @@ Any OccurrenceSpecificationImpl::eGet(int featureID, bool resolve, bool coreType
 			}
 			return eAny(tempList); //16413
 		}
-		case UmlPackage::OCCURRENCESPECIFICATION_ATTRIBUTE_TOBEFORE:
+		case uml::UmlPackage::OCCURRENCESPECIFICATION_ATTRIBUTE_TOBEFORE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::GeneralOrdering>::iterator iter = m_toBefore->begin();
@@ -350,9 +329,9 @@ bool OccurrenceSpecificationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::OCCURRENCESPECIFICATION_ATTRIBUTE_TOAFTER:
+		case uml::UmlPackage::OCCURRENCESPECIFICATION_ATTRIBUTE_TOAFTER:
 			return getToAfter() != nullptr; //16413
-		case UmlPackage::OCCURRENCESPECIFICATION_ATTRIBUTE_TOBEFORE:
+		case uml::UmlPackage::OCCURRENCESPECIFICATION_ATTRIBUTE_TOBEFORE:
 			return getToBefore() != nullptr; //16414
 	}
 	return InteractionFragmentImpl::internalEIsSet(featureID);
@@ -361,7 +340,7 @@ bool OccurrenceSpecificationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::OCCURRENCESPECIFICATION_ATTRIBUTE_TOAFTER:
+		case uml::UmlPackage::OCCURRENCESPECIFICATION_ATTRIBUTE_TOAFTER:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -397,7 +376,7 @@ bool OccurrenceSpecificationImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case UmlPackage::OCCURRENCESPECIFICATION_ATTRIBUTE_TOBEFORE:
+		case uml::UmlPackage::OCCURRENCESPECIFICATION_ATTRIBUTE_TOBEFORE:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -450,11 +429,10 @@ void OccurrenceSpecificationImpl::load(std::shared_ptr<persistence::interfaces::
 	// Create new objects (from references (containment == true))
 	//
 	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -490,18 +468,19 @@ void OccurrenceSpecificationImpl::loadAttributes(std::shared_ptr<persistence::in
 	InteractionFragmentImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void OccurrenceSpecificationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void OccurrenceSpecificationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
 
-
-	InteractionFragmentImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	InteractionFragmentImpl::loadNode(nodeName, loadHandler);
 }
 
 void OccurrenceSpecificationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
-		case UmlPackage::OCCURRENCESPECIFICATION_ATTRIBUTE_TOAFTER:
+		case uml::UmlPackage::OCCURRENCESPECIFICATION_ATTRIBUTE_TOAFTER:
 		{
 			std::shared_ptr<Bag<uml::GeneralOrdering>> _toAfter = getToAfter();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -515,7 +494,7 @@ void OccurrenceSpecificationImpl::resolveReferences(const int featureID, std::li
 			return;
 		}
 
-		case UmlPackage::OCCURRENCESPECIFICATION_ATTRIBUTE_TOBEFORE:
+		case uml::UmlPackage::OCCURRENCESPECIFICATION_ATTRIBUTE_TOBEFORE:
 		{
 			std::shared_ptr<Bag<uml::GeneralOrdering>> _toBefore = getToBefore();
 			for(std::shared_ptr<ecore::EObject> ref : references)

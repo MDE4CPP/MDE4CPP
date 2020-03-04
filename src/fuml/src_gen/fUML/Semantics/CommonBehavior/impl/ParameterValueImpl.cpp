@@ -17,20 +17,18 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "fUML/impl/FUMLPackageImpl.hpp"
-#include "fUML/FUMLFactory.hpp"
+
+//Includes from codegen annotation
+#include "fUML/Semantics/Values/ValuesPackage.hpp"
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -38,10 +36,15 @@
 
 #include "fUML/Semantics/Values/Value.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
+//Factories an Package includes
+#include "fUML/Semantics/CommonBehavior/Impl/CommonBehaviorFactoryImpl.hpp"
+#include "fUML/Semantics/CommonBehavior/Impl/CommonBehaviorPackageImpl.hpp"
+
+#include "fUML/Semantics/SemanticsFactory.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -119,7 +122,7 @@ std::shared_ptr<ecore::EObject>  ParameterValueImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ParameterValueImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getParameterValue_Class();
+	return fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getParameterValue_Class();
 }
 
 //*********************************
@@ -175,9 +178,9 @@ Any ParameterValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::PARAMETERVALUE_ATTRIBUTE_PARAMETER:
+		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_ATTRIBUTE_PARAMETER:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getParameter())); //870
-		case fUML::FUMLPackage::PARAMETERVALUE_ATTRIBUTE_VALUES:
+		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_ATTRIBUTE_VALUES:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<fUML::Semantics::Values::Value>::iterator iter = m_values->begin();
@@ -196,9 +199,9 @@ bool ParameterValueImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::PARAMETERVALUE_ATTRIBUTE_PARAMETER:
+		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_ATTRIBUTE_PARAMETER:
 			return getParameter() != nullptr; //870
-		case fUML::FUMLPackage::PARAMETERVALUE_ATTRIBUTE_VALUES:
+		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_ATTRIBUTE_VALUES:
 			return getValues() != nullptr; //871
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
@@ -207,7 +210,7 @@ bool ParameterValueImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::PARAMETERVALUE_ATTRIBUTE_PARAMETER:
+		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_ATTRIBUTE_PARAMETER:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -215,7 +218,7 @@ bool ParameterValueImpl::eSet(int featureID, Any newValue)
 			setParameter(_parameter); //870
 			return true;
 		}
-		case fUML::FUMLPackage::PARAMETERVALUE_ATTRIBUTE_VALUES:
+		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_ATTRIBUTE_VALUES:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -268,11 +271,10 @@ void ParameterValueImpl::load(std::shared_ptr<persistence::interfaces::XLoadHand
 	// Create new objects (from references (containment == true))
 	//
 	// get FUMLFactory
-	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -301,8 +303,9 @@ void ParameterValueImpl::loadAttributes(std::shared_ptr<persistence::interfaces:
 	ecore::EObjectImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void ParameterValueImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+void ParameterValueImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<fUML::Semantics::CommonBehavior::CommonBehaviorFactory> modelFactory=fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance();
 
 	try
 	{
@@ -332,15 +335,14 @@ void ParameterValueImpl::loadNode(std::string nodeName, std::shared_ptr<persiste
 	{
 		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
 	}
-
-	ecore::EObjectImpl::loadNode(nodeName, loadHandler, ecore::EcoreFactory::eInstance());
+	//load BasePackage Nodes
 }
 
 void ParameterValueImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::PARAMETERVALUE_ATTRIBUTE_PARAMETER:
+		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_ATTRIBUTE_PARAMETER:
 		{
 			if (references.size() == 1)
 			{
@@ -368,7 +370,7 @@ void ParameterValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 {
 	try
 	{
-		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+		std::shared_ptr<fUML::Semantics::CommonBehavior::CommonBehaviorPackage> package = fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance();
 
 	
 
@@ -384,7 +386,7 @@ void ParameterValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 		std::shared_ptr<Bag<fUML::Semantics::Values::Value>> list_values = this->getValues();
 		for (std::shared_ptr<fUML::Semantics::Values::Value> values : *list_values) 
 		{
-			saveHandler->addReference(values, "values", values->eClass() != package->fUML::FUMLPackage::eInstance()->getValue_Class());
+			saveHandler->addReference(values, "values", values->eClass() !=fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
 		}
 	}
 	catch (std::exception& e)

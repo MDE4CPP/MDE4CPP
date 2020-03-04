@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -26,21 +25,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -82,10 +72,11 @@
 
 #include "uml/StructuredActivityNode.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/Impl/UmlFactoryImpl.hpp"
+#include "uml/Impl/UmlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -135,9 +126,6 @@ TestIdentityActionImpl::~TestIdentityActionImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			TestIdentityActionImpl::TestIdentityActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
 			:TestIdentityActionImpl()
@@ -145,9 +133,6 @@ TestIdentityActionImpl::~TestIdentityActionImpl()
 			    m_inStructuredNode = par_inStructuredNode;
 				m_owner = par_inStructuredNode;
 			}
-
-
-
 
 
 //Additional constructor for the containments back reference
@@ -159,18 +144,12 @@ TestIdentityActionImpl::~TestIdentityActionImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			TestIdentityActionImpl::TestIdentityActionImpl(std::weak_ptr<uml::Element > par_owner)
 			:TestIdentityActionImpl()
 			{
 			    m_owner = par_owner;
 			}
-
-
-
 
 
 
@@ -320,7 +299,7 @@ std::shared_ptr<ecore::EObject>  TestIdentityActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> TestIdentityActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getTestIdentityAction_Class();
+	return uml::UmlPackage::eInstance()->getTestIdentityAction_Class();
 }
 
 //*********************************
@@ -450,11 +429,11 @@ Any TestIdentityActionImpl::eGet(int featureID, bool resolve, bool coreType) con
 {
 	switch(featureID)
 	{
-		case UmlPackage::TESTIDENTITYACTION_ATTRIBUTE_FIRST:
+		case uml::UmlPackage::TESTIDENTITYACTION_ATTRIBUTE_FIRST:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getFirst())); //23627
-		case UmlPackage::TESTIDENTITYACTION_ATTRIBUTE_RESULT:
+		case uml::UmlPackage::TESTIDENTITYACTION_ATTRIBUTE_RESULT:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getResult())); //23628
-		case UmlPackage::TESTIDENTITYACTION_ATTRIBUTE_SECOND:
+		case uml::UmlPackage::TESTIDENTITYACTION_ATTRIBUTE_SECOND:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSecond())); //23629
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
@@ -463,11 +442,11 @@ bool TestIdentityActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::TESTIDENTITYACTION_ATTRIBUTE_FIRST:
+		case uml::UmlPackage::TESTIDENTITYACTION_ATTRIBUTE_FIRST:
 			return getFirst() != nullptr; //23627
-		case UmlPackage::TESTIDENTITYACTION_ATTRIBUTE_RESULT:
+		case uml::UmlPackage::TESTIDENTITYACTION_ATTRIBUTE_RESULT:
 			return getResult() != nullptr; //23628
-		case UmlPackage::TESTIDENTITYACTION_ATTRIBUTE_SECOND:
+		case uml::UmlPackage::TESTIDENTITYACTION_ATTRIBUTE_SECOND:
 			return getSecond() != nullptr; //23629
 	}
 	return ActionImpl::internalEIsSet(featureID);
@@ -476,7 +455,7 @@ bool TestIdentityActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::TESTIDENTITYACTION_ATTRIBUTE_FIRST:
+		case uml::UmlPackage::TESTIDENTITYACTION_ATTRIBUTE_FIRST:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -484,7 +463,7 @@ bool TestIdentityActionImpl::eSet(int featureID, Any newValue)
 			setFirst(_first); //23627
 			return true;
 		}
-		case UmlPackage::TESTIDENTITYACTION_ATTRIBUTE_RESULT:
+		case uml::UmlPackage::TESTIDENTITYACTION_ATTRIBUTE_RESULT:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -492,7 +471,7 @@ bool TestIdentityActionImpl::eSet(int featureID, Any newValue)
 			setResult(_result); //23628
 			return true;
 		}
-		case UmlPackage::TESTIDENTITYACTION_ATTRIBUTE_SECOND:
+		case uml::UmlPackage::TESTIDENTITYACTION_ATTRIBUTE_SECOND:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -517,11 +496,10 @@ void TestIdentityActionImpl::load(std::shared_ptr<persistence::interfaces::XLoad
 	// Create new objects (from references (containment == true))
 	//
 	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -531,8 +509,9 @@ void TestIdentityActionImpl::loadAttributes(std::shared_ptr<persistence::interfa
 	ActionImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void TestIdentityActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void TestIdentityActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
 
 	try
 	{
@@ -592,8 +571,8 @@ void TestIdentityActionImpl::loadNode(std::string nodeName, std::shared_ptr<pers
 	{
 		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
 	}
-
-	ActionImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	ActionImpl::loadNode(nodeName, loadHandler);
 }
 
 void TestIdentityActionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)

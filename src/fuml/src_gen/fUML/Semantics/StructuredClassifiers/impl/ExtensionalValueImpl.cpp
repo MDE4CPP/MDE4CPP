@@ -17,20 +17,18 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "fUML/impl/FUMLPackageImpl.hpp"
+
+//Includes from codegen annotation
 #include "fUML/FUMLFactory.hpp"
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -40,10 +38,15 @@
 
 #include "fUML/Semantics/Loci/Locus.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
+//Factories an Package includes
+#include "fUML/Semantics/StructuredClassifiers/Impl/StructuredClassifiersFactoryImpl.hpp"
+#include "fUML/Semantics/StructuredClassifiers/Impl/StructuredClassifiersPackageImpl.hpp"
+
+#include "fUML/Semantics/SemanticsFactory.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -112,7 +115,7 @@ std::shared_ptr<ecore::EObject>  ExtensionalValueImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ExtensionalValueImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getExtensionalValue_Class();
+	return fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getExtensionalValue_Class();
 }
 
 //*********************************
@@ -172,7 +175,7 @@ Any ExtensionalValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::EXTENSIONALVALUE_ATTRIBUTE_LOCUS:
+		case fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::EXTENSIONALVALUE_ATTRIBUTE_LOCUS:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getLocus())); //521
 	}
 	return fUML::Semantics::SimpleClassifiers::CompoundValueImpl::eGet(featureID, resolve, coreType);
@@ -181,7 +184,7 @@ bool ExtensionalValueImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::EXTENSIONALVALUE_ATTRIBUTE_LOCUS:
+		case fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::EXTENSIONALVALUE_ATTRIBUTE_LOCUS:
 			return getLocus() != nullptr; //521
 	}
 	return fUML::Semantics::SimpleClassifiers::CompoundValueImpl::internalEIsSet(featureID);
@@ -190,7 +193,7 @@ bool ExtensionalValueImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::EXTENSIONALVALUE_ATTRIBUTE_LOCUS:
+		case fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::EXTENSIONALVALUE_ATTRIBUTE_LOCUS:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -215,11 +218,10 @@ void ExtensionalValueImpl::load(std::shared_ptr<persistence::interfaces::XLoadHa
 	// Create new objects (from references (containment == true))
 	//
 	// get FUMLFactory
-	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -248,18 +250,19 @@ void ExtensionalValueImpl::loadAttributes(std::shared_ptr<persistence::interface
 	fUML::Semantics::SimpleClassifiers::CompoundValueImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void ExtensionalValueImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+void ExtensionalValueImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<fUML::Semantics::StructuredClassifiers::StructuredClassifiersFactory> modelFactory=fUML::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance();
 
-
-	fUML::Semantics::SimpleClassifiers::CompoundValueImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	fUML::Semantics::SimpleClassifiers::CompoundValueImpl::loadNode(nodeName, loadHandler);
 }
 
 void ExtensionalValueImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::EXTENSIONALVALUE_ATTRIBUTE_LOCUS:
+		case fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::EXTENSIONALVALUE_ATTRIBUTE_LOCUS:
 		{
 			if (references.size() == 1)
 			{
@@ -297,7 +300,7 @@ void ExtensionalValueImpl::saveContent(std::shared_ptr<persistence::interfaces::
 {
 	try
 	{
-		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+		std::shared_ptr<fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage> package = fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance();
 
 	
 

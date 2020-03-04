@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -26,21 +25,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -84,10 +74,11 @@
 
 #include "uml/StructuredActivityNode.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/Impl/UmlFactoryImpl.hpp"
+#include "uml/Impl/UmlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -133,9 +124,6 @@ WriteStructuralFeatureActionImpl::~WriteStructuralFeatureActionImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			WriteStructuralFeatureActionImpl::WriteStructuralFeatureActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
 			:WriteStructuralFeatureActionImpl()
@@ -143,9 +131,6 @@ WriteStructuralFeatureActionImpl::~WriteStructuralFeatureActionImpl()
 			    m_inStructuredNode = par_inStructuredNode;
 				m_owner = par_inStructuredNode;
 			}
-
-
-
 
 
 //Additional constructor for the containments back reference
@@ -157,18 +142,12 @@ WriteStructuralFeatureActionImpl::~WriteStructuralFeatureActionImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			WriteStructuralFeatureActionImpl::WriteStructuralFeatureActionImpl(std::weak_ptr<uml::Element > par_owner)
 			:WriteStructuralFeatureActionImpl()
 			{
 			    m_owner = par_owner;
 			}
-
-
-
 
 
 
@@ -318,7 +297,7 @@ std::shared_ptr<ecore::EObject>  WriteStructuralFeatureActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> WriteStructuralFeatureActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getWriteStructuralFeatureAction_Class();
+	return uml::UmlPackage::eInstance()->getWriteStructuralFeatureAction_Class();
 }
 
 //*********************************
@@ -444,9 +423,9 @@ Any WriteStructuralFeatureActionImpl::eGet(int featureID, bool resolve, bool cor
 {
 	switch(featureID)
 	{
-		case UmlPackage::WRITESTRUCTURALFEATUREACTION_ATTRIBUTE_RESULT:
+		case uml::UmlPackage::WRITESTRUCTURALFEATUREACTION_ATTRIBUTE_RESULT:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getResult())); //25829
-		case UmlPackage::WRITESTRUCTURALFEATUREACTION_ATTRIBUTE_VALUE:
+		case uml::UmlPackage::WRITESTRUCTURALFEATUREACTION_ATTRIBUTE_VALUE:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getValue())); //25830
 	}
 	return StructuralFeatureActionImpl::eGet(featureID, resolve, coreType);
@@ -455,9 +434,9 @@ bool WriteStructuralFeatureActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::WRITESTRUCTURALFEATUREACTION_ATTRIBUTE_RESULT:
+		case uml::UmlPackage::WRITESTRUCTURALFEATUREACTION_ATTRIBUTE_RESULT:
 			return getResult() != nullptr; //25829
-		case UmlPackage::WRITESTRUCTURALFEATUREACTION_ATTRIBUTE_VALUE:
+		case uml::UmlPackage::WRITESTRUCTURALFEATUREACTION_ATTRIBUTE_VALUE:
 			return getValue() != nullptr; //25830
 	}
 	return StructuralFeatureActionImpl::internalEIsSet(featureID);
@@ -466,7 +445,7 @@ bool WriteStructuralFeatureActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::WRITESTRUCTURALFEATUREACTION_ATTRIBUTE_RESULT:
+		case uml::UmlPackage::WRITESTRUCTURALFEATUREACTION_ATTRIBUTE_RESULT:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -474,7 +453,7 @@ bool WriteStructuralFeatureActionImpl::eSet(int featureID, Any newValue)
 			setResult(_result); //25829
 			return true;
 		}
-		case UmlPackage::WRITESTRUCTURALFEATUREACTION_ATTRIBUTE_VALUE:
+		case uml::UmlPackage::WRITESTRUCTURALFEATUREACTION_ATTRIBUTE_VALUE:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -499,11 +478,10 @@ void WriteStructuralFeatureActionImpl::load(std::shared_ptr<persistence::interfa
 	// Create new objects (from references (containment == true))
 	//
 	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -513,8 +491,9 @@ void WriteStructuralFeatureActionImpl::loadAttributes(std::shared_ptr<persistenc
 	StructuralFeatureActionImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void WriteStructuralFeatureActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void WriteStructuralFeatureActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
 
 	try
 	{
@@ -525,7 +504,7 @@ void WriteStructuralFeatureActionImpl::loadNode(std::string nodeName, std::share
 			{
 				typeName = "OutputPin";
 			}
-			std::shared_ptr<ecore::EObject> result = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::OUTPUTPIN_ATTRIBUTE_WRITESTRUCTURALFEATUREACTION);
+			std::shared_ptr<ecore::EObject> result = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::UmlPackage::OUTPUTPIN_ATTRIBUTE_WRITESTRUCTURALFEATUREACTION);
 			if (result != nullptr)
 			{
 				loadHandler->handleChild(result);
@@ -540,7 +519,7 @@ void WriteStructuralFeatureActionImpl::loadNode(std::string nodeName, std::share
 			{
 				typeName = "InputPin";
 			}
-			std::shared_ptr<ecore::EObject> value = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::INPUTPIN_ATTRIBUTE_WRITESTRUCTURALFEATUREACTION);
+			std::shared_ptr<ecore::EObject> value = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::UmlPackage::INPUTPIN_ATTRIBUTE_WRITESTRUCTURALFEATUREACTION);
 			if (value != nullptr)
 			{
 				loadHandler->handleChild(value);
@@ -556,8 +535,8 @@ void WriteStructuralFeatureActionImpl::loadNode(std::string nodeName, std::share
 	{
 		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
 	}
-
-	StructuralFeatureActionImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	StructuralFeatureActionImpl::loadNode(nodeName, loadHandler);
 }
 
 void WriteStructuralFeatureActionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)

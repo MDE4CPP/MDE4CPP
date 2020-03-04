@@ -17,16 +17,18 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/Union.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "fUML/impl/FUMLPackageImpl.hpp"
+
+//Includes from codegen annotation
 #include "fUML/Semantics/CommonBehavior/Execution.hpp"
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "uml/InputPin.hpp"
 #include "uml/OutputPin.hpp"
 #include "uml/Parameter.hpp"
@@ -38,10 +40,6 @@
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -63,10 +61,15 @@
 
 #include "fUML/Semantics/Activities/Token.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
+//Factories an Package includes
+#include "fUML/Semantics/Actions/Impl/ActionsFactoryImpl.hpp"
+#include "fUML/Semantics/Actions/Impl/ActionsPackageImpl.hpp"
+
+#include "fUML/Semantics/SemanticsFactory.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -108,9 +111,6 @@ CallActionActivationImpl::~CallActionActivationImpl()
 			{
 			    m_group = par_group;
 			}
-
-
-
 
 
 
@@ -187,7 +187,7 @@ std::shared_ptr<ecore::EObject>  CallActionActivationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> CallActionActivationImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getCallActionActivation_Class();
+	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getCallActionActivation_Class();
 }
 
 //*********************************
@@ -219,7 +219,7 @@ void CallActionActivationImpl::doAction()
         	uml::ParameterDirectionKind direction=parameter->getDirection();
             if (direction == uml::ParameterDirectionKind::IN || direction == uml::ParameterDirectionKind::INOUT)
             {
-            	std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> parameterValue(fUML::FUMLFactory::eInstance()->createParameterValue());
+            	std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> parameterValue(fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createParameterValue());
                 parameterValue->setParameter(parameter);
 
                 std::shared_ptr<Bag<fUML::Semantics::Values::Value> > values = parameterValue->getValues();
@@ -262,7 +262,7 @@ void CallActionActivationImpl::doAction()
         			    {
         					DEBUG_MESSAGE(std::cout<<("[putToken] node = " + this->getNode()->getName())<<std::endl;)
 
-        					std::shared_ptr<fUML::Semantics::Activities::ObjectToken> token = fUML::FUMLFactory::eInstance()->createObjectToken();
+        					std::shared_ptr<fUML::Semantics::Activities::ObjectToken> token = fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createObjectToken();
         					token->setValue(value);
 
         					resultPinActivation->addToken(token);
@@ -363,7 +363,7 @@ Any CallActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) c
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::CALLACTIONACTIVATION_ATTRIBUTE_CALLEXECUTIONS:
+		case fUML::Semantics::Actions::ActionsPackage::CALLACTIONACTIVATION_ATTRIBUTE_CALLEXECUTIONS:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<fUML::Semantics::CommonBehavior::Execution>::iterator iter = m_callExecutions->begin();
@@ -382,7 +382,7 @@ bool CallActionActivationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::CALLACTIONACTIVATION_ATTRIBUTE_CALLEXECUTIONS:
+		case fUML::Semantics::Actions::ActionsPackage::CALLACTIONACTIVATION_ATTRIBUTE_CALLEXECUTIONS:
 			return getCallExecutions() != nullptr; //1410
 	}
 	return InvocationActionActivationImpl::internalEIsSet(featureID);
@@ -391,7 +391,7 @@ bool CallActionActivationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::CALLACTIONACTIVATION_ATTRIBUTE_CALLEXECUTIONS:
+		case fUML::Semantics::Actions::ActionsPackage::CALLACTIONACTIVATION_ATTRIBUTE_CALLEXECUTIONS:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -444,11 +444,10 @@ void CallActionActivationImpl::load(std::shared_ptr<persistence::interfaces::XLo
 	// Create new objects (from references (containment == true))
 	//
 	// get FUMLFactory
-	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -458,8 +457,9 @@ void CallActionActivationImpl::loadAttributes(std::shared_ptr<persistence::inter
 	InvocationActionActivationImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void CallActionActivationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+void CallActionActivationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<fUML::Semantics::Actions::ActionsFactory> modelFactory=fUML::Semantics::Actions::ActionsFactory::eInstance();
 
 	try
 	{
@@ -489,8 +489,8 @@ void CallActionActivationImpl::loadNode(std::string nodeName, std::shared_ptr<pe
 	{
 		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
 	}
-
-	InvocationActionActivationImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	InvocationActionActivationImpl::loadNode(nodeName, loadHandler);
 }
 
 void CallActionActivationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
@@ -521,7 +521,7 @@ void CallActionActivationImpl::saveContent(std::shared_ptr<persistence::interfac
 {
 	try
 	{
-		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+		std::shared_ptr<fUML::Semantics::Actions::ActionsPackage> package = fUML::Semantics::Actions::ActionsPackage::eInstance();
 
 	
 
@@ -534,7 +534,7 @@ void CallActionActivationImpl::saveContent(std::shared_ptr<persistence::interfac
 		std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::Execution>> list_callExecutions = this->getCallExecutions();
 		for (std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> callExecutions : *list_callExecutions) 
 		{
-			saveHandler->addReference(callExecutions, "callExecutions", callExecutions->eClass() != package->fUML::FUMLPackage::eInstance()->getExecution_Class());
+			saveHandler->addReference(callExecutions, "callExecutions", callExecutions->eClass() !=fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getExecution_Class());
 		}
 	}
 	catch (std::exception& e)

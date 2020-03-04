@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -25,25 +24,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -95,10 +81,11 @@
 
 #include "uml/Variable.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/Impl/UmlFactoryImpl.hpp"
+#include "uml/Impl/UmlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -155,13 +142,7 @@ SequenceNodeImpl::SequenceNodeImpl(std::weak_ptr<uml::Activity > par_Activity, c
 }
 
 
-
-
-
 //Additional constructor for the containments back reference
-
-
-
 
 
 //Additional constructor for the containments back reference
@@ -173,9 +154,6 @@ SequenceNodeImpl::SequenceNodeImpl(std::weak_ptr<uml::Activity > par_Activity, c
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			SequenceNodeImpl::SequenceNodeImpl(std::weak_ptr<uml::Namespace > par_namespace)
 			:SequenceNodeImpl()
@@ -183,9 +161,6 @@ SequenceNodeImpl::SequenceNodeImpl(std::weak_ptr<uml::Activity > par_Activity, c
 			    m_namespace = par_namespace;
 				m_owner = par_namespace;
 			}
-
-
-
 
 
 //Additional constructor for the containments back reference
@@ -196,9 +171,6 @@ SequenceNodeImpl::SequenceNodeImpl(std::weak_ptr<uml::Activity > par_Activity, c
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			SequenceNodeImpl::SequenceNodeImpl(std::weak_ptr<uml::ActivityGroup > par_superGroup)
 			:SequenceNodeImpl()
@@ -206,9 +178,6 @@ SequenceNodeImpl::SequenceNodeImpl(std::weak_ptr<uml::Activity > par_Activity, c
 			    m_superGroup = par_superGroup;
 				m_owner = par_superGroup;
 			}
-
-
-
 
 
 
@@ -428,7 +397,7 @@ std::shared_ptr<ecore::EObject>  SequenceNodeImpl::copy() const
 
 std::shared_ptr<ecore::EClass> SequenceNodeImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getSequenceNode_Class();
+	return uml::UmlPackage::eInstance()->getSequenceNode_Class();
 }
 
 //*********************************
@@ -544,7 +513,7 @@ Any SequenceNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::SEQUENCENODE_ATTRIBUTE_EXECUTABLENODE:
+		case uml::UmlPackage::SEQUENCENODE_ATTRIBUTE_EXECUTABLENODE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::ExecutableNode>::iterator iter = m_executableNode->begin();
@@ -563,7 +532,7 @@ bool SequenceNodeImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::SEQUENCENODE_ATTRIBUTE_EXECUTABLENODE:
+		case uml::UmlPackage::SEQUENCENODE_ATTRIBUTE_EXECUTABLENODE:
 			return getExecutableNode() != nullptr; //21544
 	}
 	return StructuredActivityNodeImpl::internalEIsSet(featureID);
@@ -572,7 +541,7 @@ bool SequenceNodeImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::SEQUENCENODE_ATTRIBUTE_EXECUTABLENODE:
+		case uml::UmlPackage::SEQUENCENODE_ATTRIBUTE_EXECUTABLENODE:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -625,11 +594,10 @@ void SequenceNodeImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandle
 	// Create new objects (from references (containment == true))
 	//
 	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -639,8 +607,9 @@ void SequenceNodeImpl::loadAttributes(std::shared_ptr<persistence::interfaces::X
 	StructuredActivityNodeImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void SequenceNodeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void SequenceNodeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
 
 	try
 	{
@@ -670,8 +639,8 @@ void SequenceNodeImpl::loadNode(std::string nodeName, std::shared_ptr<persistenc
 	{
 		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
 	}
-
-	StructuredActivityNodeImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	StructuredActivityNodeImpl::loadNode(nodeName, loadHandler);
 }
 
 void SequenceNodeImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
@@ -730,7 +699,7 @@ void SequenceNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 		std::shared_ptr<Bag<uml::ExecutableNode>> list_executableNode = this->getExecutableNode();
 		for (std::shared_ptr<uml::ExecutableNode> executableNode : *list_executableNode) 
 		{
-			saveHandler->addReference(executableNode, "executableNode", executableNode->eClass() != package->getExecutableNode_Class());
+			saveHandler->addReference(executableNode, "executableNode", executableNode->eClass() !=uml::UmlPackage::eInstance()->getExecutableNode_Class());
 		}
 	}
 	catch (std::exception& e)

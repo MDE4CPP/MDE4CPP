@@ -17,18 +17,19 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "fUML/impl/FUMLPackageImpl.hpp"
+
+//Includes from codegen annotation
 #include <algorithm>
 #include "uml/Classifier.hpp"
 #include "uml/Behavior.hpp"
 #include "uml/Class.hpp"
-#include "fUML/FUMLFactory.hpp"
+#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
+#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "fUML/Semantics/Loci/ExecutionFactory.hpp"
 #include "fUML/Semantics/StructuredClassifiers/ExtensionalValue.hpp"
 #include "fUML/Semantics/Loci/Executor.hpp"
@@ -39,8 +40,6 @@
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -56,10 +55,15 @@
 
 #include "fUML/Semantics/StructuredClassifiers/Object.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
+//Factories an Package includes
+#include "fUML/Semantics/Loci/Impl/LociFactoryImpl.hpp"
+#include "fUML/Semantics/Loci/Impl/LociPackageImpl.hpp"
+
+#include "fUML/Semantics/SemanticsFactory.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -157,7 +161,7 @@ std::shared_ptr<ecore::EObject>  LocusImpl::copy() const
 
 std::shared_ptr<ecore::EClass> LocusImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getLocus_Class();
+	return fUML::Semantics::Loci::LociPackage::eInstance()->getLocus_Class();
 }
 
 //*********************************
@@ -229,7 +233,7 @@ std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> LocusImpl::insta
     }
     else
     {
-        object = FUMLFactory::eInstance()->createObject();
+        object = fUML::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createObject();
         object->getTypes()->push_back(type);
         object->createFeatureValues();
         this->add(object);
@@ -330,9 +334,9 @@ Any LocusImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::LOCUS_ATTRIBUTE_EXECUTOR:
+		case fUML::Semantics::Loci::LociPackage::LOCUS_ATTRIBUTE_EXECUTOR:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getExecutor())); //770
-		case fUML::FUMLPackage::LOCUS_ATTRIBUTE_EXTENSIONALVALUES:
+		case fUML::Semantics::Loci::LociPackage::LOCUS_ATTRIBUTE_EXTENSIONALVALUES:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>::iterator iter = m_extensionalValues->begin();
@@ -344,7 +348,7 @@ Any LocusImpl::eGet(int featureID, bool resolve, bool coreType) const
 			}
 			return eAny(tempList); //772
 		}
-		case fUML::FUMLPackage::LOCUS_ATTRIBUTE_FACTORY:
+		case fUML::Semantics::Loci::LociPackage::LOCUS_ATTRIBUTE_FACTORY:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getFactory())); //771
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
@@ -353,11 +357,11 @@ bool LocusImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::LOCUS_ATTRIBUTE_EXECUTOR:
+		case fUML::Semantics::Loci::LociPackage::LOCUS_ATTRIBUTE_EXECUTOR:
 			return getExecutor() != nullptr; //770
-		case fUML::FUMLPackage::LOCUS_ATTRIBUTE_EXTENSIONALVALUES:
+		case fUML::Semantics::Loci::LociPackage::LOCUS_ATTRIBUTE_EXTENSIONALVALUES:
 			return getExtensionalValues() != nullptr; //772
-		case fUML::FUMLPackage::LOCUS_ATTRIBUTE_FACTORY:
+		case fUML::Semantics::Loci::LociPackage::LOCUS_ATTRIBUTE_FACTORY:
 			return getFactory() != nullptr; //771
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
@@ -366,7 +370,7 @@ bool LocusImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::LOCUS_ATTRIBUTE_EXECUTOR:
+		case fUML::Semantics::Loci::LociPackage::LOCUS_ATTRIBUTE_EXECUTOR:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -374,7 +378,7 @@ bool LocusImpl::eSet(int featureID, Any newValue)
 			setExecutor(_executor); //770
 			return true;
 		}
-		case fUML::FUMLPackage::LOCUS_ATTRIBUTE_EXTENSIONALVALUES:
+		case fUML::Semantics::Loci::LociPackage::LOCUS_ATTRIBUTE_EXTENSIONALVALUES:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -410,7 +414,7 @@ bool LocusImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case fUML::FUMLPackage::LOCUS_ATTRIBUTE_FACTORY:
+		case fUML::Semantics::Loci::LociPackage::LOCUS_ATTRIBUTE_FACTORY:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -435,11 +439,10 @@ void LocusImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> load
 	// Create new objects (from references (containment == true))
 	//
 	// get FUMLFactory
-	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -449,8 +452,9 @@ void LocusImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHan
 	ecore::EObjectImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void LocusImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+void LocusImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<fUML::Semantics::Loci::LociFactory> modelFactory=fUML::Semantics::Loci::LociFactory::eInstance();
 
 	try
 	{
@@ -461,7 +465,7 @@ void LocusImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inte
 			{
 				typeName = "Executor";
 			}
-			std::shared_ptr<ecore::EObject> executor = modelFactory->create(typeName, loadHandler->getCurrentObject(), fUML::FUMLPackage::EXECUTOR_ATTRIBUTE_LOCUS);
+			std::shared_ptr<ecore::EObject> executor = modelFactory->create(typeName, loadHandler->getCurrentObject(), fUML::Semantics::Loci::LociPackage::EXECUTOR_ATTRIBUTE_LOCUS);
 			if (executor != nullptr)
 			{
 				loadHandler->handleChild(executor);
@@ -494,7 +498,7 @@ void LocusImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inte
 			{
 				typeName = "ExecutionFactory";
 			}
-			std::shared_ptr<ecore::EObject> factory = modelFactory->create(typeName, loadHandler->getCurrentObject(), fUML::FUMLPackage::EXECUTIONFACTORY_ATTRIBUTE_LOCUS);
+			std::shared_ptr<ecore::EObject> factory = modelFactory->create(typeName, loadHandler->getCurrentObject(), fUML::Semantics::Loci::LociPackage::EXECUTIONFACTORY_ATTRIBUTE_LOCUS);
 			if (factory != nullptr)
 			{
 				loadHandler->handleChild(factory);
@@ -510,8 +514,7 @@ void LocusImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inte
 	{
 		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
 	}
-
-	ecore::EObjectImpl::loadNode(nodeName, loadHandler, ecore::EcoreFactory::eInstance());
+	//load BasePackage Nodes
 }
 
 void LocusImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
@@ -532,7 +535,7 @@ void LocusImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandle
 {
 	try
 	{
-		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+		std::shared_ptr<fUML::Semantics::Loci::LociPackage> package = fUML::Semantics::Loci::LociPackage::eInstance();
 
 	
 
@@ -545,21 +548,21 @@ void LocusImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandle
 		std::shared_ptr<fUML::Semantics::Loci::Executor > executor = this->getExecutor();
 		if (executor != nullptr)
 		{
-			saveHandler->addReference(executor, "executor", executor->eClass() != package->getExecutor_Class());
+			saveHandler->addReference(executor, "executor", executor->eClass() != fUML::Semantics::Loci::LociPackage::eInstance()->getExecutor_Class());
 		}
 
 		// Save 'extensionalValues'
 		std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>> list_extensionalValues = this->getExtensionalValues();
 		for (std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> extensionalValues : *list_extensionalValues) 
 		{
-			saveHandler->addReference(extensionalValues, "extensionalValues", extensionalValues->eClass() != package->fUML::FUMLPackage::eInstance()->getExtensionalValue_Class());
+			saveHandler->addReference(extensionalValues, "extensionalValues", extensionalValues->eClass() !=fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getExtensionalValue_Class());
 		}
 
 		// Save 'factory'
 		std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory > factory = this->getFactory();
 		if (factory != nullptr)
 		{
-			saveHandler->addReference(factory, "factory", factory->eClass() != package->getExecutionFactory_Class());
+			saveHandler->addReference(factory, "factory", factory->eClass() != fUML::Semantics::Loci::LociPackage::eInstance()->getExecutionFactory_Class());
 		}
 	}
 	catch (std::exception& e)

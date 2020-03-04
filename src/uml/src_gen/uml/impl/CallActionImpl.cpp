@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -26,21 +25,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -86,10 +76,11 @@
 
 #include "uml/StructuredActivityNode.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/Impl/UmlFactoryImpl.hpp"
+#include "uml/Impl/UmlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -143,9 +134,6 @@ CallActionImpl::~CallActionImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			CallActionImpl::CallActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
 			:CallActionImpl()
@@ -153,9 +141,6 @@ CallActionImpl::~CallActionImpl()
 			    m_inStructuredNode = par_inStructuredNode;
 				m_owner = par_inStructuredNode;
 			}
-
-
-
 
 
 //Additional constructor for the containments back reference
@@ -167,18 +152,12 @@ CallActionImpl::~CallActionImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			CallActionImpl::CallActionImpl(std::weak_ptr<uml::Element > par_owner)
 			:CallActionImpl()
 			{
 			    m_owner = par_owner;
 			}
-
-
-
 
 
 
@@ -328,7 +307,7 @@ std::shared_ptr<ecore::EObject>  CallActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> CallActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getCallAction_Class();
+	return uml::UmlPackage::eInstance()->getCallAction_Class();
 }
 
 //*********************************
@@ -456,9 +435,9 @@ Any CallActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::CALLACTION_ATTRIBUTE_ISSYNCHRONOUS:
+		case uml::UmlPackage::CALLACTION_ATTRIBUTE_ISSYNCHRONOUS:
 			return eAny(getIsSynchronous()); //2929
-		case UmlPackage::CALLACTION_ATTRIBUTE_RESULT:
+		case uml::UmlPackage::CALLACTION_ATTRIBUTE_RESULT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::OutputPin>::iterator iter = m_result->begin();
@@ -477,9 +456,9 @@ bool CallActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::CALLACTION_ATTRIBUTE_ISSYNCHRONOUS:
+		case uml::UmlPackage::CALLACTION_ATTRIBUTE_ISSYNCHRONOUS:
 			return getIsSynchronous() != true; //2929
-		case UmlPackage::CALLACTION_ATTRIBUTE_RESULT:
+		case uml::UmlPackage::CALLACTION_ATTRIBUTE_RESULT:
 			return getResult() != nullptr; //2930
 	}
 	return InvocationActionImpl::internalEIsSet(featureID);
@@ -488,14 +467,14 @@ bool CallActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::CALLACTION_ATTRIBUTE_ISSYNCHRONOUS:
+		case uml::UmlPackage::CALLACTION_ATTRIBUTE_ISSYNCHRONOUS:
 		{
 			// BOOST CAST
 			bool _isSynchronous = newValue->get<bool>();
 			setIsSynchronous(_isSynchronous); //2929
 			return true;
 		}
-		case UmlPackage::CALLACTION_ATTRIBUTE_RESULT:
+		case uml::UmlPackage::CALLACTION_ATTRIBUTE_RESULT:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -548,11 +527,10 @@ void CallActionImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler>
 	// Create new objects (from references (containment == true))
 	//
 	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -583,8 +561,9 @@ void CallActionImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLo
 	InvocationActionImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void CallActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void CallActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
 
 	try
 	{
@@ -595,7 +574,7 @@ void CallActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence:
 			{
 				typeName = "OutputPin";
 			}
-			std::shared_ptr<ecore::EObject> result = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::OUTPUTPIN_ATTRIBUTE_CALLACTION);
+			std::shared_ptr<ecore::EObject> result = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::UmlPackage::OUTPUTPIN_ATTRIBUTE_CALLACTION);
 			if (result != nullptr)
 			{
 				loadHandler->handleChild(result);
@@ -611,8 +590,8 @@ void CallActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence:
 	{
 		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
 	}
-
-	InvocationActionImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	InvocationActionImpl::loadNode(nodeName, loadHandler);
 }
 
 void CallActionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
@@ -664,7 +643,6 @@ void CallActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 			saveHandler->addReference(result, "result", result->eClass() != package->getOutputPin_Class());
 		}
 	
- 
 		// Add attributes
 		if ( this->eIsSet(package->getCallAction_Attribute_isSynchronous()) )
 		{

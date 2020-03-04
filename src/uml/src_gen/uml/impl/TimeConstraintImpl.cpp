@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -26,23 +25,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -64,10 +52,11 @@
 
 #include "uml/ValueSpecification.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/Impl/UmlFactoryImpl.hpp"
+#include "uml/Impl/UmlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -119,13 +108,7 @@ TimeConstraintImpl::TimeConstraintImpl(std::weak_ptr<uml::Namespace > par_Namesp
 }
 
 
-
-
-
 //Additional constructor for the containments back reference
-
-
-
 
 
 //Additional constructor for the containments back reference
@@ -134,9 +117,6 @@ TimeConstraintImpl::TimeConstraintImpl(std::weak_ptr<uml::Namespace > par_Namesp
 			{
 			    m_owner = par_owner;
 			}
-
-
-
 
 
 //Additional constructor for the containments back reference
@@ -148,9 +128,6 @@ TimeConstraintImpl::TimeConstraintImpl(std::weak_ptr<uml::Namespace > par_Namesp
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			TimeConstraintImpl::TimeConstraintImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
 			:TimeConstraintImpl()
@@ -158,9 +135,6 @@ TimeConstraintImpl::TimeConstraintImpl(std::weak_ptr<uml::Namespace > par_Namesp
 			    m_owningTemplateParameter = par_owningTemplateParameter;
 				m_owner = par_owningTemplateParameter;
 			}
-
-
-
 
 
 
@@ -232,7 +206,7 @@ std::shared_ptr<ecore::EObject>  TimeConstraintImpl::copy() const
 
 std::shared_ptr<ecore::EClass> TimeConstraintImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getTimeConstraint_Class();
+	return uml::UmlPackage::eInstance()->getTimeConstraint_Class();
 }
 
 //*********************************
@@ -323,7 +297,7 @@ Any TimeConstraintImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::TIMECONSTRAINT_ATTRIBUTE_FIRSTEVENT:
+		case uml::UmlPackage::TIMECONSTRAINT_ATTRIBUTE_FIRSTEVENT:
 			return eAny(getFirstEvent()); //23715
 	}
 	return IntervalConstraintImpl::eGet(featureID, resolve, coreType);
@@ -332,7 +306,7 @@ bool TimeConstraintImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::TIMECONSTRAINT_ATTRIBUTE_FIRSTEVENT:
+		case uml::UmlPackage::TIMECONSTRAINT_ATTRIBUTE_FIRSTEVENT:
 			return getFirstEvent() != true; //23715
 	}
 	return IntervalConstraintImpl::internalEIsSet(featureID);
@@ -341,7 +315,7 @@ bool TimeConstraintImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::TIMECONSTRAINT_ATTRIBUTE_FIRSTEVENT:
+		case uml::UmlPackage::TIMECONSTRAINT_ATTRIBUTE_FIRSTEVENT:
 		{
 			// BOOST CAST
 			bool _firstEvent = newValue->get<bool>();
@@ -365,11 +339,10 @@ void TimeConstraintImpl::load(std::shared_ptr<persistence::interfaces::XLoadHand
 	// Create new objects (from references (containment == true))
 	//
 	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -400,11 +373,12 @@ void TimeConstraintImpl::loadAttributes(std::shared_ptr<persistence::interfaces:
 	IntervalConstraintImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void TimeConstraintImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void TimeConstraintImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
 
-
-	IntervalConstraintImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	IntervalConstraintImpl::loadNode(nodeName, loadHandler);
 }
 
 void TimeConstraintImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
@@ -445,7 +419,6 @@ void TimeConstraintImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
 
 	
- 
 		// Add attributes
 		if ( this->eIsSet(package->getTimeConstraint_Attribute_firstEvent()) )
 		{

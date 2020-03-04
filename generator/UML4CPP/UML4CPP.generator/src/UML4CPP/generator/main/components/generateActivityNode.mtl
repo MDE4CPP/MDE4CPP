@@ -161,9 +161,13 @@
  * - initalize input and output pins
 */]
 [template private initializeActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(CallOperationAction))]
-[anActivityNode.memberName()/]->setOperation([anActivityNode.oclAsType(CallOperationAction).operation.generatePackageGetterCall()/]);
-[anActivityNode.oclAsType(CallOperationAction).input.initializePin()/]
-[anActivityNode.oclAsType(CallOperationAction).output.initializePin()/]
+[let action : CallOperationAction = self.oclAsType(CallOperationAction)]
+[action.memberName()/]->setOperation([action.operation.generatePackageGetterCall()/]);
+[for (inputPin : InputPin | action.input)]
+[inputPin.initializePin(inputPin = action.target)/]
+[/for]
+[action.output.initializePin()/]
+[/let]
 [/template]
 
 [**
@@ -196,7 +200,15 @@
  * - if pin is a target pin, add to input pin list of CallOperationAction instance
 */]
 [template private initializePin(pin : Pin)]
+[pin.initializePin(false)/]
+[/template]
+[template private initializePin(pin : Pin, isTarget : Boolean)]
 [pin.memberName()/]->setName("[pin.name/]");
 [pin.memberName()/]->setLower([pin.lower/]);
+<<<<<<< HEAD
 [pin.memberName()/]->setUpper([pin.upper/]);
+=======
+[pin.memberName()/]->setUpper([if (isTarget)]-1[else][pin.upper/][/if]);
+
+>>>>>>> 6da89415d34eadfee120c931945e66653629f773
 [/template]

@@ -13,7 +13,7 @@
 //Model includes
 #include "../DestroyLinkActionActivation.hpp"
 
-#include "fUML/impl/FUMLFactoryImpl.hpp"
+#include "fUML/Semantics/Actions/Impl/ActionsFactoryImpl.hpp"
 #include "fUML/Semantics/Actions/impl/WriteLinkActionActivationImpl.hpp"
 
 //*********************************
@@ -29,7 +29,7 @@ namespace fUML::Semantics::Actions
 			DestroyLinkActionActivationImpl& operator=(DestroyLinkActionActivationImpl const&) = delete;
 
 		protected:
-			friend class fUML::FUMLFactoryImpl;
+			friend class fUML::Semantics::Actions::ActionsFactoryImpl;
 			DestroyLinkActionActivationImpl();
 			virtual std::shared_ptr<DestroyLinkActionActivation> getThisDestroyLinkActionActivationPtr() const;
 			virtual void setThisDestroyLinkActionActivationPtr(std::weak_ptr<DestroyLinkActionActivation> thisDestroyLinkActionActivationPtr);
@@ -77,7 +77,7 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
 			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;

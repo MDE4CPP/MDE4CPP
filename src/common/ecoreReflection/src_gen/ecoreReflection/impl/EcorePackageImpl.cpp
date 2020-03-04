@@ -95,6 +95,7 @@ void EcorePackageImpl::createPackageActivities(std::shared_ptr<uml::Package> eco
 {
 }
 
+
 void EcorePackageImpl::createPackageClasses(std::shared_ptr<uml::Package> ecore, std::shared_ptr<uml::UmlFactory> factory)
 {
 	std::shared_ptr<uml::Constraint> con = nullptr;
@@ -865,6 +866,7 @@ void EcorePackageImpl::initializePackageContents(std::shared_ptr<uml::Package> e
 void EcorePackageImpl::initializePackageActivities()
 {
 }
+
 
 void EcorePackageImpl::initializePackageClasses()
 {

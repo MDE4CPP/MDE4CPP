@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -25,23 +24,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -99,10 +87,11 @@
 
 #include "uml/UseCase.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/Impl/UmlFactoryImpl.hpp"
+#include "uml/Impl/UmlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -156,18 +145,12 @@ EncapsulatedClassifierImpl::~EncapsulatedClassifierImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			EncapsulatedClassifierImpl::EncapsulatedClassifierImpl(std::weak_ptr<uml::Element > par_owner)
 			:EncapsulatedClassifierImpl()
 			{
 			    m_owner = par_owner;
 			}
-
-
-
 
 
 //Additional constructor for the containments back reference
@@ -191,9 +174,6 @@ EncapsulatedClassifierImpl::EncapsulatedClassifierImpl(std::weak_ptr<uml::Packag
 }
 
 
-
-
-
 //Additional constructor for the containments back reference
 			EncapsulatedClassifierImpl::EncapsulatedClassifierImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
 			:EncapsulatedClassifierImpl()
@@ -203,13 +183,7 @@ EncapsulatedClassifierImpl::EncapsulatedClassifierImpl(std::weak_ptr<uml::Packag
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
-
-
-
 
 
 
@@ -420,7 +394,7 @@ std::shared_ptr<ecore::EObject>  EncapsulatedClassifierImpl::copy() const
 
 std::shared_ptr<ecore::EClass> EncapsulatedClassifierImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getEncapsulatedClassifier_Class();
+	return uml::UmlPackage::eInstance()->getEncapsulatedClassifier_Class();
 }
 
 //*********************************
@@ -532,7 +506,7 @@ Any EncapsulatedClassifierImpl::eGet(int featureID, bool resolve, bool coreType)
 {
 	switch(featureID)
 	{
-		case UmlPackage::ENCAPSULATEDCLASSIFIER_ATTRIBUTE_OWNEDPORT:
+		case uml::UmlPackage::ENCAPSULATEDCLASSIFIER_ATTRIBUTE_OWNEDPORT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Port>::iterator iter = m_ownedPort->begin();
@@ -551,7 +525,7 @@ bool EncapsulatedClassifierImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::ENCAPSULATEDCLASSIFIER_ATTRIBUTE_OWNEDPORT:
+		case uml::UmlPackage::ENCAPSULATEDCLASSIFIER_ATTRIBUTE_OWNEDPORT:
 			return getOwnedPort() != nullptr; //8442
 	}
 	return StructuredClassifierImpl::internalEIsSet(featureID);
@@ -577,11 +551,10 @@ void EncapsulatedClassifierImpl::load(std::shared_ptr<persistence::interfaces::X
 	// Create new objects (from references (containment == true))
 	//
 	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -591,11 +564,12 @@ void EncapsulatedClassifierImpl::loadAttributes(std::shared_ptr<persistence::int
 	StructuredClassifierImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void EncapsulatedClassifierImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void EncapsulatedClassifierImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
 
-
-	StructuredClassifierImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	StructuredClassifierImpl::loadNode(nodeName, loadHandler);
 }
 
 void EncapsulatedClassifierImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)

@@ -57,6 +57,8 @@ void UmlPackageImpl::init(std::shared_ptr<ecore::EPackage> package)
     initializePackageContents();   
 }
 
+
+
 // Begin Class Abstraction
 std::shared_ptr<ecore::EClass> UmlPackageImpl::getAbstraction_Class() const
 {

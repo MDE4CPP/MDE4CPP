@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -26,21 +25,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -84,10 +74,11 @@
 
 #include "uml/StructuredActivityNode.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/Impl/UmlFactoryImpl.hpp"
+#include "uml/Impl/UmlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -133,9 +124,6 @@ ClearAssociationActionImpl::~ClearAssociationActionImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			ClearAssociationActionImpl::ClearAssociationActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
 			:ClearAssociationActionImpl()
@@ -143,9 +131,6 @@ ClearAssociationActionImpl::~ClearAssociationActionImpl()
 			    m_inStructuredNode = par_inStructuredNode;
 				m_owner = par_inStructuredNode;
 			}
-
-
-
 
 
 //Additional constructor for the containments back reference
@@ -157,18 +142,12 @@ ClearAssociationActionImpl::~ClearAssociationActionImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			ClearAssociationActionImpl::ClearAssociationActionImpl(std::weak_ptr<uml::Element > par_owner)
 			:ClearAssociationActionImpl()
 			{
 			    m_owner = par_owner;
 			}
-
-
-
 
 
 
@@ -302,7 +281,7 @@ std::shared_ptr<ecore::EObject>  ClearAssociationActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ClearAssociationActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getClearAssociationAction_Class();
+	return uml::UmlPackage::eInstance()->getClearAssociationAction_Class();
 }
 
 //*********************************
@@ -412,9 +391,9 @@ Any ClearAssociationActionImpl::eGet(int featureID, bool resolve, bool coreType)
 {
 	switch(featureID)
 	{
-		case UmlPackage::CLEARASSOCIATIONACTION_ATTRIBUTE_ASSOCIATION:
+		case uml::UmlPackage::CLEARASSOCIATIONACTION_ATTRIBUTE_ASSOCIATION:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getAssociation())); //4027
-		case UmlPackage::CLEARASSOCIATIONACTION_ATTRIBUTE_OBJECT:
+		case uml::UmlPackage::CLEARASSOCIATIONACTION_ATTRIBUTE_OBJECT:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getObject())); //4028
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
@@ -423,9 +402,9 @@ bool ClearAssociationActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::CLEARASSOCIATIONACTION_ATTRIBUTE_ASSOCIATION:
+		case uml::UmlPackage::CLEARASSOCIATIONACTION_ATTRIBUTE_ASSOCIATION:
 			return getAssociation() != nullptr; //4027
-		case UmlPackage::CLEARASSOCIATIONACTION_ATTRIBUTE_OBJECT:
+		case uml::UmlPackage::CLEARASSOCIATIONACTION_ATTRIBUTE_OBJECT:
 			return getObject() != nullptr; //4028
 	}
 	return ActionImpl::internalEIsSet(featureID);
@@ -434,7 +413,7 @@ bool ClearAssociationActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::CLEARASSOCIATIONACTION_ATTRIBUTE_ASSOCIATION:
+		case uml::UmlPackage::CLEARASSOCIATIONACTION_ATTRIBUTE_ASSOCIATION:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -442,7 +421,7 @@ bool ClearAssociationActionImpl::eSet(int featureID, Any newValue)
 			setAssociation(_association); //4027
 			return true;
 		}
-		case UmlPackage::CLEARASSOCIATIONACTION_ATTRIBUTE_OBJECT:
+		case uml::UmlPackage::CLEARASSOCIATIONACTION_ATTRIBUTE_OBJECT:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -467,11 +446,10 @@ void ClearAssociationActionImpl::load(std::shared_ptr<persistence::interfaces::X
 	// Create new objects (from references (containment == true))
 	//
 	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -500,8 +478,9 @@ void ClearAssociationActionImpl::loadAttributes(std::shared_ptr<persistence::int
 	ActionImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void ClearAssociationActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void ClearAssociationActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
 
 	try
 	{
@@ -529,15 +508,15 @@ void ClearAssociationActionImpl::loadNode(std::string nodeName, std::shared_ptr<
 	{
 		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
 	}
-
-	ActionImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	ActionImpl::loadNode(nodeName, loadHandler);
 }
 
 void ClearAssociationActionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
-		case UmlPackage::CLEARASSOCIATIONACTION_ATTRIBUTE_ASSOCIATION:
+		case uml::UmlPackage::CLEARASSOCIATIONACTION_ATTRIBUTE_ASSOCIATION:
 		{
 			if (references.size() == 1)
 			{

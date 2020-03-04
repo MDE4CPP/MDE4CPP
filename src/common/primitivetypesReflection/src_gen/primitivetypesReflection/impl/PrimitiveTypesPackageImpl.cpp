@@ -80,6 +80,7 @@ void PrimitiveTypesPackageImpl::createPackageActivities(std::shared_ptr<uml::Pac
 {
 }
 
+
 void PrimitiveTypesPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> primitiveTypes, std::shared_ptr<uml::UmlFactory> factory)
 {
 	std::shared_ptr<uml::Constraint> con = nullptr;
@@ -161,6 +162,7 @@ void PrimitiveTypesPackageImpl::initializePackageContents(std::shared_ptr<uml::P
 void PrimitiveTypesPackageImpl::initializePackageActivities()
 {
 }
+
 
 void PrimitiveTypesPackageImpl::initializePackageClasses()
 {

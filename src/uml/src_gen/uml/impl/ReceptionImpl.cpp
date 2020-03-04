@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -26,17 +25,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -76,10 +70,11 @@
 
 #include "uml/Type.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/Impl/UmlFactoryImpl.hpp"
+#include "uml/Impl/UmlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -121,18 +116,12 @@ ReceptionImpl::~ReceptionImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			ReceptionImpl::ReceptionImpl(std::weak_ptr<uml::Element > par_owner)
 			:ReceptionImpl()
 			{
 			    m_owner = par_owner;
 			}
-
-
-
 
 
 
@@ -257,7 +246,7 @@ std::shared_ptr<ecore::EObject>  ReceptionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ReceptionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getReception_Class();
+	return uml::UmlPackage::eInstance()->getReception_Class();
 }
 
 //*********************************
@@ -343,7 +332,7 @@ Any ReceptionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::RECEPTION_ATTRIBUTE_SIGNAL:
+		case uml::UmlPackage::RECEPTION_ATTRIBUTE_SIGNAL:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSignal())); //20326
 	}
 	return BehavioralFeatureImpl::eGet(featureID, resolve, coreType);
@@ -352,7 +341,7 @@ bool ReceptionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::RECEPTION_ATTRIBUTE_SIGNAL:
+		case uml::UmlPackage::RECEPTION_ATTRIBUTE_SIGNAL:
 			return getSignal() != nullptr; //20326
 	}
 	return BehavioralFeatureImpl::internalEIsSet(featureID);
@@ -361,7 +350,7 @@ bool ReceptionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::RECEPTION_ATTRIBUTE_SIGNAL:
+		case uml::UmlPackage::RECEPTION_ATTRIBUTE_SIGNAL:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -386,11 +375,10 @@ void ReceptionImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> 
 	// Create new objects (from references (containment == true))
 	//
 	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -419,18 +407,19 @@ void ReceptionImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoa
 	BehavioralFeatureImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void ReceptionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void ReceptionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
 
-
-	BehavioralFeatureImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	BehavioralFeatureImpl::loadNode(nodeName, loadHandler);
 }
 
 void ReceptionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
-		case UmlPackage::RECEPTION_ATTRIBUTE_SIGNAL:
+		case uml::UmlPackage::RECEPTION_ATTRIBUTE_SIGNAL:
 		{
 			if (references.size() == 1)
 			{

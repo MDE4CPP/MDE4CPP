@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -25,25 +24,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -119,10 +105,11 @@
 
 #include "uml/UseCase.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/Impl/UmlFactoryImpl.hpp"
+#include "uml/Impl/UmlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -163,9 +150,6 @@ OpaqueBehaviorImpl::~OpaqueBehaviorImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			OpaqueBehaviorImpl::OpaqueBehaviorImpl(std::weak_ptr<uml::Namespace > par_namespace)
 			:OpaqueBehaviorImpl()
@@ -175,18 +159,12 @@ OpaqueBehaviorImpl::~OpaqueBehaviorImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			OpaqueBehaviorImpl::OpaqueBehaviorImpl(std::weak_ptr<uml::Element > par_owner)
 			:OpaqueBehaviorImpl()
 			{
 			    m_owner = par_owner;
 			}
-
-
-
 
 
 //Additional constructor for the containments back reference
@@ -210,9 +188,6 @@ OpaqueBehaviorImpl::OpaqueBehaviorImpl(std::weak_ptr<uml::Package > par_Package,
 }
 
 
-
-
-
 //Additional constructor for the containments back reference
 			OpaqueBehaviorImpl::OpaqueBehaviorImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
 			:OpaqueBehaviorImpl()
@@ -222,13 +197,7 @@ OpaqueBehaviorImpl::OpaqueBehaviorImpl(std::weak_ptr<uml::Package > par_Package,
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
-
-
-
 
 
 
@@ -547,7 +516,7 @@ std::shared_ptr<ecore::EObject>  OpaqueBehaviorImpl::copy() const
 
 std::shared_ptr<ecore::EClass> OpaqueBehaviorImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getOpaqueBehavior_Class();
+	return uml::UmlPackage::eInstance()->getOpaqueBehavior_Class();
 }
 
 //*********************************
@@ -670,9 +639,9 @@ Any OpaqueBehaviorImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::OPAQUEBEHAVIOR_ATTRIBUTE_BODY:
+		case uml::UmlPackage::OPAQUEBEHAVIOR_ATTRIBUTE_BODY:
 			return eAny(getBody()); //16661
-		case UmlPackage::OPAQUEBEHAVIOR_ATTRIBUTE_LANGUAGE:
+		case uml::UmlPackage::OPAQUEBEHAVIOR_ATTRIBUTE_LANGUAGE:
 			return eAny(getLanguage()); //16662
 	}
 	return BehaviorImpl::eGet(featureID, resolve, coreType);
@@ -681,9 +650,9 @@ bool OpaqueBehaviorImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::OPAQUEBEHAVIOR_ATTRIBUTE_BODY:
+		case uml::UmlPackage::OPAQUEBEHAVIOR_ATTRIBUTE_BODY:
 			return !getBody()->empty(); //16661
-		case UmlPackage::OPAQUEBEHAVIOR_ATTRIBUTE_LANGUAGE:
+		case uml::UmlPackage::OPAQUEBEHAVIOR_ATTRIBUTE_LANGUAGE:
 			return !getLanguage()->empty(); //16662
 	}
 	return BehaviorImpl::internalEIsSet(featureID);
@@ -692,13 +661,13 @@ bool OpaqueBehaviorImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::OPAQUEBEHAVIOR_ATTRIBUTE_BODY:
+		case uml::UmlPackage::OPAQUEBEHAVIOR_ATTRIBUTE_BODY:
 		{
 			// BOOST CAST
 			// nothing to do
 			return true;
 		}
-		case UmlPackage::OPAQUEBEHAVIOR_ATTRIBUTE_LANGUAGE:
+		case uml::UmlPackage::OPAQUEBEHAVIOR_ATTRIBUTE_LANGUAGE:
 		{
 			// BOOST CAST
 			// nothing to do
@@ -721,11 +690,10 @@ void OpaqueBehaviorImpl::load(std::shared_ptr<persistence::interfaces::XLoadHand
 	// Create new objects (from references (containment == true))
 	//
 	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -735,8 +703,9 @@ void OpaqueBehaviorImpl::loadAttributes(std::shared_ptr<persistence::interfaces:
 	BehaviorImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void OpaqueBehaviorImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void OpaqueBehaviorImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
 	try
 	{
 		if (nodeName.compare("body") == 0)
@@ -764,8 +733,8 @@ void OpaqueBehaviorImpl::loadNode(std::string nodeName, std::shared_ptr<persiste
 		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
 	}
 
-
-	BehaviorImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	BehaviorImpl::loadNode(nodeName, loadHandler);
 }
 
 void OpaqueBehaviorImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
@@ -822,7 +791,6 @@ void OpaqueBehaviorImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
 
 	
- 
 		// Add attributes
 		if ( this->eIsSet(package->getOpaqueBehavior_Attribute_body()) )
 		{

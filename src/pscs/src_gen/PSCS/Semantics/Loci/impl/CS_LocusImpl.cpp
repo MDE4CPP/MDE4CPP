@@ -17,22 +17,20 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "PSCS/impl/PSCSPackageImpl.hpp"
-#include "fUML/FUMLFactory.hpp"
+
+//Includes from codegen annotation
 #include "uml/Behavior.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/CS_Object.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "PSCS/PSCSFactory.hpp"
-#include "PSCS/PSCSPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -48,10 +46,15 @@
 
 #include "fUML/Semantics/StructuredClassifiers/Object.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "PSCS/PSCSPackage.hpp"
+//Factories an Package includes
+#include "PSCS/Semantics/Loci/Impl/LociFactoryImpl.hpp"
+#include "PSCS/Semantics/Loci/Impl/LociPackageImpl.hpp"
+
+#include "PSCS/Semantics/SemanticsFactory.hpp"
+#include "PSCS/Semantics/SemanticsPackage.hpp"
 #include "PSCS/PSCSFactory.hpp"
+#include "PSCS/PSCSPackage.hpp"
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -130,7 +133,7 @@ std::shared_ptr<ecore::EObject>  CS_LocusImpl::copy() const
 
 std::shared_ptr<ecore::EClass> CS_LocusImpl::eStaticClass() const
 {
-	return PSCSPackageImpl::eInstance()->getCS_Locus_Class();
+	return PSCS::Semantics::Loci::LociPackage::eInstance()->getCS_Locus_Class();
 }
 
 //*********************************
@@ -152,7 +155,7 @@ std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> CS_LocusImpl::in
 		object = fUML::Semantics::Loci::LocusImpl::instantiate(type);
 	}
 	else  {
-		object = PSCS::PSCSFactory::eInstance()->createCS_Object();
+		object = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Object();
 		object->getTypes()->add(type);
 		object->createFeatureValues();
 		this->add(object);
@@ -222,11 +225,10 @@ void CS_LocusImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> l
 	// Create new objects (from references (containment == true))
 	//
 	// get PSCSFactory
-	std::shared_ptr<PSCS::PSCSFactory> modelFactory = PSCS::PSCSFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -236,11 +238,12 @@ void CS_LocusImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoad
 	fUML::Semantics::Loci::LocusImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void CS_LocusImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<PSCS::PSCSFactory> modelFactory)
+void CS_LocusImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<PSCS::Semantics::Loci::LociFactory> modelFactory=PSCS::Semantics::Loci::LociFactory::eInstance();
 
-
-	fUML::Semantics::Loci::LocusImpl::loadNode(nodeName, loadHandler, fUML::FUMLFactory::eInstance());
+	//load BasePackage Nodes
+	fUML::Semantics::Loci::LocusImpl::loadNode(nodeName, loadHandler);
 }
 
 void CS_LocusImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
@@ -262,7 +265,7 @@ void CS_LocusImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 {
 	try
 	{
-		std::shared_ptr<PSCS::PSCSPackage> package = PSCS::PSCSPackage::eInstance();
+		std::shared_ptr<PSCS::Semantics::Loci::LociPackage> package = PSCS::Semantics::Loci::LociPackage::eInstance();
 
 	
 

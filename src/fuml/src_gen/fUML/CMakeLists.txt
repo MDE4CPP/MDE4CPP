@@ -33,14 +33,72 @@ SET(CMAKE_CXX_FLAGS_RELEASE " -O3  ${ENABLED_DEBUG_MESSAGE}")
 string(REPLACE "\\" "/" MDE4CPP_HOME $ENV{MDE4CPP_HOME})
 
 SET(SOURCE_FILES
-	impl/FUMLFactoryImpl.cpp
+# Factories and packages
 	FUMLFactory.cpp
+	impl/FUMLFactoryImpl.cpp
+	FUMLPackage.cpp
 	impl/FUMLPackageImpl.cpp
 	impl/FUMLPackageImpl_Creation.cpp
 	impl/FUMLPackageImpl_Initialization.cpp
-	FUMLPackage.cpp
+	Semantics/SemanticsFactory.cpp
+	Semantics/impl/SemanticsFactoryImpl.cpp
+	Semantics/SemanticsPackage.cpp
+	Semantics/impl/SemanticsPackageImpl.cpp
+	Semantics/impl/SemanticsPackageImpl_Creation.cpp
+	Semantics/impl/SemanticsPackageImpl_Initialization.cpp
+	Semantics/Classification/ClassificationFactory.cpp
+	Semantics/Classification/impl/ClassificationFactoryImpl.cpp
+	Semantics/Classification/ClassificationPackage.cpp
+	Semantics/Classification/impl/ClassificationPackageImpl.cpp
+	Semantics/Classification/impl/ClassificationPackageImpl_Creation.cpp
+	Semantics/Classification/impl/ClassificationPackageImpl_Initialization.cpp
+	Semantics/Values/ValuesFactory.cpp
+	Semantics/Values/impl/ValuesFactoryImpl.cpp
+	Semantics/Values/ValuesPackage.cpp
+	Semantics/Values/impl/ValuesPackageImpl.cpp
+	Semantics/Values/impl/ValuesPackageImpl_Creation.cpp
+	Semantics/Values/impl/ValuesPackageImpl_Initialization.cpp
+	Semantics/SimpleClassifiers/SimpleClassifiersFactory.cpp
+	Semantics/SimpleClassifiers/impl/SimpleClassifiersFactoryImpl.cpp
+	Semantics/SimpleClassifiers/SimpleClassifiersPackage.cpp
+	Semantics/SimpleClassifiers/impl/SimpleClassifiersPackageImpl.cpp
+	Semantics/SimpleClassifiers/impl/SimpleClassifiersPackageImpl_Creation.cpp
+	Semantics/SimpleClassifiers/impl/SimpleClassifiersPackageImpl_Initialization.cpp
+	Semantics/StructuredClassifiers/StructuredClassifiersFactory.cpp
+	Semantics/StructuredClassifiers/impl/StructuredClassifiersFactoryImpl.cpp
+	Semantics/StructuredClassifiers/StructuredClassifiersPackage.cpp
+	Semantics/StructuredClassifiers/impl/StructuredClassifiersPackageImpl.cpp
+	Semantics/StructuredClassifiers/impl/StructuredClassifiersPackageImpl_Creation.cpp
+	Semantics/StructuredClassifiers/impl/StructuredClassifiersPackageImpl_Initialization.cpp
+	Semantics/CommonBehavior/CommonBehaviorFactory.cpp
+	Semantics/CommonBehavior/impl/CommonBehaviorFactoryImpl.cpp
+	Semantics/CommonBehavior/CommonBehaviorPackage.cpp
+	Semantics/CommonBehavior/impl/CommonBehaviorPackageImpl.cpp
+	Semantics/CommonBehavior/impl/CommonBehaviorPackageImpl_Creation.cpp
+	Semantics/CommonBehavior/impl/CommonBehaviorPackageImpl_Initialization.cpp
+	Semantics/Actions/ActionsFactory.cpp
+	Semantics/Actions/impl/ActionsFactoryImpl.cpp
+	Semantics/Actions/ActionsPackage.cpp
+	Semantics/Actions/impl/ActionsPackageImpl.cpp
+	Semantics/Actions/impl/ActionsPackageImpl_Creation.cpp
+	Semantics/Actions/impl/ActionsPackageImpl_Initialization.cpp
+	Semantics/Activities/ActivitiesFactory.cpp
+	Semantics/Activities/impl/ActivitiesFactoryImpl.cpp
+	Semantics/Activities/ActivitiesPackage.cpp
+	Semantics/Activities/impl/ActivitiesPackageImpl.cpp
+	Semantics/Activities/impl/ActivitiesPackageImpl_Creation.cpp
+	Semantics/Activities/impl/ActivitiesPackageImpl_Initialization.cpp
+	Semantics/Loci/LociFactory.cpp
+	Semantics/Loci/impl/LociFactoryImpl.cpp
+	Semantics/Loci/LociPackage.cpp
+	Semantics/Loci/impl/LociPackageImpl.cpp
+	Semantics/Loci/impl/LociPackageImpl_Creation.cpp
+	Semantics/Loci/impl/LociPackageImpl_Initialization.cpp
+	
+# Package plugin
 	impl/FUMLPluginImpl.cpp
 	FUMLPlugin.cpp
+# Package content
 	Semantics/Actions/impl/AcceptCallActionActivationImpl.cpp
 	Semantics/Actions/impl/AcceptCallActionActivationsImpl.cpp
 	Semantics/Actions/impl/AcceptEventActionActivationImpl.cpp

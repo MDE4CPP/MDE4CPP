@@ -18,11 +18,11 @@
 #include <iostream>
 #include <sstream>
 
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "fUML/impl/FUMLPackageImpl.hpp"
+
+//Includes from codegen annotation
 #include "abstractDataTypes/Subset.hpp"
 #include "fUML/FUMLFactory.hpp"
 #include "fUML/Semantics/SimpleClassifiers/IntegerValue.hpp"
@@ -35,8 +35,6 @@
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -48,10 +46,15 @@
 
 #include "uml/ValueSpecification.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
+//Factories an Package includes
+#include "fUML/Semantics/SimpleClassifiers/Impl/SimpleClassifiersFactoryImpl.hpp"
+#include "fUML/Semantics/SimpleClassifiers/Impl/SimpleClassifiersPackageImpl.hpp"
+
+#include "fUML/Semantics/SemanticsFactory.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -111,7 +114,7 @@ std::shared_ptr<ecore::EObject>  UnlimitedNaturalValueImpl::copy() const
 
 std::shared_ptr<ecore::EClass> UnlimitedNaturalValueImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getUnlimitedNaturalValue_Class();
+	return fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance()->getUnlimitedNaturalValue_Class();
 }
 
 //*********************************
@@ -137,7 +140,7 @@ bool UnlimitedNaturalValueImpl::equals(std::shared_ptr<fUML::Semantics::Values::
 		//generated from body annotation
 	bool isEqual = false;
 
-    if(otherValue != nullptr && otherValue->eClass()->getClassifierID() == fUML::FUMLPackage::UNLIMITEDNATURALVALUE_CLASS)
+    if(otherValue != nullptr && otherValue->eClass()->getClassifierID() == fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::UNLIMITEDNATURALVALUE_CLASS)
     {
 		std::shared_ptr<fUML::Semantics::SimpleClassifiers::UnlimitedNaturalValue> unValue = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::UnlimitedNaturalValue>(otherValue);
         isEqual = (unValue->getValue() == this->getValue());
@@ -166,7 +169,7 @@ std::string UnlimitedNaturalValueImpl::toString()
 
     if(this->getValue() >= 0)
     {
-        auto integerValue = FUMLFactory::eInstance()->createIntegerValue();
+        auto integerValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createIntegerValue();
         integerValue->setValue(this->getValue());
         stringValue = integerValue->toString();
     }
@@ -205,7 +208,7 @@ Any UnlimitedNaturalValueImpl::eGet(int featureID, bool resolve, bool coreType) 
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::UNLIMITEDNATURALVALUE_ATTRIBUTE_VALUE:
+		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::UNLIMITEDNATURALVALUE_ATTRIBUTE_VALUE:
 			return eAny(getValue()); //1171
 	}
 	return PrimitiveValueImpl::eGet(featureID, resolve, coreType);
@@ -214,7 +217,7 @@ bool UnlimitedNaturalValueImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::UNLIMITEDNATURALVALUE_ATTRIBUTE_VALUE:
+		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::UNLIMITEDNATURALVALUE_ATTRIBUTE_VALUE:
 			return getValue() != 0; //1171
 	}
 	return PrimitiveValueImpl::internalEIsSet(featureID);
@@ -223,7 +226,7 @@ bool UnlimitedNaturalValueImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::UNLIMITEDNATURALVALUE_ATTRIBUTE_VALUE:
+		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::UNLIMITEDNATURALVALUE_ATTRIBUTE_VALUE:
 		{
 			// BOOST CAST
 			int _value = newValue->get<int>();
@@ -247,11 +250,10 @@ void UnlimitedNaturalValueImpl::load(std::shared_ptr<persistence::interfaces::XL
 	// Create new objects (from references (containment == true))
 	//
 	// get FUMLFactory
-	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -282,11 +284,12 @@ void UnlimitedNaturalValueImpl::loadAttributes(std::shared_ptr<persistence::inte
 	PrimitiveValueImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void UnlimitedNaturalValueImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+void UnlimitedNaturalValueImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory> modelFactory=fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance();
 
-
-	PrimitiveValueImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	PrimitiveValueImpl::loadNode(nodeName, loadHandler);
 }
 
 void UnlimitedNaturalValueImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
@@ -314,10 +317,9 @@ void UnlimitedNaturalValueImpl::saveContent(std::shared_ptr<persistence::interfa
 {
 	try
 	{
-		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+		std::shared_ptr<fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage> package = fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance();
 
 	
- 
 		// Add attributes
 		if ( this->eIsSet(package->getUnlimitedNaturalValue_Attribute_value()) )
 		{

@@ -17,21 +17,19 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "PSCS/impl/PSCSPackageImpl.hpp"
+
+//Includes from codegen annotation
 #include "PSCS/Semantics/CommonBehavior/CS_EventOccurrence.hpp"
 #include "fUML/FUMLFactory.hpp"
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "PSCS/PSCSFactory.hpp"
-#include "PSCS/PSCSPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -55,10 +53,15 @@
 
 #include "fUML/Semantics/Values/Value.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "PSCS/PSCSPackage.hpp"
+//Factories an Package includes
+#include "PSCS/Semantics/CommonBehavior/Impl/CommonBehaviorFactoryImpl.hpp"
+#include "PSCS/Semantics/CommonBehavior/Impl/CommonBehaviorPackageImpl.hpp"
+
+#include "PSCS/Semantics/SemanticsFactory.hpp"
+#include "PSCS/Semantics/SemanticsPackage.hpp"
 #include "PSCS/PSCSFactory.hpp"
+#include "PSCS/PSCSPackage.hpp"
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -150,7 +153,7 @@ std::shared_ptr<ecore::EObject>  CS_CallEventExecutionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> CS_CallEventExecutionImpl::eStaticClass() const
 {
-	return PSCSPackageImpl::eInstance()->getCS_CallEventExecution_Class();
+	return PSCS::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getCS_CallEventExecution_Class();
 }
 
 //*********************************
@@ -168,7 +171,7 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> CS_CallEventEx
 	//generated from body annotation
 		// Wrap the created event occurrence within a CS_EventOccurrence which
 	// references the behavior port on which the call was dispatched.
-	std::shared_ptr<PSCS::Semantics::CommonBehavior::CS_EventOccurrence> wrappingEventOccurrence = PSCS::PSCSFactory::eInstance()->createCS_EventOccurrence();
+	std::shared_ptr<PSCS::Semantics::CommonBehavior::CS_EventOccurrence> wrappingEventOccurrence = PSCS::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createCS_EventOccurrence();
 	wrappingEventOccurrence->setInteractionPoint(this->getInteractionPoint());
 	wrappingEventOccurrence->setWrappedEventOccurrence(fUML::Semantics::CommonBehavior::CallEventExecutionImpl::createEventOccurrence());
 	return wrappingEventOccurrence;
@@ -181,7 +184,7 @@ std::shared_ptr<fUML::Semantics::Values::Value> CS_CallEventExecutionImpl::new_(
 	//generated from body annotation
 	// Create a new call event execution.
 
-return PSCS::PSCSFactory::eInstance()->createCS_CallEventExecution();
+return PSCS::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createCS_CallEventExecution();
 	//end of body
 }
 
@@ -224,7 +227,7 @@ Any CS_CallEventExecutionImpl::eGet(int featureID, bool resolve, bool coreType) 
 {
 	switch(featureID)
 	{
-		case PSCS::PSCSPackage::CS_CALLEVENTEXECUTION_ATTRIBUTE_INTERACTIONPOINT:
+		case PSCS::Semantics::CommonBehavior::CommonBehaviorPackage::CS_CALLEVENTEXECUTION_ATTRIBUTE_INTERACTIONPOINT:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getInteractionPoint())); //47
 	}
 	return fUML::Semantics::CommonBehavior::CallEventExecutionImpl::eGet(featureID, resolve, coreType);
@@ -233,7 +236,7 @@ bool CS_CallEventExecutionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case PSCS::PSCSPackage::CS_CALLEVENTEXECUTION_ATTRIBUTE_INTERACTIONPOINT:
+		case PSCS::Semantics::CommonBehavior::CommonBehaviorPackage::CS_CALLEVENTEXECUTION_ATTRIBUTE_INTERACTIONPOINT:
 			return getInteractionPoint() != nullptr; //47
 	}
 	return fUML::Semantics::CommonBehavior::CallEventExecutionImpl::internalEIsSet(featureID);
@@ -242,7 +245,7 @@ bool CS_CallEventExecutionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case PSCS::PSCSPackage::CS_CALLEVENTEXECUTION_ATTRIBUTE_INTERACTIONPOINT:
+		case PSCS::Semantics::CommonBehavior::CommonBehaviorPackage::CS_CALLEVENTEXECUTION_ATTRIBUTE_INTERACTIONPOINT:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -267,11 +270,10 @@ void CS_CallEventExecutionImpl::load(std::shared_ptr<persistence::interfaces::XL
 	// Create new objects (from references (containment == true))
 	//
 	// get PSCSFactory
-	std::shared_ptr<PSCS::PSCSFactory> modelFactory = PSCS::PSCSFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -300,18 +302,19 @@ void CS_CallEventExecutionImpl::loadAttributes(std::shared_ptr<persistence::inte
 	fUML::Semantics::CommonBehavior::CallEventExecutionImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void CS_CallEventExecutionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<PSCS::PSCSFactory> modelFactory)
+void CS_CallEventExecutionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<PSCS::Semantics::CommonBehavior::CommonBehaviorFactory> modelFactory=PSCS::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance();
 
-
-	fUML::Semantics::CommonBehavior::CallEventExecutionImpl::loadNode(nodeName, loadHandler, fUML::FUMLFactory::eInstance());
+	//load BasePackage Nodes
+	fUML::Semantics::CommonBehavior::CallEventExecutionImpl::loadNode(nodeName, loadHandler);
 }
 
 void CS_CallEventExecutionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
-		case PSCS::PSCSPackage::CS_CALLEVENTEXECUTION_ATTRIBUTE_INTERACTIONPOINT:
+		case PSCS::Semantics::CommonBehavior::CommonBehaviorPackage::CS_CALLEVENTEXECUTION_ATTRIBUTE_INTERACTIONPOINT:
 		{
 			if (references.size() == 1)
 			{
@@ -361,7 +364,7 @@ void CS_CallEventExecutionImpl::saveContent(std::shared_ptr<persistence::interfa
 {
 	try
 	{
-		std::shared_ptr<PSCS::PSCSPackage> package = PSCS::PSCSPackage::eInstance();
+		std::shared_ptr<PSCS::Semantics::CommonBehavior::CommonBehaviorPackage> package = PSCS::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance();
 
 	
 

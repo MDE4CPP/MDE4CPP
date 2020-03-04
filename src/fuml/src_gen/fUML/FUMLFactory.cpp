@@ -2,11 +2,11 @@
 #include "fUML/impl/FUMLFactoryImpl.hpp"
 
 using namespace fUML;
-
+				 
 //static initialisation
 std::shared_ptr<FUMLFactory> FUMLFactory::instance;
 
-std::shared_ptr<FUMLFactory>FUMLFactory::eInstance()
+std::shared_ptr<FUMLFactory> FUMLFactory::eInstance()
 {
 	if(!instance)
 	{

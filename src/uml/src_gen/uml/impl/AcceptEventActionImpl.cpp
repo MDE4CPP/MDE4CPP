@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -26,21 +25,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -84,10 +74,11 @@
 
 #include "uml/Trigger.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/Impl/UmlFactoryImpl.hpp"
+#include "uml/Impl/UmlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -157,9 +148,6 @@ AcceptEventActionImpl::~AcceptEventActionImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			AcceptEventActionImpl::AcceptEventActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
 			:AcceptEventActionImpl()
@@ -167,9 +155,6 @@ AcceptEventActionImpl::~AcceptEventActionImpl()
 			    m_inStructuredNode = par_inStructuredNode;
 				m_owner = par_inStructuredNode;
 			}
-
-
-
 
 
 //Additional constructor for the containments back reference
@@ -181,18 +166,12 @@ AcceptEventActionImpl::~AcceptEventActionImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			AcceptEventActionImpl::AcceptEventActionImpl(std::weak_ptr<uml::Element > par_owner)
 			:AcceptEventActionImpl()
 			{
 			    m_owner = par_owner;
 			}
-
-
-
 
 
 
@@ -348,7 +327,7 @@ std::shared_ptr<ecore::EObject>  AcceptEventActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> AcceptEventActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getAcceptEventAction_Class();
+	return uml::UmlPackage::eInstance()->getAcceptEventAction_Class();
 }
 
 //*********************************
@@ -479,9 +458,9 @@ Any AcceptEventActionImpl::eGet(int featureID, bool resolve, bool coreType) cons
 {
 	switch(featureID)
 	{
-		case UmlPackage::ACCEPTEVENTACTION_ATTRIBUTE_ISUNMARSHALL:
+		case uml::UmlPackage::ACCEPTEVENTACTION_ATTRIBUTE_ISUNMARSHALL:
 			return eAny(getIsUnmarshall()); //327
-		case UmlPackage::ACCEPTEVENTACTION_ATTRIBUTE_RESULT:
+		case uml::UmlPackage::ACCEPTEVENTACTION_ATTRIBUTE_RESULT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::OutputPin>::iterator iter = m_result->begin();
@@ -493,7 +472,7 @@ Any AcceptEventActionImpl::eGet(int featureID, bool resolve, bool coreType) cons
 			}
 			return eAny(tempList); //328
 		}
-		case UmlPackage::ACCEPTEVENTACTION_ATTRIBUTE_TRIGGER:
+		case uml::UmlPackage::ACCEPTEVENTACTION_ATTRIBUTE_TRIGGER:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Trigger>::iterator iter = m_trigger->begin();
@@ -512,11 +491,11 @@ bool AcceptEventActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::ACCEPTEVENTACTION_ATTRIBUTE_ISUNMARSHALL:
+		case uml::UmlPackage::ACCEPTEVENTACTION_ATTRIBUTE_ISUNMARSHALL:
 			return getIsUnmarshall() != false; //327
-		case UmlPackage::ACCEPTEVENTACTION_ATTRIBUTE_RESULT:
+		case uml::UmlPackage::ACCEPTEVENTACTION_ATTRIBUTE_RESULT:
 			return getResult() != nullptr; //328
-		case UmlPackage::ACCEPTEVENTACTION_ATTRIBUTE_TRIGGER:
+		case uml::UmlPackage::ACCEPTEVENTACTION_ATTRIBUTE_TRIGGER:
 			return getTrigger() != nullptr; //329
 	}
 	return ActionImpl::internalEIsSet(featureID);
@@ -525,14 +504,14 @@ bool AcceptEventActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::ACCEPTEVENTACTION_ATTRIBUTE_ISUNMARSHALL:
+		case uml::UmlPackage::ACCEPTEVENTACTION_ATTRIBUTE_ISUNMARSHALL:
 		{
 			// BOOST CAST
 			bool _isUnmarshall = newValue->get<bool>();
 			setIsUnmarshall(_isUnmarshall); //327
 			return true;
 		}
-		case UmlPackage::ACCEPTEVENTACTION_ATTRIBUTE_RESULT:
+		case uml::UmlPackage::ACCEPTEVENTACTION_ATTRIBUTE_RESULT:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -568,7 +547,7 @@ bool AcceptEventActionImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case UmlPackage::ACCEPTEVENTACTION_ATTRIBUTE_TRIGGER:
+		case uml::UmlPackage::ACCEPTEVENTACTION_ATTRIBUTE_TRIGGER:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -621,11 +600,10 @@ void AcceptEventActionImpl::load(std::shared_ptr<persistence::interfaces::XLoadH
 	// Create new objects (from references (containment == true))
 	//
 	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -656,8 +634,9 @@ void AcceptEventActionImpl::loadAttributes(std::shared_ptr<persistence::interfac
 	ActionImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void AcceptEventActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void AcceptEventActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
 
 	try
 	{
@@ -703,8 +682,8 @@ void AcceptEventActionImpl::loadNode(std::string nodeName, std::shared_ptr<persi
 	{
 		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
 	}
-
-	ActionImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	ActionImpl::loadNode(nodeName, loadHandler);
 }
 
 void AcceptEventActionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
@@ -759,7 +738,6 @@ void AcceptEventActionImpl::saveContent(std::shared_ptr<persistence::interfaces:
 			saveHandler->addReference(trigger, "trigger", trigger->eClass() != package->getTrigger_Class());
 		}
 	
- 
 		// Add attributes
 		if ( this->eIsSet(package->getAcceptEventAction_Attribute_isUnmarshall()) )
 		{

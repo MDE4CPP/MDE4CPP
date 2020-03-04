@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -26,21 +25,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -84,10 +74,11 @@
 
 #include "uml/StructuredActivityNode.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/Impl/UmlFactoryImpl.hpp"
+#include "uml/Impl/UmlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -137,9 +128,6 @@ ReadLinkObjectEndActionImpl::~ReadLinkObjectEndActionImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			ReadLinkObjectEndActionImpl::ReadLinkObjectEndActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
 			:ReadLinkObjectEndActionImpl()
@@ -147,9 +135,6 @@ ReadLinkObjectEndActionImpl::~ReadLinkObjectEndActionImpl()
 			    m_inStructuredNode = par_inStructuredNode;
 				m_owner = par_inStructuredNode;
 			}
-
-
-
 
 
 //Additional constructor for the containments back reference
@@ -161,18 +146,12 @@ ReadLinkObjectEndActionImpl::~ReadLinkObjectEndActionImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			ReadLinkObjectEndActionImpl::ReadLinkObjectEndActionImpl(std::weak_ptr<uml::Element > par_owner)
 			:ReadLinkObjectEndActionImpl()
 			{
 			    m_owner = par_owner;
 			}
-
-
-
 
 
 
@@ -315,7 +294,7 @@ std::shared_ptr<ecore::EObject>  ReadLinkObjectEndActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ReadLinkObjectEndActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getReadLinkObjectEndAction_Class();
+	return uml::UmlPackage::eInstance()->getReadLinkObjectEndAction_Class();
 }
 
 //*********************************
@@ -469,11 +448,11 @@ Any ReadLinkObjectEndActionImpl::eGet(int featureID, bool resolve, bool coreType
 {
 	switch(featureID)
 	{
-		case UmlPackage::READLINKOBJECTENDACTION_ATTRIBUTE_END:
+		case uml::UmlPackage::READLINKOBJECTENDACTION_ATTRIBUTE_END:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEnd())); //19727
-		case UmlPackage::READLINKOBJECTENDACTION_ATTRIBUTE_OBJECT:
+		case uml::UmlPackage::READLINKOBJECTENDACTION_ATTRIBUTE_OBJECT:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getObject())); //19728
-		case UmlPackage::READLINKOBJECTENDACTION_ATTRIBUTE_RESULT:
+		case uml::UmlPackage::READLINKOBJECTENDACTION_ATTRIBUTE_RESULT:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getResult())); //19729
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
@@ -482,11 +461,11 @@ bool ReadLinkObjectEndActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::READLINKOBJECTENDACTION_ATTRIBUTE_END:
+		case uml::UmlPackage::READLINKOBJECTENDACTION_ATTRIBUTE_END:
 			return getEnd() != nullptr; //19727
-		case UmlPackage::READLINKOBJECTENDACTION_ATTRIBUTE_OBJECT:
+		case uml::UmlPackage::READLINKOBJECTENDACTION_ATTRIBUTE_OBJECT:
 			return getObject() != nullptr; //19728
-		case UmlPackage::READLINKOBJECTENDACTION_ATTRIBUTE_RESULT:
+		case uml::UmlPackage::READLINKOBJECTENDACTION_ATTRIBUTE_RESULT:
 			return getResult() != nullptr; //19729
 	}
 	return ActionImpl::internalEIsSet(featureID);
@@ -495,7 +474,7 @@ bool ReadLinkObjectEndActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::READLINKOBJECTENDACTION_ATTRIBUTE_END:
+		case uml::UmlPackage::READLINKOBJECTENDACTION_ATTRIBUTE_END:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -503,7 +482,7 @@ bool ReadLinkObjectEndActionImpl::eSet(int featureID, Any newValue)
 			setEnd(_end); //19727
 			return true;
 		}
-		case UmlPackage::READLINKOBJECTENDACTION_ATTRIBUTE_OBJECT:
+		case uml::UmlPackage::READLINKOBJECTENDACTION_ATTRIBUTE_OBJECT:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -511,7 +490,7 @@ bool ReadLinkObjectEndActionImpl::eSet(int featureID, Any newValue)
 			setObject(_object); //19728
 			return true;
 		}
-		case UmlPackage::READLINKOBJECTENDACTION_ATTRIBUTE_RESULT:
+		case uml::UmlPackage::READLINKOBJECTENDACTION_ATTRIBUTE_RESULT:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -536,11 +515,10 @@ void ReadLinkObjectEndActionImpl::load(std::shared_ptr<persistence::interfaces::
 	// Create new objects (from references (containment == true))
 	//
 	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -569,8 +547,9 @@ void ReadLinkObjectEndActionImpl::loadAttributes(std::shared_ptr<persistence::in
 	ActionImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void ReadLinkObjectEndActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void ReadLinkObjectEndActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
 
 	try
 	{
@@ -614,15 +593,15 @@ void ReadLinkObjectEndActionImpl::loadNode(std::string nodeName, std::shared_ptr
 	{
 		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
 	}
-
-	ActionImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	ActionImpl::loadNode(nodeName, loadHandler);
 }
 
 void ReadLinkObjectEndActionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
-		case UmlPackage::READLINKOBJECTENDACTION_ATTRIBUTE_END:
+		case uml::UmlPackage::READLINKOBJECTENDACTION_ATTRIBUTE_END:
 		{
 			if (references.size() == 1)
 			{

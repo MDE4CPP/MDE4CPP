@@ -28,13 +28,13 @@
 
 [template public generateDeletePrivatePackageMember(anENamedElement : ENamedElement)]
 [anENamedElement.getClassMemberName()/].reset();
-
 [/template]
 
 [template public generateModelElementGetter(anENamedElement : ENamedElement, anEPackage : EPackage, impl : Boolean) ? ( not hasImplOnly())]
 virtual std::shared_ptr<[metaModelTypeString(anENamedElement, anEPackage)/]> get[anENamedElement.getMemberNameUpperFirst()/]() const [abstractSufix(impl)/];
 
 [/template]
+
 
 [template public generateModelElementGetterImpl(anENamedElement : ENamedElement, anEPackage : EPackage)]
 std::shared_ptr<[metaModelTypeString(anENamedElement, anEPackage)/]> [anEPackage.name.toUpperFirst()/]PackageImpl::get[anENamedElement.getMemberNameUpperFirst()/]() const
@@ -44,7 +44,19 @@ std::shared_ptr<[metaModelTypeString(anENamedElement, anEPackage)/]> [anEPackage
 
 [/template]
 
+[template public generateSubPackageGetter(anEPackage : EPackage, impl : Boolean) ? ( not hasImplOnly()) ]			
+virtual std::shared_ptr<[anEPackage.name.toUpperFirst()/]::[anEPackage.name.toUpperFirst()/]Package> get[anEPackage.getMemberNameUpperFirst()/]Package() const [abstractSufix(impl)/];
+
+[/template]
+
+[template public generateSubPackageGetterImpl(aSubPackage: EPackage, anEPackage: EPackage)]
+std::shared_ptr<[aSubPackage.name.toUpperFirst()/]::[aSubPackage.name.toUpperFirst()/]Package> [anEPackage.name.toUpperFirst()/]PackageImpl::get[aSubPackage.getMemberNameUpperFirst()/]Package() const
+{
+	return [aSubPackage.name/]::[aSubPackage.name/]Package::eInstance();
+} 
+
+[/template]
+
 [template public generatePrivatePackageMember(anENamedElement : ENamedElement, anEPackage : EPackage)] 
 std::shared_ptr<[metaModelTypeString(anENamedElement, anEPackage)/]> [anENamedElement.getClassMemberName()/] = nullptr;
-
 [/template]

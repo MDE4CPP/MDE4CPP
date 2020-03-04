@@ -17,13 +17,13 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "PSCS/impl/PSCSPackageImpl.hpp"
+
+//Includes from codegen annotation
 #include "fUML/FUMLFactory.hpp"
 #include <stdexcept>
 
@@ -32,6 +32,7 @@
 #include "uml/ValueSpecification.hpp"
 #include "uml/InterfaceRealization.hpp"
 #include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
 #include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
 #include "fUML/Semantics/Values/Evaluation.hpp"
 #include "fUML/Semantics/Loci/ExecutionFactory.hpp"
@@ -39,16 +40,11 @@
 #include "PSCS/Semantics/StructuredClassifiers/CS_InteractionPoint.hpp"
 #include "PSCS/Semantics/Values/CS_OpaqueExpressionEvaluation.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/CS_Link.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "PSCS/PSCSFactory.hpp"
-#include "PSCS/PSCSPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -78,10 +74,15 @@
 
 #include "fUML/Semantics/Values/Value.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "PSCS/PSCSPackage.hpp"
+//Factories an Package includes
+#include "PSCS/Semantics/Actions/Impl/ActionsFactoryImpl.hpp"
+#include "PSCS/Semantics/Actions/Impl/ActionsPackageImpl.hpp"
+
+#include "PSCS/Semantics/SemanticsFactory.hpp"
+#include "PSCS/Semantics/SemanticsPackage.hpp"
 #include "PSCS/PSCSFactory.hpp"
+#include "PSCS/PSCSPackage.hpp"
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -172,7 +173,7 @@ std::shared_ptr<ecore::EObject>  CS_DefaultConstructStrategyImpl::copy() const
 
 std::shared_ptr<ecore::EClass> CS_DefaultConstructStrategyImpl::eStaticClass() const
 {
-	return PSCSPackageImpl::eInstance()->getCS_DefaultConstructStrategy_Class();
+	return PSCS::Semantics::Actions::ActionsPackage::eInstance()->getCS_DefaultConstructStrategy_Class();
 }
 
 //*********************************
@@ -191,7 +192,7 @@ void CS_DefaultConstructStrategyImpl::addStructuralFeatureValue(std::shared_ptr<
 		std::shared_ptr<Bag<fUML::Semantics::Values::Value>> values = featureValue->getValues();
 		if(std::dynamic_pointer_cast<uml::Port>(feature) != nullptr) {
 			// insert an interaction point
-			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> interactionPoint = PSCS::PSCSFactory::eInstance()->createCS_InteractionPoint();
+			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> interactionPoint = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_InteractionPoint();
 			interactionPoint->setDefiningPort(std::dynamic_pointer_cast<uml::Port>(feature));
 			interactionPoint->setReferent(std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Object>(value));
 			interactionPoint->setOwner(context);
@@ -199,7 +200,7 @@ void CS_DefaultConstructStrategyImpl::addStructuralFeatureValue(std::shared_ptr<
 		}
 		else if (std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Object>(value) != nullptr) {
 			// insert a reference
-			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference = PSCS::PSCSFactory::eInstance()->createCS_Reference();
+			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Reference();
 			reference->setCompositeReferent(std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Object>(value));
 			reference->setReferent(std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Object>(value));
 			values->add(reference);
@@ -250,7 +251,7 @@ std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> CS_DefaultConstr
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> referenceToContext = PSCS::PSCSFactory::eInstance()->createCS_Reference();
+			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> referenceToContext = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Reference();
 	referenceToContext->setReferent(context);
 	referenceToContext->setCompositeReferent(std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Object>(context));
 	// FIXME detect infinite recursive instantiation
@@ -330,7 +331,7 @@ void CS_DefaultConstructStrategyImpl::generateArrayPattern(std::shared_ptr<PSCS:
 	std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference>> end1Values = std::dynamic_pointer_cast<Bag<fUML::Semantics::StructuredClassifiers::Reference>>(this->getValuesFromConnectorEnd(context, end1));
 	std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference>> end2Values = std::dynamic_pointer_cast<Bag<fUML::Semantics::StructuredClassifiers::Reference>>(this->getValuesFromConnectorEnd(context, end2));
 	for(unsigned int i = 0; i < end1Values->size(); i++) {
-		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Link> link = PSCS::PSCSFactory::eInstance()->createCS_Link();
+		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Link> link = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Link();
 		if(connector->getType() == nullptr) {
 			link->setType(this->getDefaultAssociation());
 		}
@@ -374,7 +375,7 @@ void CS_DefaultConstructStrategyImpl::generateStarPattern(std::shared_ptr<PSCS::
 	std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference>> end2Values = std::dynamic_pointer_cast<Bag<fUML::Semantics::StructuredClassifiers::Reference>>(this->getValuesFromConnectorEnd(context, end2));
 	for(unsigned int i = 0; i < end1Values->size(); i++) {
 		for(unsigned int j = 0; j < end2Values->size(); j++) {
-			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Link> link = PSCS::PSCSFactory::eInstance()->createCS_Link();
+			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Link> link = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Link();
 			if(connector->getType() == nullptr) {
 				link->setType(this->getDefaultAssociation());
 			}
@@ -651,9 +652,9 @@ Any CS_DefaultConstructStrategyImpl::eGet(int featureID, bool resolve, bool core
 {
 	switch(featureID)
 	{
-		case PSCS::PSCSPackage::CS_DEFAULTCONSTRUCTSTRATEGY_ATTRIBUTE_DEFAULTASSOCIATION:
+		case PSCS::Semantics::Actions::ActionsPackage::CS_DEFAULTCONSTRUCTSTRATEGY_ATTRIBUTE_DEFAULTASSOCIATION:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getDefaultAssociation())); //101
-		case PSCS::PSCSPackage::CS_DEFAULTCONSTRUCTSTRATEGY_ATTRIBUTE_GENERATEDREALIZINGCLASSES:
+		case PSCS::Semantics::Actions::ActionsPackage::CS_DEFAULTCONSTRUCTSTRATEGY_ATTRIBUTE_GENERATEDREALIZINGCLASSES:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Class>::iterator iter = m_generatedRealizingClasses->begin();
@@ -665,7 +666,7 @@ Any CS_DefaultConstructStrategyImpl::eGet(int featureID, bool resolve, bool core
 			}
 			return eAny(tempList); //102
 		}
-		case PSCS::PSCSPackage::CS_DEFAULTCONSTRUCTSTRATEGY_ATTRIBUTE_LOCUS:
+		case PSCS::Semantics::Actions::ActionsPackage::CS_DEFAULTCONSTRUCTSTRATEGY_ATTRIBUTE_LOCUS:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getLocus())); //100
 	}
 	return CS_ConstructStrategyImpl::eGet(featureID, resolve, coreType);
@@ -674,11 +675,11 @@ bool CS_DefaultConstructStrategyImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case PSCS::PSCSPackage::CS_DEFAULTCONSTRUCTSTRATEGY_ATTRIBUTE_DEFAULTASSOCIATION:
+		case PSCS::Semantics::Actions::ActionsPackage::CS_DEFAULTCONSTRUCTSTRATEGY_ATTRIBUTE_DEFAULTASSOCIATION:
 			return getDefaultAssociation() != nullptr; //101
-		case PSCS::PSCSPackage::CS_DEFAULTCONSTRUCTSTRATEGY_ATTRIBUTE_GENERATEDREALIZINGCLASSES:
+		case PSCS::Semantics::Actions::ActionsPackage::CS_DEFAULTCONSTRUCTSTRATEGY_ATTRIBUTE_GENERATEDREALIZINGCLASSES:
 			return getGeneratedRealizingClasses() != nullptr; //102
-		case PSCS::PSCSPackage::CS_DEFAULTCONSTRUCTSTRATEGY_ATTRIBUTE_LOCUS:
+		case PSCS::Semantics::Actions::ActionsPackage::CS_DEFAULTCONSTRUCTSTRATEGY_ATTRIBUTE_LOCUS:
 			return getLocus() != nullptr; //100
 	}
 	return CS_ConstructStrategyImpl::internalEIsSet(featureID);
@@ -687,7 +688,7 @@ bool CS_DefaultConstructStrategyImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case PSCS::PSCSPackage::CS_DEFAULTCONSTRUCTSTRATEGY_ATTRIBUTE_DEFAULTASSOCIATION:
+		case PSCS::Semantics::Actions::ActionsPackage::CS_DEFAULTCONSTRUCTSTRATEGY_ATTRIBUTE_DEFAULTASSOCIATION:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -695,7 +696,7 @@ bool CS_DefaultConstructStrategyImpl::eSet(int featureID, Any newValue)
 			setDefaultAssociation(_defaultAssociation); //101
 			return true;
 		}
-		case PSCS::PSCSPackage::CS_DEFAULTCONSTRUCTSTRATEGY_ATTRIBUTE_GENERATEDREALIZINGCLASSES:
+		case PSCS::Semantics::Actions::ActionsPackage::CS_DEFAULTCONSTRUCTSTRATEGY_ATTRIBUTE_GENERATEDREALIZINGCLASSES:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -731,7 +732,7 @@ bool CS_DefaultConstructStrategyImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case PSCS::PSCSPackage::CS_DEFAULTCONSTRUCTSTRATEGY_ATTRIBUTE_LOCUS:
+		case PSCS::Semantics::Actions::ActionsPackage::CS_DEFAULTCONSTRUCTSTRATEGY_ATTRIBUTE_LOCUS:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -756,11 +757,10 @@ void CS_DefaultConstructStrategyImpl::load(std::shared_ptr<persistence::interfac
 	// Create new objects (from references (containment == true))
 	//
 	// get PSCSFactory
-	std::shared_ptr<PSCS::PSCSFactory> modelFactory = PSCS::PSCSFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -789,8 +789,9 @@ void CS_DefaultConstructStrategyImpl::loadAttributes(std::shared_ptr<persistence
 	CS_ConstructStrategyImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void CS_DefaultConstructStrategyImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<PSCS::PSCSFactory> modelFactory)
+void CS_DefaultConstructStrategyImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<PSCS::Semantics::Actions::ActionsFactory> modelFactory=PSCS::Semantics::Actions::ActionsFactory::eInstance();
 
 	try
 	{
@@ -835,15 +836,15 @@ void CS_DefaultConstructStrategyImpl::loadNode(std::string nodeName, std::shared
 	{
 		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
 	}
-
-	CS_ConstructStrategyImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	CS_ConstructStrategyImpl::loadNode(nodeName, loadHandler);
 }
 
 void CS_DefaultConstructStrategyImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
-		case PSCS::PSCSPackage::CS_DEFAULTCONSTRUCTSTRATEGY_ATTRIBUTE_LOCUS:
+		case PSCS::Semantics::Actions::ActionsPackage::CS_DEFAULTCONSTRUCTSTRATEGY_ATTRIBUTE_LOCUS:
 		{
 			if (references.size() == 1)
 			{
@@ -875,7 +876,7 @@ void CS_DefaultConstructStrategyImpl::saveContent(std::shared_ptr<persistence::i
 {
 	try
 	{
-		std::shared_ptr<PSCS::PSCSPackage> package = PSCS::PSCSPackage::eInstance();
+		std::shared_ptr<PSCS::Semantics::Actions::ActionsPackage> package = PSCS::Semantics::Actions::ActionsPackage::eInstance();
 
 	
 
@@ -898,7 +899,7 @@ void CS_DefaultConstructStrategyImpl::saveContent(std::shared_ptr<persistence::i
 		std::shared_ptr<Bag<uml::Class>> list_generatedRealizingClasses = this->getGeneratedRealizingClasses();
 		for (std::shared_ptr<uml::Class> generatedRealizingClasses : *list_generatedRealizingClasses) 
 		{
-			saveHandler->addReference(generatedRealizingClasses, "generatedRealizingClasses", generatedRealizingClasses->eClass() != uml::UmlPackage::eInstance()->getClass_Class());
+			saveHandler->addReference(generatedRealizingClasses, "generatedRealizingClasses", generatedRealizingClasses->eClass() !=uml::UmlPackage::eInstance()->getClass_Class());
 		}
 	}
 	catch (std::exception& e)

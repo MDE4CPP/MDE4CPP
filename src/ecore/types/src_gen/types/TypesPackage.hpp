@@ -18,6 +18,11 @@ namespace ecore
 
 namespace types 
 {
+
+}
+
+namespace types 
+{
 	/*!
 	The Metamodel Package for the types metamodel. This package is used to enable the reflection of model elements. It contains all model elements
 	which were described in an ecore file.
@@ -50,6 +55,8 @@ namespace types
 			virtual std::shared_ptr<ecore::EDataType> getReal_Class() const = 0;
 			virtual std::shared_ptr<ecore::EDataType> getString_Class() const = 0;
 			virtual std::shared_ptr<ecore::EDataType> getUnlimitedNatural_Class() const = 0;
+			
+
 			
 
 			//Singleton Instance and Getter

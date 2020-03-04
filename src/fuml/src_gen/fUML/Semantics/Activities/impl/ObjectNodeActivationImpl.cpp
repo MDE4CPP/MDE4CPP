@@ -17,13 +17,13 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "fUML/impl/FUMLPackageImpl.hpp"
+
+//Includes from codegen annotation
 #include "fUML/FUMLFactory.hpp"
 #include "fUML/Semantics/Activities/ObjectToken.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
@@ -31,10 +31,6 @@
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -48,10 +44,15 @@
 
 #include "fUML/Semantics/Activities/Token.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
+//Factories an Package includes
+#include "fUML/Semantics/Activities/Impl/ActivitiesFactoryImpl.hpp"
+#include "fUML/Semantics/Activities/Impl/ActivitiesPackageImpl.hpp"
+
+#include "fUML/Semantics/SemanticsFactory.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -88,9 +89,6 @@ ObjectNodeActivationImpl::~ObjectNodeActivationImpl()
 			{
 			    m_group = par_group;
 			}
-
-
-
 
 
 
@@ -138,7 +136,7 @@ std::shared_ptr<ecore::EObject>  ObjectNodeActivationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ObjectNodeActivationImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getObjectNodeActivation_Class();
+	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getObjectNodeActivation_Class();
 }
 
 //*********************************
@@ -257,7 +255,7 @@ void ObjectNodeActivationImpl::sendOffers(std::shared_ptr<Bag<fUML::Semantics::A
 	//generated from body annotation
 	if (tokens->size() == 0) 
 	{
-		std::shared_ptr<fUML::Semantics::Activities::ObjectToken> token = fUML::FUMLFactory::eInstance()->createObjectToken();
+		std::shared_ptr<fUML::Semantics::Activities::ObjectToken> token = fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createObjectToken();
 		token->setHolder(getThisObjectNodeActivationPtr());
 		token->setWithdrawn(false);
 		tokens->push_back(token);
@@ -334,7 +332,7 @@ Any ObjectNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType) c
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::OBJECTNODEACTIVATION_ATTRIBUTE_OFFEREDTOKENCOUNT:
+		case fUML::Semantics::Activities::ActivitiesPackage::OBJECTNODEACTIVATION_ATTRIBUTE_OFFEREDTOKENCOUNT:
 			return eAny(getOfferedTokenCount()); //826
 	}
 	return ActivityNodeActivationImpl::eGet(featureID, resolve, coreType);
@@ -343,7 +341,7 @@ bool ObjectNodeActivationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::OBJECTNODEACTIVATION_ATTRIBUTE_OFFEREDTOKENCOUNT:
+		case fUML::Semantics::Activities::ActivitiesPackage::OBJECTNODEACTIVATION_ATTRIBUTE_OFFEREDTOKENCOUNT:
 			return getOfferedTokenCount() != 0; //826
 	}
 	return ActivityNodeActivationImpl::internalEIsSet(featureID);
@@ -352,7 +350,7 @@ bool ObjectNodeActivationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::OBJECTNODEACTIVATION_ATTRIBUTE_OFFEREDTOKENCOUNT:
+		case fUML::Semantics::Activities::ActivitiesPackage::OBJECTNODEACTIVATION_ATTRIBUTE_OFFEREDTOKENCOUNT:
 		{
 			// BOOST CAST
 			int _offeredTokenCount = newValue->get<int>();
@@ -376,11 +374,10 @@ void ObjectNodeActivationImpl::load(std::shared_ptr<persistence::interfaces::XLo
 	// Create new objects (from references (containment == true))
 	//
 	// get FUMLFactory
-	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -411,11 +408,12 @@ void ObjectNodeActivationImpl::loadAttributes(std::shared_ptr<persistence::inter
 	ActivityNodeActivationImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void ObjectNodeActivationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+void ObjectNodeActivationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<fUML::Semantics::Activities::ActivitiesFactory> modelFactory=fUML::Semantics::Activities::ActivitiesFactory::eInstance();
 
-
-	ActivityNodeActivationImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	ActivityNodeActivationImpl::loadNode(nodeName, loadHandler);
 }
 
 void ObjectNodeActivationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
@@ -440,10 +438,9 @@ void ObjectNodeActivationImpl::saveContent(std::shared_ptr<persistence::interfac
 {
 	try
 	{
-		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+		std::shared_ptr<fUML::Semantics::Activities::ActivitiesPackage> package = fUML::Semantics::Activities::ActivitiesPackage::eInstance();
 
 	
- 
 		// Add attributes
 		if ( this->eIsSet(package->getObjectNodeActivation_Attribute_offeredTokenCount()) )
 		{

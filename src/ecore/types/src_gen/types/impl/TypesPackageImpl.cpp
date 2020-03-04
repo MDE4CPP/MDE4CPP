@@ -47,6 +47,8 @@ void TypesPackageImpl::init(std::shared_ptr<ecore::EPackage> package)
     initializePackageContents();   
 }
 
+
+
 std::shared_ptr<ecore::EDataType> TypesPackageImpl::getBoolean_Class() const
 {
 	return m_boolean_Class;

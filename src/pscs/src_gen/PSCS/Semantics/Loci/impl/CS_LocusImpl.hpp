@@ -13,7 +13,7 @@
 //Model includes
 #include "../CS_Locus.hpp"
 
-#include "PSCS/impl/PSCSFactoryImpl.hpp"
+#include "PSCS/Semantics/Loci/Impl/LociFactoryImpl.hpp"
 #include "fUML/Semantics/Loci/impl/LocusImpl.hpp"
 
 //*********************************
@@ -29,7 +29,7 @@ namespace PSCS::Semantics::Loci
 			CS_LocusImpl& operator=(CS_LocusImpl const&) = delete;
 
 		protected:
-			friend class PSCS::PSCSFactoryImpl;
+			friend class PSCS::Semantics::Loci::LociFactoryImpl;
 			CS_LocusImpl();
 			virtual std::shared_ptr<CS_Locus> getThisCS_LocusPtr() const;
 			virtual void setThisCS_LocusPtr(std::weak_ptr<CS_Locus> thisCS_LocusPtr);
@@ -75,7 +75,7 @@ namespace PSCS::Semantics::Loci
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<PSCS::PSCSFactory> modelFactory);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
 			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;

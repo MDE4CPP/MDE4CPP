@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -26,23 +25,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -102,10 +90,11 @@
 
 #include "uml/UseCase.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/Impl/UmlFactoryImpl.hpp"
+#include "uml/Impl/UmlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -227,18 +216,12 @@ InterfaceImpl::~InterfaceImpl()
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			InterfaceImpl::InterfaceImpl(std::weak_ptr<uml::Element > par_owner)
 			:InterfaceImpl()
 			{
 			    m_owner = par_owner;
 			}
-
-
-
 
 
 //Additional constructor for the containments back reference
@@ -262,9 +245,6 @@ InterfaceImpl::InterfaceImpl(std::weak_ptr<uml::Package > par_Package, const int
 }
 
 
-
-
-
 //Additional constructor for the containments back reference
 			InterfaceImpl::InterfaceImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
 			:InterfaceImpl()
@@ -274,13 +254,7 @@ InterfaceImpl::InterfaceImpl(std::weak_ptr<uml::Package > par_Package, const int
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
-
-
-
 
 
 
@@ -544,7 +518,7 @@ std::shared_ptr<ecore::EObject>  InterfaceImpl::copy() const
 
 std::shared_ptr<ecore::EClass> InterfaceImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getInterface_Class();
+	return uml::UmlPackage::eInstance()->getInterface_Class();
 }
 
 //*********************************
@@ -702,7 +676,7 @@ Any InterfaceImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::INTERFACE_ATTRIBUTE_NESTEDCLASSIFIER:
+		case uml::UmlPackage::INTERFACE_ATTRIBUTE_NESTEDCLASSIFIER:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Classifier>::iterator iter = m_nestedClassifier->begin();
@@ -714,7 +688,7 @@ Any InterfaceImpl::eGet(int featureID, bool resolve, bool coreType) const
 			}
 			return eAny(tempList); //12638
 		}
-		case UmlPackage::INTERFACE_ATTRIBUTE_OWNEDATTRIBUTE:
+		case uml::UmlPackage::INTERFACE_ATTRIBUTE_OWNEDATTRIBUTE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Property>::iterator iter = m_ownedAttribute->begin();
@@ -726,7 +700,7 @@ Any InterfaceImpl::eGet(int featureID, bool resolve, bool coreType) const
 			}
 			return eAny(tempList); //12639
 		}
-		case UmlPackage::INTERFACE_ATTRIBUTE_OWNEDOPERATION:
+		case uml::UmlPackage::INTERFACE_ATTRIBUTE_OWNEDOPERATION:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Operation>::iterator iter = m_ownedOperation->begin();
@@ -738,7 +712,7 @@ Any InterfaceImpl::eGet(int featureID, bool resolve, bool coreType) const
 			}
 			return eAny(tempList); //12643
 		}
-		case UmlPackage::INTERFACE_ATTRIBUTE_OWNEDRECEPTION:
+		case uml::UmlPackage::INTERFACE_ATTRIBUTE_OWNEDRECEPTION:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Reception>::iterator iter = m_ownedReception->begin();
@@ -750,9 +724,9 @@ Any InterfaceImpl::eGet(int featureID, bool resolve, bool coreType) const
 			}
 			return eAny(tempList); //12640
 		}
-		case UmlPackage::INTERFACE_ATTRIBUTE_PROTOCOL:
+		case uml::UmlPackage::INTERFACE_ATTRIBUTE_PROTOCOL:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getProtocol())); //12641
-		case UmlPackage::INTERFACE_ATTRIBUTE_REDEFINEDINTERFACE:
+		case uml::UmlPackage::INTERFACE_ATTRIBUTE_REDEFINEDINTERFACE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Interface>::iterator iter = m_redefinedInterface->begin();
@@ -771,17 +745,17 @@ bool InterfaceImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::INTERFACE_ATTRIBUTE_NESTEDCLASSIFIER:
+		case uml::UmlPackage::INTERFACE_ATTRIBUTE_NESTEDCLASSIFIER:
 			return getNestedClassifier() != nullptr; //12638
-		case UmlPackage::INTERFACE_ATTRIBUTE_OWNEDATTRIBUTE:
+		case uml::UmlPackage::INTERFACE_ATTRIBUTE_OWNEDATTRIBUTE:
 			return getOwnedAttribute() != nullptr; //12639
-		case UmlPackage::INTERFACE_ATTRIBUTE_OWNEDOPERATION:
+		case uml::UmlPackage::INTERFACE_ATTRIBUTE_OWNEDOPERATION:
 			return getOwnedOperation() != nullptr; //12643
-		case UmlPackage::INTERFACE_ATTRIBUTE_OWNEDRECEPTION:
+		case uml::UmlPackage::INTERFACE_ATTRIBUTE_OWNEDRECEPTION:
 			return getOwnedReception() != nullptr; //12640
-		case UmlPackage::INTERFACE_ATTRIBUTE_PROTOCOL:
+		case uml::UmlPackage::INTERFACE_ATTRIBUTE_PROTOCOL:
 			return getProtocol() != nullptr; //12641
-		case UmlPackage::INTERFACE_ATTRIBUTE_REDEFINEDINTERFACE:
+		case uml::UmlPackage::INTERFACE_ATTRIBUTE_REDEFINEDINTERFACE:
 			return getRedefinedInterface() != nullptr; //12642
 	}
 	return ClassifierImpl::internalEIsSet(featureID);
@@ -790,7 +764,7 @@ bool InterfaceImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::INTERFACE_ATTRIBUTE_NESTEDCLASSIFIER:
+		case uml::UmlPackage::INTERFACE_ATTRIBUTE_NESTEDCLASSIFIER:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -826,7 +800,7 @@ bool InterfaceImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case UmlPackage::INTERFACE_ATTRIBUTE_OWNEDATTRIBUTE:
+		case uml::UmlPackage::INTERFACE_ATTRIBUTE_OWNEDATTRIBUTE:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -862,7 +836,7 @@ bool InterfaceImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case UmlPackage::INTERFACE_ATTRIBUTE_OWNEDOPERATION:
+		case uml::UmlPackage::INTERFACE_ATTRIBUTE_OWNEDOPERATION:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -898,7 +872,7 @@ bool InterfaceImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case UmlPackage::INTERFACE_ATTRIBUTE_OWNEDRECEPTION:
+		case uml::UmlPackage::INTERFACE_ATTRIBUTE_OWNEDRECEPTION:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -934,7 +908,7 @@ bool InterfaceImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case UmlPackage::INTERFACE_ATTRIBUTE_PROTOCOL:
+		case uml::UmlPackage::INTERFACE_ATTRIBUTE_PROTOCOL:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -942,7 +916,7 @@ bool InterfaceImpl::eSet(int featureID, Any newValue)
 			setProtocol(_protocol); //12641
 			return true;
 		}
-		case UmlPackage::INTERFACE_ATTRIBUTE_REDEFINEDINTERFACE:
+		case uml::UmlPackage::INTERFACE_ATTRIBUTE_REDEFINEDINTERFACE:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -995,11 +969,10 @@ void InterfaceImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> 
 	// Create new objects (from references (containment == true))
 	//
 	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -1028,8 +1001,9 @@ void InterfaceImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoa
 	ClassifierImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void InterfaceImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void InterfaceImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
 
 	try
 	{
@@ -1058,7 +1032,7 @@ void InterfaceImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::
 			{
 				typeName = "Property";
 			}
-			std::shared_ptr<ecore::EObject> ownedAttribute = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::PROPERTY_ATTRIBUTE_INTERFACE);
+			std::shared_ptr<ecore::EObject> ownedAttribute = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::UmlPackage::PROPERTY_ATTRIBUTE_INTERFACE);
 			if (ownedAttribute != nullptr)
 			{
 				loadHandler->handleChild(ownedAttribute);
@@ -1073,7 +1047,7 @@ void InterfaceImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::
 			{
 				typeName = "Operation";
 			}
-			std::shared_ptr<ecore::EObject> ownedOperation = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::OPERATION_ATTRIBUTE_INTERFACE);
+			std::shared_ptr<ecore::EObject> ownedOperation = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::UmlPackage::OPERATION_ATTRIBUTE_INTERFACE);
 			if (ownedOperation != nullptr)
 			{
 				loadHandler->handleChild(ownedOperation);
@@ -1122,15 +1096,15 @@ void InterfaceImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::
 	{
 		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
 	}
-
-	ClassifierImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	ClassifierImpl::loadNode(nodeName, loadHandler);
 }
 
 void InterfaceImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
-		case UmlPackage::INTERFACE_ATTRIBUTE_REDEFINEDINTERFACE:
+		case uml::UmlPackage::INTERFACE_ATTRIBUTE_REDEFINEDINTERFACE:
 		{
 			std::shared_ptr<Bag<uml::Interface>> _redefinedInterface = getRedefinedInterface();
 			for(std::shared_ptr<ecore::EObject> ref : references)

@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -25,25 +24,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -95,10 +81,11 @@
 
 #include "uml/Variable.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/Impl/UmlFactoryImpl.hpp"
+#include "uml/Impl/UmlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -162,13 +149,7 @@ ExpansionRegionImpl::ExpansionRegionImpl(std::weak_ptr<uml::Activity > par_Activ
 }
 
 
-
-
-
 //Additional constructor for the containments back reference
-
-
-
 
 
 //Additional constructor for the containments back reference
@@ -180,9 +161,6 @@ ExpansionRegionImpl::ExpansionRegionImpl(std::weak_ptr<uml::Activity > par_Activ
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			ExpansionRegionImpl::ExpansionRegionImpl(std::weak_ptr<uml::Namespace > par_namespace)
 			:ExpansionRegionImpl()
@@ -190,9 +168,6 @@ ExpansionRegionImpl::ExpansionRegionImpl(std::weak_ptr<uml::Activity > par_Activ
 			    m_namespace = par_namespace;
 				m_owner = par_namespace;
 			}
-
-
-
 
 
 //Additional constructor for the containments back reference
@@ -203,9 +178,6 @@ ExpansionRegionImpl::ExpansionRegionImpl(std::weak_ptr<uml::Activity > par_Activ
 			}
 
 
-
-
-
 //Additional constructor for the containments back reference
 			ExpansionRegionImpl::ExpansionRegionImpl(std::weak_ptr<uml::ActivityGroup > par_superGroup)
 			:ExpansionRegionImpl()
@@ -213,9 +185,6 @@ ExpansionRegionImpl::ExpansionRegionImpl(std::weak_ptr<uml::Activity > par_Activ
 			    m_superGroup = par_superGroup;
 				m_owner = par_superGroup;
 			}
-
-
-
 
 
 
@@ -432,7 +401,7 @@ std::shared_ptr<ecore::EObject>  ExpansionRegionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ExpansionRegionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getExpansionRegion_Class();
+	return uml::UmlPackage::eInstance()->getExpansionRegion_Class();
 }
 
 //*********************************
@@ -564,7 +533,7 @@ Any ExpansionRegionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::EXPANSIONREGION_ATTRIBUTE_INPUTELEMENT:
+		case uml::UmlPackage::EXPANSIONREGION_ATTRIBUTE_INPUTELEMENT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::ExpansionNode>::iterator iter = m_inputElement->begin();
@@ -576,9 +545,9 @@ Any ExpansionRegionImpl::eGet(int featureID, bool resolve, bool coreType) const
 			}
 			return eAny(tempList); //9546
 		}
-		case UmlPackage::EXPANSIONREGION_ATTRIBUTE_MODE:
+		case uml::UmlPackage::EXPANSIONREGION_ATTRIBUTE_MODE:
 			return eAny(getMode()); //9544
-		case UmlPackage::EXPANSIONREGION_ATTRIBUTE_OUTPUTELEMENT:
+		case uml::UmlPackage::EXPANSIONREGION_ATTRIBUTE_OUTPUTELEMENT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::ExpansionNode>::iterator iter = m_outputElement->begin();
@@ -597,11 +566,11 @@ bool ExpansionRegionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::EXPANSIONREGION_ATTRIBUTE_INPUTELEMENT:
+		case uml::UmlPackage::EXPANSIONREGION_ATTRIBUTE_INPUTELEMENT:
 			return getInputElement() != nullptr; //9546
-		case UmlPackage::EXPANSIONREGION_ATTRIBUTE_MODE:
+		case uml::UmlPackage::EXPANSIONREGION_ATTRIBUTE_MODE:
 			return m_mode != ExpansionKind::ITERATIVE;; //9544
-		case UmlPackage::EXPANSIONREGION_ATTRIBUTE_OUTPUTELEMENT:
+		case uml::UmlPackage::EXPANSIONREGION_ATTRIBUTE_OUTPUTELEMENT:
 			return getOutputElement() != nullptr; //9545
 	}
 	return StructuredActivityNodeImpl::internalEIsSet(featureID);
@@ -610,7 +579,7 @@ bool ExpansionRegionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::EXPANSIONREGION_ATTRIBUTE_INPUTELEMENT:
+		case uml::UmlPackage::EXPANSIONREGION_ATTRIBUTE_INPUTELEMENT:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -646,14 +615,14 @@ bool ExpansionRegionImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case UmlPackage::EXPANSIONREGION_ATTRIBUTE_MODE:
+		case uml::UmlPackage::EXPANSIONREGION_ATTRIBUTE_MODE:
 		{
 			// BOOST CAST
 			uml::ExpansionKind _mode = newValue->get<uml::ExpansionKind>();
 			setMode(_mode); //9544
 			return true;
 		}
-		case UmlPackage::EXPANSIONREGION_ATTRIBUTE_OUTPUTELEMENT:
+		case uml::UmlPackage::EXPANSIONREGION_ATTRIBUTE_OUTPUTELEMENT:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -706,11 +675,10 @@ void ExpansionRegionImpl::load(std::shared_ptr<persistence::interfaces::XLoadHan
 	// Create new objects (from references (containment == true))
 	//
 	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -766,18 +734,19 @@ void ExpansionRegionImpl::loadAttributes(std::shared_ptr<persistence::interfaces
 	StructuredActivityNodeImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void ExpansionRegionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void ExpansionRegionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
 
-
-	StructuredActivityNodeImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	StructuredActivityNodeImpl::loadNode(nodeName, loadHandler);
 }
 
 void ExpansionRegionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
-		case UmlPackage::EXPANSIONREGION_ATTRIBUTE_INPUTELEMENT:
+		case uml::UmlPackage::EXPANSIONREGION_ATTRIBUTE_INPUTELEMENT:
 		{
 			std::shared_ptr<Bag<uml::ExpansionNode>> _inputElement = getInputElement();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -791,7 +760,7 @@ void ExpansionRegionImpl::resolveReferences(const int featureID, std::list<std::
 			return;
 		}
 
-		case UmlPackage::EXPANSIONREGION_ATTRIBUTE_OUTPUTELEMENT:
+		case uml::UmlPackage::EXPANSIONREGION_ATTRIBUTE_OUTPUTELEMENT:
 		{
 			std::shared_ptr<Bag<uml::ExpansionNode>> _outputElement = getOutputElement();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -849,7 +818,6 @@ void ExpansionRegionImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
 
 	
- 
 		// Add attributes
 		if ( this->eIsSet(package->getExpansionRegion_Attribute_mode()) )
 		{

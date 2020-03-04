@@ -176,8 +176,6 @@ namespace ecore
 			virtual std::shared_ptr<ETypeParameter> createETypeParameter_in_EContainer(std::weak_ptr<ecore::EObject > par_eContainer, const int metaElementID=-1) const = 0;
 			
 			
-			//Package
-			virtual std::shared_ptr<EcorePackage> getEcorePackage() const = 0;
 	};
 }
 #endif /* end of include guard: ECOREFACTORY_HPP */
