@@ -20,7 +20,9 @@
 
 
 
-//Included from from Ports typed by interface
+//Included from Ports typed by interface
+
+//Included from roles of ConnectorEnds
 
 using namespace StandardProfile;
 
