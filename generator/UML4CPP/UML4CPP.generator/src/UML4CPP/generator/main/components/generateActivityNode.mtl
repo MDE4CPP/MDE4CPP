@@ -205,10 +205,5 @@
 [template private initializePin(pin : Pin, isTarget : Boolean)]
 [pin.memberName()/]->setName("[pin.name/]");
 [pin.memberName()/]->setLower([pin.lower/]);
-<<<<<<< HEAD
-[pin.memberName()/]->setUpper([pin.upper/]);
-=======
 [pin.memberName()/]->setUpper([if (isTarget)]-1[else][pin.upper/][/if]);
-
->>>>>>> 6da89415d34eadfee120c931945e66653629f773
 [/template]
