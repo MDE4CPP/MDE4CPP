@@ -259,7 +259,7 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> CallOperationActionA
 					}
 					else
 					{
-						std::shared_ptr<fUML::Semantics::Activities::Token> firstToken = unofferedTokens->front();
+						std::shared_ptr<fUML::Semantics::Activities::Token> firstToken = unofferedTokens->at(unofferedTokens->size()-1);
 						if(nullptr==firstToken)
 						{
 							std::cerr << "[getCallExecution] FirstToken is null" << std::endl;

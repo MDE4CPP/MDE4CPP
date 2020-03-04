@@ -470,7 +470,7 @@ std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> ExecutionFactoryImpl::in
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-		std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> visitor = nullptr;
+	std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> visitor = nullptr;
 
 	if(std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::CallEventBehavior>(element) != nullptr) {
 		return fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createCallEventExecution();
@@ -715,11 +715,7 @@ std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> ExecutionFactoryImpl::in
 		}
 		case uml::UmlPackage::CENTRALBUFFERNODE_CLASS: 
 		{
-<<<<<<< HEAD
-			visitor = std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>(FUMLFactory::eInstance()->createCentralBufferNodeActivation());
-=======
 			visitor = std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>(fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createCentralBufferNodeActivation());
->>>>>>> 6da89415d34eadfee120c931945e66653629f773
 			break;
 		}		
 		default: 

@@ -22,12 +22,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-<<<<<<< HEAD
-#include "fUML/impl/FUMLPackageImpl.hpp"
-=======
 
 //Includes from codegen annotation
->>>>>>> 6da89415d34eadfee120c931945e66653629f773
 #include "fUML/Semantics/Activities/ControlToken.hpp"
 #include "uml/ActivityNode.hpp"
 
@@ -159,11 +155,7 @@ void JoinNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Semantics::Activitie
 		}
 	)
 
-<<<<<<< HEAD
-	int controlTokenID = fUML::FUMLPackage::CONTROLTOKEN_CLASS;
-=======
 	int controlTokenID = fUML::Semantics::Activities::ActivitiesPackage::CONTROLTOKEN_CLASS;
->>>>>>> 6da89415d34eadfee120c931945e66653629f773
 	std::shared_ptr<Bag<fUML::Semantics::Activities::ControlToken>> controlTokenList(new Bag<fUML::Semantics::Activities::ControlToken>());
 
 	Bag<fUML::Semantics::Activities::Token>::iterator tokenIter = incomingTokens->begin();

@@ -13,11 +13,7 @@
 
 
 // forward declarations
-<<<<<<< HEAD
-template<class T> class Bag;
-=======
 template<class T> class Bag; 
->>>>>>> 6da89415d34eadfee120c931945e66653629f773
 
 
 
