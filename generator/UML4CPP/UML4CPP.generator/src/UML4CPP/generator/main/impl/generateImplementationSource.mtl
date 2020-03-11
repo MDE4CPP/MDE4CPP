@@ -31,6 +31,7 @@
 [import UML4CPP::generator::main::validation::validateModel /]
 [import UML4CPP::generator::main::pscs::generatePropertyInstantiation/]
 [import UML4CPP::generator::main::pscs::generateConnectorPatternsInstantiation/]
+[import UML4CPP::generator::main::pscs::generateDestruction/]
 
 [query private includes(aClass : Class)  : Set(Type) = OrderedSet{aClass.member->selectByKind(TypedElement)->select(not type.oclIsUndefined()).type, aClass.ownedOperation.ownedParameter.type, aClass.getAllAttributes().type, aClass.importedMember}->flatten() /]
 [query private includes(aInterface : Interface)  : Set(Type) = OrderedSet{aInterface.member->selectByKind(TypedElement)->select(not type.oclIsUndefined()).type, aInterface.ownedOperation.ownedParameter.type}->flatten() /]
@@ -154,6 +155,7 @@
 
 [className/]::~[className/]()
 {
+	clear();
 }
 
 [className/]::[className/](const [className/] & obj):[className/]()
@@ -206,6 +208,14 @@ std::shared_ptr<ecore::EObject>  [className/]::copy() const
 std::shared_ptr<uml::Class> [className/]::getMetaClass()
 {
 	return [aPackage.name.concat('PackageImpl').toUpperFirst()/]::eInstance()->[aClass.generatePackageGetterCall(aClass)/];
+}
+
+void [className/]::clear()
+{
+	//Erase properties
+	[for (aProperty : Property | aClass.ownedAttribute->sortedBy(myQualifiedName()))]
+	[aProperty.generatePropertyDestruction()/]
+	[/for]
 }
 
 //*********************************

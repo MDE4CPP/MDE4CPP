@@ -30,6 +30,16 @@
 [query public hasSetter(aProperty : Property) : Boolean = not aProperty.isReadOnly and aProperty.upper = 1/]
 
 [**
+ * checks if Property is container
+*/]
+[query public isContainer(aProperty : Property) : Boolean = aProperty.upper = -1/]
+
+[**
+ * checks if Property is single value
+*/]
+[query public isSingleValue(aProperty : Property) : Boolean = aProperty.upper = 1/]
+
+[**
  * generate getter and setter declaration
  * setter is only generated if hasSetter query returns true
 */]
