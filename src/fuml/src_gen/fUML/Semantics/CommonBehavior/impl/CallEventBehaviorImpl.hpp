@@ -13,7 +13,7 @@
 //Model includes
 #include "../CallEventBehavior.hpp"
 
-#include "fUML/Semantics/CommonBehavior/Impl/CommonBehaviorFactoryImpl.hpp"
+#include "fUML/Semantics/CommonBehavior/impl/CommonBehaviorFactoryImpl.hpp"
 
 #include "ecore/impl/EObjectImpl.hpp"
 

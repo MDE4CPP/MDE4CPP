@@ -46,8 +46,8 @@
 #include "ecore/EPackage.hpp"
 
 //Factories an Package includes
-#include "ecore/Impl/EcoreFactoryImpl.hpp"
-#include "ecore/Impl/EcorePackageImpl.hpp"
+#include "ecore/impl/EcoreFactoryImpl.hpp"
+#include "ecore/impl/EcorePackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"

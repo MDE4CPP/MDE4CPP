@@ -13,7 +13,7 @@
 //Model includes
 #include "../SemanticStrategy.hpp"
 
-#include "fUML/Semantics/Loci/Impl/LociFactoryImpl.hpp"
+#include "fUML/Semantics/Loci/impl/LociFactoryImpl.hpp"
 
 #include "ecore/impl/EObjectImpl.hpp"
 

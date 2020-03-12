@@ -39,13 +39,13 @@
 #include "fUML/Semantics/Loci/SemanticVisitor.hpp"
 
 //Factories an Package includes
-#include "PSCS/Semantics/StructuredClassifiers/Impl/StructuredClassifiersFactoryImpl.hpp"
-#include "PSCS/Semantics/StructuredClassifiers/Impl/StructuredClassifiersPackageImpl.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/impl/StructuredClassifiersFactoryImpl.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/impl/StructuredClassifiersPackageImpl.hpp"
 
-#include "PSCS/Semantics/SemanticsFactory.hpp"
-#include "PSCS/Semantics/SemanticsPackage.hpp"
 #include "PSCS/PSCSFactory.hpp"
 #include "PSCS/PSCSPackage.hpp"
+#include "PSCS/Semantics/SemanticsFactory.hpp"
+#include "PSCS/Semantics/SemanticsPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"

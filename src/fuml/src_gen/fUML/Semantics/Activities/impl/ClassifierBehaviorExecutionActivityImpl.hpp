@@ -13,7 +13,7 @@
 //Model includes
 #include "../ClassifierBehaviorExecutionActivity.hpp"
 
-#include "fUML/Semantics/Activities/Impl/ActivitiesFactoryImpl.hpp"
+#include "fUML/Semantics/Activities/impl/ActivitiesFactoryImpl.hpp"
 
 #include "ecore/impl/EObjectImpl.hpp"
 

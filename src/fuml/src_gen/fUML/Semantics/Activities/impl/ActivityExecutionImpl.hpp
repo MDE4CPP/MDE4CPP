@@ -13,7 +13,7 @@
 //Model includes
 #include "../ActivityExecution.hpp"
 
-#include "fUML/Semantics/Activities/Impl/ActivitiesFactoryImpl.hpp"
+#include "fUML/Semantics/Activities/impl/ActivitiesFactoryImpl.hpp"
 #include "fUML/Semantics/CommonBehavior/impl/ExecutionImpl.hpp"
 
 //*********************************

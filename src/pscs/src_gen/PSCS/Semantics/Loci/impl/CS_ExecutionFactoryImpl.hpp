@@ -13,7 +13,7 @@
 //Model includes
 #include "../CS_ExecutionFactory.hpp"
 
-#include "PSCS/Semantics/Loci/Impl/LociFactoryImpl.hpp"
+#include "PSCS/Semantics/Loci/impl/LociFactoryImpl.hpp"
 #include "fUML/Semantics/Loci/impl/ExecutionFactoryImpl.hpp"
 
 //*********************************

@@ -13,7 +13,7 @@
 //Model includes
 #include "../Reference.hpp"
 
-#include "fUML/Semantics/StructuredClassifiers/Impl/StructuredClassifiersFactoryImpl.hpp"
+#include "fUML/Semantics/StructuredClassifiers/impl/StructuredClassifiersFactoryImpl.hpp"
 #include "fUML/Semantics/SimpleClassifiers/impl/StructuredValueImpl.hpp"
 
 //*********************************

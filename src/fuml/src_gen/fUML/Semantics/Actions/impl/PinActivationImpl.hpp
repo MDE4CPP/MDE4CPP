@@ -13,7 +13,7 @@
 //Model includes
 #include "../PinActivation.hpp"
 
-#include "fUML/Semantics/Actions/Impl/ActionsFactoryImpl.hpp"
+#include "fUML/Semantics/Actions/impl/ActionsFactoryImpl.hpp"
 #include "fUML/Semantics/Activities/impl/ObjectNodeActivationImpl.hpp"
 
 //*********************************

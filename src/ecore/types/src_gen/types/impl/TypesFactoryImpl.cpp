@@ -4,7 +4,7 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EClass.hpp"
-#include "types/typesPackage.hpp"
+#include "types/TypesPackage.hpp"
 
 
 

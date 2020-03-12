@@ -13,7 +13,7 @@
 //Model includes
 #include "../ReadLinkActionActivation.hpp"
 
-#include "fUML/Semantics/Actions/Impl/ActionsFactoryImpl.hpp"
+#include "fUML/Semantics/Actions/impl/ActionsFactoryImpl.hpp"
 #include "fUML/Semantics/Actions/impl/LinkActionActivationImpl.hpp"
 
 //*********************************

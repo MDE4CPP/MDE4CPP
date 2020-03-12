@@ -1,0 +1,203 @@
+#include "PSCS/Semantics/Actions/impl/ActionsPackageImpl.hpp"
+
+// metametamodel factory
+#include "ecore/EcoreFactory.hpp"
+
+#include <cassert>
+
+#include "abstractDataTypes/SubsetUnion.hpp"
+//metametamodel classes
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/EDataType.hpp"
+#include "ecore/EGenericType.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EParameter.hpp"
+#include "ecore/EReference.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
+
+//depending model packages
+#include "PSCS/PSCSPackage.hpp"
+#include "ecore/EcorePackage.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include "uml/UmlPackage.hpp"
+//include subpackages 
+ 
+using namespace PSCS::Semantics::Actions;
+
+void ActionsPackageImpl::createPackageContents(std::shared_ptr<ecore::EPackage> package)
+{
+	if (isCreated) 
+	{
+		return;
+	}
+	isCreated = true;
+
+	std::shared_ptr<ecore::EcoreFactory> factory = ecore::EcoreFactory::eInstance();
+
+	createCS_AcceptCallActionActivationContent(package, factory);
+	createCS_AcceptEventActionActivationContent(package, factory);
+	createCS_AddStructuralFeatureValueActionActivationContent(package, factory);
+	createCS_CallOperationActionActivationContent(package, factory);
+	createCS_ClearStructuralFeatureActionActivationContent(package, factory);
+	createCS_ConstructStrategyContent(package, factory);
+	createCS_CreateLinkActionActivationContent(package, factory);
+	createCS_CreateObjectActionActivationContent(package, factory);
+	createCS_DefaultConstructStrategyContent(package, factory);
+	createCS_ReadExtentActionActivationContent(package, factory);
+	createCS_ReadSelfActionActivationContent(package, factory);
+	createCS_RemoveStructuralFeatureValueActionActivationContent(package, factory);
+	createCS_SendSignalActionActivationContent(package, factory);
+
+	createPackageEDataTypes(package, factory);
+
+}
+
+void ActionsPackageImpl::createCS_AcceptCallActionActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+{
+	m_cS_AcceptCallActionActivation_Class = factory->createEClass_in_EPackage(package, CS_ACCEPTCALLACTIONACTIVATION_CLASS);
+	
+	
+	m_cS_AcceptCallActionActivation_Operation_accept_EventOccurrence = factory->createEOperation_in_EContainingClass(m_cS_AcceptCallActionActivation_Class, CS_ACCEPTCALLACTIONACTIVATION_OPERATION_ACCEPT_EVENTOCCURRENCE);
+	
+}
+
+void ActionsPackageImpl::createCS_AcceptEventActionActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+{
+	m_cS_AcceptEventActionActivation_Class = factory->createEClass_in_EPackage(package, CS_ACCEPTEVENTACTIONACTIVATION_CLASS);
+	
+	
+	m_cS_AcceptEventActionActivation_Operation_accept_EventOccurrence = factory->createEOperation_in_EContainingClass(m_cS_AcceptEventActionActivation_Class, CS_ACCEPTEVENTACTIONACTIVATION_OPERATION_ACCEPT_EVENTOCCURRENCE);
+	
+}
+
+void ActionsPackageImpl::createCS_AddStructuralFeatureValueActionActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+{
+	m_cS_AddStructuralFeatureValueActionActivation_Class = factory->createEClass_in_EPackage(package, CS_ADDSTRUCTURALFEATUREVALUEACTIONACTIVATION_CLASS);
+	
+	
+	m_cS_AddStructuralFeatureValueActionActivation_Operation_doAction = factory->createEOperation_in_EContainingClass(m_cS_AddStructuralFeatureValueActionActivation_Class, CS_ADDSTRUCTURALFEATUREVALUEACTIONACTIVATION_OPERATION_DOACTION);
+	m_cS_AddStructuralFeatureValueActionActivation_Operation_doActionDefault = factory->createEOperation_in_EContainingClass(m_cS_AddStructuralFeatureValueActionActivation_Class, CS_ADDSTRUCTURALFEATUREVALUEACTIONACTIVATION_OPERATION_DOACTIONDEFAULT);
+	
+}
+
+void ActionsPackageImpl::createCS_CallOperationActionActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+{
+	m_cS_CallOperationActionActivation_Class = factory->createEClass_in_EPackage(package, CS_CALLOPERATIONACTIONACTIVATION_CLASS);
+	
+	
+	m_cS_CallOperationActionActivation_Operation__isCreate_Operation = factory->createEOperation_in_EContainingClass(m_cS_CallOperationActionActivation_Class, CS_CALLOPERATIONACTIONACTIVATION_OPERATION__ISCREATE_OPERATION);
+	m_cS_CallOperationActionActivation_Operation_doAction = factory->createEOperation_in_EContainingClass(m_cS_CallOperationActionActivation_Class, CS_CALLOPERATIONACTIONACTIVATION_OPERATION_DOACTION);
+	m_cS_CallOperationActionActivation_Operation_getCallExecution = factory->createEOperation_in_EContainingClass(m_cS_CallOperationActionActivation_Class, CS_CALLOPERATIONACTIONACTIVATION_OPERATION_GETCALLEXECUTION);
+	m_cS_CallOperationActionActivation_Operation_isCreate_Operation = factory->createEOperation_in_EContainingClass(m_cS_CallOperationActionActivation_Class, CS_CALLOPERATIONACTIONACTIVATION_OPERATION_ISCREATE_OPERATION);
+	m_cS_CallOperationActionActivation_Operation_isOperationProvided_Port_Operation = factory->createEOperation_in_EContainingClass(m_cS_CallOperationActionActivation_Class, CS_CALLOPERATIONACTIONACTIVATION_OPERATION_ISOPERATIONPROVIDED_PORT_OPERATION);
+	m_cS_CallOperationActionActivation_Operation_isOperationRequired_Port_Operation = factory->createEOperation_in_EContainingClass(m_cS_CallOperationActionActivation_Class, CS_CALLOPERATIONACTIONACTIVATION_OPERATION_ISOPERATIONREQUIRED_PORT_OPERATION);
+	
+}
+
+void ActionsPackageImpl::createCS_ClearStructuralFeatureActionActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+{
+	m_cS_ClearStructuralFeatureActionActivation_Class = factory->createEClass_in_EPackage(package, CS_CLEARSTRUCTURALFEATUREACTIONACTIVATION_CLASS);
+	
+	
+	m_cS_ClearStructuralFeatureActionActivation_Operation_doAction = factory->createEOperation_in_EContainingClass(m_cS_ClearStructuralFeatureActionActivation_Class, CS_CLEARSTRUCTURALFEATUREACTIONACTIVATION_OPERATION_DOACTION);
+	m_cS_ClearStructuralFeatureActionActivation_Operation_getLinksToDestroy_StructuredValue_StructuralFeature = factory->createEOperation_in_EContainingClass(m_cS_ClearStructuralFeatureActionActivation_Class, CS_CLEARSTRUCTURALFEATUREACTIONACTIVATION_OPERATION_GETLINKSTODESTROY_STRUCTUREDVALUE_STRUCTURALFEATURE);
+	m_cS_ClearStructuralFeatureActionActivation_Operation_getPotentialLinkEnds_CS_Reference_StructuralFeature = factory->createEOperation_in_EContainingClass(m_cS_ClearStructuralFeatureActionActivation_Class, CS_CLEARSTRUCTURALFEATUREACTIONACTIVATION_OPERATION_GETPOTENTIALLINKENDS_CS_REFERENCE_STRUCTURALFEATURE);
+	
+}
+
+void ActionsPackageImpl::createCS_ConstructStrategyContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+{
+	m_cS_ConstructStrategy_Class = factory->createEClass_in_EPackage(package, CS_CONSTRUCTSTRATEGY_CLASS);
+	
+	
+	m_cS_ConstructStrategy_Operation_construct_Operation_CS_Object = factory->createEOperation_in_EContainingClass(m_cS_ConstructStrategy_Class, CS_CONSTRUCTSTRATEGY_OPERATION_CONSTRUCT_OPERATION_CS_OBJECT);
+	m_cS_ConstructStrategy_Operation_getName = factory->createEOperation_in_EContainingClass(m_cS_ConstructStrategy_Class, CS_CONSTRUCTSTRATEGY_OPERATION_GETNAME);
+	
+}
+
+void ActionsPackageImpl::createCS_CreateLinkActionActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+{
+	m_cS_CreateLinkActionActivation_Class = factory->createEClass_in_EPackage(package, CS_CREATELINKACTIONACTIVATION_CLASS);
+	
+	
+	m_cS_CreateLinkActionActivation_Operation_doAction = factory->createEOperation_in_EContainingClass(m_cS_CreateLinkActionActivation_Class, CS_CREATELINKACTIONACTIVATION_OPERATION_DOACTION);
+	
+}
+
+void ActionsPackageImpl::createCS_CreateObjectActionActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+{
+	m_cS_CreateObjectActionActivation_Class = factory->createEClass_in_EPackage(package, CS_CREATEOBJECTACTIONACTIVATION_CLASS);
+	
+	
+	m_cS_CreateObjectActionActivation_Operation_doAction = factory->createEOperation_in_EContainingClass(m_cS_CreateObjectActionActivation_Class, CS_CREATEOBJECTACTIONACTIVATION_OPERATION_DOACTION);
+	
+}
+
+void ActionsPackageImpl::createCS_DefaultConstructStrategyContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+{
+	m_cS_DefaultConstructStrategy_Class = factory->createEClass_in_EPackage(package, CS_DEFAULTCONSTRUCTSTRATEGY_CLASS);
+	
+	m_cS_DefaultConstructStrategy_Attribute_defaultAssociation = factory->createEReference_in_EContainingClass(m_cS_DefaultConstructStrategy_Class, CS_DEFAULTCONSTRUCTSTRATEGY_ATTRIBUTE_DEFAULTASSOCIATION);
+	m_cS_DefaultConstructStrategy_Attribute_generatedRealizingClasses = factory->createEReference_in_EContainingClass(m_cS_DefaultConstructStrategy_Class, CS_DEFAULTCONSTRUCTSTRATEGY_ATTRIBUTE_GENERATEDREALIZINGCLASSES);
+	m_cS_DefaultConstructStrategy_Attribute_locus = factory->createEReference_in_EContainingClass(m_cS_DefaultConstructStrategy_Class, CS_DEFAULTCONSTRUCTSTRATEGY_ATTRIBUTE_LOCUS);
+	
+	m_cS_DefaultConstructStrategy_Operation_addStructuralFeatureValue_CS_Reference_Value = factory->createEOperation_in_EContainingClass(m_cS_DefaultConstructStrategy_Class, CS_DEFAULTCONSTRUCTSTRATEGY_OPERATION_ADDSTRUCTURALFEATUREVALUE_CS_REFERENCE_VALUE);
+	m_cS_DefaultConstructStrategy_Operation_canInstantiate_Property = factory->createEOperation_in_EContainingClass(m_cS_DefaultConstructStrategy_Class, CS_DEFAULTCONSTRUCTSTRATEGY_OPERATION_CANINSTANTIATE_PROPERTY);
+	m_cS_DefaultConstructStrategy_Operation_construct_Operation_CS_Object = factory->createEOperation_in_EContainingClass(m_cS_DefaultConstructStrategy_Class, CS_DEFAULTCONSTRUCTSTRATEGY_OPERATION_CONSTRUCT_OPERATION_CS_OBJECT);
+	m_cS_DefaultConstructStrategy_Operation_constructObject_CS_Object_Class = factory->createEOperation_in_EContainingClass(m_cS_DefaultConstructStrategy_Class, CS_DEFAULTCONSTRUCTSTRATEGY_OPERATION_CONSTRUCTOBJECT_CS_OBJECT_CLASS);
+	m_cS_DefaultConstructStrategy_Operation_generateArrayPattern_CS_Reference_Connector = factory->createEOperation_in_EContainingClass(m_cS_DefaultConstructStrategy_Class, CS_DEFAULTCONSTRUCTSTRATEGY_OPERATION_GENERATEARRAYPATTERN_CS_REFERENCE_CONNECTOR);
+	m_cS_DefaultConstructStrategy_Operation_generateRealizingClass_Interface_EString = factory->createEOperation_in_EContainingClass(m_cS_DefaultConstructStrategy_Class, CS_DEFAULTCONSTRUCTSTRATEGY_OPERATION_GENERATEREALIZINGCLASS_INTERFACE_ESTRING);
+	m_cS_DefaultConstructStrategy_Operation_generateStarPattern_CS_Reference_Connector = factory->createEOperation_in_EContainingClass(m_cS_DefaultConstructStrategy_Class, CS_DEFAULTCONSTRUCTSTRATEGY_OPERATION_GENERATESTARPATTERN_CS_REFERENCE_CONNECTOR);
+	m_cS_DefaultConstructStrategy_Operation_getCardinality_ConnectorEnd = factory->createEOperation_in_EContainingClass(m_cS_DefaultConstructStrategy_Class, CS_DEFAULTCONSTRUCTSTRATEGY_OPERATION_GETCARDINALITY_CONNECTOREND);
+	m_cS_DefaultConstructStrategy_Operation_getDefaultAssociation = factory->createEOperation_in_EContainingClass(m_cS_DefaultConstructStrategy_Class, CS_DEFAULTCONSTRUCTSTRATEGY_OPERATION_GETDEFAULTASSOCIATION);
+	m_cS_DefaultConstructStrategy_Operation_getRealizingClass_Interface = factory->createEOperation_in_EContainingClass(m_cS_DefaultConstructStrategy_Class, CS_DEFAULTCONSTRUCTSTRATEGY_OPERATION_GETREALIZINGCLASS_INTERFACE);
+	m_cS_DefaultConstructStrategy_Operation_getValuesFromConnectorEnd_CS_Reference_ConnectorEnd = factory->createEOperation_in_EContainingClass(m_cS_DefaultConstructStrategy_Class, CS_DEFAULTCONSTRUCTSTRATEGY_OPERATION_GETVALUESFROMCONNECTOREND_CS_REFERENCE_CONNECTOREND);
+	m_cS_DefaultConstructStrategy_Operation_instantiateInterface_Interface_Locus = factory->createEOperation_in_EContainingClass(m_cS_DefaultConstructStrategy_Class, CS_DEFAULTCONSTRUCTSTRATEGY_OPERATION_INSTANTIATEINTERFACE_INTERFACE_LOCUS);
+	m_cS_DefaultConstructStrategy_Operation_isArrayPattern_Connector = factory->createEOperation_in_EContainingClass(m_cS_DefaultConstructStrategy_Class, CS_DEFAULTCONSTRUCTSTRATEGY_OPERATION_ISARRAYPATTERN_CONNECTOR);
+	m_cS_DefaultConstructStrategy_Operation_isStarPattern_Connector = factory->createEOperation_in_EContainingClass(m_cS_DefaultConstructStrategy_Class, CS_DEFAULTCONSTRUCTSTRATEGY_OPERATION_ISSTARPATTERN_CONNECTOR);
+	
+}
+
+void ActionsPackageImpl::createCS_ReadExtentActionActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+{
+	m_cS_ReadExtentActionActivation_Class = factory->createEClass_in_EPackage(package, CS_READEXTENTACTIONACTIVATION_CLASS);
+	
+	
+	m_cS_ReadExtentActionActivation_Operation_doAction = factory->createEOperation_in_EContainingClass(m_cS_ReadExtentActionActivation_Class, CS_READEXTENTACTIONACTIVATION_OPERATION_DOACTION);
+	
+}
+
+void ActionsPackageImpl::createCS_ReadSelfActionActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+{
+	m_cS_ReadSelfActionActivation_Class = factory->createEClass_in_EPackage(package, CS_READSELFACTIONACTIVATION_CLASS);
+	
+	
+	m_cS_ReadSelfActionActivation_Operation_doAction = factory->createEOperation_in_EContainingClass(m_cS_ReadSelfActionActivation_Class, CS_READSELFACTIONACTIVATION_OPERATION_DOACTION);
+	
+}
+
+void ActionsPackageImpl::createCS_RemoveStructuralFeatureValueActionActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+{
+	m_cS_RemoveStructuralFeatureValueActionActivation_Class = factory->createEClass_in_EPackage(package, CS_REMOVESTRUCTURALFEATUREVALUEACTIONACTIVATION_CLASS);
+	
+	
+	m_cS_RemoveStructuralFeatureValueActionActivation_Operation_doAction = factory->createEOperation_in_EContainingClass(m_cS_RemoveStructuralFeatureValueActionActivation_Class, CS_REMOVESTRUCTURALFEATUREVALUEACTIONACTIVATION_OPERATION_DOACTION);
+	m_cS_RemoveStructuralFeatureValueActionActivation_Operation_getLinksToDestroy_StructuredValue_Value = factory->createEOperation_in_EContainingClass(m_cS_RemoveStructuralFeatureValueActionActivation_Class, CS_REMOVESTRUCTURALFEATUREVALUEACTIONACTIVATION_OPERATION_GETLINKSTODESTROY_STRUCTUREDVALUE_VALUE);
+	m_cS_RemoveStructuralFeatureValueActionActivation_Operation_getPotentialLinkEnds_CS_Reference_StructuralFeature = factory->createEOperation_in_EContainingClass(m_cS_RemoveStructuralFeatureValueActionActivation_Class, CS_REMOVESTRUCTURALFEATUREVALUEACTIONACTIVATION_OPERATION_GETPOTENTIALLINKENDS_CS_REFERENCE_STRUCTURALFEATURE);
+	
+}
+
+void ActionsPackageImpl::createCS_SendSignalActionActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+{
+	m_cS_SendSignalActionActivation_Class = factory->createEClass_in_EPackage(package, CS_SENDSIGNALACTIONACTIVATION_CLASS);
+	
+	
+	m_cS_SendSignalActionActivation_Operation_doAction = factory->createEOperation_in_EContainingClass(m_cS_SendSignalActionActivation_Class, CS_SENDSIGNALACTIONACTIVATION_OPERATION_DOACTION);
+	
+}
+
+void ActionsPackageImpl::createPackageEDataTypes(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+{
+	
+}

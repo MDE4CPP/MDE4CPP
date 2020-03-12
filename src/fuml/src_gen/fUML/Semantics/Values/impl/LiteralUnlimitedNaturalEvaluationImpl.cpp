@@ -42,13 +42,13 @@
 #include "uml/ValueSpecification.hpp"
 
 //Factories an Package includes
-#include "fUML/Semantics/Values/Impl/ValuesFactoryImpl.hpp"
-#include "fUML/Semantics/Values/Impl/ValuesPackageImpl.hpp"
+#include "fUML/Semantics/Values/impl/ValuesFactoryImpl.hpp"
+#include "fUML/Semantics/Values/impl/ValuesPackageImpl.hpp"
 
-#include "fUML/Semantics/SemanticsFactory.hpp"
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/FUMLFactory.hpp"
 #include "fUML/FUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsFactory.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"

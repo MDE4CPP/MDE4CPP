@@ -13,7 +13,7 @@
 //Model includes
 #include "../CS_DispatchOperationOfInterfaceStrategy.hpp"
 
-#include "PSCS/Semantics/StructuredClassifiers/Impl/StructuredClassifiersFactoryImpl.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/impl/StructuredClassifiersFactoryImpl.hpp"
 #include "fUML/Semantics/StructuredClassifiers/impl/RedefinitionBasedDispatchStrategyImpl.hpp"
 
 //*********************************

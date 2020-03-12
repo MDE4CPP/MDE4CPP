@@ -13,7 +13,7 @@
 //Model includes
 #include "../CS_InstanceValueEvaluation.hpp"
 
-#include "PSCS/Semantics/Classification/Impl/ClassificationFactoryImpl.hpp"
+#include "PSCS/Semantics/Classification/impl/ClassificationFactoryImpl.hpp"
 #include "fUML/Semantics/Classification/impl/InstanceValueEvaluationImpl.hpp"
 
 //*********************************

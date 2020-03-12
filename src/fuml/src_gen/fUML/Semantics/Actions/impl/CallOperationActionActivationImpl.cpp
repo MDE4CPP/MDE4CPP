@@ -57,13 +57,13 @@
 #include "fUML/Semantics/Activities/Token.hpp"
 
 //Factories an Package includes
-#include "fUML/Semantics/Actions/Impl/ActionsFactoryImpl.hpp"
-#include "fUML/Semantics/Actions/Impl/ActionsPackageImpl.hpp"
+#include "fUML/Semantics/Actions/impl/ActionsFactoryImpl.hpp"
+#include "fUML/Semantics/Actions/impl/ActionsPackageImpl.hpp"
 
-#include "fUML/Semantics/SemanticsFactory.hpp"
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/FUMLFactory.hpp"
 #include "fUML/FUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsFactory.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -259,7 +259,7 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> CallOperationActionA
 					}
 					else
 					{
-						std::shared_ptr<fUML::Semantics::Activities::Token> firstToken = unofferedTokens->front();
+						std::shared_ptr<fUML::Semantics::Activities::Token> firstToken = unofferedTokens->at(unofferedTokens->size()-1);
 						if(nullptr==firstToken)
 						{
 							std::cerr << "[getCallExecution] FirstToken is null" << std::endl;

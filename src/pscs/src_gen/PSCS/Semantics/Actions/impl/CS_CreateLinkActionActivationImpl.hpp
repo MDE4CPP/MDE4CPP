@@ -13,7 +13,7 @@
 //Model includes
 #include "../CS_CreateLinkActionActivation.hpp"
 
-#include "PSCS/Semantics/Actions/Impl/ActionsFactoryImpl.hpp"
+#include "PSCS/Semantics/Actions/impl/ActionsFactoryImpl.hpp"
 #include "fUML/Semantics/Actions/impl/CreateLinkActionActivationImpl.hpp"
 
 //*********************************

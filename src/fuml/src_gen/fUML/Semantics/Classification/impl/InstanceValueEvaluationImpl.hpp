@@ -13,7 +13,7 @@
 //Model includes
 #include "../InstanceValueEvaluation.hpp"
 
-#include "fUML/Semantics/Classification/Impl/ClassificationFactoryImpl.hpp"
+#include "fUML/Semantics/Classification/impl/ClassificationFactoryImpl.hpp"
 #include "fUML/Semantics/Values/impl/EvaluationImpl.hpp"
 
 //*********************************

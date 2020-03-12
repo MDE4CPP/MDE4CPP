@@ -13,7 +13,7 @@
 //Model includes
 #include "../CS_EventOccurrence.hpp"
 
-#include "PSCS/Semantics/CommonBehavior/Impl/CommonBehaviorFactoryImpl.hpp"
+#include "PSCS/Semantics/CommonBehavior/impl/CommonBehaviorFactoryImpl.hpp"
 #include "fUML/Semantics/CommonBehavior/impl/EventOccurrenceImpl.hpp"
 
 //*********************************

@@ -13,7 +13,7 @@
 //Model includes
 #include "../GetNextEventStrategy.hpp"
 
-#include "fUML/Semantics/CommonBehavior/Impl/CommonBehaviorFactoryImpl.hpp"
+#include "fUML/Semantics/CommonBehavior/impl/CommonBehaviorFactoryImpl.hpp"
 #include "fUML/Semantics/Loci/impl/SemanticStrategyImpl.hpp"
 
 //*********************************

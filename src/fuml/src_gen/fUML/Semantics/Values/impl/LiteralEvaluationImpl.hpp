@@ -13,7 +13,7 @@
 //Model includes
 #include "../LiteralEvaluation.hpp"
 
-#include "fUML/Semantics/Values/Impl/ValuesFactoryImpl.hpp"
+#include "fUML/Semantics/Values/impl/ValuesFactoryImpl.hpp"
 #include "fUML/Semantics/Values/impl/EvaluationImpl.hpp"
 
 //*********************************

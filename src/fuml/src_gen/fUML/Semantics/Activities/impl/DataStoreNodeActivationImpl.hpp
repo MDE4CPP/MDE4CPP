@@ -13,7 +13,7 @@
 //Model includes
 #include "../DataStoreNodeActivation.hpp"
 
-#include "fUML/Semantics/Activities/Impl/ActivitiesFactoryImpl.hpp"
+#include "fUML/Semantics/Activities/impl/ActivitiesFactoryImpl.hpp"
 #include "fUML/Semantics/Activities/impl/CentralBufferNodeActivationImpl.hpp"
 
 //*********************************

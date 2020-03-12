@@ -13,7 +13,7 @@
 //Model includes
 #include "../DataValue.hpp"
 
-#include "fUML/Semantics/SimpleClassifiers/Impl/SimpleClassifiersFactoryImpl.hpp"
+#include "fUML/Semantics/SimpleClassifiers/impl/SimpleClassifiersFactoryImpl.hpp"
 #include "fUML/Semantics/SimpleClassifiers/impl/CompoundValueImpl.hpp"
 
 //*********************************

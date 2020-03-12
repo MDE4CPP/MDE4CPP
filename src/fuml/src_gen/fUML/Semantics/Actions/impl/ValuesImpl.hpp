@@ -13,7 +13,7 @@
 //Model includes
 #include "../Values.hpp"
 
-#include "fUML/Semantics/Actions/Impl/ActionsFactoryImpl.hpp"
+#include "fUML/Semantics/Actions/impl/ActionsFactoryImpl.hpp"
 
 #include "ecore/impl/EObjectImpl.hpp"
 
