@@ -35,7 +35,7 @@
 #include "../[aClass.name.toUpperFirst().concat('.hpp')/]"
 
 [if (not (aClass.ePackage = aClass.getRootPackage()))]
-#include "[aClass.getRootPackage().name/]/[aClass.getNamespacePathWithoutRoot()/]Impl/[aClass.ePackage.name.toUpperFirst()/]FactoryImpl.hpp"
+#include "[aClass.getRootPackage().name/]/[aClass.getNamespacePathWithoutRoot()/]impl/[aClass.ePackage.name.toUpperFirst()/]FactoryImpl.hpp"
 [/if]
 [for (aEClass : EClass | aClass.eSuperTypes->asOrderedSet()->sortedBy(name)) separator ('\n')]
 #include "[aEClass.generateNamespacePath()/]/impl/[aEClass.name.toUpperFirst()/]Impl.hpp"[/for]

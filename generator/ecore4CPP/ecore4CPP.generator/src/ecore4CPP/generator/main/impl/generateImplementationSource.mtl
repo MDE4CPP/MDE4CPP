@@ -61,8 +61,8 @@
 [/for]
 
 //Factories an Package includes
-#include "[aClass.ePackage.getRootPackage().name/]/[aClass.ePackage.getNamespacePathWithoutRoot()/]Impl/[aClass.ePackage.name.toUpperFirst()/]FactoryImpl.hpp"
-#include "[aClass.ePackage.getRootPackage().name/]/[aClass.ePackage.getNamespacePathWithoutRoot()/]Impl/[aClass.ePackage.name.toUpperFirst()/]PackageImpl.hpp"
+#include "[aClass.ePackage.getRootPackage().name/]/[aClass.ePackage.getNamespacePathWithoutRoot()/]impl/[aClass.ePackage.name.toUpperFirst()/]FactoryImpl.hpp"
+#include "[aClass.ePackage.getRootPackage().name/]/[aClass.ePackage.getNamespacePathWithoutRoot()/]impl/[aClass.ePackage.name.toUpperFirst()/]PackageImpl.hpp"
 
 [for (anEPackage: EPackage| aClass.ePackage->closure(p|p.eSuperPackage)->asSet() )]
 #include "[anEPackage.getRootPackage().name/]/[anEPackage.getNamespacePathWithoutRoot()/][anEPackage.name.toUpperFirst()/]Factory.hpp"
