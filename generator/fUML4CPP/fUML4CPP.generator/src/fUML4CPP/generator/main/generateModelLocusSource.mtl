@@ -50,7 +50,6 @@ originalName : String = aPackage.getPackageName();
 [/for]
 
 
-using namespace fUML;
 using namespace [originalName/];
 
 //*********************************
@@ -92,14 +91,14 @@ std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> [upperName/]Locu
 [/let]
 			default:
 			{
-				return fUML::Semantics::Loci::LocusImpl::instantiate(type);
+				return PSCS::Semantics::Loci::CS_LocusImpl::instantiate(type);
 			}
 		}
 	}
 [/for]
 [/if]
 [/let]
-	return fUML::Semantics::Loci::LocusImpl::instantiate(type);
+	return PSCS::Semantics::Loci::CS_LocusImpl::instantiate(type);
 }
 [/file]
 [/template]

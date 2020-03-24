@@ -160,7 +160,7 @@ throw "error";
 [else]
 [if (par.upper =1)]
 assert(resultPList->front());
-std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> [par.name/]Value = std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Reference>(resultPList->front()->getValues()->front());
+std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> [par.name/]Value = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(resultPList->front()->getValues()->front());
 std::shared_ptr<[par.type.name.toUpperFirst()/]Object> [par.name/]UmlLinker = std::dynamic_pointer_cast<[par.type.name.toUpperFirst()/]Object>([par.name/]Value->getReferent());
 return eAny([par.name/]UmlLinker->getUmlValue[if(not (par.upper = 1))]s[/if]());
 [else]
@@ -171,7 +171,7 @@ Bag<fUML::Semantics::Values::Value>::iterator valueEnd = returnValues->end();
 std::shared_ptr<Bag<[par.type.generateCppType(true)/]>> returnList(new Bag<[par.type.generateCppType(true)/]>());
 while (valueIter != valueEnd)
 {
-	std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> returnValue = std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Reference>(*valueIter);
+	std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> returnValue = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(*valueIter);
 	std::shared_ptr<[par.type.name.toUpperFirst()/]Object> returnObject = std::dynamic_pointer_cast<[par.type.name.toUpperFirst()/]Object>(returnValue->getReferent());
 	returnList->push_back(returnObject->getUmlValue());
 	valueIter++;

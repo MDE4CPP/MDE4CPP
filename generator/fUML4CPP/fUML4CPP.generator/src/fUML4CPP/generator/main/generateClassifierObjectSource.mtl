@@ -41,9 +41,9 @@
 #include "abstractDataTypes/Any.hpp"
 [if (aPackage.getStructuralFeaturesFromRSTA(aClassifier)->size() > 0)]
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
-#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
 [/if]
-#include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/CS_Reference.hpp"
 #include "fUML/Semantics/Values/Value.hpp"
 [for (property : Property | attributes->sortedBy(qualifiedName))]
 [property.type.generateTypeInclude(aPackage)/]
@@ -69,7 +69,7 @@ using namespace [aPackage.name/];
 }
 
 [className/]::[className/]([className/] &obj):
-	ObjectImpl(obj)
+	CS_ObjectImpl(obj)
 {
 }
 
@@ -159,7 +159,7 @@ void [className/]::removeValue(std::shared_ptr<uml::StructuralFeature> feature, 
 				}
 			}
 [else]
-			std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> reference = std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Reference>(value);
+			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(value);
 			std::shared_ptr<[aProperty.type.getValueClass()/]> inputValue = std::dynamic_pointer_cast<[aProperty.type.getValueClass()/]>(reference->getReferent());
 			if (inputValue != nullptr)
 			{
@@ -195,7 +195,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> [className/]::getValues(std
 	{
 [if (aProperty.type.oclIsKindOf(Enumeration))]
 		[aProperty.type.generateCppType(false)/] [aProperty.name/] = m_umlValue->[aProperty.getterName()/]();
-		std::shared_ptr<fUML::Semantics::SimpleClassifiers::EnumerationValue> value = [getSimpleClassifierFactory()/]->createEnumerationValue();
+		std::shared_ptr<fUML::Semantics::SimpleClassifiers::EnumerationValue> value = [getFUMLSimpleClassifierFactory()/]->createEnumerationValue();
 [for (literal : EnumerationLiteral | aProperty.type.oclAsType(Enumeration).ownedLiteral)]
 		if ([aProperty.name/] == [literal.enumeration.namespace.name/]::[literal.enumeration.name/]::[literal.name.toUpperCase()/])
 		{
@@ -205,7 +205,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> [className/]::getValues(std
 		values->add(value);
 [elseif (aProperty.isPrimitiveTypedProperty())]
 [if (aProperty.upper = 1)]
-		std::shared_ptr<[aProperty.type.getValueClass()/]> value = [getSimpleClassifierFactory()/]->create[aProperty.type.name.toUpperFirst()/]Value();
+		std::shared_ptr<[aProperty.type.getValueClass()/]> value = [getFUMLSimpleClassifierFactory()/]->create[aProperty.type.name.toUpperFirst()/]Value();
 		value->setValue(m_umlValue->[if (aClassifier.getNearestPackage().name.toLower() = 'uml')]get[aProperty.name.toUpperFirst()/][else][aProperty.getterName()/][/if]());
 		values->add(value);
 [else]
@@ -214,7 +214,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> [className/]::getValues(std
 		Bag<[aProperty.type.generateCppType(true)/]>::iterator end = valueList->end();
 		while (iter != end)
 		{
-			std::shared_ptr<[aProperty.type.getValueClass()/]> value = [getSimpleClassifierFactory()/]->create[aProperty.type.name.toUpperFirst()/]Value();
+			std::shared_ptr<[aProperty.type.getValueClass()/]> value = [getFUMLSimpleClassifierFactory()/]->create[aProperty.type.name.toUpperFirst()/]Value();
 			value->setValue(*(*iter));
 			values->push_back(value);
 			iter++;
@@ -226,7 +226,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> [className/]::getValues(std
 		value->setThis[aProperty.type.oclAsType(Classifier).objectClassName()/]Ptr(value);
 		value->setLocus(this->getLocus());
 		value->setUmlValue(m_umlValue->[aProperty.getterName()/]()[if(aProperty.isBackReference())].lock()[/if]);
-		std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> reference= [getStructuredClassifierFactory()/]->createReference();
+		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference= [getPSCSStructuredClassifierFactory()/]->createCS_Reference();
 		reference->setReferent(value);
 		values->add(reference);
 [else]
@@ -239,7 +239,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> [className/]::getValues(std
 			value->setThis[aProperty.type.oclAsType(Classifier).objectClassName()/]Ptr(value);
 			value->setLocus(this->getLocus());
 			value->setUmlValue(*iter);
-			std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> reference= [getStructuredClassifierFactory()/]->createReference();
+			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference= [getPSCSStructuredClassifierFactory()/]->createCS_Reference();
 			reference->setReferent(value);
 			values->add(reference);
 			iter++;
@@ -311,7 +311,7 @@ if (valueObject != nullptr)
 [/if]
 }
 [else]
-std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> reference = std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Reference>(inputValue);
+std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(inputValue);
 std::shared_ptr<[valuePin.type.getValueClass()/]> value = std::dynamic_pointer_cast<[valuePin.type.getValueClass()/]>(reference->getReferent());
 if (value != nullptr)
 {

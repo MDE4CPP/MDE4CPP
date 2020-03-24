@@ -100,15 +100,16 @@ int main()
 
 [template public generateMainIncludes(aPackage : Package)]
 #include "abstractDataTypes/SubsetUnion.hpp"
+#include "PSCS/Semantics/Loci/LociFactory.hpp"
+#include "PSCS/Semantics/Loci/CS_Locus.hpp"
+#include "PSCS/Semantics/Loci/CS_ExecutionFactory.hpp"
+#include "PSCS/Semantics/Loci/CS_Executor.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
-#include "fUML/Semantics/Loci/ExecutionFactory.hpp"
-#include "fUML/Semantics/Loci/Executor.hpp"
 #include "fUML/Semantics/Loci/FirstChoiceStrategy.hpp"
-#include "fUML/Semantics/Loci/Locus.hpp"
 #include "fUML/Semantics/StructuredClassifiers/DispatchStrategy.hpp"
 #include "fUML/Semantics/Values/Value.hpp"
 #include "uml/Activity.hpp"
@@ -142,7 +143,7 @@ int main()
 [/template]
 
 [template public generateActivityRelatedIncludes(anActivity : Activity, aPackage : Package)]
-#include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/CS_Reference.hpp"
 #include "[aPackage.getPackageName()/]/[aPackage.getPackageName().toUpperFirst()/]Factory.hpp"
 #include "[aPackage.getPackageName()/]/[aPackage.getPackageName().toUpperFirst()/]Package.hpp"
 
@@ -155,22 +156,24 @@ int main()
 [template public generateLocusInitialization(aPackage : Package) {locusName : String = aPackage.getPackageName().sanitize().toUpperFirst() + 'Locus' ;}]
 DEBUG_MESSAGE(std::cout<<"Main function is executing"<<std::endl;)
 
-std::shared_ptr<fUML::Semantics::CommonBehavior::CommonBehaviorFactory> commonBehaviorFactory = [getCommonBehaviorFactory()/];
-std::shared_ptr<fUML::Semantics::Loci::LociFactory> lociFactory = [getLocusBehaviorFactory()/];
-std::shared_ptr<fUML::Semantics::StructuredClassifiers::StructuredClassifiersFactory> structuredClassifierFactory = [getStructuredClassifierFactory()/];
+std::shared_ptr<fUML::Semantics::CommonBehavior::CommonBehaviorFactory> commonBehaviorFactory = [getFUMLCommonBehaviorFactory()/];
+std::shared_ptr<fUML::Semantics::Loci::LociFactory> fUMLLociFactory = [getFUMLLociFactory()/];
+std::shared_ptr<PSCS::Semantics::Loci::LociFactory> PSCSLociFactory = [getPSCSLociFactory()/];
+std::shared_ptr<fUML::Semantics::StructuredClassifiers::StructuredClassifiersFactory> structuredClassifierFactory = [getFUMLStructuredClassifierFactory()/];
 
 std::shared_ptr<[locusName/]Impl> locus(new [locusName/]Impl);
 locus->setThisLocusPtr(locus);
 
-std::shared_ptr<fUML::Semantics::Loci::Executor> executor = lociFactory->createExecutor();
+std::shared_ptr<PSCS::Semantics::Loci::CS_Executor> executor = PSCSLociFactory->createCS_Executor();
 executor->setLocus(locus);
 locus->setExecutor(executor);
 
-std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory> factory = lociFactory->createExecutionFactory_in_Locus(locus);
+std::shared_ptr<PSCS::Semantics::Loci::CS_ExecutionFactory> factory = PSCSLociFactory->createCS_ExecutionFactory_in_Locus(locus);
 locus->setExecutor(executor);
 
-locus->getFactory()->assignStrategy(lociFactory->createFirstChoiceStrategy());
+locus->getFactory()->assignStrategy(fUMLLociFactory->createFirstChoiceStrategy());
 locus->getFactory()->assignStrategy(structuredClassifierFactory->createDispatchStrategy());
+//TODO set PSCS strategies
 [/template]
 
 [template public generateParameterInstances(anActivity : Activity, aPackage : Package)]

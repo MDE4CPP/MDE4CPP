@@ -46,8 +46,7 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp" 
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
-#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/CS_Reference.hpp"
 #include "uml/Behavior.hpp"
 
 [aNamedElement.generateIncludes(aPackage)/]
@@ -108,7 +107,6 @@ void [behaviorName/]::setThisExecutionPtr(std::weak_ptr<[behaviorName/]> thisExe
 #include "[aPackage.getPackageName()/]Exec/[aCallOperationAction.target.type.name.toUpperFirst()/]Object.hpp"
 [/if]
 
-#include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
 [for (type : Type | aCallOperationAction.input.type->asOrderedSet())]
 [type.generateTypeInclude(aPackage)/]
 [/for]
@@ -130,7 +128,6 @@ void [behaviorName/]::setThisExecutionPtr(std::weak_ptr<[behaviorName/]> thisExe
 [anOpaqueBehavior._body->at(index)/]
 [/if][/let][/if]
 
-#include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
 [for (type : Type | anOpaqueBehavior.ownedParameter.type->asOrderedSet())]
 [type.generateTypeInclude(aPackage)/]
 [/for]
@@ -286,7 +283,7 @@ if (literal[aPin.name.toUpperFirst()/] == [literal.generatePackageGetterCall()/]
 }
 [/for]
 [elseif (not aPin.type.supportedTypes())]
-std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> [aPin.name/]Value = std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Reference>([aPin.name/]ValueList->front());
+std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> [aPin.name/]Value = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>([aPin.name/]ValueList->front());
 [aPin.name/] = std::dynamic_pointer_cast<[aPin.type.name/]Object>([aPin.name/]Value->getReferent())->getUmlValue();
 if([aPin.name/] == nullptr)
 {
@@ -302,7 +299,7 @@ Bag<fUML::Semantics::Values::Value>::iterator [aPin.name.toLowerFirst()/]End = [
 while ([aPin.name.toLowerFirst()/]Iter != [aPin.name.toLowerFirst()/]End)
 {
 	[if (not aPin.type.supportedTypes())]
-	std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> [aPin.name/]Value = std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Reference>(*[aPin.name.toLowerFirst()/]Iter);
+	std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> [aPin.name/]Value = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(*[aPin.name.toLowerFirst()/]Iter);
 	[aPin.type.generateCppType(false)/] [aPin.name/]Temp = std::dynamic_pointer_cast<[aPin.type.name/]Object>([aPin.name/]Value->getReferent())->getUmlValue();
 	if([aPin.name/]Temp == nullptr)
 	{
@@ -347,7 +344,7 @@ if (literal[par.name.toUpperFirst()/] == [literal.generatePackageGetterCall()/])
 }
 [/for]
 [elseif (not par.type.supportedTypes())]
-std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> [par.name/]Value = std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Reference>([par.name/]ValueList->front());
+std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> [par.name/]Value = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_eference>([par.name/]ValueList->front());
 [par.name/] = std::dynamic_pointer_cast<[par.type.name/]Object>([par.name/]Value->getReferent())->getUmlValue();
 if([par.name/] == nullptr)
 {
@@ -363,7 +360,7 @@ Bag<fUML::Semantics::Values::Value>::iterator [par.name.toLowerFirst()/]ValueEnd
 while ([par.name.toLowerFirst()/]ValueIter != [par.name.toLowerFirst()/]ValueEnd)
 {
 	[if (not par.type.supportedTypes())]
-	std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> [par.name/]Value = std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Reference>(*[par.name.toLowerFirst()/]ValueIter);
+	std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> [par.name/]Value = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(*[par.name.toLowerFirst()/]ValueIter);
 	[par.type.generateCppType(false)/] [par.name/]Temp = std::dynamic_pointer_cast<[par.type.name/]Object>([par.name/]Value->getReferent())->getUmlValue();
 	if([par.name/]Temp == nullptr)
 	{

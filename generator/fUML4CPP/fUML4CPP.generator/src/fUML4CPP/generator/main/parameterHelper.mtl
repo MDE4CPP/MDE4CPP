@@ -18,10 +18,14 @@
 [import UML4CPP::generator::main::components::generateType /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 
-[query public getCommonBehaviorFactory(any : OclAny) : String = 'fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()' /]
-[query public getLocusBehaviorFactory(any : OclAny) : String = 'fUML::Semantics::Loci::LociFactory::eInstance()' /]
-[query public getSimpleClassifierFactory(any : OclAny) : String = 'fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()' /]
-[query public getStructuredClassifierFactory(any : OclAny) : String = 'fUML::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()' /]
+[query public getFUMLCommonBehaviorFactory(any : OclAny) : String = 'fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()' /]
+[query public getPSCSCommonBehaviorFactory(any : OclAny) : String = 'PSCS::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()' /]
+[query public getFUMLLociFactory(any : OclAny) : String = 'fUML::Semantics::Loci::LociFactory::eInstance()' /]
+[query public getPSCSLociFactory(any : OclAny) : String = 'PSCS::Semantics::Loci::LociFactory::eInstance()' /]
+[query public getFUMLSimpleClassifierFactory(any : OclAny) : String = 'fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()' /]
+[query public getPSCSSimpleClassifierFactory(any : OclAny) : String = 'PSCS::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()' /]
+[query public getFUMLStructuredClassifierFactory(any : OclAny) : String = 'fUML::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()' /]
+[query public getPSCSStructuredClassifierFactory(any : OclAny) : String = 'PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()' /]
 
 [query public getValueClass(aType : Type) : String = if (aType.oclIsKindOf(PrimitiveType)) then 'fUML::Semantics::SimpleClassifiers::'.concat(aType.name.toUpperFirst()).concat('Value') else aType.oclAsType(Classifier).objectClassName() endif /]
 
@@ -79,15 +83,15 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> [name/]ValueList = inputPar
 [/template]
 
 [template public generateOutputParameter(par : Parameter) ? (par.type.supportedTypes())]
-std::shared_ptr<fUML::Semantics::SimpleClassifiers::[par.type.name/]Value> [par.name/]OutValue([getSimpleClassifierFactory()/]->create[par.type.name/]Value());
+std::shared_ptr<fUML::Semantics::SimpleClassifiers::[par.type.name/]Value> [par.name/]OutValue([getFUMLSimpleClassifierFactory()/]->create[par.type.name/]Value());
 [/template]
 
 [template public generateOutputParameter(par : Parameter) ? (not type.supportedTypes() and type.oclIsKindOf(Enumeration))]
-std::shared_ptr<fUML::Semantics::SimpleClassifiers::EnumerationValue> [par.name/]OutValue([getSimpleClassifierFactory()/]->createEnumerationValue());
+std::shared_ptr<fUML::Semantics::SimpleClassifiers::EnumerationValue> [par.name/]OutValue([getFUMLSimpleClassifierFactory()/]->createEnumerationValue());
 [/template]
 
 [template public generateOutputParameter(par : Parameter) ? ((not type.supportedTypes()) and (not type.oclIsKindOf(Enumeration)))]
-std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> [par.name/]OutValue([getStructuredClassifierFactory()/]->createReference());
+std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> [par.name/]OutValue([getFUMLStructuredClassifierFactory()/]->createReference());
 std::shared_ptr<[par.type.name.toUpperFirst()/]Object> [par.name/]OutUmlLinker(new [par.type.name.toUpperFirst()/]Object([par.name.toLowerFirst()/][if (par.upper <> 1)]Temp[/if]));
 [par.name/]OutUmlLinker->setThis[par.type.name.toUpperFirst()/]ObjectPtr([par.name/]OutUmlLinker);
 [/template]

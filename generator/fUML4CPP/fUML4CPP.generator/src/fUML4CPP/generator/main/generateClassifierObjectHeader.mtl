@@ -27,7 +27,7 @@
 [file (aPackage.getPackageName().concat('Exec/').concat(className).concat('.hpp'), false, 'UTF-8')]
 [startGuard(aClassifier,'Execution')/]
 
-#include "fUML/Semantics/StructuredClassifiers/impl/ObjectImpl.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/impl/CS_ObjectImpl.hpp"
 
 template <class T> 
 class Bag;
@@ -39,7 +39,7 @@ namespace [aClassifier.getNearestPackage().myNamespaceName()/]
 
 namespace [aPackage.name/] 
 {
-	class [className/] : virtual public fUML::Semantics::StructuredClassifiers::ObjectImpl
+	class [className/] : virtual public PSCS::Semantics::StructuredClassifiers::CS_ObjectImpl
 	{
 		public:
 		    //constructors
