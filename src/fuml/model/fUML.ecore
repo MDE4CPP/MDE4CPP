@@ -1562,19 +1562,34 @@
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="StructuralFeatureActionActivation"
           abstract="true" eSuperTypes="#//Semantics/Actions/ActionActivation">
+        <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+          <details key="includes" value="#include &quot;fUML/Semantics/StructuredClassifiers/Link.hpp&quot;&#xA;#include &quot;fUML/Semantics/SimpleClassifiers/FeatureValue.hpp&quot;&#xA;#include &quot;fUML/Semantics/Loci/Locus.hpp&quot;"/>
+        </eAnnotations>
         <eOperations name="getAssociation" ordered="false" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Association">
+          <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+            <details key="body" value="// If the structural feature for the action of this activation is an association end,&#xA;// then get the associated association.&#xA;&#xA;std::shared_ptr&lt;uml::Association> association = nullptr;&#xA;std::shared_ptr&lt;uml::Property> property = std::dynamic_pointer_cast&lt;uml::Property>(feature);&#xA;&#xA;if(property != nullptr)&#xA;{&#xA;&#x9;association = property->getAssociation();&#xA;}&#xA;&#xA;return association;"/>
+          </eAnnotations>
           <eParameters name="feature" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//StructuralFeature"/>
         </eOperations>
         <eOperations name="getMatchingLinks" ordered="false" upperBound="-1" eType="#//Semantics/StructuredClassifiers/Link">
+          <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+            <details key="body" value="// Get the links of the given binary association whose end opposite&#xA;// to the given end has the given value&#xA;&#xA;return getMatchingLinksForEndValue(association, end, oppositeValue, nullptr);"/>
+          </eAnnotations>
           <eParameters name="association" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Association"/>
           <eParameters name="end" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//StructuralFeature"/>
           <eParameters name="oppositeValue" ordered="false" lowerBound="1" eType="#//Semantics/Values/Value"/>
         </eOperations>
         <eOperations name="getOppositeEnd" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Property">
+          <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+            <details key="body" value="// Get the end of a binary association opposite to the given end.&#xA;&#xA;std::shared_ptr&lt;uml::Property> oppositeEnd = association->getMemberEnd()->at(0);&#xA;if(oppositeEnd == end)&#xA;{&#xA;&#x9;&#x9;oppositeEnd = association->getMemberEnd()->at(1);&#xA;}&#xA;&#xA;return oppositeEnd;"/>
+          </eAnnotations>
           <eParameters name="association" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Association"/>
           <eParameters name="end" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//StructuralFeature"/>
         </eOperations>
         <eOperations name="getMatchingLinksForEndValue" upperBound="-1" eType="#//Semantics/StructuredClassifiers/Link">
+          <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+            <details key="body" value="// Get the links of the given binary association whose end opposite&#xA;// to the given end has the given opposite value and, optionally, that&#xA;// has a given end value for the given end.&#xA;&#xA;std::shared_ptr&lt;uml::Property> oppositeEnd = getOppositeEnd(association, end);&#xA;&#xA;std::shared_ptr&lt;Bag&lt;fUML::Semantics::StructuredClassifiers::ExtensionalValue>> extent = this->getExecutionLocus()->retrieveExtent(association);&#xA;&#xA;std::shared_ptr&lt;Bag&lt;fUML::Semantics::StructuredClassifiers::Link>> links(new Bag&lt;fUML::Semantics::StructuredClassifiers::Link>);&#xA;for(unsigned int i = 0; i &lt; extent->size(); i++){&#xA;&#x9;std::shared_ptr&lt;fUML::Semantics::StructuredClassifiers::ExtensionalValue> link = extent->at(i);&#xA;&#x9;if(link->retrieveFeatureValue(oppositeEnd)->getValues()->at(0) == oppositeValue) {&#xA;&#x9;&#x9;bool matches = true;&#xA;&#x9;&#x9;if(endValue != nullptr) {&#xA;&#x9;&#x9;&#x9;matches = (link->retrieveFeatureValue(end)->getValues()->at(0) == endValue);&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;&#xA;&#x9;&#x9;if(matches){&#xA;&#x9;&#x9;&#x9;if(!(std::dynamic_pointer_cast&lt;uml::MultiplicityElement>(end)->getIsOrdered()) || (links->size() == 0)){&#xA;&#x9;&#x9;&#x9;&#x9;links->add(std::dynamic_pointer_cast&lt;fUML::Semantics::StructuredClassifiers::Link>(link));&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;else {&#xA;&#x9;&#x9;&#x9;&#x9;unsigned int n = link->retrieveFeatureValue(end)->getPosition();&#xA;&#x9;&#x9;&#x9;&#x9;bool continueSearching = true;&#xA;&#x9;&#x9;&#x9;&#x9;unsigned int j = 0;&#xA;&#x9;&#x9;&#x9;&#x9;while(continueSearching &amp;&amp; (j &lt; links->size())){&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;j += 1;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;continueSearching = (unsigned int)(links->at(j-1)->retrieveFeatureValue(end)->getPosition()) &lt; n;&#xA;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;if(continueSearching){&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;links->add(std::dynamic_pointer_cast&lt;fUML::Semantics::StructuredClassifiers::Link>(link));&#xA;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;else {&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;//TODO&#xA;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;}&#xA;&#xA;return links;"/>
+          </eAnnotations>
           <eParameters name="association" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Association"/>
           <eParameters name="end" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//StructuralFeature"/>
           <eParameters name="oppositeValue" lowerBound="1" eType="#//Semantics/Values/Value"/>

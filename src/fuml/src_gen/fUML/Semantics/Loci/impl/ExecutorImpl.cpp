@@ -57,10 +57,10 @@
 #include "fUML/Semantics/Loci/impl/LociFactoryImpl.hpp"
 #include "fUML/Semantics/Loci/impl/LociPackageImpl.hpp"
 
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsFactory.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
