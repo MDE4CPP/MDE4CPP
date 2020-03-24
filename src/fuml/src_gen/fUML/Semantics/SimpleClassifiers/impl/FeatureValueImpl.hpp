@@ -13,7 +13,7 @@
 //Model includes
 #include "../FeatureValue.hpp"
 
-#include "fUML/Semantics/SimpleClassifiers/Impl/SimpleClassifiersFactoryImpl.hpp"
+#include "fUML/Semantics/SimpleClassifiers/impl/SimpleClassifiersFactoryImpl.hpp"
 
 #include "ecore/impl/EObjectImpl.hpp"
 

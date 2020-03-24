@@ -62,13 +62,13 @@
 #include "uml/ValueSpecification.hpp"
 
 //Factories an Package includes
-#include "fUML/Semantics/Classification/Impl/ClassificationFactoryImpl.hpp"
-#include "fUML/Semantics/Classification/Impl/ClassificationPackageImpl.hpp"
+#include "fUML/Semantics/Classification/impl/ClassificationFactoryImpl.hpp"
+#include "fUML/Semantics/Classification/impl/ClassificationPackageImpl.hpp"
 
-#include "fUML/Semantics/SemanticsFactory.hpp"
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/FUMLFactory.hpp"
 #include "fUML/FUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsFactory.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"

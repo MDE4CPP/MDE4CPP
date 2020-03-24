@@ -3,7 +3,7 @@
 #include <cassert>
 
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "ecore/ecorePackage.hpp"
+#include "ecore/EcorePackage.hpp"
 #include "ecore/impl/EAnnotationImpl.hpp"
 #include "ecore/impl/EAttributeImpl.hpp"
 #include "ecore/impl/EClassImpl.hpp"

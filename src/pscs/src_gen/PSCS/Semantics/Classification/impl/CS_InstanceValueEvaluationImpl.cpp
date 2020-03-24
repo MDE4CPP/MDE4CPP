@@ -59,13 +59,13 @@
 #include "uml/ValueSpecification.hpp"
 
 //Factories an Package includes
-#include "PSCS/Semantics/Classification/Impl/ClassificationFactoryImpl.hpp"
-#include "PSCS/Semantics/Classification/Impl/ClassificationPackageImpl.hpp"
+#include "PSCS/Semantics/Classification/impl/ClassificationFactoryImpl.hpp"
+#include "PSCS/Semantics/Classification/impl/ClassificationPackageImpl.hpp"
 
-#include "PSCS/Semantics/SemanticsFactory.hpp"
-#include "PSCS/Semantics/SemanticsPackage.hpp"
 #include "PSCS/PSCSFactory.hpp"
 #include "PSCS/PSCSPackage.hpp"
+#include "PSCS/Semantics/SemanticsFactory.hpp"
+#include "PSCS/Semantics/SemanticsPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"

@@ -13,7 +13,7 @@
 //Model includes
 #include "../CS_OpaqueExpressionEvaluation.hpp"
 
-#include "PSCS/Semantics/Values/Impl/ValuesFactoryImpl.hpp"
+#include "PSCS/Semantics/Values/impl/ValuesFactoryImpl.hpp"
 #include "fUML/Semantics/Values/impl/EvaluationImpl.hpp"
 
 //*********************************

@@ -66,13 +66,13 @@
 #include "fUML/Semantics/Activities/Token.hpp"
 
 //Factories an Package includes
-#include "PSCS/Semantics/Actions/Impl/ActionsFactoryImpl.hpp"
-#include "PSCS/Semantics/Actions/Impl/ActionsPackageImpl.hpp"
+#include "PSCS/Semantics/Actions/impl/ActionsFactoryImpl.hpp"
+#include "PSCS/Semantics/Actions/impl/ActionsPackageImpl.hpp"
 
-#include "PSCS/Semantics/SemanticsFactory.hpp"
-#include "PSCS/Semantics/SemanticsPackage.hpp"
 #include "PSCS/PSCSFactory.hpp"
 #include "PSCS/PSCSPackage.hpp"
+#include "PSCS/Semantics/SemanticsFactory.hpp"
+#include "PSCS/Semantics/SemanticsPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"

@@ -32,9 +32,9 @@
 #include "uml/impl/ElementImpl.hpp"
 [/if]
 [if (not (anEPackage = anEPackage.getRootPackage()))]
-#include "[anEPackage.getRootPackage().name/]/[anEPackage.getNamespacePathWithoutRoot()/][anEPackage.name/]Package.hpp"
+#include "[anEPackage.getRootPackage().name/]/[anEPackage.getNamespacePathWithoutRoot()/][anEPackage.name.toUpperFirst()/]Package.hpp"
 [else]
-#include "[anEPackage.getRootPackage().name/]/[anEPackage.getRootPackage().name/]Package.hpp"
+#include "[anEPackage.getRootPackage().name/]/[anEPackage.getRootPackage().name.toUpperFirst()/]Package.hpp"
 [/if]
 [generateFactoryImports()/]
 

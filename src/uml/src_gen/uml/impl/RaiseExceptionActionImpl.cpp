@@ -72,8 +72,8 @@
 #include "uml/StructuredActivityNode.hpp"
 
 //Factories an Package includes
-#include "uml/Impl/UmlFactoryImpl.hpp"
-#include "uml/Impl/UmlPackageImpl.hpp"
+#include "uml/impl/UmlFactoryImpl.hpp"
+#include "uml/impl/UmlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"

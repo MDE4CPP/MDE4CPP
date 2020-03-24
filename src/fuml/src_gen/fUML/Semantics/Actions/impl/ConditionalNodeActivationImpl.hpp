@@ -13,7 +13,7 @@
 //Model includes
 #include "../ConditionalNodeActivation.hpp"
 
-#include "fUML/Semantics/Actions/Impl/ActionsFactoryImpl.hpp"
+#include "fUML/Semantics/Actions/impl/ActionsFactoryImpl.hpp"
 #include "fUML/Semantics/Actions/impl/StructuredActivityNodeActivationImpl.hpp"
 
 //*********************************

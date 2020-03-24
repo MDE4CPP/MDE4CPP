@@ -4,7 +4,7 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EClass.hpp"
-#include "fUML/fUMLPackage.hpp"
+#include "fUML/FUMLPackage.hpp"
 
 
 

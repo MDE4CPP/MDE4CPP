@@ -13,7 +13,7 @@
 //Model includes
 #include "../CS_ConstructStrategy.hpp"
 
-#include "PSCS/Semantics/Actions/Impl/ActionsFactoryImpl.hpp"
+#include "PSCS/Semantics/Actions/impl/ActionsFactoryImpl.hpp"
 #include "fUML/Semantics/Loci/impl/SemanticStrategyImpl.hpp"
 
 //*********************************

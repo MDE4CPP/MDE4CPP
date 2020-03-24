@@ -47,13 +47,13 @@
 #include "fUML/Semantics/StructuredClassifiers/Object.hpp"
 
 //Factories an Package includes
-#include "PSCS/Semantics/Loci/Impl/LociFactoryImpl.hpp"
-#include "PSCS/Semantics/Loci/Impl/LociPackageImpl.hpp"
+#include "PSCS/Semantics/Loci/impl/LociFactoryImpl.hpp"
+#include "PSCS/Semantics/Loci/impl/LociPackageImpl.hpp"
 
-#include "PSCS/Semantics/SemanticsFactory.hpp"
-#include "PSCS/Semantics/SemanticsPackage.hpp"
 #include "PSCS/PSCSFactory.hpp"
 #include "PSCS/PSCSPackage.hpp"
+#include "PSCS/Semantics/SemanticsFactory.hpp"
+#include "PSCS/Semantics/SemanticsPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"

@@ -13,7 +13,7 @@
 //Model includes
 #include "../FIFOGetNextEventStrategy.hpp"
 
-#include "fUML/Semantics/CommonBehavior/Impl/CommonBehaviorFactoryImpl.hpp"
+#include "fUML/Semantics/CommonBehavior/impl/CommonBehaviorFactoryImpl.hpp"
 #include "fUML/Semantics/CommonBehavior/impl/GetNextEventStrategyImpl.hpp"
 
 //*********************************
