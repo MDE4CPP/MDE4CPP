@@ -1,0 +1,110 @@
+[comment encoding = UTF-8 /]
+[**
+ * Copyright (c) 2017 TU Ilmenau, Systems and Software Engineering Group
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
+ * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+ * and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */]
+[module parameterHelper('http://www.eclipse.org/uml2/5.0.0/UML')]
+ 
+[import fUML4CPP::generator::main::generateOpaqueBehaviorExecution /]
+[import UML4CPP::generator::main::components::generateType /]
+[import UML4CPP::generator::main::helpers::nameHelper /]
+
+[query public getCommonBehaviorFactory(any : OclAny) : String = 'fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()' /]
+[query public getLocusBehaviorFactory(any : OclAny) : String = 'fUML::Semantics::Loci::LociFactory::eInstance()' /]
+[query public getSimpleClassifierFactory(any : OclAny) : String = 'fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()' /]
+[query public getStructuredClassifierFactory(any : OclAny) : String = 'fUML::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()' /]
+
+[query public getValueClass(aType : Type) : String = if (aType.oclIsKindOf(PrimitiveType)) then 'fUML::Semantics::SimpleClassifiers::'.concat(aType.name.toUpperFirst()).concat('Value') else aType.oclAsType(Classifier).objectClassName() endif /]
+
+[query public pointerName(aClassifier : Classifier, aPackage : Package) : String = if (aPackage.name = aClassifier.namespace.myNamespaceName()) then aClassifier.name.toUpperFirst() else aClassifier.namespace.myNamespaceName().concat('::').concat(aClassifier.name.toUpperFirst()) endif /]
+[query public executionClassName(aClassifier : Classifier) : String = aClassifier.name.toUpperFirst().concat('Execution') /]
+[query public objectClassName(aClassifier : Classifier) : String = aClassifier.name.toUpperFirst().concat('Object') /]
+
+[query public supportedTypes(type : Type) : Boolean = (name = 'Integer') or (name = 'Boolean') or (name = 'String') or (name = 'Real') or (name = 'UnlimitedNatural') /]
+
+[query public getClassiferExecutions(aPackage : Package) : Set(Classifier) = OrderedSet{
+				aPackage.allOwnedElements()->filter(Activity)._context->reject(oclIsUndefined()),
+				aPackage.allOwnedElements()->filter(CallOperationAction).target.type,
+				aPackage.allOwnedElements()->filter(CallOperationAction).operation.ownedParameter->select(type.oclIsKindOf(Interface)).type,
+				aPackage.allOwnedElements()->filter(CallOperationAction).operation.ownedParameter->select(type.oclIsKindOf(Class)).type,
+				aPackage.allOwnedElements()->filter(CallBehaviorAction).behavior->filter(OpaqueBehavior).ownedParameter->select(type.oclIsKindOf(Interface)).type,
+				aPackage.allOwnedElements()->filter(CallBehaviorAction).behavior->filter(OpaqueBehavior).ownedParameter->select(type.oclIsKindOf(Class)).type,
+				aPackage.allOwnedElements()->filter(ReadStructuralFeatureAction).structuralFeature.type,
+				aPackage.allOwnedElements()->filter(AddStructuralFeatureValueAction).structuralFeature.type,
+				aPackage.allOwnedElements()->filter(RemoveStructuralFeatureValueAction).structuralFeature.type,
+				aPackage.allOwnedElements()->filter(Action).input.type,
+				aPackage.allOwnedElements()->filter(Action).output.type	
+			}->flatten()->reject(oclIsKindOf(Activity))->reject(supportedTypes())->reject(oclIsKindOf(Enumeration))->sortedBy(name)/]
+
+[comment]INPUT SWITCH ----------------------------------------------------------[/comment]
+[template public generateInputParameter(par : Parameter, index:Integer)]
+[par.name.generateInputParameter(par.type, index)/]
+[/template]
+
+[template public generateInputParameter(pin : Pin, index:Integer)]
+[pin.name.generateInputParameter(pin.type, index)/]
+[/template]
+
+[template private generateInputParameter(name : String, type : Type, index:Integer) ? (name.oclIsUndefined())]
+#error There is an input parameter/pin that doesn't have a name set. Fix the model and generate the code again.
+//Here some info that might help you to find it: name: [name/] - type: [type/]
+[/template]
+
+[template private generateInputParameter(name : String, type : Type, index:Integer) ? (type.name.oclIsUndefined())]
+#error Input parameter/pin [name/] does not have a type set. Fix the model and generate the code again.
+//Here some additional info that might help you to find it: [name/] - type: [type/]
+[/template]
+
+[template private generateInputParameter(name : String, type : Type, index:Integer) ? (not (name.oclIsUndefined() or type.name.oclIsUndefined()))]
+std::shared_ptr<Bag<fUML::Semantics::Values::Value>> [name/]ValueList = inputParameters->at([index/])->getValues();
+[/template]
+
+
+[comment]OUTPUT SWITCH ----------------------------------------------------------[/comment]
+[template public generateOutputParameter(par : Parameter) ? (par.name.oclIsUndefined())]
+#error There is an output parameter that doesn't have a name set. Fix the model and generate the code again.
+[/template]
+
+[template public generateOutputParameter(par : Parameter) ? (par.type.name.oclIsUndefined())]
+#error Output parameter [par.name/] doesn't have a type set. Fix the model and generate the code again.
+[/template]
+
+[template public generateOutputParameter(par : Parameter) ? (par.type.supportedTypes())]
+std::shared_ptr<fUML::Semantics::SimpleClassifiers::[par.type.name/]Value> [par.name/]OutValue([getSimpleClassifierFactory()/]->create[par.type.name/]Value());
+[/template]
+
+[template public generateOutputParameter(par : Parameter) ? (not type.supportedTypes() and type.oclIsKindOf(Enumeration))]
+std::shared_ptr<fUML::Semantics::SimpleClassifiers::EnumerationValue> [par.name/]OutValue([getSimpleClassifierFactory()/]->createEnumerationValue());
+[/template]
+
+[template public generateOutputParameter(par : Parameter) ? ((not type.supportedTypes()) and (not type.oclIsKindOf(Enumeration)))]
+std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> [par.name/]OutValue([getStructuredClassifierFactory()/]->createReference());
+std::shared_ptr<[par.type.name.toUpperFirst()/]Object> [par.name/]OutUmlLinker(new [par.type.name.toUpperFirst()/]Object([par.name.toLowerFirst()/][if (par.upper <> 1)]Temp[/if]));
+[par.name/]OutUmlLinker->setThis[par.type.name.toUpperFirst()/]ObjectPtr([par.name/]OutUmlLinker);
+[/template]
+
+
+[comment]INCLUDE SWITCH----------------------------------------------------------[/comment]
+[template public generateTypeInclude(type : Type, aPackage : Package) ? ((not type.supportedTypes()) and (not type.oclIsKindOf(Enumeration)))]
+#include "[type.getNearestPackage().myNamespaceName()/]/[type.name/].hpp"
+#include "[aPackage.getPackageName()/]Exec/[type.name/]Object.hpp"
+[/template]
+
+[template public generateTypeInclude(type : Type, aPackage : Package) ? (not type.supportedTypes() and type.oclIsKindOf(Enumeration))]
+#include "fUML/Semantics/SimpleClassifiers/EnumerationValue.hpp"
+#include "[type.getNearestPackage().myNamespaceName()/]/[type.name/].hpp"
+#include "[type.getNearestPackage().myNamespaceName()/]/[type.getNearestPackage().myNamespaceName()/]Package.hpp"
+[/template]
+
+[template public generateTypeInclude(type : Type, aPackage : Package) ? (supportedTypes())]
+#include "fUML/Semantics/SimpleClassifiers/[type.name/]Value.hpp"
+[/template]

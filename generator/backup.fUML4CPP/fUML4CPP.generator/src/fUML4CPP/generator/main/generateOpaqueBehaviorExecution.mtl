@@ -1,0 +1,150 @@
+[comment encoding = UTF-8 /]
+[**
+ * Copyright (c) 2017 TU Ilmenau, Systems and Software Engineering Group
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
+ * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+ * and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */]
+[module generateOpaqueBehaviorExecution('http://www.eclipse.org/uml2/5.0.0/UML')]
+
+[import UML4CPP::generator::main::components::generateType /]
+[import UML4CPP::generator::main::helpers::generalHelper /]
+[import UML4CPP::generator::main::helpers::nameHelper /]
+
+
+[template public generateOpaqueBehaviorExecutionName(aNamedElement : NamedElement) ? (aNamedElement.oclIsKindOf(DecisionNode))]
+[aNamedElement.oclAsType(DecisionNode).decisionInput.name.sanitize().toUpperFirst().concat('Execution')/]
+[/template]
+
+[template public generateOpaqueBehaviorExecutionName(aNamedElement : NamedElement) ? (aNamedElement.oclIsKindOf(CallBehaviorAction))]
+[aNamedElement.oclAsType(CallBehaviorAction).behavior.name.sanitize().toUpperFirst().concat('Execution')/]
+[/template]
+
+[template public generateOpaqueBehaviorExecutionName(aNamedElement : NamedElement) ? (aNamedElement.oclIsKindOf(CallOperationAction))]
+[aNamedElement.oclAsType(CallOperationAction).name.sanitize().toUpperFirst().concat('Execution')/]
+[/template] 
+
+[query public getDecisionNodesWithOB(aPackage : Package) : OrderedSet(DecisionNode) = OrderedSet{
+		aPackage.allOwnedElements()->selectByKind(DecisionNode)
+	}->flatten()->reject(decisionInput.oclIsUndefined())->select(decisionInput.oclIsKindOf(OpaqueBehavior))->sortedBy(name)
+ /]
+
+[query public getDecisionNodesWithOB(anActivity : Activity) : OrderedSet(DecisionNode) = OrderedSet{
+		anActivity.allOwnedElements()->selectByKind(DecisionNode)
+	}->flatten()->reject(decisionInput.oclIsUndefined())->select(node : DecisionNode | node.decisionInput.oclIsKindOf(OpaqueBehavior))->sortedBy(name)
+/]
+
+[query public getCallBehaviorActionsWithOB(aPackage : Package) : OrderedSet(CallBehaviorAction) = OrderedSet{
+		aPackage.allOwnedElements()->selectByKind(Activity).ownedNode->filter(CallBehaviorAction),
+		aPackage.allOwnedElements()->selectByKind(ExpansionRegion).node->filter(CallBehaviorAction),
+		aPackage.allOwnedElements()->filter(CallBehaviorAction).behavior->selectByKind(Activity)->reject(oclIsUndefined()).getCallBehaviorActionsWithOB()
+	}->flatten()->reject(behavior.oclIsUndefined())->select(behavior.oclIsKindOf(OpaqueBehavior))->sortedBy(name)
+/]
+
+[query public getCallBehaviorActionsWithOB(anActivity : Activity) : OrderedSet(CallBehaviorAction) = OrderedSet{
+		anActivity.allOwnedElements()->filter(CallBehaviorAction),
+		anActivity.allOwnedElements()->filter(CallBehaviorAction).behavior->selectByKind(Activity)->reject(oclIsUndefined()).getCallBehaviorActionsWithOB()
+	}->flatten()->reject(behavior.oclIsUndefined())->select(behavior.oclIsKindOf(OpaqueBehavior))->sortedBy(name)
+/]
+
+[query public getCallOperationActions(aPackage : Package) : OrderedSet(CallOperationAction) = OrderedSet{
+		aPackage.allOwnedElements()->selectByKind(Activity).ownedNode->filter(CallOperationAction),
+		aPackage.allOwnedElements()->selectByKind(ExpansionRegion).node->filter(CallOperationAction),
+		aPackage.allOwnedElements()->filter(CallBehaviorAction).behavior->selectByKind(Activity)->reject(oclIsUndefined()).getCallOperationActions()
+	}->flatten()->sortedBy(name)
+/]
+
+[query public getCallOperationActions(anActivity : Activity) : OrderedSet(CallOperationAction) = OrderedSet{
+		anActivity.allOwnedElements()->filter(CallOperationAction),
+		anActivity.allOwnedElements()->filter(CallBehaviorAction).behavior->selectByKind(Activity)->reject(oclIsUndefined()).getCallOperationActions()
+	}->flatten()->sortedBy(name)
+/]
+
+[template public generateOpaqueBehaviorCreation(anOpaqueBehavior : OpaqueBehavior, executionName : String) ]
+{
+	[if (not anOpaqueBehavior.name.oclIsUndefined())]
+	std::shared_ptr<[anOpaqueBehavior.getNearestPackage().myNamespaceName()/]::[executionName/]> [memberName(anOpaqueBehavior)/]Execution(new [anOpaqueBehavior.getNearestPackage().myNamespaceName()/]::[executionName/]());
+	[memberName(anOpaqueBehavior)/]Execution->setThisExecutionPtr([memberName(anOpaqueBehavior)/]Execution);
+	[memberName(anOpaqueBehavior)/]Execution->getTypes()->push_back([anOpaqueBehavior.generatePackageGetterCall()/]);
+	[memberName(anOpaqueBehavior)/]Execution->setLocus(locus);
+	factory->addPrimitiveBehaviorPrototype([memberName(anOpaqueBehavior)/]Execution);
+}
+[/if]
+[/template]
+
+[query public getFBPackageElement(aCOA : CallOperationAction) : String = 'ob_'.concat(aCOA.owner.oclAsType(NamedElement).name.replaceAll(' ', '')).concat('_').concat(aCOA.myName().sanitize())/]
+
+[template public generateCallOperationActionCreation(aCallOperationAction : CallOperationAction)]
+[if (not aCallOperationAction.name.oclIsUndefined())]
+std::shared_ptr<uml::OpaqueBehavior> [aCallOperationAction.getFBPackageElement()/](uml::UmlFactory::eInstance()->createOpaqueBehavior_in_Package([aCallOperationAction.getNearestPackage().name.concat('::').concat(aCallOperationAction.getNearestPackage().name.toUpperFirst()).concat('Package').concat('::eInstance()')/]));
+[aCallOperationAction.getFBPackageElement()/]->setName("[aCallOperationAction.getFBPackageElement()/]");
+[if (aCallOperationAction._context.oclIsKindOf(BehavioredClassifier))]
+[aCallOperationAction.getFBPackageElement()/]->setContext([aCallOperationAction._context.generatePackageGetterCall()/]);
+[/if]
+[aCallOperationAction.operation->asOrderedSet()->first().generatePackageGetterCall()/]->getMethod()->insert([aCallOperationAction.operation->asOrderedSet()->first().generatePackageGetterCall()/]->getMethod()->begin(), [aCallOperationAction.getFBPackageElement()/]);
+
+[for (aParameter : Parameter | aCallOperationAction.operation->asOrderedSet()->first().ownedParameter)]
+{
+	std::shared_ptr<uml::Parameter> [memberName(aParameter)/](uml::UmlFactory::eInstance()->createParameter_in_Behavior([aCallOperationAction.getFBPackageElement()/]));
+	[memberName(aParameter)/]->setName("[aParameter.name/]");
+	[memberName(aParameter)/]->setType([if(aParameter.type.getNearestPackage() = aParameter.getNearestPackage())][aParameter.getNearestPackage().myNamespaceName().concat('::').concat(aParameter.getNearestPackage().name.toUpperFirst()).concat('Package').concat('::eInstance()->')/][/if][aParameter.type.generatePackageGetterCall(aParameter)/]);
+	[memberName(aParameter)/]->setLower([aParameter.lower/]);
+	[memberName(aParameter)/]->setUpper([aParameter.upper/]);
+	[memberName(aParameter)/]->setDirection(uml::ParameterDirectionKind::[direction.toString().toUpper()/]);
+	//[aCallOperationAction.getFBPackageElement()/]->getOwnedParameter()->push_back([memberName(aParameter)/]);
+}
+[/for]
+{
+	std::shared_ptr<[aCallOperationAction.getNearestPackage().myNamespaceName()/]::[aCallOperationAction.generateOpaqueBehaviorExecutionName()/]> [memberName(aCallOperationAction)/]Execution(new [aCallOperationAction.getNearestPackage().myNamespaceName()/]::[aCallOperationAction.generateOpaqueBehaviorExecutionName()/]());
+	[memberName(aCallOperationAction)/]Execution->setThisExecutionPtr([memberName(aCallOperationAction)/]Execution);
+	[memberName(aCallOperationAction)/]Execution->getTypes()->push_back([aCallOperationAction.getFBPackageElement()/]);
+	[memberName(aCallOperationAction)/]Execution->setLocus(locus);
+	factory->addPrimitiveBehaviorPrototype([memberName(aCallOperationAction)/]Execution);
+}
+[else]
+std::cerr << "a CallOperationAction without name" << std::endl;
+throw "error";
+[/if]
+[/template]
+
+[template public generateCallOperationActionClearing(aCallOperationAction : CallOperationAction)]
+[aCallOperationAction.operation->asOrderedSet()->first().generatePackageGetterCall()/]->getMethod()->erase([aCallOperationAction.getFBPackageElement()/]);
+
+[/template]
+
+[template public generateInclude(aCallBehaviorAction : CallBehaviorAction)]
+[if (not aCallBehaviorAction.behavior.oclIsUndefined())]
+[if (not aCallBehaviorAction.behavior.name.oclIsUndefined())]
+#include "[aCallBehaviorAction.getNearestPackage().getPackageName()/]Exec/[aCallBehaviorAction.generateOpaqueBehaviorExecutionName()/].hpp"
+[/if]
+[/if]
+[/template]
+
+[template public generateInclude(aCallOperationAction : CallOperationAction)]
+[if (not aCallOperationAction.oclIsUndefined())]
+[if (not aCallOperationAction.name.oclIsUndefined())]
+#include "[aCallOperationAction.getNearestPackage().getPackageName()/]Exec/[aCallOperationAction.generateOpaqueBehaviorExecutionName()/].hpp"
+[/if]
+[/if]
+[/template]
+
+[template public generateInclude(aDecisionNode : DecisionNode)]
+[if (not aDecisionNode.decisionInput.oclIsUndefined())]
+[if (not aDecisionNode.decisionInput.name.oclIsUndefined())]
+#include "[aDecisionNode.getNearestPackage().getPackageName()/]Exec/[aDecisionNode.generateOpaqueBehaviorExecutionName()/].hpp"
+[/if]
+[/if]
+[/template]
+
+[template public generateInclude(anActivity : Activity)]
+[if (not anActivity.name.oclIsUndefined())]
+#include "[anActivity.getNearestPackage().getPackageName()/]Exec/[anActivity.name.toUpperFirst()/]Execution.hpp"
+[/if]
+[/template]

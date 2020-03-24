@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            allPopups="false"
+            locationURI="popup:org.eclipse.ui.popup.any?before=additions">
+         <menu
+               id="menuMDE4CPP"
+               label="MDE4CPP">
+            <command
+                  commandId="fUML4CPP.generator.ui.generateCommand"
+                  label="Generate with fUML4CPP"
+                  style="push">
+               <visibleWhen
+                     checkEnabled="false">
+                  <iterate
+                        ifEmpty="false"
+                        operator="or">
+                     <test
+                           property="org.eclipse.core.resources.name"
+                           value="*.uml">
+                     </test>
+                  </iterate>
+               </visibleWhen>
+            </command>
+         </menu>
+      </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            defaultHandler="fUML4CPP.generator.ui.common.fMLGeneraterCommand"
+            id="fUML4CPP.generator.ui.generateCommand"
+            name="Generate with fUML4CPP">
+      </command>
+   </extension>
+</plugin>
