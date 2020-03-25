@@ -280,7 +280,7 @@ void CS_AddStructuralFeatureValueActionActivationImpl::doActionDefault()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-		// Get the values of the object and value input pins.
+	// Get the values of the object and value input pins.
 	// If the given feature is an association end, then create a link
 	// between the object and value inputs.
 	// Otherwise, if the object input is a structural value, then add a
@@ -388,6 +388,8 @@ void CS_AddStructuralFeatureValueActionActivationImpl::doActionDefault()
 			else {
 				featureValue->getValues()->insert((featureValue->getValues()->begin() + (insertAt - 1)), inputValue);
 			}
+			
+			structuredValue->assignFeatureValue(feature, featureValue->getValues(), 0);
 		}
 	}
 	

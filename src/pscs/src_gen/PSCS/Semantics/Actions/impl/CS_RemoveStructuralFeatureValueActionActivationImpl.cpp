@@ -299,6 +299,7 @@ void CS_RemoveStructuralFeatureValueActionActivationImpl::doAction()
 				linkToDestroy->at(j)->destroy();
 			}
 		}
+		std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::StructuredValue>(value)->assignFeatureValue(feature, featureValue->getValues(), 0);
 	}
 	if(action->getResult() != nullptr) {
 		this->putToken(action->getResult(), value);
