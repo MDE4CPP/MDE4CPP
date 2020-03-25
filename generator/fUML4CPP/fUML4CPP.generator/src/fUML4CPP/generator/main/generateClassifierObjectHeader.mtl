@@ -63,6 +63,7 @@ namespace [aPackage.name/]
 [/if]
 [if (aPackage.getStructuralFeaturesFromASTVA(aClassifier)->size() > 0)]
 			virtual void setFeatureValue(std::shared_ptr<uml::StructuralFeature> feature, std::shared_ptr<Bag<fUML::Semantics::Values::Value>> value, int position);
+			virtual void assignFeatureValue(std::shared_ptr<uml::StructuralFeature> feature, std::shared_ptr<Bag<fUML::Semantics::Values::Value>> value, int position);
 [/if]
 		
 		protected:

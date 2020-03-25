@@ -311,6 +311,11 @@ void [className/]::setFeatureValue(std::shared_ptr<uml::StructuralFeature> featu
 [/let]
 [/for]
 }
+
+void [className/]::assignFeatureValue(std::shared_ptr<uml::StructuralFeature> feature, std::shared_ptr<Bag<fUML::Semantics::Values::Value>> values, int position)
+{
+	this->setFeatureValue(feature, values, position);
+}
 [/if]
 [/file]
 [/template]
