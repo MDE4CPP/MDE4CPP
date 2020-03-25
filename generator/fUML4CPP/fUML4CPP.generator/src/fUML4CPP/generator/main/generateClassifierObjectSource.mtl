@@ -45,6 +45,7 @@
 [/if]
 #include "PSCS/Semantics/StructuredClassifiers/CS_Reference.hpp"
 #include "fUML/Semantics/Values/Value.hpp"
+#include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
 [for (property : Property | attributes->sortedBy(qualifiedName))]
 [property.type.generateTypeInclude(aPackage)/]
 [/for]
@@ -249,6 +250,22 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> [className/]::getValues(std
 	}
 [/for]	
 	return values;
+}
+
+std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> [className/]::retrieveFeatureValue(std::shared_ptr<uml::StructuralFeature> feature)
+{
+	std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> featureValue([getFUMLSimpleClassifierFactory()/]->createFeatureValue());
+	featureValue->setFeature(feature);
+
+	std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> featureValues(new Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>());
+	std::shared_ptr<Bag<fUML::Semantics::Values::Value>> values = this->getValues(feature, featureValues);
+	
+	for(unsigned int i = 0; i < values->size(); i++)
+	{
+		featureValue->getValues()->add(values->at(i));
+	}
+
+	return featureValue;
 }
 [/if]
 [if (aPackage.getStructuralFeaturesFromASTVA(aClassifier)->size() > 0)]

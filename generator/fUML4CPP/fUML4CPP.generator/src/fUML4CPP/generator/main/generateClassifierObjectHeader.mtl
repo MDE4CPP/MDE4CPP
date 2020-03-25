@@ -59,6 +59,7 @@ namespace [aPackage.name/]
 [/if]
 [if (aPackage.getStructuralFeaturesFromRSTA(aClassifier)->size() > 0)]
 			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value>> getValues(std::shared_ptr<uml::StructuralFeature> feature, std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> featureValues);
+			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> retrieveFeatureValue(std::shared_ptr<uml::StructuralFeature> feature);
 [/if]
 [if (aPackage.getStructuralFeaturesFromASTVA(aClassifier)->size() > 0)]
 			virtual void setFeatureValue(std::shared_ptr<uml::StructuralFeature> feature, std::shared_ptr<Bag<fUML::Semantics::Values::Value>> value, int position);
