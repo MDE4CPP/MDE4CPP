@@ -249,7 +249,7 @@ for(unsigned int i = 0; i < extent->size(); i++){
 					links->add(std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Link>(link));
 				}
 				else {
-					//TODO
+					links->insert((links->begin() + (j-1)), std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Link>(link));
 				}
 			}
 		}
