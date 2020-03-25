@@ -173,8 +173,25 @@ std::shared_ptr<ecore::EClass> WriteStructuralFeatureActionActivationImpl::eStat
 //*********************************
 int WriteStructuralFeatureActionActivationImpl::position(std::shared_ptr<fUML::Semantics::Values::Value>  value,std::shared_ptr<Bag<fUML::Semantics::Values::Value> >  list,int startAt)
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Return the position (counting from 1) of the first occurance of the given value in the
+// given list at or after the starting index, or 0 if it is not found.
+
+bool found = false;
+unsigned int i = startAt;
+
+while(!found && i<=list->size()) {
+	found = (list->at(i-1) == value);
+	i += 1;
+}
+
+if(!found){
+	i = 1;
+}
+
+return i-1;
+	//end of body
 }
 
 //*********************************

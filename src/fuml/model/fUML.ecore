@@ -1702,6 +1702,9 @@
       <eClassifiers xsi:type="ecore:EClass" name="WriteStructuralFeatureActionActivation"
           abstract="true" eSuperTypes="#//Semantics/Actions/StructuralFeatureActionActivation">
         <eOperations name="position" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
+          <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+            <details key="body" value="// Return the position (counting from 1) of the first occurance of the given value in the&#xA;// given list at or after the starting index, or 0 if it is not found.&#xA;&#xA;bool found = false;&#xA;unsigned int i = startAt;&#xA;&#xA;while(!found &amp;&amp; i&lt;=list->size()) {&#xA;&#x9;found = (list->at(i-1) == value);&#xA;&#x9;i += 1;&#xA;}&#xA;&#xA;if(!found){&#xA;&#x9;i = 1;&#xA;}&#xA;&#xA;return i-1;"/>
+          </eAnnotations>
           <eParameters name="value" ordered="false" lowerBound="1" eType="#//Semantics/Values/Value"/>
           <eParameters name="list" ordered="false" upperBound="-1" eType="#//Semantics/Values/Value"/>
           <eParameters name="startAt" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
