@@ -50,6 +50,7 @@
 [property.type.generateTypeInclude(aPackage)/]
 [/for]
 #include "uml/Property.hpp"
+#include "uml/Port.hpp"
 
 [for (aPack : Package | attributes.getNearestPackage()->asSet()->flatten()->sortedBy(name))]
 #include "[aPack.getPackageName()/]/[aPack.name/]Package.hpp"

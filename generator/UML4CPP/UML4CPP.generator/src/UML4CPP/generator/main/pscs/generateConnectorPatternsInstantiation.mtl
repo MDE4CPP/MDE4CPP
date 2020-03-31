@@ -72,8 +72,8 @@ for(unsigned int i = 0; i < [end1.role.oclAsType(MultiplicityElement).getLower()
 	this->get[end2.role.name.toUpperFirst()/]()->at(i)->get[end2.getDefiningEnd().name.toUpperFirst()/]()->add(this->get[end1.role.name.toUpperFirst()/]()->at(i));
 }
 [else] [comment 1-multiplicity/]
-this->get[end1.role.name.toUpperFirst()/]()->set[end1.getDefiningEnd().name.toUpperFirst()/](this->get([end2.role.name.toUpperFirst()/]))
-this->get[end2.role.name.toUpperFirst()/]()->set[end2.getDefiningEnd().name.toUpperFirst()/](this->get([end1.role.name.toUpperFirst()/]))
+this->get[end1.role.name.toUpperFirst()/]()->set[end1.getDefiningEnd().name.toUpperFirst()/](this->get[end2.role.name.toUpperFirst()/]());
+this->get[end2.role.name.toUpperFirst()/]()->set[end2.getDefiningEnd().name.toUpperFirst()/](this->get[end1.role.name.toUpperFirst()/]());
 [/if]
 [/template]
 
@@ -217,8 +217,8 @@ for(unsigned int i = 0; i < [end1.role.oclAsType(MultiplicityElement).getLower()
 	}
 }
 [else] [comment 1-multiplicity/]
-this->get[end1.role.name.toUpperFirst()/]()->set[end1.getDefiningEnd().name.toUpperFirst()/](this->get([end2.role.name.toUpperFirst()/]))
-this->get[end2.role.name.toUpperFirst()/]()->set[end2.getDefiningEnd().name.toUpperFirst()/](this->get([end1.role.name.toUpperFirst()/]))
+this->get[end1.role.name.toUpperFirst()/]()->set[end1.getDefiningEnd().name.toUpperFirst()/](this->get[end2.role.name.toUpperFirst()/]());
+this->get[end2.role.name.toUpperFirst()/]()->set[end2.getDefiningEnd().name.toUpperFirst()/](this->get[end1.role.name.toUpperFirst()/]());
 [/if]
 [/template]
 

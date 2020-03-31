@@ -1278,7 +1278,7 @@
       <ownedDiagramElements xmi:type="diagram:DNodeContainer" uid="_Pp7qgE8OEeqkydMnulefaw" name="ValSpec5" incomingEdges="_PqWhRE8OEeqkydMnulefaw">
         <target xmi:type="uml:ValueSpecificationAction" href="ActionTest.uml#_FGGisPDEEemaRoNal_vgxw"/>
         <semanticElements xmi:type="uml:ValueSpecificationAction" href="ActionTest.uml#_FGGisPDEEemaRoNal_vgxw"/>
-        <ownedBorderedNodes xmi:type="diagram:DNode" uid="_Pp84oE8OEeqkydMnulefaw" name="out : " outgoingEdges="_Pqiugk8OEeqkydMnulefaw" width="2" height="2">
+        <ownedBorderedNodes xmi:type="diagram:DNode" uid="_Pp84oE8OEeqkydMnulefaw" name="out : Integer" outgoingEdges="_Pqiugk8OEeqkydMnulefaw" width="2" height="2">
           <target xmi:type="uml:OutputPin" href="ActionTest.uml#_FGGisfDEEemaRoNal_vgxw"/>
           <semanticElements xmi:type="uml:OutputPin" href="ActionTest.uml#_FGGisfDEEemaRoNal_vgxw"/>
           <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>

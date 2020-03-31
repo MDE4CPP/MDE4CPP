@@ -28,7 +28,7 @@
 [if (aProperty.isContainer())]
 //reset property [aProperty.name/]
 m_[aProperty.name/]->clear();
-[elseif (aProperty.isSingleValue() and not aProperty.type.isPrimitive())]
+[elseif (aProperty.isSingleValue() and not aProperty.type.isPrimitive() and not aProperty.type.oclIsKindOf(Enumeration))]
 //reset property [aProperty.name/]
 m_[aProperty.name/].reset();
 [/if]
