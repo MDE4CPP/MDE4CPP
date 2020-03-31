@@ -104,10 +104,15 @@ int main()
 #include "PSCS/Semantics/Loci/CS_Locus.hpp"
 #include "PSCS/Semantics/Loci/CS_ExecutionFactory.hpp"
 #include "PSCS/Semantics/Loci/CS_Executor.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/CS_DispatchOperationOfInterfaceStrategy.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/CS_NameBased_StructuralFeatureOfInterfaceAccessStrategy.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/CS_DefaultRequestPropagationStrategy.hpp"
+#include "PSCS/Semantics/Actions/ActionsFactory.hpp"
+#include "PSCS/Semantics/Actions/CS_DefaultConstructStrategy.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
-#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
 #include "fUML/Semantics/Loci/FirstChoiceStrategy.hpp"
 #include "fUML/Semantics/StructuredClassifiers/DispatchStrategy.hpp"
@@ -159,7 +164,8 @@ DEBUG_MESSAGE(std::cout<<"Main function is executing"<<std::endl;)
 std::shared_ptr<fUML::Semantics::CommonBehavior::CommonBehaviorFactory> commonBehaviorFactory = [getFUMLCommonBehaviorFactory()/];
 std::shared_ptr<fUML::Semantics::Loci::LociFactory> fUMLLociFactory = [getFUMLLociFactory()/];
 std::shared_ptr<PSCS::Semantics::Loci::LociFactory> PSCSLociFactory = [getPSCSLociFactory()/];
-std::shared_ptr<fUML::Semantics::StructuredClassifiers::StructuredClassifiersFactory> structuredClassifierFactory = [getFUMLStructuredClassifierFactory()/];
+std::shared_ptr<PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory> PSCSStructuredClassifierFactory = [getPSCSStructuredClassifierFactory()/];
+std::shared_ptr<PSCS::Semantics::Actions::ActionsFactory> PSCSActionsFactory = [getPSCSActionsFactory()/];
 
 std::shared_ptr<[locusName/]Impl> locus(new [locusName/]Impl);
 locus->setThisLocusPtr(locus);
@@ -171,9 +177,16 @@ locus->setExecutor(executor);
 std::shared_ptr<PSCS::Semantics::Loci::CS_ExecutionFactory> factory = PSCSLociFactory->createCS_ExecutionFactory_in_Locus(locus);
 locus->setExecutor(executor);
 
+//Assign ConstructStrategy
+locus->getFactory()->assignStrategy(PSCSActionsFactory->createCS_DefaultConstructStrategy());
+//Assign ChoiceStrategy
 locus->getFactory()->assignStrategy(fUMLLociFactory->createFirstChoiceStrategy());
-locus->getFactory()->assignStrategy(structuredClassifierFactory->createDispatchStrategy());
-//TODO set PSCS strategies
+//Assign DispatchStrategy
+locus->getFactory()->assignStrategy(PSCSStructuredClassifierFactory->createCS_DispatchOperationOfInterfaceStrategy());
+//Assign StructuralFeatureOfInterfaceAccessStrategy
+locus->getFactory()->assignStrategy(PSCSStructuredClassifierFactory->createCS_NameBased_StructuralFeatureOfInterfaceAccessStrategy());
+//Assign RequestPropagationStrategy
+locus->getFactory()->assignStrategy(PSCSStructuredClassifierFactory->createCS_DefaultRequestPropagationStrategy());
 [/template]
 
 [template public generateParameterInstances(anActivity : Activity, aPackage : Package)]

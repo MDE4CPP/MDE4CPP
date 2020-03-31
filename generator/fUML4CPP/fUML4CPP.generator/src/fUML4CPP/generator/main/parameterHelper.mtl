@@ -26,6 +26,7 @@
 [query public getPSCSSimpleClassifierFactory(any : OclAny) : String = 'PSCS::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()' /]
 [query public getFUMLStructuredClassifierFactory(any : OclAny) : String = 'fUML::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()' /]
 [query public getPSCSStructuredClassifierFactory(any : OclAny) : String = 'PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()' /]
+[query public getPSCSActionsFactory(any : OclAny) : String = 'PSCS::Semantics::Actions::ActionsFactory::eInstance()' /]
 
 [query public getValueClass(aType : Type) : String = if (aType.oclIsKindOf(PrimitiveType)) then 'fUML::Semantics::SimpleClassifiers::'.concat(aType.name.toUpperFirst()).concat('Value') else aType.oclAsType(Classifier).objectClassName() endif /]
 
