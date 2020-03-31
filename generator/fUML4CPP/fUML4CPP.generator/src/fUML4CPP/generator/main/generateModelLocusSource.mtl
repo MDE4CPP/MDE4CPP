@@ -35,6 +35,7 @@ originalName : String = aPackage.getPackageName();
 
 [defineDebugMacro()/]
 
+#include "abstractDataTypes/SubsetUnion.hpp"
 #include "uml/Class.hpp"
 
 [for (classPackage : Package | aPackage.getClassPackagesOfCreateObjectAction())]
@@ -83,6 +84,7 @@ std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> [upperName/]Locu
 				std::shared_ptr<[originalName/]::[className/]Object> object(new [originalName/]::[className/]Object());
 				object->setThis[className/]ObjectPtr(object);
 				object->setUmlValue([packageName/]::[packageName.toUpperFirst()/]Factory::eInstance()->create[aClass.name.toUpperFirst()/]());
+				object->getTypes()->add(type);
 				object->setLocus(this->getThisLocusPtr());
 				return object;
 			}
