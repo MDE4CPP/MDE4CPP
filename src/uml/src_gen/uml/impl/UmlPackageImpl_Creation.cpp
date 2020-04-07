@@ -994,6 +994,7 @@ void UmlPackageImpl::createConnectorContent(std::shared_ptr<ecore::EPackage> pac
 	m_connector_Attribute_contract = factory->createEReference_in_EContainingClass(m_connector_Class, CONNECTOR_ATTRIBUTE_CONTRACT);
 	m_connector_Attribute_end = factory->createEReference_in_EContainingClass(m_connector_Class, CONNECTOR_ATTRIBUTE_END);
 	m_connector_Attribute_redefinedConnector = factory->createEReference_in_EContainingClass(m_connector_Class, CONNECTOR_ATTRIBUTE_REDEFINEDCONNECTOR);
+	m_connector_Attribute_structuredClassifier = factory->createEReference_in_EContainingClass(m_connector_Class, CONNECTOR_ATTRIBUTE_STRUCTUREDCLASSIFIER);
 	m_connector_Attribute_type = factory->createEReference_in_EContainingClass(m_connector_Class, CONNECTOR_ATTRIBUTE_TYPE);
 	
 	m_connector_Operation_getKind = factory->createEOperation_in_EContainingClass(m_connector_Class, CONNECTOR_OPERATION_GETKIND);
@@ -1006,6 +1007,7 @@ void UmlPackageImpl::createConnectorEndContent(std::shared_ptr<ecore::EPackage> 
 {
 	m_connectorEnd_Class = factory->createEClass_in_EPackage(package, CONNECTOREND_CLASS);
 	
+	m_connectorEnd_Attribute_connector = factory->createEReference_in_EContainingClass(m_connectorEnd_Class, CONNECTOREND_ATTRIBUTE_CONNECTOR);
 	m_connectorEnd_Attribute_definingEnd = factory->createEReference_in_EContainingClass(m_connectorEnd_Class, CONNECTOREND_ATTRIBUTE_DEFININGEND);
 	m_connectorEnd_Attribute_partWithPort = factory->createEReference_in_EContainingClass(m_connectorEnd_Class, CONNECTOREND_ATTRIBUTE_PARTWITHPORT);
 	m_connectorEnd_Attribute_role = factory->createEReference_in_EContainingClass(m_connectorEnd_Class, CONNECTOREND_ATTRIBUTE_ROLE);

@@ -1749,18 +1749,19 @@ namespace uml
 			// Begin Class Connector
 			//Class and Feature IDs 
 			static const unsigned int CONNECTOR_CLASS = 54;
-			static const unsigned int CONNECTOR_CLASS_FEATURE_COUNT = 19;
+			static const unsigned int CONNECTOR_CLASS_FEATURE_COUNT = 20;
 			static const unsigned int CONNECTOR_CLASS_OPERATION_COUNT = 64;
 			static const int CONNECTOR_ATTRIBUTE_KIND = 5416;
 			
 			static const int CONNECTOR_ATTRIBUTE_CONTRACT = 5414;
 			static const int CONNECTOR_ATTRIBUTE_END = 5415;
 			static const int CONNECTOR_ATTRIBUTE_REDEFINEDCONNECTOR = 5417;
+			static const int CONNECTOR_ATTRIBUTE_STRUCTUREDCLASSIFIER = 5419;
 			static const int CONNECTOR_ATTRIBUTE_TYPE = 5418;
 			
-			static const int CONNECTOR_OPERATION_GETKIND = 5482;
-			static const int CONNECTOR_OPERATION_ROLES_EDIAGNOSTICCHAIN_EMAP = 5481;
-			static const int CONNECTOR_OPERATION_TYPES_EDIAGNOSTICCHAIN_EMAP = 5480;
+			static const int CONNECTOR_OPERATION_GETKIND = 5483;
+			static const int CONNECTOR_OPERATION_ROLES_EDIAGNOSTICCHAIN_EMAP = 5482;
+			static const int CONNECTOR_OPERATION_TYPES_EDIAGNOSTICCHAIN_EMAP = 5481;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getConnector_Class() const = 0;
@@ -1770,6 +1771,7 @@ namespace uml
 			virtual std::shared_ptr<ecore::EReference> getConnector_Attribute_contract() const = 0;
 			virtual std::shared_ptr<ecore::EReference> getConnector_Attribute_end() const = 0;
 			virtual std::shared_ptr<ecore::EReference> getConnector_Attribute_redefinedConnector() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getConnector_Attribute_structuredClassifier() const = 0;
 			virtual std::shared_ptr<ecore::EReference> getConnector_Attribute_type() const = 0;
 			
 			virtual std::shared_ptr<ecore::EOperation> getConnector_Operation_getKind() const = 0;
@@ -1782,23 +1784,25 @@ namespace uml
 			// Begin Class ConnectorEnd
 			//Class and Feature IDs 
 			static const unsigned int CONNECTOREND_CLASS = 55;
-			static const unsigned int CONNECTOREND_CLASS_FEATURE_COUNT = 12;
+			static const unsigned int CONNECTOREND_CLASS_FEATURE_COUNT = 13;
 			static const unsigned int CONNECTOREND_CLASS_OPERATION_COUNT = 59;
 			
+			static const int CONNECTOREND_ATTRIBUTE_CONNECTOR = 5512;
 			static const int CONNECTOREND_ATTRIBUTE_DEFININGEND = 5509;
 			static const int CONNECTOREND_ATTRIBUTE_PARTWITHPORT = 5510;
 			static const int CONNECTOREND_ATTRIBUTE_ROLE = 5511;
 			
-			static const int CONNECTOREND_OPERATION_GETDEFININGEND = 5570;
-			static const int CONNECTOREND_OPERATION_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP = 5568;
-			static const int CONNECTOREND_OPERATION_PART_WITH_PORT_EMPTY_EDIAGNOSTICCHAIN_EMAP = 5567;
-			static const int CONNECTOREND_OPERATION_ROLE_AND_PART_WITH_PORT_EDIAGNOSTICCHAIN_EMAP = 5566;
-			static const int CONNECTOREND_OPERATION_SELF_PART_WITH_PORT_EDIAGNOSTICCHAIN_EMAP = 5569;
+			static const int CONNECTOREND_OPERATION_GETDEFININGEND = 5571;
+			static const int CONNECTOREND_OPERATION_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP = 5569;
+			static const int CONNECTOREND_OPERATION_PART_WITH_PORT_EMPTY_EDIAGNOSTICCHAIN_EMAP = 5568;
+			static const int CONNECTOREND_OPERATION_ROLE_AND_PART_WITH_PORT_EDIAGNOSTICCHAIN_EMAP = 5567;
+			static const int CONNECTOREND_OPERATION_SELF_PART_WITH_PORT_EDIAGNOSTICCHAIN_EMAP = 5570;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getConnectorEnd_Class() const = 0;
 			
 			
+			virtual std::shared_ptr<ecore::EReference> getConnectorEnd_Attribute_connector() const = 0;
 			virtual std::shared_ptr<ecore::EReference> getConnectorEnd_Attribute_definingEnd() const = 0;
 			virtual std::shared_ptr<ecore::EReference> getConnectorEnd_Attribute_partWithPort() const = 0;
 			virtual std::shared_ptr<ecore::EReference> getConnectorEnd_Attribute_role() const = 0;

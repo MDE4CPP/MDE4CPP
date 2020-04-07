@@ -1807,6 +1807,10 @@ std::shared_ptr<ecore::EReference> UmlPackageImpl::getConnector_Attribute_redefi
 {
 	return m_connector_Attribute_redefinedConnector;
 }
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getConnector_Attribute_structuredClassifier() const
+{
+	return m_connector_Attribute_structuredClassifier;
+}
 std::shared_ptr<ecore::EReference> UmlPackageImpl::getConnector_Attribute_type() const
 {
 	return m_connector_Attribute_type;
@@ -1834,6 +1838,10 @@ std::shared_ptr<ecore::EClass> UmlPackageImpl::getConnectorEnd_Class() const
 }
 
 
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getConnectorEnd_Attribute_connector() const
+{
+	return m_connectorEnd_Attribute_connector;
+}
 std::shared_ptr<ecore::EReference> UmlPackageImpl::getConnectorEnd_Attribute_definingEnd() const
 {
 	return m_connectorEnd_Attribute_definingEnd;

@@ -41,6 +41,10 @@ namespace uml
 			ConnectorImpl(std::weak_ptr<uml::Element > par_owner);
 
 
+			//Additional constructors for the containments back reference
+			ConnectorImpl(std::weak_ptr<uml::StructuredClassifier > par_structuredClassifier);
+
+
 
 
 		public:
@@ -109,6 +113,13 @@ namespace uml
 			virtual std::shared_ptr<Subset<uml::Connector, uml::RedefinableElement>> getRedefinedConnector() const ;
 			
 			/*!
+			 */
+			virtual std::weak_ptr<uml::StructuredClassifier > getStructuredClassifier() const ;
+			
+			/*!
+			 */
+			virtual void setStructuredClassifier(std::shared_ptr<uml::StructuredClassifier> _structuredClassifier_structuredClassifier) ;
+			/*!
 			 An optional Association that classifies links corresponding to this Connector.
 			<p>From package UML::StructuredClassifiers.</p> */
 			virtual std::shared_ptr<uml::Association > getType() const ;
@@ -123,6 +134,12 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
+			 The Classifiers that have this Feature as a feature.
+			<p>From package UML::Classification.</p> */
+			virtual std::shared_ptr<Union<uml::Classifier>> getFeaturingClassifier() const ;/*!
+			 Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
@@ -131,7 +148,10 @@ namespace uml
 			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
 			 The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const ; 
+			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const ;/*!
+			 The contexts that this element may be redefined from.
+			<p>From package UML::Classification.</p> */
+			virtual std::shared_ptr<Union<uml::Classifier>> getRedefinitionContext() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

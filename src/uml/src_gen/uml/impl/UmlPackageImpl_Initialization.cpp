@@ -7705,8 +7705,11 @@ void UmlPackageImpl::initializeConnectorContent()
 		{
 			m_connector_Attribute_end->setDefaultValueLiteral(defaultValue);
 		}				
-			//undefined otherEnd
-			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getConnectorEnd_Attribute_connector();
+		if (otherEnd != nullptr)
+	    {
+	   		m_connector_Attribute_end->setEOpposite(otherEnd);
+	    }
 	}
 	m_connector_Attribute_redefinedConnector->setName("redefinedConnector");
 	m_connector_Attribute_redefinedConnector->setEType(getConnector_Class());
@@ -7729,6 +7732,31 @@ void UmlPackageImpl::initializeConnectorContent()
 		}				
 			//undefined otherEnd
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
+	}
+	m_connector_Attribute_structuredClassifier->setName("structuredClassifier");
+	m_connector_Attribute_structuredClassifier->setEType(getStructuredClassifier_Class());
+	m_connector_Attribute_structuredClassifier->setLowerBound(0);
+	m_connector_Attribute_structuredClassifier->setUpperBound(1);
+	m_connector_Attribute_structuredClassifier->setTransient(false);
+	m_connector_Attribute_structuredClassifier->setVolatile(false);
+	m_connector_Attribute_structuredClassifier->setChangeable(true);
+	m_connector_Attribute_structuredClassifier->setUnsettable(false);
+	m_connector_Attribute_structuredClassifier->setUnique(true);
+	m_connector_Attribute_structuredClassifier->setDerived(false);
+	m_connector_Attribute_structuredClassifier->setOrdered(true);
+	m_connector_Attribute_structuredClassifier->setContainment(false);
+	m_connector_Attribute_structuredClassifier->setResolveProxies(true);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			m_connector_Attribute_structuredClassifier->setDefaultValueLiteral(defaultValue);
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getStructuredClassifier_Attribute_ownedConnector();
+		if (otherEnd != nullptr)
+	    {
+	   		m_connector_Attribute_structuredClassifier->setEOpposite(otherEnd);
+	    }
 	}
 	m_connector_Attribute_type->setName("type");
 	m_connector_Attribute_type->setEType(getAssociation_Class());
@@ -7825,6 +7853,31 @@ void UmlPackageImpl::initializeConnectorEndContent()
 	m_connectorEnd_Class->setInterface(false);
 	
 	
+	m_connectorEnd_Attribute_connector->setName("connector");
+	m_connectorEnd_Attribute_connector->setEType(getConnector_Class());
+	m_connectorEnd_Attribute_connector->setLowerBound(1);
+	m_connectorEnd_Attribute_connector->setUpperBound(1);
+	m_connectorEnd_Attribute_connector->setTransient(false);
+	m_connectorEnd_Attribute_connector->setVolatile(false);
+	m_connectorEnd_Attribute_connector->setChangeable(true);
+	m_connectorEnd_Attribute_connector->setUnsettable(false);
+	m_connectorEnd_Attribute_connector->setUnique(true);
+	m_connectorEnd_Attribute_connector->setDerived(false);
+	m_connectorEnd_Attribute_connector->setOrdered(true);
+	m_connectorEnd_Attribute_connector->setContainment(false);
+	m_connectorEnd_Attribute_connector->setResolveProxies(true);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			m_connectorEnd_Attribute_connector->setDefaultValueLiteral(defaultValue);
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getConnector_Attribute_end();
+		if (otherEnd != nullptr)
+	    {
+	   		m_connectorEnd_Attribute_connector->setEOpposite(otherEnd);
+	    }
+	}
 	m_connectorEnd_Attribute_definingEnd->setName("definingEnd");
 	m_connectorEnd_Attribute_definingEnd->setEType(getProperty_Class());
 	m_connectorEnd_Attribute_definingEnd->setLowerBound(0);
@@ -30018,8 +30071,11 @@ void UmlPackageImpl::initializeStructuredClassifierContent()
 		{
 			m_structuredClassifier_Attribute_ownedConnector->setDefaultValueLiteral(defaultValue);
 		}				
-			//undefined otherEnd
-			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getConnector_Attribute_structuredClassifier();
+		if (otherEnd != nullptr)
+	    {
+	   		m_structuredClassifier_Attribute_ownedConnector->setEOpposite(otherEnd);
+	    }
 	}
 	m_structuredClassifier_Attribute_part->setName("part");
 	m_structuredClassifier_Attribute_part->setEType(getProperty_Class());

@@ -695,8 +695,12 @@ namespace uml
 			 virtual std::shared_ptr<Connector> createConnector_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID=-1) const ;
 			 //Add containing object
 			 virtual std::shared_ptr<Connector> createConnector_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID=-1) const ;
+			 //Add containing object
+			 virtual std::shared_ptr<Connector> createConnector_in_StructuredClassifier(std::weak_ptr<uml::StructuredClassifier > par_structuredClassifier, const int metaElementID=-1) const ;
 			 
 			 virtual std::shared_ptr<ConnectorEnd> createConnectorEnd(const int metaElementID=-1) const ;
+			 //Add containing object
+			 virtual std::shared_ptr<ConnectorEnd> createConnectorEnd_in_Connector(std::weak_ptr<uml::Connector > par_connector, const int metaElementID=-1) const ;
 			 //Add containing object
 			 virtual std::shared_ptr<ConnectorEnd> createConnectorEnd_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID=-1) const ;
 			 

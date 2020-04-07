@@ -101,6 +101,11 @@ namespace uml
 	class StringExpression;
 }
 
+namespace uml 
+{
+	class StructuredClassifier;
+}
+
 // base class includes
 #include "uml/Feature.hpp"
 
@@ -125,6 +130,18 @@ namespace uml
 		protected:
 			Connector(){}
 
+
+			//Additional constructors for the containments back reference
+
+			Connector(std::weak_ptr<uml::Namespace > par_namespace);
+
+			//Additional constructors for the containments back reference
+
+			Connector(std::weak_ptr<uml::Element > par_owner);
+
+			//Additional constructors for the containments back reference
+
+			Connector(std::weak_ptr<uml::StructuredClassifier > par_structuredClassifier);
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -192,6 +209,13 @@ namespace uml
 			virtual std::shared_ptr<Subset<uml::Connector, uml::RedefinableElement>> getRedefinedConnector() const = 0;
 			
 			/*!
+			 */
+			virtual std::weak_ptr<uml::StructuredClassifier > getStructuredClassifier() const = 0;
+			
+			/*!
+			 */
+			virtual void setStructuredClassifier(std::shared_ptr<uml::StructuredClassifier> _structuredClassifier_structuredClassifier) = 0;
+			/*!
 			 An optional Association that classifies links corresponding to this Connector.
 			<p>From package UML::StructuredClassifiers.</p> */
 			virtual std::shared_ptr<uml::Association > getType() const = 0;
@@ -228,6 +252,9 @@ namespace uml
 			<p>From package UML::StructuredClassifiers.</p> */
 			std::shared_ptr<Subset<uml::Connector, uml::RedefinableElement>> m_redefinedConnector;
 			/*!
+			 */
+			std::weak_ptr<uml::StructuredClassifier > m_structuredClassifier;
+			/*!
 			 An optional Association that classifies links corresponding to this Connector.
 			<p>From package UML::StructuredClassifiers.</p> */
 			std::shared_ptr<uml::Association > m_type;
@@ -238,6 +265,12 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
+			 The Classifiers that have this Feature as a feature.
+			<p>From package UML::Classification.</p> */
+			virtual std::shared_ptr<Union<uml::Classifier>> getFeaturingClassifier() const = 0;/*!
+			 Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;/*!
@@ -246,7 +279,10 @@ namespace uml
 			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
 			 The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const = 0;
+			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const = 0;/*!
+			 The contexts that this element may be redefined from.
+			<p>From package UML::Classification.</p> */
+			virtual std::shared_ptr<Union<uml::Classifier>> getRedefinitionContext() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
 			

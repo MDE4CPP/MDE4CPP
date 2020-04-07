@@ -34,6 +34,10 @@ namespace uml
 			virtual void setThisConnectorEndPtr(std::weak_ptr<ConnectorEnd> thisConnectorEndPtr);
 
 			//Additional constructors for the containments back reference
+			ConnectorEndImpl(std::weak_ptr<uml::Connector > par_connector);
+
+
+			//Additional constructors for the containments back reference
 			ConnectorEndImpl(std::weak_ptr<uml::Element > par_owner);
 
 
@@ -79,6 +83,13 @@ namespace uml
 			//*********************************
 			// Reference
 			//*********************************
+			/*!
+			 */
+			virtual std::weak_ptr<uml::Connector > getConnector() const ;
+			
+			/*!
+			 */
+			virtual void setConnector(std::shared_ptr<uml::Connector> _connector_connector) ;
 			/*!
 			 A derived property referencing the corresponding end on the Association which types the Connector owing this ConnectorEnd, if any. It is derived by selecting the end at the same place in the ordering of Association ends as this ConnectorEnd.
 			<p>From package UML::StructuredClassifiers.</p> */

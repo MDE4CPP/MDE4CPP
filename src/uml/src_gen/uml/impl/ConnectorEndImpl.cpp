@@ -37,6 +37,8 @@
 
 #include "uml/ConnectableElement.hpp"
 
+#include "uml/Connector.hpp"
+
 #include "uml/Element.hpp"
 
 #include "uml/MultiplicityElement.hpp"
@@ -74,7 +76,11 @@ ConnectorEndImpl::ConnectorEndImpl()
 
 	
 
+	
+
 	//Init references
+	
+
 	
 
 	
@@ -88,6 +94,14 @@ ConnectorEndImpl::~ConnectorEndImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ConnectorEnd "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
+
+
+//Additional constructor for the containments back reference
+			ConnectorEndImpl::ConnectorEndImpl(std::weak_ptr<uml::Connector > par_connector)
+			:ConnectorEndImpl()
+			{
+			    m_connector = par_connector;
+			}
 
 
 //Additional constructor for the containments back reference
@@ -112,6 +126,8 @@ ConnectorEndImpl::ConnectorEndImpl(const ConnectorEndImpl & obj):ConnectorEndImp
 
 	//copy references with no containment (soft copy)
 	
+	m_connector  = obj.getConnector();
+
 	m_definingEnd  = obj.getDefiningEnd();
 
 	m_owner  = obj.getOwner();
@@ -196,6 +212,16 @@ bool ConnectorEndImpl::self_part_with_port(Any diagnostics,std::map <   Any, Any
 //*********************************
 // References
 //*********************************
+std::weak_ptr<uml::Connector > ConnectorEndImpl::getConnector() const
+{
+//assert(m_connector);
+    return m_connector;
+}
+void ConnectorEndImpl::setConnector(std::shared_ptr<uml::Connector> _connector)
+{
+    m_connector = _connector;
+}
+
 std::shared_ptr<uml::Property > ConnectorEndImpl::getDefiningEnd() const
 {
 
@@ -243,6 +269,11 @@ void ConnectorEndImpl::setThisConnectorEndPtr(std::weak_ptr<ConnectorEnd> thisCo
 }
 std::shared_ptr<ecore::EObject> ConnectorEndImpl::eContainer() const
 {
+	if(auto wp = m_connector.lock())
+	{
+		return wp;
+	}
+
 	if(auto wp = m_owner.lock())
 	{
 		return wp;
@@ -257,6 +288,8 @@ Any ConnectorEndImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
+		case uml::UmlPackage::CONNECTOREND_ATTRIBUTE_CONNECTOR:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getConnector().lock())); //5512
 		case uml::UmlPackage::CONNECTOREND_ATTRIBUTE_DEFININGEND:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getDefiningEnd())); //559
 		case uml::UmlPackage::CONNECTOREND_ATTRIBUTE_PARTWITHPORT:
@@ -270,6 +303,8 @@ bool ConnectorEndImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
+		case uml::UmlPackage::CONNECTOREND_ATTRIBUTE_CONNECTOR:
+			return getConnector().lock() != nullptr; //5512
 		case uml::UmlPackage::CONNECTOREND_ATTRIBUTE_DEFININGEND:
 			return getDefiningEnd() != nullptr; //559
 		case uml::UmlPackage::CONNECTOREND_ATTRIBUTE_PARTWITHPORT:
@@ -283,6 +318,14 @@ bool ConnectorEndImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
+		case uml::UmlPackage::CONNECTOREND_ATTRIBUTE_CONNECTOR:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Connector> _connector = std::dynamic_pointer_cast<uml::Connector>(_temp);
+			setConnector(_connector); //5512
+			return true;
+		}
 		case uml::UmlPackage::CONNECTOREND_ATTRIBUTE_PARTWITHPORT:
 		{
 			// BOOST CAST
@@ -367,6 +410,18 @@ void ConnectorEndImpl::resolveReferences(const int featureID, std::list<std::sha
 {
 	switch(featureID)
 	{
+		case uml::UmlPackage::CONNECTOREND_ATTRIBUTE_CONNECTOR:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::Connector> _connector = std::dynamic_pointer_cast<uml::Connector>( references.front() );
+				setConnector(_connector);
+			}
+			
+			return;
+		}
+
 		case uml::UmlPackage::CONNECTOREND_ATTRIBUTE_PARTWITHPORT:
 		{
 			if (references.size() == 1)
