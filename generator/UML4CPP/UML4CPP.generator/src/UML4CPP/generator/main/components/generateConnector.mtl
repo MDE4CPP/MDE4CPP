@@ -1,0 +1,51 @@
+[comment encoding = UTF-8 /]
+[module generateConnector('http://www.eclipse.org/uml2/5.0.0/UML')]
+
+[import UML4CPP::generator::main::helpers::nameHelper /]
+[import UML4CPP::generator::main::helpers::generalHelper /]
+[import UML4CPP::generator::main::components::generateType/]
+
+[**
+ * generate creation of meta model instance for a Connector element
+*/]
+[template public generateConnectorCreation(aConnector : Connector)]
+[for (aConnectorEnd : ConnectorEnd | aConnector.end)]
+[aConnectorEnd.memberName()/] = factory->createConnectorEnd_in_Connector([aConnector.memberName()/]);
+[/for]
+[/template]
+
+[**
+ * generate initialization of meta model instance for a Connector element
+ * 
+ * this includes:
+ * - set connector name
+ * - set type
+ * - set visibility
+ * - set redefined connectors
+ * - set connector ends
+*/]
+[template public generateConnectorInitialization(aConnector : Connector)]
+[aConnector.memberName()/]->setName("[aConnector.name/]");
+[aConnector.memberName()/]->setType([aConnector.type.generatePackageGetterCall()/]);
+[aConnector.memberName()/]->setVisibility(uml::VisibilityKind::[aConnector.visibility.toString().toUpperCase()/]);
+[for (redefConnector : Connector | aConnector.redefinedConnector)]
+[aConnector.memberName()/]->getRedefinedConnector()->add([redefConnector.generatePackageGetterCall()/]);[/for]
+[for(aConnectorEnd : ConnectorEnd | aConnector.end)]
+[aConnectorEnd.generateConnectorEndInitialization()/]
+[/for]
+[/template]
+
+[**
+ * generate initialization of meta model instance for a ConnectorEnd element
+ * 
+ * this includes:
+ * - set role
+ * - set part with port
+ * - set lower and upper bound
+*/]
+[template public generateConnectorEndInitialization(aConnectorEnd : ConnectorEnd)]
+[aConnectorEnd.memberName()/]->setRole([aConnectorEnd.role.generatePackageGetterCall()/]);
+[aConnectorEnd.memberName()/]->setPartWithPort([aConnectorEnd.partWithPort.generatePackageGetterCall()/]);
+[aConnectorEnd.memberName()/]->setLower([aConnectorEnd.lower/]);
+[aConnectorEnd.memberName()/]->setUpper([aConnectorEnd.upper/]);
+[/template]

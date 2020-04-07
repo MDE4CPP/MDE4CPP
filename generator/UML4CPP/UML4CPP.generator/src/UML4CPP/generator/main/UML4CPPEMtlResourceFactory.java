@@ -99,6 +99,7 @@ public class UML4CPPEMtlResourceFactory extends EMtlResourceFactoryImpl {
 								"generateActivityEdge",
 								"generateActivityNode",
 								"generateClass",
+								"generateConnector",
 								"generateDependency",
 								"generateNamedElement",
 								"generateConstraint",
