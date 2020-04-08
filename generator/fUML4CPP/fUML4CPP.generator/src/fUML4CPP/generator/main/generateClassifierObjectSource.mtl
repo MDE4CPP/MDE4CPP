@@ -39,6 +39,12 @@
 [if (attributes->size() > 0)]
 
 #include "abstractDataTypes/Any.hpp"
+[if (aClassifier.eAllContents(Connector)->size() > 0)]
+#include "fUML/Semantics/CommonBehavior/Execution.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
+#include "uml/Connector.hpp"
+#include "uml/ConnectorEnd.hpp"
+[/if]
 [if (aPackage.getStructuralFeaturesFromRSTA(aClassifier)->size() > 0)]
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
@@ -104,6 +110,19 @@ void [className/]::setThis[className/]Ptr(std::weak_ptr<[className/]> thisObject
 {
 	setThisObjectPtr(thisObjectPtr);
 }
+[if (aClassifier.eAllContents(Connector)->size() > 0)]
+std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> [className/]::dispatchIn(std::shared_ptr<uml::Operation>  operation,std::shared_ptr<uml::Port>  onPort)
+{
+	return nullptr;
+}
+
+std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> [className/]::dispatchOut(std::shared_ptr<uml::Operation>  operation,std::shared_ptr<uml::Port>  onPort)
+{
+	return nullptr;
+}
+[/if]
+
+
 [if (aPackage.getStructuralFeaturesFromRSTVA(aClassifier)->size() > 0)]
 
 void [className/]::removeValue(std::shared_ptr<uml::StructuralFeature> feature, std::shared_ptr<fUML::Semantics::Values::Value> value)

@@ -324,6 +324,9 @@
 [template private initializeActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(CallOperationAction))]
 [let action : CallOperationAction = self.oclAsType(CallOperationAction)]
 [action.memberName()/]->setOperation([action.operation.generatePackageGetterCall()/]);
+[if(not action.onPort.oclIsUndefined())]
+[action.memberName()/]->setOnPort([action.onPort.generatePackageGetterCall()/]);
+[/if]
 [for (inputPin : InputPin | action.input)]
 [inputPin.initializePin(inputPin = action.target)/]
 [/for]

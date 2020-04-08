@@ -54,6 +54,10 @@ namespace [aPackage.name/]
 			virtual std::shared_ptr<[pointerName/]> getUmlValue() const;
 			virtual void setUmlValue(std::shared_ptr<[pointerName/]>);
 			virtual void setThis[className/]Ptr(std::weak_ptr<[className/]> thisObjectPtr);
+[if (aClassifier.eAllContents(Connector)->size() > 0)]
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> dispatchIn(std::shared_ptr<uml::Operation>  operation,std::shared_ptr<uml::Port>  onPort);
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> dispatchOut(std::shared_ptr<uml::Operation>  operation,std::shared_ptr<uml::Port>  onPort);
+[/if]
 [if (aPackage.getStructuralFeaturesFromRSTVA(aClassifier)->size() > 0)]
 			virtual void removeValue(std::shared_ptr<uml::StructuralFeature> feature, std::shared_ptr<fUML::Semantics::Values::Value> values);
 [/if]
