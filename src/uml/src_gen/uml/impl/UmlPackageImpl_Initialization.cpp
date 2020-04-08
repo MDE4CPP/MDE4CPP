@@ -20483,6 +20483,23 @@ void UmlPackageImpl::initializeOperationContent()
 	m_operation_Operation_isUnique->setOrdered(false);
 	
 	
+	m_operation_Operation_matches_Operation->setEType(types::TypesPackage::eInstance()->getBoolean_Class());
+	m_operation_Operation_matches_Operation->setName("matches");
+	m_operation_Operation_matches_Operation->setLowerBound(1);
+	m_operation_Operation_matches_Operation->setUpperBound(1);
+	m_operation_Operation_matches_Operation->setUnique(true);
+	m_operation_Operation_matches_Operation->setOrdered(true);
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_operation_Operation_matches_Operation);
+		parameter->setName("comparedOperation");
+		parameter->setEType(getOperation_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
 	m_operation_Operation_only_body_for_query_EDiagnosticChain_EMap->setEType(ecore::EcorePackage::eInstance()->getEBoolean_Class());
 	m_operation_Operation_only_body_for_query_EDiagnosticChain_EMap->setName("only_body_for_query");
 	m_operation_Operation_only_body_for_query_EDiagnosticChain_EMap->setLowerBound(0);

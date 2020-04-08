@@ -420,14 +420,36 @@ bool PortImpl::getIsService() const
 //*********************************
 std::shared_ptr<Bag<uml::Interface> > PortImpl::basicProvided()
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+		std::shared_ptr<Bag<uml::Interface>> providedInterfaces(new Bag<uml::Interface>());
+	std::shared_ptr<uml::Classifier> type = std::dynamic_pointer_cast<uml::Classifier>(this->getType());
+	
+	if(std::dynamic_pointer_cast<uml::Interface>(type) != nullptr)
+	{
+		providedInterfaces->add(std::dynamic_pointer_cast<uml::Interface>(type));
+	}
+	else
+	{
+		std::shared_ptr<Bag<uml::Interface>> typingClassRealizedInterfaces = type->allRealizedInterfaces();
+		providedInterfaces->insert(providedInterfaces->end(), typingClassRealizedInterfaces->begin(), typingClassRealizedInterfaces->end());
+	}
+	return providedInterfaces;
+	//end of body
 }
 
 std::shared_ptr<Bag<uml::Interface> > PortImpl::basicRequired()
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+		std::shared_ptr<Bag<uml::Interface>> requiredInterfaces(new Bag<uml::Interface>());
+	std::shared_ptr<uml::Classifier> type = std::dynamic_pointer_cast<uml::Classifier>(this->getType());
+	
+	std::shared_ptr<Bag<uml::Interface>> typingClassRequiredInterfaces = type->allUsedInterfaces();
+	requiredInterfaces->insert(requiredInterfaces->end(), typingClassRequiredInterfaces->begin(), typingClassRequiredInterfaces->end());
+	
+	return requiredInterfaces;
+	//end of body
 }
 
 bool PortImpl::default_value(Any diagnostics,std::map <   Any, Any >  context)
@@ -444,14 +466,20 @@ bool PortImpl::encapsulated_owner(Any diagnostics,std::map <   Any, Any >  conte
 
 std::shared_ptr<Bag<uml::Interface> > PortImpl::getProvideds()
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+		if(m_isConjugated) return this->basicRequired();
+	else return this->basicProvided();
+	//end of body
 }
 
 std::shared_ptr<Bag<uml::Interface> > PortImpl::getRequireds()
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+		if(m_isConjugated) return this->basicProvided();
+	else return this->basicRequired();
+	//end of body
 }
 
 bool PortImpl::port_aggregation(Any diagnostics,std::map <   Any, Any >  context)

@@ -2380,6 +2380,7 @@ void UmlPackageImpl::createOperationContent(std::shared_ptr<ecore::EPackage> pac
 	m_operation_Operation_getUpper = factory->createEOperation_in_EContainingClass(m_operation_Class, OPERATION_OPERATION_GETUPPER);
 	m_operation_Operation_isOrdered = factory->createEOperation_in_EContainingClass(m_operation_Class, OPERATION_OPERATION_ISORDERED);
 	m_operation_Operation_isUnique = factory->createEOperation_in_EContainingClass(m_operation_Class, OPERATION_OPERATION_ISUNIQUE);
+	m_operation_Operation_matches_Operation = factory->createEOperation_in_EContainingClass(m_operation_Class, OPERATION_OPERATION_MATCHES_OPERATION);
 	m_operation_Operation_only_body_for_query_EDiagnosticChain_EMap = factory->createEOperation_in_EContainingClass(m_operation_Class, OPERATION_OPERATION_ONLY_BODY_FOR_QUERY_EDIAGNOSTICCHAIN_EMAP);
 	m_operation_Operation_returnResult = factory->createEOperation_in_EContainingClass(m_operation_Class, OPERATION_OPERATION_RETURNRESULT);
 	m_operation_Operation_setIsOrdered_Boolean = factory->createEOperation_in_EContainingClass(m_operation_Class, OPERATION_OPERATION_SETISORDERED_BOOLEAN);

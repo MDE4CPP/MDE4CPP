@@ -27,6 +27,10 @@
 #include "ecore/EClass.hpp"
 
 //Includes from codegen annotation
+#include "uml/BehavioredClassifier.hpp"
+#include "uml/InterfaceRealization.hpp"
+#include "uml/Interface.hpp"
+#include "uml/Usage.hpp"
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -588,8 +592,22 @@ std::shared_ptr<Bag<uml::Classifier> > ClassifierImpl::allParents()
 
 std::shared_ptr<Bag<uml::Interface> > ClassifierImpl::allRealizedInterfaces()
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	std::shared_ptr<Bag<uml::Interface>> allRealizedInterface(new Bag<uml::Interface>());
+std::shared_ptr<Bag<uml::Interface>> directlyRealizedInterfaces = this->directlyRealizedInterfaces();
+	
+allRealizedInterface->insert(allRealizedInterface->end(), directlyRealizedInterfaces->begin(), directlyRealizedInterfaces->end());
+	
+std::shared_ptr<Bag<uml::Classifier>> superClasses = this->getGenerals();
+for(unsigned int i = 0; i < superClasses->size(); i++)
+{
+	std::shared_ptr<Bag<uml::Interface>> superRealizedInterfaces = superClasses->at(i)->allRealizedInterfaces();
+	allRealizedInterface->insert(allRealizedInterface->end(), superRealizedInterfaces->begin(), superRealizedInterfaces->end());
+}
+
+return allRealizedInterface;
+	//end of body
 }
 
 std::shared_ptr<Bag<uml::StructuralFeature> > ClassifierImpl::allSlottableFeatures()
@@ -600,20 +618,81 @@ std::shared_ptr<Bag<uml::StructuralFeature> > ClassifierImpl::allSlottableFeatur
 
 std::shared_ptr<Bag<uml::Interface> > ClassifierImpl::allUsedInterfaces()
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+		std::shared_ptr<Bag<uml::Interface>> allUsedInterfaces(new Bag<uml::Interface>());
+	std::shared_ptr<Bag<uml::Interface>> directlyUsedInterfaces = this->directlyUsedInterfaces();
+	
+	allUsedInterfaces->insert(allUsedInterfaces->end(), directlyUsedInterfaces->begin(), directlyUsedInterfaces->end());
+	
+	std::shared_ptr<Bag<uml::Classifier>> superClasses = this->getGenerals();
+	for(unsigned int i = 0; i < superClasses->size(); i++)
+	{
+		std::shared_ptr<Bag<uml::Interface>> superRealizedInterfaces = superClasses->at(i)->allRealizedInterfaces();
+		allUsedInterfaces->insert(allUsedInterfaces->end(), superRealizedInterfaces->begin(), superRealizedInterfaces->end());
+	}
+
+	return allUsedInterfaces;
+	//end of body
 }
 
 std::shared_ptr<Bag<uml::Interface> > ClassifierImpl::directlyRealizedInterfaces()
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	std::shared_ptr<Bag<uml::Interface>> directlyRealizedInterfaces(new Bag<uml::Interface>());
+std::shared_ptr<uml::BehavioredClassifier> bClassifier = std::dynamic_pointer_cast<uml::BehavioredClassifier>(getThisClassifierPtr());
+
+if(bClassifier != nullptr)
+{
+	std::shared_ptr<Bag<uml::InterfaceRealization>> interfaceRealizations = bClassifier->getInterfaceRealization();
+	for(unsigned int i = 0; i < interfaceRealizations->size(); i++)
+	{
+		std::shared_ptr<uml::InterfaceRealization> interfaceRealization = interfaceRealizations->at(i);
+		std::shared_ptr<uml::Interface> contract = interfaceRealization->getContract();
+
+		if(contract != nullptr)
+		{
+			directlyRealizedInterfaces->add(contract);
+		}
+	}
+}
+
+return directlyRealizedInterfaces;
+	//end of body
 }
 
 std::shared_ptr<Bag<uml::Interface> > ClassifierImpl::directlyUsedInterfaces()
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+		std::shared_ptr<Bag<uml::Interface>> directlyUsedInterfaces(new Bag<uml::Interface>());
+
+	std::shared_ptr<Bag<uml::Dependency>> clientDependencies = this->getClientDependency();
+	
+	for(unsigned int i = 0; i < clientDependencies->size(); i++)
+	{
+		std::shared_ptr<uml::Usage> usage = std::dynamic_pointer_cast<uml::Usage>(clientDependencies->at(i));
+		if(usage != nullptr)
+		{
+			std::shared_ptr<Bag<uml::NamedElement>> suppliers = usage->getSupplier();
+			std::shared_ptr<Bag<uml::Interface>> interfacesInSuppliers(new Bag<uml::Interface>());
+			
+			for(unsigned int j = 0; j < suppliers->size(); j++)
+			{
+				std::shared_ptr<uml::Interface> supplyingInterface = std::dynamic_pointer_cast<uml::Interface>(suppliers->at(j));
+				if(supplyingInterface != nullptr)
+				{
+					interfacesInSuppliers->add(supplyingInterface);
+				}
+			}
+			
+			directlyUsedInterfaces->insert(directlyUsedInterfaces->end(), interfacesInSuppliers->begin(), interfacesInSuppliers->end());
+		}
+	}
+	
+	return directlyUsedInterfaces;
+	//end of body
 }
 
 std::shared_ptr<Bag<uml::Property> > ClassifierImpl::getAllAttributes()

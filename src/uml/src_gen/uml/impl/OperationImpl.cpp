@@ -512,6 +512,32 @@ bool OperationImpl::isUnique()
 	throw "UnsupportedOperationException";
 }
 
+bool OperationImpl::matches(std::shared_ptr<uml::Operation>  comparedOperation)
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	//Checks whether two uml::Operations share the same name and input parameter types (= share same signature)
+
+bool equals = false;
+
+if(this->getName() != comparedOperation->getName()) {return equals;}
+
+std::shared_ptr<Bag<uml::Parameter>> thisParameters = this->getOwnedParameter();
+std::shared_ptr<Bag<uml::Parameter>> otherParameters = comparedOperation->getOwnedParameter();
+
+if(thisParameters->size() != otherParameters->size()) {return equals;}
+
+for(unsigned int i = 0; i < thisParameters->size(); i++)
+{
+	if(thisParameters->at(i)->getType() != otherParameters->at(i)->getType()) {return equals;}
+}
+
+equals = true;
+return equals;
+
+	//end of body
+}
+
 bool OperationImpl::only_body_for_query(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;

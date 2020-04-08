@@ -5080,6 +5080,10 @@ std::shared_ptr<ecore::EOperation> UmlPackageImpl::getOperation_Operation_isUniq
 {
 	return m_operation_Operation_isUnique;
 }
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getOperation_Operation_matches_Operation() const
+{
+	return m_operation_Operation_matches_Operation;
+}
 std::shared_ptr<ecore::EOperation> UmlPackageImpl::getOperation_Operation_only_body_for_query_EDiagnosticChain_EMap() const
 {
 	return m_operation_Operation_only_body_for_query_EDiagnosticChain_EMap;

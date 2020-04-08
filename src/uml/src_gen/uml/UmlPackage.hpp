@@ -4596,7 +4596,7 @@ namespace uml
 			//Class and Feature IDs 
 			static const unsigned int OPERATION_CLASS = 168;
 			static const unsigned int OPERATION_CLASS_FEATURE_COUNT = 43;
-			static const unsigned int OPERATION_CLASS_OPERATION_COUNT = 96;
+			static const unsigned int OPERATION_CLASS_OPERATION_COUNT = 97;
 			static const int OPERATION_ATTRIBUTE_ISORDERED = 16834;
 			static const int OPERATION_ATTRIBUTE_ISQUERY = 16835;
 			static const int OPERATION_ATTRIBUTE_ISUNIQUE = 16836;
@@ -4619,6 +4619,7 @@ namespace uml
 			static const int OPERATION_OPERATION_GETUPPER = 16938;
 			static const int OPERATION_OPERATION_ISORDERED = 16933;
 			static const int OPERATION_OPERATION_ISUNIQUE = 16934;
+			static const int OPERATION_OPERATION_MATCHES_OPERATION = 16939;
 			static const int OPERATION_OPERATION_ONLY_BODY_FOR_QUERY_EDIAGNOSTICCHAIN_EMAP = 16926;
 			static const int OPERATION_OPERATION_RETURNRESULT = 16936;
 			static const int OPERATION_OPERATION_SETISORDERED_BOOLEAN = 16928;
@@ -4652,6 +4653,7 @@ namespace uml
 			virtual std::shared_ptr<ecore::EOperation> getOperation_Operation_getUpper() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getOperation_Operation_isOrdered() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getOperation_Operation_isUnique() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getOperation_Operation_matches_Operation() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getOperation_Operation_only_body_for_query_EDiagnosticChain_EMap() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getOperation_Operation_returnResult() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getOperation_Operation_setIsOrdered_Boolean() const = 0;
