@@ -11,6 +11,7 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
  */]
 [module generateClassifierObjectSource('http://www.eclipse.org/uml2/5.0.0/UML')]
  
@@ -35,20 +36,12 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "[aClassifier.getNearestPackage().myNamespaceName()/]/[aClassifier.name.toUpperFirst()/].hpp"
-[let attributes : OrderedSet(Property)= aPackage.getStructuralFeaturesFromRSTA(aClassifier)->addAll(aPackage.getStructuralFeaturesFromASTVA(aClassifier))->addAll(aPackage.getStructuralFeaturesFromRSTVA(aClassifier).oclAsType(Property)->flatten()->sortedBy(qualifiedName))]
+[let attributes : OrderedSet(Property) = aClassifier.getAllAttributes().oclAsType(Property)->flatten()->asOrderedSet()->sortedBy(qualifiedName) ]
 [if (attributes->size() > 0)]
 
 #include "abstractDataTypes/Any.hpp"
-[if (aClassifier.eAllContents(Connector)->size() > 0)]
-#include "fUML/Semantics/CommonBehavior/Execution.hpp"
-#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
-#include "uml/Connector.hpp"
-#include "uml/ConnectorEnd.hpp"
-[/if]
-[if (aPackage.getStructuralFeaturesFromRSTA(aClassifier)->size() > 0)]
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
-[/if]
 #include "PSCS/Semantics/StructuredClassifiers/CS_Reference.hpp"
 #include "fUML/Semantics/Values/Value.hpp"
 #include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
@@ -63,6 +56,19 @@
 [/for]
 [/if]
 [/let]
+[if (aClassifier.eAllContents(Connector)->size() > 0)]
+#include "fUML/Semantics/CommonBehavior/Execution.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
+#include "fUML/Semantics/Loci/Locus.hpp"
+#include "fUML/Semantics/Loci/ExecutionFactory.hpp"
+#include "fUML/Semantics/Loci/ChoiceStrategy.hpp"
+#include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
+#include "uml/Connector.hpp"
+#include "uml/ConnectorEnd.hpp"
+#include "uml/Port.hpp"
+#include "uml/Class.hpp"
+#include "uml/Operation.hpp"
+[/if]
 [for (action : AddStructuralFeatureValueAction | aPackage.getASTVA(aClassifier)->select(not (structuralFeature.type = value.type)))]
 #include "[aPackage.getPackageName()/]Exec/[action.value.type.oclAsType(Classifier).objectClassName()/].hpp"
 #include "[action.value.type._package.myNamespaceName()/]/[action.value.type.name/].hpp"
@@ -113,7 +119,83 @@ void [className/]::setThis[className/]Ptr(std::weak_ptr<[className/]> thisObject
 [if (aClassifier.eAllContents(Connector)->size() > 0)]
 std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> [className/]::dispatchIn(std::shared_ptr<uml::Operation>  operation,std::shared_ptr<uml::Port>  onPort)
 {
-	return nullptr;
+	std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> execution = nullptr;
+	
+	//Get all Connector elements of this objects type
+	std::shared_ptr<Bag<uml::Connector>> connectorsOfMetaClass = this->getUmlValue()->getMetaClass()->getOwnedConnector();
+	std::cout<<"Metaklasse hat "<<connectorsOfMetaClass->size()<<" Connectoren"<<std::endl;
+	
+	//Will contain potential targets to dispatch operation call to
+	std::shared_ptr<Bag<uml::Property>> potentialTargets(new Bag<uml::Property>());
+	
+	for(unsigned int i = 0; i < connectorsOfMetaClass->size(); i++)
+	{
+		std::shared_ptr<uml::Connector> connector = connectorsOfMetaClass->at(i);
+		std::shared_ptr<uml::ConnectorEnd> end1 = connector->getEnd()->at(0);
+		std::shared_ptr<uml::ConnectorEnd> end2 = connector->getEnd()->at(1);
+		
+		std::shared_ptr<uml::Property> potentialTarget = nullptr;
+		
+		//If onPort matches role of end1 of connector, role of end2 is potential dispatch target
+		if(onPort == end1->getRole()){
+			potentialTarget = std::dynamic_pointer_cast<uml::Property>(end2->getRole());
+		}
+		//If onPort matches role of end2 of connector, role of end1 is potential dispatch target
+		else if(onPort == end2->getRole())
+		{
+			potentialTarget = std::dynamic_pointer_cast<uml::Property>(end1->getRole());
+		}
+		
+		if(potentialTarget != nullptr){
+			//Check if target provides the required operation
+			//Retrieve all provided operations of potentialTargets type and supertypes
+			std::shared_ptr<uml::Classifier> potentialTargetType = std::dynamic_pointer_cast<uml::Classifier>(potentialTarget->getType());
+			std::shared_ptr<Bag<uml::Operation>> potentialTargetOperations = potentialTargetType->getAllOperations();
+				
+			unsigned int j = 0;
+			bool providesOperation = false;
+				
+			while(!providesOperation && j < potentialTargetOperations->size())
+			{
+				providesOperation = operation->matches(potentialTargetOperations->at(j));
+			}
+				
+			if(providesOperation) {potentialTargets->add(potentialTarget);}
+		}
+	}
+	
+	if(potentialTargets->size() == 0) return execution;
+
+	//Choose target to dispatch to from potential targets
+	std::shared_ptr<fUML::Semantics::Loci::ChoiceStrategy> strategy = std::dynamic_pointer_cast<fUML::Semantics::Loci::ChoiceStrategy>(this->getLocus()->getFactory()->getStrategy("choice"));
+	//Since fUML only specifies FirstChoiceStrategy, choose() will always return 1
+	std::shared_ptr<uml::Property> targetProperty = potentialTargets->at(strategy->choose(potentialTargets->size())-1);
+
+	//Get operation to call
+	std::shared_ptr<uml::Operation> targetOperation = nullptr;
+	std::shared_ptr<Bag<uml::Operation>> operations = (std::dynamic_pointer_cast<uml::Classifier>(targetProperty->getType()))->getAllOperations();
+	unsigned int i = 0;
+	
+	while((targetOperation == nullptr) && (i < operations->size()))
+	{
+		if(operation->matches(operations->at(i)))
+		{
+			targetOperation = operations->at(i);
+		}
+	}
+	
+	if(targetOperation == nullptr) return execution;
+	
+	//Get FeatureValue for chosen target
+	std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> featureValue = this->retrieveFeatureValue(targetProperty);
+	//Get CS_Reference for chosen target
+	std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> targetforDispatching = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(featureValue->getValues()->at(0));
+	
+	if(targetforDispatching != nullptr){
+		execution = targetforDispatching->dispatch(targetOperation);
+	}
+	
+	return execution;
 }
 
 std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> [className/]::dispatchOut(std::shared_ptr<uml::Operation>  operation,std::shared_ptr<uml::Port>  onPort)
@@ -122,8 +204,6 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> [className/]::dispat
 }
 [/if]
 
-
-[if (aPackage.getStructuralFeaturesFromRSTVA(aClassifier)->size() > 0)]
 
 void [className/]::removeValue(std::shared_ptr<uml::StructuralFeature> feature, std::shared_ptr<fUML::Semantics::Values::Value> value)
 {
@@ -140,7 +220,7 @@ void [className/]::removeValue(std::shared_ptr<uml::StructuralFeature> feature, 
 		throw "UnsupportedParameterException";	
 	}
 
-[for (aProperty : Property | aPackage.getStructuralFeaturesFromRSTVA(aClassifier).oclAsType(Property))]
+[for (aProperty : Property | aClassifier.getAllAttributes().oclAsType(Property))]
 	if (property == [aProperty.getModelPackage()/][aProperty.generatePackageGetterCall(aProperty)/])
 	{
 [if (aProperty.upper = 1)]
@@ -194,8 +274,7 @@ void [className/]::removeValue(std::shared_ptr<uml::StructuralFeature> feature, 
 	}
 [/for]
 }
-[/if]
-[if (aPackage.getStructuralFeaturesFromRSTA(aClassifier)->size() > 0)]
+
 
 std::shared_ptr<Bag<fUML::Semantics::Values::Value>> [className/]::getValues(std::shared_ptr<uml::StructuralFeature> feature, std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> featureValues)
 {
@@ -213,7 +292,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> [className/]::getValues(std
 	}
 
 	std::shared_ptr<Bag<fUML::Semantics::Values::Value>> values(new Bag<fUML::Semantics::Values::Value>());
-[for (aProperty : Property | aPackage.getStructuralFeaturesFromRSTA(aClassifier).oclAsType(Property))]
+[for (aProperty : Property | aClassifier.getAllAttributes().oclAsType(Property))]
 	if (property == [aProperty.getModelPackage()/][aProperty.generatePackageGetterCall(aProperty)/])
 	{
 [if (aProperty.type.oclIsKindOf(Enumeration))]
@@ -289,8 +368,7 @@ std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> [className/]::
 
 	return featureValue;
 }
-[/if]
-[if (aPackage.getStructuralFeaturesFromASTVA(aClassifier)->size() > 0)]
+
 
 void [className/]::setFeatureValue(std::shared_ptr<uml::StructuralFeature> feature, std::shared_ptr<Bag<fUML::Semantics::Values::Value>> values, int position)
 {
@@ -338,7 +416,6 @@ void [className/]::assignFeatureValue(std::shared_ptr<uml::StructuralFeature> fe
 {
 	this->setFeatureValue(feature, values, position);
 }
-[/if]
 [/file]
 [/template]
 

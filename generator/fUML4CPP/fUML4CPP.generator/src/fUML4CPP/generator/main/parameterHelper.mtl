@@ -50,6 +50,11 @@
 				aPackage.allOwnedElements()->filter(Action).output.type	
 			}->flatten()->reject(oclIsKindOf(Activity))->reject(supportedTypes())->reject(oclIsKindOf(Enumeration))->sortedBy(name)/]
 
+[query public getPackageClasses(aPackage : Package) : Set(Classifier) = OrderedSet{
+				aPackage.allOwnedElements()->filter(Class)
+				}->flatten()->reject(oclIsKindOf(AssociationClass))->reject(oclIsKindOf(Component))->reject(oclIsKindOf(Behavior))->reject(oclIsKindOf(Stereotype))->reject(oclIsKindOf(Node))->sortedBy(name)
+/]
+
 [comment]INPUT SWITCH ----------------------------------------------------------[/comment]
 [template public generateInputParameter(par : Parameter, index:Integer)]
 [par.name.generateInputParameter(par.type, index)/]

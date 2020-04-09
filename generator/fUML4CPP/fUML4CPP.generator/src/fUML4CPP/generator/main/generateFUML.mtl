@@ -72,8 +72,8 @@
 [/for]
 
 //generate execution classifier
-[aPackage.getClassiferExecutions().generateClassifierObjectHeader(aPackage)/]
-[aPackage.getClassiferExecutions().generateClassifierObjectSource(aPackage)/]
+[aPackage.getPackageClasses().generateClassifierObjectHeader(aPackage)/]
+[aPackage.getPackageClasses().generateClassifierObjectSource(aPackage)/]
 
 [if (not buildLibrary())]
 //generate main

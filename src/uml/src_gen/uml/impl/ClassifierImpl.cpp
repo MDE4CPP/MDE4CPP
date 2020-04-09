@@ -716,8 +716,27 @@ std::shared_ptr<Bag<uml::Property> > ClassifierImpl::getAllAttributes()
 
 std::shared_ptr<Bag<uml::Operation> > ClassifierImpl::getAllOperations()
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+		std::shared_ptr<Bag<uml::Operation>> allOperations(new Bag<uml::Operation>());
+	std::shared_ptr<Bag<uml::Feature>> allDirectFeatures = this->getFeature();
+	
+	for(unsigned int i = 0; i < allDirectFeatures->size(); i++)
+	{
+		std::shared_ptr<uml::Operation> operation = std::dynamic_pointer_cast<uml::Operation>(allDirectFeatures->at(i));
+		if(operation != nullptr){ allOperations->add(operation); }
+	}
+	
+	std::shared_ptr<Bag<uml::Classifier>> superTypes = this->getGenerals();
+	
+	for(unsigned int i = 0; i < superTypes->size(); i++)
+	{
+		std::shared_ptr<Bag<uml::Operation>> superTypeOperations = superTypes->at(i)->getAllOperations();
+		allOperations->insert(allOperations->end(), superTypeOperations->begin(), superTypeOperations->end());
+	}
+	
+	return allOperations;
+	//end of body
 }
 
 std::shared_ptr<Bag<uml::Interface> > ClassifierImpl::getAllUsedInterfaces()

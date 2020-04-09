@@ -81,7 +81,7 @@ SET(SOURCE_FILES
 [for (aCOA : CallOperationAction | aPackage.getCallOperationActions()->sortedBy(name))]
 	[aCOA.generateOpaqueBehaviorExecutionName()/].cpp
 [/for]
-[for (aClassifier : Classifier | getClassiferExecutions()->sortedBy(name))]
+[for (aClassifier : Classifier | getPackageClasses()->sortedBy(name))]
 	[aClassifier.name.toUpperFirst()/]Object.cpp
 [/for]
 	impl/[aPackage.name.toUpperFirst()/]LocusImpl.cpp
