@@ -124,7 +124,6 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> [className/]::dispat
 	
 	//Get all Connector elements of this objects type
 	std::shared_ptr<Bag<uml::Connector>> connectorsOfMetaClass = this->getUmlValue()->getMetaClass()->getOwnedConnector();
-	std::cout<<"Metaklasse hat "<<connectorsOfMetaClass->size()<<" Connectoren"<<std::endl;
 	
 	//Will contain potential targets to dispatch operation call to
 	std::shared_ptr<Bag<uml::Property>> potentialTargets(new Bag<uml::Property>());
