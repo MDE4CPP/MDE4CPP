@@ -101,7 +101,7 @@ Any [packageName/]::executeActivity(std::shared_ptr<uml::Activity> activity, std
 	if (activity == [act.getNearestPackage().myNamespaceName()/]::[act.getNearestPackage().myName()/]Package::eInstance()->[act.generatePackageGetterCall()/])
 	{
 		[act.generateParameterFromAny()/]
-		[act.generateStartActivityExecution()/]   
+		[act.generateStartActivityExecution(aPackage)/]   
 		[act.generateReturnParameter()/]
 	}
 [/for]

@@ -55,6 +55,12 @@
 				}->flatten()->reject(oclIsKindOf(AssociationClass))->reject(oclIsKindOf(Component))->reject(oclIsKindOf(Behavior))->reject(oclIsKindOf(Stereotype))->reject(oclIsKindOf(Node))->sortedBy(name)
 /]
 
+[comment]Get all Operations in Package[/comment]
+[query public getClassOperations(aPackage : Package) : Set(Operation) = OrderedSet{
+				aPackage.allOwnedElements()->filter(Class).ownedOperation
+				}->flatten()->sortedBy(name)
+/]
+
 [comment]INPUT SWITCH ----------------------------------------------------------[/comment]
 [template public generateInputParameter(par : Parameter, index:Integer)]
 [par.name.generateInputParameter(par.type, index)/]

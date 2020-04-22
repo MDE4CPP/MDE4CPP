@@ -15,6 +15,7 @@
 [module generateMainExecution('http://www.eclipse.org/uml2/5.0.0/UML')]
 
 [import fUML4CPP::generator::main::generateOpaqueBehaviorExecution /]
+[import fUML4CPP::generator::main::generateOperationExecution /]
 [import fUML4CPP::generator::main::parameterHelper /]
 [import UML4CPP::generator::main::components::generateType /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
@@ -56,7 +57,7 @@ int main()
 [if (act.owner.oclIsKindOf(Classifier))]
 	std::shared_ptr<[act.owner.oclAsType(Classifier).name.toUpperFirst()/]> element = [act.owner.oclAsType(Classifier).namespace.myNamespaceName()/]::[act.owner.oclAsType(Classifier).namespace.myNamespaceName().toUpperFirst()/]Factory::eInstance()->create[act.owner.oclAsType(Classifier).name.toUpperFirst()/]();
 [/if]
-	[act.generateStartActivityExecution()/]   
+	[act.generateStartActivityExecution(aPackage)/]   
 	[/let]
 
 	if(nullptr == resultPList)
@@ -144,7 +145,7 @@ int main()
 //OpaqueBehaviourExecutions
 [aPackage.getCallBehaviorActionsWithOB().generateInclude()/]
 [aPackage.getDecisionNodesWithOB().generateInclude()/]
-[aPackage.getCallOperationActions().generateInclude()/]
+[aPackage.getClassOperations().generateInclude()/]
 [/template]
 
 [template public generateActivityRelatedIncludes(anActivity : Activity, aPackage : Package)]
@@ -200,7 +201,7 @@ locus->getFactory()->assignStrategy(PSCSStructuredClassifierFactory->createCS_De
 [/for]
 [/template]
 
-[template public generateStartActivityExecution(anActivity : Activity)]
+[template public generateStartActivityExecution(anActivity : Activity, aPackage : Package)]
 [for (aDecisionNode : DecisionNode | anActivity.getDecisionNodesWithOB())]
 [aDecisionNode.decisionInput.oclAsType(OpaqueBehavior).generateOpaqueBehaviorCreation(aDecisionNode.generateOpaqueBehaviorExecutionName())/]
 [/for]
@@ -209,8 +210,8 @@ locus->getFactory()->assignStrategy(PSCSStructuredClassifierFactory->createCS_De
 [aCBA.behavior.oclAsType(OpaqueBehavior).generateOpaqueBehaviorCreation(aCBA.generateOpaqueBehaviorExecutionName())/]
 [/for]
 
-[for (aCOA : CallOperationAction | anActivity.getCallOperationActions())]
-[aCOA.generateCallOperationActionCreation()/]
+[for (anOperation : Operation | aPackage.getClassOperations())]
+[anOperation.generateOperationExecutionCreation()/]
 [/for]
 
 std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > pList(new Bag<fUML::Semantics::CommonBehavior::ParameterValue>());
@@ -242,9 +243,7 @@ object->setLocus(locus);
 [/if]
 std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> resultPList = locus->getExecutor()->execute([anActivity.generatePackageGetterCall()/], [if (anActivity.owner.oclIsKindOf(Class))]object[else]nullptr[/if], pList);
 
-[if (anActivity.getCallOperationActions()->size() > 0)]
-[anActivity.getCallOperationActions().generateCallOperationActionClearing()/]
-[/if]
+[aPackage.getClassOperations().generateOperationClearing()/]
 
 [/template]
 

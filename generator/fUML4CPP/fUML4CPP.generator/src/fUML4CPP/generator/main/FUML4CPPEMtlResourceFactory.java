@@ -42,6 +42,9 @@ public class FUML4CPPEMtlResourceFactory extends UML4CPPEMtlResourceFactory {
 								"generateOpaqueBehaviorExecution",
 								"generateOpaqueBehaviorExecutionHeader",
 								"generateOpaqueBehaviorExecutionSource",
+								"generateOperationExecution",
+								"generateOperationExecutionHeader",
+								"generateOperationExecutionSource",
 								"parameterHelper"
 		};
 		generateFilePathMapData(moduleNames, "", resourcePathPrefix);

@@ -15,6 +15,7 @@
 [module generateExecutionBuildFile('http://www.eclipse.org/uml2/5.0.0/UML')]
 
 [import fUML4CPP::generator::main::generateOpaqueBehaviorExecution /]
+[import fUML4CPP::generator::main::generateOperationExecution /]
 [import fUML4CPP::generator::main::parameterHelper /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
@@ -78,8 +79,8 @@ SET(SOURCE_FILES
 [for (aCBA : CallBehaviorAction | aPackage.getCallBehaviorActionsWithOB())]
 	[aCBA.generateOpaqueBehaviorExecutionName()/].cpp
 [/for]
-[for (aCOA : CallOperationAction | aPackage.getCallOperationActions()->sortedBy(name))]
-	[aCOA.generateOpaqueBehaviorExecutionName()/].cpp
+[for (anOperation : Operation | aPackage.getClassOperations()->sortedBy(name))]
+	[anOperation.generateOperationExecutionName()/].cpp
 [/for]
 [for (aClassifier : Classifier | getPackageClasses()->sortedBy(name))]
 	[aClassifier.name.toUpperFirst()/]Object.cpp

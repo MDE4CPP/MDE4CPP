@@ -1,0 +1,67 @@
+[comment encoding = UTF-8 /]
+[**
+ * Copyright (c) 2017 TU Ilmenau, Systems and Software Engineering Group
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
+ * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+ * and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */]
+[module generateOperationExecution('http://www.eclipse.org/uml2/5.0.0/UML')]
+
+[import UML4CPP::generator::main::components::generateType /]
+[import UML4CPP::generator::main::helpers::generalHelper /]
+[import UML4CPP::generator::main::helpers::nameHelper /]
+
+[template public generateOperationExecutionName(anOperation : Operation)]
+[anOperation.owner.oclAsType(NamedElement).name.concat('_').concat(anOperation.name.sanitize()).concat(('Execution'))/]
+[/template]
+
+[template public generateOperationExecutionCreation(anOperation : Operation)]
+[if (not anOperation.name.oclIsUndefined())]
+std::shared_ptr<uml::OpaqueBehavior> [anOperation.getFBPackageElement()/](uml::UmlFactory::eInstance()->createOpaqueBehavior_in_Package([anOperation.getNearestPackage().name.concat('::').concat(anOperation.getNearestPackage().name.toUpperFirst()).concat('Package').concat('::eInstance()')/]));
+[anOperation.getFBPackageElement()/]->setName("[anOperation.getFBPackageElement()/]");
+[anOperation.generatePackageGetterCall()/]->getMethod()->insert([anOperation.generatePackageGetterCall()/]->getMethod()->begin(), [anOperation.getFBPackageElement()/]);
+
+[for (aParameter : Parameter | anOperation.ownedParameter)]
+{
+	std::shared_ptr<uml::Parameter> [memberName(aParameter)/](uml::UmlFactory::eInstance()->createParameter_in_Behavior([anOperation.getFBPackageElement()/]));
+	[memberName(aParameter)/]->setName("[aParameter.name/]");
+	[memberName(aParameter)/]->setType([if(aParameter.type.getNearestPackage() = aParameter.getNearestPackage())][aParameter.getNearestPackage().myNamespaceName().concat('::').concat(aParameter.getNearestPackage().name.toUpperFirst()).concat('Package').concat('::eInstance()->')/][/if][aParameter.type.generatePackageGetterCall(aParameter)/]);
+	[memberName(aParameter)/]->setLower([aParameter.lower/]);
+	[memberName(aParameter)/]->setUpper([aParameter.upper/]);
+	[memberName(aParameter)/]->setDirection(uml::ParameterDirectionKind::[direction.toString().toUpper()/]);
+	//[anOperation.getFBPackageElement()/]->getOwnedParameter()->push_back([memberName(aParameter)/]);
+}
+[/for]
+{
+	std::shared_ptr<[anOperation.getNearestPackage().myNamespaceName()/]::[anOperation.generateOperationExecutionName()/]> [memberName(anOperation)/]Execution(new [anOperation.getNearestPackage().myNamespaceName()/]::[anOperation.generateOperationExecutionName()/]());
+	[memberName(anOperation)/]Execution->setThisExecutionPtr([memberName(anOperation)/]Execution);
+	[memberName(anOperation)/]Execution->getTypes()->push_back([anOperation.getFBPackageElement()/]);
+	[memberName(anOperation)/]Execution->setLocus(locus);
+	factory->addPrimitiveBehaviorPrototype([memberName(anOperation)/]Execution);
+}
+[else]
+std::cerr << "an Operation without name" << std::endl;
+throw "error";
+[/if]
+[/template]
+
+[template public generateOperationClearing(anOperation : Operation)]
+[anOperation.generatePackageGetterCall()/]->getMethod()->erase([anOperation.getFBPackageElement()/]);
+[/template]
+
+[template public generateInclude(anOperation : Operation)]
+[if (not anOperation.oclIsUndefined())]
+[if (not anOperation.name.oclIsUndefined())]
+#include "[anOperation.getNearestPackage().getPackageName()/]Exec/[anOperation.generateOperationExecutionName()/].hpp"
+[/if]
+[/if]
+[/template]
+
+[query public getFBPackageElement(anOperation : Operation) : String = 'ob_'.concat(anOperation.owner.oclAsType(NamedElement).name.replaceAll(' ', '')).concat('_').concat(anOperation.myName().sanitize())/]

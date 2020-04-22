@@ -23,6 +23,9 @@
 [import fUML4CPP::generator::main::generateOpaqueBehaviorExecution /]
 [import fUML4CPP::generator::main::generateOpaqueBehaviorExecutionHeader /]
 [import fUML4CPP::generator::main::generateOpaqueBehaviorExecutionSource /]
+[import fUML4CPP::generator::main::generateOperationExecution /]
+[import fUML4CPP::generator::main::generateOperationExecutionHeader /]
+[import fUML4CPP::generator::main::generateOperationExecutionSource /]
 [import fUML4CPP::generator::main::parameterHelper /]
 [import fUML4CPP::generator::main::plugin::generateExecutionPlugin /]
 [import UML4CPP::generator::main::generate /]
@@ -66,10 +69,8 @@
 [/for]
 
 //generate execution for CallOperationAction
-[for (aCOA : CallOperationAction | aPackage.getCallOperationActions())]
-[aCOA.generateOpaqueBehaviorExecutionHeader(aPackage)/]
-[aCOA.generateOpaqueBehaviorExecutionSource(aPackage)/]
-[/for]
+[aPackage.getClassOperations().generateOperationExecutionHeader(aPackage)/]
+[aPackage.getClassOperations().generateOperationExecutionSource(aPackage)/]
 
 //generate execution classifier
 [aPackage.getPackageClasses().generateClassifierObjectHeader(aPackage)/]
