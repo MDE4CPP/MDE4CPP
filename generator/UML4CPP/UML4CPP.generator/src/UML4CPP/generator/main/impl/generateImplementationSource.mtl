@@ -2,20 +2,20 @@
 [**
  * Copyright (c) 2017 TU Ilmenau, Systems and Software Engineering Group
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
- * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"),
+ * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense,
  * and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
  *
  * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
- * 
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  ****************************************************************************************************************************************************************
- * 
+ *
  * module to generate class implementation source file
- * 
+ *
  */]
 [module generateImplementationSource('http://www.eclipse.org/uml2/5.0.0/UML')]
 
@@ -53,7 +53,11 @@
 [if (cl.oclIsUndefined() or cl.name.oclIsUndefined())]
 // undefined  [cl.eClass().name/] ([cl.toString()/]) ['class '.concat(aClass.name).concat(': header include failed for undefined ').concat(cl.eClass().name).concat(' ').concat(cl.toString()).registerError()/]
 [else]
+[if (cl.getNearestPackage().hasIncludePath())]
+#include "[cl.getNearestPackage().getIncludePath()/]"
+[else]
 #include "[cl.getNearestPackage().myNamespaceName()/]/[cl.name.toUpperFirst()/].hpp"
+[/if]
 [/if]
 [/for]
 [for (aPackage : Package | aClass.ownedAttribute->select(type.oclIsKindOf(Enumeration)).type._package->flatten()->reject(pack : Package | pack = aPackage)->sortedBy(name))]
@@ -96,7 +100,7 @@
 {
 	//***********************************
 	// init Get Set
-	[aClass.generateGetSetInit()/] 
+	[aClass.generateGetSetInit()/]
 
 	// init properties without default
 	[for (aProperty : Property | aClass.ownedAttribute->sortedBy(myQualifiedName()))]
@@ -110,7 +114,7 @@
 	[instVal.initPropertyFromInstanceValue()/]
 	[/if]
 	[/for]
-	
+
 }
 
 [for (anAssociation : Association | aClass.getCompositionsToClass())]
@@ -147,7 +151,7 @@
 	[att.generateCppType()/] [att.name/]List = obj.[att.getterName()/]();
 	Bag<[att.type.generateCppType(true)/]>::iterator [att.name/]Iter = [att.name/]List->begin();
 	Bag<[att.type.generateCppType(true)/]>::iterator [att.name/]End = [att.name/]List->end();
-	while ([att.name/]Iter != [att.name/]End) 
+	while ([att.name/]Iter != [att.name/]End)
 	{
 [if (att.type.isPrimitive())]
 		std::shared_ptr<[att.type.generateCppType(true)/]> temp(new [att.type.generateCppType(true)/](*(*[att.name/]Iter)));
@@ -266,7 +270,7 @@ std::shared_ptr<uml::Class> [className/]::getMetaClass()
 {
 	//***********************************
 	// init Get Set
-	[aInterface.generateGetSetInit()/] 
+	[aInterface.generateGetSetInit()/]
 
 	// init properties without default
 	[for (aProperty : Property | aInterface.ownedAttribute->sortedBy(myQualifiedName()))]
@@ -280,7 +284,7 @@ std::shared_ptr<uml::Class> [className/]::getMetaClass()
 	[instVal.initPropertyFromInstanceValue()/]
 	[/if]
 	[/for]
-	
+
 }
 
 [for (anAssociation : Association | aInterface.getCompositionsToInterface())]
