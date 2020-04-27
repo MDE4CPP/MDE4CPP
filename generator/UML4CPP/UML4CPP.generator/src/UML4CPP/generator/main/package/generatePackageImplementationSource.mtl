@@ -20,6 +20,7 @@
 [module generatePackageImplementationSource('http://www.eclipse.org/uml2/5.0.0/UML','http://www.eclipse.org/emf/2002/Ecore')]
 
 [import UML4CPP::generator::main::components::generateClass /]
+[import UML4CPP::generator::main::components::generateAssociation/]
 [import UML4CPP::generator::main::components::generateConnector /]
 [import UML4CPP::generator::main::components::generateNamedElement /]
 [import UML4CPP::generator::main::components::generateActivity /]
@@ -161,6 +162,7 @@ void [packageName/]::createPackageContents(std::shared_ptr<uml::Package> [aPacka
 	createPackageValueSpecifications([aPackage.memberName()/], factory);
 	createPackageInterfaces([aPackage.memberName()/], factory);
 	createPackageClasses([aPackage.memberName()/], factory);
+	createPackageAssociations([aPackage.memberName()/], factory);
 	createPackageInstanceSpecifications([aPackage.memberName()/], factory);
 	createPackageStereotypes([aPackage.memberName()/], factory);
 	createPackageActivities([aPackage.memberName()/], factory);
@@ -219,6 +221,15 @@ void [packageName/]::createPackageClasses(std::shared_ptr<uml::Package> [aPackag
 	[/for]
 [/for]
 } 
+
+[comment]Only Associations[/comment]
+void [packageName/]::createPackageAssociations(std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::UmlFactory> factory)
+{
+[for (anAssociation : Association | aPackage.ownedMember->filter(Association)->reject(oclIsTypeOf(AssociationClass))->reject(oclIsTypeOf(Extension))->reject(oclIsTypeOf(CommunicationPath))->asOrderedSet()->sortedBy(myQualifiedName())) separator ('\n    //-------------------------------------------\n')]
+	// [anAssociation.name/]
+	[anAssociation.memberName()/] = factory->createAssociation_in_Package([aPackage.memberName()/]);
+[/for]
+}
 
 [comment]Only Dependency[/comment]
 void [packageName/]::createPackageDependencies(std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::UmlFactory> factory)
@@ -298,6 +309,7 @@ void [packageName/]::initializePackageContents(std::shared_ptr<uml::Package> [aP
 
 	initializePackageActivities();
 	initializePackageClasses();
+	initializePackageAssociations();
 	initializePackageDependencies();
 	initializePackageInstanceSpecifications();
 	initializePackageInterfaceRealizations();
@@ -354,6 +366,15 @@ void [packageName/]::initializePackageClasses()
 	[if (aClass.ownedAttribute->select(name=aAttribute.name)->size() = 0)][aAttribute.addInterfaceAttribute(aClass)/][/if]
 	[/for]
 [/for]
+}
+
+[comment]Only Associations[/comment]
+void [packageName/]::initializePackageAssociations()
+{
+	[for (anAssociation : Association | aPackage.ownedMember->filter(Association)->reject(oclIsTypeOf(AssociationClass))->reject(oclIsTypeOf(Extension))->reject(oclIsTypeOf(CommunicationPath))->asOrderedSet()->sortedBy(myQualifiedName())) separator ('\n    //-------------------------------------------\n')]
+	// [anAssociation.name/]
+	[anAssociation.generateAssociationInitialization()/]
+	[/for]
 }
 
 [comment]Only Dependency[/comment]

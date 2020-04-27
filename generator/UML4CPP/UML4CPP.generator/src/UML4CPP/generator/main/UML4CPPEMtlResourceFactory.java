@@ -98,6 +98,7 @@ public class UML4CPPEMtlResourceFactory extends EMtlResourceFactoryImpl {
 		String[] moduleNames = {"generateActivity", 
 								"generateActivityEdge",
 								"generateActivityNode",
+								"generateAssociation",
 								"generateClass",
 								"generateConnector",
 								"generateDependency",
