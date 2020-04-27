@@ -36,38 +36,40 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "[aClassifier.getNearestPackage().myNamespaceName()/]/[aClassifier.name.toUpperFirst()/].hpp"
+#include "[aClassifier.getNearestPackage().getPackageName()/]/[aClassifier.getNearestPackage().name/]Package.hpp"
+#include "uml/Class.hpp"
 [let attributes : OrderedSet(Property) = aClassifier.getAllAttributes().oclAsType(Property)->flatten()->asOrderedSet()->sortedBy(qualifiedName) ]
 [if (attributes->size() > 0)]
-
 #include "abstractDataTypes/Any.hpp"
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/CS_Reference.hpp"
+#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "fUML/Semantics/Values/Value.hpp"
 #include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
+[if (aClassifier.ownedElement->filter(Connector)->size() > 0)]
+#include "PSCS/Semantics/StructuredClassifiers/CS_Link.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/CS_InteractionPoint.hpp"
+#include "fUML/Semantics/CommonBehavior/Execution.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
+#include "fUML/Semantics/Loci/Locus.hpp"
+#include "fUML/Semantics/Loci/ExecutionFactory.hpp"
+#include "fUML/Semantics/Loci/ChoiceStrategy.hpp"
+#include "uml/Association.hpp"
+#include "uml/Connector.hpp"
+#include "uml/ConnectorEnd.hpp"
+#include "uml/Operation.hpp"
+#include "uml/Port.hpp"
+[/if]
+#include "uml/Property.hpp"
 [for (property : Property | attributes->sortedBy(qualifiedName))]
 [property.type.generateTypeInclude(aPackage)/]
 [/for]
-#include "uml/Property.hpp"
-#include "uml/Port.hpp"
-#include "uml/Class.hpp"
 
 [for (aPack : Package | attributes.getNearestPackage()->asSet()->flatten()->sortedBy(name))]
 #include "[aPack.getPackageName()/]/[aPack.name/]Package.hpp"
 [/for]
 [/if]
 [/let]
-[if (aClassifier.eAllContents(Connector)->size() > 0)]
-#include "fUML/Semantics/CommonBehavior/Execution.hpp"
-#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
-#include "fUML/Semantics/Loci/Locus.hpp"
-#include "fUML/Semantics/Loci/ExecutionFactory.hpp"
-#include "fUML/Semantics/Loci/ChoiceStrategy.hpp"
-#include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
-#include "uml/Connector.hpp"
-#include "uml/ConnectorEnd.hpp"
-#include "uml/Operation.hpp"
-[/if]
 [for (action : AddStructuralFeatureValueAction | aPackage.getASTVA(aClassifier)->select(not (structuralFeature.type = value.type)))]
 #include "[aPackage.getPackageName()/]Exec/[action.value.type.oclAsType(Classifier).objectClassName()/].hpp"
 #include "[action.value.type._package.myNamespaceName()/]/[action.value.type.name/].hpp"
@@ -79,7 +81,7 @@ using namespace [aPackage.name/];
 [className/]::[className/](std::shared_ptr<[pointerName/]> _element):
 	m_umlValue(_element)
 {
-	this->getTypes()->add([aClassifier.getModelPackage()/][aClassifier.generatePackageGetterCall()/]);
+	this->getTypes()->add([aClassifier.getModelPackage()/][aClassifier.generatePackageGetterCall(aClassifier)/]);
 }
 
 [className/]::[className/]([className/] &obj):
@@ -89,7 +91,7 @@ using namespace [aPackage.name/];
 
 [className/]::[className/]()
 {
-	this->getTypes()->add([aClassifier.getModelPackage()/][aClassifier.generatePackageGetterCall()/]);
+	this->getTypes()->add([aClassifier.getModelPackage()/][aClassifier.generatePackageGetterCall(aClassifier)/]);
 }
 
 [className/]::~[className/]()
@@ -115,10 +117,13 @@ void [className/]::setUmlValue(std::shared_ptr<[pointerName/]> _element)
 
 void [className/]::setThis[className/]Ptr(std::weak_ptr<[className/]> thisObjectPtr)
 {
-	setThisObjectPtr(thisObjectPtr);
+	setThisCS_ObjectPtr(thisObjectPtr);
 }
-[if (aClassifier.eAllContents(Connector)->size() > 0)]
-std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> [className/]::dispatchIn(std::shared_ptr<uml::Operation>  operation,std::shared_ptr<uml::Port>  onPort)
+
+[let attributes : OrderedSet(Property) = aClassifier.getAllAttributes().oclAsType(Property)->flatten()->asOrderedSet()->sortedBy(qualifiedName) ]
+[if (attributes->size() > 0)]
+[if (aClassifier.ownedElement->filter(Connector)->size() > 0)]
+/*std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> [className/]::dispatchIn(std::shared_ptr<uml::Operation>  operation,std::shared_ptr<uml::Port>  onPort)
 {
 	std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> execution = nullptr;
 	
@@ -196,14 +201,84 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> [className/]::dispat
 	}
 	
 	return execution;
-}
+}*/
 
 std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> [className/]::dispatchOut(std::shared_ptr<uml::Operation>  operation,std::shared_ptr<uml::Port>  onPort)
 {
 	return nullptr;
 }
-[/if]
 
+std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Link>> [className/]::getLinks(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> interactionPoint)
+{
+	std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Link>> allLinks(new Bag<PSCS::Semantics::StructuredClassifiers::CS_Link>());
+	
+	//Retrieve all metamodel elements
+	std::shared_ptr<Bag<uml::Element>> modelMembers = Op_ProvInterface::Op_ProvInterfacePackage::eInstance()->allOwnedElements();
+	std::shared_ptr<Bag<uml::Connector>> connectors(new Bag<uml::Connector>());
+	std::shared_ptr<uml::Port> definingPort = interactionPoint->getDefiningPort();
+	
+	//Filter model elements for connectors that are connected to interactionPoints' definingPort
+	for(unsigned int i = 0; i < modelMembers->size(); i++)
+	{
+		std::shared_ptr<uml::Connector> elementAsConnector = std::dynamic_pointer_cast<uml::Connector>(modelMembers->at(i));
+		if(elementAsConnector != nullptr)
+		{
+			std::shared_ptr<uml::ConnectorEnd> end1 = elementAsConnector->getEnd()->at(0);
+			std::shared_ptr<uml::ConnectorEnd> end2 = elementAsConnector->getEnd()->at(1);
+			
+			if((end1->getRole() == definingPort) || (end2->getRole() == definingPort))
+			{
+				connectors->add(elementAsConnector);
+			}
+		}
+	}
+
+	
+	//For each connector that is connected to interactionPoints' definingPort:
+	//- retrieve FeatureValue of otherEnd
+	//-	create Link and add both interactionPoint as well as retrieved FeatureValue of otherEnd to the links' featureValues property
+	//- add Link to allLinks
+	
+	for(unsigned int i = 0; i < connectors->size(); i++)
+	{
+		std::shared_ptr<uml::Connector> currentConnector = connectors->at(i);
+		std::shared_ptr<Bag<fUML::Semantics::Values::Value>> otherEndValues(new Bag<fUML::Semantics::Values::Value>());
+		std::shared_ptr<Bag<fUML::Semantics::Values::Value>> definingEndValues(new Bag<fUML::Semantics::Values::Value>());
+		std::shared_ptr<uml::ConnectorEnd> end1 = currentConnector->getEnd()->at(0);
+		std::shared_ptr<uml::ConnectorEnd> end2 = currentConnector->getEnd()->at(1);
+		
+		definingEndValues->add(interactionPoint);
+		
+		if(definingPort == end1->getRole())
+		{
+			std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> dummyBag(new Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>());
+			otherEndValues = interactionPoint->getReferent()->getValues(currentConnector->getType()->getMemberEnd()->at(1), dummyBag);
+			
+			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Link> newLink = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Link();
+			newLink->setType(currentConnector->getType());
+			newLink->assignFeatureValue(newLink->getType()->getMemberEnd()->at(0), definingEndValues, -1);
+			newLink->assignFeatureValue(newLink->getType()->getMemberEnd()->at(1), otherEndValues, -1);
+			
+			allLinks->add(newLink);
+		}
+		else if(definingPort == end2->getRole())
+		{
+			std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> dummyBag(new Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>());
+			otherEndValues = interactionPoint->getReferent()->getValues(currentConnector->getType()->getMemberEnd()->at(0), dummyBag);
+			
+			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Link> newLink = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Link();
+			newLink->setType(currentConnector->getType());
+			newLink->assignFeatureValue(newLink->getType()->getOwnedEnd()->at(0), otherEndValues, -1);
+			newLink->assignFeatureValue(newLink->getType()->getOwnedEnd()->at(1), definingEndValues, -1);
+		
+			allLinks->add(newLink);
+		}
+	}
+	
+	return allLinks;
+}
+
+[/if]
 
 void [className/]::removeValue(std::shared_ptr<uml::StructuralFeature> feature, std::shared_ptr<fUML::Semantics::Values::Value> value)
 {
@@ -416,6 +491,23 @@ void [className/]::assignFeatureValue(std::shared_ptr<uml::StructuralFeature> fe
 {
 	this->setFeatureValue(feature, values, position);
 }
+
+std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> [className/]::retrieveFeatureValues()
+{
+	std::shared_ptr<uml::Classifier> type = this->getTypes()->at(0);
+	std::shared_ptr<Bag<uml::Property>> allAttributes = type->getAllAttributes();
+	std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> featureValues(new Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>());
+	
+	for(unsigned int i = 0; i < allAttributes->size(); i++)
+	{
+		featureValues->add(this->retrieveFeatureValue(allAttributes->at(i)));
+	}
+	
+	return featureValues;
+}
+
+[/if]
+[/let]
 [/file]
 [/template]
 

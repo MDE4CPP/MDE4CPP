@@ -76,6 +76,7 @@
 [aPackage.getPackageClasses().generateClassifierObjectHeader(aPackage)/]
 [aPackage.getPackageClasses().generateClassifierObjectSource(aPackage)/]
 
+//generate main or execution plugin
 [if (not buildLibrary())]
 //generate main
 [aPackage.generateMain()/]

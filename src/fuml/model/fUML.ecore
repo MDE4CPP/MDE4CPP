@@ -566,7 +566,7 @@
         </eAnnotations>
         <eOperations name="operationsMatch" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
           <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-            <details key="body" value="&#x9;bool matches = false;&#xA;&#x9;if(ownedOperation == baseOperation)&#xA;&#x9;{&#xA;&#x9;&#x9;matches = true;&#xA;&#x9;}&#xA;&#x9;else&#xA;    {&#xA;&#x9;&#x9;unsigned int i = 0;&#xA;&#x9;&#x9;while(!matches &amp;&amp; i &lt; ownedOperation->getRedefinedOperation()->size())&#xA;        {&#xA;&#x9;&#x9;&#x9;matches = this->operationsMatch(ownedOperation->getRedefinedOperation()->at(i), baseOperation);&#xA;&#x9;&#x9;&#x9;i = i + 1;&#xA;        }&#xA;    }&#xA;&#x9;return matches;"/>
+            <details key="body" value="&#x9;bool matches = false;&#xA;&#x9;if(ownedOperation->matches(baseOperation))&#xA;&#x9;{&#xA;&#x9;&#x9;matches = true;&#xA;&#x9;}&#xA;&#x9;else&#xA;    {&#xA;&#x9;&#x9;unsigned int i = 0;&#xA;&#x9;&#x9;while(!matches &amp;&amp; i &lt; ownedOperation->getRedefinedOperation()->size())&#xA;        {&#xA;&#x9;&#x9;&#x9;matches = this->operationsMatch(ownedOperation->getRedefinedOperation()->at(i), baseOperation);&#xA;&#x9;&#x9;&#x9;i = i + 1;&#xA;        }&#xA;    }&#xA;&#x9;return matches;"/>
           </eAnnotations>
           <eParameters name="ownedOperation" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Operation"/>
           <eParameters name="baseOperation" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Operation"/>
@@ -609,7 +609,7 @@
         </eOperations>
         <eOperations name="equals" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
           <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-            <details key="body" value="&#x9;bool isEqual = false;&#xA;&#x9;if (otherValue->eClass()->getClassifierID() == fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::REFERENCE_CLASS) {&#xA;&#x9;&#x9;auto other = std::dynamic_pointer_cast&lt;fUML::Semantics::StructuredClassifiers::Reference>(otherValue);&#xA;&#x9;&#x9;if (this->getReferent() == nullptr) {&#xA;&#x9;&#x9;&#x9;isEqual = other->getReferent() == nullptr;&#xA;&#x9;&#x9;} else {&#xA;&#x9;&#x9;&#x9;isEqual = this->getReferent()->equals(other->getReferent());&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;&#x9;return isEqual;"/>
+            <details key="body" value="&#x9;bool isEqual = false;&#xA;&#x9;auto other = std::dynamic_pointer_cast&lt;fUML::Semantics::StructuredClassifiers::Reference>(otherValue);&#xA;&#x9;if (other != nullptr) {&#xA;&#x9;&#x9;if (this->getReferent() == nullptr) {&#xA;&#x9;&#x9;&#x9;isEqual = other->getReferent() == nullptr;&#xA;&#x9;&#x9;} else {&#xA;&#x9;&#x9;&#x9;isEqual = this->getReferent()->equals(other->getReferent());&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;&#x9;return isEqual;"/>
           </eAnnotations>
           <eParameters name="otherValue" ordered="false" lowerBound="1" eType="#//Semantics/Values/Value"/>
         </eOperations>

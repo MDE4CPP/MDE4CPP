@@ -122,7 +122,7 @@ bool RedefinitionBasedDispatchStrategyImpl::operationsMatch(std::shared_ptr<uml:
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 		bool matches = false;
-	if(ownedOperation == baseOperation)
+	if(ownedOperation->matches(baseOperation))
 	{
 		matches = true;
 	}
