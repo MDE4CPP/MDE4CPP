@@ -303,19 +303,25 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> CS_CallOperationActi
 				// If not executing in the context of the target,
 				// Semantics are undefined.
 				// Otherwise, dispatch outside.
-				if((executionContext == targetReference->getReferent()) || (targetReference->getCompositeReferent()->contains(executionContext))) {
+				//if((executionContext == targetReference->getReferent()) || (targetReference->getCompositeReferent()->contains(executionContext))) {
 					execution = targetReference->dispatchOut(action->getOperation(), action->getOnPort());
-				}
+				//}
 			}
 			// Operation is both on a provided and a required interface
 			else if (operationIsOnProvidedInterface && operationIsOnRequiredInterface) {
+				std::cout<<__FUNCTION__<<"-- Operation is on both provided and required interface"<<std::endl;
 				if((executionContext == targetReference->getReferent()) || (targetReference->getCompositeReferent()->contains(executionContext))) {
+					std::cout<<__FUNCTION__<<"-- going into if"<<std::endl;
 					execution = targetReference->dispatchOut(action->getOperation(), action->getOnPort());
 				}
 			else {
+				std::cout<<__FUNCTION__<<"-- going into else"<<std::endl;
 				execution = targetReference->dispatchIn(action->getOperation(), action->getOnPort()); 
 				}	
 			}
+		}
+		else {
+			std::cout<<__FUNCTION__<<"-- target NOT instanceOf Reference"<<std::endl;
 		}
 	}
 	return execution;

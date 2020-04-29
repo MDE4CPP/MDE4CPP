@@ -163,21 +163,23 @@ bool CompoundValueImpl::equals(std::shared_ptr<fUML::Semantics::Values::Value>  
 	//generated from body annotation
 		std::shared_ptr<fUML::Semantics::SimpleClassifiers::CompoundValue> otherCompoundValue = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::CompoundValue>(otherValue);
 	bool isEqual = (otherCompoundValue != nullptr);
+	
     if (isEqual)
     {
         isEqual = fUML::Semantics::SimpleClassifiers::StructuredValueImpl::equals(otherValue)
-                && otherCompoundValue->getFeatureValues()->size() == this->getFeatureValues()->size();
+                && otherCompoundValue->retrieveFeatureValues()->size() == this->retrieveFeatureValues()->size();
 
         unsigned int i = 0;
-        while (isEqual && i < this->getFeatureValues()->size())
+        while (isEqual && i < this->retrieveFeatureValues()->size())
         {
-        	std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> thisFeatureValue = this->getFeatureValues()->at(i);
+        	std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> thisFeatureValue = this->retrieveFeatureValues()->at(i);
 
             bool matched = false;
             unsigned int j = 0;
-            while (!matched && j < otherCompoundValue->getFeatureValues()->size())
+            while (!matched && j < otherCompoundValue->retrieveFeatureValues()->size())
             {
-            	std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> otherFeatureValue = otherCompoundValue->getFeatureValues()->at(j);
+            	std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> otherFeatureValue = otherCompoundValue->retrieveFeatureValues()->at(j);		
+				
                 if (thisFeatureValue->getFeature() == otherFeatureValue->getFeature())
                 {
                     matched = thisFeatureValue->hasEqualValues(otherFeatureValue);
@@ -189,7 +191,7 @@ bool CompoundValueImpl::equals(std::shared_ptr<fUML::Semantics::Values::Value>  
             i = i + 1;
         }
     }
-
+	
     return isEqual;
 	//end of body
 }

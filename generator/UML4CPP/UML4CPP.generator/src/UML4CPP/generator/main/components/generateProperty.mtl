@@ -145,6 +145,9 @@ void [aInterface.name.toUpperFirst()/]Impl::[aProperty.setterName()/]([aProperty
 [aProperty.memberName()/]->setType([aProperty.type.generatePackageGetterCall(aProperty)/]);
 [aProperty.memberName()/]->setLower([aProperty.lower/]);
 [aProperty.memberName()/]->setUpper([aProperty.upper/]);
+[if (aProperty.oclIsTypeOf(Port))]
+[aProperty.memberName()/]->setIsConjugated([aProperty.oclAsType(Port).isConjugated/]);
+[/if]
 [aProperty.memberName()/]->setVisibility(uml::VisibilityKind::[aProperty.visibility.toString().toUpperCase()/]);
 [if (not aProperty.association.oclIsUndefined())][aProperty.memberName()/]->setAssociation([memberName(aProperty.association)/]);[/if]
 [if (not aProperty.defaultValue.oclIsUndefined())][aProperty.memberName()/]->setDefaultValue([memberName(aProperty.defaultValue)/]);[/if]

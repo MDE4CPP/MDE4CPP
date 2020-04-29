@@ -46,7 +46,6 @@
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "fUML/Semantics/Values/Value.hpp"
 #include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
-[if (aClassifier.ownedElement->filter(Connector)->size() > 0)]
 #include "PSCS/Semantics/StructuredClassifiers/CS_Link.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/CS_InteractionPoint.hpp"
 #include "fUML/Semantics/CommonBehavior/Execution.hpp"
@@ -58,9 +57,8 @@
 #include "uml/Connector.hpp"
 #include "uml/ConnectorEnd.hpp"
 #include "uml/Operation.hpp"
-#include "uml/Port.hpp"
-[/if]
 #include "uml/Property.hpp"
+#include "uml/Port.hpp"
 [for (property : Property | attributes->sortedBy(qualifiedName))]
 [property.type.generateTypeInclude(aPackage)/]
 [/for]
@@ -120,9 +118,36 @@ void [className/]::setThis[className/]Ptr(std::weak_ptr<[className/]> thisObject
 	setThisCS_ObjectPtr(thisObjectPtr);
 }
 
+bool [className/]::equals(std::shared_ptr<fUML::Semantics::Values::Value> otherValue)
+{
+
+	//std::cout<<"#[className/]::"<<__FUNCTION__<<"-- Entered for :\n"<<"\tthisValue = "<<this->toString()<<"\n\totherValue"<<otherValue->toString()<<std::endl;
+	
+	bool isEqual = false;
+	
+	std::shared_ptr<[className/]> other[className/] = std::dynamic_pointer_cast<[className/]>(otherValue);
+
+	if(other[className/] != nullptr)
+	{
+		//std::cout<<"#[className/]::"<<__FUNCTION__<<"-- otherValue instanceOf [className/]"<<std::endl;
+
+		if(this->getUmlValue() == other[className/]->getUmlValue())
+		{
+			isEqual = true;//fUML::Semantics::SimpleClassifiers::CompoundValueImpl::equals(otherValue);
+		}
+	}
+	else
+	{
+		//std::cout<<"#[className/]::"<<__FUNCTION__<<"-- otherValue NOT instanceOf [className/]"<<std::endl;
+	}
+
+	//std::cout<<"#[className/]::"<<__FUNCTION__<<"-- isEqual = "<<isEqual<<std::endl;
+
+	return isEqual;
+}
+
 [let attributes : OrderedSet(Property) = aClassifier.getAllAttributes().oclAsType(Property)->flatten()->asOrderedSet()->sortedBy(qualifiedName) ]
 [if (attributes->size() > 0)]
-[if (aClassifier.ownedElement->filter(Connector)->size() > 0)]
 /*std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> [className/]::dispatchIn(std::shared_ptr<uml::Operation>  operation,std::shared_ptr<uml::Port>  onPort)
 {
 	std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> execution = nullptr;
@@ -203,17 +228,12 @@ void [className/]::setThis[className/]Ptr(std::weak_ptr<[className/]> thisObject
 	return execution;
 }*/
 
-std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> [className/]::dispatchOut(std::shared_ptr<uml::Operation>  operation,std::shared_ptr<uml::Port>  onPort)
-{
-	return nullptr;
-}
-
 std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Link>> [className/]::getLinks(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> interactionPoint)
 {
 	std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Link>> allLinks(new Bag<PSCS::Semantics::StructuredClassifiers::CS_Link>());
 	
 	//Retrieve all metamodel elements
-	std::shared_ptr<Bag<uml::Element>> modelMembers = Op_ProvInterface::Op_ProvInterfacePackage::eInstance()->allOwnedElements();
+	std::shared_ptr<Bag<uml::Element>> modelMembers = [aClassifier.getModelPackage()/]allOwnedElements();
 	std::shared_ptr<Bag<uml::Connector>> connectors(new Bag<uml::Connector>());
 	std::shared_ptr<uml::Port> definingPort = interactionPoint->getDefiningPort();
 	
@@ -277,8 +297,6 @@ std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Link>> [className
 	
 	return allLinks;
 }
-
-[/if]
 
 void [className/]::removeValue(std::shared_ptr<uml::StructuralFeature> feature, std::shared_ptr<fUML::Semantics::Values::Value> value)
 {
@@ -403,9 +421,25 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> [className/]::getValues(std
 		value->setThis[aProperty.type.oclAsType(Classifier).objectClassName()/]Ptr(value);
 		value->setLocus(this->getLocus());
 		value->setUmlValue(m_umlValue->[aProperty.getterName()/]()[if(aProperty.isBackReference())].lock()[/if]);
-		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference= [getPSCSStructuredClassifierFactory()/]->createCS_Reference();
+[if (aProperty.oclIsTypeOf(Port))]
+		//property [aProperty.name/] is Port
+		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> interactionPoint = [getPSCSStructuredClassifierFactory()/]->createCS_InteractionPoint();
+		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> referenceToOwner = [getPSCSStructuredClassifierFactory()/]->createCS_Reference();
+		referenceToOwner->setReferent(getThisCS_ObjectPtr());
+		referenceToOwner->setCompositeReferent(std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Object>(getThisCS_ObjectPtr()));
+		interactionPoint->setOwner(referenceToOwner);
+		interactionPoint->setReferent(value);
+		interactionPoint->setDefiningPort([aProperty.getModelPackage()/][aProperty.generatePackageGetterCall(aProperty)/]);
+
+		values->add(interactionPoint);
+[else]
+		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference = [getPSCSStructuredClassifierFactory()/]->createCS_Reference();
 		reference->setReferent(value);
+[if (aProperty.isComposite)]
+		reference->setCompositeReferent(value);
+[/if]
 		values->add(reference);
+[/if]
 [else]
 		[aProperty.generateCppType()/] [aProperty.name.toLowerFirst()/]List = m_umlValue->[aProperty.getterName()/]();
 		Bag<[aProperty.type.generateCppType(true)/]>::iterator iter = [aProperty.name.toLowerFirst()/]List->begin();
@@ -416,9 +450,25 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> [className/]::getValues(std
 			value->setThis[aProperty.type.oclAsType(Classifier).objectClassName()/]Ptr(value);
 			value->setLocus(this->getLocus());
 			value->setUmlValue(*iter);
-			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference= [getPSCSStructuredClassifierFactory()/]->createCS_Reference();
+[if (aProperty.oclIsTypeOf(Port))]
+			//property [aProperty.name/] is Port
+			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> interactionPoint = [getPSCSStructuredClassifierFactory()/]->createCS_InteractionPoint();
+			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> referenceToOwner = [getPSCSStructuredClassifierFactory()/]->createCS_Reference();
+			referenceToOwner->setReferent(getThisCS_ObjectPtr());
+			referenceToOwner->setCompositeReferent(std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Object>(getThisCS_ObjectPtr()));
+			interactionPoint->setOwner(referenceToOwner);
+			interactionPoint->setReferent(value);
+			interactionPoint->setDefiningPort([aProperty.getModelPackage()/][aProperty.generatePackageGetterCall(aProperty)/]);
+
+			values->add(interactionPoint);
+[else]
+			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference = [getPSCSStructuredClassifierFactory()/]->createCS_Reference();
 			reference->setReferent(value);
+[if (aProperty.isComposite)]
+			reference->setCompositeReferent(value);
+[/if]
 			values->add(reference);
+[/if]
 			iter++;
 		} 
 [/if]
@@ -500,7 +550,15 @@ std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> [classNam
 	
 	for(unsigned int i = 0; i < allAttributes->size(); i++)
 	{
-		featureValues->add(this->retrieveFeatureValue(allAttributes->at(i)));
+		std::shared_ptr<uml::Property> property = allAttributes->at(i);
+		[for (aProperty : Property | aClassifier.getAllAttributes().oclAsType(Property))]
+		[if (not aProperty.isPrimitiveTypedProperty() and not aProperty.isEnumerationProperty())]
+		if (property == [aProperty.getModelPackage()/][aProperty.generatePackageGetterCall(aProperty)/] && m_umlValue->[aProperty.getterName()/]() != nullptr)
+		{
+			featureValues->add(this->retrieveFeatureValue(property));
+		}
+		[/if]
+		[/for]
 	}
 	
 	return featureValues;
@@ -538,3 +596,4 @@ if (value != nullptr)
 [/template]
 
 [query private isPrimitiveTypedProperty(aProperty : Property) : Boolean = aProperty.type.oclIsKindOf(PrimitiveType) /] 
+[query private isEnumerationProperty(aProperty : Property) : Boolean = aProperty.type.oclIsKindOf(Enumeration) /]
