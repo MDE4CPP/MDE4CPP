@@ -120,28 +120,17 @@ void [className/]::setThis[className/]Ptr(std::weak_ptr<[className/]> thisObject
 
 bool [className/]::equals(std::shared_ptr<fUML::Semantics::Values::Value> otherValue)
 {
-
-	//std::cout<<"#[className/]::"<<__FUNCTION__<<"-- Entered for :\n"<<"\tthisValue = "<<this->toString()<<"\n\totherValue"<<otherValue->toString()<<std::endl;
-	
 	bool isEqual = false;
 	
 	std::shared_ptr<[className/]> other[className/] = std::dynamic_pointer_cast<[className/]>(otherValue);
 
 	if(other[className/] != nullptr)
 	{
-		//std::cout<<"#[className/]::"<<__FUNCTION__<<"-- otherValue instanceOf [className/]"<<std::endl;
-
 		if(this->getUmlValue() == other[className/]->getUmlValue())
 		{
 			isEqual = true;//fUML::Semantics::SimpleClassifiers::CompoundValueImpl::equals(otherValue);
 		}
 	}
-	else
-	{
-		//std::cout<<"#[className/]::"<<__FUNCTION__<<"-- otherValue NOT instanceOf [className/]"<<std::endl;
-	}
-
-	//std::cout<<"#[className/]::"<<__FUNCTION__<<"-- isEqual = "<<isEqual<<std::endl;
 
 	return isEqual;
 }
