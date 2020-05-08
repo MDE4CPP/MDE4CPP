@@ -37,6 +37,11 @@ namespace [aClassifier.getNearestPackage().myNamespaceName()/]
 	class [aClassifier.name.toUpperFirst()/];
 }
 
+namespace uml
+{
+	class ConnectorEnd;
+}
+
 namespace [aPackage.name/] 
 {
 	class [className/] : virtual public PSCS::Semantics::StructuredClassifiers::CS_ObjectImpl
@@ -64,8 +69,8 @@ namespace [aPackage.name/]
 			virtual void assignFeatureValue(std::shared_ptr<uml::StructuralFeature> feature, std::shared_ptr<Bag<fUML::Semantics::Values::Value>> value, int position);
 			virtual std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> retrieveFeatureValues();
 
-			//virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> dispatchIn(std::shared_ptr<uml::Operation>  operation,std::shared_ptr<uml::Port>  onPort);
 			virtual std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Link>> getLinks(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> interactionPoint);
+			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value>> retrieveEndValueAsInteractionPoint(std::shared_ptr<fUML::Semantics::Values::Value> endValue, std::shared_ptr<uml::ConnectorEnd> end);
 [/if]
 [/let]
 

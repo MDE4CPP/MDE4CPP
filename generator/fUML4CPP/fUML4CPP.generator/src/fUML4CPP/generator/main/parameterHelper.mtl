@@ -61,6 +61,28 @@
 				}->flatten()->sortedBy(name)
 /]
 
+[comment]Get Types of partWithPort properties of connectors that have partWithPort of Type "sourceType" on one end [/comment]
+
+[comment get all connectors /]
+[query private getAllConnectors(aPackage : Package) : Set(Connector) = aPackage.allOwnedElements()->selectByKind(Connector) /]
+
+[comment get all connectors with specific port type /]
+[query private getAllConnectorsWithType(aPackage : Package, aClass : Class) : Set(Connector) = aPackage.getAllConnectors()->select(containsPortWithSpecificClass(aClass)) /]
+
+[comment check, if type of aPort is equal to aClass /]
+[query private isConnectorEndTypeEqualTo(anEnd : ConnectorEnd, aClass : Class) : Boolean = if (anEnd.oclIsUndefined()) then false else anEnd.partWithPort.type = aClass endif /]
+
+[comment check if aConnector has two valid connector ends -> 2x end AND all ends are defined AND all ends have valid partWithPort /]
+[query private isValidConnector(aConnector : Connector) : Boolean = aConnector.end->size() = 2 and aConnector.end->reject(oclIsUndefined()).partWithPort->asSet()->reject(oclIsUndefined())->size() = 2 /] 
+
+[comment check if aConnector contains a port with type aClass) -> überprüfe alle ConnectorEnd gegen aClass, sammele alle Ergebnisse (in einem Set), entferne alle false -> somit nur true drin, bei size > 0 muss ein true, also ein Connectorend mit type = aClass drin sein/]
+[query private containsPortWithSpecificClass(aConnector : Connector, aClass : Class) : Boolean = if (not aConnector.isValidConnector()) then false else aConnector.end.isConnectorEndTypeEqualTo(aClass)->reject(false)->size() > 0  endif /] 
+
+[comment get all part type's, but only classes,  and not someType, sorted by name /]
+[query public collectClasses(aPackage : Package, someType : Class) : OrderedSet(Class) = aPackage.getAllConnectorsWithType(someType).end.partWithPort.type->flatten()->selectByKind(Class)->reject(thisClass : Class | thisClass = someType)->asOrderedSet()->sortedBy(name)/]
+
+[query public collectConnectorEnds(aPackage : Package, someType : Class) : OrderedSet(ConnectorEnd) = (aPackage.getAllConnectorsWithType(someType).end->flatten()->reject(thisEnd : ConnectorEnd | thisEnd.partWithPort.type = someType))->asOrderedSet()->sortedBy(name)/]
+
 [comment]INPUT SWITCH ----------------------------------------------------------[/comment]
 [template public generateInputParameter(par : Parameter, index:Integer)]
 [par.name.generateInputParameter(par.type, index)/]
