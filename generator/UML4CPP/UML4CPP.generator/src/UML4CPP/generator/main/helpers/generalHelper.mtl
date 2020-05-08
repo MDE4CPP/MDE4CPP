@@ -46,9 +46,8 @@
 [**
  * queries to check values of include path annotation keys
 */]
-[query public hasInclude(aPackage : Package) : Boolean = hasSourceGen(sourceNameIncludePath()) /]
-[query public hasIncludePath(ePackage : Package) : Boolean = hasKey(sourceNameIncludePath(), keyIncludePath()) /]
-[query public getIncludePath(ePackage : Package) : String = valueKey(sourceNameIncludePath(), keyIncludePath()) /]
+[query public hasIncludePath(ePackage : Package) : Boolean = hasKey(sourceNameCodeGen(), keyIncludePath()) /]
+[query public getIncludePath(ePackage : Package) : String = valueKey(sourceNameCodeGen(), keyIncludePath()) /]
 
 [**
  * queries to check values of prepareApplication annotation keys

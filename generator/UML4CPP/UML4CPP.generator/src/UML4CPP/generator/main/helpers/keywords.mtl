@@ -51,5 +51,4 @@
 [**
  * keywords for source name and keys of include annoation
 */]
-[query public sourceNameIncludePath(any : OclAny) : String = 'include' /] [** special source for include path of external library. Incase of naming difference between the namespace and the include path /]
-[query public keyIncludePath(any : OclAny) : String = 'path'/] [** specifiy include path/]
+[query public keyIncludePath(any : OclAny) : String = 'includePath'/] [** specifiy include path/]
