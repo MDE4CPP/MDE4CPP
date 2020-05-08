@@ -33,7 +33,7 @@
 [import UML4CPP::generator::main::pscs::generateConnectorPatternsInstantiation/]
 [import UML4CPP::generator::main::pscs::generateDestruction/]
 
-[query private includes(aClass : Class)  : Set(Type) = OrderedSet{aClass.member->selectByKind(TypedElement)->select(not type.oclIsUndefined()).type, aClass.ownedOperation.ownedParameter.type, aClass.getAllAttributes().type, aClass.importedMember}->flatten() /]
+[query private includes(aClass : Class)  : Set(Type) = OrderedSet{aClass.member->selectByKind(TypedElement)->select(not type.oclIsUndefined()).type, aClass.ownedOperation.ownedParameter.type, aClass.getAllAttributes().type, aClass.importedMember, aClass.getCompositeOwners()}->flatten() /]
 [query private includes(aInterface : Interface)  : Set(Type) = OrderedSet{aInterface.member->selectByKind(TypedElement)->select(not type.oclIsUndefined()).type, aInterface.ownedOperation.ownedParameter.type}->flatten() /]
 
 [query private getAllAttributes(anInterface : Interface) : Set(Property) = OrderedSet{anInterface.ownedAttribute, anInterface.generalization.general->selectByType(Interface).getAllAttributes()} /]
@@ -117,29 +117,6 @@
 	//***********************************
 	// init Get Set
 	[aClass.generateGetSetInit()/] 
-
-	// init properties without default
-	[for (aProperty : Property | aClass.ownedAttribute->sortedBy(myQualifiedName()))]
-	[if (aProperty.default->isEmpty())][aProperty.generateAttributeInstantiation()/][/if]
-	[/for]
-	
-	// init properties with default
-	[for (aProperty : Property | aClass.ownedAttribute->sortedBy(myQualifiedName()))]
-	[if ((not aProperty.defaultValue.oclIsUndefined()) and (aProperty.defaultValue.oclIsTypeOf(InstanceValue)))]
-	[if (aProperty.defaultValue.type.oclIsUndefined() or aProperty.defaultValue.name.oclIsUndefined())]
-	// undefined type of InstanceValue [aProperty.defaultValue.qualifiedName/] ([aProperty.defaultValue.type.toString()/]) ['class '.concat(aClass.name).concat(': undefined type of InstanceValue ').concat(aProperty.defaultValue.qualifiedName).concat(' (').concat(aProperty.defaultValue.type.toString()).registerError()/]
-	[else]
-	[aProperty.generateAttributeDefaultInstantiation()/]
-	[/if]
-	[/if]
-	[/for]
-
-	// init connectors
-	[for (aConnector : Connector | aClass.ownedConnector->sortedBy(myQualifiedName()))]
-	[if ((not(aConnector.type.oclIsUndefined())) and (not(aConnector.type.name.oclIsUndefined())))]
-	[aConnector.generateConnectorInstantiation()/]
-	[/if]
-	[/for]
 }
 
 [for (anAssociation : Association | aClass.getCompositionsToClass())]
@@ -152,6 +129,13 @@
     m_[containmentProperty.name/] = [containmentProperty.name.toLowerFirst()/];
 }
 [/if] [/let] [/let] [/for]
+[for (compositeOwnerClass : Class | aClass.getCompositeOwners())]
+[className/]::[className/](std::weak_ptr<[compositeOwnerClass.generateCppType(true)/]> [compositeOwnerClass.name.toLowerFirst()/])
+:[className/]()
+{
+    m_[compositeOwnerClass.name/] = [compositeOwnerClass.name.toLowerFirst()/];
+}
+[/for]
 
 [className/]::~[className/]()
 {
@@ -210,11 +194,40 @@ std::shared_ptr<uml::Class> [className/]::getMetaClass()
 	return [aPackage.name.concat('PackageImpl').toUpperFirst()/]::eInstance()->[aClass.generatePackageGetterCall(aClass)/];
 }
 
+void [className/]::instantiate()
+{
+	// init properties without default
+	[for (aProperty : Property | aClass.ownedAttribute->sortedBy(myQualifiedName()))]
+	[if (aProperty.default->isEmpty())][aProperty.generateAttributeInstantiation()/][/if]
+	[/for]
+	
+	// init properties with default
+	[for (aProperty : Property | aClass.ownedAttribute->sortedBy(myQualifiedName()))]
+	[if ((not aProperty.defaultValue.oclIsUndefined()) and (aProperty.defaultValue.oclIsTypeOf(InstanceValue)))]
+	[if (aProperty.defaultValue.type.oclIsUndefined() or aProperty.defaultValue.name.oclIsUndefined())]
+	// undefined type of InstanceValue [aProperty.defaultValue.qualifiedName/] ([aProperty.defaultValue.type.toString()/]) ['class '.concat(aClass.name).concat(': undefined type of InstanceValue ').concat(aProperty.defaultValue.qualifiedName).concat(' (').concat(aProperty.defaultValue.type.toString()).registerError()/]
+	[else]
+	[aProperty.generateAttributeDefaultInstantiation()/]
+	[/if]
+	[/if]
+	[/for]
+
+	// init connectors
+	[for (aConnector : Connector | aClass.ownedConnector->sortedBy(myQualifiedName()))]
+	[if ((not(aConnector.type.oclIsUndefined())) and (not(aConnector.type.name.oclIsUndefined())))]
+	[aConnector.generateConnectorInstantiation()/]
+	[/if]
+	[/for]
+}
+
 void [className/]::clear()
 {
 	//Erase properties
 	[for (aProperty : Property | aClass.ownedAttribute->sortedBy(myQualifiedName()))]
 	[aProperty.generatePropertyDestruction()/]
+	[/for]
+	[for (compositeOwnerClass : Class | aClass.getCompositeOwners())]
+	m_[compositeOwnerClass.name/].reset();
 	[/for]
 }
 
@@ -229,6 +242,10 @@ void [className/]::clear()
 [aAttribute.generateAttributeSetterImplementationCpp(aClass)/]
 [aAttribute.generateAttributeGetterImplementationCpp(aClass)/]
 [/if][/for][/for]
+[for (compositeOwnerClass : Class | aClass.getCompositeOwners())]
+[aClass.generateCompositeOwnerAttributeGetterImplementationCpp(compositeOwnerClass)/]
+[aClass.generateCompositeOwnerAttributeSetterImplementationCpp(compositeOwnerClass)/]
+[/for]
 
 //*********************************
 // Operations

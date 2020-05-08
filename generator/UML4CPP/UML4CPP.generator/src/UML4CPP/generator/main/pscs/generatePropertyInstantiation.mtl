@@ -29,7 +29,11 @@
 [template public generateAttributeInstantiation(aProperty : Property)]
 [if (aProperty.upper = 1)]
 [if (aProperty.canInstantiate())]
+[if (aProperty.isComposite())]
+m_[aProperty.name/] = [aProperty.type._package.getPackageName()/]::[aProperty.type._package.getPackageName().toUpperFirst()/]Factory::eInstance()->create[aProperty.type.name.toUpperFirst()/]_as_[aProperty.name/]_in_[aProperty.class.name.toUpperFirst()/](m_this[aProperty.class.name.toUpperFirst()/]Ptr);
+[else]
 m_[aProperty.name/] = [aProperty.type._package.getPackageName()/]::[aProperty.type._package.getPackageName().toUpperFirst()/]Factory::eInstance()->create[aProperty.type.name.toUpperFirst()/]();
+[/if]
 [/if]
 [else]
 m_[aProperty.name/].reset(new Bag<[aProperty.type.transformType()/]>());
@@ -52,7 +56,11 @@ for(unsigned int i = 1; i <= [aProperty.getLower()/]; i++)
 */]
 [template private generatePortInstantiation(aProperty : Property) {aPackage : Package = aProperty.ancestors()->filter(Package)->first(); factoryName : String = aPackage.name.toUpperFirst().concat('Factory');}]
 	[let interfaceOfPort : Interface = aProperty.type.oclAsType(Interface)]
+	[if (aProperty.isComposite)]
+	std::shared_ptr<[aProperty.type.transformType()/]> value = [aPackage.name/]::[factoryName/]::eInstance()->create[aPackage.getInterfaceRealizations(interfaceOfPort)->asOrderedSet()->first().owner.oclAsType(Class).name/]_as_[aProperty.name/]_in_[aProperty.class.name.toUpperFirst()/](m_this[aProperty.class.name.toUpperFirst()/]Ptr);
+	[else]
 	std::shared_ptr<[aProperty.type.transformType()/]> value = [aPackage.name/]::[factoryName/]::eInstance()->create[aPackage.getInterfaceRealizations(interfaceOfPort)->asOrderedSet()->first().owner.oclAsType(Class).name/]();
+	[/if]
 	[/let]
 	m_[aProperty.name/]->add(value);
 [/template]
@@ -62,7 +70,11 @@ for(unsigned int i = 1; i <= [aProperty.getLower()/]; i++)
  * Template for generation of instantiation of a part
 */]
 [template private generatePartInstantiation(aProperty : Property) {aPackage : Package = aProperty.ancestors()->filter(Package)->first(); factoryName : String = aPackage.name.toUpperFirst().concat('Factory');}]
-	std::shared_ptr<[aProperty.type.transformType()/]> value = [aPackage.name/]::[factoryName/]::eInstance()->create[aProperty.type.name/]();
+	[if (aProperty.isComposite)]
+	std::shared_ptr<[aProperty.type.transformType()/]> value = [aPackage.name/]::[factoryName/]::eInstance()->create[aProperty.type.name.toUpperFirst()/]_as_[aProperty.name/]_in_[aProperty.class.name.toUpperFirst()/](m_this[aProperty.class.name.toUpperFirst()/]Ptr);
+	[else]
+	std::shared_ptr<[aProperty.type.transformType()/]> value = [aPackage.name/]::[factoryName/]::eInstance()->create[aProperty.type.name.toUpperFirst()/]();
+	[/if]
 	m_[aProperty.name/]->add(value);
 [/template]
 

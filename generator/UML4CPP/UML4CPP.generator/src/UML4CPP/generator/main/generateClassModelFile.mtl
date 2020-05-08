@@ -27,8 +27,9 @@
 [import UML4CPP::generator::main::helpers::nameHelper /]
 [import UML4CPP::generator::main::helpers::singletonHelper /]
 [import UML4CPP::generator::main::validation::validateModel /]
+[import UML4CPP::generator::main::components::generateClass /]
 
-[query private includes(aClass : Class) : Set(Type) = Set(Type){aClass.ownedAttribute.type, aClass.ownedOperation.ownedParameter.type}->flatten() /]
+[query private includes(aClass : Class) : Set(Type) = Set(Type){aClass.ownedAttribute.type, aClass.ownedOperation.ownedParameter.type, aClass.getCompositeOwners()}->flatten() /]
 
 [template public generateModel(aClass : Class) {aPackage:Package = aClass.ancestors()->filter(Package)->first();}]
 [file (aPackage.getPackageName().concat('/').concat(aClass.name.toUpperFirst()).concat('.hpp'), false, 'UTF-8')]
@@ -115,6 +116,7 @@ virtual public [sClass.getClassifierName(aClass, ignoreNamespace(sClass))/][/for
 			// Getter Setter
 			//*********************************
 			[aClass.ownedAttribute->sortedBy(name).generateAttributeAccessorsDeclaration(false)/]
+			[aClass.getCompositeOwners()->sortedBy(name).generateCompositeOwnerAttributeAccessorsDeclaration(false)/]
 			
 			//*********************************
 			// Operations
@@ -126,6 +128,7 @@ virtual public [sClass.getClassifierName(aClass, ignoreNamespace(sClass))/][/for
 			// Members
 			//*********************************
 			[aClass.ownedAttribute->sortedBy(name).generateAttributeProtectedMember()/]
+			[aClass.getCompositeOwners()->sortedBy(name).generateCompositeOwnerAttributeProtectedMember() /]
 [if (isSingleton())]
 
 			//Singleton Instance and Getter

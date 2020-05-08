@@ -46,8 +46,13 @@
 [template public generateAttributeAccessorsDeclaration(aProperty : Property, impl : Boolean)]
 virtual [aProperty.generateCppType()/] [aProperty.getterName()/]() const [abstractSuffix(impl)/];
 [if (aProperty.hasSetter())]
-virtual void [aProperty.setterName()/] ([aProperty.generateCppType()/] _[aProperty.name/])[abstractSuffix(impl)/];
+virtual void [aProperty.setterName()/]([aProperty.generateCppType()/] _[aProperty.name/])[abstractSuffix(impl)/];
 [/if]
+[/template]
+
+[template public generateCompositeOwnerAttributeAccessorsDeclaration(compositeOwnerClass : Class, impl : Boolean)]
+virtual std::weak_ptr<[compositeOwnerClass.generateCppType(true)/]> get[compositeOwnerClass.name.toUpperFirst()/]() const [abstractSuffix(impl)/];
+virtual void set[compositeOwnerClass.name.toUpperFirst()/](std::weak_ptr<[compositeOwnerClass.generateCppType(true)/]> _[compositeOwnerClass.name/])[abstractSuffix(impl)/];
 [/template]
 
 [**
@@ -55,7 +60,10 @@ virtual void [aProperty.setterName()/] ([aProperty.generateCppType()/] _[aProper
  */]
 [template public generateAttributeProtectedMember(aProperty : Property)]
 [if (aProperty.isStatic)]static [/if][aProperty.generateCppType()/] m_[aProperty.name/][if (aProperty.default->notEmpty())]= [aProperty.genDefault()/][/if];
+[/template]
 
+[template public generateCompositeOwnerAttributeProtectedMember(compositeOwnerClass : Class)]
+std::weak_ptr<[compositeOwnerClass.generateCppType(true)/]> m_[compositeOwnerClass.name/];
 [/template]
 
 [**
@@ -88,6 +96,13 @@ m_[aProperty.name/].reset(new Bag<[aProperty.type.transformType()/]>());
 }
 [/template]
 
+[template public generateCompositeOwnerAttributeGetterImplementationCpp(aClass : Class, compositeOwnerClass : Class)]
+std::weak_ptr<[compositeOwnerClass.generateCppType(true)/]> [aClass.name.toUpperFirst()/]Impl::get[compositeOwnerClass.name.toUpperFirst()/]() const
+{
+	return m_[compositeOwnerClass.name/];
+}
+[/template]
+
 [**
  * generate property setter implementation
 */]
@@ -106,6 +121,13 @@ void [aClass.name.toUpperFirst()/]Impl::[aProperty.setterName()/]([aProperty.gen
 void [aInterface.name.toUpperFirst()/]Impl::[aProperty.setterName()/]([aProperty.generateCppType()/] _[aProperty.name/])
 {
 	m_[aProperty.name/] = _[aProperty.name/];
+}
+[/template]
+
+[template public generateCompositeOwnerAttributeSetterImplementationCpp(aClass : Class, compositeOwnerClass : Class)]
+void [aClass.name.toUpperFirst()/]Impl::set[compositeOwnerClass.name.toUpperFirst()/](std::weak_ptr<[compositeOwnerClass.generateCppType(true)/]> _[compositeOwnerClass.name/])
+{
+	m_[compositeOwnerClass.name/] = _[compositeOwnerClass.name/];
 }
 [/template]
 
