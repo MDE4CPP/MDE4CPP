@@ -74,8 +74,8 @@ for(unsigned int i = 1; i <= [aProperty.getLower()/]; i++)
 	std::shared_ptr<[aProperty.type.transformType()/]> value = [aPackage.name/]::[factoryName/]::eInstance()->create[aProperty.type.name.toUpperFirst()/]_as_[aProperty.name/]_in_[aProperty.class.name.toUpperFirst()/](m_this[aProperty.class.name.toUpperFirst()/]Ptr);
 	[else]
 	std::shared_ptr<[aProperty.type.transformType()/]> value = [aPackage.name/]::[factoryName/]::eInstance()->create[aProperty.type.name.toUpperFirst()/]();
-	[/if]
 	m_[aProperty.name/]->add(value);
+	[/if]
 [/template]
 
 

@@ -135,7 +135,7 @@ bool [className/]::equals(std::shared_ptr<fUML::Semantics::Values::Value> otherV
 	{
 		if(this->getUmlValue() == other[className/]->getUmlValue())
 		{
-			isEqual = true;//fUML::Semantics::SimpleClassifiers::CompoundValueImpl::equals(otherValue);
+			isEqual = true;
 		}
 	}
 
@@ -192,7 +192,7 @@ std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Link>> [className
 			
 			//If other end of connector is a port, the corresponding FeatureValue has to be retrieved as CS_InteractionPoint from its owner
 			//instead of being retrieved from this connector end as just a CS_Reference
-			if(std::dynamic_pointer_cast<uml::Port>(end2->getRole()) != nullptr)
+			if((std::dynamic_pointer_cast<uml::Port>(end2->getRole()) != nullptr) && (end2->getPartWithPort() != nullptr))
 			{
 				//otherEndValues->at(0) is passed to retrieve the ports owner later on
 				otherEndValues = this->retrieveEndValueAsInteractionPoint(otherEndValues->at(0), end2);
@@ -212,7 +212,7 @@ std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Link>> [className
 			
 			//If other end of connector is a port, the corresponding FeatureValue has to be retrieved as CS_InteractionPoint from its owner
 			//instead of being retrieved from this connector end as just a CS_Reference
-			if(std::dynamic_pointer_cast<uml::Port>(end1->getRole()) != nullptr)
+			if((std::dynamic_pointer_cast<uml::Port>(end1->getRole()) != nullptr) && (end1->getPartWithPort() != nullptr))
 			{
 				//otherEndValues->at(0) is passed to retrieve the ports owner later on
 				otherEndValues = this->retrieveEndValueAsInteractionPoint(otherEndValues->at(0), end1);
@@ -232,13 +232,15 @@ std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Link>> [className
 
 std::shared_ptr<Bag<fUML::Semantics::Values::Value>> [className/]::retrieveEndValueAsInteractionPoint(std::shared_ptr<fUML::Semantics::Values::Value> endValue, std::shared_ptr<uml::ConnectorEnd> end)
 {
+[let ends : OrderedSet(ConnectorEnd) = aPackage.collectOppositeConnectorEndsForClass(aClassifier.oclAsType(Class))]
+[if (ends->size() > 0) ]
 	std::shared_ptr<uml::Class> type = std::dynamic_pointer_cast<uml::Class>(end->getPartWithPort()->getType());
 	std::shared_ptr<uml::Class> portType = std::dynamic_pointer_cast<uml::Class>(end->getRole()->getType());
 	std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> featureValue = nullptr;
 
 [comment] type can only be a class that plays partWithPort of a connector end where aClassifier is type of opposite partWithPort [/comment]
 
-[for (end : ConnectorEnd | aPackage.collectConnectorEnds(aClassifier.oclAsType(Class)))]
+[for (end : ConnectorEnd | ends)]
 [let partWithPortType : Class = end.partWithPort.type ]
 [let roleType : Class = end.role.type ]
 	if(type == [partWithPortType.getModelPackage()/][partWithPortType.generatePackageGetterCall(partWithPortType)/] && portType == [roleType.getModelPackage()/][roleType.generatePackageGetterCall(roleType)/])
@@ -247,12 +249,14 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> [className/]::retrieveEndVa
 		std::shared_ptr<[roleType.objectClassName()/]> portObject = std::dynamic_pointer_cast<[roleType.objectClassName()/]>(std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(endValue)->getReferent());
 		std::shared_ptr<[partWithPortType.generateCppType(true)/]> ownerUmlValue = portObject->getUmlValue()->get[partWithPortType.name.toUpperFirst()/]().lock();
 		ownerObject->setUmlValue(ownerUmlValue);
-		featureValue = ownerObject->retrieveFeatureValue(std::dynamic_pointer_cast<uml::Feature>(end->getRole()));
+		featureValue = ownerObject->retrieveFeatureValue(std::dynamic_pointer_cast<uml::StructuralFeature>(end->getRole()));
 	}
 [/let][/let]
 [/for]
-
 	return featureValue->getValues();
+[else]
+	return nullptr;
+[/if][/let]
 }
 
 void [className/]::removeValue(std::shared_ptr<uml::StructuralFeature> feature, std::shared_ptr<fUML::Semantics::Values::Value> value)

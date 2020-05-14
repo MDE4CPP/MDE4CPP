@@ -29,10 +29,8 @@
 */]
 [template public generateConnectorInstantiation(aConnector : Connector)]
 [if (aConnector.isArrayPattern())]
-	//instantiate array pattern for connector [aConnector.name/]
 	[aConnector.generateArrayPatternInstantiation()/]
 [elseif (aConnector.isStarPattern())]
-	//instantiate star pattern for connector [aConnector.name/]
 	[aConnector.generateStarPatternInstantiation()/]
 [/if]
 [/template]
@@ -45,12 +43,16 @@
 [comment TODO: Implement instatiation if ends are parts with ports /]
 [if(not definingAssociation.oclIsUndefined())]
 [if(end1.partWithPort.oclIsUndefined() and end2.partWithPort.oclIsUndefined())]
+//instantiate array pattern for connector [aConnector.name/] between a port and a part
 [aConnector.initArrayPattern_P_P()/]
 [elseif(end1.partWithPort.oclIsUndefined() and (not end2.partWithPort.oclIsUndefined()))]
+//instantiate array pattern for connector [aConnector.name/] between a port and a part with a port
 [aConnector.initArrayPattern_P_PWP()/]
 [elseif((not end1.partWithPort.oclIsUndefined()) and end2.partWithPort.oclIsUndefined())]
+//instantiate array pattern for connector [aConnector.name/] between a part with a port and a port
 [aConnector.initArrayPattern_PWP_P()/]
 [else]
+//instantiate array pattern for connector [aConnector.name/] between a part with a port and a part with a port
 [aConnector.initArrayPattern_PWP_PWP()/]
 [/if]
 [else]
@@ -65,15 +67,16 @@ Error: Untyped connector '[aConnector.name/]'. A connector must have one and onl
  * Template for generation of array pattern between a part and a part
 */]
 [template private initArrayPattern_P_P(aConnector : Connector){end1 : ConnectorEnd = aConnector.end->at(1); end2 : ConnectorEnd = aConnector.end->at(2); definingAssociation : Association = aConnector.type;}]
-[if(definingAssociation.memberEnd->at(1).getUpper() <> 1)] [comment *-multiplicity/]
+[if(definingAssociation.memberEnd->at(1).getUpper() <> 1)] [comment *-multiplicity of end1/] 
+[comment if property of end1 has *-multiplicity then end2 must have *-multiplicity too for array pattern between part and part /]
 for(unsigned int i = 0; i < [end1.role.oclAsType(MultiplicityElement).getLower()/]; i++)
 {
-	this->get[end1.role.name.toUpperFirst()/]()->at(i)->get[end1.getDefiningEnd().name.toUpperFirst()/]()->add(this->get[end2.role.name.toUpperFirst()/]()->at(i));
-	this->get[end2.role.name.toUpperFirst()/]()->at(i)->get[end2.getDefiningEnd().name.toUpperFirst()/]()->add(this->get[end1.role.name.toUpperFirst()/]()->at(i));
+	this->get[end2.role.name.toUpperFirst()/]()->at(i)->get[definingAssociation.memberEnd->at(1).name.toUpperFirst()/]()->add(this->get[end1.role.name.toUpperFirst()/]()->at(i));
+	this->get[end1.role.name.toUpperFirst()/]()->at(i)->get[definingAssociation.memberEnd->at(2).name.toUpperFirst()/]()->add(this->get[end2.role.name.toUpperFirst()/]()->at(i));
 }
-[else] [comment 1-multiplicity/]
-this->get[end1.role.name.toUpperFirst()/]()->set[end1.getDefiningEnd().name.toUpperFirst()/](this->get[end2.role.name.toUpperFirst()/]());
-this->get[end2.role.name.toUpperFirst()/]()->set[end2.getDefiningEnd().name.toUpperFirst()/](this->get[end1.role.name.toUpperFirst()/]());
+[else] [comment 1-multiplicity/] [comment if property of end1 has 1-multiplicity then end2 must have 1-multiplicity too for array pattern between part and part /]
+this->get[end2.role.name.toUpperFirst()/]()->set[definingAssociation.memberEnd->at(1).name.toUpperFirst()/](this->get[end1.role.name.toUpperFirst()/]());
+this->get[end1.role.name.toUpperFirst()/]()->set[definingAssociation.memberEnd->at(2).name.toUpperFirst()/](this->get[end2.role.name.toUpperFirst()/]());
 [/if]
 [/template]
 
@@ -82,28 +85,54 @@ this->get[end2.role.name.toUpperFirst()/]()->set[end2.getDefiningEnd().name.toUp
  * Template for generation of array pattern between a part and a part with port
 */]
 [template private initArrayPattern_P_PWP(aConnector : Connector){end1 : ConnectorEnd = aConnector.end->at(1); end2 : ConnectorEnd = aConnector.end->at(2); definingAssociation : Association = aConnector.type;}]
-[if(definingAssociation.memberEnd->at(1).getUpper() <> 1)] [comment *-multiplicity/]
+[if(definingAssociation.memberEnd->at(1).getUpper() <> 1)][comment *-multiplicity of end1 (= port)/]
+[comment if property of end1 has *-multiplicity then either part or port or both of end2 must have *-multiplicity too for array pattern between part and part with port /]
 unsigned int k = 0;
+[if (end2.partWithPort.getUpper() <> 1)][comment *-multiplicity of end2-partWithPort/]
 for(unsigned int i = 0; i < [end2.partWithPort.getLower()/]; i++)
 {
 	std::shared_ptr<[end2.partWithPort.type.transformType()/]> end2Part = this->get[end2.partWithPort.name.toUpperFirst()/]()->at(i);
-
+[if (definingAssociation.memberEnd->at(2).getUpper() <> 1)][comment *-multiplicity of end2-Port/]
 	for(unsigned int j = 0; j < [end2.role.oclAsType(MultiplicityElement).getLower()/]; j++)
 	{
 		std::shared_ptr<[end2.role.type.transformType()/]> end2Port = end2Part->get[end2.role.name.toUpperFirst()/]()->at(j);
 		std::shared_ptr<[end1.role.type.transformType()/]> end1Part = this->get[end1.role.name.toUpperFirst()/]()->at(k);
 
-		end2Port->get[end2.getDefiningEnd().name.toUpperFirst()/]()->add(end1Part);
-		end1Part->get[end1.getDefiningEnd().name.toUpperFirst()/]()->add(end2Port);
+		end2Port->get[definingAssociation.memberEnd->at(1).name.toUpperFirst()/]()->add(end1Part);
+		end1Part->get[definingAssociation.memberEnd->at(2).name.toUpperFirst()/]()->add(end2Port);
 
 		k++;
 	}
+[else][comment 1-multiplicity of end2-Port/]
+	std::shared_ptr<[end2.role.type.transformType()/]> end2Port = end2Part->get[end2.role.name.toUpperFirst()/]();
+	std::shared_ptr<[end1.role.type.transformType()/]> end1Part = this->get[end1.role.name.toUpperFirst()/]()->at(k);
+
+	end2Port->get[definingAssociation.memberEnd->at(1).name.toUpperFirst()/]()->add(end1Part);
+	end1Part->set[definingAssociation.memberEnd->at(2).name.toUpperFirst()/](end2Port);
+
+	k++;
+[/if]
 }
-[else] [comment 1-multiplicity/]
+[else][comment 1-multiplicity of end2-partWithPort/]
+std::shared_ptr<[end2.partWithPort.type.transformType()/]> end2Part = this->get[end2.partWithPort.name.toUpperFirst()/]();
+[comment since end1 has *-multiplicity and end2-partWithPort has 1-multiplicity, end2-Port can only have *-multiplicity for array pattern between part and part with port/]
+for(unsigned int j = 0; j < [end2.role.oclAsType(MultiplicityElement).getLower()/]; j++)
+	{
+		std::shared_ptr<[end2.role.type.transformType()/]> end2Port = end2Part->get[end2.role.name.toUpperFirst()/]()->at(j);
+		std::shared_ptr<[end1.role.type.transformType()/]> end1Part = this->get[end1.role.name.toUpperFirst()/]()->at(k);
+
+		end2Port->get[definingAssociation.memberEnd->at(1).name.toUpperFirst()/]()->add(end1Part);
+		end1Part->get[definingAssociation.memberEnd->at(2).name.toUpperFirst()/]()->add(end2Port);
+
+		k++;
+	}
+[/if]
+[else] [comment 1-multiplicity of end1/]
+[comment if property of end1 has 1-multiplicity then both part and port of end2 must have 1-multiplicity too for array pattern between part and part with port /]
 std::shared_ptr<[end1.role.type.transformType()/]> end1Part = this->get[end1.role.name.toUpperFirst()/]();
 std::shared_ptr<[end2.role.type.transformType()/]> end2Port = this->get[end2.partWithPort.name.toUpperFirst()/]()->get[end2.role.name.toUpperFirst()/]();
-end1Part->set[end1.getDefiningEnd().name.toUpperFirst()/](end2Port);
-end2Port->set[end2.getDefiningEnd().name.toUpperFirst()/](end1Part);
+end2Port->set[definingAssociation.memberEnd->at(1).name.toUpperFirst()/](end1Part);
+end1Part->set[definingAssociation.memberEnd->at(2).name.toUpperFirst()/](end2Port);
 [/if]
 [/template]
 
@@ -112,28 +141,54 @@ end2Port->set[end2.getDefiningEnd().name.toUpperFirst()/](end1Part);
  * Template for generation of array pattern between a part with port and a part
 */]
 [template private initArrayPattern_PWP_P(aConnector : Connector){end1 : ConnectorEnd = aConnector.end->at(1); end2 : ConnectorEnd = aConnector.end->at(2); definingAssociation : Association = aConnector.type;}]
-[if(definingAssociation.memberEnd->at(1).getUpper() <> 1)] [comment *-multiplicity/]
+[if(definingAssociation.memberEnd->at(2).getUpper() <> 1)][comment *-multiplicity of end2 (= port)/]
+[comment if property of end2 has *-multiplicity then either part or port or both of end1 can have *-multiplicity too for array pattern between part with port and part /]
 unsigned int k = 0;
+[if (end1.partWithPort.getUpper() <> 1)][comment *-multiplicity of end1-partWithPort/]
 for(unsigned int i = 0; i < [end1.partWithPort.getLower()/]; i++)
 {
 	std::shared_ptr<[end1.partWithPort.type.transformType()/]> end1Part = this->get[end1.partWithPort.name.toUpperFirst()/]()->at(i);
-
+[if (definingAssociation.memberEnd->at(1).getUpper() <> 1)][comment *-multiplicity of end1-Port/]
 	for(unsigned int j = 0; j < [end1.role.oclAsType(MultiplicityElement).getLower()/]; j++)
 	{
 		std::shared_ptr<[end1.role.type.transformType()/]> end1Port = end1Part->get[end1.role.name.toUpperFirst()/]()->at(j);
 		std::shared_ptr<[end2.role.type.transformType()/]> end2Part = this->get[end2.role.name.toUpperFirst()/]()->at(k);
 
-		end1Port->get[end1.getDefiningEnd().name.toUpperFirst()/]()->add(end2Part);
-		end2Part->get[end2.getDefiningEnd().name.toUpperFirst()/]()->add(end1Port);
+		end1Port->get[definingAssociation.memberEnd->at(2).name.toUpperFirst()/]()->add(end2Part);
+		end2Part->get[definingAssociation.memberEnd->at(1).name.toUpperFirst()/]()->add(end1Port);
 
 		k++;
 	}
+[else][comment 1-multiplicity of end1-Port/]
+	std::shared_ptr<[end1.role.type.transformType()/]> end1Port = end1Part->get[end1.role.name.toUpperFirst()/]();
+	std::shared_ptr<[end2.role.type.transformType()/]> end2Part = this->get[end2.role.name.toUpperFirst()/]()->at(k);
+
+	end1Port->get[definingAssociation.memberEnd->at(2).name.toUpperFirst()/]()->add(end2Part);
+	end2Part->set[definingAssociation.memberEnd->at(1).name.toUpperFirst()/](end1Port);
+
+	k++;
+[/if]
 }
-[else] [comment 1-multiplicity/]
-std::shared_ptr<[end1.role.type.transformType()/]> end1Port = this->get[end1.partWithPort.name.toUpperFirst()/]()->get[end1.role.name.toUpperFirst()/]();
+[else][comment 1-multiplicity of end1-partWithPort/]
+std::shared_ptr<[end1.partWithPort.type.transformType()/]> end1Part = this->get[end1.partWithPort.name.toUpperFirst()/]();
+[comment since end2 has *-multiplicity and end1-partWithPort has 1-multiplicity, end1-Port can only have *-multiplicity for array pattern between part with port and part/]
+for(unsigned int j = 0; j < [end1.role.oclAsType(MultiplicityElement).getLower()/]; j++)
+	{
+		std::shared_ptr<[end1.role.type.transformType()/]> end1Port = end1Part->get[end1.role.name.toUpperFirst()/]()->at(j);
+		std::shared_ptr<[end2.role.type.transformType()/]> end2Part = this->get[end2.role.name.toUpperFirst()/]()->at(k);
+
+		end1Port->get[definingAssociation.memberEnd->at(2).name.toUpperFirst()/]()->add(end2Part);
+		end2Part->get[definingAssociation.memberEnd->at(1).name.toUpperFirst()/]()->add(end1Port);
+
+		k++;
+	}
+[/if]
+[else] [comment 1-multiplicity of end2/]
+[comment if property of end2 has 1-multiplicity then both part and port of end1 must have 1-multiplicity too for array pattern between part with port and part /]
 std::shared_ptr<[end2.role.type.transformType()/]> end2Part = this->get[end2.role.name.toUpperFirst()/]();
-end1Port->set[end1.getDefiningEnd().name.toUpperFirst()/](end2Part);
-end2Part->set[end2.getDefiningEnd().name.toUpperFirst()/](end1Port);
+std::shared_ptr<[end1.role.type.transformType()/]> end1Port = this->get[end1.partWithPort.name.toUpperFirst()/]()->get[end1.role.name.toUpperFirst()/]();
+end1Port->set[definingAssociation.memberEnd->at(2).name.toUpperFirst()/](end2Part);
+end2Part->set[definingAssociation.memberEnd->at(1).name.toUpperFirst()/](end1Port);
 [/if]
 [/template]
 
@@ -142,20 +197,22 @@ end2Part->set[end2.getDefiningEnd().name.toUpperFirst()/](end1Port);
  * Template for generation of array pattern between a part with port and a part with port
 */]
 [template private initArrayPattern_PWP_PWP(aConnector : Connector){end1 : ConnectorEnd = aConnector.end->at(1); end2 : ConnectorEnd = aConnector.end->at(2); definingAssociation : Association = aConnector.type;}]
-[if(definingAssociation.memberEnd->at(1).getUpper() <> 1)] [comment *-multiplicity/]
-unsigned int end1PartIndex = 0, end2PartIndex = 0, end1PortIndex = 0, end2PortIndex = 0;
+[if(definingAssociation.memberEnd->at(1).getUpper() <> 1)] [comment *-multiplicity of port of end1/]
+unsigned int end1PortIndex = 0;
+[if(end1.partWithPort.getUpper() <> 1 and end2.partWithPort.getUpper() <> 1)] [comment *-multiplicity of parts of end1 and end2/]
+unsigned int end1PartIndex = 0, end2PartIndex = 0, end2PortIndex=0;
 while((end1PartIndex < [end1.partWithPort.getLower()/]) &&(end2PartIndex < [end2.partWithPort.getLower()/]))
 {
 	std::shared_ptr<[end1.partWithPort.type.transformType()/]> end1Part = this->get[end1.partWithPort.name.toUpperFirst()/]()->at(end1PartIndex);
 	std::shared_ptr<[end2.partWithPort.type.transformType()/]> end2Part = this->get[end2.partWithPort.name.toUpperFirst()/]()->at(end2PartIndex);
-
+[if(definingAssociation.memberEnd->at(2).getUpper() <> 1)] [comment *-multiplicity of port of end2/]
 	while((end1PortIndex < [end1.role.oclAsType(MultiplicityElement).getLower()/]) && (end2PortIndex < [end2.role.oclAsType(MultiplicityElement).getLower()/]))
 	{
 		std::shared_ptr<[end1.role.type.transformType()/]> end1Port = end1Part->get[end1.role.name.toUpperFirst()/]()->at(end1PortIndex);
 		std::shared_ptr<[end2.role.type.transformType()/]> end2Port = end2Part->get[end2.role.name.toUpperFirst()/]()->at(end2PortIndex);
 
-		end1Port->get[end1.getDefiningEnd().name.toUpperFirst()/]()->add(end2Port);
-		end2Port->get[end2.getDefiningEnd().name.toUpperFirst()/]()->add(end1Port);
+		end1Port->get[definingAssociation.memberEnd->at(2).name.toUpperFirst()/]()->add(end2Port);
+		end2Port->get[definingAssociation.memberEnd->at(1).name.toUpperFirst()/]()->add(end1Port);
 
 		end1PortIndex++;
 		end2PortIndex++;
@@ -170,12 +227,149 @@ while((end1PartIndex < [end1.partWithPort.getLower()/]) &&(end2PartIndex < [end2
 		end2PortIndex = 0;
 		end2PartIndex++;
 	}
+[else][comment 1-multiplicity of port of end2/]
+	std::shared_ptr<[end1.role.type.transformType()/]> end1Port = end1Part->get[end1.role.name.toUpperFirst()/]()->at(end1PortIndex);
+	std::shared_ptr<[end2.role.type.transformType()/]> end2Port = end2Part->get[end2.role.name.toUpperFirst()/]();
+	end1Port->set[definingAssociation.memberEnd->at(2).name.toUpperFirst()/](end2Port);
+	end2Port->get[definingAssociation.memberEnd->at(1).name.toUpperFirst()/]()->add(end1Port);
+
+	end1PortIndex++;
+	end2PartIndex++;
+
+	if(end1PortIndex >= [end1.role.oclAsType(MultiplicityElement).getLower()/])
+	{
+		end1PortIndex = 0;
+		end1PartIndex++;
+	}
+[/if]
 }
-[else] [comment 1-multiplicity/]
+[elseif(end1.partWithPort.getUpper() <> 1 and not(end2.partWithPort.getUpper() <> 1))] [comment *-multiplicity of part of end1 and 1-multiplicity of part of end2/]
+unsigned int end1PartIndex = 0, end2PortIndex=0;
+std::shared_ptr<[end2.partWithPort.type.transformType()/]> end2Part = this->get[end2.partWithPort.name.toUpperFirst()/]();
+while(end1PartIndex < [end1.partWithPort.getLower()/])
+{
+	std::shared_ptr<[end1.partWithPort.type.transformType()/]> end1Part = this->get[end1.partWithPort.name.toUpperFirst()/]()->at(end1PartIndex);
+	while((end1PortIndex < [end1.role.oclAsType(MultiplicityElement).getLower()/]) && (end2PortIndex < [end2.role.oclAsType(MultiplicityElement).getLower()/])) [comment *-multiplicity of port of end2 -> since part and port of end1 are *-multiplicity and part of end2 is 1-multiplicity, port of end2 has to be *-multiplicity for array pattern between a part with port and a part with port/]
+	{
+		std::shared_ptr<[end1.role.type.transformType()/]> end1Port = end1Part->get[end1.role.name.toUpperFirst()/]()->at(end1PortIndex);
+		std::shared_ptr<[end2.role.type.transformType()/]> end2Port = end2Part->get[end2.role.name.toUpperFirst()/]()->at(end2PortIndex);
+
+		end1Port->get[definingAssociation.memberEnd->at(2).name.toUpperFirst()/]()->add(end2Port);
+		end2Port->get[definingAssociation.memberEnd->at(1).name.toUpperFirst()/]()->add(end1Port);
+
+		end1PortIndex++;
+		end2PortIndex++;
+	}
+
+	end1PortIndex = 0;
+	end1PartIndex++;
+}
+[elseif(not(end1.partWithPort.getUpper() <> 1) and end2.partWithPort.getUpper() <> 1)] [comment 1-multiplicity of part of end1 and *-multiplicity of part of end2/]
+unsigned int end2PartIndex = 0, end2PortIndex=0;
+std::shared_ptr<[end1.partWithPort.type.transformType()/]> end1Part = this->get[end1.partWithPort.name.toUpperFirst()/]();
+while(end2PartIndex < [end2.partWithPort.getLower()/])
+{
+	std::shared_ptr<[end2.partWithPort.type.transformType()/]> end2Part = this->get[end2.partWithPort.name.toUpperFirst()/]()->at(end2PartIndex);
+[if (definingAssociation.memberEnd->at(2).getUpper() <> 1)] [comment *-multiplicity of port of end2/]
+	while(end2PortIndex < [end2.role.oclAsType(MultiplicityElement).getLower()/])
+	{
+		std::shared_ptr<[end1.role.type.transformType()/]> end1Port = end1Part->get[end1.role.name.toUpperFirst()/]()->at(end1PortIndex);
+		std::shared_ptr<[end2.role.type.transformType()/]> end2Port = end2Part->get[end2.role.name.toUpperFirst()/]()->at(end2PortIndex);
+
+		end1Port->get[definingAssociation.memberEnd->at(2).name.toUpperFirst()/]()->add(end2Port);
+		end2Port->get[definingAssociation.memberEnd->at(1).name.toUpperFirst()/]()->add(end1Port);
+
+		end1PortIndex++;
+		end2PortIndex++;
+	}
+	if(end2PortIndex >= [end2.role.oclAsType(MultiplicityElement).getLower()/])
+	{
+		end2PortIndex = 0;
+		end2PartIndex++;
+	}
+[else] [comment 1-multiplicity of port of end2/]
+	std::shared_ptr<[end1.role.type.transformType()/]> end1Port = end1Part->get[end1.role.name.toUpperFirst()/]()->at(end1PortIndex);
+	std::shared_ptr<[end2.role.type.transformType()/]> end2Port = end2Part->get[end2.role.name.toUpperFirst()/]();
+
+	end1Port->set[definingAssociation.memberEnd->at(2).name.toUpperFirst()/](end2Port);
+	end2Port->get[definingAssociation.memberEnd->at(1).name.toUpperFirst()/]()->add(end1Port);
+
+	end1PortIndex++;
+	end2PartIndex++;
+[/if]
+}
+[else] [comment 1-multiplicity of parts of end1 and end2/]
+std::shared_ptr<[end1.partWithPort.type.transformType()/]> end1Part = this->get[end1.partWithPort.name.toUpperFirst()/]();
+std::shared_ptr<[end2.partWithPort.type.transformType()/]> end2Part = this->get[end2.partWithPort.name.toUpperFirst()/]();
+
+while(end1PortIndex < [end1.role.oclAsType(MultiplicityElement).getLower()/]) 
+[comment since parts of end1 and end2 both have a cardinality of 1, port of end1 and port of end2 must have the same cardinalities for array pattern -> it doesn't matter which portIndex is used to iterate /]
+[comment since port of end1 is assumed to be of *-multiplicity (see first condition of the template) port of end2 must also be of *-multiplicity/]
+{
+	std::shared_ptr<[end1.role.type.transformType()/]> end1Port = end1Part->get[end1.role.name.toUpperFirst()/]()->at(end1PortIndex);
+	std::shared_ptr<[end2.role.type.transformType()/]> end2Port = end2Part->get[end2.role.name.toUpperFirst()/]()->at(end1PortIndex);
+
+	end1Port->get[definingAssociation.memberEnd->at(2).name.toUpperFirst()/]()->add(end2Port);
+	end2Port->get[definingAssociation.memberEnd->at(1).name.toUpperFirst()/]()->add(end1Port);
+
+	end1PortIndex++;
+}
+[/if]
+[comment ------------------------------------------------------------------------------------------------------------------------------------------------/]
+[else] [comment 1-multiplicity of port of end1/]
+[if (end1.partWithPort.getUpper() <> 1 and end2.partWithPort.getUpper() <> 1)] [comment *-multiplicity of part of end1 and part of end2/]
+unsigned int end1PartIndex = 0, end2PartIndex = 0, end2PortIndex=0;
+while((end1PartIndex < [end1.partWithPort.getLower()/]) &&(end2PartIndex < [end2.partWithPort.getLower()/]))
+{
+	std::shared_ptr<[end1.partWithPort.type.transformType()/]> end1Part = this->get[end1.partWithPort.name.toUpperFirst()/]()->at(end1PartIndex);
+	std::shared_ptr<[end2.partWithPort.type.transformType()/]> end2Part = this->get[end2.partWithPort.name.toUpperFirst()/]()->at(end2PartIndex);
+[if(definingAssociation.memberEnd->at(2).getUpper() <> 1)] [comment *-multiplicity of port of end2/]
+	std::shared_ptr<[end1.role.type.transformType()/]> end1Port = end1Part->get[end1.role.name.toUpperFirst()/]();
+	std::shared_ptr<[end2.role.type.transformType()/]> end2Port = end2Part->get[end2.role.name.toUpperFirst()/]()->at(end2PortIndex);
+	end1Port->get[definingAssociation.memberEnd->at(2).name.toUpperFirst()/]()->add(end2Port);
+	end2Port->set[definingAssociation.memberEnd->at(1).name.toUpperFirst()/](end1Port);
+
+	end2PortIndex++;
+	end1PartIndex++;
+
+	if(end2PortIndex >= [end2.role.oclAsType(MultiplicityElement).getLower()/])
+	{
+		end2PortIndex = 0;
+		end2PartIndex++;
+	}
+[else] [comment 1-multiplicity of port of end2/]
+[comment since ports of end1 and end2 both have a cardinality of 1, parts of end1 and end2 must have the same cardinality for array pattern/]
+	std::shared_ptr<[end1.role.type.transformType()/]> end1Port = end1Part->get[end1.role.name.toUpperFirst()/]();
+	std::shared_ptr<[end2.role.type.transformType()/]> end2Port = end2Part->get[end2.role.name.toUpperFirst()/]();
+	end1Port->set[definingAssociation.memberEnd->at(2).name.toUpperFirst()/](end2Port);
+	end2Port->set[definingAssociation.memberEnd->at(1).name.toUpperFirst()/](end1Port);
+
+	end1PartIndex++;
+	end2PartIndex++;
+[/if]
+}
+[elseif (end1.partWithPort.getUpper() <> 1 and not(end2.partWithPort.getUpper() <> 1))] [comment *-multiplicity of part of end1 and 1-multiplicity of part of end2/]
+unsigned int end1PartIndex = 0, end2PortIndex=0;
+[comment since part of end 1 is of *-multiplicity and part of end2 is already of 1-multiplicity, port of end2 must also be of *-multiplicity/]
+std::shared_ptr<[end2.partWithPort.type.transformType()/]> end2Part = this->get[end2.partWithPort.name.toUpperFirst()/]();
+while(end1PartIndex < [end1.partWithPort.getLower()/])
+{
+	std::shared_ptr<[end1.partWithPort.type.transformType()/]> end1Part = this->get[end1.partWithPort.name.toUpperFirst()/]()->at(end1PartIndex);
+	std::shared_ptr<[end1.role.type.transformType()/]> end1Port = end1Part->get[end1.role.name.toUpperFirst()/]();
+	std::shared_ptr<[end2.role.type.transformType()/]> end2Port = end2Part->get[end2.role.name.toUpperFirst()/]()->at(end2PortIndex);
+
+	end1Port->get[definingAssociation.memberEnd->at(2).name.toUpperFirst()/]()->add(end2Port);
+	end2Port->set[definingAssociation.memberEnd->at(1).name.toUpperFirst()/](end1Port);
+
+	end1PartIndex++;
+	end2PortIndex++;
+}
+[else] [comment 1-multiplicity of part of end1 -> both part and port must be of 1-multiplicity as well for array pattern between part with port and part with port/]
 std::shared_ptr<[end1.role.type.transformType()/]> end1Port = this->get[end1.partWithPort.name.toUpperFirst()/]()->get[end1.role.name.toUpperFirst()/]();
 std::shared_ptr<[end2.role.type.transformType()/]> end2Port = this->get[end2.partWithPort.name.toUpperFirst()/]()->get[end2.role.name.toUpperFirst()/]();
-end1Port->set[end1.getDefiningEnd().name.toUpperFirst()/](end2Port);
-end2Port->set[end2.getDefiningEnd().name.toUpperFirst()/](end1Port);
+end1Port->set[definingAssociation.memberEnd->at(2).name.toUpperFirst()/](end2Port);
+end2Port->set[definingAssociation.memberEnd->at(1).name.toUpperFirst()/](end1Port);
+[/if]
 [/if]
 [/template]
 
@@ -187,12 +381,16 @@ end2Port->set[end2.getDefiningEnd().name.toUpperFirst()/](end1Port);
 [comment TODO: Implement instatiation if ends are parts with ports /]
 [if(not definingAssociation.oclIsUndefined())]
 [if(end1.partWithPort.oclIsUndefined() and end2.partWithPort.oclIsUndefined())]
+//instantiate star pattern for connector [aConnector.name/] between a port and a part
 [aConnector.initStarPattern_P_P()/]
 [elseif(end1.partWithPort.oclIsUndefined() and (not end2.partWithPort.oclIsUndefined()))]
+//instantiate star pattern for connector [aConnector.name/] between a port and a part with a port
 [aConnector.initStarPattern_P_PWP()/]
 [elseif((not end1.partWithPort.oclIsUndefined()) and end2.partWithPort.oclIsUndefined())]
+//instantiate star pattern for connector [aConnector.name/] between a part with a port and a port
 [aConnector.initStarPattern_PWP_P()/]
 [else]
+//instantiate star pattern for connector [aConnector.name/] between a part with a port and a part with a port
 [aConnector.initStarPattern_PWP_PWP()/]
 [/if]
 [else]
@@ -207,18 +405,31 @@ Error: Untyped connector '[aConnector.name/]'. A connector must have one and onl
  * Template for generation of star pattern between a part and a part
 */]
 [template private initStarPattern_P_P(aConnector : Connector){end1 : ConnectorEnd = aConnector.end->at(1); end2 : ConnectorEnd = aConnector.end->at(2); definingAssociation : Association = aConnector.type;}]
-[if(definingAssociation.memberEnd->at(1).getUpper() <> 1)] [comment *-multiplicity/]
+[if(definingAssociation.memberEnd->at(1).getUpper() <> 1)] [comment *-multiplicity of end1/]
 for(unsigned int i = 0; i < [end1.role.oclAsType(MultiplicityElement).getLower()/]; i++)
 {
+	[if (definingAssociation.memberEnd->at(2).getUpper() <> 1)] [comment *-multiplicity of end2/]
 	for(unsigned int j = 0; j < [end2.role.oclAsType(MultiplicityElement).getLower()/]; j++)
 	{
-		this->get[end1.role.name.toUpperFirst()/]()->at(i)->get[end1.getDefiningEnd().name.toUpperFirst()/]()->add(this->get[end2.role.name.toUpperFirst()/]()->at(j));
-		this->get[end2.role.name.toUpperFirst()/]()->at(j)->get[end2.getDefiningEnd().name.toUpperFirst()/]()->add(this->get[end1.role.name.toUpperFirst()/]()->at(i));
+		this->get[end1.role.name.toUpperFirst()/]()->at(i)->get[definingAssociation.memberEnd->at(2).name.toUpperFirst()/]()->add(this->get[end2.role.name.toUpperFirst()/]()->at(j));
+		this->get[end2.role.name.toUpperFirst()/]()->at(j)->get[definingAssociation.memberEnd->at(1).name.toUpperFirst()/]()->add(this->get[end1.role.name.toUpperFirst()/]()->at(i));
 	}
+	[else][comment 1-multiplicity of end2/]
+	this->get[end1.role.name.toUpperFirst()/]()->at(i)->set[definingAssociation.memberEnd->at(2).name.toUpperFirst()/](this->get[end2.role.name.toUpperFirst()/]());
+	this->get[end2.role.name.toUpperFirst()/]()->get[definingAssociation.memberEnd->at(1).name.toUpperFirst()/]()->add(this->get[end1.role.name.toUpperFirst()/]()->at(i));
+	[/if]
 }
-[else] [comment 1-multiplicity/]
-this->get[end1.role.name.toUpperFirst()/]()->set[end1.getDefiningEnd().name.toUpperFirst()/](this->get[end2.role.name.toUpperFirst()/]());
-this->get[end2.role.name.toUpperFirst()/]()->set[end2.getDefiningEnd().name.toUpperFirst()/](this->get[end1.role.name.toUpperFirst()/]());
+[else] [comment 1-multiplicity of end1/]
+	[if(definingAssociation.memberEnd->at(2).getUpper() <> 1)] [comment *-multiplicity of end2/]
+for(unsigned int j = 0; j < [end2.role.oclAsType(MultiplicityElement).getLower()/]; j++)
+{
+	this->get[end1.role.name.toUpperFirst()/]()->get[definingAssociation.memberEnd->at(2).name.toUpperFirst()/]()->add(this->get[end2.role.name.toUpperFirst()/]()->at(j));
+	this->get[end2.role.name.toUpperFirst()/]()->at(j)->set[definingAssociation.memberEnd->at(1).name.toUpperFirst()/](this->get[end1.role.name.toUpperFirst()/]());
+}
+	[else] [comment 1-multiplicity of end2/][comment WOULD BE ARRAY PATTERN/]
+this->get[end1.role.name.toUpperFirst()/]()->set[definingAssociation.memberEnd->at(2).name.toUpperFirst()/](this->get[end2.role.name.toUpperFirst()/]());
+this->get[end2.role.name.toUpperFirst()/]()->set[definingAssociation.memberEnd->at(1).name.toUpperFirst()/](this->get[end1.role.name.toUpperFirst()/]());
+	[/if]
 [/if]
 [/template]
 
@@ -227,11 +438,12 @@ this->get[end2.role.name.toUpperFirst()/]()->set[end2.getDefiningEnd().name.toUp
  * Template for generation of star pattern between a part and a part with port
 */]
 [template private initStarPattern_P_PWP(aConnector : Connector){end1 : ConnectorEnd = aConnector.end->at(1); end2 : ConnectorEnd = aConnector.end->at(2); definingAssociation : Association = aConnector.type;}]
-[if(definingAssociation.memberEnd->at(1).getUpper() <> 1)] [comment *-multiplicity/]
+[if(definingAssociation.memberEnd->at(1).getUpper() <> 1)] [comment *-multiplicity of associationEnd 1 = left port/]
+[if(end2.partWithPort.getUpper() <> 1)] [comment *-multiplicity of part with port = right part/]
 for(unsigned int i = 0; i < [end2.partWithPort.getLower()/]; i++)
 {
 	std::shared_ptr<[end2.partWithPort.type.transformType()/]> end2Part = this->get[end2.partWithPort.name.toUpperFirst()/]()->at(i);
-
+[if(end2.role.oclAsType(MultiplicityElement).getUpper() <> 1)] [comment *-multiplicity of port of partWithPort = right port/]
 	for(unsigned int j = 0; j < [end2.role.oclAsType(MultiplicityElement).getLower()/]; j++)
 	{
 		std::shared_ptr<[end2.role.type.transformType()/]> end2Port = end2Part->get[end2.role.name.toUpperFirst()/]()->at(j);
@@ -240,29 +452,97 @@ for(unsigned int i = 0; i < [end2.partWithPort.getLower()/]; i++)
 		{
 			std::shared_ptr<[end1.role.type.transformType()/]> end1Part = this->get[end1.role.name.toUpperFirst()/]()->at(k);
 
-			end2Port->get[end2.getDefiningEnd().name.toUpperFirst()/]()->add(end1Part);
-			end1Part->get[end1.getDefiningEnd().name.toUpperFirst()/]()->add(end2Port);
+			end2Port->get[definingAssociation.memberEnd->at(1).name.toUpperFirst()/]()->add(end1Part);
+			end1Part->get[definingAssociation.memberEnd->at(2).name.toUpperFirst()/]()->add(end2Port);
 		}
 	}
+[else] [comment 1-multiplicity of port of partWithPort = right port/]
+	std::shared_ptr<[end2.role.type.transformType()/]> end2Port = end2Part->get[end2.role.name.toUpperFirst()/]();
+
+	for(unsigned int k = 0; k < [end1.role.oclAsType(MultiplicityElement).getLower()/]; k++)
+	{
+		std::shared_ptr<[end1.role.type.transformType()/]> end1Part = this->get[end1.role.name.toUpperFirst()/]()->at(k);
+
+		end2Port->get[definingAssociation.memberEnd->at(1).name.toUpperFirst()/]()->add(end1Part);
+		end1Part->get[definingAssociation.memberEnd->at(2).name.toUpperFirst()/]()->add(end2Port);
+	}
+[/if]
 }
-[else] [comment 1-multiplicity/]
-std::shared_ptr<[end1.role.type.transformType()/]> end1Part = this->get[end1.role.name.toUpperFirst()/]();
-std::shared_ptr<[end2.role.type.transformType()/]> end2Port = this->get[end2.partWithPort.name.toUpperFirst()/]()->get[end2.role.name.toUpperFirst()/]();
-end1Part->set[end1.getDefiningEnd().name.toUpperFirst()/](end2Port);
-end2Port->set[end2.getDefiningEnd().name.toUpperFirst()/](end1Part);
+[else] [comment 1-multiplicity of part with port = right part/]
+std::shared_ptr<[end2.partWithPort.type.transformType()/]> end2Part = this->get[end2.partWithPort.name.toUpperFirst()/]();
+[if(end2.role.oclAsType(MultiplicityElement).getUpper() <> 1)] [comment *-multiplicity of port of partWithPort = right port/]
+for(unsigned int j = 0; j < [end2.role.oclAsType(MultiplicityElement).getLower()/]; j++)
+{
+	std::shared_ptr<[end2.role.type.transformType()/]> end2Port = end2Part->get[end2.role.name.toUpperFirst()/]()->at(j);
+
+	for(unsigned int k = 0; k < [end1.role.oclAsType(MultiplicityElement).getLower()/]; k++)
+	{
+		std::shared_ptr<[end1.role.type.transformType()/]> end1Part = this->get[end1.role.name.toUpperFirst()/]()->at(k);
+
+		end2Port->get[definingAssociation.memberEnd->at(1).name.toUpperFirst()/]()->add(end1Part);
+		end1Part->get[definingAssociation.memberEnd->at(2).name.toUpperFirst()/]()->add(end2Port);
+	}
+}
+[else] [comment 1-multiplicity of port of partWithPort = right port/]
+std::shared_ptr<[end2.role.type.transformType()/]> end2Port = end2Part->get[end2.role.name.toUpperFirst()/]();
+
+for(unsigned int k = 0; k < [end1.role.oclAsType(MultiplicityElement).getLower()/]; k++)
+{
+	std::shared_ptr<[end1.role.type.transformType()/]> end1Part = this->get[end1.role.name.toUpperFirst()/]()->at(k);
+
+	end2Port->get[definingAssociation.memberEnd->at(1).name.toUpperFirst()/]()->add(end1Part);
+	end1Part->set[definingAssociation.memberEnd->at(2).name.toUpperFirst()/](end2Port);
+}
+[/if]
+[/if]
+[comment --------------------------------------/]
+[else] [comment 1-multiplicity of associationEnd 1 = left port/]
+[if(end2.partWithPort.getUpper() <> 1)] [comment *-multiplicity of part with port = right part/]
+for(unsigned int i = 0; i < [end2.partWithPort.getLower()/]; i++)
+{
+	std::shared_ptr<[end2.partWithPort.type.transformType()/]> end2Part = this->get[end2.partWithPort.name.toUpperFirst()/]()->at(i);
+[if(end2.role.oclAsType(MultiplicityElement).getUpper() <> 1)] [comment *-multiplicity of port of partWithPort = right port/]
+	for(unsigned int j = 0; j < [end2.role.oclAsType(MultiplicityElement).getLower()/]; j++)
+	{
+		std::shared_ptr<[end2.role.type.transformType()/]> end2Port = end2Part->get[end2.role.name.toUpperFirst()/]()->at(j);
+
+		std::shared_ptr<[end1.role.type.transformType()/]> end1Part = this->get[end1.role.name.toUpperFirst()/]();
+		end1Part->get[definingAssociation.memberEnd->at(2).name.toUpperFirst()/]()->add(end2Port);
+		end2Port->set[definingAssociation.memberEnd->at(1).name.toUpperFirst()/](end1Part);
+	}
+[else] [comment 1-multiplicity of port of partWithPort = right port/]
+	std::shared_ptr<[end2.role.type.transformType()/]> end2Port = end2Part->get[end2.role.name.toUpperFirst()/]();
+
+	std::shared_ptr<[end1.role.type.transformType()/]> end1Part = this->get[end1.role.name.toUpperFirst()/]();
+	end1Part->get[definingAssociation.memberEnd->at(2).name.toUpperFirst()/]()->add(end2Port);
+	end2Port->set[definingAssociation.memberEnd->at(1).name.toUpperFirst()/](end1Part);
+[/if]
+}
+[else] [comment 1-multiplicity of part with port = right part/]
+std::shared_ptr<[end2.partWithPort.type.transformType()/]> end2Part = this->get[end2.partWithPort.name.toUpperFirst()/]();
+[comment because left part as well as right partWithPort are assumed to be of 1-multiplicity, right port must be of *-multiplicity, otherwise this would be an array pattern/]
+for(unsigned int j = 0; j < [end2.role.oclAsType(MultiplicityElement).getLower()/]; j++)
+{
+	std::shared_ptr<[end2.role.type.transformType()/]> end2Port = end2Part->get[end2.role.name.toUpperFirst()/]()->at(j);
+
+	std::shared_ptr<[end1.role.type.transformType()/]> end1Part = this->get[end1.role.name.toUpperFirst()/]();
+	end1Part->get[definingAssociation.memberEnd->at(2).name.toUpperFirst()/]()->add(end2Port);
+	end2Port->set[definingAssociation.memberEnd->at(1).name.toUpperFirst()/](end1Part);
+}
+[/if]
 [/if]
 [/template]
-
 
 [**
  * Template for generation of star pattern between a part with port and a part
 */]
 [template private initStarPattern_PWP_P(aConnector : Connector){end1 : ConnectorEnd = aConnector.end->at(1); end2 : ConnectorEnd = aConnector.end->at(2); definingAssociation : Association = aConnector.type;}]
-[if(definingAssociation.memberEnd->at(1).getUpper() <> 1)] [comment *-multiplicity/]
+[if(definingAssociation.memberEnd->at(2).getUpper() <> 1)] [comment *-multiplicity of associationEnd 2 = right port/]
+[if(end1.partWithPort.getUpper() <> 1)] [comment *-multiplicity of part with port = left part/]
 for(unsigned int i = 0; i < [end1.partWithPort.getLower()/]; i++)
 {
 	std::shared_ptr<[end1.partWithPort.type.transformType()/]> end1Part = this->get[end1.partWithPort.name.toUpperFirst()/]()->at(i);
-
+[if(end1.role.oclAsType(MultiplicityElement).getUpper() <> 1)] [comment *-multiplicity of port of partWithPort = left port/]
 	for(unsigned int j = 0; j < [end1.role.oclAsType(MultiplicityElement).getLower()/]; j++)
 	{
 		std::shared_ptr<[end1.role.type.transformType()/]> end1Port = end1Part->get[end1.role.name.toUpperFirst()/]()->at(j);
@@ -271,16 +551,84 @@ for(unsigned int i = 0; i < [end1.partWithPort.getLower()/]; i++)
 		{
 			std::shared_ptr<[end2.role.type.transformType()/]> end2Part = this->get[end2.role.name.toUpperFirst()/]()->at(k);
 
-			end1Port->get[end1.getDefiningEnd().name.toUpperFirst()/]()->add(end2Part);
-			end2Part->get[end2.getDefiningEnd().name.toUpperFirst()/]()->add(end1Port);
+			end1Port->get[definingAssociation.memberEnd->at(2).name.toUpperFirst()/]()->add(end2Part);
+			end2Part->get[definingAssociation.memberEnd->at(1).name.toUpperFirst()/]()->add(end1Port);
 		}
 	}
+[else] [comment 1-multiplicity of port of partWithPort = left port/]
+	std::shared_ptr<[end1.role.type.transformType()/]> end1Port = end1Part->get[end1.role.name.toUpperFirst()/]();
+
+	for(unsigned int k = 0; k < [end2.role.oclAsType(MultiplicityElement).getLower()/]; k++)
+	{
+		std::shared_ptr<[end2.role.type.transformType()/]> end2Part = this->get[end2.role.name.toUpperFirst()/]()->at(k);
+
+		end1Port->get[definingAssociation.memberEnd->at(2).name.toUpperFirst()/]()->add(end2Part);
+		end2Part->get[definingAssociation.memberEnd->at(1).name.toUpperFirst()/]()->add(end1Port);
+	}
+[/if]
 }
-[else] [comment 1-multiplicity/]
-std::shared_ptr<[end1.role.type.transformType()/]> end1Port = this->get[end1.partWithPort.name.toUpperFirst()/]()->get[end1.role.name.toUpperFirst()/]();
-std::shared_ptr<[end2.role.type.transformType()/]> end2Part = this->get[end2.role.name.toUpperFirst()/]();
-end1Port->set[end1.getDefiningEnd().name.toUpperFirst()/](end2Part);
-end2Part->set[end2.getDefiningEnd().name.toUpperFirst()/](end1Port);
+[else] [comment 1-multiplicity of part with port = left part/]
+std::shared_ptr<[end1.partWithPort.type.transformType()/]> end1Part = this->get[end1.partWithPort.name.toUpperFirst()/]();
+[if(end1.role.oclAsType(MultiplicityElement).getUpper() <> 1)] [comment *-multiplicity of port of partWithPort = left port/]
+for(unsigned int j = 0; j < [end1.role.oclAsType(MultiplicityElement).getLower()/]; j++)
+{
+	std::shared_ptr<[end1.role.type.transformType()/]> end1Port = end1Part->get[end1.role.name.toUpperFirst()/]()->at(j);
+
+	for(unsigned int k = 0; k < [end2.role.oclAsType(MultiplicityElement).getLower()/]; k++)
+	{
+		std::shared_ptr<[end2.role.type.transformType()/]> end2Part = this->get[end2.role.name.toUpperFirst()/]()->at(k);
+
+		end1Port->get[definingAssociation.memberEnd->at(2).name.toUpperFirst()/]()->add(end2Part);
+		end2Part->get[definingAssociation.memberEnd->at(1).name.toUpperFirst()/]()->add(end1Port);
+	}
+}
+[else] [comment 1-multiplicity of port of partWithPort = left port/]
+std::shared_ptr<[end1.role.type.transformType()/]> end1Port = end1Part->get[end1.role.name.toUpperFirst()/]();
+
+for(unsigned int k = 0; k < [end2.role.oclAsType(MultiplicityElement).getLower()/]; k++)
+{
+	std::shared_ptr<[end2.role.type.transformType()/]> end2Part = this->get[end2.role.name.toUpperFirst()/]()->at(k);
+
+	end1Port->get[definingAssociation.memberEnd->at(2).name.toUpperFirst()/]()->add(end2Part);
+	end2Part->set[definingAssociation.memberEnd->at(1).name.toUpperFirst()/](end1Port);
+}
+[/if]
+[/if]
+[comment --------------------------------------/]
+[else] [comment 1-multiplicity of associationEnd 2 = right port/]
+[if(end1.partWithPort.getUpper() <> 1)] [comment *-multiplicity of part with port = left part/]
+for(unsigned int i = 0; i < [end1.partWithPort.getLower()/]; i++)
+{
+	std::shared_ptr<[end1.partWithPort.type.transformType()/]> end1Part = this->get[end1.partWithPort.name.toUpperFirst()/]()->at(i);
+[if(end1.role.oclAsType(MultiplicityElement).getUpper() <> 1)] [comment *-multiplicity of port of partWithPort = left port/]
+	for(unsigned int j = 0; j < [end1.role.oclAsType(MultiplicityElement).getLower()/]; j++)
+	{
+		std::shared_ptr<[end1.role.type.transformType()/]> end1Port = end1Part->get[end1.role.name.toUpperFirst()/]()->at(j);
+
+		std::shared_ptr<[end2.role.type.transformType()/]> end2Part = this->get[end2.role.name.toUpperFirst()/]();
+		end2Part->get[definingAssociation.memberEnd->at(1).name.toUpperFirst()/]()->add(end1Port);
+		end1Port->set[definingAssociation.memberEnd->at(2).name.toUpperFirst()/](end2Part);
+	}
+[else] [comment 1-multiplicity of port of partWithPort = left port/]
+	std::shared_ptr<[end1.role.type.transformType()/]> end1Port = end1Part->get[end1.role.name.toUpperFirst()/]();
+
+	std::shared_ptr<[end2.role.type.transformType()/]> end2Part = this->get[end2.role.name.toUpperFirst()/]();
+	end2Part->get[definingAssociation.memberEnd->at(1).name.toUpperFirst()/]()->add(end1Port);
+	end1Port->set[definingAssociation.memberEnd->at(2).name.toUpperFirst()/](end2Part);
+[/if]
+}
+[else] [comment 1-multiplicity of part with port = left part/]
+std::shared_ptr<[end1.partWithPort.type.transformType()/]> end1Part = this->get[end1.partWithPort.name.toUpperFirst()/]();
+[comment because left part as well as right partWithPort are assumed to be of 1-multiplicity, right port must be of *-multiplicity, otherwise this would be an array pattern/]
+for(unsigned int j = 0; j < [end1.role.oclAsType(MultiplicityElement).getLower()/]; j++)
+{
+	std::shared_ptr<[end1.role.type.transformType()/]> end1Port = end1Part->get[end1.role.name.toUpperFirst()/]()->at(j);
+
+	std::shared_ptr<[end2.role.type.transformType()/]> end2Part = this->get[end2.role.name.toUpperFirst()/]();
+	end2Part->get[definingAssociation.memberEnd->at(1).name.toUpperFirst()/]()->add(end1Port);
+	end1Port->set[definingAssociation.memberEnd->at(2).name.toUpperFirst()/](end2Part);
+}
+[/if]
 [/if]
 [/template]
 
@@ -289,33 +637,154 @@ end2Part->set[end2.getDefiningEnd().name.toUpperFirst()/](end1Port);
  * Template for generation of star pattern between a part with port and a part with port
 */]
 [template private initStarPattern_PWP_PWP(aConnector : Connector){end1 : ConnectorEnd = aConnector.end->at(1); end2 : ConnectorEnd = aConnector.end->at(2); definingAssociation : Association = aConnector.type;}]
-[if(definingAssociation.memberEnd->at(1).getUpper() <> 1)] [comment *-multiplicity/]
+[if (end1.partWithPort.getUpper() <> 1)] [comment *-multiplicity of end1 part/]
 for(unsigned int i = 0; i < [end1.partWithPort.getLower()/]; i++)
 {
 	std::shared_ptr<[end1.partWithPort.type.transformType()/]> end1Part = this->get[end1.partWithPort.name.toUpperFirst()/]()->at(i);
-
+	[if(definingAssociation.memberEnd->at(1).getUpper() <> 1)] [comment *-multiplicity of end1 port/]
 	for(unsigned int j = 0; j < [end1.role.oclAsType(MultiplicityElement).getLower()/]; j++)
 	{
 		std::shared_ptr<[end1.role.type.transformType()/]> end1Port = end1Part->get[end1.role.name.toUpperFirst()/]()->at(j);
-
+		[if (end2.partWithPort.getUpper() <> 1)][comment *-multiplicity of end2 part/]
 		for(unsigned int k = 0; k < [end2.partWithPort.getLower()/]; k++)
 		{
 			std::shared_ptr<[end2.partWithPort.type.transformType()/]> end2Part = this->get[end2.partWithPort.name.toUpperFirst()/]()->at(k);
-
+			[if(definingAssociation.memberEnd->at(2).getUpper() <> 1)][comment *-multiplicity of end2 port/]
 			for(unsigned int l = 0; l < [end2.role.oclAsType(MultiplicityElement).getLower()/]; l++)
 			{
 				std::shared_ptr<[end2.role.type.transformType()/]> end2Port = end2Part->get[end2.role.name.toUpperFirst()/]()->at(l);
-				end1Port->get[end1.getDefiningEnd().name.toUpperFirst()/]()->add(end2Port);
-				end2Port->get[end2.getDefiningEnd().name.toUpperFirst()/]()->add(end1Port);
+				end1Port->get[definingAssociation.memberEnd->at(2).name.toUpperFirst()/]()->add(end2Port);
+				end2Port->get[definingAssociation.memberEnd->at(1).name.toUpperFirst()/]()->add(end1Port);
 			}
-		}		
+			[else][comment 1-multiplicity of end2 port/]
+			std::shared_ptr<[end2.role.type.transformType()/]> end2Port = end2Part->get[end2.role.name.toUpperFirst()/]();
+			end1Port->get[definingAssociation.memberEnd->at(2).name.toUpperFirst()/]()->add(end2Port);
+			end2Port->get[definingAssociation.memberEnd->at(1).name.toUpperFirst()/]()->add(end1Port);
+			[/if]
+		}	
+		[else][comment 1-multiplicity of end2 part/]
+		std::shared_ptr<[end2.partWithPort.type.transformType()/]> end2Part = this->get[end2.partWithPort.name.toUpperFirst()/]();
+			[if(definingAssociation.memberEnd->at(2).getUpper() <> 1)][comment *-multiplicity of end2 port/]
+			for(unsigned int l = 0; l < [end2.role.oclAsType(MultiplicityElement).getLower()/]; l++)
+			{
+				std::shared_ptr<[end2.role.type.transformType()/]> end2Port = end2Part->get[end2.role.name.toUpperFirst()/]()->at(l);
+				end1Port->get[definingAssociation.memberEnd->at(2).name.toUpperFirst()/]()->add(end2Port);
+				end2Port->get[definingAssociation.memberEnd->at(1).name.toUpperFirst()/]()->add(end1Port);
+			}
+			[else][comment 1-multiplicity of end2 port/]
+			std::shared_ptr<[end2.role.type.transformType()/]> end2Port = end2Part->get[end2.role.name.toUpperFirst()/]();
+			end1Port->set[definingAssociation.memberEnd->at(2).name.toUpperFirst()/](end2Port);
+			end2Port->get[definingAssociation.memberEnd->at(1).name.toUpperFirst()/]()->add(end1Port);
+			[/if]
+
+		[/if]	
 	}
+	[else][comment 1-multiplicity of end1 port/]
+	std::shared_ptr<[end1.role.type.transformType()/]> end1Port = end1Part->get[end1.role.name.toUpperFirst()/]();
+		[if (end2.partWithPort.getUpper() <> 1)][comment *-multiplicity of end2 part/]
+		for(unsigned int k = 0; k < [end2.partWithPort.getLower()/]; k++)
+		{
+			std::shared_ptr<[end2.partWithPort.type.transformType()/]> end2Part = this->get[end2.partWithPort.name.toUpperFirst()/]()->at(k);
+			[if(definingAssociation.memberEnd->at(2).getUpper() <> 1)][comment *-multiplicity of end2 port/]
+			for(unsigned int l = 0; l < [end2.role.oclAsType(MultiplicityElement).getLower()/]; l++)
+			{
+				std::shared_ptr<[end2.role.type.transformType()/]> end2Port = end2Part->get[end2.role.name.toUpperFirst()/]()->at(l);
+				end1Port->get[definingAssociation.memberEnd->at(2).name.toUpperFirst()/]()->add(end2Port);
+				end2Port->get[definingAssociation.memberEnd->at(1).name.toUpperFirst()/]()->add(end1Port);
+			}
+			[else][comment 1-multiplicity of end2 port/]
+			std::shared_ptr<[end2.role.type.transformType()/]> end2Port = end2Part->get[end2.role.name.toUpperFirst()/]();
+			end1Port->get[definingAssociation.memberEnd->at(2).name.toUpperFirst()/]()->add(end2Port);
+			end2Port->get[definingAssociation.memberEnd->at(1).name.toUpperFirst()/]()->add(end1Port);
+			[/if]
+		}	
+		[else][comment 1-multiplicity of end2 part/]
+		std::shared_ptr<[end2.partWithPort.type.transformType()/]> end2Part = this->get[end2.partWithPort.name.toUpperFirst()/]();
+			[if(definingAssociation.memberEnd->at(2).getUpper() <> 1)][comment *-multiplicity of end2 port/]
+			for(unsigned int l = 0; l < [end2.role.oclAsType(MultiplicityElement).getLower()/]; l++)
+			{
+				std::shared_ptr<[end2.role.type.transformType()/]> end2Port = end2Part->get[end2.role.name.toUpperFirst()/]()->at(l);
+				end1Port->get[definingAssociation.memberEnd->at(2).name.toUpperFirst()/]()->add(end2Port);
+				end2Port->get[definingAssociation.memberEnd->at(1).name.toUpperFirst()/]()->add(end1Port);
+			}
+			[else][comment 1-multiplicity of end2 port/]
+			std::shared_ptr<[end2.role.type.transformType()/]> end2Port = end2Part->get[end2.role.name.toUpperFirst()/]();
+			end1Port->set[definingAssociation.memberEnd->at(2).name.toUpperFirst()/](end2Port);
+			end2Port->get[definingAssociation.memberEnd->at(1).name.toUpperFirst()/]()->add(end1Port);
+			[/if]
+		[/if]	
+	[/if]
 }
-[else] [comment 1-multiplicity/]
-std::shared_ptr<[end1.role.type.transformType()/]> end1Port = this->get[end1.partWithPort.name.toUpperFirst()/]()->get[end1.role.name.toUpperFirst()/]();
-std::shared_ptr<[end2.role.type.transformType()/]> end2Port = this->get[end2.partWithPort.name.toUpperFirst()/]()->get[end2.role.name.toUpperFirst()/]();
-end1Port->set[end1.getDefiningEnd().name.toUpperFirst()/](end2Port);
-end2Port->set[end2.getDefiningEnd().name.toUpperFirst()/](end1Port);
+[else] [comment 1-multiplicity of end1 part/]
+	std::shared_ptr<[end1.partWithPort.type.transformType()/]> end1Part = this->get[end1.partWithPort.name.toUpperFirst()/]();
+	[if(definingAssociation.memberEnd->at(1).getUpper() <> 1)] [comment *-multiplicity of end1 port/]
+	for(unsigned int j = 0; j < [end1.role.oclAsType(MultiplicityElement).getLower()/]; j++)
+	{
+		std::shared_ptr<[end1.role.type.transformType()/]> end1Port = end1Part->get[end1.role.name.toUpperFirst()/]()->at(j);
+		[if (end2.partWithPort.getUpper() <> 1)][comment *-multiplicity of end2 part/]
+		for(unsigned int k = 0; k < [end2.partWithPort.getLower()/]; k++)
+		{
+			std::shared_ptr<[end2.partWithPort.type.transformType()/]> end2Part = this->get[end2.partWithPort.name.toUpperFirst()/]()->at(k);
+			[if(definingAssociation.memberEnd->at(2).getUpper() <> 1)][comment *-multiplicity of end2 port/]
+			for(unsigned int l = 0; l < [end2.role.oclAsType(MultiplicityElement).getLower()/]; l++)
+			{
+				std::shared_ptr<[end2.role.type.transformType()/]> end2Port = end2Part->get[end2.role.name.toUpperFirst()/]()->at(l);
+				end1Port->get[definingAssociation.memberEnd->at(2).name.toUpperFirst()/]()->add(end2Port);
+				end2Port->get[definingAssociation.memberEnd->at(1).name.toUpperFirst()/]()->add(end1Port);
+			}
+			[else][comment 1-multiplicity of end2 port/]
+			std::shared_ptr<[end2.role.type.transformType()/]> end2Port = end2Part->get[end2.role.name.toUpperFirst()/]();
+			end1Port->get[definingAssociation.memberEnd->at(2).name.toUpperFirst()/]()->add(end2Port);
+			end2Port->get[definingAssociation.memberEnd->at(1).name.toUpperFirst()/]()->add(end1Port);
+			[/if]
+		}	
+		[else][comment 1-multiplicity of end2 part/]
+		std::shared_ptr<[end2.partWithPort.type.transformType()/]> end2Part = this->get[end2.partWithPort.name.toUpperFirst()/]();
+			[if(definingAssociation.memberEnd->at(2).getUpper() <> 1)][comment *-multiplicity of end2 port/]
+			for(unsigned int l = 0; l < [end2.role.oclAsType(MultiplicityElement).getLower()/]; l++)
+			{
+				std::shared_ptr<[end2.role.type.transformType()/]> end2Port = end2Part->get[end2.role.name.toUpperFirst()/]()->at(l);
+				end1Port->get[definingAssociation.memberEnd->at(2).name.toUpperFirst()/]()->add(end2Port);
+				end2Port->get[definingAssociation.memberEnd->at(1).name.toUpperFirst()/]()->add(end1Port);
+			}
+			[else][comment 1-multiplicity of end2 port/]
+			std::shared_ptr<[end2.role.type.transformType()/]> end2Port = end2Part->get[end2.role.name.toUpperFirst()/]();
+			end1Port->set[definingAssociation.memberEnd->at(2).name.toUpperFirst()/](end2Port);
+			end2Port->get[definingAssociation.memberEnd->at(1).name.toUpperFirst()/]()->add(end1Port);
+			[/if]
+
+		[/if]	
+	}
+	[else][comment 1-multiplicity of end1 port/]
+	std::shared_ptr<[end1.role.type.transformType()/]> end1Port = end1Part->get[end1.role.name.toUpperFirst()/]();
+		[if (end2.partWithPort.getUpper() <> 1)][comment *-multiplicity of end2 part/]
+		for(unsigned int k = 0; k < [end2.partWithPort.getLower()/]; k++)
+		{
+			std::shared_ptr<[end2.partWithPort.type.transformType()/]> end2Part = this->get[end2.partWithPort.name.toUpperFirst()/]()->at(k);
+			[if(definingAssociation.memberEnd->at(2).getUpper() <> 1)][comment *-multiplicity of end2 port/]
+			for(unsigned int l = 0; l < [end2.role.oclAsType(MultiplicityElement).getLower()/]; l++)
+			{
+				std::shared_ptr<[end2.role.type.transformType()/]> end2Port = end2Part->get[end2.role.name.toUpperFirst()/]()->at(l);
+				end1Port->get[definingAssociation.memberEnd->at(2).name.toUpperFirst()/]()->add(end2Port);
+				end2Port->set[definingAssociation.memberEnd->at(1).name.toUpperFirst()/](end1Port);
+			}
+			[else][comment 1-multiplicity of end2 port/]
+			std::shared_ptr<[end2.role.type.transformType()/]> end2Port = end2Part->get[end2.role.name.toUpperFirst()/]();
+			end1Port->get[definingAssociation.memberEnd->at(2).name.toUpperFirst()/]()->add(end2Port);
+			end2Port->set[definingAssociation.memberEnd->at(1).name.toUpperFirst()/](end1Port);
+			[/if]
+		}	
+		[else][comment 1-multiplicity of end2 part/]
+		std::shared_ptr<[end2.partWithPort.type.transformType()/]> end2Part = this->get[end2.partWithPort.name.toUpperFirst()/]();
+			[comment *-multiplicity of end2 port -> since part and port of end1 as well as part of end2 are of 1-multiplicity, port of end2 must be of *-multiplicity, otherwise this would be an array pattern /]
+			for(unsigned int l = 0; l < [end2.role.oclAsType(MultiplicityElement).getLower()/]; l++)
+			{
+				std::shared_ptr<[end2.role.type.transformType()/]> end2Port = end2Part->get[end2.role.name.toUpperFirst()/]()->at(l);
+				end1Port->get[definingAssociation.memberEnd->at(2).name.toUpperFirst()/]()->add(end2Port);
+				end2Port->set[definingAssociation.memberEnd->at(1).name.toUpperFirst()/](end1Port);
+			}
+		[/if]	
+	[/if]
 [/if]
 [/template]
 
@@ -380,6 +849,3 @@ if(aConnector.end->size() = 2) then
 else false
 endif
 /]
-
-
-[query private getDefiningEnd(aConnectorEnd : ConnectorEnd) : Property = (aConnectorEnd.owner.oclAsType(Connector).type.memberEnd->asOrderedSet()->select(type = aConnectorEnd.role.type))->first()/]

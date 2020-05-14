@@ -76,12 +76,22 @@
 [query private isValidConnector(aConnector : Connector) : Boolean = aConnector.end->size() = 2 and aConnector.end->reject(oclIsUndefined()).partWithPort->asSet()->reject(oclIsUndefined())->size() = 2 /] 
 
 [comment check if aConnector contains a port with type aClass) -> überprüfe alle ConnectorEnd gegen aClass, sammele alle Ergebnisse (in einem Set), entferne alle false -> somit nur true drin, bei size > 0 muss ein true, also ein Connectorend mit type = aClass drin sein/]
-[query private containsPortWithSpecificClass(aConnector : Connector, aClass : Class) : Boolean = if (not aConnector.isValidConnector()) then false else aConnector.end.isConnectorEndTypeEqualTo(aClass)->reject(false)->size() > 0  endif /] 
+[query private containsPortWithSpecificClass(aConnector : Connector, aClass : Class) : Boolean = if (not aConnector.isValidConnector()) then false else aConnector.end.isConnectorEndTypeEqualTo(aClass)->reject(value : Boolean | value = false)->size() > 0  endif /] 
 
 [comment get all part type's, but only classes,  and not someType, sorted by name /]
-[query public collectClasses(aPackage : Package, someType : Class) : OrderedSet(Class) = aPackage.getAllConnectorsWithType(someType).end.partWithPort.type->flatten()->selectByKind(Class)->reject(thisClass : Class | thisClass = someType)->asOrderedSet()->sortedBy(name)/]
+[query private collectOppositeEndsofExternalConnectors(aPackage : Package, someType : Class) : OrderedSet(ConnectorEnd) = (aPackage.getAllConnectorsWithType(someType).end->flatten()->reject(thisEnd : ConnectorEnd | thisEnd.partWithPort.type = someType))->asOrderedSet()->sortedBy(name)/]
 
-[query public collectConnectorEnds(aPackage : Package, someType : Class) : OrderedSet(ConnectorEnd) = (aPackage.getAllConnectorsWithType(someType).end->flatten()->reject(thisEnd : ConnectorEnd | thisEnd.partWithPort.type = someType))->asOrderedSet()->sortedBy(name)/]
+
+[comment get all opposite ConnectorEnds of Connectors that are owned by aClass and are connected to a port of aClass/]
+[query private getAllConnectorsOfClass(aClass : Class) : Set(Connector) = aClass.ownedConnector->select(end->size() = 2)/]
+
+[query private isConnectorEndRoleChildOfClass(anEnd : ConnectorEnd, aClass : Class) : Boolean = if (anEnd.oclIsUndefined() or anEnd.role.oclIsUndefined()) then false else anEnd.role.owner = aClass endif /]
+
+[query private containsPortOfClass(aConnector : Connector, aClass : Class) : Boolean = aConnector.end.isConnectorEndRoleChildOfClass(aClass)->reject(value : Boolean | value = false)->size() > 0/]
+
+[query private collectOppositeEndsofInternalConnectors(aClass : Class) : OrderedSet(ConnectorEnd) = (aClass.getAllConnectorsOfClass()->select(containsPortOfClass(aClass)).end->reject(isConnectorEndRoleChildOfClass(aClass))->reject(partWithPort.oclIsUndefined()))->asOrderedSet() /]
+
+[query public collectOppositeConnectorEndsForClass(aPackage : Package, aClass : Class) : OrderedSet(ConnectorEnd) = aPackage.collectOppositeEndsofExternalConnectors(aClass)->addAll(aClass.collectOppositeEndsofInternalConnectors())->asOrderedSet() /]
 
 [comment]INPUT SWITCH ----------------------------------------------------------[/comment]
 [template public generateInputParameter(par : Parameter, index:Integer)]
