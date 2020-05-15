@@ -29,6 +29,9 @@
 [query public getStructuralFeaturesFromRSTVA(aPackage : Package, aClassifier : Classifier) : OrderedSet(StructuralFeature) = aPackage.allOwnedElements()->filter(RemoveStructuralFeatureValueAction)->select(object.type=aClassifier).structuralFeature->asOrderedSet()->sortedBy(name)/]
 
 [query private collectConnectedClassesToInclude(aClass : Class) : Set(Class) = Set(Class){getCompositeOwners().ownedConnector.end->select(not role.oclIsUndefined()).role->reject(type = aClass).type, getCompositeOwners().ownedConnector.end->select(not partWithPort.oclIsUndefined()).partWithPort->reject(type = aClass).type}->flatten()->asOrderedSet()->sortedBy(myQualifiedName()) /]
+[query private collectClassesToIncludeFromPartsWithPortsProperties(aClass : Class) : Set(Class) = Set(Class){aClass.ownedConnector.end->reject(anEnd : ConnectorEnd | anEnd.partWithPort.oclIsUndefined()).role.type}->flatten()->asOrderedSet()->sortedBy(myQualifiedName()) /]
+[query private collectCompositeStructureIncludes(aClass : Class) : Set(Class) = Set(Class){aClass.collectClassesToIncludeFromPartsWithPortsProperties(), aClass.collectConnectedClassesToInclude()}->flatten()->asOrderedSet()->sortedBy(myQualifiedName()) /]
+
 
 [template public generateClassifierObjectSource(aClassifier : Classifier, aPackage:Package) {
 	className : String = objectClassName();
@@ -40,9 +43,9 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "[aClassifier.getNearestPackage().myNamespaceName()/]/[aClassifier.name.toUpperFirst()/].hpp"
 #include "[aClassifier.getNearestPackage().getPackageName()/]/[aClassifier.getNearestPackage().name/]Package.hpp"
-[for (connectedClass : Class | aClassifier.oclAsType(Class).collectConnectedClassesToInclude())]
-#include "[aPackage.getPackageName()/]/[connectedClass.name.toUpperFirst()/].hpp"
-#include "[aPackage.getPackageName()/]Exec/[connectedClass.objectClassName()/].hpp"
+[for (includedClass : Class | aClassifier.oclAsType(Class).collectCompositeStructureIncludes())]
+#include "[aPackage.getPackageName()/]/[includedClass.name.toUpperFirst()/].hpp"
+#include "[aPackage.getPackageName()/]Exec/[includedClass.objectClassName()/].hpp"
 [/for]
 #include "uml/Class.hpp"
 [let attributes : OrderedSet(Property) = aClassifier.getAllAttributes().oclAsType(Property)->flatten()->asOrderedSet()->sortedBy(qualifiedName) ]

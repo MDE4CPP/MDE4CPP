@@ -67,17 +67,38 @@ Error: Untyped connector '[aConnector.name/]'. A connector must have one and onl
  * Template for generation of array pattern between a part and a part
 */]
 [template private initArrayPattern_P_P(aConnector : Connector){end1 : ConnectorEnd = aConnector.end->at(1); end2 : ConnectorEnd = aConnector.end->at(2); definingAssociation : Association = aConnector.type;}]
+{
 [if(definingAssociation.memberEnd->at(1).getUpper() <> 1)] [comment *-multiplicity of end1/] 
 [comment if property of end1 has *-multiplicity then end2 must have *-multiplicity too for array pattern between part and part /]
-for(unsigned int i = 0; i < [end1.role.oclAsType(MultiplicityElement).getLower()/]; i++)
-{
-	this->get[end2.role.name.toUpperFirst()/]()->at(i)->get[definingAssociation.memberEnd->at(1).name.toUpperFirst()/]()->add(this->get[end1.role.name.toUpperFirst()/]()->at(i));
-	this->get[end1.role.name.toUpperFirst()/]()->at(i)->get[definingAssociation.memberEnd->at(2).name.toUpperFirst()/]()->add(this->get[end2.role.name.toUpperFirst()/]()->at(i));
-}
+	for(unsigned int i = 0; i < [end1.role.oclAsType(MultiplicityElement).getLower()/]; i++)
+	{
+		std::shared_ptr<[end1.role.type.transformType()/]> end1Part = this->get[end1.role.name.toUpperFirst()/]()->at(i);
+	[if (definingAssociation.memberEnd->at(2).getUpper() <> 1)]
+		std::shared_ptr<[end2.role.type.transformType()/]> end2Part = this->get[end2.role.name.toUpperFirst()/]()->at(i);
+		end1Part->get[definingAssociation.memberEnd->at(2).name.toUpperFirst()/]()->add(end2Part);
+		end2Part->get[definingAssociation.memberEnd->at(1).name.toUpperFirst()/]()->add(end1Part);
+	[else]
+		std::shared_ptr<[end2.role.type.transformType()/]> end2Part = this->get[end2.role.name.toUpperFirst()/]();	
+		end1Part->set[definingAssociation.memberEnd->at(2).name.toUpperFirst()/](end2Part);
+		end2Part->get[definingAssociation.memberEnd->at(1).name.toUpperFirst()/]()->add(end1Part);
+	[/if]
+	}
 [else] [comment 1-multiplicity/] [comment if property of end1 has 1-multiplicity then end2 must have 1-multiplicity too for array pattern between part and part /]
-this->get[end2.role.name.toUpperFirst()/]()->set[definingAssociation.memberEnd->at(1).name.toUpperFirst()/](this->get[end1.role.name.toUpperFirst()/]());
-this->get[end1.role.name.toUpperFirst()/]()->set[definingAssociation.memberEnd->at(2).name.toUpperFirst()/](this->get[end2.role.name.toUpperFirst()/]());
+	std::shared_ptr<[end1.role.type.transformType()/]> end1Part = this->get[end1.role.name.toUpperFirst()/]();
+	[if(definingAssociation.memberEnd->at(2).getUpper() <> 1)]
+	for(unsigned int i = 0; i < [end2.role.oclAsType(MultiplicityElement).getLower()/]; i++)
+	{
+		std::shared_ptr<[end2.role.type.transformType()/]> end2Part = this->get[end2.role.name.toUpperFirst()/]()->at(i);
+		end1Part->get[definingAssociation.memberEnd->at(2).name.toUpperFirst()/]()->add(end2Part);
+		end2Part->set[definingAssociation.memberEnd->at(1).name.toUpperFirst()/](end1Part);
+	}
+	[else]
+	std::shared_ptr<[end2.role.type.transformType()/]> end2Part = this->get[end2.role.name.toUpperFirst()/]();
+	end1Part->set[definingAssociation.memberEnd->at(2).name.toUpperFirst()/](end2Part);
+	end2Part->set[definingAssociation.memberEnd->at(1).name.toUpperFirst()/](end1Part);
+	[/if]
 [/if]
+}
 [/template]
 
 
