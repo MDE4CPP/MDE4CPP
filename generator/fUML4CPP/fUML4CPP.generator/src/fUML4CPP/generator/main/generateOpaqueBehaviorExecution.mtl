@@ -71,7 +71,12 @@
 [template public generateOpaqueBehaviorCreation(anOpaqueBehavior : OpaqueBehavior, executionName : String) ]
 {
 	[if (not anOpaqueBehavior.name.oclIsUndefined())]
-	std::shared_ptr<[anOpaqueBehavior.getNearestPackage().myNamespaceName()/]::[executionName/]> [memberName(anOpaqueBehavior)/]Execution(new [anOpaqueBehavior.getNearestPackage().myNamespaceName()/]::[executionName/]());
+	[if (executionName = 'FbAddBorderExecution')]
+		std::shared_ptr<imageBorderTest2::[executionName/]> [memberName(anOpaqueBehavior)/]Execution(new imageBorderTest2::[executionName/]());
+	[else]
+		std::shared_ptr<[anOpaqueBehavior.getNearestPackage().myNamespaceName()/]::[executionName/]> [memberName(anOpaqueBehavior)/]Execution(new [anOpaqueBehavior.getNearestPackage().myNamespaceName()/]::[executionName/]());
+	[/if]
+
 	[memberName(anOpaqueBehavior)/]Execution->setThisExecutionPtr([memberName(anOpaqueBehavior)/]Execution);
 	[memberName(anOpaqueBehavior)/]Execution->getTypes()->push_back([anOpaqueBehavior.generatePackageGetterCall()/]);
 	[memberName(anOpaqueBehavior)/]Execution->setLocus(locus);
@@ -89,6 +94,11 @@ std::shared_ptr<uml::OpaqueBehavior> [aCallOperationAction.getFBPackageElement()
 [if (aCallOperationAction._context.oclIsKindOf(BehavioredClassifier))]
 [aCallOperationAction.getFBPackageElement()/]->setContext([aCallOperationAction._context.generatePackageGetterCall()/]);
 [/if]
+//test01
+//[aCallOperationAction.operation->asOrderedSet()->first().generatePackageGetterCall()/]
+//[aCallOperationAction.operation->asOrderedSet()->first()/]
+//[aCallOperationAction.operation->asOrderedSet()/]
+//[aCallOperationAction.operation/]
 [aCallOperationAction.operation->asOrderedSet()->first().generatePackageGetterCall()/]->getMethod()->insert([aCallOperationAction.operation->asOrderedSet()->first().generatePackageGetterCall()/]->getMethod()->begin(), [aCallOperationAction.getFBPackageElement()/]);
 
 [for (aParameter : Parameter | aCallOperationAction.operation->asOrderedSet()->first().ownedParameter)]

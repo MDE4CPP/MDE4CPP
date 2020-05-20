@@ -16,15 +16,16 @@
 
 [import fUML4CPP::generator::main::generateOpaqueBehaviorExecution /]
 [import fUML4CPP::generator::main::parameterHelper /]
+[import UML4CPP::generator::main::helpers::collectionHelper /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 
 [query public metaModelIncludes(aPackage : Package) : Set(Package) = OrderedSet{
 																			aPackage.member->filter(Class).attribute.type.getNearestPackage(),
-																			aPackage.member->filter(Class).ownedOperation.ownedParameter.type.getNearestPackage(),
+																			aPackage.member->filter(Class).ownedOperation.ownedParameter.type.getNearestPackage(), 
 																			aPackage.member->filter(Class).attribute.getAppliedStereotypes().getNearestPackage(), 
 																			aPackage.member->filter(Class).interfaceRealization.supplier.getNearestPackage(), 
-																			aPackage.member->filter(Class).generalization.general.getNearestPackage(), 
+																			aPackage.member->filter(Class).generalization.general.getNearestPackage(),
 																			aPackage.getCallOperationActions().operation.method->reject(oclIsUndefined()).ownedParameter.type.getNearestPackage(),
 																			aPackage.packageImport.importedPackage
 																		}->flatten() /]
@@ -47,7 +48,7 @@
 [file (aPackage.name.concat('Exec/').concat('CMakeLists.txt'), false, 'UTF-8')]
 #############################################################################
 #																			#
-#		 			CMakeList created by fUML4CPP Generator					# 
+#		 			CMakeList created by fUML4CPP Generator					#
 #																			#
 #############################################################################
 
@@ -57,7 +58,7 @@ CMAKE_MINIMUM_REQUIRED(VERSION 3.9)
 
 PROJECT([execPackageName/])
 
-IF(NOT CMAKE_BUILD_TYPE) 
+IF(NOT CMAKE_BUILD_TYPE)
     SET(CMAKE_BUILD_TYPE Debug)
 ENDIF(NOT CMAKE_BUILD_TYPE)
 SET(CMAKE_DEBUG_POSTFIX d)
@@ -222,7 +223,7 @@ task compile[packageName.toUpperFirst()/](type: tui.sse.mde4cpp.MDE4CPPCompile) 
 	outputs.dir file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'include' + File.separator + '[packageName/]')
 
 	// dependency to basic interfaces
-	dependsOn getRootProject().getTasksByName('deliverBasicInterfaces', true) 
+	dependsOn getRootProject().getTasksByName('deliverBasicInterfaces', true)
 	outputs.dir file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'include' + File.separator + 'abstractDataTypes')
 	outputs.dir file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'include' + File.separator + 'persistence' + File.separator + 'interfaces')
 	outputs.dir file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'include' + File.separator + 'pluginFramework')
@@ -267,18 +268,43 @@ ENDIF()
 [query private buildModeCMakeProperty(debugMode : Boolean) : String = if (debugMode) then 'debug' else 'optimized' endif/]
 
 [template private generateCMakeFindLibraryCommand(aPackage : Package, ending : String, folderName : String, debugMode : Boolean)]
+[for (packName : String | aPackage.collectIncludingModelNames())]
+[if (not (packName = 'cv'))]
+FIND_LIBRARY([packName.toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/] [packName/][libraryNameSuffix(debugMode)/][ending/] ${MDE4CPP_HOME}/application/[folderName/])
+[/if]
+[/for]
 [for (packName : String | aPackage.metaModelLibrariesNames())]
 FIND_LIBRARY([packName.toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/] [packName/][libraryNameSuffix(debugMode)/][ending/] ${MDE4CPP_HOME}/application/[folderName/])
 [/for]
+[if (not (aPackage.getPackageName() = 'cv'))]
+FIND_LIBRARY([aPackage.getPackageName().toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/] [aPackage.getPackageName().toUpperFirst()/][libraryNameSuffix(debugMode)/][ending/] ${MDE4CPP_HOME}/application/[folderName/])
+[/if]
+
+FIND_LIBRARY(LIBOPENCV_CORE_[libraryVariableNameSuffix(debugMode)/] libopencv_cored[ending/] ${MDE4CPP_HOME}/application/bin)
+FIND_LIBRARY(LIBOPENCV_IMGPROC_[libraryVariableNameSuffix(debugMode)/] libopencv_imgprocd[ending/] ${MDE4CPP_HOME}/application/bin)
+FIND_LIBRARY(LIBOPENCV_HIGHGUI_[libraryVariableNameSuffix(debugMode)/] libopencv_highguid[ending/] ${MDE4CPP_HOME}/application/bin)
+FIND_LIBRARY(LIBOPENCV_IMGCODECS_[libraryVariableNameSuffix(debugMode)/] libopencv_imgcodecsd[ending/] ${MDE4CPP_HOME}/application/bin)
+
 [/template]
 
 [template private generateLibraryLinking(aPackage : Package, debugMode : Boolean)]
 TARGET_LINK_LIBRARIES(${PROJECT_NAME}
-[for (packName : String | aPackage.metaModelLibrariesNames())]
+[for (packName : String | aPackage.collectIncludingModelNames())]
 	[buildModeCMakeProperty(debugMode)/] ${[packName.toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/]}
 [/for]
+	[buildModeCMakeProperty(debugMode)/] ${[aPackage.getPackageName().toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/]}
+
+[for (packName : String | aPackage.metaModelLibrariesNames())]
+   [buildModeCMakeProperty(debugMode)/] ${[packName.toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/]}
+[/for]
+[buildModeCMakeProperty(debugMode)/] ${LIBOPENCV_CORE_[libraryVariableNameSuffix(debugMode)/]}
+[buildModeCMakeProperty(debugMode)/] ${LIBOPENCV_IMGPROC_[libraryVariableNameSuffix(debugMode)/]}
+[buildModeCMakeProperty(debugMode)/] ${LIBOPENCV_HIGHGUI_[libraryVariableNameSuffix(debugMode)/]}
+[buildModeCMakeProperty(debugMode)/] ${LIBOPENCV_IMGCODECS_[libraryVariableNameSuffix(debugMode)/]}
 )
 [/template]
+
+
 
 [template private generateRelatedModelNameList(aPackage : Package) post (trim())]
 [for (packName : String | aPackage.metaModelLibrariesNames()) separator (', ') ? (not(packName = aPackage.name))]

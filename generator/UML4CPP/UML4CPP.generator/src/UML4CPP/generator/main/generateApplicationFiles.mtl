@@ -222,9 +222,13 @@ ENDIF()
 
 [template private generateCMakeFindLibraryCommand(aPackage : Package, ending : String, folderName : String, debugMode : Boolean, system : String)]
 [for (packName : String | aPackage.collectIncludingModelNames())]
+[if (not (packName = 'cv'))]
 FIND_LIBRARY([packName.toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/] [packName/][libraryNameSuffix(debugMode)/][ending/] ${MDE4CPP_HOME}/application/[folderName/])
+[/if]
 [/for]
+[if (not (aPackage.getPackageName() = 'cv'))]
 FIND_LIBRARY([aPackage.getPackageName().toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/] [aPackage.getPackageName().toUpperFirst()/][libraryNameSuffix(debugMode)/][ending/] ${MDE4CPP_HOME}/application/[folderName/])
+[/if]
 # ['['/]protected ('library_[system/]_[buildModeCMakeProperty(debugMode)/]')[']'/]
 # You may manually edit the following lines, won't be overwritten upon generation.
 

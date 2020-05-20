@@ -132,7 +132,11 @@ void [behaviorName/]::setThisExecutionPtr(std::weak_ptr<[behaviorName/]> thisExe
 
 #include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
 [for (type : Type | anOpaqueBehavior.ownedParameter.type->asOrderedSet())]
+[if (not (type.name = 'Mat'))]
 [type.generateTypeInclude(aPackage)/]
+[else]
+#include "[aPackage.getPackageName()/]Exec/[type.name/]Object.hpp"
+[/if]
 [/for]
 [if (anOpaqueBehavior.hasGenerateContextVariable() or requiresContext)]
 
