@@ -248,8 +248,8 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> [className/]::retrieveEndVa
 [let roleType : Class = end.role.type ]
 	if(type == [partWithPortType.getModelPackage()/][partWithPortType.generatePackageGetterCall(partWithPortType)/] && portType == [roleType.getModelPackage()/][roleType.generatePackageGetterCall(roleType)/])
 	{
-		std::shared_ptr<[partWithPortType.objectClassName()/]> ownerObject = std::dynamic_pointer_cast<[partWithPortType.objectClassName()/]>(this->getLocus()->instantiate(type));
-		std::shared_ptr<[roleType.objectClassName()/]> portObject = std::dynamic_pointer_cast<[roleType.objectClassName()/]>(std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(endValue)->getReferent());
+		std::shared_ptr<[aPackage.name/]::[partWithPortType.objectClassName()/]> ownerObject = std::dynamic_pointer_cast<[aPackage.name/]::[partWithPortType.objectClassName()/]>(this->getLocus()->instantiate(type));
+		std::shared_ptr<[aPackage.name/]::[roleType.objectClassName()/]> portObject = std::dynamic_pointer_cast<[aPackage.name/]::[roleType.objectClassName()/]>(std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(endValue)->getReferent());
 		std::shared_ptr<[partWithPortType.generateCppType(true)/]> ownerUmlValue = portObject->getUmlValue()->get[partWithPortType.name.toUpperFirst()/]().lock();
 		ownerObject->setUmlValue(ownerUmlValue);
 		featureValue = ownerObject->retrieveFeatureValue(std::dynamic_pointer_cast<uml::StructuralFeature>(end->getRole()));
@@ -381,7 +381,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> [className/]::getValues(std
 [/if]
 [else]
 [if (aProperty.upper = 1)]
-		std::shared_ptr<[aProperty.type.getValueClass()/]> value(new [aProperty.type.oclAsType(Classifier).objectClassName()/]());
+		std::shared_ptr<[aPackage.name/]::[aProperty.type.getValueClass()/]> value(new [aPackage.name/]::[aProperty.type.oclAsType(Classifier).objectClassName()/]());
 		value->setThis[aProperty.type.oclAsType(Classifier).objectClassName()/]Ptr(value);
 		value->setLocus(this->getLocus());
 		value->setUmlValue(m_umlValue->[aProperty.getterName()/]()[if(aProperty.isBackReference())].lock()[/if]);
@@ -410,7 +410,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> [className/]::getValues(std
 		Bag<[aProperty.type.generateCppType(true)/]>::iterator end = [aProperty.name.toLowerFirst()/]List->end();
 		while (iter != end)
 		{
-			std::shared_ptr<[aProperty.type.getValueClass()/]> value(new [aProperty.type.oclAsType(Classifier).objectClassName()/]());
+			std::shared_ptr<[aPackage.name/]::[aProperty.type.getValueClass()/]> value(new [aPackage.name/]::[aProperty.type.oclAsType(Classifier).objectClassName()/]());
 			value->setThis[aProperty.type.oclAsType(Classifier).objectClassName()/]Ptr(value);
 			value->setLocus(this->getLocus());
 			value->setUmlValue(*iter);
