@@ -30,7 +30,7 @@
 
 [query private collectConnectedClassesToInclude(aClass : Class) : Set(Class) = Set(Class){getCompositeOwners().ownedConnector.end->select(not role.oclIsUndefined()).role->reject(type = aClass).type, getCompositeOwners().ownedConnector.end->select(not partWithPort.oclIsUndefined()).partWithPort->reject(type = aClass).type}->flatten()->asOrderedSet()->sortedBy(myQualifiedName()) /]
 [query private collectClassesToIncludeFromPartsWithPortsProperties(aClass : Class) : Set(Class) = Set(Class){aClass.ownedConnector.end->reject(anEnd : ConnectorEnd | anEnd.partWithPort.oclIsUndefined()).role.type}->flatten()->asOrderedSet()->sortedBy(myQualifiedName()) /]
-[query private collectCompositeStructureIncludes(aClass : Class) : Set(Class) = Set(Class){aClass.collectClassesToIncludeFromPartsWithPortsProperties(), aClass.collectConnectedClassesToInclude()}->flatten()->asOrderedSet()->sortedBy(myQualifiedName()) /]
+[query private collectCompositeStructureIncludes(aClass : Class) : Set(Class) = Set(Class){aClass.collectClassesToIncludeFromPartsWithPortsProperties(), aClass.collectConnectedClassesToInclude(), aClass.getCompositeOwners()}->flatten()->asOrderedSet()->sortedBy(myQualifiedName()) /]
 
 
 [template public generateClassifierObjectSource(aClassifier : Classifier, aPackage:Package) {
@@ -145,6 +145,23 @@ bool [className/]::equals(std::shared_ptr<fUML::Semantics::Values::Value> otherV
 	return isEqual;
 }
 
+std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Object>> [className/]::getDirectContainers()
+{
+	std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Object>> directContainers(new Bag<PSCS::Semantics::StructuredClassifiers::CS_Object>());
+	[for (ownerClass : Class | aClassifier.oclAsType(Class).getCompositeOwners())]
+	//owner class [ownerClass.name.toUpperFirst()/]
+	{	std::shared_ptr<[aPackage.name/]::[ownerClass.name.toUpperFirst()/]> ownerUmlValue = m_umlValue->get[ownerClass.name.toUpperFirst()/]().lock();
+		if(ownerUmlValue != nullptr)
+		{
+			std::shared_ptr<[aPackage.name/]::[ownerClass.objectClassName()/]> container[ownerClass.objectClassName()/] = std::dynamic_pointer_cast<[aPackage.name/]::[ownerClass.objectClassName()/]>(this->getLocus()->instantiate([ownerClass.getModelPackage()/][ownerClass.generatePackageGetterCall(ownerClass)/]));
+			container[ownerClass.objectClassName()/]->setUmlValue(ownerUmlValue);
+			directContainers->add(container[ownerClass.objectClassName()/]);
+		}
+	}
+	[/for]
+	return directContainers;
+}
+
 [let attributes : OrderedSet(Property) = aClassifier.getAllAttributes().oclAsType(Property)->flatten()->asOrderedSet()->sortedBy(qualifiedName) ]
 [if (attributes->size() > 0)]
 std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Link>> [className/]::getLinks(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> interactionPoint)
@@ -195,7 +212,7 @@ std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Link>> [className
 			
 			//If other end of connector is a port, the corresponding FeatureValue has to be retrieved as CS_InteractionPoint from its owner
 			//instead of being retrieved from this connector end as just a CS_Reference
-			if((std::dynamic_pointer_cast<uml::Port>(end2->getRole()) != nullptr) && (end2->getPartWithPort() != nullptr))
+			if(std::dynamic_pointer_cast<uml::Port>(end2->getRole()) != nullptr)
 			{
 				//otherEndValues->at(0) is passed to retrieve the ports owner later on
 				otherEndValues = this->retrieveEndValueAsInteractionPoint(otherEndValues->at(0), end2);
@@ -215,7 +232,7 @@ std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Link>> [className
 			
 			//If other end of connector is a port, the corresponding FeatureValue has to be retrieved as CS_InteractionPoint from its owner
 			//instead of being retrieved from this connector end as just a CS_Reference
-			if((std::dynamic_pointer_cast<uml::Port>(end1->getRole()) != nullptr) && (end1->getPartWithPort() != nullptr))
+			if(std::dynamic_pointer_cast<uml::Port>(end1->getRole()) != nullptr)
 			{
 				//otherEndValues->at(0) is passed to retrieve the ports owner later on
 				otherEndValues = this->retrieveEndValueAsInteractionPoint(otherEndValues->at(0), end1);
@@ -237,20 +254,20 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> [className/]::retrieveEndVa
 {
 [let ends : OrderedSet(ConnectorEnd) = aPackage.collectOppositeConnectorEndsForClass(aClassifier.oclAsType(Class))]
 [if (ends->size() > 0) ]
-	std::shared_ptr<uml::Class> type = std::dynamic_pointer_cast<uml::Class>(end->getPartWithPort()->getType());
+	std::shared_ptr<uml::Class> type = std::dynamic_pointer_cast<uml::Property>(end->getRole())->getClass().lock();
 	std::shared_ptr<uml::Class> portType = std::dynamic_pointer_cast<uml::Class>(end->getRole()->getType());
 	std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> featureValue = nullptr;
 
 [comment] type can only be a class that plays partWithPort of a connector end where aClassifier is type of opposite partWithPort [/comment]
 
 [for (end : ConnectorEnd | ends)]
-[let partWithPortType : Class = end.partWithPort.type ]
+[let ownerOfRoleType : Class = end.role.oclAsType(Property).class]
 [let roleType : Class = end.role.type ]
-	if(type == [partWithPortType.getModelPackage()/][partWithPortType.generatePackageGetterCall(partWithPortType)/] && portType == [roleType.getModelPackage()/][roleType.generatePackageGetterCall(roleType)/])
+	if(type == [ownerOfRoleType.getModelPackage()/][ownerOfRoleType.generatePackageGetterCall(ownerOfRoleType)/] && portType == [roleType.getModelPackage()/][roleType.generatePackageGetterCall(roleType)/])
 	{
-		std::shared_ptr<[aPackage.name/]::[partWithPortType.objectClassName()/]> ownerObject = std::dynamic_pointer_cast<[aPackage.name/]::[partWithPortType.objectClassName()/]>(this->getLocus()->instantiate(type));
+		std::shared_ptr<[aPackage.name/]::[ownerOfRoleType.objectClassName()/]> ownerObject = std::dynamic_pointer_cast<[aPackage.name/]::[ownerOfRoleType.objectClassName()/]>(this->getLocus()->instantiate(type));
 		std::shared_ptr<[aPackage.name/]::[roleType.objectClassName()/]> portObject = std::dynamic_pointer_cast<[aPackage.name/]::[roleType.objectClassName()/]>(std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(endValue)->getReferent());
-		std::shared_ptr<[partWithPortType.generateCppType(true)/]> ownerUmlValue = portObject->getUmlValue()->get[partWithPortType.name.toUpperFirst()/]().lock();
+		std::shared_ptr<[ownerOfRoleType.generateCppType(true)/]> ownerUmlValue = portObject->getUmlValue()->get[ownerOfRoleType.name.toUpperFirst()/]().lock();
 		ownerObject->setUmlValue(ownerUmlValue);
 		featureValue = ownerObject->retrieveFeatureValue(std::dynamic_pointer_cast<uml::StructuralFeature>(end->getRole()));
 	}
