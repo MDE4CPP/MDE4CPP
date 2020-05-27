@@ -31,6 +31,7 @@
 #include "uml/CallOperationAction.hpp"
 #include "uml/Parameter.hpp"
 #include "uml/ParameterDirectionKind.hpp"
+#include "uml/InputPin.hpp"
 #include "uml/OutputPin.hpp"
 #include "uml/Class.hpp"
 #include "uml/Interface.hpp"
@@ -39,6 +40,7 @@
 #include "fUML/Semantics/Activities/ActivityExecution.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
 #include "fUML/Semantics/Loci/ExecutionFactory.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/CS_Reference.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/CS_Object.hpp"
 #include "PSCS/Semantics/Actions/CS_ConstructStrategy.hpp"
@@ -285,7 +287,24 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> CS_CallOperationActi
 		execution = fUML::Semantics::Actions::CallOperationActionActivationImpl::getCallExecution();
 	}
 	else {
-		std::shared_ptr<fUML::Semantics::Values::Value> target = this->takeTokens(action->getTarget())->at(0);
+		std::shared_ptr<fUML::Semantics::Values::Value> target = nullptr;		
+
+		/* MDE4CPP specific implementation for handling "self"-Pin */
+		std::string targetPinName = action->getTarget()->getName();
+		if((targetPinName.empty()) || (targetPinName.find("self") == 0)){
+			//target is set to the context of the current activity execution
+			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> contextReference = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Reference();
+			std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> context = this->getActivityExecution()->getContext();
+			contextReference->setReferent(context);
+			contextReference->setCompositeReferent(std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Object>(context));
+			
+			target = contextReference;
+		}
+		else{
+			target = this->takeTokens(action->getTarget())->at(0);
+		}
+		/*--------------------------------------------------------*/
+
 		if(std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(target) != nullptr) {
 			// Tries to determine if the operation call has to be
 			// dispatched to the environment or to the internals of
@@ -303,25 +322,19 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> CS_CallOperationActi
 				// If not executing in the context of the target,
 				// Semantics are undefined.
 				// Otherwise, dispatch outside.
-				//if((executionContext == targetReference->getReferent()) || (targetReference->getCompositeReferent()->contains(executionContext))) {
+				if((executionContext == targetReference->getReferent()) || (targetReference->getCompositeReferent()->contains(executionContext))) {
 					execution = targetReference->dispatchOut(action->getOperation(), action->getOnPort());
-				//}
+				}
 			}
 			// Operation is both on a provided and a required interface
 			else if (operationIsOnProvidedInterface && operationIsOnRequiredInterface) {
-				std::cout<<__FUNCTION__<<"-- Operation is on both provided and required interface"<<std::endl;
 				if((executionContext == targetReference->getReferent()) || (targetReference->getCompositeReferent()->contains(executionContext))) {
-					std::cout<<__FUNCTION__<<"-- going into if"<<std::endl;
 					execution = targetReference->dispatchOut(action->getOperation(), action->getOnPort());
 				}
 			else {
-				std::cout<<__FUNCTION__<<"-- going into else"<<std::endl;
-				execution = targetReference->dispatchIn(action->getOperation(), action->getOnPort()); 
+					execution = targetReference->dispatchIn(action->getOperation(), action->getOnPort()); 
 				}	
 			}
-		}
-		else {
-			std::cout<<__FUNCTION__<<"-- target NOT instanceOf Reference"<<std::endl;
 		}
 	}
 	return execution;

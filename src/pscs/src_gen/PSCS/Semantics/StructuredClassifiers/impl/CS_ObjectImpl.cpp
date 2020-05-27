@@ -313,30 +313,10 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> CS_ObjectImpl::dispa
 	// Select a CS_InteractionPoint value playing onPort,
 	// and dispatches the operation call to this interaction point
 
-	/*Original specification implementation*/
-	/*std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> featureValue = this->getFeatureValue(onPort);
-	std::shared_ptr<Bag<fUML::Semantics::Values::Value>> values = featureValue->getValues();
-	int choice = (std::dynamic_pointer_cast<fUML::Semantics::Loci::ChoiceStrategy>(this->getLocus()->getFactory()->getStrategy("choice")))->choose(featureValue->getValues()->size()) - 1;
-	std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> interactionPoint = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint>(values->at(choice));
-	return interactionPoint->dispatch(operation);*/
-
-
 	std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> featureValue = this->retrieveFeatureValue(onPort);
 	std::shared_ptr<Bag<fUML::Semantics::Values::Value>> values = featureValue->getValues();
 	int choice = (std::dynamic_pointer_cast<fUML::Semantics::Loci::ChoiceStrategy>(this->getLocus()->getFactory()->getStrategy("choice")))->choose(featureValue->getValues()->size()) - 1;
-	
 	std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> interactionPoint = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint>(values->at(choice));
-	
-	//TODO delete
-	/*std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> referenceToValue = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(values->at(choice));
-	std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> referenceToOwner = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Reference();
-	referenceToOwner->setReferent(getThisCS_ObjectPtr());
-	referenceToOwner->setCompositeReferent(std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Object>(getThisCS_ObjectPtr()));
-	
-	std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> interactionPoint = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_InteractionPoint();
-	interactionPoint->setReferent(referenceToValue->getReferent());
-	interactionPoint->setOwner(referenceToOwner);
-	interactionPoint->setDefiningPort(onPort);*/
 	
 	return interactionPoint->dispatch(operation);
 	//end of body
@@ -421,17 +401,6 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> CS_ObjectImpl::dispa
 	// if targets is empty, no dispatch target has been found,
 	// and the operation call is lost
 	if(targets->size() >= 1) {
-		//TODO delete
-		/*std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> referenceToValue = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(targets->at(0));
-		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> referenceToOwner = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Reference();
-		referenceToOwner->setReferent(getThisCS_ObjectPtr());
-		referenceToOwner->setCompositeReferent(std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Object>(getThisCS_ObjectPtr()));
-		
-		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> target = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_InteractionPoint();
-		target->setReferent(referenceToValue->getReferent());
-		target->setOwner(referenceToOwner);
-		target->setDefiningPort(onPort);*/
-		
 		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> target = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint>(targets->at(0));
 		execution = this->dispatchOut(operation, target);
 	}
@@ -615,7 +584,14 @@ bool CS_ObjectImpl::isOperationProvided(std::shared_ptr<fUML::Semantics::Structu
 
 	bool isProvided = false;
 	if(std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint>(reference) != nullptr) {
+		/*Maximilian Hammer: The following if-Statement is bypassed, because it would prohibit operation delegation
+		for operations that are not owned by an Interface (i.e. are owned by a class) (since there is no else-Statement for this if-Statement)
+		--> this does not match the test models of the PSCS Test Suite.
+		Might be an error in the specification
+		*/
+
 		//if(std::dynamic_pointer_cast<uml::Interface>(operation->getOwner().lock()) != nullptr) {
+			
 			// We have to look in provided interfaces of the port if
 			// they define directly or indirectly the Operation
 			unsigned int interfaceIndex = 1;
@@ -792,7 +768,7 @@ std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference> > CS_Obje
 							std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Object>> directContainers = this->getDirectContainers();
 							bool isDelegation = false;
 							unsigned int j = 1;
-							while ((isDelegation) && (j <= directContainers->size())) {
+							while ((!isDelegation) && (j <= directContainers->size())) {
 								std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object> container = directContainers->at(j-1);
 								if(container->hasValueForAFeature(cddTarget)) {
 									isDelegation = true;
