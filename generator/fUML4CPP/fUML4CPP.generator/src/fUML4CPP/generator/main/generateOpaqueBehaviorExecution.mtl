@@ -71,7 +71,7 @@
 [template public generateOpaqueBehaviorCreation(anOpaqueBehavior : OpaqueBehavior, executionName : String) ]
 {
 	[if (not anOpaqueBehavior.name.oclIsUndefined())]
-	[if (executionName = 'FbAddBorderExecution') or (executionName = 'FbLoadImageExecution') or (executionName = 'FbSaveImageExecution') or (executionName = 'FbShowImageExecution') or (executionName = 'FbGaussianBlurExecution') or (executionName = 'FbFilter2D_mdeExecution')]
+	[if (executionName = 'FbAddBorderExecution') or (executionName = 'FbLoadImageExecution') or (executionName = 'FbSaveImageExecution') or (executionName = 'FbShowImageExecution') or (executionName = 'FbGaussianBlurExecution') or (executionName = 'FbFilter2D_mdeExecution') or (executionName = 'FbReadIntegerExecution')]
 		std::shared_ptr<imageBorderTest2::[executionName/]> [memberName(anOpaqueBehavior)/]Execution(new imageBorderTest2::[executionName/]());
 	[else]
 		std::shared_ptr<[anOpaqueBehavior.getNearestPackage().myNamespaceName()/]::[executionName/]> [memberName(anOpaqueBehavior)/]Execution(new [anOpaqueBehavior.getNearestPackage().myNamespaceName()/]::[executionName/]());
