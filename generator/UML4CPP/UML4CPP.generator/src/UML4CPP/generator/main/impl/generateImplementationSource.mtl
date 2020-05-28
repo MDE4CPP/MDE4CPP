@@ -140,6 +140,7 @@
 [className/]::~[className/]()
 {
 	clear();
+	DEBUG_MESSAGE(std::cout<<"[aClass.name.toUpperFirst()/] is destroyed..."<<std::endl;)
 }
 
 [className/]::[className/](const [className/] & obj):[className/]()
