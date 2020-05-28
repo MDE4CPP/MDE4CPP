@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_PmmP8LAqEeert7O7oCVCsA" name="DefaultStructures">
+  <eAnnotations xmi:id="_otFUEFgQEeqZPe2oHCHy2Q" source="prepareApplication">
+    <details xmi:id="_qWW_AFgQEeqZPe2oHCHy2Q" key="sourceCodeMain" value="std::cout&lt;&lt;&quot;-- Test model : Default Values - Structures&quot;&lt;&lt;std::endl;&#xA;&#xA;int v = 4;&#xA;bool successful = true;&#xA;&#xA;std::cout&lt;&lt;&quot;-- Running test case - Instantiation of Default values - Structures --&quot;&lt;&lt;std::endl;&#xA;std::cout&lt;&lt;std::endl;&#xA;&#xA;std::cout&lt;&lt;&quot;Creating single instance of B...&quot;&lt;&lt;std::endl;&#xA;std::shared_ptr&lt;DefaultStructures::B> b = factory->createB();&#xA;std::cout&lt;&lt;&quot;b->p = &quot;&lt;&lt;b->getP()&lt;&lt;std::endl&lt;&lt;std::endl;&#xA;&#xA;std::cout&lt;&lt;&quot;Creating instance of A with property b:B[4] specified by instance specification with p=4...&quot;&lt;&lt;std::endl;&#xA;std::shared_ptr&lt;DefaultStructures::A> a = factory->createA();&#xA;for(unsigned int i = 0; i &lt; a->getB()->size(); i++)&#xA;{&#xA;&#x9;if(successful) successful = (a->getB()->at(i)->getP() == v);&#xA;&#x9;std::cout&lt;&lt;&quot;a->b[&quot;&lt;&lt;i&lt;&lt;&quot;]->p = &quot;&lt;&lt;v&lt;&lt;&quot; : &quot;&lt;&lt;std::boolalpha&lt;&lt;(a->getB()->at(i)->getP() == v)&lt;&lt;std::endl;&#xA;}&#xA;&#xA;std::cout&lt;&lt;&quot;Test case successful : &quot;&lt;&lt;std::boolalpha&lt;&lt;successful&lt;&lt;std::endl;&#xA;std::cout&lt;&lt;std::endl;&#xA;std::cout&lt;&lt;&quot;-- End of test case --&quot;&lt;&lt;std::endl;"/>
+  </eAnnotations>
+  <ownedComment xmi:id="_rGBtkKDvEeq8Z9IqI9dZbA">
+    <body>This test case addresses instantiation of default values for properties typed by composite structures.</body>
+  </ownedComment>
+  <packageImport xmi:id="_rgWIkLArEeert7O7oCVCsA">
+    <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
+  </packageImport>
+  <packagedElement xmi:type="uml:Class" xmi:id="__HCucFlqEeqCEpOYlPRuRQ" name="A">
+    <ownedAttribute xmi:id="_CSldYFlrEeqCEpOYlPRuRQ" name="b" type="_ApZSAFlrEeqCEpOYlPRuRQ" aggregation="composite">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_EGE0QFlrEeqCEpOYlPRuRQ" value="4"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_EoVz0FlrEeqCEpOYlPRuRQ" value="*"/>
+      <defaultValue xmi:type="uml:InstanceValue" xmi:id="_MRPCYFlsEeqCEpOYlPRuRQ" name="defaultValueB" type="_ApZSAFlrEeqCEpOYlPRuRQ" instance="_XR03cFlrEeqCEpOYlPRuRQ"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_ApZSAFlrEeqCEpOYlPRuRQ" name="B">
+    <ownedAttribute xmi:id="_H5DWoFlrEeqCEpOYlPRuRQ" name="p">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:InstanceSpecification" xmi:id="_XR03cFlrEeqCEpOYlPRuRQ" name="instanceSpecificationB" classifier="_ApZSAFlrEeqCEpOYlPRuRQ">
+    <slot xmi:id="_b3OVQFlrEeqCEpOYlPRuRQ" definingFeature="_H5DWoFlrEeqCEpOYlPRuRQ">
+      <value xmi:type="uml:LiteralInteger" xmi:id="_sJVR0FlrEeqCEpOYlPRuRQ" name="instanceSpecificationB_p" value="4">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </value>
+    </slot>
+  </packagedElement>
+</uml:Model>
