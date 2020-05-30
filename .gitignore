@@ -11,3 +11,7 @@ setenv*
 /application/
 /gradle.properties
 xerces
+
+generator/UML4CPP/.project
+
+src/
