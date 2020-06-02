@@ -114,6 +114,10 @@
 //*********************************
 [className/]::[className/]()
 {
+	#ifdef ADD_COUNT
+		ADD_COUNT("[className/]()");
+	#endif
+
 	//***********************************
 	// init Get Set
 	[aClass.generateGetSetInit()/] 
@@ -139,8 +143,11 @@
 
 [className/]::~[className/]()
 {
+	#ifdef SUB_COUNT
+		SUB_COUNT("[className/]()");
+	#endif
+
 	clear();
-	DEBUG_MESSAGE(std::cout<<"[aClass.name.toUpperFirst()/] is destroyed..."<<std::endl;)
 }
 
 [className/]::[className/](const [className/] & obj):[className/]()

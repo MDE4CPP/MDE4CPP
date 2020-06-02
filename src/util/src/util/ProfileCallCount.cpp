@@ -24,7 +24,29 @@ void ProfileCallCount::addCount(std::string cntfunction)
 	}
 	else
 	{
-		countmap.insert(std::pair<std::string, int>(cntfunction, 12));
+		countmap.insert(std::pair<std::string, int>(cntfunction, 1));
+	}
+}
+
+void ProfileCallCount::subCount(std::string cntfunction)
+{
+	auto search = countmap.find(cntfunction);
+	if (search != countmap.end())
+	{
+		search->second--;
+	}
+}
+
+void ProfileCallCount::printFunc(std::string cntfunction)
+{
+	auto search = countmap.find(cntfunction);
+	if (search != countmap.end())
+	{
+		std::cout<<"Function '"<<cntfunction<<"' counter: "<<search->second<<std::endl;
+	}
+	else 
+	{
+		std::cout<<"Function '"<<cntfunction<<"' not present in map"<<std::endl;
 	}
 }
 
