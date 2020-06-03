@@ -118,6 +118,8 @@
 		ADD_COUNT("[className/]()");
 	#endif
 
+	DEBUG_MESSAGE(std::cout<<"[aClass.name.toUpperFirst()/] is created..."<<std::endl;)
+
 	//***********************************
 	// init Get Set
 	[aClass.generateGetSetInit()/] 
@@ -147,7 +149,7 @@
 		SUB_COUNT("[className/]()");
 	#endif
 
-	clear();
+	DEBUG_MESSAGE(std::cout<<"[aClass.name.toUpperFirst()/] is destroyed..."<<std::endl;)
 }
 
 [className/]::[className/](const [className/] & obj):[className/]()
@@ -228,15 +230,20 @@ void [className/]::instantiate()
 	[/for]
 }
 
-void [className/]::clear()
-{
-	//Erase properties
-	[for (aProperty : Property | aClass.ownedAttribute->sortedBy(myQualifiedName()))]
-	[aProperty.generatePropertyDestruction()/]
-	[/for]
-	[for (compositeOwnerClass : Class | aClass.getCompositeOwners())]
-	m_[compositeOwnerClass.name/].reset();
-	[/for]
+void [className/]::destroy()
+{	
+	if(!m_IsInDestruction){
+		m_IsInDestruction = true;
+
+		//Erase properties
+		[for (aProperty : Property | aClass.ownedAttribute->sortedBy(myQualifiedName()))]
+		[aProperty.generatePropertyDestruction()/]
+		[/for]
+		//Erase back reference to owner
+		[for (compositeOwnerClass : Class | aClass.getCompositeOwners())]
+		m_[compositeOwnerClass.name/].reset();
+		[/for]
+	}
 }
 
 //*********************************

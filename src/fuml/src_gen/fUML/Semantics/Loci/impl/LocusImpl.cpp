@@ -249,6 +249,7 @@ void LocusImpl::remove(std::shared_ptr<fUML::Semantics::StructuredClassifiers::E
 	//generated from body annotation
 	value->setLocus(nullptr);
 	this->getExtensionalValues()->erase(value);
+	value.reset();
 	//end of body
 }
 

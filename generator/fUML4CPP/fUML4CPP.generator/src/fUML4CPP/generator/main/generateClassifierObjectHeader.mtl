@@ -55,6 +55,8 @@ namespace [aPackage.name/]
 		    virtual ~[className/]();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+
+			virtual void destroy();
 			
 			virtual std::shared_ptr<[pointerName/]> getUmlValue() const;
 			virtual void setUmlValue(std::shared_ptr<[pointerName/]>);
