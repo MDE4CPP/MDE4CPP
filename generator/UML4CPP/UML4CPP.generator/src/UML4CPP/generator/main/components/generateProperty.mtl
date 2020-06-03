@@ -167,6 +167,7 @@ void [aClass.name.toUpperFirst()/]Impl::set[compositeOwnerClass.name.toUpperFirs
 [aProperty.memberName()/]->setType([aProperty.type.generatePackageGetterCall(aProperty)/]);
 [aProperty.memberName()/]->setLower([aProperty.lower/]);
 [aProperty.memberName()/]->setUpper([aProperty.upper/]);
+[aProperty.memberName()/]->setAggregation(uml::AggregationKind::[aProperty.aggregation.toString().toUpper()/]);
 [if (aProperty.oclIsTypeOf(Port))]
 [aProperty.memberName()/]->setIsConjugated([aProperty.oclAsType(Port).isConjugated/]);
 [/if]
