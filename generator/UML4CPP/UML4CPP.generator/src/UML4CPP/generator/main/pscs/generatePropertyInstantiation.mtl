@@ -87,39 +87,62 @@ for(unsigned int i = 1; i <= [aProperty.getLower()/]; i++)
 [if (aProperty.upper <> 1)] [comment *-multiplicity /]
 for(unsigned int i = 0; i < [aProperty.lower/]; i++)
 {
-[for (aSlot : Slot | specification.slot) ? (aSlot.definingFeature.type.isPrimitive())]
-	m_[aProperty.name/]->at(i)->[aSlot.generateSlotInitialization()/][/for]
+[for (aSlot : Slot | specification.slot)]
+	[aSlot.generateSlotInitialization('m_'.concat(aProperty.name).concat('->at(i)'), 0)/]
+[/for]
 }
 [else] [comment 1-multiplicity /]
-m_[aProperty.name/] = [aProperty.type._package.getPackageName()/]::[aProperty.type._package.getPackageName().toUpperFirst()/]Factory::eInstance()->create[aProperty.type.name.toUpperFirst()/]();
-[for (aSlot : Slot | specification.slot) ? (aSlot.definingFeature.type.isPrimitive())]
-m_[aProperty.name/]->[aSlot.generateSlotInitialization()/]
+[for (aSlot : Slot | specification.slot)]
+[aSlot.generateSlotInitialization('m_'.concat(aProperty.name), 0)/]
 [/for]
 [/if]
 [/let]
 [/template]
 
+[template private generateSlotInitialization(aSlot : Slot, recursiveString : String, recursionDepth : Integer)]
+[if (aSlot.definingFeature.type.isPrimitive())]
+[aSlot.generatePrimitiveSlotInitialization(recursiveString)/]
+[else]
+[aSlot.generateNonPrimitiveSlotInitialization(recursiveString, recursionDepth)/]
+[/if]
+[/template]
+
+[template private generateNonPrimitiveSlotInitialization(aSlot : Slot, recursiveString : String, recursionDepth : Integer){instValue : InstanceValue = aSlot.value->first().oclAsType(InstanceValue); instSpec : InstanceSpecification = instValue.instance; feature : Property = aSlot.definingFeature.oclAsType(Property)}]
+[if (aSlot.definingFeature.getUpper()<>1)]
+for(unsigned int i_[recursionDepth/] = 0; i_[recursionDepth/] < [feature.lower/]; i_[recursionDepth/]++)
+{
+	[for (aNestedSlot : Slot | instSpec.slot)]
+	[aNestedSlot.generateSlotInitialization(recursiveString.concat('->get'.concat(feature.name.toUpperFirst()).concat('()->at(i_'.concat(recursionDepth.toString()).concat(')'))), recursionDepth+1) /]
+	[/for]
+}
+[else]
+[for (aNestedSlot : Slot | instSpec.slot)]
+[aNestedSlot.generateSlotInitialization(recursiveString.concat('->get'.concat(feature.name.toUpperFirst()).concat('()')), recursionDepth) /]
+[/for]
+[/if]
+[/template]
+
 [**
  * generate instantiation of a slot of an instance specification
 */]
-[template private generateSlotInitialization(aSlot : Slot)]
+[template private generatePrimitiveSlotInitialization(aSlot : Slot, recursiveString : String)]
 [if (aSlot.definingFeature.getUpper() <> 1)]
-[aSlot.initPrimitiveValueFromMultipleLiteralSpecifications()/]
+[aSlot.initPrimitiveValueFromMultipleLiteralSpecifications(recursiveString)/]
 [else]
-[aSlot.initPrimitiveValueFromSingleLiteralSpecification()/]
+[aSlot.initPrimitiveValueFromSingleLiteralSpecification(recursiveString)/]
 [/if]
 [/template]
 
 [**
  * generate call of attribute setter to set value (upper = 1) as defined by Slot
 */]
-[template private initPrimitiveValueFromSingleLiteralSpecification(aSlot : Slot)]
+[template private initPrimitiveValueFromSingleLiteralSpecification(aSlot : Slot, recursiveString : String)]
 [let slotType : String = aSlot.definingFeature.type.name]
-[if (slotType = 'Boolean' or slotType = 'EBoolean')]set[aSlot.definingFeature.name.toUpperFirst()/]([aSlot.value->first().oclAsType(LiteralBoolean).value/]);
-[elseif (slotType = 'UnlimitedNatural')]set[aSlot.definingFeature.name.toUpperFirst()/]([aSlot.value->first().oclAsType(LiteralUnlimitedNatural).value/]);
-[elseif (slotType = 'Integer' or slotType = 'EInt')]set[aSlot.definingFeature.name.toUpperFirst()/]([aSlot.value->first().oclAsType(LiteralInteger).value/]);
-[elseif (slotType = 'Real' or slotType = 'EDouble' or slotType = 'EFloat')]set[aSlot.definingFeature.name.toUpperFirst()/]([aSlot.value->first().oclAsType(LiteralReal).value/]);
-[elseif (aSlot.definingFeature.type.oclIsKindOf(PrimitiveType) and slotType = 'String' or slotType = 'EString')]set[aSlot.definingFeature.name.toUpperFirst()/]("[aSlot.value->first().oclAsType(LiteralString).value/]");
+[if (slotType = 'Boolean' or slotType = 'EBoolean')][recursiveString/]->set[aSlot.definingFeature.name.toUpperFirst()/]([aSlot.value->first().oclAsType(LiteralBoolean).value/]);
+[elseif (slotType = 'UnlimitedNatural')][recursiveString/]->set[aSlot.definingFeature.name.toUpperFirst()/]([aSlot.value->first().oclAsType(LiteralUnlimitedNatural).value/]);
+[elseif (slotType = 'Integer' or slotType = 'EInt')][recursiveString/]->set[aSlot.definingFeature.name.toUpperFirst()/]([aSlot.value->first().oclAsType(LiteralInteger).value/]);
+[elseif (slotType = 'Real' or slotType = 'EDouble' or slotType = 'EFloat')][recursiveString/]->set[aSlot.definingFeature.name.toUpperFirst()/]([aSlot.value->first().oclAsType(LiteralReal).value/]);
+[elseif (aSlot.definingFeature.type.oclIsKindOf(PrimitiveType) and slotType = 'String' or slotType = 'EString')][recursiveString/]->set[aSlot.definingFeature.name.toUpperFirst()/]("[aSlot.value->first().oclAsType(LiteralString).value/]");
 [/if]
 [/let]
 [/template]
@@ -127,14 +150,14 @@ m_[aProperty.name/]->[aSlot.generateSlotInitialization()/]
 [**
  * generate call of attribute setter to set values (upper != 1) as defined by Slot
 */]
-[template private initPrimitiveValueFromMultipleLiteralSpecifications(aSlot : Slot)]
+[template private initPrimitiveValueFromMultipleLiteralSpecifications(aSlot : Slot, recursiveString : String)]
 [let slotType : String = aSlot.definingFeature.type.name]
 [for (aValueSpecification : ValueSpecification | aSlot.value)]
-[if (slotType = 'Boolean' or slotType = 'EBoolean')]get[aSlot.definingFeature.name.toUpperFirst()/]()->add([aValueSpecification.oclAsType(LiteralBoolean).value/]);
-[elseif (slotType = 'UnlimitedNatural')]get[aSlot.definingFeature.name.toUpperFirst()/]()->add([aValueSpecification.oclAsType(LiteralUnlimitedNatural).value/]);
-[elseif (slotType = 'Integer' or slotType = 'EInt')]get[aSlot.definingFeature.name.toUpperFirst()/]()->add([ aValueSpecification.oclAsType(LiteralInteger).value/]);
-[elseif (slotType = 'Real' or slotType = 'EDouble' or slotType = 'EFloat')]get[aSlot.definingFeature.name.toUpperFirst()/]()->add([aValueSpecification.oclAsType(LiteralReal).value/]);
-[elseif (aSlot.definingFeature.type.oclIsKindOf(PrimitiveType) and slotType = 'String' or slotType = 'EString')]get[aSlot.definingFeature.name.toUpperFirst()/]()->add("[aValueSpecification.oclAsType(LiteralString).value/]");
+[if (slotType = 'Boolean' or slotType = 'EBoolean')][recursiveString/]->get[aSlot.definingFeature.name.toUpperFirst()/]()->add([aValueSpecification.oclAsType(LiteralBoolean).value/]);
+[elseif (slotType = 'UnlimitedNatural')][recursiveString/]->get[aSlot.definingFeature.name.toUpperFirst()/]()->add([aValueSpecification.oclAsType(LiteralUnlimitedNatural).value/]);
+[elseif (slotType = 'Integer' or slotType = 'EInt')][recursiveString/]->get[aSlot.definingFeature.name.toUpperFirst()/]()->add([ aValueSpecification.oclAsType(LiteralInteger).value/]);
+[elseif (slotType = 'Real' or slotType = 'EDouble' or slotType = 'EFloat')][recursiveString/]->get[aSlot.definingFeature.name.toUpperFirst()/]()->add([aValueSpecification.oclAsType(LiteralReal).value/]);
+[elseif (aSlot.definingFeature.type.oclIsKindOf(PrimitiveType) and slotType = 'String' or slotType = 'EString')][recursiveString/]->get[aSlot.definingFeature.name.toUpperFirst()/]()->add("[aValueSpecification.oclAsType(LiteralString).value/]");
 [/if]
 [/for]
 [/let]
