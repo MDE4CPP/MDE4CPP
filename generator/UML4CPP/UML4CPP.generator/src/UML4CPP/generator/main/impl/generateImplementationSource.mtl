@@ -232,6 +232,24 @@ void [className/]::instantiate()
 
 void [className/]::destroy()
 {	
+	[comment Destroy corresponding links if existing/]
+	[for (aProperty : Property | aClass.ownedAttribute->sortedBy(myQualifiedName()))]
+	[if (not aProperty.association.oclIsUndefined() and not aProperty.type.oclIsUndefined() and not (aProperty.type.isPrimitive() or aProperty.type.oclIsKindOf(Enumeration)))]
+	[for (anotherProperty : Property | aProperty.association.memberEnd->reject(p : Property | p = aProperty))]
+	//Destroying links for opposite property [aProperty.name/]
+	[if (aProperty.upper <> 1)]
+	for(unsigned int i = 0; i < m_[aProperty.name/]->size(); i++)
+	{	
+		m_[aProperty.name/]->at(i)->[anotherProperty.getterName()/]()[if (anotherProperty.upper <> 1)]->erase([aClass.generateGetThisPtrPropertyGetterName()/]())[else].reset()[/if];
+	}
+	[else]
+	m_[aProperty.name/]->[anotherProperty.getterName()/]()[if (anotherProperty.upper <> 1)]->erase([aClass.generateGetThisPtrPropertyGetterName()/]())[else].reset()[/if];
+	[/if]
+	[/for]
+	[/if]
+	[/for]
+
+	[comment Recursively destroy properties/]
 	if(!m_IsInDestruction){
 		m_IsInDestruction = true;
 
