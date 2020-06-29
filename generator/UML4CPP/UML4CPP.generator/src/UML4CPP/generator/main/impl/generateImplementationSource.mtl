@@ -242,7 +242,11 @@ void [className/]::destroy()
 		m_[aProperty.name/]->at(i)->[anotherProperty.getterName()/]()[if (anotherProperty.upper <> 1)]->erase([aClass.generateGetThisPtrPropertyGetterName()/]())[else].reset()[/if];
 	}
 	[else]
-	m_[aProperty.name/]->[anotherProperty.getterName()/]()[if (anotherProperty.upper <> 1)]->erase([aClass.generateGetThisPtrPropertyGetterName()/]())[else].reset()[/if];
+	[if (anotherProperty.upper <> 1)]
+	m_[aProperty.name/]->[anotherProperty.getterName()/]()->erase([aClass.generateGetThisPtrPropertyGetterName()/]());
+	[else]
+	if(m_[aProperty.name/]->[anotherProperty.getterName()/]() == [aClass.generateGetThisPtrPropertyGetterName()/]()) { m_[aProperty.name/]->[anotherProperty.getterName()/]().reset(); }
+	[/if]
 	[/if]
 	[/for]
 	[/if]
