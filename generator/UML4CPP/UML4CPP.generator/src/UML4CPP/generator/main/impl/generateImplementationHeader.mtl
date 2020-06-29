@@ -135,7 +135,6 @@ virtual public [sClass.getClassifierName(aClass, ignoreNamespace(sClass))/]Impl[
 			static [aClass.name.toUpperFirst()/] * create();
 [/if]
 			std::weak_ptr<[aClass.name.toUpperFirst()/]> m_[generateGetThisPtrPropertyName()/];
-			bool m_IsInDestruction = false;
 			[aClass.generateGetSetMemeberInit()/]
 	};
 [if (not aPackage.ignoreNamespace())]}[/if]

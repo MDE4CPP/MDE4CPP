@@ -231,8 +231,7 @@ void [className/]::instantiate()
 }
 
 void [className/]::destroy()
-{	
-	[comment Destroy corresponding links if existing/]
+{	[comment Destroy corresponding links if existing/]
 	[for (aProperty : Property | aClass.ownedAttribute->sortedBy(myQualifiedName()))]
 	[if (not aProperty.association.oclIsUndefined() and not aProperty.type.oclIsUndefined() and not (aProperty.type.isPrimitive() or aProperty.type.oclIsKindOf(Enumeration)))]
 	[for (anotherProperty : Property | aProperty.association.memberEnd->reject(p : Property | p = aProperty))]
@@ -250,18 +249,14 @@ void [className/]::destroy()
 	[/for]
 
 	[comment Recursively destroy properties/]
-	if(!m_IsInDestruction){
-		m_IsInDestruction = true;
-
-		//Erase properties
-		[for (aProperty : Property | aClass.ownedAttribute->sortedBy(myQualifiedName()))]
-		[aProperty.generatePropertyDestruction()/]
-		[/for]
-		//Erase back reference to owner
-		[for (compositeOwnerClass : Class | aClass.getCompositeOwners())]
-		m_[compositeOwnerClass.name/].reset();
-		[/for]
-	}
+	//Erase properties
+	[for (aProperty : Property | aClass.ownedAttribute->sortedBy(myQualifiedName()))]
+	[aProperty.generatePropertyDestruction()/]
+	[/for]
+	//Erase back reference to owner
+	[for (compositeOwnerClass : Class | aClass.getCompositeOwners())]
+	m_[compositeOwnerClass.name/].reset();
+	[/for]
 }
 
 //*********************************
