@@ -90,7 +90,6 @@ using namespace [aPackage.name/];
 	m_umlValue(_element)
 {
 	this->getTypes()->add([aClassifier.getModelPackage()/][aClassifier.generatePackageGetterCall(aClassifier)/]);
-	DEBUG_MESSAGE(std::cout<<"[className/] is created..."<<std::endl;)
 }
 
 [className/]::[className/]([className/] &obj):
@@ -101,12 +100,10 @@ using namespace [aPackage.name/];
 [className/]::[className/]()
 {
 	this->getTypes()->add([aClassifier.getModelPackage()/][aClassifier.generatePackageGetterCall(aClassifier)/]);
-	DEBUG_MESSAGE(std::cout<<"[className/] is created..."<<std::endl;)
 }
 
 [className/]::~[className/]()
 {
-	DEBUG_MESSAGE(std::cout<<"[className/] is destroyed..."<<std::endl;)
 }
 
 std::shared_ptr<ecore::EObject> [className/]::copy()
@@ -320,12 +317,21 @@ void [className/]::removeValue(std::shared_ptr<uml::StructuralFeature> feature, 
 				// no default value defined, clear not realized
 [/if]
 [else]
+				[if (aProperty.isComposite)]
+				m_umlValue->[aProperty.getterName()/]()->destroy();
+				[/if]
 				m_umlValue->[aProperty.setterName()/](nullptr);
 [/if]
 
 [else]
 		if (value == nullptr) // clear mode
 		{
+			[if (aProperty.isComposite)]
+			for(unsigned int i = 0; i < m_umlValue->[aProperty.getterName()/]()->size(); i++)
+			{
+				m_umlValue->[aProperty.getterName()/]()->at(i)->destroy();
+			}
+			[/if]
 			m_umlValue->[aProperty.getterName()/]()->clear();
 		}
 		else
@@ -355,6 +361,9 @@ void [className/]::removeValue(std::shared_ptr<uml::StructuralFeature> feature, 
 			std::shared_ptr<[aProperty.type.getValueClass()/]> inputValue = std::dynamic_pointer_cast<[aProperty.type.getValueClass()/]>(reference->getReferent());
 			if (inputValue != nullptr)
 			{
+				[if (aProperty.isComposite)]
+				inputValue->getUmlValue()->destroy();
+				[/if]
 				m_umlValue->[aProperty.getterName()/]()->erase(inputValue->getUmlValue());
 [/if]
 			}
