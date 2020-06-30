@@ -55,7 +55,11 @@
 							<tool id="org.eclipse.cdt.build.core.settings.holder.libs.2132956685" name="holder for library settings" superClass="org.eclipse.cdt.build.core.settings.holder.libs"/>
 							<tool id="org.eclipse.cdt.build.core.settings.holder.859100136" name="GNU C++" superClass="org.eclipse.cdt.build.core.settings.holder">
 								<option id="org.eclipse.cdt.build.core.settings.holder.incpaths.1289626169" name="Include Paths" superClass="org.eclipse.cdt.build.core.settings.holder.incpaths" valueType="includePath">
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/[if(prepareApplication)]ApplicatonFor[/if][packageName/]_src[if(not prepareApplication)]_gen[/if]/src[if(not prepareApplication)]_gen[/if]}&quot;"/>
+									[comment]
+										"prepareApplication" is false by default
+										<listOptionValue builtIn="false" value="&quot;${workspace_loc:/[if(prepareApplication)]ApplicatonFor[/if][packageName/]_src[if(not prepareApplication)]_gen[/if]/src[if(not prepareApplication)]_gen[/if]}&quot;"/>
+									[/comment]
+									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/src_gen&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${COMPILER_HOME}/include&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${COMPILER_HOME}/lib/gcc/${COMPILER_DELIVERY_NAME}/${COMPILER_VERSION}/include/c++&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${COMPILER_HOME}/lib/gcc/${COMPILER_DELIVERY_NAME}/${COMPILER_VERSION}/include/c++/backward&quot;"/>
