@@ -29,13 +29,13 @@
 */]
 [template public generateConnectorInstantiation(aConnector : Connector)]
 [if (aConnector.isArrayPattern())]
-	{
-		[aConnector.generateArrayPatternInstantiation()/]
-	}
+{
+	[aConnector.generateArrayPatternInstantiation()/]
+}
 [elseif (aConnector.isStarPattern())]
-	{
-		[aConnector.generateStarPatternInstantiation()/]
-	}
+{
+	[aConnector.generateStarPatternInstantiation()/]
+}
 [/if]
 [/template]
 
@@ -44,7 +44,6 @@
  * Template for generation of array pattern
 */]
 [template private generateArrayPatternInstantiation(aConnector : Connector){end1 : ConnectorEnd = aConnector.end->at(1); end2 : ConnectorEnd = aConnector.end->at(2); definingAssociation : Association = aConnector.type;}]
-[comment TODO: Implement instatiation if ends are parts with ports /]
 [if(not definingAssociation.oclIsUndefined())]
 [if(end1.partWithPort.oclIsUndefined() and end2.partWithPort.oclIsUndefined())]
 //instantiate array pattern for connector [aConnector.name/] between a port and a part

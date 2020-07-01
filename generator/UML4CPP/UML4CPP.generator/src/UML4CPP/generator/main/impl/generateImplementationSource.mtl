@@ -205,24 +205,20 @@ std::shared_ptr<uml::Class> [className/]::getMetaClass()
 }
 
 void [className/]::instantiate()
-{
-	// init properties without default
+{	[comment Init properties without default value/]
 	[for (aProperty : Property | aClass.ownedAttribute->sortedBy(myQualifiedName()))]
 	[if (aProperty.default->isEmpty())][aProperty.generateAttributeInstantiation()/][/if]
 	[/for]
-	
-	// init properties with default
+	[comment Init properties with default value/]
 	[for (aProperty : Property | aClass.ownedAttribute->sortedBy(myQualifiedName()))]
 	[if ((not aProperty.defaultValue.oclIsUndefined()) and (aProperty.defaultValue.oclIsTypeOf(InstanceValue)))]
 	[if (aProperty.defaultValue.type.oclIsUndefined() or aProperty.defaultValue.name.oclIsUndefined())]
 	// undefined type of InstanceValue [aProperty.defaultValue.qualifiedName/] ([aProperty.defaultValue.type.toString()/]) ['class '.concat(aClass.name).concat(': undefined type of InstanceValue ').concat(aProperty.defaultValue.qualifiedName).concat(' (').concat(aProperty.defaultValue.type.toString()).registerError()/]
 	[else]
 	[aProperty.generateAttributeDefaultInstantiation()/]
-	[/if]
-	[/if]
+	[/if][/if]
 	[/for]
-
-	// init connectors
+	[comment Init connector patterns/]
 	[for (aConnector : Connector | aClass.ownedConnector->sortedBy(myQualifiedName()))]
 	[if ((not(aConnector.type.oclIsUndefined())) and (not(aConnector.type.name.oclIsUndefined())))]
 	[aConnector.generateConnectorInstantiation()/]
