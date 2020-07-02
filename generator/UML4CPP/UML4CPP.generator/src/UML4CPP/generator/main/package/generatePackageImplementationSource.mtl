@@ -213,6 +213,9 @@ void [packageName/]::createPackageClasses(std::shared_ptr<uml::Package> [aPackag
 	[/if]
 	[/for]
 [/for]
+[for (anOpaqueBehavior : OpaqueBehavior | aPackage.ownedMember->filter(OpaqueBehavior))]
+	[anOpaqueBehavior.generateOpaqueBehaviorCreation()/]
+[/for]
 } 
 
 [comment]Only Dependency[/comment]
@@ -345,6 +348,9 @@ void [packageName/]::initializePackageClasses()
 	[for (aAttribute : Property | aClass.ownedElement->filter(InterfaceRealization)->sortedBy(myQualifiedName()).supplier.oclAsType(Interface).ownedAttribute->sortedBy(myQualifiedName())) separator ('\n')] 
 	[if (aClass.ownedAttribute->select(name=aAttribute.name)->size() = 0)][aAttribute.addInterfaceAttribute(aClass)/][/if]
 	[/for]
+[/for]
+[for (anOpaqueBehavior : OpaqueBehavior | aPackage.ownedMember->filter(OpaqueBehavior))]
+	[anOpaqueBehavior.generateOpaqueBehaviorInitialization()/]
 [/for]
 }
 

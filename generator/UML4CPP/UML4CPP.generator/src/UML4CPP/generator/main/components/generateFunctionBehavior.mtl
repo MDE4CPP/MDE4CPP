@@ -30,7 +30,11 @@
  * - creation of function behavior parameter
 */]
 [template public generateOpaqueBehaviorCreation(aOpaqueBehavior : OpaqueBehavior)]
+[if (aOpaqueBehavior.owner = aOpaqueBehavior._package)]
+[aOpaqueBehavior.memberName()/] = factory->createOpaqueBehavior();
+[else]
 [aOpaqueBehavior.memberName()/] = factory->createOpaqueBehavior_in_BehavioredClassifier([aOpaqueBehavior.owner.oclAsType(NamedElement).memberName()/]);
+[/if]
 [for (aParameter : Parameter | aOpaqueBehavior.ownedParameter) separator ('\n')]
 [aParameter.generateParameterCreation()/]
 [/for]
@@ -52,7 +56,9 @@
 */]
 [template public generateOpaqueBehaviorInitialization(aOpaqueBehavior : OpaqueBehavior)]
 [aOpaqueBehavior.memberName()/]->setName("[aOpaqueBehavior.name/]");
+[if (not aOpaqueBehavior._context.oclIsUndefined())]
 [aOpaqueBehavior.memberName()/]->setContext([aOpaqueBehavior._context.memberName()/]);
+[/if]
 [for (aParameter : Parameter | aOpaqueBehavior.ownedParameter) separator ('\n')]
 [aParameter.generateParameterInitialization()/]
 [/for]
