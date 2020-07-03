@@ -40,6 +40,7 @@
 [query public keyIgnoreNamespace (any : OclAny) : String = 'ignoreNamespace' /]	[** indicate, whether a namespace for given element should be generated: value = '1' -> namespace ignored /]
 [query public keySingleton(any : OclAny) : String = 'singleton' /]	[** indicate, if a singleton mechanism should be generated for given element: value = '1' -> singleton generated /]
 [query public keyConst(any : OclAny) : String = 'const' /] [** indicate, that an operation should have const qualifier /]
+[query public keyMainActivity(any : OclAny) : String = 'mainActivity' /] [** indicate, that this activity should be used inside main.cpp /]
 
 [** 
  * keywords for source name and keys of prepareApplication annoation
