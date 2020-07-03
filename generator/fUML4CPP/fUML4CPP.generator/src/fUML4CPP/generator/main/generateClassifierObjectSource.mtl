@@ -210,53 +210,39 @@ std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Link>> [className
 	for(unsigned int i = 0; i < connectors->size(); i++)
 	{
 		std::shared_ptr<uml::Connector> currentConnector = connectors->at(i);
+		unsigned int definingEndIndex = 0, otherEndIndex = 1;
+		std::shared_ptr<uml::ConnectorEnd> definingEnd = currentConnector->getEnd()->at(0);
+		std::shared_ptr<uml::ConnectorEnd> otherEnd = currentConnector->getEnd()->at(1);
 		std::shared_ptr<Bag<fUML::Semantics::Values::Value>> otherEndValues(new Bag<fUML::Semantics::Values::Value>());
 		std::shared_ptr<Bag<fUML::Semantics::Values::Value>> definingEndValues(new Bag<fUML::Semantics::Values::Value>());
-		std::shared_ptr<uml::ConnectorEnd> end1 = currentConnector->getEnd()->at(0);
-		std::shared_ptr<uml::ConnectorEnd> end2 = currentConnector->getEnd()->at(1);
 		
 		definingEndValues->add(interactionPoint);
-		
-		if(definingPort == end1->getRole())
-		{
-			std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> dummyBag(new Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>());
-			otherEndValues = interactionPoint->getReferent()->getValues(currentConnector->getType()->getMemberEnd()->at(1), dummyBag);
-			
-			//If other end of connector is a port, the corresponding FeatureValue has to be retrieved as CS_InteractionPoint from its owner
-			//instead of being retrieved from this connector end as just a CS_Reference
-			if(std::dynamic_pointer_cast<uml::Port>(end2->getRole()) != nullptr)
-			{
-				//otherEndValues->at(0) is passed to retrieve the ports owner later on
-				otherEndValues = this->retrieveEndValueAsInteractionPoint(otherEndValues->at(0), end2);
-			}
-			
-			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Link> newLink = [getPSCSStructuredClassifierFactory()/]->createCS_Link();
-			newLink->setType(currentConnector->getType());
-			newLink->assignFeatureValue(newLink->getType()->getMemberEnd()->at(0), definingEndValues, -1);
-			newLink->assignFeatureValue(newLink->getType()->getMemberEnd()->at(1), otherEndValues, -1);
-			
-			allLinks->add(newLink);
-		}
-		else if(definingPort == end2->getRole())
-		{
-			std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> dummyBag(new Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>());
-			otherEndValues = interactionPoint->getReferent()->getValues(currentConnector->getType()->getMemberEnd()->at(0), dummyBag);
-			
-			//If other end of connector is a port, the corresponding FeatureValue has to be retrieved as CS_InteractionPoint from its owner
-			//instead of being retrieved from this connector end as just a CS_Reference
-			if(std::dynamic_pointer_cast<uml::Port>(end1->getRole()) != nullptr)
-			{
-				//otherEndValues->at(0) is passed to retrieve the ports owner later on
-				otherEndValues = this->retrieveEndValueAsInteractionPoint(otherEndValues->at(0), end1);
-			}
 
-			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Link> newLink = [getPSCSStructuredClassifierFactory()/]->createCS_Link();
-			newLink->setType(currentConnector->getType());
-			newLink->assignFeatureValue(newLink->getType()->getMemberEnd()->at(0), otherEndValues, -1);
-			newLink->assignFeatureValue(newLink->getType()->getMemberEnd()->at(1), definingEndValues, -1);
-		
-			allLinks->add(newLink);
+		if(definingPort == otherEnd->getRole())
+		{
+			definingEndIndex = 1;
+			otherEndIndex = 0; 
+			definingEnd = currentConnector->getEnd()->at(1);; 
+			otherEnd = currentConnector->getEnd()->at(0);;
 		}
+		
+		std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> dummyBag(new Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>());
+		otherEndValues = interactionPoint->getReferent()->getValues(currentConnector->getType()->getMemberEnd()->at(otherEndIndex), dummyBag);
+			
+		//If other end of connector is a port, the corresponding FeatureValue has to be retrieved as CS_InteractionPoint from its owner
+		//instead of being retrieved from this connector end as just a CS_Reference
+		if(std::dynamic_pointer_cast<uml::Port>(otherEnd->getRole()) != nullptr)
+		{
+			//otherEndValues->at(0) is passed to retrieve the ports owner later on
+			otherEndValues = this->retrieveEndValueAsInteractionPoint(otherEndValues->at(0), otherEnd);
+		}
+			
+		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Link> newLink = [getPSCSStructuredClassifierFactory()/]->createCS_Link();
+		newLink->setType(currentConnector->getType());
+		newLink->assignFeatureValue(newLink->getType()->getMemberEnd()->at(definingEndIndex), definingEndValues, -1);
+		newLink->assignFeatureValue(newLink->getType()->getMemberEnd()->at(otherEndIndex), otherEndValues, -1);
+			
+		allLinks->add(newLink);
 	}
 	
 	return allLinks;
