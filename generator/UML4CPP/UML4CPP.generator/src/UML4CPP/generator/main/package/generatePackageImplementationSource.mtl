@@ -213,7 +213,7 @@ void [packageName/]::createPackageClasses(std::shared_ptr<uml::Package> [aPackag
 	[/if]
 	[/for]
 [/for]
-[for (anOpaqueBehavior : OpaqueBehavior | aPackage.ownedMember->filter(OpaqueBehavior))]
+[for (anOpaqueBehavior : OpaqueBehavior | aPackage.ownedMember->filter(OpaqueBehavior)->addAll(aPackage.ownedMember)->filter(Activity).ownedMember->filter(OpaqueBehavior))]
 	[anOpaqueBehavior.generateOpaqueBehaviorCreation()/]
 [/for]
 } 
@@ -349,7 +349,7 @@ void [packageName/]::initializePackageClasses()
 	[if (aClass.ownedAttribute->select(name=aAttribute.name)->size() = 0)][aAttribute.addInterfaceAttribute(aClass)/][/if]
 	[/for]
 [/for]
-[for (anOpaqueBehavior : OpaqueBehavior | aPackage.ownedMember->filter(OpaqueBehavior))]
+[for (anOpaqueBehavior : OpaqueBehavior | aPackage.ownedMember->filter(OpaqueBehavior)->addAll(aPackage.ownedMember)->filter(Activity).ownedMember->filter(OpaqueBehavior))]
 	[anOpaqueBehavior.generateOpaqueBehaviorInitialization()/]
 [/for]
 }
