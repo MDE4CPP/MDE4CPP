@@ -115,8 +115,8 @@ void [className/]::removeValue(std::shared_ptr<uml::StructuralFeature> feature, 
 
 	if (m_umlValue == nullptr)
 	{
-		std::cerr << __PRETTY_FUNCTION__ << ": not implemented for object lists" << std::endl;
-		throw "UnsupportedParameterException";	
+		std::cerr << __PRETTY_FUNCTION__ << ": no value stored inside [className/] (property: " << property->getName() << ")" << std::endl;
+		throw "NullPointerException";	
 	}
 
 [for (aProperty : Property | aPackage.getStructuralFeaturesFromRSTVA(aClassifier).oclAsType(Property))]
@@ -185,7 +185,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> [className/]::getValues(std
 
 	if (m_umlValue == nullptr)
 	{
-		std::cerr << __PRETTY_FUNCTION__ << ": no value stored inside [className/]" << std::endl;
+		std::cerr << __PRETTY_FUNCTION__ << ": no value stored inside [className/] (property: " << property->getName() << ")" << std::endl;
 		throw "NullPointerException";	
 	}
 
@@ -264,8 +264,8 @@ void [className/]::setFeatureValue(std::shared_ptr<uml::StructuralFeature> featu
 
 	if (m_umlValue == nullptr)
 	{
-		std::cerr << __PRETTY_FUNCTION__ << ": not implemented for object lists" << std::endl;
-		throw "UnsupportedParameterException";
+		std::cerr << __PRETTY_FUNCTION__ << ": no value stored inside [className/] (property: " << property->getName() << ")" << std::endl;
+		throw "NullPointerException";	
 	}
 
 	if (values->size() == 0)
