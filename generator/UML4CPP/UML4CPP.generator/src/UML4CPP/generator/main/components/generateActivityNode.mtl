@@ -219,7 +219,7 @@
 	[action.memberName()/]->getOutput()->push_back([action.result.memberName()/]); // subset/union in not implemented for upper=1
 [/if]
 [if (not action.removeAt.oclIsUndefined())]
-	[action.removeAt.memberName()/] = factory->create[action.removeAt.eClass().name/]_in_AddStructuralFeatureValueAction([action.removeAt.owner.oclAsType(NamedElement).memberName()/]);
+	[action.removeAt.memberName()/] = factory->create[action.removeAt.eClass().name/]_in_WriteStructuralFeatureAction([action.removeAt.owner.oclAsType(NamedElement).memberName()/]);
 	[action.memberName()/]->getInput()->push_back([action.removeAt.memberName()/]); // subset/union in not implemented for upper=1
 [/if]
 [/let]
