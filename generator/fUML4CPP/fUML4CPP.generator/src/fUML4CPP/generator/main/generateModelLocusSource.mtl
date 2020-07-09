@@ -19,9 +19,10 @@
 [import UML4CPP::generator::main::helpers::nameHelper /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
 
+[query private getAllLocusClasses(aPackage : Package) : Set(Class) = aPackage.allOwnedElements()->filter(Class)->asSet()->flatten()->addAll(aPackage.getClassesOfCreateObjectAction()) /]
 [query private getClassesOfCreateObjectAction(aPackage : Package) : Set(Class) = aPackage.allOwnedElements()->filter(CreateObjectAction).classifier->asSet()->flatten()->filter(Class) /]
 [query private getClassesOfCreateObjectActionForPackage(aPackage : Package, classPackage : Package) : Set(Class) = aPackage.getClassesOfCreateObjectAction()->select(aClass : Class | aClass.getNearestPackage() = classPackage)->sortedBy(name) /]
-[query private getClassPackagesOfCreateObjectAction(aPackage : Package) : Set(Package) = aPackage.getClassesOfCreateObjectAction().getNamespace()->asSet()->flatten()->sortedBy(name) /]
+[query private getClassPackagesOfCreateObjectAction(aPackage : Package) : Set(Package) = aPackage.getAllLocusClasses().getNamespace()->asSet()->flatten()->sortedBy(name) /]
 
 [template public generateModelLocusSource(aPackage : Package) 
 {
