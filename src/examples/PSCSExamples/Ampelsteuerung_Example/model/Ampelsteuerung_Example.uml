@@ -1,82 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_PmmP8LAqEeert7O7oCVCsA" name="Ampelsteuerung_Example">
   <eAnnotations xmi:id="_SS2-ELGGEeqsrLyVjRVsCQ" source="prepareApplication">
-    <details xmi:id="_Vx3bkLGGEeqsrLyVjRVsCQ" key="sourceCodeMain" value="std::shared_ptr&lt;Emerg_Module> emerg_module = factory->createEmerg_Module();&#xA;&#xA;emerg_module->supervise();"/>
+    <details xmi:id="_Vx3bkLGGEeqsrLyVjRVsCQ" key="sourceCodeMain" value="std::shared_ptr&lt;SafetyModule> safetyModule = factory->createSafetyModule();&#xA;&#xA;safetyModule->supervise();"/>
   </eAnnotations>
   <eAnnotations xmi:id="_XwOlsLGGEeqsrLyVjRVsCQ" source="BuildMode">
     <details xmi:id="_a38kkLGGEeqsrLyVjRVsCQ" key="type" value="library"/>
   </eAnnotations>
-  <packagedElement xmi:type="uml:Class" xmi:id="_IHAPELF7EeqsrLyVjRVsCQ" name="Emerg_Module">
-    <ownedAttribute xmi:id="_z-vY8LF9EeqsrLyVjRVsCQ" name="mUnit" type="_Mr4IcLF7EeqsrLyVjRVsCQ" aggregation="composite"/>
-    <ownedAttribute xmi:id="_D-v44LF-EeqsrLyVjRVsCQ" name="wUnit" type="_ZiE-0LF7EeqsrLyVjRVsCQ" aggregation="composite"/>
-    <ownedConnector xmi:id="_OX0lgLF-EeqsrLyVjRVsCQ" name="c_mUnit_wUnit" type="_xsyH8LF-EeqsrLyVjRVsCQ">
-      <end xmi:id="_QUP18LF-EeqsrLyVjRVsCQ" partWithPort="_z-vY8LF9EeqsrLyVjRVsCQ" role="_bHfykLF9EeqsrLyVjRVsCQ"/>
-      <end xmi:id="_QtbK8LF-EeqsrLyVjRVsCQ" partWithPort="_D-v44LF-EeqsrLyVjRVsCQ" role="_T8fkcLF9EeqsrLyVjRVsCQ"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_NZxm4MeNEeqjX9fZDPwOyA" name="SafetyModule">
+    <ownedAttribute xmi:id="_p6F60MePEeqjX9fZDPwOyA" name="mUnit" type="_OFI4EMeNEeqjX9fZDPwOyA" aggregation="composite"/>
+    <ownedAttribute xmi:id="_qqYIQMePEeqjX9fZDPwOyA" name="wUnit" type="_OvKsgMeNEeqjX9fZDPwOyA" aggregation="composite"/>
+    <ownedConnector xmi:id="_wX6S0MePEeqjX9fZDPwOyA" name="C_mUnit__wUnit" type="_IaAr0MeOEeqjX9fZDPwOyA">
+      <end xmi:id="_1ZrjkMePEeqjX9fZDPwOyA" partWithPort="_p6F60MePEeqjX9fZDPwOyA" role="_T3MrYMePEeqjX9fZDPwOyA"/>
+      <end xmi:id="_10c0AMePEeqjX9fZDPwOyA" partWithPort="_qqYIQMePEeqjX9fZDPwOyA" role="_2YpisMeOEeqjX9fZDPwOyA"/>
     </ownedConnector>
-    <ownedBehavior xmi:type="uml:Activity" xmi:id="_0ye7ULGDEeqsrLyVjRVsCQ" name="actSupervise" specification="_z2d3oLGGEeqsrLyVjRVsCQ" node="_SOTgILGEEeqsrLyVjRVsCQ _X0g6sLGEEeqsrLyVjRVsCQ _7oJ9MLGEEeqsrLyVjRVsCQ">
-      <edge xmi:type="uml:ObjectFlow" xmi:id="_ONPpALGFEeqsrLyVjRVsCQ" target="_X0hhwLGEEeqsrLyVjRVsCQ" source="_SOUHMLGEEeqsrLyVjRVsCQ"/>
-      <edge xmi:type="uml:ObjectFlow" xmi:id="_PAGCQLGFEeqsrLyVjRVsCQ" target="_7oJ9MbGEEeqsrLyVjRVsCQ" source="_X0hhwbGEEeqsrLyVjRVsCQ"/>
-      <node xmi:type="uml:ReadSelfAction" xmi:id="_SOTgILGEEeqsrLyVjRVsCQ" name="ReadSelfAction1">
-        <result xmi:id="_SOUHMLGEEeqsrLyVjRVsCQ" name="result" outgoing="_ONPpALGFEeqsrLyVjRVsCQ" type="_IHAPELF7EeqsrLyVjRVsCQ"/>
+    <ownedBehavior xmi:type="uml:Activity" xmi:id="_-szUwMePEeqjX9fZDPwOyA" name="actSupervise" specification="_86NVwMePEeqjX9fZDPwOyA" node="_SbTDMMeREeqyCIYYeX0K-g _U5aEYMeREeqyCIYYeX0K-g _bxTJQMeREeqyCIYYeX0K-g _rjf2sMeREeqyCIYYeX0K-g">
+      <edge xmi:type="uml:ControlFlow" xmi:id="_oL3MgMeREeqyCIYYeX0K-g" target="_U5aEYMeREeqyCIYYeX0K-g" source="_SbTDMMeREeqyCIYYeX0K-g">
+        <guard xmi:type="uml:LiteralBoolean" xmi:id="_oL3MgceREeqyCIYYeX0K-g" name="Initial1_To_ReadSelf_guard" value="true"/>
+        <weight xmi:type="uml:LiteralInteger" xmi:id="_oL3MgseREeqyCIYYeX0K-g" name="Initial1_To_ReadSelf_weight"/>
+      </edge>
+      <edge xmi:type="uml:ObjectFlow" xmi:id="_o7jkEMeREeqyCIYYeX0K-g" target="_bxTJQceREeqyCIYYeX0K-g" source="_U5aEYceREeqyCIYYeX0K-g"/>
+      <edge xmi:type="uml:ObjectFlow" xmi:id="_zvSMYMeREeqyCIYYeX0K-g" target="_rjf2sceREeqyCIYYeX0K-g" source="_bxTJQseREeqyCIYYeX0K-g"/>
+      <node xmi:type="uml:InitialNode" xmi:id="_SbTDMMeREeqyCIYYeX0K-g" name="Initial1" outgoing="_oL3MgMeREeqyCIYYeX0K-g"/>
+      <node xmi:type="uml:ReadSelfAction" xmi:id="_U5aEYMeREeqyCIYYeX0K-g" name="ReadSelf" incoming="_oL3MgMeREeqyCIYYeX0K-g">
+        <result xmi:id="_U5aEYceREeqyCIYYeX0K-g" name="result" outgoing="_o7jkEMeREeqyCIYYeX0K-g" type="_NZxm4MeNEeqjX9fZDPwOyA"/>
       </node>
-      <node xmi:type="uml:ReadStructuralFeatureAction" xmi:id="_X0g6sLGEEeqsrLyVjRVsCQ" name="ReadMonitor" structuralFeature="_z-vY8LF9EeqsrLyVjRVsCQ">
-        <object xmi:id="_X0hhwLGEEeqsrLyVjRVsCQ" name="object" incoming="_ONPpALGFEeqsrLyVjRVsCQ" type="_IHAPELF7EeqsrLyVjRVsCQ"/>
-        <result xmi:id="_X0hhwbGEEeqsrLyVjRVsCQ" name="out" outgoing="_PAGCQLGFEeqsrLyVjRVsCQ" type="_Mr4IcLF7EeqsrLyVjRVsCQ"/>
+      <node xmi:type="uml:ReadStructuralFeatureAction" xmi:id="_bxTJQMeREeqyCIYYeX0K-g" name="ReadMonitorUnit" structuralFeature="_p6F60MePEeqjX9fZDPwOyA">
+        <object xmi:id="_bxTJQceREeqyCIYYeX0K-g" name="object" incoming="_o7jkEMeREeqyCIYYeX0K-g" type="_NZxm4MeNEeqjX9fZDPwOyA"/>
+        <result xmi:id="_bxTJQseREeqyCIYYeX0K-g" name="out" outgoing="_zvSMYMeREeqyCIYYeX0K-g" type="_OFI4EMeNEeqjX9fZDPwOyA"/>
       </node>
-      <node xmi:type="uml:CallOperationAction" xmi:id="_7oJ9MLGEEeqsrLyVjRVsCQ" name="callAlarm" operation="_3zpJwLGEEeqsrLyVjRVsCQ">
-        <target xmi:id="_7oJ9MbGEEeqsrLyVjRVsCQ" name="target" incoming="_PAGCQLGFEeqsrLyVjRVsCQ" type="_Mr4IcLF7EeqsrLyVjRVsCQ"/>
+      <node xmi:type="uml:CallOperationAction" xmi:id="_rjf2sMeREeqyCIYYeX0K-g" name="callMonitor" operation="_hMzakMePEeqjX9fZDPwOyA">
+        <target xmi:id="_rjf2sceREeqyCIYYeX0K-g" name="target" incoming="_zvSMYMeREeqyCIYYeX0K-g" type="_OFI4EMeNEeqjX9fZDPwOyA"/>
       </node>
     </ownedBehavior>
-    <ownedOperation xmi:id="_z2d3oLGGEeqsrLyVjRVsCQ" name="supervise" method="_0ye7ULGDEeqsrLyVjRVsCQ"/>
+    <ownedOperation xmi:id="_86NVwMePEeqjX9fZDPwOyA" name="supervise" method="_-szUwMePEeqjX9fZDPwOyA"/>
   </packagedElement>
-  <packagedElement xmi:type="uml:Class" xmi:id="_Mr4IcLF7EeqsrLyVjRVsCQ" name="Emerg_MonitorUnit">
-    <ownedAttribute xmi:type="uml:Port" xmi:id="_bHfykLF9EeqsrLyVjRVsCQ" name="portSC" type="_u9UYYLF7EeqsrLyVjRVsCQ" aggregation="composite" isConjugated="true"/>
-    <ownedBehavior xmi:type="uml:Activity" xmi:id="_qJcHwLF9EeqsrLyVjRVsCQ" name="actAlarm" specification="_3zpJwLGEEeqsrLyVjRVsCQ" node="_e-Pd0LGBEeqsrLyVjRVsCQ _z8mRoLGCEeqsrLyVjRVsCQ _7YZU0LGCEeqsrLyVjRVsCQ">
-      <edge xmi:type="uml:ObjectFlow" xmi:id="_idxN0LGDEeqsrLyVjRVsCQ" target="_z8m4sLGCEeqsrLyVjRVsCQ" source="_e-QE4LGBEeqsrLyVjRVsCQ"/>
-      <edge xmi:type="uml:ObjectFlow" xmi:id="_quH6cLGDEeqsrLyVjRVsCQ" target="_2lSLILGCEeqsrLyVjRVsCQ" source="_7YZ74LGCEeqsrLyVjRVsCQ"/>
-      <node xmi:type="uml:ReadSelfAction" xmi:id="_e-Pd0LGBEeqsrLyVjRVsCQ" name="ReadSelfAction1">
-        <result xmi:id="_e-QE4LGBEeqsrLyVjRVsCQ" name="this" outgoing="_idxN0LGDEeqsrLyVjRVsCQ" type="_Mr4IcLF7EeqsrLyVjRVsCQ"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_OFI4EMeNEeqjX9fZDPwOyA" name="MonitorUnit">
+    <ownedAttribute xmi:type="uml:Port" xmi:id="_T3MrYMePEeqjX9fZDPwOyA" name="p" type="_QpY9gMeNEeqjX9fZDPwOyA" aggregation="composite" isConjugated="true"/>
+    <ownedBehavior xmi:type="uml:Activity" xmi:id="_jwF2sMePEeqjX9fZDPwOyA" name="actMonitor" specification="_hMzakMePEeqjX9fZDPwOyA" node="_CWEPkMeSEeqyCIYYeX0K-g _Gitu0MeVEeqyCIYYeX0K-g _MoBgMMeVEeqyCIYYeX0K-g _bOxHIMeVEeqyCIYYeX0K-g">
+      <edge xmi:type="uml:ObjectFlow" xmi:id="_kkCNYMeVEeqyCIYYeX0K-g" target="_bOxHIceVEeqyCIYYeX0K-g" source="_Gitu0ceVEeqyCIYYeX0K-g"/>
+      <edge xmi:type="uml:ObjectFlow" xmi:id="_n3jMkMeVEeqyCIYYeX0K-g" target="_hrNmIMeVEeqyCIYYeX0K-g" source="_MoBgMceVEeqyCIYYeX0K-g"/>
+      <edge xmi:type="uml:ControlFlow" xmi:id="_uskjoMeVEeqyCIYYeX0K-g" target="_bOxHIMeVEeqyCIYYeX0K-g" source="_CWEPkMeSEeqyCIYYeX0K-g">
+        <guard xmi:type="uml:LiteralBoolean" xmi:id="_uskjoceVEeqyCIYYeX0K-g" name="Initial1_To_callAnnounce_guard" value="true"/>
+        <weight xmi:type="uml:LiteralInteger" xmi:id="_uskjoseVEeqyCIYYeX0K-g" name="Initial1_To_callAnnounce_weight"/>
+      </edge>
+      <node xmi:type="uml:InitialNode" xmi:id="_CWEPkMeSEeqyCIYYeX0K-g" name="Initial1" outgoing="_uskjoMeVEeqyCIYYeX0K-g"/>
+      <node xmi:type="uml:ReadSelfAction" xmi:id="_Gitu0MeVEeqyCIYYeX0K-g" name="ReadSelf">
+        <result xmi:id="_Gitu0ceVEeqyCIYYeX0K-g" name="result" outgoing="_kkCNYMeVEeqyCIYYeX0K-g" type="_OFI4EMeNEeqjX9fZDPwOyA"/>
       </node>
-      <node xmi:type="uml:CallOperationAction" xmi:id="_z8mRoLGCEeqsrLyVjRVsCQ" name="callAnnounce" onPort="_bHfykLF9EeqsrLyVjRVsCQ" operation="_n_N5oLGCEeqsrLyVjRVsCQ">
-        <argument xmi:id="_2lSLILGCEeqsrLyVjRVsCQ" name="message" incoming="_quH6cLGDEeqsrLyVjRVsCQ">
-          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
-        </argument>
-        <target xmi:id="_z8m4sLGCEeqsrLyVjRVsCQ" name="target" incoming="_idxN0LGDEeqsrLyVjRVsCQ" type="_Mr4IcLF7EeqsrLyVjRVsCQ"/>
-      </node>
-      <node xmi:type="uml:ValueSpecificationAction" xmi:id="_7YZU0LGCEeqsrLyVjRVsCQ" name="MessageValueSpecification">
-        <result xmi:id="_7YZ74LGCEeqsrLyVjRVsCQ" name="out" outgoing="_quH6cLGDEeqsrLyVjRVsCQ">
+      <node xmi:type="uml:ValueSpecificationAction" xmi:id="_MoBgMMeVEeqyCIYYeX0K-g" name="messageSpecification">
+        <result xmi:id="_MoBgMceVEeqyCIYYeX0K-g" name="out" outgoing="_n3jMkMeVEeqyCIYYeX0K-g">
           <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
         </result>
-        <value xmi:type="uml:LiteralString" xmi:id="_HIW74LGDEeqsrLyVjRVsCQ" value="DRIVE CAREFULLY! TRAFFIC LIGHTS NOT WORKING!"/>
+        <value xmi:type="uml:LiteralString" xmi:id="_O2YOIMeVEeqyCIYYeX0K-g" value="Test">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </value>
+      </node>
+      <node xmi:type="uml:CallOperationAction" xmi:id="_bOxHIMeVEeqyCIYYeX0K-g" name="callAnnounce" incoming="_uskjoMeVEeqyCIYYeX0K-g" operation="_dMUAoMePEeqjX9fZDPwOyA">
+        <argument xmi:id="_hrNmIMeVEeqyCIYYeX0K-g" name="message" incoming="_n3jMkMeVEeqyCIYYeX0K-g">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </argument>
+        <target xmi:id="_bOxHIceVEeqyCIYYeX0K-g" name="target" incoming="_kkCNYMeVEeqyCIYYeX0K-g" type="_OFI4EMeNEeqjX9fZDPwOyA"/>
       </node>
     </ownedBehavior>
-    <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_qyg1AL-WEeqzW83R9cQTRQ" name="test">
-      <language>CPP</language>
-      <body>std::cout&lt;&lt;message&lt;&lt;std::endl</body>
-    </ownedBehavior>
-    <ownedOperation xmi:id="_3zpJwLGEEeqsrLyVjRVsCQ" name="alarm" method="_qJcHwLF9EeqsrLyVjRVsCQ"/>
-    <ownedOperation xmi:id="_n_N5oLGCEeqsrLyVjRVsCQ" name="announce">
-      <ownedParameter xmi:id="_r1tqELGCEeqsrLyVjRVsCQ" name="message">
-        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
-      </ownedParameter>
-    </ownedOperation>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Class" xmi:id="_ZiE-0LF7EeqsrLyVjRVsCQ" name="Emerg_WarningUnit">
-    <ownedAttribute xmi:type="uml:Port" xmi:id="_T8fkcLF9EeqsrLyVjRVsCQ" name="portSC" type="_u9UYYLF7EeqsrLyVjRVsCQ" aggregation="composite"/>
-    <ownedAttribute xmi:id="_M7Mr8LF9EeqsrLyVjRVsCQ" name="emerg_SC" type="_VlR8oLF8EeqsrLyVjRVsCQ" aggregation="composite"/>
-    <ownedConnector xmi:id="_1-89MLF9EeqsrLyVjRVsCQ" name="c_portSC_emerg_SC" type="_kwXfYLF_EeqsrLyVjRVsCQ">
-      <end xmi:id="_5A7gcLF9EeqsrLyVjRVsCQ" role="_T8fkcLF9EeqsrLyVjRVsCQ"/>
-      <end xmi:id="_5t0boLF9EeqsrLyVjRVsCQ" role="_M7Mr8LF9EeqsrLyVjRVsCQ"/>
-    </ownedConnector>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Class" xmi:id="_VlR8oLF8EeqsrLyVjRVsCQ" name="Emerg_SpeakerControl">
-    <ownedAttribute xmi:id="_Y2LlULF_EeqsrLyVjRVsCQ" name="sc" type="_u9UYYLF7EeqsrLyVjRVsCQ" association="_kwXfYLF_EeqsrLyVjRVsCQ">
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_ZT74ULF_EeqsrLyVjRVsCQ" value="1"/>
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_ZkgD4LF_EeqsrLyVjRVsCQ" value="1"/>
-    </ownedAttribute>
-    <interfaceRealization xmi:id="_lXls4LF-EeqsrLyVjRVsCQ" name="ISpeakerControl_Realization" client="_VlR8oLF8EeqsrLyVjRVsCQ" supplier="_hvHRsLF7EeqsrLyVjRVsCQ" contract="_hvHRsLF7EeqsrLyVjRVsCQ"/>
-    <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_mxHWgLF8EeqsrLyVjRVsCQ" name="fbAnnounce" specification="_ZpyT4LF8EeqsrLyVjRVsCQ">
-      <ownedParameter xmi:id="_0PUoELF8EeqsrLyVjRVsCQ" name="message">
+    <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_YxoEYMeXEeqyCIYYeX0K-g" name="fbAnnounce" specification="_dMUAoMePEeqjX9fZDPwOyA">
+      <ownedParameter xmi:id="_YxoEYceXEeqyCIYYeX0K-g" name="message">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
       </ownedParameter>
       <language>INCLUDE</language>
@@ -89,39 +76,62 @@
 	Beep(440, 1000);&#xD;
 }</body>
     </ownedBehavior>
-    <ownedOperation xmi:id="_ZpyT4LF8EeqsrLyVjRVsCQ" name="announce" method="_mxHWgLF8EeqsrLyVjRVsCQ">
-      <ownedParameter xmi:id="_ZpyT4bF8EeqsrLyVjRVsCQ" name="message">
+    <ownedOperation xmi:id="_hMzakMePEeqjX9fZDPwOyA" name="monitor" method="_jwF2sMePEeqjX9fZDPwOyA"/>
+    <ownedOperation xmi:id="_dMUAoMePEeqjX9fZDPwOyA" name="announce" method="_YxoEYMeXEeqyCIYYeX0K-g">
+      <ownedParameter xmi:id="_eX3NwMePEeqjX9fZDPwOyA" name="message">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
       </ownedParameter>
     </ownedOperation>
   </packagedElement>
-  <packagedElement xmi:type="uml:Class" xmi:id="_u9UYYLF7EeqsrLyVjRVsCQ" name="SpeakerControl">
-    <ownedAttribute xmi:id="_20trELF-EeqsrLyVjRVsCQ" name="sc_1" type="_u9UYYLF7EeqsrLyVjRVsCQ" association="_xsyH8LF-EeqsrLyVjRVsCQ">
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_HIpzoLF_EeqsrLyVjRVsCQ" value="1"/>
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_HcCCoLF_EeqsrLyVjRVsCQ" value="1"/>
-    </ownedAttribute>
-    <ownedAttribute xmi:id="_GidWULF_EeqsrLyVjRVsCQ" name="sc_2" type="_u9UYYLF7EeqsrLyVjRVsCQ" association="_xsyH8LF-EeqsrLyVjRVsCQ">
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_NM2KsLF_EeqsrLyVjRVsCQ" value="1"/>
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_NiviMLF_EeqsrLyVjRVsCQ" value="1"/>
-    </ownedAttribute>
-    <ownedAttribute xmi:id="_Pa5WoLF_EeqsrLyVjRVsCQ" name="emerg_sc" type="_VlR8oLF8EeqsrLyVjRVsCQ" association="_kwXfYLF_EeqsrLyVjRVsCQ">
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_QIAUQLF_EeqsrLyVjRVsCQ" value="1"/>
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_QV9QsLF_EeqsrLyVjRVsCQ" value="1"/>
-    </ownedAttribute>
-    <interfaceRealization xmi:id="_dyHwULF-EeqsrLyVjRVsCQ" name="ISpeakerControl_Realization" client="_u9UYYLF7EeqsrLyVjRVsCQ" supplier="_hvHRsLF7EeqsrLyVjRVsCQ" contract="_hvHRsLF7EeqsrLyVjRVsCQ"/>
-    <ownedOperation xmi:id="_Y09ksLF8EeqsrLyVjRVsCQ" name="announce">
-      <ownedParameter xmi:id="_Y09ksbF8EeqsrLyVjRVsCQ" name="message">
+  <packagedElement xmi:type="uml:Class" xmi:id="_OvKsgMeNEeqjX9fZDPwOyA" name="WarningUnit">
+    <ownedAttribute xmi:type="uml:Port" xmi:id="_2YpisMeOEeqjX9fZDPwOyA" name="q" type="_QpY9gMeNEeqjX9fZDPwOyA" aggregation="composite"/>
+    <ownedAttribute xmi:id="_839IcMeOEeqjX9fZDPwOyA" name="wSc" type="_PfJX8MeNEeqjX9fZDPwOyA" aggregation="composite"/>
+    <ownedConnector xmi:id="_ByFgIMePEeqjX9fZDPwOyA" name="C_p_wSc" type="_TllzcMeOEeqjX9fZDPwOyA">
+      <end xmi:id="_FE8YAMePEeqjX9fZDPwOyA" role="_2YpisMeOEeqjX9fZDPwOyA"/>
+      <end xmi:id="_F0xScMePEeqjX9fZDPwOyA" role="_839IcMeOEeqjX9fZDPwOyA"/>
+    </ownedConnector>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_PfJX8MeNEeqjX9fZDPwOyA" name="WarningSpeakerCtrl">
+    <ownedAttribute xmi:id="_QBvSMMeOEeqjX9fZDPwOyA" name="sc" type="_QpY9gMeNEeqjX9fZDPwOyA" association="_TllzcMeOEeqjX9fZDPwOyA"/>
+    <interfaceRealization xmi:id="_fF4m0MeOEeqjX9fZDPwOyA" name="ISpeakerCtrl_Realization" client="_PfJX8MeNEeqjX9fZDPwOyA" supplier="_ebPj0MeNEeqjX9fZDPwOyA" contract="_ebPj0MeNEeqjX9fZDPwOyA"/>
+    <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_ipuhAMeOEeqjX9fZDPwOyA" name="fbAnnounce" specification="_webnAMeOEeqjX9fZDPwOyA">
+      <ownedParameter xmi:id="_k-AQwMeOEeqjX9fZDPwOyA" name="message">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedParameter>
+      <language>INCLUDE</language>
+      <language>CPP</language>
+      <body>#include &quot;windows.h&quot;</body>
+      <body>for(unsigned int i=0; i&lt;4; i++)&#xD;
+{&#xD;
+	std::cout&lt;&lt;message&lt;&lt;std::endl;&#xD;
+	Beep(880, 1000);&#xD;
+	Beep(440, 1000);&#xD;
+}</body>
+    </ownedBehavior>
+    <ownedOperation xmi:id="_webnAMeOEeqjX9fZDPwOyA" name="announce" method="_ipuhAMeOEeqjX9fZDPwOyA">
+      <ownedParameter xmi:id="_y8ioMMeOEeqjX9fZDPwOyA" name="message">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
       </ownedParameter>
     </ownedOperation>
   </packagedElement>
-  <packagedElement xmi:type="uml:Interface" xmi:id="_hvHRsLF7EeqsrLyVjRVsCQ" name="ISpeakerControl">
-    <ownedOperation xmi:id="_jsQT0LF7EeqsrLyVjRVsCQ" name="announce">
-      <ownedParameter xmi:id="_mrJG0LF7EeqsrLyVjRVsCQ" name="message">
+  <packagedElement xmi:type="uml:Class" xmi:id="_QpY9gMeNEeqjX9fZDPwOyA" name="SpeakerCtrl">
+    <ownedAttribute xmi:id="_3fmZIMeNEeqjX9fZDPwOyA" name="sc1" type="_QpY9gMeNEeqjX9fZDPwOyA" association="_IaAr0MeOEeqjX9fZDPwOyA"/>
+    <ownedAttribute xmi:id="_4cMkQMeNEeqjX9fZDPwOyA" name="sc2" type="_QpY9gMeNEeqjX9fZDPwOyA" association="_IaAr0MeOEeqjX9fZDPwOyA"/>
+    <ownedAttribute xmi:id="_9GYbcMeNEeqjX9fZDPwOyA" name="wSc" type="_PfJX8MeNEeqjX9fZDPwOyA" association="_TllzcMeOEeqjX9fZDPwOyA"/>
+    <interfaceRealization xmi:id="_sy-eYMeNEeqjX9fZDPwOyA" name="ISpeakerCtrl_Realization" client="_QpY9gMeNEeqjX9fZDPwOyA" supplier="_ebPj0MeNEeqjX9fZDPwOyA" contract="_ebPj0MeNEeqjX9fZDPwOyA"/>
+    <ownedOperation xmi:id="_w8htsMeNEeqjX9fZDPwOyA" name="announce">
+      <ownedParameter xmi:id="_yk3kgMeNEeqjX9fZDPwOyA" name="message">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
       </ownedParameter>
     </ownedOperation>
   </packagedElement>
-  <packagedElement xmi:type="uml:Association" xmi:id="_xsyH8LF-EeqsrLyVjRVsCQ" name="Assoc_sc_sc" memberEnd="_20trELF-EeqsrLyVjRVsCQ _GidWULF_EeqsrLyVjRVsCQ"/>
-  <packagedElement xmi:type="uml:Association" xmi:id="_kwXfYLF_EeqsrLyVjRVsCQ" name="Assoc_sc_emerg_sc" memberEnd="_Y2LlULF_EeqsrLyVjRVsCQ _Pa5WoLF_EeqsrLyVjRVsCQ"/>
+  <packagedElement xmi:type="uml:Interface" xmi:id="_ebPj0MeNEeqjX9fZDPwOyA" name="ISpeakerCtrl">
+    <ownedOperation xmi:id="_gMpQAMeNEeqjX9fZDPwOyA" name="announce">
+      <ownedParameter xmi:id="_h_PPAMeNEeqjX9fZDPwOyA" name="message">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedParameter>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_IaAr0MeOEeqjX9fZDPwOyA" name="Association_SpeakerCtrl__SpeakerCtrl" memberEnd="_3fmZIMeNEeqjX9fZDPwOyA _4cMkQMeNEeqjX9fZDPwOyA"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="_TllzcMeOEeqjX9fZDPwOyA" name="Association_SpeakerCtrl_WarningSpeakerCtrl" memberEnd="_QBvSMMeOEeqjX9fZDPwOyA _9GYbcMeNEeqjX9fZDPwOyA"/>
 </uml:Model>
