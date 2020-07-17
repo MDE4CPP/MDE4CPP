@@ -32,7 +32,12 @@
 */]
 [template public generateAssociationInitialization(anAssociation : Association)]
 [anAssociation.memberName()/]->setName("[anAssociation.name/]");
+[comment] Problem: for correct functionality of connectors, associationEnds have to be added in the exact same order as defined in the model. Not sorted
 [for (memberEnd : Property | anAssociation.memberEnd->asOrderedSet()->sortedBy(myQualifiedName()))]
+[anAssociation.memberName()/]->getMemberEnd()->add([memberEnd.memberName()/]);
+[/for]
+[/comment]
+[for (memberEnd : Property | anAssociation.memberEnd)]
 [anAssociation.memberName()/]->getMemberEnd()->add([memberEnd.memberName()/]);
 [/for]
 [/template]
