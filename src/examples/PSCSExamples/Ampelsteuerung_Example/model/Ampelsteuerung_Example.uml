@@ -36,50 +36,81 @@
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="_OFI4EMeNEeqjX9fZDPwOyA" name="MonitorUnit">
     <ownedAttribute xmi:type="uml:Port" xmi:id="_T3MrYMePEeqjX9fZDPwOyA" name="p" type="_QpY9gMeNEeqjX9fZDPwOyA" aggregation="composite" isConjugated="true"/>
-    <ownedBehavior xmi:type="uml:Activity" xmi:id="_jwF2sMePEeqjX9fZDPwOyA" name="actMonitor" specification="_hMzakMePEeqjX9fZDPwOyA" node="_CWEPkMeSEeqyCIYYeX0K-g _Gitu0MeVEeqyCIYYeX0K-g _MoBgMMeVEeqyCIYYeX0K-g _bOxHIMeVEeqyCIYYeX0K-g">
-      <edge xmi:type="uml:ObjectFlow" xmi:id="_kkCNYMeVEeqyCIYYeX0K-g" target="_bOxHIceVEeqyCIYYeX0K-g" source="_Gitu0ceVEeqyCIYYeX0K-g"/>
+    <ownedBehavior xmi:type="uml:Activity" xmi:id="_jwF2sMePEeqjX9fZDPwOyA" name="actMonitor" specification="_hMzakMePEeqjX9fZDPwOyA" node="_CWEPkMeSEeqyCIYYeX0K-g _MoBgMMeVEeqyCIYYeX0K-g _bOxHIMeVEeqyCIYYeX0K-g _EbEhEMg-EeqfIZgAuNbvJw _Gtq10Mg-EeqfIZgAuNbvJw _XTzhoMg-EeqfIZgAuNbvJw">
       <edge xmi:type="uml:ObjectFlow" xmi:id="_n3jMkMeVEeqyCIYYeX0K-g" target="_hrNmIMeVEeqyCIYYeX0K-g" source="_MoBgMceVEeqyCIYYeX0K-g"/>
-      <edge xmi:type="uml:ControlFlow" xmi:id="_uskjoMeVEeqyCIYYeX0K-g" target="_bOxHIMeVEeqyCIYYeX0K-g" source="_CWEPkMeSEeqyCIYYeX0K-g">
-        <guard xmi:type="uml:LiteralBoolean" xmi:id="_uskjoceVEeqyCIYYeX0K-g" name="Initial1_To_callAnnounce_guard" value="true"/>
-        <weight xmi:type="uml:LiteralInteger" xmi:id="_uskjoseVEeqyCIYYeX0K-g" name="Initial1_To_callAnnounce_weight"/>
+      <edge xmi:type="uml:ControlFlow" xmi:id="_FuoasMg-EeqfIZgAuNbvJw" target="_EbEhEMg-EeqfIZgAuNbvJw" source="_CWEPkMeSEeqyCIYYeX0K-g">
+        <guard xmi:type="uml:LiteralBoolean" xmi:id="_Fuoascg-EeqfIZgAuNbvJw" name="Initial1_To_Merge1_guard" value="true"/>
+        <weight xmi:type="uml:LiteralInteger" xmi:id="_FupBwMg-EeqfIZgAuNbvJw" name="Initial1_To_Merge1_weight"/>
       </edge>
-      <node xmi:type="uml:InitialNode" xmi:id="_CWEPkMeSEeqyCIYYeX0K-g" name="Initial1" outgoing="_uskjoMeVEeqyCIYYeX0K-g"/>
-      <node xmi:type="uml:ReadSelfAction" xmi:id="_Gitu0MeVEeqyCIYYeX0K-g" name="ReadSelf">
-        <result xmi:id="_Gitu0ceVEeqyCIYYeX0K-g" name="result" outgoing="_kkCNYMeVEeqyCIYYeX0K-g" type="_OFI4EMeNEeqjX9fZDPwOyA"/>
-      </node>
+      <edge xmi:type="uml:ControlFlow" xmi:id="_Oyox0Mg-EeqfIZgAuNbvJw" target="_Gtq10Mg-EeqfIZgAuNbvJw" source="_EbEhEMg-EeqfIZgAuNbvJw">
+        <guard xmi:type="uml:LiteralBoolean" xmi:id="_Oyox0cg-EeqfIZgAuNbvJw" name="Merge1_To_checkForMalfunction_guard" value="true"/>
+        <weight xmi:type="uml:LiteralInteger" xmi:id="_Oyox0sg-EeqfIZgAuNbvJw" name="Merge1_To_checkForMalfunction_weight"/>
+      </edge>
+      <edge xmi:type="uml:ObjectFlow" xmi:id="_btMjwMg-EeqfIZgAuNbvJw" target="_XTzhoMg-EeqfIZgAuNbvJw" source="_Jpj_MMg-EeqfIZgAuNbvJw"/>
+      <edge xmi:type="uml:ControlFlow" xmi:id="_f6fDkMg-EeqfIZgAuNbvJw" name="noErrorOccured" target="_EbEhEMg-EeqfIZgAuNbvJw" source="_XTzhoMg-EeqfIZgAuNbvJw">
+        <guard xmi:type="uml:LiteralBoolean" xmi:id="_f6fDkcg-EeqfIZgAuNbvJw" name="Decision1_To_Merge1_guard"/>
+        <weight xmi:type="uml:LiteralInteger" xmi:id="_f6fDksg-EeqfIZgAuNbvJw" name="Decision1_To_Merge1_weight"/>
+      </edge>
+      <edge xmi:type="uml:ControlFlow" xmi:id="_mo3nIMg-EeqfIZgAuNbvJw" name="errorOccured" target="_bOxHIMeVEeqyCIYYeX0K-g" source="_XTzhoMg-EeqfIZgAuNbvJw">
+        <guard xmi:type="uml:LiteralBoolean" xmi:id="_mo4OMMg-EeqfIZgAuNbvJw" name="Decision1_To_callAnnounce_guard" value="true"/>
+        <weight xmi:type="uml:LiteralInteger" xmi:id="_mo4OMcg-EeqfIZgAuNbvJw" name="Decision1_To_callAnnounce_weight"/>
+      </edge>
+      <node xmi:type="uml:InitialNode" xmi:id="_CWEPkMeSEeqyCIYYeX0K-g" name="Initial1" outgoing="_FuoasMg-EeqfIZgAuNbvJw"/>
       <node xmi:type="uml:ValueSpecificationAction" xmi:id="_MoBgMMeVEeqyCIYYeX0K-g" name="messageSpecification">
         <result xmi:id="_MoBgMceVEeqyCIYYeX0K-g" name="out" outgoing="_n3jMkMeVEeqyCIYYeX0K-g">
           <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
         </result>
-        <value xmi:type="uml:LiteralString" xmi:id="_O2YOIMeVEeqyCIYYeX0K-g" value="Test">
+        <value xmi:type="uml:LiteralString" xmi:id="_O2YOIMeVEeqyCIYYeX0K-g" value="DRIVE CAREFULLY! TRAFFIC LIGHTS NOT WORKING!">
           <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
         </value>
       </node>
-      <node xmi:type="uml:CallOperationAction" xmi:id="_bOxHIMeVEeqyCIYYeX0K-g" name="callAnnounce" incoming="_uskjoMeVEeqyCIYYeX0K-g" operation="_dMUAoMePEeqjX9fZDPwOyA">
+      <node xmi:type="uml:CallOperationAction" xmi:id="_bOxHIMeVEeqyCIYYeX0K-g" name="callAnnounce" incoming="_mo3nIMg-EeqfIZgAuNbvJw" onPort="_T3MrYMePEeqjX9fZDPwOyA" operation="_dMUAoMePEeqjX9fZDPwOyA">
         <argument xmi:id="_hrNmIMeVEeqyCIYYeX0K-g" name="message" incoming="_n3jMkMeVEeqyCIYYeX0K-g">
           <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
         </argument>
-        <target xmi:id="_bOxHIceVEeqyCIYYeX0K-g" name="target" incoming="_kkCNYMeVEeqyCIYYeX0K-g" type="_OFI4EMeNEeqjX9fZDPwOyA"/>
+        <target xmi:id="_bOxHIceVEeqyCIYYeX0K-g" name="self" type="_OFI4EMeNEeqjX9fZDPwOyA"/>
       </node>
+      <node xmi:type="uml:MergeNode" xmi:id="_EbEhEMg-EeqfIZgAuNbvJw" name="Merge1" incoming="_FuoasMg-EeqfIZgAuNbvJw _f6fDkMg-EeqfIZgAuNbvJw" outgoing="_Oyox0Mg-EeqfIZgAuNbvJw"/>
+      <node xmi:type="uml:CallOperationAction" xmi:id="_Gtq10Mg-EeqfIZgAuNbvJw" name="checkForMalfunction" incoming="_Oyox0Mg-EeqfIZgAuNbvJw" operation="_iJfHMMg9EeqfIZgAuNbvJw">
+        <result xmi:id="_Jpj_MMg-EeqfIZgAuNbvJw" name="errorOccured" outgoing="_btMjwMg-EeqfIZgAuNbvJw">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+        </result>
+        <target xmi:id="_Gtrc4Mg-EeqfIZgAuNbvJw" name="self" type="_OFI4EMeNEeqjX9fZDPwOyA"/>
+      </node>
+      <node xmi:type="uml:DecisionNode" xmi:id="_XTzhoMg-EeqfIZgAuNbvJw" name="Decision1" incoming="_btMjwMg-EeqfIZgAuNbvJw" outgoing="_f6fDkMg-EeqfIZgAuNbvJw _mo3nIMg-EeqfIZgAuNbvJw"/>
     </ownedBehavior>
-    <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_YxoEYMeXEeqyCIYYeX0K-g" name="fbAnnounce" specification="_dMUAoMePEeqjX9fZDPwOyA">
-      <ownedParameter xmi:id="_YxoEYceXEeqyCIYYeX0K-g" name="message">
-        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_vLbXsMg2EeqfIZgAuNbvJw" name="fbCheckForMalfunction" specification="_iJfHMMg9EeqfIZgAuNbvJw">
+      <ownedParameter xmi:id="_CgzpQMg9EeqfIZgAuNbvJw" name="errorOccured" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
       </ownedParameter>
       <language>INCLUDE</language>
       <language>CPP</language>
-      <body>#include &quot;windows.h&quot;</body>
-      <body>for(unsigned int i=0; i&lt;4; i++)&#xD;
-{&#xD;
-	std::cout&lt;&lt;message&lt;&lt;std::endl;&#xD;
-	Beep(880, 1000);&#xD;
-	Beep(440, 1000);&#xD;
-}</body>
+      <body>#include &lt;random>&#xD;
+#include &lt;time.h>&#xD;
+#include &lt;windows.h></body>
+      <body>	std::mt19937 generator(time(0));&#xD;
+	std::uniform_int_distribution&lt;int> distribution(0,3);&#xD;
+	int rand = distribution(generator);&#xD;
+	int trigger = 2;&#xD;
+&#xD;
+	std::cout&lt;&lt;&quot;Monitoring...&quot;&lt;&lt;std::endl;&#xD;
+	Sleep(1000);&#xD;
+	&#xD;
+	errorOccured = (rand == trigger);&#xD;
+&#xD;
+	if(errorOccured) std::cout&lt;&lt;&quot;MALFUNCTION DETECTED!\n-MonitorUnit- : Requesting 'WarningSpeakerController'...\n&quot;&lt;&lt;std::endl;&#xD;
+&#xD;
+	return errorOccured;</body>
     </ownedBehavior>
     <ownedOperation xmi:id="_hMzakMePEeqjX9fZDPwOyA" name="monitor" method="_jwF2sMePEeqjX9fZDPwOyA"/>
-    <ownedOperation xmi:id="_dMUAoMePEeqjX9fZDPwOyA" name="announce" method="_YxoEYMeXEeqyCIYYeX0K-g">
+    <ownedOperation xmi:id="_dMUAoMePEeqjX9fZDPwOyA" name="announce">
       <ownedParameter xmi:id="_eX3NwMePEeqjX9fZDPwOyA" name="message">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="_iJfHMMg9EeqfIZgAuNbvJw" name="checkForMalfunction" method="_vLbXsMg2EeqfIZgAuNbvJw">
+      <ownedParameter xmi:id="_pLP5wMg9EeqfIZgAuNbvJw" name="errorOccured" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
       </ownedParameter>
     </ownedOperation>
   </packagedElement>
@@ -101,7 +132,8 @@
       <language>INCLUDE</language>
       <language>CPP</language>
       <body>#include &quot;windows.h&quot;</body>
-      <body>for(unsigned int i=0; i&lt;4; i++)&#xD;
+      <body>std::cout&lt;&lt;&quot;-WarningSpeakerController- : Processing request from 'MonitorUnit'...&quot;&lt;&lt;std::endl;&#xD;
+for(unsigned int i=0; i&lt;4; i++)&#xD;
 {&#xD;
 	std::cout&lt;&lt;message&lt;&lt;std::endl;&#xD;
 	Beep(880, 1000);&#xD;
