@@ -284,6 +284,7 @@ FIND_LIBRARY(LIBOPENCV_CORE_[libraryVariableNameSuffix(debugMode)/] libopencv_co
 FIND_LIBRARY(LIBOPENCV_IMGPROC_[libraryVariableNameSuffix(debugMode)/] libopencv_imgproc[ending/] ${MDE4CPP_HOME}/application/bin)
 FIND_LIBRARY(LIBOPENCV_HIGHGUI_[libraryVariableNameSuffix(debugMode)/] libopencv_highgui[ending/] ${MDE4CPP_HOME}/application/bin)
 FIND_LIBRARY(LIBOPENCV_IMGCODECS_[libraryVariableNameSuffix(debugMode)/] libopencv_imgcodecs[ending/] ${MDE4CPP_HOME}/application/bin)
+FIND_LIBRARY(LIBOPENCV_VIDEOIO_[libraryVariableNameSuffix(debugMode)/] libopencv_videoio[ending/] ${MDE4CPP_HOME}/application/bin)
 FIND_LIBRARY(nfd_[libraryVariableNameSuffix(debugMode)/] nfd[ending/] ${MDE4CPP_HOME}/application/bin)
 
 [/template]
@@ -302,6 +303,7 @@ TARGET_LINK_LIBRARIES(${PROJECT_NAME}
 [buildModeCMakeProperty(debugMode)/] ${LIBOPENCV_IMGPROC_[libraryVariableNameSuffix(debugMode)/]}
 [buildModeCMakeProperty(debugMode)/] ${LIBOPENCV_HIGHGUI_[libraryVariableNameSuffix(debugMode)/]}
 [buildModeCMakeProperty(debugMode)/] ${LIBOPENCV_IMGCODECS_[libraryVariableNameSuffix(debugMode)/]}
+[buildModeCMakeProperty(debugMode)/] ${LIBOPENCV_VIDEOIO_[libraryVariableNameSuffix(debugMode)/]}
 [buildModeCMakeProperty(debugMode)/] ${nfd_[libraryVariableNameSuffix(debugMode)/]}
 )
 [/template]
