@@ -45,6 +45,12 @@
 [query public isMainActivity(anElement : Element) : Boolean = anElement.valueKey(sourceNameCodeGen(), keyMainActivity()) = '1' /]	[** check, if an operation with const construct should be generated /]
 
 [**
+ * queries to check values of include path annotation keys
+*/]
+[query public hasIncludePath(ePackage : Package) : Boolean = hasKey(sourceNameCodeGen(), keyIncludePath()) /]
+[query public getIncludePath(ePackage : Package) : String = valueKey(sourceNameCodeGen(), keyIncludePath()) /]
+
+[**
  * queries to check values of prepareApplication annotation keys
 */]
 [query public prepareApplication(aPackage : Package) : Boolean = hasSourceGen(sourceNamePrepareApplication()) /]
