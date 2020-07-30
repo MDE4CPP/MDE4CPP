@@ -52,6 +52,8 @@
 [for (cl : Type | aClass.includes()->sortedBy(myQualifiedName())) ? ( oclIsKindOf(Class) or oclIsKindOf(Interface) or oclIsKindOf(Enumeration))]
 [if (cl.oclIsUndefined() or cl.name.oclIsUndefined())]
 // undefined  [cl.eClass().name/] ([cl.toString()/]) ['class '.concat(aClass.name).concat(': header include failed for undefined ').concat(cl.eClass().name).concat(' ').concat(cl.toString()).registerError()/]
+[elseif (cl.getNearestPackage().hasIncludePath())]
+#include "[cl.getNearestPackage().getIncludePath()/]"
 [else]
 #include "[cl.getNearestPackage().myNamespaceName()/]/[cl.name.toUpperFirst()/].hpp"
 [/if]
