@@ -5,6 +5,8 @@ plugins {
 
 description 'Common collection'
 
+def xercesVersion = "3.2.3"
+
 task deliverPersistenceInterface(type: Copy) {
 	group 'Persistence'
 	description 'deliver persistence interface header to %MDE4CPP_HOME%/application/include/persistence/interfaces'
@@ -19,36 +21,36 @@ task deliverPersistenceInterface(type: Copy) {
 
 task downloadFile(type: Download) {
 	description 'download xerces'
-    src 'http://www-eu.apache.org/dist//xerces/c/3/sources/xerces-c-3.2.2.zip'
-    dest new File(file('./xerces/xerces-c-3.2.2.zip').absolutePath)
+    src "http://www-eu.apache.org/dist//xerces/c/3/sources/xerces-c-${xercesVersion}.zip"
+    dest new File(file("./xerces/xerces-c-${xercesVersion}.zip").absolutePath)
     onlyIfModified true
 }
 
 task downloadAndUnzipFile(dependsOn: downloadFile, type: Copy) {
 	description 'download and unzip xerces'
-	from zipTree('xerces/xerces-c-3.2.2.zip')
+	from zipTree("xerces/xerces-c-${xercesVersion}.zip")
 	into 'xerces'
 }
 
 task compileXerces(dependsOn: downloadAndUnzipFile) {
 	description 'download, unzip and compile xerces'
 
-	def folder = new File(file('./xerces/xerces-c-3.2.2/.cmake').absolutePath)
+	def folder = new File(file("./xerces/xerces-c-${xercesVersion}/.cmake").absolutePath)
 	if( !folder.exists()) {
 		folder.mkdirs()
 	}
 
 	doLast {
 		exec {
-			workingDir 'xerces/xerces-c-3.2.2/.cmake'
+			workingDir "xerces/xerces-c-${xercesVersion}/.cmake"
 			if (System.properties['os.name'].toLowerCase().contains('windows')) {
-				commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=' + file("./xerces/bin") + ' ' + file("./xerces/xerces-c-3.2.2").absolutePath
+				commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=' + file("./xerces/bin") + ' ' + file("./xerces/xerces-c-${xercesVersion}").absolutePath
 			} else {
-				commandLine '/bin/sh', '-c', 'cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=' + file("./xerces/bin") + ' ' + file("./xerces/xerces-c-3.2.2").absolutePath
+				commandLine '/bin/sh', '-c', 'cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=' + file("./xerces/bin") + ' ' + file("./xerces/xerces-c-${xercesVersion}").absolutePath
 			}
 		}
 		exec {
-			workingDir 'xerces/xerces-c-3.2.2/.cmake'
+			workingDir "xerces/xerces-c-${xercesVersion}/.cmake"
 			def count = findProperty('WORKER') ?: 1
 			if (System.properties['os.name'].toLowerCase().contains('windows')) {
 				commandLine 'cmd', '/c', 'mingw32-make install -j' + count
@@ -74,7 +76,7 @@ task compileXerces(dependsOn: downloadAndUnzipFile) {
 		}
 	}
 
-	inputs.files(fileTree('.' + File.separator + 'xerces' + File.separator + 'xerces-c-3.2.2') {
+	inputs.files(fileTree(".${File.separator}xerces${File.separator}xerces-c-${xercesVersion}") {
         exclude '.cmake/**'
     })
 	if(!file('.' + File.separator + '.cmake' + File.separator).exists()) {
@@ -129,7 +131,7 @@ task clean {
 			println "deleting folder " + cmakeFolder.absolutePath
 		}
 
-		cmakeFolder = file('.' + File.separator + 'xerces' + File.separator + 'xerces-c-3.2.2' + File.separator + '.cmake' + File.separator)
+		cmakeFolder = file(".${File.separator}xerces${File.separator}xerces-c-${xercesVersion}${File.separator}.cmake${File.separator}")
 		if(cmakeFolder.exists()) {
 			delete cmakeFolder.absolutePath
 			println "deleting folder " + cmakeFolder.absolutePath
