@@ -45,7 +45,7 @@ originalName : String = aPackage.getPackageName();
 [if (classPackage.isReflectionModel())]
 #include "[classPackage.getPackageName()/]/[classPackage.name.toUpperFirst()/]Package.hpp"
 [/if]
-[for (aClass : Class | classPackage.ownedElement->filter(Class)->sortedBy(myQualifiedName()))]
+[for (aClass : Class | classPackage.ownedElement->filter(Class)->reject(c : Class | c.oclIsKindOf(Behavior))->sortedBy(myQualifiedName()))]
 #include "[aClass.getNearestPackage().myNamespaceName()/]/[aClass.name.toUpperFirst()/].hpp"
 #include "[originalName/]Exec/[aClass.name.toUpperFirst()/]Object.hpp"
 [/for]
@@ -78,7 +78,7 @@ std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> [upperName/]Locu
 	{		
 		switch(type->getMetaElementID())
 		{
-[for (aClass : Class | classPackage.ownedElement->filter(Class)->sortedBy(myQualifiedName())) separator('\n')]
+[for (aClass : Class | classPackage.ownedElement->filter(Class)->reject(c : Class | c.oclIsKindOf(Behavior))->sortedBy(myQualifiedName())) separator('\n')]
 [let className : String = aClass.name.toUpperFirst()]
 			case [packageName/]::[packageName.toUpperFirst()/]Package::[aClass.getMemberName().toUpperCase()/]:
 			{
