@@ -88,10 +88,10 @@
 #include "fUML/Semantics/Actions/impl/ActionsFactoryImpl.hpp"
 #include "fUML/Semantics/Actions/impl/ActionsPackageImpl.hpp"
 
-#include "fUML/Semantics/SemanticsFactory.hpp"
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/FUMLFactory.hpp"
 #include "fUML/FUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsFactory.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -259,41 +259,35 @@ void ActionActivationImpl::addOutgoingEdge(std::shared_ptr<fUML::Semantics::Acti
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
+		/* If there are no outgoing activity edge instances, create a single activity edge instance with a fork node execution at the other end.
+	   Add the give edge to the fork node execution that is the target of the activity edge instance out of this action execution.
+	   [This assumes that all edges directly outgoing from the action are control flows, with an implicit fork for offers out of the action.]
+	 */
+
 	std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> forkNodeActivation;
 
     if (this->getOutgoingEdges()->empty()) 
     {
-    	//Create anonymousFork
+    	//Create anonymousFork with no reference to model node
 
-    	std::shared_ptr<uml::Activity> activity; // need Activity 2 create anonymousFork
-    	std::shared_ptr<uml::UmlFactory> factory = uml::UmlFactory::eInstance();
+		forkNodeActivation = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityNodeActivation>(fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createForkNodeActivation());
+		// copy from ActivityNodeActivationGroupImpl::createNodeActivation
+		if(forkNodeActivation!=nullptr)
+		{
+			// activation->setNode(node); anonymous Fork doesn't has a Node
+			forkNodeActivation->setRunning(false);
+			this->getGroup().lock()->addNodeActivation(forkNodeActivation);
+			forkNodeActivation->createNodeActivations();
+		}
+		else
+		{
+			DEBUG_MESSAGE(std::cout<<"Null activation"<<std::endl;)
+		}
 
-    	auto group=this->getGroup().lock();
-    	if(group)
-    	{
-    		auto execution = group->getActivityExecution().lock();
-    		if(execution)
-    		{
-    	    	activity= std::dynamic_pointer_cast<uml::Activity>(execution->getBehavior());
-    		}
-    	}
-
-    	if(activity)
-    	{
-			std::shared_ptr<uml::ForkNode> newForkNode = factory->createForkNode_in_Activity(activity);
-			newForkNode->setName(this->getNode()->getName()+"anonymousFork");
-
-			forkNodeActivation = this->getGroup().lock()->createNodeActivation(newForkNode);
-
-			std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> newEdge(fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createActivityEdgeInstance());
-			fUML::Semantics::Activities::ActivityNodeActivationImpl::addOutgoingEdge(newEdge);
-			forkNodeActivation->addIncomingEdge(newEdge);
-			edge->setSource(forkNodeActivation);
-    	}
-    	else
-    	{
-			throw "fUML::Semantics::Actions::ActionActivationImpl::addOutgoingEdge: unknown Activity to create anonymousFork.";
-    	}
+		std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> newEdge(fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createActivityEdgeInstance());
+		fUML::Semantics::Activities::ActivityNodeActivationImpl::addOutgoingEdge(newEdge);
+		forkNodeActivation->addIncomingEdge(newEdge);
+		edge->setSource(forkNodeActivation);
     } 
     else 
     {
