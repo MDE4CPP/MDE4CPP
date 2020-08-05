@@ -2,9 +2,9 @@ src_gen/
 application/
 
 **/model/build.gradle
-/fumlExamples/**/.cproject
-/fumlExamples/**/.project
-/fumlExamples/**/build.gradle
+/fUMLExamples/**/.cproject
+/fUMLExamples/**/.project
+/fUMLExamples/**/build.gradle
 /commonExamples/SubsetUnionExample/**/.cproject
 /commonExamples/SubsetUnionExample/**/.project
 /commonExamples/SubsetUnionExample/**/build.gradle

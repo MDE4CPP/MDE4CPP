@@ -37,7 +37,8 @@
  /]
 
 [query public getDecisionNodesWithOB(anActivity : Activity) : OrderedSet(DecisionNode) = OrderedSet{
-		anActivity.allOwnedElements()->selectByKind(DecisionNode)
+		anActivity.allOwnedElements()->selectByKind(DecisionNode),
+		anActivity.allOwnedElements()->filter(CallBehaviorAction).behavior->selectByKind(Activity)->reject(oclIsUndefined()).getDecisionNodesWithOB()
 	}->flatten()->reject(decisionInput.oclIsUndefined())->select(node : DecisionNode | node.decisionInput.oclIsKindOf(OpaqueBehavior))->sortedBy(name)
 /]
 
