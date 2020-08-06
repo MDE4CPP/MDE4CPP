@@ -299,7 +299,16 @@ void [className/]::setFeatureValue(std::shared_ptr<uml::StructuralFeature> featu
 [/template]
 
 [template private generateSetFeatureValue(aProperty : Property, valuePin : InputPin)]
-[if (aProperty.isPrimitiveTypedProperty())]
+[if (aProperty.type.oclIsKindOf(Enumeration))]
+std::shared_ptr<fUML::Semantics::SimpleClassifiers::EnumerationValue> enumValue = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::EnumerationValue>(inputValue);
+std::shared_ptr<uml::EnumerationLiteral> literal = enumValue->getLiteral();
+[for (literal : EnumerationLiteral | aProperty.type.oclAsType(Enumeration).ownedLiteral)]
+if (literal == [literal.generatePackageGetterCall()/])
+{
+	m_umlValue->setMode([literal.enumeration.namespace.name/]::[literal.enumeration.name/]::[literal.name.toUpperCase()/]);
+}
+[/for]
+[elseif (aProperty.isPrimitiveTypedProperty())]
 std::shared_ptr<[aProperty.type.getValueClass()/]> valueObject = std::dynamic_pointer_cast<[aProperty.type.getValueClass()/]>(inputValue);
 if (valueObject != nullptr)
 {
