@@ -45,6 +45,7 @@ public class FUML4CPPEMtlResourceFactory extends UML4CPPEMtlResourceFactory {
 								"generateOperationExecution",
 								"generateOperationExecutionHeader",
 								"generateOperationExecutionSource",
+								"fUMLCollectionHelper",
 								"parameterHelper"
 		};
 		generateFilePathMapData(moduleNames, "", resourcePathPrefix);

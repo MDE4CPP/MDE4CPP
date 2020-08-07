@@ -45,6 +45,12 @@
 */]
 [template private generateArrayPatternInstantiation(aConnector : Connector){end1 : ConnectorEnd = aConnector.end->at(1); end2 : ConnectorEnd = aConnector.end->at(2); definingAssociation : Association = aConnector.type;}]
 [if(not definingAssociation.oclIsUndefined())]
+[if(end1.role.type.oclIsTypeOf(Interface) or end2.role.type.oclIsTypeOf(Interface))]
+/*
+Note: Connector pattern will not be instantiated because at least one end of connector [aConnector.name/] is typed by an interface.
+Links can be created manually after instantiating the corresponding properties with instances typed by a class that realized the interface.
+*/
+[else]
 [if(end1.partWithPort.oclIsUndefined() and end2.partWithPort.oclIsUndefined())]
 //instantiate array pattern for connector [aConnector.name/] between a port and a part
 [aConnector.initArrayPattern_P_P()/]
@@ -57,6 +63,7 @@
 [else]
 //instantiate array pattern for connector [aConnector.name/] between a part with a port and a part with a port
 [aConnector.initArrayPattern_PWP_PWP()/]
+[/if]
 [/if]
 [else]
 /*

@@ -1,0 +1,62 @@
+[comment encoding = UTF-8 /]
+[**
+ * Copyright (c) 2017 TU Ilmenau, Systems and Software Engineering Group
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
+ * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+ * and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */]
+[module fUMLCollectionHelper('http://www.eclipse.org/uml2/5.0.0/UML')]
+
+[import UML4CPP::generator::main::helpers::nameHelper /]
+
+[comment]COLLECT REALIZING CLASSES FOR CERTAIN INTERFACE --------------- [/comment]
+[query public collectRealizingClasses(anInterface : Interface) : OrderedSet(Class) = 
+	anInterface._package.allOwnedElements()->filter(InterfaceRealization)->select(ir : InterfaceRealization | ir.contract = anInterface).owner.oclAsType(Class)->asOrderedSet()->sortedBy(myQualifiedName())/]
+
+[comment]COLLECT CORRESPONDING CONNECTOR END FOR CERTAIN TYPE --------------- [/comment]
+[comment EXTERNAL CONNECTORS /]
+[comment checks if 'aConnector' has two valid connector ends -> 2x end AND role is defined for both ends /]
+[query private isValidConnector(aConnector : Connector) : Boolean = 
+	aConnector.end->size() = 2 and aConnector.end->asSet()->reject(end : ConnectorEnd | end.role.oclIsUndefined())->size() = 2 /]
+[comment collects all valid connectors of 'aPackage' /]
+[query private getAllValidConnectors(aPackage : Package) : Set(Connector) = 
+	aPackage.allOwnedElements()->selectByKind(Connector)->select(isValidConnector()) /] 
+[comment checks if 'anEnd' is typed by 'aClass', i.e. if 'partWithPort' is defined, it must be typed by 'aClass' ; if only 'partWithPort' is undefined, 'role' must be typed by 'aClass' /]
+[query private isConnectorEndTypeEqualTo(anEnd : ConnectorEnd, aClass : Class) : Boolean = 
+	if (anEnd.oclIsUndefined() or anEnd.role.oclIsUndefined()) then false else if (not anEnd.partWithPort.oclIsUndefined()) then anEnd.partWithPort.type = aClass else anEnd.role.type = aClass endif endif /]
+[comment checks if connector has at least one end that is typed by 'aClass'/]
+[query private containsEndWithSpecificClass(aConnector : Connector, aClass : Class) : Boolean = 
+	aConnector.end.isConnectorEndTypeEqualTo(aClass)->reject(value : Boolean | value = false)->size() > 0 /] 
+[comment collects all valid connectors that have at least one end typed by 'aClass' /]
+[query private getAllConnectorsWithType(aPackage : Package, aClass : Class) : Set(Connector) = 
+	aPackage.getAllValidConnectors()->select(containsEndWithSpecificClass(aClass)) /]
+[comment collects all external connectors of (i.e. not owned by) 'aClass' /]
+[query private collectEndsofExternalConnectors(aPackage : Package, aClass : Class) : OrderedSet(ConnectorEnd) = 
+	(aPackage.getAllConnectorsWithType(aClass).end->flatten())->asOrderedSet()->sortedBy(name)/]
+
+[comment INTERNAL CONNECTORS /]
+[comment collect ConnectorEnds of internal (=delegation) connectors for 'aClass'/]
+[query private getAllConnectorsOfClass(aClass : Class) : Set(Connector) = 
+	aClass.ownedConnector->select(isValidConnector())/]
+[comment checks if 'role' of 'anEnd' is an owned port of 'aClass' /]
+[query private isConnectorEndRoleOwnedPortOfClass(anEnd : ConnectorEnd, aClass : Class) : Boolean = 
+	if (anEnd.role.oclIsUndefined()) then false else (anEnd.role.owner = aClass and anEnd.role.oclIsTypeOf(Port)) endif /]
+[comment since only delegation connectors of 'aClass' should be obtained, 'role' of one end of aConnector must be a child of 'aClass' and a port (the corresponding delegation port)/]
+[query private isDelegationConnectorOfClass(aConnector : Connector, aClass : Class) : Boolean = 
+	aConnector.end.isConnectorEndRoleOwnedPortOfClass(aClass)->reject(value : Boolean | value = false)->size() > 0/]
+[comment collects ConnectorEnds of delegation (i.e. internal) connectors of 'aClass' ; reject ConnectorEnd if its role is an owned port of 'aClass' /]
+[query private collectEndsofInternalConnectors(aClass : Class) : OrderedSet(ConnectorEnd) = 
+	(aClass.getAllConnectorsOfClass()->select(isDelegationConnectorOfClass(aClass)).end->reject(isConnectorEndRoleOwnedPortOfClass(aClass)))->select(end : ConnectorEnd | (not end.role.oclIsUndefined()) and (not end.partWithPort.oclIsUndefined()))->asOrderedSet() /]
+
+[comment collects all ConnectorEnds that are typed by a property of type 'aClass' connected by a connector AND all connectorEnds for delegation connectors of 'aClass' /]
+[comment external connectors are connectors that are not owned by 'aClass' ; internal connectors are connectors that are owned by 'aClass' (= delegation connectors for 'aClass') /]
+[comment both 'role' and 'partWithPort' must be defined for a valid ConnectorEnd/]
+[query public collectConnectorEndsConnectedToClass(aPackage : Package, aClass : Class) : OrderedSet(ConnectorEnd) = 
+	aPackage.collectEndsofExternalConnectors(aClass)->addAll(aClass.collectEndsofInternalConnectors())->asOrderedSet() /]

@@ -28,7 +28,7 @@
 */]
 [template public generateAttributeInstantiation(aProperty : Property)]
 [if (aProperty.upper = 1)]
-[if (aProperty.canInstantiate())]
+[if (aProperty.canInstantiate() and (not aProperty.type.oclIsTypeOf(Interface)))]
 //instantiate property '[aProperty.name/]'
 [if (aProperty.isComposite())]
 m_[aProperty.name/] = [aProperty.type._package.getPackageName()/]::[aProperty.type._package.getPackageName().toUpperFirst()/]Factory::eInstance()->create[aProperty.type.name.toUpperFirst()/]_as_[aProperty.name/]_in_[aProperty.class.name.toUpperFirst()/](m_this[aProperty.class.name.toUpperFirst()/]Ptr);
@@ -39,32 +39,13 @@ m_[aProperty.name/] = [aProperty.type._package.getPackageName()/]::[aProperty.ty
 [else]
 //instantiate property '[aProperty.name/]'
 m_[aProperty.name/].reset(new Bag<[aProperty.type.transformType()/]>());
-[if (aProperty.canInstantiate() and aProperty.getUpper() = -1 and aProperty.getLower() > 0)]
+[if (aProperty.canInstantiate() and aProperty.getUpper() = -1 and aProperty.getLower() > 0 and (not aProperty.type.oclIsTypeOf(Interface)))]
 for(unsigned int i = 1; i <= [aProperty.getLower()/]; i++)
 {
-	[if (aProperty.oclIsTypeOf(Port) and aProperty.type.oclIsTypeOf(Interface))]
-	[aProperty.generatePortInstantiation()/]
-	[else]
 	[aProperty.generatePartInstantiation()/]
-	[/if]
 } 
 [/if]
 [/if]
-[/template]
-
-
-[**
- * Template for generation of instantiation of a port typed by an interface
-*/]
-[template private generatePortInstantiation(aProperty : Property) {aPackage : Package = aProperty.ancestors()->filter(Package)->first(); factoryName : String = aPackage.name.toUpperFirst().concat('Factory');}]
-	[let interfaceOfPort : Interface = aProperty.type.oclAsType(Interface)]
-	[if (aProperty.isComposite)]
-	std::shared_ptr<[aProperty.type.transformType()/]> value = [aPackage.name/]::[factoryName/]::eInstance()->create[aPackage.getInterfaceRealizations(interfaceOfPort)->asOrderedSet()->first().owner.oclAsType(Class).name/]_as_[aProperty.name/]_in_[aProperty.class.name.toUpperFirst()/](m_this[aProperty.class.name.toUpperFirst()/]Ptr);
-	[else]
-	std::shared_ptr<[aProperty.type.transformType()/]> value = [aPackage.name/]::[factoryName/]::eInstance()->create[aPackage.getInterfaceRealizations(interfaceOfPort)->asOrderedSet()->first().owner.oclAsType(Class).name/]();
-	[/if]
-	[/let]
-	m_[aProperty.name/]->add(value);
 [/template]
 
 
