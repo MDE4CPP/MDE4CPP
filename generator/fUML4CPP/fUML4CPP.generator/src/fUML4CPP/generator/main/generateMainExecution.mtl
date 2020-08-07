@@ -21,6 +21,10 @@
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 
+[query private isActivityWithMainKeyExisting(aPackage : Package) : Boolean = aPackage.allOwnedElements()->filter(Activity)->select(act : Activity | act.isMainActivity())->size() > 0 /]
+[query private getFirstActivityWithMainKey(aPackage : Package) : Activity = aPackage.allOwnedElements()->filter(Activity)->select(act : Activity | act.isMainActivity())->asOrderedSet()->first() /]
+[query private getMainActivity(aPackage : Package) : Activity = if (aPackage.isActivityWithMainKeyExisting()) then aPackage.getFirstActivityWithMainKey() else aPackage.allOwnedElements()->filter(Activity)->asOrderedSet()->first() endif/]
+
 [template public generateMain(aPackage : Package)]
 [file (aPackage.getPackageName().concat('Exec/').concat('main.cpp'), false, 'UTF-8')]
 
@@ -32,7 +36,7 @@
 
 [generateMainIncludes()/]
 [if (not aPackage.allOwnedElements()->filter(Activity)->isEmpty())]
-[let act : Activity = aPackage.allOwnedElements()->filter(Activity)->asOrderedSet()->first()]
+[let act : Activity = aPackage.getMainActivity()]
 [generateActivityRelatedIncludes(act, aPackage)/]
 [if (act.owner.oclIsKindOf(Classifier))]
 #include "[act.owner.oclAsType(Classifier).namespace.myNamespaceName()/]Exec/[act.owner.oclAsType(Classifier).name.toUpperFirst()/]Object.hpp"
@@ -52,7 +56,7 @@ int main()
 
 	[if (not aPackage.allOwnedElements()->filter(Activity)->isEmpty())]
     //Executor will execute the first Activity
-	[let act : Activity = aPackage.allOwnedElements()->filter(Activity)->asOrderedSet()->first()]
+	[let act : Activity = aPackage.getMainActivity()]
 	[act.generateParameterInstances(aPackage)/]
 [if (act.owner.oclIsKindOf(Classifier))]
 	std::shared_ptr<[act.owner.oclAsType(Classifier).name.toUpperFirst()/]> element = [act.owner.oclAsType(Classifier).namespace.myNamespaceName()/]::[act.owner.oclAsType(Classifier).namespace.myNamespaceName().toUpperFirst()/]Factory::eInstance()->create[act.owner.oclAsType(Classifier).name.toUpperFirst()/]();

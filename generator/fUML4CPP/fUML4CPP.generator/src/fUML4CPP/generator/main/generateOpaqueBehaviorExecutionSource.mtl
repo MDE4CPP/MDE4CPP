@@ -249,7 +249,14 @@ DEBUG_MESSAGE(
 //Body of the Opaquebehavior
 //Start ---------------------------
 [if (anOpaqueBehavior.hasGenerateContextVariable())]
-std::shared_ptr<[anOpaqueBehavior.owner.oclAsType(Classifier).namespace.myNamespaceName()/]::[anOpaqueBehavior.owner.oclAsType(Classifier).name.toUpperFirst()/]> context = std::dynamic_pointer_cast<[anOpaqueBehavior.owner.oclAsType(Classifier).name.toUpperFirst()/]Object>(this->getContext())->getUmlValue();
+std::shared_ptr<[anOpaqueBehavior.getContext().namespace.myNamespaceName()/]::[anOpaqueBehavior.getContext().name.toUpperFirst()/]> context = std::dynamic_pointer_cast<[anOpaqueBehavior.getContext().name.toUpperFirst()/]Object>(this->getContext())->getUmlValue();
+DEBUG_MESSAGE(
+	if (context == nullptr)
+	{
+		std::cerr << "context of DecisionNode '[aNamedElement.name/]'is not set" << std::endl;
+	    throw "error";
+	}
+)
 [/if]
 
 [if (anOpaqueBehavior.language->includes(keyCPP()))]
