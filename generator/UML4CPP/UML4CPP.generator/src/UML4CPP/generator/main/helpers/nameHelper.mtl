@@ -101,6 +101,7 @@
 [query public getMetaClassName(anElement : Element) : String = if anElement.getNearestPackage().name = anElement.eClass().ePackage.name then anElement.eClass().name else anElement.eClass().ePackage.name.concat('::').concat(anElement.eClass().name) endif /]
 
 [query public getStaticClassID_ID(aClass : Class) : String = aClass._package.allOwnedElements()->asOrderedSet()->indexOf(aClass).toString()/]
+[query public getStaticPropertyID_ID(aProperty : Property) : String = if (not aProperty.association.oclIsUndefined()) then aProperty.association._package.allOwnedElements()->asOrderedSet()->indexOf(aProperty.association).toString().concat('00').concat(aProperty.association.memberEnd->indexOf(aProperty).toString()) else '0' endif/]
 [query public getStaticInterfaceID_ID(aInterface : Interface) : String = aInterface._package.allOwnedElements()->asOrderedSet()->indexOf(aInterface).toString()/]
 
 [** 

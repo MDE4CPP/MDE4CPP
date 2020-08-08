@@ -69,6 +69,14 @@ static const unsigned int [aClass.getMemberName().toUpperCase()/]_OPERATION_COUN
 [template public generateStaticPackageID(aPackage : Package)]
 [for (c : Class | aPackage.allOwnedElements()->selectByType(Class)->sortedBy(name)->reject(name.oclIsInvalid() or name = ''))]
 	[generateStaticClassID(c)/]
+
+	[for (anAssociation : Association | c.getCompositionsToClass())]
+	[let containerProperty : Property = anAssociation.memberEnd->select(type = c)->asOrderedSet()->first()]
+	[let containmentProperty : Property = anAssociation.memberEnd->select(not (type = c))->asOrderedSet()->first()]
+	static const unsigned int [containmentProperty.name.toUpperCase()/] = [containmentProperty.getStaticPropertyID_ID()/];	
+	[/let]
+	[/let]
+	[/for]
 [/for]
 [for (c : Class | aPackage.allOwnedElements()->selectByType(Stereotype)->sortedBy(name)->reject(name.oclIsInvalid() or name = ''))]
 	[generateStaticClassID(c)/]
