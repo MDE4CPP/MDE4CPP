@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_PmmP8LAqEeert7O7oCVCsA" name="DestructionInstances">
   <eAnnotations xmi:id="_xjG30IrMEeqOgdz40dwV8A" source="prepareApplication">
-    <details xmi:id="_2tFCUIrMEeqOgdz40dwV8A" key="sourceCodeMain" value="std::cout&lt;&lt;&quot;-- Test model : Removing specific instances from part and port&quot;&lt;&lt;std::endl;&#xA;&#xA;std::shared_ptr&lt;S> s = factory->createS();&#xA;&#xA;bool successful = false;&#xA;&#xA;std::cout&lt;&lt;&quot;-- Running test case: Remove instance P from S.p1 part --&quot;&lt;&lt;std::endl;&#xA;std::cout&lt;&lt;std::endl;&#xA;&#xA;std::cout&lt;&lt;&quot;Test case successful : &quot;&lt;&lt;std::boolalpha&lt;&lt;successful&lt;&lt;std::endl;&#xA;std::cout&lt;&lt;std::endl;&#xA;std::cout&lt;&lt;&quot;-- End of test case --&quot;&lt;&lt;std::endl;"/>
+    <details xmi:id="_2tFCUIrMEeqOgdz40dwV8A" key="sourceCodeMain" value="std::cout&lt;&lt;&quot;-- Test model : Removing specific instances from part and port&quot;&lt;&lt;std::endl;&#xA;&#xA;std::shared_ptr&lt;Tester> tester = factory->createTester();&#xA;std::shared_ptr&lt;S> s = factory->createS();&#xA;&#xA;bool successful = true;&#xA;&#xA;std::cout&lt;&lt;&quot;-- Running test case: Remove instance from S.p1 part --&quot;&lt;&lt;std::endl;&#xA;std::cout&lt;&lt;std::endl;&#xA;&#xA;s = tester->removeInstanceP();&#xA;&#xA;successful = successful &amp;&amp; (s->getP1()->size() == 2);&#xA;std::cout&lt;&lt;&quot;s::p1::size = 2 : &quot;&lt;&lt;std::boolalpha&lt;&lt;(s->getP1()->size() == 2)&lt;&lt;std::endl;&#xA;&#xA;successful = successful &amp;&amp; (s->getC1()->at(0)->getP()->size() == 2);&#xA;std::cout&lt;&lt;&quot;s::c1[1]::p::size = 2 : &quot;&lt;&lt;std::boolalpha&lt;&lt;(s->getC1()->at(0)->getP()->size() == 2)&lt;&lt;std::endl;&#xA;&#xA;&#xA;std::cout&lt;&lt;&quot;\n-- Running test case: Remove instance from S.p2.ipp port --&quot;&lt;&lt;std::endl;&#xA;std::cout&lt;&lt;std::endl;&#xA;&#xA;s = tester->removeInstanceIpp();&#xA;&#xA;successful = successful &amp;&amp; (s->getP2()->at(0)->getIpp()->size() == 2);&#xA;std::cout&lt;&lt;&quot;s::p2[1]::ipp::size = 2 : &quot;&lt;&lt;std::boolalpha&lt;&lt;(s->getP2()->at(0)->getIpp()->size() == 2)&lt;&lt;std::endl;&#xA;&#xA;successful = successful &amp;&amp; (s->getC2()->at(1)->getIpc()->at(0)->getLeft()->size() == 0);&#xA;std::cout&lt;&lt;&quot;s::c2[2]::ipc[1]::left::size = 0 : &quot;&lt;&lt;std::boolalpha&lt;&lt;(s->getC2()->at(1)->getIpc()->at(0)->getLeft()->size() == 0)&lt;&lt;std::endl&lt;&lt;std::endl;&#xA;&#xA;std::cout&lt;&lt;&quot;Test case successful : &quot;&lt;&lt;std::boolalpha&lt;&lt;successful&lt;&lt;std::endl;&#xA;std::cout&lt;&lt;std::endl;&#xA;std::cout&lt;&lt;&quot;-- End of test case --&quot;&lt;&lt;std::endl;"/>
   </eAnnotations>
   <eAnnotations xmi:id="_6FZB8IrMEeqOgdz40dwV8A" source="BuildMode">
     <details xmi:id="_7Juz0IrMEeqOgdz40dwV8A" key="type" value="library"/>
   </eAnnotations>
   <ownedComment xmi:id="_lhCQQKDJEeq8Z9IqI9dZbA">
-    <body>This test case validates that the removal of an instance from a port implies destruction of related links.
+    <body>This test case validates that the removal of an instance from a part and a port implies destruction of related links.
 If destruction of the object is successful:
-	- a::q->size() must be equal to 0
-	- a::b::y->size() (= #links from a::b to a::q) must be equal to 0</body>
+	- s::p1->size() must be equal to 2 AND s::c1[1]::p (= #links from s::c1[1] to s::p1) must be equal to 2
+	- s::p2::ipp->size() must be equal to 2 AND s::c2[2]::left (= #links from s::c2[2]::ipc[1] to s::p2::ipp) must be equal to 0</body>
   </ownedComment>
   <packageImport xmi:id="_rgWIkLArEeert7O7oCVCsA">
     <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
@@ -134,11 +134,53 @@ If destruction of the object is successful:
         <result xmi:id="_1ytCwbu2EeqlcssBCPf7eQ" name="out" outgoing="_HWg3wLu3EeqlcssBCPf7eQ">
           <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#UnlimitedNatural"/>
         </result>
-        <value xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_5m5tILu2EeqlcssBCPf7eQ" value="1"/>
+        <value xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_5m5tILu2EeqlcssBCPf7eQ" value="2"/>
+      </node>
+    </ownedBehavior>
+    <ownedBehavior xmi:type="uml:Activity" xmi:id="_5ImpENybEeqol7MOQzT3-w" name="actRemoveInstanceIpp" specification="_XHreMNyXEeq7L7avc0xjjA" node="__QtPwNybEeqol7MOQzT3-w _K7NvENycEeqol7MOQzT3-w _SxlOYNycEeqol7MOQzT3-w _lhWgMNycEeqol7MOQzT3-w _DfqHANydEeqol7MOQzT3-w _FEed0NyfEeqol7MOQzT3-w _Qnw60NyfEeqol7MOQzT3-w _RutmsNydEeqol7MOQzT3-w">
+      <ownedParameter xmi:id="_9jI6sNybEeqol7MOQzT3-w" name="s" type="_8F2g4Lq7EeqnW_aN9c7CrQ" direction="return"/>
+      <edge xmi:type="uml:ObjectFlow" xmi:id="_3Ezd8NyeEeqol7MOQzT3-w" target="_FEed0NyfEeqol7MOQzT3-w" source="_N-ONENycEeqol7MOQzT3-w"/>
+      <edge xmi:type="uml:ObjectFlow" xmi:id="_LRG_MNyfEeqol7MOQzT3-w" target="_XnAsQNycEeqol7MOQzT3-w" source="_FEed0NyfEeqol7MOQzT3-w"/>
+      <edge xmi:type="uml:ObjectFlow" xmi:id="_TQDLsNyfEeqol7MOQzT3-w" target="_Qnw60NyfEeqol7MOQzT3-w" source="_cF4EQNycEeqol7MOQzT3-w"/>
+      <edge xmi:type="uml:ObjectFlow" xmi:id="_fYmR4NyfEeqol7MOQzT3-w" target="_wQ5zINycEeqol7MOQzT3-w" source="_Qnw60NyfEeqol7MOQzT3-w"/>
+      <edge xmi:type="uml:ObjectFlow" xmi:id="_mvdKsNyfEeqol7MOQzT3-w" target="_X6cJINydEeqol7MOQzT3-w" source="_w2o9cNycEeqol7MOQzT3-w"/>
+      <edge xmi:type="uml:ObjectFlow" xmi:id="_qmBzoNyfEeqol7MOQzT3-w" target="_T7SL8NydEeqol7MOQzT3-w" source="_Qnw60NyfEeqol7MOQzT3-w"/>
+      <edge xmi:type="uml:ObjectFlow" xmi:id="_s5uUkNyfEeqol7MOQzT3-w" target="_d42BQNydEeqol7MOQzT3-w" source="_FaKr4NydEeqol7MOQzT3-w"/>
+      <edge xmi:type="uml:ObjectFlow" xmi:id="_6RqmENyfEeqol7MOQzT3-w" target="__QtPwNybEeqol7MOQzT3-w" source="_FEed0NyfEeqol7MOQzT3-w"/>
+      <node xmi:type="uml:ActivityParameterNode" xmi:id="__QtPwNybEeqol7MOQzT3-w" name="nodeS" incoming="_6RqmENyfEeqol7MOQzT3-w" type="_8F2g4Lq7EeqnW_aN9c7CrQ" parameter="_9jI6sNybEeqol7MOQzT3-w"/>
+      <node xmi:type="uml:CreateObjectAction" xmi:id="_K7NvENycEeqol7MOQzT3-w" name="createS" classifier="_8F2g4Lq7EeqnW_aN9c7CrQ">
+        <result xmi:id="_N-ONENycEeqol7MOQzT3-w" name="result" outgoing="_3Ezd8NyeEeqol7MOQzT3-w" type="_8F2g4Lq7EeqnW_aN9c7CrQ"/>
+      </node>
+      <node xmi:type="uml:ForkNode" xmi:id="_FEed0NyfEeqol7MOQzT3-w" name="ForkS" incoming="_3Ezd8NyeEeqol7MOQzT3-w" outgoing="_LRG_MNyfEeqol7MOQzT3-w _6RqmENyfEeqol7MOQzT3-w"/>
+      <node xmi:type="uml:ReadStructuralFeatureAction" xmi:id="_SxlOYNycEeqol7MOQzT3-w" name="ReadP2OfS" structuralFeature="_SaQaQLrAEeqnW_aN9c7CrQ">
+        <object xmi:id="_XnAsQNycEeqol7MOQzT3-w" name="object" incoming="_LRG_MNyfEeqol7MOQzT3-w" type="_8F2g4Lq7EeqnW_aN9c7CrQ"/>
+        <result xmi:id="_cF4EQNycEeqol7MOQzT3-w" name="out" outgoing="_TQDLsNyfEeqol7MOQzT3-w" type="_9oEhkLq7EeqnW_aN9c7CrQ"/>
+      </node>
+      <node xmi:type="uml:ForkNode" xmi:id="_Qnw60NyfEeqol7MOQzT3-w" name="ForkP" incoming="_TQDLsNyfEeqol7MOQzT3-w" outgoing="_fYmR4NyfEeqol7MOQzT3-w _qmBzoNyfEeqol7MOQzT3-w"/>
+      <node xmi:type="uml:ReadStructuralFeatureAction" xmi:id="_lhWgMNycEeqol7MOQzT3-w" name="ReadIppOfP2" structuralFeature="_9zR2kLq8EeqnW_aN9c7CrQ">
+        <object xmi:id="_wQ5zINycEeqol7MOQzT3-w" name="object" incoming="_fYmR4NyfEeqol7MOQzT3-w" type="_9oEhkLq7EeqnW_aN9c7CrQ"/>
+        <result xmi:id="_w2o9cNycEeqol7MOQzT3-w" name="out" outgoing="_mvdKsNyfEeqol7MOQzT3-w" type="_Dmr1ELq8EeqnW_aN9c7CrQ"/>
+      </node>
+      <node xmi:type="uml:ValueSpecificationAction" xmi:id="_DfqHANydEeqol7MOQzT3-w" name="Integer2Specification">
+        <result xmi:id="_FaKr4NydEeqol7MOQzT3-w" name="out" outgoing="_s5uUkNyfEeqol7MOQzT3-w">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#UnlimitedNatural"/>
+        </result>
+        <value xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_KshWUNydEeqol7MOQzT3-w" value="2"/>
+      </node>
+      <node xmi:type="uml:RemoveStructuralFeatureValueAction" xmi:id="_RutmsNydEeqol7MOQzT3-w" name="RemoveIppInstanceOfP2" structuralFeature="_9zR2kLq8EeqnW_aN9c7CrQ">
+        <object xmi:id="_T7SL8NydEeqol7MOQzT3-w" name="object" incoming="_qmBzoNyfEeqol7MOQzT3-w" type="_9oEhkLq7EeqnW_aN9c7CrQ"/>
+        <result xmi:id="_ar6LMNydEeqol7MOQzT3-w" name="out" type="_9oEhkLq7EeqnW_aN9c7CrQ"/>
+        <value xmi:id="_X6cJINydEeqol7MOQzT3-w" name="value" incoming="_mvdKsNyfEeqol7MOQzT3-w" type="_Dmr1ELq8EeqnW_aN9c7CrQ"/>
+        <removeAt xmi:id="_d42BQNydEeqol7MOQzT3-w" name="removeAt" incoming="_s5uUkNyfEeqol7MOQzT3-w">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#UnlimitedNatural"/>
+        </removeAt>
       </node>
     </ownedBehavior>
     <ownedOperation xmi:id="_giuTcLu1EeqlcssBCPf7eQ" name="removeInstanceP" method="_i0RfULu1EeqlcssBCPf7eQ">
       <ownedParameter xmi:id="_pB--wLu1EeqlcssBCPf7eQ" name="s" type="_8F2g4Lq7EeqnW_aN9c7CrQ" direction="return"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_XHreMNyXEeq7L7avc0xjjA" name="removeInstanceIpp" method="_5ImpENybEeqol7MOQzT3-w">
+      <ownedParameter xmi:id="_XHreMdyXEeq7L7avc0xjjA" name="s" type="_8F2g4Lq7EeqnW_aN9c7CrQ" direction="return"/>
     </ownedOperation>
   </packagedElement>
 </uml:Model>
