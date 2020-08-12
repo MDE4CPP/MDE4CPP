@@ -73,8 +73,8 @@
 [aPackage.getClassOperations().generateOperationExecutionSource(aPackage)/]
 
 //generate execution classifier
-[aPackage.getPackageClasses().generateClassifierObjectHeader(aPackage)/]
-[aPackage.getPackageClasses().generateClassifierObjectSource(aPackage)/]
+[aPackage.getClassifiersForObjectClasses().generateClassifierObjectHeader(aPackage)/]
+[aPackage.getClassifiersForObjectClasses().generateClassifierObjectSource(aPackage)/]
 
 //generate main or execution plugin
 [if (not buildLibrary())]

@@ -60,3 +60,9 @@
 [comment both 'role' and 'partWithPort' must be defined for a valid ConnectorEnd/]
 [query public collectConnectorEndsConnectedToClass(aPackage : Package, aClass : Class) : OrderedSet(ConnectorEnd) = 
 	aPackage.collectEndsofExternalConnectors(aClass)->addAll(aClass.collectEndsofInternalConnectors())->asOrderedSet() /]
+
+[comment]COLLECT BASE CLASSES AND REALIZED INTERFACES FOR CERTAIN CLASS --------------- [/comment]
+[query public collectInheritedTypes(aClassifier : Classifier) : OrderedSet(Classifier) = OrderedSet{aClassifier.collectSuperClasses(), aClassifier.collectRealizedInterfaces()}->flatten()->reject(oclIsUndefined() or name.oclIsUndefined())->sortedBy(myQualifiedName())/]
+[query private collectSuperClasses(aClassifier : Classifier) : OrderedSet(Classifier) = if(aClassifier.oclIsTypeOf(Class)) then aClassifier.oclAsType(Class).superClass->sortedBy(name) else OrderedSet{} endif/]
+[query private collectRealizedInterfaces(aClassifier : Classifier) : OrderedSet(Classifier) = if(aClassifier.oclIsTypeOf(Class)) then aClassifier.oclAsType(Class).interfaceRealization.supplier.oclAsType(Classifier)->asOrderedSet()->sortedBy(name) else OrderedSet{} endif/]
+[query private collectRedefinedInterfaces(aClassifier : Classifier) : OrderedSet(Classifier) = if(aClassifier.oclIsTypeOf(Interface)) then aClassifier.oclAsType(Interface).redefinedInterface->sortedBy(name) else OrderedSet{} endif/]

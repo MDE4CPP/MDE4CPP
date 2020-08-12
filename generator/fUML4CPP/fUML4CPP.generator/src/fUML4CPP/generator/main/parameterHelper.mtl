@@ -55,9 +55,9 @@
 				}->flatten()->reject(oclIsKindOf(AssociationClass))->reject(oclIsKindOf(Component))->reject(oclIsKindOf(Behavior))->reject(oclIsKindOf(Stereotype))->reject(oclIsKindOf(Node))->sortedBy(name)
 /]
 
-[query public getPackageInterfaces(aPackage : Package) : Set(Classifier) = OrderedSet{aPackage.allOwnedElements()->filter(Interface)}->sortedBy(name) /]
+[query public getPackageInterfaces(aPackage : Package) : Set(Classifier) = aPackage.allOwnedElements()->filter(Interface)->sortedBy(name) /]
 
-[query public getClassifiersForObjectClasses(aPackage : Package) : Set(Classifier) = OrderedSet{aPackage.getPackageClasses(), aPackage.getPackageInterfaces()}->sortedBy(name) /]
+[query public getClassifiersForObjectClasses(aPackage : Package) : Set(Classifier) = OrderedSet{aPackage.getPackageClasses(), aPackage.getPackageInterfaces()}->flatten()->sortedBy(name) /]
 				
 
 [comment]Get all Operations in Package[/comment]
@@ -118,9 +118,7 @@ std::shared_ptr<[par.type.name.toUpperFirst()/]Object> [par.name/]OutUmlLinker(n
 [comment]INCLUDE SWITCH----------------------------------------------------------[/comment]
 [template public generateTypeInclude(type : Type, aPackage : Package) ? ((not type.supportedTypes()) and (not type.oclIsKindOf(Enumeration)))]
 #include "[type.getNearestPackage().myNamespaceName()/]/[type.name/].hpp"
-[if (not type.oclIsTypeOf(Interface))]
 #include "[aPackage.getPackageName()/]Exec/[type.name/]Object.hpp"
-[/if]
 [/template]
 
 [template public generateTypeInclude(type : Type, aPackage : Package) ? (not type.supportedTypes() and type.oclIsKindOf(Enumeration))]
@@ -132,3 +130,8 @@ std::shared_ptr<[par.type.name.toUpperFirst()/]Object> [par.name/]OutUmlLinker(n
 [template public generateTypeInclude(type : Type, aPackage : Package) ? (supportedTypes())]
 #include "fUML/Semantics/SimpleClassifiers/[type.name/]Value.hpp"
 [/template]
+
+[comment]UMLValue Getter---------------------------------------------------------[/comment]
+[query public UMLValueName(aClassifier : Classifier) : String = 'm_'.concat(aClassifier.name.toUpperFirst()).concat('Value')/]
+[query public UMLValueGetterName(aClassifier : Classifier) : String = 'get'.concat(aClassifier.name.toUpperFirst()).concat('Value')/]
+[query public UMLValueSetterName(aClassifier : Classifier) : String = 'set'.concat(aClassifier.name.toUpperFirst()).concat('Value')/]

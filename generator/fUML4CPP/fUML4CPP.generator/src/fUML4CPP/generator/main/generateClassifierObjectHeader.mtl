@@ -16,6 +16,7 @@
 
 [import fUML4CPP::generator::main::generateClassifierObjectSource /]
 [import fUML4CPP::generator::main::parameterHelper /]
+[import fUML4CPP::generator::main::fUMLCollectionHelper /]
 [import UML4CPP::generator::main::components::generateType /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
@@ -28,6 +29,9 @@
 [startGuard(aClassifier,'Execution')/]
 
 #include "PSCS/Semantics/StructuredClassifiers/impl/CS_ObjectImpl.hpp"
+[for (inheritedType : Classifier | aClassifier.collectInheritedTypes())]
+#include "[aPackage.getPackageName()/]Exec/[inheritedType.objectClassName()/].hpp"
+[/for]
 
 template <class T> 
 class Bag;
@@ -39,12 +43,13 @@ namespace [aClassifier.getNearestPackage().myNamespaceName()/]
 
 namespace uml
 {
+	class Element;
 	class ConnectorEnd;
 }
 
 namespace [aPackage.name/] 
 {
-	class [className/] : virtual public PSCS::Semantics::StructuredClassifiers::CS_ObjectImpl
+	class [className/] : [if (aClassifier.collectInheritedTypes()->isEmpty())]virtual public PSCS::Semantics::StructuredClassifiers::CS_ObjectImpl[else][for(inheritedType : Classifier | aClassifier.collectInheritedTypes()) separator (' , ')]virtual public [inheritedType.objectClassName()/][/for][/if]
 	{
 		public:
 		    //constructors
@@ -58,8 +63,10 @@ namespace [aPackage.name/]
 
 			virtual void destroy();
 			
-			virtual std::shared_ptr<[pointerName/]> getUmlValue() const;
-			virtual void setUmlValue(std::shared_ptr<[pointerName/]>);
+			virtual std::shared_ptr<[pointerName/]> [aClassifier.UMLValueGetterName()/]() const;
+			virtual std::shared_ptr<uml::Element> getUmlValue() const;
+			virtual void setUmlValue(std::shared_ptr<uml::Element>);
+			virtual void [aClassifier.UMLValueSetterName()/](std::shared_ptr<[pointerName/]>);
 			virtual void setThis[className/]Ptr(std::weak_ptr<[className/]> thisObjectPtr);
 			virtual bool equals(std::shared_ptr<fUML::Semantics::Values::Value> otherValue);
 			virtual std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Object>> getDirectContainers();
@@ -78,7 +85,7 @@ namespace [aPackage.name/]
 [/let]
 
 		protected:
-			std::shared_ptr<[pointerName/]> m_umlValue = nullptr;
+			std::shared_ptr<[pointerName/]> [aClassifier.UMLValueName()/] = nullptr;
 	};
 }
 [endGuard(aClassifier,'Object')/]
