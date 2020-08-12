@@ -72,6 +72,8 @@
 
 #include "uml/RedefinableElement.hpp"
 
+#include "uml/RemoveStructuralFeatureValueAction.hpp"
+
 #include "uml/State.hpp"
 
 #include "uml/StringExpression.hpp"
@@ -200,6 +202,14 @@ ValuePinImpl::~ValuePinImpl()
 
 
 //Additional constructor for the containments back reference
+			ValuePinImpl::ValuePinImpl(std::weak_ptr<uml::RemoveStructuralFeatureValueAction > par_removeStructuralFeatureValueAction)
+			:ValuePinImpl()
+			{
+			    m_removeStructuralFeatureValueAction = par_removeStructuralFeatureValueAction;
+			}
+
+
+//Additional constructor for the containments back reference
 			ValuePinImpl::ValuePinImpl(std::weak_ptr<uml::StructuralFeatureAction > par_structuralFeatureAction)
 			:ValuePinImpl()
 			{
@@ -274,6 +284,8 @@ ValuePinImpl::ValuePinImpl(const ValuePinImpl & obj):ValuePinImpl()
 
 	std::shared_ptr<Union<uml::Classifier>> _redefinitionContext = obj.getRedefinitionContext();
 	m_redefinitionContext.reset(new Union<uml::Classifier>(*(obj.getRedefinitionContext().get())));
+
+	m_removeStructuralFeatureValueAction  = obj.getRemoveStructuralFeatureValueAction();
 
 	m_selection  = obj.getSelection();
 
@@ -478,6 +490,11 @@ std::shared_ptr<ecore::EObject> ValuePinImpl::eContainer() const
 		return wp;
 	}
 
+	if(auto wp = m_removeStructuralFeatureValueAction.lock())
+	{
+		return wp;
+	}
+
 	if(auto wp = m_structuralFeatureAction.lock())
 	{
 		return wp;
@@ -498,7 +515,7 @@ Any ValuePinImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::VALUEPIN_ATTRIBUTE_VALUE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getValue())); //25040
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getValue())); //25041
 	}
 	return InputPinImpl::eGet(featureID, resolve, coreType);
 }
@@ -507,7 +524,7 @@ bool ValuePinImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::VALUEPIN_ATTRIBUTE_VALUE:
-			return getValue() != nullptr; //25040
+			return getValue() != nullptr; //25041
 	}
 	return InputPinImpl::internalEIsSet(featureID);
 }
@@ -520,7 +537,7 @@ bool ValuePinImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ValueSpecification> _value = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
-			setValue(_value); //25040
+			setValue(_value); //25041
 			return true;
 		}
 	}

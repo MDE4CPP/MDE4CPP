@@ -137,6 +137,11 @@ namespace uml
 
 namespace uml 
 {
+	class RemoveStructuralFeatureValueAction;
+}
+
+namespace uml 
+{
 	class State;
 }
 
@@ -233,6 +238,10 @@ namespace uml
 
 			//Additional constructors for the containments back reference
 
+			InputPin(std::weak_ptr<uml::RemoveStructuralFeatureValueAction > par_removeStructuralFeatureValueAction);
+
+			//Additional constructors for the containments back reference
+
 			InputPin(std::weak_ptr<uml::StructuralFeatureAction > par_structuralFeatureAction);
 
 			//Additional constructors for the containments back reference
@@ -298,6 +307,13 @@ namespace uml
 			virtual void setInvocationAction(std::shared_ptr<uml::InvocationAction> _invocationAction_invocationAction) = 0;
 			/*!
 			 */
+			virtual std::weak_ptr<uml::RemoveStructuralFeatureValueAction > getRemoveStructuralFeatureValueAction() const = 0;
+			
+			/*!
+			 */
+			virtual void setRemoveStructuralFeatureValueAction(std::shared_ptr<uml::RemoveStructuralFeatureValueAction> _removeStructuralFeatureValueAction_removeStructuralFeatureValueAction) = 0;
+			/*!
+			 */
 			virtual std::weak_ptr<uml::StructuralFeatureAction > getStructuralFeatureAction() const = 0;
 			
 			/*!
@@ -336,6 +352,9 @@ namespace uml
 			/*!
 			 */
 			std::weak_ptr<uml::InvocationAction > m_invocationAction;
+			/*!
+			 */
+			std::weak_ptr<uml::RemoveStructuralFeatureValueAction > m_removeStructuralFeatureValueAction;
 			/*!
 			 */
 			std::weak_ptr<uml::StructuralFeatureAction > m_structuralFeatureAction;

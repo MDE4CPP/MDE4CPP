@@ -72,6 +72,8 @@
 
 #include "uml/RedefinableElement.hpp"
 
+#include "uml/RemoveStructuralFeatureValueAction.hpp"
+
 #include "uml/State.hpp"
 
 #include "uml/StringExpression.hpp"
@@ -123,7 +125,11 @@ InputPinImpl::InputPinImpl()
 
 	
 
+	
+
 	//Init references
+	
+
 	
 
 	
@@ -224,6 +230,14 @@ InputPinImpl::~InputPinImpl()
 
 
 //Additional constructor for the containments back reference
+			InputPinImpl::InputPinImpl(std::weak_ptr<uml::RemoveStructuralFeatureValueAction > par_removeStructuralFeatureValueAction)
+			:InputPinImpl()
+			{
+			    m_removeStructuralFeatureValueAction = par_removeStructuralFeatureValueAction;
+			}
+
+
+//Additional constructor for the containments back reference
 			InputPinImpl::InputPinImpl(std::weak_ptr<uml::StructuralFeatureAction > par_structuralFeatureAction)
 			:InputPinImpl()
 			{
@@ -298,6 +312,8 @@ InputPinImpl::InputPinImpl(const InputPinImpl & obj):InputPinImpl()
 
 	std::shared_ptr<Union<uml::Classifier>> _redefinitionContext = obj.getRedefinitionContext();
 	m_redefinitionContext.reset(new Union<uml::Classifier>(*(obj.getRedefinitionContext().get())));
+
+	m_removeStructuralFeatureValueAction  = obj.getRemoveStructuralFeatureValueAction();
 
 	m_selection  = obj.getSelection();
 
@@ -448,6 +464,16 @@ void InputPinImpl::setInvocationAction(std::shared_ptr<uml::InvocationAction> _i
     m_invocationAction = _invocationAction;
 }
 
+std::weak_ptr<uml::RemoveStructuralFeatureValueAction > InputPinImpl::getRemoveStructuralFeatureValueAction() const
+{
+
+    return m_removeStructuralFeatureValueAction;
+}
+void InputPinImpl::setRemoveStructuralFeatureValueAction(std::shared_ptr<uml::RemoveStructuralFeatureValueAction> _removeStructuralFeatureValueAction)
+{
+    m_removeStructuralFeatureValueAction = _removeStructuralFeatureValueAction;
+}
+
 std::weak_ptr<uml::StructuralFeatureAction > InputPinImpl::getStructuralFeatureAction() const
 {
 
@@ -545,6 +571,11 @@ std::shared_ptr<ecore::EObject> InputPinImpl::eContainer() const
 		return wp;
 	}
 
+	if(auto wp = m_removeStructuralFeatureValueAction.lock())
+	{
+		return wp;
+	}
+
 	if(auto wp = m_structuralFeatureAction.lock())
 	{
 		return wp;
@@ -574,6 +605,8 @@ Any InputPinImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getDestroyObjectAction().lock())); //11739
 		case uml::UmlPackage::INPUTPIN_ATTRIBUTE_INVOCATIONACTION:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getInvocationAction().lock())); //11735
+		case uml::UmlPackage::INPUTPIN_ATTRIBUTE_REMOVESTRUCTURALFEATUREVALUEACTION:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getRemoveStructuralFeatureValueAction().lock())); //11740
 		case uml::UmlPackage::INPUTPIN_ATTRIBUTE_STRUCTURALFEATUREACTION:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getStructuralFeatureAction().lock())); //11733
 		case uml::UmlPackage::INPUTPIN_ATTRIBUTE_WRITESTRUCTURALFEATUREACTION:
@@ -595,6 +628,8 @@ bool InputPinImpl::internalEIsSet(int featureID) const
 			return getDestroyObjectAction().lock() != nullptr; //11739
 		case uml::UmlPackage::INPUTPIN_ATTRIBUTE_INVOCATIONACTION:
 			return getInvocationAction().lock() != nullptr; //11735
+		case uml::UmlPackage::INPUTPIN_ATTRIBUTE_REMOVESTRUCTURALFEATUREVALUEACTION:
+			return getRemoveStructuralFeatureValueAction().lock() != nullptr; //11740
 		case uml::UmlPackage::INPUTPIN_ATTRIBUTE_STRUCTURALFEATUREACTION:
 			return getStructuralFeatureAction().lock() != nullptr; //11733
 		case uml::UmlPackage::INPUTPIN_ATTRIBUTE_WRITESTRUCTURALFEATUREACTION:
@@ -636,6 +671,14 @@ bool InputPinImpl::eSet(int featureID, Any newValue)
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::InvocationAction> _invocationAction = std::dynamic_pointer_cast<uml::InvocationAction>(_temp);
 			setInvocationAction(_invocationAction); //11735
+			return true;
+		}
+		case uml::UmlPackage::INPUTPIN_ATTRIBUTE_REMOVESTRUCTURALFEATUREVALUEACTION:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::RemoveStructuralFeatureValueAction> _removeStructuralFeatureValueAction = std::dynamic_pointer_cast<uml::RemoveStructuralFeatureValueAction>(_temp);
+			setRemoveStructuralFeatureValueAction(_removeStructuralFeatureValueAction); //11740
 			return true;
 		}
 		case uml::UmlPackage::INPUTPIN_ATTRIBUTE_STRUCTURALFEATUREACTION:
@@ -739,6 +782,18 @@ void InputPinImpl::resolveReferences(const int featureID, std::list<std::shared_
 				// Cast object to correct type
 				std::shared_ptr<uml::InvocationAction> _invocationAction = std::dynamic_pointer_cast<uml::InvocationAction>( references.front() );
 				setInvocationAction(_invocationAction);
+			}
+			
+			return;
+		}
+
+		case uml::UmlPackage::INPUTPIN_ATTRIBUTE_REMOVESTRUCTURALFEATUREVALUEACTION:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::RemoveStructuralFeatureValueAction> _removeStructuralFeatureValueAction = std::dynamic_pointer_cast<uml::RemoveStructuralFeatureValueAction>( references.front() );
+				setRemoveStructuralFeatureValueAction(_removeStructuralFeatureValueAction);
 			}
 			
 			return;

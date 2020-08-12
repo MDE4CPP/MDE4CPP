@@ -3466,6 +3466,10 @@ std::shared_ptr<ecore::EReference> UmlPackageImpl::getInputPin_Attribute_invocat
 {
 	return m_inputPin_Attribute_invocationAction;
 }
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getInputPin_Attribute_removeStructuralFeatureValueAction() const
+{
+	return m_inputPin_Attribute_removeStructuralFeatureValueAction;
+}
 std::shared_ptr<ecore::EReference> UmlPackageImpl::getInputPin_Attribute_structuralFeatureAction() const
 {
 	return m_inputPin_Attribute_structuralFeatureAction;

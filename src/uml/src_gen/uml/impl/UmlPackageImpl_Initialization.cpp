@@ -13872,6 +13872,31 @@ void UmlPackageImpl::initializeInputPinContent()
 	   		m_inputPin_Attribute_invocationAction->setEOpposite(otherEnd);
 	    }
 	}
+	m_inputPin_Attribute_removeStructuralFeatureValueAction->setName("removeStructuralFeatureValueAction");
+	m_inputPin_Attribute_removeStructuralFeatureValueAction->setEType(getRemoveStructuralFeatureValueAction_Class());
+	m_inputPin_Attribute_removeStructuralFeatureValueAction->setLowerBound(0);
+	m_inputPin_Attribute_removeStructuralFeatureValueAction->setUpperBound(1);
+	m_inputPin_Attribute_removeStructuralFeatureValueAction->setTransient(false);
+	m_inputPin_Attribute_removeStructuralFeatureValueAction->setVolatile(false);
+	m_inputPin_Attribute_removeStructuralFeatureValueAction->setChangeable(true);
+	m_inputPin_Attribute_removeStructuralFeatureValueAction->setUnsettable(false);
+	m_inputPin_Attribute_removeStructuralFeatureValueAction->setUnique(true);
+	m_inputPin_Attribute_removeStructuralFeatureValueAction->setDerived(false);
+	m_inputPin_Attribute_removeStructuralFeatureValueAction->setOrdered(true);
+	m_inputPin_Attribute_removeStructuralFeatureValueAction->setContainment(false);
+	m_inputPin_Attribute_removeStructuralFeatureValueAction->setResolveProxies(true);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			m_inputPin_Attribute_removeStructuralFeatureValueAction->setDefaultValueLiteral(defaultValue);
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getRemoveStructuralFeatureValueAction_Attribute_removeAt();
+		if (otherEnd != nullptr)
+	    {
+	   		m_inputPin_Attribute_removeStructuralFeatureValueAction->setEOpposite(otherEnd);
+	    }
+	}
 	m_inputPin_Attribute_structuralFeatureAction->setName("structuralFeatureAction");
 	m_inputPin_Attribute_structuralFeatureAction->setEType(getStructuralFeatureAction_Class());
 	m_inputPin_Attribute_structuralFeatureAction->setLowerBound(0);
@@ -27342,8 +27367,11 @@ void UmlPackageImpl::initializeRemoveStructuralFeatureValueActionContent()
 		{
 			m_removeStructuralFeatureValueAction_Attribute_removeAt->setDefaultValueLiteral(defaultValue);
 		}				
-			//undefined otherEnd
-			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::UmlPackage::eInstance()->getInputPin_Attribute_removeStructuralFeatureValueAction();
+		if (otherEnd != nullptr)
+	    {
+	   		m_removeStructuralFeatureValueAction_Attribute_removeAt->setEOpposite(otherEnd);
+	    }
 	}
 	
 	m_removeStructuralFeatureValueAction_Operation_removeAt_and_value_EDiagnosticChain_EMap->setEType(ecore::EcorePackage::eInstance()->getEBoolean_Class());

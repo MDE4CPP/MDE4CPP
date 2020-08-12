@@ -340,6 +340,8 @@ namespace uml
 			 //Add containing object
 			 virtual std::shared_ptr<ActionInputPin> createActionInputPin_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID=-1) const ;
 			 //Add containing object
+			 virtual std::shared_ptr<ActionInputPin> createActionInputPin_in_RemoveStructuralFeatureValueAction(std::weak_ptr<uml::RemoveStructuralFeatureValueAction > par_removeStructuralFeatureValueAction, const int metaElementID=-1) const ;
+			 //Add containing object
 			 virtual std::shared_ptr<ActionInputPin> createActionInputPin_in_StructuralFeatureAction(std::weak_ptr<uml::StructuralFeatureAction > par_structuralFeatureAction, const int metaElementID=-1) const ;
 			 //Add containing object
 			 virtual std::shared_ptr<ActionInputPin> createActionInputPin_in_WriteStructuralFeatureAction(std::weak_ptr<uml::WriteStructuralFeatureAction > par_writeStructuralFeatureAction, const int metaElementID=-1) const ;
@@ -1215,6 +1217,8 @@ namespace uml
 			 virtual std::shared_ptr<InputPin> createInputPin_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID=-1) const ;
 			 //Add containing object
 			 virtual std::shared_ptr<InputPin> createInputPin_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID=-1) const ;
+			 //Add containing object
+			 virtual std::shared_ptr<InputPin> createInputPin_in_RemoveStructuralFeatureValueAction(std::weak_ptr<uml::RemoveStructuralFeatureValueAction > par_removeStructuralFeatureValueAction, const int metaElementID=-1) const ;
 			 //Add containing object
 			 virtual std::shared_ptr<InputPin> createInputPin_in_StructuralFeatureAction(std::weak_ptr<uml::StructuralFeatureAction > par_structuralFeatureAction, const int metaElementID=-1) const ;
 			 //Add containing object
@@ -2313,6 +2317,8 @@ namespace uml
 			 virtual std::shared_ptr<ValuePin> createValuePin_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID=-1) const ;
 			 //Add containing object
 			 virtual std::shared_ptr<ValuePin> createValuePin_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID=-1) const ;
+			 //Add containing object
+			 virtual std::shared_ptr<ValuePin> createValuePin_in_RemoveStructuralFeatureValueAction(std::weak_ptr<uml::RemoveStructuralFeatureValueAction > par_removeStructuralFeatureValueAction, const int metaElementID=-1) const ;
 			 //Add containing object
 			 virtual std::shared_ptr<ValuePin> createValuePin_in_StructuralFeatureAction(std::weak_ptr<uml::StructuralFeatureAction > par_structuralFeatureAction, const int metaElementID=-1) const ;
 			 //Add containing object

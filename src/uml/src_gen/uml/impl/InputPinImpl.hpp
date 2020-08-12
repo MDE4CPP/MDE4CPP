@@ -70,6 +70,10 @@ namespace uml
 
 
 			//Additional constructors for the containments back reference
+			InputPinImpl(std::weak_ptr<uml::RemoveStructuralFeatureValueAction > par_removeStructuralFeatureValueAction);
+
+
+			//Additional constructors for the containments back reference
 			InputPinImpl(std::weak_ptr<uml::StructuralFeatureAction > par_structuralFeatureAction);
 
 
@@ -136,6 +140,13 @@ namespace uml
 			/*!
 			 */
 			virtual void setInvocationAction(std::shared_ptr<uml::InvocationAction> _invocationAction_invocationAction) ;
+			/*!
+			 */
+			virtual std::weak_ptr<uml::RemoveStructuralFeatureValueAction > getRemoveStructuralFeatureValueAction() const ;
+			
+			/*!
+			 */
+			virtual void setRemoveStructuralFeatureValueAction(std::shared_ptr<uml::RemoveStructuralFeatureValueAction> _removeStructuralFeatureValueAction_removeStructuralFeatureValueAction) ;
 			/*!
 			 */
 			virtual std::weak_ptr<uml::StructuralFeatureAction > getStructuralFeatureAction() const ;

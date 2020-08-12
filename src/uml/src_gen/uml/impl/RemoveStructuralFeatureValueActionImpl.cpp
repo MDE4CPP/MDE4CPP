@@ -507,10 +507,9 @@ void RemoveStructuralFeatureValueActionImpl::loadNode(std::string nodeName, std:
 			{
 				typeName = "InputPin";
 			}
-			std::shared_ptr<uml::InputPin> removeAt = std::dynamic_pointer_cast<uml::InputPin>(modelFactory->create(typeName));
+			std::shared_ptr<ecore::EObject> removeAt = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::UmlPackage::INPUTPIN_ATTRIBUTE_REMOVESTRUCTURALFEATUREVALUEACTION);
 			if (removeAt != nullptr)
 			{
-				this->setRemoveAt(removeAt);
 				loadHandler->handleChild(removeAt);
 			}
 			return;
