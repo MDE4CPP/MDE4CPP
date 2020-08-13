@@ -36,7 +36,7 @@ task compileEcoreModels() {
 	dependsOn 'ecore:types:src_gen:compileTypes'
 	dependsOn 'uml:src_gen:compileUml'
 	dependsOn 'fuml:src_gen:compileFUML'
-//	dependsOn 'pscs:src_gen:compilePSCS'
+	dependsOn 'pscs:src_gen:compilePSCS'
 }
 
 // Compile all without generating the models
