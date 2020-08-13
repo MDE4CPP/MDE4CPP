@@ -89,12 +89,12 @@ CallActionActivationImpl::CallActionActivationImpl()
 	//*********************************
 	//References
 		m_callExecutions.reset(new Bag<fUML::Semantics::CommonBehavior::Execution>());
-	
-	
+
+
 
 	//Init references
-	
-	
+
+
 }
 
 CallActionActivationImpl::~CallActionActivationImpl()
@@ -124,7 +124,7 @@ CallActionActivationImpl::CallActionActivationImpl(const CallActionActivationImp
 	m_running = obj.isRunning();
 
 	//copy references with no containment (soft copy)
-	
+
 	m_group  = obj.getGroup();
 
 	std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> _incomingEdges = obj.getIncomingEdges();
@@ -174,8 +174,8 @@ CallActionActivationImpl::CallActionActivationImpl(const CallActionActivationImp
 		std::cout << "Copying the Subset: " << "m_outputPinActivation" << std::endl;
 	#endif
 
-	
-	
+
+
 }
 
 std::shared_ptr<ecore::EObject>  CallActionActivationImpl::copy() const
@@ -208,6 +208,9 @@ void CallActionActivationImpl::doAction()
         this->getCallExecutions()->push_back(callExecution);
 
         std::shared_ptr<uml::CallAction> callAction = std::dynamic_pointer_cast<uml::CallAction> (this->getNode());
+
+				std::cout << "-----CallActionActivation::" << __FUNCTION__<<": action = " << callAction->getName() << '\n';
+
         std::shared_ptr<Bag<uml::InputPin> > argumentPins = callAction->getArgument();
         std::shared_ptr<Subset<fUML::Semantics::Actions::InputPinActivation, fUML::Semantics::Actions::PinActivation>> inputActivationList=this->getInputPinActivation();
 
@@ -403,7 +406,7 @@ bool CallActionActivationImpl::eSet(int featureID, Any newValue)
 				callExecutionsList->add(std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::Execution>(*iter));
 				iter++;
 			}
-			
+
 			Bag<fUML::Semantics::CommonBehavior::Execution>::iterator iterCallExecutions = m_callExecutions->begin();
 			Bag<fUML::Semantics::CommonBehavior::Execution>::iterator endCallExecutions = m_callExecutions->end();
 			while (iterCallExecutions != endCallExecutions)
@@ -423,7 +426,7 @@ bool CallActionActivationImpl::eSet(int featureID, Any newValue)
 				{
 					m_callExecutions->add(*iterCallExecutions);
 				}
-				iterCallExecutions++;			
+				iterCallExecutions++;
 			}
 			return true;
 		}
@@ -449,7 +452,7 @@ void CallActionActivationImpl::load(std::shared_ptr<persistence::interfaces::XLo
 	{
 		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
-}		
+}
 
 void CallActionActivationImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
@@ -485,7 +488,7 @@ void CallActionActivationImpl::loadNode(std::string nodeName, std::shared_ptr<pe
 	{
 		std::cout << "| ERROR    | " << e.what() << std::endl;
 	}
-	catch (...) 
+	catch (...)
 	{
 		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
 	}
@@ -503,18 +506,18 @@ void CallActionActivationImpl::save(std::shared_ptr<persistence::interfaces::XSa
 	saveContent(saveHandler);
 
 	InvocationActionActivationImpl::saveContent(saveHandler);
-	
+
 	ActionActivationImpl::saveContent(saveHandler);
-	
+
 	fUML::Semantics::Activities::ActivityNodeActivationImpl::saveContent(saveHandler);
-	
+
 	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
-	
+
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
+
+
+
+
 }
 
 void CallActionActivationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -523,7 +526,7 @@ void CallActionActivationImpl::saveContent(std::shared_ptr<persistence::interfac
 	{
 		std::shared_ptr<fUML::Semantics::Actions::ActionsPackage> package = fUML::Semantics::Actions::ActionsPackage::eInstance();
 
-	
+
 
 
 		//
@@ -532,7 +535,7 @@ void CallActionActivationImpl::saveContent(std::shared_ptr<persistence::interfac
 		std::shared_ptr<ecore::EClass> metaClass = this->eClass();
 		// Save 'callExecutions'
 		std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::Execution>> list_callExecutions = this->getCallExecutions();
-		for (std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> callExecutions : *list_callExecutions) 
+		for (std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> callExecutions : *list_callExecutions)
 		{
 			saveHandler->addReference(callExecutions, "callExecutions", callExecutions->eClass() !=fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getExecution_Class());
 		}
@@ -542,4 +545,3 @@ void CallActionActivationImpl::saveContent(std::shared_ptr<persistence::interfac
 		std::cout << "| ERROR    | " << e.what() << std::endl;
 	}
 }
-

@@ -92,7 +92,7 @@ DispatchStrategyImpl::DispatchStrategyImpl(const DispatchStrategyImpl & obj):Dis
 	#endif
 
 	//copy references with no containment (soft copy)
-	
+
 
 	//Clone references with containment (deep copy)
 
@@ -122,6 +122,7 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> DispatchStrategyImpl
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
+			std::cout << "-----DispatchStrategy::" << __FUNCTION__<<": Entering! " << '\n';
 	    return object->getLocus()->getFactory()->createExecution(this->retrieveMethod(object,operation),object);
 	//end of body
 }
@@ -208,7 +209,7 @@ void DispatchStrategyImpl::load(std::shared_ptr<persistence::interfaces::XLoadHa
 	{
 		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
-}		
+}
 
 void DispatchStrategyImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
@@ -234,9 +235,9 @@ void DispatchStrategyImpl::save(std::shared_ptr<persistence::interfaces::XSaveHa
 	saveContent(saveHandler);
 
 	fUML::Semantics::Loci::SemanticStrategyImpl::saveContent(saveHandler);
-	
+
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
+
 }
 
 void DispatchStrategyImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -245,7 +246,7 @@ void DispatchStrategyImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	{
 		std::shared_ptr<fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage> package = fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance();
 
-	
+
 
 	}
 	catch (std::exception& e)
@@ -253,4 +254,3 @@ void DispatchStrategyImpl::saveContent(std::shared_ptr<persistence::interfaces::
 		std::cout << "| ERROR    | " << e.what() << std::endl;
 	}
 }
-

@@ -85,10 +85,10 @@ ReferenceImpl::ReferenceImpl()
 	// Reference Members
 	//*********************************
 	//References
-	
+
 
 	//Init references
-	
+
 }
 
 ReferenceImpl::~ReferenceImpl()
@@ -109,7 +109,7 @@ ReferenceImpl::ReferenceImpl(const ReferenceImpl & obj):ReferenceImpl()
 	#endif
 
 	//copy references with no containment (soft copy)
-	
+
 	m_referent  = obj.getReferent();
 
 
@@ -157,6 +157,7 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> ReferenceImpl::dispa
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
+	std::cout << "-----Reference::" << __FUNCTION__<<": Entering!" << '\n';
 	return this->getReferent()->dispatch(operation);
 	//end of body
 }
@@ -238,7 +239,7 @@ void ReferenceImpl::send(std::shared_ptr<fUML::Semantics::CommonBehavior::EventO
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	
+
 	//end of body
 }
 
@@ -353,7 +354,7 @@ void ReferenceImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> 
 	{
 		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
-}		
+}
 
 void ReferenceImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
@@ -372,7 +373,7 @@ void ReferenceImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoa
 	{
 		std::cout << "| ERROR    | " << e.what() << std::endl;
 	}
-	catch (...) 
+	catch (...)
 	{
 		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
 	}
@@ -400,7 +401,7 @@ void ReferenceImpl::resolveReferences(const int featureID, std::list<std::shared
 				std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> _referent = std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Object>( references.front() );
 				setReferent(_referent);
 			}
-			
+
 			return;
 		}
 	}
@@ -412,15 +413,15 @@ void ReferenceImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> 
 	saveContent(saveHandler);
 
 	fUML::Semantics::SimpleClassifiers::StructuredValueImpl::saveContent(saveHandler);
-	
+
 	fUML::Semantics::Values::ValueImpl::saveContent(saveHandler);
-	
+
 	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
-	
+
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
+
+
+
 }
 
 void ReferenceImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -429,7 +430,7 @@ void ReferenceImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 	{
 		std::shared_ptr<fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage> package = fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance();
 
-	
+
 
 		// Add references
 		saveHandler->addReference("referent", this->getReferent());
@@ -440,4 +441,3 @@ void ReferenceImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 		std::cout << "| ERROR    | " << e.what() << std::endl;
 	}
 }
-

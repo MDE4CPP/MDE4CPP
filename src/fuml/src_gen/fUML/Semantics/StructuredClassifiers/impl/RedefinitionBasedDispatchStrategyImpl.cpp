@@ -91,7 +91,7 @@ RedefinitionBasedDispatchStrategyImpl::RedefinitionBasedDispatchStrategyImpl(con
 	#endif
 
 	//copy references with no containment (soft copy)
-	
+
 
 	//Clone references with containment (deep copy)
 
@@ -121,6 +121,7 @@ bool RedefinitionBasedDispatchStrategyImpl::operationsMatch(std::shared_ptr<uml:
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
+	std::cout << "-----RedefinitionBasedDispatchStrategy::" << __FUNCTION__<<": Entering! " << '\n';
 		bool matches = false;
 	if(ownedOperation->matches(baseOperation))
 	{
@@ -135,6 +136,7 @@ bool RedefinitionBasedDispatchStrategyImpl::operationsMatch(std::shared_ptr<uml:
 			i = i + 1;
         }
     }
+	std::cout << "-----RedefinitionBasedDispatchStrategy::" << __FUNCTION__<<": Leaving : " << std::boolalpha << matches << '\n';
 	return matches;
 	//end of body
 }
@@ -143,19 +145,30 @@ std::shared_ptr<uml::Behavior> RedefinitionBasedDispatchStrategyImpl::retrieveMe
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
+
+	std::cout << "-----RedefinitionBasedDispatchStrategy::" << __FUNCTION__<<": Entering! " << '\n';
+	std::cout << "-----RedefinitionBasedDispatchStrategy::" << __FUNCTION__<<": object->types->size = " << object->getTypes()->size() << '\n';
 		std::shared_ptr<uml::Behavior> method = nullptr;
 	unsigned int i = 0;
 	while(method == nullptr && (i < object->getTypes()->size()))
-	{
+	{	std::cout << "-----RedefinitionBasedDispatchStrategy::" << __FUNCTION__<<": Outer while iteration " << i << '\n';
+	std::shared_ptr<uml::Classifier> classifier = object->getTypes()->at(i);
+	std::cout << "classifier->eClass: " << classifier->eClass()->getName() << '\n';
+	std::cout << "classifier->eClass->getMetaElementID: " << classifier->eClass()->getMetaElementID() << '\n';
+	std::cout << "classifier->getMetaElementID: " << classifier->getMetaElementID() << '\n';
 		std::shared_ptr<uml::Class> type = std::dynamic_pointer_cast<uml::Class>(object->getTypes()->at(i));
+		std::cout << "-----RedefinitionBasedDispatchStrategy::" << __FUNCTION__<<": current type is null = " << std::boolalpha << (type==nullptr) << '\n';
+		std::cout << "-----RedefinitionBasedDispatchStrategy::" << __FUNCTION__<<": current type = " << type->getName() << '\n';
+
 		std::shared_ptr<Bag<uml::NamedElement> > members = type->getMember();
 		unsigned int j = 0;
 		while(method == nullptr && (j < members->size()))
 		{
+			std::cout << "-----RedefinitionBasedDispatchStrategy::" << __FUNCTION__<<": Inner while iteration " << i << '\n';
 			std::shared_ptr<uml::NamedElement> member = members->at(j);
 			std::shared_ptr<uml::Operation> memberOperation = std::dynamic_pointer_cast<uml::Operation>(member);
 			if(memberOperation != nullptr)
-			{	
+			{
 				if(this->operationsMatch(memberOperation, operation))
 				{
 					method = memberOperation->getMethod()->at(0);
@@ -165,7 +178,7 @@ std::shared_ptr<uml::Behavior> RedefinitionBasedDispatchStrategyImpl::retrieveMe
 		}
 		i = i + 1;
 	}
-
+	std::cout << "-----RedefinitionBasedDispatchStrategy::" << __FUNCTION__<<": Leaving! " << '\n';
 	return method;
 	//end of body
 }
@@ -236,7 +249,7 @@ void RedefinitionBasedDispatchStrategyImpl::load(std::shared_ptr<persistence::in
 	{
 		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
-}		
+}
 
 void RedefinitionBasedDispatchStrategyImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
@@ -262,12 +275,12 @@ void RedefinitionBasedDispatchStrategyImpl::save(std::shared_ptr<persistence::in
 	saveContent(saveHandler);
 
 	DispatchStrategyImpl::saveContent(saveHandler);
-	
+
 	fUML::Semantics::Loci::SemanticStrategyImpl::saveContent(saveHandler);
-	
+
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
+
+
 }
 
 void RedefinitionBasedDispatchStrategyImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -276,7 +289,7 @@ void RedefinitionBasedDispatchStrategyImpl::saveContent(std::shared_ptr<persiste
 	{
 		std::shared_ptr<fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage> package = fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance();
 
-	
+
 
 	}
 	catch (std::exception& e)
@@ -284,4 +297,3 @@ void RedefinitionBasedDispatchStrategyImpl::saveContent(std::shared_ptr<persiste
 		std::cout << "| ERROR    | " << e.what() << std::endl;
 	}
 }
-
