@@ -226,7 +226,6 @@ void CS_CallOperationActionActivationImpl::doAction()
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	std::shared_ptr<uml::CallOperationAction> action = std::dynamic_pointer_cast<uml::CallOperationAction>(this->getNode());
-	std::cout << "-----CS_CallOperationActionActivation::" << __FUNCTION__<<": action = " << action->getName() << '\n';
 	// First determines if this is a call to a constructor and if a default
 	// construction strategy needs to be applied.
 	// This is a call to a constructor if the called operation has
@@ -283,15 +282,11 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> CS_CallOperationActi
 	// Otherwise the invocation is made into the target object through the given Port.
 
 	std::shared_ptr<uml::CallOperationAction> action = std::dynamic_pointer_cast<uml::CallOperationAction>(this->getNode());
-	std::cout << "-----CS_CallOperationActionActivation::" << __FUNCTION__<<": action = " << action->getName() << '\n';
 	std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> execution = nullptr;
 	if(action->getOnPort() == nullptr) {
-		std::cout << "-----CS_CallOperationActionActivation::" << __FUNCTION__<<": onPort is null " << '\n';
 		execution = fUML::Semantics::Actions::CallOperationActionActivationImpl::getCallExecution();
 	}
 	else {
-
-std::cout << "-----CS_CallOperationActionActivation::" << __FUNCTION__<<": onPort is NOT null " << '\n';
 
 		std::shared_ptr<fUML::Semantics::Values::Value> target = nullptr;
 

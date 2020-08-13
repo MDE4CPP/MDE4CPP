@@ -60,10 +60,10 @@
 #include "fUML/Semantics/Actions/impl/ActionsFactoryImpl.hpp"
 #include "fUML/Semantics/Actions/impl/ActionsPackageImpl.hpp"
 
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsFactory.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -114,7 +114,7 @@ CallOperationActionActivationImpl::CallOperationActionActivationImpl(const CallO
 	m_running = obj.isRunning();
 
 	//copy references with no containment (soft copy)
-
+	
 	m_group  = obj.getGroup();
 
 	std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> _incomingEdges = obj.getIncomingEdges();
@@ -191,10 +191,8 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> CallOperationActionA
 	//generated from body annotation
 		std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> execution = nullptr;
 	std::shared_ptr<uml::CallOperationAction> action = std::dynamic_pointer_cast<uml::CallOperationAction> (this->getNode());
-	std::cout << "-----CallOperationActionActivation::" << __FUNCTION__<<": action = " << action->getName() << '\n';
 	if(action != nullptr)
 	{
-		std::cout << "-----CallOperationActionActivation::" << __FUNCTION__<<": action is NOT null " << '\n';
 		//Pin name
 		std::shared_ptr<uml::InputPin> targetPin = action->getTarget();
 		std::string name = targetPin->getName();
@@ -277,13 +275,10 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> CallOperationActionA
 			std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> ref = std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Reference>(target);
 			if(nullptr != ref)
 			{
-				std::cout << "-----CallOperationActionActivation::" << __FUNCTION__<<": calling ref->dispatch" << '\n';
 				execution = ref->dispatch(action->getOperation());
 			}
 		}
 	}
-	else{std::cout << "-----CallOperationActionActivation::" << __FUNCTION__<<": action is null " << '\n';}
-	std::cout << "-----CallOperationActionActivation::" << __FUNCTION__<<": execution is null : " <<std::boolalpha <<(execution == nullptr) << '\n';
 	return execution;
 	//end of body
 }
@@ -362,7 +357,7 @@ void CallOperationActionActivationImpl::load(std::shared_ptr<persistence::interf
 	{
 		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
-}
+}		
 
 void CallOperationActionActivationImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
@@ -388,21 +383,21 @@ void CallOperationActionActivationImpl::save(std::shared_ptr<persistence::interf
 	saveContent(saveHandler);
 
 	CallActionActivationImpl::saveContent(saveHandler);
-
+	
 	InvocationActionActivationImpl::saveContent(saveHandler);
-
+	
 	ActionActivationImpl::saveContent(saveHandler);
-
+	
 	fUML::Semantics::Activities::ActivityNodeActivationImpl::saveContent(saveHandler);
-
+	
 	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
-
+	
 	ecore::EObjectImpl::saveContent(saveHandler);
-
-
-
-
-
+	
+	
+	
+	
+	
 }
 
 void CallOperationActionActivationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -411,7 +406,7 @@ void CallOperationActionActivationImpl::saveContent(std::shared_ptr<persistence:
 	{
 		std::shared_ptr<fUML::Semantics::Actions::ActionsPackage> package = fUML::Semantics::Actions::ActionsPackage::eInstance();
 
-
+	
 
 	}
 	catch (std::exception& e)
@@ -419,3 +414,4 @@ void CallOperationActionActivationImpl::saveContent(std::shared_ptr<persistence:
 		std::cout << "| ERROR    | " << e.what() << std::endl;
 	}
 }
+

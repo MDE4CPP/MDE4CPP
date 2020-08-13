@@ -94,8 +94,10 @@ using namespace [aPackage.name/];
 
 [className/]::[className/](std::shared_ptr<[pointerName/]> _element):
 	[aClassifier.UMLValueName()/](_element)
-{
+{		
+	[if(not aClassifier.oclIsTypeOf(Interface))]
 	this->getTypes()->add([aClassifier.getModelPackage()/][aClassifier.generatePackageGetterCall(aClassifier)/]);
+	[/if]
 }
 
 [className/]::[className/]([className/] &obj):
@@ -104,8 +106,10 @@ using namespace [aPackage.name/];
 }
 
 [className/]::[className/]()
-{
+{	
+	[if(not aClassifier.oclIsTypeOf(Interface))]
 	this->getTypes()->add([aClassifier.getModelPackage()/][aClassifier.generatePackageGetterCall(aClassifier)/]);
+	[/if]
 }
 
 [className/]::~[className/]()
@@ -173,6 +177,17 @@ bool [className/]::equals(std::shared_ptr<fUML::Semantics::Values::Value> otherV
 	return isEqual;
 }
 
+std::string [className/]::toString()
+{
+	std::string buffer = "Instance of '[className/]', " + std::to_string(getTypes()->size()) + " types (";
+	for(unsigned int i = 0; i < getTypes()->size(); ++i)
+	{
+		buffer += "type{" + std::to_string(i) + "}: '" + getTypes()->at(i)->getName() + "', ";
+	}
+	buffer +=")";
+
+	return buffer;
+}
 
 std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Object>> [className/]::getDirectContainers()
 {   

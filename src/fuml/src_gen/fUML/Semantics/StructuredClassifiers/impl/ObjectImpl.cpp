@@ -68,10 +68,10 @@
 #include "fUML/Semantics/StructuredClassifiers/impl/StructuredClassifiersFactoryImpl.hpp"
 #include "fUML/Semantics/StructuredClassifiers/impl/StructuredClassifiersPackageImpl.hpp"
 
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsFactory.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -91,17 +91,17 @@ ObjectImpl::ObjectImpl()
 	// Reference Members
 	//*********************************
 	//References
-
+	
 
 		m_types.reset(new Bag<uml::Classifier>());
-
-
+	
+	
 
 	//Init references
+	
 
-
-
-
+	
+	
 }
 
 ObjectImpl::~ObjectImpl()
@@ -122,7 +122,7 @@ ObjectImpl::ObjectImpl(const ObjectImpl & obj):ObjectImpl()
 	#endif
 
 	//copy references with no containment (soft copy)
-
+	
 	m_locus  = obj.getLocus();
 
 	std::shared_ptr<Bag<uml::Classifier>> _types = obj.getTypes();
@@ -147,7 +147,7 @@ ObjectImpl::ObjectImpl(const ObjectImpl & obj):ObjectImpl()
 		std::cout << "Copying the Subset: " << "m_objectActivation" << std::endl;
 	#endif
 
-
+	
 }
 
 std::shared_ptr<ecore::EObject>  ObjectImpl::copy() const
@@ -199,9 +199,7 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> ObjectImpl::dispatch
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::cout << "-----Object::" << __FUNCTION__<<": Entering!" << '\n';
 	static std::shared_ptr<fUML::Semantics::StructuredClassifiers::DispatchStrategy> strategy = std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::DispatchStrategy>(this->getLocus()->getFactory()->getStrategy("dispatch"));
-	std::cout << "-----Object::" << __FUNCTION__<<": strategy is null : " << std::boolalpha << (strategy==nullptr) << '\n';
 	return strategy->dispatch(getThisObjectPtr(), operation);
 	//end of body
 }
@@ -229,7 +227,7 @@ void ObjectImpl::send(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccu
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-
+	
 	//end of body
 }
 
@@ -237,7 +235,7 @@ void ObjectImpl::startBehavior(std::shared_ptr<uml::Class>  classifier,std::shar
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	if(this->getObjectActivation() == nullptr)
+	if(this->getObjectActivation() == nullptr) 
     {
         this->setObjectActivation(std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation>(fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createObjectActivation()));
         this->getObjectActivation()->setObject(getThisObjectPtr());
@@ -356,7 +354,7 @@ bool ObjectImpl::eSet(int featureID, Any newValue)
 				typesList->add(std::dynamic_pointer_cast<uml::Classifier>(*iter));
 				iter++;
 			}
-
+			
 			Bag<uml::Classifier>::iterator iterTypes = m_types->begin();
 			Bag<uml::Classifier>::iterator endTypes = m_types->end();
 			while (iterTypes != endTypes)
@@ -376,7 +374,7 @@ bool ObjectImpl::eSet(int featureID, Any newValue)
 				{
 					m_types->add(*iterTypes);
 				}
-				iterTypes++;
+				iterTypes++;			
 			}
 			return true;
 		}
@@ -402,7 +400,7 @@ void ObjectImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loa
 	{
 		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
-}
+}		
 
 void ObjectImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
@@ -421,7 +419,7 @@ void ObjectImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHa
 	{
 		std::cout << "| ERROR    | " << e.what() << std::endl;
 	}
-	catch (...)
+	catch (...) 
 	{
 		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
 	}
@@ -455,7 +453,7 @@ void ObjectImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::int
 	{
 		std::cout << "| ERROR    | " << e.what() << std::endl;
 	}
-	catch (...)
+	catch (...) 
 	{
 		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
 	}
@@ -476,7 +474,7 @@ void ObjectImpl::resolveReferences(const int featureID, std::list<std::shared_pt
 				if (_r != nullptr)
 				{
 					_types->push_back(_r);
-				}
+				}				
 			}
 			return;
 		}
@@ -489,21 +487,21 @@ void ObjectImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> sav
 	saveContent(saveHandler);
 
 	ExtensionalValueImpl::saveContent(saveHandler);
-
+	
 	fUML::Semantics::SimpleClassifiers::CompoundValueImpl::saveContent(saveHandler);
-
+	
 	fUML::Semantics::SimpleClassifiers::StructuredValueImpl::saveContent(saveHandler);
-
+	
 	fUML::Semantics::Values::ValueImpl::saveContent(saveHandler);
-
+	
 	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
-
+	
 	ecore::EObjectImpl::saveContent(saveHandler);
-
-
-
-
-
+	
+	
+	
+	
+	
 }
 
 void ObjectImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -512,12 +510,12 @@ void ObjectImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandl
 	{
 		std::shared_ptr<fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage> package = fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance();
 
-
+	
 
 		// Add references
 		std::shared_ptr<Bag<uml::Classifier>> types_list = this->getTypes();
 		for (std::shared_ptr<uml::Classifier > object : *types_list)
-		{
+		{ 
 			saveHandler->addReferences("types", object);
 		}
 
@@ -538,3 +536,4 @@ void ObjectImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandl
 		std::cout << "| ERROR    | " << e.what() << std::endl;
 	}
 }
+
