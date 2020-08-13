@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-#include <typeinfo>
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/Union.hpp"
@@ -31,7 +30,6 @@
 #include "uml/RemoveStructuralFeatureValueAction.hpp"
 #include "uml/Association.hpp"
 #include "uml/Port.hpp"
-#include "uml/InputPin.hpp"
 #include "fUML/Semantics/SimpleClassifiers/UnlimitedNaturalValue.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
 #include "fUML/Semantics/Loci/ExecutionFactory.hpp"
@@ -79,10 +77,10 @@
 #include "PSCS/Semantics/Actions/impl/ActionsFactoryImpl.hpp"
 #include "PSCS/Semantics/Actions/impl/ActionsPackageImpl.hpp"
 
-#include "PSCS/Semantics/SemanticsFactory.hpp"
-#include "PSCS/Semantics/SemanticsPackage.hpp"
 #include "PSCS/PSCSFactory.hpp"
 #include "PSCS/PSCSPackage.hpp"
+#include "PSCS/Semantics/SemanticsFactory.hpp"
+#include "PSCS/Semantics/SemanticsPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -133,7 +131,7 @@ CS_RemoveStructuralFeatureValueActionActivationImpl::CS_RemoveStructuralFeatureV
 	m_running = obj.isRunning();
 
 	//copy references with no containment (soft copy)
-
+	
 	m_group  = obj.getGroup();
 
 	std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> _incomingEdges = obj.getIncomingEdges();
@@ -200,7 +198,7 @@ void CS_RemoveStructuralFeatureValueActionActivationImpl::doAction()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	// Get the values of the object and value input pins.
+		// Get the values of the object and value input pins.
 	// If the given feature is an association end, then destroy any
 	// matching links. Otherwise, if the object input is a structural
 	// value, remove values from the given feature and destroy all links
@@ -223,18 +221,11 @@ void CS_RemoveStructuralFeatureValueActionActivationImpl::doAction()
 		inputValue = this->takeTokens(action->getValue())->at(0);
 	}
 
-	std::cout << "----- CS_RemoveStructuralFeatureValueActionActivation::" << __FUNCTION__ <<": feature is " << feature->getName() << '\n';
-	std::cout << "----- CS_RemoveStructuralFeatureValueActionActivation::" << __FUNCTION__ <<": object is " << value->toString() << '\n';
-	std::cout << "----- CS_RemoveStructuralFeatureValueActionActivation::" << __FUNCTION__ <<": value is " << inputValue->toString() << '\n';
-
 	int removeAt = 0;
 	if(action->getRemoveAt() != nullptr) {
-		std::cout << "----- CS_RemoveStructuralFeatureValueActionActivation::" << __FUNCTION__ <<": removeAt is not null" << '\n';
 		removeAt = (std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::UnlimitedNaturalValue>(this->takeTokens(action->getRemoveAt())->at(0)))->getValue();
-		std::cout << "----- CS_RemoveStructuralFeatureValueActionActivation::" << __FUNCTION__ <<": removeAt(a) = " << removeAt << '\n';
 	}
 	if(association != nullptr) {
-		std::cout << "----- CS_RemoveStructuralFeatureValueActionActivation::" << __FUNCTION__ <<": association is not null" << '\n';
 		std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Link>> links = this->getMatchingLinksForEndValue(association, feature, value, inputValue);
 		if(action->getIsRemoveDuplicates()) {
 			for(unsigned int i = 0; i < links->size(); i++) {
@@ -263,17 +254,14 @@ void CS_RemoveStructuralFeatureValueActionActivationImpl::doAction()
 		}
 	}
 	else if (std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::StructuredValue>(value) != nullptr) {
-		std::cout << "----- CS_RemoveStructuralFeatureValueActionActivation::" << __FUNCTION__ <<": association is null and value is StructuredValue" << '\n';
 		std::shared_ptr<fUML::Semantics::SimpleClassifiers::StructuredValue> structuredValue = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::StructuredValue>(value);
 
 		// If the value is a data value, then it must be copied before
 		// any change is made.
 		if(std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Reference>(value) == nullptr) {
-			std::cout << "----- CS_RemoveStructuralFeatureValueActionActivation::" << __FUNCTION__ <<": value is NOT a reference" << '\n';
 			value = std::dynamic_pointer_cast<fUML::Semantics::Values::Value>(value->copy());
 		}
 		std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> featureValue = structuredValue->retrieveFeatureValue(feature);
-		std::cout << "----- CS_RemoveStructuralFeatureValueActionActivation::" << __FUNCTION__ <<": featureValue->size (3) = " << featureValue->getValues()->size() << '\n';
 		std::shared_ptr<Bag<fUML::Semantics::Values::Value>> removedValues(new Bag<fUML::Semantics::Values::Value>());
 
 		if(action->getIsRemoveDuplicates()) {
@@ -286,7 +274,6 @@ void CS_RemoveStructuralFeatureValueActionActivationImpl::doAction()
 			}
 		}
 		else if(action->getRemoveAt() == nullptr) {
-			std::cout << "----- CS_RemoveStructuralFeatureValueActionActivation::" << __FUNCTION__ <<": removeAt is null" << '\n';
 			std::vector<unsigned int> positions;
 			/*!
 			Hier sitzt das Problem: in position() liefert der Vergleich zwischen inputValue und dem Value im extrahierten FeatureValue ungleich (müsste gleich sein)
@@ -311,40 +298,35 @@ void CS_RemoveStructuralFeatureValueActionActivationImpl::doAction()
 				structuredValue->removeValue(feature, featureValue->getValues()->at(positions.at(k-1)-1));
 			}*/
 			removedValues->add(inputValue);
-			std::cout << "----- CS_RemoveStructuralFeatureValueActionActivation::" << __FUNCTION__ <<": removing Value" << '\n';
 			structuredValue->removeValue(feature, inputValue);
-			std::cout << "----- CS_RemoveStructuralFeatureValueActionActivation::" << __FUNCTION__ <<": removed Value" << '\n';
 
 		}
 		else {
 			if((int)featureValue->getValues()->size() >= removeAt) {
-				std::cout << "----- CS_RemoveStructuralFeatureValueActionActivation::" << __FUNCTION__ <<": removeAt(b) = " << removeAt-1 << '\n';
-				std::cout << "----- CS_RemoveStructuralFeatureValueActionActivation::" << __FUNCTION__ <<": ...Deleting" << '\n';
 				removedValues->add(featureValue->getValues()->at(removeAt-1));
 				//featureValue->getValues()->erase(featureValue->getValues()->begin() + (removeAt-1));
 				structuredValue->removeValue(feature, featureValue->getValues()->at(removeAt-1));
-				std::cout << "----- CS_RemoveStructuralFeatureValueActionActivation::" << __FUNCTION__ <<": ...Deleted!" << '\n';
 				featureValue = structuredValue->retrieveFeatureValue(feature);
-				std::cout << "----- CS_RemoveStructuralFeatureValueActionActivation::" << __FUNCTION__ <<": featureValue->size (2) = " << featureValue->getValues()->size() << '\n';
 			}
 		}
 		// When values are removed from the list of values associated to the feature
 		// (in the context of the target), these latter may be involved in links representing
 		// instance of connectors. If this is the case, links in which the removed values are
 		// involved are destroyed.
-		for(unsigned int i = 0; i < removedValues->size(); i++) {
-			/*std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Link>> linkToDestroy = this->getLinksToDestroy(std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::StructuredValue>(value), feature, removedValues->at(i));
+		/*!
+			This functionality is excluded from PSCS in MDE4CPP because link destruction is handled on model level, not execution level.
+		*/
+		/*for(unsigned int i = 0; i < removedValues->size(); i++) {
+			std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Link>> linkToDestroy = this->getLinksToDestroy(std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::StructuredValue>(value), feature, removedValues->at(i));
 			for(unsigned int j = 0; j < linkToDestroy->size(); j++) {
 				linkToDestroy->at(j)->destroy();
-			}*/
-		}
+			}
+		}*/
 	}
 	if(action->getResult() != nullptr) {
-		std::cout << "----- CS_RemoveStructuralFeatureValueActionActivation::" << __FUNCTION__ <<": result != null" << '\n';
 		this->putToken(action->getResult(), value);
 	}
 	//end of body
-		std::cout << "----- CS_RemoveStructuralFeatureValueActionActivation::" << __FUNCTION__ <<": ...Leaving!" << '\n';
 }
 
 std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Link> > CS_RemoveStructuralFeatureValueActionActivationImpl::getLinksToDestroy(std::shared_ptr<fUML::Semantics::SimpleClassifiers::StructuredValue>  value,std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<fUML::Semantics::Values::Value>  removedValue)
@@ -427,7 +409,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value> > CS_RemoveStructuralFeature
 	//generated from body annotation
 			// Retrieves all feature values for the context object for the given feature,
 	// as well as all interaction point for these values
-
+	
 	std::shared_ptr<Bag<fUML::Semantics::Values::Value>> potentialLinkEnds(new Bag<fUML::Semantics::Values::Value>());
 	std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> featureValue = context->retrieveFeatureValue(feature);
 	for(unsigned int i = 0; i < featureValue->getValues()->size(); i++) {
@@ -523,7 +505,7 @@ void CS_RemoveStructuralFeatureValueActionActivationImpl::load(std::shared_ptr<p
 	{
 		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
-}
+}		
 
 void CS_RemoveStructuralFeatureValueActionActivationImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
@@ -549,24 +531,24 @@ void CS_RemoveStructuralFeatureValueActionActivationImpl::save(std::shared_ptr<p
 	saveContent(saveHandler);
 
 	fUML::Semantics::Actions::RemoveStructuralFeatureValueActivationImpl::saveContent(saveHandler);
-
+	
 	fUML::Semantics::Actions::WriteStructuralFeatureActionActivationImpl::saveContent(saveHandler);
-
+	
 	fUML::Semantics::Actions::StructuralFeatureActionActivationImpl::saveContent(saveHandler);
-
+	
 	fUML::Semantics::Actions::ActionActivationImpl::saveContent(saveHandler);
-
+	
 	fUML::Semantics::Activities::ActivityNodeActivationImpl::saveContent(saveHandler);
-
+	
 	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
-
+	
 	ecore::EObjectImpl::saveContent(saveHandler);
-
-
-
-
-
-
+	
+	
+	
+	
+	
+	
 }
 
 void CS_RemoveStructuralFeatureValueActionActivationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -575,7 +557,7 @@ void CS_RemoveStructuralFeatureValueActionActivationImpl::saveContent(std::share
 	{
 		std::shared_ptr<PSCS::Semantics::Actions::ActionsPackage> package = PSCS::Semantics::Actions::ActionsPackage::eInstance();
 
-
+	
 
 	}
 	catch (std::exception& e)
@@ -583,3 +565,4 @@ void CS_RemoveStructuralFeatureValueActionActivationImpl::saveContent(std::share
 		std::cout << "| ERROR    | " << e.what() << std::endl;
 	}
 }
+
