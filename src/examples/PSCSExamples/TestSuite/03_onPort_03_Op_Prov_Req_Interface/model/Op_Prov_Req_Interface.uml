@@ -38,7 +38,7 @@ If the operation call is forwarded outside of the port's owner (i.e., in the tes
   <packagedElement xmi:type="uml:Class" xmi:id="_hwDmQJ6KEeq4dc7QyPXQSA" name="E">
     <ownedAttribute xmi:id="_kpt7AJ6KEeq4dc7QyPXQSA" name="c" type="_yM2IkIkwEeqZeLJ8PYwzEw" aggregation="composite"/>
     <ownedAttribute xmi:type="uml:Port" xmi:id="_ouuBgJ6KEeq4dc7QyPXQSA" name="q" type="_uBLWcJ6GEeq4dc7QyPXQSA" aggregation="composite"/>
-    <ownedConnector xmi:id="_y8DYMJ6KEeq4dc7QyPXQSA" name="t" type="_urwu8KAPEeqW06AABVfoSQ">
+    <ownedConnector xmi:id="_y8DYMJ6KEeq4dc7QyPXQSA" name="s" type="_r6tHAIkuEeqZeLJ8PYwzEw">
       <end xmi:id="_1Mi0IJ6KEeq4dc7QyPXQSA" partWithPort="_kpt7AJ6KEeq4dc7QyPXQSA" role="_DdfxAIkxEeqZeLJ8PYwzEw"/>
       <end xmi:id="_1nBwsJ6KEeq4dc7QyPXQSA" role="_ouuBgJ6KEeq4dc7QyPXQSA"/>
     </ownedConnector>
@@ -93,7 +93,8 @@ If the operation call is forwarded outside of the port's owner (i.e., in the tes
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="_iTKigHlrEeqsJ5V89htlww" name="IImpl">
     <ownedAttribute xmi:id="_dw-UQHlsEeqsJ5V89htlww" name="b" type="_yXXl8HlrEeqsJ5V89htlww" association="_U4ZxEHlsEeqsJ5V89htlww"/>
-    <ownedAttribute xmi:id="_iHCNgIkuEeqZeLJ8PYwzEw" name="iProvReq" type="_uBLWcJ6GEeq4dc7QyPXQSA" association="_r6tHAIkuEeqZeLJ8PYwzEw"/>
+    <ownedAttribute xmi:id="_PvrU8Nb8EeqmNofdulKLvA" name="left" type="_iTKigHlrEeqsJ5V89htlww" association="_r6tHAIkuEeqZeLJ8PYwzEw"/>
+    <ownedAttribute xmi:id="_SsXvkNb8EeqmNofdulKLvA" name="right" type="_iTKigHlrEeqsJ5V89htlww" association="_r6tHAIkuEeqZeLJ8PYwzEw"/>
     <interfaceRealization xmi:id="_lDiYYHlrEeqsJ5V89htlww" name="I_Realization" client="_iTKigHlrEeqsJ5V89htlww" supplier="_MV1IgHlrEeqsJ5V89htlww" contract="_MV1IgHlrEeqsJ5V89htlww"/>
     <ownedOperation xmi:id="_pK2zEHlrEeqsJ5V89htlww" name="assignP">
       <ownedParameter xmi:id="_r35oIHlrEeqsJ5V89htlww" name="_p">
@@ -103,9 +104,6 @@ If the operation call is forwarded outside of the port's owner (i.e., in the tes
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="_uBLWcJ6GEeq4dc7QyPXQSA" name="IProvReq">
     <generalization xmi:id="_20XDUJ6GEeq4dc7QyPXQSA" general="_iTKigHlrEeqsJ5V89htlww"/>
-    <ownedAttribute xmi:id="_bVmLgKAPEeqW06AABVfoSQ" name="left" type="_uBLWcJ6GEeq4dc7QyPXQSA" association="_urwu8KAPEeqW06AABVfoSQ"/>
-    <ownedAttribute xmi:id="_cJMysKAPEeqW06AABVfoSQ" name="right" type="_uBLWcJ6GEeq4dc7QyPXQSA" association="_urwu8KAPEeqW06AABVfoSQ"/>
-    <ownedAttribute xmi:id="_JquOwKAbEeqW06AABVfoSQ" name="iImpl" type="_iTKigHlrEeqsJ5V89htlww" association="_r6tHAIkuEeqZeLJ8PYwzEw"/>
     <ownedOperation xmi:id="_x1nRYJ6GEeq4dc7QyPXQSA" name="assignP">
       <ownedParameter xmi:id="_x1nRYZ6GEeq4dc7QyPXQSA" name="_p">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
@@ -121,8 +119,7 @@ If the operation call is forwarded outside of the port's owner (i.e., in the tes
     </ownedOperation>
   </packagedElement>
   <packagedElement xmi:type="uml:Association" xmi:id="_U4ZxEHlsEeqsJ5V89htlww" name="R" memberEnd="_igG84HlsEeqsJ5V89htlww _dw-UQHlsEeqsJ5V89htlww"/>
-  <packagedElement xmi:type="uml:Association" xmi:id="_r6tHAIkuEeqZeLJ8PYwzEw" name="S" memberEnd="_iHCNgIkuEeqZeLJ8PYwzEw _JquOwKAbEeqW06AABVfoSQ"/>
-  <packagedElement xmi:type="uml:Association" xmi:id="_urwu8KAPEeqW06AABVfoSQ" name="T" memberEnd="_bVmLgKAPEeqW06AABVfoSQ _cJMysKAPEeqW06AABVfoSQ"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="_r6tHAIkuEeqZeLJ8PYwzEw" name="S" memberEnd="_PvrU8Nb8EeqmNofdulKLvA _SsXvkNb8EeqmNofdulKLvA"/>
   <packagedElement xmi:type="uml:Class" xmi:id="_heRLYIVfEeq7y-U79yHWlQ" name="Tester">
     <ownedBehavior xmi:type="uml:Activity" xmi:id="_NMnmEIlPEeqZeLJ8PYwzEw" name="actTestCallDelegation" specification="_80EM8IVhEeq7y-U79yHWlQ" node="_NMnmGIlPEeqZeLJ8PYwzEw _NMnmGYlPEeqZeLJ8PYwzEw _NMnmGolPEeqZeLJ8PYwzEw _NMnmHIlPEeqZeLJ8PYwzEw _NMnmHYlPEeqZeLJ8PYwzEw _1LXS8J6LEeq4dc7QyPXQSA _0897MJ_3EeqW06AABVfoSQ">
       <ownedParameter xmi:id="_NMnmEYlPEeqZeLJ8PYwzEw" name="v">
