@@ -294,17 +294,19 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> [className/]::retrieveEndVa
 [comment] type can only be a class that plays partWithPort of a connector end where aClassifier is type of opposite partWithPort [/comment]
 
 [for (end : ConnectorEnd | ends)]
+/*DefiningEnd: [end.definingEnd.association.name/]::[end.definingEnd.name/] */
 [let ownerOfRoleType : Class = end.role.oclAsType(Property).class]
-[let roleType : Class = end.role.type ]
+[let roleType : Classifier = end.role.type]
+[let definingEndType : Classifier = end.definingEnd.type]
 	if(type == [ownerOfRoleType.getModelPackage()/][ownerOfRoleType.generatePackageGetterCall(ownerOfRoleType)/] && portType == [roleType.getModelPackage()/][roleType.generatePackageGetterCall(roleType)/])
 	{
 		std::shared_ptr<[aPackage.name/]::[ownerOfRoleType.objectClassName()/]> ownerObject = std::dynamic_pointer_cast<[aPackage.name/]::[ownerOfRoleType.objectClassName()/]>(this->getLocus()->instantiate(type));
-		std::shared_ptr<[aPackage.name/]::[roleType.objectClassName()/]> portObject = std::dynamic_pointer_cast<[aPackage.name/]::[roleType.objectClassName()/]>(std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(endValue)->getReferent());
-		std::shared_ptr<[ownerOfRoleType.generateCppType(true)/]> ownerUmlValue = portObject->[roleType.UMLValueGetterName()/]()->get[ownerOfRoleType.name.toUpperFirst()/]().lock();
+		std::shared_ptr<[aPackage.name/]::[definingEndType.objectClassName()/]> portObject = std::dynamic_pointer_cast<[aPackage.name/]::[definingEndType.objectClassName()/]>(std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(endValue)->getReferent());
+		std::shared_ptr<[ownerOfRoleType.generateCppType(true)/]> ownerUmlValue = [if(roleType <> definingEndType)]std::dynamic_pointer_cast<[roleType.generateCppType(true)/]>(portObject->[definingEndType.UMLValueGetterName()/]())[else]portObject->[definingEndType.UMLValueGetterName()/]()[/if]->get[ownerOfRoleType.name.toUpperFirst()/]().lock();
 		ownerObject->[ownerOfRoleType.UMLValueSetterName()/](ownerUmlValue);
 		featureValue = ownerObject->retrieveFeatureValue(std::dynamic_pointer_cast<uml::StructuralFeature>(end->getRole()));
 	}
-[/let][/let]
+[/let][/let][/let]
 [/for]
 	return featureValue->getValues();
 [else]
