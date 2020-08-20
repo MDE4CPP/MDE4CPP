@@ -86,7 +86,7 @@ static const unsigned int [aClass.getMemberName().toUpperCase()/]_OPERATION_COUN
 	[for (anAssociation : Association | c.getCompositionsToClass())]
 	[let containerProperty : Property = anAssociation.memberEnd->select(type = c)->asOrderedSet()->first()]
 	[let containmentProperty : Property = anAssociation.memberEnd->select(not (type = c))->asOrderedSet()->first()]
-	static const unsigned int [containmentProperty.name.toUpperCase()/] = [containmentProperty.getStaticPropertyID_ID()/];	
+	static const unsigned int [containmentProperty.name.toUpperCase()/] = [containmentProperty.getStaticPropertyID_ID()/];
 	[/let]
 	[/let]
 	[/for]
