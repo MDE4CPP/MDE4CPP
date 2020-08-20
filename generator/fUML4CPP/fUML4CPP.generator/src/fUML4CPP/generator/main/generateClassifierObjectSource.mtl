@@ -93,6 +93,7 @@
 using namespace [aPackage.name/];
 
 [className/]::[className/](std::shared_ptr<[pointerName/]> _element):
+
 	[aClassifier.UMLValueName()/](_element)
 {		
 	[if(not aClassifier.oclIsTypeOf(Interface))]
@@ -598,7 +599,16 @@ std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> [classNam
 [/template]
 
 [template private generateSetFeatureValue(aProperty : Property, valuePin : InputPin, aClassifier : Classifier)]
-[if (aProperty.isPrimitiveTypedProperty())]
+[if (aProperty.type.oclIsKindOf(Enumeration))]
+std::shared_ptr<fUML::Semantics::SimpleClassifiers::EnumerationValue> enumValue = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::EnumerationValue>(inputValue);
+std::shared_ptr<uml::EnumerationLiteral> literal = enumValue->getLiteral();
+[for (literal : EnumerationLiteral | aProperty.type.oclAsType(Enumeration).ownedLiteral)]
+if (literal == [literal.generatePackageGetterCall()/])
+{
+	m_umlValue->setMode([literal.enumeration.namespace.name/]::[literal.enumeration.name/]::[literal.name.toUpperCase()/]);
+}
+[/for]
+[elseif (aProperty.isPrimitiveTypedProperty())]
 std::shared_ptr<[aProperty.type.getValueClass()/]> valueObject = std::dynamic_pointer_cast<[aProperty.type.getValueClass()/]>(inputValue);
 if (valueObject != nullptr)
 {
@@ -622,6 +632,5 @@ if (value != nullptr)
 }
 [/if]
 [/template]
-
 [query private isPrimitiveTypedProperty(aProperty : Property) : Boolean = aProperty.type.oclIsKindOf(PrimitiveType) /] 
 [query private isEnumerationProperty(aProperty : Property) : Boolean = aProperty.type.oclIsKindOf(Enumeration) /]
