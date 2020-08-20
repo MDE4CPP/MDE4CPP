@@ -15,6 +15,8 @@ namespace callDebugCount
 			static ProfileCallCount* getInstance();
 
 			void addCount(std::string cntfunction);
+			void subCount(std::string cntfunction);
+			void printFunc(std::string cntfunction);
 			void printMap();
 
 		private:
@@ -28,5 +30,6 @@ namespace callDebugCount
 }
 
 #define ADD_COUNT(cntfunction) callDebugCount::ProfileCallCount::getInstance()->addCount(cntfunction);
+#define SUB_COUNT(cntfunction) callDebugCount::ProfileCallCount::getInstance()->subCount(cntfunction);
 
 #endif

@@ -11,12 +11,17 @@
 
 #include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
+#include "StandardProfile/StandardProfileFactory.hpp"
 #include "StandardProfile/impl/StandardProfilePackageImpl.hpp"
 #include "uml/Stereotype.hpp"
 #include "uml/Component.hpp"
 
 
 
+
+//Included from Ports typed by interface
+
+//Included from roles of ConnectorEnds
 
 using namespace StandardProfile;
 
@@ -37,8 +42,10 @@ ProcessImpl::ProcessImpl()
 
 	// init properties without default
 	
-
 	
+	// init properties with default
+
+	// init connectors
 }
 
 

@@ -219,7 +219,7 @@
 	[action.memberName()/]->getOutput()->push_back([action.result.memberName()/]); // subset/union in not implemented for upper=1
 [/if]
 [if (not action.removeAt.oclIsUndefined())]
-	[action.removeAt.memberName()/] = factory->create[action.removeAt.eClass().name/]_in_AddStructuralFeatureValueAction([action.removeAt.owner.oclAsType(NamedElement).memberName()/]);
+	[action.removeAt.memberName()/] = factory->create[action.removeAt.eClass().name/]_in_RemoveStructuralFeatureValueAction([action.removeAt.owner.oclAsType(NamedElement).memberName()/]);
 	[action.memberName()/]->getInput()->push_back([action.removeAt.memberName()/]); // subset/union in not implemented for upper=1
 [/if]
 [/let]
@@ -324,6 +324,9 @@
 [template private initializeActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(CallOperationAction))]
 [let action : CallOperationAction = self.oclAsType(CallOperationAction)]
 [action.memberName()/]->setOperation([action.operation.generatePackageGetterCall()/]);
+[if(not action.onPort.oclIsUndefined())]
+[action.memberName()/]->setOnPort([action.onPort.generatePackageGetterCall()/]);
+[/if]
 [for (inputPin : InputPin | action.input)]
 [inputPin.initializePin(inputPin = action.target)/]
 [/for]
@@ -383,6 +386,7 @@
 */]
 [template private initializeActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(DestroyObjectAction))]
 [let action : DestroyObjectAction = self.oclAsType(DestroyObjectAction)]
+[action.memberName()/]->setIsDestroyOwnedObjects([action.isDestroyOwnedObjects/]);
 [action.output.initializePin()/]
 [/let]
 [/template]

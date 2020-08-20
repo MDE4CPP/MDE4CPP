@@ -62,10 +62,10 @@
 #include "fUML/Semantics/StructuredClassifiers/impl/StructuredClassifiersFactoryImpl.hpp"
 #include "fUML/Semantics/StructuredClassifiers/impl/StructuredClassifiersPackageImpl.hpp"
 
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsFactory.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -166,8 +166,8 @@ bool ReferenceImpl::equals(std::shared_ptr<fUML::Semantics::Values::Value>  othe
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 		bool isEqual = false;
-	if (otherValue->eClass()->getClassifierID() == fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::REFERENCE_CLASS) {
-		auto other = std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Reference>(otherValue);
+	auto other = std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Reference>(otherValue);
+	if (other != nullptr) {
 		if (this->getReferent() == nullptr) {
 			isEqual = other->getReferent() == nullptr;
 		} else {

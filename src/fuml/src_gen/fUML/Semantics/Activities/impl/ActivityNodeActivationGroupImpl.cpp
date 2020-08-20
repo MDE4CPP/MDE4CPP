@@ -65,10 +65,10 @@
 #include "fUML/Semantics/Activities/impl/ActivitiesFactoryImpl.hpp"
 #include "fUML/Semantics/Activities/impl/ActivitiesPackageImpl.hpp"
 
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsFactory.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -465,65 +465,95 @@ void ActivityNodeActivationGroupImpl::run(std::shared_ptr<Bag<fUML::Semantics::A
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	for (unsigned int i = 0; i < activations->size(); i++)
-	{
-		std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> activation = activations->at(i);
-        activation->run();
-    }
+		{
+		auto endIter=activations->end();
+		for (auto it = activations->begin(); it != endIter; it++)
+		{
+			std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> activation = (*it);
+			activation->run();
+		}
+	}
 
     DEBUG_MESSAGE(std::cout<<"[run] Checking for enabled nodes..."<<std::endl;)
 
     std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation> > enabledActivations(new Bag<fUML::Semantics::Activities::ActivityNodeActivation>());
-
-    for (unsigned int i = 0; i < activations->size(); i++)
     {
-    	std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> activation = activations->at(i);
+        auto endIter=activations->end();
+		for (auto it = activations->begin(); it != endIter; ++it)
+		{
+			std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> activation = (*it);
 
-        DEBUG_MESSAGE(std::cout<<"[run] Checking node " << activation->getNode()->getName()<< "..."<<std::endl;)
+			if(activation->getNode())
+			{
+				DEBUG_MESSAGE(std::cout<<"[run] Checking node " << activation->getNode()->getName()<< "..."<<std::endl;)
+			}
+			else
+			{
+				DEBUG_MESSAGE(std::cout<<"[run] Checking node anonymous Node (e.g. anonymous Fork) ..."<<std::endl;)
+			}
+			const int class_id = activation->eClass()->getClassifierID();
+			if(!(class_id == fUML::Semantics::Actions::ActionsPackage::INPUTPINACTIVATION_CLASS ||  class_id == fUML::Semantics::Actions::ActionsPackage::OUTPUTPINACTIVATION_CLASS || class_id ==fUML::Semantics::Activities::ActivitiesPackage::EXPANSIONNODEACTIVATION_CLASS))
+			{
+				std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance> > edges = activation->getIncomingEdges();
+				bool isEnabled = this->checkIncomingEdges(edges, activations);
 
-        const int class_id = activation->eClass()->getClassifierID();
-        if(!(class_id == fUML::Semantics::Actions::ActionsPackage::INPUTPINACTIVATION_CLASS ||  class_id == fUML::Semantics::Actions::ActionsPackage::OUTPUTPINACTIVATION_CLASS || class_id ==fUML::Semantics::Activities::ActivitiesPackage::EXPANSIONNODEACTIVATION_CLASS))
-        {
-        	std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance> > edges = activation->getIncomingEdges();
-            bool isEnabled = this->checkIncomingEdges(edges, activations);
+				// For an action activation, also consider incoming edges to
+				// input pins
+				if (isEnabled)
+				{
+					std::shared_ptr<uml::Action> action = std::dynamic_pointer_cast<uml::Action>(activation->getNode());
+					if(action != nullptr) // if there is no action (e.g anonymous Fork), then there is also no pins
+					{
+						std::shared_ptr<Bag<uml::InputPin> > inputPins = action->getInput();
+				        auto pinEndIter=inputPins->end();
+						for (auto pinIt = inputPins->begin(); pinIt != pinEndIter; ++pinIt)
+						{
+							std::shared_ptr<uml::InputPin> inputPin = (*pinIt);
+							std::shared_ptr<fUML::Semantics::Actions::ActionActivation> actionActivation = std::dynamic_pointer_cast<fUML::Semantics::Actions::ActionActivation>(activation);
+							std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance> > inputEdges = actionActivation->retrievePinActivation(inputPin)->getIncomingEdges();
+							isEnabled = this->checkIncomingEdges(inputEdges, activations);
+							if(isEnabled)
+							{
+								break;
+							}
+						}
+					}
+				}
 
-            // For an action activation, also consider incoming edges to
-            // input pins
-            if (isEnabled)
-            {
-            	std::shared_ptr<uml::Action> action = std::dynamic_pointer_cast<uml::Action>(activation->getNode());
-                if(action != nullptr)
-                {
-                	std::shared_ptr<Bag<uml::InputPin> > inputPins = action->getInput();
-                    unsigned int j = 0;
-                    while ((j < inputPins->size()) && isEnabled)
-                    {
-                    	std::shared_ptr<uml::InputPin> inputPin = inputPins->at(j);
-                        std::shared_ptr<fUML::Semantics::Actions::ActionActivation> actionActivation = std::dynamic_pointer_cast<fUML::Semantics::Actions::ActionActivation>(activation);
-                    	std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance> > inputEdges = actionActivation->retrievePinActivation(inputPin)->getIncomingEdges();
-                        isEnabled = this->checkIncomingEdges(inputEdges, activations);
-                        j = j + 1;
-                    }
-                }
-            }
+				if (isEnabled)
+				{
 
-            if (isEnabled) 
-            {
-                DEBUG_MESSAGE(std::cout<<"[run] Node " << activation->getNode()->getName()<< " is enabled."<<std::endl;)
-                enabledActivations->push_back(activation);
-            }
-        }
+					if(activation->getNode())
+					{
+						DEBUG_MESSAGE(std::cout<<"[run] Node " << activation->getNode()->getName()<< " is enabled."<<std::endl;)
+					}
+					else
+					{
+						DEBUG_MESSAGE(std::cout<<"[run] Node anonymous Node (eg. anonymous Fork) is enabled."<<std::endl;)
+					}
+					enabledActivations->push_back(activation);
+				}
+			}
+		}
     }
-
     DEBUG_MESSAGE(std::cout<<"[run] " << enabledActivations->size() << " node(s) is/are enabled."<<std::endl;)
 
     // *** Send offers to all enabled nodes concurrently. ***
-    std::vector<std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation>>::iterator i;
-    for (i = enabledActivations->begin(); i != enabledActivations->end(); ++i) 
     {
-    	std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> activation = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityNodeActivation> (*i);
-        DEBUG_MESSAGE(std::cout<<"[run] Sending offer to node " << activation->getNode()->getName()<<std::endl;)
-        activation->receiveOffer();
+		auto endIter=enabledActivations->end();
+		for (auto it = enabledActivations->begin(); it != endIter; it++)
+		{
+			std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> activation = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityNodeActivation> (*it);
+			if(activation->getNode())
+			{
+				DEBUG_MESSAGE(std::cout<<"[run] Sending offer to node " << activation->getNode()->getName()<<std::endl;)
+			}
+			else
+			{
+				DEBUG_MESSAGE(std::cout<<"[run] Sending offer to anonymous Node (e.g anonymous Fork)"<<std::endl;)
+			}
+			activation->receiveOffer();
+		}
     }
 	//end of body
 }

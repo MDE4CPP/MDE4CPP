@@ -25,6 +25,9 @@
 #include "ecore/EClass.hpp"
 
 //Includes from codegen annotation
+#include "fUML/Semantics/StructuredClassifiers/Link.hpp"
+#include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
+#include "fUML/Semantics/Loci/Locus.hpp"
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -62,10 +65,10 @@
 #include "fUML/Semantics/Actions/impl/ActionsFactoryImpl.hpp"
 #include "fUML/Semantics/Actions/impl/ActionsPackageImpl.hpp"
 
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsFactory.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -181,26 +184,96 @@ std::shared_ptr<ecore::EClass> StructuralFeatureActionActivationImpl::eStaticCla
 //*********************************
 std::shared_ptr<uml::Association> StructuralFeatureActionActivationImpl::getAssociation(std::shared_ptr<uml::StructuralFeature>  feature)
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// If the structural feature for the action of this activation is an association end,
+// then get the associated association.
+
+std::shared_ptr<uml::Association> association = nullptr;
+std::shared_ptr<uml::Property> property = std::dynamic_pointer_cast<uml::Property>(feature);
+
+if(property != nullptr)
+{
+	association = property->getAssociation();
+}
+
+return association;
+	//end of body
 }
 
 std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Link> > StructuralFeatureActionActivationImpl::getMatchingLinks(std::shared_ptr<uml::Association>  association,std::shared_ptr<uml::StructuralFeature>  end,std::shared_ptr<fUML::Semantics::Values::Value>  oppositeValue)
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Get the links of the given binary association whose end opposite
+// to the given end has the given value
+
+return getMatchingLinksForEndValue(association, end, oppositeValue, nullptr);
+	//end of body
 }
 
 std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Link> > StructuralFeatureActionActivationImpl::getMatchingLinksForEndValue(std::shared_ptr<uml::Association>  association,std::shared_ptr<uml::StructuralFeature>  end,std::shared_ptr<fUML::Semantics::Values::Value>  oppositeValue,std::shared_ptr<fUML::Semantics::Values::Value>  endValue)
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Get the links of the given binary association whose end opposite
+// to the given end has the given opposite value and, optionally, that
+// has a given end value for the given end.
+
+std::shared_ptr<uml::Property> oppositeEnd = getOppositeEnd(association, end);
+
+std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>> extent = this->getExecutionLocus()->retrieveExtent(association);
+
+std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Link>> links(new Bag<fUML::Semantics::StructuredClassifiers::Link>);
+for(unsigned int i = 0; i < extent->size(); i++){
+	std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> link = extent->at(i);
+	if(link->retrieveFeatureValue(oppositeEnd)->getValues()->at(0) == oppositeValue) {
+		bool matches = true;
+		if(endValue != nullptr) {
+			matches = (link->retrieveFeatureValue(end)->getValues()->at(0) == endValue);
+		}
+		
+		if(matches){
+			if(!(std::dynamic_pointer_cast<uml::MultiplicityElement>(end)->getIsOrdered()) || (links->size() == 0)){
+				links->add(std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Link>(link));
+			}
+			else {
+				unsigned int n = link->retrieveFeatureValue(end)->getPosition();
+				bool continueSearching = true;
+				unsigned int j = 0;
+				while(continueSearching && (j < links->size())){
+					j += 1;
+					continueSearching = (unsigned int)(links->at(j-1)->retrieveFeatureValue(end)->getPosition()) < n;
+				}
+				if(continueSearching){
+					links->add(std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Link>(link));
+				}
+				else {
+					links->insert((links->begin() + (j-1)), std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Link>(link));
+				}
+			}
+		}
+	}
+}
+
+return links;
+	//end of body
 }
 
 std::shared_ptr<uml::Property> StructuralFeatureActionActivationImpl::getOppositeEnd(std::shared_ptr<uml::Association>  association,std::shared_ptr<uml::StructuralFeature>  end)
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Get the end of a binary association opposite to the given end.
+
+std::shared_ptr<uml::Property> oppositeEnd = association->getMemberEnd()->at(0);
+if(oppositeEnd == end)
+{
+		oppositeEnd = association->getMemberEnd()->at(1);
+}
+
+return oppositeEnd;
+	//end of body
 }
 
 //*********************************

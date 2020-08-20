@@ -1,0 +1,475 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_PmmP8LAqEeert7O7oCVCsA" name="AssemblyConnectors_P_P">
+  <eAnnotations xmi:id="_otFUEFgQEeqZPe2oHCHy2Q" source="prepareApplication">
+    <details xmi:id="_qWW_AFgQEeqZPe2oHCHy2Q" key="sourceCodeMain" value="std::cout&lt;&lt;&quot;-- Test model : Assembly connector between parts&quot;&lt;&lt;std::endl;&#xA;std::shared_ptr&lt;AssemblyConnectors_P_P::Tester> tester = factory->createTester();&#xA;&#xA;std::cout&lt;&lt;&quot;-- Running test case: Assembly connector between two parts --&quot;&lt;&lt;std::endl;&#xA;std::cout&lt;&lt;std::endl;&#xA;&#xA;tester->runTestCase();&#xA;&#xA;std::cout&lt;&lt;std::endl;&#xA;std::cout&lt;&lt;&quot;-- End of test case --&quot;&lt;&lt;std::endl;"/>
+  </eAnnotations>
+  <eAnnotations xmi:id="_e-w0AI4bEeqm_eVeNYUZww" source="BuildMode">
+    <details xmi:id="_hOlhkI4bEeqm_eVeNYUZww" key="type" value="library"/>
+  </eAnnotations>
+  <ownedComment xmi:id="_cfnBEKGPEeq_jPVfGA6A8w">
+    <body>This test case addresses instantiation semantics in the case of assembly connectors between parts.</body>
+  </ownedComment>
+  <packageImport xmi:id="_rgWIkLArEeert7O7oCVCsA">
+    <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
+  </packageImport>
+  <packagedElement xmi:type="uml:Class" xmi:id="_z6HwQO9BEemWP7t7cfH8xA" name="A_Empty_Pattern">
+    <ownedComment xmi:id="_6GtOUO9BEemWP7t7cfH8xA">
+      <body>Empty pattern:
+lower bound of part b and c is 0</body>
+    </ownedComment>
+    <ownedAttribute xmi:id="_u8DPkO9IEemWP7t7cfH8xA" name="partB" type="_Mk9kQO9AEemWP7t7cfH8xA" aggregation="composite">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_yr6zkO9IEemWP7t7cfH8xA"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_0CIYkO9IEemWP7t7cfH8xA" value="*"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_-MG5QO9IEemWP7t7cfH8xA" name="partC" type="_PMiDcO9AEemWP7t7cfH8xA" aggregation="composite">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="__HrwsO9IEemWP7t7cfH8xA"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="__ffMsO9IEemWP7t7cfH8xA" value="*"/>
+    </ownedAttribute>
+    <ownedConnector xmi:id="_5Dm2APEXEem6OrjQXRieKQ" name="r" type="_kQiBsO9AEemWP7t7cfH8xA">
+      <end xmi:id="_ASU0kPEaEem6OrjQXRieKQ" role="_u8DPkO9IEemWP7t7cfH8xA">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_HAZPEPEaEem6OrjQXRieKQ" name="connectorEnd_1_Lower" value="1"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_H5WQUPEaEem6OrjQXRieKQ" name="connectorEnd_1_Upper" value="*"/>
+      </end>
+      <end xmi:id="_AzlHgPEaEem6OrjQXRieKQ" role="_-MG5QO9IEemWP7t7cfH8xA">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_I81GkPEaEem6OrjQXRieKQ" name="connectorEnd_2_Lower" value="1"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_KKi24PEaEem6OrjQXRieKQ" name="connectorEnd_2_Upper" value="*"/>
+      </end>
+    </ownedConnector>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_bfcP8FIvEeq4WpdDJnu9kg" name="A_Unconnected_Pattern">
+    <ownedComment xmi:id="_bfcP8VIvEeq4WpdDJnu9kg">
+      <body>Unconnected pattern:
+lower bound on ends of connector r is 0</body>
+    </ownedComment>
+    <ownedAttribute xmi:id="_bfcP8lIvEeq4WpdDJnu9kg" name="partB" type="_Mk9kQO9AEemWP7t7cfH8xA" aggregation="composite">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_bfcP81IvEeq4WpdDJnu9kg" value="2"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_bfcP9FIvEeq4WpdDJnu9kg" value="*"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_bfcP9VIvEeq4WpdDJnu9kg" name="partC" type="_PMiDcO9AEemWP7t7cfH8xA" aggregation="composite">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_bfcP9lIvEeq4WpdDJnu9kg" value="3"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_bfcP91IvEeq4WpdDJnu9kg" value="*"/>
+    </ownedAttribute>
+    <ownedConnector xmi:id="_bfcP-FIvEeq4WpdDJnu9kg" name="r" type="_kQiBsO9AEemWP7t7cfH8xA">
+      <end xmi:id="_bfcP-VIvEeq4WpdDJnu9kg" role="_bfcP8lIvEeq4WpdDJnu9kg">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_bfcP-lIvEeq4WpdDJnu9kg" name="connectorEnd_1_Lower"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_bfcP-1IvEeq4WpdDJnu9kg" name="connectorEnd_1_Upper" value="*"/>
+      </end>
+      <end xmi:id="_bfcP_FIvEeq4WpdDJnu9kg" role="_bfcP9VIvEeq4WpdDJnu9kg">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_bfcP_VIvEeq4WpdDJnu9kg" name="connectorEnd_2_Lower"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_bfcP_lIvEeq4WpdDJnu9kg" name="connectorEnd_2_Upper" value="*"/>
+      </end>
+    </ownedConnector>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_rZJ6oFIvEeq4WpdDJnu9kg" name="A_Array_Pattern">
+    <ownedComment xmi:id="_rZJ6oVIvEeq4WpdDJnu9kg">
+      <body>Array pattern:
+lower bound of b and c are equals
+lower bound on ends of connector r is 1</body>
+    </ownedComment>
+    <ownedAttribute xmi:id="_rZJ6olIvEeq4WpdDJnu9kg" name="partB" type="_Mk9kQO9AEemWP7t7cfH8xA" aggregation="composite">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_rZJ6o1IvEeq4WpdDJnu9kg" value="4"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_rZJ6pFIvEeq4WpdDJnu9kg" value="*"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_rZJ6pVIvEeq4WpdDJnu9kg" name="partC" type="_PMiDcO9AEemWP7t7cfH8xA" aggregation="composite">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_rZJ6plIvEeq4WpdDJnu9kg" value="4"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_rZJ6p1IvEeq4WpdDJnu9kg" value="*"/>
+    </ownedAttribute>
+    <ownedConnector xmi:id="_rZJ6qFIvEeq4WpdDJnu9kg" name="r" type="_kQiBsO9AEemWP7t7cfH8xA">
+      <end xmi:id="_rZJ6qVIvEeq4WpdDJnu9kg" role="_rZJ6olIvEeq4WpdDJnu9kg">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_rZJ6qlIvEeq4WpdDJnu9kg" name="connectorEnd_1_Lower" value="1"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_rZJ6q1IvEeq4WpdDJnu9kg" name="connectorEnd_1_Upper" value="*"/>
+      </end>
+      <end xmi:id="_rZJ6rFIvEeq4WpdDJnu9kg" role="_rZJ6pVIvEeq4WpdDJnu9kg">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_rZJ6rVIvEeq4WpdDJnu9kg" name="connectorEnd_2_Lower" value="1"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_rZJ6rlIvEeq4WpdDJnu9kg" name="connectorEnd_2_Upper" value="*"/>
+      </end>
+    </ownedConnector>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="__fogsFIvEeq4WpdDJnu9kg" name="A_Star_Pattern">
+    <ownedComment xmi:id="__fogsVIvEeq4WpdDJnu9kg">
+      <body>Star pattern:
+lower bound on ends of connector r equal
+lower bound of connected parts</body>
+    </ownedComment>
+    <ownedAttribute xmi:id="__fogslIvEeq4WpdDJnu9kg" name="partB" type="_Mk9kQO9AEemWP7t7cfH8xA" aggregation="composite">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="__fogs1IvEeq4WpdDJnu9kg" value="4"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="__fogtFIvEeq4WpdDJnu9kg" value="*"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="__fogtVIvEeq4WpdDJnu9kg" name="partC" type="_PMiDcO9AEemWP7t7cfH8xA" aggregation="composite">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="__fogtlIvEeq4WpdDJnu9kg" value="3"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="__fogt1IvEeq4WpdDJnu9kg" value="*"/>
+    </ownedAttribute>
+    <ownedConnector xmi:id="__foguFIvEeq4WpdDJnu9kg" name="r" type="_kQiBsO9AEemWP7t7cfH8xA">
+      <end xmi:id="__foguVIvEeq4WpdDJnu9kg" role="__fogslIvEeq4WpdDJnu9kg">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="__fogulIvEeq4WpdDJnu9kg" name="connectorEnd_1_Lower" value="4"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="__fogu1IvEeq4WpdDJnu9kg" name="connectorEnd_1_Upper" value="*"/>
+      </end>
+      <end xmi:id="__fogvFIvEeq4WpdDJnu9kg" role="__fogtVIvEeq4WpdDJnu9kg">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="__fogvVIvEeq4WpdDJnu9kg" name="connectorEnd_2_Lower" value="3"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="__fogvlIvEeq4WpdDJnu9kg" name="connectorEnd_2_Upper" value="*"/>
+      </end>
+    </ownedConnector>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_Mk9kQO9AEemWP7t7cfH8xA" name="B">
+    <ownedAttribute xmi:id="_B_KIIFPmEeqC--0EaeaESg" name="c" type="_PMiDcO9AEemWP7t7cfH8xA" association="_kQiBsO9AEemWP7t7cfH8xA">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_8TbBcFPyEeqC--0EaeaESg"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_GOU3QFPmEeqC--0EaeaESg" value="*"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_PMiDcO9AEemWP7t7cfH8xA" name="C">
+    <ownedAttribute xmi:id="_H2VW4FPmEeqC--0EaeaESg" name="b" type="_Mk9kQO9AEemWP7t7cfH8xA" association="_kQiBsO9AEemWP7t7cfH8xA">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_9L5hkFPyEeqC--0EaeaESg"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_ZM1vsFPmEeqC--0EaeaESg" value="*"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_kQiBsO9AEemWP7t7cfH8xA" name="R" memberEnd="_H2VW4FPmEeqC--0EaeaESg _B_KIIFPmEeqC--0EaeaESg"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_AX6AEFgQEeqZPe2oHCHy2Q" name="Tester">
+    <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_6vTt8FgREeqZPe2oHCHy2Q" name="fbTestAEmptyPattern" specification="_N16ycFgSEeqZPe2oHCHy2Q">
+      <language>CPP</language>
+      <language>INCLUDE</language>
+      <body>std::cout&lt;&lt;&quot;-- Instantiation of A_Empty_Pattern --&quot;&lt;&lt;std::endl;&#xD;
+&#xD;
+unsigned int leftFeatCardinality=0, rightFeatCardinality=0, rightEndCardinality=1, leftEndCardinality=1;&#xD;
+&#xD;
+bool successful = ((aEmptyPattern->getPartB()->size()) == leftFeatCardinality);&#xD;
+std::cout&lt;&lt;&quot;partB->size = &quot;&lt;&lt;leftFeatCardinality&lt;&lt;&quot; : &quot;&lt;&lt;std::boolalpha&lt;&lt;successful&lt;&lt;std::endl;&#xD;
+&#xD;
+for(unsigned int i = 0; i &lt; aEmptyPattern->getPartB()->size(); i++)&#xD;
+{&#xD;
+	successful = ((aEmptyPattern->getPartB()->at(i)->getC()->size()) == rightEndCardinality);&#xD;
+	std::cout&lt;&lt;&quot;partB[&quot;&lt;&lt;i&lt;&lt;&quot;]->c->size = &quot;&lt;&lt;rightEndCardinality&lt;&lt;&quot; : &quot;&lt;&lt;std::boolalpha&lt;&lt;successful&lt;&lt;std::endl;&#xD;
+}&#xD;
+std::cout&lt;&lt;std::endl;&#xD;
+&#xD;
+successful = ((aEmptyPattern->getPartC()->size()) == rightFeatCardinality);&#xD;
+std::cout&lt;&lt;&quot;partC->size = &quot;&lt;&lt;rightFeatCardinality&lt;&lt;&quot; : &quot;&lt;&lt;std::boolalpha&lt;&lt;successful&lt;&lt;std::endl;&#xD;
+&#xD;
+for(unsigned int i = 0; i &lt; aEmptyPattern->getPartC()->size(); i++)&#xD;
+{&#xD;
+	successful = ((aEmptyPattern->getPartC()->at(i)->getB()->size()) == leftEndCardinality);&#xD;
+	std::cout&lt;&lt;&quot;partC[&quot;&lt;&lt;i&lt;&lt;&quot;]->b->size = &quot;&lt;&lt;leftEndCardinality&lt;&lt;&quot; : &quot;&lt;&lt;std::boolalpha&lt;&lt;successful&lt;&lt;std::endl;&#xD;
+}&#xD;
+std::cout&lt;&lt;std::endl;&#xD;
+&#xD;
+std::cout&lt;&lt;&quot;Instantiation was successful : &quot;&lt;&lt;std::boolalpha&lt;&lt;successful&lt;&lt;std::endl;&#xD;
+std::cout&lt;&lt;&quot;-- Instantiation of A_Empty_Pattern --&quot;&lt;&lt;std::endl;&#xD;
+std::cout&lt;&lt;&quot;Press Enter for next pattern...&quot;;&#xD;
+getchar();</body>
+      <body>#include &quot;AssemblyConnectors_P_P/B.hpp&quot;&#xD;
+#include &quot;AssemblyConnectors_P_P/C.hpp&quot;</body>
+    </ownedBehavior>
+    <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_-aF9oFgREeqZPe2oHCHy2Q" name="fbTestAUnconnectedPattern" specification="_1_Kt0FgTEeqZPe2oHCHy2Q">
+      <language>CPP</language>
+      <body>std::string compareString = &quot;\tpartB[0]     partC[0]\n\tpartB[0]     partC[1]\n\tpartB[0]     partC[2]\n\n\tpartB[1]     partC[0]\n\tpartB[1]     partC[1]\n\tpartB[1]     partC[2]\n\n&quot;;&#xD;
+&#xD;
+std::cout&lt;&lt;&quot;-- Instantiation of A_Unconnected_Pattern --&quot;&lt;&lt;std::endl;&#xD;
+&#xD;
+unsigned int leftFeatCardinality=2, rightFeatCardinality=3, rightEndCardinality=0, leftEndCardinality=0;&#xD;
+&#xD;
+bool successful = ((aUnconnectedPattern->getPartB()->size()) == leftFeatCardinality);&#xD;
+std::cout&lt;&lt;&quot;partB->size = &quot;&lt;&lt;leftFeatCardinality&lt;&lt;&quot; : &quot;&lt;&lt;std::boolalpha&lt;&lt;successful&lt;&lt;std::endl;&#xD;
+&#xD;
+for(unsigned int i = 0; i &lt; aUnconnectedPattern->getPartB()->size(); i++)&#xD;
+{&#xD;
+	successful = ((aUnconnectedPattern->getPartB()->at(i)->getC()->size()) == rightEndCardinality);&#xD;
+	std::cout&lt;&lt;&quot;partB[&quot;&lt;&lt;i&lt;&lt;&quot;]->c->size = &quot;&lt;&lt;rightEndCardinality&lt;&lt;&quot; : &quot;&lt;&lt;std::boolalpha&lt;&lt;successful&lt;&lt;std::endl;&#xD;
+}&#xD;
+std::cout&lt;&lt;std::endl;&#xD;
+&#xD;
+successful = ((aUnconnectedPattern->getPartC()->size()) == rightFeatCardinality);&#xD;
+std::cout&lt;&lt;&quot;partC->size = &quot;&lt;&lt;rightFeatCardinality&lt;&lt;&quot; : &quot;&lt;&lt;std::boolalpha&lt;&lt;successful&lt;&lt;std::endl;&#xD;
+&#xD;
+for(unsigned int i = 0; i &lt; aUnconnectedPattern->getPartB()->size(); i++)&#xD;
+{&#xD;
+	successful = ((aUnconnectedPattern->getPartC()->at(i)->getB()->size()) == leftEndCardinality);&#xD;
+	std::cout&lt;&lt;&quot;partC[&quot;&lt;&lt;i&lt;&lt;&quot;]->b->size = &quot;&lt;&lt;leftEndCardinality&lt;&lt;&quot; : &quot;&lt;&lt;std::boolalpha&lt;&lt;successful&lt;&lt;std::endl;&#xD;
+}&#xD;
+std::cout&lt;&lt;std::endl;&#xD;
+&#xD;
+std::string connectionsString = &quot;&quot;;&#xD;
+&#xD;
+for(unsigned int i = 0; i &lt; aUnconnectedPattern->getPartB()->size(); i++){&#xD;
+&#xD;
+	std::shared_ptr&lt;B> currentBOfPattern = aUnconnectedPattern->getPartB()->at(i);&#xD;
+&#xD;
+	for(unsigned int j = 0; j &lt; aUnconnectedPattern->getPartC()->size(); j++)&#xD;
+	{&#xD;
+		std::shared_ptr&lt;C> currentCOfPattern = aUnconnectedPattern->getPartC()->at(j);&#xD;
+		bool connected = false;&#xD;
+&#xD;
+		for(unsigned int k = 0; k &lt; currentBOfPattern->getC()->size() &amp;&amp; !connected; k++){&#xD;
+			&#xD;
+			std::shared_ptr&lt;C> currentCOfB = currentBOfPattern->getC()->at(k);&#xD;
+			if(currentCOfPattern  == currentCOfB)&#xD;
+			{	&#xD;
+				for(unsigned int h=0; h &lt; currentCOfPattern->getB()->size() &amp;&amp; !connected; h++)&#xD;
+				{&#xD;
+					std::shared_ptr&lt;B> currentBOfC = currentCOfPattern->getB()->at(h);&#xD;
+					if(!connected &amp;&amp; (currentBOfC == currentBOfPattern)) connected = true;&#xD;
+				}&#xD;
+			}&#xD;
+		}&#xD;
+		std::string connectedString = connected ? &quot;&lt;->&quot; : &quot;   &quot;;&#xD;
+		connectionsString+=&quot;\tpartB[&quot;+std::to_string(i)+&quot;] &quot;+connectedString+&quot; partC[&quot;+std::to_string(j)+&quot;]\n&quot;;&#xD;
+	}&#xD;
+	connectionsString+=&quot;\n&quot;;&#xD;
+}&#xD;
+&#xD;
+&#xD;
+successful = (connectionsString == compareString);&#xD;
+&#xD;
+if(successful){&#xD;
+	std::cout&lt;&lt;&quot;Links creation successful : &quot;&lt;&lt;std::boolalpha&lt;&lt;successful&lt;&lt;std::endl;&#xD;
+	&#xD;
+	std::cout&lt;&lt;connectionsString&lt;&lt;std::endl;&#xD;
+}&#xD;
+else{&#xD;
+	std::cout&lt;&lt;&quot;Links creation successful : &quot;&lt;&lt;std::boolalpha&lt;&lt;successful&lt;&lt;std::endl;&#xD;
+	std::cout&lt;&lt;&quot;Created links are:&quot;&lt;&lt;std::endl;&#xD;
+	std::cout&lt;&lt;connectionsString&lt;&lt;std::endl;&#xD;
+	std::cout&lt;&lt;&quot;Created links should be:&quot;&lt;&lt;std::endl;&#xD;
+	std::cout&lt;&lt;compareString&lt;&lt;std::endl;&#xD;
+}&#xD;
+&#xD;
+std::cout&lt;&lt;&quot;Instantiation was successful : &quot;&lt;&lt;std::boolalpha&lt;&lt;successful&lt;&lt;std::endl;&#xD;
+std::cout&lt;&lt;&quot;-- Instantiation of A_Unconnected_Pattern --&quot;&lt;&lt;std::endl;&#xD;
+std::cout&lt;&lt;&quot;Press Enter for next pattern...&quot;;&#xD;
+getchar();</body>
+    </ownedBehavior>
+    <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_CeMFMFgSEeqZPe2oHCHy2Q" name="fbTestAArrayPattern" specification="_-PQ7wFgTEeqZPe2oHCHy2Q">
+      <language>CPP</language>
+      <body>std::string compareString = &quot;\tpartB[0] &lt;-> partC[0]\n\tpartB[0]     partC[1]\n\tpartB[0]     partC[2]\n\tpartB[0]     partC[3]\n\n\tpartB[1]     partC[0]\n\tpartB[1] &lt;-> partC[1]\n\tpartB[1]     partC[2]\n\tpartB[1]     partC[3]\n\n\tpartB[2]     partC[0]\n\tpartB[2]     partC[1]\n\tpartB[2] &lt;-> partC[2]\n\tpartB[2]     partC[3]\n\n\tpartB[3]     partC[0]\n\tpartB[3]     partC[1]\n\tpartB[3]     partC[2]\n\tpartB[3] &lt;-> partC[3]\n\n&quot;;&#xD;
+&#xD;
+std::cout&lt;&lt;&quot;-- Instantiation of A_Array_Pattern --&quot;&lt;&lt;std::endl;&#xD;
+&#xD;
+unsigned int leftFeatCardinality=4, rightFeatCardinality=4, rightEndCardinality=1, leftEndCardinality=1;&#xD;
+&#xD;
+bool successful = ((aArrayPattern->getPartB()->size()) == leftFeatCardinality);&#xD;
+std::cout&lt;&lt;&quot;partB->size = &quot;&lt;&lt;leftFeatCardinality&lt;&lt;&quot; : &quot;&lt;&lt;std::boolalpha&lt;&lt;successful&lt;&lt;std::endl;&#xD;
+&#xD;
+for(unsigned int i = 0; i &lt; aArrayPattern->getPartB()->size(); i++)&#xD;
+{&#xD;
+	successful = ((aArrayPattern->getPartB()->at(i)->getC()->size()) == rightEndCardinality);&#xD;
+	std::cout&lt;&lt;&quot;partB[&quot;&lt;&lt;i&lt;&lt;&quot;]->c->size = &quot;&lt;&lt;rightEndCardinality&lt;&lt;&quot; : &quot;&lt;&lt;std::boolalpha&lt;&lt;successful&lt;&lt;std::endl;&#xD;
+}&#xD;
+std::cout&lt;&lt;std::endl;&#xD;
+&#xD;
+successful = ((aArrayPattern->getPartC()->size()) == rightFeatCardinality);&#xD;
+std::cout&lt;&lt;&quot;partC->size = &quot;&lt;&lt;rightFeatCardinality&lt;&lt;&quot; : &quot;&lt;&lt;std::boolalpha&lt;&lt;successful&lt;&lt;std::endl;&#xD;
+&#xD;
+for(unsigned int i = 0; i &lt; aArrayPattern->getPartC()->size(); i++)&#xD;
+{&#xD;
+	successful = ((aArrayPattern->getPartC()->at(i)->getB()->size()) == leftEndCardinality);&#xD;
+	std::cout&lt;&lt;&quot;partC[&quot;&lt;&lt;i&lt;&lt;&quot;]->b->size = &quot;&lt;&lt;leftEndCardinality&lt;&lt;&quot; : &quot;&lt;&lt;std::boolalpha&lt;&lt;successful&lt;&lt;std::endl;&#xD;
+}&#xD;
+std::cout&lt;&lt;std::endl;&#xD;
+&#xD;
+std::string connectionsString = &quot;&quot;;&#xD;
+&#xD;
+for(unsigned int i = 0; i &lt; aArrayPattern->getPartB()->size(); i++){&#xD;
+&#xD;
+	std::shared_ptr&lt;B> currentBOfPattern = aArrayPattern->getPartB()->at(i);&#xD;
+&#xD;
+	for(unsigned int j = 0; j &lt; aArrayPattern->getPartC()->size(); j++)&#xD;
+	{&#xD;
+		std::shared_ptr&lt;C> currentCOfPattern = aArrayPattern->getPartC()->at(j);&#xD;
+		bool connected = false;&#xD;
+&#xD;
+		for(unsigned int k = 0; k &lt; currentBOfPattern->getC()->size() &amp;&amp; !connected; k++){&#xD;
+			&#xD;
+			std::shared_ptr&lt;C> currentCOfB = currentBOfPattern->getC()->at(k);&#xD;
+			if(currentCOfPattern  == currentCOfB)&#xD;
+			{	&#xD;
+				for(unsigned int h=0; h &lt; currentCOfPattern->getB()->size() &amp;&amp; !connected; h++)&#xD;
+				{&#xD;
+					std::shared_ptr&lt;B> currentBOfC = currentCOfPattern->getB()->at(h);&#xD;
+					if(!connected &amp;&amp; (currentBOfC == currentBOfPattern)) connected = true;&#xD;
+				}&#xD;
+			}&#xD;
+		}&#xD;
+		std::string connectedString = connected ? &quot;&lt;->&quot; : &quot;   &quot;;&#xD;
+		connectionsString +=&quot;\tpartB[&quot;+std::to_string(i)+&quot;] &quot;+connectedString+&quot; partC[&quot;+std::to_string(j)+&quot;]\n&quot;;&#xD;
+	}&#xD;
+	connectionsString+=&quot;\n&quot;;&#xD;
+}&#xD;
+&#xD;
+successful = (connectionsString == compareString);&#xD;
+&#xD;
+if(successful){&#xD;
+	std::cout&lt;&lt;&quot;Links creation successful : &quot;&lt;&lt;std::boolalpha&lt;&lt;successful&lt;&lt;std::endl;&#xD;
+	&#xD;
+	std::cout&lt;&lt;connectionsString&lt;&lt;std::endl;&#xD;
+}&#xD;
+else{&#xD;
+	std::cout&lt;&lt;&quot;Links creation successful : &quot;&lt;&lt;std::boolalpha&lt;&lt;successful&lt;&lt;std::endl;&#xD;
+	std::cout&lt;&lt;&quot;Created links are:&quot;&lt;&lt;std::endl;&#xD;
+	std::cout&lt;&lt;connectionsString&lt;&lt;std::endl;&#xD;
+	std::cout&lt;&lt;&quot;Created links should be:&quot;&lt;&lt;std::endl;&#xD;
+	std::cout&lt;&lt;compareString&lt;&lt;std::endl;&#xD;
+}&#xD;
+&#xD;
+std::cout&lt;&lt;&quot;Instantiation was successful : &quot;&lt;&lt;std::boolalpha&lt;&lt;successful&lt;&lt;std::endl;&#xD;
+std::cout&lt;&lt;&quot;-- Instantiation of A_Array_Pattern --&quot;&lt;&lt;std::endl;&#xD;
+std::cout&lt;&lt;&quot;Press Enter for next pattern...&quot;;&#xD;
+getchar();</body>
+    </ownedBehavior>
+    <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_EXuZsFgSEeqZPe2oHCHy2Q" name="fbTestAStarPattern" specification="_HVXkoFgUEeqZPe2oHCHy2Q">
+      <language>CPP</language>
+      <body>std::string compareString=&quot;\tpartB[0] &lt;-> partC[0]\n\tpartB[0] &lt;-> partC[1]\n\tpartB[0] &lt;-> partC[2]\n\n\tpartB[1] &lt;-> partC[0]\n\tpartB[1] &lt;-> partC[1]\n\tpartB[1] &lt;-> partC[2]\n\n\tpartB[2] &lt;-> partC[0]\n\tpartB[2] &lt;-> partC[1]\n\tpartB[2] &lt;-> partC[2]\n\n\tpartB[3] &lt;-> partC[0]\n\tpartB[3] &lt;-> partC[1]\n\tpartB[3] &lt;-> partC[2]\n\n&quot;;&#xD;
+&#xD;
+std::cout&lt;&lt;&quot;-- Instantiation of A_Star_Pattern --&quot;&lt;&lt;std::endl;&#xD;
+&#xD;
+unsigned int leftFeatCardinality=4, rightFeatCardinality=3, rightEndCardinality=3, leftEndCardinality=4;&#xD;
+&#xD;
+bool successful = ((aStarPattern->getPartB()->size()) == leftFeatCardinality);&#xD;
+std::cout&lt;&lt;&quot;partB->size = &quot;&lt;&lt;leftFeatCardinality&lt;&lt;&quot; : &quot;&lt;&lt;std::boolalpha&lt;&lt;successful&lt;&lt;std::endl;&#xD;
+&#xD;
+for(unsigned int i = 0; i &lt; aStarPattern->getPartB()->size(); i++)&#xD;
+{&#xD;
+	successful = ((aStarPattern->getPartB()->at(i)->getC()->size()) == rightEndCardinality);&#xD;
+	std::cout&lt;&lt;&quot;partB[&quot;&lt;&lt;i&lt;&lt;&quot;]->c->size = &quot;&lt;&lt;rightEndCardinality&lt;&lt;&quot; : &quot;&lt;&lt;std::boolalpha&lt;&lt;successful&lt;&lt;std::endl;&#xD;
+}&#xD;
+std::cout&lt;&lt;std::endl;&#xD;
+&#xD;
+successful = ((aStarPattern->getPartC()->size()) == rightFeatCardinality);&#xD;
+std::cout&lt;&lt;&quot;partC->size = &quot;&lt;&lt;rightFeatCardinality&lt;&lt;&quot; : &quot;&lt;&lt;std::boolalpha&lt;&lt;successful&lt;&lt;std::endl;&#xD;
+&#xD;
+for(unsigned int i = 0; i &lt; aStarPattern->getPartC()->size(); i++)&#xD;
+{&#xD;
+	successful = ((aStarPattern->getPartC()->at(i)->getB()->size()) == leftEndCardinality);&#xD;
+	std::cout&lt;&lt;&quot;partC[&quot;&lt;&lt;i&lt;&lt;&quot;]->b->size = &quot;&lt;&lt;leftEndCardinality&lt;&lt;&quot; : &quot;&lt;&lt;std::boolalpha&lt;&lt;successful&lt;&lt;std::endl;&#xD;
+}&#xD;
+std::cout&lt;&lt;std::endl;&#xD;
+&#xD;
+std::string connectionsString = &quot;&quot;;&#xD;
+&#xD;
+for(unsigned int i = 0; i &lt; aStarPattern->getPartB()->size(); i++){&#xD;
+&#xD;
+	std::shared_ptr&lt;B> currentBOfPattern = aStarPattern->getPartB()->at(i);&#xD;
+&#xD;
+	for(unsigned int j = 0; j &lt; aStarPattern->getPartC()->size(); j++)&#xD;
+	{&#xD;
+		std::shared_ptr&lt;C> currentCOfPattern = aStarPattern->getPartC()->at(j);&#xD;
+		bool connected = false;&#xD;
+&#xD;
+		for(unsigned int k = 0; k &lt; currentBOfPattern->getC()->size() &amp;&amp; !connected; k++){&#xD;
+			&#xD;
+			std::shared_ptr&lt;C> currentCOfB = currentBOfPattern->getC()->at(k);&#xD;
+			if(currentCOfPattern  == currentCOfB)&#xD;
+			{	&#xD;
+				for(unsigned int h=0; h &lt; currentCOfPattern->getB()->size() &amp;&amp; !connected; h++)&#xD;
+				{&#xD;
+					std::shared_ptr&lt;B> currentBOfC = currentCOfPattern->getB()->at(h);&#xD;
+					if(!connected &amp;&amp; (currentBOfC == currentBOfPattern)) connected = true;&#xD;
+				}&#xD;
+			}&#xD;
+		}&#xD;
+		std::string connectedString = connected ? &quot;&lt;->&quot; : &quot;   &quot;;&#xD;
+		connectionsString += &quot;\tpartB[&quot;+std::to_string(i)+&quot;] &quot;+connectedString+&quot; partC[&quot;+std::to_string(j)+&quot;]\n&quot;;&#xD;
+	}&#xD;
+	connectionsString += &quot;\n&quot;;&#xD;
+}&#xD;
+&#xD;
+successful = (connectionsString == compareString);&#xD;
+&#xD;
+if(successful){&#xD;
+	std::cout&lt;&lt;&quot;Links creation successful : &quot;&lt;&lt;std::boolalpha&lt;&lt;successful&lt;&lt;std::endl;&#xD;
+	&#xD;
+	std::cout&lt;&lt;connectionsString&lt;&lt;std::endl;&#xD;
+}&#xD;
+else{&#xD;
+	std::cout&lt;&lt;&quot;Links creation successful : &quot;&lt;&lt;std::boolalpha&lt;&lt;successful&lt;&lt;std::endl;&#xD;
+	std::cout&lt;&lt;&quot;Created links are:&quot;&lt;&lt;std::endl;&#xD;
+	std::cout&lt;&lt;connectionsString&lt;&lt;std::endl;&#xD;
+	std::cout&lt;&lt;&quot;Created links should be:&quot;&lt;&lt;std::endl;&#xD;
+	std::cout&lt;&lt;compareString&lt;&lt;std::endl;&#xD;
+}&#xD;
+&#xD;
+std::cout&lt;&lt;&quot;Instantiation was successful : &quot;&lt;&lt;std::boolalpha&lt;&lt;successful&lt;&lt;std::endl;&#xD;
+std::cout&lt;&lt;&quot;-- Instantiation of A_Star_Pattern --&quot;&lt;&lt;std::endl;&#xD;
+std::cout&lt;&lt;&quot;Press Enter for next pattern...&quot;;&#xD;
+getchar();</body>
+    </ownedBehavior>
+    <ownedBehavior xmi:type="uml:Activity" xmi:id="_xisNwF09EeqSTMfFMj3W_w" name="actRunTestCase" specification="_ll58kI4aEeqm_eVeNYUZww" node="_DmQg4F0-EeqSTMfFMj3W_w _Zj31cF1DEeqSTMfFMj3W_w _o8oIIF1DEeqSTMfFMj3W_w _yfwEMF1DEeqSTMfFMj3W_w __HSzgF1DEeqSTMfFMj3W_w _OQiDgF1EEeqSTMfFMj3W_w _FcqksF1FEeqSTMfFMj3W_w _-sn-0F1FEeqSTMfFMj3W_w _4o8IoF1GEeqSTMfFMj3W_w _Lus4kF1HEeqSTMfFMj3W_w">
+      <edge xmi:type="uml:ControlFlow" xmi:id="_WeoGUF1EEeqSTMfFMj3W_w" target="_OQiDgF1EEeqSTMfFMj3W_w" source="_DmQg4F0-EeqSTMfFMj3W_w">
+        <guard xmi:type="uml:LiteralBoolean" xmi:id="_WeotYF1EEeqSTMfFMj3W_w" name="Initial1_To_Fork1_guard" value="true"/>
+        <weight xmi:type="uml:LiteralInteger" xmi:id="_WepUcF1EEeqSTMfFMj3W_w" name="Initial1_To_Fork1_weight"/>
+      </edge>
+      <edge xmi:type="uml:ControlFlow" xmi:id="_YpZUwF1EEeqSTMfFMj3W_w" target="__HSzgF1DEeqSTMfFMj3W_w" source="_OQiDgF1EEeqSTMfFMj3W_w">
+        <guard xmi:type="uml:LiteralBoolean" xmi:id="_YpZ70F1EEeqSTMfFMj3W_w" name="Fork1_To_CreateAStarPattern_guard" value="true"/>
+        <weight xmi:type="uml:LiteralInteger" xmi:id="_YpZ70V1EEeqSTMfFMj3W_w" name="Fork1_To_CreateAStarPattern_weight"/>
+      </edge>
+      <edge xmi:type="uml:ControlFlow" xmi:id="_ZeE6AF1EEeqSTMfFMj3W_w" target="_yfwEMF1DEeqSTMfFMj3W_w" source="_OQiDgF1EEeqSTMfFMj3W_w">
+        <guard xmi:type="uml:LiteralBoolean" xmi:id="_ZeE6AV1EEeqSTMfFMj3W_w" name="Fork1_To_CreateAArrayPattern_guard" value="true"/>
+        <weight xmi:type="uml:LiteralInteger" xmi:id="_ZeFhEF1EEeqSTMfFMj3W_w" name="Fork1_To_CreateAArrayPattern_weight"/>
+      </edge>
+      <edge xmi:type="uml:ControlFlow" xmi:id="_bwoLcF1EEeqSTMfFMj3W_w" target="_o8oIIF1DEeqSTMfFMj3W_w" source="_OQiDgF1EEeqSTMfFMj3W_w">
+        <guard xmi:type="uml:LiteralBoolean" xmi:id="_bwoLcV1EEeqSTMfFMj3W_w" name="Fork1_To_CreateAUnconnectedPattern_guard" value="true"/>
+        <weight xmi:type="uml:LiteralInteger" xmi:id="_bwoygF1EEeqSTMfFMj3W_w" name="Fork1_To_CreateAUnconnectedPattern_weight"/>
+      </edge>
+      <edge xmi:type="uml:ControlFlow" xmi:id="_eIxHgF1EEeqSTMfFMj3W_w" target="_Zj31cF1DEeqSTMfFMj3W_w" source="_OQiDgF1EEeqSTMfFMj3W_w">
+        <guard xmi:type="uml:LiteralBoolean" xmi:id="_eIxHgV1EEeqSTMfFMj3W_w" name="Fork1_To_CreateAEmptyPattern_guard" value="true"/>
+        <weight xmi:type="uml:LiteralInteger" xmi:id="_eIxukF1EEeqSTMfFMj3W_w" name="Fork1_To_CreateAEmptyPattern_weight"/>
+      </edge>
+      <edge xmi:type="uml:ObjectFlow" xmi:id="_yvdpQF1FEeqSTMfFMj3W_w" target="_R2j5kF1FEeqSTMfFMj3W_w" source="_Zj4cgF1DEeqSTMfFMj3W_w"/>
+      <edge xmi:type="uml:ObjectFlow" xmi:id="_q6L5oF1GEeqSTMfFMj3W_w" target="_FJi-8F1GEeqSTMfFMj3W_w" source="_o8ovMF1DEeqSTMfFMj3W_w"/>
+      <edge xmi:type="uml:ControlFlow" xmi:id="_0HAOgF1GEeqSTMfFMj3W_w" target="_-sn-0F1FEeqSTMfFMj3W_w" source="_FcqksF1FEeqSTMfFMj3W_w">
+        <guard xmi:type="uml:LiteralBoolean" xmi:id="_0HA1kF1GEeqSTMfFMj3W_w" name="testAEmptyPattern_To_testAUnconnectedPattern_guard" value="true"/>
+        <weight xmi:type="uml:LiteralInteger" xmi:id="_0HA1kV1GEeqSTMfFMj3W_w" name="testAEmptyPattern_To_testAUnconnectedPattern_weight"/>
+      </edge>
+      <edge xmi:type="uml:ControlFlow" xmi:id="__SIDIF1GEeqSTMfFMj3W_w" target="_4o8IoF1GEeqSTMfFMj3W_w" source="_-sn-0F1FEeqSTMfFMj3W_w">
+        <guard xmi:type="uml:LiteralBoolean" xmi:id="__SIqMF1GEeqSTMfFMj3W_w" name="testAUnconnectedPattern_To_testAArrayPattern_guard" value="true"/>
+        <weight xmi:type="uml:LiteralInteger" xmi:id="__SJRQF1GEeqSTMfFMj3W_w" name="testAUnconnectedPattern_To_testAArrayPattern_weight"/>
+      </edge>
+      <edge xmi:type="uml:ObjectFlow" xmi:id="_EMlyAF1HEeqSTMfFMj3W_w" target="_7Jc9kF1GEeqSTMfFMj3W_w" source="_yfwEMV1DEeqSTMfFMj3W_w"/>
+      <edge xmi:type="uml:ControlFlow" xmi:id="_WwAC0F1HEeqSTMfFMj3W_w" target="_Lus4kF1HEeqSTMfFMj3W_w" source="_4o8IoF1GEeqSTMfFMj3W_w">
+        <guard xmi:type="uml:LiteralBoolean" xmi:id="_WwAp4F1HEeqSTMfFMj3W_w" name="testAArrayPattern_To_testAStarPattern_guard" value="true"/>
+        <weight xmi:type="uml:LiteralInteger" xmi:id="_WwAp4V1HEeqSTMfFMj3W_w" name="testAArrayPattern_To_testAStarPattern_weight"/>
+      </edge>
+      <edge xmi:type="uml:ObjectFlow" xmi:id="_bycpAF1HEeqSTMfFMj3W_w" target="_Oa4yAF1HEeqSTMfFMj3W_w" source="__HTakF1DEeqSTMfFMj3W_w"/>
+      <node xmi:type="uml:InitialNode" xmi:id="_DmQg4F0-EeqSTMfFMj3W_w" name="Initial1" outgoing="_WeoGUF1EEeqSTMfFMj3W_w"/>
+      <node xmi:type="uml:CreateObjectAction" xmi:id="_Zj31cF1DEeqSTMfFMj3W_w" name="CreateAEmptyPattern" incoming="_eIxHgF1EEeqSTMfFMj3W_w" classifier="_z6HwQO9BEemWP7t7cfH8xA">
+        <result xmi:id="_Zj4cgF1DEeqSTMfFMj3W_w" name="aEmptyPattern" outgoing="_yvdpQF1FEeqSTMfFMj3W_w" type="_z6HwQO9BEemWP7t7cfH8xA"/>
+      </node>
+      <node xmi:type="uml:CreateObjectAction" xmi:id="_o8oIIF1DEeqSTMfFMj3W_w" name="CreateAUnconnectedPattern" incoming="_bwoLcF1EEeqSTMfFMj3W_w" classifier="_bfcP8FIvEeq4WpdDJnu9kg">
+        <result xmi:id="_o8ovMF1DEeqSTMfFMj3W_w" name="aUnconnectedPattern" outgoing="_q6L5oF1GEeqSTMfFMj3W_w" type="_bfcP8FIvEeq4WpdDJnu9kg"/>
+      </node>
+      <node xmi:type="uml:CreateObjectAction" xmi:id="_yfwEMF1DEeqSTMfFMj3W_w" name="CreateAArrayPattern" incoming="_ZeE6AF1EEeqSTMfFMj3W_w" classifier="_rZJ6oFIvEeq4WpdDJnu9kg">
+        <result xmi:id="_yfwEMV1DEeqSTMfFMj3W_w" name="aArrayPattern" outgoing="_EMlyAF1HEeqSTMfFMj3W_w" type="_rZJ6oFIvEeq4WpdDJnu9kg"/>
+      </node>
+      <node xmi:type="uml:CreateObjectAction" xmi:id="__HSzgF1DEeqSTMfFMj3W_w" name="CreateAStarPattern" incoming="_YpZUwF1EEeqSTMfFMj3W_w" classifier="__fogsFIvEeq4WpdDJnu9kg">
+        <result xmi:id="__HTakF1DEeqSTMfFMj3W_w" name="aStarPattern" outgoing="_bycpAF1HEeqSTMfFMj3W_w" type="__fogsFIvEeq4WpdDJnu9kg"/>
+      </node>
+      <node xmi:type="uml:ForkNode" xmi:id="_OQiDgF1EEeqSTMfFMj3W_w" name="Fork1" incoming="_WeoGUF1EEeqSTMfFMj3W_w" outgoing="_YpZUwF1EEeqSTMfFMj3W_w _ZeE6AF1EEeqSTMfFMj3W_w _bwoLcF1EEeqSTMfFMj3W_w _eIxHgF1EEeqSTMfFMj3W_w"/>
+      <node xmi:type="uml:CallOperationAction" xmi:id="_FcqksF1FEeqSTMfFMj3W_w" name="testAEmptyPattern" outgoing="_0HAOgF1GEeqSTMfFMj3W_w" operation="_N16ycFgSEeqZPe2oHCHy2Q">
+        <argument xmi:id="_R2j5kF1FEeqSTMfFMj3W_w" name="aEmptyPattern" incoming="_yvdpQF1FEeqSTMfFMj3W_w" type="_z6HwQO9BEemWP7t7cfH8xA"/>
+        <target xmi:id="_FcqksV1FEeqSTMfFMj3W_w" name="self" type="_AX6AEFgQEeqZPe2oHCHy2Q"/>
+      </node>
+      <node xmi:type="uml:CallOperationAction" xmi:id="_-sn-0F1FEeqSTMfFMj3W_w" name="testAUnconnectedPattern" incoming="_0HAOgF1GEeqSTMfFMj3W_w" outgoing="__SIDIF1GEeqSTMfFMj3W_w" operation="_1_Kt0FgTEeqZPe2oHCHy2Q">
+        <argument xmi:id="_FJi-8F1GEeqSTMfFMj3W_w" name="aUnconnectedPattern" incoming="_q6L5oF1GEeqSTMfFMj3W_w" type="_bfcP8FIvEeq4WpdDJnu9kg"/>
+        <target xmi:id="_-sol4F1FEeqSTMfFMj3W_w" name="self" type="_AX6AEFgQEeqZPe2oHCHy2Q"/>
+      </node>
+      <node xmi:type="uml:CallOperationAction" xmi:id="_4o8IoF1GEeqSTMfFMj3W_w" name="testAArrayPattern" incoming="__SIDIF1GEeqSTMfFMj3W_w" outgoing="_WwAC0F1HEeqSTMfFMj3W_w" operation="_-PQ7wFgTEeqZPe2oHCHy2Q">
+        <argument xmi:id="_7Jc9kF1GEeqSTMfFMj3W_w" name="aArrayPattern" incoming="_EMlyAF1HEeqSTMfFMj3W_w" type="_rZJ6oFIvEeq4WpdDJnu9kg"/>
+        <target xmi:id="_4o8vsF1GEeqSTMfFMj3W_w" name="self" type="_AX6AEFgQEeqZPe2oHCHy2Q"/>
+      </node>
+      <node xmi:type="uml:CallOperationAction" xmi:id="_Lus4kF1HEeqSTMfFMj3W_w" name="testAStarPattern" incoming="_WwAC0F1HEeqSTMfFMj3W_w" operation="_HVXkoFgUEeqZPe2oHCHy2Q">
+        <argument xmi:id="_Oa4yAF1HEeqSTMfFMj3W_w" name="aStarPattern" incoming="_bycpAF1HEeqSTMfFMj3W_w" type="__fogsFIvEeq4WpdDJnu9kg"/>
+        <target xmi:id="_LutfoF1HEeqSTMfFMj3W_w" name="self" type="_AX6AEFgQEeqZPe2oHCHy2Q"/>
+      </node>
+    </ownedBehavior>
+    <ownedOperation xmi:id="_N16ycFgSEeqZPe2oHCHy2Q" name="testAEmptyPattern" method="_6vTt8FgREeqZPe2oHCHy2Q">
+      <ownedParameter xmi:id="_TUYmQFgSEeqZPe2oHCHy2Q" name="aEmptyPattern" type="_z6HwQO9BEemWP7t7cfH8xA"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_1_Kt0FgTEeqZPe2oHCHy2Q" name="testAUnconnectedPattern" method="_-aF9oFgREeqZPe2oHCHy2Q">
+      <ownedParameter xmi:id="_7GFkUFgTEeqZPe2oHCHy2Q" name="aUnconnectedPattern" type="_bfcP8FIvEeq4WpdDJnu9kg"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_-PQ7wFgTEeqZPe2oHCHy2Q" name="testAArrayPattern" method="_CeMFMFgSEeqZPe2oHCHy2Q">
+      <ownedParameter xmi:id="_-PQ7wVgTEeqZPe2oHCHy2Q" name="aArrayPattern" type="_rZJ6oFIvEeq4WpdDJnu9kg"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_HVXkoFgUEeqZPe2oHCHy2Q" name="testAStarPattern" method="_EXuZsFgSEeqZPe2oHCHy2Q">
+      <ownedParameter xmi:id="_HVXkoVgUEeqZPe2oHCHy2Q" name="aStarPattern" type="__fogsFIvEeq4WpdDJnu9kg"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_ll58kI4aEeqm_eVeNYUZww" name="runTestCase" method="_xisNwF09EeqSTMfFMj3W_w"/>
+  </packagedElement>
+</uml:Model>

@@ -885,7 +885,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EAnnotation_contents->setLower(0);
 	ecore_EAnnotation_contents->setUpper(-1);
 	ecore_EAnnotation_contents->setVisibility(uml::VisibilityKind::PUBLIC);
-	
+	//ecore_EAnnotation_contents->setAssociation(a_Ecore_EObject_contents_ecore_EAnnotation);
 	
 	
 	ecore_EAnnotation_details->setName("details");
@@ -893,7 +893,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EAnnotation_details->setLower(0);
 	ecore_EAnnotation_details->setUpper(-1);
 	ecore_EAnnotation_details->setVisibility(uml::VisibilityKind::PUBLIC);
-	
+	//ecore_EAnnotation_details->setAssociation(a_Ecore_EStringToStringMapEntry_details_ecore_EAnnotation);
 	
 	
 	ecore_EAnnotation_eModelElement->setName("eModelElement");
@@ -901,7 +901,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EAnnotation_eModelElement->setLower(0);
 	ecore_EAnnotation_eModelElement->setUpper(1);
 	ecore_EAnnotation_eModelElement->setVisibility(uml::VisibilityKind::PUBLIC);
-	
+	//ecore_EAnnotation_eModelElement->setAssociation(a_Ecore_EAnnotation_eAnnotations_Ecore_EModelElement_eModelElement);
 	
 	
 	ecore_EAnnotation_references->setName("references");
@@ -909,7 +909,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EAnnotation_references->setLower(0);
 	ecore_EAnnotation_references->setUpper(-1);
 	ecore_EAnnotation_references->setVisibility(uml::VisibilityKind::PUBLIC);
-	
+	//ecore_EAnnotation_references->setAssociation(a_Ecore_EObject_references_ecore_EAnnotation);
 	
 	
 	ecore_EAnnotation_source->setName("source");
@@ -936,7 +936,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EAttribute_eAttributeType->setLower(1);
 	ecore_EAttribute_eAttributeType->setUpper(1);
 	ecore_EAttribute_eAttributeType->setVisibility(uml::VisibilityKind::PUBLIC);
-	
+	//ecore_EAttribute_eAttributeType->setAssociation(a_Ecore_EDataType_eAttributeType_ecore_EAttribute);
 	
 	
 	ecore_EAttribute_id->setName("id");
@@ -971,7 +971,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EClass_eAllAttributes->setLower(0);
 	ecore_EClass_eAllAttributes->setUpper(-1);
 	ecore_EClass_eAllAttributes->setVisibility(uml::VisibilityKind::PUBLIC);
-	
+	//ecore_EClass_eAllAttributes->setAssociation(a_Ecore_EAttribute_eAllAttributes_ecore_EClass);
 	
 	
 	ecore_EClass_eAllContainments->setName("eAllContainments");
@@ -979,7 +979,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EClass_eAllContainments->setLower(0);
 	ecore_EClass_eAllContainments->setUpper(-1);
 	ecore_EClass_eAllContainments->setVisibility(uml::VisibilityKind::PUBLIC);
-	
+	//ecore_EClass_eAllContainments->setAssociation(a_Ecore_EReference_eAllContainments_ecore_EClass);
 	
 	
 	ecore_EClass_eAllGenericSuperTypes->setName("eAllGenericSuperTypes");
@@ -987,7 +987,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EClass_eAllGenericSuperTypes->setLower(0);
 	ecore_EClass_eAllGenericSuperTypes->setUpper(-1);
 	ecore_EClass_eAllGenericSuperTypes->setVisibility(uml::VisibilityKind::PUBLIC);
-	
+	//ecore_EClass_eAllGenericSuperTypes->setAssociation(a_Ecore_EGenericType_eAllGenericSuperTypes_ecore_EClass);
 	
 	
 	ecore_EClass_eAllOperations->setName("eAllOperations");
@@ -995,7 +995,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EClass_eAllOperations->setLower(0);
 	ecore_EClass_eAllOperations->setUpper(-1);
 	ecore_EClass_eAllOperations->setVisibility(uml::VisibilityKind::PUBLIC);
-	
+	//ecore_EClass_eAllOperations->setAssociation(a_Ecore_EOperation_eAllOperations_ecore_EClass);
 	
 	
 	ecore_EClass_eAllReferences->setName("eAllReferences");
@@ -1003,7 +1003,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EClass_eAllReferences->setLower(0);
 	ecore_EClass_eAllReferences->setUpper(-1);
 	ecore_EClass_eAllReferences->setVisibility(uml::VisibilityKind::PUBLIC);
-	
+	//ecore_EClass_eAllReferences->setAssociation(a_Ecore_EReference_eAllReferences_ecore_EClass);
 	
 	
 	ecore_EClass_eAllStructuralFeatures->setName("eAllStructuralFeatures");
@@ -1011,7 +1011,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EClass_eAllStructuralFeatures->setLower(0);
 	ecore_EClass_eAllStructuralFeatures->setUpper(-1);
 	ecore_EClass_eAllStructuralFeatures->setVisibility(uml::VisibilityKind::PUBLIC);
-	
+	//ecore_EClass_eAllStructuralFeatures->setAssociation(a_Ecore_EStructuralFeature_eAllStructuralFeatures_ecore_EClass);
 	
 	
 	ecore_EClass_eAllSuperTypes->setName("eAllSuperTypes");
@@ -1019,7 +1019,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EClass_eAllSuperTypes->setLower(0);
 	ecore_EClass_eAllSuperTypes->setUpper(-1);
 	ecore_EClass_eAllSuperTypes->setVisibility(uml::VisibilityKind::PUBLIC);
-	
+	//ecore_EClass_eAllSuperTypes->setAssociation(a_Ecore_EClass_eAllSuperTypes_ecore_EClass);
 	
 	
 	ecore_EClass_eAttributes->setName("eAttributes");
@@ -1027,7 +1027,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EClass_eAttributes->setLower(0);
 	ecore_EClass_eAttributes->setUpper(-1);
 	ecore_EClass_eAttributes->setVisibility(uml::VisibilityKind::PUBLIC);
-	
+	//ecore_EClass_eAttributes->setAssociation(a_Ecore_EAttribute_eAttributes_ecore_EClass);
 	
 	
 	ecore_EClass_eGenericSuperTypes->setName("eGenericSuperTypes");
@@ -1035,7 +1035,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EClass_eGenericSuperTypes->setLower(0);
 	ecore_EClass_eGenericSuperTypes->setUpper(-1);
 	ecore_EClass_eGenericSuperTypes->setVisibility(uml::VisibilityKind::PUBLIC);
-	
+	//ecore_EClass_eGenericSuperTypes->setAssociation(a_Ecore_EGenericType_eGenericSuperTypes_ecore_EClass);
 	
 	
 	ecore_EClass_eIDAttribute->setName("eIDAttribute");
@@ -1043,7 +1043,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EClass_eIDAttribute->setLower(0);
 	ecore_EClass_eIDAttribute->setUpper(1);
 	ecore_EClass_eIDAttribute->setVisibility(uml::VisibilityKind::PUBLIC);
-	
+	//ecore_EClass_eIDAttribute->setAssociation(a_Ecore_EAttribute_eIDAttribute_ecore_EClass);
 	
 	
 	ecore_EClass_eOperations->setName("eOperations");
@@ -1051,7 +1051,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EClass_eOperations->setLower(0);
 	ecore_EClass_eOperations->setUpper(-1);
 	ecore_EClass_eOperations->setVisibility(uml::VisibilityKind::PUBLIC);
-	
+	//ecore_EClass_eOperations->setAssociation(a_Ecore_EOperation_eOperations_Ecore_EClass_eContainingClass);
 	
 	
 	ecore_EClass_eReferences->setName("eReferences");
@@ -1059,7 +1059,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EClass_eReferences->setLower(0);
 	ecore_EClass_eReferences->setUpper(-1);
 	ecore_EClass_eReferences->setVisibility(uml::VisibilityKind::PUBLIC);
-	
+	//ecore_EClass_eReferences->setAssociation(a_Ecore_EReference_eReferences_ecore_EClass);
 	
 	
 	ecore_EClass_eStructuralFeatures->setName("eStructuralFeatures");
@@ -1067,7 +1067,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EClass_eStructuralFeatures->setLower(0);
 	ecore_EClass_eStructuralFeatures->setUpper(-1);
 	ecore_EClass_eStructuralFeatures->setVisibility(uml::VisibilityKind::PUBLIC);
-	
+	//ecore_EClass_eStructuralFeatures->setAssociation(a_Ecore_EStructuralFeature_eStructuralFeatures_Ecore_EClass_eContainingClass);
 	
 	
 	ecore_EClass_eSuperTypes->setName("eSuperTypes");
@@ -1075,7 +1075,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EClass_eSuperTypes->setLower(0);
 	ecore_EClass_eSuperTypes->setUpper(-1);
 	ecore_EClass_eSuperTypes->setVisibility(uml::VisibilityKind::PUBLIC);
-	
+	//ecore_EClass_eSuperTypes->setAssociation(a_Ecore_EClass_eSuperTypes_ecore_EClass);
 	
 	
 	ecore_EClass_interface->setName("interface");
@@ -1214,7 +1214,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EClassifier_ePackage->setLower(0);
 	ecore_EClassifier_ePackage->setUpper(1);
 	ecore_EClassifier_ePackage->setVisibility(uml::VisibilityKind::PUBLIC);
-	
+	//ecore_EClassifier_ePackage->setAssociation(a_Ecore_EClassifier_eClassifiers_Ecore_EPackage_ePackage);
 	
 	
 	ecore_EClassifier_eTypeParameters->setName("eTypeParameters");
@@ -1222,7 +1222,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EClassifier_eTypeParameters->setLower(0);
 	ecore_EClassifier_eTypeParameters->setUpper(-1);
 	ecore_EClassifier_eTypeParameters->setVisibility(uml::VisibilityKind::PUBLIC);
-	
+	//ecore_EClassifier_eTypeParameters->setAssociation(a_Ecore_ETypeParameter_eTypeParameters_ecore_EClassifier);
 	
 	
 	ecore_EClassifier_instanceClass->setName("instanceClass");
@@ -1319,7 +1319,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EEnum_eLiterals->setLower(0);
 	ecore_EEnum_eLiterals->setUpper(-1);
 	ecore_EEnum_eLiterals->setVisibility(uml::VisibilityKind::PUBLIC);
-	
+	//ecore_EEnum_eLiterals->setAssociation(a_Ecore_EEnumLiteral_eLiterals_Ecore_EEnum_eEnum);
 	
 	
 
@@ -1408,7 +1408,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EEnumLiteral_eEnum->setLower(0);
 	ecore_EEnumLiteral_eEnum->setUpper(1);
 	ecore_EEnumLiteral_eEnum->setVisibility(uml::VisibilityKind::PUBLIC);
-	
+	//ecore_EEnumLiteral_eEnum->setAssociation(a_Ecore_EEnumLiteral_eLiterals_Ecore_EEnum_eEnum);
 	
 	
 	ecore_EEnumLiteral_instance->setName("instance");
@@ -1451,7 +1451,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EFactory_ePackage->setLower(1);
 	ecore_EFactory_ePackage->setUpper(1);
 	ecore_EFactory_ePackage->setVisibility(uml::VisibilityKind::PUBLIC);
-	
+	//ecore_EFactory_ePackage->setAssociation(a_Ecore_EPackage_ePackage_Ecore_EFactory_eFactoryInstance);
 	
 	
 
@@ -1564,7 +1564,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EGenericType_eClassifier->setLower(0);
 	ecore_EGenericType_eClassifier->setUpper(1);
 	ecore_EGenericType_eClassifier->setVisibility(uml::VisibilityKind::PUBLIC);
-	
+	//ecore_EGenericType_eClassifier->setAssociation(a_Ecore_EClassifier_eClassifier_ecore_EGenericType);
 	
 	
 	ecore_EGenericType_eLowerBound->setName("eLowerBound");
@@ -1572,7 +1572,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EGenericType_eLowerBound->setLower(0);
 	ecore_EGenericType_eLowerBound->setUpper(1);
 	ecore_EGenericType_eLowerBound->setVisibility(uml::VisibilityKind::PUBLIC);
-	
+	//ecore_EGenericType_eLowerBound->setAssociation(a_Ecore_EGenericType_eLowerBound_ecore_EGenericType);
 	
 	
 	ecore_EGenericType_eRawType->setName("eRawType");
@@ -1580,7 +1580,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EGenericType_eRawType->setLower(1);
 	ecore_EGenericType_eRawType->setUpper(1);
 	ecore_EGenericType_eRawType->setVisibility(uml::VisibilityKind::PUBLIC);
-	
+	//ecore_EGenericType_eRawType->setAssociation(a_Ecore_EClassifier_eRawType_ecore_EGenericType);
 	
 	
 	ecore_EGenericType_eTypeArguments->setName("eTypeArguments");
@@ -1588,7 +1588,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EGenericType_eTypeArguments->setLower(0);
 	ecore_EGenericType_eTypeArguments->setUpper(-1);
 	ecore_EGenericType_eTypeArguments->setVisibility(uml::VisibilityKind::PUBLIC);
-	
+	//ecore_EGenericType_eTypeArguments->setAssociation(a_Ecore_EGenericType_eTypeArguments_ecore_EGenericType);
 	
 	
 	ecore_EGenericType_eTypeParameter->setName("eTypeParameter");
@@ -1596,7 +1596,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EGenericType_eTypeParameter->setLower(0);
 	ecore_EGenericType_eTypeParameter->setUpper(1);
 	ecore_EGenericType_eTypeParameter->setVisibility(uml::VisibilityKind::PUBLIC);
-	
+	//ecore_EGenericType_eTypeParameter->setAssociation(a_Ecore_ETypeParameter_eTypeParameter_ecore_EGenericType);
 	
 	
 	ecore_EGenericType_eUpperBound->setName("eUpperBound");
@@ -1604,7 +1604,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EGenericType_eUpperBound->setLower(0);
 	ecore_EGenericType_eUpperBound->setUpper(1);
 	ecore_EGenericType_eUpperBound->setVisibility(uml::VisibilityKind::PUBLIC);
-	
+	//ecore_EGenericType_eUpperBound->setAssociation(a_Ecore_EGenericType_eUpperBound_ecore_EGenericType);
 	
 	
 
@@ -1623,7 +1623,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EModelElement_eAnnotations->setLower(0);
 	ecore_EModelElement_eAnnotations->setUpper(-1);
 	ecore_EModelElement_eAnnotations->setVisibility(uml::VisibilityKind::PUBLIC);
-	
+	//ecore_EModelElement_eAnnotations->setAssociation(a_Ecore_EAnnotation_eAnnotations_Ecore_EModelElement_eModelElement);
 	
 	
 
@@ -1930,7 +1930,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EOperation_eContainingClass->setLower(0);
 	ecore_EOperation_eContainingClass->setUpper(1);
 	ecore_EOperation_eContainingClass->setVisibility(uml::VisibilityKind::PUBLIC);
-	
+	//ecore_EOperation_eContainingClass->setAssociation(a_Ecore_EOperation_eOperations_Ecore_EClass_eContainingClass);
 	
 	
 	ecore_EOperation_eExceptions->setName("eExceptions");
@@ -1938,7 +1938,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EOperation_eExceptions->setLower(0);
 	ecore_EOperation_eExceptions->setUpper(-1);
 	ecore_EOperation_eExceptions->setVisibility(uml::VisibilityKind::PUBLIC);
-	
+	//ecore_EOperation_eExceptions->setAssociation(a_Ecore_EClassifier_eExceptions_ecore_EOperation);
 	
 	
 	ecore_EOperation_eGenericExceptions->setName("eGenericExceptions");
@@ -1946,7 +1946,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EOperation_eGenericExceptions->setLower(0);
 	ecore_EOperation_eGenericExceptions->setUpper(-1);
 	ecore_EOperation_eGenericExceptions->setVisibility(uml::VisibilityKind::PUBLIC);
-	
+	//ecore_EOperation_eGenericExceptions->setAssociation(a_Ecore_EGenericType_eGenericExceptions_ecore_EOperation);
 	
 	
 	ecore_EOperation_eParameters->setName("eParameters");
@@ -1954,7 +1954,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EOperation_eParameters->setLower(0);
 	ecore_EOperation_eParameters->setUpper(-1);
 	ecore_EOperation_eParameters->setVisibility(uml::VisibilityKind::PUBLIC);
-	
+	//ecore_EOperation_eParameters->setAssociation(a_Ecore_EParameter_eParameters_Ecore_EOperation_eOperation);
 	
 	
 	ecore_EOperation_eTypeParameters->setName("eTypeParameters");
@@ -1962,7 +1962,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EOperation_eTypeParameters->setLower(0);
 	ecore_EOperation_eTypeParameters->setUpper(-1);
 	ecore_EOperation_eTypeParameters->setVisibility(uml::VisibilityKind::PUBLIC);
-	
+	//ecore_EOperation_eTypeParameters->setAssociation(a_Ecore_ETypeParameter_eTypeParameters_ecore_EOperation);
 	
 	
 
@@ -1981,7 +1981,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EPackage_eClassifiers->setLower(0);
 	ecore_EPackage_eClassifiers->setUpper(-1);
 	ecore_EPackage_eClassifiers->setVisibility(uml::VisibilityKind::PUBLIC);
-	
+	//ecore_EPackage_eClassifiers->setAssociation(a_Ecore_EClassifier_eClassifiers_Ecore_EPackage_ePackage);
 	
 	
 	ecore_EPackage_eFactoryInstance->setName("eFactoryInstance");
@@ -1989,7 +1989,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EPackage_eFactoryInstance->setLower(1);
 	ecore_EPackage_eFactoryInstance->setUpper(1);
 	ecore_EPackage_eFactoryInstance->setVisibility(uml::VisibilityKind::PUBLIC);
-	
+	//ecore_EPackage_eFactoryInstance->setAssociation(a_Ecore_EPackage_ePackage_Ecore_EFactory_eFactoryInstance);
 	
 	
 	ecore_EPackage_eSubpackages->setName("eSubpackages");
@@ -1997,7 +1997,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EPackage_eSubpackages->setLower(0);
 	ecore_EPackage_eSubpackages->setUpper(-1);
 	ecore_EPackage_eSubpackages->setVisibility(uml::VisibilityKind::PUBLIC);
-	
+	//ecore_EPackage_eSubpackages->setAssociation(a_Ecore_EPackage_eSubpackages_Ecore_EPackage_eSuperPackage);
 	
 	
 	ecore_EPackage_eSuperPackage->setName("eSuperPackage");
@@ -2005,7 +2005,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EPackage_eSuperPackage->setLower(0);
 	ecore_EPackage_eSuperPackage->setUpper(1);
 	ecore_EPackage_eSuperPackage->setVisibility(uml::VisibilityKind::PUBLIC);
-	
+	//ecore_EPackage_eSuperPackage->setAssociation(a_Ecore_EPackage_eSubpackages_Ecore_EPackage_eSuperPackage);
 	
 	
 	ecore_EPackage_nsPrefix->setName("nsPrefix");
@@ -2064,7 +2064,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EParameter_eOperation->setLower(0);
 	ecore_EParameter_eOperation->setUpper(1);
 	ecore_EParameter_eOperation->setVisibility(uml::VisibilityKind::PUBLIC);
-	
+	//ecore_EParameter_eOperation->setAssociation(a_Ecore_EParameter_eParameters_Ecore_EOperation_eOperation);
 	
 	
 
@@ -2099,7 +2099,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EReference_eKeys->setLower(0);
 	ecore_EReference_eKeys->setUpper(-1);
 	ecore_EReference_eKeys->setVisibility(uml::VisibilityKind::PUBLIC);
-	
+	//ecore_EReference_eKeys->setAssociation(a_Ecore_EAttribute_eKeys_ecore_EReference);
 	
 	
 	ecore_EReference_eOpposite->setName("eOpposite");
@@ -2107,7 +2107,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EReference_eOpposite->setLower(0);
 	ecore_EReference_eOpposite->setUpper(1);
 	ecore_EReference_eOpposite->setVisibility(uml::VisibilityKind::PUBLIC);
-	
+	//ecore_EReference_eOpposite->setAssociation(a_Ecore_EReference_eOpposite_ecore_EReference);
 	
 	
 	ecore_EReference_eReferenceType->setName("eReferenceType");
@@ -2115,7 +2115,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EReference_eReferenceType->setLower(1);
 	ecore_EReference_eReferenceType->setUpper(1);
 	ecore_EReference_eReferenceType->setVisibility(uml::VisibilityKind::PUBLIC);
-	
+	//ecore_EReference_eReferenceType->setAssociation(a_Ecore_EClass_eReferenceType_ecore_EReference);
 	
 	
 	ecore_EReference_resolveProxies->setName("resolveProxies");
@@ -2198,7 +2198,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EStructuralFeature_eContainingClass->setLower(0);
 	ecore_EStructuralFeature_eContainingClass->setUpper(1);
 	ecore_EStructuralFeature_eContainingClass->setVisibility(uml::VisibilityKind::PUBLIC);
-	
+	//ecore_EStructuralFeature_eContainingClass->setAssociation(a_Ecore_EStructuralFeature_eStructuralFeatures_Ecore_EClass_eContainingClass);
 	
 	
 	ecore_EStructuralFeature_transient->setName("transient");
@@ -2264,7 +2264,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_ETypeParameter_eBounds->setLower(0);
 	ecore_ETypeParameter_eBounds->setUpper(-1);
 	ecore_ETypeParameter_eBounds->setVisibility(uml::VisibilityKind::PUBLIC);
-	
+	//ecore_ETypeParameter_eBounds->setAssociation(a_Ecore_EGenericType_eBounds_ecore_ETypeParameter);
 	
 	
 
@@ -2283,7 +2283,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_ETypedElement_eGenericType->setLower(0);
 	ecore_ETypedElement_eGenericType->setUpper(1);
 	ecore_ETypedElement_eGenericType->setVisibility(uml::VisibilityKind::PUBLIC);
-	
+	//ecore_ETypedElement_eGenericType->setAssociation(a_Ecore_EGenericType_eGenericType_ecore_ETypedElement);
 	
 	
 	ecore_ETypedElement_eType->setName("eType");
@@ -2291,7 +2291,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_ETypedElement_eType->setLower(0);
 	ecore_ETypedElement_eType->setUpper(1);
 	ecore_ETypedElement_eType->setVisibility(uml::VisibilityKind::PUBLIC);
-	
+	//ecore_ETypedElement_eType->setAssociation(a_Ecore_EClassifier_eType_ecore_ETypedElement);
 	
 	
 	ecore_ETypedElement_lowerBound->setName("lowerBound");

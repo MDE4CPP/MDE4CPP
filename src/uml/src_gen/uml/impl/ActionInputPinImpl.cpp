@@ -72,6 +72,8 @@
 
 #include "uml/RedefinableElement.hpp"
 
+#include "uml/RemoveStructuralFeatureValueAction.hpp"
+
 #include "uml/State.hpp"
 
 #include "uml/StringExpression.hpp"
@@ -200,6 +202,14 @@ ActionInputPinImpl::~ActionInputPinImpl()
 
 
 //Additional constructor for the containments back reference
+			ActionInputPinImpl::ActionInputPinImpl(std::weak_ptr<uml::RemoveStructuralFeatureValueAction > par_removeStructuralFeatureValueAction)
+			:ActionInputPinImpl()
+			{
+			    m_removeStructuralFeatureValueAction = par_removeStructuralFeatureValueAction;
+			}
+
+
+//Additional constructor for the containments back reference
 			ActionInputPinImpl::ActionInputPinImpl(std::weak_ptr<uml::StructuralFeatureAction > par_structuralFeatureAction)
 			:ActionInputPinImpl()
 			{
@@ -274,6 +284,8 @@ ActionInputPinImpl::ActionInputPinImpl(const ActionInputPinImpl & obj):ActionInp
 
 	std::shared_ptr<Union<uml::Classifier>> _redefinitionContext = obj.getRedefinitionContext();
 	m_redefinitionContext.reset(new Union<uml::Classifier>(*(obj.getRedefinitionContext().get())));
+
+	m_removeStructuralFeatureValueAction  = obj.getRemoveStructuralFeatureValueAction();
 
 	m_selection  = obj.getSelection();
 
@@ -484,6 +496,11 @@ std::shared_ptr<ecore::EObject> ActionInputPinImpl::eContainer() const
 		return wp;
 	}
 
+	if(auto wp = m_removeStructuralFeatureValueAction.lock())
+	{
+		return wp;
+	}
+
 	if(auto wp = m_structuralFeatureAction.lock())
 	{
 		return wp;
@@ -504,7 +521,7 @@ Any ActionInputPinImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::ACTIONINPUTPIN_ATTRIBUTE_FROMACTION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getFromAction())); //640
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getFromAction())); //641
 	}
 	return InputPinImpl::eGet(featureID, resolve, coreType);
 }
@@ -513,7 +530,7 @@ bool ActionInputPinImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::ACTIONINPUTPIN_ATTRIBUTE_FROMACTION:
-			return getFromAction() != nullptr; //640
+			return getFromAction() != nullptr; //641
 	}
 	return InputPinImpl::internalEIsSet(featureID);
 }
@@ -526,7 +543,7 @@ bool ActionInputPinImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Action> _fromAction = std::dynamic_pointer_cast<uml::Action>(_temp);
-			setFromAction(_fromAction); //640
+			setFromAction(_fromAction); //641
 			return true;
 		}
 	}

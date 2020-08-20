@@ -350,6 +350,11 @@ namespace uml
 
 namespace uml 
 {
+	class Connector;
+}
+
+namespace uml 
+{
 	class Region;
 }
 
@@ -550,6 +555,11 @@ namespace uml
 
 namespace uml 
 {
+	class RemoveStructuralFeatureValueAction;
+}
+
+namespace uml 
+{
 	class StructuredActivityNode;
 }
 
@@ -596,6 +606,11 @@ namespace uml
 namespace uml 
 {
 	class StructuralFeatureAction;
+}
+
+namespace uml 
+{
+	class StructuredClassifier;
 }
 
 namespace uml 
@@ -729,6 +744,8 @@ namespace uml
 			virtual std::shared_ptr<ActionInputPin> createActionInputPin_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID=-1) const = 0;
 			//Add containing object
 			virtual std::shared_ptr<ActionInputPin> createActionInputPin_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID=-1) const = 0;
+			//Add containing object
+			virtual std::shared_ptr<ActionInputPin> createActionInputPin_in_RemoveStructuralFeatureValueAction(std::weak_ptr<uml::RemoveStructuralFeatureValueAction > par_removeStructuralFeatureValueAction, const int metaElementID=-1) const = 0;
 			//Add containing object
 			virtual std::shared_ptr<ActionInputPin> createActionInputPin_in_StructuralFeatureAction(std::weak_ptr<uml::StructuralFeatureAction > par_structuralFeatureAction, const int metaElementID=-1) const = 0;
 			//Add containing object
@@ -1085,8 +1102,12 @@ namespace uml
 			virtual std::shared_ptr<Connector> createConnector_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID=-1) const = 0;
 			//Add containing object
 			virtual std::shared_ptr<Connector> createConnector_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID=-1) const = 0;
+			//Add containing object
+			virtual std::shared_ptr<Connector> createConnector_in_StructuredClassifier(std::weak_ptr<uml::StructuredClassifier > par_structuredClassifier, const int metaElementID=-1) const = 0;
 			
 			virtual std::shared_ptr<ConnectorEnd> createConnectorEnd(const int metaElementID=-1) const = 0;
+			//Add containing object
+			virtual std::shared_ptr<ConnectorEnd> createConnectorEnd_in_Connector(std::weak_ptr<uml::Connector > par_connector, const int metaElementID=-1) const = 0;
 			//Add containing object
 			virtual std::shared_ptr<ConnectorEnd> createConnectorEnd_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID=-1) const = 0;
 			
@@ -1601,6 +1622,8 @@ namespace uml
 			virtual std::shared_ptr<InputPin> createInputPin_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID=-1) const = 0;
 			//Add containing object
 			virtual std::shared_ptr<InputPin> createInputPin_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID=-1) const = 0;
+			//Add containing object
+			virtual std::shared_ptr<InputPin> createInputPin_in_RemoveStructuralFeatureValueAction(std::weak_ptr<uml::RemoveStructuralFeatureValueAction > par_removeStructuralFeatureValueAction, const int metaElementID=-1) const = 0;
 			//Add containing object
 			virtual std::shared_ptr<InputPin> createInputPin_in_StructuralFeatureAction(std::weak_ptr<uml::StructuralFeatureAction > par_structuralFeatureAction, const int metaElementID=-1) const = 0;
 			//Add containing object
@@ -2699,6 +2722,8 @@ namespace uml
 			virtual std::shared_ptr<ValuePin> createValuePin_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID=-1) const = 0;
 			//Add containing object
 			virtual std::shared_ptr<ValuePin> createValuePin_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID=-1) const = 0;
+			//Add containing object
+			virtual std::shared_ptr<ValuePin> createValuePin_in_RemoveStructuralFeatureValueAction(std::weak_ptr<uml::RemoveStructuralFeatureValueAction > par_removeStructuralFeatureValueAction, const int metaElementID=-1) const = 0;
 			//Add containing object
 			virtual std::shared_ptr<ValuePin> createValuePin_in_StructuralFeatureAction(std::weak_ptr<uml::StructuralFeatureAction > par_structuralFeatureAction, const int metaElementID=-1) const = 0;
 			//Add containing object

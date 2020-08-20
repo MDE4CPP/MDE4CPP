@@ -1807,6 +1807,10 @@ std::shared_ptr<ecore::EReference> UmlPackageImpl::getConnector_Attribute_redefi
 {
 	return m_connector_Attribute_redefinedConnector;
 }
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getConnector_Attribute_structuredClassifier() const
+{
+	return m_connector_Attribute_structuredClassifier;
+}
 std::shared_ptr<ecore::EReference> UmlPackageImpl::getConnector_Attribute_type() const
 {
 	return m_connector_Attribute_type;
@@ -1834,6 +1838,10 @@ std::shared_ptr<ecore::EClass> UmlPackageImpl::getConnectorEnd_Class() const
 }
 
 
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getConnectorEnd_Attribute_connector() const
+{
+	return m_connectorEnd_Attribute_connector;
+}
 std::shared_ptr<ecore::EReference> UmlPackageImpl::getConnectorEnd_Attribute_definingEnd() const
 {
 	return m_connectorEnd_Attribute_definingEnd;
@@ -3458,6 +3466,10 @@ std::shared_ptr<ecore::EReference> UmlPackageImpl::getInputPin_Attribute_invocat
 {
 	return m_inputPin_Attribute_invocationAction;
 }
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getInputPin_Attribute_removeStructuralFeatureValueAction() const
+{
+	return m_inputPin_Attribute_removeStructuralFeatureValueAction;
+}
 std::shared_ptr<ecore::EReference> UmlPackageImpl::getInputPin_Attribute_structuralFeatureAction() const
 {
 	return m_inputPin_Attribute_structuralFeatureAction;
@@ -5071,6 +5083,10 @@ std::shared_ptr<ecore::EOperation> UmlPackageImpl::getOperation_Operation_isOrde
 std::shared_ptr<ecore::EOperation> UmlPackageImpl::getOperation_Operation_isUnique() const
 {
 	return m_operation_Operation_isUnique;
+}
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getOperation_Operation_matches_Operation() const
+{
+	return m_operation_Operation_matches_Operation;
 }
 std::shared_ptr<ecore::EOperation> UmlPackageImpl::getOperation_Operation_only_body_for_query_EDiagnosticChain_EMap() const
 {

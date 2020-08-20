@@ -31,6 +31,7 @@
 #include "uml/CallOperationAction.hpp"
 #include "uml/Parameter.hpp"
 #include "uml/ParameterDirectionKind.hpp"
+#include "uml/InputPin.hpp"
 #include "uml/OutputPin.hpp"
 #include "uml/Class.hpp"
 #include "uml/Interface.hpp"
@@ -39,6 +40,7 @@
 #include "fUML/Semantics/Activities/ActivityExecution.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
 #include "fUML/Semantics/Loci/ExecutionFactory.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/CS_Reference.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/CS_Object.hpp"
 #include "PSCS/Semantics/Actions/CS_ConstructStrategy.hpp"
@@ -130,7 +132,7 @@ CS_CallOperationActionActivationImpl::CS_CallOperationActionActivationImpl(const
 	m_running = obj.isRunning();
 
 	//copy references with no containment (soft copy)
-	
+
 	m_group  = obj.getGroup();
 
 	std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> _incomingEdges = obj.getIncomingEdges();
@@ -223,7 +225,7 @@ void CS_CallOperationActionActivationImpl::doAction()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-			std::shared_ptr<uml::CallOperationAction> action = std::dynamic_pointer_cast<uml::CallOperationAction>(this->getNode());
+	std::shared_ptr<uml::CallOperationAction> action = std::dynamic_pointer_cast<uml::CallOperationAction>(this->getNode());
 	// First determines if this is a call to a constructor and if a default
 	// construction strategy needs to be applied.
 	// This is a call to a constructor if the called operation has
@@ -263,20 +265,20 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> CS_CallOperationActi
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 		// If onPort is not specified, behaves like in fUML
-	// If onPort is specified, and if the value on the target input pin is a 
-	// reference, dispatch the operation 
+	// If onPort is specified, and if the value on the target input pin is a
+	// reference, dispatch the operation
 	// to it and return the resulting execution object.
-	// As compared to fUML, instead of dispatching directly to target reference 
+	// As compared to fUML, instead of dispatching directly to target reference
 	// by calling operation dispatch:
-	// - If the invoked BehavioralFeature is on a provided Interface but not on any required Interface, 
-	// then, when the InvocationAction is executed, the invocation is made into the object given on 
+	// - If the invoked BehavioralFeature is on a provided Interface but not on any required Interface,
+	// then, when the InvocationAction is executed, the invocation is made into the object given on
 	// the target InputPin through the given Port
-	// - If the invoked BehavioralFeature is on a required Interface but not on any provided Interface, 
-	// then, if the InvocationAction is being executed inside the object given on the target InputPin, 
+	// - If the invoked BehavioralFeature is on a required Interface but not on any provided Interface,
+	// then, if the InvocationAction is being executed inside the object given on the target InputPin,
 	// the invocation is forwarded out of the target object through the given Port.
-	// - If the invoked BehavioralFeature is on both a provided and a required Interface, 
-	// then, if the InvocationAction is being executed inside the object given on the target InputPin, 
-	// the invocation is made out of the target object through the given Port. 
+	// - If the invoked BehavioralFeature is on both a provided and a required Interface,
+	// then, if the InvocationAction is being executed inside the object given on the target InputPin,
+	// the invocation is made out of the target object through the given Port.
 	// Otherwise the invocation is made into the target object through the given Port.
 
 	std::shared_ptr<uml::CallOperationAction> action = std::dynamic_pointer_cast<uml::CallOperationAction>(this->getNode());
@@ -285,7 +287,25 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> CS_CallOperationActi
 		execution = fUML::Semantics::Actions::CallOperationActionActivationImpl::getCallExecution();
 	}
 	else {
-		std::shared_ptr<fUML::Semantics::Values::Value> target = this->takeTokens(action->getTarget())->at(0);
+
+		std::shared_ptr<fUML::Semantics::Values::Value> target = nullptr;
+
+		/* MDE4CPP specific implementation for handling "self"-Pin */
+		std::string targetPinName = action->getTarget()->getName();
+		if((targetPinName.empty()) || (targetPinName.find("self") == 0)){
+			//target is set to the context of the current activity execution
+			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> contextReference = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Reference();
+			std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> context = this->getActivityExecution()->getContext();
+			contextReference->setReferent(context);
+			contextReference->setCompositeReferent(std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Object>(context));
+
+			target = contextReference;
+		}
+		else{
+			target = this->takeTokens(action->getTarget())->at(0);
+		}
+		/*--------------------------------------------------------*/
+
 		if(std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(target) != nullptr) {
 			// Tries to determine if the operation call has to be
 			// dispatched to the environment or to the internals of
@@ -313,8 +333,8 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> CS_CallOperationActi
 					execution = targetReference->dispatchOut(action->getOperation(), action->getOnPort());
 				}
 			else {
-				execution = targetReference->dispatchIn(action->getOperation(), action->getOnPort()); 
-				}	
+					execution = targetReference->dispatchIn(action->getOperation(), action->getOnPort());
+				}
 			}
 		}
 	}
@@ -332,7 +352,7 @@ bool CS_CallOperationActionActivationImpl::isCreate(std::shared_ptr<uml::Operati
 		// standard profile is not applied
 		return false;
 	}
-	return executionFactory->getStereotypeApplication(stereotypeCreate, operation) != nullptr; 
+	return executionFactory->getStereotypeApplication(stereotypeCreate, operation) != nullptr;
 	//end of body
 }
 
@@ -340,27 +360,28 @@ bool CS_CallOperationActionActivationImpl::isOperationProvided(std::shared_ptr<u
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-			bool isProvided = false;
-	if(std::dynamic_pointer_cast<uml::Interface>(operation->getOwner().lock()) != nullptr) {
-		// We have to look in provided interfaces of the port if
-		// they define directly or indirectly the Operation
-		unsigned int interfaceIndex = 1;
-		// Iterates on provided interfaces of the port
-		std::shared_ptr<Bag<uml::Interface>> providedInterfaces = port->getProvided();
-		while((interfaceIndex <= providedInterfaces->size()) && (!isProvided)) {
-			std::shared_ptr<uml::Interface> interface_ = providedInterfaces->at(interfaceIndex-1);
-			// Iterates on members of the current Interface
-			unsigned int memberIndex = 1;
-			while((memberIndex <= interface_->getMember()->size()) && (!isProvided)) {
-				std::shared_ptr<uml::NamedElement> cddOperation = interface_->getMember()->at(memberIndex-1);
-				if(std::dynamic_pointer_cast<uml::Operation>(cddOperation) != nullptr) {
-					isProvided = (operation == cddOperation);
-				}
-				memberIndex += 1;
+		bool isProvided = false;
+	/*if(std::dynamic_pointer_cast<uml::Interface>(operation->getOwner().lock()) != nullptr) {*/
+	// We have to look in provided interfaces of the port if
+	// they define directly or indirectly the Operation
+	unsigned int interfaceIndex = 1;
+	// Iterates on provided interfaces of the port
+	std::shared_ptr<Bag<uml::Interface>> providedInterfaces = port->getProvideds();
+	while((interfaceIndex <= providedInterfaces->size()) && (!isProvided)) {
+		std::shared_ptr<uml::Interface> interface_ = providedInterfaces->at(interfaceIndex-1);
+		// Iterates on members of the current Interface
+		unsigned int memberIndex = 1;
+		while((memberIndex <= interface_->getMember()->size()) && (!isProvided)) {
+			std::shared_ptr<uml::NamedElement> cddOperation = interface_->getMember()->at(memberIndex-1);
+			if(std::dynamic_pointer_cast<uml::Operation>(cddOperation) != nullptr) {
+				//isProvided = (operation == cddOperation);
+				isProvided = operation->matches(std::dynamic_pointer_cast<uml::Operation>(cddOperation));
 			}
-			interfaceIndex += 1;
+			memberIndex += 1;
 		}
+		interfaceIndex += 1;
 	}
+	/*}*/
 	return isProvided;
 	//end of body
 }
@@ -369,10 +390,10 @@ bool CS_CallOperationActionActivationImpl::isOperationRequired(std::shared_ptr<u
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-			bool isRequired = false;
+		bool isRequired = false;
 	unsigned int interfaceIndex = 1;
 	// Interfaces on provided interfaces of the port
-	std::shared_ptr<Bag<uml::Interface>> requiredInterfaces = port->getRequired();
+	std::shared_ptr<Bag<uml::Interface>> requiredInterfaces = port->getRequireds();
 	while((interfaceIndex <= requiredInterfaces->size()) && (!isRequired)) {
 		std::shared_ptr<uml::Interface> interface_ = requiredInterfaces->at(interfaceIndex-1);
 		// Iterates on members of the current Interface
@@ -380,7 +401,8 @@ bool CS_CallOperationActionActivationImpl::isOperationRequired(std::shared_ptr<u
 		while((memberIndex <= interface_->getMember()->size()) && (!isRequired)) {
 			std::shared_ptr<uml::NamedElement> cddOperation = interface_->getMember()->at(memberIndex-1);
 			if(std::dynamic_pointer_cast<uml::Operation>(cddOperation)) {
-				isRequired = (operation == cddOperation);
+				//isRequired = (operation == cddOperation);
+				isRequired = operation->matches(std::dynamic_pointer_cast<uml::Operation>(cddOperation));
 			}
 			memberIndex += 1;
 		}
@@ -464,7 +486,7 @@ void CS_CallOperationActionActivationImpl::load(std::shared_ptr<persistence::int
 	{
 		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
-}		
+}
 
 void CS_CallOperationActionActivationImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
@@ -490,24 +512,24 @@ void CS_CallOperationActionActivationImpl::save(std::shared_ptr<persistence::int
 	saveContent(saveHandler);
 
 	fUML::Semantics::Actions::CallOperationActionActivationImpl::saveContent(saveHandler);
-	
+
 	fUML::Semantics::Actions::CallActionActivationImpl::saveContent(saveHandler);
-	
+
 	fUML::Semantics::Actions::InvocationActionActivationImpl::saveContent(saveHandler);
-	
+
 	fUML::Semantics::Actions::ActionActivationImpl::saveContent(saveHandler);
-	
+
 	fUML::Semantics::Activities::ActivityNodeActivationImpl::saveContent(saveHandler);
-	
+
 	fUML::Semantics::Loci::SemanticVisitorImpl::saveContent(saveHandler);
-	
+
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
 }
 
 void CS_CallOperationActionActivationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const
@@ -516,7 +538,7 @@ void CS_CallOperationActionActivationImpl::saveContent(std::shared_ptr<persisten
 	{
 		std::shared_ptr<PSCS::Semantics::Actions::ActionsPackage> package = PSCS::Semantics::Actions::ActionsPackage::eInstance();
 
-	
+
 
 	}
 	catch (std::exception& e)
@@ -524,4 +546,3 @@ void CS_CallOperationActionActivationImpl::saveContent(std::shared_ptr<persisten
 		std::cout << "| ERROR    | " << e.what() << std::endl;
 	}
 }
-

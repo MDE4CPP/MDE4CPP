@@ -94,6 +94,9 @@ virtual public [sClass.getClassifierName(aClass, ignoreNamespace(sClass))/]Impl[
 [/let]
 [/let]
 [/for]
+[for (compositeOwnerClass : Class | aClass.getCompositeOwners())]
+			[className/](std::weak_ptr<[compositeOwnerClass.generateCppType(true)/]> [compositeOwnerClass.name.toLowerFirst()/]);
+[/for]
 
 		public:
 
@@ -109,12 +112,16 @@ virtual public [sClass.getClassifierName(aClass, ignoreNamespace(sClass))/]Impl[
 			// Attributes Getter Setter
 			//*********************************
 			[aClass.ownedAttribute.generateAttributeAccessorsDeclaration(true)/]
+			[aClass.getCompositeOwners()->sortedBy(name).generateCompositeOwnerAttributeAccessorsDeclaration(true)/]
 			[for (interfaceR : InterfaceRealization | aClass.ownedElement->filter(InterfaceRealization)->sortedBy(myQualifiedName()))] [for (aAttribute : Property | interfaceR.supplier.oclAsType(Interface).ownedAttribute->sortedBy(myQualifiedName())) separator ('\n')] [if (aClass.ownedAttribute->select(name=aAttribute.name)->size() = 0)]
 			[aAttribute.generateAttributeAccessorsDeclaration(true)/]
 			[/if][/for][/for]
+			
 
 		protected:
 			virtual std::shared_ptr<uml::Class> getMetaClass();
+			virtual void instantiate();
+			virtual void destroy();
 
 		public:
 			//*********************************

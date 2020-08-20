@@ -137,6 +137,11 @@ namespace uml
 
 namespace uml 
 {
+	class RemoveStructuralFeatureValueAction;
+}
+
+namespace uml 
+{
 	class State;
 }
 

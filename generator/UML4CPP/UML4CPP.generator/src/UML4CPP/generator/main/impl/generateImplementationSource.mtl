@@ -29,8 +29,11 @@
 [import UML4CPP::generator::main::helpers::nameHelper /]
 [import UML4CPP::generator::main::helpers::setGetHelper /]
 [import UML4CPP::generator::main::validation::validateModel /]
+[import UML4CPP::generator::main::pscs::generatePropertyInstantiation/]
+[import UML4CPP::generator::main::pscs::generateConnectorPatternsInstantiation/]
+[import UML4CPP::generator::main::pscs::generateDestruction/]
 
-[query private includes(aClass : Class)  : Set(Type) = OrderedSet{aClass.member->selectByKind(TypedElement)->select(not type.oclIsUndefined()).type, aClass.ownedOperation.ownedParameter.type, aClass.getAllAttributes().type, aClass.importedMember}->flatten() /]
+[query private includes(aClass : Class)  : Set(Type) = OrderedSet{aClass.member->selectByKind(TypedElement)->select(not type.oclIsUndefined()).type, aClass.ownedOperation.ownedParameter.type, aClass.getAllAttributes().type, aClass.importedMember, aClass.getCompositeOwners()}->flatten() /]
 [query private includes(aInterface : Interface)  : Set(Type) = OrderedSet{aInterface.member->selectByKind(TypedElement)->select(not type.oclIsUndefined()).type, aInterface.ownedOperation.ownedParameter.type}->flatten() /]
 
 [query private getAllAttributes(anInterface : Interface) : Set(Property) = OrderedSet{anInterface.ownedAttribute, anInterface.generalization.general->selectByType(Interface).getAllAttributes()} /]
@@ -47,6 +50,7 @@
 [generateAbstractDataTypesIncludes()/]
 #include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
+#include "[aPackage.getPackageName()/]/[aPackage.name.toUpperFirst().concat('Factory')/].hpp"
 #include "[aPackage.getPackageName()/]/impl/[aPackage.name.toUpperFirst().concat('PackageImpl')/].hpp"
 #include "[aClass.eClass().ePackage.name/]/[aClass.eClass().name/].hpp"
 [for (cl : Type | aClass.includes()->sortedBy(myQualifiedName())) ? ( oclIsKindOf(Class) or oclIsKindOf(Interface) or oclIsKindOf(Enumeration))]
@@ -84,10 +88,26 @@
 [if (instVal.type.oclIsUndefined() or instVal.type.name.oclIsUndefined())]
 // undefined type of InstanceValue [instVal.qualifiedName/] ([instVal.type.toString()/]) ['class '.concat(aClass.name).concat(': undefined type of InstanceValue ').concat(instVal.qualifiedName).concat(' (').concat(instVal.type.toString()).registerError()/]
 [else]
-#include "[instVal.type._package.getPackageName()/]/[instVal.type._package.getPackageName()/]Factory.hpp"
+#include "[instVal.type._package.getPackageName()/]/[instVal.type._package.getPackageName().toUpperFirst()/]Factory.hpp"
 #include "[instVal.type._package.getPackageName()/]/[instVal.type.name.toUpperFirst()/].hpp"
 [/if]
 [/for]
+
+//Included from Ports typed by interface
+[for (aPort : Port | aClass.ownedAttribute->filter(Port))]
+[if (aPort.type.oclIsTypeOf(Interface))]
+[for (anInterfaceRealization : InterfaceRealization | aPackage.getInterfaceRealizations(aPort.type.oclAsType(Interface)))]
+[let realizingClass : Class = anInterfaceRealization.owner.oclAsType(Class)]
+#include "[realizingClass._package.getPackageName()/]/[realizingClass.name.toUpperFirst()/].hpp"
+[/let]
+[/for]
+[/if]
+[/for]
+
+//Included from roles of ConnectorEnds
+[for (aConnector : Connector | aClass.ownedConnector)][for (anEnd : ConnectorEnd | aConnector.end)]
+#include "[anEnd.role.type._package.getPackageName()/]/[anEnd.role.type.name.toUpperFirst()/].hpp"
+[/for][/for]
 
 [if (not aPackage.ignoreNamespace())]using namespace [aPackage.name/];[/if]
 
@@ -96,23 +116,15 @@
 //*********************************
 [className/]::[className/]()
 {
+	#ifdef ADD_COUNT
+		ADD_COUNT("[className/]()");
+	#endif
+
+	DEBUG_MESSAGE(std::cout<<"[aClass.name.toUpperFirst()/] is created..."<<std::endl;)
+
 	//***********************************
 	// init Get Set
 	[aClass.generateGetSetInit()/] 
-
-	// init properties without default
-	[for (aProperty : Property | aClass.ownedAttribute->sortedBy(myQualifiedName()))]
-	[if (aProperty.default->isEmpty() and aProperty.upper <> 1)][aProperty.initAttributeProtectedMember()/][/if]
-	[/for]
-
-	[for (instVal : InstanceValue | aClass.ownedAttribute.defaultValue->reject(oclIsUndefined())->selectByType(InstanceValue)->reject(type.oclIsUndefined() or type.oclIsKindOf(Enumeration))->sortedBy(myQualifiedName()))]
-	[if (instVal.type.oclIsUndefined() or instVal.type.name.oclIsUndefined())]
-	// undefined type of InstanceValue [instVal.qualifiedName/] ([instVal.type.toString()/]) ['class '.concat(aClass.name).concat(': undefined type of InstanceValue ').concat(instVal.qualifiedName).concat(' (').concat(instVal.type.toString()).registerError()/]
-	[else]
-	[instVal.initPropertyFromInstanceValue()/]
-	[/if]
-	[/for]
-	
 }
 
 [for (anAssociation : Association | aClass.getCompositionsToClass())]
@@ -125,9 +137,21 @@
     m_[containmentProperty.name/] = [containmentProperty.name.toLowerFirst()/];
 }
 [/if] [/let] [/let] [/for]
+[for (compositeOwnerClass : Class | aClass.getCompositeOwners())]
+[className/]::[className/](std::weak_ptr<[compositeOwnerClass.generateCppType(true)/]> [compositeOwnerClass.name.toLowerFirst()/])
+:[className/]()
+{
+    m_[compositeOwnerClass.name/] = [compositeOwnerClass.name.toLowerFirst()/];
+}
+[/for]
 
 [className/]::~[className/]()
 {
+	#ifdef SUB_COUNT
+		SUB_COUNT("[className/]()");
+	#endif
+
+	DEBUG_MESSAGE(std::cout<<"[aClass.name.toUpperFirst()/] is destroyed..."<<std::endl;)
 }
 
 [className/]::[className/](const [className/] & obj):[className/]()
@@ -182,6 +206,61 @@ std::shared_ptr<uml::Class> [className/]::getMetaClass()
 	return [aPackage.name.concat('PackageImpl').toUpperFirst()/]::eInstance()->[aClass.generatePackageGetterCall(aClass)/];
 }
 
+void [className/]::instantiate()
+{	[comment Init properties without default value/]
+	[for (aProperty : Property | aClass.ownedAttribute->sortedBy(myQualifiedName()))]
+	[if (aProperty.default->isEmpty())][aProperty.generateAttributeInstantiation()/][/if]
+	[/for]
+	[comment Init properties with default value/]
+	[for (aProperty : Property | aClass.ownedAttribute->sortedBy(myQualifiedName()))]
+	[if ((not aProperty.defaultValue.oclIsUndefined()) and (aProperty.defaultValue.oclIsTypeOf(InstanceValue)))]
+	[if (aProperty.defaultValue.type.oclIsUndefined() or aProperty.defaultValue.name.oclIsUndefined())]
+	// undefined type of InstanceValue [aProperty.defaultValue.qualifiedName/] ([aProperty.defaultValue.type.toString()/]) ['class '.concat(aClass.name).concat(': undefined type of InstanceValue ').concat(aProperty.defaultValue.qualifiedName).concat(' (').concat(aProperty.defaultValue.type.toString()).registerError()/]
+	[else]
+	[aProperty.generateAttributeDefaultInstantiation()/]
+	[/if][/if]
+	[/for]
+	[comment Init connector patterns/]
+	[for (aConnector : Connector | aClass.ownedConnector->sortedBy(myQualifiedName()))]
+	[if ((not(aConnector.type.oclIsUndefined())) and (not(aConnector.type.name.oclIsUndefined())))]
+	[aConnector.generateConnectorInstantiation()/]
+	[/if]
+	[/for]
+}
+
+void [className/]::destroy()
+{	[comment Destroy corresponding links if existing/]
+	[for (aProperty : Property | aClass.ownedAttribute->sortedBy(myQualifiedName()))]
+	[if (not aProperty.association.oclIsUndefined() and not aProperty.type.oclIsUndefined() and not (aProperty.type.isPrimitive() or aProperty.type.oclIsKindOf(Enumeration)))]
+	[for (anotherProperty : Property | aProperty.association.memberEnd->reject(p : Property | p = aProperty))]
+	//Destroying links for opposite property [aProperty.name/]
+	[if (aProperty.upper <> 1)]
+	for(unsigned int i = 0; i < m_[aProperty.name/]->size(); i++)
+	{	
+		m_[aProperty.name/]->at(i)->[anotherProperty.getterName()/]()[if (anotherProperty.upper <> 1)]->erase([aClass.generateGetThisPtrPropertyGetterName()/]())[else].reset()[/if];
+	}
+	[else]
+	[if (anotherProperty.upper <> 1)]
+	m_[aProperty.name/]->[anotherProperty.getterName()/]()->erase([aClass.generateGetThisPtrPropertyGetterName()/]());
+	[else]
+	if(m_[aProperty.name/]->[anotherProperty.getterName()/]() == [aClass.generateGetThisPtrPropertyGetterName()/]()) { m_[aProperty.name/]->[anotherProperty.getterName()/]().reset(); }
+	[/if]
+	[/if]
+	[/for]
+	[/if]
+	[/for]
+
+	[comment Recursively destroy properties/]
+	//Erase properties
+	[for (aProperty : Property | aClass.ownedAttribute->sortedBy(myQualifiedName()))]
+	[aProperty.generatePropertyDestruction()/]
+	[/for]
+	//Erase back reference to owner
+	[for (compositeOwnerClass : Class | aClass.getCompositeOwners())]
+	m_[compositeOwnerClass.name/].reset();
+	[/for]
+}
+
 //*********************************
 // Attribute Setter Getter
 //*********************************
@@ -193,6 +272,10 @@ std::shared_ptr<uml::Class> [className/]::getMetaClass()
 [aAttribute.generateAttributeSetterImplementationCpp(aClass)/]
 [aAttribute.generateAttributeGetterImplementationCpp(aClass)/]
 [/if][/for][/for]
+[for (compositeOwnerClass : Class | aClass.getCompositeOwners())]
+[aClass.generateCompositeOwnerAttributeGetterImplementationCpp(compositeOwnerClass)/]
+[aClass.generateCompositeOwnerAttributeSetterImplementationCpp(compositeOwnerClass)/]
+[/for]
 
 //*********************************
 // Operations
@@ -279,7 +362,6 @@ std::shared_ptr<uml::Class> [className/]::getMetaClass()
 	[if (instVal.type.oclIsUndefined() or instVal.type.name.oclIsUndefined())]
 	// undefined type of InstanceValue [instVal.qualifiedName/] ([instVal.type.toString()/]) ['class '.concat(aInterface.name).concat(': undefined type of InstanceValue ').concat(instVal.qualifiedName).concat(' (').concat(instVal.type.toString()).registerError()/]
 	[else]
-	[instVal.initPropertyFromInstanceValue()/]
 	[/if]
 	[/for]
 	

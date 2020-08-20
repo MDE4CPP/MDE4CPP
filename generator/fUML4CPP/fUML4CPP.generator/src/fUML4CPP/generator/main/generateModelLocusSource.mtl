@@ -19,9 +19,11 @@
 [import UML4CPP::generator::main::helpers::nameHelper /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
 
+[query private getAllLocusClasses(aPackage : Package) : Set(Class) = aPackage.allOwnedElements()->filter(Class)->asSet()->flatten()->addAll(aPackage.getClassesOfCreateObjectAction())
+																	->reject(oclIsKindOf(Behavior))->reject(oclIsKindOf(AssociationClass))->reject(oclIsKindOf(Component))->reject(oclIsKindOf(Stereotype))->reject(oclIsKindOf(Node)) /]
 [query private getClassesOfCreateObjectAction(aPackage : Package) : Set(Class) = aPackage.allOwnedElements()->filter(CreateObjectAction).classifier->asSet()->flatten()->filter(Class) /]
 [query private getClassesOfCreateObjectActionForPackage(aPackage : Package, classPackage : Package) : Set(Class) = aPackage.getClassesOfCreateObjectAction()->select(aClass : Class | aClass.getNearestPackage() = classPackage)->sortedBy(name) /]
-[query private getClassPackagesOfCreateObjectAction(aPackage : Package) : Set(Package) = aPackage.getClassesOfCreateObjectAction().getNamespace()->asSet()->flatten()->sortedBy(name) /]
+[query private getClassPackagesOfCreateObjectAction(aPackage : Package) : Set(Package) = aPackage.getAllLocusClasses().getNamespace()->asSet()->flatten()->sortedBy(name) /]
 
 [template public generateModelLocusSource(aPackage : Package) 
 {
@@ -35,6 +37,7 @@ originalName : String = aPackage.getPackageName();
 
 [defineDebugMacro()/]
 
+#include "abstractDataTypes/SubsetUnion.hpp"
 #include "uml/Class.hpp"
 
 [for (classPackage : Package | aPackage.getClassPackagesOfCreateObjectAction())]
@@ -43,14 +46,13 @@ originalName : String = aPackage.getPackageName();
 [if (classPackage.isReflectionModel())]
 #include "[classPackage.getPackageName()/]/[classPackage.name.toUpperFirst()/]Package.hpp"
 [/if]
-[for (aClass : Class | aPackage.getClassesOfCreateObjectActionForPackage(classPackage))]
+[for (aClass : Class | classPackage.ownedElement->filter(Class)->reject(c : Class | c.oclIsKindOf(Behavior))->sortedBy(myQualifiedName()))]
 #include "[aClass.getNearestPackage().myNamespaceName()/]/[aClass.name.toUpperFirst()/].hpp"
 #include "[originalName/]Exec/[aClass.name.toUpperFirst()/]Object.hpp"
 [/for]
 [/for]
 
 
-using namespace fUML;
 using namespace [originalName/];
 
 //*********************************
@@ -77,7 +79,7 @@ std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> [upperName/]Locu
 	{		
 		switch(type->getMetaElementID())
 		{
-[for (aClass : Class | aPackage.getClassesOfCreateObjectActionForPackage(classPackage)) separator('\n')]
+[for (aClass : Class | classPackage.ownedElement->filter(Class)->reject(c : Class | c.oclIsKindOf(Behavior))->sortedBy(myQualifiedName())) separator('\n')]
 [let className : String = aClass.name.toUpperFirst()]
 			case [packageName/]::[packageName.toUpperFirst()/]Package::[aClass.getMemberName().toUpperCase()/]:
 			{
@@ -92,14 +94,14 @@ std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> [upperName/]Locu
 [/let]
 			default:
 			{
-				return fUML::Semantics::Loci::LocusImpl::instantiate(type);
+				return PSCS::Semantics::Loci::CS_LocusImpl::instantiate(type);
 			}
 		}
 	}
 [/for]
 [/if]
 [/let]
-	return fUML::Semantics::Loci::LocusImpl::instantiate(type);
+	return PSCS::Semantics::Loci::CS_LocusImpl::instantiate(type);
 }
 [/file]
 [/template]

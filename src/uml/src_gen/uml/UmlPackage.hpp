@@ -435,14 +435,14 @@ namespace uml
 			// Begin Class ActionInputPin
 			//Class and Feature IDs 
 			static const unsigned int ACTIONINPUTPIN_CLASS = 6;
-			static const unsigned int ACTIONINPUTPIN_CLASS_FEATURE_COUNT = 41;
+			static const unsigned int ACTIONINPUTPIN_CLASS_FEATURE_COUNT = 42;
 			static const unsigned int ACTIONINPUTPIN_CLASS_OPERATION_COUNT = 83;
 			
-			static const int ACTIONINPUTPIN_ATTRIBUTE_FROMACTION = 640;
+			static const int ACTIONINPUTPIN_ATTRIBUTE_FROMACTION = 641;
 			
-			static const int ACTIONINPUTPIN_OPERATION_INPUT_PIN_EDIAGNOSTICCHAIN_EMAP = 721;
-			static const int ACTIONINPUTPIN_OPERATION_NO_CONTROL_OR_OBJECT_FLOW_EDIAGNOSTICCHAIN_EMAP = 723;
-			static const int ACTIONINPUTPIN_OPERATION_ONE_OUTPUT_PIN_EDIAGNOSTICCHAIN_EMAP = 722;
+			static const int ACTIONINPUTPIN_OPERATION_INPUT_PIN_EDIAGNOSTICCHAIN_EMAP = 722;
+			static const int ACTIONINPUTPIN_OPERATION_NO_CONTROL_OR_OBJECT_FLOW_EDIAGNOSTICCHAIN_EMAP = 724;
+			static const int ACTIONINPUTPIN_OPERATION_ONE_OUTPUT_PIN_EDIAGNOSTICCHAIN_EMAP = 723;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getActionInputPin_Class() const = 0;
@@ -1749,18 +1749,19 @@ namespace uml
 			// Begin Class Connector
 			//Class and Feature IDs 
 			static const unsigned int CONNECTOR_CLASS = 54;
-			static const unsigned int CONNECTOR_CLASS_FEATURE_COUNT = 19;
+			static const unsigned int CONNECTOR_CLASS_FEATURE_COUNT = 20;
 			static const unsigned int CONNECTOR_CLASS_OPERATION_COUNT = 64;
 			static const int CONNECTOR_ATTRIBUTE_KIND = 5416;
 			
 			static const int CONNECTOR_ATTRIBUTE_CONTRACT = 5414;
 			static const int CONNECTOR_ATTRIBUTE_END = 5415;
 			static const int CONNECTOR_ATTRIBUTE_REDEFINEDCONNECTOR = 5417;
+			static const int CONNECTOR_ATTRIBUTE_STRUCTUREDCLASSIFIER = 5419;
 			static const int CONNECTOR_ATTRIBUTE_TYPE = 5418;
 			
-			static const int CONNECTOR_OPERATION_GETKIND = 5482;
-			static const int CONNECTOR_OPERATION_ROLES_EDIAGNOSTICCHAIN_EMAP = 5481;
-			static const int CONNECTOR_OPERATION_TYPES_EDIAGNOSTICCHAIN_EMAP = 5480;
+			static const int CONNECTOR_OPERATION_GETKIND = 5483;
+			static const int CONNECTOR_OPERATION_ROLES_EDIAGNOSTICCHAIN_EMAP = 5482;
+			static const int CONNECTOR_OPERATION_TYPES_EDIAGNOSTICCHAIN_EMAP = 5481;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getConnector_Class() const = 0;
@@ -1770,6 +1771,7 @@ namespace uml
 			virtual std::shared_ptr<ecore::EReference> getConnector_Attribute_contract() const = 0;
 			virtual std::shared_ptr<ecore::EReference> getConnector_Attribute_end() const = 0;
 			virtual std::shared_ptr<ecore::EReference> getConnector_Attribute_redefinedConnector() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getConnector_Attribute_structuredClassifier() const = 0;
 			virtual std::shared_ptr<ecore::EReference> getConnector_Attribute_type() const = 0;
 			
 			virtual std::shared_ptr<ecore::EOperation> getConnector_Operation_getKind() const = 0;
@@ -1782,23 +1784,25 @@ namespace uml
 			// Begin Class ConnectorEnd
 			//Class and Feature IDs 
 			static const unsigned int CONNECTOREND_CLASS = 55;
-			static const unsigned int CONNECTOREND_CLASS_FEATURE_COUNT = 12;
+			static const unsigned int CONNECTOREND_CLASS_FEATURE_COUNT = 13;
 			static const unsigned int CONNECTOREND_CLASS_OPERATION_COUNT = 59;
 			
+			static const int CONNECTOREND_ATTRIBUTE_CONNECTOR = 5512;
 			static const int CONNECTOREND_ATTRIBUTE_DEFININGEND = 5509;
 			static const int CONNECTOREND_ATTRIBUTE_PARTWITHPORT = 5510;
 			static const int CONNECTOREND_ATTRIBUTE_ROLE = 5511;
 			
-			static const int CONNECTOREND_OPERATION_GETDEFININGEND = 5570;
-			static const int CONNECTOREND_OPERATION_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP = 5568;
-			static const int CONNECTOREND_OPERATION_PART_WITH_PORT_EMPTY_EDIAGNOSTICCHAIN_EMAP = 5567;
-			static const int CONNECTOREND_OPERATION_ROLE_AND_PART_WITH_PORT_EDIAGNOSTICCHAIN_EMAP = 5566;
-			static const int CONNECTOREND_OPERATION_SELF_PART_WITH_PORT_EDIAGNOSTICCHAIN_EMAP = 5569;
+			static const int CONNECTOREND_OPERATION_GETDEFININGEND = 5571;
+			static const int CONNECTOREND_OPERATION_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP = 5569;
+			static const int CONNECTOREND_OPERATION_PART_WITH_PORT_EMPTY_EDIAGNOSTICCHAIN_EMAP = 5568;
+			static const int CONNECTOREND_OPERATION_ROLE_AND_PART_WITH_PORT_EDIAGNOSTICCHAIN_EMAP = 5567;
+			static const int CONNECTOREND_OPERATION_SELF_PART_WITH_PORT_EDIAGNOSTICCHAIN_EMAP = 5570;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getConnectorEnd_Class() const = 0;
 			
 			
+			virtual std::shared_ptr<ecore::EReference> getConnectorEnd_Attribute_connector() const = 0;
 			virtual std::shared_ptr<ecore::EReference> getConnectorEnd_Attribute_definingEnd() const = 0;
 			virtual std::shared_ptr<ecore::EReference> getConnectorEnd_Attribute_partWithPort() const = 0;
 			virtual std::shared_ptr<ecore::EReference> getConnectorEnd_Attribute_role() const = 0;
@@ -3274,7 +3278,7 @@ namespace uml
 			// Begin Class InputPin
 			//Class and Feature IDs 
 			static const unsigned int INPUTPIN_CLASS = 117;
-			static const unsigned int INPUTPIN_CLASS_FEATURE_COUNT = 40;
+			static const unsigned int INPUTPIN_CLASS_FEATURE_COUNT = 41;
 			static const unsigned int INPUTPIN_CLASS_OPERATION_COUNT = 80;
 			
 			static const int INPUTPIN_ATTRIBUTE_ACTION = 11736;
@@ -3282,10 +3286,11 @@ namespace uml
 			static const int INPUTPIN_ATTRIBUTE_CALLOPERATIONACTION = 11734;
 			static const int INPUTPIN_ATTRIBUTE_DESTROYOBJECTACTION = 11739;
 			static const int INPUTPIN_ATTRIBUTE_INVOCATIONACTION = 11735;
+			static const int INPUTPIN_ATTRIBUTE_REMOVESTRUCTURALFEATUREVALUEACTION = 11740;
 			static const int INPUTPIN_ATTRIBUTE_STRUCTURALFEATUREACTION = 11733;
 			static const int INPUTPIN_ATTRIBUTE_WRITESTRUCTURALFEATUREACTION = 11737;
 			
-			static const int INPUTPIN_OPERATION_OUTGOING_EDGES_STRUCTURED_ONLY_EDIAGNOSTICCHAIN_EMAP = 11819;
+			static const int INPUTPIN_OPERATION_OUTGOING_EDGES_STRUCTURED_ONLY_EDIAGNOSTICCHAIN_EMAP = 11820;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getInputPin_Class() const = 0;
@@ -3296,6 +3301,7 @@ namespace uml
 			virtual std::shared_ptr<ecore::EReference> getInputPin_Attribute_callOperationAction() const = 0;
 			virtual std::shared_ptr<ecore::EReference> getInputPin_Attribute_destroyObjectAction() const = 0;
 			virtual std::shared_ptr<ecore::EReference> getInputPin_Attribute_invocationAction() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getInputPin_Attribute_removeStructuralFeatureValueAction() const = 0;
 			virtual std::shared_ptr<ecore::EReference> getInputPin_Attribute_structuralFeatureAction() const = 0;
 			virtual std::shared_ptr<ecore::EReference> getInputPin_Attribute_writeStructuralFeatureAction() const = 0;
 			
@@ -4592,7 +4598,7 @@ namespace uml
 			//Class and Feature IDs 
 			static const unsigned int OPERATION_CLASS = 168;
 			static const unsigned int OPERATION_CLASS_FEATURE_COUNT = 43;
-			static const unsigned int OPERATION_CLASS_OPERATION_COUNT = 96;
+			static const unsigned int OPERATION_CLASS_OPERATION_COUNT = 97;
 			static const int OPERATION_ATTRIBUTE_ISORDERED = 16834;
 			static const int OPERATION_ATTRIBUTE_ISQUERY = 16835;
 			static const int OPERATION_ATTRIBUTE_ISUNIQUE = 16836;
@@ -4615,6 +4621,7 @@ namespace uml
 			static const int OPERATION_OPERATION_GETUPPER = 16938;
 			static const int OPERATION_OPERATION_ISORDERED = 16933;
 			static const int OPERATION_OPERATION_ISUNIQUE = 16934;
+			static const int OPERATION_OPERATION_MATCHES_OPERATION = 16939;
 			static const int OPERATION_OPERATION_ONLY_BODY_FOR_QUERY_EDIAGNOSTICCHAIN_EMAP = 16926;
 			static const int OPERATION_OPERATION_RETURNRESULT = 16936;
 			static const int OPERATION_OPERATION_SETISORDERED_BOOLEAN = 16928;
@@ -4648,6 +4655,7 @@ namespace uml
 			virtual std::shared_ptr<ecore::EOperation> getOperation_Operation_getUpper() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getOperation_Operation_isOrdered() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getOperation_Operation_isUnique() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getOperation_Operation_matches_Operation() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getOperation_Operation_only_body_for_query_EDiagnosticChain_EMap() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getOperation_Operation_returnResult() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getOperation_Operation_setIsOrdered_Boolean() const = 0;
@@ -6957,13 +6965,13 @@ namespace uml
 			// Begin Class ValuePin
 			//Class and Feature IDs 
 			static const unsigned int VALUEPIN_CLASS = 250;
-			static const unsigned int VALUEPIN_CLASS_FEATURE_COUNT = 41;
+			static const unsigned int VALUEPIN_CLASS_FEATURE_COUNT = 42;
 			static const unsigned int VALUEPIN_CLASS_OPERATION_COUNT = 82;
 			
-			static const int VALUEPIN_ATTRIBUTE_VALUE = 25040;
+			static const int VALUEPIN_ATTRIBUTE_VALUE = 25041;
 			
-			static const int VALUEPIN_OPERATION_COMPATIBLE_TYPE_EDIAGNOSTICCHAIN_EMAP = 25122;
-			static const int VALUEPIN_OPERATION_NO_INCOMING_EDGES_EDIAGNOSTICCHAIN_EMAP = 25121;
+			static const int VALUEPIN_OPERATION_COMPATIBLE_TYPE_EDIAGNOSTICCHAIN_EMAP = 25123;
+			static const int VALUEPIN_OPERATION_NO_INCOMING_EDGES_EDIAGNOSTICCHAIN_EMAP = 25122;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getValuePin_Class() const = 0;

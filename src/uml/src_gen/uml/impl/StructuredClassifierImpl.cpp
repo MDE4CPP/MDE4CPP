@@ -781,11 +781,9 @@ void StructuredClassifierImpl::loadNode(std::string nodeName, std::shared_ptr<pe
 			{
 				typeName = "Connector";
 			}
-			std::shared_ptr<uml::Connector> ownedConnector = std::dynamic_pointer_cast<uml::Connector>(modelFactory->create(typeName));
+			std::shared_ptr<ecore::EObject> ownedConnector = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::UmlPackage::CONNECTOR_ATTRIBUTE_STRUCTUREDCLASSIFIER);
 			if (ownedConnector != nullptr)
 			{
-				std::shared_ptr<Subset<uml::Connector, uml::Feature,uml::NamedElement>> list_ownedConnector = this->getOwnedConnector();
-				list_ownedConnector->push_back(ownedConnector);
 				loadHandler->handleChild(ownedConnector);
 			}
 			return;

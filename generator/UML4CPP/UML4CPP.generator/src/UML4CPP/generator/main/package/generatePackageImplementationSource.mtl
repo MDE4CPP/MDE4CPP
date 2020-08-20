@@ -20,6 +20,8 @@
 [module generatePackageImplementationSource('http://www.eclipse.org/uml2/5.0.0/UML','http://www.eclipse.org/emf/2002/Ecore')]
 
 [import UML4CPP::generator::main::components::generateClass /]
+[import UML4CPP::generator::main::components::generateAssociation/]
+[import UML4CPP::generator::main::components::generateConnector /]
 [import UML4CPP::generator::main::components::generateNamedElement /]
 [import UML4CPP::generator::main::components::generateActivity /]
 [import UML4CPP::generator::main::components::generateActivityEdge /]
@@ -160,6 +162,7 @@ void [packageName/]::createPackageContents(std::shared_ptr<uml::Package> [aPacka
 	createPackageValueSpecifications([aPackage.memberName()/], factory);
 	createPackageInterfaces([aPackage.memberName()/], factory);
 	createPackageClasses([aPackage.memberName()/], factory);
+	createPackageAssociations([aPackage.memberName()/], factory);
 	createPackageInstanceSpecifications([aPackage.memberName()/], factory);
 	createPackageStereotypes([aPackage.memberName()/], factory);
 	createPackageActivities([aPackage.memberName()/], factory);
@@ -202,9 +205,13 @@ void [packageName/]::createPackageClasses(std::shared_ptr<uml::Package> [aPackag
 	[for (anProperty : Property | aClass.ownedAttribute->sortedBy(name)) before ('    // '.concat(aClass.name).concat(' attributes\n'))]
 	[anProperty.generateAttributeCreation()/]
 	[/for]
+	[for (aConnector : Connector | aClass.ownedConnector->sortedBy(name)) before ('    // '.concat(aClass.name).concat(' connectors\n'))]
+	[aConnector.memberName()/] = factory->createConnector_in_StructuredClassifier([aClass.memberName()/]);
+	[aConnector.generateConnectorCreation()/]
+	[/for]
 	[for (anOperation : Operation | aClass.ownedOperation->sortedBy(name)) before ('    // '.concat(aClass.name).concat(' operations\n')) separator('\n')]
 	[anOperation.generateOperationCreation()/]
-	[/for]
+	[/for] 
 	[for (aOpaqueBehavior : OpaqueBehavior | aClass.allOwnedElements()->filter(OpaqueBehavior)->sortedBy(myQualifiedName())) before ('    // '.concat(aClass.name).concat(' opaque behaviors\n'))  separator('\n')]
 	[if (aOpaqueBehavior.oclIsKindOf(FunctionBehavior))]
 	[aOpaqueBehavior.oclAsType(FunctionBehavior).generateFunctionBehaviorCreation()/]
@@ -217,6 +224,15 @@ void [packageName/]::createPackageClasses(std::shared_ptr<uml::Package> [aPackag
 	[anOpaqueBehavior.generateOpaqueBehaviorCreation()/]
 [/for]
 } 
+
+[comment]Only Associations[/comment]
+void [packageName/]::createPackageAssociations(std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::UmlFactory> factory)
+{
+[for (anAssociation : Association | aPackage.ownedMember->filter(Association)->reject(oclIsTypeOf(AssociationClass))->reject(oclIsTypeOf(Extension))->reject(oclIsTypeOf(CommunicationPath))->asOrderedSet()->sortedBy(myQualifiedName())) separator ('\n    //-------------------------------------------\n')]
+	// [anAssociation.name/]
+	[anAssociation.memberName()/] = factory->createAssociation_in_Package([aPackage.memberName()/]);
+[/for]
+}
 
 [comment]Only Dependency[/comment]
 void [packageName/]::createPackageDependencies(std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::UmlFactory> factory)
@@ -296,6 +312,7 @@ void [packageName/]::initializePackageContents(std::shared_ptr<uml::Package> [aP
 
 	initializePackageActivities();
 	initializePackageClasses();
+	initializePackageAssociations();
 	initializePackageDependencies();
 	initializePackageInstanceSpecifications();
 	initializePackageInterfaceRealizations();
@@ -335,6 +352,9 @@ void [packageName/]::initializePackageClasses()
 	[for (anProperty : Property | aClass.ownedAttribute->sortedBy(name)) before ('    // '.concat(aClass.name).concat(' attributes\n')) after ('\n')]
 	[anProperty.generateAttributeInitialization()/]
 	[/for]
+	[for (aConnector : Connector | aClass.ownedConnector->sortedBy(name)) before ('    // '.concat(aClass.name).concat(' connectors\n')) after ('\n')]
+	[aConnector.generateConnectorInitialization()/]
+	[/for]
 	[for (anOperation : Operation | aClass.ownedOperation->sortedBy(name)) before ('    // '.concat(aClass.name).concat(' operations\n')) separator('\n') after ('\n')]
 	[anOperation.initalizeOperation()/]
 	[/for]
@@ -352,6 +372,15 @@ void [packageName/]::initializePackageClasses()
 [for (anOpaqueBehavior : OpaqueBehavior | aPackage.ownedMember->filter(OpaqueBehavior)->addAll(aPackage.ownedMember)->filter(Activity).ownedMember->filter(OpaqueBehavior))]
 	[anOpaqueBehavior.generateOpaqueBehaviorInitialization()/]
 [/for]
+}
+
+[comment]Only Associations[/comment]
+void [packageName/]::initializePackageAssociations()
+{
+	[for (anAssociation : Association | aPackage.ownedMember->filter(Association)->reject(oclIsTypeOf(AssociationClass))->reject(oclIsTypeOf(Extension))->reject(oclIsTypeOf(CommunicationPath))->asOrderedSet()->sortedBy(myQualifiedName())) separator ('\n    //-------------------------------------------\n')]
+	// [anAssociation.name/]
+	[anAssociation.generateAssociationInitialization()/]
+	[/for]
 }
 
 [comment]Only Dependency[/comment]

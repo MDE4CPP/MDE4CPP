@@ -522,6 +522,9 @@
         <eAnnotations source="redefines" references="#//ParameterableElement/templateParameter"/>
       </contents>
     </eAnnotations>
+    <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+      <details key="includes" value="#include &quot;uml/BehavioredClassifier.hpp&quot;&#xA;#include &quot;uml/InterfaceRealization.hpp&quot;&#xA;#include &quot;uml/Interface.hpp&quot;&#xA;#include &quot;uml/Usage.hpp&quot;"/>
+    </eAnnotations>
     <eOperations name="specialize_type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="A Classifier may only specialize Classifiers of a valid type.&#xA;parents()->forAll(c | self.maySpecializeType(c))"/>
@@ -609,6 +612,9 @@
     <eOperations name="getAllOperations" ordered="false" upperBound="-1" eType="#//Operation">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Retrieves all the operations of this classifier, including those inherited from its parents."/>
+      </eAnnotations>
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="&#x9;std::shared_ptr&lt;Bag&lt;uml::Operation>> allOperations(new Bag&lt;uml::Operation>());&#xA;&#x9;std::shared_ptr&lt;Bag&lt;uml::Feature>> allDirectFeatures = this->getFeature();&#xA;&#x9;&#xA;&#x9;for(unsigned int i = 0; i &lt; allDirectFeatures->size(); i++)&#xA;&#x9;{&#xA;&#x9;&#x9;std::shared_ptr&lt;uml::Operation> operation = std::dynamic_pointer_cast&lt;uml::Operation>(allDirectFeatures->at(i));&#xA;&#x9;&#x9;if(operation != nullptr){ allOperations->add(operation); }&#xA;&#x9;}&#xA;&#x9;&#xA;&#x9;std::shared_ptr&lt;Bag&lt;uml::Classifier>> superTypes = this->getGenerals();&#xA;&#x9;&#xA;&#x9;for(unsigned int i = 0; i &lt; superTypes->size(); i++)&#xA;&#x9;{&#xA;&#x9;&#x9;std::shared_ptr&lt;Bag&lt;uml::Operation>> superTypeOperations = superTypes->at(i)->getAllOperations();&#xA;&#x9;&#x9;allOperations->insert(allOperations->end(), superTypeOperations->begin(), superTypeOperations->end());&#xA;&#x9;}&#xA;&#x9;&#xA;&#x9;return allOperations;"/>
       </eAnnotations>
     </eOperations>
     <eOperations name="getAllUsedInterfaces" ordered="false" upperBound="-1" eType="#//Interface">
@@ -739,20 +745,32 @@
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The Interfaces directly realized by this Classifier&#xA;result = ((clientDependency->&#xD;&#xA;  select(oclIsKindOf(Realization) and supplier->forAll(oclIsKindOf(Interface))))->&#xD;&#xA;      collect(supplier.oclAsType(Interface))->asSet())&#xA;&lt;p>From package UML::Classification.&lt;/p>"/>
       </eAnnotations>
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="std::shared_ptr&lt;Bag&lt;uml::Interface>> directlyRealizedInterfaces(new Bag&lt;uml::Interface>());&#xA;std::shared_ptr&lt;uml::BehavioredClassifier> bClassifier = std::dynamic_pointer_cast&lt;uml::BehavioredClassifier>(getThisClassifierPtr());&#xA;&#xA;if(bClassifier != nullptr)&#xA;{&#xA;&#x9;std::shared_ptr&lt;Bag&lt;uml::InterfaceRealization>> interfaceRealizations = bClassifier->getInterfaceRealization();&#xA;&#x9;for(unsigned int i = 0; i &lt; interfaceRealizations->size(); i++)&#xA;&#x9;{&#xA;&#x9;&#x9;std::shared_ptr&lt;uml::InterfaceRealization> interfaceRealization = interfaceRealizations->at(i);&#xA;&#x9;&#x9;std::shared_ptr&lt;uml::Interface> contract = interfaceRealization->getContract();&#xA;&#xA;&#x9;&#x9;if(contract != nullptr)&#xA;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;directlyRealizedInterfaces->add(contract);&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;}&#xA;&#xA;return directlyRealizedInterfaces;"/>
+      </eAnnotations>
     </eOperations>
     <eOperations name="directlyUsedInterfaces" ordered="false" upperBound="-1" eType="#//Interface">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The Interfaces directly used by this Classifier&#xA;result = ((supplierDependency->&#xD;&#xA;  select(oclIsKindOf(Usage) and client->forAll(oclIsKindOf(Interface))))->&#xD;&#xA;    collect(client.oclAsType(Interface))->asSet())&#xA;&lt;p>From package UML::Classification.&lt;/p>"/>
+      </eAnnotations>
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="&#x9;std::shared_ptr&lt;Bag&lt;uml::Interface>> directlyUsedInterfaces(new Bag&lt;uml::Interface>());&#xA;&#xA;&#x9;std::shared_ptr&lt;Bag&lt;uml::Dependency>> clientDependencies = this->getClientDependency();&#xA;&#x9;&#xA;&#x9;for(unsigned int i = 0; i &lt; clientDependencies->size(); i++)&#xA;&#x9;{&#xA;&#x9;&#x9;std::shared_ptr&lt;uml::Usage> usage = std::dynamic_pointer_cast&lt;uml::Usage>(clientDependencies->at(i));&#xA;&#x9;&#x9;if(usage != nullptr)&#xA;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;std::shared_ptr&lt;Bag&lt;uml::NamedElement>> suppliers = usage->getSupplier();&#xA;&#x9;&#x9;&#x9;std::shared_ptr&lt;Bag&lt;uml::Interface>> interfacesInSuppliers(new Bag&lt;uml::Interface>());&#xA;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;for(unsigned int j = 0; j &lt; suppliers->size(); j++)&#xA;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;std::shared_ptr&lt;uml::Interface> supplyingInterface = std::dynamic_pointer_cast&lt;uml::Interface>(suppliers->at(j));&#xA;&#x9;&#x9;&#x9;&#x9;if(supplyingInterface != nullptr)&#xA;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;interfacesInSuppliers->add(supplyingInterface);&#xA;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;directlyUsedInterfaces->insert(directlyUsedInterfaces->end(), interfacesInSuppliers->begin(), interfacesInSuppliers->end());&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;&#x9;&#xA;&#x9;return directlyUsedInterfaces;"/>
       </eAnnotations>
     </eOperations>
     <eOperations name="allRealizedInterfaces" ordered="false" upperBound="-1" eType="#//Interface">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The Interfaces realized by this Classifier and all of its generalizations&#xA;result = (directlyRealizedInterfaces()->union(self.allParents()->collect(directlyRealizedInterfaces()))->asSet())&#xA;&lt;p>From package UML::Classification.&lt;/p>"/>
       </eAnnotations>
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="std::shared_ptr&lt;Bag&lt;uml::Interface>> allRealizedInterface(new Bag&lt;uml::Interface>());&#xA;std::shared_ptr&lt;Bag&lt;uml::Interface>> directlyRealizedInterfaces = this->directlyRealizedInterfaces();&#xA;&#x9;&#xA;allRealizedInterface->insert(allRealizedInterface->end(), directlyRealizedInterfaces->begin(), directlyRealizedInterfaces->end());&#xA;&#x9;&#xA;std::shared_ptr&lt;Bag&lt;uml::Classifier>> superClasses = this->getGenerals();&#xA;for(unsigned int i = 0; i &lt; superClasses->size(); i++)&#xA;{&#xA;&#x9;std::shared_ptr&lt;Bag&lt;uml::Interface>> superRealizedInterfaces = superClasses->at(i)->allRealizedInterfaces();&#xA;&#x9;allRealizedInterface->insert(allRealizedInterface->end(), superRealizedInterfaces->begin(), superRealizedInterfaces->end());&#xA;}&#xA;&#xA;return allRealizedInterface;"/>
+      </eAnnotations>
     </eOperations>
     <eOperations name="allUsedInterfaces" ordered="false" upperBound="-1" eType="#//Interface">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The Interfaces used by this Classifier and all of its generalizations&#xA;result = (directlyUsedInterfaces()->union(self.allParents()->collect(directlyUsedInterfaces()))->asSet())&#xA;&lt;p>From package UML::Classification.&lt;/p>"/>
+      </eAnnotations>
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="&#x9;std::shared_ptr&lt;Bag&lt;uml::Interface>> allUsedInterfaces(new Bag&lt;uml::Interface>());&#xA;&#x9;std::shared_ptr&lt;Bag&lt;uml::Interface>> directlyUsedInterfaces = this->directlyUsedInterfaces();&#xA;&#x9;&#xA;&#x9;allUsedInterfaces->insert(allUsedInterfaces->end(), directlyUsedInterfaces->begin(), directlyUsedInterfaces->end());&#xA;&#x9;&#xA;&#x9;std::shared_ptr&lt;Bag&lt;uml::Classifier>> superClasses = this->getGenerals();&#xA;&#x9;for(unsigned int i = 0; i &lt; superClasses->size(); i++)&#xA;&#x9;{&#xA;&#x9;&#x9;std::shared_ptr&lt;Bag&lt;uml::Interface>> superUsedInterfaces = superClasses->at(i)->allUsedInterfaces();&#xA;&#x9;&#x9;allUsedInterfaces->insert(allUsedInterfaces->end(), superUsedInterfaces->begin(), superUsedInterfaces->end());&#xA;&#x9;}&#xA;&#xA;&#x9;return allUsedInterfaces;"/>
       </eAnnotations>
     </eOperations>
     <eOperations name="isSubstitutableFor" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//Boolean">
@@ -1270,7 +1288,7 @@
       <details key="documentation" value="An Element is a constituent of a model. As such, it has the capability of owning other Elements.&#xA;&lt;p>From package UML::CommonStructure.&lt;/p>"/>
     </eAnnotations>
     <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-      <details key="includes" value="#include &quot;abstractDataTypes/SubsetUnion.hpp&quot;&#xD;&#xA;#include &quot;util/stereotypestorage.hpp&quot;&#xD;&#xA;#include &quot;uml/Property.hpp&quot;"/>
+      <details key="includes" value="#include &quot;abstractDataTypes/SubsetUnion.hpp&quot;&#xA;#include &quot;util/stereotypestorage.hpp&quot;&#xA;#include &quot;uml/Property.hpp&quot;"/>
     </eAnnotations>
     <eOperations name="has_owner" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -3695,6 +3713,8 @@
         <details key="documentation" value="The ConnectableElement attached at this ConnectorEnd. When an instance of the containing Classifier is created, a link may (depending on the multiplicities) be created to an instance of the Classifier that types this ConnectableElement.&#xA;&lt;p>From package UML::StructuredClassifiers.&lt;/p>"/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="connector" lowerBound="1"
+        eType="#//Connector" eOpposite="#//Connector/end"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MultiplicityElement" abstract="true"
       eSuperTypes="#//Element">
@@ -4778,6 +4798,12 @@
       <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML">
         <details key="originalName" value="upper"/>
       </eAnnotations>
+    </eOperations>
+    <eOperations name="matches" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//Boolean">
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="//Checks whether two uml::Operations share the same name and input parameter types (= share same signature)&#xA;&#xA;bool equals = false;&#xA;&#xA;if(this->getName() != comparedOperation->getName()) {return equals;}&#xA;&#xA;std::shared_ptr&lt;Bag&lt;uml::Parameter>> thisParameters = this->getOwnedParameter();&#xA;std::shared_ptr&lt;Bag&lt;uml::Parameter>> otherParameters = comparedOperation->getOwnedParameter();&#xA;&#xA;if(thisParameters->size() != otherParameters->size()) {return equals;}&#xA;&#xA;for(unsigned int i = 0; i &lt; thisParameters->size(); i++)&#xA;{&#xA;&#x9;if(thisParameters->at(i)->getType() != otherParameters->at(i)->getType()) {return equals;}&#xA;}&#xA;&#xA;equals = true;&#xA;return equals;&#xA;"/>
+      </eAnnotations>
+      <eParameters name="comparedOperation" lowerBound="1" eType="#//Operation"/>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="bodyCondition" ordered="false"
         eType="#//Constraint">
@@ -6627,6 +6653,9 @@
       <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML">
         <details key="originalName" value="provided"/>
       </eAnnotations>
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="&#x9;if(m_isConjugated) return this->basicRequired();&#xA;&#x9;else return this->basicProvided();"/>
+      </eAnnotations>
     </eOperations>
     <eOperations name="getRequireds" ordered="false" upperBound="-1" eType="#//Interface">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -6636,15 +6665,24 @@
       <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML">
         <details key="originalName" value="required"/>
       </eAnnotations>
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="&#x9;if(m_isConjugated) return this->basicProvided();&#xA;&#x9;else return this->basicRequired();"/>
+      </eAnnotations>
     </eOperations>
     <eOperations name="basicProvided" ordered="false" upperBound="-1" eType="#//Interface">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The union of the sets of Interfaces realized by the type of the Port and its supertypes, or directly the type of the Port if the Port is typed by an Interface.&#xA;result = (if type.oclIsKindOf(Interface) &#xD;&#xA;then type.oclAsType(Interface)->asSet() &#xD;&#xA;else type.oclAsType(Classifier).allRealizedInterfaces() &#xD;&#xA;endif)&#xA;&lt;p>From package UML::StructuredClassifiers.&lt;/p>"/>
       </eAnnotations>
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="&#x9;std::shared_ptr&lt;Bag&lt;uml::Interface>> providedInterfaces(new Bag&lt;uml::Interface>());&#xA;&#x9;std::shared_ptr&lt;uml::Classifier> type = std::dynamic_pointer_cast&lt;uml::Classifier>(this->getType());&#xA;&#x9;&#xA;&#x9;if(std::dynamic_pointer_cast&lt;uml::Interface>(type) != nullptr)&#xA;&#x9;{&#xA;&#x9;&#x9;providedInterfaces->add(std::dynamic_pointer_cast&lt;uml::Interface>(type));&#xA;&#x9;}&#xA;&#x9;else&#xA;&#x9;{&#xA;&#x9;&#x9;std::shared_ptr&lt;Bag&lt;uml::Interface>> typingClassRealizedInterfaces = type->allRealizedInterfaces();&#xA;&#x9;&#x9;providedInterfaces->insert(providedInterfaces->end(), typingClassRealizedInterfaces->begin(), typingClassRealizedInterfaces->end());&#xA;&#x9;}&#xA;&#x9;return providedInterfaces;"/>
+      </eAnnotations>
     </eOperations>
     <eOperations name="basicRequired" ordered="false" upperBound="-1" eType="#//Interface">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The union of the sets of Interfaces used by the type of the Port and its supertypes.&#xA;result = ( type.oclAsType(Classifier).allUsedInterfaces() )&#xA;&lt;p>From package UML::StructuredClassifiers.&lt;/p>"/>
+      </eAnnotations>
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="&#x9;std::shared_ptr&lt;Bag&lt;uml::Interface>> requiredInterfaces(new Bag&lt;uml::Interface>());&#xA;&#x9;std::shared_ptr&lt;uml::Classifier> type = std::dynamic_pointer_cast&lt;uml::Classifier>(this->getType());&#xA;&#x9;&#xA;&#x9;std::shared_ptr&lt;Bag&lt;uml::Interface>> typingClassRequiredInterfaces = type->allUsedInterfaces();&#xA;&#x9;requiredInterfaces->insert(requiredInterfaces->end(), typingClassRequiredInterfaces->begin(), typingClassRequiredInterfaces->end());&#xA;&#x9;&#xA;&#x9;return requiredInterfaces;"/>
       </eAnnotations>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isBehavior" ordered="false"
@@ -7920,7 +7958,7 @@
       <eAnnotations source="subsets" references="#//Classifier/attribute #//Namespace/ownedMember #//StructuredClassifier/role"/>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedConnector" ordered="false"
-        upperBound="-1" eType="#//Connector" containment="true">
+        upperBound="-1" eType="#//Connector" containment="true" eOpposite="#//Connector/structuredClassifier">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The connectors owned by the StructuredClassifier.&#xA;&lt;p>From package UML::StructuredClassifiers.&lt;/p>"/>
       </eAnnotations>
@@ -8000,7 +8038,7 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="end" lowerBound="2" upperBound="-1"
-        eType="#//ConnectorEnd" containment="true">
+        eType="#//ConnectorEnd" containment="true" eOpposite="#//ConnectorEnd/connector">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="A Connector has at least two ConnectorEnds, each representing the participation of instances of the Classifiers typing the ConnectableElements attached to the end. The set of ConnectorEnds is ordered.&#xA;&lt;p>From package UML::StructuredClassifiers.&lt;/p>"/>
       </eAnnotations>
@@ -8024,6 +8062,10 @@
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="An optional Association that classifies links corresponding to this Connector.&#xA;&lt;p>From package UML::StructuredClassifiers.&lt;/p>"/>
       </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="structuredClassifier" eType="#//StructuredClassifier"
+        eOpposite="#//StructuredClassifier/ownedConnector">
+      <eAnnotations source="subsets" references="#//Feature/featuringClassifier #//NamedElement/namespace #//RedefinableElement/redefinitionContext"/>
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="ConnectorKind">
@@ -9616,6 +9658,8 @@
         eOpposite="#//DestroyObjectAction/target">
       <eAnnotations source="subsets" references="#//ActionExecutionSpecification/action"/>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="removeStructuralFeatureValueAction"
+        eType="#//RemoveStructuralFeatureValueAction" eOpposite="#//RemoveStructuralFeatureValueAction/removeAt"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Pin" abstract="true" eSuperTypes="#//ObjectNode #//MultiplicityElement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -13179,7 +13223,7 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="removeAt" ordered="false"
-        eType="#//InputPin" containment="true">
+        eType="#//InputPin" containment="true" eOpposite="#//InputPin/removeStructuralFeatureValueAction">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="An InputPin that provides the position of an existing value to remove in ordered, nonunique structural features. The type of the removeAt InputPin is UnlimitedNatural, but the value cannot be zero or unlimited.&#xA;&lt;p>From package UML::Actions.&lt;/p>"/>
       </eAnnotations>

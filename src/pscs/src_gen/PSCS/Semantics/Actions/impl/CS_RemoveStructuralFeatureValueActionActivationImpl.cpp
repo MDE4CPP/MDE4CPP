@@ -198,7 +198,7 @@ void CS_RemoveStructuralFeatureValueActionActivationImpl::doAction()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-			// Get the values of the object and value input pins. 
+		// Get the values of the object and value input pins.
 	// If the given feature is an association end, then destroy any
 	// matching links. Otherwise, if the object input is a structural
 	// value, remove values from the given feature and destroy all links
@@ -218,8 +218,9 @@ void CS_RemoveStructuralFeatureValueActionActivationImpl::doAction()
 	std::shared_ptr<fUML::Semantics::Values::Value> inputValue = nullptr;
 	if(action->getValue() != nullptr) {
 		// NOTE: Multiplicity of the value input pin is required to be 1..1.
-		inputValue = this->takeTokens(action->getObject())->at(0);
+		inputValue = this->takeTokens(action->getValue())->at(0);
 	}
+
 	int removeAt = 0;
 	if(action->getRemoveAt() != nullptr) {
 		removeAt = (std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::UnlimitedNaturalValue>(this->takeTokens(action->getRemoveAt())->at(0)))->getValue();
@@ -253,24 +254,37 @@ void CS_RemoveStructuralFeatureValueActionActivationImpl::doAction()
 		}
 	}
 	else if (std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::StructuredValue>(value) != nullptr) {
+		std::shared_ptr<fUML::Semantics::SimpleClassifiers::StructuredValue> structuredValue = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::StructuredValue>(value);
+
 		// If the value is a data value, then it must be copied before
 		// any change is made.
 		if(std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Reference>(value) == nullptr) {
 			value = std::dynamic_pointer_cast<fUML::Semantics::Values::Value>(value->copy());
 		}
-		std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> featureValue = (std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::StructuredValue>(value))->retrieveFeatureValue(action->getStructuralFeature());
+		std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> featureValue = structuredValue->retrieveFeatureValue(feature);
 		std::shared_ptr<Bag<fUML::Semantics::Values::Value>> removedValues(new Bag<fUML::Semantics::Values::Value>());
+
 		if(action->getIsRemoveDuplicates()) {
 			unsigned int j = this->position(inputValue, featureValue->getValues(), 1);
 			while(j > 0) {
 				removedValues->add(featureValue->getValues()->at(j-1));
-				featureValue->getValues()->erase(featureValue->getValues()->begin() + (j-1));
+				//featureValue->getValues()->erase(featureValue->getValues()->begin() + (j-1));
+				structuredValue->removeValue(feature, featureValue->getValues()->at(j-1));
 				j = this->position(inputValue, featureValue->getValues(), j);
 			}
 		}
 		else if(action->getRemoveAt() == nullptr) {
 			std::vector<unsigned int> positions;
+			/*!
+			Hier sitzt das Problem: in position() liefert der Vergleich zwischen inputValue und dem Value im extrahierten FeatureValue ungleich (müsste gleich sein)
+			--> da ohnehin bisher als ChoiceStrategy nur die FirstChoiceStrategy in der fUML implementiert ist wird dieser Code vorerst ersetzt durch die fUML-Funktionalität
+			*/
+			/*
 			unsigned int j = this->position(inputValue, featureValue->getValues(), 1);
+
+			std::cout<<"inputValue* : "<<inputValue.get()<<std::endl;
+			std::cout<<"retrievedValue* : "<<featureValue->getValues()->at(0).get()<<std::endl;
+
 			while(j > 0) {
 				positions.push_back(j);
 				j = this->position(inputValue, featureValue->getValues(), j);
@@ -280,25 +294,34 @@ void CS_RemoveStructuralFeatureValueActionActivationImpl::doAction()
 				// ***
 				int k = (std::dynamic_pointer_cast<fUML::Semantics::Loci::ChoiceStrategy>(this->getExecutionLocus()->getFactory()->getStrategy("choice")))->choose(positions.size());
 				removedValues->add(featureValue->getValues()->at(positions.at(k-1)-1));
-				featureValue->getValues()->erase(featureValue->getValues()->begin() + (positions.at(k-1)-1));
-			}
+				//featureValue->getValues()->erase(featureValue->getValues()->begin() + (positions.at(k-1)-1));
+				structuredValue->removeValue(feature, featureValue->getValues()->at(positions.at(k-1)-1));
+			}*/
+			removedValues->add(inputValue);
+			structuredValue->removeValue(feature, inputValue);
+
 		}
 		else {
 			if((int)featureValue->getValues()->size() >= removeAt) {
 				removedValues->add(featureValue->getValues()->at(removeAt-1));
-				featureValue->getValues()->erase(featureValue->getValues()->begin() + (removeAt-1));
+				//featureValue->getValues()->erase(featureValue->getValues()->begin() + (removeAt-1));
+				structuredValue->removeValue(feature, featureValue->getValues()->at(removeAt-1));
+				featureValue = structuredValue->retrieveFeatureValue(feature);
 			}
 		}
 		// When values are removed from the list of values associated to the feature
 		// (in the context of the target), these latter may be involved in links representing
 		// instance of connectors. If this is the case, links in which the removed values are
 		// involved are destroyed.
-		for(unsigned int i = 0; i < removedValues->size(); i++) {
+		/*!
+			This functionality is excluded from PSCS in MDE4CPP because link destruction is handled on model level, not execution level.
+		*/
+		/*for(unsigned int i = 0; i < removedValues->size(); i++) {
 			std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Link>> linkToDestroy = this->getLinksToDestroy(std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::StructuredValue>(value), feature, removedValues->at(i));
 			for(unsigned int j = 0; j < linkToDestroy->size(); j++) {
 				linkToDestroy->at(j)->destroy();
 			}
-		}
+		}*/
 	}
 	if(action->getResult() != nullptr) {
 		this->putToken(action->getResult(), value);

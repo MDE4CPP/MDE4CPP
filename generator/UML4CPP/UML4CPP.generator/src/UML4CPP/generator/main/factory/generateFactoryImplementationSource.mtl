@@ -208,6 +208,7 @@ std::shared_ptr<[aClass.generateCppType(true)/]> [className/]::create[aClass.nam
 	std::shared_ptr<[aClass.generateCppType(true)/]Impl> element(new [aClass.name.toUpperFirst()/]Impl());
 	element->setMetaElementID(metaElementID);
 	element->[aClass.generateGetThisPtrPropertySetterName()/](element);
+	element->instantiate();
 	return element;
 }
 [for (anAssociation : Association | aClass.getCompositionsToClass())]
@@ -226,10 +227,27 @@ std::shared_ptr<[aClass.generateCppType(true)/]> [className/]::create[aClass.nam
 		[if (containmentProperty.isBackReference())]wp[else][containmentProperty.name.toLowerFirst()/][/if]->[if(containerProperty.upper <> 1)][containerProperty.getterName()/]()->push_back(element)[else][containerProperty.setterName()/](element)[/if];
 	}
 	element->[aClass.generateGetThisPtrPropertySetterName()/](element);
+	element->instantiate();
 	return element;
 }
 [/let]
 [/let]
+[/for]
+[for (compositeOwnerClass : Class | aClass.getCompositeOwners())] [comment for each class that has composite properties of type aClass/]
+[for (compositeProperty : Property | compositeOwnerClass.getCompositePropertiesOfType(aClass))] [comment for each composite property that compositeOwnerClass has/]
+std::shared_ptr<[aClass.generateCppType(true)/]> [className/]::create[aClass.name.toUpperFirst()/]_as_[compositeProperty.name/]_in_[compositeOwnerClass.name.toUpperFirst()/](std::weak_ptr<[compositeOwnerClass.generateCppType(true)/]> [compositeOwnerClass.name.toLowerFirst()/], const int metaElementID/*=-1*/) const
+{
+	std::shared_ptr<[aClass.generateCppType(true)/]Impl> element(new [aClass.name.toUpperFirst()/]Impl([compositeOwnerClass.name.toLowerFirst()/]));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = [compositeOwnerClass.name.toLowerFirst()/].lock())
+	{
+		wp->[if(compositeProperty.upper <> 1)][compositeProperty.getterName()/]()->push_back(element)[else][compositeProperty.setterName()/](element)[/if];
+	}
+	element->[aClass.generateGetThisPtrPropertySetterName()/](element);
+	element->instantiate();
+	return element;
+}
+[/for]
 [/for][/for]
 
 [comment]

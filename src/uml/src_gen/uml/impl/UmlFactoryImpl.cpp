@@ -270,6 +270,7 @@
 #include "uml/Class.hpp"
 #include "uml/Class.hpp"
 #include "uml/ClearStructuralFeatureAction.hpp"
+#include "uml/Connector.hpp"
 #include "uml/Region.hpp"
 #include "uml/Region.hpp"
 #include "uml/Namespace.hpp"
@@ -310,6 +311,7 @@
 #include "uml/ReadSelfAction.hpp"
 #include "uml/ReadStructuralFeatureAction.hpp"
 #include "uml/Package.hpp"
+#include "uml/RemoveStructuralFeatureValueAction.hpp"
 #include "uml/StructuredActivityNode.hpp"
 #include "uml/TemplateSignature.hpp"
 #include "uml/Classifier.hpp"
@@ -320,6 +322,7 @@
 #include "uml/StateMachine.hpp"
 #include "uml/StateMachine.hpp"
 #include "uml/StructuralFeatureAction.hpp"
+#include "uml/StructuredClassifier.hpp"
 #include "uml/Classifier.hpp"
 #include "uml/ActivityGroup.hpp"
 #include "uml/ActivityPartition.hpp"
@@ -774,6 +777,12 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createActionInputPin_in_Owner(castedContainer,metaElementID);
+					}
+					//ActionInputPin has removeStructuralFeatureValueAction as a containment
+					case  UmlPackage::INPUTPIN_ATTRIBUTE_REMOVESTRUCTURALFEATUREVALUEACTION:
+					{
+						auto castedContainer = std::dynamic_pointer_cast<uml::RemoveStructuralFeatureValueAction>(container);
+						return this->createActionInputPin_in_RemoveStructuralFeatureValueAction(castedContainer,metaElementID);
 					}
 					//ActionInputPin has structuralFeatureAction as a containment
 					case  UmlPackage::INPUTPIN_ATTRIBUTE_STRUCTURALFEATUREACTION:
@@ -2141,6 +2150,12 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createConnector_in_Owner(castedContainer,metaElementID);
 					}
+					//Connector has structuredClassifier as a containment
+					case  UmlPackage::CONNECTOR_ATTRIBUTE_STRUCTUREDCLASSIFIER:
+					{
+						auto castedContainer = std::dynamic_pointer_cast<uml::StructuredClassifier>(container);
+						return this->createConnector_in_StructuredClassifier(castedContainer,metaElementID);
+					}
 					default:
 						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
 				}
@@ -2154,9 +2169,23 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 			}
 			else
 			{
-				std::shared_ptr<uml::Element> castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
-				assert(castedContainer);
-				return std::shared_ptr<uml::ConnectorEnd>(this->createConnectorEnd_in_Owner(castedContainer,metaElementID));
+				switch(referenceID)
+				{
+					//ConnectorEnd has connector as a containment
+					case  UmlPackage::CONNECTOREND_ATTRIBUTE_CONNECTOR:
+					{
+						auto castedContainer = std::dynamic_pointer_cast<uml::Connector>(container);
+						return this->createConnectorEnd_in_Connector(castedContainer,metaElementID);
+					}
+					//ConnectorEnd has owner as a containment
+					case  UmlPackage::ELEMENT_ATTRIBUTE_OWNER:
+					{
+						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
+						return this->createConnectorEnd_in_Owner(castedContainer,metaElementID);
+					}
+					default:
+						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
+				}
 			}
 		}
 		case UmlPackage::CONSIDERIGNOREFRAGMENT_CLASS:
@@ -4114,6 +4143,12 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createInputPin_in_Owner(castedContainer,metaElementID);
+					}
+					//InputPin has removeStructuralFeatureValueAction as a containment
+					case  UmlPackage::INPUTPIN_ATTRIBUTE_REMOVESTRUCTURALFEATUREVALUEACTION:
+					{
+						auto castedContainer = std::dynamic_pointer_cast<uml::RemoveStructuralFeatureValueAction>(container);
+						return this->createInputPin_in_RemoveStructuralFeatureValueAction(castedContainer,metaElementID);
 					}
 					//InputPin has structuralFeatureAction as a containment
 					case  UmlPackage::INPUTPIN_ATTRIBUTE_STRUCTURALFEATUREACTION:
@@ -8294,6 +8329,12 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const int metaElementID, 
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createValuePin_in_Owner(castedContainer,metaElementID);
 					}
+					//ValuePin has removeStructuralFeatureValueAction as a containment
+					case  UmlPackage::INPUTPIN_ATTRIBUTE_REMOVESTRUCTURALFEATUREVALUEACTION:
+					{
+						auto castedContainer = std::dynamic_pointer_cast<uml::RemoveStructuralFeatureValueAction>(container);
+						return this->createValuePin_in_RemoveStructuralFeatureValueAction(castedContainer,metaElementID);
+					}
 					//ValuePin has structuralFeatureAction as a containment
 					case  UmlPackage::INPUTPIN_ATTRIBUTE_STRUCTURALFEATUREACTION:
 					{
@@ -8753,6 +8794,18 @@ std::shared_ptr<ActionInputPin> UmlFactoryImpl::createActionInputPin_in_Owner(st
 	if(auto wp = par_owner.lock())
 	{
 			wp->getOwnedElement()->push_back(element);
+	}
+	element->setThisActionInputPinPtr(element);
+	return element;
+	
+}
+std::shared_ptr<ActionInputPin> UmlFactoryImpl::createActionInputPin_in_RemoveStructuralFeatureValueAction(std::weak_ptr<uml::RemoveStructuralFeatureValueAction > par_removeStructuralFeatureValueAction, const int metaElementID) const
+{
+	std::shared_ptr<ActionInputPinImpl> element(new ActionInputPinImpl(par_removeStructuralFeatureValueAction));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_removeStructuralFeatureValueAction.lock())
+	{
+			wp->setRemoveAt(element);
 	}
 	element->setThisActionInputPinPtr(element);
 	return element;
@@ -10714,12 +10767,36 @@ std::shared_ptr<Connector> UmlFactoryImpl::createConnector_in_Owner(std::weak_pt
 	return element;
 	
 }
+std::shared_ptr<Connector> UmlFactoryImpl::createConnector_in_StructuredClassifier(std::weak_ptr<uml::StructuredClassifier > par_structuredClassifier, const int metaElementID) const
+{
+	std::shared_ptr<ConnectorImpl> element(new ConnectorImpl(par_structuredClassifier));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_structuredClassifier.lock())
+	{
+			wp->getOwnedConnector()->push_back(element);
+	}
+	element->setThisConnectorPtr(element);
+	return element;
+	
+}
 std::shared_ptr<ConnectorEnd> UmlFactoryImpl::createConnectorEnd(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<ConnectorEndImpl> element(new ConnectorEndImpl());
 	element->setMetaElementID(metaElementID);
 	element->setThisConnectorEndPtr(element);
 	return element;
+}
+std::shared_ptr<ConnectorEnd> UmlFactoryImpl::createConnectorEnd_in_Connector(std::weak_ptr<uml::Connector > par_connector, const int metaElementID) const
+{
+	std::shared_ptr<ConnectorEndImpl> element(new ConnectorEndImpl(par_connector));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_connector.lock())
+	{
+			wp->getEnd()->push_back(element);
+	}
+	element->setThisConnectorEndPtr(element);
+	return element;
+	
 }
 std::shared_ptr<ConnectorEnd> UmlFactoryImpl::createConnectorEnd_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
 {
@@ -13555,6 +13632,18 @@ std::shared_ptr<InputPin> UmlFactoryImpl::createInputPin_in_Owner(std::weak_ptr<
 	if(auto wp = par_owner.lock())
 	{
 			wp->getOwnedElement()->push_back(element);
+	}
+	element->setThisInputPinPtr(element);
+	return element;
+	
+}
+std::shared_ptr<InputPin> UmlFactoryImpl::createInputPin_in_RemoveStructuralFeatureValueAction(std::weak_ptr<uml::RemoveStructuralFeatureValueAction > par_removeStructuralFeatureValueAction, const int metaElementID) const
+{
+	std::shared_ptr<InputPinImpl> element(new InputPinImpl(par_removeStructuralFeatureValueAction));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_removeStructuralFeatureValueAction.lock())
+	{
+			wp->setRemoveAt(element);
 	}
 	element->setThisInputPinPtr(element);
 	return element;
@@ -19628,6 +19717,18 @@ std::shared_ptr<ValuePin> UmlFactoryImpl::createValuePin_in_Owner(std::weak_ptr<
 	if(auto wp = par_owner.lock())
 	{
 			wp->getOwnedElement()->push_back(element);
+	}
+	element->setThisValuePinPtr(element);
+	return element;
+	
+}
+std::shared_ptr<ValuePin> UmlFactoryImpl::createValuePin_in_RemoveStructuralFeatureValueAction(std::weak_ptr<uml::RemoveStructuralFeatureValueAction > par_removeStructuralFeatureValueAction, const int metaElementID) const
+{
+	std::shared_ptr<ValuePinImpl> element(new ValuePinImpl(par_removeStructuralFeatureValueAction));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_removeStructuralFeatureValueAction.lock())
+	{
+			wp->setRemoveAt(element);
 	}
 	element->setThisValuePinPtr(element);
 	return element;

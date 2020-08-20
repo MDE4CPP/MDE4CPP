@@ -104,6 +104,10 @@ namespace uml
 			virtual bool isUnique() ;
 			
 			/*!
+			 */ 
+			virtual bool matches(std::shared_ptr<uml::Operation>  comparedOperation) ;
+			
+			/*!
 			 A bodyCondition can only be specified for a query Operation.
 			bodyCondition <> null implies isQuery */ 
 			virtual bool only_body_for_query(Any diagnostics,std::map <   Any, Any >  context) ;

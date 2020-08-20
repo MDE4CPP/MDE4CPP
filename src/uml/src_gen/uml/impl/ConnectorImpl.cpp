@@ -58,6 +58,8 @@
 
 #include "uml/StringExpression.hpp"
 
+#include "uml/StructuredClassifier.hpp"
+
 //Factories an Package includes
 #include "uml/impl/UmlFactoryImpl.hpp"
 #include "uml/impl/UmlPackageImpl.hpp"
@@ -103,6 +105,8 @@ ConnectorImpl::ConnectorImpl()
 
 	
 
+	
+
 	//Init references
 	
 	
@@ -121,6 +125,8 @@ ConnectorImpl::ConnectorImpl()
 			std::cout << "Initialising value Subset: " << "m_redefinedConnector - Subset<uml::Connector, uml::RedefinableElement >(m_redefinedElement)" << std::endl;
 		#endif
 	
+	
+
 	
 
 	
@@ -148,6 +154,15 @@ ConnectorImpl::~ConnectorImpl()
 			:ConnectorImpl()
 			{
 			    m_owner = par_owner;
+			}
+
+
+//Additional constructor for the containments back reference
+			ConnectorImpl::ConnectorImpl(std::weak_ptr<uml::StructuredClassifier > par_structuredClassifier)
+			:ConnectorImpl()
+			{
+			    m_structuredClassifier = par_structuredClassifier;
+				m_namespace = par_structuredClassifier;
 			}
 
 
@@ -185,6 +200,8 @@ ConnectorImpl::ConnectorImpl(const ConnectorImpl & obj):ConnectorImpl()
 
 	std::shared_ptr<Union<uml::Classifier>> _redefinitionContext = obj.getRedefinitionContext();
 	m_redefinitionContext.reset(new Union<uml::Classifier>(*(obj.getRedefinitionContext().get())));
+
+	m_structuredClassifier  = obj.getStructuredClassifier();
 
 	m_type  = obj.getType();
 
@@ -299,6 +316,16 @@ std::shared_ptr<Subset<uml::Connector, uml::RedefinableElement>> ConnectorImpl::
 }
 
 
+std::weak_ptr<uml::StructuredClassifier > ConnectorImpl::getStructuredClassifier() const
+{
+
+    return m_structuredClassifier;
+}
+void ConnectorImpl::setStructuredClassifier(std::shared_ptr<uml::StructuredClassifier> _structuredClassifier)
+{
+    m_structuredClassifier = _structuredClassifier;
+}
+
 std::shared_ptr<uml::Association > ConnectorImpl::getType() const
 {
 
@@ -312,6 +339,14 @@ void ConnectorImpl::setType(std::shared_ptr<uml::Association> _type)
 //*********************************
 // Union Getter
 //*********************************
+std::shared_ptr<Union<uml::Classifier>> ConnectorImpl::getFeaturingClassifier() const
+{
+	return m_featuringClassifier;
+}
+std::weak_ptr<uml::Namespace > ConnectorImpl::getNamespace() const
+{
+	return m_namespace;
+}
 std::shared_ptr<Union<uml::Element>> ConnectorImpl::getOwnedElement() const
 {
 	return m_ownedElement;
@@ -323,6 +358,10 @@ std::weak_ptr<uml::Element > ConnectorImpl::getOwner() const
 std::shared_ptr<Union<uml::RedefinableElement>> ConnectorImpl::getRedefinedElement() const
 {
 	return m_redefinedElement;
+}
+std::shared_ptr<Union<uml::Classifier>> ConnectorImpl::getRedefinitionContext() const
+{
+	return m_redefinitionContext;
 }
 
 
@@ -343,6 +382,11 @@ std::shared_ptr<ecore::EObject> ConnectorImpl::eContainer() const
 	}
 
 	if(auto wp = m_owner.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_structuredClassifier.lock())
 	{
 		return wp;
 	}
@@ -394,6 +438,8 @@ Any ConnectorImpl::eGet(int featureID, bool resolve, bool coreType) const
 			}
 			return eAny(tempList); //5417
 		}
+		case uml::UmlPackage::CONNECTOR_ATTRIBUTE_STRUCTUREDCLASSIFIER:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getStructuredClassifier().lock())); //5419
 		case uml::UmlPackage::CONNECTOR_ATTRIBUTE_TYPE:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getType())); //5418
 	}
@@ -411,6 +457,8 @@ bool ConnectorImpl::internalEIsSet(int featureID) const
 			return m_kind != ConnectorKind::ASSEMBLY;; //5416
 		case uml::UmlPackage::CONNECTOR_ATTRIBUTE_REDEFINEDCONNECTOR:
 			return getRedefinedConnector() != nullptr; //5417
+		case uml::UmlPackage::CONNECTOR_ATTRIBUTE_STRUCTUREDCLASSIFIER:
+			return getStructuredClassifier().lock() != nullptr; //5419
 		case uml::UmlPackage::CONNECTOR_ATTRIBUTE_TYPE:
 			return getType() != nullptr; //5418
 	}
@@ -528,6 +576,14 @@ bool ConnectorImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
+		case uml::UmlPackage::CONNECTOR_ATTRIBUTE_STRUCTUREDCLASSIFIER:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::StructuredClassifier> _structuredClassifier = std::dynamic_pointer_cast<uml::StructuredClassifier>(_temp);
+			setStructuredClassifier(_structuredClassifier); //5419
+			return true;
+		}
 		case uml::UmlPackage::CONNECTOR_ATTRIBUTE_TYPE:
 		{
 			// BOOST CAST
@@ -612,11 +668,9 @@ void ConnectorImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::
 			{
 				typeName = "ConnectorEnd";
 			}
-			std::shared_ptr<uml::ConnectorEnd> end = std::dynamic_pointer_cast<uml::ConnectorEnd>(modelFactory->create(typeName));
+			std::shared_ptr<ecore::EObject> end = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::UmlPackage::CONNECTOREND_ATTRIBUTE_CONNECTOR);
 			if (end != nullptr)
 			{
-				std::shared_ptr<Subset<uml::ConnectorEnd, uml::Element>> list_end = this->getEnd();
-				list_end->push_back(end);
 				loadHandler->handleChild(end);
 			}
 			return;
@@ -663,6 +717,18 @@ void ConnectorImpl::resolveReferences(const int featureID, std::list<std::shared
 					_redefinedConnector->push_back(_r);
 				}				
 			}
+			return;
+		}
+
+		case uml::UmlPackage::CONNECTOR_ATTRIBUTE_STRUCTUREDCLASSIFIER:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::StructuredClassifier> _structuredClassifier = std::dynamic_pointer_cast<uml::StructuredClassifier>( references.front() );
+				setStructuredClassifier(_structuredClassifier);
+			}
+			
 			return;
 		}
 
