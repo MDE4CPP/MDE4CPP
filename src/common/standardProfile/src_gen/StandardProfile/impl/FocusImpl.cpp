@@ -30,6 +30,12 @@ using namespace StandardProfile;
 //*********************************
 FocusImpl::FocusImpl()
 {
+	#ifdef ADD_COUNT
+		ADD_COUNT("FocusImpl()");
+	#endif
+
+	DEBUG_MESSAGE(std::cout<<"Focus is created..."<<std::endl;)
+
 	//***********************************
 	// init Get Set
 	//getter init
@@ -39,18 +45,16 @@ FocusImpl::FocusImpl()
 	
 	m_unsetterMap.insert(std::pair<std::string,std::function<void()>>("StandardProfile::Focus::base_Class",[this](){m_base_Class = std::shared_ptr<uml::Class>(nullptr);}));
 	 
-
-	// init properties without default
-	
-	
-	// init properties with default
-
-	// init connectors
 }
 
 
 FocusImpl::~FocusImpl()
 {
+	#ifdef SUB_COUNT
+		SUB_COUNT("FocusImpl()");
+	#endif
+
+	DEBUG_MESSAGE(std::cout<<"Focus is destroyed..."<<std::endl;)
 }
 
 FocusImpl::FocusImpl(const FocusImpl & obj):FocusImpl()
@@ -72,6 +76,21 @@ std::shared_ptr<ecore::EObject>  FocusImpl::copy() const
 std::shared_ptr<uml::Class> FocusImpl::getMetaClass()
 {
 	return StandardProfilePackageImpl::eInstance()->get_StandardProfile_Focus();
+}
+
+void FocusImpl::instantiate()
+{	
+	
+}
+
+void FocusImpl::destroy()
+{	
+
+	//Erase properties
+	//deleting property base_Class
+	m_base_Class.reset();
+	
+	//Erase back reference to owner
 }
 
 //*********************************

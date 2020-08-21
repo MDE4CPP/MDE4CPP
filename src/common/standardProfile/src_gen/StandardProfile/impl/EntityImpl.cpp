@@ -30,6 +30,12 @@ using namespace StandardProfile;
 //*********************************
 EntityImpl::EntityImpl()
 {
+	#ifdef ADD_COUNT
+		ADD_COUNT("EntityImpl()");
+	#endif
+
+	DEBUG_MESSAGE(std::cout<<"Entity is created..."<<std::endl;)
+
 	//***********************************
 	// init Get Set
 	//getter init
@@ -39,18 +45,16 @@ EntityImpl::EntityImpl()
 	
 	m_unsetterMap.insert(std::pair<std::string,std::function<void()>>("StandardProfile::Entity::base_Component",[this](){m_base_Component = std::shared_ptr<uml::Component>(nullptr);}));
 	 
-
-	// init properties without default
-	
-	
-	// init properties with default
-
-	// init connectors
 }
 
 
 EntityImpl::~EntityImpl()
 {
+	#ifdef SUB_COUNT
+		SUB_COUNT("EntityImpl()");
+	#endif
+
+	DEBUG_MESSAGE(std::cout<<"Entity is destroyed..."<<std::endl;)
 }
 
 EntityImpl::EntityImpl(const EntityImpl & obj):EntityImpl()
@@ -72,6 +76,21 @@ std::shared_ptr<ecore::EObject>  EntityImpl::copy() const
 std::shared_ptr<uml::Class> EntityImpl::getMetaClass()
 {
 	return StandardProfilePackageImpl::eInstance()->get_StandardProfile_Entity();
+}
+
+void EntityImpl::instantiate()
+{	
+	
+}
+
+void EntityImpl::destroy()
+{	
+
+	//Erase properties
+	//deleting property base_Component
+	m_base_Component.reset();
+	
+	//Erase back reference to owner
 }
 
 //*********************************

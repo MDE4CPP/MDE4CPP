@@ -30,6 +30,12 @@ using namespace StandardProfile;
 //*********************************
 FrameworkImpl::FrameworkImpl()
 {
+	#ifdef ADD_COUNT
+		ADD_COUNT("FrameworkImpl()");
+	#endif
+
+	DEBUG_MESSAGE(std::cout<<"Framework is created..."<<std::endl;)
+
 	//***********************************
 	// init Get Set
 	//getter init
@@ -39,18 +45,16 @@ FrameworkImpl::FrameworkImpl()
 	
 	m_unsetterMap.insert(std::pair<std::string,std::function<void()>>("StandardProfile::Framework::base_Package",[this](){m_base_Package = std::shared_ptr<uml::Package>(nullptr);}));
 	 
-
-	// init properties without default
-	
-	
-	// init properties with default
-
-	// init connectors
 }
 
 
 FrameworkImpl::~FrameworkImpl()
 {
+	#ifdef SUB_COUNT
+		SUB_COUNT("FrameworkImpl()");
+	#endif
+
+	DEBUG_MESSAGE(std::cout<<"Framework is destroyed..."<<std::endl;)
 }
 
 FrameworkImpl::FrameworkImpl(const FrameworkImpl & obj):FrameworkImpl()
@@ -72,6 +76,21 @@ std::shared_ptr<ecore::EObject>  FrameworkImpl::copy() const
 std::shared_ptr<uml::Class> FrameworkImpl::getMetaClass()
 {
 	return StandardProfilePackageImpl::eInstance()->get_StandardProfile_Framework();
+}
+
+void FrameworkImpl::instantiate()
+{	
+	
+}
+
+void FrameworkImpl::destroy()
+{	
+
+	//Erase properties
+	//deleting property base_Package
+	m_base_Package.reset();
+	
+	//Erase back reference to owner
 }
 
 //*********************************

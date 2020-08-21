@@ -30,6 +30,12 @@ using namespace StandardProfile;
 //*********************************
 ModelLibraryImpl::ModelLibraryImpl()
 {
+	#ifdef ADD_COUNT
+		ADD_COUNT("ModelLibraryImpl()");
+	#endif
+
+	DEBUG_MESSAGE(std::cout<<"ModelLibrary is created..."<<std::endl;)
+
 	//***********************************
 	// init Get Set
 	//getter init
@@ -39,18 +45,16 @@ ModelLibraryImpl::ModelLibraryImpl()
 	
 	m_unsetterMap.insert(std::pair<std::string,std::function<void()>>("StandardProfile::ModelLibrary::base_Package",[this](){m_base_Package = std::shared_ptr<uml::Package>(nullptr);}));
 	 
-
-	// init properties without default
-	
-	
-	// init properties with default
-
-	// init connectors
 }
 
 
 ModelLibraryImpl::~ModelLibraryImpl()
 {
+	#ifdef SUB_COUNT
+		SUB_COUNT("ModelLibraryImpl()");
+	#endif
+
+	DEBUG_MESSAGE(std::cout<<"ModelLibrary is destroyed..."<<std::endl;)
 }
 
 ModelLibraryImpl::ModelLibraryImpl(const ModelLibraryImpl & obj):ModelLibraryImpl()
@@ -72,6 +76,21 @@ std::shared_ptr<ecore::EObject>  ModelLibraryImpl::copy() const
 std::shared_ptr<uml::Class> ModelLibraryImpl::getMetaClass()
 {
 	return StandardProfilePackageImpl::eInstance()->get_StandardProfile_ModelLibrary();
+}
+
+void ModelLibraryImpl::instantiate()
+{	
+	
+}
+
+void ModelLibraryImpl::destroy()
+{	
+
+	//Erase properties
+	//deleting property base_Package
+	m_base_Package.reset();
+	
+	//Erase back reference to owner
 }
 
 //*********************************

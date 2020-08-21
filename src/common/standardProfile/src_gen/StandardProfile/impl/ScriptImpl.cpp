@@ -30,6 +30,12 @@ using namespace StandardProfile;
 //*********************************
 ScriptImpl::ScriptImpl()
 {
+	#ifdef ADD_COUNT
+		ADD_COUNT("ScriptImpl()");
+	#endif
+
+	DEBUG_MESSAGE(std::cout<<"Script is created..."<<std::endl;)
+
 	//***********************************
 	// init Get Set
 	//getter init
@@ -39,18 +45,16 @@ ScriptImpl::ScriptImpl()
 	
 	m_unsetterMap.insert(std::pair<std::string,std::function<void()>>("StandardProfile::Script::base_Artifact",[this](){m_base_Artifact = std::shared_ptr<uml::Artifact>(nullptr);}));
 	 
-
-	// init properties without default
-	
-	
-	// init properties with default
-
-	// init connectors
 }
 
 
 ScriptImpl::~ScriptImpl()
 {
+	#ifdef SUB_COUNT
+		SUB_COUNT("ScriptImpl()");
+	#endif
+
+	DEBUG_MESSAGE(std::cout<<"Script is destroyed..."<<std::endl;)
 }
 
 ScriptImpl::ScriptImpl(const ScriptImpl & obj):ScriptImpl()
@@ -72,6 +76,21 @@ std::shared_ptr<ecore::EObject>  ScriptImpl::copy() const
 std::shared_ptr<uml::Class> ScriptImpl::getMetaClass()
 {
 	return StandardProfilePackageImpl::eInstance()->get_StandardProfile_Script();
+}
+
+void ScriptImpl::instantiate()
+{	
+	
+}
+
+void ScriptImpl::destroy()
+{	
+
+	//Erase properties
+	//deleting property base_Artifact
+	m_base_Artifact.reset();
+	
+	//Erase back reference to owner
 }
 
 //*********************************

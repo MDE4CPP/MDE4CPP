@@ -30,6 +30,12 @@ using namespace StandardProfile;
 //*********************************
 DeriveImpl::DeriveImpl()
 {
+	#ifdef ADD_COUNT
+		ADD_COUNT("DeriveImpl()");
+	#endif
+
+	DEBUG_MESSAGE(std::cout<<"Derive is created..."<<std::endl;)
+
 	//***********************************
 	// init Get Set
 	//getter init
@@ -39,18 +45,16 @@ DeriveImpl::DeriveImpl()
 	
 	m_unsetterMap.insert(std::pair<std::string,std::function<void()>>("StandardProfile::Derive::base_Abstraction",[this](){m_base_Abstraction = std::shared_ptr<uml::Abstraction>(nullptr);}));
 	 
-
-	// init properties without default
-	
-	
-	// init properties with default
-
-	// init connectors
 }
 
 
 DeriveImpl::~DeriveImpl()
 {
+	#ifdef SUB_COUNT
+		SUB_COUNT("DeriveImpl()");
+	#endif
+
+	DEBUG_MESSAGE(std::cout<<"Derive is destroyed..."<<std::endl;)
 }
 
 DeriveImpl::DeriveImpl(const DeriveImpl & obj):DeriveImpl()
@@ -72,6 +76,21 @@ std::shared_ptr<ecore::EObject>  DeriveImpl::copy() const
 std::shared_ptr<uml::Class> DeriveImpl::getMetaClass()
 {
 	return StandardProfilePackageImpl::eInstance()->get_StandardProfile_Derive();
+}
+
+void DeriveImpl::instantiate()
+{	
+	
+}
+
+void DeriveImpl::destroy()
+{	
+
+	//Erase properties
+	//deleting property base_Abstraction
+	m_base_Abstraction.reset();
+	
+	//Erase back reference to owner
 }
 
 //*********************************

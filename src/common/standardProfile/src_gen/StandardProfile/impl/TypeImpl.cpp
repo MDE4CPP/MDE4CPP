@@ -30,6 +30,12 @@ using namespace StandardProfile;
 //*********************************
 TypeImpl::TypeImpl()
 {
+	#ifdef ADD_COUNT
+		ADD_COUNT("TypeImpl()");
+	#endif
+
+	DEBUG_MESSAGE(std::cout<<"Type is created..."<<std::endl;)
+
 	//***********************************
 	// init Get Set
 	//getter init
@@ -39,18 +45,16 @@ TypeImpl::TypeImpl()
 	
 	m_unsetterMap.insert(std::pair<std::string,std::function<void()>>("StandardProfile::Type::base_Class",[this](){m_base_Class = std::shared_ptr<uml::Class>(nullptr);}));
 	 
-
-	// init properties without default
-	
-	
-	// init properties with default
-
-	// init connectors
 }
 
 
 TypeImpl::~TypeImpl()
 {
+	#ifdef SUB_COUNT
+		SUB_COUNT("TypeImpl()");
+	#endif
+
+	DEBUG_MESSAGE(std::cout<<"Type is destroyed..."<<std::endl;)
 }
 
 TypeImpl::TypeImpl(const TypeImpl & obj):TypeImpl()
@@ -72,6 +76,21 @@ std::shared_ptr<ecore::EObject>  TypeImpl::copy() const
 std::shared_ptr<uml::Class> TypeImpl::getMetaClass()
 {
 	return StandardProfilePackageImpl::eInstance()->get_StandardProfile_Type();
+}
+
+void TypeImpl::instantiate()
+{	
+	
+}
+
+void TypeImpl::destroy()
+{	
+
+	//Erase properties
+	//deleting property base_Class
+	m_base_Class.reset();
+	
+	//Erase back reference to owner
 }
 
 //*********************************

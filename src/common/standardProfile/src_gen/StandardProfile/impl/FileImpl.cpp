@@ -30,6 +30,12 @@ using namespace StandardProfile;
 //*********************************
 FileImpl::FileImpl()
 {
+	#ifdef ADD_COUNT
+		ADD_COUNT("FileImpl()");
+	#endif
+
+	DEBUG_MESSAGE(std::cout<<"File is created..."<<std::endl;)
+
 	//***********************************
 	// init Get Set
 	//getter init
@@ -39,18 +45,16 @@ FileImpl::FileImpl()
 	
 	m_unsetterMap.insert(std::pair<std::string,std::function<void()>>("StandardProfile::File::base_Artifact",[this](){m_base_Artifact = std::shared_ptr<uml::Artifact>(nullptr);}));
 	 
-
-	// init properties without default
-	
-	
-	// init properties with default
-
-	// init connectors
 }
 
 
 FileImpl::~FileImpl()
 {
+	#ifdef SUB_COUNT
+		SUB_COUNT("FileImpl()");
+	#endif
+
+	DEBUG_MESSAGE(std::cout<<"File is destroyed..."<<std::endl;)
 }
 
 FileImpl::FileImpl(const FileImpl & obj):FileImpl()
@@ -72,6 +76,21 @@ std::shared_ptr<ecore::EObject>  FileImpl::copy() const
 std::shared_ptr<uml::Class> FileImpl::getMetaClass()
 {
 	return StandardProfilePackageImpl::eInstance()->get_StandardProfile_File();
+}
+
+void FileImpl::instantiate()
+{	
+	
+}
+
+void FileImpl::destroy()
+{	
+
+	//Erase properties
+	//deleting property base_Artifact
+	m_base_Artifact.reset();
+	
+	//Erase back reference to owner
 }
 
 //*********************************

@@ -30,6 +30,12 @@ using namespace StandardProfile;
 //*********************************
 MetamodelImpl::MetamodelImpl()
 {
+	#ifdef ADD_COUNT
+		ADD_COUNT("MetamodelImpl()");
+	#endif
+
+	DEBUG_MESSAGE(std::cout<<"Metamodel is created..."<<std::endl;)
+
 	//***********************************
 	// init Get Set
 	//getter init
@@ -39,18 +45,16 @@ MetamodelImpl::MetamodelImpl()
 	
 	m_unsetterMap.insert(std::pair<std::string,std::function<void()>>("StandardProfile::Metamodel::base_Model",[this](){m_base_Model = std::shared_ptr<uml::Model>(nullptr);}));
 	 
-
-	// init properties without default
-	
-	
-	// init properties with default
-
-	// init connectors
 }
 
 
 MetamodelImpl::~MetamodelImpl()
 {
+	#ifdef SUB_COUNT
+		SUB_COUNT("MetamodelImpl()");
+	#endif
+
+	DEBUG_MESSAGE(std::cout<<"Metamodel is destroyed..."<<std::endl;)
 }
 
 MetamodelImpl::MetamodelImpl(const MetamodelImpl & obj):MetamodelImpl()
@@ -72,6 +76,21 @@ std::shared_ptr<ecore::EObject>  MetamodelImpl::copy() const
 std::shared_ptr<uml::Class> MetamodelImpl::getMetaClass()
 {
 	return StandardProfilePackageImpl::eInstance()->get_StandardProfile_Metamodel();
+}
+
+void MetamodelImpl::instantiate()
+{	
+	
+}
+
+void MetamodelImpl::destroy()
+{	
+
+	//Erase properties
+	//deleting property base_Model
+	m_base_Model.reset();
+	
+	//Erase back reference to owner
 }
 
 //*********************************

@@ -30,6 +30,12 @@ using namespace StandardProfile;
 //*********************************
 SpecificationImpl::SpecificationImpl()
 {
+	#ifdef ADD_COUNT
+		ADD_COUNT("SpecificationImpl()");
+	#endif
+
+	DEBUG_MESSAGE(std::cout<<"Specification is created..."<<std::endl;)
+
 	//***********************************
 	// init Get Set
 	//getter init
@@ -39,18 +45,16 @@ SpecificationImpl::SpecificationImpl()
 	
 	m_unsetterMap.insert(std::pair<std::string,std::function<void()>>("StandardProfile::Specification::base_Classifier",[this](){m_base_Classifier = std::shared_ptr<uml::Classifier>(nullptr);}));
 	 
-
-	// init properties without default
-	
-	
-	// init properties with default
-
-	// init connectors
 }
 
 
 SpecificationImpl::~SpecificationImpl()
 {
+	#ifdef SUB_COUNT
+		SUB_COUNT("SpecificationImpl()");
+	#endif
+
+	DEBUG_MESSAGE(std::cout<<"Specification is destroyed..."<<std::endl;)
 }
 
 SpecificationImpl::SpecificationImpl(const SpecificationImpl & obj):SpecificationImpl()
@@ -72,6 +76,21 @@ std::shared_ptr<ecore::EObject>  SpecificationImpl::copy() const
 std::shared_ptr<uml::Class> SpecificationImpl::getMetaClass()
 {
 	return StandardProfilePackageImpl::eInstance()->get_StandardProfile_Specification();
+}
+
+void SpecificationImpl::instantiate()
+{	
+	
+}
+
+void SpecificationImpl::destroy()
+{	
+
+	//Erase properties
+	//deleting property base_Classifier
+	m_base_Classifier.reset();
+	
+	//Erase back reference to owner
 }
 
 //*********************************

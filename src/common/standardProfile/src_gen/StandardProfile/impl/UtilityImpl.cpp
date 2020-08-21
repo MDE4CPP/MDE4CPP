@@ -30,6 +30,12 @@ using namespace StandardProfile;
 //*********************************
 UtilityImpl::UtilityImpl()
 {
+	#ifdef ADD_COUNT
+		ADD_COUNT("UtilityImpl()");
+	#endif
+
+	DEBUG_MESSAGE(std::cout<<"Utility is created..."<<std::endl;)
+
 	//***********************************
 	// init Get Set
 	//getter init
@@ -39,18 +45,16 @@ UtilityImpl::UtilityImpl()
 	
 	m_unsetterMap.insert(std::pair<std::string,std::function<void()>>("StandardProfile::Utility::base_Class",[this](){m_base_Class = std::shared_ptr<uml::Class>(nullptr);}));
 	 
-
-	// init properties without default
-	
-	
-	// init properties with default
-
-	// init connectors
 }
 
 
 UtilityImpl::~UtilityImpl()
 {
+	#ifdef SUB_COUNT
+		SUB_COUNT("UtilityImpl()");
+	#endif
+
+	DEBUG_MESSAGE(std::cout<<"Utility is destroyed..."<<std::endl;)
 }
 
 UtilityImpl::UtilityImpl(const UtilityImpl & obj):UtilityImpl()
@@ -72,6 +76,21 @@ std::shared_ptr<ecore::EObject>  UtilityImpl::copy() const
 std::shared_ptr<uml::Class> UtilityImpl::getMetaClass()
 {
 	return StandardProfilePackageImpl::eInstance()->get_StandardProfile_Utility();
+}
+
+void UtilityImpl::instantiate()
+{	
+	
+}
+
+void UtilityImpl::destroy()
+{	
+
+	//Erase properties
+	//deleting property base_Class
+	m_base_Class.reset();
+	
+	//Erase back reference to owner
 }
 
 //*********************************

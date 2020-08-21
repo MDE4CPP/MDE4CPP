@@ -30,6 +30,12 @@ using namespace StandardProfile;
 //*********************************
 ExecutableImpl::ExecutableImpl()
 {
+	#ifdef ADD_COUNT
+		ADD_COUNT("ExecutableImpl()");
+	#endif
+
+	DEBUG_MESSAGE(std::cout<<"Executable is created..."<<std::endl;)
+
 	//***********************************
 	// init Get Set
 	//getter init
@@ -39,18 +45,16 @@ ExecutableImpl::ExecutableImpl()
 	
 	m_unsetterMap.insert(std::pair<std::string,std::function<void()>>("StandardProfile::Executable::base_Artifact",[this](){m_base_Artifact = std::shared_ptr<uml::Artifact>(nullptr);}));
 	 
-
-	// init properties without default
-	
-	
-	// init properties with default
-
-	// init connectors
 }
 
 
 ExecutableImpl::~ExecutableImpl()
 {
+	#ifdef SUB_COUNT
+		SUB_COUNT("ExecutableImpl()");
+	#endif
+
+	DEBUG_MESSAGE(std::cout<<"Executable is destroyed..."<<std::endl;)
 }
 
 ExecutableImpl::ExecutableImpl(const ExecutableImpl & obj):ExecutableImpl()
@@ -72,6 +76,21 @@ std::shared_ptr<ecore::EObject>  ExecutableImpl::copy() const
 std::shared_ptr<uml::Class> ExecutableImpl::getMetaClass()
 {
 	return StandardProfilePackageImpl::eInstance()->get_StandardProfile_Executable();
+}
+
+void ExecutableImpl::instantiate()
+{	
+	
+}
+
+void ExecutableImpl::destroy()
+{	
+
+	//Erase properties
+	//deleting property base_Artifact
+	m_base_Artifact.reset();
+	
+	//Erase back reference to owner
 }
 
 //*********************************

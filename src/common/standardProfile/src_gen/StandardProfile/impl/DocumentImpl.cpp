@@ -30,6 +30,12 @@ using namespace StandardProfile;
 //*********************************
 DocumentImpl::DocumentImpl()
 {
+	#ifdef ADD_COUNT
+		ADD_COUNT("DocumentImpl()");
+	#endif
+
+	DEBUG_MESSAGE(std::cout<<"Document is created..."<<std::endl;)
+
 	//***********************************
 	// init Get Set
 	//getter init
@@ -39,18 +45,16 @@ DocumentImpl::DocumentImpl()
 	
 	m_unsetterMap.insert(std::pair<std::string,std::function<void()>>("StandardProfile::Document::base_Artifact",[this](){m_base_Artifact = std::shared_ptr<uml::Artifact>(nullptr);}));
 	 
-
-	// init properties without default
-	
-	
-	// init properties with default
-
-	// init connectors
 }
 
 
 DocumentImpl::~DocumentImpl()
 {
+	#ifdef SUB_COUNT
+		SUB_COUNT("DocumentImpl()");
+	#endif
+
+	DEBUG_MESSAGE(std::cout<<"Document is destroyed..."<<std::endl;)
 }
 
 DocumentImpl::DocumentImpl(const DocumentImpl & obj):DocumentImpl()
@@ -72,6 +76,21 @@ std::shared_ptr<ecore::EObject>  DocumentImpl::copy() const
 std::shared_ptr<uml::Class> DocumentImpl::getMetaClass()
 {
 	return StandardProfilePackageImpl::eInstance()->get_StandardProfile_Document();
+}
+
+void DocumentImpl::instantiate()
+{	
+	
+}
+
+void DocumentImpl::destroy()
+{	
+
+	//Erase properties
+	//deleting property base_Artifact
+	m_base_Artifact.reset();
+	
+	//Erase back reference to owner
 }
 
 //*********************************

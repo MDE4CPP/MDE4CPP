@@ -30,6 +30,12 @@ using namespace StandardProfile;
 //*********************************
 AuxiliaryImpl::AuxiliaryImpl()
 {
+	#ifdef ADD_COUNT
+		ADD_COUNT("AuxiliaryImpl()");
+	#endif
+
+	DEBUG_MESSAGE(std::cout<<"Auxiliary is created..."<<std::endl;)
+
 	//***********************************
 	// init Get Set
 	//getter init
@@ -39,18 +45,16 @@ AuxiliaryImpl::AuxiliaryImpl()
 	
 	m_unsetterMap.insert(std::pair<std::string,std::function<void()>>("StandardProfile::Auxiliary::base_Class",[this](){m_base_Class = std::shared_ptr<uml::Class>(nullptr);}));
 	 
-
-	// init properties without default
-	
-	
-	// init properties with default
-
-	// init connectors
 }
 
 
 AuxiliaryImpl::~AuxiliaryImpl()
 {
+	#ifdef SUB_COUNT
+		SUB_COUNT("AuxiliaryImpl()");
+	#endif
+
+	DEBUG_MESSAGE(std::cout<<"Auxiliary is destroyed..."<<std::endl;)
 }
 
 AuxiliaryImpl::AuxiliaryImpl(const AuxiliaryImpl & obj):AuxiliaryImpl()
@@ -72,6 +76,21 @@ std::shared_ptr<ecore::EObject>  AuxiliaryImpl::copy() const
 std::shared_ptr<uml::Class> AuxiliaryImpl::getMetaClass()
 {
 	return StandardProfilePackageImpl::eInstance()->get_StandardProfile_Auxiliary();
+}
+
+void AuxiliaryImpl::instantiate()
+{	
+	
+}
+
+void AuxiliaryImpl::destroy()
+{	
+
+	//Erase properties
+	//deleting property base_Class
+	m_base_Class.reset();
+	
+	//Erase back reference to owner
 }
 
 //*********************************

@@ -30,6 +30,12 @@ using namespace StandardProfile;
 //*********************************
 DestroyImpl::DestroyImpl()
 {
+	#ifdef ADD_COUNT
+		ADD_COUNT("DestroyImpl()");
+	#endif
+
+	DEBUG_MESSAGE(std::cout<<"Destroy is created..."<<std::endl;)
+
 	//***********************************
 	// init Get Set
 	//getter init
@@ -39,18 +45,16 @@ DestroyImpl::DestroyImpl()
 	
 	m_unsetterMap.insert(std::pair<std::string,std::function<void()>>("StandardProfile::Destroy::base_BehavioralFeature",[this](){m_base_BehavioralFeature = std::shared_ptr<uml::BehavioralFeature>(nullptr);}));
 	 
-
-	// init properties without default
-	
-	
-	// init properties with default
-
-	// init connectors
 }
 
 
 DestroyImpl::~DestroyImpl()
 {
+	#ifdef SUB_COUNT
+		SUB_COUNT("DestroyImpl()");
+	#endif
+
+	DEBUG_MESSAGE(std::cout<<"Destroy is destroyed..."<<std::endl;)
 }
 
 DestroyImpl::DestroyImpl(const DestroyImpl & obj):DestroyImpl()
@@ -72,6 +76,21 @@ std::shared_ptr<ecore::EObject>  DestroyImpl::copy() const
 std::shared_ptr<uml::Class> DestroyImpl::getMetaClass()
 {
 	return StandardProfilePackageImpl::eInstance()->get_StandardProfile_Destroy();
+}
+
+void DestroyImpl::instantiate()
+{	
+	
+}
+
+void DestroyImpl::destroy()
+{	
+
+	//Erase properties
+	//deleting property base_BehavioralFeature
+	m_base_BehavioralFeature.reset();
+	
+	//Erase back reference to owner
 }
 
 //*********************************

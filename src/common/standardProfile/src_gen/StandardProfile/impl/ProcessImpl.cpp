@@ -30,6 +30,12 @@ using namespace StandardProfile;
 //*********************************
 ProcessImpl::ProcessImpl()
 {
+	#ifdef ADD_COUNT
+		ADD_COUNT("ProcessImpl()");
+	#endif
+
+	DEBUG_MESSAGE(std::cout<<"Process is created..."<<std::endl;)
+
 	//***********************************
 	// init Get Set
 	//getter init
@@ -39,18 +45,16 @@ ProcessImpl::ProcessImpl()
 	
 	m_unsetterMap.insert(std::pair<std::string,std::function<void()>>("StandardProfile::Process::base_Component",[this](){m_base_Component = std::shared_ptr<uml::Component>(nullptr);}));
 	 
-
-	// init properties without default
-	
-	
-	// init properties with default
-
-	// init connectors
 }
 
 
 ProcessImpl::~ProcessImpl()
 {
+	#ifdef SUB_COUNT
+		SUB_COUNT("ProcessImpl()");
+	#endif
+
+	DEBUG_MESSAGE(std::cout<<"Process is destroyed..."<<std::endl;)
 }
 
 ProcessImpl::ProcessImpl(const ProcessImpl & obj):ProcessImpl()
@@ -72,6 +76,21 @@ std::shared_ptr<ecore::EObject>  ProcessImpl::copy() const
 std::shared_ptr<uml::Class> ProcessImpl::getMetaClass()
 {
 	return StandardProfilePackageImpl::eInstance()->get_StandardProfile_Process();
+}
+
+void ProcessImpl::instantiate()
+{	
+	
+}
+
+void ProcessImpl::destroy()
+{	
+
+	//Erase properties
+	//deleting property base_Component
+	m_base_Component.reset();
+	
+	//Erase back reference to owner
 }
 
 //*********************************

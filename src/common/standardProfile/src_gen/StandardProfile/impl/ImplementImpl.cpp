@@ -30,6 +30,12 @@ using namespace StandardProfile;
 //*********************************
 ImplementImpl::ImplementImpl()
 {
+	#ifdef ADD_COUNT
+		ADD_COUNT("ImplementImpl()");
+	#endif
+
+	DEBUG_MESSAGE(std::cout<<"Implement is created..."<<std::endl;)
+
 	//***********************************
 	// init Get Set
 	//getter init
@@ -39,18 +45,16 @@ ImplementImpl::ImplementImpl()
 	
 	m_unsetterMap.insert(std::pair<std::string,std::function<void()>>("StandardProfile::Implement::base_Component",[this](){m_base_Component = std::shared_ptr<uml::Component>(nullptr);}));
 	 
-
-	// init properties without default
-	
-	
-	// init properties with default
-
-	// init connectors
 }
 
 
 ImplementImpl::~ImplementImpl()
 {
+	#ifdef SUB_COUNT
+		SUB_COUNT("ImplementImpl()");
+	#endif
+
+	DEBUG_MESSAGE(std::cout<<"Implement is destroyed..."<<std::endl;)
 }
 
 ImplementImpl::ImplementImpl(const ImplementImpl & obj):ImplementImpl()
@@ -72,6 +76,21 @@ std::shared_ptr<ecore::EObject>  ImplementImpl::copy() const
 std::shared_ptr<uml::Class> ImplementImpl::getMetaClass()
 {
 	return StandardProfilePackageImpl::eInstance()->get_StandardProfile_Implement();
+}
+
+void ImplementImpl::instantiate()
+{	
+	
+}
+
+void ImplementImpl::destroy()
+{	
+
+	//Erase properties
+	//deleting property base_Component
+	m_base_Component.reset();
+	
+	//Erase back reference to owner
 }
 
 //*********************************

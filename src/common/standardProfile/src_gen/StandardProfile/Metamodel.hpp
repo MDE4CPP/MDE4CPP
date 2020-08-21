@@ -39,7 +39,8 @@ namespace StandardProfile
 			// Getter Setter
 			//*********************************
 			virtual std::weak_ptr<uml::Model> getBase_Model() const  = 0;
-			virtual void setBase_Model (std::weak_ptr<uml::Model> _base_Model) = 0;
+			virtual void setBase_Model(std::weak_ptr<uml::Model> _base_Model) = 0;
+			
 			
 			
 			//*********************************

@@ -30,6 +30,12 @@ using namespace StandardProfile;
 //*********************************
 BuildComponentImpl::BuildComponentImpl()
 {
+	#ifdef ADD_COUNT
+		ADD_COUNT("BuildComponentImpl()");
+	#endif
+
+	DEBUG_MESSAGE(std::cout<<"BuildComponent is created..."<<std::endl;)
+
 	//***********************************
 	// init Get Set
 	//getter init
@@ -39,18 +45,16 @@ BuildComponentImpl::BuildComponentImpl()
 	
 	m_unsetterMap.insert(std::pair<std::string,std::function<void()>>("StandardProfile::BuildComponent::base_Component",[this](){m_base_Component = std::shared_ptr<uml::Component>(nullptr);}));
 	 
-
-	// init properties without default
-	
-	
-	// init properties with default
-
-	// init connectors
 }
 
 
 BuildComponentImpl::~BuildComponentImpl()
 {
+	#ifdef SUB_COUNT
+		SUB_COUNT("BuildComponentImpl()");
+	#endif
+
+	DEBUG_MESSAGE(std::cout<<"BuildComponent is destroyed..."<<std::endl;)
 }
 
 BuildComponentImpl::BuildComponentImpl(const BuildComponentImpl & obj):BuildComponentImpl()
@@ -72,6 +76,21 @@ std::shared_ptr<ecore::EObject>  BuildComponentImpl::copy() const
 std::shared_ptr<uml::Class> BuildComponentImpl::getMetaClass()
 {
 	return StandardProfilePackageImpl::eInstance()->get_StandardProfile_BuildComponent();
+}
+
+void BuildComponentImpl::instantiate()
+{	
+	
+}
+
+void BuildComponentImpl::destroy()
+{	
+
+	//Erase properties
+	//deleting property base_Component
+	m_base_Component.reset();
+	
+	//Erase back reference to owner
 }
 
 //*********************************

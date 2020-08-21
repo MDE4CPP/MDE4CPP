@@ -30,6 +30,12 @@ using namespace StandardProfile;
 //*********************************
 ResponsibilityImpl::ResponsibilityImpl()
 {
+	#ifdef ADD_COUNT
+		ADD_COUNT("ResponsibilityImpl()");
+	#endif
+
+	DEBUG_MESSAGE(std::cout<<"Responsibility is created..."<<std::endl;)
+
 	//***********************************
 	// init Get Set
 	//getter init
@@ -39,18 +45,16 @@ ResponsibilityImpl::ResponsibilityImpl()
 	
 	m_unsetterMap.insert(std::pair<std::string,std::function<void()>>("StandardProfile::Responsibility::base_Usage",[this](){m_base_Usage = std::shared_ptr<uml::Usage>(nullptr);}));
 	 
-
-	// init properties without default
-	
-	
-	// init properties with default
-
-	// init connectors
 }
 
 
 ResponsibilityImpl::~ResponsibilityImpl()
 {
+	#ifdef SUB_COUNT
+		SUB_COUNT("ResponsibilityImpl()");
+	#endif
+
+	DEBUG_MESSAGE(std::cout<<"Responsibility is destroyed..."<<std::endl;)
 }
 
 ResponsibilityImpl::ResponsibilityImpl(const ResponsibilityImpl & obj):ResponsibilityImpl()
@@ -72,6 +76,21 @@ std::shared_ptr<ecore::EObject>  ResponsibilityImpl::copy() const
 std::shared_ptr<uml::Class> ResponsibilityImpl::getMetaClass()
 {
 	return StandardProfilePackageImpl::eInstance()->get_StandardProfile_Responsibility();
+}
+
+void ResponsibilityImpl::instantiate()
+{	
+	
+}
+
+void ResponsibilityImpl::destroy()
+{	
+
+	//Erase properties
+	//deleting property base_Usage
+	m_base_Usage.reset();
+	
+	//Erase back reference to owner
 }
 
 //*********************************

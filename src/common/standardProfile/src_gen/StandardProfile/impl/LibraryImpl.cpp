@@ -30,6 +30,12 @@ using namespace StandardProfile;
 //*********************************
 LibraryImpl::LibraryImpl()
 {
+	#ifdef ADD_COUNT
+		ADD_COUNT("LibraryImpl()");
+	#endif
+
+	DEBUG_MESSAGE(std::cout<<"Library is created..."<<std::endl;)
+
 	//***********************************
 	// init Get Set
 	//getter init
@@ -39,18 +45,16 @@ LibraryImpl::LibraryImpl()
 	
 	m_unsetterMap.insert(std::pair<std::string,std::function<void()>>("StandardProfile::Library::base_Artifact",[this](){m_base_Artifact = std::shared_ptr<uml::Artifact>(nullptr);}));
 	 
-
-	// init properties without default
-	
-	
-	// init properties with default
-
-	// init connectors
 }
 
 
 LibraryImpl::~LibraryImpl()
 {
+	#ifdef SUB_COUNT
+		SUB_COUNT("LibraryImpl()");
+	#endif
+
+	DEBUG_MESSAGE(std::cout<<"Library is destroyed..."<<std::endl;)
 }
 
 LibraryImpl::LibraryImpl(const LibraryImpl & obj):LibraryImpl()
@@ -72,6 +76,21 @@ std::shared_ptr<ecore::EObject>  LibraryImpl::copy() const
 std::shared_ptr<uml::Class> LibraryImpl::getMetaClass()
 {
 	return StandardProfilePackageImpl::eInstance()->get_StandardProfile_Library();
+}
+
+void LibraryImpl::instantiate()
+{	
+	
+}
+
+void LibraryImpl::destroy()
+{	
+
+	//Erase properties
+	//deleting property base_Artifact
+	m_base_Artifact.reset();
+	
+	//Erase back reference to owner
 }
 
 //*********************************

@@ -31,6 +31,12 @@ using namespace StandardProfile;
 //*********************************
 CreateImpl::CreateImpl()
 {
+	#ifdef ADD_COUNT
+		ADD_COUNT("CreateImpl()");
+	#endif
+
+	DEBUG_MESSAGE(std::cout<<"Create is created..."<<std::endl;)
+
 	//***********************************
 	// init Get Set
 	//getter init
@@ -43,19 +49,16 @@ CreateImpl::CreateImpl()
 	m_unsetterMap.insert(std::pair<std::string,std::function<void()>>("StandardProfile::Create::base_BehavioralFeature",[this](){m_base_BehavioralFeature = std::shared_ptr<uml::BehavioralFeature>(nullptr);}));
 	m_unsetterMap.insert(std::pair<std::string,std::function<void()>>("StandardProfile::Create::base_Usage",[this](){m_base_Usage = std::shared_ptr<uml::Usage>(nullptr);}));
 	 
-
-	// init properties without default
-	
-	
-	
-	// init properties with default
-
-	// init connectors
 }
 
 
 CreateImpl::~CreateImpl()
 {
+	#ifdef SUB_COUNT
+		SUB_COUNT("CreateImpl()");
+	#endif
+
+	DEBUG_MESSAGE(std::cout<<"Create is destroyed..."<<std::endl;)
 }
 
 CreateImpl::CreateImpl(const CreateImpl & obj):CreateImpl()
@@ -77,6 +80,25 @@ std::shared_ptr<ecore::EObject>  CreateImpl::copy() const
 std::shared_ptr<uml::Class> CreateImpl::getMetaClass()
 {
 	return StandardProfilePackageImpl::eInstance()->get_StandardProfile_Create();
+}
+
+void CreateImpl::instantiate()
+{	
+	
+	
+}
+
+void CreateImpl::destroy()
+{	
+
+	//Erase properties
+	//deleting property base_BehavioralFeature
+	m_base_BehavioralFeature.reset();
+	
+	//deleting property base_Usage
+	m_base_Usage.reset();
+	
+	//Erase back reference to owner
 }
 
 //*********************************

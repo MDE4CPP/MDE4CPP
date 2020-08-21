@@ -30,6 +30,12 @@ using namespace StandardProfile;
 //*********************************
 MetaclassImpl::MetaclassImpl()
 {
+	#ifdef ADD_COUNT
+		ADD_COUNT("MetaclassImpl()");
+	#endif
+
+	DEBUG_MESSAGE(std::cout<<"Metaclass is created..."<<std::endl;)
+
 	//***********************************
 	// init Get Set
 	//getter init
@@ -39,18 +45,16 @@ MetaclassImpl::MetaclassImpl()
 	
 	m_unsetterMap.insert(std::pair<std::string,std::function<void()>>("StandardProfile::Metaclass::base_Class",[this](){m_base_Class = std::shared_ptr<uml::Class>(nullptr);}));
 	 
-
-	// init properties without default
-	
-	
-	// init properties with default
-
-	// init connectors
 }
 
 
 MetaclassImpl::~MetaclassImpl()
 {
+	#ifdef SUB_COUNT
+		SUB_COUNT("MetaclassImpl()");
+	#endif
+
+	DEBUG_MESSAGE(std::cout<<"Metaclass is destroyed..."<<std::endl;)
 }
 
 MetaclassImpl::MetaclassImpl(const MetaclassImpl & obj):MetaclassImpl()
@@ -72,6 +76,21 @@ std::shared_ptr<ecore::EObject>  MetaclassImpl::copy() const
 std::shared_ptr<uml::Class> MetaclassImpl::getMetaClass()
 {
 	return StandardProfilePackageImpl::eInstance()->get_StandardProfile_Metaclass();
+}
+
+void MetaclassImpl::instantiate()
+{	
+	
+}
+
+void MetaclassImpl::destroy()
+{	
+
+	//Erase properties
+	//deleting property base_Class
+	m_base_Class.reset();
+	
+	//Erase back reference to owner
 }
 
 //*********************************

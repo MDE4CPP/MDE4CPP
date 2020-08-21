@@ -30,6 +30,12 @@ using namespace StandardProfile;
 //*********************************
 InstantiateImpl::InstantiateImpl()
 {
+	#ifdef ADD_COUNT
+		ADD_COUNT("InstantiateImpl()");
+	#endif
+
+	DEBUG_MESSAGE(std::cout<<"Instantiate is created..."<<std::endl;)
+
 	//***********************************
 	// init Get Set
 	//getter init
@@ -39,18 +45,16 @@ InstantiateImpl::InstantiateImpl()
 	
 	m_unsetterMap.insert(std::pair<std::string,std::function<void()>>("StandardProfile::Instantiate::base_Usage",[this](){m_base_Usage = std::shared_ptr<uml::Usage>(nullptr);}));
 	 
-
-	// init properties without default
-	
-	
-	// init properties with default
-
-	// init connectors
 }
 
 
 InstantiateImpl::~InstantiateImpl()
 {
+	#ifdef SUB_COUNT
+		SUB_COUNT("InstantiateImpl()");
+	#endif
+
+	DEBUG_MESSAGE(std::cout<<"Instantiate is destroyed..."<<std::endl;)
 }
 
 InstantiateImpl::InstantiateImpl(const InstantiateImpl & obj):InstantiateImpl()
@@ -72,6 +76,21 @@ std::shared_ptr<ecore::EObject>  InstantiateImpl::copy() const
 std::shared_ptr<uml::Class> InstantiateImpl::getMetaClass()
 {
 	return StandardProfilePackageImpl::eInstance()->get_StandardProfile_Instantiate();
+}
+
+void InstantiateImpl::instantiate()
+{	
+	
+}
+
+void InstantiateImpl::destroy()
+{	
+
+	//Erase properties
+	//deleting property base_Usage
+	m_base_Usage.reset();
+	
+	//Erase back reference to owner
 }
 
 //*********************************

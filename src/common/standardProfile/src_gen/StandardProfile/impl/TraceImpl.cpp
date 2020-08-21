@@ -30,6 +30,12 @@ using namespace StandardProfile;
 //*********************************
 TraceImpl::TraceImpl()
 {
+	#ifdef ADD_COUNT
+		ADD_COUNT("TraceImpl()");
+	#endif
+
+	DEBUG_MESSAGE(std::cout<<"Trace is created..."<<std::endl;)
+
 	//***********************************
 	// init Get Set
 	//getter init
@@ -39,18 +45,16 @@ TraceImpl::TraceImpl()
 	
 	m_unsetterMap.insert(std::pair<std::string,std::function<void()>>("StandardProfile::Trace::base_Abstraction",[this](){m_base_Abstraction = std::shared_ptr<uml::Abstraction>(nullptr);}));
 	 
-
-	// init properties without default
-	
-	
-	// init properties with default
-
-	// init connectors
 }
 
 
 TraceImpl::~TraceImpl()
 {
+	#ifdef SUB_COUNT
+		SUB_COUNT("TraceImpl()");
+	#endif
+
+	DEBUG_MESSAGE(std::cout<<"Trace is destroyed..."<<std::endl;)
 }
 
 TraceImpl::TraceImpl(const TraceImpl & obj):TraceImpl()
@@ -72,6 +76,21 @@ std::shared_ptr<ecore::EObject>  TraceImpl::copy() const
 std::shared_ptr<uml::Class> TraceImpl::getMetaClass()
 {
 	return StandardProfilePackageImpl::eInstance()->get_StandardProfile_Trace();
+}
+
+void TraceImpl::instantiate()
+{	
+	
+}
+
+void TraceImpl::destroy()
+{	
+
+	//Erase properties
+	//deleting property base_Abstraction
+	m_base_Abstraction.reset();
+	
+	//Erase back reference to owner
 }
 
 //*********************************

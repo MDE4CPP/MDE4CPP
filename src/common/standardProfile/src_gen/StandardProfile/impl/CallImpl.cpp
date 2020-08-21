@@ -30,6 +30,12 @@ using namespace StandardProfile;
 //*********************************
 CallImpl::CallImpl()
 {
+	#ifdef ADD_COUNT
+		ADD_COUNT("CallImpl()");
+	#endif
+
+	DEBUG_MESSAGE(std::cout<<"Call is created..."<<std::endl;)
+
 	//***********************************
 	// init Get Set
 	//getter init
@@ -39,18 +45,16 @@ CallImpl::CallImpl()
 	
 	m_unsetterMap.insert(std::pair<std::string,std::function<void()>>("StandardProfile::Call::base_Usage",[this](){m_base_Usage = std::shared_ptr<uml::Usage>(nullptr);}));
 	 
-
-	// init properties without default
-	
-	
-	// init properties with default
-
-	// init connectors
 }
 
 
 CallImpl::~CallImpl()
 {
+	#ifdef SUB_COUNT
+		SUB_COUNT("CallImpl()");
+	#endif
+
+	DEBUG_MESSAGE(std::cout<<"Call is destroyed..."<<std::endl;)
 }
 
 CallImpl::CallImpl(const CallImpl & obj):CallImpl()
@@ -72,6 +76,21 @@ std::shared_ptr<ecore::EObject>  CallImpl::copy() const
 std::shared_ptr<uml::Class> CallImpl::getMetaClass()
 {
 	return StandardProfilePackageImpl::eInstance()->get_StandardProfile_Call();
+}
+
+void CallImpl::instantiate()
+{	
+	
+}
+
+void CallImpl::destroy()
+{	
+
+	//Erase properties
+	//deleting property base_Usage
+	m_base_Usage.reset();
+	
+	//Erase back reference to owner
 }
 
 //*********************************

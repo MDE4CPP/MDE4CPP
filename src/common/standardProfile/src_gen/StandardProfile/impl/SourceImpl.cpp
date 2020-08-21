@@ -30,6 +30,12 @@ using namespace StandardProfile;
 //*********************************
 SourceImpl::SourceImpl()
 {
+	#ifdef ADD_COUNT
+		ADD_COUNT("SourceImpl()");
+	#endif
+
+	DEBUG_MESSAGE(std::cout<<"Source is created..."<<std::endl;)
+
 	//***********************************
 	// init Get Set
 	//getter init
@@ -39,18 +45,16 @@ SourceImpl::SourceImpl()
 	
 	m_unsetterMap.insert(std::pair<std::string,std::function<void()>>("StandardProfile::Source::base_Artifact",[this](){m_base_Artifact = std::shared_ptr<uml::Artifact>(nullptr);}));
 	 
-
-	// init properties without default
-	
-	
-	// init properties with default
-
-	// init connectors
 }
 
 
 SourceImpl::~SourceImpl()
 {
+	#ifdef SUB_COUNT
+		SUB_COUNT("SourceImpl()");
+	#endif
+
+	DEBUG_MESSAGE(std::cout<<"Source is destroyed..."<<std::endl;)
 }
 
 SourceImpl::SourceImpl(const SourceImpl & obj):SourceImpl()
@@ -72,6 +76,21 @@ std::shared_ptr<ecore::EObject>  SourceImpl::copy() const
 std::shared_ptr<uml::Class> SourceImpl::getMetaClass()
 {
 	return StandardProfilePackageImpl::eInstance()->get_StandardProfile_Source();
+}
+
+void SourceImpl::instantiate()
+{	
+	
+}
+
+void SourceImpl::destroy()
+{	
+
+	//Erase properties
+	//deleting property base_Artifact
+	m_base_Artifact.reset();
+	
+	//Erase back reference to owner
 }
 
 //*********************************
