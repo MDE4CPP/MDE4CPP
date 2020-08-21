@@ -231,7 +231,8 @@ void [className/]::instantiate()
 void [className/]::destroy()
 {	[comment Destroy corresponding links if existing/]
 	[for (aProperty : Property | aClass.ownedAttribute->sortedBy(myQualifiedName()))]
-	[if (not aProperty.association.oclIsUndefined() and not aProperty.type.oclIsUndefined() and not (aProperty.type.isPrimitive() or aProperty.type.oclIsKindOf(Enumeration)))]
+	[comment  property must belong to an association AND be owned by a class (i.e. not owned by an association) AND be typed AND neither be of primitive nor enumeration type AND not be a back reference/]
+	[if (not aProperty.association.oclIsUndefined() and aProperty.owner.oclIsTypeOf(Class) and (not aProperty.type.oclIsUndefined()) and (not (aProperty.type.isPrimitive() or aProperty.type.oclIsKindOf(Enumeration))) and (not aProperty.isBackReference()))]
 	[for (anotherProperty : Property | aProperty.association.memberEnd->reject(p : Property | p = aProperty))]
 	//Destroying links for opposite property [aProperty.name/]
 	[if (aProperty.upper <> 1)]
