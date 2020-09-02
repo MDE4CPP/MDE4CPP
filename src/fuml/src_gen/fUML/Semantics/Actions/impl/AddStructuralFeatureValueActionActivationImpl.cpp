@@ -25,11 +25,16 @@
 #include "ecore/EClass.hpp"
 
 //Includes from codegen annotation
+#include "fUML/Semantics/Loci/Locus.hpp"
+#include "fUML/Semantics/Loci/ChoiceStrategy.hpp"
+#include "fUML/Semantics/Loci/ExecutionFactory.hpp"
 #include "fUML/Semantics/SimpleClassifiers/StructuredValue.hpp"
+#include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
 #include "fUML/Semantics/SimpleClassifiers/UnlimitedNaturalValue.hpp"
-#include "fUML/Semantics/Values/Value.hpp"
+#include "fUML/Semantics/StructuredClassifiers/Link.hpp"
+#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
 #include "uml/AddStructuralFeatureValueAction.hpp"
-#include "uml/StructuralFeature.hpp"
+#include "uml/Property.hpp"
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -57,10 +62,10 @@
 #include "fUML/Semantics/Actions/impl/ActionsFactoryImpl.hpp"
 #include "fUML/Semantics/Actions/impl/ActionsPackageImpl.hpp"
 
-#include "fUML/Semantics/SemanticsFactory.hpp"
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/FUMLFactory.hpp"
 #include "fUML/FUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsFactory.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -178,11 +183,21 @@ void AddStructuralFeatureValueActionActivationImpl::doAction()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
+		// Get the values of the object and value input pins.
+	// If the given feature is an association end, then create a link between the object and value inputs.
+	// Otherwise, if the object input is a structural value, then add a value to the values for the feature.
+	// If isReplaceAll is true, first remove all current matching links or feature values.
+	// If isReplaceAll is false and there is an insertAt pin, insert the value at the appropriate position.
+	
 	std::shared_ptr<uml::AddStructuralFeatureValueAction> action = std::dynamic_pointer_cast<uml::AddStructuralFeatureValueAction>(m_node);
 	std::shared_ptr<uml::StructuralFeature> feature = action->getStructuralFeature();
+	std::shared_ptr<uml::Association> association = this->getAssociation(feature);
 
 	std::shared_ptr<fUML::Semantics::Values::Value> value = takeTokens(action->getObject())->at(0);
 	std::shared_ptr<Bag<fUML::Semantics::Values::Value>> inputValues = takeTokens(action->getValue());
+	
+	// NOTE: Multiplicity of the value input pin is required to be 1..1.
+	std::shared_ptr<fUML::Semantics::Values::Value> inputValue = inputValues->at(0);
 
 	int insertAt = -1;
 	if (action->getInsertAt() != nullptr)
@@ -194,19 +209,101 @@ void AddStructuralFeatureValueActionActivationImpl::doAction()
 			insertAt = unlimitedValue->getValue();
 		}
 	}
-
-	// TODO handle isRemoveAll
-
-	std::shared_ptr<fUML::Semantics::SimpleClassifiers::StructuredValue> structuredValue = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::StructuredValue>(value);
-	if (structuredValue)
+	
+	if(association != nullptr) 
 	{
-		structuredValue->setFeatureValue(feature, inputValues, insertAt);
+		std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Link>> links = this->getMatchingLinks(association, feature, value);
+		
+		std::shared_ptr<uml::Property> oppositeEnd = this->getOppositeEnd(association, feature);
+		int position = 0;
+		if(oppositeEnd->getIsOrdered()) {
+			position = this->getMatchingLinks(association, oppositeEnd, inputValue)->size() + 1;
+		}
+		
+		if (action->getIsReplaceAll()){
+			for(int unsigned i = 0; i < links->size(); i++) {
+				std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link> link = links->at(i);
+				link->destroy();
+			}			
+		}
+		else if(feature->getIsUnique())
+		{
+			unsigned int i = 1;
+			bool destroyed = false;
+			while(!destroyed && i <= links->size()){
+				std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link> link = links->at(i-1);
+				std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> featureValue = link->retrieveFeatureValue(feature);
+				if(featureValue->getValues()->at(0)->equals(inputValue))
+				{
+					position = link->retrieveFeatureValue(oppositeEnd)->getPosition();
+					link->destroy();
+					destroyed = true;
+				}
+				i++;
+			}
+		}
+		
+		std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link> newLink = fUML::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createLink();
+		newLink->setType(association);
+		
+		newLink->assignFeatureValue(feature, inputValues, insertAt);
+		
+		std::shared_ptr<Bag<fUML::Semantics::Values::Value>> oppositeValues(new Bag<fUML::Semantics::Values::Value>());
+		oppositeValues->add(value);
+		newLink->assignFeatureValue(oppositeEnd, oppositeValues, position);
+		
+		newLink->getLocus()->add(newLink);
 	}
 	else
 	{
-		throw "unhandled fUML::Value instance";
+		std::shared_ptr<fUML::Semantics::SimpleClassifiers::StructuredValue> structuredValue = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::StructuredValue>(value);
+		
+		if (structuredValue)
+		{
+			if(action->getIsReplaceAll())
+			{
+				structuredValue->assignFeatureValue(feature, inputValues, 0);
+			}
+			else{
+				std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> featureValue = structuredValue->retrieveFeatureValue(feature);
+				if(featureValue->getValues()->size() > 0 && insertAt == 0)
+				{
+					// *** If there is no insertAt pin, then the structural feature must be unordered, and the insertion position is immaterial. ***
+					insertAt = (std::dynamic_pointer_cast<fUML::Semantics::Loci::ChoiceStrategy>(this->getExecutionLocus()->getFactory()->getStrategy("choice")))->choose(featureValue->getValues()->size());
+				}
+				
+				if(feature->getIsUnique())
+				{
+					// Remove any existing value that duplicates the input value
+					int j = position(inputValue, featureValue->getValues(), 1);
+					if(j > 0) 
+					{
+					featureValue->getValues()->erase(featureValue->getValues()->begin() + (j-1));
+					}
+				}
+				
+				if (insertAt <= 0)
+				{
+					// Note: insertAt = -1 indicates an unlimited value of "*"
+					featureValue->getValues()->add(inputValue);
+				}
+				else
+				{
+					featureValue->getValues()->insert((featureValue->getValues()->begin() + (insertAt - 1)), inputValue);
+				}
+				structuredValue->assignFeatureValue(feature, featureValue->getValues(), 0);
+			}
+		}
+		else
+		{
+			throw "unhandled fUML::Value instance";
+		}
 	}
-	putToken(action->getResult(), value);
+	
+	if(action->getResult() != nullptr) 
+	{
+		this->putToken(action->getResult(), value);
+	}
 	//end of body
 }
 
