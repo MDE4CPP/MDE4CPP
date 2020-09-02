@@ -554,6 +554,7 @@ void [className/]::setFeatureValue(std::shared_ptr<uml::StructuralFeature> featu
 [else]
 		Bag<fUML::Semantics::Values::Value>::iterator iter = values->begin();
 		Bag<fUML::Semantics::Values::Value>::iterator end = values->end();
+		[aClassifier.UMLValueName()/]->[aProperty.getterName()/]()->clear();
 		while (iter != end)
 		{
 			std::shared_ptr<Value> inputValue = *iter;
