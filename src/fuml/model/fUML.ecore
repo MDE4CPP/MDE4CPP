@@ -2348,7 +2348,7 @@
         </eOperations>
         <eOperations name="terminate" ordered="false" lowerBound="1">
           <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-            <details key="body" value="    this->clearTokens();&#xA;    fUML::Semantics::Activities::ActivityNodeActivationImpl::terminate();"/>
+            <details key="body" value="fUML::Semantics::Activities::ActivityNodeActivationImpl::terminate();&#xA;this->clearTokens();"/>
           </eAnnotations>
         </eOperations>
         <eOperations name="addToken" ordered="false" lowerBound="1">
