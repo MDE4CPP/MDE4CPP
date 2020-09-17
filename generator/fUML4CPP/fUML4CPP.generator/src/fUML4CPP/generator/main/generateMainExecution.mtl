@@ -140,7 +140,7 @@ int main()
 [for (anotherPackage : Package | aPackage.findPackagesForOpaqueBehaviorExecutions())]
 #include "[anotherPackage.getPackageName()/]/[anotherPackage.getPackageName().toUpperFirst().concat('Package')/].hpp" 
 [/for] 
-[for (pack : Package | aPackage.getCallOperationActions().operation.ownedParameter.type.getNearestPackage()->asSet()->sortedBy(name))]
+[for (pack : Package | aPackage.getCallOperationActions().operation.ownedParameter.type.getNearestPackage()->asSet()->addAll(aPackage.allOwnedElements()->filter(Activity).ownedParameter.type.getNearestPackage()->asSet())->sortedBy(name))]
 [if (not (pack.name='StandardProfile'))]
 #include "[pack.getPackageName()/]/[pack.name.concat('Package').toUpperFirst()/].hpp"
 [/if]
