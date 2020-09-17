@@ -109,7 +109,7 @@ std::shared_ptr<fUML::Semantics::SimpleClassifiers::EnumerationValue> [par.name/
 [/template]
 
 [template public generateOutputParameter(par : Parameter) ? ((not type.supportedTypes()) and (not type.oclIsKindOf(Enumeration)))]
-std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> [par.name/]OutValue([getFUMLStructuredClassifierFactory()/]->createReference());
+std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> [par.name/]OutValue([getPSCSStructuredClassifierFactory()/]->createCS_Reference());
 std::shared_ptr<[par.type.name.toUpperFirst()/]Object> [par.name/]OutUmlLinker(new [par.type.name.toUpperFirst()/]Object([par.name.toLowerFirst()/][if (par.upper <> 1)]Temp[/if]));
 [par.name/]OutUmlLinker->setThis[par.type.name.toUpperFirst()/]ObjectPtr([par.name/]OutUmlLinker);
 [/template]
