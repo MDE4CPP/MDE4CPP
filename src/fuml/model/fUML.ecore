@@ -132,6 +132,11 @@
           <eParameters name="type" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Classifier"/>
           <eParameters name="classifier" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Classifier"/>
         </eOperations>
+        <eOperations name="_copy" lowerBound="1" eType="#//Semantics/Values/Value">
+          <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+            <details key="body" value="// Create a new value that is equal to this value.&#xA;// By default, this operation simply creates a new value with empty properties.&#xA;// It must be overridden in each Value subclass to do the superclass copy and then appropriately set properties defined in the subclass.&#xA;&#xA;std::shared_ptr&lt;fUML::Semantics::Values::Value> newValue(new fUML::Semantics::Values::ValueImpl());&#xA;return newValue;"/>
+          </eAnnotations>
+        </eOperations>
       </eClassifiers>
     </eSubpackages>
     <eSubpackages name="SimpleClassifiers" nsURI="http:///fUML_Semantics/Semantics/SimpleClassifiers.ecore"
@@ -154,6 +159,11 @@
         <eOperations name="toString" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
           <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
             <details key="body" value="    std::string stringValue = &quot;false&quot;;&#xD;&#xA;&#xD;&#xA;    if(this->isValue())&#xD;&#xA;    {&#xD;&#xA;        stringValue = &quot;true&quot;;&#xD;&#xA;    }&#xD;&#xA;&#xD;&#xA;    return stringValue;"/>
+          </eAnnotations>
+        </eOperations>
+        <eOperations name="_copy" lowerBound="1" eType="#//Semantics/Values/Value">
+          <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+            <details key="body" value="// Create a new boolean value with the same value as this boolean value.&#xA;&#xA;std::shared_ptr&lt;fUML::Semantics::SimpleClassifiers::BooleanValue> newValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createBooleanValue();&#xA;newValue->setType(this->getType()); //Duplicated from _copy()-method of super class in order to avoid having to call _copy()-method of super class and having to cast afterwards&#xA;newValue->setValue(this->isValue());&#xA;return newValue;"/>
           </eAnnotations>
         </eOperations>
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" ordered="false"
@@ -200,6 +210,11 @@
             <details key="body" value=" return this->getFeatureValues();"/>
           </eAnnotations>
         </eOperations>
+        <eOperations name="_copy" lowerBound="1" eType="#//Semantics/Values/Value">
+          <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+            <details key="body" value="// Create a new data value with the same featureValues as this data value.&#xA;&#xA;std::shared_ptr&lt;fUML::Semantics::SimpleClassifiers::CompoundValue> newValue(new fUML::Semantics::SimpleClassifiers::CompoundValueImpl());&#xA;&#xA;std::shared_ptr&lt;Bag&lt;fUML::Semantics::SimpleClassifiers::FeatureValue>> featureValues = this->retrieveFeatureValues();&#xA;unsigned int featureValuesSize = featureValues->size();&#xA;&#xA;for(unsigned int i = 0; i &lt; featureValuesSize; i++)&#xA;{&#xA;&#x9;std::shared_ptr&lt;fUML::Semantics::SimpleClassifiers::FeatureValue> featureValue = featureValues->at(i);&#xA;&#x9;newValue->getFeatureValues()->add(featureValue);&#xA;}&#xA;&#xA;return newValue;&#xA;"/>
+          </eAnnotations>
+        </eOperations>
         <eStructuralFeatures xsi:type="ecore:EReference" name="featureValues" ordered="false"
             upperBound="-1" eType="#//Semantics/SimpleClassifiers/FeatureValue" containment="true"/>
       </eClassifiers>
@@ -215,6 +230,11 @@
         <eOperations name="getTypes" ordered="false" upperBound="-1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Classifier">
           <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
             <details key="body" value="std::shared_ptr&lt;Bag&lt;uml::Classifier> > types(new Bag&lt;uml::Classifier>());&#xD;&#xA;    types->push_back(std::dynamic_pointer_cast&lt;uml::Classifier>(this->getType()));&#xD;&#xA;    return types;"/>
+          </eAnnotations>
+        </eOperations>
+        <eOperations name="_copy" lowerBound="1" eType="#//Semantics/Values/Value">
+          <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+            <details key="body" value="// Create a new data value with the same type and feature values as this data value.&#xA;&#xA;std::shared_ptr&lt;fUML::Semantics::SimpleClassifiers::DataValue> newValue = std::dynamic_pointer_cast&lt;fUML::Semantics::SimpleClassifiers::DataValue>(fUML::Semantics::SimpleClassifiers::CompoundValueImpl::_copy());&#xA;newValue->setType(this->getType());&#xA;return newValue;"/>
           </eAnnotations>
         </eOperations>
         <eStructuralFeatures xsi:type="ecore:EReference" name="type" ordered="false"
@@ -250,6 +270,11 @@
             <details key="body" value="std::shared_ptr&lt;Bag&lt;uml::Classifier> > types(new Bag&lt;uml::Classifier>());&#xD;&#xA;    types->push_back(std::dynamic_pointer_cast&lt;uml::Classifier>(this->getType()));&#xD;&#xA;    return types;"/>
           </eAnnotations>
         </eOperations>
+        <eOperations name="_copy" lowerBound="1" eType="#//Semantics/Values/Value">
+          <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+            <details key="body" value="// Create a new enumeration value with the same literal as this enumeration value.&#xA;&#xA;std::shared_ptr&lt;fUML::Semantics::SimpleClassifiers::EnumerationValue> newValue(new fUML::Semantics::SimpleClassifiers::EnumerationValueImpl());&#xA;newValue->setType(this->getType());&#xA;newValue->setLiteral(this->getLiteral());&#xA;return newValue;"/>
+          </eAnnotations>
+        </eOperations>
         <eStructuralFeatures xsi:type="ecore:EReference" name="literal" ordered="false"
             lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//EnumerationLiteral"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="type" ordered="false"
@@ -264,6 +289,11 @@
             <details key="body" value="&#x9;bool equal = true;&#xA;&#xA;    if(this->getValues()->size() != other->getValues()->size())&#xA;    {&#xA;        equal = false;&#xA;&#xA;    }&#xA;    else&#xA;    {&#xA;    &#x9;std::shared_ptr&lt;uml::StructuralFeature> feature = this->getFeature();&#xA;        if(feature->getIsOrdered())&#xA;        {&#xA;            unsigned int i = 0;&#xA;            while(equal &amp;&amp; (i &lt; this->getValues()->size()))&#xA;            {&#xA;                equal = this->getValues()->at(i)->equals(other->getValues()->at(i));&#xA;                i = i + 1;&#xA;            }&#xA;&#xA;        }&#xA;        else&#xA;        {&#xA;        &#x9;std::shared_ptr&lt;fUML::Semantics::SimpleClassifiers::FeatureValue> otherFeatureValues(fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createFeatureValue());&#xA;        &#x9;std::shared_ptr&lt;Bag&lt;fUML::Semantics::Values::Value> > values = other->getValues();&#xA;            for(unsigned int i = 0; i &lt; values->size(); i++)&#xA;            {&#xA;            &#x9;std::shared_ptr&lt;fUML::Semantics::Values::Value> value = values->at(i);&#xA;                otherFeatureValues->getValues()->push_back(value);&#xA;            }&#xA;&#xA;            unsigned int i = 0;&#xA;            while(equal &amp;&amp; (i &lt; this->getValues()->size()))&#xA;            {&#xA;                bool matched = false;&#xA;                unsigned int j = 0;&#xA;                while(!matched &amp;&amp; (j &lt; otherFeatureValues->getValues()->size()))&#xA;                {&#xA;                    if(this->getValues()->at(i)->equals(otherFeatureValues->getValues()->at(j)))&#xA;                    {&#xA;                        matched = true;&#xA;                        otherFeatureValues->getValues()->erase(otherFeatureValues->getValues()->begin() + j);&#xA;                    }&#xA;                    j = j + 1;&#xA;                }&#xA;&#xA;                equal = matched;&#xA;                i = i + 1;&#xA;            }&#xA;        }&#xA;    }&#xA;&#xA;    return equal;"/>
           </eAnnotations>
           <eParameters name="other" ordered="false" lowerBound="1" eType="#//Semantics/SimpleClassifiers/FeatureValue"/>
+        </eOperations>
+        <eOperations name="_copy" lowerBound="1" eType="#//Semantics/SimpleClassifiers/FeatureValue">
+          <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+            <details key="body" value="// Create a copy of this feature value.&#xA;&#xA;std::shared_ptr&lt;fUML::Semantics::SimpleClassifiers::FeatureValue> newValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createFeatureValue();&#xA;newValue->setFeature(this->getFeature());&#xA;newValue->setPosition(this->getPosition());&#xA;&#xA;std::shared_ptr&lt;Bag&lt;fUML::Semantics::Values::Value>> values = this->getValues();&#xA;unsigned int valuesSize = values->size();&#xA;&#xA;for(unsigned int i = 0; i &lt; valuesSize; i++)&#xA;{&#xA;&#x9;std::shared_ptr&lt;fUML::Semantics::Values::Value> value = values->at(i);&#xA;&#x9;newValue->getValues()->add(value->_copy());&#xA;}&#xA;&#xA;return newValue;"/>
+          </eAnnotations>
         </eOperations>
         <eStructuralFeatures xsi:type="ecore:EReference" name="values" ordered="false"
             upperBound="-1" eType="#//Semantics/Values/Value" containment="true"/>
@@ -292,6 +322,11 @@
             <details key="body" value="    char buf [11];&#xD;&#xA;    std::sprintf(buf, &quot;%d&quot;, this->getValue());&#xD;&#xA;    return std::string(buf);"/>
           </eAnnotations>
         </eOperations>
+        <eOperations name="_copy" lowerBound="1" eType="#//Semantics/Values/Value">
+          <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+            <details key="body" value="// Create a new integer value with the same value as this integer value.&#xA;&#xA;std::shared_ptr&lt;fUML::Semantics::SimpleClassifiers::IntegerValue> newValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createIntegerValue();&#xA;newValue->setType(this->getType()); //Duplicated from _copy()-method of super class in order to avoid having to call _copy()-method of super class and having to cast afterwards&#xA;newValue->setValue(this->getValue());&#xA;return newValue;"/>
+          </eAnnotations>
+        </eOperations>
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" ordered="false"
             lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
       </eClassifiers>
@@ -303,6 +338,11 @@
         <eOperations name="getTypes" ordered="false" upperBound="-1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Classifier">
           <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
             <details key="body" value="std::shared_ptr&lt;Bag&lt;uml::Classifier> > types(new Bag&lt;uml::Classifier>());&#xD;&#xA;&#x9;std::shared_ptr&lt;uml::PrimitiveType> type = this->getType();&#xD;&#xA;&#x9;if (type != nullptr)&#xD;&#xA;&#x9;{&#xD;&#xA;&#x9;&#x9;types->push_back(std::dynamic_pointer_cast&lt;uml::Classifier>(type));&#xD;&#xA;&#x9;}&#xD;&#xA;    return types;"/>
+          </eAnnotations>
+        </eOperations>
+        <eOperations name="_copy" lowerBound="1" eType="#//Semantics/Values/Value">
+          <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+            <details key="body" value="// Create a new value that is equal to this primitive value.&#xA;&#xA;std::shared_ptr&lt;fUML::Semantics::SimpleClassifiers::PrimitiveValue> newValue(new fUML::Semantics::SimpleClassifiers::PrimitiveValueImpl());&#xA;newValue->setType(this->getType());&#xA;return newValue;"/>
           </eAnnotations>
         </eOperations>
         <eStructuralFeatures xsi:type="ecore:EReference" name="type" ordered="false"
@@ -328,10 +368,20 @@
             <details key="body" value="    std::ostringstream o;&#xD;&#xA;     if (!(o &lt;&lt; this->getValue()))&#xD;&#xA;       return &quot;&quot;;&#xD;&#xA;     return o.str();"/>
           </eAnnotations>
         </eOperations>
+        <eOperations name="_copy" lowerBound="1" eType="#//Semantics/Values/Value">
+          <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+            <details key="body" value="// Create a new real value with the same value as this real value.&#xA;&#xA;std::shared_ptr&lt;fUML::Semantics::SimpleClassifiers::RealValue> newValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createRealValue();&#xA;newValue->setType(this->getType()); //Duplicated from _copy()-method of super class in order to avoid having to call _copy()-method of super class and having to cast afterwards&#xA;newValue->setValue(this->getValue());&#xA;return newValue;"/>
+          </eAnnotations>
+        </eOperations>
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" ordered="false"
             lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="SignalInstance" eSuperTypes="#//Semantics/SimpleClassifiers/CompoundValue">
+        <eOperations name="_copy" lowerBound="1" eType="#//Semantics/Values/Value">
+          <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+            <details key="body" value="// Create a new signal instance with the same type and feature values as this signal instance.&#xA;&#xA;std::shared_ptr&lt;fUML::Semantics::SimpleClassifiers::SignalInstance> newValue = std::dynamic_pointer_cast&lt;fUML::Semantics::SimpleClassifiers::SignalInstance>(fUML::Semantics::SimpleClassifiers::CompoundValueImpl::_copy());&#xA;newValue->setType(this->getType());&#xA;return newValue;"/>
+          </eAnnotations>
+        </eOperations>
         <eStructuralFeatures xsi:type="ecore:EReference" name="type" ordered="false"
             lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Signal"/>
       </eClassifiers>
@@ -353,6 +403,11 @@
         <eOperations name="toString" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
           <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
             <details key="body" value="return this->getValue();"/>
+          </eAnnotations>
+        </eOperations>
+        <eOperations name="_copy" lowerBound="1" eType="#//Semantics/Values/Value">
+          <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+            <details key="body" value="// Create a new string value with the same value as this string value.&#xA;&#xA;std::shared_ptr&lt;fUML::Semantics::SimpleClassifiers::StringValue> newValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createStringValue();&#xA;newValue->setType(this->getType()); //Duplicated from _copy()-method of super class in order to avoid having to call _copy()-method of super class and having to cast afterwards&#xA;newValue->setValue(this->getValue());&#xA;return newValue;"/>
           </eAnnotations>
         </eOperations>
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" ordered="false"
@@ -428,6 +483,11 @@
             <details key="body" value="    std::string stringValue = &quot;*&quot;;&#xD;&#xA;&#xD;&#xA;    if(this->getValue() >= 0)&#xD;&#xA;    {&#xD;&#xA;        auto integerValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createIntegerValue();&#xD;&#xA;        integerValue->setValue(this->getValue());&#xD;&#xA;        stringValue = integerValue->toString();&#xD;&#xA;    }&#xD;&#xA;&#xD;&#xA;    return stringValue;"/>
           </eAnnotations>
         </eOperations>
+        <eOperations name="_copy" lowerBound="1" eType="#//Semantics/Values/Value">
+          <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+            <details key="body" value="// Create a new unlimited natural value with the same value as this unlimited natural value.&#xA;&#xA;std::shared_ptr&lt;fUML::Semantics::SimpleClassifiers::UnlimitedNaturalValue> newValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createUnlimitedNaturalValue();&#xA;newValue->setType(this->getType()); //Duplicated from _copy()-method of super class in order to avoid having to call _copy()-method of super class and having to cast afterwards&#xA;newValue->setValue(this->getValue());&#xA;return newValue;"/>
+          </eAnnotations>
+        </eOperations>
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" ordered="false"
             lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
       </eClassifiers>
@@ -468,6 +528,11 @@
             <details key="body" value="if(this->getLocus() != nullptr)&#xD;&#xA;    {&#xD;&#xA;        this->getLocus()->remove(getThisExtensionalValuePtr());&#xD;&#xA;    }"/>
           </eAnnotations>
         </eOperations>
+        <eOperations name="_copy" lowerBound="1" eType="#//Semantics/Values/Value">
+          <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+            <details key="body" value="// Create a new extensional value with the same feature values at the same locus as this one.&#xA;&#xA;std::shared_ptr&lt;fUML::Semantics::StructuredClassifiers::ExtensionalValue> newValue = std::dynamic_pointer_cast&lt;fUML::Semantics::StructuredClassifiers::ExtensionalValue>(fUML::Semantics::SimpleClassifiers::CompoundValueImpl::_copy());&#xA;&#xA;if(this->getLocus() != nullptr)&#xA;{&#xA;&#x9;newValue->setLocus(this->getLocus());&#xA;}&#xA;&#xA;return newValue;"/>
+          </eAnnotations>
+        </eOperations>
         <eStructuralFeatures xsi:type="ecore:EReference" name="locus" ordered="false"
             eType="#//Semantics/Loci/Locus"/>
       </eClassifiers>
@@ -495,6 +560,11 @@
         <eOperations name="getOtherFeatureValues" upperBound="-1" eType="#//Semantics/SimpleClassifiers/FeatureValue">
           <eParameters name="extent" upperBound="-1" eType="#//Semantics/StructuredClassifiers/ExtensionalValue"/>
           <eParameters name="end" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Property"/>
+        </eOperations>
+        <eOperations name="_copy" lowerBound="1" eType="#//Semantics/Values/Value">
+          <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+            <details key="body" value="// Create a new link with the same type, locus and feature values as this link.&#xA;&#xA;std::shared_ptr&lt;fUML::Semantics::StructuredClassifiers::Link> newValue = std::dynamic_pointer_cast&lt;fUML::Semantics::StructuredClassifiers::Link>(fUML::Semantics::StructuredClassifiers::ExtensionalValueImpl::_copy());&#xA;&#xA;newValue->setType(this->getType());&#xA;&#xA;return newValue;"/>
+          </eAnnotations>
         </eOperations>
         <eStructuralFeatures xsi:type="ecore:EReference" name="type" ordered="false"
             eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Association"/>
@@ -550,6 +620,11 @@
           </eAnnotations>
           <eParameters name="eventOccurrence" lowerBound="1" eType="#//Semantics/CommonBehavior/EventOccurrence"/>
         </eOperations>
+        <eOperations name="_copy" lowerBound="1" eType="#//Semantics/Values/Value">
+          <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+            <details key="body" value="// Create a new object that is a copy of this object at the same locus as this object.&#xA;// However, the new object will NOT have any object activation (i.e, its classifier behaviors will not be started).&#xA;&#xA;std::shared_ptr&lt;fUML::Semantics::StructuredClassifiers::Object> newObject = std::dynamic_pointer_cast&lt;fUML::Semantics::StructuredClassifiers::Object>(fUML::Semantics::StructuredClassifiers::ExtensionalValueImpl::_copy());&#xA;&#xA;std::shared_ptr&lt;Bag&lt;uml::Classifier>> types = this->getTypes();&#xA;unsigned int typesSize = types->size();&#xA;&#xA;for(unsigned int i = 0; i &lt; typesSize; i++)&#xA;{&#xA;&#x9;std::shared_ptr&lt;uml::Classifier> type = types->at(i);&#xA;&#x9;newObject->getTypes()->add(type);&#xA;}&#xA;&#xA;return newObject;"/>
+          </eAnnotations>
+        </eOperations>
         <eStructuralFeatures xsi:type="ecore:EReference" name="types" ordered="false"
             upperBound="-1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Classifier">
           <eAnnotations>
@@ -562,7 +637,7 @@
       <eClassifiers xsi:type="ecore:EClass" name="RedefinitionBasedDispatchStrategy"
           eSuperTypes="#//Semantics/StructuredClassifiers/DispatchStrategy">
         <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-          <details key="includes" value="#include &quot;abstractDataTypes/Subset.hpp&quot;&#xD;&#xA;#include &quot;uml/NamedElement.hpp&quot;&#xD;&#xA;#include &quot;uml/Class.hpp&quot;&#xD;&#xA;#include &quot;uml/Operation.hpp&quot;"/>
+          <details key="includes" value="#include &quot;abstractDataTypes/Subset.hpp&quot;&#xA;#include &quot;uml/UmlPackage.hpp&quot;&#xA;#include &quot;uml/NamedElement.hpp&quot;&#xA;#include &quot;uml/Class.hpp&quot;&#xA;#include &quot;uml/Operation.hpp&quot;"/>
         </eAnnotations>
         <eOperations name="operationsMatch" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
           <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
@@ -573,7 +648,7 @@
         </eOperations>
         <eOperations name="retrieveMethod" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Behavior">
           <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-            <details key="body" value="&#x9;std::shared_ptr&lt;uml::Behavior> method = nullptr;&#xD;&#xA;&#x9;unsigned int i = 0;&#xD;&#xA;&#x9;while(method == nullptr &amp;&amp; (i &lt; object->getTypes()->size()))&#xD;&#xA;&#x9;{&#xD;&#xA;&#x9;&#x9;std::shared_ptr&lt;uml::Class> type = std::dynamic_pointer_cast&lt;uml::Class>(object->getTypes()->at(i));&#xD;&#xA;&#x9;&#x9;std::shared_ptr&lt;Bag&lt;uml::NamedElement> > members = type->getMember();&#xD;&#xA;&#x9;&#x9;unsigned int j = 0;&#xD;&#xA;&#x9;&#x9;while(method == nullptr &amp;&amp; (j &lt; members->size()))&#xD;&#xA;&#x9;&#x9;{&#xD;&#xA;&#x9;&#x9;&#x9;std::shared_ptr&lt;uml::NamedElement> member = members->at(j);&#xD;&#xA;&#x9;&#x9;&#x9;std::shared_ptr&lt;uml::Operation> memberOperation = std::dynamic_pointer_cast&lt;uml::Operation>(member);&#xD;&#xA;&#x9;&#x9;&#x9;if(memberOperation != nullptr)&#xD;&#xA;&#x9;&#x9;&#x9;{&#x9;&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;if(this->operationsMatch(memberOperation, operation))&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;{&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;method = memberOperation->getMethod()->at(0);&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;}&#xD;&#xA;&#x9;&#x9;&#x9;}&#xD;&#xA;&#x9;&#x9;&#x9;j = j + 1;&#xD;&#xA;&#x9;&#x9;}&#xD;&#xA;&#x9;&#x9;i = i + 1;&#xD;&#xA;&#x9;}&#xD;&#xA;&#xD;&#xA;&#x9;return method;"/>
+            <details key="body" value="&#x9;std::shared_ptr&lt;uml::Behavior> method = nullptr;&#xA;&#x9;unsigned int i = 0;&#xA;&#x9;while(method == nullptr &amp;&amp; (i &lt; object->getTypes()->size()))&#xA;&#x9;{&#xA;&#x9;&#x9;std::shared_ptr&lt;uml::Classifier> type = object->getTypes()->at(i);&#xA;&#x9;&#x9;if(type->eClass()->getMetaElementID() == uml::UmlPackage::CLASS_CLASS)&#xA;&#x9;&#x9;{&#xA;&#x9;&#x9;std::shared_ptr&lt;Bag&lt;uml::Operation> > memberOperations = type->getAllOperations();&#xA;&#x9;&#x9;unsigned int j = 0;&#xA;&#x9;&#x9;while(method == nullptr &amp;&amp; (j &lt; memberOperations->size()))&#xA;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;std::shared_ptr&lt;uml::Operation> memberOperation = memberOperations->at(j);&#xA;&#x9;&#x9;&#x9;if(memberOperation != nullptr)&#xA;&#x9;&#x9;&#x9;{&#x9;&#xA;&#x9;&#x9;&#x9;&#x9;if(this->operationsMatch(memberOperation, operation))&#xA;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;method = memberOperation->getMethod()->at(0);&#xA;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;j = j + 1;&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;i = i + 1;&#xA;&#x9;}&#xA;&#xA;&#x9;return method;"/>
           </eAnnotations>
           <eParameters name="object" ordered="false" lowerBound="1" eType="#//Semantics/StructuredClassifiers/Object"/>
           <eParameters name="operation" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Operation"/>
@@ -676,6 +751,11 @@
           <eParameters name="feature" ordered="false" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//StructuralFeature"/>
           <eParameters name="value" ordered="false" lowerBound="1" eType="#//Semantics/Values/Value"/>
         </eOperations>
+        <eOperations name="_copy" lowerBound="1" eType="#//Semantics/Values/Value">
+          <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+            <details key="body" value="// // Create a new reference with the same referent as this reference.&#xA;&#xA;std::shared_ptr&lt;fUML::Semantics::StructuredClassifiers::Reference> newValue = fUML::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createReference();&#xA;&#xA;newValue->setReferent(this->getReferent());&#xA;&#xA;return newValue;"/>
+          </eAnnotations>
+        </eOperations>
         <eStructuralFeatures xsi:type="ecore:EReference" name="referent" ordered="false"
             lowerBound="1" eType="#//Semantics/StructuredClassifiers/Object"/>
       </eClassifiers>
@@ -717,10 +797,9 @@
         <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
           <details key="includes" value="#include &quot;fUML/Semantics/CommonBehavior/CallEventOccurrence.hpp&quot;&#xA;#include &quot;fUML/Semantics/CommonBehavior/CallEventBehavior.hpp&quot;&#xA;#include &quot;fUML/FUMLFactory.hpp&quot;&#xA;#include &quot;fUML/Semantics/StructuredClassifiers/Reference.hpp&quot;&#xA;#include &quot;uml/ParameterDirectionKind.hpp&quot;&#xA;#include &quot;uml/Parameter.hpp&quot;&#xA;#include &quot;uml/Behavior.hpp&quot;"/>
         </eAnnotations>
-        <eOperations name="copy" lowerBound="1" eType="#//Semantics/Values/Value">
+        <eOperations name="_copy" lowerBound="1" eType="#//Semantics/Values/Value">
           <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-            <details key="body" value="//Create a new call event execution that is a copy of this execution, with the&#xA;// caller initially not suspended.&#xA;&#xA;//CallEventExecution copy = (CallEventExecution)super.copy();&#xA;//copy.callerSuspended = false;&#xA;//return copy;"/>
-            <details key="doNotGenerate" value="true"/>
+            <details key="body" value="// Create a new call event execution that is a copy of this execution, with the&#xA;// caller initially not suspended.&#xA;&#xA;std::shared_ptr&lt;fUML::Semantics::CommonBehavior::CallEventExecution> newValue = std::dynamic_pointer_cast&lt;fUML::Semantics::CommonBehavior::CallEventExecution>(fUML::Semantics::CommonBehavior::ExecutionImpl::_copy());&#xA;newValue->setCallerSuspended(false);&#xA;return newValue;"/>
           </eAnnotations>
         </eOperations>
         <eOperations name="createEventOccurrence" lowerBound="1" eType="#//Semantics/CommonBehavior/EventOccurrence">
@@ -931,6 +1010,11 @@
         <eOperations name="new_" ordered="false" lowerBound="1" eType="#//Semantics/Values/Value">
           <eAnnotations source="http://sse.tu-ilmenau.de/codegen"/>
         </eOperations>
+        <eOperations name="_copy" lowerBound="1" eType="#//Semantics/Values/Value">
+          <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+            <details key="body" value="// Create a new execution that has the same behavior and parameterValues as this execution.&#xA;&#xA;std::shared_ptr&lt;fUML::Semantics::CommonBehavior::Execution> newValue = std::dynamic_pointer_cast&lt;fUML::Semantics::CommonBehavior::Execution>(fUML::Semantics::StructuredClassifiers::ObjectImpl::_copy());&#xA;&#xA;newValue->setContext(this->getContext());&#xA;&#xA;std::shared_ptr&lt;Bag&lt;fUML::Semantics::CommonBehavior::ParameterValue>> parameterValues = this->getParameterValues();&#xA;unsigned int parameterValuesSize = parameterValues->size();&#xA;&#xA;for(unsigned int i = 0; i &lt; parameterValuesSize; i++)&#xA;{&#xA;&#x9;std::shared_ptr&lt;fUML::Semantics::CommonBehavior::ParameterValue> parameterValue = parameterValues->at(i);&#xA;&#x9;newValue->getParameterValues()->add(parameterValue->_copy());&#xA;}&#xA;&#xA;return newValue;"/>
+          </eAnnotations>
+        </eOperations>
         <eStructuralFeatures xsi:type="ecore:EReference" name="context" ordered="false"
             lowerBound="1" eType="#//Semantics/StructuredClassifiers/Object"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="parameterValues" ordered="false"
@@ -1048,6 +1132,11 @@
         <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
           <details key="includes" value="#include &quot;fUML/Semantics/Values/ValuesPackage.hpp&quot;"/>
         </eAnnotations>
+        <eOperations name="_copy" lowerBound="1" eType="#//Semantics/CommonBehavior/ParameterValue">
+          <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+            <details key="body" value="// Create a new parameter value for the same parameter as this parameter value, but with&#xA;// copies of the values of this parameter value.&#xA;&#xA;std::shared_ptr&lt;fUML::Semantics::CommonBehavior::ParameterValue> newValue = fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createParameterValue();&#xA;newValue->setParameter(this->getParameter());&#xA;&#xA;std::shared_ptr&lt;Bag&lt;fUML::Semantics::Values::Value>> values = this->getValues();&#xA;unsigned int valuesSize = values->size();&#xA;&#xA;for(unsigned int i = 0; i &lt; valuesSize; i++)&#xA;{&#xA;&#x9;std::shared_ptr&lt;fUML::Semantics::Values::Value> value = values->at(i);&#xA;&#x9;newValue->getValues()->add(value->_copy());&#xA;}&#xA;&#xA;return newValue;"/>
+          </eAnnotations>
+        </eOperations>
         <eStructuralFeatures xsi:type="ecore:EReference" name="parameter" ordered="false"
             lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Parameter"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="values" ordered="false"
@@ -1172,7 +1261,7 @@
         </eOperations>
         <eOperations name="takeOfferedTokens" ordered="false" upperBound="-1" eType="#//Semantics/Activities/Token">
           <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-            <details key="body" value="&#x9;std::shared_ptr&lt;uml::Action> action = std::dynamic_pointer_cast&lt;uml::Action> (this->getNode());&#xA;&#xA;    if(action != nullptr)&#xA;    {&#xA;        this->setFiring(!action->getIsLocallyReentrant());&#xA;    }&#xA;&#xA;    std::shared_ptr&lt;Bag&lt;fUML::Semantics::Activities::Token> > offeredTokens(new Bag&lt;fUML::Semantics::Activities::Token>());&#xA;    std::shared_ptr&lt;Bag&lt;fUML::Semantics::Activities::ActivityEdgeInstance> > incomingEdgeList = this->getIncomingEdges();&#xA;    for(std::shared_ptr&lt;fUML::Semantics::Activities::ActivityEdgeInstance> incomingEdge : *incomingEdgeList)&#xA;    {&#xA;    &#x9;std::shared_ptr&lt;Bag&lt;fUML::Semantics::Activities::Token> > tokenList = incomingEdge->takeOfferedTokens();&#xA;        for(std::shared_ptr&lt;fUML::Semantics::Activities::Token> token: *tokenList)&#xA;        {&#xA;            token->withdraw();&#xA;            offeredTokens->push_back(token);&#xA;        }&#xA;    }&#xA;&#xA;    // *** Fire all input pins concurrently. ***&#xA;    if(action != nullptr)&#xA;    {&#xA;    &#x9;std::shared_ptr&lt;Subset&lt;fUML::Semantics::Actions::InputPinActivation, fUML::Semantics::Actions::PinActivation > > inputPinActivations = this->getInputPinActivation();&#xA;        for (std::shared_ptr&lt;fUML::Semantics::Actions::InputPinActivation> pinActivation : *inputPinActivations)&#xA;        {&#xA;            if(pinActivation!=nullptr)&#xA;&#x9;&#x9;&#x9;{&#xA;            &#x9;std::shared_ptr&lt;Bag&lt;fUML::Semantics::Activities::Token> > tokens = pinActivation->takeOfferedTokens();&#xA;            &#x9;pinActivation->fire(tokens);&#xA;            &#x9;offeredTokens->insert(offeredTokens->end(), tokens->begin(), tokens->end());&#xA;            }&#xA;            else&#xA;            {&#xA;                DEBUG_MESSAGE(std::cout&lt;&lt;&quot;Warning! Firing: A Pin was null!&quot;&lt;&lt;std::endl;)&#xA;            }&#xA;        }&#xA;    }&#xA;&#xA;    return offeredTokens;"/>
+            <details key="body" value="std::shared_ptr&lt;uml::Action> action = std::dynamic_pointer_cast&lt;uml::Action> (this->getNode());&#xA;&#xA;    if(action != nullptr)&#xA;    {&#xA;        this->setFiring(!action->getIsLocallyReentrant());&#xA;    }&#xA;&#xA;    std::shared_ptr&lt;Bag&lt;fUML::Semantics::Activities::Token> > offeredTokens(new Bag&lt;fUML::Semantics::Activities::Token>());&#xA;    std::shared_ptr&lt;Bag&lt;fUML::Semantics::Activities::ActivityEdgeInstance> > incomingEdgeList = this->getIncomingEdges();&#xA;&#x9;//NEWDEBUG&#xA;&#x9;DEBUG_MESSAGE(std::cout&lt;&lt;&quot;-- printing from ActionActivation::&quot;&lt;&lt;__FUNCTION__&lt;&lt;&quot; '&quot;&lt;&lt;(this->getNode() == nullptr ? &quot;...&quot; : (&quot;node = &quot; + this->getNode()->getName()))&lt;&lt;&quot;' : #incomingEdges = &quot;&lt;&lt;incomingEdgeList->size()&lt;&lt;std::endl;)&#xA;&#x9;&#xA;    for(std::shared_ptr&lt;fUML::Semantics::Activities::ActivityEdgeInstance> incomingEdge : *incomingEdgeList)&#xA;    {&#xA;    &#x9;std::shared_ptr&lt;Bag&lt;fUML::Semantics::Activities::Token> > tokenList = incomingEdge->takeOfferedTokens();&#xA;        for(std::shared_ptr&lt;fUML::Semantics::Activities::Token> token: *tokenList)&#xA;        {&#xA;            token->withdraw();&#xA;            offeredTokens->push_back(token);&#xA;        }&#xA;    }&#xA;&#xA;    // *** Fire all input pins concurrently. ***&#xA;    if(action != nullptr)&#xA;    {&#xA;    &#x9;std::shared_ptr&lt;Subset&lt;fUML::Semantics::Actions::InputPinActivation, fUML::Semantics::Actions::PinActivation > > inputPinActivations = this->getInputPinActivation();&#xA;&#x9;&#x9;//NEWDEBUG&#xA;&#x9;&#x9;DEBUG_MESSAGE(std::cout&lt;&lt;&quot;-- printing from ActionActivation::&quot;&lt;&lt;__FUNCTION__&lt;&lt;&quot; '&quot;&lt;&lt;(this->getNode() == nullptr ? &quot;...&quot; : (&quot;action = &quot; + this->getNode()->getName()))&lt;&lt;&quot;' : #inputPinActivation = &quot;&lt;&lt;inputPinActivations->size()&lt;&lt;std::endl;)&#xA;        for (std::shared_ptr&lt;fUML::Semantics::Actions::InputPinActivation> pinActivation : *inputPinActivations)&#xA;        {&#xA;            if(pinActivation!=nullptr)&#xA;&#x9;&#x9;&#x9;{&#xA;            &#x9;std::shared_ptr&lt;Bag&lt;fUML::Semantics::Activities::Token> > tokens = pinActivation->takeOfferedTokens();&#xA;            &#x9;pinActivation->fire(tokens);&#xA;            &#x9;offeredTokens->insert(offeredTokens->end(), tokens->begin(), tokens->end());&#xA;            }&#xA;            else&#xA;            {&#xA;                DEBUG_MESSAGE(std::cout&lt;&lt;&quot;Warning! Firing: A Pin was null!&quot;&lt;&lt;std::endl;)&#xA;            }&#xA;        }&#xA;    }&#xA;&#x9;//NEWDEBUG&#xA;&#x9;DEBUG_MESSAGE(std::cout&lt;&lt;&quot;-- printing from ActionActivation::&quot;&lt;&lt;__FUNCTION__&lt;&lt;&quot; '&quot;&lt;&lt;(this->getNode() == nullptr ? &quot;...&quot; : (&quot;action = &quot; + this->getNode()->getName()))&lt;&lt;&quot;' : #offeredTokens = &quot;&lt;&lt;offeredTokens->size()&lt;&lt;std::endl;)&#xA;    return offeredTokens;"/>
           </eAnnotations>
         </eOperations>
         <eOperations name="fire" ordered="false" lowerBound="1">
@@ -1419,7 +1508,7 @@
         </eOperations>
         <eOperations name="takeOfferedTokens" ordered="false" upperBound="-1" eType="#//Semantics/Activities/Token">
           <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-            <details key="body" value="int count = this->countUnofferedTokens();&#xA;&#x9;int upper = -1;&#xA;&#xA;&#x9;//Note: A pin activation used in an expansion activation group will have this.node == null&#xA;&#x9;if (this->getNode() != nullptr) &#xA;&#x9;{&#xA;&#x9;&#x9;std::shared_ptr&lt;uml::Pin> pin = std::dynamic_pointer_cast&lt;uml::Pin>(this->getNode());&#xA;&#x9;&#x9;if (pin != nullptr)&#xA;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;upper = pin->getUpper();&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;&#xA;&#x9;std::shared_ptr&lt;Bag&lt;fUML::Semantics::Activities::Token> > tokens(new Bag&lt;fUML::Semantics::Activities::Token>());&#xA;&#xA;&#x9;if (upper &lt; 0 || count &lt; upper) &#xA;&#x9;{&#xA;&#x9;&#x9;std::shared_ptr&lt;Bag&lt;fUML::Semantics::Activities::ActivityEdgeInstance> > incomingEdges = this->getIncomingEdges();&#xA;&#x9;&#x9;for (unsigned int i = 0; i &lt; incomingEdges->size(); i++) &#xA;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;std::shared_ptr&lt;fUML::Semantics::Activities::ActivityEdgeInstance> edge = incomingEdges->at(i);&#xA;&#x9;&#x9;&#x9;int incomingCount = edge->countOfferedValue();&#xA;&#x9;&#x9;&#x9;std::shared_ptr&lt;Bag&lt;fUML::Semantics::Activities::Token> > incomingTokens(new Bag&lt;fUML::Semantics::Activities::Token>());&#xA;&#x9;&#x9;&#x9;if (upper &lt; 0 || incomingCount &lt; upper - count) &#xA;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;incomingTokens = edge->takeOfferedTokens();&#xA;&#x9;&#x9;&#x9;&#x9;count = count + incomingCount;&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;else if (count &lt; upper) &#xA;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;incomingTokens = edge->takeOfferedTokens(upper - count);&#xA;&#x9;&#x9;&#x9;&#x9;count = upper;&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;for (unsigned int j = 0; j &lt; incomingTokens->size(); j++) &#xA;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;std::shared_ptr&lt;fUML::Semantics::Activities::Token> token = incomingTokens->at(j);&#xA;&#x9;&#x9;&#x9;&#x9;tokens->push_back(token);&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;&#xA;&#x9;return tokens;"/>
+            <details key="body" value="int count = this->countUnofferedTokens();&#xA;&#x9;int upper = -1;&#xA;&#xA;&#x9;//Note: A pin activation used in an expansion activation group will have this.node == null&#xA;&#x9;if (this->getNode() != nullptr) &#xA;&#x9;{&#xA;&#x9;&#x9;std::shared_ptr&lt;uml::Pin> pin = std::dynamic_pointer_cast&lt;uml::Pin>(this->getNode());&#xA;&#x9;&#x9;if (pin != nullptr)&#xA;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;upper = pin->getUpper();&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;&#xA;&#x9;std::shared_ptr&lt;Bag&lt;fUML::Semantics::Activities::Token> > tokens(new Bag&lt;fUML::Semantics::Activities::Token>());&#xA;&#xA;&#x9;//NEWDEBUG&#xA;&#x9;DEBUG_MESSAGE(std::cout&lt;&lt;&quot;-- printing from PinActivation::&quot;&lt;&lt;__FUNCTION__&lt;&lt;&quot; '&quot;&lt;&lt;(this->getNode() == nullptr ? &quot;...&quot; : (&quot;node = &quot; + this->getNode()->getName()))&lt;&lt;&quot;' : count = &quot;&lt;&lt;count&lt;&lt;std::endl;)&#xA;&#xA;&#x9;if (upper &lt; 0 || count &lt; upper) &#xA;&#x9;{&#xA;&#x9;&#x9;std::shared_ptr&lt;Bag&lt;fUML::Semantics::Activities::ActivityEdgeInstance> > incomingEdges = this->getIncomingEdges();&#xA;&#xA;&#x9;&#x9;//NEWDEBUG&#xA;&#x9;&#x9;DEBUG_MESSAGE(std::cout&lt;&lt;&quot;-- printing from PinActivation::&quot;&lt;&lt;__FUNCTION__&lt;&lt;&quot; '&quot;&lt;&lt;(this->getNode() == nullptr ? &quot;...&quot; : (&quot;node = &quot; + this->getNode()->getName()))&lt;&lt;&quot;' : #incomingEdges = &quot;&lt;&lt;incomingEdges->size()&lt;&lt;std::endl;)&#xA;&#xA;&#x9;&#x9;for (unsigned int i = 0; i &lt; incomingEdges->size(); i++) &#xA;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;std::shared_ptr&lt;fUML::Semantics::Activities::ActivityEdgeInstance> edge = incomingEdges->at(i);&#xA;&#x9;&#x9;&#x9;int incomingCount = edge->countOfferedValue();&#xA;&#x9;&#x9;&#x9;std::shared_ptr&lt;Bag&lt;fUML::Semantics::Activities::Token> > incomingTokens(new Bag&lt;fUML::Semantics::Activities::Token>());&#xA;&#x9;&#x9;&#x9;if (upper &lt; 0 || incomingCount &lt; upper - count) &#xA;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;incomingTokens = edge->takeOfferedTokens();&#xA;&#x9;&#x9;&#x9;&#x9;count = count + incomingCount;&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;else if (count &lt; upper) &#xA;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;incomingTokens = edge->takeOfferedTokens(upper - count);&#xA;&#x9;&#x9;&#x9;&#x9;count = upper;&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;for (unsigned int j = 0; j &lt; incomingTokens->size(); j++) &#xA;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;std::shared_ptr&lt;fUML::Semantics::Activities::Token> token = incomingTokens->at(j);&#xA;&#x9;&#x9;&#x9;&#x9;tokens->push_back(token);&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;&#x9;&#xA;&#x9;//NEWDEBUG&#xA;&#xA;&#x9;DEBUG_MESSAGE(std::cout&lt;&lt;&quot;-- printing from PinActivation::&quot;&lt;&lt;__FUNCTION__&lt;&lt;&quot; '&quot;&lt;&lt;(this->getNode() == nullptr ? &quot;...&quot; : (&quot;pin = &quot; + this->getNode()->getName()))&lt;&lt;&quot;' : #offeredTokens = &quot;&lt;&lt;tokens->size()&lt;&lt;std::endl;)&#xA;&#x9;return tokens;"/>
           </eAnnotations>
         </eOperations>
         <eStructuralFeatures xsi:type="ecore:EReference" name="actionActivation" ordered="false"
@@ -1495,11 +1584,6 @@
             <details key="body" value="// Return the operation associated with the call event occurrence of this&#xA;// return information.&#xA;&#xA;return this->getCallEventOccurrence()->getOperation();"/>
           </eAnnotations>
         </eOperations>
-        <eOperations name="copy" lowerBound="1" eType="#//Semantics/Values/Value">
-          <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-            <details key="doNotGenerate" value="true"/>
-          </eAnnotations>
-        </eOperations>
         <eOperations name="equals" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
           <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
             <details key="body" value="// One return information value equals another if they are for the&#xA;// same call event occurrence.&#xA;&#xA;bool isEqual = false;&#xA;&#xA;if(std::dynamic_pointer_cast&lt;fUML::Semantics::Actions::ReturnInformation>(otherValue) != nullptr)&#xA;{&#xA;&#x9;isEqual = (std::dynamic_pointer_cast&lt;fUML::Semantics::Actions::ReturnInformation>(otherValue))->getCallEventOccurrence() == this->getCallEventOccurrence();&#xA;}&#xA;&#xA;return isEqual;"/>
@@ -1530,6 +1614,11 @@
         <eOperations name="toString" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
           <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
             <details key="body" value="// Return a string representation of the return information.&#xA;&#x9;std::string s = &quot;ReturnInformation&quot;;&#xA;&#x9;std::string name = this->getCallEventOccurrence()->getOperation()->getName();&#xA;&#x9;if(name != &quot;&quot;)&#xA;&#x9;{&#xA;&#x9;&#x9;s = s + &quot;(&quot; + name + &quot;)&quot;;&#xA;&#x9;}&#xA;&#x9;return s;"/>
+          </eAnnotations>
+        </eOperations>
+        <eOperations name="_copy" lowerBound="1" eType="#//Semantics/Values/Value">
+          <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+            <details key="body" value="// Create a new return information value that is a copy of this value, with&#xA;// the same call event occurrence.&#xA;&#xA;std::shared_ptr&lt;fUML::Semantics::Actions::ReturnInformation> newValue = fUML::Semantics::Actions::ActionsFactory::eInstance()->createReturnInformation();&#xA;newValue->setCallEventOccurrence(this->getCallEventOccurrence());&#xA;return newValue;"/>
           </eAnnotations>
         </eOperations>
         <eStructuralFeatures xsi:type="ecore:EReference" name="callEventOccurrence"
@@ -1720,7 +1809,7 @@
         </eAnnotations>
         <eOperations name="sendOffer" ordered="false" lowerBound="1">
           <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-            <details key="body" value="&#x9;std::shared_ptr&lt;fUML::Semantics::Activities::Offer> offer(fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createOffer());&#xA;    offer->getOfferedTokens()->insert(offer->getOfferedTokens()->end(), tokens->begin(), tokens->end());&#xA;    this->getOffers()->push_back(offer);&#xA;    auto target = this->getTarget().lock();&#xA;    if(nullptr == target )&#xA;    {&#xA;        std::cout &lt;&lt; &quot;[sendOffer] The edge does not have a target&quot; &lt;&lt; std::endl;&#xA;    }&#xA;    else&#xA;    {&#xA;    &#x9;target->receiveOffer();&#xA;    }"/>
+            <details key="body" value="&#x9;std::shared_ptr&lt;fUML::Semantics::Activities::Offer> offer(fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createOffer());&#xA;&#x9;//NEWDEBUG&#xA;&#x9;DEBUG_MESSAGE(std::cout&lt;&lt;&quot;-- printing from ActivityEdgeInstance::&quot;&lt;&lt;__FUNCTION__&lt;&lt;&quot; '&quot;&lt;&lt;(this->getEdge() == nullptr ? &quot;...&quot; : (&quot;edge = &quot; + this->getEdge()->getName()))&lt;&lt;&quot;' : created new offer with &quot;&lt;&lt;tokens->size()&lt;&lt;&quot; tokens&quot;&lt;&lt;std::endl;)&#xA;    offer->getOfferedTokens()->insert(offer->getOfferedTokens()->end(), tokens->begin(), tokens->end());&#xA;    this->getOffers()->push_back(offer);&#xA;    auto target = this->getTarget().lock();&#xA;&#xA;&#x9;//NEWDEBUG&#xA;&#x9;DEBUG_MESSAGE(std::cout&lt;&lt;&quot;-- printing from ActivityEdgeInstance::&quot;&lt;&lt;__FUNCTION__&lt;&lt;&quot; '&quot;&lt;&lt;(this->getEdge() == nullptr ? &quot;...&quot; : (&quot;edge = &quot; + this->getEdge()->getName()))&lt;&lt;&quot;' : #offers before receive = &quot;&lt;&lt;this->getOffers()->size()&lt;&lt;std::endl;)&#xA;&#xA;    if(nullptr == target )&#xA;    {&#xA;        std::cout &lt;&lt; &quot;[sendOffer] The edge does not have a target&quot; &lt;&lt; std::endl;&#xA;    }&#xA;    else&#xA;    {&#xA;    &#x9;target->receiveOffer();&#xA;    }&#xA;&#xA;&#x9;//NEWDEBUG&#xA;&#x9;DEBUG_MESSAGE(std::cout&lt;&lt;&quot;-- printing from ActivityEdgeInstance::&quot;&lt;&lt;__FUNCTION__&lt;&lt;&quot; '&quot;&lt;&lt;(this->getEdge() == nullptr ? &quot;...&quot; : (&quot;edge = &quot; + this->getEdge()->getName()))&lt;&lt;&quot;' : current #offers after receive = &quot;&lt;&lt;this->getOffers()->size()&lt;&lt;std::endl;)"/>
           </eAnnotations>
           <eParameters name="tokens" ordered="false" upperBound="-1" eType="#//Semantics/Activities/Token"/>
         </eOperations>
@@ -1731,7 +1820,7 @@
         </eOperations>
         <eOperations name="takeOfferedTokens" ordered="false" upperBound="-1" eType="#//Semantics/Activities/Token">
           <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-            <details key="body" value="std::shared_ptr&lt;Bag&lt;fUML::Semantics::Activities::Token> > tokens(new Bag&lt;fUML::Semantics::Activities::Token>());&#xA;&#xA;&#x9;std::shared_ptr&lt;Bag&lt;fUML::Semantics::Activities::Offer> > offerList = this->getOffers();&#xA;&#x9;    for(std::shared_ptr&lt;fUML::Semantics::Activities::Offer> offer : *offerList)&#xA;    {&#xA;    &#x9;auto vec = offer->retrieveOfferedTokens();&#xA;        tokens->insert(tokens->end(), vec->begin(), vec->end());&#xA;    }&#xA;    this->getOffers()->clear();&#xA;&#xA;    return tokens;"/>
+            <details key="body" value="std::shared_ptr&lt;Bag&lt;fUML::Semantics::Activities::Token> > tokens(new Bag&lt;fUML::Semantics::Activities::Token>());&#xA;&#xA;&#x9;std::shared_ptr&lt;Bag&lt;fUML::Semantics::Activities::Offer> > offerList = this->getOffers();&#xA;&#x9;//NEWDEBUG&#xA;&#x9;DEBUG_MESSAGE(std::cout&lt;&lt;&quot;-- printing from ActivityEdgeInstance::&quot;&lt;&lt;__FUNCTION__&lt;&lt;&quot; '&quot;&lt;&lt;(this->getEdge() == nullptr ? &quot;...&quot; : (&quot;edge = &quot; + this->getEdge()->getName()))&lt;&lt;&quot;' : #offers = &quot;&lt;&lt;this->getOffers()->size()&lt;&lt;std::endl;)&#xA;&#x9;    for(std::shared_ptr&lt;fUML::Semantics::Activities::Offer> offer : *offerList)&#xA;    {&#xA;    &#x9;auto vec = offer->retrieveOfferedTokens();&#xA;&#x9;//NEWDEBUG&#xA;&#x9;DEBUG_MESSAGE(std::cout&lt;&lt;&quot;-- printing from ActivityEdgeInstance::&quot;&lt;&lt;__FUNCTION__&lt;&lt;&quot; '&quot;&lt;&lt;(this->getEdge() == nullptr ? &quot;...&quot; : (&quot;edge = &quot; + this->getEdge()->getName()))&lt;&lt;&quot;' : retrieved &quot;&lt;&lt;vec->size()&lt;&lt;&quot; tokens from offer&quot;&lt;&lt;std::endl;)&#xA;        tokens->insert(tokens->end(), vec->begin(), vec->end());&#xA;    }&#xA;    this->getOffers()->clear();&#xA;&#xA;    return tokens;"/>
           </eAnnotations>
         </eOperations>
         <eOperations name="takeOfferedTokens" ordered="false" upperBound="-1" eType="#//Semantics/Activities/Token">
@@ -1791,6 +1880,11 @@
             <details key="body" value="// return fUML::Semantics::Values::ValuesFactory::eInstance()->createActivityExecution();&#xA;&#xA;&#x9;std::cout &lt;&lt; __PRETTY_FUNCTION__  &lt;&lt; std::endl;&#xA;&#x9;throw &quot;UnsupportedOperationException&quot;;&#xA;&#x9;return nullptr;"/>
           </eAnnotations>
         </eOperations>
+        <eOperations name="_copy" lowerBound="1" eType="#//Semantics/Values/Value">
+          <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+            <details key="body" value="// Create a new activity execution that is a copy of this execution.&#xA;// [Note: This currently just returns a non-executing execution for the same activity as this execution.]&#xA;&#xA;return fUML::Semantics::CommonBehavior::ExecutionImpl::_copy();"/>
+          </eAnnotations>
+        </eOperations>
         <eStructuralFeatures xsi:type="ecore:EReference" name="activationGroup" ordered="false"
             lowerBound="1" eType="#//Semantics/Activities/ActivityNodeActivationGroup"
             containment="true" eOpposite="#//Semantics/Activities/ActivityNodeActivationGroup/activityExecution"/>
@@ -1818,12 +1912,12 @@
         </eOperations>
         <eOperations name="receiveOffer" ordered="false" lowerBound="1">
           <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-            <details key="body" value="DEBUG_MESSAGE(std::cout&lt;&lt;&quot;[receiveOffer] &quot;&#xD;&#xA; &lt;&lt; (this->getNode() == nullptr ? &quot;...&quot; : (&quot;node = &quot; + this->getNode()->getName()))&lt;&lt;std::endl;)&#xD;&#xA;&#xD;&#xA;    _beginIsolation();&#xD;&#xA;&#xD;&#xA;    bool ready = this->isReady();&#xD;&#xA;&#xD;&#xA;    std::shared_ptr&lt;Bag&lt;Token> > tokens;&#xD;&#xA;    if (ready) &#xD;&#xA;    {&#xD;&#xA;        DEBUG_MESSAGE(std::cout&lt;&lt;&quot;[receiveOffer] Firing.&quot;&lt;&lt;std::endl;)&#xD;&#xA;        tokens = this->takeOfferedTokens();&#xD;&#xA;    }&#xD;&#xA;&#xD;&#xA;    _endIsolation();&#xD;&#xA;&#xD;&#xA;    if (ready) &#xD;&#xA;    {&#xD;&#xA;        DEBUG_MESSAGE(std::cout&lt;&lt; &quot;Firing &quot;&lt;&lt;tokens->size()&lt;&lt;&quot; token(s)&quot;&lt;&lt;std::endl;)&#xD;&#xA;        this->fire(tokens);&#xD;&#xA;    }&#xD;&#xA;    else&#xD;&#xA;    {&#xD;&#xA;        DEBUG_MESSAGE(std::cout&lt;&lt; &quot;Node&quot;&lt;&lt;(this->getNode() == nullptr ? &quot;...&quot; : &quot;node = &quot; + this->getNode()->getName())&lt;&lt;&quot; is not ready to execute.&quot;&lt;&lt;std::endl;)&#xD;&#xA;    }"/>
+            <details key="body" value="DEBUG_MESSAGE(std::cout&lt;&lt;&quot;[receiveOffer] &quot;&#xA; &lt;&lt; (this->getNode() == nullptr ? &quot;...&quot; : (&quot;node = &quot; + this->getNode()->getName()))&lt;&lt;std::endl;)&#xA;&#xA;    _beginIsolation();&#xA;&#xA;    bool ready = this->isReady();&#xA;&#xA;    std::shared_ptr&lt;Bag&lt;Token> > tokens;&#xA;    if (ready) &#xA;    {&#xA;        DEBUG_MESSAGE(std::cout&lt;&lt;&quot;[receiveOffer] Firing.&quot;&lt;&lt;std::endl;)&#xA;        tokens = this->takeOfferedTokens();&#xA;    }&#xA;&#x9;&#x9;else{&#xA;&#x9;&#x9;//NEWDEBUG&#xA;&#x9;&#x9;DEBUG_MESSAGE(std::cout&lt;&lt;&quot;ActivityNodeActivation::[receiveOffer] NOT taking offered tokens because not ready&quot;&lt;&lt;std::endl;)&#xA;&#x9;}&#xA;&#xA;    _endIsolation();&#xA;&#xA;    if (ready) &#xA;    {&#xA;        DEBUG_MESSAGE(std::cout&lt;&lt; &quot;Firing &quot;&lt;&lt;tokens->size()&lt;&lt;&quot; token(s)&quot;&lt;&lt;std::endl;)&#xA;        this->fire(tokens);&#xA;    }&#xA;    else&#xA;    {&#xA;        DEBUG_MESSAGE(std::cout&lt;&lt; &quot;Node&quot;&lt;&lt;(this->getNode() == nullptr ? &quot;...&quot; : &quot;node = &quot; + this->getNode()->getName())&lt;&lt;&quot; is not ready to execute.&quot;&lt;&lt;std::endl;)&#xA;    }"/>
           </eAnnotations>
         </eOperations>
         <eOperations name="takeOfferedTokens" ordered="false" upperBound="-1" eType="#//Semantics/Activities/Token">
           <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-            <details key="body" value="std::shared_ptr&lt;Bag&lt;fUML::Semantics::Activities::Token> > allTokens(new Bag&lt;fUML::Semantics::Activities::Token>());&#xA;&#x9;std::shared_ptr&lt;Bag&lt;fUML::Semantics::Activities::ActivityEdgeInstance> > incomingEdgeList = this->getIncomingEdges();&#xA;&#x9;for(std::shared_ptr&lt;fUML::Semantics::Activities::ActivityEdgeInstance> incomingEdge : *incomingEdgeList)&#xA;&#x9;{&#xA;&#x9;&#x9;auto vec = incomingEdge->takeOfferedTokens();&#xA;&#x9;&#x9;allTokens->insert(allTokens->end(), vec->begin(), vec->end());&#xA;&#x9;}&#xA;&#x9;return allTokens;"/>
+            <details key="body" value="std::shared_ptr&lt;Bag&lt;fUML::Semantics::Activities::Token> > allTokens(new Bag&lt;fUML::Semantics::Activities::Token>());&#xA;&#x9;std::shared_ptr&lt;Bag&lt;fUML::Semantics::Activities::ActivityEdgeInstance> > incomingEdgeList = this->getIncomingEdges();&#xA;&#xA;&#x9;//NEWDEBUG&#xA;&#x9;DEBUG_MESSAGE(std::cout&lt;&lt;&quot;-- printing from ActivityNodeActivation::&quot;&lt;&lt;__FUNCTION__&lt;&lt;&quot; '&quot;&lt;&lt;(this->getNode() == nullptr ? &quot;...&quot; : (&quot;node = &quot; + this->getNode()->getName()))&lt;&lt;&quot;' : #incomingEdges = &quot;&lt;&lt;incomingEdgeList->size()&lt;&lt;std::endl;)&#xA;&#xA;&#x9;for(std::shared_ptr&lt;fUML::Semantics::Activities::ActivityEdgeInstance> incomingEdge : *incomingEdgeList)&#xA;&#x9;{&#xA;&#x9;&#x9;auto vec = incomingEdge->takeOfferedTokens();&#xA;&#x9;&#x9;allTokens->insert(allTokens->end(), vec->begin(), vec->end());&#xA;&#x9;}&#xA;&#xA;&#x9;//NEWDEBUG&#xA;&#x9;DEBUG_MESSAGE(std::cout&lt;&lt;&quot;-- printing from ActivityNodeActivation::&quot;&lt;&lt;__FUNCTION__&lt;&lt;&quot; for node '&quot;&lt;&lt;(this->getNode() == nullptr ? &quot;...&quot; : (&quot;node = &quot; + this->getNode()->getName()))&lt;&lt;&quot;' : #allTokens = &quot;&lt;&lt;allTokens->size()&lt;&lt;std::endl;)&#xA;&#xA;&#x9;return allTokens;"/>
           </eAnnotations>
         </eOperations>
         <eOperations name="fire" ordered="false" lowerBound="1">
@@ -1832,13 +1926,13 @@
         </eOperations>
         <eOperations name="sendOffers" ordered="false">
           <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-            <details key="body" value="&#x9;&#x9;if (tokens->size() > 0) &#xA;&#x9;{&#xA;        // *** Send all outgoing offers concurrently. ***&#xA;&#x9;&#x9;std::shared_ptr&lt;Bag&lt;fUML::Semantics::Activities::ActivityEdgeInstance> > outgoingEdgeList = this->getOutgoingEdges();&#xA;        for(std::shared_ptr&lt;fUML::Semantics::Activities::ActivityEdgeInstance> outgoingEdge : *outgoingEdgeList)&#xA;        {&#xA;&#x9;&#x9;&#x9;DEBUG_MESSAGE(&#xA;&#x9;&#x9;&#x9;&#x9;auto target=outgoingEdge->getTarget().lock();&#xA;&#x9;&#x9;&#x9;&#x9;if(!target){&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;std::cerr &lt;&lt; &quot;[sendOffers] Target is NULL for edge: &quot; &lt;&lt; outgoingEdge->getEdge()->getName() &lt;&lt; std::endl;&#xA;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;if(! (target->getNode()))&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;std::cerr &lt;&lt; &quot;[sendOffers] Node is NULL for target on edge: &quot; &lt;&lt;  outgoingEdge->getEdge()->getName() &lt;&lt; std::endl;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;std::cout &lt;&lt; &quot;[sendOffers] Sending offer to &quot; &lt;&lt; target->getNode()->getName() &lt;&lt; &quot;.&quot;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;  &lt;&lt; std::endl;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;)&#xA;            outgoingEdge->sendOffer(tokens);&#xA;        }&#xA;    }"/>
+            <details key="body" value="//NEWDEBUG&#xA;&#x9;DEBUG_MESSAGE(std::cout&lt;&lt;&quot;[sendOffers] &quot;&lt;&lt; (this->getNode() == nullptr ? &quot;...&quot; : (&quot;node = &quot; + this->getNode()->getName()))&lt;&lt;std::endl;)&#x9;&#x9;&#xA;if (tokens->size() > 0) &#xA;&#x9;{&#xA;        // *** Send all outgoing offers concurrently. ***&#xA;&#x9;&#x9;std::shared_ptr&lt;Bag&lt;fUML::Semantics::Activities::ActivityEdgeInstance> > outgoingEdgeList = this->getOutgoingEdges();&#xA;        for(std::shared_ptr&lt;fUML::Semantics::Activities::ActivityEdgeInstance> outgoingEdge : *outgoingEdgeList)&#xA;        {&#xA;&#x9;&#x9;&#x9;DEBUG_MESSAGE(&#xA;&#x9;&#x9;&#x9;&#x9;auto target=outgoingEdge->getTarget().lock();&#xA;&#x9;&#x9;&#x9;&#x9;if(!target){&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;std::cerr &lt;&lt; &quot;[sendOffers] Target is NULL for edge: &quot; &lt;&lt; outgoingEdge->getEdge()->getName() &lt;&lt; std::endl;&#xA;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;if(! (target->getNode()))&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;std::cerr &lt;&lt; &quot;[sendOffers] Node is NULL for target on edge: &quot; &lt;&lt;  outgoingEdge->getEdge()->getName() &lt;&lt; std::endl;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;std::cout &lt;&lt; &quot;[sendOffers] Sending offer to &quot; &lt;&lt; target->getNode()->getName() &lt;&lt; &quot;.&quot;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;  &lt;&lt; std::endl;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;//NEWDEBUG&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;DEBUG_MESSAGE(std::cout &lt;&lt; &quot;[sendOffers] Sending offer to &quot; &lt;&lt; target->getNode()->getName() &lt;&lt; &quot; with &quot;&lt;&lt;tokens->size()&lt;&lt;&quot; tokens.&quot;&lt;&lt; std::endl;)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;)&#xA;            outgoingEdge->sendOffer(tokens);&#xA;        }&#xA;    }&#xA;&#xA;//NEWDEBUG alles hier drunter&#xA;&#x9;if (this->getNode() == nullptr) &#xA;&#x9;{&#xA;        DEBUG_MESSAGE(std::cout&lt;&lt;&quot;-- printing from ActivityNodeActivation::&quot;&lt;&lt;__FUNCTION__&lt;&lt;&quot; : node = anonymous fork\n&quot;;)&#xA;    } &#xA;&#x9;else &#xA;&#x9;{&#xA;&#x9;&#x9;DEBUG_MESSAGE(std::cout&lt;&lt;&quot;-- printing from ActivityNodeActivation::&quot;&lt;&lt;__FUNCTION__&lt;&lt;&quot; : node = &quot;&lt;&lt;this->getNode()->getName()&lt;&lt;std::endl;)&#xA;    }&#xA;&#x9;&#x9;DEBUG_MESSAGE(std::cout&lt;&lt;&quot;-- printing from ActivityNodeActivation::&quot;&lt;&lt;__FUNCTION__&lt;&lt;&quot; : ENDE!!!!!!!!!\n&quot;;)"/>
           </eAnnotations>
           <eParameters name="tokens" ordered="false" upperBound="-1" eType="#//Semantics/Activities/Token"/>
         </eOperations>
         <eOperations name="terminate" ordered="false" lowerBound="1">
           <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-            <details key="body" value="/*    if (this->isRunning()) {&#xD;&#xA;        if (this->getNode() != nullptr) {&#xD;&#xA;            DEBUG_MESSAGE(std::cout&lt;&lt;&quot;[terminate] node = &quot; &lt;&lt; this->getNode()->getName()&lt;&lt;std::endl;)&#xD;&#xA;        } else {&#xD;&#xA;            DEBUG_MESSAGE(std::cout&lt;&lt;&quot;[terminate] Anonymous activation of type &quot; &lt;&lt; this->eClass()->getName()&lt;&lt;std::endl;)&#xD;&#xA;        }&#xD;&#xA;    }&#xD;&#xA;*/&#xD;&#xA;this->setRunning(false);"/>
+            <details key="body" value="/*    if (this->isRunning()) {&#xA;        if (this->getNode() != nullptr) {&#xA;            DEBUG_MESSAGE(std::cout&lt;&lt;&quot;[terminate] node = &quot; &lt;&lt; this->getNode()->getName()&lt;&lt;std::endl;)&#xA;        } else {&#xA;            DEBUG_MESSAGE(std::cout&lt;&lt;&quot;[terminate] Anonymous activation of type &quot; &lt;&lt; this->eClass()->getName()&lt;&lt;std::endl;)&#xA;        }&#xA;    }&#xA;*/&#xA;this->setRunning(false);"/>
           </eAnnotations>
         </eOperations>
         <eOperations name="isReady" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
@@ -1902,7 +1996,7 @@
         </eOperations>
         <eOperations name="addToken" ordered="false" lowerBound="1">
           <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-            <details key="body" value="&#x9;&#x9;&#x9;DEBUG_MESSAGE(&#xD;&#xA;&#x9;&#x9;if (this->getNode()== nullptr)&#xD;&#xA;&#x9;&#x9;{&#xD;&#xA;&#x9;&#x9;&#x9;std::cout&lt;&lt;&quot;[addToken] ...&quot;&lt;&lt;std::endl;&#xD;&#xA;&#x9;&#x9;}&#xD;&#xA;&#x9;&#x9;else&#xD;&#xA;&#x9;&#x9;{&#xD;&#xA;&#x9;&#x9;&#x9;std::cout&lt;&lt;&quot;[addToken] node = &quot; &lt;&lt; this->getNode()->getName()&lt;&lt;std::endl;&#xD;&#xA;            &#xD;&#xA;            std::shared_ptr&lt;uml::NamedElement> owner = std::dynamic_pointer_cast&lt;uml::NamedElement>(this->getNode()->getOwner().lock());&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;ACT_DEBUG(std::cout &lt;&lt; &quot;SET_TOKEN;NODE:&quot; &lt;&lt; (owner != nullptr ? owner->getName() : &quot;[NO_OWNER]&quot;) &lt;&lt; &quot;::&quot;&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;&lt; this->getNode()->getName() &lt;&lt; &quot;;TOKEN:&quot; &lt;&lt; token->getValue()&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;&lt; &quot;;CURRENT_TOKENS:&quot; &lt;&lt; (this->getHeldTokens()->size() + 1) &lt;&lt; &quot;;DIRECTION:add&quot;&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;&lt; std::endl;)&#xD;&#xA;&#x9;&#x9;}&#xD;&#xA;&#x9;)&#xD;&#xA;&#xD;&#xA;&#x9;if (!token->isWithdrawn())&#xD;&#xA;&#x9;{&#xD;&#xA;&#x9;&#x9;token->withdraw();&#xD;&#xA;&#x9;&#x9;token = std::dynamic_pointer_cast&lt;Token>(token->copy());&#xD;&#xA;&#x9;}&#xD;&#xA;&#x9;token->setHolder(getThisActivityNodeActivationPtr());&#xD;&#xA;&#x9;token->setWithdrawn(false);&#xD;&#xA;&#xD;&#xA;&#x9;DEBUG_MESSAGE(std::cout&lt;&lt;&quot;[addToken] Adding token with value = &quot; &lt;&lt;token->getValue()&lt;&lt;std::endl;)&#xD;&#xA;&#xD;&#xA;&#x9;this->getHeldTokens()->push_back(token);"/>
+            <details key="body" value="&#x9;&#x9;&#x9;DEBUG_MESSAGE(&#xA;&#x9;&#x9;if (this->getNode()== nullptr)&#xA;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;std::cout&lt;&lt;&quot;[addToken] ...&quot;&lt;&lt;std::endl;&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;else&#xA;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;std::cout&lt;&lt;&quot;[addToken] node = &quot; &lt;&lt; this->getNode()->getName()&lt;&lt;std::endl;&#xA;            &#xA;            std::shared_ptr&lt;uml::NamedElement> owner = std::dynamic_pointer_cast&lt;uml::NamedElement>(this->getNode()->getOwner().lock());&#xA;&#x9;&#x9;&#x9;&#x9;ACT_DEBUG(std::cout &lt;&lt; &quot;SET_TOKEN;NODE:&quot; &lt;&lt; (owner != nullptr ? owner->getName() : &quot;[NO_OWNER]&quot;) &lt;&lt; &quot;::&quot;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;&lt; this->getNode()->getName() &lt;&lt; &quot;;TOKEN:&quot; &lt;&lt; token->getValue()&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;&lt; &quot;;CURRENT_TOKENS:&quot; &lt;&lt; (this->getHeldTokens()->size() + 1) &lt;&lt; &quot;;DIRECTION:add&quot;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;&lt; std::endl;)&#xA;&#x9;&#x9;}&#xA;&#x9;)&#xA;&#xA;&#x9;if (!token->isWithdrawn())&#xA;&#x9;{&#xA;&#x9;&#x9;token->withdraw();&#xA;&#x9;&#x9;token = std::dynamic_pointer_cast&lt;Token>(token->_copy());&#xA;&#x9;}&#xA;&#x9;token->setHolder(getThisActivityNodeActivationPtr());&#xA;&#x9;token->setWithdrawn(false);&#xA;&#xA;&#x9;DEBUG_MESSAGE(std::cout&lt;&lt;&quot;[addToken] Adding token with value = &quot; &lt;&lt;token->getValue()&lt;&lt;std::endl;)&#xA;&#xA;&#x9;this->getHeldTokens()->push_back(token);"/>
           </eAnnotations>
           <eParameters name="token" ordered="false" lowerBound="1" eType="#//Semantics/Activities/Token"/>
         </eOperations>
@@ -2137,6 +2231,11 @@
             <details key="const"/>
           </eAnnotations>
         </eOperations>
+        <eOperations name="_copy" lowerBound="1" eType="#//Semantics/Activities/Token">
+          <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+            <details key="body" value="// Return a new control token.&#xA;&#xA;return fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createControlToken();"/>
+          </eAnnotations>
+        </eOperations>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="DataStoreNodeActivation" eSuperTypes="#//Semantics/Activities/CentralBufferNodeActivation">
         <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
@@ -2144,7 +2243,7 @@
         </eAnnotations>
         <eOperations name="removeToken" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
           <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-            <details key="body" value="int i = fUML::Semantics::Activities::ObjectNodeActivationImpl::removeToken(token);&#xA;&#x9;&#x9;&#xA;&#x9;&#x9;if (this->isRunning()) {&#xA;&#x9;&#x9;&#x9;std::shared_ptr&lt;fUML::Semantics::Activities::Token> copied_token = std::dynamic_pointer_cast&lt;fUML::Semantics::Activities::Token>(token->copy());&#xA;&#x9;&#x9;&#x9;fUML::Semantics::Activities::ObjectNodeActivationImpl::addToken(copied_token);&#xA;&#x9;&#x9;&#x9;this->sendUnofferedTokens();&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;return i;"/>
+            <details key="body" value="int i = fUML::Semantics::Activities::ObjectNodeActivationImpl::removeToken(token);&#xA;&#x9;&#x9;&#xA;&#x9;&#x9;if (this->isRunning()) {&#xA;&#x9;&#x9;&#x9;std::shared_ptr&lt;fUML::Semantics::Activities::Token> copied_token = std::dynamic_pointer_cast&lt;fUML::Semantics::Activities::Token>(token->_copy());&#xA;&#x9;&#x9;&#x9;fUML::Semantics::Activities::ObjectNodeActivationImpl::addToken(copied_token);&#xA;&#x9;&#x9;&#x9;this->sendUnofferedTokens();&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;return i;"/>
           </eAnnotations>
           <eParameters name="token" ordered="false" lowerBound="1" eType="#//Semantics/Activities/Token"/>
         </eOperations>
@@ -2230,7 +2329,7 @@
       <eClassifiers xsi:type="ecore:EClass" name="FlowFinalNodeActivation" eSuperTypes="#//Semantics/Activities/ControlNodeActivation"/>
       <eClassifiers xsi:type="ecore:EClass" name="ForkedToken" eSuperTypes="#//Semantics/Activities/Token">
         <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-          <details key="includes" value=" "/>
+          <details key="includes" value="//NEWDEBUG&#xA;#include &quot;uml/ActivityNode.hpp&quot;"/>
         </eAnnotations>
         <eOperations name="equals" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
           <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
@@ -2240,7 +2339,7 @@
         </eOperations>
         <eOperations name="withdraw" ordered="false" lowerBound="1">
           <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-            <details key="body" value="    if (!this->isBaseTokenIsWithdrawn() &amp; !this->getBaseToken()->isWithdrawn()) {&#xA;        this->getBaseToken()->withdraw();&#xA;        this->setBaseTokenIsWithdrawn(true);&#xA;    }&#xA;&#xA;    if (this->getRemainingOffersCount() > 0) {&#xA;        this->setRemainingOffersCount(this->getRemainingOffersCount() - 1);&#xA;    }&#xA;&#xA;    if (this->getRemainingOffersCount() == 0) {&#xA;        fUML::Semantics::Activities::TokenImpl::withdraw();&#xA;    }"/>
+            <details key="body" value="//NEWDEBUG&#xA;&#x9;std::shared_ptr&lt;fUML::Semantics::Activities::ActivityNodeActivation> holder = this->getHolder().lock();    &#xA;&#xA;if (!this->isBaseTokenIsWithdrawn() &amp; !this->getBaseToken()->isWithdrawn()) {&#xA;        this->getBaseToken()->withdraw();&#xA;        this->setBaseTokenIsWithdrawn(true);&#xA;    }&#xA;&#xA;    if (this->getRemainingOffersCount() > 0) {&#xA;        this->setRemainingOffersCount(this->getRemainingOffersCount() - 1);&#xA;&#x9;//NEWDEBUG&#xA;&#x9;&#x9;DEBUG_MESSAGE(std::cout&lt;&lt;&quot;-- printing from ForkedToken::&quot;&lt;&lt;__FUNCTION__&lt;&lt;&quot; '&quot;&lt;&lt;(holder->getNode() == nullptr ? &quot;...&quot; : (&quot;holder = &quot; + holder->getNode()->getName()))&lt;&lt;&quot;' : remainingOffersCount = &quot;&lt;&lt;getRemainingOffersCount()&lt;&lt;std::endl;)&#xA;    }&#xA;&#xA;    if (this->getRemainingOffersCount() == 0) {&#xA;&#x9;&#x9;//NEWDEBUG&#xA;&#x9;&#x9;DEBUG_MESSAGE(std::cout&lt;&lt;&quot;-- printing from ForkedToken::&quot;&lt;&lt;__FUNCTION__&lt;&lt;&quot; '&quot;&lt;&lt;(holder->getNode() == nullptr ? &quot;...&quot; : (&quot;holder = &quot; + holder->getNode()->getName()))&lt;&lt;&quot;' : final withdraw!&quot;&lt;&lt;std::endl;)&#xA;        fUML::Semantics::Activities::TokenImpl::withdraw();&#xA;    }"/>
           </eAnnotations>
         </eOperations>
         <eOperations name="isControl" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
@@ -2252,6 +2351,11 @@
           <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
             <details key="body" value="return this->getBaseToken()->getValue();"/>
             <details key="const"/>
+          </eAnnotations>
+        </eOperations>
+        <eOperations name="_copy" lowerBound="1" eType="#//Semantics/Activities/Token">
+          <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+            <details key="body" value="// Return a copy of the base token.&#xA;&#xA;return this->getBaseToken()->_copy();"/>
           </eAnnotations>
         </eOperations>
         <eStructuralFeatures xsi:type="ecore:EReference" name="baseToken" ordered="false"
@@ -2267,7 +2371,7 @@
         </eAnnotations>
         <eOperations name="fire" ordered="false" lowerBound="1">
           <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-            <details key="body" value="if (this->getNode() == nullptr) &#xA;&#x9;{&#xA;        DEBUG_MESSAGE(std::cout&lt;&lt;&quot;[fire] Anonymous fork node.&quot;&lt;&lt;std::endl;)&#xA;    } &#xA;&#x9;else &#xA;&#x9;{&#xA;        DEBUG_MESSAGE(std::cout&lt;&lt;&quot;[fire] Fork node &quot; &lt;&lt; this->getNode()->getName() &lt;&lt; &quot;...&quot;&lt;&lt;std::endl;)&#xA;    }&#xA;&#xA;&#x9;std::shared_ptr&lt;Bag&lt;fUML::Semantics::Activities::ActivityEdgeInstance> > outgoingEdges = this->getOutgoingEdges();&#xA;    int outgoingEdgeCount = outgoingEdges->size();&#xA;&#xA;    std::shared_ptr&lt;Bag&lt;fUML::Semantics::Activities::Token> > forkedTokens(new Bag&lt;fUML::Semantics::Activities::Token>());&#xA;    for (unsigned int i = 0; i &lt; incomingTokens->size(); i++) &#xA;    {&#xA;    &#x9;std::shared_ptr&lt;fUML::Semantics::Activities::Token> token = incomingTokens->at(i);&#xA;    &#x9;std::shared_ptr&lt;fUML::Semantics::Activities::ForkedToken> forkedToken(fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createForkedToken());&#xA;        forkedToken->setBaseToken(token);&#xA;        forkedToken->setRemainingOffersCount(outgoingEdgeCount);&#xA;        forkedToken->setBaseTokenIsWithdrawn(false);&#xA;        forkedTokens->push_back(forkedToken);&#xA;    }&#xA;&#xA;    this->addTokens(forkedTokens);&#xA;    this->sendOffers(forkedTokens);"/>
+            <details key="body" value="if (this->getNode() == nullptr) &#xA;&#x9;{&#xA;        &#x9;DEBUG_MESSAGE(std::cout&lt;&lt;&quot;[fire] Anonymous fork node.&quot;&lt;&lt;std::endl;&#xA;&#x9;&#x9;//NEWDEBUG&#xA;&#x9;&#x9;std::cout&lt;&lt;&quot;-- printing from Anonymous fork : #incomingTokens = &quot;&lt;&lt;incomingTokens->size()&lt;&lt;std::endl;)&#xA;    } &#xA;&#x9;else &#xA;&#x9;{&#xA;       &#x9;&#x9;DEBUG_MESSAGE(std::cout&lt;&lt;&quot;[fire] Fork node &quot; &lt;&lt; this->getNode()->getName() &lt;&lt; &quot;...&quot;&lt;&lt;std::endl;&#xA;&#x9;&#x9;//NEWDEBUG&#xA;&#x9;&#x9;std::cout&lt;&lt;&quot;-- printing from &quot;&lt;&lt;this->getNode()->getName()&lt;&lt;&quot; : #incomingTokens = &quot;&lt;&lt;incomingTokens->size()&lt;&lt;std::endl;)&#xA;    }&#xA;&#xA;&#x9;std::shared_ptr&lt;Bag&lt;fUML::Semantics::Activities::ActivityEdgeInstance> > outgoingEdges = this->getOutgoingEdges();&#xA;    int outgoingEdgeCount = outgoingEdges->size();&#xA;&#xA;    std::shared_ptr&lt;Bag&lt;fUML::Semantics::Activities::Token> > forkedTokens(new Bag&lt;fUML::Semantics::Activities::Token>());&#xA;    for (unsigned int i = 0; i &lt; incomingTokens->size(); i++) &#xA;    {&#xA;    &#x9;std::shared_ptr&lt;fUML::Semantics::Activities::Token> token = incomingTokens->at(i);&#xA;    &#x9;std::shared_ptr&lt;fUML::Semantics::Activities::ForkedToken> forkedToken(fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createForkedToken());&#xA;        forkedToken->setBaseToken(token);&#xA;        forkedToken->setRemainingOffersCount(outgoingEdgeCount);&#xA;        forkedToken->setBaseTokenIsWithdrawn(false);&#xA;        forkedTokens->push_back(forkedToken);&#xA;    }&#xA;&#xA;&#xA;&#x9;if (this->getNode() == nullptr) &#xA;&#x9;{&#xA;&#x9;&#x9;//NEWDEBUG&#xA;        DEBUG_MESSAGE(std::cout&lt;&lt;&quot;-- printing from Anonymous fork : #forkedTokens = &quot;&lt;&lt;forkedTokens->size()&lt;&lt;std::endl;)&#xA;    &#x9;} &#xA;&#x9;else &#xA;&#x9;{&#x9;//NEWDEBUG&#xA;&#x9;&#x9;DEBUG_MESSAGE(std::cout&lt;&lt;&quot;-- printing from &quot;&lt;&lt;this->getNode()->getName()&lt;&lt;&quot; : #forkedTokens = &quot;&lt;&lt;forkedTokens->size()&lt;&lt;std::endl;)&#xA;    }&#xA;&#xA;    this->addTokens(forkedTokens);&#xA;    this->sendOffers(forkedTokens);"/>
           </eAnnotations>
           <eParameters name="incomingTokens" ordered="false" upperBound="-1" eType="#//Semantics/Activities/Token"/>
         </eOperations>
@@ -2327,12 +2431,12 @@
         </eOperations>
         <eOperations name="getUnofferedTokens" ordered="false" upperBound="-1" eType="#//Semantics/Activities/Token">
           <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-            <details key="body" value="std::shared_ptr&lt;Bag&lt;fUML::Semantics::Activities::Token> > tokens(new Bag&lt;fUML::Semantics::Activities::Token>());&#xA;&#xA;  int i = 0; &#xA;  const int numberUnofferedTokens=this->countUnofferedTokens(); &#xA;  int offeredTokenCount=this->getOfferedTokenCount(); &#xA; &#xA;  Bag&lt;fUML::Semantics::Activities::Token>* heldTokenPtr = this->getHeldTokens().get(); &#xA;  if(nullptr!=heldTokenPtr) &#xA;  { &#xA;    while (i &lt; numberUnofferedTokens) &#xA;    { &#xA;      tokens->push_back((*heldTokenPtr)[offeredTokenCount + i]);&#xA;      i++; &#xA;    } &#xA;  } &#xA;  return tokens; "/>
+            <details key="body" value="std::shared_ptr&lt;Bag&lt;fUML::Semantics::Activities::Token> > tokens(new Bag&lt;fUML::Semantics::Activities::Token>());&#xA;&#xA;  int i = 0; &#xA;  const int numberUnofferedTokens=this->countUnofferedTokens(); &#xA;  int offeredTokenCount=this->getOfferedTokenCount(); &#xA;&#xA;//NEWDEBUG&#xA;  DEBUG_MESSAGE(std::cout&lt;&lt;&quot;-- printing from ObjectNodeActivation::&quot;&lt;&lt;__FUNCTION__&lt;&lt;&quot; '&quot;&lt;&lt;(this->getNode() == nullptr ? &quot;...&quot; : (&quot;node = &quot; + this->getNode()->getName()))&lt;&lt;&quot;' : numberUnofferedTokens = &quot;&lt;&lt;numberUnofferedTokens&lt;&lt;std::endl;)&#xA;  DEBUG_MESSAGE(std::cout&lt;&lt;&quot;-- printing from ObjectNodeActivation::&quot;&lt;&lt;__FUNCTION__&lt;&lt;&quot; '&quot;&lt;&lt;(this->getNode() == nullptr ? &quot;...&quot; : (&quot;node = &quot; + this->getNode()->getName()))&lt;&lt;&quot;' : offeredTokenCount = &quot;&lt;&lt;offeredTokenCount&lt;&lt;std::endl;)&#xA; &#xA;  Bag&lt;fUML::Semantics::Activities::Token>* heldTokenPtr = this->getHeldTokens().get(); &#xA;  if(nullptr!=heldTokenPtr) &#xA;  { &#xA;    while (i &lt; numberUnofferedTokens) &#xA;    { &#xA;      tokens->push_back((*heldTokenPtr)[offeredTokenCount + i]);&#xA;      i++; &#xA;    } &#xA;  } &#xA;  return tokens; "/>
           </eAnnotations>
         </eOperations>
         <eOperations name="takeUnofferedTokens" ordered="false" upperBound="-1" eType="#//Semantics/Activities/Token">
           <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-            <details key="body" value="std::shared_ptr&lt;Bag&lt;fUML::Semantics::Activities::Token> > tokens = this->getUnofferedTokens();&#xA;    for (unsigned int i = 0; i &lt; tokens->size(); i++) &#xA;    {&#xA;    &#x9;std::shared_ptr&lt;fUML::Semantics::Activities::Token> token = tokens->at(i);&#xA;        token->withdraw();&#xA;    }&#xA;    return tokens;"/>
+            <details key="body" value="std::shared_ptr&lt;Bag&lt;fUML::Semantics::Activities::Token> > tokens = this->getUnofferedTokens();&#xA;&#xA;//NEWDEBUG&#xA;DEBUG_MESSAGE(std::cout&lt;&lt;&quot;-- printing from ObjectNodeActivation::&quot;&lt;&lt;__FUNCTION__&lt;&lt;&quot; '&quot;&lt;&lt;(this->getNode() == nullptr ? &quot;...&quot; : (&quot;node = &quot; + this->getNode()->getName()))&lt;&lt;&quot;' : #unofferedTokens before withdraw = &quot;&lt;&lt;tokens->size()&lt;&lt;std::endl;)&#xA;&#xA;    for (unsigned int i = 0; i &lt; tokens->size(); i++) &#xA;    {&#xA;    &#x9;std::shared_ptr&lt;fUML::Semantics::Activities::Token> token = tokens->at(i);&#xA;        token->withdraw();&#xA;    }&#xA;&#xA;//NEWDEBUG&#xA;DEBUG_MESSAGE(std::cout&lt;&lt;&quot;-- printing from ObjectNodeActivation::&quot;&lt;&lt;__FUNCTION__&lt;&lt;&quot; '&quot;&lt;&lt;(this->getNode() == nullptr ? &quot;...&quot; : (&quot;node = &quot; + this->getNode()->getName()))&lt;&lt;&quot;' : #unofferedTokens after withdraw = &quot;&lt;&lt;countUnofferedTokens()&lt;&lt;std::endl;)&#xA;&#xA;    return tokens;"/>
           </eAnnotations>
         </eOperations>
         <eOperations name="run" ordered="false" lowerBound="1">
@@ -2387,6 +2491,11 @@
             <details key="body" value="return false;"/>
           </eAnnotations>
         </eOperations>
+        <eOperations name="_copy" lowerBound="1" eType="#//Semantics/Activities/Token">
+          <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+            <details key="body" value="// Return a new object token with the same value as this token.&#xA;// [Note: the holder of the copy is not set.]&#xA;&#xA;std::shared_ptr&lt;fUML::Semantics::Activities::ObjectToken> copy = fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createObjectToken();&#xA;copy->setValue(this->getValue());&#xA;&#xA;return copy;"/>
+          </eAnnotations>
+        </eOperations>
         <eStructuralFeatures xsi:type="ecore:EReference" name="value" ordered="false"
             eType="#//Semantics/Values/Value" containment="true"/>
       </eClassifiers>
@@ -2433,7 +2542,7 @@
         </eOperations>
         <eOperations name="withdraw" ordered="false" lowerBound="1">
           <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-            <details key="body" value="if (!this->isWithdrawn()) &#xA;&#x9;{&#xA;&#x9;&#x9;std::shared_ptr&lt;fUML::Semantics::Activities::ActivityNodeActivation> holder = this->getHolder().lock();&#xA;        this->setHolder(nullptr);&#xA;&#x9;&#x9;this->setWithdrawn(true);&#xA;&#x9;&#x9;if (holder)&#xA;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;holder->removeToken(getThisTokenPtr());&#xA;&#x9;&#x9;}&#xA;    }"/>
+            <details key="body" value="if (!this->isWithdrawn()) &#xA;&#x9;{&#xA;&#x9;&#x9;std::shared_ptr&lt;fUML::Semantics::Activities::ActivityNodeActivation> holder = this->getHolder().lock();&#xA;&#x9;&#x9;//NEWDEBUG&#xA;&#x9;&#x9;DEBUG_MESSAGE(std::cout&lt;&lt;&quot;-- printing from Token::&quot;&lt;&lt;__FUNCTION__&lt;&lt;&quot; '&quot;&lt;&lt;(holder->getNode() == nullptr ? &quot;...&quot; : (&quot;holder = &quot; + holder->getNode()->getName()))&lt;&lt;&quot;' : !isWithdrawn&quot;&lt;&lt;std::endl;)&#xA;        this->setHolder(nullptr);&#xA;&#x9;&#x9;this->setWithdrawn(true);&#xA;&#x9;&#x9;if (holder)&#xA;&#x9;&#x9;{&#x9;&#xA;&#x9;&#x9;&#x9;//NEWDEBUG&#xA;&#x9;&#x9;&#x9;DEBUG_MESSAGE(std::cout&lt;&lt;&quot;-- printing from Token::&quot;&lt;&lt;__FUNCTION__&lt;&lt;&quot; '&quot;&lt;&lt;(holder->getNode() == nullptr ? &quot;...&quot; : (&quot;holder = &quot; + holder->getNode()->getName()))&lt;&lt;&quot;' : withdrawing token...&quot;&lt;&lt;std::endl;)&#xA;&#x9;&#x9;&#x9;holder->removeToken(getThisTokenPtr());&#xA;&#x9;&#x9;}&#xA;    }"/>
           </eAnnotations>
         </eOperations>
         <eOperations name="equals" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
@@ -2448,6 +2557,11 @@
         <eOperations name="getValue" ordered="false" eType="#//Semantics/Values/Value">
           <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
             <details key="const"/>
+          </eAnnotations>
+        </eOperations>
+        <eOperations name="_copy" lowerBound="1" eType="#//Semantics/Activities/Token">
+          <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+            <details key="body" value="return std::dynamic_pointer_cast&lt;fUML::Semantics::Activities::Token>(this->copy());"/>
           </eAnnotations>
         </eOperations>
         <eStructuralFeatures xsi:type="ecore:EReference" name="holder" ordered="false"

@@ -177,6 +177,17 @@ std::shared_ptr<ecore::EClass> ActivityExecutionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
+std::shared_ptr<fUML::Semantics::Values::Value> ActivityExecutionImpl::_copy()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Create a new activity execution that is a copy of this execution.
+// [Note: This currently just returns a non-executing execution for the same activity as this execution.]
+
+return fUML::Semantics::CommonBehavior::ExecutionImpl::_copy();
+	//end of body
+}
+
 void ActivityExecutionImpl::execute()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)

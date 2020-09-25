@@ -114,6 +114,10 @@ namespace fUML::Semantics::CommonBehavior
 			//*********************************
 			/*!
 			 */ 
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() = 0;
+			
+			/*!
+			 */ 
 			virtual void execute() = 0;
 			
 			/*!

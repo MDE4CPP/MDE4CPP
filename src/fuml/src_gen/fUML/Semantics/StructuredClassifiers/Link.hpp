@@ -67,6 +67,11 @@ namespace uml
 	class Property;
 }
 
+namespace fUML::Semantics::Values 
+{
+	class Value;
+}
+
 // base class includes
 #include "fUML/Semantics/StructuredClassifiers/ExtensionalValue.hpp"
 
@@ -97,6 +102,10 @@ namespace fUML::Semantics::StructuredClassifiers
 			//*********************************
 			// Operations
 			//*********************************
+			/*!
+			 */ 
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() = 0;
+			
 			/*!
 			 */ 
 			virtual void addTo(std::shared_ptr<fUML::Semantics::Loci::Locus>  locus) = 0;

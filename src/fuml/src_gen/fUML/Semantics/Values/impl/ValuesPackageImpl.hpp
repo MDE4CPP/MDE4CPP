@@ -132,6 +132,7 @@ namespace fUML::Semantics::Values
 			
 			
 			
+			virtual std::shared_ptr<ecore::EOperation> getValue_Operation__copy() const ;
 			virtual std::shared_ptr<ecore::EOperation> getValue_Operation_checkAllParents_Classifier_Classifier() const ;
 			virtual std::shared_ptr<ecore::EOperation> getValue_Operation_equals_Value() const ;
 			virtual std::shared_ptr<ecore::EOperation> getValue_Operation_getTypes() const ;
@@ -151,7 +152,7 @@ namespace fUML::Semantics::Values
 			
 			
 			std::shared_ptr<ecore::EReference> m_evaluation_Attribute_locus = nullptr;std::shared_ptr<ecore::EReference> m_evaluation_Attribute_specification = nullptr;
-			std::shared_ptr<ecore::EOperation> m_value_Operation_checkAllParents_Classifier_Classifier = nullptr;std::shared_ptr<ecore::EOperation> m_value_Operation_equals_Value = nullptr;std::shared_ptr<ecore::EOperation> m_evaluation_Operation_evaluate = nullptr;std::shared_ptr<ecore::EOperation> m_literalBooleanEvaluation_Operation_evaluate = nullptr;std::shared_ptr<ecore::EOperation> m_literalIntegerEvaluation_Operation_evaluate = nullptr;std::shared_ptr<ecore::EOperation> m_literalNullEvaluation_Operation_evaluate = nullptr;std::shared_ptr<ecore::EOperation> m_literalRealEvaluation_Operation_evaluate = nullptr;std::shared_ptr<ecore::EOperation> m_literalStringEvaluation_Operation_evaluate = nullptr;std::shared_ptr<ecore::EOperation> m_literalUnlimitedNaturalEvaluation_Operation_evaluate = nullptr;std::shared_ptr<ecore::EOperation> m_literalEvaluation_Operation_getType_EString = nullptr;std::shared_ptr<ecore::EOperation> m_value_Operation_getTypes = nullptr;std::shared_ptr<ecore::EOperation> m_value_Operation_hasTypes_Classifier = nullptr;std::shared_ptr<ecore::EOperation> m_value_Operation_objectId = nullptr;std::shared_ptr<ecore::EOperation> m_value_Operation_specify = nullptr;std::shared_ptr<ecore::EOperation> m_value_Operation_toString = nullptr;
+			std::shared_ptr<ecore::EOperation> m_value_Operation__copy = nullptr;std::shared_ptr<ecore::EOperation> m_value_Operation_checkAllParents_Classifier_Classifier = nullptr;std::shared_ptr<ecore::EOperation> m_value_Operation_equals_Value = nullptr;std::shared_ptr<ecore::EOperation> m_evaluation_Operation_evaluate = nullptr;std::shared_ptr<ecore::EOperation> m_literalBooleanEvaluation_Operation_evaluate = nullptr;std::shared_ptr<ecore::EOperation> m_literalIntegerEvaluation_Operation_evaluate = nullptr;std::shared_ptr<ecore::EOperation> m_literalNullEvaluation_Operation_evaluate = nullptr;std::shared_ptr<ecore::EOperation> m_literalRealEvaluation_Operation_evaluate = nullptr;std::shared_ptr<ecore::EOperation> m_literalStringEvaluation_Operation_evaluate = nullptr;std::shared_ptr<ecore::EOperation> m_literalUnlimitedNaturalEvaluation_Operation_evaluate = nullptr;std::shared_ptr<ecore::EOperation> m_literalEvaluation_Operation_getType_EString = nullptr;std::shared_ptr<ecore::EOperation> m_value_Operation_getTypes = nullptr;std::shared_ptr<ecore::EOperation> m_value_Operation_hasTypes_Classifier = nullptr;std::shared_ptr<ecore::EOperation> m_value_Operation_objectId = nullptr;std::shared_ptr<ecore::EOperation> m_value_Operation_specify = nullptr;std::shared_ptr<ecore::EOperation> m_value_Operation_toString = nullptr;
 
 			friend class ValuesPackage;
 

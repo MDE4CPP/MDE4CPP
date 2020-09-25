@@ -1720,12 +1720,12 @@ void ActionsPackageImpl::initializeReturnInformationContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_returnInformation_Operation_copy->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
-	m_returnInformation_Operation_copy->setName("copy");
-	m_returnInformation_Operation_copy->setLowerBound(1);
-	m_returnInformation_Operation_copy->setUpperBound(1);
-	m_returnInformation_Operation_copy->setUnique(true);
-	m_returnInformation_Operation_copy->setOrdered(true);
+	m_returnInformation_Operation__copy->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
+	m_returnInformation_Operation__copy->setName("_copy");
+	m_returnInformation_Operation__copy->setLowerBound(1);
+	m_returnInformation_Operation__copy->setUpperBound(1);
+	m_returnInformation_Operation__copy->setUnique(true);
+	m_returnInformation_Operation__copy->setOrdered(true);
 	
 	
 	m_returnInformation_Operation_equals_Value->setEType(ecore::EcorePackage::eInstance()->getEBoolean_Class());

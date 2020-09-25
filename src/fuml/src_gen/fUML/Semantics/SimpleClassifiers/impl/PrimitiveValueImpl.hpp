@@ -45,6 +45,10 @@ namespace fUML::Semantics::SimpleClassifiers
 			//*********************************
 			/*!
 			 */ 
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() ;
+			
+			/*!
+			 */ 
 			virtual std::shared_ptr<Bag<uml::Classifier> > getTypes() ;
 			
 			

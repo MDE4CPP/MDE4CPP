@@ -132,6 +132,19 @@ double RealValueImpl::getValue() const
 //*********************************
 // Operations
 //*********************************
+std::shared_ptr<fUML::Semantics::Values::Value> RealValueImpl::_copy()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Create a new real value with the same value as this real value.
+
+std::shared_ptr<fUML::Semantics::SimpleClassifiers::RealValue> newValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createRealValue();
+newValue->setType(this->getType()); //Duplicated from _copy()-method of super class in order to avoid having to call _copy()-method of super class and having to cast afterwards
+newValue->setValue(this->getValue());
+return newValue;
+	//end of body
+}
+
 bool RealValueImpl::equals(std::shared_ptr<fUML::Semantics::Values::Value>  otherValue)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)

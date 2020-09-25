@@ -173,7 +173,7 @@ int DataStoreNodeActivationImpl::removeToken(std::shared_ptr<fUML::Semantics::Ac
 	int i = fUML::Semantics::Activities::ObjectNodeActivationImpl::removeToken(token);
 		
 		if (this->isRunning()) {
-			std::shared_ptr<fUML::Semantics::Activities::Token> copied_token = std::dynamic_pointer_cast<fUML::Semantics::Activities::Token>(token->copy());
+			std::shared_ptr<fUML::Semantics::Activities::Token> copied_token = std::dynamic_pointer_cast<fUML::Semantics::Activities::Token>(token->_copy());
 			fUML::Semantics::Activities::ObjectNodeActivationImpl::addToken(copied_token);
 			this->sendUnofferedTokens();
 		}

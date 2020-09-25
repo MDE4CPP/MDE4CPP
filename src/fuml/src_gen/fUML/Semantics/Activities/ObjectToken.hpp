@@ -83,6 +83,10 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			/*!
 			 */ 
+			virtual std::shared_ptr<fUML::Semantics::Activities::Token> _copy() = 0;
+			
+			/*!
+			 */ 
 			virtual bool equals(std::shared_ptr<fUML::Semantics::Activities::Token>  other) = 0;
 			
 			/*!

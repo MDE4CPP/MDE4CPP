@@ -193,6 +193,10 @@ std::shared_ptr<ecore::EClass> ValuesPackageImpl::getValue_Class() const
 
 
 
+std::shared_ptr<ecore::EOperation> ValuesPackageImpl::getValue_Operation__copy() const
+{
+	return m_value_Operation__copy;
+}
 std::shared_ptr<ecore::EOperation> ValuesPackageImpl::getValue_Operation_checkAllParents_Classifier_Classifier() const
 {
 	return m_value_Operation_checkAllParents_Classifier_Classifier;

@@ -175,6 +175,29 @@ std::shared_ptr<ecore::EClass> ExecutionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
+std::shared_ptr<fUML::Semantics::Values::Value> ExecutionImpl::_copy()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Create a new execution that has the same behavior and parameterValues as this execution.
+
+std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> newValue = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::Execution>(fUML::Semantics::StructuredClassifiers::ObjectImpl::_copy());
+
+newValue->setContext(this->getContext());
+
+std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> parameterValues = this->getParameterValues();
+unsigned int parameterValuesSize = parameterValues->size();
+
+for(unsigned int i = 0; i < parameterValuesSize; i++)
+{
+	std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> parameterValue = parameterValues->at(i);
+	newValue->getParameterValues()->add(parameterValue->_copy());
+}
+
+return newValue;
+	//end of body
+}
+
 void ExecutionImpl::execute()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)

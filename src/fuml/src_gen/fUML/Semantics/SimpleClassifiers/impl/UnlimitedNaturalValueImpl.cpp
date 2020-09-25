@@ -133,6 +133,19 @@ int UnlimitedNaturalValueImpl::getValue() const
 //*********************************
 // Operations
 //*********************************
+std::shared_ptr<fUML::Semantics::Values::Value> UnlimitedNaturalValueImpl::_copy()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Create a new unlimited natural value with the same value as this unlimited natural value.
+
+std::shared_ptr<fUML::Semantics::SimpleClassifiers::UnlimitedNaturalValue> newValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createUnlimitedNaturalValue();
+newValue->setType(this->getType()); //Duplicated from _copy()-method of super class in order to avoid having to call _copy()-method of super class and having to cast afterwards
+newValue->setValue(this->getValue());
+return newValue;
+	//end of body
+}
+
 bool UnlimitedNaturalValueImpl::equals(std::shared_ptr<fUML::Semantics::Values::Value>  otherValue)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)

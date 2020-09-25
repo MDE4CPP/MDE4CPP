@@ -46,6 +46,8 @@
 
 #include "uml/Property.hpp"
 
+#include "fUML/Semantics/Values/Value.hpp"
+
 //Factories an Package includes
 #include "fUML/Semantics/StructuredClassifiers/impl/StructuredClassifiersFactoryImpl.hpp"
 #include "fUML/Semantics/StructuredClassifiers/impl/StructuredClassifiersPackageImpl.hpp"
@@ -135,6 +137,20 @@ std::shared_ptr<ecore::EClass> LinkImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
+std::shared_ptr<fUML::Semantics::Values::Value> LinkImpl::_copy()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Create a new link with the same type, locus and feature values as this link.
+
+std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link> newValue = std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Link>(fUML::Semantics::StructuredClassifiers::ExtensionalValueImpl::_copy());
+
+newValue->setType(this->getType());
+
+return newValue;
+	//end of body
+}
+
 void LinkImpl::addTo(std::shared_ptr<fUML::Semantics::Loci::Locus>  locus)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;

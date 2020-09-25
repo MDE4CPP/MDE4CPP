@@ -93,6 +93,7 @@ void ActivitiesPackageImpl::createActivityExecutionContent(std::shared_ptr<ecore
 	
 	m_activityExecution_Attribute_activationGroup = factory->createEReference_in_EContainingClass(m_activityExecution_Class, ACTIVITYEXECUTION_ATTRIBUTE_ACTIVATIONGROUP);
 	
+	m_activityExecution_Operation__copy = factory->createEOperation_in_EContainingClass(m_activityExecution_Class, ACTIVITYEXECUTION_OPERATION__COPY);
 	m_activityExecution_Operation_execute = factory->createEOperation_in_EContainingClass(m_activityExecution_Class, ACTIVITYEXECUTION_OPERATION_EXECUTE);
 	m_activityExecution_Operation_new_ = factory->createEOperation_in_EContainingClass(m_activityExecution_Class, ACTIVITYEXECUTION_OPERATION_NEW_);
 	m_activityExecution_Operation_terminate = factory->createEOperation_in_EContainingClass(m_activityExecution_Class, ACTIVITYEXECUTION_OPERATION_TERMINATE);
@@ -226,6 +227,7 @@ void ActivitiesPackageImpl::createControlTokenContent(std::shared_ptr<ecore::EPa
 	m_controlToken_Class = factory->createEClass_in_EPackage(package, CONTROLTOKEN_CLASS);
 	
 	
+	m_controlToken_Operation__copy = factory->createEOperation_in_EContainingClass(m_controlToken_Class, CONTROLTOKEN_OPERATION__COPY);
 	m_controlToken_Operation_equals_Token = factory->createEOperation_in_EContainingClass(m_controlToken_Class, CONTROLTOKEN_OPERATION_EQUALS_TOKEN);
 	m_controlToken_Operation_getValue = factory->createEOperation_in_EContainingClass(m_controlToken_Class, CONTROLTOKEN_OPERATION_GETVALUE);
 	m_controlToken_Operation_isControl = factory->createEOperation_in_EContainingClass(m_controlToken_Class, CONTROLTOKEN_OPERATION_ISCONTROL);
@@ -343,6 +345,7 @@ void ActivitiesPackageImpl::createForkedTokenContent(std::shared_ptr<ecore::EPac
 	
 	m_forkedToken_Attribute_baseToken = factory->createEReference_in_EContainingClass(m_forkedToken_Class, FORKEDTOKEN_ATTRIBUTE_BASETOKEN);
 	
+	m_forkedToken_Operation__copy = factory->createEOperation_in_EContainingClass(m_forkedToken_Class, FORKEDTOKEN_OPERATION__COPY);
 	m_forkedToken_Operation_equals_Token = factory->createEOperation_in_EContainingClass(m_forkedToken_Class, FORKEDTOKEN_OPERATION_EQUALS_TOKEN);
 	m_forkedToken_Operation_getValue = factory->createEOperation_in_EContainingClass(m_forkedToken_Class, FORKEDTOKEN_OPERATION_GETVALUE);
 	m_forkedToken_Operation_isControl = factory->createEOperation_in_EContainingClass(m_forkedToken_Class, FORKEDTOKEN_OPERATION_ISCONTROL);
@@ -403,6 +406,7 @@ void ActivitiesPackageImpl::createObjectTokenContent(std::shared_ptr<ecore::EPac
 	
 	m_objectToken_Attribute_value = factory->createEReference_in_EContainingClass(m_objectToken_Class, OBJECTTOKEN_ATTRIBUTE_VALUE);
 	
+	m_objectToken_Operation__copy = factory->createEOperation_in_EContainingClass(m_objectToken_Class, OBJECTTOKEN_OPERATION__COPY);
 	m_objectToken_Operation_equals_Token = factory->createEOperation_in_EContainingClass(m_objectToken_Class, OBJECTTOKEN_OPERATION_EQUALS_TOKEN);
 	m_objectToken_Operation_isControl = factory->createEOperation_in_EContainingClass(m_objectToken_Class, OBJECTTOKEN_OPERATION_ISCONTROL);
 	
@@ -429,6 +433,7 @@ void ActivitiesPackageImpl::createTokenContent(std::shared_ptr<ecore::EPackage> 
 	
 	m_token_Attribute_holder = factory->createEReference_in_EContainingClass(m_token_Class, TOKEN_ATTRIBUTE_HOLDER);
 	
+	m_token_Operation__copy = factory->createEOperation_in_EContainingClass(m_token_Class, TOKEN_OPERATION__COPY);
 	m_token_Operation_equals_Token = factory->createEOperation_in_EContainingClass(m_token_Class, TOKEN_OPERATION_EQUALS_TOKEN);
 	m_token_Operation_getValue = factory->createEOperation_in_EContainingClass(m_token_Class, TOKEN_OPERATION_GETVALUE);
 	m_token_Operation_isControl = factory->createEOperation_in_EContainingClass(m_token_Class, TOKEN_OPERATION_ISCONTROL);

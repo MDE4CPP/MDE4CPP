@@ -42,6 +42,11 @@ namespace uml
 	class Parameter;
 }
 
+namespace fUML::Semantics::CommonBehavior 
+{
+	class ParameterValue;
+}
+
 namespace fUML::Semantics::Values 
 {
 	class Value;
@@ -78,6 +83,10 @@ namespace fUML::Semantics::CommonBehavior
 			//*********************************
 			// Operations
 			//*********************************
+			/*!
+			 */ 
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> _copy() = 0;
+			
 			
 			//*********************************
 			// Attributes Getter Setter

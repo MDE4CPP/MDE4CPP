@@ -45,6 +45,10 @@ namespace fUML::Semantics::StructuredClassifiers
 			//*********************************
 			/*!
 			 */ 
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() ;
+			
+			/*!
+			 */ 
 			virtual void assignFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<Bag<fUML::Semantics::Values::Value> >  values,int position) ;
 			
 			/*!

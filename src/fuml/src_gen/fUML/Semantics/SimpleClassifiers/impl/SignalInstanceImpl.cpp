@@ -37,6 +37,8 @@
 
 #include "uml/Signal.hpp"
 
+#include "fUML/Semantics/Values/Value.hpp"
+
 //Factories an Package includes
 #include "fUML/Semantics/SimpleClassifiers/impl/SimpleClassifiersFactoryImpl.hpp"
 #include "fUML/Semantics/SimpleClassifiers/impl/SimpleClassifiersPackageImpl.hpp"
@@ -124,6 +126,17 @@ std::shared_ptr<ecore::EClass> SignalInstanceImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
+std::shared_ptr<fUML::Semantics::Values::Value> SignalInstanceImpl::_copy()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Create a new signal instance with the same type and feature values as this signal instance.
+
+std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> newValue = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::SignalInstance>(fUML::Semantics::SimpleClassifiers::CompoundValueImpl::_copy());
+newValue->setType(this->getType());
+return newValue;
+	//end of body
+}
 
 //*********************************
 // References

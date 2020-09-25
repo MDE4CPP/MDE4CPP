@@ -119,6 +119,18 @@ std::shared_ptr<ecore::EClass> PrimitiveValueImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
+std::shared_ptr<fUML::Semantics::Values::Value> PrimitiveValueImpl::_copy()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Create a new value that is equal to this primitive value.
+
+std::shared_ptr<fUML::Semantics::SimpleClassifiers::PrimitiveValue> newValue(new fUML::Semantics::SimpleClassifiers::PrimitiveValueImpl());
+newValue->setType(this->getType());
+return newValue;
+	//end of body
+}
+
 std::shared_ptr<Bag<uml::Classifier> > PrimitiveValueImpl::getTypes()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)

@@ -363,7 +363,13 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> ExecutionFactoryImpl
     {
         if(execution != nullptr)
         {
-            execution->setContext(execution);
+	  /*
+	  Setting the execution as the context of itself creates a circular dependecy between shared_ptrs,
+	  which results in a memory leak.
+	  Since the execution context should not be needed if the executed behavior does not have a context,
+	  this line is commented out
+	  */
+            //execution->setContext(execution);
         }
     }
     else

@@ -70,6 +70,10 @@ std::shared_ptr<ecore::EAttribute> SimpleClassifiersPackageImpl::getBooleanValue
 }
 
 
+std::shared_ptr<ecore::EOperation> SimpleClassifiersPackageImpl::getBooleanValue_Operation__copy() const
+{
+	return m_booleanValue_Operation__copy;
+}
 std::shared_ptr<ecore::EOperation> SimpleClassifiersPackageImpl::getBooleanValue_Operation_equals_Value() const
 {
 	return m_booleanValue_Operation_equals_Value;
@@ -97,6 +101,10 @@ std::shared_ptr<ecore::EReference> SimpleClassifiersPackageImpl::getCompoundValu
 	return m_compoundValue_Attribute_featureValues;
 }
 
+std::shared_ptr<ecore::EOperation> SimpleClassifiersPackageImpl::getCompoundValue_Operation__copy() const
+{
+	return m_compoundValue_Operation__copy;
+}
 std::shared_ptr<ecore::EOperation> SimpleClassifiersPackageImpl::getCompoundValue_Operation_assignFeatureValue_StructuralFeature_EInt() const
 {
 	return m_compoundValue_Operation_assignFeatureValue_StructuralFeature_EInt;
@@ -136,6 +144,10 @@ std::shared_ptr<ecore::EReference> SimpleClassifiersPackageImpl::getDataValue_At
 	return m_dataValue_Attribute_type;
 }
 
+std::shared_ptr<ecore::EOperation> SimpleClassifiersPackageImpl::getDataValue_Operation__copy() const
+{
+	return m_dataValue_Operation__copy;
+}
 std::shared_ptr<ecore::EOperation> SimpleClassifiersPackageImpl::getDataValue_Operation_getTypes() const
 {
 	return m_dataValue_Operation_getTypes;
@@ -163,6 +175,10 @@ std::shared_ptr<ecore::EReference> SimpleClassifiersPackageImpl::getEnumerationV
 	return m_enumerationValue_Attribute_type;
 }
 
+std::shared_ptr<ecore::EOperation> SimpleClassifiersPackageImpl::getEnumerationValue_Operation__copy() const
+{
+	return m_enumerationValue_Operation__copy;
+}
 std::shared_ptr<ecore::EOperation> SimpleClassifiersPackageImpl::getEnumerationValue_Operation_equals_Value() const
 {
 	return m_enumerationValue_Operation_equals_Value;
@@ -206,6 +222,10 @@ std::shared_ptr<ecore::EReference> SimpleClassifiersPackageImpl::getFeatureValue
 	return m_featureValue_Attribute_values;
 }
 
+std::shared_ptr<ecore::EOperation> SimpleClassifiersPackageImpl::getFeatureValue_Operation__copy() const
+{
+	return m_featureValue_Operation__copy;
+}
 std::shared_ptr<ecore::EOperation> SimpleClassifiersPackageImpl::getFeatureValue_Operation_hasEqualValues_FeatureValue() const
 {
 	return m_featureValue_Operation_hasEqualValues_FeatureValue;
@@ -225,6 +245,10 @@ std::shared_ptr<ecore::EAttribute> SimpleClassifiersPackageImpl::getIntegerValue
 }
 
 
+std::shared_ptr<ecore::EOperation> SimpleClassifiersPackageImpl::getIntegerValue_Operation__copy() const
+{
+	return m_integerValue_Operation__copy;
+}
 std::shared_ptr<ecore::EOperation> SimpleClassifiersPackageImpl::getIntegerValue_Operation_equals_Value() const
 {
 	return m_integerValue_Operation_equals_Value;
@@ -252,6 +276,10 @@ std::shared_ptr<ecore::EReference> SimpleClassifiersPackageImpl::getPrimitiveVal
 	return m_primitiveValue_Attribute_type;
 }
 
+std::shared_ptr<ecore::EOperation> SimpleClassifiersPackageImpl::getPrimitiveValue_Operation__copy() const
+{
+	return m_primitiveValue_Operation__copy;
+}
 std::shared_ptr<ecore::EOperation> SimpleClassifiersPackageImpl::getPrimitiveValue_Operation_getTypes() const
 {
 	return m_primitiveValue_Operation_getTypes;
@@ -271,6 +299,10 @@ std::shared_ptr<ecore::EAttribute> SimpleClassifiersPackageImpl::getRealValue_At
 }
 
 
+std::shared_ptr<ecore::EOperation> SimpleClassifiersPackageImpl::getRealValue_Operation__copy() const
+{
+	return m_realValue_Operation__copy;
+}
 std::shared_ptr<ecore::EOperation> SimpleClassifiersPackageImpl::getRealValue_Operation_equals_Value() const
 {
 	return m_realValue_Operation_equals_Value;
@@ -298,6 +330,10 @@ std::shared_ptr<ecore::EReference> SimpleClassifiersPackageImpl::getSignalInstan
 	return m_signalInstance_Attribute_type;
 }
 
+std::shared_ptr<ecore::EOperation> SimpleClassifiersPackageImpl::getSignalInstance_Operation__copy() const
+{
+	return m_signalInstance_Operation__copy;
+}
 
 // End Class SignalInstance
 
@@ -313,6 +349,10 @@ std::shared_ptr<ecore::EAttribute> SimpleClassifiersPackageImpl::getStringValue_
 }
 
 
+std::shared_ptr<ecore::EOperation> SimpleClassifiersPackageImpl::getStringValue_Operation__copy() const
+{
+	return m_stringValue_Operation__copy;
+}
 std::shared_ptr<ecore::EOperation> SimpleClassifiersPackageImpl::getStringValue_Operation_equals_Value() const
 {
 	return m_stringValue_Operation_equals_Value;
@@ -383,6 +423,10 @@ std::shared_ptr<ecore::EAttribute> SimpleClassifiersPackageImpl::getUnlimitedNat
 }
 
 
+std::shared_ptr<ecore::EOperation> SimpleClassifiersPackageImpl::getUnlimitedNaturalValue_Operation__copy() const
+{
+	return m_unlimitedNaturalValue_Operation__copy;
+}
 std::shared_ptr<ecore::EOperation> SimpleClassifiersPackageImpl::getUnlimitedNaturalValue_Operation_equals_Value() const
 {
 	return m_unlimitedNaturalValue_Operation_equals_Value;

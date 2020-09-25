@@ -330,6 +330,14 @@ void ActivitiesPackageImpl::initializeActivityExecutionContent()
 	    }
 	}
 	
+	m_activityExecution_Operation__copy->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
+	m_activityExecution_Operation__copy->setName("_copy");
+	m_activityExecution_Operation__copy->setLowerBound(1);
+	m_activityExecution_Operation__copy->setUpperBound(1);
+	m_activityExecution_Operation__copy->setUnique(true);
+	m_activityExecution_Operation__copy->setOrdered(true);
+	
+	
 	m_activityExecution_Operation_execute->setEType(nullptr);
 	m_activityExecution_Operation_execute->setName("execute");
 	m_activityExecution_Operation_execute->setLowerBound(1);
@@ -1347,6 +1355,14 @@ void ActivitiesPackageImpl::initializeControlTokenContent()
 	
 	
 	
+	m_controlToken_Operation__copy->setEType(getToken_Class());
+	m_controlToken_Operation__copy->setName("_copy");
+	m_controlToken_Operation__copy->setLowerBound(1);
+	m_controlToken_Operation__copy->setUpperBound(1);
+	m_controlToken_Operation__copy->setUnique(true);
+	m_controlToken_Operation__copy->setOrdered(true);
+	
+	
 	m_controlToken_Operation_equals_Token->setEType(ecore::EcorePackage::eInstance()->getEBoolean_Class());
 	m_controlToken_Operation_equals_Token->setName("equals");
 	m_controlToken_Operation_equals_Token->setLowerBound(1);
@@ -2206,6 +2222,14 @@ void ActivitiesPackageImpl::initializeForkedTokenContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
+	m_forkedToken_Operation__copy->setEType(getToken_Class());
+	m_forkedToken_Operation__copy->setName("_copy");
+	m_forkedToken_Operation__copy->setLowerBound(1);
+	m_forkedToken_Operation__copy->setUpperBound(1);
+	m_forkedToken_Operation__copy->setUnique(true);
+	m_forkedToken_Operation__copy->setOrdered(true);
+	
+	
 	m_forkedToken_Operation_equals_Token->setEType(ecore::EcorePackage::eInstance()->getEBoolean_Class());
 	m_forkedToken_Operation_equals_Token->setName("equals");
 	m_forkedToken_Operation_equals_Token->setLowerBound(1);
@@ -2501,6 +2525,14 @@ void ActivitiesPackageImpl::initializeObjectTokenContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
+	m_objectToken_Operation__copy->setEType(getToken_Class());
+	m_objectToken_Operation__copy->setName("_copy");
+	m_objectToken_Operation__copy->setLowerBound(1);
+	m_objectToken_Operation__copy->setUpperBound(1);
+	m_objectToken_Operation__copy->setUnique(true);
+	m_objectToken_Operation__copy->setOrdered(true);
+	
+	
 	m_objectToken_Operation_equals_Token->setEType(ecore::EcorePackage::eInstance()->getEBoolean_Class());
 	m_objectToken_Operation_equals_Token->setName("equals");
 	m_objectToken_Operation_equals_Token->setLowerBound(1);
@@ -2663,6 +2695,14 @@ void ActivitiesPackageImpl::initializeTokenContent()
 	   		m_token_Attribute_holder->setEOpposite(otherEnd);
 	    }
 	}
+	
+	m_token_Operation__copy->setEType(getToken_Class());
+	m_token_Operation__copy->setName("_copy");
+	m_token_Operation__copy->setLowerBound(1);
+	m_token_Operation__copy->setUpperBound(1);
+	m_token_Operation__copy->setUnique(true);
+	m_token_Operation__copy->setOrdered(true);
+	
 	
 	m_token_Operation_equals_Token->setEType(ecore::EcorePackage::eInstance()->getEBoolean_Class());
 	m_token_Operation_equals_Token->setName("equals");

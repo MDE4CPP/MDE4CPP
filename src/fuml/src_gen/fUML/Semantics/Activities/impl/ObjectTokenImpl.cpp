@@ -125,6 +125,20 @@ std::shared_ptr<ecore::EClass> ObjectTokenImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
+std::shared_ptr<fUML::Semantics::Activities::Token> ObjectTokenImpl::_copy()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Return a new object token with the same value as this token.
+// [Note: the holder of the copy is not set.]
+
+std::shared_ptr<fUML::Semantics::Activities::ObjectToken> copy = fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createObjectToken();
+copy->setValue(this->getValue());
+
+return copy;
+	//end of body
+}
+
 bool ObjectTokenImpl::equals(std::shared_ptr<fUML::Semantics::Activities::Token>  other)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)

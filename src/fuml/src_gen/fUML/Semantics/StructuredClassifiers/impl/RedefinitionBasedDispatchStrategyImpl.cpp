@@ -24,6 +24,7 @@
 
 //Includes from codegen annotation
 #include "abstractDataTypes/Subset.hpp"
+#include "uml/UmlPackage.hpp"
 #include "uml/NamedElement.hpp"
 #include "uml/Class.hpp"
 #include "uml/Operation.hpp"
@@ -147,13 +148,14 @@ std::shared_ptr<uml::Behavior> RedefinitionBasedDispatchStrategyImpl::retrieveMe
 	unsigned int i = 0;
 	while(method == nullptr && (i < object->getTypes()->size()))
 	{
-		std::shared_ptr<uml::Class> type = std::dynamic_pointer_cast<uml::Class>(object->getTypes()->at(i));
-		std::shared_ptr<Bag<uml::NamedElement> > members = type->getMember();
-		unsigned int j = 0;
-		while(method == nullptr && (j < members->size()))
+		std::shared_ptr<uml::Classifier> type = object->getTypes()->at(i);
+		if(type->eClass()->getMetaElementID() == uml::UmlPackage::CLASS_CLASS)
 		{
-			std::shared_ptr<uml::NamedElement> member = members->at(j);
-			std::shared_ptr<uml::Operation> memberOperation = std::dynamic_pointer_cast<uml::Operation>(member);
+		std::shared_ptr<Bag<uml::Operation> > memberOperations = type->getAllOperations();
+		unsigned int j = 0;
+		while(method == nullptr && (j < memberOperations->size()))
+		{
+			std::shared_ptr<uml::Operation> memberOperation = memberOperations->at(j);
 			if(memberOperation != nullptr)
 			{	
 				if(this->operationsMatch(memberOperation, operation))
@@ -162,6 +164,7 @@ std::shared_ptr<uml::Behavior> RedefinitionBasedDispatchStrategyImpl::retrieveMe
 				}
 			}
 			j = j + 1;
+		}
 		}
 		i = i + 1;
 	}

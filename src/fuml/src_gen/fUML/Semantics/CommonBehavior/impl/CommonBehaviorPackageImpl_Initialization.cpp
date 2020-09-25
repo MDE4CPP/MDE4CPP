@@ -156,12 +156,12 @@ void CommonBehaviorPackageImpl::initializeCallEventExecutionContent()
 	}
 	
 	
-	m_callEventExecution_Operation_copy->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
-	m_callEventExecution_Operation_copy->setName("copy");
-	m_callEventExecution_Operation_copy->setLowerBound(1);
-	m_callEventExecution_Operation_copy->setUpperBound(1);
-	m_callEventExecution_Operation_copy->setUnique(true);
-	m_callEventExecution_Operation_copy->setOrdered(true);
+	m_callEventExecution_Operation__copy->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
+	m_callEventExecution_Operation__copy->setName("_copy");
+	m_callEventExecution_Operation__copy->setLowerBound(1);
+	m_callEventExecution_Operation__copy->setUpperBound(1);
+	m_callEventExecution_Operation__copy->setUnique(true);
+	m_callEventExecution_Operation__copy->setOrdered(true);
 	
 	
 	m_callEventExecution_Operation_createEventOccurrence->setEType(getEventOccurrence_Class());
@@ -829,6 +829,14 @@ void CommonBehaviorPackageImpl::initializeExecutionContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
+	m_execution_Operation__copy->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
+	m_execution_Operation__copy->setName("_copy");
+	m_execution_Operation__copy->setLowerBound(1);
+	m_execution_Operation__copy->setUpperBound(1);
+	m_execution_Operation__copy->setUnique(true);
+	m_execution_Operation__copy->setOrdered(true);
+	
+	
 	m_execution_Operation_execute->setEType(nullptr);
 	m_execution_Operation_execute->setName("execute");
 	m_execution_Operation_execute->setLowerBound(1);
@@ -1334,6 +1342,14 @@ void CommonBehaviorPackageImpl::initializeParameterValueContent()
 			//undefined otherEnd
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
+	
+	m_parameterValue_Operation__copy->setEType(getParameterValue_Class());
+	m_parameterValue_Operation__copy->setName("_copy");
+	m_parameterValue_Operation__copy->setLowerBound(1);
+	m_parameterValue_Operation__copy->setUpperBound(1);
+	m_parameterValue_Operation__copy->setUnique(true);
+	m_parameterValue_Operation__copy->setOrdered(true);
+	
 	
 	
 }

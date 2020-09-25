@@ -97,7 +97,9 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Operations
 			//*********************************
-			
+			/*!
+			 */ 
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() = 0;
 			
 			/*!
 			 */ 

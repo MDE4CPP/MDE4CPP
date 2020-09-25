@@ -134,6 +134,18 @@ std::shared_ptr<ecore::EClass> DataValueImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
+std::shared_ptr<fUML::Semantics::Values::Value> DataValueImpl::_copy()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Create a new data value with the same type and feature values as this data value.
+
+std::shared_ptr<fUML::Semantics::SimpleClassifiers::DataValue> newValue = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::DataValue>(fUML::Semantics::SimpleClassifiers::CompoundValueImpl::_copy());
+newValue->setType(this->getType());
+return newValue;
+	//end of body
+}
+
 std::shared_ptr<Bag<uml::Classifier> > DataValueImpl::getTypes()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)

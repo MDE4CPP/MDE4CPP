@@ -213,9 +213,15 @@ void ActivityEdgeInstanceImpl::sendOffer(std::shared_ptr<Bag<fUML::Semantics::Ac
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 		std::shared_ptr<fUML::Semantics::Activities::Offer> offer(fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createOffer());
+	//NEWDEBUG
+	DEBUG_MESSAGE(std::cout<<"-- printing from ActivityEdgeInstance::"<<__FUNCTION__<<" '"<<(this->getEdge() == nullptr ? "..." : ("edge = " + this->getEdge()->getName()))<<"' : created new offer with "<<tokens->size()<<" tokens"<<std::endl;)
     offer->getOfferedTokens()->insert(offer->getOfferedTokens()->end(), tokens->begin(), tokens->end());
     this->getOffers()->push_back(offer);
     auto target = this->getTarget().lock();
+
+	//NEWDEBUG
+	DEBUG_MESSAGE(std::cout<<"-- printing from ActivityEdgeInstance::"<<__FUNCTION__<<" '"<<(this->getEdge() == nullptr ? "..." : ("edge = " + this->getEdge()->getName()))<<"' : #offers before receive = "<<this->getOffers()->size()<<std::endl;)
+
     if(nullptr == target )
     {
         std::cout << "[sendOffer] The edge does not have a target" << std::endl;
@@ -224,6 +230,9 @@ void ActivityEdgeInstanceImpl::sendOffer(std::shared_ptr<Bag<fUML::Semantics::Ac
     {
     	target->receiveOffer();
     }
+
+	//NEWDEBUG
+	DEBUG_MESSAGE(std::cout<<"-- printing from ActivityEdgeInstance::"<<__FUNCTION__<<" '"<<(this->getEdge() == nullptr ? "..." : ("edge = " + this->getEdge()->getName()))<<"' : current #offers after receive = "<<this->getOffers()->size()<<std::endl;)
 	//end of body
 }
 
@@ -234,9 +243,13 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > ActivityEdgeInstanceIm
 	std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > tokens(new Bag<fUML::Semantics::Activities::Token>());
 
 	std::shared_ptr<Bag<fUML::Semantics::Activities::Offer> > offerList = this->getOffers();
+	//NEWDEBUG
+	DEBUG_MESSAGE(std::cout<<"-- printing from ActivityEdgeInstance::"<<__FUNCTION__<<" '"<<(this->getEdge() == nullptr ? "..." : ("edge = " + this->getEdge()->getName()))<<"' : #offers = "<<this->getOffers()->size()<<std::endl;)
 	    for(std::shared_ptr<fUML::Semantics::Activities::Offer> offer : *offerList)
     {
     	auto vec = offer->retrieveOfferedTokens();
+	//NEWDEBUG
+	DEBUG_MESSAGE(std::cout<<"-- printing from ActivityEdgeInstance::"<<__FUNCTION__<<" '"<<(this->getEdge() == nullptr ? "..." : ("edge = " + this->getEdge()->getName()))<<"' : retrieved "<<vec->size()<<" tokens from offer"<<std::endl;)
         tokens->insert(tokens->end(), vec->begin(), vec->end());
     }
     this->getOffers()->clear();

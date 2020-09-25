@@ -145,6 +145,29 @@ int FeatureValueImpl::getPosition() const
 //*********************************
 // Operations
 //*********************************
+std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> FeatureValueImpl::_copy()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Create a copy of this feature value.
+
+std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> newValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createFeatureValue();
+newValue->setFeature(this->getFeature());
+newValue->setPosition(this->getPosition());
+
+std::shared_ptr<Bag<fUML::Semantics::Values::Value>> values = this->getValues();
+unsigned int valuesSize = values->size();
+
+for(unsigned int i = 0; i < valuesSize; i++)
+{
+	std::shared_ptr<fUML::Semantics::Values::Value> value = values->at(i);
+	newValue->getValues()->add(value->_copy());
+}
+
+return newValue;
+	//end of body
+}
+
 bool FeatureValueImpl::hasEqualValues(std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue>  other)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)

@@ -54,6 +54,7 @@ namespace fUML::Semantics::SimpleClassifiers
 			virtual std::shared_ptr<ecore::EAttribute> getBooleanValue_Attribute_value() const ;
 			
 			
+			virtual std::shared_ptr<ecore::EOperation> getBooleanValue_Operation__copy() const ;
 			virtual std::shared_ptr<ecore::EOperation> getBooleanValue_Operation_equals_Value() const ;
 			virtual std::shared_ptr<ecore::EOperation> getBooleanValue_Operation_specify() const ;
 			virtual std::shared_ptr<ecore::EOperation> getBooleanValue_Operation_toString() const ;
@@ -67,6 +68,7 @@ namespace fUML::Semantics::SimpleClassifiers
 			
 			virtual std::shared_ptr<ecore::EReference> getCompoundValue_Attribute_featureValues() const ;
 			
+			virtual std::shared_ptr<ecore::EOperation> getCompoundValue_Operation__copy() const ;
 			virtual std::shared_ptr<ecore::EOperation> getCompoundValue_Operation_assignFeatureValue_StructuralFeature_EInt() const ;
 			virtual std::shared_ptr<ecore::EOperation> getCompoundValue_Operation_equals_Value() const ;
 			virtual std::shared_ptr<ecore::EOperation> getCompoundValue_Operation_removeFeatureValues_Classifier() const ;
@@ -83,6 +85,7 @@ namespace fUML::Semantics::SimpleClassifiers
 			
 			virtual std::shared_ptr<ecore::EReference> getDataValue_Attribute_type() const ;
 			
+			virtual std::shared_ptr<ecore::EOperation> getDataValue_Operation__copy() const ;
 			virtual std::shared_ptr<ecore::EOperation> getDataValue_Operation_getTypes() const ;
 			virtual std::shared_ptr<ecore::EOperation> getDataValue_Operation_new_() const ;
 			
@@ -96,6 +99,7 @@ namespace fUML::Semantics::SimpleClassifiers
 			virtual std::shared_ptr<ecore::EReference> getEnumerationValue_Attribute_literal() const ;
 			virtual std::shared_ptr<ecore::EReference> getEnumerationValue_Attribute_type() const ;
 			
+			virtual std::shared_ptr<ecore::EOperation> getEnumerationValue_Operation__copy() const ;
 			virtual std::shared_ptr<ecore::EOperation> getEnumerationValue_Operation_equals_Value() const ;
 			virtual std::shared_ptr<ecore::EOperation> getEnumerationValue_Operation_getTypes() const ;
 			virtual std::shared_ptr<ecore::EOperation> getEnumerationValue_Operation_new_() const ;
@@ -113,6 +117,7 @@ namespace fUML::Semantics::SimpleClassifiers
 			virtual std::shared_ptr<ecore::EReference> getFeatureValue_Attribute_feature() const ;
 			virtual std::shared_ptr<ecore::EReference> getFeatureValue_Attribute_values() const ;
 			
+			virtual std::shared_ptr<ecore::EOperation> getFeatureValue_Operation__copy() const ;
 			virtual std::shared_ptr<ecore::EOperation> getFeatureValue_Operation_hasEqualValues_FeatureValue() const ;
 			
 			// End Class FeatureValue
@@ -124,6 +129,7 @@ namespace fUML::Semantics::SimpleClassifiers
 			virtual std::shared_ptr<ecore::EAttribute> getIntegerValue_Attribute_value() const ;
 			
 			
+			virtual std::shared_ptr<ecore::EOperation> getIntegerValue_Operation__copy() const ;
 			virtual std::shared_ptr<ecore::EOperation> getIntegerValue_Operation_equals_Value() const ;
 			virtual std::shared_ptr<ecore::EOperation> getIntegerValue_Operation_specify() const ;
 			virtual std::shared_ptr<ecore::EOperation> getIntegerValue_Operation_toString() const ;
@@ -137,6 +143,7 @@ namespace fUML::Semantics::SimpleClassifiers
 			
 			virtual std::shared_ptr<ecore::EReference> getPrimitiveValue_Attribute_type() const ;
 			
+			virtual std::shared_ptr<ecore::EOperation> getPrimitiveValue_Operation__copy() const ;
 			virtual std::shared_ptr<ecore::EOperation> getPrimitiveValue_Operation_getTypes() const ;
 			
 			// End Class PrimitiveValue
@@ -148,6 +155,7 @@ namespace fUML::Semantics::SimpleClassifiers
 			virtual std::shared_ptr<ecore::EAttribute> getRealValue_Attribute_value() const ;
 			
 			
+			virtual std::shared_ptr<ecore::EOperation> getRealValue_Operation__copy() const ;
 			virtual std::shared_ptr<ecore::EOperation> getRealValue_Operation_equals_Value() const ;
 			virtual std::shared_ptr<ecore::EOperation> getRealValue_Operation_specify() const ;
 			virtual std::shared_ptr<ecore::EOperation> getRealValue_Operation_toString() const ;
@@ -161,6 +169,7 @@ namespace fUML::Semantics::SimpleClassifiers
 			
 			virtual std::shared_ptr<ecore::EReference> getSignalInstance_Attribute_type() const ;
 			
+			virtual std::shared_ptr<ecore::EOperation> getSignalInstance_Operation__copy() const ;
 			
 			// End Class SignalInstance
 
@@ -171,6 +180,7 @@ namespace fUML::Semantics::SimpleClassifiers
 			virtual std::shared_ptr<ecore::EAttribute> getStringValue_Attribute_value() const ;
 			
 			
+			virtual std::shared_ptr<ecore::EOperation> getStringValue_Operation__copy() const ;
 			virtual std::shared_ptr<ecore::EOperation> getStringValue_Operation_equals_Value() const ;
 			virtual std::shared_ptr<ecore::EOperation> getStringValue_Operation_specify() const ;
 			virtual std::shared_ptr<ecore::EOperation> getStringValue_Operation_toString() const ;
@@ -201,6 +211,7 @@ namespace fUML::Semantics::SimpleClassifiers
 			virtual std::shared_ptr<ecore::EAttribute> getUnlimitedNaturalValue_Attribute_value() const ;
 			
 			
+			virtual std::shared_ptr<ecore::EOperation> getUnlimitedNaturalValue_Operation__copy() const ;
 			virtual std::shared_ptr<ecore::EOperation> getUnlimitedNaturalValue_Operation_equals_Value() const ;
 			virtual std::shared_ptr<ecore::EOperation> getUnlimitedNaturalValue_Operation_specify() const ;
 			virtual std::shared_ptr<ecore::EOperation> getUnlimitedNaturalValue_Operation_toString() const ;
@@ -216,7 +227,7 @@ namespace fUML::Semantics::SimpleClassifiers
 			
 			std::shared_ptr<ecore::EAttribute> m_featureValue_Attribute_position = nullptr;std::shared_ptr<ecore::EAttribute> m_booleanValue_Attribute_value = nullptr;std::shared_ptr<ecore::EAttribute> m_integerValue_Attribute_value = nullptr;std::shared_ptr<ecore::EAttribute> m_realValue_Attribute_value = nullptr;std::shared_ptr<ecore::EAttribute> m_stringValue_Attribute_value = nullptr;std::shared_ptr<ecore::EAttribute> m_unlimitedNaturalValue_Attribute_value = nullptr;
 			std::shared_ptr<ecore::EReference> m_featureValue_Attribute_feature = nullptr;std::shared_ptr<ecore::EReference> m_compoundValue_Attribute_featureValues = nullptr;std::shared_ptr<ecore::EReference> m_enumerationValue_Attribute_literal = nullptr;std::shared_ptr<ecore::EReference> m_dataValue_Attribute_type = nullptr;std::shared_ptr<ecore::EReference> m_enumerationValue_Attribute_type = nullptr;std::shared_ptr<ecore::EReference> m_primitiveValue_Attribute_type = nullptr;std::shared_ptr<ecore::EReference> m_signalInstance_Attribute_type = nullptr;std::shared_ptr<ecore::EReference> m_featureValue_Attribute_values = nullptr;
-			std::shared_ptr<ecore::EOperation> m_compoundValue_Operation_assignFeatureValue_StructuralFeature_EInt = nullptr;std::shared_ptr<ecore::EOperation> m_structuredValue_Operation_assignFeatureValue_StructuralFeature_EInt = nullptr;std::shared_ptr<ecore::EOperation> m_structuredValue_Operation_createFeatureValues = nullptr;std::shared_ptr<ecore::EOperation> m_booleanValue_Operation_equals_Value = nullptr;std::shared_ptr<ecore::EOperation> m_compoundValue_Operation_equals_Value = nullptr;std::shared_ptr<ecore::EOperation> m_enumerationValue_Operation_equals_Value = nullptr;std::shared_ptr<ecore::EOperation> m_integerValue_Operation_equals_Value = nullptr;std::shared_ptr<ecore::EOperation> m_realValue_Operation_equals_Value = nullptr;std::shared_ptr<ecore::EOperation> m_stringValue_Operation_equals_Value = nullptr;std::shared_ptr<ecore::EOperation> m_unlimitedNaturalValue_Operation_equals_Value = nullptr;std::shared_ptr<ecore::EOperation> m_dataValue_Operation_getTypes = nullptr;std::shared_ptr<ecore::EOperation> m_enumerationValue_Operation_getTypes = nullptr;std::shared_ptr<ecore::EOperation> m_primitiveValue_Operation_getTypes = nullptr;std::shared_ptr<ecore::EOperation> m_structuredValue_Operation_getValues_StructuralFeature_FeatureValue = nullptr;std::shared_ptr<ecore::EOperation> m_featureValue_Operation_hasEqualValues_FeatureValue = nullptr;std::shared_ptr<ecore::EOperation> m_dataValue_Operation_new_ = nullptr;std::shared_ptr<ecore::EOperation> m_enumerationValue_Operation_new_ = nullptr;std::shared_ptr<ecore::EOperation> m_compoundValue_Operation_removeFeatureValues_Classifier = nullptr;std::shared_ptr<ecore::EOperation> m_structuredValue_Operation_removeValue_StructuralFeature_Value = nullptr;std::shared_ptr<ecore::EOperation> m_compoundValue_Operation_retrieveFeatureValue_StructuralFeature = nullptr;std::shared_ptr<ecore::EOperation> m_structuredValue_Operation_retrieveFeatureValue_StructuralFeature = nullptr;std::shared_ptr<ecore::EOperation> m_compoundValue_Operation_retrieveFeatureValues = nullptr;std::shared_ptr<ecore::EOperation> m_structuredValue_Operation_retrieveFeatureValues = nullptr;std::shared_ptr<ecore::EOperation> m_structuredValue_Operation_setFeatureValue_StructuralFeature_EInt = nullptr;std::shared_ptr<ecore::EOperation> m_booleanValue_Operation_specify = nullptr;std::shared_ptr<ecore::EOperation> m_enumerationValue_Operation_specify = nullptr;std::shared_ptr<ecore::EOperation> m_integerValue_Operation_specify = nullptr;std::shared_ptr<ecore::EOperation> m_realValue_Operation_specify = nullptr;std::shared_ptr<ecore::EOperation> m_stringValue_Operation_specify = nullptr;std::shared_ptr<ecore::EOperation> m_structuredValue_Operation_specify = nullptr;std::shared_ptr<ecore::EOperation> m_unlimitedNaturalValue_Operation_specify = nullptr;std::shared_ptr<ecore::EOperation> m_booleanValue_Operation_toString = nullptr;std::shared_ptr<ecore::EOperation> m_compoundValue_Operation_toString = nullptr;std::shared_ptr<ecore::EOperation> m_enumerationValue_Operation_toString = nullptr;std::shared_ptr<ecore::EOperation> m_integerValue_Operation_toString = nullptr;std::shared_ptr<ecore::EOperation> m_realValue_Operation_toString = nullptr;std::shared_ptr<ecore::EOperation> m_stringValue_Operation_toString = nullptr;std::shared_ptr<ecore::EOperation> m_unlimitedNaturalValue_Operation_toString = nullptr;
+			std::shared_ptr<ecore::EOperation> m_booleanValue_Operation__copy = nullptr;std::shared_ptr<ecore::EOperation> m_compoundValue_Operation__copy = nullptr;std::shared_ptr<ecore::EOperation> m_dataValue_Operation__copy = nullptr;std::shared_ptr<ecore::EOperation> m_enumerationValue_Operation__copy = nullptr;std::shared_ptr<ecore::EOperation> m_featureValue_Operation__copy = nullptr;std::shared_ptr<ecore::EOperation> m_integerValue_Operation__copy = nullptr;std::shared_ptr<ecore::EOperation> m_primitiveValue_Operation__copy = nullptr;std::shared_ptr<ecore::EOperation> m_realValue_Operation__copy = nullptr;std::shared_ptr<ecore::EOperation> m_signalInstance_Operation__copy = nullptr;std::shared_ptr<ecore::EOperation> m_stringValue_Operation__copy = nullptr;std::shared_ptr<ecore::EOperation> m_unlimitedNaturalValue_Operation__copy = nullptr;std::shared_ptr<ecore::EOperation> m_compoundValue_Operation_assignFeatureValue_StructuralFeature_EInt = nullptr;std::shared_ptr<ecore::EOperation> m_structuredValue_Operation_assignFeatureValue_StructuralFeature_EInt = nullptr;std::shared_ptr<ecore::EOperation> m_structuredValue_Operation_createFeatureValues = nullptr;std::shared_ptr<ecore::EOperation> m_booleanValue_Operation_equals_Value = nullptr;std::shared_ptr<ecore::EOperation> m_compoundValue_Operation_equals_Value = nullptr;std::shared_ptr<ecore::EOperation> m_enumerationValue_Operation_equals_Value = nullptr;std::shared_ptr<ecore::EOperation> m_integerValue_Operation_equals_Value = nullptr;std::shared_ptr<ecore::EOperation> m_realValue_Operation_equals_Value = nullptr;std::shared_ptr<ecore::EOperation> m_stringValue_Operation_equals_Value = nullptr;std::shared_ptr<ecore::EOperation> m_unlimitedNaturalValue_Operation_equals_Value = nullptr;std::shared_ptr<ecore::EOperation> m_dataValue_Operation_getTypes = nullptr;std::shared_ptr<ecore::EOperation> m_enumerationValue_Operation_getTypes = nullptr;std::shared_ptr<ecore::EOperation> m_primitiveValue_Operation_getTypes = nullptr;std::shared_ptr<ecore::EOperation> m_structuredValue_Operation_getValues_StructuralFeature_FeatureValue = nullptr;std::shared_ptr<ecore::EOperation> m_featureValue_Operation_hasEqualValues_FeatureValue = nullptr;std::shared_ptr<ecore::EOperation> m_dataValue_Operation_new_ = nullptr;std::shared_ptr<ecore::EOperation> m_enumerationValue_Operation_new_ = nullptr;std::shared_ptr<ecore::EOperation> m_compoundValue_Operation_removeFeatureValues_Classifier = nullptr;std::shared_ptr<ecore::EOperation> m_structuredValue_Operation_removeValue_StructuralFeature_Value = nullptr;std::shared_ptr<ecore::EOperation> m_compoundValue_Operation_retrieveFeatureValue_StructuralFeature = nullptr;std::shared_ptr<ecore::EOperation> m_structuredValue_Operation_retrieveFeatureValue_StructuralFeature = nullptr;std::shared_ptr<ecore::EOperation> m_compoundValue_Operation_retrieveFeatureValues = nullptr;std::shared_ptr<ecore::EOperation> m_structuredValue_Operation_retrieveFeatureValues = nullptr;std::shared_ptr<ecore::EOperation> m_structuredValue_Operation_setFeatureValue_StructuralFeature_EInt = nullptr;std::shared_ptr<ecore::EOperation> m_booleanValue_Operation_specify = nullptr;std::shared_ptr<ecore::EOperation> m_enumerationValue_Operation_specify = nullptr;std::shared_ptr<ecore::EOperation> m_integerValue_Operation_specify = nullptr;std::shared_ptr<ecore::EOperation> m_realValue_Operation_specify = nullptr;std::shared_ptr<ecore::EOperation> m_stringValue_Operation_specify = nullptr;std::shared_ptr<ecore::EOperation> m_structuredValue_Operation_specify = nullptr;std::shared_ptr<ecore::EOperation> m_unlimitedNaturalValue_Operation_specify = nullptr;std::shared_ptr<ecore::EOperation> m_booleanValue_Operation_toString = nullptr;std::shared_ptr<ecore::EOperation> m_compoundValue_Operation_toString = nullptr;std::shared_ptr<ecore::EOperation> m_enumerationValue_Operation_toString = nullptr;std::shared_ptr<ecore::EOperation> m_integerValue_Operation_toString = nullptr;std::shared_ptr<ecore::EOperation> m_realValue_Operation_toString = nullptr;std::shared_ptr<ecore::EOperation> m_stringValue_Operation_toString = nullptr;std::shared_ptr<ecore::EOperation> m_unlimitedNaturalValue_Operation_toString = nullptr;
 
 			friend class SimpleClassifiersPackage;
 

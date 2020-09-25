@@ -134,6 +134,10 @@ namespace fUML::Semantics::StructuredClassifiers
 			//*********************************
 			/*!
 			 */ 
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() = 0;
+			
+			/*!
+			 */ 
 			virtual void _register(std::shared_ptr<fUML::Semantics::CommonBehavior::EventAccepter>  accepter) = 0;
 			
 			/*!

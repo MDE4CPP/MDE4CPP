@@ -43,7 +43,9 @@ namespace fUML::Semantics::CommonBehavior
 			//*********************************
 			// Operations
 			//*********************************
-			
+			/*!
+			 */ 
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() ;
 			
 			/*!
 			 */ 

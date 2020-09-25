@@ -45,6 +45,10 @@ virtual public ParameterValue
 			//*********************************
 			// Operations
 			//*********************************
+			/*!
+			 */ 
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> _copy() ;
+			
 			
 			
 			//*********************************

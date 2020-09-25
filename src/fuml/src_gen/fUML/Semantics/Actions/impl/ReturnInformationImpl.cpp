@@ -123,7 +123,18 @@ std::shared_ptr<ecore::EClass> ReturnInformationImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
+std::shared_ptr<fUML::Semantics::Values::Value> ReturnInformationImpl::_copy()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Create a new return information value that is a copy of this value, with
+// the same call event occurrence.
 
+std::shared_ptr<fUML::Semantics::Actions::ReturnInformation> newValue = fUML::Semantics::Actions::ActionsFactory::eInstance()->createReturnInformation();
+newValue->setCallEventOccurrence(this->getCallEventOccurrence());
+return newValue;
+	//end of body
+}
 
 bool ReturnInformationImpl::equals(std::shared_ptr<fUML::Semantics::Values::Value>  otherValue)
 {

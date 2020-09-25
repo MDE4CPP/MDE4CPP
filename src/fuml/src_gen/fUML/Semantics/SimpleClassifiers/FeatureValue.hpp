@@ -85,6 +85,10 @@ namespace fUML::Semantics::SimpleClassifiers
 			//*********************************
 			/*!
 			 */ 
+			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> _copy() = 0;
+			
+			/*!
+			 */ 
 			virtual bool hasEqualValues(std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue>  other) = 0;
 			
 			

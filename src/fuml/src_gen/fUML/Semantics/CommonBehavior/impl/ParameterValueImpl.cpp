@@ -34,6 +34,8 @@
 
 #include "uml/Parameter.hpp"
 
+#include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
+
 #include "fUML/Semantics/Values/Value.hpp"
 
 //Factories an Package includes
@@ -132,6 +134,28 @@ std::shared_ptr<ecore::EClass> ParameterValueImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
+std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> ParameterValueImpl::_copy()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Create a new parameter value for the same parameter as this parameter value, but with
+// copies of the values of this parameter value.
+
+std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> newValue = fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createParameterValue();
+newValue->setParameter(this->getParameter());
+
+std::shared_ptr<Bag<fUML::Semantics::Values::Value>> values = this->getValues();
+unsigned int valuesSize = values->size();
+
+for(unsigned int i = 0; i < valuesSize; i++)
+{
+	std::shared_ptr<fUML::Semantics::Values::Value> value = values->at(i);
+	newValue->getValues()->add(value->_copy());
+}
+
+return newValue;
+	//end of body
+}
 
 //*********************************
 // References

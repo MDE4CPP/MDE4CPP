@@ -169,6 +169,28 @@ std::shared_ptr<ecore::EClass> ObjectImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
+std::shared_ptr<fUML::Semantics::Values::Value> ObjectImpl::_copy()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Create a new object that is a copy of this object at the same locus as this object.
+// However, the new object will NOT have any object activation (i.e, its classifier behaviors will not be started).
+
+std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> newObject = std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Object>(fUML::Semantics::StructuredClassifiers::ExtensionalValueImpl::_copy());
+
+std::shared_ptr<Bag<uml::Classifier>> types = this->getTypes();
+unsigned int typesSize = types->size();
+
+for(unsigned int i = 0; i < typesSize; i++)
+{
+	std::shared_ptr<uml::Classifier> type = types->at(i);
+	newObject->getTypes()->add(type);
+}
+
+return newObject;
+	//end of body
+}
+
 void ObjectImpl::_register(std::shared_ptr<fUML::Semantics::CommonBehavior::EventAccepter>  accepter)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)

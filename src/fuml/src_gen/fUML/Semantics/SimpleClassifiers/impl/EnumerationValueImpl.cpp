@@ -132,6 +132,19 @@ std::shared_ptr<ecore::EClass> EnumerationValueImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
+std::shared_ptr<fUML::Semantics::Values::Value> EnumerationValueImpl::_copy()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Create a new enumeration value with the same literal as this enumeration value.
+
+std::shared_ptr<fUML::Semantics::SimpleClassifiers::EnumerationValue> newValue(new fUML::Semantics::SimpleClassifiers::EnumerationValueImpl());
+newValue->setType(this->getType());
+newValue->setLiteral(this->getLiteral());
+return newValue;
+	//end of body
+}
+
 bool EnumerationValueImpl::equals(std::shared_ptr<fUML::Semantics::Values::Value>  otherValue)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)

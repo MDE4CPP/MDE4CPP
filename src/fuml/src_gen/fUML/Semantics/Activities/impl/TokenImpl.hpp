@@ -47,6 +47,10 @@ virtual public Token
 			//*********************************
 			/*!
 			 */ 
+			virtual std::shared_ptr<fUML::Semantics::Activities::Token> _copy() ;
+			
+			/*!
+			 */ 
 			virtual bool equals(std::shared_ptr<fUML::Semantics::Activities::Token>  other) ;
 			
 			/*!

@@ -47,6 +47,10 @@ virtual public FeatureValue
 			//*********************************
 			/*!
 			 */ 
+			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> _copy() ;
+			
+			/*!
+			 */ 
 			virtual bool hasEqualValues(std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue>  other) ;
 			
 			

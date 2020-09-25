@@ -241,7 +241,7 @@ void ActivityNodeActivationImpl::addToken(std::shared_ptr<fUML::Semantics::Activ
 	if (!token->isWithdrawn())
 	{
 		token->withdraw();
-		token = std::dynamic_pointer_cast<Token>(token->copy());
+		token = std::dynamic_pointer_cast<Token>(token->_copy());
 	}
 	token->setHolder(getThisActivityNodeActivationPtr());
 	token->setWithdrawn(false);
@@ -403,6 +403,10 @@ void ActivityNodeActivationImpl::receiveOffer()
         DEBUG_MESSAGE(std::cout<<"[receiveOffer] Firing."<<std::endl;)
         tokens = this->takeOfferedTokens();
     }
+		else{
+		//NEWDEBUG
+		DEBUG_MESSAGE(std::cout<<"ActivityNodeActivation::[receiveOffer] NOT taking offered tokens because not ready"<<std::endl;)
+	}
 
     _endIsolation();
 
@@ -498,7 +502,9 @@ void ActivityNodeActivationImpl::sendOffers(std::shared_ptr<Bag<fUML::Semantics:
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-			if (tokens->size() > 0) 
+	//NEWDEBUG
+	DEBUG_MESSAGE(std::cout<<"[sendOffers] "<< (this->getNode() == nullptr ? "..." : ("node = " + this->getNode()->getName()))<<std::endl;)		
+if (tokens->size() > 0) 
 	{
         // *** Send all outgoing offers concurrently. ***
 		std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance> > outgoingEdgeList = this->getOutgoingEdges();
@@ -519,12 +525,25 @@ void ActivityNodeActivationImpl::sendOffers(std::shared_ptr<Bag<fUML::Semantics:
 					{
 						std::cout << "[sendOffers] Sending offer to " << target->getNode()->getName() << "."
 							  << std::endl;
+						//NEWDEBUG
+						DEBUG_MESSAGE(std::cout << "[sendOffers] Sending offer to " << target->getNode()->getName() << " with "<<tokens->size()<<" tokens."<< std::endl;)
 					}
 				}
 			)
             outgoingEdge->sendOffer(tokens);
         }
     }
+
+//NEWDEBUG alles hier drunter
+	if (this->getNode() == nullptr) 
+	{
+        DEBUG_MESSAGE(std::cout<<"-- printing from ActivityNodeActivation::"<<__FUNCTION__<<" : node = anonymous fork\n";)
+    } 
+	else 
+	{
+		DEBUG_MESSAGE(std::cout<<"-- printing from ActivityNodeActivation::"<<__FUNCTION__<<" : node = "<<this->getNode()->getName()<<std::endl;)
+    }
+		DEBUG_MESSAGE(std::cout<<"-- printing from ActivityNodeActivation::"<<__FUNCTION__<<" : ENDE!!!!!!!!!\n";)
 	//end of body
 }
 
@@ -550,11 +569,19 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > ActivityNodeActivation
 	//generated from body annotation
 	std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > allTokens(new Bag<fUML::Semantics::Activities::Token>());
 	std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance> > incomingEdgeList = this->getIncomingEdges();
+
+	//NEWDEBUG
+	DEBUG_MESSAGE(std::cout<<"-- printing from ActivityNodeActivation::"<<__FUNCTION__<<" '"<<(this->getNode() == nullptr ? "..." : ("node = " + this->getNode()->getName()))<<"' : #incomingEdges = "<<incomingEdgeList->size()<<std::endl;)
+
 	for(std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> incomingEdge : *incomingEdgeList)
 	{
 		auto vec = incomingEdge->takeOfferedTokens();
 		allTokens->insert(allTokens->end(), vec->begin(), vec->end());
 	}
+
+	//NEWDEBUG
+	DEBUG_MESSAGE(std::cout<<"-- printing from ActivityNodeActivation::"<<__FUNCTION__<<" for node '"<<(this->getNode() == nullptr ? "..." : ("node = " + this->getNode()->getName()))<<"' : #allTokens = "<<allTokens->size()<<std::endl;)
+
 	return allTokens;
 	//end of body
 }

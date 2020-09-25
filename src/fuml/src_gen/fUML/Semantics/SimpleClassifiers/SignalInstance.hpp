@@ -51,6 +51,11 @@ namespace uml
 	class Signal;
 }
 
+namespace fUML::Semantics::Values 
+{
+	class Value;
+}
+
 // base class includes
 #include "fUML/Semantics/SimpleClassifiers/CompoundValue.hpp"
 
@@ -81,6 +86,10 @@ namespace fUML::Semantics::SimpleClassifiers
 			//*********************************
 			// Operations
 			//*********************************
+			/*!
+			 */ 
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() = 0;
+			
 			
 			//*********************************
 			// Attributes Getter Setter

@@ -73,7 +73,7 @@ void CommonBehaviorPackageImpl::createCallEventExecutionContent(std::shared_ptr<
 	m_callEventExecution_Attribute_callerSuspended = factory->createEAttribute_in_EContainingClass(m_callEventExecution_Class, CALLEVENTEXECUTION_ATTRIBUTE_CALLERSUSPENDED);
 	
 	
-	m_callEventExecution_Operation_copy = factory->createEOperation_in_EContainingClass(m_callEventExecution_Class, CALLEVENTEXECUTION_OPERATION_COPY);
+	m_callEventExecution_Operation__copy = factory->createEOperation_in_EContainingClass(m_callEventExecution_Class, CALLEVENTEXECUTION_OPERATION__COPY);
 	m_callEventExecution_Operation_createEventOccurrence = factory->createEOperation_in_EContainingClass(m_callEventExecution_Class, CALLEVENTEXECUTION_OPERATION_CREATEEVENTOCCURRENCE);
 	m_callEventExecution_Operation_execute = factory->createEOperation_in_EContainingClass(m_callEventExecution_Class, CALLEVENTEXECUTION_OPERATION_EXECUTE);
 	m_callEventExecution_Operation_getInputParameterValues = factory->createEOperation_in_EContainingClass(m_callEventExecution_Class, CALLEVENTEXECUTION_OPERATION_GETINPUTPARAMETERVALUES);
@@ -170,6 +170,7 @@ void CommonBehaviorPackageImpl::createExecutionContent(std::shared_ptr<ecore::EP
 	m_execution_Attribute_context = factory->createEReference_in_EContainingClass(m_execution_Class, EXECUTION_ATTRIBUTE_CONTEXT);
 	m_execution_Attribute_parameterValues = factory->createEReference_in_EContainingClass(m_execution_Class, EXECUTION_ATTRIBUTE_PARAMETERVALUES);
 	
+	m_execution_Operation__copy = factory->createEOperation_in_EContainingClass(m_execution_Class, EXECUTION_OPERATION__COPY);
 	m_execution_Operation_execute = factory->createEOperation_in_EContainingClass(m_execution_Class, EXECUTION_OPERATION_EXECUTE);
 	m_execution_Operation_getBehavior = factory->createEOperation_in_EContainingClass(m_execution_Class, EXECUTION_OPERATION_GETBEHAVIOR);
 	m_execution_Operation_getOutputParameterValues = factory->createEOperation_in_EContainingClass(m_execution_Class, EXECUTION_OPERATION_GETOUTPUTPARAMETERVALUES);
@@ -247,6 +248,7 @@ void CommonBehaviorPackageImpl::createParameterValueContent(std::shared_ptr<ecor
 	m_parameterValue_Attribute_parameter = factory->createEReference_in_EContainingClass(m_parameterValue_Class, PARAMETERVALUE_ATTRIBUTE_PARAMETER);
 	m_parameterValue_Attribute_values = factory->createEReference_in_EContainingClass(m_parameterValue_Class, PARAMETERVALUE_ATTRIBUTE_VALUES);
 	
+	m_parameterValue_Operation__copy = factory->createEOperation_in_EContainingClass(m_parameterValue_Class, PARAMETERVALUE_OPERATION__COPY);
 	
 }
 

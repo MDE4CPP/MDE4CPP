@@ -137,6 +137,20 @@ std::shared_ptr<ecore::EClass> ReferenceImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
+std::shared_ptr<fUML::Semantics::Values::Value> ReferenceImpl::_copy()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// // Create a new reference with the same referent as this reference.
+
+std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> newValue = fUML::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createReference();
+
+newValue->setReferent(this->getReferent());
+
+return newValue;
+	//end of body
+}
+
 void ReferenceImpl::assignFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<Bag<fUML::Semantics::Values::Value> >  values,int position)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)

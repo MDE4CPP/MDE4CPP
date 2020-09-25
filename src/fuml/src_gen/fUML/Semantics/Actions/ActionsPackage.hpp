@@ -804,13 +804,13 @@ namespace fUML::Semantics::Actions
 			//Class and Feature IDs 
 			static const unsigned int RETURNINFORMATION_CLASS = 102;
 			static const unsigned int RETURNINFORMATION_CLASS_FEATURE_COUNT = 1;
-			static const unsigned int RETURNINFORMATION_CLASS_OPERATION_COUNT = 17;
+			static const unsigned int RETURNINFORMATION_CLASS_OPERATION_COUNT = 18;
 			
 			static const int RETURNINFORMATION_ATTRIBUTE_CALLEVENTOCCURRENCE = 10200;
 			
-			static const int RETURNINFORMATION_OPERATION_COPY = 10211;
+			static const int RETURNINFORMATION_OPERATION__COPY = 10218;
 			static const int RETURNINFORMATION_OPERATION_EQUALS_VALUE = 10212;
-			static const int RETURNINFORMATION_OPERATION_GETOPERATION = 10210;
+			static const int RETURNINFORMATION_OPERATION_GETOPERATION = 10211;
 			static const int RETURNINFORMATION_OPERATION_GETTYPES = 10213;
 			static const int RETURNINFORMATION_OPERATION_NEW_ = 10214;
 			static const int RETURNINFORMATION_OPERATION_REPLY_PARAMETERVALUE = 10215;
@@ -823,7 +823,7 @@ namespace fUML::Semantics::Actions
 			
 			virtual std::shared_ptr<ecore::EReference> getReturnInformation_Attribute_callEventOccurrence() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getReturnInformation_Operation_copy() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getReturnInformation_Operation__copy() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getReturnInformation_Operation_equals_Value() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getReturnInformation_Operation_getOperation() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getReturnInformation_Operation_getTypes() const = 0;

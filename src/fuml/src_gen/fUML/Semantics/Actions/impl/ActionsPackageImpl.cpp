@@ -750,9 +750,9 @@ std::shared_ptr<ecore::EReference> ActionsPackageImpl::getReturnInformation_Attr
 	return m_returnInformation_Attribute_callEventOccurrence;
 }
 
-std::shared_ptr<ecore::EOperation> ActionsPackageImpl::getReturnInformation_Operation_copy() const
+std::shared_ptr<ecore::EOperation> ActionsPackageImpl::getReturnInformation_Operation__copy() const
 {
-	return m_returnInformation_Operation_copy;
+	return m_returnInformation_Operation__copy;
 }
 std::shared_ptr<ecore::EOperation> ActionsPackageImpl::getReturnInformation_Operation_equals_Value() const
 {

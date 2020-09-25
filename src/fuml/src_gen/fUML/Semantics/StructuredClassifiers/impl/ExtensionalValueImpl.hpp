@@ -45,6 +45,10 @@ namespace fUML::Semantics::StructuredClassifiers
 			//*********************************
 			/*!
 			 */ 
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() ;
+			
+			/*!
+			 */ 
 			virtual void destroy() ;
 			
 			

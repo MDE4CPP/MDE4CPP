@@ -23,7 +23,8 @@
 #include "ecore/EClass.hpp"
 
 //Includes from codegen annotation
- 
+//NEWDEBUG
+#include "uml/ActivityNode.hpp"
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -141,6 +142,16 @@ int ForkedTokenImpl::getRemainingOffersCount() const
 //*********************************
 // Operations
 //*********************************
+std::shared_ptr<fUML::Semantics::Activities::Token> ForkedTokenImpl::_copy()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Return a copy of the base token.
+
+return this->getBaseToken()->_copy();
+	//end of body
+}
+
 bool ForkedTokenImpl::equals(std::shared_ptr<fUML::Semantics::Activities::Token>  otherToken)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
@@ -169,16 +180,23 @@ void ForkedTokenImpl::withdraw()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	    if (!this->isBaseTokenIsWithdrawn() & !this->getBaseToken()->isWithdrawn()) {
+	//NEWDEBUG
+	std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> holder = this->getHolder().lock();    
+
+if (!this->isBaseTokenIsWithdrawn() & !this->getBaseToken()->isWithdrawn()) {
         this->getBaseToken()->withdraw();
         this->setBaseTokenIsWithdrawn(true);
     }
 
     if (this->getRemainingOffersCount() > 0) {
         this->setRemainingOffersCount(this->getRemainingOffersCount() - 1);
+	//NEWDEBUG
+		DEBUG_MESSAGE(std::cout<<"-- printing from ForkedToken::"<<__FUNCTION__<<" '"<<(holder->getNode() == nullptr ? "..." : ("holder = " + holder->getNode()->getName()))<<"' : remainingOffersCount = "<<getRemainingOffersCount()<<std::endl;)
     }
 
     if (this->getRemainingOffersCount() == 0) {
+		//NEWDEBUG
+		DEBUG_MESSAGE(std::cout<<"-- printing from ForkedToken::"<<__FUNCTION__<<" '"<<(holder->getNode() == nullptr ? "..." : ("holder = " + holder->getNode()->getName()))<<"' : final withdraw!"<<std::endl;)
         fUML::Semantics::Activities::TokenImpl::withdraw();
     }
 	//end of body

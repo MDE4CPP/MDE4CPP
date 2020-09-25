@@ -115,6 +115,16 @@ std::shared_ptr<ecore::EClass> ControlTokenImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
+std::shared_ptr<fUML::Semantics::Activities::Token> ControlTokenImpl::_copy()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Return a new control token.
+
+return fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createControlToken();
+	//end of body
+}
+
 bool ControlTokenImpl::equals(std::shared_ptr<fUML::Semantics::Activities::Token>  other)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)

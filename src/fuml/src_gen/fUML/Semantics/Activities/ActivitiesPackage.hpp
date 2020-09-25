@@ -119,13 +119,14 @@ namespace fUML::Semantics::Activities
 			//Class and Feature IDs 
 			static const unsigned int ACTIVITYEXECUTION_CLASS = 7;
 			static const unsigned int ACTIVITYEXECUTION_CLASS_FEATURE_COUNT = 7;
-			static const unsigned int ACTIVITYEXECUTION_CLASS_OPERATION_COUNT = 42;
+			static const unsigned int ACTIVITYEXECUTION_CLASS_OPERATION_COUNT = 48;
 			
 			static const int ACTIVITYEXECUTION_ATTRIBUTE_ACTIVATIONGROUP = 706;
 			
-			static const int ACTIVITYEXECUTION_OPERATION_EXECUTE = 746;
-			static const int ACTIVITYEXECUTION_OPERATION_NEW_ = 748;
-			static const int ACTIVITYEXECUTION_OPERATION_TERMINATE = 747;
+			static const int ACTIVITYEXECUTION_OPERATION__COPY = 754;
+			static const int ACTIVITYEXECUTION_OPERATION_EXECUTE = 751;
+			static const int ACTIVITYEXECUTION_OPERATION_NEW_ = 753;
+			static const int ACTIVITYEXECUTION_OPERATION_TERMINATE = 752;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getActivityExecution_Class() const = 0;
@@ -133,6 +134,7 @@ namespace fUML::Semantics::Activities
 			
 			virtual std::shared_ptr<ecore::EReference> getActivityExecution_Attribute_activationGroup() const = 0;
 			
+			virtual std::shared_ptr<ecore::EOperation> getActivityExecution_Operation__copy() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getActivityExecution_Operation_execute() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getActivityExecution_Operation_new_() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getActivityExecution_Operation_terminate() const = 0;
@@ -396,18 +398,20 @@ namespace fUML::Semantics::Activities
 			//Class and Feature IDs 
 			static const unsigned int CONTROLTOKEN_CLASS = 32;
 			static const unsigned int CONTROLTOKEN_CLASS_FEATURE_COUNT = 2;
-			static const unsigned int CONTROLTOKEN_CLASS_OPERATION_COUNT = 8;
+			static const unsigned int CONTROLTOKEN_CLASS_OPERATION_COUNT = 10;
 			
 			
-			static const int CONTROLTOKEN_OPERATION_EQUALS_TOKEN = 3207;
-			static const int CONTROLTOKEN_OPERATION_GETVALUE = 3209;
-			static const int CONTROLTOKEN_OPERATION_ISCONTROL = 3208;
+			static const int CONTROLTOKEN_OPERATION__COPY = 3211;
+			static const int CONTROLTOKEN_OPERATION_EQUALS_TOKEN = 3208;
+			static const int CONTROLTOKEN_OPERATION_GETVALUE = 3210;
+			static const int CONTROLTOKEN_OPERATION_ISCONTROL = 3209;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getControlToken_Class() const = 0;
 			
 			
 			
+			virtual std::shared_ptr<ecore::EOperation> getControlToken_Operation__copy() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getControlToken_Operation_equals_Token() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getControlToken_Operation_getValue() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getControlToken_Operation_isControl() const = 0;
@@ -632,16 +636,17 @@ namespace fUML::Semantics::Activities
 			//Class and Feature IDs 
 			static const unsigned int FORKEDTOKEN_CLASS = 59;
 			static const unsigned int FORKEDTOKEN_CLASS_FEATURE_COUNT = 5;
-			static const unsigned int FORKEDTOKEN_CLASS_OPERATION_COUNT = 9;
+			static const unsigned int FORKEDTOKEN_CLASS_OPERATION_COUNT = 11;
 			static const int FORKEDTOKEN_ATTRIBUTE_BASETOKENISWITHDRAWN = 5904;
 			static const int FORKEDTOKEN_ATTRIBUTE_REMAININGOFFERSCOUNT = 5903;
 			
 			static const int FORKEDTOKEN_ATTRIBUTE_BASETOKEN = 5902;
 			
-			static const int FORKEDTOKEN_OPERATION_EQUALS_TOKEN = 5910;
-			static const int FORKEDTOKEN_OPERATION_GETVALUE = 5913;
-			static const int FORKEDTOKEN_OPERATION_ISCONTROL = 5912;
-			static const int FORKEDTOKEN_OPERATION_WITHDRAW = 5911;
+			static const int FORKEDTOKEN_OPERATION__COPY = 5915;
+			static const int FORKEDTOKEN_OPERATION_EQUALS_TOKEN = 5911;
+			static const int FORKEDTOKEN_OPERATION_GETVALUE = 5914;
+			static const int FORKEDTOKEN_OPERATION_ISCONTROL = 5913;
+			static const int FORKEDTOKEN_OPERATION_WITHDRAW = 5912;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getForkedToken_Class() const = 0;
@@ -651,6 +656,7 @@ namespace fUML::Semantics::Activities
 			
 			virtual std::shared_ptr<ecore::EReference> getForkedToken_Attribute_baseToken() const = 0;
 			
+			virtual std::shared_ptr<ecore::EOperation> getForkedToken_Operation__copy() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getForkedToken_Operation_equals_Token() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getForkedToken_Operation_getValue() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getForkedToken_Operation_isControl() const = 0;
@@ -761,12 +767,13 @@ namespace fUML::Semantics::Activities
 			//Class and Feature IDs 
 			static const unsigned int OBJECTTOKEN_CLASS = 83;
 			static const unsigned int OBJECTTOKEN_CLASS_FEATURE_COUNT = 3;
-			static const unsigned int OBJECTTOKEN_CLASS_OPERATION_COUNT = 7;
+			static const unsigned int OBJECTTOKEN_CLASS_OPERATION_COUNT = 9;
 			
 			static const int OBJECTTOKEN_ATTRIBUTE_VALUE = 8302;
 			
-			static const int OBJECTTOKEN_OPERATION_EQUALS_TOKEN = 8308;
-			static const int OBJECTTOKEN_OPERATION_ISCONTROL = 8309;
+			static const int OBJECTTOKEN_OPERATION__COPY = 8311;
+			static const int OBJECTTOKEN_OPERATION_EQUALS_TOKEN = 8309;
+			static const int OBJECTTOKEN_OPERATION_ISCONTROL = 8310;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getObjectToken_Class() const = 0;
@@ -774,6 +781,7 @@ namespace fUML::Semantics::Activities
 			
 			virtual std::shared_ptr<ecore::EReference> getObjectToken_Attribute_value() const = 0;
 			
+			virtual std::shared_ptr<ecore::EOperation> getObjectToken_Operation__copy() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getObjectToken_Operation_equals_Token() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getObjectToken_Operation_isControl() const = 0;
 			
@@ -813,11 +821,12 @@ namespace fUML::Semantics::Activities
 			//Class and Feature IDs 
 			static const unsigned int TOKEN_CLASS = 115;
 			static const unsigned int TOKEN_CLASS_FEATURE_COUNT = 2;
-			static const unsigned int TOKEN_CLASS_OPERATION_COUNT = 5;
+			static const unsigned int TOKEN_CLASS_OPERATION_COUNT = 6;
 			static const int TOKEN_ATTRIBUTE_WITHDRAWN = 11501;
 			
 			static const int TOKEN_ATTRIBUTE_HOLDER = 11500;
 			
+			static const int TOKEN_OPERATION__COPY = 11507;
 			static const int TOKEN_OPERATION_EQUALS_TOKEN = 11504;
 			static const int TOKEN_OPERATION_GETVALUE = 11506;
 			static const int TOKEN_OPERATION_ISCONTROL = 11505;
@@ -831,6 +840,7 @@ namespace fUML::Semantics::Activities
 			
 			virtual std::shared_ptr<ecore::EReference> getToken_Attribute_holder() const = 0;
 			
+			virtual std::shared_ptr<ecore::EOperation> getToken_Operation__copy() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getToken_Operation_equals_Token() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getToken_Operation_getValue() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getToken_Operation_isControl() const = 0;

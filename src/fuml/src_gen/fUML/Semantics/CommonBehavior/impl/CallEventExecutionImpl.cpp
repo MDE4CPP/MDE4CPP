@@ -173,7 +173,18 @@ bool CallEventExecutionImpl::getCallerSuspended() const
 //*********************************
 // Operations
 //*********************************
+std::shared_ptr<fUML::Semantics::Values::Value> CallEventExecutionImpl::_copy()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Create a new call event execution that is a copy of this execution, with the
+// caller initially not suspended.
 
+std::shared_ptr<fUML::Semantics::CommonBehavior::CallEventExecution> newValue = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::CallEventExecution>(fUML::Semantics::CommonBehavior::ExecutionImpl::_copy());
+newValue->setCallerSuspended(false);
+return newValue;
+	//end of body
+}
 
 std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> CallEventExecutionImpl::createEventOccurrence()
 {

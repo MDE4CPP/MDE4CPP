@@ -51,6 +51,11 @@ namespace fUML::Semantics::Loci
 	class Locus;
 }
 
+namespace fUML::Semantics::Values 
+{
+	class Value;
+}
+
 // base class includes
 #include "fUML/Semantics/SimpleClassifiers/CompoundValue.hpp"
 
@@ -81,6 +86,10 @@ namespace fUML::Semantics::StructuredClassifiers
 			//*********************************
 			// Operations
 			//*********************************
+			/*!
+			 */ 
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() = 0;
+			
 			/*!
 			 */ 
 			virtual void destroy() = 0;

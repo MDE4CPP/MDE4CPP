@@ -128,6 +128,14 @@ bool TokenImpl::isWithdrawn() const
 //*********************************
 // Operations
 //*********************************
+std::shared_ptr<fUML::Semantics::Activities::Token> TokenImpl::_copy()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	return std::dynamic_pointer_cast<fUML::Semantics::Activities::Token>(this->copy());
+	//end of body
+}
+
 bool TokenImpl::equals(std::shared_ptr<fUML::Semantics::Activities::Token>  other)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
@@ -172,10 +180,14 @@ void TokenImpl::withdraw()
 	if (!this->isWithdrawn()) 
 	{
 		std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> holder = this->getHolder().lock();
+		//NEWDEBUG
+		DEBUG_MESSAGE(std::cout<<"-- printing from Token::"<<__FUNCTION__<<" '"<<(holder->getNode() == nullptr ? "..." : ("holder = " + holder->getNode()->getName()))<<"' : !isWithdrawn"<<std::endl;)
         this->setHolder(nullptr);
 		this->setWithdrawn(true);
 		if (holder)
-		{
+		{	
+			//NEWDEBUG
+			DEBUG_MESSAGE(std::cout<<"-- printing from Token::"<<__FUNCTION__<<" '"<<(holder->getNode() == nullptr ? "..." : ("holder = " + holder->getNode()->getName()))<<"' : withdrawing token..."<<std::endl;)
 			holder->removeToken(getThisTokenPtr());
 		}
     }

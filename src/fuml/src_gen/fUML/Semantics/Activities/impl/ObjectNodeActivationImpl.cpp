@@ -213,6 +213,10 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > ObjectNodeActivationIm
   int i = 0; 
   const int numberUnofferedTokens=this->countUnofferedTokens(); 
   int offeredTokenCount=this->getOfferedTokenCount(); 
+
+//NEWDEBUG
+  DEBUG_MESSAGE(std::cout<<"-- printing from ObjectNodeActivation::"<<__FUNCTION__<<" '"<<(this->getNode() == nullptr ? "..." : ("node = " + this->getNode()->getName()))<<"' : numberUnofferedTokens = "<<numberUnofferedTokens<<std::endl;)
+  DEBUG_MESSAGE(std::cout<<"-- printing from ObjectNodeActivation::"<<__FUNCTION__<<" '"<<(this->getNode() == nullptr ? "..." : ("node = " + this->getNode()->getName()))<<"' : offeredTokenCount = "<<offeredTokenCount<<std::endl;)
  
   Bag<fUML::Semantics::Activities::Token>* heldTokenPtr = this->getHeldTokens().get(); 
   if(nullptr!=heldTokenPtr) 
@@ -280,11 +284,19 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > ObjectNodeActivationIm
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > tokens = this->getUnofferedTokens();
+
+//NEWDEBUG
+DEBUG_MESSAGE(std::cout<<"-- printing from ObjectNodeActivation::"<<__FUNCTION__<<" '"<<(this->getNode() == nullptr ? "..." : ("node = " + this->getNode()->getName()))<<"' : #unofferedTokens before withdraw = "<<tokens->size()<<std::endl;)
+
     for (unsigned int i = 0; i < tokens->size(); i++) 
     {
     	std::shared_ptr<fUML::Semantics::Activities::Token> token = tokens->at(i);
         token->withdraw();
     }
+
+//NEWDEBUG
+DEBUG_MESSAGE(std::cout<<"-- printing from ObjectNodeActivation::"<<__FUNCTION__<<" '"<<(this->getNode() == nullptr ? "..." : ("node = " + this->getNode()->getName()))<<"' : #unofferedTokens after withdraw = "<<countUnofferedTokens()<<std::endl;)
+
     return tokens;
 	//end of body
 }
@@ -293,8 +305,8 @@ void ObjectNodeActivationImpl::terminate()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	    this->clearTokens();
-    fUML::Semantics::Activities::ActivityNodeActivationImpl::terminate();
+	fUML::Semantics::Activities::ActivityNodeActivationImpl::terminate();
+this->clearTokens();
 	//end of body
 }
 

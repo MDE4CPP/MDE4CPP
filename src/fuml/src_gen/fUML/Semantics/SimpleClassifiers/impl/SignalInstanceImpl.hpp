@@ -43,6 +43,10 @@ namespace fUML::Semantics::SimpleClassifiers
 			//*********************************
 			// Operations
 			//*********************************
+			/*!
+			 */ 
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() ;
+			
 			
 			
 			//*********************************

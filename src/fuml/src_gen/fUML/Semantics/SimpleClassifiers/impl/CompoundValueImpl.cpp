@@ -137,6 +137,28 @@ std::shared_ptr<ecore::EClass> CompoundValueImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
+std::shared_ptr<fUML::Semantics::Values::Value> CompoundValueImpl::_copy()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Create a new data value with the same featureValues as this data value.
+
+std::shared_ptr<fUML::Semantics::SimpleClassifiers::CompoundValue> newValue(new fUML::Semantics::SimpleClassifiers::CompoundValueImpl());
+
+std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> featureValues = this->retrieveFeatureValues();
+unsigned int featureValuesSize = featureValues->size();
+
+for(unsigned int i = 0; i < featureValuesSize; i++)
+{
+	std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> featureValue = featureValues->at(i);
+	newValue->getFeatureValues()->add(featureValue);
+}
+
+return newValue;
+
+	//end of body
+}
+
 void CompoundValueImpl::assignFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<Bag<fUML::Semantics::Values::Value> >  values,int position)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)

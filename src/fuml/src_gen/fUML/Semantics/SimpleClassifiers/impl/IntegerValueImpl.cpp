@@ -132,6 +132,19 @@ int IntegerValueImpl::getValue() const
 //*********************************
 // Operations
 //*********************************
+std::shared_ptr<fUML::Semantics::Values::Value> IntegerValueImpl::_copy()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Create a new integer value with the same value as this integer value.
+
+std::shared_ptr<fUML::Semantics::SimpleClassifiers::IntegerValue> newValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createIntegerValue();
+newValue->setType(this->getType()); //Duplicated from _copy()-method of super class in order to avoid having to call _copy()-method of super class and having to cast afterwards
+newValue->setValue(this->getValue());
+return newValue;
+	//end of body
+}
+
 bool IntegerValueImpl::equals(std::shared_ptr<fUML::Semantics::Values::Value>  otherValue)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)

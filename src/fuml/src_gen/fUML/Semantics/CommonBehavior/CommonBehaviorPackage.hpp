@@ -90,22 +90,22 @@ namespace fUML::Semantics::CommonBehavior
 			//Class and Feature IDs 
 			static const unsigned int CALLEVENTEXECUTION_CLASS = 17;
 			static const unsigned int CALLEVENTEXECUTION_CLASS_FEATURE_COUNT = 7;
-			static const unsigned int CALLEVENTEXECUTION_CLASS_OPERATION_COUNT = 51;
+			static const unsigned int CALLEVENTEXECUTION_CLASS_OPERATION_COUNT = 56;
 			static const int CALLEVENTEXECUTION_ATTRIBUTE_CALLERSUSPENDED = 1706;
 			
 			
-			static const int CALLEVENTEXECUTION_OPERATION_COPY = 1746;
-			static const int CALLEVENTEXECUTION_OPERATION_CREATEEVENTOCCURRENCE = 1747;
-			static const int CALLEVENTEXECUTION_OPERATION_EXECUTE = 1748;
-			static const int CALLEVENTEXECUTION_OPERATION_GETINPUTPARAMETERVALUES = 1749;
-			static const int CALLEVENTEXECUTION_OPERATION_GETOPERATION = 1750;
-			static const int CALLEVENTEXECUTION_OPERATION_ISCALLERSUSPENDED = 1751;
-			static const int CALLEVENTEXECUTION_OPERATION_MAKECALL = 1752;
-			static const int CALLEVENTEXECUTION_OPERATION_NEW_ = 1753;
-			static const int CALLEVENTEXECUTION_OPERATION_RELEASECALLER = 1754;
-			static const int CALLEVENTEXECUTION_OPERATION_SETOUTPUTPARAMETERVALUES_PARAMETERVALUE = 1755;
-			static const int CALLEVENTEXECUTION_OPERATION_SUSPENDCALLER = 1756;
-			static const int CALLEVENTEXECUTION_OPERATION_WAIT_ = 1757;
+			static const int CALLEVENTEXECUTION_OPERATION__COPY = 1751;
+			static const int CALLEVENTEXECUTION_OPERATION_CREATEEVENTOCCURRENCE = 1752;
+			static const int CALLEVENTEXECUTION_OPERATION_EXECUTE = 1753;
+			static const int CALLEVENTEXECUTION_OPERATION_GETINPUTPARAMETERVALUES = 1754;
+			static const int CALLEVENTEXECUTION_OPERATION_GETOPERATION = 1755;
+			static const int CALLEVENTEXECUTION_OPERATION_ISCALLERSUSPENDED = 1756;
+			static const int CALLEVENTEXECUTION_OPERATION_MAKECALL = 1757;
+			static const int CALLEVENTEXECUTION_OPERATION_NEW_ = 1758;
+			static const int CALLEVENTEXECUTION_OPERATION_RELEASECALLER = 1759;
+			static const int CALLEVENTEXECUTION_OPERATION_SETOUTPUTPARAMETERVALUES_PARAMETERVALUE = 1760;
+			static const int CALLEVENTEXECUTION_OPERATION_SUSPENDCALLER = 1761;
+			static const int CALLEVENTEXECUTION_OPERATION_WAIT_ = 1762;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getCallEventExecution_Class() const = 0;
@@ -113,7 +113,7 @@ namespace fUML::Semantics::CommonBehavior
 			virtual std::shared_ptr<ecore::EAttribute> getCallEventExecution_Attribute_callerSuspended() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getCallEventExecution_Operation_copy() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getCallEventExecution_Operation__copy() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getCallEventExecution_Operation_createEventOccurrence() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getCallEventExecution_Operation_execute() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getCallEventExecution_Operation_getInputParameterValues() const = 0;
@@ -289,18 +289,19 @@ namespace fUML::Semantics::CommonBehavior
 			//Class and Feature IDs 
 			static const unsigned int EXECUTION_CLASS = 46;
 			static const unsigned int EXECUTION_CLASS_FEATURE_COUNT = 6;
-			static const unsigned int EXECUTION_CLASS_OPERATION_COUNT = 39;
+			static const unsigned int EXECUTION_CLASS_OPERATION_COUNT = 44;
 			
 			static const int EXECUTION_ATTRIBUTE_CONTEXT = 4604;
 			static const int EXECUTION_ATTRIBUTE_PARAMETERVALUES = 4605;
 			
-			static const int EXECUTION_OPERATION_EXECUTE = 4638;
-			static const int EXECUTION_OPERATION_GETBEHAVIOR = 4643;
-			static const int EXECUTION_OPERATION_GETOUTPUTPARAMETERVALUES = 4642;
-			static const int EXECUTION_OPERATION_GETPARAMETERVALUE_PARAMETER = 4641;
-			static const int EXECUTION_OPERATION_NEW_ = 4644;
-			static const int EXECUTION_OPERATION_SETPARAMETERVALUE_PARAMETERVALUE = 4640;
-			static const int EXECUTION_OPERATION_TERMINATE = 4639;
+			static const int EXECUTION_OPERATION__COPY = 4649;
+			static const int EXECUTION_OPERATION_EXECUTE = 4642;
+			static const int EXECUTION_OPERATION_GETBEHAVIOR = 4647;
+			static const int EXECUTION_OPERATION_GETOUTPUTPARAMETERVALUES = 4646;
+			static const int EXECUTION_OPERATION_GETPARAMETERVALUE_PARAMETER = 4645;
+			static const int EXECUTION_OPERATION_NEW_ = 4648;
+			static const int EXECUTION_OPERATION_SETPARAMETERVALUE_PARAMETERVALUE = 4644;
+			static const int EXECUTION_OPERATION_TERMINATE = 4643;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getExecution_Class() const = 0;
@@ -309,6 +310,7 @@ namespace fUML::Semantics::CommonBehavior
 			virtual std::shared_ptr<ecore::EReference> getExecution_Attribute_context() const = 0;
 			virtual std::shared_ptr<ecore::EReference> getExecution_Attribute_parameterValues() const = 0;
 			
+			virtual std::shared_ptr<ecore::EOperation> getExecution_Operation__copy() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getExecution_Operation_execute() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getExecution_Operation_getBehavior() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getExecution_Operation_getOutputParameterValues() const = 0;
@@ -428,11 +430,11 @@ namespace fUML::Semantics::CommonBehavior
 			//Class and Feature IDs 
 			static const unsigned int OPAQUEBEHAVIOREXECUTION_CLASS = 85;
 			static const unsigned int OPAQUEBEHAVIOREXECUTION_CLASS_FEATURE_COUNT = 6;
-			static const unsigned int OPAQUEBEHAVIOREXECUTION_CLASS_OPERATION_COUNT = 41;
+			static const unsigned int OPAQUEBEHAVIOREXECUTION_CLASS_OPERATION_COUNT = 46;
 			
 			
-			static const int OPAQUEBEHAVIOREXECUTION_OPERATION_DOBODY_PARAMETERVALUE_PARAMETERVALUE = 8545;
-			static const int OPAQUEBEHAVIOREXECUTION_OPERATION_EXECUTE = 8546;
+			static const int OPAQUEBEHAVIOREXECUTION_OPERATION_DOBODY_PARAMETERVALUE_PARAMETERVALUE = 8550;
+			static const int OPAQUEBEHAVIOREXECUTION_OPERATION_EXECUTE = 8551;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getOpaqueBehaviorExecution_Class() const = 0;
@@ -449,11 +451,12 @@ namespace fUML::Semantics::CommonBehavior
 			//Class and Feature IDs 
 			static const unsigned int PARAMETERVALUE_CLASS = 87;
 			static const unsigned int PARAMETERVALUE_CLASS_FEATURE_COUNT = 2;
-			static const unsigned int PARAMETERVALUE_CLASS_OPERATION_COUNT = 0;
+			static const unsigned int PARAMETERVALUE_CLASS_OPERATION_COUNT = 1;
 			
 			static const int PARAMETERVALUE_ATTRIBUTE_PARAMETER = 8700;
 			static const int PARAMETERVALUE_ATTRIBUTE_VALUES = 8701;
 			
+			static const int PARAMETERVALUE_OPERATION__COPY = 8702;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getParameterValue_Class() const = 0;
@@ -462,6 +465,7 @@ namespace fUML::Semantics::CommonBehavior
 			virtual std::shared_ptr<ecore::EReference> getParameterValue_Attribute_parameter() const = 0;
 			virtual std::shared_ptr<ecore::EReference> getParameterValue_Attribute_values() const = 0;
 			
+			virtual std::shared_ptr<ecore::EOperation> getParameterValue_Operation__copy() const = 0;
 			
 			// End Class ParameterValue
 

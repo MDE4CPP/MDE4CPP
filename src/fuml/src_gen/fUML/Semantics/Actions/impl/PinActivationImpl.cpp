@@ -180,9 +180,16 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > PinActivationImpl::tak
 
 	std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > tokens(new Bag<fUML::Semantics::Activities::Token>());
 
+	//NEWDEBUG
+	DEBUG_MESSAGE(std::cout<<"-- printing from PinActivation::"<<__FUNCTION__<<" '"<<(this->getNode() == nullptr ? "..." : ("node = " + this->getNode()->getName()))<<"' : count = "<<count<<std::endl;)
+
 	if (upper < 0 || count < upper) 
 	{
 		std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance> > incomingEdges = this->getIncomingEdges();
+
+		//NEWDEBUG
+		DEBUG_MESSAGE(std::cout<<"-- printing from PinActivation::"<<__FUNCTION__<<" '"<<(this->getNode() == nullptr ? "..." : ("node = " + this->getNode()->getName()))<<"' : #incomingEdges = "<<incomingEdges->size()<<std::endl;)
+
 		for (unsigned int i = 0; i < incomingEdges->size(); i++) 
 		{
 			std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> edge = incomingEdges->at(i);
@@ -205,7 +212,10 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > PinActivationImpl::tak
 			}
 		}
 	}
+	
+	//NEWDEBUG
 
+	DEBUG_MESSAGE(std::cout<<"-- printing from PinActivation::"<<__FUNCTION__<<" '"<<(this->getNode() == nullptr ? "..." : ("pin = " + this->getNode()->getName()))<<"' : #offeredTokens = "<<tokens->size()<<std::endl;)
 	return tokens;
 	//end of body
 }

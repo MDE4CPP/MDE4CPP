@@ -88,6 +88,10 @@ namespace fUML::Semantics::Values
 			//*********************************
 			/*!
 			 */ 
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() = 0;
+			
+			/*!
+			 */ 
 			virtual bool checkAllParents(std::shared_ptr<uml::Classifier>  type,std::shared_ptr<uml::Classifier>  classifier) = 0;
 			
 			/*!

@@ -90,9 +90,9 @@ std::shared_ptr<ecore::EAttribute> CommonBehaviorPackageImpl::getCallEventExecut
 }
 
 
-std::shared_ptr<ecore::EOperation> CommonBehaviorPackageImpl::getCallEventExecution_Operation_copy() const
+std::shared_ptr<ecore::EOperation> CommonBehaviorPackageImpl::getCallEventExecution_Operation__copy() const
 {
-	return m_callEventExecution_Operation_copy;
+	return m_callEventExecution_Operation__copy;
 }
 std::shared_ptr<ecore::EOperation> CommonBehaviorPackageImpl::getCallEventExecution_Operation_createEventOccurrence() const
 {
@@ -331,6 +331,10 @@ std::shared_ptr<ecore::EReference> CommonBehaviorPackageImpl::getExecution_Attri
 	return m_execution_Attribute_parameterValues;
 }
 
+std::shared_ptr<ecore::EOperation> CommonBehaviorPackageImpl::getExecution_Operation__copy() const
+{
+	return m_execution_Operation__copy;
+}
 std::shared_ptr<ecore::EOperation> CommonBehaviorPackageImpl::getExecution_Operation_execute() const
 {
 	return m_execution_Operation_execute;
@@ -513,6 +517,10 @@ std::shared_ptr<ecore::EReference> CommonBehaviorPackageImpl::getParameterValue_
 	return m_parameterValue_Attribute_values;
 }
 
+std::shared_ptr<ecore::EOperation> CommonBehaviorPackageImpl::getParameterValue_Operation__copy() const
+{
+	return m_parameterValue_Operation__copy;
+}
 
 // End Class ParameterValue
 

@@ -641,7 +641,7 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > ActionActivationImpl::
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-		std::shared_ptr<uml::Action> action = std::dynamic_pointer_cast<uml::Action> (this->getNode());
+	std::shared_ptr<uml::Action> action = std::dynamic_pointer_cast<uml::Action> (this->getNode());
 
     if(action != nullptr)
     {
@@ -650,6 +650,9 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > ActionActivationImpl::
 
     std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > offeredTokens(new Bag<fUML::Semantics::Activities::Token>());
     std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance> > incomingEdgeList = this->getIncomingEdges();
+	//NEWDEBUG
+	DEBUG_MESSAGE(std::cout<<"-- printing from ActionActivation::"<<__FUNCTION__<<" '"<<(this->getNode() == nullptr ? "..." : ("node = " + this->getNode()->getName()))<<"' : #incomingEdges = "<<incomingEdgeList->size()<<std::endl;)
+	
     for(std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> incomingEdge : *incomingEdgeList)
     {
     	std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > tokenList = incomingEdge->takeOfferedTokens();
@@ -664,6 +667,8 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > ActionActivationImpl::
     if(action != nullptr)
     {
     	std::shared_ptr<Subset<fUML::Semantics::Actions::InputPinActivation, fUML::Semantics::Actions::PinActivation > > inputPinActivations = this->getInputPinActivation();
+		//NEWDEBUG
+		DEBUG_MESSAGE(std::cout<<"-- printing from ActionActivation::"<<__FUNCTION__<<" '"<<(this->getNode() == nullptr ? "..." : ("action = " + this->getNode()->getName()))<<"' : #inputPinActivation = "<<inputPinActivations->size()<<std::endl;)
         for (std::shared_ptr<fUML::Semantics::Actions::InputPinActivation> pinActivation : *inputPinActivations)
         {
             if(pinActivation!=nullptr)
@@ -678,7 +683,8 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > ActionActivationImpl::
             }
         }
     }
-
+	//NEWDEBUG
+	DEBUG_MESSAGE(std::cout<<"-- printing from ActionActivation::"<<__FUNCTION__<<" '"<<(this->getNode() == nullptr ? "..." : ("action = " + this->getNode()->getName()))<<"' : #offeredTokens = "<<offeredTokens->size()<<std::endl;)
     return offeredTokens;
 	//end of body
 }

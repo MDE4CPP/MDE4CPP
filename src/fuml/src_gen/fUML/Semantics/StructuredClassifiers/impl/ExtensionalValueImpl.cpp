@@ -38,6 +38,8 @@
 
 #include "fUML/Semantics/Loci/Locus.hpp"
 
+#include "fUML/Semantics/Values/Value.hpp"
+
 //Factories an Package includes
 #include "fUML/Semantics/StructuredClassifiers/impl/StructuredClassifiersFactoryImpl.hpp"
 #include "fUML/Semantics/StructuredClassifiers/impl/StructuredClassifiersPackageImpl.hpp"
@@ -125,6 +127,23 @@ std::shared_ptr<ecore::EClass> ExtensionalValueImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
+std::shared_ptr<fUML::Semantics::Values::Value> ExtensionalValueImpl::_copy()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Create a new extensional value with the same feature values at the same locus as this one.
+
+std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> newValue = std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::ExtensionalValue>(fUML::Semantics::SimpleClassifiers::CompoundValueImpl::_copy());
+
+if(this->getLocus() != nullptr)
+{
+	newValue->setLocus(this->getLocus());
+}
+
+return newValue;
+	//end of body
+}
+
 void ExtensionalValueImpl::destroy()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
