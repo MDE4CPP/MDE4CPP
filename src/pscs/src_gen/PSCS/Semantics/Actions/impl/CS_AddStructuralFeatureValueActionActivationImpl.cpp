@@ -296,7 +296,8 @@ void CS_AddStructuralFeatureValueActionActivationImpl::doActionDefault()
 
 	std::shared_ptr<uml::AddStructuralFeatureValueAction> action = std::dynamic_pointer_cast<uml::AddStructuralFeatureValueAction>(this->getNode());
 	std::shared_ptr<uml::StructuralFeature> feature = action->getStructuralFeature();
-	std::shared_ptr<uml::Association> association = this->getAssociation(feature);
+	/* Since links are represented implicitly in MDE4CPP, handling of links when adding a structural feature value is bypassed here*/
+	std::shared_ptr<uml::Association> association = nullptr; //this->getAssociation(feature);
 	
 	std::shared_ptr<fUML::Semantics::Values::Value> value = this->takeTokens(action->getObject())->at(0);
 	std::shared_ptr<Bag<fUML::Semantics::Values::Value>> inputValues = this->takeTokens(action->getValue());

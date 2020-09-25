@@ -71,9 +71,9 @@ std::shared_ptr<ecore::EReference> CommonBehaviorPackageImpl::getCS_CallEventExe
 	return m_cS_CallEventExecution_Attribute_interactionPoint;
 }
 
-std::shared_ptr<ecore::EOperation> CommonBehaviorPackageImpl::getCS_CallEventExecution_Operation_copy() const
+std::shared_ptr<ecore::EOperation> CommonBehaviorPackageImpl::getCS_CallEventExecution_Operation__copy() const
 {
-	return m_cS_CallEventExecution_Operation_copy;
+	return m_cS_CallEventExecution_Operation__copy;
 }
 std::shared_ptr<ecore::EOperation> CommonBehaviorPackageImpl::getCS_CallEventExecution_Operation_createEventOccurrence() const
 {

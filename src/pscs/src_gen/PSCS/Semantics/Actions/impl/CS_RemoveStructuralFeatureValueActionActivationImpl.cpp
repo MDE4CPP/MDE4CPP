@@ -213,7 +213,8 @@ void CS_RemoveStructuralFeatureValueActionActivationImpl::doAction()
 
 	std::shared_ptr<uml::RemoveStructuralFeatureValueAction> action = std::dynamic_pointer_cast<uml::RemoveStructuralFeatureValueAction>(this->getNode());
 	std::shared_ptr<uml::StructuralFeature> feature = action->getStructuralFeature();
-	std::shared_ptr<uml::Association> association = this->getAssociation(feature);
+	/* Since links are represented implicitly in MDE4CPP, handling of links when adding a structural feature value is bypassed here*/
+	std::shared_ptr<uml::Association> association = nullptr; //this->getAssociation(feature);
 	std::shared_ptr<fUML::Semantics::Values::Value> value = this->takeTokens(action->getObject())->at(0);
 	std::shared_ptr<fUML::Semantics::Values::Value> inputValue = nullptr;
 	if(action->getValue() != nullptr) {

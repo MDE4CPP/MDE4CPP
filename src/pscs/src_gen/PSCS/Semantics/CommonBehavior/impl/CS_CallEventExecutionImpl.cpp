@@ -163,7 +163,18 @@ std::shared_ptr<ecore::EClass> CS_CallEventExecutionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
+std::shared_ptr<fUML::Semantics::Values::Value> CS_CallEventExecutionImpl::_copy()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Create a new call event execution that is a copy of this execution
+// with no referenced interaction point.
 
+std::shared_ptr<PSCS::Semantics::CommonBehavior::CS_CallEventExecution> newValue = std::dynamic_pointer_cast<PSCS::Semantics::CommonBehavior::CS_CallEventExecution>(fUML::Semantics::CommonBehavior::CallEventExecutionImpl::_copy());
+newValue->setInteractionPoint(nullptr);
+return newValue;
+	//end of body
+}
 
 std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> CS_CallEventExecutionImpl::createEventOccurrence()
 {

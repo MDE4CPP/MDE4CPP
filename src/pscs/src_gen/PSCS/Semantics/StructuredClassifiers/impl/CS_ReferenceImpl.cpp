@@ -131,6 +131,21 @@ std::shared_ptr<ecore::EClass> CS_ReferenceImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
+std::shared_ptr<fUML::Semantics::Values::Value> CS_ReferenceImpl::_copy()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Create a new reference with the same referent and composite referent
+// as this reference.
+
+std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> newValue = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Reference();
+newValue->setReferent(this->getReferent());
+newValue->setCompositeReferent(this->getCompositeReferent());
+
+return newValue;
+	//end of body
+}
+
 
 
 std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> CS_ReferenceImpl::dispatchIn(std::shared_ptr<uml::Operation>  operation,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint>  interactionPoint)

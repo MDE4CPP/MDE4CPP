@@ -55,13 +55,13 @@ namespace PSCS::Semantics::CommonBehavior
 			//Class and Feature IDs 
 			static const unsigned int CS_CALLEVENTEXECUTION_CLASS = 4;
 			static const unsigned int CS_CALLEVENTEXECUTION_CLASS_FEATURE_COUNT = 8;
-			static const unsigned int CS_CALLEVENTEXECUTION_CLASS_OPERATION_COUNT = 54;
+			static const unsigned int CS_CALLEVENTEXECUTION_CLASS_OPERATION_COUNT = 59;
 			
 			static const int CS_CALLEVENTEXECUTION_ATTRIBUTE_INTERACTIONPOINT = 407;
 			
-			static const int CS_CALLEVENTEXECUTION_OPERATION_COPY = 459;
-			static const int CS_CALLEVENTEXECUTION_OPERATION_CREATEEVENTOCCURRENCE = 460;
-			static const int CS_CALLEVENTEXECUTION_OPERATION_NEW_ = 461;
+			static const int CS_CALLEVENTEXECUTION_OPERATION__COPY = 466;
+			static const int CS_CALLEVENTEXECUTION_OPERATION_CREATEEVENTOCCURRENCE = 464;
+			static const int CS_CALLEVENTEXECUTION_OPERATION_NEW_ = 465;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getCS_CallEventExecution_Class() const = 0;
@@ -69,7 +69,7 @@ namespace PSCS::Semantics::CommonBehavior
 			
 			virtual std::shared_ptr<ecore::EReference> getCS_CallEventExecution_Attribute_interactionPoint() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getCS_CallEventExecution_Operation_copy() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getCS_CallEventExecution_Operation__copy() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getCS_CallEventExecution_Operation_createEventOccurrence() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getCS_CallEventExecution_Operation_new_() const = 0;
 			
