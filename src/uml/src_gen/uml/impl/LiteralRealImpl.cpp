@@ -225,6 +225,21 @@ double LiteralRealImpl::getValue() const
 //*********************************
 // Operations
 //*********************************
+bool LiteralRealImpl::isComputable()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	return true;
+	//end of body
+}
+
+double LiteralRealImpl::realValue()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	return m_value;
+	//end of body
+}
 
 //*********************************
 // References

@@ -225,6 +225,21 @@ std::string LiteralStringImpl::getValue() const
 //*********************************
 // Operations
 //*********************************
+bool LiteralStringImpl::isComputable()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	return true;
+	//end of body
+}
+
+std::string LiteralStringImpl::stringValue()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	return m_value;
+	//end of body
+}
 
 //*********************************
 // References

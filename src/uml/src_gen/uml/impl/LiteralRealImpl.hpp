@@ -66,6 +66,18 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
+			/*!
+			 The query isComputable() is redefined to be true.
+			result = (true)
+			<p>From package UML::Values.</p> */ 
+			virtual bool isComputable() ;
+			
+			/*!
+			 The query realValue() gives the value.
+			result = (value)
+			<p>From package UML::Values.</p> */ 
+			virtual double realValue() ;
+			
 			
 			
 			//*********************************

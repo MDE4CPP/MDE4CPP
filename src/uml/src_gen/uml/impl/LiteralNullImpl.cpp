@@ -215,6 +215,21 @@ std::shared_ptr<ecore::EClass> LiteralNullImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
+bool LiteralNullImpl::isComputable()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	return true;
+	//end of body
+}
+
+bool LiteralNullImpl::isNull()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	return true;
+	//end of body
+}
 
 //*********************************
 // References

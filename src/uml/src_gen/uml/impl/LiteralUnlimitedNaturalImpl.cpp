@@ -225,6 +225,21 @@ int LiteralUnlimitedNaturalImpl::getValue() const
 //*********************************
 // Operations
 //*********************************
+bool LiteralUnlimitedNaturalImpl::isComputable()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	return true;
+	//end of body
+}
+
+int LiteralUnlimitedNaturalImpl::unlimitedValue()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	return m_value;
+	//end of body
+}
 
 //*********************************
 // References

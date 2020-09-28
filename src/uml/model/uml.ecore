@@ -17367,20 +17367,23 @@
         </eAnnotations>
         <eAnnotations source="redefines" references="#//ValueSpecification/stringValue"/>
       </contents>
-      <contents xsi:type="ecore:EOperation" name="booleanValue" ordered="false" eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//Boolean">
-        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="The query booleanValue() gives the value.&#xA;result = (value)&#xA;&lt;p>From package UML::Values.&lt;/p>"/>
-        </eAnnotations>
-        <eAnnotations source="redefines" references="#//ValueSpecification/booleanValue"/>
-      </contents>
-      <contents xsi:type="ecore:EOperation" name="isComputable" ordered="false" lowerBound="1"
-          eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//Boolean">
-        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="The query isComputable() is redefined to be true.&#xA;result = (true)&#xA;&lt;p>From package UML::Values.&lt;/p>"/>
-        </eAnnotations>
-        <eAnnotations source="redefines" references="#//ValueSpecification/isComputable"/>
-      </contents>
     </eAnnotations>
+    <eOperations name="booleanValue" ordered="false" eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//Boolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The query booleanValue() gives the value.&#xA;result = (value)&#xA;&lt;p>From package UML::Values.&lt;/p>"/>
+      </eAnnotations>
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="return m_value;"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="isComputable" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//Boolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The query isComputable() is redefined to be true.&#xA;result = (true)&#xA;&lt;p>From package UML::Values.&lt;/p>"/>
+      </eAnnotations>
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="return true;"/>
+      </eAnnotations>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" ordered="false"
         lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//Boolean"
         defaultValueLiteral="false">
@@ -17406,20 +17409,23 @@
         </eAnnotations>
         <eAnnotations source="redefines" references="#//ValueSpecification/stringValue"/>
       </contents>
-      <contents xsi:type="ecore:EOperation" name="integerValue" ordered="false" eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//Integer">
-        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="The query integerValue() gives the value.&#xA;result = (value)&#xA;&lt;p>From package UML::Values.&lt;/p>"/>
-        </eAnnotations>
-        <eAnnotations source="redefines" references="#//ValueSpecification/integerValue"/>
-      </contents>
-      <contents xsi:type="ecore:EOperation" name="isComputable" ordered="false" lowerBound="1"
-          eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//Boolean">
-        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="The query isComputable() is redefined to be true.&#xA;result = (true)&#xA;&lt;p>From package UML::Values.&lt;/p>"/>
-        </eAnnotations>
-        <eAnnotations source="redefines" references="#//ValueSpecification/isComputable"/>
-      </contents>
     </eAnnotations>
+    <eOperations name="integerValue" ordered="false" eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//Integer">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The query integerValue() gives the value.&#xA;result = (value)&#xA;&lt;p>From package UML::Values.&lt;/p>"/>
+      </eAnnotations>
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="return m_value;"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="isComputable" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//Boolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The query isComputable() is redefined to be true.&#xA;result = (true)&#xA;&lt;p>From package UML::Values.&lt;/p>"/>
+      </eAnnotations>
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="return true;"/>
+      </eAnnotations>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" ordered="false"
         lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//Integer"
         defaultValueLiteral="0">
@@ -17432,22 +17438,22 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="A LiteralNull specifies the lack of a value.&#xA;&lt;p>From package UML::Values.&lt;/p>"/>
     </eAnnotations>
-    <eAnnotations source="duplicates">
-      <contents xsi:type="ecore:EOperation" name="isComputable" ordered="false" lowerBound="1"
-          eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//Boolean">
-        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="The query isComputable() is redefined to be true.&#xA;result = (true)&#xA;&lt;p>From package UML::Values.&lt;/p>"/>
-        </eAnnotations>
-        <eAnnotations source="redefines" references="#//ValueSpecification/isComputable"/>
-      </contents>
-      <contents xsi:type="ecore:EOperation" name="isNull" ordered="false" lowerBound="1"
-          eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//Boolean">
-        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="The query isNull() returns true.&#xA;result = (true)&#xA;&lt;p>From package UML::Values.&lt;/p>"/>
-        </eAnnotations>
-        <eAnnotations source="redefines" references="#//ValueSpecification/isNull"/>
-      </contents>
-    </eAnnotations>
+    <eOperations name="isComputable" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//Boolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The query isComputable() is redefined to be true.&#xA;result = (true)&#xA;&lt;p>From package UML::Values.&lt;/p>"/>
+      </eAnnotations>
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="return true;"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="isNull" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//Boolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The query isNull() returns true.&#xA;result = (true)&#xA;&lt;p>From package UML::Values.&lt;/p>"/>
+      </eAnnotations>
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="return true;"/>
+      </eAnnotations>
+    </eOperations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="LiteralReal" eSuperTypes="#//LiteralSpecification">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -17457,20 +17463,23 @@
       <contents xsi:type="ecore:EOperation" name="stringValue" ordered="false" eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//String">
         <eAnnotations source="redefines" references="#//ValueSpecification/stringValue"/>
       </contents>
-      <contents xsi:type="ecore:EOperation" name="isComputable" ordered="false" lowerBound="1"
-          eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//Boolean">
-        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="The query isComputable() is redefined to be true.&#xA;result = (true)&#xA;&lt;p>From package UML::Values.&lt;/p>"/>
-        </eAnnotations>
-        <eAnnotations source="redefines" references="#//ValueSpecification/isComputable"/>
-      </contents>
-      <contents xsi:type="ecore:EOperation" name="realValue" ordered="false" eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//Real">
-        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="The query realValue() gives the value.&#xA;result = (value)&#xA;&lt;p>From package UML::Values.&lt;/p>"/>
-        </eAnnotations>
-        <eAnnotations source="redefines" references="#//ValueSpecification/realValue"/>
-      </contents>
     </eAnnotations>
+    <eOperations name="isComputable" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//Boolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The query isComputable() is redefined to be true.&#xA;result = (true)&#xA;&lt;p>From package UML::Values.&lt;/p>"/>
+      </eAnnotations>
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="return true;"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="realValue" ordered="false" eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//Real">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The query realValue() gives the value.&#xA;result = (value)&#xA;&lt;p>From package UML::Values.&lt;/p>"/>
+      </eAnnotations>
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="return m_value;"/>
+      </eAnnotations>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" ordered="false"
         lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//Real">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -17496,20 +17505,23 @@
         </eAnnotations>
         <eAnnotations source="redefines" references="#//ValueSpecification/unlimitedValue"/>
       </contents>
-      <contents xsi:type="ecore:EOperation" name="isComputable" ordered="false" lowerBound="1"
-          eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//Boolean">
-        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="The query isComputable() is redefined to be true.&#xA;result = (true)&#xA;&lt;p>From package UML::Values.&lt;/p>"/>
-        </eAnnotations>
-        <eAnnotations source="redefines" references="#//ValueSpecification/isComputable"/>
-      </contents>
-      <contents xsi:type="ecore:EOperation" name="stringValue" ordered="false" eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//String">
-        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="The query stringValue() gives the value.&#xA;result = (value)&#xA;&lt;p>From package UML::Values.&lt;/p>"/>
-        </eAnnotations>
-        <eAnnotations source="redefines" references="#//ValueSpecification/stringValue"/>
-      </contents>
     </eAnnotations>
+    <eOperations name="isComputable" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//Boolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The query isComputable() is redefined to be true.&#xA;result = (true)&#xA;&lt;p>From package UML::Values.&lt;/p>"/>
+      </eAnnotations>
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="return true;"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="stringValue" ordered="false" eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//String">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The query stringValue() gives the value.&#xA;result = (value)&#xA;&lt;p>From package UML::Values.&lt;/p>"/>
+      </eAnnotations>
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="return m_value;"/>
+      </eAnnotations>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" ordered="false"
         eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//String" unsettable="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -17528,21 +17540,23 @@
         </eAnnotations>
         <eAnnotations source="redefines" references="#//ValueSpecification/stringValue"/>
       </contents>
-      <contents xsi:type="ecore:EOperation" name="isComputable" ordered="false" lowerBound="1"
-          eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//Boolean">
-        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="The query isComputable() is redefined to be true.&#xA;result = (true)&#xA;&lt;p>From package UML::Values.&lt;/p>"/>
-        </eAnnotations>
-        <eAnnotations source="redefines" references="#//ValueSpecification/isComputable"/>
-      </contents>
-      <contents xsi:type="ecore:EOperation" name="unlimitedValue" ordered="false"
-          eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//UnlimitedNatural">
-        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="The query unlimitedValue() gives the value.&#xA;result = (value)&#xA;&lt;p>From package UML::Values.&lt;/p>"/>
-        </eAnnotations>
-        <eAnnotations source="redefines" references="#//ValueSpecification/unlimitedValue"/>
-      </contents>
     </eAnnotations>
+    <eOperations name="isComputable" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//Boolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The query isComputable() is redefined to be true.&#xA;result = (true)&#xA;&lt;p>From package UML::Values.&lt;/p>"/>
+      </eAnnotations>
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="return true;"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="unlimitedValue" ordered="false" eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//UnlimitedNatural">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The query unlimitedValue() gives the value.&#xA;result = (value)&#xA;&lt;p>From package UML::Values.&lt;/p>"/>
+      </eAnnotations>
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="return m_value;"/>
+      </eAnnotations>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" ordered="false"
         lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//UnlimitedNatural"
         defaultValueLiteral="0">

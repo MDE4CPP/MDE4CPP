@@ -225,6 +225,21 @@ bool LiteralBooleanImpl::getValue() const
 //*********************************
 // Operations
 //*********************************
+bool LiteralBooleanImpl::booleanValue()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	return m_value;
+	//end of body
+}
+
+bool LiteralBooleanImpl::isComputable()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	return true;
+	//end of body
+}
 
 //*********************************
 // References

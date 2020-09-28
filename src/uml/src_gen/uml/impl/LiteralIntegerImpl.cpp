@@ -225,6 +225,21 @@ int LiteralIntegerImpl::getValue() const
 //*********************************
 // Operations
 //*********************************
+int LiteralIntegerImpl::integerValue()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	return m_value;
+	//end of body
+}
+
+bool LiteralIntegerImpl::isComputable()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	return true;
+	//end of body
+}
 
 //*********************************
 // References
