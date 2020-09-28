@@ -54,6 +54,11 @@
  * queries to check values of prepareApplication annotation keys
 */]
 [query public prepareApplication(aPackage : Package) : Boolean = hasSourceGen(sourceNamePrepareApplication()) /]
+[query public hasMainActivity(aPackage : Package) : Boolean = hasKey(sourceNamePrepareApplication(), keyIsMainActivity()) /]
+[query public getHasMainActivity(aPackage : Package) : String = valueKey(sourceNamePrepareApplication(), keyIsMainActivity()) /]
+[query public isActivityWithMainKeyExisting(aPackage : Package) : Boolean = aPackage.allOwnedElements()->filter(Activity)->select(act : Activity | act.isMainActivity())->size() > 0 /]
+[query private getFirstActivityWithMainKey(aPackage : Package) : Activity = aPackage.allOwnedElements()->filter(Activity)->select(act : Activity | act.isMainActivity())->asOrderedSet()->first() /]
+[query public getMainActivity(aPackage : Package) : Activity = if (aPackage.isActivityWithMainKeyExisting()) then aPackage.getFirstActivityWithMainKey() else null endif/]
 [query public hasMainSourceCode(ePackage : Package) : Boolean = hasKey(sourceNamePrepareApplication(), keyMainSourceCode()) /]
 [query public getMainSourceCode(ePackage : Package) : String = valueKey(sourceNamePrepareApplication(), keyMainSourceCode()) /]
 [query public hasMainIncludes(ePackage : Package) : Boolean = hasKey(sourceNamePrepareApplication(), keyMainIncludes()) /]
