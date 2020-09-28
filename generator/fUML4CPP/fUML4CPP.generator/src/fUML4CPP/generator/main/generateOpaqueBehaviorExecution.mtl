@@ -68,56 +68,10 @@
 	}->flatten()->sortedBy(name)
 /]
 
-[template public generateOpaqueBehaviorCreation(anOpaqueBehavior : OpaqueBehavior, executionName : String) ]
-{
-	[if (not anOpaqueBehavior.name.oclIsUndefined())]
-	std::shared_ptr<[anOpaqueBehavior.getNearestPackage().myNamespaceName()/]::[executionName/]> [memberName(anOpaqueBehavior)/]Execution(new [anOpaqueBehavior.getNearestPackage().myNamespaceName()/]::[executionName/]());
-	[memberName(anOpaqueBehavior)/]Execution->setThisExecutionPtr([memberName(anOpaqueBehavior)/]Execution);
-	[memberName(anOpaqueBehavior)/]Execution->getTypes()->push_back([anOpaqueBehavior.generatePackageGetterCall()/]);
-	[memberName(anOpaqueBehavior)/]Execution->setLocus(locus);
-	factory->addPrimitiveBehaviorPrototype([memberName(anOpaqueBehavior)/]Execution);
-}
-[/if]
-[/template]
-
 [query public getFBPackageElement(aCOA : CallOperationAction) : String = 'ob_'.concat(aCOA.owner.oclAsType(NamedElement).name.replaceAll(' ', '')).concat('_').concat(aCOA.myName().sanitize())/]
-
-[template public generateCallOperationActionCreation(aCallOperationAction : CallOperationAction)]
-[if (not aCallOperationAction.name.oclIsUndefined())]
-std::shared_ptr<uml::OpaqueBehavior> [aCallOperationAction.getFBPackageElement()/](uml::UmlFactory::eInstance()->createOpaqueBehavior_in_Package([aCallOperationAction.getNearestPackage().name.concat('::').concat(aCallOperationAction.getNearestPackage().name.toUpperFirst()).concat('Package').concat('::eInstance()')/]));
-[aCallOperationAction.getFBPackageElement()/]->setName("[aCallOperationAction.getFBPackageElement()/]");
-[if (aCallOperationAction._context.oclIsKindOf(BehavioredClassifier))]
-[aCallOperationAction.getFBPackageElement()/]->setContext([aCallOperationAction._context.generatePackageGetterCall()/]);
-[/if]
-[aCallOperationAction.operation->asOrderedSet()->first().generatePackageGetterCall()/]->getMethod()->insert([aCallOperationAction.operation->asOrderedSet()->first().generatePackageGetterCall()/]->getMethod()->begin(), [aCallOperationAction.getFBPackageElement()/]);
-
-[for (aParameter : Parameter | aCallOperationAction.operation->asOrderedSet()->first().ownedParameter)]
-{
-	std::shared_ptr<uml::Parameter> [memberName(aParameter)/](uml::UmlFactory::eInstance()->createParameter_in_Behavior([aCallOperationAction.getFBPackageElement()/]));
-	[memberName(aParameter)/]->setName("[aParameter.name/]");
-	[memberName(aParameter)/]->setType([if(aParameter.type.getNearestPackage() = aParameter.getNearestPackage())][aParameter.getNearestPackage().myNamespaceName().concat('::').concat(aParameter.getNearestPackage().name.toUpperFirst()).concat('Package').concat('::eInstance()->')/][/if][aParameter.type.generatePackageGetterCall(aParameter)/]);
-	[memberName(aParameter)/]->setLower([aParameter.lower/]);
-	[memberName(aParameter)/]->setUpper([aParameter.upper/]);
-	[memberName(aParameter)/]->setDirection(uml::ParameterDirectionKind::[direction.toString().toUpper()/]);
-	//[aCallOperationAction.getFBPackageElement()/]->getOwnedParameter()->push_back([memberName(aParameter)/]);
-}
-[/for]
-{
-	std::shared_ptr<[aCallOperationAction.getNearestPackage().myNamespaceName()/]::[aCallOperationAction.generateOpaqueBehaviorExecutionName()/]> [memberName(aCallOperationAction)/]Execution(new [aCallOperationAction.getNearestPackage().myNamespaceName()/]::[aCallOperationAction.generateOpaqueBehaviorExecutionName()/]());
-	[memberName(aCallOperationAction)/]Execution->setThisExecutionPtr([memberName(aCallOperationAction)/]Execution);
-	[memberName(aCallOperationAction)/]Execution->getTypes()->push_back([aCallOperationAction.getFBPackageElement()/]);
-	[memberName(aCallOperationAction)/]Execution->setLocus(locus);
-	factory->addPrimitiveBehaviorPrototype([memberName(aCallOperationAction)/]Execution);
-}
-[else]
-std::cerr << "a CallOperationAction without name" << std::endl;
-throw "error";
-[/if]
-[/template]
 
 [template public generateCallOperationActionClearing(aCallOperationAction : CallOperationAction)]
 [aCallOperationAction.operation->asOrderedSet()->first().generatePackageGetterCall()/]->getMethod()->erase([aCallOperationAction.getFBPackageElement()/]);
-
 [/template]
 
 [template public generateInclude(aCallBehaviorAction : CallBehaviorAction)]
