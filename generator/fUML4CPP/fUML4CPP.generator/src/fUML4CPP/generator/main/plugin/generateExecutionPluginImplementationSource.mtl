@@ -14,7 +14,6 @@
  */]
 [module generateExecutionPluginImplementationSource('http://www.eclipse.org/uml2/5.0.0/UML')]
 
-[import fUML4CPP::generator::main::generateMainExecution /]
 [import fUML4CPP::generator::main::generateOpaqueBehaviorExecution /]
 [import fUML4CPP::generator::main::generateOperationExecution /]
 [import fUML4CPP::generator::main::parameterHelper /]

@@ -19,7 +19,6 @@
 [import fUML4CPP::generator::main::generateModelLocusHeader /]
 [import fUML4CPP::generator::main::generateModelLocusSource /]
 [import fUML4CPP::generator::main::generateExecutionBuildFile /]
-[import fUML4CPP::generator::main::generateMainExecution /]
 [import fUML4CPP::generator::main::generateOpaqueBehaviorExecution /]
 [import fUML4CPP::generator::main::generateOpaqueBehaviorExecutionHeader /]
 [import fUML4CPP::generator::main::generateOpaqueBehaviorExecutionSource /]
@@ -31,11 +30,6 @@
 [import UML4CPP::generator::main::generate /]
 [import UML4CPP::generator::main::configuration::generateGradleFiles /]
 [import UML4CPP::generator::main::validation::validateModel /]
- 
-[query public hasConfiguredBuildMode(aPackage : Package) : Boolean = eAllContents()->filter(ecore::EAnnotation)->select(source = 'BuildMode')->notEmpty() /]
-[query public getBuildMode(aPackage : Package) : ecore::EAnnotation = eAllContents()->filter(ecore::EAnnotation)->select(source = 'BuildMode')->first() /]
-[query public hasBuildTypeConfiguration(aPackage : Package) : Boolean = if (hasConfiguredBuildMode()) then getBuildMode().details->select(key = 'type')->notEmpty() else false endif /]
-[query public buildLibrary(aPackage : Package) : Boolean = if (hasBuildTypeConfiguration()) then (aPackage.getBuildMode().details->select(key = 'type')->first().value = 'library') else false endif /]
 
 [template public generateFUML(aPackage : uml::Package)]
 [comment @main/]
@@ -76,13 +70,8 @@
 [aPackage.getClassifiersForObjectClasses().generateClassifierObjectHeader(aPackage)/]
 [aPackage.getClassifiersForObjectClasses().generateClassifierObjectSource(aPackage)/]
 
-//generate main or execution plugin
-[if (not buildLibrary())]
-//generate main
-[aPackage.generateMain()/]
-[else]
+//generate execution plugin
 [aPackage.generateExecutionPlugin()/]
-[/if]
 
 //generate model locus
 [aPackage.generateModelLocusHeader()/]
@@ -90,5 +79,5 @@
 
 
 //generate project files
-[aPackage.generateExecutionBuildFile(buildLibrary())/]
+[aPackage.generateExecutionBuildFiles()/]
 [/template]
