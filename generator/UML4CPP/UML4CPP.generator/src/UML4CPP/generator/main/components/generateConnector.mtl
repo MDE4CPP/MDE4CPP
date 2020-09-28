@@ -49,3 +49,7 @@
 [aConnectorEnd.memberName()/]->setLower([aConnectorEnd.lower/]);
 [aConnectorEnd.memberName()/]->setUpper([aConnectorEnd.upper/]);
 [/template]
+
+[query public getConnector(connectorEnd : ConnectorEnd) : Connector = connectorEnd.owner.oclAsType(Connector)/]
+[query public getOtherConnectorEnd(connector : Connector, connectorEnd : ConnectorEnd) : ConnectorEnd = connector.end->reject(end : ConnectorEnd | end = connectorEnd)->first()/]
+[query public getOtherConnectorEnd(connectorEnd : ConnectorEnd) : ConnectorEnd = connectorEnd.getConnector().end->reject(end : ConnectorEnd | end = connectorEnd)->first()/]
