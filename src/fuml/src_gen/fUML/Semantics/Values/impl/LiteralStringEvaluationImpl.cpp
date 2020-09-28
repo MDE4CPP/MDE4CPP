@@ -26,6 +26,7 @@
 #include "fUML/Semantics/SimpleClassifiers/StringValue.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "uml/LiteralString.hpp"
+#include "primitivetypesReflection/PrimitiveTypesPackage.hpp"
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -124,11 +125,10 @@ std::shared_ptr<fUML::Semantics::Values::Value> LiteralStringEvaluationImpl::eva
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr<uml::LiteralString> literal = std::dynamic_pointer_cast<uml::LiteralString>(getSpecification());
-	std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> stringValue(fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createStringValue());
-    stringValue->setType(this->getType("String"));
-    stringValue->setValue(literal->getValue());
-    return stringValue ;
+		std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> stringValue(fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createStringValue());
+    stringValue->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
+    stringValue->setValue(getSpecification()->stringValue());
+    return stringValue;
 	//end of body
 }
 

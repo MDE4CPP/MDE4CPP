@@ -26,6 +26,7 @@
 #include "fUML/Semantics/SimpleClassifiers/UnlimitedNaturalValue.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "uml/LiteralUnlimitedNatural.hpp"
+#include "primitivetypesReflection/PrimitiveTypesPackage.hpp"
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -124,10 +125,9 @@ std::shared_ptr<fUML::Semantics::Values::Value> LiteralUnlimitedNaturalEvaluatio
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr<uml::LiteralUnlimitedNatural> literal = std::dynamic_pointer_cast<uml::LiteralUnlimitedNatural>(getSpecification());
-	std::shared_ptr<fUML::Semantics::SimpleClassifiers::UnlimitedNaturalValue> unlimitedNaturalValue(fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createUnlimitedNaturalValue());
-    unlimitedNaturalValue->setType(this->getType("UnlimitedNatural"));
-    unlimitedNaturalValue->setValue(literal->getValue());
+		std::shared_ptr<fUML::Semantics::SimpleClassifiers::UnlimitedNaturalValue> unlimitedNaturalValue(fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createUnlimitedNaturalValue());
+    unlimitedNaturalValue->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_UnlimitedNatural());
+    unlimitedNaturalValue->setValue(getSpecification()->unlimitedValue());
     return unlimitedNaturalValue;
 	//end of body
 }

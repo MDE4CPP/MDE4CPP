@@ -26,6 +26,7 @@
 #include "fUML/Semantics/SimpleClassifiers/RealValue.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "uml/LiteralReal.hpp"
+#include "primitivetypesReflection/PrimitiveTypesPackage.hpp"
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -124,11 +125,10 @@ std::shared_ptr<fUML::Semantics::Values::Value> LiteralRealEvaluationImpl::evalu
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr<uml::LiteralReal> literal = std::dynamic_pointer_cast<uml::LiteralReal>(this->getSpecification());
 	std::shared_ptr<fUML::Semantics::SimpleClassifiers::RealValue> realValue(fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createRealValue());
-	realValue->setType(this->getType("Real"));
-	realValue->setValue(literal->getValue());
-	return realValue;
+realValue->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Real());
+realValue->setValue(getSpecification()->realValue());
+return realValue;
 	//end of body
 }
 

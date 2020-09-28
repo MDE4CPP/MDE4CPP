@@ -28,11 +28,12 @@
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="LiteralBooleanEvaluation" eSuperTypes="#//Semantics/Values/LiteralEvaluation">
         <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-          <details key="includes" value="#include &quot;fUML/Semantics/SimpleClassifiers/BooleanValue.hpp&quot;&#xA;#include &quot;fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp&quot;&#xA;#include &quot;uml/LiteralBoolean.hpp&quot;"/>
+          <details key="includes" value="#include &quot;fUML/Semantics/SimpleClassifiers/BooleanValue.hpp&quot;&#xA;#include &quot;fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp&quot;&#xA;#include &quot;uml/LiteralBoolean.hpp&quot;&#xA;#include &quot;primitivetypesReflection/PrimitiveTypesPackage.hpp&quot;"/>
+          <details key="library" value="primitivetypesReflection"/>
         </eAnnotations>
         <eOperations name="evaluate" ordered="false" eType="#//Semantics/Values/Value">
           <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-            <details key="body" value="std::shared_ptr&lt;uml::LiteralBoolean> literal = std::dynamic_pointer_cast&lt;uml::LiteralBoolean>(getSpecification());&#xA;&#x9;std::shared_ptr&lt;fUML::Semantics::SimpleClassifiers::BooleanValue> booleanValue(fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createBooleanValue());&#xA;    booleanValue->setType(this->getType(&quot;Boolean&quot;));&#xA;    booleanValue->setValue(literal->getValue());&#xA;    return booleanValue;"/>
+            <details key="body" value="std::shared_ptr&lt;fUML::Semantics::SimpleClassifiers::BooleanValue> booleanValue(fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createBooleanValue());&#xA;booleanValue->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());&#xA;booleanValue->setValue(getSpecification()->booleanValue());&#xA;return booleanValue;"/>
           </eAnnotations>
         </eOperations>
       </eClassifiers>
@@ -50,11 +51,12 @@
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="LiteralIntegerEvaluation" eSuperTypes="#//Semantics/Values/LiteralEvaluation">
         <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-          <details key="includes" value="#include &quot;fUML/Semantics/SimpleClassifiers/IntegerValue.hpp&quot;&#xA;#include &quot;fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp&quot;&#xA;#include &quot;uml/LiteralInteger.hpp&quot;"/>
+          <details key="includes" value="#include &quot;fUML/Semantics/SimpleClassifiers/IntegerValue.hpp&quot;&#xA;#include &quot;fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp&quot;&#xA;#include &quot;uml/LiteralInteger.hpp&quot;&#xA;#include &quot;primitivetypesReflection/PrimitiveTypesPackage.hpp&quot;"/>
+          <details key="library" value="primitivetypesReflection"/>
         </eAnnotations>
         <eOperations name="evaluate" ordered="false" eType="#//Semantics/Values/Value">
           <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-            <details key="body" value="std::shared_ptr&lt;uml::LiteralInteger> literal = std::dynamic_pointer_cast&lt;uml::LiteralInteger>(getSpecification());&#xA;&#x9;std::shared_ptr&lt;fUML::Semantics::SimpleClassifiers::IntegerValue> integerValue(fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createIntegerValue());&#xA;    integerValue ->setType(this->getType(&quot;Integer&quot;));&#xA;    integerValue ->setValue(literal->getValue());&#xA;&#xA;    return integerValue ;"/>
+            <details key="body" value="&#x9;std::shared_ptr&lt;fUML::Semantics::SimpleClassifiers::IntegerValue> integerValue(fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createIntegerValue());&#xA;    integerValue ->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());&#xA;    integerValue ->setValue(getSpecification()->integerValue());&#xA;&#xA;    return integerValue ;"/>
           </eAnnotations>
         </eOperations>
       </eClassifiers>
@@ -67,32 +69,35 @@
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="LiteralRealEvaluation" eSuperTypes="#//Semantics/Values/LiteralEvaluation">
         <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-          <details key="includes" value="#include &quot;fUML/Semantics/SimpleClassifiers/RealValue.hpp&quot;&#xA;#include &quot;fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp&quot;&#xA;#include &quot;uml/LiteralReal.hpp&quot;"/>
+          <details key="includes" value="#include &quot;fUML/Semantics/SimpleClassifiers/RealValue.hpp&quot;&#xA;#include &quot;fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp&quot;&#xA;#include &quot;uml/LiteralReal.hpp&quot;&#xA;#include &quot;primitivetypesReflection/PrimitiveTypesPackage.hpp&quot;"/>
+          <details key="library" value="primitivetypesReflection"/>
         </eAnnotations>
         <eOperations name="evaluate" ordered="false" eType="#//Semantics/Values/Value">
           <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-            <details key="body" value="std::shared_ptr&lt;uml::LiteralReal> literal = std::dynamic_pointer_cast&lt;uml::LiteralReal>(this->getSpecification());&#xA;&#x9;std::shared_ptr&lt;fUML::Semantics::SimpleClassifiers::RealValue> realValue(fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createRealValue());&#xA;&#x9;realValue->setType(this->getType(&quot;Real&quot;));&#xA;&#x9;realValue->setValue(literal->getValue());&#xA;&#x9;return realValue;"/>
+            <details key="body" value="std::shared_ptr&lt;fUML::Semantics::SimpleClassifiers::RealValue> realValue(fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createRealValue());&#xA;realValue->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Real());&#xA;realValue->setValue(getSpecification()->realValue());&#xA;return realValue;"/>
           </eAnnotations>
         </eOperations>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="LiteralStringEvaluation" eSuperTypes="#//Semantics/Values/LiteralEvaluation">
         <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-          <details key="includes" value="#include &quot;fUML/Semantics/SimpleClassifiers/StringValue.hpp&quot;&#xA;#include &quot;fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp&quot;&#xA;#include &quot;uml/LiteralString.hpp&quot;"/>
+          <details key="includes" value="#include &quot;fUML/Semantics/SimpleClassifiers/StringValue.hpp&quot;&#xA;#include &quot;fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp&quot;&#xA;#include &quot;uml/LiteralString.hpp&quot;&#xA;#include &quot;primitivetypesReflection/PrimitiveTypesPackage.hpp&quot;"/>
+          <details key="library" value="primitivetypesReflection"/>
         </eAnnotations>
         <eOperations name="evaluate" ordered="false" eType="#//Semantics/Values/Value">
           <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-            <details key="body" value="std::shared_ptr&lt;uml::LiteralString> literal = std::dynamic_pointer_cast&lt;uml::LiteralString>(getSpecification());&#xA;&#x9;std::shared_ptr&lt;fUML::Semantics::SimpleClassifiers::StringValue> stringValue(fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createStringValue());&#xA;    stringValue->setType(this->getType(&quot;String&quot;));&#xA;    stringValue->setValue(literal->getValue());&#xA;    return stringValue ;"/>
+            <details key="body" value="&#x9;std::shared_ptr&lt;fUML::Semantics::SimpleClassifiers::StringValue> stringValue(fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createStringValue());&#xA;    stringValue->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());&#xA;    stringValue->setValue(getSpecification()->stringValue());&#xA;    return stringValue;"/>
           </eAnnotations>
         </eOperations>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="LiteralUnlimitedNaturalEvaluation"
           eSuperTypes="#//Semantics/Values/LiteralEvaluation">
         <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-          <details key="includes" value="#include &quot;fUML/Semantics/SimpleClassifiers/UnlimitedNaturalValue.hpp&quot;&#xA;#include &quot;fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp&quot;&#xA;#include &quot;uml/LiteralUnlimitedNatural.hpp&quot;"/>
+          <details key="includes" value="#include &quot;fUML/Semantics/SimpleClassifiers/UnlimitedNaturalValue.hpp&quot;&#xA;#include &quot;fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp&quot;&#xA;#include &quot;uml/LiteralUnlimitedNatural.hpp&quot;&#xA;#include &quot;primitivetypesReflection/PrimitiveTypesPackage.hpp&quot;"/>
+          <details key="library" value="primitivetypesReflection"/>
         </eAnnotations>
         <eOperations name="evaluate" ordered="false" eType="#//Semantics/Values/Value">
           <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-            <details key="body" value="std::shared_ptr&lt;uml::LiteralUnlimitedNatural> literal = std::dynamic_pointer_cast&lt;uml::LiteralUnlimitedNatural>(getSpecification());&#xA;&#x9;std::shared_ptr&lt;fUML::Semantics::SimpleClassifiers::UnlimitedNaturalValue> unlimitedNaturalValue(fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createUnlimitedNaturalValue());&#xA;    unlimitedNaturalValue->setType(this->getType(&quot;UnlimitedNatural&quot;));&#xA;    unlimitedNaturalValue->setValue(literal->getValue());&#xA;    return unlimitedNaturalValue;"/>
+            <details key="body" value="&#x9;std::shared_ptr&lt;fUML::Semantics::SimpleClassifiers::UnlimitedNaturalValue> unlimitedNaturalValue(fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createUnlimitedNaturalValue());&#xA;    unlimitedNaturalValue->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_UnlimitedNatural());&#xA;    unlimitedNaturalValue->setValue(getSpecification()->unlimitedValue());&#xA;    return unlimitedNaturalValue;"/>
           </eAnnotations>
         </eOperations>
       </eClassifiers>
