@@ -44,17 +44,17 @@
  * template to generate create function declarations
 */]
 [template public generateClassCreate(aClass : Class,impl : Boolean)]
-virtual std::shared_ptr<[aClass.generateCppType(true)/]> create[aClass.name.toUpperFirst()/](const int metaElementID=-1) const [abstractSuffix(impl)/];
+virtual std::shared_ptr<[aClass.generateCppType(true)/]> create[aClass.name.toUpperFirst()/](const int metaElementID = [aClass.getNearestPackage().name.toUpperFirst()/]Package::[aClass.getMemberName().toUpperCase()/]) const [abstractSuffix(impl)/];
 [for (anAssociation : Association | aClass.getCompositionsToClass())]
 [let containerProperty : Property = anAssociation.memberEnd->select(type = aClass)->asOrderedSet()->first()]
 [let containmentProperty : Property = anAssociation.memberEnd->select(not (type = aClass))->asOrderedSet()->first()]
-virtual std::shared_ptr<[aClass.generateCppType(true)/]> create[aClass.name.toUpperFirst()/]_in_[containmentProperty.name.toUpperFirst()/]([containmentProperty.generateCppType()/] [containmentProperty.name.toLowerFirst()/], const int metaElementID=-1) const [abstractSuffix(impl)/] ; 
+virtual std::shared_ptr<[aClass.generateCppType(true)/]> create[aClass.name.toUpperFirst()/]_in_[containmentProperty.name.toUpperFirst()/]([containmentProperty.generateCppType()/] [containmentProperty.name.toLowerFirst()/], const int metaElementID = [aClass.getNearestPackage().name.toUpperFirst()/]Package::[aClass.getMemberName().toUpperCase()/]) const [abstractSuffix(impl)/] ; 
 [/let]
 [/let]
 [/for]
 [for (compositeOwnerClass : Class | aClass.getCompositeOwners())] [comment for each class that has composite properties of type aClass/]
 [for (compositeProperty : Property | compositeOwnerClass.getCompositePropertiesOfType(aClass))] [comment for each composite property that compositeOwnerClass has/]
-virtual std::shared_ptr<[aClass.generateCppType(true)/]> create[aClass.name.toUpperFirst()/]_as_[compositeProperty.name/]_in_[compositeOwnerClass.name.toUpperFirst()/](std::weak_ptr<[compositeOwnerClass.generateCppType(true)/]> [compositeOwnerClass.name.toLowerFirst()/], const int metaElementID=-1) const [abstractSuffix(impl)/] ;
+virtual std::shared_ptr<[aClass.generateCppType(true)/]> create[aClass.name.toUpperFirst()/]_as_[compositeProperty.name/]_in_[compositeOwnerClass.name.toUpperFirst()/](std::weak_ptr<[compositeOwnerClass.generateCppType(true)/]> [compositeOwnerClass.name.toLowerFirst()/], const int metaElementID = [aClass.getNearestPackage().name.toUpperFirst()/]Package::[aClass.getMemberName().toUpperCase()/]) const [abstractSuffix(impl)/] ;
 [/for]
 [/for]
 
