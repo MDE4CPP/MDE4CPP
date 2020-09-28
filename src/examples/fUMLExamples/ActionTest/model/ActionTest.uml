@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_9K1YsPAoEemD6KgsJJSfgA" name="ActionTest">
+  <eAnnotations xmi:id="_2W1d4AGvEeuJAuxe-SDWBA" source="prepareApplication">
+    <details xmi:id="_QQFT0AGwEeuJAuxe-SDWBA" key="activityMain" value="true"/>
+  </eAnnotations>
   <packagedElement xmi:type="uml:Class" xmi:id="_KrxOIPApEemD6KgsJJSfgA" name="A">
     <ownedAttribute xmi:id="_89updPArEemD6KgsJJSfgA" name="b" type="_zZdd4PArEemD6KgsJJSfgA" aggregation="composite" association="_89upcPArEemD6KgsJJSfgA">
       <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_89updfArEemD6KgsJJSfgA"/>
@@ -45,6 +48,9 @@ for (int i=0; i&lt;size; i++)&#xD;
     </ownedEnd>
   </packagedElement>
   <packagedElement xmi:type="uml:Activity" xmi:id="_aUdykPAvEemD6KgsJJSfgA" name="TestingActions" node="_i_E80PAwEemD6KgsJJSfgA _l3bC8PAwEemD6KgsJJSfgA _1yIH8PA3EempB8MpOULpbQ _h1PSkPDCEemaRoNal_vgxw _loQRMPDCEemaRoNal_vgxw _yjbHIPDCEemaRoNal_vgxw _jv0TcPDDEemaRoNal_vgxw _FGGisPDEEemaRoNal_vgxw _gjw8QPDFEemaRoNal_vgxw _1bHloPDFEemaRoNal_vgxw _DbH8sPDGEemaRoNal_vgxw _dxl6IPDGEemaRoNal_vgxw _mEIYEPDGEemaRoNal_vgxw _urZZwPDPEemQycJoFzhfvg _JbSuYPDREem1LIjGksKcUw _pUn5wPQ6EemfQqubpKoUPA">
+    <eAnnotations xmi:id="_phixAAGwEeuJAuxe-SDWBA" source="http://sse.tu-ilmenau.de/codegen">
+      <details xmi:id="_4c4H4AGwEeuJAuxe-SDWBA" key="mainActivity" value="1"/>
+    </eAnnotations>
     <edge xmi:type="uml:ControlFlow" xmi:id="_n14TsPAwEemD6KgsJJSfgA" target="_l3bC8PAwEemD6KgsJJSfgA" source="_i_E80PAwEemD6KgsJJSfgA">
       <guard xmi:type="uml:LiteralBoolean" xmi:id="_n14TsfAwEemD6KgsJJSfgA" name="Initial1_To_CreateObjectAction1_guard" value="true"/>
       <weight xmi:type="uml:LiteralInteger" xmi:id="_n14TsvAwEemD6KgsJJSfgA" name="Initial1_To_CreateObjectAction1_weight"/>

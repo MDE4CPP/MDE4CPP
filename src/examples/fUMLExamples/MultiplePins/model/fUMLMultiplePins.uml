@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_tOlpABV2Eeizx8YA6wZ-UA" name="fUMLMultiplePins">
+  <eAnnotations xmi:id="_AFQrAAGwEeuJAuxe-SDWBA" source="prepareApplication">
+    <details xmi:id="_TIkj4AGwEeuJAuxe-SDWBA" key="activityMain" value="true"/>
+  </eAnnotations>
   <packagedElement xmi:type="uml:Class" xmi:id="_bO-zYBV3Eeizx8YA6wZ-UA" name="TestClass" visibility="public">
     <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_eQ4osBV4Eeizx8YA6wZ-UA" name="fbDoAll" specification="_iMEhUBV3Eeizx8YA6wZ-UA">
       <ownedParameter xmi:id="_ow7mUBZEEeisfP-nBA5Rfg" name="param_0" direction="inout">
@@ -92,6 +95,9 @@ else&#xD;
 }</body>
     </ownedBehavior>
     <ownedBehavior xmi:type="uml:Activity" xmi:id="_MQEkEBV3Eeizx8YA6wZ-UA" name="TestMultiplePins" node="_nLCVsBV3Eeizx8YA6wZ-UA _qKkB4BV3Eeizx8YA6wZ-UA _G0MzcBWGEeiNjZJ64Als6w _lSxJQBY3EeisfP-nBA5Rfg _uAqGcBY3EeisfP-nBA5Rfg _vhmUwBY3EeisfP-nBA5Rfg _xLWg0BY3EeisfP-nBA5Rfg _y1siwBY3EeisfP-nBA5Rfg _diyT4BY5EeisfP-nBA5Rfg _ocKRMBY5EeisfP-nBA5Rfg _c9adgBZbEeisfP-nBA5Rfg _gkEbIBZbEeisfP-nBA5Rfg _iAv0gBZbEeisfP-nBA5Rfg _i7HyEBZbEeisfP-nBA5Rfg _lGVscBZbEeisfP-nBA5Rfg">
+      <eAnnotations xmi:id="_vCBXAAGwEeuJAuxe-SDWBA" source="http://sse.tu-ilmenau.de/codegen">
+        <details xmi:id="_9-L0UAGwEeuJAuxe-SDWBA" key="mainActivity" value="1"/>
+      </eAnnotations>
       <ownedParameter xmi:id="_G0MMYBWGEeiNjZJ64Als6w" name="startParam" type="_bO-zYBV3Eeizx8YA6wZ-UA">
         <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_QndV4BWJEeiNjZJ64Als6w"/>
         <defaultValue xmi:type="uml:LiteralInteger" xmi:id="__WNtABWHEeiNjZJ64Als6w"/>

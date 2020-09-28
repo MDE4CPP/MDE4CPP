@@ -4,9 +4,6 @@
     <details xmi:id="_SKv2oIViEeq7y-U79yHWlQ" key="sourceCodeMain" value="std::cout&lt;&lt;&quot;Test model : Feature on both Required and Provided Interface&quot;&lt;&lt;std::endl;&#xA;&#xA;std::shared_ptr&lt;Op_Prov_Req_Interface::Tester> tester = factory->createTester();&#xA;std::shared_ptr&lt;Op_Prov_Req_Interface::D> d = factory->createD();&#xA;int v = 4;&#xA;bool successful = false;&#xA;&#xA;std::cout&lt;&lt;&quot;-- Running test case: Feature on both Required and Provided Interface --&quot;&lt;&lt;std::endl;&#xA;std::cout&lt;&lt;std::endl;&#xA;&#xA;d = tester->testCallDelegation(v);&#xA;successful = (d->getA()->getB()->getP() == v);&#xA;&#xA;std::cout&lt;&lt;&quot;d->a->b->v = &quot;&lt;&lt;d->getA()->getB()->getP()&lt;&lt;std::endl;&#xA;std::cout&lt;&lt;&quot;Operation call forwarded out of c through c::q, out of e through e::q into a through a::q to a::b : &quot;&lt;&lt;std::boolalpha&lt;&lt;successful&lt;&lt;std::endl;&#xA;std::cout&lt;&lt;&quot;Test case successful : &quot;&lt;&lt;std::boolalpha&lt;&lt;successful&lt;&lt;std::endl;&#xA;std::cout&lt;&lt;std::endl;&#xA;std::cout&lt;&lt;&quot;-- End of test case --&quot;&lt;&lt;std::endl;"/>
     <details xmi:id="_oOnckIYJEeqd18W_zXZ5kw" key="sourceCodeIncludes" value=""/>
   </eAnnotations>
-  <eAnnotations xmi:id="_SFMBYIWHEeq7y-U79yHWlQ" source="BuildMode">
-    <details xmi:id="_btG94IWHEeq7y-U79yHWlQ" key="type" value="library"/>
-  </eAnnotations>
   <ownedComment xmi:id="_HodpwKDkEeq8Z9IqI9dZbA">
     <body>This test case addresses invocation of an Operation which is both on a provided and a required interface of a Port using the &quot;onPort&quot; property of uml::CallOperationAction.
 If the operation call is forwarded outside of the port's owner (i.e., in the test case, the initial invocation is made inside of the port's owner), d::a::b::p must be equal to 4.</body>

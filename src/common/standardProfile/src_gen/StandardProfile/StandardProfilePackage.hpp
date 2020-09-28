@@ -182,135 +182,135 @@ namespace StandardProfile
 				static std::shared_ptr<StandardProfilePackage> eInstance();
 
 			//Class IDs
-				static const unsigned int AUXILIARY_CLASS = 121;
+				static const unsigned int AUXILIARY_CLASS = 28;
 				static const unsigned int AUXILIARY_CLASS_FEATURE_COUNT = 1;
 				static const unsigned int AUXILIARY_CLASS_OPERATION_COUNT = 0;
 				
-				static const unsigned int BUILDCOMPONENT_CLASS = 166;
+				static const unsigned int BUILDCOMPONENT_CLASS = 91;
 				static const unsigned int BUILDCOMPONENT_CLASS_FEATURE_COUNT = 1;
 				static const unsigned int BUILDCOMPONENT_CLASS_OPERATION_COUNT = 0;
 				
-				static const unsigned int CALL_CLASS = 78;
+				static const unsigned int CALL_CLASS = 32;
 				static const unsigned int CALL_CLASS_FEATURE_COUNT = 1;
 				static const unsigned int CALL_CLASS_OPERATION_COUNT = 0;
 				
-				static const unsigned int CREATE_CLASS = 44;
+				static const unsigned int CREATE_CLASS = 94;
 				static const unsigned int CREATE_CLASS_FEATURE_COUNT = 2;
 				static const unsigned int CREATE_CLASS_OPERATION_COUNT = 0;
 				
-				static const unsigned int DERIVE_CLASS = 167;
+				static const unsigned int DERIVE_CLASS = 56;
 				static const unsigned int DERIVE_CLASS_FEATURE_COUNT = 1;
 				static const unsigned int DERIVE_CLASS_OPERATION_COUNT = 0;
 				
-				static const unsigned int DESTROY_CLASS = 153;
+				static const unsigned int DESTROY_CLASS = 145;
 				static const unsigned int DESTROY_CLASS_FEATURE_COUNT = 1;
 				static const unsigned int DESTROY_CLASS_OPERATION_COUNT = 0;
 				
-				static const unsigned int DOCUMENT_CLASS = 22;
+				static const unsigned int DOCUMENT_CLASS = 17;
 				static const unsigned int DOCUMENT_CLASS_FEATURE_COUNT = 2;
 				static const unsigned int DOCUMENT_CLASS_OPERATION_COUNT = 0;
 				
-				static const unsigned int ENTITY_CLASS = 151;
+				static const unsigned int ENTITY_CLASS = 55;
 				static const unsigned int ENTITY_CLASS_FEATURE_COUNT = 1;
 				static const unsigned int ENTITY_CLASS_OPERATION_COUNT = 0;
 				
-				static const unsigned int EXECUTABLE_CLASS = 6;
+				static const unsigned int EXECUTABLE_CLASS = 173;
 				static const unsigned int EXECUTABLE_CLASS_FEATURE_COUNT = 2;
 				static const unsigned int EXECUTABLE_CLASS_OPERATION_COUNT = 0;
 				
-				static const unsigned int FILE_CLASS = 41;
+				static const unsigned int FILE_CLASS = 153;
 				static const unsigned int FILE_CLASS_FEATURE_COUNT = 1;
 				static const unsigned int FILE_CLASS_OPERATION_COUNT = 0;
 				
-				static const unsigned int FOCUS_CLASS = 140;
+				static const unsigned int FOCUS_CLASS = 53;
 				static const unsigned int FOCUS_CLASS_FEATURE_COUNT = 1;
 				static const unsigned int FOCUS_CLASS_OPERATION_COUNT = 0;
 				
-				static const unsigned int FRAMEWORK_CLASS = 88;
+				static const unsigned int FRAMEWORK_CLASS = 157;
 				static const unsigned int FRAMEWORK_CLASS_FEATURE_COUNT = 1;
 				static const unsigned int FRAMEWORK_CLASS_OPERATION_COUNT = 0;
 				
-				static const unsigned int IMPLEMENT_CLASS = 102;
+				static const unsigned int IMPLEMENT_CLASS = 51;
 				static const unsigned int IMPLEMENT_CLASS_FEATURE_COUNT = 1;
 				static const unsigned int IMPLEMENT_CLASS_OPERATION_COUNT = 0;
 				
-				static const unsigned int IMPLEMENTATIONCLASS_CLASS = 50;
+				static const unsigned int IMPLEMENTATIONCLASS_CLASS = 87;
 				static const unsigned int IMPLEMENTATIONCLASS_CLASS_FEATURE_COUNT = 1;
 				static const unsigned int IMPLEMENTATIONCLASS_CLASS_OPERATION_COUNT = 0;
 				
-				static const unsigned int INSTANTIATE_CLASS = 96;
+				static const unsigned int INSTANTIATE_CLASS = 80;
 				static const unsigned int INSTANTIATE_CLASS_FEATURE_COUNT = 1;
 				static const unsigned int INSTANTIATE_CLASS_OPERATION_COUNT = 0;
 				
-				static const unsigned int LIBRARY_CLASS = 144;
+				static const unsigned int LIBRARY_CLASS = 19;
 				static const unsigned int LIBRARY_CLASS_FEATURE_COUNT = 2;
 				static const unsigned int LIBRARY_CLASS_OPERATION_COUNT = 0;
 				
-				static const unsigned int METACLASS_CLASS = 33;
+				static const unsigned int METACLASS_CLASS = 96;
 				static const unsigned int METACLASS_CLASS_FEATURE_COUNT = 1;
 				static const unsigned int METACLASS_CLASS_OPERATION_COUNT = 0;
 				
-				static const unsigned int METAMODEL_CLASS = 70;
+				static const unsigned int METAMODEL_CLASS = 142;
 				static const unsigned int METAMODEL_CLASS_FEATURE_COUNT = 1;
 				static const unsigned int METAMODEL_CLASS_OPERATION_COUNT = 0;
 				
-				static const unsigned int MODELLIBRARY_CLASS = 89;
+				static const unsigned int MODELLIBRARY_CLASS = 117;
 				static const unsigned int MODELLIBRARY_CLASS_FEATURE_COUNT = 1;
 				static const unsigned int MODELLIBRARY_CLASS_OPERATION_COUNT = 0;
 				
-				static const unsigned int PROCESS_CLASS = 128;
+				static const unsigned int PROCESS_CLASS = 62;
 				static const unsigned int PROCESS_CLASS_FEATURE_COUNT = 1;
 				static const unsigned int PROCESS_CLASS_OPERATION_COUNT = 0;
 				
-				static const unsigned int REALIZATION_CLASS = 43;
+				static const unsigned int REALIZATION_CLASS = 75;
 				static const unsigned int REALIZATION_CLASS_FEATURE_COUNT = 1;
 				static const unsigned int REALIZATION_CLASS_OPERATION_COUNT = 0;
 				
-				static const unsigned int REFINE_CLASS = 134;
+				static const unsigned int REFINE_CLASS = 37;
 				static const unsigned int REFINE_CLASS_FEATURE_COUNT = 1;
 				static const unsigned int REFINE_CLASS_OPERATION_COUNT = 0;
 				
-				static const unsigned int RESPONSIBILITY_CLASS = 122;
+				static const unsigned int RESPONSIBILITY_CLASS = 63;
 				static const unsigned int RESPONSIBILITY_CLASS_FEATURE_COUNT = 1;
 				static const unsigned int RESPONSIBILITY_CLASS_OPERATION_COUNT = 0;
 				
-				static const unsigned int SCRIPT_CLASS = 93;
+				static const unsigned int SCRIPT_CLASS = 169;
 				static const unsigned int SCRIPT_CLASS_FEATURE_COUNT = 2;
 				static const unsigned int SCRIPT_CLASS_OPERATION_COUNT = 0;
 				
-				static const unsigned int SEND_CLASS = 75;
+				static const unsigned int SEND_CLASS = 151;
 				static const unsigned int SEND_CLASS_FEATURE_COUNT = 1;
 				static const unsigned int SEND_CLASS_OPERATION_COUNT = 0;
 				
-				static const unsigned int SERVICE_CLASS = 25;
+				static const unsigned int SERVICE_CLASS = 18;
 				static const unsigned int SERVICE_CLASS_FEATURE_COUNT = 1;
 				static const unsigned int SERVICE_CLASS_OPERATION_COUNT = 0;
 				
-				static const unsigned int SOURCE_CLASS = 13;
+				static const unsigned int SOURCE_CLASS = 143;
 				static const unsigned int SOURCE_CLASS_FEATURE_COUNT = 2;
 				static const unsigned int SOURCE_CLASS_OPERATION_COUNT = 0;
 				
-				static const unsigned int SPECIFICATION_CLASS = 90;
+				static const unsigned int SPECIFICATION_CLASS = 85;
 				static const unsigned int SPECIFICATION_CLASS_FEATURE_COUNT = 1;
 				static const unsigned int SPECIFICATION_CLASS_OPERATION_COUNT = 0;
 				
-				static const unsigned int SUBSYSTEM_CLASS = 48;
+				static const unsigned int SUBSYSTEM_CLASS = 148;
 				static const unsigned int SUBSYSTEM_CLASS_FEATURE_COUNT = 1;
 				static const unsigned int SUBSYSTEM_CLASS_OPERATION_COUNT = 0;
 				
-				static const unsigned int SYSTEMMODEL_CLASS = 170;
+				static const unsigned int SYSTEMMODEL_CLASS = 29;
 				static const unsigned int SYSTEMMODEL_CLASS_FEATURE_COUNT = 1;
 				static const unsigned int SYSTEMMODEL_CLASS_OPERATION_COUNT = 0;
 				
-				static const unsigned int TRACE_CLASS = 137;
+				static const unsigned int TRACE_CLASS = 20;
 				static const unsigned int TRACE_CLASS_FEATURE_COUNT = 1;
 				static const unsigned int TRACE_CLASS_OPERATION_COUNT = 0;
 				
-				static const unsigned int TYPE_CLASS = 63;
+				static const unsigned int TYPE_CLASS = 8;
 				static const unsigned int TYPE_CLASS_FEATURE_COUNT = 1;
 				static const unsigned int TYPE_CLASS_OPERATION_COUNT = 0;
 				
-				static const unsigned int UTILITY_CLASS = 8;
+				static const unsigned int UTILITY_CLASS = 35;
 				static const unsigned int UTILITY_CLASS_FEATURE_COUNT = 1;
 				static const unsigned int UTILITY_CLASS_OPERATION_COUNT = 0;
 				

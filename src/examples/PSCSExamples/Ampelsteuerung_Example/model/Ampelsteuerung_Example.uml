@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_PmmP8LAqEeert7O7oCVCsA" name="Ampelsteuerung_Example">
   <eAnnotations xmi:id="_SS2-ELGGEeqsrLyVjRVsCQ" source="prepareApplication">
-    <details xmi:id="_Vx3bkLGGEeqsrLyVjRVsCQ" key="sourceCodeMain" value="std::shared_ptr&lt;SafetyModule> safetyModule = factory->createSafetyModule();&#xA;&#xA;safetyModule->supervise();"/>
-  </eAnnotations>
-  <eAnnotations xmi:id="_XwOlsLGGEeqsrLyVjRVsCQ" source="BuildMode">
-    <details xmi:id="_a38kkLGGEeqsrLyVjRVsCQ" key="type" value="library"/>
+    <details xmi:id="_Vx3bkLGGEeqsrLyVjRVsCQ" key="activityMain" value="true"/>
   </eAnnotations>
   <packagedElement xmi:type="uml:Class" xmi:id="_NZxm4MeNEeqjX9fZDPwOyA" name="SafetyModule">
     <ownedAttribute xmi:id="_p6F60MePEeqjX9fZDPwOyA" name="mUnit" type="_OFI4EMeNEeqjX9fZDPwOyA" aggregation="composite"/>
@@ -14,6 +11,9 @@
       <end xmi:id="_10c0AMePEeqjX9fZDPwOyA" partWithPort="_qqYIQMePEeqjX9fZDPwOyA" role="_2YpisMeOEeqjX9fZDPwOyA"/>
     </ownedConnector>
     <ownedBehavior xmi:type="uml:Activity" xmi:id="_-szUwMePEeqjX9fZDPwOyA" name="actSupervise" specification="_86NVwMePEeqjX9fZDPwOyA" node="_SbTDMMeREeqyCIYYeX0K-g _U5aEYMeREeqyCIYYeX0K-g _bxTJQMeREeqyCIYYeX0K-g _rjf2sMeREeqyCIYYeX0K-g">
+      <eAnnotations xmi:id="_UakzwAGvEeuJAuxe-SDWBA" source="http://sse.tu-ilmenau.de/codegen">
+        <details xmi:id="_cY1q0AGvEeuJAuxe-SDWBA" key="mainActivity" value="1"/>
+      </eAnnotations>
       <edge xmi:type="uml:ControlFlow" xmi:id="_oL3MgMeREeqyCIYYeX0K-g" target="_U5aEYMeREeqyCIYYeX0K-g" source="_SbTDMMeREeqyCIYYeX0K-g">
         <guard xmi:type="uml:LiteralBoolean" xmi:id="_oL3MgceREeqyCIYYeX0K-g" name="Initial1_To_ReadSelf_guard" value="true"/>
         <weight xmi:type="uml:LiteralInteger" xmi:id="_oL3MgseREeqyCIYYeX0K-g" name="Initial1_To_ReadSelf_weight"/>

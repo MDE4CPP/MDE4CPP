@@ -3,9 +3,6 @@
   <eAnnotations xmi:id="_xjG30IrMEeqOgdz40dwV8A" source="prepareApplication">
     <details xmi:id="_2tFCUIrMEeqOgdz40dwV8A" key="sourceCodeMain" value="std::cout&lt;&lt;&quot;-- Test model : SingleDelegation - PortToPWP - Operation&quot;&lt;&lt;std::endl;&#xA;&#xA;std::shared_ptr&lt;SingleDeleg_PWP_P_Op::Tester> tester = factory->createTester();&#xA;std::shared_ptr&lt;SingleDeleg_PWP_P_Op::C> c = factory->createC();&#xA;int v = 4;&#xA;bool successful = false;&#xA;&#xA;std::cout&lt;&lt;&quot;-- Running test case: Single delegation connector - Operation delegated from port to part with port --&quot;&lt;&lt;std::endl;&#xA;std::cout&lt;&lt;std::endl;&#xA;&#xA;c = tester->testCallDelegation(v);&#xA;successful = (c->getA()->getB()->getP() == v);&#xA;&#xA;std::cout&lt;&lt;&quot;c->a->b->p = &quot;&lt;&lt;c->getA()->getB()->getP()&lt;&lt;std::endl;&#xA;std::cout&lt;&lt;&quot;Operation call was forwarded through c::p into c::a through a::q to a::b : &quot;&lt;&lt;std::boolalpha&lt;&lt;successful&lt;&lt;std::endl;&#xA;std::cout&lt;&lt;&quot;Test case successful : &quot;&lt;&lt;std::boolalpha&lt;&lt;successful&lt;&lt;std::endl;&#xA;std::cout&lt;&lt;std::endl;&#xA;std::cout&lt;&lt;&quot;-- End of test case --&quot;&lt;&lt;std::endl;"/>
   </eAnnotations>
-  <eAnnotations xmi:id="_6FZB8IrMEeqOgdz40dwV8A" source="BuildMode">
-    <details xmi:id="_7Juz0IrMEeqOgdz40dwV8A" key="type" value="library"/>
-  </eAnnotations>
   <ownedComment xmi:id="_Gz9CcKDKEeq8Z9IqI9dZbA">
     <body>This test case addresses forwarding of an operation call through a single delegation link, corresponding to a single connector, expressed between a port and a part with port. 
 If the operation call is forwarded, c::a::b::p must be equal to 4.</body>
