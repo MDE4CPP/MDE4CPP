@@ -23,6 +23,7 @@
 #include "ecore/EClass.hpp"
 
 //Includes from codegen annotation
+#include "uml/ActivityNode.hpp"
 #include "fUML/Semantics/Activities/ControlToken.hpp"
 #include "fUML/Semantics/Loci/ExecutionFactory.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
@@ -43,10 +44,10 @@
 #include "fUML/Semantics/Activities/impl/ActivitiesFactoryImpl.hpp"
 #include "fUML/Semantics/Activities/impl/ActivitiesPackageImpl.hpp"
 
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsFactory.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"

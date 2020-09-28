@@ -2537,7 +2537,7 @@
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="Token" abstract="true">
         <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-          <details key="includes" value="#include &quot;fUML/Semantics/Activities/ControlToken.hpp&quot;&#xA;#include &quot;fUML/Semantics/Loci/ExecutionFactory.hpp&quot;&#xA;#include &quot;fUML/Semantics/Loci/Locus.hpp&quot;"/>
+          <details key="includes" value="#include &quot;uml/ActivityNode.hpp&quot;&#xA;#include &quot;fUML/Semantics/Activities/ControlToken.hpp&quot;&#xA;#include &quot;fUML/Semantics/Loci/ExecutionFactory.hpp&quot;&#xA;#include &quot;fUML/Semantics/Loci/Locus.hpp&quot;"/>
         </eAnnotations>
         <eOperations name="transfer" ordered="false" lowerBound="1" eType="#//Semantics/Activities/Token">
           <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
