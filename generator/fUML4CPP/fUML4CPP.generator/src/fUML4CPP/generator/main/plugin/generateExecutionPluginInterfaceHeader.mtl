@@ -36,7 +36,7 @@ namespace PSCS::Semantics::Loci
 	class CS_ExecutionFactory;
 }
 
-namespace [aPackage.getPackageName().sanitize().toUpperFirst()/]
+namespace [aPackage.getPackageName().sanitize()/]
 {
 	class [aPackage.getPackageName().sanitize().toUpperFirst() + 'Locus'/];
 }
