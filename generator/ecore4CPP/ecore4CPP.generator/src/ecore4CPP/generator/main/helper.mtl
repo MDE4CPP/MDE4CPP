@@ -58,6 +58,7 @@
 */]
 [query public hasKey(aModelElement : EModelElement, aKey:String) : Boolean = if aModelElement.hasSourceGen() then aModelElement.SourceGen().details->select(key = aKey)->notEmpty() else false endif /]
 [query public valueKey(aModelElement : EModelElement, aKey:String) : String = aModelElement.SourceGen().details->select(key = aKey)->first().value /]
+[query public valueKeys(aModelElement : EModelElement, aKey:String) : Set(String) = Set{aModelElement.SourceGen().details->select(key = aKey).value} /]
 
 [query public containsContainerAttribute(aClass : EClass) : Boolean =  getContainsContainerAttribute()->notEmpty() /]
 [query public getContainsContainerAttribute(aClass : EClass) : OrderedSet(EReference) =  aClass.eReferences->select(isContainerAttribute())->sortedBy(name) /]

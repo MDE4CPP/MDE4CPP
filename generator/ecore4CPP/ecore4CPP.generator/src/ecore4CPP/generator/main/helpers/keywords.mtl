@@ -29,6 +29,7 @@
 [query public keyGetterName(any : OclAny) : String = 'includes'/]	[**	indicates the name of getter function /]
 [query public keySetterName(any : OclAny) : String = 'includes'/]	[**	indicates the name of setter function /]
 [query public keyIncludes(any : OclAny) : String = 'includes'/]	[**	indicates a header include specification /]
+[query public keyLibrary(any : OclAny) : String = 'library' /] [**	indicates a specification for a library to link /]
 [query public keyAggregationKind(any : OclAny) : String = 'AggregationKind'/]	[** indicates a AggregationKind specifiation, values: 'shared' -> indicates a back reference, otherwise -> no action/]
 [query public keyNoBackReference(any : OclAny) : String = 'no_back_reference'/] [** indicates that no back reference for a reference should exists/]
 [query public keyWeakptr(any : OclAny) : String = 'weakptr'/] [** indicates that an operation with upper=1 should return an weak pointer/]
