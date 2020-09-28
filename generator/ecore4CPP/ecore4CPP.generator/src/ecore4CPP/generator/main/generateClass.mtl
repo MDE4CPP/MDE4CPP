@@ -21,11 +21,11 @@
  * Operation to generate create operation in model factory
 */]
 [template public generateClassCreate(aEClass : EClass,impl : Boolean) ? (aEClass.abstract=false)]
-virtual std::shared_ptr<[aEClass.generateTypeClass()/]> create[aEClass.name/](const int metaElementID=-1)[if (not generateObjectMonitoring())] const[/if] [abstractSufix(impl)/];
+virtual std::shared_ptr<[aEClass.generateTypeClass()/]> create[aEClass.name/](const int metaElementID = [aEClass.ePackage.name.toUpperFirst()/]Package::[aEClass.getStaticAttributeIDName()/])[if (not generateObjectMonitoring())] const[/if] [abstractSufix(impl)/];
 [let ref:OrderedSet(EReference) = aEClass.getAllContainers()]
 [for(aReference:EReference | ref->sortedBy(name))]
 //Add containing object
-virtual std::shared_ptr<[aEClass.generateTypeClass()/]> create[aEClass.name/]_in_[aReference.name.toUpperFirst()/]([aReference.generateReferenceType(true)/] par_[aReference.name/], const int metaElementID=-1)[if (not generateObjectMonitoring())] const[/if] [abstractSufix(impl)/];
+virtual std::shared_ptr<[aEClass.generateTypeClass()/]> create[aEClass.name/]_in_[aReference.name.toUpperFirst()/]([aReference.generateReferenceType(true)/] par_[aReference.name/], const int metaElementID = [aEClass.ePackage.name.toUpperFirst()/]Package::[aEClass.getStaticAttributeIDName()/])[if (not generateObjectMonitoring())] const[/if] [abstractSufix(impl)/];
 [/for]
 
 [/let]
