@@ -67,6 +67,7 @@ void PrimitiveTypesPackageImpl::createPackageContents(std::shared_ptr<uml::Packa
 	createPackageValueSpecifications(primitiveTypes, factory);
 	createPackageInterfaces(primitiveTypes, factory);
 	createPackageClasses(primitiveTypes, factory);
+	createPackageAssociations(primitiveTypes, factory);
 	createPackageInstanceSpecifications(primitiveTypes, factory);
 	createPackageStereotypes(primitiveTypes, factory);
 	createPackageActivities(primitiveTypes, factory);
@@ -86,7 +87,15 @@ void PrimitiveTypesPackageImpl::createPackageClasses(std::shared_ptr<uml::Packag
 	std::shared_ptr<uml::Constraint> con = nullptr;
 	std::shared_ptr<uml::OpaqueExpression> oe = nullptr;
 
+
+//-------------------------------------------
+//Opaque Behaviors
+
 } 
+
+void PrimitiveTypesPackageImpl::createPackageAssociations(std::shared_ptr<uml::Package> primitiveTypes, std::shared_ptr<uml::UmlFactory> factory)
+{
+}
 
 void PrimitiveTypesPackageImpl::createPackageDependencies(std::shared_ptr<uml::Package> primitiveTypes, std::shared_ptr<uml::UmlFactory> factory)
 {
@@ -148,6 +157,7 @@ void PrimitiveTypesPackageImpl::initializePackageContents(std::shared_ptr<uml::P
 
 	initializePackageActivities();
 	initializePackageClasses();
+	initializePackageAssociations();
 	initializePackageDependencies();
 	initializePackageInstanceSpecifications();
 	initializePackageInterfaceRealizations();
@@ -168,6 +178,14 @@ void PrimitiveTypesPackageImpl::initializePackageClasses()
 {
 	std::shared_ptr<uml::Generalization> gen = nullptr;
 
+
+//-------------------------------------------
+//Opaque Behaviors
+
+}
+
+void PrimitiveTypesPackageImpl::initializePackageAssociations()
+{
 }
 
 void PrimitiveTypesPackageImpl::initializePackageDependencies()

@@ -11,6 +11,7 @@
 #include <memory>
 
 #include "ecore/EFactory.hpp"
+#include "PSCS/Semantics/Values/ValuesPackage.hpp"
 
 namespace PSCS::Semantics::Values 
 {
@@ -39,7 +40,7 @@ namespace PSCS::Semantics::Values
 			virtual std::shared_ptr<ecore::EObject> create(const int classID,  std::shared_ptr<ecore::EObject> container = nullptr, const int referenceID = -1) const = 0;
 			virtual std::shared_ptr<ecore::EObject> create(std::shared_ptr<ecore::EClass> _class, std::shared_ptr<EObject> _container=nullptr, const int referenceID = -1) const = 0;
 
-			virtual std::shared_ptr<PSCS::Semantics::Values::CS_OpaqueExpressionEvaluation> createCS_OpaqueExpressionEvaluation(const int metaElementID=-1) const = 0;
+			virtual std::shared_ptr<PSCS::Semantics::Values::CS_OpaqueExpressionEvaluation> createCS_OpaqueExpressionEvaluation(const int metaElementID = ValuesPackage::CS_OPAQUEEXPRESSIONEVALUATION_CLASS) const = 0;
 			
 			
 	};

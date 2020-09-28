@@ -35,7 +35,7 @@ namespace PSCS::Semantics::Classification
 			virtual std::shared_ptr<ecore::EObject> create(std::shared_ptr<ecore::EClass> _class, std::shared_ptr<EObject> _container=nullptr, const int referenceID = -1) const;
 
 			//Creator functions
-			 virtual std::shared_ptr<PSCS::Semantics::Classification::CS_InstanceValueEvaluation> createCS_InstanceValueEvaluation(const int metaElementID=-1) const ;
+			 virtual std::shared_ptr<PSCS::Semantics::Classification::CS_InstanceValueEvaluation> createCS_InstanceValueEvaluation(const int metaElementID = ClassificationPackage::CS_INSTANCEVALUEEVALUATION_CLASS) const ;
 			 
 			 
 

@@ -94,6 +94,10 @@ void StandardProfilePackageImpl::createPackageClasses(std::shared_ptr<uml::Packa
 	std::shared_ptr<uml::Constraint> con = nullptr;
 	std::shared_ptr<uml::OpaqueExpression> oe = nullptr;
 
+
+//-------------------------------------------
+//Opaque Behaviors
+
 } 
 
 void StandardProfilePackageImpl::createPackageAssociations(std::shared_ptr<uml::Package> standardProfile, std::shared_ptr<uml::UmlFactory> factory)
@@ -431,6 +435,10 @@ void StandardProfilePackageImpl::initializePackageActivities()
 void StandardProfilePackageImpl::initializePackageClasses()
 {
 	std::shared_ptr<uml::Generalization> gen = nullptr;
+
+
+//-------------------------------------------
+//Opaque Behaviors
 
 }
 

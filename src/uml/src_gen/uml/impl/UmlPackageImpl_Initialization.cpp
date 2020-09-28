@@ -16510,6 +16510,22 @@ void UmlPackageImpl::initializeLiteralBooleanContent()
 	}
 	
 	
+	m_literalBoolean_Operation_booleanValue->setEType(types::TypesPackage::eInstance()->getBoolean_Class());
+	m_literalBoolean_Operation_booleanValue->setName("booleanValue");
+	m_literalBoolean_Operation_booleanValue->setLowerBound(0);
+	m_literalBoolean_Operation_booleanValue->setUpperBound(1);
+	m_literalBoolean_Operation_booleanValue->setUnique(true);
+	m_literalBoolean_Operation_booleanValue->setOrdered(false);
+	
+	
+	m_literalBoolean_Operation_isComputable->setEType(types::TypesPackage::eInstance()->getBoolean_Class());
+	m_literalBoolean_Operation_isComputable->setName("isComputable");
+	m_literalBoolean_Operation_isComputable->setLowerBound(1);
+	m_literalBoolean_Operation_isComputable->setUpperBound(1);
+	m_literalBoolean_Operation_isComputable->setUnique(true);
+	m_literalBoolean_Operation_isComputable->setOrdered(false);
+	
+	
 	
 }
 
@@ -16541,6 +16557,22 @@ void UmlPackageImpl::initializeLiteralIntegerContent()
 	}
 	
 	
+	m_literalInteger_Operation_integerValue->setEType(types::TypesPackage::eInstance()->getInteger_Class());
+	m_literalInteger_Operation_integerValue->setName("integerValue");
+	m_literalInteger_Operation_integerValue->setLowerBound(0);
+	m_literalInteger_Operation_integerValue->setUpperBound(1);
+	m_literalInteger_Operation_integerValue->setUnique(true);
+	m_literalInteger_Operation_integerValue->setOrdered(false);
+	
+	
+	m_literalInteger_Operation_isComputable->setEType(types::TypesPackage::eInstance()->getBoolean_Class());
+	m_literalInteger_Operation_isComputable->setName("isComputable");
+	m_literalInteger_Operation_isComputable->setLowerBound(1);
+	m_literalInteger_Operation_isComputable->setUpperBound(1);
+	m_literalInteger_Operation_isComputable->setUnique(true);
+	m_literalInteger_Operation_isComputable->setOrdered(false);
+	
+	
 	
 }
 
@@ -16550,6 +16582,22 @@ void UmlPackageImpl::initializeLiteralNullContent()
 	m_literalNull_Class->setAbstract(false);
 	m_literalNull_Class->setInterface(false);
 	
+	
+	
+	m_literalNull_Operation_isComputable->setEType(types::TypesPackage::eInstance()->getBoolean_Class());
+	m_literalNull_Operation_isComputable->setName("isComputable");
+	m_literalNull_Operation_isComputable->setLowerBound(1);
+	m_literalNull_Operation_isComputable->setUpperBound(1);
+	m_literalNull_Operation_isComputable->setUnique(true);
+	m_literalNull_Operation_isComputable->setOrdered(false);
+	
+	
+	m_literalNull_Operation_isNull->setEType(types::TypesPackage::eInstance()->getBoolean_Class());
+	m_literalNull_Operation_isNull->setName("isNull");
+	m_literalNull_Operation_isNull->setLowerBound(1);
+	m_literalNull_Operation_isNull->setUpperBound(1);
+	m_literalNull_Operation_isNull->setUnique(true);
+	m_literalNull_Operation_isNull->setOrdered(false);
 	
 	
 	
@@ -16581,6 +16629,22 @@ void UmlPackageImpl::initializeLiteralRealContent()
 		   m_literalReal_Attribute_value->setDefaultValueLiteral(defaultValue);
 		}
 	}
+	
+	
+	m_literalReal_Operation_isComputable->setEType(types::TypesPackage::eInstance()->getBoolean_Class());
+	m_literalReal_Operation_isComputable->setName("isComputable");
+	m_literalReal_Operation_isComputable->setLowerBound(1);
+	m_literalReal_Operation_isComputable->setUpperBound(1);
+	m_literalReal_Operation_isComputable->setUnique(true);
+	m_literalReal_Operation_isComputable->setOrdered(false);
+	
+	
+	m_literalReal_Operation_realValue->setEType(types::TypesPackage::eInstance()->getReal_Class());
+	m_literalReal_Operation_realValue->setName("realValue");
+	m_literalReal_Operation_realValue->setLowerBound(0);
+	m_literalReal_Operation_realValue->setUpperBound(1);
+	m_literalReal_Operation_realValue->setUnique(true);
+	m_literalReal_Operation_realValue->setOrdered(false);
 	
 	
 	
@@ -16625,6 +16689,22 @@ void UmlPackageImpl::initializeLiteralStringContent()
 	}
 	
 	
+	m_literalString_Operation_isComputable->setEType(types::TypesPackage::eInstance()->getBoolean_Class());
+	m_literalString_Operation_isComputable->setName("isComputable");
+	m_literalString_Operation_isComputable->setLowerBound(1);
+	m_literalString_Operation_isComputable->setUpperBound(1);
+	m_literalString_Operation_isComputable->setUnique(true);
+	m_literalString_Operation_isComputable->setOrdered(false);
+	
+	
+	m_literalString_Operation_stringValue->setEType(types::TypesPackage::eInstance()->getString_Class());
+	m_literalString_Operation_stringValue->setName("stringValue");
+	m_literalString_Operation_stringValue->setLowerBound(0);
+	m_literalString_Operation_stringValue->setUpperBound(1);
+	m_literalString_Operation_stringValue->setUnique(true);
+	m_literalString_Operation_stringValue->setOrdered(false);
+	
+	
 	
 }
 
@@ -16654,6 +16734,22 @@ void UmlPackageImpl::initializeLiteralUnlimitedNaturalContent()
 		   m_literalUnlimitedNatural_Attribute_value->setDefaultValueLiteral(defaultValue);
 		}
 	}
+	
+	
+	m_literalUnlimitedNatural_Operation_isComputable->setEType(types::TypesPackage::eInstance()->getBoolean_Class());
+	m_literalUnlimitedNatural_Operation_isComputable->setName("isComputable");
+	m_literalUnlimitedNatural_Operation_isComputable->setLowerBound(1);
+	m_literalUnlimitedNatural_Operation_isComputable->setUpperBound(1);
+	m_literalUnlimitedNatural_Operation_isComputable->setUnique(true);
+	m_literalUnlimitedNatural_Operation_isComputable->setOrdered(false);
+	
+	
+	m_literalUnlimitedNatural_Operation_unlimitedValue->setEType(types::TypesPackage::eInstance()->getUnlimitedNatural_Class());
+	m_literalUnlimitedNatural_Operation_unlimitedValue->setName("unlimitedValue");
+	m_literalUnlimitedNatural_Operation_unlimitedValue->setLowerBound(0);
+	m_literalUnlimitedNatural_Operation_unlimitedValue->setUpperBound(1);
+	m_literalUnlimitedNatural_Operation_unlimitedValue->setUnique(true);
+	m_literalUnlimitedNatural_Operation_unlimitedValue->setOrdered(false);
 	
 	
 	

@@ -46,23 +46,23 @@ namespace fUML::Semantics::SimpleClassifiers
 			virtual std::shared_ptr<ecore::EObject> create(std::shared_ptr<ecore::EClass> _class, std::shared_ptr<EObject> _container=nullptr, const int referenceID = -1) const;
 
 			//Creator functions
-			 virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> createBooleanValue(const int metaElementID=-1) const ;
+			 virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> createBooleanValue(const int metaElementID = SimpleClassifiersPackage::BOOLEANVALUE_CLASS) const ;
 			 
-			 virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::DataValue> createDataValue(const int metaElementID=-1) const ;
+			 virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::DataValue> createDataValue(const int metaElementID = SimpleClassifiersPackage::DATAVALUE_CLASS) const ;
 			 
-			 virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::EnumerationValue> createEnumerationValue(const int metaElementID=-1) const ;
+			 virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::EnumerationValue> createEnumerationValue(const int metaElementID = SimpleClassifiersPackage::ENUMERATIONVALUE_CLASS) const ;
 			 
-			 virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> createFeatureValue(const int metaElementID=-1) const ;
+			 virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> createFeatureValue(const int metaElementID = SimpleClassifiersPackage::FEATUREVALUE_CLASS) const ;
 			 
-			 virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::IntegerValue> createIntegerValue(const int metaElementID=-1) const ;
+			 virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::IntegerValue> createIntegerValue(const int metaElementID = SimpleClassifiersPackage::INTEGERVALUE_CLASS) const ;
 			 
-			 virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::RealValue> createRealValue(const int metaElementID=-1) const ;
+			 virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::RealValue> createRealValue(const int metaElementID = SimpleClassifiersPackage::REALVALUE_CLASS) const ;
 			 
-			 virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> createSignalInstance(const int metaElementID=-1) const ;
+			 virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> createSignalInstance(const int metaElementID = SimpleClassifiersPackage::SIGNALINSTANCE_CLASS) const ;
 			 
-			 virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> createStringValue(const int metaElementID=-1) const ;
+			 virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> createStringValue(const int metaElementID = SimpleClassifiersPackage::STRINGVALUE_CLASS) const ;
 			 
-			 virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::UnlimitedNaturalValue> createUnlimitedNaturalValue(const int metaElementID=-1) const ;
+			 virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::UnlimitedNaturalValue> createUnlimitedNaturalValue(const int metaElementID = SimpleClassifiersPackage::UNLIMITEDNATURALVALUE_CLASS) const ;
 			 
 			 
 

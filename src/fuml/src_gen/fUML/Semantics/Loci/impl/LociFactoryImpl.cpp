@@ -4,7 +4,6 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EClass.hpp"
-#include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/Semantics/Loci/impl/ChoiceStrategyImpl.hpp"
 #include "fUML/Semantics/Loci/impl/ExecutionFactoryImpl.hpp"
 #include "fUML/Semantics/Loci/impl/ExecutorImpl.hpp"

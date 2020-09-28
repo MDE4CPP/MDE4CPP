@@ -4,7 +4,6 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EClass.hpp"
-#include "PSCS/Semantics/Loci/LociPackage.hpp"
 #include "PSCS/Semantics/Loci/impl/CS_ExecutionFactoryImpl.hpp"
 #include "PSCS/Semantics/Loci/impl/CS_ExecutorImpl.hpp"
 #include "PSCS/Semantics/Loci/impl/CS_LocusImpl.hpp"

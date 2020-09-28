@@ -36,9 +36,9 @@ namespace PSCS::Semantics::CommonBehavior
 			virtual std::shared_ptr<ecore::EObject> create(std::shared_ptr<ecore::EClass> _class, std::shared_ptr<EObject> _container=nullptr, const int referenceID = -1) const;
 
 			//Creator functions
-			 virtual std::shared_ptr<PSCS::Semantics::CommonBehavior::CS_CallEventExecution> createCS_CallEventExecution(const int metaElementID=-1) const ;
+			 virtual std::shared_ptr<PSCS::Semantics::CommonBehavior::CS_CallEventExecution> createCS_CallEventExecution(const int metaElementID = CommonBehaviorPackage::CS_CALLEVENTEXECUTION_CLASS) const ;
 			 
-			 virtual std::shared_ptr<PSCS::Semantics::CommonBehavior::CS_EventOccurrence> createCS_EventOccurrence(const int metaElementID=-1) const ;
+			 virtual std::shared_ptr<PSCS::Semantics::CommonBehavior::CS_EventOccurrence> createCS_EventOccurrence(const int metaElementID = CommonBehaviorPackage::CS_EVENTOCCURRENCE_CLASS) const ;
 			 
 			 
 

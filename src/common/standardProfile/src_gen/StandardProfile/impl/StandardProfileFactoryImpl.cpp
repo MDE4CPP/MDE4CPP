@@ -1,5 +1,4 @@
 #include "StandardProfile/impl/StandardProfileFactoryImpl.hpp"
-#include "StandardProfile/StandardProfilePackage.hpp"
 
 #include "abstractDataTypes/Bag.hpp"
 #include "uml/Class.hpp"

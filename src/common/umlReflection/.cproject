@@ -26,6 +26,7 @@
 							<tool id="org.eclipse.cdt.build.core.settings.holder.859100136" name="GNU C++" superClass="org.eclipse.cdt.build.core.settings.holder">
 								<option id="org.eclipse.cdt.build.core.settings.holder.incpaths.1289626169" name="Include Paths" superClass="org.eclipse.cdt.build.core.settings.holder.incpaths" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/UmlReflection_src_gen/src_gen}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/src_gen&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${COMPILER_HOME}/include&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${COMPILER_HOME}/lib/gcc/${COMPILER_DELIVERY_NAME}/${COMPILER_VERSION}/include/c++&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${COMPILER_HOME}/lib/gcc/${COMPILER_DELIVERY_NAME}/${COMPILER_VERSION}/include/c++/backward&quot;"/>

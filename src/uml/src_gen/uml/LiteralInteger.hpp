@@ -123,6 +123,18 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
+			/*!
+			 The query integerValue() gives the value.
+			result = (value)
+			<p>From package UML::Values.</p> */ 
+			virtual int integerValue() = 0;
+			
+			/*!
+			 The query isComputable() is redefined to be true.
+			result = (true)
+			<p>From package UML::Values.</p> */ 
+			virtual bool isComputable() = 0;
+			
 			
 			//*********************************
 			// Attributes Getter Setter

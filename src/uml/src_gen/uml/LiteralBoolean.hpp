@@ -123,6 +123,18 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
+			/*!
+			 The query booleanValue() gives the value.
+			result = (value)
+			<p>From package UML::Values.</p> */ 
+			virtual bool booleanValue() = 0;
+			
+			/*!
+			 The query isComputable() is redefined to be true.
+			result = (true)
+			<p>From package UML::Values.</p> */ 
+			virtual bool isComputable() = 0;
+			
 			
 			//*********************************
 			// Attributes Getter Setter

@@ -11,6 +11,7 @@
 #include <memory>
 
 #include "ecore/EFactory.hpp"
+#include "PSCS/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 
 namespace PSCS::Semantics::CommonBehavior 
 {
@@ -40,9 +41,9 @@ namespace PSCS::Semantics::CommonBehavior
 			virtual std::shared_ptr<ecore::EObject> create(const int classID,  std::shared_ptr<ecore::EObject> container = nullptr, const int referenceID = -1) const = 0;
 			virtual std::shared_ptr<ecore::EObject> create(std::shared_ptr<ecore::EClass> _class, std::shared_ptr<EObject> _container=nullptr, const int referenceID = -1) const = 0;
 
-			virtual std::shared_ptr<PSCS::Semantics::CommonBehavior::CS_CallEventExecution> createCS_CallEventExecution(const int metaElementID=-1) const = 0;
+			virtual std::shared_ptr<PSCS::Semantics::CommonBehavior::CS_CallEventExecution> createCS_CallEventExecution(const int metaElementID = CommonBehaviorPackage::CS_CALLEVENTEXECUTION_CLASS) const = 0;
 			
-			virtual std::shared_ptr<PSCS::Semantics::CommonBehavior::CS_EventOccurrence> createCS_EventOccurrence(const int metaElementID=-1) const = 0;
+			virtual std::shared_ptr<PSCS::Semantics::CommonBehavior::CS_EventOccurrence> createCS_EventOccurrence(const int metaElementID = CommonBehaviorPackage::CS_EVENTOCCURRENCE_CLASS) const = 0;
 			
 			
 	};

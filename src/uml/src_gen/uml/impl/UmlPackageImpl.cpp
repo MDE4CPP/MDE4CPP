@@ -4079,6 +4079,14 @@ std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getLiteralBoolean_Attribute_v
 }
 
 
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getLiteralBoolean_Operation_booleanValue() const
+{
+	return m_literalBoolean_Operation_booleanValue;
+}
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getLiteralBoolean_Operation_isComputable() const
+{
+	return m_literalBoolean_Operation_isComputable;
+}
 
 // End Class LiteralBoolean
 
@@ -4094,6 +4102,14 @@ std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getLiteralInteger_Attribute_v
 }
 
 
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getLiteralInteger_Operation_integerValue() const
+{
+	return m_literalInteger_Operation_integerValue;
+}
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getLiteralInteger_Operation_isComputable() const
+{
+	return m_literalInteger_Operation_isComputable;
+}
 
 // End Class LiteralInteger
 
@@ -4105,6 +4121,14 @@ std::shared_ptr<ecore::EClass> UmlPackageImpl::getLiteralNull_Class() const
 
 
 
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getLiteralNull_Operation_isComputable() const
+{
+	return m_literalNull_Operation_isComputable;
+}
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getLiteralNull_Operation_isNull() const
+{
+	return m_literalNull_Operation_isNull;
+}
 
 // End Class LiteralNull
 
@@ -4120,6 +4144,14 @@ std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getLiteralReal_Attribute_valu
 }
 
 
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getLiteralReal_Operation_isComputable() const
+{
+	return m_literalReal_Operation_isComputable;
+}
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getLiteralReal_Operation_realValue() const
+{
+	return m_literalReal_Operation_realValue;
+}
 
 // End Class LiteralReal
 
@@ -4146,6 +4178,14 @@ std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getLiteralString_Attribute_va
 }
 
 
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getLiteralString_Operation_isComputable() const
+{
+	return m_literalString_Operation_isComputable;
+}
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getLiteralString_Operation_stringValue() const
+{
+	return m_literalString_Operation_stringValue;
+}
 
 // End Class LiteralString
 
@@ -4161,6 +4201,14 @@ std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getLiteralUnlimitedNatural_At
 }
 
 
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getLiteralUnlimitedNatural_Operation_isComputable() const
+{
+	return m_literalUnlimitedNatural_Operation_isComputable;
+}
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getLiteralUnlimitedNatural_Operation_unlimitedValue() const
+{
+	return m_literalUnlimitedNatural_Operation_unlimitedValue;
+}
 
 // End Class LiteralUnlimitedNatural
 

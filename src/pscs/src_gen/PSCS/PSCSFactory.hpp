@@ -11,6 +11,7 @@
 #include <memory>
 
 #include "ecore/EFactory.hpp"
+#include "PSCS/PSCSPackage.hpp"
 
 namespace PSCS 
 {

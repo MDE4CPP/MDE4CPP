@@ -3823,10 +3823,12 @@ namespace uml
 			//Class and Feature IDs 
 			static const unsigned int LITERALBOOLEAN_CLASS = 138;
 			static const unsigned int LITERALBOOLEAN_CLASS_FEATURE_COUNT = 16;
-			static const unsigned int LITERALBOOLEAN_CLASS_OPERATION_COUNT = 66;
+			static const unsigned int LITERALBOOLEAN_CLASS_OPERATION_COUNT = 68;
 			static const int LITERALBOOLEAN_ATTRIBUTE_VALUE = 13815;
 			
 			
+			static const int LITERALBOOLEAN_OPERATION_BOOLEANVALUE = 13882;
+			static const int LITERALBOOLEAN_OPERATION_ISCOMPUTABLE = 13883;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getLiteralBoolean_Class() const = 0;
@@ -3834,6 +3836,8 @@ namespace uml
 			virtual std::shared_ptr<ecore::EAttribute> getLiteralBoolean_Attribute_value() const = 0;
 			
 			
+			virtual std::shared_ptr<ecore::EOperation> getLiteralBoolean_Operation_booleanValue() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getLiteralBoolean_Operation_isComputable() const = 0;
 			
 			// End Class LiteralBoolean
 
@@ -3842,10 +3846,12 @@ namespace uml
 			//Class and Feature IDs 
 			static const unsigned int LITERALINTEGER_CLASS = 139;
 			static const unsigned int LITERALINTEGER_CLASS_FEATURE_COUNT = 16;
-			static const unsigned int LITERALINTEGER_CLASS_OPERATION_COUNT = 66;
+			static const unsigned int LITERALINTEGER_CLASS_OPERATION_COUNT = 68;
 			static const int LITERALINTEGER_ATTRIBUTE_VALUE = 13915;
 			
 			
+			static const int LITERALINTEGER_OPERATION_INTEGERVALUE = 13982;
+			static const int LITERALINTEGER_OPERATION_ISCOMPUTABLE = 13983;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getLiteralInteger_Class() const = 0;
@@ -3853,6 +3859,8 @@ namespace uml
 			virtual std::shared_ptr<ecore::EAttribute> getLiteralInteger_Attribute_value() const = 0;
 			
 			
+			virtual std::shared_ptr<ecore::EOperation> getLiteralInteger_Operation_integerValue() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getLiteralInteger_Operation_isComputable() const = 0;
 			
 			// End Class LiteralInteger
 
@@ -3861,15 +3869,19 @@ namespace uml
 			//Class and Feature IDs 
 			static const unsigned int LITERALNULL_CLASS = 140;
 			static const unsigned int LITERALNULL_CLASS_FEATURE_COUNT = 15;
-			static const unsigned int LITERALNULL_CLASS_OPERATION_COUNT = 66;
+			static const unsigned int LITERALNULL_CLASS_OPERATION_COUNT = 68;
 			
 			
+			static const int LITERALNULL_OPERATION_ISCOMPUTABLE = 14081;
+			static const int LITERALNULL_OPERATION_ISNULL = 14082;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getLiteralNull_Class() const = 0;
 			
 			
 			
+			virtual std::shared_ptr<ecore::EOperation> getLiteralNull_Operation_isComputable() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getLiteralNull_Operation_isNull() const = 0;
 			
 			// End Class LiteralNull
 
@@ -3878,10 +3890,12 @@ namespace uml
 			//Class and Feature IDs 
 			static const unsigned int LITERALREAL_CLASS = 141;
 			static const unsigned int LITERALREAL_CLASS_FEATURE_COUNT = 16;
-			static const unsigned int LITERALREAL_CLASS_OPERATION_COUNT = 66;
+			static const unsigned int LITERALREAL_CLASS_OPERATION_COUNT = 68;
 			static const int LITERALREAL_ATTRIBUTE_VALUE = 14115;
 			
 			
+			static const int LITERALREAL_OPERATION_ISCOMPUTABLE = 14182;
+			static const int LITERALREAL_OPERATION_REALVALUE = 14183;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getLiteralReal_Class() const = 0;
@@ -3889,6 +3903,8 @@ namespace uml
 			virtual std::shared_ptr<ecore::EAttribute> getLiteralReal_Attribute_value() const = 0;
 			
 			
+			virtual std::shared_ptr<ecore::EOperation> getLiteralReal_Operation_isComputable() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getLiteralReal_Operation_realValue() const = 0;
 			
 			// End Class LiteralReal
 
@@ -3914,10 +3930,12 @@ namespace uml
 			//Class and Feature IDs 
 			static const unsigned int LITERALSTRING_CLASS = 143;
 			static const unsigned int LITERALSTRING_CLASS_FEATURE_COUNT = 16;
-			static const unsigned int LITERALSTRING_CLASS_OPERATION_COUNT = 66;
+			static const unsigned int LITERALSTRING_CLASS_OPERATION_COUNT = 68;
 			static const int LITERALSTRING_ATTRIBUTE_VALUE = 14315;
 			
 			
+			static const int LITERALSTRING_OPERATION_ISCOMPUTABLE = 14382;
+			static const int LITERALSTRING_OPERATION_STRINGVALUE = 14383;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getLiteralString_Class() const = 0;
@@ -3925,6 +3943,8 @@ namespace uml
 			virtual std::shared_ptr<ecore::EAttribute> getLiteralString_Attribute_value() const = 0;
 			
 			
+			virtual std::shared_ptr<ecore::EOperation> getLiteralString_Operation_isComputable() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getLiteralString_Operation_stringValue() const = 0;
 			
 			// End Class LiteralString
 
@@ -3933,10 +3953,12 @@ namespace uml
 			//Class and Feature IDs 
 			static const unsigned int LITERALUNLIMITEDNATURAL_CLASS = 144;
 			static const unsigned int LITERALUNLIMITEDNATURAL_CLASS_FEATURE_COUNT = 16;
-			static const unsigned int LITERALUNLIMITEDNATURAL_CLASS_OPERATION_COUNT = 66;
+			static const unsigned int LITERALUNLIMITEDNATURAL_CLASS_OPERATION_COUNT = 68;
 			static const int LITERALUNLIMITEDNATURAL_ATTRIBUTE_VALUE = 14415;
 			
 			
+			static const int LITERALUNLIMITEDNATURAL_OPERATION_ISCOMPUTABLE = 14482;
+			static const int LITERALUNLIMITEDNATURAL_OPERATION_UNLIMITEDVALUE = 14483;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getLiteralUnlimitedNatural_Class() const = 0;
@@ -3944,6 +3966,8 @@ namespace uml
 			virtual std::shared_ptr<ecore::EAttribute> getLiteralUnlimitedNatural_Attribute_value() const = 0;
 			
 			
+			virtual std::shared_ptr<ecore::EOperation> getLiteralUnlimitedNatural_Operation_isComputable() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getLiteralUnlimitedNatural_Operation_unlimitedValue() const = 0;
 			
 			// End Class LiteralUnlimitedNatural
 

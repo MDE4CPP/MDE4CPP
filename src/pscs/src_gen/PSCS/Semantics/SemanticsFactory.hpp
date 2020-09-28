@@ -11,6 +11,7 @@
 #include <memory>
 
 #include "ecore/EFactory.hpp"
+#include "PSCS/Semantics/SemanticsPackage.hpp"
 
 namespace PSCS::Semantics::Actions 
 {

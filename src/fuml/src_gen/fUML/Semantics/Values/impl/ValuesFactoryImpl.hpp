@@ -43,17 +43,17 @@ namespace fUML::Semantics::Values
 			virtual std::shared_ptr<ecore::EObject> create(std::shared_ptr<ecore::EClass> _class, std::shared_ptr<EObject> _container=nullptr, const int referenceID = -1) const;
 
 			//Creator functions
-			 virtual std::shared_ptr<fUML::Semantics::Values::LiteralBooleanEvaluation> createLiteralBooleanEvaluation(const int metaElementID=-1) const ;
+			 virtual std::shared_ptr<fUML::Semantics::Values::LiteralBooleanEvaluation> createLiteralBooleanEvaluation(const int metaElementID = ValuesPackage::LITERALBOOLEANEVALUATION_CLASS) const ;
 			 
-			 virtual std::shared_ptr<fUML::Semantics::Values::LiteralIntegerEvaluation> createLiteralIntegerEvaluation(const int metaElementID=-1) const ;
+			 virtual std::shared_ptr<fUML::Semantics::Values::LiteralIntegerEvaluation> createLiteralIntegerEvaluation(const int metaElementID = ValuesPackage::LITERALINTEGEREVALUATION_CLASS) const ;
 			 
-			 virtual std::shared_ptr<fUML::Semantics::Values::LiteralNullEvaluation> createLiteralNullEvaluation(const int metaElementID=-1) const ;
+			 virtual std::shared_ptr<fUML::Semantics::Values::LiteralNullEvaluation> createLiteralNullEvaluation(const int metaElementID = ValuesPackage::LITERALNULLEVALUATION_CLASS) const ;
 			 
-			 virtual std::shared_ptr<fUML::Semantics::Values::LiteralRealEvaluation> createLiteralRealEvaluation(const int metaElementID=-1) const ;
+			 virtual std::shared_ptr<fUML::Semantics::Values::LiteralRealEvaluation> createLiteralRealEvaluation(const int metaElementID = ValuesPackage::LITERALREALEVALUATION_CLASS) const ;
 			 
-			 virtual std::shared_ptr<fUML::Semantics::Values::LiteralStringEvaluation> createLiteralStringEvaluation(const int metaElementID=-1) const ;
+			 virtual std::shared_ptr<fUML::Semantics::Values::LiteralStringEvaluation> createLiteralStringEvaluation(const int metaElementID = ValuesPackage::LITERALSTRINGEVALUATION_CLASS) const ;
 			 
-			 virtual std::shared_ptr<fUML::Semantics::Values::LiteralUnlimitedNaturalEvaluation> createLiteralUnlimitedNaturalEvaluation(const int metaElementID=-1) const ;
+			 virtual std::shared_ptr<fUML::Semantics::Values::LiteralUnlimitedNaturalEvaluation> createLiteralUnlimitedNaturalEvaluation(const int metaElementID = ValuesPackage::LITERALUNLIMITEDNATURALEVALUATION_CLASS) const ;
 			 
 			 
 

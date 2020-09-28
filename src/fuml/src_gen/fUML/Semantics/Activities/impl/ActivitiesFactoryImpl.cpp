@@ -4,7 +4,6 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EClass.hpp"
-#include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "fUML/Semantics/Activities/impl/ActivityEdgeInstanceImpl.hpp"
 #include "fUML/Semantics/Activities/impl/ActivityExecutionImpl.hpp"
 #include "fUML/Semantics/Activities/impl/ActivityFinalNodeActivationImpl.hpp"

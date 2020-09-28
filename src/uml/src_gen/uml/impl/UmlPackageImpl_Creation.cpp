@@ -1988,6 +1988,8 @@ void UmlPackageImpl::createLiteralBooleanContent(std::shared_ptr<ecore::EPackage
 	m_literalBoolean_Attribute_value = factory->createEAttribute_in_EContainingClass(m_literalBoolean_Class, LITERALBOOLEAN_ATTRIBUTE_VALUE);
 	
 	
+	m_literalBoolean_Operation_booleanValue = factory->createEOperation_in_EContainingClass(m_literalBoolean_Class, LITERALBOOLEAN_OPERATION_BOOLEANVALUE);
+	m_literalBoolean_Operation_isComputable = factory->createEOperation_in_EContainingClass(m_literalBoolean_Class, LITERALBOOLEAN_OPERATION_ISCOMPUTABLE);
 	
 }
 
@@ -1997,6 +1999,8 @@ void UmlPackageImpl::createLiteralIntegerContent(std::shared_ptr<ecore::EPackage
 	m_literalInteger_Attribute_value = factory->createEAttribute_in_EContainingClass(m_literalInteger_Class, LITERALINTEGER_ATTRIBUTE_VALUE);
 	
 	
+	m_literalInteger_Operation_integerValue = factory->createEOperation_in_EContainingClass(m_literalInteger_Class, LITERALINTEGER_OPERATION_INTEGERVALUE);
+	m_literalInteger_Operation_isComputable = factory->createEOperation_in_EContainingClass(m_literalInteger_Class, LITERALINTEGER_OPERATION_ISCOMPUTABLE);
 	
 }
 
@@ -2005,6 +2009,8 @@ void UmlPackageImpl::createLiteralNullContent(std::shared_ptr<ecore::EPackage> p
 	m_literalNull_Class = factory->createEClass_in_EPackage(package, LITERALNULL_CLASS);
 	
 	
+	m_literalNull_Operation_isComputable = factory->createEOperation_in_EContainingClass(m_literalNull_Class, LITERALNULL_OPERATION_ISCOMPUTABLE);
+	m_literalNull_Operation_isNull = factory->createEOperation_in_EContainingClass(m_literalNull_Class, LITERALNULL_OPERATION_ISNULL);
 	
 }
 
@@ -2014,6 +2020,8 @@ void UmlPackageImpl::createLiteralRealContent(std::shared_ptr<ecore::EPackage> p
 	m_literalReal_Attribute_value = factory->createEAttribute_in_EContainingClass(m_literalReal_Class, LITERALREAL_ATTRIBUTE_VALUE);
 	
 	
+	m_literalReal_Operation_isComputable = factory->createEOperation_in_EContainingClass(m_literalReal_Class, LITERALREAL_OPERATION_ISCOMPUTABLE);
+	m_literalReal_Operation_realValue = factory->createEOperation_in_EContainingClass(m_literalReal_Class, LITERALREAL_OPERATION_REALVALUE);
 	
 }
 
@@ -2031,6 +2039,8 @@ void UmlPackageImpl::createLiteralStringContent(std::shared_ptr<ecore::EPackage>
 	m_literalString_Attribute_value = factory->createEAttribute_in_EContainingClass(m_literalString_Class, LITERALSTRING_ATTRIBUTE_VALUE);
 	
 	
+	m_literalString_Operation_isComputable = factory->createEOperation_in_EContainingClass(m_literalString_Class, LITERALSTRING_OPERATION_ISCOMPUTABLE);
+	m_literalString_Operation_stringValue = factory->createEOperation_in_EContainingClass(m_literalString_Class, LITERALSTRING_OPERATION_STRINGVALUE);
 	
 }
 
@@ -2040,6 +2050,8 @@ void UmlPackageImpl::createLiteralUnlimitedNaturalContent(std::shared_ptr<ecore:
 	m_literalUnlimitedNatural_Attribute_value = factory->createEAttribute_in_EContainingClass(m_literalUnlimitedNatural_Class, LITERALUNLIMITEDNATURAL_ATTRIBUTE_VALUE);
 	
 	
+	m_literalUnlimitedNatural_Operation_isComputable = factory->createEOperation_in_EContainingClass(m_literalUnlimitedNatural_Class, LITERALUNLIMITEDNATURAL_OPERATION_ISCOMPUTABLE);
+	m_literalUnlimitedNatural_Operation_unlimitedValue = factory->createEOperation_in_EContainingClass(m_literalUnlimitedNatural_Class, LITERALUNLIMITEDNATURAL_OPERATION_UNLIMITEDVALUE);
 	
 }
 

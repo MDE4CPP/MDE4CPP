@@ -11,6 +11,7 @@
 #include <memory>
 
 #include "ecore/EFactory.hpp"
+#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 
 namespace fUML::Semantics::StructuredClassifiers 
 {
@@ -45,17 +46,17 @@ namespace fUML::Semantics::StructuredClassifiers
 			virtual std::shared_ptr<ecore::EObject> create(const int classID,  std::shared_ptr<ecore::EObject> container = nullptr, const int referenceID = -1) const = 0;
 			virtual std::shared_ptr<ecore::EObject> create(std::shared_ptr<ecore::EClass> _class, std::shared_ptr<EObject> _container=nullptr, const int referenceID = -1) const = 0;
 
-			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::DispatchStrategy> createDispatchStrategy(const int metaElementID=-1) const = 0;
+			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::DispatchStrategy> createDispatchStrategy(const int metaElementID = StructuredClassifiersPackage::DISPATCHSTRATEGY_CLASS) const = 0;
 			
-			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValueList> createExtensionalValueList(const int metaElementID=-1) const = 0;
+			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValueList> createExtensionalValueList(const int metaElementID = StructuredClassifiersPackage::EXTENSIONALVALUELIST_CLASS) const = 0;
 			
-			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link> createLink(const int metaElementID=-1) const = 0;
+			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link> createLink(const int metaElementID = StructuredClassifiersPackage::LINK_CLASS) const = 0;
 			
-			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> createObject(const int metaElementID=-1) const = 0;
+			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> createObject(const int metaElementID = StructuredClassifiersPackage::OBJECT_CLASS) const = 0;
 			
-			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::RedefinitionBasedDispatchStrategy> createRedefinitionBasedDispatchStrategy(const int metaElementID=-1) const = 0;
+			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::RedefinitionBasedDispatchStrategy> createRedefinitionBasedDispatchStrategy(const int metaElementID = StructuredClassifiersPackage::REDEFINITIONBASEDDISPATCHSTRATEGY_CLASS) const = 0;
 			
-			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> createReference(const int metaElementID=-1) const = 0;
+			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> createReference(const int metaElementID = StructuredClassifiersPackage::REFERENCE_CLASS) const = 0;
 			
 			
 	};
