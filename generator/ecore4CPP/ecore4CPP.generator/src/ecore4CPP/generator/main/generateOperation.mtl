@@ -38,7 +38,7 @@
 
 [template public generateOperationDecl(anEOperation : EOperation, impl: Boolean)]
 [if (((impl or (not hasImplOnly())) and (not (doNotGenerate() or ignore()))))]
-[anEOperation.generateDokumentation()/] 
+[anEOperation.generateDocumentation()/] 
 virtual [anEOperation.generateOperationType()/] [anEOperation.name/]([anEOperation.generateParameterList()/])[if (hasKey('const'))] const[/if] [abstractSufix(impl)/];[/if]
 
 

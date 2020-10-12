@@ -78,7 +78,7 @@ namespace [element.generateNamespaceDefinition()/]
 //*********************************
 namespace [aClass.generateNamespaceDefinition()/] 
 {
-	[aClass.generateDokumentation()/]
+	[aClass.generateDocumentation()/]
 	class [aClass.name.toUpperFirst()/] [if (aClass.eSuperTypes->isEmpty() and not (aClass.name ='EObject'))] : virtual public ecore::EObject 
 [else]
 [for (sClass : EClass | aClass.eSuperTypes->asOrderedSet()->sortedBy(name)) before (':') separator (',')]

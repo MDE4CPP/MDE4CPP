@@ -56,7 +56,7 @@ namespace [anEPackage.generateNamespaceDefinition()/]
 	The Metamodel Package for the [anEPackage.name/] metamodel. This package is used to enable the reflection of model elements. It contains all model elements
 	which were described in an ecore file.
 	*/
-	[anEPackage.generateDokumentation()/]
+	[anEPackage.generateDocumentation()/]
 	class [packageName/] : virtual public [needNamespace(anEPackage, 'EPackage')/] 
 	{
 		private:    
