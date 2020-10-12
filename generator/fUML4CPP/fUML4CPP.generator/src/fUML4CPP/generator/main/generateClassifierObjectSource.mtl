@@ -70,6 +70,7 @@
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "fUML/Semantics/Loci/ExecutionFactory.hpp"
 #include "fUML/Semantics/Loci/ChoiceStrategy.hpp"
+#include "uml/UmlPackage.hpp"
 #include "uml/Association.hpp"
 #include "uml/Connector.hpp"
 #include "uml/ConnectorEnd.hpp"
@@ -223,7 +224,8 @@ std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Link>> [className
 	std::shared_ptr<uml::Port> definingPort = interactionPoint->getDefiningPort();
 	
 	//Filter model elements for connectors that are connected to interactionPoints' definingPort
-	for(unsigned int i = 0; i < modelMembers->size(); i++)
+	unsigned int membersSize = modelMembers->size();
+	for(unsigned int i = 0; i < membersSize; i++)
 	{
 		std::shared_ptr<uml::Connector> elementAsConnector = std::dynamic_pointer_cast<uml::Connector>(modelMembers->at(i));
 		if(elementAsConnector != nullptr)
@@ -243,8 +245,8 @@ std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Link>> [className
 	//- retrieve FeatureValue of otherEnd
 	//-	create Link and add both interactionPoint as well as retrieved FeatureValue of otherEnd to the links' featureValues property
 	//- add Link to allLinks
-	
-	for(unsigned int i = 0; i < connectors->size(); i++)
+	unsigned int connectorsSize = connectors->size();
+	for(unsigned int i = 0; i < connectorsSize; i++)
 	{
 		std::shared_ptr<uml::Connector> currentConnector = connectors->at(i);
 		unsigned int definingEndIndex = 0, otherEndIndex = 1;
@@ -316,8 +318,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> [className/]::retrieveEndVa
 
 void [className/]::removeValue(std::shared_ptr<uml::StructuralFeature> feature, std::shared_ptr<fUML::Semantics::Values::Value> value)
 {
-	std::shared_ptr<uml::Property> property = std::dynamic_pointer_cast<uml::Property>(feature);
-	if (property == nullptr)
+	if (feature->getMetaElementID() != uml::UmlPackage::PROPERTY_CLASS && feature->getMetaElementID() != uml::UmlPackage::PORT_CLASS && feature->getMetaElementID() != uml::UmlPackage::EXTENSIONEND_CLASS)
 	{
 		std::cerr << __PRETTY_FUNCTION__ << ": feature is null or not kind of uml::Property" << std::endl;
 		throw "feature is null or not kind of uml::Property";
@@ -325,12 +326,12 @@ void [className/]::removeValue(std::shared_ptr<uml::StructuralFeature> feature, 
 
 	if ([aClassifier.UMLValueName()/] == nullptr)
 	{
-		std::cerr << __PRETTY_FUNCTION__ << ": no value stored inside [className/] (property: " << property->getName() << ")" << std::endl;
+		std::cerr << __PRETTY_FUNCTION__ << ": no value stored inside [className/] (property: " << feature->getName() << ")" << std::endl;
 		throw "NullPointerException";	
 	}
 
 [for (aProperty : Property | aClassifier.getAllAttributes().oclAsType(Property))]
-	if (property == [aProperty.getModelPackage()/][aProperty.generatePackageGetterCall(aProperty)/])
+	if (feature == [aProperty.getModelPackage()/][aProperty.generatePackageGetterCall(aProperty)/])
 	{
 [if (aProperty.upper = 1)]
 [if (aProperty.isPrimitiveTypedProperty())]
@@ -399,8 +400,7 @@ void [className/]::removeValue(std::shared_ptr<uml::StructuralFeature> feature, 
 
 std::shared_ptr<Bag<fUML::Semantics::Values::Value>> [className/]::getValues(std::shared_ptr<uml::StructuralFeature> feature, std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> featureValues)
 {
-	std::shared_ptr<uml::Property> property = std::dynamic_pointer_cast<uml::Property>(feature);
-	if (property == nullptr)
+	if (feature->getMetaElementID() != uml::UmlPackage::PROPERTY_CLASS && feature->getMetaElementID() != uml::UmlPackage::PORT_CLASS && feature->getMetaElementID() != uml::UmlPackage::EXTENSIONEND_CLASS)
 	{
 		std::cerr << __PRETTY_FUNCTION__ << ": feature is null or not kind of uml::Property" << std::endl;
 		throw "feature is null or not kind of uml::Property";
@@ -408,13 +408,13 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> [className/]::getValues(std
 
 	if ([aClassifier.UMLValueName()/] == nullptr)
 	{
-		std::cerr << __PRETTY_FUNCTION__ << ": no value stored inside [className/] (property: " << property->getName() << ")" << std::endl;
+		std::cerr << __PRETTY_FUNCTION__ << ": no value stored inside [className/] (property: " << feature->getName() << ")" << std::endl;
 		throw "NullPointerException";	
 	}
 
 	std::shared_ptr<Bag<fUML::Semantics::Values::Value>> values(new Bag<fUML::Semantics::Values::Value>());
 [for (aProperty : Property | aClassifier.getAllAttributes().oclAsType(Property))]
-	if (property == [aProperty.getModelPackage()/][aProperty.generatePackageGetterCall(aProperty)/])
+	if (feature == [aProperty.getModelPackage()/][aProperty.generatePackageGetterCall(aProperty)/])
 	{
 [if (aProperty.type.oclIsKindOf(Enumeration))]
 		[aProperty.type.generateCppType(false)/] [aProperty.name/] = [aClassifier.UMLValueName()/]->[aProperty.getterName()/]();
@@ -514,7 +514,8 @@ std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> [className/]::
 	std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> featureValues(new Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>());
 	std::shared_ptr<Bag<fUML::Semantics::Values::Value>> values = this->getValues(feature, featureValues);
 	
-	for(unsigned int i = 0; i < values->size(); i++)
+	unsigned int valuesSize = values->size();
+	for(unsigned int i = 0; i < valuesSize; i++)
 	{
 		featureValue->getValues()->add(values->at(i));
 	}
@@ -525,8 +526,7 @@ std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> [className/]::
 
 void [className/]::setFeatureValue(std::shared_ptr<uml::StructuralFeature> feature, std::shared_ptr<Bag<fUML::Semantics::Values::Value>> values, int position)
 {
-	std::shared_ptr<uml::Property> property = std::dynamic_pointer_cast<uml::Property>(feature);
-	if (property == nullptr)
+	if (feature->getMetaElementID() != uml::UmlPackage::PROPERTY_CLASS && feature->getMetaElementID() != uml::UmlPackage::PORT_CLASS && feature->getMetaElementID() != uml::UmlPackage::EXTENSIONEND_CLASS)
 	{
 		std::cerr << __PRETTY_FUNCTION__ << ": feature is null or not kind of uml::Property" << std::endl;
 		throw "feature is null or not kind of uml::Property";
@@ -534,7 +534,7 @@ void [className/]::setFeatureValue(std::shared_ptr<uml::StructuralFeature> featu
 
 	if ([aClassifier.UMLValueName()/] == nullptr)
 	{
-		std::cerr << __PRETTY_FUNCTION__ << ": no value stored inside [className/] (property: " << property->getName() << ")" << std::endl;
+		std::cerr << __PRETTY_FUNCTION__ << ": no value stored inside [className/] (property: " << feature->getName() << ")" << std::endl;
 		throw "NullPointerException";	
 	}
 
@@ -545,7 +545,7 @@ void [className/]::setFeatureValue(std::shared_ptr<uml::StructuralFeature> featu
 	}
 [for (action : AddStructuralFeatureValueAction | aPackage.getASTVA(aClassifier))]
 [let aProperty : Property = action.structuralFeature.oclAsType(Property)]
-	if (property == [action.structuralFeature.getModelPackage()/][aProperty.generatePackageGetterCall(aProperty)/])
+	if (feature == [action.structuralFeature.getModelPackage()/][aProperty.generatePackageGetterCall(aProperty)/])
 	{
 [if (aProperty.upper = 1)]
 		std::shared_ptr<Value> inputValue = values->at(0);
@@ -577,7 +577,9 @@ std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> [classNam
 	std::shared_ptr<Bag<uml::Property>> allAttributes = type->getAllAttributes();
 	std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> featureValues(new Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>());
 	
-	for(unsigned int i = 0; i < allAttributes->size(); i++)
+	unsigned int allAttributesSize = allAttributes->size();
+
+	for(unsigned int i = 0; i < allAttributesSize; i++)
 	{
 		std::shared_ptr<uml::Property> property = allAttributes->at(i);
 		[for (aProperty : Property | aClassifier.getAllAttributes().oclAsType(Property))]
