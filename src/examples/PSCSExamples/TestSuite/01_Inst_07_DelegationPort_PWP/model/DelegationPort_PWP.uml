@@ -3,9 +3,6 @@
   <eAnnotations xmi:id="_otFUEFgQEeqZPe2oHCHy2Q" source="prepareApplication">
     <details xmi:id="_qWW_AFgQEeqZPe2oHCHy2Q" key="sourceCodeMain" value="std::cout&lt;&lt;&quot;-- Test model : Delegation between a port and a part with a port&quot;&lt;&lt;std::endl;&#xA;&#xA;std::shared_ptr&lt;DelegationPort_PWP::Tester> tester = factory->createTester();&#xA;&#xA;std::cout&lt;&lt;&quot;-- Running test case: Delegation connector between a port and a part with a port --&quot;&lt;&lt;std::endl;&#xA;std::cout&lt;&lt;std::endl;&#xA;&#xA;tester->runTestCase();&#xA;&#xA;std::cout&lt;&lt;std::endl;&#xA;std::cout&lt;&lt;&quot;-- End of test case --&quot;&lt;&lt;std::endl;"/>
   </eAnnotations>
-  <eAnnotations xmi:id="_OZx8wI4xEeqm_eVeNYUZww" source="BuildMode">
-    <details xmi:id="_PXN1YI4xEeqm_eVeNYUZww" key="type" value="library"/>
-  </eAnnotations>
   <ownedComment xmi:id="_WQ-gIKGFEeq_jPVfGA6A8w">
     <body>This test case addresses instantiation semantics in the case of a delegation connector between a port and a part with port.</body>
   </ownedComment>

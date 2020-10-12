@@ -115,6 +115,8 @@ int main ()
 #include "[mainActivity.owner.oclAsType(Classifier).namespace.myNamespaceName()/]/[mainActivity.owner.oclAsType(Classifier).name.toUpperFirst()/].hpp"
 #include "[mainActivity.owner.oclAsType(Classifier).namespace.myNamespaceName()/]/[mainActivity.owner.oclAsType(Classifier).namespace.myNamespaceName().toUpperFirst()/]Package.hpp"
 #include "[mainActivity.owner.oclAsType(Classifier).namespace.myNamespaceName()/]/[mainActivity.owner.oclAsType(Classifier).namespace.myNamespaceName().toUpperFirst()/]Factory.hpp"
+[else]
+#include "[mainActivity.namespace.myNamespaceName()/]/[mainActivity.namespace.myNamespaceName().toUpperFirst()/]Package.hpp"
 [/if]
 [for ( type : Type | mainActivity.ownedParameter.type->asOrderedSet())]
 #include "[type.getNearestPackage().myNamespaceName()/]/[type.name/].hpp"
@@ -134,9 +136,7 @@ int main()
     //executing main activity
 	[let mainActivity : Activity = aPackage.getMainActivity()]
 	[mainActivity.generateParameterInstances(aPackage)/]
-	[if (mainActivity.owner.oclIsKindOf(Classifier))]
-	std::shared_ptr<[mainActivity.owner.oclAsType(Classifier).name.toUpperFirst()/]> element = [mainActivity.owner.oclAsType(Classifier).namespace.myNamespaceName()/]::[mainActivity.owner.oclAsType(Classifier).namespace.myNamespaceName().toUpperFirst()/]Factory::eInstance()->create[mainActivity.owner.oclAsType(Classifier).name.toUpperFirst()/]();
-	[/if]
+	std::shared_ptr<[if (mainActivity.owner.oclIsKindOf(Classifier))][mainActivity.owner.oclAsType(Classifier).name.toUpperFirst()/][else]uml::Element[/if]> element = [if (mainActivity.owner.oclIsKindOf(Classifier))][mainActivity.owner.oclAsType(Classifier).namespace.myNamespaceName()/]::[mainActivity.owner.oclAsType(Classifier).namespace.myNamespaceName().toUpperFirst()/]Factory::eInstance()->create[mainActivity.owner.oclAsType(Classifier).name.toUpperFirst()/]()[else]nullptr[/if];
 
 	std::shared_ptr<PluginFramework> pluginFramework = PluginFramework::eInstance();
 	std::string pluginName = "[mainActivity.getNearestPackage().getPackageName()/]Exec";

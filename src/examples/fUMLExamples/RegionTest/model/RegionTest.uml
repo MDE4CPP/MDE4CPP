@@ -3,9 +3,6 @@
   <eAnnotations xmi:id="_lOoioBnHEeqOHbkWkfH76A" source="prepareApplication">
     <details xmi:id="_H9r7oBnIEeqOHbkWkfH76A" key="sourceCodeMain" value="std::shared_ptr&lt;A> a = factory->createA();&#xA;&#x9;auto b = a->createB();&#xA;&#x9;a->doB(b);&#xA;&#x9;std::cout &lt;&lt; &quot;END&quot; &lt;&lt; std::endl;"/>
   </eAnnotations>
-  <eAnnotations xmi:id="_VzdjMBnJEeqOHbkWkfH76A" source="BuildMode">
-    <details xmi:id="_Woj_MBnJEeqOHbkWkfH76A" key="type" value="library"/>
-  </eAnnotations>
   <packagedElement xmi:type="uml:Class" xmi:id="_5uuEsBmJEeqOHbkWkfH76A" name="A">
     <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_WTRN0BmLEeqOHbkWkfH76A" name="fbCreateB" specification="_Yu_e0BmKEeqOHbkWkfH76A">
       <ownedParameter xmi:id="_YojDIBmLEeqOHbkWkfH76A" name="b" type="_7Vcx8BmJEeqOHbkWkfH76A" direction="return">

@@ -106,7 +106,7 @@ std::shared_ptr<ecore::EObject> [packageName/]::create(const std::string& name, 
 Any [packageName/]::executeActivity(std::shared_ptr<uml::Activity> activity, std::shared_ptr<std::vector<Any>> parameterList, std::shared_ptr<uml::Element> element)
 {
 [for (act : Activity | aPackage.getUsedActivities()->sortedBy(myQualifiedName()))]
-	if (activity == [act.getNearestPackage().myNamespaceName()/]::[act.getNearestPackage().myName()/]Package::eInstance()->[act.generatePackageGetterCall()/])
+	if (activity == [act.generatePackageGetterCall()/])
 	{
 		[act.generateGetInputParameter()/]
 		[act.generateActivityExecution()/]   

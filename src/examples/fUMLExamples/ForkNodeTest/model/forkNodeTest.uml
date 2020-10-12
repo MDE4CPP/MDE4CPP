@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_HhFBwE4UEeiTBv0OlW4vQw" name="forkNodeTest">
+  <eAnnotations xmi:id="_CLOR8AGwEeuJAuxe-SDWBA" source="prepareApplication">
+    <details xmi:id="_UHfDMAGwEeuJAuxe-SDWBA" key="activityMain" value="true"/>
+  </eAnnotations>
   <packagedElement xmi:type="uml:Class" xmi:id="_MVkcwE4aEeiTBv0OlW4vQw" name="forkClass">
     <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_YyT5AE4UEeiTBv0OlW4vQw" name="fbNull">
       <language>CPP</language>
       <body>;</body>
     </ownedBehavior>
     <ownedBehavior xmi:type="uml:Activity" xmi:id="_M7SAoE4UEeiTBv0OlW4vQw" name="forkNodeTest" node="_OIBgkE4UEeiTBv0OlW4vQw _QbOSQE4UEeiTBv0OlW4vQw _hpD3QE4UEeiTBv0OlW4vQw _j_rJUE4UEeiTBv0OlW4vQw _kOExsE4UEeiTBv0OlW4vQw _kcuRsE4UEeiTBv0OlW4vQw _k-N1ME4UEeiTBv0OlW4vQw _lYjAwE4UEeiTBv0OlW4vQw _lswWME4UEeiTBv0OlW4vQw _mP2cME4UEeiTBv0OlW4vQw _mmvSME4UEeiTBv0OlW4vQw _m_nsQE4UEeiTBv0OlW4vQw _nUcswE4UEeiTBv0OlW4vQw _nqktwE4UEeiTBv0OlW4vQw _v_DFYE4UEeiTBv0OlW4vQw _kIosQE69Eei1I7Gq89eF_Q _bwfqEOjjEeiFTPjnyhRBZg">
+      <eAnnotations xmi:id="_xS1jEAGwEeuJAuxe-SDWBA" source="http://sse.tu-ilmenau.de/codegen">
+        <details xmi:id="__V84gAGwEeuJAuxe-SDWBA" key="mainActivity" value="1"/>
+      </eAnnotations>
       <edge xmi:type="uml:ControlFlow" xmi:id="_R1OyIE4UEeiTBv0OlW4vQw" target="_QbOSQE4UEeiTBv0OlW4vQw" source="_OIBgkE4UEeiTBv0OlW4vQw">
         <guard xmi:type="uml:LiteralBoolean" xmi:id="_R1PZME4UEeiTBv0OlW4vQw" name="Initial1_To_Fork1_guard" value="true"/>
         <weight xmi:type="uml:LiteralInteger" xmi:id="_R1QnUE4UEeiTBv0OlW4vQw" name="Initial1_To_Fork1_weight"/>

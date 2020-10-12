@@ -3,9 +3,6 @@
   <eAnnotations xmi:id="_4LFuYFi5Eeq745ruafyE3Q" source="prepareApplication">
     <details xmi:id="_5TFRMFi5Eeq745ruafyE3Q" key="sourceCodeMain" value="std::cout&lt;&lt;&quot;-- Test model : Assembly connector between a part with port and a part with port&quot;&lt;&lt;std::endl;&#xA;&#xA;std::shared_ptr&lt;AssemblyConnectors_PWP_PWP::Tester> tester = factory->createTester();&#xA;&#xA;std::cout&lt;&lt;&quot;-- Running test case: Assembly connector between a part with port and a part with port --&quot;&lt;&lt;std::endl;&#xA;std::cout&lt;&lt;std::endl;&#xA;&#xA;tester->runTestCase();&#xA;&#xA;std::cout&lt;&lt;std::endl;&#xA;std::cout&lt;&lt;&quot;-- End of test case --&quot;&lt;&lt;std::endl;"/>
   </eAnnotations>
-  <eAnnotations xmi:id="_PYK4oI4mEeqm_eVeNYUZww" source="BuildMode">
-    <details xmi:id="_QOrC0I4mEeqm_eVeNYUZww" key="type" value="library"/>
-  </eAnnotations>
   <ownedComment xmi:id="_BipcoKGVEeq_jPVfGA6A8w">
     <body>This test case addresses instantiation semantics in the case of an assembly connector between a part with port and a part with port.</body>
   </ownedComment>
