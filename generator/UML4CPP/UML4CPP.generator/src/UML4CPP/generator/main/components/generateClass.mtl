@@ -24,6 +24,7 @@
 [import UML4CPP::generator::main::components::generateInterface /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
+[import UML4CPP::generator::main::helpers::IDHelper /]
 
 [** 
  * get all classes that has parts or ports of type aClass (= composite properties; attributes connected to a composition association are rejected)
@@ -66,7 +67,10 @@ virtual std::shared_ptr<[aClass.generateCppType(true)/]> create[aClass.name.toUp
  * - operation count
 */]
 [template public generateStaticClassID(aClass : Class)]
+[comment] OLD class IDs
 static const unsigned int [aClass.getMemberName().toUpperCase()/] = [aClass.getStaticClassID_ID()/];
+[/comment]
+static const unsigned long [aClass.getMemberName().toUpperCase()/] = [aClass.transformType().generateID()/];
 static const unsigned int [aClass.getMemberName().toUpperCase()/]_FEATURE_COUNT = [aClass.allFeatures()->size()/];
 static const unsigned int [aClass.getMemberName().toUpperCase()/]_OPERATION_COUNT = [aClass.ownedOperation->size()/];
 
