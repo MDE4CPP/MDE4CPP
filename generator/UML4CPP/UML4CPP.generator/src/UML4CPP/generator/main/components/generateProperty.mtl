@@ -60,6 +60,7 @@ virtual void set[compositeOwnerClass.name.toUpperFirst()/](std::weak_ptr<[compos
  */]
 [template public generateAttributeProtectedMember(aProperty : Property)]
 [if (aProperty.isStatic)]static [/if][aProperty.generateCppType()/] m_[aProperty.name/][if (aProperty.default->notEmpty())]= [aProperty.genDefault()/][/if];
+
 [/template]
 
 [template public generateCompositeOwnerAttributeProtectedMember(compositeOwnerClass : Class)]
@@ -200,5 +201,5 @@ void [aClass.name.toUpperFirst()/]Impl::set[compositeOwnerClass.name.toUpperFirs
 [/template]
 
 [template public genDefault(aProperty : Property) ? (aProperty.type.oclIsKindOf(Enumeration))]
-[aProperty.type.qualifiedName/]::[aProperty.default.toUpper()/]
+[aProperty.type.qualifiedName/]::[aProperty.default.toUpper()/] /*defined default value*/
 [/template]
