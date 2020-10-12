@@ -59,19 +59,7 @@ using namespace ecore;
 // Constructor / Destructor
 //*********************************
 EFactoryImpl::EFactoryImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	//Init references
-	
+{	
 }
 
 EFactoryImpl::~EFactoryImpl()
@@ -81,14 +69,12 @@ EFactoryImpl::~EFactoryImpl()
 #endif
 }
 
-
 //Additional constructor for the containments back reference
-			EFactoryImpl::EFactoryImpl(std::weak_ptr<ecore::EObject > par_eContainer)
-			:EFactoryImpl()
-			{
-			    m_eContainer = par_eContainer;
-			}
-
+EFactoryImpl::EFactoryImpl(std::weak_ptr<ecore::EObject > par_eContainer)
+:EFactoryImpl()
+{
+	m_eContainer = par_eContainer;
+}
 
 
 EFactoryImpl::EFactoryImpl(const EFactoryImpl & obj):EFactoryImpl()
@@ -174,8 +160,20 @@ void EFactoryImpl::setEPackage(std::shared_ptr<ecore::EPackage> _ePackage)
 //*********************************
 std::shared_ptr<Union<ecore::EObject>> EFactoryImpl::getEContens() const
 {
+	if(m_eContens == nullptr)
+	{
+		/*Union*/
+		m_eContens.reset(new Union<ecore::EObject>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_eContens - Union<ecore::EObject>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_eContens;
 }
+
+
 
 
 std::shared_ptr<EFactory> EFactoryImpl::getThisEFactoryPtr() const

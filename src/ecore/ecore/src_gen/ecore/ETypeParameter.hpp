@@ -112,7 +112,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			std::shared_ptr<Bag<ecore::EGenericType>> m_eBounds;
+			mutable std::shared_ptr<Bag<ecore::EGenericType>> m_eBounds;
 			
 
 		public:

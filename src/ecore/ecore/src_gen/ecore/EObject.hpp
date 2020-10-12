@@ -198,7 +198,7 @@ namespace ecore
 			std::weak_ptr<ecore::EObject > m_eContainer;
 			/*!
 			 */
-			std::shared_ptr<Union<ecore::EObject>> m_eContens;
+			mutable std::shared_ptr<Union<ecore::EObject>> m_eContens;
 			
 
 		public:

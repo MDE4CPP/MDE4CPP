@@ -61,19 +61,7 @@ using namespace ecore;
 // Constructor / Destructor
 //*********************************
 EAttributeImpl::EAttributeImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	//Init references
-	
+{	
 }
 
 EAttributeImpl::~EAttributeImpl()
@@ -83,22 +71,19 @@ EAttributeImpl::~EAttributeImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+EAttributeImpl::EAttributeImpl(std::weak_ptr<ecore::EObject > par_eContainer)
+:EAttributeImpl()
+{
+	m_eContainer = par_eContainer;
+}
 
 //Additional constructor for the containments back reference
-			EAttributeImpl::EAttributeImpl(std::weak_ptr<ecore::EObject > par_eContainer)
-			:EAttributeImpl()
-			{
-			    m_eContainer = par_eContainer;
-			}
-
-
-//Additional constructor for the containments back reference
-			EAttributeImpl::EAttributeImpl(std::weak_ptr<ecore::EClass > par_eContainingClass)
-			:EAttributeImpl()
-			{
-			    m_eContainingClass = par_eContainingClass;
-			}
-
+EAttributeImpl::EAttributeImpl(std::weak_ptr<ecore::EClass > par_eContainingClass)
+:EAttributeImpl()
+{
+	m_eContainingClass = par_eContainingClass;
+}
 
 
 EAttributeImpl::EAttributeImpl(const EAttributeImpl & obj):EAttributeImpl()
@@ -175,7 +160,6 @@ void EAttributeImpl::setID(bool _iD)
 {
 	m_iD = _iD;
 } 
-
 bool EAttributeImpl::isID() const 
 {
 	return m_iD;
@@ -200,8 +184,20 @@ std::shared_ptr<ecore::EDataType > EAttributeImpl::getEAttributeType() const
 //*********************************
 std::shared_ptr<Union<ecore::EObject>> EAttributeImpl::getEContens() const
 {
+	if(m_eContens == nullptr)
+	{
+		/*Union*/
+		m_eContens.reset(new Union<ecore::EObject>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_eContens - Union<ecore::EObject>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_eContens;
 }
+
+
 
 
 std::shared_ptr<EAttribute> EAttributeImpl::getThisEAttributePtr() const

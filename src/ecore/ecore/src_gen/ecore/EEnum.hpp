@@ -134,7 +134,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			std::shared_ptr<Subset<ecore::EEnumLiteral, ecore::EObject>> m_eLiterals;
+			mutable std::shared_ptr<Subset<ecore::EEnumLiteral, ecore::EObject>> m_eLiterals;
 			
 
 		public:

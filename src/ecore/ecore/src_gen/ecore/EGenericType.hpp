@@ -158,7 +158,7 @@ namespace ecore
 			std::shared_ptr<ecore::EClassifier > m_eRawType;
 			/*!
 			 */
-			std::shared_ptr<Bag<ecore::EGenericType>> m_eTypeArguments;
+			mutable std::shared_ptr<Bag<ecore::EGenericType>> m_eTypeArguments;
 			/*!
 			 */
 			std::shared_ptr<ecore::ETypeParameter > m_eTypeParameter;

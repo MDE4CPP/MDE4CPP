@@ -59,26 +59,7 @@ using namespace ecore;
 // Constructor / Destructor
 //*********************************
 EStructuralFeatureImpl::EStructuralFeatureImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	
-	
-	
-	
-	
-	
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	//Init references
-	
+{	
 }
 
 EStructuralFeatureImpl::~EStructuralFeatureImpl()
@@ -88,22 +69,19 @@ EStructuralFeatureImpl::~EStructuralFeatureImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+EStructuralFeatureImpl::EStructuralFeatureImpl(std::weak_ptr<ecore::EObject > par_eContainer)
+:EStructuralFeatureImpl()
+{
+	m_eContainer = par_eContainer;
+}
 
 //Additional constructor for the containments back reference
-			EStructuralFeatureImpl::EStructuralFeatureImpl(std::weak_ptr<ecore::EObject > par_eContainer)
-			:EStructuralFeatureImpl()
-			{
-			    m_eContainer = par_eContainer;
-			}
-
-
-//Additional constructor for the containments back reference
-			EStructuralFeatureImpl::EStructuralFeatureImpl(std::weak_ptr<ecore::EClass > par_eContainingClass)
-			:EStructuralFeatureImpl()
-			{
-			    m_eContainingClass = par_eContainingClass;
-			}
-
+EStructuralFeatureImpl::EStructuralFeatureImpl(std::weak_ptr<ecore::EClass > par_eContainingClass)
+:EStructuralFeatureImpl()
+{
+	m_eContainingClass = par_eContainingClass;
+}
 
 
 EStructuralFeatureImpl::EStructuralFeatureImpl(const EStructuralFeatureImpl & obj):EStructuralFeatureImpl()
@@ -177,7 +155,6 @@ void EStructuralFeatureImpl::setChangeable(bool _changeable)
 {
 	m_changeable = _changeable;
 } 
-
 bool EStructuralFeatureImpl::isChangeable() const 
 {
 	return m_changeable;
@@ -187,7 +164,6 @@ void EStructuralFeatureImpl::setDefaultValue(Any _defaultValue)
 {
 	m_defaultValue = _defaultValue;
 } 
-
 Any EStructuralFeatureImpl::getDefaultValue() const 
 {
 	return m_defaultValue;
@@ -197,7 +173,6 @@ void EStructuralFeatureImpl::setDefaultValueLiteral(std::string _defaultValueLit
 {
 	m_defaultValueLiteral = _defaultValueLiteral;
 } 
-
 std::string EStructuralFeatureImpl::getDefaultValueLiteral() const 
 {
 	return m_defaultValueLiteral;
@@ -207,7 +182,6 @@ void EStructuralFeatureImpl::setDerived(bool _derived)
 {
 	m_derived = _derived;
 } 
-
 bool EStructuralFeatureImpl::isDerived() const 
 {
 	return m_derived;
@@ -217,7 +191,6 @@ void EStructuralFeatureImpl::setFeatureID(int _featureID)
 {
 	m_featureID = _featureID;
 } 
-
 int EStructuralFeatureImpl::getFeatureID() const 
 {
 	return m_featureID;
@@ -227,7 +200,6 @@ void EStructuralFeatureImpl::setTransient(bool _transient)
 {
 	m_transient = _transient;
 } 
-
 bool EStructuralFeatureImpl::isTransient() const 
 {
 	return m_transient;
@@ -237,7 +209,6 @@ void EStructuralFeatureImpl::setUnsettable(bool _unsettable)
 {
 	m_unsettable = _unsettable;
 } 
-
 bool EStructuralFeatureImpl::isUnsettable() const 
 {
 	return m_unsettable;
@@ -247,7 +218,6 @@ void EStructuralFeatureImpl::setVolatile(bool _volatile)
 {
 	m_volatile = _volatile;
 } 
-
 bool EStructuralFeatureImpl::isVolatile() const 
 {
 	return m_volatile;
@@ -279,8 +249,20 @@ std::weak_ptr<ecore::EClass > EStructuralFeatureImpl::getEContainingClass() cons
 //*********************************
 std::shared_ptr<Union<ecore::EObject>> EStructuralFeatureImpl::getEContens() const
 {
+	if(m_eContens == nullptr)
+	{
+		/*Union*/
+		m_eContens.reset(new Union<ecore::EObject>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_eContens - Union<ecore::EObject>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_eContens;
 }
+
+
 
 
 std::shared_ptr<EStructuralFeature> EStructuralFeatureImpl::getThisEStructuralFeaturePtr() const

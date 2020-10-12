@@ -106,7 +106,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			std::shared_ptr<Subset<ecore::EAnnotation, ecore::EObject>> m_eAnnotations;
+			mutable std::shared_ptr<Subset<ecore::EAnnotation, ecore::EObject>> m_eAnnotations;
 			
 
 		public:

@@ -147,16 +147,16 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			std::shared_ptr<Subset<ecore::EObject, ecore::EObject>> m_contents;
+			mutable std::shared_ptr<Subset<ecore::EObject, ecore::EObject>> m_contents;
 			/*!
 			 */
-			std::shared_ptr<Bag<ecore::EStringToStringMapEntry>> m_details;
+			mutable std::shared_ptr<Bag<ecore::EStringToStringMapEntry>> m_details;
 			/*!
 			 */
 			std::weak_ptr<ecore::EModelElement > m_eModelElement;
 			/*!
 			 */
-			std::shared_ptr<Bag<ecore::EObject>> m_references;
+			mutable std::shared_ptr<Bag<ecore::EObject>> m_references;
 			
 
 		public:

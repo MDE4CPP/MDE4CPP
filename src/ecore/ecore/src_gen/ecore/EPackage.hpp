@@ -172,13 +172,13 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			std::shared_ptr<Subset<ecore::EClassifier, ecore::EObject>> m_eClassifiers;
+			mutable std::shared_ptr<Subset<ecore::EClassifier, ecore::EObject>> m_eClassifiers;
 			/*!
 			 */
 			std::shared_ptr<ecore::EFactory > m_eFactoryInstance;
 			/*!
 			 */
-			std::shared_ptr<Bag<ecore::EPackage>> m_eSubpackages;
+			mutable std::shared_ptr<Bag<ecore::EPackage>> m_eSubpackages;
 			/*!
 			 */
 			std::weak_ptr<ecore::EPackage > m_eSuperPackage;

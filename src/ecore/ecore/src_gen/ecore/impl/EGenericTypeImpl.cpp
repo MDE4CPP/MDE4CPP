@@ -52,42 +52,7 @@ using namespace ecore;
 // Constructor / Destructor
 //*********************************
 EGenericTypeImpl::EGenericTypeImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	
-
-	
-
-		m_eTypeArguments.reset(new Bag<ecore::EGenericType>());
-	
-	
-
-	
-
-	
-
-	//Init references
-	
-
-	
-
-	
-
-	
-	
-
-	
-
-	
+{	
 }
 
 EGenericTypeImpl::~EGenericTypeImpl()
@@ -96,7 +61,6 @@ EGenericTypeImpl::~EGenericTypeImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete EGenericType "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -143,7 +107,6 @@ EGenericTypeImpl::EGenericTypeImpl(const EGenericTypeImpl & obj):EGenericTypeImp
 
 	
 
-	
 	
 
 	
@@ -209,6 +172,12 @@ void EGenericTypeImpl::setERawType(std::shared_ptr<ecore::EClassifier> _eRawType
 
 std::shared_ptr<Bag<ecore::EGenericType>> EGenericTypeImpl::getETypeArguments() const
 {
+	if(m_eTypeArguments == nullptr)
+	{
+		m_eTypeArguments.reset(new Bag<ecore::EGenericType>());
+		
+		
+	}
 
     return m_eTypeArguments;
 }
@@ -237,6 +206,7 @@ void EGenericTypeImpl::setEUpperBound(std::shared_ptr<ecore::EGenericType> _eUpp
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<EGenericType> EGenericTypeImpl::getThisEGenericTypePtr() const

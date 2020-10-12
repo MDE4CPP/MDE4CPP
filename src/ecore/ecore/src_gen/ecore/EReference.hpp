@@ -175,7 +175,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			std::shared_ptr<Bag<ecore::EAttribute>> m_eKeys;
+			mutable std::shared_ptr<Bag<ecore::EAttribute>> m_eKeys;
 			/*!
 			 */
 			std::shared_ptr<ecore::EReference > m_eOpposite;

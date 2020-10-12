@@ -64,56 +64,7 @@ using namespace ecore;
 // Constructor / Destructor
 //*********************************
 EOperationImpl::EOperationImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-		m_eExceptions.reset(new Bag<ecore::EClassifier>());
-	
-	
-
-		m_eGenericExceptions.reset(new Bag<ecore::EGenericType>());
-	
-	
-
-		/*Subset*/
-		m_eParameters.reset(new Subset<ecore::EParameter, ecore::EObject >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_eParameters - Subset<ecore::EParameter, ecore::EObject >()" << std::endl;
-		#endif
-	
-	
-
-		m_eTypeParameters.reset(new Bag<ecore::ETypeParameter>());
-	
-	
-
-	//Init references
-	
-
-	
-	
-
-	
-	
-
-		/*Subset*/
-		m_eParameters->initSubset(m_eContens);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_eParameters - Subset<ecore::EParameter, ecore::EObject >(m_eContens)" << std::endl;
-		#endif
-	
-	
-
-	
-	
+{	
 }
 
 EOperationImpl::~EOperationImpl()
@@ -123,22 +74,19 @@ EOperationImpl::~EOperationImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+EOperationImpl::EOperationImpl(std::weak_ptr<ecore::EObject > par_eContainer)
+:EOperationImpl()
+{
+	m_eContainer = par_eContainer;
+}
 
 //Additional constructor for the containments back reference
-			EOperationImpl::EOperationImpl(std::weak_ptr<ecore::EObject > par_eContainer)
-			:EOperationImpl()
-			{
-			    m_eContainer = par_eContainer;
-			}
-
-
-//Additional constructor for the containments back reference
-			EOperationImpl::EOperationImpl(std::weak_ptr<ecore::EClass > par_eContainingClass)
-			:EOperationImpl()
-			{
-			    m_eContainingClass = par_eContainingClass;
-			}
-
+EOperationImpl::EOperationImpl(std::weak_ptr<ecore::EClass > par_eContainingClass)
+:EOperationImpl()
+{
+	m_eContainingClass = par_eContainingClass;
+}
 
 
 EOperationImpl::EOperationImpl(const EOperationImpl & obj):EOperationImpl()
@@ -212,17 +160,14 @@ EOperationImpl::EOperationImpl(const EOperationImpl & obj):EOperationImpl()
 	#endif
 
 	
+
+	/*Subset*/
+	m_eParameters->initSubset(getEContens());
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Initialising value Subset: " << "m_eParameters - Subset<ecore::EParameter, ecore::EObject >(getEContens())" << std::endl;
+	#endif
 	
 
-		/*Subset*/
-		m_eParameters->initSubset(m_eContens);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_eParameters - Subset<ecore::EParameter, ecore::EObject >(m_eContens)" << std::endl;
-		#endif
-	
-	
-
-	
 	
 }
 
@@ -245,7 +190,6 @@ void EOperationImpl::setOperationID(int _operationID)
 {
 	m_operationID = _operationID;
 } 
-
 int EOperationImpl::getOperationID() const 
 {
 	return m_operationID;
@@ -308,6 +252,12 @@ std::weak_ptr<ecore::EClass > EOperationImpl::getEContainingClass() const
 
 std::shared_ptr<Bag<ecore::EClassifier>> EOperationImpl::getEExceptions() const
 {
+	if(m_eExceptions == nullptr)
+	{
+		m_eExceptions.reset(new Bag<ecore::EClassifier>());
+		
+		
+	}
 
     return m_eExceptions;
 }
@@ -315,6 +265,12 @@ std::shared_ptr<Bag<ecore::EClassifier>> EOperationImpl::getEExceptions() const
 
 std::shared_ptr<Bag<ecore::EGenericType>> EOperationImpl::getEGenericExceptions() const
 {
+	if(m_eGenericExceptions == nullptr)
+	{
+		m_eGenericExceptions.reset(new Bag<ecore::EGenericType>());
+		
+		
+	}
 
     return m_eGenericExceptions;
 }
@@ -322,6 +278,21 @@ std::shared_ptr<Bag<ecore::EGenericType>> EOperationImpl::getEGenericExceptions(
 
 std::shared_ptr<Subset<ecore::EParameter, ecore::EObject>> EOperationImpl::getEParameters() const
 {
+	if(m_eParameters == nullptr)
+	{
+		/*Subset*/
+		m_eParameters.reset(new Subset<ecore::EParameter, ecore::EObject >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_eParameters - Subset<ecore::EParameter, ecore::EObject >()" << std::endl;
+		#endif
+		
+		/*Subset*/
+		m_eParameters->initSubset(getEContens());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_eParameters - Subset<ecore::EParameter, ecore::EObject >(getEContens())" << std::endl;
+		#endif
+		
+	}
 
     return m_eParameters;
 }
@@ -329,6 +300,12 @@ std::shared_ptr<Subset<ecore::EParameter, ecore::EObject>> EOperationImpl::getEP
 
 std::shared_ptr<Bag<ecore::ETypeParameter>> EOperationImpl::getETypeParameters() const
 {
+	if(m_eTypeParameters == nullptr)
+	{
+		m_eTypeParameters.reset(new Bag<ecore::ETypeParameter>());
+		
+		
+	}
 
     return m_eTypeParameters;
 }
@@ -339,8 +316,20 @@ std::shared_ptr<Bag<ecore::ETypeParameter>> EOperationImpl::getETypeParameters()
 //*********************************
 std::shared_ptr<Union<ecore::EObject>> EOperationImpl::getEContens() const
 {
+	if(m_eContens == nullptr)
+	{
+		/*Union*/
+		m_eContens.reset(new Union<ecore::EObject>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_eContens - Union<ecore::EObject>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_eContens;
 }
+
+
 
 
 std::shared_ptr<EOperation> EOperationImpl::getThisEOperationPtr() const

@@ -178,16 +178,16 @@ namespace ecore
 			std::weak_ptr<ecore::EClass > m_eContainingClass;
 			/*!
 			 */
-			std::shared_ptr<Bag<ecore::EClassifier>> m_eExceptions;
+			mutable std::shared_ptr<Bag<ecore::EClassifier>> m_eExceptions;
 			/*!
 			 */
-			std::shared_ptr<Bag<ecore::EGenericType>> m_eGenericExceptions;
+			mutable std::shared_ptr<Bag<ecore::EGenericType>> m_eGenericExceptions;
 			/*!
 			 */
-			std::shared_ptr<Subset<ecore::EParameter, ecore::EObject>> m_eParameters;
+			mutable std::shared_ptr<Subset<ecore::EParameter, ecore::EObject>> m_eParameters;
 			/*!
 			 */
-			std::shared_ptr<Bag<ecore::ETypeParameter>> m_eTypeParameters;
+			mutable std::shared_ptr<Bag<ecore::ETypeParameter>> m_eTypeParameters;
 			
 
 		public:

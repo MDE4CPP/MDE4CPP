@@ -58,31 +58,7 @@ using namespace ecore;
 // Constructor / Destructor
 //*********************************
 EEnumImpl::EEnumImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-		/*Subset*/
-		m_eLiterals.reset(new Subset<ecore::EEnumLiteral, ecore::EObject >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_eLiterals - Subset<ecore::EEnumLiteral, ecore::EObject >()" << std::endl;
-		#endif
-	
-	
-
-	//Init references
-		/*Subset*/
-		m_eLiterals->initSubset(m_eContens);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_eLiterals - Subset<ecore::EEnumLiteral, ecore::EObject >(m_eContens)" << std::endl;
-		#endif
-	
-	
+{	
 }
 
 EEnumImpl::~EEnumImpl()
@@ -92,22 +68,19 @@ EEnumImpl::~EEnumImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+EEnumImpl::EEnumImpl(std::weak_ptr<ecore::EObject > par_eContainer)
+:EEnumImpl()
+{
+	m_eContainer = par_eContainer;
+}
 
 //Additional constructor for the containments back reference
-			EEnumImpl::EEnumImpl(std::weak_ptr<ecore::EObject > par_eContainer)
-			:EEnumImpl()
-			{
-			    m_eContainer = par_eContainer;
-			}
-
-
-//Additional constructor for the containments back reference
-			EEnumImpl::EEnumImpl(std::weak_ptr<ecore::EPackage > par_ePackage)
-			:EEnumImpl()
-			{
-			    m_ePackage = par_ePackage;
-			}
-
+EEnumImpl::EEnumImpl(std::weak_ptr<ecore::EPackage > par_ePackage)
+:EEnumImpl()
+{
+	m_ePackage = par_ePackage;
+}
 
 
 EEnumImpl::EEnumImpl(const EEnumImpl & obj):EEnumImpl()
@@ -158,12 +131,11 @@ EEnumImpl::EEnumImpl(const EEnumImpl & obj):EEnumImpl()
 		std::cout << "Copying the Subset: " << "m_eTypeParameters" << std::endl;
 	#endif
 
-		/*Subset*/
-		m_eLiterals->initSubset(m_eContens);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_eLiterals - Subset<ecore::EEnumLiteral, ecore::EObject >(m_eContens)" << std::endl;
-		#endif
-	
+	/*Subset*/
+	m_eLiterals->initSubset(getEContens());
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Initialising value Subset: " << "m_eLiterals - Subset<ecore::EEnumLiteral, ecore::EObject >(getEContens())" << std::endl;
+	#endif
 	
 }
 
@@ -237,6 +209,21 @@ std::shared_ptr<ecore::EEnumLiteral> EEnumImpl::getEEnumLiteralByLiteral(std::st
 //*********************************
 std::shared_ptr<Subset<ecore::EEnumLiteral, ecore::EObject>> EEnumImpl::getELiterals() const
 {
+	if(m_eLiterals == nullptr)
+	{
+		/*Subset*/
+		m_eLiterals.reset(new Subset<ecore::EEnumLiteral, ecore::EObject >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_eLiterals - Subset<ecore::EEnumLiteral, ecore::EObject >()" << std::endl;
+		#endif
+		
+		/*Subset*/
+		m_eLiterals->initSubset(getEContens());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_eLiterals - Subset<ecore::EEnumLiteral, ecore::EObject >(getEContens())" << std::endl;
+		#endif
+		
+	}
 
     return m_eLiterals;
 }
@@ -247,8 +234,20 @@ std::shared_ptr<Subset<ecore::EEnumLiteral, ecore::EObject>> EEnumImpl::getELite
 //*********************************
 std::shared_ptr<Union<ecore::EObject>> EEnumImpl::getEContens() const
 {
+	if(m_eContens == nullptr)
+	{
+		/*Union*/
+		m_eContens.reset(new Union<ecore::EObject>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_eContens - Union<ecore::EObject>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_eContens;
 }
+
+
 
 
 std::shared_ptr<EEnum> EEnumImpl::getThisEEnumPtr() const

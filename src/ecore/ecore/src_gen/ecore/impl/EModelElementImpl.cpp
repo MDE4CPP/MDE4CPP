@@ -50,31 +50,7 @@ using namespace ecore;
 // Constructor / Destructor
 //*********************************
 EModelElementImpl::EModelElementImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-		/*Subset*/
-		m_eAnnotations.reset(new Subset<ecore::EAnnotation, ecore::EObject >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_eAnnotations - Subset<ecore::EAnnotation, ecore::EObject >()" << std::endl;
-		#endif
-	
-	
-
-	//Init references
-		/*Subset*/
-		m_eAnnotations->initSubset(m_eContens);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_eAnnotations - Subset<ecore::EAnnotation, ecore::EObject >(m_eContens)" << std::endl;
-		#endif
-	
-	
+{	
 }
 
 EModelElementImpl::~EModelElementImpl()
@@ -84,14 +60,12 @@ EModelElementImpl::~EModelElementImpl()
 #endif
 }
 
-
 //Additional constructor for the containments back reference
-			EModelElementImpl::EModelElementImpl(std::weak_ptr<ecore::EObject > par_eContainer)
-			:EModelElementImpl()
-			{
-			    m_eContainer = par_eContainer;
-			}
-
+EModelElementImpl::EModelElementImpl(std::weak_ptr<ecore::EObject > par_eContainer)
+:EModelElementImpl()
+{
+	m_eContainer = par_eContainer;
+}
 
 
 EModelElementImpl::EModelElementImpl(const EModelElementImpl & obj):EModelElementImpl()
@@ -118,12 +92,11 @@ EModelElementImpl::EModelElementImpl(const EModelElementImpl & obj):EModelElemen
 		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
 	#endif
 
-		/*Subset*/
-		m_eAnnotations->initSubset(m_eContens);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_eAnnotations - Subset<ecore::EAnnotation, ecore::EObject >(m_eContens)" << std::endl;
-		#endif
-	
+	/*Subset*/
+	m_eAnnotations->initSubset(getEContens());
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Initialising value Subset: " << "m_eAnnotations - Subset<ecore::EAnnotation, ecore::EObject >(getEContens())" << std::endl;
+	#endif
 	
 }
 
@@ -166,6 +139,21 @@ std::shared_ptr<ecore::EAnnotation> EModelElementImpl::getEAnnotation(std::strin
 //*********************************
 std::shared_ptr<Subset<ecore::EAnnotation, ecore::EObject>> EModelElementImpl::getEAnnotations() const
 {
+	if(m_eAnnotations == nullptr)
+	{
+		/*Subset*/
+		m_eAnnotations.reset(new Subset<ecore::EAnnotation, ecore::EObject >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_eAnnotations - Subset<ecore::EAnnotation, ecore::EObject >()" << std::endl;
+		#endif
+		
+		/*Subset*/
+		m_eAnnotations->initSubset(getEContens());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_eAnnotations - Subset<ecore::EAnnotation, ecore::EObject >(getEContens())" << std::endl;
+		#endif
+		
+	}
 
     return m_eAnnotations;
 }
@@ -176,8 +164,20 @@ std::shared_ptr<Subset<ecore::EAnnotation, ecore::EObject>> EModelElementImpl::g
 //*********************************
 std::shared_ptr<Union<ecore::EObject>> EModelElementImpl::getEContens() const
 {
+	if(m_eContens == nullptr)
+	{
+		/*Union*/
+		m_eContens.reset(new Union<ecore::EObject>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_eContens - Union<ecore::EObject>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_eContens;
 }
+
+
 
 
 std::shared_ptr<EModelElement> EModelElementImpl::getThisEModelElementPtr() const

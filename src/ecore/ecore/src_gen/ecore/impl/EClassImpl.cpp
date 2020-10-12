@@ -69,147 +69,7 @@ using namespace ecore;
 // Constructor / Destructor
 //*********************************
 EClassImpl::EClassImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-		m_eAllAttributes.reset(new Bag<ecore::EAttribute>());
-	
-	
-
-		m_eAllContainments.reset(new Bag<ecore::EReference>());
-	
-	
-
-		m_eAllGenericSuperTypes.reset(new Bag<ecore::EGenericType>());
-	
-	
-
-		m_eAllOperations.reset(new Bag<ecore::EOperation>());
-	
-	
-
-		m_eAllReferences.reset(new Bag<ecore::EReference>());
-	
-	
-
-		m_eAllStructuralFeatures.reset(new Bag<ecore::EStructuralFeature>());
-	
-	
-
-		m_eAllSuperTypes.reset(new Bag<ecore::EClass>());
-	
-	
-
-		/*Subset*/
-		m_eAttributes.reset(new Subset<ecore::EAttribute, ecore::EStructuralFeature >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_eAttributes - Subset<ecore::EAttribute, ecore::EStructuralFeature >()" << std::endl;
-		#endif
-	
-	
-
-		m_eGenericSuperTypes.reset(new Bag<ecore::EGenericType>());
-	
-	
-
-	
-
-		/*Subset*/
-		m_eOperations.reset(new Subset<ecore::EOperation, ecore::EObject >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_eOperations - Subset<ecore::EOperation, ecore::EObject >()" << std::endl;
-		#endif
-	
-	
-
-		/*Subset*/
-		m_eReferences.reset(new Subset<ecore::EReference, ecore::EStructuralFeature >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_eReferences - Subset<ecore::EReference, ecore::EStructuralFeature >()" << std::endl;
-		#endif
-	
-	
-
-		/*SubsetUnion*/
-		m_eStructuralFeatures.reset(new SubsetUnion<ecore::EStructuralFeature, ecore::EObject >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_eStructuralFeatures - SubsetUnion<ecore::EStructuralFeature, ecore::EObject >()" << std::endl;
-		#endif
-	
-	
-
-		m_eSuperTypes.reset(new Bag<ecore::EClass>());
-	
-	
-
-	//Init references
-	
-	
-
-	
-	
-
-	
-	
-
-	
-	
-
-	
-	
-
-	
-	
-
-	
-	
-
-		/*Subset*/
-		m_eAttributes->initSubset(m_eStructuralFeatures);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_eAttributes - Subset<ecore::EAttribute, ecore::EStructuralFeature >(m_eStructuralFeatures)" << std::endl;
-		#endif
-	
-	
-
-	
-	
-
-	
-
-		/*Subset*/
-		m_eOperations->initSubset(m_eContens);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_eOperations - Subset<ecore::EOperation, ecore::EObject >(m_eContens)" << std::endl;
-		#endif
-	
-	
-
-		/*Subset*/
-		m_eReferences->initSubset(m_eStructuralFeatures);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_eReferences - Subset<ecore::EReference, ecore::EStructuralFeature >(m_eStructuralFeatures)" << std::endl;
-		#endif
-	
-	
-
-		/*SubsetUnion*/
-		m_eStructuralFeatures->initSubsetUnion(m_eContens);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_eStructuralFeatures - SubsetUnion<ecore::EStructuralFeature, ecore::EObject >(m_eContens)" << std::endl;
-		#endif
-	
-	
-
-	
-	
+{	
 }
 
 EClassImpl::~EClassImpl()
@@ -219,22 +79,19 @@ EClassImpl::~EClassImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+EClassImpl::EClassImpl(std::weak_ptr<ecore::EObject > par_eContainer)
+:EClassImpl()
+{
+	m_eContainer = par_eContainer;
+}
 
 //Additional constructor for the containments back reference
-			EClassImpl::EClassImpl(std::weak_ptr<ecore::EObject > par_eContainer)
-			:EClassImpl()
-			{
-			    m_eContainer = par_eContainer;
-			}
-
-
-//Additional constructor for the containments back reference
-			EClassImpl::EClassImpl(std::weak_ptr<ecore::EPackage > par_ePackage)
-			:EClassImpl()
-			{
-			    m_ePackage = par_ePackage;
-			}
-
+EClassImpl::EClassImpl(std::weak_ptr<ecore::EPackage > par_ePackage)
+:EClassImpl()
+{
+	m_ePackage = par_ePackage;
+}
 
 
 EClassImpl::EClassImpl(const EClassImpl & obj):EClassImpl()
@@ -337,14 +194,12 @@ EClassImpl::EClassImpl(const EClassImpl & obj):EClassImpl()
 	#endif
 
 	
-	
 
-		/*Subset*/
-		m_eOperations->initSubset(m_eContens);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_eOperations - Subset<ecore::EOperation, ecore::EObject >(m_eContens)" << std::endl;
-		#endif
-	
+	/*Subset*/
+	m_eOperations->initSubset(getEContens());
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Initialising value Subset: " << "m_eOperations - Subset<ecore::EOperation, ecore::EObject >(getEContens())" << std::endl;
+	#endif
 	
 }
 
@@ -367,7 +222,6 @@ void EClassImpl::setAbstract(bool _abstract)
 {
 	m_abstract = _abstract;
 } 
-
 bool EClassImpl::isAbstract() const 
 {
 	return m_abstract;
@@ -377,7 +231,6 @@ void EClassImpl::setInterface(bool _interface)
 {
 	m_interface = _interface;
 } 
-
 bool EClassImpl::isInterface() const 
 {
 	return m_interface;
@@ -523,7 +376,7 @@ bool EClassImpl::isSuperTypeOf(std::shared_ptr<ecore::EClass>  someClass) const
 //*********************************
 std::shared_ptr<Bag<ecore::EAttribute>> EClassImpl::getEAllAttributes() const
 {
-//generated from getterbody annotation
+	//generated from getterbody annotation
     std::shared_ptr<Bag<ecore::EAttribute> > eAllAttributes(new Bag<ecore::EAttribute>());
 
     std::shared_ptr<Bag<ecore::EAttribute> > attributeList = this->getEAttributes();
@@ -535,12 +388,18 @@ std::shared_ptr<Bag<ecore::EAttribute>> EClassImpl::getEAllAttributes() const
         eAllAttributes->insert(eAllAttributes->end(), attributeList->begin(), attributeList->end());
     }
     return eAllAttributes;
-//end of body
+	//end of body
 }
 
 
 std::shared_ptr<Bag<ecore::EReference>> EClassImpl::getEAllContainments() const
 {
+	if(m_eAllContainments == nullptr)
+	{
+		m_eAllContainments.reset(new Bag<ecore::EReference>());
+		
+		
+	}
 
     return m_eAllContainments;
 }
@@ -548,6 +407,12 @@ std::shared_ptr<Bag<ecore::EReference>> EClassImpl::getEAllContainments() const
 
 std::shared_ptr<Bag<ecore::EGenericType>> EClassImpl::getEAllGenericSuperTypes() const
 {
+	if(m_eAllGenericSuperTypes == nullptr)
+	{
+		m_eAllGenericSuperTypes.reset(new Bag<ecore::EGenericType>());
+		
+		
+	}
 
     return m_eAllGenericSuperTypes;
 }
@@ -555,7 +420,7 @@ std::shared_ptr<Bag<ecore::EGenericType>> EClassImpl::getEAllGenericSuperTypes()
 
 std::shared_ptr<Bag<ecore::EOperation>> EClassImpl::getEAllOperations() const
 {
-//generated from getterbody annotation
+	//generated from getterbody annotation
 std::shared_ptr< Bag<ecore::EOperation> > eAllOperations(new Bag<ecore::EOperation> () );
 
     std::shared_ptr<Bag<ecore::EOperation> > operationList = this->getEOperations();
@@ -567,13 +432,13 @@ std::shared_ptr< Bag<ecore::EOperation> > eAllOperations(new Bag<ecore::EOperati
         eAllOperations->insert(eAllOperations->end(), operationList->begin(), operationList->end());
     }
     return eAllOperations;
-//end of body
+	//end of body
 }
 
 
 std::shared_ptr<Bag<ecore::EReference>> EClassImpl::getEAllReferences() const
 {
-//generated from getterbody annotation
+	//generated from getterbody annotation
     std::shared_ptr<Bag<ecore::EReference> > eAllReferences(new Bag<ecore::EReference>());
 
     std::shared_ptr<Bag<ecore::EReference> > referenceList = this->getEReferences();
@@ -585,13 +450,13 @@ std::shared_ptr<Bag<ecore::EReference>> EClassImpl::getEAllReferences() const
         eAllReferences->insert(eAllReferences->end(), referenceList->begin(), referenceList->end());
     }
     return eAllReferences;
-//end of body
+	//end of body
 }
 
 
 std::shared_ptr<Bag<ecore::EStructuralFeature>> EClassImpl::getEAllStructuralFeatures() const
 {
-//generated from getterbody annotation
+	//generated from getterbody annotation
 std::shared_ptr< Bag<ecore::EStructuralFeature> > eAllStructuralFeatures( new Bag<ecore::EStructuralFeature> ());
 
     std::shared_ptr< Bag< EStructuralFeature> > featureList = this->getEStructuralFeatures();
@@ -603,13 +468,13 @@ std::shared_ptr< Bag<ecore::EStructuralFeature> > eAllStructuralFeatures( new Ba
         eAllStructuralFeatures->insert(eAllStructuralFeatures->end(), featureList->begin(), featureList->end());
     }
     return eAllStructuralFeatures;
-//end of body
+	//end of body
 }
 
 
 std::shared_ptr<Bag<ecore::EClass>> EClassImpl::getEAllSuperTypes() const
 {
-//generated from getterbody annotation
+	//generated from getterbody annotation
 std::shared_ptr< Bag<ecore::EClass> > eAllSuperTypes(new Bag<ecore::EClass>  ());
 
 	std::shared_ptr<Bag<EClass> > classList = this->getESuperTypes();
@@ -620,12 +485,27 @@ std::shared_ptr< Bag<ecore::EClass> > eAllSuperTypes(new Bag<ecore::EClass>  ())
         eAllSuperTypes->insert(eAllSuperTypes->end(), classList->begin(), classList->end());
     }
     return eAllSuperTypes;
-//end of body
+	//end of body
 }
 
 
 std::shared_ptr<Subset<ecore::EAttribute, ecore::EStructuralFeature>> EClassImpl::getEAttributes() const
 {
+	if(m_eAttributes == nullptr)
+	{
+		/*Subset*/
+		m_eAttributes.reset(new Subset<ecore::EAttribute, ecore::EStructuralFeature >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_eAttributes - Subset<ecore::EAttribute, ecore::EStructuralFeature >()" << std::endl;
+		#endif
+		
+		/*Subset*/
+		m_eAttributes->initSubset(getEStructuralFeatures());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_eAttributes - Subset<ecore::EAttribute, ecore::EStructuralFeature >(getEStructuralFeatures())" << std::endl;
+		#endif
+		
+	}
 
     return m_eAttributes;
 }
@@ -633,6 +513,12 @@ std::shared_ptr<Subset<ecore::EAttribute, ecore::EStructuralFeature>> EClassImpl
 
 std::shared_ptr<Bag<ecore::EGenericType>> EClassImpl::getEGenericSuperTypes() const
 {
+	if(m_eGenericSuperTypes == nullptr)
+	{
+		m_eGenericSuperTypes.reset(new Bag<ecore::EGenericType>());
+		
+		
+	}
 
     return m_eGenericSuperTypes;
 }
@@ -650,6 +536,21 @@ void EClassImpl::setEIDAttribute(std::shared_ptr<ecore::EAttribute> _eIDAttribut
 
 std::shared_ptr<Subset<ecore::EOperation, ecore::EObject>> EClassImpl::getEOperations() const
 {
+	if(m_eOperations == nullptr)
+	{
+		/*Subset*/
+		m_eOperations.reset(new Subset<ecore::EOperation, ecore::EObject >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_eOperations - Subset<ecore::EOperation, ecore::EObject >()" << std::endl;
+		#endif
+		
+		/*Subset*/
+		m_eOperations->initSubset(getEContens());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_eOperations - Subset<ecore::EOperation, ecore::EObject >(getEContens())" << std::endl;
+		#endif
+		
+	}
 
     return m_eOperations;
 }
@@ -657,6 +558,21 @@ std::shared_ptr<Subset<ecore::EOperation, ecore::EObject>> EClassImpl::getEOpera
 
 std::shared_ptr<Subset<ecore::EReference, ecore::EStructuralFeature>> EClassImpl::getEReferences() const
 {
+	if(m_eReferences == nullptr)
+	{
+		/*Subset*/
+		m_eReferences.reset(new Subset<ecore::EReference, ecore::EStructuralFeature >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_eReferences - Subset<ecore::EReference, ecore::EStructuralFeature >()" << std::endl;
+		#endif
+		
+		/*Subset*/
+		m_eReferences->initSubset(getEStructuralFeatures());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_eReferences - Subset<ecore::EReference, ecore::EStructuralFeature >(getEStructuralFeatures())" << std::endl;
+		#endif
+		
+	}
 
     return m_eReferences;
 }
@@ -667,6 +583,12 @@ std::shared_ptr<Subset<ecore::EReference, ecore::EStructuralFeature>> EClassImpl
 
 std::shared_ptr<Bag<ecore::EClass>> EClassImpl::getESuperTypes() const
 {
+	if(m_eSuperTypes == nullptr)
+	{
+		m_eSuperTypes.reset(new Bag<ecore::EClass>());
+		
+		
+	}
 
     return m_eSuperTypes;
 }
@@ -677,12 +599,40 @@ std::shared_ptr<Bag<ecore::EClass>> EClassImpl::getESuperTypes() const
 //*********************************
 std::shared_ptr<Union<ecore::EObject>> EClassImpl::getEContens() const
 {
+	if(m_eContens == nullptr)
+	{
+		/*Union*/
+		m_eContens.reset(new Union<ecore::EObject>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_eContens - Union<ecore::EObject>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_eContens;
 }
+
 std::shared_ptr<SubsetUnion<ecore::EStructuralFeature, ecore::EObject>> EClassImpl::getEStructuralFeatures() const
 {
+	if(m_eStructuralFeatures == nullptr)
+	{
+		/*SubsetUnion*/
+		m_eStructuralFeatures.reset(new SubsetUnion<ecore::EStructuralFeature, ecore::EObject >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_eStructuralFeatures - SubsetUnion<ecore::EStructuralFeature, ecore::EObject >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_eStructuralFeatures->initSubsetUnion(getEContens());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_eStructuralFeatures - SubsetUnion<ecore::EStructuralFeature, ecore::EObject >(getEContens())" << std::endl;
+		#endif
+		
+	}
 	return m_eStructuralFeatures;
 }
+
+
 
 
 std::shared_ptr<EClass> EClassImpl::getThisEClassPtr() const

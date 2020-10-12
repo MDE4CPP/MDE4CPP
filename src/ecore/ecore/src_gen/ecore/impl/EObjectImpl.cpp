@@ -56,30 +56,7 @@ using namespace ecore;
 // Constructor / Destructor
 //*********************************
 EObjectImpl::EObjectImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-		/*Union*/
-		m_eContens.reset(new Union<ecore::EObject>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_eContens - Union<ecore::EObject>()" << std::endl;
-		#endif
-	
-	
-
-	//Init references
-	
-
-	
-	
+{	
 }
 
 EObjectImpl::~EObjectImpl()
@@ -89,14 +66,12 @@ EObjectImpl::~EObjectImpl()
 #endif
 }
 
-
 //Additional constructor for the containments back reference
-			EObjectImpl::EObjectImpl(std::weak_ptr<ecore::EObject > par_eContainer)
-			:EObjectImpl()
-			{
-			    m_eContainer = par_eContainer;
-			}
-
+EObjectImpl::EObjectImpl(std::weak_ptr<ecore::EObject > par_eContainer)
+:EObjectImpl()
+{
+	m_eContainer = par_eContainer;
+}
 
 
 EObjectImpl::EObjectImpl(const EObjectImpl & obj):EObjectImpl()
@@ -136,7 +111,6 @@ void EObjectImpl::setMetaElementID(int _metaElementID)
 {
 	m_metaElementID = _metaElementID;
 } 
-
 int EObjectImpl::getMetaElementID() const 
 {
 	return m_metaElementID;
@@ -262,8 +236,20 @@ void EObjectImpl::setEContainer(std::shared_ptr<ecore::EObject> _eContainer)
 //*********************************
 std::shared_ptr<Union<ecore::EObject>> EObjectImpl::getEContens() const
 {
+	if(m_eContens == nullptr)
+	{
+		/*Union*/
+		m_eContens.reset(new Union<ecore::EObject>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_eContens - Union<ecore::EObject>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_eContens;
 }
+
+
 
 
 std::shared_ptr<EObject> EObjectImpl::getThisEObjectPtr() const

@@ -58,19 +58,7 @@ using namespace ecore;
 // Constructor / Destructor
 //*********************************
 EParameterImpl::EParameterImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	//Init references
-	
+{	
 }
 
 EParameterImpl::~EParameterImpl()
@@ -80,22 +68,19 @@ EParameterImpl::~EParameterImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+EParameterImpl::EParameterImpl(std::weak_ptr<ecore::EObject > par_eContainer)
+:EParameterImpl()
+{
+	m_eContainer = par_eContainer;
+}
 
 //Additional constructor for the containments back reference
-			EParameterImpl::EParameterImpl(std::weak_ptr<ecore::EObject > par_eContainer)
-			:EParameterImpl()
-			{
-			    m_eContainer = par_eContainer;
-			}
-
-
-//Additional constructor for the containments back reference
-			EParameterImpl::EParameterImpl(std::weak_ptr<ecore::EOperation > par_eOperation)
-			:EParameterImpl()
-			{
-			    m_eOperation = par_eOperation;
-			}
-
+EParameterImpl::EParameterImpl(std::weak_ptr<ecore::EOperation > par_eOperation)
+:EParameterImpl()
+{
+	m_eOperation = par_eOperation;
+}
 
 
 EParameterImpl::EParameterImpl(const EParameterImpl & obj):EParameterImpl()
@@ -177,8 +162,20 @@ std::weak_ptr<ecore::EOperation > EParameterImpl::getEOperation() const
 //*********************************
 std::shared_ptr<Union<ecore::EObject>> EParameterImpl::getEContens() const
 {
+	if(m_eContens == nullptr)
+	{
+		/*Union*/
+		m_eContens.reset(new Union<ecore::EObject>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_eContens - Union<ecore::EObject>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_eContens;
 }
+
+
 
 
 std::shared_ptr<EParameter> EParameterImpl::getThisEParameterPtr() const

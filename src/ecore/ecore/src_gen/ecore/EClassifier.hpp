@@ -181,7 +181,7 @@ namespace ecore
 			std::weak_ptr<ecore::EPackage > m_ePackage;
 			/*!
 			 */
-			std::shared_ptr<Bag<ecore::ETypeParameter>> m_eTypeParameters;
+			mutable std::shared_ptr<Bag<ecore::ETypeParameter>> m_eTypeParameters;
 			
 
 		public:

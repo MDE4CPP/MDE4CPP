@@ -54,22 +54,7 @@ using namespace ecore;
 // Constructor / Destructor
 //*********************************
 ETypeParameterImpl::ETypeParameterImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-		m_eBounds.reset(new Bag<ecore::EGenericType>());
-	
-	
-
-	//Init references
-	
-	
+{	
 }
 
 ETypeParameterImpl::~ETypeParameterImpl()
@@ -79,14 +64,12 @@ ETypeParameterImpl::~ETypeParameterImpl()
 #endif
 }
 
-
 //Additional constructor for the containments back reference
-			ETypeParameterImpl::ETypeParameterImpl(std::weak_ptr<ecore::EObject > par_eContainer)
-			:ETypeParameterImpl()
-			{
-			    m_eContainer = par_eContainer;
-			}
-
+ETypeParameterImpl::ETypeParameterImpl(std::weak_ptr<ecore::EObject > par_eContainer)
+:ETypeParameterImpl()
+{
+	m_eContainer = par_eContainer;
+}
 
 
 ETypeParameterImpl::ETypeParameterImpl(const ETypeParameterImpl & obj):ETypeParameterImpl()
@@ -123,7 +106,6 @@ ETypeParameterImpl::ETypeParameterImpl(const ETypeParameterImpl & obj):ETypePara
 	#endif
 
 	
-	
 }
 
 std::shared_ptr<ecore::EObject>  ETypeParameterImpl::copy() const
@@ -151,6 +133,12 @@ std::shared_ptr<EClass> ETypeParameterImpl::eStaticClass() const
 //*********************************
 std::shared_ptr<Bag<ecore::EGenericType>> ETypeParameterImpl::getEBounds() const
 {
+	if(m_eBounds == nullptr)
+	{
+		m_eBounds.reset(new Bag<ecore::EGenericType>());
+		
+		
+	}
 
     return m_eBounds;
 }
@@ -161,8 +149,20 @@ std::shared_ptr<Bag<ecore::EGenericType>> ETypeParameterImpl::getEBounds() const
 //*********************************
 std::shared_ptr<Union<ecore::EObject>> ETypeParameterImpl::getEContens() const
 {
+	if(m_eContens == nullptr)
+	{
+		/*Union*/
+		m_eContens.reset(new Union<ecore::EObject>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_eContens - Union<ecore::EObject>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_eContens;
 }
+
+
 
 
 std::shared_ptr<ETypeParameter> ETypeParameterImpl::getThisETypeParameterPtr() const

@@ -263,46 +263,46 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			std::shared_ptr<Bag<ecore::EAttribute>> m_eAllAttributes;
+			mutable std::shared_ptr<Bag<ecore::EAttribute>> m_eAllAttributes;
 			/*!
 			 */
-			std::shared_ptr<Bag<ecore::EReference>> m_eAllContainments;
+			mutable std::shared_ptr<Bag<ecore::EReference>> m_eAllContainments;
 			/*!
 			 */
-			std::shared_ptr<Bag<ecore::EGenericType>> m_eAllGenericSuperTypes;
+			mutable std::shared_ptr<Bag<ecore::EGenericType>> m_eAllGenericSuperTypes;
 			/*!
 			 */
-			std::shared_ptr<Bag<ecore::EOperation>> m_eAllOperations;
+			mutable std::shared_ptr<Bag<ecore::EOperation>> m_eAllOperations;
 			/*!
 			 */
-			std::shared_ptr<Bag<ecore::EReference>> m_eAllReferences;
+			mutable std::shared_ptr<Bag<ecore::EReference>> m_eAllReferences;
 			/*!
 			 */
-			std::shared_ptr<Bag<ecore::EStructuralFeature>> m_eAllStructuralFeatures;
+			mutable std::shared_ptr<Bag<ecore::EStructuralFeature>> m_eAllStructuralFeatures;
 			/*!
 			 */
-			std::shared_ptr<Bag<ecore::EClass>> m_eAllSuperTypes;
+			mutable std::shared_ptr<Bag<ecore::EClass>> m_eAllSuperTypes;
 			/*!
 			 */
-			std::shared_ptr<Subset<ecore::EAttribute, ecore::EStructuralFeature>> m_eAttributes;
+			mutable std::shared_ptr<Subset<ecore::EAttribute, ecore::EStructuralFeature>> m_eAttributes;
 			/*!
 			 */
-			std::shared_ptr<Bag<ecore::EGenericType>> m_eGenericSuperTypes;
+			mutable std::shared_ptr<Bag<ecore::EGenericType>> m_eGenericSuperTypes;
 			/*!
 			 */
 			std::shared_ptr<ecore::EAttribute > m_eIDAttribute;
 			/*!
 			 */
-			std::shared_ptr<Subset<ecore::EOperation, ecore::EObject>> m_eOperations;
+			mutable std::shared_ptr<Subset<ecore::EOperation, ecore::EObject>> m_eOperations;
 			/*!
 			 */
-			std::shared_ptr<Subset<ecore::EReference, ecore::EStructuralFeature>> m_eReferences;
+			mutable std::shared_ptr<Subset<ecore::EReference, ecore::EStructuralFeature>> m_eReferences;
 			/*!
 			 */
-			std::shared_ptr<SubsetUnion<ecore::EStructuralFeature, ecore::EObject>> m_eStructuralFeatures;
+			mutable std::shared_ptr<SubsetUnion<ecore::EStructuralFeature, ecore::EObject>> m_eStructuralFeatures;
 			/*!
 			 */
-			std::shared_ptr<Bag<ecore::EClass>> m_eSuperTypes;
+			mutable std::shared_ptr<Bag<ecore::EClass>> m_eSuperTypes;
 			
 
 		public:

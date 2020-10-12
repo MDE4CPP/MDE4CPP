@@ -72,7 +72,7 @@ namespace ecore
 
 			// Begin Class EAnnotation
 			//Class and Feature IDs 
-			static const unsigned int EANNOTATION_CLASS = 1;
+			static const unsigned long EANNOTATION_CLASS = 1746034582;
 			static const unsigned int EANNOTATION_CLASS_FEATURE_COUNT = 9;
 			static const unsigned int EANNOTATION_CLASS_OPERATION_COUNT = 16;
 			static const int EANNOTATION_ATTRIBUTE_SOURCE = 104;
@@ -99,7 +99,7 @@ namespace ecore
 
 			// Begin Class EAttribute
 			//Class and Feature IDs 
-			static const unsigned int EATTRIBUTE_CLASS = 2;
+			static const unsigned long EATTRIBUTE_CLASS = 1433133167;
 			static const unsigned int EATTRIBUTE_CLASS_FEATURE_COUNT = 24;
 			static const unsigned int EATTRIBUTE_CLASS_OPERATION_COUNT = 18;
 			static const int EATTRIBUTE_ATTRIBUTE_ID = 222;
@@ -120,7 +120,7 @@ namespace ecore
 
 			// Begin Class EClass
 			//Class and Feature IDs 
-			static const unsigned int ECLASS_CLASS = 12;
+			static const unsigned long ECLASS_CLASS = 625132329;
 			static const unsigned int ECLASS_CLASS_FEATURE_COUNT = 27;
 			static const unsigned int ECLASS_CLASS_OPERATION_COUNT = 28;
 			static const int ECLASS_ATTRIBUTE_ABSTRACT = 1211;
@@ -189,7 +189,7 @@ namespace ecore
 
 			// Begin Class EClassifier
 			//Class and Feature IDs 
-			static const unsigned int ECLASSIFIER_CLASS = 13;
+			static const unsigned long ECLASSIFIER_CLASS = 198601986;
 			static const unsigned int ECLASSIFIER_CLASS_FEATURE_COUNT = 11;
 			static const unsigned int ECLASSIFIER_CLASS_OPERATION_COUNT = 18;
 			static const int ECLASSIFIER_ATTRIBUTE_DEFAULTVALUE = 1307;
@@ -222,7 +222,7 @@ namespace ecore
 
 			// Begin Class EDataType
 			//Class and Feature IDs 
-			static const unsigned int EDATATYPE_CLASS = 14;
+			static const unsigned long EDATATYPE_CLASS = 1778684692;
 			static const unsigned int EDATATYPE_CLASS_FEATURE_COUNT = 12;
 			static const unsigned int EDATATYPE_CLASS_OPERATION_COUNT = 18;
 			static const int EDATATYPE_ATTRIBUTE_SERIALIZABLE = 1411;
@@ -241,7 +241,7 @@ namespace ecore
 
 			// Begin Class EEnum
 			//Class and Feature IDs 
-			static const unsigned int EENUM_CLASS = 20;
+			static const unsigned long EENUM_CLASS = 789245707;
 			static const unsigned int EENUM_CLASS_FEATURE_COUNT = 13;
 			static const unsigned int EENUM_CLASS_OPERATION_COUNT = 21;
 			
@@ -266,7 +266,7 @@ namespace ecore
 
 			// Begin Class EEnumLiteral
 			//Class and Feature IDs 
-			static const unsigned int EENUMLITERAL_CLASS = 21;
+			static const unsigned long EENUMLITERAL_CLASS = 306949309;
 			static const unsigned int EENUMLITERAL_CLASS_FEATURE_COUNT = 9;
 			static const unsigned int EENUMLITERAL_CLASS_OPERATION_COUNT = 16;
 			static const int EENUMLITERAL_ATTRIBUTE_INSTANCE = 2106;
@@ -291,7 +291,7 @@ namespace ecore
 
 			// Begin Class EFactory
 			//Class and Feature IDs 
-			static const unsigned int EFACTORY_CLASS = 23;
+			static const unsigned long EFACTORY_CLASS = 817046646;
 			static const unsigned int EFACTORY_CLASS_FEATURE_COUNT = 5;
 			static const unsigned int EFACTORY_CLASS_OPERATION_COUNT = 19;
 			
@@ -316,7 +316,7 @@ namespace ecore
 
 			// Begin Class EGenericType
 			//Class and Feature IDs 
-			static const unsigned int EGENERICTYPE_CLASS = 28;
+			static const unsigned long EGENERICTYPE_CLASS = 1282018195;
 			static const unsigned int EGENERICTYPE_CLASS_FEATURE_COUNT = 6;
 			static const unsigned int EGENERICTYPE_CLASS_OPERATION_COUNT = 1;
 			
@@ -347,7 +347,7 @@ namespace ecore
 
 			// Begin Class EModelElement
 			//Class and Feature IDs 
-			static const unsigned int EMODELELEMENT_CLASS = 37;
+			static const unsigned long EMODELELEMENT_CLASS = 1193165779;
 			static const unsigned int EMODELELEMENT_CLASS_FEATURE_COUNT = 4;
 			static const unsigned int EMODELELEMENT_CLASS_OPERATION_COUNT = 16;
 			
@@ -368,7 +368,7 @@ namespace ecore
 
 			// Begin Class ENamedElement
 			//Class and Feature IDs 
-			static const unsigned int ENAMEDELEMENT_CLASS = 38;
+			static const unsigned long ENAMEDELEMENT_CLASS = 2138707061;
 			static const unsigned int ENAMEDELEMENT_CLASS_FEATURE_COUNT = 5;
 			static const unsigned int ENAMEDELEMENT_CLASS_OPERATION_COUNT = 16;
 			static const int ENAMEDELEMENT_ATTRIBUTE_NAME = 3804;
@@ -387,7 +387,7 @@ namespace ecore
 
 			// Begin Class EObject
 			//Class and Feature IDs 
-			static const unsigned int EOBJECT_CLASS = 39;
+			static const unsigned long EOBJECT_CLASS = 2051543432;
 			static const unsigned int EOBJECT_CLASS_FEATURE_COUNT = 3;
 			static const unsigned int EOBJECT_CLASS_OPERATION_COUNT = 15;
 			static const int EOBJECT_ATTRIBUTE_METAELEMENTID = 3902;
@@ -440,7 +440,7 @@ namespace ecore
 
 			// Begin Class EOperation
 			//Class and Feature IDs 
-			static const unsigned int EOPERATION_CLASS = 40;
+			static const unsigned long EOPERATION_CLASS = 1293372482;
 			static const unsigned int EOPERATION_CLASS_FEATURE_COUNT = 19;
 			static const unsigned int EOPERATION_CLASS_OPERATION_COUNT = 18;
 			static const int EOPERATION_ATTRIBUTE_OPERATIONID = 4013;
@@ -473,7 +473,7 @@ namespace ecore
 
 			// Begin Class EPackage
 			//Class and Feature IDs 
-			static const unsigned int EPACKAGE_CLASS = 41;
+			static const unsigned long EPACKAGE_CLASS = 1953920355;
 			static const unsigned int EPACKAGE_CLASS_FEATURE_COUNT = 11;
 			static const unsigned int EPACKAGE_CLASS_OPERATION_COUNT = 17;
 			static const int EPACKAGE_ATTRIBUTE_NSPREFIX = 4106;
@@ -504,7 +504,7 @@ namespace ecore
 
 			// Begin Class EParameter
 			//Class and Feature IDs 
-			static const unsigned int EPARAMETER_CLASS = 42;
+			static const unsigned long EPARAMETER_CLASS = 461177325;
 			static const unsigned int EPARAMETER_CLASS_FEATURE_COUNT = 14;
 			static const unsigned int EPARAMETER_CLASS_OPERATION_COUNT = 16;
 			
@@ -523,7 +523,7 @@ namespace ecore
 
 			// Begin Class EReference
 			//Class and Feature IDs 
-			static const unsigned int EREFERENCE_CLASS = 43;
+			static const unsigned long EREFERENCE_CLASS = 390204639;
 			static const unsigned int EREFERENCE_CLASS_FEATURE_COUNT = 28;
 			static const unsigned int EREFERENCE_CLASS_OPERATION_COUNT = 18;
 			static const int EREFERENCE_ATTRIBUTE_CONTAINER = 4323;
@@ -552,7 +552,7 @@ namespace ecore
 
 			// Begin Class EStringToStringMapEntry
 			//Class and Feature IDs 
-			static const unsigned int ESTRINGTOSTRINGMAPENTRY_CLASS = 49;
+			static const unsigned long ESTRINGTOSTRINGMAPENTRY_CLASS = 1101973251;
 			static const unsigned int ESTRINGTOSTRINGMAPENTRY_CLASS_FEATURE_COUNT = 2;
 			static const unsigned int ESTRINGTOSTRINGMAPENTRY_CLASS_OPERATION_COUNT = 0;
 			static const int ESTRINGTOSTRINGMAPENTRY_ATTRIBUTE_KEY = 4900;
@@ -573,7 +573,7 @@ namespace ecore
 
 			// Begin Class EStructuralFeature
 			//Class and Feature IDs 
-			static const unsigned int ESTRUCTURALFEATURE_CLASS = 50;
+			static const unsigned long ESTRUCTURALFEATURE_CLASS = 1432739060;
 			static const unsigned int ESTRUCTURALFEATURE_CLASS_FEATURE_COUNT = 22;
 			static const unsigned int ESTRUCTURALFEATURE_CLASS_OPERATION_COUNT = 18;
 			static const int ESTRUCTURALFEATURE_ATTRIBUTE_CHANGEABLE = 5013;
@@ -612,7 +612,7 @@ namespace ecore
 
 			// Begin Class ETypeParameter
 			//Class and Feature IDs 
-			static const unsigned int ETYPEPARAMETER_CLASS = 52;
+			static const unsigned long ETYPEPARAMETER_CLASS = 1516033880;
 			static const unsigned int ETYPEPARAMETER_CLASS_FEATURE_COUNT = 6;
 			static const unsigned int ETYPEPARAMETER_CLASS_OPERATION_COUNT = 16;
 			
@@ -631,7 +631,7 @@ namespace ecore
 
 			// Begin Class ETypedElement
 			//Class and Feature IDs 
-			static const unsigned int ETYPEDELEMENT_CLASS = 53;
+			static const unsigned long ETYPEDELEMENT_CLASS = 714923840;
 			static const unsigned int ETYPEDELEMENT_CLASS_FEATURE_COUNT = 13;
 			static const unsigned int ETYPEDELEMENT_CLASS_OPERATION_COUNT = 16;
 			static const int ETYPEDELEMENT_ATTRIBUTE_LOWERBOUND = 5307;
