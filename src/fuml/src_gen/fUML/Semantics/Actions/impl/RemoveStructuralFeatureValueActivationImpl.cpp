@@ -28,6 +28,10 @@
 #include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
 #include "fUML/Semantics/SimpleClassifiers/StructuredValue.hpp"
 #include "fUML/Semantics/Values/Value.hpp"
+#include "fUML/Semantics/Activities/ActivityExecution.hpp"
+#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
+#include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
+#include "uml/InputPin.hpp"
 #include "uml/RemoveStructuralFeatureValueAction.hpp"
 #include "uml/StructuralFeature.hpp"
 
@@ -177,7 +181,23 @@ void RemoveStructuralFeatureValueActivationImpl::doAction()
 	std::shared_ptr<uml::RemoveStructuralFeatureValueAction> action = this->getRemoveStructuralFeatureValueAction();
 	std::shared_ptr<uml::StructuralFeature> feature = action->getStructuralFeature();
 
-	std::shared_ptr<fUML::Semantics::Values::Value> objectValue = takeTokens(action->getObject())->at(0);
+	std::shared_ptr<fUML::Semantics::Values::Value> objectValue = nullptr;
+	
+	/* MDE4CPP specific implementation for handling "self"-Pin */
+	std::string objectPinName = action->getObject()->getName();
+	if((objectPinName.empty()) || (objectPinName.find("self") == 0)){
+		//objectValue is set to the context of the current activity execution
+		std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> contextReference = fUML::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createReference();
+		std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> context = this->getActivityExecution()->getContext();
+		contextReference->setReferent(context);
+			
+		objectValue = contextReference;
+	}
+	else{
+		objectValue = this->takeTokens(action->getObject())->at(0);
+	}
+	/*--------------------------------------------------------*/
+	
 	std::shared_ptr<fUML::Semantics::Values::Value> inputValue = takeTokens(action->getValue())->at(0);
 	std::shared_ptr<fUML::Semantics::SimpleClassifiers::StructuredValue> structuredValue = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::StructuredValue>(objectValue);
 	if (structuredValue)

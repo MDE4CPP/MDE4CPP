@@ -36,6 +36,10 @@
 #include "uml/AddStructuralFeatureValueAction.hpp"
 #include "uml/Property.hpp"
 
+#include "fUML/Semantics/Activities/ActivityExecution.hpp"
+#include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
+#include "uml/InputPin.hpp"
+
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -189,7 +193,23 @@ void AddStructuralFeatureValueActionActivationImpl::doAction()
 	std::shared_ptr<uml::StructuralFeature> feature = action->getStructuralFeature();
 	std::shared_ptr<uml::Association> association = this->getAssociation(feature);
 
-	std::shared_ptr<fUML::Semantics::Values::Value> value = takeTokens(action->getObject())->at(0);
+	std::shared_ptr<fUML::Semantics::Values::Value> value = nullptr;
+	
+	/* MDE4CPP specific implementation for handling "self"-Pin */
+	std::string objectPinName = action->getObject()->getName();
+	if((objectPinName.empty()) || (objectPinName.find("self") == 0)){
+		//value is set to the context of the current activity execution
+		std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> contextReference = fUML::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createReference();
+		std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> context = this->getActivityExecution()->getContext();
+		contextReference->setReferent(context);
+			
+		value = contextReference;
+	}
+	else{
+		value = this->takeTokens(action->getObject())->at(0);
+	}
+	/*--------------------------------------------------------*/
+	
 	std::shared_ptr<Bag<fUML::Semantics::Values::Value>> inputValues = takeTokens(action->getValue());
 	
 	// NOTE: Multiplicity of the value input pin is required to be 1..1.

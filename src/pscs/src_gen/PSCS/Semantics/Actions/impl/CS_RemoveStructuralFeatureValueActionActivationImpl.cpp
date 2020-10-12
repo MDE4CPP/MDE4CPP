@@ -38,8 +38,11 @@
 #include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
 #include "fUML/Semantics/StructuredClassifiers/ExtensionalValue.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/CS_InteractionPoint.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/CS_Object.hpp"
+#include "fUML/Semantics/Activities/ActivityExecution.hpp"
+#include "uml/InputPin.hpp"
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -211,7 +214,24 @@ void CS_RemoveStructuralFeatureValueActionActivationImpl::doAction()
 	std::shared_ptr<uml::StructuralFeature> feature = action->getStructuralFeature();
 	/* Since links are represented implicitly in MDE4CPP, handling of links when adding a structural feature value is bypassed here*/
 	std::shared_ptr<uml::Association> association = nullptr; //this->getAssociation(feature);
-	std::shared_ptr<fUML::Semantics::Values::Value> value = this->takeTokens(action->getObject())->at(0);
+	std::shared_ptr<fUML::Semantics::Values::Value> value = nullptr;		
+
+	/* MDE4CPP specific implementation for handling "self"-Pin */
+	std::string targetPinName = action->getObject()->getName();
+	if((targetPinName.empty()) || (targetPinName.find("self") == 0)){
+		//target is set to the context of the current activity execution
+		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> contextReference = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Reference();
+		std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> context = this->getActivityExecution()->getContext();
+		contextReference->setReferent(context);
+		contextReference->setCompositeReferent(std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Object>(context));
+			
+		value = contextReference;
+	}
+	else{
+		value = this->takeTokens(action->getObject())->at(0);
+	}
+	/*--------------------------------------------------------*/
+	
 	std::shared_ptr<fUML::Semantics::Values::Value> inputValue = nullptr;
 	if(action->getValue() != nullptr) {
 		// NOTE: Multiplicity of the value input pin is required to be 1..1.

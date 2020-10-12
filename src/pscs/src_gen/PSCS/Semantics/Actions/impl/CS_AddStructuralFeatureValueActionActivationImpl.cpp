@@ -48,6 +48,9 @@
 #include "fUML/Semantics/Loci/ExecutionFactory.hpp"
 #include "fUML/Semantics/StructuredClassifiers/Link.hpp"
 #include "fUML/Semantics/SimpleClassifiers/StructuredValue.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/CS_Object.hpp"
+#include "fUML/Semantics/Activities/ActivityExecution.hpp"
+#include "uml/InputPin.hpp"
 
 
 //Forward declaration includes
@@ -218,9 +221,28 @@ void CS_AddStructuralFeatureValueActionActivationImpl::doAction()
 			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> interactionPoint = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_InteractionPoint();
 			interactionPoint->setReferent(reference->getReferent());
 			interactionPoint->setDefiningPort(std::dynamic_pointer_cast<uml::Port>(feature));
+			
+			std::shared_ptr<fUML::Semantics::Values::Value> value = nullptr;		
+
+			/* MDE4CPP specific implementation for handling "self"-Pin */
+			std::string targetPinName = action->getObject()->getName();
+			if((targetPinName.empty()) || (targetPinName.find("self") == 0)){
+				//target is set to the context of the current activity execution
+				std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> contextReference = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Reference();
+				std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> context = this->getActivityExecution()->getContext();
+				contextReference->setReferent(context);
+				contextReference->setCompositeReferent(std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Object>(context));
+			
+				value = contextReference;
+			}
+			else{
+				value = this->takeTokens(action->getObject())->at(0);
+			}
+			/*--------------------------------------------------------*/
+			
 			// The value on action.object is necessarily instanceof
 			// CS_Reference (otherwise, the feature cannot be a port)
-			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> owner = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(this->takeTokens(action->getObject())->at(0));
+			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> owner = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(value);
 			interactionPoint->setOwner(owner);
 			// Then replaces the CS_Reference by a CS_InteractionPoint in the inputValues
 			inputValues->erase(inputValues->begin());
@@ -299,7 +321,24 @@ void CS_AddStructuralFeatureValueActionActivationImpl::doActionDefault()
 	/* Since links are represented implicitly in MDE4CPP, handling of links when adding a structural feature value is bypassed here*/
 	std::shared_ptr<uml::Association> association = nullptr; //this->getAssociation(feature);
 	
-	std::shared_ptr<fUML::Semantics::Values::Value> value = this->takeTokens(action->getObject())->at(0);
+	std::shared_ptr<fUML::Semantics::Values::Value> value = nullptr;		
+
+	/* MDE4CPP specific implementation for handling "self"-Pin */
+	std::string targetPinName = action->getObject()->getName();
+	if((targetPinName.empty()) || (targetPinName.find("self") == 0)){
+		//target is set to the context of the current activity execution
+		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> contextReference = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Reference();
+		std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> context = this->getActivityExecution()->getContext();
+		contextReference->setReferent(context);
+		contextReference->setCompositeReferent(std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Object>(context));
+			
+		value = contextReference;
+	}
+	else{
+		value = this->takeTokens(action->getObject())->at(0);
+	}
+	/*--------------------------------------------------------*/
+	
 	std::shared_ptr<Bag<fUML::Semantics::Values::Value>> inputValues = this->takeTokens(action->getValue());
 	
 	// NOTE: Multiplicity of the value input pin is required to be 1..1.
