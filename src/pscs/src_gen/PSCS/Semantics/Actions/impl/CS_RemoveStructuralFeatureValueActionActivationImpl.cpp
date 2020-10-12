@@ -47,6 +47,8 @@
 
 #include <exception> // used in Persistence
 
+#include "uml/Action.hpp"
+
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 
 #include "uml/ActivityNode.hpp"
@@ -62,6 +64,8 @@
 #include "fUML/Semantics/Actions/OutputPinActivation.hpp"
 
 #include "fUML/Semantics/Actions/PinActivation.hpp"
+
+#include "uml/RemoveStructuralFeatureValueAction.hpp"
 
 #include "fUML/Semantics/Actions/RemoveStructuralFeatureValueActivation.hpp"
 
@@ -91,17 +95,7 @@ using namespace PSCS::Semantics::Actions;
 // Constructor / Destructor
 //*********************************
 CS_RemoveStructuralFeatureValueActionActivationImpl::CS_RemoveStructuralFeatureValueActionActivationImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 CS_RemoveStructuralFeatureValueActionActivationImpl::~CS_RemoveStructuralFeatureValueActionActivationImpl()
@@ -111,14 +105,12 @@ CS_RemoveStructuralFeatureValueActionActivationImpl::~CS_RemoveStructuralFeature
 #endif
 }
 
-
 //Additional constructor for the containments back reference
-			CS_RemoveStructuralFeatureValueActionActivationImpl::CS_RemoveStructuralFeatureValueActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
-			:CS_RemoveStructuralFeatureValueActionActivationImpl()
-			{
-			    m_group = par_group;
-			}
-
+CS_RemoveStructuralFeatureValueActionActivationImpl::CS_RemoveStructuralFeatureValueActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
+:CS_RemoveStructuralFeatureValueActionActivationImpl()
+{
+	m_group = par_group;
+}
 
 
 CS_RemoveStructuralFeatureValueActionActivationImpl::CS_RemoveStructuralFeatureValueActionActivationImpl(const CS_RemoveStructuralFeatureValueActionActivationImpl & obj):CS_RemoveStructuralFeatureValueActionActivationImpl()
@@ -132,6 +124,8 @@ CS_RemoveStructuralFeatureValueActionActivationImpl::CS_RemoveStructuralFeatureV
 
 	//copy references with no containment (soft copy)
 	
+	m_action  = obj.getAction();
+
 	m_group  = obj.getGroup();
 
 	std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> _incomingEdges = obj.getIncomingEdges();
@@ -144,6 +138,8 @@ CS_RemoveStructuralFeatureValueActionActivationImpl::CS_RemoveStructuralFeatureV
 
 	std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> _pinActivation = obj.getPinActivation();
 	m_pinActivation.reset(new Union<fUML::Semantics::Actions::PinActivation>(*(obj.getPinActivation().get())));
+
+	m_removeStructuralFeatureValueAction  = obj.getRemoveStructuralFeatureValueAction();
 
 
 	//Clone references with containment (deep copy)
@@ -211,7 +207,7 @@ void CS_RemoveStructuralFeatureValueActionActivationImpl::doAction()
 	// If isRemoveDuplicates is false, and there is a removeAt input pin
 	// remove the feature value at that position.
 
-	std::shared_ptr<uml::RemoveStructuralFeatureValueAction> action = std::dynamic_pointer_cast<uml::RemoveStructuralFeatureValueAction>(this->getNode());
+	std::shared_ptr<uml::RemoveStructuralFeatureValueAction> action = this->getRemoveStructuralFeatureValueAction();
 	std::shared_ptr<uml::StructuralFeature> feature = action->getStructuralFeature();
 	/* Since links are represented implicitly in MDE4CPP, handling of links when adding a structural feature value is bypassed here*/
 	std::shared_ptr<uml::Association> association = nullptr; //this->getAssociation(feature);
@@ -441,8 +437,20 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value> > CS_RemoveStructuralFeature
 //*********************************
 std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> CS_RemoveStructuralFeatureValueActionActivationImpl::getPinActivation() const
 {
+	if(m_pinActivation == nullptr)
+	{
+		/*Union*/
+		m_pinActivation.reset(new Union<fUML::Semantics::Actions::PinActivation>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_pinActivation - Union<fUML::Semantics::Actions::PinActivation>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_pinActivation;
 }
+
+
 
 
 std::shared_ptr<CS_RemoveStructuralFeatureValueActionActivation> CS_RemoveStructuralFeatureValueActionActivationImpl::getThisCS_RemoveStructuralFeatureValueActionActivationPtr() const

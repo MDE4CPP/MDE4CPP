@@ -65,8 +65,7 @@ namespace fUML::Semantics::Loci
 //*********************************
 namespace PSCS::Semantics::Actions 
 {
-	/*!
-	 */
+	
 	class CS_ConstructStrategy:virtual public fUML::Semantics::Loci::SemanticStrategy
 	{
 		public:
@@ -86,12 +85,10 @@ namespace PSCS::Semantics::Actions
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> construct(std::shared_ptr<uml::Operation>  constructor,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object>  context) = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual std::string getName() = 0;
 			
 			

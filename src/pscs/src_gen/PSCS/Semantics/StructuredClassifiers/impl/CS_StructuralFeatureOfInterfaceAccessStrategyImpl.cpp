@@ -60,17 +60,7 @@ using namespace PSCS::Semantics::StructuredClassifiers;
 // Constructor / Destructor
 //*********************************
 CS_StructuralFeatureOfInterfaceAccessStrategyImpl::CS_StructuralFeatureOfInterfaceAccessStrategyImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 CS_StructuralFeatureOfInterfaceAccessStrategyImpl::~CS_StructuralFeatureOfInterfaceAccessStrategyImpl()
@@ -79,7 +69,6 @@ CS_StructuralFeatureOfInterfaceAccessStrategyImpl::~CS_StructuralFeatureOfInterf
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete CS_StructuralFeatureOfInterfaceAccessStrategy "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -145,6 +134,7 @@ void CS_StructuralFeatureOfInterfaceAccessStrategyImpl::write(std::shared_ptr<PS
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<CS_StructuralFeatureOfInterfaceAccessStrategy> CS_StructuralFeatureOfInterfaceAccessStrategyImpl::getThisCS_StructuralFeatureOfInterfaceAccessStrategyPtr() const

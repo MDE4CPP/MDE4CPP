@@ -43,12 +43,10 @@ namespace PSCS::Semantics::Actions
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> construct(std::shared_ptr<uml::Operation>  constructor,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object>  context) ;
 			
-			/*!
-			 */ 
+			 
 			virtual std::string getName() ;
 			
 			

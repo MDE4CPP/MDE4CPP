@@ -44,6 +44,8 @@
 
 #include <exception> // used in Persistence
 
+#include "uml/Action.hpp"
+
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 
 #include "uml/ActivityNode.hpp"
@@ -88,17 +90,7 @@ using namespace PSCS::Semantics::Actions;
 // Constructor / Destructor
 //*********************************
 CS_ClearStructuralFeatureActionActivationImpl::CS_ClearStructuralFeatureActionActivationImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 CS_ClearStructuralFeatureActionActivationImpl::~CS_ClearStructuralFeatureActionActivationImpl()
@@ -108,14 +100,12 @@ CS_ClearStructuralFeatureActionActivationImpl::~CS_ClearStructuralFeatureActionA
 #endif
 }
 
-
 //Additional constructor for the containments back reference
-			CS_ClearStructuralFeatureActionActivationImpl::CS_ClearStructuralFeatureActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
-			:CS_ClearStructuralFeatureActionActivationImpl()
-			{
-			    m_group = par_group;
-			}
-
+CS_ClearStructuralFeatureActionActivationImpl::CS_ClearStructuralFeatureActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
+:CS_ClearStructuralFeatureActionActivationImpl()
+{
+	m_group = par_group;
+}
 
 
 CS_ClearStructuralFeatureActionActivationImpl::CS_ClearStructuralFeatureActionActivationImpl(const CS_ClearStructuralFeatureActionActivationImpl & obj):CS_ClearStructuralFeatureActionActivationImpl()
@@ -129,6 +119,8 @@ CS_ClearStructuralFeatureActionActivationImpl::CS_ClearStructuralFeatureActionAc
 
 	//copy references with no containment (soft copy)
 	
+	m_action  = obj.getAction();
+
 	m_group  = obj.getGroup();
 
 	std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> _incomingEdges = obj.getIncomingEdges();
@@ -361,8 +353,20 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value> > CS_ClearStructuralFeatureA
 //*********************************
 std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> CS_ClearStructuralFeatureActionActivationImpl::getPinActivation() const
 {
+	if(m_pinActivation == nullptr)
+	{
+		/*Union*/
+		m_pinActivation.reset(new Union<fUML::Semantics::Actions::PinActivation>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_pinActivation - Union<fUML::Semantics::Actions::PinActivation>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_pinActivation;
 }
+
+
 
 
 std::shared_ptr<CS_ClearStructuralFeatureActionActivation> CS_ClearStructuralFeatureActionActivationImpl::getThisCS_ClearStructuralFeatureActionActivationPtr() const

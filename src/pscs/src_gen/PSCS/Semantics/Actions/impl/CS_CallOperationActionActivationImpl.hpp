@@ -47,28 +47,22 @@ namespace PSCS::Semantics::Actions
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual bool _isCreate(std::shared_ptr<uml::Operation>  operation) ;
 			
-			/*!
-			 */ 
+			 
 			virtual void doAction() ;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> getCallExecution() ;
 			
-			/*!
-			 */ 
+			 
 			virtual bool isCreate(std::shared_ptr<uml::Operation>  operation) ;
 			
-			/*!
-			 */ 
+			 
 			virtual bool isOperationProvided(std::shared_ptr<uml::Port>  port,std::shared_ptr<uml::Operation>  operation) ;
 			
-			/*!
-			 */ 
+			 
 			virtual bool isOperationRequired(std::shared_ptr<uml::Port>  port,std::shared_ptr<uml::Operation>  operation) ;
 			
 			
@@ -86,8 +80,7 @@ namespace PSCS::Semantics::Actions
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> getPinActivation() const ; 
 			 
 			//*********************************

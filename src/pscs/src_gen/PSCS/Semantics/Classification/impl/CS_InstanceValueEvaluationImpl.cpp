@@ -76,17 +76,7 @@ using namespace PSCS::Semantics::Classification;
 // Constructor / Destructor
 //*********************************
 CS_InstanceValueEvaluationImpl::CS_InstanceValueEvaluationImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 CS_InstanceValueEvaluationImpl::~CS_InstanceValueEvaluationImpl()
@@ -95,7 +85,6 @@ CS_InstanceValueEvaluationImpl::~CS_InstanceValueEvaluationImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete CS_InstanceValueEvaluation "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -248,6 +237,7 @@ return value;
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<CS_InstanceValueEvaluation> CS_InstanceValueEvaluationImpl::getThisCS_InstanceValueEvaluationPtr() const

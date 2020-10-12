@@ -56,17 +56,7 @@ using namespace PSCS::Semantics::StructuredClassifiers;
 // Constructor / Destructor
 //*********************************
 CS_RequestPropagationStrategyImpl::CS_RequestPropagationStrategyImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 CS_RequestPropagationStrategyImpl::~CS_RequestPropagationStrategyImpl()
@@ -75,7 +65,6 @@ CS_RequestPropagationStrategyImpl::~CS_RequestPropagationStrategyImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete CS_RequestPropagationStrategy "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -135,6 +124,7 @@ std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference> > CS_Requ
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<CS_RequestPropagationStrategy> CS_RequestPropagationStrategyImpl::getThisCS_RequestPropagationStrategyPtr() const

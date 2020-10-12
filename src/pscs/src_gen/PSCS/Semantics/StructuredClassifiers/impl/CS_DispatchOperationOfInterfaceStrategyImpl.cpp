@@ -25,6 +25,7 @@
 //Includes from codegen annotation
 #include "fUML/FUMLFactory.hpp"
 
+#include "uml/UmlPackage.hpp"
 #include "uml/Namespace.hpp"
 #include "uml/Interface.hpp"
 #include "uml/Parameter.hpp"
@@ -57,17 +58,7 @@ using namespace PSCS::Semantics::StructuredClassifiers;
 // Constructor / Destructor
 //*********************************
 CS_DispatchOperationOfInterfaceStrategyImpl::CS_DispatchOperationOfInterfaceStrategyImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 CS_DispatchOperationOfInterfaceStrategyImpl::~CS_DispatchOperationOfInterfaceStrategyImpl()
@@ -76,7 +67,6 @@ CS_DispatchOperationOfInterfaceStrategyImpl::~CS_DispatchOperationOfInterfaceStr
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete CS_DispatchOperationOfInterfaceStrategy "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -124,7 +114,7 @@ bool CS_DispatchOperationOfInterfaceStrategyImpl::operationsMatch(std::shared_pt
 	// Otherwise, behaves like fUML RedefinitionBasedDispatchStrategy
 
 	bool matches = true;
-	if(std::dynamic_pointer_cast<uml::Interface>(baseOperation->getNamespace().lock()) != nullptr) {
+	if(baseOperation->getNamespace().lock()->getMetaElementID() == uml::UmlPackage::INTERFACE_CLASS) {
 		matches = (baseOperation->getName()) == (ownedOperation->getName());
 		matches = matches && ((baseOperation->getOwnedParameter()->size()) == (ownedOperation->getOwnedParameter()->size()));
 		std::shared_ptr<Bag<uml::Parameter>> ownedOperationParameters = ownedOperation->getOwnedParameter();
@@ -152,6 +142,7 @@ bool CS_DispatchOperationOfInterfaceStrategyImpl::operationsMatch(std::shared_pt
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<CS_DispatchOperationOfInterfaceStrategy> CS_DispatchOperationOfInterfaceStrategyImpl::getThisCS_DispatchOperationOfInterfaceStrategyPtr() const

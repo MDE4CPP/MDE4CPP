@@ -97,17 +97,7 @@ using namespace PSCS::Semantics::StructuredClassifiers;
 // Constructor / Destructor
 //*********************************
 CS_ObjectImpl::CS_ObjectImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 CS_ObjectImpl::~CS_ObjectImpl()
@@ -116,7 +106,6 @@ CS_ObjectImpl::~CS_ObjectImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete CS_Object "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -1050,6 +1039,7 @@ void CS_ObjectImpl::setFeatureValue(std::shared_ptr<uml::StructuralFeature>  fea
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<CS_Object> CS_ObjectImpl::getThisCS_ObjectPtr() const

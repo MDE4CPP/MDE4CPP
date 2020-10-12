@@ -43,16 +43,13 @@ namespace PSCS::Semantics::CommonBehavior
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() ;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> createEventOccurrence() ;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> new_() ;
 			
 			
@@ -65,13 +62,12 @@ namespace PSCS::Semantics::CommonBehavior
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint > getInteractionPoint() const ;
 			
-			/*!
-			 */
-			virtual void setInteractionPoint(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> _interactionPoint_interactionPoint) ;
+			
+			virtual void setInteractionPoint(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> _interactionPoint) ;
+			
 							
 			
 			//*********************************

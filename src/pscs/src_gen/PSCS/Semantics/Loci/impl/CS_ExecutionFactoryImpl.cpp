@@ -28,6 +28,7 @@
 #include "uml/UmlFactory.hpp"
 #include "uml/UmlPackage.hpp"
 #include "fUML/Semantics/StructuredClassifiers/ExtensionalValue.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 
 #include "uml/ReadExtentAction.hpp"
 #include "uml/AddStructuralFeatureValueAction.hpp"
@@ -110,22 +111,7 @@ using namespace PSCS::Semantics::Loci;
 // Constructor / Destructor
 //*********************************
 CS_ExecutionFactoryImpl::CS_ExecutionFactoryImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-		m_appliedProfiles.reset(new Bag<uml::Package>());
-	
-	
-
-	//Init references
-	
-	
+{	
 }
 
 CS_ExecutionFactoryImpl::~CS_ExecutionFactoryImpl()
@@ -135,14 +121,12 @@ CS_ExecutionFactoryImpl::~CS_ExecutionFactoryImpl()
 #endif
 }
 
-
 //Additional constructor for the containments back reference
-			CS_ExecutionFactoryImpl::CS_ExecutionFactoryImpl(std::weak_ptr<fUML::Semantics::Loci::Locus > par_locus)
-			:CS_ExecutionFactoryImpl()
-			{
-			    m_locus = par_locus;
-			}
-
+CS_ExecutionFactoryImpl::CS_ExecutionFactoryImpl(std::weak_ptr<fUML::Semantics::Loci::Locus > par_locus)
+:CS_ExecutionFactoryImpl()
+{
+	m_locus = par_locus;
+}
 
 
 CS_ExecutionFactoryImpl::CS_ExecutionFactoryImpl(const CS_ExecutionFactoryImpl & obj):CS_ExecutionFactoryImpl()
@@ -229,10 +213,6 @@ std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> CS_ExecutionFactoryImpl:
 	// semantic visitors are instantiated instead of fUML visitors
 	std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> visitor = nullptr;
 	
-	if(std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::CallEventBehavior>(element) != nullptr) {
-		return PSCS::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createCS_CallEventExecution();
-	}
-	
 	switch(element->eClass()->getClassifierID())
 	{
 		case uml::UmlPackage::READEXTENTACTION_CLASS: 
@@ -300,6 +280,11 @@ std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> CS_ExecutionFactoryImpl:
 			visitor = PSCS::Semantics::Actions::ActionsFactory::eInstance()->createCS_RemoveStructuralFeatureValueActionActivation();
 			break;
 		}
+		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::CALLEVENTBEHAVIOR_CLASS:
+		{
+			visitor = PSCS::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createCS_CallEventExecution();
+			break;
+		}
 		default:
 		{
 			visitor = fUML::Semantics::Loci::ExecutionFactoryImpl::instantiateVisitor(element);
@@ -313,16 +298,29 @@ std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> CS_ExecutionFactoryImpl:
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference appliedProfiles
+*/
 std::shared_ptr<Bag<uml::Package>> CS_ExecutionFactoryImpl::getAppliedProfiles() const
 {
+	if(m_appliedProfiles == nullptr)
+	{
+		m_appliedProfiles.reset(new Bag<uml::Package>());
+		
+		
+	}
 
     return m_appliedProfiles;
 }
 
 
+
+
+
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<CS_ExecutionFactory> CS_ExecutionFactoryImpl::getThisCS_ExecutionFactoryPtr() const

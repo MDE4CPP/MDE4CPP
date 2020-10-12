@@ -64,17 +64,7 @@ using namespace PSCS::Semantics::Loci;
 // Constructor / Destructor
 //*********************************
 CS_LocusImpl::CS_LocusImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 CS_LocusImpl::~CS_LocusImpl()
@@ -83,7 +73,6 @@ CS_LocusImpl::~CS_LocusImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete CS_Locus "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -171,6 +160,7 @@ std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> CS_LocusImpl::in
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<CS_Locus> CS_LocusImpl::getThisCS_LocusPtr() const

@@ -80,8 +80,7 @@ namespace uml
 //*********************************
 namespace PSCS::Semantics::CommonBehavior 
 {
-	/*!
-	 */
+	
 	class CS_EventOccurrence:virtual public fUML::Semantics::CommonBehavior::EventOccurrence
 	{
 		public:
@@ -101,87 +100,69 @@ namespace PSCS::Semantics::CommonBehavior
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual void doSend() = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > getParameterValues() = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual bool match(std::shared_ptr<uml::Trigger>  trigger) = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual void sendInTo(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference>  target,std::shared_ptr<uml::Port>  port) = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual void sendOutTo(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference>  target,std::shared_ptr<uml::Port>  port) = 0;
 			
 			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual bool isPropagationInward() const = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual void setPropagationInward (bool _propagationInward)= 0; 
-			
 			
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint > getInteractionPoint() const = 0;
 			
-			/*!
-			 */
-			virtual void setInteractionPoint(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> _interactionPoint_interactionPoint) = 0;
-			/*!
-			 */
+			
+			virtual void setInteractionPoint(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> _interactionPoint) = 0;
+			
+			
 			virtual std::shared_ptr<uml::Port > getOnPort() const = 0;
 			
-			/*!
-			 */
-			virtual void setOnPort(std::shared_ptr<uml::Port> _onPort_onPort) = 0;
-			/*!
-			 */
+			
+			virtual void setOnPort(std::shared_ptr<uml::Port> _onPort) = 0;
+			
+			
 			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence > getWrappedEventOccurrence() const = 0;
 			
-			/*!
-			 */
-			virtual void setWrappedEventOccurrence(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> _wrappedEventOccurrence_wrappedEventOccurrence) = 0;
+			
+			virtual void setWrappedEventOccurrence(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> _wrappedEventOccurrence) = 0;
+			
 			
 
 		protected:
 			//*********************************
 			// Attribute Members
 			//*********************************
-			/*!
-			 */ 
+			 
 			bool m_propagationInward = false;
 			
 			
 			//*********************************
 			// Reference Members
 			//*********************************
-			/*!
-			 */
-			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint > m_interactionPoint;
-			/*!
-			 */
-			std::shared_ptr<uml::Port > m_onPort;
-			/*!
-			 */
-			std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence > m_wrappedEventOccurrence;
 			
+			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint > m_interactionPoint;
+			std::shared_ptr<uml::Port > m_onPort;
+			std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence > m_wrappedEventOccurrence;
 
 		public:
 			//*********************************

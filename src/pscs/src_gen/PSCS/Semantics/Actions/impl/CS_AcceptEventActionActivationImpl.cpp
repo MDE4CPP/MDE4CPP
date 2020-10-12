@@ -39,6 +39,8 @@
 
 #include "fUML/Semantics/Actions/AcceptEventActionEventAccepter.hpp"
 
+#include "uml/Action.hpp"
+
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 
 #include "uml/ActivityNode.hpp"
@@ -73,17 +75,7 @@ using namespace PSCS::Semantics::Actions;
 // Constructor / Destructor
 //*********************************
 CS_AcceptEventActionActivationImpl::CS_AcceptEventActionActivationImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 CS_AcceptEventActionActivationImpl::~CS_AcceptEventActionActivationImpl()
@@ -93,14 +85,12 @@ CS_AcceptEventActionActivationImpl::~CS_AcceptEventActionActivationImpl()
 #endif
 }
 
-
 //Additional constructor for the containments back reference
-			CS_AcceptEventActionActivationImpl::CS_AcceptEventActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
-			:CS_AcceptEventActionActivationImpl()
-			{
-			    m_group = par_group;
-			}
-
+CS_AcceptEventActionActivationImpl::CS_AcceptEventActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
+:CS_AcceptEventActionActivationImpl()
+{
+	m_group = par_group;
+}
 
 
 CS_AcceptEventActionActivationImpl::CS_AcceptEventActionActivationImpl(const CS_AcceptEventActionActivationImpl & obj):CS_AcceptEventActionActivationImpl()
@@ -115,6 +105,8 @@ CS_AcceptEventActionActivationImpl::CS_AcceptEventActionActivationImpl(const CS_
 
 	//copy references with no containment (soft copy)
 	
+	m_action  = obj.getAction();
+
 	m_eventAccepter  = obj.getEventAccepter();
 
 	m_group  = obj.getGroup();
@@ -204,8 +196,20 @@ void CS_AcceptEventActionActivationImpl::accept(std::shared_ptr<fUML::Semantics:
 //*********************************
 std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> CS_AcceptEventActionActivationImpl::getPinActivation() const
 {
+	if(m_pinActivation == nullptr)
+	{
+		/*Union*/
+		m_pinActivation.reset(new Union<fUML::Semantics::Actions::PinActivation>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_pinActivation - Union<fUML::Semantics::Actions::PinActivation>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_pinActivation;
 }
+
+
 
 
 std::shared_ptr<CS_AcceptEventActionActivation> CS_AcceptEventActionActivationImpl::getThisCS_AcceptEventActionActivationPtr() const

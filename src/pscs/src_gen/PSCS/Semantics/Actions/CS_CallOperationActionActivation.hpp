@@ -36,6 +36,11 @@ namespace PSCS
 }
 
 //Forward Declaration for used types
+namespace uml 
+{
+	class Action;
+}
+
 namespace fUML::Semantics::Activities 
 {
 	class ActivityEdgeInstance;
@@ -49,6 +54,16 @@ namespace uml
 namespace fUML::Semantics::Activities 
 {
 	class ActivityNodeActivationGroup;
+}
+
+namespace uml 
+{
+	class CallAction;
+}
+
+namespace uml 
+{
+	class CallOperationAction;
 }
 
 namespace fUML::Semantics::Actions 
@@ -100,8 +115,7 @@ namespace fUML::Semantics::Activities
 //*********************************
 namespace PSCS::Semantics::Actions 
 {
-	/*!
-	 */
+	
 	class CS_CallOperationActionActivation:virtual public fUML::Semantics::Actions::CallOperationActionActivation
 	{
 		public:
@@ -121,28 +135,22 @@ namespace PSCS::Semantics::Actions
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual bool _isCreate(std::shared_ptr<uml::Operation>  operation) = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual void doAction() = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> getCallExecution() = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual bool isCreate(std::shared_ptr<uml::Operation>  operation) = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual bool isOperationProvided(std::shared_ptr<uml::Port>  port,std::shared_ptr<uml::Operation>  operation) = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual bool isOperationRequired(std::shared_ptr<uml::Port>  port,std::shared_ptr<uml::Operation>  operation) = 0;
 			
 			
@@ -170,8 +178,7 @@ namespace PSCS::Semantics::Actions
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> getPinActivation() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

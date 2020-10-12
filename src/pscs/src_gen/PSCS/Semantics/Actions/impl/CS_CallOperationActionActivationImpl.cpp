@@ -52,11 +52,17 @@
 
 #include <exception> // used in Persistence
 
+#include "uml/Action.hpp"
+
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 
 #include "uml/ActivityNode.hpp"
 
 #include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
+
+#include "uml/CallAction.hpp"
+
+#include "uml/CallOperationAction.hpp"
 
 #include "fUML/Semantics/Actions/CallOperationActionActivation.hpp"
 
@@ -92,17 +98,7 @@ using namespace PSCS::Semantics::Actions;
 // Constructor / Destructor
 //*********************************
 CS_CallOperationActionActivationImpl::CS_CallOperationActionActivationImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 CS_CallOperationActionActivationImpl::~CS_CallOperationActionActivationImpl()
@@ -112,14 +108,12 @@ CS_CallOperationActionActivationImpl::~CS_CallOperationActionActivationImpl()
 #endif
 }
 
-
 //Additional constructor for the containments back reference
-			CS_CallOperationActionActivationImpl::CS_CallOperationActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
-			:CS_CallOperationActionActivationImpl()
-			{
-			    m_group = par_group;
-			}
-
+CS_CallOperationActionActivationImpl::CS_CallOperationActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
+:CS_CallOperationActionActivationImpl()
+{
+	m_group = par_group;
+}
 
 
 CS_CallOperationActionActivationImpl::CS_CallOperationActionActivationImpl(const CS_CallOperationActionActivationImpl & obj):CS_CallOperationActionActivationImpl()
@@ -133,6 +127,12 @@ CS_CallOperationActionActivationImpl::CS_CallOperationActionActivationImpl(const
 
 	//copy references with no containment (soft copy)
 	
+	m_action  = obj.getAction();
+
+	m_callAction  = obj.getCallAction();
+
+	m_callOperationAction  = obj.getCallOperationAction();
+
 	m_group  = obj.getGroup();
 
 	std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> _incomingEdges = obj.getIncomingEdges();
@@ -225,14 +225,16 @@ void CS_CallOperationActionActivationImpl::doAction()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-			std::shared_ptr<uml::CallOperationAction> action = std::dynamic_pointer_cast<uml::CallOperationAction>(this->getNode());
-	// First determines if this is a call to a constructor and if a default
+		// First determines if this is a call to a constructor and if a default
 	// construction strategy needs to be applied.
 	// This is a call to a constructor if the called operation has
 	// stereotype <<Create>> applied.
 	// The default construction strategy is used if no method is associated with the
 	// <<Create>> operation.
 	// Otherwise, behaves like in fUML.
+
+	std::shared_ptr<uml::CallOperationAction> action = this->getCallOperationAction();
+
 	if((action->getOnPort() == nullptr) && (this->_isCreate(action->getOperation())) && (action->getOperation()->getMethod()->size() == 0)) {
 		std::shared_ptr<fUML::Semantics::Loci::Locus> locus = this->getExecutionLocus();
 		std::shared_ptr<PSCS::Semantics::Actions::CS_ConstructStrategy> strategy = std::dynamic_pointer_cast<PSCS::Semantics::Actions::CS_ConstructStrategy>(locus->getFactory()->getStrategy("constructStrategy"));
@@ -281,7 +283,7 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> CS_CallOperationActi
 	// the invocation is made out of the target object through the given Port. 
 	// Otherwise the invocation is made into the target object through the given Port.
 
-	std::shared_ptr<uml::CallOperationAction> action = std::dynamic_pointer_cast<uml::CallOperationAction>(this->getNode());
+	std::shared_ptr<uml::CallOperationAction> action = this->getCallOperationAction();
 	std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> execution = nullptr;
 	if(action->getOnPort() == nullptr) {
 		execution = fUML::Semantics::Actions::CallOperationActionActivationImpl::getCallExecution();
@@ -420,8 +422,20 @@ bool CS_CallOperationActionActivationImpl::isOperationRequired(std::shared_ptr<u
 //*********************************
 std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> CS_CallOperationActionActivationImpl::getPinActivation() const
 {
+	if(m_pinActivation == nullptr)
+	{
+		/*Union*/
+		m_pinActivation.reset(new Union<fUML::Semantics::Actions::PinActivation>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_pinActivation - Union<fUML::Semantics::Actions::PinActivation>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_pinActivation;
 }
+
+
 
 
 std::shared_ptr<CS_CallOperationActionActivation> CS_CallOperationActionActivationImpl::getThisCS_CallOperationActionActivationPtr() const

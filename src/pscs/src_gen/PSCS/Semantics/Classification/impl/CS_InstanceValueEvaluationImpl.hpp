@@ -43,8 +43,7 @@ namespace PSCS::Semantics::Classification
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> evaluate() ;
 			
 			

@@ -32,11 +32,13 @@
 #include "PSCS/Semantics/StructuredClassifiers/CS_Reference.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/CS_Link.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
+#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 
 #include "uml/AddStructuralFeatureValueAction.hpp"
 #include "uml/Port.hpp"
 #include "uml/StructuralFeature.hpp"
 #include "uml/Association.hpp"
+#include "uml/UmlPackage.hpp"
 #include "fUML/Semantics/Values/Value.hpp"
 #include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
 #include "fUML/Semantics/SimpleClassifiers/UnlimitedNaturalValue.hpp"
@@ -54,11 +56,15 @@
 
 #include <exception> // used in Persistence
 
+#include "uml/Action.hpp"
+
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 
 #include "uml/ActivityNode.hpp"
 
 #include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
+
+#include "uml/AddStructuralFeatureValueAction.hpp"
 
 #include "fUML/Semantics/Actions/AddStructuralFeatureValueActionActivation.hpp"
 
@@ -88,17 +94,7 @@ using namespace PSCS::Semantics::Actions;
 // Constructor / Destructor
 //*********************************
 CS_AddStructuralFeatureValueActionActivationImpl::CS_AddStructuralFeatureValueActionActivationImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 CS_AddStructuralFeatureValueActionActivationImpl::~CS_AddStructuralFeatureValueActionActivationImpl()
@@ -108,14 +104,12 @@ CS_AddStructuralFeatureValueActionActivationImpl::~CS_AddStructuralFeatureValueA
 #endif
 }
 
-
 //Additional constructor for the containments back reference
-			CS_AddStructuralFeatureValueActionActivationImpl::CS_AddStructuralFeatureValueActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
-			:CS_AddStructuralFeatureValueActionActivationImpl()
-			{
-			    m_group = par_group;
-			}
-
+CS_AddStructuralFeatureValueActionActivationImpl::CS_AddStructuralFeatureValueActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
+:CS_AddStructuralFeatureValueActionActivationImpl()
+{
+	m_group = par_group;
+}
 
 
 CS_AddStructuralFeatureValueActionActivationImpl::CS_AddStructuralFeatureValueActionActivationImpl(const CS_AddStructuralFeatureValueActionActivationImpl & obj):CS_AddStructuralFeatureValueActionActivationImpl()
@@ -129,6 +123,10 @@ CS_AddStructuralFeatureValueActionActivationImpl::CS_AddStructuralFeatureValueAc
 
 	//copy references with no containment (soft copy)
 	
+	m_action  = obj.getAction();
+
+	m_addStructuralFeatureValueAction  = obj.getAddStructuralFeatureValueAction();
+
 	m_group  = obj.getGroup();
 
 	std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> _incomingEdges = obj.getIncomingEdges();
@@ -201,10 +199,10 @@ void CS_AddStructuralFeatureValueActionActivationImpl::doAction()
 	// as usual.
 	// If the feature is not a port, behaves as usual
 
-	std::shared_ptr<uml::AddStructuralFeatureValueAction> action = std::dynamic_pointer_cast<uml::AddStructuralFeatureValueAction>(this->getNode());
+	std::shared_ptr<uml::AddStructuralFeatureValueAction> action = this->getAddStructuralFeatureValueAction();
 	std::shared_ptr<uml::StructuralFeature> feature = action->getStructuralFeature();
 	
-	if(std::dynamic_pointer_cast<uml::Port>(feature) == nullptr) {
+	if(feature->getMetaElementID() != uml::UmlPackage::PORT_CLASS) {
 		// Behaves as usual
 		this->doActionDefault();
 	}
@@ -212,7 +210,9 @@ void CS_AddStructuralFeatureValueActionActivationImpl::doAction()
 		std::shared_ptr<Bag<fUML::Semantics::Values::Value>> inputValues = this->takeTokens(action->getValue());
 		// NOTE: Multiplicity of the value input pin is required to be 1..1.
 		std::shared_ptr<fUML::Semantics::Values::Value> inputValue = inputValues->at(0);
-		if(std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Reference>(inputValue) != nullptr) {
+		if(inputValue->getMetaElementID() == fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::REFERENCE_CLASS ||
+		   inputValue->getMetaElementID() == PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::CS_REFERENCE_CLASS ||
+		   inputValue->getMetaElementID() == PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::CS_INTERACTIONPOINT_CLASS) {
 			// First constructs an InteractionPoint from the inputValue
 			std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> reference = std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Reference>(inputValue);
 			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> interactionPoint = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_InteractionPoint();
@@ -294,7 +294,7 @@ void CS_AddStructuralFeatureValueActionActivationImpl::doActionDefault()
 	// when the feature is an association end, a CS_Link will be created instead
 	// of a Link
 
-	std::shared_ptr<uml::AddStructuralFeatureValueAction> action = std::dynamic_pointer_cast<uml::AddStructuralFeatureValueAction>(this->getNode());
+	std::shared_ptr<uml::AddStructuralFeatureValueAction> action = this->getAddStructuralFeatureValueAction();
 	std::shared_ptr<uml::StructuralFeature> feature = action->getStructuralFeature();
 	/* Since links are represented implicitly in MDE4CPP, handling of links when adding a structural feature value is bypassed here*/
 	std::shared_ptr<uml::Association> association = nullptr; //this->getAssociation(feature);
@@ -409,8 +409,20 @@ void CS_AddStructuralFeatureValueActionActivationImpl::doActionDefault()
 //*********************************
 std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> CS_AddStructuralFeatureValueActionActivationImpl::getPinActivation() const
 {
+	if(m_pinActivation == nullptr)
+	{
+		/*Union*/
+		m_pinActivation.reset(new Union<fUML::Semantics::Actions::PinActivation>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_pinActivation - Union<fUML::Semantics::Actions::PinActivation>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_pinActivation;
 }
+
+
 
 
 std::shared_ptr<CS_AddStructuralFeatureValueActionActivation> CS_AddStructuralFeatureValueActionActivationImpl::getThisCS_AddStructuralFeatureValueActionActivationPtr() const

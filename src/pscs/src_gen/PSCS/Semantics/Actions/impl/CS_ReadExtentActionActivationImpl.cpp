@@ -43,6 +43,8 @@
 
 #include <exception> // used in Persistence
 
+#include "uml/Action.hpp"
+
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 
 #include "uml/ActivityNode.hpp"
@@ -77,17 +79,7 @@ using namespace PSCS::Semantics::Actions;
 // Constructor / Destructor
 //*********************************
 CS_ReadExtentActionActivationImpl::CS_ReadExtentActionActivationImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 CS_ReadExtentActionActivationImpl::~CS_ReadExtentActionActivationImpl()
@@ -97,14 +89,12 @@ CS_ReadExtentActionActivationImpl::~CS_ReadExtentActionActivationImpl()
 #endif
 }
 
-
 //Additional constructor for the containments back reference
-			CS_ReadExtentActionActivationImpl::CS_ReadExtentActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
-			:CS_ReadExtentActionActivationImpl()
-			{
-			    m_group = par_group;
-			}
-
+CS_ReadExtentActionActivationImpl::CS_ReadExtentActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
+:CS_ReadExtentActionActivationImpl()
+{
+	m_group = par_group;
+}
 
 
 CS_ReadExtentActionActivationImpl::CS_ReadExtentActionActivationImpl(const CS_ReadExtentActionActivationImpl & obj):CS_ReadExtentActionActivationImpl()
@@ -118,6 +108,8 @@ CS_ReadExtentActionActivationImpl::CS_ReadExtentActionActivationImpl(const CS_Re
 
 	//copy references with no containment (soft copy)
 	
+	m_action  = obj.getAction();
+
 	m_group  = obj.getGroup();
 
 	std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> _incomingEdges = obj.getIncomingEdges();
@@ -221,8 +213,20 @@ void CS_ReadExtentActionActivationImpl::doAction()
 //*********************************
 std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> CS_ReadExtentActionActivationImpl::getPinActivation() const
 {
+	if(m_pinActivation == nullptr)
+	{
+		/*Union*/
+		m_pinActivation.reset(new Union<fUML::Semantics::Actions::PinActivation>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_pinActivation - Union<fUML::Semantics::Actions::PinActivation>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_pinActivation;
 }
+
+
 
 
 std::shared_ptr<CS_ReadExtentActionActivation> CS_ReadExtentActionActivationImpl::getThisCS_ReadExtentActionActivationPtr() const

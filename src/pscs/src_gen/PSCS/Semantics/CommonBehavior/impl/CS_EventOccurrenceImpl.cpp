@@ -64,27 +64,7 @@ using namespace PSCS::Semantics::CommonBehavior;
 // Constructor / Destructor
 //*********************************
 CS_EventOccurrenceImpl::CS_EventOccurrenceImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	
-
-	
-
-	//Init references
-	
-
-	
-
-	
+{	
 }
 
 CS_EventOccurrenceImpl::~CS_EventOccurrenceImpl()
@@ -93,7 +73,6 @@ CS_EventOccurrenceImpl::~CS_EventOccurrenceImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete CS_EventOccurrence "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -136,15 +115,20 @@ std::shared_ptr<ecore::EClass> CS_EventOccurrenceImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
+/*
+Getter & Setter for attribute propagationInward
+*/
+bool CS_EventOccurrenceImpl::isPropagationInward() const 
+{
+	return m_propagationInward;
+}
+
 void CS_EventOccurrenceImpl::setPropagationInward(bool _propagationInward)
 {
 	m_propagationInward = _propagationInward;
 } 
 
-bool CS_EventOccurrenceImpl::isPropagationInward() const 
-{
-	return m_propagationInward;
-}
+
 
 //*********************************
 // Operations
@@ -237,39 +221,58 @@ void CS_EventOccurrenceImpl::sendOutTo(std::shared_ptr<PSCS::Semantics::Structur
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference interactionPoint
+*/
 std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint > CS_EventOccurrenceImpl::getInteractionPoint() const
 {
 
     return m_interactionPoint;
 }
+
 void CS_EventOccurrenceImpl::setInteractionPoint(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> _interactionPoint)
 {
     m_interactionPoint = _interactionPoint;
 }
 
+
+
+/*
+Getter & Setter for reference onPort
+*/
 std::shared_ptr<uml::Port > CS_EventOccurrenceImpl::getOnPort() const
 {
 
     return m_onPort;
 }
+
 void CS_EventOccurrenceImpl::setOnPort(std::shared_ptr<uml::Port> _onPort)
 {
     m_onPort = _onPort;
 }
 
+
+
+/*
+Getter & Setter for reference wrappedEventOccurrence
+*/
 std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence > CS_EventOccurrenceImpl::getWrappedEventOccurrence() const
 {
 
     return m_wrappedEventOccurrence;
 }
+
 void CS_EventOccurrenceImpl::setWrappedEventOccurrence(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> _wrappedEventOccurrence)
 {
     m_wrappedEventOccurrence = _wrappedEventOccurrence;
 }
 
+
+
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<CS_EventOccurrence> CS_EventOccurrenceImpl::getThisCS_EventOccurrencePtr() const

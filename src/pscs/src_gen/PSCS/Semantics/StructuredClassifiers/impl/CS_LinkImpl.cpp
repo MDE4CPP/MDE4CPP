@@ -62,17 +62,7 @@ using namespace PSCS::Semantics::StructuredClassifiers;
 // Constructor / Destructor
 //*********************************
 CS_LinkImpl::CS_LinkImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 CS_LinkImpl::~CS_LinkImpl()
@@ -81,7 +71,6 @@ CS_LinkImpl::~CS_LinkImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete CS_Link "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -173,6 +162,7 @@ bool CS_LinkImpl::hasValueForAFeature(std::shared_ptr<fUML::Semantics::Values::V
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<CS_Link> CS_LinkImpl::getThisCS_LinkPtr() const

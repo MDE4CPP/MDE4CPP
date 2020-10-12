@@ -71,8 +71,7 @@ namespace fUML::Semantics::StructuredClassifiers
 //*********************************
 namespace PSCS::Semantics::Loci 
 {
-	/*!
-	 */
+	
 	class CS_Executor:virtual public fUML::Semantics::Loci::Executor
 	{
 		public:
@@ -92,8 +91,7 @@ namespace PSCS::Semantics::Loci
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> start(std::shared_ptr<uml::Class>  type,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> >  inputs) = 0;
 			
 			

@@ -68,19 +68,7 @@ using namespace PSCS::Semantics::StructuredClassifiers;
 // Constructor / Destructor
 //*********************************
 CS_ReferenceImpl::CS_ReferenceImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	//Init references
-	
+{	
 }
 
 CS_ReferenceImpl::~CS_ReferenceImpl()
@@ -89,7 +77,6 @@ CS_ReferenceImpl::~CS_ReferenceImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete CS_Reference "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -225,19 +212,26 @@ void CS_ReferenceImpl::sendOut(std::shared_ptr<fUML::Semantics::CommonBehavior::
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference compositeReferent
+*/
 std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object > CS_ReferenceImpl::getCompositeReferent() const
 {
 //assert(m_compositeReferent);
     return m_compositeReferent;
 }
+
 void CS_ReferenceImpl::setCompositeReferent(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object> _compositeReferent)
 {
     m_compositeReferent = _compositeReferent;
 }
 
+
+
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<CS_Reference> CS_ReferenceImpl::getThisCS_ReferencePtr() const

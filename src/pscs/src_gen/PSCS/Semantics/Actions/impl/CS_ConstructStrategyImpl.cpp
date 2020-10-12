@@ -57,17 +57,7 @@ using namespace PSCS::Semantics::Actions;
 // Constructor / Destructor
 //*********************************
 CS_ConstructStrategyImpl::CS_ConstructStrategyImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 CS_ConstructStrategyImpl::~CS_ConstructStrategyImpl()
@@ -76,7 +66,6 @@ CS_ConstructStrategyImpl::~CS_ConstructStrategyImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete CS_ConstructStrategy "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -136,6 +125,7 @@ std::string CS_ConstructStrategyImpl::getName()
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<CS_ConstructStrategy> CS_ConstructStrategyImpl::getThisCS_ConstructStrategyPtr() const

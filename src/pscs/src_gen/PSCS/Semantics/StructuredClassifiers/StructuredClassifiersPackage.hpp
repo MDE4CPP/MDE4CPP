@@ -42,8 +42,7 @@ namespace PSCS::Semantics::StructuredClassifiers
 	The Metamodel Package for the StructuredClassifiers metamodel. This package is used to enable the reflection of model elements. It contains all model elements
 	which were described in an ecore file.
 	*/
-	/*!
-	 */
+	
 	class StructuredClassifiersPackage : virtual public ecore::EPackage 
 	{
 		private:    
@@ -61,7 +60,7 @@ namespace PSCS::Semantics::StructuredClassifiers
 
 			// Begin Class CS_DefaultRequestPropagationStrategy
 			//Class and Feature IDs 
-			static const unsigned int CS_DEFAULTREQUESTPROPAGATIONSTRATEGY_CLASS = 11;
+			static const unsigned long CS_DEFAULTREQUESTPROPAGATIONSTRATEGY_CLASS = 114292004;
 			static const unsigned int CS_DEFAULTREQUESTPROPAGATIONSTRATEGY_CLASS_FEATURE_COUNT = 0;
 			static const unsigned int CS_DEFAULTREQUESTPROPAGATIONSTRATEGY_CLASS_OPERATION_COUNT = 4;
 			
@@ -80,7 +79,7 @@ namespace PSCS::Semantics::StructuredClassifiers
 
 			// Begin Class CS_DispatchOperationOfInterfaceStrategy
 			//Class and Feature IDs 
-			static const unsigned int CS_DISPATCHOPERATIONOFINTERFACESTRATEGY_CLASS = 12;
+			static const unsigned long CS_DISPATCHOPERATIONOFINTERFACESTRATEGY_CLASS = 732334652;
 			static const unsigned int CS_DISPATCHOPERATIONOFINTERFACESTRATEGY_CLASS_FEATURE_COUNT = 0;
 			static const unsigned int CS_DISPATCHOPERATIONOFINTERFACESTRATEGY_CLASS_OPERATION_COUNT = 7;
 			
@@ -99,7 +98,7 @@ namespace PSCS::Semantics::StructuredClassifiers
 
 			// Begin Class CS_InteractionPoint
 			//Class and Feature IDs 
-			static const unsigned int CS_INTERACTIONPOINT_CLASS = 17;
+			static const unsigned long CS_INTERACTIONPOINT_CLASS = 314391515;
 			static const unsigned int CS_INTERACTIONPOINT_CLASS_FEATURE_COUNT = 3;
 			static const unsigned int CS_INTERACTIONPOINT_CLASS_OPERATION_COUNT = 38;
 			
@@ -128,7 +127,7 @@ namespace PSCS::Semantics::StructuredClassifiers
 
 			// Begin Class CS_Link
 			//Class and Feature IDs 
-			static const unsigned int CS_LINK_CLASS = 18;
+			static const unsigned long CS_LINK_CLASS = 225228270;
 			static const unsigned int CS_LINK_CLASS_FEATURE_COUNT = 3;
 			static const unsigned int CS_LINK_CLASS_OPERATION_COUNT = 34;
 			
@@ -149,7 +148,7 @@ namespace PSCS::Semantics::StructuredClassifiers
 
 			// Begin Class CS_NameBased_StructuralFeatureOfInterfaceAccessStrategy
 			//Class and Feature IDs 
-			static const unsigned int CS_NAMEBASED_STRUCTURALFEATUREOFINTERFACEACCESSSTRATEGY_CLASS = 21;
+			static const unsigned long CS_NAMEBASED_STRUCTURALFEATUREOFINTERFACEACCESSSTRATEGY_CLASS = 1596515744;
 			static const unsigned int CS_NAMEBASED_STRUCTURALFEATUREOFINTERFACEACCESSSTRATEGY_CLASS_FEATURE_COUNT = 0;
 			static const unsigned int CS_NAMEBASED_STRUCTURALFEATUREOFINTERFACEACCESSSTRATEGY_CLASS_OPERATION_COUNT = 6;
 			
@@ -170,7 +169,7 @@ namespace PSCS::Semantics::StructuredClassifiers
 
 			// Begin Class CS_Object
 			//Class and Feature IDs 
-			static const unsigned int CS_OBJECT_CLASS = 22;
+			static const unsigned long CS_OBJECT_CLASS = 1305137753;
 			static const unsigned int CS_OBJECT_CLASS_FEATURE_COUNT = 4;
 			static const unsigned int CS_OBJECT_CLASS_OPERATION_COUNT = 59;
 			
@@ -233,7 +232,7 @@ namespace PSCS::Semantics::StructuredClassifiers
 
 			// Begin Class CS_Reference
 			//Class and Feature IDs 
-			static const unsigned int CS_REFERENCE_CLASS = 26;
+			static const unsigned long CS_REFERENCE_CLASS = 1875601966;
 			static const unsigned int CS_REFERENCE_CLASS_FEATURE_COUNT = 2;
 			static const unsigned int CS_REFERENCE_CLASS_OPERATION_COUNT = 44;
 			
@@ -272,7 +271,7 @@ namespace PSCS::Semantics::StructuredClassifiers
 
 			// Begin Class CS_RequestPropagationStrategy
 			//Class and Feature IDs 
-			static const unsigned int CS_REQUESTPROPAGATIONSTRATEGY_CLASS = 28;
+			static const unsigned long CS_REQUESTPROPAGATIONSTRATEGY_CLASS = 1044958815;
 			static const unsigned int CS_REQUESTPROPAGATIONSTRATEGY_CLASS_FEATURE_COUNT = 0;
 			static const unsigned int CS_REQUESTPROPAGATIONSTRATEGY_CLASS_OPERATION_COUNT = 3;
 			
@@ -293,7 +292,7 @@ namespace PSCS::Semantics::StructuredClassifiers
 
 			// Begin Class CS_StructuralFeatureOfInterfaceAccessStrategy
 			//Class and Feature IDs 
-			static const unsigned int CS_STRUCTURALFEATUREOFINTERFACEACCESSSTRATEGY_CLASS = 30;
+			static const unsigned long CS_STRUCTURALFEATUREOFINTERFACEACCESSSTRATEGY_CLASS = 1746875136;
 			static const unsigned int CS_STRUCTURALFEATUREOFINTERFACEACCESSSTRATEGY_CLASS_FEATURE_COUNT = 0;
 			static const unsigned int CS_STRUCTURALFEATUREOFINTERFACEACCESSSTRATEGY_CLASS_OPERATION_COUNT = 4;
 			

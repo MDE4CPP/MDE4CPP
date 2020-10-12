@@ -44,11 +44,15 @@
 
 #include <exception> // used in Persistence
 
+#include "uml/Action.hpp"
+
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 
 #include "uml/ActivityNode.hpp"
 
 #include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
+
+#include "uml/CreateObjectAction.hpp"
 
 #include "fUML/Semantics/Actions/CreateObjectActionActivation.hpp"
 
@@ -78,17 +82,7 @@ using namespace PSCS::Semantics::Actions;
 // Constructor / Destructor
 //*********************************
 CS_CreateObjectActionActivationImpl::CS_CreateObjectActionActivationImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 CS_CreateObjectActionActivationImpl::~CS_CreateObjectActionActivationImpl()
@@ -98,14 +92,12 @@ CS_CreateObjectActionActivationImpl::~CS_CreateObjectActionActivationImpl()
 #endif
 }
 
-
 //Additional constructor for the containments back reference
-			CS_CreateObjectActionActivationImpl::CS_CreateObjectActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
-			:CS_CreateObjectActionActivationImpl()
-			{
-			    m_group = par_group;
-			}
-
+CS_CreateObjectActionActivationImpl::CS_CreateObjectActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
+:CS_CreateObjectActionActivationImpl()
+{
+	m_group = par_group;
+}
 
 
 CS_CreateObjectActionActivationImpl::CS_CreateObjectActionActivationImpl(const CS_CreateObjectActionActivationImpl & obj):CS_CreateObjectActionActivationImpl()
@@ -119,6 +111,10 @@ CS_CreateObjectActionActivationImpl::CS_CreateObjectActionActivationImpl(const C
 
 	//copy references with no containment (soft copy)
 	
+	m_action  = obj.getAction();
+
+	m_createObjectAction  = obj.getCreateObjectAction();
+
 	m_group  = obj.getGroup();
 
 	std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> _incomingEdges = obj.getIncomingEdges();
@@ -195,7 +191,7 @@ void CS_CreateObjectActionActivationImpl::doAction()
 	// to produce a CS_Object instead of an Object in the case where the class
 	// to be instantiated is not a behavior
 
-	std::shared_ptr<uml::CreateObjectAction> action = std::dynamic_pointer_cast<uml::CreateObjectAction>(this->getNode());
+	std::shared_ptr<uml::CreateObjectAction> action = this->getCreateObjectAction();
 	
 	std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> reference;
 	std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> referent = this->getExecutionLocus()->instantiate(std::dynamic_pointer_cast<uml::Class>(action->getClassifier()));
@@ -222,8 +218,20 @@ void CS_CreateObjectActionActivationImpl::doAction()
 //*********************************
 std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> CS_CreateObjectActionActivationImpl::getPinActivation() const
 {
+	if(m_pinActivation == nullptr)
+	{
+		/*Union*/
+		m_pinActivation.reset(new Union<fUML::Semantics::Actions::PinActivation>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_pinActivation - Union<fUML::Semantics::Actions::PinActivation>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_pinActivation;
 }
+
+
 
 
 std::shared_ptr<CS_CreateObjectActionActivation> CS_CreateObjectActionActivationImpl::getThisCS_CreateObjectActionActivationPtr() const

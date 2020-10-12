@@ -61,8 +61,7 @@ namespace fUML::Semantics::Loci
 //*********************************
 namespace PSCS::Semantics::StructuredClassifiers 
 {
-	/*!
-	 */
+	
 	class CS_RequestPropagationStrategy:virtual public fUML::Semantics::Loci::SemanticStrategy
 	{
 		public:
@@ -82,12 +81,10 @@ namespace PSCS::Semantics::StructuredClassifiers
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual std::string getName() = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference> > select(std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference> >  potentialTargets,std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>  context) = 0;
 			
 			

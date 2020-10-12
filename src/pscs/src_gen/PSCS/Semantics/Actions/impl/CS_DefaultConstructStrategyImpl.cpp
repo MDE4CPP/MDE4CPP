@@ -92,30 +92,7 @@ using namespace PSCS::Semantics::Actions;
 // Constructor / Destructor
 //*********************************
 CS_DefaultConstructStrategyImpl::CS_DefaultConstructStrategyImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-		m_generatedRealizingClasses.reset(new Bag<uml::Class>());
-	
-	
-
-	
-
-	//Init references
-	
-
-	
-	
-
-	
+{	
 }
 
 CS_DefaultConstructStrategyImpl::~CS_DefaultConstructStrategyImpl()
@@ -124,7 +101,6 @@ CS_DefaultConstructStrategyImpl::~CS_DefaultConstructStrategyImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete CS_DefaultConstructStrategy "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -160,7 +136,6 @@ CS_DefaultConstructStrategyImpl::CS_DefaultConstructStrategyImpl(const CS_Defaul
 
 	
 
-	
 	
 }
 
@@ -599,36 +574,61 @@ bool CS_DefaultConstructStrategyImpl::isStarPattern(std::shared_ptr<uml::Connect
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference defaultAssociation
+*/
 std::shared_ptr<uml::Association > CS_DefaultConstructStrategyImpl::getDefaultAssociation() const
 {
 //assert(m_defaultAssociation);
     return m_defaultAssociation;
 }
+
 void CS_DefaultConstructStrategyImpl::setDefaultAssociation(std::shared_ptr<uml::Association> _defaultAssociation)
 {
     m_defaultAssociation = _defaultAssociation;
 }
 
+
+
+/*
+Getter & Setter for reference generatedRealizingClasses
+*/
 std::shared_ptr<Bag<uml::Class>> CS_DefaultConstructStrategyImpl::getGeneratedRealizingClasses() const
 {
+	if(m_generatedRealizingClasses == nullptr)
+	{
+		m_generatedRealizingClasses.reset(new Bag<uml::Class>());
+		
+		
+	}
 
     return m_generatedRealizingClasses;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference locus
+*/
 std::shared_ptr<fUML::Semantics::Loci::Locus > CS_DefaultConstructStrategyImpl::getLocus() const
 {
 //assert(m_locus);
     return m_locus;
 }
+
 void CS_DefaultConstructStrategyImpl::setLocus(std::shared_ptr<fUML::Semantics::Loci::Locus> _locus)
 {
     m_locus = _locus;
 }
 
+
+
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<CS_DefaultConstructStrategy> CS_DefaultConstructStrategyImpl::getThisCS_DefaultConstructStrategyPtr() const
