@@ -8247,7 +8247,7 @@
       <eAnnotations source="subsets" references="#//TemplateSignature/parameter"/>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="classifier" ordered="false"
-        lowerBound="1" eType="#//Classifier" changeable="false" volatile="true" transient="true">
+        lowerBound="1" eType="#//Classifier" volatile="true" transient="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The Classifier that owns this RedefinableTemplateSignature.&#xA;&lt;p>From package UML::Classification.&lt;/p>"/>
       </eAnnotations>
@@ -13364,7 +13364,7 @@
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The request object, which is transmitted to the target object. The object may be copied in transmission, so identity might not be preserved.&#xA;&lt;p>From package UML::Actions.&lt;/p>"/>
       </eAnnotations>
-      <eAnnotations source="redefines" references="#//InvocationAction/argument"/>
+      <eAnnotations source="subsets" references="#//InvocationAction/argument"/>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="target" ordered="false"
         lowerBound="1" eType="#//InputPin" containment="true">

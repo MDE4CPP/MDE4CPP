@@ -221,13 +221,43 @@ bool RedefinableTemplateSignatureImpl::redefines_parents(Any diagnostics,std::ma
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference classifier
+*/
 std::shared_ptr<uml::Classifier > RedefinableTemplateSignatureImpl::getClassifier() const
 {
 //assert(m_classifier);
     return m_classifier;
 }
 
+void RedefinableTemplateSignatureImpl::setClassifier(std::shared_ptr<uml::Classifier> _classifier)
+{
+    m_classifier = _classifier;
+	//additional setter call for redefined reference TemplateSignature::template
+	uml::TemplateSignatureImpl::setTemplate(_classifier);
+}
 
+/*Additional Setter for redefined reference 'TemplateSignature::template'*/
+void RedefinableTemplateSignatureImpl::setTemplate(std::shared_ptr<uml::TemplateableElement> _template)
+{
+	std::shared_ptr<uml::Classifier> _classifier = std::dynamic_pointer_cast<uml::Classifier>(_template);
+	if(_classifier)
+	{
+		m_classifier = _classifier;
+
+		//additional setter call for redefined reference TemplateSignature::template
+		uml::TemplateSignatureImpl::setTemplate(_template);
+	}
+	else
+	{
+		std::cerr<<"[RedefinableTemplateSignature::setTemplate] : Could not set template because provided template was not of type 'uml::Classifier'"<<std::endl;
+	}
+}
+
+
+/*
+Getter & Setter for reference extendedSignature
+*/
 std::shared_ptr<Subset<uml::RedefinableTemplateSignature, uml::RedefinableElement>> RedefinableTemplateSignatureImpl::getExtendedSignature() const
 {
 	if(m_extendedSignature == nullptr)
@@ -250,6 +280,12 @@ std::shared_ptr<Subset<uml::RedefinableTemplateSignature, uml::RedefinableElemen
 }
 
 
+
+
+
+/*
+Getter & Setter for reference inheritedParameter
+*/
 std::shared_ptr<Subset<uml::TemplateParameter, uml::TemplateParameter>> RedefinableTemplateSignatureImpl::getInheritedParameter() const
 {
 	if(m_inheritedParameter == nullptr)
@@ -270,6 +306,9 @@ std::shared_ptr<Subset<uml::TemplateParameter, uml::TemplateParameter>> Redefina
 
     return m_inheritedParameter;
 }
+
+
+
 
 
 //*********************************
@@ -439,6 +478,14 @@ bool RedefinableTemplateSignatureImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
+		case uml::UmlPackage::REDEFINABLETEMPLATESIGNATURE_ATTRIBUTE_CLASSIFIER:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Classifier> _classifier = std::dynamic_pointer_cast<uml::Classifier>(_temp);
+			setClassifier(_classifier); //20617
+			return true;
+		}
 		case uml::UmlPackage::REDEFINABLETEMPLATESIGNATURE_ATTRIBUTE_EXTENDEDSIGNATURE:
 		{
 			// BOOST CAST
@@ -512,6 +559,13 @@ void RedefinableTemplateSignatureImpl::loadAttributes(std::shared_ptr<persistenc
 	{
 		std::map<std::string, std::string>::const_iterator iter;
 		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("classifier");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("classifier")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+
 		iter = attr_list.find("extendedSignature");
 		if ( iter != attr_list.end() )
 		{
@@ -545,6 +599,18 @@ void RedefinableTemplateSignatureImpl::resolveReferences(const int featureID, st
 {
 	switch(featureID)
 	{
+		case uml::UmlPackage::REDEFINABLETEMPLATESIGNATURE_ATTRIBUTE_CLASSIFIER:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::Classifier> _classifier = std::dynamic_pointer_cast<uml::Classifier>( references.front() );
+				setClassifier(_classifier);
+			}
+			
+			return;
+		}
+
 		case uml::UmlPackage::REDEFINABLETEMPLATESIGNATURE_ATTRIBUTE_EXTENDEDSIGNATURE:
 		{
 			std::shared_ptr<Bag<uml::RedefinableTemplateSignature>> _extendedSignature = getExtendedSignature();
@@ -592,6 +658,7 @@ void RedefinableTemplateSignatureImpl::saveContent(std::shared_ptr<persistence::
 	
 
 		// Add references
+		saveHandler->addReference("classifier", this->getClassifier());
 		std::shared_ptr<Bag<uml::RedefinableTemplateSignature>> extendedSignature_list = this->getExtendedSignature();
 		for (std::shared_ptr<uml::RedefinableTemplateSignature > object : *extendedSignature_list)
 		{ 

@@ -148,26 +148,41 @@ std::shared_ptr<ecore::EClass> SlotImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference definingFeature
+*/
 std::shared_ptr<uml::StructuralFeature > SlotImpl::getDefiningFeature() const
 {
 //assert(m_definingFeature);
     return m_definingFeature;
 }
+
 void SlotImpl::setDefiningFeature(std::shared_ptr<uml::StructuralFeature> _definingFeature)
 {
     m_definingFeature = _definingFeature;
 }
 
+
+
+/*
+Getter & Setter for reference owningInstance
+*/
 std::weak_ptr<uml::InstanceSpecification > SlotImpl::getOwningInstance() const
 {
 //assert(m_owningInstance);
     return m_owningInstance;
 }
+
 void SlotImpl::setOwningInstance(std::shared_ptr<uml::InstanceSpecification> _owningInstance)
 {
     m_owningInstance = _owningInstance;
 }
 
+
+
+/*
+Getter & Setter for reference value
+*/
 std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>> SlotImpl::getValue() const
 {
 	if(m_value == nullptr)
@@ -188,6 +203,9 @@ std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>> SlotImpl::getValu
 
     return m_value;
 }
+
+
+
 
 
 //*********************************

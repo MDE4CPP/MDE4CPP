@@ -55,14 +55,11 @@ namespace ecore
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual bool isSerializable() const ;
 			
-			/*!
-			 */ 
+			 
 			virtual void setSerializable (bool _serializable); 
-			
 			
 			
 			//*********************************
@@ -73,8 +70,7 @@ namespace ecore
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const ; 
 			 
 			//*********************************

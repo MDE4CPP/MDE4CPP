@@ -233,23 +233,35 @@ std::shared_ptr<ecore::EClass> ObjectFlowImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
+/*
+Getter & Setter for attribute isMulticast
+*/
+bool ObjectFlowImpl::getIsMulticast() const 
+{
+	return m_isMulticast;
+}
+
 void ObjectFlowImpl::setIsMulticast(bool _isMulticast)
 {
 	m_isMulticast = _isMulticast;
 } 
-bool ObjectFlowImpl::getIsMulticast() const 
+
+
+
+/*
+Getter & Setter for attribute isMultireceive
+*/
+bool ObjectFlowImpl::getIsMultireceive() const 
 {
-	return m_isMulticast;
+	return m_isMultireceive;
 }
 
 void ObjectFlowImpl::setIsMultireceive(bool _isMultireceive)
 {
 	m_isMultireceive = _isMultireceive;
 } 
-bool ObjectFlowImpl::getIsMultireceive() const 
-{
-	return m_isMultireceive;
-}
+
+
 
 //*********************************
 // Operations
@@ -305,25 +317,37 @@ bool ObjectFlowImpl::transformation_behavior(Any diagnostics,std::map <   Any, A
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference selection
+*/
 std::shared_ptr<uml::Behavior > ObjectFlowImpl::getSelection() const
 {
 
     return m_selection;
 }
+
 void ObjectFlowImpl::setSelection(std::shared_ptr<uml::Behavior> _selection)
 {
     m_selection = _selection;
 }
 
+
+
+/*
+Getter & Setter for reference transformation
+*/
 std::shared_ptr<uml::Behavior > ObjectFlowImpl::getTransformation() const
 {
 
     return m_transformation;
 }
+
 void ObjectFlowImpl::setTransformation(std::shared_ptr<uml::Behavior> _transformation)
 {
     m_transformation = _transformation;
 }
+
+
 
 //*********************************
 // Union Getter

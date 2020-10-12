@@ -382,6 +382,9 @@ std::shared_ptr<Bag<uml::Port> > EncapsulatedClassifierImpl::getOwnedPorts()
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference ownedPort
+*/
 std::shared_ptr<Subset<uml::Port, uml::Property /*Subset does not reference a union*/>> EncapsulatedClassifierImpl::getOwnedPort() const
 {
 	if(m_ownedPort == nullptr)
@@ -402,6 +405,9 @@ std::shared_ptr<Subset<uml::Port, uml::Property /*Subset does not reference a un
 
     return m_ownedPort;
 }
+
+
+
 
 
 //*********************************

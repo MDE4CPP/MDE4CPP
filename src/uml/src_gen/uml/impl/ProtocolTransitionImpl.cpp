@@ -299,26 +299,41 @@ bool ProtocolTransitionImpl::refers_to_operation(Any diagnostics,std::map <   An
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference postCondition
+*/
 std::shared_ptr<uml::Constraint > ProtocolTransitionImpl::getPostCondition() const
 {
 
     return m_postCondition;
 }
+
 void ProtocolTransitionImpl::setPostCondition(std::shared_ptr<uml::Constraint> _postCondition)
 {
     m_postCondition = _postCondition;
 }
 
+
+
+/*
+Getter & Setter for reference preCondition
+*/
 std::shared_ptr<uml::Constraint > ProtocolTransitionImpl::getPreCondition() const
 {
 
     return m_preCondition;
 }
+
 void ProtocolTransitionImpl::setPreCondition(std::shared_ptr<uml::Constraint> _preCondition)
 {
     m_preCondition = _preCondition;
 }
 
+
+
+/*
+Getter & Setter for reference referred
+*/
 std::shared_ptr<Bag<uml::Operation>> ProtocolTransitionImpl::getReferred() const
 {
 	if(m_referred == nullptr)
@@ -330,6 +345,9 @@ std::shared_ptr<Bag<uml::Operation>> ProtocolTransitionImpl::getReferred() const
 
     return m_referred;
 }
+
+
+
 
 
 //*********************************

@@ -330,35 +330,53 @@ bool ReadLinkObjectEndQualifierActionImpl::type_of_object(Any diagnostics,std::m
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference object
+*/
 std::shared_ptr<uml::InputPin > ReadLinkObjectEndQualifierActionImpl::getObject() const
 {
 //assert(m_object);
     return m_object;
 }
+
 void ReadLinkObjectEndQualifierActionImpl::setObject(std::shared_ptr<uml::InputPin> _object)
 {
     m_object = _object;
 }
 
+
+
+/*
+Getter & Setter for reference qualifier
+*/
 std::shared_ptr<uml::Property > ReadLinkObjectEndQualifierActionImpl::getQualifier() const
 {
 //assert(m_qualifier);
     return m_qualifier;
 }
+
 void ReadLinkObjectEndQualifierActionImpl::setQualifier(std::shared_ptr<uml::Property> _qualifier)
 {
     m_qualifier = _qualifier;
 }
 
+
+
+/*
+Getter & Setter for reference result
+*/
 std::shared_ptr<uml::OutputPin > ReadLinkObjectEndQualifierActionImpl::getResult() const
 {
 //assert(m_result);
     return m_result;
 }
+
 void ReadLinkObjectEndQualifierActionImpl::setResult(std::shared_ptr<uml::OutputPin> _result)
 {
     m_result = _result;
 }
+
+
 
 //*********************************
 // Union Getter

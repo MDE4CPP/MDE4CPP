@@ -197,15 +197,21 @@ std::shared_ptr<ecore::EClass> ExecutionOccurrenceSpecificationImpl::eStaticClas
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference execution
+*/
 std::shared_ptr<uml::ExecutionSpecification > ExecutionOccurrenceSpecificationImpl::getExecution() const
 {
 //assert(m_execution);
     return m_execution;
 }
+
 void ExecutionOccurrenceSpecificationImpl::setExecution(std::shared_ptr<uml::ExecutionSpecification> _execution)
 {
     m_execution = _execution;
 }
+
+
 
 //*********************************
 // Union Getter

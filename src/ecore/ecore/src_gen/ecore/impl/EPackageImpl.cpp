@@ -155,23 +155,35 @@ std::shared_ptr<EClass> EPackageImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
+/*
+Getter & Setter for attribute nsPrefix
+*/
+std::string EPackageImpl::getNsPrefix() const 
+{
+	return m_nsPrefix;
+}
+
 void EPackageImpl::setNsPrefix(std::string _nsPrefix)
 {
 	m_nsPrefix = _nsPrefix;
 } 
-std::string EPackageImpl::getNsPrefix() const 
+
+
+
+/*
+Getter & Setter for attribute nsURI
+*/
+std::string EPackageImpl::getNsURI() const 
 {
-	return m_nsPrefix;
+	return m_nsURI;
 }
 
 void EPackageImpl::setNsURI(std::string _nsURI)
 {
 	m_nsURI = _nsURI;
 } 
-std::string EPackageImpl::getNsURI() const 
-{
-	return m_nsURI;
-}
+
+
 
 //*********************************
 // Operations
@@ -195,6 +207,9 @@ std::shared_ptr<ecore::EClassifier> EPackageImpl::getEClassifier(std::string nam
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference eClassifiers
+*/
 std::shared_ptr<Subset<ecore::EClassifier, ecore::EObject>> EPackageImpl::getEClassifiers() const
 {
 	if(m_eClassifiers == nullptr)
@@ -217,16 +232,28 @@ std::shared_ptr<Subset<ecore::EClassifier, ecore::EObject>> EPackageImpl::getECl
 }
 
 
+
+
+
+/*
+Getter & Setter for reference eFactoryInstance
+*/
 std::shared_ptr<ecore::EFactory > EPackageImpl::getEFactoryInstance() const
 {
 //assert(m_eFactoryInstance);
     return m_eFactoryInstance;
 }
+
 void EPackageImpl::setEFactoryInstance(std::shared_ptr<ecore::EFactory> _eFactoryInstance)
 {
     m_eFactoryInstance = _eFactoryInstance;
 }
 
+
+
+/*
+Getter & Setter for reference eSubpackages
+*/
 std::shared_ptr<Bag<ecore::EPackage>> EPackageImpl::getESubpackages() const
 {
 	if(m_eSubpackages == nullptr)
@@ -240,11 +267,20 @@ std::shared_ptr<Bag<ecore::EPackage>> EPackageImpl::getESubpackages() const
 }
 
 
+
+
+
+/*
+Getter & Setter for reference eSuperPackage
+*/
 std::weak_ptr<ecore::EPackage > EPackageImpl::getESuperPackage() const
 {
 
     return m_eSuperPackage;
 }
+
+
+
 
 
 //*********************************

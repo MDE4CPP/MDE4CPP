@@ -305,15 +305,21 @@ bool CreateLinkObjectActionImpl::type_of_result(Any diagnostics,std::map <   Any
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference result
+*/
 std::shared_ptr<uml::OutputPin > CreateLinkObjectActionImpl::getResult() const
 {
 //assert(m_result);
     return m_result;
 }
+
 void CreateLinkObjectActionImpl::setResult(std::shared_ptr<uml::OutputPin> _result)
 {
     m_result = _result;
 }
+
+
 
 //*********************************
 // Union Getter

@@ -386,6 +386,9 @@ std::shared_ptr<uml::Operation> DataTypeImpl::createOwnedOperation(std::string n
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference ownedAttribute
+*/
 std::shared_ptr<Subset<uml::Property, uml::Property,uml::NamedElement>> DataTypeImpl::getOwnedAttribute() const
 {
 	if(m_ownedAttribute == nullptr)
@@ -408,6 +411,12 @@ std::shared_ptr<Subset<uml::Property, uml::Property,uml::NamedElement>> DataType
 }
 
 
+
+
+
+/*
+Getter & Setter for reference ownedOperation
+*/
 std::shared_ptr<Subset<uml::Operation, uml::Feature,uml::NamedElement>> DataTypeImpl::getOwnedOperation() const
 {
 	if(m_ownedOperation == nullptr)
@@ -428,6 +437,9 @@ std::shared_ptr<Subset<uml::Operation, uml::Feature,uml::NamedElement>> DataType
 
     return m_ownedOperation;
 }
+
+
+
 
 
 //*********************************

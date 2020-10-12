@@ -156,16 +156,25 @@ std::shared_ptr<Bag<uml::ParameterableElement> > TemplateableElementImpl::parame
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference ownedTemplateSignature
+*/
 std::shared_ptr<uml::TemplateSignature > TemplateableElementImpl::getOwnedTemplateSignature() const
 {
 
     return m_ownedTemplateSignature;
 }
+
 void TemplateableElementImpl::setOwnedTemplateSignature(std::shared_ptr<uml::TemplateSignature> _ownedTemplateSignature)
 {
     m_ownedTemplateSignature = _ownedTemplateSignature;
 }
 
+
+
+/*
+Getter & Setter for reference templateBinding
+*/
 std::shared_ptr<Subset<uml::TemplateBinding, uml::Element>> TemplateableElementImpl::getTemplateBinding() const
 {
 	if(m_templateBinding == nullptr)
@@ -186,6 +195,9 @@ std::shared_ptr<Subset<uml::TemplateBinding, uml::Element>> TemplateableElementI
 
     return m_templateBinding;
 }
+
+
+
 
 
 //*********************************

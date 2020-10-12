@@ -381,14 +381,20 @@ std::shared_ptr<ecore::EClass> AssociationImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
-void AssociationImpl::setIsDerived(bool _isDerived)
-{
-	m_isDerived = _isDerived;
-} 
+/*
+Getter & Setter for attribute isDerived
+*/
 bool AssociationImpl::getIsDerived() const 
 {
 	return m_isDerived;
 }
+
+void AssociationImpl::setIsDerived(bool _isDerived)
+{
+	m_isDerived = _isDerived;
+} 
+
+
 
 //*********************************
 // Operations
@@ -438,6 +444,9 @@ bool AssociationImpl::specialized_end_types(Any diagnostics,std::map <   Any, An
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference endType
+*/
 std::shared_ptr<Subset<uml::Type, uml::Element>> AssociationImpl::getEndType() const
 {
 	if(m_endType == nullptr)
@@ -460,6 +469,12 @@ std::shared_ptr<Subset<uml::Type, uml::Element>> AssociationImpl::getEndType() c
 }
 
 
+
+
+
+/*
+Getter & Setter for reference memberEnd
+*/
 std::shared_ptr<SubsetUnion<uml::Property, uml::NamedElement>> AssociationImpl::getMemberEnd() const
 {
 	if(m_memberEnd == nullptr)
@@ -482,6 +497,12 @@ std::shared_ptr<SubsetUnion<uml::Property, uml::NamedElement>> AssociationImpl::
 }
 
 
+
+
+
+/*
+Getter & Setter for reference navigableOwnedEnd
+*/
 std::shared_ptr<Subset<uml::Property, uml::Property /*Subset does not reference a union*/>> AssociationImpl::getNavigableOwnedEnd() const
 {
 	if(m_navigableOwnedEnd == nullptr)
@@ -504,6 +525,12 @@ std::shared_ptr<Subset<uml::Property, uml::Property /*Subset does not reference 
 }
 
 
+
+
+
+/*
+Getter & Setter for reference ownedEnd
+*/
 std::shared_ptr<SubsetUnion<uml::Property, uml::Property /*Subset does not reference a union*/,uml::Feature,uml::NamedElement>> AssociationImpl::getOwnedEnd() const
 {
 	if(m_ownedEnd == nullptr)
@@ -524,6 +551,9 @@ std::shared_ptr<SubsetUnion<uml::Property, uml::Property /*Subset does not refer
 
     return m_ownedEnd;
 }
+
+
+
 
 
 //*********************************

@@ -313,25 +313,37 @@ bool WriteStructuralFeatureActionImpl::type_of_value(Any diagnostics,std::map < 
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference result
+*/
 std::shared_ptr<uml::OutputPin > WriteStructuralFeatureActionImpl::getResult() const
 {
 
     return m_result;
 }
+
 void WriteStructuralFeatureActionImpl::setResult(std::shared_ptr<uml::OutputPin> _result)
 {
     m_result = _result;
 }
 
+
+
+/*
+Getter & Setter for reference value
+*/
 std::shared_ptr<uml::InputPin > WriteStructuralFeatureActionImpl::getValue() const
 {
 
     return m_value;
 }
+
 void WriteStructuralFeatureActionImpl::setValue(std::shared_ptr<uml::InputPin> _value)
 {
     m_value = _value;
 }
+
+
 
 //*********************************
 // Union Getter

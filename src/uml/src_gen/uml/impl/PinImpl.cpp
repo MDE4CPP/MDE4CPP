@@ -264,14 +264,20 @@ std::shared_ptr<ecore::EClass> PinImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
-void PinImpl::setIsControl(bool _isControl)
-{
-	m_isControl = _isControl;
-} 
+/*
+Getter & Setter for attribute isControl
+*/
 bool PinImpl::getIsControl() const 
 {
 	return m_isControl;
 }
+
+void PinImpl::setIsControl(bool _isControl)
+{
+	m_isControl = _isControl;
+} 
+
+
 
 //*********************************
 // Operations

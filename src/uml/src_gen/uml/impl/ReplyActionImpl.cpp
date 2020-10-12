@@ -300,16 +300,25 @@ bool ReplyActionImpl::pins_match_parameter(Any diagnostics,std::map <   Any, Any
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference replyToCall
+*/
 std::shared_ptr<uml::Trigger > ReplyActionImpl::getReplyToCall() const
 {
 //assert(m_replyToCall);
     return m_replyToCall;
 }
+
 void ReplyActionImpl::setReplyToCall(std::shared_ptr<uml::Trigger> _replyToCall)
 {
     m_replyToCall = _replyToCall;
 }
 
+
+
+/*
+Getter & Setter for reference replyValue
+*/
 std::shared_ptr<Subset<uml::InputPin, uml::InputPin>> ReplyActionImpl::getReplyValue() const
 {
 	if(m_replyValue == nullptr)
@@ -332,15 +341,24 @@ std::shared_ptr<Subset<uml::InputPin, uml::InputPin>> ReplyActionImpl::getReplyV
 }
 
 
+
+
+
+/*
+Getter & Setter for reference returnInformation
+*/
 std::shared_ptr<uml::InputPin > ReplyActionImpl::getReturnInformation() const
 {
 //assert(m_returnInformation);
     return m_returnInformation;
 }
+
 void ReplyActionImpl::setReturnInformation(std::shared_ptr<uml::InputPin> _returnInformation)
 {
     m_returnInformation = _returnInformation;
 }
+
+
 
 //*********************************
 // Union Getter

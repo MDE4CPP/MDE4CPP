@@ -140,36 +140,57 @@ bool EGenericTypeImpl::isInstance(Any object) const
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference eClassifier
+*/
 std::shared_ptr<ecore::EClassifier > EGenericTypeImpl::getEClassifier() const
 {
 
     return m_eClassifier;
 }
+
 void EGenericTypeImpl::setEClassifier(std::shared_ptr<ecore::EClassifier> _eClassifier)
 {
     m_eClassifier = _eClassifier;
 }
 
+
+
+/*
+Getter & Setter for reference eLowerBound
+*/
 std::shared_ptr<ecore::EGenericType > EGenericTypeImpl::getELowerBound() const
 {
 
     return m_eLowerBound;
 }
+
 void EGenericTypeImpl::setELowerBound(std::shared_ptr<ecore::EGenericType> _eLowerBound)
 {
     m_eLowerBound = _eLowerBound;
 }
 
+
+
+/*
+Getter & Setter for reference eRawType
+*/
 std::shared_ptr<ecore::EClassifier > EGenericTypeImpl::getERawType() const
 {
 //assert(m_eRawType);
     return m_eRawType;
 }
+
 void EGenericTypeImpl::setERawType(std::shared_ptr<ecore::EClassifier> _eRawType)
 {
     m_eRawType = _eRawType;
 }
 
+
+
+/*
+Getter & Setter for reference eTypeArguments
+*/
 std::shared_ptr<Bag<ecore::EGenericType>> EGenericTypeImpl::getETypeArguments() const
 {
 	if(m_eTypeArguments == nullptr)
@@ -183,25 +204,40 @@ std::shared_ptr<Bag<ecore::EGenericType>> EGenericTypeImpl::getETypeArguments() 
 }
 
 
+
+
+
+/*
+Getter & Setter for reference eTypeParameter
+*/
 std::shared_ptr<ecore::ETypeParameter > EGenericTypeImpl::getETypeParameter() const
 {
 
     return m_eTypeParameter;
 }
+
 void EGenericTypeImpl::setETypeParameter(std::shared_ptr<ecore::ETypeParameter> _eTypeParameter)
 {
     m_eTypeParameter = _eTypeParameter;
 }
 
+
+
+/*
+Getter & Setter for reference eUpperBound
+*/
 std::shared_ptr<ecore::EGenericType > EGenericTypeImpl::getEUpperBound() const
 {
 
     return m_eUpperBound;
 }
+
 void EGenericTypeImpl::setEUpperBound(std::shared_ptr<ecore::EGenericType> _eUpperBound)
 {
     m_eUpperBound = _eUpperBound;
 }
+
+
 
 //*********************************
 // Union Getter

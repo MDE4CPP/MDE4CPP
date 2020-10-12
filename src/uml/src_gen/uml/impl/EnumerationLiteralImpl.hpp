@@ -64,8 +64,7 @@ namespace uml
 			//*********************************
 			
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<Bag<uml::Classifier> > getClassifiers() ;
 			
 			
@@ -79,28 +78,39 @@ namespace uml
 			// Reference
 			//*********************************
 			/*!
-			 The Enumeration that this EnumerationLiteral is a member of.
-			<p>From package UML::SimpleClassifiers.</p> */
+			The Enumeration that this EnumerationLiteral is a member of.
+			<p>From package UML::SimpleClassifiers.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Enumeration > getEnumeration() const ;
 			
 			/*!
-			 The Enumeration that this EnumerationLiteral is a member of.
-			<p>From package UML::SimpleClassifiers.</p> */
-			virtual void setEnumeration(std::shared_ptr<uml::Enumeration> _enumeration_enumeration) ;
+			The Enumeration that this EnumerationLiteral is a member of.
+			<p>From package UML::SimpleClassifiers.</p>
+			*/
+			
+			virtual void setEnumeration(std::shared_ptr<uml::Enumeration> _enumeration) ;
+			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************

@@ -244,23 +244,35 @@ std::shared_ptr<ecore::EClass> ObjectNodeImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
+/*
+Getter & Setter for attribute isControlType
+*/
+bool ObjectNodeImpl::getIsControlType() const 
+{
+	return m_isControlType;
+}
+
 void ObjectNodeImpl::setIsControlType(bool _isControlType)
 {
 	m_isControlType = _isControlType;
 } 
-bool ObjectNodeImpl::getIsControlType() const 
+
+
+
+/*
+Getter & Setter for attribute ordering
+*/
+uml::ObjectNodeOrderingKind ObjectNodeImpl::getOrdering() const 
 {
-	return m_isControlType;
+	return m_ordering;
 }
 
 void ObjectNodeImpl::setOrdering(uml::ObjectNodeOrderingKind _ordering)
 {
 	m_ordering = _ordering;
 } 
-uml::ObjectNodeOrderingKind ObjectNodeImpl::getOrdering() const 
-{
-	return m_ordering;
-}
+
+
 
 //*********************************
 // Operations
@@ -286,6 +298,9 @@ bool ObjectNodeImpl::selection_behavior(Any diagnostics,std::map <   Any, Any > 
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference inState
+*/
 std::shared_ptr<Bag<uml::State>> ObjectNodeImpl::getInState() const
 {
 	if(m_inState == nullptr)
@@ -299,25 +314,40 @@ std::shared_ptr<Bag<uml::State>> ObjectNodeImpl::getInState() const
 }
 
 
+
+
+
+/*
+Getter & Setter for reference selection
+*/
 std::shared_ptr<uml::Behavior > ObjectNodeImpl::getSelection() const
 {
 
     return m_selection;
 }
+
 void ObjectNodeImpl::setSelection(std::shared_ptr<uml::Behavior> _selection)
 {
     m_selection = _selection;
 }
 
+
+
+/*
+Getter & Setter for reference upperBound
+*/
 std::shared_ptr<uml::ValueSpecification > ObjectNodeImpl::getUpperBound() const
 {
 
     return m_upperBound;
 }
+
 void ObjectNodeImpl::setUpperBound(std::shared_ptr<uml::ValueSpecification> _upperBound)
 {
     m_upperBound = _upperBound;
 }
+
+
 
 //*********************************
 // Union Getter

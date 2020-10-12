@@ -163,16 +163,25 @@ bool TriggerImpl::trigger_with_ports(Any diagnostics,std::map <   Any, Any >  co
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference event
+*/
 std::shared_ptr<uml::Event > TriggerImpl::getEvent() const
 {
 //assert(m_event);
     return m_event;
 }
+
 void TriggerImpl::setEvent(std::shared_ptr<uml::Event> _event)
 {
     m_event = _event;
 }
 
+
+
+/*
+Getter & Setter for reference port
+*/
 std::shared_ptr<Bag<uml::Port>> TriggerImpl::getPort() const
 {
 	if(m_port == nullptr)
@@ -184,6 +193,9 @@ std::shared_ptr<Bag<uml::Port>> TriggerImpl::getPort() const
 
     return m_port;
 }
+
+
+
 
 
 //*********************************

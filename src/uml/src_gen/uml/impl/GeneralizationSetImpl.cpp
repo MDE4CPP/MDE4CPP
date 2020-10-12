@@ -178,23 +178,35 @@ std::shared_ptr<ecore::EClass> GeneralizationSetImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
+/*
+Getter & Setter for attribute isCovering
+*/
+bool GeneralizationSetImpl::getIsCovering() const 
+{
+	return m_isCovering;
+}
+
 void GeneralizationSetImpl::setIsCovering(bool _isCovering)
 {
 	m_isCovering = _isCovering;
 } 
-bool GeneralizationSetImpl::getIsCovering() const 
+
+
+
+/*
+Getter & Setter for attribute isDisjoint
+*/
+bool GeneralizationSetImpl::getIsDisjoint() const 
 {
-	return m_isCovering;
+	return m_isDisjoint;
 }
 
 void GeneralizationSetImpl::setIsDisjoint(bool _isDisjoint)
 {
 	m_isDisjoint = _isDisjoint;
 } 
-bool GeneralizationSetImpl::getIsDisjoint() const 
-{
-	return m_isDisjoint;
-}
+
+
 
 //*********************************
 // Operations
@@ -214,6 +226,9 @@ bool GeneralizationSetImpl::maps_to_generalization_set(Any diagnostics,std::map 
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference generalization
+*/
 std::shared_ptr<Bag<uml::Generalization>> GeneralizationSetImpl::getGeneralization() const
 {
 	if(m_generalization == nullptr)
@@ -227,15 +242,24 @@ std::shared_ptr<Bag<uml::Generalization>> GeneralizationSetImpl::getGeneralizati
 }
 
 
+
+
+
+/*
+Getter & Setter for reference powertype
+*/
 std::shared_ptr<uml::Classifier > GeneralizationSetImpl::getPowertype() const
 {
 
     return m_powertype;
 }
+
 void GeneralizationSetImpl::setPowertype(std::shared_ptr<uml::Classifier> _powertype)
 {
     m_powertype = _powertype;
 }
+
+
 
 //*********************************
 // Union Getter

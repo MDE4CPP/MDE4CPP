@@ -404,6 +404,9 @@ bool ProfileImpl::references_same_metamodel(Any diagnostics,std::map <   Any, An
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference metaclassReference
+*/
 std::shared_ptr<Subset<uml::ElementImport, uml::ElementImport /*Subset does not reference a union*/>> ProfileImpl::getMetaclassReference() const
 {
 	if(m_metaclassReference == nullptr)
@@ -426,6 +429,12 @@ std::shared_ptr<Subset<uml::ElementImport, uml::ElementImport /*Subset does not 
 }
 
 
+
+
+
+/*
+Getter & Setter for reference metamodelReference
+*/
 std::shared_ptr<Subset<uml::PackageImport, uml::PackageImport /*Subset does not reference a union*/>> ProfileImpl::getMetamodelReference() const
 {
 	if(m_metamodelReference == nullptr)
@@ -446,6 +455,9 @@ std::shared_ptr<Subset<uml::PackageImport, uml::PackageImport /*Subset does not 
 
     return m_metamodelReference;
 }
+
+
+
 
 
 //*********************************

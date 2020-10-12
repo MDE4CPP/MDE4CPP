@@ -153,14 +153,20 @@ std::shared_ptr<ecore::EClass> FeatureImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
-void FeatureImpl::setIsStatic(bool _isStatic)
-{
-	m_isStatic = _isStatic;
-} 
+/*
+Getter & Setter for attribute isStatic
+*/
 bool FeatureImpl::getIsStatic() const 
 {
 	return m_isStatic;
 }
+
+void FeatureImpl::setIsStatic(bool _isStatic)
+{
+	m_isStatic = _isStatic;
+} 
+
+
 
 //*********************************
 // Operations
@@ -169,6 +175,12 @@ bool FeatureImpl::getIsStatic() const
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference featuringClassifier
+*/
+
+
+
 
 
 

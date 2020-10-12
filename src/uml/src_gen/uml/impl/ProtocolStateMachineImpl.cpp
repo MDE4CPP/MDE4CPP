@@ -573,6 +573,9 @@ bool ProtocolStateMachineImpl::protocol_transitions(Any diagnostics,std::map <  
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference conformance
+*/
 std::shared_ptr<Subset<uml::ProtocolConformance, uml::Element>> ProtocolStateMachineImpl::getConformance() const
 {
 	if(m_conformance == nullptr)
@@ -593,6 +596,9 @@ std::shared_ptr<Subset<uml::ProtocolConformance, uml::Element>> ProtocolStateMac
 
     return m_conformance;
 }
+
+
+
 
 
 //*********************************

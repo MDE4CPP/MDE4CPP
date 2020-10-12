@@ -254,25 +254,37 @@ bool InteractionConstraintImpl::minint_non_negative(Any diagnostics,std::map <  
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference maxint
+*/
 std::shared_ptr<uml::ValueSpecification > InteractionConstraintImpl::getMaxint() const
 {
 
     return m_maxint;
 }
+
 void InteractionConstraintImpl::setMaxint(std::shared_ptr<uml::ValueSpecification> _maxint)
 {
     m_maxint = _maxint;
 }
 
+
+
+/*
+Getter & Setter for reference minint
+*/
 std::shared_ptr<uml::ValueSpecification > InteractionConstraintImpl::getMinint() const
 {
 
     return m_minint;
 }
+
 void InteractionConstraintImpl::setMinint(std::shared_ptr<uml::ValueSpecification> _minint)
 {
     m_minint = _minint;
 }
+
+
 
 //*********************************
 // Union Getter

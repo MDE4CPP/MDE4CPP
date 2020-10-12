@@ -67,8 +67,10 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 If a Duration has no expr, then it must have a single observation that is a DurationObservation.
-			expr = null implies (observation->size() = 1 and observation->forAll(oclIsKindOf(DurationObservation))) */ 
+			If a Duration has no expr, then it must have a single observation that is a DurationObservation.
+			expr = null implies (observation->size() = 1 and observation->forAll(oclIsKindOf(DurationObservation)))
+			*/
+			 
 			virtual bool no_expr_requires_observation(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
@@ -82,18 +84,26 @@ namespace uml
 			// Reference
 			//*********************************
 			/*!
-			 A ValueSpecification that evaluates to the value of the Duration.
-			<p>From package UML::Values.</p> */
+			A ValueSpecification that evaluates to the value of the Duration.
+			<p>From package UML::Values.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::ValueSpecification > getExpr() const ;
 			
 			/*!
-			 A ValueSpecification that evaluates to the value of the Duration.
-			<p>From package UML::Values.</p> */
-			virtual void setExpr(std::shared_ptr<uml::ValueSpecification> _expr_expr) ;
+			A ValueSpecification that evaluates to the value of the Duration.
+			<p>From package UML::Values.</p>
+			*/
+			
+			virtual void setExpr(std::shared_ptr<uml::ValueSpecification> _expr) ;
+			
 			/*!
-			 Refers to the Observations that are involved in the computation of the Duration value
-			<p>From package UML::Values.</p> */
+			Refers to the Observations that are involved in the computation of the Duration value
+			<p>From package UML::Values.</p>
+			*/
+			
 			virtual std::shared_ptr<Bag<uml::Observation>> getObservation() const ;
+			
 			
 							
 			
@@ -101,14 +111,20 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************

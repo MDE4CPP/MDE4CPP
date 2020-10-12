@@ -276,14 +276,20 @@ std::shared_ptr<ecore::EClass> ReduceActionImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
-void ReduceActionImpl::setIsOrdered(bool _isOrdered)
-{
-	m_isOrdered = _isOrdered;
-} 
+/*
+Getter & Setter for attribute isOrdered
+*/
 bool ReduceActionImpl::getIsOrdered() const 
 {
 	return m_isOrdered;
 }
+
+void ReduceActionImpl::setIsOrdered(bool _isOrdered)
+{
+	m_isOrdered = _isOrdered;
+} 
+
+
 
 //*********************************
 // Operations
@@ -309,35 +315,53 @@ bool ReduceActionImpl::reducer_inputs_output(Any diagnostics,std::map <   Any, A
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference collection
+*/
 std::shared_ptr<uml::InputPin > ReduceActionImpl::getCollection() const
 {
 //assert(m_collection);
     return m_collection;
 }
+
 void ReduceActionImpl::setCollection(std::shared_ptr<uml::InputPin> _collection)
 {
     m_collection = _collection;
 }
 
+
+
+/*
+Getter & Setter for reference reducer
+*/
 std::shared_ptr<uml::Behavior > ReduceActionImpl::getReducer() const
 {
 //assert(m_reducer);
     return m_reducer;
 }
+
 void ReduceActionImpl::setReducer(std::shared_ptr<uml::Behavior> _reducer)
 {
     m_reducer = _reducer;
 }
 
+
+
+/*
+Getter & Setter for reference result
+*/
 std::shared_ptr<uml::OutputPin > ReduceActionImpl::getResult() const
 {
 //assert(m_result);
     return m_result;
 }
+
 void ReduceActionImpl::setResult(std::shared_ptr<uml::OutputPin> _result)
 {
     m_result = _result;
 }
+
+
 
 //*********************************
 // Union Getter

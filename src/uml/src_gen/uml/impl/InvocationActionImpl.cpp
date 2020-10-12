@@ -248,10 +248,10 @@ InvocationActionImpl::InvocationActionImpl(const InvocationActionImpl & obj):Inv
 		std::cout << "Copying the Subset: " << "m_redefinedNode" << std::endl;
 	#endif
 
-	/*Subset*/
-	m_argument->initSubset(getInput());
+	/*SubsetUnion*/
+	m_argument->initSubsetUnion(getInput());
 	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Initialising value Subset: " << "m_argument - Subset<uml::InputPin, uml::InputPin >(getInput())" << std::endl;
+		std::cout << "Initialising value SubsetUnion: " << "m_argument - SubsetUnion<uml::InputPin, uml::InputPin >(getInput())" << std::endl;
 	#endif
 	
 }
@@ -279,20 +279,23 @@ std::shared_ptr<ecore::EClass> InvocationActionImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
-std::shared_ptr<Subset<uml::InputPin, uml::InputPin>> InvocationActionImpl::getArgument() const
+/*
+Getter & Setter for reference argument
+*/
+std::shared_ptr<SubsetUnion<uml::InputPin, uml::InputPin>> InvocationActionImpl::getArgument() const
 {
 	if(m_argument == nullptr)
 	{
-		/*Subset*/
-		m_argument.reset(new Subset<uml::InputPin, uml::InputPin >());
+		/*SubsetUnion*/
+		m_argument.reset(new SubsetUnion<uml::InputPin, uml::InputPin >());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_argument - Subset<uml::InputPin, uml::InputPin >()" << std::endl;
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_argument - SubsetUnion<uml::InputPin, uml::InputPin >()" << std::endl;
 		#endif
 		
-		/*Subset*/
-		m_argument->initSubset(getInput());
+		/*SubsetUnion*/
+		m_argument->initSubsetUnion(getInput());
 		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_argument - Subset<uml::InputPin, uml::InputPin >(getInput())" << std::endl;
+			std::cout << "Initialising value SubsetUnion: " << "m_argument - SubsetUnion<uml::InputPin, uml::InputPin >(getInput())" << std::endl;
 		#endif
 		
 	}
@@ -301,15 +304,24 @@ std::shared_ptr<Subset<uml::InputPin, uml::InputPin>> InvocationActionImpl::getA
 }
 
 
+
+
+
+/*
+Getter & Setter for reference onPort
+*/
 std::shared_ptr<uml::Port > InvocationActionImpl::getOnPort() const
 {
 
     return m_onPort;
 }
+
 void InvocationActionImpl::setOnPort(std::shared_ptr<uml::Port> _onPort)
 {
     m_onPort = _onPort;
 }
+
+
 
 //*********************************
 // Union Getter
@@ -639,16 +651,22 @@ void InvocationActionImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	{
 		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
 
-		// Save 'argument'
-		for (std::shared_ptr<uml::InputPin> argument : *this->getArgument()) 
-		{
-			saveHandler->addReference(argument, "argument", argument->eClass() != package->getInputPin_Class());
-		}
 	
 
 		// Add references
 		saveHandler->addReference("onPort", this->getOnPort());
 
+
+		//
+		// Add new tags (from references)
+		//
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass();
+		// Save 'argument'
+		std::shared_ptr<SubsetUnion<uml::InputPin, uml::InputPin>> list_argument = this->getArgument();
+		for (std::shared_ptr<uml::InputPin> argument : *list_argument) 
+		{
+			saveHandler->addReference(argument, "argument", argument->eClass() !=uml::UmlPackage::eInstance()->getInputPin_Class());
+		}
 	}
 	catch (std::exception& e)
 	{

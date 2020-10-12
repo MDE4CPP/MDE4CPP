@@ -210,15 +210,21 @@ std::shared_ptr<Bag<uml::Association> > TypeImpl::getAssociations()
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference package
+*/
 std::weak_ptr<uml::Package > TypeImpl::getPackage() const
 {
 
     return m_package;
 }
+
 void TypeImpl::setPackage(std::shared_ptr<uml::Package> _package)
 {
     m_package = _package;
 }
+
+
 
 //*********************************
 // Union Getter

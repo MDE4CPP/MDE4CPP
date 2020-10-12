@@ -172,25 +172,37 @@ std::shared_ptr<ecore::EClass> IncludeImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference addition
+*/
 std::shared_ptr<uml::UseCase > IncludeImpl::getAddition() const
 {
 //assert(m_addition);
     return m_addition;
 }
+
 void IncludeImpl::setAddition(std::shared_ptr<uml::UseCase> _addition)
 {
     m_addition = _addition;
 }
 
+
+
+/*
+Getter & Setter for reference includingCase
+*/
 std::weak_ptr<uml::UseCase > IncludeImpl::getIncludingCase() const
 {
 //assert(m_includingCase);
     return m_includingCase;
 }
+
 void IncludeImpl::setIncludingCase(std::shared_ptr<uml::UseCase> _includingCase)
 {
     m_includingCase = _includingCase;
 }
+
+
 
 //*********************************
 // Union Getter

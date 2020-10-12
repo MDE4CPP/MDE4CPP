@@ -69,28 +69,39 @@ namespace uml
 			// Reference
 			//*********************************
 			/*!
-			 References the execution specification describing the execution that is started or finished at this execution event.
-			<p>From package UML::Interactions.</p> */
+			References the execution specification describing the execution that is started or finished at this execution event.
+			<p>From package UML::Interactions.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::ExecutionSpecification > getExecution() const ;
 			
 			/*!
-			 References the execution specification describing the execution that is started or finished at this execution event.
-			<p>From package UML::Interactions.</p> */
-			virtual void setExecution(std::shared_ptr<uml::ExecutionSpecification> _execution_execution) ;
+			References the execution specification describing the execution that is started or finished at this execution event.
+			<p>From package UML::Interactions.</p>
+			*/
+			
+			virtual void setExecution(std::shared_ptr<uml::ExecutionSpecification> _execution) ;
+			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************

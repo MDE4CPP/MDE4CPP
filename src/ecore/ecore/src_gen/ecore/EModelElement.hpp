@@ -56,8 +56,7 @@ namespace ecore
 //*********************************
 namespace ecore 
 {
-	/*!
-	 */
+	
 	class EModelElement:virtual public EObject
 	{
 		public:
@@ -77,8 +76,7 @@ namespace ecore
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<ecore::EAnnotation> getEAnnotation(std::string source) = 0;
 			
 			
@@ -89,9 +87,9 @@ namespace ecore
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Subset<ecore::EAnnotation, ecore::EObject>> getEAnnotations() const = 0;
+			
 			
 			
 
@@ -104,17 +102,14 @@ namespace ecore
 			//*********************************
 			// Reference Members
 			//*********************************
-			/*!
-			 */
-			mutable std::shared_ptr<Subset<ecore::EAnnotation, ecore::EObject>> m_eAnnotations;
 			
+			mutable std::shared_ptr<Subset<ecore::EAnnotation, ecore::EObject>> m_eAnnotations;
 
 		public:
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

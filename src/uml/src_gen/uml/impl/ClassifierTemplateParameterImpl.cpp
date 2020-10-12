@@ -149,14 +149,20 @@ std::shared_ptr<ecore::EClass> ClassifierTemplateParameterImpl::eStaticClass() c
 //*********************************
 // Attribute Setter Getter
 //*********************************
-void ClassifierTemplateParameterImpl::setAllowSubstitutable(bool _allowSubstitutable)
-{
-	m_allowSubstitutable = _allowSubstitutable;
-} 
+/*
+Getter & Setter for attribute allowSubstitutable
+*/
 bool ClassifierTemplateParameterImpl::getAllowSubstitutable() const 
 {
 	return m_allowSubstitutable;
 }
+
+void ClassifierTemplateParameterImpl::setAllowSubstitutable(bool _allowSubstitutable)
+{
+	m_allowSubstitutable = _allowSubstitutable;
+} 
+
+
 
 //*********************************
 // Operations
@@ -200,6 +206,9 @@ bool ClassifierTemplateParameterImpl::parametered_element_no_features(Any diagno
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference constrainingClassifier
+*/
 std::shared_ptr<Bag<uml::Classifier>> ClassifierTemplateParameterImpl::getConstrainingClassifier() const
 {
 	if(m_constrainingClassifier == nullptr)
@@ -211,6 +220,9 @@ std::shared_ptr<Bag<uml::Classifier>> ClassifierTemplateParameterImpl::getConstr
 
     return m_constrainingClassifier;
 }
+
+
+
 
 
 //*********************************

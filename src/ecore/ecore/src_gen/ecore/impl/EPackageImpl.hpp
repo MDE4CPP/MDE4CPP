@@ -50,8 +50,7 @@ namespace ecore
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<ecore::EClassifier> getEClassifier(std::string name) const ;
 			
 			
@@ -59,53 +58,45 @@ namespace ecore
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual std::string getNsPrefix() const ;
 			
-			/*!
-			 */ 
+			 
 			virtual void setNsPrefix (std::string _nsPrefix); 
-			
-			/*!
-			 */ 
+			 
 			virtual std::string getNsURI() const ;
 			
-			/*!
-			 */ 
+			 
 			virtual void setNsURI (std::string _nsURI); 
-			
 			
 			
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Subset<ecore::EClassifier, ecore::EObject>> getEClassifiers() const ;
 			
-			/*!
-			 */
+			
+			
 			virtual std::shared_ptr<ecore::EFactory > getEFactoryInstance() const ;
 			
-			/*!
-			 */
-			virtual void setEFactoryInstance(std::shared_ptr<ecore::EFactory> _eFactoryInstance_eFactoryInstance) ;
-			/*!
-			 */
+			
+			virtual void setEFactoryInstance(std::shared_ptr<ecore::EFactory> _eFactoryInstance) ;
+			
+			
 			virtual std::shared_ptr<Bag<ecore::EPackage>> getESubpackages() const ;
 			
-			/*!
-			 */
+			
+			
 			virtual std::weak_ptr<ecore::EPackage > getESuperPackage() const ;
+			
 			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const ; 
 			 
 			//*********************************

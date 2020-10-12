@@ -230,14 +230,20 @@ std::shared_ptr<ecore::EClass> JoinNodeImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
-void JoinNodeImpl::setIsCombineDuplicate(bool _isCombineDuplicate)
-{
-	m_isCombineDuplicate = _isCombineDuplicate;
-} 
+/*
+Getter & Setter for attribute isCombineDuplicate
+*/
 bool JoinNodeImpl::getIsCombineDuplicate() const 
 {
 	return m_isCombineDuplicate;
 }
+
+void JoinNodeImpl::setIsCombineDuplicate(bool _isCombineDuplicate)
+{
+	m_isCombineDuplicate = _isCombineDuplicate;
+} 
+
+
 
 //*********************************
 // Operations
@@ -257,15 +263,21 @@ bool JoinNodeImpl::one_outgoing_edge(Any diagnostics,std::map <   Any, Any >  co
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference joinSpec
+*/
 std::shared_ptr<uml::ValueSpecification > JoinNodeImpl::getJoinSpec() const
 {
 
     return m_joinSpec;
 }
+
 void JoinNodeImpl::setJoinSpec(std::shared_ptr<uml::ValueSpecification> _joinSpec)
 {
     m_joinSpec = _joinSpec;
 }
+
+
 
 //*********************************
 // Union Getter

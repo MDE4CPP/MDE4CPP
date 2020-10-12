@@ -138,23 +138,35 @@ std::shared_ptr<ecore::EClass> ElementImportImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
+/*
+Getter & Setter for attribute alias
+*/
+std::string ElementImportImpl::getAlias() const 
+{
+	return m_alias;
+}
+
 void ElementImportImpl::setAlias(std::string _alias)
 {
 	m_alias = _alias;
 } 
-std::string ElementImportImpl::getAlias() const 
+
+
+
+/*
+Getter & Setter for attribute visibility
+*/
+uml::VisibilityKind ElementImportImpl::getVisibility() const 
 {
-	return m_alias;
+	return m_visibility;
 }
 
 void ElementImportImpl::setVisibility(uml::VisibilityKind _visibility)
 {
 	m_visibility = _visibility;
 } 
-uml::VisibilityKind ElementImportImpl::getVisibility() const 
-{
-	return m_visibility;
-}
+
+
 
 //*********************************
 // Operations
@@ -180,25 +192,37 @@ bool ElementImportImpl::visibility_public_or_private(Any diagnostics,std::map < 
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference importedElement
+*/
 std::shared_ptr<uml::PackageableElement > ElementImportImpl::getImportedElement() const
 {
 //assert(m_importedElement);
     return m_importedElement;
 }
+
 void ElementImportImpl::setImportedElement(std::shared_ptr<uml::PackageableElement> _importedElement)
 {
     m_importedElement = _importedElement;
 }
 
+
+
+/*
+Getter & Setter for reference importingNamespace
+*/
 std::weak_ptr<uml::Namespace > ElementImportImpl::getImportingNamespace() const
 {
 //assert(m_importingNamespace);
     return m_importingNamespace;
 }
+
 void ElementImportImpl::setImportingNamespace(std::shared_ptr<uml::Namespace> _importingNamespace)
 {
     m_importingNamespace = _importingNamespace;
 }
+
+
 
 //*********************************
 // Union Getter

@@ -143,25 +143,37 @@ bool ParameterableElementImpl::isTemplateParameter()
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference owningTemplateParameter
+*/
 std::weak_ptr<uml::TemplateParameter > ParameterableElementImpl::getOwningTemplateParameter() const
 {
 
     return m_owningTemplateParameter;
 }
+
 void ParameterableElementImpl::setOwningTemplateParameter(std::shared_ptr<uml::TemplateParameter> _owningTemplateParameter)
 {
     m_owningTemplateParameter = _owningTemplateParameter;
 }
 
+
+
+/*
+Getter & Setter for reference templateParameter
+*/
 std::shared_ptr<uml::TemplateParameter > ParameterableElementImpl::getTemplateParameter() const
 {
 
     return m_templateParameter;
 }
+
 void ParameterableElementImpl::setTemplateParameter(std::shared_ptr<uml::TemplateParameter> _templateParameter)
 {
     m_templateParameter = _templateParameter;
 }
+
+
 
 //*********************************
 // Union Getter

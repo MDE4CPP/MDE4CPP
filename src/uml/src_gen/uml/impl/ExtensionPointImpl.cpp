@@ -175,15 +175,21 @@ bool ExtensionPointImpl::must_have_name(Any diagnostics,std::map <   Any, Any > 
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference useCase
+*/
 std::weak_ptr<uml::UseCase > ExtensionPointImpl::getUseCase() const
 {
 //assert(m_useCase);
     return m_useCase;
 }
+
 void ExtensionPointImpl::setUseCase(std::shared_ptr<uml::UseCase> _useCase)
 {
     m_useCase = _useCase;
 }
+
+
 
 //*********************************
 // Union Getter

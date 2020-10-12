@@ -636,6 +636,9 @@ bool InteractionImpl::not_contained(Any diagnostics,std::map <   Any, Any >  con
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference action
+*/
 std::shared_ptr<Subset<uml::Action, uml::Element>> InteractionImpl::getAction() const
 {
 	if(m_action == nullptr)
@@ -658,6 +661,12 @@ std::shared_ptr<Subset<uml::Action, uml::Element>> InteractionImpl::getAction() 
 }
 
 
+
+
+
+/*
+Getter & Setter for reference formalGate
+*/
 std::shared_ptr<Subset<uml::Gate, uml::NamedElement>> InteractionImpl::getFormalGate() const
 {
 	if(m_formalGate == nullptr)
@@ -680,6 +689,12 @@ std::shared_ptr<Subset<uml::Gate, uml::NamedElement>> InteractionImpl::getFormal
 }
 
 
+
+
+
+/*
+Getter & Setter for reference fragment
+*/
 std::shared_ptr<Subset<uml::InteractionFragment, uml::NamedElement>> InteractionImpl::getFragment() const
 {
 	if(m_fragment == nullptr)
@@ -702,6 +717,12 @@ std::shared_ptr<Subset<uml::InteractionFragment, uml::NamedElement>> Interaction
 }
 
 
+
+
+
+/*
+Getter & Setter for reference lifeline
+*/
 std::shared_ptr<Subset<uml::Lifeline, uml::NamedElement>> InteractionImpl::getLifeline() const
 {
 	if(m_lifeline == nullptr)
@@ -724,6 +745,12 @@ std::shared_ptr<Subset<uml::Lifeline, uml::NamedElement>> InteractionImpl::getLi
 }
 
 
+
+
+
+/*
+Getter & Setter for reference message
+*/
 std::shared_ptr<Subset<uml::Message, uml::NamedElement>> InteractionImpl::getMessage() const
 {
 	if(m_message == nullptr)
@@ -744,6 +771,9 @@ std::shared_ptr<Subset<uml::Message, uml::NamedElement>> InteractionImpl::getMes
 
     return m_message;
 }
+
+
+
 
 
 //*********************************

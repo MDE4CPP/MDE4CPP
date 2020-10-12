@@ -70,48 +70,74 @@ namespace uml
 			// Reference
 			//*********************************
 			/*!
-			 The Activity containing the ActivityNode, if it is directly owned by an Activity.
-			<p>From package UML::Activities.</p> */
+			The Activity containing the ActivityNode, if it is directly owned by an Activity.
+			<p>From package UML::Activities.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Activity > getActivity() const ;
 			
 			/*!
-			 The Activity containing the ActivityNode, if it is directly owned by an Activity.
-			<p>From package UML::Activities.</p> */
-			virtual void setActivity(std::shared_ptr<uml::Activity> _activity_activity) ;
+			The Activity containing the ActivityNode, if it is directly owned by an Activity.
+			<p>From package UML::Activities.</p>
+			*/
+			
+			virtual void setActivity(std::shared_ptr<uml::Activity> _activity) ;
+			
+			
 			
 			/*!
-			 InterruptibleActivityRegions containing the ActivityNode.
-			<p>From package UML::Activities.</p> */
+			InterruptibleActivityRegions containing the ActivityNode.
+			<p>From package UML::Activities.</p>
+			*/
+			
 			virtual std::shared_ptr<Subset<uml::InterruptibleActivityRegion, uml::ActivityGroup>> getInInterruptibleRegion() const ;
 			
-			/*!
-			 ActivityPartitions containing the ActivityNode.
-			<p>From package UML::Activities.</p> */
-			virtual std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup>> getInPartition() const ;
 			
 			/*!
-			 The StructuredActivityNode containing the ActvityNode, if it is directly owned by a StructuredActivityNode.
-			<p>From package UML::Activities.</p> */
+			ActivityPartitions containing the ActivityNode.
+			<p>From package UML::Activities.</p>
+			*/
+			
+			virtual std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup>> getInPartition() const ;
+			
+			
+			/*!
+			The StructuredActivityNode containing the ActvityNode, if it is directly owned by a StructuredActivityNode.
+			<p>From package UML::Activities.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::StructuredActivityNode > getInStructuredNode() const ;
 			
 			/*!
-			 The StructuredActivityNode containing the ActvityNode, if it is directly owned by a StructuredActivityNode.
-			<p>From package UML::Activities.</p> */
-			virtual void setInStructuredNode(std::shared_ptr<uml::StructuredActivityNode> _inStructuredNode_inStructuredNode) ;
+			The StructuredActivityNode containing the ActvityNode, if it is directly owned by a StructuredActivityNode.
+			<p>From package UML::Activities.</p>
+			*/
+			
+			virtual void setInStructuredNode(std::shared_ptr<uml::StructuredActivityNode> _inStructuredNode) ;
+			
 			/*!
-			 ActivityEdges that have the ActivityNode as their target.
-			<p>From package UML::Activities.</p> */
+			ActivityEdges that have the ActivityNode as their target.
+			<p>From package UML::Activities.</p>
+			*/
+			
 			virtual std::shared_ptr<Bag<uml::ActivityEdge>> getIncoming() const ;
 			
-			/*!
-			 ActivityEdges that have the ActivityNode as their source.
-			<p>From package UML::Activities.</p> */
-			virtual std::shared_ptr<Bag<uml::ActivityEdge>> getOutgoing() const ;
 			
 			/*!
-			 ActivityNodes from a generalization of the Activity containining this ActivityNode that are redefined by this ActivityNode.
-			<p>From package UML::Activities.</p> */
+			ActivityEdges that have the ActivityNode as their source.
+			<p>From package UML::Activities.</p>
+			*/
+			
+			virtual std::shared_ptr<Bag<uml::ActivityEdge>> getOutgoing() const ;
+			
+			
+			/*!
+			ActivityNodes from a generalization of the Activity containining this ActivityNode that are redefined by this ActivityNode.
+			<p>From package UML::Activities.</p>
+			*/
+			
 			virtual std::shared_ptr<Subset<uml::ActivityNode, uml::RedefinableElement>> getRedefinedNode() const ;
+			
 			
 							
 			
@@ -119,17 +145,25 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p> */
+			ActivityGroups containing the ActivityNode.
+			<p>From package UML::Activities.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::ActivityGroup>> getInGroup() const ;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
+			The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const ; 
 			 
 			//*********************************

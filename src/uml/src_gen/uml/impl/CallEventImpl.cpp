@@ -178,15 +178,21 @@ std::shared_ptr<ecore::EClass> CallEventImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference operation
+*/
 std::shared_ptr<uml::Operation > CallEventImpl::getOperation() const
 {
 //assert(m_operation);
     return m_operation;
 }
+
 void CallEventImpl::setOperation(std::shared_ptr<uml::Operation> _operation)
 {
     m_operation = _operation;
 }
+
+
 
 //*********************************
 // Union Getter

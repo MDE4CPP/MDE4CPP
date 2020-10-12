@@ -44,8 +44,7 @@ virtual public EGenericType
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual bool isInstance(Any object) const ;
 			
 			
@@ -58,45 +57,40 @@ virtual public EGenericType
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<ecore::EClassifier > getEClassifier() const ;
 			
-			/*!
-			 */
-			virtual void setEClassifier(std::shared_ptr<ecore::EClassifier> _eClassifier_eClassifier) ;
-			/*!
-			 */
+			
+			virtual void setEClassifier(std::shared_ptr<ecore::EClassifier> _eClassifier) ;
+			
+			
 			virtual std::shared_ptr<ecore::EGenericType > getELowerBound() const ;
 			
-			/*!
-			 */
-			virtual void setELowerBound(std::shared_ptr<ecore::EGenericType> _eLowerBound_eLowerBound) ;
-			/*!
-			 */
+			
+			virtual void setELowerBound(std::shared_ptr<ecore::EGenericType> _eLowerBound) ;
+			
+			
 			virtual std::shared_ptr<ecore::EClassifier > getERawType() const ;
 			
-			/*!
-			 */
-			virtual void setERawType(std::shared_ptr<ecore::EClassifier> _eRawType_eRawType) ;
-			/*!
-			 */
+			
+			virtual void setERawType(std::shared_ptr<ecore::EClassifier> _eRawType) ;
+			
+			
 			virtual std::shared_ptr<Bag<ecore::EGenericType>> getETypeArguments() const ;
 			
-			/*!
-			 */
+			
+			
 			virtual std::shared_ptr<ecore::ETypeParameter > getETypeParameter() const ;
 			
-			/*!
-			 */
-			virtual void setETypeParameter(std::shared_ptr<ecore::ETypeParameter> _eTypeParameter_eTypeParameter) ;
-			/*!
-			 */
+			
+			virtual void setETypeParameter(std::shared_ptr<ecore::ETypeParameter> _eTypeParameter) ;
+			
+			
 			virtual std::shared_ptr<ecore::EGenericType > getEUpperBound() const ;
 			
-			/*!
-			 */
-			virtual void setEUpperBound(std::shared_ptr<ecore::EGenericType> _eUpperBound_eUpperBound) ;
+			
+			virtual void setEUpperBound(std::shared_ptr<ecore::EGenericType> _eUpperBound) ;
+			
 							
 			
 			//*********************************

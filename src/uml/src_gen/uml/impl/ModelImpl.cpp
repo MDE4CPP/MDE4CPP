@@ -301,14 +301,20 @@ std::shared_ptr<ecore::EClass> ModelImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
-void ModelImpl::setViewpoint(std::string _viewpoint)
-{
-	m_viewpoint = _viewpoint;
-} 
+/*
+Getter & Setter for attribute viewpoint
+*/
 std::string ModelImpl::getViewpoint() const 
 {
 	return m_viewpoint;
 }
+
+void ModelImpl::setViewpoint(std::string _viewpoint)
+{
+	m_viewpoint = _viewpoint;
+} 
+
+
 
 //*********************************
 // Operations

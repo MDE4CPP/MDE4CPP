@@ -61,25 +61,34 @@ namespace uml
 			// Reference
 			//*********************************
 			/*!
-			 The type of the TypedElement.
-			<p>From package UML::CommonStructure.</p> */
+			The type of the TypedElement.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::Type > getType() const ;
 			
 			/*!
-			 The type of the TypedElement.
-			<p>From package UML::CommonStructure.</p> */
-			virtual void setType(std::shared_ptr<uml::Type> _type_type) ;
+			The type of the TypedElement.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
+			virtual void setType(std::shared_ptr<uml::Type> _type) ;
+			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************

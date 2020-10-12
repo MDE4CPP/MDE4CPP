@@ -232,15 +232,21 @@ std::shared_ptr<Bag<uml::Classifier> > EnumerationLiteralImpl::getClassifiers()
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference enumeration
+*/
 std::weak_ptr<uml::Enumeration > EnumerationLiteralImpl::getEnumeration() const
 {
 //assert(m_enumeration);
     return m_enumeration;
 }
+
 void EnumerationLiteralImpl::setEnumeration(std::shared_ptr<uml::Enumeration> _enumeration)
 {
     m_enumeration = _enumeration;
 }
+
+
 
 //*********************************
 // Union Getter

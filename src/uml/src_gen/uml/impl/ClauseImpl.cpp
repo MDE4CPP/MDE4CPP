@@ -157,6 +157,9 @@ bool ClauseImpl::test_and_body(Any diagnostics,std::map <   Any, Any >  context)
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference body
+*/
 std::shared_ptr<Bag<uml::ExecutableNode>> ClauseImpl::getBody() const
 {
 	if(m_body == nullptr)
@@ -170,6 +173,12 @@ std::shared_ptr<Bag<uml::ExecutableNode>> ClauseImpl::getBody() const
 }
 
 
+
+
+
+/*
+Getter & Setter for reference bodyOutput
+*/
 std::shared_ptr<Bag<uml::OutputPin>> ClauseImpl::getBodyOutput() const
 {
 	if(m_bodyOutput == nullptr)
@@ -183,16 +192,28 @@ std::shared_ptr<Bag<uml::OutputPin>> ClauseImpl::getBodyOutput() const
 }
 
 
+
+
+
+/*
+Getter & Setter for reference decider
+*/
 std::shared_ptr<uml::OutputPin > ClauseImpl::getDecider() const
 {
 //assert(m_decider);
     return m_decider;
 }
+
 void ClauseImpl::setDecider(std::shared_ptr<uml::OutputPin> _decider)
 {
     m_decider = _decider;
 }
 
+
+
+/*
+Getter & Setter for reference predecessorClause
+*/
 std::shared_ptr<Bag<uml::Clause>> ClauseImpl::getPredecessorClause() const
 {
 	if(m_predecessorClause == nullptr)
@@ -206,6 +227,12 @@ std::shared_ptr<Bag<uml::Clause>> ClauseImpl::getPredecessorClause() const
 }
 
 
+
+
+
+/*
+Getter & Setter for reference successorClause
+*/
 std::shared_ptr<Bag<uml::Clause>> ClauseImpl::getSuccessorClause() const
 {
 	if(m_successorClause == nullptr)
@@ -219,6 +246,12 @@ std::shared_ptr<Bag<uml::Clause>> ClauseImpl::getSuccessorClause() const
 }
 
 
+
+
+
+/*
+Getter & Setter for reference test
+*/
 std::shared_ptr<Bag<uml::ExecutableNode>> ClauseImpl::getTest() const
 {
 	if(m_test == nullptr)
@@ -230,6 +263,9 @@ std::shared_ptr<Bag<uml::ExecutableNode>> ClauseImpl::getTest() const
 //assert(m_test);
     return m_test;
 }
+
+
+
 
 
 //*********************************

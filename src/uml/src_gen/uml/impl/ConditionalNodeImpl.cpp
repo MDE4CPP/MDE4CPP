@@ -397,23 +397,35 @@ std::shared_ptr<ecore::EClass> ConditionalNodeImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
+/*
+Getter & Setter for attribute isAssured
+*/
+bool ConditionalNodeImpl::getIsAssured() const 
+{
+	return m_isAssured;
+}
+
 void ConditionalNodeImpl::setIsAssured(bool _isAssured)
 {
 	m_isAssured = _isAssured;
 } 
-bool ConditionalNodeImpl::getIsAssured() const 
+
+
+
+/*
+Getter & Setter for attribute isDeterminate
+*/
+bool ConditionalNodeImpl::getIsDeterminate() const 
 {
-	return m_isAssured;
+	return m_isDeterminate;
 }
 
 void ConditionalNodeImpl::setIsDeterminate(bool _isDeterminate)
 {
 	m_isDeterminate = _isDeterminate;
 } 
-bool ConditionalNodeImpl::getIsDeterminate() const 
-{
-	return m_isDeterminate;
-}
+
+
 
 //*********************************
 // Operations
@@ -457,6 +469,9 @@ bool ConditionalNodeImpl::result_no_incoming(Any diagnostics,std::map <   Any, A
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference clause
+*/
 std::shared_ptr<Subset<uml::Clause, uml::Element>> ConditionalNodeImpl::getClause() const
 {
 	if(m_clause == nullptr)
@@ -479,6 +494,12 @@ std::shared_ptr<Subset<uml::Clause, uml::Element>> ConditionalNodeImpl::getClaus
 }
 
 
+
+
+
+/*
+Getter & Setter for reference result
+*/
 std::shared_ptr<Bag<uml::OutputPin>> ConditionalNodeImpl::getResult() const
 {
 	if(m_result == nullptr)
@@ -490,6 +511,11 @@ std::shared_ptr<Bag<uml::OutputPin>> ConditionalNodeImpl::getResult() const
 
     return m_result;
 }
+
+
+
+/*Additional Setter for redefined reference 'StructuredActivityNode::structuredNodeOutput'*/
+
 
 
 //*********************************

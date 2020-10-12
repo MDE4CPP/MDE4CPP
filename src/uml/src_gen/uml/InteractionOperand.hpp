@@ -133,8 +133,10 @@ namespace uml
 namespace uml 
 {
 	/*!
-	 An InteractionOperand is contained in a CombinedFragment. An InteractionOperand represents one operand of the expression given by the enclosing CombinedFragment.
-	<p>From package UML::Interactions.</p> */
+	An InteractionOperand is contained in a CombinedFragment. An InteractionOperand represents one operand of the expression given by the enclosing CombinedFragment.
+	<p>From package UML::Interactions.</p>
+	*/
+	
 	class InteractionOperand:virtual public InteractionFragment,virtual public Namespace
 	{
 		public:
@@ -155,11 +157,15 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 The guard must contain only references to values local to the Lifeline on which it resides, or values global to the whole Interaction. */ 
+			The guard must contain only references to values local to the Lifeline on which it resides, or values global to the whole Interaction.
+			*/
+			 
 			virtual bool guard_contain_references(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
-			 The guard must be placed directly prior to (above) the OccurrenceSpecification that will become the first OccurrenceSpecification within this InteractionOperand. */ 
+			The guard must be placed directly prior to (above) the OccurrenceSpecification that will become the first OccurrenceSpecification within this InteractionOperand.
+			*/
+			 
 			virtual bool guard_directly_prior(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
@@ -171,19 +177,27 @@ namespace uml
 			// Reference
 			//*********************************
 			/*!
-			 The fragments of the operand.
-			<p>From package UML::Interactions.</p> */
+			The fragments of the operand.
+			<p>From package UML::Interactions.</p>
+			*/
+			
 			virtual std::shared_ptr<Subset<uml::InteractionFragment, uml::NamedElement>> getFragment() const = 0;
 			
+			
 			/*!
-			 Constraint of the operand.
-			<p>From package UML::Interactions.</p> */
+			Constraint of the operand.
+			<p>From package UML::Interactions.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::InteractionConstraint > getGuard() const = 0;
 			
 			/*!
-			 Constraint of the operand.
-			<p>From package UML::Interactions.</p> */
-			virtual void setGuard(std::shared_ptr<uml::InteractionConstraint> _guard_guard) = 0;
+			Constraint of the operand.
+			<p>From package UML::Interactions.</p>
+			*/
+			
+			virtual void setGuard(std::shared_ptr<uml::InteractionConstraint> _guard) = 0;
+			
 			
 
 		protected:
@@ -196,34 +210,46 @@ namespace uml
 			// Reference Members
 			//*********************************
 			/*!
-			 The fragments of the operand.
-			<p>From package UML::Interactions.</p> */
-			mutable std::shared_ptr<Subset<uml::InteractionFragment, uml::NamedElement>> m_fragment;
-			/*!
-			 Constraint of the operand.
-			<p>From package UML::Interactions.</p> */
-			std::shared_ptr<uml::InteractionConstraint > m_guard;
+			The fragments of the operand.
+			<p>From package UML::Interactions.</p>
+			*/
 			
+			mutable std::shared_ptr<Subset<uml::InteractionFragment, uml::NamedElement>> m_fragment;/*!
+			Constraint of the operand.
+			<p>From package UML::Interactions.</p>
+			*/
+			
+			std::shared_ptr<uml::InteractionConstraint > m_guard;
 
 		public:
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
-			<p>From package UML::CommonStructure.</p> */
+			A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::NamedElement>> getMember() const = 0;/*!
-			 Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;/*!
-			 A collection of NamedElements owned by the Namespace.
-			<p>From package UML::CommonStructure.</p> */
+			A collection of NamedElements owned by the Namespace.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> getOwnedMember() const = 0;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

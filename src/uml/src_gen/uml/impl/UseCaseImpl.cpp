@@ -454,6 +454,9 @@ bool UseCaseImpl::no_association_to_use_case(Any diagnostics,std::map <   Any, A
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference extend
+*/
 std::shared_ptr<Subset<uml::Extend, uml::NamedElement>> UseCaseImpl::getExtend() const
 {
 	if(m_extend == nullptr)
@@ -476,6 +479,12 @@ std::shared_ptr<Subset<uml::Extend, uml::NamedElement>> UseCaseImpl::getExtend()
 }
 
 
+
+
+
+/*
+Getter & Setter for reference extensionPoint
+*/
 std::shared_ptr<Subset<uml::ExtensionPoint, uml::NamedElement>> UseCaseImpl::getExtensionPoint() const
 {
 	if(m_extensionPoint == nullptr)
@@ -498,6 +507,12 @@ std::shared_ptr<Subset<uml::ExtensionPoint, uml::NamedElement>> UseCaseImpl::get
 }
 
 
+
+
+
+/*
+Getter & Setter for reference include
+*/
 std::shared_ptr<Subset<uml::Include, uml::NamedElement>> UseCaseImpl::getInclude() const
 {
 	if(m_include == nullptr)
@@ -520,6 +535,12 @@ std::shared_ptr<Subset<uml::Include, uml::NamedElement>> UseCaseImpl::getInclude
 }
 
 
+
+
+
+/*
+Getter & Setter for reference subject
+*/
 std::shared_ptr<Bag<uml::Classifier>> UseCaseImpl::getSubject() const
 {
 	if(m_subject == nullptr)
@@ -531,6 +552,9 @@ std::shared_ptr<Bag<uml::Classifier>> UseCaseImpl::getSubject() const
 
     return m_subject;
 }
+
+
+
 
 
 //*********************************

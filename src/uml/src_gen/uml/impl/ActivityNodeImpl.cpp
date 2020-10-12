@@ -226,11 +226,15 @@ std::shared_ptr<ecore::EClass> ActivityNodeImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference activity
+*/
 std::weak_ptr<uml::Activity > ActivityNodeImpl::getActivity() const
 {
 
     return m_activity;
 }
+
 void ActivityNodeImpl::setActivity(std::shared_ptr<uml::Activity> _activity)
 {
     m_activity = _activity;
@@ -238,7 +242,18 @@ void ActivityNodeImpl::setActivity(std::shared_ptr<uml::Activity> _activity)
 
 
 
+/*
+Getter & Setter for reference inGroup
+*/
 
+
+
+
+
+
+/*
+Getter & Setter for reference inInterruptibleRegion
+*/
 std::shared_ptr<Subset<uml::InterruptibleActivityRegion, uml::ActivityGroup>> ActivityNodeImpl::getInInterruptibleRegion() const
 {
 	if(m_inInterruptibleRegion == nullptr)
@@ -261,6 +276,12 @@ std::shared_ptr<Subset<uml::InterruptibleActivityRegion, uml::ActivityGroup>> Ac
 }
 
 
+
+
+
+/*
+Getter & Setter for reference inPartition
+*/
 std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup>> ActivityNodeImpl::getInPartition() const
 {
 	if(m_inPartition == nullptr)
@@ -283,16 +304,28 @@ std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup>> ActivityNode
 }
 
 
+
+
+
+/*
+Getter & Setter for reference inStructuredNode
+*/
 std::weak_ptr<uml::StructuredActivityNode > ActivityNodeImpl::getInStructuredNode() const
 {
 
     return m_inStructuredNode;
 }
+
 void ActivityNodeImpl::setInStructuredNode(std::shared_ptr<uml::StructuredActivityNode> _inStructuredNode)
 {
     m_inStructuredNode = _inStructuredNode;
 }
 
+
+
+/*
+Getter & Setter for reference incoming
+*/
 std::shared_ptr<Bag<uml::ActivityEdge>> ActivityNodeImpl::getIncoming() const
 {
 	if(m_incoming == nullptr)
@@ -306,6 +339,12 @@ std::shared_ptr<Bag<uml::ActivityEdge>> ActivityNodeImpl::getIncoming() const
 }
 
 
+
+
+
+/*
+Getter & Setter for reference outgoing
+*/
 std::shared_ptr<Bag<uml::ActivityEdge>> ActivityNodeImpl::getOutgoing() const
 {
 	if(m_outgoing == nullptr)
@@ -319,6 +358,12 @@ std::shared_ptr<Bag<uml::ActivityEdge>> ActivityNodeImpl::getOutgoing() const
 }
 
 
+
+
+
+/*
+Getter & Setter for reference redefinedNode
+*/
 std::shared_ptr<Subset<uml::ActivityNode, uml::RedefinableElement>> ActivityNodeImpl::getRedefinedNode() const
 {
 	if(m_redefinedNode == nullptr)
@@ -339,6 +384,9 @@ std::shared_ptr<Subset<uml::ActivityNode, uml::RedefinableElement>> ActivityNode
 
     return m_redefinedNode;
 }
+
+
+
 
 
 //*********************************

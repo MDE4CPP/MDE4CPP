@@ -209,14 +209,20 @@ std::shared_ptr<ecore::EClass> ExpressionImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
-void ExpressionImpl::setSymbol(std::string _symbol)
-{
-	m_symbol = _symbol;
-} 
+/*
+Getter & Setter for attribute symbol
+*/
 std::string ExpressionImpl::getSymbol() const 
 {
 	return m_symbol;
 }
+
+void ExpressionImpl::setSymbol(std::string _symbol)
+{
+	m_symbol = _symbol;
+} 
+
+
 
 //*********************************
 // Operations
@@ -225,6 +231,9 @@ std::string ExpressionImpl::getSymbol() const
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference operand
+*/
 std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>> ExpressionImpl::getOperand() const
 {
 	if(m_operand == nullptr)
@@ -245,6 +254,9 @@ std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>> ExpressionImpl::g
 
     return m_operand;
 }
+
+
+
 
 
 //*********************************

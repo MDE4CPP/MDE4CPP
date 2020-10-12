@@ -61,43 +61,63 @@ namespace uml
 			// Reference
 			//*********************************
 			/*!
-			 References the Package that is to be merged with the receiving package of the PackageMerge.
-			<p>From package UML::Packages.</p> */
+			References the Package that is to be merged with the receiving package of the PackageMerge.
+			<p>From package UML::Packages.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::Package > getMergedPackage() const ;
 			
 			/*!
-			 References the Package that is to be merged with the receiving package of the PackageMerge.
-			<p>From package UML::Packages.</p> */
-			virtual void setMergedPackage(std::shared_ptr<uml::Package> _mergedPackage_mergedPackage) ;
+			References the Package that is to be merged with the receiving package of the PackageMerge.
+			<p>From package UML::Packages.</p>
+			*/
+			
+			virtual void setMergedPackage(std::shared_ptr<uml::Package> _mergedPackage) ;
+			
 			/*!
-			 References the Package that is being extended with the contents of the merged package of the PackageMerge.
-			<p>From package UML::Packages.</p> */
+			References the Package that is being extended with the contents of the merged package of the PackageMerge.
+			<p>From package UML::Packages.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Package > getReceivingPackage() const ;
 			
 			/*!
-			 References the Package that is being extended with the contents of the merged package of the PackageMerge.
-			<p>From package UML::Packages.</p> */
-			virtual void setReceivingPackage(std::shared_ptr<uml::Package> _receivingPackage_receivingPackage) ;
+			References the Package that is being extended with the contents of the merged package of the PackageMerge.
+			<p>From package UML::Packages.</p>
+			*/
+			
+			virtual void setReceivingPackage(std::shared_ptr<uml::Package> _receivingPackage) ;
+			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
-			 Specifies the elements related by the Relationship.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the elements related by the Relationship.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getRelatedElement() const ;/*!
-			 Specifies the source Element(s) of the DirectedRelationship.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the source Element(s) of the DirectedRelationship.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> getSource() const ;/*!
-			 Specifies the target Element(s) of the DirectedRelationship.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the target Element(s) of the DirectedRelationship.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> getTarget() const ; 
 			 
 			//*********************************

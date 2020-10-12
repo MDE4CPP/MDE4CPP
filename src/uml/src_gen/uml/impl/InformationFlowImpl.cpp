@@ -240,6 +240,9 @@ bool InformationFlowImpl::sources_and_targets_kind(Any diagnostics,std::map <   
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference conveyed
+*/
 std::shared_ptr<Bag<uml::Classifier>> InformationFlowImpl::getConveyed() const
 {
 	if(m_conveyed == nullptr)
@@ -253,6 +256,12 @@ std::shared_ptr<Bag<uml::Classifier>> InformationFlowImpl::getConveyed() const
 }
 
 
+
+
+
+/*
+Getter & Setter for reference informationSource
+*/
 std::shared_ptr<Subset<uml::NamedElement, uml::Element>> InformationFlowImpl::getInformationSource() const
 {
 	if(m_informationSource == nullptr)
@@ -275,6 +284,12 @@ std::shared_ptr<Subset<uml::NamedElement, uml::Element>> InformationFlowImpl::ge
 }
 
 
+
+
+
+/*
+Getter & Setter for reference informationTarget
+*/
 std::shared_ptr<Subset<uml::NamedElement, uml::Element>> InformationFlowImpl::getInformationTarget() const
 {
 	if(m_informationTarget == nullptr)
@@ -297,6 +312,12 @@ std::shared_ptr<Subset<uml::NamedElement, uml::Element>> InformationFlowImpl::ge
 }
 
 
+
+
+
+/*
+Getter & Setter for reference realization
+*/
 std::shared_ptr<Bag<uml::Relationship>> InformationFlowImpl::getRealization() const
 {
 	if(m_realization == nullptr)
@@ -310,6 +331,12 @@ std::shared_ptr<Bag<uml::Relationship>> InformationFlowImpl::getRealization() co
 }
 
 
+
+
+
+/*
+Getter & Setter for reference realizingActivityEdge
+*/
 std::shared_ptr<Bag<uml::ActivityEdge>> InformationFlowImpl::getRealizingActivityEdge() const
 {
 	if(m_realizingActivityEdge == nullptr)
@@ -323,6 +350,12 @@ std::shared_ptr<Bag<uml::ActivityEdge>> InformationFlowImpl::getRealizingActivit
 }
 
 
+
+
+
+/*
+Getter & Setter for reference realizingConnector
+*/
 std::shared_ptr<Bag<uml::Connector>> InformationFlowImpl::getRealizingConnector() const
 {
 	if(m_realizingConnector == nullptr)
@@ -336,6 +369,12 @@ std::shared_ptr<Bag<uml::Connector>> InformationFlowImpl::getRealizingConnector(
 }
 
 
+
+
+
+/*
+Getter & Setter for reference realizingMessage
+*/
 std::shared_ptr<Bag<uml::Message>> InformationFlowImpl::getRealizingMessage() const
 {
 	if(m_realizingMessage == nullptr)
@@ -347,6 +386,9 @@ std::shared_ptr<Bag<uml::Message>> InformationFlowImpl::getRealizingMessage() co
 
     return m_realizingMessage;
 }
+
+
+
 
 
 //*********************************

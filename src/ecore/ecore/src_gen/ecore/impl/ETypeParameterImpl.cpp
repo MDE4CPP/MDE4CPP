@@ -131,6 +131,9 @@ std::shared_ptr<EClass> ETypeParameterImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference eBounds
+*/
 std::shared_ptr<Bag<ecore::EGenericType>> ETypeParameterImpl::getEBounds() const
 {
 	if(m_eBounds == nullptr)
@@ -142,6 +145,9 @@ std::shared_ptr<Bag<ecore::EGenericType>> ETypeParameterImpl::getEBounds() const
 
     return m_eBounds;
 }
+
+
+
 
 
 //*********************************

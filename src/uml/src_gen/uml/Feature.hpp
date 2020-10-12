@@ -82,8 +82,10 @@ namespace uml
 namespace uml 
 {
 	/*!
-	 A Feature declares a behavioral or structural characteristic of Classifiers.
-	<p>From package UML::Classification.</p> */
+	A Feature declares a behavioral or structural characteristic of Classifiers.
+	<p>From package UML::Classification.</p>
+	*/
+	
 	class Feature:virtual public RedefinableElement
 	{
 		public:
@@ -108,19 +110,23 @@ namespace uml
 			// Attributes Getter Setter
 			//*********************************
 			/*!
-			 Specifies whether this Feature characterizes individual instances classified by the Classifier (false) or the Classifier itself (true).
-			<p>From package UML::Classification.</p> */ 
+			Specifies whether this Feature characterizes individual instances classified by the Classifier (false) or the Classifier itself (true).
+			<p>From package UML::Classification.</p>
+			*/
+			 
 			virtual bool getIsStatic() const = 0;
 			
 			/*!
-			 Specifies whether this Feature characterizes individual instances classified by the Classifier (false) or the Classifier itself (true).
-			<p>From package UML::Classification.</p> */ 
+			Specifies whether this Feature characterizes individual instances classified by the Classifier (false) or the Classifier itself (true).
+			<p>From package UML::Classification.</p>
+			*/
+			 
 			virtual void setIsStatic (bool _isStatic)= 0; 
-			
 			
 			//*********************************
 			// Reference
 			//*********************************
+			
 			
 			
 
@@ -129,8 +135,10 @@ namespace uml
 			// Attribute Members
 			//*********************************
 			/*!
-			 Specifies whether this Feature characterizes individual instances classified by the Classifier (false) or the Classifier itself (true).
-			<p>From package UML::Classification.</p> */ 
+			Specifies whether this Feature characterizes individual instances classified by the Classifier (false) or the Classifier itself (true).
+			<p>From package UML::Classification.</p>
+			*/
+			 
 			bool m_isStatic = false;
 			
 			
@@ -138,24 +146,31 @@ namespace uml
 			// Reference Members
 			//*********************************
 			/*!
-			 The Classifiers that have this Feature as a feature.
-			<p>From package UML::Classification.</p> */
-			mutable std::shared_ptr<Union<uml::Classifier>> m_featuringClassifier;
+			The Classifiers that have this Feature as a feature.
+			<p>From package UML::Classification.</p>
+			*/
 			
+			mutable std::shared_ptr<Union<uml::Classifier>> m_featuringClassifier;
 
 		public:
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 The Classifiers that have this Feature as a feature.
-			<p>From package UML::Classification.</p> */
+			The Classifiers that have this Feature as a feature.
+			<p>From package UML::Classification.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Classifier>> getFeaturingClassifier() const = 0;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

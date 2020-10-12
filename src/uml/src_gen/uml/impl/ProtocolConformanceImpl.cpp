@@ -141,25 +141,37 @@ std::shared_ptr<ecore::EClass> ProtocolConformanceImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference generalMachine
+*/
 std::shared_ptr<uml::ProtocolStateMachine > ProtocolConformanceImpl::getGeneralMachine() const
 {
 //assert(m_generalMachine);
     return m_generalMachine;
 }
+
 void ProtocolConformanceImpl::setGeneralMachine(std::shared_ptr<uml::ProtocolStateMachine> _generalMachine)
 {
     m_generalMachine = _generalMachine;
 }
 
+
+
+/*
+Getter & Setter for reference specificMachine
+*/
 std::weak_ptr<uml::ProtocolStateMachine > ProtocolConformanceImpl::getSpecificMachine() const
 {
 //assert(m_specificMachine);
     return m_specificMachine;
 }
+
 void ProtocolConformanceImpl::setSpecificMachine(std::shared_ptr<uml::ProtocolStateMachine> _specificMachine)
 {
     m_specificMachine = _specificMachine;
 }
+
+
 
 //*********************************
 // Union Getter

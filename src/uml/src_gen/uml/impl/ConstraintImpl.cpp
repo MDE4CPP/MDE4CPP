@@ -220,6 +220,9 @@ bool ConstraintImpl::not_apply_to_self(Any diagnostics,std::map <   Any, Any >  
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference constrainedElement
+*/
 std::shared_ptr<Bag<uml::Element>> ConstraintImpl::getConstrainedElement() const
 {
 	if(m_constrainedElement == nullptr)
@@ -233,25 +236,40 @@ std::shared_ptr<Bag<uml::Element>> ConstraintImpl::getConstrainedElement() const
 }
 
 
+
+
+
+/*
+Getter & Setter for reference context
+*/
 std::weak_ptr<uml::Namespace > ConstraintImpl::getContext() const
 {
 
     return m_context;
 }
+
 void ConstraintImpl::setContext(std::shared_ptr<uml::Namespace> _context)
 {
     m_context = _context;
 }
 
+
+
+/*
+Getter & Setter for reference specification
+*/
 std::shared_ptr<uml::ValueSpecification > ConstraintImpl::getSpecification() const
 {
 //assert(m_specification);
     return m_specification;
 }
+
 void ConstraintImpl::setSpecification(std::shared_ptr<uml::ValueSpecification> _specification)
 {
     m_specification = _specification;
 }
+
+
 
 //*********************************
 // Union Getter

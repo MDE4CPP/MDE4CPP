@@ -197,15 +197,21 @@ std::shared_ptr<ecore::EClass> StateInvariantImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference invariant
+*/
 std::shared_ptr<uml::Constraint > StateInvariantImpl::getInvariant() const
 {
 //assert(m_invariant);
     return m_invariant;
 }
+
 void StateInvariantImpl::setInvariant(std::shared_ptr<uml::Constraint> _invariant)
 {
     m_invariant = _invariant;
 }
+
+
 
 //*********************************
 // Union Getter

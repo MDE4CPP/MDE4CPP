@@ -293,15 +293,21 @@ bool ReadSelfActionImpl::type(Any diagnostics,std::map <   Any, Any >  context)
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference result
+*/
 std::shared_ptr<uml::OutputPin > ReadSelfActionImpl::getResult() const
 {
 //assert(m_result);
     return m_result;
 }
+
 void ReadSelfActionImpl::setResult(std::shared_ptr<uml::OutputPin> _result)
 {
     m_result = _result;
 }
+
+
 
 //*********************************
 // Union Getter

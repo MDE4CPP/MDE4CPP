@@ -49,22 +49,16 @@ virtual public EStringToStringMapEntry
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual std::string getKey() const ;
 			
-			/*!
-			 */ 
+			 
 			virtual void setKey (std::string _key); 
-			
-			/*!
-			 */ 
+			 
 			virtual std::string getValue() const ;
 			
-			/*!
-			 */ 
+			 
 			virtual void setValue (std::string _value); 
-			
 			
 			
 			//*********************************

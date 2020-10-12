@@ -125,8 +125,10 @@ namespace uml
 namespace uml 
 {
 	/*!
-	 A ForkNode is a ControlNode that splits a flow into multiple concurrent flows.
-	<p>From package UML::Activities.</p> */
+	A ForkNode is a ControlNode that splits a flow into multiple concurrent flows.
+	<p>From package UML::Activities.</p>
+	*/
+	
 	class ForkNode:virtual public ControlNode
 	{
 		public:
@@ -147,14 +149,18 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 The ActivityEdges incoming to and outgoing from a ForkNode must be either all ObjectFlows or all ControlFlows.
+			The ActivityEdges incoming to and outgoing from a ForkNode must be either all ObjectFlows or all ControlFlows.
 			let allEdges : Set(ActivityEdge) = incoming->union(outgoing) in
-			allEdges->forAll(oclIsKindOf(ControlFlow)) or allEdges->forAll(oclIsKindOf(ObjectFlow)) */ 
+			allEdges->forAll(oclIsKindOf(ControlFlow)) or allEdges->forAll(oclIsKindOf(ObjectFlow))
+			*/
+			 
 			virtual bool edges(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
-			 A ForkNode has one incoming ActivityEdge.
-			incoming->size()=1 */ 
+			A ForkNode has one incoming ActivityEdge.
+			incoming->size()=1
+			*/
+			 
 			virtual bool one_incoming_edge(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
@@ -183,17 +189,25 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p> */
+			ActivityGroups containing the ActivityNode.
+			<p>From package UML::Activities.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::ActivityGroup>> getInGroup() const = 0;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
+			The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

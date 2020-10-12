@@ -303,25 +303,37 @@ bool SendSignalActionImpl::type_target_pin(Any diagnostics,std::map <   Any, Any
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference signal
+*/
 std::shared_ptr<uml::Signal > SendSignalActionImpl::getSignal() const
 {
 //assert(m_signal);
     return m_signal;
 }
+
 void SendSignalActionImpl::setSignal(std::shared_ptr<uml::Signal> _signal)
 {
     m_signal = _signal;
 }
 
+
+
+/*
+Getter & Setter for reference target
+*/
 std::shared_ptr<uml::InputPin > SendSignalActionImpl::getTarget() const
 {
 //assert(m_target);
     return m_target;
 }
+
 void SendSignalActionImpl::setTarget(std::shared_ptr<uml::InputPin> _target)
 {
     m_target = _target;
 }
+
+
 
 //*********************************
 // Union Getter

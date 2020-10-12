@@ -363,6 +363,9 @@ std::shared_ptr<uml::Property> SignalImpl::createOwnedAttribute(std::string name
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference ownedAttribute
+*/
 std::shared_ptr<Subset<uml::Property, uml::Property,uml::NamedElement>> SignalImpl::getOwnedAttribute() const
 {
 	if(m_ownedAttribute == nullptr)
@@ -383,6 +386,9 @@ std::shared_ptr<Subset<uml::Property, uml::Property,uml::NamedElement>> SignalIm
 
     return m_ownedAttribute;
 }
+
+
+
 
 
 //*********************************

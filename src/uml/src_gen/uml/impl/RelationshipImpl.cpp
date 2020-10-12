@@ -119,6 +119,12 @@ std::shared_ptr<ecore::EClass> RelationshipImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference relatedElement
+*/
+
+
+
 
 
 

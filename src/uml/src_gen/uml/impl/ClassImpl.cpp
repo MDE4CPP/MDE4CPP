@@ -460,14 +460,20 @@ std::shared_ptr<ecore::EClass> ClassImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
-void ClassImpl::setIsActive(bool _isActive)
-{
-	m_isActive = _isActive;
-} 
+/*
+Getter & Setter for attribute isActive
+*/
 bool ClassImpl::getIsActive() const 
 {
 	return m_isActive;
 }
+
+void ClassImpl::setIsActive(bool _isActive)
+{
+	m_isActive = _isActive;
+} 
+
+
 
 //*********************************
 // Operations
@@ -539,6 +545,9 @@ bool ClassImpl::passive_class(Any diagnostics,std::map <   Any, Any >  context)
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference extension
+*/
 std::shared_ptr<Bag<uml::Extension>> ClassImpl::getExtension() const
 {
 	if(m_extension == nullptr)
@@ -552,6 +561,12 @@ std::shared_ptr<Bag<uml::Extension>> ClassImpl::getExtension() const
 }
 
 
+
+
+
+/*
+Getter & Setter for reference nestedClassifier
+*/
 std::shared_ptr<Subset<uml::Classifier, uml::NamedElement>> ClassImpl::getNestedClassifier() const
 {
 	if(m_nestedClassifier == nullptr)
@@ -574,6 +589,12 @@ std::shared_ptr<Subset<uml::Classifier, uml::NamedElement>> ClassImpl::getNested
 }
 
 
+
+
+
+/*
+Getter & Setter for reference ownedOperation
+*/
 std::shared_ptr<Subset<uml::Operation, uml::Feature,uml::NamedElement>> ClassImpl::getOwnedOperation() const
 {
 	if(m_ownedOperation == nullptr)
@@ -596,6 +617,12 @@ std::shared_ptr<Subset<uml::Operation, uml::Feature,uml::NamedElement>> ClassImp
 }
 
 
+
+
+
+/*
+Getter & Setter for reference ownedReception
+*/
 std::shared_ptr<Subset<uml::Reception, uml::Feature,uml::NamedElement>> ClassImpl::getOwnedReception() const
 {
 	if(m_ownedReception == nullptr)
@@ -618,6 +645,12 @@ std::shared_ptr<Subset<uml::Reception, uml::Feature,uml::NamedElement>> ClassImp
 }
 
 
+
+
+
+/*
+Getter & Setter for reference superClass
+*/
 std::shared_ptr<Bag<uml::Class>> ClassImpl::getSuperClass() const
 {
 	if(m_superClass == nullptr)
@@ -629,6 +662,11 @@ std::shared_ptr<Bag<uml::Class>> ClassImpl::getSuperClass() const
 
     return m_superClass;
 }
+
+
+
+/*Additional Setter for redefined reference 'Classifier::general'*/
+
 
 
 //*********************************

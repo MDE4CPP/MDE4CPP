@@ -137,6 +137,9 @@ std::shared_ptr<ecore::EAnnotation> EModelElementImpl::getEAnnotation(std::strin
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference eAnnotations
+*/
 std::shared_ptr<Subset<ecore::EAnnotation, ecore::EObject>> EModelElementImpl::getEAnnotations() const
 {
 	if(m_eAnnotations == nullptr)
@@ -157,6 +160,9 @@ std::shared_ptr<Subset<ecore::EAnnotation, ecore::EObject>> EModelElementImpl::g
 
     return m_eAnnotations;
 }
+
+
+
 
 
 //*********************************

@@ -283,14 +283,20 @@ std::shared_ptr<ecore::EClass> CallActionImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
-void CallActionImpl::setIsSynchronous(bool _isSynchronous)
-{
-	m_isSynchronous = _isSynchronous;
-} 
+/*
+Getter & Setter for attribute isSynchronous
+*/
 bool CallActionImpl::getIsSynchronous() const 
 {
 	return m_isSynchronous;
 }
+
+void CallActionImpl::setIsSynchronous(bool _isSynchronous)
+{
+	m_isSynchronous = _isSynchronous;
+} 
+
+
 
 //*********************************
 // Operations
@@ -328,6 +334,9 @@ bool CallActionImpl::synchronous_call(Any diagnostics,std::map <   Any, Any >  c
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference result
+*/
 std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>> CallActionImpl::getResult() const
 {
 	if(m_result == nullptr)
@@ -348,6 +357,9 @@ std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>> CallActionImpl::getResul
 
     return m_result;
 }
+
+
+
 
 
 //*********************************

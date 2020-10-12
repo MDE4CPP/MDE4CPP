@@ -52,24 +52,30 @@ namespace uml
 			// Attributes Getter Setter
 			//*********************************
 			/*!
-			 Specifies a string that is the comment.
-			<p>From package UML::CommonStructure.</p> */ 
+			Specifies a string that is the comment.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			 
 			virtual std::string getBody() const ;
 			
 			/*!
-			 Specifies a string that is the comment.
-			<p>From package UML::CommonStructure.</p> */ 
+			Specifies a string that is the comment.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			 
 			virtual void setBody (std::string _body); 
-			
 			
 			
 			//*********************************
 			// Reference
 			//*********************************
 			/*!
-			 References the Element(s) being commented.
-			<p>From package UML::CommonStructure.</p> */
+			References the Element(s) being commented.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Bag<uml::Element>> getAnnotatedElement() const ;
+			
 			
 							
 			
@@ -77,8 +83,10 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ; 
 			 
 			//*********************************

@@ -59,18 +59,24 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 The multiplicity of the InputPins is 1..1.
-			first.is(1,1) and second.is(1,1) */ 
+			The multiplicity of the InputPins is 1..1.
+			first.is(1,1) and second.is(1,1)
+			*/
+			 
 			virtual bool multiplicity(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
-			 The InputPins have no type.
-			first.type= null and second.type = null */ 
+			The InputPins have no type.
+			first.type= null and second.type = null
+			*/
+			 
 			virtual bool no_type(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
-			 The type of the result OutputPin is Boolean.
-			result.type=Boolean */ 
+			The type of the result OutputPin is Boolean.
+			result.type=Boolean
+			*/
+			 
 			virtual bool result_is_boolean(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
@@ -84,55 +90,82 @@ namespace uml
 			// Reference
 			//*********************************
 			/*!
-			 The InputPin on which the first input object is placed.
-			<p>From package UML::Actions.</p> */
+			The InputPin on which the first input object is placed.
+			<p>From package UML::Actions.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::InputPin > getFirst() const ;
 			
 			/*!
-			 The InputPin on which the first input object is placed.
-			<p>From package UML::Actions.</p> */
-			virtual void setFirst(std::shared_ptr<uml::InputPin> _first_first) ;
+			The InputPin on which the first input object is placed.
+			<p>From package UML::Actions.</p>
+			*/
+			
+			virtual void setFirst(std::shared_ptr<uml::InputPin> _first) ;
+			
 			/*!
-			 The OutputPin whose Boolean value indicates whether the two input objects are identical.
-			<p>From package UML::Actions.</p> */
+			The OutputPin whose Boolean value indicates whether the two input objects are identical.
+			<p>From package UML::Actions.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::OutputPin > getResult() const ;
 			
 			/*!
-			 The OutputPin whose Boolean value indicates whether the two input objects are identical.
-			<p>From package UML::Actions.</p> */
-			virtual void setResult(std::shared_ptr<uml::OutputPin> _result_result) ;
+			The OutputPin whose Boolean value indicates whether the two input objects are identical.
+			<p>From package UML::Actions.</p>
+			*/
+			
+			virtual void setResult(std::shared_ptr<uml::OutputPin> _result) ;
+			
 			/*!
-			 The OutputPin on which the second input object is placed.
-			<p>From package UML::Actions.</p> */
+			The OutputPin on which the second input object is placed.
+			<p>From package UML::Actions.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::InputPin > getSecond() const ;
 			
 			/*!
-			 The OutputPin on which the second input object is placed.
-			<p>From package UML::Actions.</p> */
-			virtual void setSecond(std::shared_ptr<uml::InputPin> _second_second) ;
+			The OutputPin on which the second input object is placed.
+			<p>From package UML::Actions.</p>
+			*/
+			
+			virtual void setSecond(std::shared_ptr<uml::InputPin> _second) ;
+			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p> */
+			ActivityGroups containing the ActivityNode.
+			<p>From package UML::Activities.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::ActivityGroup>> getInGroup() const ;/*!
-			 The ordered set of InputPins representing the inputs to the Action.
-			<p>From package UML::Actions.</p> */
+			The ordered set of InputPins representing the inputs to the Action.
+			<p>From package UML::Actions.</p>
+			*/
+			
 			virtual std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element>> getInput() const ;/*!
-			 The ordered set of OutputPins representing outputs from the Action.
-			<p>From package UML::Actions.</p> */
+			The ordered set of OutputPins representing outputs from the Action.
+			<p>From package UML::Actions.</p>
+			*/
+			
 			virtual std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element>> getOutput() const ;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
+			The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const ; 
 			 
 			//*********************************

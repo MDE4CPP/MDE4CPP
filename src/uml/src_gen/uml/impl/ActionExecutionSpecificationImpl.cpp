@@ -203,15 +203,21 @@ bool ActionExecutionSpecificationImpl::action_referenced(Any diagnostics,std::ma
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference action
+*/
 std::shared_ptr<uml::Action > ActionExecutionSpecificationImpl::getAction() const
 {
 //assert(m_action);
     return m_action;
 }
+
 void ActionExecutionSpecificationImpl::setAction(std::shared_ptr<uml::Action> _action)
 {
     m_action = _action;
 }
+
+
 
 //*********************************
 // Union Getter

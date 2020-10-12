@@ -196,22 +196,52 @@ bool ActivityGroupImpl::not_contained(Any diagnostics,std::map <   Any, Any >  c
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference containedEdge
+*/
 
 
 
 
 
 
+/*
+Getter & Setter for reference containedNode
+*/
+
+
+
+
+
+
+/*
+Getter & Setter for reference inActivity
+*/
 std::weak_ptr<uml::Activity > ActivityGroupImpl::getInActivity() const
 {
 
     return m_inActivity;
 }
+
 void ActivityGroupImpl::setInActivity(std::shared_ptr<uml::Activity> _inActivity)
 {
     m_inActivity = _inActivity;
 }
 
+
+
+/*
+Getter & Setter for reference subgroup
+*/
+
+
+
+
+
+
+/*
+Getter & Setter for reference superGroup
+*/
 
 
 

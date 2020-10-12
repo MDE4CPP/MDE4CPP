@@ -402,16 +402,25 @@ std::shared_ptr<Bag<uml::Interface> > BehavioredClassifierImpl::getImplementedIn
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference classifierBehavior
+*/
 std::shared_ptr<uml::Behavior > BehavioredClassifierImpl::getClassifierBehavior() const
 {
 
     return m_classifierBehavior;
 }
+
 void BehavioredClassifierImpl::setClassifierBehavior(std::shared_ptr<uml::Behavior> _classifierBehavior)
 {
     m_classifierBehavior = _classifierBehavior;
 }
 
+
+
+/*
+Getter & Setter for reference interfaceRealization
+*/
 std::shared_ptr<Subset<uml::InterfaceRealization, uml::Element>> BehavioredClassifierImpl::getInterfaceRealization() const
 {
 	if(m_interfaceRealization == nullptr)
@@ -434,6 +443,12 @@ std::shared_ptr<Subset<uml::InterfaceRealization, uml::Element>> BehavioredClass
 }
 
 
+
+
+
+/*
+Getter & Setter for reference ownedBehavior
+*/
 std::shared_ptr<SubsetUnion<uml::Behavior, uml::NamedElement>> BehavioredClassifierImpl::getOwnedBehavior() const
 {
 	if(m_ownedBehavior == nullptr)
@@ -454,6 +469,9 @@ std::shared_ptr<SubsetUnion<uml::Behavior, uml::NamedElement>> BehavioredClassif
 
     return m_ownedBehavior;
 }
+
+
+
 
 
 //*********************************

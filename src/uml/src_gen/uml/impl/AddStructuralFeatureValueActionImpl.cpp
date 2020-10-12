@@ -288,14 +288,20 @@ std::shared_ptr<ecore::EClass> AddStructuralFeatureValueActionImpl::eStaticClass
 //*********************************
 // Attribute Setter Getter
 //*********************************
-void AddStructuralFeatureValueActionImpl::setIsReplaceAll(bool _isReplaceAll)
-{
-	m_isReplaceAll = _isReplaceAll;
-} 
+/*
+Getter & Setter for attribute isReplaceAll
+*/
 bool AddStructuralFeatureValueActionImpl::getIsReplaceAll() const 
 {
 	return m_isReplaceAll;
 }
+
+void AddStructuralFeatureValueActionImpl::setIsReplaceAll(bool _isReplaceAll)
+{
+	m_isReplaceAll = _isReplaceAll;
+} 
+
+
 
 //*********************************
 // Operations
@@ -315,15 +321,21 @@ bool AddStructuralFeatureValueActionImpl::required_value(Any diagnostics,std::ma
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference insertAt
+*/
 std::shared_ptr<uml::InputPin > AddStructuralFeatureValueActionImpl::getInsertAt() const
 {
 
     return m_insertAt;
 }
+
 void AddStructuralFeatureValueActionImpl::setInsertAt(std::shared_ptr<uml::InputPin> _insertAt)
 {
     m_insertAt = _insertAt;
 }
+
+
 
 //*********************************
 // Union Getter

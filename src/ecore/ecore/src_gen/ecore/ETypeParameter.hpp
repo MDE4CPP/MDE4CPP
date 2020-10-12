@@ -66,8 +66,7 @@ namespace ecore
 //*********************************
 namespace ecore 
 {
-	/*!
-	 */
+	
 	class ETypeParameter:virtual public ENamedElement
 	{
 		public:
@@ -95,9 +94,9 @@ namespace ecore
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Bag<ecore::EGenericType>> getEBounds() const = 0;
+			
 			
 			
 
@@ -110,17 +109,14 @@ namespace ecore
 			//*********************************
 			// Reference Members
 			//*********************************
-			/*!
-			 */
-			mutable std::shared_ptr<Bag<ecore::EGenericType>> m_eBounds;
 			
+			mutable std::shared_ptr<Bag<ecore::EGenericType>> m_eBounds;
 
 		public:
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

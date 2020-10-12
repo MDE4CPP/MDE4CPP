@@ -259,14 +259,20 @@ std::shared_ptr<ecore::EClass> TransitionImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
-void TransitionImpl::setKind(uml::TransitionKind _kind)
-{
-	m_kind = _kind;
-} 
+/*
+Getter & Setter for attribute kind
+*/
 uml::TransitionKind TransitionImpl::getKind() const 
 {
 	return m_kind;
 }
+
+void TransitionImpl::setKind(uml::TransitionKind _kind)
+{
+	m_kind = _kind;
+} 
+
+
 
 //*********************************
 // Operations
@@ -340,66 +346,105 @@ bool TransitionImpl::state_is_local(Any diagnostics,std::map <   Any, Any >  con
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference container
+*/
 std::weak_ptr<uml::Region > TransitionImpl::getContainer() const
 {
 //assert(m_container);
     return m_container;
 }
+
 void TransitionImpl::setContainer(std::shared_ptr<uml::Region> _container)
 {
     m_container = _container;
 }
 
+
+
+/*
+Getter & Setter for reference effect
+*/
 std::shared_ptr<uml::Behavior > TransitionImpl::getEffect() const
 {
 
     return m_effect;
 }
+
 void TransitionImpl::setEffect(std::shared_ptr<uml::Behavior> _effect)
 {
     m_effect = _effect;
 }
 
+
+
+/*
+Getter & Setter for reference guard
+*/
 std::shared_ptr<uml::Constraint > TransitionImpl::getGuard() const
 {
 
     return m_guard;
 }
+
 void TransitionImpl::setGuard(std::shared_ptr<uml::Constraint> _guard)
 {
     m_guard = _guard;
 }
 
+
+
+/*
+Getter & Setter for reference redefinedTransition
+*/
 std::shared_ptr<uml::Transition > TransitionImpl::getRedefinedTransition() const
 {
 
     return m_redefinedTransition;
 }
+
 void TransitionImpl::setRedefinedTransition(std::shared_ptr<uml::Transition> _redefinedTransition)
 {
     m_redefinedTransition = _redefinedTransition;
 }
 
+
+
+/*
+Getter & Setter for reference source
+*/
 std::shared_ptr<uml::Vertex > TransitionImpl::getSource() const
 {
 //assert(m_source);
     return m_source;
 }
+
 void TransitionImpl::setSource(std::shared_ptr<uml::Vertex> _source)
 {
     m_source = _source;
 }
 
+
+
+/*
+Getter & Setter for reference target
+*/
 std::shared_ptr<uml::Vertex > TransitionImpl::getTarget() const
 {
 //assert(m_target);
     return m_target;
 }
+
 void TransitionImpl::setTarget(std::shared_ptr<uml::Vertex> _target)
 {
     m_target = _target;
 }
 
+
+
+/*
+Getter & Setter for reference trigger
+*/
 std::shared_ptr<Subset<uml::Trigger, uml::Element>> TransitionImpl::getTrigger() const
 {
 	if(m_trigger == nullptr)
@@ -420,6 +465,9 @@ std::shared_ptr<Subset<uml::Trigger, uml::Element>> TransitionImpl::getTrigger()
 
     return m_trigger;
 }
+
+
+
 
 
 //*********************************

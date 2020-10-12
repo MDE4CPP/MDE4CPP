@@ -219,23 +219,35 @@ std::shared_ptr<ecore::EClass> ActivityPartitionImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
+/*
+Getter & Setter for attribute isDimension
+*/
+bool ActivityPartitionImpl::getIsDimension() const 
+{
+	return m_isDimension;
+}
+
 void ActivityPartitionImpl::setIsDimension(bool _isDimension)
 {
 	m_isDimension = _isDimension;
 } 
-bool ActivityPartitionImpl::getIsDimension() const 
+
+
+
+/*
+Getter & Setter for attribute isExternal
+*/
+bool ActivityPartitionImpl::getIsExternal() const 
 {
-	return m_isDimension;
+	return m_isExternal;
 }
 
 void ActivityPartitionImpl::setIsExternal(bool _isExternal)
 {
 	m_isExternal = _isExternal;
 } 
-bool ActivityPartitionImpl::getIsExternal() const 
-{
-	return m_isExternal;
-}
+
+
 
 //*********************************
 // Operations
@@ -267,6 +279,9 @@ bool ActivityPartitionImpl::represents_property_and_is_contained(Any diagnostics
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference edge
+*/
 std::shared_ptr<Subset<uml::ActivityEdge, uml::ActivityEdge>> ActivityPartitionImpl::getEdge() const
 {
 	if(m_edge == nullptr)
@@ -289,6 +304,12 @@ std::shared_ptr<Subset<uml::ActivityEdge, uml::ActivityEdge>> ActivityPartitionI
 }
 
 
+
+
+
+/*
+Getter & Setter for reference node
+*/
 std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode>> ActivityPartitionImpl::getNode() const
 {
 	if(m_node == nullptr)
@@ -311,16 +332,28 @@ std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode>> ActivityPartitionI
 }
 
 
+
+
+
+/*
+Getter & Setter for reference represents
+*/
 std::shared_ptr<uml::Element > ActivityPartitionImpl::getRepresents() const
 {
 
     return m_represents;
 }
+
 void ActivityPartitionImpl::setRepresents(std::shared_ptr<uml::Element> _represents)
 {
     m_represents = _represents;
 }
 
+
+
+/*
+Getter & Setter for reference subpartition
+*/
 std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup>> ActivityPartitionImpl::getSubpartition() const
 {
 	if(m_subpartition == nullptr)
@@ -343,15 +376,24 @@ std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup>> ActivityPart
 }
 
 
+
+
+
+/*
+Getter & Setter for reference superPartition
+*/
 std::weak_ptr<uml::ActivityPartition > ActivityPartitionImpl::getSuperPartition() const
 {
 
     return m_superPartition;
 }
+
 void ActivityPartitionImpl::setSuperPartition(std::shared_ptr<uml::ActivityPartition> _superPartition)
 {
     m_superPartition = _superPartition;
 }
+
+
 
 //*********************************
 // Union Getter

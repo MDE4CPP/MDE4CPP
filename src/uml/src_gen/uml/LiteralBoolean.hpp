@@ -102,8 +102,10 @@ namespace uml
 namespace uml 
 {
 	/*!
-	 A LiteralBoolean is a specification of a Boolean value.
-	<p>From package UML::Values.</p> */
+	A LiteralBoolean is a specification of a Boolean value.
+	<p>From package UML::Values.</p>
+	*/
+	
 	class LiteralBoolean:virtual public LiteralSpecification
 	{
 		public:
@@ -124,15 +126,19 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 The query booleanValue() gives the value.
+			The query booleanValue() gives the value.
 			result = (value)
-			<p>From package UML::Values.</p> */ 
+			<p>From package UML::Values.</p>
+			*/
+			 
 			virtual bool booleanValue() = 0;
 			
 			/*!
-			 The query isComputable() is redefined to be true.
+			The query isComputable() is redefined to be true.
 			result = (true)
-			<p>From package UML::Values.</p> */ 
+			<p>From package UML::Values.</p>
+			*/
+			 
 			virtual bool isComputable() = 0;
 			
 			
@@ -140,15 +146,18 @@ namespace uml
 			// Attributes Getter Setter
 			//*********************************
 			/*!
-			 The specified Boolean value.
-			<p>From package UML::Values.</p> */ 
+			The specified Boolean value.
+			<p>From package UML::Values.</p>
+			*/
+			 
 			virtual bool getValue() const = 0;
 			
 			/*!
-			 The specified Boolean value.
-			<p>From package UML::Values.</p> */ 
+			The specified Boolean value.
+			<p>From package UML::Values.</p>
+			*/
+			 
 			virtual void setValue (bool _value)= 0; 
-			
 			
 			//*********************************
 			// Reference
@@ -160,8 +169,10 @@ namespace uml
 			// Attribute Members
 			//*********************************
 			/*!
-			 The specified Boolean value.
-			<p>From package UML::Values.</p> */ 
+			The specified Boolean value.
+			<p>From package UML::Values.</p>
+			*/
+			 
 			bool m_value = false;
 			
 			
@@ -175,14 +186,20 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

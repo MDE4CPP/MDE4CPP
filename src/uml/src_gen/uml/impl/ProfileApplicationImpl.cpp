@@ -142,14 +142,20 @@ std::shared_ptr<ecore::EClass> ProfileApplicationImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
-void ProfileApplicationImpl::setIsStrict(bool _isStrict)
-{
-	m_isStrict = _isStrict;
-} 
+/*
+Getter & Setter for attribute isStrict
+*/
 bool ProfileApplicationImpl::getIsStrict() const 
 {
 	return m_isStrict;
 }
+
+void ProfileApplicationImpl::setIsStrict(bool _isStrict)
+{
+	m_isStrict = _isStrict;
+} 
+
+
 
 //*********************************
 // Operations
@@ -169,25 +175,37 @@ std::shared_ptr<ecore::ENamedElement> ProfileApplicationImpl::getAppliedDefiniti
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference appliedProfile
+*/
 std::shared_ptr<uml::Profile > ProfileApplicationImpl::getAppliedProfile() const
 {
 //assert(m_appliedProfile);
     return m_appliedProfile;
 }
+
 void ProfileApplicationImpl::setAppliedProfile(std::shared_ptr<uml::Profile> _appliedProfile)
 {
     m_appliedProfile = _appliedProfile;
 }
 
+
+
+/*
+Getter & Setter for reference applyingPackage
+*/
 std::weak_ptr<uml::Package > ProfileApplicationImpl::getApplyingPackage() const
 {
 //assert(m_applyingPackage);
     return m_applyingPackage;
 }
+
 void ProfileApplicationImpl::setApplyingPackage(std::shared_ptr<uml::Package> _applyingPackage)
 {
     m_applyingPackage = _applyingPackage;
 }
+
+
 
 //*********************************
 // Union Getter

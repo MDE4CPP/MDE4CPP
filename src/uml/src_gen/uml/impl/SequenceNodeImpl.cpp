@@ -387,6 +387,9 @@ std::shared_ptr<ecore::EClass> SequenceNodeImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference executableNode
+*/
 std::shared_ptr<Bag<uml::ExecutableNode>> SequenceNodeImpl::getExecutableNode() const
 {
 	if(m_executableNode == nullptr)
@@ -398,6 +401,11 @@ std::shared_ptr<Bag<uml::ExecutableNode>> SequenceNodeImpl::getExecutableNode() 
 
     return m_executableNode;
 }
+
+
+
+/*Additional Setter for redefined reference 'StructuredActivityNode::node'*/
+
 
 
 //*********************************

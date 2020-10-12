@@ -178,15 +178,21 @@ std::shared_ptr<ecore::EClass> SignalEventImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference signal
+*/
 std::shared_ptr<uml::Signal > SignalEventImpl::getSignal() const
 {
 //assert(m_signal);
     return m_signal;
 }
+
 void SignalEventImpl::setSignal(std::shared_ptr<uml::Signal> _signal)
 {
     m_signal = _signal;
 }
+
+
 
 //*********************************
 // Union Getter

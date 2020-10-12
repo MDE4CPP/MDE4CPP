@@ -241,21 +241,31 @@ bool ActivityEdgeImpl::source_and_target(Any diagnostics,std::map <   Any, Any >
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference activity
+*/
 std::weak_ptr<uml::Activity > ActivityEdgeImpl::getActivity() const
 {
 
     return m_activity;
 }
+
 void ActivityEdgeImpl::setActivity(std::shared_ptr<uml::Activity> _activity)
 {
     m_activity = _activity;
 }
 
+
+
+/*
+Getter & Setter for reference guard
+*/
 std::shared_ptr<uml::ValueSpecification > ActivityEdgeImpl::getGuard() const
 {
 
     return m_guard;
 }
+
 void ActivityEdgeImpl::setGuard(std::shared_ptr<uml::ValueSpecification> _guard)
 {
     m_guard = _guard;
@@ -263,7 +273,18 @@ void ActivityEdgeImpl::setGuard(std::shared_ptr<uml::ValueSpecification> _guard)
 
 
 
+/*
+Getter & Setter for reference inGroup
+*/
 
+
+
+
+
+
+/*
+Getter & Setter for reference inPartition
+*/
 std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup>> ActivityEdgeImpl::getInPartition() const
 {
 	if(m_inPartition == nullptr)
@@ -286,26 +307,44 @@ std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup>> ActivityEdge
 }
 
 
+
+
+
+/*
+Getter & Setter for reference inStructuredNode
+*/
 std::weak_ptr<uml::StructuredActivityNode > ActivityEdgeImpl::getInStructuredNode() const
 {
 
     return m_inStructuredNode;
 }
+
 void ActivityEdgeImpl::setInStructuredNode(std::shared_ptr<uml::StructuredActivityNode> _inStructuredNode)
 {
     m_inStructuredNode = _inStructuredNode;
 }
 
+
+
+/*
+Getter & Setter for reference interrupts
+*/
 std::shared_ptr<uml::InterruptibleActivityRegion > ActivityEdgeImpl::getInterrupts() const
 {
 
     return m_interrupts;
 }
+
 void ActivityEdgeImpl::setInterrupts(std::shared_ptr<uml::InterruptibleActivityRegion> _interrupts)
 {
     m_interrupts = _interrupts;
 }
 
+
+
+/*
+Getter & Setter for reference redefinedEdge
+*/
 std::shared_ptr<Subset<uml::ActivityEdge, uml::RedefinableElement>> ActivityEdgeImpl::getRedefinedEdge() const
 {
 	if(m_redefinedEdge == nullptr)
@@ -328,35 +367,56 @@ std::shared_ptr<Subset<uml::ActivityEdge, uml::RedefinableElement>> ActivityEdge
 }
 
 
+
+
+
+/*
+Getter & Setter for reference source
+*/
 std::shared_ptr<uml::ActivityNode > ActivityEdgeImpl::getSource() const
 {
 //assert(m_source);
     return m_source;
 }
+
 void ActivityEdgeImpl::setSource(std::shared_ptr<uml::ActivityNode> _source)
 {
     m_source = _source;
 }
 
+
+
+/*
+Getter & Setter for reference target
+*/
 std::shared_ptr<uml::ActivityNode > ActivityEdgeImpl::getTarget() const
 {
 //assert(m_target);
     return m_target;
 }
+
 void ActivityEdgeImpl::setTarget(std::shared_ptr<uml::ActivityNode> _target)
 {
     m_target = _target;
 }
 
+
+
+/*
+Getter & Setter for reference weight
+*/
 std::shared_ptr<uml::ValueSpecification > ActivityEdgeImpl::getWeight() const
 {
 
     return m_weight;
 }
+
 void ActivityEdgeImpl::setWeight(std::shared_ptr<uml::ValueSpecification> _weight)
 {
     m_weight = _weight;
 }
+
+
 
 //*********************************
 // Union Getter

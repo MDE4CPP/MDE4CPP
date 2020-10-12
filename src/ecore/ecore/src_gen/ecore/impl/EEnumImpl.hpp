@@ -50,16 +50,13 @@ namespace ecore
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<ecore::EEnumLiteral> getEEnumLiteral(std::string name) const ;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<ecore::EEnumLiteral> getEEnumLiteral(int value) const ;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<ecore::EEnumLiteral> getEEnumLiteralByLiteral(std::string literal) const ;
 			
 			
@@ -72,17 +69,16 @@ namespace ecore
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Subset<ecore::EEnumLiteral, ecore::EObject>> getELiterals() const ;
+			
 			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const ; 
 			 
 			//*********************************

@@ -262,25 +262,37 @@ bool ExpansionNodeImpl::region_as_input_or_output(Any diagnostics,std::map <   A
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference regionAsInput
+*/
 std::shared_ptr<uml::ExpansionRegion > ExpansionNodeImpl::getRegionAsInput() const
 {
 
     return m_regionAsInput;
 }
+
 void ExpansionNodeImpl::setRegionAsInput(std::shared_ptr<uml::ExpansionRegion> _regionAsInput)
 {
     m_regionAsInput = _regionAsInput;
 }
 
+
+
+/*
+Getter & Setter for reference regionAsOutput
+*/
 std::shared_ptr<uml::ExpansionRegion > ExpansionNodeImpl::getRegionAsOutput() const
 {
 
     return m_regionAsOutput;
 }
+
 void ExpansionNodeImpl::setRegionAsOutput(std::shared_ptr<uml::ExpansionRegion> _regionAsOutput)
 {
     m_regionAsOutput = _regionAsOutput;
 }
+
+
 
 //*********************************
 // Union Getter

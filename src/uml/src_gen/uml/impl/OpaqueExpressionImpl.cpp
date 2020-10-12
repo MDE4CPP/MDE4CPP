@@ -205,7 +205,9 @@ std::shared_ptr<ecore::EClass> OpaqueExpressionImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
-
+/*
+Getter & Setter for attribute body
+*/
 std::shared_ptr<Bag<std::string> > OpaqueExpressionImpl::getBody() const 
 {
 	if(m_body == nullptr)
@@ -216,6 +218,12 @@ std::shared_ptr<Bag<std::string> > OpaqueExpressionImpl::getBody() const
 }
 
 
+
+
+
+/*
+Getter & Setter for attribute language
+*/
 std::shared_ptr<Bag<std::string> > OpaqueExpressionImpl::getLanguage() const 
 {
 	if(m_language == nullptr)
@@ -224,6 +232,10 @@ std::shared_ptr<Bag<std::string> > OpaqueExpressionImpl::getLanguage() const
 	}
 	return m_language;
 }
+
+
+
+
 
 //*********************************
 // Operations
@@ -275,21 +287,33 @@ int OpaqueExpressionImpl::value()
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference behavior
+*/
 std::shared_ptr<uml::Behavior > OpaqueExpressionImpl::getBehavior() const
 {
 
     return m_behavior;
 }
+
 void OpaqueExpressionImpl::setBehavior(std::shared_ptr<uml::Behavior> _behavior)
 {
     m_behavior = _behavior;
 }
 
+
+
+/*
+Getter & Setter for reference result
+*/
 std::shared_ptr<uml::Parameter > OpaqueExpressionImpl::getResult() const
 {
 
     return m_result;
 }
+
+
+
 
 
 //*********************************

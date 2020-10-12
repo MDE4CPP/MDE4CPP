@@ -325,15 +325,21 @@ bool ReadLinkActionImpl::visibility(Any diagnostics,std::map <   Any, Any >  con
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference result
+*/
 std::shared_ptr<uml::OutputPin > ReadLinkActionImpl::getResult() const
 {
 //assert(m_result);
     return m_result;
 }
+
 void ReadLinkActionImpl::setResult(std::shared_ptr<uml::OutputPin> _result)
 {
     m_result = _result;
 }
+
+
 
 //*********************************
 // Union Getter

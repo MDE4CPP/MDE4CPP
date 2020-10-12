@@ -384,15 +384,21 @@ bool ActionInputPinImpl::one_output_pin(Any diagnostics,std::map <   Any, Any > 
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference fromAction
+*/
 std::shared_ptr<uml::Action > ActionInputPinImpl::getFromAction() const
 {
 //assert(m_fromAction);
     return m_fromAction;
 }
+
 void ActionInputPinImpl::setFromAction(std::shared_ptr<uml::Action> _fromAction)
 {
     m_fromAction = _fromAction;
 }
+
+
 
 //*********************************
 // Union Getter

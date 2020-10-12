@@ -285,15 +285,21 @@ bool WriteVariableActionImpl::value_type(Any diagnostics,std::map <   Any, Any >
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference value
+*/
 std::shared_ptr<uml::InputPin > WriteVariableActionImpl::getValue() const
 {
 
     return m_value;
 }
+
 void WriteVariableActionImpl::setValue(std::shared_ptr<uml::InputPin> _value)
 {
     m_value = _value;
 }
+
+
 
 //*********************************
 // Union Getter

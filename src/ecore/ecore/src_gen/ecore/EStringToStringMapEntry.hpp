@@ -46,8 +46,7 @@ namespace ecore
 //*********************************
 namespace ecore 
 {
-	/*!
-	 */
+	
 	class EStringToStringMapEntry : virtual public ecore::EObject 
 
 	{
@@ -72,22 +71,16 @@ namespace ecore
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual std::string getKey() const = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual void setKey (std::string _key)= 0; 
-			
-			/*!
-			 */ 
+			 
 			virtual std::string getValue() const = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual void setValue (std::string _value)= 0; 
-			
 			
 			//*********************************
 			// Reference
@@ -98,11 +91,9 @@ namespace ecore
 			//*********************************
 			// Attribute Members
 			//*********************************
-			/*!
-			 */ 
+			 
 			std::string m_key = "";
-			/*!
-			 */ 
+			 
 			std::string m_value = "";
 			
 			

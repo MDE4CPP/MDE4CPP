@@ -206,25 +206,37 @@ std::shared_ptr<ecore::EClass> IntervalImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference max
+*/
 std::shared_ptr<uml::ValueSpecification > IntervalImpl::getMax() const
 {
 //assert(m_max);
     return m_max;
 }
+
 void IntervalImpl::setMax(std::shared_ptr<uml::ValueSpecification> _max)
 {
     m_max = _max;
 }
 
+
+
+/*
+Getter & Setter for reference min
+*/
 std::shared_ptr<uml::ValueSpecification > IntervalImpl::getMin() const
 {
 //assert(m_min);
     return m_min;
 }
+
 void IntervalImpl::setMin(std::shared_ptr<uml::ValueSpecification> _min)
 {
     m_min = _min;
 }
+
+
 
 //*********************************
 // Union Getter

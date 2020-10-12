@@ -264,23 +264,35 @@ std::shared_ptr<ecore::EClass> DestroyObjectActionImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
+/*
+Getter & Setter for attribute isDestroyLinks
+*/
+bool DestroyObjectActionImpl::getIsDestroyLinks() const 
+{
+	return m_isDestroyLinks;
+}
+
 void DestroyObjectActionImpl::setIsDestroyLinks(bool _isDestroyLinks)
 {
 	m_isDestroyLinks = _isDestroyLinks;
 } 
-bool DestroyObjectActionImpl::getIsDestroyLinks() const 
+
+
+
+/*
+Getter & Setter for attribute isDestroyOwnedObjects
+*/
+bool DestroyObjectActionImpl::getIsDestroyOwnedObjects() const 
 {
-	return m_isDestroyLinks;
+	return m_isDestroyOwnedObjects;
 }
 
 void DestroyObjectActionImpl::setIsDestroyOwnedObjects(bool _isDestroyOwnedObjects)
 {
 	m_isDestroyOwnedObjects = _isDestroyOwnedObjects;
 } 
-bool DestroyObjectActionImpl::getIsDestroyOwnedObjects() const 
-{
-	return m_isDestroyOwnedObjects;
-}
+
+
 
 //*********************************
 // Operations
@@ -300,15 +312,21 @@ bool DestroyObjectActionImpl::no_type(Any diagnostics,std::map <   Any, Any >  c
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference target
+*/
 std::shared_ptr<uml::InputPin > DestroyObjectActionImpl::getTarget() const
 {
 //assert(m_target);
     return m_target;
 }
+
 void DestroyObjectActionImpl::setTarget(std::shared_ptr<uml::InputPin> _target)
 {
     m_target = _target;
 }
+
+
 
 //*********************************
 // Union Getter

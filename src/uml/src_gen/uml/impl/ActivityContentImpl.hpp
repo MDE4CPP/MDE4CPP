@@ -44,8 +44,7 @@ virtual public ActivityContent
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<uml::Activity> containingActivity() ;
 			
 			

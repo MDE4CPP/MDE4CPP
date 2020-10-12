@@ -193,6 +193,9 @@ std::shared_ptr<ecore::EClass> InteractionFragmentImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference covered
+*/
 std::shared_ptr<Bag<uml::Lifeline>> InteractionFragmentImpl::getCovered() const
 {
 	if(m_covered == nullptr)
@@ -206,26 +209,44 @@ std::shared_ptr<Bag<uml::Lifeline>> InteractionFragmentImpl::getCovered() const
 }
 
 
+
+
+
+/*
+Getter & Setter for reference enclosingInteraction
+*/
 std::weak_ptr<uml::Interaction > InteractionFragmentImpl::getEnclosingInteraction() const
 {
 
     return m_enclosingInteraction;
 }
+
 void InteractionFragmentImpl::setEnclosingInteraction(std::shared_ptr<uml::Interaction> _enclosingInteraction)
 {
     m_enclosingInteraction = _enclosingInteraction;
 }
 
+
+
+/*
+Getter & Setter for reference enclosingOperand
+*/
 std::weak_ptr<uml::InteractionOperand > InteractionFragmentImpl::getEnclosingOperand() const
 {
 
     return m_enclosingOperand;
 }
+
 void InteractionFragmentImpl::setEnclosingOperand(std::shared_ptr<uml::InteractionOperand> _enclosingOperand)
 {
     m_enclosingOperand = _enclosingOperand;
 }
 
+
+
+/*
+Getter & Setter for reference generalOrdering
+*/
 std::shared_ptr<Subset<uml::GeneralOrdering, uml::Element>> InteractionFragmentImpl::getGeneralOrdering() const
 {
 	if(m_generalOrdering == nullptr)
@@ -246,6 +267,9 @@ std::shared_ptr<Subset<uml::GeneralOrdering, uml::Element>> InteractionFragmentI
 
     return m_generalOrdering;
 }
+
+
+
 
 
 //*********************************

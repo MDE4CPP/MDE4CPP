@@ -300,25 +300,37 @@ bool CallOperationActionImpl::type_target_pin(Any diagnostics,std::map <   Any, 
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference operation
+*/
 std::shared_ptr<uml::Operation > CallOperationActionImpl::getOperation() const
 {
 //assert(m_operation);
     return m_operation;
 }
+
 void CallOperationActionImpl::setOperation(std::shared_ptr<uml::Operation> _operation)
 {
     m_operation = _operation;
 }
 
+
+
+/*
+Getter & Setter for reference target
+*/
 std::shared_ptr<uml::InputPin > CallOperationActionImpl::getTarget() const
 {
 //assert(m_target);
     return m_target;
 }
+
 void CallOperationActionImpl::setTarget(std::shared_ptr<uml::InputPin> _target)
 {
     m_target = _target;
 }
+
+
 
 //*********************************
 // Union Getter

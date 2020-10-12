@@ -377,14 +377,20 @@ std::shared_ptr<ecore::EClass> ExpansionRegionImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
-void ExpansionRegionImpl::setMode(uml::ExpansionKind _mode)
-{
-	m_mode = _mode;
-} 
+/*
+Getter & Setter for attribute mode
+*/
 uml::ExpansionKind ExpansionRegionImpl::getMode() const 
 {
 	return m_mode;
 }
+
+void ExpansionRegionImpl::setMode(uml::ExpansionKind _mode)
+{
+	m_mode = _mode;
+} 
+
+
 
 //*********************************
 // Operations
@@ -393,6 +399,9 @@ uml::ExpansionKind ExpansionRegionImpl::getMode() const
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference inputElement
+*/
 std::shared_ptr<Bag<uml::ExpansionNode>> ExpansionRegionImpl::getInputElement() const
 {
 	if(m_inputElement == nullptr)
@@ -406,6 +415,12 @@ std::shared_ptr<Bag<uml::ExpansionNode>> ExpansionRegionImpl::getInputElement() 
 }
 
 
+
+
+
+/*
+Getter & Setter for reference outputElement
+*/
 std::shared_ptr<Bag<uml::ExpansionNode>> ExpansionRegionImpl::getOutputElement() const
 {
 	if(m_outputElement == nullptr)
@@ -417,6 +432,9 @@ std::shared_ptr<Bag<uml::ExpansionNode>> ExpansionRegionImpl::getOutputElement()
 
     return m_outputElement;
 }
+
+
+
 
 
 //*********************************

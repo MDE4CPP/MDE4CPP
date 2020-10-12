@@ -66,14 +66,16 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 A Parameter with direction other than inout must have exactly one ActivityParameterNode in an Activity.
+			A Parameter with direction other than inout must have exactly one ActivityParameterNode in an Activity.
 			ownedParameter->forAll(p | 
 			   p.direction <> ParameterDirectionKind::inout implies node->select(
-			       oclIsKindOf(ActivityParameterNode) and oclAsType(ActivityParameterNode).parameter = p)->size()= 1) */ 
+			       oclIsKindOf(ActivityParameterNode) and oclAsType(ActivityParameterNode).parameter = p)->size()= 1)
+			*/
+			 
 			virtual bool maximum_one_parameter_node(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
-			 A Parameter with direction inout must have exactly two ActivityParameterNodes in an Activity, at most one with incoming ActivityEdges and at most one with outgoing ActivityEdges.
+			A Parameter with direction inout must have exactly two ActivityParameterNodes in an Activity, at most one with incoming ActivityEdges and at most one with outgoing ActivityEdges.
 			ownedParameter->forAll(p | 
 			p.direction = ParameterDirectionKind::inout implies
 			let associatedNodes : Set(ActivityNode) = node->select(
@@ -81,7 +83,9 @@ namespace uml
 			  associatedNodes->size()=2 and
 			  associatedNodes->select(incoming->notEmpty())->size()<=1 and
 			  associatedNodes->select(outgoing->notEmpty())->size()<=1
-			) */ 
+			)
+			*/
+			 
 			virtual bool maximum_two_parameter_nodes(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
@@ -90,63 +94,85 @@ namespace uml
 			// Attributes Getter Setter
 			//*********************************
 			/*!
-			 If true, this Activity must not make any changes to objects. The default is false (an Activity may make nonlocal changes). (This is an assertion, not an executable property. It may be used by an execution engine to optimize model execution. If the assertion is violated by the Activity, then the model is ill-formed.)
-			<p>From package UML::Activities.</p> */ 
+			If true, this Activity must not make any changes to objects. The default is false (an Activity may make nonlocal changes). (This is an assertion, not an executable property. It may be used by an execution engine to optimize model execution. If the assertion is violated by the Activity, then the model is ill-formed.)
+			<p>From package UML::Activities.</p>
+			*/
+			 
 			virtual bool getIsReadOnly() const ;
 			
 			/*!
-			 If true, this Activity must not make any changes to objects. The default is false (an Activity may make nonlocal changes). (This is an assertion, not an executable property. It may be used by an execution engine to optimize model execution. If the assertion is violated by the Activity, then the model is ill-formed.)
-			<p>From package UML::Activities.</p> */ 
+			If true, this Activity must not make any changes to objects. The default is false (an Activity may make nonlocal changes). (This is an assertion, not an executable property. It may be used by an execution engine to optimize model execution. If the assertion is violated by the Activity, then the model is ill-formed.)
+			<p>From package UML::Activities.</p>
+			*/
+			 
 			virtual void setIsReadOnly (bool _isReadOnly); 
-			
 			/*!
-			 If true, all invocations of the Activity are handled by the same execution.
-			<p>From package UML::Activities.</p> */ 
+			If true, all invocations of the Activity are handled by the same execution.
+			<p>From package UML::Activities.</p>
+			*/
+			 
 			virtual bool getIsSingleExecution() const ;
 			
 			/*!
-			 If true, all invocations of the Activity are handled by the same execution.
-			<p>From package UML::Activities.</p> */ 
+			If true, all invocations of the Activity are handled by the same execution.
+			<p>From package UML::Activities.</p>
+			*/
+			 
 			virtual void setIsSingleExecution (bool _isSingleExecution); 
-			
 			
 			
 			//*********************************
 			// Reference
 			//*********************************
 			/*!
-			 ActivityEdges expressing flow between the nodes of the Activity.
-			<p>From package UML::Activities.</p> */
+			ActivityEdges expressing flow between the nodes of the Activity.
+			<p>From package UML::Activities.</p>
+			*/
+			
 			virtual std::shared_ptr<Subset<uml::ActivityEdge, uml::Element>> getEdge() const ;
 			
 			
+			
+			
 			/*!
-			 ActivityNodes coordinated by the Activity.
-			<p>From package UML::Activities.</p> */
+			ActivityNodes coordinated by the Activity.
+			<p>From package UML::Activities.</p>
+			*/
+			
 			virtual std::shared_ptr<SubsetUnion<uml::ActivityNode, uml::Element>> getNode() const ;
 			
-			/*!
-			 */
+			
+			
 			virtual std::shared_ptr<SubsetUnion<uml::ActivityGroup, uml::ActivityGroup>> getOwnedGroup() const ;
 			
-			/*!
-			 */
+			
+			
 			virtual std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode /*Subset does not reference a union*/>> getOwnedNode() const ;
 			
+			
 			/*!
-			 Top-level ActivityPartitions in the Activity.
-			<p>From package UML::Activities.</p> */
+			Top-level ActivityPartitions in the Activity.
+			<p>From package UML::Activities.</p>
+			*/
+			
 			virtual std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup,uml::ActivityGroup /*Subset does not reference a union*/>> getPartition() const ;
 			
-			/*!
-			 Top-level StructuredActivityNodes in the Activity.
-			<p>From package UML::Activities.</p> */
-			virtual std::shared_ptr<Subset<uml::StructuredActivityNode, uml::ActivityGroup,uml::ActivityNode /*Subset does not reference a union*/>> getStructuredNode() const ;
 			
 			/*!
-			 Top-level Variables defined by the Activity.
-			<p>From package UML::Activities.</p> */
+			Top-level StructuredActivityNodes in the Activity.
+			<p>From package UML::Activities.</p>
+			*/
+			
+			virtual std::shared_ptr<Subset<uml::StructuredActivityNode, uml::ActivityGroup,uml::ActivityNode /*Subset does not reference a union*/>> getStructuredNode() const ;
+			
+			
+			/*!
+			Top-level Variables defined by the Activity.
+			<p>From package UML::Activities.</p>
+			*/
+			
 			virtual std::shared_ptr<Subset<uml::Variable, uml::NamedElement>> getVariable() const ;
+			
 			
 							
 			
@@ -154,38 +180,60 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 All of the Properties that are direct (i.e., not inherited or imported) attributes of the Classifier.
-			<p>From package UML::Classification.</p> */
+			All of the Properties that are direct (i.e., not inherited or imported) attributes of the Classifier.
+			<p>From package UML::Classification.</p>
+			*/
+			
 			virtual std::shared_ptr<SubsetUnion<uml::Property, uml::Feature>> getAttribute() const ;/*!
-			 Specifies each Feature directly defined in the classifier. Note that there may be members of the Classifier that are of the type Feature but are not included, e.g., inherited features.
-			<p>From package UML::Classification.</p> */
+			Specifies each Feature directly defined in the classifier. Note that there may be members of the Classifier that are of the type Feature but are not included, e.g., inherited features.
+			<p>From package UML::Classification.</p>
+			*/
+			
 			virtual std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement>> getFeature() const ;/*!
-			 Top-level ActivityGroups in the Activity.
-			<p>From package UML::Activities.</p> */
+			Top-level ActivityGroups in the Activity.
+			<p>From package UML::Activities.</p>
+			*/
+			
 			virtual std::shared_ptr<SubsetUnion<uml::ActivityGroup, uml::Element>> getGroup() const ;/*!
-			 A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
-			<p>From package UML::CommonStructure.</p> */
+			A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::NamedElement>> getMember() const ;/*!
-			 Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
-			 A collection of NamedElements owned by the Namespace.
-			<p>From package UML::CommonStructure.</p> */
+			A collection of NamedElements owned by the Namespace.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> getOwnedMember() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
+			The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const ;/*!
-			 The contexts that this element may be redefined from.
-			<p>From package UML::Classification.</p> */
+			The contexts that this element may be redefined from.
+			<p>From package UML::Classification.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Classifier>> getRedefinitionContext() const ;/*!
-			 The roles that instances may play in this StructuredClassifier.
-			<p>From package UML::StructuredClassifiers.</p> */
+			The roles that instances may play in this StructuredClassifier.
+			<p>From package UML::StructuredClassifiers.</p>
+			*/
+			
 			virtual std::shared_ptr<SubsetUnion<uml::ConnectableElement, uml::NamedElement>> getRole() const ; 
 			 
 			//*********************************

@@ -207,6 +207,9 @@ std::shared_ptr<ecore::EEnumLiteral> EEnumImpl::getEEnumLiteralByLiteral(std::st
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference eLiterals
+*/
 std::shared_ptr<Subset<ecore::EEnumLiteral, ecore::EObject>> EEnumImpl::getELiterals() const
 {
 	if(m_eLiterals == nullptr)
@@ -227,6 +230,9 @@ std::shared_ptr<Subset<ecore::EEnumLiteral, ecore::EObject>> EEnumImpl::getELite
 
     return m_eLiterals;
 }
+
+
+
 
 
 //*********************************

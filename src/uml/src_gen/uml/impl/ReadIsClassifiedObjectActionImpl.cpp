@@ -274,14 +274,20 @@ std::shared_ptr<ecore::EClass> ReadIsClassifiedObjectActionImpl::eStaticClass() 
 //*********************************
 // Attribute Setter Getter
 //*********************************
-void ReadIsClassifiedObjectActionImpl::setIsDirect(bool _isDirect)
-{
-	m_isDirect = _isDirect;
-} 
+/*
+Getter & Setter for attribute isDirect
+*/
 bool ReadIsClassifiedObjectActionImpl::getIsDirect() const 
 {
 	return m_isDirect;
 }
+
+void ReadIsClassifiedObjectActionImpl::setIsDirect(bool _isDirect)
+{
+	m_isDirect = _isDirect;
+} 
+
+
 
 //*********************************
 // Operations
@@ -313,35 +319,53 @@ bool ReadIsClassifiedObjectActionImpl::no_type(Any diagnostics,std::map <   Any,
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference classifier
+*/
 std::shared_ptr<uml::Classifier > ReadIsClassifiedObjectActionImpl::getClassifier() const
 {
 //assert(m_classifier);
     return m_classifier;
 }
+
 void ReadIsClassifiedObjectActionImpl::setClassifier(std::shared_ptr<uml::Classifier> _classifier)
 {
     m_classifier = _classifier;
 }
 
+
+
+/*
+Getter & Setter for reference object
+*/
 std::shared_ptr<uml::InputPin > ReadIsClassifiedObjectActionImpl::getObject() const
 {
 //assert(m_object);
     return m_object;
 }
+
 void ReadIsClassifiedObjectActionImpl::setObject(std::shared_ptr<uml::InputPin> _object)
 {
     m_object = _object;
 }
 
+
+
+/*
+Getter & Setter for reference result
+*/
 std::shared_ptr<uml::OutputPin > ReadIsClassifiedObjectActionImpl::getResult() const
 {
 //assert(m_result);
     return m_result;
 }
+
 void ReadIsClassifiedObjectActionImpl::setResult(std::shared_ptr<uml::OutputPin> _result)
 {
     m_result = _result;
 }
+
+
 
 //*********************************
 // Union Getter

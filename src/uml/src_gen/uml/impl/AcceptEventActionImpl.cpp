@@ -286,14 +286,20 @@ std::shared_ptr<ecore::EClass> AcceptEventActionImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
-void AcceptEventActionImpl::setIsUnmarshall(bool _isUnmarshall)
-{
-	m_isUnmarshall = _isUnmarshall;
-} 
+/*
+Getter & Setter for attribute isUnmarshall
+*/
 bool AcceptEventActionImpl::getIsUnmarshall() const 
 {
 	return m_isUnmarshall;
 }
+
+void AcceptEventActionImpl::setIsUnmarshall(bool _isUnmarshall)
+{
+	m_isUnmarshall = _isUnmarshall;
+} 
+
+
 
 //*********************************
 // Operations
@@ -331,6 +337,9 @@ bool AcceptEventActionImpl::unmarshall_signal_events(Any diagnostics,std::map < 
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference result
+*/
 std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>> AcceptEventActionImpl::getResult() const
 {
 	if(m_result == nullptr)
@@ -353,6 +362,12 @@ std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>> AcceptEventActionImpl::g
 }
 
 
+
+
+
+/*
+Getter & Setter for reference trigger
+*/
 std::shared_ptr<Subset<uml::Trigger, uml::Element>> AcceptEventActionImpl::getTrigger() const
 {
 	if(m_trigger == nullptr)
@@ -373,6 +388,9 @@ std::shared_ptr<Subset<uml::Trigger, uml::Element>> AcceptEventActionImpl::getTr
 //assert(m_trigger);
     return m_trigger;
 }
+
+
+
 
 
 //*********************************

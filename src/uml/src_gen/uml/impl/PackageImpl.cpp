@@ -356,14 +356,20 @@ std::shared_ptr<ecore::EClass> PackageImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
-void PackageImpl::setURI(std::string _URI)
-{
-	m_URI = _URI;
-} 
+/*
+Getter & Setter for attribute URI
+*/
 std::string PackageImpl::getURI() const 
 {
 	return m_URI;
 }
+
+void PackageImpl::setURI(std::string _URI)
+{
+	m_URI = _URI;
+} 
+
+
 
 //*********************************
 // Operations
@@ -515,6 +521,9 @@ std::shared_ptr<Bag<uml::PackageableElement> > PackageImpl::visibleMembers()
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference nestedPackage
+*/
 std::shared_ptr<Subset<uml::Package, uml::PackageableElement /*Subset does not reference a union*/>> PackageImpl::getNestedPackage() const
 {
 	if(m_nestedPackage == nullptr)
@@ -537,16 +546,28 @@ std::shared_ptr<Subset<uml::Package, uml::PackageableElement /*Subset does not r
 }
 
 
+
+
+
+/*
+Getter & Setter for reference nestingPackage
+*/
 std::weak_ptr<uml::Package > PackageImpl::getNestingPackage() const
 {
 
     return m_nestingPackage;
 }
+
 void PackageImpl::setNestingPackage(std::shared_ptr<uml::Package> _nestingPackage)
 {
     m_nestingPackage = _nestingPackage;
 }
 
+
+
+/*
+Getter & Setter for reference ownedStereotype
+*/
 std::shared_ptr<Subset<uml::Stereotype, uml::PackageableElement /*Subset does not reference a union*/>> PackageImpl::getOwnedStereotype() const
 {
 	if(m_ownedStereotype == nullptr)
@@ -569,6 +590,12 @@ std::shared_ptr<Subset<uml::Stereotype, uml::PackageableElement /*Subset does no
 }
 
 
+
+
+
+/*
+Getter & Setter for reference ownedType
+*/
 std::shared_ptr<Subset<uml::Type, uml::PackageableElement /*Subset does not reference a union*/>> PackageImpl::getOwnedType() const
 {
 	if(m_ownedType == nullptr)
@@ -591,6 +618,12 @@ std::shared_ptr<Subset<uml::Type, uml::PackageableElement /*Subset does not refe
 }
 
 
+
+
+
+/*
+Getter & Setter for reference packageMerge
+*/
 std::shared_ptr<Subset<uml::PackageMerge, uml::Element>> PackageImpl::getPackageMerge() const
 {
 	if(m_packageMerge == nullptr)
@@ -613,6 +646,12 @@ std::shared_ptr<Subset<uml::PackageMerge, uml::Element>> PackageImpl::getPackage
 }
 
 
+
+
+
+/*
+Getter & Setter for reference packagedElement
+*/
 std::shared_ptr<SubsetUnion<uml::PackageableElement, uml::NamedElement>> PackageImpl::getPackagedElement() const
 {
 	if(m_packagedElement == nullptr)
@@ -635,6 +674,12 @@ std::shared_ptr<SubsetUnion<uml::PackageableElement, uml::NamedElement>> Package
 }
 
 
+
+
+
+/*
+Getter & Setter for reference profileApplication
+*/
 std::shared_ptr<Subset<uml::ProfileApplication, uml::Element>> PackageImpl::getProfileApplication() const
 {
 	if(m_profileApplication == nullptr)
@@ -655,6 +700,9 @@ std::shared_ptr<Subset<uml::ProfileApplication, uml::Element>> PackageImpl::getP
 
     return m_profileApplication;
 }
+
+
+
 
 
 //*********************************

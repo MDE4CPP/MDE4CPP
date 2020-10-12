@@ -596,6 +596,9 @@ bool StateMachineImpl::method(Any diagnostics,std::map <   Any, Any >  context)
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference connectionPoint
+*/
 std::shared_ptr<Subset<uml::Pseudostate, uml::NamedElement>> StateMachineImpl::getConnectionPoint() const
 {
 	if(m_connectionPoint == nullptr)
@@ -618,6 +621,12 @@ std::shared_ptr<Subset<uml::Pseudostate, uml::NamedElement>> StateMachineImpl::g
 }
 
 
+
+
+
+/*
+Getter & Setter for reference extendedStateMachine
+*/
 std::shared_ptr<Bag<uml::StateMachine>> StateMachineImpl::getExtendedStateMachine() const
 {
 	if(m_extendedStateMachine == nullptr)
@@ -631,6 +640,14 @@ std::shared_ptr<Bag<uml::StateMachine>> StateMachineImpl::getExtendedStateMachin
 }
 
 
+
+/*Additional Setter for redefined reference 'Behavior::redefinedBehavior'*/
+
+
+
+/*
+Getter & Setter for reference region
+*/
 std::shared_ptr<Subset<uml::Region, uml::NamedElement>> StateMachineImpl::getRegion() const
 {
 	if(m_region == nullptr)
@@ -653,6 +670,12 @@ std::shared_ptr<Subset<uml::Region, uml::NamedElement>> StateMachineImpl::getReg
 }
 
 
+
+
+
+/*
+Getter & Setter for reference submachineState
+*/
 std::shared_ptr<Bag<uml::State>> StateMachineImpl::getSubmachineState() const
 {
 	if(m_submachineState == nullptr)
@@ -664,6 +687,9 @@ std::shared_ptr<Bag<uml::State>> StateMachineImpl::getSubmachineState() const
 
     return m_submachineState;
 }
+
+
+
 
 
 //*********************************

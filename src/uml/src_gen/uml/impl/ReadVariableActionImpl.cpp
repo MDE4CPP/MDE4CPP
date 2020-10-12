@@ -285,15 +285,21 @@ bool ReadVariableActionImpl::type_and_ordering(Any diagnostics,std::map <   Any,
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference result
+*/
 std::shared_ptr<uml::OutputPin > ReadVariableActionImpl::getResult() const
 {
 //assert(m_result);
     return m_result;
 }
+
 void ReadVariableActionImpl::setResult(std::shared_ptr<uml::OutputPin> _result)
 {
     m_result = _result;
 }
+
+
 
 //*********************************
 // Union Getter

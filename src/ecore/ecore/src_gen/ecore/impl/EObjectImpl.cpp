@@ -107,14 +107,20 @@ std::shared_ptr<EClass> EObjectImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
-void EObjectImpl::setMetaElementID(int _metaElementID)
-{
-	m_metaElementID = _metaElementID;
-} 
+/*
+Getter & Setter for attribute metaElementID
+*/
 int EObjectImpl::getMetaElementID() const 
 {
 	return m_metaElementID;
 }
+
+void EObjectImpl::setMetaElementID(int _metaElementID)
+{
+	m_metaElementID = _metaElementID;
+} 
+
+
 
 //*********************************
 // Operations
@@ -218,15 +224,27 @@ void EObjectImpl::eUnset(std::shared_ptr<ecore::EStructuralFeature>  feature) co
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference eContainer
+*/
 std::weak_ptr<ecore::EObject > EObjectImpl::getEContainer() const
 {
 
     return m_eContainer;
 }
+
 void EObjectImpl::setEContainer(std::shared_ptr<ecore::EObject> _eContainer)
 {
     m_eContainer = _eContainer;
 }
+
+
+
+/*
+Getter & Setter for reference eContens
+*/
+
+
 
 
 

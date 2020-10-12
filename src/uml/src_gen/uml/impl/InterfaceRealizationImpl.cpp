@@ -225,25 +225,37 @@ std::shared_ptr<ecore::EClass> InterfaceRealizationImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference contract
+*/
 std::shared_ptr<uml::Interface > InterfaceRealizationImpl::getContract() const
 {
 //assert(m_contract);
     return m_contract;
 }
+
 void InterfaceRealizationImpl::setContract(std::shared_ptr<uml::Interface> _contract)
 {
     m_contract = _contract;
 }
 
+
+
+/*
+Getter & Setter for reference implementingClassifier
+*/
 std::weak_ptr<uml::BehavioredClassifier > InterfaceRealizationImpl::getImplementingClassifier() const
 {
 //assert(m_implementingClassifier);
     return m_implementingClassifier;
 }
+
 void InterfaceRealizationImpl::setImplementingClassifier(std::shared_ptr<uml::BehavioredClassifier> _implementingClassifier)
 {
     m_implementingClassifier = _implementingClassifier;
 }
+
+
 
 //*********************************
 // Union Getter

@@ -285,7 +285,9 @@ std::shared_ptr<ecore::EClass> OpaqueActionImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
-
+/*
+Getter & Setter for attribute body
+*/
 std::shared_ptr<Bag<std::string> > OpaqueActionImpl::getBody() const 
 {
 	if(m_body == nullptr)
@@ -296,6 +298,12 @@ std::shared_ptr<Bag<std::string> > OpaqueActionImpl::getBody() const
 }
 
 
+
+
+
+/*
+Getter & Setter for attribute language
+*/
 std::shared_ptr<Bag<std::string> > OpaqueActionImpl::getLanguage() const 
 {
 	if(m_language == nullptr)
@@ -304,6 +312,10 @@ std::shared_ptr<Bag<std::string> > OpaqueActionImpl::getLanguage() const
 	}
 	return m_language;
 }
+
+
+
+
 
 //*********************************
 // Operations
@@ -317,6 +329,9 @@ bool OpaqueActionImpl::language_body_size(Any diagnostics,std::map <   Any, Any 
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference inputValue
+*/
 std::shared_ptr<Subset<uml::InputPin, uml::InputPin>> OpaqueActionImpl::getInputValue() const
 {
 	if(m_inputValue == nullptr)
@@ -339,6 +354,12 @@ std::shared_ptr<Subset<uml::InputPin, uml::InputPin>> OpaqueActionImpl::getInput
 }
 
 
+
+
+
+/*
+Getter & Setter for reference outputValue
+*/
 std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>> OpaqueActionImpl::getOutputValue() const
 {
 	if(m_outputValue == nullptr)
@@ -359,6 +380,9 @@ std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>> OpaqueActionImpl::getOut
 
     return m_outputValue;
 }
+
+
+
 
 
 //*********************************

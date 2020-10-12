@@ -291,6 +291,9 @@ bool NamespaceImpl::members_distinguishable(Any diagnostics,std::map <   Any, An
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference elementImport
+*/
 std::shared_ptr<SubsetUnion<uml::ElementImport, uml::Element>> NamespaceImpl::getElementImport() const
 {
 	if(m_elementImport == nullptr)
@@ -313,6 +316,12 @@ std::shared_ptr<SubsetUnion<uml::ElementImport, uml::Element>> NamespaceImpl::ge
 }
 
 
+
+
+
+/*
+Getter & Setter for reference importedMember
+*/
 std::shared_ptr<Subset<uml::PackageableElement, uml::NamedElement>> NamespaceImpl::getImportedMember() const
 {
 	if(m_importedMember == nullptr)
@@ -338,9 +347,27 @@ std::shared_ptr<Subset<uml::PackageableElement, uml::NamedElement>> NamespaceImp
 
 
 
+/*
+Getter & Setter for reference member
+*/
 
 
 
+
+
+
+/*
+Getter & Setter for reference ownedMember
+*/
+
+
+
+
+
+
+/*
+Getter & Setter for reference ownedRule
+*/
 std::shared_ptr<SubsetUnion<uml::Constraint, uml::NamedElement>> NamespaceImpl::getOwnedRule() const
 {
 	if(m_ownedRule == nullptr)
@@ -363,6 +390,12 @@ std::shared_ptr<SubsetUnion<uml::Constraint, uml::NamedElement>> NamespaceImpl::
 }
 
 
+
+
+
+/*
+Getter & Setter for reference packageImport
+*/
 std::shared_ptr<SubsetUnion<uml::PackageImport, uml::Element>> NamespaceImpl::getPackageImport() const
 {
 	if(m_packageImport == nullptr)
@@ -383,6 +416,9 @@ std::shared_ptr<SubsetUnion<uml::PackageImport, uml::Element>> NamespaceImpl::ge
 
     return m_packageImport;
 }
+
+
+
 
 
 //*********************************

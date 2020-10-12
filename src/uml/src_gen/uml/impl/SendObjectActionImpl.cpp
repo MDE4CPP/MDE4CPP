@@ -296,25 +296,37 @@ bool SendObjectActionImpl::type_target_pin(Any diagnostics,std::map <   Any, Any
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference request
+*/
 std::shared_ptr<uml::InputPin > SendObjectActionImpl::getRequest() const
 {
 //assert(m_request);
     return m_request;
 }
+
 void SendObjectActionImpl::setRequest(std::shared_ptr<uml::InputPin> _request)
 {
     m_request = _request;
 }
 
+
+
+/*
+Getter & Setter for reference target
+*/
 std::shared_ptr<uml::InputPin > SendObjectActionImpl::getTarget() const
 {
 //assert(m_target);
     return m_target;
 }
+
 void SendObjectActionImpl::setTarget(std::shared_ptr<uml::InputPin> _target)
 {
     m_target = _target;
 }
+
+
 
 //*********************************
 // Union Getter
@@ -593,6 +605,13 @@ void SendObjectActionImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	{
 		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
 
+		// Save 'request'
+		std::shared_ptr<uml::InputPin > request = this->getRequest();
+		if (request != nullptr)
+		{
+			saveHandler->addReference(request, "request", request->eClass() != package->getInputPin_Class());
+		}
+
 		// Save 'target'
 		std::shared_ptr<uml::InputPin > target = this->getTarget();
 		if (target != nullptr)
@@ -601,17 +620,6 @@ void SendObjectActionImpl::saveContent(std::shared_ptr<persistence::interfaces::
 		}
 	
 
-
-		//
-		// Add new tags (from references)
-		//
-		std::shared_ptr<ecore::EClass> metaClass = this->eClass();
-		// Save 'request'
-		std::shared_ptr<uml::InputPin > request = this->getRequest();
-		if (request != nullptr)
-		{
-			saveHandler->addReference(request, "request", request->eClass() != uml::UmlPackage::eInstance()->getInputPin_Class());
-		}
 	}
 	catch (std::exception& e)
 	{

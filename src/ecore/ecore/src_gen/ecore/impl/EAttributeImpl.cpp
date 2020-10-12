@@ -156,14 +156,20 @@ std::shared_ptr<EClass> EAttributeImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
-void EAttributeImpl::setID(bool _iD)
-{
-	m_iD = _iD;
-} 
+/*
+Getter & Setter for attribute iD
+*/
 bool EAttributeImpl::isID() const 
 {
 	return m_iD;
 }
+
+void EAttributeImpl::setID(bool _iD)
+{
+	m_iD = _iD;
+} 
+
+
 
 //*********************************
 // Operations
@@ -172,11 +178,17 @@ bool EAttributeImpl::isID() const
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference eAttributeType
+*/
 std::shared_ptr<ecore::EDataType > EAttributeImpl::getEAttributeType() const
 {
 //assert(m_eAttributeType);
     return m_eAttributeType;
 }
+
+
+
 
 
 //*********************************

@@ -56,20 +56,24 @@ namespace uml
 			// Attributes Getter Setter
 			//*********************************
 			/*!
-			 Specifies whether this Feature characterizes individual instances classified by the Classifier (false) or the Classifier itself (true).
-			<p>From package UML::Classification.</p> */ 
+			Specifies whether this Feature characterizes individual instances classified by the Classifier (false) or the Classifier itself (true).
+			<p>From package UML::Classification.</p>
+			*/
+			 
 			virtual bool getIsStatic() const ;
 			
 			/*!
-			 Specifies whether this Feature characterizes individual instances classified by the Classifier (false) or the Classifier itself (true).
-			<p>From package UML::Classification.</p> */ 
+			Specifies whether this Feature characterizes individual instances classified by the Classifier (false) or the Classifier itself (true).
+			<p>From package UML::Classification.</p>
+			*/
+			 
 			virtual void setIsStatic (bool _isStatic); 
-			
 			
 			
 			//*********************************
 			// Reference
 			//*********************************
+			
 			
 							
 			
@@ -77,14 +81,20 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Classifiers that have this Feature as a feature.
-			<p>From package UML::Classification.</p> */
+			The Classifiers that have this Feature as a feature.
+			<p>From package UML::Classification.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Classifier>> getFeaturingClassifier() const ;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************

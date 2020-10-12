@@ -324,59 +324,95 @@ std::shared_ptr<ecore::EClass> PropertyImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
+/*
+Getter & Setter for attribute aggregation
+*/
+uml::AggregationKind PropertyImpl::getAggregation() const 
+{
+	return m_aggregation;
+}
+
 void PropertyImpl::setAggregation(uml::AggregationKind _aggregation)
 {
 	m_aggregation = _aggregation;
 } 
-uml::AggregationKind PropertyImpl::getAggregation() const 
+
+
+
+/*
+Getter & Setter for attribute default
+*/
+std::string PropertyImpl::getDefault() const 
 {
-	return m_aggregation;
+	return m_default;
 }
 
 void PropertyImpl::setDefault(std::string _default)
 {
 	m_default = _default;
 } 
-std::string PropertyImpl::getDefault() const 
+
+
+
+/*
+Getter & Setter for attribute isComposite
+*/
+bool PropertyImpl::getIsComposite() const 
 {
-	return m_default;
+	return m_isComposite;
 }
 
 void PropertyImpl::setIsComposite(bool _isComposite)
 {
 	m_isComposite = _isComposite;
 } 
-bool PropertyImpl::getIsComposite() const 
+
+
+
+/*
+Getter & Setter for attribute isDerived
+*/
+bool PropertyImpl::getIsDerived() const 
 {
-	return m_isComposite;
+	return m_isDerived;
 }
 
 void PropertyImpl::setIsDerived(bool _isDerived)
 {
 	m_isDerived = _isDerived;
 } 
-bool PropertyImpl::getIsDerived() const 
+
+
+
+/*
+Getter & Setter for attribute isDerivedUnion
+*/
+bool PropertyImpl::getIsDerivedUnion() const 
 {
-	return m_isDerived;
+	return m_isDerivedUnion;
 }
 
 void PropertyImpl::setIsDerivedUnion(bool _isDerivedUnion)
 {
 	m_isDerivedUnion = _isDerivedUnion;
 } 
-bool PropertyImpl::getIsDerivedUnion() const 
+
+
+
+/*
+Getter & Setter for attribute isID
+*/
+bool PropertyImpl::getIsID() const 
 {
-	return m_isDerivedUnion;
+	return m_isID;
 }
 
 void PropertyImpl::setIsID(bool _isID)
 {
 	m_isID = _isID;
 } 
-bool PropertyImpl::getIsID() const 
-{
-	return m_isID;
-}
+
+
 
 //*********************************
 // Operations
@@ -538,86 +574,137 @@ void PropertyImpl::unsetDefault()
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference association
+*/
 std::shared_ptr<uml::Association > PropertyImpl::getAssociation() const
 {
 
     return m_association;
 }
+
 void PropertyImpl::setAssociation(std::shared_ptr<uml::Association> _association)
 {
     m_association = _association;
 }
 
+
+
+/*
+Getter & Setter for reference associationEnd
+*/
 std::weak_ptr<uml::Property > PropertyImpl::getAssociationEnd() const
 {
 
     return m_associationEnd;
 }
+
 void PropertyImpl::setAssociationEnd(std::shared_ptr<uml::Property> _associationEnd)
 {
     m_associationEnd = _associationEnd;
 }
 
+
+
+/*
+Getter & Setter for reference class
+*/
 std::weak_ptr<uml::Class > PropertyImpl::getClass() const
 {
 
     return m_class;
 }
+
 void PropertyImpl::setClass(std::shared_ptr<uml::Class> _class)
 {
     m_class = _class;
 }
 
+
+
+/*
+Getter & Setter for reference datatype
+*/
 std::weak_ptr<uml::DataType > PropertyImpl::getDatatype() const
 {
 
     return m_datatype;
 }
+
 void PropertyImpl::setDatatype(std::shared_ptr<uml::DataType> _datatype)
 {
     m_datatype = _datatype;
 }
 
+
+
+/*
+Getter & Setter for reference defaultValue
+*/
 std::shared_ptr<uml::ValueSpecification > PropertyImpl::getDefaultValue() const
 {
 
     return m_defaultValue;
 }
+
 void PropertyImpl::setDefaultValue(std::shared_ptr<uml::ValueSpecification> _defaultValue)
 {
     m_defaultValue = _defaultValue;
 }
 
+
+
+/*
+Getter & Setter for reference interface
+*/
 std::weak_ptr<uml::Interface > PropertyImpl::getInterface() const
 {
 
     return m_interface;
 }
+
 void PropertyImpl::setInterface(std::shared_ptr<uml::Interface> _interface)
 {
     m_interface = _interface;
 }
 
+
+
+/*
+Getter & Setter for reference opposite
+*/
 std::shared_ptr<uml::Property > PropertyImpl::getOpposite() const
 {
 
     return m_opposite;
 }
+
 void PropertyImpl::setOpposite(std::shared_ptr<uml::Property> _opposite)
 {
     m_opposite = _opposite;
 }
 
+
+
+/*
+Getter & Setter for reference owningAssociation
+*/
 std::weak_ptr<uml::Association > PropertyImpl::getOwningAssociation() const
 {
 
     return m_owningAssociation;
 }
+
 void PropertyImpl::setOwningAssociation(std::shared_ptr<uml::Association> _owningAssociation)
 {
     m_owningAssociation = _owningAssociation;
 }
 
+
+
+/*
+Getter & Setter for reference qualifier
+*/
 std::shared_ptr<Subset<uml::Property, uml::Element>> PropertyImpl::getQualifier() const
 {
 	if(m_qualifier == nullptr)
@@ -640,6 +727,12 @@ std::shared_ptr<Subset<uml::Property, uml::Element>> PropertyImpl::getQualifier(
 }
 
 
+
+
+
+/*
+Getter & Setter for reference redefinedProperty
+*/
 std::shared_ptr<SubsetUnion<uml::Property, uml::RedefinableElement>> PropertyImpl::getRedefinedProperty() const
 {
 	if(m_redefinedProperty == nullptr)
@@ -662,6 +755,12 @@ std::shared_ptr<SubsetUnion<uml::Property, uml::RedefinableElement>> PropertyImp
 }
 
 
+
+
+
+/*
+Getter & Setter for reference subsettedProperty
+*/
 std::shared_ptr<Bag<uml::Property>> PropertyImpl::getSubsettedProperty() const
 {
 	if(m_subsettedProperty == nullptr)
@@ -673,6 +772,9 @@ std::shared_ptr<Bag<uml::Property>> PropertyImpl::getSubsettedProperty() const
 
     return m_subsettedProperty;
 }
+
+
+
 
 
 //*********************************

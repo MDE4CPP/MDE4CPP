@@ -195,14 +195,20 @@ std::shared_ptr<ecore::EClass> TimeConstraintImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
-void TimeConstraintImpl::setFirstEvent(bool _firstEvent)
-{
-	m_firstEvent = _firstEvent;
-} 
+/*
+Getter & Setter for attribute firstEvent
+*/
 bool TimeConstraintImpl::getFirstEvent() const 
 {
 	return m_firstEvent;
 }
+
+void TimeConstraintImpl::setFirstEvent(bool _firstEvent)
+{
+	m_firstEvent = _firstEvent;
+} 
+
+
 
 //*********************************
 // Operations

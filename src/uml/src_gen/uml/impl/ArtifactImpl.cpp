@@ -404,14 +404,20 @@ std::shared_ptr<ecore::EClass> ArtifactImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
-void ArtifactImpl::setFileName(std::string _fileName)
-{
-	m_fileName = _fileName;
-} 
+/*
+Getter & Setter for attribute fileName
+*/
 std::string ArtifactImpl::getFileName() const 
 {
 	return m_fileName;
 }
+
+void ArtifactImpl::setFileName(std::string _fileName)
+{
+	m_fileName = _fileName;
+} 
+
+
 
 //*********************************
 // Operations
@@ -431,6 +437,9 @@ std::shared_ptr<uml::Operation> ArtifactImpl::createOwnedOperation(std::string n
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference manifestation
+*/
 std::shared_ptr<Subset<uml::Manifestation, uml::Element>> ArtifactImpl::getManifestation() const
 {
 	if(m_manifestation == nullptr)
@@ -453,6 +462,12 @@ std::shared_ptr<Subset<uml::Manifestation, uml::Element>> ArtifactImpl::getManif
 }
 
 
+
+
+
+/*
+Getter & Setter for reference nestedArtifact
+*/
 std::shared_ptr<Subset<uml::Artifact, uml::NamedElement>> ArtifactImpl::getNestedArtifact() const
 {
 	if(m_nestedArtifact == nullptr)
@@ -475,6 +490,12 @@ std::shared_ptr<Subset<uml::Artifact, uml::NamedElement>> ArtifactImpl::getNeste
 }
 
 
+
+
+
+/*
+Getter & Setter for reference ownedAttribute
+*/
 std::shared_ptr<Subset<uml::Property, uml::Property,uml::NamedElement>> ArtifactImpl::getOwnedAttribute() const
 {
 	if(m_ownedAttribute == nullptr)
@@ -497,6 +518,12 @@ std::shared_ptr<Subset<uml::Property, uml::Property,uml::NamedElement>> Artifact
 }
 
 
+
+
+
+/*
+Getter & Setter for reference ownedOperation
+*/
 std::shared_ptr<Subset<uml::Operation, uml::Feature,uml::NamedElement>> ArtifactImpl::getOwnedOperation() const
 {
 	if(m_ownedOperation == nullptr)
@@ -517,6 +544,9 @@ std::shared_ptr<Subset<uml::Operation, uml::Feature,uml::NamedElement>> Artifact
 
     return m_ownedOperation;
 }
+
+
+
 
 
 //*********************************

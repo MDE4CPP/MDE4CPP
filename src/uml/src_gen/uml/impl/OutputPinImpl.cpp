@@ -364,6 +364,9 @@ bool OutputPinImpl::incoming_edges_structured_only(Any diagnostics,std::map <   
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference action
+*/
 std::weak_ptr<uml::Action > OutputPinImpl::getAction() const
 {
 
@@ -371,75 +374,120 @@ std::weak_ptr<uml::Action > OutputPinImpl::getAction() const
 }
 
 
+
+
+
+/*
+Getter & Setter for reference callAction
+*/
 std::weak_ptr<uml::CallAction > OutputPinImpl::getCallAction() const
 {
 
     return m_callAction;
 }
+
 void OutputPinImpl::setCallAction(std::shared_ptr<uml::CallAction> _callAction)
 {
     m_callAction = _callAction;
 }
 
+
+
+/*
+Getter & Setter for reference clearStructuralFeatureAction
+*/
 std::weak_ptr<uml::ClearStructuralFeatureAction > OutputPinImpl::getClearStructuralFeatureAction() const
 {
 
     return m_clearStructuralFeatureAction;
 }
+
 void OutputPinImpl::setClearStructuralFeatureAction(std::shared_ptr<uml::ClearStructuralFeatureAction> _clearStructuralFeatureAction)
 {
     m_clearStructuralFeatureAction = _clearStructuralFeatureAction;
 }
 
+
+
+/*
+Getter & Setter for reference createObjectAction
+*/
 std::weak_ptr<uml::CreateObjectAction > OutputPinImpl::getCreateObjectAction() const
 {
 
     return m_createObjectAction;
 }
+
 void OutputPinImpl::setCreateObjectAction(std::shared_ptr<uml::CreateObjectAction> _createObjectAction)
 {
     m_createObjectAction = _createObjectAction;
 }
 
+
+
+/*
+Getter & Setter for reference readSelfAction
+*/
 std::weak_ptr<uml::ReadSelfAction > OutputPinImpl::getReadSelfAction() const
 {
 
     return m_readSelfAction;
 }
+
 void OutputPinImpl::setReadSelfAction(std::shared_ptr<uml::ReadSelfAction> _readSelfAction)
 {
     m_readSelfAction = _readSelfAction;
 }
 
+
+
+/*
+Getter & Setter for reference readStructuralFeatureAction
+*/
 std::weak_ptr<uml::ReadStructuralFeatureAction > OutputPinImpl::getReadStructuralFeatureAction() const
 {
 
     return m_readStructuralFeatureAction;
 }
+
 void OutputPinImpl::setReadStructuralFeatureAction(std::shared_ptr<uml::ReadStructuralFeatureAction> _readStructuralFeatureAction)
 {
     m_readStructuralFeatureAction = _readStructuralFeatureAction;
 }
 
+
+
+/*
+Getter & Setter for reference valueSpecificationAction
+*/
 std::weak_ptr<uml::ValueSpecificationAction > OutputPinImpl::getValueSpecificationAction() const
 {
 
     return m_valueSpecificationAction;
 }
+
 void OutputPinImpl::setValueSpecificationAction(std::shared_ptr<uml::ValueSpecificationAction> _valueSpecificationAction)
 {
     m_valueSpecificationAction = _valueSpecificationAction;
 }
 
+
+
+/*
+Getter & Setter for reference writeStructuralFeatureAction
+*/
 std::weak_ptr<uml::WriteStructuralFeatureAction > OutputPinImpl::getWriteStructuralFeatureAction() const
 {
 
     return m_writeStructuralFeatureAction;
 }
+
 void OutputPinImpl::setWriteStructuralFeatureAction(std::shared_ptr<uml::WriteStructuralFeatureAction> _writeStructuralFeatureAction)
 {
     m_writeStructuralFeatureAction = _writeStructuralFeatureAction;
 }
+
+
 
 //*********************************
 // Union Getter

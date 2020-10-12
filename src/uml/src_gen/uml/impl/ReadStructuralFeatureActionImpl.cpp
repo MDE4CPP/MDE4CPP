@@ -286,15 +286,21 @@ bool ReadStructuralFeatureActionImpl::type_and_ordering(Any diagnostics,std::map
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference result
+*/
 std::shared_ptr<uml::OutputPin > ReadStructuralFeatureActionImpl::getResult() const
 {
 //assert(m_result);
     return m_result;
 }
+
 void ReadStructuralFeatureActionImpl::setResult(std::shared_ptr<uml::OutputPin> _result)
 {
     m_result = _result;
 }
+
+
 
 //*********************************
 // Union Getter

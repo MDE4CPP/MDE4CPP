@@ -59,18 +59,24 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 The Association must be an AssociationClass.
-			self.association().oclIsKindOf(AssociationClass) */ 
+			The Association must be an AssociationClass.
+			self.association().oclIsKindOf(AssociationClass)
+			*/
+			 
 			virtual bool association_class(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
-			 The multiplicity of the OutputPin is 1..1.
-			result.is(1,1) */ 
+			The multiplicity of the OutputPin is 1..1.
+			result.is(1,1)
+			*/
+			 
 			virtual bool multiplicity(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
-			 The type of the result OutputPin must be the same as the Association of the CreateLinkObjectAction.
-			result.type = association() */ 
+			The type of the result OutputPin must be the same as the Association of the CreateLinkObjectAction.
+			result.type = association()
+			*/
+			 
 			virtual bool type_of_result(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
@@ -84,37 +90,54 @@ namespace uml
 			// Reference
 			//*********************************
 			/*!
-			 The output pin on which the newly created link object is placed.
-			<p>From package UML::Actions.</p> */
+			The output pin on which the newly created link object is placed.
+			<p>From package UML::Actions.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::OutputPin > getResult() const ;
 			
 			/*!
-			 The output pin on which the newly created link object is placed.
-			<p>From package UML::Actions.</p> */
-			virtual void setResult(std::shared_ptr<uml::OutputPin> _result_result) ;
+			The output pin on which the newly created link object is placed.
+			<p>From package UML::Actions.</p>
+			*/
+			
+			virtual void setResult(std::shared_ptr<uml::OutputPin> _result) ;
+			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p> */
+			ActivityGroups containing the ActivityNode.
+			<p>From package UML::Activities.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::ActivityGroup>> getInGroup() const ;/*!
-			 The ordered set of InputPins representing the inputs to the Action.
-			<p>From package UML::Actions.</p> */
+			The ordered set of InputPins representing the inputs to the Action.
+			<p>From package UML::Actions.</p>
+			*/
+			
 			virtual std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element>> getInput() const ;/*!
-			 The ordered set of OutputPins representing outputs from the Action.
-			<p>From package UML::Actions.</p> */
+			The ordered set of OutputPins representing outputs from the Action.
+			<p>From package UML::Actions.</p>
+			*/
+			
 			virtual std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element>> getOutput() const ;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
+			The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const ; 
 			 
 			//*********************************

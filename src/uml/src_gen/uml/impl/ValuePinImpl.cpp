@@ -378,15 +378,21 @@ bool ValuePinImpl::no_incoming_edges(Any diagnostics,std::map <   Any, Any >  co
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference value
+*/
 std::shared_ptr<uml::ValueSpecification > ValuePinImpl::getValue() const
 {
 //assert(m_value);
     return m_value;
 }
+
 void ValuePinImpl::setValue(std::shared_ptr<uml::ValueSpecification> _value)
 {
     m_value = _value;
 }
+
+
 
 //*********************************
 // Union Getter

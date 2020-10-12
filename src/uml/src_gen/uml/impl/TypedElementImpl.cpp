@@ -152,15 +152,21 @@ std::shared_ptr<ecore::EClass> TypedElementImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference type
+*/
 std::shared_ptr<uml::Type > TypedElementImpl::getType() const
 {
 
     return m_type;
 }
+
 void TypedElementImpl::setType(std::shared_ptr<uml::Type> _type)
 {
     m_type = _type;
 }
+
+
 
 //*********************************
 // Union Getter

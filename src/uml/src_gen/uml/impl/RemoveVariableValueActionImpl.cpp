@@ -274,14 +274,20 @@ std::shared_ptr<ecore::EClass> RemoveVariableValueActionImpl::eStaticClass() con
 //*********************************
 // Attribute Setter Getter
 //*********************************
-void RemoveVariableValueActionImpl::setIsRemoveDuplicates(bool _isRemoveDuplicates)
-{
-	m_isRemoveDuplicates = _isRemoveDuplicates;
-} 
+/*
+Getter & Setter for attribute isRemoveDuplicates
+*/
 bool RemoveVariableValueActionImpl::getIsRemoveDuplicates() const 
 {
 	return m_isRemoveDuplicates;
 }
+
+void RemoveVariableValueActionImpl::setIsRemoveDuplicates(bool _isRemoveDuplicates)
+{
+	m_isRemoveDuplicates = _isRemoveDuplicates;
+} 
+
+
 
 //*********************************
 // Operations
@@ -295,15 +301,21 @@ bool RemoveVariableValueActionImpl::removeAt_and_value(Any diagnostics,std::map 
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference removeAt
+*/
 std::shared_ptr<uml::InputPin > RemoveVariableValueActionImpl::getRemoveAt() const
 {
 
     return m_removeAt;
 }
+
 void RemoveVariableValueActionImpl::setRemoveAt(std::shared_ptr<uml::InputPin> _removeAt)
 {
     m_removeAt = _removeAt;
 }
+
+
 
 //*********************************
 // Union Getter

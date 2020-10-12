@@ -141,25 +141,37 @@ std::shared_ptr<ecore::EClass> PackageMergeImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference mergedPackage
+*/
 std::shared_ptr<uml::Package > PackageMergeImpl::getMergedPackage() const
 {
 //assert(m_mergedPackage);
     return m_mergedPackage;
 }
+
 void PackageMergeImpl::setMergedPackage(std::shared_ptr<uml::Package> _mergedPackage)
 {
     m_mergedPackage = _mergedPackage;
 }
 
+
+
+/*
+Getter & Setter for reference receivingPackage
+*/
 std::weak_ptr<uml::Package > PackageMergeImpl::getReceivingPackage() const
 {
 //assert(m_receivingPackage);
     return m_receivingPackage;
 }
+
 void PackageMergeImpl::setReceivingPackage(std::shared_ptr<uml::Package> _receivingPackage)
 {
     m_receivingPackage = _receivingPackage;
 }
+
+
 
 //*********************************
 // Union Getter

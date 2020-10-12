@@ -193,36 +193,57 @@ bool ExtendImpl::extension_points(Any diagnostics,std::map <   Any, Any >  conte
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference condition
+*/
 std::shared_ptr<uml::Constraint > ExtendImpl::getCondition() const
 {
 
     return m_condition;
 }
+
 void ExtendImpl::setCondition(std::shared_ptr<uml::Constraint> _condition)
 {
     m_condition = _condition;
 }
 
+
+
+/*
+Getter & Setter for reference extendedCase
+*/
 std::shared_ptr<uml::UseCase > ExtendImpl::getExtendedCase() const
 {
 //assert(m_extendedCase);
     return m_extendedCase;
 }
+
 void ExtendImpl::setExtendedCase(std::shared_ptr<uml::UseCase> _extendedCase)
 {
     m_extendedCase = _extendedCase;
 }
 
+
+
+/*
+Getter & Setter for reference extension
+*/
 std::weak_ptr<uml::UseCase > ExtendImpl::getExtension() const
 {
 //assert(m_extension);
     return m_extension;
 }
+
 void ExtendImpl::setExtension(std::shared_ptr<uml::UseCase> _extension)
 {
     m_extension = _extension;
 }
 
+
+
+/*
+Getter & Setter for reference extensionLocation
+*/
 std::shared_ptr<Bag<uml::ExtensionPoint>> ExtendImpl::getExtensionLocation() const
 {
 	if(m_extensionLocation == nullptr)
@@ -234,6 +255,9 @@ std::shared_ptr<Bag<uml::ExtensionPoint>> ExtendImpl::getExtensionLocation() con
 //assert(m_extensionLocation);
     return m_extensionLocation;
 }
+
+
+
 
 
 //*********************************

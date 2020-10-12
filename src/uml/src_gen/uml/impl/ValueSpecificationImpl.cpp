@@ -245,25 +245,37 @@ int ValueSpecificationImpl::unlimitedValue()
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference owningSlot
+*/
 std::weak_ptr<uml::Slot > ValueSpecificationImpl::getOwningSlot() const
 {
 
     return m_owningSlot;
 }
+
 void ValueSpecificationImpl::setOwningSlot(std::shared_ptr<uml::Slot> _owningSlot)
 {
     m_owningSlot = _owningSlot;
 }
 
+
+
+/*
+Getter & Setter for reference valueSpecificationAction
+*/
 std::weak_ptr<uml::ValueSpecificationAction > ValueSpecificationImpl::getValueSpecificationAction() const
 {
 
     return m_valueSpecificationAction;
 }
+
 void ValueSpecificationImpl::setValueSpecificationAction(std::shared_ptr<uml::ValueSpecificationAction> _valueSpecificationAction)
 {
     m_valueSpecificationAction = _valueSpecificationAction;
 }
+
+
 
 //*********************************
 // Union Getter

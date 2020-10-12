@@ -204,11 +204,17 @@ std::shared_ptr<ecore::EClass> ConnectorImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
-
+/*
+Getter & Setter for attribute kind
+*/
 uml::ConnectorKind ConnectorImpl::getKind() const 
 {
 	return m_kind;
 }
+
+
+
+
 
 //*********************************
 // Operations
@@ -234,6 +240,9 @@ bool ConnectorImpl::types(Any diagnostics,std::map <   Any, Any >  context)
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference contract
+*/
 std::shared_ptr<Bag<uml::Behavior>> ConnectorImpl::getContract() const
 {
 	if(m_contract == nullptr)
@@ -247,6 +256,12 @@ std::shared_ptr<Bag<uml::Behavior>> ConnectorImpl::getContract() const
 }
 
 
+
+
+
+/*
+Getter & Setter for reference end
+*/
 std::shared_ptr<Subset<uml::ConnectorEnd, uml::Element>> ConnectorImpl::getEnd() const
 {
 	if(m_end == nullptr)
@@ -269,6 +284,12 @@ std::shared_ptr<Subset<uml::ConnectorEnd, uml::Element>> ConnectorImpl::getEnd()
 }
 
 
+
+
+
+/*
+Getter & Setter for reference redefinedConnector
+*/
 std::shared_ptr<Subset<uml::Connector, uml::RedefinableElement>> ConnectorImpl::getRedefinedConnector() const
 {
 	if(m_redefinedConnector == nullptr)
@@ -291,25 +312,40 @@ std::shared_ptr<Subset<uml::Connector, uml::RedefinableElement>> ConnectorImpl::
 }
 
 
+
+
+
+/*
+Getter & Setter for reference structuredClassifier
+*/
 std::weak_ptr<uml::StructuredClassifier > ConnectorImpl::getStructuredClassifier() const
 {
 
     return m_structuredClassifier;
 }
+
 void ConnectorImpl::setStructuredClassifier(std::shared_ptr<uml::StructuredClassifier> _structuredClassifier)
 {
     m_structuredClassifier = _structuredClassifier;
 }
 
+
+
+/*
+Getter & Setter for reference type
+*/
 std::shared_ptr<uml::Association > ConnectorImpl::getType() const
 {
 
     return m_type;
 }
+
 void ConnectorImpl::setType(std::shared_ptr<uml::Association> _type)
 {
     m_type = _type;
 }
+
+
 
 //*********************************
 // Union Getter

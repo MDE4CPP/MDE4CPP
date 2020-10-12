@@ -271,15 +271,21 @@ bool VariableActionImpl::scope_of_variable(Any diagnostics,std::map <   Any, Any
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference variable
+*/
 std::shared_ptr<uml::Variable > VariableActionImpl::getVariable() const
 {
 //assert(m_variable);
     return m_variable;
 }
+
 void VariableActionImpl::setVariable(std::shared_ptr<uml::Variable> _variable)
 {
     m_variable = _variable;
 }
+
+
 
 //*********************************
 // Union Getter

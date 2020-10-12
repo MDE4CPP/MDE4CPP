@@ -207,6 +207,9 @@ bool LifelineImpl::selector_specified(Any diagnostics,std::map <   Any, Any >  c
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference coveredBy
+*/
 std::shared_ptr<Bag<uml::InteractionFragment>> LifelineImpl::getCoveredBy() const
 {
 	if(m_coveredBy == nullptr)
@@ -220,45 +223,72 @@ std::shared_ptr<Bag<uml::InteractionFragment>> LifelineImpl::getCoveredBy() cons
 }
 
 
+
+
+
+/*
+Getter & Setter for reference decomposedAs
+*/
 std::shared_ptr<uml::PartDecomposition > LifelineImpl::getDecomposedAs() const
 {
 
     return m_decomposedAs;
 }
+
 void LifelineImpl::setDecomposedAs(std::shared_ptr<uml::PartDecomposition> _decomposedAs)
 {
     m_decomposedAs = _decomposedAs;
 }
 
+
+
+/*
+Getter & Setter for reference interaction
+*/
 std::weak_ptr<uml::Interaction > LifelineImpl::getInteraction() const
 {
 //assert(m_interaction);
     return m_interaction;
 }
+
 void LifelineImpl::setInteraction(std::shared_ptr<uml::Interaction> _interaction)
 {
     m_interaction = _interaction;
 }
 
+
+
+/*
+Getter & Setter for reference represents
+*/
 std::shared_ptr<uml::ConnectableElement > LifelineImpl::getRepresents() const
 {
 
     return m_represents;
 }
+
 void LifelineImpl::setRepresents(std::shared_ptr<uml::ConnectableElement> _represents)
 {
     m_represents = _represents;
 }
 
+
+
+/*
+Getter & Setter for reference selector
+*/
 std::shared_ptr<uml::ValueSpecification > LifelineImpl::getSelector() const
 {
 
     return m_selector;
 }
+
 void LifelineImpl::setSelector(std::shared_ptr<uml::ValueSpecification> _selector)
 {
     m_selector = _selector;
 }
+
+
 
 //*********************************
 // Union Getter

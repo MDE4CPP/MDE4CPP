@@ -421,6 +421,9 @@ std::shared_ptr<ecore::EObject> ElementImpl::unapplyStereotype(std::shared_ptr<u
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference ownedComment
+*/
 std::shared_ptr<Subset<uml::Comment, uml::Element>> ElementImpl::getOwnedComment() const
 {
 	if(m_ownedComment == nullptr)
@@ -443,6 +446,21 @@ std::shared_ptr<Subset<uml::Comment, uml::Element>> ElementImpl::getOwnedComment
 }
 
 
+
+
+
+/*
+Getter & Setter for reference ownedElement
+*/
+
+
+
+
+
+
+/*
+Getter & Setter for reference owner
+*/
 
 
 

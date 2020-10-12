@@ -492,6 +492,9 @@ bool NodeImpl::internal_structure(Any diagnostics,std::map <   Any, Any >  conte
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference nestedNode
+*/
 std::shared_ptr<Subset<uml::Node, uml::NamedElement>> NodeImpl::getNestedNode() const
 {
 	if(m_nestedNode == nullptr)
@@ -512,6 +515,9 @@ std::shared_ptr<Subset<uml::Node, uml::NamedElement>> NodeImpl::getNestedNode() 
 
     return m_nestedNode;
 }
+
+
+
 
 
 //*********************************

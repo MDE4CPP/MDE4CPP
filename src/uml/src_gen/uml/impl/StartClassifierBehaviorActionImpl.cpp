@@ -281,15 +281,21 @@ bool StartClassifierBehaviorActionImpl::type_has_classifier(Any diagnostics,std:
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference object
+*/
 std::shared_ptr<uml::InputPin > StartClassifierBehaviorActionImpl::getObject() const
 {
 //assert(m_object);
     return m_object;
 }
+
 void StartClassifierBehaviorActionImpl::setObject(std::shared_ptr<uml::InputPin> _object)
 {
     m_object = _object;
 }
+
+
 
 //*********************************
 // Union Getter

@@ -382,11 +382,17 @@ std::shared_ptr<ecore::EClass> ExtensionImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
-
+/*
+Getter & Setter for attribute isRequired
+*/
 bool ExtensionImpl::getIsRequired() const 
 {
 	return m_isRequired;
 }
+
+
+
+
 
 //*********************************
 // Operations
@@ -432,11 +438,17 @@ bool ExtensionImpl::non_owned_end(Any diagnostics,std::map <   Any, Any >  conte
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference metaclass
+*/
 std::shared_ptr<uml::Class > ExtensionImpl::getMetaclass() const
 {
 //assert(m_metaclass);
     return m_metaclass;
 }
+
+
+
 
 
 //*********************************

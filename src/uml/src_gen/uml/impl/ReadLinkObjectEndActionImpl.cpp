@@ -324,35 +324,53 @@ bool ReadLinkObjectEndActionImpl::type_of_result(Any diagnostics,std::map <   An
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference end
+*/
 std::shared_ptr<uml::Property > ReadLinkObjectEndActionImpl::getEnd() const
 {
 //assert(m_end);
     return m_end;
 }
+
 void ReadLinkObjectEndActionImpl::setEnd(std::shared_ptr<uml::Property> _end)
 {
     m_end = _end;
 }
 
+
+
+/*
+Getter & Setter for reference object
+*/
 std::shared_ptr<uml::InputPin > ReadLinkObjectEndActionImpl::getObject() const
 {
 //assert(m_object);
     return m_object;
 }
+
 void ReadLinkObjectEndActionImpl::setObject(std::shared_ptr<uml::InputPin> _object)
 {
     m_object = _object;
 }
 
+
+
+/*
+Getter & Setter for reference result
+*/
 std::shared_ptr<uml::OutputPin > ReadLinkObjectEndActionImpl::getResult() const
 {
 //assert(m_result);
     return m_result;
 }
+
 void ReadLinkObjectEndActionImpl::setResult(std::shared_ptr<uml::OutputPin> _result)
 {
     m_result = _result;
 }
+
+
 
 //*********************************
 // Union Getter

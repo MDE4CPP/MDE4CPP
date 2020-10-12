@@ -146,8 +146,10 @@ namespace uml
 namespace uml 
 {
 	/*!
-	 An OpaqueAction is an Action whose functionality is not specified within UML.
-	<p>From package UML::Actions.</p> */
+	An OpaqueAction is an Action whose functionality is not specified within UML.
+	<p>From package UML::Actions.</p>
+	*/
+	
 	class OpaqueAction:virtual public Action
 	{
 		public:
@@ -168,8 +170,10 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 If the language attribute is not empty, then the size of the body and language lists must be the same.
-			language->notEmpty() implies (_'body'->size() = language->size()) */ 
+			If the language attribute is not empty, then the size of the body and language lists must be the same.
+			language->notEmpty() implies (_'body'->size() = language->size())
+			*/
+			 
 			virtual bool language_body_size(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
@@ -177,28 +181,40 @@ namespace uml
 			// Attributes Getter Setter
 			//*********************************
 			/*!
-			 Provides a textual specification of the functionality of the Action, in one or more languages other than UML.
-			<p>From package UML::Actions.</p> */ 
+			Provides a textual specification of the functionality of the Action, in one or more languages other than UML.
+			<p>From package UML::Actions.</p>
+			*/
+			 
 			virtual std::shared_ptr<Bag<std::string> > getBody() const = 0;
 			
+			
 			/*!
-			 If provided, a specification of the language used for each of the body Strings.
-			<p>From package UML::Actions.</p> */ 
+			If provided, a specification of the language used for each of the body Strings.
+			<p>From package UML::Actions.</p>
+			*/
+			 
 			virtual std::shared_ptr<Bag<std::string> > getLanguage() const = 0;
+			
 			
 			
 			//*********************************
 			// Reference
 			//*********************************
 			/*!
-			 The InputPins providing inputs to the OpaqueAction.
-			<p>From package UML::Actions.</p> */
+			The InputPins providing inputs to the OpaqueAction.
+			<p>From package UML::Actions.</p>
+			*/
+			
 			virtual std::shared_ptr<Subset<uml::InputPin, uml::InputPin>> getInputValue() const = 0;
 			
+			
 			/*!
-			 The OutputPins on which the OpaqueAction provides outputs.
-			<p>From package UML::Actions.</p> */
+			The OutputPins on which the OpaqueAction provides outputs.
+			<p>From package UML::Actions.</p>
+			*/
+			
 			virtual std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>> getOutputValue() const = 0;
+			
 			
 			
 
@@ -207,12 +223,16 @@ namespace uml
 			// Attribute Members
 			//*********************************
 			/*!
-			 Provides a textual specification of the functionality of the Action, in one or more languages other than UML.
-			<p>From package UML::Actions.</p> */ 
+			Provides a textual specification of the functionality of the Action, in one or more languages other than UML.
+			<p>From package UML::Actions.</p>
+			*/
+			 
 			mutable std::shared_ptr<Bag<std::string> > m_body; 
 			/*!
-			 If provided, a specification of the language used for each of the body Strings.
-			<p>From package UML::Actions.</p> */ 
+			If provided, a specification of the language used for each of the body Strings.
+			<p>From package UML::Actions.</p>
+			*/
+			 
 			mutable std::shared_ptr<Bag<std::string> > m_language; 
 			
 			
@@ -220,37 +240,51 @@ namespace uml
 			// Reference Members
 			//*********************************
 			/*!
-			 The InputPins providing inputs to the OpaqueAction.
-			<p>From package UML::Actions.</p> */
-			mutable std::shared_ptr<Subset<uml::InputPin, uml::InputPin>> m_inputValue;
-			/*!
-			 The OutputPins on which the OpaqueAction provides outputs.
-			<p>From package UML::Actions.</p> */
-			mutable std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>> m_outputValue;
+			The InputPins providing inputs to the OpaqueAction.
+			<p>From package UML::Actions.</p>
+			*/
 			
+			mutable std::shared_ptr<Subset<uml::InputPin, uml::InputPin>> m_inputValue;/*!
+			The OutputPins on which the OpaqueAction provides outputs.
+			<p>From package UML::Actions.</p>
+			*/
+			
+			mutable std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>> m_outputValue;
 
 		public:
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p> */
+			ActivityGroups containing the ActivityNode.
+			<p>From package UML::Activities.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::ActivityGroup>> getInGroup() const = 0;/*!
-			 The ordered set of InputPins representing the inputs to the Action.
-			<p>From package UML::Actions.</p> */
+			The ordered set of InputPins representing the inputs to the Action.
+			<p>From package UML::Actions.</p>
+			*/
+			
 			virtual std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element>> getInput() const = 0;/*!
-			 The ordered set of OutputPins representing outputs from the Action.
-			<p>From package UML::Actions.</p> */
+			The ordered set of OutputPins representing outputs from the Action.
+			<p>From package UML::Actions.</p>
+			*/
+			
 			virtual std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element>> getOutput() const = 0;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
+			The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

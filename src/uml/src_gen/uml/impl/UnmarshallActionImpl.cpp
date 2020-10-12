@@ -316,16 +316,25 @@ bool UnmarshallActionImpl::type_ordering_and_multiplicity(Any diagnostics,std::m
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference object
+*/
 std::shared_ptr<uml::InputPin > UnmarshallActionImpl::getObject() const
 {
 //assert(m_object);
     return m_object;
 }
+
 void UnmarshallActionImpl::setObject(std::shared_ptr<uml::InputPin> _object)
 {
     m_object = _object;
 }
 
+
+
+/*
+Getter & Setter for reference result
+*/
 std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>> UnmarshallActionImpl::getResult() const
 {
 	if(m_result == nullptr)
@@ -348,15 +357,24 @@ std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>> UnmarshallActionImpl::ge
 }
 
 
+
+
+
+/*
+Getter & Setter for reference unmarshallType
+*/
 std::shared_ptr<uml::Classifier > UnmarshallActionImpl::getUnmarshallType() const
 {
 //assert(m_unmarshallType);
     return m_unmarshallType;
 }
+
 void UnmarshallActionImpl::setUnmarshallType(std::shared_ptr<uml::Classifier> _unmarshallType)
 {
     m_unmarshallType = _unmarshallType;
 }
+
+
 
 //*********************************
 // Union Getter

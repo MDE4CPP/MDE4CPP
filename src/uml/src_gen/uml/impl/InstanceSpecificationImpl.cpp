@@ -247,6 +247,9 @@ bool InstanceSpecificationImpl::structural_feature(Any diagnostics,std::map <   
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference classifier
+*/
 std::shared_ptr<Bag<uml::Classifier>> InstanceSpecificationImpl::getClassifier() const
 {
 	if(m_classifier == nullptr)
@@ -260,6 +263,12 @@ std::shared_ptr<Bag<uml::Classifier>> InstanceSpecificationImpl::getClassifier()
 }
 
 
+
+
+
+/*
+Getter & Setter for reference slot
+*/
 std::shared_ptr<Subset<uml::Slot, uml::Element>> InstanceSpecificationImpl::getSlot() const
 {
 	if(m_slot == nullptr)
@@ -282,15 +291,24 @@ std::shared_ptr<Subset<uml::Slot, uml::Element>> InstanceSpecificationImpl::getS
 }
 
 
+
+
+
+/*
+Getter & Setter for reference specification
+*/
 std::shared_ptr<uml::ValueSpecification > InstanceSpecificationImpl::getSpecification() const
 {
 
     return m_specification;
 }
+
 void InstanceSpecificationImpl::setSpecification(std::shared_ptr<uml::ValueSpecification> _specification)
 {
     m_specification = _specification;
 }
+
+
 
 //*********************************
 // Union Getter

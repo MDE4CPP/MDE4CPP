@@ -67,15 +67,19 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 The query isComputable() is redefined to be true.
+			The query isComputable() is redefined to be true.
 			result = (true)
-			<p>From package UML::Values.</p> */ 
+			<p>From package UML::Values.</p>
+			*/
+			 
 			virtual bool isComputable() ;
 			
 			/*!
-			 The query isNull() returns true.
+			The query isNull() returns true.
 			result = (true)
-			<p>From package UML::Values.</p> */ 
+			<p>From package UML::Values.</p>
+			*/
+			 
 			virtual bool isNull() ;
 			
 			
@@ -94,14 +98,20 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************

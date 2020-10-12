@@ -103,8 +103,10 @@ namespace uml
 namespace uml 
 {
 	/*!
-	 A manifestation is the concrete physical rendering of one or more model elements by an artifact.
-	<p>From package UML::Deployments.</p> */
+	A manifestation is the concrete physical rendering of one or more model elements by an artifact.
+	<p>From package UML::Deployments.</p>
+	*/
+	
 	class Manifestation:virtual public Abstraction
 	{
 		public:
@@ -133,14 +135,19 @@ namespace uml
 			// Reference
 			//*********************************
 			/*!
-			 The model element that is utilized in the manifestation in an Artifact.
-			<p>From package UML::Deployments.</p> */
+			The model element that is utilized in the manifestation in an Artifact.
+			<p>From package UML::Deployments.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::PackageableElement > getUtilizedElement() const = 0;
 			
 			/*!
-			 The model element that is utilized in the manifestation in an Artifact.
-			<p>From package UML::Deployments.</p> */
-			virtual void setUtilizedElement(std::shared_ptr<uml::PackageableElement> _utilizedElement_utilizedElement) = 0;
+			The model element that is utilized in the manifestation in an Artifact.
+			<p>From package UML::Deployments.</p>
+			*/
+			
+			virtual void setUtilizedElement(std::shared_ptr<uml::PackageableElement> _utilizedElement) = 0;
+			
 			
 
 		protected:
@@ -153,33 +160,46 @@ namespace uml
 			// Reference Members
 			//*********************************
 			/*!
-			 The model element that is utilized in the manifestation in an Artifact.
-			<p>From package UML::Deployments.</p> */
-			std::shared_ptr<uml::PackageableElement > m_utilizedElement;
+			The model element that is utilized in the manifestation in an Artifact.
+			<p>From package UML::Deployments.</p>
+			*/
 			
+			std::shared_ptr<uml::PackageableElement > m_utilizedElement;
 
 		public:
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
-			 Specifies the elements related by the Relationship.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the elements related by the Relationship.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getRelatedElement() const = 0;/*!
-			 Specifies the source Element(s) of the DirectedRelationship.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the source Element(s) of the DirectedRelationship.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> getSource() const = 0;/*!
-			 Specifies the target Element(s) of the DirectedRelationship.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the target Element(s) of the DirectedRelationship.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> getTarget() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

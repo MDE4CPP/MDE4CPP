@@ -176,16 +176,25 @@ bool LinkEndDataImpl::same_type(Any diagnostics,std::map <   Any, Any >  context
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference end
+*/
 std::shared_ptr<uml::Property > LinkEndDataImpl::getEnd() const
 {
 //assert(m_end);
     return m_end;
 }
+
 void LinkEndDataImpl::setEnd(std::shared_ptr<uml::Property> _end)
 {
     m_end = _end;
 }
 
+
+
+/*
+Getter & Setter for reference qualifier
+*/
 std::shared_ptr<Subset<uml::QualifierValue, uml::Element>> LinkEndDataImpl::getQualifier() const
 {
 	if(m_qualifier == nullptr)
@@ -208,15 +217,24 @@ std::shared_ptr<Subset<uml::QualifierValue, uml::Element>> LinkEndDataImpl::getQ
 }
 
 
+
+
+
+/*
+Getter & Setter for reference value
+*/
 std::shared_ptr<uml::InputPin > LinkEndDataImpl::getValue() const
 {
 
     return m_value;
 }
+
 void LinkEndDataImpl::setValue(std::shared_ptr<uml::InputPin> _value)
 {
     m_value = _value;
 }
+
+
 
 //*********************************
 // Union Getter

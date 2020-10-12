@@ -91,8 +91,10 @@ namespace uml
 namespace uml 
 {
 	/*!
-	 An ExtensionPoint identifies a point in the behavior of a UseCase where that behavior can be extended by the behavior of some other (extending) UseCase, as specified by an Extend relationship.
-	<p>From package UML::UseCases.</p> */
+	An ExtensionPoint identifies a point in the behavior of a UseCase where that behavior can be extended by the behavior of some other (extending) UseCase, as specified by an Extend relationship.
+	<p>From package UML::UseCases.</p>
+	*/
+	
 	class ExtensionPoint:virtual public RedefinableElement
 	{
 		public:
@@ -125,8 +127,10 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 An ExtensionPoint must have a name.
-			name->notEmpty () */ 
+			An ExtensionPoint must have a name.
+			name->notEmpty ()
+			*/
+			 
 			virtual bool must_have_name(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
@@ -138,14 +142,19 @@ namespace uml
 			// Reference
 			//*********************************
 			/*!
-			 The UseCase that owns this ExtensionPoint.
-			<p>From package UML::UseCases.</p> */
+			The UseCase that owns this ExtensionPoint.
+			<p>From package UML::UseCases.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::UseCase > getUseCase() const = 0;
 			
 			/*!
-			 The UseCase that owns this ExtensionPoint.
-			<p>From package UML::UseCases.</p> */
-			virtual void setUseCase(std::shared_ptr<uml::UseCase> _useCase_useCase) = 0;
+			The UseCase that owns this ExtensionPoint.
+			<p>From package UML::UseCases.</p>
+			*/
+			
+			virtual void setUseCase(std::shared_ptr<uml::UseCase> _useCase) = 0;
+			
 			
 
 		protected:
@@ -158,24 +167,31 @@ namespace uml
 			// Reference Members
 			//*********************************
 			/*!
-			 The UseCase that owns this ExtensionPoint.
-			<p>From package UML::UseCases.</p> */
-			std::weak_ptr<uml::UseCase > m_useCase;
+			The UseCase that owns this ExtensionPoint.
+			<p>From package UML::UseCases.</p>
+			*/
 			
+			std::weak_ptr<uml::UseCase > m_useCase;
 
 		public:
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

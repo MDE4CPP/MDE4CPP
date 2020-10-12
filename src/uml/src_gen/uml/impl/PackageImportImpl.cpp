@@ -137,14 +137,20 @@ std::shared_ptr<ecore::EClass> PackageImportImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
-void PackageImportImpl::setVisibility(uml::VisibilityKind _visibility)
-{
-	m_visibility = _visibility;
-} 
+/*
+Getter & Setter for attribute visibility
+*/
 uml::VisibilityKind PackageImportImpl::getVisibility() const 
 {
 	return m_visibility;
 }
+
+void PackageImportImpl::setVisibility(uml::VisibilityKind _visibility)
+{
+	m_visibility = _visibility;
+} 
+
+
 
 //*********************************
 // Operations
@@ -158,25 +164,37 @@ bool PackageImportImpl::public_or_private(Any diagnostics,std::map <   Any, Any 
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference importedPackage
+*/
 std::shared_ptr<uml::Package > PackageImportImpl::getImportedPackage() const
 {
 //assert(m_importedPackage);
     return m_importedPackage;
 }
+
 void PackageImportImpl::setImportedPackage(std::shared_ptr<uml::Package> _importedPackage)
 {
     m_importedPackage = _importedPackage;
 }
 
+
+
+/*
+Getter & Setter for reference importingNamespace
+*/
 std::weak_ptr<uml::Namespace > PackageImportImpl::getImportingNamespace() const
 {
 //assert(m_importingNamespace);
     return m_importingNamespace;
 }
+
 void PackageImportImpl::setImportingNamespace(std::shared_ptr<uml::Namespace> _importingNamespace)
 {
     m_importingNamespace = _importingNamespace;
 }
+
+
 
 //*********************************
 // Union Getter

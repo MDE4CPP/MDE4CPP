@@ -292,25 +292,37 @@ bool ValueSpecificationActionImpl::multiplicity(Any diagnostics,std::map <   Any
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference result
+*/
 std::shared_ptr<uml::OutputPin > ValueSpecificationActionImpl::getResult() const
 {
 //assert(m_result);
     return m_result;
 }
+
 void ValueSpecificationActionImpl::setResult(std::shared_ptr<uml::OutputPin> _result)
 {
     m_result = _result;
 }
 
+
+
+/*
+Getter & Setter for reference value
+*/
 std::shared_ptr<uml::ValueSpecification > ValueSpecificationActionImpl::getValue() const
 {
 //assert(m_value);
     return m_value;
 }
+
 void ValueSpecificationActionImpl::setValue(std::shared_ptr<uml::ValueSpecification> _value)
 {
     m_value = _value;
 }
+
+
 
 //*********************************
 // Union Getter

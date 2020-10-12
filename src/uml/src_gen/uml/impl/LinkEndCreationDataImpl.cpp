@@ -132,14 +132,20 @@ std::shared_ptr<ecore::EClass> LinkEndCreationDataImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
-void LinkEndCreationDataImpl::setIsReplaceAll(bool _isReplaceAll)
-{
-	m_isReplaceAll = _isReplaceAll;
-} 
+/*
+Getter & Setter for attribute isReplaceAll
+*/
 bool LinkEndCreationDataImpl::getIsReplaceAll() const 
 {
 	return m_isReplaceAll;
 }
+
+void LinkEndCreationDataImpl::setIsReplaceAll(bool _isReplaceAll)
+{
+	m_isReplaceAll = _isReplaceAll;
+} 
+
+
 
 //*********************************
 // Operations
@@ -153,15 +159,21 @@ bool LinkEndCreationDataImpl::insertAt_pin(Any diagnostics,std::map <   Any, Any
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference insertAt
+*/
 std::shared_ptr<uml::InputPin > LinkEndCreationDataImpl::getInsertAt() const
 {
 
     return m_insertAt;
 }
+
 void LinkEndCreationDataImpl::setInsertAt(std::shared_ptr<uml::InputPin> _insertAt)
 {
     m_insertAt = _insertAt;
 }
+
+
 
 //*********************************
 // Union Getter

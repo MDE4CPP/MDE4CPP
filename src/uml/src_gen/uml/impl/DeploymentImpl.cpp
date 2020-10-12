@@ -231,6 +231,9 @@ std::shared_ptr<ecore::EClass> DeploymentImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference configuration
+*/
 std::shared_ptr<Subset<uml::DeploymentSpecification, uml::Element>> DeploymentImpl::getConfiguration() const
 {
 	if(m_configuration == nullptr)
@@ -253,6 +256,12 @@ std::shared_ptr<Subset<uml::DeploymentSpecification, uml::Element>> DeploymentIm
 }
 
 
+
+
+
+/*
+Getter & Setter for reference deployedArtifact
+*/
 std::shared_ptr<Subset<uml::DeployedArtifact, uml::NamedElement /*Subset does not reference a union*/>> DeploymentImpl::getDeployedArtifact() const
 {
 	if(m_deployedArtifact == nullptr)
@@ -275,15 +284,24 @@ std::shared_ptr<Subset<uml::DeployedArtifact, uml::NamedElement /*Subset does no
 }
 
 
+
+
+
+/*
+Getter & Setter for reference location
+*/
 std::weak_ptr<uml::DeploymentTarget > DeploymentImpl::getLocation() const
 {
 //assert(m_location);
     return m_location;
 }
+
 void DeploymentImpl::setLocation(std::shared_ptr<uml::DeploymentTarget> _location)
 {
     m_location = _location;
 }
+
+
 
 //*********************************
 // Union Getter

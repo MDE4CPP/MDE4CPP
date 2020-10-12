@@ -203,15 +203,21 @@ std::shared_ptr<ecore::EClass> AbstractionImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference mapping
+*/
 std::shared_ptr<uml::OpaqueExpression > AbstractionImpl::getMapping() const
 {
 
     return m_mapping;
 }
+
 void AbstractionImpl::setMapping(std::shared_ptr<uml::OpaqueExpression> _mapping)
 {
     m_mapping = _mapping;
 }
+
+
 
 //*********************************
 // Union Getter

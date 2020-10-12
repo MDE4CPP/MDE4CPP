@@ -112,14 +112,20 @@ std::shared_ptr<EClass> ENamedElementImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
-void ENamedElementImpl::setName(std::string _name)
-{
-	m_name = _name;
-} 
+/*
+Getter & Setter for attribute name
+*/
 std::string ENamedElementImpl::getName() const 
 {
 	return m_name;
 }
+
+void ENamedElementImpl::setName(std::string _name)
+{
+	m_name = _name;
+} 
+
+
 
 //*********************************
 // Operations

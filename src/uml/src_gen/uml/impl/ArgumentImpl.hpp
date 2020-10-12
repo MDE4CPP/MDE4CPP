@@ -49,26 +49,22 @@ virtual public Argument
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual std::string getName() const ;
 			
-			/*!
-			 */ 
+			 
 			virtual void setName (std::string _name); 
-			
 			
 			
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<uml::Object > getValue() const ;
 			
-			/*!
-			 */
-			virtual void setValue(std::shared_ptr<uml::Object> _value_value) ;
+			
+			virtual void setValue(std::shared_ptr<uml::Object> _value) ;
+			
 							
 			
 			//*********************************

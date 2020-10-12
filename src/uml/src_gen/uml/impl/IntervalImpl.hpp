@@ -77,37 +77,53 @@ namespace uml
 			// Reference
 			//*********************************
 			/*!
-			 Refers to the ValueSpecification denoting the maximum value of the range.
-			<p>From package UML::Values.</p> */
+			Refers to the ValueSpecification denoting the maximum value of the range.
+			<p>From package UML::Values.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::ValueSpecification > getMax() const ;
 			
 			/*!
-			 Refers to the ValueSpecification denoting the maximum value of the range.
-			<p>From package UML::Values.</p> */
-			virtual void setMax(std::shared_ptr<uml::ValueSpecification> _max_max) ;
+			Refers to the ValueSpecification denoting the maximum value of the range.
+			<p>From package UML::Values.</p>
+			*/
+			
+			virtual void setMax(std::shared_ptr<uml::ValueSpecification> _max) ;
+			
 			/*!
-			 Refers to the ValueSpecification denoting the minimum value of the range.
-			<p>From package UML::Values.</p> */
+			Refers to the ValueSpecification denoting the minimum value of the range.
+			<p>From package UML::Values.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::ValueSpecification > getMin() const ;
 			
 			/*!
-			 Refers to the ValueSpecification denoting the minimum value of the range.
-			<p>From package UML::Values.</p> */
-			virtual void setMin(std::shared_ptr<uml::ValueSpecification> _min_min) ;
+			Refers to the ValueSpecification denoting the minimum value of the range.
+			<p>From package UML::Values.</p>
+			*/
+			
+			virtual void setMin(std::shared_ptr<uml::ValueSpecification> _min) ;
+			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************

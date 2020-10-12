@@ -139,14 +139,20 @@ std::shared_ptr<ecore::EClass> GeneralizationImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
-void GeneralizationImpl::setIsSubstitutable(bool _isSubstitutable)
-{
-	m_isSubstitutable = _isSubstitutable;
-} 
+/*
+Getter & Setter for attribute isSubstitutable
+*/
 bool GeneralizationImpl::getIsSubstitutable() const 
 {
 	return m_isSubstitutable;
 }
+
+void GeneralizationImpl::setIsSubstitutable(bool _isSubstitutable)
+{
+	m_isSubstitutable = _isSubstitutable;
+} 
+
+
 
 //*********************************
 // Operations
@@ -155,16 +161,25 @@ bool GeneralizationImpl::getIsSubstitutable() const
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference general
+*/
 std::shared_ptr<uml::Classifier > GeneralizationImpl::getGeneral() const
 {
 //assert(m_general);
     return m_general;
 }
+
 void GeneralizationImpl::setGeneral(std::shared_ptr<uml::Classifier> _general)
 {
     m_general = _general;
 }
 
+
+
+/*
+Getter & Setter for reference generalizationSet
+*/
 std::shared_ptr<Bag<uml::GeneralizationSet>> GeneralizationImpl::getGeneralizationSet() const
 {
 	if(m_generalizationSet == nullptr)
@@ -178,15 +193,24 @@ std::shared_ptr<Bag<uml::GeneralizationSet>> GeneralizationImpl::getGeneralizati
 }
 
 
+
+
+
+/*
+Getter & Setter for reference specific
+*/
 std::weak_ptr<uml::Classifier > GeneralizationImpl::getSpecific() const
 {
 //assert(m_specific);
     return m_specific;
 }
+
 void GeneralizationImpl::setSpecific(std::shared_ptr<uml::Classifier> _specific)
 {
     m_specific = _specific;
 }
+
+
 
 //*********************************
 // Union Getter

@@ -182,15 +182,21 @@ bool PackageableElementImpl::namespace_needs_visibility(Any diagnostics,std::map
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference owningPackage
+*/
 std::weak_ptr<uml::Package > PackageableElementImpl::getOwningPackage() const
 {
 
     return m_owningPackage;
 }
+
 void PackageableElementImpl::setOwningPackage(std::shared_ptr<uml::Package> _owningPackage)
 {
     m_owningPackage = _owningPackage;
 }
+
+
 
 //*********************************
 // Union Getter

@@ -197,15 +197,21 @@ std::shared_ptr<ecore::EClass> BehaviorExecutionSpecificationImpl::eStaticClass(
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference behavior
+*/
 std::shared_ptr<uml::Behavior > BehaviorExecutionSpecificationImpl::getBehavior() const
 {
 
     return m_behavior;
 }
+
 void BehaviorExecutionSpecificationImpl::setBehavior(std::shared_ptr<uml::Behavior> _behavior)
 {
     m_behavior = _behavior;
 }
+
+
 
 //*********************************
 // Union Getter

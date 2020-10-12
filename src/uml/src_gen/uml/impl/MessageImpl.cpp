@@ -183,20 +183,32 @@ std::shared_ptr<ecore::EClass> MessageImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
-
+/*
+Getter & Setter for attribute messageKind
+*/
 uml::MessageKind MessageImpl::getMessageKind() const 
 {
 	return m_messageKind;
+}
+
+
+
+
+
+/*
+Getter & Setter for attribute messageSort
+*/
+uml::MessageSort MessageImpl::getMessageSort() const 
+{
+	return m_messageSort;
 }
 
 void MessageImpl::setMessageSort(uml::MessageSort _messageSort)
 {
 	m_messageSort = _messageSort;
 } 
-uml::MessageSort MessageImpl::getMessageSort() const 
-{
-	return m_messageSort;
-}
+
+
 
 //*********************************
 // Operations
@@ -258,6 +270,9 @@ bool MessageImpl::signature_refer_to(Any diagnostics,std::map <   Any, Any >  co
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference argument
+*/
 std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>> MessageImpl::getArgument() const
 {
 	if(m_argument == nullptr)
@@ -280,55 +295,88 @@ std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>> MessageImpl::getA
 }
 
 
+
+
+
+/*
+Getter & Setter for reference connector
+*/
 std::shared_ptr<uml::Connector > MessageImpl::getConnector() const
 {
 
     return m_connector;
 }
+
 void MessageImpl::setConnector(std::shared_ptr<uml::Connector> _connector)
 {
     m_connector = _connector;
 }
 
+
+
+/*
+Getter & Setter for reference interaction
+*/
 std::weak_ptr<uml::Interaction > MessageImpl::getInteraction() const
 {
 //assert(m_interaction);
     return m_interaction;
 }
+
 void MessageImpl::setInteraction(std::shared_ptr<uml::Interaction> _interaction)
 {
     m_interaction = _interaction;
 }
 
+
+
+/*
+Getter & Setter for reference receiveEvent
+*/
 std::shared_ptr<uml::MessageEnd > MessageImpl::getReceiveEvent() const
 {
 
     return m_receiveEvent;
 }
+
 void MessageImpl::setReceiveEvent(std::shared_ptr<uml::MessageEnd> _receiveEvent)
 {
     m_receiveEvent = _receiveEvent;
 }
 
+
+
+/*
+Getter & Setter for reference sendEvent
+*/
 std::shared_ptr<uml::MessageEnd > MessageImpl::getSendEvent() const
 {
 
     return m_sendEvent;
 }
+
 void MessageImpl::setSendEvent(std::shared_ptr<uml::MessageEnd> _sendEvent)
 {
     m_sendEvent = _sendEvent;
 }
 
+
+
+/*
+Getter & Setter for reference signature
+*/
 std::shared_ptr<uml::NamedElement > MessageImpl::getSignature() const
 {
 
     return m_signature;
 }
+
 void MessageImpl::setSignature(std::shared_ptr<uml::NamedElement> _signature)
 {
     m_signature = _signature;
 }
+
+
 
 //*********************************
 // Union Getter

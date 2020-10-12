@@ -364,6 +364,9 @@ bool InputPinImpl::outgoing_edges_structured_only(Any diagnostics,std::map <   A
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference action
+*/
 std::weak_ptr<uml::Action > InputPinImpl::getAction() const
 {
 
@@ -371,75 +374,120 @@ std::weak_ptr<uml::Action > InputPinImpl::getAction() const
 }
 
 
+
+
+
+/*
+Getter & Setter for reference addStructuralFeatureValueAction
+*/
 std::weak_ptr<uml::AddStructuralFeatureValueAction > InputPinImpl::getAddStructuralFeatureValueAction() const
 {
 
     return m_addStructuralFeatureValueAction;
 }
+
 void InputPinImpl::setAddStructuralFeatureValueAction(std::shared_ptr<uml::AddStructuralFeatureValueAction> _addStructuralFeatureValueAction)
 {
     m_addStructuralFeatureValueAction = _addStructuralFeatureValueAction;
 }
 
+
+
+/*
+Getter & Setter for reference callOperationAction
+*/
 std::weak_ptr<uml::CallOperationAction > InputPinImpl::getCallOperationAction() const
 {
 
     return m_callOperationAction;
 }
+
 void InputPinImpl::setCallOperationAction(std::shared_ptr<uml::CallOperationAction> _callOperationAction)
 {
     m_callOperationAction = _callOperationAction;
 }
 
+
+
+/*
+Getter & Setter for reference destroyObjectAction
+*/
 std::weak_ptr<uml::DestroyObjectAction > InputPinImpl::getDestroyObjectAction() const
 {
 
     return m_destroyObjectAction;
 }
+
 void InputPinImpl::setDestroyObjectAction(std::shared_ptr<uml::DestroyObjectAction> _destroyObjectAction)
 {
     m_destroyObjectAction = _destroyObjectAction;
 }
 
+
+
+/*
+Getter & Setter for reference invocationAction
+*/
 std::weak_ptr<uml::InvocationAction > InputPinImpl::getInvocationAction() const
 {
 
     return m_invocationAction;
 }
+
 void InputPinImpl::setInvocationAction(std::shared_ptr<uml::InvocationAction> _invocationAction)
 {
     m_invocationAction = _invocationAction;
 }
 
+
+
+/*
+Getter & Setter for reference removeStructuralFeatureValueAction
+*/
 std::weak_ptr<uml::RemoveStructuralFeatureValueAction > InputPinImpl::getRemoveStructuralFeatureValueAction() const
 {
 
     return m_removeStructuralFeatureValueAction;
 }
+
 void InputPinImpl::setRemoveStructuralFeatureValueAction(std::shared_ptr<uml::RemoveStructuralFeatureValueAction> _removeStructuralFeatureValueAction)
 {
     m_removeStructuralFeatureValueAction = _removeStructuralFeatureValueAction;
 }
 
+
+
+/*
+Getter & Setter for reference structuralFeatureAction
+*/
 std::weak_ptr<uml::StructuralFeatureAction > InputPinImpl::getStructuralFeatureAction() const
 {
 
     return m_structuralFeatureAction;
 }
+
 void InputPinImpl::setStructuralFeatureAction(std::shared_ptr<uml::StructuralFeatureAction> _structuralFeatureAction)
 {
     m_structuralFeatureAction = _structuralFeatureAction;
 }
 
+
+
+/*
+Getter & Setter for reference writeStructuralFeatureAction
+*/
 std::weak_ptr<uml::WriteStructuralFeatureAction > InputPinImpl::getWriteStructuralFeatureAction() const
 {
 
     return m_writeStructuralFeatureAction;
 }
+
 void InputPinImpl::setWriteStructuralFeatureAction(std::shared_ptr<uml::WriteStructuralFeatureAction> _writeStructuralFeatureAction)
 {
     m_writeStructuralFeatureAction = _writeStructuralFeatureAction;
 }
+
+
 
 //*********************************
 // Union Getter

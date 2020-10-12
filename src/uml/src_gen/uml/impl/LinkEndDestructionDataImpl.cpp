@@ -132,14 +132,20 @@ std::shared_ptr<ecore::EClass> LinkEndDestructionDataImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
-void LinkEndDestructionDataImpl::setIsDestroyDuplicates(bool _isDestroyDuplicates)
-{
-	m_isDestroyDuplicates = _isDestroyDuplicates;
-} 
+/*
+Getter & Setter for attribute isDestroyDuplicates
+*/
 bool LinkEndDestructionDataImpl::getIsDestroyDuplicates() const 
 {
 	return m_isDestroyDuplicates;
 }
+
+void LinkEndDestructionDataImpl::setIsDestroyDuplicates(bool _isDestroyDuplicates)
+{
+	m_isDestroyDuplicates = _isDestroyDuplicates;
+} 
+
+
 
 //*********************************
 // Operations
@@ -153,15 +159,21 @@ bool LinkEndDestructionDataImpl::destroyAt_pin(Any diagnostics,std::map <   Any,
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference destroyAt
+*/
 std::shared_ptr<uml::InputPin > LinkEndDestructionDataImpl::getDestroyAt() const
 {
 
     return m_destroyAt;
 }
+
 void LinkEndDestructionDataImpl::setDestroyAt(std::shared_ptr<uml::InputPin> _destroyAt)
 {
     m_destroyAt = _destroyAt;
 }
+
+
 
 //*********************************
 // Union Getter

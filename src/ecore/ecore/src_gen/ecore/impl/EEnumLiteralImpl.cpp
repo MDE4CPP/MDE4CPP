@@ -126,32 +126,50 @@ std::shared_ptr<EClass> EEnumLiteralImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
+/*
+Getter & Setter for attribute instance
+*/
+Any EEnumLiteralImpl::getInstance() const 
+{
+	return m_instance;
+}
+
 void EEnumLiteralImpl::setInstance(Any _instance)
 {
 	m_instance = _instance;
 } 
-Any EEnumLiteralImpl::getInstance() const 
+
+
+
+/*
+Getter & Setter for attribute literal
+*/
+std::string EEnumLiteralImpl::getLiteral() const 
 {
-	return m_instance;
+	return m_literal;
 }
 
 void EEnumLiteralImpl::setLiteral(std::string _literal)
 {
 	m_literal = _literal;
 } 
-std::string EEnumLiteralImpl::getLiteral() const 
+
+
+
+/*
+Getter & Setter for attribute value
+*/
+int EEnumLiteralImpl::getValue() const 
 {
-	return m_literal;
+	return m_value;
 }
 
 void EEnumLiteralImpl::setValue(int _value)
 {
 	m_value = _value;
 } 
-int EEnumLiteralImpl::getValue() const 
-{
-	return m_value;
-}
+
+
 
 //*********************************
 // Operations
@@ -160,11 +178,17 @@ int EEnumLiteralImpl::getValue() const
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference eEnum
+*/
 std::weak_ptr<ecore::EEnum > EEnumLiteralImpl::getEEnum() const
 {
 
     return m_eEnum;
 }
+
+
+
 
 
 //*********************************

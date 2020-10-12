@@ -111,32 +111,50 @@ std::shared_ptr<ecore::EClass> ImageImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
+/*
+Getter & Setter for attribute content
+*/
+std::string ImageImpl::getContent() const 
+{
+	return m_content;
+}
+
 void ImageImpl::setContent(std::string _content)
 {
 	m_content = _content;
 } 
-std::string ImageImpl::getContent() const 
+
+
+
+/*
+Getter & Setter for attribute format
+*/
+std::string ImageImpl::getFormat() const 
 {
-	return m_content;
+	return m_format;
 }
 
 void ImageImpl::setFormat(std::string _format)
 {
 	m_format = _format;
 } 
-std::string ImageImpl::getFormat() const 
+
+
+
+/*
+Getter & Setter for attribute location
+*/
+std::string ImageImpl::getLocation() const 
 {
-	return m_format;
+	return m_location;
 }
 
 void ImageImpl::setLocation(std::string _location)
 {
 	m_location = _location;
 } 
-std::string ImageImpl::getLocation() const 
-{
-	return m_location;
-}
+
+
 
 //*********************************
 // Operations

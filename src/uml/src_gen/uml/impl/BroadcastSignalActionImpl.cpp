@@ -295,15 +295,21 @@ bool BroadcastSignalActionImpl::type_ordering_multiplicity(Any diagnostics,std::
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference signal
+*/
 std::shared_ptr<uml::Signal > BroadcastSignalActionImpl::getSignal() const
 {
 //assert(m_signal);
     return m_signal;
 }
+
 void BroadcastSignalActionImpl::setSignal(std::shared_ptr<uml::Signal> _signal)
 {
     m_signal = _signal;
 }
+
+
 
 //*********************************
 // Union Getter

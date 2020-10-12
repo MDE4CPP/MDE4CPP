@@ -420,14 +420,20 @@ std::shared_ptr<ecore::EClass> LoopNodeImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
-void LoopNodeImpl::setIsTestedFirst(bool _isTestedFirst)
-{
-	m_isTestedFirst = _isTestedFirst;
-} 
+/*
+Getter & Setter for attribute isTestedFirst
+*/
 bool LoopNodeImpl::getIsTestedFirst() const 
 {
 	return m_isTestedFirst;
 }
+
+void LoopNodeImpl::setIsTestedFirst(bool _isTestedFirst)
+{
+	m_isTestedFirst = _isTestedFirst;
+} 
+
+
 
 //*********************************
 // Operations
@@ -489,6 +495,9 @@ bool LoopNodeImpl::setup_test_and_body(Any diagnostics,std::map <   Any, Any >  
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference bodyOutput
+*/
 std::shared_ptr<Bag<uml::OutputPin>> LoopNodeImpl::getBodyOutput() const
 {
 	if(m_bodyOutput == nullptr)
@@ -502,6 +511,12 @@ std::shared_ptr<Bag<uml::OutputPin>> LoopNodeImpl::getBodyOutput() const
 }
 
 
+
+
+
+/*
+Getter & Setter for reference bodyPart
+*/
 std::shared_ptr<Bag<uml::ExecutableNode>> LoopNodeImpl::getBodyPart() const
 {
 	if(m_bodyPart == nullptr)
@@ -515,16 +530,28 @@ std::shared_ptr<Bag<uml::ExecutableNode>> LoopNodeImpl::getBodyPart() const
 }
 
 
+
+
+
+/*
+Getter & Setter for reference decider
+*/
 std::shared_ptr<uml::OutputPin > LoopNodeImpl::getDecider() const
 {
 //assert(m_decider);
     return m_decider;
 }
+
 void LoopNodeImpl::setDecider(std::shared_ptr<uml::OutputPin> _decider)
 {
     m_decider = _decider;
 }
 
+
+
+/*
+Getter & Setter for reference loopVariable
+*/
 std::shared_ptr<Subset<uml::OutputPin, uml::Element>> LoopNodeImpl::getLoopVariable() const
 {
 	if(m_loopVariable == nullptr)
@@ -547,6 +574,12 @@ std::shared_ptr<Subset<uml::OutputPin, uml::Element>> LoopNodeImpl::getLoopVaria
 }
 
 
+
+
+
+/*
+Getter & Setter for reference loopVariableInput
+*/
 std::shared_ptr<Bag<uml::InputPin>> LoopNodeImpl::getLoopVariableInput() const
 {
 	if(m_loopVariableInput == nullptr)
@@ -560,6 +593,14 @@ std::shared_ptr<Bag<uml::InputPin>> LoopNodeImpl::getLoopVariableInput() const
 }
 
 
+
+/*Additional Setter for redefined reference 'StructuredActivityNode::structuredNodeInput'*/
+
+
+
+/*
+Getter & Setter for reference result
+*/
 std::shared_ptr<Bag<uml::OutputPin>> LoopNodeImpl::getResult() const
 {
 	if(m_result == nullptr)
@@ -573,6 +614,14 @@ std::shared_ptr<Bag<uml::OutputPin>> LoopNodeImpl::getResult() const
 }
 
 
+
+/*Additional Setter for redefined reference 'StructuredActivityNode::structuredNodeOutput'*/
+
+
+
+/*
+Getter & Setter for reference setupPart
+*/
 std::shared_ptr<Bag<uml::ExecutableNode>> LoopNodeImpl::getSetupPart() const
 {
 	if(m_setupPart == nullptr)
@@ -586,6 +635,12 @@ std::shared_ptr<Bag<uml::ExecutableNode>> LoopNodeImpl::getSetupPart() const
 }
 
 
+
+
+
+/*
+Getter & Setter for reference test
+*/
 std::shared_ptr<Bag<uml::ExecutableNode>> LoopNodeImpl::getTest() const
 {
 	if(m_test == nullptr)
@@ -597,6 +652,9 @@ std::shared_ptr<Bag<uml::ExecutableNode>> LoopNodeImpl::getTest() const
 //assert(m_test);
     return m_test;
 }
+
+
+
 
 
 //*********************************

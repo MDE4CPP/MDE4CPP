@@ -150,11 +150,17 @@ std::shared_ptr<EClass> EParameterImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference eOperation
+*/
 std::weak_ptr<ecore::EOperation > EParameterImpl::getEOperation() const
 {
 
     return m_eOperation;
 }
+
+
+
 
 
 //*********************************

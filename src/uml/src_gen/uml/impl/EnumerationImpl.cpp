@@ -384,6 +384,9 @@ bool EnumerationImpl::immutable(Any diagnostics,std::map <   Any, Any >  context
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference ownedLiteral
+*/
 std::shared_ptr<Subset<uml::EnumerationLiteral, uml::NamedElement>> EnumerationImpl::getOwnedLiteral() const
 {
 	if(m_ownedLiteral == nullptr)
@@ -404,6 +407,9 @@ std::shared_ptr<Subset<uml::EnumerationLiteral, uml::NamedElement>> EnumerationI
 
     return m_ownedLiteral;
 }
+
+
+
 
 
 //*********************************

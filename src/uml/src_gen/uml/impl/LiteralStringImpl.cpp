@@ -195,14 +195,20 @@ std::shared_ptr<ecore::EClass> LiteralStringImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
-void LiteralStringImpl::setValue(std::string _value)
-{
-	m_value = _value;
-} 
+/*
+Getter & Setter for attribute value
+*/
 std::string LiteralStringImpl::getValue() const 
 {
 	return m_value;
 }
+
+void LiteralStringImpl::setValue(std::string _value)
+{
+	m_value = _value;
+} 
+
+
 
 //*********************************
 // Operations

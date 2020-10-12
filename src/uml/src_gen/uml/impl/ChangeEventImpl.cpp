@@ -184,15 +184,21 @@ std::shared_ptr<ecore::EClass> ChangeEventImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference changeExpression
+*/
 std::shared_ptr<uml::ValueSpecification > ChangeEventImpl::getChangeExpression() const
 {
 //assert(m_changeExpression);
     return m_changeExpression;
 }
+
 void ChangeEventImpl::setChangeExpression(std::shared_ptr<uml::ValueSpecification> _changeExpression)
 {
     m_changeExpression = _changeExpression;
 }
+
+
 
 //*********************************
 // Union Getter

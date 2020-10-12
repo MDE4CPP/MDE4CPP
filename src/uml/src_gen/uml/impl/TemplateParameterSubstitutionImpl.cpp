@@ -150,45 +150,69 @@ bool TemplateParameterSubstitutionImpl::must_be_compatible(Any diagnostics,std::
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference actual
+*/
 std::shared_ptr<uml::ParameterableElement > TemplateParameterSubstitutionImpl::getActual() const
 {
 //assert(m_actual);
     return m_actual;
 }
+
 void TemplateParameterSubstitutionImpl::setActual(std::shared_ptr<uml::ParameterableElement> _actual)
 {
     m_actual = _actual;
 }
 
+
+
+/*
+Getter & Setter for reference formal
+*/
 std::shared_ptr<uml::TemplateParameter > TemplateParameterSubstitutionImpl::getFormal() const
 {
 //assert(m_formal);
     return m_formal;
 }
+
 void TemplateParameterSubstitutionImpl::setFormal(std::shared_ptr<uml::TemplateParameter> _formal)
 {
     m_formal = _formal;
 }
 
+
+
+/*
+Getter & Setter for reference ownedActual
+*/
 std::shared_ptr<uml::ParameterableElement > TemplateParameterSubstitutionImpl::getOwnedActual() const
 {
 
     return m_ownedActual;
 }
+
 void TemplateParameterSubstitutionImpl::setOwnedActual(std::shared_ptr<uml::ParameterableElement> _ownedActual)
 {
     m_ownedActual = _ownedActual;
 }
 
+
+
+/*
+Getter & Setter for reference templateBinding
+*/
 std::weak_ptr<uml::TemplateBinding > TemplateParameterSubstitutionImpl::getTemplateBinding() const
 {
 //assert(m_templateBinding);
     return m_templateBinding;
 }
+
 void TemplateParameterSubstitutionImpl::setTemplateBinding(std::shared_ptr<uml::TemplateBinding> _templateBinding)
 {
     m_templateBinding = _templateBinding;
 }
+
+
 
 //*********************************
 // Union Getter

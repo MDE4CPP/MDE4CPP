@@ -306,15 +306,21 @@ bool AcceptCallActionImpl::unmarshall(Any diagnostics,std::map <   Any, Any >  c
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference returnInformation
+*/
 std::shared_ptr<uml::OutputPin > AcceptCallActionImpl::getReturnInformation() const
 {
 //assert(m_returnInformation);
     return m_returnInformation;
 }
+
 void AcceptCallActionImpl::setReturnInformation(std::shared_ptr<uml::OutputPin> _returnInformation)
 {
     m_returnInformation = _returnInformation;
 }
+
+
 
 //*********************************
 // Union Getter

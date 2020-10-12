@@ -56,8 +56,10 @@ namespace uml
 namespace uml 
 {
 	/*!
-	 Relationship is an abstract concept that specifies some kind of relationship between Elements.
-	<p>From package UML::CommonStructure.</p> */
+	Relationship is an abstract concept that specifies some kind of relationship between Elements.
+	<p>From package UML::CommonStructure.</p>
+	*/
+	
 	class Relationship:virtual public Element
 	{
 		public:
@@ -87,6 +89,7 @@ namespace uml
 			//*********************************
 			
 			
+			
 
 		protected:
 			//*********************************
@@ -98,21 +101,26 @@ namespace uml
 			// Reference Members
 			//*********************************
 			/*!
-			 Specifies the elements related by the Relationship.
-			<p>From package UML::CommonStructure.</p> */
-			mutable std::shared_ptr<Union<uml::Element>> m_relatedElement;
+			Specifies the elements related by the Relationship.
+			<p>From package UML::CommonStructure.</p>
+			*/
 			
+			mutable std::shared_ptr<Union<uml::Element>> m_relatedElement;
 
 		public:
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;/*!
-			 Specifies the elements related by the Relationship.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the elements related by the Relationship.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getRelatedElement() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

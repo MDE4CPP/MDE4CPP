@@ -269,14 +269,20 @@ std::shared_ptr<ecore::EClass> ReclassifyObjectActionImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
-void ReclassifyObjectActionImpl::setIsReplaceAll(bool _isReplaceAll)
-{
-	m_isReplaceAll = _isReplaceAll;
-} 
+/*
+Getter & Setter for attribute isReplaceAll
+*/
 bool ReclassifyObjectActionImpl::getIsReplaceAll() const 
 {
 	return m_isReplaceAll;
 }
+
+void ReclassifyObjectActionImpl::setIsReplaceAll(bool _isReplaceAll)
+{
+	m_isReplaceAll = _isReplaceAll;
+} 
+
+
 
 //*********************************
 // Operations
@@ -302,6 +308,9 @@ bool ReclassifyObjectActionImpl::multiplicity(Any diagnostics,std::map <   Any, 
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference newClassifier
+*/
 std::shared_ptr<Bag<uml::Classifier>> ReclassifyObjectActionImpl::getNewClassifier() const
 {
 	if(m_newClassifier == nullptr)
@@ -315,16 +324,28 @@ std::shared_ptr<Bag<uml::Classifier>> ReclassifyObjectActionImpl::getNewClassifi
 }
 
 
+
+
+
+/*
+Getter & Setter for reference object
+*/
 std::shared_ptr<uml::InputPin > ReclassifyObjectActionImpl::getObject() const
 {
 //assert(m_object);
     return m_object;
 }
+
 void ReclassifyObjectActionImpl::setObject(std::shared_ptr<uml::InputPin> _object)
 {
     m_object = _object;
 }
 
+
+
+/*
+Getter & Setter for reference oldClassifier
+*/
 std::shared_ptr<Bag<uml::Classifier>> ReclassifyObjectActionImpl::getOldClassifier() const
 {
 	if(m_oldClassifier == nullptr)
@@ -336,6 +357,9 @@ std::shared_ptr<Bag<uml::Classifier>> ReclassifyObjectActionImpl::getOldClassifi
 
     return m_oldClassifier;
 }
+
+
+
 
 
 //*********************************

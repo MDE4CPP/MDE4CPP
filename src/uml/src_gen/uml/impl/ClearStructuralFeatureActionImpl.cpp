@@ -292,15 +292,21 @@ bool ClearStructuralFeatureActionImpl::type_of_result(Any diagnostics,std::map <
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference result
+*/
 std::shared_ptr<uml::OutputPin > ClearStructuralFeatureActionImpl::getResult() const
 {
 
     return m_result;
 }
+
 void ClearStructuralFeatureActionImpl::setResult(std::shared_ptr<uml::OutputPin> _result)
 {
     m_result = _result;
 }
+
+
 
 //*********************************
 // Union Getter

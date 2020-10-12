@@ -73,46 +73,68 @@ namespace uml
 			// Reference
 			//*********************************
 			/*!
-			 References the Interface specifying the conformance contract.
-			<p>From package UML::SimpleClassifiers.</p> */
+			References the Interface specifying the conformance contract.
+			<p>From package UML::SimpleClassifiers.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::Interface > getContract() const ;
 			
 			/*!
-			 References the Interface specifying the conformance contract.
-			<p>From package UML::SimpleClassifiers.</p> */
-			virtual void setContract(std::shared_ptr<uml::Interface> _contract_contract) ;
+			References the Interface specifying the conformance contract.
+			<p>From package UML::SimpleClassifiers.</p>
+			*/
+			
+			virtual void setContract(std::shared_ptr<uml::Interface> _contract) ;
+			
 			/*!
-			 References the BehavioredClassifier that owns this InterfaceRealization, i.e., the BehavioredClassifier that realizes the Interface to which it refers.
-			<p>From package UML::SimpleClassifiers.</p> */
+			References the BehavioredClassifier that owns this InterfaceRealization, i.e., the BehavioredClassifier that realizes the Interface to which it refers.
+			<p>From package UML::SimpleClassifiers.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::BehavioredClassifier > getImplementingClassifier() const ;
 			
 			/*!
-			 References the BehavioredClassifier that owns this InterfaceRealization, i.e., the BehavioredClassifier that realizes the Interface to which it refers.
-			<p>From package UML::SimpleClassifiers.</p> */
-			virtual void setImplementingClassifier(std::shared_ptr<uml::BehavioredClassifier> _implementingClassifier_implementingClassifier) ;
+			References the BehavioredClassifier that owns this InterfaceRealization, i.e., the BehavioredClassifier that realizes the Interface to which it refers.
+			<p>From package UML::SimpleClassifiers.</p>
+			*/
+			
+			virtual void setImplementingClassifier(std::shared_ptr<uml::BehavioredClassifier> _implementingClassifier) ;
+			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
-			 Specifies the elements related by the Relationship.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the elements related by the Relationship.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getRelatedElement() const ;/*!
-			 Specifies the source Element(s) of the DirectedRelationship.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the source Element(s) of the DirectedRelationship.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> getSource() const ;/*!
-			 Specifies the target Element(s) of the DirectedRelationship.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the target Element(s) of the DirectedRelationship.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> getTarget() const ; 
 			 
 			//*********************************

@@ -197,6 +197,9 @@ std::shared_ptr<ecore::EClass> DependencyImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference client
+*/
 std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element>> DependencyImpl::getClient() const
 {
 	if(m_client == nullptr)
@@ -219,6 +222,12 @@ std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element>> DependencyImpl::ge
 }
 
 
+
+
+
+/*
+Getter & Setter for reference supplier
+*/
 std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element>> DependencyImpl::getSupplier() const
 {
 	if(m_supplier == nullptr)
@@ -239,6 +248,9 @@ std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element>> DependencyImpl::ge
 //assert(m_supplier);
     return m_supplier;
 }
+
+
+
 
 
 //*********************************

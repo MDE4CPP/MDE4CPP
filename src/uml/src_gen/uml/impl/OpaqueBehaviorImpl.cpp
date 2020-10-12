@@ -503,7 +503,9 @@ std::shared_ptr<ecore::EClass> OpaqueBehaviorImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
-
+/*
+Getter & Setter for attribute body
+*/
 std::shared_ptr<Bag<std::string> > OpaqueBehaviorImpl::getBody() const 
 {
 	if(m_body == nullptr)
@@ -514,6 +516,12 @@ std::shared_ptr<Bag<std::string> > OpaqueBehaviorImpl::getBody() const
 }
 
 
+
+
+
+/*
+Getter & Setter for attribute language
+*/
 std::shared_ptr<Bag<std::string> > OpaqueBehaviorImpl::getLanguage() const 
 {
 	if(m_language == nullptr)
@@ -522,6 +530,10 @@ std::shared_ptr<Bag<std::string> > OpaqueBehaviorImpl::getLanguage() const
 	}
 	return m_language;
 }
+
+
+
+
 
 //*********************************
 // Operations

@@ -269,6 +269,9 @@ bool InteractionOperandImpl::guard_directly_prior(Any diagnostics,std::map <   A
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference fragment
+*/
 std::shared_ptr<Subset<uml::InteractionFragment, uml::NamedElement>> InteractionOperandImpl::getFragment() const
 {
 	if(m_fragment == nullptr)
@@ -291,15 +294,24 @@ std::shared_ptr<Subset<uml::InteractionFragment, uml::NamedElement>> Interaction
 }
 
 
+
+
+
+/*
+Getter & Setter for reference guard
+*/
 std::shared_ptr<uml::InteractionConstraint > InteractionOperandImpl::getGuard() const
 {
 
     return m_guard;
 }
+
 void InteractionOperandImpl::setGuard(std::shared_ptr<uml::InteractionConstraint> _guard)
 {
     m_guard = _guard;
 }
+
+
 
 //*********************************
 // Union Getter

@@ -122,6 +122,18 @@ std::shared_ptr<ecore::EClass> DirectedRelationshipImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference source
+*/
+
+
+
+
+
+
+/*
+Getter & Setter for reference target
+*/
 
 
 

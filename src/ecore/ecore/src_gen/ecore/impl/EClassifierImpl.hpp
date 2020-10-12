@@ -50,12 +50,10 @@ namespace ecore
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual int getClassifierID() ;
 			
-			/*!
-			 */ 
+			 
 			virtual bool isInstance(Any object) const ;
 			
 			
@@ -63,54 +61,44 @@ namespace ecore
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual Any getDefaultValue() const ;
 			
-			/*!
-			 */ 
+			 
 			virtual void setDefaultValue (Any _defaultValue); 
-			
-			/*!
-			 */ 
+			 
 			virtual void *  getInstanceClass() const ;
 			
-			/*!
-			 */ 
+			
+			 
 			virtual std::string getInstanceClassName() const ;
 			
-			/*!
-			 */ 
+			 
 			virtual void setInstanceClassName (std::string _instanceClassName); 
-			
-			/*!
-			 */ 
+			 
 			virtual std::string getInstanceTypeName() const ;
 			
-			/*!
-			 */ 
+			 
 			virtual void setInstanceTypeName (std::string _instanceTypeName); 
-			
 			
 			
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::weak_ptr<ecore::EPackage > getEPackage() const ;
 			
-			/*!
-			 */
+			
+			
 			virtual std::shared_ptr<Bag<ecore::ETypeParameter>> getETypeParameters() const ;
+			
 			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const ; 
 			 
 			//*********************************

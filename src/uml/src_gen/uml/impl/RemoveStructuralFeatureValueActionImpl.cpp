@@ -288,14 +288,20 @@ std::shared_ptr<ecore::EClass> RemoveStructuralFeatureValueActionImpl::eStaticCl
 //*********************************
 // Attribute Setter Getter
 //*********************************
-void RemoveStructuralFeatureValueActionImpl::setIsRemoveDuplicates(bool _isRemoveDuplicates)
-{
-	m_isRemoveDuplicates = _isRemoveDuplicates;
-} 
+/*
+Getter & Setter for attribute isRemoveDuplicates
+*/
 bool RemoveStructuralFeatureValueActionImpl::getIsRemoveDuplicates() const 
 {
 	return m_isRemoveDuplicates;
 }
+
+void RemoveStructuralFeatureValueActionImpl::setIsRemoveDuplicates(bool _isRemoveDuplicates)
+{
+	m_isRemoveDuplicates = _isRemoveDuplicates;
+} 
+
+
 
 //*********************************
 // Operations
@@ -309,15 +315,21 @@ bool RemoveStructuralFeatureValueActionImpl::removeAt_and_value(Any diagnostics,
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference removeAt
+*/
 std::shared_ptr<uml::InputPin > RemoveStructuralFeatureValueActionImpl::getRemoveAt() const
 {
 
     return m_removeAt;
 }
+
 void RemoveStructuralFeatureValueActionImpl::setRemoveAt(std::shared_ptr<uml::InputPin> _removeAt)
 {
     m_removeAt = _removeAt;
 }
+
+
 
 //*********************************
 // Union Getter

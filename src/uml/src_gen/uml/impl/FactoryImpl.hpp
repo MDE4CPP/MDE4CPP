@@ -47,10 +47,12 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 Creates an element that is an instance of the metaClass. Object::metaClass == metaClass and metaClass.isInstance(object)
+			Creates an element that is an instance of the metaClass. Object::metaClass == metaClass and metaClass.isInstance(object)
 			== true.
 			All properties of the element are considered unset. The values are the same as if object.unset(property) was invoked for
-			every property. */ 
+			every property.
+			*/
+			 
 			virtual std::shared_ptr<uml::Element> create(std::shared_ptr<uml::Class>  metaClass) ;
 			
 			
@@ -69,8 +71,10 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ; 
 			 
 			//*********************************

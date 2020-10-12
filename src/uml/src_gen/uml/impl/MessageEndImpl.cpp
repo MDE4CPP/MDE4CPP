@@ -179,15 +179,21 @@ std::shared_ptr<Bag<uml::MessageEnd> > MessageEndImpl::oppositeEnd()
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference message
+*/
 std::shared_ptr<uml::Message > MessageEndImpl::getMessage() const
 {
 
     return m_message;
 }
+
 void MessageEndImpl::setMessage(std::shared_ptr<uml::Message> _message)
 {
     m_message = _message;
 }
+
+
 
 //*********************************
 // Union Getter

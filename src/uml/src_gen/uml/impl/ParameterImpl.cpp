@@ -228,50 +228,80 @@ std::shared_ptr<ecore::EClass> ParameterImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
+/*
+Getter & Setter for attribute default
+*/
+std::string ParameterImpl::getDefault() const 
+{
+	return m_default;
+}
+
 void ParameterImpl::setDefault(std::string _default)
 {
 	m_default = _default;
 } 
-std::string ParameterImpl::getDefault() const 
+
+
+
+/*
+Getter & Setter for attribute direction
+*/
+uml::ParameterDirectionKind ParameterImpl::getDirection() const 
 {
-	return m_default;
+	return m_direction;
 }
 
 void ParameterImpl::setDirection(uml::ParameterDirectionKind _direction)
 {
 	m_direction = _direction;
 } 
-uml::ParameterDirectionKind ParameterImpl::getDirection() const 
+
+
+
+/*
+Getter & Setter for attribute effect
+*/
+uml::ParameterEffectKind ParameterImpl::getEffect() const 
 {
-	return m_direction;
+	return m_effect;
 }
 
 void ParameterImpl::setEffect(uml::ParameterEffectKind _effect)
 {
 	m_effect = _effect;
 } 
-uml::ParameterEffectKind ParameterImpl::getEffect() const 
+
+
+
+/*
+Getter & Setter for attribute isException
+*/
+bool ParameterImpl::getIsException() const 
 {
-	return m_effect;
+	return m_isException;
 }
 
 void ParameterImpl::setIsException(bool _isException)
 {
 	m_isException = _isException;
 } 
-bool ParameterImpl::getIsException() const 
+
+
+
+/*
+Getter & Setter for attribute isStream
+*/
+bool ParameterImpl::getIsStream() const 
 {
-	return m_isException;
+	return m_isStream;
 }
 
 void ParameterImpl::setIsStream(bool _isStream)
 {
 	m_isStream = _isStream;
 } 
-bool ParameterImpl::getIsStream() const 
-{
-	return m_isStream;
-}
+
+
 
 //*********************************
 // Operations
@@ -363,26 +393,41 @@ void ParameterImpl::unsetDefault()
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference behavior
+*/
 std::weak_ptr<uml::Behavior > ParameterImpl::getBehavior() const
 {
 
     return m_behavior;
 }
+
 void ParameterImpl::setBehavior(std::shared_ptr<uml::Behavior> _behavior)
 {
     m_behavior = _behavior;
 }
 
+
+
+/*
+Getter & Setter for reference defaultValue
+*/
 std::shared_ptr<uml::ValueSpecification > ParameterImpl::getDefaultValue() const
 {
 
     return m_defaultValue;
 }
+
 void ParameterImpl::setDefaultValue(std::shared_ptr<uml::ValueSpecification> _defaultValue)
 {
     m_defaultValue = _defaultValue;
 }
 
+
+
+/*
+Getter & Setter for reference operation
+*/
 std::weak_ptr<uml::Operation > ParameterImpl::getOperation() const
 {
 
@@ -390,6 +435,12 @@ std::weak_ptr<uml::Operation > ParameterImpl::getOperation() const
 }
 
 
+
+
+
+/*
+Getter & Setter for reference parameterSet
+*/
 std::shared_ptr<Bag<uml::ParameterSet>> ParameterImpl::getParameterSet() const
 {
 	if(m_parameterSet == nullptr)
@@ -401,6 +452,9 @@ std::shared_ptr<Bag<uml::ParameterSet>> ParameterImpl::getParameterSet() const
 
     return m_parameterSet;
 }
+
+
+
 
 
 //*********************************

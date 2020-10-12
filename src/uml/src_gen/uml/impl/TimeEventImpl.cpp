@@ -178,14 +178,20 @@ std::shared_ptr<ecore::EClass> TimeEventImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
-void TimeEventImpl::setIsRelative(bool _isRelative)
-{
-	m_isRelative = _isRelative;
-} 
+/*
+Getter & Setter for attribute isRelative
+*/
 bool TimeEventImpl::getIsRelative() const 
 {
 	return m_isRelative;
 }
+
+void TimeEventImpl::setIsRelative(bool _isRelative)
+{
+	m_isRelative = _isRelative;
+} 
+
+
 
 //*********************************
 // Operations
@@ -199,15 +205,21 @@ bool TimeEventImpl::when_non_negative(Any diagnostics,std::map <   Any, Any >  c
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference when
+*/
 std::shared_ptr<uml::TimeExpression > TimeEventImpl::getWhen() const
 {
 //assert(m_when);
     return m_when;
 }
+
 void TimeEventImpl::setWhen(std::shared_ptr<uml::TimeExpression> _when)
 {
     m_when = _when;
 }
+
+
 
 //*********************************
 // Union Getter

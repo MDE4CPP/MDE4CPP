@@ -224,25 +224,37 @@ bool VariableImpl::isAccessibleBy(std::shared_ptr<uml::Action>  a)
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference activityScope
+*/
 std::weak_ptr<uml::Activity > VariableImpl::getActivityScope() const
 {
 
     return m_activityScope;
 }
+
 void VariableImpl::setActivityScope(std::shared_ptr<uml::Activity> _activityScope)
 {
     m_activityScope = _activityScope;
 }
 
+
+
+/*
+Getter & Setter for reference scope
+*/
 std::weak_ptr<uml::StructuredActivityNode > VariableImpl::getScope() const
 {
 
     return m_scope;
 }
+
 void VariableImpl::setScope(std::shared_ptr<uml::StructuredActivityNode> _scope)
 {
     m_scope = _scope;
 }
+
+
 
 //*********************************
 // Union Getter

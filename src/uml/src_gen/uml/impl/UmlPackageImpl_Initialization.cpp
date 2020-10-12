@@ -26850,7 +26850,7 @@ void UmlPackageImpl::initializeRedefinableTemplateSignatureContent()
 	m_redefinableTemplateSignature_Attribute_classifier->setUpperBound(1);
 	m_redefinableTemplateSignature_Attribute_classifier->setTransient(true);
 	m_redefinableTemplateSignature_Attribute_classifier->setVolatile(true);
-	m_redefinableTemplateSignature_Attribute_classifier->setChangeable(false);
+	m_redefinableTemplateSignature_Attribute_classifier->setChangeable(true);
 	m_redefinableTemplateSignature_Attribute_classifier->setUnsettable(false);
 	m_redefinableTemplateSignature_Attribute_classifier->setUnique(true);
 	m_redefinableTemplateSignature_Attribute_classifier->setDerived(false);

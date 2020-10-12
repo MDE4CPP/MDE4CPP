@@ -181,14 +181,20 @@ std::shared_ptr<ecore::EClass> ContinuationImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
-void ContinuationImpl::setSetting(bool _setting)
-{
-	m_setting = _setting;
-} 
+/*
+Getter & Setter for attribute setting
+*/
 bool ContinuationImpl::getSetting() const 
 {
 	return m_setting;
 }
+
+void ContinuationImpl::setSetting(bool _setting)
+{
+	m_setting = _setting;
+} 
+
+
 
 //*********************************
 // Operations

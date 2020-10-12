@@ -171,14 +171,20 @@ std::shared_ptr<ecore::EClass> TimeObservationImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
-void TimeObservationImpl::setFirstEvent(bool _firstEvent)
-{
-	m_firstEvent = _firstEvent;
-} 
+/*
+Getter & Setter for attribute firstEvent
+*/
 bool TimeObservationImpl::getFirstEvent() const 
 {
 	return m_firstEvent;
 }
+
+void TimeObservationImpl::setFirstEvent(bool _firstEvent)
+{
+	m_firstEvent = _firstEvent;
+} 
+
+
 
 //*********************************
 // Operations
@@ -187,15 +193,21 @@ bool TimeObservationImpl::getFirstEvent() const
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference event
+*/
 std::shared_ptr<uml::NamedElement > TimeObservationImpl::getEvent() const
 {
 //assert(m_event);
     return m_event;
 }
+
 void TimeObservationImpl::setEvent(std::shared_ptr<uml::NamedElement> _event)
 {
     m_event = _event;
 }
+
+
 
 //*********************************
 // Union Getter

@@ -51,9 +51,11 @@ namespace uml
 namespace uml 
 {
 	/*!
-	 This is a new datatype that is used to represent named arguments to open-ended reflective operations. It is open-ended and allows both Elements and data values to be supplied.
+	This is a new datatype that is used to represent named arguments to open-ended reflective operations. It is open-ended and allows both Elements and data values to be supplied.
 	
-	This Element was merged from mof::Reflection package.  */
+	This Element was merged from mof::Reflection package. 
+	*/
+	
 	class Argument : virtual public ecore::EObject 
 
 	{
@@ -78,43 +80,36 @@ namespace uml
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual std::string getName() const = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual void setName (std::string _name)= 0; 
-			
 			
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<uml::Object > getValue() const = 0;
 			
-			/*!
-			 */
-			virtual void setValue(std::shared_ptr<uml::Object> _value_value) = 0;
+			
+			virtual void setValue(std::shared_ptr<uml::Object> _value) = 0;
+			
 			
 
 		protected:
 			//*********************************
 			// Attribute Members
 			//*********************************
-			/*!
-			 */ 
+			 
 			std::string m_name = "";
 			
 			
 			//*********************************
 			// Reference Members
 			//*********************************
-			/*!
-			 */
-			std::shared_ptr<uml::Object > m_value;
 			
+			std::shared_ptr<uml::Object > m_value;
 
 		public:
 			//*********************************

@@ -226,16 +226,25 @@ std::shared_ptr<ecore::EClass> ComponentRealizationImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference abstraction
+*/
 std::weak_ptr<uml::Component > ComponentRealizationImpl::getAbstraction() const
 {
 
     return m_abstraction;
 }
+
 void ComponentRealizationImpl::setAbstraction(std::shared_ptr<uml::Component> _abstraction)
 {
     m_abstraction = _abstraction;
 }
 
+
+
+/*
+Getter & Setter for reference realizingClassifier
+*/
 std::shared_ptr<Subset<uml::Classifier, uml::NamedElement /*Subset does not reference a union*/>> ComponentRealizationImpl::getRealizingClassifier() const
 {
 	if(m_realizingClassifier == nullptr)
@@ -256,6 +265,9 @@ std::shared_ptr<Subset<uml::Classifier, uml::NamedElement /*Subset does not refe
 //assert(m_realizingClassifier);
     return m_realizingClassifier;
 }
+
+
+
 
 
 //*********************************

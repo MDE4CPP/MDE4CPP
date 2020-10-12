@@ -284,15 +284,21 @@ bool ActivityParameterNodeImpl::same_type(Any diagnostics,std::map <   Any, Any 
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference parameter
+*/
 std::shared_ptr<uml::Parameter > ActivityParameterNodeImpl::getParameter() const
 {
 //assert(m_parameter);
     return m_parameter;
 }
+
 void ActivityParameterNodeImpl::setParameter(std::shared_ptr<uml::Parameter> _parameter)
 {
     m_parameter = _parameter;
 }
+
+
 
 //*********************************
 // Union Getter

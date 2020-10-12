@@ -269,15 +269,21 @@ std::shared_ptr<ecore::EClass> RaiseExceptionActionImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference exception
+*/
 std::shared_ptr<uml::InputPin > RaiseExceptionActionImpl::getException() const
 {
 //assert(m_exception);
     return m_exception;
 }
+
 void RaiseExceptionActionImpl::setException(std::shared_ptr<uml::InputPin> _exception)
 {
     m_exception = _exception;
 }
+
+
 
 //*********************************
 // Union Getter

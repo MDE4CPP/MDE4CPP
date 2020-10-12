@@ -51,7 +51,7 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 This query returns a set including the enclosing InteractionFragment this MessageEnd is enclosed within.
+			This query returns a set including the enclosing InteractionFragment this MessageEnd is enclosed within.
 			result = (if self->select(oclIsKindOf(Gate))->notEmpty() 
 			then -- it is a Gate
 			let endGate : Gate = 
@@ -81,28 +81,36 @@ namespace uml
 			  else endMOS.enclosingOperand.oclAsType(InteractionFragment)->asSet()
 			  endif
 			endif)
-			<p>From package UML::Interactions.</p> */ 
+			<p>From package UML::Interactions.</p>
+			*/
+			 
 			virtual std::shared_ptr<Bag<uml::InteractionFragment> > enclosingFragment() ;
 			
 			/*!
-			 This query returns value true if this MessageEnd is a receiveEvent.
+			This query returns value true if this MessageEnd is a receiveEvent.
 			message->notEmpty()
 			result = (message.receiveEvent->asSet()->includes(self))
-			<p>From package UML::Interactions.</p> */ 
+			<p>From package UML::Interactions.</p>
+			*/
+			 
 			virtual bool isReceive() ;
 			
 			/*!
-			 This query returns value true if this MessageEnd is a sendEvent.
+			This query returns value true if this MessageEnd is a sendEvent.
 			message->notEmpty()
 			result = (message.sendEvent->asSet()->includes(self))
-			<p>From package UML::Interactions.</p> */ 
+			<p>From package UML::Interactions.</p>
+			*/
+			 
 			virtual bool isSend() ;
 			
 			/*!
-			 This query returns a set including the MessageEnd (if exists) at the opposite end of the Message for this MessageEnd.
+			This query returns a set including the MessageEnd (if exists) at the opposite end of the Message for this MessageEnd.
 			result = (message->asSet().messageEnd->asSet()->excluding(self))
 			message->notEmpty()
-			<p>From package UML::Interactions.</p> */ 
+			<p>From package UML::Interactions.</p>
+			*/
+			 
 			virtual std::shared_ptr<Bag<uml::MessageEnd> > oppositeEnd() ;
 			
 			
@@ -116,25 +124,34 @@ namespace uml
 			// Reference
 			//*********************************
 			/*!
-			 References a Message.
-			<p>From package UML::Interactions.</p> */
+			References a Message.
+			<p>From package UML::Interactions.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::Message > getMessage() const ;
 			
 			/*!
-			 References a Message.
-			<p>From package UML::Interactions.</p> */
-			virtual void setMessage(std::shared_ptr<uml::Message> _message_message) ;
+			References a Message.
+			<p>From package UML::Interactions.</p>
+			*/
+			
+			virtual void setMessage(std::shared_ptr<uml::Message> _message) ;
+			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************

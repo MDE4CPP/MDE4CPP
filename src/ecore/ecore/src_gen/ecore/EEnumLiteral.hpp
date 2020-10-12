@@ -66,8 +66,7 @@ namespace ecore
 //*********************************
 namespace ecore 
 {
-	/*!
-	 */
+	
 	class EEnumLiteral:virtual public ENamedElement
 	{
 		public:
@@ -99,37 +98,28 @@ namespace ecore
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual Any getInstance() const = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual void setInstance (Any _instance)= 0; 
-			
-			/*!
-			 */ 
+			 
 			virtual std::string getLiteral() const = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual void setLiteral (std::string _literal)= 0; 
-			
-			/*!
-			 */ 
+			 
 			virtual int getValue() const = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual void setValue (int _value)= 0; 
-			
 			
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::weak_ptr<ecore::EEnum > getEEnum() const = 0;
+			
 			
 			
 
@@ -137,31 +127,25 @@ namespace ecore
 			//*********************************
 			// Attribute Members
 			//*********************************
-			/*!
-			 */ 
+			 
 			Any m_instance = nullptr;
-			/*!
-			 */ 
+			 
 			std::string m_literal = "";
-			/*!
-			 */ 
+			 
 			int m_value = 0;
 			
 			
 			//*********************************
 			// Reference Members
 			//*********************************
-			/*!
-			 */
-			std::weak_ptr<ecore::EEnum > m_eEnum;
 			
+			std::weak_ptr<ecore::EEnum > m_eEnum;
 
 		public:
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

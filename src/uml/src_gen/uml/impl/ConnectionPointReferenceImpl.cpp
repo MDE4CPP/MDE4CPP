@@ -200,6 +200,9 @@ bool ConnectionPointReferenceImpl::exit_pseudostates(Any diagnostics,std::map < 
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference entry
+*/
 std::shared_ptr<Bag<uml::Pseudostate>> ConnectionPointReferenceImpl::getEntry() const
 {
 	if(m_entry == nullptr)
@@ -213,6 +216,12 @@ std::shared_ptr<Bag<uml::Pseudostate>> ConnectionPointReferenceImpl::getEntry() 
 }
 
 
+
+
+
+/*
+Getter & Setter for reference exit
+*/
 std::shared_ptr<Bag<uml::Pseudostate>> ConnectionPointReferenceImpl::getExit() const
 {
 	if(m_exit == nullptr)
@@ -226,15 +235,24 @@ std::shared_ptr<Bag<uml::Pseudostate>> ConnectionPointReferenceImpl::getExit() c
 }
 
 
+
+
+
+/*
+Getter & Setter for reference state
+*/
 std::weak_ptr<uml::State > ConnectionPointReferenceImpl::getState() const
 {
 
     return m_state;
 }
+
 void ConnectionPointReferenceImpl::setState(std::shared_ptr<uml::State> _state)
 {
     m_state = _state;
 }
+
+
 
 //*********************************
 // Union Getter

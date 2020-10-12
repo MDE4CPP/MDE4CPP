@@ -310,36 +310,57 @@ bool RegionImpl::shallow_history_vertex(Any diagnostics,std::map <   Any, Any > 
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference extendedRegion
+*/
 std::shared_ptr<uml::Region > RegionImpl::getExtendedRegion() const
 {
 
     return m_extendedRegion;
 }
+
 void RegionImpl::setExtendedRegion(std::shared_ptr<uml::Region> _extendedRegion)
 {
     m_extendedRegion = _extendedRegion;
 }
 
+
+
+/*
+Getter & Setter for reference state
+*/
 std::weak_ptr<uml::State > RegionImpl::getState() const
 {
 
     return m_state;
 }
+
 void RegionImpl::setState(std::shared_ptr<uml::State> _state)
 {
     m_state = _state;
 }
 
+
+
+/*
+Getter & Setter for reference stateMachine
+*/
 std::weak_ptr<uml::StateMachine > RegionImpl::getStateMachine() const
 {
 
     return m_stateMachine;
 }
+
 void RegionImpl::setStateMachine(std::shared_ptr<uml::StateMachine> _stateMachine)
 {
     m_stateMachine = _stateMachine;
 }
 
+
+
+/*
+Getter & Setter for reference subvertex
+*/
 std::shared_ptr<Subset<uml::Vertex, uml::NamedElement>> RegionImpl::getSubvertex() const
 {
 	if(m_subvertex == nullptr)
@@ -362,6 +383,12 @@ std::shared_ptr<Subset<uml::Vertex, uml::NamedElement>> RegionImpl::getSubvertex
 }
 
 
+
+
+
+/*
+Getter & Setter for reference transition
+*/
 std::shared_ptr<Subset<uml::Transition, uml::NamedElement>> RegionImpl::getTransition() const
 {
 	if(m_transition == nullptr)
@@ -382,6 +409,9 @@ std::shared_ptr<Subset<uml::Transition, uml::NamedElement>> RegionImpl::getTrans
 
     return m_transition;
 }
+
+
+
 
 
 //*********************************

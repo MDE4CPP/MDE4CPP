@@ -405,14 +405,20 @@ std::shared_ptr<ecore::EClass> StructuredActivityNodeImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
-void StructuredActivityNodeImpl::setMustIsolate(bool _mustIsolate)
-{
-	m_mustIsolate = _mustIsolate;
-} 
+/*
+Getter & Setter for attribute mustIsolate
+*/
 bool StructuredActivityNodeImpl::getMustIsolate() const 
 {
 	return m_mustIsolate;
 }
+
+void StructuredActivityNodeImpl::setMustIsolate(bool _mustIsolate)
+{
+	m_mustIsolate = _mustIsolate;
+} 
+
+
 
 //*********************************
 // Operations
@@ -450,6 +456,9 @@ std::shared_ptr<Bag<uml::ActivityNode> > StructuredActivityNodeImpl::targetNodes
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference edge
+*/
 std::shared_ptr<Subset<uml::ActivityEdge, uml::ActivityEdge,uml::Element>> StructuredActivityNodeImpl::getEdge() const
 {
 	if(m_edge == nullptr)
@@ -472,6 +481,12 @@ std::shared_ptr<Subset<uml::ActivityEdge, uml::ActivityEdge,uml::Element>> Struc
 }
 
 
+
+
+
+/*
+Getter & Setter for reference node
+*/
 std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode,uml::Element>> StructuredActivityNodeImpl::getNode() const
 {
 	if(m_node == nullptr)
@@ -494,6 +509,12 @@ std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode,uml::Element>> Struc
 }
 
 
+
+
+
+/*
+Getter & Setter for reference structuredNodeInput
+*/
 std::shared_ptr<Subset<uml::InputPin, uml::InputPin>> StructuredActivityNodeImpl::getStructuredNodeInput() const
 {
 	if(m_structuredNodeInput == nullptr)
@@ -516,6 +537,12 @@ std::shared_ptr<Subset<uml::InputPin, uml::InputPin>> StructuredActivityNodeImpl
 }
 
 
+
+
+
+/*
+Getter & Setter for reference structuredNodeOutput
+*/
 std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>> StructuredActivityNodeImpl::getStructuredNodeOutput() const
 {
 	if(m_structuredNodeOutput == nullptr)
@@ -538,6 +565,12 @@ std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>> StructuredActivityNodeIm
 }
 
 
+
+
+
+/*
+Getter & Setter for reference variable
+*/
 std::shared_ptr<Subset<uml::Variable, uml::NamedElement>> StructuredActivityNodeImpl::getVariable() const
 {
 	if(m_variable == nullptr)
@@ -558,6 +591,9 @@ std::shared_ptr<Subset<uml::Variable, uml::NamedElement>> StructuredActivityNode
 
     return m_variable;
 }
+
+
+
 
 
 //*********************************

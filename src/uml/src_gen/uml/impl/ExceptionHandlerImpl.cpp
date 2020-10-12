@@ -175,16 +175,25 @@ bool ExceptionHandlerImpl::output_pins(Any diagnostics,std::map <   Any, Any >  
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference exceptionInput
+*/
 std::shared_ptr<uml::ObjectNode > ExceptionHandlerImpl::getExceptionInput() const
 {
 //assert(m_exceptionInput);
     return m_exceptionInput;
 }
+
 void ExceptionHandlerImpl::setExceptionInput(std::shared_ptr<uml::ObjectNode> _exceptionInput)
 {
     m_exceptionInput = _exceptionInput;
 }
 
+
+
+/*
+Getter & Setter for reference exceptionType
+*/
 std::shared_ptr<Bag<uml::Classifier>> ExceptionHandlerImpl::getExceptionType() const
 {
 	if(m_exceptionType == nullptr)
@@ -198,25 +207,40 @@ std::shared_ptr<Bag<uml::Classifier>> ExceptionHandlerImpl::getExceptionType() c
 }
 
 
+
+
+
+/*
+Getter & Setter for reference handlerBody
+*/
 std::shared_ptr<uml::ExecutableNode > ExceptionHandlerImpl::getHandlerBody() const
 {
 //assert(m_handlerBody);
     return m_handlerBody;
 }
+
 void ExceptionHandlerImpl::setHandlerBody(std::shared_ptr<uml::ExecutableNode> _handlerBody)
 {
     m_handlerBody = _handlerBody;
 }
 
+
+
+/*
+Getter & Setter for reference protectedNode
+*/
 std::weak_ptr<uml::ExecutableNode > ExceptionHandlerImpl::getProtectedNode() const
 {
 //assert(m_protectedNode);
     return m_protectedNode;
 }
+
 void ExceptionHandlerImpl::setProtectedNode(std::shared_ptr<uml::ExecutableNode> _protectedNode)
 {
     m_protectedNode = _protectedNode;
 }
+
+
 
 //*********************************
 // Union Getter

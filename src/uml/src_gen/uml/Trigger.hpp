@@ -91,8 +91,10 @@ namespace uml
 namespace uml 
 {
 	/*!
-	 A Trigger specifies a specific point  at which an Event occurrence may trigger an effect in a Behavior. A Trigger may be qualified by the Port on which the Event occurred.
-	<p>From package UML::CommonBehavior.</p> */
+	A Trigger specifies a specific point  at which an Event occurrence may trigger an effect in a Behavior. A Trigger may be qualified by the Port on which the Event occurred.
+	<p>From package UML::CommonBehavior.</p>
+	*/
+	
 	class Trigger:virtual public NamedElement
 	{
 		public:
@@ -113,8 +115,10 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 If a Trigger specifies one or more ports, the event of the Trigger must be a MessageEvent.
-			port->notEmpty() implies event.oclIsKindOf(MessageEvent) */ 
+			If a Trigger specifies one or more ports, the event of the Trigger must be a MessageEvent.
+			port->notEmpty() implies event.oclIsKindOf(MessageEvent)
+			*/
+			 
 			virtual bool trigger_with_ports(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
@@ -126,18 +130,26 @@ namespace uml
 			// Reference
 			//*********************************
 			/*!
-			 The Event that detected by the Trigger.
-			<p>From package UML::CommonBehavior.</p> */
+			The Event that detected by the Trigger.
+			<p>From package UML::CommonBehavior.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::Event > getEvent() const = 0;
 			
 			/*!
-			 The Event that detected by the Trigger.
-			<p>From package UML::CommonBehavior.</p> */
-			virtual void setEvent(std::shared_ptr<uml::Event> _event_event) = 0;
+			The Event that detected by the Trigger.
+			<p>From package UML::CommonBehavior.</p>
+			*/
+			
+			virtual void setEvent(std::shared_ptr<uml::Event> _event) = 0;
+			
 			/*!
-			 A optional Port of through which the given effect is detected.
-			<p>From package UML::CommonBehavior.</p> */
+			A optional Port of through which the given effect is detected.
+			<p>From package UML::CommonBehavior.</p>
+			*/
+			
 			virtual std::shared_ptr<Bag<uml::Port>> getPort() const = 0;
+			
 			
 			
 
@@ -151,25 +163,31 @@ namespace uml
 			// Reference Members
 			//*********************************
 			/*!
-			 The Event that detected by the Trigger.
-			<p>From package UML::CommonBehavior.</p> */
-			std::shared_ptr<uml::Event > m_event;
-			/*!
-			 A optional Port of through which the given effect is detected.
-			<p>From package UML::CommonBehavior.</p> */
-			mutable std::shared_ptr<Bag<uml::Port>> m_port;
+			The Event that detected by the Trigger.
+			<p>From package UML::CommonBehavior.</p>
+			*/
 			
+			std::shared_ptr<uml::Event > m_event;/*!
+			A optional Port of through which the given effect is detected.
+			<p>From package UML::CommonBehavior.</p>
+			*/
+			
+			mutable std::shared_ptr<Bag<uml::Port>> m_port;
 
 		public:
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

@@ -62,7 +62,7 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 An Actor can only have Associations to UseCases, Components, and Classes. Furthermore these Associations must be binary.
+			An Actor can only have Associations to UseCases, Components, and Classes. Furthermore these Associations must be binary.
 			Association.allInstances()->forAll( a |
 			  a.memberEnd->collect(type)->includes(self) implies
 			  (
@@ -72,12 +72,16 @@ namespace uml
 			      ( actorEnd.opposite.class.oclIsKindOf(Class) and not
 			         actorEnd.opposite.class.oclIsKindOf(Behavior))
 			      )
-			  ) */ 
+			  )
+			*/
+			 
 			virtual bool associations(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
-			 An Actor must have a name.
-			name->notEmpty() */ 
+			An Actor must have a name.
+			name->notEmpty()
+			*/
+			 
 			virtual bool must_have_name(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
@@ -96,26 +100,40 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 Specifies each Feature directly defined in the classifier. Note that there may be members of the Classifier that are of the type Feature but are not included, e.g., inherited features.
-			<p>From package UML::Classification.</p> */
+			Specifies each Feature directly defined in the classifier. Note that there may be members of the Classifier that are of the type Feature but are not included, e.g., inherited features.
+			<p>From package UML::Classification.</p>
+			*/
+			
 			virtual std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement>> getFeature() const ;/*!
-			 A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
-			<p>From package UML::CommonStructure.</p> */
+			A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::NamedElement>> getMember() const ;/*!
-			 Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
-			 A collection of NamedElements owned by the Namespace.
-			<p>From package UML::CommonStructure.</p> */
+			A collection of NamedElements owned by the Namespace.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> getOwnedMember() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
+			The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const ; 
 			 
 			//*********************************

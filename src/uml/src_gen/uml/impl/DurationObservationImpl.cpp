@@ -173,7 +173,9 @@ std::shared_ptr<ecore::EClass> DurationObservationImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
-
+/*
+Getter & Setter for attribute firstEvent
+*/
 std::shared_ptr<Bag<bool> > DurationObservationImpl::getFirstEvent() const 
 {
 	if(m_firstEvent == nullptr)
@@ -182,6 +184,10 @@ std::shared_ptr<Bag<bool> > DurationObservationImpl::getFirstEvent() const
 	}
 	return m_firstEvent;
 }
+
+
+
+
 
 //*********************************
 // Operations
@@ -195,6 +201,9 @@ bool DurationObservationImpl::first_event_multiplicity(Any diagnostics,std::map 
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference event
+*/
 std::shared_ptr<Bag<uml::NamedElement>> DurationObservationImpl::getEvent() const
 {
 	if(m_event == nullptr)
@@ -206,6 +215,9 @@ std::shared_ptr<Bag<uml::NamedElement>> DurationObservationImpl::getEvent() cons
 //assert(m_event);
     return m_event;
 }
+
+
+
 
 
 //*********************************

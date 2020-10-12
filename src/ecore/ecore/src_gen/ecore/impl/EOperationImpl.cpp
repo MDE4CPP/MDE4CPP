@@ -186,14 +186,20 @@ std::shared_ptr<EClass> EOperationImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
-void EOperationImpl::setOperationID(int _operationID)
-{
-	m_operationID = _operationID;
-} 
+/*
+Getter & Setter for attribute operationID
+*/
 int EOperationImpl::getOperationID() const 
 {
 	return m_operationID;
 }
+
+void EOperationImpl::setOperationID(int _operationID)
+{
+	m_operationID = _operationID;
+} 
+
+
 
 //*********************************
 // Operations
@@ -243,6 +249,9 @@ bool EOperationImpl::isOverrideOf(std::shared_ptr<ecore::EOperation>  someOperat
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference eContainingClass
+*/
 std::weak_ptr<ecore::EClass > EOperationImpl::getEContainingClass() const
 {
 
@@ -250,6 +259,12 @@ std::weak_ptr<ecore::EClass > EOperationImpl::getEContainingClass() const
 }
 
 
+
+
+
+/*
+Getter & Setter for reference eExceptions
+*/
 std::shared_ptr<Bag<ecore::EClassifier>> EOperationImpl::getEExceptions() const
 {
 	if(m_eExceptions == nullptr)
@@ -263,6 +278,12 @@ std::shared_ptr<Bag<ecore::EClassifier>> EOperationImpl::getEExceptions() const
 }
 
 
+
+
+
+/*
+Getter & Setter for reference eGenericExceptions
+*/
 std::shared_ptr<Bag<ecore::EGenericType>> EOperationImpl::getEGenericExceptions() const
 {
 	if(m_eGenericExceptions == nullptr)
@@ -276,6 +297,12 @@ std::shared_ptr<Bag<ecore::EGenericType>> EOperationImpl::getEGenericExceptions(
 }
 
 
+
+
+
+/*
+Getter & Setter for reference eParameters
+*/
 std::shared_ptr<Subset<ecore::EParameter, ecore::EObject>> EOperationImpl::getEParameters() const
 {
 	if(m_eParameters == nullptr)
@@ -298,6 +325,12 @@ std::shared_ptr<Subset<ecore::EParameter, ecore::EObject>> EOperationImpl::getEP
 }
 
 
+
+
+
+/*
+Getter & Setter for reference eTypeParameters
+*/
 std::shared_ptr<Bag<ecore::ETypeParameter>> EOperationImpl::getETypeParameters() const
 {
 	if(m_eTypeParameters == nullptr)
@@ -309,6 +342,9 @@ std::shared_ptr<Bag<ecore::ETypeParameter>> EOperationImpl::getETypeParameters()
 
     return m_eTypeParameters;
 }
+
+
+
 
 
 //*********************************

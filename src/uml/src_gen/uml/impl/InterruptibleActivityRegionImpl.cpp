@@ -197,6 +197,9 @@ bool InterruptibleActivityRegionImpl::interrupting_edges(Any diagnostics,std::ma
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference interruptingEdge
+*/
 std::shared_ptr<Bag<uml::ActivityEdge>> InterruptibleActivityRegionImpl::getInterruptingEdge() const
 {
 	if(m_interruptingEdge == nullptr)
@@ -210,6 +213,12 @@ std::shared_ptr<Bag<uml::ActivityEdge>> InterruptibleActivityRegionImpl::getInte
 }
 
 
+
+
+
+/*
+Getter & Setter for reference node
+*/
 std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode>> InterruptibleActivityRegionImpl::getNode() const
 {
 	if(m_node == nullptr)
@@ -230,6 +239,9 @@ std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode>> InterruptibleActiv
 
     return m_node;
 }
+
+
+
 
 
 //*********************************

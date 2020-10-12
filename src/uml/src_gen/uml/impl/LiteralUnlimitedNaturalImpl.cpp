@@ -195,14 +195,20 @@ std::shared_ptr<ecore::EClass> LiteralUnlimitedNaturalImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
-void LiteralUnlimitedNaturalImpl::setValue(int _value)
-{
-	m_value = _value;
-} 
+/*
+Getter & Setter for attribute value
+*/
 int LiteralUnlimitedNaturalImpl::getValue() const 
 {
 	return m_value;
 }
+
+void LiteralUnlimitedNaturalImpl::setValue(int _value)
+{
+	m_value = _value;
+} 
+
+
 
 //*********************************
 // Operations

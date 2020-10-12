@@ -335,29 +335,53 @@ std::shared_ptr<ecore::EClass> StateImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
-
+/*
+Getter & Setter for attribute isComposite
+*/
 bool StateImpl::getIsComposite() const 
 {
 	return m_isComposite;
 }
 
 
+
+
+
+/*
+Getter & Setter for attribute isOrthogonal
+*/
 bool StateImpl::getIsOrthogonal() const 
 {
 	return m_isOrthogonal;
 }
 
 
+
+
+
+/*
+Getter & Setter for attribute isSimple
+*/
 bool StateImpl::getIsSimple() const 
 {
 	return m_isSimple;
 }
 
 
+
+
+
+/*
+Getter & Setter for attribute isSubmachineState
+*/
 bool StateImpl::getIsSubmachineState() const 
 {
 	return m_isSubmachineState;
 }
+
+
+
+
 
 //*********************************
 // Operations
@@ -425,6 +449,9 @@ bool StateImpl::submachine_states(Any diagnostics,std::map <   Any, Any >  conte
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference connection
+*/
 std::shared_ptr<Subset<uml::ConnectionPointReference, uml::NamedElement>> StateImpl::getConnection() const
 {
 	if(m_connection == nullptr)
@@ -447,6 +474,12 @@ std::shared_ptr<Subset<uml::ConnectionPointReference, uml::NamedElement>> StateI
 }
 
 
+
+
+
+/*
+Getter & Setter for reference connectionPoint
+*/
 std::shared_ptr<Subset<uml::Pseudostate, uml::NamedElement>> StateImpl::getConnectionPoint() const
 {
 	if(m_connectionPoint == nullptr)
@@ -469,6 +502,12 @@ std::shared_ptr<Subset<uml::Pseudostate, uml::NamedElement>> StateImpl::getConne
 }
 
 
+
+
+
+/*
+Getter & Setter for reference deferrableTrigger
+*/
 std::shared_ptr<Subset<uml::Trigger, uml::Element>> StateImpl::getDeferrableTrigger() const
 {
 	if(m_deferrableTrigger == nullptr)
@@ -491,46 +530,76 @@ std::shared_ptr<Subset<uml::Trigger, uml::Element>> StateImpl::getDeferrableTrig
 }
 
 
+
+
+
+/*
+Getter & Setter for reference doActivity
+*/
 std::shared_ptr<uml::Behavior > StateImpl::getDoActivity() const
 {
 
     return m_doActivity;
 }
+
 void StateImpl::setDoActivity(std::shared_ptr<uml::Behavior> _doActivity)
 {
     m_doActivity = _doActivity;
 }
 
+
+
+/*
+Getter & Setter for reference entry
+*/
 std::shared_ptr<uml::Behavior > StateImpl::getEntry() const
 {
 
     return m_entry;
 }
+
 void StateImpl::setEntry(std::shared_ptr<uml::Behavior> _entry)
 {
     m_entry = _entry;
 }
 
+
+
+/*
+Getter & Setter for reference exit
+*/
 std::shared_ptr<uml::Behavior > StateImpl::getExit() const
 {
 
     return m_exit;
 }
+
 void StateImpl::setExit(std::shared_ptr<uml::Behavior> _exit)
 {
     m_exit = _exit;
 }
 
+
+
+/*
+Getter & Setter for reference redefinedState
+*/
 std::shared_ptr<uml::State > StateImpl::getRedefinedState() const
 {
 
     return m_redefinedState;
 }
+
 void StateImpl::setRedefinedState(std::shared_ptr<uml::State> _redefinedState)
 {
     m_redefinedState = _redefinedState;
 }
 
+
+
+/*
+Getter & Setter for reference region
+*/
 std::shared_ptr<Subset<uml::Region, uml::NamedElement>> StateImpl::getRegion() const
 {
 	if(m_region == nullptr)
@@ -553,25 +622,40 @@ std::shared_ptr<Subset<uml::Region, uml::NamedElement>> StateImpl::getRegion() c
 }
 
 
+
+
+
+/*
+Getter & Setter for reference stateInvariant
+*/
 std::shared_ptr<uml::Constraint > StateImpl::getStateInvariant() const
 {
 
     return m_stateInvariant;
 }
+
 void StateImpl::setStateInvariant(std::shared_ptr<uml::Constraint> _stateInvariant)
 {
     m_stateInvariant = _stateInvariant;
 }
 
+
+
+/*
+Getter & Setter for reference submachine
+*/
 std::shared_ptr<uml::StateMachine > StateImpl::getSubmachine() const
 {
 
     return m_submachine;
 }
+
 void StateImpl::setSubmachine(std::shared_ptr<uml::StateMachine> _submachine)
 {
     m_submachine = _submachine;
 }
+
+
 
 //*********************************
 // Union Getter

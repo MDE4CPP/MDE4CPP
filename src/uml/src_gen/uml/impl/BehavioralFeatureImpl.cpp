@@ -246,23 +246,35 @@ std::shared_ptr<ecore::EClass> BehavioralFeatureImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
+/*
+Getter & Setter for attribute concurrency
+*/
+uml::CallConcurrencyKind BehavioralFeatureImpl::getConcurrency() const 
+{
+	return m_concurrency;
+}
+
 void BehavioralFeatureImpl::setConcurrency(uml::CallConcurrencyKind _concurrency)
 {
 	m_concurrency = _concurrency;
 } 
-uml::CallConcurrencyKind BehavioralFeatureImpl::getConcurrency() const 
+
+
+
+/*
+Getter & Setter for attribute isAbstract
+*/
+bool BehavioralFeatureImpl::getIsAbstract() const 
 {
-	return m_concurrency;
+	return m_isAbstract;
 }
 
 void BehavioralFeatureImpl::setIsAbstract(bool _isAbstract)
 {
 	m_isAbstract = _isAbstract;
 } 
-bool BehavioralFeatureImpl::getIsAbstract() const 
-{
-	return m_isAbstract;
-}
+
+
 
 //*********************************
 // Operations
@@ -294,6 +306,9 @@ std::shared_ptr<Bag<uml::Parameter> > BehavioralFeatureImpl::outputParameters()
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference method
+*/
 std::shared_ptr<Bag<uml::Behavior>> BehavioralFeatureImpl::getMethod() const
 {
 	if(m_method == nullptr)
@@ -307,6 +322,12 @@ std::shared_ptr<Bag<uml::Behavior>> BehavioralFeatureImpl::getMethod() const
 }
 
 
+
+
+
+/*
+Getter & Setter for reference ownedParameter
+*/
 std::shared_ptr<Subset<uml::Parameter, uml::NamedElement>> BehavioralFeatureImpl::getOwnedParameter() const
 {
 	if(m_ownedParameter == nullptr)
@@ -329,6 +350,12 @@ std::shared_ptr<Subset<uml::Parameter, uml::NamedElement>> BehavioralFeatureImpl
 }
 
 
+
+
+
+/*
+Getter & Setter for reference ownedParameterSet
+*/
 std::shared_ptr<Subset<uml::ParameterSet, uml::NamedElement>> BehavioralFeatureImpl::getOwnedParameterSet() const
 {
 	if(m_ownedParameterSet == nullptr)
@@ -351,6 +378,12 @@ std::shared_ptr<Subset<uml::ParameterSet, uml::NamedElement>> BehavioralFeatureI
 }
 
 
+
+
+
+/*
+Getter & Setter for reference raisedException
+*/
 std::shared_ptr<Bag<uml::Type>> BehavioralFeatureImpl::getRaisedException() const
 {
 	if(m_raisedException == nullptr)
@@ -362,6 +395,9 @@ std::shared_ptr<Bag<uml::Type>> BehavioralFeatureImpl::getRaisedException() cons
 
     return m_raisedException;
 }
+
+
+
 
 
 //*********************************

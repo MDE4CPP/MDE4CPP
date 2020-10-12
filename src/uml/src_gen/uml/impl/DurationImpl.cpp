@@ -221,16 +221,25 @@ bool DurationImpl::no_expr_requires_observation(Any diagnostics,std::map <   Any
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference expr
+*/
 std::shared_ptr<uml::ValueSpecification > DurationImpl::getExpr() const
 {
 
     return m_expr;
 }
+
 void DurationImpl::setExpr(std::shared_ptr<uml::ValueSpecification> _expr)
 {
     m_expr = _expr;
 }
 
+
+
+/*
+Getter & Setter for reference observation
+*/
 std::shared_ptr<Bag<uml::Observation>> DurationImpl::getObservation() const
 {
 	if(m_observation == nullptr)
@@ -242,6 +251,9 @@ std::shared_ptr<Bag<uml::Observation>> DurationImpl::getObservation() const
 
     return m_observation;
 }
+
+
+
 
 
 //*********************************

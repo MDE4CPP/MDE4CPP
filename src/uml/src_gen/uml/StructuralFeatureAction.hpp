@@ -151,8 +151,10 @@ namespace uml
 namespace uml 
 {
 	/*!
-	 StructuralFeatureAction is an abstract class for all Actions that operate on StructuralFeatures.
-	<p>From package UML::Actions.</p> */
+	StructuralFeatureAction is an abstract class for all Actions that operate on StructuralFeatures.
+	<p>From package UML::Actions.</p>
+	*/
+	
 	class StructuralFeatureAction:virtual public Action
 	{
 		public:
@@ -173,32 +175,42 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 The multiplicity of the object InputPin must be 1..1.
-			object.is(1,1) */ 
+			The multiplicity of the object InputPin must be 1..1.
+			object.is(1,1)
+			*/
+			 
 			virtual bool multiplicity(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
-			 The structuralFeature must not be static.
-			not structuralFeature.isStatic */ 
+			The structuralFeature must not be static.
+			not structuralFeature.isStatic
+			*/
+			 
 			virtual bool not_static(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
-			 The structuralFeature must either be an owned or inherited feature of the type of the object InputPin, or it must be an owned end of a binary Association whose opposite end had as a type to which the type of the object InputPin conforms.
+			The structuralFeature must either be an owned or inherited feature of the type of the object InputPin, or it must be an owned end of a binary Association whose opposite end had as a type to which the type of the object InputPin conforms.
 			object.type.oclAsType(Classifier).allFeatures()->includes(structuralFeature) or
-				object.type.conformsTo(structuralFeature.oclAsType(Property).opposite.type) */ 
+				object.type.conformsTo(structuralFeature.oclAsType(Property).opposite.type)
+			*/
+			 
 			virtual bool object_type(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
-			 The structuralFeature must have exactly one featuringClassifier.
-			structuralFeature.featuringClassifier->size() = 1 */ 
+			The structuralFeature must have exactly one featuringClassifier.
+			structuralFeature.featuringClassifier->size() = 1
+			*/
+			 
 			virtual bool one_featuring_classifier(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
-			 The visibility of the structuralFeature must allow access from the object performing the ReadStructuralFeatureAction.
+			The visibility of the structuralFeature must allow access from the object performing the ReadStructuralFeatureAction.
 			structuralFeature.visibility = VisibilityKind::public or
 			_'context'.allFeatures()->includes(structuralFeature) or
 			structuralFeature.visibility=VisibilityKind::protected and
-			_'context'.conformsTo(structuralFeature.oclAsType(Property).opposite.type.oclAsType(Classifier)) */ 
+			_'context'.conformsTo(structuralFeature.oclAsType(Property).opposite.type.oclAsType(Classifier))
+			*/
+			 
 			virtual bool visibility(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
@@ -210,23 +222,33 @@ namespace uml
 			// Reference
 			//*********************************
 			/*!
-			 The InputPin from which the object whose StructuralFeature is to be read or written is obtained.
-			<p>From package UML::Actions.</p> */
+			The InputPin from which the object whose StructuralFeature is to be read or written is obtained.
+			<p>From package UML::Actions.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::InputPin > getObject() const = 0;
 			
 			/*!
-			 The InputPin from which the object whose StructuralFeature is to be read or written is obtained.
-			<p>From package UML::Actions.</p> */
-			virtual void setObject(std::shared_ptr<uml::InputPin> _object_object) = 0;
+			The InputPin from which the object whose StructuralFeature is to be read or written is obtained.
+			<p>From package UML::Actions.</p>
+			*/
+			
+			virtual void setObject(std::shared_ptr<uml::InputPin> _object) = 0;
+			
 			/*!
-			 The StructuralFeature to be read or written.
-			<p>From package UML::Actions.</p> */
+			The StructuralFeature to be read or written.
+			<p>From package UML::Actions.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::StructuralFeature > getStructuralFeature() const = 0;
 			
 			/*!
-			 The StructuralFeature to be read or written.
-			<p>From package UML::Actions.</p> */
-			virtual void setStructuralFeature(std::shared_ptr<uml::StructuralFeature> _structuralFeature_structuralFeature) = 0;
+			The StructuralFeature to be read or written.
+			<p>From package UML::Actions.</p>
+			*/
+			
+			virtual void setStructuralFeature(std::shared_ptr<uml::StructuralFeature> _structuralFeature) = 0;
+			
 			
 
 		protected:
@@ -239,34 +261,46 @@ namespace uml
 			// Reference Members
 			//*********************************
 			/*!
-			 The InputPin from which the object whose StructuralFeature is to be read or written is obtained.
-			<p>From package UML::Actions.</p> */
-			std::shared_ptr<uml::InputPin > m_object;
-			/*!
-			 The StructuralFeature to be read or written.
-			<p>From package UML::Actions.</p> */
-			std::shared_ptr<uml::StructuralFeature > m_structuralFeature;
+			The InputPin from which the object whose StructuralFeature is to be read or written is obtained.
+			<p>From package UML::Actions.</p>
+			*/
 			
+			std::shared_ptr<uml::InputPin > m_object;/*!
+			The StructuralFeature to be read or written.
+			<p>From package UML::Actions.</p>
+			*/
+			
+			std::shared_ptr<uml::StructuralFeature > m_structuralFeature;
 
 		public:
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p> */
+			ActivityGroups containing the ActivityNode.
+			<p>From package UML::Activities.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::ActivityGroup>> getInGroup() const = 0;/*!
-			 The ordered set of InputPins representing the inputs to the Action.
-			<p>From package UML::Actions.</p> */
+			The ordered set of InputPins representing the inputs to the Action.
+			<p>From package UML::Actions.</p>
+			*/
+			
 			virtual std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element>> getInput() const = 0;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
+			The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

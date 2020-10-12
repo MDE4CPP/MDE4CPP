@@ -240,6 +240,9 @@ std::shared_ptr<ecore::EClass> ExecutableNodeImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference handler
+*/
 std::shared_ptr<Subset<uml::ExceptionHandler, uml::Element>> ExecutableNodeImpl::getHandler() const
 {
 	if(m_handler == nullptr)
@@ -260,6 +263,9 @@ std::shared_ptr<Subset<uml::ExceptionHandler, uml::Element>> ExecutableNodeImpl:
 
     return m_handler;
 }
+
+
+
 
 
 //*********************************

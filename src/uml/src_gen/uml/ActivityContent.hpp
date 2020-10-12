@@ -50,8 +50,7 @@ namespace uml
 //*********************************
 namespace uml 
 {
-	/*!
-	 */
+	
 	class ActivityContent : virtual public ecore::EObject 
 
 	{
@@ -72,8 +71,7 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<uml::Activity> containingActivity() = 0;
 			
 			

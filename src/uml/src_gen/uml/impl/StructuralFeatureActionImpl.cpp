@@ -303,25 +303,37 @@ bool StructuralFeatureActionImpl::visibility(Any diagnostics,std::map <   Any, A
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference object
+*/
 std::shared_ptr<uml::InputPin > StructuralFeatureActionImpl::getObject() const
 {
 //assert(m_object);
     return m_object;
 }
+
 void StructuralFeatureActionImpl::setObject(std::shared_ptr<uml::InputPin> _object)
 {
     m_object = _object;
 }
 
+
+
+/*
+Getter & Setter for reference structuralFeature
+*/
 std::shared_ptr<uml::StructuralFeature > StructuralFeatureActionImpl::getStructuralFeature() const
 {
 //assert(m_structuralFeature);
     return m_structuralFeature;
 }
+
 void StructuralFeatureActionImpl::setStructuralFeature(std::shared_ptr<uml::StructuralFeature> _structuralFeature)
 {
     m_structuralFeature = _structuralFeature;
 }
+
+
 
 //*********************************
 // Union Getter

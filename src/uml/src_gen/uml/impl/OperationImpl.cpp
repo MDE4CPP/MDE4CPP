@@ -346,38 +346,68 @@ std::shared_ptr<ecore::EClass> OperationImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
-
+/*
+Getter & Setter for attribute isOrdered
+*/
 bool OperationImpl::getIsOrdered() const 
 {
 	return m_isOrdered;
+}
+
+
+
+
+
+/*
+Getter & Setter for attribute isQuery
+*/
+bool OperationImpl::getIsQuery() const 
+{
+	return m_isQuery;
 }
 
 void OperationImpl::setIsQuery(bool _isQuery)
 {
 	m_isQuery = _isQuery;
 } 
-bool OperationImpl::getIsQuery() const 
-{
-	return m_isQuery;
-}
 
 
+
+/*
+Getter & Setter for attribute isUnique
+*/
 bool OperationImpl::getIsUnique() const 
 {
 	return m_isUnique;
 }
 
 
+
+
+
+/*
+Getter & Setter for attribute lower
+*/
 int OperationImpl::getLower() const 
 {
 	return m_lower;
 }
 
 
+
+
+
+/*
+Getter & Setter for attribute upper
+*/
 int OperationImpl::getUpper() const 
 {
 	return m_upper;
 }
+
+
+
+
 
 //*********************************
 // Operations
@@ -491,46 +521,73 @@ void OperationImpl::setUpper(int newUpper)
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference bodyCondition
+*/
 std::shared_ptr<uml::Constraint > OperationImpl::getBodyCondition() const
 {
 
     return m_bodyCondition;
 }
+
 void OperationImpl::setBodyCondition(std::shared_ptr<uml::Constraint> _bodyCondition)
 {
     m_bodyCondition = _bodyCondition;
 }
 
+
+
+/*
+Getter & Setter for reference class
+*/
 std::weak_ptr<uml::Class > OperationImpl::getClass() const
 {
 
     return m_class;
 }
+
 void OperationImpl::setClass(std::shared_ptr<uml::Class> _class)
 {
     m_class = _class;
 }
 
+
+
+/*
+Getter & Setter for reference datatype
+*/
 std::weak_ptr<uml::DataType > OperationImpl::getDatatype() const
 {
 
     return m_datatype;
 }
+
 void OperationImpl::setDatatype(std::shared_ptr<uml::DataType> _datatype)
 {
     m_datatype = _datatype;
 }
 
+
+
+/*
+Getter & Setter for reference interface
+*/
 std::weak_ptr<uml::Interface > OperationImpl::getInterface() const
 {
 
     return m_interface;
 }
+
 void OperationImpl::setInterface(std::shared_ptr<uml::Interface> _interface)
 {
     m_interface = _interface;
 }
 
+
+
+/*
+Getter & Setter for reference postcondition
+*/
 std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>> OperationImpl::getPostcondition() const
 {
 	if(m_postcondition == nullptr)
@@ -553,6 +610,12 @@ std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not refere
 }
 
 
+
+
+
+/*
+Getter & Setter for reference precondition
+*/
 std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>> OperationImpl::getPrecondition() const
 {
 	if(m_precondition == nullptr)
@@ -575,6 +638,12 @@ std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not refere
 }
 
 
+
+
+
+/*
+Getter & Setter for reference redefinedOperation
+*/
 std::shared_ptr<Subset<uml::Operation, uml::RedefinableElement>> OperationImpl::getRedefinedOperation() const
 {
 	if(m_redefinedOperation == nullptr)
@@ -597,11 +666,20 @@ std::shared_ptr<Subset<uml::Operation, uml::RedefinableElement>> OperationImpl::
 }
 
 
+
+
+
+/*
+Getter & Setter for reference type
+*/
 std::shared_ptr<uml::Type > OperationImpl::getType() const
 {
 
     return m_type;
 }
+
+
+
 
 
 //*********************************

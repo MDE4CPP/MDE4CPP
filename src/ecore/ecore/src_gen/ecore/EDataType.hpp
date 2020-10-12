@@ -70,8 +70,7 @@ namespace ecore
 //*********************************
 namespace ecore 
 {
-	/*!
-	 */
+	
 	class EDataType:virtual public EClassifier
 	{
 		public:
@@ -95,14 +94,11 @@ namespace ecore
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual bool isSerializable() const = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual void setSerializable (bool _serializable)= 0; 
-			
 			
 			//*********************************
 			// Reference
@@ -113,8 +109,7 @@ namespace ecore
 			//*********************************
 			// Attribute Members
 			//*********************************
-			/*!
-			 */ 
+			 
 			bool m_serializable = true;
 			
 			
@@ -127,8 +122,7 @@ namespace ecore
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

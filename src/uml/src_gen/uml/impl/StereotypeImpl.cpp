@@ -561,6 +561,9 @@ bool StereotypeImpl::name_not_clash(Any diagnostics,std::map <   Any, Any >  con
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference icon
+*/
 std::shared_ptr<Subset<uml::Image, uml::Element>> StereotypeImpl::getIcon() const
 {
 	if(m_icon == nullptr)
@@ -583,11 +586,20 @@ std::shared_ptr<Subset<uml::Image, uml::Element>> StereotypeImpl::getIcon() cons
 }
 
 
+
+
+
+/*
+Getter & Setter for reference profile
+*/
 std::shared_ptr<uml::Profile > StereotypeImpl::getProfile() const
 {
 //assert(m_profile);
     return m_profile;
 }
+
+
+
 
 
 //*********************************

@@ -270,16 +270,25 @@ bool StringExpressionImpl::subexpressions(Any diagnostics,std::map <   Any, Any 
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference owningExpression
+*/
 std::weak_ptr<uml::StringExpression > StringExpressionImpl::getOwningExpression() const
 {
 
     return m_owningExpression;
 }
+
 void StringExpressionImpl::setOwningExpression(std::shared_ptr<uml::StringExpression> _owningExpression)
 {
     m_owningExpression = _owningExpression;
 }
 
+
+
+/*
+Getter & Setter for reference subExpression
+*/
 std::shared_ptr<Subset<uml::StringExpression, uml::Element>> StringExpressionImpl::getSubExpression() const
 {
 	if(m_subExpression == nullptr)
@@ -300,6 +309,9 @@ std::shared_ptr<Subset<uml::StringExpression, uml::Element>> StringExpressionImp
 
     return m_subExpression;
 }
+
+
+
 
 
 //*********************************

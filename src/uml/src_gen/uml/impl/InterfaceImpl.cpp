@@ -446,6 +446,9 @@ bool InterfaceImpl::visibility(Any diagnostics,std::map <   Any, Any >  context)
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference nestedClassifier
+*/
 std::shared_ptr<Subset<uml::Classifier, uml::NamedElement>> InterfaceImpl::getNestedClassifier() const
 {
 	if(m_nestedClassifier == nullptr)
@@ -468,6 +471,12 @@ std::shared_ptr<Subset<uml::Classifier, uml::NamedElement>> InterfaceImpl::getNe
 }
 
 
+
+
+
+/*
+Getter & Setter for reference ownedAttribute
+*/
 std::shared_ptr<Subset<uml::Property, uml::Property,uml::NamedElement>> InterfaceImpl::getOwnedAttribute() const
 {
 	if(m_ownedAttribute == nullptr)
@@ -490,6 +499,12 @@ std::shared_ptr<Subset<uml::Property, uml::Property,uml::NamedElement>> Interfac
 }
 
 
+
+
+
+/*
+Getter & Setter for reference ownedOperation
+*/
 std::shared_ptr<Subset<uml::Operation, uml::Feature,uml::NamedElement>> InterfaceImpl::getOwnedOperation() const
 {
 	if(m_ownedOperation == nullptr)
@@ -512,6 +527,12 @@ std::shared_ptr<Subset<uml::Operation, uml::Feature,uml::NamedElement>> Interfac
 }
 
 
+
+
+
+/*
+Getter & Setter for reference ownedReception
+*/
 std::shared_ptr<Subset<uml::Reception, uml::Feature,uml::NamedElement>> InterfaceImpl::getOwnedReception() const
 {
 	if(m_ownedReception == nullptr)
@@ -534,16 +555,28 @@ std::shared_ptr<Subset<uml::Reception, uml::Feature,uml::NamedElement>> Interfac
 }
 
 
+
+
+
+/*
+Getter & Setter for reference protocol
+*/
 std::shared_ptr<uml::ProtocolStateMachine > InterfaceImpl::getProtocol() const
 {
 
     return m_protocol;
 }
+
 void InterfaceImpl::setProtocol(std::shared_ptr<uml::ProtocolStateMachine> _protocol)
 {
     m_protocol = _protocol;
 }
 
+
+
+/*
+Getter & Setter for reference redefinedInterface
+*/
 std::shared_ptr<Subset<uml::Interface, uml::Classifier /*Subset does not reference a union*/>> InterfaceImpl::getRedefinedInterface() const
 {
 	if(m_redefinedInterface == nullptr)
@@ -564,6 +597,9 @@ std::shared_ptr<Subset<uml::Interface, uml::Classifier /*Subset does not referen
 
     return m_redefinedInterface;
 }
+
+
+
 
 
 //*********************************

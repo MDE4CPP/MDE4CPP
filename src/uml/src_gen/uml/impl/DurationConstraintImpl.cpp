@@ -195,7 +195,9 @@ std::shared_ptr<ecore::EClass> DurationConstraintImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
-
+/*
+Getter & Setter for attribute firstEvent
+*/
 std::shared_ptr<Bag<bool> > DurationConstraintImpl::getFirstEvent() const 
 {
 	if(m_firstEvent == nullptr)
@@ -204,6 +206,10 @@ std::shared_ptr<Bag<bool> > DurationConstraintImpl::getFirstEvent() const
 	}
 	return m_firstEvent;
 }
+
+
+
+
 
 //*********************************
 // Operations

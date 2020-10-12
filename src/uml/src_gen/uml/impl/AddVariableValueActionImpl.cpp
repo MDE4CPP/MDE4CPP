@@ -274,14 +274,20 @@ std::shared_ptr<ecore::EClass> AddVariableValueActionImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
-void AddVariableValueActionImpl::setIsReplaceAll(bool _isReplaceAll)
-{
-	m_isReplaceAll = _isReplaceAll;
-} 
+/*
+Getter & Setter for attribute isReplaceAll
+*/
 bool AddVariableValueActionImpl::getIsReplaceAll() const 
 {
 	return m_isReplaceAll;
 }
+
+void AddVariableValueActionImpl::setIsReplaceAll(bool _isReplaceAll)
+{
+	m_isReplaceAll = _isReplaceAll;
+} 
+
+
 
 //*********************************
 // Operations
@@ -301,15 +307,21 @@ bool AddVariableValueActionImpl::required_value(Any diagnostics,std::map <   Any
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference insertAt
+*/
 std::shared_ptr<uml::InputPin > AddVariableValueActionImpl::getInsertAt() const
 {
 
     return m_insertAt;
 }
+
 void AddVariableValueActionImpl::setInsertAt(std::shared_ptr<uml::InputPin> _insertAt)
 {
     m_insertAt = _insertAt;
 }
+
+
 
 //*********************************
 // Union Getter

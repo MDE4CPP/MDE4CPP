@@ -256,15 +256,21 @@ bool ReceptionImpl::same_structure_as_signal(Any diagnostics,std::map <   Any, A
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference signal
+*/
 std::shared_ptr<uml::Signal > ReceptionImpl::getSignal() const
 {
 //assert(m_signal);
     return m_signal;
 }
+
 void ReceptionImpl::setSignal(std::shared_ptr<uml::Signal> _signal)
 {
     m_signal = _signal;
 }
+
+
 
 //*********************************
 // Union Getter

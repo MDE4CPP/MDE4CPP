@@ -186,14 +186,20 @@ std::shared_ptr<ecore::EClass> PseudostateImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
-void PseudostateImpl::setKind(uml::PseudostateKind _kind)
-{
-	m_kind = _kind;
-} 
+/*
+Getter & Setter for attribute kind
+*/
 uml::PseudostateKind PseudostateImpl::getKind() const 
 {
 	return m_kind;
 }
+
+void PseudostateImpl::setKind(uml::PseudostateKind _kind)
+{
+	m_kind = _kind;
+} 
+
+
 
 //*********************************
 // Operations
@@ -255,25 +261,37 @@ bool PseudostateImpl::transitions_outgoing(Any diagnostics,std::map <   Any, Any
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference state
+*/
 std::weak_ptr<uml::State > PseudostateImpl::getState() const
 {
 
     return m_state;
 }
+
 void PseudostateImpl::setState(std::shared_ptr<uml::State> _state)
 {
     m_state = _state;
 }
 
+
+
+/*
+Getter & Setter for reference stateMachine
+*/
 std::weak_ptr<uml::StateMachine > PseudostateImpl::getStateMachine() const
 {
 
     return m_stateMachine;
 }
+
 void PseudostateImpl::setStateMachine(std::shared_ptr<uml::StateMachine> _stateMachine)
 {
     m_stateMachine = _stateMachine;
 }
+
+
 
 //*********************************
 // Union Getter

@@ -213,15 +213,21 @@ std::shared_ptr<ecore::EClass> ManifestationImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference utilizedElement
+*/
 std::shared_ptr<uml::PackageableElement > ManifestationImpl::getUtilizedElement() const
 {
 //assert(m_utilizedElement);
     return m_utilizedElement;
 }
+
 void ManifestationImpl::setUtilizedElement(std::shared_ptr<uml::PackageableElement> _utilizedElement)
 {
     m_utilizedElement = _utilizedElement;
 }
+
+
 
 //*********************************
 // Union Getter

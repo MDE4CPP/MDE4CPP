@@ -195,14 +195,20 @@ std::shared_ptr<ecore::EClass> LiteralBooleanImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
-void LiteralBooleanImpl::setValue(bool _value)
-{
-	m_value = _value;
-} 
+/*
+Getter & Setter for attribute value
+*/
 bool LiteralBooleanImpl::getValue() const 
 {
 	return m_value;
 }
+
+void LiteralBooleanImpl::setValue(bool _value)
+{
+	m_value = _value;
+} 
+
+
 
 //*********************************
 // Operations

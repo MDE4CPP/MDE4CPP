@@ -282,25 +282,37 @@ bool DecisionNodeImpl::zero_input_parameters(Any diagnostics,std::map <   Any, A
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference decisionInput
+*/
 std::shared_ptr<uml::Behavior > DecisionNodeImpl::getDecisionInput() const
 {
 
     return m_decisionInput;
 }
+
 void DecisionNodeImpl::setDecisionInput(std::shared_ptr<uml::Behavior> _decisionInput)
 {
     m_decisionInput = _decisionInput;
 }
 
+
+
+/*
+Getter & Setter for reference decisionInputFlow
+*/
 std::shared_ptr<uml::ObjectFlow > DecisionNodeImpl::getDecisionInputFlow() const
 {
 
     return m_decisionInputFlow;
 }
+
 void DecisionNodeImpl::setDecisionInputFlow(std::shared_ptr<uml::ObjectFlow> _decisionInputFlow)
 {
     m_decisionInputFlow = _decisionInputFlow;
 }
+
+
 
 //*********************************
 // Union Getter

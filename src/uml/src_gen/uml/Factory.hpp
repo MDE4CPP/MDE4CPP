@@ -61,10 +61,12 @@ namespace uml
 namespace uml 
 {
 	/*!
-	 An Element may be created from a Factory. A Factory is an instance of the MOF Factory class. A Factory creates
+	An Element may be created from a Factory. A Factory is an instance of the MOF Factory class. A Factory creates
 	instances of the types in a Package.
 	
-	<span style="background-color:#FF8000">This Element was merged from mof::Reflection package.</span> */
+	<span style="background-color:#FF8000">This Element was merged from mof::Reflection package.</span>
+	*/
+	
 	class Factory:virtual public Element
 	{
 		public:
@@ -85,10 +87,12 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 Creates an element that is an instance of the metaClass. Object::metaClass == metaClass and metaClass.isInstance(object)
+			Creates an element that is an instance of the metaClass. Object::metaClass == metaClass and metaClass.isInstance(object)
 			== true.
 			All properties of the element are considered unset. The values are the same as if object.unset(property) was invoked for
-			every property. */ 
+			every property.
+			*/
+			 
 			virtual std::shared_ptr<uml::Element> create(std::shared_ptr<uml::Class>  metaClass) = 0;
 			
 			
@@ -117,8 +121,10 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

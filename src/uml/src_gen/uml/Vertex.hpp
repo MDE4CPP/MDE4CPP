@@ -99,8 +99,10 @@ namespace uml
 namespace uml 
 {
 	/*!
-	 A Vertex is an abstraction of a node in a StateMachine graph. It can be the source or destination of any number of Transitions.
-	<p>From package UML::StateMachines.</p> */
+	A Vertex is an abstraction of a node in a StateMachine graph. It can be the source or destination of any number of Transitions.
+	<p>From package UML::StateMachines.</p>
+	*/
+	
 	class Vertex:virtual public NamedElement
 	{
 		public:
@@ -133,7 +135,7 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 The operation containingStateMachine() returns the StateMachine in which this Vertex is defined.
+			The operation containingStateMachine() returns the StateMachine in which this Vertex is defined.
 			result = (if container <> null
 			then
 			-- the container is a region
@@ -150,23 +152,29 @@ namespace uml
 			   endif
 			endif
 			)
-			<p>From package UML::StateMachines.</p> */ 
+			<p>From package UML::StateMachines.</p>
+			*/
+			 
 			virtual std::shared_ptr<uml::StateMachine> containingStateMachine() = 0;
 			
 			/*!
-			 Derivation for Vertex::/incoming.
+			Derivation for Vertex::/incoming.
 			result = (Transition.allInstances()->select(target=self))
-			<p>From package UML::StateMachines.</p> */ 
+			<p>From package UML::StateMachines.</p>
+			*/
+			 
 			virtual std::shared_ptr<Bag<uml::Transition> > getIncomings() = 0;
 			
 			/*!
-			 Derivation for Vertex::/outgoing
+			Derivation for Vertex::/outgoing
 			result = (Transition.allInstances()->select(source=self))
-			<p>From package UML::StateMachines.</p> */ 
+			<p>From package UML::StateMachines.</p>
+			*/
+			 
 			virtual std::shared_ptr<Bag<uml::Transition> > getOutgoings() = 0;
 			
 			/*!
-			 This utility query returns true if the Vertex is contained in the Region r (input argument).
+			This utility query returns true if the Vertex is contained in the Region r (input argument).
 			result = (if (container = r) then
 				true
 			else
@@ -176,11 +184,13 @@ namespace uml
 					container.state.isContainedInRegion(r)
 				endif
 			endif)
-			<p>From package UML::StateMachines.</p> */ 
+			<p>From package UML::StateMachines.</p>
+			*/
+			 
 			virtual bool isContainedInRegion(std::shared_ptr<uml::Region>  r) = 0;
 			
 			/*!
-			 This utility operation returns true if the Vertex is contained in the State s (input argument).
+			This utility operation returns true if the Vertex is contained in the State s (input argument).
 			result = (if not s.isComposite() or container->isEmpty() then
 				false
 			else
@@ -190,7 +200,9 @@ namespace uml
 					container.state.isContainedInState(s)
 				endif
 			endif)
-			<p>From package UML::StateMachines.</p> */ 
+			<p>From package UML::StateMachines.</p>
+			*/
+			 
 			virtual bool isContainedInState(std::shared_ptr<uml::State>  s) = 0;
 			
 			
@@ -202,23 +214,34 @@ namespace uml
 			// Reference
 			//*********************************
 			/*!
-			 The Region that contains this Vertex.
-			<p>From package UML::StateMachines.</p> */
+			The Region that contains this Vertex.
+			<p>From package UML::StateMachines.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Region > getContainer() const = 0;
 			
 			/*!
-			 The Region that contains this Vertex.
-			<p>From package UML::StateMachines.</p> */
-			virtual void setContainer(std::shared_ptr<uml::Region> _container_container) = 0;
-			/*!
-			 Specifies the Transitions entering this Vertex.
-			<p>From package UML::StateMachines.</p> */
-			virtual std::shared_ptr<Bag<uml::Transition>> getIncoming() const = 0;
+			The Region that contains this Vertex.
+			<p>From package UML::StateMachines.</p>
+			*/
+			
+			virtual void setContainer(std::shared_ptr<uml::Region> _container) = 0;
 			
 			/*!
-			 Specifies the Transitions departing from this Vertex.
-			<p>From package UML::StateMachines.</p> */
+			Specifies the Transitions entering this Vertex.
+			<p>From package UML::StateMachines.</p>
+			*/
+			
+			virtual std::shared_ptr<Bag<uml::Transition>> getIncoming() const = 0;
+			
+			
+			/*!
+			Specifies the Transitions departing from this Vertex.
+			<p>From package UML::StateMachines.</p>
+			*/
+			
 			virtual std::shared_ptr<Bag<uml::Transition>> getOutgoing() const = 0;
+			
 			
 			
 
@@ -232,32 +255,41 @@ namespace uml
 			// Reference Members
 			//*********************************
 			/*!
-			 The Region that contains this Vertex.
-			<p>From package UML::StateMachines.</p> */
-			std::weak_ptr<uml::Region > m_container;
-			/*!
-			 Specifies the Transitions entering this Vertex.
-			<p>From package UML::StateMachines.</p> */
-			mutable std::shared_ptr<Bag<uml::Transition>> m_incoming;
-			/*!
-			 Specifies the Transitions departing from this Vertex.
-			<p>From package UML::StateMachines.</p> */
-			mutable std::shared_ptr<Bag<uml::Transition>> m_outgoing;
+			The Region that contains this Vertex.
+			<p>From package UML::StateMachines.</p>
+			*/
 			
+			std::weak_ptr<uml::Region > m_container;/*!
+			Specifies the Transitions entering this Vertex.
+			<p>From package UML::StateMachines.</p>
+			*/
+			
+			mutable std::shared_ptr<Bag<uml::Transition>> m_incoming;/*!
+			Specifies the Transitions departing from this Vertex.
+			<p>From package UML::StateMachines.</p>
+			*/
+			
+			mutable std::shared_ptr<Bag<uml::Transition>> m_outgoing;
 
 		public:
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

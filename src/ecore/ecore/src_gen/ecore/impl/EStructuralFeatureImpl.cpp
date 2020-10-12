@@ -151,77 +151,125 @@ std::shared_ptr<EClass> EStructuralFeatureImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
+/*
+Getter & Setter for attribute changeable
+*/
+bool EStructuralFeatureImpl::isChangeable() const 
+{
+	return m_changeable;
+}
+
 void EStructuralFeatureImpl::setChangeable(bool _changeable)
 {
 	m_changeable = _changeable;
 } 
-bool EStructuralFeatureImpl::isChangeable() const 
+
+
+
+/*
+Getter & Setter for attribute defaultValue
+*/
+Any EStructuralFeatureImpl::getDefaultValue() const 
 {
-	return m_changeable;
+	return m_defaultValue;
 }
 
 void EStructuralFeatureImpl::setDefaultValue(Any _defaultValue)
 {
 	m_defaultValue = _defaultValue;
 } 
-Any EStructuralFeatureImpl::getDefaultValue() const 
+
+
+
+/*
+Getter & Setter for attribute defaultValueLiteral
+*/
+std::string EStructuralFeatureImpl::getDefaultValueLiteral() const 
 {
-	return m_defaultValue;
+	return m_defaultValueLiteral;
 }
 
 void EStructuralFeatureImpl::setDefaultValueLiteral(std::string _defaultValueLiteral)
 {
 	m_defaultValueLiteral = _defaultValueLiteral;
 } 
-std::string EStructuralFeatureImpl::getDefaultValueLiteral() const 
+
+
+
+/*
+Getter & Setter for attribute derived
+*/
+bool EStructuralFeatureImpl::isDerived() const 
 {
-	return m_defaultValueLiteral;
+	return m_derived;
 }
 
 void EStructuralFeatureImpl::setDerived(bool _derived)
 {
 	m_derived = _derived;
 } 
-bool EStructuralFeatureImpl::isDerived() const 
+
+
+
+/*
+Getter & Setter for attribute featureID
+*/
+int EStructuralFeatureImpl::getFeatureID() const 
 {
-	return m_derived;
+	return m_featureID;
 }
 
 void EStructuralFeatureImpl::setFeatureID(int _featureID)
 {
 	m_featureID = _featureID;
 } 
-int EStructuralFeatureImpl::getFeatureID() const 
+
+
+
+/*
+Getter & Setter for attribute transient
+*/
+bool EStructuralFeatureImpl::isTransient() const 
 {
-	return m_featureID;
+	return m_transient;
 }
 
 void EStructuralFeatureImpl::setTransient(bool _transient)
 {
 	m_transient = _transient;
 } 
-bool EStructuralFeatureImpl::isTransient() const 
+
+
+
+/*
+Getter & Setter for attribute unsettable
+*/
+bool EStructuralFeatureImpl::isUnsettable() const 
 {
-	return m_transient;
+	return m_unsettable;
 }
 
 void EStructuralFeatureImpl::setUnsettable(bool _unsettable)
 {
 	m_unsettable = _unsettable;
 } 
-bool EStructuralFeatureImpl::isUnsettable() const 
+
+
+
+/*
+Getter & Setter for attribute volatile
+*/
+bool EStructuralFeatureImpl::isVolatile() const 
 {
-	return m_unsettable;
+	return m_volatile;
 }
 
 void EStructuralFeatureImpl::setVolatile(bool _volatile)
 {
 	m_volatile = _volatile;
 } 
-bool EStructuralFeatureImpl::isVolatile() const 
-{
-	return m_volatile;
-}
+
+
 
 //*********************************
 // Operations
@@ -237,11 +285,17 @@ void * EStructuralFeatureImpl::getContainerClass()
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference eContainingClass
+*/
 std::weak_ptr<ecore::EClass > EStructuralFeatureImpl::getEContainingClass() const
 {
 
     return m_eContainingClass;
 }
+
+
+
 
 
 //*********************************

@@ -223,25 +223,37 @@ std::shared_ptr<ecore::EClass> SubstitutionImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference contract
+*/
 std::shared_ptr<uml::Classifier > SubstitutionImpl::getContract() const
 {
 //assert(m_contract);
     return m_contract;
 }
+
 void SubstitutionImpl::setContract(std::shared_ptr<uml::Classifier> _contract)
 {
     m_contract = _contract;
 }
 
+
+
+/*
+Getter & Setter for reference substitutingClassifier
+*/
 std::weak_ptr<uml::Classifier > SubstitutionImpl::getSubstitutingClassifier() const
 {
 //assert(m_substitutingClassifier);
     return m_substitutingClassifier;
 }
+
 void SubstitutionImpl::setSubstitutingClassifier(std::shared_ptr<uml::Classifier> _substitutingClassifier)
 {
     m_substitutingClassifier = _substitutingClassifier;
 }
+
+
 
 //*********************************
 // Union Getter

@@ -112,14 +112,20 @@ std::shared_ptr<ecore::EClass> CommentImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
-void CommentImpl::setBody(std::string _body)
-{
-	m_body = _body;
-} 
+/*
+Getter & Setter for attribute body
+*/
 std::string CommentImpl::getBody() const 
 {
 	return m_body;
 }
+
+void CommentImpl::setBody(std::string _body)
+{
+	m_body = _body;
+} 
+
+
 
 //*********************************
 // Operations
@@ -128,6 +134,9 @@ std::string CommentImpl::getBody() const
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference annotatedElement
+*/
 std::shared_ptr<Bag<uml::Element>> CommentImpl::getAnnotatedElement() const
 {
 	if(m_annotatedElement == nullptr)
@@ -139,6 +148,9 @@ std::shared_ptr<Bag<uml::Element>> CommentImpl::getAnnotatedElement() const
 
     return m_annotatedElement;
 }
+
+
+
 
 
 //*********************************

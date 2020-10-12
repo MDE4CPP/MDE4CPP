@@ -397,6 +397,9 @@ std::shared_ptr<Bag<uml::Property> > StructuredClassifierImpl::getParts()
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference ownedAttribute
+*/
 std::shared_ptr<SubsetUnion<uml::Property, uml::Property,uml::NamedElement,uml::ConnectableElement>> StructuredClassifierImpl::getOwnedAttribute() const
 {
 	if(m_ownedAttribute == nullptr)
@@ -419,6 +422,12 @@ std::shared_ptr<SubsetUnion<uml::Property, uml::Property,uml::NamedElement,uml::
 }
 
 
+
+
+
+/*
+Getter & Setter for reference ownedConnector
+*/
 std::shared_ptr<Subset<uml::Connector, uml::Feature,uml::NamedElement>> StructuredClassifierImpl::getOwnedConnector() const
 {
 	if(m_ownedConnector == nullptr)
@@ -441,6 +450,12 @@ std::shared_ptr<Subset<uml::Connector, uml::Feature,uml::NamedElement>> Structur
 }
 
 
+
+
+
+/*
+Getter & Setter for reference part
+*/
 std::shared_ptr<Bag<uml::Property>> StructuredClassifierImpl::getPart() const
 {
 	if(m_part == nullptr)
@@ -452,6 +467,15 @@ std::shared_ptr<Bag<uml::Property>> StructuredClassifierImpl::getPart() const
 
     return m_part;
 }
+
+
+
+
+
+/*
+Getter & Setter for reference role
+*/
+
 
 
 

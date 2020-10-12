@@ -332,32 +332,50 @@ std::shared_ptr<ecore::EClass> PortImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
+/*
+Getter & Setter for attribute isBehavior
+*/
+bool PortImpl::getIsBehavior() const 
+{
+	return m_isBehavior;
+}
+
 void PortImpl::setIsBehavior(bool _isBehavior)
 {
 	m_isBehavior = _isBehavior;
 } 
-bool PortImpl::getIsBehavior() const 
+
+
+
+/*
+Getter & Setter for attribute isConjugated
+*/
+bool PortImpl::getIsConjugated() const 
 {
-	return m_isBehavior;
+	return m_isConjugated;
 }
 
 void PortImpl::setIsConjugated(bool _isConjugated)
 {
 	m_isConjugated = _isConjugated;
 } 
-bool PortImpl::getIsConjugated() const 
+
+
+
+/*
+Getter & Setter for attribute isService
+*/
+bool PortImpl::getIsService() const 
 {
-	return m_isConjugated;
+	return m_isService;
 }
 
 void PortImpl::setIsService(bool _isService)
 {
 	m_isService = _isService;
 } 
-bool PortImpl::getIsService() const 
-{
-	return m_isService;
-}
+
+
 
 //*********************************
 // Operations
@@ -435,16 +453,25 @@ bool PortImpl::port_aggregation(Any diagnostics,std::map <   Any, Any >  context
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference protocol
+*/
 std::shared_ptr<uml::ProtocolStateMachine > PortImpl::getProtocol() const
 {
 
     return m_protocol;
 }
+
 void PortImpl::setProtocol(std::shared_ptr<uml::ProtocolStateMachine> _protocol)
 {
     m_protocol = _protocol;
 }
 
+
+
+/*
+Getter & Setter for reference provided
+*/
 std::shared_ptr<Bag<uml::Interface>> PortImpl::getProvided() const
 {
 	if(m_provided == nullptr)
@@ -458,6 +485,12 @@ std::shared_ptr<Bag<uml::Interface>> PortImpl::getProvided() const
 }
 
 
+
+
+
+/*
+Getter & Setter for reference redefinedPort
+*/
 std::shared_ptr<Subset<uml::Port, uml::Property /*Subset does not reference a union*/>> PortImpl::getRedefinedPort() const
 {
 	if(m_redefinedPort == nullptr)
@@ -480,6 +513,12 @@ std::shared_ptr<Subset<uml::Port, uml::Property /*Subset does not reference a un
 }
 
 
+
+
+
+/*
+Getter & Setter for reference required
+*/
 std::shared_ptr<Bag<uml::Interface>> PortImpl::getRequired() const
 {
 	if(m_required == nullptr)
@@ -491,6 +530,9 @@ std::shared_ptr<Bag<uml::Interface>> PortImpl::getRequired() const
 
     return m_required;
 }
+
+
+
 
 
 //*********************************

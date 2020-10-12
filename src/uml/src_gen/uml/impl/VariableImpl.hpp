@@ -64,11 +64,13 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 A Variable is accessible by Actions within its scope (the Activity or StructuredActivityNode that owns it).
+			A Variable is accessible by Actions within its scope (the Activity or StructuredActivityNode that owns it).
 			result = (if scope<>null then scope.allOwnedNodes()->includes(a)
 			else a.containingActivity()=activityScope
 			endif)
-			<p>From package UML::Activities.</p> */ 
+			<p>From package UML::Activities.</p>
+			*/
+			 
 			virtual bool isAccessibleBy(std::shared_ptr<uml::Action>  a) ;
 			
 			
@@ -82,37 +84,53 @@ namespace uml
 			// Reference
 			//*********************************
 			/*!
-			 An Activity that owns the Variable.
-			<p>From package UML::Activities.</p> */
+			An Activity that owns the Variable.
+			<p>From package UML::Activities.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Activity > getActivityScope() const ;
 			
 			/*!
-			 An Activity that owns the Variable.
-			<p>From package UML::Activities.</p> */
-			virtual void setActivityScope(std::shared_ptr<uml::Activity> _activityScope_activityScope) ;
+			An Activity that owns the Variable.
+			<p>From package UML::Activities.</p>
+			*/
+			
+			virtual void setActivityScope(std::shared_ptr<uml::Activity> _activityScope) ;
+			
 			/*!
-			 A StructuredActivityNode that owns the Variable.
-			<p>From package UML::Activities.</p> */
+			A StructuredActivityNode that owns the Variable.
+			<p>From package UML::Activities.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::StructuredActivityNode > getScope() const ;
 			
 			/*!
-			 A StructuredActivityNode that owns the Variable.
-			<p>From package UML::Activities.</p> */
-			virtual void setScope(std::shared_ptr<uml::StructuredActivityNode> _scope_scope) ;
+			A StructuredActivityNode that owns the Variable.
+			<p>From package UML::Activities.</p>
+			*/
+			
+			virtual void setScope(std::shared_ptr<uml::StructuredActivityNode> _scope) ;
+			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************

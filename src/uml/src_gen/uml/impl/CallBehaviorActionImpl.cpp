@@ -292,15 +292,21 @@ bool CallBehaviorActionImpl::no_onport(Any diagnostics,std::map <   Any, Any >  
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference behavior
+*/
 std::shared_ptr<uml::Behavior > CallBehaviorActionImpl::getBehavior() const
 {
 //assert(m_behavior);
     return m_behavior;
 }
+
 void CallBehaviorActionImpl::setBehavior(std::shared_ptr<uml::Behavior> _behavior)
 {
     m_behavior = _behavior;
 }
+
+
 
 //*********************************
 // Union Getter

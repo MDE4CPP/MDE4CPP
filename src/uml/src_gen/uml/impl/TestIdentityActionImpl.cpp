@@ -305,35 +305,53 @@ bool TestIdentityActionImpl::result_is_boolean(Any diagnostics,std::map <   Any,
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference first
+*/
 std::shared_ptr<uml::InputPin > TestIdentityActionImpl::getFirst() const
 {
 //assert(m_first);
     return m_first;
 }
+
 void TestIdentityActionImpl::setFirst(std::shared_ptr<uml::InputPin> _first)
 {
     m_first = _first;
 }
 
+
+
+/*
+Getter & Setter for reference result
+*/
 std::shared_ptr<uml::OutputPin > TestIdentityActionImpl::getResult() const
 {
 //assert(m_result);
     return m_result;
 }
+
 void TestIdentityActionImpl::setResult(std::shared_ptr<uml::OutputPin> _result)
 {
     m_result = _result;
 }
 
+
+
+/*
+Getter & Setter for reference second
+*/
 std::shared_ptr<uml::InputPin > TestIdentityActionImpl::getSecond() const
 {
 //assert(m_second);
     return m_second;
 }
+
 void TestIdentityActionImpl::setSecond(std::shared_ptr<uml::InputPin> _second)
 {
     m_second = _second;
 }
+
+
 
 //*********************************
 // Union Getter

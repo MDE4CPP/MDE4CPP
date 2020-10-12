@@ -171,16 +171,25 @@ bool TemplateBindingImpl::parameter_substitution_formal(Any diagnostics,std::map
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference boundElement
+*/
 std::weak_ptr<uml::TemplateableElement > TemplateBindingImpl::getBoundElement() const
 {
 //assert(m_boundElement);
     return m_boundElement;
 }
+
 void TemplateBindingImpl::setBoundElement(std::shared_ptr<uml::TemplateableElement> _boundElement)
 {
     m_boundElement = _boundElement;
 }
 
+
+
+/*
+Getter & Setter for reference parameterSubstitution
+*/
 std::shared_ptr<Subset<uml::TemplateParameterSubstitution, uml::Element>> TemplateBindingImpl::getParameterSubstitution() const
 {
 	if(m_parameterSubstitution == nullptr)
@@ -203,15 +212,24 @@ std::shared_ptr<Subset<uml::TemplateParameterSubstitution, uml::Element>> Templa
 }
 
 
+
+
+
+/*
+Getter & Setter for reference signature
+*/
 std::shared_ptr<uml::TemplateSignature > TemplateBindingImpl::getSignature() const
 {
 //assert(m_signature);
     return m_signature;
 }
+
 void TemplateBindingImpl::setSignature(std::shared_ptr<uml::TemplateSignature> _signature)
 {
     m_signature = _signature;
 }
+
+
 
 //*********************************
 // Union Getter

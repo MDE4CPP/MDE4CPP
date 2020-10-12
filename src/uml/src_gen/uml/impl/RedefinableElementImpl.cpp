@@ -152,14 +152,20 @@ std::shared_ptr<ecore::EClass> RedefinableElementImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
-void RedefinableElementImpl::setIsLeaf(bool _isLeaf)
-{
-	m_isLeaf = _isLeaf;
-} 
+/*
+Getter & Setter for attribute isLeaf
+*/
 bool RedefinableElementImpl::getIsLeaf() const 
 {
 	return m_isLeaf;
 }
+
+void RedefinableElementImpl::setIsLeaf(bool _isLeaf)
+{
+	m_isLeaf = _isLeaf;
+} 
+
+
 
 //*********************************
 // Operations
@@ -197,6 +203,18 @@ bool RedefinableElementImpl::redefinition_context_valid(Any diagnostics,std::map
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference redefinedElement
+*/
+
+
+
+
+
+
+/*
+Getter & Setter for reference redefinitionContext
+*/
 
 
 

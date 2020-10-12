@@ -363,6 +363,9 @@ bool InformationItemImpl::sources_and_targets(Any diagnostics,std::map <   Any, 
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference represented
+*/
 std::shared_ptr<Bag<uml::Classifier>> InformationItemImpl::getRepresented() const
 {
 	if(m_represented == nullptr)
@@ -374,6 +377,9 @@ std::shared_ptr<Bag<uml::Classifier>> InformationItemImpl::getRepresented() cons
 
     return m_represented;
 }
+
+
+
 
 
 //*********************************

@@ -178,6 +178,9 @@ std::shared_ptr<Bag<uml::ConnectorEnd> > ConnectableElementImpl::getEnds()
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference end
+*/
 std::shared_ptr<Bag<uml::ConnectorEnd>> ConnectableElementImpl::getEnd() const
 {
 	if(m_end == nullptr)
@@ -189,6 +192,9 @@ std::shared_ptr<Bag<uml::ConnectorEnd>> ConnectableElementImpl::getEnd() const
 
     return m_end;
 }
+
+
+
 
 
 //*********************************

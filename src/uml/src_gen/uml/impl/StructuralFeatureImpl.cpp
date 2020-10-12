@@ -184,14 +184,20 @@ std::shared_ptr<ecore::EClass> StructuralFeatureImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
-void StructuralFeatureImpl::setIsReadOnly(bool _isReadOnly)
-{
-	m_isReadOnly = _isReadOnly;
-} 
+/*
+Getter & Setter for attribute isReadOnly
+*/
 bool StructuralFeatureImpl::getIsReadOnly() const 
 {
 	return m_isReadOnly;
 }
+
+void StructuralFeatureImpl::setIsReadOnly(bool _isReadOnly)
+{
+	m_isReadOnly = _isReadOnly;
+} 
+
+
 
 //*********************************
 // Operations

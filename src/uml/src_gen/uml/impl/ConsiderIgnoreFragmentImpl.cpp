@@ -223,6 +223,9 @@ bool ConsiderIgnoreFragmentImpl::type(Any diagnostics,std::map <   Any, Any >  c
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference message
+*/
 std::shared_ptr<Bag<uml::NamedElement>> ConsiderIgnoreFragmentImpl::getMessage() const
 {
 	if(m_message == nullptr)
@@ -234,6 +237,9 @@ std::shared_ptr<Bag<uml::NamedElement>> ConsiderIgnoreFragmentImpl::getMessage()
 
     return m_message;
 }
+
+
+
 
 
 //*********************************

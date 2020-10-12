@@ -138,38 +138,62 @@ std::shared_ptr<EClass> EClassifierImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
-void EClassifierImpl::setDefaultValue(Any _defaultValue)
-{
-	m_defaultValue = _defaultValue;
-} 
+/*
+Getter & Setter for attribute defaultValue
+*/
 Any EClassifierImpl::getDefaultValue() const 
 {
 	return m_defaultValue;
 }
 
+void EClassifierImpl::setDefaultValue(Any _defaultValue)
+{
+	m_defaultValue = _defaultValue;
+} 
 
+
+
+/*
+Getter & Setter for attribute instanceClass
+*/
 void *  EClassifierImpl::getInstanceClass() const 
 {
 	return m_instanceClass;
+}
+
+
+
+
+
+/*
+Getter & Setter for attribute instanceClassName
+*/
+std::string EClassifierImpl::getInstanceClassName() const 
+{
+	return m_instanceClassName;
 }
 
 void EClassifierImpl::setInstanceClassName(std::string _instanceClassName)
 {
 	m_instanceClassName = _instanceClassName;
 } 
-std::string EClassifierImpl::getInstanceClassName() const 
+
+
+
+/*
+Getter & Setter for attribute instanceTypeName
+*/
+std::string EClassifierImpl::getInstanceTypeName() const 
 {
-	return m_instanceClassName;
+	return m_instanceTypeName;
 }
 
 void EClassifierImpl::setInstanceTypeName(std::string _instanceTypeName)
 {
 	m_instanceTypeName = _instanceTypeName;
 } 
-std::string EClassifierImpl::getInstanceTypeName() const 
-{
-	return m_instanceTypeName;
-}
+
+
 
 //*********************************
 // Operations
@@ -191,6 +215,9 @@ bool EClassifierImpl::isInstance(Any object) const
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference ePackage
+*/
 std::weak_ptr<ecore::EPackage > EClassifierImpl::getEPackage() const
 {
 
@@ -198,6 +225,12 @@ std::weak_ptr<ecore::EPackage > EClassifierImpl::getEPackage() const
 }
 
 
+
+
+
+/*
+Getter & Setter for reference eTypeParameters
+*/
 std::shared_ptr<Bag<ecore::ETypeParameter>> EClassifierImpl::getETypeParameters() const
 {
 	if(m_eTypeParameters == nullptr)
@@ -209,6 +242,9 @@ std::shared_ptr<Bag<ecore::ETypeParameter>> EClassifierImpl::getETypeParameters(
 
     return m_eTypeParameters;
 }
+
+
+
 
 
 //*********************************

@@ -285,25 +285,37 @@ bool ClearAssociationActionImpl::same_type(Any diagnostics,std::map <   Any, Any
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference association
+*/
 std::shared_ptr<uml::Association > ClearAssociationActionImpl::getAssociation() const
 {
 //assert(m_association);
     return m_association;
 }
+
 void ClearAssociationActionImpl::setAssociation(std::shared_ptr<uml::Association> _association)
 {
     m_association = _association;
 }
 
+
+
+/*
+Getter & Setter for reference object
+*/
 std::shared_ptr<uml::InputPin > ClearAssociationActionImpl::getObject() const
 {
 //assert(m_object);
     return m_object;
 }
+
 void ClearAssociationActionImpl::setObject(std::shared_ptr<uml::InputPin> _object)
 {
     m_object = _object;
 }
+
+
 
 //*********************************
 // Union Getter

@@ -72,24 +72,30 @@ namespace uml
 			// Attributes Getter Setter
 			//*********************************
 			/*!
-			 The symbol associated with this node in the expression tree.
-			<p>From package UML::Values.</p> */ 
+			The symbol associated with this node in the expression tree.
+			<p>From package UML::Values.</p>
+			*/
+			 
 			virtual std::string getSymbol() const ;
 			
 			/*!
-			 The symbol associated with this node in the expression tree.
-			<p>From package UML::Values.</p> */ 
+			The symbol associated with this node in the expression tree.
+			<p>From package UML::Values.</p>
+			*/
+			 
 			virtual void setSymbol (std::string _symbol); 
-			
 			
 			
 			//*********************************
 			// Reference
 			//*********************************
 			/*!
-			 Specifies a sequence of operand ValueSpecifications.
-			<p>From package UML::Values.</p> */
+			Specifies a sequence of operand ValueSpecifications.
+			<p>From package UML::Values.</p>
+			*/
+			
 			virtual std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>> getOperand() const ;
+			
 			
 							
 			
@@ -97,14 +103,20 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************

@@ -53,24 +53,32 @@ namespace uml
 			
 			
 			/*!
-			 The multiplicity of the ConnectorEnd may not be more general than the multiplicity of the corresponding end of the Association typing the owning Connector, if any.
-			self.compatibleWith(definingEnd) */ 
+			The multiplicity of the ConnectorEnd may not be more general than the multiplicity of the corresponding end of the Association typing the owning Connector, if any.
+			self.compatibleWith(definingEnd)
+			*/
+			 
 			virtual bool multiplicity(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
-			 If a ConnectorEnd is attached to a Port of the containing Classifier, partWithPort will be empty.
-			(role.oclIsKindOf(Port) and role.owner = connector.owner) implies partWithPort->isEmpty() */ 
+			If a ConnectorEnd is attached to a Port of the containing Classifier, partWithPort will be empty.
+			(role.oclIsKindOf(Port) and role.owner = connector.owner) implies partWithPort->isEmpty()
+			*/
+			 
 			virtual bool part_with_port_empty(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
-			 If a ConnectorEnd references a partWithPort, then the role must be a Port that is defined or inherited by the type of the partWithPort.
+			If a ConnectorEnd references a partWithPort, then the role must be a Port that is defined or inherited by the type of the partWithPort.
 			partWithPort->notEmpty() implies 
-			  (role.oclIsKindOf(Port) and partWithPort.type.oclAsType(Namespace).member->includes(role)) */ 
+			  (role.oclIsKindOf(Port) and partWithPort.type.oclAsType(Namespace).member->includes(role))
+			*/
+			 
 			virtual bool role_and_part_with_port(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
-			 The Property held in self.partWithPort must not be a Port.
-			partWithPort->notEmpty() implies not partWithPort.oclIsKindOf(Port) */ 
+			The Property held in self.partWithPort must not be a Port.
+			partWithPort->notEmpty() implies not partWithPort.oclIsKindOf(Port)
+			*/
+			 
 			virtual bool self_part_with_port(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
@@ -83,44 +91,58 @@ namespace uml
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::weak_ptr<uml::Connector > getConnector() const ;
 			
-			/*!
-			 */
-			virtual void setConnector(std::shared_ptr<uml::Connector> _connector_connector) ;
-			/*!
-			 A derived property referencing the corresponding end on the Association which types the Connector owing this ConnectorEnd, if any. It is derived by selecting the end at the same place in the ordering of Association ends as this ConnectorEnd.
-			<p>From package UML::StructuredClassifiers.</p> */
-			virtual std::shared_ptr<uml::Property > getDefiningEnd() const ;
+			
+			virtual void setConnector(std::shared_ptr<uml::Connector> _connector) ;
 			
 			/*!
-			 Indicates the role of the internal structure of a Classifier with the Port to which the ConnectorEnd is attached.
-			<p>From package UML::StructuredClassifiers.</p> */
+			A derived property referencing the corresponding end on the Association which types the Connector owing this ConnectorEnd, if any. It is derived by selecting the end at the same place in the ordering of Association ends as this ConnectorEnd.
+			<p>From package UML::StructuredClassifiers.</p>
+			*/
+			
+			virtual std::shared_ptr<uml::Property > getDefiningEnd() const ;
+			
+			
+			/*!
+			Indicates the role of the internal structure of a Classifier with the Port to which the ConnectorEnd is attached.
+			<p>From package UML::StructuredClassifiers.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::Property > getPartWithPort() const ;
 			
 			/*!
-			 Indicates the role of the internal structure of a Classifier with the Port to which the ConnectorEnd is attached.
-			<p>From package UML::StructuredClassifiers.</p> */
-			virtual void setPartWithPort(std::shared_ptr<uml::Property> _partWithPort_partWithPort) ;
+			Indicates the role of the internal structure of a Classifier with the Port to which the ConnectorEnd is attached.
+			<p>From package UML::StructuredClassifiers.</p>
+			*/
+			
+			virtual void setPartWithPort(std::shared_ptr<uml::Property> _partWithPort) ;
+			
 			/*!
-			 The ConnectableElement attached at this ConnectorEnd. When an instance of the containing Classifier is created, a link may (depending on the multiplicities) be created to an instance of the Classifier that types this ConnectableElement.
-			<p>From package UML::StructuredClassifiers.</p> */
+			The ConnectableElement attached at this ConnectorEnd. When an instance of the containing Classifier is created, a link may (depending on the multiplicities) be created to an instance of the Classifier that types this ConnectableElement.
+			<p>From package UML::StructuredClassifiers.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::ConnectableElement > getRole() const ;
 			
 			/*!
-			 The ConnectableElement attached at this ConnectorEnd. When an instance of the containing Classifier is created, a link may (depending on the multiplicities) be created to an instance of the Classifier that types this ConnectableElement.
-			<p>From package UML::StructuredClassifiers.</p> */
-			virtual void setRole(std::shared_ptr<uml::ConnectableElement> _role_role) ;
+			The ConnectableElement attached at this ConnectorEnd. When an instance of the containing Classifier is created, a link may (depending on the multiplicities) be created to an instance of the Classifier that types this ConnectableElement.
+			<p>From package UML::StructuredClassifiers.</p>
+			*/
+			
+			virtual void setRole(std::shared_ptr<uml::ConnectableElement> _role) ;
+			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ; 
 			 
 			//*********************************

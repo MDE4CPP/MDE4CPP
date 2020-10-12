@@ -316,15 +316,21 @@ bool StartObjectBehaviorActionImpl::type_of_object(Any diagnostics,std::map <   
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference object
+*/
 std::shared_ptr<uml::InputPin > StartObjectBehaviorActionImpl::getObject() const
 {
 //assert(m_object);
     return m_object;
 }
+
 void StartObjectBehaviorActionImpl::setObject(std::shared_ptr<uml::InputPin> _object)
 {
     m_object = _object;
 }
+
+
 
 //*********************************
 // Union Getter

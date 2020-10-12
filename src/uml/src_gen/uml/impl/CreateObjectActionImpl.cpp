@@ -295,25 +295,37 @@ bool CreateObjectActionImpl::same_type(Any diagnostics,std::map <   Any, Any >  
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference classifier
+*/
 std::shared_ptr<uml::Classifier > CreateObjectActionImpl::getClassifier() const
 {
 //assert(m_classifier);
     return m_classifier;
 }
+
 void CreateObjectActionImpl::setClassifier(std::shared_ptr<uml::Classifier> _classifier)
 {
     m_classifier = _classifier;
 }
 
+
+
+/*
+Getter & Setter for reference result
+*/
 std::shared_ptr<uml::OutputPin > CreateObjectActionImpl::getResult() const
 {
 //assert(m_result);
     return m_result;
 }
+
 void CreateObjectActionImpl::setResult(std::shared_ptr<uml::OutputPin> _result)
 {
     m_result = _result;
 }
+
+
 
 //*********************************
 // Union Getter

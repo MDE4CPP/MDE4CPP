@@ -388,23 +388,35 @@ std::shared_ptr<ecore::EClass> DeploymentSpecificationImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
+/*
+Getter & Setter for attribute deploymentLocation
+*/
+std::string DeploymentSpecificationImpl::getDeploymentLocation() const 
+{
+	return m_deploymentLocation;
+}
+
 void DeploymentSpecificationImpl::setDeploymentLocation(std::string _deploymentLocation)
 {
 	m_deploymentLocation = _deploymentLocation;
 } 
-std::string DeploymentSpecificationImpl::getDeploymentLocation() const 
+
+
+
+/*
+Getter & Setter for attribute executionLocation
+*/
+std::string DeploymentSpecificationImpl::getExecutionLocation() const 
 {
-	return m_deploymentLocation;
+	return m_executionLocation;
 }
 
 void DeploymentSpecificationImpl::setExecutionLocation(std::string _executionLocation)
 {
 	m_executionLocation = _executionLocation;
 } 
-std::string DeploymentSpecificationImpl::getExecutionLocation() const 
-{
-	return m_executionLocation;
-}
+
+
 
 //*********************************
 // Operations
@@ -424,15 +436,21 @@ bool DeploymentSpecificationImpl::deployment_target(Any diagnostics,std::map <  
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference deployment
+*/
 std::weak_ptr<uml::Deployment > DeploymentSpecificationImpl::getDeployment() const
 {
 
     return m_deployment;
 }
+
 void DeploymentSpecificationImpl::setDeployment(std::shared_ptr<uml::Deployment> _deployment)
 {
     m_deployment = _deployment;
 }
+
+
 
 //*********************************
 // Union Getter

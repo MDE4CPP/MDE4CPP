@@ -134,41 +134,65 @@ std::shared_ptr<ecore::EClass> MultiplicityElementImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
+/*
+Getter & Setter for attribute isOrdered
+*/
+bool MultiplicityElementImpl::getIsOrdered() const 
+{
+	return m_isOrdered;
+}
+
 void MultiplicityElementImpl::setIsOrdered(bool _isOrdered)
 {
 	m_isOrdered = _isOrdered;
 } 
-bool MultiplicityElementImpl::getIsOrdered() const 
+
+
+
+/*
+Getter & Setter for attribute isUnique
+*/
+bool MultiplicityElementImpl::getIsUnique() const 
 {
-	return m_isOrdered;
+	return m_isUnique;
 }
 
 void MultiplicityElementImpl::setIsUnique(bool _isUnique)
 {
 	m_isUnique = _isUnique;
 } 
-bool MultiplicityElementImpl::getIsUnique() const 
+
+
+
+/*
+Getter & Setter for attribute lower
+*/
+int MultiplicityElementImpl::getLower() const 
 {
-	return m_isUnique;
+	return m_lower;
 }
 
 void MultiplicityElementImpl::setLower(int _lower)
 {
 	m_lower = _lower;
 } 
-int MultiplicityElementImpl::getLower() const 
+
+
+
+/*
+Getter & Setter for attribute upper
+*/
+int MultiplicityElementImpl::getUpper() const 
 {
-	return m_lower;
+	return m_upper;
 }
 
 void MultiplicityElementImpl::setUpper(int _upper)
 {
 	m_upper = _upper;
 } 
-int MultiplicityElementImpl::getUpper() const 
-{
-	return m_upper;
-}
+
+
 
 //*********************************
 // Operations
@@ -248,25 +272,37 @@ bool MultiplicityElementImpl::value_specification_no_side_effects(Any diagnostic
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference lowerValue
+*/
 std::shared_ptr<uml::ValueSpecification > MultiplicityElementImpl::getLowerValue() const
 {
 
     return m_lowerValue;
 }
+
 void MultiplicityElementImpl::setLowerValue(std::shared_ptr<uml::ValueSpecification> _lowerValue)
 {
     m_lowerValue = _lowerValue;
 }
 
+
+
+/*
+Getter & Setter for reference upperValue
+*/
 std::shared_ptr<uml::ValueSpecification > MultiplicityElementImpl::getUpperValue() const
 {
 
     return m_upperValue;
 }
+
 void MultiplicityElementImpl::setUpperValue(std::shared_ptr<uml::ValueSpecification> _upperValue)
 {
     m_upperValue = _upperValue;
 }
+
+
 
 //*********************************
 // Union Getter

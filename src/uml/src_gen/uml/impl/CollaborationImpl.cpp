@@ -404,6 +404,9 @@ std::shared_ptr<ecore::EClass> CollaborationImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference collaborationRole
+*/
 std::shared_ptr<Subset<uml::ConnectableElement, uml::ConnectableElement>> CollaborationImpl::getCollaborationRole() const
 {
 	if(m_collaborationRole == nullptr)
@@ -424,6 +427,9 @@ std::shared_ptr<Subset<uml::ConnectableElement, uml::ConnectableElement>> Collab
 
     return m_collaborationRole;
 }
+
+
+
 
 
 //*********************************

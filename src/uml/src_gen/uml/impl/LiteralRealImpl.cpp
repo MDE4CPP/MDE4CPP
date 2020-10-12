@@ -195,14 +195,20 @@ std::shared_ptr<ecore::EClass> LiteralRealImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
-void LiteralRealImpl::setValue(double _value)
-{
-	m_value = _value;
-} 
+/*
+Getter & Setter for attribute value
+*/
 double LiteralRealImpl::getValue() const 
 {
 	return m_value;
 }
+
+void LiteralRealImpl::setValue(double _value)
+{
+	m_value = _value;
+} 
+
+
 
 //*********************************
 // Operations

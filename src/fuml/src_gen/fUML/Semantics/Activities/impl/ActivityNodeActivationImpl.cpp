@@ -25,7 +25,6 @@
 
 //Includes from codegen annotation
 #include "ecore/EClass.hpp"
-#include "fUML/Semantics/Activities/ActivityNodeActivation.hpp"
 #include "fUML/Semantics/Activities/ForkedToken.hpp"
 #include "uml/ActivityNode.hpp"
 #include "uml/ActivityEdge.hpp"
@@ -187,14 +186,14 @@ void ActivityNodeActivationImpl::addToken(std::shared_ptr<fUML::Semantics::Activ
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-				DEBUG_MESSAGE(
-		if (this->getNode()== nullptr)
-		{
-			std::cout<<"[addToken] ..."<<std::endl;
-		}
-		else
-		{
-			std::cout<<"[addToken] node = " << this->getNode()->getName()<<std::endl;
+	DEBUG_MESSAGE(
+if (this->getNode()== nullptr)
+{
+	std::cout<<"[addToken] ..."<<std::endl;
+}
+else
+{
+	std::cout<<"[addToken] node = " << this->getNode()->getName()<<std::endl;
             
             std::shared_ptr<uml::NamedElement> owner = std::dynamic_pointer_cast<uml::NamedElement>(this->getNode()->getOwner().lock());
 				ACT_DEBUG(std::cout << "SET_TOKEN;NODE:" << (owner != nullptr ? owner->getName() : "[NO_OWNER]") << "::"
@@ -204,22 +203,23 @@ void ActivityNodeActivationImpl::addToken(std::shared_ptr<fUML::Semantics::Activ
 		}
 	)
 
-	if (!token->isWithdrawn())
+if (!token->isWithdrawn())
+{
+	token->withdraw();
+	//token = token->_copy();
+	if(token->getMetaElementID() == fUML::Semantics::Activities::ActivitiesPackage::FORKEDTOKEN_CLASS)
 	{
-		token->withdraw();
-		//token = token->_copy();
-		if(token->getMetaElementID() == fUML::Semantics::Activities::ActivitiesPackage::FORKEDTOKEN_CLASS)
-		{
-			token = token->_copy();
-		}
-		
+		token = token->_copy();
 	}
-	token->setHolder(getThisActivityNodeActivationPtr());
-	token->setWithdrawn(false);
+		
+}
 
-	DEBUG_MESSAGE(std::cout<<"[addToken] Adding token with value = " <<token->getValue()<<std::endl;)
+token->setHolder(getThisActivityNodeActivationPtr());
+token->setWithdrawn(false);
 
-	this->getHeldTokens()->push_back(token);
+DEBUG_MESSAGE(std::cout<<"[addToken] Adding token with value = "<<token->getValue()<<std::endl;)
+
+this->getHeldTokens()->push_back(token);
 	//end of body
 }
 

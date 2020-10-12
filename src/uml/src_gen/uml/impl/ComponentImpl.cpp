@@ -478,14 +478,20 @@ std::shared_ptr<ecore::EClass> ComponentImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
-void ComponentImpl::setIsIndirectlyInstantiated(bool _isIndirectlyInstantiated)
-{
-	m_isIndirectlyInstantiated = _isIndirectlyInstantiated;
-} 
+/*
+Getter & Setter for attribute isIndirectlyInstantiated
+*/
 bool ComponentImpl::getIsIndirectlyInstantiated() const 
 {
 	return m_isIndirectlyInstantiated;
 }
+
+void ComponentImpl::setIsIndirectlyInstantiated(bool _isIndirectlyInstantiated)
+{
+	m_isIndirectlyInstantiated = _isIndirectlyInstantiated;
+} 
+
+
 
 //*********************************
 // Operations
@@ -541,6 +547,9 @@ bool ComponentImpl::no_packaged_elements(Any diagnostics,std::map <   Any, Any >
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference packagedElement
+*/
 std::shared_ptr<Subset<uml::PackageableElement, uml::NamedElement>> ComponentImpl::getPackagedElement() const
 {
 	if(m_packagedElement == nullptr)
@@ -563,6 +572,12 @@ std::shared_ptr<Subset<uml::PackageableElement, uml::NamedElement>> ComponentImp
 }
 
 
+
+
+
+/*
+Getter & Setter for reference provided
+*/
 std::shared_ptr<Bag<uml::Interface>> ComponentImpl::getProvided() const
 {
 	if(m_provided == nullptr)
@@ -576,6 +591,12 @@ std::shared_ptr<Bag<uml::Interface>> ComponentImpl::getProvided() const
 }
 
 
+
+
+
+/*
+Getter & Setter for reference realization
+*/
 std::shared_ptr<Subset<uml::ComponentRealization, uml::Element>> ComponentImpl::getRealization() const
 {
 	if(m_realization == nullptr)
@@ -598,6 +619,12 @@ std::shared_ptr<Subset<uml::ComponentRealization, uml::Element>> ComponentImpl::
 }
 
 
+
+
+
+/*
+Getter & Setter for reference required
+*/
 std::shared_ptr<Bag<uml::Interface>> ComponentImpl::getRequired() const
 {
 	if(m_required == nullptr)
@@ -609,6 +636,9 @@ std::shared_ptr<Bag<uml::Interface>> ComponentImpl::getRequired() const
 
     return m_required;
 }
+
+
+
 
 
 //*********************************

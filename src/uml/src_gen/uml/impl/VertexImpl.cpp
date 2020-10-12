@@ -201,16 +201,25 @@ bool VertexImpl::isContainedInState(std::shared_ptr<uml::State>  s)
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference container
+*/
 std::weak_ptr<uml::Region > VertexImpl::getContainer() const
 {
 
     return m_container;
 }
+
 void VertexImpl::setContainer(std::shared_ptr<uml::Region> _container)
 {
     m_container = _container;
 }
 
+
+
+/*
+Getter & Setter for reference incoming
+*/
 std::shared_ptr<Bag<uml::Transition>> VertexImpl::getIncoming() const
 {
 	if(m_incoming == nullptr)
@@ -224,6 +233,12 @@ std::shared_ptr<Bag<uml::Transition>> VertexImpl::getIncoming() const
 }
 
 
+
+
+
+/*
+Getter & Setter for reference outgoing
+*/
 std::shared_ptr<Bag<uml::Transition>> VertexImpl::getOutgoing() const
 {
 	if(m_outgoing == nullptr)
@@ -235,6 +250,9 @@ std::shared_ptr<Bag<uml::Transition>> VertexImpl::getOutgoing() const
 
     return m_outgoing;
 }
+
+
+
 
 
 //*********************************

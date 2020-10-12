@@ -146,8 +146,10 @@ namespace uml
 namespace uml 
 {
 	/*!
-	 A DestroyObjectAction is an Action that destroys objects.
-	<p>From package UML::Actions.</p> */
+	A DestroyObjectAction is an Action that destroys objects.
+	<p>From package UML::Actions.</p>
+	*/
+	
 	class DestroyObjectAction:virtual public Action
 	{
 		public:
@@ -168,13 +170,17 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 The multiplicity of the targe IinputPin is 1..1.
-			target.is(1,1) */ 
+			The multiplicity of the targe IinputPin is 1..1.
+			target.is(1,1)
+			*/
+			 
 			virtual bool multiplicity(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
-			 The target InputPin has no type.
-			target.type= null */ 
+			The target InputPin has no type.
+			target.type= null
+			*/
+			 
 			virtual bool no_type(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
@@ -182,38 +188,49 @@ namespace uml
 			// Attributes Getter Setter
 			//*********************************
 			/*!
-			 Specifies whether links in which the object participates are destroyed along with the object.
-			<p>From package UML::Actions.</p> */ 
+			Specifies whether links in which the object participates are destroyed along with the object.
+			<p>From package UML::Actions.</p>
+			*/
+			 
 			virtual bool getIsDestroyLinks() const = 0;
 			
 			/*!
-			 Specifies whether links in which the object participates are destroyed along with the object.
-			<p>From package UML::Actions.</p> */ 
+			Specifies whether links in which the object participates are destroyed along with the object.
+			<p>From package UML::Actions.</p>
+			*/
+			 
 			virtual void setIsDestroyLinks (bool _isDestroyLinks)= 0; 
-			
 			/*!
-			 Specifies whether objects owned by the object (via composition) are destroyed along with the object.
-			<p>From package UML::Actions.</p> */ 
+			Specifies whether objects owned by the object (via composition) are destroyed along with the object.
+			<p>From package UML::Actions.</p>
+			*/
+			 
 			virtual bool getIsDestroyOwnedObjects() const = 0;
 			
 			/*!
-			 Specifies whether objects owned by the object (via composition) are destroyed along with the object.
-			<p>From package UML::Actions.</p> */ 
+			Specifies whether objects owned by the object (via composition) are destroyed along with the object.
+			<p>From package UML::Actions.</p>
+			*/
+			 
 			virtual void setIsDestroyOwnedObjects (bool _isDestroyOwnedObjects)= 0; 
-			
 			
 			//*********************************
 			// Reference
 			//*********************************
 			/*!
-			 The InputPin providing the object to be destroyed.
-			<p>From package UML::Actions.</p> */
+			The InputPin providing the object to be destroyed.
+			<p>From package UML::Actions.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::InputPin > getTarget() const = 0;
 			
 			/*!
-			 The InputPin providing the object to be destroyed.
-			<p>From package UML::Actions.</p> */
-			virtual void setTarget(std::shared_ptr<uml::InputPin> _target_target) = 0;
+			The InputPin providing the object to be destroyed.
+			<p>From package UML::Actions.</p>
+			*/
+			
+			virtual void setTarget(std::shared_ptr<uml::InputPin> _target) = 0;
+			
 			
 
 		protected:
@@ -221,12 +238,16 @@ namespace uml
 			// Attribute Members
 			//*********************************
 			/*!
-			 Specifies whether links in which the object participates are destroyed along with the object.
-			<p>From package UML::Actions.</p> */ 
+			Specifies whether links in which the object participates are destroyed along with the object.
+			<p>From package UML::Actions.</p>
+			*/
+			 
 			bool m_isDestroyLinks = false;
 			/*!
-			 Specifies whether objects owned by the object (via composition) are destroyed along with the object.
-			<p>From package UML::Actions.</p> */ 
+			Specifies whether objects owned by the object (via composition) are destroyed along with the object.
+			<p>From package UML::Actions.</p>
+			*/
+			 
 			bool m_isDestroyOwnedObjects = false;
 			
 			
@@ -234,30 +255,41 @@ namespace uml
 			// Reference Members
 			//*********************************
 			/*!
-			 The InputPin providing the object to be destroyed.
-			<p>From package UML::Actions.</p> */
-			std::shared_ptr<uml::InputPin > m_target;
+			The InputPin providing the object to be destroyed.
+			<p>From package UML::Actions.</p>
+			*/
 			
+			std::shared_ptr<uml::InputPin > m_target;
 
 		public:
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p> */
+			ActivityGroups containing the ActivityNode.
+			<p>From package UML::Activities.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::ActivityGroup>> getInGroup() const = 0;/*!
-			 The ordered set of InputPins representing the inputs to the Action.
-			<p>From package UML::Actions.</p> */
+			The ordered set of InputPins representing the inputs to the Action.
+			<p>From package UML::Actions.</p>
+			*/
+			
 			virtual std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element>> getInput() const = 0;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
+			The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

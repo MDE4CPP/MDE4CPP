@@ -55,8 +55,10 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 An ExtensionPoint must have a name.
-			name->notEmpty () */ 
+			An ExtensionPoint must have a name.
+			name->notEmpty ()
+			*/
+			 
 			virtual bool must_have_name(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
@@ -70,28 +72,39 @@ namespace uml
 			// Reference
 			//*********************************
 			/*!
-			 The UseCase that owns this ExtensionPoint.
-			<p>From package UML::UseCases.</p> */
+			The UseCase that owns this ExtensionPoint.
+			<p>From package UML::UseCases.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::UseCase > getUseCase() const ;
 			
 			/*!
-			 The UseCase that owns this ExtensionPoint.
-			<p>From package UML::UseCases.</p> */
-			virtual void setUseCase(std::shared_ptr<uml::UseCase> _useCase_useCase) ;
+			The UseCase that owns this ExtensionPoint.
+			<p>From package UML::UseCases.</p>
+			*/
+			
+			virtual void setUseCase(std::shared_ptr<uml::UseCase> _useCase) ;
+			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************

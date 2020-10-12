@@ -184,6 +184,9 @@ bool CollaborationUseImpl::every_role(Any diagnostics,std::map <   Any, Any >  c
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference roleBinding
+*/
 std::shared_ptr<Subset<uml::Dependency, uml::Element>> CollaborationUseImpl::getRoleBinding() const
 {
 	if(m_roleBinding == nullptr)
@@ -206,15 +209,24 @@ std::shared_ptr<Subset<uml::Dependency, uml::Element>> CollaborationUseImpl::get
 }
 
 
+
+
+
+/*
+Getter & Setter for reference type
+*/
 std::shared_ptr<uml::Collaboration > CollaborationUseImpl::getType() const
 {
 //assert(m_type);
     return m_type;
 }
+
 void CollaborationUseImpl::setType(std::shared_ptr<uml::Collaboration> _type)
 {
     m_type = _type;
 }
+
+
 
 //*********************************
 // Union Getter

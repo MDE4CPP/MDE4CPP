@@ -159,6 +159,9 @@ bool TemplateSignatureImpl::unique_parameters(Any diagnostics,std::map <   Any, 
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference ownedParameter
+*/
 std::shared_ptr<Subset<uml::TemplateParameter, uml::Element,uml::TemplateParameter>> TemplateSignatureImpl::getOwnedParameter() const
 {
 	if(m_ownedParameter == nullptr)
@@ -184,15 +187,30 @@ std::shared_ptr<Subset<uml::TemplateParameter, uml::Element,uml::TemplateParamet
 
 
 
+/*
+Getter & Setter for reference parameter
+*/
+
+
+
+
+
+
+/*
+Getter & Setter for reference template
+*/
 std::weak_ptr<uml::TemplateableElement > TemplateSignatureImpl::getTemplate() const
 {
 //assert(m_template);
     return m_template;
 }
+
 void TemplateSignatureImpl::setTemplate(std::shared_ptr<uml::TemplateableElement> _template)
 {
     m_template = _template;
 }
+
+
 
 //*********************************
 // Union Getter
