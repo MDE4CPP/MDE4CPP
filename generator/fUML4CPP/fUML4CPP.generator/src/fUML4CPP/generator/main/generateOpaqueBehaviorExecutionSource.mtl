@@ -351,7 +351,7 @@ if (literal[par.name.toUpperFirst()/] == [literal.generatePackageGetterCall()/])
 }
 [/for]
 [elseif (not par.type.supportedTypes())]
-std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> [par.name/]Value = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_eference>([par.name/]ValueList->front());
+std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> [par.name/]Value = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>([par.name/]ValueList->front());
 [par.name/] = std::dynamic_pointer_cast<[par.type.name/]Object>([par.name/]Value->getReferent())->[par.type.oclAsType(Classifier).UMLValueGetterName()/]();
 if([par.name/] == nullptr)
 {
