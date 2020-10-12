@@ -57,30 +57,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 GeneralizationImpl::GeneralizationImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-		m_generalizationSet.reset(new Bag<uml::GeneralizationSet>());
-	
-	
-
-	
-
-	//Init references
-	
-
-	
-	
-
-	
+{	
 }
 
 GeneralizationImpl::~GeneralizationImpl()
@@ -90,23 +67,20 @@ GeneralizationImpl::~GeneralizationImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+GeneralizationImpl::GeneralizationImpl(std::weak_ptr<uml::Element > par_owner)
+:GeneralizationImpl()
+{
+	m_owner = par_owner;
+}
 
 //Additional constructor for the containments back reference
-			GeneralizationImpl::GeneralizationImpl(std::weak_ptr<uml::Element > par_owner)
-			:GeneralizationImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-//Additional constructor for the containments back reference
-			GeneralizationImpl::GeneralizationImpl(std::weak_ptr<uml::Classifier > par_specific)
-			:GeneralizationImpl()
-			{
-			    m_specific = par_specific;
-				m_owner = par_specific;
-			}
-
+GeneralizationImpl::GeneralizationImpl(std::weak_ptr<uml::Classifier > par_specific)
+:GeneralizationImpl()
+{
+	m_specific = par_specific;
+	m_owner = par_specific;
+}
 
 
 GeneralizationImpl::GeneralizationImpl(const GeneralizationImpl & obj):GeneralizationImpl()
@@ -169,7 +143,6 @@ void GeneralizationImpl::setIsSubstitutable(bool _isSubstitutable)
 {
 	m_isSubstitutable = _isSubstitutable;
 } 
-
 bool GeneralizationImpl::getIsSubstitutable() const 
 {
 	return m_isSubstitutable;
@@ -194,6 +167,12 @@ void GeneralizationImpl::setGeneral(std::shared_ptr<uml::Classifier> _general)
 
 std::shared_ptr<Bag<uml::GeneralizationSet>> GeneralizationImpl::getGeneralizationSet() const
 {
+	if(m_generalizationSet == nullptr)
+	{
+		m_generalizationSet.reset(new Bag<uml::GeneralizationSet>());
+		
+		
+	}
 
     return m_generalizationSet;
 }
@@ -214,24 +193,80 @@ void GeneralizationImpl::setSpecific(std::shared_ptr<uml::Classifier> _specific)
 //*********************************
 std::shared_ptr<Union<uml::Element>> GeneralizationImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > GeneralizationImpl::getOwner() const
 {
 	return m_owner;
 }
+
 std::shared_ptr<Union<uml::Element>> GeneralizationImpl::getRelatedElement() const
 {
+	if(m_relatedElement == nullptr)
+	{
+		/*Union*/
+		m_relatedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_relatedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_relatedElement;
 }
+
 std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> GeneralizationImpl::getSource() const
 {
+	if(m_source == nullptr)
+	{
+		/*SubsetUnion*/
+		m_source.reset(new SubsetUnion<uml::Element, uml::Element >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_source - SubsetUnion<uml::Element, uml::Element >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_source->initSubsetUnion(getRelatedElement());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_source - SubsetUnion<uml::Element, uml::Element >(getRelatedElement())" << std::endl;
+		#endif
+		
+	}
 	return m_source;
 }
+
 std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> GeneralizationImpl::getTarget() const
 {
+	if(m_target == nullptr)
+	{
+		/*SubsetUnion*/
+		m_target.reset(new SubsetUnion<uml::Element, uml::Element >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_target - SubsetUnion<uml::Element, uml::Element >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_target->initSubsetUnion(getRelatedElement());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_target - SubsetUnion<uml::Element, uml::Element >(getRelatedElement())" << std::endl;
+		#endif
+		
+	}
 	return m_target;
 }
+
+
 
 
 std::shared_ptr<Generalization> GeneralizationImpl::getThisGeneralizationPtr() const

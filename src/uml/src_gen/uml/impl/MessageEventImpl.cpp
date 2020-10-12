@@ -63,17 +63,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 MessageEventImpl::MessageEventImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 MessageEventImpl::~MessageEventImpl()
@@ -83,41 +73,36 @@ MessageEventImpl::~MessageEventImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+MessageEventImpl::MessageEventImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:MessageEventImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			MessageEventImpl::MessageEventImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:MessageEventImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
+MessageEventImpl::MessageEventImpl(std::weak_ptr<uml::Element > par_owner)
+:MessageEventImpl()
+{
+	m_owner = par_owner;
+}
 
 //Additional constructor for the containments back reference
-			MessageEventImpl::MessageEventImpl(std::weak_ptr<uml::Element > par_owner)
-			:MessageEventImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-//Additional constructor for the containments back reference
-			MessageEventImpl::MessageEventImpl(std::weak_ptr<uml::Package > par_owningPackage)
-			:MessageEventImpl()
-			{
-			    m_owningPackage = par_owningPackage;
-				m_namespace = par_owningPackage;
-			}
-
+MessageEventImpl::MessageEventImpl(std::weak_ptr<uml::Package > par_owningPackage)
+:MessageEventImpl()
+{
+	m_owningPackage = par_owningPackage;
+	m_namespace = par_owningPackage;
+}
 
 //Additional constructor for the containments back reference
-			MessageEventImpl::MessageEventImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
-			:MessageEventImpl()
-			{
-			    m_owningTemplateParameter = par_owningTemplateParameter;
-				m_owner = par_owningTemplateParameter;
-			}
-
+MessageEventImpl::MessageEventImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+:MessageEventImpl()
+{
+	m_owningTemplateParameter = par_owningTemplateParameter;
+	m_owner = par_owningTemplateParameter;
+}
 
 
 MessageEventImpl::MessageEventImpl(const MessageEventImpl & obj):MessageEventImpl()
@@ -197,14 +182,28 @@ std::weak_ptr<uml::Namespace > MessageEventImpl::getNamespace() const
 {
 	return m_namespace;
 }
+
 std::shared_ptr<Union<uml::Element>> MessageEventImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > MessageEventImpl::getOwner() const
 {
 	return m_owner;
 }
+
+
 
 
 std::shared_ptr<MessageEvent> MessageEventImpl::getThisMessageEventPtr() const

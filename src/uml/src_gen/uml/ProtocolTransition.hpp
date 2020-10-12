@@ -241,7 +241,7 @@ namespace uml
 			/*!
 			 This association refers to the associated Operation. It is derived from the Operation of the CallEvent Trigger when applicable.
 			<p>From package UML::StateMachines.</p> */
-			std::shared_ptr<Bag<uml::Operation>> m_referred;
+			mutable std::shared_ptr<Bag<uml::Operation>> m_referred;
 			
 
 		public:

@@ -174,7 +174,7 @@ namespace uml
 			/*!
 			 A mapping between features of the Collaboration and features of the owning Classifier. This mapping indicates which ConnectableElement of the Classifier plays which role(s) in the Collaboration. A ConnectableElement may be bound to multiple roles in the same CollaborationUse (that is, it may play multiple roles).
 			<p>From package UML::StructuredClassifiers.</p> */
-			std::shared_ptr<Subset<uml::Dependency, uml::Element>> m_roleBinding;
+			mutable std::shared_ptr<Subset<uml::Dependency, uml::Element>> m_roleBinding;
 			/*!
 			 The Collaboration which is used in this CollaborationUse. The Collaboration defines the cooperation between its roles which are mapped to ConnectableElements relating to the Classifier owning the CollaborationUse.
 			<p>From package UML::StructuredClassifiers.</p> */

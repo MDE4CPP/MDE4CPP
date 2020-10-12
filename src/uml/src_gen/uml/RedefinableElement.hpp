@@ -177,11 +177,11 @@ namespace uml
 			/*!
 			 The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p> */
-			std::shared_ptr<Union<uml::RedefinableElement>> m_redefinedElement;
+			mutable std::shared_ptr<Union<uml::RedefinableElement>> m_redefinedElement;
 			/*!
 			 The contexts that this element may be redefined from.
 			<p>From package UML::Classification.</p> */
-			std::shared_ptr<Union<uml::Classifier>> m_redefinitionContext;
+			mutable std::shared_ptr<Union<uml::Classifier>> m_redefinitionContext;
 			
 
 		public:

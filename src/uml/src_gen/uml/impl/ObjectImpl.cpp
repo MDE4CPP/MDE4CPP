@@ -54,17 +54,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 ObjectImpl::ObjectImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 ObjectImpl::~ObjectImpl()
@@ -73,7 +63,6 @@ ObjectImpl::~ObjectImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete Object "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -142,6 +131,7 @@ void ObjectImpl::unset(std::shared_ptr<uml::Property>  property)
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<Object> ObjectImpl::getThisObjectPtr() const

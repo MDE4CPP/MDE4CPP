@@ -238,7 +238,7 @@ namespace uml
 			/*!
 			 A set of Classifiers to be added to the Classifiers of the given object.
 			<p>From package UML::Actions.</p> */
-			std::shared_ptr<Bag<uml::Classifier>> m_newClassifier;
+			mutable std::shared_ptr<Bag<uml::Classifier>> m_newClassifier;
 			/*!
 			 The InputPin that holds the object to be reclassified.
 			<p>From package UML::Actions.</p> */
@@ -246,7 +246,7 @@ namespace uml
 			/*!
 			 A set of Classifiers to be removed from the Classifiers of the given object.
 			<p>From package UML::Actions.</p> */
-			std::shared_ptr<Bag<uml::Classifier>> m_oldClassifier;
+			mutable std::shared_ptr<Bag<uml::Classifier>> m_oldClassifier;
 			
 
 		public:

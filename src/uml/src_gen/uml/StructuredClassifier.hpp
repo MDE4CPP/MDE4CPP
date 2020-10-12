@@ -255,19 +255,19 @@ namespace uml
 			/*!
 			 The Properties owned by the StructuredClassifier.
 			<p>From package UML::StructuredClassifiers.</p> */
-			std::shared_ptr<SubsetUnion<uml::Property, uml::Property,uml::NamedElement,uml::ConnectableElement>> m_ownedAttribute;
+			mutable std::shared_ptr<SubsetUnion<uml::Property, uml::Property,uml::NamedElement,uml::ConnectableElement>> m_ownedAttribute;
 			/*!
 			 The connectors owned by the StructuredClassifier.
 			<p>From package UML::StructuredClassifiers.</p> */
-			std::shared_ptr<Subset<uml::Connector, uml::Feature,uml::NamedElement>> m_ownedConnector;
+			mutable std::shared_ptr<Subset<uml::Connector, uml::Feature,uml::NamedElement>> m_ownedConnector;
 			/*!
 			 The Properties specifying instances that the StructuredClassifier owns by composition. This collection is derived, selecting those owned Properties where isComposite is true.
 			<p>From package UML::StructuredClassifiers.</p> */
-			std::shared_ptr<Bag<uml::Property>> m_part;
+			mutable std::shared_ptr<Bag<uml::Property>> m_part;
 			/*!
 			 The roles that instances may play in this StructuredClassifier.
 			<p>From package UML::StructuredClassifiers.</p> */
-			std::shared_ptr<SubsetUnion<uml::ConnectableElement, uml::NamedElement>> m_role;
+			mutable std::shared_ptr<SubsetUnion<uml::ConnectableElement, uml::NamedElement>> m_role;
 			
 
 		public:

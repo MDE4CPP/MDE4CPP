@@ -78,35 +78,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 StringExpressionImpl::StringExpressionImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-		/*Subset*/
-		m_subExpression.reset(new Subset<uml::StringExpression, uml::Element >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_subExpression - Subset<uml::StringExpression, uml::Element >()" << std::endl;
-		#endif
-	
-	
-
-	//Init references
-	
-
-		/*Subset*/
-		m_subExpression->initSubset(m_ownedElement);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_subExpression - Subset<uml::StringExpression, uml::Element >(m_ownedElement)" << std::endl;
-		#endif
-	
-	
+{	
 }
 
 StringExpressionImpl::~StringExpressionImpl()
@@ -116,68 +88,60 @@ StringExpressionImpl::~StringExpressionImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+StringExpressionImpl::StringExpressionImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:StringExpressionImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			StringExpressionImpl::StringExpressionImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:StringExpressionImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
+StringExpressionImpl::StringExpressionImpl(std::weak_ptr<uml::Element > par_owner)
+:StringExpressionImpl()
+{
+	m_owner = par_owner;
+}
 
 //Additional constructor for the containments back reference
-			StringExpressionImpl::StringExpressionImpl(std::weak_ptr<uml::Element > par_owner)
-			:StringExpressionImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-//Additional constructor for the containments back reference
-			StringExpressionImpl::StringExpressionImpl(std::weak_ptr<uml::StringExpression > par_owningExpression)
-			:StringExpressionImpl()
-			{
-			    m_owningExpression = par_owningExpression;
-				m_owner = par_owningExpression;
-			}
-
+StringExpressionImpl::StringExpressionImpl(std::weak_ptr<uml::StringExpression > par_owningExpression)
+:StringExpressionImpl()
+{
+	m_owningExpression = par_owningExpression;
+	m_owner = par_owningExpression;
+}
 
 //Additional constructor for the containments back reference
-			StringExpressionImpl::StringExpressionImpl(std::weak_ptr<uml::Package > par_owningPackage)
-			:StringExpressionImpl()
-			{
-			    m_owningPackage = par_owningPackage;
-				m_namespace = par_owningPackage;
-			}
-
-
-//Additional constructor for the containments back reference
-			StringExpressionImpl::StringExpressionImpl(std::weak_ptr<uml::Slot > par_owningSlot)
-			:StringExpressionImpl()
-			{
-			    m_owningSlot = par_owningSlot;
-				m_owner = par_owningSlot;
-			}
-
+StringExpressionImpl::StringExpressionImpl(std::weak_ptr<uml::Package > par_owningPackage)
+:StringExpressionImpl()
+{
+	m_owningPackage = par_owningPackage;
+	m_namespace = par_owningPackage;
+}
 
 //Additional constructor for the containments back reference
-			StringExpressionImpl::StringExpressionImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
-			:StringExpressionImpl()
-			{
-			    m_owningTemplateParameter = par_owningTemplateParameter;
-				m_owner = par_owningTemplateParameter;
-			}
-
+StringExpressionImpl::StringExpressionImpl(std::weak_ptr<uml::Slot > par_owningSlot)
+:StringExpressionImpl()
+{
+	m_owningSlot = par_owningSlot;
+	m_owner = par_owningSlot;
+}
 
 //Additional constructor for the containments back reference
-			StringExpressionImpl::StringExpressionImpl(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction)
-			:StringExpressionImpl()
-			{
-			    m_valueSpecificationAction = par_valueSpecificationAction;
-				m_owner = par_valueSpecificationAction;
-			}
+StringExpressionImpl::StringExpressionImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+:StringExpressionImpl()
+{
+	m_owningTemplateParameter = par_owningTemplateParameter;
+	m_owner = par_owningTemplateParameter;
+}
 
+//Additional constructor for the containments back reference
+StringExpressionImpl::StringExpressionImpl(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction)
+:StringExpressionImpl()
+{
+	m_valueSpecificationAction = par_valueSpecificationAction;
+	m_owner = par_valueSpecificationAction;
+}
 
 
 StringExpressionImpl::StringExpressionImpl(const StringExpressionImpl & obj):StringExpressionImpl()
@@ -264,12 +228,11 @@ StringExpressionImpl::StringExpressionImpl(const StringExpressionImpl & obj):Str
 		std::cout << "Copying the Subset: " << "m_templateBinding" << std::endl;
 	#endif
 
-		/*Subset*/
-		m_subExpression->initSubset(m_ownedElement);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_subExpression - Subset<uml::StringExpression, uml::Element >(m_ownedElement)" << std::endl;
-		#endif
-	
+	/*Subset*/
+	m_subExpression->initSubset(getOwnedElement());
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Initialising value Subset: " << "m_subExpression - Subset<uml::StringExpression, uml::Element >(getOwnedElement())" << std::endl;
+	#endif
 	
 }
 
@@ -319,6 +282,21 @@ void StringExpressionImpl::setOwningExpression(std::shared_ptr<uml::StringExpres
 
 std::shared_ptr<Subset<uml::StringExpression, uml::Element>> StringExpressionImpl::getSubExpression() const
 {
+	if(m_subExpression == nullptr)
+	{
+		/*Subset*/
+		m_subExpression.reset(new Subset<uml::StringExpression, uml::Element >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_subExpression - Subset<uml::StringExpression, uml::Element >()" << std::endl;
+		#endif
+		
+		/*Subset*/
+		m_subExpression->initSubset(getOwnedElement());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_subExpression - Subset<uml::StringExpression, uml::Element >(getOwnedElement())" << std::endl;
+		#endif
+		
+	}
 
     return m_subExpression;
 }
@@ -331,14 +309,28 @@ std::weak_ptr<uml::Namespace > StringExpressionImpl::getNamespace() const
 {
 	return m_namespace;
 }
+
 std::shared_ptr<Union<uml::Element>> StringExpressionImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > StringExpressionImpl::getOwner() const
 {
 	return m_owner;
 }
+
+
 
 
 std::shared_ptr<StringExpression> StringExpressionImpl::getThisStringExpressionPtr() const

@@ -275,10 +275,12 @@ namespace uml
 			/*!
 			 Specifies the behavior in one or more languages.
 			<p>From package UML::CommonBehavior.</p> */ 
-			std::shared_ptr<Bag<std::string> > m_body; /*!
+			mutable std::shared_ptr<Bag<std::string> > m_body; 
+			/*!
 			 Languages the body strings use in the same order as the body strings.
 			<p>From package UML::CommonBehavior.</p> */ 
-			std::shared_ptr<Bag<std::string> > m_language; 
+			mutable std::shared_ptr<Bag<std::string> > m_language; 
+			
 			
 			//*********************************
 			// Reference Members

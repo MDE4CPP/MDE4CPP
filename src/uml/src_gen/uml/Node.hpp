@@ -296,7 +296,7 @@ namespace uml
 			/*!
 			 The Nodes that are defined (nested) within the Node.
 			<p>From package UML::Deployments.</p> */
-			std::shared_ptr<Subset<uml::Node, uml::NamedElement>> m_nestedNode;
+			mutable std::shared_ptr<Subset<uml::Node, uml::NamedElement>> m_nestedNode;
 			
 
 		public:

@@ -272,11 +272,11 @@ namespace uml
 			/*!
 			 ActivityGroups containing the ActivityEdge.
 			<p>From package UML::Activities.</p> */
-			std::shared_ptr<Union<uml::ActivityGroup>> m_inGroup;
+			mutable std::shared_ptr<Union<uml::ActivityGroup>> m_inGroup;
 			/*!
 			 ActivityPartitions containing the ActivityEdge.
 			<p>From package UML::Activities.</p> */
-			std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup>> m_inPartition;
+			mutable std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup>> m_inPartition;
 			/*!
 			 The StructuredActivityNode containing the ActivityEdge, if it is owned by a StructuredActivityNode.
 			<p>From package UML::Activities.</p> */
@@ -288,7 +288,7 @@ namespace uml
 			/*!
 			 ActivityEdges from a generalization of the Activity containing this ActivityEdge that are redefined by this ActivityEdge.
 			<p>From package UML::Activities.</p> */
-			std::shared_ptr<Subset<uml::ActivityEdge, uml::RedefinableElement>> m_redefinedEdge;
+			mutable std::shared_ptr<Subset<uml::ActivityEdge, uml::RedefinableElement>> m_redefinedEdge;
 			/*!
 			 The ActivityNode from which tokens are taken when they traverse the ActivityEdge.
 			<p>From package UML::Activities.</p> */

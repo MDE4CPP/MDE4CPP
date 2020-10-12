@@ -69,17 +69,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 LiteralStringImpl::LiteralStringImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 LiteralStringImpl::~LiteralStringImpl()
@@ -89,59 +79,52 @@ LiteralStringImpl::~LiteralStringImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+LiteralStringImpl::LiteralStringImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:LiteralStringImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			LiteralStringImpl::LiteralStringImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:LiteralStringImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
+LiteralStringImpl::LiteralStringImpl(std::weak_ptr<uml::Element > par_owner)
+:LiteralStringImpl()
+{
+	m_owner = par_owner;
+}
 
 //Additional constructor for the containments back reference
-			LiteralStringImpl::LiteralStringImpl(std::weak_ptr<uml::Element > par_owner)
-			:LiteralStringImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-//Additional constructor for the containments back reference
-			LiteralStringImpl::LiteralStringImpl(std::weak_ptr<uml::Package > par_owningPackage)
-			:LiteralStringImpl()
-			{
-			    m_owningPackage = par_owningPackage;
-				m_namespace = par_owningPackage;
-			}
-
+LiteralStringImpl::LiteralStringImpl(std::weak_ptr<uml::Package > par_owningPackage)
+:LiteralStringImpl()
+{
+	m_owningPackage = par_owningPackage;
+	m_namespace = par_owningPackage;
+}
 
 //Additional constructor for the containments back reference
-			LiteralStringImpl::LiteralStringImpl(std::weak_ptr<uml::Slot > par_owningSlot)
-			:LiteralStringImpl()
-			{
-			    m_owningSlot = par_owningSlot;
-				m_owner = par_owningSlot;
-			}
-
-
-//Additional constructor for the containments back reference
-			LiteralStringImpl::LiteralStringImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
-			:LiteralStringImpl()
-			{
-			    m_owningTemplateParameter = par_owningTemplateParameter;
-				m_owner = par_owningTemplateParameter;
-			}
-
+LiteralStringImpl::LiteralStringImpl(std::weak_ptr<uml::Slot > par_owningSlot)
+:LiteralStringImpl()
+{
+	m_owningSlot = par_owningSlot;
+	m_owner = par_owningSlot;
+}
 
 //Additional constructor for the containments back reference
-			LiteralStringImpl::LiteralStringImpl(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction)
-			:LiteralStringImpl()
-			{
-			    m_valueSpecificationAction = par_valueSpecificationAction;
-				m_owner = par_valueSpecificationAction;
-			}
+LiteralStringImpl::LiteralStringImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+:LiteralStringImpl()
+{
+	m_owningTemplateParameter = par_owningTemplateParameter;
+	m_owner = par_owningTemplateParameter;
+}
 
+//Additional constructor for the containments back reference
+LiteralStringImpl::LiteralStringImpl(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction)
+:LiteralStringImpl()
+{
+	m_valueSpecificationAction = par_valueSpecificationAction;
+	m_owner = par_valueSpecificationAction;
+}
 
 
 LiteralStringImpl::LiteralStringImpl(const LiteralStringImpl & obj):LiteralStringImpl()
@@ -216,7 +199,6 @@ void LiteralStringImpl::setValue(std::string _value)
 {
 	m_value = _value;
 } 
-
 std::string LiteralStringImpl::getValue() const 
 {
 	return m_value;
@@ -252,14 +234,28 @@ std::weak_ptr<uml::Namespace > LiteralStringImpl::getNamespace() const
 {
 	return m_namespace;
 }
+
 std::shared_ptr<Union<uml::Element>> LiteralStringImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > LiteralStringImpl::getOwner() const
 {
 	return m_owner;
 }
+
+
 
 
 std::shared_ptr<LiteralString> LiteralStringImpl::getThisLiteralStringPtr() const

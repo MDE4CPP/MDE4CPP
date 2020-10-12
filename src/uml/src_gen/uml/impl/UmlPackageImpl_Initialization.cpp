@@ -5033,6 +5033,14 @@ void UmlPackageImpl::initializeClassContent()
 		parameter->setOrdered(true);
 	}
 	
+	m_class_Operation_getAllOperations->setEType(getOperation_Class());
+	m_class_Operation_getAllOperations->setName("getAllOperations");
+	m_class_Operation_getAllOperations->setLowerBound(0);
+	m_class_Operation_getAllOperations->setUpperBound(-1);
+	m_class_Operation_getAllOperations->setUnique(true);
+	m_class_Operation_getAllOperations->setOrdered(false);
+	
+	
 	m_class_Operation_getExtensions->setEType(getExtension_Class());
 	m_class_Operation_getExtensions->setName("getExtensions");
 	m_class_Operation_getExtensions->setLowerBound(0);

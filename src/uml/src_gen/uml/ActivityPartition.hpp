@@ -267,11 +267,11 @@ namespace uml
 			/*!
 			 ActivityEdges immediately contained in the ActivityPartition.
 			<p>From package UML::Activities.</p> */
-			std::shared_ptr<Subset<uml::ActivityEdge, uml::ActivityEdge>> m_edge;
+			mutable std::shared_ptr<Subset<uml::ActivityEdge, uml::ActivityEdge>> m_edge;
 			/*!
 			 ActivityNodes immediately contained in the ActivityPartition.
 			<p>From package UML::Activities.</p> */
-			std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode>> m_node;
+			mutable std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode>> m_node;
 			/*!
 			 An Element represented by the functionality modeled within the ActivityPartition.
 			<p>From package UML::Activities.</p> */
@@ -279,7 +279,7 @@ namespace uml
 			/*!
 			 Other ActivityPartitions immediately contained in this ActivityPartition (as its subgroups).
 			<p>From package UML::Activities.</p> */
-			std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup>> m_subpartition;
+			mutable std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup>> m_subpartition;
 			/*!
 			 Other ActivityPartitions immediately containing this ActivityPartition (as its superGroups).
 			<p>From package UML::Activities.</p> */

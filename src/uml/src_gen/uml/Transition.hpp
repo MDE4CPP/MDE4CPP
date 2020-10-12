@@ -365,7 +365,7 @@ namespace uml
 			/*!
 			 Specifies the Triggers that may fire the transition.
 			<p>From package UML::StateMachines.</p> */
-			std::shared_ptr<Subset<uml::Trigger, uml::Element>> m_trigger;
+			mutable std::shared_ptr<Subset<uml::Trigger, uml::Element>> m_trigger;
 			
 
 		public:

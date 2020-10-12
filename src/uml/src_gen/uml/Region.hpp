@@ -302,11 +302,11 @@ namespace uml
 			/*!
 			 The set of Vertices that are owned by this Region.
 			<p>From package UML::StateMachines.</p> */
-			std::shared_ptr<Subset<uml::Vertex, uml::NamedElement>> m_subvertex;
+			mutable std::shared_ptr<Subset<uml::Vertex, uml::NamedElement>> m_subvertex;
 			/*!
 			 The set of Transitions owned by the Region.
 			<p>From package UML::StateMachines.</p> */
-			std::shared_ptr<Subset<uml::Transition, uml::NamedElement>> m_transition;
+			mutable std::shared_ptr<Subset<uml::Transition, uml::NamedElement>> m_transition;
 			
 
 		public:

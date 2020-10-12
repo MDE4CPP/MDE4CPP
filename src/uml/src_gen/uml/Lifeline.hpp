@@ -262,7 +262,7 @@ namespace uml
 			/*!
 			 References the InteractionFragments in which this Lifeline takes part.
 			<p>From package UML::Interactions.</p> */
-			std::shared_ptr<Bag<uml::InteractionFragment>> m_coveredBy;
+			mutable std::shared_ptr<Bag<uml::InteractionFragment>> m_coveredBy;
 			/*!
 			 References the Interaction that represents the decomposition.
 			<p>From package UML::Interactions.</p> */

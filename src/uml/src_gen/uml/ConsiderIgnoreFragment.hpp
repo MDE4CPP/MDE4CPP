@@ -171,7 +171,7 @@ namespace uml
 			/*!
 			 The set of messages that apply to this fragment.
 			<p>From package UML::Interactions.</p> */
-			std::shared_ptr<Bag<uml::NamedElement>> m_message;
+			mutable std::shared_ptr<Bag<uml::NamedElement>> m_message;
 			
 
 		public:

@@ -67,33 +67,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 VertexImpl::VertexImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-		m_incoming.reset(new Bag<uml::Transition>());
-	
-	
-
-		m_outgoing.reset(new Bag<uml::Transition>());
-	
-	
-
-	//Init references
-	
-
-	
-	
-
-	
-	
+{	
 }
 
 VertexImpl::~VertexImpl()
@@ -103,32 +77,28 @@ VertexImpl::~VertexImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+VertexImpl::VertexImpl(std::weak_ptr<uml::Region > par_container)
+:VertexImpl()
+{
+	m_container = par_container;
+	m_namespace = par_container;
+}
 
 //Additional constructor for the containments back reference
-			VertexImpl::VertexImpl(std::weak_ptr<uml::Region > par_container)
-			:VertexImpl()
-			{
-			    m_container = par_container;
-				m_namespace = par_container;
-			}
-
-
-//Additional constructor for the containments back reference
-			VertexImpl::VertexImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:VertexImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
+VertexImpl::VertexImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:VertexImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			VertexImpl::VertexImpl(std::weak_ptr<uml::Element > par_owner)
-			:VertexImpl()
-			{
-			    m_owner = par_owner;
-			}
-
+VertexImpl::VertexImpl(std::weak_ptr<uml::Element > par_owner)
+:VertexImpl()
+{
+	m_owner = par_owner;
+}
 
 
 VertexImpl::VertexImpl(const VertexImpl & obj):VertexImpl()
@@ -243,6 +213,12 @@ void VertexImpl::setContainer(std::shared_ptr<uml::Region> _container)
 
 std::shared_ptr<Bag<uml::Transition>> VertexImpl::getIncoming() const
 {
+	if(m_incoming == nullptr)
+	{
+		m_incoming.reset(new Bag<uml::Transition>());
+		
+		
+	}
 
     return m_incoming;
 }
@@ -250,6 +226,12 @@ std::shared_ptr<Bag<uml::Transition>> VertexImpl::getIncoming() const
 
 std::shared_ptr<Bag<uml::Transition>> VertexImpl::getOutgoing() const
 {
+	if(m_outgoing == nullptr)
+	{
+		m_outgoing.reset(new Bag<uml::Transition>());
+		
+		
+	}
 
     return m_outgoing;
 }
@@ -262,14 +244,28 @@ std::weak_ptr<uml::Namespace > VertexImpl::getNamespace() const
 {
 	return m_namespace;
 }
+
 std::shared_ptr<Union<uml::Element>> VertexImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > VertexImpl::getOwner() const
 {
 	return m_owner;
 }
+
+
 
 
 std::shared_ptr<Vertex> VertexImpl::getThisVertexPtr() const

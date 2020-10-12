@@ -59,22 +59,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 ClassifierTemplateParameterImpl::ClassifierTemplateParameterImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-		m_constrainingClassifier.reset(new Bag<uml::Classifier>());
-	
-	
-
-	//Init references
-	
-	
+{	
 }
 
 ClassifierTemplateParameterImpl::~ClassifierTemplateParameterImpl()
@@ -84,23 +69,20 @@ ClassifierTemplateParameterImpl::~ClassifierTemplateParameterImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+ClassifierTemplateParameterImpl::ClassifierTemplateParameterImpl(std::weak_ptr<uml::Element > par_owner)
+:ClassifierTemplateParameterImpl()
+{
+	m_owner = par_owner;
+}
 
 //Additional constructor for the containments back reference
-			ClassifierTemplateParameterImpl::ClassifierTemplateParameterImpl(std::weak_ptr<uml::Element > par_owner)
-			:ClassifierTemplateParameterImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-//Additional constructor for the containments back reference
-			ClassifierTemplateParameterImpl::ClassifierTemplateParameterImpl(std::weak_ptr<uml::TemplateSignature > par_signature)
-			:ClassifierTemplateParameterImpl()
-			{
-			    m_signature = par_signature;
-				m_owner = par_signature;
-			}
-
+ClassifierTemplateParameterImpl::ClassifierTemplateParameterImpl(std::weak_ptr<uml::TemplateSignature > par_signature)
+:ClassifierTemplateParameterImpl()
+{
+	m_signature = par_signature;
+	m_owner = par_signature;
+}
 
 
 ClassifierTemplateParameterImpl::ClassifierTemplateParameterImpl(const ClassifierTemplateParameterImpl & obj):ClassifierTemplateParameterImpl()
@@ -171,7 +153,6 @@ void ClassifierTemplateParameterImpl::setAllowSubstitutable(bool _allowSubstitut
 {
 	m_allowSubstitutable = _allowSubstitutable;
 } 
-
 bool ClassifierTemplateParameterImpl::getAllowSubstitutable() const 
 {
 	return m_allowSubstitutable;
@@ -221,6 +202,12 @@ bool ClassifierTemplateParameterImpl::parametered_element_no_features(Any diagno
 //*********************************
 std::shared_ptr<Bag<uml::Classifier>> ClassifierTemplateParameterImpl::getConstrainingClassifier() const
 {
+	if(m_constrainingClassifier == nullptr)
+	{
+		m_constrainingClassifier.reset(new Bag<uml::Classifier>());
+		
+		
+	}
 
     return m_constrainingClassifier;
 }
@@ -231,12 +218,25 @@ std::shared_ptr<Bag<uml::Classifier>> ClassifierTemplateParameterImpl::getConstr
 //*********************************
 std::shared_ptr<Union<uml::Element>> ClassifierTemplateParameterImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > ClassifierTemplateParameterImpl::getOwner() const
 {
 	return m_owner;
 }
+
+
 
 
 std::shared_ptr<ClassifierTemplateParameter> ClassifierTemplateParameterImpl::getThisClassifierTemplateParameterPtr() const

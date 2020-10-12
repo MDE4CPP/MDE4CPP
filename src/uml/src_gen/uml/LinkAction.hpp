@@ -230,11 +230,11 @@ namespace uml
 			/*!
 			 The LinkEndData identifying the values on the ends of the links acting on by this LinkAction.
 			<p>From package UML::Actions.</p> */
-			std::shared_ptr<Subset<uml::LinkEndData, uml::Element>> m_endData;
+			mutable std::shared_ptr<Subset<uml::LinkEndData, uml::Element>> m_endData;
 			/*!
 			 InputPins used by the LinkEndData of the LinkAction.
 			<p>From package UML::Actions.</p> */
-			std::shared_ptr<Subset<uml::InputPin, uml::InputPin>> m_inputValue;
+			mutable std::shared_ptr<Subset<uml::InputPin, uml::InputPin>> m_inputValue;
 			
 
 		public:

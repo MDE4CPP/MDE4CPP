@@ -58,23 +58,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 PackageImportImpl::PackageImportImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	
-
-	//Init references
-	
-
-	
+{	
 }
 
 PackageImportImpl::~PackageImportImpl()
@@ -84,23 +68,20 @@ PackageImportImpl::~PackageImportImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+PackageImportImpl::PackageImportImpl(std::weak_ptr<uml::Namespace > par_importingNamespace)
+:PackageImportImpl()
+{
+	m_importingNamespace = par_importingNamespace;
+	m_owner = par_importingNamespace;
+}
 
 //Additional constructor for the containments back reference
-			PackageImportImpl::PackageImportImpl(std::weak_ptr<uml::Namespace > par_importingNamespace)
-			:PackageImportImpl()
-			{
-			    m_importingNamespace = par_importingNamespace;
-				m_owner = par_importingNamespace;
-			}
-
-
-//Additional constructor for the containments back reference
-			PackageImportImpl::PackageImportImpl(std::weak_ptr<uml::Element > par_owner)
-			:PackageImportImpl()
-			{
-			    m_owner = par_owner;
-			}
-
+PackageImportImpl::PackageImportImpl(std::weak_ptr<uml::Element > par_owner)
+:PackageImportImpl()
+{
+	m_owner = par_owner;
+}
 
 
 PackageImportImpl::PackageImportImpl(const PackageImportImpl & obj):PackageImportImpl()
@@ -160,7 +141,6 @@ void PackageImportImpl::setVisibility(uml::VisibilityKind _visibility)
 {
 	m_visibility = _visibility;
 } 
-
 uml::VisibilityKind PackageImportImpl::getVisibility() const 
 {
 	return m_visibility;
@@ -203,24 +183,80 @@ void PackageImportImpl::setImportingNamespace(std::shared_ptr<uml::Namespace> _i
 //*********************************
 std::shared_ptr<Union<uml::Element>> PackageImportImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > PackageImportImpl::getOwner() const
 {
 	return m_owner;
 }
+
 std::shared_ptr<Union<uml::Element>> PackageImportImpl::getRelatedElement() const
 {
+	if(m_relatedElement == nullptr)
+	{
+		/*Union*/
+		m_relatedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_relatedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_relatedElement;
 }
+
 std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> PackageImportImpl::getSource() const
 {
+	if(m_source == nullptr)
+	{
+		/*SubsetUnion*/
+		m_source.reset(new SubsetUnion<uml::Element, uml::Element >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_source - SubsetUnion<uml::Element, uml::Element >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_source->initSubsetUnion(getRelatedElement());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_source - SubsetUnion<uml::Element, uml::Element >(getRelatedElement())" << std::endl;
+		#endif
+		
+	}
 	return m_source;
 }
+
 std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> PackageImportImpl::getTarget() const
 {
+	if(m_target == nullptr)
+	{
+		/*SubsetUnion*/
+		m_target.reset(new SubsetUnion<uml::Element, uml::Element >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_target - SubsetUnion<uml::Element, uml::Element >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_target->initSubsetUnion(getRelatedElement());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_target - SubsetUnion<uml::Element, uml::Element >(getRelatedElement())" << std::endl;
+		#endif
+		
+	}
 	return m_target;
 }
+
+
 
 
 std::shared_ptr<PackageImport> PackageImportImpl::getThisPackageImportPtr() const

@@ -285,7 +285,7 @@ namespace uml
 			/*!
 			 Indicates the Dependencies that reference this NamedElement as a client.
 			<p>From package UML::CommonStructure.</p> */
-			std::shared_ptr<Bag<uml::Dependency>> m_clientDependency;
+			mutable std::shared_ptr<Bag<uml::Dependency>> m_clientDependency;
 			/*!
 			 The StringExpression used to define the name of this NamedElement.
 			<p>From package UML::CommonStructure.</p> */

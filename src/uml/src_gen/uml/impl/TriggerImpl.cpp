@@ -64,26 +64,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 TriggerImpl::TriggerImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-		m_port.reset(new Bag<uml::Port>());
-	
-	
-
-	//Init references
-	
-
-	
-	
+{	
 }
 
 TriggerImpl::~TriggerImpl()
@@ -93,23 +74,20 @@ TriggerImpl::~TriggerImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+TriggerImpl::TriggerImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:TriggerImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			TriggerImpl::TriggerImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:TriggerImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
-
-//Additional constructor for the containments back reference
-			TriggerImpl::TriggerImpl(std::weak_ptr<uml::Element > par_owner)
-			:TriggerImpl()
-			{
-			    m_owner = par_owner;
-			}
-
+TriggerImpl::TriggerImpl(std::weak_ptr<uml::Element > par_owner)
+:TriggerImpl()
+{
+	m_owner = par_owner;
+}
 
 
 TriggerImpl::TriggerImpl(const TriggerImpl & obj):TriggerImpl()
@@ -197,6 +175,12 @@ void TriggerImpl::setEvent(std::shared_ptr<uml::Event> _event)
 
 std::shared_ptr<Bag<uml::Port>> TriggerImpl::getPort() const
 {
+	if(m_port == nullptr)
+	{
+		m_port.reset(new Bag<uml::Port>());
+		
+		
+	}
 
     return m_port;
 }
@@ -207,12 +191,25 @@ std::shared_ptr<Bag<uml::Port>> TriggerImpl::getPort() const
 //*********************************
 std::shared_ptr<Union<uml::Element>> TriggerImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > TriggerImpl::getOwner() const
 {
 	return m_owner;
 }
+
+
 
 
 std::shared_ptr<Trigger> TriggerImpl::getThisTriggerPtr() const

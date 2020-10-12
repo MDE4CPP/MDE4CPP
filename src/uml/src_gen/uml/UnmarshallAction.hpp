@@ -245,7 +245,7 @@ namespace uml
 			/*!
 			 The OutputPins on which are placed the values of the StructuralFeatures of the input object.
 			<p>From package UML::Actions.</p> */
-			std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>> m_result;
+			mutable std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>> m_result;
 			/*!
 			 The type of the object to be unmarshalled.
 			<p>From package UML::Actions.</p> */

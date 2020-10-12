@@ -87,17 +87,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 DestroyLinkActionImpl::DestroyLinkActionImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 DestroyLinkActionImpl::~DestroyLinkActionImpl()
@@ -107,41 +97,36 @@ DestroyLinkActionImpl::~DestroyLinkActionImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+DestroyLinkActionImpl::DestroyLinkActionImpl(std::weak_ptr<uml::Activity > par_activity)
+:DestroyLinkActionImpl()
+{
+	m_activity = par_activity;
+	m_owner = par_activity;
+}
 
 //Additional constructor for the containments back reference
-			DestroyLinkActionImpl::DestroyLinkActionImpl(std::weak_ptr<uml::Activity > par_activity)
-			:DestroyLinkActionImpl()
-			{
-			    m_activity = par_activity;
-				m_owner = par_activity;
-			}
-
-
-//Additional constructor for the containments back reference
-			DestroyLinkActionImpl::DestroyLinkActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
-			:DestroyLinkActionImpl()
-			{
-			    m_inStructuredNode = par_inStructuredNode;
-				m_owner = par_inStructuredNode;
-			}
-
+DestroyLinkActionImpl::DestroyLinkActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
+:DestroyLinkActionImpl()
+{
+	m_inStructuredNode = par_inStructuredNode;
+	m_owner = par_inStructuredNode;
+}
 
 //Additional constructor for the containments back reference
-			DestroyLinkActionImpl::DestroyLinkActionImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:DestroyLinkActionImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
+DestroyLinkActionImpl::DestroyLinkActionImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:DestroyLinkActionImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			DestroyLinkActionImpl::DestroyLinkActionImpl(std::weak_ptr<uml::Element > par_owner)
-			:DestroyLinkActionImpl()
-			{
-			    m_owner = par_owner;
-			}
-
+DestroyLinkActionImpl::DestroyLinkActionImpl(std::weak_ptr<uml::Element > par_owner)
+:DestroyLinkActionImpl()
+{
+	m_owner = par_owner;
+}
 
 
 DestroyLinkActionImpl::DestroyLinkActionImpl(const DestroyLinkActionImpl & obj):DestroyLinkActionImpl()
@@ -300,24 +285,75 @@ std::shared_ptr<ecore::EClass> DestroyLinkActionImpl::eStaticClass() const
 //*********************************
 std::shared_ptr<Union<uml::ActivityGroup>> DestroyLinkActionImpl::getInGroup() const
 {
+	if(m_inGroup == nullptr)
+	{
+		/*Union*/
+		m_inGroup.reset(new Union<uml::ActivityGroup>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_inGroup - Union<uml::ActivityGroup>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_inGroup;
 }
+
 std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element>> DestroyLinkActionImpl::getInput() const
 {
+	if(m_input == nullptr)
+	{
+		/*SubsetUnion*/
+		m_input.reset(new SubsetUnion<uml::InputPin, uml::Element >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_input - SubsetUnion<uml::InputPin, uml::Element >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_input->initSubsetUnion(getOwnedElement());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_input - SubsetUnion<uml::InputPin, uml::Element >(getOwnedElement())" << std::endl;
+		#endif
+		
+	}
 	return m_input;
 }
+
 std::shared_ptr<Union<uml::Element>> DestroyLinkActionImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > DestroyLinkActionImpl::getOwner() const
 {
 	return m_owner;
 }
+
 std::shared_ptr<Union<uml::RedefinableElement>> DestroyLinkActionImpl::getRedefinedElement() const
 {
+	if(m_redefinedElement == nullptr)
+	{
+		/*Union*/
+		m_redefinedElement.reset(new Union<uml::RedefinableElement>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_redefinedElement - Union<uml::RedefinableElement>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_redefinedElement;
 }
+
+
 
 
 std::shared_ptr<DestroyLinkAction> DestroyLinkActionImpl::getThisDestroyLinkActionPtr() const

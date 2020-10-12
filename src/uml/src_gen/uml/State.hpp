@@ -375,15 +375,15 @@ namespace uml
 			/*!
 			 The entry and exit connection points used in conjunction with this (submachine) State, i.e., as targets and sources, respectively, in the Region with the submachine State. A connection point reference references the corresponding definition of a connection point Pseudostate in the StateMachine referenced by the submachine State.
 			<p>From package UML::StateMachines.</p> */
-			std::shared_ptr<Subset<uml::ConnectionPointReference, uml::NamedElement>> m_connection;
+			mutable std::shared_ptr<Subset<uml::ConnectionPointReference, uml::NamedElement>> m_connection;
 			/*!
 			 The entry and exit Pseudostates of a composite State. These can only be entry or exit Pseudostates, and they must have different names. They can only be defined for composite States.
 			<p>From package UML::StateMachines.</p> */
-			std::shared_ptr<Subset<uml::Pseudostate, uml::NamedElement>> m_connectionPoint;
+			mutable std::shared_ptr<Subset<uml::Pseudostate, uml::NamedElement>> m_connectionPoint;
 			/*!
 			 A list of Triggers that are candidates to be retained by the StateMachine if they trigger no Transitions out of the State (not consumed). A deferred Trigger is retained until the StateMachine reaches a State configuration where it is no longer deferred.
 			<p>From package UML::StateMachines.</p> */
-			std::shared_ptr<Subset<uml::Trigger, uml::Element>> m_deferrableTrigger;
+			mutable std::shared_ptr<Subset<uml::Trigger, uml::Element>> m_deferrableTrigger;
 			/*!
 			 An optional Behavior that is executed while being in the State. The execution starts when this State is entered, and ceases either by itself when done, or when the State is exited, whichever comes first.
 			<p>From package UML::StateMachines.</p> */
@@ -403,7 +403,7 @@ namespace uml
 			/*!
 			 The Regions owned directly by the State.
 			<p>From package UML::StateMachines.</p> */
-			std::shared_ptr<Subset<uml::Region, uml::NamedElement>> m_region;
+			mutable std::shared_ptr<Subset<uml::Region, uml::NamedElement>> m_region;
 			/*!
 			 Specifies conditions that are always true when this State is the current State. In ProtocolStateMachines state invariants are additional conditions to the preconditions of the outgoing Transitions, and to the postcondition of the incoming Transitions.
 			<p>From package UML::StateMachines.</p> */

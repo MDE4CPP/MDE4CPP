@@ -233,7 +233,7 @@ namespace uml
 			/*!
 			 The ordered set of literals owned by this Enumeration.
 			<p>From package UML::SimpleClassifiers.</p> */
-			std::shared_ptr<Subset<uml::EnumerationLiteral, uml::NamedElement>> m_ownedLiteral;
+			mutable std::shared_ptr<Subset<uml::EnumerationLiteral, uml::NamedElement>> m_ownedLiteral;
 			
 
 		public:

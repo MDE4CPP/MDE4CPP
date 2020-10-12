@@ -67,22 +67,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 ConnectableElementImpl::ConnectableElementImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-		m_end.reset(new Bag<uml::ConnectorEnd>());
-	
-	
-
-	//Init references
-	
-	
+{	
 }
 
 ConnectableElementImpl::~ConnectableElementImpl()
@@ -92,32 +77,28 @@ ConnectableElementImpl::~ConnectableElementImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+ConnectableElementImpl::ConnectableElementImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:ConnectableElementImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			ConnectableElementImpl::ConnectableElementImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:ConnectableElementImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
+ConnectableElementImpl::ConnectableElementImpl(std::weak_ptr<uml::Element > par_owner)
+:ConnectableElementImpl()
+{
+	m_owner = par_owner;
+}
 
 //Additional constructor for the containments back reference
-			ConnectableElementImpl::ConnectableElementImpl(std::weak_ptr<uml::Element > par_owner)
-			:ConnectableElementImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-//Additional constructor for the containments back reference
-			ConnectableElementImpl::ConnectableElementImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
-			:ConnectableElementImpl()
-			{
-			    m_owningTemplateParameter = par_owningTemplateParameter;
-				m_owner = par_owningTemplateParameter;
-			}
-
+ConnectableElementImpl::ConnectableElementImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+:ConnectableElementImpl()
+{
+	m_owningTemplateParameter = par_owningTemplateParameter;
+	m_owner = par_owningTemplateParameter;
+}
 
 
 ConnectableElementImpl::ConnectableElementImpl(const ConnectableElementImpl & obj):ConnectableElementImpl()
@@ -199,6 +180,12 @@ std::shared_ptr<Bag<uml::ConnectorEnd> > ConnectableElementImpl::getEnds()
 //*********************************
 std::shared_ptr<Bag<uml::ConnectorEnd>> ConnectableElementImpl::getEnd() const
 {
+	if(m_end == nullptr)
+	{
+		m_end.reset(new Bag<uml::ConnectorEnd>());
+		
+		
+	}
 
     return m_end;
 }
@@ -209,12 +196,25 @@ std::shared_ptr<Bag<uml::ConnectorEnd>> ConnectableElementImpl::getEnd() const
 //*********************************
 std::shared_ptr<Union<uml::Element>> ConnectableElementImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > ConnectableElementImpl::getOwner() const
 {
 	return m_owner;
 }
+
+
 
 
 std::shared_ptr<ConnectableElement> ConnectableElementImpl::getThisConnectableElementPtr() const

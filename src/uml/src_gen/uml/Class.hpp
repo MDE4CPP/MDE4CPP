@@ -255,6 +255,10 @@ namespace uml
 			virtual std::shared_ptr<uml::Operation> createOwnedOperation(std::string name,std::shared_ptr<Bag<std::string> >  parameterNames,std::shared_ptr<Bag<uml::Type> >  parameterTypes,std::shared_ptr<uml::Type>  returnType) = 0;
 			
 			/*!
+			 */ 
+			virtual std::shared_ptr<Bag<uml::Operation> > getAllOperations() = 0;
+			
+			/*!
 			 Derivation for Class::/extension : Extension
 			result = (Extension.allInstances()->select(ext | 
 			  let endTypes : Sequence(Classifier) = ext.memberEnd->collect(type.oclAsType(Classifier)) in
@@ -338,23 +342,23 @@ namespace uml
 			/*!
 			 This property is used when the Class is acting as a metaclass. It references the Extensions that specify additional properties of the metaclass. The property is derived from the Extensions whose memberEnds are typed by the Class.
 			<p>From package UML::StructuredClassifiers.</p> */
-			std::shared_ptr<Bag<uml::Extension>> m_extension;
+			mutable std::shared_ptr<Bag<uml::Extension>> m_extension;
 			/*!
 			 The Classifiers owned by the Class that are not ownedBehaviors.
 			<p>From package UML::StructuredClassifiers.</p> */
-			std::shared_ptr<Subset<uml::Classifier, uml::NamedElement>> m_nestedClassifier;
+			mutable std::shared_ptr<Subset<uml::Classifier, uml::NamedElement>> m_nestedClassifier;
 			/*!
 			 The Operations owned by the Class.
 			<p>From package UML::StructuredClassifiers.</p> */
-			std::shared_ptr<Subset<uml::Operation, uml::Feature,uml::NamedElement>> m_ownedOperation;
+			mutable std::shared_ptr<Subset<uml::Operation, uml::Feature,uml::NamedElement>> m_ownedOperation;
 			/*!
 			 The Receptions owned by the Class.
 			<p>From package UML::StructuredClassifiers.</p> */
-			std::shared_ptr<Subset<uml::Reception, uml::Feature,uml::NamedElement>> m_ownedReception;
+			mutable std::shared_ptr<Subset<uml::Reception, uml::Feature,uml::NamedElement>> m_ownedReception;
 			/*!
 			 The superclasses of a Class, derived from its Generalizations.
 			<p>From package UML::StructuredClassifiers.</p> */
-			std::shared_ptr<Bag<uml::Class>> m_superClass;
+			mutable std::shared_ptr<Bag<uml::Class>> m_superClass;
 			
 
 		public:

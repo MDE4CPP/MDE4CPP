@@ -253,19 +253,19 @@ namespace uml
 			/*!
 			 A Behavior that implements the BehavioralFeature. There may be at most one Behavior for a particular pairing of a Classifier (as owner of the Behavior) and a BehavioralFeature (as specification of the Behavior).
 			<p>From package UML::Classification.</p> */
-			std::shared_ptr<Bag<uml::Behavior>> m_method;
+			mutable std::shared_ptr<Bag<uml::Behavior>> m_method;
 			/*!
 			 The ordered set of formal Parameters of this BehavioralFeature.
 			<p>From package UML::Classification.</p> */
-			std::shared_ptr<Subset<uml::Parameter, uml::NamedElement>> m_ownedParameter;
+			mutable std::shared_ptr<Subset<uml::Parameter, uml::NamedElement>> m_ownedParameter;
 			/*!
 			 The ParameterSets owned by this BehavioralFeature.
 			<p>From package UML::Classification.</p> */
-			std::shared_ptr<Subset<uml::ParameterSet, uml::NamedElement>> m_ownedParameterSet;
+			mutable std::shared_ptr<Subset<uml::ParameterSet, uml::NamedElement>> m_ownedParameterSet;
 			/*!
 			 The Types representing exceptions that may be raised during an invocation of this BehavioralFeature.
 			<p>From package UML::Classification.</p> */
-			std::shared_ptr<Bag<uml::Type>> m_raisedException;
+			mutable std::shared_ptr<Bag<uml::Type>> m_raisedException;
 			
 
 		public:

@@ -151,7 +151,8 @@ namespace uml
 			/*!
 			 The value of firstEvent[i] is related to event[i] (where i is 1 or 2). If firstEvent[i] is true, then the corresponding observation event is the first time instant the execution enters event[i]. If firstEvent[i] is false, then the corresponding observation event is the time instant the execution exits event[i].
 			<p>From package UML::Values.</p> */ 
-			std::shared_ptr<Bag<bool> > m_firstEvent; 
+			mutable std::shared_ptr<Bag<bool> > m_firstEvent; 
+			
 			
 			//*********************************
 			// Reference Members
@@ -159,7 +160,7 @@ namespace uml
 			/*!
 			 The DurationObservation is determined as the duration between the entering or exiting of a single event Element during execution, or the entering/exiting of one event Element and the entering/exiting of a second.
 			<p>From package UML::Values.</p> */
-			std::shared_ptr<Bag<uml::NamedElement>> m_event;
+			mutable std::shared_ptr<Bag<uml::NamedElement>> m_event;
 			
 
 		public:

@@ -244,11 +244,11 @@ namespace uml
 			/*!
 			 The actual gates of the InteractionUse.
 			<p>From package UML::Interactions.</p> */
-			std::shared_ptr<Subset<uml::Gate, uml::Element>> m_actualGate;
+			mutable std::shared_ptr<Subset<uml::Gate, uml::Element>> m_actualGate;
 			/*!
 			 The actual arguments of the Interaction.
 			<p>From package UML::Interactions.</p> */
-			std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>> m_argument;
+			mutable std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>> m_argument;
 			/*!
 			 Refers to the Interaction that defines its meaning.
 			<p>From package UML::Interactions.</p> */

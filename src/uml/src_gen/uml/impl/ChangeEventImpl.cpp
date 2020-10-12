@@ -65,19 +65,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 ChangeEventImpl::ChangeEventImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	//Init references
-	
+{	
 }
 
 ChangeEventImpl::~ChangeEventImpl()
@@ -87,41 +75,36 @@ ChangeEventImpl::~ChangeEventImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+ChangeEventImpl::ChangeEventImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:ChangeEventImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			ChangeEventImpl::ChangeEventImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:ChangeEventImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
+ChangeEventImpl::ChangeEventImpl(std::weak_ptr<uml::Element > par_owner)
+:ChangeEventImpl()
+{
+	m_owner = par_owner;
+}
 
 //Additional constructor for the containments back reference
-			ChangeEventImpl::ChangeEventImpl(std::weak_ptr<uml::Element > par_owner)
-			:ChangeEventImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-//Additional constructor for the containments back reference
-			ChangeEventImpl::ChangeEventImpl(std::weak_ptr<uml::Package > par_owningPackage)
-			:ChangeEventImpl()
-			{
-			    m_owningPackage = par_owningPackage;
-				m_namespace = par_owningPackage;
-			}
-
+ChangeEventImpl::ChangeEventImpl(std::weak_ptr<uml::Package > par_owningPackage)
+:ChangeEventImpl()
+{
+	m_owningPackage = par_owningPackage;
+	m_namespace = par_owningPackage;
+}
 
 //Additional constructor for the containments back reference
-			ChangeEventImpl::ChangeEventImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
-			:ChangeEventImpl()
-			{
-			    m_owningTemplateParameter = par_owningTemplateParameter;
-				m_owner = par_owningTemplateParameter;
-			}
-
+ChangeEventImpl::ChangeEventImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+:ChangeEventImpl()
+{
+	m_owningTemplateParameter = par_owningTemplateParameter;
+	m_owner = par_owningTemplateParameter;
+}
 
 
 ChangeEventImpl::ChangeEventImpl(const ChangeEventImpl & obj):ChangeEventImpl()
@@ -218,14 +201,28 @@ std::weak_ptr<uml::Namespace > ChangeEventImpl::getNamespace() const
 {
 	return m_namespace;
 }
+
 std::shared_ptr<Union<uml::Element>> ChangeEventImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > ChangeEventImpl::getOwner() const
 {
 	return m_owner;
 }
+
+
 
 
 std::shared_ptr<ChangeEvent> ChangeEventImpl::getThisChangeEventPtr() const

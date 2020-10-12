@@ -46,19 +46,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 ArgumentImpl::ArgumentImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	//Init references
-	
+{	
 }
 
 ArgumentImpl::~ArgumentImpl()
@@ -67,7 +55,6 @@ ArgumentImpl::~ArgumentImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete Argument "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -108,7 +95,6 @@ void ArgumentImpl::setName(std::string _name)
 {
 	m_name = _name;
 } 
-
 std::string ArgumentImpl::getName() const 
 {
 	return m_name;
@@ -134,6 +120,7 @@ void ArgumentImpl::setValue(std::shared_ptr<uml::Object> _value)
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<Argument> ArgumentImpl::getThisArgumentPtr() const

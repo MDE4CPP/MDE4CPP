@@ -1134,6 +1134,10 @@ std::shared_ptr<ecore::EOperation> UmlPackageImpl::getClass_Operation_createOwne
 {
 	return m_class_Operation_createOwnedOperation_String_Type;
 }
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getClass_Operation_getAllOperations() const
+{
+	return m_class_Operation_getAllOperations;
+}
 std::shared_ptr<ecore::EOperation> UmlPackageImpl::getClass_Operation_getExtensions() const
 {
 	return m_class_Operation_getExtensions;

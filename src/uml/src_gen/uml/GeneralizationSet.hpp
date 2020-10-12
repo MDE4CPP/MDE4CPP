@@ -198,7 +198,7 @@ namespace uml
 			/*!
 			 Designates the instances of Generalization that are members of this GeneralizationSet.
 			<p>From package UML::Classification.</p> */
-			std::shared_ptr<Bag<uml::Generalization>> m_generalization;
+			mutable std::shared_ptr<Bag<uml::Generalization>> m_generalization;
 			/*!
 			 Designates the Classifier that is defined as the power type for the associated GeneralizationSet, if there is one.
 			<p>From package UML::Classification.</p> */

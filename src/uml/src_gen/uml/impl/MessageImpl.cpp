@@ -68,52 +68,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 MessageImpl::MessageImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-		/*Subset*/
-		m_argument.reset(new Subset<uml::ValueSpecification, uml::Element >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_argument - Subset<uml::ValueSpecification, uml::Element >()" << std::endl;
-		#endif
-	
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	//Init references
-		/*Subset*/
-		m_argument->initSubset(m_ownedElement);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_argument - Subset<uml::ValueSpecification, uml::Element >(m_ownedElement)" << std::endl;
-		#endif
-	
-	
-
-	
-
-	
-
-	
-
-	
-
-	
+{	
 }
 
 MessageImpl::~MessageImpl()
@@ -123,32 +78,28 @@ MessageImpl::~MessageImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+MessageImpl::MessageImpl(std::weak_ptr<uml::Interaction > par_interaction)
+:MessageImpl()
+{
+	m_interaction = par_interaction;
+	m_namespace = par_interaction;
+}
 
 //Additional constructor for the containments back reference
-			MessageImpl::MessageImpl(std::weak_ptr<uml::Interaction > par_interaction)
-			:MessageImpl()
-			{
-			    m_interaction = par_interaction;
-				m_namespace = par_interaction;
-			}
-
-
-//Additional constructor for the containments back reference
-			MessageImpl::MessageImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:MessageImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
+MessageImpl::MessageImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:MessageImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			MessageImpl::MessageImpl(std::weak_ptr<uml::Element > par_owner)
-			:MessageImpl()
-			{
-			    m_owner = par_owner;
-			}
-
+MessageImpl::MessageImpl(std::weak_ptr<uml::Element > par_owner)
+:MessageImpl()
+{
+	m_owner = par_owner;
+}
 
 
 MessageImpl::MessageImpl(const MessageImpl & obj):MessageImpl()
@@ -209,12 +160,11 @@ MessageImpl::MessageImpl(const MessageImpl & obj):MessageImpl()
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
 
-		/*Subset*/
-		m_argument->initSubset(m_ownedElement);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_argument - Subset<uml::ValueSpecification, uml::Element >(m_ownedElement)" << std::endl;
-		#endif
-	
+	/*Subset*/
+	m_argument->initSubset(getOwnedElement());
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Initialising value Subset: " << "m_argument - Subset<uml::ValueSpecification, uml::Element >(getOwnedElement())" << std::endl;
+	#endif
 	
 }
 
@@ -234,7 +184,6 @@ std::shared_ptr<ecore::EClass> MessageImpl::eStaticClass() const
 // Attribute Setter Getter
 //*********************************
 
-
 uml::MessageKind MessageImpl::getMessageKind() const 
 {
 	return m_messageKind;
@@ -244,7 +193,6 @@ void MessageImpl::setMessageSort(uml::MessageSort _messageSort)
 {
 	m_messageSort = _messageSort;
 } 
-
 uml::MessageSort MessageImpl::getMessageSort() const 
 {
 	return m_messageSort;
@@ -312,6 +260,21 @@ bool MessageImpl::signature_refer_to(Any diagnostics,std::map <   Any, Any >  co
 //*********************************
 std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>> MessageImpl::getArgument() const
 {
+	if(m_argument == nullptr)
+	{
+		/*Subset*/
+		m_argument.reset(new Subset<uml::ValueSpecification, uml::Element >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_argument - Subset<uml::ValueSpecification, uml::Element >()" << std::endl;
+		#endif
+		
+		/*Subset*/
+		m_argument->initSubset(getOwnedElement());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_argument - Subset<uml::ValueSpecification, uml::Element >(getOwnedElement())" << std::endl;
+		#endif
+		
+	}
 
     return m_argument;
 }
@@ -374,14 +337,28 @@ std::weak_ptr<uml::Namespace > MessageImpl::getNamespace() const
 {
 	return m_namespace;
 }
+
 std::shared_ptr<Union<uml::Element>> MessageImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > MessageImpl::getOwner() const
 {
 	return m_owner;
 }
+
+
 
 
 std::shared_ptr<Message> MessageImpl::getThisMessagePtr() const

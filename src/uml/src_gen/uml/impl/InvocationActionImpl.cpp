@@ -87,35 +87,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 InvocationActionImpl::InvocationActionImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-		/*Subset*/
-		m_argument.reset(new Subset<uml::InputPin, uml::InputPin >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_argument - Subset<uml::InputPin, uml::InputPin >()" << std::endl;
-		#endif
-	
-	
-
-	
-
-	//Init references
-		/*Subset*/
-		m_argument->initSubset(m_input);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_argument - Subset<uml::InputPin, uml::InputPin >(m_input)" << std::endl;
-		#endif
-	
-	
-
-	
+{	
 }
 
 InvocationActionImpl::~InvocationActionImpl()
@@ -125,41 +97,36 @@ InvocationActionImpl::~InvocationActionImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+InvocationActionImpl::InvocationActionImpl(std::weak_ptr<uml::Activity > par_activity)
+:InvocationActionImpl()
+{
+	m_activity = par_activity;
+	m_owner = par_activity;
+}
 
 //Additional constructor for the containments back reference
-			InvocationActionImpl::InvocationActionImpl(std::weak_ptr<uml::Activity > par_activity)
-			:InvocationActionImpl()
-			{
-			    m_activity = par_activity;
-				m_owner = par_activity;
-			}
-
-
-//Additional constructor for the containments back reference
-			InvocationActionImpl::InvocationActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
-			:InvocationActionImpl()
-			{
-			    m_inStructuredNode = par_inStructuredNode;
-				m_owner = par_inStructuredNode;
-			}
-
+InvocationActionImpl::InvocationActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
+:InvocationActionImpl()
+{
+	m_inStructuredNode = par_inStructuredNode;
+	m_owner = par_inStructuredNode;
+}
 
 //Additional constructor for the containments back reference
-			InvocationActionImpl::InvocationActionImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:InvocationActionImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
+InvocationActionImpl::InvocationActionImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:InvocationActionImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			InvocationActionImpl::InvocationActionImpl(std::weak_ptr<uml::Element > par_owner)
-			:InvocationActionImpl()
-			{
-			    m_owner = par_owner;
-			}
-
+InvocationActionImpl::InvocationActionImpl(std::weak_ptr<uml::Element > par_owner)
+:InvocationActionImpl()
+{
+	m_owner = par_owner;
+}
 
 
 InvocationActionImpl::InvocationActionImpl(const InvocationActionImpl & obj):InvocationActionImpl()
@@ -281,12 +248,11 @@ InvocationActionImpl::InvocationActionImpl(const InvocationActionImpl & obj):Inv
 		std::cout << "Copying the Subset: " << "m_redefinedNode" << std::endl;
 	#endif
 
-		/*Subset*/
-		m_argument->initSubset(m_input);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_argument - Subset<uml::InputPin, uml::InputPin >(m_input)" << std::endl;
-		#endif
-	
+	/*Subset*/
+	m_argument->initSubset(getInput());
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Initialising value Subset: " << "m_argument - Subset<uml::InputPin, uml::InputPin >(getInput())" << std::endl;
+	#endif
 	
 }
 
@@ -315,6 +281,21 @@ std::shared_ptr<ecore::EClass> InvocationActionImpl::eStaticClass() const
 //*********************************
 std::shared_ptr<Subset<uml::InputPin, uml::InputPin>> InvocationActionImpl::getArgument() const
 {
+	if(m_argument == nullptr)
+	{
+		/*Subset*/
+		m_argument.reset(new Subset<uml::InputPin, uml::InputPin >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_argument - Subset<uml::InputPin, uml::InputPin >()" << std::endl;
+		#endif
+		
+		/*Subset*/
+		m_argument->initSubset(getInput());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_argument - Subset<uml::InputPin, uml::InputPin >(getInput())" << std::endl;
+		#endif
+		
+	}
 
     return m_argument;
 }
@@ -335,24 +316,75 @@ void InvocationActionImpl::setOnPort(std::shared_ptr<uml::Port> _onPort)
 //*********************************
 std::shared_ptr<Union<uml::ActivityGroup>> InvocationActionImpl::getInGroup() const
 {
+	if(m_inGroup == nullptr)
+	{
+		/*Union*/
+		m_inGroup.reset(new Union<uml::ActivityGroup>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_inGroup - Union<uml::ActivityGroup>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_inGroup;
 }
+
 std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element>> InvocationActionImpl::getInput() const
 {
+	if(m_input == nullptr)
+	{
+		/*SubsetUnion*/
+		m_input.reset(new SubsetUnion<uml::InputPin, uml::Element >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_input - SubsetUnion<uml::InputPin, uml::Element >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_input->initSubsetUnion(getOwnedElement());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_input - SubsetUnion<uml::InputPin, uml::Element >(getOwnedElement())" << std::endl;
+		#endif
+		
+	}
 	return m_input;
 }
+
 std::shared_ptr<Union<uml::Element>> InvocationActionImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > InvocationActionImpl::getOwner() const
 {
 	return m_owner;
 }
+
 std::shared_ptr<Union<uml::RedefinableElement>> InvocationActionImpl::getRedefinedElement() const
 {
+	if(m_redefinedElement == nullptr)
+	{
+		/*Union*/
+		m_redefinedElement.reset(new Union<uml::RedefinableElement>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_redefinedElement - Union<uml::RedefinableElement>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_redefinedElement;
 }
+
+
 
 
 std::shared_ptr<InvocationAction> InvocationActionImpl::getThisInvocationActionPtr() const

@@ -208,7 +208,7 @@ namespace uml
 			/*!
 			 The Classifiers whose instances the ExceptionHandler catches as exceptions. If an exception occurs whose type is any exceptionType, the ExceptionHandler catches the exception and executes the handlerBody.
 			<p>From package UML::Activities.</p> */
-			std::shared_ptr<Bag<uml::Classifier>> m_exceptionType;
+			mutable std::shared_ptr<Bag<uml::Classifier>> m_exceptionType;
 			/*!
 			 An ExecutableNode that is executed if the ExceptionHandler catches an exception.
 			<p>From package UML::Activities.</p> */

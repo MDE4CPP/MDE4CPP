@@ -65,32 +65,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 NamedElementImpl::NamedElementImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-		m_clientDependency.reset(new Bag<uml::Dependency>());
-	
-	
-
-	
-
-	
-
-	//Init references
-	
-	
-
-	
-
-	
+{	
 }
 
 NamedElementImpl::~NamedElementImpl()
@@ -100,23 +75,20 @@ NamedElementImpl::~NamedElementImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+NamedElementImpl::NamedElementImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:NamedElementImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			NamedElementImpl::NamedElementImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:NamedElementImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
-
-//Additional constructor for the containments back reference
-			NamedElementImpl::NamedElementImpl(std::weak_ptr<uml::Element > par_owner)
-			:NamedElementImpl()
-			{
-			    m_owner = par_owner;
-			}
-
+NamedElementImpl::NamedElementImpl(std::weak_ptr<uml::Element > par_owner)
+:NamedElementImpl()
+{
+	m_owner = par_owner;
+}
 
 
 NamedElementImpl::NamedElementImpl(const NamedElementImpl & obj):NamedElementImpl()
@@ -179,7 +151,6 @@ void NamedElementImpl::setName(std::string _name)
 {
 	m_name = _name;
 } 
-
 std::string NamedElementImpl::getName() const 
 {
 	return m_name;
@@ -188,12 +159,10 @@ std::string NamedElementImpl::getName() const
 
 
 
-
 void NamedElementImpl::setVisibility(uml::VisibilityKind _visibility)
 {
 	m_visibility = _visibility;
 } 
-
 uml::VisibilityKind NamedElementImpl::getVisibility() const 
 {
 	return m_visibility;
@@ -325,6 +294,12 @@ bool NamedElementImpl::visibility_needs_ownership(Any diagnostics,std::map <   A
 //*********************************
 std::shared_ptr<Bag<uml::Dependency>> NamedElementImpl::getClientDependency() const
 {
+	if(m_clientDependency == nullptr)
+	{
+		m_clientDependency.reset(new Bag<uml::Dependency>());
+		
+		
+	}
 
     return m_clientDependency;
 }
@@ -350,14 +325,28 @@ std::weak_ptr<uml::Namespace > NamedElementImpl::getNamespace() const
 {
 	return m_namespace;
 }
+
 std::shared_ptr<Union<uml::Element>> NamedElementImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > NamedElementImpl::getOwner() const
 {
 	return m_owner;
 }
+
+
 
 
 std::shared_ptr<NamedElement> NamedElementImpl::getThisNamedElementPtr() const

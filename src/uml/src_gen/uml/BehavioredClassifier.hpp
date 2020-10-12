@@ -261,11 +261,11 @@ namespace uml
 			/*!
 			 The set of InterfaceRealizations owned by the BehavioredClassifier. Interface realizations reference the Interfaces of which the BehavioredClassifier is an implementation.
 			<p>From package UML::SimpleClassifiers.</p> */
-			std::shared_ptr<Subset<uml::InterfaceRealization, uml::Element>> m_interfaceRealization;
+			mutable std::shared_ptr<Subset<uml::InterfaceRealization, uml::Element>> m_interfaceRealization;
 			/*!
 			 Behaviors owned by a BehavioredClassifier.
 			<p>From package UML::SimpleClassifiers.</p> */
-			std::shared_ptr<SubsetUnion<uml::Behavior, uml::NamedElement>> m_ownedBehavior;
+			mutable std::shared_ptr<SubsetUnion<uml::Behavior, uml::NamedElement>> m_ownedBehavior;
 			
 
 		public:

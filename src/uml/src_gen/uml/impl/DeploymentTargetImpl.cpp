@@ -63,38 +63,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 DeploymentTargetImpl::DeploymentTargetImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-		m_deployedElement.reset(new Bag<uml::PackageableElement>());
-	
-	
-
-		/*Subset*/
-		m_deployment.reset(new Subset<uml::Deployment, uml::Element >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_deployment - Subset<uml::Deployment, uml::Element >()" << std::endl;
-		#endif
-	
-	
-
-	//Init references
-	
-	
-
-		/*Subset*/
-		m_deployment->initSubset(m_ownedElement);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_deployment - Subset<uml::Deployment, uml::Element >(m_ownedElement)" << std::endl;
-		#endif
-	
-	
+{	
 }
 
 DeploymentTargetImpl::~DeploymentTargetImpl()
@@ -104,23 +73,20 @@ DeploymentTargetImpl::~DeploymentTargetImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+DeploymentTargetImpl::DeploymentTargetImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:DeploymentTargetImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			DeploymentTargetImpl::DeploymentTargetImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:DeploymentTargetImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
-
-//Additional constructor for the containments back reference
-			DeploymentTargetImpl::DeploymentTargetImpl(std::weak_ptr<uml::Element > par_owner)
-			:DeploymentTargetImpl()
-			{
-			    m_owner = par_owner;
-			}
-
+DeploymentTargetImpl::DeploymentTargetImpl(std::weak_ptr<uml::Element > par_owner)
+:DeploymentTargetImpl()
+{
+	m_owner = par_owner;
+}
 
 
 DeploymentTargetImpl::DeploymentTargetImpl(const DeploymentTargetImpl & obj):DeploymentTargetImpl()
@@ -172,12 +138,11 @@ DeploymentTargetImpl::DeploymentTargetImpl(const DeploymentTargetImpl & obj):Dep
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
 
-		/*Subset*/
-		m_deployment->initSubset(m_ownedElement);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_deployment - Subset<uml::Deployment, uml::Element >(m_ownedElement)" << std::endl;
-		#endif
-	
+	/*Subset*/
+	m_deployment->initSubset(getOwnedElement());
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Initialising value Subset: " << "m_deployment - Subset<uml::Deployment, uml::Element >(getOwnedElement())" << std::endl;
+	#endif
 	
 }
 
@@ -211,6 +176,12 @@ std::shared_ptr<Bag<uml::PackageableElement> > DeploymentTargetImpl::getDeployed
 //*********************************
 std::shared_ptr<Bag<uml::PackageableElement>> DeploymentTargetImpl::getDeployedElement() const
 {
+	if(m_deployedElement == nullptr)
+	{
+		m_deployedElement.reset(new Bag<uml::PackageableElement>());
+		
+		
+	}
 
     return m_deployedElement;
 }
@@ -218,6 +189,21 @@ std::shared_ptr<Bag<uml::PackageableElement>> DeploymentTargetImpl::getDeployedE
 
 std::shared_ptr<Subset<uml::Deployment, uml::Element>> DeploymentTargetImpl::getDeployment() const
 {
+	if(m_deployment == nullptr)
+	{
+		/*Subset*/
+		m_deployment.reset(new Subset<uml::Deployment, uml::Element >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_deployment - Subset<uml::Deployment, uml::Element >()" << std::endl;
+		#endif
+		
+		/*Subset*/
+		m_deployment->initSubset(getOwnedElement());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_deployment - Subset<uml::Deployment, uml::Element >(getOwnedElement())" << std::endl;
+		#endif
+		
+	}
 
     return m_deployment;
 }
@@ -228,12 +214,25 @@ std::shared_ptr<Subset<uml::Deployment, uml::Element>> DeploymentTargetImpl::get
 //*********************************
 std::shared_ptr<Union<uml::Element>> DeploymentTargetImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > DeploymentTargetImpl::getOwner() const
 {
 	return m_owner;
 }
+
+
 
 
 std::shared_ptr<DeploymentTarget> DeploymentTargetImpl::getThisDeploymentTargetPtr() const

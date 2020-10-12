@@ -59,17 +59,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 DeployedArtifactImpl::DeployedArtifactImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 DeployedArtifactImpl::~DeployedArtifactImpl()
@@ -79,23 +69,20 @@ DeployedArtifactImpl::~DeployedArtifactImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+DeployedArtifactImpl::DeployedArtifactImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:DeployedArtifactImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			DeployedArtifactImpl::DeployedArtifactImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:DeployedArtifactImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
-
-//Additional constructor for the containments back reference
-			DeployedArtifactImpl::DeployedArtifactImpl(std::weak_ptr<uml::Element > par_owner)
-			:DeployedArtifactImpl()
-			{
-			    m_owner = par_owner;
-			}
-
+DeployedArtifactImpl::DeployedArtifactImpl(std::weak_ptr<uml::Element > par_owner)
+:DeployedArtifactImpl()
+{
+	m_owner = par_owner;
+}
 
 
 DeployedArtifactImpl::DeployedArtifactImpl(const DeployedArtifactImpl & obj):DeployedArtifactImpl()
@@ -167,12 +154,25 @@ std::shared_ptr<ecore::EClass> DeployedArtifactImpl::eStaticClass() const
 //*********************************
 std::shared_ptr<Union<uml::Element>> DeployedArtifactImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > DeployedArtifactImpl::getOwner() const
 {
 	return m_owner;
 }
+
+
 
 
 std::shared_ptr<DeployedArtifact> DeployedArtifactImpl::getThisDeployedArtifactPtr() const

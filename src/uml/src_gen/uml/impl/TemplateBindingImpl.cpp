@@ -60,39 +60,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 TemplateBindingImpl::TemplateBindingImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-		/*Subset*/
-		m_parameterSubstitution.reset(new Subset<uml::TemplateParameterSubstitution, uml::Element >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_parameterSubstitution - Subset<uml::TemplateParameterSubstitution, uml::Element >()" << std::endl;
-		#endif
-	
-	
-
-	
-
-	//Init references
-	
-
-		/*Subset*/
-		m_parameterSubstitution->initSubset(m_ownedElement);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_parameterSubstitution - Subset<uml::TemplateParameterSubstitution, uml::Element >(m_ownedElement)" << std::endl;
-		#endif
-	
-	
-
-	
+{	
 }
 
 TemplateBindingImpl::~TemplateBindingImpl()
@@ -102,23 +70,20 @@ TemplateBindingImpl::~TemplateBindingImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+TemplateBindingImpl::TemplateBindingImpl(std::weak_ptr<uml::TemplateableElement > par_boundElement)
+:TemplateBindingImpl()
+{
+	m_boundElement = par_boundElement;
+	m_owner = par_boundElement;
+}
 
 //Additional constructor for the containments back reference
-			TemplateBindingImpl::TemplateBindingImpl(std::weak_ptr<uml::TemplateableElement > par_boundElement)
-			:TemplateBindingImpl()
-			{
-			    m_boundElement = par_boundElement;
-				m_owner = par_boundElement;
-			}
-
-
-//Additional constructor for the containments back reference
-			TemplateBindingImpl::TemplateBindingImpl(std::weak_ptr<uml::Element > par_owner)
-			:TemplateBindingImpl()
-			{
-			    m_owner = par_owner;
-			}
-
+TemplateBindingImpl::TemplateBindingImpl(std::weak_ptr<uml::Element > par_owner)
+:TemplateBindingImpl()
+{
+	m_owner = par_owner;
+}
 
 
 TemplateBindingImpl::TemplateBindingImpl(const TemplateBindingImpl & obj):TemplateBindingImpl()
@@ -164,12 +129,11 @@ TemplateBindingImpl::TemplateBindingImpl(const TemplateBindingImpl & obj):Templa
 		std::cout << "Copying the Subset: " << "m_signature" << std::endl;
 	#endif
 
-		/*Subset*/
-		m_parameterSubstitution->initSubset(m_ownedElement);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_parameterSubstitution - Subset<uml::TemplateParameterSubstitution, uml::Element >(m_ownedElement)" << std::endl;
-		#endif
-	
+	/*Subset*/
+	m_parameterSubstitution->initSubset(getOwnedElement());
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Initialising value Subset: " << "m_parameterSubstitution - Subset<uml::TemplateParameterSubstitution, uml::Element >(getOwnedElement())" << std::endl;
+	#endif
 	
 }
 
@@ -219,6 +183,21 @@ void TemplateBindingImpl::setBoundElement(std::shared_ptr<uml::TemplateableEleme
 
 std::shared_ptr<Subset<uml::TemplateParameterSubstitution, uml::Element>> TemplateBindingImpl::getParameterSubstitution() const
 {
+	if(m_parameterSubstitution == nullptr)
+	{
+		/*Subset*/
+		m_parameterSubstitution.reset(new Subset<uml::TemplateParameterSubstitution, uml::Element >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_parameterSubstitution - Subset<uml::TemplateParameterSubstitution, uml::Element >()" << std::endl;
+		#endif
+		
+		/*Subset*/
+		m_parameterSubstitution->initSubset(getOwnedElement());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_parameterSubstitution - Subset<uml::TemplateParameterSubstitution, uml::Element >(getOwnedElement())" << std::endl;
+		#endif
+		
+	}
 
     return m_parameterSubstitution;
 }
@@ -239,24 +218,80 @@ void TemplateBindingImpl::setSignature(std::shared_ptr<uml::TemplateSignature> _
 //*********************************
 std::shared_ptr<Union<uml::Element>> TemplateBindingImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > TemplateBindingImpl::getOwner() const
 {
 	return m_owner;
 }
+
 std::shared_ptr<Union<uml::Element>> TemplateBindingImpl::getRelatedElement() const
 {
+	if(m_relatedElement == nullptr)
+	{
+		/*Union*/
+		m_relatedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_relatedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_relatedElement;
 }
+
 std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> TemplateBindingImpl::getSource() const
 {
+	if(m_source == nullptr)
+	{
+		/*SubsetUnion*/
+		m_source.reset(new SubsetUnion<uml::Element, uml::Element >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_source - SubsetUnion<uml::Element, uml::Element >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_source->initSubsetUnion(getRelatedElement());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_source - SubsetUnion<uml::Element, uml::Element >(getRelatedElement())" << std::endl;
+		#endif
+		
+	}
 	return m_source;
 }
+
 std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> TemplateBindingImpl::getTarget() const
 {
+	if(m_target == nullptr)
+	{
+		/*SubsetUnion*/
+		m_target.reset(new SubsetUnion<uml::Element, uml::Element >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_target - SubsetUnion<uml::Element, uml::Element >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_target->initSubsetUnion(getRelatedElement());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_target - SubsetUnion<uml::Element, uml::Element >(getRelatedElement())" << std::endl;
+		#endif
+		
+	}
 	return m_target;
 }
+
+
 
 
 std::shared_ptr<TemplateBinding> TemplateBindingImpl::getThisTemplateBindingPtr() const

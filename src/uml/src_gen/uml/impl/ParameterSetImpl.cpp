@@ -64,38 +64,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 ParameterSetImpl::ParameterSetImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-		/*Subset*/
-		m_condition.reset(new Subset<uml::Constraint, uml::Element >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_condition - Subset<uml::Constraint, uml::Element >()" << std::endl;
-		#endif
-	
-	
-
-		m_parameter.reset(new Bag<uml::Parameter>());
-	
-	
-
-	//Init references
-		/*Subset*/
-		m_condition->initSubset(m_ownedElement);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_condition - Subset<uml::Constraint, uml::Element >(m_ownedElement)" << std::endl;
-		#endif
-	
-	
-
-	
-	
+{	
 }
 
 ParameterSetImpl::~ParameterSetImpl()
@@ -105,23 +74,20 @@ ParameterSetImpl::~ParameterSetImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+ParameterSetImpl::ParameterSetImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:ParameterSetImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			ParameterSetImpl::ParameterSetImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:ParameterSetImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
-
-//Additional constructor for the containments back reference
-			ParameterSetImpl::ParameterSetImpl(std::weak_ptr<uml::Element > par_owner)
-			:ParameterSetImpl()
-			{
-			    m_owner = par_owner;
-			}
-
+ParameterSetImpl::ParameterSetImpl(std::weak_ptr<uml::Element > par_owner)
+:ParameterSetImpl()
+{
+	m_owner = par_owner;
+}
 
 
 ParameterSetImpl::ParameterSetImpl(const ParameterSetImpl & obj):ParameterSetImpl()
@@ -173,12 +139,11 @@ ParameterSetImpl::ParameterSetImpl(const ParameterSetImpl & obj):ParameterSetImp
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
 
-		/*Subset*/
-		m_condition->initSubset(m_ownedElement);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_condition - Subset<uml::Constraint, uml::Element >(m_ownedElement)" << std::endl;
-		#endif
-	
+	/*Subset*/
+	m_condition->initSubset(getOwnedElement());
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Initialising value Subset: " << "m_condition - Subset<uml::Constraint, uml::Element >(getOwnedElement())" << std::endl;
+	#endif
 	
 }
 
@@ -224,6 +189,21 @@ bool ParameterSetImpl::two_parameter_sets(Any diagnostics,std::map <   Any, Any 
 //*********************************
 std::shared_ptr<Subset<uml::Constraint, uml::Element>> ParameterSetImpl::getCondition() const
 {
+	if(m_condition == nullptr)
+	{
+		/*Subset*/
+		m_condition.reset(new Subset<uml::Constraint, uml::Element >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_condition - Subset<uml::Constraint, uml::Element >()" << std::endl;
+		#endif
+		
+		/*Subset*/
+		m_condition->initSubset(getOwnedElement());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_condition - Subset<uml::Constraint, uml::Element >(getOwnedElement())" << std::endl;
+		#endif
+		
+	}
 
     return m_condition;
 }
@@ -231,6 +211,12 @@ std::shared_ptr<Subset<uml::Constraint, uml::Element>> ParameterSetImpl::getCond
 
 std::shared_ptr<Bag<uml::Parameter>> ParameterSetImpl::getParameter() const
 {
+	if(m_parameter == nullptr)
+	{
+		m_parameter.reset(new Bag<uml::Parameter>());
+		
+		
+	}
 //assert(m_parameter);
     return m_parameter;
 }
@@ -241,12 +227,25 @@ std::shared_ptr<Bag<uml::Parameter>> ParameterSetImpl::getParameter() const
 //*********************************
 std::shared_ptr<Union<uml::Element>> ParameterSetImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > ParameterSetImpl::getOwner() const
 {
 	return m_owner;
 }
+
+
 
 
 std::shared_ptr<ParameterSet> ParameterSetImpl::getThisParameterSetPtr() const

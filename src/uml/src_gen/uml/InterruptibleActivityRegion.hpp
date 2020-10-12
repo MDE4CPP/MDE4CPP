@@ -156,11 +156,11 @@ namespace uml
 			/*!
 			 The ActivityEdges leaving the InterruptibleActivityRegion on which a traversing token will result in the termination of other tokens flowing in the InterruptibleActivityRegion.
 			<p>From package UML::Activities.</p> */
-			std::shared_ptr<Bag<uml::ActivityEdge>> m_interruptingEdge;
+			mutable std::shared_ptr<Bag<uml::ActivityEdge>> m_interruptingEdge;
 			/*!
 			 ActivityNodes immediately contained in the InterruptibleActivityRegion.
 			<p>From package UML::Activities.</p> */
-			std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode>> m_node;
+			mutable std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode>> m_node;
 			
 
 		public:

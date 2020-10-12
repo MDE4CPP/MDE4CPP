@@ -242,15 +242,15 @@ namespace uml
 			/*!
 			 The set of Behaviors that specify the valid interaction patterns across the Connector.
 			<p>From package UML::StructuredClassifiers.</p> */
-			std::shared_ptr<Bag<uml::Behavior>> m_contract;
+			mutable std::shared_ptr<Bag<uml::Behavior>> m_contract;
 			/*!
 			 A Connector has at least two ConnectorEnds, each representing the participation of instances of the Classifiers typing the ConnectableElements attached to the end. The set of ConnectorEnds is ordered.
 			<p>From package UML::StructuredClassifiers.</p> */
-			std::shared_ptr<Subset<uml::ConnectorEnd, uml::Element>> m_end;
+			mutable std::shared_ptr<Subset<uml::ConnectorEnd, uml::Element>> m_end;
 			/*!
 			 A Connector may be redefined when its containing Classifier is specialized. The redefining Connector may have a type that specializes the type of the redefined Connector. The types of the ConnectorEnds of the redefining Connector may specialize the types of the ConnectorEnds of the redefined Connector. The properties of the ConnectorEnds of the redefining Connector may be replaced.
 			<p>From package UML::StructuredClassifiers.</p> */
-			std::shared_ptr<Subset<uml::Connector, uml::RedefinableElement>> m_redefinedConnector;
+			mutable std::shared_ptr<Subset<uml::Connector, uml::RedefinableElement>> m_redefinedConnector;
 			/*!
 			 */
 			std::weak_ptr<uml::StructuredClassifier > m_structuredClassifier;

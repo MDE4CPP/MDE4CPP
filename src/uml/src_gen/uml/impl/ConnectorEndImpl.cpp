@@ -61,31 +61,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 ConnectorEndImpl::ConnectorEndImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	
-
-	
-
-	
-
-	//Init references
-	
-
-	
-
-	
-
-	
+{	
 }
 
 ConnectorEndImpl::~ConnectorEndImpl()
@@ -95,22 +71,19 @@ ConnectorEndImpl::~ConnectorEndImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+ConnectorEndImpl::ConnectorEndImpl(std::weak_ptr<uml::Connector > par_connector)
+:ConnectorEndImpl()
+{
+	m_connector = par_connector;
+}
 
 //Additional constructor for the containments back reference
-			ConnectorEndImpl::ConnectorEndImpl(std::weak_ptr<uml::Connector > par_connector)
-			:ConnectorEndImpl()
-			{
-			    m_connector = par_connector;
-			}
-
-
-//Additional constructor for the containments back reference
-			ConnectorEndImpl::ConnectorEndImpl(std::weak_ptr<uml::Element > par_owner)
-			:ConnectorEndImpl()
-			{
-			    m_owner = par_owner;
-			}
-
+ConnectorEndImpl::ConnectorEndImpl(std::weak_ptr<uml::Element > par_owner)
+:ConnectorEndImpl()
+{
+	m_owner = par_owner;
+}
 
 
 ConnectorEndImpl::ConnectorEndImpl(const ConnectorEndImpl & obj):ConnectorEndImpl()
@@ -254,8 +227,20 @@ void ConnectorEndImpl::setRole(std::shared_ptr<uml::ConnectableElement> _role)
 //*********************************
 std::shared_ptr<Union<uml::Element>> ConnectorEndImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
+
 
 
 std::shared_ptr<ConnectorEnd> ConnectorEndImpl::getThisConnectorEndPtr() const

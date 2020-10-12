@@ -216,7 +216,7 @@ namespace uml
 			/*!
 			 The ordered set of ExecutableNodes to be sequenced.
 			<p>From package UML::Actions.</p> */
-			std::shared_ptr<Bag<uml::ExecutableNode>> m_executableNode;
+			mutable std::shared_ptr<Bag<uml::ExecutableNode>> m_executableNode;
 			
 
 		public:

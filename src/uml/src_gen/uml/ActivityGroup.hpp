@@ -195,11 +195,11 @@ namespace uml
 			/*!
 			 ActivityEdges immediately contained in the ActivityGroup.
 			<p>From package UML::Activities.</p> */
-			std::shared_ptr<Union<uml::ActivityEdge>> m_containedEdge;
+			mutable std::shared_ptr<Union<uml::ActivityEdge>> m_containedEdge;
 			/*!
 			 ActivityNodes immediately contained in the ActivityGroup.
 			<p>From package UML::Activities.</p> */
-			std::shared_ptr<Union<uml::ActivityNode>> m_containedNode;
+			mutable std::shared_ptr<Union<uml::ActivityNode>> m_containedNode;
 			/*!
 			 The Activity containing the ActivityGroup, if it is directly owned by an Activity.
 			<p>From package UML::Activities.</p> */
@@ -207,7 +207,7 @@ namespace uml
 			/*!
 			 Other ActivityGroups immediately contained in this ActivityGroup.
 			<p>From package UML::Activities.</p> */
-			std::shared_ptr<SubsetUnion<uml::ActivityGroup, uml::Element>> m_subgroup;
+			mutable std::shared_ptr<SubsetUnion<uml::ActivityGroup, uml::Element>> m_subgroup;
 			/*!
 			 The ActivityGroup immediately containing this ActivityGroup, if it is directly owned by another ActivityGroup.
 			<p>From package UML::Activities.</p> */

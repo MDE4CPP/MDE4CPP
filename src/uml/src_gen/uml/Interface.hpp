@@ -282,19 +282,19 @@ namespace uml
 			/*!
 			 References all the Classifiers that are defined (nested) within the Interface.
 			<p>From package UML::SimpleClassifiers.</p> */
-			std::shared_ptr<Subset<uml::Classifier, uml::NamedElement>> m_nestedClassifier;
+			mutable std::shared_ptr<Subset<uml::Classifier, uml::NamedElement>> m_nestedClassifier;
 			/*!
 			 The attributes (i.e., the Properties) owned by the Interface.
 			<p>From package UML::SimpleClassifiers.</p> */
-			std::shared_ptr<Subset<uml::Property, uml::Property,uml::NamedElement>> m_ownedAttribute;
+			mutable std::shared_ptr<Subset<uml::Property, uml::Property,uml::NamedElement>> m_ownedAttribute;
 			/*!
 			 The Operations owned by the Interface.
 			<p>From package UML::SimpleClassifiers.</p> */
-			std::shared_ptr<Subset<uml::Operation, uml::Feature,uml::NamedElement>> m_ownedOperation;
+			mutable std::shared_ptr<Subset<uml::Operation, uml::Feature,uml::NamedElement>> m_ownedOperation;
 			/*!
 			 Receptions that objects providing this Interface are willing to accept.
 			<p>From package UML::SimpleClassifiers.</p> */
-			std::shared_ptr<Subset<uml::Reception, uml::Feature,uml::NamedElement>> m_ownedReception;
+			mutable std::shared_ptr<Subset<uml::Reception, uml::Feature,uml::NamedElement>> m_ownedReception;
 			/*!
 			 References a ProtocolStateMachine specifying the legal sequences of the invocation of the BehavioralFeatures described in the Interface.
 			<p>From package UML::SimpleClassifiers.</p> */
@@ -302,7 +302,7 @@ namespace uml
 			/*!
 			 References all the Interfaces redefined by this Interface.
 			<p>From package UML::SimpleClassifiers.</p> */
-			std::shared_ptr<Subset<uml::Interface, uml::Classifier /*Subset does not reference a union*/>> m_redefinedInterface;
+			mutable std::shared_ptr<Subset<uml::Interface, uml::Classifier /*Subset does not reference a union*/>> m_redefinedInterface;
 			
 
 		public:

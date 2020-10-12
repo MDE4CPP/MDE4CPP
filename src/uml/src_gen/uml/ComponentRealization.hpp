@@ -189,7 +189,7 @@ namespace uml
 			/*!
 			 The Classifiers that are involved in the implementation of the Component that owns this Realization.
 			<p>From package UML::StructuredClassifiers.</p> */
-			std::shared_ptr<Subset<uml::Classifier, uml::NamedElement /*Subset does not reference a union*/>> m_realizingClassifier;
+			mutable std::shared_ptr<Subset<uml::Classifier, uml::NamedElement /*Subset does not reference a union*/>> m_realizingClassifier;
 			
 
 		public:

@@ -235,11 +235,11 @@ namespace uml
 			/*!
 			 The attributes owned by the DataType.
 			<p>From package UML::SimpleClassifiers.</p> */
-			std::shared_ptr<Subset<uml::Property, uml::Property,uml::NamedElement>> m_ownedAttribute;
+			mutable std::shared_ptr<Subset<uml::Property, uml::Property,uml::NamedElement>> m_ownedAttribute;
 			/*!
 			 The Operations owned by the DataType.
 			<p>From package UML::SimpleClassifiers.</p> */
-			std::shared_ptr<Subset<uml::Operation, uml::Feature,uml::NamedElement>> m_ownedOperation;
+			mutable std::shared_ptr<Subset<uml::Operation, uml::Feature,uml::NamedElement>> m_ownedOperation;
 			
 
 		public:

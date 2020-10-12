@@ -353,7 +353,7 @@ namespace uml
 			/*!
 			 Stereotype can change the graphical appearance of the extended model element by using attached icons. When this association is not null, it references the location of the icon content to be displayed within diagrams presenting the extended model elements.
 			<p>From package UML::Packages.</p> */
-			std::shared_ptr<Subset<uml::Image, uml::Element>> m_icon;
+			mutable std::shared_ptr<Subset<uml::Image, uml::Element>> m_icon;
 			/*!
 			 The profile that directly or indirectly contains this stereotype.
 			<p>From package UML::Packages.</p> */

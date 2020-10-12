@@ -68,33 +68,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 ConnectionPointReferenceImpl::ConnectionPointReferenceImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-		m_entry.reset(new Bag<uml::Pseudostate>());
-	
-	
-
-		m_exit.reset(new Bag<uml::Pseudostate>());
-	
-	
-
-	
-
-	//Init references
-	
-	
-
-	
-	
-
-	
+{	
 }
 
 ConnectionPointReferenceImpl::~ConnectionPointReferenceImpl()
@@ -104,41 +78,36 @@ ConnectionPointReferenceImpl::~ConnectionPointReferenceImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+ConnectionPointReferenceImpl::ConnectionPointReferenceImpl(std::weak_ptr<uml::Region > par_container)
+:ConnectionPointReferenceImpl()
+{
+	m_container = par_container;
+	m_namespace = par_container;
+}
 
 //Additional constructor for the containments back reference
-			ConnectionPointReferenceImpl::ConnectionPointReferenceImpl(std::weak_ptr<uml::Region > par_container)
-			:ConnectionPointReferenceImpl()
-			{
-			    m_container = par_container;
-				m_namespace = par_container;
-			}
-
-
-//Additional constructor for the containments back reference
-			ConnectionPointReferenceImpl::ConnectionPointReferenceImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:ConnectionPointReferenceImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
+ConnectionPointReferenceImpl::ConnectionPointReferenceImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:ConnectionPointReferenceImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			ConnectionPointReferenceImpl::ConnectionPointReferenceImpl(std::weak_ptr<uml::Element > par_owner)
-			:ConnectionPointReferenceImpl()
-			{
-			    m_owner = par_owner;
-			}
-
+ConnectionPointReferenceImpl::ConnectionPointReferenceImpl(std::weak_ptr<uml::Element > par_owner)
+:ConnectionPointReferenceImpl()
+{
+	m_owner = par_owner;
+}
 
 //Additional constructor for the containments back reference
-			ConnectionPointReferenceImpl::ConnectionPointReferenceImpl(std::weak_ptr<uml::State > par_state)
-			:ConnectionPointReferenceImpl()
-			{
-			    m_state = par_state;
-				m_namespace = par_state;
-			}
-
+ConnectionPointReferenceImpl::ConnectionPointReferenceImpl(std::weak_ptr<uml::State > par_state)
+:ConnectionPointReferenceImpl()
+{
+	m_state = par_state;
+	m_namespace = par_state;
+}
 
 
 ConnectionPointReferenceImpl::ConnectionPointReferenceImpl(const ConnectionPointReferenceImpl & obj):ConnectionPointReferenceImpl()
@@ -233,6 +202,12 @@ bool ConnectionPointReferenceImpl::exit_pseudostates(Any diagnostics,std::map < 
 //*********************************
 std::shared_ptr<Bag<uml::Pseudostate>> ConnectionPointReferenceImpl::getEntry() const
 {
+	if(m_entry == nullptr)
+	{
+		m_entry.reset(new Bag<uml::Pseudostate>());
+		
+		
+	}
 
     return m_entry;
 }
@@ -240,6 +215,12 @@ std::shared_ptr<Bag<uml::Pseudostate>> ConnectionPointReferenceImpl::getEntry() 
 
 std::shared_ptr<Bag<uml::Pseudostate>> ConnectionPointReferenceImpl::getExit() const
 {
+	if(m_exit == nullptr)
+	{
+		m_exit.reset(new Bag<uml::Pseudostate>());
+		
+		
+	}
 
     return m_exit;
 }
@@ -262,14 +243,28 @@ std::weak_ptr<uml::Namespace > ConnectionPointReferenceImpl::getNamespace() cons
 {
 	return m_namespace;
 }
+
 std::shared_ptr<Union<uml::Element>> ConnectionPointReferenceImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > ConnectionPointReferenceImpl::getOwner() const
 {
 	return m_owner;
 }
+
+
 
 
 std::shared_ptr<ConnectionPointReference> ConnectionPointReferenceImpl::getThisConnectionPointReferencePtr() const

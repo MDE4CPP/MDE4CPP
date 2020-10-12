@@ -321,7 +321,7 @@ namespace uml
 			/*!
 			 Conformance between ProtocolStateMachine
 			<p>From package UML::StateMachines.</p> */
-			std::shared_ptr<Subset<uml::ProtocolConformance, uml::Element>> m_conformance;
+			mutable std::shared_ptr<Subset<uml::ProtocolConformance, uml::Element>> m_conformance;
 			
 
 		public:

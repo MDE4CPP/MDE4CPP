@@ -164,11 +164,11 @@ namespace uml
 			/*!
 			 A constraint that should be satisfied for the owner of the Parameters in an input ParameterSet to start execution using the values provided for those Parameters, or the owner of the Parameters in an output ParameterSet to end execution providing the values for those Parameters, if all preconditions and conditions on input ParameterSets were satisfied.
 			<p>From package UML::Classification.</p> */
-			std::shared_ptr<Subset<uml::Constraint, uml::Element>> m_condition;
+			mutable std::shared_ptr<Subset<uml::Constraint, uml::Element>> m_condition;
 			/*!
 			 Parameters in the ParameterSet.
 			<p>From package UML::Classification.</p> */
-			std::shared_ptr<Bag<uml::Parameter>> m_parameter;
+			mutable std::shared_ptr<Bag<uml::Parameter>> m_parameter;
 			
 
 		public:

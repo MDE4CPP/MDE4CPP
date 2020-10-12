@@ -85,17 +85,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 CentralBufferNodeImpl::CentralBufferNodeImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 CentralBufferNodeImpl::~CentralBufferNodeImpl()
@@ -105,41 +95,36 @@ CentralBufferNodeImpl::~CentralBufferNodeImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+CentralBufferNodeImpl::CentralBufferNodeImpl(std::weak_ptr<uml::Activity > par_activity)
+:CentralBufferNodeImpl()
+{
+	m_activity = par_activity;
+	m_owner = par_activity;
+}
 
 //Additional constructor for the containments back reference
-			CentralBufferNodeImpl::CentralBufferNodeImpl(std::weak_ptr<uml::Activity > par_activity)
-			:CentralBufferNodeImpl()
-			{
-			    m_activity = par_activity;
-				m_owner = par_activity;
-			}
-
-
-//Additional constructor for the containments back reference
-			CentralBufferNodeImpl::CentralBufferNodeImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
-			:CentralBufferNodeImpl()
-			{
-			    m_inStructuredNode = par_inStructuredNode;
-				m_owner = par_inStructuredNode;
-			}
-
+CentralBufferNodeImpl::CentralBufferNodeImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
+:CentralBufferNodeImpl()
+{
+	m_inStructuredNode = par_inStructuredNode;
+	m_owner = par_inStructuredNode;
+}
 
 //Additional constructor for the containments back reference
-			CentralBufferNodeImpl::CentralBufferNodeImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:CentralBufferNodeImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
+CentralBufferNodeImpl::CentralBufferNodeImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:CentralBufferNodeImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			CentralBufferNodeImpl::CentralBufferNodeImpl(std::weak_ptr<uml::Element > par_owner)
-			:CentralBufferNodeImpl()
-			{
-			    m_owner = par_owner;
-			}
-
+CentralBufferNodeImpl::CentralBufferNodeImpl(std::weak_ptr<uml::Element > par_owner)
+:CentralBufferNodeImpl()
+{
+	m_owner = par_owner;
+}
 
 
 CentralBufferNodeImpl::CentralBufferNodeImpl(const CentralBufferNodeImpl & obj):CentralBufferNodeImpl()
@@ -271,20 +256,55 @@ std::shared_ptr<ecore::EClass> CentralBufferNodeImpl::eStaticClass() const
 //*********************************
 std::shared_ptr<Union<uml::ActivityGroup>> CentralBufferNodeImpl::getInGroup() const
 {
+	if(m_inGroup == nullptr)
+	{
+		/*Union*/
+		m_inGroup.reset(new Union<uml::ActivityGroup>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_inGroup - Union<uml::ActivityGroup>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_inGroup;
 }
+
 std::shared_ptr<Union<uml::Element>> CentralBufferNodeImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > CentralBufferNodeImpl::getOwner() const
 {
 	return m_owner;
 }
+
 std::shared_ptr<Union<uml::RedefinableElement>> CentralBufferNodeImpl::getRedefinedElement() const
 {
+	if(m_redefinedElement == nullptr)
+	{
+		/*Union*/
+		m_redefinedElement.reset(new Union<uml::RedefinableElement>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_redefinedElement - Union<uml::RedefinableElement>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_redefinedElement;
 }
+
+
 
 
 std::shared_ptr<CentralBufferNode> CentralBufferNodeImpl::getThisCentralBufferNodePtr() const

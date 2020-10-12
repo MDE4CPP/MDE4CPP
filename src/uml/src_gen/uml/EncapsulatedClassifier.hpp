@@ -237,7 +237,7 @@ namespace uml
 			/*!
 			 The Ports owned by the EncapsulatedClassifier.
 			<p>From package UML::StructuredClassifiers.</p> */
-			std::shared_ptr<Subset<uml::Port, uml::Property /*Subset does not reference a union*/>> m_ownedPort;
+			mutable std::shared_ptr<Subset<uml::Port, uml::Property /*Subset does not reference a union*/>> m_ownedPort;
 			
 
 		public:

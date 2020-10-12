@@ -198,7 +198,7 @@ namespace uml
 			/*!
 			 The fragments of the operand.
 			<p>From package UML::Interactions.</p> */
-			std::shared_ptr<Subset<uml::InteractionFragment, uml::NamedElement>> m_fragment;
+			mutable std::shared_ptr<Subset<uml::InteractionFragment, uml::NamedElement>> m_fragment;
 			/*!
 			 Constraint of the operand.
 			<p>From package UML::Interactions.</p> */

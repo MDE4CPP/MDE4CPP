@@ -94,22 +94,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 InformationItemImpl::InformationItemImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-		m_represented.reset(new Bag<uml::Classifier>());
-	
-	
-
-	//Init references
-	
-	
+{	
 }
 
 InformationItemImpl::~InformationItemImpl()
@@ -119,23 +104,20 @@ InformationItemImpl::~InformationItemImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+InformationItemImpl::InformationItemImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:InformationItemImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			InformationItemImpl::InformationItemImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:InformationItemImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
-
-//Additional constructor for the containments back reference
-			InformationItemImpl::InformationItemImpl(std::weak_ptr<uml::Element > par_owner)
-			:InformationItemImpl()
-			{
-			    m_owner = par_owner;
-			}
-
+InformationItemImpl::InformationItemImpl(std::weak_ptr<uml::Element > par_owner)
+:InformationItemImpl()
+{
+	m_owner = par_owner;
+}
 
 //Additional constructor for the containments back reference
 InformationItemImpl::InformationItemImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id)
@@ -157,17 +139,13 @@ InformationItemImpl::InformationItemImpl(std::weak_ptr<uml::Package > par_Packag
    
 }
 
-
 //Additional constructor for the containments back reference
-			InformationItemImpl::InformationItemImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
-			:InformationItemImpl()
-			{
-			    m_owningTemplateParameter = par_owningTemplateParameter;
-				m_owner = par_owningTemplateParameter;
-			}
-
-
-//Additional constructor for the containments back reference
+InformationItemImpl::InformationItemImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+:InformationItemImpl()
+{
+	m_owningTemplateParameter = par_owningTemplateParameter;
+	m_owner = par_owningTemplateParameter;
+}
 
 
 
@@ -387,6 +365,12 @@ bool InformationItemImpl::sources_and_targets(Any diagnostics,std::map <   Any, 
 //*********************************
 std::shared_ptr<Bag<uml::Classifier>> InformationItemImpl::getRepresented() const
 {
+	if(m_represented == nullptr)
+	{
+		m_represented.reset(new Bag<uml::Classifier>());
+		
+		
+	}
 
     return m_represented;
 }
@@ -397,32 +381,100 @@ std::shared_ptr<Bag<uml::Classifier>> InformationItemImpl::getRepresented() cons
 //*********************************
 std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement>> InformationItemImpl::getFeature() const
 {
+	if(m_feature == nullptr)
+	{
+		/*SubsetUnion*/
+		m_feature.reset(new SubsetUnion<uml::Feature, uml::NamedElement >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_feature - SubsetUnion<uml::Feature, uml::NamedElement >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_feature->initSubsetUnion(getMember());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_feature - SubsetUnion<uml::Feature, uml::NamedElement >(getMember())" << std::endl;
+		#endif
+		
+	}
 	return m_feature;
 }
+
 std::shared_ptr<Union<uml::NamedElement>> InformationItemImpl::getMember() const
 {
+	if(m_member == nullptr)
+	{
+		/*Union*/
+		m_member.reset(new Union<uml::NamedElement>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_member - Union<uml::NamedElement>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_member;
 }
+
 std::weak_ptr<uml::Namespace > InformationItemImpl::getNamespace() const
 {
 	return m_namespace;
 }
+
 std::shared_ptr<Union<uml::Element>> InformationItemImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> InformationItemImpl::getOwnedMember() const
 {
+	if(m_ownedMember == nullptr)
+	{
+		/*SubsetUnion*/
+		m_ownedMember.reset(new SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_ownedMember->initSubsetUnion(getOwnedElement(),getMember());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >(getOwnedElement(),getMember())" << std::endl;
+		#endif
+		
+	}
 	return m_ownedMember;
 }
+
 std::weak_ptr<uml::Element > InformationItemImpl::getOwner() const
 {
 	return m_owner;
 }
+
 std::shared_ptr<Union<uml::RedefinableElement>> InformationItemImpl::getRedefinedElement() const
 {
+	if(m_redefinedElement == nullptr)
+	{
+		/*Union*/
+		m_redefinedElement.reset(new Union<uml::RedefinableElement>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_redefinedElement - Union<uml::RedefinableElement>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_redefinedElement;
 }
+
+
 
 
 std::shared_ptr<InformationItem> InformationItemImpl::getThisInformationItemPtr() const

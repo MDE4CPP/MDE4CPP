@@ -346,23 +346,23 @@ namespace uml
 			/*!
 			 Actions owned by the Interaction.
 			<p>From package UML::Interactions.</p> */
-			std::shared_ptr<Subset<uml::Action, uml::Element>> m_action;
+			mutable std::shared_ptr<Subset<uml::Action, uml::Element>> m_action;
 			/*!
 			 Specifies the gates that form the message interface between this Interaction and any InteractionUses which reference it.
 			<p>From package UML::Interactions.</p> */
-			std::shared_ptr<Subset<uml::Gate, uml::NamedElement>> m_formalGate;
+			mutable std::shared_ptr<Subset<uml::Gate, uml::NamedElement>> m_formalGate;
 			/*!
 			 The ordered set of fragments in the Interaction.
 			<p>From package UML::Interactions.</p> */
-			std::shared_ptr<Subset<uml::InteractionFragment, uml::NamedElement>> m_fragment;
+			mutable std::shared_ptr<Subset<uml::InteractionFragment, uml::NamedElement>> m_fragment;
 			/*!
 			 Specifies the participants in this Interaction.
 			<p>From package UML::Interactions.</p> */
-			std::shared_ptr<Subset<uml::Lifeline, uml::NamedElement>> m_lifeline;
+			mutable std::shared_ptr<Subset<uml::Lifeline, uml::NamedElement>> m_lifeline;
 			/*!
 			 The Messages contained in this Interaction.
 			<p>From package UML::Interactions.</p> */
-			std::shared_ptr<Subset<uml::Message, uml::NamedElement>> m_message;
+			mutable std::shared_ptr<Subset<uml::Message, uml::NamedElement>> m_message;
 			
 
 		public:

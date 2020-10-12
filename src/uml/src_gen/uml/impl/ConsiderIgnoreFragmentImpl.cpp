@@ -72,22 +72,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 ConsiderIgnoreFragmentImpl::ConsiderIgnoreFragmentImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-		m_message.reset(new Bag<uml::NamedElement>());
-	
-	
-
-	//Init references
-	
-	
+{	
 }
 
 ConsiderIgnoreFragmentImpl::~ConsiderIgnoreFragmentImpl()
@@ -97,41 +82,36 @@ ConsiderIgnoreFragmentImpl::~ConsiderIgnoreFragmentImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+ConsiderIgnoreFragmentImpl::ConsiderIgnoreFragmentImpl(std::weak_ptr<uml::Interaction > par_enclosingInteraction)
+:ConsiderIgnoreFragmentImpl()
+{
+	m_enclosingInteraction = par_enclosingInteraction;
+	m_namespace = par_enclosingInteraction;
+}
 
 //Additional constructor for the containments back reference
-			ConsiderIgnoreFragmentImpl::ConsiderIgnoreFragmentImpl(std::weak_ptr<uml::Interaction > par_enclosingInteraction)
-			:ConsiderIgnoreFragmentImpl()
-			{
-			    m_enclosingInteraction = par_enclosingInteraction;
-				m_namespace = par_enclosingInteraction;
-			}
-
-
-//Additional constructor for the containments back reference
-			ConsiderIgnoreFragmentImpl::ConsiderIgnoreFragmentImpl(std::weak_ptr<uml::InteractionOperand > par_enclosingOperand)
-			:ConsiderIgnoreFragmentImpl()
-			{
-			    m_enclosingOperand = par_enclosingOperand;
-				m_namespace = par_enclosingOperand;
-			}
-
+ConsiderIgnoreFragmentImpl::ConsiderIgnoreFragmentImpl(std::weak_ptr<uml::InteractionOperand > par_enclosingOperand)
+:ConsiderIgnoreFragmentImpl()
+{
+	m_enclosingOperand = par_enclosingOperand;
+	m_namespace = par_enclosingOperand;
+}
 
 //Additional constructor for the containments back reference
-			ConsiderIgnoreFragmentImpl::ConsiderIgnoreFragmentImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:ConsiderIgnoreFragmentImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
+ConsiderIgnoreFragmentImpl::ConsiderIgnoreFragmentImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:ConsiderIgnoreFragmentImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			ConsiderIgnoreFragmentImpl::ConsiderIgnoreFragmentImpl(std::weak_ptr<uml::Element > par_owner)
-			:ConsiderIgnoreFragmentImpl()
-			{
-			    m_owner = par_owner;
-			}
-
+ConsiderIgnoreFragmentImpl::ConsiderIgnoreFragmentImpl(std::weak_ptr<uml::Element > par_owner)
+:ConsiderIgnoreFragmentImpl()
+{
+	m_owner = par_owner;
+}
 
 
 ConsiderIgnoreFragmentImpl::ConsiderIgnoreFragmentImpl(const ConsiderIgnoreFragmentImpl & obj):ConsiderIgnoreFragmentImpl()
@@ -245,6 +225,12 @@ bool ConsiderIgnoreFragmentImpl::type(Any diagnostics,std::map <   Any, Any >  c
 //*********************************
 std::shared_ptr<Bag<uml::NamedElement>> ConsiderIgnoreFragmentImpl::getMessage() const
 {
+	if(m_message == nullptr)
+	{
+		m_message.reset(new Bag<uml::NamedElement>());
+		
+		
+	}
 
     return m_message;
 }
@@ -257,14 +243,28 @@ std::weak_ptr<uml::Namespace > ConsiderIgnoreFragmentImpl::getNamespace() const
 {
 	return m_namespace;
 }
+
 std::shared_ptr<Union<uml::Element>> ConsiderIgnoreFragmentImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > ConsiderIgnoreFragmentImpl::getOwner() const
 {
 	return m_owner;
 }
+
+
 
 
 std::shared_ptr<ConsiderIgnoreFragment> ConsiderIgnoreFragmentImpl::getThisConsiderIgnoreFragmentPtr() const

@@ -446,15 +446,15 @@ namespace uml
 			/*!
 			 An optional set of Constraints specifying the state of the system when the Operation is completed.
 			<p>From package UML::Classification.</p> */
-			std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>> m_postcondition;
+			mutable std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>> m_postcondition;
 			/*!
 			 An optional set of Constraints on the state of the system when the Operation is invoked.
 			<p>From package UML::Classification.</p> */
-			std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>> m_precondition;
+			mutable std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>> m_precondition;
 			/*!
 			 The Operations that are redefined by this Operation.
 			<p>From package UML::Classification.</p> */
-			std::shared_ptr<Subset<uml::Operation, uml::RedefinableElement>> m_redefinedOperation;
+			mutable std::shared_ptr<Subset<uml::Operation, uml::RedefinableElement>> m_redefinedOperation;
 			/*!
 			 The return type of the operation, if present. This information is derived from the return result for this Operation.
 			<p>From package UML::Classification.</p> */

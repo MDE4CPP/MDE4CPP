@@ -418,7 +418,7 @@ namespace uml
 			/*!
 			 References the packaged elements that are Packages.
 			<p>From package UML::Packages.</p> */
-			std::shared_ptr<Subset<uml::Package, uml::PackageableElement /*Subset does not reference a union*/>> m_nestedPackage;
+			mutable std::shared_ptr<Subset<uml::Package, uml::PackageableElement /*Subset does not reference a union*/>> m_nestedPackage;
 			/*!
 			 References the Package that owns this Package.
 			<p>From package UML::Packages.</p> */
@@ -426,23 +426,23 @@ namespace uml
 			/*!
 			 References the Stereotypes that are owned by the Package.
 			<p>From package UML::Packages.</p> */
-			std::shared_ptr<Subset<uml::Stereotype, uml::PackageableElement /*Subset does not reference a union*/>> m_ownedStereotype;
+			mutable std::shared_ptr<Subset<uml::Stereotype, uml::PackageableElement /*Subset does not reference a union*/>> m_ownedStereotype;
 			/*!
 			 References the packaged elements that are Types.
 			<p>From package UML::Packages.</p> */
-			std::shared_ptr<Subset<uml::Type, uml::PackageableElement /*Subset does not reference a union*/>> m_ownedType;
+			mutable std::shared_ptr<Subset<uml::Type, uml::PackageableElement /*Subset does not reference a union*/>> m_ownedType;
 			/*!
 			 References the PackageMerges that are owned by this Package.
 			<p>From package UML::Packages.</p> */
-			std::shared_ptr<Subset<uml::PackageMerge, uml::Element>> m_packageMerge;
+			mutable std::shared_ptr<Subset<uml::PackageMerge, uml::Element>> m_packageMerge;
 			/*!
 			 Specifies the packageable elements that are owned by this Package.
 			<p>From package UML::Packages.</p> */
-			std::shared_ptr<SubsetUnion<uml::PackageableElement, uml::NamedElement>> m_packagedElement;
+			mutable std::shared_ptr<SubsetUnion<uml::PackageableElement, uml::NamedElement>> m_packagedElement;
 			/*!
 			 References the ProfileApplications that indicate which profiles have been applied to the Package.
 			<p>From package UML::Packages.</p> */
-			std::shared_ptr<Subset<uml::ProfileApplication, uml::Element>> m_profileApplication;
+			mutable std::shared_ptr<Subset<uml::ProfileApplication, uml::Element>> m_profileApplication;
 			
 
 		public:

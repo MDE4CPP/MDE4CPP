@@ -209,10 +209,12 @@ namespace uml
 			/*!
 			 Provides a textual specification of the functionality of the Action, in one or more languages other than UML.
 			<p>From package UML::Actions.</p> */ 
-			std::shared_ptr<Bag<std::string> > m_body; /*!
+			mutable std::shared_ptr<Bag<std::string> > m_body; 
+			/*!
 			 If provided, a specification of the language used for each of the body Strings.
 			<p>From package UML::Actions.</p> */ 
-			std::shared_ptr<Bag<std::string> > m_language; 
+			mutable std::shared_ptr<Bag<std::string> > m_language; 
+			
 			
 			//*********************************
 			// Reference Members
@@ -220,11 +222,11 @@ namespace uml
 			/*!
 			 The InputPins providing inputs to the OpaqueAction.
 			<p>From package UML::Actions.</p> */
-			std::shared_ptr<Subset<uml::InputPin, uml::InputPin>> m_inputValue;
+			mutable std::shared_ptr<Subset<uml::InputPin, uml::InputPin>> m_inputValue;
 			/*!
 			 The OutputPins on which the OpaqueAction provides outputs.
 			<p>From package UML::Actions.</p> */
-			std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>> m_outputValue;
+			mutable std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>> m_outputValue;
 			
 
 		public:

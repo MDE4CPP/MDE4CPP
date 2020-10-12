@@ -277,19 +277,19 @@ namespace uml
 			/*!
 			 The set of model elements that are manifested in the Artifact. That is, these model elements are utilized in the construction (or generation) of the artifact.
 			<p>From package UML::Deployments.</p> */
-			std::shared_ptr<Subset<uml::Manifestation, uml::Element>> m_manifestation;
+			mutable std::shared_ptr<Subset<uml::Manifestation, uml::Element>> m_manifestation;
 			/*!
 			 The Artifacts that are defined (nested) within the Artifact. The association is a specialization of the ownedMember association from Namespace to NamedElement.
 			<p>From package UML::Deployments.</p> */
-			std::shared_ptr<Subset<uml::Artifact, uml::NamedElement>> m_nestedArtifact;
+			mutable std::shared_ptr<Subset<uml::Artifact, uml::NamedElement>> m_nestedArtifact;
 			/*!
 			 The attributes or association ends defined for the Artifact. The association is a specialization of the ownedMember association.
 			<p>From package UML::Deployments.</p> */
-			std::shared_ptr<Subset<uml::Property, uml::Property,uml::NamedElement>> m_ownedAttribute;
+			mutable std::shared_ptr<Subset<uml::Property, uml::Property,uml::NamedElement>> m_ownedAttribute;
 			/*!
 			 The Operations defined for the Artifact. The association is a specialization of the ownedMember association.
 			<p>From package UML::Deployments.</p> */
-			std::shared_ptr<Subset<uml::Operation, uml::Feature,uml::NamedElement>> m_ownedOperation;
+			mutable std::shared_ptr<Subset<uml::Operation, uml::Feature,uml::NamedElement>> m_ownedOperation;
 			
 
 		public:

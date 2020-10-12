@@ -67,6 +67,10 @@ namespace uml
 			virtual std::shared_ptr<uml::Operation> createOwnedOperation(std::string name,std::shared_ptr<Bag<std::string> >  parameterNames,std::shared_ptr<Bag<uml::Type> >  parameterTypes,std::shared_ptr<uml::Type>  returnType) ;
 			
 			/*!
+			 */ 
+			virtual std::shared_ptr<Bag<uml::Operation> > getAllOperations() ;
+			
+			/*!
 			 Derivation for Class::/extension : Extension
 			result = (Extension.allInstances()->select(ext | 
 			  let endTypes : Sequence(Classifier) = ext.memberEnd->collect(type.oclAsType(Classifier)) in

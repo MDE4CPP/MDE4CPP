@@ -72,26 +72,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 DurationImpl::DurationImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-		m_observation.reset(new Bag<uml::Observation>());
-	
-	
-
-	//Init references
-	
-
-	
-	
+{	
 }
 
 DurationImpl::~DurationImpl()
@@ -101,59 +82,52 @@ DurationImpl::~DurationImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+DurationImpl::DurationImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:DurationImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			DurationImpl::DurationImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:DurationImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
+DurationImpl::DurationImpl(std::weak_ptr<uml::Element > par_owner)
+:DurationImpl()
+{
+	m_owner = par_owner;
+}
 
 //Additional constructor for the containments back reference
-			DurationImpl::DurationImpl(std::weak_ptr<uml::Element > par_owner)
-			:DurationImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-//Additional constructor for the containments back reference
-			DurationImpl::DurationImpl(std::weak_ptr<uml::Package > par_owningPackage)
-			:DurationImpl()
-			{
-			    m_owningPackage = par_owningPackage;
-				m_namespace = par_owningPackage;
-			}
-
+DurationImpl::DurationImpl(std::weak_ptr<uml::Package > par_owningPackage)
+:DurationImpl()
+{
+	m_owningPackage = par_owningPackage;
+	m_namespace = par_owningPackage;
+}
 
 //Additional constructor for the containments back reference
-			DurationImpl::DurationImpl(std::weak_ptr<uml::Slot > par_owningSlot)
-			:DurationImpl()
-			{
-			    m_owningSlot = par_owningSlot;
-				m_owner = par_owningSlot;
-			}
-
-
-//Additional constructor for the containments back reference
-			DurationImpl::DurationImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
-			:DurationImpl()
-			{
-			    m_owningTemplateParameter = par_owningTemplateParameter;
-				m_owner = par_owningTemplateParameter;
-			}
-
+DurationImpl::DurationImpl(std::weak_ptr<uml::Slot > par_owningSlot)
+:DurationImpl()
+{
+	m_owningSlot = par_owningSlot;
+	m_owner = par_owningSlot;
+}
 
 //Additional constructor for the containments back reference
-			DurationImpl::DurationImpl(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction)
-			:DurationImpl()
-			{
-			    m_valueSpecificationAction = par_valueSpecificationAction;
-				m_owner = par_valueSpecificationAction;
-			}
+DurationImpl::DurationImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+:DurationImpl()
+{
+	m_owningTemplateParameter = par_owningTemplateParameter;
+	m_owner = par_owningTemplateParameter;
+}
 
+//Additional constructor for the containments back reference
+DurationImpl::DurationImpl(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction)
+:DurationImpl()
+{
+	m_valueSpecificationAction = par_valueSpecificationAction;
+	m_owner = par_valueSpecificationAction;
+}
 
 
 DurationImpl::DurationImpl(const DurationImpl & obj):DurationImpl()
@@ -259,6 +233,12 @@ void DurationImpl::setExpr(std::shared_ptr<uml::ValueSpecification> _expr)
 
 std::shared_ptr<Bag<uml::Observation>> DurationImpl::getObservation() const
 {
+	if(m_observation == nullptr)
+	{
+		m_observation.reset(new Bag<uml::Observation>());
+		
+		
+	}
 
     return m_observation;
 }
@@ -271,14 +251,28 @@ std::weak_ptr<uml::Namespace > DurationImpl::getNamespace() const
 {
 	return m_namespace;
 }
+
 std::shared_ptr<Union<uml::Element>> DurationImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > DurationImpl::getOwner() const
 {
 	return m_owner;
 }
+
+
 
 
 std::shared_ptr<Duration> DurationImpl::getThisDurationPtr() const

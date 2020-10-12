@@ -227,7 +227,7 @@ namespace uml
 			/*!
 			 The StringExpressions that constitute this StringExpression.
 			<p>From package UML::Values.</p> */
-			std::shared_ptr<Subset<uml::StringExpression, uml::Element>> m_subExpression;
+			mutable std::shared_ptr<Subset<uml::StringExpression, uml::Element>> m_subExpression;
 			
 
 		public:

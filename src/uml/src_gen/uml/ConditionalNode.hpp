@@ -290,11 +290,11 @@ namespace uml
 			/*!
 			 The set of Clauses composing the ConditionalNode.
 			<p>From package UML::Actions.</p> */
-			std::shared_ptr<Subset<uml::Clause, uml::Element>> m_clause;
+			mutable std::shared_ptr<Subset<uml::Clause, uml::Element>> m_clause;
 			/*!
 			 The OutputPins that onto which are moved values from the bodyOutputs of the Clause selected for execution.
 			<p>From package UML::Actions.</p> */
-			std::shared_ptr<Bag<uml::OutputPin>> m_result;
+			mutable std::shared_ptr<Bag<uml::OutputPin>> m_result;
 			
 
 		public:

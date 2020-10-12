@@ -148,11 +148,11 @@ namespace uml
 			/*!
 			 The set of elements that are manifested in an Artifact that is involved in Deployment to a DeploymentTarget.
 			<p>From package UML::Deployments.</p> */
-			std::shared_ptr<Bag<uml::PackageableElement>> m_deployedElement;
+			mutable std::shared_ptr<Bag<uml::PackageableElement>> m_deployedElement;
 			/*!
 			 The set of Deployments for a DeploymentTarget.
 			<p>From package UML::Deployments.</p> */
-			std::shared_ptr<Subset<uml::Deployment, uml::Element>> m_deployment;
+			mutable std::shared_ptr<Subset<uml::Deployment, uml::Element>> m_deployment;
 			
 
 		public:

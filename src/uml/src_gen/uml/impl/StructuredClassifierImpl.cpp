@@ -99,70 +99,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 StructuredClassifierImpl::StructuredClassifierImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-		/*SubsetUnion*/
-		m_ownedAttribute.reset(new SubsetUnion<uml::Property, uml::Property,uml::NamedElement,uml::ConnectableElement >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedAttribute - SubsetUnion<uml::Property, uml::Property,uml::NamedElement,uml::ConnectableElement >()" << std::endl;
-		#endif
-	
-	
-
-		/*Subset*/
-		m_ownedConnector.reset(new Subset<uml::Connector, uml::Feature,uml::NamedElement >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_ownedConnector - Subset<uml::Connector, uml::Feature,uml::NamedElement >()" << std::endl;
-		#endif
-	
-	
-
-		m_part.reset(new Bag<uml::Property>());
-	
-	
-
-		/*SubsetUnion*/
-		m_role.reset(new SubsetUnion<uml::ConnectableElement, uml::NamedElement >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_role - SubsetUnion<uml::ConnectableElement, uml::NamedElement >()" << std::endl;
-		#endif
-	
-	
-
-	//Init references
-		/*SubsetUnion*/
-		m_ownedAttribute->initSubsetUnion(m_attribute,m_ownedMember,m_role);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_ownedAttribute - SubsetUnion<uml::Property, uml::Property,uml::NamedElement,uml::ConnectableElement >(m_attribute,m_ownedMember,m_role)" << std::endl;
-		#endif
-	
-	
-
-		/*Subset*/
-		m_ownedConnector->initSubset(m_feature,m_ownedMember);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_ownedConnector - Subset<uml::Connector, uml::Feature,uml::NamedElement >(m_feature,m_ownedMember)" << std::endl;
-		#endif
-	
-	
-
-	
-	
-
-		/*SubsetUnion*/
-		m_role->initSubsetUnion(m_member);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_role - SubsetUnion<uml::ConnectableElement, uml::NamedElement >(m_member)" << std::endl;
-		#endif
-	
-	
+{	
 }
 
 StructuredClassifierImpl::~StructuredClassifierImpl()
@@ -172,23 +109,20 @@ StructuredClassifierImpl::~StructuredClassifierImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+StructuredClassifierImpl::StructuredClassifierImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:StructuredClassifierImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			StructuredClassifierImpl::StructuredClassifierImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:StructuredClassifierImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
-
-//Additional constructor for the containments back reference
-			StructuredClassifierImpl::StructuredClassifierImpl(std::weak_ptr<uml::Element > par_owner)
-			:StructuredClassifierImpl()
-			{
-			    m_owner = par_owner;
-			}
-
+StructuredClassifierImpl::StructuredClassifierImpl(std::weak_ptr<uml::Element > par_owner)
+:StructuredClassifierImpl()
+{
+	m_owner = par_owner;
+}
 
 //Additional constructor for the containments back reference
 StructuredClassifierImpl::StructuredClassifierImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id)
@@ -210,17 +144,13 @@ StructuredClassifierImpl::StructuredClassifierImpl(std::weak_ptr<uml::Package > 
    
 }
 
-
 //Additional constructor for the containments back reference
-			StructuredClassifierImpl::StructuredClassifierImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
-			:StructuredClassifierImpl()
-			{
-			    m_owningTemplateParameter = par_owningTemplateParameter;
-				m_owner = par_owningTemplateParameter;
-			}
-
-
-//Additional constructor for the containments back reference
+StructuredClassifierImpl::StructuredClassifierImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+:StructuredClassifierImpl()
+{
+	m_owningTemplateParameter = par_owningTemplateParameter;
+	m_owner = par_owningTemplateParameter;
+}
 
 
 
@@ -412,20 +342,18 @@ StructuredClassifierImpl::StructuredClassifierImpl(const StructuredClassifierImp
 		std::cout << "Copying the Subset: " << "m_templateBinding" << std::endl;
 	#endif
 
-		/*SubsetUnion*/
-		m_ownedAttribute->initSubsetUnion(m_attribute,m_ownedMember,m_role);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_ownedAttribute - SubsetUnion<uml::Property, uml::Property,uml::NamedElement,uml::ConnectableElement >(m_attribute,m_ownedMember,m_role)" << std::endl;
-		#endif
-	
+	/*SubsetUnion*/
+	m_ownedAttribute->initSubsetUnion(getAttribute(),getOwnedMember(),getRole());
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Initialising value SubsetUnion: " << "m_ownedAttribute - SubsetUnion<uml::Property, uml::Property,uml::NamedElement,uml::ConnectableElement >(getAttribute(),getOwnedMember(),getRole())" << std::endl;
+	#endif
 	
 
-		/*Subset*/
-		m_ownedConnector->initSubset(m_feature,m_ownedMember);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_ownedConnector - Subset<uml::Connector, uml::Feature,uml::NamedElement >(m_feature,m_ownedMember)" << std::endl;
-		#endif
-	
+	/*Subset*/
+	m_ownedConnector->initSubset(getFeature(),getOwnedMember());
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Initialising value Subset: " << "m_ownedConnector - Subset<uml::Connector, uml::Feature,uml::NamedElement >(getFeature(),getOwnedMember())" << std::endl;
+	#endif
 	
 }
 
@@ -471,6 +399,21 @@ std::shared_ptr<Bag<uml::Property> > StructuredClassifierImpl::getParts()
 //*********************************
 std::shared_ptr<SubsetUnion<uml::Property, uml::Property,uml::NamedElement,uml::ConnectableElement>> StructuredClassifierImpl::getOwnedAttribute() const
 {
+	if(m_ownedAttribute == nullptr)
+	{
+		/*SubsetUnion*/
+		m_ownedAttribute.reset(new SubsetUnion<uml::Property, uml::Property,uml::NamedElement,uml::ConnectableElement >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedAttribute - SubsetUnion<uml::Property, uml::Property,uml::NamedElement,uml::ConnectableElement >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_ownedAttribute->initSubsetUnion(getAttribute(),getOwnedMember(),getRole());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_ownedAttribute - SubsetUnion<uml::Property, uml::Property,uml::NamedElement,uml::ConnectableElement >(getAttribute(),getOwnedMember(),getRole())" << std::endl;
+		#endif
+		
+	}
 
     return m_ownedAttribute;
 }
@@ -478,6 +421,21 @@ std::shared_ptr<SubsetUnion<uml::Property, uml::Property,uml::NamedElement,uml::
 
 std::shared_ptr<Subset<uml::Connector, uml::Feature,uml::NamedElement>> StructuredClassifierImpl::getOwnedConnector() const
 {
+	if(m_ownedConnector == nullptr)
+	{
+		/*Subset*/
+		m_ownedConnector.reset(new Subset<uml::Connector, uml::Feature,uml::NamedElement >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_ownedConnector - Subset<uml::Connector, uml::Feature,uml::NamedElement >()" << std::endl;
+		#endif
+		
+		/*Subset*/
+		m_ownedConnector->initSubset(getFeature(),getOwnedMember());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_ownedConnector - Subset<uml::Connector, uml::Feature,uml::NamedElement >(getFeature(),getOwnedMember())" << std::endl;
+		#endif
+		
+	}
 
     return m_ownedConnector;
 }
@@ -485,6 +443,12 @@ std::shared_ptr<Subset<uml::Connector, uml::Feature,uml::NamedElement>> Structur
 
 std::shared_ptr<Bag<uml::Property>> StructuredClassifierImpl::getPart() const
 {
+	if(m_part == nullptr)
+	{
+		m_part.reset(new Bag<uml::Property>());
+		
+		
+	}
 
     return m_part;
 }
@@ -498,40 +462,140 @@ std::shared_ptr<Bag<uml::Property>> StructuredClassifierImpl::getPart() const
 //*********************************
 std::shared_ptr<SubsetUnion<uml::Property, uml::Feature>> StructuredClassifierImpl::getAttribute() const
 {
+	if(m_attribute == nullptr)
+	{
+		/*SubsetUnion*/
+		m_attribute.reset(new SubsetUnion<uml::Property, uml::Feature >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_attribute - SubsetUnion<uml::Property, uml::Feature >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_attribute->initSubsetUnion(getFeature());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_attribute - SubsetUnion<uml::Property, uml::Feature >(getFeature())" << std::endl;
+		#endif
+		
+	}
 	return m_attribute;
 }
+
 std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement>> StructuredClassifierImpl::getFeature() const
 {
+	if(m_feature == nullptr)
+	{
+		/*SubsetUnion*/
+		m_feature.reset(new SubsetUnion<uml::Feature, uml::NamedElement >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_feature - SubsetUnion<uml::Feature, uml::NamedElement >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_feature->initSubsetUnion(getMember());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_feature - SubsetUnion<uml::Feature, uml::NamedElement >(getMember())" << std::endl;
+		#endif
+		
+	}
 	return m_feature;
 }
+
 std::shared_ptr<Union<uml::NamedElement>> StructuredClassifierImpl::getMember() const
 {
+	if(m_member == nullptr)
+	{
+		/*Union*/
+		m_member.reset(new Union<uml::NamedElement>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_member - Union<uml::NamedElement>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_member;
 }
+
 std::weak_ptr<uml::Namespace > StructuredClassifierImpl::getNamespace() const
 {
 	return m_namespace;
 }
+
 std::shared_ptr<Union<uml::Element>> StructuredClassifierImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> StructuredClassifierImpl::getOwnedMember() const
 {
+	if(m_ownedMember == nullptr)
+	{
+		/*SubsetUnion*/
+		m_ownedMember.reset(new SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_ownedMember->initSubsetUnion(getOwnedElement(),getMember());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >(getOwnedElement(),getMember())" << std::endl;
+		#endif
+		
+	}
 	return m_ownedMember;
 }
+
 std::weak_ptr<uml::Element > StructuredClassifierImpl::getOwner() const
 {
 	return m_owner;
 }
+
 std::shared_ptr<Union<uml::RedefinableElement>> StructuredClassifierImpl::getRedefinedElement() const
 {
+	if(m_redefinedElement == nullptr)
+	{
+		/*Union*/
+		m_redefinedElement.reset(new Union<uml::RedefinableElement>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_redefinedElement - Union<uml::RedefinableElement>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_redefinedElement;
 }
+
 std::shared_ptr<SubsetUnion<uml::ConnectableElement, uml::NamedElement>> StructuredClassifierImpl::getRole() const
 {
+	if(m_role == nullptr)
+	{
+		/*SubsetUnion*/
+		m_role.reset(new SubsetUnion<uml::ConnectableElement, uml::NamedElement >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_role - SubsetUnion<uml::ConnectableElement, uml::NamedElement >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_role->initSubsetUnion(getMember());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_role - SubsetUnion<uml::ConnectableElement, uml::NamedElement >(getMember())" << std::endl;
+		#endif
+		
+	}
 	return m_role;
 }
+
+
 
 
 std::shared_ptr<StructuredClassifier> StructuredClassifierImpl::getThisStructuredClassifierPtr() const

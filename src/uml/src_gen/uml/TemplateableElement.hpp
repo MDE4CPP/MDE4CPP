@@ -145,7 +145,7 @@ namespace uml
 			/*!
 			 The optional TemplateBindings from this TemplateableElement to one or more templates.
 			<p>From package UML::CommonStructure.</p> */
-			std::shared_ptr<Subset<uml::TemplateBinding, uml::Element>> m_templateBinding;
+			mutable std::shared_ptr<Subset<uml::TemplateBinding, uml::Element>> m_templateBinding;
 			
 
 		public:

@@ -66,30 +66,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 ConstraintImpl::ConstraintImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-		m_constrainedElement.reset(new Bag<uml::Element>());
-	
-	
-
-	
-
-	
-
-	//Init references
-	
-	
-
-	
-
-	
+{	
 }
 
 ConstraintImpl::~ConstraintImpl()
@@ -98,7 +75,6 @@ ConstraintImpl::~ConstraintImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete Constraint "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 //Additional constructor for the containments back reference
 ConstraintImpl::ConstraintImpl(std::weak_ptr<uml::Namespace > par_Namespace, const int reference_id)
@@ -122,33 +98,27 @@ ConstraintImpl::ConstraintImpl(std::weak_ptr<uml::Namespace > par_Namespace, con
 
 
 //Additional constructor for the containments back reference
-
-
-//Additional constructor for the containments back reference
-			ConstraintImpl::ConstraintImpl(std::weak_ptr<uml::Element > par_owner)
-			:ConstraintImpl()
-			{
-			    m_owner = par_owner;
-			}
-
+ConstraintImpl::ConstraintImpl(std::weak_ptr<uml::Element > par_owner)
+:ConstraintImpl()
+{
+	m_owner = par_owner;
+}
 
 //Additional constructor for the containments back reference
-			ConstraintImpl::ConstraintImpl(std::weak_ptr<uml::Package > par_owningPackage)
-			:ConstraintImpl()
-			{
-			    m_owningPackage = par_owningPackage;
-				m_namespace = par_owningPackage;
-			}
-
+ConstraintImpl::ConstraintImpl(std::weak_ptr<uml::Package > par_owningPackage)
+:ConstraintImpl()
+{
+	m_owningPackage = par_owningPackage;
+	m_namespace = par_owningPackage;
+}
 
 //Additional constructor for the containments back reference
-			ConstraintImpl::ConstraintImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
-			:ConstraintImpl()
-			{
-			    m_owningTemplateParameter = par_owningTemplateParameter;
-				m_owner = par_owningTemplateParameter;
-			}
-
+ConstraintImpl::ConstraintImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+:ConstraintImpl()
+{
+	m_owningTemplateParameter = par_owningTemplateParameter;
+	m_owner = par_owningTemplateParameter;
+}
 
 
 ConstraintImpl::ConstraintImpl(const ConstraintImpl & obj):ConstraintImpl()
@@ -252,6 +222,12 @@ bool ConstraintImpl::not_apply_to_self(Any diagnostics,std::map <   Any, Any >  
 //*********************************
 std::shared_ptr<Bag<uml::Element>> ConstraintImpl::getConstrainedElement() const
 {
+	if(m_constrainedElement == nullptr)
+	{
+		m_constrainedElement.reset(new Bag<uml::Element>());
+		
+		
+	}
 
     return m_constrainedElement;
 }
@@ -284,14 +260,28 @@ std::weak_ptr<uml::Namespace > ConstraintImpl::getNamespace() const
 {
 	return m_namespace;
 }
+
 std::shared_ptr<Union<uml::Element>> ConstraintImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > ConstraintImpl::getOwner() const
 {
 	return m_owner;
 }
+
+
 
 
 std::shared_ptr<Constraint> ConstraintImpl::getThisConstraintPtr() const

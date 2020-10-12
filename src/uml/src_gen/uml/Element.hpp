@@ -326,11 +326,11 @@ namespace uml
 			/*!
 			 The Comments owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			std::shared_ptr<Subset<uml::Comment, uml::Element>> m_ownedComment;
+			mutable std::shared_ptr<Subset<uml::Comment, uml::Element>> m_ownedComment;
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			std::shared_ptr<Union<uml::Element>> m_ownedElement;
+			mutable std::shared_ptr<Union<uml::Element>> m_ownedElement;
 			/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */

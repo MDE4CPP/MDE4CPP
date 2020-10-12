@@ -581,15 +581,15 @@ namespace uml
 			/*!
 			 An optional list of ordered qualifier attributes for the end.
 			<p>From package UML::Classification.</p> */
-			std::shared_ptr<Subset<uml::Property, uml::Element>> m_qualifier;
+			mutable std::shared_ptr<Subset<uml::Property, uml::Element>> m_qualifier;
 			/*!
 			 The properties that are redefined by this property, if any.
 			<p>From package UML::Classification.</p> */
-			std::shared_ptr<SubsetUnion<uml::Property, uml::RedefinableElement>> m_redefinedProperty;
+			mutable std::shared_ptr<SubsetUnion<uml::Property, uml::RedefinableElement>> m_redefinedProperty;
 			/*!
 			 The properties of which this Property is constrained to be a subset, if any.
 			<p>From package UML::Classification.</p> */
-			std::shared_ptr<Bag<uml::Property>> m_subsettedProperty;
+			mutable std::shared_ptr<Bag<uml::Property>> m_subsettedProperty;
 			
 
 		public:

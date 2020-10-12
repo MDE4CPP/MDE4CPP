@@ -181,11 +181,11 @@ namespace uml
 			/*!
 			 The signatures extended by this RedefinableTemplateSignature.
 			<p>From package UML::Classification.</p> */
-			std::shared_ptr<Subset<uml::RedefinableTemplateSignature, uml::RedefinableElement>> m_extendedSignature;
+			mutable std::shared_ptr<Subset<uml::RedefinableTemplateSignature, uml::RedefinableElement>> m_extendedSignature;
 			/*!
 			 The formal template parameters of the extended signatures.
 			<p>From package UML::Classification.</p> */
-			std::shared_ptr<Subset<uml::TemplateParameter, uml::TemplateParameter>> m_inheritedParameter;
+			mutable std::shared_ptr<Subset<uml::TemplateParameter, uml::TemplateParameter>> m_inheritedParameter;
 			
 
 		public:

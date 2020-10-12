@@ -176,7 +176,7 @@ namespace uml
 			/*!
 			 A set of QualifierValues used to provide values for the qualifiers of the end.
 			<p>From package UML::Actions.</p> */
-			std::shared_ptr<Subset<uml::QualifierValue, uml::Element>> m_qualifier;
+			mutable std::shared_ptr<Subset<uml::QualifierValue, uml::Element>> m_qualifier;
 			/*!
 			 The InputPin that provides the specified value for the given end. This InputPin is omitted if the LinkEndData specifies the "open" end for a ReadLinkAction.
 			<p>From package UML::Actions.</p> */

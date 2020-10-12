@@ -98,47 +98,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 ProfileImpl::ProfileImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-		/*Subset*/
-		m_metaclassReference.reset(new Subset<uml::ElementImport, uml::ElementImport /*Subset does not reference a union*/ >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_metaclassReference - Subset<uml::ElementImport, uml::ElementImport /*Subset does not reference a union*/ >()" << std::endl;
-		#endif
-	
-	
-
-		/*Subset*/
-		m_metamodelReference.reset(new Subset<uml::PackageImport, uml::PackageImport /*Subset does not reference a union*/ >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_metamodelReference - Subset<uml::PackageImport, uml::PackageImport /*Subset does not reference a union*/ >()" << std::endl;
-		#endif
-	
-	
-
-	//Init references
-		/*Subset*/
-		m_metaclassReference->initSubset(m_elementImport);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_metaclassReference - Subset<uml::ElementImport, uml::ElementImport /*Subset does not reference a union*/ >(m_elementImport)" << std::endl;
-		#endif
-	
-	
-
-		/*Subset*/
-		m_metamodelReference->initSubset(m_packageImport);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_metamodelReference - Subset<uml::PackageImport, uml::PackageImport /*Subset does not reference a union*/ >(m_packageImport)" << std::endl;
-		#endif
-	
-	
+{	
 }
 
 ProfileImpl::~ProfileImpl()
@@ -148,15 +108,13 @@ ProfileImpl::~ProfileImpl()
 #endif
 }
 
-
 //Additional constructor for the containments back reference
-			ProfileImpl::ProfileImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:ProfileImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
+ProfileImpl::ProfileImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:ProfileImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
 ProfileImpl::ProfileImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id)
@@ -178,26 +136,21 @@ ProfileImpl::ProfileImpl(std::weak_ptr<uml::Package > par_Package, const int ref
    
 }
 
-
 //Additional constructor for the containments back reference
-			ProfileImpl::ProfileImpl(std::weak_ptr<uml::Element > par_owner)
-			:ProfileImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-//Additional constructor for the containments back reference
+ProfileImpl::ProfileImpl(std::weak_ptr<uml::Element > par_owner)
+:ProfileImpl()
+{
+	m_owner = par_owner;
+}
 
 
 //Additional constructor for the containments back reference
-			ProfileImpl::ProfileImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
-			:ProfileImpl()
-			{
-			    m_owningTemplateParameter = par_owningTemplateParameter;
-				m_owner = par_owningTemplateParameter;
-			}
-
+ProfileImpl::ProfileImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+:ProfileImpl()
+{
+	m_owningTemplateParameter = par_owningTemplateParameter;
+	m_owner = par_owningTemplateParameter;
+}
 
 
 ProfileImpl::ProfileImpl(const ProfileImpl & obj):ProfileImpl()
@@ -453,6 +406,21 @@ bool ProfileImpl::references_same_metamodel(Any diagnostics,std::map <   Any, An
 //*********************************
 std::shared_ptr<Subset<uml::ElementImport, uml::ElementImport /*Subset does not reference a union*/>> ProfileImpl::getMetaclassReference() const
 {
+	if(m_metaclassReference == nullptr)
+	{
+		/*Subset*/
+		m_metaclassReference.reset(new Subset<uml::ElementImport, uml::ElementImport /*Subset does not reference a union*/ >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_metaclassReference - Subset<uml::ElementImport, uml::ElementImport /*Subset does not reference a union*/ >()" << std::endl;
+		#endif
+		
+		/*Subset*/
+		m_metaclassReference->initSubset(getElementImport());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_metaclassReference - Subset<uml::ElementImport, uml::ElementImport /*Subset does not reference a union*/ >(getElementImport())" << std::endl;
+		#endif
+		
+	}
 
     return m_metaclassReference;
 }
@@ -460,6 +428,21 @@ std::shared_ptr<Subset<uml::ElementImport, uml::ElementImport /*Subset does not 
 
 std::shared_ptr<Subset<uml::PackageImport, uml::PackageImport /*Subset does not reference a union*/>> ProfileImpl::getMetamodelReference() const
 {
+	if(m_metamodelReference == nullptr)
+	{
+		/*Subset*/
+		m_metamodelReference.reset(new Subset<uml::PackageImport, uml::PackageImport /*Subset does not reference a union*/ >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_metamodelReference - Subset<uml::PackageImport, uml::PackageImport /*Subset does not reference a union*/ >()" << std::endl;
+		#endif
+		
+		/*Subset*/
+		m_metamodelReference->initSubset(getPackageImport());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_metamodelReference - Subset<uml::PackageImport, uml::PackageImport /*Subset does not reference a union*/ >(getPackageImport())" << std::endl;
+		#endif
+		
+	}
 
     return m_metamodelReference;
 }
@@ -470,24 +453,65 @@ std::shared_ptr<Subset<uml::PackageImport, uml::PackageImport /*Subset does not 
 //*********************************
 std::shared_ptr<Union<uml::NamedElement>> ProfileImpl::getMember() const
 {
+	if(m_member == nullptr)
+	{
+		/*Union*/
+		m_member.reset(new Union<uml::NamedElement>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_member - Union<uml::NamedElement>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_member;
 }
+
 std::weak_ptr<uml::Namespace > ProfileImpl::getNamespace() const
 {
 	return m_namespace;
 }
+
 std::shared_ptr<Union<uml::Element>> ProfileImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> ProfileImpl::getOwnedMember() const
 {
+	if(m_ownedMember == nullptr)
+	{
+		/*SubsetUnion*/
+		m_ownedMember.reset(new SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_ownedMember->initSubsetUnion(getOwnedElement(),getMember());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >(getOwnedElement(),getMember())" << std::endl;
+		#endif
+		
+	}
 	return m_ownedMember;
 }
+
 std::weak_ptr<uml::Element > ProfileImpl::getOwner() const
 {
 	return m_owner;
 }
+
+
 
 
 std::shared_ptr<Profile> ProfileImpl::getThisProfilePtr() const

@@ -190,11 +190,11 @@ namespace uml
 			/*!
 			 The entryPoint Pseudostates corresponding to this connection point.
 			<p>From package UML::StateMachines.</p> */
-			std::shared_ptr<Bag<uml::Pseudostate>> m_entry;
+			mutable std::shared_ptr<Bag<uml::Pseudostate>> m_entry;
 			/*!
 			 The exitPoints kind Pseudostates corresponding to this connection point.
 			<p>From package UML::StateMachines.</p> */
-			std::shared_ptr<Bag<uml::Pseudostate>> m_exit;
+			mutable std::shared_ptr<Bag<uml::Pseudostate>> m_exit;
 			/*!
 			 The State in which the ConnectionPointReference is defined.
 			<p>From package UML::StateMachines.</p> */

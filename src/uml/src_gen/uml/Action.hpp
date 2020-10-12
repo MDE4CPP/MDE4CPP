@@ -256,19 +256,19 @@ namespace uml
 			/*!
 			 The ordered set of InputPins representing the inputs to the Action.
 			<p>From package UML::Actions.</p> */
-			std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element>> m_input;
+			mutable std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element>> m_input;
 			/*!
 			 A Constraint that must be satisfied when execution of the Action is completed.
 			<p>From package UML::Actions.</p> */
-			std::shared_ptr<Subset<uml::Constraint, uml::Element>> m_localPostcondition;
+			mutable std::shared_ptr<Subset<uml::Constraint, uml::Element>> m_localPostcondition;
 			/*!
 			 A Constraint that must be satisfied when execution of the Action is started.
 			<p>From package UML::Actions.</p> */
-			std::shared_ptr<Subset<uml::Constraint, uml::Element>> m_localPrecondition;
+			mutable std::shared_ptr<Subset<uml::Constraint, uml::Element>> m_localPrecondition;
 			/*!
 			 The ordered set of OutputPins representing outputs from the Action.
 			<p>From package UML::Actions.</p> */
-			std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element>> m_output;
+			mutable std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element>> m_output;
 			
 
 		public:

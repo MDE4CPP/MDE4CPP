@@ -165,7 +165,7 @@ namespace uml
 			/*!
 			 Represents a set of instances of Generalization.  A Generalization may appear in many GeneralizationSets.
 			<p>From package UML::Classification.</p> */
-			std::shared_ptr<Bag<uml::GeneralizationSet>> m_generalizationSet;
+			mutable std::shared_ptr<Bag<uml::GeneralizationSet>> m_generalizationSet;
 			/*!
 			 The specializing Classifier in the Generalization relationship.
 			<p>From package UML::Classification.</p> */

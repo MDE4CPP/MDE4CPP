@@ -157,7 +157,7 @@ namespace uml
 			/*!
 			 A optional Port of through which the given effect is detected.
 			<p>From package UML::CommonBehavior.</p> */
-			std::shared_ptr<Bag<uml::Port>> m_port;
+			mutable std::shared_ptr<Bag<uml::Port>> m_port;
 			
 
 		public:

@@ -75,19 +75,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 EnumerationLiteralImpl::EnumerationLiteralImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	//Init references
-	
+{	
 }
 
 EnumerationLiteralImpl::~EnumerationLiteralImpl()
@@ -97,50 +85,44 @@ EnumerationLiteralImpl::~EnumerationLiteralImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+EnumerationLiteralImpl::EnumerationLiteralImpl(std::weak_ptr<uml::Enumeration > par_enumeration)
+:EnumerationLiteralImpl()
+{
+	m_enumeration = par_enumeration;
+	m_namespace = par_enumeration;
+}
 
 //Additional constructor for the containments back reference
-			EnumerationLiteralImpl::EnumerationLiteralImpl(std::weak_ptr<uml::Enumeration > par_enumeration)
-			:EnumerationLiteralImpl()
-			{
-			    m_enumeration = par_enumeration;
-				m_namespace = par_enumeration;
-			}
-
-
-//Additional constructor for the containments back reference
-			EnumerationLiteralImpl::EnumerationLiteralImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:EnumerationLiteralImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
+EnumerationLiteralImpl::EnumerationLiteralImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:EnumerationLiteralImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			EnumerationLiteralImpl::EnumerationLiteralImpl(std::weak_ptr<uml::Element > par_owner)
-			:EnumerationLiteralImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-//Additional constructor for the containments back reference
-			EnumerationLiteralImpl::EnumerationLiteralImpl(std::weak_ptr<uml::Package > par_owningPackage)
-			:EnumerationLiteralImpl()
-			{
-			    m_owningPackage = par_owningPackage;
-				m_namespace = par_owningPackage;
-			}
-
+EnumerationLiteralImpl::EnumerationLiteralImpl(std::weak_ptr<uml::Element > par_owner)
+:EnumerationLiteralImpl()
+{
+	m_owner = par_owner;
+}
 
 //Additional constructor for the containments back reference
-			EnumerationLiteralImpl::EnumerationLiteralImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
-			:EnumerationLiteralImpl()
-			{
-			    m_owningTemplateParameter = par_owningTemplateParameter;
-				m_owner = par_owningTemplateParameter;
-			}
+EnumerationLiteralImpl::EnumerationLiteralImpl(std::weak_ptr<uml::Package > par_owningPackage)
+:EnumerationLiteralImpl()
+{
+	m_owningPackage = par_owningPackage;
+	m_namespace = par_owningPackage;
+}
 
+//Additional constructor for the containments back reference
+EnumerationLiteralImpl::EnumerationLiteralImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+:EnumerationLiteralImpl()
+{
+	m_owningTemplateParameter = par_owningTemplateParameter;
+	m_owner = par_owningTemplateParameter;
+}
 
 
 EnumerationLiteralImpl::EnumerationLiteralImpl(const EnumerationLiteralImpl & obj):EnumerationLiteralImpl()
@@ -267,14 +249,28 @@ std::weak_ptr<uml::Namespace > EnumerationLiteralImpl::getNamespace() const
 {
 	return m_namespace;
 }
+
 std::shared_ptr<Union<uml::Element>> EnumerationLiteralImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > EnumerationLiteralImpl::getOwner() const
 {
 	return m_owner;
 }
+
+
 
 
 std::shared_ptr<EnumerationLiteral> EnumerationLiteralImpl::getThisEnumerationLiteralPtr() const

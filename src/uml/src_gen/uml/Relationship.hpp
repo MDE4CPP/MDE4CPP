@@ -100,7 +100,7 @@ namespace uml
 			/*!
 			 Specifies the elements related by the Relationship.
 			<p>From package UML::CommonStructure.</p> */
-			std::shared_ptr<Union<uml::Element>> m_relatedElement;
+			mutable std::shared_ptr<Union<uml::Element>> m_relatedElement;
 			
 
 		public:

@@ -82,59 +82,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 RegionImpl::RegionImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	
-
-	
-
-		/*Subset*/
-		m_subvertex.reset(new Subset<uml::Vertex, uml::NamedElement >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_subvertex - Subset<uml::Vertex, uml::NamedElement >()" << std::endl;
-		#endif
-	
-	
-
-		/*Subset*/
-		m_transition.reset(new Subset<uml::Transition, uml::NamedElement >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_transition - Subset<uml::Transition, uml::NamedElement >()" << std::endl;
-		#endif
-	
-	
-
-	//Init references
-	
-
-	
-
-	
-
-		/*Subset*/
-		m_subvertex->initSubset(m_ownedMember);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_subvertex - Subset<uml::Vertex, uml::NamedElement >(m_ownedMember)" << std::endl;
-		#endif
-	
-	
-
-		/*Subset*/
-		m_transition->initSubset(m_ownedMember);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_transition - Subset<uml::Transition, uml::NamedElement >(m_ownedMember)" << std::endl;
-		#endif
-	
-	
+{	
 }
 
 RegionImpl::~RegionImpl()
@@ -144,41 +92,36 @@ RegionImpl::~RegionImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+RegionImpl::RegionImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:RegionImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			RegionImpl::RegionImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:RegionImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
+RegionImpl::RegionImpl(std::weak_ptr<uml::Element > par_owner)
+:RegionImpl()
+{
+	m_owner = par_owner;
+}
 
 //Additional constructor for the containments back reference
-			RegionImpl::RegionImpl(std::weak_ptr<uml::Element > par_owner)
-			:RegionImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-//Additional constructor for the containments back reference
-			RegionImpl::RegionImpl(std::weak_ptr<uml::State > par_state)
-			:RegionImpl()
-			{
-			    m_state = par_state;
-				m_namespace = par_state;
-			}
-
+RegionImpl::RegionImpl(std::weak_ptr<uml::State > par_state)
+:RegionImpl()
+{
+	m_state = par_state;
+	m_namespace = par_state;
+}
 
 //Additional constructor for the containments back reference
-			RegionImpl::RegionImpl(std::weak_ptr<uml::StateMachine > par_stateMachine)
-			:RegionImpl()
-			{
-			    m_stateMachine = par_stateMachine;
-				m_namespace = par_stateMachine;
-			}
-
+RegionImpl::RegionImpl(std::weak_ptr<uml::StateMachine > par_stateMachine)
+:RegionImpl()
+{
+	m_stateMachine = par_stateMachine;
+	m_namespace = par_stateMachine;
+}
 
 
 RegionImpl::RegionImpl(const RegionImpl & obj):RegionImpl()
@@ -288,20 +231,18 @@ RegionImpl::RegionImpl(const RegionImpl & obj):RegionImpl()
 		std::cout << "Copying the Subset: " << "m_transition" << std::endl;
 	#endif
 
-		/*Subset*/
-		m_subvertex->initSubset(m_ownedMember);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_subvertex - Subset<uml::Vertex, uml::NamedElement >(m_ownedMember)" << std::endl;
-		#endif
-	
+	/*Subset*/
+	m_subvertex->initSubset(getOwnedMember());
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Initialising value Subset: " << "m_subvertex - Subset<uml::Vertex, uml::NamedElement >(getOwnedMember())" << std::endl;
+	#endif
 	
 
-		/*Subset*/
-		m_transition->initSubset(m_ownedMember);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_transition - Subset<uml::Transition, uml::NamedElement >(m_ownedMember)" << std::endl;
-		#endif
-	
+	/*Subset*/
+	m_transition->initSubset(getOwnedMember());
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Initialising value Subset: " << "m_transition - Subset<uml::Transition, uml::NamedElement >(getOwnedMember())" << std::endl;
+	#endif
 	
 }
 
@@ -401,6 +342,21 @@ void RegionImpl::setStateMachine(std::shared_ptr<uml::StateMachine> _stateMachin
 
 std::shared_ptr<Subset<uml::Vertex, uml::NamedElement>> RegionImpl::getSubvertex() const
 {
+	if(m_subvertex == nullptr)
+	{
+		/*Subset*/
+		m_subvertex.reset(new Subset<uml::Vertex, uml::NamedElement >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_subvertex - Subset<uml::Vertex, uml::NamedElement >()" << std::endl;
+		#endif
+		
+		/*Subset*/
+		m_subvertex->initSubset(getOwnedMember());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_subvertex - Subset<uml::Vertex, uml::NamedElement >(getOwnedMember())" << std::endl;
+		#endif
+		
+	}
 
     return m_subvertex;
 }
@@ -408,6 +364,21 @@ std::shared_ptr<Subset<uml::Vertex, uml::NamedElement>> RegionImpl::getSubvertex
 
 std::shared_ptr<Subset<uml::Transition, uml::NamedElement>> RegionImpl::getTransition() const
 {
+	if(m_transition == nullptr)
+	{
+		/*Subset*/
+		m_transition.reset(new Subset<uml::Transition, uml::NamedElement >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_transition - Subset<uml::Transition, uml::NamedElement >()" << std::endl;
+		#endif
+		
+		/*Subset*/
+		m_transition->initSubset(getOwnedMember());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_transition - Subset<uml::Transition, uml::NamedElement >(getOwnedMember())" << std::endl;
+		#endif
+		
+	}
 
     return m_transition;
 }
@@ -418,28 +389,80 @@ std::shared_ptr<Subset<uml::Transition, uml::NamedElement>> RegionImpl::getTrans
 //*********************************
 std::shared_ptr<Union<uml::NamedElement>> RegionImpl::getMember() const
 {
+	if(m_member == nullptr)
+	{
+		/*Union*/
+		m_member.reset(new Union<uml::NamedElement>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_member - Union<uml::NamedElement>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_member;
 }
+
 std::weak_ptr<uml::Namespace > RegionImpl::getNamespace() const
 {
 	return m_namespace;
 }
+
 std::shared_ptr<Union<uml::Element>> RegionImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> RegionImpl::getOwnedMember() const
 {
+	if(m_ownedMember == nullptr)
+	{
+		/*SubsetUnion*/
+		m_ownedMember.reset(new SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_ownedMember->initSubsetUnion(getOwnedElement(),getMember());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >(getOwnedElement(),getMember())" << std::endl;
+		#endif
+		
+	}
 	return m_ownedMember;
 }
+
 std::weak_ptr<uml::Element > RegionImpl::getOwner() const
 {
 	return m_owner;
 }
+
 std::shared_ptr<Union<uml::RedefinableElement>> RegionImpl::getRedefinedElement() const
 {
+	if(m_redefinedElement == nullptr)
+	{
+		/*Union*/
+		m_redefinedElement.reset(new Union<uml::RedefinableElement>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_redefinedElement - Union<uml::RedefinableElement>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_redefinedElement;
 }
+
+
 
 
 std::shared_ptr<Region> RegionImpl::getThisRegionPtr() const

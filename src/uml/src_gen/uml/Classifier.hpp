@@ -485,39 +485,39 @@ namespace uml
 			/*!
 			 All of the Properties that are direct (i.e., not inherited or imported) attributes of the Classifier.
 			<p>From package UML::Classification.</p> */
-			std::shared_ptr<SubsetUnion<uml::Property, uml::Feature>> m_attribute;
+			mutable std::shared_ptr<SubsetUnion<uml::Property, uml::Feature>> m_attribute;
 			/*!
 			 The CollaborationUses owned by the Classifier.
 			<p>From package UML::Classification.</p> */
-			std::shared_ptr<SubsetUnion<uml::CollaborationUse, uml::Element>> m_collaborationUse;
+			mutable std::shared_ptr<SubsetUnion<uml::CollaborationUse, uml::Element>> m_collaborationUse;
 			/*!
 			 Specifies each Feature directly defined in the classifier. Note that there may be members of the Classifier that are of the type Feature but are not included, e.g., inherited features.
 			<p>From package UML::Classification.</p> */
-			std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement>> m_feature;
+			mutable std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement>> m_feature;
 			/*!
 			 The generalizing Classifiers for this Classifier.
 			<p>From package UML::Classification.</p> */
-			std::shared_ptr<Bag<uml::Classifier>> m_general;
+			mutable std::shared_ptr<Bag<uml::Classifier>> m_general;
 			/*!
 			 The Generalization relationships for this Classifier. These Generalizations navigate to more general Classifiers in the generalization hierarchy.
 			<p>From package UML::Classification.</p> */
-			std::shared_ptr<Subset<uml::Generalization, uml::Element>> m_generalization;
+			mutable std::shared_ptr<Subset<uml::Generalization, uml::Element>> m_generalization;
 			/*!
 			 All elements inherited by this Classifier from its general Classifiers.
 			<p>From package UML::Classification.</p> */
-			std::shared_ptr<Subset<uml::NamedElement, uml::NamedElement>> m_inheritedMember;
+			mutable std::shared_ptr<Subset<uml::NamedElement, uml::NamedElement>> m_inheritedMember;
 			/*!
 			 The UseCases owned by this classifier.
 			<p>From package UML::Classification.</p> */
-			std::shared_ptr<Subset<uml::UseCase, uml::NamedElement>> m_ownedUseCase;
+			mutable std::shared_ptr<Subset<uml::UseCase, uml::NamedElement>> m_ownedUseCase;
 			/*!
 			 The GeneralizationSet of which this Classifier is a power type.
 			<p>From package UML::Classification.</p> */
-			std::shared_ptr<Bag<uml::GeneralizationSet>> m_powertypeExtent;
+			mutable std::shared_ptr<Bag<uml::GeneralizationSet>> m_powertypeExtent;
 			/*!
 			 The Classifiers redefined by this Classifier.
 			<p>From package UML::Classification.</p> */
-			std::shared_ptr<SubsetUnion<uml::Classifier, uml::RedefinableElement>> m_redefinedClassifier;
+			mutable std::shared_ptr<SubsetUnion<uml::Classifier, uml::RedefinableElement>> m_redefinedClassifier;
 			/*!
 			 A CollaborationUse which indicates the Collaboration that represents this Classifier.
 			<p>From package UML::Classification.</p> */
@@ -525,11 +525,11 @@ namespace uml
 			/*!
 			 The Substitutions owned by this Classifier.
 			<p>From package UML::Classification.</p> */
-			std::shared_ptr<Subset<uml::Substitution, uml::Element>> m_substitution;
+			mutable std::shared_ptr<Subset<uml::Substitution, uml::Element>> m_substitution;
 			/*!
 			 The set of UseCases for which this Classifier is the subject.
 			<p>From package UML::Classification.</p> */
-			std::shared_ptr<Bag<uml::UseCase>> m_useCase;
+			mutable std::shared_ptr<Bag<uml::UseCase>> m_useCase;
 			
 
 		public:

@@ -732,6 +732,7 @@ void UmlPackageImpl::createClassContent(std::shared_ptr<ecore::EPackage> package
 	m_class_Attribute_superClass = factory->createEReference_in_EContainingClass(m_class_Class, CLASS_ATTRIBUTE_SUPERCLASS);
 	
 	m_class_Operation_createOwnedOperation_String_Type = factory->createEOperation_in_EContainingClass(m_class_Class, CLASS_OPERATION_CREATEOWNEDOPERATION_STRING_TYPE);
+	m_class_Operation_getAllOperations = factory->createEOperation_in_EContainingClass(m_class_Class, CLASS_OPERATION_GETALLOPERATIONS);
 	m_class_Operation_getExtensions = factory->createEOperation_in_EContainingClass(m_class_Class, CLASS_OPERATION_GETEXTENSIONS);
 	m_class_Operation_getSuperClasses = factory->createEOperation_in_EContainingClass(m_class_Class, CLASS_OPERATION_GETSUPERCLASSES);
 	m_class_Operation_isMetaclass = factory->createEOperation_in_EContainingClass(m_class_Class, CLASS_OPERATION_ISMETACLASS);

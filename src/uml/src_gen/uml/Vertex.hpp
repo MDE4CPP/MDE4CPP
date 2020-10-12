@@ -238,11 +238,11 @@ namespace uml
 			/*!
 			 Specifies the Transitions entering this Vertex.
 			<p>From package UML::StateMachines.</p> */
-			std::shared_ptr<Bag<uml::Transition>> m_incoming;
+			mutable std::shared_ptr<Bag<uml::Transition>> m_incoming;
 			/*!
 			 Specifies the Transitions departing from this Vertex.
 			<p>From package UML::StateMachines.</p> */
-			std::shared_ptr<Bag<uml::Transition>> m_outgoing;
+			mutable std::shared_ptr<Bag<uml::Transition>> m_outgoing;
 			
 
 		public:

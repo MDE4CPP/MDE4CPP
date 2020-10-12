@@ -237,11 +237,11 @@ namespace uml
 			/*!
 			 The ExpansionNodes that hold the input collections for the ExpansionRegion.
 			<p>From package UML::Actions.</p> */
-			std::shared_ptr<Bag<uml::ExpansionNode>> m_inputElement;
+			mutable std::shared_ptr<Bag<uml::ExpansionNode>> m_inputElement;
 			/*!
 			 The ExpansionNodes that form the output collections of the ExpansionRegion.
 			<p>From package UML::Actions.</p> */
-			std::shared_ptr<Bag<uml::ExpansionNode>> m_outputElement;
+			mutable std::shared_ptr<Bag<uml::ExpansionNode>> m_outputElement;
 			
 
 		public:

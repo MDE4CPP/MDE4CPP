@@ -62,23 +62,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 GeneralOrderingImpl::GeneralOrderingImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	
-
-	//Init references
-	
-
-	
+{	
 }
 
 GeneralOrderingImpl::~GeneralOrderingImpl()
@@ -88,23 +72,20 @@ GeneralOrderingImpl::~GeneralOrderingImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+GeneralOrderingImpl::GeneralOrderingImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:GeneralOrderingImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			GeneralOrderingImpl::GeneralOrderingImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:GeneralOrderingImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
-
-//Additional constructor for the containments back reference
-			GeneralOrderingImpl::GeneralOrderingImpl(std::weak_ptr<uml::Element > par_owner)
-			:GeneralOrderingImpl()
-			{
-			    m_owner = par_owner;
-			}
-
+GeneralOrderingImpl::GeneralOrderingImpl(std::weak_ptr<uml::Element > par_owner)
+:GeneralOrderingImpl()
+{
+	m_owner = par_owner;
+}
 
 
 GeneralOrderingImpl::GeneralOrderingImpl(const GeneralOrderingImpl & obj):GeneralOrderingImpl()
@@ -204,12 +185,25 @@ void GeneralOrderingImpl::setBefore(std::shared_ptr<uml::OccurrenceSpecification
 //*********************************
 std::shared_ptr<Union<uml::Element>> GeneralOrderingImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > GeneralOrderingImpl::getOwner() const
 {
 	return m_owner;
 }
+
+
 
 
 std::shared_ptr<GeneralOrdering> GeneralOrderingImpl::getThisGeneralOrderingPtr() const

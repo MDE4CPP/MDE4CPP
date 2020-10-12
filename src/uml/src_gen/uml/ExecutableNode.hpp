@@ -171,7 +171,7 @@ namespace uml
 			/*!
 			 A set of ExceptionHandlers that are examined if an exception propagates out of the ExceptionNode.
 			<p>From package UML::Activities.</p> */
-			std::shared_ptr<Subset<uml::ExceptionHandler, uml::Element>> m_handler;
+			mutable std::shared_ptr<Subset<uml::ExceptionHandler, uml::Element>> m_handler;
 			
 
 		public:

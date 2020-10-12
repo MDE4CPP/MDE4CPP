@@ -147,11 +147,11 @@ namespace uml
 			/*!
 			 The formal parameters that are owned by this TemplateSignature.
 			<p>From package UML::CommonStructure.</p> */
-			std::shared_ptr<Subset<uml::TemplateParameter, uml::Element,uml::TemplateParameter>> m_ownedParameter;
+			mutable std::shared_ptr<Subset<uml::TemplateParameter, uml::Element,uml::TemplateParameter>> m_ownedParameter;
 			/*!
 			 The ordered set of all formal TemplateParameters for this TemplateSignature.
 			<p>From package UML::CommonStructure.</p> */
-			std::shared_ptr<Union<uml::TemplateParameter>> m_parameter;
+			mutable std::shared_ptr<Union<uml::TemplateParameter>> m_parameter;
 			/*!
 			 The TemplateableElement that owns this TemplateSignature.
 			<p>From package UML::CommonStructure.</p> */

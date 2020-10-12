@@ -140,7 +140,7 @@ namespace uml
 			/*!
 			 The Classifiers that have this Feature as a feature.
 			<p>From package UML::Classification.</p> */
-			std::shared_ptr<Union<uml::Classifier>> m_featuringClassifier;
+			mutable std::shared_ptr<Union<uml::Classifier>> m_featuringClassifier;
 			
 
 		public:

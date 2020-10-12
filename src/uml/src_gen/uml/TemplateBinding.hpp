@@ -168,7 +168,7 @@ namespace uml
 			/*!
 			 The TemplateParameterSubstitutions owned by this TemplateBinding.
 			<p>From package UML::CommonStructure.</p> */
-			std::shared_ptr<Subset<uml::TemplateParameterSubstitution, uml::Element>> m_parameterSubstitution;
+			mutable std::shared_ptr<Subset<uml::TemplateParameterSubstitution, uml::Element>> m_parameterSubstitution;
 			/*!
 			 The TemplateSignature for the template that is the target of this TemplateBinding.
 			<p>From package UML::CommonStructure.</p> */

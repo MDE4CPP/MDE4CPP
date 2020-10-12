@@ -165,7 +165,7 @@ namespace uml
 			/*!
 			 Specifies a sequence of operand ValueSpecifications.
 			<p>From package UML::Values.</p> */
-			std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>> m_operand;
+			mutable std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>> m_operand;
 			
 
 		public:

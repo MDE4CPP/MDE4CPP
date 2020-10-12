@@ -55,26 +55,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 MultiplicityElementImpl::MultiplicityElementImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	
-	
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	
-
-	//Init references
-	
-
-	
+{	
 }
 
 MultiplicityElementImpl::~MultiplicityElementImpl()
@@ -84,14 +65,12 @@ MultiplicityElementImpl::~MultiplicityElementImpl()
 #endif
 }
 
-
 //Additional constructor for the containments back reference
-			MultiplicityElementImpl::MultiplicityElementImpl(std::weak_ptr<uml::Element > par_owner)
-			:MultiplicityElementImpl()
-			{
-			    m_owner = par_owner;
-			}
-
+MultiplicityElementImpl::MultiplicityElementImpl(std::weak_ptr<uml::Element > par_owner)
+:MultiplicityElementImpl()
+{
+	m_owner = par_owner;
+}
 
 
 MultiplicityElementImpl::MultiplicityElementImpl(const MultiplicityElementImpl & obj):MultiplicityElementImpl()
@@ -159,7 +138,6 @@ void MultiplicityElementImpl::setIsOrdered(bool _isOrdered)
 {
 	m_isOrdered = _isOrdered;
 } 
-
 bool MultiplicityElementImpl::getIsOrdered() const 
 {
 	return m_isOrdered;
@@ -169,7 +147,6 @@ void MultiplicityElementImpl::setIsUnique(bool _isUnique)
 {
 	m_isUnique = _isUnique;
 } 
-
 bool MultiplicityElementImpl::getIsUnique() const 
 {
 	return m_isUnique;
@@ -179,7 +156,6 @@ void MultiplicityElementImpl::setLower(int _lower)
 {
 	m_lower = _lower;
 } 
-
 int MultiplicityElementImpl::getLower() const 
 {
 	return m_lower;
@@ -189,7 +165,6 @@ void MultiplicityElementImpl::setUpper(int _upper)
 {
 	m_upper = _upper;
 } 
-
 int MultiplicityElementImpl::getUpper() const 
 {
 	return m_upper;
@@ -298,8 +273,20 @@ void MultiplicityElementImpl::setUpperValue(std::shared_ptr<uml::ValueSpecificat
 //*********************************
 std::shared_ptr<Union<uml::Element>> MultiplicityElementImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
+
 
 
 std::shared_ptr<MultiplicityElement> MultiplicityElementImpl::getThisMultiplicityElementPtr() const

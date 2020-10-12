@@ -154,7 +154,7 @@ namespace uml
 			/*!
 			 The value or values held by the Slot.
 			<p>From package UML::Classification.</p> */
-			std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>> m_value;
+			mutable std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>> m_value;
 			
 
 		public:

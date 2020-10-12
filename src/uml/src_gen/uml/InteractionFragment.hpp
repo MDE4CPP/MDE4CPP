@@ -186,7 +186,7 @@ namespace uml
 			/*!
 			 References the Lifelines that the InteractionFragment involves.
 			<p>From package UML::Interactions.</p> */
-			std::shared_ptr<Bag<uml::Lifeline>> m_covered;
+			mutable std::shared_ptr<Bag<uml::Lifeline>> m_covered;
 			/*!
 			 The Interaction enclosing this InteractionFragment.
 			<p>From package UML::Interactions.</p> */
@@ -198,7 +198,7 @@ namespace uml
 			/*!
 			 The general ordering relationships contained in this fragment.
 			<p>From package UML::Interactions.</p> */
-			std::shared_ptr<Subset<uml::GeneralOrdering, uml::Element>> m_generalOrdering;
+			mutable std::shared_ptr<Subset<uml::GeneralOrdering, uml::Element>> m_generalOrdering;
 			
 
 		public:

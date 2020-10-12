@@ -317,7 +317,7 @@ namespace uml
 			/*!
 			 The arguments of the Message.
 			<p>From package UML::Interactions.</p> */
-			std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>> m_argument;
+			mutable std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>> m_argument;
 			/*!
 			 The Connector on which this Message is sent.
 			<p>From package UML::Interactions.</p> */

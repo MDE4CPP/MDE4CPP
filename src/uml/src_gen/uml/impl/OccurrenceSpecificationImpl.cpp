@@ -67,29 +67,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 OccurrenceSpecificationImpl::OccurrenceSpecificationImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-		m_toAfter.reset(new Bag<uml::GeneralOrdering>());
-	
-	
-
-		m_toBefore.reset(new Bag<uml::GeneralOrdering>());
-	
-	
-
-	//Init references
-	
-	
-
-	
-	
+{	
 }
 
 OccurrenceSpecificationImpl::~OccurrenceSpecificationImpl()
@@ -99,41 +77,36 @@ OccurrenceSpecificationImpl::~OccurrenceSpecificationImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+OccurrenceSpecificationImpl::OccurrenceSpecificationImpl(std::weak_ptr<uml::Interaction > par_enclosingInteraction)
+:OccurrenceSpecificationImpl()
+{
+	m_enclosingInteraction = par_enclosingInteraction;
+	m_namespace = par_enclosingInteraction;
+}
 
 //Additional constructor for the containments back reference
-			OccurrenceSpecificationImpl::OccurrenceSpecificationImpl(std::weak_ptr<uml::Interaction > par_enclosingInteraction)
-			:OccurrenceSpecificationImpl()
-			{
-			    m_enclosingInteraction = par_enclosingInteraction;
-				m_namespace = par_enclosingInteraction;
-			}
-
-
-//Additional constructor for the containments back reference
-			OccurrenceSpecificationImpl::OccurrenceSpecificationImpl(std::weak_ptr<uml::InteractionOperand > par_enclosingOperand)
-			:OccurrenceSpecificationImpl()
-			{
-			    m_enclosingOperand = par_enclosingOperand;
-				m_namespace = par_enclosingOperand;
-			}
-
+OccurrenceSpecificationImpl::OccurrenceSpecificationImpl(std::weak_ptr<uml::InteractionOperand > par_enclosingOperand)
+:OccurrenceSpecificationImpl()
+{
+	m_enclosingOperand = par_enclosingOperand;
+	m_namespace = par_enclosingOperand;
+}
 
 //Additional constructor for the containments back reference
-			OccurrenceSpecificationImpl::OccurrenceSpecificationImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:OccurrenceSpecificationImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
+OccurrenceSpecificationImpl::OccurrenceSpecificationImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:OccurrenceSpecificationImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			OccurrenceSpecificationImpl::OccurrenceSpecificationImpl(std::weak_ptr<uml::Element > par_owner)
-			:OccurrenceSpecificationImpl()
-			{
-			    m_owner = par_owner;
-			}
-
+OccurrenceSpecificationImpl::OccurrenceSpecificationImpl(std::weak_ptr<uml::Element > par_owner)
+:OccurrenceSpecificationImpl()
+{
+	m_owner = par_owner;
+}
 
 
 OccurrenceSpecificationImpl::OccurrenceSpecificationImpl(const OccurrenceSpecificationImpl & obj):OccurrenceSpecificationImpl()
@@ -229,6 +202,12 @@ void OccurrenceSpecificationImpl::setCovered(std::shared_ptr<uml::Lifeline>  val
 //*********************************
 std::shared_ptr<Bag<uml::GeneralOrdering>> OccurrenceSpecificationImpl::getToAfter() const
 {
+	if(m_toAfter == nullptr)
+	{
+		m_toAfter.reset(new Bag<uml::GeneralOrdering>());
+		
+		
+	}
 
     return m_toAfter;
 }
@@ -236,6 +215,12 @@ std::shared_ptr<Bag<uml::GeneralOrdering>> OccurrenceSpecificationImpl::getToAft
 
 std::shared_ptr<Bag<uml::GeneralOrdering>> OccurrenceSpecificationImpl::getToBefore() const
 {
+	if(m_toBefore == nullptr)
+	{
+		m_toBefore.reset(new Bag<uml::GeneralOrdering>());
+		
+		
+	}
 
     return m_toBefore;
 }
@@ -248,14 +233,28 @@ std::weak_ptr<uml::Namespace > OccurrenceSpecificationImpl::getNamespace() const
 {
 	return m_namespace;
 }
+
 std::shared_ptr<Union<uml::Element>> OccurrenceSpecificationImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > OccurrenceSpecificationImpl::getOwner() const
 {
 	return m_owner;
 }
+
+
 
 
 std::shared_ptr<OccurrenceSpecification> OccurrenceSpecificationImpl::getThisOccurrenceSpecificationPtr() const

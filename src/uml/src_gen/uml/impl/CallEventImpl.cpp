@@ -65,19 +65,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 CallEventImpl::CallEventImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	//Init references
-	
+{	
 }
 
 CallEventImpl::~CallEventImpl()
@@ -87,41 +75,36 @@ CallEventImpl::~CallEventImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+CallEventImpl::CallEventImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:CallEventImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			CallEventImpl::CallEventImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:CallEventImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
+CallEventImpl::CallEventImpl(std::weak_ptr<uml::Element > par_owner)
+:CallEventImpl()
+{
+	m_owner = par_owner;
+}
 
 //Additional constructor for the containments back reference
-			CallEventImpl::CallEventImpl(std::weak_ptr<uml::Element > par_owner)
-			:CallEventImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-//Additional constructor for the containments back reference
-			CallEventImpl::CallEventImpl(std::weak_ptr<uml::Package > par_owningPackage)
-			:CallEventImpl()
-			{
-			    m_owningPackage = par_owningPackage;
-				m_namespace = par_owningPackage;
-			}
-
+CallEventImpl::CallEventImpl(std::weak_ptr<uml::Package > par_owningPackage)
+:CallEventImpl()
+{
+	m_owningPackage = par_owningPackage;
+	m_namespace = par_owningPackage;
+}
 
 //Additional constructor for the containments back reference
-			CallEventImpl::CallEventImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
-			:CallEventImpl()
-			{
-			    m_owningTemplateParameter = par_owningTemplateParameter;
-				m_owner = par_owningTemplateParameter;
-			}
-
+CallEventImpl::CallEventImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+:CallEventImpl()
+{
+	m_owningTemplateParameter = par_owningTemplateParameter;
+	m_owner = par_owningTemplateParameter;
+}
 
 
 CallEventImpl::CallEventImpl(const CallEventImpl & obj):CallEventImpl()
@@ -212,14 +195,28 @@ std::weak_ptr<uml::Namespace > CallEventImpl::getNamespace() const
 {
 	return m_namespace;
 }
+
 std::shared_ptr<Union<uml::Element>> CallEventImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > CallEventImpl::getOwner() const
 {
 	return m_owner;
 }
+
+
 
 
 std::shared_ptr<CallEvent> CallEventImpl::getThisCallEventPtr() const

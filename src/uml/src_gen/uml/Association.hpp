@@ -292,19 +292,19 @@ namespace uml
 			/*!
 			 The Classifiers that are used as types of the ends of the Association.
 			<p>From package UML::StructuredClassifiers.</p> */
-			std::shared_ptr<Subset<uml::Type, uml::Element>> m_endType;
+			mutable std::shared_ptr<Subset<uml::Type, uml::Element>> m_endType;
 			/*!
 			 Each end represents participation of instances of the Classifier connected to the end in links of the Association.
 			<p>From package UML::StructuredClassifiers.</p> */
-			std::shared_ptr<SubsetUnion<uml::Property, uml::NamedElement>> m_memberEnd;
+			mutable std::shared_ptr<SubsetUnion<uml::Property, uml::NamedElement>> m_memberEnd;
 			/*!
 			 The navigable ends that are owned by the Association itself.
 			<p>From package UML::StructuredClassifiers.</p> */
-			std::shared_ptr<Subset<uml::Property, uml::Property /*Subset does not reference a union*/>> m_navigableOwnedEnd;
+			mutable std::shared_ptr<Subset<uml::Property, uml::Property /*Subset does not reference a union*/>> m_navigableOwnedEnd;
 			/*!
 			 The ends that are owned by the Association itself.
 			<p>From package UML::StructuredClassifiers.</p> */
-			std::shared_ptr<SubsetUnion<uml::Property, uml::Property /*Subset does not reference a union*/,uml::Feature,uml::NamedElement>> m_ownedEnd;
+			mutable std::shared_ptr<SubsetUnion<uml::Property, uml::Property /*Subset does not reference a union*/,uml::Feature,uml::NamedElement>> m_ownedEnd;
 			
 
 		public:

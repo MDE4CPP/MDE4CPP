@@ -287,23 +287,23 @@ namespace uml
 			/*!
 			 The ActivityEdges immediately contained in the StructuredActivityNode.
 			<p>From package UML::Actions.</p> */
-			std::shared_ptr<Subset<uml::ActivityEdge, uml::ActivityEdge,uml::Element>> m_edge;
+			mutable std::shared_ptr<Subset<uml::ActivityEdge, uml::ActivityEdge,uml::Element>> m_edge;
 			/*!
 			 The ActivityNodes immediately contained in the StructuredActivityNode.
 			<p>From package UML::Actions.</p> */
-			std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode,uml::Element>> m_node;
+			mutable std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode,uml::Element>> m_node;
 			/*!
 			 The InputPins owned by the StructuredActivityNode.
 			<p>From package UML::Actions.</p> */
-			std::shared_ptr<Subset<uml::InputPin, uml::InputPin>> m_structuredNodeInput;
+			mutable std::shared_ptr<Subset<uml::InputPin, uml::InputPin>> m_structuredNodeInput;
 			/*!
 			 The OutputPins owned by the StructuredActivityNode.
 			<p>From package UML::Actions.</p> */
-			std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>> m_structuredNodeOutput;
+			mutable std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>> m_structuredNodeOutput;
 			/*!
 			 The Variables defined in the scope of the StructuredActivityNode.
 			<p>From package UML::Actions.</p> */
-			std::shared_ptr<Subset<uml::Variable, uml::NamedElement>> m_variable;
+			mutable std::shared_ptr<Subset<uml::Variable, uml::NamedElement>> m_variable;
 			
 
 		public:

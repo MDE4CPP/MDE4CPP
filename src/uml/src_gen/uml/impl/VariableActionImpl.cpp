@@ -88,19 +88,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 VariableActionImpl::VariableActionImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	//Init references
-	
+{	
 }
 
 VariableActionImpl::~VariableActionImpl()
@@ -110,41 +98,36 @@ VariableActionImpl::~VariableActionImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+VariableActionImpl::VariableActionImpl(std::weak_ptr<uml::Activity > par_activity)
+:VariableActionImpl()
+{
+	m_activity = par_activity;
+	m_owner = par_activity;
+}
 
 //Additional constructor for the containments back reference
-			VariableActionImpl::VariableActionImpl(std::weak_ptr<uml::Activity > par_activity)
-			:VariableActionImpl()
-			{
-			    m_activity = par_activity;
-				m_owner = par_activity;
-			}
-
-
-//Additional constructor for the containments back reference
-			VariableActionImpl::VariableActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
-			:VariableActionImpl()
-			{
-			    m_inStructuredNode = par_inStructuredNode;
-				m_owner = par_inStructuredNode;
-			}
-
+VariableActionImpl::VariableActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
+:VariableActionImpl()
+{
+	m_inStructuredNode = par_inStructuredNode;
+	m_owner = par_inStructuredNode;
+}
 
 //Additional constructor for the containments back reference
-			VariableActionImpl::VariableActionImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:VariableActionImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
+VariableActionImpl::VariableActionImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:VariableActionImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			VariableActionImpl::VariableActionImpl(std::weak_ptr<uml::Element > par_owner)
-			:VariableActionImpl()
-			{
-			    m_owner = par_owner;
-			}
-
+VariableActionImpl::VariableActionImpl(std::weak_ptr<uml::Element > par_owner)
+:VariableActionImpl()
+{
+	m_owner = par_owner;
+}
 
 
 VariableActionImpl::VariableActionImpl(const VariableActionImpl & obj):VariableActionImpl()
@@ -303,20 +286,55 @@ void VariableActionImpl::setVariable(std::shared_ptr<uml::Variable> _variable)
 //*********************************
 std::shared_ptr<Union<uml::ActivityGroup>> VariableActionImpl::getInGroup() const
 {
+	if(m_inGroup == nullptr)
+	{
+		/*Union*/
+		m_inGroup.reset(new Union<uml::ActivityGroup>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_inGroup - Union<uml::ActivityGroup>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_inGroup;
 }
+
 std::shared_ptr<Union<uml::Element>> VariableActionImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > VariableActionImpl::getOwner() const
 {
 	return m_owner;
 }
+
 std::shared_ptr<Union<uml::RedefinableElement>> VariableActionImpl::getRedefinedElement() const
 {
+	if(m_redefinedElement == nullptr)
+	{
+		/*Union*/
+		m_redefinedElement.reset(new Union<uml::RedefinableElement>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_redefinedElement - Union<uml::RedefinableElement>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_redefinedElement;
 }
+
+
 
 
 std::shared_ptr<VariableAction> VariableActionImpl::getThisVariableActionPtr() const

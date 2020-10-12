@@ -233,15 +233,15 @@ namespace uml
 			/*!
 			 ActivityGroups containing the ActivityNode.
 			<p>From package UML::Activities.</p> */
-			std::shared_ptr<Union<uml::ActivityGroup>> m_inGroup;
+			mutable std::shared_ptr<Union<uml::ActivityGroup>> m_inGroup;
 			/*!
 			 InterruptibleActivityRegions containing the ActivityNode.
 			<p>From package UML::Activities.</p> */
-			std::shared_ptr<Subset<uml::InterruptibleActivityRegion, uml::ActivityGroup>> m_inInterruptibleRegion;
+			mutable std::shared_ptr<Subset<uml::InterruptibleActivityRegion, uml::ActivityGroup>> m_inInterruptibleRegion;
 			/*!
 			 ActivityPartitions containing the ActivityNode.
 			<p>From package UML::Activities.</p> */
-			std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup>> m_inPartition;
+			mutable std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup>> m_inPartition;
 			/*!
 			 The StructuredActivityNode containing the ActvityNode, if it is directly owned by a StructuredActivityNode.
 			<p>From package UML::Activities.</p> */
@@ -249,15 +249,15 @@ namespace uml
 			/*!
 			 ActivityEdges that have the ActivityNode as their target.
 			<p>From package UML::Activities.</p> */
-			std::shared_ptr<Bag<uml::ActivityEdge>> m_incoming;
+			mutable std::shared_ptr<Bag<uml::ActivityEdge>> m_incoming;
 			/*!
 			 ActivityEdges that have the ActivityNode as their source.
 			<p>From package UML::Activities.</p> */
-			std::shared_ptr<Bag<uml::ActivityEdge>> m_outgoing;
+			mutable std::shared_ptr<Bag<uml::ActivityEdge>> m_outgoing;
 			/*!
 			 ActivityNodes from a generalization of the Activity containining this ActivityNode that are redefined by this ActivityNode.
 			<p>From package UML::Activities.</p> */
-			std::shared_ptr<Subset<uml::ActivityNode, uml::RedefinableElement>> m_redefinedNode;
+			mutable std::shared_ptr<Subset<uml::ActivityNode, uml::RedefinableElement>> m_redefinedNode;
 			
 
 		public:

@@ -157,11 +157,11 @@ namespace uml
 			/*!
 			 References the GeneralOrderings that specify EventOcurrences that must occur after this OccurrenceSpecification.
 			<p>From package UML::Interactions.</p> */
-			std::shared_ptr<Bag<uml::GeneralOrdering>> m_toAfter;
+			mutable std::shared_ptr<Bag<uml::GeneralOrdering>> m_toAfter;
 			/*!
 			 References the GeneralOrderings that specify EventOcurrences that must occur before this OccurrenceSpecification.
 			<p>From package UML::Interactions.</p> */
-			std::shared_ptr<Bag<uml::GeneralOrdering>> m_toBefore;
+			mutable std::shared_ptr<Bag<uml::GeneralOrdering>> m_toBefore;
 			
 
 		public:

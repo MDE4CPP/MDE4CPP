@@ -154,7 +154,7 @@ namespace uml
 			/*!
 			 A set of ConnectorEnds that attach to this ConnectableElement.
 			<p>From package UML::StructuredClassifiers.</p> */
-			std::shared_ptr<Bag<uml::ConnectorEnd>> m_end;
+			mutable std::shared_ptr<Bag<uml::ConnectorEnd>> m_end;
 			
 
 		public:

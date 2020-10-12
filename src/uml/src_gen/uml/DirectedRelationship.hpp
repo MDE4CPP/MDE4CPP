@@ -107,11 +107,11 @@ namespace uml
 			/*!
 			 Specifies the source Element(s) of the DirectedRelationship.
 			<p>From package UML::CommonStructure.</p> */
-			std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> m_source;
+			mutable std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> m_source;
 			/*!
 			 Specifies the target Element(s) of the DirectedRelationship.
 			<p>From package UML::CommonStructure.</p> */
-			std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> m_target;
+			mutable std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> m_target;
 			
 
 		public:

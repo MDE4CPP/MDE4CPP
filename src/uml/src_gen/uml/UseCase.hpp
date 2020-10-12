@@ -291,19 +291,19 @@ namespace uml
 			/*!
 			 The Extend relationships owned by this UseCase.
 			<p>From package UML::UseCases.</p> */
-			std::shared_ptr<Subset<uml::Extend, uml::NamedElement>> m_extend;
+			mutable std::shared_ptr<Subset<uml::Extend, uml::NamedElement>> m_extend;
 			/*!
 			 The ExtensionPoints owned by this UseCase.
 			<p>From package UML::UseCases.</p> */
-			std::shared_ptr<Subset<uml::ExtensionPoint, uml::NamedElement>> m_extensionPoint;
+			mutable std::shared_ptr<Subset<uml::ExtensionPoint, uml::NamedElement>> m_extensionPoint;
 			/*!
 			 The Include relationships owned by this UseCase.
 			<p>From package UML::UseCases.</p> */
-			std::shared_ptr<Subset<uml::Include, uml::NamedElement>> m_include;
+			mutable std::shared_ptr<Subset<uml::Include, uml::NamedElement>> m_include;
 			/*!
 			 The subjects to which this UseCase applies. Each subject or its parts realize all the UseCases that apply to it.
 			<p>From package UML::UseCases.</p> */
-			std::shared_ptr<Bag<uml::Classifier>> m_subject;
+			mutable std::shared_ptr<Bag<uml::Classifier>> m_subject;
 			
 
 		public:

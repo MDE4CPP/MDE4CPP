@@ -362,7 +362,7 @@ namespace uml
 			/*!
 			 The ParameterSets containing the parameter. See ParameterSet.
 			<p>From package UML::Classification.</p> */
-			std::shared_ptr<Bag<uml::ParameterSet>> m_parameterSet;
+			mutable std::shared_ptr<Bag<uml::ParameterSet>> m_parameterSet;
 			
 
 		public:

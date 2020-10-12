@@ -333,11 +333,11 @@ namespace uml
 			/*!
 			 The OutputPins on Actions within the bodyPart, the values of which are moved to the loopVariable OutputPins after the completion of each execution of the bodyPart, before the next iteration of the loop begins or before the loop exits.
 			<p>From package UML::Actions.</p> */
-			std::shared_ptr<Bag<uml::OutputPin>> m_bodyOutput;
+			mutable std::shared_ptr<Bag<uml::OutputPin>> m_bodyOutput;
 			/*!
 			 The set of ExecutableNodes that perform the repetitive computations of the loop. The bodyPart is executed as long as the test section produces a true value.
 			<p>From package UML::Actions.</p> */
-			std::shared_ptr<Bag<uml::ExecutableNode>> m_bodyPart;
+			mutable std::shared_ptr<Bag<uml::ExecutableNode>> m_bodyPart;
 			/*!
 			 An OutputPin on an Action in the test section whose Boolean value determines whether to continue executing the loop bodyPart.
 			<p>From package UML::Actions.</p> */
@@ -345,23 +345,23 @@ namespace uml
 			/*!
 			 A list of OutputPins that hold the values of the loop variables during an execution of the loop. When the test fails, the values are moved to the result OutputPins of the loop.
 			<p>From package UML::Actions.</p> */
-			std::shared_ptr<Subset<uml::OutputPin, uml::Element>> m_loopVariable;
+			mutable std::shared_ptr<Subset<uml::OutputPin, uml::Element>> m_loopVariable;
 			/*!
 			 A list of InputPins whose values are moved into the loopVariable Pins before the first iteration of the loop.
 			<p>From package UML::Actions.</p> */
-			std::shared_ptr<Bag<uml::InputPin>> m_loopVariableInput;
+			mutable std::shared_ptr<Bag<uml::InputPin>> m_loopVariableInput;
 			/*!
 			 A list of OutputPins that receive the loopVariable values after the last iteration of the loop and constitute the output of the LoopNode.
 			<p>From package UML::Actions.</p> */
-			std::shared_ptr<Bag<uml::OutputPin>> m_result;
+			mutable std::shared_ptr<Bag<uml::OutputPin>> m_result;
 			/*!
 			 The set of ExecutableNodes executed before the first iteration of the loop, in order to initialize values or perform other setup computations.
 			<p>From package UML::Actions.</p> */
-			std::shared_ptr<Bag<uml::ExecutableNode>> m_setupPart;
+			mutable std::shared_ptr<Bag<uml::ExecutableNode>> m_setupPart;
 			/*!
 			 The set of ExecutableNodes executed in order to provide the test result for the loop.
 			<p>From package UML::Actions.</p> */
-			std::shared_ptr<Bag<uml::ExecutableNode>> m_test;
+			mutable std::shared_ptr<Bag<uml::ExecutableNode>> m_test;
 			
 
 		public:

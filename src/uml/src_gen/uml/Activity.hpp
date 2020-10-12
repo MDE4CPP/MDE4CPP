@@ -386,33 +386,33 @@ namespace uml
 			/*!
 			 ActivityEdges expressing flow between the nodes of the Activity.
 			<p>From package UML::Activities.</p> */
-			std::shared_ptr<Subset<uml::ActivityEdge, uml::Element>> m_edge;
+			mutable std::shared_ptr<Subset<uml::ActivityEdge, uml::Element>> m_edge;
 			/*!
 			 Top-level ActivityGroups in the Activity.
 			<p>From package UML::Activities.</p> */
-			std::shared_ptr<SubsetUnion<uml::ActivityGroup, uml::Element>> m_group;
+			mutable std::shared_ptr<SubsetUnion<uml::ActivityGroup, uml::Element>> m_group;
 			/*!
 			 ActivityNodes coordinated by the Activity.
 			<p>From package UML::Activities.</p> */
-			std::shared_ptr<SubsetUnion<uml::ActivityNode, uml::Element>> m_node;
+			mutable std::shared_ptr<SubsetUnion<uml::ActivityNode, uml::Element>> m_node;
 			/*!
 			 */
-			std::shared_ptr<SubsetUnion<uml::ActivityGroup, uml::ActivityGroup>> m_ownedGroup;
+			mutable std::shared_ptr<SubsetUnion<uml::ActivityGroup, uml::ActivityGroup>> m_ownedGroup;
 			/*!
 			 */
-			std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode /*Subset does not reference a union*/>> m_ownedNode;
+			mutable std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode /*Subset does not reference a union*/>> m_ownedNode;
 			/*!
 			 Top-level ActivityPartitions in the Activity.
 			<p>From package UML::Activities.</p> */
-			std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup,uml::ActivityGroup /*Subset does not reference a union*/>> m_partition;
+			mutable std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup,uml::ActivityGroup /*Subset does not reference a union*/>> m_partition;
 			/*!
 			 Top-level StructuredActivityNodes in the Activity.
 			<p>From package UML::Activities.</p> */
-			std::shared_ptr<Subset<uml::StructuredActivityNode, uml::ActivityGroup,uml::ActivityNode /*Subset does not reference a union*/>> m_structuredNode;
+			mutable std::shared_ptr<Subset<uml::StructuredActivityNode, uml::ActivityGroup,uml::ActivityNode /*Subset does not reference a union*/>> m_structuredNode;
 			/*!
 			 Top-level Variables defined by the Activity.
 			<p>From package UML::Activities.</p> */
-			std::shared_ptr<Subset<uml::Variable, uml::NamedElement>> m_variable;
+			mutable std::shared_ptr<Subset<uml::Variable, uml::NamedElement>> m_variable;
 			
 
 		public:

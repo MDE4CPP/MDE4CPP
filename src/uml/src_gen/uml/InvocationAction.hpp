@@ -205,7 +205,7 @@ namespace uml
 			/*!
 			 The InputPins that provide the argument values passed in the invocation request.
 			<p>From package UML::Actions.</p> */
-			std::shared_ptr<Subset<uml::InputPin, uml::InputPin>> m_argument;
+			mutable std::shared_ptr<Subset<uml::InputPin, uml::InputPin>> m_argument;
 			/*!
 			 For CallOperationActions, SendSignalActions, and SendObjectActions, an optional Port of the target object through which the invocation request is sent.
 			<p>From package UML::Actions.</p> */

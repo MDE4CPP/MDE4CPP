@@ -236,7 +236,7 @@ namespace uml
 			/*!
 			 A list of InputPins providing the values for the output (inout, out, and return) Parameters of the Operation. These values are returned to the caller.
 			<p>From package UML::Actions.</p> */
-			std::shared_ptr<Subset<uml::InputPin, uml::InputPin>> m_replyValue;
+			mutable std::shared_ptr<Subset<uml::InputPin, uml::InputPin>> m_replyValue;
 			/*!
 			 An InputPin that holds the return information value produced by an earlier AcceptCallAction.
 			<p>From package UML::Actions.</p> */

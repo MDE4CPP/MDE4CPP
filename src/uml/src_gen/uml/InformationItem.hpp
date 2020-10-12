@@ -233,7 +233,7 @@ namespace uml
 			/*!
 			 Determines the classifiers that will specify the structure and nature of the information. An information item represents all its represented classifiers.
 			<p>From package UML::InformationFlows.</p> */
-			std::shared_ptr<Bag<uml::Classifier>> m_represented;
+			mutable std::shared_ptr<Bag<uml::Classifier>> m_represented;
 			
 
 		public:

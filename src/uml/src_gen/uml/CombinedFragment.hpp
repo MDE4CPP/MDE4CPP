@@ -195,11 +195,11 @@ namespace uml
 			/*!
 			 Specifies the gates that form the interface between this CombinedFragment and its surroundings
 			<p>From package UML::Interactions.</p> */
-			std::shared_ptr<Subset<uml::Gate, uml::Element>> m_cfragmentGate;
+			mutable std::shared_ptr<Subset<uml::Gate, uml::Element>> m_cfragmentGate;
 			/*!
 			 The set of operands of the combined fragment.
 			<p>From package UML::Interactions.</p> */
-			std::shared_ptr<Subset<uml::InteractionOperand, uml::Element>> m_operand;
+			mutable std::shared_ptr<Subset<uml::InteractionOperand, uml::Element>> m_operand;
 			
 
 		public:

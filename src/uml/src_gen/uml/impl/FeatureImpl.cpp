@@ -61,26 +61,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 FeatureImpl::FeatureImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-		/*Union*/
-		m_featuringClassifier.reset(new Union<uml::Classifier>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_featuringClassifier - Union<uml::Classifier>()" << std::endl;
-		#endif
-	
-	
-
-	//Init references
-	
-	
+{	
 }
 
 FeatureImpl::~FeatureImpl()
@@ -90,23 +71,20 @@ FeatureImpl::~FeatureImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+FeatureImpl::FeatureImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:FeatureImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			FeatureImpl::FeatureImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:FeatureImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
-
-//Additional constructor for the containments back reference
-			FeatureImpl::FeatureImpl(std::weak_ptr<uml::Element > par_owner)
-			:FeatureImpl()
-			{
-			    m_owner = par_owner;
-			}
-
+FeatureImpl::FeatureImpl(std::weak_ptr<uml::Element > par_owner)
+:FeatureImpl()
+{
+	m_owner = par_owner;
+}
 
 
 FeatureImpl::FeatureImpl(const FeatureImpl & obj):FeatureImpl()
@@ -179,7 +157,6 @@ void FeatureImpl::setIsStatic(bool _isStatic)
 {
 	m_isStatic = _isStatic;
 } 
-
 bool FeatureImpl::getIsStatic() const 
 {
 	return m_isStatic;
@@ -200,16 +177,40 @@ bool FeatureImpl::getIsStatic() const
 //*********************************
 std::shared_ptr<Union<uml::Classifier>> FeatureImpl::getFeaturingClassifier() const
 {
+	if(m_featuringClassifier == nullptr)
+	{
+		/*Union*/
+		m_featuringClassifier.reset(new Union<uml::Classifier>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_featuringClassifier - Union<uml::Classifier>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_featuringClassifier;
 }
+
 std::shared_ptr<Union<uml::Element>> FeatureImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > FeatureImpl::getOwner() const
 {
 	return m_owner;
 }
+
+
 
 
 std::shared_ptr<Feature> FeatureImpl::getThisFeaturePtr() const

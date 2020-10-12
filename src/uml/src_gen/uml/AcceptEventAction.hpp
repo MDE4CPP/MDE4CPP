@@ -260,11 +260,11 @@ namespace uml
 			/*!
 			 OutputPins holding the values received from an Event occurrence.
 			<p>From package UML::Actions.</p> */
-			std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>> m_result;
+			mutable std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>> m_result;
 			/*!
 			 The Triggers specifying the Events of which the AcceptEventAction waits for occurrences.
 			<p>From package UML::Actions.</p> */
-			std::shared_ptr<Subset<uml::Trigger, uml::Element>> m_trigger;
+			mutable std::shared_ptr<Subset<uml::Trigger, uml::Element>> m_trigger;
 			
 
 		public:

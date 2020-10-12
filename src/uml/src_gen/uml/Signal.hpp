@@ -220,7 +220,7 @@ namespace uml
 			/*!
 			 The attributes owned by the Signal.
 			<p>From package UML::SimpleClassifiers.</p> */
-			std::shared_ptr<Subset<uml::Property, uml::Property,uml::NamedElement>> m_ownedAttribute;
+			mutable std::shared_ptr<Subset<uml::Property, uml::Property,uml::NamedElement>> m_ownedAttribute;
 			
 
 		public:

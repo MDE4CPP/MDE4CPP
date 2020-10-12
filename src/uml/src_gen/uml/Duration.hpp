@@ -178,7 +178,7 @@ namespace uml
 			/*!
 			 Refers to the Observations that are involved in the computation of the Duration value
 			<p>From package UML::Values.</p> */
-			std::shared_ptr<Bag<uml::Observation>> m_observation;
+			mutable std::shared_ptr<Bag<uml::Observation>> m_observation;
 			
 
 		public:

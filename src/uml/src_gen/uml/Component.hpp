@@ -360,19 +360,19 @@ namespace uml
 			/*!
 			 The set of PackageableElements that a Component owns. In the namespace of a Component, all model elements that are involved in or related to its definition may be owned or imported explicitly. These may include e.g., Classes, Interfaces, Components, Packages, UseCases, Dependencies (e.g., mappings), and Artifacts.
 			<p>From package UML::StructuredClassifiers.</p> */
-			std::shared_ptr<Subset<uml::PackageableElement, uml::NamedElement>> m_packagedElement;
+			mutable std::shared_ptr<Subset<uml::PackageableElement, uml::NamedElement>> m_packagedElement;
 			/*!
 			 The Interfaces that the Component exposes to its environment. These Interfaces may be Realized by the Component or any of its realizingClassifiers, or they may be the Interfaces that are provided by its public Ports.
 			<p>From package UML::StructuredClassifiers.</p> */
-			std::shared_ptr<Bag<uml::Interface>> m_provided;
+			mutable std::shared_ptr<Bag<uml::Interface>> m_provided;
 			/*!
 			 The set of Realizations owned by the Component. Realizations reference the Classifiers of which the Component is an abstraction; i.e., that realize its behavior.
 			<p>From package UML::StructuredClassifiers.</p> */
-			std::shared_ptr<Subset<uml::ComponentRealization, uml::Element>> m_realization;
+			mutable std::shared_ptr<Subset<uml::ComponentRealization, uml::Element>> m_realization;
 			/*!
 			 The Interfaces that the Component requires from other Components in its environment in order to be able to offer its full set of provided functionality. These Interfaces may be used by the Component or any of its realizingClassifiers, or they may be the Interfaces that are required by its public Ports.
 			<p>From package UML::StructuredClassifiers.</p> */
-			std::shared_ptr<Bag<uml::Interface>> m_required;
+			mutable std::shared_ptr<Bag<uml::Interface>> m_required;
 			
 
 		public:

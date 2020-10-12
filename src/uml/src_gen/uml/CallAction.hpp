@@ -253,7 +253,7 @@ namespace uml
 			/*!
 			 The OutputPins on which the reply values from the invocation are placed (if the call is synchronous).
 			<p>From package UML::Actions.</p> */
-			std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>> m_result;
+			mutable std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>> m_result;
 			
 
 		public:

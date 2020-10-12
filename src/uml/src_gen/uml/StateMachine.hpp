@@ -385,19 +385,19 @@ namespace uml
 			/*!
 			 The connection points defined for this StateMachine. They represent the interface of the StateMachine when used as part of submachine State
 			<p>From package UML::StateMachines.</p> */
-			std::shared_ptr<Subset<uml::Pseudostate, uml::NamedElement>> m_connectionPoint;
+			mutable std::shared_ptr<Subset<uml::Pseudostate, uml::NamedElement>> m_connectionPoint;
 			/*!
 			 The StateMachines of which this is an extension.
 			<p>From package UML::StateMachines.</p> */
-			std::shared_ptr<Bag<uml::StateMachine>> m_extendedStateMachine;
+			mutable std::shared_ptr<Bag<uml::StateMachine>> m_extendedStateMachine;
 			/*!
 			 The Regions owned directly by the StateMachine.
 			<p>From package UML::StateMachines.</p> */
-			std::shared_ptr<Subset<uml::Region, uml::NamedElement>> m_region;
+			mutable std::shared_ptr<Subset<uml::Region, uml::NamedElement>> m_region;
 			/*!
 			 References the submachine(s) in case of a submachine State. Multiple machines are referenced in case of a concurrent State.
 			<p>From package UML::StateMachines.</p> */
-			std::shared_ptr<Bag<uml::State>> m_submachineState;
+			mutable std::shared_ptr<Bag<uml::State>> m_submachineState;
 			
 
 		public:

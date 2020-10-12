@@ -90,106 +90,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 StateImpl::StateImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	
-	
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-		/*Subset*/
-		m_connection.reset(new Subset<uml::ConnectionPointReference, uml::NamedElement >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_connection - Subset<uml::ConnectionPointReference, uml::NamedElement >()" << std::endl;
-		#endif
-	
-	
-
-		/*Subset*/
-		m_connectionPoint.reset(new Subset<uml::Pseudostate, uml::NamedElement >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_connectionPoint - Subset<uml::Pseudostate, uml::NamedElement >()" << std::endl;
-		#endif
-	
-	
-
-		/*Subset*/
-		m_deferrableTrigger.reset(new Subset<uml::Trigger, uml::Element >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_deferrableTrigger - Subset<uml::Trigger, uml::Element >()" << std::endl;
-		#endif
-	
-	
-
-	
-
-	
-
-	
-
-	
-
-		/*Subset*/
-		m_region.reset(new Subset<uml::Region, uml::NamedElement >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_region - Subset<uml::Region, uml::NamedElement >()" << std::endl;
-		#endif
-	
-	
-
-	
-
-	
-
-	//Init references
-		/*Subset*/
-		m_connection->initSubset(m_ownedMember);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_connection - Subset<uml::ConnectionPointReference, uml::NamedElement >(m_ownedMember)" << std::endl;
-		#endif
-	
-	
-
-		/*Subset*/
-		m_connectionPoint->initSubset(m_ownedMember);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_connectionPoint - Subset<uml::Pseudostate, uml::NamedElement >(m_ownedMember)" << std::endl;
-		#endif
-	
-	
-
-		/*Subset*/
-		m_deferrableTrigger->initSubset(m_ownedElement);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_deferrableTrigger - Subset<uml::Trigger, uml::Element >(m_ownedElement)" << std::endl;
-		#endif
-	
-	
-
-	
-
-	
-
-	
-
-	
-
-		/*Subset*/
-		m_region->initSubset(m_ownedMember);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_region - Subset<uml::Region, uml::NamedElement >(m_ownedMember)" << std::endl;
-		#endif
-	
-	
-
-	
-
-	
+{	
 }
 
 StateImpl::~StateImpl()
@@ -199,32 +100,28 @@ StateImpl::~StateImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+StateImpl::StateImpl(std::weak_ptr<uml::Region > par_container)
+:StateImpl()
+{
+	m_container = par_container;
+	m_namespace = par_container;
+}
 
 //Additional constructor for the containments back reference
-			StateImpl::StateImpl(std::weak_ptr<uml::Region > par_container)
-			:StateImpl()
-			{
-			    m_container = par_container;
-				m_namespace = par_container;
-			}
-
-
-//Additional constructor for the containments back reference
-			StateImpl::StateImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:StateImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
+StateImpl::StateImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:StateImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			StateImpl::StateImpl(std::weak_ptr<uml::Element > par_owner)
-			:StateImpl()
-			{
-			    m_owner = par_owner;
-			}
-
+StateImpl::StateImpl(std::weak_ptr<uml::Element > par_owner)
+:StateImpl()
+{
+	m_owner = par_owner;
+}
 
 
 StateImpl::StateImpl(const StateImpl & obj):StateImpl()
@@ -388,28 +285,25 @@ StateImpl::StateImpl(const StateImpl & obj):StateImpl()
 		std::cout << "Copying the Subset: " << "m_stateInvariant" << std::endl;
 	#endif
 
-		/*Subset*/
-		m_connection->initSubset(m_ownedMember);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_connection - Subset<uml::ConnectionPointReference, uml::NamedElement >(m_ownedMember)" << std::endl;
-		#endif
-	
-	
-
-		/*Subset*/
-		m_connectionPoint->initSubset(m_ownedMember);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_connectionPoint - Subset<uml::Pseudostate, uml::NamedElement >(m_ownedMember)" << std::endl;
-		#endif
-	
+	/*Subset*/
+	m_connection->initSubset(getOwnedMember());
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Initialising value Subset: " << "m_connection - Subset<uml::ConnectionPointReference, uml::NamedElement >(getOwnedMember())" << std::endl;
+	#endif
 	
 
-		/*Subset*/
-		m_deferrableTrigger->initSubset(m_ownedElement);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_deferrableTrigger - Subset<uml::Trigger, uml::Element >(m_ownedElement)" << std::endl;
-		#endif
+	/*Subset*/
+	m_connectionPoint->initSubset(getOwnedMember());
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Initialising value Subset: " << "m_connectionPoint - Subset<uml::Pseudostate, uml::NamedElement >(getOwnedMember())" << std::endl;
+	#endif
 	
+
+	/*Subset*/
+	m_deferrableTrigger->initSubset(getOwnedElement());
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Initialising value Subset: " << "m_deferrableTrigger - Subset<uml::Trigger, uml::Element >(getOwnedElement())" << std::endl;
+	#endif
 	
 
 	
@@ -418,12 +312,11 @@ StateImpl::StateImpl(const StateImpl & obj):StateImpl()
 
 	
 
-		/*Subset*/
-		m_region->initSubset(m_ownedMember);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_region - Subset<uml::Region, uml::NamedElement >(m_ownedMember)" << std::endl;
-		#endif
-	
+	/*Subset*/
+	m_region->initSubset(getOwnedMember());
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Initialising value Subset: " << "m_region - Subset<uml::Region, uml::NamedElement >(getOwnedMember())" << std::endl;
+	#endif
 	
 }
 
@@ -443,12 +336,10 @@ std::shared_ptr<ecore::EClass> StateImpl::eStaticClass() const
 // Attribute Setter Getter
 //*********************************
 
-
 bool StateImpl::getIsComposite() const 
 {
 	return m_isComposite;
 }
-
 
 
 bool StateImpl::getIsOrthogonal() const 
@@ -457,12 +348,10 @@ bool StateImpl::getIsOrthogonal() const
 }
 
 
-
 bool StateImpl::getIsSimple() const 
 {
 	return m_isSimple;
 }
-
 
 
 bool StateImpl::getIsSubmachineState() const 
@@ -538,6 +427,21 @@ bool StateImpl::submachine_states(Any diagnostics,std::map <   Any, Any >  conte
 //*********************************
 std::shared_ptr<Subset<uml::ConnectionPointReference, uml::NamedElement>> StateImpl::getConnection() const
 {
+	if(m_connection == nullptr)
+	{
+		/*Subset*/
+		m_connection.reset(new Subset<uml::ConnectionPointReference, uml::NamedElement >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_connection - Subset<uml::ConnectionPointReference, uml::NamedElement >()" << std::endl;
+		#endif
+		
+		/*Subset*/
+		m_connection->initSubset(getOwnedMember());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_connection - Subset<uml::ConnectionPointReference, uml::NamedElement >(getOwnedMember())" << std::endl;
+		#endif
+		
+	}
 
     return m_connection;
 }
@@ -545,6 +449,21 @@ std::shared_ptr<Subset<uml::ConnectionPointReference, uml::NamedElement>> StateI
 
 std::shared_ptr<Subset<uml::Pseudostate, uml::NamedElement>> StateImpl::getConnectionPoint() const
 {
+	if(m_connectionPoint == nullptr)
+	{
+		/*Subset*/
+		m_connectionPoint.reset(new Subset<uml::Pseudostate, uml::NamedElement >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_connectionPoint - Subset<uml::Pseudostate, uml::NamedElement >()" << std::endl;
+		#endif
+		
+		/*Subset*/
+		m_connectionPoint->initSubset(getOwnedMember());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_connectionPoint - Subset<uml::Pseudostate, uml::NamedElement >(getOwnedMember())" << std::endl;
+		#endif
+		
+	}
 
     return m_connectionPoint;
 }
@@ -552,6 +471,21 @@ std::shared_ptr<Subset<uml::Pseudostate, uml::NamedElement>> StateImpl::getConne
 
 std::shared_ptr<Subset<uml::Trigger, uml::Element>> StateImpl::getDeferrableTrigger() const
 {
+	if(m_deferrableTrigger == nullptr)
+	{
+		/*Subset*/
+		m_deferrableTrigger.reset(new Subset<uml::Trigger, uml::Element >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_deferrableTrigger - Subset<uml::Trigger, uml::Element >()" << std::endl;
+		#endif
+		
+		/*Subset*/
+		m_deferrableTrigger->initSubset(getOwnedElement());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_deferrableTrigger - Subset<uml::Trigger, uml::Element >(getOwnedElement())" << std::endl;
+		#endif
+		
+	}
 
     return m_deferrableTrigger;
 }
@@ -599,6 +533,21 @@ void StateImpl::setRedefinedState(std::shared_ptr<uml::State> _redefinedState)
 
 std::shared_ptr<Subset<uml::Region, uml::NamedElement>> StateImpl::getRegion() const
 {
+	if(m_region == nullptr)
+	{
+		/*Subset*/
+		m_region.reset(new Subset<uml::Region, uml::NamedElement >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_region - Subset<uml::Region, uml::NamedElement >()" << std::endl;
+		#endif
+		
+		/*Subset*/
+		m_region->initSubset(getOwnedMember());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_region - Subset<uml::Region, uml::NamedElement >(getOwnedMember())" << std::endl;
+		#endif
+		
+	}
 
     return m_region;
 }
@@ -629,28 +578,80 @@ void StateImpl::setSubmachine(std::shared_ptr<uml::StateMachine> _submachine)
 //*********************************
 std::shared_ptr<Union<uml::NamedElement>> StateImpl::getMember() const
 {
+	if(m_member == nullptr)
+	{
+		/*Union*/
+		m_member.reset(new Union<uml::NamedElement>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_member - Union<uml::NamedElement>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_member;
 }
+
 std::weak_ptr<uml::Namespace > StateImpl::getNamespace() const
 {
 	return m_namespace;
 }
+
 std::shared_ptr<Union<uml::Element>> StateImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> StateImpl::getOwnedMember() const
 {
+	if(m_ownedMember == nullptr)
+	{
+		/*SubsetUnion*/
+		m_ownedMember.reset(new SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_ownedMember->initSubsetUnion(getOwnedElement(),getMember());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >(getOwnedElement(),getMember())" << std::endl;
+		#endif
+		
+	}
 	return m_ownedMember;
 }
+
 std::weak_ptr<uml::Element > StateImpl::getOwner() const
 {
 	return m_owner;
 }
+
 std::shared_ptr<Union<uml::RedefinableElement>> StateImpl::getRedefinedElement() const
 {
+	if(m_redefinedElement == nullptr)
+	{
+		/*Union*/
+		m_redefinedElement.reset(new Union<uml::RedefinableElement>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_redefinedElement - Union<uml::RedefinableElement>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_redefinedElement;
 }
+
+
 
 
 std::shared_ptr<State> StateImpl::getThisStatePtr() const

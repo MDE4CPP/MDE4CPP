@@ -249,27 +249,27 @@ namespace uml
 			/*!
 			 References the ElementImports owned by the Namespace.
 			<p>From package UML::CommonStructure.</p> */
-			std::shared_ptr<SubsetUnion<uml::ElementImport, uml::Element>> m_elementImport;
+			mutable std::shared_ptr<SubsetUnion<uml::ElementImport, uml::Element>> m_elementImport;
 			/*!
 			 References the PackageableElements that are members of this Namespace as a result of either PackageImports or ElementImports.
 			<p>From package UML::CommonStructure.</p> */
-			std::shared_ptr<Subset<uml::PackageableElement, uml::NamedElement>> m_importedMember;
+			mutable std::shared_ptr<Subset<uml::PackageableElement, uml::NamedElement>> m_importedMember;
 			/*!
 			 A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
 			<p>From package UML::CommonStructure.</p> */
-			std::shared_ptr<Union<uml::NamedElement>> m_member;
+			mutable std::shared_ptr<Union<uml::NamedElement>> m_member;
 			/*!
 			 A collection of NamedElements owned by the Namespace.
 			<p>From package UML::CommonStructure.</p> */
-			std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> m_ownedMember;
+			mutable std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> m_ownedMember;
 			/*!
 			 Specifies a set of Constraints owned by this Namespace.
 			<p>From package UML::CommonStructure.</p> */
-			std::shared_ptr<SubsetUnion<uml::Constraint, uml::NamedElement>> m_ownedRule;
+			mutable std::shared_ptr<SubsetUnion<uml::Constraint, uml::NamedElement>> m_ownedRule;
 			/*!
 			 References the PackageImports owned by the Namespace.
 			<p>From package UML::CommonStructure.</p> */
-			std::shared_ptr<SubsetUnion<uml::PackageImport, uml::Element>> m_packageImport;
+			mutable std::shared_ptr<SubsetUnion<uml::PackageImport, uml::Element>> m_packageImport;
 			
 
 		public:

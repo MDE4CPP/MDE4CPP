@@ -195,7 +195,7 @@ namespace uml
 			/*!
 			 The ordered set of Elements referenced by this Constraint.
 			<p>From package UML::CommonStructure.</p> */
-			std::shared_ptr<Bag<uml::Element>> m_constrainedElement;
+			mutable std::shared_ptr<Bag<uml::Element>> m_constrainedElement;
 			/*!
 			 Specifies the Namespace that owns the Constraint.
 			<p>From package UML::CommonStructure.</p> */

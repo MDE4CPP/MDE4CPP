@@ -243,7 +243,7 @@ namespace uml
 			/*!
 			 Represents the participants in the Collaboration.
 			<p>From package UML::StructuredClassifiers.</p> */
-			std::shared_ptr<Subset<uml::ConnectableElement, uml::ConnectableElement>> m_collaborationRole;
+			mutable std::shared_ptr<Subset<uml::ConnectableElement, uml::ConnectableElement>> m_collaborationRole;
 			
 
 		public:

@@ -282,11 +282,11 @@ namespace uml
 			/*!
 			 References a metaclass that may be extended.
 			<p>From package UML::Packages.</p> */
-			std::shared_ptr<Subset<uml::ElementImport, uml::ElementImport /*Subset does not reference a union*/>> m_metaclassReference;
+			mutable std::shared_ptr<Subset<uml::ElementImport, uml::ElementImport /*Subset does not reference a union*/>> m_metaclassReference;
 			/*!
 			 References a package containing (directly or indirectly) metaclasses that may be extended.
 			<p>From package UML::Packages.</p> */
-			std::shared_ptr<Subset<uml::PackageImport, uml::PackageImport /*Subset does not reference a union*/>> m_metamodelReference;
+			mutable std::shared_ptr<Subset<uml::PackageImport, uml::PackageImport /*Subset does not reference a union*/>> m_metamodelReference;
 			
 
 		public:

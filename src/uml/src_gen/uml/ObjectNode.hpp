@@ -264,7 +264,7 @@ namespace uml
 			/*!
 			 The States required to be associated with the values held by tokens on this ObjectNode.
 			<p>From package UML::Activities.</p> */
-			std::shared_ptr<Bag<uml::State>> m_inState;
+			mutable std::shared_ptr<Bag<uml::State>> m_inState;
 			/*!
 			 A Behavior used to select tokens to be offered on outgoing ActivityEdges.
 			<p>From package UML::Activities.</p> */

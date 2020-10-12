@@ -153,11 +153,11 @@ namespace uml
 			/*!
 			 The Element(s) dependent on the supplier Element(s). In some cases (such as a trace Abstraction) the assignment of direction (that is, the designation of the client Element) is at the discretion of the modeler and is a stipulation.
 			<p>From package UML::CommonStructure.</p> */
-			std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element>> m_client;
+			mutable std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element>> m_client;
 			/*!
 			 The Element(s) on which the client Element(s) depend in some respect. The modeler may stipulate a sense of Dependency direction suitable for their domain.
 			<p>From package UML::CommonStructure.</p> */
-			std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element>> m_supplier;
+			mutable std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element>> m_supplier;
 			
 
 		public:

@@ -208,11 +208,11 @@ namespace uml
 			/*!
 			 The Classifier or Classifiers of the represented instance. If multiple Classifiers are specified, the instance is classified by all of them.
 			<p>From package UML::Classification.</p> */
-			std::shared_ptr<Bag<uml::Classifier>> m_classifier;
+			mutable std::shared_ptr<Bag<uml::Classifier>> m_classifier;
 			/*!
 			 A Slot giving the value or values of a StructuralFeature of the instance. An InstanceSpecification can have one Slot per StructuralFeature of its Classifiers, including inherited features. It is not necessary to model a Slot for every StructuralFeature, in which case the InstanceSpecification is a partial description.
 			<p>From package UML::Classification.</p> */
-			std::shared_ptr<Subset<uml::Slot, uml::Element>> m_slot;
+			mutable std::shared_ptr<Subset<uml::Slot, uml::Element>> m_slot;
 			/*!
 			 A specification of how to compute, derive, or construct the instance.
 			<p>From package UML::Classification.</p> */

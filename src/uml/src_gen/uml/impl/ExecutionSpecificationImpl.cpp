@@ -70,23 +70,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 ExecutionSpecificationImpl::ExecutionSpecificationImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	
-
-	//Init references
-	
-
-	
+{	
 }
 
 ExecutionSpecificationImpl::~ExecutionSpecificationImpl()
@@ -96,41 +80,36 @@ ExecutionSpecificationImpl::~ExecutionSpecificationImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+ExecutionSpecificationImpl::ExecutionSpecificationImpl(std::weak_ptr<uml::Interaction > par_enclosingInteraction)
+:ExecutionSpecificationImpl()
+{
+	m_enclosingInteraction = par_enclosingInteraction;
+	m_namespace = par_enclosingInteraction;
+}
 
 //Additional constructor for the containments back reference
-			ExecutionSpecificationImpl::ExecutionSpecificationImpl(std::weak_ptr<uml::Interaction > par_enclosingInteraction)
-			:ExecutionSpecificationImpl()
-			{
-			    m_enclosingInteraction = par_enclosingInteraction;
-				m_namespace = par_enclosingInteraction;
-			}
-
-
-//Additional constructor for the containments back reference
-			ExecutionSpecificationImpl::ExecutionSpecificationImpl(std::weak_ptr<uml::InteractionOperand > par_enclosingOperand)
-			:ExecutionSpecificationImpl()
-			{
-			    m_enclosingOperand = par_enclosingOperand;
-				m_namespace = par_enclosingOperand;
-			}
-
+ExecutionSpecificationImpl::ExecutionSpecificationImpl(std::weak_ptr<uml::InteractionOperand > par_enclosingOperand)
+:ExecutionSpecificationImpl()
+{
+	m_enclosingOperand = par_enclosingOperand;
+	m_namespace = par_enclosingOperand;
+}
 
 //Additional constructor for the containments back reference
-			ExecutionSpecificationImpl::ExecutionSpecificationImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:ExecutionSpecificationImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
+ExecutionSpecificationImpl::ExecutionSpecificationImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:ExecutionSpecificationImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			ExecutionSpecificationImpl::ExecutionSpecificationImpl(std::weak_ptr<uml::Element > par_owner)
-			:ExecutionSpecificationImpl()
-			{
-			    m_owner = par_owner;
-			}
-
+ExecutionSpecificationImpl::ExecutionSpecificationImpl(std::weak_ptr<uml::Element > par_owner)
+:ExecutionSpecificationImpl()
+{
+	m_owner = par_owner;
+}
 
 
 ExecutionSpecificationImpl::ExecutionSpecificationImpl(const ExecutionSpecificationImpl & obj):ExecutionSpecificationImpl()
@@ -247,14 +226,28 @@ std::weak_ptr<uml::Namespace > ExecutionSpecificationImpl::getNamespace() const
 {
 	return m_namespace;
 }
+
 std::shared_ptr<Union<uml::Element>> ExecutionSpecificationImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > ExecutionSpecificationImpl::getOwner() const
 {
 	return m_owner;
 }
+
+
 
 
 std::shared_ptr<ExecutionSpecification> ExecutionSpecificationImpl::getThisExecutionSpecificationPtr() const

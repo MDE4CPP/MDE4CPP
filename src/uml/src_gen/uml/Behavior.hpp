@@ -410,23 +410,23 @@ namespace uml
 			/*!
 			 References a list of Parameters to the Behavior which describes the order and type of arguments that can be given when the Behavior is invoked and of the values which will be returned when the Behavior completes its execution.
 			<p>From package UML::CommonBehavior.</p> */
-			std::shared_ptr<Subset<uml::Parameter, uml::NamedElement>> m_ownedParameter;
+			mutable std::shared_ptr<Subset<uml::Parameter, uml::NamedElement>> m_ownedParameter;
 			/*!
 			 The ParameterSets owned by this Behavior.
 			<p>From package UML::CommonBehavior.</p> */
-			std::shared_ptr<Subset<uml::ParameterSet, uml::NamedElement>> m_ownedParameterSet;
+			mutable std::shared_ptr<Subset<uml::ParameterSet, uml::NamedElement>> m_ownedParameterSet;
 			/*!
 			 An optional set of Constraints specifying what is fulfilled after the execution of the Behavior is completed, if its precondition was fulfilled before its invocation.
 			<p>From package UML::CommonBehavior.</p> */
-			std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>> m_postcondition;
+			mutable std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>> m_postcondition;
 			/*!
 			 An optional set of Constraints specifying what must be fulfilled before the Behavior is invoked.
 			<p>From package UML::CommonBehavior.</p> */
-			std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>> m_precondition;
+			mutable std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>> m_precondition;
 			/*!
 			 References the Behavior that this Behavior redefines. A subtype of Behavior may redefine any other subtype of Behavior. If the Behavior implements a BehavioralFeature, it replaces the redefined Behavior. If the Behavior is a classifierBehavior, it extends the redefined Behavior.
 			<p>From package UML::CommonBehavior.</p> */
-			std::shared_ptr<Subset<uml::Behavior, uml::Classifier /*Subset does not reference a union*/>> m_redefinedBehavior;
+			mutable std::shared_ptr<Subset<uml::Behavior, uml::Classifier /*Subset does not reference a union*/>> m_redefinedBehavior;
 			/*!
 			 Designates a BehavioralFeature that the Behavior implements. The BehavioralFeature must be owned by the BehavioredClassifier that owns the Behavior or be inherited by it. The Parameters of the BehavioralFeature and the implementing Behavior must match. A Behavior does not need to have a specification, in which case it either is the classifierBehavior of a BehavioredClassifier or it can only be invoked by another Behavior of the Classifier.
 			<p>From package UML::CommonBehavior.</p> */

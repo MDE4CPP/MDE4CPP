@@ -186,11 +186,11 @@ namespace uml
 			/*!
 			 The specification of properties that parameterize the deployment and execution of one or more Artifacts.
 			<p>From package UML::Deployments.</p> */
-			std::shared_ptr<Subset<uml::DeploymentSpecification, uml::Element>> m_configuration;
+			mutable std::shared_ptr<Subset<uml::DeploymentSpecification, uml::Element>> m_configuration;
 			/*!
 			 The Artifacts that are deployed onto a Node. This association specializes the supplier association.
 			<p>From package UML::Deployments.</p> */
-			std::shared_ptr<Subset<uml::DeployedArtifact, uml::NamedElement /*Subset does not reference a union*/>> m_deployedArtifact;
+			mutable std::shared_ptr<Subset<uml::DeployedArtifact, uml::NamedElement /*Subset does not reference a union*/>> m_deployedArtifact;
 			/*!
 			 The DeployedTarget which is the target of a Deployment.
 			<p>From package UML::Deployments.</p> */

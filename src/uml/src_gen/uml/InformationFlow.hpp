@@ -235,31 +235,31 @@ namespace uml
 			/*!
 			 Specifies the information items that may circulate on this information flow.
 			<p>From package UML::InformationFlows.</p> */
-			std::shared_ptr<Bag<uml::Classifier>> m_conveyed;
+			mutable std::shared_ptr<Bag<uml::Classifier>> m_conveyed;
 			/*!
 			 Defines from which source the conveyed InformationItems are initiated.
 			<p>From package UML::InformationFlows.</p> */
-			std::shared_ptr<Subset<uml::NamedElement, uml::Element>> m_informationSource;
+			mutable std::shared_ptr<Subset<uml::NamedElement, uml::Element>> m_informationSource;
 			/*!
 			 Defines to which target the conveyed InformationItems are directed.
 			<p>From package UML::InformationFlows.</p> */
-			std::shared_ptr<Subset<uml::NamedElement, uml::Element>> m_informationTarget;
+			mutable std::shared_ptr<Subset<uml::NamedElement, uml::Element>> m_informationTarget;
 			/*!
 			 Determines which Relationship will realize the specified flow.
 			<p>From package UML::InformationFlows.</p> */
-			std::shared_ptr<Bag<uml::Relationship>> m_realization;
+			mutable std::shared_ptr<Bag<uml::Relationship>> m_realization;
 			/*!
 			 Determines which ActivityEdges will realize the specified flow.
 			<p>From package UML::InformationFlows.</p> */
-			std::shared_ptr<Bag<uml::ActivityEdge>> m_realizingActivityEdge;
+			mutable std::shared_ptr<Bag<uml::ActivityEdge>> m_realizingActivityEdge;
 			/*!
 			 Determines which Connectors will realize the specified flow.
 			<p>From package UML::InformationFlows.</p> */
-			std::shared_ptr<Bag<uml::Connector>> m_realizingConnector;
+			mutable std::shared_ptr<Bag<uml::Connector>> m_realizingConnector;
 			/*!
 			 Determines which Messages will realize the specified flow.
 			<p>From package UML::InformationFlows.</p> */
-			std::shared_ptr<Bag<uml::Message>> m_realizingMessage;
+			mutable std::shared_ptr<Bag<uml::Message>> m_realizingMessage;
 			
 
 		public:

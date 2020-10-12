@@ -59,19 +59,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 LinkEndCreationDataImpl::LinkEndCreationDataImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	//Init references
-	
+{	
 }
 
 LinkEndCreationDataImpl::~LinkEndCreationDataImpl()
@@ -81,14 +69,12 @@ LinkEndCreationDataImpl::~LinkEndCreationDataImpl()
 #endif
 }
 
-
 //Additional constructor for the containments back reference
-			LinkEndCreationDataImpl::LinkEndCreationDataImpl(std::weak_ptr<uml::Element > par_owner)
-			:LinkEndCreationDataImpl()
-			{
-			    m_owner = par_owner;
-			}
-
+LinkEndCreationDataImpl::LinkEndCreationDataImpl(std::weak_ptr<uml::Element > par_owner)
+:LinkEndCreationDataImpl()
+{
+	m_owner = par_owner;
+}
 
 
 LinkEndCreationDataImpl::LinkEndCreationDataImpl(const LinkEndCreationDataImpl & obj):LinkEndCreationDataImpl()
@@ -150,7 +136,6 @@ void LinkEndCreationDataImpl::setIsReplaceAll(bool _isReplaceAll)
 {
 	m_isReplaceAll = _isReplaceAll;
 } 
-
 bool LinkEndCreationDataImpl::getIsReplaceAll() const 
 {
 	return m_isReplaceAll;
@@ -183,8 +168,20 @@ void LinkEndCreationDataImpl::setInsertAt(std::shared_ptr<uml::InputPin> _insert
 //*********************************
 std::shared_ptr<Union<uml::Element>> LinkEndCreationDataImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
+
 
 
 std::shared_ptr<LinkEndCreationData> LinkEndCreationDataImpl::getThisLinkEndCreationDataPtr() const

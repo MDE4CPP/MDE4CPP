@@ -169,11 +169,11 @@ namespace uml
 			/*!
 			 The set of ExecutableNodes that are executed if the test evaluates to true and the Clause is chosen over other Clauses within the ConditionalNode that also have tests that evaluate to true.
 			<p>From package UML::Actions.</p> */
-			std::shared_ptr<Bag<uml::ExecutableNode>> m_body;
+			mutable std::shared_ptr<Bag<uml::ExecutableNode>> m_body;
 			/*!
 			 The OutputPins on Actions within the body section whose values are moved to the result OutputPins of the containing ConditionalNode after execution of the body.
 			<p>From package UML::Actions.</p> */
-			std::shared_ptr<Bag<uml::OutputPin>> m_bodyOutput;
+			mutable std::shared_ptr<Bag<uml::OutputPin>> m_bodyOutput;
 			/*!
 			 An OutputPin on an Action in the test section whose Boolean value determines the result of the test.
 			<p>From package UML::Actions.</p> */
@@ -181,15 +181,15 @@ namespace uml
 			/*!
 			 A set of Clauses whose tests must all evaluate to false before this Clause can evaluate its test.
 			<p>From package UML::Actions.</p> */
-			std::shared_ptr<Bag<uml::Clause>> m_predecessorClause;
+			mutable std::shared_ptr<Bag<uml::Clause>> m_predecessorClause;
 			/*!
 			 A set of Clauses that may not evaluate their tests unless the test for this Clause evaluates to false.
 			<p>From package UML::Actions.</p> */
-			std::shared_ptr<Bag<uml::Clause>> m_successorClause;
+			mutable std::shared_ptr<Bag<uml::Clause>> m_successorClause;
 			/*!
 			 The set of ExecutableNodes that are executed in order to provide a test result for the Clause.
 			<p>From package UML::Actions.</p> */
-			std::shared_ptr<Bag<uml::ExecutableNode>> m_test;
+			mutable std::shared_ptr<Bag<uml::ExecutableNode>> m_test;
 			
 
 		public:

@@ -55,35 +55,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 TemplateParameterImpl::TemplateParameterImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	
-
-	
-
-	
-
-	
-
-	//Init references
-	
-
-	
-
-	
-
-	
-
-	
+{	
 }
 
 TemplateParameterImpl::~TemplateParameterImpl()
@@ -93,23 +65,20 @@ TemplateParameterImpl::~TemplateParameterImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+TemplateParameterImpl::TemplateParameterImpl(std::weak_ptr<uml::Element > par_owner)
+:TemplateParameterImpl()
+{
+	m_owner = par_owner;
+}
 
 //Additional constructor for the containments back reference
-			TemplateParameterImpl::TemplateParameterImpl(std::weak_ptr<uml::Element > par_owner)
-			:TemplateParameterImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-//Additional constructor for the containments back reference
-			TemplateParameterImpl::TemplateParameterImpl(std::weak_ptr<uml::TemplateSignature > par_signature)
-			:TemplateParameterImpl()
-			{
-			    m_signature = par_signature;
-				m_owner = par_signature;
-			}
-
+TemplateParameterImpl::TemplateParameterImpl(std::weak_ptr<uml::TemplateSignature > par_signature)
+:TemplateParameterImpl()
+{
+	m_signature = par_signature;
+	m_owner = par_signature;
+}
 
 
 TemplateParameterImpl::TemplateParameterImpl(const TemplateParameterImpl & obj):TemplateParameterImpl()
@@ -243,12 +212,25 @@ void TemplateParameterImpl::setSignature(std::shared_ptr<uml::TemplateSignature>
 //*********************************
 std::shared_ptr<Union<uml::Element>> TemplateParameterImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > TemplateParameterImpl::getOwner() const
 {
 	return m_owner;
 }
+
+
 
 
 std::shared_ptr<TemplateParameter> TemplateParameterImpl::getThisTemplateParameterPtr() const

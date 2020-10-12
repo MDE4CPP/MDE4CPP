@@ -119,7 +119,7 @@ namespace uml
 			/*!
 			 References the Element(s) being commented.
 			<p>From package UML::CommonStructure.</p> */
-			std::shared_ptr<Bag<uml::Element>> m_annotatedElement;
+			mutable std::shared_ptr<Bag<uml::Element>> m_annotatedElement;
 			
 
 		public:

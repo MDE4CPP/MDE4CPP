@@ -69,19 +69,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 StateInvariantImpl::StateInvariantImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	//Init references
-	
+{	
 }
 
 StateInvariantImpl::~StateInvariantImpl()
@@ -91,41 +79,36 @@ StateInvariantImpl::~StateInvariantImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+StateInvariantImpl::StateInvariantImpl(std::weak_ptr<uml::Interaction > par_enclosingInteraction)
+:StateInvariantImpl()
+{
+	m_enclosingInteraction = par_enclosingInteraction;
+	m_namespace = par_enclosingInteraction;
+}
 
 //Additional constructor for the containments back reference
-			StateInvariantImpl::StateInvariantImpl(std::weak_ptr<uml::Interaction > par_enclosingInteraction)
-			:StateInvariantImpl()
-			{
-			    m_enclosingInteraction = par_enclosingInteraction;
-				m_namespace = par_enclosingInteraction;
-			}
-
-
-//Additional constructor for the containments back reference
-			StateInvariantImpl::StateInvariantImpl(std::weak_ptr<uml::InteractionOperand > par_enclosingOperand)
-			:StateInvariantImpl()
-			{
-			    m_enclosingOperand = par_enclosingOperand;
-				m_namespace = par_enclosingOperand;
-			}
-
+StateInvariantImpl::StateInvariantImpl(std::weak_ptr<uml::InteractionOperand > par_enclosingOperand)
+:StateInvariantImpl()
+{
+	m_enclosingOperand = par_enclosingOperand;
+	m_namespace = par_enclosingOperand;
+}
 
 //Additional constructor for the containments back reference
-			StateInvariantImpl::StateInvariantImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:StateInvariantImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
+StateInvariantImpl::StateInvariantImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:StateInvariantImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			StateInvariantImpl::StateInvariantImpl(std::weak_ptr<uml::Element > par_owner)
-			:StateInvariantImpl()
-			{
-			    m_owner = par_owner;
-			}
-
+StateInvariantImpl::StateInvariantImpl(std::weak_ptr<uml::Element > par_owner)
+:StateInvariantImpl()
+{
+	m_owner = par_owner;
+}
 
 
 StateInvariantImpl::StateInvariantImpl(const StateInvariantImpl & obj):StateInvariantImpl()
@@ -231,14 +214,28 @@ std::weak_ptr<uml::Namespace > StateInvariantImpl::getNamespace() const
 {
 	return m_namespace;
 }
+
 std::shared_ptr<Union<uml::Element>> StateInvariantImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > StateInvariantImpl::getOwner() const
 {
 	return m_owner;
 }
+
+
 
 
 std::shared_ptr<StateInvariant> StateInvariantImpl::getThisStateInvariantPtr() const

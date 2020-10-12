@@ -55,23 +55,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 QualifierValueImpl::QualifierValueImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	
-
-	//Init references
-	
-
-	
+{	
 }
 
 QualifierValueImpl::~QualifierValueImpl()
@@ -81,14 +65,12 @@ QualifierValueImpl::~QualifierValueImpl()
 #endif
 }
 
-
 //Additional constructor for the containments back reference
-			QualifierValueImpl::QualifierValueImpl(std::weak_ptr<uml::Element > par_owner)
-			:QualifierValueImpl()
-			{
-			    m_owner = par_owner;
-			}
-
+QualifierValueImpl::QualifierValueImpl(std::weak_ptr<uml::Element > par_owner)
+:QualifierValueImpl()
+{
+	m_owner = par_owner;
+}
 
 
 QualifierValueImpl::QualifierValueImpl(const QualifierValueImpl & obj):QualifierValueImpl()
@@ -185,8 +167,20 @@ void QualifierValueImpl::setValue(std::shared_ptr<uml::InputPin> _value)
 //*********************************
 std::shared_ptr<Union<uml::Element>> QualifierValueImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
+
 
 
 std::shared_ptr<QualifierValue> QualifierValueImpl::getThisQualifierValuePtr() const
