@@ -49,7 +49,7 @@ virtual std::shared_ptr<[aClass.generateCppType(true)/]> create[aClass.name.toUp
 [for (anAssociation : Association | aClass.getCompositionsToClass())]
 [let containerProperty : Property = anAssociation.memberEnd->select(type = aClass)->asOrderedSet()->first()]
 [let containmentProperty : Property = anAssociation.memberEnd->select(not (type = aClass))->asOrderedSet()->first()]
-virtual std::shared_ptr<[aClass.generateCppType(true)/]> create[aClass.name.toUpperFirst()/]_in_[containmentProperty.name.toUpperFirst()/]([containmentProperty.generateCppType()/] [containmentProperty.name.toLowerFirst()/], const int metaElementID = [aClass.getNearestPackage().name.toUpperFirst()/]Package::[aClass.getMemberName().toUpperCase()/]) const [abstractSuffix(impl)/] ; 
+virtual std::shared_ptr<[aClass.generateCppType(true)/]> create[aClass.name.toUpperFirst()/]_as_[containerProperty.name/]_in_[containmentProperty.type.name.toUpperFirst()/]([containmentProperty.generateCppType()/] [containmentProperty.name.toLowerFirst()/], const int metaElementID = [aClass.getNearestPackage().name.toUpperFirst()/]Package::[aClass.getMemberName().toUpperCase()/]) const [abstractSuffix(impl)/] ; 
 [/let]
 [/let]
 [/for]
@@ -73,7 +73,6 @@ static const unsigned int [aClass.getMemberName().toUpperCase()/] = [aClass.getS
 static const unsigned long [aClass.getMemberName().toUpperCase()/] = [aClass.transformType().generateID()/];
 static const unsigned int [aClass.getMemberName().toUpperCase()/]_FEATURE_COUNT = [aClass.allFeatures()->size()/];
 static const unsigned int [aClass.getMemberName().toUpperCase()/]_OPERATION_COUNT = [aClass.ownedOperation->size()/];
-
 [/template]
 
 
@@ -86,14 +85,14 @@ static const unsigned int [aClass.getMemberName().toUpperCase()/]_OPERATION_COUN
 [template public generateStaticPackageID(aPackage : Package)]
 [for (c : Class | aPackage.allOwnedElements()->selectByType(Class)->sortedBy(name)->reject(name.oclIsInvalid() or name = ''))]
 	[generateStaticClassID(c)/]
-
 	[for (anAssociation : Association | c.getCompositionsToClass())]
 	[let containerProperty : Property = anAssociation.memberEnd->select(type = c)->asOrderedSet()->first()]
 	[let containmentProperty : Property = anAssociation.memberEnd->select(not (type = c))->asOrderedSet()->first()]
-	static const unsigned int [containmentProperty.name.toUpperCase()/] = [containmentProperty.getStaticPropertyID_ID()/];
+	static const unsigned long [containerProperty.name.toUpperCase()/]_[containmentProperty.name.toUpperCase()/] = [containmentProperty.type.transformType().generateID()/];
 	[/let]
 	[/let]
 	[/for]
+
 [/for]
 [for (c : Class | aPackage.allOwnedElements()->selectByType(Stereotype)->sortedBy(name)->reject(name.oclIsInvalid() or name = ''))]
 	[generateStaticClassID(c)/]

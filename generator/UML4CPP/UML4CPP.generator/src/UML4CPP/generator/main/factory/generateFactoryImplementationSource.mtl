@@ -83,10 +83,10 @@ std::shared_ptr<uml::Element> [className/]::create(const unsigned int _metaClass
 	[let ref:OrderedSet(Association) = aClass.getCompositionsToClass()]
 		case [aPackage.name.toUpperFirst()/]Package::[aClass.getMemberName().toUpperCase()/]:
 		{
-[if(ref->size()>0)]
+			[if(ref->size()>0)]
 			if (nullptr == container)
 			{
-[/if]
+			[/if]
 				return this->create[aClass.name.toUpperFirst()/](_metaClassId);
 [if(ref->size()>0)]			}
 			else
@@ -99,10 +99,10 @@ std::shared_ptr<uml::Element> [className/]::create(const unsigned int _metaClass
 					[let containerProperty : Property = anAssociation.memberEnd->select(type = aClass)->asOrderedSet()->first()]
 					[let containmentProperty : Property = anAssociation.memberEnd->select(not (type = aClass))->asOrderedSet()->first()]
 					//[aClass.name/] has [anAssociation.name/] as a containment
-					case  [aPackage.name.toUpperFirst()/]Package::[containmentProperty.name.toUpperCase()/]:
+					case  [aPackage.name.toUpperFirst()/]Package::[containerProperty.name.toUpperCase()/]_[containmentProperty.name.toUpperCase()/]:
 					{
 						auto castedContainer = std::dynamic_pointer_cast<[if (containmentProperty.upper <> 1)]Bag<[/if][containmentProperty.type.transformType()/][if (containmentProperty.upper <> 1)]>[/if]>(container);
-						return this->create[aClass.name/]_in_[containmentProperty.name.toUpperFirst()/](castedContainer,_metaClassId);															  
+						return this->create[aClass.name.toUpperFirst()/]_as_[containerProperty.name/]_in_[containmentProperty.type.name.toUpperFirst()/](castedContainer,_metaClassId);															  
 					}
 					[/let]
 					[/let]
@@ -117,7 +117,7 @@ std::shared_ptr<uml::Element> [className/]::create(const unsigned int _metaClass
 [if (not containmentProperty.isBackReference())]
 				assert(castedContainer);
 [/if]
-				return std::shared_ptr<[aClass.name.toUpperFirst()/]>(this->create[aClass.name/]_in_[containmentProperty.name.toUpperFirst()/](castedContainer,_metaClassId));
+				return std::shared_ptr<[aClass.name.toUpperFirst()/]>(this->create[aClass.name.toUpperFirst()/]_as_[containerProperty.name/]_in_[containmentProperty.type.name.toUpperFirst()/](castedContainer,_metaClassId));
 				[/let]
 				[/let]
 				[/if]
@@ -200,8 +200,11 @@ std::shared_ptr<uml::Element> [className/]::create(std::string _className, std::
     }
     return nullptr;
 }
-[comment  generate create operations with string in Container/]
+
 [for (aClass : Class | aPackage.collectModelClassesForFactoryFunctions())]
+//--------------------------
+//create-Functions for class '[aClass.name/]'
+//--------------------------
 std::shared_ptr<[aClass.generateCppType(true)/]> [className/]::create[aClass.name.toUpperFirst()/](const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<[aClass.generateCppType(true)/]Impl> element(new [aClass.name.toUpperFirst()/]Impl());
@@ -210,10 +213,11 @@ std::shared_ptr<[aClass.generateCppType(true)/]> [className/]::create[aClass.nam
 	element->instantiate();
 	return element;
 }
+
 [for (anAssociation : Association | aClass.getCompositionsToClass())]
 [let containerProperty : Property = anAssociation.memberEnd->select(type = aClass)->asOrderedSet()->first()]
 [let containmentProperty : Property = anAssociation.memberEnd->select(not (type = aClass))->asOrderedSet()->first()]
-std::shared_ptr<[aClass.generateCppType(true)/]> [className/]::create[aClass.name.toUpperFirst()/]_in_[containmentProperty.name.toUpperFirst()/]([containmentProperty.generateCppType()/] [containmentProperty.name.toLowerFirst()/], const int metaElementID/*=-1*/) const
+std::shared_ptr<[aClass.generateCppType(true)/]> [className/]::create[aClass.name.toUpperFirst()/]_as_[containerProperty.name/]_in_[containmentProperty.type.name.toUpperFirst()/]([containmentProperty.generateCppType()/] [containmentProperty.name.toLowerFirst()/], const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<[aClass.generateCppType(true)/]Impl> element(new [aClass.name.toUpperFirst()/]Impl([if (containmentProperty.isBackReference())][containmentProperty.name.toLowerFirst()/][/if]));
 	element->setMetaElementID(metaElementID);
@@ -232,6 +236,7 @@ std::shared_ptr<[aClass.generateCppType(true)/]> [className/]::create[aClass.nam
 [/let]
 [/let]
 [/for]
+
 [for (compositeOwnerClass : Class | aClass.getCompositeOwners())] [comment for each class that has composite properties of type aClass/]
 [for (compositeProperty : Property | compositeOwnerClass.getCompositePropertiesOfType(aClass))] [comment for each composite property that compositeOwnerClass has/]
 std::shared_ptr<[aClass.generateCppType(true)/]> [className/]::create[aClass.name.toUpperFirst()/]_as_[compositeProperty.name/]_in_[compositeOwnerClass.name.toUpperFirst()/](std::weak_ptr<[compositeOwnerClass.generateCppType(true)/]> [compositeOwnerClass.name.toLowerFirst()/], const int metaElementID/*=-1*/) const
