@@ -66,19 +66,7 @@ using namespace fUML::Semantics::StructuredClassifiers;
 // Constructor / Destructor
 //*********************************
 LinkImpl::LinkImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	//Init references
-	
+{	
 }
 
 LinkImpl::~LinkImpl()
@@ -87,7 +75,6 @@ LinkImpl::~LinkImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete Link "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -204,19 +191,26 @@ bool LinkImpl::isMatchingLink(std::shared_ptr<fUML::Semantics::StructuredClassif
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference type
+*/
 std::shared_ptr<uml::Association > LinkImpl::getType() const
 {
 
     return m_type;
 }
+
 void LinkImpl::setType(std::shared_ptr<uml::Association> _type)
 {
     m_type = _type;
 }
 
+
+
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<Link> LinkImpl::getThisLinkPtr() const

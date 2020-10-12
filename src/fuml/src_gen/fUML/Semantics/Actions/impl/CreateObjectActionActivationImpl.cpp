@@ -37,6 +37,8 @@
 
 #include <exception> // used in Persistence
 
+#include "uml/Action.hpp"
+
 #include "fUML/Semantics/Actions/ActionActivation.hpp"
 
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
@@ -44,6 +46,8 @@
 #include "uml/ActivityNode.hpp"
 
 #include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
+
+#include "uml/CreateObjectAction.hpp"
 
 #include "fUML/Semantics/Actions/InputPinActivation.hpp"
 
@@ -71,17 +75,7 @@ using namespace fUML::Semantics::Actions;
 // Constructor / Destructor
 //*********************************
 CreateObjectActionActivationImpl::CreateObjectActionActivationImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 CreateObjectActionActivationImpl::~CreateObjectActionActivationImpl()
@@ -91,14 +85,12 @@ CreateObjectActionActivationImpl::~CreateObjectActionActivationImpl()
 #endif
 }
 
-
 //Additional constructor for the containments back reference
-			CreateObjectActionActivationImpl::CreateObjectActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
-			:CreateObjectActionActivationImpl()
-			{
-			    m_group = par_group;
-			}
-
+CreateObjectActionActivationImpl::CreateObjectActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
+:CreateObjectActionActivationImpl()
+{
+	m_group = par_group;
+}
 
 
 CreateObjectActionActivationImpl::CreateObjectActionActivationImpl(const CreateObjectActionActivationImpl & obj):CreateObjectActionActivationImpl()
@@ -112,6 +104,10 @@ CreateObjectActionActivationImpl::CreateObjectActionActivationImpl(const CreateO
 
 	//copy references with no containment (soft copy)
 	
+	m_action  = obj.getAction();
+
+	m_createObjectAction  = obj.getCreateObjectAction();
+
 	m_group  = obj.getGroup();
 
 	std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> _incomingEdges = obj.getIncomingEdges();
@@ -181,7 +177,7 @@ void CreateObjectActionActivationImpl::doAction()
 	// Create an object with the given classifier (which must be a class) as its type, at the same locus as the action activation.
 // Place a reference to the object on the result pin of the action.
 
-std::shared_ptr<uml::CreateObjectAction> action = std::dynamic_pointer_cast<uml::CreateObjectAction>(this->m_node);
+std::shared_ptr<uml::CreateObjectAction> action = this->getCreateObjectAction();
 if(action)
 {
 	std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> reference= fUML::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createReference();
@@ -214,14 +210,75 @@ else
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference createObjectAction
+*/
+std::shared_ptr<uml::CreateObjectAction > CreateObjectActionActivationImpl::getCreateObjectAction() const
+{
+//assert(m_createObjectAction);
+    return m_createObjectAction;
+}
+
+void CreateObjectActionActivationImpl::setCreateObjectAction(std::shared_ptr<uml::CreateObjectAction> _createObjectAction)
+{
+    m_createObjectAction = _createObjectAction;
+	//additional setter call for redefined reference ActionActivation::action
+	fUML::Semantics::Actions::ActionActivationImpl::setAction(_createObjectAction);
+}
+
+/*Additional Setter for redefined reference 'ActionActivation::action'*/
+void CreateObjectActionActivationImpl::setAction(std::shared_ptr<uml::Action> _action)
+{
+	std::shared_ptr<uml::CreateObjectAction> _createObjectAction = std::dynamic_pointer_cast<uml::CreateObjectAction>(_action);
+	if(_createObjectAction)
+	{
+		m_createObjectAction = _createObjectAction;
+
+		//additional setter call for redefined reference ActionActivation::action
+		fUML::Semantics::Actions::ActionActivationImpl::setAction(_action);
+	}
+	else
+	{
+		std::cerr<<"[CreateObjectActionActivation::setAction] : Could not set action because provided action was not of type 'uml::CreateObjectAction'"<<std::endl;
+	}
+}
+/*Additional Setter for redefined reference 'ActivityNodeActivation::node'*/
+void CreateObjectActionActivationImpl::setNode(std::shared_ptr<uml::ActivityNode> _node)
+{
+	std::shared_ptr<uml::CreateObjectAction> _createObjectAction = std::dynamic_pointer_cast<uml::CreateObjectAction>(_node);
+	if(_createObjectAction)
+	{
+		m_createObjectAction = _createObjectAction;
+
+		//additional setter call for redefined reference ActionActivation::action
+		fUML::Semantics::Actions::ActionActivationImpl::setNode(_node);
+	}
+	else
+	{
+		std::cerr<<"[CreateObjectActionActivation::setNode] : Could not set node because provided node was not of type 'uml::CreateObjectAction'"<<std::endl;
+	}
+}
+
 
 //*********************************
 // Union Getter
 //*********************************
 std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> CreateObjectActionActivationImpl::getPinActivation() const
 {
+	if(m_pinActivation == nullptr)
+	{
+		/*Union*/
+		m_pinActivation.reset(new Union<fUML::Semantics::Actions::PinActivation>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_pinActivation - Union<fUML::Semantics::Actions::PinActivation>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_pinActivation;
 }
+
+
 
 
 std::shared_ptr<CreateObjectActionActivation> CreateObjectActionActivationImpl::getThisCreateObjectActionActivationPtr() const
@@ -249,6 +306,8 @@ Any CreateObjectActionActivationImpl::eGet(int featureID, bool resolve, bool cor
 {
 	switch(featureID)
 	{
+		case fUML::Semantics::Actions::ActionsPackage::CREATEOBJECTACTIONACTIVATION_ATTRIBUTE_CREATEOBJECTACTION:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getCreateObjectAction())); //3411
 	}
 	return ActionActivationImpl::eGet(featureID, resolve, coreType);
 }
@@ -256,6 +315,8 @@ bool CreateObjectActionActivationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
+		case fUML::Semantics::Actions::ActionsPackage::CREATEOBJECTACTIONACTIVATION_ATTRIBUTE_CREATEOBJECTACTION:
+			return getCreateObjectAction() != nullptr; //3411
 	}
 	return ActionActivationImpl::internalEIsSet(featureID);
 }
@@ -263,6 +324,14 @@ bool CreateObjectActionActivationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
+		case fUML::Semantics::Actions::ActionsPackage::CREATEOBJECTACTIONACTIVATION_ATTRIBUTE_CREATEOBJECTACTION:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::CreateObjectAction> _createObjectAction = std::dynamic_pointer_cast<uml::CreateObjectAction>(_temp);
+			setCreateObjectAction(_createObjectAction); //3411
+			return true;
+		}
 	}
 
 	return ActionActivationImpl::eSet(featureID, newValue);
@@ -289,6 +358,25 @@ void CreateObjectActionActivationImpl::load(std::shared_ptr<persistence::interfa
 
 void CreateObjectActionActivationImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("createObjectAction");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("createObjectAction")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
 
 	ActionActivationImpl::loadAttributes(loadHandler, attr_list);
 }
@@ -303,6 +391,20 @@ void CreateObjectActionActivationImpl::loadNode(std::string nodeName, std::share
 
 void CreateObjectActionActivationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
+	switch(featureID)
+	{
+		case fUML::Semantics::Actions::ActionsPackage::CREATEOBJECTACTIONACTIVATION_ATTRIBUTE_CREATEOBJECTACTION:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::CreateObjectAction> _createObjectAction = std::dynamic_pointer_cast<uml::CreateObjectAction>( references.front() );
+				setCreateObjectAction(_createObjectAction);
+			}
+			
+			return;
+		}
+	}
 	ActionActivationImpl::resolveReferences(featureID, references);
 }
 
@@ -329,6 +431,9 @@ void CreateObjectActionActivationImpl::saveContent(std::shared_ptr<persistence::
 		std::shared_ptr<fUML::Semantics::Actions::ActionsPackage> package = fUML::Semantics::Actions::ActionsPackage::eInstance();
 
 	
+
+		// Add references
+		saveHandler->addReference("createObjectAction", this->getCreateObjectAction());
 
 	}
 	catch (std::exception& e)

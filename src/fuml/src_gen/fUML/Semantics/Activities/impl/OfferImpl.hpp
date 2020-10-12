@@ -45,24 +45,19 @@ virtual public Offer
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual int countOfferedVales() ;
 			
-			/*!
-			 */ 
+			 
 			virtual bool hasTokens() ;
 			
-			/*!
-			 */ 
+			 
 			virtual void removeOfferedValues(int count) ;
 			
-			/*!
-			 */ 
+			 
 			virtual void removeWithdrawnTokens() ;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > retrieveOfferedTokens() ;
 			
 			
@@ -75,9 +70,9 @@ virtual public Offer
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> getOfferedTokens() const ;
+			
 			
 							
 			

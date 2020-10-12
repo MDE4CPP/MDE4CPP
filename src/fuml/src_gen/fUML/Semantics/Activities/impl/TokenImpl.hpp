@@ -45,28 +45,22 @@ virtual public Token
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<fUML::Semantics::Activities::Token> _copy() ;
 			
-			/*!
-			 */ 
+			 
 			virtual bool equals(std::shared_ptr<fUML::Semantics::Activities::Token>  other) ;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> getValue() const ;
 			
-			/*!
-			 */ 
+			 
 			virtual bool isControl() ;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<fUML::Semantics::Activities::Token> transfer(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation>  holder) ;
 			
-			/*!
-			 */ 
+			 
 			virtual void withdraw() ;
 			
 			
@@ -74,26 +68,22 @@ virtual public Token
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual bool isWithdrawn() const ;
 			
-			/*!
-			 */ 
+			 
 			virtual void setWithdrawn (bool _withdrawn); 
-			
 			
 			
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivation > getHolder() const ;
 			
-			/*!
-			 */
-			virtual void setHolder(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> _holder_holder) ;
+			
+			virtual void setHolder(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> _holder) ;
+			
 							
 			
 			//*********************************

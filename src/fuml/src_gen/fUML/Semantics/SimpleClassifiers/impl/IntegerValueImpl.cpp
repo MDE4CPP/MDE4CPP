@@ -63,17 +63,7 @@ using namespace fUML::Semantics::SimpleClassifiers;
 // Constructor / Destructor
 //*********************************
 IntegerValueImpl::IntegerValueImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 IntegerValueImpl::~IntegerValueImpl()
@@ -82,7 +72,6 @@ IntegerValueImpl::~IntegerValueImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete IntegerValue "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -119,15 +108,20 @@ std::shared_ptr<ecore::EClass> IntegerValueImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
+/*
+Getter & Setter for attribute value
+*/
+int IntegerValueImpl::getValue() const 
+{
+	return m_value;
+}
+
 void IntegerValueImpl::setValue(int _value)
 {
 	m_value = _value;
 } 
 
-int IntegerValueImpl::getValue() const 
-{
-	return m_value;
-}
+
 
 //*********************************
 // Operations
@@ -192,6 +186,7 @@ std::string IntegerValueImpl::toString()
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<IntegerValue> IntegerValueImpl::getThisIntegerValuePtr() const

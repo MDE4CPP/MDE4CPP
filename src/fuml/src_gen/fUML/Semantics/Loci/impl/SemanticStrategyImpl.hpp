@@ -45,8 +45,7 @@ virtual public SemanticStrategy
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual std::string getName() ;
 			
 			

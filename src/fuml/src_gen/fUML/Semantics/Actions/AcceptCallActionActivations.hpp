@@ -46,8 +46,7 @@ namespace fUML
 //*********************************
 namespace fUML::Semantics::Actions 
 {
-	/*!
-	 */
+	
 	class AcceptCallActionActivations : virtual public ecore::EObject 
 
 	{

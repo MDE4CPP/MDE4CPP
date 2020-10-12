@@ -125,6 +125,10 @@ std::shared_ptr<ecore::EReference> ActivitiesPackageImpl::getActivityExecution_A
 {
 	return m_activityExecution_Attribute_activationGroup;
 }
+std::shared_ptr<ecore::EReference> ActivitiesPackageImpl::getActivityExecution_Attribute_activity() const
+{
+	return m_activityExecution_Attribute_activity;
+}
 
 std::shared_ptr<ecore::EOperation> ActivitiesPackageImpl::getActivityExecution_Operation__copy() const
 {
@@ -481,10 +485,6 @@ std::shared_ptr<ecore::EOperation> ActivitiesPackageImpl::getControlToken_Operat
 {
 	return m_controlToken_Operation_equals_Token;
 }
-std::shared_ptr<ecore::EOperation> ActivitiesPackageImpl::getControlToken_Operation_getValue() const
-{
-	return m_controlToken_Operation_getValue;
-}
 std::shared_ptr<ecore::EOperation> ActivitiesPackageImpl::getControlToken_Operation_isControl() const
 {
 	return m_controlToken_Operation_isControl;
@@ -521,6 +521,10 @@ std::shared_ptr<ecore::EClass> ActivitiesPackageImpl::getDecisionNodeActivation_
 std::shared_ptr<ecore::EReference> ActivitiesPackageImpl::getDecisionNodeActivation_Attribute_decisionInputExecution() const
 {
 	return m_decisionNodeActivation_Attribute_decisionInputExecution;
+}
+std::shared_ptr<ecore::EReference> ActivitiesPackageImpl::getDecisionNodeActivation_Attribute_decisionNode() const
+{
+	return m_decisionNodeActivation_Attribute_decisionNode;
 }
 
 std::shared_ptr<ecore::EOperation> ActivitiesPackageImpl::getDecisionNodeActivation_Operation_executeDecisionInputBehavior_Value_Value() const

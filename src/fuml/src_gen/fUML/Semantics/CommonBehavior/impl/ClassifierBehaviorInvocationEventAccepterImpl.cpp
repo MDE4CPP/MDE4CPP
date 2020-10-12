@@ -65,27 +65,7 @@ using namespace fUML::Semantics::CommonBehavior;
 // Constructor / Destructor
 //*********************************
 ClassifierBehaviorInvocationEventAccepterImpl::ClassifierBehaviorInvocationEventAccepterImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	
-
-	
-
-	//Init references
-	
-
-	
-
-	
+{	
 }
 
 ClassifierBehaviorInvocationEventAccepterImpl::~ClassifierBehaviorInvocationEventAccepterImpl()
@@ -94,7 +74,6 @@ ClassifierBehaviorInvocationEventAccepterImpl::~ClassifierBehaviorInvocationEven
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ClassifierBehaviorInvocationEventAccepter "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -192,39 +171,58 @@ if(this->getExecution() != this->getObjectActivation()->getObject())
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference classifier
+*/
 std::shared_ptr<uml::Class > ClassifierBehaviorInvocationEventAccepterImpl::getClassifier() const
 {
 //assert(m_classifier);
     return m_classifier;
 }
+
 void ClassifierBehaviorInvocationEventAccepterImpl::setClassifier(std::shared_ptr<uml::Class> _classifier)
 {
     m_classifier = _classifier;
 }
 
+
+
+/*
+Getter & Setter for reference execution
+*/
 std::shared_ptr<fUML::Semantics::CommonBehavior::Execution > ClassifierBehaviorInvocationEventAccepterImpl::getExecution() const
 {
 //assert(m_execution);
     return m_execution;
 }
+
 void ClassifierBehaviorInvocationEventAccepterImpl::setExecution(std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> _execution)
 {
     m_execution = _execution;
 }
 
+
+
+/*
+Getter & Setter for reference objectActivation
+*/
 std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation > ClassifierBehaviorInvocationEventAccepterImpl::getObjectActivation() const
 {
 
     return m_objectActivation;
 }
+
 void ClassifierBehaviorInvocationEventAccepterImpl::setObjectActivation(std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> _objectActivation)
 {
     m_objectActivation = _objectActivation;
 }
 
+
+
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<ClassifierBehaviorInvocationEventAccepter> ClassifierBehaviorInvocationEventAccepterImpl::getThisClassifierBehaviorInvocationEventAccepterPtr() const

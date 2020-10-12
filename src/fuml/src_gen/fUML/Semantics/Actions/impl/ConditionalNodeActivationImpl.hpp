@@ -47,16 +47,13 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<fUML::Semantics::Actions::ClauseActivation> getClauseActivation(std::shared_ptr<uml::Clause>  clause) ;
 			
-			/*!
-			 */ 
+			 
 			virtual void runTest(std::shared_ptr<uml::Clause>  clause) ;
 			
-			/*!
-			 */ 
+			 
 			virtual void selectBody(std::shared_ptr<uml::Clause>  clause) ;
 			
 			
@@ -69,21 +66,20 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Bag<fUML::Semantics::Actions::ClauseActivation>> getClauseActivations() const ;
 			
-			/*!
-			 */
+			
+			
 			virtual std::shared_ptr<Bag<uml::Clause>> getSelectedClauses() const ;
+			
 			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> getPinActivation() const ; 
 			 
 			//*********************************

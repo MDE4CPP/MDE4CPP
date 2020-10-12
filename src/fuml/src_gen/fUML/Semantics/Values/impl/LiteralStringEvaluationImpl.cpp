@@ -60,17 +60,7 @@ using namespace fUML::Semantics::Values;
 // Constructor / Destructor
 //*********************************
 LiteralStringEvaluationImpl::LiteralStringEvaluationImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 LiteralStringEvaluationImpl::~LiteralStringEvaluationImpl()
@@ -79,7 +69,6 @@ LiteralStringEvaluationImpl::~LiteralStringEvaluationImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete LiteralStringEvaluation "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -139,6 +128,7 @@ std::shared_ptr<fUML::Semantics::Values::Value> LiteralStringEvaluationImpl::eva
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<LiteralStringEvaluation> LiteralStringEvaluationImpl::getThisLiteralStringEvaluationPtr() const

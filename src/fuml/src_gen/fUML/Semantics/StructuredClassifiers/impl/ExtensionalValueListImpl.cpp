@@ -57,17 +57,7 @@ using namespace fUML::Semantics::StructuredClassifiers;
 // Constructor / Destructor
 //*********************************
 ExtensionalValueListImpl::ExtensionalValueListImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 ExtensionalValueListImpl::~ExtensionalValueListImpl()
@@ -76,7 +66,6 @@ ExtensionalValueListImpl::~ExtensionalValueListImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ExtensionalValueList "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -161,6 +150,7 @@ std::shared_ptr<fUML::Semantics::Values::Value> ExtensionalValueListImpl::setVal
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<ExtensionalValueList> ExtensionalValueListImpl::getThisExtensionalValueListPtr() const

@@ -38,6 +38,8 @@
 
 #include <exception> // used in Persistence
 
+#include "uml/Behavior.hpp"
+
 #include "uml/Classifier.hpp"
 
 #include "fUML/Semantics/CommonBehavior/EventOccurrence.hpp"
@@ -76,17 +78,7 @@ using namespace fUML::Semantics::CommonBehavior;
 // Constructor / Destructor
 //*********************************
 CallEventExecutionImpl::CallEventExecutionImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 CallEventExecutionImpl::~CallEventExecutionImpl()
@@ -95,7 +87,6 @@ CallEventExecutionImpl::~CallEventExecutionImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete CallEventExecution "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -109,6 +100,8 @@ CallEventExecutionImpl::CallEventExecutionImpl(const CallEventExecutionImpl & ob
 
 	//copy references with no containment (soft copy)
 	
+	m_behavior  = obj.getBehavior();
+
 	m_context  = obj.getContext();
 
 	m_locus  = obj.getLocus();
@@ -160,15 +153,20 @@ std::shared_ptr<ecore::EClass> CallEventExecutionImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
+/*
+Getter & Setter for attribute callerSuspended
+*/
+bool CallEventExecutionImpl::getCallerSuspended() const 
+{
+	return m_callerSuspended;
+}
+
 void CallEventExecutionImpl::setCallerSuspended(bool _callerSuspended)
 {
 	m_callerSuspended = _callerSuspended;
 } 
 
-bool CallEventExecutionImpl::getCallerSuspended() const 
-{
-	return m_callerSuspended;
-}
+
 
 //*********************************
 // Operations
@@ -340,6 +338,7 @@ void CallEventExecutionImpl::wait_()
 //*********************************
 
 
+
 std::shared_ptr<CallEventExecution> CallEventExecutionImpl::getThisCallEventExecutionPtr() const
 {
 	return m_thisCallEventExecutionPtr.lock();
@@ -362,7 +361,7 @@ Any CallEventExecutionImpl::eGet(int featureID, bool resolve, bool coreType) con
 	switch(featureID)
 	{
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::CALLEVENTEXECUTION_ATTRIBUTE_CALLERSUSPENDED:
-			return eAny(getCallerSuspended()); //176
+			return eAny(getCallerSuspended()); //177
 	}
 	return ExecutionImpl::eGet(featureID, resolve, coreType);
 }
@@ -371,7 +370,7 @@ bool CallEventExecutionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::CALLEVENTEXECUTION_ATTRIBUTE_CALLERSUSPENDED:
-			return getCallerSuspended() != false; //176
+			return getCallerSuspended() != false; //177
 	}
 	return ExecutionImpl::internalEIsSet(featureID);
 }
@@ -383,7 +382,7 @@ bool CallEventExecutionImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			bool _callerSuspended = newValue->get<bool>();
-			setCallerSuspended(_callerSuspended); //176
+			setCallerSuspended(_callerSuspended); //177
 			return true;
 		}
 	}

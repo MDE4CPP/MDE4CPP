@@ -58,19 +58,7 @@ using namespace fUML::Semantics::SimpleClassifiers;
 // Constructor / Destructor
 //*********************************
 PrimitiveValueImpl::PrimitiveValueImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	//Init references
-	
+{	
 }
 
 PrimitiveValueImpl::~PrimitiveValueImpl()
@@ -79,7 +67,6 @@ PrimitiveValueImpl::~PrimitiveValueImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete PrimitiveValue "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -148,19 +135,26 @@ std::shared_ptr<Bag<uml::Classifier> > PrimitiveValueImpl::getTypes()
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference type
+*/
 std::shared_ptr<uml::PrimitiveType > PrimitiveValueImpl::getType() const
 {
 //assert(m_type);
     return m_type;
 }
+
 void PrimitiveValueImpl::setType(std::shared_ptr<uml::PrimitiveType> _type)
 {
     m_type = _type;
 }
 
+
+
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<PrimitiveValue> PrimitiveValueImpl::getThisPrimitiveValuePtr() const

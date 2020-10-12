@@ -73,30 +73,7 @@ using namespace fUML::Semantics::Loci;
 // Constructor / Destructor
 //*********************************
 LocusImpl::LocusImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-		m_extensionalValues.reset(new Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>());
-	
-	
-
-	
-
-	//Init references
-	
-
-	
-	
-
-	
+{	
 }
 
 LocusImpl::~LocusImpl()
@@ -105,7 +82,6 @@ LocusImpl::~LocusImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete Locus "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -146,7 +122,6 @@ LocusImpl::LocusImpl(const LocusImpl & obj):LocusImpl()
 
 	
 
-	
 	
 
 	
@@ -283,36 +258,61 @@ std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue> > 
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference executor
+*/
 std::shared_ptr<fUML::Semantics::Loci::Executor > LocusImpl::getExecutor() const
 {
 
     return m_executor;
 }
+
 void LocusImpl::setExecutor(std::shared_ptr<fUML::Semantics::Loci::Executor> _executor)
 {
     m_executor = _executor;
 }
 
+
+
+/*
+Getter & Setter for reference extensionalValues
+*/
 std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>> LocusImpl::getExtensionalValues() const
 {
+	if(m_extensionalValues == nullptr)
+	{
+		m_extensionalValues.reset(new Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>());
+		
+		
+	}
 
     return m_extensionalValues;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference factory
+*/
 std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory > LocusImpl::getFactory() const
 {
 //assert(m_factory);
     return m_factory;
 }
+
 void LocusImpl::setFactory(std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory> _factory)
 {
     m_factory = _factory;
 }
 
+
+
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<Locus> LocusImpl::getThisLocusPtr() const

@@ -57,13 +57,12 @@ virtual public CallEventBehavior
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<uml::Operation > getOperation() const ;
 			
-			/*!
-			 */
-			virtual void setOperation(std::shared_ptr<uml::Operation> _operation_operation) ;
+			
+			virtual void setOperation(std::shared_ptr<uml::Operation> _operation) ;
+			
 							
 			
 			//*********************************

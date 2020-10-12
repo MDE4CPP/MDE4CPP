@@ -51,22 +51,7 @@ using namespace fUML::Semantics::Activities;
 // Constructor / Destructor
 //*********************************
 TokenSetImpl::TokenSetImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-		m_tokens.reset(new Bag<fUML::Semantics::Activities::Token>());
-	
-	
-
-	//Init references
-	
-	
+{	
 }
 
 TokenSetImpl::~TokenSetImpl()
@@ -75,7 +60,6 @@ TokenSetImpl::~TokenSetImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete TokenSet "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -120,16 +104,29 @@ std::shared_ptr<ecore::EClass> TokenSetImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference tokens
+*/
 std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> TokenSetImpl::getTokens() const
 {
+	if(m_tokens == nullptr)
+	{
+		m_tokens.reset(new Bag<fUML::Semantics::Activities::Token>());
+		
+		
+	}
 
     return m_tokens;
 }
 
 
+
+
+
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<TokenSet> TokenSetImpl::getThisTokenSetPtr() const

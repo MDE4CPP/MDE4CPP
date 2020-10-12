@@ -51,20 +51,16 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual std::weak_ptr<fUML::Semantics::Activities::ActivityExecution> getActivityExecution() const ;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> getNodeActivation(std::shared_ptr<uml::ActivityNode>  node) ;
 			
-			/*!
-			 */ 
+			 
 			virtual void resume(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation>  activation) ;
 			
-			/*!
-			 */ 
+			 
 			virtual void suspend(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation>  activation) ;
 			
 			
@@ -72,37 +68,33 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual int getIndex() const ;
 			
-			/*!
-			 */ 
+			 
 			virtual void setIndex (int _index); 
-			
 			
 			
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Bag<fUML::Semantics::Actions::OutputPinActivation>> getGroupInputs() const ;
 			
-			/*!
-			 */
+			
+			
 			virtual std::shared_ptr<Bag<fUML::Semantics::Actions::OutputPinActivation>> getGroupOutputs() const ;
 			
-			/*!
-			 */
+			
+			
 			virtual std::shared_ptr<fUML::Semantics::Activities::ExpansionRegionActivation > getRegionActivation() const ;
 			
-			/*!
-			 */
-			virtual void setRegionActivation(std::shared_ptr<fUML::Semantics::Activities::ExpansionRegionActivation> _regionActivation_regionActivation) ;
-			/*!
-			 */
+			
+			virtual void setRegionActivation(std::shared_ptr<fUML::Semantics::Activities::ExpansionRegionActivation> _regionActivation) ;
+			
+			
 			virtual std::shared_ptr<Bag<fUML::Semantics::Actions::OutputPinActivation>> getRegionInputs() const ;
+			
 			
 							
 			

@@ -65,8 +65,7 @@ namespace uml
 //*********************************
 namespace fUML::Semantics::Values 
 {
-	/*!
-	 */
+	
 	class Evaluation:virtual public fUML::Semantics::Loci::SemanticVisitor
 	{
 		public:
@@ -86,8 +85,7 @@ namespace fUML::Semantics::Values
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> evaluate() = 0;
 			
 			
@@ -98,20 +96,18 @@ namespace fUML::Semantics::Values
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<fUML::Semantics::Loci::Locus > getLocus() const = 0;
 			
-			/*!
-			 */
-			virtual void setLocus(std::shared_ptr<fUML::Semantics::Loci::Locus> _locus_locus) = 0;
-			/*!
-			 */
+			
+			virtual void setLocus(std::shared_ptr<fUML::Semantics::Loci::Locus> _locus) = 0;
+			
+			
 			virtual std::shared_ptr<uml::ValueSpecification > getSpecification() const = 0;
 			
-			/*!
-			 */
-			virtual void setSpecification(std::shared_ptr<uml::ValueSpecification> _specification_specification) = 0;
+			
+			virtual void setSpecification(std::shared_ptr<uml::ValueSpecification> _specification) = 0;
+			
 			
 
 		protected:
@@ -123,13 +119,9 @@ namespace fUML::Semantics::Values
 			//*********************************
 			// Reference Members
 			//*********************************
-			/*!
-			 */
-			std::shared_ptr<fUML::Semantics::Loci::Locus > m_locus;
-			/*!
-			 */
-			std::shared_ptr<uml::ValueSpecification > m_specification;
 			
+			std::shared_ptr<fUML::Semantics::Loci::Locus > m_locus;
+			std::shared_ptr<uml::ValueSpecification > m_specification;
 
 		public:
 			//*********************************

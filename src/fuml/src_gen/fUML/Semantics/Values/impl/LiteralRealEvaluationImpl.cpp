@@ -60,17 +60,7 @@ using namespace fUML::Semantics::Values;
 // Constructor / Destructor
 //*********************************
 LiteralRealEvaluationImpl::LiteralRealEvaluationImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 LiteralRealEvaluationImpl::~LiteralRealEvaluationImpl()
@@ -79,7 +69,6 @@ LiteralRealEvaluationImpl::~LiteralRealEvaluationImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete LiteralRealEvaluation "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -139,6 +128,7 @@ return realValue;
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<LiteralRealEvaluation> LiteralRealEvaluationImpl::getThisLiteralRealEvaluationPtr() const

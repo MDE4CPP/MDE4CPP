@@ -45,32 +45,25 @@ virtual public ClauseActivation
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> getDecision() ;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<Bag<fUML::Semantics::Actions::ClauseActivation> > getPredecessors() ;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<Bag<fUML::Semantics::Actions::ClauseActivation> > getSuccessors() ;
 			
-			/*!
-			 */ 
+			 
 			virtual bool isReady() ;
 			
-			/*!
-			 */ 
+			 
 			virtual void recieveControl() ;
 			
-			/*!
-			 */ 
+			 
 			virtual void runTest() ;
 			
-			/*!
-			 */ 
+			 
 			virtual void selectBody() ;
 			
 			
@@ -83,20 +76,18 @@ virtual public ClauseActivation
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<uml::Clause > getClause() const ;
 			
-			/*!
-			 */
-			virtual void setClause(std::shared_ptr<uml::Clause> _clause_clause) ;
-			/*!
-			 */
+			
+			virtual void setClause(std::shared_ptr<uml::Clause> _clause) ;
+			
+			
 			virtual std::shared_ptr<fUML::Semantics::Actions::ConditionalNodeActivation > getConditionalNodeActivation() const ;
 			
-			/*!
-			 */
-			virtual void setConditionalNodeActivation(std::shared_ptr<fUML::Semantics::Actions::ConditionalNodeActivation> _conditionalNodeActivation_conditionalNodeActivation) ;
+			
+			virtual void setConditionalNodeActivation(std::shared_ptr<fUML::Semantics::Actions::ConditionalNodeActivation> _conditionalNodeActivation) ;
+			
 							
 			
 			//*********************************

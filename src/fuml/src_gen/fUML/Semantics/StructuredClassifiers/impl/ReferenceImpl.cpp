@@ -76,19 +76,7 @@ using namespace fUML::Semantics::StructuredClassifiers;
 // Constructor / Destructor
 //*********************************
 ReferenceImpl::ReferenceImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	//Init references
-	
+{	
 }
 
 ReferenceImpl::~ReferenceImpl()
@@ -97,7 +85,6 @@ ReferenceImpl::~ReferenceImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete Reference "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -283,19 +270,26 @@ std::string ReferenceImpl::toString()
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference referent
+*/
 std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object > ReferenceImpl::getReferent() const
 {
 //assert(m_referent);
     return m_referent;
 }
+
 void ReferenceImpl::setReferent(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> _referent)
 {
     m_referent = _referent;
 }
 
+
+
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<Reference> ReferenceImpl::getThisReferencePtr() const

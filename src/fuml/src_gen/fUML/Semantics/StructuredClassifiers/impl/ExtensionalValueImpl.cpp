@@ -58,19 +58,7 @@ using namespace fUML::Semantics::StructuredClassifiers;
 // Constructor / Destructor
 //*********************************
 ExtensionalValueImpl::ExtensionalValueImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	//Init references
-	
+{	
 }
 
 ExtensionalValueImpl::~ExtensionalValueImpl()
@@ -79,7 +67,6 @@ ExtensionalValueImpl::~ExtensionalValueImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ExtensionalValue "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -158,19 +145,26 @@ void ExtensionalValueImpl::destroy()
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference locus
+*/
 std::shared_ptr<fUML::Semantics::Loci::Locus > ExtensionalValueImpl::getLocus() const
 {
 
     return m_locus;
 }
+
 void ExtensionalValueImpl::setLocus(std::shared_ptr<fUML::Semantics::Loci::Locus> _locus)
 {
     m_locus = _locus;
 }
 
+
+
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<ExtensionalValue> ExtensionalValueImpl::getThisExtensionalValuePtr() const

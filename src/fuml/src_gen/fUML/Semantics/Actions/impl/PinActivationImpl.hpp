@@ -47,12 +47,10 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual void fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token> >  incomingTokens) ;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > takeOfferedTokens() ;
 			
 			
@@ -65,13 +63,22 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::weak_ptr<fUML::Semantics::Actions::ActionActivation > getActionActivation() const ;
 			
-			/*!
-			 */
-			virtual void setActionActivation(std::shared_ptr<fUML::Semantics::Actions::ActionActivation> _actionActivation_actionActivation) ;
+			
+			virtual void setActionActivation(std::shared_ptr<fUML::Semantics::Actions::ActionActivation> _actionActivation) ;
+			
+			
+			virtual std::shared_ptr<uml::Pin > getPin() const ;
+			
+			
+			virtual void setPin(std::shared_ptr<uml::Pin> _pin) ;
+			
+			/*Additional Setter for 'ActivityNodeActivation::node' redefined by reference 'pin'*/
+			
+			virtual void setNode(std::shared_ptr<uml::ActivityNode> _node) ;
+			
 							
 			
 			//*********************************

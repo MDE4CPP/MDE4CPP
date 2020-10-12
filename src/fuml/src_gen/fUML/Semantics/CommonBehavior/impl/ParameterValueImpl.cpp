@@ -56,26 +56,7 @@ using namespace fUML::Semantics::CommonBehavior;
 // Constructor / Destructor
 //*********************************
 ParameterValueImpl::ParameterValueImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-		m_values.reset(new Bag<fUML::Semantics::Values::Value>());
-	
-	
-
-	//Init references
-	
-
-	
-	
+{	
 }
 
 ParameterValueImpl::~ParameterValueImpl()
@@ -84,7 +65,6 @@ ParameterValueImpl::~ParameterValueImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ParameterValue "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -111,7 +91,6 @@ ParameterValueImpl::ParameterValueImpl(const ParameterValueImpl & obj):Parameter
 		std::cout << "Copying the Subset: " << "m_values" << std::endl;
 	#endif
 
-	
 	
 }
 
@@ -160,26 +139,45 @@ return newValue;
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference parameter
+*/
 std::shared_ptr<uml::Parameter > ParameterValueImpl::getParameter() const
 {
 //assert(m_parameter);
     return m_parameter;
 }
+
 void ParameterValueImpl::setParameter(std::shared_ptr<uml::Parameter> _parameter)
 {
     m_parameter = _parameter;
 }
 
+
+
+/*
+Getter & Setter for reference values
+*/
 std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ParameterValueImpl::getValues() const
 {
+	if(m_values == nullptr)
+	{
+		m_values.reset(new Bag<fUML::Semantics::Values::Value>());
+		
+		
+	}
 
     return m_values;
 }
 
 
+
+
+
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<ParameterValue> ParameterValueImpl::getThisParameterValuePtr() const

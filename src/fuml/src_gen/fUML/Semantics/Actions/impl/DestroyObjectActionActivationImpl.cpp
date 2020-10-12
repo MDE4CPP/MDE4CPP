@@ -38,6 +38,8 @@
 
 #include <exception> // used in Persistence
 
+#include "uml/Action.hpp"
+
 #include "fUML/Semantics/Actions/ActionActivation.hpp"
 
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
@@ -45,6 +47,8 @@
 #include "uml/ActivityNode.hpp"
 
 #include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
+
+#include "uml/DestroyObjectAction.hpp"
 
 #include "fUML/Semantics/Actions/InputPinActivation.hpp"
 
@@ -78,17 +82,7 @@ using namespace fUML::Semantics::Actions;
 // Constructor / Destructor
 //*********************************
 DestroyObjectActionActivationImpl::DestroyObjectActionActivationImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 DestroyObjectActionActivationImpl::~DestroyObjectActionActivationImpl()
@@ -98,14 +92,12 @@ DestroyObjectActionActivationImpl::~DestroyObjectActionActivationImpl()
 #endif
 }
 
-
 //Additional constructor for the containments back reference
-			DestroyObjectActionActivationImpl::DestroyObjectActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
-			:DestroyObjectActionActivationImpl()
-			{
-			    m_group = par_group;
-			}
-
+DestroyObjectActionActivationImpl::DestroyObjectActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
+:DestroyObjectActionActivationImpl()
+{
+	m_group = par_group;
+}
 
 
 DestroyObjectActionActivationImpl::DestroyObjectActionActivationImpl(const DestroyObjectActionActivationImpl & obj):DestroyObjectActionActivationImpl()
@@ -119,6 +111,10 @@ DestroyObjectActionActivationImpl::DestroyObjectActionActivationImpl(const Destr
 
 	//copy references with no containment (soft copy)
 	
+	m_action  = obj.getAction();
+
+	m_destroyObjectAction  = obj.getDestroyObjectAction();
+
 	m_group  = obj.getGroup();
 
 	std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> _incomingEdges = obj.getIncomingEdges();
@@ -244,7 +240,7 @@ void DestroyObjectActionActivationImpl::doAction()
 	// If isDestroyOwnedObjects is true, destroy all objects owned by the referent via composition links.
 	// Destroy the referent object.
 
-	std::shared_ptr<uml::DestroyObjectAction> action = std::dynamic_pointer_cast<uml::DestroyObjectAction>(this->getNode());
+	std::shared_ptr<uml::DestroyObjectAction> action = this->getDestroyObjectAction();
 	if(action)
 	{
 		std::shared_ptr<uml::InputPin > destroyTarget=action->getTarget();
@@ -298,14 +294,75 @@ bool DestroyObjectActionActivationImpl::objectIsComposite(std::shared_ptr<fUML::
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference destroyObjectAction
+*/
+std::shared_ptr<uml::DestroyObjectAction > DestroyObjectActionActivationImpl::getDestroyObjectAction() const
+{
+//assert(m_destroyObjectAction);
+    return m_destroyObjectAction;
+}
+
+void DestroyObjectActionActivationImpl::setDestroyObjectAction(std::shared_ptr<uml::DestroyObjectAction> _destroyObjectAction)
+{
+    m_destroyObjectAction = _destroyObjectAction;
+	//additional setter call for redefined reference ActionActivation::action
+	fUML::Semantics::Actions::ActionActivationImpl::setAction(_destroyObjectAction);
+}
+
+/*Additional Setter for redefined reference 'ActionActivation::action'*/
+void DestroyObjectActionActivationImpl::setAction(std::shared_ptr<uml::Action> _action)
+{
+	std::shared_ptr<uml::DestroyObjectAction> _destroyObjectAction = std::dynamic_pointer_cast<uml::DestroyObjectAction>(_action);
+	if(_destroyObjectAction)
+	{
+		m_destroyObjectAction = _destroyObjectAction;
+
+		//additional setter call for redefined reference ActionActivation::action
+		fUML::Semantics::Actions::ActionActivationImpl::setAction(_action);
+	}
+	else
+	{
+		std::cerr<<"[DestroyObjectActionActivation::setAction] : Could not set action because provided action was not of type 'uml::DestroyObjectAction'"<<std::endl;
+	}
+}
+/*Additional Setter for redefined reference 'ActivityNodeActivation::node'*/
+void DestroyObjectActionActivationImpl::setNode(std::shared_ptr<uml::ActivityNode> _node)
+{
+	std::shared_ptr<uml::DestroyObjectAction> _destroyObjectAction = std::dynamic_pointer_cast<uml::DestroyObjectAction>(_node);
+	if(_destroyObjectAction)
+	{
+		m_destroyObjectAction = _destroyObjectAction;
+
+		//additional setter call for redefined reference ActionActivation::action
+		fUML::Semantics::Actions::ActionActivationImpl::setNode(_node);
+	}
+	else
+	{
+		std::cerr<<"[DestroyObjectActionActivation::setNode] : Could not set node because provided node was not of type 'uml::DestroyObjectAction'"<<std::endl;
+	}
+}
+
 
 //*********************************
 // Union Getter
 //*********************************
 std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> DestroyObjectActionActivationImpl::getPinActivation() const
 {
+	if(m_pinActivation == nullptr)
+	{
+		/*Union*/
+		m_pinActivation.reset(new Union<fUML::Semantics::Actions::PinActivation>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_pinActivation - Union<fUML::Semantics::Actions::PinActivation>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_pinActivation;
 }
+
+
 
 
 std::shared_ptr<DestroyObjectActionActivation> DestroyObjectActionActivationImpl::getThisDestroyObjectActionActivationPtr() const
@@ -333,6 +390,8 @@ Any DestroyObjectActionActivationImpl::eGet(int featureID, bool resolve, bool co
 {
 	switch(featureID)
 	{
+		case fUML::Semantics::Actions::ActionsPackage::DESTROYOBJECTACTIONACTIVATION_ATTRIBUTE_DESTROYOBJECTACTION:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getDestroyObjectAction())); //3911
 	}
 	return ActionActivationImpl::eGet(featureID, resolve, coreType);
 }
@@ -340,6 +399,8 @@ bool DestroyObjectActionActivationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
+		case fUML::Semantics::Actions::ActionsPackage::DESTROYOBJECTACTIONACTIVATION_ATTRIBUTE_DESTROYOBJECTACTION:
+			return getDestroyObjectAction() != nullptr; //3911
 	}
 	return ActionActivationImpl::internalEIsSet(featureID);
 }
@@ -347,6 +408,14 @@ bool DestroyObjectActionActivationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
+		case fUML::Semantics::Actions::ActionsPackage::DESTROYOBJECTACTIONACTIVATION_ATTRIBUTE_DESTROYOBJECTACTION:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::DestroyObjectAction> _destroyObjectAction = std::dynamic_pointer_cast<uml::DestroyObjectAction>(_temp);
+			setDestroyObjectAction(_destroyObjectAction); //3911
+			return true;
+		}
 	}
 
 	return ActionActivationImpl::eSet(featureID, newValue);
@@ -373,6 +442,25 @@ void DestroyObjectActionActivationImpl::load(std::shared_ptr<persistence::interf
 
 void DestroyObjectActionActivationImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("destroyObjectAction");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("destroyObjectAction")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
 
 	ActionActivationImpl::loadAttributes(loadHandler, attr_list);
 }
@@ -387,6 +475,20 @@ void DestroyObjectActionActivationImpl::loadNode(std::string nodeName, std::shar
 
 void DestroyObjectActionActivationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
+	switch(featureID)
+	{
+		case fUML::Semantics::Actions::ActionsPackage::DESTROYOBJECTACTIONACTIVATION_ATTRIBUTE_DESTROYOBJECTACTION:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::DestroyObjectAction> _destroyObjectAction = std::dynamic_pointer_cast<uml::DestroyObjectAction>( references.front() );
+				setDestroyObjectAction(_destroyObjectAction);
+			}
+			
+			return;
+		}
+	}
 	ActionActivationImpl::resolveReferences(featureID, references);
 }
 
@@ -413,6 +515,9 @@ void DestroyObjectActionActivationImpl::saveContent(std::shared_ptr<persistence:
 		std::shared_ptr<fUML::Semantics::Actions::ActionsPackage> package = fUML::Semantics::Actions::ActionsPackage::eInstance();
 
 	
+
+		// Add references
+		saveHandler->addReference("destroyObjectAction", this->getDestroyObjectAction());
 
 	}
 	catch (std::exception& e)

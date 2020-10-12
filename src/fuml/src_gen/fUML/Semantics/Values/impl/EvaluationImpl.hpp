@@ -43,8 +43,7 @@ namespace fUML::Semantics::Values
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> evaluate() ;
 			
 			
@@ -57,20 +56,18 @@ namespace fUML::Semantics::Values
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<fUML::Semantics::Loci::Locus > getLocus() const ;
 			
-			/*!
-			 */
-			virtual void setLocus(std::shared_ptr<fUML::Semantics::Loci::Locus> _locus_locus) ;
-			/*!
-			 */
+			
+			virtual void setLocus(std::shared_ptr<fUML::Semantics::Loci::Locus> _locus) ;
+			
+			
 			virtual std::shared_ptr<uml::ValueSpecification > getSpecification() const ;
 			
-			/*!
-			 */
-			virtual void setSpecification(std::shared_ptr<uml::ValueSpecification> _specification_specification) ;
+			
+			virtual void setSpecification(std::shared_ptr<uml::ValueSpecification> _specification) ;
+			
 							
 			
 			//*********************************

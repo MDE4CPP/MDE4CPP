@@ -59,19 +59,7 @@ using namespace fUML::Semantics::CommonBehavior;
 // Constructor / Destructor
 //*********************************
 InvocationEventOccurrenceImpl::InvocationEventOccurrenceImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	//Init references
-	
+{	
 }
 
 InvocationEventOccurrenceImpl::~InvocationEventOccurrenceImpl()
@@ -80,7 +68,6 @@ InvocationEventOccurrenceImpl::~InvocationEventOccurrenceImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete InvocationEventOccurrence "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -147,19 +134,26 @@ return false;
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference execution
+*/
 std::shared_ptr<fUML::Semantics::CommonBehavior::Execution > InvocationEventOccurrenceImpl::getExecution() const
 {
 //assert(m_execution);
     return m_execution;
 }
+
 void InvocationEventOccurrenceImpl::setExecution(std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> _execution)
 {
     m_execution = _execution;
 }
 
+
+
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<InvocationEventOccurrence> InvocationEventOccurrenceImpl::getThisInvocationEventOccurrencePtr() const

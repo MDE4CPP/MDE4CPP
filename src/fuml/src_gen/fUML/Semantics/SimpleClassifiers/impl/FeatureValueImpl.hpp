@@ -45,12 +45,10 @@ virtual public FeatureValue
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> _copy() ;
 			
-			/*!
-			 */ 
+			 
 			virtual bool hasEqualValues(std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue>  other) ;
 			
 			
@@ -58,29 +56,25 @@ virtual public FeatureValue
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual int getPosition() const ;
 			
-			/*!
-			 */ 
+			 
 			virtual void setPosition (int _position); 
-			
 			
 			
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<uml::StructuralFeature > getFeature() const ;
 			
-			/*!
-			 */
-			virtual void setFeature(std::shared_ptr<uml::StructuralFeature> _feature_feature) ;
-			/*!
-			 */
+			
+			virtual void setFeature(std::shared_ptr<uml::StructuralFeature> _feature) ;
+			
+			
 			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value>> getValues() const ;
+			
 			
 							
 			

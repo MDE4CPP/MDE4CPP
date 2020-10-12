@@ -39,6 +39,11 @@ namespace fUML
 //Forward Declaration for used types
 namespace uml 
 {
+	class Behavior;
+}
+
+namespace uml 
+{
 	class Classifier;
 }
 
@@ -81,8 +86,7 @@ namespace fUML::Semantics::CommonBehavior
 //*********************************
 namespace fUML::Semantics::CommonBehavior 
 {
-	/*!
-	 */
+	
 	class OpaqueBehaviorExecution:virtual public Execution
 	{
 		public:
@@ -102,12 +106,10 @@ namespace fUML::Semantics::CommonBehavior
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual void doBody(std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> >  inputParameters,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> >  outputParameters) = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual void execute() = 0;
 			
 			

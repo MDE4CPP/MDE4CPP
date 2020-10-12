@@ -55,19 +55,7 @@ using namespace fUML::Semantics::Activities;
 // Constructor / Destructor
 //*********************************
 ObjectTokenImpl::ObjectTokenImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	//Init references
-	
+{	
 }
 
 ObjectTokenImpl::~ObjectTokenImpl()
@@ -76,7 +64,6 @@ ObjectTokenImpl::~ObjectTokenImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ObjectToken "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -158,19 +145,26 @@ bool ObjectTokenImpl::isControl()
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference value
+*/
 std::shared_ptr<fUML::Semantics::Values::Value > ObjectTokenImpl::getValue() const
 {
 
     return m_value;
 }
+
 void ObjectTokenImpl::setValue(std::shared_ptr<fUML::Semantics::Values::Value> _value)
 {
     m_value = _value;
 }
 
+
+
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<ObjectToken> ObjectTokenImpl::getThisObjectTokenPtr() const

@@ -62,17 +62,7 @@ using namespace fUML::Semantics::SimpleClassifiers;
 // Constructor / Destructor
 //*********************************
 BooleanValueImpl::BooleanValueImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 BooleanValueImpl::~BooleanValueImpl()
@@ -81,7 +71,6 @@ BooleanValueImpl::~BooleanValueImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete BooleanValue "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -118,15 +107,20 @@ std::shared_ptr<ecore::EClass> BooleanValueImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
+/*
+Getter & Setter for attribute value
+*/
+bool BooleanValueImpl::isValue() const 
+{
+	return m_value;
+}
+
 void BooleanValueImpl::setValue(bool _value)
 {
 	m_value = _value;
 } 
 
-bool BooleanValueImpl::isValue() const 
-{
-	return m_value;
-}
+
 
 //*********************************
 // Operations
@@ -193,6 +187,7 @@ std::string BooleanValueImpl::toString()
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<BooleanValue> BooleanValueImpl::getThisBooleanValuePtr() const

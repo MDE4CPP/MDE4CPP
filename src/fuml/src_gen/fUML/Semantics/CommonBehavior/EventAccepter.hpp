@@ -50,8 +50,7 @@ namespace fUML::Semantics::SimpleClassifiers
 //*********************************
 namespace fUML::Semantics::CommonBehavior 
 {
-	/*!
-	 */
+	
 	class EventAccepter : virtual public ecore::EObject 
 
 	{
@@ -72,12 +71,10 @@ namespace fUML::Semantics::CommonBehavior
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual void accept(std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance>  signalInstance) = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual bool match(std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance>  signalInstance) = 0;
 			
 			

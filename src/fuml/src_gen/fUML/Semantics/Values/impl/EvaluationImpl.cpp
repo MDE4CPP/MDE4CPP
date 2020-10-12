@@ -56,23 +56,7 @@ using namespace fUML::Semantics::Values;
 // Constructor / Destructor
 //*********************************
 EvaluationImpl::EvaluationImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	
-
-	//Init references
-	
-
-	
+{	
 }
 
 EvaluationImpl::~EvaluationImpl()
@@ -81,7 +65,6 @@ EvaluationImpl::~EvaluationImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete Evaluation "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -132,29 +115,42 @@ std::shared_ptr<fUML::Semantics::Values::Value> EvaluationImpl::evaluate()
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference locus
+*/
 std::shared_ptr<fUML::Semantics::Loci::Locus > EvaluationImpl::getLocus() const
 {
 //assert(m_locus);
     return m_locus;
 }
+
 void EvaluationImpl::setLocus(std::shared_ptr<fUML::Semantics::Loci::Locus> _locus)
 {
     m_locus = _locus;
 }
 
+
+
+/*
+Getter & Setter for reference specification
+*/
 std::shared_ptr<uml::ValueSpecification > EvaluationImpl::getSpecification() const
 {
 //assert(m_specification);
     return m_specification;
 }
+
 void EvaluationImpl::setSpecification(std::shared_ptr<uml::ValueSpecification> _specification)
 {
     m_specification = _specification;
 }
 
+
+
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<Evaluation> EvaluationImpl::getThisEvaluationPtr() const

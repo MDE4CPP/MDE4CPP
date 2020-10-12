@@ -60,17 +60,7 @@ using namespace fUML::Semantics::Values;
 // Constructor / Destructor
 //*********************************
 LiteralIntegerEvaluationImpl::LiteralIntegerEvaluationImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 LiteralIntegerEvaluationImpl::~LiteralIntegerEvaluationImpl()
@@ -79,7 +69,6 @@ LiteralIntegerEvaluationImpl::~LiteralIntegerEvaluationImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete LiteralIntegerEvaluation "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -140,6 +129,7 @@ std::shared_ptr<fUML::Semantics::Values::Value> LiteralIntegerEvaluationImpl::ev
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<LiteralIntegerEvaluation> LiteralIntegerEvaluationImpl::getThisLiteralIntegerEvaluationPtr() const

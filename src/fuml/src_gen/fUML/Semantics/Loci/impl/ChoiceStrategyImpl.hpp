@@ -43,12 +43,10 @@ namespace fUML::Semantics::Loci
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual int choose(int size) ;
 			
-			/*!
-			 */ 
+			 
 			virtual std::string getName() ;
 			
 			

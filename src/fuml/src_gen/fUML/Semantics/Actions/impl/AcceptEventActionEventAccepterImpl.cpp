@@ -52,19 +52,7 @@ using namespace fUML::Semantics::Actions;
 // Constructor / Destructor
 //*********************************
 AcceptEventActionEventAccepterImpl::AcceptEventActionEventAccepterImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	//Init references
-	
+{	
 }
 
 AcceptEventActionEventAccepterImpl::~AcceptEventActionEventAccepterImpl()
@@ -73,7 +61,6 @@ AcceptEventActionEventAccepterImpl::~AcceptEventActionEventAccepterImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete AcceptEventActionEventAccepter "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -117,19 +104,26 @@ std::shared_ptr<ecore::EClass> AcceptEventActionEventAccepterImpl::eStaticClass(
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference actionActivation
+*/
 std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionActivation > AcceptEventActionEventAccepterImpl::getActionActivation() const
 {
 //assert(m_actionActivation);
     return m_actionActivation;
 }
+
 void AcceptEventActionEventAccepterImpl::setActionActivation(std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionActivation> _actionActivation)
 {
     m_actionActivation = _actionActivation;
 }
 
+
+
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<AcceptEventActionEventAccepter> AcceptEventActionEventAccepterImpl::getThisAcceptEventActionEventAccepterPtr() const

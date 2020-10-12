@@ -62,17 +62,7 @@ using namespace fUML::Semantics::SimpleClassifiers;
 // Constructor / Destructor
 //*********************************
 StringValueImpl::StringValueImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 StringValueImpl::~StringValueImpl()
@@ -81,7 +71,6 @@ StringValueImpl::~StringValueImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete StringValue "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -118,15 +107,20 @@ std::shared_ptr<ecore::EClass> StringValueImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
+/*
+Getter & Setter for attribute value
+*/
+std::string StringValueImpl::getValue() const 
+{
+	return m_value;
+}
+
 void StringValueImpl::setValue(std::string _value)
 {
 	m_value = _value;
 } 
 
-std::string StringValueImpl::getValue() const 
-{
-	return m_value;
-}
+
 
 //*********************************
 // Operations
@@ -186,6 +180,7 @@ std::string StringValueImpl::toString()
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<StringValue> StringValueImpl::getThisStringValuePtr() const

@@ -43,11 +43,15 @@
 
 #include <exception> // used in Persistence
 
+#include "uml/Action.hpp"
+
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 
 #include "uml/ActivityNode.hpp"
 
 #include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
+
+#include "uml/CallAction.hpp"
 
 #include "fUML/Semantics/CommonBehavior/Execution.hpp"
 
@@ -79,22 +83,7 @@ using namespace fUML::Semantics::Actions;
 // Constructor / Destructor
 //*********************************
 CallActionActivationImpl::CallActionActivationImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-		m_callExecutions.reset(new Bag<fUML::Semantics::CommonBehavior::Execution>());
-	
-	
-
-	//Init references
-	
-	
+{	
 }
 
 CallActionActivationImpl::~CallActionActivationImpl()
@@ -104,14 +93,12 @@ CallActionActivationImpl::~CallActionActivationImpl()
 #endif
 }
 
-
 //Additional constructor for the containments back reference
-			CallActionActivationImpl::CallActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
-			:CallActionActivationImpl()
-			{
-			    m_group = par_group;
-			}
-
+CallActionActivationImpl::CallActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
+:CallActionActivationImpl()
+{
+	m_group = par_group;
+}
 
 
 CallActionActivationImpl::CallActionActivationImpl(const CallActionActivationImpl & obj):CallActionActivationImpl()
@@ -125,6 +112,10 @@ CallActionActivationImpl::CallActionActivationImpl(const CallActionActivationImp
 
 	//copy references with no containment (soft copy)
 	
+	m_action  = obj.getAction();
+
+	m_callAction  = obj.getCallAction();
+
 	m_group  = obj.getGroup();
 
 	std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> _incomingEdges = obj.getIncomingEdges();
@@ -175,7 +166,6 @@ CallActionActivationImpl::CallActionActivationImpl(const CallActionActivationImp
 	#endif
 
 	
-	
 }
 
 std::shared_ptr<ecore::EObject>  CallActionActivationImpl::copy() const
@@ -207,7 +197,7 @@ void CallActionActivationImpl::doAction()
     {
         this->getCallExecutions()->push_back(callExecution);
 
-        std::shared_ptr<uml::CallAction> callAction = std::dynamic_pointer_cast<uml::CallAction> (this->getNode());
+        std::shared_ptr<uml::CallAction> callAction = this->getCallAction();
         std::shared_ptr<Bag<uml::InputPin> > argumentPins = callAction->getArgument();
         std::shared_ptr<Subset<fUML::Semantics::Actions::InputPinActivation, fUML::Semantics::Actions::PinActivation>> inputActivationList=this->getInputPinActivation();
 
@@ -322,11 +312,73 @@ void CallActionActivationImpl::terminate()
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference callAction
+*/
+std::shared_ptr<uml::CallAction > CallActionActivationImpl::getCallAction() const
+{
+//assert(m_callAction);
+    return m_callAction;
+}
+
+void CallActionActivationImpl::setCallAction(std::shared_ptr<uml::CallAction> _callAction)
+{
+    m_callAction = _callAction;
+	//additional setter call for redefined reference ActionActivation::action
+	fUML::Semantics::Actions::ActionActivationImpl::setAction(_callAction);
+}
+
+/*Additional Setter for redefined reference 'ActionActivation::action'*/
+void CallActionActivationImpl::setAction(std::shared_ptr<uml::Action> _action)
+{
+	std::shared_ptr<uml::CallAction> _callAction = std::dynamic_pointer_cast<uml::CallAction>(_action);
+	if(_callAction)
+	{
+		m_callAction = _callAction;
+
+		//additional setter call for redefined reference ActionActivation::action
+		fUML::Semantics::Actions::ActionActivationImpl::setAction(_action);
+	}
+	else
+	{
+		std::cerr<<"[CallActionActivation::setAction] : Could not set action because provided action was not of type 'uml::CallAction'"<<std::endl;
+	}
+}
+/*Additional Setter for redefined reference 'ActivityNodeActivation::node'*/
+void CallActionActivationImpl::setNode(std::shared_ptr<uml::ActivityNode> _node)
+{
+	std::shared_ptr<uml::CallAction> _callAction = std::dynamic_pointer_cast<uml::CallAction>(_node);
+	if(_callAction)
+	{
+		m_callAction = _callAction;
+
+		//additional setter call for redefined reference ActionActivation::action
+		fUML::Semantics::Actions::ActionActivationImpl::setNode(_node);
+	}
+	else
+	{
+		std::cerr<<"[CallActionActivation::setNode] : Could not set node because provided node was not of type 'uml::CallAction'"<<std::endl;
+	}
+}
+
+
+/*
+Getter & Setter for reference callExecutions
+*/
 std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::Execution>> CallActionActivationImpl::getCallExecutions() const
 {
+	if(m_callExecutions == nullptr)
+	{
+		m_callExecutions.reset(new Bag<fUML::Semantics::CommonBehavior::Execution>());
+		
+		
+	}
 
     return m_callExecutions;
 }
+
+
+
 
 
 //*********************************
@@ -334,8 +386,20 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::Execution>> CallActionActiv
 //*********************************
 std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> CallActionActivationImpl::getPinActivation() const
 {
+	if(m_pinActivation == nullptr)
+	{
+		/*Union*/
+		m_pinActivation.reset(new Union<fUML::Semantics::Actions::PinActivation>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_pinActivation - Union<fUML::Semantics::Actions::PinActivation>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_pinActivation;
 }
+
+
 
 
 std::shared_ptr<CallActionActivation> CallActionActivationImpl::getThisCallActionActivationPtr() const
@@ -363,6 +427,8 @@ Any CallActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) c
 {
 	switch(featureID)
 	{
+		case fUML::Semantics::Actions::ActionsPackage::CALLACTIONACTIVATION_ATTRIBUTE_CALLACTION:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getCallAction())); //1412
 		case fUML::Semantics::Actions::ActionsPackage::CALLACTIONACTIVATION_ATTRIBUTE_CALLEXECUTIONS:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -373,7 +439,7 @@ Any CallActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) c
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //1410
+			return eAny(tempList); //1411
 		}
 	}
 	return InvocationActionActivationImpl::eGet(featureID, resolve, coreType);
@@ -382,8 +448,10 @@ bool CallActionActivationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
+		case fUML::Semantics::Actions::ActionsPackage::CALLACTIONACTIVATION_ATTRIBUTE_CALLACTION:
+			return getCallAction() != nullptr; //1412
 		case fUML::Semantics::Actions::ActionsPackage::CALLACTIONACTIVATION_ATTRIBUTE_CALLEXECUTIONS:
-			return getCallExecutions() != nullptr; //1410
+			return getCallExecutions() != nullptr; //1411
 	}
 	return InvocationActionActivationImpl::internalEIsSet(featureID);
 }
@@ -391,6 +459,14 @@ bool CallActionActivationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
+		case fUML::Semantics::Actions::ActionsPackage::CALLACTIONACTIVATION_ATTRIBUTE_CALLACTION:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::CallAction> _callAction = std::dynamic_pointer_cast<uml::CallAction>(_temp);
+			setCallAction(_callAction); //1412
+			return true;
+		}
 		case fUML::Semantics::Actions::ActionsPackage::CALLACTIONACTIVATION_ATTRIBUTE_CALLEXECUTIONS:
 		{
 			// BOOST CAST
@@ -453,6 +529,25 @@ void CallActionActivationImpl::load(std::shared_ptr<persistence::interfaces::XLo
 
 void CallActionActivationImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("callAction");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("callAction")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
 
 	InvocationActionActivationImpl::loadAttributes(loadHandler, attr_list);
 }
@@ -495,6 +590,20 @@ void CallActionActivationImpl::loadNode(std::string nodeName, std::shared_ptr<pe
 
 void CallActionActivationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
+	switch(featureID)
+	{
+		case fUML::Semantics::Actions::ActionsPackage::CALLACTIONACTIVATION_ATTRIBUTE_CALLACTION:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::CallAction> _callAction = std::dynamic_pointer_cast<uml::CallAction>( references.front() );
+				setCallAction(_callAction);
+			}
+			
+			return;
+		}
+	}
 	InvocationActionActivationImpl::resolveReferences(featureID, references);
 }
 
@@ -524,6 +633,9 @@ void CallActionActivationImpl::saveContent(std::shared_ptr<persistence::interfac
 		std::shared_ptr<fUML::Semantics::Actions::ActionsPackage> package = fUML::Semantics::Actions::ActionsPackage::eInstance();
 
 	
+
+		// Add references
+		saveHandler->addReference("callAction", this->getCallAction());
 
 
 		//

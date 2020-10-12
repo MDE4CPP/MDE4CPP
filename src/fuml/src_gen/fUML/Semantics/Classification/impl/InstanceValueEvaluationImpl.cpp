@@ -79,17 +79,7 @@ using namespace fUML::Semantics::Classification;
 // Constructor / Destructor
 //*********************************
 InstanceValueEvaluationImpl::InstanceValueEvaluationImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 InstanceValueEvaluationImpl::~InstanceValueEvaluationImpl()
@@ -98,7 +88,6 @@ InstanceValueEvaluationImpl::~InstanceValueEvaluationImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete InstanceValueEvaluation "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -228,6 +217,7 @@ std::shared_ptr<fUML::Semantics::Values::Value> InstanceValueEvaluationImpl::eva
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<InstanceValueEvaluation> InstanceValueEvaluationImpl::getThisInstanceValueEvaluationPtr() const

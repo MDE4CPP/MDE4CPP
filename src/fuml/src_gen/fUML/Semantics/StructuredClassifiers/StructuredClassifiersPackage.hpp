@@ -38,8 +38,7 @@ namespace fUML::Semantics::StructuredClassifiers
 	The Metamodel Package for the StructuredClassifiers metamodel. This package is used to enable the reflection of model elements. It contains all model elements
 	which were described in an ecore file.
 	*/
-	/*!
-	 */
+	
 	class StructuredClassifiersPackage : virtual public ecore::EPackage 
 	{
 		private:    
@@ -57,7 +56,7 @@ namespace fUML::Semantics::StructuredClassifiers
 
 			// Begin Class DispatchStrategy
 			//Class and Feature IDs 
-			static const unsigned int DISPATCHSTRATEGY_CLASS = 40;
+			static const unsigned long DISPATCHSTRATEGY_CLASS = 1413517210;
 			static const unsigned int DISPATCHSTRATEGY_CLASS_FEATURE_COUNT = 0;
 			static const unsigned int DISPATCHSTRATEGY_CLASS_OPERATION_COUNT = 4;
 			
@@ -80,7 +79,7 @@ namespace fUML::Semantics::StructuredClassifiers
 
 			// Begin Class ExtensionalValue
 			//Class and Feature IDs 
-			static const unsigned int EXTENSIONALVALUE_CLASS = 52;
+			static const unsigned long EXTENSIONALVALUE_CLASS = 1972653315;
 			static const unsigned int EXTENSIONALVALUE_CLASS_FEATURE_COUNT = 2;
 			static const unsigned int EXTENSIONALVALUE_CLASS_OPERATION_COUNT = 27;
 			
@@ -103,7 +102,7 @@ namespace fUML::Semantics::StructuredClassifiers
 
 			// Begin Class ExtensionalValueList
 			//Class and Feature IDs 
-			static const unsigned int EXTENSIONALVALUELIST_CLASS = 53;
+			static const unsigned long EXTENSIONALVALUELIST_CLASS = 823739257;
 			static const unsigned int EXTENSIONALVALUELIST_CLASS_FEATURE_COUNT = 2;
 			static const unsigned int EXTENSIONALVALUELIST_CLASS_OPERATION_COUNT = 32;
 			
@@ -130,7 +129,7 @@ namespace fUML::Semantics::StructuredClassifiers
 
 			// Begin Class Link
 			//Class and Feature IDs 
-			static const unsigned int LINK_CLASS = 68;
+			static const unsigned long LINK_CLASS = 1823394283;
 			static const unsigned int LINK_CLASS_FEATURE_COUNT = 3;
 			static const unsigned int LINK_CLASS_OPERATION_COUNT = 32;
 			
@@ -159,7 +158,7 @@ namespace fUML::Semantics::StructuredClassifiers
 
 			// Begin Class Object
 			//Class and Feature IDs 
-			static const unsigned int OBJECT_CLASS = 80;
+			static const unsigned long OBJECT_CLASS = 208025094;
 			static const unsigned int OBJECT_CLASS_FEATURE_COUNT = 4;
 			static const unsigned int OBJECT_CLASS_OPERATION_COUNT = 36;
 			
@@ -198,7 +197,7 @@ namespace fUML::Semantics::StructuredClassifiers
 
 			// Begin Class RedefinitionBasedDispatchStrategy
 			//Class and Feature IDs 
-			static const unsigned int REDEFINITIONBASEDDISPATCHSTRATEGY_CLASS = 97;
+			static const unsigned long REDEFINITIONBASEDDISPATCHSTRATEGY_CLASS = 784625732;
 			static const unsigned int REDEFINITIONBASEDDISPATCHSTRATEGY_CLASS_FEATURE_COUNT = 0;
 			static const unsigned int REDEFINITIONBASEDDISPATCHSTRATEGY_CLASS_OPERATION_COUNT = 6;
 			
@@ -219,7 +218,7 @@ namespace fUML::Semantics::StructuredClassifiers
 
 			// Begin Class Reference
 			//Class and Feature IDs 
-			static const unsigned int REFERENCE_CLASS = 99;
+			static const unsigned long REFERENCE_CLASS = 408530163;
 			static const unsigned int REFERENCE_CLASS_FEATURE_COUNT = 1;
 			static const unsigned int REFERENCE_CLASS_OPERATION_COUNT = 34;
 			

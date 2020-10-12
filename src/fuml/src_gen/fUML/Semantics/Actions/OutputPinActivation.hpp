@@ -56,6 +56,11 @@ namespace fUML::Semantics::Activities
 	class ActivityNodeActivationGroup;
 }
 
+namespace uml 
+{
+	class Pin;
+}
+
 namespace fUML::Semantics::Actions 
 {
 	class PinActivation;
@@ -75,8 +80,7 @@ namespace fUML::Semantics::Activities
 //*********************************
 namespace fUML::Semantics::Actions 
 {
-	/*!
-	 */
+	
 	class OutputPinActivation:virtual public PinActivation
 	{
 		public:

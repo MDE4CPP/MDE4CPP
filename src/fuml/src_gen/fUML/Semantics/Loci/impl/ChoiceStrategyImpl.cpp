@@ -50,17 +50,7 @@ using namespace fUML::Semantics::Loci;
 // Constructor / Destructor
 //*********************************
 ChoiceStrategyImpl::ChoiceStrategyImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 ChoiceStrategyImpl::~ChoiceStrategyImpl()
@@ -69,7 +59,6 @@ ChoiceStrategyImpl::~ChoiceStrategyImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ChoiceStrategy "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -128,6 +117,7 @@ std::string ChoiceStrategyImpl::getName()
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<ChoiceStrategy> ChoiceStrategyImpl::getThisChoiceStrategyPtr() const

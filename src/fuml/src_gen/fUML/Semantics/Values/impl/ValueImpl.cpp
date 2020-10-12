@@ -58,17 +58,7 @@ using namespace fUML::Semantics::Values;
 // Constructor / Destructor
 //*********************************
 ValueImpl::ValueImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 ValueImpl::~ValueImpl()
@@ -77,7 +67,6 @@ ValueImpl::~ValueImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete Value "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -222,6 +211,7 @@ std::string ValueImpl::toString()
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<Value> ValueImpl::getThisValuePtr() const

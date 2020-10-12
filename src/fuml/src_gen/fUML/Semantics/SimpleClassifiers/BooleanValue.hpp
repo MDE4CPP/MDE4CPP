@@ -65,8 +65,7 @@ namespace uml
 //*********************************
 namespace fUML::Semantics::SimpleClassifiers 
 {
-	/*!
-	 */
+	
 	class BooleanValue:virtual public PrimitiveValue
 	{
 		public:
@@ -86,34 +85,27 @@ namespace fUML::Semantics::SimpleClassifiers
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual bool equals(std::shared_ptr<fUML::Semantics::Values::Value>  otherValue) = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<uml::ValueSpecification> specify() = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual std::string toString() = 0;
 			
 			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual bool isValue() const = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual void setValue (bool _value)= 0; 
-			
 			
 			//*********************************
 			// Reference
@@ -124,8 +116,7 @@ namespace fUML::Semantics::SimpleClassifiers
 			//*********************************
 			// Attribute Members
 			//*********************************
-			/*!
-			 */ 
+			 
 			bool m_value = false;
 			
 			

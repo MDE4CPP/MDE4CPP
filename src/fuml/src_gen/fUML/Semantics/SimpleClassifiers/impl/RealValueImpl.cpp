@@ -63,17 +63,7 @@ using namespace fUML::Semantics::SimpleClassifiers;
 // Constructor / Destructor
 //*********************************
 RealValueImpl::RealValueImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 RealValueImpl::~RealValueImpl()
@@ -82,7 +72,6 @@ RealValueImpl::~RealValueImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete RealValue "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -119,15 +108,20 @@ std::shared_ptr<ecore::EClass> RealValueImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
+/*
+Getter & Setter for attribute value
+*/
+double RealValueImpl::getValue() const 
+{
+	return m_value;
+}
+
 void RealValueImpl::setValue(double _value)
 {
 	m_value = _value;
 } 
 
-double RealValueImpl::getValue() const 
-{
-	return m_value;
-}
+
 
 //*********************************
 // Operations
@@ -190,6 +184,7 @@ std::string RealValueImpl::toString()
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<RealValue> RealValueImpl::getThisRealValuePtr() const

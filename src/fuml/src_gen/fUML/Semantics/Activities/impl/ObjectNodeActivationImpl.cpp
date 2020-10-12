@@ -62,17 +62,7 @@ using namespace fUML::Semantics::Activities;
 // Constructor / Destructor
 //*********************************
 ObjectNodeActivationImpl::ObjectNodeActivationImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 ObjectNodeActivationImpl::~ObjectNodeActivationImpl()
@@ -82,14 +72,12 @@ ObjectNodeActivationImpl::~ObjectNodeActivationImpl()
 #endif
 }
 
-
 //Additional constructor for the containments back reference
-			ObjectNodeActivationImpl::ObjectNodeActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
-			:ObjectNodeActivationImpl()
-			{
-			    m_group = par_group;
-			}
-
+ObjectNodeActivationImpl::ObjectNodeActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
+:ObjectNodeActivationImpl()
+{
+	m_group = par_group;
+}
 
 
 ObjectNodeActivationImpl::ObjectNodeActivationImpl(const ObjectNodeActivationImpl & obj):ObjectNodeActivationImpl()
@@ -142,15 +130,20 @@ std::shared_ptr<ecore::EClass> ObjectNodeActivationImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
+/*
+Getter & Setter for attribute offeredTokenCount
+*/
+int ObjectNodeActivationImpl::getOfferedTokenCount() const 
+{
+	return m_offeredTokenCount;
+}
+
 void ObjectNodeActivationImpl::setOfferedTokenCount(int _offeredTokenCount)
 {
 	m_offeredTokenCount = _offeredTokenCount;
 } 
 
-int ObjectNodeActivationImpl::getOfferedTokenCount() const 
-{
-	return m_offeredTokenCount;
-}
+
 
 //*********************************
 // Operations
@@ -219,14 +212,10 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > ObjectNodeActivationIm
   DEBUG_MESSAGE(std::cout<<"-- printing from ObjectNodeActivation::"<<__FUNCTION__<<" '"<<(this->getNode() == nullptr ? "..." : ("node = " + this->getNode()->getName()))<<"' : offeredTokenCount = "<<offeredTokenCount<<std::endl;)
  
   Bag<fUML::Semantics::Activities::Token>* heldTokenPtr = this->getHeldTokens().get(); 
-  if(nullptr!=heldTokenPtr) 
-  { 
-    while (i < numberUnofferedTokens) 
-    { 
-      tokens->push_back((*heldTokenPtr)[offeredTokenCount + i]);
-      i++; 
-    } 
-  } 
+  Bag<fUML::Semantics::Activities::Token>* tokensPtr = tokens.get();
+  
+  tokensPtr->insert(tokensPtr->begin(), heldTokenPtr->begin() + offeredTokenCount, heldTokenPtr->begin() + offeredTokenCount + numberUnofferedTokens);
+
   return tokens; 
 	//end of body
 }
@@ -317,6 +306,7 @@ this->clearTokens();
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<ObjectNodeActivation> ObjectNodeActivationImpl::getThisObjectNodeActivationPtr() const

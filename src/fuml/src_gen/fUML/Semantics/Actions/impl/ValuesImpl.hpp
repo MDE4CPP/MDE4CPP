@@ -55,9 +55,9 @@ virtual public Values
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value>> getValues() const ;
+			
 			
 							
 			

@@ -47,60 +47,46 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > completeAction() ;
 			
-			/*!
-			 */ 
+			 
 			virtual void createEdgeInstances() ;
 			
-			/*!
-			 */ 
+			 
 			virtual void createNodeActivations() ;
 			
-			/*!
-			 */ 
+			 
 			virtual void doAction() ;
 			
-			/*!
-			 */ 
+			 
 			virtual void doStructuredActivity() ;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> getNodeActivation(std::shared_ptr<uml::ActivityNode>  node) ;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value> > getPinValues(std::shared_ptr<uml::OutputPin>  pin) ;
 			
-			/*!
-			 */ 
+			 
 			virtual bool isSourceFor(std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance>  edgeInstance) ;
 			
-			/*!
-			 */ 
+			 
 			virtual bool isSuspended() ;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<Bag<uml::ActivityNode> > makeActivityNodeList(std::shared_ptr<Bag<uml::ExecutableNode> >  nodes) ;
 			
-			/*!
-			 */ 
+			 
 			virtual void putPinValues(std::shared_ptr<uml::OutputPin>  pin,std::shared_ptr<Bag<fUML::Semantics::Values::Value> >  values) ;
 			
-			/*!
-			 */ 
+			 
 			virtual void resume() ;
 			
-			/*!
-			 */ 
+			 
 			virtual void terminate() ;
 			
-			/*!
-			 */ 
+			 
 			virtual void terminateAll() ;
 			
 			
@@ -113,20 +99,18 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > getActivationGroup() const ;
 			
-			/*!
-			 */
-			virtual void setActivationGroup(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> _activationGroup_activationGroup) ;
+			
+			virtual void setActivationGroup(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> _activationGroup) ;
+			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> getPinActivation() const ; 
 			 
 			//*********************************

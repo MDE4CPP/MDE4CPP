@@ -64,19 +64,7 @@ using namespace fUML::Semantics::CommonBehavior;
 // Constructor / Destructor
 //*********************************
 CallEventOccurrenceImpl::CallEventOccurrenceImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	//Init references
-	
+{	
 }
 
 CallEventOccurrenceImpl::~CallEventOccurrenceImpl()
@@ -85,7 +73,6 @@ CallEventOccurrenceImpl::~CallEventOccurrenceImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete CallEventOccurrence "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -176,19 +163,26 @@ void CallEventOccurrenceImpl::setOutputParameterValues(std::shared_ptr<Bag<fUML:
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference execution
+*/
 std::shared_ptr<fUML::Semantics::CommonBehavior::CallEventExecution > CallEventOccurrenceImpl::getExecution() const
 {
 //assert(m_execution);
     return m_execution;
 }
+
 void CallEventOccurrenceImpl::setExecution(std::shared_ptr<fUML::Semantics::CommonBehavior::CallEventExecution> _execution)
 {
     m_execution = _execution;
 }
 
+
+
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<CallEventOccurrence> CallEventOccurrenceImpl::getThisCallEventOccurrencePtr() const

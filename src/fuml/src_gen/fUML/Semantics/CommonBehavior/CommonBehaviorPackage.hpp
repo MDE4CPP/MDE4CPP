@@ -48,8 +48,7 @@ namespace fUML::Semantics::CommonBehavior
 	The Metamodel Package for the CommonBehavior metamodel. This package is used to enable the reflection of model elements. It contains all model elements
 	which were described in an ecore file.
 	*/
-	/*!
-	 */
+	
 	class CommonBehaviorPackage : virtual public ecore::EPackage 
 	{
 		private:    
@@ -67,7 +66,7 @@ namespace fUML::Semantics::CommonBehavior
 
 			// Begin Class CallEventBehavior
 			//Class and Feature IDs 
-			static const unsigned int CALLEVENTBEHAVIOR_CLASS = 16;
+			static const unsigned long CALLEVENTBEHAVIOR_CLASS = 3715801;
 			static const unsigned int CALLEVENTBEHAVIOR_CLASS_FEATURE_COUNT = 1;
 			static const unsigned int CALLEVENTBEHAVIOR_CLASS_OPERATION_COUNT = 1;
 			
@@ -88,24 +87,24 @@ namespace fUML::Semantics::CommonBehavior
 
 			// Begin Class CallEventExecution
 			//Class and Feature IDs 
-			static const unsigned int CALLEVENTEXECUTION_CLASS = 17;
-			static const unsigned int CALLEVENTEXECUTION_CLASS_FEATURE_COUNT = 7;
+			static const unsigned long CALLEVENTEXECUTION_CLASS = 1815999052;
+			static const unsigned int CALLEVENTEXECUTION_CLASS_FEATURE_COUNT = 8;
 			static const unsigned int CALLEVENTEXECUTION_CLASS_OPERATION_COUNT = 56;
-			static const int CALLEVENTEXECUTION_ATTRIBUTE_CALLERSUSPENDED = 1706;
+			static const int CALLEVENTEXECUTION_ATTRIBUTE_CALLERSUSPENDED = 1707;
 			
 			
-			static const int CALLEVENTEXECUTION_OPERATION__COPY = 1751;
-			static const int CALLEVENTEXECUTION_OPERATION_CREATEEVENTOCCURRENCE = 1752;
-			static const int CALLEVENTEXECUTION_OPERATION_EXECUTE = 1753;
-			static const int CALLEVENTEXECUTION_OPERATION_GETINPUTPARAMETERVALUES = 1754;
-			static const int CALLEVENTEXECUTION_OPERATION_GETOPERATION = 1755;
-			static const int CALLEVENTEXECUTION_OPERATION_ISCALLERSUSPENDED = 1756;
-			static const int CALLEVENTEXECUTION_OPERATION_MAKECALL = 1757;
-			static const int CALLEVENTEXECUTION_OPERATION_NEW_ = 1758;
-			static const int CALLEVENTEXECUTION_OPERATION_RELEASECALLER = 1759;
-			static const int CALLEVENTEXECUTION_OPERATION_SETOUTPUTPARAMETERVALUES_PARAMETERVALUE = 1760;
-			static const int CALLEVENTEXECUTION_OPERATION_SUSPENDCALLER = 1761;
-			static const int CALLEVENTEXECUTION_OPERATION_WAIT_ = 1762;
+			static const int CALLEVENTEXECUTION_OPERATION__COPY = 1752;
+			static const int CALLEVENTEXECUTION_OPERATION_CREATEEVENTOCCURRENCE = 1753;
+			static const int CALLEVENTEXECUTION_OPERATION_EXECUTE = 1754;
+			static const int CALLEVENTEXECUTION_OPERATION_GETINPUTPARAMETERVALUES = 1755;
+			static const int CALLEVENTEXECUTION_OPERATION_GETOPERATION = 1756;
+			static const int CALLEVENTEXECUTION_OPERATION_ISCALLERSUSPENDED = 1757;
+			static const int CALLEVENTEXECUTION_OPERATION_MAKECALL = 1758;
+			static const int CALLEVENTEXECUTION_OPERATION_NEW_ = 1759;
+			static const int CALLEVENTEXECUTION_OPERATION_RELEASECALLER = 1760;
+			static const int CALLEVENTEXECUTION_OPERATION_SETOUTPUTPARAMETERVALUES_PARAMETERVALUE = 1761;
+			static const int CALLEVENTEXECUTION_OPERATION_SUSPENDCALLER = 1762;
+			static const int CALLEVENTEXECUTION_OPERATION_WAIT_ = 1763;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getCallEventExecution_Class() const = 0;
@@ -131,7 +130,7 @@ namespace fUML::Semantics::CommonBehavior
 
 			// Begin Class CallEventOccurrence
 			//Class and Feature IDs 
-			static const unsigned int CALLEVENTOCCURRENCE_CLASS = 18;
+			static const unsigned long CALLEVENTOCCURRENCE_CLASS = 1651938494;
 			static const unsigned int CALLEVENTOCCURRENCE_CLASS_FEATURE_COUNT = 2;
 			static const unsigned int CALLEVENTOCCURRENCE_CLASS_OPERATION_COUNT = 10;
 			
@@ -160,7 +159,7 @@ namespace fUML::Semantics::CommonBehavior
 
 			// Begin Class ClassifierBehaviorExecution
 			//Class and Feature IDs 
-			static const unsigned int CLASSIFIERBEHAVIOREXECUTION_CLASS = 22;
+			static const unsigned long CLASSIFIERBEHAVIOREXECUTION_CLASS = 1551835842;
 			static const unsigned int CLASSIFIERBEHAVIOREXECUTION_CLASS_FEATURE_COUNT = 3;
 			static const unsigned int CLASSIFIERBEHAVIOREXECUTION_CLASS_OPERATION_COUNT = 3;
 			
@@ -189,7 +188,7 @@ namespace fUML::Semantics::CommonBehavior
 
 			// Begin Class ClassifierBehaviorInvocationEventAccepter
 			//Class and Feature IDs 
-			static const unsigned int CLASSIFIERBEHAVIORINVOCATIONEVENTACCEPTER_CLASS = 25;
+			static const unsigned long CLASSIFIERBEHAVIORINVOCATIONEVENTACCEPTER_CLASS = 165051968;
 			static const unsigned int CLASSIFIERBEHAVIORINVOCATIONEVENTACCEPTER_CLASS_FEATURE_COUNT = 3;
 			static const unsigned int CLASSIFIERBEHAVIORINVOCATIONEVENTACCEPTER_CLASS_OPERATION_COUNT = 6;
 			
@@ -220,7 +219,7 @@ namespace fUML::Semantics::CommonBehavior
 
 			// Begin Class EventAccepter
 			//Class and Feature IDs 
-			static const unsigned int EVENTACCEPTER_CLASS = 43;
+			static const unsigned long EVENTACCEPTER_CLASS = 720513438;
 			static const unsigned int EVENTACCEPTER_CLASS_FEATURE_COUNT = 0;
 			static const unsigned int EVENTACCEPTER_CLASS_OPERATION_COUNT = 2;
 			
@@ -241,7 +240,7 @@ namespace fUML::Semantics::CommonBehavior
 
 			// Begin Class EventDispatchLoop
 			//Class and Feature IDs 
-			static const unsigned int EVENTDISPATCHLOOP_CLASS = 44;
+			static const unsigned long EVENTDISPATCHLOOP_CLASS = 1354650361;
 			static const unsigned int EVENTDISPATCHLOOP_CLASS_FEATURE_COUNT = 0;
 			static const unsigned int EVENTDISPATCHLOOP_CLASS_OPERATION_COUNT = 0;
 			
@@ -258,7 +257,7 @@ namespace fUML::Semantics::CommonBehavior
 
 			// Begin Class EventOccurrence
 			//Class and Feature IDs 
-			static const unsigned int EVENTOCCURRENCE_CLASS = 45;
+			static const unsigned long EVENTOCCURRENCE_CLASS = 1863789533;
 			static const unsigned int EVENTOCCURRENCE_CLASS_FEATURE_COUNT = 1;
 			static const unsigned int EVENTOCCURRENCE_CLASS_OPERATION_COUNT = 5;
 			
@@ -287,26 +286,28 @@ namespace fUML::Semantics::CommonBehavior
 
 			// Begin Class Execution
 			//Class and Feature IDs 
-			static const unsigned int EXECUTION_CLASS = 46;
-			static const unsigned int EXECUTION_CLASS_FEATURE_COUNT = 6;
+			static const unsigned long EXECUTION_CLASS = 921905715;
+			static const unsigned int EXECUTION_CLASS_FEATURE_COUNT = 7;
 			static const unsigned int EXECUTION_CLASS_OPERATION_COUNT = 44;
 			
+			static const int EXECUTION_ATTRIBUTE_BEHAVIOR = 4606;
 			static const int EXECUTION_ATTRIBUTE_CONTEXT = 4604;
 			static const int EXECUTION_ATTRIBUTE_PARAMETERVALUES = 4605;
 			
-			static const int EXECUTION_OPERATION__COPY = 4649;
-			static const int EXECUTION_OPERATION_EXECUTE = 4642;
-			static const int EXECUTION_OPERATION_GETBEHAVIOR = 4647;
-			static const int EXECUTION_OPERATION_GETOUTPUTPARAMETERVALUES = 4646;
-			static const int EXECUTION_OPERATION_GETPARAMETERVALUE_PARAMETER = 4645;
-			static const int EXECUTION_OPERATION_NEW_ = 4648;
-			static const int EXECUTION_OPERATION_SETPARAMETERVALUE_PARAMETERVALUE = 4644;
-			static const int EXECUTION_OPERATION_TERMINATE = 4643;
+			static const int EXECUTION_OPERATION__COPY = 4650;
+			static const int EXECUTION_OPERATION_EXECUTE = 4643;
+			static const int EXECUTION_OPERATION_GETBEHAVIOR = 4648;
+			static const int EXECUTION_OPERATION_GETOUTPUTPARAMETERVALUES = 4647;
+			static const int EXECUTION_OPERATION_GETPARAMETERVALUE_PARAMETER = 4646;
+			static const int EXECUTION_OPERATION_NEW_ = 4649;
+			static const int EXECUTION_OPERATION_SETPARAMETERVALUE_PARAMETERVALUE = 4645;
+			static const int EXECUTION_OPERATION_TERMINATE = 4644;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getExecution_Class() const = 0;
 			
 			
+			virtual std::shared_ptr<ecore::EReference> getExecution_Attribute_behavior() const = 0;
 			virtual std::shared_ptr<ecore::EReference> getExecution_Attribute_context() const = 0;
 			virtual std::shared_ptr<ecore::EReference> getExecution_Attribute_parameterValues() const = 0;
 			
@@ -324,7 +325,7 @@ namespace fUML::Semantics::CommonBehavior
 
 			// Begin Class FIFOGetNextEventStrategy
 			//Class and Feature IDs 
-			static const unsigned int FIFOGETNEXTEVENTSTRATEGY_CLASS = 54;
+			static const unsigned long FIFOGETNEXTEVENTSTRATEGY_CLASS = 860953508;
 			static const unsigned int FIFOGETNEXTEVENTSTRATEGY_CLASS_FEATURE_COUNT = 0;
 			static const unsigned int FIFOGETNEXTEVENTSTRATEGY_CLASS_OPERATION_COUNT = 3;
 			
@@ -341,7 +342,7 @@ namespace fUML::Semantics::CommonBehavior
 
 			// Begin Class GetNextEventStrategy
 			//Class and Feature IDs 
-			static const unsigned int GETNEXTEVENTSTRATEGY_CLASS = 60;
+			static const unsigned long GETNEXTEVENTSTRATEGY_CLASS = 2103787987;
 			static const unsigned int GETNEXTEVENTSTRATEGY_CLASS_FEATURE_COUNT = 0;
 			static const unsigned int GETNEXTEVENTSTRATEGY_CLASS_OPERATION_COUNT = 3;
 			
@@ -362,7 +363,7 @@ namespace fUML::Semantics::CommonBehavior
 
 			// Begin Class InvocationEventOccurrence
 			//Class and Feature IDs 
-			static const unsigned int INVOCATIONEVENTOCCURRENCE_CLASS = 66;
+			static const unsigned long INVOCATIONEVENTOCCURRENCE_CLASS = 1468408266;
 			static const unsigned int INVOCATIONEVENTOCCURRENCE_CLASS_FEATURE_COUNT = 2;
 			static const unsigned int INVOCATIONEVENTOCCURRENCE_CLASS_OPERATION_COUNT = 7;
 			
@@ -385,7 +386,7 @@ namespace fUML::Semantics::CommonBehavior
 
 			// Begin Class ObjectActivation
 			//Class and Feature IDs 
-			static const unsigned int OBJECTACTIVATION_CLASS = 81;
+			static const unsigned long OBJECTACTIVATION_CLASS = 1754020883;
 			static const unsigned int OBJECTACTIVATION_CLASS_FEATURE_COUNT = 4;
 			static const unsigned int OBJECTACTIVATION_CLASS_OPERATION_COUNT = 9;
 			
@@ -428,13 +429,13 @@ namespace fUML::Semantics::CommonBehavior
 
 			// Begin Class OpaqueBehaviorExecution
 			//Class and Feature IDs 
-			static const unsigned int OPAQUEBEHAVIOREXECUTION_CLASS = 85;
-			static const unsigned int OPAQUEBEHAVIOREXECUTION_CLASS_FEATURE_COUNT = 6;
+			static const unsigned long OPAQUEBEHAVIOREXECUTION_CLASS = 1247403081;
+			static const unsigned int OPAQUEBEHAVIOREXECUTION_CLASS_FEATURE_COUNT = 7;
 			static const unsigned int OPAQUEBEHAVIOREXECUTION_CLASS_OPERATION_COUNT = 46;
 			
 			
-			static const int OPAQUEBEHAVIOREXECUTION_OPERATION_DOBODY_PARAMETERVALUE_PARAMETERVALUE = 8550;
-			static const int OPAQUEBEHAVIOREXECUTION_OPERATION_EXECUTE = 8551;
+			static const int OPAQUEBEHAVIOREXECUTION_OPERATION_DOBODY_PARAMETERVALUE_PARAMETERVALUE = 8551;
+			static const int OPAQUEBEHAVIOREXECUTION_OPERATION_EXECUTE = 8552;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getOpaqueBehaviorExecution_Class() const = 0;
@@ -449,7 +450,7 @@ namespace fUML::Semantics::CommonBehavior
 
 			// Begin Class ParameterValue
 			//Class and Feature IDs 
-			static const unsigned int PARAMETERVALUE_CLASS = 87;
+			static const unsigned long PARAMETERVALUE_CLASS = 1804530160;
 			static const unsigned int PARAMETERVALUE_CLASS_FEATURE_COUNT = 2;
 			static const unsigned int PARAMETERVALUE_CLASS_OPERATION_COUNT = 1;
 			
@@ -472,7 +473,7 @@ namespace fUML::Semantics::CommonBehavior
 
 			// Begin Class SignalEventOccurrence
 			//Class and Feature IDs 
-			static const unsigned int SIGNALEVENTOCCURRENCE_CLASS = 106;
+			static const unsigned long SIGNALEVENTOCCURRENCE_CLASS = 1277756023;
 			static const unsigned int SIGNALEVENTOCCURRENCE_CLASS_FEATURE_COUNT = 2;
 			static const unsigned int SIGNALEVENTOCCURRENCE_CLASS_OPERATION_COUNT = 7;
 			

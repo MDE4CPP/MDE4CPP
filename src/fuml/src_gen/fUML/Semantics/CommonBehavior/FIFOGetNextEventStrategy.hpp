@@ -50,8 +50,7 @@ namespace fUML::Semantics::CommonBehavior
 //*********************************
 namespace fUML::Semantics::CommonBehavior 
 {
-	/*!
-	 */
+	
 	class FIFOGetNextEventStrategy:virtual public GetNextEventStrategy
 	{
 		public:

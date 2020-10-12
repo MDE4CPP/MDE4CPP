@@ -26,6 +26,7 @@
 //Includes from codegen annotation
 #include "ecore/EClass.hpp"
 #include "fUML/Semantics/Activities/ActivityNodeActivation.hpp"
+#include "fUML/Semantics/Activities/ForkedToken.hpp"
 #include "uml/ActivityNode.hpp"
 #include "uml/ActivityEdge.hpp"
 #include "uml/Class.hpp"
@@ -72,44 +73,7 @@ using namespace fUML::Semantics::Activities;
 // Constructor / Destructor
 //*********************************
 ActivityNodeActivationImpl::ActivityNodeActivationImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-		m_heldTokens.reset(new Bag<fUML::Semantics::Activities::Token>());
-	
-	
-
-		m_incomingEdges.reset(new Bag<fUML::Semantics::Activities::ActivityEdgeInstance>());
-	
-	
-
-	
-
-		m_outgoingEdges.reset(new Bag<fUML::Semantics::Activities::ActivityEdgeInstance>());
-	
-	
-
-	//Init references
-	
-
-	
-	
-
-	
-	
-
-	
-
-	
-	
+{	
 }
 
 ActivityNodeActivationImpl::~ActivityNodeActivationImpl()
@@ -119,14 +83,12 @@ ActivityNodeActivationImpl::~ActivityNodeActivationImpl()
 #endif
 }
 
-
 //Additional constructor for the containments back reference
-			ActivityNodeActivationImpl::ActivityNodeActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
-			:ActivityNodeActivationImpl()
-			{
-			    m_group = par_group;
-			}
-
+ActivityNodeActivationImpl::ActivityNodeActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
+:ActivityNodeActivationImpl()
+{
+	m_group = par_group;
+}
 
 
 ActivityNodeActivationImpl::ActivityNodeActivationImpl(const ActivityNodeActivationImpl & obj):ActivityNodeActivationImpl()
@@ -162,7 +124,6 @@ ActivityNodeActivationImpl::ActivityNodeActivationImpl(const ActivityNodeActivat
 	#endif
 
 	
-	
 }
 
 std::shared_ptr<ecore::EObject>  ActivityNodeActivationImpl::copy() const
@@ -180,15 +141,20 @@ std::shared_ptr<ecore::EClass> ActivityNodeActivationImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
+/*
+Getter & Setter for attribute running
+*/
+bool ActivityNodeActivationImpl::isRunning() const 
+{
+	return m_running;
+}
+
 void ActivityNodeActivationImpl::setRunning(bool _running)
 {
 	m_running = _running;
 } 
 
-bool ActivityNodeActivationImpl::isRunning() const 
-{
-	return m_running;
-}
+
 
 //*********************************
 // Operations
@@ -241,7 +207,12 @@ void ActivityNodeActivationImpl::addToken(std::shared_ptr<fUML::Semantics::Activ
 	if (!token->isWithdrawn())
 	{
 		token->withdraw();
-		token = std::dynamic_pointer_cast<Token>(token->_copy());
+		//token = token->_copy();
+		if(token->getMetaElementID() == fUML::Semantics::Activities::ActivitiesPackage::FORKEDTOKEN_CLASS)
+		{
+			token = token->_copy();
+		}
+		
 	}
 	token->setHolder(getThisActivityNodeActivationPtr());
 	token->setWithdrawn(false);
@@ -616,50 +587,99 @@ this->setRunning(false);
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference group
+*/
 std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > ActivityNodeActivationImpl::getGroup() const
 {
 //assert(m_group);
     return m_group;
 }
+
 void ActivityNodeActivationImpl::setGroup(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> _group)
 {
     m_group = _group;
 }
 
+
+
+/*
+Getter & Setter for reference heldTokens
+*/
 std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> ActivityNodeActivationImpl::getHeldTokens() const
 {
+	if(m_heldTokens == nullptr)
+	{
+		m_heldTokens.reset(new Bag<fUML::Semantics::Activities::Token>());
+		
+		
+	}
 
     return m_heldTokens;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference incomingEdges
+*/
 std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> ActivityNodeActivationImpl::getIncomingEdges() const
 {
+	if(m_incomingEdges == nullptr)
+	{
+		m_incomingEdges.reset(new Bag<fUML::Semantics::Activities::ActivityEdgeInstance>());
+		
+		
+	}
 
     return m_incomingEdges;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference node
+*/
 std::shared_ptr<uml::ActivityNode > ActivityNodeActivationImpl::getNode() const
 {
 
     return m_node;
 }
+
 void ActivityNodeActivationImpl::setNode(std::shared_ptr<uml::ActivityNode> _node)
 {
     m_node = _node;
 }
 
+
+
+/*
+Getter & Setter for reference outgoingEdges
+*/
 std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> ActivityNodeActivationImpl::getOutgoingEdges() const
 {
+	if(m_outgoingEdges == nullptr)
+	{
+		m_outgoingEdges.reset(new Bag<fUML::Semantics::Activities::ActivityEdgeInstance>());
+		
+		
+	}
 
     return m_outgoingEdges;
 }
 
 
+
+
+
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<ActivityNodeActivation> ActivityNodeActivationImpl::getThisActivityNodeActivationPtr() const

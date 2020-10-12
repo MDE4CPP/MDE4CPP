@@ -92,6 +92,7 @@ void ActivitiesPackageImpl::createActivityExecutionContent(std::shared_ptr<ecore
 	m_activityExecution_Class = factory->createEClass_in_EPackage(package, ACTIVITYEXECUTION_CLASS);
 	
 	m_activityExecution_Attribute_activationGroup = factory->createEReference_in_EContainingClass(m_activityExecution_Class, ACTIVITYEXECUTION_ATTRIBUTE_ACTIVATIONGROUP);
+	m_activityExecution_Attribute_activity = factory->createEReference_in_EContainingClass(m_activityExecution_Class, ACTIVITYEXECUTION_ATTRIBUTE_ACTIVITY);
 	
 	m_activityExecution_Operation__copy = factory->createEOperation_in_EContainingClass(m_activityExecution_Class, ACTIVITYEXECUTION_OPERATION__COPY);
 	m_activityExecution_Operation_execute = factory->createEOperation_in_EContainingClass(m_activityExecution_Class, ACTIVITYEXECUTION_OPERATION_EXECUTE);
@@ -229,7 +230,6 @@ void ActivitiesPackageImpl::createControlTokenContent(std::shared_ptr<ecore::EPa
 	
 	m_controlToken_Operation__copy = factory->createEOperation_in_EContainingClass(m_controlToken_Class, CONTROLTOKEN_OPERATION__COPY);
 	m_controlToken_Operation_equals_Token = factory->createEOperation_in_EContainingClass(m_controlToken_Class, CONTROLTOKEN_OPERATION_EQUALS_TOKEN);
-	m_controlToken_Operation_getValue = factory->createEOperation_in_EContainingClass(m_controlToken_Class, CONTROLTOKEN_OPERATION_GETVALUE);
 	m_controlToken_Operation_isControl = factory->createEOperation_in_EContainingClass(m_controlToken_Class, CONTROLTOKEN_OPERATION_ISCONTROL);
 	
 }
@@ -249,6 +249,7 @@ void ActivitiesPackageImpl::createDecisionNodeActivationContent(std::shared_ptr<
 	m_decisionNodeActivation_Class = factory->createEClass_in_EPackage(package, DECISIONNODEACTIVATION_CLASS);
 	
 	m_decisionNodeActivation_Attribute_decisionInputExecution = factory->createEReference_in_EContainingClass(m_decisionNodeActivation_Class, DECISIONNODEACTIVATION_ATTRIBUTE_DECISIONINPUTEXECUTION);
+	m_decisionNodeActivation_Attribute_decisionNode = factory->createEReference_in_EContainingClass(m_decisionNodeActivation_Class, DECISIONNODEACTIVATION_ATTRIBUTE_DECISIONNODE);
 	
 	m_decisionNodeActivation_Operation_executeDecisionInputBehavior_Value_Value = factory->createEOperation_in_EContainingClass(m_decisionNodeActivation_Class, DECISIONNODEACTIVATION_OPERATION_EXECUTEDECISIONINPUTBEHAVIOR_VALUE_VALUE);
 	m_decisionNodeActivation_Operation_fire_Token = factory->createEOperation_in_EContainingClass(m_decisionNodeActivation_Class, DECISIONNODEACTIVATION_OPERATION_FIRE_TOKEN);

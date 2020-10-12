@@ -57,19 +57,7 @@ using namespace fUML::Semantics::SimpleClassifiers;
 // Constructor / Destructor
 //*********************************
 SignalInstanceImpl::SignalInstanceImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	//Init references
-	
+{	
 }
 
 SignalInstanceImpl::~SignalInstanceImpl()
@@ -78,7 +66,6 @@ SignalInstanceImpl::~SignalInstanceImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete SignalInstance "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -141,19 +128,26 @@ return newValue;
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference type
+*/
 std::shared_ptr<uml::Signal > SignalInstanceImpl::getType() const
 {
 //assert(m_type);
     return m_type;
 }
+
 void SignalInstanceImpl::setType(std::shared_ptr<uml::Signal> _type)
 {
     m_type = _type;
 }
 
+
+
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<SignalInstance> SignalInstanceImpl::getThisSignalInstancePtr() const

@@ -82,26 +82,7 @@ using namespace fUML::Semantics::StructuredClassifiers;
 // Constructor / Destructor
 //*********************************
 ObjectImpl::ObjectImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-		m_types.reset(new Bag<uml::Classifier>());
-	
-	
-
-	//Init references
-	
-
-	
-	
+{	
 }
 
 ObjectImpl::~ObjectImpl()
@@ -110,7 +91,6 @@ ObjectImpl::~ObjectImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete Object "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -281,26 +261,45 @@ void ObjectImpl::unregister(std::shared_ptr<fUML::Semantics::CommonBehavior::Eve
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference objectActivation
+*/
 std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation > ObjectImpl::getObjectActivation() const
 {
 
     return m_objectActivation;
 }
+
 void ObjectImpl::setObjectActivation(std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> _objectActivation)
 {
     m_objectActivation = _objectActivation;
 }
 
+
+
+/*
+Getter & Setter for reference types
+*/
 std::shared_ptr<Bag<uml::Classifier>> ObjectImpl::getTypes() const
 {
+	if(m_types == nullptr)
+	{
+		m_types.reset(new Bag<uml::Classifier>());
+		
+		
+	}
 
     return m_types;
 }
 
 
+
+
+
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<Object> ObjectImpl::getThisObjectPtr() const

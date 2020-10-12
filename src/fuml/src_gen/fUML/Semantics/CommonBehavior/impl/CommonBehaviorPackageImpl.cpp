@@ -322,6 +322,10 @@ std::shared_ptr<ecore::EClass> CommonBehaviorPackageImpl::getExecution_Class() c
 }
 
 
+std::shared_ptr<ecore::EReference> CommonBehaviorPackageImpl::getExecution_Attribute_behavior() const
+{
+	return m_execution_Attribute_behavior;
+}
 std::shared_ptr<ecore::EReference> CommonBehaviorPackageImpl::getExecution_Attribute_context() const
 {
 	return m_execution_Attribute_context;

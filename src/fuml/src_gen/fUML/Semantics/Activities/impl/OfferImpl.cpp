@@ -51,22 +51,7 @@ using namespace fUML::Semantics::Activities;
 // Constructor / Destructor
 //*********************************
 OfferImpl::OfferImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-		m_offeredTokens.reset(new Bag<fUML::Semantics::Activities::Token>());
-	
-	
-
-	//Init references
-	
-	
+{	
 }
 
 OfferImpl::~OfferImpl()
@@ -75,7 +60,6 @@ OfferImpl::~OfferImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete Offer "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -212,16 +196,29 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > OfferImpl::retrieveOff
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference offeredTokens
+*/
 std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> OfferImpl::getOfferedTokens() const
 {
+	if(m_offeredTokens == nullptr)
+	{
+		m_offeredTokens.reset(new Bag<fUML::Semantics::Activities::Token>());
+		
+		
+	}
 
     return m_offeredTokens;
 }
 
 
+
+
+
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<Offer> OfferImpl::getThisOfferPtr() const

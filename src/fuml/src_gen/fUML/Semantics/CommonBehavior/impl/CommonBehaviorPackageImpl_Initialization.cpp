@@ -784,6 +784,28 @@ void CommonBehaviorPackageImpl::initializeExecutionContent()
 	m_execution_Class->setInterface(false);
 	
 	
+	m_execution_Attribute_behavior->setName("behavior");
+	m_execution_Attribute_behavior->setEType(uml::UmlPackage::eInstance()->getBehavior_Class());
+	m_execution_Attribute_behavior->setLowerBound(1);
+	m_execution_Attribute_behavior->setUpperBound(1);
+	m_execution_Attribute_behavior->setTransient(false);
+	m_execution_Attribute_behavior->setVolatile(false);
+	m_execution_Attribute_behavior->setChangeable(true);
+	m_execution_Attribute_behavior->setUnsettable(false);
+	m_execution_Attribute_behavior->setUnique(true);
+	m_execution_Attribute_behavior->setDerived(false);
+	m_execution_Attribute_behavior->setOrdered(true);
+	m_execution_Attribute_behavior->setContainment(false);
+	m_execution_Attribute_behavior->setResolveProxies(true);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			m_execution_Attribute_behavior->setDefaultValueLiteral(defaultValue);
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
+	}
 	m_execution_Attribute_context->setName("context");
 	m_execution_Attribute_context->setEType(fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getObject_Class());
 	m_execution_Attribute_context->setLowerBound(1);

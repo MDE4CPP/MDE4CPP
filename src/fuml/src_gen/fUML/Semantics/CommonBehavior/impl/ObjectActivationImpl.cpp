@@ -67,40 +67,7 @@ using namespace fUML::Semantics::CommonBehavior;
 // Constructor / Destructor
 //*********************************
 ObjectActivationImpl::ObjectActivationImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-		m_classifierBehaviorExecutions.reset(new Bag<fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution>());
-	
-	
-
-		m_eventPool.reset(new Bag<fUML::Semantics::SimpleClassifiers::SignalInstance>());
-	
-	
-
-	
-
-		m_waitingEventAccepters.reset(new Bag<fUML::Semantics::CommonBehavior::EventAccepter>());
-	
-	
-
-	//Init references
-	
-	
-
-	
-	
-
-	
-
-	
-	
+{	
 }
 
 ObjectActivationImpl::~ObjectActivationImpl()
@@ -109,7 +76,6 @@ ObjectActivationImpl::~ObjectActivationImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ObjectActivation "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -148,9 +114,7 @@ ObjectActivationImpl::ObjectActivationImpl(const ObjectActivationImpl & obj):Obj
 	#endif
 
 	
-	
 
-	
 	
 }
 
@@ -303,40 +267,83 @@ void ObjectActivationImpl::unregister(std::shared_ptr<fUML::Semantics::CommonBeh
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference classifierBehaviorExecutions
+*/
 std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution>> ObjectActivationImpl::getClassifierBehaviorExecutions() const
 {
+	if(m_classifierBehaviorExecutions == nullptr)
+	{
+		m_classifierBehaviorExecutions.reset(new Bag<fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution>());
+		
+		
+	}
 
     return m_classifierBehaviorExecutions;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference eventPool
+*/
 std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::SignalInstance>> ObjectActivationImpl::getEventPool() const
 {
+	if(m_eventPool == nullptr)
+	{
+		m_eventPool.reset(new Bag<fUML::Semantics::SimpleClassifiers::SignalInstance>());
+		
+		
+	}
 
     return m_eventPool;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference object
+*/
 std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object > ObjectActivationImpl::getObject() const
 {
 //assert(m_object);
     return m_object;
 }
+
 void ObjectActivationImpl::setObject(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> _object)
 {
     m_object = _object;
 }
 
+
+
+/*
+Getter & Setter for reference waitingEventAccepters
+*/
 std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::EventAccepter>> ObjectActivationImpl::getWaitingEventAccepters() const
 {
+	if(m_waitingEventAccepters == nullptr)
+	{
+		m_waitingEventAccepters.reset(new Bag<fUML::Semantics::CommonBehavior::EventAccepter>());
+		
+		
+	}
 
     return m_waitingEventAccepters;
 }
 
 
+
+
+
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<ObjectActivation> ObjectActivationImpl::getThisObjectActivationPtr() const

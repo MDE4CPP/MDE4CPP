@@ -45,12 +45,10 @@ virtual public SemanticVisitor
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual void _beginIsolation() ;
 			
-			/*!
-			 */ 
+			 
 			virtual void _endIsolation() ;
 			
 			

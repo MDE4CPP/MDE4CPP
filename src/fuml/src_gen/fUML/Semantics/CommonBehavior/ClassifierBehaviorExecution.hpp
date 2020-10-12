@@ -66,8 +66,7 @@ namespace fUML::Semantics::CommonBehavior
 //*********************************
 namespace fUML::Semantics::CommonBehavior 
 {
-	/*!
-	 */
+	
 	class ClassifierBehaviorExecution : virtual public ecore::EObject 
 
 	{
@@ -88,16 +87,13 @@ namespace fUML::Semantics::CommonBehavior
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual void _startObjectBehavior() = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual void execute(std::shared_ptr<Bag<uml::Class> >  classifier,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> >  inputs) = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual void terminate() = 0;
 			
 			
@@ -108,27 +104,24 @@ namespace fUML::Semantics::CommonBehavior
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<uml::Class > getClassifier() const = 0;
 			
-			/*!
-			 */
-			virtual void setClassifier(std::shared_ptr<uml::Class> _classifier_classifier) = 0;
-			/*!
-			 */
+			
+			virtual void setClassifier(std::shared_ptr<uml::Class> _classifier) = 0;
+			
+			
 			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution > getExecution() const = 0;
 			
-			/*!
-			 */
-			virtual void setExecution(std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> _execution_execution) = 0;
-			/*!
-			 */
+			
+			virtual void setExecution(std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> _execution) = 0;
+			
+			
 			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation > getObjectActivation() const = 0;
 			
-			/*!
-			 */
-			virtual void setObjectActivation(std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> _objectActivation_objectActivation) = 0;
+			
+			virtual void setObjectActivation(std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> _objectActivation) = 0;
+			
 			
 
 		protected:
@@ -140,16 +133,10 @@ namespace fUML::Semantics::CommonBehavior
 			//*********************************
 			// Reference Members
 			//*********************************
-			/*!
-			 */
-			std::shared_ptr<uml::Class > m_classifier;
-			/*!
-			 */
-			std::shared_ptr<fUML::Semantics::CommonBehavior::Execution > m_execution;
-			/*!
-			 */
-			std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation > m_objectActivation;
 			
+			std::shared_ptr<uml::Class > m_classifier;
+			std::shared_ptr<fUML::Semantics::CommonBehavior::Execution > m_execution;
+			std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation > m_objectActivation;
 
 		public:
 			//*********************************

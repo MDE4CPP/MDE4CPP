@@ -32,6 +32,8 @@
 
 #include <exception> // used in Persistence
 
+#include "uml/Action.hpp"
+
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 
 #include "uml/ActivityNode.hpp"
@@ -68,17 +70,7 @@ using namespace fUML::Semantics::Actions;
 // Constructor / Destructor
 //*********************************
 WriteStructuralFeatureActionActivationImpl::WriteStructuralFeatureActionActivationImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 WriteStructuralFeatureActionActivationImpl::~WriteStructuralFeatureActionActivationImpl()
@@ -88,14 +80,12 @@ WriteStructuralFeatureActionActivationImpl::~WriteStructuralFeatureActionActivat
 #endif
 }
 
-
 //Additional constructor for the containments back reference
-			WriteStructuralFeatureActionActivationImpl::WriteStructuralFeatureActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
-			:WriteStructuralFeatureActionActivationImpl()
-			{
-			    m_group = par_group;
-			}
-
+WriteStructuralFeatureActionActivationImpl::WriteStructuralFeatureActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
+:WriteStructuralFeatureActionActivationImpl()
+{
+	m_group = par_group;
+}
 
 
 WriteStructuralFeatureActionActivationImpl::WriteStructuralFeatureActionActivationImpl(const WriteStructuralFeatureActionActivationImpl & obj):WriteStructuralFeatureActionActivationImpl()
@@ -109,6 +99,8 @@ WriteStructuralFeatureActionActivationImpl::WriteStructuralFeatureActionActivati
 
 	//copy references with no containment (soft copy)
 	
+	m_action  = obj.getAction();
+
 	m_group  = obj.getGroup();
 
 	std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> _incomingEdges = obj.getIncomingEdges();
@@ -203,8 +195,20 @@ return i-1;
 //*********************************
 std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> WriteStructuralFeatureActionActivationImpl::getPinActivation() const
 {
+	if(m_pinActivation == nullptr)
+	{
+		/*Union*/
+		m_pinActivation.reset(new Union<fUML::Semantics::Actions::PinActivation>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_pinActivation - Union<fUML::Semantics::Actions::PinActivation>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_pinActivation;
 }
+
+
 
 
 std::shared_ptr<WriteStructuralFeatureActionActivation> WriteStructuralFeatureActionActivationImpl::getThisWriteStructuralFeatureActionActivationPtr() const

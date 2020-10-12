@@ -61,8 +61,7 @@ namespace fUML::Semantics::Values
 //*********************************
 namespace fUML::Semantics::SimpleClassifiers 
 {
-	/*!
-	 */
+	
 	class FeatureValue : virtual public ecore::EObject 
 
 	{
@@ -83,40 +82,34 @@ namespace fUML::Semantics::SimpleClassifiers
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> _copy() = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual bool hasEqualValues(std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue>  other) = 0;
 			
 			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual int getPosition() const = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual void setPosition (int _position)= 0; 
-			
 			
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<uml::StructuralFeature > getFeature() const = 0;
 			
-			/*!
-			 */
-			virtual void setFeature(std::shared_ptr<uml::StructuralFeature> _feature_feature) = 0;
-			/*!
-			 */
+			
+			virtual void setFeature(std::shared_ptr<uml::StructuralFeature> _feature) = 0;
+			
+			
 			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value>> getValues() const = 0;
+			
 			
 			
 
@@ -124,21 +117,16 @@ namespace fUML::Semantics::SimpleClassifiers
 			//*********************************
 			// Attribute Members
 			//*********************************
-			/*!
-			 */ 
+			 
 			int m_position = 0;
 			
 			
 			//*********************************
 			// Reference Members
 			//*********************************
-			/*!
-			 */
-			std::shared_ptr<uml::StructuralFeature > m_feature;
-			/*!
-			 */
-			std::shared_ptr<Bag<fUML::Semantics::Values::Value>> m_values;
 			
+			std::shared_ptr<uml::StructuralFeature > m_feature;
+			mutable std::shared_ptr<Bag<fUML::Semantics::Values::Value>> m_values;
 
 		public:
 			//*********************************

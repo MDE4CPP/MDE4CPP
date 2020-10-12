@@ -62,19 +62,7 @@ using namespace fUML::Semantics::Actions;
 // Constructor / Destructor
 //*********************************
 ReturnInformationImpl::ReturnInformationImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	//Init references
-	
+{	
 }
 
 ReturnInformationImpl::~ReturnInformationImpl()
@@ -83,7 +71,6 @@ ReturnInformationImpl::~ReturnInformationImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ReturnInformation "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -225,19 +212,26 @@ std::string ReturnInformationImpl::toString()
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference callEventOccurrence
+*/
 std::shared_ptr<fUML::Semantics::CommonBehavior::CallEventOccurrence > ReturnInformationImpl::getCallEventOccurrence() const
 {
 //assert(m_callEventOccurrence);
     return m_callEventOccurrence;
 }
+
 void ReturnInformationImpl::setCallEventOccurrence(std::shared_ptr<fUML::Semantics::CommonBehavior::CallEventOccurrence> _callEventOccurrence)
 {
     m_callEventOccurrence = _callEventOccurrence;
 }
 
+
+
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<ReturnInformation> ReturnInformationImpl::getThisReturnInformationPtr() const

@@ -38,8 +38,7 @@ namespace fUML::Semantics::Loci
 	The Metamodel Package for the Loci metamodel. This package is used to enable the reflection of model elements. It contains all model elements
 	which were described in an ecore file.
 	*/
-	/*!
-	 */
+	
 	class LociPackage : virtual public ecore::EPackage 
 	{
 		private:    
@@ -57,7 +56,7 @@ namespace fUML::Semantics::Loci
 
 			// Begin Class ChoiceStrategy
 			//Class and Feature IDs 
-			static const unsigned int CHOICESTRATEGY_CLASS = 21;
+			static const unsigned long CHOICESTRATEGY_CLASS = 645728985;
 			static const unsigned int CHOICESTRATEGY_CLASS_FEATURE_COUNT = 0;
 			static const unsigned int CHOICESTRATEGY_CLASS_OPERATION_COUNT = 3;
 			
@@ -78,24 +77,25 @@ namespace fUML::Semantics::Loci
 
 			// Begin Class ExecutionFactory
 			//Class and Feature IDs 
-			static const unsigned int EXECUTIONFACTORY_CLASS = 47;
+			static const unsigned long EXECUTIONFACTORY_CLASS = 102788675;
 			static const unsigned int EXECUTIONFACTORY_CLASS_FEATURE_COUNT = 4;
-			static const unsigned int EXECUTIONFACTORY_CLASS_OPERATION_COUNT = 10;
+			static const unsigned int EXECUTIONFACTORY_CLASS_OPERATION_COUNT = 11;
 			
 			static const int EXECUTIONFACTORY_ATTRIBUTE_BUILTINTYPES = 4703;
 			static const int EXECUTIONFACTORY_ATTRIBUTE_LOCUS = 4700;
 			static const int EXECUTIONFACTORY_ATTRIBUTE_PRIMITIVEBEHAVIORPROTOTYPES = 4702;
 			static const int EXECUTIONFACTORY_ATTRIBUTE_STRATEGIES = 4701;
 			
-			static const int EXECUTIONFACTORY_OPERATION_ADDBUILTINTYPE_PRIMITIVETYPE = 4709;
-			static const int EXECUTIONFACTORY_OPERATION_ADDPRIMITIVEBEHAVIORPROTOTYPE_OPAQUEBEHAVIOREXECUTION = 4708;
-			static const int EXECUTIONFACTORY_OPERATION_ASSIGNSTRATEGY_SEMANTICSTRATEGY = 4711;
+			static const int EXECUTIONFACTORY_OPERATION_ADDBUILTINTYPE_PRIMITIVETYPE = 4710;
+			static const int EXECUTIONFACTORY_OPERATION_ADDPRIMITIVEBEHAVIORPROTOTYPE_OPAQUEBEHAVIOREXECUTION = 4709;
+			static const int EXECUTIONFACTORY_OPERATION_ASSIGNSTRATEGY_SEMANTICSTRATEGY = 4712;
 			static const int EXECUTIONFACTORY_OPERATION_CREATEEVALUATION_VALUESPECIFICATION = 4705;
 			static const int EXECUTIONFACTORY_OPERATION_CREATEEXECUTION_BEHAVIOR_OBJECT = 4704;
-			static const int EXECUTIONFACTORY_OPERATION_GETBUILTINTYPE_ESTRING = 4710;
-			static const int EXECUTIONFACTORY_OPERATION_GETSTRATEGY_ESTRING = 4712;
-			static const int EXECUTIONFACTORY_OPERATION_GETSTRATEGYINDEX_ESTRING = 4713;
+			static const int EXECUTIONFACTORY_OPERATION_GETBUILTINTYPE_ESTRING = 4711;
+			static const int EXECUTIONFACTORY_OPERATION_GETSTRATEGY_ESTRING = 4713;
+			static const int EXECUTIONFACTORY_OPERATION_GETSTRATEGYINDEX_ESTRING = 4714;
 			static const int EXECUTIONFACTORY_OPERATION_INSTANTIATEOPAQUEBEHAVIOREXECUTION_OPAQUEBEHAVIOR = 4707;
+			static const int EXECUTIONFACTORY_OPERATION_INSTANTIATEOPAQUEBEHAVIOREXECUTION_BEHAVIOR = 4708;
 			static const int EXECUTIONFACTORY_OPERATION_INSTANTIATEVISITOR_ELEMENT = 4706;
 			
 			//Class and Feature Getter
@@ -116,6 +116,7 @@ namespace fUML::Semantics::Loci
 			virtual std::shared_ptr<ecore::EOperation> getExecutionFactory_Operation_getStrategy_EString() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getExecutionFactory_Operation_getStrategyIndex_EString() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getExecutionFactory_Operation_instantiateOpaqueBehaviorExecution_OpaqueBehavior() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getExecutionFactory_Operation_instantiateOpaqueBehaviorExecution_Behavior() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getExecutionFactory_Operation_instantiateVisitor_Element() const = 0;
 			
 			// End Class ExecutionFactory
@@ -123,7 +124,7 @@ namespace fUML::Semantics::Loci
 
 			// Begin Class Executor
 			//Class and Feature IDs 
-			static const unsigned int EXECUTOR_CLASS = 48;
+			static const unsigned long EXECUTOR_CLASS = 1690815834;
 			static const unsigned int EXECUTOR_CLASS_FEATURE_COUNT = 1;
 			static const unsigned int EXECUTOR_CLASS_OPERATION_COUNT = 3;
 			
@@ -148,7 +149,7 @@ namespace fUML::Semantics::Loci
 
 			// Begin Class FirstChoiceStrategy
 			//Class and Feature IDs 
-			static const unsigned int FIRSTCHOICESTRATEGY_CLASS = 56;
+			static const unsigned long FIRSTCHOICESTRATEGY_CLASS = 1039516550;
 			static const unsigned int FIRSTCHOICESTRATEGY_CLASS_FEATURE_COUNT = 0;
 			static const unsigned int FIRSTCHOICESTRATEGY_CLASS_OPERATION_COUNT = 4;
 			
@@ -167,7 +168,7 @@ namespace fUML::Semantics::Loci
 
 			// Begin Class Locus
 			//Class and Feature IDs 
-			static const unsigned int LOCUS_CLASS = 77;
+			static const unsigned long LOCUS_CLASS = 274444621;
 			static const unsigned int LOCUS_CLASS_FEATURE_COUNT = 3;
 			static const unsigned int LOCUS_CLASS_OPERATION_COUNT = 7;
 			
@@ -204,7 +205,7 @@ namespace fUML::Semantics::Loci
 
 			// Begin Class SemanticStrategy
 			//Class and Feature IDs 
-			static const unsigned int SEMANTICSTRATEGY_CLASS = 103;
+			static const unsigned long SEMANTICSTRATEGY_CLASS = 1874097743;
 			static const unsigned int SEMANTICSTRATEGY_CLASS_FEATURE_COUNT = 0;
 			static const unsigned int SEMANTICSTRATEGY_CLASS_OPERATION_COUNT = 1;
 			
@@ -223,7 +224,7 @@ namespace fUML::Semantics::Loci
 
 			// Begin Class SemanticVisitor
 			//Class and Feature IDs 
-			static const unsigned int SEMANTICVISITOR_CLASS = 104;
+			static const unsigned long SEMANTICVISITOR_CLASS = 768926104;
 			static const unsigned int SEMANTICVISITOR_CLASS_FEATURE_COUNT = 0;
 			static const unsigned int SEMANTICVISITOR_CLASS_OPERATION_COUNT = 2;
 			

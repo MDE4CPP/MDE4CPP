@@ -46,8 +46,7 @@ namespace fUML
 //*********************************
 namespace fUML::Semantics::Activities 
 {
-	/*!
-	 */
+	
 	class ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1 : virtual public ecore::EObject 
 
 	{

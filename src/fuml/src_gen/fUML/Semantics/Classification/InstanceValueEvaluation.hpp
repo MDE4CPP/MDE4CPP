@@ -65,8 +65,7 @@ namespace uml
 //*********************************
 namespace fUML::Semantics::Classification 
 {
-	/*!
-	 */
+	
 	class InstanceValueEvaluation:virtual public fUML::Semantics::Values::Evaluation
 	{
 		public:
@@ -86,8 +85,7 @@ namespace fUML::Semantics::Classification
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> evaluate() = 0;
 			
 			

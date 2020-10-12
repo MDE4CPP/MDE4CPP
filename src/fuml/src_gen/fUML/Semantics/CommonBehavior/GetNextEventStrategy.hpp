@@ -60,8 +60,7 @@ namespace fUML::Semantics::SimpleClassifiers
 //*********************************
 namespace fUML::Semantics::CommonBehavior 
 {
-	/*!
-	 */
+	
 	class GetNextEventStrategy:virtual public fUML::Semantics::Loci::SemanticStrategy
 	{
 		public:
@@ -81,12 +80,10 @@ namespace fUML::Semantics::CommonBehavior
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual std::string getName() = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> retrieveNextEvent(std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation>  objectActivation) = 0;
 			
 			

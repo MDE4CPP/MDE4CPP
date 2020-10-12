@@ -46,8 +46,7 @@ namespace fUML
 //*********************************
 namespace fUML::Semantics::Loci 
 {
-	/*!
-	 */
+	
 	class SemanticStrategy : virtual public ecore::EObject 
 
 	{
@@ -68,8 +67,7 @@ namespace fUML::Semantics::Loci
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual std::string getName() = 0;
 			
 			

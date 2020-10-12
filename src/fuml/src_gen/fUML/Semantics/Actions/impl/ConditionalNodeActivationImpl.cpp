@@ -32,6 +32,8 @@
 
 #include <exception> // used in Persistence
 
+#include "uml/Action.hpp"
+
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 
 #include "uml/ActivityNode.hpp"
@@ -70,29 +72,7 @@ using namespace fUML::Semantics::Actions;
 // Constructor / Destructor
 //*********************************
 ConditionalNodeActivationImpl::ConditionalNodeActivationImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-		m_clauseActivations.reset(new Bag<fUML::Semantics::Actions::ClauseActivation>());
-	
-	
-
-		m_selectedClauses.reset(new Bag<uml::Clause>());
-	
-	
-
-	//Init references
-	
-	
-
-	
-	
+{	
 }
 
 ConditionalNodeActivationImpl::~ConditionalNodeActivationImpl()
@@ -102,14 +82,12 @@ ConditionalNodeActivationImpl::~ConditionalNodeActivationImpl()
 #endif
 }
 
-
 //Additional constructor for the containments back reference
-			ConditionalNodeActivationImpl::ConditionalNodeActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
-			:ConditionalNodeActivationImpl()
-			{
-			    m_group = par_group;
-			}
-
+ConditionalNodeActivationImpl::ConditionalNodeActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
+:ConditionalNodeActivationImpl()
+{
+	m_group = par_group;
+}
 
 
 ConditionalNodeActivationImpl::ConditionalNodeActivationImpl(const ConditionalNodeActivationImpl & obj):ConditionalNodeActivationImpl()
@@ -123,6 +101,8 @@ ConditionalNodeActivationImpl::ConditionalNodeActivationImpl(const ConditionalNo
 
 	//copy references with no containment (soft copy)
 	
+	m_action  = obj.getAction();
+
 	m_group  = obj.getGroup();
 
 	std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> _incomingEdges = obj.getIncomingEdges();
@@ -183,7 +163,6 @@ ConditionalNodeActivationImpl::ConditionalNodeActivationImpl(const ConditionalNo
 	#endif
 
 	
-	
 }
 
 std::shared_ptr<ecore::EObject>  ConditionalNodeActivationImpl::copy() const
@@ -226,18 +205,42 @@ void ConditionalNodeActivationImpl::selectBody(std::shared_ptr<uml::Clause>  cla
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference clauseActivations
+*/
 std::shared_ptr<Bag<fUML::Semantics::Actions::ClauseActivation>> ConditionalNodeActivationImpl::getClauseActivations() const
 {
+	if(m_clauseActivations == nullptr)
+	{
+		m_clauseActivations.reset(new Bag<fUML::Semantics::Actions::ClauseActivation>());
+		
+		
+	}
 
     return m_clauseActivations;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference selectedClauses
+*/
 std::shared_ptr<Bag<uml::Clause>> ConditionalNodeActivationImpl::getSelectedClauses() const
 {
+	if(m_selectedClauses == nullptr)
+	{
+		m_selectedClauses.reset(new Bag<uml::Clause>());
+		
+		
+	}
 
     return m_selectedClauses;
 }
+
+
+
 
 
 //*********************************
@@ -245,8 +248,20 @@ std::shared_ptr<Bag<uml::Clause>> ConditionalNodeActivationImpl::getSelectedClau
 //*********************************
 std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> ConditionalNodeActivationImpl::getPinActivation() const
 {
+	if(m_pinActivation == nullptr)
+	{
+		/*Union*/
+		m_pinActivation.reset(new Union<fUML::Semantics::Actions::PinActivation>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_pinActivation - Union<fUML::Semantics::Actions::PinActivation>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_pinActivation;
 }
+
+
 
 
 std::shared_ptr<ConditionalNodeActivation> ConditionalNodeActivationImpl::getThisConditionalNodeActivationPtr() const
@@ -284,7 +299,7 @@ Any ConditionalNodeActivationImpl::eGet(int featureID, bool resolve, bool coreTy
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //3011
+			return eAny(tempList); //3012
 		}
 		case fUML::Semantics::Actions::ActionsPackage::CONDITIONALNODEACTIVATION_ATTRIBUTE_SELECTEDCLAUSES:
 		{
@@ -296,7 +311,7 @@ Any ConditionalNodeActivationImpl::eGet(int featureID, bool resolve, bool coreTy
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //3012
+			return eAny(tempList); //3013
 		}
 	}
 	return StructuredActivityNodeActivationImpl::eGet(featureID, resolve, coreType);
@@ -306,9 +321,9 @@ bool ConditionalNodeActivationImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::CONDITIONALNODEACTIVATION_ATTRIBUTE_CLAUSEACTIVATIONS:
-			return getClauseActivations() != nullptr; //3011
+			return getClauseActivations() != nullptr; //3012
 		case fUML::Semantics::Actions::ActionsPackage::CONDITIONALNODEACTIVATION_ATTRIBUTE_SELECTEDCLAUSES:
-			return getSelectedClauses() != nullptr; //3012
+			return getSelectedClauses() != nullptr; //3013
 	}
 	return StructuredActivityNodeActivationImpl::internalEIsSet(featureID);
 }

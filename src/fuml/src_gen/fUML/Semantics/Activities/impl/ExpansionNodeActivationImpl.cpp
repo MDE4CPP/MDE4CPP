@@ -63,17 +63,7 @@ using namespace fUML::Semantics::Activities;
 // Constructor / Destructor
 //*********************************
 ExpansionNodeActivationImpl::ExpansionNodeActivationImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 ExpansionNodeActivationImpl::~ExpansionNodeActivationImpl()
@@ -83,14 +73,12 @@ ExpansionNodeActivationImpl::~ExpansionNodeActivationImpl()
 #endif
 }
 
-
 //Additional constructor for the containments back reference
-			ExpansionNodeActivationImpl::ExpansionNodeActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
-			:ExpansionNodeActivationImpl()
-			{
-			    m_group = par_group;
-			}
-
+ExpansionNodeActivationImpl::ExpansionNodeActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
+:ExpansionNodeActivationImpl()
+{
+	m_group = par_group;
+}
 
 
 ExpansionNodeActivationImpl::ExpansionNodeActivationImpl(const ExpansionNodeActivationImpl & obj):ExpansionNodeActivationImpl()
@@ -200,6 +188,7 @@ void ExpansionNodeActivationImpl::receiveOffer()
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<ExpansionNodeActivation> ExpansionNodeActivationImpl::getThisExpansionNodeActivationPtr() const

@@ -61,17 +61,7 @@ using namespace fUML::Semantics::StructuredClassifiers;
 // Constructor / Destructor
 //*********************************
 DispatchStrategyImpl::DispatchStrategyImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 DispatchStrategyImpl::~DispatchStrategyImpl()
@@ -80,7 +70,6 @@ DispatchStrategyImpl::~DispatchStrategyImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete DispatchStrategy "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -149,6 +138,7 @@ std::shared_ptr<uml::Behavior> DispatchStrategyImpl::retrieveMethod(std::shared_
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<DispatchStrategy> DispatchStrategyImpl::getThisDispatchStrategyPtr() const

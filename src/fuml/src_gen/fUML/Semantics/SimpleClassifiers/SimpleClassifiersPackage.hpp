@@ -44,8 +44,7 @@ namespace fUML::Semantics::SimpleClassifiers
 	The Metamodel Package for the SimpleClassifiers metamodel. This package is used to enable the reflection of model elements. It contains all model elements
 	which were described in an ecore file.
 	*/
-	/*!
-	 */
+	
 	class SimpleClassifiersPackage : virtual public ecore::EPackage 
 	{
 		private:    
@@ -63,7 +62,7 @@ namespace fUML::Semantics::SimpleClassifiers
 
 			// Begin Class BooleanValue
 			//Class and Feature IDs 
-			static const unsigned int BOOLEANVALUE_CLASS = 13;
+			static const unsigned long BOOLEANVALUE_CLASS = 696652347;
 			static const unsigned int BOOLEANVALUE_CLASS_FEATURE_COUNT = 2;
 			static const unsigned int BOOLEANVALUE_CLASS_OPERATION_COUNT = 16;
 			static const int BOOLEANVALUE_ATTRIBUTE_VALUE = 1301;
@@ -90,7 +89,7 @@ namespace fUML::Semantics::SimpleClassifiers
 
 			// Begin Class CompoundValue
 			//Class and Feature IDs 
-			static const unsigned int COMPOUNDVALUE_CLASS = 29;
+			static const unsigned long COMPOUNDVALUE_CLASS = 960723248;
 			static const unsigned int COMPOUNDVALUE_CLASS_FEATURE_COUNT = 1;
 			static const unsigned int COMPOUNDVALUE_CLASS_OPERATION_COUNT = 25;
 			
@@ -123,7 +122,7 @@ namespace fUML::Semantics::SimpleClassifiers
 
 			// Begin Class DataValue
 			//Class and Feature IDs 
-			static const unsigned int DATAVALUE_CLASS = 36;
+			static const unsigned long DATAVALUE_CLASS = 622084858;
 			static const unsigned int DATAVALUE_CLASS_FEATURE_COUNT = 2;
 			static const unsigned int DATAVALUE_CLASS_OPERATION_COUNT = 28;
 			
@@ -148,7 +147,7 @@ namespace fUML::Semantics::SimpleClassifiers
 
 			// Begin Class EnumerationValue
 			//Class and Feature IDs 
-			static const unsigned int ENUMERATIONVALUE_CLASS = 41;
+			static const unsigned long ENUMERATIONVALUE_CLASS = 241622527;
 			static const unsigned int ENUMERATIONVALUE_CLASS_FEATURE_COUNT = 2;
 			static const unsigned int ENUMERATIONVALUE_CLASS_OPERATION_COUNT = 16;
 			
@@ -181,7 +180,7 @@ namespace fUML::Semantics::SimpleClassifiers
 
 			// Begin Class FeatureValue
 			//Class and Feature IDs 
-			static const unsigned int FEATUREVALUE_CLASS = 55;
+			static const unsigned long FEATUREVALUE_CLASS = 1582063511;
 			static const unsigned int FEATUREVALUE_CLASS_FEATURE_COUNT = 3;
 			static const unsigned int FEATUREVALUE_CLASS_OPERATION_COUNT = 2;
 			static const int FEATUREVALUE_ATTRIBUTE_POSITION = 5501;
@@ -208,7 +207,7 @@ namespace fUML::Semantics::SimpleClassifiers
 
 			// Begin Class IntegerValue
 			//Class and Feature IDs 
-			static const unsigned int INTEGERVALUE_CLASS = 64;
+			static const unsigned long INTEGERVALUE_CLASS = 2030861441;
 			static const unsigned int INTEGERVALUE_CLASS_FEATURE_COUNT = 2;
 			static const unsigned int INTEGERVALUE_CLASS_OPERATION_COUNT = 16;
 			static const int INTEGERVALUE_ATTRIBUTE_VALUE = 6401;
@@ -235,7 +234,7 @@ namespace fUML::Semantics::SimpleClassifiers
 
 			// Begin Class PrimitiveValue
 			//Class and Feature IDs 
-			static const unsigned int PRIMITIVEVALUE_CLASS = 89;
+			static const unsigned long PRIMITIVEVALUE_CLASS = 884702000;
 			static const unsigned int PRIMITIVEVALUE_CLASS_FEATURE_COUNT = 1;
 			static const unsigned int PRIMITIVEVALUE_CLASS_OPERATION_COUNT = 12;
 			
@@ -258,7 +257,7 @@ namespace fUML::Semantics::SimpleClassifiers
 
 			// Begin Class RealValue
 			//Class and Feature IDs 
-			static const unsigned int REALVALUE_CLASS = 95;
+			static const unsigned long REALVALUE_CLASS = 1589674022;
 			static const unsigned int REALVALUE_CLASS_FEATURE_COUNT = 2;
 			static const unsigned int REALVALUE_CLASS_OPERATION_COUNT = 16;
 			static const int REALVALUE_ATTRIBUTE_VALUE = 9501;
@@ -285,7 +284,7 @@ namespace fUML::Semantics::SimpleClassifiers
 
 			// Begin Class SignalInstance
 			//Class and Feature IDs 
-			static const unsigned int SIGNALINSTANCE_CLASS = 107;
+			static const unsigned long SIGNALINSTANCE_CLASS = 1044212856;
 			static const unsigned int SIGNALINSTANCE_CLASS_FEATURE_COUNT = 2;
 			static const unsigned int SIGNALINSTANCE_CLASS_OPERATION_COUNT = 26;
 			
@@ -306,7 +305,7 @@ namespace fUML::Semantics::SimpleClassifiers
 
 			// Begin Class StringValue
 			//Class and Feature IDs 
-			static const unsigned int STRINGVALUE_CLASS = 110;
+			static const unsigned long STRINGVALUE_CLASS = 1276339704;
 			static const unsigned int STRINGVALUE_CLASS_FEATURE_COUNT = 2;
 			static const unsigned int STRINGVALUE_CLASS_OPERATION_COUNT = 16;
 			static const int STRINGVALUE_ATTRIBUTE_VALUE = 11001;
@@ -333,7 +332,7 @@ namespace fUML::Semantics::SimpleClassifiers
 
 			// Begin Class StructuredValue
 			//Class and Feature IDs 
-			static const unsigned int STRUCTUREDVALUE_CLASS = 113;
+			static const unsigned long STRUCTUREDVALUE_CLASS = 1984808016;
 			static const unsigned int STRUCTUREDVALUE_CLASS_FEATURE_COUNT = 0;
 			static const unsigned int STRUCTUREDVALUE_CLASS_OPERATION_COUNT = 18;
 			
@@ -366,7 +365,7 @@ namespace fUML::Semantics::SimpleClassifiers
 
 			// Begin Class UnlimitedNaturalValue
 			//Class and Feature IDs 
-			static const unsigned int UNLIMITEDNATURALVALUE_CLASS = 117;
+			static const unsigned long UNLIMITEDNATURALVALUE_CLASS = 459381760;
 			static const unsigned int UNLIMITEDNATURALVALUE_CLASS_FEATURE_COUNT = 2;
 			static const unsigned int UNLIMITEDNATURALVALUE_CLASS_OPERATION_COUNT = 16;
 			static const int UNLIMITEDNATURALVALUE_ATTRIBUTE_VALUE = 11701;

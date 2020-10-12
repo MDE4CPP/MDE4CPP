@@ -49,17 +49,7 @@ using namespace fUML::Semantics::Activities;
 // Constructor / Destructor
 //*********************************
 ClassifierBehaviorExecutionActivityImpl::ClassifierBehaviorExecutionActivityImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 ClassifierBehaviorExecutionActivityImpl::~ClassifierBehaviorExecutionActivityImpl()
@@ -68,7 +58,6 @@ ClassifierBehaviorExecutionActivityImpl::~ClassifierBehaviorExecutionActivityImp
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ClassifierBehaviorExecutionActivity "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -114,6 +103,7 @@ std::shared_ptr<ecore::EClass> ClassifierBehaviorExecutionActivityImpl::eStaticC
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<ClassifierBehaviorExecutionActivity> ClassifierBehaviorExecutionActivityImpl::getThisClassifierBehaviorExecutionActivityPtr() const

@@ -56,20 +56,7 @@ using namespace fUML::Semantics::Activities;
 // Constructor / Destructor
 //*********************************
 ForkedTokenImpl::ForkedTokenImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	//Init references
-	
+{	
 }
 
 ForkedTokenImpl::~ForkedTokenImpl()
@@ -78,7 +65,6 @@ ForkedTokenImpl::~ForkedTokenImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ForkedToken "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -119,14 +105,27 @@ std::shared_ptr<ecore::EClass> ForkedTokenImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
+/*
+Getter & Setter for attribute baseTokenIsWithdrawn
+*/
+bool ForkedTokenImpl::isBaseTokenIsWithdrawn() const 
+{
+	return m_baseTokenIsWithdrawn;
+}
+
 void ForkedTokenImpl::setBaseTokenIsWithdrawn(bool _baseTokenIsWithdrawn)
 {
 	m_baseTokenIsWithdrawn = _baseTokenIsWithdrawn;
 } 
 
-bool ForkedTokenImpl::isBaseTokenIsWithdrawn() const 
+
+
+/*
+Getter & Setter for attribute remainingOffersCount
+*/
+int ForkedTokenImpl::getRemainingOffersCount() const 
 {
-	return m_baseTokenIsWithdrawn;
+	return m_remainingOffersCount;
 }
 
 void ForkedTokenImpl::setRemainingOffersCount(int _remainingOffersCount)
@@ -134,10 +133,7 @@ void ForkedTokenImpl::setRemainingOffersCount(int _remainingOffersCount)
 	m_remainingOffersCount = _remainingOffersCount;
 } 
 
-int ForkedTokenImpl::getRemainingOffersCount() const 
-{
-	return m_remainingOffersCount;
-}
+
 
 //*********************************
 // Operations
@@ -205,19 +201,26 @@ if (!this->isBaseTokenIsWithdrawn() & !this->getBaseToken()->isWithdrawn()) {
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference baseToken
+*/
 std::shared_ptr<fUML::Semantics::Activities::Token > ForkedTokenImpl::getBaseToken() const
 {
 
     return m_baseToken;
 }
+
 void ForkedTokenImpl::setBaseToken(std::shared_ptr<fUML::Semantics::Activities::Token> _baseToken)
 {
     m_baseToken = _baseToken;
 }
 
+
+
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<ForkedToken> ForkedTokenImpl::getThisForkedTokenPtr() const

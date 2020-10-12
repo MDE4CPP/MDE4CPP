@@ -55,19 +55,7 @@ using namespace fUML::Semantics::CommonBehavior;
 // Constructor / Destructor
 //*********************************
 EventOccurrenceImpl::EventOccurrenceImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	//Init references
-	
+{	
 }
 
 EventOccurrenceImpl::~EventOccurrenceImpl()
@@ -76,7 +64,6 @@ EventOccurrenceImpl::~EventOccurrenceImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete EventOccurrence "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -149,19 +136,26 @@ void EventOccurrenceImpl::sendTo(std::shared_ptr<fUML::Semantics::StructuredClas
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference target
+*/
 std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference > EventOccurrenceImpl::getTarget() const
 {
 
     return m_target;
 }
+
 void EventOccurrenceImpl::setTarget(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> _target)
 {
     m_target = _target;
 }
 
+
+
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<EventOccurrence> EventOccurrenceImpl::getThisEventOccurrencePtr() const

@@ -29,8 +29,7 @@ namespace fUML::Semantics::Classification
 	The Metamodel Package for the Classification metamodel. This package is used to enable the reflection of model elements. It contains all model elements
 	which were described in an ecore file.
 	*/
-	/*!
-	 */
+	
 	class ClassificationPackage : virtual public ecore::EPackage 
 	{
 		private:    
@@ -48,7 +47,7 @@ namespace fUML::Semantics::Classification
 
 			// Begin Class InstanceValueEvaluation
 			//Class and Feature IDs 
-			static const unsigned int INSTANCEVALUEEVALUATION_CLASS = 63;
+			static const unsigned long INSTANCEVALUEEVALUATION_CLASS = 1738756913;
 			static const unsigned int INSTANCEVALUEEVALUATION_CLASS_FEATURE_COUNT = 2;
 			static const unsigned int INSTANCEVALUEEVALUATION_CLASS_OPERATION_COUNT = 4;
 			

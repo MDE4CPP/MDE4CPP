@@ -61,17 +61,7 @@ using namespace fUML::Semantics::Activities;
 // Constructor / Destructor
 //*********************************
 JoinNodeActivationImpl::JoinNodeActivationImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 JoinNodeActivationImpl::~JoinNodeActivationImpl()
@@ -81,14 +71,12 @@ JoinNodeActivationImpl::~JoinNodeActivationImpl()
 #endif
 }
 
-
 //Additional constructor for the containments back reference
-			JoinNodeActivationImpl::JoinNodeActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
-			:JoinNodeActivationImpl()
-			{
-			    m_group = par_group;
-			}
-
+JoinNodeActivationImpl::JoinNodeActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
+:JoinNodeActivationImpl()
+{
+	m_group = par_group;
+}
 
 
 JoinNodeActivationImpl::JoinNodeActivationImpl(const JoinNodeActivationImpl & obj):JoinNodeActivationImpl()
@@ -212,6 +200,7 @@ bool JoinNodeActivationImpl::isReady()
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<JoinNodeActivation> JoinNodeActivationImpl::getThisJoinNodeActivationPtr() const

@@ -65,22 +65,7 @@ using namespace fUML::Semantics::SimpleClassifiers;
 // Constructor / Destructor
 //*********************************
 CompoundValueImpl::CompoundValueImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-		m_featureValues.reset(new Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>());
-	
-	
-
-	//Init references
-	
-	
+{	
 }
 
 CompoundValueImpl::~CompoundValueImpl()
@@ -89,7 +74,6 @@ CompoundValueImpl::~CompoundValueImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete CompoundValue "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -114,7 +98,6 @@ CompoundValueImpl::CompoundValueImpl(const CompoundValueImpl & obj):CompoundValu
 		std::cout << "Copying the Subset: " << "m_featureValues" << std::endl;
 	#endif
 
-	
 	
 }
 
@@ -292,16 +275,29 @@ std::string CompoundValueImpl::toString()
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference featureValues
+*/
 std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> CompoundValueImpl::getFeatureValues() const
 {
+	if(m_featureValues == nullptr)
+	{
+		m_featureValues.reset(new Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>());
+		
+		
+	}
 
     return m_featureValues;
 }
 
 
+
+
+
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<CompoundValue> CompoundValueImpl::getThisCompoundValuePtr() const

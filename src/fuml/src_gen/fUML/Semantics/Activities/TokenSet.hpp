@@ -51,8 +51,7 @@ namespace fUML::Semantics::Activities
 //*********************************
 namespace fUML::Semantics::Activities 
 {
-	/*!
-	 */
+	
 	class TokenSet : virtual public ecore::EObject 
 
 	{
@@ -81,9 +80,9 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> getTokens() const = 0;
+			
 			
 			
 
@@ -96,10 +95,8 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			// Reference Members
 			//*********************************
-			/*!
-			 */
-			std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> m_tokens;
 			
+			mutable std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> m_tokens;
 
 		public:
 			//*********************************

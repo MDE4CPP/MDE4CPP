@@ -32,6 +32,8 @@
 
 #include <exception> // used in Persistence
 
+#include "uml/Action.hpp"
+
 #include "fUML/Semantics/Actions/ActionActivation.hpp"
 
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
@@ -66,17 +68,7 @@ using namespace fUML::Semantics::Actions;
 // Constructor / Destructor
 //*********************************
 TestIdentityActionActivationImpl::TestIdentityActionActivationImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 TestIdentityActionActivationImpl::~TestIdentityActionActivationImpl()
@@ -86,14 +78,12 @@ TestIdentityActionActivationImpl::~TestIdentityActionActivationImpl()
 #endif
 }
 
-
 //Additional constructor for the containments back reference
-			TestIdentityActionActivationImpl::TestIdentityActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
-			:TestIdentityActionActivationImpl()
-			{
-			    m_group = par_group;
-			}
-
+TestIdentityActionActivationImpl::TestIdentityActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
+:TestIdentityActionActivationImpl()
+{
+	m_group = par_group;
+}
 
 
 TestIdentityActionActivationImpl::TestIdentityActionActivationImpl(const TestIdentityActionActivationImpl & obj):TestIdentityActionActivationImpl()
@@ -107,6 +97,8 @@ TestIdentityActionActivationImpl::TestIdentityActionActivationImpl(const TestIde
 
 	//copy references with no containment (soft copy)
 	
+	m_action  = obj.getAction();
+
 	m_group  = obj.getGroup();
 
 	std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> _incomingEdges = obj.getIncomingEdges();
@@ -179,8 +171,20 @@ std::shared_ptr<ecore::EClass> TestIdentityActionActivationImpl::eStaticClass() 
 //*********************************
 std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> TestIdentityActionActivationImpl::getPinActivation() const
 {
+	if(m_pinActivation == nullptr)
+	{
+		/*Union*/
+		m_pinActivation.reset(new Union<fUML::Semantics::Actions::PinActivation>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_pinActivation - Union<fUML::Semantics::Actions::PinActivation>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_pinActivation;
 }
+
+
 
 
 std::shared_ptr<TestIdentityActionActivation> TestIdentityActionActivationImpl::getThisTestIdentityActionActivationPtr() const

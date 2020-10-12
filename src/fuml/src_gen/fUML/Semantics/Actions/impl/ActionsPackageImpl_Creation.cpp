@@ -132,6 +132,7 @@ void ActionsPackageImpl::createActionActivationContent(std::shared_ptr<ecore::EP
 	m_actionActivation_Class = factory->createEClass_in_EPackage(package, ACTIONACTIVATION_CLASS);
 	m_actionActivation_Attribute_firing = factory->createEAttribute_in_EContainingClass(m_actionActivation_Class, ACTIONACTIVATION_ATTRIBUTE_FIRING);
 	
+	m_actionActivation_Attribute_action = factory->createEReference_in_EContainingClass(m_actionActivation_Class, ACTIONACTIVATION_ATTRIBUTE_ACTION);
 	m_actionActivation_Attribute_inputPinActivation = factory->createEReference_in_EContainingClass(m_actionActivation_Class, ACTIONACTIVATION_ATTRIBUTE_INPUTPINACTIVATION);
 	m_actionActivation_Attribute_outputPinActivation = factory->createEReference_in_EContainingClass(m_actionActivation_Class, ACTIONACTIVATION_ATTRIBUTE_OUTPUTPINACTIVATION);
 	m_actionActivation_Attribute_pinActivation = factory->createEReference_in_EContainingClass(m_actionActivation_Class, ACTIONACTIVATION_ATTRIBUTE_PINACTIVATION);
@@ -163,6 +164,7 @@ void ActionsPackageImpl::createAddStructuralFeatureValueActionActivationContent(
 {
 	m_addStructuralFeatureValueActionActivation_Class = factory->createEClass_in_EPackage(package, ADDSTRUCTURALFEATUREVALUEACTIONACTIVATION_CLASS);
 	
+	m_addStructuralFeatureValueActionActivation_Attribute_addStructuralFeatureValueAction = factory->createEReference_in_EContainingClass(m_addStructuralFeatureValueActionActivation_Class, ADDSTRUCTURALFEATUREVALUEACTIONACTIVATION_ATTRIBUTE_ADDSTRUCTURALFEATUREVALUEACTION);
 	
 	m_addStructuralFeatureValueActionActivation_Operation_doAction = factory->createEOperation_in_EContainingClass(m_addStructuralFeatureValueActionActivation_Class, ADDSTRUCTURALFEATUREVALUEACTIONACTIVATION_OPERATION_DOACTION);
 	
@@ -172,6 +174,7 @@ void ActionsPackageImpl::createCallActionActivationContent(std::shared_ptr<ecore
 {
 	m_callActionActivation_Class = factory->createEClass_in_EPackage(package, CALLACTIONACTIVATION_CLASS);
 	
+	m_callActionActivation_Attribute_callAction = factory->createEReference_in_EContainingClass(m_callActionActivation_Class, CALLACTIONACTIVATION_ATTRIBUTE_CALLACTION);
 	m_callActionActivation_Attribute_callExecutions = factory->createEReference_in_EContainingClass(m_callActionActivation_Class, CALLACTIONACTIVATION_ATTRIBUTE_CALLEXECUTIONS);
 	
 	m_callActionActivation_Operation_doAction = factory->createEOperation_in_EContainingClass(m_callActionActivation_Class, CALLACTIONACTIVATION_OPERATION_DOACTION);
@@ -185,6 +188,7 @@ void ActionsPackageImpl::createCallBehaviorActionActivationContent(std::shared_p
 {
 	m_callBehaviorActionActivation_Class = factory->createEClass_in_EPackage(package, CALLBEHAVIORACTIONACTIVATION_CLASS);
 	
+	m_callBehaviorActionActivation_Attribute_callBehaviorAction = factory->createEReference_in_EContainingClass(m_callBehaviorActionActivation_Class, CALLBEHAVIORACTIONACTIVATION_ATTRIBUTE_CALLBEHAVIORACTION);
 	
 	m_callBehaviorActionActivation_Operation_getCallExecution = factory->createEOperation_in_EContainingClass(m_callBehaviorActionActivation_Class, CALLBEHAVIORACTIONACTIVATION_OPERATION_GETCALLEXECUTION);
 	
@@ -194,6 +198,7 @@ void ActionsPackageImpl::createCallOperationActionActivationContent(std::shared_
 {
 	m_callOperationActionActivation_Class = factory->createEClass_in_EPackage(package, CALLOPERATIONACTIONACTIVATION_CLASS);
 	
+	m_callOperationActionActivation_Attribute_callOperationAction = factory->createEReference_in_EContainingClass(m_callOperationActionActivation_Class, CALLOPERATIONACTIONACTIVATION_ATTRIBUTE_CALLOPERATIONACTION);
 	
 	m_callOperationActionActivation_Operation_getCallExecution = factory->createEOperation_in_EContainingClass(m_callOperationActionActivation_Class, CALLOPERATIONACTIONACTIVATION_OPERATION_GETCALLEXECUTION);
 	
@@ -258,6 +263,7 @@ void ActionsPackageImpl::createCreateObjectActionActivationContent(std::shared_p
 {
 	m_createObjectActionActivation_Class = factory->createEClass_in_EPackage(package, CREATEOBJECTACTIONACTIVATION_CLASS);
 	
+	m_createObjectActionActivation_Attribute_createObjectAction = factory->createEReference_in_EContainingClass(m_createObjectActionActivation_Class, CREATEOBJECTACTIONACTIVATION_ATTRIBUTE_CREATEOBJECTACTION);
 	
 	m_createObjectActionActivation_Operation_doAction = factory->createEOperation_in_EContainingClass(m_createObjectActionActivation_Class, CREATEOBJECTACTIONACTIVATION_OPERATION_DOACTION);
 	
@@ -275,6 +281,7 @@ void ActionsPackageImpl::createDestroyObjectActionActivationContent(std::shared_
 {
 	m_destroyObjectActionActivation_Class = factory->createEClass_in_EPackage(package, DESTROYOBJECTACTIONACTIVATION_CLASS);
 	
+	m_destroyObjectActionActivation_Attribute_destroyObjectAction = factory->createEReference_in_EContainingClass(m_destroyObjectActionActivation_Class, DESTROYOBJECTACTIONACTIVATION_ATTRIBUTE_DESTROYOBJECTACTION);
 	
 	m_destroyObjectActionActivation_Operation_destroyObject_Value_EBoolean = factory->createEOperation_in_EContainingClass(m_destroyObjectActionActivation_Class, DESTROYOBJECTACTIONACTIVATION_OPERATION_DESTROYOBJECT_VALUE_EBOOLEAN);
 	m_destroyObjectActionActivation_Operation_doAction = factory->createEOperation_in_EContainingClass(m_destroyObjectActionActivation_Class, DESTROYOBJECTACTIONACTIVATION_OPERATION_DOACTION);
@@ -337,6 +344,7 @@ void ActionsPackageImpl::createPinActivationContent(std::shared_ptr<ecore::EPack
 	m_pinActivation_Class = factory->createEClass_in_EPackage(package, PINACTIVATION_CLASS);
 	
 	m_pinActivation_Attribute_actionActivation = factory->createEReference_in_EContainingClass(m_pinActivation_Class, PINACTIVATION_ATTRIBUTE_ACTIONACTIVATION);
+	m_pinActivation_Attribute_pin = factory->createEReference_in_EContainingClass(m_pinActivation_Class, PINACTIVATION_ATTRIBUTE_PIN);
 	
 	m_pinActivation_Operation_fire_Token = factory->createEOperation_in_EContainingClass(m_pinActivation_Class, PINACTIVATION_OPERATION_FIRE_TOKEN);
 	m_pinActivation_Operation_takeOfferedTokens = factory->createEOperation_in_EContainingClass(m_pinActivation_Class, PINACTIVATION_OPERATION_TAKEOFFEREDTOKENS);
@@ -372,6 +380,7 @@ void ActionsPackageImpl::createReadSelfActionActivationContent(std::shared_ptr<e
 {
 	m_readSelfActionActivation_Class = factory->createEClass_in_EPackage(package, READSELFACTIONACTIVATION_CLASS);
 	
+	m_readSelfActionActivation_Attribute_readSelfAction = factory->createEReference_in_EContainingClass(m_readSelfActionActivation_Class, READSELFACTIONACTIVATION_ATTRIBUTE_READSELFACTION);
 	
 	m_readSelfActionActivation_Operation_doAction = factory->createEOperation_in_EContainingClass(m_readSelfActionActivation_Class, READSELFACTIONACTIVATION_OPERATION_DOACTION);
 	
@@ -381,6 +390,7 @@ void ActionsPackageImpl::createReadStructuralFeatureActionActivationContent(std:
 {
 	m_readStructuralFeatureActionActivation_Class = factory->createEClass_in_EPackage(package, READSTRUCTURALFEATUREACTIONACTIVATION_CLASS);
 	
+	m_readStructuralFeatureActionActivation_Attribute_readStructuralFeatureAction = factory->createEReference_in_EContainingClass(m_readStructuralFeatureActionActivation_Class, READSTRUCTURALFEATUREACTIONACTIVATION_ATTRIBUTE_READSTRUCTURALFEATUREACTION);
 	
 	m_readStructuralFeatureActionActivation_Operation_doAction = factory->createEOperation_in_EContainingClass(m_readStructuralFeatureActionActivation_Class, READSTRUCTURALFEATUREACTIONACTIVATION_OPERATION_DOACTION);
 	
@@ -407,6 +417,7 @@ void ActionsPackageImpl::createRemoveStructuralFeatureValueActivationContent(std
 {
 	m_removeStructuralFeatureValueActivation_Class = factory->createEClass_in_EPackage(package, REMOVESTRUCTURALFEATUREVALUEACTIVATION_CLASS);
 	
+	m_removeStructuralFeatureValueActivation_Attribute_removeStructuralFeatureValueAction = factory->createEReference_in_EContainingClass(m_removeStructuralFeatureValueActivation_Class, REMOVESTRUCTURALFEATUREVALUEACTIVATION_ATTRIBUTE_REMOVESTRUCTURALFEATUREVALUEACTION);
 	
 	m_removeStructuralFeatureValueActivation_Operation_doAction = factory->createEOperation_in_EContainingClass(m_removeStructuralFeatureValueActivation_Class, REMOVESTRUCTURALFEATUREVALUEACTIVATION_OPERATION_DOACTION);
 	

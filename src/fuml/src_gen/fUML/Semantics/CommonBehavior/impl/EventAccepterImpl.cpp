@@ -50,17 +50,7 @@ using namespace fUML::Semantics::CommonBehavior;
 // Constructor / Destructor
 //*********************************
 EventAccepterImpl::EventAccepterImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 EventAccepterImpl::~EventAccepterImpl()
@@ -69,7 +59,6 @@ EventAccepterImpl::~EventAccepterImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete EventAccepter "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -126,6 +115,7 @@ bool EventAccepterImpl::match(std::shared_ptr<fUML::Semantics::SimpleClassifiers
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<EventAccepter> EventAccepterImpl::getThisEventAccepterPtr() const

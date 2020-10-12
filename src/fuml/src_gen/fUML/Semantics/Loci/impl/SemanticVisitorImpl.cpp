@@ -49,17 +49,7 @@ using namespace fUML::Semantics::Loci;
 // Constructor / Destructor
 //*********************************
 SemanticVisitorImpl::SemanticVisitorImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 SemanticVisitorImpl::~SemanticVisitorImpl()
@@ -68,7 +58,6 @@ SemanticVisitorImpl::~SemanticVisitorImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete SemanticVisitor "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -129,6 +118,7 @@ void SemanticVisitorImpl::_endIsolation()
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<SemanticVisitor> SemanticVisitorImpl::getThisSemanticVisitorPtr() const

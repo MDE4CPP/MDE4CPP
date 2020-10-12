@@ -70,8 +70,7 @@ namespace fUML::Semantics::Activities
 //*********************************
 namespace fUML::Semantics::Activities 
 {
-	/*!
-	 */
+	
 	class MergeNodeActivation:virtual public ControlNodeActivation
 	{
 		public:

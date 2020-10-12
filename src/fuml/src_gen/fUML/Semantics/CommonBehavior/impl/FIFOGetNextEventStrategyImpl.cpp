@@ -50,17 +50,7 @@ using namespace fUML::Semantics::CommonBehavior;
 // Constructor / Destructor
 //*********************************
 FIFOGetNextEventStrategyImpl::FIFOGetNextEventStrategyImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 FIFOGetNextEventStrategyImpl::~FIFOGetNextEventStrategyImpl()
@@ -69,7 +59,6 @@ FIFOGetNextEventStrategyImpl::~FIFOGetNextEventStrategyImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete FIFOGetNextEventStrategy "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -115,6 +104,7 @@ std::shared_ptr<ecore::EClass> FIFOGetNextEventStrategyImpl::eStaticClass() cons
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<FIFOGetNextEventStrategy> FIFOGetNextEventStrategyImpl::getThisFIFOGetNextEventStrategyPtr() const

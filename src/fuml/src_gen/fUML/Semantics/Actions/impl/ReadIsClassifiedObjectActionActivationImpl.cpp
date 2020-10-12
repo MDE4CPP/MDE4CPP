@@ -32,6 +32,8 @@
 
 #include <exception> // used in Persistence
 
+#include "uml/Action.hpp"
+
 #include "fUML/Semantics/Actions/ActionActivation.hpp"
 
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
@@ -68,17 +70,7 @@ using namespace fUML::Semantics::Actions;
 // Constructor / Destructor
 //*********************************
 ReadIsClassifiedObjectActionActivationImpl::ReadIsClassifiedObjectActionActivationImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 ReadIsClassifiedObjectActionActivationImpl::~ReadIsClassifiedObjectActionActivationImpl()
@@ -88,14 +80,12 @@ ReadIsClassifiedObjectActionActivationImpl::~ReadIsClassifiedObjectActionActivat
 #endif
 }
 
-
 //Additional constructor for the containments back reference
-			ReadIsClassifiedObjectActionActivationImpl::ReadIsClassifiedObjectActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
-			:ReadIsClassifiedObjectActionActivationImpl()
-			{
-			    m_group = par_group;
-			}
-
+ReadIsClassifiedObjectActionActivationImpl::ReadIsClassifiedObjectActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
+:ReadIsClassifiedObjectActionActivationImpl()
+{
+	m_group = par_group;
+}
 
 
 ReadIsClassifiedObjectActionActivationImpl::ReadIsClassifiedObjectActionActivationImpl(const ReadIsClassifiedObjectActionActivationImpl & obj):ReadIsClassifiedObjectActionActivationImpl()
@@ -109,6 +99,8 @@ ReadIsClassifiedObjectActionActivationImpl::ReadIsClassifiedObjectActionActivati
 
 	//copy references with no containment (soft copy)
 	
+	m_action  = obj.getAction();
+
 	m_group  = obj.getGroup();
 
 	std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> _incomingEdges = obj.getIncomingEdges();
@@ -186,8 +178,20 @@ bool ReadIsClassifiedObjectActionActivationImpl::checkAllParents(std::shared_ptr
 //*********************************
 std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> ReadIsClassifiedObjectActionActivationImpl::getPinActivation() const
 {
+	if(m_pinActivation == nullptr)
+	{
+		/*Union*/
+		m_pinActivation.reset(new Union<fUML::Semantics::Actions::PinActivation>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_pinActivation - Union<fUML::Semantics::Actions::PinActivation>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_pinActivation;
 }
+
+
 
 
 std::shared_ptr<ReadIsClassifiedObjectActionActivation> ReadIsClassifiedObjectActionActivationImpl::getThisReadIsClassifiedObjectActionActivationPtr() const

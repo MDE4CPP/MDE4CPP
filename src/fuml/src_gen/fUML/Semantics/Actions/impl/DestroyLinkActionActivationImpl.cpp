@@ -32,6 +32,8 @@
 
 #include <exception> // used in Persistence
 
+#include "uml/Action.hpp"
+
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 
 #include "uml/ActivityNode.hpp"
@@ -66,17 +68,7 @@ using namespace fUML::Semantics::Actions;
 // Constructor / Destructor
 //*********************************
 DestroyLinkActionActivationImpl::DestroyLinkActionActivationImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 DestroyLinkActionActivationImpl::~DestroyLinkActionActivationImpl()
@@ -86,14 +78,12 @@ DestroyLinkActionActivationImpl::~DestroyLinkActionActivationImpl()
 #endif
 }
 
-
 //Additional constructor for the containments back reference
-			DestroyLinkActionActivationImpl::DestroyLinkActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
-			:DestroyLinkActionActivationImpl()
-			{
-			    m_group = par_group;
-			}
-
+DestroyLinkActionActivationImpl::DestroyLinkActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
+:DestroyLinkActionActivationImpl()
+{
+	m_group = par_group;
+}
 
 
 DestroyLinkActionActivationImpl::DestroyLinkActionActivationImpl(const DestroyLinkActionActivationImpl & obj):DestroyLinkActionActivationImpl()
@@ -107,6 +97,8 @@ DestroyLinkActionActivationImpl::DestroyLinkActionActivationImpl(const DestroyLi
 
 	//copy references with no containment (soft copy)
 	
+	m_action  = obj.getAction();
+
 	m_group  = obj.getGroup();
 
 	std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> _incomingEdges = obj.getIncomingEdges();
@@ -179,8 +171,20 @@ std::shared_ptr<ecore::EClass> DestroyLinkActionActivationImpl::eStaticClass() c
 //*********************************
 std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> DestroyLinkActionActivationImpl::getPinActivation() const
 {
+	if(m_pinActivation == nullptr)
+	{
+		/*Union*/
+		m_pinActivation.reset(new Union<fUML::Semantics::Actions::PinActivation>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_pinActivation - Union<fUML::Semantics::Actions::PinActivation>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_pinActivation;
 }
+
+
 
 
 std::shared_ptr<DestroyLinkActionActivation> DestroyLinkActionActivationImpl::getThisDestroyLinkActionActivationPtr() const

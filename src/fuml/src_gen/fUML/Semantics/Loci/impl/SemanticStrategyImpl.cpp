@@ -49,17 +49,7 @@ using namespace fUML::Semantics::Loci;
 // Constructor / Destructor
 //*********************************
 SemanticStrategyImpl::SemanticStrategyImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 SemanticStrategyImpl::~SemanticStrategyImpl()
@@ -68,7 +58,6 @@ SemanticStrategyImpl::~SemanticStrategyImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete SemanticStrategy "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -119,6 +108,7 @@ std::string SemanticStrategyImpl::getName()
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<SemanticStrategy> SemanticStrategyImpl::getThisSemanticStrategyPtr() const

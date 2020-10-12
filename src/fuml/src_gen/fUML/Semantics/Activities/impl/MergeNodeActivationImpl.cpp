@@ -59,17 +59,7 @@ using namespace fUML::Semantics::Activities;
 // Constructor / Destructor
 //*********************************
 MergeNodeActivationImpl::MergeNodeActivationImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 MergeNodeActivationImpl::~MergeNodeActivationImpl()
@@ -79,14 +69,12 @@ MergeNodeActivationImpl::~MergeNodeActivationImpl()
 #endif
 }
 
-
 //Additional constructor for the containments back reference
-			MergeNodeActivationImpl::MergeNodeActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
-			:MergeNodeActivationImpl()
-			{
-			    m_group = par_group;
-			}
-
+MergeNodeActivationImpl::MergeNodeActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
+:MergeNodeActivationImpl()
+{
+	m_group = par_group;
+}
 
 
 MergeNodeActivationImpl::MergeNodeActivationImpl(const MergeNodeActivationImpl & obj):MergeNodeActivationImpl()
@@ -150,6 +138,7 @@ std::shared_ptr<ecore::EClass> MergeNodeActivationImpl::eStaticClass() const
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<MergeNodeActivation> MergeNodeActivationImpl::getThisMergeNodeActivationPtr() const

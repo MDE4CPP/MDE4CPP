@@ -65,19 +65,7 @@ using namespace fUML::Semantics::SimpleClassifiers;
 // Constructor / Destructor
 //*********************************
 DataValueImpl::DataValueImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	//Init references
-	
+{	
 }
 
 DataValueImpl::~DataValueImpl()
@@ -86,7 +74,6 @@ DataValueImpl::~DataValueImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete DataValue "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -167,19 +154,26 @@ std::shared_ptr<fUML::Semantics::Values::Value> DataValueImpl::new_()
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference type
+*/
 std::shared_ptr<uml::DataType > DataValueImpl::getType() const
 {
 //assert(m_type);
     return m_type;
 }
+
 void DataValueImpl::setType(std::shared_ptr<uml::DataType> _type)
 {
     m_type = _type;
 }
 
+
+
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<DataValue> DataValueImpl::getThisDataValuePtr() const

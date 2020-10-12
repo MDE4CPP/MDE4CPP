@@ -167,6 +167,7 @@ void CommonBehaviorPackageImpl::createExecutionContent(std::shared_ptr<ecore::EP
 {
 	m_execution_Class = factory->createEClass_in_EPackage(package, EXECUTION_CLASS);
 	
+	m_execution_Attribute_behavior = factory->createEReference_in_EContainingClass(m_execution_Class, EXECUTION_ATTRIBUTE_BEHAVIOR);
 	m_execution_Attribute_context = factory->createEReference_in_EContainingClass(m_execution_Class, EXECUTION_ATTRIBUTE_CONTEXT);
 	m_execution_Attribute_parameterValues = factory->createEReference_in_EContainingClass(m_execution_Class, EXECUTION_ATTRIBUTE_PARAMETERVALUES);
 	

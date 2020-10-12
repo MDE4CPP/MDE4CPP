@@ -60,17 +60,7 @@ using namespace fUML::Semantics::Activities;
 // Constructor / Destructor
 //*********************************
 ControlNodeActivationImpl::ControlNodeActivationImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 ControlNodeActivationImpl::~ControlNodeActivationImpl()
@@ -80,14 +70,12 @@ ControlNodeActivationImpl::~ControlNodeActivationImpl()
 #endif
 }
 
-
 //Additional constructor for the containments back reference
-			ControlNodeActivationImpl::ControlNodeActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
-			:ControlNodeActivationImpl()
-			{
-			    m_group = par_group;
-			}
-
+ControlNodeActivationImpl::ControlNodeActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
+:ControlNodeActivationImpl()
+{
+	m_group = par_group;
+}
 
 
 ControlNodeActivationImpl::ControlNodeActivationImpl(const ControlNodeActivationImpl & obj):ControlNodeActivationImpl()
@@ -162,6 +150,7 @@ void ControlNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Semantics::Activi
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<ControlNodeActivation> ControlNodeActivationImpl::getThisControlNodeActivationPtr() const

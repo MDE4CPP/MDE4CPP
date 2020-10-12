@@ -62,17 +62,7 @@ using namespace fUML::Semantics::Activities;
 // Constructor / Destructor
 //*********************************
 ForkNodeActivationImpl::ForkNodeActivationImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 ForkNodeActivationImpl::~ForkNodeActivationImpl()
@@ -82,14 +72,12 @@ ForkNodeActivationImpl::~ForkNodeActivationImpl()
 #endif
 }
 
-
 //Additional constructor for the containments back reference
-			ForkNodeActivationImpl::ForkNodeActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
-			:ForkNodeActivationImpl()
-			{
-			    m_group = par_group;
-			}
-
+ForkNodeActivationImpl::ForkNodeActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
+:ForkNodeActivationImpl()
+{
+	m_group = par_group;
+}
 
 
 ForkNodeActivationImpl::ForkNodeActivationImpl(const ForkNodeActivationImpl & obj):ForkNodeActivationImpl()
@@ -208,6 +196,7 @@ void ForkNodeActivationImpl::terminate()
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<ForkNodeActivation> ForkNodeActivationImpl::getThisForkNodeActivationPtr() const

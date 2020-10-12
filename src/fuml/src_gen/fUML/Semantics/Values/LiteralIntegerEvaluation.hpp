@@ -65,8 +65,7 @@ namespace uml
 //*********************************
 namespace fUML::Semantics::Values 
 {
-	/*!
-	 */
+	
 	class LiteralIntegerEvaluation:virtual public LiteralEvaluation
 	{
 		public:
@@ -86,8 +85,7 @@ namespace fUML::Semantics::Values
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> evaluate() = 0;
 			
 			

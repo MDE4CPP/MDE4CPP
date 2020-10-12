@@ -398,6 +398,28 @@ void ActionsPackageImpl::initializeActionActivationContent()
 		}
 	}
 	
+	m_actionActivation_Attribute_action->setName("action");
+	m_actionActivation_Attribute_action->setEType(uml::UmlPackage::eInstance()->getAction_Class());
+	m_actionActivation_Attribute_action->setLowerBound(1);
+	m_actionActivation_Attribute_action->setUpperBound(1);
+	m_actionActivation_Attribute_action->setTransient(false);
+	m_actionActivation_Attribute_action->setVolatile(false);
+	m_actionActivation_Attribute_action->setChangeable(true);
+	m_actionActivation_Attribute_action->setUnsettable(false);
+	m_actionActivation_Attribute_action->setUnique(true);
+	m_actionActivation_Attribute_action->setDerived(false);
+	m_actionActivation_Attribute_action->setOrdered(true);
+	m_actionActivation_Attribute_action->setContainment(false);
+	m_actionActivation_Attribute_action->setResolveProxies(true);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			m_actionActivation_Attribute_action->setDefaultValueLiteral(defaultValue);
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
+	}
 	m_actionActivation_Attribute_inputPinActivation->setName("inputPinActivation");
 	m_actionActivation_Attribute_inputPinActivation->setEType(getInputPinActivation_Class());
 	m_actionActivation_Attribute_inputPinActivation->setLowerBound(0);
@@ -767,6 +789,28 @@ void ActionsPackageImpl::initializeAddStructuralFeatureValueActionActivationCont
 	m_addStructuralFeatureValueActionActivation_Class->setInterface(false);
 	
 	
+	m_addStructuralFeatureValueActionActivation_Attribute_addStructuralFeatureValueAction->setName("addStructuralFeatureValueAction");
+	m_addStructuralFeatureValueActionActivation_Attribute_addStructuralFeatureValueAction->setEType(uml::UmlPackage::eInstance()->getAddStructuralFeatureValueAction_Class());
+	m_addStructuralFeatureValueActionActivation_Attribute_addStructuralFeatureValueAction->setLowerBound(1);
+	m_addStructuralFeatureValueActionActivation_Attribute_addStructuralFeatureValueAction->setUpperBound(1);
+	m_addStructuralFeatureValueActionActivation_Attribute_addStructuralFeatureValueAction->setTransient(false);
+	m_addStructuralFeatureValueActionActivation_Attribute_addStructuralFeatureValueAction->setVolatile(false);
+	m_addStructuralFeatureValueActionActivation_Attribute_addStructuralFeatureValueAction->setChangeable(true);
+	m_addStructuralFeatureValueActionActivation_Attribute_addStructuralFeatureValueAction->setUnsettable(false);
+	m_addStructuralFeatureValueActionActivation_Attribute_addStructuralFeatureValueAction->setUnique(true);
+	m_addStructuralFeatureValueActionActivation_Attribute_addStructuralFeatureValueAction->setDerived(false);
+	m_addStructuralFeatureValueActionActivation_Attribute_addStructuralFeatureValueAction->setOrdered(true);
+	m_addStructuralFeatureValueActionActivation_Attribute_addStructuralFeatureValueAction->setContainment(false);
+	m_addStructuralFeatureValueActionActivation_Attribute_addStructuralFeatureValueAction->setResolveProxies(true);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			m_addStructuralFeatureValueActionActivation_Attribute_addStructuralFeatureValueAction->setDefaultValueLiteral(defaultValue);
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
+	}
 	
 	m_addStructuralFeatureValueActionActivation_Operation_doAction->setEType(nullptr);
 	m_addStructuralFeatureValueActionActivation_Operation_doAction->setName("doAction");
@@ -786,6 +830,28 @@ void ActionsPackageImpl::initializeCallActionActivationContent()
 	m_callActionActivation_Class->setInterface(false);
 	
 	
+	m_callActionActivation_Attribute_callAction->setName("callAction");
+	m_callActionActivation_Attribute_callAction->setEType(uml::UmlPackage::eInstance()->getCallAction_Class());
+	m_callActionActivation_Attribute_callAction->setLowerBound(1);
+	m_callActionActivation_Attribute_callAction->setUpperBound(1);
+	m_callActionActivation_Attribute_callAction->setTransient(false);
+	m_callActionActivation_Attribute_callAction->setVolatile(false);
+	m_callActionActivation_Attribute_callAction->setChangeable(true);
+	m_callActionActivation_Attribute_callAction->setUnsettable(false);
+	m_callActionActivation_Attribute_callAction->setUnique(true);
+	m_callActionActivation_Attribute_callAction->setDerived(false);
+	m_callActionActivation_Attribute_callAction->setOrdered(true);
+	m_callActionActivation_Attribute_callAction->setContainment(false);
+	m_callActionActivation_Attribute_callAction->setResolveProxies(true);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			m_callActionActivation_Attribute_callAction->setDefaultValueLiteral(defaultValue);
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
+	}
 	m_callActionActivation_Attribute_callExecutions->setName("callExecutions");
 	m_callActionActivation_Attribute_callExecutions->setEType(fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getExecution_Class());
 	m_callActionActivation_Attribute_callExecutions->setLowerBound(0);
@@ -860,6 +926,28 @@ void ActionsPackageImpl::initializeCallBehaviorActionActivationContent()
 	m_callBehaviorActionActivation_Class->setInterface(false);
 	
 	
+	m_callBehaviorActionActivation_Attribute_callBehaviorAction->setName("callBehaviorAction");
+	m_callBehaviorActionActivation_Attribute_callBehaviorAction->setEType(uml::UmlPackage::eInstance()->getCallBehaviorAction_Class());
+	m_callBehaviorActionActivation_Attribute_callBehaviorAction->setLowerBound(1);
+	m_callBehaviorActionActivation_Attribute_callBehaviorAction->setUpperBound(1);
+	m_callBehaviorActionActivation_Attribute_callBehaviorAction->setTransient(false);
+	m_callBehaviorActionActivation_Attribute_callBehaviorAction->setVolatile(false);
+	m_callBehaviorActionActivation_Attribute_callBehaviorAction->setChangeable(true);
+	m_callBehaviorActionActivation_Attribute_callBehaviorAction->setUnsettable(false);
+	m_callBehaviorActionActivation_Attribute_callBehaviorAction->setUnique(true);
+	m_callBehaviorActionActivation_Attribute_callBehaviorAction->setDerived(false);
+	m_callBehaviorActionActivation_Attribute_callBehaviorAction->setOrdered(true);
+	m_callBehaviorActionActivation_Attribute_callBehaviorAction->setContainment(false);
+	m_callBehaviorActionActivation_Attribute_callBehaviorAction->setResolveProxies(true);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			m_callBehaviorActionActivation_Attribute_callBehaviorAction->setDefaultValueLiteral(defaultValue);
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
+	}
 	
 	m_callBehaviorActionActivation_Operation_getCallExecution->setEType(fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getExecution_Class());
 	m_callBehaviorActionActivation_Operation_getCallExecution->setName("getCallExecution");
@@ -879,6 +967,28 @@ void ActionsPackageImpl::initializeCallOperationActionActivationContent()
 	m_callOperationActionActivation_Class->setInterface(false);
 	
 	
+	m_callOperationActionActivation_Attribute_callOperationAction->setName("callOperationAction");
+	m_callOperationActionActivation_Attribute_callOperationAction->setEType(uml::UmlPackage::eInstance()->getCallOperationAction_Class());
+	m_callOperationActionActivation_Attribute_callOperationAction->setLowerBound(1);
+	m_callOperationActionActivation_Attribute_callOperationAction->setUpperBound(1);
+	m_callOperationActionActivation_Attribute_callOperationAction->setTransient(false);
+	m_callOperationActionActivation_Attribute_callOperationAction->setVolatile(false);
+	m_callOperationActionActivation_Attribute_callOperationAction->setChangeable(true);
+	m_callOperationActionActivation_Attribute_callOperationAction->setUnsettable(false);
+	m_callOperationActionActivation_Attribute_callOperationAction->setUnique(true);
+	m_callOperationActionActivation_Attribute_callOperationAction->setDerived(false);
+	m_callOperationActionActivation_Attribute_callOperationAction->setOrdered(true);
+	m_callOperationActionActivation_Attribute_callOperationAction->setContainment(false);
+	m_callOperationActionActivation_Attribute_callOperationAction->setResolveProxies(true);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			m_callOperationActionActivation_Attribute_callOperationAction->setDefaultValueLiteral(defaultValue);
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
+	}
 	
 	m_callOperationActionActivation_Operation_getCallExecution->setEType(fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getExecution_Class());
 	m_callOperationActionActivation_Operation_getCallExecution->setName("getCallExecution");
@@ -1156,6 +1266,28 @@ void ActionsPackageImpl::initializeCreateObjectActionActivationContent()
 	m_createObjectActionActivation_Class->setInterface(false);
 	
 	
+	m_createObjectActionActivation_Attribute_createObjectAction->setName("createObjectAction");
+	m_createObjectActionActivation_Attribute_createObjectAction->setEType(uml::UmlPackage::eInstance()->getCreateObjectAction_Class());
+	m_createObjectActionActivation_Attribute_createObjectAction->setLowerBound(1);
+	m_createObjectActionActivation_Attribute_createObjectAction->setUpperBound(1);
+	m_createObjectActionActivation_Attribute_createObjectAction->setTransient(false);
+	m_createObjectActionActivation_Attribute_createObjectAction->setVolatile(false);
+	m_createObjectActionActivation_Attribute_createObjectAction->setChangeable(true);
+	m_createObjectActionActivation_Attribute_createObjectAction->setUnsettable(false);
+	m_createObjectActionActivation_Attribute_createObjectAction->setUnique(true);
+	m_createObjectActionActivation_Attribute_createObjectAction->setDerived(false);
+	m_createObjectActionActivation_Attribute_createObjectAction->setOrdered(true);
+	m_createObjectActionActivation_Attribute_createObjectAction->setContainment(false);
+	m_createObjectActionActivation_Attribute_createObjectAction->setResolveProxies(true);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			m_createObjectActionActivation_Attribute_createObjectAction->setDefaultValueLiteral(defaultValue);
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
+	}
 	
 	m_createObjectActionActivation_Operation_doAction->setEType(nullptr);
 	m_createObjectActionActivation_Operation_doAction->setName("doAction");
@@ -1186,6 +1318,28 @@ void ActionsPackageImpl::initializeDestroyObjectActionActivationContent()
 	m_destroyObjectActionActivation_Class->setInterface(false);
 	
 	
+	m_destroyObjectActionActivation_Attribute_destroyObjectAction->setName("destroyObjectAction");
+	m_destroyObjectActionActivation_Attribute_destroyObjectAction->setEType(uml::UmlPackage::eInstance()->getDestroyObjectAction_Class());
+	m_destroyObjectActionActivation_Attribute_destroyObjectAction->setLowerBound(1);
+	m_destroyObjectActionActivation_Attribute_destroyObjectAction->setUpperBound(1);
+	m_destroyObjectActionActivation_Attribute_destroyObjectAction->setTransient(false);
+	m_destroyObjectActionActivation_Attribute_destroyObjectAction->setVolatile(false);
+	m_destroyObjectActionActivation_Attribute_destroyObjectAction->setChangeable(true);
+	m_destroyObjectActionActivation_Attribute_destroyObjectAction->setUnsettable(false);
+	m_destroyObjectActionActivation_Attribute_destroyObjectAction->setUnique(true);
+	m_destroyObjectActionActivation_Attribute_destroyObjectAction->setDerived(false);
+	m_destroyObjectActionActivation_Attribute_destroyObjectAction->setOrdered(true);
+	m_destroyObjectActionActivation_Attribute_destroyObjectAction->setContainment(false);
+	m_destroyObjectActionActivation_Attribute_destroyObjectAction->setResolveProxies(true);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			m_destroyObjectActionActivation_Attribute_destroyObjectAction->setDefaultValueLiteral(defaultValue);
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
+	}
 	
 	m_destroyObjectActionActivation_Operation_destroyObject_Value_EBoolean->setEType(nullptr);
 	m_destroyObjectActionActivation_Operation_destroyObject_Value_EBoolean->setName("destroyObject");
@@ -1481,6 +1635,28 @@ void ActionsPackageImpl::initializePinActivationContent()
 	   		m_pinActivation_Attribute_actionActivation->setEOpposite(otherEnd);
 	    }
 	}
+	m_pinActivation_Attribute_pin->setName("pin");
+	m_pinActivation_Attribute_pin->setEType(uml::UmlPackage::eInstance()->getPin_Class());
+	m_pinActivation_Attribute_pin->setLowerBound(1);
+	m_pinActivation_Attribute_pin->setUpperBound(1);
+	m_pinActivation_Attribute_pin->setTransient(false);
+	m_pinActivation_Attribute_pin->setVolatile(false);
+	m_pinActivation_Attribute_pin->setChangeable(true);
+	m_pinActivation_Attribute_pin->setUnsettable(false);
+	m_pinActivation_Attribute_pin->setUnique(true);
+	m_pinActivation_Attribute_pin->setDerived(false);
+	m_pinActivation_Attribute_pin->setOrdered(true);
+	m_pinActivation_Attribute_pin->setContainment(false);
+	m_pinActivation_Attribute_pin->setResolveProxies(true);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			m_pinActivation_Attribute_pin->setDefaultValueLiteral(defaultValue);
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
+	}
 	
 	m_pinActivation_Operation_fire_Token->setEType(nullptr);
 	m_pinActivation_Operation_fire_Token->setName("fire");
@@ -1577,6 +1753,28 @@ void ActionsPackageImpl::initializeReadSelfActionActivationContent()
 	m_readSelfActionActivation_Class->setInterface(false);
 	
 	
+	m_readSelfActionActivation_Attribute_readSelfAction->setName("readSelfAction");
+	m_readSelfActionActivation_Attribute_readSelfAction->setEType(uml::UmlPackage::eInstance()->getReadSelfAction_Class());
+	m_readSelfActionActivation_Attribute_readSelfAction->setLowerBound(1);
+	m_readSelfActionActivation_Attribute_readSelfAction->setUpperBound(1);
+	m_readSelfActionActivation_Attribute_readSelfAction->setTransient(false);
+	m_readSelfActionActivation_Attribute_readSelfAction->setVolatile(false);
+	m_readSelfActionActivation_Attribute_readSelfAction->setChangeable(true);
+	m_readSelfActionActivation_Attribute_readSelfAction->setUnsettable(false);
+	m_readSelfActionActivation_Attribute_readSelfAction->setUnique(true);
+	m_readSelfActionActivation_Attribute_readSelfAction->setDerived(false);
+	m_readSelfActionActivation_Attribute_readSelfAction->setOrdered(true);
+	m_readSelfActionActivation_Attribute_readSelfAction->setContainment(false);
+	m_readSelfActionActivation_Attribute_readSelfAction->setResolveProxies(true);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			m_readSelfActionActivation_Attribute_readSelfAction->setDefaultValueLiteral(defaultValue);
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
+	}
 	
 	m_readSelfActionActivation_Operation_doAction->setEType(nullptr);
 	m_readSelfActionActivation_Operation_doAction->setName("doAction");
@@ -1596,6 +1794,28 @@ void ActionsPackageImpl::initializeReadStructuralFeatureActionActivationContent(
 	m_readStructuralFeatureActionActivation_Class->setInterface(false);
 	
 	
+	m_readStructuralFeatureActionActivation_Attribute_readStructuralFeatureAction->setName("readStructuralFeatureAction");
+	m_readStructuralFeatureActionActivation_Attribute_readStructuralFeatureAction->setEType(uml::UmlPackage::eInstance()->getReadStructuralFeatureAction_Class());
+	m_readStructuralFeatureActionActivation_Attribute_readStructuralFeatureAction->setLowerBound(1);
+	m_readStructuralFeatureActionActivation_Attribute_readStructuralFeatureAction->setUpperBound(1);
+	m_readStructuralFeatureActionActivation_Attribute_readStructuralFeatureAction->setTransient(false);
+	m_readStructuralFeatureActionActivation_Attribute_readStructuralFeatureAction->setVolatile(false);
+	m_readStructuralFeatureActionActivation_Attribute_readStructuralFeatureAction->setChangeable(true);
+	m_readStructuralFeatureActionActivation_Attribute_readStructuralFeatureAction->setUnsettable(false);
+	m_readStructuralFeatureActionActivation_Attribute_readStructuralFeatureAction->setUnique(true);
+	m_readStructuralFeatureActionActivation_Attribute_readStructuralFeatureAction->setDerived(false);
+	m_readStructuralFeatureActionActivation_Attribute_readStructuralFeatureAction->setOrdered(true);
+	m_readStructuralFeatureActionActivation_Attribute_readStructuralFeatureAction->setContainment(false);
+	m_readStructuralFeatureActionActivation_Attribute_readStructuralFeatureAction->setResolveProxies(true);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			m_readStructuralFeatureActionActivation_Attribute_readStructuralFeatureAction->setDefaultValueLiteral(defaultValue);
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
+	}
 	
 	m_readStructuralFeatureActionActivation_Operation_doAction->setEType(nullptr);
 	m_readStructuralFeatureActionActivation_Operation_doAction->setName("doAction");
@@ -1659,6 +1879,28 @@ void ActionsPackageImpl::initializeRemoveStructuralFeatureValueActivationContent
 	m_removeStructuralFeatureValueActivation_Class->setInterface(false);
 	
 	
+	m_removeStructuralFeatureValueActivation_Attribute_removeStructuralFeatureValueAction->setName("removeStructuralFeatureValueAction");
+	m_removeStructuralFeatureValueActivation_Attribute_removeStructuralFeatureValueAction->setEType(uml::UmlPackage::eInstance()->getRemoveStructuralFeatureValueAction_Class());
+	m_removeStructuralFeatureValueActivation_Attribute_removeStructuralFeatureValueAction->setLowerBound(1);
+	m_removeStructuralFeatureValueActivation_Attribute_removeStructuralFeatureValueAction->setUpperBound(1);
+	m_removeStructuralFeatureValueActivation_Attribute_removeStructuralFeatureValueAction->setTransient(false);
+	m_removeStructuralFeatureValueActivation_Attribute_removeStructuralFeatureValueAction->setVolatile(false);
+	m_removeStructuralFeatureValueActivation_Attribute_removeStructuralFeatureValueAction->setChangeable(true);
+	m_removeStructuralFeatureValueActivation_Attribute_removeStructuralFeatureValueAction->setUnsettable(false);
+	m_removeStructuralFeatureValueActivation_Attribute_removeStructuralFeatureValueAction->setUnique(true);
+	m_removeStructuralFeatureValueActivation_Attribute_removeStructuralFeatureValueAction->setDerived(false);
+	m_removeStructuralFeatureValueActivation_Attribute_removeStructuralFeatureValueAction->setOrdered(true);
+	m_removeStructuralFeatureValueActivation_Attribute_removeStructuralFeatureValueAction->setContainment(false);
+	m_removeStructuralFeatureValueActivation_Attribute_removeStructuralFeatureValueAction->setResolveProxies(true);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			m_removeStructuralFeatureValueActivation_Attribute_removeStructuralFeatureValueAction->setDefaultValueLiteral(defaultValue);
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
+	}
 	
 	m_removeStructuralFeatureValueActivation_Operation_doAction->setEType(nullptr);
 	m_removeStructuralFeatureValueActivation_Operation_doAction->setName("doAction");

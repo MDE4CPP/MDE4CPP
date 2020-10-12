@@ -46,8 +46,7 @@ namespace fUML
 //*********************************
 namespace fUML::Semantics::CommonBehavior 
 {
-	/*!
-	 */
+	
 	class EventDispatchLoop : virtual public ecore::EObject 
 
 	{

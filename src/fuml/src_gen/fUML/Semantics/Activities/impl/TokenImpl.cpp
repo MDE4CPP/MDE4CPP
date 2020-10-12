@@ -27,6 +27,8 @@
 #include "fUML/Semantics/Loci/ExecutionFactory.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
 
+#include "uml/ActivityNode.hpp"
+
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
@@ -57,19 +59,7 @@ using namespace fUML::Semantics::Activities;
 // Constructor / Destructor
 //*********************************
 TokenImpl::TokenImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	//Init references
-	
+{	
 }
 
 TokenImpl::~TokenImpl()
@@ -78,7 +68,6 @@ TokenImpl::~TokenImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete Token "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -115,15 +104,20 @@ std::shared_ptr<ecore::EClass> TokenImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
+/*
+Getter & Setter for attribute withdrawn
+*/
+bool TokenImpl::isWithdrawn() const 
+{
+	return m_withdrawn;
+}
+
 void TokenImpl::setWithdrawn(bool _withdrawn)
 {
 	m_withdrawn = _withdrawn;
 } 
 
-bool TokenImpl::isWithdrawn() const 
-{
-	return m_withdrawn;
-}
+
 
 //*********************************
 // Operations
@@ -144,8 +138,10 @@ bool TokenImpl::equals(std::shared_ptr<fUML::Semantics::Activities::Token>  othe
 
 std::shared_ptr<fUML::Semantics::Values::Value> TokenImpl::getValue() const
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	return nullptr;
+	//end of body
 }
 
 bool TokenImpl::isControl()
@@ -197,19 +193,26 @@ void TokenImpl::withdraw()
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference holder
+*/
 std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivation > TokenImpl::getHolder() const
 {
 
     return m_holder;
 }
+
 void TokenImpl::setHolder(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> _holder)
 {
     m_holder = _holder;
 }
 
+
+
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<Token> TokenImpl::getThisTokenPtr() const

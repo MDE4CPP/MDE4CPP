@@ -46,8 +46,7 @@ namespace fUML
 //*********************************
 namespace fUML::Semantics::Loci 
 {
-	/*!
-	 */
+	
 	class SemanticVisitor : virtual public ecore::EObject 
 
 	{
@@ -68,12 +67,10 @@ namespace fUML::Semantics::Loci
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual void _beginIsolation() = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual void _endIsolation() = 0;
 			
 			

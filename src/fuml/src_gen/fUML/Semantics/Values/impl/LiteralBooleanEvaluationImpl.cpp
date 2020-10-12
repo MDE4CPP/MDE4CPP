@@ -60,17 +60,7 @@ using namespace fUML::Semantics::Values;
 // Constructor / Destructor
 //*********************************
 LiteralBooleanEvaluationImpl::LiteralBooleanEvaluationImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 LiteralBooleanEvaluationImpl::~LiteralBooleanEvaluationImpl()
@@ -79,7 +69,6 @@ LiteralBooleanEvaluationImpl::~LiteralBooleanEvaluationImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete LiteralBooleanEvaluation "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -139,6 +128,7 @@ return booleanValue;
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<LiteralBooleanEvaluation> LiteralBooleanEvaluationImpl::getThisLiteralBooleanEvaluationPtr() const

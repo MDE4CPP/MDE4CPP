@@ -64,17 +64,7 @@ using namespace fUML::Semantics::SimpleClassifiers;
 // Constructor / Destructor
 //*********************************
 UnlimitedNaturalValueImpl::UnlimitedNaturalValueImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 UnlimitedNaturalValueImpl::~UnlimitedNaturalValueImpl()
@@ -83,7 +73,6 @@ UnlimitedNaturalValueImpl::~UnlimitedNaturalValueImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete UnlimitedNaturalValue "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -120,15 +109,20 @@ std::shared_ptr<ecore::EClass> UnlimitedNaturalValueImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
+/*
+Getter & Setter for attribute value
+*/
+int UnlimitedNaturalValueImpl::getValue() const 
+{
+	return m_value;
+}
+
 void UnlimitedNaturalValueImpl::setValue(int _value)
 {
 	m_value = _value;
 } 
 
-int UnlimitedNaturalValueImpl::getValue() const 
-{
-	return m_value;
-}
+
 
 //*********************************
 // Operations
@@ -198,6 +192,7 @@ std::string UnlimitedNaturalValueImpl::toString()
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<UnlimitedNaturalValue> UnlimitedNaturalValueImpl::getThisUnlimitedNaturalValuePtr() const

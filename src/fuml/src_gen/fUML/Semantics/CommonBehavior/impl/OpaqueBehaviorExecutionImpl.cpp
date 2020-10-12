@@ -37,6 +37,8 @@
 
 #include <exception> // used in Persistence
 
+#include "uml/Behavior.hpp"
+
 #include "uml/Classifier.hpp"
 
 #include "fUML/Semantics/CommonBehavior/Execution.hpp"
@@ -69,17 +71,7 @@ using namespace fUML::Semantics::CommonBehavior;
 // Constructor / Destructor
 //*********************************
 OpaqueBehaviorExecutionImpl::OpaqueBehaviorExecutionImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 OpaqueBehaviorExecutionImpl::~OpaqueBehaviorExecutionImpl()
@@ -88,7 +80,6 @@ OpaqueBehaviorExecutionImpl::~OpaqueBehaviorExecutionImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete OpaqueBehaviorExecution "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -101,6 +92,8 @@ OpaqueBehaviorExecutionImpl::OpaqueBehaviorExecutionImpl(const OpaqueBehaviorExe
 
 	//copy references with no containment (soft copy)
 	
+	m_behavior  = obj.getBehavior();
+
 	m_context  = obj.getContext();
 
 	m_locus  = obj.getLocus();
@@ -209,6 +202,7 @@ void OpaqueBehaviorExecutionImpl::execute()
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<OpaqueBehaviorExecution> OpaqueBehaviorExecutionImpl::getThisOpaqueBehaviorExecutionPtr() const
