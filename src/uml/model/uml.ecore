@@ -4745,20 +4745,38 @@
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Retrieves the (only) return result parameter for this operation."/>
       </eAnnotations>
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="this->returnResult();"/>
+      </eAnnotations>
     </eOperations>
     <eOperations name="setIsOrdered" ordered="false" lowerBound="1">
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="m_isOrdered = newIsOrdered;"/>
+      </eAnnotations>
       <eParameters name="newIsOrdered" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//Boolean"/>
     </eOperations>
     <eOperations name="setIsUnique" ordered="false" lowerBound="1">
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="m_isUnique = newIsUnique;"/>
+      </eAnnotations>
       <eParameters name="newIsUnique" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//Boolean"/>
     </eOperations>
     <eOperations name="setLower" ordered="false" lowerBound="1">
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="m_lower = newLower;"/>
+      </eAnnotations>
       <eParameters name="newLower" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//Integer"/>
     </eOperations>
     <eOperations name="setType" ordered="false" lowerBound="1">
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="m_type = newType;"/>
+      </eAnnotations>
       <eParameters name="newType" ordered="false" lowerBound="1" eType="#//Type"/>
     </eOperations>
     <eOperations name="setUpper" ordered="false" lowerBound="1">
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="m_upper = newUpper;"/>
+      </eAnnotations>
       <eParameters name="newUpper" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//UnlimitedNatural"/>
     </eOperations>
     <eOperations name="isOrdered" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//Boolean">
@@ -4783,6 +4801,9 @@
     <eOperations name="returnResult" ordered="false" upperBound="-1" eType="#//Parameter">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The query returnResult() returns the set containing the return parameter of the Operation if one exists, otherwise, it returns an empty set&#xA;result = (ownedParameter->select (direction = ParameterDirectionKind::return)->asSet())&#xA;&lt;p>From package UML::Classification.&lt;/p>"/>
+      </eAnnotations>
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="&#x9;std::shared_ptr&lt;Bag&lt;uml::Parameter>> ownedParameters = this->getOwnedParameter();&#xA;&#x9;std::shared_ptr&lt;Bag&lt;uml::Parameter>> returnResult(new Bag&lt;uml::Parameter>);&#xA;&#xA;&#x9;for(std::shared_ptr&lt;uml::Parameter> p : *ownedParameters)&#xA;&#x9;{&#xA;&#x9;&#x9;if(p->getDirection() == uml::ParameterDirectionKind::RETURN)&#xA;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;returnResult->add(p);&#xA;&#x9;&#x9;&#x9;&#x9;break;&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;&#x9;&#xA;&#x9;return returnResult;"/>
       </eAnnotations>
     </eOperations>
     <eOperations name="getType" ordered="false" lowerBound="1" eType="#//Type">

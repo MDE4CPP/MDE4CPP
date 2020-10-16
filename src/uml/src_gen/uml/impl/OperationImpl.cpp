@@ -426,8 +426,10 @@ int OperationImpl::getLower()
 
 std::shared_ptr<uml::Parameter> OperationImpl::getReturnResult()
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	this->returnResult();
+	//end of body
 }
 
 
@@ -484,38 +486,62 @@ bool OperationImpl::only_body_for_query(Any diagnostics,std::map <   Any, Any > 
 
 std::shared_ptr<Bag<uml::Parameter> > OperationImpl::returnResult()
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+		std::shared_ptr<Bag<uml::Parameter>> ownedParameters = this->getOwnedParameter();
+	std::shared_ptr<Bag<uml::Parameter>> returnResult(new Bag<uml::Parameter>);
+
+	for(std::shared_ptr<uml::Parameter> p : *ownedParameters)
+	{
+		if(p->getDirection() == uml::ParameterDirectionKind::RETURN)
+		{
+				returnResult->add(p);
+				break;
+		}
+	}
+	
+	return returnResult;
+	//end of body
 }
 
 void OperationImpl::setIsOrdered(bool newIsOrdered)
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	m_isOrdered = newIsOrdered;
+	//end of body
 }
 
 void OperationImpl::setIsUnique(bool newIsUnique)
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	m_isUnique = newIsUnique;
+	//end of body
 }
 
 void OperationImpl::setLower(int newLower)
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	m_lower = newLower;
+	//end of body
 }
 
 void OperationImpl::setType(std::shared_ptr<uml::Type>  newType)
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	m_type = newType;
+	//end of body
 }
 
 void OperationImpl::setUpper(int newUpper)
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	m_upper = newUpper;
+	//end of body
 }
 
 //*********************************
