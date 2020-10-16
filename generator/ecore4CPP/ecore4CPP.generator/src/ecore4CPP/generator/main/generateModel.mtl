@@ -72,14 +72,14 @@ namespace [element.generateNamespaceDefinition()/]
 [/for]
 
 [if (aClass.eSuperTypes->isEmpty() and not (aClass.name ='EObject'))]
-#include "ecore/EObject.hpp"
+#include "ecore/EModelElement.hpp"
 [/if]
 
 //*********************************
 namespace [aClass.generateNamespaceDefinition()/] 
 {
 	[aClass.generateDocumentation()/]
-	class [aClass.name.toUpperFirst()/] [if (aClass.eSuperTypes->isEmpty() and not (aClass.name ='EObject'))] : virtual public ecore::EObject 
+	class [aClass.name.toUpperFirst()/] [if (aClass.eSuperTypes->isEmpty() and not (aClass.name ='EObject'))] : virtual public ecore::EModelElement
 [else]
 [for (sClass : EClass | aClass.eSuperTypes->asOrderedSet()->sortedBy(name)) before (':') separator (',')]
 virtual public [ClassWithNamespace(aClass,sClass)/][/for]
