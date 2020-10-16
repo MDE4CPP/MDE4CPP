@@ -55,7 +55,7 @@ using namespace [aPackage.name/];
 	[generateExecutionPluginInitialization()/]
 
 	[comment create opaque behavior executions for operations /]
-	[for (anOperation : Operation | aPackage.getClassOperations())]
+	[for (anOperation : Operation | aPackage.getClassOperations()) ? (anOperation.method->size() > 0)]
 	[anOperation.generateOpaqueBehaviorForOperationExecution()/]
 	[/for]
 
@@ -370,7 +370,7 @@ return nullptr;
 
 [template public generateExecutionPluginDeinitialization(aPackage : Package)]
 /*clearing opaque behaviors from operations*/
-[for (anOperation : Operation | aPackage.getClassOperations())]
+[for (anOperation : Operation | aPackage.getClassOperations()) ? (anOperation.method->size() > 0)]
 [anOperation.generatePackageGetterCall()/]->getMethod()->erase(m_[anOperation.getFBPackageElement()/]);
 [/for]
 

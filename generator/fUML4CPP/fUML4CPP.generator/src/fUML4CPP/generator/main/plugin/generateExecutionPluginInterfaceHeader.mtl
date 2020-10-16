@@ -71,7 +71,7 @@ namespace [aPackage.name/]
 			std::shared_ptr<PSCS::Semantics::Loci::CS_Executor> m_executor;
 			std::shared_ptr<PSCS::Semantics::Loci::CS_ExecutionFactory> m_factory;
 			//OpaqueBehaviors for primitive prototypes for activity executions
-			[for (anOperation : Operation | aPackage.getClassOperations())]
+			[for (anOperation : Operation | aPackage.getClassOperations()) ? (anOperation.method->size() > 0)]
 			[if (not anOperation.name.oclIsUndefined())]
 			std::shared_ptr<uml::OpaqueBehavior> m_[anOperation.getFBPackageElement()/];
 			[/if]
