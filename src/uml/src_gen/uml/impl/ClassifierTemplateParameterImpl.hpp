@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class ClassifierTemplateParameterImpl :virtual public TemplateParameterImpl, virtual public ClassifierTemplateParameter 
+	class ClassifierTemplateParameterImpl : virtual public TemplateParameterImpl, virtual public ClassifierTemplateParameter 
 	{
 		public: 
 			ClassifierTemplateParameterImpl(const ClassifierTemplateParameterImpl & obj);

@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class CollaborationUseImpl :virtual public NamedElementImpl, virtual public CollaborationUse 
+	class CollaborationUseImpl : virtual public NamedElementImpl, virtual public CollaborationUse 
 	{
 		public: 
 			CollaborationUseImpl(const CollaborationUseImpl & obj);

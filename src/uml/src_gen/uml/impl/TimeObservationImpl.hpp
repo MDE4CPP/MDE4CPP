@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class TimeObservationImpl :virtual public ObservationImpl, virtual public TimeObservation 
+	class TimeObservationImpl : virtual public ObservationImpl, virtual public TimeObservation 
 	{
 		public: 
 			TimeObservationImpl(const TimeObservationImpl & obj);

@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class ClearStructuralFeatureActionImpl :virtual public StructuralFeatureActionImpl, virtual public ClearStructuralFeatureAction 
+	class ClearStructuralFeatureActionImpl : virtual public StructuralFeatureActionImpl, virtual public ClearStructuralFeatureAction 
 	{
 		public: 
 			ClearStructuralFeatureActionImpl(const ClearStructuralFeatureActionImpl & obj);

@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class CommunicationPathImpl :virtual public AssociationImpl, virtual public CommunicationPath 
+	class CommunicationPathImpl : virtual public AssociationImpl, virtual public CommunicationPath 
 	{
 		public: 
 			CommunicationPathImpl(const CommunicationPathImpl & obj);

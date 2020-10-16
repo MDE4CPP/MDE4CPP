@@ -20,7 +20,7 @@
 //*********************************
 namespace uml 
 {
-	class InstanceSpecificationImpl :virtual public DeployedArtifactImpl, virtual public DeploymentTargetImpl, virtual public PackageableElementImpl, virtual public InstanceSpecification 
+	class InstanceSpecificationImpl : virtual public DeployedArtifactImpl, virtual public DeploymentTargetImpl, virtual public PackageableElementImpl, virtual public InstanceSpecification 
 	{
 		public: 
 			InstanceSpecificationImpl(const InstanceSpecificationImpl & obj);

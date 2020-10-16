@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class SlotImpl :virtual public ElementImpl, virtual public Slot 
+	class SlotImpl : virtual public ElementImpl, virtual public Slot 
 	{
 		public: 
 			SlotImpl(const SlotImpl & obj);

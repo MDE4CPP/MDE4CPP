@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class GeneralOrderingImpl :virtual public NamedElementImpl, virtual public GeneralOrdering 
+	class GeneralOrderingImpl : virtual public NamedElementImpl, virtual public GeneralOrdering 
 	{
 		public: 
 			GeneralOrderingImpl(const GeneralOrderingImpl & obj);

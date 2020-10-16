@@ -19,7 +19,7 @@
 //*********************************
 namespace uml 
 {
-	class CollaborationImpl :virtual public BehavioredClassifierImpl, virtual public StructuredClassifierImpl, virtual public Collaboration 
+	class CollaborationImpl : virtual public BehavioredClassifierImpl, virtual public StructuredClassifierImpl, virtual public Collaboration 
 	{
 		public: 
 			CollaborationImpl(const CollaborationImpl & obj);

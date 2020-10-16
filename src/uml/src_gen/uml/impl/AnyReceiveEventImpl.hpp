@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class AnyReceiveEventImpl :virtual public MessageEventImpl, virtual public AnyReceiveEvent 
+	class AnyReceiveEventImpl : virtual public MessageEventImpl, virtual public AnyReceiveEvent 
 	{
 		public: 
 			AnyReceiveEventImpl(const AnyReceiveEventImpl & obj);

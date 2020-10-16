@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class TriggerImpl :virtual public NamedElementImpl, virtual public Trigger 
+	class TriggerImpl : virtual public NamedElementImpl, virtual public Trigger 
 	{
 		public: 
 			TriggerImpl(const TriggerImpl & obj);

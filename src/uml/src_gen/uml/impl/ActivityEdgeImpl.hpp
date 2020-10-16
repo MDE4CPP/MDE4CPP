@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class ActivityEdgeImpl :virtual public RedefinableElementImpl, virtual public ActivityEdge 
+	class ActivityEdgeImpl : virtual public RedefinableElementImpl, virtual public ActivityEdge 
 	{
 		public: 
 			ActivityEdgeImpl(const ActivityEdgeImpl & obj);

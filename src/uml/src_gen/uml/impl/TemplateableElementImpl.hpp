@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class TemplateableElementImpl :virtual public ElementImpl, virtual public TemplateableElement 
+	class TemplateableElementImpl : virtual public ElementImpl, virtual public TemplateableElement 
 	{
 		public: 
 			TemplateableElementImpl(const TemplateableElementImpl & obj);

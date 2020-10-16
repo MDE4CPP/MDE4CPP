@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class ElementImpl :virtual public ObjectImpl, virtual public Element 
+	class ElementImpl : virtual public ObjectImpl, virtual public Element 
 	{
 		public: 
 			ElementImpl(const ElementImpl & obj);

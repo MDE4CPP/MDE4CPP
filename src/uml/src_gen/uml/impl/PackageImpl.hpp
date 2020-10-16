@@ -20,7 +20,7 @@
 //*********************************
 namespace uml 
 {
-	class PackageImpl :virtual public NamespaceImpl, virtual public PackageableElementImpl, virtual public TemplateableElementImpl, virtual public Package 
+	class PackageImpl : virtual public NamespaceImpl, virtual public PackageableElementImpl, virtual public TemplateableElementImpl, virtual public Package 
 	{
 		public: 
 			PackageImpl(const PackageImpl & obj);

@@ -19,7 +19,7 @@
 //*********************************
 namespace uml 
 {
-	class ObjectNodeImpl :virtual public ActivityNodeImpl, virtual public TypedElementImpl, virtual public ObjectNode 
+	class ObjectNodeImpl : virtual public ActivityNodeImpl, virtual public TypedElementImpl, virtual public ObjectNode 
 	{
 		public: 
 			ObjectNodeImpl(const ObjectNodeImpl & obj);

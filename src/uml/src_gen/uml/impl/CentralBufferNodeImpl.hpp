@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class CentralBufferNodeImpl :virtual public ObjectNodeImpl, virtual public CentralBufferNode 
+	class CentralBufferNodeImpl : virtual public ObjectNodeImpl, virtual public CentralBufferNode 
 	{
 		public: 
 			CentralBufferNodeImpl(const CentralBufferNodeImpl & obj);

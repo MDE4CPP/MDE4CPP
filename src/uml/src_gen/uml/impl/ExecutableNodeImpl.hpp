@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class ExecutableNodeImpl :virtual public ActivityNodeImpl, virtual public ExecutableNode 
+	class ExecutableNodeImpl : virtual public ActivityNodeImpl, virtual public ExecutableNode 
 	{
 		public: 
 			ExecutableNodeImpl(const ExecutableNodeImpl & obj);

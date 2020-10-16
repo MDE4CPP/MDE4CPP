@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class InterfaceRealizationImpl :virtual public RealizationImpl, virtual public InterfaceRealization 
+	class InterfaceRealizationImpl : virtual public RealizationImpl, virtual public InterfaceRealization 
 	{
 		public: 
 			InterfaceRealizationImpl(const InterfaceRealizationImpl & obj);

@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class AcceptCallActionImpl :virtual public AcceptEventActionImpl, virtual public AcceptCallAction 
+	class AcceptCallActionImpl : virtual public AcceptEventActionImpl, virtual public AcceptCallAction 
 	{
 		public: 
 			AcceptCallActionImpl(const AcceptCallActionImpl & obj);

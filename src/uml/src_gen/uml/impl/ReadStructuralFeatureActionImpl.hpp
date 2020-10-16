@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class ReadStructuralFeatureActionImpl :virtual public StructuralFeatureActionImpl, virtual public ReadStructuralFeatureAction 
+	class ReadStructuralFeatureActionImpl : virtual public StructuralFeatureActionImpl, virtual public ReadStructuralFeatureAction 
 	{
 		public: 
 			ReadStructuralFeatureActionImpl(const ReadStructuralFeatureActionImpl & obj);

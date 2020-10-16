@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class ConnectorImpl :virtual public FeatureImpl, virtual public Connector 
+	class ConnectorImpl : virtual public FeatureImpl, virtual public Connector 
 	{
 		public: 
 			ConnectorImpl(const ConnectorImpl & obj);

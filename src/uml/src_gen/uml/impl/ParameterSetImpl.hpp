@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class ParameterSetImpl :virtual public NamedElementImpl, virtual public ParameterSet 
+	class ParameterSetImpl : virtual public NamedElementImpl, virtual public ParameterSet 
 	{
 		public: 
 			ParameterSetImpl(const ParameterSetImpl & obj);

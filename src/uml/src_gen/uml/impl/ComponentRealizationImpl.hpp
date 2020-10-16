@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class ComponentRealizationImpl :virtual public RealizationImpl, virtual public ComponentRealization 
+	class ComponentRealizationImpl : virtual public RealizationImpl, virtual public ComponentRealization 
 	{
 		public: 
 			ComponentRealizationImpl(const ComponentRealizationImpl & obj);

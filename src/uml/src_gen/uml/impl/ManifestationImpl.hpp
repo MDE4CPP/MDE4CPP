@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class ManifestationImpl :virtual public AbstractionImpl, virtual public Manifestation 
+	class ManifestationImpl : virtual public AbstractionImpl, virtual public Manifestation 
 	{
 		public: 
 			ManifestationImpl(const ManifestationImpl & obj);

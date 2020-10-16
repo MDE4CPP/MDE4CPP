@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class MessageEventImpl :virtual public EventImpl, virtual public MessageEvent 
+	class MessageEventImpl : virtual public EventImpl, virtual public MessageEvent 
 	{
 		public: 
 			MessageEventImpl(const MessageEventImpl & obj);

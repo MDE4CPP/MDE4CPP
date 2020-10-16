@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class ModelImpl :virtual public PackageImpl, virtual public Model 
+	class ModelImpl : virtual public PackageImpl, virtual public Model 
 	{
 		public: 
 			ModelImpl(const ModelImpl & obj);

@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class DirectedRelationshipImpl :virtual public RelationshipImpl, virtual public DirectedRelationship 
+	class DirectedRelationshipImpl : virtual public RelationshipImpl, virtual public DirectedRelationship 
 	{
 		public: 
 			DirectedRelationshipImpl(const DirectedRelationshipImpl & obj);

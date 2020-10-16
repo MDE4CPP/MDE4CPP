@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class ReduceActionImpl :virtual public ActionImpl, virtual public ReduceAction 
+	class ReduceActionImpl : virtual public ActionImpl, virtual public ReduceAction 
 	{
 		public: 
 			ReduceActionImpl(const ReduceActionImpl & obj);

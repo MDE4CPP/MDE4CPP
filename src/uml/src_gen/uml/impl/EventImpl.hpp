@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class EventImpl :virtual public PackageableElementImpl, virtual public Event 
+	class EventImpl : virtual public PackageableElementImpl, virtual public Event 
 	{
 		public: 
 			EventImpl(const EventImpl & obj);

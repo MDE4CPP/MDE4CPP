@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class ReadLinkObjectEndActionImpl :virtual public ActionImpl, virtual public ReadLinkObjectEndAction 
+	class ReadLinkObjectEndActionImpl : virtual public ActionImpl, virtual public ReadLinkObjectEndAction 
 	{
 		public: 
 			ReadLinkObjectEndActionImpl(const ReadLinkObjectEndActionImpl & obj);

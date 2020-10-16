@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class FunctionBehaviorImpl :virtual public OpaqueBehaviorImpl, virtual public FunctionBehavior 
+	class FunctionBehaviorImpl : virtual public OpaqueBehaviorImpl, virtual public FunctionBehavior 
 	{
 		public: 
 			FunctionBehaviorImpl(const FunctionBehaviorImpl & obj);

@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class StateInvariantImpl :virtual public InteractionFragmentImpl, virtual public StateInvariant 
+	class StateInvariantImpl : virtual public InteractionFragmentImpl, virtual public StateInvariant 
 	{
 		public: 
 			StateInvariantImpl(const StateInvariantImpl & obj);

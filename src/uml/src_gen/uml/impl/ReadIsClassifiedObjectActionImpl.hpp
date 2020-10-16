@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class ReadIsClassifiedObjectActionImpl :virtual public ActionImpl, virtual public ReadIsClassifiedObjectAction 
+	class ReadIsClassifiedObjectActionImpl : virtual public ActionImpl, virtual public ReadIsClassifiedObjectAction 
 	{
 		public: 
 			ReadIsClassifiedObjectActionImpl(const ReadIsClassifiedObjectActionImpl & obj);

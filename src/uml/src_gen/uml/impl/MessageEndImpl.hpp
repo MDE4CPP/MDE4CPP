@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class MessageEndImpl :virtual public NamedElementImpl, virtual public MessageEnd 
+	class MessageEndImpl : virtual public NamedElementImpl, virtual public MessageEnd 
 	{
 		public: 
 			MessageEndImpl(const MessageEndImpl & obj);

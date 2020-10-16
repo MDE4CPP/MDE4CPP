@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class GeneralizationImpl :virtual public DirectedRelationshipImpl, virtual public Generalization 
+	class GeneralizationImpl : virtual public DirectedRelationshipImpl, virtual public Generalization 
 	{
 		public: 
 			GeneralizationImpl(const GeneralizationImpl & obj);

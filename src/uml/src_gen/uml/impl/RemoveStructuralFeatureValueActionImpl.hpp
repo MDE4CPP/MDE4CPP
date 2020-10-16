@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class RemoveStructuralFeatureValueActionImpl :virtual public WriteStructuralFeatureActionImpl, virtual public RemoveStructuralFeatureValueAction 
+	class RemoveStructuralFeatureValueActionImpl : virtual public WriteStructuralFeatureActionImpl, virtual public RemoveStructuralFeatureValueAction 
 	{
 		public: 
 			RemoveStructuralFeatureValueActionImpl(const RemoveStructuralFeatureValueActionImpl & obj);

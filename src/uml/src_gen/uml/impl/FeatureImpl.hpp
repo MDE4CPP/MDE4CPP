@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class FeatureImpl :virtual public RedefinableElementImpl, virtual public Feature 
+	class FeatureImpl : virtual public RedefinableElementImpl, virtual public Feature 
 	{
 		public: 
 			FeatureImpl(const FeatureImpl & obj);

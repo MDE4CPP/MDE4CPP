@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class MergeNodeImpl :virtual public ControlNodeImpl, virtual public MergeNode 
+	class MergeNodeImpl : virtual public ControlNodeImpl, virtual public MergeNode 
 	{
 		public: 
 			MergeNodeImpl(const MergeNodeImpl & obj);

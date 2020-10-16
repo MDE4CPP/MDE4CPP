@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class SubstitutionImpl :virtual public RealizationImpl, virtual public Substitution 
+	class SubstitutionImpl : virtual public RealizationImpl, virtual public Substitution 
 	{
 		public: 
 			SubstitutionImpl(const SubstitutionImpl & obj);

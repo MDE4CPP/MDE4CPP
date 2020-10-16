@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class ReadVariableActionImpl :virtual public VariableActionImpl, virtual public ReadVariableAction 
+	class ReadVariableActionImpl : virtual public VariableActionImpl, virtual public ReadVariableAction 
 	{
 		public: 
 			ReadVariableActionImpl(const ReadVariableActionImpl & obj);

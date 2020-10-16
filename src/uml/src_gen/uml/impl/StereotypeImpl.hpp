@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class StereotypeImpl :virtual public ClassImpl, virtual public Stereotype 
+	class StereotypeImpl : virtual public ClassImpl, virtual public Stereotype 
 	{
 		public: 
 			StereotypeImpl(const StereotypeImpl & obj);

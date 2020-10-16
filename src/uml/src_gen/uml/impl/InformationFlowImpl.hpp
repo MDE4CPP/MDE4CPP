@@ -19,7 +19,7 @@
 //*********************************
 namespace uml 
 {
-	class InformationFlowImpl :virtual public DirectedRelationshipImpl, virtual public PackageableElementImpl, virtual public InformationFlow 
+	class InformationFlowImpl : virtual public DirectedRelationshipImpl, virtual public PackageableElementImpl, virtual public InformationFlow 
 	{
 		public: 
 			InformationFlowImpl(const InformationFlowImpl & obj);

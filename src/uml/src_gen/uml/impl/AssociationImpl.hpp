@@ -19,7 +19,7 @@
 //*********************************
 namespace uml 
 {
-	class AssociationImpl :virtual public ClassifierImpl, virtual public RelationshipImpl, virtual public Association 
+	class AssociationImpl : virtual public ClassifierImpl, virtual public RelationshipImpl, virtual public Association 
 	{
 		public: 
 			AssociationImpl(const AssociationImpl & obj);

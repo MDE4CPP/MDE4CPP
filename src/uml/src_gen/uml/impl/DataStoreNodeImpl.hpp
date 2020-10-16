@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class DataStoreNodeImpl :virtual public CentralBufferNodeImpl, virtual public DataStoreNode 
+	class DataStoreNodeImpl : virtual public CentralBufferNodeImpl, virtual public DataStoreNode 
 	{
 		public: 
 			DataStoreNodeImpl(const DataStoreNodeImpl & obj);

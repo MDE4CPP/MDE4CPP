@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class ExtensionEndImpl :virtual public PropertyImpl, virtual public ExtensionEnd 
+	class ExtensionEndImpl : virtual public PropertyImpl, virtual public ExtensionEnd 
 	{
 		public: 
 			ExtensionEndImpl(const ExtensionEndImpl & obj);

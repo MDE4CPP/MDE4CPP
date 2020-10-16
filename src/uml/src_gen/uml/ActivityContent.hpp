@@ -45,13 +45,13 @@ namespace uml
 
 // enum includes
 
-#include "ecore/EObject.hpp"
+#include "ecore/EModelElement.hpp"
 
 //*********************************
 namespace uml 
 {
 	
-	class ActivityContent : virtual public ecore::EObject 
+	class ActivityContent : virtual public ecore::EModelElement
 
 	{
 		public:

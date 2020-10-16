@@ -20,7 +20,7 @@
 //*********************************
 namespace uml 
 {
-	class StructuralFeatureImpl :virtual public FeatureImpl, virtual public MultiplicityElementImpl, virtual public TypedElementImpl, virtual public StructuralFeature 
+	class StructuralFeatureImpl : virtual public FeatureImpl, virtual public MultiplicityElementImpl, virtual public TypedElementImpl, virtual public StructuralFeature 
 	{
 		public: 
 			StructuralFeatureImpl(const StructuralFeatureImpl & obj);

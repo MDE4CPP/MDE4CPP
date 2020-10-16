@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class ClauseImpl :virtual public ElementImpl, virtual public Clause 
+	class ClauseImpl : virtual public ElementImpl, virtual public Clause 
 	{
 		public: 
 			ClauseImpl(const ClauseImpl & obj);

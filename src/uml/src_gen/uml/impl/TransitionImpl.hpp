@@ -19,7 +19,7 @@
 //*********************************
 namespace uml 
 {
-	class TransitionImpl :virtual public NamespaceImpl, virtual public RedefinableElementImpl, virtual public Transition 
+	class TransitionImpl : virtual public NamespaceImpl, virtual public RedefinableElementImpl, virtual public Transition 
 	{
 		public: 
 			TransitionImpl(const TransitionImpl & obj);

@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class InputPinImpl :virtual public PinImpl, virtual public InputPin 
+	class InputPinImpl : virtual public PinImpl, virtual public InputPin 
 	{
 		public: 
 			InputPinImpl(const InputPinImpl & obj);

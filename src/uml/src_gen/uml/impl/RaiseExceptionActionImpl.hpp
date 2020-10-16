@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class RaiseExceptionActionImpl :virtual public ActionImpl, virtual public RaiseExceptionAction 
+	class RaiseExceptionActionImpl : virtual public ActionImpl, virtual public RaiseExceptionAction 
 	{
 		public: 
 			RaiseExceptionActionImpl(const RaiseExceptionActionImpl & obj);

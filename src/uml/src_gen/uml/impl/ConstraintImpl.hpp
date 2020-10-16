@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class ConstraintImpl :virtual public PackageableElementImpl, virtual public Constraint 
+	class ConstraintImpl : virtual public PackageableElementImpl, virtual public Constraint 
 	{
 		public: 
 			ConstraintImpl(const ConstraintImpl & obj);

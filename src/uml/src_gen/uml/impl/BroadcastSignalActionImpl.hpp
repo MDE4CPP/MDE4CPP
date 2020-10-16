@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class BroadcastSignalActionImpl :virtual public InvocationActionImpl, virtual public BroadcastSignalAction 
+	class BroadcastSignalActionImpl : virtual public InvocationActionImpl, virtual public BroadcastSignalAction 
 	{
 		public: 
 			BroadcastSignalActionImpl(const BroadcastSignalActionImpl & obj);

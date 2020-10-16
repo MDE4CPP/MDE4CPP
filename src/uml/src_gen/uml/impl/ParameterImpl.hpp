@@ -19,7 +19,7 @@
 //*********************************
 namespace uml 
 {
-	class ParameterImpl :virtual public ConnectableElementImpl, virtual public MultiplicityElementImpl, virtual public Parameter 
+	class ParameterImpl : virtual public ConnectableElementImpl, virtual public MultiplicityElementImpl, virtual public Parameter 
 	{
 		public: 
 			ParameterImpl(const ParameterImpl & obj);

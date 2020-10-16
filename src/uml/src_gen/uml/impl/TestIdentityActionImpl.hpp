@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class TestIdentityActionImpl :virtual public ActionImpl, virtual public TestIdentityAction 
+	class TestIdentityActionImpl : virtual public ActionImpl, virtual public TestIdentityAction 
 	{
 		public: 
 			TestIdentityActionImpl(const TestIdentityActionImpl & obj);

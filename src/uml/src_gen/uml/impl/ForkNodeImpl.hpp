@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class ForkNodeImpl :virtual public ControlNodeImpl, virtual public ForkNode 
+	class ForkNodeImpl : virtual public ControlNodeImpl, virtual public ForkNode 
 	{
 		public: 
 			ForkNodeImpl(const ForkNodeImpl & obj);

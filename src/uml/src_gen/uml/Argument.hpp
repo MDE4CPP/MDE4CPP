@@ -45,7 +45,7 @@ namespace uml
 
 // enum includes
 
-#include "ecore/EObject.hpp"
+#include "ecore/EModelElement.hpp"
 
 //*********************************
 namespace uml 
@@ -56,7 +56,7 @@ namespace uml
 	This Element was merged from mof::Reflection package. 
 	*/
 	
-	class Argument : virtual public ecore::EObject 
+	class Argument : virtual public ecore::EModelElement
 
 	{
 		public:

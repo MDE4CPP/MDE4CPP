@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class CallOperationActionImpl :virtual public CallActionImpl, virtual public CallOperationAction 
+	class CallOperationActionImpl : virtual public CallActionImpl, virtual public CallOperationAction 
 	{
 		public: 
 			CallOperationActionImpl(const CallOperationActionImpl & obj);

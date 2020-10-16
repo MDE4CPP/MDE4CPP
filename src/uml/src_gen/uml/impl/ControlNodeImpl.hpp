@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class ControlNodeImpl :virtual public ActivityNodeImpl, virtual public ControlNode 
+	class ControlNodeImpl : virtual public ActivityNodeImpl, virtual public ControlNode 
 	{
 		public: 
 			ControlNodeImpl(const ControlNodeImpl & obj);

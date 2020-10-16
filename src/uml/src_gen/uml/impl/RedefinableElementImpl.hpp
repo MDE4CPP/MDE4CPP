@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class RedefinableElementImpl :virtual public NamedElementImpl, virtual public RedefinableElement 
+	class RedefinableElementImpl : virtual public NamedElementImpl, virtual public RedefinableElement 
 	{
 		public: 
 			RedefinableElementImpl(const RedefinableElementImpl & obj);

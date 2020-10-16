@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class ExceptionHandlerImpl :virtual public ElementImpl, virtual public ExceptionHandler 
+	class ExceptionHandlerImpl : virtual public ElementImpl, virtual public ExceptionHandler 
 	{
 		public: 
 			ExceptionHandlerImpl(const ExceptionHandlerImpl & obj);

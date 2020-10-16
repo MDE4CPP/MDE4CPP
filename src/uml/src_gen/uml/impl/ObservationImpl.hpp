@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class ObservationImpl :virtual public PackageableElementImpl, virtual public Observation 
+	class ObservationImpl : virtual public PackageableElementImpl, virtual public Observation 
 	{
 		public: 
 			ObservationImpl(const ObservationImpl & obj);

@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class TimeEventImpl :virtual public EventImpl, virtual public TimeEvent 
+	class TimeEventImpl : virtual public EventImpl, virtual public TimeEvent 
 	{
 		public: 
 			TimeEventImpl(const TimeEventImpl & obj);

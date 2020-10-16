@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class ConsiderIgnoreFragmentImpl :virtual public CombinedFragmentImpl, virtual public ConsiderIgnoreFragment 
+	class ConsiderIgnoreFragmentImpl : virtual public CombinedFragmentImpl, virtual public ConsiderIgnoreFragment 
 	{
 		public: 
 			ConsiderIgnoreFragmentImpl(const ConsiderIgnoreFragmentImpl & obj);

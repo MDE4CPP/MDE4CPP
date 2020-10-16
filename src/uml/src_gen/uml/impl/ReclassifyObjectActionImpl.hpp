@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class ReclassifyObjectActionImpl :virtual public ActionImpl, virtual public ReclassifyObjectAction 
+	class ReclassifyObjectActionImpl : virtual public ActionImpl, virtual public ReclassifyObjectAction 
 	{
 		public: 
 			ReclassifyObjectActionImpl(const ReclassifyObjectActionImpl & obj);

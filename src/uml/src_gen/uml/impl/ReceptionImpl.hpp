@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class ReceptionImpl :virtual public BehavioralFeatureImpl, virtual public Reception 
+	class ReceptionImpl : virtual public BehavioralFeatureImpl, virtual public Reception 
 	{
 		public: 
 			ReceptionImpl(const ReceptionImpl & obj);

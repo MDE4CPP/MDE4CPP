@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class DeploymentTargetImpl :virtual public NamedElementImpl, virtual public DeploymentTarget 
+	class DeploymentTargetImpl : virtual public NamedElementImpl, virtual public DeploymentTarget 
 	{
 		public: 
 			DeploymentTargetImpl(const DeploymentTargetImpl & obj);

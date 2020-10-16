@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class PrimitiveTypeImpl :virtual public DataTypeImpl, virtual public PrimitiveType 
+	class PrimitiveTypeImpl : virtual public DataTypeImpl, virtual public PrimitiveType 
 	{
 		public: 
 			PrimitiveTypeImpl(const PrimitiveTypeImpl & obj);

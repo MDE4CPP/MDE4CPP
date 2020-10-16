@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class InformationItemImpl :virtual public ClassifierImpl, virtual public InformationItem 
+	class InformationItemImpl : virtual public ClassifierImpl, virtual public InformationItem 
 	{
 		public: 
 			InformationItemImpl(const InformationItemImpl & obj);

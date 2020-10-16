@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class JoinNodeImpl :virtual public ControlNodeImpl, virtual public JoinNode 
+	class JoinNodeImpl : virtual public ControlNodeImpl, virtual public JoinNode 
 	{
 		public: 
 			JoinNodeImpl(const JoinNodeImpl & obj);

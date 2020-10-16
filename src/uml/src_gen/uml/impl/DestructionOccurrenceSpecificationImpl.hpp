@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class DestructionOccurrenceSpecificationImpl :virtual public MessageOccurrenceSpecificationImpl, virtual public DestructionOccurrenceSpecification 
+	class DestructionOccurrenceSpecificationImpl : virtual public MessageOccurrenceSpecificationImpl, virtual public DestructionOccurrenceSpecification 
 	{
 		public: 
 			DestructionOccurrenceSpecificationImpl(const DestructionOccurrenceSpecificationImpl & obj);

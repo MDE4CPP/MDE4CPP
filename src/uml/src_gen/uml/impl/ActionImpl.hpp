@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class ActionImpl :virtual public ExecutableNodeImpl, virtual public Action 
+	class ActionImpl : virtual public ExecutableNodeImpl, virtual public Action 
 	{
 		public: 
 			ActionImpl(const ActionImpl & obj);

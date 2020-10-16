@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class FinalNodeImpl :virtual public ControlNodeImpl, virtual public FinalNode 
+	class FinalNodeImpl : virtual public ControlNodeImpl, virtual public FinalNode 
 	{
 		public: 
 			FinalNodeImpl(const FinalNodeImpl & obj);

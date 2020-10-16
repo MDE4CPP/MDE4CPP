@@ -19,7 +19,7 @@
 //*********************************
 namespace uml 
 {
-	class ConnectableElementImpl :virtual public ParameterableElementImpl, virtual public TypedElementImpl, virtual public ConnectableElement 
+	class ConnectableElementImpl : virtual public ParameterableElementImpl, virtual public TypedElementImpl, virtual public ConnectableElement 
 	{
 		public: 
 			ConnectableElementImpl(const ConnectableElementImpl & obj);

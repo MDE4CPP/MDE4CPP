@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class GeneralizationSetImpl :virtual public PackageableElementImpl, virtual public GeneralizationSet 
+	class GeneralizationSetImpl : virtual public PackageableElementImpl, virtual public GeneralizationSet 
 	{
 		public: 
 			GeneralizationSetImpl(const GeneralizationSetImpl & obj);

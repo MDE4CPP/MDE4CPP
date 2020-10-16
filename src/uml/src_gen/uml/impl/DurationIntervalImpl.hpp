@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class DurationIntervalImpl :virtual public IntervalImpl, virtual public DurationInterval 
+	class DurationIntervalImpl : virtual public IntervalImpl, virtual public DurationInterval 
 	{
 		public: 
 			DurationIntervalImpl(const DurationIntervalImpl & obj);

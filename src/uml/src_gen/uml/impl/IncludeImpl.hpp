@@ -19,7 +19,7 @@
 //*********************************
 namespace uml 
 {
-	class IncludeImpl :virtual public DirectedRelationshipImpl, virtual public NamedElementImpl, virtual public Include 
+	class IncludeImpl : virtual public DirectedRelationshipImpl, virtual public NamedElementImpl, virtual public Include 
 	{
 		public: 
 			IncludeImpl(const IncludeImpl & obj);

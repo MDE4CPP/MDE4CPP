@@ -19,7 +19,7 @@
 //*********************************
 namespace uml 
 {
-	class StringExpressionImpl :virtual public ExpressionImpl, virtual public TemplateableElementImpl, virtual public StringExpression 
+	class StringExpressionImpl : virtual public ExpressionImpl, virtual public TemplateableElementImpl, virtual public StringExpression 
 	{
 		public: 
 			StringExpressionImpl(const StringExpressionImpl & obj);

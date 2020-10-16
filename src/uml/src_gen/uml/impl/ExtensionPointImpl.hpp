@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class ExtensionPointImpl :virtual public RedefinableElementImpl, virtual public ExtensionPoint 
+	class ExtensionPointImpl : virtual public RedefinableElementImpl, virtual public ExtensionPoint 
 	{
 		public: 
 			ExtensionPointImpl(const ExtensionPointImpl & obj);

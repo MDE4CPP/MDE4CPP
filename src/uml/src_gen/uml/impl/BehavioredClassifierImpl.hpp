@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class BehavioredClassifierImpl :virtual public ClassifierImpl, virtual public BehavioredClassifier 
+	class BehavioredClassifierImpl : virtual public ClassifierImpl, virtual public BehavioredClassifier 
 	{
 		public: 
 			BehavioredClassifierImpl(const BehavioredClassifierImpl & obj);

@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class ConnectionPointReferenceImpl :virtual public VertexImpl, virtual public ConnectionPointReference 
+	class ConnectionPointReferenceImpl : virtual public VertexImpl, virtual public ConnectionPointReference 
 	{
 		public: 
 			ConnectionPointReferenceImpl(const ConnectionPointReferenceImpl & obj);

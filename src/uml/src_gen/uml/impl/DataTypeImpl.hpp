@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class DataTypeImpl :virtual public ClassifierImpl, virtual public DataType 
+	class DataTypeImpl : virtual public ClassifierImpl, virtual public DataType 
 	{
 		public: 
 			DataTypeImpl(const DataTypeImpl & obj);

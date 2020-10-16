@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class DeviceImpl :virtual public NodeImpl, virtual public Device 
+	class DeviceImpl : virtual public NodeImpl, virtual public Device 
 	{
 		public: 
 			DeviceImpl(const DeviceImpl & obj);

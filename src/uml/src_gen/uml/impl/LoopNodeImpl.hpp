@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class LoopNodeImpl :virtual public StructuredActivityNodeImpl, virtual public LoopNode 
+	class LoopNodeImpl : virtual public StructuredActivityNodeImpl, virtual public LoopNode 
 	{
 		public: 
 			LoopNodeImpl(const LoopNodeImpl & obj);

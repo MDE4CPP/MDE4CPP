@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class PartDecompositionImpl :virtual public InteractionUseImpl, virtual public PartDecomposition 
+	class PartDecompositionImpl : virtual public InteractionUseImpl, virtual public PartDecomposition 
 	{
 		public: 
 			PartDecompositionImpl(const PartDecompositionImpl & obj);

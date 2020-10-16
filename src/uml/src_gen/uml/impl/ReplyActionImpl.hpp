@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class ReplyActionImpl :virtual public ActionImpl, virtual public ReplyAction 
+	class ReplyActionImpl : virtual public ActionImpl, virtual public ReplyAction 
 	{
 		public: 
 			ReplyActionImpl(const ReplyActionImpl & obj);

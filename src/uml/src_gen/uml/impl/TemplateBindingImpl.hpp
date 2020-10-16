@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class TemplateBindingImpl :virtual public DirectedRelationshipImpl, virtual public TemplateBinding 
+	class TemplateBindingImpl : virtual public DirectedRelationshipImpl, virtual public TemplateBinding 
 	{
 		public: 
 			TemplateBindingImpl(const TemplateBindingImpl & obj);

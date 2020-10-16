@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class InitialNodeImpl :virtual public ControlNodeImpl, virtual public InitialNode 
+	class InitialNodeImpl : virtual public ControlNodeImpl, virtual public InitialNode 
 	{
 		public: 
 			InitialNodeImpl(const InitialNodeImpl & obj);

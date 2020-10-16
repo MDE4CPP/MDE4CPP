@@ -63,7 +63,7 @@ namespace uml
 
 // enum includes
 
-#include "ecore/EObject.hpp"
+#include "ecore/EModelElement.hpp"
 
 //*********************************
 namespace uml 
@@ -75,7 +75,7 @@ namespace uml
 	<span style="background-color:#FF8000">This Element was merged from mof::Reflection package.</span>
 	*/
 	
-	class Object : virtual public ecore::EObject 
+	class Object : virtual public ecore::EModelElement
 
 	{
 		public:

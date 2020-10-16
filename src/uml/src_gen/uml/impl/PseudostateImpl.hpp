@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class PseudostateImpl :virtual public VertexImpl, virtual public Pseudostate 
+	class PseudostateImpl : virtual public VertexImpl, virtual public Pseudostate 
 	{
 		public: 
 			PseudostateImpl(const PseudostateImpl & obj);

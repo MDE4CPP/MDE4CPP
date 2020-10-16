@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class ActorImpl :virtual public BehavioredClassifierImpl, virtual public Actor 
+	class ActorImpl : virtual public BehavioredClassifierImpl, virtual public Actor 
 	{
 		public: 
 			ActorImpl(const ActorImpl & obj);

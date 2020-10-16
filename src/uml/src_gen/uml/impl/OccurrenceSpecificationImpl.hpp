@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class OccurrenceSpecificationImpl :virtual public InteractionFragmentImpl, virtual public OccurrenceSpecification 
+	class OccurrenceSpecificationImpl : virtual public InteractionFragmentImpl, virtual public OccurrenceSpecification 
 	{
 		public: 
 			OccurrenceSpecificationImpl(const OccurrenceSpecificationImpl & obj);

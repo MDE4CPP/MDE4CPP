@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class DeploymentImpl :virtual public DependencyImpl, virtual public Deployment 
+	class DeploymentImpl : virtual public DependencyImpl, virtual public Deployment 
 	{
 		public: 
 			DeploymentImpl(const DeploymentImpl & obj);

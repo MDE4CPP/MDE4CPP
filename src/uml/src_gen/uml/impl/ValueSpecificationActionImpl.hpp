@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class ValueSpecificationActionImpl :virtual public ActionImpl, virtual public ValueSpecificationAction 
+	class ValueSpecificationActionImpl : virtual public ActionImpl, virtual public ValueSpecificationAction 
 	{
 		public: 
 			ValueSpecificationActionImpl(const ValueSpecificationActionImpl & obj);

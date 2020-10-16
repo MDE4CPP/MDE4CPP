@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class ClearVariableActionImpl :virtual public VariableActionImpl, virtual public ClearVariableAction 
+	class ClearVariableActionImpl : virtual public VariableActionImpl, virtual public ClearVariableAction 
 	{
 		public: 
 			ClearVariableActionImpl(const ClearVariableActionImpl & obj);

@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class LifelineImpl :virtual public NamedElementImpl, virtual public Lifeline 
+	class LifelineImpl : virtual public NamedElementImpl, virtual public Lifeline 
 	{
 		public: 
 			LifelineImpl(const LifelineImpl & obj);

@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class ActivityImpl :virtual public BehaviorImpl, virtual public Activity 
+	class ActivityImpl : virtual public BehaviorImpl, virtual public Activity 
 	{
 		public: 
 			ActivityImpl(const ActivityImpl & obj);

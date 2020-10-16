@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class ImageImpl :virtual public ElementImpl, virtual public Image 
+	class ImageImpl : virtual public ElementImpl, virtual public Image 
 	{
 		public: 
 			ImageImpl(const ImageImpl & obj);

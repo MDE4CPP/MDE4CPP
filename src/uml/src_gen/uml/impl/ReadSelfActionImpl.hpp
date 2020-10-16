@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class ReadSelfActionImpl :virtual public ActionImpl, virtual public ReadSelfAction 
+	class ReadSelfActionImpl : virtual public ActionImpl, virtual public ReadSelfAction 
 	{
 		public: 
 			ReadSelfActionImpl(const ReadSelfActionImpl & obj);

@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class TimeExpressionImpl :virtual public ValueSpecificationImpl, virtual public TimeExpression 
+	class TimeExpressionImpl : virtual public ValueSpecificationImpl, virtual public TimeExpression 
 	{
 		public: 
 			TimeExpressionImpl(const TimeExpressionImpl & obj);

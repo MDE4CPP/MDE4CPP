@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class StateMachineImpl :virtual public BehaviorImpl, virtual public StateMachine 
+	class StateMachineImpl : virtual public BehaviorImpl, virtual public StateMachine 
 	{
 		public: 
 			StateMachineImpl(const StateMachineImpl & obj);

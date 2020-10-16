@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class ProfileApplicationImpl :virtual public DirectedRelationshipImpl, virtual public ProfileApplication 
+	class ProfileApplicationImpl : virtual public DirectedRelationshipImpl, virtual public ProfileApplication 
 	{
 		public: 
 			ProfileApplicationImpl(const ProfileApplicationImpl & obj);

@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class LiteralUnlimitedNaturalImpl :virtual public LiteralSpecificationImpl, virtual public LiteralUnlimitedNatural 
+	class LiteralUnlimitedNaturalImpl : virtual public LiteralSpecificationImpl, virtual public LiteralUnlimitedNatural 
 	{
 		public: 
 			LiteralUnlimitedNaturalImpl(const LiteralUnlimitedNaturalImpl & obj);

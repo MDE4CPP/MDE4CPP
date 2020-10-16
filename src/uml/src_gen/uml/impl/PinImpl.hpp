@@ -19,7 +19,7 @@
 //*********************************
 namespace uml 
 {
-	class PinImpl :virtual public MultiplicityElementImpl, virtual public ObjectNodeImpl, virtual public Pin 
+	class PinImpl : virtual public MultiplicityElementImpl, virtual public ObjectNodeImpl, virtual public Pin 
 	{
 		public: 
 			PinImpl(const PinImpl & obj);

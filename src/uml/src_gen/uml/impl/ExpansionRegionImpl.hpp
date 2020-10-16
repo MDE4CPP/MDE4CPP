@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class ExpansionRegionImpl :virtual public StructuredActivityNodeImpl, virtual public ExpansionRegion 
+	class ExpansionRegionImpl : virtual public StructuredActivityNodeImpl, virtual public ExpansionRegion 
 	{
 		public: 
 			ExpansionRegionImpl(const ExpansionRegionImpl & obj);

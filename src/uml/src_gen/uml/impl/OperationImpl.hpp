@@ -20,7 +20,7 @@
 //*********************************
 namespace uml 
 {
-	class OperationImpl :virtual public BehavioralFeatureImpl, virtual public ParameterableElementImpl, virtual public TemplateableElementImpl, virtual public Operation 
+	class OperationImpl : virtual public BehavioralFeatureImpl, virtual public ParameterableElementImpl, virtual public TemplateableElementImpl, virtual public Operation 
 	{
 		public: 
 			OperationImpl(const OperationImpl & obj);

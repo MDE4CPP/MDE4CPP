@@ -19,7 +19,7 @@
 //*********************************
 namespace uml 
 {
-	class NodeImpl :virtual public ClassImpl, virtual public DeploymentTargetImpl, virtual public Node 
+	class NodeImpl : virtual public ClassImpl, virtual public DeploymentTargetImpl, virtual public Node 
 	{
 		public: 
 			NodeImpl(const NodeImpl & obj);

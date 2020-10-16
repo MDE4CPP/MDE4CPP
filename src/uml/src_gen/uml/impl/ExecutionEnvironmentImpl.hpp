@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class ExecutionEnvironmentImpl :virtual public NodeImpl, virtual public ExecutionEnvironment 
+	class ExecutionEnvironmentImpl : virtual public NodeImpl, virtual public ExecutionEnvironment 
 	{
 		public: 
 			ExecutionEnvironmentImpl(const ExecutionEnvironmentImpl & obj);

@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class AbstractionImpl :virtual public DependencyImpl, virtual public Abstraction 
+	class AbstractionImpl : virtual public DependencyImpl, virtual public Abstraction 
 	{
 		public: 
 			AbstractionImpl(const AbstractionImpl & obj);

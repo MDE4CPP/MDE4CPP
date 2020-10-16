@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class ConnectorEndImpl :virtual public MultiplicityElementImpl, virtual public ConnectorEnd 
+	class ConnectorEndImpl : virtual public MultiplicityElementImpl, virtual public ConnectorEnd 
 	{
 		public: 
 			ConnectorEndImpl(const ConnectorEndImpl & obj);

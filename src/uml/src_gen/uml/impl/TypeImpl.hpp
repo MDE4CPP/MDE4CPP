@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class TypeImpl :virtual public PackageableElementImpl, virtual public Type 
+	class TypeImpl : virtual public PackageableElementImpl, virtual public Type 
 	{
 		public: 
 			TypeImpl(const TypeImpl & obj);

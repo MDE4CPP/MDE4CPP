@@ -19,7 +19,7 @@
 //*********************************
 namespace uml 
 {
-	class RegionImpl :virtual public NamespaceImpl, virtual public RedefinableElementImpl, virtual public Region 
+	class RegionImpl : virtual public NamespaceImpl, virtual public RedefinableElementImpl, virtual public Region 
 	{
 		public: 
 			RegionImpl(const RegionImpl & obj);

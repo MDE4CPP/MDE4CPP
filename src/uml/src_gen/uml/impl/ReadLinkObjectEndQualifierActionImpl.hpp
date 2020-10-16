@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class ReadLinkObjectEndQualifierActionImpl :virtual public ActionImpl, virtual public ReadLinkObjectEndQualifierAction 
+	class ReadLinkObjectEndQualifierActionImpl : virtual public ActionImpl, virtual public ReadLinkObjectEndQualifierAction 
 	{
 		public: 
 			ReadLinkObjectEndQualifierActionImpl(const ReadLinkObjectEndQualifierActionImpl & obj);

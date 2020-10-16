@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class AddVariableValueActionImpl :virtual public WriteVariableActionImpl, virtual public AddVariableValueAction 
+	class AddVariableValueActionImpl : virtual public WriteVariableActionImpl, virtual public AddVariableValueAction 
 	{
 		public: 
 			AddVariableValueActionImpl(const AddVariableValueActionImpl & obj);

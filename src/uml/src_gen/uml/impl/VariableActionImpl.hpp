@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class VariableActionImpl :virtual public ActionImpl, virtual public VariableAction 
+	class VariableActionImpl : virtual public ActionImpl, virtual public VariableAction 
 	{
 		public: 
 			VariableActionImpl(const VariableActionImpl & obj);

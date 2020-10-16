@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class OpaqueActionImpl :virtual public ActionImpl, virtual public OpaqueAction 
+	class OpaqueActionImpl : virtual public ActionImpl, virtual public OpaqueAction 
 	{
 		public: 
 			OpaqueActionImpl(const OpaqueActionImpl & obj);

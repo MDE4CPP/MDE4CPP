@@ -20,7 +20,7 @@
 //*********************************
 namespace uml 
 {
-	class PropertyImpl :virtual public ConnectableElementImpl, virtual public DeploymentTargetImpl, virtual public StructuralFeatureImpl, virtual public Property 
+	class PropertyImpl : virtual public ConnectableElementImpl, virtual public DeploymentTargetImpl, virtual public StructuralFeatureImpl, virtual public Property 
 	{
 		public: 
 			PropertyImpl(const PropertyImpl & obj);

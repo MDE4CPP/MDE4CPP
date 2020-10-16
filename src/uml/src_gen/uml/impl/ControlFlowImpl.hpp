@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class ControlFlowImpl :virtual public ActivityEdgeImpl, virtual public ControlFlow 
+	class ControlFlowImpl : virtual public ActivityEdgeImpl, virtual public ControlFlow 
 	{
 		public: 
 			ControlFlowImpl(const ControlFlowImpl & obj);

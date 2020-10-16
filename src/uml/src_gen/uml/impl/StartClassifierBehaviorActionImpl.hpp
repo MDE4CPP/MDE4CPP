@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class StartClassifierBehaviorActionImpl :virtual public ActionImpl, virtual public StartClassifierBehaviorAction 
+	class StartClassifierBehaviorActionImpl : virtual public ActionImpl, virtual public StartClassifierBehaviorAction 
 	{
 		public: 
 			StartClassifierBehaviorActionImpl(const StartClassifierBehaviorActionImpl & obj);

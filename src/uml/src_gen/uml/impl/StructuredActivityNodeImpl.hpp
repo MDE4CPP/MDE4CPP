@@ -20,7 +20,7 @@
 //*********************************
 namespace uml 
 {
-	class StructuredActivityNodeImpl :virtual public ActionImpl, virtual public ActivityGroupImpl, virtual public NamespaceImpl, virtual public StructuredActivityNode 
+	class StructuredActivityNodeImpl : virtual public ActionImpl, virtual public ActivityGroupImpl, virtual public NamespaceImpl, virtual public StructuredActivityNode 
 	{
 		public: 
 			StructuredActivityNodeImpl(const StructuredActivityNodeImpl & obj);

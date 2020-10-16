@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class LinkEndDestructionDataImpl :virtual public LinkEndDataImpl, virtual public LinkEndDestructionData 
+	class LinkEndDestructionDataImpl : virtual public LinkEndDataImpl, virtual public LinkEndDestructionData 
 	{
 		public: 
 			LinkEndDestructionDataImpl(const LinkEndDestructionDataImpl & obj);

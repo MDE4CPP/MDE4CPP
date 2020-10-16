@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class RemoveVariableValueActionImpl :virtual public WriteVariableActionImpl, virtual public RemoveVariableValueAction 
+	class RemoveVariableValueActionImpl : virtual public WriteVariableActionImpl, virtual public RemoveVariableValueAction 
 	{
 		public: 
 			RemoveVariableValueActionImpl(const RemoveVariableValueActionImpl & obj);

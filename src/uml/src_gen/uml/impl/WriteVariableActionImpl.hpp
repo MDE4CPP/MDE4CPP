@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class WriteVariableActionImpl :virtual public VariableActionImpl, virtual public WriteVariableAction 
+	class WriteVariableActionImpl : virtual public VariableActionImpl, virtual public WriteVariableAction 
 	{
 		public: 
 			WriteVariableActionImpl(const WriteVariableActionImpl & obj);

@@ -20,7 +20,7 @@
 //*********************************
 namespace uml 
 {
-	class StateImpl :virtual public NamespaceImpl, virtual public RedefinableElementImpl, virtual public VertexImpl, virtual public State 
+	class StateImpl : virtual public NamespaceImpl, virtual public RedefinableElementImpl, virtual public VertexImpl, virtual public State 
 	{
 		public: 
 			StateImpl(const StateImpl & obj);

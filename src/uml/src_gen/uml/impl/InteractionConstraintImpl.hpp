@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class InteractionConstraintImpl :virtual public ConstraintImpl, virtual public InteractionConstraint 
+	class InteractionConstraintImpl : virtual public ConstraintImpl, virtual public InteractionConstraint 
 	{
 		public: 
 			InteractionConstraintImpl(const InteractionConstraintImpl & obj);

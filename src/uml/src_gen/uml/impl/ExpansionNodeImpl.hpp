@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class ExpansionNodeImpl :virtual public ObjectNodeImpl, virtual public ExpansionNode 
+	class ExpansionNodeImpl : virtual public ObjectNodeImpl, virtual public ExpansionNode 
 	{
 		public: 
 			ExpansionNodeImpl(const ExpansionNodeImpl & obj);

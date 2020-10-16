@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class ActionInputPinImpl :virtual public InputPinImpl, virtual public ActionInputPin 
+	class ActionInputPinImpl : virtual public InputPinImpl, virtual public ActionInputPin 
 	{
 		public: 
 			ActionInputPinImpl(const ActionInputPinImpl & obj);

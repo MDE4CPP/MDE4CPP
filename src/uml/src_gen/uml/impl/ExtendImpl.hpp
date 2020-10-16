@@ -19,7 +19,7 @@
 //*********************************
 namespace uml 
 {
-	class ExtendImpl :virtual public DirectedRelationshipImpl, virtual public NamedElementImpl, virtual public Extend 
+	class ExtendImpl : virtual public DirectedRelationshipImpl, virtual public NamedElementImpl, virtual public Extend 
 	{
 		public: 
 			ExtendImpl(const ExtendImpl & obj);

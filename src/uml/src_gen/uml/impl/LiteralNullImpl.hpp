@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class LiteralNullImpl :virtual public LiteralSpecificationImpl, virtual public LiteralNull 
+	class LiteralNullImpl : virtual public LiteralSpecificationImpl, virtual public LiteralNull 
 	{
 		public: 
 			LiteralNullImpl(const LiteralNullImpl & obj);

@@ -14,12 +14,12 @@
 #include "../Argument.hpp"
 
 
-#include "ecore/impl/EObjectImpl.hpp"
+#include "ecore/impl/EModelElementImpl.hpp"
 
 //*********************************
 namespace uml 
 {
-	class ArgumentImpl :virtual public ecore::EObjectImpl,
+	class ArgumentImpl : virtual public ecore::EModelElementImpl,
 virtual public Argument 
 	{
 		public: 

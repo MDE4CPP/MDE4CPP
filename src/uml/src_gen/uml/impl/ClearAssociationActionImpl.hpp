@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class ClearAssociationActionImpl :virtual public ActionImpl, virtual public ClearAssociationAction 
+	class ClearAssociationActionImpl : virtual public ActionImpl, virtual public ClearAssociationAction 
 	{
 		public: 
 			ClearAssociationActionImpl(const ClearAssociationActionImpl & obj);

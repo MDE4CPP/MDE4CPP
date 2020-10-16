@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class LiteralIntegerImpl :virtual public LiteralSpecificationImpl, virtual public LiteralInteger 
+	class LiteralIntegerImpl : virtual public LiteralSpecificationImpl, virtual public LiteralInteger 
 	{
 		public: 
 			LiteralIntegerImpl(const LiteralIntegerImpl & obj);

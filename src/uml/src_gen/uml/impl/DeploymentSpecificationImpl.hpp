@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class DeploymentSpecificationImpl :virtual public ArtifactImpl, virtual public DeploymentSpecification 
+	class DeploymentSpecificationImpl : virtual public ArtifactImpl, virtual public DeploymentSpecification 
 	{
 		public: 
 			DeploymentSpecificationImpl(const DeploymentSpecificationImpl & obj);

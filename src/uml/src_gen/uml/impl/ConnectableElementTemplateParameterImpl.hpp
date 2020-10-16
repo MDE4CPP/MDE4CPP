@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class ConnectableElementTemplateParameterImpl :virtual public TemplateParameterImpl, virtual public ConnectableElementTemplateParameter 
+	class ConnectableElementTemplateParameterImpl : virtual public TemplateParameterImpl, virtual public ConnectableElementTemplateParameter 
 	{
 		public: 
 			ConnectableElementTemplateParameterImpl(const ConnectableElementTemplateParameterImpl & obj);

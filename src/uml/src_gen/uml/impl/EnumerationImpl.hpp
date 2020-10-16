@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class EnumerationImpl :virtual public DataTypeImpl, virtual public Enumeration 
+	class EnumerationImpl : virtual public DataTypeImpl, virtual public Enumeration 
 	{
 		public: 
 			EnumerationImpl(const EnumerationImpl & obj);

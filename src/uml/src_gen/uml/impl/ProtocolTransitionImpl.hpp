@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class ProtocolTransitionImpl :virtual public TransitionImpl, virtual public ProtocolTransition 
+	class ProtocolTransitionImpl : virtual public TransitionImpl, virtual public ProtocolTransition 
 	{
 		public: 
 			ProtocolTransitionImpl(const ProtocolTransitionImpl & obj);

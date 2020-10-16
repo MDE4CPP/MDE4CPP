@@ -19,7 +19,7 @@
 //*********************************
 namespace uml 
 {
-	class InteractionOperandImpl :virtual public InteractionFragmentImpl, virtual public NamespaceImpl, virtual public InteractionOperand 
+	class InteractionOperandImpl : virtual public InteractionFragmentImpl, virtual public NamespaceImpl, virtual public InteractionOperand 
 	{
 		public: 
 			InteractionOperandImpl(const InteractionOperandImpl & obj);

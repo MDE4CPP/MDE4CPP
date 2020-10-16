@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class GateImpl :virtual public MessageEndImpl, virtual public Gate 
+	class GateImpl : virtual public MessageEndImpl, virtual public Gate 
 	{
 		public: 
 			GateImpl(const GateImpl & obj);

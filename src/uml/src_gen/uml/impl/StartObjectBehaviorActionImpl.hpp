@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class StartObjectBehaviorActionImpl :virtual public CallActionImpl, virtual public StartObjectBehaviorAction 
+	class StartObjectBehaviorActionImpl : virtual public CallActionImpl, virtual public StartObjectBehaviorAction 
 	{
 		public: 
 			StartObjectBehaviorActionImpl(const StartObjectBehaviorActionImpl & obj);

@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class FinalStateImpl :virtual public StateImpl, virtual public FinalState 
+	class FinalStateImpl : virtual public StateImpl, virtual public FinalState 
 	{
 		public: 
 			FinalStateImpl(const FinalStateImpl & obj);

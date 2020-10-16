@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class ProtocolConformanceImpl :virtual public DirectedRelationshipImpl, virtual public ProtocolConformance 
+	class ProtocolConformanceImpl : virtual public DirectedRelationshipImpl, virtual public ProtocolConformance 
 	{
 		public: 
 			ProtocolConformanceImpl(const ProtocolConformanceImpl & obj);

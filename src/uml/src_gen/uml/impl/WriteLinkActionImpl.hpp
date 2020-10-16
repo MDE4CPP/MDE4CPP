@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class WriteLinkActionImpl :virtual public LinkActionImpl, virtual public WriteLinkAction 
+	class WriteLinkActionImpl : virtual public LinkActionImpl, virtual public WriteLinkAction 
 	{
 		public: 
 			WriteLinkActionImpl(const WriteLinkActionImpl & obj);

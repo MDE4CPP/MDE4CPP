@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class CommentImpl :virtual public ElementImpl, virtual public Comment 
+	class CommentImpl : virtual public ElementImpl, virtual public Comment 
 	{
 		public: 
 			CommentImpl(const CommentImpl & obj);

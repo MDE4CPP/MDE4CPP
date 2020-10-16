@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class ExpressionImpl :virtual public ValueSpecificationImpl, virtual public Expression 
+	class ExpressionImpl : virtual public ValueSpecificationImpl, virtual public Expression 
 	{
 		public: 
 			ExpressionImpl(const ExpressionImpl & obj);

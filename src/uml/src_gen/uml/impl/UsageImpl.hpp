@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class UsageImpl :virtual public DependencyImpl, virtual public Usage 
+	class UsageImpl : virtual public DependencyImpl, virtual public Usage 
 	{
 		public: 
 			UsageImpl(const UsageImpl & obj);

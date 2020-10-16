@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class DestroyLinkActionImpl :virtual public WriteLinkActionImpl, virtual public DestroyLinkAction 
+	class DestroyLinkActionImpl : virtual public WriteLinkActionImpl, virtual public DestroyLinkAction 
 	{
 		public: 
 			DestroyLinkActionImpl(const DestroyLinkActionImpl & obj);

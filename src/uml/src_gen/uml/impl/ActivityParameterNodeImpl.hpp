@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class ActivityParameterNodeImpl :virtual public ObjectNodeImpl, virtual public ActivityParameterNode 
+	class ActivityParameterNodeImpl : virtual public ObjectNodeImpl, virtual public ActivityParameterNode 
 	{
 		public: 
 			ActivityParameterNodeImpl(const ActivityParameterNodeImpl & obj);

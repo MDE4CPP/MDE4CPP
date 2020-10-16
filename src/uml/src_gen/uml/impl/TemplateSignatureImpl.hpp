@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class TemplateSignatureImpl :virtual public ElementImpl, virtual public TemplateSignature 
+	class TemplateSignatureImpl : virtual public ElementImpl, virtual public TemplateSignature 
 	{
 		public: 
 			TemplateSignatureImpl(const TemplateSignatureImpl & obj);

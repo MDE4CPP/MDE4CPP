@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class UnmarshallActionImpl :virtual public ActionImpl, virtual public UnmarshallAction 
+	class UnmarshallActionImpl : virtual public ActionImpl, virtual public UnmarshallAction 
 	{
 		public: 
 			UnmarshallActionImpl(const UnmarshallActionImpl & obj);

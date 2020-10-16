@@ -19,7 +19,7 @@
 //*********************************
 namespace uml 
 {
-	class ClassImpl :virtual public BehavioredClassifierImpl, virtual public EncapsulatedClassifierImpl, virtual public Class 
+	class ClassImpl : virtual public BehavioredClassifierImpl, virtual public EncapsulatedClassifierImpl, virtual public Class 
 	{
 		public: 
 			ClassImpl(const ClassImpl & obj);

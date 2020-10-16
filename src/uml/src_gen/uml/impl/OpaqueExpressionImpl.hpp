@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class OpaqueExpressionImpl :virtual public ValueSpecificationImpl, virtual public OpaqueExpression 
+	class OpaqueExpressionImpl : virtual public ValueSpecificationImpl, virtual public OpaqueExpression 
 	{
 		public: 
 			OpaqueExpressionImpl(const OpaqueExpressionImpl & obj);

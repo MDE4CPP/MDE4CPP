@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class InstanceValueImpl :virtual public ValueSpecificationImpl, virtual public InstanceValue 
+	class InstanceValueImpl : virtual public ValueSpecificationImpl, virtual public InstanceValue 
 	{
 		public: 
 			InstanceValueImpl(const InstanceValueImpl & obj);

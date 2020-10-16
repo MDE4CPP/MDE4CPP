@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class ProfileImpl :virtual public PackageImpl, virtual public Profile 
+	class ProfileImpl : virtual public PackageImpl, virtual public Profile 
 	{
 		public: 
 			ProfileImpl(const ProfileImpl & obj);

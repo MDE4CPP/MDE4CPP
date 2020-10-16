@@ -19,7 +19,7 @@
 //*********************************
 namespace uml 
 {
-	class VariableImpl :virtual public ConnectableElementImpl, virtual public MultiplicityElementImpl, virtual public Variable 
+	class VariableImpl : virtual public ConnectableElementImpl, virtual public MultiplicityElementImpl, virtual public Variable 
 	{
 		public: 
 			VariableImpl(const VariableImpl & obj);

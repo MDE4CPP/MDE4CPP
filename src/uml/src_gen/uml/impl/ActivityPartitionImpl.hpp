@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class ActivityPartitionImpl :virtual public ActivityGroupImpl, virtual public ActivityPartition 
+	class ActivityPartitionImpl : virtual public ActivityGroupImpl, virtual public ActivityPartition 
 	{
 		public: 
 			ActivityPartitionImpl(const ActivityPartitionImpl & obj);

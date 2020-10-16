@@ -19,7 +19,7 @@
 //*********************************
 namespace uml 
 {
-	class BehavioralFeatureImpl :virtual public FeatureImpl, virtual public NamespaceImpl, virtual public BehavioralFeature 
+	class BehavioralFeatureImpl : virtual public FeatureImpl, virtual public NamespaceImpl, virtual public BehavioralFeature 
 	{
 		public: 
 			BehavioralFeatureImpl(const BehavioralFeatureImpl & obj);

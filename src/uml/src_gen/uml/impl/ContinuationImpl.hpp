@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class ContinuationImpl :virtual public InteractionFragmentImpl, virtual public Continuation 
+	class ContinuationImpl : virtual public InteractionFragmentImpl, virtual public Continuation 
 	{
 		public: 
 			ContinuationImpl(const ContinuationImpl & obj);

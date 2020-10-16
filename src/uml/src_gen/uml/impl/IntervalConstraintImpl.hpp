@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class IntervalConstraintImpl :virtual public ConstraintImpl, virtual public IntervalConstraint 
+	class IntervalConstraintImpl : virtual public ConstraintImpl, virtual public IntervalConstraint 
 	{
 		public: 
 			IntervalConstraintImpl(const IntervalConstraintImpl & obj);

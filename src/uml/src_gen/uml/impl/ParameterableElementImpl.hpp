@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class ParameterableElementImpl :virtual public ElementImpl, virtual public ParameterableElement 
+	class ParameterableElementImpl : virtual public ElementImpl, virtual public ParameterableElement 
 	{
 		public: 
 			ParameterableElementImpl(const ParameterableElementImpl & obj);

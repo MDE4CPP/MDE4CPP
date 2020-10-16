@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class PortImpl :virtual public PropertyImpl, virtual public Port 
+	class PortImpl : virtual public PropertyImpl, virtual public Port 
 	{
 		public: 
 			PortImpl(const PortImpl & obj);

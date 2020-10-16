@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class ComponentImpl :virtual public ClassImpl, virtual public Component 
+	class ComponentImpl : virtual public ClassImpl, virtual public Component 
 	{
 		public: 
 			ComponentImpl(const ComponentImpl & obj);

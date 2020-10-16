@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class TypedElementImpl :virtual public NamedElementImpl, virtual public TypedElement 
+	class TypedElementImpl : virtual public NamedElementImpl, virtual public TypedElement 
 	{
 		public: 
 			TypedElementImpl(const TypedElementImpl & obj);

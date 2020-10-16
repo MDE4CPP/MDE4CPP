@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class SequenceNodeImpl :virtual public StructuredActivityNodeImpl, virtual public SequenceNode 
+	class SequenceNodeImpl : virtual public StructuredActivityNodeImpl, virtual public SequenceNode 
 	{
 		public: 
 			SequenceNodeImpl(const SequenceNodeImpl & obj);

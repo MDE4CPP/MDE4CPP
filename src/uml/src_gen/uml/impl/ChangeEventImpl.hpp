@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class ChangeEventImpl :virtual public EventImpl, virtual public ChangeEvent 
+	class ChangeEventImpl : virtual public EventImpl, virtual public ChangeEvent 
 	{
 		public: 
 			ChangeEventImpl(const ChangeEventImpl & obj);

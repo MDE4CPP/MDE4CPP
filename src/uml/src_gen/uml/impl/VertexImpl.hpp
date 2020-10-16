@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class VertexImpl :virtual public NamedElementImpl, virtual public Vertex 
+	class VertexImpl : virtual public NamedElementImpl, virtual public Vertex 
 	{
 		public: 
 			VertexImpl(const VertexImpl & obj);

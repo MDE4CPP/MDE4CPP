@@ -19,7 +19,7 @@
 //*********************************
 namespace uml 
 {
-	class ValueSpecificationImpl :virtual public PackageableElementImpl, virtual public TypedElementImpl, virtual public ValueSpecification 
+	class ValueSpecificationImpl : virtual public PackageableElementImpl, virtual public TypedElementImpl, virtual public ValueSpecification 
 	{
 		public: 
 			ValueSpecificationImpl(const ValueSpecificationImpl & obj);

@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class ConditionalNodeImpl :virtual public StructuredActivityNodeImpl, virtual public ConditionalNode 
+	class ConditionalNodeImpl : virtual public StructuredActivityNodeImpl, virtual public ConditionalNode 
 	{
 		public: 
 			ConditionalNodeImpl(const ConditionalNodeImpl & obj);

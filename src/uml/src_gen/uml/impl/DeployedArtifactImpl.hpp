@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class DeployedArtifactImpl :virtual public NamedElementImpl, virtual public DeployedArtifact 
+	class DeployedArtifactImpl : virtual public NamedElementImpl, virtual public DeployedArtifact 
 	{
 		public: 
 			DeployedArtifactImpl(const DeployedArtifactImpl & obj);

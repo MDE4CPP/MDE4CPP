@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class FactoryImpl :virtual public ElementImpl, virtual public Factory 
+	class FactoryImpl : virtual public ElementImpl, virtual public Factory 
 	{
 		public: 
 			FactoryImpl(const FactoryImpl & obj);

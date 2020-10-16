@@ -19,7 +19,7 @@
 //*********************************
 namespace uml 
 {
-	class ActivityNodeImpl :virtual public ActivityContentImpl, virtual public RedefinableElementImpl, virtual public ActivityNode 
+	class ActivityNodeImpl : virtual public ActivityContentImpl, virtual public RedefinableElementImpl, virtual public ActivityNode 
 	{
 		public: 
 			ActivityNodeImpl(const ActivityNodeImpl & obj);

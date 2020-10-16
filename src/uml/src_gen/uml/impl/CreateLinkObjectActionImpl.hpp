@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class CreateLinkObjectActionImpl :virtual public CreateLinkActionImpl, virtual public CreateLinkObjectAction 
+	class CreateLinkObjectActionImpl : virtual public CreateLinkActionImpl, virtual public CreateLinkObjectAction 
 	{
 		public: 
 			CreateLinkObjectActionImpl(const CreateLinkObjectActionImpl & obj);

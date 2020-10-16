@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class SendObjectActionImpl :virtual public InvocationActionImpl, virtual public SendObjectAction 
+	class SendObjectActionImpl : virtual public InvocationActionImpl, virtual public SendObjectAction 
 	{
 		public: 
 			SendObjectActionImpl(const SendObjectActionImpl & obj);

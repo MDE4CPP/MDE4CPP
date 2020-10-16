@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class UseCaseImpl :virtual public BehavioredClassifierImpl, virtual public UseCase 
+	class UseCaseImpl : virtual public BehavioredClassifierImpl, virtual public UseCase 
 	{
 		public: 
 			UseCaseImpl(const UseCaseImpl & obj);

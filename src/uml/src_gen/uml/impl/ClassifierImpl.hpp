@@ -21,7 +21,7 @@
 //*********************************
 namespace uml 
 {
-	class ClassifierImpl :virtual public NamespaceImpl, virtual public RedefinableElementImpl, virtual public TemplateableElementImpl, virtual public TypeImpl, virtual public Classifier 
+	class ClassifierImpl : virtual public NamespaceImpl, virtual public RedefinableElementImpl, virtual public TemplateableElementImpl, virtual public TypeImpl, virtual public Classifier 
 	{
 		public: 
 			ClassifierImpl(const ClassifierImpl & obj);

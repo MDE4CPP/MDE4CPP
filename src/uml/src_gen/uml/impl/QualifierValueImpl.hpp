@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class QualifierValueImpl :virtual public ElementImpl, virtual public QualifierValue 
+	class QualifierValueImpl : virtual public ElementImpl, virtual public QualifierValue 
 	{
 		public: 
 			QualifierValueImpl(const QualifierValueImpl & obj);

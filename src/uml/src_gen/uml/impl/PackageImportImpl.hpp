@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class PackageImportImpl :virtual public DirectedRelationshipImpl, virtual public PackageImport 
+	class PackageImportImpl : virtual public DirectedRelationshipImpl, virtual public PackageImport 
 	{
 		public: 
 			PackageImportImpl(const PackageImportImpl & obj);

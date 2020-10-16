@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class InteractionFragmentImpl :virtual public NamedElementImpl, virtual public InteractionFragment 
+	class InteractionFragmentImpl : virtual public NamedElementImpl, virtual public InteractionFragment 
 	{
 		public: 
 			InteractionFragmentImpl(const InteractionFragmentImpl & obj);

@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class ProtocolStateMachineImpl :virtual public StateMachineImpl, virtual public ProtocolStateMachine 
+	class ProtocolStateMachineImpl : virtual public StateMachineImpl, virtual public ProtocolStateMachine 
 	{
 		public: 
 			ProtocolStateMachineImpl(const ProtocolStateMachineImpl & obj);

@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class InterruptibleActivityRegionImpl :virtual public ActivityGroupImpl, virtual public InterruptibleActivityRegion 
+	class InterruptibleActivityRegionImpl : virtual public ActivityGroupImpl, virtual public InterruptibleActivityRegion 
 	{
 		public: 
 			InterruptibleActivityRegionImpl(const InterruptibleActivityRegionImpl & obj);

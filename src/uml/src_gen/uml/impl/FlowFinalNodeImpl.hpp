@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class FlowFinalNodeImpl :virtual public FinalNodeImpl, virtual public FlowFinalNode 
+	class FlowFinalNodeImpl : virtual public FinalNodeImpl, virtual public FlowFinalNode 
 	{
 		public: 
 			FlowFinalNodeImpl(const FlowFinalNodeImpl & obj);

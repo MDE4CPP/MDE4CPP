@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class ExtensionImpl :virtual public AssociationImpl, virtual public Extension 
+	class ExtensionImpl : virtual public AssociationImpl, virtual public Extension 
 	{
 		public: 
 			ExtensionImpl(const ExtensionImpl & obj);

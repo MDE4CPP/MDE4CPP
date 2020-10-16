@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class ReadExtentActionImpl :virtual public ActionImpl, virtual public ReadExtentAction 
+	class ReadExtentActionImpl : virtual public ActionImpl, virtual public ReadExtentAction 
 	{
 		public: 
 			ReadExtentActionImpl(const ReadExtentActionImpl & obj);

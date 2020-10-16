@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class EnumerationLiteralImpl :virtual public InstanceSpecificationImpl, virtual public EnumerationLiteral 
+	class EnumerationLiteralImpl : virtual public InstanceSpecificationImpl, virtual public EnumerationLiteral 
 	{
 		public: 
 			EnumerationLiteralImpl(const EnumerationLiteralImpl & obj);

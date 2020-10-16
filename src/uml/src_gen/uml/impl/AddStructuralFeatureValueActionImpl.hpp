@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class AddStructuralFeatureValueActionImpl :virtual public WriteStructuralFeatureActionImpl, virtual public AddStructuralFeatureValueAction 
+	class AddStructuralFeatureValueActionImpl : virtual public WriteStructuralFeatureActionImpl, virtual public AddStructuralFeatureValueAction 
 	{
 		public: 
 			AddStructuralFeatureValueActionImpl(const AddStructuralFeatureValueActionImpl & obj);

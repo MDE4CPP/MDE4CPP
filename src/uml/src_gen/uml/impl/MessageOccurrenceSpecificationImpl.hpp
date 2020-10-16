@@ -19,7 +19,7 @@
 //*********************************
 namespace uml 
 {
-	class MessageOccurrenceSpecificationImpl :virtual public MessageEndImpl, virtual public OccurrenceSpecificationImpl, virtual public MessageOccurrenceSpecification 
+	class MessageOccurrenceSpecificationImpl : virtual public MessageEndImpl, virtual public OccurrenceSpecificationImpl, virtual public MessageOccurrenceSpecification 
 	{
 		public: 
 			MessageOccurrenceSpecificationImpl(const MessageOccurrenceSpecificationImpl & obj);

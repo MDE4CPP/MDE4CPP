@@ -19,7 +19,7 @@
 //*********************************
 namespace uml 
 {
-	class RedefinableTemplateSignatureImpl :virtual public RedefinableElementImpl, virtual public TemplateSignatureImpl, virtual public RedefinableTemplateSignature 
+	class RedefinableTemplateSignatureImpl : virtual public RedefinableElementImpl, virtual public TemplateSignatureImpl, virtual public RedefinableTemplateSignature 
 	{
 		public: 
 			RedefinableTemplateSignatureImpl(const RedefinableTemplateSignatureImpl & obj);

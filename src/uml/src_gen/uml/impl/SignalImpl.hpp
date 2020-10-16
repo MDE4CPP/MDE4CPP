@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class SignalImpl :virtual public ClassifierImpl, virtual public Signal 
+	class SignalImpl : virtual public ClassifierImpl, virtual public Signal 
 	{
 		public: 
 			SignalImpl(const SignalImpl & obj);

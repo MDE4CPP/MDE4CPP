@@ -19,7 +19,7 @@
 //*********************************
 namespace uml 
 {
-	class DependencyImpl :virtual public DirectedRelationshipImpl, virtual public PackageableElementImpl, virtual public Dependency 
+	class DependencyImpl : virtual public DirectedRelationshipImpl, virtual public PackageableElementImpl, virtual public Dependency 
 	{
 		public: 
 			DependencyImpl(const DependencyImpl & obj);

@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class MultiplicityElementImpl :virtual public ElementImpl, virtual public MultiplicityElement 
+	class MultiplicityElementImpl : virtual public ElementImpl, virtual public MultiplicityElement 
 	{
 		public: 
 			MultiplicityElementImpl(const MultiplicityElementImpl & obj);

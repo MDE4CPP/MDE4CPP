@@ -19,7 +19,7 @@
 //*********************************
 namespace uml 
 {
-	class ArtifactImpl :virtual public ClassifierImpl, virtual public DeployedArtifactImpl, virtual public Artifact 
+	class ArtifactImpl : virtual public ClassifierImpl, virtual public DeployedArtifactImpl, virtual public Artifact 
 	{
 		public: 
 			ArtifactImpl(const ArtifactImpl & obj);

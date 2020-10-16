@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class EncapsulatedClassifierImpl :virtual public StructuredClassifierImpl, virtual public EncapsulatedClassifier 
+	class EncapsulatedClassifierImpl : virtual public StructuredClassifierImpl, virtual public EncapsulatedClassifier 
 	{
 		public: 
 			EncapsulatedClassifierImpl(const EncapsulatedClassifierImpl & obj);
