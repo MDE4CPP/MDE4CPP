@@ -12,16 +12,15 @@
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */]
-[module generateClassifierObjectHeader('http://www.eclipse.org/uml2/5.0.0/UML')]
+[module generateMetamodelClassifierObjectHeader('http://www.eclipse.org/uml2/5.0.0/UML')]
 
-[import fUML4CPP::generator::main::generateClassifierObjectSource /]
 [import fUML4CPP::generator::main::parameterHelper /]
 [import fUML4CPP::generator::main::fUMLCollectionHelper /]
 [import UML4CPP::generator::main::components::generateType /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 
-[template public generateClassifierObjectHeader(aClassifier : Classifier, aPackage :Package) {
+[template public generateMetamodelClassifierObjectHeader(aClassifier : Classifier, aPackage :Package) {
 	className : String = objectClassName();
 	pointerName : String = pointerName(aPackage);
 }]
@@ -41,9 +40,13 @@ namespace [aClassifier.getNearestPackage().myNamespaceName()/]
 	class [aClassifier.name.toUpperFirst()/];
 }
 
+namespace ecore
+{
+	class EObject;
+}
+
 namespace uml
 {
-	class Element;
 	class ConnectorEnd;
 }
 
@@ -64,8 +67,8 @@ namespace [aClassifier.getNearestPackage().name/]
 			virtual void destroy();
 			
 			virtual std::shared_ptr<[pointerName/]> [aClassifier.UMLValueGetterName()/]() const;
-			virtual std::shared_ptr<uml::Element> getUmlValue() const;
-			virtual void setUmlValue(std::shared_ptr<uml::Element>);
+			virtual std::shared_ptr<ecore::EObject> getUmlValue() const;
+			virtual void setUmlValue(std::shared_ptr<ecore::EObject>);
 			virtual void [aClassifier.UMLValueSetterName()/](std::shared_ptr<[pointerName/]>);
 			virtual void setThis[className/]Ptr(std::weak_ptr<[className/]> thisObjectPtr);
 			virtual bool equals(std::shared_ptr<fUML::Semantics::Values::Value> otherValue);

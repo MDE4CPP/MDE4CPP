@@ -201,5 +201,5 @@ void [aClass.name.toUpperFirst()/]Impl::set[compositeOwnerClass.name.toUpperFirs
 [/template]
 
 [template public genDefault(aProperty : Property) ? (aProperty.type.oclIsKindOf(Enumeration))]
-[aProperty.type.qualifiedName/]::[aProperty.default.toUpper()/] /*defined default value*/
+[aProperty.type.getNearestPackage().myNamespaceName()/]::[aProperty.type.name/]::[aProperty.default.toUpper()/] /*defined default value*/
 [/template]

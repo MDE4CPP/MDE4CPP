@@ -64,7 +64,7 @@ SET(SOURCE_FILES
 [for (anOperation : Operation | aPackage.getClassOperations()->sortedBy(name))]
 	[anOperation.generateOperationExecutionName()/].cpp
 [/for]
-[for (aClassifier : Classifier | getClassifiersForObjectClasses()->sortedBy(name))]
+[for (aClassifier : Classifier | getClassifiersForObjectClasses()->addAll(getMetamodelClassifiersForObjectClasses())->sortedBy(name))]
 	[aClassifier.name.toUpperFirst()/]Object.cpp
 [/for]
 	impl/[aPackage.name.toUpperFirst()/]LocusImpl.cpp
@@ -233,6 +233,9 @@ ENDIF()
 [template private generateCMakeFindLibraryCommand(aPackage : Package, ending : String, folderName : String, debugMode : Boolean)]
 [for (packName : String | aPackage.metaModelLibrariesNames())]
 FIND_LIBRARY([packName.toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/] [packName/][libraryNameSuffix(debugMode)/][ending/] ${MDE4CPP_HOME}/application/[folderName/])
+[if (OrderedSet{'ecore', 'uml', 'fUML', 'PSCS', 'ecoreReflection', 'primitivetypesReflection', 'umlReflection', aPackage.name}->excludes(packName))]
+FIND_LIBRARY([packName.toUpperCase()/]EXEC_[libraryVariableNameSuffix(debugMode)/] [packName/]Exec[libraryNameSuffix(debugMode)/][ending/] ${MDE4CPP_HOME}/application/[folderName/])
+[/if]
 [/for]
 [/template]
 
@@ -240,6 +243,9 @@ FIND_LIBRARY([packName.toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/] [
 TARGET_LINK_LIBRARIES(${PROJECT_NAME}
 [for (packName : String | aPackage.metaModelLibrariesNames())]
 	[buildModeCMakeProperty(debugMode)/] ${[packName.toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/]}
+	[if (OrderedSet{'ecore', 'uml', 'fUML', 'PSCS', 'ecoreReflection', 'primitivetypesReflection', 'umlReflection', aPackage.name}->excludes(packName))]
+	[buildModeCMakeProperty(debugMode)/] ${[packName.toUpperCase()/]EXEC_[libraryVariableNameSuffix(debugMode)/]}
+	[/if]
 [/for]
 )
 [/template]
@@ -254,13 +260,12 @@ TARGET_LINK_LIBRARIES(${PROJECT_NAME}
 [query private buildModeCMakeProperty(debugMode : Boolean) : String = if (debugMode) then 'debug' else 'optimized' endif/]
 
 [query public metaModelIncludes(aPackage : Package) : Set(Package) = OrderedSet{
-																			aPackage.member->filter(Class).attribute.type.getNearestPackage(),
-																			aPackage.member->filter(Class).ownedOperation.ownedParameter.type.getNearestPackage(),
+																			aPackage.member->filter(Class).attribute.type->reject(oclIsUndefined()).getNearestPackage(),
+																			aPackage.member->filter(Class).ownedOperation.ownedParameter.type->reject(oclIsUndefined()).getNearestPackage(),
 																			aPackage.member->filter(Class).attribute.getAppliedStereotypes().getNearestPackage(), 
 																			aPackage.member->filter(Class).interfaceRealization.supplier.getNearestPackage(), 
 																			aPackage.member->filter(Class).generalization.general.getNearestPackage(), 
-																			aPackage.getCallOperationActions().operation.method->reject(oclIsUndefined()).ownedParameter.type.getNearestPackage(),
-																			aPackage.packageImport.importedPackage
+																			aPackage.getCallOperationActions().operation.method->reject(oclIsUndefined()).ownedParameter.type->reject(oclIsUndefined()).getNearestPackage()
 																		}->flatten() /]
 [query public isReflectionModel(aPackage : Package) : Boolean = if ((aPackage.name='UML') or (aPackage.name='Ecore')or (aPackage.name='PrimitiveTypes') or (aPackage.eAllContents()->filter(ecore::EAnnotation)->select(source = 'SDK')->notEmpty())) then true else false endif /]
 [query public metaModelIncludesWithoutReflection(aPackage : Package) : Set(Package) = aPackage.metaModelIncludes()->reject((name = aPackage.name) or (name = 'PrimitiveTypes') or (name = 'UML')or (name = 'Ecore'))/]

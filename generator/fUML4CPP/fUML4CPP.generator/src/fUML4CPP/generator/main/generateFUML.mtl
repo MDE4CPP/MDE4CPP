@@ -15,7 +15,9 @@
 [module generateFUML('http://www.eclipse.org/uml2/5.0.0/UML')]
     
 [import fUML4CPP::generator::main::generateClassifierObjectHeader /]
+[import fUML4CPP::generator::main::generateMetamodelClassifierObjectHeader /]
 [import fUML4CPP::generator::main::generateClassifierObjectSource /]
+[import fUML4CPP::generator::main::generateMetamodelClassifierObjectSource /]
 [import fUML4CPP::generator::main::generateModelLocusHeader /]
 [import fUML4CPP::generator::main::generateModelLocusSource /]
 [import fUML4CPP::generator::main::generateExecutionBuildFile /]
@@ -74,6 +76,10 @@
 //generate execution classifier
 [aPackage.getClassifiersForObjectClasses().generateClassifierObjectHeader(aPackage)/]
 [aPackage.getClassifiersForObjectClasses().generateClassifierObjectSource(aPackage)/]
+[comment metamodel classifiers are handled seperately for now... /]
+[aPackage.getMetamodelClassifiersForObjectClasses().generateMetamodelClassifierObjectHeader(aPackage)/]
+[aPackage.getMetamodelClassifiersForObjectClasses().generateMetamodelClassifierObjectSource(aPackage)/]
+
 
 //generate execution plugin
 [aPackage.generateExecutionPlugin()/]

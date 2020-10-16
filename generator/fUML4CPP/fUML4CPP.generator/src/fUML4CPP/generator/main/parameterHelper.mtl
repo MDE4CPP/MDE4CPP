@@ -17,6 +17,7 @@
 [import fUML4CPP::generator::main::generateOpaqueBehaviorExecution /]
 [import UML4CPP::generator::main::components::generateType /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
+[import UML4CPP::generator::main::helpers::collectionHelper /]
 
 [query public getFUMLCommonBehaviorFactory(any : OclAny) : String = 'fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()' /]
 [query public getPSCSCommonBehaviorFactory(any : OclAny) : String = 'PSCS::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()' /]
@@ -47,18 +48,34 @@
 				aPackage.allOwnedElements()->filter(AddStructuralFeatureValueAction).structuralFeature.type,
 				aPackage.allOwnedElements()->filter(RemoveStructuralFeatureValueAction).structuralFeature.type,
 				aPackage.allOwnedElements()->filter(Action).input.type,
-				aPackage.allOwnedElements()->filter(Action).output.type	
-			}->flatten()->reject(oclIsKindOf(Activity))->reject(supportedTypes())->reject(oclIsKindOf(Enumeration))->sortedBy(name)/]
+				aPackage.allOwnedElements()->filter(Action).output.type,
+				aPackage.getPackageClasses().attribute.type,
+				aPackage.getPackageClasses().getAllOperations().ownedParameter.type,
+				aPackage.getPackageClasses().attribute.getAppliedStereotypes(),
+				aPackage.getPackageClasses().interfaceRealization.supplier.oclAsType(Classifier),
+				aPackage.getPackageClasses().generalization.general 
+			}->flatten()->reject(oclIsUndefined())->reject(oclIsKindOf(Activity))->reject(supportedTypes())->reject(oclIsKindOf(PrimitiveType))->reject(oclIsKindOf(Enumeration))->sortedBy(name)/]
 
-[query public getPackageClasses(aPackage : Package) : Set(Classifier) = OrderedSet{
-				aPackage.allOwnedElements()->filter(Class)
-				}->flatten()->reject(oclIsKindOf(AssociationClass))->reject(oclIsKindOf(Component))->reject(oclIsKindOf(Behavior))->reject(oclIsKindOf(Stereotype))->reject(oclIsKindOf(Node))->sortedBy(name)
-/]
+[query private getReflectionClassesForObjectClasses(aPackage : Package) : Set(Classifier) = 
+	getDirectlyUsedReflectionPackageClasses()
+	->addAll(getDirectlyUsedReflectionPackageClasses().getNearestPackage()->reject(p : Package | p = aPackage).getReflectionClassesForObjectClasses())
+	->flatten()->asOrderedSet()->sortedBy(name)/]
+
+[query private getDirectlyUsedReflectionPackageClasses(aPackage : Package) : Set(Classifier) = getClassiferExecutions()->select(c : Classifier | c.getNearestPackage().isReflectionModel()) /]
+
+[query public getPackageClasses(aPackage : Package) : Set(Class) = 
+	aPackage.allOwnedElements()->filter(Class)->flatten()->reject(oclIsKindOf(AssociationClass))->reject(oclIsKindOf(Component))->reject(oclIsKindOf(Behavior))->reject(oclIsKindOf(Stereotype))->reject(oclIsKindOf(Node))->sortedBy(name)/]
 
 [query public getPackageInterfaces(aPackage : Package) : Set(Classifier) = aPackage.allOwnedElements()->filter(Interface)->sortedBy(name) /]
 
-[query public getClassifiersForObjectClasses(aPackage : Package) : Set(Classifier) = OrderedSet{aPackage.getPackageClasses(), aPackage.getPackageInterfaces()}->flatten()->sortedBy(name) /]
-				
+[query public getPackageClassifiers(aPackage : Package) : Set(Classifier) = OrderedSet{getPackageClasses(), getPackageInterfaces()}->flatten()->sortedBy(name) /]
+
+[query public getClassifiersForObjectClasses(aPackage : Package) : Set(Classifier) = OrderedSet{
+				getPackageClassifiers(),
+				aPackage.getClassiferExecutions()->reject(getNearestPackage().isReflectionModel())
+			}->flatten()->sortedBy(name)/]
+
+[query public getMetamodelClassifiersForObjectClasses(aPackage: Package) : Set(Classifier) = aPackage.getReflectionClassesForObjectClasses()->addAll(aPackage.getClassiferExecutions().getNearestPackage()->select(isReflectionModel()).getPackageClassifiers())->flatten()->asOrderedSet()->sortedBy(name)/]
 
 [comment]Get all Operations in Package[/comment]
 [query public getClassOperations(aPackage : Package) : Set(Operation) = OrderedSet{
@@ -116,18 +133,22 @@ std::shared_ptr<[par.type.name.toUpperFirst()/]Object> [par.name/]OutUmlLinker(n
 
 
 [comment]INCLUDE SWITCH----------------------------------------------------------[/comment]
-[template public generateTypeInclude(type : Type, aPackage : Package) ? ((not type.supportedTypes()) and (not type.oclIsKindOf(Enumeration)))]
-#include "[type.getNearestPackage().myNamespaceName()/]/[type.name/].hpp"
+[template public generateTypeInclude(type : Type, aPackage : Package, thisPackage : Package) ? ((not type.supportedTypes()) and (not type.oclIsKindOf(Enumeration)))]
+#include "[aPackage.myNamespaceName()/]/[type.name/].hpp"
+[if (aPackage.isReflectionModel())]
+#include "[thisPackage.getPackageName()/]Exec/[type.name/]Object.hpp"
+[else]
 #include "[aPackage.getPackageName()/]Exec/[type.name/]Object.hpp"
+[/if]
 [/template]
 
-[template public generateTypeInclude(type : Type, aPackage : Package) ? (not type.supportedTypes() and type.oclIsKindOf(Enumeration))]
+[template public generateTypeInclude(type : Type, aPackage : Package, thisPackage : Package) ? (not type.supportedTypes() and type.oclIsKindOf(Enumeration))]
 #include "fUML/Semantics/SimpleClassifiers/EnumerationValue.hpp"
-#include "[type.getNearestPackage().myNamespaceName()/]/[type.name/].hpp"
-#include "[type.getNearestPackage().myNamespaceName()/]/[type.getNearestPackage().myNamespaceName()/]Package.hpp"
+#include "[aPackage.myNamespaceName()/]/[type.name/].hpp"
+#include "[aPackage.myNamespaceName()/]/[aPackage.myNamespaceName()/]Package.hpp"
 [/template]
 
-[template public generateTypeInclude(type : Type, aPackage : Package) ? (supportedTypes())]
+[template public generateTypeInclude(type : Type, aPackage : Package, thisPackage : Package) ? (supportedTypes())]
 #include "fUML/Semantics/SimpleClassifiers/[type.name/]Value.hpp"
 [/template]
 

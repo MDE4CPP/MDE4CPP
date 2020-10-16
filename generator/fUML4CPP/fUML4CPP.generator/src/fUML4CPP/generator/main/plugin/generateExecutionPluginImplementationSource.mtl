@@ -175,7 +175,7 @@ Any [packageName/]::executeActivity(std::shared_ptr<uml::Activity> activity, std
 #include "[aPackage.getPackageName()/]/[aPackage.getPackageName().toUpperFirst()/]Package.hpp"
 
 [for ( type : Type | anActivity->asOrderedSet()->first().ownedParameter.type->asOrderedSet())]
-[type.generateTypeInclude(aPackage)/]
+[type.generateTypeInclude(type.getNearestPackage(), aPackage)/]
 [/for]
 [/template]
 

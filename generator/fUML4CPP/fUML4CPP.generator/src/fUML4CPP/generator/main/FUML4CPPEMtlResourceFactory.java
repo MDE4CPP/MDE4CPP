@@ -28,7 +28,9 @@ public class FUML4CPPEMtlResourceFactory extends UML4CPPEMtlResourceFactory {
 	{		
 		String[] moduleNames = {
 								"generateClassifierObjectHeader",
+								"generateMetamodelClassifierObjectHeader",
 								"generateClassifierObjectSource",
+								"generateMetamodelClassifierObjectSource",
 								"generateExpansionRegionActiviationHeader",
 								"generateExpansionRegionActiviationSource",
 								"generateExecutionBuildFile",
