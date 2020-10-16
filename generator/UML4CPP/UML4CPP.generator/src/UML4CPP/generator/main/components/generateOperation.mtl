@@ -134,6 +134,9 @@ virtual [aOperation.generateCppType()/] [aOperation.name/]([for (sParameter : Pa
 */]
 [template public initalizeOperation(aOperation : Operation)]
 [memberName(aOperation)/]->setName("[aOperation.name/]");
+[if(not aOperation.type.oclIsUndefined())]
+[memberName(aOperation)/]->setType([memberName(aOperation.type)/]);
+[/if]
 [for (beh : Behavior | aOperation.method) separator ('\n')]
 [memberName(aOperation)/]->getMethod()->push_back([memberName(beh)/]);[/for]
 
