@@ -30,7 +30,7 @@
 
 #include "PSCS/Semantics/StructuredClassifiers/impl/CS_ObjectImpl.hpp"
 [for (inheritedType : Classifier | aClassifier.collectInheritedTypes())]
-#include "[aPackage.getPackageName()/]Exec/[inheritedType.objectClassName()/].hpp"
+#include "[inheritedType.getNearestPackage().getPackageName()/]Exec/[inheritedType.objectClassName()/].hpp"
 [/for]
 
 template <class T> 

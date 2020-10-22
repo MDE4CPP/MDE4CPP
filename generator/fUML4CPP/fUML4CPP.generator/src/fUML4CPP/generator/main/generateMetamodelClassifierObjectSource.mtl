@@ -99,7 +99,7 @@ using namespace [aClassifier.getNearestPackage().name/];
 	[aClassifier.UMLValueName()/](_element)
 {		
 	[if(not aClassifier.oclIsTypeOf(Interface))]
-	this->getTypes()->add([aClassifier.getModelPackage()/][aClassifier.generatePackageGetterCall(aClassifier)/]);
+	this->getTypes()->insert(this->getTypes()->begin(), [aClassifier.getModelPackage()/][aClassifier.generatePackageGetterCall(aClassifier)/]);
 	[/if]
 }
 
@@ -111,7 +111,7 @@ using namespace [aClassifier.getNearestPackage().name/];
 [className/]::[className/]()
 {	
 	[if(not aClassifier.oclIsTypeOf(Interface))]
-	this->getTypes()->add([aClassifier.getModelPackage()/][aClassifier.generatePackageGetterCall(aClassifier)/]);
+	this->getTypes()->insert(this->getTypes()->begin(), [aClassifier.getModelPackage()/][aClassifier.generatePackageGetterCall(aClassifier)/]);
 	[/if]
 }
 
@@ -145,12 +145,18 @@ std::shared_ptr<[pointerName/]> [className/]::[aClassifier.UMLValueGetterName()/
 
 void [className/]::setUmlValue(std::shared_ptr<ecore::EObject> _element)
 {
-	[aClassifier.UMLValueName()/] = std::dynamic_pointer_cast<[pointerName/]>(_element);
+	[aClassifier.UMLValueSetterName()/](std::dynamic_pointer_cast<[pointerName/]>(_element));
 }
 
 void [className/]::[aClassifier.UMLValueSetterName()/](std::shared_ptr<[pointerName/]> _[aClassifier.name.toUpperFirst()/]Element)
 {
 	[aClassifier.UMLValueName()/] = _[aClassifier.name.toUpperFirst()/]Element;
+	[if(not (aClassifier.collectInheritedTypes()->isEmpty()))]
+	//set super type values
+	[for (inheritedType : Classifier | aClassifier.collectInheritedTypes())]
+	[inheritedType.getNearestPackage().name/]::[inheritedType.getValueClass()/]::[inheritedType.UMLValueSetterName()/](_[aClassifier.name.toUpperFirst()/]Element);
+	[/for]
+	[/if]
 }
 
 void [className/]::setThis[className/]Ptr(std::weak_ptr<[className/]> thisObjectPtr)
