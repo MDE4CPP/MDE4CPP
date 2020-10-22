@@ -61,7 +61,7 @@ SET(SOURCE_FILES
 [for (aCBA : CallBehaviorAction | aPackage.getCallBehaviorActionsWithOB())]
 	[aCBA.generateOpaqueBehaviorExecutionName()/].cpp
 [/for]
-[for (anOperation : Operation | aPackage.getClassOperations()->sortedBy(name))]
+[for (anOperation : Operation | aPackage.getPackageOperations()->sortedBy(name))]
 	[anOperation.generateOperationExecutionName()/].cpp
 [/for]
 [for (aClassifier : Classifier | getClassifiersForObjectClasses()->addAll(getMetamodelClassifiersForObjectClasses())->sortedBy(name))]

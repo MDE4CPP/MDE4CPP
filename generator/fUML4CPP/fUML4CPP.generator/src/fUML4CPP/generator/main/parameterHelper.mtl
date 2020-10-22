@@ -70,18 +70,17 @@
 
 [query public getPackageClassifiers(aPackage : Package) : Set(Classifier) = OrderedSet{getPackageClasses(), getPackageInterfaces()}->flatten()->sortedBy(name) /]
 
-[query public getClassifiersForObjectClasses(aPackage : Package) : Set(Classifier) = OrderedSet{
-				getPackageClassifiers(),
-				aPackage.getClassiferExecutions()->reject(getNearestPackage().isReflectionModel())
-			}->flatten()->sortedBy(name)/]
+[query public getClassifiersForObjectClasses(aPackage : Package) : Set(Classifier) =
+				getPackageClassifiers()->flatten()->sortedBy(name)/]
 
 [query public getMetamodelClassifiersForObjectClasses(aPackage: Package) : Set(Classifier) = aPackage.getReflectionClassesForObjectClasses()->addAll(aPackage.getClassiferExecutions().getNearestPackage()->select(isReflectionModel()).getPackageClassifiers())->flatten()->asOrderedSet()->sortedBy(name)/]
 
 [comment]Get all Operations in Package[/comment]
-[query public getClassOperations(aPackage : Package) : Set(Operation) = OrderedSet{
-				aPackage.allOwnedElements()->filter(Class).ownedOperation
+[query public getPackageOperations(aPackage : Package) : Set(Operation) = OrderedSet{
+				aPackage.allOwnedElements()->filter(Classifier).getAllOperations()
 				}->flatten()->sortedBy(name)
 /]
+
 
 
 [comment]INPUT SWITCH ----------------------------------------------------------[/comment]
@@ -127,7 +126,7 @@ std::shared_ptr<fUML::Semantics::SimpleClassifiers::EnumerationValue> [par.name/
 
 [template public generateOutputParameter(par : Parameter) ? ((not type.supportedTypes()) and (not type.oclIsKindOf(Enumeration)))]
 std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> [par.name/]OutValue([getPSCSStructuredClassifierFactory()/]->createCS_Reference());
-std::shared_ptr<[par.type.name.toUpperFirst()/]Object> [par.name/]OutUmlLinker(new [par.type.name.toUpperFirst()/]Object([par.name.toLowerFirst()/][if (par.upper <> 1)]Temp[/if]));
+std::shared_ptr<[par.type.getNearestPackage().name/]::[par.type.name.toUpperFirst()/]Object> [par.name/]OutUmlLinker(new [par.type.getNearestPackage().name/]::[par.type.name.toUpperFirst()/]Object([par.name.toLowerFirst()/][if (par.upper <> 1)]Temp[/if]));
 [par.name/]OutUmlLinker->setThis[par.type.name.toUpperFirst()/]ObjectPtr([par.name/]OutUmlLinker);
 [/template]
 

@@ -18,6 +18,7 @@
 [import UML4CPP::generator::main::helpers::nameHelper /]
 [import fUML4CPP::generator::main::parameterHelper /]
 [import fUML4CPP::generator::main::generateOperationExecution /]
+[import fUML4CPP::generator::main::plugin::generateExecutionPluginImplementationSource /]
 
 [template public generateExecutionPluginInterfaceHeader(aPackage : Package){packageName : String = aPackage.name.toUpperFirst().concat('ExecPlugin');}]
 [file (aPackage.name.concat('Exec/').concat(packageName).concat('.hpp'), false, 'UTF-8')]
@@ -71,7 +72,7 @@ namespace [aPackage.name/]
 			std::shared_ptr<PSCS::Semantics::Loci::CS_Executor> m_executor;
 			std::shared_ptr<PSCS::Semantics::Loci::CS_ExecutionFactory> m_factory;
 			//OpaqueBehaviors for primitive prototypes for activity executions
-			[for (anOperation : Operation | aPackage.getClassOperations()) ? (anOperation.method->size() > 0)]
+			[for (anOperation : Operation | aPackage.getOperationExecutions())]
 			[if (not anOperation.name.oclIsUndefined())]
 			std::shared_ptr<uml::OpaqueBehavior> m_[anOperation.getFBPackageElement()/];
 			[/if]

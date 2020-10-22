@@ -70,8 +70,9 @@
 [aPackage.collectAllPossiblyCalledOperations().generateOperationExecutionHeader(aPackage)/]
 [aPackage.collectAllPossiblyCalledOperations().generateOperationExecutionSource(aPackage)/]
 [/comment]
-[aPackage.getClassOperations().generateOperationExecutionHeader(aPackage)/]
-[aPackage.getClassOperations().generateOperationExecutionSource(aPackage)/]
+[aPackage.getPackageOperations().generateOperationExecutionHeader(aPackage)/]
+[aPackage.getPackageOperations().generateOperationExecutionSource(aPackage)/]
+
 
 //generate execution classifier
 [aPackage.getClassifiersForObjectClasses().generateClassifierObjectHeader(aPackage)/]
