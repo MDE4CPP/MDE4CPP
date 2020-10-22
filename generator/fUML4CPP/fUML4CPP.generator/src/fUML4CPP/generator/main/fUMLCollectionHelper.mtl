@@ -40,9 +40,18 @@
 [comment collects all ConnectorEnds that are typed by aType /]
 [query private collectConnectorEndsOfType(aPackage : Package, aType : Classifier) : OrderedSet(ConnectorEnd) = 
 	aPackage.allOwnedElements()->filter(ConnectorEnd)->select(isConnectorEndTypeEqualTo(aType))->asOrderedSet()/]
-[comment collects valid other ends for all ConnectorEnds that are typed by aType /]
-[query public collectOppositeConnectorEndsForType(aPackage : Package, aType : Classifier) : OrderedSet(ConnectorEnd) = 
-	aPackage.collectConnectorEndsOfType(aType).getOtherConnectorEnd()->select(e : ConnectorEnd | (not e.role.oclIsUndefined()) and e.role.oclIsKindOf(Port))->asOrderedSet() /]
+[comment collects valid other ends for all ConnectorEnds that are typed by aType (for external connectors)/]
+[query private collectExternalOppositeConnectorEndsForType(aPackage : Package, aType : Classifier) : OrderedSet(ConnectorEnd) = 
+	aPackage.collectConnectorEndsOfType(aType).getOtherConnectorEnd()->select(e : ConnectorEnd | (not e.role.oclIsUndefined()) and (e.role.oclIsKindOf(Port)))->asOrderedSet() /]
+[comment collects valid other ends for all ConnectorEnds that are owned by aType (for internal connectors)/]
+[query private collectInternalOppositeConnectorEndsOfType(aPackage : Package, aType : Classifier) : OrderedSet(ConnectorEnd) =
+	 aPackage.allOwnedElements()->filter(ConnectorEnd)->select(aType.attribute->includes(role) and role.oclIsTypeOf(Port)).getOtherConnectorEnd()
+	->select(e : ConnectorEnd | ((not e.partWithPort.oclIsUndefined()) and (not e.role.oclIsUndefined()) and aType.attribute->includes(e.partWithPort)))->asOrderedSet()/]
+
+[query public collectOppositeConnectorEndsOfType(aPackage : Package, aType : Classifier) : OrderedSet(ConnectorEnd) =
+	OrderedSet{aPackage.collectExternalOppositeConnectorEndsForType(aType), aPackage.collectInternalOppositeConnectorEndsOfType(aType)}->flatten()->asOrderedSet() /]
+
+
 
 [comment]COLLECT ALL OPAQUEBEHAVIORS OF THE MODEL THAT ARE EXECUTED EITHER BY CALLBEHAVIORACTION OR DECISIONNODE --------------- [/comment]
 [comment collect all CallBehaviorActions in the model that have a defined Opaque behavior /]
