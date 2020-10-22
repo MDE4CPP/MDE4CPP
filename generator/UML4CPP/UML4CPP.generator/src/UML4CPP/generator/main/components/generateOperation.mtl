@@ -146,3 +146,18 @@ virtual [aOperation.generateCppType()/] [aOperation.name/]([for (sParameter : Pa
 
 [aOperation.generateStereotypeApplication()/]
 [/template]
+
+[**
+ * checks if 'matchingOperation' matches 'baseOperation'
+ * 
+ * operations match if:
+ * - they have the sme name
+ * - they have the same number of input parameters
+ * - the input parameter lists have the same types in the same order
+*/]
+[query public matches(baseOperation : Operation, matchingOperation : Operation) : Boolean = 
+	if(baseOperation.name <> matchingOperation.name) then false
+		else 	(baseOperation.ownedParameter->select(direction = ParameterDirectionKind::_in or direction = ParameterDirectionKind::_inout).type 
+				= matchingOperation.ownedParameter->select(direction = ParameterDirectionKind::_in or direction = ParameterDirectionKind::_inout).type)
+		endif
+/]
