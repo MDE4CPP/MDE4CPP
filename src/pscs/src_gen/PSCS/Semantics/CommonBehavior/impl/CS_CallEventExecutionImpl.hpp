@@ -19,7 +19,7 @@
 //*********************************
 namespace PSCS::Semantics::CommonBehavior 
 {
-	class CS_CallEventExecutionImpl :virtual public fUML::Semantics::CommonBehavior::CallEventExecutionImpl, virtual public CS_CallEventExecution 
+	class CS_CallEventExecutionImpl : virtual public fUML::Semantics::CommonBehavior::CallEventExecutionImpl, virtual public CS_CallEventExecution 
 	{
 		public: 
 			CS_CallEventExecutionImpl(const CS_CallEventExecutionImpl & obj);

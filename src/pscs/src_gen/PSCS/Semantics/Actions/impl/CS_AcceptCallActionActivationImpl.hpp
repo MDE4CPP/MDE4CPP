@@ -19,7 +19,7 @@
 //*********************************
 namespace PSCS::Semantics::Actions 
 {
-	class CS_AcceptCallActionActivationImpl :virtual public fUML::Semantics::Actions::AcceptCallActionActivationImpl, virtual public CS_AcceptCallActionActivation 
+	class CS_AcceptCallActionActivationImpl : virtual public fUML::Semantics::Actions::AcceptCallActionActivationImpl, virtual public CS_AcceptCallActionActivation 
 	{
 		public: 
 			CS_AcceptCallActionActivationImpl(const CS_AcceptCallActionActivationImpl & obj);

@@ -39,6 +39,7 @@
 #include "uml/StructuralFeature.hpp"
 #include "uml/Association.hpp"
 #include "uml/UmlPackage.hpp"
+#include "uml/InputPin.hpp"
 #include "fUML/Semantics/Values/Value.hpp"
 #include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
 #include "fUML/Semantics/SimpleClassifiers/UnlimitedNaturalValue.hpp"
@@ -50,7 +51,6 @@
 #include "fUML/Semantics/SimpleClassifiers/StructuredValue.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/CS_Object.hpp"
 #include "fUML/Semantics/Activities/ActivityExecution.hpp"
-#include "uml/InputPin.hpp"
 
 
 //Forward declaration includes
@@ -221,7 +221,7 @@ void CS_AddStructuralFeatureValueActionActivationImpl::doAction()
 			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> interactionPoint = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_InteractionPoint();
 			interactionPoint->setReferent(reference->getReferent());
 			interactionPoint->setDefiningPort(std::dynamic_pointer_cast<uml::Port>(feature));
-			
+
 			std::shared_ptr<fUML::Semantics::Values::Value> value = nullptr;		
 
 			/* MDE4CPP specific implementation for handling "self"-Pin */
@@ -239,7 +239,7 @@ void CS_AddStructuralFeatureValueActionActivationImpl::doAction()
 				value = this->takeTokens(action->getObject())->at(0);
 			}
 			/*--------------------------------------------------------*/
-			
+
 			// The value on action.object is necessarily instanceof
 			// CS_Reference (otherwise, the feature cannot be a port)
 			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> owner = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(value);
@@ -338,7 +338,7 @@ void CS_AddStructuralFeatureValueActionActivationImpl::doActionDefault()
 		value = this->takeTokens(action->getObject())->at(0);
 	}
 	/*--------------------------------------------------------*/
-	
+
 	std::shared_ptr<Bag<fUML::Semantics::Values::Value>> inputValues = this->takeTokens(action->getValue());
 	
 	// NOTE: Multiplicity of the value input pin is required to be 1..1.

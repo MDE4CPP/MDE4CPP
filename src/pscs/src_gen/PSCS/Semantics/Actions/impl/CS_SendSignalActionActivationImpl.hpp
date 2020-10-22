@@ -19,7 +19,7 @@
 //*********************************
 namespace PSCS::Semantics::Actions 
 {
-	class CS_SendSignalActionActivationImpl :virtual public fUML::Semantics::Actions::SendSignalActionActivationImpl, virtual public CS_SendSignalActionActivation 
+	class CS_SendSignalActionActivationImpl : virtual public fUML::Semantics::Actions::SendSignalActionActivationImpl, virtual public CS_SendSignalActionActivation 
 	{
 		public: 
 			CS_SendSignalActionActivationImpl(const CS_SendSignalActionActivationImpl & obj);

@@ -19,7 +19,7 @@
 //*********************************
 namespace PSCS::Semantics::StructuredClassifiers 
 {
-	class CS_RequestPropagationStrategyImpl :virtual public fUML::Semantics::Loci::SemanticStrategyImpl, virtual public CS_RequestPropagationStrategy 
+	class CS_RequestPropagationStrategyImpl : virtual public fUML::Semantics::Loci::SemanticStrategyImpl, virtual public CS_RequestPropagationStrategy 
 	{
 		public: 
 			CS_RequestPropagationStrategyImpl(const CS_RequestPropagationStrategyImpl & obj);

@@ -19,7 +19,7 @@
 //*********************************
 namespace PSCS::Semantics::CommonBehavior 
 {
-	class CS_EventOccurrenceImpl :virtual public fUML::Semantics::CommonBehavior::EventOccurrenceImpl, virtual public CS_EventOccurrence 
+	class CS_EventOccurrenceImpl : virtual public fUML::Semantics::CommonBehavior::EventOccurrenceImpl, virtual public CS_EventOccurrence 
 	{
 		public: 
 			CS_EventOccurrenceImpl(const CS_EventOccurrenceImpl & obj);

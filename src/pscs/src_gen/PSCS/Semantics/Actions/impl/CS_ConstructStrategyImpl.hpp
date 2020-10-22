@@ -19,7 +19,7 @@
 //*********************************
 namespace PSCS::Semantics::Actions 
 {
-	class CS_ConstructStrategyImpl :virtual public fUML::Semantics::Loci::SemanticStrategyImpl, virtual public CS_ConstructStrategy 
+	class CS_ConstructStrategyImpl : virtual public fUML::Semantics::Loci::SemanticStrategyImpl, virtual public CS_ConstructStrategy 
 	{
 		public: 
 			CS_ConstructStrategyImpl(const CS_ConstructStrategyImpl & obj);

@@ -19,7 +19,7 @@
 //*********************************
 namespace PSCS::Semantics::Values 
 {
-	class CS_OpaqueExpressionEvaluationImpl :virtual public fUML::Semantics::Values::EvaluationImpl, virtual public CS_OpaqueExpressionEvaluation 
+	class CS_OpaqueExpressionEvaluationImpl : virtual public fUML::Semantics::Values::EvaluationImpl, virtual public CS_OpaqueExpressionEvaluation 
 	{
 		public: 
 			CS_OpaqueExpressionEvaluationImpl(const CS_OpaqueExpressionEvaluationImpl & obj);

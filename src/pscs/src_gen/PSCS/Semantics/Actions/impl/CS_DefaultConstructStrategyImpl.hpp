@@ -19,7 +19,7 @@
 //*********************************
 namespace PSCS::Semantics::Actions 
 {
-	class CS_DefaultConstructStrategyImpl :virtual public CS_ConstructStrategyImpl, virtual public CS_DefaultConstructStrategy 
+	class CS_DefaultConstructStrategyImpl : virtual public CS_ConstructStrategyImpl, virtual public CS_DefaultConstructStrategy 
 	{
 		public: 
 			CS_DefaultConstructStrategyImpl(const CS_DefaultConstructStrategyImpl & obj);

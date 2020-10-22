@@ -19,7 +19,7 @@
 //*********************************
 namespace PSCS::Semantics::StructuredClassifiers 
 {
-	class CS_StructuralFeatureOfInterfaceAccessStrategyImpl :virtual public fUML::Semantics::Loci::SemanticStrategyImpl, virtual public CS_StructuralFeatureOfInterfaceAccessStrategy 
+	class CS_StructuralFeatureOfInterfaceAccessStrategyImpl : virtual public fUML::Semantics::Loci::SemanticStrategyImpl, virtual public CS_StructuralFeatureOfInterfaceAccessStrategy 
 	{
 		public: 
 			CS_StructuralFeatureOfInterfaceAccessStrategyImpl(const CS_StructuralFeatureOfInterfaceAccessStrategyImpl & obj);

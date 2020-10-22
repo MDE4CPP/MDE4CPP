@@ -19,7 +19,7 @@
 //*********************************
 namespace PSCS::Semantics::Loci 
 {
-	class CS_ExecutorImpl :virtual public fUML::Semantics::Loci::ExecutorImpl, virtual public CS_Executor 
+	class CS_ExecutorImpl : virtual public fUML::Semantics::Loci::ExecutorImpl, virtual public CS_Executor 
 	{
 		public: 
 			CS_ExecutorImpl(const CS_ExecutorImpl & obj);

@@ -19,7 +19,7 @@
 //*********************************
 namespace PSCS::Semantics::StructuredClassifiers 
 {
-	class CS_InteractionPointImpl :virtual public fUML::Semantics::StructuredClassifiers::ReferenceImpl, virtual public CS_InteractionPoint 
+	class CS_InteractionPointImpl : virtual public fUML::Semantics::StructuredClassifiers::ReferenceImpl, virtual public CS_InteractionPoint 
 	{
 		public: 
 			CS_InteractionPointImpl(const CS_InteractionPointImpl & obj);

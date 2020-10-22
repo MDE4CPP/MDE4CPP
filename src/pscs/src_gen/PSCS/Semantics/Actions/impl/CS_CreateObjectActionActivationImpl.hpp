@@ -19,7 +19,7 @@
 //*********************************
 namespace PSCS::Semantics::Actions 
 {
-	class CS_CreateObjectActionActivationImpl :virtual public fUML::Semantics::Actions::CreateObjectActionActivationImpl, virtual public CS_CreateObjectActionActivation 
+	class CS_CreateObjectActionActivationImpl : virtual public fUML::Semantics::Actions::CreateObjectActionActivationImpl, virtual public CS_CreateObjectActionActivation 
 	{
 		public: 
 			CS_CreateObjectActionActivationImpl(const CS_CreateObjectActionActivationImpl & obj);

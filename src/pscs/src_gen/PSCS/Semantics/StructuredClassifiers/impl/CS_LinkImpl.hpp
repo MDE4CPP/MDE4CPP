@@ -19,7 +19,7 @@
 //*********************************
 namespace PSCS::Semantics::StructuredClassifiers 
 {
-	class CS_LinkImpl :virtual public fUML::Semantics::StructuredClassifiers::LinkImpl, virtual public CS_Link 
+	class CS_LinkImpl : virtual public fUML::Semantics::StructuredClassifiers::LinkImpl, virtual public CS_Link 
 	{
 		public: 
 			CS_LinkImpl(const CS_LinkImpl & obj);

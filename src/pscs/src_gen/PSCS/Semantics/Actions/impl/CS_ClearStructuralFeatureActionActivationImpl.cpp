@@ -216,7 +216,7 @@ void CS_ClearStructuralFeatureActionActivationImpl::doAction()
 		value = this->takeTokens(action->getObject())->at(0);
 	}
 	/*--------------------------------------------------------*/
-	
+
 	if(association != nullptr) {
 		std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Link>> links = this->getMatchingLinks(association, feature, value);
 		for(unsigned int i = 0; i < links->size(); i++) {

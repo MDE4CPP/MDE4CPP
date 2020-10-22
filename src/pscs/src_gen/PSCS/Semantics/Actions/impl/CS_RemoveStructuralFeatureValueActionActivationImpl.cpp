@@ -231,7 +231,7 @@ void CS_RemoveStructuralFeatureValueActionActivationImpl::doAction()
 		value = this->takeTokens(action->getObject())->at(0);
 	}
 	/*--------------------------------------------------------*/
-	
+
 	std::shared_ptr<fUML::Semantics::Values::Value> inputValue = nullptr;
 	if(action->getValue() != nullptr) {
 		// NOTE: Multiplicity of the value input pin is required to be 1..1.

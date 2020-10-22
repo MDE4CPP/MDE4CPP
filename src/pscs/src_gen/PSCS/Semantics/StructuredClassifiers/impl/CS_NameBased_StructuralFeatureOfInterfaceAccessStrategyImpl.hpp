@@ -19,7 +19,7 @@
 //*********************************
 namespace PSCS::Semantics::StructuredClassifiers 
 {
-	class CS_NameBased_StructuralFeatureOfInterfaceAccessStrategyImpl :virtual public CS_StructuralFeatureOfInterfaceAccessStrategyImpl, virtual public CS_NameBased_StructuralFeatureOfInterfaceAccessStrategy 
+	class CS_NameBased_StructuralFeatureOfInterfaceAccessStrategyImpl : virtual public CS_StructuralFeatureOfInterfaceAccessStrategyImpl, virtual public CS_NameBased_StructuralFeatureOfInterfaceAccessStrategy 
 	{
 		public: 
 			CS_NameBased_StructuralFeatureOfInterfaceAccessStrategyImpl(const CS_NameBased_StructuralFeatureOfInterfaceAccessStrategyImpl & obj);

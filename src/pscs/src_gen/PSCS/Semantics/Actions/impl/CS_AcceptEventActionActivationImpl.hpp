@@ -19,7 +19,7 @@
 //*********************************
 namespace PSCS::Semantics::Actions 
 {
-	class CS_AcceptEventActionActivationImpl :virtual public fUML::Semantics::Actions::AcceptEventActionActivationImpl, virtual public CS_AcceptEventActionActivation 
+	class CS_AcceptEventActionActivationImpl : virtual public fUML::Semantics::Actions::AcceptEventActionActivationImpl, virtual public CS_AcceptEventActionActivation 
 	{
 		public: 
 			CS_AcceptEventActionActivationImpl(const CS_AcceptEventActionActivationImpl & obj);

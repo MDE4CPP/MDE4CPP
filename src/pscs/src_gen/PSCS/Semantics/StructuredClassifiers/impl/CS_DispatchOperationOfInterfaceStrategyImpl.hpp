@@ -19,7 +19,7 @@
 //*********************************
 namespace PSCS::Semantics::StructuredClassifiers 
 {
-	class CS_DispatchOperationOfInterfaceStrategyImpl :virtual public fUML::Semantics::StructuredClassifiers::RedefinitionBasedDispatchStrategyImpl, virtual public CS_DispatchOperationOfInterfaceStrategy 
+	class CS_DispatchOperationOfInterfaceStrategyImpl : virtual public fUML::Semantics::StructuredClassifiers::RedefinitionBasedDispatchStrategyImpl, virtual public CS_DispatchOperationOfInterfaceStrategy 
 	{
 		public: 
 			CS_DispatchOperationOfInterfaceStrategyImpl(const CS_DispatchOperationOfInterfaceStrategyImpl & obj);

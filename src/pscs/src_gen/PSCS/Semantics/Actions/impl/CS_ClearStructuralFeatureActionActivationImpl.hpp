@@ -19,7 +19,7 @@
 //*********************************
 namespace PSCS::Semantics::Actions 
 {
-	class CS_ClearStructuralFeatureActionActivationImpl :virtual public fUML::Semantics::Actions::ClearStructuralFeatureActionActivationImpl, virtual public CS_ClearStructuralFeatureActionActivation 
+	class CS_ClearStructuralFeatureActionActivationImpl : virtual public fUML::Semantics::Actions::ClearStructuralFeatureActionActivationImpl, virtual public CS_ClearStructuralFeatureActionActivation 
 	{
 		public: 
 			CS_ClearStructuralFeatureActionActivationImpl(const CS_ClearStructuralFeatureActionActivationImpl & obj);

@@ -19,7 +19,7 @@
 //*********************************
 namespace PSCS::Semantics::Loci 
 {
-	class CS_ExecutionFactoryImpl :virtual public fUML::Semantics::Loci::ExecutionFactoryImpl, virtual public CS_ExecutionFactory 
+	class CS_ExecutionFactoryImpl : virtual public fUML::Semantics::Loci::ExecutionFactoryImpl, virtual public CS_ExecutionFactory 
 	{
 		public: 
 			CS_ExecutionFactoryImpl(const CS_ExecutionFactoryImpl & obj);
