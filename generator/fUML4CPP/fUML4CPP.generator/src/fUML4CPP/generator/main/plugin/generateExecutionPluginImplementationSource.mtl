@@ -50,20 +50,7 @@ using namespace [aPackage.name/];
 // Constructor / Destructor
 //*********************************
 [packageName/]::[packageName/]()
-{	[comment initialization of execution locus, factory, executer/]
-	[if (aPackage.allOwnedElements()->filter(Activity)->size() > 0)]
-	[generateExecutionPluginInitialization()/]
-
-	[comment create opaque behavior executions for operations /]
-	[for (anOperation : Operation | aPackage.getClassOperations()) ? (anOperation.method->size() > 0)]
-	[anOperation.generateOpaqueBehaviorForOperationExecution()/]
-	[/for]
-
-	[comment create opaque behavior executions for opaque behaviors in the model that are executed either by a call behavior action or by a desicion node/]
-	[for (anOpaqueBehavior : OpaqueBehavior | aPackage.collectAllExecutedOpaqueBehaviors())]
-	[anOpaqueBehavior.generateOpaqueBehaviorExecution()/]
-	[/for]
-	[/if]
+{	
 }
 
 [packageName/]::~[packageName/]()
@@ -103,8 +90,32 @@ std::shared_ptr<ecore::EObject> [packageName/]::create(const std::string& name, 
 	return nullptr;
 }
 
+void [packageName/]::initialize()
+{
+	[comment initialization of execution locus, factory, executer/]
+	[if (aPackage.allOwnedElements()->filter(Activity)->size() > 0)]
+	[generateExecutionPluginInitialization()/]
+
+	[comment create opaque behavior executions for operations /]
+	[for (anOperation : Operation | aPackage.getOperationExecutions())]
+	[anOperation.generateOpaqueBehaviorForOperationExecution()/]
+	[/for]
+
+	[comment create opaque behavior executions for opaque behaviors in the model that are executed either by a call behavior action or by a desicion node/]
+	[for (anOpaqueBehavior : OpaqueBehavior | aPackage.collectAllExecutedOpaqueBehaviors())]
+	[anOpaqueBehavior.generateOpaqueBehaviorExecution()/]
+	[/for]
+	[/if]
+
+	m_IsInitialized = true;
+}
+
 Any [packageName/]::executeActivity(std::shared_ptr<uml::Activity> activity, std::shared_ptr<std::vector<Any>> parameterList, std::shared_ptr<uml::Element> element)
 {
+	if(!m_IsInitialized)
+	{
+		initialize();
+	}
 [for (act : Activity | aPackage.getUsedActivities()->sortedBy(myQualifiedName()))]
 	if (activity == [act.generatePackageGetterCall()/])
 	{
@@ -166,7 +177,7 @@ Any [packageName/]::executeActivity(std::shared_ptr<uml::Activity> activity, std
 //OpaqueBehaviourExecutions
 [aPackage.getCallBehaviorActionsWithOB().generateInclude()/]
 [aPackage.getDecisionNodesWithOB().generateInclude()/]
-[aPackage.getClassOperations().generateInclude()/]
+[aPackage.getOperationExecutions().generateInclude()/]
 [/template]
 
 [template public generateActivityRelatedIncludes(anActivity : Activity, aPackage : Package)]
@@ -370,7 +381,7 @@ return nullptr;
 
 [template public generateExecutionPluginDeinitialization(aPackage : Package)]
 /*clearing opaque behaviors from operations*/
-[for (anOperation : Operation | aPackage.getClassOperations()) ? (anOperation.method->size() > 0)]
+[for (anOperation : Operation | aPackage.getOperationExecutions())]
 [anOperation.generatePackageGetterCall()/]->getMethod()->erase(m_[anOperation.getFBPackageElement()/]);
 [/for]
 
@@ -393,6 +404,7 @@ m_locus->setFactory(nullptr);
 		aPackage.getDecisionNodesWithOB().decisionInput.getNearestPackage()
 	}->flatten()->sortedBy(name) /]
 
+
 [query private getOperationExecutionName(anOperation : Operation) : String = 
 	anOperation.owner.oclAsType(NamedElement).name.concat('_').concat(anOperation.name.sanitize()).concat(('Execution')) /]
 
@@ -413,3 +425,6 @@ m_locus->setFactory(nullptr);
 
 [query public listNumber(aParameter : Parameter, anActivity : Activity) : Integer =  
 	anActivity.ownedParameter->select((direction = ParameterDirectionKind::_out) or (direction = ParameterDirectionKind::_in))->indexOf(aParameter)-1 /]
+
+[query public getOperationExecutions(aPackage : Package) : OrderedSet(Operation) = 
+	getPackageOperations()->addAll(aPackage.allOwnedElements()->filter(CallOperationAction).operation)->sortedBy(name) /]
