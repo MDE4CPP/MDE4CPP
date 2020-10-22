@@ -18,7 +18,7 @@
 //*********************************
 namespace ecore 
 {
-	class EStructuralFeatureImpl :virtual public ETypedElementImpl, virtual public EStructuralFeature 
+	class EStructuralFeatureImpl : virtual public ETypedElementImpl, virtual public EStructuralFeature 
 	{
 		public: 
 			EStructuralFeatureImpl(const EStructuralFeatureImpl & obj);

@@ -54,6 +54,7 @@ namespace StandardProfile
 			//*********************************
 			std::weak_ptr<uml::Usage> m_base_Usage;
 			
+			
 	};
 }
 #endif /* end of include guard: STANDARDPROFILE_SEND__HPP */

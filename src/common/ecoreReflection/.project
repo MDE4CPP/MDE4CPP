@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>ecoreReflection</name>
+<!-- Start of user code main
+	You may manually edit the following lines, won't be overwritten upon generation. -->
+	<name>EcoreReflection_src_gen</name>
+<!-- End of user code -->
 	<comment></comment>
-	<projects>
+	<projects> 
 	</projects>
 	<buildSpec>
 		<buildCommand>

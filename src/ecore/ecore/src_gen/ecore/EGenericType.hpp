@@ -58,13 +58,13 @@ namespace ecore
 
 // enum includes
 
-#include "ecore/EObject.hpp"
+#include "ecore/EModelElement.hpp"
 
 //*********************************
 namespace ecore 
 {
 	
-	class EGenericType : virtual public ecore::EObject 
+	class EGenericType : virtual public ecore::EModelElement
 
 	{
 		public:

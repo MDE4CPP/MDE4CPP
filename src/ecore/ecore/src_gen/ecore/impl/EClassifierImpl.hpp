@@ -18,7 +18,7 @@
 //*********************************
 namespace ecore 
 {
-	class EClassifierImpl :virtual public ENamedElementImpl, virtual public EClassifier 
+	class EClassifierImpl : virtual public ENamedElementImpl, virtual public EClassifier 
 	{
 		public: 
 			EClassifierImpl(const EClassifierImpl & obj);

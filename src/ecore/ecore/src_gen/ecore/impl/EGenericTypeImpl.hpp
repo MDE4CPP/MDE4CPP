@@ -14,12 +14,12 @@
 #include "../EGenericType.hpp"
 
 
-#include "ecore/impl/EObjectImpl.hpp"
+#include "ecore/impl/EModelElementImpl.hpp"
 
 //*********************************
 namespace ecore 
 {
-	class EGenericTypeImpl :virtual public ecore::EObjectImpl,
+	class EGenericTypeImpl : virtual public ecore::EModelElementImpl,
 virtual public EGenericType 
 	{
 		public: 

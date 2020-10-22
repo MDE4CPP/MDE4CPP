@@ -18,7 +18,7 @@
 //*********************************
 namespace ecore 
 {
-	class EEnumLiteralImpl :virtual public ENamedElementImpl, virtual public EEnumLiteral 
+	class EEnumLiteralImpl : virtual public ENamedElementImpl, virtual public EEnumLiteral 
 	{
 		public: 
 			EEnumLiteralImpl(const EEnumLiteralImpl & obj);

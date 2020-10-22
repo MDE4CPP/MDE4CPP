@@ -18,7 +18,7 @@
 //*********************************
 namespace ecore 
 {
-	class EFactoryImpl :virtual public EModelElementImpl, virtual public EFactory 
+	class EFactoryImpl : virtual public EModelElementImpl, virtual public EFactory 
 	{
 		public: 
 			EFactoryImpl(const EFactoryImpl & obj);

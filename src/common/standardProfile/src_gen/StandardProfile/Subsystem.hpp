@@ -54,6 +54,7 @@ namespace StandardProfile
 			//*********************************
 			std::weak_ptr<uml::Component> m_base_Component;
 			
+			
 	};
 }
 #endif /* end of include guard: STANDARDPROFILE_SUBSYSTEM__HPP */

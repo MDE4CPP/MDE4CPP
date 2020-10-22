@@ -288,6 +288,10 @@ std::shared_ptr<uml::Element> StandardProfileFactoryImpl::create(std::string _cl
     }
     return nullptr;
 }
+
+//--------------------------
+//create-Functions for class 'Auxiliary'
+//--------------------------
 std::shared_ptr<StandardProfile::Auxiliary> StandardProfileFactoryImpl::createAuxiliary(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<StandardProfile::AuxiliaryImpl> element(new AuxiliaryImpl());
@@ -296,6 +300,11 @@ std::shared_ptr<StandardProfile::Auxiliary> StandardProfileFactoryImpl::createAu
 	element->instantiate();
 	return element;
 }
+
+
+//--------------------------
+//create-Functions for class 'BuildComponent'
+//--------------------------
 std::shared_ptr<StandardProfile::BuildComponent> StandardProfileFactoryImpl::createBuildComponent(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<StandardProfile::BuildComponentImpl> element(new BuildComponentImpl());
@@ -304,6 +313,11 @@ std::shared_ptr<StandardProfile::BuildComponent> StandardProfileFactoryImpl::cre
 	element->instantiate();
 	return element;
 }
+
+
+//--------------------------
+//create-Functions for class 'Call'
+//--------------------------
 std::shared_ptr<StandardProfile::Call> StandardProfileFactoryImpl::createCall(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<StandardProfile::CallImpl> element(new CallImpl());
@@ -312,6 +326,11 @@ std::shared_ptr<StandardProfile::Call> StandardProfileFactoryImpl::createCall(co
 	element->instantiate();
 	return element;
 }
+
+
+//--------------------------
+//create-Functions for class 'Create'
+//--------------------------
 std::shared_ptr<StandardProfile::Create> StandardProfileFactoryImpl::createCreate(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<StandardProfile::CreateImpl> element(new CreateImpl());
@@ -320,6 +339,11 @@ std::shared_ptr<StandardProfile::Create> StandardProfileFactoryImpl::createCreat
 	element->instantiate();
 	return element;
 }
+
+
+//--------------------------
+//create-Functions for class 'Derive'
+//--------------------------
 std::shared_ptr<StandardProfile::Derive> StandardProfileFactoryImpl::createDerive(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<StandardProfile::DeriveImpl> element(new DeriveImpl());
@@ -328,6 +352,11 @@ std::shared_ptr<StandardProfile::Derive> StandardProfileFactoryImpl::createDeriv
 	element->instantiate();
 	return element;
 }
+
+
+//--------------------------
+//create-Functions for class 'Destroy'
+//--------------------------
 std::shared_ptr<StandardProfile::Destroy> StandardProfileFactoryImpl::createDestroy(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<StandardProfile::DestroyImpl> element(new DestroyImpl());
@@ -336,6 +365,11 @@ std::shared_ptr<StandardProfile::Destroy> StandardProfileFactoryImpl::createDest
 	element->instantiate();
 	return element;
 }
+
+
+//--------------------------
+//create-Functions for class 'Document'
+//--------------------------
 std::shared_ptr<StandardProfile::Document> StandardProfileFactoryImpl::createDocument(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<StandardProfile::DocumentImpl> element(new DocumentImpl());
@@ -344,6 +378,11 @@ std::shared_ptr<StandardProfile::Document> StandardProfileFactoryImpl::createDoc
 	element->instantiate();
 	return element;
 }
+
+
+//--------------------------
+//create-Functions for class 'Entity'
+//--------------------------
 std::shared_ptr<StandardProfile::Entity> StandardProfileFactoryImpl::createEntity(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<StandardProfile::EntityImpl> element(new EntityImpl());
@@ -352,6 +391,11 @@ std::shared_ptr<StandardProfile::Entity> StandardProfileFactoryImpl::createEntit
 	element->instantiate();
 	return element;
 }
+
+
+//--------------------------
+//create-Functions for class 'Executable'
+//--------------------------
 std::shared_ptr<StandardProfile::Executable> StandardProfileFactoryImpl::createExecutable(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<StandardProfile::ExecutableImpl> element(new ExecutableImpl());
@@ -360,6 +404,11 @@ std::shared_ptr<StandardProfile::Executable> StandardProfileFactoryImpl::createE
 	element->instantiate();
 	return element;
 }
+
+
+//--------------------------
+//create-Functions for class 'File'
+//--------------------------
 std::shared_ptr<StandardProfile::File> StandardProfileFactoryImpl::createFile(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<StandardProfile::FileImpl> element(new FileImpl());
@@ -368,6 +417,11 @@ std::shared_ptr<StandardProfile::File> StandardProfileFactoryImpl::createFile(co
 	element->instantiate();
 	return element;
 }
+
+
+//--------------------------
+//create-Functions for class 'Focus'
+//--------------------------
 std::shared_ptr<StandardProfile::Focus> StandardProfileFactoryImpl::createFocus(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<StandardProfile::FocusImpl> element(new FocusImpl());
@@ -376,6 +430,11 @@ std::shared_ptr<StandardProfile::Focus> StandardProfileFactoryImpl::createFocus(
 	element->instantiate();
 	return element;
 }
+
+
+//--------------------------
+//create-Functions for class 'Framework'
+//--------------------------
 std::shared_ptr<StandardProfile::Framework> StandardProfileFactoryImpl::createFramework(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<StandardProfile::FrameworkImpl> element(new FrameworkImpl());
@@ -384,6 +443,11 @@ std::shared_ptr<StandardProfile::Framework> StandardProfileFactoryImpl::createFr
 	element->instantiate();
 	return element;
 }
+
+
+//--------------------------
+//create-Functions for class 'Implement'
+//--------------------------
 std::shared_ptr<StandardProfile::Implement> StandardProfileFactoryImpl::createImplement(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<StandardProfile::ImplementImpl> element(new ImplementImpl());
@@ -392,6 +456,11 @@ std::shared_ptr<StandardProfile::Implement> StandardProfileFactoryImpl::createIm
 	element->instantiate();
 	return element;
 }
+
+
+//--------------------------
+//create-Functions for class 'ImplementationClass'
+//--------------------------
 std::shared_ptr<StandardProfile::ImplementationClass> StandardProfileFactoryImpl::createImplementationClass(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<StandardProfile::ImplementationClassImpl> element(new ImplementationClassImpl());
@@ -400,6 +469,11 @@ std::shared_ptr<StandardProfile::ImplementationClass> StandardProfileFactoryImpl
 	element->instantiate();
 	return element;
 }
+
+
+//--------------------------
+//create-Functions for class 'Instantiate'
+//--------------------------
 std::shared_ptr<StandardProfile::Instantiate> StandardProfileFactoryImpl::createInstantiate(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<StandardProfile::InstantiateImpl> element(new InstantiateImpl());
@@ -408,6 +482,11 @@ std::shared_ptr<StandardProfile::Instantiate> StandardProfileFactoryImpl::create
 	element->instantiate();
 	return element;
 }
+
+
+//--------------------------
+//create-Functions for class 'Library'
+//--------------------------
 std::shared_ptr<StandardProfile::Library> StandardProfileFactoryImpl::createLibrary(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<StandardProfile::LibraryImpl> element(new LibraryImpl());
@@ -416,6 +495,11 @@ std::shared_ptr<StandardProfile::Library> StandardProfileFactoryImpl::createLibr
 	element->instantiate();
 	return element;
 }
+
+
+//--------------------------
+//create-Functions for class 'Metaclass'
+//--------------------------
 std::shared_ptr<StandardProfile::Metaclass> StandardProfileFactoryImpl::createMetaclass(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<StandardProfile::MetaclassImpl> element(new MetaclassImpl());
@@ -424,6 +508,11 @@ std::shared_ptr<StandardProfile::Metaclass> StandardProfileFactoryImpl::createMe
 	element->instantiate();
 	return element;
 }
+
+
+//--------------------------
+//create-Functions for class 'Metamodel'
+//--------------------------
 std::shared_ptr<StandardProfile::Metamodel> StandardProfileFactoryImpl::createMetamodel(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<StandardProfile::MetamodelImpl> element(new MetamodelImpl());
@@ -432,6 +521,11 @@ std::shared_ptr<StandardProfile::Metamodel> StandardProfileFactoryImpl::createMe
 	element->instantiate();
 	return element;
 }
+
+
+//--------------------------
+//create-Functions for class 'ModelLibrary'
+//--------------------------
 std::shared_ptr<StandardProfile::ModelLibrary> StandardProfileFactoryImpl::createModelLibrary(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<StandardProfile::ModelLibraryImpl> element(new ModelLibraryImpl());
@@ -440,6 +534,11 @@ std::shared_ptr<StandardProfile::ModelLibrary> StandardProfileFactoryImpl::creat
 	element->instantiate();
 	return element;
 }
+
+
+//--------------------------
+//create-Functions for class 'Process'
+//--------------------------
 std::shared_ptr<StandardProfile::Process> StandardProfileFactoryImpl::createProcess(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<StandardProfile::ProcessImpl> element(new ProcessImpl());
@@ -448,6 +547,11 @@ std::shared_ptr<StandardProfile::Process> StandardProfileFactoryImpl::createProc
 	element->instantiate();
 	return element;
 }
+
+
+//--------------------------
+//create-Functions for class 'Realization'
+//--------------------------
 std::shared_ptr<StandardProfile::Realization> StandardProfileFactoryImpl::createRealization(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<StandardProfile::RealizationImpl> element(new RealizationImpl());
@@ -456,6 +560,11 @@ std::shared_ptr<StandardProfile::Realization> StandardProfileFactoryImpl::create
 	element->instantiate();
 	return element;
 }
+
+
+//--------------------------
+//create-Functions for class 'Refine'
+//--------------------------
 std::shared_ptr<StandardProfile::Refine> StandardProfileFactoryImpl::createRefine(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<StandardProfile::RefineImpl> element(new RefineImpl());
@@ -464,6 +573,11 @@ std::shared_ptr<StandardProfile::Refine> StandardProfileFactoryImpl::createRefin
 	element->instantiate();
 	return element;
 }
+
+
+//--------------------------
+//create-Functions for class 'Responsibility'
+//--------------------------
 std::shared_ptr<StandardProfile::Responsibility> StandardProfileFactoryImpl::createResponsibility(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<StandardProfile::ResponsibilityImpl> element(new ResponsibilityImpl());
@@ -472,6 +586,11 @@ std::shared_ptr<StandardProfile::Responsibility> StandardProfileFactoryImpl::cre
 	element->instantiate();
 	return element;
 }
+
+
+//--------------------------
+//create-Functions for class 'Script'
+//--------------------------
 std::shared_ptr<StandardProfile::Script> StandardProfileFactoryImpl::createScript(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<StandardProfile::ScriptImpl> element(new ScriptImpl());
@@ -480,6 +599,11 @@ std::shared_ptr<StandardProfile::Script> StandardProfileFactoryImpl::createScrip
 	element->instantiate();
 	return element;
 }
+
+
+//--------------------------
+//create-Functions for class 'Send'
+//--------------------------
 std::shared_ptr<StandardProfile::Send> StandardProfileFactoryImpl::createSend(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<StandardProfile::SendImpl> element(new SendImpl());
@@ -488,6 +612,11 @@ std::shared_ptr<StandardProfile::Send> StandardProfileFactoryImpl::createSend(co
 	element->instantiate();
 	return element;
 }
+
+
+//--------------------------
+//create-Functions for class 'Service'
+//--------------------------
 std::shared_ptr<StandardProfile::Service> StandardProfileFactoryImpl::createService(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<StandardProfile::ServiceImpl> element(new ServiceImpl());
@@ -496,6 +625,11 @@ std::shared_ptr<StandardProfile::Service> StandardProfileFactoryImpl::createServ
 	element->instantiate();
 	return element;
 }
+
+
+//--------------------------
+//create-Functions for class 'Source'
+//--------------------------
 std::shared_ptr<StandardProfile::Source> StandardProfileFactoryImpl::createSource(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<StandardProfile::SourceImpl> element(new SourceImpl());
@@ -504,6 +638,11 @@ std::shared_ptr<StandardProfile::Source> StandardProfileFactoryImpl::createSourc
 	element->instantiate();
 	return element;
 }
+
+
+//--------------------------
+//create-Functions for class 'Specification'
+//--------------------------
 std::shared_ptr<StandardProfile::Specification> StandardProfileFactoryImpl::createSpecification(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<StandardProfile::SpecificationImpl> element(new SpecificationImpl());
@@ -512,6 +651,11 @@ std::shared_ptr<StandardProfile::Specification> StandardProfileFactoryImpl::crea
 	element->instantiate();
 	return element;
 }
+
+
+//--------------------------
+//create-Functions for class 'Subsystem'
+//--------------------------
 std::shared_ptr<StandardProfile::Subsystem> StandardProfileFactoryImpl::createSubsystem(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<StandardProfile::SubsystemImpl> element(new SubsystemImpl());
@@ -520,6 +664,11 @@ std::shared_ptr<StandardProfile::Subsystem> StandardProfileFactoryImpl::createSu
 	element->instantiate();
 	return element;
 }
+
+
+//--------------------------
+//create-Functions for class 'SystemModel'
+//--------------------------
 std::shared_ptr<StandardProfile::SystemModel> StandardProfileFactoryImpl::createSystemModel(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<StandardProfile::SystemModelImpl> element(new SystemModelImpl());
@@ -528,6 +677,11 @@ std::shared_ptr<StandardProfile::SystemModel> StandardProfileFactoryImpl::create
 	element->instantiate();
 	return element;
 }
+
+
+//--------------------------
+//create-Functions for class 'Trace'
+//--------------------------
 std::shared_ptr<StandardProfile::Trace> StandardProfileFactoryImpl::createTrace(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<StandardProfile::TraceImpl> element(new TraceImpl());
@@ -536,6 +690,11 @@ std::shared_ptr<StandardProfile::Trace> StandardProfileFactoryImpl::createTrace(
 	element->instantiate();
 	return element;
 }
+
+
+//--------------------------
+//create-Functions for class 'Type'
+//--------------------------
 std::shared_ptr<StandardProfile::Type> StandardProfileFactoryImpl::createType(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<StandardProfile::TypeImpl> element(new TypeImpl());
@@ -544,6 +703,11 @@ std::shared_ptr<StandardProfile::Type> StandardProfileFactoryImpl::createType(co
 	element->instantiate();
 	return element;
 }
+
+
+//--------------------------
+//create-Functions for class 'Utility'
+//--------------------------
 std::shared_ptr<StandardProfile::Utility> StandardProfileFactoryImpl::createUtility(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<StandardProfile::UtilityImpl> element(new UtilityImpl());
@@ -552,6 +716,8 @@ std::shared_ptr<StandardProfile::Utility> StandardProfileFactoryImpl::createUtil
 	element->instantiate();
 	return element;
 }
+
+
 
 
 

@@ -14,12 +14,12 @@
 #include "../EStringToStringMapEntry.hpp"
 
 
-#include "ecore/impl/EObjectImpl.hpp"
+#include "ecore/impl/EModelElementImpl.hpp"
 
 //*********************************
 namespace ecore 
 {
-	class EStringToStringMapEntryImpl :virtual public ecore::EObjectImpl,
+	class EStringToStringMapEntryImpl : virtual public ecore::EModelElementImpl,
 virtual public EStringToStringMapEntry 
 	{
 		public: 

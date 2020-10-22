@@ -41,13 +41,13 @@ namespace ecore
 
 // enum includes
 
-#include "ecore/EObject.hpp"
+#include "ecore/EModelElement.hpp"
 
 //*********************************
 namespace ecore 
 {
 	
-	class EStringToStringMapEntry : virtual public ecore::EObject 
+	class EStringToStringMapEntry : virtual public ecore::EModelElement
 
 	{
 		public:

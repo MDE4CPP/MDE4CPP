@@ -18,7 +18,7 @@
 //*********************************
 namespace ecore 
 {
-	class EAnnotationImpl :virtual public EModelElementImpl, virtual public EAnnotation 
+	class EAnnotationImpl : virtual public EModelElementImpl, virtual public EAnnotation 
 	{
 		public: 
 			EAnnotationImpl(const EAnnotationImpl & obj);

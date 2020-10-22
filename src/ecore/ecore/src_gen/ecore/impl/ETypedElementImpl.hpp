@@ -18,7 +18,7 @@
 //*********************************
 namespace ecore 
 {
-	class ETypedElementImpl :virtual public ENamedElementImpl, virtual public ETypedElement 
+	class ETypedElementImpl : virtual public ENamedElementImpl, virtual public ETypedElement 
 	{
 		public: 
 			ETypedElementImpl(const ETypedElementImpl & obj);

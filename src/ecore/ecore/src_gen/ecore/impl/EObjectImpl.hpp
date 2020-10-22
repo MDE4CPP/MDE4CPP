@@ -18,7 +18,7 @@
 //*********************************
 namespace ecore 
 {
-	class EObjectImpl :
+	class EObjectImpl : 
 virtual public EObject 
 	{
 		public: 

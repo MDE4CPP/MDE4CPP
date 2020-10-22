@@ -18,7 +18,7 @@
 //*********************************
 namespace ecore 
 {
-	class EDataTypeImpl :virtual public EClassifierImpl, virtual public EDataType 
+	class EDataTypeImpl : virtual public EClassifierImpl, virtual public EDataType 
 	{
 		public: 
 			EDataTypeImpl(const EDataTypeImpl & obj);
