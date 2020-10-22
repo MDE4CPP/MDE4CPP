@@ -19,7 +19,7 @@
 //*********************************
 namespace fUML::Semantics::StructuredClassifiers 
 {
-	class DispatchStrategyImpl :virtual public fUML::Semantics::Loci::SemanticStrategyImpl, virtual public DispatchStrategy 
+	class DispatchStrategyImpl : virtual public fUML::Semantics::Loci::SemanticStrategyImpl, virtual public DispatchStrategy 
 	{
 		public: 
 			DispatchStrategyImpl(const DispatchStrategyImpl & obj);

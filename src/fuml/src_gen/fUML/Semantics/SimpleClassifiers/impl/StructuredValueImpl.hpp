@@ -19,7 +19,7 @@
 //*********************************
 namespace fUML::Semantics::SimpleClassifiers 
 {
-	class StructuredValueImpl :virtual public fUML::Semantics::Values::ValueImpl, virtual public StructuredValue 
+	class StructuredValueImpl : virtual public fUML::Semantics::Values::ValueImpl, virtual public StructuredValue 
 	{
 		public: 
 			StructuredValueImpl(const StructuredValueImpl & obj);

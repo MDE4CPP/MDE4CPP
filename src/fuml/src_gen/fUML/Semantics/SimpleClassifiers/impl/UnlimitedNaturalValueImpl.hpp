@@ -19,7 +19,7 @@
 //*********************************
 namespace fUML::Semantics::SimpleClassifiers 
 {
-	class UnlimitedNaturalValueImpl :virtual public PrimitiveValueImpl, virtual public UnlimitedNaturalValue 
+	class UnlimitedNaturalValueImpl : virtual public PrimitiveValueImpl, virtual public UnlimitedNaturalValue 
 	{
 		public: 
 			UnlimitedNaturalValueImpl(const UnlimitedNaturalValueImpl & obj);

@@ -19,7 +19,7 @@
 //*********************************
 namespace fUML::Semantics::Actions 
 {
-	class TestIdentityActionActivationImpl :virtual public ActionActivationImpl, virtual public TestIdentityActionActivation 
+	class TestIdentityActionActivationImpl : virtual public ActionActivationImpl, virtual public TestIdentityActionActivation 
 	{
 		public: 
 			TestIdentityActionActivationImpl(const TestIdentityActionActivationImpl & obj);

@@ -61,13 +61,13 @@ namespace fUML::Semantics::CommonBehavior
 
 // enum includes
 
-#include "ecore/EObject.hpp"
+#include "ecore/EModelElement.hpp"
 
 //*********************************
 namespace fUML::Semantics::CommonBehavior 
 {
 	
-	class ClassifierBehaviorExecution : virtual public ecore::EObject 
+	class ClassifierBehaviorExecution : virtual public ecore::EModelElement
 
 	{
 		public:

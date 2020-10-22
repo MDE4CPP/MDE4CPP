@@ -19,7 +19,7 @@
 //*********************************
 namespace fUML::Semantics::CommonBehavior 
 {
-	class ExecutionImpl :virtual public fUML::Semantics::StructuredClassifiers::ObjectImpl, virtual public Execution 
+	class ExecutionImpl : virtual public fUML::Semantics::StructuredClassifiers::ObjectImpl, virtual public Execution 
 	{
 		public: 
 			ExecutionImpl(const ExecutionImpl & obj);

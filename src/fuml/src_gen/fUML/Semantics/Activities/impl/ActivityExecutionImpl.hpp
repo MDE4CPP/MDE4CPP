@@ -19,7 +19,7 @@
 //*********************************
 namespace fUML::Semantics::Activities 
 {
-	class ActivityExecutionImpl :virtual public fUML::Semantics::CommonBehavior::ExecutionImpl, virtual public ActivityExecution 
+	class ActivityExecutionImpl : virtual public fUML::Semantics::CommonBehavior::ExecutionImpl, virtual public ActivityExecution 
 	{
 		public: 
 			ActivityExecutionImpl(const ActivityExecutionImpl & obj);

@@ -15,12 +15,12 @@
 
 #include "fUML/Semantics/Actions/impl/ActionsFactoryImpl.hpp"
 
-#include "ecore/impl/EObjectImpl.hpp"
+#include "ecore/impl/EModelElementImpl.hpp"
 
 //*********************************
 namespace fUML::Semantics::Actions 
 {
-	class AcceptCallActionActivationsImpl :virtual public ecore::EObjectImpl,
+	class AcceptCallActionActivationsImpl : virtual public ecore::EModelElementImpl,
 virtual public AcceptCallActionActivations 
 	{
 		public: 

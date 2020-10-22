@@ -19,7 +19,7 @@
 //*********************************
 namespace fUML::Semantics::Actions 
 {
-	class ClearAssociationActionActivationImpl :virtual public ActionActivationImpl, virtual public ClearAssociationActionActivation 
+	class ClearAssociationActionActivationImpl : virtual public ActionActivationImpl, virtual public ClearAssociationActionActivation 
 	{
 		public: 
 			ClearAssociationActionActivationImpl(const ClearAssociationActionActivationImpl & obj);

@@ -60,13 +60,13 @@ namespace fUML::Semantics::Actions
 
 // enum includes
 
-#include "ecore/EObject.hpp"
+#include "ecore/EModelElement.hpp"
 
 //*********************************
 namespace fUML::Semantics::Actions 
 {
 	
-	class ClauseActivation : virtual public ecore::EObject 
+	class ClauseActivation : virtual public ecore::EModelElement
 
 	{
 		public:

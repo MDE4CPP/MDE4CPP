@@ -56,13 +56,13 @@ namespace fUML::Semantics::Values
 
 // enum includes
 
-#include "ecore/EObject.hpp"
+#include "ecore/EModelElement.hpp"
 
 //*********************************
 namespace fUML::Semantics::CommonBehavior 
 {
 	
-	class ParameterValue : virtual public ecore::EObject 
+	class ParameterValue : virtual public ecore::EModelElement
 
 	{
 		public:

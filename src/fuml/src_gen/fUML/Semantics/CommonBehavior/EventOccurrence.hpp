@@ -56,13 +56,13 @@ namespace uml
 
 // enum includes
 
-#include "ecore/EObject.hpp"
+#include "ecore/EModelElement.hpp"
 
 //*********************************
 namespace fUML::Semantics::CommonBehavior 
 {
 	
-	class EventOccurrence : virtual public ecore::EObject 
+	class EventOccurrence : virtual public ecore::EModelElement
 
 	{
 		public:

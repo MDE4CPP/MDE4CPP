@@ -41,13 +41,13 @@ namespace fUML
 
 // enum includes
 
-#include "ecore/EObject.hpp"
+#include "ecore/EModelElement.hpp"
 
 //*********************************
 namespace fUML::Semantics::Loci 
 {
 	
-	class SemanticStrategy : virtual public ecore::EObject 
+	class SemanticStrategy : virtual public ecore::EModelElement
 
 	{
 		public:

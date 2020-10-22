@@ -19,7 +19,7 @@
 //*********************************
 namespace fUML::Semantics::Actions 
 {
-	class ReadSelfActionActivationImpl :virtual public ActionActivationImpl, virtual public ReadSelfActionActivation 
+	class ReadSelfActionActivationImpl : virtual public ActionActivationImpl, virtual public ReadSelfActionActivation 
 	{
 		public: 
 			ReadSelfActionActivationImpl(const ReadSelfActionActivationImpl & obj);

@@ -19,7 +19,7 @@
 //*********************************
 namespace fUML::Semantics::Actions 
 {
-	class DestroyLinkActionActivationImpl :virtual public WriteLinkActionActivationImpl, virtual public DestroyLinkActionActivation 
+	class DestroyLinkActionActivationImpl : virtual public WriteLinkActionActivationImpl, virtual public DestroyLinkActionActivation 
 	{
 		public: 
 			DestroyLinkActionActivationImpl(const DestroyLinkActionActivationImpl & obj);

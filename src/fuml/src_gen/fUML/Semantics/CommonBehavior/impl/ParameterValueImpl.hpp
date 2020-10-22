@@ -15,12 +15,12 @@
 
 #include "fUML/Semantics/CommonBehavior/impl/CommonBehaviorFactoryImpl.hpp"
 
-#include "ecore/impl/EObjectImpl.hpp"
+#include "ecore/impl/EModelElementImpl.hpp"
 
 //*********************************
 namespace fUML::Semantics::CommonBehavior 
 {
-	class ParameterValueImpl :virtual public ecore::EObjectImpl,
+	class ParameterValueImpl : virtual public ecore::EModelElementImpl,
 virtual public ParameterValue 
 	{
 		public: 

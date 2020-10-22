@@ -15,12 +15,12 @@
 
 #include "fUML/Semantics/CommonBehavior/impl/CommonBehaviorFactoryImpl.hpp"
 
-#include "ecore/impl/EObjectImpl.hpp"
+#include "ecore/impl/EModelElementImpl.hpp"
 
 //*********************************
 namespace fUML::Semantics::CommonBehavior 
 {
-	class ObjectActivationImpl :virtual public ecore::EObjectImpl,
+	class ObjectActivationImpl : virtual public ecore::EModelElementImpl,
 virtual public ObjectActivation 
 	{
 		public: 

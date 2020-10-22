@@ -19,7 +19,7 @@
 //*********************************
 namespace fUML::Semantics::StructuredClassifiers 
 {
-	class RedefinitionBasedDispatchStrategyImpl :virtual public DispatchStrategyImpl, virtual public RedefinitionBasedDispatchStrategy 
+	class RedefinitionBasedDispatchStrategyImpl : virtual public DispatchStrategyImpl, virtual public RedefinitionBasedDispatchStrategy 
 	{
 		public: 
 			RedefinitionBasedDispatchStrategyImpl(const RedefinitionBasedDispatchStrategyImpl & obj);

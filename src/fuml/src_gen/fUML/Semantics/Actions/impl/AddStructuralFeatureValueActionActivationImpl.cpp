@@ -31,13 +31,12 @@
 #include "fUML/Semantics/SimpleClassifiers/StructuredValue.hpp"
 #include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
 #include "fUML/Semantics/SimpleClassifiers/UnlimitedNaturalValue.hpp"
+#include "fUML/Semantics/Activities/ActivityExecution.hpp"
+#include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
 #include "fUML/Semantics/StructuredClassifiers/Link.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
 #include "uml/AddStructuralFeatureValueAction.hpp"
 #include "uml/Property.hpp"
-
-#include "fUML/Semantics/Activities/ActivityExecution.hpp"
-#include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
 #include "uml/InputPin.hpp"
 
 //Forward declaration includes
@@ -209,7 +208,7 @@ void AddStructuralFeatureValueActionActivationImpl::doAction()
 		value = this->takeTokens(action->getObject())->at(0);
 	}
 	/*--------------------------------------------------------*/
-	
+
 	std::shared_ptr<Bag<fUML::Semantics::Values::Value>> inputValues = takeTokens(action->getValue());
 	
 	// NOTE: Multiplicity of the value input pin is required to be 1..1.

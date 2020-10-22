@@ -19,7 +19,7 @@
 //*********************************
 namespace fUML::Semantics::Loci 
 {
-	class ChoiceStrategyImpl :virtual public SemanticStrategyImpl, virtual public ChoiceStrategy 
+	class ChoiceStrategyImpl : virtual public SemanticStrategyImpl, virtual public ChoiceStrategy 
 	{
 		public: 
 			ChoiceStrategyImpl(const ChoiceStrategyImpl & obj);

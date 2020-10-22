@@ -66,13 +66,13 @@ namespace fUML::Semantics::Activities
 
 // enum includes
 
-#include "ecore/EObject.hpp"
+#include "ecore/EModelElement.hpp"
 
 //*********************************
 namespace fUML::Semantics::Activities 
 {
 	
-	class ActivityEdgeInstance : virtual public ecore::EObject 
+	class ActivityEdgeInstance : virtual public ecore::EModelElement
 
 	{
 		public:

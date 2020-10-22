@@ -19,7 +19,7 @@
 //*********************************
 namespace fUML::Semantics::CommonBehavior 
 {
-	class SignalEventOccurrenceImpl :virtual public EventOccurrenceImpl, virtual public SignalEventOccurrence 
+	class SignalEventOccurrenceImpl : virtual public EventOccurrenceImpl, virtual public SignalEventOccurrence 
 	{
 		public: 
 			SignalEventOccurrenceImpl(const SignalEventOccurrenceImpl & obj);

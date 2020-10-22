@@ -19,7 +19,7 @@
 //*********************************
 namespace fUML::Semantics::Classification 
 {
-	class InstanceValueEvaluationImpl :virtual public fUML::Semantics::Values::EvaluationImpl, virtual public InstanceValueEvaluation 
+	class InstanceValueEvaluationImpl : virtual public fUML::Semantics::Values::EvaluationImpl, virtual public InstanceValueEvaluation 
 	{
 		public: 
 			InstanceValueEvaluationImpl(const InstanceValueEvaluationImpl & obj);

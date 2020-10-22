@@ -15,12 +15,12 @@
 
 #include "fUML/Semantics/Activities/impl/ActivitiesFactoryImpl.hpp"
 
-#include "ecore/impl/EObjectImpl.hpp"
+#include "ecore/impl/EModelElementImpl.hpp"
 
 //*********************************
 namespace fUML::Semantics::Activities 
 {
-	class ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl :virtual public ecore::EObjectImpl,
+	class ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl : virtual public ecore::EModelElementImpl,
 virtual public ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1 
 	{
 		public: 

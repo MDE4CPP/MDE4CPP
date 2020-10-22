@@ -15,12 +15,12 @@
 
 #include "fUML/Semantics/CommonBehavior/impl/CommonBehaviorFactoryImpl.hpp"
 
-#include "ecore/impl/EObjectImpl.hpp"
+#include "ecore/impl/EModelElementImpl.hpp"
 
 //*********************************
 namespace fUML::Semantics::CommonBehavior 
 {
-	class ClassifierBehaviorExecutionImpl :virtual public ecore::EObjectImpl,
+	class ClassifierBehaviorExecutionImpl : virtual public ecore::EModelElementImpl,
 virtual public ClassifierBehaviorExecution 
 	{
 		public: 

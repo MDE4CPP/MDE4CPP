@@ -19,7 +19,7 @@
 //*********************************
 namespace fUML::Semantics::CommonBehavior 
 {
-	class ClassifierBehaviorInvocationEventAccepterImpl :virtual public EventAccepterImpl, virtual public ClassifierBehaviorInvocationEventAccepter 
+	class ClassifierBehaviorInvocationEventAccepterImpl : virtual public EventAccepterImpl, virtual public ClassifierBehaviorInvocationEventAccepter 
 	{
 		public: 
 			ClassifierBehaviorInvocationEventAccepterImpl(const ClassifierBehaviorInvocationEventAccepterImpl & obj);

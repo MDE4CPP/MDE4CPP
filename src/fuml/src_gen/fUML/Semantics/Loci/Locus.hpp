@@ -71,13 +71,13 @@ namespace fUML::Semantics::StructuredClassifiers
 
 // enum includes
 
-#include "ecore/EObject.hpp"
+#include "ecore/EModelElement.hpp"
 
 //*********************************
 namespace fUML::Semantics::Loci 
 {
 	
-	class Locus : virtual public ecore::EObject 
+	class Locus : virtual public ecore::EModelElement
 
 	{
 		public:

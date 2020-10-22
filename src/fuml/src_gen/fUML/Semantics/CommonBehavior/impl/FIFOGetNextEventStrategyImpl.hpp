@@ -19,7 +19,7 @@
 //*********************************
 namespace fUML::Semantics::CommonBehavior 
 {
-	class FIFOGetNextEventStrategyImpl :virtual public GetNextEventStrategyImpl, virtual public FIFOGetNextEventStrategy 
+	class FIFOGetNextEventStrategyImpl : virtual public GetNextEventStrategyImpl, virtual public FIFOGetNextEventStrategy 
 	{
 		public: 
 			FIFOGetNextEventStrategyImpl(const FIFOGetNextEventStrategyImpl & obj);

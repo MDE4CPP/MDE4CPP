@@ -19,7 +19,7 @@
 //*********************************
 namespace fUML::Semantics::StructuredClassifiers 
 {
-	class ExtensionalValueListImpl :virtual public ExtensionalValueImpl, virtual public ExtensionalValueList 
+	class ExtensionalValueListImpl : virtual public ExtensionalValueImpl, virtual public ExtensionalValueList 
 	{
 		public: 
 			ExtensionalValueListImpl(const ExtensionalValueListImpl & obj);

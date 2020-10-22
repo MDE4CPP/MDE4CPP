@@ -19,7 +19,7 @@
 //*********************************
 namespace fUML::Semantics::Values 
 {
-	class EvaluationImpl :virtual public fUML::Semantics::Loci::SemanticVisitorImpl, virtual public Evaluation 
+	class EvaluationImpl : virtual public fUML::Semantics::Loci::SemanticVisitorImpl, virtual public Evaluation 
 	{
 		public: 
 			EvaluationImpl(const EvaluationImpl & obj);

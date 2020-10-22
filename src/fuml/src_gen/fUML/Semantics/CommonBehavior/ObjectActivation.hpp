@@ -73,13 +73,13 @@ namespace fUML::Semantics::SimpleClassifiers
 
 // enum includes
 
-#include "ecore/EObject.hpp"
+#include "ecore/EModelElement.hpp"
 
 //*********************************
 namespace fUML::Semantics::CommonBehavior 
 {
 	
-	class ObjectActivation : virtual public ecore::EObject 
+	class ObjectActivation : virtual public ecore::EModelElement
 
 	{
 		public:

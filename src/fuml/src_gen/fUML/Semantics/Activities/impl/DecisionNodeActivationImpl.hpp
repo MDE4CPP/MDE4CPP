@@ -19,7 +19,7 @@
 //*********************************
 namespace fUML::Semantics::Activities 
 {
-	class DecisionNodeActivationImpl :virtual public ControlNodeActivationImpl, virtual public DecisionNodeActivation 
+	class DecisionNodeActivationImpl : virtual public ControlNodeActivationImpl, virtual public DecisionNodeActivation 
 	{
 		public: 
 			DecisionNodeActivationImpl(const DecisionNodeActivationImpl & obj);

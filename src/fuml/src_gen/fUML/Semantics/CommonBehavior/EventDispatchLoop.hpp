@@ -41,13 +41,13 @@ namespace fUML
 
 // enum includes
 
-#include "ecore/EObject.hpp"
+#include "ecore/EModelElement.hpp"
 
 //*********************************
 namespace fUML::Semantics::CommonBehavior 
 {
 	
-	class EventDispatchLoop : virtual public ecore::EObject 
+	class EventDispatchLoop : virtual public ecore::EModelElement
 
 	{
 		public:

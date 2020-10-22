@@ -19,7 +19,7 @@
 //*********************************
 namespace fUML::Semantics::Actions 
 {
-	class DestroyObjectActionActivationImpl :virtual public ActionActivationImpl, virtual public DestroyObjectActionActivation 
+	class DestroyObjectActionActivationImpl : virtual public ActionActivationImpl, virtual public DestroyObjectActionActivation 
 	{
 		public: 
 			DestroyObjectActionActivationImpl(const DestroyObjectActionActivationImpl & obj);

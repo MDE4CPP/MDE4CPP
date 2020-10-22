@@ -56,13 +56,13 @@ namespace fUML::Semantics::Values
 
 // enum includes
 
-#include "ecore/EObject.hpp"
+#include "ecore/EModelElement.hpp"
 
 //*********************************
 namespace fUML::Semantics::SimpleClassifiers 
 {
 	
-	class FeatureValue : virtual public ecore::EObject 
+	class FeatureValue : virtual public ecore::EModelElement
 
 	{
 		public:

@@ -19,7 +19,7 @@
 //*********************************
 namespace fUML::Semantics::StructuredClassifiers 
 {
-	class ReferenceImpl :virtual public fUML::Semantics::SimpleClassifiers::StructuredValueImpl, virtual public Reference 
+	class ReferenceImpl : virtual public fUML::Semantics::SimpleClassifiers::StructuredValueImpl, virtual public Reference 
 	{
 		public: 
 			ReferenceImpl(const ReferenceImpl & obj);

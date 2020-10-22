@@ -19,7 +19,7 @@
 //*********************************
 namespace fUML::Semantics::Activities 
 {
-	class ForkedTokenImpl :virtual public TokenImpl, virtual public ForkedToken 
+	class ForkedTokenImpl : virtual public TokenImpl, virtual public ForkedToken 
 	{
 		public: 
 			ForkedTokenImpl(const ForkedTokenImpl & obj);

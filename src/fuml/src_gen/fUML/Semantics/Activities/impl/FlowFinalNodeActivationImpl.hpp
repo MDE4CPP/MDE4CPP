@@ -19,7 +19,7 @@
 //*********************************
 namespace fUML::Semantics::Activities 
 {
-	class FlowFinalNodeActivationImpl :virtual public ControlNodeActivationImpl, virtual public FlowFinalNodeActivation 
+	class FlowFinalNodeActivationImpl : virtual public ControlNodeActivationImpl, virtual public FlowFinalNodeActivation 
 	{
 		public: 
 			FlowFinalNodeActivationImpl(const FlowFinalNodeActivationImpl & obj);

@@ -15,12 +15,12 @@
 
 #include "fUML/Semantics/SimpleClassifiers/impl/SimpleClassifiersFactoryImpl.hpp"
 
-#include "ecore/impl/EObjectImpl.hpp"
+#include "ecore/impl/EModelElementImpl.hpp"
 
 //*********************************
 namespace fUML::Semantics::SimpleClassifiers 
 {
-	class FeatureValueImpl :virtual public ecore::EObjectImpl,
+	class FeatureValueImpl : virtual public ecore::EModelElementImpl,
 virtual public FeatureValue 
 	{
 		public: 

@@ -19,7 +19,7 @@
 //*********************************
 namespace fUML::Semantics::CommonBehavior 
 {
-	class GetNextEventStrategyImpl :virtual public fUML::Semantics::Loci::SemanticStrategyImpl, virtual public GetNextEventStrategy 
+	class GetNextEventStrategyImpl : virtual public fUML::Semantics::Loci::SemanticStrategyImpl, virtual public GetNextEventStrategy 
 	{
 		public: 
 			GetNextEventStrategyImpl(const GetNextEventStrategyImpl & obj);

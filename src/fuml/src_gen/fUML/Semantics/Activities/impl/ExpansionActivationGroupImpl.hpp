@@ -19,7 +19,7 @@
 //*********************************
 namespace fUML::Semantics::Activities 
 {
-	class ExpansionActivationGroupImpl :virtual public ActivityNodeActivationGroupImpl, virtual public ExpansionActivationGroup 
+	class ExpansionActivationGroupImpl : virtual public ActivityNodeActivationGroupImpl, virtual public ExpansionActivationGroup 
 	{
 		public: 
 			ExpansionActivationGroupImpl(const ExpansionActivationGroupImpl & obj);

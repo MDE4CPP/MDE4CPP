@@ -19,7 +19,7 @@
 //*********************************
 namespace fUML::Semantics::Actions 
 {
-	class WriteStructuralFeatureActionActivationImpl :virtual public StructuralFeatureActionActivationImpl, virtual public WriteStructuralFeatureActionActivation 
+	class WriteStructuralFeatureActionActivationImpl : virtual public StructuralFeatureActionActivationImpl, virtual public WriteStructuralFeatureActionActivation 
 	{
 		public: 
 			WriteStructuralFeatureActionActivationImpl(const WriteStructuralFeatureActionActivationImpl & obj);

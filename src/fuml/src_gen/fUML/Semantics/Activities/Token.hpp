@@ -55,13 +55,13 @@ namespace fUML::Semantics::Values
 
 // enum includes
 
-#include "ecore/EObject.hpp"
+#include "ecore/EModelElement.hpp"
 
 //*********************************
 namespace fUML::Semantics::Activities 
 {
 	
-	class Token : virtual public ecore::EObject 
+	class Token : virtual public ecore::EModelElement
 
 	{
 		public:

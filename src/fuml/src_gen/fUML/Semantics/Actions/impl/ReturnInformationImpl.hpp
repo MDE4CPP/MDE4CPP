@@ -19,7 +19,7 @@
 //*********************************
 namespace fUML::Semantics::Actions 
 {
-	class ReturnInformationImpl :virtual public fUML::Semantics::Values::ValueImpl, virtual public ReturnInformation 
+	class ReturnInformationImpl : virtual public fUML::Semantics::Values::ValueImpl, virtual public ReturnInformation 
 	{
 		public: 
 			ReturnInformationImpl(const ReturnInformationImpl & obj);

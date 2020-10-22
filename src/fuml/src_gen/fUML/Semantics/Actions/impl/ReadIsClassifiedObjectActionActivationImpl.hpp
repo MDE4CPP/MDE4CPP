@@ -19,7 +19,7 @@
 //*********************************
 namespace fUML::Semantics::Actions 
 {
-	class ReadIsClassifiedObjectActionActivationImpl :virtual public ActionActivationImpl, virtual public ReadIsClassifiedObjectActionActivation 
+	class ReadIsClassifiedObjectActionActivationImpl : virtual public ActionActivationImpl, virtual public ReadIsClassifiedObjectActionActivation 
 	{
 		public: 
 			ReadIsClassifiedObjectActionActivationImpl(const ReadIsClassifiedObjectActionActivationImpl & obj);

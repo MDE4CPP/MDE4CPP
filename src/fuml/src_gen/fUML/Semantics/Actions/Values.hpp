@@ -46,13 +46,13 @@ namespace fUML::Semantics::Values
 
 // enum includes
 
-#include "ecore/EObject.hpp"
+#include "ecore/EModelElement.hpp"
 
 //*********************************
 namespace fUML::Semantics::Actions 
 {
 	
-	class Values : virtual public ecore::EObject 
+	class Values : virtual public ecore::EModelElement
 
 	{
 		public:

@@ -19,7 +19,7 @@
 //*********************************
 namespace fUML::Semantics::Actions 
 {
-	class AcceptEventActionEventAccepterImpl :virtual public fUML::Semantics::CommonBehavior::EventAccepterImpl, virtual public AcceptEventActionEventAccepter 
+	class AcceptEventActionEventAccepterImpl : virtual public fUML::Semantics::CommonBehavior::EventAccepterImpl, virtual public AcceptEventActionEventAccepter 
 	{
 		public: 
 			AcceptEventActionEventAccepterImpl(const AcceptEventActionEventAccepterImpl & obj);

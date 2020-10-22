@@ -15,12 +15,12 @@
 
 #include "fUML/Semantics/Loci/impl/LociFactoryImpl.hpp"
 
-#include "ecore/impl/EObjectImpl.hpp"
+#include "ecore/impl/EModelElementImpl.hpp"
 
 //*********************************
 namespace fUML::Semantics::Loci 
 {
-	class LocusImpl :virtual public ecore::EObjectImpl,
+	class LocusImpl : virtual public ecore::EModelElementImpl,
 virtual public Locus 
 	{
 		public: 

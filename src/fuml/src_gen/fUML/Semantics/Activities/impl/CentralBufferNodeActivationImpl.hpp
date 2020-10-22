@@ -19,7 +19,7 @@
 //*********************************
 namespace fUML::Semantics::Activities 
 {
-	class CentralBufferNodeActivationImpl :virtual public ObjectNodeActivationImpl, virtual public CentralBufferNodeActivation 
+	class CentralBufferNodeActivationImpl : virtual public ObjectNodeActivationImpl, virtual public CentralBufferNodeActivation 
 	{
 		public: 
 			CentralBufferNodeActivationImpl(const CentralBufferNodeActivationImpl & obj);

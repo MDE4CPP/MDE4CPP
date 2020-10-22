@@ -19,7 +19,7 @@
 //*********************************
 namespace fUML::Semantics::SimpleClassifiers 
 {
-	class SignalInstanceImpl :virtual public CompoundValueImpl, virtual public SignalInstance 
+	class SignalInstanceImpl : virtual public CompoundValueImpl, virtual public SignalInstance 
 	{
 		public: 
 			SignalInstanceImpl(const SignalInstanceImpl & obj);

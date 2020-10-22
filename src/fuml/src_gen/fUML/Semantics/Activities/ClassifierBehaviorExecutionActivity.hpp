@@ -41,13 +41,13 @@ namespace fUML
 
 // enum includes
 
-#include "ecore/EObject.hpp"
+#include "ecore/EModelElement.hpp"
 
 //*********************************
 namespace fUML::Semantics::Activities 
 {
 	
-	class ClassifierBehaviorExecutionActivity : virtual public ecore::EObject 
+	class ClassifierBehaviorExecutionActivity : virtual public ecore::EModelElement
 
 	{
 		public:

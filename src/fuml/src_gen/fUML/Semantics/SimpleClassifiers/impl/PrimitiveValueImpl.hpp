@@ -19,7 +19,7 @@
 //*********************************
 namespace fUML::Semantics::SimpleClassifiers 
 {
-	class PrimitiveValueImpl :virtual public fUML::Semantics::Values::ValueImpl, virtual public PrimitiveValue 
+	class PrimitiveValueImpl : virtual public fUML::Semantics::Values::ValueImpl, virtual public PrimitiveValue 
 	{
 		public: 
 			PrimitiveValueImpl(const PrimitiveValueImpl & obj);

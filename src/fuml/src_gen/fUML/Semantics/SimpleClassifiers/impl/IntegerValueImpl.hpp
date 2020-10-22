@@ -19,7 +19,7 @@
 //*********************************
 namespace fUML::Semantics::SimpleClassifiers 
 {
-	class IntegerValueImpl :virtual public PrimitiveValueImpl, virtual public IntegerValue 
+	class IntegerValueImpl : virtual public PrimitiveValueImpl, virtual public IntegerValue 
 	{
 		public: 
 			IntegerValueImpl(const IntegerValueImpl & obj);

@@ -19,7 +19,7 @@
 //*********************************
 namespace fUML::Semantics::SimpleClassifiers 
 {
-	class EnumerationValueImpl :virtual public fUML::Semantics::Values::ValueImpl, virtual public EnumerationValue 
+	class EnumerationValueImpl : virtual public fUML::Semantics::Values::ValueImpl, virtual public EnumerationValue 
 	{
 		public: 
 			EnumerationValueImpl(const EnumerationValueImpl & obj);

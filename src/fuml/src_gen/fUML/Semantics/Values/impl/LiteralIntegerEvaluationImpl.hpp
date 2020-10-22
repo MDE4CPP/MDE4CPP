@@ -19,7 +19,7 @@
 //*********************************
 namespace fUML::Semantics::Values 
 {
-	class LiteralIntegerEvaluationImpl :virtual public LiteralEvaluationImpl, virtual public LiteralIntegerEvaluation 
+	class LiteralIntegerEvaluationImpl : virtual public LiteralEvaluationImpl, virtual public LiteralIntegerEvaluation 
 	{
 		public: 
 			LiteralIntegerEvaluationImpl(const LiteralIntegerEvaluationImpl & obj);

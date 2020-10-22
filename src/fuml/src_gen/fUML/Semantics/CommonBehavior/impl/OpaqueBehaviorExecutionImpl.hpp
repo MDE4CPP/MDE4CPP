@@ -19,7 +19,7 @@
 //*********************************
 namespace fUML::Semantics::CommonBehavior 
 {
-	class OpaqueBehaviorExecutionImpl :virtual public ExecutionImpl, virtual public OpaqueBehaviorExecution 
+	class OpaqueBehaviorExecutionImpl : virtual public ExecutionImpl, virtual public OpaqueBehaviorExecution 
 	{
 		public: 
 			OpaqueBehaviorExecutionImpl(const OpaqueBehaviorExecutionImpl & obj);

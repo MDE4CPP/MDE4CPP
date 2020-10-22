@@ -45,13 +45,13 @@ namespace fUML::Semantics::SimpleClassifiers
 
 // enum includes
 
-#include "ecore/EObject.hpp"
+#include "ecore/EModelElement.hpp"
 
 //*********************************
 namespace fUML::Semantics::CommonBehavior 
 {
 	
-	class EventAccepter : virtual public ecore::EObject 
+	class EventAccepter : virtual public ecore::EModelElement
 
 	{
 		public:

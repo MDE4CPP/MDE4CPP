@@ -15,12 +15,12 @@
 
 #include "fUML/Semantics/Activities/impl/ActivitiesFactoryImpl.hpp"
 
-#include "ecore/impl/EObjectImpl.hpp"
+#include "ecore/impl/EModelElementImpl.hpp"
 
 //*********************************
 namespace fUML::Semantics::Activities 
 {
-	class OfferImpl :virtual public ecore::EObjectImpl,
+	class OfferImpl : virtual public ecore::EModelElementImpl,
 virtual public Offer 
 	{
 		public: 

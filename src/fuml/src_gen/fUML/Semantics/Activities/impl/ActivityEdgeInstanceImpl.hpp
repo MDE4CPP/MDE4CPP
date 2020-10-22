@@ -15,12 +15,12 @@
 
 #include "fUML/Semantics/Activities/impl/ActivitiesFactoryImpl.hpp"
 
-#include "ecore/impl/EObjectImpl.hpp"
+#include "ecore/impl/EModelElementImpl.hpp"
 
 //*********************************
 namespace fUML::Semantics::Activities 
 {
-	class ActivityEdgeInstanceImpl :virtual public ecore::EObjectImpl,
+	class ActivityEdgeInstanceImpl : virtual public ecore::EModelElementImpl,
 virtual public ActivityEdgeInstance 
 	{
 		public: 

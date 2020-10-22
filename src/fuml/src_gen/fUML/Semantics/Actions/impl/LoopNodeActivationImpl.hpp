@@ -19,7 +19,7 @@
 //*********************************
 namespace fUML::Semantics::Actions 
 {
-	class LoopNodeActivationImpl :virtual public StructuredActivityNodeActivationImpl, virtual public LoopNodeActivation 
+	class LoopNodeActivationImpl : virtual public StructuredActivityNodeActivationImpl, virtual public LoopNodeActivation 
 	{
 		public: 
 			LoopNodeActivationImpl(const LoopNodeActivationImpl & obj);

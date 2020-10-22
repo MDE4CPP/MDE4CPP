@@ -19,7 +19,7 @@
 //*********************************
 namespace fUML::Semantics::Activities 
 {
-	class ActivityNodeActivationImpl :virtual public fUML::Semantics::Loci::SemanticVisitorImpl, virtual public ActivityNodeActivation 
+	class ActivityNodeActivationImpl : virtual public fUML::Semantics::Loci::SemanticVisitorImpl, virtual public ActivityNodeActivation 
 	{
 		public: 
 			ActivityNodeActivationImpl(const ActivityNodeActivationImpl & obj);

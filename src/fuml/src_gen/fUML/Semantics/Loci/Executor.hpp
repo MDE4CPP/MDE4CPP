@@ -81,13 +81,13 @@ namespace uml
 
 // enum includes
 
-#include "ecore/EObject.hpp"
+#include "ecore/EModelElement.hpp"
 
 //*********************************
 namespace fUML::Semantics::Loci 
 {
 	
-	class Executor : virtual public ecore::EObject 
+	class Executor : virtual public ecore::EModelElement
 
 	{
 		public:

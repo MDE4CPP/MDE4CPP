@@ -203,7 +203,6 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > ObjectNodeActivationIm
 	//generated from body annotation
 	std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > tokens(new Bag<fUML::Semantics::Activities::Token>());
 
-  int i = 0; 
   const int numberUnofferedTokens=this->countUnofferedTokens(); 
   int offeredTokenCount=this->getOfferedTokenCount(); 
 

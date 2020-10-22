@@ -138,7 +138,14 @@ std::shared_ptr<uml::Behavior> RedefinitionBasedDispatchStrategyImpl::retrieveMe
 	while(method == nullptr && (i < object->getTypes()->size()))
 	{
 		std::shared_ptr<uml::Classifier> type = object->getTypes()->at(i);
-		if(type->eClass()->getMetaElementID() == uml::UmlPackage::CLASS_CLASS)
+		/*
+		MDE4CPP specific implementation:
+		Normalley. only classes would be taken into account. 
+		In MDE4CPP object classes for interfaces also exist. Those are typed by interfaces as well.
+		Because of that, interfaces are also taken into account here.
+		*/
+		unsigned long metaElementID = type->eClass()->getMetaElementID();
+		if(metaElementID == uml::UmlPackage::CLASS_CLASS || metaElementID == uml::UmlPackage::INTERFACE_CLASS)
 		{
 		std::shared_ptr<Bag<uml::Operation> > memberOperations = type->getAllOperations();
 		unsigned int j = 0;

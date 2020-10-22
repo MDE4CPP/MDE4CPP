@@ -19,7 +19,7 @@
 //*********************************
 namespace fUML::Semantics::Actions 
 {
-	class PinActivationImpl :virtual public fUML::Semantics::Activities::ObjectNodeActivationImpl, virtual public PinActivation 
+	class PinActivationImpl : virtual public fUML::Semantics::Activities::ObjectNodeActivationImpl, virtual public PinActivation 
 	{
 		public: 
 			PinActivationImpl(const PinActivationImpl & obj);

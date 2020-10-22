@@ -19,7 +19,7 @@
 //*********************************
 namespace fUML::Semantics::Activities 
 {
-	class ControlTokenImpl :virtual public TokenImpl, virtual public ControlToken 
+	class ControlTokenImpl : virtual public TokenImpl, virtual public ControlToken 
 	{
 		public: 
 			ControlTokenImpl(const ControlTokenImpl & obj);

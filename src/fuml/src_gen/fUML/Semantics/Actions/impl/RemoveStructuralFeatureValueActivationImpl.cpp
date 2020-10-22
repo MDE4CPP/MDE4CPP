@@ -197,7 +197,7 @@ void RemoveStructuralFeatureValueActivationImpl::doAction()
 		objectValue = this->takeTokens(action->getObject())->at(0);
 	}
 	/*--------------------------------------------------------*/
-	
+
 	std::shared_ptr<fUML::Semantics::Values::Value> inputValue = takeTokens(action->getValue())->at(0);
 	std::shared_ptr<fUML::Semantics::SimpleClassifiers::StructuredValue> structuredValue = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::StructuredValue>(objectValue);
 	if (structuredValue)

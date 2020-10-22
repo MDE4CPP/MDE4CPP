@@ -19,7 +19,7 @@
 //*********************************
 namespace fUML::Semantics::SimpleClassifiers 
 {
-	class DataValueImpl :virtual public CompoundValueImpl, virtual public DataValue 
+	class DataValueImpl : virtual public CompoundValueImpl, virtual public DataValue 
 	{
 		public: 
 			DataValueImpl(const DataValueImpl & obj);
