@@ -153,16 +153,17 @@ std::shared_ptr<Bag<uml::Element> > ElementImpl::allOwnedElements()
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 		std::shared_ptr<Bag<uml::Element>> list(new Bag<uml::Element>());
-	list->insert(list->begin(), m_ownedElement->begin(), m_ownedElement->end());
+	list->insert(list->begin(), this->getOwnedElement()->begin(), this->getOwnedElement()->end());
 
-	Bag<uml::Element>::iterator iter = m_ownedElement->begin();
-	Bag<uml::Element>::iterator end = m_ownedElement->end();
-
+	Bag<uml::Element>::iterator iter = this->getOwnedElement()->begin();
+	Bag<uml::Element>::iterator end = this->getOwnedElement()->end();
+	int i = 0;
 	while(iter != end)
 	{
 		std::shared_ptr<Bag<uml::Element>> elementList = (*iter)->allOwnedElements();
 		list->insert(list->end(), elementList->begin(), elementList->end());
 		iter++;
+		i++;
 	}
 
 	return list;
