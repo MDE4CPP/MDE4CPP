@@ -76,9 +76,9 @@
 [template public generateParameterInstances(anActivity : Activity, aPackage : Package)]
 [for (par : Parameter | anActivity.ownedParameter->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in)))]
 [if(par.type.supportedTypes())]
-[par.generateCppType(true)/] [par.name.toLowerFirst()/] = [par.default/];
+[par.generateCppType(true)/] [par.name/] = [par.default/];
 [else]
-[par.generateCppType(true)/] [par.name.toLowerFirst()/]([aPackage.getPackageName()/]::[aPackage.getPackageName().toUpperFirst()/]Factory::eInstance()->create[par.type.name.toUpperFirst()/]());
+[par.generateCppType(true)/] [par.name/]([aPackage.getPackageName()/]::[aPackage.getPackageName().toUpperFirst()/]Factory::eInstance()->create[par.type.name.toUpperFirst()/]());
 [/if]
 [/for]
 [/template]
